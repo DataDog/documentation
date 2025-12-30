@@ -26,31 +26,12 @@ further_reading:
       tag: 'Blog'
 ---
 
-Datadog SDKs provide an implementation of the [OpenTelemetry API][1] for traces, metrics, and logs. This means you can maintain vendor-neutral instrumentation of your services, while still taking advantage of Datadog's native implementation, features, and products.
-
-The telemetry produced by your running code can be processed, analyzed, and monitored alongside Datadog's native telemetry, allowing you to take advantage of Datadog's unified platform and products like [Continuous Profiler][3], [Data Streams Monitoring][4], [App and API Protection][5], and [Live Processes][6].
-
-{% img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Diagram: OpenTelemetry API with Datadog SDKs sends telemetry data through the OTLP protocol to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" /%}
-
-{% alert level="info" %}
-You can also send your OpenTelemetry API instrumented traces to Datadog using the [OTel Collector][7].
-{% /alert %}
-
-By [instrumenting your code with OpenTelemetry APIs][2], your code:
-
-- Remains free of vendor-specific API calls.
-- Does not depend on Datadog SDKs at compile time (only runtime).
-
-{% alert level="info" %}
-To see which Datadog features are supported with this setup, see the [feature compatibility table][8].
-{% /alert %}
-
 <!-- ============================================== -->
 <!-- SIGNAL AVAILABILITY NOTICES -->
 <!-- ============================================== -->
 
-<!-- Languages with only traces (Go, PHP) -->
-{% if or(equals($prog_lang, "go"), equals($prog_lang, "php")) %}
+<!-- Languages with only traces: Go, PHP, Java, Rust -->
+{% if or(or(or(equals($prog_lang, "go"), equals($prog_lang, "php")), equals($prog_lang, "java")), equals($prog_lang, "rust")) %}
 {% if equals($platform, "metrics") %}
 {% alert level="warning" %}
 OpenTelemetry API support for metrics is not yet available for this language. Select **Traces** to see available instrumentation options.
@@ -59,34 +40,6 @@ OpenTelemetry API support for metrics is not yet available for this language. Se
 {% if equals($platform, "logs") %}
 {% alert level="warning" %}
 OpenTelemetry API support for logs is not yet available for this language. Select **Traces** to see available instrumentation options.
-{% /alert %}
-{% /if %}
-{% /if %}
-
-<!-- Java has only traces -->
-{% if equals($prog_lang, "java") %}
-{% if equals($platform, "metrics") %}
-{% alert level="warning" %}
-OpenTelemetry API support for metrics is not yet available for Java. Select **Traces** to see available instrumentation options.
-{% /alert %}
-{% /if %}
-{% if equals($platform, "logs") %}
-{% alert level="warning" %}
-OpenTelemetry API support for logs is not yet available for Java. Select **Traces** to see available instrumentation options.
-{% /alert %}
-{% /if %}
-{% /if %}
-
-<!-- Rust has only traces -->
-{% if equals($prog_lang, "rust") %}
-{% if equals($platform, "metrics") %}
-{% alert level="warning" %}
-OpenTelemetry API support for metrics is not yet available for Rust. Select **Traces** to see available instrumentation options.
-{% /alert %}
-{% /if %}
-{% if equals($platform, "logs") %}
-{% alert level="warning" %}
-OpenTelemetry API support for logs is not yet available for Rust. Select **Traces** to see available instrumentation options.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -100,6 +53,12 @@ OpenTelemetry API support for logs is not yet available for Ruby. Select **Trace
 {% /if %}
 {% /if %}
 
+Datadog SDKs implement the [OpenTelemetry API][1], allowing you to [instrument your code][2] with vendor-neutral APIs while benefiting from Datadog's native features. Your code remains free of vendor-specific calls and doesn't depend on Datadog SDKs at compile time.
+
+{% alert level="info" %}
+You can also send OTel-instrumented data via the [OTel Collector][7]. See the [feature compatibility table][8] for supported Datadog features.
+{% /alert %}
+
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
 <!-- ============================================== -->
@@ -108,17 +67,7 @@ OpenTelemetry API support for logs is not yet available for Ruby. Select **Trace
 
 ## Overview
 
-{% alert level="info" %}
-Unsure when to use OpenTelemetry with Datadog? Start with [Custom Instrumentation with the OpenTelemetry API][101] to learn more.
-{% /alert %}
-
-There are a few reasons to manually instrument your applications with the OpenTelemetry API:
-
-- You are not using Datadog [supported library instrumentation][102].
-- You want to extend the `ddtrace` library's functionality.
-- You need finer control over instrumenting your applications.
-
-The Datadog library provides several techniques to help you achieve these goals. The following sections demonstrate how to use the OpenTelemetry API for custom instrumentation to use with Datadog.
+The following sections demonstrate how to use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tags, record events, and more.
 
 <!-- JAVA TRACES -->
 {% if equals($prog_lang, "java") %}
@@ -131,7 +80,7 @@ OpenTelemetry is supported in Java after version 1.24.0.
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Java Setup Instructions][15].
+1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Java Setup Instructions][100].
 
 2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
 
@@ -176,9 +125,56 @@ public void doSomething() {
 }
 ```
 
+### Setting tags and errors on a root span from a child span
+
+When you want to set tags or errors on the root span from within a child span, you can use the OpenTelemetry Context API:
+
+```java
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Context;
+import io.opentelemetry.context.ContextKey;
+import io.opentelemetry.context.Scope;
+
+public class Example {
+
+  private final static ContextKey<Span> CONTEXT_KEY =
+    ContextKey.named("opentelemetry-traces-local-root-span");
+
+  public void begin() {
+    Tracer tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
+    Span parentSpan = tracer.spanBuilder("begin").startSpan();
+    try (Scope scope = parentSpan.makeCurrent()) {
+      createChildSpan();
+    } finally {
+      parentSpan.end();
+    }
+  }
+
+  private void createChildSpan() {
+    Tracer tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
+    Span childSpan = tracer.spanBuilder("child-span").startSpan();
+    try {
+      Span rootSpan = Context.current().get(CONTEXT_KEY);
+        if (null != rootSpan) {
+          rootSpan.setAttribute("my-attribute", "my-attribute-value");
+          rootSpan.setStatus(StatusCode.ERROR, "Some error details...");
+        }
+    } finally {
+      childSpan.end();
+    }
+  }
+
+}
+```
+
 ## Adding spans
 
-If you aren't using a [supported framework instrumentation][17], or you would like additional depth in your application's [traces][16], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
+If you aren't using a [supported framework instrumentation][101], or you would like additional depth in your application's [traces][102], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
+
+If modifying application code is not possible, use the environment variable `dd.trace.methods` to detail these methods.
+
+If you have existing `@Trace` or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
 
 ### Trace annotations
 
@@ -249,6 +245,8 @@ span.addEvent("Event With No Attributes");
 span.addEvent("Event With Some Attributes", eventAttributes);
 ```
 
+Read the [OpenTelemetry specification for adding events][103] for more information.
+
 ### Recording exceptions
 
 To record exceptions, use the `recordException` API:
@@ -259,24 +257,19 @@ span.recordException(new Exception("Error Message"),
     Attributes.builder().put(AttributeKey.stringKey("status"), "failed").build());
 ```
 
+Read the [OpenTelemetry specification for recording exceptions][104] for more information.
+
 ## Trace client and Agent configuration
 
 Both the tracing client and Datadog Agent offer additional configuration options for context propagation. You can also exclude specific resources from sending traces to Datadog if you don't want those traces to be included in calculated metrics, such as traces related to health checks.
 
 ### Propagating context with headers extraction and injection
 
-You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][18] for information.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][19] page or in [Ignoring Unwanted Resources][20].
-
-[15]: /tracing/setup/java/
-[16]: /tracing/glossary/#trace
-[17]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
-[18]: /tracing/trace_collection/trace_context_propagation/
-[19]: /tracing/security
-[20]: /tracing/guide/ignoring_apm_resources/
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][106] page or in [Ignoring Unwanted Resources][107].
 
 {% /if %}
 <!-- END JAVA TRACES -->
@@ -288,7 +281,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Python Setup Instructions][30].
+1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Python Setup Instructions][110].
 
 2. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
@@ -344,6 +337,8 @@ span.add_event("Event With No Attributes")
 span.add_event("Event With Some Attributes", {"int_val": 1, "string_val": "two", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [True, False]})
 ```
 
+Read the [OpenTelemetry specification for adding events][103] for more information.
+
 ### Recording exceptions
 
 To record exceptions, use the `record_exception` API:
@@ -353,7 +348,7 @@ span.record_exception(Exception("Error Message"))
 span.record_exception(Exception("Error Message"), {"status": "failed"})
 ```
 
-[30]: /tracing/setup/python/
+Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
 {% /if %}
 <!-- END PYTHON TRACES -->
@@ -397,7 +392,7 @@ const otelTracer = otel.trace.getTracer(
 // You can now use 'otelTracer' to create spans throughout your application.
 ```
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [integration instrumentation][41] and [OpenTelemetry automatic instrumentation][42].
+Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [integration instrumentation][120] and [OpenTelemetry automatic instrumentation][121].
 
 ## Adding span tags
 
@@ -448,6 +443,8 @@ span.addEvent('Event With No Attributes')
 span.addEvent('Event With Some Attributes', {"int_val": 1, "string_val": "two", "int_array": [3, 4], "string_array": ["5", "6"], "bool_array": [true, false]})
 ```
 
+Read the [OpenTelemetry specification for adding events][103] for more information.
+
 ### Recording exceptions
 
 To record exceptions, use the `recordException` API:
@@ -455,6 +452,8 @@ To record exceptions, use the `recordException` API:
 ```javascript
 span.recordException(new TestError())
 ```
+
+Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
 ## Filtering requests
 
@@ -467,8 +466,17 @@ tracer.use('http', {
 })
 ```
 
-[41]: /tracing/trace_collection/dd_libraries/nodejs#integration-instrumentation
-[42]: https://opentelemetry.io/docs/instrumentation/js/automatic/
+You can also split the configuration between client and server if needed:
+
+```javascript
+tracer.use('http', {
+  server: {
+    blocklist: ['/ping']
+  }
+})
+```
+
+Additionally, you can exclude traces based on their resource name to prevent the Agent from sending them to Datadog. For more information on security and fine-tuning Agent configurations, read the [Security][106] or [Ignoring Unwanted Resources][107] documentation.
 
 {% /if %}
 <!-- END NODE.JS TRACES -->
@@ -499,7 +507,7 @@ import (
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][50]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][130]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
 2. Install the OpenTelemetry package:
    ```shell
@@ -600,19 +608,17 @@ span.AddEvent("Event With Some Attributes", oteltrace.WithAttributes(attribute.I
 span.Finish()
 ```
 
+Read the [OpenTelemetry specification for adding events][103] for more information.
+
 ## Trace client and Agent configuration
 
 ### Propagating context with headers extraction and injection
 
-You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][51] for information.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][52] page.
-
-[50]: https://opentelemetry.io/docs/instrumentation/go/manual/
-[51]: /tracing/trace_collection/trace_context_propagation/
-[52]: /tracing/security
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][106] page.
 
 {% /if %}
 <!-- END GO TRACES -->
@@ -637,7 +643,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][60]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][140]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
 2. Add the `datadog` gem to your Gemfile:
     ```ruby
@@ -660,7 +666,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
     end
     ```
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][61] and [OpenTelemetry Automatic instrumentation][62] also.
+Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][141] and [OpenTelemetry Automatic instrumentation][142] also.
 
 ## Adding span events
 
@@ -678,6 +684,8 @@ span.add_event(
 )
 ```
 
+Read the [OpenTelemetry specification for adding events][103] for more information.
+
 ### Recording exceptions
 
 To record exceptions, use the `record_exception` API:
@@ -692,9 +700,7 @@ span.record_exception(
 )
 ```
 
-[60]: https://opentelemetry.io/docs/instrumentation/ruby/manual/
-[61]: /tracing/trace_collection/dd_libraries/ruby#integration-instrumentation
-[62]: https://opentelemetry.io/docs/languages/ruby/libraries/
+Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
 {% /if %}
 <!-- END RUBY TRACES -->
@@ -706,15 +712,15 @@ span.record_exception(
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][70]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][150]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
-2. Install the Datadog .NET tracing library and enable the tracer for your [.NET Framework service][71] or your [.NET Core (and .NET 5+) service][72]. You can optionally do this with [Single Step APM Instrumentation][73].
+2. Install the Datadog .NET tracing library and enable the tracer for your [.NET Framework service][151] or your [.NET Core (and .NET 5+) service][152]. You can optionally do this with [Single Step APM Instrumentation][153].
 
 3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
 4. Run your application.
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [OpenTelemetry instrumentation libraries][74].
+Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [OpenTelemetry instrumentation libraries][154].
 
 ## Creating custom spans
 
@@ -815,16 +821,11 @@ activity.AddEvent(new ActivityEvent("Event With No Attributes"));
 activity.AddEvent(new ActivityEvent("Event With Some Attributes", DateTimeOffset.Now, eventTags));
 ```
 
+Read the [OpenTelemetry specification for adding events][103] for more information.
+
 ## Propagating context with headers extraction and injection
 
-You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][75] for information.
-
-[70]: https://opentelemetry.io/docs/instrumentation/net/manual/
-[71]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
-[72]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
-[73]: /tracing/trace_collection/single-step-apm/
-[74]: https://opentelemetry.io/docs/instrumentation/net/libraries/
-[75]: /tracing/trace_collection/trace_context_propagation/
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
 {% /if %}
 <!-- END .NET TRACES -->
@@ -836,14 +837,14 @@ You can configure the propagation of context for distributed traces by injecting
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. Install [OpenTelemetry API packages][80]:
+1. Install [OpenTelemetry API packages][160]:
    ```php
    composer require open-telemetry/sdk
    ```
 
-2. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][81].
+2. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][161].
 
-3. Install the [Datadog PHP tracing library][82].
+3. Install the [Datadog PHP tracing library][162].
 
 4. Set `DD_TRACE_OTEL_ENABLED` to `true`.
 
@@ -934,6 +935,8 @@ $span->addEvent(
 );
 ```
 
+Read the [OpenTelemetry specification for adding events][103] for more information.
+
 ### Recording exceptions
 
 To record exceptions, use the `recordException` API:
@@ -943,6 +946,8 @@ $span->recordException(new \Exception("Error Message"));
 $span->recordException(new \Exception("Error Message"), [ "status" => "failed" ]);
 ```
 
+Read the [OpenTelemetry specification for recording exceptions][104] for more information.
+
 ## Accessing active spans
 
 To access the currently active span:
@@ -950,10 +955,6 @@ To access the currently active span:
 ```php
 $span = OpenTelemetry\API\Trace\Span::getCurrent();
 ```
-
-[80]: https://opentelemetry.io/docs/languages/php/instrumentation/#instrumentation-setup
-[81]: https://opentelemetry.io/docs/instrumentation/php/manual/
-[82]: /tracing/trace_collection/dd_libraries/php#getting-started
 
 {% /if %}
 <!-- END PHP TRACES -->
@@ -965,7 +966,7 @@ $span = OpenTelemetry\API\Trace\Span::getCurrent();
 The Datadog Rust SDK is in Preview.
 {% /alert %}
 
-Datadog provides support for custom instrumentation in Rust applications through the [`datadog-opentelemetry` crate][90]. This library is built on the OpenTelemetry (OTel) API and SDK, providing a tracer that includes Datadog-specific features and an exporter.
+Datadog provides support for custom instrumentation in Rust applications through the [`datadog-opentelemetry` crate][170]. This library is built on the OpenTelemetry (OTel) API and SDK, providing a tracer that includes Datadog-specific features and an exporter.
 
 Because this library is built on OpenTelemetry, you use the standard OpenTelemetry API to create traces and spans.
 
@@ -1022,7 +1023,7 @@ The Datadog exporter sends traces to the Datadog Agent, which must be running an
 
 ## Configuration
 
-The Datadog Rust SDK is configured using environment variables. For a complete list of options, see the [Configuration documentation][91].
+The Datadog Rust SDK is configured using environment variables. For a complete list of options, see the [Configuration documentation][171].
 
 ## Examples
 
@@ -1123,17 +1124,10 @@ fn add_events_to_span() {
 
 Because Rust does not have automatic instrumentation, you must manually propagate the trace context when making or receiving remote calls to connect traces across services.
 
-For more information, see [Trace Context Propagation][92].
-
-[90]: https://crates.io/crates/datadog-opentelemetry
-[91]: /tracing/trace_collection/library_config/rust
-[92]: /tracing/trace_collection/trace_context_propagation/?tab=rust
+For more information, see [Trace Context Propagation][172].
 
 {% /if %}
 <!-- END RUST TRACES -->
-
-[101]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[102]: /tracing/trace_collection/compatibility/
 
 {% /if %}
 <!-- END TRACES CONTENT -->
@@ -1149,12 +1143,12 @@ For more information, see [Trace Context Propagation][92].
 
 ## Overview
 
-<!-- Native implementation (.NET, Node.js) -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")) %}
 Send custom application metrics into Datadog using the OpenTelemetry (OTel) Metrics API with the Datadog SDK.
 
 This is an alternative to using [DogStatsD][200] and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.
 
+<!-- Native implementation (.NET, Node.js) -->
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")) %}
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
@@ -1164,27 +1158,36 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 
 <!-- Exporter-based implementation (Python, Ruby) -->
 {% if or(equals($prog_lang, "python"), equals($prog_lang, "ruby")) %}
-Send custom application metrics into Datadog using the OpenTelemetry (OTel) Metrics API with the Datadog SDK.
-
-This is an alternative to using [DogStatsD][200] and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.
-
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
 {% /if %}
 
-<!-- .NET METRICS -->
-{% if equals($prog_lang, "dot_net") %}
-
 ## Prerequisites
 
+{% if equals($prog_lang, "dot_net") %}
 - **.NET Runtime**: Requires .NET 6+ (or `System.Diagnostics.DiagnosticSource` v6.0.0+). See [Version and instrument support](#net-version-and-instrument-support) for a list of supported instruments by version.
 - **Datadog SDK**: dd-trace-dotnet version 3.30.0 or later.
+{% /if %}
+{% if equals($prog_lang, "node_js") %}
+- **Datadog SDK**: `dd-trace-js` version 5.81.0 or later.
+- **OpenTelemetry API**: `@opentelemetry/api` version 1.0.0 to 1.10.0. (The Datadog SDK provides the implementation for this API).
+{% /if %}
+{% if equals($prog_lang, "python") %}
+- **Datadog SDK**: dd-trace-py version 3.18.0 or later.
+{% /if %}
+{% if equals($prog_lang, "ruby") %}
+{% alert level="info" %}
+The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](https://github.com/open-telemetry/opentelemetry-ruby/tree/main/metrics_sdk). Report issues with the SDK at [opentelemetry-ruby/issues](https://github.com/open-telemetry/opentelemetry-ruby/issues).
+{% /alert %}
+- **Datadog SDK**: `datadog` gem version 2.23.0 or later.
+{% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 - **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 
 ## Setup
 
-Follow these steps to enable OTel Metrics API support in your .NET application.
+Follow these steps to enable OTel Metrics API support in your application.
 
+{% if equals($prog_lang, "dot_net") %}
 1. Install the Datadog SDK. Follow the installation steps for your runtime:
    - [.NET Framework][202]
    - [.NET Core][203]
@@ -1192,126 +1195,9 @@ Follow these steps to enable OTel Metrics API support in your .NET application.
    ```sh
    export DD_METRICS_OTEL_ENABLED=true
    ```
-
-## Examples
-
-You can use the standard OpenTelemetry API packages to create custom metrics.
-
-### Create a counter
-
-This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
-
-```csharp
-using System.Diagnostics.Metrics;
-
-// Define a meter
-Meter meter = new("MyService", "1.0.0");
-
-// Create a counter instrument
-Counter<long> requestsCounter = meter.CreateCounter<long>("http.requests_total");
-
-// Perform work
-// ...
-
-// Record measurements
-requestsCounter.Add(1, new("method", "GET"), new("status_code", "200"));
-```
-
-### Create a histogram
-
-This example uses the OTel Metrics API to create a histogram to track request durations:
-
-```csharp
-using System.Diagnostics.Metrics;
-
-// Define a meter
-Meter meter = new("MyService", "1.0.0");
-
-// Create a histogram instrument
-Histogram<double> responseTimeHistogram = meter.CreateHistogram<double>("http.response.time");
-
-// Perform work
-var watch = System.Diagnostics.Stopwatch.StartNew();
-await Task.Delay(1_000);
-watch.Stop();
-
-// Record measurements
-responseTimeHistogram.Record(watch.ElapsedMilliseconds, new("method", "GET"), new("status_code", "200"));
-```
-
-## Supported configuration
-
-To enable this feature, you must set `DD_METRICS_OTEL_ENABLED=true`.
-
-All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and temporality preferences are configured using a shared set of OpenTelemetry environment variables.
-
-For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][204].
-
-## Migrate from other setups
-
-### Existing OTel setup
-
-If you are already using the OpenTelemetry SDK with a manual OTLP exporter configuration, follow these steps to migrate:
-
-1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OtlpExporter` for metrics. The Datadog SDK handles this configuration automatically.
-3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
-4. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
-
-### Existing DogStatsD setup
-
-If you are currently using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
-
-## Troubleshooting
-
-- Ensure `DD_METRICS_OTEL_ENABLED` is set to `true`.
-- Verify that your OTLP destination is configured correctly to receive metrics.
-- If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][205] for details.
-- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the metric data.
-- If, after removing the OpenTelemetry SDK packages, your application fails to compile due to missing APIs in the [System.Diagnostics.Metrics namespace][206], you must update your application by either adding a direct NuGet package reference to `System.Diagnostics.DiagnosticSource` or upgrading the version of .NET. See [.NET version and instrument support](#net-version-and-instrument-support) for more information.
-
-### .NET version and instrument support
-
-Support for specific OpenTelemetry metric instruments is dependent on your .NET runtime version or the version of the `System.Diagnostics.DiagnosticSource` NuGet package you have installed.
-
-Here is the minimum version required for each instrument type:
-
-- **.NET 6+** (or `System.Diagnostics.DiagnosticSource` v6.0.0) supports:
-  - `Counter`
-  - `Histogram`
-  - `ObservableCounter`
-  - `ObservableGauge`
-
-- **.NET 7+** (or `System.Diagnostics.DiagnosticSource` v7.0.0) supports:
-  - `UpDownCounter`
-  - `ObservableUpDownCounter`
-
-- **.NET 9+** (or `System.Diagnostics.DiagnosticSource` v9.0.0) supports:
-  - `Gauge`
-
-[202]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
-[203]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
-[204]: /opentelemetry/config/environment_variable_support
-[205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-[206]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics
-
 {% /if %}
-<!-- END .NET METRICS -->
 
-<!-- NODE.JS METRICS -->
 {% if equals($prog_lang, "node_js") %}
-
-## Prerequisites
-
-- **Datadog SDK**: `dd-trace-js` version 5.81.0 or later.
-- **OpenTelemetry API**: `@opentelemetry/api` version 1.0.0 to 1.10.0. (The Datadog SDK provides the implementation for this API).
-- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
-- **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
-
-## Setup
-
-Follow these steps to enable OTel Metrics API support in your Node.js application.
-
 1. Install the Datadog SDK:
    ```sh
    npm install dd-trace
@@ -1325,95 +1211,9 @@ Follow these steps to enable OTel Metrics API support in your Node.js applicatio
    // On application start
    require('dd-trace').init();
    ```
-
-## Examples
-
-You can use the standard OpenTelemetry API packages to create custom metrics.
-
-### Create a counter
-
-This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
-
-```javascript
-const { metrics } = require('@opentelemetry/api');
-
-const meter = metrics.getMeter('my-service', '1.0.0');
-
-// Counter - monotonically increasing values
-const requestCounter = meter.createCounter('http.requests', {
-  description: 'Total HTTP requests',
-  unit: 'requests'
-});
-requestCounter.add(1, { method: 'GET', status: 200 });
-```
-
-### Create a histogram
-
-This example uses the OTel Metrics API to create a histogram to track request durations:
-
-```javascript
-const { metrics } = require('@opentelemetry/api');
-
-const meter = metrics.getMeter('my-service', '1.0.0');
-
-// Histogram - distribution of values
-const durationHistogram = meter.createHistogram('http.duration', {
-  description: 'HTTP request duration',
-  unit: 'ms'
-});
-durationHistogram.record(145, { route: '/api/users' });
-```
-
-## Supported configuration
-
-To enable this feature, you must set `DD_METRICS_OTEL_ENABLED=true`.
-
-All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and temporality preferences are configured using a shared set of OpenTelemetry environment variables.
-
-For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][204].
-
-## Migrate from other setups
-
-### Existing OTel setup
-
-If you are already using the OpenTelemetry SDK with a manual OTLP exporter configuration, follow these steps to migrate:
-
-1. Add the Datadog SDK (`dd-trace`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
-3. Remove the `@opentelemetry/sdk-node` and `@opentelemetry/exporter-otlp` packages from your project's dependencies.
-4. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
-
-### Existing DogStatsD setup
-
-If you are using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
-
-## Troubleshooting
-
-- Ensure `DD_METRICS_OTEL_ENABLED` is set to `true`.
-- Verify that your OTLP destination is configured correctly to receive metrics.
-- If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][205] for details.
-- Verify `dd-trace` is initialized first. The Datadog SDK must be initialized at the top of your application, *before* any other modules are imported.
-- Verify `@opentelemetry/api` is installed. The Node.js SDK requires this API package.
-
-[204]: /opentelemetry/config/environment_variable_support
-[205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-
 {% /if %}
-<!-- END NODE.JS METRICS -->
 
-<!-- PYTHON METRICS -->
 {% if equals($prog_lang, "python") %}
-
-## Prerequisites
-
-- **Datadog SDK**: dd-trace-py version 3.18.0 or later.
-- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
-- **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
-
-## Setup
-
-Follow these steps to enable OTel Metrics API support in your Python application.
-
 1. Install the Datadog SDK:
    ```sh
    pip install ddtrace
@@ -1430,112 +1230,9 @@ Follow these steps to enable OTel Metrics API support in your Python application
    ```py
    ddtrace-run python my_app.py
    ```
-
-## Examples
-
-You can use the standard OpenTelemetry API packages to create custom metrics.
-
-### Create a counter
-
-This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
-
-```python
-import os
-os.environ["DD_METRICS_OTEL_ENABLED"] = "true"
-import ddtrace.auto # This must be imported before opentelemetry
-from opentelemetry import metrics
-
-# ddtrace automatically configures the MeterProvider
-meter = metrics.get_meter(__name__)
-
-# Counter - monotonically increasing values
-counter = meter.create_counter("http.requests_total")
-counter.add(1, {"method": "GET", "status_code": "200"})
-```
-
-### Create a histogram
-
-This example uses the OTel Metrics API to create a histogram to track request durations:
-
-```python
-import os
-os.environ["DD_METRICS_OTEL_ENABLED"] = "true"
-import ddtrace.auto # This must be imported before opentelemetry
-from opentelemetry import metrics
-import time
-
-# ddtrace automatically configures the MeterProvider
-meter = metrics.get_meter(__name__)
-
-# Histogram - distribution of values
-histogram = meter.create_histogram(
-    name="http.request_duration",
-    description="HTTP request duration",
-    unit="ms"
-)
-
-start_time = time.time()
-# ... simulate work ...
-time.sleep(0.05)
-end_time = time.time()
-
-duration = (end_time - start_time) * 1000 # convert to milliseconds
-histogram.record(duration, {"method": "POST", "route": "/api/users"})
-```
-
-## Supported configuration
-
-To enable this feature, you must set `DD_METRICS_OTEL_ENABLED=true`.
-
-All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and temporality preferences are configured using a shared set of OpenTelemetry environment variables.
-
-For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][204].
-
-## Migrate from other setups
-
-### Existing OTel setup
-
-If you are using the OTel SDK with your own manual OTLP exporter configuration:
-
-1. Add the Datadog SDK (`dd-trace-py`) to your project and enable its instrumentation (for example, `ddtrace-run`).
-2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
-3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
-
-### Existing DogStatsD setup
-
-If you are currently using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
-
-## Troubleshooting
-
-- Ensure `DD_METRICS_OTEL_ENABLED` is set to `true`.
-- Verify that your OTLP destination is configured correctly to receive metrics.
-- If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][205] for details.
-- Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
-- Ensure `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
-
-[204]: /opentelemetry/config/environment_variable_support
-[205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-
 {% /if %}
-<!-- END PYTHON METRICS -->
 
-<!-- RUBY METRICS -->
 {% if equals($prog_lang, "ruby") %}
-
-{% alert level="info" %}
-The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](https://github.com/open-telemetry/opentelemetry-ruby/tree/main/metrics_sdk). Report issues with the SDK at [opentelemetry-ruby/issues](https://github.com/open-telemetry/opentelemetry-ruby/issues).
-{% /alert %}
-
-## Prerequisites
-
-- **Datadog SDK**: `datadog` gem version 2.23.0 or later.
-- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
-- **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
-
-## Setup
-
-Follow these steps to enable OTel Metrics API support in your Ruby application.
-
 1. Add the Datadog SDK and OTel gems:
    ```ruby
    # Add to your Gemfile
@@ -1563,6 +1260,7 @@ Follow these steps to enable OTel Metrics API support in your Ruby application.
    # Call after Datadog.configure to initialize metrics
    OpenTelemetry::SDK.configure
    ```
+{% /if %}
 
 ## Examples
 
@@ -1572,6 +1270,56 @@ You can use the standard OpenTelemetry API packages to create custom metrics.
 
 This example uses the OTel Metrics API to create a counter that increments every time an item is processed:
 
+{% if equals($prog_lang, "dot_net") %}
+```csharp
+using System.Diagnostics.Metrics;
+
+// Define a meter
+Meter meter = new("MyService", "1.0.0");
+
+// Create a counter instrument
+Counter<long> requestsCounter = meter.CreateCounter<long>("http.requests_total");
+
+// Perform work
+// ...
+
+// Record measurements
+requestsCounter.Add(1, new("method", "GET"), new("status_code", "200"));
+```
+{% /if %}
+
+{% if equals($prog_lang, "node_js") %}
+```javascript
+const { metrics } = require('@opentelemetry/api');
+
+const meter = metrics.getMeter('my-service', '1.0.0');
+
+// Counter - monotonically increasing values
+const requestCounter = meter.createCounter('http.requests', {
+  description: 'Total HTTP requests',
+  unit: 'requests'
+});
+requestCounter.add(1, { method: 'GET', status: 200 });
+```
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+```python
+import os
+os.environ["DD_METRICS_OTEL_ENABLED"] = "true"
+import ddtrace.auto # This must be imported before opentelemetry
+from opentelemetry import metrics
+
+# ddtrace automatically configures the MeterProvider
+meter = metrics.get_meter(__name__)
+
+# Counter - monotonically increasing values
+counter = meter.create_counter("http.requests_total")
+counter.add(1, {"method": "GET", "status_code": "200"})
+```
+{% /if %}
+
+{% if equals($prog_lang, "ruby") %}
 ```ruby
 require 'opentelemetry/api'
 
@@ -1582,11 +1330,76 @@ meter = OpenTelemetry.meter_provider.meter('my-service', '1.0.0')
 counter = meter.create_counter('http.requests_total')
 counter.add(1, attributes: { 'method' => 'GET', 'status_code' => '200' })
 ```
+{% /if %}
 
 ### Create a histogram
 
 This example uses the OTel Metrics API to create a histogram to track request durations:
 
+{% if equals($prog_lang, "dot_net") %}
+```csharp
+using System.Diagnostics.Metrics;
+
+// Define a meter
+Meter meter = new("MyService", "1.0.0");
+
+// Create a histogram instrument
+Histogram<double> responseTimeHistogram = meter.CreateHistogram<double>("http.response.time");
+
+// Perform work
+var watch = System.Diagnostics.Stopwatch.StartNew();
+await Task.Delay(1_000);
+watch.Stop();
+
+// Record measurements
+responseTimeHistogram.Record(watch.ElapsedMilliseconds, new("method", "GET"), new("status_code", "200"));
+```
+{% /if %}
+
+{% if equals($prog_lang, "node_js") %}
+```javascript
+const { metrics } = require('@opentelemetry/api');
+
+const meter = metrics.getMeter('my-service', '1.0.0');
+
+// Histogram - distribution of values
+const durationHistogram = meter.createHistogram('http.duration', {
+  description: 'HTTP request duration',
+  unit: 'ms'
+});
+durationHistogram.record(145, { route: '/api/users' });
+```
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+```python
+import os
+os.environ["DD_METRICS_OTEL_ENABLED"] = "true"
+import ddtrace.auto # This must be imported before opentelemetry
+from opentelemetry import metrics
+import time
+
+# ddtrace automatically configures the MeterProvider
+meter = metrics.get_meter(__name__)
+
+# Histogram - distribution of values
+histogram = meter.create_histogram(
+    name="http.request_duration",
+    description="HTTP request duration",
+    unit="ms"
+)
+
+start_time = time.time()
+# ... simulate work ...
+time.sleep(0.05)
+end_time = time.time()
+
+duration = (end_time - start_time) * 1000 # convert to milliseconds
+histogram.record(duration, {"method": "POST", "route": "/api/users"})
+```
+{% /if %}
+
+{% if equals($prog_lang, "ruby") %}
 ```ruby
 require 'opentelemetry/api'
 require 'time'
@@ -1608,6 +1421,7 @@ end_time = Time.now
 duration = (end_time - start_time) * 1000 # convert to milliseconds
 histogram.record(duration, attributes: { 'method' => 'POST', 'route' => '/api/users' })
 ```
+{% /if %}
 
 ## Supported configuration
 
@@ -1621,8 +1435,29 @@ For a complete list of all shared OTLP environment variables, see [OpenTelemetry
 
 ### Existing OTel setup
 
-If you are using the OTel SDK with your own manual OTLP exporter configuration:
+If you are already using the OpenTelemetry SDK with a manual OTLP exporter configuration, follow these steps to migrate:
 
+{% if equals($prog_lang, "dot_net") %}
+1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
+2. Remove any code that manually configures the `OtlpExporter` for metrics. The Datadog SDK handles this configuration automatically.
+3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
+4. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
+{% if equals($prog_lang, "node_js") %}
+1. Add the Datadog SDK (`dd-trace`) to your project and enable its instrumentation.
+2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
+3. Remove the `@opentelemetry/sdk-node` and `@opentelemetry/exporter-otlp` packages from your project's dependencies.
+4. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+1. Add the Datadog SDK (`dd-trace-py`) to your project and enable its instrumentation (for example, `ddtrace-run`).
+2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
+3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
+{% if equals($prog_lang, "ruby") %}
 1. Add the Datadog SDK (`datadog`) to your project and enable its instrumentation.
 2. Remove any code that manually configures the `OTLPMetricsExporter`. The Datadog SDK handles this configuration automatically.
 3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
@@ -1630,23 +1465,54 @@ If you are using the OTel SDK with your own manual OTLP exporter configuration:
 {% alert level="warning" %}
 Runtime and trace metrics continue to be submitted using StatsD. Only custom metrics created through the OpenTelemetry Metrics API are sent using OTLP. The `dd-trace-rb` implementation supports exporting OTLP metrics exclusively to a Datadog Agent or OpenTelemetry Collector. Multiple exporters are not supported.
 {% /alert %}
+{% /if %}
+
+### Existing DogStatsD setup
+
+If you are currently using the Datadog DogStatsD client and want to migrate to the OpenTelemetry Metrics API, you need to update your instrumentation code. The main difference is that OTel metrics are configured using environment variables rather than code, and you create `Instrument` objects first.
 
 ## Troubleshooting
 
 - Ensure `DD_METRICS_OTEL_ENABLED` is set to `true`.
 - Verify that your OTLP destination is configured correctly to receive metrics.
 - If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][205] for details.
+{% if equals($prog_lang, "dot_net") %}
+- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the metric data.
+- If, after removing the OpenTelemetry SDK packages, your application fails to compile due to missing APIs in the [System.Diagnostics.Metrics namespace][206], you must update your application by either adding a direct NuGet package reference to `System.Diagnostics.DiagnosticSource` or upgrading the version of .NET. See [.NET version and instrument support](#net-version-and-instrument-support) for more information.
+{% /if %}
+{% if equals($prog_lang, "node_js") %}
+- Verify `dd-trace` is initialized first. The Datadog SDK must be initialized at the top of your application, *before* any other modules are imported.
+- Verify `@opentelemetry/api` is installed. The Node.js SDK requires this API package.
+{% /if %}
+{% if equals($prog_lang, "python") %}
+- Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
+- Ensure `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
+{% /if %}
+{% if equals($prog_lang, "ruby") %}
 - Verify required gems are installed. Ensure `opentelemetry-metrics-sdk` and `opentelemetry-exporter-otlp-metrics` are installed in your Ruby environment.
 - Ensure `Datadog.configure` is called before `OpenTelemetry::SDK.configure`. The Datadog SDK must be configured first to properly set up the meter provider.
-
-[204]: /opentelemetry/config/environment_variable_support
-[205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-
 {% /if %}
-<!-- END RUBY METRICS -->
 
-[200]: /developers/dogstatsd/
-[201]: /tracing/metrics/runtime_metrics/
+{% if equals($prog_lang, "dot_net") %}
+### .NET version and instrument support
+
+Support for specific OpenTelemetry metric instruments is dependent on your .NET runtime version or the version of the `System.Diagnostics.DiagnosticSource` NuGet package you have installed.
+
+Here is the minimum version required for each instrument type:
+
+- **.NET 6+** (or `System.Diagnostics.DiagnosticSource` v6.0.0) supports:
+  - `Counter`
+  - `Histogram`
+  - `ObservableCounter`
+  - `ObservableGauge`
+
+- **.NET 7+** (or `System.Diagnostics.DiagnosticSource` v7.0.0) supports:
+  - `UpDownCounter`
+  - `ObservableUpDownCounter`
+
+- **.NET 9+** (or `System.Diagnostics.DiagnosticSource` v9.0.0) supports:
+  - `Gauge`
+{% /if %}
 
 {% /if %}
 <!-- End metrics support check -->
@@ -1665,12 +1531,12 @@ Runtime and trace metrics continue to be submitted using StatsD. Only custom met
 
 ## Overview
 
-<!-- Native implementation (.NET, Node.js) -->
-{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")) %}
 Send custom application logs into Datadog using the OpenTelemetry (OTel) Logs API with the Datadog SDK.
 
 This is an alternative to using Datadog's traditional log injection and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.
 
+<!-- Native implementation (.NET, Node.js) -->
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")) %}
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
@@ -1680,37 +1546,90 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 
 <!-- Exporter-based implementation (Python) -->
 {% if equals($prog_lang, "python") %}
-Send custom application logs into Datadog using the OpenTelemetry (OTel) Logs API with the Datadog SDK.
-
-This is an alternative to using Datadog's traditional log injection and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.
-
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
 {% /if %}
 
-<!-- .NET LOGS -->
-{% if equals($prog_lang, "dot_net") %}
-
-You can export OTLP logs from your .NET application using the Datadog SDK (`dd-trace-dotnet`).
-
-This feature works by intercepting logs from the built-in `Microsoft.Extensions.Logging.ILogger` library and exporting them as structured OTLP data.
-
 ## Prerequisites
 
+{% if equals($prog_lang, "dot_net") %}
 - **Datadog SDK**: `dd-trace-dotnet` version [3.31.0][301] or later.
+{% /if %}
+{% if equals($prog_lang, "node_js") %}
+- **Datadog SDK**: `dd-trace-js` version 5.73.0 or later.
+- **OpenTelemetry Logs API**: The `@opentelemetry/api-logs` package is required, in a version from `v0.200.0` up to `v1.0`.
+
+{% alert level="warning" %}
+The `@opentelemetry/api-logs` package is still experimental, and version 1.0 has not yet been released. New versions of this package may introduce breaking changes that affect compatibility.
+
+If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an issue in the `dd-trace-js` repository](https://github.com/DataDog/dd-trace-js/issues).
+{% /alert %}
+{% /if %}
+{% if equals($prog_lang, "python") %}
+- **Datadog SDK**: `dd-trace-py` version 3.18.0 or later.
+{% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
 
 ## Setup
 
+Follow these steps to enable OTel Logs API support in your application.
+
+{% if equals($prog_lang, "dot_net") %}
 1. Install the Datadog SDK. Follow the installation steps for your runtime:
-   - [.NET Framework][302]
-   - [.NET Core][303]
+   - [.NET Framework][202]
+   - [.NET Core][203]
 2. Enable OTel logs export by setting the following environment variable:
     ```sh
     export DD_LOGS_OTEL_ENABLED=true
     ```
+{% /if %}
+
+{% if equals($prog_lang, "node_js") %}
+1. Install the Datadog SDK:
+    ```sh
+    npm install dd-trace
+    ```
+2. Install the OpenTelemetry Logs API package:
+    ```sh
+    npm install @opentelemetry/api-logs
+    ```
+3. Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
+    ```
+4. Initialize the Datadog SDK (`dd-trace`) at the beginning of your application, before any other modules are imported:
+    ```javascript
+    // This must be the first line of your application
+    require('dd-trace').init()
+
+    // Other imports can follow
+    const { logs } = require('@opentelemetry/api-logs')
+    const express = require('express')
+    ```
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
+1. Install the Datadog SDK:
+    ```sh
+    pip install ddtrace
+    ```
+2. Install the OTel SDK and Exporter:
+    ```sh
+    pip install opentelemetry-sdk opentelemetry-exporter-otlp>=1.15.0
+    ```
+3. Enable OTel logs export by setting the following environment variable:
+    ```sh
+    export DD_LOGS_OTEL_ENABLED=true
+    ```
+4. Run your application using `ddtrace-run`:
+    ```sh
+    ddtrace-run python my_app.py
+    ```
+    When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to your OTLP destination.
+{% /if %}
 
 ## Examples
 
+{% if equals($prog_lang, "dot_net") %}
 ### Standard logging
 
 ```csharp
@@ -1731,7 +1650,7 @@ logger.LogInformation("This is a standard log message.");
 
 ### Trace and log correlation
 
-This example shows how logs emitted within an active Datadog span are automatically correlated. If you are using the OTel Tracing API or built-in .NET Activity API to create spans, ensure [OTel Tracing API support][304] is enabled.
+This example shows how logs emitted within an active Datadog span are automatically correlated. If you are using the OTel Tracing API or built-in .NET Activity API to create spans, ensure OTel Tracing API support is enabled by setting `DD_TRACE_OTEL_ENABLED=true`.
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -1759,93 +1678,9 @@ using (var activity = activitySource.StartActivity("do.work"))
     logger.LogWarning("So is this one.");
 }
 ```
-
-## Supported configuration
-
-To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
-
-All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and batch processor settings are configured using a shared set of OpenTelemetry environment variables.
-
-For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][305].
-
-## Migrate from other setups
-
-### Existing OTel setup
-
-If you are already using the OpenTelemetry SDK with a manual OTLP exporter configuration, follow these steps to migrate:
-
-1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
-2. Remove any code that manually configures the `OtlpExporter` for logs. The Datadog SDK handles this configuration automatically.
-3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
-4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-
-### Existing Datadog log injection
-
-If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
-
-1. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2. The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
-3. Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required)
-4. Disable any file-based log collection for this service to avoid duplicate logs.
-
-## Troubleshooting
-
-- Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
-- Verify that your OTLP destination is configured correctly to receive logs.
-- If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][306] for details.
-- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the log data.
-
-[301]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.31.0
-[302]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
-[303]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
-[304]: /opentelemetry/instrument/api_support/dotnet/traces
-[305]: /opentelemetry/config/environment_variable_support
-[306]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-
 {% /if %}
-<!-- END .NET LOGS -->
 
-<!-- NODE.JS LOGS -->
 {% if equals($prog_lang, "node_js") %}
-
-## Prerequisites
-
-- **Datadog SDK**: `dd-trace-js` version 5.73.0 or later.
-- **OpenTelemetry Logs API**: The `@opentelemetry/api-logs` package is required, in a version from `v0.200.0` up to `v1.0`.
-- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
-
-{% alert level="warning" %}
-The `@opentelemetry/api-logs` package is still experimental, and version 1.0 has not yet been released. New versions of this package may introduce breaking changes that affect compatibility.
-
-If you encounter an issue after upgrading `@opentelemetry/api-logs`, [open an issue in the `dd-trace-js` repository](https://github.com/DataDog/dd-trace-js/issues).
-{% /alert %}
-
-## Setup
-
-1. Install the Datadog SDK:
-    ```sh
-    npm install dd-trace
-    ```
-2. Install the OpenTelemetry Logs API package:
-    ```sh
-    npm install @opentelemetry/api-logs
-    ```
-3. Enable OTel logs export by setting the following environment variable:
-    ```sh
-    export DD_LOGS_OTEL_ENABLED=true
-    ```
-4. Initialize the Datadog SDK (`dd-trace`) at the beginning of your application, before any other modules are imported:
-    ```javascript
-    // This must be the first line of your application
-    require('dd-trace').init()
-
-    // Other imports can follow
-    const { logs } = require('@opentelemetry/api-logs')
-    const express = require('express')
-    ```
-
-## Examples
-
 ### Emitting a log
 
 After the Datadog SDK is initialized, you can use the standard OpenTelemetry Logs API to get a logger and emit log records.
@@ -1895,87 +1730,9 @@ app.get('/api/users/:id', (req, res) => {
 
 app.listen(3000)
 ```
-
-## Supported configuration
-
-To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
-
-All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and batch processor settings are configured using a shared set of OpenTelemetry environment variables.
-
-For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][310].
-
-## Migrate from other setups
-
-### Existing OTel setup (manual configuration)
-
-If you are using the full OpenTelemetry SDK (`@opentelemetry/sdk-logs`) with a manual exporter setup:
-
-1. Remove the OTel SDK and OTLP Exporter packages:
-    ```sh
-    npm uninstall @opentelemetry/sdk-logs @opentelemetry/exporter-otlp-logs
-    ```
-2. Remove all manual OTel SDK initialization code (for example, `new LoggerProvider()`, `addLogRecordProcessor()`, `new OTLPLogExporter()`).
-3. Install the Datadog SDK: `npm install dd-trace`
-4. Keep the `@opentelemetry/api-logs` package.
-5. Set `DD_LOGS_OTEL_ENABLED=true` and initialize `dd-trace` at the top of your application.
-
-Your existing code that uses `logs.getLogger()` will continue to work.
-
-### Existing Datadog log injection
-
-If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=true` adds trace context to text logs) and an Agent to tail log files:
-
-1. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
-2. The Datadog SDK automatically disables the old log injection style (`DD_LOGS_INJECTION`) to prevent duplicate trace metadata in your logs. Trace correlation is handled by the structured OTLP payload.
-3. Ensure your Datadog Agent is configured to receive OTLP logs (version 7.48.0 or greater is required)
-4. Disable any file-based log collection for this service to avoid duplicate logs.
-
-## Troubleshooting
-
-- Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
-- Verify that your OTLP destination is configured correctly to receive logs.
-- If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][311] for details.
-- Verify `dd-trace` is initialized first. The Datadog SDK must be initialized at the top of your application, *before* any other modules are imported.
-- Verify `@opentelemetry/api-logs` is installed. The Node.js SDK requires this API package.
-
-[310]: /opentelemetry/config/environment_variable_support
-[311]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-
 {% /if %}
-<!-- END NODE.JS LOGS -->
 
-<!-- PYTHON LOGS -->
 {% if equals($prog_lang, "python") %}
-
-## Prerequisites
-
-- **Datadog SDK**: `dd-trace-py` version 3.18.0 or later.
-- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel logs.
-
-## Setup
-
-Follow these steps to enable OTel Logs API support in your Python application.
-
-1. Install the Datadog SDK:
-    ```sh
-    pip install ddtrace
-    ```
-2. Install the OTel SDK and Exporter:
-    ```sh
-    pip install opentelemetry-sdk opentelemetry-exporter-otlp>=1.15.0
-    ```
-3. Enable OTel logs export by setting the following environment variable:
-    ```sh
-    export DD_LOGS_OTEL_ENABLED=true
-    ```
-4. Run your application using `ddtrace-run`:
-    ```sh
-    ddtrace-run python my_app.py
-    ```
-    When enabled, `ddtrace` automatically detects the OTel packages and configures the `OTLPLogExporter` to send logs to your OTLP destination.
-
-## Examples
-
 The Datadog SDK supports the OpenTelemetry Logs API for Python's built-in `logging` module. You do not need to change your existing logging code.
 
 ### Standard logging
@@ -2025,6 +1782,7 @@ print("Starting work...")
 do_work()
 print("Work complete.")
 ```
+{% /if %}
 
 ## Supported configuration
 
@@ -2032,19 +1790,41 @@ To enable this feature, you must set `DD_LOGS_OTEL_ENABLED=true`.
 
 All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and batch processor settings are configured using a shared set of OpenTelemetry environment variables.
 
-For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][320].
+For a complete list of all shared OTLP environment variables, see [OpenTelemetry Environment Variables Interoperability][204].
 
 ## Migrate from other setups
 
-### Existing OTel setup (manual configuration)
+### Existing OTel setup
 
-If you are already using the OTel SDK and manually configuring an `OTLPLogExporter` in your code:
+If you are already using the OpenTelemetry SDK with a manual OTLP exporter configuration, follow these steps to migrate:
 
+{% if equals($prog_lang, "dot_net") %}
+1. Add the Datadog SDK (`dd-trace-dotnet`) to your project and enable its instrumentation.
+2. Remove any code that manually configures the `OtlpExporter` for logs. The Datadog SDK handles this configuration automatically.
+3. Remove the `OpenTelemetry` and `OpenTelemetry.Exporter.OpenTelemetryProtocol` packages from your project's dependencies.
+4. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
+{% /if %}
+
+{% if equals($prog_lang, "node_js") %}
+1. Remove the OTel SDK and OTLP Exporter packages:
+    ```sh
+    npm uninstall @opentelemetry/sdk-logs @opentelemetry/exporter-otlp-logs
+    ```
+2. Remove all manual OTel SDK initialization code (for example, `new LoggerProvider()`, `addLogRecordProcessor()`, `new OTLPLogExporter()`).
+3. Install the Datadog SDK: `npm install dd-trace`
+4. Keep the `@opentelemetry/api-logs` package.
+5. Set `DD_LOGS_OTEL_ENABLED=true` and initialize `dd-trace` at the top of your application.
+
+Your existing code that uses `logs.getLogger()` will continue to work.
+{% /if %}
+
+{% if equals($prog_lang, "python") %}
 1. Remove your manual setup code (for example, `LoggerProvider`, `BatchLogRecordProcessor`, and `OTLPLogExporter` instantiation).
 2. Enable `ddtrace-run` auto-instrumentation for your application.
 3. Set the `DD_LOGS_OTEL_ENABLED=true` environment variable.
 
 The Datadog SDK will programmatically configure the OTel SDK for you.
+{% /if %}
 
 ### Existing Datadog log injection
 
@@ -2059,15 +1839,18 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 
 - Ensure `DD_LOGS_OTEL_ENABLED` is set to `true`.
 - Verify that your OTLP destination is configured correctly to receive logs.
-- If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][321] for details.
+- If you are sending data to the Datadog Agent, ensure OTLP ingestion is enabled. See [Enabling OTLP Ingestion on the Datadog Agent][205] for details.
+{% if equals($prog_lang, "dot_net") %}
+- Verify Datadog automatic instrumentation is active. This feature relies on Datadog's automatic instrumentation to function. Ensure you have completed all setup steps to enable the .NET instrumentation hooks, as these are required to intercept the log data.
+{% /if %}
+{% if equals($prog_lang, "node_js") %}
+- Verify `dd-trace` is initialized first. The Datadog SDK must be initialized at the top of your application, *before* any other modules are imported.
+- Verify `@opentelemetry/api-logs` is installed. The Node.js SDK requires this API package.
+{% /if %}
+{% if equals($prog_lang, "python") %}
 - Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
 - Ensure `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
-
-[320]: /opentelemetry/config/environment_variable_support
-[321]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
-
 {% /if %}
-<!-- END PYTHON LOGS -->
 
 {% /if %}
 <!-- End logs support check -->
@@ -2075,11 +1858,65 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 {% /if %}
 <!-- END LOGS CONTENT -->
 
+<!-- ============================================== -->
+<!-- GLOBAL LINK REFERENCES -->
+<!-- ============================================== -->
+
 [1]: https://opentelemetry.io/docs/specs/otel/trace/api/
 [2]: /tracing/trace_collection/otel_instrumentation/
-[3]: /profiler/
-[4]: /data_streams/
-[5]: /security/application_security/
-[6]: /infrastructure/process
 [7]: /opentelemetry/setup/collector_exporter/
 [8]: /opentelemetry/compatibility/#feature-compatibility
+
+<!-- Java traces -->
+[100]: /tracing/setup/java/
+[101]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
+[102]: /tracing/glossary/#trace
+[103]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[104]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception
+[105]: /tracing/trace_collection/trace_context_propagation/
+[106]: /tracing/security
+[107]: /tracing/guide/ignoring_apm_resources/
+
+<!-- Python traces -->
+[110]: /tracing/setup/python/
+
+<!-- Node.js traces -->
+[120]: /tracing/trace_collection/dd_libraries/nodejs#integration-instrumentation
+[121]: https://opentelemetry.io/docs/instrumentation/js/automatic/
+
+<!-- Go traces -->
+[130]: https://opentelemetry.io/docs/instrumentation/go/manual/
+
+<!-- Ruby traces -->
+[140]: https://opentelemetry.io/docs/instrumentation/ruby/manual/
+[141]: /tracing/trace_collection/dd_libraries/ruby#integration-instrumentation
+[142]: https://opentelemetry.io/docs/languages/ruby/libraries/
+
+<!-- .NET traces -->
+[150]: https://opentelemetry.io/docs/instrumentation/net/manual/
+[151]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
+[152]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[153]: /tracing/trace_collection/single-step-apm/
+[154]: https://opentelemetry.io/docs/instrumentation/net/libraries/
+
+<!-- PHP traces -->
+[160]: https://opentelemetry.io/docs/languages/php/instrumentation/#instrumentation-setup
+[161]: https://opentelemetry.io/docs/instrumentation/php/manual/
+[162]: /tracing/trace_collection/dd_libraries/php#getting-started
+
+<!-- Rust traces -->
+[170]: https://crates.io/crates/datadog-opentelemetry
+[171]: /tracing/trace_collection/library_config/rust
+[172]: /tracing/trace_collection/trace_context_propagation/?tab=rust
+
+<!-- Metrics and logs shared -->
+[200]: /developers/dogstatsd/
+[201]: /tracing/metrics/runtime_metrics/
+[202]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-framework/#install-the-tracer
+[203]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core#install-the-tracer
+[204]: /opentelemetry/config/environment_variable_support
+[205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
+[206]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics
+
+<!-- .NET logs -->
+[301]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.31.0
