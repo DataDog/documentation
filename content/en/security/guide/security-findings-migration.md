@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-To make it easier to search for security findings throughout Datadog, the syntax for search queries is changing:
+To make it easier to search for security findings throughout Datadog, the syntax for search queries is changing starting January 28th:
 - **Standardized naming conventions** for security finding data fields
 - **A new schema** to consistently organize those fields across security products
 
@@ -28,22 +28,32 @@ This change comes with a set of [new features](#new-features) that use the new s
 
 ### Required action
 
-This change affects all interfaces where you can query security findings data. While some queries will receive automatic updates, others require updates on your part:
-- **No change required** - queries are updated automatically
-  - Explorers, dashboards, notification rules, and automation pipelines
-- **Changes required** - update your queries by **April 1, 2026**
-  - Workflow Automation and Sheets
-  - API endpoints: [List findings][15] and [Get a finding][16]
-  - Terraform resource: `datadog_security_notification_rule`
-  <div class="alert alert-warning">Datadog will deprecate legacy API and Terraform resources. Update your queries on time so you can avoid workflow interruptions.</div>
+- If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required** - queries are updated automatically in the UI:
+  - Explorers, dashboards, notification rules, automation pipelines and workflows
+
+- If you do use one of the features listed below, **changes will be required** - please prepare to update before the second half of 2026:
+  - API endpoints: [List findings][15] and [Get a finding][16] will eventually be deprecated in favor of a new unified Findings API (docs to be shared early January). 
+  - Terraform resource `datadog_security_notification_rule` for triggery_type: "security_findings": Starting January 28th, you can update the `query` value to match the new syntax. 
 
 If you need assistance with your migration, contact [Datadog support][14].
 
 ## What is changing
 
+### New querying syntax
+
+Following this change, you can use the same query syntax for all security findings, using attributes organized around namespaces. Here are some practical examples:
+
+| Before | After (all findings) |
+|--------|----------------------|
+| **Misconfigurations:** `@workflow.triage.status:open status:critical`<br>**Library vulnerabilities:** `status:open severity:Critical` | `@status:open @severity:critical` |
+| **Misconfigurations:** `@dd_computed_attributes.is_publicly_accessible:true`<br>**Host Vulnerabilities:** `is_publicly_accessible:Accessible` | `@risk.is_publicly_accessible:true` |
+| **Library Vulnerabilities:** `library_name:org.apache.logging.log4j`<br>**Host Vulnerabilities:** `package:org.apache.logging.log4j` | `@package.name:org.apache.logging.log4j` |
+
+View the full specification at [Security Findings Schema Reference][1].
+
 ### New features
 
-Starting late January 2026, the following features use the new data model:
+Starting late January 2026, the following features will be made available and use the new data model:
 - Unified search queries for Cloud Security [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
 - A new unified public findings API
 - [Dashboard][2] support for Code Security
@@ -114,17 +124,6 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
   </tbody>
 </table>
 
-### New querying syntax
-
-Following this change, you can use the same query syntax for all security findings, using attributes organized around namespaces. Here are some practical examples:
-
-| Before | After (all findings) |
-|--------|----------------------|
-| **Misconfigurations:** `@workflow.triage.status:open status:critical`<br>**Library vulnerabilities:** `status:open severity:Critical` | `@status:open @severity:critical` |
-| **Misconfigurations:** `@dd_computed_attributes.is_publicly_accessible:true`<br>**Host Vulnerabilities:** `is_publicly_accessible:Accessible` | `@risk.is_publicly_accessible:true` |
-| **Library Vulnerabilities:** `library_name:org.apache.logging.log4j`<br>**Host Vulnerabilities:** `package:org.apache.logging.log4j` | `@package.name:org.apache.logging.log4j` |
-
-View the full specification at [Security Findings Schema Reference][1].
 
 ## Further reading
 
