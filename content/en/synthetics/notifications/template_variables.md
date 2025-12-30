@@ -41,8 +41,8 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 `{{synthetics.result.duration}}`
 : Duration of the test run (in milliseconds) (for example, `9096`).
 
-`{{tags.env}}`
-: The environment tag value (for example, `prod`).
+`{{tags}}`
+: Lists all the tags added to the synthetics test. Use {{tag.my_tag}} to access individual tag values.
 
 **Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration.
 
@@ -186,6 +186,14 @@ Applies to Multistep, Browser, and Mobile tests.
 
 `{{synthetics.attributes.count.hops}}`
 : The number of traceroute hops for TCP and ICMP tests
+
+{{% /tab %}}
+{{% tab "Failed Step" %}}
+
+Applies to Multistep, Browser, and Mobile tests.
+
+`{{synthetics.failed_step}}`
+: The `failed_step` object provides a shortcut to the data for the step in `{{synthetics.attributes.result.steps}}` that caused the test to fail. For example, `{{synthetics.failed_step.name}}` maps to `{{synthetics.attributes.result.steps.<step-index>.name}}`, the failing step’s name.
 
 {{% /tab %}}
 {{< /tabs >}}
