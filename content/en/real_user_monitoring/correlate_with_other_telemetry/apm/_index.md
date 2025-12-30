@@ -177,7 +177,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable the tracing for `api.example.com` and `foo.example.com`.
 
-3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
+5.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog. To keep 20% of backend traces:
 
     ```kotlin
         val tracedHosts = listOf("example.com")
@@ -185,18 +185,33 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
             DatadogInterceptor.Builder(tracedHosts)
-                .setTraceSampler(RateBasedSampler(100f))
+                .setTraceSampler(RateBasedSampler(20f))
                 .build()
         )
         .build()
     ```
 
+6. _(Optional)_ To ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `SAMPLED` (set to `SAMPLED` by default).
+
+    For example, if you set the `traceSampler` to 20% in the Android SDK:
+    - When `traceContextInjection` is set to `ALL`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
+
+  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
+
+    - When `traceContextInjection` is set to `SAMPLED`, **20%** of backend traces are kept. For the remaining **80%**, the Android SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][3]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+
+    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+
+
 **Note**:
 * `traceSampler` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 * If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
+* The default sample rate for the `traceSampler` was 20% in the Android SDK versions 1.x and 2.x, and was increased to 100% with the Android SDK version 3.0.0.
+* The default for the `traceContextInjection` was `ALL` in the Android SDK versions 1.x and 2.x, and got changed to `SAMPLED` with the Android SDK version 3.0.0.
 
 [1]: /real_user_monitoring/android/
 [2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
+[3]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
@@ -241,9 +256,9 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
    Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
 
-5. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+5. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 100% of the traces coming from application requests are sent to Datadog.
 
-     To keep 100% of backend traces:
+     To keep 20% of backend traces:
     ```swift
     RUM.enable(
         with: RUM.Configuration(
@@ -254,15 +269,31 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                         "example.com",
                         "api.yourdomain.com"
                     ],
-                    sampleRate: 100
+                    sampleRate: 20
                 )
             )
         )
     )
     ```
-**Note**: `sampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+
+6. _(Optional)_ To ensure backend services' sampling decisions are still applied, configure the `traceContextInjection` initialization parameter to `.sampled` (set to `.sampled` by default).
+
+    For example, if you set the `sampleRate` to 20% in the iOS SDK:
+    - When `traceContextInjection` is set to `.all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
+
+  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
+
+    - When `traceContextInjection` is set to `.sampled`, **20%** of backend traces are kept. For the remaining **80%**, the iOS SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
+
+    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+
+**Note**:
+* `sampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+* The default sample rate for the `sampleRate` was 20% in the iOS SDK versions 1.x and 2.x, and got increased to 100% with the iOS SDK version 3.0.0.
+* The default for the `traceContextInjection` was `.all` in the iOS SDK versions 1.x and 2.x, and got changed to `.sampled` with the iOS SDK version 3.0.0.
 
 [1]: /real_user_monitoring/ios/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
