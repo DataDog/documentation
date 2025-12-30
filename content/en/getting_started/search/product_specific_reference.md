@@ -134,7 +134,7 @@ service:database @db.statement:"SELECT *" @db.row_count:>1000
   {{< nextlink href="/service_management/events/explorer/searching" >}}Service Management Events Search: Query and filter service management events{{< /nextlink >}}
   {{< nextlink href="/logs/workspaces/sql_reference" >}}SQL Reference for Logs: SQL syntax for advanced log analysis in Workspaces{{< /nextlink >}}
   {{< nextlink href="/tests/explorer/search_syntax" >}}Test Optimization Explorer Search Syntax: Search and analyze test execution data{{< /nextlink >}}
-  {{< nextlink href="/observability_pipelines/search_syntax" >}}Observability Pipelines Search Syntax: Filter logs for your processors{{< /nextlink >}}
+  {{< nextlink href="/observability_pipelines/search_syntax/logs" >}}Observability Pipelines Search Syntax: Filter logs for your processors{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

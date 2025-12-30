@@ -59,7 +59,7 @@ Datadog provides support for the OpenTelemetry Traces, Metrics, and Logs APIs ac
 | [Node.js][33] | {{< X >}} | *Not Yet Supported* | {{< X >}} |
 | [Java][34] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 | [Go][35] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
-| [Ruby][36] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
+| [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |
 | [PHP][37] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 
 ## More details
@@ -70,7 +70,8 @@ OpenTelemetry traces that have [generative AI attributes](https://opentelemetry.
 
 ### Runtime metrics
 
-Setups using the OpenTelemetry SDK follow the [OpenTelemetry Runtime Metrics][1] specification.
+- **Datadog SDK setups**: Emit [Runtime Metrics][23] using DogStatsD (UDP port 8125). Ensure DogStatsD is enabled in your Datadog Agent.
+- **OpenTelemetry SDK setups**: Follow the [OpenTelemetry Runtime Metrics][1] specification and are typically sent using OTLP (port 4317/4318).
 
 ### Real User Monitoring (RUM)
 

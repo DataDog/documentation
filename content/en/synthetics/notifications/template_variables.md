@@ -52,25 +52,34 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 {{< tabs >}}
 {{% tab "Test Info" %}}
 
-`.test`
-: Info about the test
+`{{synthetics.attributes.test}}`
+: The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
 
-`.test.id`
-: Public ID (for example, `abc-def-ghi`)
+`{{synthetics.attributes.test.name}}`
+: The name of the test
 
-`.test.type`
+`{{synthetics.attributes.test.type}}`
 : Test type (for example, `api`)
 
-`.test.subType`
-: Subtype for API tests (for example, `http`)
+`{{synthetics.attributes.test.subType}}`
+: Subtype for API tests (for example, `http`, `dns`, and `multi`)
+
+`{{synthetics.attributes.test.id}}`
+: The test's public ID (for example, `abc-def-ghi`)
 
 {{% /tab %}}
 {{% tab "Location" %}}
 
-`.location.id`
+`{{synthetics.attributes.location}}`
+: The `location` object contains information about the location of where the test is run from
+
+`{{synthetics.attributes.location.id}}`
 : Location ID (for example, `aws:eu-central-1`)
 
-`.location.privateLocation`
+`{{synthetics.attributes.location.name}}`
+: Name of the location (for example, `Frankfurt (AWS)`)
+
+`{{synthetics.attributes.location.privateLocation}}`
 : `true` for Private Locations
 
 {{% /tab %}}
@@ -78,22 +87,25 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 
 Applies to browser and mobile tests.
 
-`.device.id`
+`{{synthetics.attributes.device}}`
+: The `device` object contains information about the device on which the test is run on
+
+`{{synthetics.attributes.device.id}}`
 : Device identifier
 
-`.device.name`
+`{{synthetics.attributes.device.name}}`
 : Human-readable device name
 
-`.device.type`
+`{{synthetics.attributes.device.type}}`
 : Device type classification
 
-`.device.resolution.width`, `.device.resolution.height`
+`{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
 : Screen resolution dimensions
 
-`.device.browser.type`
+`{{synthetics.attributes.device.browser.type}}`
 : Browser type (browser tests only)
 
-`.device.platform.name`, `.device.platform.version`
+`{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (mobile tests only)
 
 **Example values:**
@@ -113,23 +125,29 @@ Applies to browser and mobile tests.
 {{% /tab %}}
 {{% tab "Result" %}}
 
-`.result.id`
+`{{synthetics.attributes.result}}`
+: The `result` object contains information about the executed test run
+
+`{{synthetics.attributes.result.id}}`
 : Unique result ID
 
-`.result.status`
-: Test execution status
+`{{synthetics.attributes.result.status}}`
+: Test execution status (for example, `passed` or `failed`)
 
-`.result.duration`
+`{{synthetics.attributes.result.duration}}`
 : Test duration in milliseconds
 
-`.result.testStartedAt`, `.result.testFinishedAt`, `.result.testTriggeredAt`
+`{{synthetics.attributes.result.testStartedAt}}`, `{{synthetics.attributes.result.testFinishedAt}}`, `{{synthetics.attributes.result.testTriggeredAt}}`
 : Epoch timestamps in milliseconds
 
-`.result.failure.message`
-: Description of failure
+`{{synthetics.attributes.result.failure}}`
+: The `failure` object contains information about why the test failed
 
-`.result.failure.code`
-: Error code
+`{{synthetics.attributes.result.failure.message}}`
+: The failure message
+
+`{{synthetics.attributes.result.failure.code}}`
+: The failure code
 
 **Example values:**
 ```json
@@ -161,16 +179,16 @@ These are local variables configured for API tests or defined outside individual
 
 Located at `{{synthetics.attributes.result.variables.config}}`:
 
-`.name`
+`{{synthetics.attributes.result.variables.config.name}}`
 : Variable name
 
-`.type`
+`{{synthetics.attributes.result.variables.config.type}}`
 : Variable type
 
-`.secure`
+`{{synthetics.attributes.result.variables.config.secure}}`
 : Whether the variable value is obfuscated
 
-`.value`
+`{{synthetics.attributes.result.variables.config.value}}`
 : Variable value (non-obfuscated only)
 
 **Examples:**
@@ -190,18 +208,18 @@ These are extracted variables whose value updates a global variable value.
 
 Available only for **successful test results** and **recovery notifications**.
 
-Located at `result.variables.extracted`:
+Located at `{{synthetics.attributes.result.variables.extracted}}`:
 
-`.id`
+`{{synthetics.attributes.result.variables.extracted.id}}`
 : Global variable ID
 
-`.name`
+`{{synthetics.attributes.result.variables.extracted.name}}`
 : Variable name
 
-`.secure`
+`{{synthetics.attributes.result.variables.extracted.secure}}`
 : Whether the variable value is obfuscated
 
-`.val`
+`{{synthetics.attributes.result.variables.extracted.val}}`
 : Variable value (note: uses `.val`, not `.value`)
 
 **Examples:**
@@ -217,7 +235,7 @@ Located at `result.variables.extracted`:
 {{% /tab %}}
 {{% tab "Step extracted variables" %}}
 
-For tests with steps, step data is contained in `.steps`.
+For tests with steps, step data is contained in `{{synthetics.attributes.result.steps}}`.
 
 `.extractedValue.name`
 : Variable name
@@ -319,7 +337,7 @@ Similar to standard API tests, the variables are listed in the `variables.extrac
 
 **General:**
 
-`.startUrl`
+`{{synthetics.attributes.result.startUrl}}`
 : URL from test configuration
 
 **Steps:**

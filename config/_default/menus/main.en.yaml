@@ -1769,21 +1769,26 @@ menu:
       parent: monitor_types
       identifier: monitor_types_metrics
       weight: 402
+    - name: Analysis
+      url: monitors/types/analysis/
+      parent: monitor_types
+      identifier: monitor_types_analysis
+      weight: 403
     - name: Anomaly
       url: monitors/types/anomaly/
       parent: monitor_types
       identifier: monitor_types_anomaly
-      weight: 403
+      weight: 404
     - name: APM
       url: monitors/types/apm/
       parent: monitor_types
       identifier: monitor_types_apm
-      weight: 404
+      weight: 405
     - name: Audit Trail
       url: monitors/types/audit_trail/
       parent: monitor_types
       identifier: monitor_types_auditlogs
-      weight: 405
+      weight: 406
     - name: Change
       url: monitors/types/change-alert/
       parent: monitor_types
@@ -1813,82 +1818,82 @@ menu:
       url: monitors/types/error_tracking/
       parent: monitor_types
       identifier: monitor_types_error_tracking
-      weight: 411
+      weight: 412
     - name: Event
       url: monitors/types/event/
       parent: monitor_types
       identifier: monitor_types_event
-      weight: 412
+      weight: 413
     - name: Forecast
       url: monitors/types/forecasts/
       parent: monitor_types
       identifier: monitor_types_forecasts
-      weight: 413
+      weight: 414
     - name: Integration
       url: monitors/types/integration/
       parent: monitor_types
       identifier: monitor_types_integration
-      weight: 414
+      weight: 415
     - name: Live Process
       url: monitors/types/process/
       parent: monitor_types
       identifier: monitor_types_process
-      weight: 415
+      weight: 416
     - name: Logs
       url: monitors/types/log/
       parent: monitor_types
       identifier: monitor_types_log
-      weight: 416
+      weight: 417
     - name: Network
       url: monitors/types/network/
       parent: monitor_types
       identifier: monitor_types_network
-      weight: 417
+      weight: 418
     - name: Cloud Network Monitoring
       url: monitors/types/cloud_network_monitoring/
       parent: monitor_types
       identifier: monitor_types_cnm
-      weight: 418
+      weight: 419
     - name: NetFlow
       url: monitors/types/netflow/
       parent: monitor_types
       identifier: monitor_types_netflow
-      weight: 419
+      weight: 420
     - name: Outlier
       url: monitors/types/outlier/
       parent: monitor_types
       identifier: monitor_types_outlier
-      weight: 420
+      weight: 421
     - name: Process Check
       url: monitors/types/process_check/
       parent: monitor_types
       identifier: monitor_types_process_check
-      weight: 421
+      weight: 422
     - name: Real User Monitoring
       url: monitors/types/real_user_monitoring/
       parent: monitor_types
       identifier: monitor_types_rum
-      weight: 422
+      weight: 423
     - name: Service Check
       url: monitors/types/service_check/
       parent: monitor_types
       identifier: monitor_types_service_check
-      weight: 423
+      weight: 424
     - name: SLO Alerts
       url: monitors/types/slo/
       parent: monitor_types
       identifier: monitor_types_slo
-      weight: 424
+      weight: 425
     - name: Synthetic Monitoring
       url: monitors/types/synthetic_monitoring/
       parent: monitor_types
       identifier: monitor_types_syn
-      weight: 425
+      weight: 426
     - name: Watchdog
       url: monitors/types/watchdog/
       parent: monitor_types
       identifier: monitor_types_watchdog
-      weight: 426
+      weight: 427
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -2191,6 +2196,11 @@ menu:
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
       weight: 403
+    - name: Custom Reports
+      url: internal_developer_portal/eng_reports/custom_reports
+      parent: idp_eng_reports
+      identifier: eng_reports_custom
+      weight: 404
     - name: Developer Homepage
       url: internal_developer_portal/developer_homepage
       parent: internal_developer_portal
@@ -3078,6 +3088,26 @@ menu:
       parent: datadog_cloudcraft
       identifier: datadog_cloudcraft_overlays
       weight: 1
+    - name: Infrastructure
+      url: datadog_cloudcraft/overlays/infrastructure/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_infrastructure
+      weight: 101
+    - name: Observability
+      url: datadog_cloudcraft/overlays/observability/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_observability
+      weight: 102
+    - name: Security
+      url: datadog_cloudcraft/overlays/security/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_security
+      weight: 103
+    - name: Cloud Cost Management
+      url: datadog_cloudcraft/overlays/ccm/
+      parent: datadog_cloudcraft_overlays
+      identifier: datadog_cloudcraft_overlays_ccm
+      weight: 104
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
@@ -3428,6 +3458,11 @@ menu:
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_admission_controller
       weight: 905
+    - name: Log Collection
+      url: containers/troubleshooting/log-collection
+      parent: containers_troubleshooting
+      identifier: containers_troubleshooting_log_collection
+      weight: 906
     - name: Guides
       url: containers/guide
       parent: containers
@@ -3651,26 +3686,21 @@ menu:
       parent: nm_parent
       identifier: cnm
       weight: 1
-    - name: CNM Terms and Concepts
-      url: network_monitoring/cloud_network_monitoring/glossary
-      parent: cnm
-      identifier: cnm_glossary
-      weight: 101
     - name: Setup
       url: network_monitoring/cloud_network_monitoring/setup/
       parent: cnm
       identifier: cnm_setup
-      weight: 102
+      weight: 101
     - name: Network Health
       url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
       identifier: cnm_network_health
-      weight: 103 
+      weight: 102 
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
       identifier: cnm_analytics
-      weight: 104
+      weight: 103
     - name: Tags Reference
       url: network_monitoring/cloud_network_monitoring/tags_reference/
       parent: cnm_analytics
@@ -3680,17 +3710,22 @@ menu:
       url: network_monitoring/cloud_network_monitoring/network_map/
       parent: cnm
       identifier: cnm_map
-      weight: 105
+      weight: 104
     - name: Guides
       url: network_monitoring/cloud_network_monitoring/guide/
       identifier: cnm_guides
       parent: cnm
-      weight: 106
+      weight: 105
     - name: Supported Cloud Services
       url: network_monitoring/cloud_network_monitoring/supported_cloud_services/
       identifier: cnm_supported_cloud_services
       parent: cnm
-      weight: 10601 
+      weight: 106
+    - name: Terms and Concepts
+      url: network_monitoring/cloud_network_monitoring/glossary
+      parent: cnm
+      identifier: cnm_glossary
+      weight: 107
     - name: DNS Monitoring
       url: network_monitoring/dns/
       parent: nm_parent
@@ -3701,81 +3736,81 @@ menu:
       parent: nm_parent
       identifier: ndm
       weight: 3      
-    - name: NDM Terms and Concepts
-      url: network_monitoring/devices/glossary
-      parent: ndm
-      identifier: ndm_glossary
-      weight: 301
     - name: Setup
       url: network_monitoring/devices/setup
       parent: ndm
       identifier: ndm_setup
-      weight: 302
+      weight: 301
     - name: Supported Devices
       url: network_monitoring/devices/supported_devices
       parent: ndm_setup
       identifier: ndm_supported_devices
-      weight: 30301
+      weight: 30101 
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm_setup
       identifier: ndm_snmp_metrics
-      weight: 30302
+      weight: 30102
     - name: SNMP Traps
       url: network_monitoring/devices/snmp_traps
       parent: ndm_setup
       identifier: ndm_snmptraps
-      weight: 30303
+      weight: 30103
     - name: Ping
       url: network_monitoring/devices/ping
       parent: ndm_setup
       identifier: ndm_snmp_ping
-      weight: 30304
+      weight: 30104
     - name: Syslog
       url: network_monitoring/devices/syslog
       parent: ndm_setup
       identifier: ndm_syslog
-      weight: 30305
+      weight: 30105
     - name: VPN Monitoring
       url: network_monitoring/devices/vpn_monitoring
       parent: ndm_setup
       identifier: ndm_vpn_monitoring
-      weight: 30306
+      weight: 30106
     - name: Integrations
       url: network_monitoring/devices/integrations
       parent: ndm
       identifier: ndm_integrations
-      weight: 304
+      weight: 302
     - name: Profiles
       url: network_monitoring/devices/profiles
       parent: ndm
       identifier: ndm_profiles
-      weight: 305
+      weight: 303
     - name: Configuration Management
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 306   
+      weight: 304   
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
       identifier: ndm_network_maps
-      weight: 307
+      weight: 305
     - name: SNMP Metrics Reference
       url: network_monitoring/devices/data
       parent: ndm
       identifier: ndm_data
-      weight: 308
+      weight: 306
     - name: Troubleshooting
       url: network_monitoring/devices/troubleshooting
       parent: ndm
       identifier: ndm_trouble
-      weight: 309
+      weight: 307
     - name: Guides
       url: network_monitoring/devices/guide/
       parent: ndm
       identifier: ndm_guide
-      weight: 310
+      weight: 308
+    - name: Terms and Concepts
+      url: network_monitoring/devices/glossary
+      parent: ndm
+      identifier: ndm_glossary
+      weight: 309
     - name: NetFlow Monitoring
       url: /network_monitoring/netflow/
       parent: nm_parent
@@ -3791,11 +3826,6 @@ menu:
       parent: nm_parent
       identifier: network_path
       weight: 5
-    - name: Terms and Concepts
-      url: network_monitoring/network_path/glossary
-      parent: network_path
-      identifier: network_path_glossary
-      weight: 501 
     - name: Setup
       url: network_monitoring/network_path/setup/
       parent: network_path
@@ -3816,6 +3846,11 @@ menu:
       parent: network_path
       identifier: network_path_guides
       weight: 505
+    - name: Terms and Concepts
+      url: network_monitoring/network_path/glossary
+      parent: network_path
+      identifier: network_path_glossary
+      weight: 506 
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -4079,171 +4114,251 @@ menu:
       parent: tracing
       identifier: tracing_trace_collection
       weight: 2
-    - name: Automatic Instrumentation
-      url: tracing/trace_collection/automatic_instrumentation/
+    - name: Single Step Instrumentation
+      url: tracing/trace_collection/single-step-apm/
       parent: tracing_trace_collection
-      identifier: automatic_instrumentation
-      weight: 201
-    - name: Using Single Step Instrumentation
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
-      parent: automatic_instrumentation
       identifier: single_step_apm
-      weight: 2011
-    - name: Single Step APM Instrumentation on Linux
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+      weight: 201
+    - name: Linux
+      url: tracing/trace_collection/single-step-apm/linux
       parent: single_step_apm
       identifier: single_step_apm_linux
-      weight: 20111
-    - name: Single Step APM Instrumentation on Docker
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/docker
+      weight: 2011
+    - name: Docker
+      url: tracing/trace_collection/single-step-apm/docker
       parent: single_step_apm
       identifier: single_step_apm_docker
-      weight: 20112
-    - name: Single Step APM Instrumentation on Kubernetes
-      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes
+      weight: 2012
+    - name: Kubernetes
+      url: tracing/trace_collection/single-step-apm/kubernetes
       parent: single_step_apm
       identifier: single_step_apm_kubernetes
-      weight: 20113
-    - name: Using Datadog Tracing Libraries
-      url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
-      parent: automatic_instrumentation
+      weight: 2013
+    - name: Windows IIS
+      url: tracing/trace_collection/single-step-apm/windows
+      parent: single_step_apm
+      identifier: single_step_apm_windows
+      weight: 2014
+    - name: Manually managed SDKs
+      url: tracing/trace_collection/dd_libraries/
+      parent: tracing_trace_collection
       identifier: auto_dd_libraries
-      weight: 2012
-    - name: Custom Instrumentation
+      weight: 202
+    - name: Java
+      url: tracing/trace_collection/dd_libraries/java
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_java
+      weight: 2021
+    - name: Python
+      url: tracing/trace_collection/dd_libraries/python
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_python
+      weight: 2022
+    - name: Ruby
+      url: tracing/trace_collection/dd_libraries/ruby
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_ruby
+      weight: 2023
+    - name: Go
+      url: tracing/trace_collection/dd_libraries/go
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_go
+      weight: 2024
+    - name: Node.js
+      url: tracing/trace_collection/dd_libraries/nodejs
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_nodejs
+      weight: 2025
+    - name: PHP
+      url: tracing/trace_collection/dd_libraries/php
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_php
+      weight: 2026
+    - name: C++
+      url: tracing/trace_collection/dd_libraries/cpp
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_cpp
+      weight: 2027
+    - name: .NET Core
+      url: tracing/trace_collection/dd_libraries/dotnet-core
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_dotnet_core
+      weight: 2028
+    - name: .NET Framework
+      url: tracing/trace_collection/dd_libraries/dotnet-framework
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_dotnet_framework  
+      weight: 2029
+    - name: Android
+      url: tracing/trace_collection/dd_libraries/android
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_android
+      weight: 2030
+    - name: iOS
+      url: tracing/trace_collection/dd_libraries/ios
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_ios
+      weight: 2031
+    - name: Code-based Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection
       identifier: custom_instrumentation
-      weight: 202
+      weight: 203
     - name: Java
       url: tracing/trace_collection/custom_instrumentation/java/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_java
-      weight: 2021
+      weight: 2031
     - name: Python
       url: tracing/trace_collection/custom_instrumentation/python/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_python
-      weight: 2022
+      weight: 2032
     - name: Ruby
       url: tracing/trace_collection/custom_instrumentation/ruby/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ruby
-      weight: 2023
+      weight: 2033
     - name: Go
       url: tracing/trace_collection/custom_instrumentation/go/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_go
-      weight: 2024
+      weight: 2034
     - name: Node.js
       url: tracing/trace_collection/custom_instrumentation/nodejs/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_nodejs
-      weight: 2025
+      weight: 2035
     - name: PHP
       url: tracing/trace_collection/custom_instrumentation/php/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_php
-      weight: 2026
+      weight: 2036
     - name: C++
       url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
       parent: custom_instrumentation
       identifier: custom_instrumentation_cpp
-      weight: 2027
+      weight: 2037
     - name: .NET
       url: tracing/trace_collection/custom_instrumentation/dotnet/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_dotnet
-      weight: 2028
+      weight: 2038
     - name: Android
       url: tracing/trace_collection/custom_instrumentation/android/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_android
-      weight: 2029
+      weight: 2039
     - name: iOS
       url: tracing/trace_collection/custom_instrumentation/ios/otel
       parent: custom_instrumentation
       identifier: custom_instrumentation_ios
-      weight: 2030
+      weight: 2040
     - name: Rust
       url: tracing/trace_collection/custom_instrumentation/rust
       parent: custom_instrumentation
       identifier: custom_instrumentation_rust
-      weight: 2031
+      weight: 2041
     - name: Swift
       url: tracing/trace_collection/custom_instrumentation/swift
       parent: custom_instrumentation
       identifier: custom_instrumentation_swift
-      weight: 2032
+      weight: 2042
     - name: Elixir
       url: tracing/trace_collection/custom_instrumentation/elixir
       parent: custom_instrumentation
       identifier: custom_instrumentation_elixir
-      weight: 2033
+      weight: 2043
+    - name: Dynamic Instrumentation
+      url: tracing/trace_collection/dynamic_instrumentation/
+      identifier: dyninst
+      parent: tracing_trace_collection
+      weight: 204
+    - name: Autocomplete and Search
+      url: tracing/trace_collection/dynamic_instrumentation/symdb
+      identifier: dyninst_symdb
+      parent: dyninst
+      weight: 2041
+    - name: Expression Language
+      url: tracing/trace_collection/dynamic_instrumentation/expression-language
+      identifier: dyninst_explang
+      parent: dyninst
+      weight: 2042
+    - name: Sensitive Data Scrubbing
+      url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
+      identifier: dyninst_sensitive_data_scrubbing
+      parent: dyninst
+      weight: 2043
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
       identifier: tracing_compatibility
-      weight: 203
+      weight: 206
     - name: Library Configuration
       url: tracing/trace_collection/library_config/
       parent: tracing_trace_collection
       identifier: tracing_library_config
-      weight: 204
+      weight: 207
     - name: Configuration at Runtime
       url: tracing/trace_collection/runtime_config/
       parent: tracing_trace_collection
       identifier: runtime_config
-      weight: 205
+      weight: 208
     - name: Trace Context Propagation
       url: tracing/trace_collection/trace_context_propagation/
       parent: tracing_trace_collection
       identifier: tracing_context
-      weight: 206
+      weight: 209
     - name: Serverless Application Tracing
       url: serverless/distributed_tracing/
       parent: tracing_trace_collection
       identifier: tracing_serverless
-      weight: 207
+      weight: 210
     - name: Proxy Tracing
       url: tracing/trace_collection/proxy_setup/
       parent: tracing_trace_collection
       identifier: tracing_proxies
-      weight: 208
-    - name: Envoy
-      url: tracing/trace_collection/proxy_setup/envoy
-      parent: tracing_proxies
-      identifier: tracing_proxies_envoy
-      weight: 2081
-    - name: NGINX
-      url: tracing/trace_collection/proxy_setup/nginx
-      parent: tracing_proxies
-      identifier: tracing_proxies_nginx
-      weight: 2082
-    - name: Istio
-      url: tracing/trace_collection/proxy_setup/istio
-      parent: tracing_proxies
-      identifier: tracing_proxies_istio
-      weight: 2083
-    - name: Kong
-      url: tracing/trace_collection/proxy_setup/kong
-      parent: tracing_proxies
-      identifier: tracing_proxies_kong
-      weight: 2084
+      weight: 211
     - name: Apache HTTP Server
       url: tracing/trace_collection/proxy_setup/httpd
       parent: tracing_proxies
       identifier: tracing_proxies_httpd
-      weight: 2085
+      weight: 2111
+    - name: Envoy
+      url: tracing/trace_collection/proxy_setup/envoy
+      parent: tracing_proxies
+      identifier: tracing_proxies_envoy
+      weight: 2112
+    - name: Istio
+      url: tracing/trace_collection/proxy_setup/istio
+      parent: tracing_proxies
+      identifier: tracing_proxies_istio
+      weight: 2113
+    - name: Kong
+      url: tracing/trace_collection/proxy_setup/kong
+      parent: tracing_proxies
+      identifier: tracing_proxies_kong
+      weight: 2114
+    - name: NGINX
+      url: tracing/trace_collection/proxy_setup/nginx
+      parent: tracing_proxies
+      identifier: tracing_proxies_nginx
+      weight: 2115
+    - name: Amazon API Gateway
+      url: tracing/trace_collection/proxy_setup/apigateway
+      parent: tracing_proxies
+      identifier: tracing_proxies_apigateway
+      weight: 2116
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
       identifier: tracing_naming_convention
-      weight: 209
+      weight: 212
     - name: Span Links
       url: tracing/trace_collection/span_links
       parent: tracing_trace_collection
       identifier: tracing_span_links
-      weight: 211
+      weight: 213
     - name: APM Metrics Collection
       url: tracing/metrics/
       parent: tracing
@@ -4409,10 +4524,10 @@ menu:
       parent: tracing_services
       identifier: tracing_inferred_services
       weight: 906
-    - name: Renaming Rules for Inferred Entities
-      url: tracing/services/renaming_rules
+    - name: Remapping Rules for Inferred Entities
+      url: tracing/services/inferred_entity_remapping_rules/
       parent: tracing_services
-      identifier: tracing_renaming_rules
+      identifier: tracing_inferred_entity_remapping_rules
       weight: 907
     - name: Service Remapping Rules
       url: tracing/services/service_remapping_rules
@@ -4439,21 +4554,6 @@ menu:
       identifier: monitor_endpoints
       parent: endpoint_observability
       weight: 1003
-    - name: Dynamic Instrumentation
-      url: tracing/dynamic_instrumentation/
-      identifier: dyninst
-      parent: tracing
-      weight: 11
-    - name: Enabling
-      url: tracing/dynamic_instrumentation/enabling
-      identifier: dyninst_enable
-      parent: dyninst
-      weight: 1101
-    - name: Expression Language
-      url: tracing/dynamic_instrumentation/expression-language
-      identifier: dyninst_explang
-      parent: dyninst
-      weight: 1102
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger
@@ -5612,21 +5712,51 @@ menu:
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
-    - name: Setup
-      url: feature_flags/setup
+    - name: Client SDKs
+      url: feature_flags/client
       parent: feature_flags
-      identifier: feature_flags_setup
+      identifier: feature_flags_client
       weight: 1
     - name: Android and Android TV
-      url: feature_flags/setup/android
-      parent: feature_flags_setup
-      identifier: feature_flags_setup_android
+      url: feature_flags/client/android
+      parent: feature_flags_client
+      identifier: feature_flags_client_android
       weight: 101
     - name: iOS and tvOS
-      url: feature_flags/setup/ios
-      parent: feature_flags_setup
-      identifier: feature_flags_setup_ios
+      url: feature_flags/client/ios
+      parent: feature_flags_client
+      identifier: feature_flags_client_ios
       weight: 102
+    - name: Server SDKs
+      url: feature_flags/server
+      parent: feature_flags
+      identifier: feature_flags_server
+      weight: 2
+    - name: Go
+      url: feature_flags/server/go
+      parent: feature_flags_server
+      identifier: feature_flags_server_go
+      weight: 201
+    - name: Java
+      url: feature_flags/server/java
+      parent: feature_flags_server
+      identifier: feature_flags_server_java
+      weight: 202
+    - name: Node.js
+      url: feature_flags/server/nodejs
+      parent: feature_flags_server
+      identifier: feature_flags_server_nodejs
+      weight: 203
+    - name: Python
+      url: feature_flags/server/python
+      parent: feature_flags_server
+      identifier: feature_flags_server_python
+      weight: 204
+    - name: Ruby
+      url: feature_flags/server/ruby
+      parent: feature_flags_server
+      identifier: feature_flags_server_ruby
+      weight: 205
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -5883,16 +6013,16 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 317
-    - name: Tags
-      url: observability_pipelines/processors/tags
+    - name: Tag Control
+      url: observability_pipelines/processors/tag_control/logs/
       parent: observability_pipelines_processors
-      identifier: observability_pipelines_processors_tags
+      identifier: observability_pipelines_processors_tag_control
       weight: 318
     - name: Throttle
       url: observability_pipelines/processors/throttle
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_throttle
-      weight: 319
+      weight: 320
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -5933,76 +6063,81 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
       weight: 407
+    - name: Datadog Metrics
+      url: observability_pipelines/destinations/datadog_metrics/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_datadog_metrics
+      weight: 408
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 408
+      weight: 409
     - name: Google Chronicle
       url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
-      weight: 409
+      weight: 410
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 410
+      weight: 411
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
-      weight: 411
+      weight: 412
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_http_client
-      weight: 412
+      weight: 413
     - name: Kafka
       url: observability_pipelines/destinations/kafka/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_kafka
-      weight: 413
+      weight: 414
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 414
+      weight: 415
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 415
+      weight: 416
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 416
+      weight: 417
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 417
+      weight: 418
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 418
+      weight: 419
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 419
+      weight: 420
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 420
+      weight: 421
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 421
+      weight: 422
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines
@@ -6109,9 +6244,9 @@ menu:
       identifier: observability_pipelines_packs_zscaler_zia_web_logs
       weight: 520
     - name: Search Syntax
-      url: observability_pipelines/search_syntax/
+      url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
-      identifier: observability_pipelines_search_syntax
+      identifier: observability_pipelines_logs_search_syntax
       weight: 6
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
@@ -6159,9 +6294,9 @@ menu:
       identifier: observability_pipelines_guide
       weight: 9
     - name: Upgrade Worker Guide
-      url: observability_pipelines/guide/upgrade_worker_2_7/
+      url: observability_pipelines/guide/upgrade_worker/
       parent: observability_pipelines_guide
-      identifier: observability_pipelines_guide_upgrade_worker_2_7
+      identifier: observability_pipelines_guide_upgrade_worker
       weight: 901
     - name: Log Management
       url: logs/
@@ -6515,11 +6650,6 @@ menu:
       parent: cloudprem_installation
       identifier: cloudprem_azure_aks
       weight: 202
-    # - name: Kubernetes with NGINX
-    #   url: /cloudprem/install/kubernetes_nginx
-    #   parent: cloudprem_installation
-    #   identifier: cloudprem_kubernetes_nginx
-    #   weight: 203
     - name: Log Ingestion
       url: /cloudprem/ingest_logs/
       parent: cloudprem
@@ -6707,7 +6837,7 @@ menu:
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_content_packs
       weight: 101
-    - name: Threat Intelligence
+    - name: Bring Your Own Threat Intelligence
       url: security/cloud_siem/ingest_and_enrich/threat_intelligence
       parent: cloud_siem_ingest_and_enrich
       identifier: cloud_siem_threat_intelligence
@@ -6802,11 +6932,16 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
       weight: 302
+    - name: IOC Explorer
+      url: security/cloud_siem/triage_and_investigate/ioc_explorer
+      parent: cloud_siem_triage_and_investigate
+      identifier: cloud_siem_ioc_explorer
+      weight: 303
     - name: Investigator
       url: security/cloud_siem/triage_and_investigate/investigator
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigator
-      weight: 303
+      weight: 304
     - name: Respond and Report
       url: security/cloud_siem/respond_and_report
       parent: cloud_siem
@@ -8461,26 +8596,31 @@ menu:
       parent: product_analytics
       identifier: pa_charts
       weight: 1
+    - name: Chart Basics
+      url: product_analytics/charts/chart_basics
+      parent: pa_charts
+      identifier: pa_chart_basics
+      weight: 101
     - name: Pathways Diagram
       url: product_analytics/charts/pathways
       parent: pa_charts
       identifier: pa_pathways
-      weight: 101
+      weight: 102
     - name: Funnel Analysis
       url: product_analytics/charts/funnel_analysis
       parent: pa_charts
       identifier: pa_funnel_analysis
-      weight: 102
+      weight: 103
     - name: Retention Analysis
       url: product_analytics/charts/retention_analysis
       parent: pa_charts
       identifier: pa_user_retention
-      weight: 103
+      weight: 104
     - name: Analytics Explorer
       url: product_analytics/charts/analytics_explorer
       parent: pa_charts
       identifier: pa_analytics_explorer
-      weight: 104
+      weight: 105
     - name: Dashboards
       url: product_analytics/dashboards
       parent: product_analytics
@@ -8757,171 +8897,171 @@ menu:
       url: account_management/teams/github/
       parent: account_management_teams
       weight: 702
+    - name: Governance Console
+      identifier: account_management_governance_console
+      url: account_management/governance_console/
+      parent: account_management
+      weight: 8
     - name: Multi-Factor Authentication
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
       parent: account_management
-      weight: 8
+      weight: 9
     - name: Audit Trail
       url: account_management/audit_trail/
       parent: account_management
       identifier: account_management_audit_trail
-      weight: 9
+      weight: 10
     - name: Events
       url: account_management/audit_trail/events/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_events
-      weight: 901
+      weight: 1001
     - name: Forwarding
       url: account_management/audit_trail/forwarding_audit_events/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_forwarding
-      weight: 902
+      weight: 1002
     - name: Guides
       url: account_management/audit_trail/guides/
       parent: account_management_audit_trail
       identifier: account_management_audit_trail_guides
-      weight: 903
+      weight: 1003
     - name: Safety Center
       url: account_management/safety_center/
       parent: account_management
       identifier: safety_center
-      weight: 10
+      weight: 11
     - name: Plan and Usage
       url: account_management/plan_and_usage/
       parent: account_management
       identifier: account_management_plan_and_usage
-      weight: 11
+      weight: 12
     - name: Cost Details
       identifier: account_management_cost_details
       url: account_management/plan_and_usage/cost_details/
       parent: account_management_plan_and_usage
-      weight: 1101
+      weight: 1201
     - name: Usage Details
       identifier: account_management_usage_details
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
-      weight: 1102
+      weight: 1202
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
       parent: account_management
-      weight: 12
+      weight: 13
     - name: Pricing
       url: account_management/billing/pricing
       parent: account_management_billing
-      weight: 1201
+      weight: 1301
       identifier: account_management_billing_pricing
     - name: Credit Card
       identifier: account_management_billing_credit_card
       url: account_management/billing/credit_card/
       parent: account_management_billing
-      weight: 1202
+      weight: 1302
     - name: Product Allotments
       url: account_management/billing/product_allotments
       parent: account_management_billing
-      weight: 1203
+      weight: 1303
       identifier: account_management_billing_product_allotments
     - name: Usage Metrics
       identifier: account_management_plan_and_usage_usage_metrics
       url: account_management/billing/usage_metrics/
       parent: account_management_billing
-      weight: 1204
+      weight: 1304
     - name: Usage Attribution
       identifier: account_management_plan_and_usage_usage_attribution
       url: account_management/billing/usage_attribution/
       parent: account_management_billing
-      weight: 1205
+      weight: 1305
     - name: Custom Metrics
       identifier: account_management_billing_custom_metrics
       url: account_management/billing/custom_metrics/
       parent: account_management_billing
-      weight: 1206
+      weight: 1306
     - name: Containers
       identifier: account_management_billing_containers
       url: account_management/billing/containers
       parent: account_management_billing
-      weight: 1207
+      weight: 1307
     - name: Log Management
       identifier: account_management_billing_log_management
       url: account_management/billing/log_management/
       parent: account_management_billing
-      weight: 1208
+      weight: 1308
     - name: APM
       identifier: account_management_billing_apm_tracing_profiler
       url: account_management/billing/apm_tracing_profiler/
       parent: account_management_billing
-      weight: 1209
+      weight: 1309
     - name: Serverless
       identifier: account_management_billing_serverless
       url: account_management/billing/serverless/
       parent: account_management_billing
-      weight: 1210
+      weight: 1310
     - name: Real User Monitoring
       identifier: account_management_billing_rum
       url: account_management/billing/rum/
       parent: account_management_billing
-      weight: 1211
+      weight: 1311
     - name: CI Visibility
       identifier: account_management_billing_ci_visibility
       url: account_management/billing/ci_visibility/
       parent: account_management_billing
-      weight: 1212
+      weight: 1312
     - name: Incident Response
       identifier: account_management_billing_incident_response
       url: account_management/billing/incident_response/
       parent: account_management_billing
-      weight: 1213
+      weight: 1313
     - name: AWS Integration
       identifier: account_management_billing_aws
       url: account_management/billing/aws/
       parent: account_management_billing
-      weight: 1214
+      weight: 1314
     - name: Azure Integration
       identifier: account_management_billing_azure
       url: account_management/billing/azure/
       parent: account_management_billing
-      weight: 1215
+      weight: 1315
     - name: Google Cloud Integration
       identifier: account_management_billing_google_cloud
       url: account_management/billing/google_cloud/
       parent: account_management_billing
-      weight: 1216
+      weight: 1316
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1217
+      weight: 1317
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1218
+      weight: 1318
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1219
+      weight: 1319
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
       parent: account_management
-      weight: 13
-    - name: Multi-org Accounts
-      identifier: account_management_multi_org_accounts
-      url: account_management/multi_organization/
-      parent: account_management
-      weight: 13
+      weight: 14
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/
       parent: account_management
-      weight: 14
+      weight: 15
     - name: Cloud-based Authentication
       identifier: account_management_cloud_auth
       url: account_management/cloud_provider_authentication/
       parent: account_management
-      weight: 15
+      weight: 16
     - name: Data Security
       url: data_security/
       pre: security-lock

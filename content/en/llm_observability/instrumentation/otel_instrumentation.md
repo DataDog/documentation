@@ -12,7 +12,8 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 - A [Datadog API key][2]
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
-<div class="alert alert-info">If you are sending <a href="/llm_observability/evaluations/external_evaluations">external evaluations</a> for OpenTelemetry spans, you must add the <code>source:otel</code> tag to your evaluation.</div>
+To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation.
+</div>
 
 ## Setup
 
@@ -25,7 +26,7 @@ Set the following environment variables in your application:
 ```
 OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=http/protobuf
 OTEL_EXPORTER_OTLP_TRACES_ENDPOINT={{< region-param key="otlp_trace_endpoint" code="true" >}}
-OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=datadog
+OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=<YOUR_API_KEY>,dd-otlp-source=llmobs
 ```
 
 Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
@@ -89,7 +90,7 @@ os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 # Configure OTLP endpoint to send traces to Datadog LLM Observability
 os.environ["OTEL_EXPORTER_OTLP_TRACES_PROTOCOL"] = "http/protobuf"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
-os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=datadog"
+os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=llmobs"
 
 # Initialize telemetry with OTLP exporter
 telemetry = StrandsTelemetry()
@@ -120,7 +121,7 @@ from openai import OpenAI
 
 # Configure OpenTelemetry to send traces to Datadog
 os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
-os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = "dd-api-key=<YOUR_DATADOG_API_KEY>,dd-otlp-source=datadog"
+os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = "dd-api-key=<YOUR_DATADOG_API_KEY>,dd-otlp-source=llmobs"
 os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 
 # Initialize OpenTelemetry SDK
@@ -225,7 +226,7 @@ exporter = OTLPSpanExporter(
     headers={
         "dd-api-key": "<YOUR_DATADOG_API_KEY>",
         "dd-ml-app": "simple-openllmetry-test",
-        "dd-otlp-source": "datadog",
+        "dd-otlp-source": "llmobs",
     },
 )
 
