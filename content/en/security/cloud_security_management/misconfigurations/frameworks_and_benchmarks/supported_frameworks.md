@@ -25,11 +25,11 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | Framework                                       | Supported Versions             | Framework Tag                       | Rule Type                |
 |-------------------------------------------------|--------------------------------|-------------------------------------|--------------------------|
 | [AICPA SOC 2][7]                                | 2017 TSC w/ rev POF - 2022     | `soc-2`                             | Cloud                    |
-| [Australia APRA CPS 234][39]                    | 2019                           | `cps234`                            | TBD                      |
-| [Australia ASD Essential 8][40]                 | 2024                           | `essential8`                        | TBD                      |
+| [Australia APRA CPS 234][39]                    | 2019                           | `cps234`                            | Cloud                    |
+| [Australia ASD Essential 8][40]                 | 2024                           | `essential8`                        | Cloud                    |
 | [AWS Foundational Security Best Practices][13]  | v1.0.0                         | `aws-fsbp`                          | Cloud                    |
-| [Brazil LGPD][44]                               | 2018                           | `lgpd`                              | TBD                      |
-| [California CCPA/CPRA][38]                      | Nov 2022                       | `ccpa`                              | TBD                      |
+| [Brazil LGPD][44]                               | 2018                           | `lgpd`                              | Cloud                    |
+| [California CCPA/CPRA][38]                      | Nov 2022                       | `ccpa`                              | Cloud                    |
 | [CIS AlmaLinux 9][16]                           | v2.0.0                         | `cis-almalinux9`                    | Infrastructure           |
 | [CIS Amazon Linux 2023][25]                     | v1.0.0                         | `cis-al2023`                        | Infrastructure           |
 | [CIS Amazon Linux 2][25]                        | v3.0.0                         | `cis-amzn2`                         | Infrastructure           |
@@ -47,10 +47,10 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [CIS Ubuntu 20.04][23]                          | v1.0.0                         | `cis-ubuntu2004`                    | Infrastructure           |
 | [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204`                    | Infrastructure           |
 | [CIS Ubuntu 24.04][23]                          | v1.0.0                         | `cis-ubuntu2404`                    | Infrastructure           |
-| [CMMC][37]                                      | v2.0                           | `cmmc-level-2`                      | TBD                      |
+| [CMMC][37]                                      | v2.0                           | `cmmc-level-2`                      | Cloud                    |
 | [Digital Operational Resilience Act (DORA)][35] | C(2024) 1532                   | `dora`                              | Cloud                    |
 | [Essential Cloud Security Controls][33]         | v2                             | `essential-cloud-security-controls` | Cloud                    |
-| [EU Cyber Resilience Act][43]                   | 2024                           | `cyber-resilience-act`              | TBD                      |
+| [EU Cyber Resilience Act][43]                   | 2024                           | `cyber-resilience-act`              | Cloud                    |
 | [FedRAMP High][36] (Preview)                    | v5                             | `fedramp-high`                      | Cloud                    |
 | [FedRAMP Moderate][36] (Preview)                | v5                             | `fedramp-moderate`                  | Cloud                    |
 | [FedRAMP Low][36] (Preview)                     | v5                             | `fedramp-low`                       | Cloud                    |
@@ -63,8 +63,8 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [NIST AI Risk Management Framework][15]         | v1.0                           | `nist-ai-rmf`                       | Cloud                    |
 | [NIST Cybersecurity Framework][32]              | v2.0, v1.1                     | `nist-csf`                          | Cloud                    |
 | [PCI DSS][6]                                    | v4.0                           | `pci-dss`                           | Cloud                    |
-| [UK Cyber Essentials][42]                       | 2024                           | `cyber-essentials`                  | TBD                      |
-| [Singapore MAS TRM][41]                         | 2021                           | `mas-trm`                           | TBD                      |
+| [UK Cyber Essentials][42]                       | 2024                           | `cyber-essentials`                  | Cloud                    |
+| [Singapore MAS TRM][41]                         | 2021                           | `mas-trm`                           | Cloud                    |
 
 *To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [CloudTrail logs to Datadog][12].
 
