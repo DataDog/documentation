@@ -107,7 +107,7 @@ The set of data captured by diversity sampling is not uniformly sampled (that is
 
 #### One percent flat sampling
 
-The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12]. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
+The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12] and retains for 30 days. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
 
 This sampling mechanism is uniform, and it is proportionally representative of the full ingested traffic. As a result, low-traffic services and endpoints might be missing from that dataset if you filter on a short time frame.
 
