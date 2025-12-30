@@ -15,7 +15,9 @@ further_reading:
 
 Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix. 
 
-**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration. See the [troubleshooting](#troubleshooting) section for more information.
+**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab of a test run in the [Results Explorer][1], then reference the path directly within your monitor configuration. 
+
+{{< img src="synthetics/notifications/action_tab.png" alt="Actions tab from the Synthetics Result Explorer with Export Result JSON highlighted" style="width:90%;" >}}
 
 ## Available variables
 
@@ -877,10 +879,10 @@ Use positive numbers to count from the beginning, or negative numbers to count f
 
 | Syntax | Description |
 |--------|-------------|
-| `.steps.0` | First step |
-| `.steps.1` | Second step |
-| `.steps.-1` | Last step |
-| `.steps.-2` | Second to last step |
+| `synthetics.attributes.result.steps.0` | First step |
+| `synthetics.attributes.result.steps.1` | Second step |
+| `synthetics.attributes.result.steps.-1` | Last step |
+| `synthetics.attributes.result.steps.-2` | Second to last step |
 
 #### By step name
 
@@ -899,21 +901,21 @@ Use the step's unique identifier:
 Combine any reference method with a property:
 
 - `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
-- `{{synthetics.attributes.result.steps[Click button].failure.message}}` - Failure message for a named step
-- `{{synthetics.attributes.result.steps.abc-def-ghi.duration}}` - Duration of a specific step
+- `{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
+- `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
 
 #### Summary counts
 
 | Variable | Description |
 |----------|-------------|
-| `synthetics.attributes.result.steps.count.steps.total` | Total number of steps |
-| `synthetics.attributes.result.steps.count.steps.completed` | Number of completed steps |
-| `synthetics.attributes.result.steps.count.errors` | Number of errors |
-| `synthetics.attributes.result.steps.count.hops` | Number of network hops (network tests only) |
+| `synthetics.attributes.count.steps.total` | Total number of steps |
+| `synthetics.attributes.count.steps.completed` | Number of completed steps |
+| `synthetics.attributes.count.errors` | Number of errors |
+| `synthetics.attributes.count.hops` | Number of network hops (TCP and ICMP tests) |
 
-
-## Troubleshooting
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /synthetics/explore/results_explorer
