@@ -324,11 +324,11 @@ You can view traces using the [Trace Explorer][9].
 {{% collapse-content title="Troubleshooting" level="h4" %}}
 ##### Not attaching the Datadog Java tracer during the training run
 
-If you don't attach the Datadog Java tracer during training, you will see this warning when attaching the tracer in production:
+If you see this warning in production it means the Datadog Java tracer wasn't attached during training:
 ```
 Mismatched values for property jdk.module.addmods: java.instrument specified during runtime but not during dump time
 ```
-This means the JVM will not use the AOT cache, and startup time will not be improved.
+The JVM cannot then use the AOT cache to improve startup time. The solution is to attach the tracer during training.
 
 ## GraalVM Native Image support
 
