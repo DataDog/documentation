@@ -296,7 +296,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 ## Ahead-of-time (AOT) class loading & linking support
 
-To improve startup time, Ahead-of-Time (AOT) class loading & linking makes the classes of an application instantly available in a loaded and linked state when the JVM starts. See [JEP 483][15] and [JEP 514][16] for more information.
+To improve startup time, Ahead-of-time (AOT) class loading & linking makes the classes of an application instantly available in a loaded and linked state when the JVM starts. See [JEP 483][15] and [JEP 514][16] for more information.
 
 ### Requirements
 
@@ -320,6 +320,15 @@ java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
 ```
 
 You can view traces using the [Trace Explorer][9].
+
+{{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Not attaching the Datadog Java tracer during the training run
+
+If you don't attach the Datadog Java tracer during training, you will see this warning when attaching the tracer in production:
+```
+Mismatched values for property jdk.module.addmods: java.instrument specified during runtime but not during dump time
+```
+This means the JVM will not use the AOT cache, and startup time will not be improved.
 
 ## GraalVM Native Image support
 
