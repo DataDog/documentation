@@ -22,7 +22,7 @@ Instrument your AWS Lambda applications with a Datadog Lambda Library to collect
 ## Quick start
 
 {{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add the Datadog to your Lambda Functions.">}}
-  Agentic onboarding for Datadog Serverless is in preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+  Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
 {{< /callout >}} 
 
 
