@@ -9146,6 +9146,11 @@ components:
     CaseCreateAttributes:
       description: Case creation attributes
       properties:
+        custom_attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/CustomAttributeValue'
+          description: Case custom attributes
+          type: object
         description:
           description: Description
           type: string
@@ -14619,9 +14624,9 @@ components:
         type: number
       type: array
     CustomAttributeMultiStringValue:
-      description: Value of multi TEXT/URL custom attribute
+      description: Value of multi TEXT/URL/SELECT custom attribute
       items:
-        description: TEXT/URL Value
+        description: TEXT/URL/SELECT Value
         type: string
       type: array
     CustomAttributeNumberValue:
@@ -14629,7 +14634,7 @@ components:
       format: double
       type: number
     CustomAttributeStringValue:
-      description: Value of TEXT/URL custom attribute
+      description: Value of TEXT/URL/SELECT custom attribute
       type: string
     CustomAttributeType:
       description: Custom attributes type
@@ -14637,12 +14642,14 @@ components:
       - URL
       - TEXT
       - NUMBER
+      - SELECT
       example: NUMBER
       type: string
       x-enum-varnames:
       - URL
       - TEXT
       - NUMBER
+      - SELECT
     CustomAttributeValue:
       description: Custom attribute values
       properties:
