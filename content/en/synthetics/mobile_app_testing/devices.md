@@ -78,7 +78,7 @@ multifiltersearch:
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Samsung Galaxy S24 Plus
+    - device: Samsung Galaxy S24+
       os: Android 14
       platform: Android
       eu: 'Yes'
@@ -264,7 +264,7 @@ multifiltersearch:
       platform: Apple
       eu: 'Yes'
       us: 'Yes'
-    - device: iPhone Pro Max
+    - device: iPhone 12 Pro Max
       os: iOS 15
       platform: Apple
       eu: 'Yes'
