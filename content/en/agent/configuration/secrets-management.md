@@ -835,35 +835,34 @@ On Windows, your executable must:
 
 ## Refreshing secrets at runtime
 
-Starting in Agent version v7.67, you can configure the Agent to refresh resolved secrets at regular intervals without requiring a restart.
+Starting in Agent v7.67, configure the Agent to refresh resolved secrets without requiring a restart.
 
-Secret refresh can be set as an interval:
+Set a refresh interval:
 ```yaml
 secret_refresh_interval: 3600  # refresh every hour
 ```
 
-Or triggered manually:
+Or, trigger a refresh manually:
 ```shell
 datadog-agent secret refresh
 ```
 
 ### API/APP key refresh
-API/APP keys can be refreshed at runtime if they are pulled as secrets.
+API/APP keys pulled as secrets support runtime refresh.
 
-To enable this, set `secret_refresh_interval` (in seconds) in your `datadog.yaml` file:
+You can enable this by setting `secret_refresh_interval` (in seconds) in `datadog.yaml`:
 ```yaml
 api_key: ENC[<secret_handle>]
 
 secret_refresh_interval: 3600  # refresh every hour
 ```
 
-By default the Agent randomly spreads its first refresh within the specified `secret_refresh_interval` window. This
-means that it resolves the API key at startup, then refreshes it within the first interval and every interval after that.
-This avoids having a fleet of Agents refreshing their API/APP key at the same time.
+By default, the Agent randomizes the initial refresh within the `secret_refresh_interval` window to prevent a fleet of
+Agents from refreshing simultaneously. The key is resolved at startup, then refreshed once within the first interval
+and every interval thereafter.
 
-To prevent downtime, only invalidate the previous API key and APP key when your entire fleet of Agents has
-pulled the updated keys from your secret management solution. You can track usage of your API keys in the [Fleet
-Management](https://app.datadoghq.com/fleet) page.
+To prevent downtime, invalidate old keys only after your entire fleet has pulled the updated keys. You can track key
+usage on the [Fleet Management](https://app.datadoghq.com/fleet) page.
 
 You can disable this behavior by setting:
 ```yaml
@@ -871,8 +870,7 @@ secret_refresh_scatter: false
 ```
 
 ### Autodiscovery check secrets refresh
-As of Agent v7.76, scheduled [Autodiscovery][1] checks can refresh secrets at runtime as  long as the configured template
-pulls secrets using the `ENC[]` syntax.
+Starting in Agent v7.76, scheduled [Autodiscovery][1] checks can refresh secrets at runtime if the template uses the `ENC[]` syntax.
 
 ```yaml
 labels:
@@ -894,6 +892,8 @@ annotations:
       }
     }
 ```
+
+Now the Agent can trigger secrets refresh at either the interval set in `secret_refresh_interval` or manually with `datadog-agent secret refresh`.
 
 ### Enabling DDOT collector refresh
 If you are using [DDOT collector][6] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
