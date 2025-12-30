@@ -330,6 +330,8 @@ Mismatched values for property jdk.module.addmods: java.instrument specified dur
 ```
 The JVM cannot then use the AOT cache to improve startup time. The solution is to attach the tracer during training.
 
+{{% /collapse-content %}}
+
 ## GraalVM Native Image support
 
 GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java tracer supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
