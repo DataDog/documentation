@@ -13,41 +13,15 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. Access these variables using the `synthetics.attributes` prefix. For example:
+Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix. 
 
-```text
-Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
-```
+**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration. See the [troubleshooting](#troubleshooting) section for more information.
 
-**Note**: For information about accessing local (config) variables, see the [Variables](#variables) section.
+## Available variables
 
-### Common variable shortcuts
+### Test execution variables
 
-`{{synthetics.failed_step.name}}`
-: The name of the failing step (for example, `Test div #title content`).
-
-`{{synthetics.failed_step.failure.message}}`
-: The error message (for example, `Element's content should match the given regex`).
-
-`{{synthetics.failed_step.url}}`
-: The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
-
-`{{synthetics.attributes.result.response.statusCode}}`
-: The HTTP status code (for example, `403`).
-
-`{{synthetics.result.step_count}}`
-: Number of steps (for example, `4`).
-
-`{{synthetics.result.duration}}`
-: Duration of the test run (in milliseconds) (for example, `9096`).
-
-`{{tags.env}}`
-: The environment tag value (for example, `prod`).
-
-**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration.
-
-
-### Result attributes
+Use these variables to include details about the test, execution location, device, and result status in your notification messages.
 
 {{< tabs >}}
 {{% tab "Test Info" %}}
@@ -170,7 +144,9 @@ Applies to browser and mobile tests.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Variables
+### Result variables
+
+These variables provide access to local and global variable values used during test execution. Use them to include variable names, types, and values in your notifications. These variables are accessed with the `{{synthetics.attributes.result}}` prefix.
 
 {{< tabs >}}
 {{% tab "Local config variables" %}}
@@ -235,15 +211,15 @@ Located at `{{synthetics.attributes.result.variables.extracted}}`:
 {{% /tab %}}
 {{% tab "Step extracted variables" %}}
 
-For tests with steps, step data is contained in `{{synthetics.attributes.result.steps}}`.
+For tests with steps, step data is contained in `{{synthetics.attributes.result.steps.<step-index>}}`. For information on how to access the `<step-index>` see the [step-index](#step-index-0-based) section below.
 
-`.extractedValue.name`
+`synthetics.attributes.result.steps.<step-index>.extractedValue.name`
 : Variable name
 
-`.extractedValue.secure`
+`synthetics.attributes.result.steps.<step-index>.extractedValue.secure`
 : Whether the variable value is obfuscated
 
-`.extractedValue.value`
+`synthetics.attributes.result.steps.<step-index>.extractedValue.value`
 : Variable value (if step was successful)
 
 **Examples:**
@@ -262,46 +238,46 @@ For tests with steps, step data is contained in `{{synthetics.attributes.result.
 
 ### Variables extracted by steps
 
-Similar to standard API tests, the variables are listed in the `variables.extracted` property, but inside steps themselves. These values are available as long as the step is successful.
+For multistep API, browser, and mobile tests, extracted variables are available at the step level within the `synthetics.attributes.variables.extracted` property. These values are only available when the step completes successfully.
 
 {{< tabs >}}
 {{% tab "General steps" %}}
 
 **For multistep/browser/mobile tests**:
 
-`.steps.allowFailure`
+`synthetics.attributes.variables.extracted.steps.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
 
-`.steps.duration`
+`synthetics.attributes.variables.extracted.steps.duration`
 : Step execution duration in milliseconds
 
-`.steps.failure`
+`synthetics.attributes.variables.extracted.steps.failure`
 : Failure information object containing `.code` and `.message`
 
-`.steps.id`
+`synthetics.attributes.variables.extracted.steps.id`
 : Unique step identifier
 
-`.steps.isCritical`
+`synthetics.attributes.variables.extracted.steps.isCritical`
 : Whether the step is critical to the test
 
-`.steps.status`
+`synthetics.attributes.variables.extracted.steps.status`
 : Step execution status
 
-`.steps.type`
+`synthetics.attributes.variables.extracted.steps.type`
 : Type of step being executed
 
 **Subtest information:**
 
-`.steps.subTest.id`
+`synthetics.attributes.variables.extracted.steps.subTest.id`
 : Subtest identifier
 
-`.steps.subStep.parentStep.id`
+`synthetics.attributes.variables.extracted.steps.subStep.parentStep.id`
 : Parent step identifier
 
-`.steps.subStep.parentTest.id`
+`synthetics.attributes.variables.extracted.steps.subStep.parentTest.id`
 : Parent test identifier
 
-`.steps.subStep.level`
+`synthetics.attributes.variables.extracted.steps.subStep.level`
 : Nesting level (1 for subtests, 2 for subtests of subtests)
 
 **Examples:**
@@ -342,31 +318,31 @@ Similar to standard API tests, the variables are listed in the `variables.extrac
 
 **Steps:**
 
-`.apiTest.request`
+`synthetics.attributes.variables.extracted.apiTest.request`
 : API test request configuration (only for "Run API Test" steps where `type` is `runApiTest`)
 
-`.apiTest.result`
+`synthetics.attributes.variables.extracted.apiTest.result`
 : API test result data (similar to `attributes.result` for API tests)
 
-`.assertionResult.expected`
+`synthetics.attributes.variables.extracted.assertionResult.expected`
 : Expected value for assertions
 
-`.assertionResults.checkType`
+`synthetics.attributes.variables.extracted.assertionResults.checkType`
 : Type of assertion check
 
-`.assertionResults.actual`
+`synthetics.attributes.variables.extracted.assertionResults.actual`
 : Actual value found during assertion
 
-`.browserErrors`
+`synthetics.attributes.variables.extracted.browserErrors`
 : List of browser errors encountered
 
-`.timings.firstByte`
+`synthetics.attributes.variables.extracted.timings.firstByte`
 : Time to first byte
 
-`.timings.tcp`
+`synthetics.attributes.variables.extracted.timings.tcp`
 : TCP connection timing
 
-`.description`
+`synthetics.attributes.variables.extracted.description`
 : Step description
 
 **Examples:**
@@ -427,13 +403,13 @@ Examples for `.browserErrors`:
 {{% /tab %}}
 {{% tab "Mobile Tests" %}}
 
-`.application.versionId`
+`synthetics.attributes.variables.extracted.application.versionId`
 : Mobile application version identifier
 
-`.apiTest`
+`synthetics.attributes.variables.extracted.apiTest`
 : API test data (for API test steps within mobile tests)
 
-`.description`
+`synthetics.attributes.variables.extracted.description`
 : Step description
 
 **Examples:**
@@ -451,59 +427,59 @@ Examples for `.browserErrors`:
 
 **Multistep:**
 
-`.name`
+`synthetics.attributes.variables.extracted.name`
 : Step name
 
-`.type`
+`synthetics.attributes.variables.extracted.type`
 : Step type
 
 *Note: Follow regular API fields per subType*
 
 **Non-Multistep:**
 
-`.assertions.actual`
+`synthetics.attributes.variables.extracted.assertions.actual`
 : Actual value from assertion
 
-`.assertions.expected`
+`synthetics.attributes.variables.extracted.assertions.expected`
 : Expected value for assertion
 
-`.assertions.operator`
+`synthetics.attributes.variables.extracted.assertions.operator`
 : Assertion operator
 
-`.assertions.type`
+`synthetics.attributes.variables.extracted.assertions.type`
 : Assertion type
 
-`.dnsResolution.resolvedIp`
+`synthetics.attributes.variables.extracted.dnsResolution.resolvedIp`
 : Resolved IP address
 
-`.dnsResolution.server`
+`synthetics.attributes.variables.extracted.dnsResolution.server`
 : DNS server used
 
-`.timings.dns`
+`synthetics.attributes.variables.extracted.timings.dns`
 : DNS resolution time
 
-`.timings.tcp`
+`synthetics.attributes.variables.extracted.timings.tcp`
 : TCP connection time
 
-`.request.url`
+`synthetics.attributes.variables.extracted.request.url`
 : Request URL
 
-`.request.host`
+`synthetics.attributes.variables.extracted.request.host`
 : Request host
 
-`.response.body`
+`synthetics.attributes.variables.extracted.response.body`
 : Response body content
 
-`.response.statusCode`
+`synthetics.attributes.variables.extracted.response.statusCode`
 : HTTP status code
 
-`.response.headers`
+`synthetics.attributes.variables.extracted.response.headers`
 : Response headers
 
-`.response.httpVersion`
+`synthetics.attributes.variables.extracted.response.httpVersion`
 : HTTP version
 
-`.response.redirects`
+`synthetics.attributes.variables.extracted.response.redirects`
 : Redirect information
 
 **Examples:**
@@ -557,28 +533,28 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title="Websocket" level="h4" expanded=false %}}
 
-`.timings.open`
+`synthetics.attributes.variables.extracted.timings.open`
 : Time to open connection (in milliseconds)
 
-`.timings.receive`
+`synthetics.attributes.variables.extracted.timings.receive`
 : Time to receive response
 
-`.handshake.request`
+`synthetics.attributes.variables.extracted.handshake.request`
 : Handshake request data
 
-`.handshake.response`
+`synthetics.attributes.variables.extracted.handshake.response`
 : Handshake response data
 
-`.request.message`
+`synthetics.attributes.variables.extracted.request.message`
 : WebSocket request message
 
-`.response.message`
+`synthetics.attributes.variables.extracted.response.message`
 : WebSocket response message
 
-`.close.reason`
+`synthetics.attributes.variables.extracted.close.reason`
 : Connection close reason
 
-`.close.statusCode`
+`synthetics.attributes.variables.extracted.close.statusCode`
 : Connection close status code
 
 **Examples:**
@@ -616,19 +592,19 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title= "gRPC" level="h4" expanded=false %}}
 
-`.callType`
+`synthetics.attributes.variables.extracted.callType`
 : Call type (`unary` or `healthcheck`)
 
-`.timings.rpc`
+`synthetics.attributes.variables.extracted.timings.rpc`
 : RPC call timing
 
-`.response.healthcheck.status`
+`synthetics.attributes.variables.extracted.response.healthcheck.status`
 : Health check status
 
-`.request.message`
+`synthetics.attributes.variables.extracted.request.message`
 : gRPC request message
 
-`.response.message`
+`synthetics.attributes.variables.extracted.response.message`
 : gRPC response message
 
 **Examples:**
@@ -658,13 +634,13 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title= "UDP" level="h4" expanded=false %}}
 
-`.request.message`
+`synthetics.attributes.variables.extracted.request.message`
 : UDP request message
 
-`.response.message`
+`synthetics.attributes.variables.extracted.response.message`
 : UDP response message
 
-`.timings.message`
+`synthetics.attributes.variables.extracted.timings.message`
 : Message timing
 
 **Examples:**
@@ -688,25 +664,25 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title= "TCP" level="h4" expanded=false %}}
 
-`.connectionOutcome`
+`synthetics.attributes.variables.extracted.connectionOutcome`
 : Connection result
 
-`.netpath.routers.ip`
+`synthetics.attributes.variables.extracted.netpath.routers.ip`
 : Router IP addresses
 
-`.traceroute.latency.min`
+`synthetics.attributes.variables.extracted.traceroute.latency.min`
 : Minimum latency
 
-`.traceroute.latency.max`
+`synthetics.attributes.variables.extracted.traceroute.latency.max`
 : Maximum latency
 
-`.traceroute.latency.avg`
+`synthetics.attributes.variables.extracted.traceroute.latency.avg`
 : Average latency
 
-`.traceroute.latency.stddev`
+`synthetics.attributes.variables.extracted.traceroute.latency.stddev`
 : Standard deviation
 
-`.traceroute.latency.values`
+`synthetics.attributes.variables.extracted.traceroute.latency.values`
 : Latency values array
 
 **Examples:**
@@ -749,16 +725,16 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title= "ICMP" level="h4" expanded=false %}}
 
-`.traceroute`
+`synthetics.attributes.variables.extracted.traceroute`
 : Same structure as TCP traceroute
 
-`.request.host`
+`synthetics.attributes.variables.extracted.request.host`
 : Target host
 
-`.ping`
+`synthetics.attributes.variables.extracted.ping`
 : Ping results
 
-`.latency.min`, `.latency.max`, `.latency.avg`, `.latency.stddev`, `.latency.values`
+`synthetics.attributes.variables.extracted.latency.min`, `synthetics.attributes.variables.extracted.latency.max`, `synthetics.attributes.variables.extracted.latency.avg`, `synthetics.attributes.variables.extracted.latency.stddev`, `synthetics.attributes.variables.extracted.latency.values`
 : Latency measurements (same as TCP)
 
 **Examples:**
@@ -793,28 +769,28 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title= "SSL" level="h4" expanded=false %}}
 
-`.cert`
+`synthetics.attributes.variables.extracted.cert`
 : SSL certificate information
 
-`.cipher`
+`synthetics.attributes.variables.extracted.cipher`
 : Cipher suite used
 
-`.issuer`
+`synthetics.attributes.variables.extracted.issuer`
 : Certificate issuer
 
-`.subject`
+`synthetics.attributes.variables.extracted.subject`
 : Certificate subject
 
-`.valid.from`
+`synthetics.attributes.variables.extracted.valid.from`
 : Certificate valid from date
 
-`.valid.to`
+`synthetics.attributes.variables.extracted.valid.to`
 : Certificate valid to date
 
-`.ocsp`
+`synthetics.attributes.variables.extracted.ocsp`
 : OCSP (Online Certificate Status Protocol) information
 
-`.timings.handshake`
+`synthetics.attributes.variables.extracted.timings.handshake`
 : SSL handshake timing
 
 **Examples:**
@@ -842,10 +818,10 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title= "DNS" level="h4" expanded=false %}}
 
-`.response.records.type`
+`synthetics.attributes.variables.extracted.response.records.type`
 : DNS record type
 
-`.response.records.values`
+`synthetics.attributes.variables.extracted.response.records.values`
 : DNS record values
 
 **Examples:**
@@ -865,15 +841,22 @@ Examples for `.browserErrors`:
 {{< /collapse-content >}}
 
 {{% /tab %}}
-{{% tab "Step summary" %}}
+{{< /tabs >}}
 
-**Step Summary:**
-- `.result.steps.<step_id>`
+### Step summary
+
+Access step data by index, name, or ID to reference specific steps in your notification messages. This section also includes summary counts for total steps, completed steps, and errors.
+
+- `synthetics.attributes.result.steps.<step_id>`
   - `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, `.url`
 
-The step summary contains the same data as described in [steps](#variables-extracted-by-steps), but you can access it in several ways:
+  For example:
+  `synthetics.attributes.result.steps.status`
 
-By step index (0-based):
+The step summary contains the same data as described in [variables extracted by steps](#variables-extracted-by-steps), but you can access it in several ways:
+
+#### Step index:
+
 - `.steps.0` - first step
 - `.steps.1` - second step
 - `.steps.-1` - last step
@@ -893,24 +876,8 @@ Then you access the data as usual, for example:
 **Summary Data:**
 - `.count.steps.{total,completed}`, `.count.errors`, `.count.hops` (for example, `4`)
 
-**Service Tag:**
-If `service` tag is set:
-- `{{service.name}}`
-- `{{service.team}}`
-- `{{service.docs}}`, `{{service.links}}`
 
-**Examples**:
-```json
-{
-  "service.name": "API Server",
-  "service.team": "Backend team",
-  "service.docs": "https://docs.datadoghq.com/api/"
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
+## Troubleshooting
 
 ## Further Reading
 
