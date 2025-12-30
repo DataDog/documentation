@@ -168,6 +168,26 @@ Applies to browser and mobile tests.
 ```
 
 {{% /tab %}}
+{{% tab "Count" %}}
+
+Applies to Multistep, Browser, and Mobile tests.
+
+`{{synthetics.attributes.count}}`
+: The `count` object contains step statistics about the test
+
+`{{synthetics.attributes.count.steps.total}}`
+: The total number of steps
+
+`{{synthetics.attributes.count.steps.completed}}`
+: The number of steps that were run
+
+`{{synthetics.attributes.count.errors}}`
+: The total number of errors that occurred while running the test. For multistep and mobile tests, this is the number of failed steps. For browser tests, this is the sum of all browser errors. 
+
+`{{synthetics.attributes.count.hops}}`
+: The number of traceroute hops for TCP and ICMP tests
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Variables
