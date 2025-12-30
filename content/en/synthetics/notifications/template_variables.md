@@ -42,7 +42,8 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 : Duration of the test run (in milliseconds) (for example, `9096`).
 
 `{{tags}}`
-: Lists all the tags added to the synthetics test. Use {{tag.my_tag}} to access individual tag values.
+: Lists all the tags added to the synthetics.
+: To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
 
 **Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration.
 
