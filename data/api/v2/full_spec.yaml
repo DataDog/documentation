@@ -35689,6 +35689,37 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineCloudPremDestination:
+      description: The `cloud_prem` destination sends logs to Datadog CloudPrem.
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: cloud-prem-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineCloudPremDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineCloudPremDestinationType:
+      default: cloud_prem
+      description: The destination type. The value should always be `cloud_prem`.
+      enum:
+      - cloud_prem
+      example: cloud_prem
+      type: string
+      x-enum-varnames:
+      - CLOUD_PREM
     ObservabilityPipelineComponentDisplayName:
       description: The display name for a component.
       example: my component
@@ -35744,6 +35775,7 @@ components:
       description: A destination for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineCloudPremDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Destination'
       - $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestination'
@@ -35762,6 +35794,7 @@ components:
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineKafkaDestination'
     ObservabilityPipelineConfigProcessorGroup:
       description: A group of processors.
       example:
@@ -37060,6 +37093,151 @@ components:
       type: string
       x-enum-varnames:
       - HTTP_SERVER
+    ObservabilityPipelineKafkaDestination:
+      description: The `kafka` destination sends logs to Apache Kafka topics.
+      properties:
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationEncoding'
+        headers_key:
+          description: The field name to use for Kafka message headers.
+          example: headers
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: kafka-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        key_field:
+          description: The field name to use as the Kafka message key.
+          example: message_id
+          type: string
+        librdkafka_options:
+          description: Optional list of advanced Kafka producer configuration options,
+            defined as key-value pairs.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaLibrdkafkaOption'
+          type: array
+        message_timeout_ms:
+          description: Maximum time in milliseconds to wait for message delivery confirmation.
+          example: 300000
+          format: int64
+          minimum: 1
+          type: integer
+        rate_limit_duration_secs:
+          description: Duration in seconds for the rate limit window.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+        rate_limit_num:
+          description: Maximum number of messages allowed per rate limit duration.
+          example: 1000
+          format: int64
+          minimum: 1
+          type: integer
+        sasl:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSasl'
+        socket_timeout_ms:
+          description: Socket timeout in milliseconds for network requests.
+          example: 60000
+          format: int64
+          maximum: 300000
+          minimum: 10
+          type: integer
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topic:
+          description: The Kafka topic name to publish logs to.
+          example: logs-topic
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - topic
+      - encoding
+      type: object
+    ObservabilityPipelineKafkaDestinationCompression:
+      description: Compression codec for Kafka messages.
+      enum:
+      - none
+      - gzip
+      - snappy
+      - lz4
+      - zstd
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - NONE
+      - GZIP
+      - SNAPPY
+      - LZ4
+      - ZSTD
+    ObservabilityPipelineKafkaDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineKafkaDestinationType:
+      default: kafka
+      description: The destination type. The value should always be `kafka`.
+      enum:
+      - kafka
+      example: kafka
+      type: string
+      x-enum-varnames:
+      - KAFKA
+    ObservabilityPipelineKafkaLibrdkafkaOption:
+      description: Represents a key-value pair used to configure low-level `librdkafka`
+        client options for Kafka source and destination, such as timeouts, buffer
+        sizes, and security settings.
+      properties:
+        name:
+          description: The name of the `librdkafka` configuration option to set.
+          example: fetch.message.max.bytes
+          type: string
+        value:
+          description: The value assigned to the specified `librdkafka` configuration
+            option.
+          example: '1048576'
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineKafkaSasl:
+      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
+      properties:
+        mechanism:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSaslMechanism'
+      type: object
+    ObservabilityPipelineKafkaSaslMechanism:
+      description: SASL mechanism used for Kafka authentication.
+      enum:
+      - PLAIN
+      - SCRAM-SHA-256
+      - SCRAM-SHA-512
+      type: string
+      x-enum-varnames:
+      - PLAIN
+      - SCRAMNOT_SHANOT_256
+      - SCRAMNOT_SHANOT_512
     ObservabilityPipelineKafkaSource:
       description: The `kafka` source ingests data from Apache Kafka topics.
       properties:
@@ -37077,10 +37255,10 @@ components:
           description: Optional list of advanced Kafka client configuration options,
             defined as key-value pairs.
           items:
-            $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceLibrdkafkaOption'
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaLibrdkafkaOption'
           type: array
         sasl:
-          $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceSasl'
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSasl'
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
         topics:
@@ -37099,30 +37277,6 @@ components:
       - type
       - group_id
       - topics
-      type: object
-    ObservabilityPipelineKafkaSourceLibrdkafkaOption:
-      description: Represents a key-value pair used to configure low-level `librdkafka`
-        client options for Kafka sources, such as timeouts, buffer sizes, and security
-        settings.
-      properties:
-        name:
-          description: The name of the `librdkafka` configuration option to set.
-          example: fetch.message.max.bytes
-          type: string
-        value:
-          description: The value assigned to the specified `librdkafka` configuration
-            option.
-          example: '1048576'
-          type: string
-      required:
-      - name
-      - value
-      type: object
-    ObservabilityPipelineKafkaSourceSasl:
-      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
-      properties:
-        mechanism:
-          $ref: '#/components/schemas/ObservabilityPipelinePipelineKafkaSourceSaslMechanism'
       type: object
     ObservabilityPipelineKafkaSourceType:
       default: kafka
@@ -37513,17 +37667,6 @@ components:
       type: string
       x-enum-varnames:
       - PARSE_JSON
-    ObservabilityPipelinePipelineKafkaSourceSaslMechanism:
-      description: SASL mechanism used for Kafka authentication.
-      enum:
-      - PLAIN
-      - SCRAM-SHA-256
-      - SCRAM-SHA-512
-      type: string
-      x-enum-varnames:
-      - PLAIN
-      - SCRAMNOT_SHANOT_256
-      - SCRAMNOT_SHANOT_512
     ObservabilityPipelineQuotaProcessor:
       description: The Quota Processor measures logging traffic for logs that match
         a specified filter. When the configured daily quota is met, the processor
