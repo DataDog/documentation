@@ -101,7 +101,7 @@ rulesets:
 ## Autres actions GitHub utiles
 
 Datadog Software Composition Analysis (SCA) offre également la possibilité d'analyser vos dépendances
-et de détecter les vulnérabilités et licences. Vous pouvez utiliser ce produit avec `datadog-sca-github-action`][7].
+et de détecter les vulnérabilités et licences. Vous pouvez utiliser ce produit avec [`datadog-sca-github-action`][7].
 
 
 ## Pour aller plus loin

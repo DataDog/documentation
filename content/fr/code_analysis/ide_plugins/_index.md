@@ -21,9 +21,9 @@ title: Plugins IDE de Datadog pour Code Analysis
 [Code Analysis][1] s'intègre directement aux outils d'environnement de développement intégré (IDE) pour fournir un retour en temps réel sur la qualité et la sécurité de votre code propriétaire au moment où il est écrit.
 
 {{< whatsnext desc="Consulter la documentation pour obtenir des informations sur les intégrations suivantes :">}}
-    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>IDE JetBrains</u> : IntelliJ IDEA, GoLand, PhpStorm et PyCharm{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Visual<u>Studio Code{{{</u>< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}Visual<u>Studio{{{</u>< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>IDE JetBrains</u> : IntelliJ IDEA, GoLand, PhpStorm et PyCharm{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Pour aller plus loin

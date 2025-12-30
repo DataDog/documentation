@@ -57,7 +57,7 @@ jobs:
 
 [Datadog Static Analysis][5] analyse votre code et fournit un retour dans votre IDE, dans les pull requests GitHub ou dans
 l'environnement Datadog. Datadog Static Analysis peut être configuré à l'aide de l'action GitHub 
-`datadog-static-analyzer-github-action`][6].
+[`datadog-static-analyzer-github-action`][6].
 
 ## Pour aller plus loin
 
