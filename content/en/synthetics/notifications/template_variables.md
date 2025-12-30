@@ -211,7 +211,7 @@ Located at `{{synthetics.attributes.result.variables.extracted}}`:
 {{% /tab %}}
 {{% tab "Step extracted variables" %}}
 
-For tests with steps, step data is contained in `{{synthetics.attributes.result.steps.<step-index>}}`. For information on how to access the `<step-index>` see the [step-index](#step-index-0-based) section below.
+For tests with steps, step data is contained in `{{synthetics.attributes.result.steps.<step-index>.extractedValue}}`. For information on how to access the `<step-index>` see the [step summary](#step-summary) section below.
 
 `synthetics.attributes.result.steps.<step-index>.extractedValue.name`
 : Variable name
@@ -847,34 +847,49 @@ Examples for `.browserErrors`:
 
 Access step data by index, name, or ID to reference specific steps in your notification messages. This section also includes summary counts for total steps, completed steps, and errors.
 
-- `synthetics.attributes.result.steps.<step_id>`
-  - `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, `.url`
+Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, and `.url`.
 
-  For example:
-  `synthetics.attributes.result.steps.status`
+You can reference steps in three ways:
 
-The step summary contains the same data as described in [variables extracted by steps](#variables-extracted-by-steps), but you can access it in several ways:
+#### By index (0-based)
 
-#### Step index:
+Use positive numbers to count from the beginning, or negative numbers to count from the end:
 
-- `.steps.0` - first step
-- `.steps.1` - second step
-- `.steps.-1` - last step
-- `.steps.-2` - step before last
+| Syntax | Description |
+|--------|-------------|
+| `.steps.0` | First step |
+| `.steps.1` | Second step |
+| `.steps.-1` | Last step |
+| `.steps.-2` | Second to last step |
 
-By step name:
-- `.steps[Click button]`
+#### By step name
 
-By step id:
-- `.steps.abc-def-ghi`
+Use the step name in brackets:
 
-Then you access the data as usual, for example:
-- `.steps.-1.status`
-- `.steps[Click button].status`
-- `.steps.abc-def-ghi.status`
+`.steps[Click button]`
 
-**Summary Data:**
-- `.count.steps.{total,completed}`, `.count.errors`, `.count.hops` (for example, `4`)
+#### By step ID
+
+Use the step's unique identifier:
+
+`.steps.abc-def-ghi`
+
+#### Accessing step properties
+
+Combine any reference method with a property:
+
+- `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
+- `{{synthetics.attributes.result.steps[Click button].failure.message}}` - Failure message for a named step
+- `{{synthetics.attributes.result.steps.abc-def-ghi.duration}}` - Duration of a specific step
+
+#### Summary counts
+
+| Variable | Description |
+|----------|-------------|
+| `synthetics.attributes.result.steps.count.steps.total` | Total number of steps |
+| `synthetics.attributes.result.steps.count.steps.completed` | Number of completed steps |
+| `synthetics.attributes.result.steps.count.errors` | Number of errors |
+| `synthetics.attributes.result.steps.count.hops` | Number of network hops (network tests only) |
 
 
 ## Troubleshooting
