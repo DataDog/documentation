@@ -340,6 +340,14 @@ To apply granular metric filtering for enabled services, click on the service in
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Limit metric collection by Google Cloud region, and by global resources" level="h4" %}}
+
+Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], deselect which region for Datadog to exclude from metrics collection.
+
+Additionally, users can specify additional locations not listed and disable any global metrics not associated with a region.
+
+{{% /collapse-content %}}
+
 {{% collapse-content title="Limit metric collection by host or Cloud Run instance" level="h4" %}}
 1. Assign a tag (such as `datadog:true`) to the hosts or Cloud Run instances you want to monitor with Datadog.
 2. Under the **Metric Collection** tab in Datadog's [Google Cloud integration page][11], enter the tags in the **Limit Metric Collection Filters** textbox. Only hosts that match one of the defined tags are imported into Datadog. You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. This example includes all `c1*` sized instances, but excludes staging hosts:
