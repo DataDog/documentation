@@ -16,11 +16,14 @@ further_reading:
 
 ## Overview
 
-To make it easier to search for security findings throughout Datadog, the syntax for search queries is changing starting January 28th:
+To make it easier to search for security findings throughout Datadog, the syntax for search queries is changing:
 - **Standardized naming conventions** for security finding data fields
 - **A new schema** to consistently organize those fields across security products
 
 This change comes with a set of [new features](#new-features) that use the new schema, and may also impact your existing workflows. This page details what is changing, the workflows that Datadog automatically updates, and the changes you need to make to avoid interruptions in your existing workflows.
+
+<div class="alert alert-warning">Datadog will start rolling out changes January 28, 2026. You should plan to update any affected workflows in the first half of 2026 to avoid any interruptions as Datadog deprecates the old syntax.
+</div>
 
 {{< learning-center-callout header="" btn_title="View the schema" btn_url="/security/guide/findings-schema/" hide_image="true" >}}
   View the new security findings schema so you can understand how finding details will be stored.
@@ -28,12 +31,15 @@ This change comes with a set of [new features](#new-features) that use the new s
 
 ### Required action
 
-- If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required** - queries are updated automatically in the UI:
-  - Explorers, dashboards, notification rules, automation pipelines and workflows
-
-- If you do use one of the features listed below, **changes will be required** - please prepare to update before the second half of 2026:
-  - API endpoints: [List findings][15] and [Get a finding][16] will eventually be deprecated in favor of a new unified Findings API (docs to be shared early January). 
-  - Terraform resource `datadog_security_notification_rule` for triggery_type: "security_findings": Starting January 28th, you can update the `query` value to match the new syntax. 
+- If you use certain API endpoints or Terraform resources, **changes will be required**:
+  - The [List findings][15] and [Get a finding][16] API endpoints will use a new unified Findings API.
+  - For the [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, the `query` value will use the new search syntax.
+- If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required**. The following queries are updated automatically in the UI:
+  - Explorers
+  - Dashboards
+  - Notification rules
+  - Automation pipelines
+  - Workflows
 
 If you need assistance with your migration, contact [Datadog support][14].
 
@@ -53,7 +59,7 @@ View the full specification at [Security Findings Schema Reference][1].
 
 ### New features
 
-Starting late January 2026, the following features will be made available and use the new data model:
+Starting January 28, 2026, the following features will be made available and use the new data model:
 - Unified search queries for Cloud Security [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
 - A new unified public findings API
 - [Dashboard][2] support for Code Security
@@ -145,3 +151,4 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
 [14]: /help
 [15]: /api/latest/security-monitoring/#list-findings
 [16]: /api/latest/security-monitoring/#get-a-finding
+[17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_notification_rule
