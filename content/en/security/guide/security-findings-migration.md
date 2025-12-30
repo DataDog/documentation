@@ -33,7 +33,7 @@ This change comes with a set of [new features](#new-features) that use the new s
 
 - If you use certain API endpoints or Terraform resources, **changes will be required**:
   - For [List findings][15] and [Get a finding][16] API endpoints, update your API calls to use the new unified Findings API. The documentation for this API will be published in early January 2026.
-  - For [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, update `query` values to use the new search syntax.
+  - For [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, update `query` values to use the new search syntax, starting January 28, 2026.
 - If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required**. The following queries are updated automatically in the UI:
   - Explorers
   - Dashboards
