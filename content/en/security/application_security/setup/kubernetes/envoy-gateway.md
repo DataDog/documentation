@@ -1,5 +1,7 @@
 ---
 title: Enabling App and API Protection for Envoy Gateway
+aliases:
+  - /security/application_security/setup/envoy-gateway
 code_lang: envoy-gateway
 code_lang_weight: 50
 further_reading:
