@@ -601,66 +601,71 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: OTel SDKs
+    - name: Using OTel SDK
       url: opentelemetry/instrument/otel_sdks/
       identifier: otel_sdks
       parent: otel-instrumentation
       weight: 301
-    - name: OTel APIs with Datadog SDKs
+    - name: Using DD SDK
       url: /opentelemetry/instrument/api_support
-      identifier: otel-api-dd-sdk
+      identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 302
+    - name: Configuration
+      url: opentelemetry/config/environment_variable_support/
+      identifier: otel_env_var
+      parent: otel-dd-sdk-parent
+      weight: 3021
+    - name: APIs
+      url: /opentelemetry/instrument/api_support
+      identifier: otel-api-dd-sdk
+      parent: otel-dd-sdk-parent
+      weight: 3022
     - name: Java
       url: /opentelemetry/instrument/api_support/java
       parent: otel-api-dd-sdk
-      weight: 3021
+      weight: 30221
       identifier: otel_api_java
     - name: Python
       url: /opentelemetry/instrument/api_support/python/traces
       parent: otel-api-dd-sdk
-      weight: 3022
+      weight: 30222
       identifier: otel_api_python
     - name: Ruby
       url: /opentelemetry/instrument/api_support/ruby
       parent: otel-api-dd-sdk
-      weight: 3023
+      weight: 30223
       identifier: otel_api_ruby
     - name: Go
       url: /opentelemetry/instrument/api_support/go
       parent: otel-api-dd-sdk
-      weight: 3024
+      weight: 30224
       identifier: otel_api_go
     - name: Node.js
       url: /opentelemetry/instrument/api_support/nodejs/traces
       parent: otel-api-dd-sdk
-      weight: 3025
+      weight: 30225
       identifier: otel_api_nodejs
     - name: PHP
       url: /opentelemetry/instrument/api_support/php
       parent: otel-api-dd-sdk
-      weight: 3026
+      weight: 30226
       identifier: otel_api_php
     - name: .NET
       url: /opentelemetry/instrument/api_support/dotnet/traces
       parent: otel-api-dd-sdk
-      weight: 3027
+      weight: 30227
       identifier: otel_api_dotnet
     - name: Rust
       url: /opentelemetry/instrument/api_support/rust
       parent: otel-api-dd-sdk
-      weight: 3028
+      weight: 30228
       identifier: otel_api_rust
-    - name: OTel Instrumentation Libraries
+    - name: Instrumentation Libraries
       url: /opentelemetry/instrument/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
-      parent: otel-instrumentation
-      weight: 303
-    - name: Configuration
-      url: opentelemetry/config/environment_variable_support/
-      identifier: otel_env_var
-      parent: otel-instrumentation
-      weight: 304
+      parent: otel-dd-sdk-parent
+      weight: 3023
     - name: Send Data to Datadog
       identifier: otel_collect
       url: /opentelemetry/setup/
