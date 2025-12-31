@@ -324,7 +324,7 @@ You can view traces using the [Trace Explorer][9].
 {{% collapse-content title="Troubleshooting" level="h4" %}}
 ##### Not attaching the Datadog Java tracer during the training run
 
-If you see this warning in production it means the Datadog Java tracer wasn't attached during training:
+If you see this warning in production, it means the Datadog Java tracer wasn't attached during training:
 ```
 Mismatched values for property jdk.module.addmods: java.instrument specified during runtime but not during dump time
 ```
