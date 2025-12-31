@@ -493,6 +493,88 @@ For multistep API, browser, and mobile tests, extracted variables are available 
 
 {{< /collapse-content >}}
 
+{{% collapse-content title= "HTTP" level="h4" expanded=false %}}
+
+**Request:**
+
+`synthetics.attributes.variables.extracted.request`
+: Information about the request
+
+`synthetics.attributes.variables.extracted.request.method`
+: The HTTP method
+
+`synthetics.attributes.variables.extracted.request.body`
+: The request body if set
+
+`synthetics.attributes.variables.extracted.request.headers`
+: The request headers
+
+**Response:**
+
+`synthetics.attributes.variables.extracted.response`
+: Information about the response
+
+`synthetics.attributes.variables.extracted.response.body`
+: The response body as string (truncated if too big)
+
+`synthetics.attributes.variables.extracted.response.bodySize`
+: The size of the full response body
+
+`synthetics.attributes.variables.extracted.response.cacheHeaders`
+: A dictionary of caching-related headers
+
+`synthetics.attributes.variables.extracted.response.cdn`
+: The response CDN info if any
+
+`synthetics.attributes.variables.extracted.response.cdn.provider`
+: The CDN provider name (for example, `akamai`, `cloudflare`)
+
+`synthetics.attributes.variables.extracted.response.cdn.cache`
+: The cache info
+
+`synthetics.attributes.variables.extracted.response.cdn.cache.cached`
+: If the data was cached
+
+`synthetics.attributes.variables.extracted.response.cdn.cache.status`
+: The cache status as provided in associated cache header
+
+`synthetics.attributes.variables.extracted.response.headers`
+: The response headers
+
+`synthetics.attributes.variables.extracted.response.httpVersion`
+: The HTTP version
+
+`synthetics.attributes.variables.extracted.response.redirects`
+: A list of redirections if any
+
+`synthetics.attributes.variables.extracted.response.redirects.statusCode`
+: The HTTP status code for the redirect
+
+`synthetics.attributes.variables.extracted.response.redirects.location`
+: The returned location to redirect to
+
+`synthetics.attributes.variables.extracted.response.statusCode`
+: The response HTTP status code
+
+**Timings:**
+
+`synthetics.attributes.variables.extracted.timings.authentication`
+: The time spent for the authentication challenge (for example, NTLM)
+
+`synthetics.attributes.variables.extracted.timings.download`
+: The time spent downloading the response
+
+`synthetics.attributes.variables.extracted.timings.firstByte`
+: The time spent waiting for the first byte of response to be received
+
+`synthetics.attributes.variables.extracted.timings.redirect`
+: The time spent in HTTP redirections
+
+`synthetics.attributes.variables.extracted.timings.ssl`
+: The duration of the TLS handshake (only when testing an HTTPS endpoint)
+
+{{< /collapse-content >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
