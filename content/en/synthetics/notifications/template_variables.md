@@ -301,53 +301,6 @@ For multistep API, browser, and mobile tests, extracted variables are available 
 
 *Note: Follow regular API fields per subType*
 
-**Non-Multistep:**
-
-`synthetics.attributes.variables.extracted.assertions.actual`
-: Actual value from assertion
-
-`synthetics.attributes.variables.extracted.assertions.expected`
-: Expected value for assertion
-
-`synthetics.attributes.variables.extracted.assertions.operator`
-: Assertion operator
-
-`synthetics.attributes.variables.extracted.assertions.type`
-: Assertion type
-
-`synthetics.attributes.variables.extracted.dnsResolution.resolvedIp`
-: Resolved IP address
-
-`synthetics.attributes.variables.extracted.dnsResolution.server`
-: DNS server used
-
-`synthetics.attributes.variables.extracted.timings.dns`
-: DNS resolution time
-
-`synthetics.attributes.variables.extracted.timings.tcp`
-: TCP connection time
-
-`synthetics.attributes.variables.extracted.request.url`
-: Request URL
-
-`synthetics.attributes.variables.extracted.request.host`
-: Request host
-
-`synthetics.attributes.variables.extracted.response.body`
-: Response body content
-
-`synthetics.attributes.variables.extracted.response.statusCode`
-: HTTP status code
-
-`synthetics.attributes.variables.extracted.response.headers`
-: Response headers
-
-`synthetics.attributes.variables.extracted.response.httpVersion`
-: HTTP version
-
-`synthetics.attributes.variables.extracted.response.redirects`
-: Redirect information
-
 {{% /tab %}}
 {{% tab "Network tests" %}}
 
