@@ -23,7 +23,7 @@ Template variables allow you to insert dynamic values from your test results and
 
 ### Test execution variables
 
-Use these variables to include details about the test, execution location, device, and result status in your notification messages.
+Use these variables to include details about the test, execution location, device, counts, and result status in your notification messages.
 
 {{< tabs >}}
 {{% tab "Test Info" %}}
@@ -84,20 +84,6 @@ Applies to browser and mobile tests.
 `{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (mobile tests only)
 
-**Example values:**
-```json
-{
-  "device": {
-    "id": "chrome.laptop_large",
-    "name": "Laptop Large",
-    "type": "laptop",
-    "resolution": {"width": 1440, "height": 1100},
-    "browser": {"type": "Chrome"},
-    "platform": {"name": "Android", "version": "14"}
-  }
-}
-```
-
 {{% /tab %}}
 {{% tab "Result" %}}
 
@@ -124,24 +110,6 @@ Applies to browser and mobile tests.
 
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
-
-**Example values:**
-```json
-{
-  "result": {
-    "id": "3015485096247415772",
-    "status": "failed",
-    "duration": 9096,
-    "testStartedAt": 1743760758904,
-    "testFinishedAt": 1743760772025,
-    "testTriggeredAt": 1743760758593,
-    "failure": {
-      "message": "Error: Element's content should match the given regex",
-      "code": "ASSERTION_FAILURE"
-    }
-  }
-}
-```
 
 {{% /tab %}}
 {{% tab "Count" %}}
@@ -189,16 +157,6 @@ Located at `{{synthetics.attributes.result.variables.config}}`:
 `{{synthetics.attributes.result.variables.config.value}}`
 : Variable value (non-obfuscated only)
 
-**Examples:**
-```json
-{
-  "name": "RANDOM_NUMBER",
-  "type": "text",
-  "secure": false,
-  "value": "133245995"
-}
-```
-
 {{% /tab %}}
 {{% tab "Global variables" %}}
 
@@ -220,16 +178,6 @@ Located at `{{synthetics.attributes.result.variables.extracted}}`:
 `{{synthetics.attributes.result.variables.extracted.val}}`
 : Variable value (note: uses `.val`, not `.value`)
 
-**Examples:**
-```json
-{
-  "id": "ec734823-536e-4aba-8b5f-55733189d936",
-  "name": "EXTRACTED_NUMBER",
-  "secure": false,
-  "val": "250661"
-}
-```
-
 {{% /tab %}}
 {{% tab "Step extracted variables" %}}
 
@@ -243,17 +191,6 @@ For tests with steps, step data is contained in `{{synthetics.attributes.result.
 
 `synthetics.attributes.result.steps.<step-index>.extractedValue.value`
 : Variable value (if step was successful)
-
-**Examples:**
-```json
-{
-  "extractedValue": {
-    "name": "EXTRACTED_COUNT",
-    "secure": false,
-    "value": "12"
-  }
-}
-```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -302,34 +239,6 @@ For multistep API, browser, and mobile tests, extracted variables are available 
 `synthetics.attributes.variables.extracted.steps.subStep.level`
 : Nesting level (1 for subtests, 2 for subtests of subtests)
 
-**Examples:**
-```json
-{
-  "steps": [
-    {
-      "allowFailure": false,
-      "duration": 10955,
-      "failure": {
-        "code": "ASSERTION_FAILURE",
-        "message": "Element's content should not equal given value."
-      },
-      "id": "g8e-q4a-fix",
-      "isCritical": true,
-      "status": "failed",
-      "type": "assertElementContent",
-      "subTest": {
-        "id": "m2i-fcy-eva"
-      },
-      "subStep": {
-        "parentStep": {"id": "ikj-juk-z2u"},
-        "parentTest": {"id": "th5-wic-5mj"},
-        "level": 1
-      }
-    }
-  ]
-}
-```
-
 {{% /tab %}}
 {{% tab "Browser Tests" %}}
 
@@ -367,61 +276,6 @@ For multistep API, browser, and mobile tests, extracted variables are available 
 `synthetics.attributes.variables.extracted.description`
 : Step description
 
-**Examples:**
-```json
-{
-  "startUrl": "https://datadoghq.com",
-  "apiTest": {
-    "request": {
-      "subType": "http",
-      "method": "GET",
-      "url": "https://datadoghq.com"
-    },
-    "result": {
-      "statusCode": 200
-    }
-  },
-  "assertionResults": {
-    "expected": "100",
-    "checkType": "equals",
-    "actual": "200"
-  },
-  "timings": {
-    "firstByte": 7.1,
-    "tcp": 5.2
-  }
-}
-```
-
-Examples for `.browserErrors`:
-
-```json
-{
-    "name": "Console error",
-    "description": "Failed to load resource: the server responded with a status of 403 ()",
-    "type": "js"
-},
-{
-    "name": "[GET] 403 - https://accounts.google.com/v3/signin/identifier?dsh=S688774280%3A1687962864348747&conti",
-    "description": "https://accounts.google.com/v3/signin/identifier?dsh=S688774280%3A1687962864348747&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3D%252Fsignin_passive%26feature%3Dpassive&hl=en&ifkv=AeDOFXjMKzxp0wt-b9IzWKz6RS9Kk-VmW5z_fzLP_cjbSWd4hWeP5g53fvdrhX6b2cDVQrNtJ5B7vA&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin\n<html lang=en><meta charset=utf-8><meta name=viewport content=\"initial-scale=1, minimum-sca",
-    "type": "network",
-    "status": 403
-},
-{
-    "method": "POST",
-    "name": "https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-",
-    "description": "Request was pending when step timed out: POST - https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-    "type": "network",
-    "url": {
-        "protocol": "https:",
-        "search": "?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-        "domain": "datadoghq.com",
-        "origin": "https://8b61d74c.datadoghq.com",
-        "full": "https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-      "pathname": "/api/v2/rum"
-    }
-},
-```
 {{% /tab %}}
 {{% tab "Mobile Tests" %}}
 
@@ -433,16 +287,6 @@ Examples for `.browserErrors`:
 
 `synthetics.attributes.variables.extracted.description`
 : Step description
-
-**Examples:**
-```json
-{
-  "application": {
-    "versionId": "4408df2e-9b7a-4665-9510-b9041b2ae1e8"
-  },
-  "description": "Tap on Button Sign In"
-}
-```
 
 {{% /tab %}}
 {{% tab "API Tests" %}}
@@ -504,52 +348,6 @@ Examples for `.browserErrors`:
 `synthetics.attributes.variables.extracted.response.redirects`
 : Redirect information
 
-**Examples:**
-```json
-{
-  "name": "Check API endpoint",
-  "type": "http",
-  "assertions": {
-    "actual": 1.5145,
-    "expected": 1000,
-    "operator": "moreThan",
-    "type": "latency"
-  },
-  "dnsResolution": {
-    "resolvedIp": "18.245.199.78",
-    "server": "8.8.4.4"
-  },
-  "timings": { //Dependent on the sub-type
-    "tcp": 6.9,
-      "download": 33.5,
-      "total": 75,
-      "dns": 7.5,
-      "firstByte": 17.2,
-      "ssl": 9.9
-    },
-  },
-  "request": {
-    "url": "https://www.datadogh.com",
-    "host": "datadoghq.com",
-    "method": "GET"
-  },
-  "response": {
-    "body": "Example Page Content", // Raw text (even if it's JSON, its contents can't be accessed individually), and it's truncated if too big (only the start is available)
-    "statusCode": 200,
-    "headers": { // Object/dictionary of headers, the key is the header name and the value its value
-      "content-type": "text/html; charset=utf-8",
-      "content-length": "250661"
-    },
-    "httpVersion": "1.1",
-    "redirects": [ // List of redirect items
-      {
-        "location": "https://datadoghq.com",
-        "statusCode": 302
-      }
-    ]
-  }
-```
-
 {{% /tab %}}
 {{% tab "Network tests" %}}
 
@@ -579,37 +377,6 @@ Examples for `.browserErrors`:
 `synthetics.attributes.variables.extracted.close.statusCode`
 : Connection close status code
 
-**Examples:**
-```json
-{
-  "timings": {
-    "tcp": 96,
-    "receive": 97,
-    "download": 0,
-    "total": 201.9,
-    "dns": 7.7,
-    "firstByte": 0,
-    "ssl": 1,
-    "open": 0.2
-  },
-  "handshake": {
-    "response": {
-      "statusCode": 101
-    }
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong"
-  },
-  "close": {
-    "reason": "message_received",
-    "statusCode": 1000
-  }
-}
-```
-
 {{< /collapse-content >}}
 
 {{% collapse-content title= "gRPC" level="h4" expanded=false %}}
@@ -629,29 +396,6 @@ Examples for `.browserErrors`:
 `synthetics.attributes.variables.extracted.response.message`
 : gRPC response message
 
-**Examples:**
-```json
-{
-  "callType": "healthcheck",
-  "timings": {
-    "total": 55.3,
-    "rpc": 9.2,
-    "dns": 46.1
-  },
-  "response": {
-    "healthcheck": {
-      "status": 1
-    }
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong" // Responses can be truncated if too big (only the start is available)
-  }
-}
-```
-
 {{< /collapse-content >}}
 
 {{% collapse-content title= "UDP" level="h4" expanded=false %}}
@@ -664,23 +408,6 @@ Examples for `.browserErrors`:
 
 `synthetics.attributes.variables.extracted.timings.message`
 : Message timing
-
-**Examples:**
-```json
-{
-  "timings": {
-    "total": 135.3,
-    "dns": 14.4,
-    "message": 120.9
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong"
-  }
-}
-```
 
 {{< /collapse-content >}}
 
@@ -707,42 +434,6 @@ Examples for `.browserErrors`:
 `synthetics.attributes.variables.extracted.traceroute.latency.values`
 : Latency values array
 
-**Examples:**
-```json
-[
-      {
-        "packetLossPercentage": 1,
-        "packetsReceived": 0,
-        "packetsSent": 2,
-        "routers": [
-          {
-            "ip": "???"
-          }
-        ]
-      },
-      {
-        "packetLossPercentage": 0,
-        "packetsReceived": 2,
-        "latency": {
-          "avg": 0.2375,
-          "min": 0.189,
-          "max": 0.286,
-          "values": [
-            0.189,
-            0.286
-          ],
-          "stddev": 0.04849999999999999
-        },
-        "packetsSent": 2,
-        "routers": [
-          {
-            "ip": "10.241.134.75"
-          }
-        ]
-      }
-]
-```
-
 {{< /collapse-content >}}
 
 {{% collapse-content title= "ICMP" level="h4" expanded=false %}}
@@ -758,31 +449,6 @@ Examples for `.browserErrors`:
 
 `synthetics.attributes.variables.extracted.latency.min`, `synthetics.attributes.variables.extracted.latency.max`, `synthetics.attributes.variables.extracted.latency.avg`, `synthetics.attributes.variables.extracted.latency.stddev`, `synthetics.attributes.variables.extracted.latency.values`
 : Latency measurements (same as TCP)
-
-**Examples:**
-```json
-{
-  "ping": {
-    "packetLossPercentage": 0,
-    "packetsReceived": 4,
-    "latency": {
-      "avg": 1.47375,
-      "min": 1.442,
-      "max": 1.516,
-      "values": [
-        1.467,
-        1.442,
-        1.47,
-        1.516
-      ],
-      "stddev": 0.02670557057993708
-    },
-    "resolvedIp": "18.245.199.70",
-    "packetsSent": 4,
-    "packetSize": 56
-  }
-}
-```
 
 {{< /collapse-content >}}
 
@@ -815,27 +481,6 @@ Examples for `.browserErrors`:
 `synthetics.attributes.variables.extracted.timings.handshake`
 : SSL handshake timing
 
-**Examples:**
-```json
-      "cipher": TLS_AES_128_GCM_SHA256,
-      "issuer": {
-        "C": "US",
-        "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
-        "O": "DigiCert Inc"
-      },
-```
-```json
-{
-  "issuer": {
-    "C": "US",
-    "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
-    "O": "DigiCert Inc"
-  },
-  "valid.from": 1751414400000, //milliseconds
-  "valid.to": 1783036799000 //milliseconds
-}     
-```
-
 {{< /collapse-content >}}
 
 {{% collapse-content title= "DNS" level="h4" expanded=false %}}
@@ -845,20 +490,6 @@ Examples for `.browserErrors`:
 
 `synthetics.attributes.variables.extracted.response.records.values`
 : DNS record values
-
-**Examples:**
-```json
-{
-  "dns": {
-    "response": {
-      "records": {
-        "type": "A",
-        "values": ["192.0.2.1", "192.0.2.2"]
-      }
-    }
-  }
-}
-```
 
 {{< /collapse-content >}}
 
@@ -903,16 +534,6 @@ Combine any reference method with a property:
 - `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
 - `{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
 - `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
-
-#### Summary counts
-
-| Variable | Description |
-|----------|-------------|
-| `synthetics.attributes.count.steps.total` | Total number of steps |
-| `synthetics.attributes.count.steps.completed` | Number of completed steps |
-| `synthetics.attributes.count.errors` | Number of errors |
-| `synthetics.attributes.count.hops` | Number of network hops (TCP and ICMP tests) |
-
 
 ## Further Reading
 
