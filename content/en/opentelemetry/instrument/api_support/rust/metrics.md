@@ -1,9 +1,9 @@
 ---
 title: Rust OpenTelemetry Metrics API Support
-code_lang: metrics
-type: multi-code-lang
-code_lang_weight: 1
-private: true
+# Uncomment Metrics tab after dd-trace-rs v0.3.0 is released
+# code_lang: metrics
+# type: multi-code-lang
+# code_lang_weight: 1
 further_reading:
     - link: opentelemetry/correlate/metrics_and_traces
       tag: Documentation
@@ -14,11 +14,11 @@ further_reading:
 
 {{% otel-overview-exporter lang="Rust" signal="Metrics" sdk_name="datadog-opentelemetry" %}}
 
-**Note**: Metrics support will be available in datadog-opentelemetry v0.4.0.
+**Note**: Metrics support will be available in datadog-opentelemetry v0.3.0.
 
 ## Prerequisites
 
-- **Datadog SDK**: `datadog-opentelemetry` crate version 0.4.0 or later.
+- **Datadog SDK**: `datadog-opentelemetry` crate version 0.3.0 or later.
 - **Rust**: MSRV 1.84 or later.
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 
@@ -29,7 +29,7 @@ Follow these steps to enable OTel Metrics API support in your Rust application.
 1. Add the Datadog SDK to your Cargo.toml:
    ```toml
    [dependencies]
-   datadog-opentelemetry = { version = "0.4.0" }
+   datadog-opentelemetry = { version = "0.3.0" }
    opentelemetry = { version = "0.31", features = ["metrics"] }
    ```
 
