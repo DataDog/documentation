@@ -33,13 +33,13 @@ further_reading:
 <!-- Languages with only traces: Go, PHP, Java, Rust -->
 {% if or(or(or(equals($prog_lang, "go"), equals($prog_lang, "php")), equals($prog_lang, "java")), equals($prog_lang, "rust")) %}
 {% if equals($platform, "metrics") %}
-{% alert level="warning" %}
-OpenTelemetry API support for metrics is not yet available for this language. Select **Traces** to see available instrumentation options.
+{% alert level="danger" %}
+OpenTelemetry API support for metrics is not available for this language. Select **Traces** to see available instrumentation options.
 {% /alert %}
 {% /if %}
 {% if equals($platform, "logs") %}
-{% alert level="warning" %}
-OpenTelemetry API support for logs is not yet available for this language. Select **Traces** to see available instrumentation options.
+{% alert level="danger" %}
+OpenTelemetry API support for logs is not available for this language. Select **Traces** to see available instrumentation options.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -47,13 +47,15 @@ OpenTelemetry API support for logs is not yet available for this language. Selec
 <!-- Ruby has traces and metrics only -->
 {% if equals($prog_lang, "ruby") %}
 {% if equals($platform, "logs") %}
-{% alert level="warning" %}
-OpenTelemetry API support for logs is not yet available for Ruby. Select **Traces** or **Metrics** to see available instrumentation options.
+{% alert level="danger" %}
+OpenTelemetry API support for logs is not available for Ruby. Select **Traces** or **Metrics** to see available instrumentation options.
 {% /alert %}
 {% /if %}
 {% /if %}
 
-Datadog SDKs implement the [OpenTelemetry API][1], allowing you to [instrument your code][2] with vendor-neutral APIs while benefiting from Datadog's native features. Your code remains free of vendor-specific calls and doesn't depend on Datadog SDKs at compile time.
+Datadog SDKs implement the [OpenTelemetry API][1], allowing you to instrument your code with vendor-neutral APIs while benefiting from Datadog's native implementation and features. Your code remains free of vendor-specific calls and doesn't depend on Datadog SDKs at compile time.
+
+{% img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" /%}
 
 {% alert level="info" %}
 You can also send OTel-instrumented data via the [OTel Collector][7]. See the [feature compatibility table][8] for supported Datadog features.
@@ -67,7 +69,7 @@ You can also send OTel-instrumented data via the [OTel Collector][7]. See the [f
 
 ## Overview
 
-The following sections demonstrate how to use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tags, record events, and more.
+Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tags, record events, and more.
 
 <!-- JAVA TRACES -->
 {% if equals($prog_lang, "java") %}
@@ -1143,12 +1145,11 @@ For more information, see [Trace Context Propagation][172].
 
 ## Overview
 
-Send custom application metrics into Datadog using the OpenTelemetry (OTel) Metrics API with the Datadog SDK.
-
-This is an alternative to using [DogStatsD][200] and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.
+Use the OpenTelemetry Metrics API with Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
 
 <!-- Native implementation (.NET, Node.js) -->
 {% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")) %}
+
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
@@ -1158,6 +1159,7 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 
 <!-- Exporter-based implementation (Python, Ruby) -->
 {% if or(equals($prog_lang, "python"), equals($prog_lang, "ruby")) %}
+
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
 {% /if %}
 
@@ -1531,12 +1533,11 @@ Here is the minimum version required for each instrument type:
 
 ## Overview
 
-Send custom application logs into Datadog using the OpenTelemetry (OTel) Logs API with the Datadog SDK.
-
-This is an alternative to using Datadog's traditional log injection and means you can write code against the standard OTel interfaces while benefiting from all the features of the Datadog SDK.
+Use the OpenTelemetry Logs API with Datadog SDKs to send custom application logs. This is an alternative to Datadog's traditional log injection.
 
 <!-- Native implementation (.NET, Node.js) -->
 {% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")) %}
+
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
 {% alert level="info" %}
@@ -1546,6 +1547,7 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 
 <!-- Exporter-based implementation (Python) -->
 {% if equals($prog_lang, "python") %}
+
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send logs to the Datadog Agent.
 {% /if %}
 
