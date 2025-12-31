@@ -567,7 +567,7 @@ Use the step's unique identifier:
 Combine any reference method with a property:
 
 - `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
-- `{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
+- `{{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
 - `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
 
 ## Further Reading
