@@ -9,871 +9,890 @@ further_reading:
 - link: "/monitors/templates/"
   tag: "Documentation"
   text: "Learn more about monitor templates"
+
+multifiltersearch:
+  headers:
+    - name: Variable
+      id: variable
+    - name: Test Type
+      id: test_type
+      filter_by: true
+    - name: Subtype
+      id: subtype
+      filter_by: true
+    - name: Category
+      id: category
+      filter_by: true
+    - name: Description
+      id: description
+  data:
+    # Test Info - All test types
+    - variable: '`{{synthetics.attributes.test}}`'
+      test_type: All
+      category: Test Info
+      description: The test object containing name, type, subtype, and id
+    - variable: '`{{synthetics.attributes.test.name}}`'
+      test_type: All
+      category: Test Info
+      description: The name of the test
+    - variable: '`{{synthetics.attributes.test.type}}`'
+      test_type: All
+      category: Test Info
+      description: 'Test type (for example, `api`)'
+    - variable: '`{{synthetics.attributes.test.subType}}`'
+      test_type: API
+      subtype: All
+      category: Test Info
+      description: 'Subtype for API tests (for example, `http`, `dns`, `multi`)'
+    - variable: '`{{synthetics.attributes.test.id}}`'
+      test_type: All
+      category: Test Info
+      description: 'The test public ID (for example, `abc-def-ghi`)'
+
+    # Location - All test types
+    - variable: '`{{synthetics.attributes.location}}`'
+      test_type: All
+      category: Location
+      description: The location object for where the test runs
+    - variable: '`{{synthetics.attributes.location.id}}`'
+      test_type: All
+      category: Location
+      description: 'Location ID (for example, `aws:eu-central-1`)'
+    - variable: '`{{synthetics.attributes.location.name}}`'
+      test_type: All
+      category: Location
+      description: 'Name of the location (for example, `Frankfurt (AWS)`)'
+    - variable: '`{{synthetics.attributes.location.privateLocation}}`'
+      test_type: All
+      category: Location
+      description: '`true` for Private Locations'
+
+    # Device - Browser
+    - variable: '`{{synthetics.attributes.device}}`'
+      test_type: Browser
+      category: Device
+      description: The device object for the test environment
+    - variable: '`{{synthetics.attributes.device}}`'
+      test_type: Mobile
+      category: Device
+      description: The device object for the test environment
+    - variable: '`{{synthetics.attributes.device.id}}`'
+      test_type: Browser
+      category: Device
+      description: Device identifier
+    - variable: '`{{synthetics.attributes.device.id}}`'
+      test_type: Mobile
+      category: Device
+      description: Device identifier
+    - variable: '`{{synthetics.attributes.device.name}}`'
+      test_type: Browser
+      category: Device
+      description: Human-readable device name
+    - variable: '`{{synthetics.attributes.device.name}}`'
+      test_type: Mobile
+      category: Device
+      description: Human-readable device name
+    - variable: '`{{synthetics.attributes.device.type}}`'
+      test_type: Browser
+      category: Device
+      description: Device type classification
+    - variable: '`{{synthetics.attributes.device.type}}`'
+      test_type: Mobile
+      category: Device
+      description: Device type classification
+    - variable: '`{{synthetics.attributes.device.width}}`'
+      test_type: Browser
+      category: Device
+      description: Screen width in pixels
+    - variable: '`{{synthetics.attributes.device.width}}`'
+      test_type: Mobile
+      category: Device
+      description: Screen width in pixels
+    - variable: '`{{synthetics.attributes.device.height}}`'
+      test_type: Browser
+      category: Device
+      description: Screen height in pixels
+    - variable: '`{{synthetics.attributes.device.height}}`'
+      test_type: Mobile
+      category: Device
+      description: Screen height in pixels
+    - variable: '`{{synthetics.attributes.device.browser.type}}`'
+      test_type: Browser
+      category: Device
+      description: Browser type
+    - variable: '`{{synthetics.attributes.device.platform.name}}`'
+      test_type: Mobile
+      category: Device
+      description: Platform name (iOS, Android)
+    - variable: '`{{synthetics.attributes.device.platform.version}}`'
+      test_type: Mobile
+      category: Device
+      description: Platform version
+
+    # Result - All test types
+    - variable: '`{{synthetics.attributes.result}}`'
+      test_type: All
+      category: Result
+      description: The result object for the executed test run
+    - variable: '`{{synthetics.attributes.result.id}}`'
+      test_type: All
+      category: Result
+      description: Unique result ID
+    - variable: '`{{synthetics.attributes.result.status}}`'
+      test_type: All
+      category: Result
+      description: 'Test execution status (`passed` or `failed`)'
+    - variable: '`{{synthetics.attributes.result.duration}}`'
+      test_type: All
+      category: Result
+      description: Test duration in milliseconds
+    - variable: '`{{synthetics.attributes.result.testStartedAt}}`'
+      test_type: All
+      category: Result
+      description: Epoch timestamp when test started (milliseconds)
+    - variable: '`{{synthetics.attributes.result.testFinishedAt}}`'
+      test_type: All
+      category: Result
+      description: Epoch timestamp when test finished (milliseconds)
+    - variable: '`{{synthetics.attributes.result.testTriggeredAt}}`'
+      test_type: All
+      category: Result
+      description: Epoch timestamp when test was triggered (milliseconds)
+    - variable: '`{{synthetics.attributes.result.failure}}`'
+      test_type: All
+      category: Result
+      description: The failure object with failure details
+    - variable: '`{{synthetics.attributes.result.failure.message}}`'
+      test_type: All
+      category: Result
+      description: The failure message
+    - variable: '`{{synthetics.attributes.result.failure.code}}`'
+      test_type: All
+      category: Result
+      description: The failure code
+    - variable: '`{{synthetics.attributes.result.startUrl}}`'
+      test_type: Browser
+      category: Result
+      description: URL from test configuration
+
+    # Count
+    - variable: '`{{synthetics.attributes.count}}`'
+      test_type: API
+      subtype: Multistep
+      category: Count
+      description: The count object with step statistics
+    - variable: '`{{synthetics.attributes.count}}`'
+      test_type: Browser
+      category: Count
+      description: The count object with step statistics
+    - variable: '`{{synthetics.attributes.count}}`'
+      test_type: Mobile
+      category: Count
+      description: The count object with step statistics
+    - variable: '`{{synthetics.attributes.count.steps.total}}`'
+      test_type: API
+      subtype: Multistep
+      category: Count
+      description: The total number of steps
+    - variable: '`{{synthetics.attributes.count.steps.total}}`'
+      test_type: Browser
+      category: Count
+      description: The total number of steps
+    - variable: '`{{synthetics.attributes.count.steps.total}}`'
+      test_type: Mobile
+      category: Count
+      description: The total number of steps
+    - variable: '`{{synthetics.attributes.count.steps.completed}}`'
+      test_type: API
+      subtype: Multistep
+      category: Count
+      description: The number of steps that were run
+    - variable: '`{{synthetics.attributes.count.steps.completed}}`'
+      test_type: Browser
+      category: Count
+      description: The number of steps that were run
+    - variable: '`{{synthetics.attributes.count.steps.completed}}`'
+      test_type: Mobile
+      category: Count
+      description: The number of steps that were run
+    - variable: '`{{synthetics.attributes.count.errors}}`'
+      test_type: API
+      subtype: Multistep
+      category: Count
+      description: Total number of failed steps
+    - variable: '`{{synthetics.attributes.count.errors}}`'
+      test_type: Browser
+      category: Count
+      description: Total number of browser errors
+    - variable: '`{{synthetics.attributes.count.errors}}`'
+      test_type: Mobile
+      category: Count
+      description: Total number of failed steps
+    - variable: '`{{synthetics.attributes.count.hops}}`'
+      test_type: API
+      subtype: TCP
+      category: Count
+      description: The number of traceroute hops
+    - variable: '`{{synthetics.attributes.count.hops}}`'
+      test_type: API
+      subtype: ICMP
+      category: Count
+      description: The number of traceroute hops
+
+    # Local Config Variables
+    - variable: '`{{synthetics.attributes.result.variables.config}}`'
+      test_type: All
+      category: Local Variables
+      description: Local variables configured for the test
+    - variable: '`{{synthetics.attributes.result.variables.config.name}}`'
+      test_type: All
+      category: Local Variables
+      description: Variable name
+    - variable: '`{{synthetics.attributes.result.variables.config.type}}`'
+      test_type: All
+      category: Local Variables
+      description: Variable type
+    - variable: '`{{synthetics.attributes.result.variables.config.secure}}`'
+      test_type: All
+      category: Local Variables
+      description: Whether the variable value is obfuscated
+    - variable: '`{{synthetics.attributes.result.variables.config.value}}`'
+      test_type: All
+      category: Local Variables
+      description: Variable value (non-obfuscated only)
+
+    # Global/Extracted Variables
+    - variable: '`{{synthetics.attributes.result.variables.extracted}}`'
+      test_type: All
+      category: Global Variables
+      description: Extracted variables that update global variable values
+    - variable: '`{{synthetics.attributes.result.variables.extracted.id}}`'
+      test_type: All
+      category: Global Variables
+      description: Global variable ID
+    - variable: '`{{synthetics.attributes.result.variables.extracted.name}}`'
+      test_type: All
+      category: Global Variables
+      description: Variable name
+    - variable: '`{{synthetics.attributes.result.variables.extracted.secure}}`'
+      test_type: All
+      category: Global Variables
+      description: Whether the variable value is obfuscated
+    - variable: '`{{synthetics.attributes.result.variables.extracted.val}}`'
+      test_type: All
+      category: Global Variables
+      description: 'Variable value (note: uses `.val`, not `.value`)'
+
+    # Step Extracted Variables
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.name}}`'
+      test_type: API
+      subtype: Multistep
+      category: Step Variables
+      description: Extracted variable name from a specific step
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.name}}`'
+      test_type: Browser
+      category: Step Variables
+      description: Extracted variable name from a specific step
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.name}}`'
+      test_type: Mobile
+      category: Step Variables
+      description: Extracted variable name from a specific step
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.secure}}`'
+      test_type: API
+      subtype: Multistep
+      category: Step Variables
+      description: Whether the extracted value is obfuscated
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.secure}}`'
+      test_type: Browser
+      category: Step Variables
+      description: Whether the extracted value is obfuscated
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.secure}}`'
+      test_type: Mobile
+      category: Step Variables
+      description: Whether the extracted value is obfuscated
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.value}}`'
+      test_type: API
+      subtype: Multistep
+      category: Step Variables
+      description: Extracted variable value (if step was successful)
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.value}}`'
+      test_type: Browser
+      category: Step Variables
+      description: Extracted variable value (if step was successful)
+    - variable: '`{{synthetics.attributes.result.steps.<index>.extractedValue.value}}`'
+      test_type: Mobile
+      category: Step Variables
+      description: Extracted variable value (if step was successful)
+
+    # General Step Properties
+    - variable: '`{{synthetics.attributes.result.steps.<index>.id}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Unique step identifier
+    - variable: '`{{synthetics.attributes.result.steps.<index>.id}}`'
+      test_type: Browser
+      category: Steps
+      description: Unique step identifier
+    - variable: '`{{synthetics.attributes.result.steps.<index>.id}}`'
+      test_type: Mobile
+      category: Steps
+      description: Unique step identifier
+    - variable: '`{{synthetics.attributes.result.steps.<index>.status}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Step execution status
+    - variable: '`{{synthetics.attributes.result.steps.<index>.status}}`'
+      test_type: Browser
+      category: Steps
+      description: Step execution status
+    - variable: '`{{synthetics.attributes.result.steps.<index>.status}}`'
+      test_type: Mobile
+      category: Steps
+      description: Step execution status
+    - variable: '`{{synthetics.attributes.result.steps.<index>.type}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Type of step being executed
+    - variable: '`{{synthetics.attributes.result.steps.<index>.type}}`'
+      test_type: Browser
+      category: Steps
+      description: Type of step being executed
+    - variable: '`{{synthetics.attributes.result.steps.<index>.type}}`'
+      test_type: Mobile
+      category: Steps
+      description: Type of step being executed
+    - variable: '`{{synthetics.attributes.result.steps.<index>.duration}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Step execution duration in milliseconds
+    - variable: '`{{synthetics.attributes.result.steps.<index>.duration}}`'
+      test_type: Browser
+      category: Steps
+      description: Step execution duration in milliseconds
+    - variable: '`{{synthetics.attributes.result.steps.<index>.duration}}`'
+      test_type: Mobile
+      category: Steps
+      description: Step execution duration in milliseconds
+    - variable: '`{{synthetics.attributes.result.steps.<index>.description}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Step description
+    - variable: '`{{synthetics.attributes.result.steps.<index>.description}}`'
+      test_type: Browser
+      category: Steps
+      description: Step description
+    - variable: '`{{synthetics.attributes.result.steps.<index>.description}}`'
+      test_type: Mobile
+      category: Steps
+      description: Step description
+    - variable: '`{{synthetics.attributes.result.steps.<index>.failure.message}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Step failure message
+    - variable: '`{{synthetics.attributes.result.steps.<index>.failure.message}}`'
+      test_type: Browser
+      category: Steps
+      description: Step failure message
+    - variable: '`{{synthetics.attributes.result.steps.<index>.failure.message}}`'
+      test_type: Mobile
+      category: Steps
+      description: Step failure message
+    - variable: '`{{synthetics.attributes.result.steps.<index>.failure.code}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Step failure code
+    - variable: '`{{synthetics.attributes.result.steps.<index>.failure.code}}`'
+      test_type: Browser
+      category: Steps
+      description: Step failure code
+    - variable: '`{{synthetics.attributes.result.steps.<index>.failure.code}}`'
+      test_type: Mobile
+      category: Steps
+      description: Step failure code
+    - variable: '`{{synthetics.attributes.result.steps.<index>.url}}`'
+      test_type: Browser
+      category: Steps
+      description: URL for the step
+    - variable: '`{{synthetics.attributes.result.steps.<index>.allowFailure}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Whether the step can fail without failing the test
+    - variable: '`{{synthetics.attributes.result.steps.<index>.allowFailure}}`'
+      test_type: Browser
+      category: Steps
+      description: Whether the step can fail without failing the test
+    - variable: '`{{synthetics.attributes.result.steps.<index>.allowFailure}}`'
+      test_type: Mobile
+      category: Steps
+      description: Whether the step can fail without failing the test
+    - variable: '`{{synthetics.attributes.result.steps.<index>.isCritical}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Whether the step is critical to the test
+    - variable: '`{{synthetics.attributes.result.steps.<index>.isCritical}}`'
+      test_type: Browser
+      category: Steps
+      description: Whether the step is critical to the test
+    - variable: '`{{synthetics.attributes.result.steps.<index>.isCritical}}`'
+      test_type: Mobile
+      category: Steps
+      description: Whether the step is critical to the test
+
+    # Subtest Information
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subTest.id}}`'
+      test_type: Browser
+      category: Subtests
+      description: Subtest identifier
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subTest.id}}`'
+      test_type: API
+      subtype: Multistep
+      category: Subtests
+      description: Subtest identifier
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subStep.parentStep.id}}`'
+      test_type: Browser
+      category: Subtests
+      description: Parent step identifier
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subStep.parentStep.id}}`'
+      test_type: API
+      subtype: Multistep
+      category: Subtests
+      description: Parent step identifier
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subStep.parentTest.id}}`'
+      test_type: Browser
+      category: Subtests
+      description: Parent test identifier
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subStep.parentTest.id}}`'
+      test_type: API
+      subtype: Multistep
+      category: Subtests
+      description: Parent test identifier
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subStep.level}}`'
+      test_type: Browser
+      category: Subtests
+      description: Nesting level (1 for subtests, 2 for subtests of subtests)
+    - variable: '`{{synthetics.attributes.variables.extracted.steps.subStep.level}}`'
+      test_type: API
+      subtype: Multistep
+      category: Subtests
+      description: Nesting level (1 for subtests, 2 for subtests of subtests)
+
+    # Browser Test Specific
+    - variable: '`{{synthetics.attributes.variables.extracted.apiTest.request}}`'
+      test_type: Browser
+      category: API Test Steps
+      description: API test request configuration (for "Run API Test" steps)
+    - variable: '`{{synthetics.attributes.variables.extracted.apiTest.result}}`'
+      test_type: Browser
+      category: API Test Steps
+      description: API test result data
+    - variable: '`{{synthetics.attributes.variables.extracted.assertionResult.expected}}`'
+      test_type: Browser
+      category: Assertions
+      description: Expected value for assertions
+    - variable: '`{{synthetics.attributes.variables.extracted.assertionResults.checkType}}`'
+      test_type: Browser
+      category: Assertions
+      description: Type of assertion check
+    - variable: '`{{synthetics.attributes.variables.extracted.assertionResults.actual}}`'
+      test_type: Browser
+      category: Assertions
+      description: Actual value found during assertion
+    - variable: '`{{synthetics.attributes.variables.extracted.browserErrors}}`'
+      test_type: Browser
+      category: Errors
+      description: List of browser errors encountered
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.firstByte}}`'
+      test_type: Browser
+      category: Timings
+      description: Time to first byte
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.tcp}}`'
+      test_type: Browser
+      category: Timings
+      description: TCP connection timing
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.tcp}}`'
+      test_type: API
+      subtype: HTTP
+      category: Timings
+      description: TCP connection timing
+    - variable: '`{{synthetics.attributes.variables.extracted.description}}`'
+      test_type: Browser
+      category: Steps
+      description: Step description
+    - variable: '`{{synthetics.attributes.variables.extracted.description}}`'
+      test_type: Mobile
+      category: Steps
+      description: Step description
+
+    # Mobile Test Specific
+    - variable: '`{{synthetics.attributes.variables.extracted.application.versionId}}`'
+      test_type: Mobile
+      category: Application
+      description: Mobile application version identifier
+    - variable: '`{{synthetics.attributes.variables.extracted.apiTest}}`'
+      test_type: Mobile
+      category: API Test Steps
+      description: API test data (for API test steps within mobile tests)
+
+    # API Test - Multistep
+    - variable: '`{{synthetics.attributes.variables.extracted.name}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Step name
+    - variable: '`{{synthetics.attributes.variables.extracted.type}}`'
+      test_type: API
+      subtype: Multistep
+      category: Steps
+      description: Step type
+
+    # API Test - HTTP
+    - variable: '`{{synthetics.attributes.variables.extracted.assertions.actual}}`'
+      test_type: API
+      subtype: HTTP
+      category: Assertions
+      description: Actual value from assertion
+    - variable: '`{{synthetics.attributes.variables.extracted.assertions.expected}}`'
+      test_type: API
+      subtype: HTTP
+      category: Assertions
+      description: Expected value for assertion
+    - variable: '`{{synthetics.attributes.variables.extracted.assertions.operator}}`'
+      test_type: API
+      subtype: HTTP
+      category: Assertions
+      description: Assertion operator
+    - variable: '`{{synthetics.attributes.variables.extracted.assertions.type}}`'
+      test_type: API
+      subtype: HTTP
+      category: Assertions
+      description: Assertion type
+    - variable: '`{{synthetics.attributes.variables.extracted.dnsResolution.resolvedIp}}`'
+      test_type: API
+      subtype: HTTP
+      category: DNS
+      description: Resolved IP address
+    - variable: '`{{synthetics.attributes.variables.extracted.dnsResolution.server}}`'
+      test_type: API
+      subtype: HTTP
+      category: DNS
+      description: DNS server used
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.dns}}`'
+      test_type: API
+      subtype: HTTP
+      category: Timings
+      description: DNS resolution time
+    - variable: '`{{synthetics.attributes.variables.extracted.request.url}}`'
+      test_type: API
+      subtype: HTTP
+      category: Request
+      description: Request URL
+    - variable: '`{{synthetics.attributes.variables.extracted.request.host}}`'
+      test_type: API
+      subtype: HTTP
+      category: Request
+      description: Request host
+    - variable: '`{{synthetics.attributes.variables.extracted.request.host}}`'
+      test_type: API
+      subtype: ICMP
+      category: Request
+      description: Target host
+    - variable: '`{{synthetics.attributes.variables.extracted.response.body}}`'
+      test_type: API
+      subtype: HTTP
+      category: Response
+      description: Response body content
+    - variable: '`{{synthetics.attributes.variables.extracted.response.statusCode}}`'
+      test_type: API
+      subtype: HTTP
+      category: Response
+      description: HTTP status code
+    - variable: '`{{synthetics.attributes.variables.extracted.response.headers}}`'
+      test_type: API
+      subtype: HTTP
+      category: Response
+      description: Response headers
+    - variable: '`{{synthetics.attributes.variables.extracted.response.httpVersion}}`'
+      test_type: API
+      subtype: HTTP
+      category: Response
+      description: HTTP version
+    - variable: '`{{synthetics.attributes.variables.extracted.response.redirects}}`'
+      test_type: API
+      subtype: HTTP
+      category: Response
+      description: Redirect information
+
+    # WebSocket
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.open}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Timings
+      description: Time to open connection (milliseconds)
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.receive}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Timings
+      description: Time to receive response
+    - variable: '`{{synthetics.attributes.variables.extracted.handshake.request}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Handshake
+      description: Handshake request data
+    - variable: '`{{synthetics.attributes.variables.extracted.handshake.response}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Handshake
+      description: Handshake response data
+    - variable: '`{{synthetics.attributes.variables.extracted.request.message}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Request
+      description: Request message
+    - variable: '`{{synthetics.attributes.variables.extracted.request.message}}`'
+      test_type: API
+      subtype: gRPC
+      category: Request
+      description: Request message
+    - variable: '`{{synthetics.attributes.variables.extracted.request.message}}`'
+      test_type: API
+      subtype: UDP
+      category: Request
+      description: Request message
+    - variable: '`{{synthetics.attributes.variables.extracted.response.message}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Response
+      description: Response message
+    - variable: '`{{synthetics.attributes.variables.extracted.response.message}}`'
+      test_type: API
+      subtype: gRPC
+      category: Response
+      description: Response message
+    - variable: '`{{synthetics.attributes.variables.extracted.response.message}}`'
+      test_type: API
+      subtype: UDP
+      category: Response
+      description: Response message
+    - variable: '`{{synthetics.attributes.variables.extracted.close.reason}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Connection
+      description: Connection close reason
+    - variable: '`{{synthetics.attributes.variables.extracted.close.statusCode}}`'
+      test_type: API
+      subtype: WebSocket
+      category: Connection
+      description: Connection close status code
+
+    # gRPC
+    - variable: '`{{synthetics.attributes.variables.extracted.callType}}`'
+      test_type: API
+      subtype: gRPC
+      category: Request
+      description: 'Call type (`unary` or `healthcheck`)'
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.rpc}}`'
+      test_type: API
+      subtype: gRPC
+      category: Timings
+      description: RPC call timing
+    - variable: '`{{synthetics.attributes.variables.extracted.response.healthcheck.status}}`'
+      test_type: API
+      subtype: gRPC
+      category: Response
+      description: Health check status
+
+    # UDP
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.message}}`'
+      test_type: API
+      subtype: UDP
+      category: Timings
+      description: Message timing
+
+    # TCP
+    - variable: '`{{synthetics.attributes.variables.extracted.connectionOutcome}}`'
+      test_type: API
+      subtype: TCP
+      category: Connection
+      description: Connection result
+    - variable: '`{{synthetics.attributes.variables.extracted.netpath.routers.ip}}`'
+      test_type: API
+      subtype: TCP
+      category: Network Path
+      description: Router IP addresses
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.min}}`'
+      test_type: API
+      subtype: TCP
+      category: Traceroute
+      description: Minimum latency
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.min}}`'
+      test_type: API
+      subtype: ICMP
+      category: Traceroute
+      description: Minimum latency
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.max}}`'
+      test_type: API
+      subtype: TCP
+      category: Traceroute
+      description: Maximum latency
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.max}}`'
+      test_type: API
+      subtype: ICMP
+      category: Traceroute
+      description: Maximum latency
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.avg}}`'
+      test_type: API
+      subtype: TCP
+      category: Traceroute
+      description: Average latency
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.avg}}`'
+      test_type: API
+      subtype: ICMP
+      category: Traceroute
+      description: Average latency
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.stddev}}`'
+      test_type: API
+      subtype: TCP
+      category: Traceroute
+      description: Latency standard deviation
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.stddev}}`'
+      test_type: API
+      subtype: ICMP
+      category: Traceroute
+      description: Latency standard deviation
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.values}}`'
+      test_type: API
+      subtype: TCP
+      category: Traceroute
+      description: Latency values array
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute.latency.values}}`'
+      test_type: API
+      subtype: ICMP
+      category: Traceroute
+      description: Latency values array
+
+    # ICMP
+    - variable: '`{{synthetics.attributes.variables.extracted.traceroute}}`'
+      test_type: API
+      subtype: ICMP
+      category: Traceroute
+      description: Traceroute object (same structure as TCP)
+    - variable: '`{{synthetics.attributes.variables.extracted.ping}}`'
+      test_type: API
+      subtype: ICMP
+      category: Network
+      description: Ping results
+    - variable: '`{{synthetics.attributes.variables.extracted.latency.min}}`'
+      test_type: API
+      subtype: ICMP
+      category: Latency
+      description: Minimum latency
+    - variable: '`{{synthetics.attributes.variables.extracted.latency.max}}`'
+      test_type: API
+      subtype: ICMP
+      category: Latency
+      description: Maximum latency
+    - variable: '`{{synthetics.attributes.variables.extracted.latency.avg}}`'
+      test_type: API
+      subtype: ICMP
+      category: Latency
+      description: Average latency
+    - variable: '`{{synthetics.attributes.variables.extracted.latency.stddev}}`'
+      test_type: API
+      subtype: ICMP
+      category: Latency
+      description: Latency standard deviation
+    - variable: '`{{synthetics.attributes.variables.extracted.latency.values}}`'
+      test_type: API
+      subtype: ICMP
+      category: Latency
+      description: Latency values array
+
+    # SSL
+    - variable: '`{{synthetics.attributes.variables.extracted.cert}}`'
+      test_type: API
+      subtype: SSL
+      category: Certificate
+      description: SSL certificate information
+    - variable: '`{{synthetics.attributes.variables.extracted.cipher}}`'
+      test_type: API
+      subtype: SSL
+      category: Certificate
+      description: Cipher suite used
+    - variable: '`{{synthetics.attributes.variables.extracted.issuer}}`'
+      test_type: API
+      subtype: SSL
+      category: Certificate
+      description: Certificate issuer
+    - variable: '`{{synthetics.attributes.variables.extracted.subject}}`'
+      test_type: API
+      subtype: SSL
+      category: Certificate
+      description: Certificate subject
+    - variable: '`{{synthetics.attributes.variables.extracted.valid.from}}`'
+      test_type: API
+      subtype: SSL
+      category: Certificate
+      description: Certificate valid from date
+    - variable: '`{{synthetics.attributes.variables.extracted.valid.to}}`'
+      test_type: API
+      subtype: SSL
+      category: Certificate
+      description: Certificate valid to date
+    - variable: '`{{synthetics.attributes.variables.extracted.ocsp}}`'
+      test_type: API
+      subtype: SSL
+      category: Certificate
+      description: OCSP (Online Certificate Status Protocol) information
+    - variable: '`{{synthetics.attributes.variables.extracted.timings.handshake}}`'
+      test_type: API
+      subtype: SSL
+      category: Timings
+      description: SSL handshake timing
+
+    # DNS
+    - variable: '`{{synthetics.attributes.variables.extracted.response.records.type}}`'
+      test_type: API
+      subtype: DNS
+      category: DNS
+      description: DNS record type
+    - variable: '`{{synthetics.attributes.variables.extracted.response.records.values}}`'
+      test_type: API
+      subtype: DNS
+      category: DNS
+      description: DNS record values
+
 ---
 
 ## Overview
 
 Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix. 
 
-**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab of a test run in the [Results Explorer][1], then reference the path directly within your monitor configuration. 
+**Note:** Variable availability depends on the test type. To verify available data, export a test result as JSON from the **Actions** tab in the [Results Explorer][1]. Use this output to confirm the exact paths for your monitor configuration.
 
 {{< img src="synthetics/notifications/action_tab.png" alt="Actions tab from the Synthetics Result Explorer with Export Result JSON highlighted" style="width:90%;" >}}
 
 ## Available variables
 
-### Test execution variables
+Use the filters below to find variables by test type or category. For API tests, use the **Subtype** filter to narrow down to specific protocols (HTTP, TCP, UDP, WebSocket, SSL, DNS, ICMP, gRPC, or Multistep). 
 
-Use these variables to include details about the test, execution location, device, and result status in your notification messages.
+Replace `<index>` in step variables with a step number (0-based), step name in brackets, or step ID. See the [step reference](#step-reference-methods) section for more information.
 
-{{< tabs >}}
-{{% tab "Test Info" %}}
+{{< multifilter-search >}}
 
-`{{synthetics.attributes.test}}`
-: The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
+## Step reference methods
 
-`{{synthetics.attributes.test.name}}`
-: The name of the test
+For tests with steps, you can reference steps in three ways:
 
-`{{synthetics.attributes.test.type}}`
-: Test type (for example, `api`)
-
-`{{synthetics.attributes.test.subType}}`
-: Subtype for API tests (for example, `http`, `dns`, and `multi`)
-
-`{{synthetics.attributes.test.id}}`
-: The test's public ID (for example, `abc-def-ghi`)
-
-{{% /tab %}}
-{{% tab "Location" %}}
-
-`{{synthetics.attributes.location}}`
-: The `location` object contains information about the location of where the test is run from
-
-`{{synthetics.attributes.location.id}}`
-: Location ID (for example, `aws:eu-central-1`)
-
-`{{synthetics.attributes.location.name}}`
-: Name of the location (for example, `Frankfurt (AWS)`)
-
-`{{synthetics.attributes.location.privateLocation}}`
-: `true` for Private Locations
-
-{{% /tab %}}
-{{% tab "Device" %}}
-
-Applies to browser and mobile tests.
-
-`{{synthetics.attributes.device}}`
-: The `device` object contains information about the device on which the test is run on
-
-`{{synthetics.attributes.device.id}}`
-: Device identifier
-
-`{{synthetics.attributes.device.name}}`
-: Human-readable device name
-
-`{{synthetics.attributes.device.type}}`
-: Device type classification
-
-`{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
-: Screen resolution dimensions
-
-`{{synthetics.attributes.device.browser.type}}`
-: Browser type (browser tests only)
-
-`{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
-: Platform information (mobile tests only)
-
-**Example values:**
-```json
-{
-  "device": {
-    "id": "chrome.laptop_large",
-    "name": "Laptop Large",
-    "type": "laptop",
-    "resolution": {"width": 1440, "height": 1100},
-    "browser": {"type": "Chrome"},
-    "platform": {"name": "Android", "version": "14"}
-  }
-}
-```
-
-{{% /tab %}}
-{{% tab "Result" %}}
-
-`{{synthetics.attributes.result}}`
-: The `result` object contains information about the executed test run
-
-`{{synthetics.attributes.result.id}}`
-: Unique result ID
-
-`{{synthetics.attributes.result.status}}`
-: Test execution status (for example, `passed` or `failed`)
-
-`{{synthetics.attributes.result.duration}}`
-: Test duration in milliseconds
-
-`{{synthetics.attributes.result.testStartedAt}}`, `{{synthetics.attributes.result.testFinishedAt}}`, `{{synthetics.attributes.result.testTriggeredAt}}`
-: Epoch timestamps in milliseconds
-
-`{{synthetics.attributes.result.failure}}`
-: The `failure` object contains information about why the test failed
-
-`{{synthetics.attributes.result.failure.message}}`
-: The failure message
-
-`{{synthetics.attributes.result.failure.code}}`
-: The failure code
-
-**Example values:**
-```json
-{
-  "result": {
-    "id": "3015485096247415772",
-    "status": "failed",
-    "duration": 9096,
-    "testStartedAt": 1743760758904,
-    "testFinishedAt": 1743760772025,
-    "testTriggeredAt": 1743760758593,
-    "failure": {
-      "message": "Error: Element's content should match the given regex",
-      "code": "ASSERTION_FAILURE"
-    }
-  }
-}
-```
-
-{{% /tab %}}
-{{% tab "Count" %}}
-
-Applies to Multistep, Browser, and Mobile tests.
-
-`{{synthetics.attributes.count}}`
-: The `count` object contains step statistics about the test
-
-`{{synthetics.attributes.count.steps.total}}`
-: The total number of steps
-
-`{{synthetics.attributes.count.steps.completed}}`
-: The number of steps that were run
-
-`{{synthetics.attributes.count.errors}}`
-: The total number of errors that occurred while running the test. For multistep and mobile tests, this is the number of failed steps. For browser tests, this is the sum of all browser errors. 
-
-`{{synthetics.attributes.count.hops}}`
-: The number of traceroute hops for TCP and ICMP tests
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Result variables
-
-These variables provide access to local and global variable values used during test execution. Use them to include variable names, types, and values in your notifications. These variables are accessed with the `{{synthetics.attributes.result}}` prefix.
-
-{{< tabs >}}
-{{% tab "Local config variables" %}}
-
-These are local variables configured for API tests or defined outside individual steps in step-based tests. This also includes variables created by JavaScript code execution.
-
-Located at `{{synthetics.attributes.result.variables.config}}`:
-
-`{{synthetics.attributes.result.variables.config.name}}`
-: Variable name
-
-`{{synthetics.attributes.result.variables.config.type}}`
-: Variable type
-
-`{{synthetics.attributes.result.variables.config.secure}}`
-: Whether the variable value is obfuscated
-
-`{{synthetics.attributes.result.variables.config.value}}`
-: Variable value (non-obfuscated only)
-
-**Examples:**
-```json
-{
-  "name": "RANDOM_NUMBER",
-  "type": "text",
-  "secure": false,
-  "value": "133245995"
-}
-```
-
-{{% /tab %}}
-{{% tab "Global variables" %}}
-
-These are extracted variables whose value updates a global variable value. 
-
-Available only for **successful test results** and **recovery notifications**.
-
-Located at `{{synthetics.attributes.result.variables.extracted}}`:
-
-`{{synthetics.attributes.result.variables.extracted.id}}`
-: Global variable ID
-
-`{{synthetics.attributes.result.variables.extracted.name}}`
-: Variable name
-
-`{{synthetics.attributes.result.variables.extracted.secure}}`
-: Whether the variable value is obfuscated
-
-`{{synthetics.attributes.result.variables.extracted.val}}`
-: Variable value (note: uses `.val`, not `.value`)
-
-**Examples:**
-```json
-{
-  "id": "ec734823-536e-4aba-8b5f-55733189d936",
-  "name": "EXTRACTED_NUMBER",
-  "secure": false,
-  "val": "250661"
-}
-```
-
-{{% /tab %}}
-{{% tab "Step extracted variables" %}}
-
-For tests with steps, step data is contained in `{{synthetics.attributes.result.steps.<step-index>.extractedValue}}`. For information on how to access the `<step-index>` see the [step summary](#step-summary) section below.
-
-`synthetics.attributes.result.steps.<step-index>.extractedValue.name`
-: Variable name
-
-`synthetics.attributes.result.steps.<step-index>.extractedValue.secure`
-: Whether the variable value is obfuscated
-
-`synthetics.attributes.result.steps.<step-index>.extractedValue.value`
-: Variable value (if step was successful)
-
-**Examples:**
-```json
-{
-  "extractedValue": {
-    "name": "EXTRACTED_COUNT",
-    "secure": false,
-    "value": "12"
-  }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Variables extracted by steps
-
-For multistep API, browser, and mobile tests, extracted variables are available at the step level within the `synthetics.attributes.variables.extracted` property. These values are only available when the step completes successfully.
-
-{{< tabs >}}
-{{% tab "General steps" %}}
-
-**For multistep/browser/mobile tests**:
-
-`synthetics.attributes.variables.extracted.steps.allowFailure`
-: Whether the step is allowed to fail without failing the entire test
-
-`synthetics.attributes.variables.extracted.steps.duration`
-: Step execution duration in milliseconds
-
-`synthetics.attributes.variables.extracted.steps.failure`
-: Failure information object containing `.code` and `.message`
-
-`synthetics.attributes.variables.extracted.steps.id`
-: Unique step identifier
-
-`synthetics.attributes.variables.extracted.steps.isCritical`
-: Whether the step is critical to the test
-
-`synthetics.attributes.variables.extracted.steps.status`
-: Step execution status
-
-`synthetics.attributes.variables.extracted.steps.type`
-: Type of step being executed
-
-**Subtest information:**
-
-`synthetics.attributes.variables.extracted.steps.subTest.id`
-: Subtest identifier
-
-`synthetics.attributes.variables.extracted.steps.subStep.parentStep.id`
-: Parent step identifier
-
-`synthetics.attributes.variables.extracted.steps.subStep.parentTest.id`
-: Parent test identifier
-
-`synthetics.attributes.variables.extracted.steps.subStep.level`
-: Nesting level (1 for subtests, 2 for subtests of subtests)
-
-**Examples:**
-```json
-{
-  "steps": [
-    {
-      "allowFailure": false,
-      "duration": 10955,
-      "failure": {
-        "code": "ASSERTION_FAILURE",
-        "message": "Element's content should not equal given value."
-      },
-      "id": "g8e-q4a-fix",
-      "isCritical": true,
-      "status": "failed",
-      "type": "assertElementContent",
-      "subTest": {
-        "id": "m2i-fcy-eva"
-      },
-      "subStep": {
-        "parentStep": {"id": "ikj-juk-z2u"},
-        "parentTest": {"id": "th5-wic-5mj"},
-        "level": 1
-      }
-    }
-  ]
-}
-```
-
-{{% /tab %}}
-{{% tab "Browser Tests" %}}
-
-**General:**
-
-`{{synthetics.attributes.result.startUrl}}`
-: URL from test configuration
-
-**Steps:**
-
-`synthetics.attributes.variables.extracted.apiTest.request`
-: API test request configuration (only for "Run API Test" steps where `type` is `runApiTest`)
-
-`synthetics.attributes.variables.extracted.apiTest.result`
-: API test result data (similar to `attributes.result` for API tests)
-
-`synthetics.attributes.variables.extracted.assertionResult.expected`
-: Expected value for assertions
-
-`synthetics.attributes.variables.extracted.assertionResults.checkType`
-: Type of assertion check
-
-`synthetics.attributes.variables.extracted.assertionResults.actual`
-: Actual value found during assertion
-
-`synthetics.attributes.variables.extracted.browserErrors`
-: List of browser errors encountered
-
-`synthetics.attributes.variables.extracted.timings.firstByte`
-: Time to first byte
-
-`synthetics.attributes.variables.extracted.timings.tcp`
-: TCP connection timing
-
-`synthetics.attributes.variables.extracted.description`
-: Step description
-
-**Examples:**
-```json
-{
-  "startUrl": "https://datadoghq.com",
-  "apiTest": {
-    "request": {
-      "subType": "http",
-      "method": "GET",
-      "url": "https://datadoghq.com"
-    },
-    "result": {
-      "statusCode": 200
-    }
-  },
-  "assertionResults": {
-    "expected": "100",
-    "checkType": "equals",
-    "actual": "200"
-  },
-  "timings": {
-    "firstByte": 7.1,
-    "tcp": 5.2
-  }
-}
-```
-
-Examples for `.browserErrors`:
-
-```json
-{
-    "name": "Console error",
-    "description": "Failed to load resource: the server responded with a status of 403 ()",
-    "type": "js"
-},
-{
-    "name": "[GET] 403 - https://accounts.google.com/v3/signin/identifier?dsh=S688774280%3A1687962864348747&conti",
-    "description": "https://accounts.google.com/v3/signin/identifier?dsh=S688774280%3A1687962864348747&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3D%252Fsignin_passive%26feature%3Dpassive&hl=en&ifkv=AeDOFXjMKzxp0wt-b9IzWKz6RS9Kk-VmW5z_fzLP_cjbSWd4hWeP5g53fvdrhX6b2cDVQrNtJ5B7vA&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin\n<html lang=en><meta charset=utf-8><meta name=viewport content=\"initial-scale=1, minimum-sca",
-    "type": "network",
-    "status": 403
-},
-{
-    "method": "POST",
-    "name": "https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-",
-    "description": "Request was pending when step timed out: POST - https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-    "type": "network",
-    "url": {
-        "protocol": "https:",
-        "search": "?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-        "domain": "datadoghq.com",
-        "origin": "https://8b61d74c.datadoghq.com",
-        "full": "https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-      "pathname": "/api/v2/rum"
-    }
-},
-```
-{{% /tab %}}
-{{% tab "Mobile Tests" %}}
-
-`synthetics.attributes.variables.extracted.application.versionId`
-: Mobile application version identifier
-
-`synthetics.attributes.variables.extracted.apiTest`
-: API test data (for API test steps within mobile tests)
-
-`synthetics.attributes.variables.extracted.description`
-: Step description
-
-**Examples:**
-```json
-{
-  "application": {
-    "versionId": "4408df2e-9b7a-4665-9510-b9041b2ae1e8"
-  },
-  "description": "Tap on Button Sign In"
-}
-```
-
-{{% /tab %}}
-{{% tab "API Tests" %}}
-
-**Multistep:**
-
-`synthetics.attributes.variables.extracted.name`
-: Step name
-
-`synthetics.attributes.variables.extracted.type`
-: Step type
-
-*Note: Follow regular API fields per subType*
-
-**Non-Multistep:**
-
-`synthetics.attributes.variables.extracted.assertions.actual`
-: Actual value from assertion
-
-`synthetics.attributes.variables.extracted.assertions.expected`
-: Expected value for assertion
-
-`synthetics.attributes.variables.extracted.assertions.operator`
-: Assertion operator
-
-`synthetics.attributes.variables.extracted.assertions.type`
-: Assertion type
-
-`synthetics.attributes.variables.extracted.dnsResolution.resolvedIp`
-: Resolved IP address
-
-`synthetics.attributes.variables.extracted.dnsResolution.server`
-: DNS server used
-
-`synthetics.attributes.variables.extracted.timings.dns`
-: DNS resolution time
-
-`synthetics.attributes.variables.extracted.timings.tcp`
-: TCP connection time
-
-`synthetics.attributes.variables.extracted.request.url`
-: Request URL
-
-`synthetics.attributes.variables.extracted.request.host`
-: Request host
-
-`synthetics.attributes.variables.extracted.response.body`
-: Response body content
-
-`synthetics.attributes.variables.extracted.response.statusCode`
-: HTTP status code
-
-`synthetics.attributes.variables.extracted.response.headers`
-: Response headers
-
-`synthetics.attributes.variables.extracted.response.httpVersion`
-: HTTP version
-
-`synthetics.attributes.variables.extracted.response.redirects`
-: Redirect information
-
-**Examples:**
-```json
-{
-  "name": "Check API endpoint",
-  "type": "http",
-  "assertions": {
-    "actual": 1.5145,
-    "expected": 1000,
-    "operator": "moreThan",
-    "type": "latency"
-  },
-  "dnsResolution": {
-    "resolvedIp": "18.245.199.78",
-    "server": "8.8.4.4"
-  },
-  "timings": { //Dependent on the sub-type
-    "tcp": 6.9,
-      "download": 33.5,
-      "total": 75,
-      "dns": 7.5,
-      "firstByte": 17.2,
-      "ssl": 9.9
-    },
-  },
-  "request": {
-    "url": "https://www.datadogh.com",
-    "host": "datadoghq.com",
-    "method": "GET"
-  },
-  "response": {
-    "body": "Example Page Content", // Raw text (even if it's JSON, its contents can't be accessed individually), and it's truncated if too big (only the start is available)
-    "statusCode": 200,
-    "headers": { // Object/dictionary of headers, the key is the header name and the value its value
-      "content-type": "text/html; charset=utf-8",
-      "content-length": "250661"
-    },
-    "httpVersion": "1.1",
-    "redirects": [ // List of redirect items
-      {
-        "location": "https://datadoghq.com",
-        "statusCode": 302
-      }
-    ]
-  }
-```
-
-{{% /tab %}}
-{{% tab "Network tests" %}}
-
-{{% collapse-content title="Websocket" level="h4" expanded=false %}}
-
-`synthetics.attributes.variables.extracted.timings.open`
-: Time to open connection (in milliseconds)
-
-`synthetics.attributes.variables.extracted.timings.receive`
-: Time to receive response
-
-`synthetics.attributes.variables.extracted.handshake.request`
-: Handshake request data
-
-`synthetics.attributes.variables.extracted.handshake.response`
-: Handshake response data
-
-`synthetics.attributes.variables.extracted.request.message`
-: WebSocket request message
-
-`synthetics.attributes.variables.extracted.response.message`
-: WebSocket response message
-
-`synthetics.attributes.variables.extracted.close.reason`
-: Connection close reason
-
-`synthetics.attributes.variables.extracted.close.statusCode`
-: Connection close status code
-
-**Examples:**
-```json
-{
-  "timings": {
-    "tcp": 96,
-    "receive": 97,
-    "download": 0,
-    "total": 201.9,
-    "dns": 7.7,
-    "firstByte": 0,
-    "ssl": 1,
-    "open": 0.2
-  },
-  "handshake": {
-    "response": {
-      "statusCode": 101
-    }
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong"
-  },
-  "close": {
-    "reason": "message_received",
-    "statusCode": 1000
-  }
-}
-```
-
-{{< /collapse-content >}}
-
-{{% collapse-content title= "gRPC" level="h4" expanded=false %}}
-
-`synthetics.attributes.variables.extracted.callType`
-: Call type (`unary` or `healthcheck`)
-
-`synthetics.attributes.variables.extracted.timings.rpc`
-: RPC call timing
-
-`synthetics.attributes.variables.extracted.response.healthcheck.status`
-: Health check status
-
-`synthetics.attributes.variables.extracted.request.message`
-: gRPC request message
-
-`synthetics.attributes.variables.extracted.response.message`
-: gRPC response message
-
-**Examples:**
-```json
-{
-  "callType": "healthcheck",
-  "timings": {
-    "total": 55.3,
-    "rpc": 9.2,
-    "dns": 46.1
-  },
-  "response": {
-    "healthcheck": {
-      "status": 1
-    }
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong" // Responses can be truncated if too big (only the start is available)
-  }
-}
-```
-
-{{< /collapse-content >}}
-
-{{% collapse-content title= "UDP" level="h4" expanded=false %}}
-
-`synthetics.attributes.variables.extracted.request.message`
-: UDP request message
-
-`synthetics.attributes.variables.extracted.response.message`
-: UDP response message
-
-`synthetics.attributes.variables.extracted.timings.message`
-: Message timing
-
-**Examples:**
-```json
-{
-  "timings": {
-    "total": 135.3,
-    "dns": 14.4,
-    "message": 120.9
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong"
-  }
-}
-```
-
-{{< /collapse-content >}}
-
-{{% collapse-content title= "TCP" level="h4" expanded=false %}}
-
-`synthetics.attributes.variables.extracted.connectionOutcome`
-: Connection result
-
-`synthetics.attributes.variables.extracted.netpath.routers.ip`
-: Router IP addresses
-
-`synthetics.attributes.variables.extracted.traceroute.latency.min`
-: Minimum latency
-
-`synthetics.attributes.variables.extracted.traceroute.latency.max`
-: Maximum latency
-
-`synthetics.attributes.variables.extracted.traceroute.latency.avg`
-: Average latency
-
-`synthetics.attributes.variables.extracted.traceroute.latency.stddev`
-: Standard deviation
-
-`synthetics.attributes.variables.extracted.traceroute.latency.values`
-: Latency values array
-
-**Examples:**
-```json
-[
-      {
-        "packetLossPercentage": 1,
-        "packetsReceived": 0,
-        "packetsSent": 2,
-        "routers": [
-          {
-            "ip": "???"
-          }
-        ]
-      },
-      {
-        "packetLossPercentage": 0,
-        "packetsReceived": 2,
-        "latency": {
-          "avg": 0.2375,
-          "min": 0.189,
-          "max": 0.286,
-          "values": [
-            0.189,
-            0.286
-          ],
-          "stddev": 0.04849999999999999
-        },
-        "packetsSent": 2,
-        "routers": [
-          {
-            "ip": "10.241.134.75"
-          }
-        ]
-      }
-]
-```
-
-{{< /collapse-content >}}
-
-{{% collapse-content title= "ICMP" level="h4" expanded=false %}}
-
-`synthetics.attributes.variables.extracted.traceroute`
-: Same structure as TCP traceroute
-
-`synthetics.attributes.variables.extracted.request.host`
-: Target host
-
-`synthetics.attributes.variables.extracted.ping`
-: Ping results
-
-`synthetics.attributes.variables.extracted.latency.min`, `synthetics.attributes.variables.extracted.latency.max`, `synthetics.attributes.variables.extracted.latency.avg`, `synthetics.attributes.variables.extracted.latency.stddev`, `synthetics.attributes.variables.extracted.latency.values`
-: Latency measurements (same as TCP)
-
-**Examples:**
-```json
-{
-  "ping": {
-    "packetLossPercentage": 0,
-    "packetsReceived": 4,
-    "latency": {
-      "avg": 1.47375,
-      "min": 1.442,
-      "max": 1.516,
-      "values": [
-        1.467,
-        1.442,
-        1.47,
-        1.516
-      ],
-      "stddev": 0.02670557057993708
-    },
-    "resolvedIp": "18.245.199.70",
-    "packetsSent": 4,
-    "packetSize": 56
-  }
-}
-```
-
-{{< /collapse-content >}}
-
-{{% /tab %}}
-{{% tab "Protocol tests" %}}
-
-{{% collapse-content title= "SSL" level="h4" expanded=false %}}
-
-`synthetics.attributes.variables.extracted.cert`
-: SSL certificate information
-
-`synthetics.attributes.variables.extracted.cipher`
-: Cipher suite used
-
-`synthetics.attributes.variables.extracted.issuer`
-: Certificate issuer
-
-`synthetics.attributes.variables.extracted.subject`
-: Certificate subject
-
-`synthetics.attributes.variables.extracted.valid.from`
-: Certificate valid from date
-
-`synthetics.attributes.variables.extracted.valid.to`
-: Certificate valid to date
-
-`synthetics.attributes.variables.extracted.ocsp`
-: OCSP (Online Certificate Status Protocol) information
-
-`synthetics.attributes.variables.extracted.timings.handshake`
-: SSL handshake timing
-
-**Examples:**
-```json
-      "cipher": TLS_AES_128_GCM_SHA256,
-      "issuer": {
-        "C": "US",
-        "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
-        "O": "DigiCert Inc"
-      },
-```
-```json
-{
-  "issuer": {
-    "C": "US",
-    "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
-    "O": "DigiCert Inc"
-  },
-  "valid.from": 1751414400000, //milliseconds
-  "valid.to": 1783036799000 //milliseconds
-}     
-```
-
-{{< /collapse-content >}}
-
-{{% collapse-content title= "DNS" level="h4" expanded=false %}}
-
-`synthetics.attributes.variables.extracted.response.records.type`
-: DNS record type
-
-`synthetics.attributes.variables.extracted.response.records.values`
-: DNS record values
-
-**Examples:**
-```json
-{
-  "dns": {
-    "response": {
-      "records": {
-        "type": "A",
-        "values": ["192.0.2.1", "192.0.2.2"]
-      }
-    }
-  }
-}
-```
-
-{{< /collapse-content >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Step summary
-
-Access step data by index, name, or ID to reference specific steps in your notification messages. This section also includes summary counts for total steps, completed steps, and errors.
-
-Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, and `.url`.
-
-You can reference steps in three ways:
-
-#### By index (0-based)
+### By index (0-based)
 
 Use positive numbers to count from the beginning, or negative numbers to count from the end:
 
@@ -884,35 +903,31 @@ Use positive numbers to count from the beginning, or negative numbers to count f
 | `synthetics.attributes.result.steps.-1` | Last step |
 | `synthetics.attributes.result.steps.-2` | Second to last step |
 
-#### By step name
+### By step name
 
 Use the step name in brackets:
 
-`.steps[Click button]`
+```shell
+synthetics.attributes.result.steps[Click button].status
+```
 
-#### By step ID
+### By step ID
 
 Use the step's unique identifier:
 
-`.steps.abc-def-ghi`
+```shell
+synthetics.attributes.result.steps.abc-def-ghi.status
+```
 
-#### Accessing step properties
+## Examples
 
 Combine any reference method with a property:
 
-- `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
-- `{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
-- `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
-
-#### Summary counts
-
-| Variable | Description |
-|----------|-------------|
-| `synthetics.attributes.count.steps.total` | Total number of steps |
-| `synthetics.attributes.count.steps.completed` | Number of completed steps |
-| `synthetics.attributes.count.errors` | Number of errors |
-| `synthetics.attributes.count.hops` | Number of network hops (TCP and ICMP tests) |
-
+```shell
+- {{synthetics.attributes.result.steps.-1.status}} - Status of the last step
+- {{synthetics.attributes.result.steps[Click button].status}} - Status of step named "Click button"
+- {{synthetics.attributes.result.steps.abc-def-ghi.status}} - Status of step with ID "abc-def-ghi"
+```
 
 ## Further Reading
 
