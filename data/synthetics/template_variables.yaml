@@ -348,6 +348,59 @@ step_extracted_variables:
               description: DNS record type
             - path: synthetics.attributes.variables.extracted.response.records.values
               description: DNS record values
+        - name: HTTP
+          variables:
+            # Request
+            - path: synthetics.attributes.variables.extracted.request
+              description: Information about the request
+            - path: synthetics.attributes.variables.extracted.request.method
+              description: The HTTP method
+            - path: synthetics.attributes.variables.extracted.request.body
+              description: The request body if set
+            - path: synthetics.attributes.variables.extracted.request.headers
+              description: The request headers
+            # Response
+            - path: synthetics.attributes.variables.extracted.response
+              description: Information about the response
+            - path: synthetics.attributes.variables.extracted.response.body
+              description: The response body as string (truncated if too big)
+            - path: synthetics.attributes.variables.extracted.response.bodySize
+              description: The size of the full response body
+            - path: synthetics.attributes.variables.extracted.response.cacheHeaders
+              description: A dictionary of caching-related headers
+            - path: synthetics.attributes.variables.extracted.response.cdn
+              description: The response CDN info if any
+            - path: synthetics.attributes.variables.extracted.response.cdn.provider
+              description: "The CDN provider name (for example, `akamai`, `cloudflare`)"
+            - path: synthetics.attributes.variables.extracted.response.cdn.cache
+              description: The cache info
+            - path: synthetics.attributes.variables.extracted.response.cdn.cache.cached
+              description: If the data was cached
+            - path: synthetics.attributes.variables.extracted.response.cdn.cache.status
+              description: The cache status as provided in associated cache header
+            - path: synthetics.attributes.variables.extracted.response.headers
+              description: The response headers
+            - path: synthetics.attributes.variables.extracted.response.httpVersion
+              description: The HTTP version
+            - path: synthetics.attributes.variables.extracted.response.redirects
+              description: A list of redirections if any
+            - path: synthetics.attributes.variables.extracted.response.redirects.statusCode
+              description: The HTTP status code for the redirect
+            - path: synthetics.attributes.variables.extracted.response.redirects.location
+              description: The returned location to redirect to
+            - path: synthetics.attributes.variables.extracted.response.statusCode
+              description: The response HTTP status code
+            # Timings
+            - path: synthetics.attributes.variables.extracted.timings.authentication
+              description: "The time spent for the authentication challenge (for example, NTLM)"
+            - path: synthetics.attributes.variables.extracted.timings.download
+              description: The time spent downloading the response
+            - path: synthetics.attributes.variables.extracted.timings.firstByte
+              description: The time spent waiting for the first byte of response to be received
+            - path: synthetics.attributes.variables.extracted.timings.redirect
+              description: The time spent in HTTP redirections
+            - path: synthetics.attributes.variables.extracted.timings.ssl
+              description: The duration of the TLS handshake (only when testing an HTTPS endpoint)
 
 # =============================================================================
 # STEP SUMMARY
