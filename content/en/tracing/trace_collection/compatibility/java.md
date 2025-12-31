@@ -296,7 +296,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 ## Ahead-of-time (AOT) class loading & linking support
 
-To improve startup time, Ahead-of-time (AOT) class loading & linking makes the classes of an application instantly available in a loaded and linked state when the JVM starts. See [JEP 483][15] and [JEP 514][16] for more information.
+To improve startup time, Ahead-of-time (AOT) class loading & linking makes application classes instantly available in a loaded and linked state when the JVM starts. See [JEP 483][15] and [JEP 514][16] for more information.
 
 ### Requirements
 
