@@ -525,5 +525,4 @@ Use the filters below to find template variables for API tests. Filter by **Subt
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/notifications/template_variables/#step-reference-methods
-
+[1]: /synthetics/notifications/template_variables/browser_mobile/#step-reference-methods

@@ -460,15 +460,12 @@ synthetics.attributes.result.steps.abc-def-ghi.status
 
 Combine any reference method with a property:
 
-```shell
-- {{synthetics.attributes.result.steps.-1.status}} - Status of the last step
-- {{synthetics.attributes.result.steps[Click button].status}} - Status of step named "Click button"
-- {{synthetics.attributes.result.steps.abc-def-ghi.status}} - Status of step with ID "abc-def-ghi"
+```text
+- synthetics.attributes.result.steps.-1.status - Status of the last step
+- synthetics.attributes.result.steps[Click button].status - Status of step named "Click button"
+- synthetics.attributes.result.steps.abc-def-ghi.status - Status of step with ID "abc-def-ghi"
 ```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /synthetics/notifications/template_variables/#step-reference-methods
-

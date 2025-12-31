@@ -7793,6 +7793,16 @@ menu:
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables
       weight: 1001
+    - name: Browser and Mobile
+      url: synthetics/notifications/template_variables/browser_mobile
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_browser_mobile
+      weight: 10001
+    - name: API
+      url: synthetics/notifications/template_variables/api
+      parent: synthetics_notifications_template_variables
+      identifier: synthetics_notifications_template_variables_api
+      weight: 10002
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications
