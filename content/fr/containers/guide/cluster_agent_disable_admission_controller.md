@@ -51,7 +51,7 @@ Pour désactiver les contrôleurs d'admission avec votre Agent de cluster géré
 
 Après avoir redéployé l'Agent de cluster avec la configuration mise à jour, les contrôleurs d'admission sont supprimés.
 {{% /tab %}}
-{{% onglet "Helm" %}}
+{{% tab "Helm" %}}
 Pour désactiver les contrôleurs d'admission avec votre Agent de cluster géré par le chart Helm Datadog :
 1. Définissez `clusterAgent.admissionController.enabled` sur `false`.
 2. Définissez `clusterAgent.admissionController.validation.enabled` sur `false`.

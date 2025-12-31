@@ -720,7 +720,7 @@ function visit(query, filename, code) {
 ```scheme
 ; Query:
 (call_expression
-  function: (_field: _ @methodName (#eq? @methodName "doSomething))
+  function: (_field: _ @methodName (#eq? @methodName "doSomething"))
 )
 ```
 

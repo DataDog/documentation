@@ -294,7 +294,7 @@ labels:
    ```yaml
    ad_identifiers:
      - redis
-   init config:
+   init_config:
    instances:
      - host: "%%host%%"
        port: "6379"
