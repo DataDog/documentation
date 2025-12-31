@@ -194,7 +194,7 @@ Applies to Multistep, Browser, and Mobile tests.
 Applies to Multistep, Browser, and Mobile tests.
 
 `{{synthetics.failed_step}}`
-: The `failed_step` object provides a shortcut to the data for the step in `{{synthetics.attributes.result.steps}}` that caused the test to fail. For example, `{{synthetics.failed_step.name}}` maps to `{{synthetics.attributes.result.steps.<step-index>.name}}`, the failing step’s name.
+: The `failed_step` object provides a shortcut to the data for the step in `{{synthetics.attributes.result.steps}}` that caused the test to fail. For example, `{{synthetics.failed_step.name}}` maps to `{{synthetics.attributes.result.steps.<step-index>.name}}`, the failing step's name.
 
 {{% /tab %}}
 {{< /tabs >}}
