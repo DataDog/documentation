@@ -1,0 +1,28 @@
+{{/*
+  Renders Test Execution Variables from data/synthetics/template_variables.yaml
+  Usage: {{ partial "synthetics/template-variables-execution.html" . }}
+*/}}
+
+{{ $data := .Site.Data.synthetics.template_variables }}
+
+{{ with $data.test_execution }}
+<p>{{ .description | markdownify }}</p>
+
+<div class="code-tabs">
+  <ul class="nav nav-tabs d-flex"></ul>
+  <div class="tab-content">
+    {{ range $idx, $cat := .categories }}
+    <div data-lang="{{ $cat.name | lower | anchorize | replace "-" "" }}" class="tab-pane fade" role="tabpanel" title="{{ $cat.name }}">
+      {{ with $cat.note }}<p><em>{{ . | markdownify }}</em></p>{{ end }}
+      <dl class="template-variables">
+        {{ range $cat.variables }}
+        <dt><code>{{ printf "{{%s}}" .path }}</code></dt>
+        <dd>{{ .description | markdownify }}</dd>
+        {{ end }}
+      </dl>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+

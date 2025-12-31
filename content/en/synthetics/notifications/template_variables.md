@@ -21,7 +21,21 @@ Template variables allow you to insert dynamic values from your test results and
 
 ## Available variables
 
-{{< partial name="synthetics/template-variables.html" >}}
+### Test execution variables
+
+{{< partial name="synthetics/template-variables-execution.html" >}}
+
+### Result variables
+
+{{< partial name="synthetics/template-variables-result.html" >}}
+
+### Variables extracted by steps
+
+{{< partial name="synthetics/template-variables-steps.html" >}}
+
+### Step summary
+
+{{< partial name="synthetics/template-variables-summary.html" >}}
 
 ## Further Reading
 

@@ -1,0 +1,63 @@
+{{/*
+  Renders Step Extracted Variables from data/synthetics/template_variables.yaml
+  Usage: {{ partial "synthetics/template-variables-steps.html" . }}
+*/}}
+
+{{ $data := .Site.Data.synthetics.template_variables }}
+
+{{ with $data.step_extracted_variables }}
+<p>{{ .description | markdownify }}</p>
+
+<div class="code-tabs">
+  <ul class="nav nav-tabs d-flex"></ul>
+  <div class="tab-content">
+    {{ range $idx, $cat := .categories }}
+    <div data-lang="{{ $cat.name | lower | anchorize | replace "-" "" }}" class="tab-pane fade" role="tabpanel" title="{{ $cat.name }}">
+      
+      {{ with $cat.note }}<p><em>{{ . | markdownify }}</em></p>{{ end }}
+      
+      {{/* Handle categories with groups */}}
+      {{ with $cat.groups }}
+        {{ range . }}
+        <h4>{{ .name }}</h4>
+        {{ with .note }}<p><em>{{ . | markdownify }}</em></p>{{ end }}
+        <dl class="template-variables">
+          {{ range .variables }}
+          <dt><code>{{ .path }}</code></dt>
+          <dd>{{ .description | markdownify }}</dd>
+          {{ end }}
+        </dl>
+        {{ end }}
+      {{ end }}
+      
+      {{/* Handle categories with direct variables (no groups) */}}
+      {{ with $cat.variables }}
+      <dl class="template-variables">
+        {{ range . }}
+        <dt><code>{{ .path }}</code></dt>
+        <dd>{{ .description | markdownify }}</dd>
+        {{ end }}
+      </dl>
+      {{ end }}
+      
+      {{/* Handle categories with subtypes (Network tests, Protocol tests) */}}
+      {{ with $cat.subtypes }}
+        {{ range . }}
+        <details class="collapse-content">
+          <summary><h4 style="display: inline;">{{ .name }}</h4></summary>
+          <dl class="template-variables">
+            {{ range .variables }}
+            <dt><code>{{ .path }}</code></dt>
+            <dd>{{ .description | markdownify }}</dd>
+            {{ end }}
+          </dl>
+        </details>
+        {{ end }}
+      {{ end }}
+      
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
