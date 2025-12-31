@@ -1,0 +1,391 @@
+# Synthetics Template Variables Data
+# This file contains all template variable definitions for Synthetic Monitoring notifications.
+# Used by: content/en/synthetics/notifications/template_variables.md
+
+# =============================================================================
+# TEST EXECUTION VARIABLES
+# =============================================================================
+test_execution:
+  description: Use these variables to include details about the test, execution location, device, counts, and result status in your notification messages.
+  categories:
+    - name: Test Info
+      variables:
+        - path: synthetics.attributes.test
+          description: The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
+        - path: synthetics.attributes.test.name
+          description: The name of the test
+        - path: synthetics.attributes.test.type
+          description: "Test type (for example, `api`)"
+        - path: synthetics.attributes.test.subType
+          description: "Subtype for API tests (for example, `http`, `dns`, and `multi`)"
+        - path: synthetics.attributes.test.id
+          description: "The test's public ID (for example, `abc-def-ghi`)"
+
+    - name: Location
+      variables:
+        - path: synthetics.attributes.location
+          description: The `location` object contains information about the location of where the test is run from
+        - path: synthetics.attributes.location.id
+          description: "Location ID (for example, `aws:eu-central-1`)"
+        - path: synthetics.attributes.location.name
+          description: "Name of the location (for example, `Frankfurt (AWS)`)"
+        - path: synthetics.attributes.location.privateLocation
+          description: "`true` for Private Locations"
+
+    - name: Device
+      note: Applies to browser and mobile tests.
+      variables:
+        - path: synthetics.attributes.device
+          description: The `device` object contains information about the device on which the test is run on
+        - path: synthetics.attributes.device.id
+          description: Device identifier
+        - path: synthetics.attributes.device.name
+          description: Human-readable device name
+        - path: synthetics.attributes.device.type
+          description: Device type classification
+        - path: synthetics.attributes.device.width
+          description: Screen width dimension
+        - path: synthetics.attributes.device.height
+          description: Screen height dimension
+        - path: synthetics.attributes.device.browser.type
+          description: Browser type (browser tests only)
+        - path: synthetics.attributes.device.platform.name
+          description: Platform name (mobile tests only)
+        - path: synthetics.attributes.device.platform.version
+          description: Platform version (mobile tests only)
+
+    - name: Result
+      variables:
+        - path: synthetics.attributes.result
+          description: The `result` object contains information about the executed test run
+        - path: synthetics.attributes.result.id
+          description: Unique result ID
+        - path: synthetics.attributes.result.status
+          description: "Test execution status (for example, `passed` or `failed`)"
+        - path: synthetics.attributes.result.duration
+          description: Test duration in milliseconds
+        - path: synthetics.attributes.result.testStartedAt
+          description: Epoch timestamp in milliseconds when test started
+        - path: synthetics.attributes.result.testFinishedAt
+          description: Epoch timestamp in milliseconds when test finished
+        - path: synthetics.attributes.result.testTriggeredAt
+          description: Epoch timestamp in milliseconds when test was triggered
+        - path: synthetics.attributes.result.failure
+          description: The `failure` object contains information about why the test failed
+        - path: synthetics.attributes.result.failure.message
+          description: The failure message
+        - path: synthetics.attributes.result.failure.code
+          description: The failure code
+
+    - name: Count
+      note: Applies to Multistep, Browser, and Mobile tests.
+      variables:
+        - path: synthetics.attributes.count
+          description: The `count` object contains step statistics about the test
+        - path: synthetics.attributes.count.steps.total
+          description: The total number of steps
+        - path: synthetics.attributes.count.steps.completed
+          description: The number of steps that were run
+        - path: synthetics.attributes.count.errors
+          description: The total number of errors that occurred while running the test. For multistep and mobile tests, this is the number of failed steps. For browser tests, this is the sum of all browser errors.
+        - path: synthetics.attributes.count.hops
+          description: The number of traceroute hops for TCP and ICMP tests
+
+# =============================================================================
+# RESULT VARIABLES
+# =============================================================================
+result_variables:
+  description: These variables provide access to local and global variable values used during test execution. Use them to include variable names, types, and values in your notifications.
+  categories:
+    - name: Local config variables
+      note: These are local variables configured for API tests or defined outside individual steps in step-based tests. This also includes variables created by JavaScript code execution.
+      location: synthetics.attributes.result.variables.config
+      variables:
+        - path: synthetics.attributes.result.variables.config.name
+          description: Variable name
+        - path: synthetics.attributes.result.variables.config.type
+          description: Variable type
+        - path: synthetics.attributes.result.variables.config.secure
+          description: Whether the variable value is obfuscated
+        - path: synthetics.attributes.result.variables.config.value
+          description: Variable value (non-obfuscated only)
+
+    - name: Global variables
+      note: These are extracted variables whose value updates a global variable value. Available only for **successful test results** and **recovery notifications**.
+      location: synthetics.attributes.result.variables.extracted
+      variables:
+        - path: synthetics.attributes.result.variables.extracted.id
+          description: Global variable ID
+        - path: synthetics.attributes.result.variables.extracted.name
+          description: Variable name
+        - path: synthetics.attributes.result.variables.extracted.secure
+          description: Whether the variable value is obfuscated
+        - path: synthetics.attributes.result.variables.extracted.val
+          description: "Variable value (note: uses `.val`, not `.value`)"
+
+    - name: Step extracted variables
+      note: "For tests with steps, step data is contained in `synthetics.attributes.result.steps.<step-index>.extractedValue`. For information on how to access the `<step-index>` see the [step summary](#step-summary) section."
+      variables:
+        - path: synthetics.attributes.result.steps.<step-index>.extractedValue.name
+          description: Variable name
+        - path: synthetics.attributes.result.steps.<step-index>.extractedValue.secure
+          description: Whether the variable value is obfuscated
+        - path: synthetics.attributes.result.steps.<step-index>.extractedValue.value
+          description: Variable value (if step was successful)
+
+# =============================================================================
+# VARIABLES EXTRACTED BY STEPS
+# =============================================================================
+step_extracted_variables:
+  description: For multistep API, browser, and mobile tests, extracted variables are available at the step level within the `synthetics.attributes.variables.extracted` property. These values are only available when the step completes successfully.
+  categories:
+    - name: General steps
+      note: For multistep/browser/mobile tests
+      groups:
+        - name: Step properties
+          variables:
+            - path: synthetics.attributes.variables.extracted.steps.allowFailure
+              description: Whether the step is allowed to fail without failing the entire test
+            - path: synthetics.attributes.variables.extracted.steps.duration
+              description: Step execution duration in milliseconds
+            - path: synthetics.attributes.variables.extracted.steps.failure
+              description: Failure information object containing `.code` and `.message`
+            - path: synthetics.attributes.variables.extracted.steps.id
+              description: Unique step identifier
+            - path: synthetics.attributes.variables.extracted.steps.isCritical
+              description: Whether the step is critical to the test
+            - path: synthetics.attributes.variables.extracted.steps.status
+              description: Step execution status
+            - path: synthetics.attributes.variables.extracted.steps.type
+              description: Type of step being executed
+        - name: Subtest information
+          variables:
+            - path: synthetics.attributes.variables.extracted.steps.subTest.id
+              description: Subtest identifier
+            - path: synthetics.attributes.variables.extracted.steps.subStep.parentStep.id
+              description: Parent step identifier
+            - path: synthetics.attributes.variables.extracted.steps.subStep.parentTest.id
+              description: Parent test identifier
+            - path: synthetics.attributes.variables.extracted.steps.subStep.level
+              description: "Nesting level (1 for subtests, 2 for subtests of subtests)"
+
+    - name: Browser Tests
+      groups:
+        - name: General
+          variables:
+            - path: synthetics.attributes.result.startUrl
+              description: URL from test configuration
+        - name: Steps
+          variables:
+            - path: synthetics.attributes.variables.extracted.apiTest.request
+              description: "API test request configuration (only for \"Run API Test\" steps where `type` is `runApiTest`)"
+            - path: synthetics.attributes.variables.extracted.apiTest.result
+              description: API test result data (similar to `attributes.result` for API tests)
+            - path: synthetics.attributes.variables.extracted.assertionResult.expected
+              description: Expected value for assertions
+            - path: synthetics.attributes.variables.extracted.assertionResults.checkType
+              description: Type of assertion check
+            - path: synthetics.attributes.variables.extracted.assertionResults.actual
+              description: Actual value found during assertion
+            - path: synthetics.attributes.variables.extracted.browserErrors
+              description: List of browser errors encountered
+            - path: synthetics.attributes.variables.extracted.timings.firstByte
+              description: Time to first byte
+            - path: synthetics.attributes.variables.extracted.timings.tcp
+              description: TCP connection timing
+            - path: synthetics.attributes.variables.extracted.description
+              description: Step description
+
+    - name: Mobile Tests
+      variables:
+        - path: synthetics.attributes.variables.extracted.application.versionId
+          description: Mobile application version identifier
+        - path: synthetics.attributes.variables.extracted.apiTest
+          description: API test data (for API test steps within mobile tests)
+        - path: synthetics.attributes.variables.extracted.description
+          description: Step description
+
+    - name: API Tests
+      groups:
+        - name: Multistep
+          note: "Follow regular API fields per subType"
+          variables:
+            - path: synthetics.attributes.variables.extracted.name
+              description: Step name
+            - path: synthetics.attributes.variables.extracted.type
+              description: Step type
+        - name: Non-Multistep
+          variables:
+            - path: synthetics.attributes.variables.extracted.assertions.actual
+              description: Actual value from assertion
+            - path: synthetics.attributes.variables.extracted.assertions.expected
+              description: Expected value for assertion
+            - path: synthetics.attributes.variables.extracted.assertions.operator
+              description: Assertion operator
+            - path: synthetics.attributes.variables.extracted.assertions.type
+              description: Assertion type
+            - path: synthetics.attributes.variables.extracted.dnsResolution.resolvedIp
+              description: Resolved IP address
+            - path: synthetics.attributes.variables.extracted.dnsResolution.server
+              description: DNS server used
+            - path: synthetics.attributes.variables.extracted.timings.dns
+              description: DNS resolution time
+            - path: synthetics.attributes.variables.extracted.timings.tcp
+              description: TCP connection time
+            - path: synthetics.attributes.variables.extracted.request.url
+              description: Request URL
+            - path: synthetics.attributes.variables.extracted.request.host
+              description: Request host
+            - path: synthetics.attributes.variables.extracted.response.body
+              description: Response body content
+            - path: synthetics.attributes.variables.extracted.response.statusCode
+              description: HTTP status code
+            - path: synthetics.attributes.variables.extracted.response.headers
+              description: Response headers
+            - path: synthetics.attributes.variables.extracted.response.httpVersion
+              description: HTTP version
+            - path: synthetics.attributes.variables.extracted.response.redirects
+              description: Redirect information
+
+    - name: Network tests
+      subtypes:
+        - name: WebSocket
+          variables:
+            - path: synthetics.attributes.variables.extracted.timings.open
+              description: Time to open connection (in milliseconds)
+            - path: synthetics.attributes.variables.extracted.timings.receive
+              description: Time to receive response
+            - path: synthetics.attributes.variables.extracted.handshake.request
+              description: Handshake request data
+            - path: synthetics.attributes.variables.extracted.handshake.response
+              description: Handshake response data
+            - path: synthetics.attributes.variables.extracted.request.message
+              description: WebSocket request message
+            - path: synthetics.attributes.variables.extracted.response.message
+              description: WebSocket response message
+            - path: synthetics.attributes.variables.extracted.close.reason
+              description: Connection close reason
+            - path: synthetics.attributes.variables.extracted.close.statusCode
+              description: Connection close status code
+        - name: gRPC
+          variables:
+            - path: synthetics.attributes.variables.extracted.callType
+              description: "Call type (`unary` or `healthcheck`)"
+            - path: synthetics.attributes.variables.extracted.timings.rpc
+              description: RPC call timing
+            - path: synthetics.attributes.variables.extracted.response.healthcheck.status
+              description: Health check status
+            - path: synthetics.attributes.variables.extracted.request.message
+              description: gRPC request message
+            - path: synthetics.attributes.variables.extracted.response.message
+              description: gRPC response message
+        - name: UDP
+          variables:
+            - path: synthetics.attributes.variables.extracted.request.message
+              description: UDP request message
+            - path: synthetics.attributes.variables.extracted.response.message
+              description: UDP response message
+            - path: synthetics.attributes.variables.extracted.timings.message
+              description: Message timing
+        - name: TCP
+          variables:
+            - path: synthetics.attributes.variables.extracted.connectionOutcome
+              description: Connection result
+            - path: synthetics.attributes.variables.extracted.netpath.routers.ip
+              description: Router IP addresses
+            - path: synthetics.attributes.variables.extracted.traceroute.latency.min
+              description: Minimum latency
+            - path: synthetics.attributes.variables.extracted.traceroute.latency.max
+              description: Maximum latency
+            - path: synthetics.attributes.variables.extracted.traceroute.latency.avg
+              description: Average latency
+            - path: synthetics.attributes.variables.extracted.traceroute.latency.stddev
+              description: Standard deviation
+            - path: synthetics.attributes.variables.extracted.traceroute.latency.values
+              description: Latency values array
+        - name: ICMP
+          variables:
+            - path: synthetics.attributes.variables.extracted.traceroute
+              description: Same structure as TCP traceroute
+            - path: synthetics.attributes.variables.extracted.request.host
+              description: Target host
+            - path: synthetics.attributes.variables.extracted.ping
+              description: Ping results
+            - path: synthetics.attributes.variables.extracted.latency.min
+              description: Minimum latency
+            - path: synthetics.attributes.variables.extracted.latency.max
+              description: Maximum latency
+            - path: synthetics.attributes.variables.extracted.latency.avg
+              description: Average latency
+            - path: synthetics.attributes.variables.extracted.latency.stddev
+              description: Latency standard deviation
+            - path: synthetics.attributes.variables.extracted.latency.values
+              description: Latency values array
+
+    - name: Protocol tests
+      subtypes:
+        - name: SSL
+          variables:
+            - path: synthetics.attributes.variables.extracted.cert
+              description: SSL certificate information
+            - path: synthetics.attributes.variables.extracted.cipher
+              description: Cipher suite used
+            - path: synthetics.attributes.variables.extracted.issuer
+              description: Certificate issuer
+            - path: synthetics.attributes.variables.extracted.subject
+              description: Certificate subject
+            - path: synthetics.attributes.variables.extracted.valid.from
+              description: Certificate valid from date
+            - path: synthetics.attributes.variables.extracted.valid.to
+              description: Certificate valid to date
+            - path: synthetics.attributes.variables.extracted.ocsp
+              description: OCSP (Online Certificate Status Protocol) information
+            - path: synthetics.attributes.variables.extracted.timings.handshake
+              description: SSL handshake timing
+        - name: DNS
+          variables:
+            - path: synthetics.attributes.variables.extracted.response.records.type
+              description: DNS record type
+            - path: synthetics.attributes.variables.extracted.response.records.values
+              description: DNS record values
+
+# =============================================================================
+# STEP SUMMARY
+# =============================================================================
+step_summary:
+  description: Access step data by index, name, or ID to reference specific steps in your notification messages. This section also includes summary counts for total steps, completed steps, and errors.
+  step_properties:
+    - ".id"
+    - ".status"
+    - ".type"
+    - ".duration"
+    - ".description"
+    - ".failure.message"
+    - ".code"
+    - ".url"
+  reference_methods:
+    - name: By index (0-based)
+      description: Use positive numbers to count from the beginning, or negative numbers to count from the end
+      examples:
+        - syntax: synthetics.attributes.result.steps.0
+          description: First step
+        - syntax: synthetics.attributes.result.steps.1
+          description: Second step
+        - syntax: synthetics.attributes.result.steps.-1
+          description: Last step
+        - syntax: synthetics.attributes.result.steps.-2
+          description: Second to last step
+    - name: By step name
+      description: Use the step name in brackets
+      example: ".steps[Click button]"
+    - name: By step ID
+      description: Use the step's unique identifier
+      example: ".steps.abc-def-ghi"
+  usage_examples:
+    - path: synthetics.attributes.result.steps.-1.status
+      description: Status of the last step
+    - path: synthetics.attributes.result.steps[Click button].status
+      description: Status of the step named "Click button"
+    - path: synthetics.attributes.result.steps.abc-def-ghi.status
+      description: Status of the step with step ID "abc-def-ghi"
+

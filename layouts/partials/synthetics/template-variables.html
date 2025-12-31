@@ -1,0 +1,155 @@
+{{/*
+  Renders Synthetics template variables from data/synthetics/template_variables.yaml
+  Usage: {{ partial "synthetics/template-variables.html" . }}
+*/}}
+
+{{ $data := .Site.Data.synthetics.template_variables }}
+
+{{/* Test Execution Variables */}}
+{{ with $data.test_execution }}
+<h3 id="test-execution-variables">Test execution variables</h3>
+<p>{{ .description | markdownify }}</p>
+
+<div class="code-tabs">
+  <ul class="nav nav-tabs d-flex"></ul>
+  <div class="tab-content">
+    {{ range $idx, $cat := .categories }}
+    <div data-lang="{{ $cat.name | lower | anchorize | replace "-" "" }}" class="tab-pane fade" role="tabpanel" title="{{ $cat.name }}">
+      {{ with $cat.note }}<p><em>{{ . | markdownify }}</em></p>{{ end }}
+      <dl class="template-variables">
+        {{ range $cat.variables }}
+        <dt><code>{{ printf "{{%s}}" .path }}</code></dt>
+        <dd>{{ .description | markdownify }}</dd>
+        {{ end }}
+      </dl>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{/* Result Variables */}}
+{{ with $data.result_variables }}
+<h3 id="result-variables">Result variables</h3>
+<p>{{ .description | markdownify }}</p>
+
+<div class="code-tabs">
+  <ul class="nav nav-tabs d-flex"></ul>
+  <div class="tab-content">
+    {{ range $idx, $cat := .categories }}
+    <div data-lang="{{ $cat.name | lower | anchorize | replace "-" "" }}" class="tab-pane fade" role="tabpanel" title="{{ $cat.name }}">
+      {{ with $cat.note }}<p>{{ . | markdownify }}</p>{{ end }}
+      {{ with $cat.location }}<p>Located at <code>{{ printf "{{%s}}" . }}</code>:</p>{{ end }}
+      <dl class="template-variables">
+        {{ range $cat.variables }}
+        <dt><code>{{ .path }}</code></dt>
+        <dd>{{ .description | markdownify }}</dd>
+        {{ end }}
+      </dl>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{/* Step Extracted Variables */}}
+{{ with $data.step_extracted_variables }}
+<h3 id="variables-extracted-by-steps">Variables extracted by steps</h3>
+<p>{{ .description | markdownify }}</p>
+
+<div class="code-tabs">
+  <ul class="nav nav-tabs d-flex"></ul>
+  <div class="tab-content">
+    {{ range $idx, $cat := .categories }}
+    <div data-lang="{{ $cat.name | lower | anchorize | replace "-" "" }}" class="tab-pane fade" role="tabpanel" title="{{ $cat.name }}">
+      
+      {{ with $cat.note }}<p><em>{{ . | markdownify }}</em></p>{{ end }}
+      
+      {{/* Handle categories with groups */}}
+      {{ with $cat.groups }}
+        {{ range . }}
+        <h4>{{ .name }}</h4>
+        {{ with .note }}<p><em>{{ . | markdownify }}</em></p>{{ end }}
+        <dl class="template-variables">
+          {{ range .variables }}
+          <dt><code>{{ .path }}</code></dt>
+          <dd>{{ .description | markdownify }}</dd>
+          {{ end }}
+        </dl>
+        {{ end }}
+      {{ end }}
+      
+      {{/* Handle categories with direct variables (no groups) */}}
+      {{ with $cat.variables }}
+      <dl class="template-variables">
+        {{ range . }}
+        <dt><code>{{ .path }}</code></dt>
+        <dd>{{ .description | markdownify }}</dd>
+        {{ end }}
+      </dl>
+      {{ end }}
+      
+      {{/* Handle categories with subtypes (Network tests, Protocol tests) */}}
+      {{ with $cat.subtypes }}
+        {{ range . }}
+        <details class="collapse-content">
+          <summary><h4 style="display: inline;">{{ .name }}</h4></summary>
+          <dl class="template-variables">
+            {{ range .variables }}
+            <dt><code>{{ .path }}</code></dt>
+            <dd>{{ .description | markdownify }}</dd>
+            {{ end }}
+          </dl>
+        </details>
+        {{ end }}
+      {{ end }}
+      
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{/* Step Summary */}}
+{{ with $data.step_summary }}
+<h3 id="step-summary">Step summary</h3>
+<p>{{ .description | markdownify }}</p>
+
+<p>Each step exposes the following properties: 
+{{ range $idx, $prop := .step_properties }}{{ if $idx }}, {{ end }}<code>{{ $prop }}</code>{{ end }}.
+</p>
+
+<p>You can reference steps in three ways:</p>
+
+{{ range .reference_methods }}
+<h4>{{ .name }}</h4>
+<p>{{ .description | markdownify }}{{ if .example }}: <code>{{ .example }}</code>{{ end }}</p>
+
+{{ with .examples }}
+<table>
+  <thead>
+    <tr>
+      <th>Syntax</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+    <tr>
+      <td><code>{{ .syntax }}</code></td>
+      <td>{{ .description | markdownify }}</td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
+{{ end }}
+{{ end }}
+
+<h4>Accessing step properties</h4>
+<p>Combine any reference method with a property:</p>
+<ul>
+{{ range .usage_examples }}
+  <li><code>{{ printf "{{%s}}" .path }}</code> - {{ .description | markdownify }}</li>
+{{ end }}
+</ul>
+{{ end }}
