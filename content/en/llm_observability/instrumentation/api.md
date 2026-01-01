@@ -464,8 +464,11 @@ Evaluations must be joined to a unique span. You can identify the target span us
 |--------------------------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------|
 | ID                                                                 | string              | Evaluation metric UUID (generated upon submission).                                                    |
 | join_on [*required*]                                               | [[JoinOn](#joinon)] | How the evaluation is joined to a span.                                                                |
+| trace_id                                                           | string              | Joins an eval metric to any span with that TraceID.                                                    |
+| span_id                                                            | string              | Joins an eval metric to any span with that SpanID. SpanID is not guaranteed to be unique globally.    |
 | timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
+| ml_app_version                                                     | string              | Version of the ML app that produced this metric datapoint.                                             |
 | metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, or `"boolean"`.                                    |
 | label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
 | categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
@@ -474,27 +477,28 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
 | reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
 | tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
+| metadata                                                           | Dict[key (string), any] | Arbitrary metadata attached to the evaluation metric.                                                  |
 
 #### JoinOn
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span | [[Span](#SpanContext)] | Uniquely identifies the span associated with this evaluation using span ID & trace ID. |
-| tag | [[Tag](#TagContext)] | Uniquely identifies the span associated with this evaluation using a tag key-value pair. |
+| span | [[Span](#spancontext)] | Uniquely identifies the span associated with this evaluation using span ID & trace ID. |
+| tag | [[Tag](#tagcontext)] | Uniquely identifies the span associated with this evaluation using a tag key-value pair. |
 
 #### SpanContext
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span_id | string | The span ID of the span that this evaluation is associated with. |
-| trace_id | string | The trace ID of the span that this evaluation is associated with. |
+| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. |
+| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. |
 
 #### TagContext
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| key | string | The tag key name. This must be the same key used when setting the tag on the span.  |
-| value | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
+| key [*required*] | string | The tag key name. This must be the same key used when setting the tag on the span.  |
+| value [*required*] | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
 
 
 #### EvalMetricsRequestData
