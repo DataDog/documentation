@@ -245,8 +245,9 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
-| type [*required*]        | string                        | Identifier for the request. Set to `spans`. |
-| attributes [*required*]  | [SearchSpansPayload](#searchspanspayload) | The body of the request.  |
+| type        | string                        | Identifier for the request. Set to `spans`. |
+| attributes  | [SearchSpansPayload](#searchspanspayload) | The body of the request.  |
+| id | string | JSONAPI primary identifier. |
 
 ### SearchSpansPayload
 

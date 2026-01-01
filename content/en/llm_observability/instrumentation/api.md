@@ -153,6 +153,8 @@ If the request is successful, the API responds with a 202 network code and an em
 | messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
 | documents| [Document](#document) | List of documents. This should only be used as the output for retrieval spans |
 | prompt | [Prompt](#prompt) | Structured prompt metadata that includes the template and variables used for the LLM input. This should only be used for input IO on LLM spans. |
+| embedding | [float] | Embedding vector as an array of floats. |
+| parameters | Dict[key (string), any] | Additional parameters as key-value pairs. |
 
 
 **Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
@@ -164,8 +166,33 @@ If the request is successful, the API responds with a 202 network code and an em
 
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
-| content [*required*] | string | The body of the message. |
+| content | string | The body of the message. |
 | role                 | string | The role of the entity.  |
+| tool_calls | [[ToolCall](#toolcall)] | List of tool calls made in this message. |
+| tool_results | [[ToolResult](#toolresult)] | List of tool results returned in this message. |
+
+#### ToolCall
+| Field     | Type   | Description          |
+|-----------|--------|----------------------|
+| name      | string | The name of the tool being called. |
+| arguments | Dict[key (string), any] | Arguments passed to the tool. |
+| tool_id   | string | Unique identifier for this tool call. |
+| type      | string | The type of tool call. |
+
+#### ToolResult
+| Field   | Type   | Description        |
+|---------|--------|--------------------|
+| name    | string | The name of the tool. |
+| result  | string | The result returned by the tool. |
+| tool_id | string | Unique identifier for this tool result. |
+| type    | string | The type of tool result. |
+
+#### ToolDefinition
+| Field       | Type                       | Description            |
+|-------------|----------------------------|------------------------|
+| name        | string                     | The name of the tool.  |
+| description | string                     | The description of the tool's function. |
+| schema      | Dict[key (string), any]    | Data about the arguments a tool accepts. |
 
 #### Document
 | Field                | Type   | Description              |
@@ -174,6 +201,8 @@ If the request is successful, the API responds with a 202 network code and an em
 | name    | string | The name of the document.  |
 | score | float | The score associated with this document. |
 | id    | string | The id of this document.  |
+| ranking | integer | The ranking of the document. |
+| metadata | Dict[key (string), any] | Additional metadata as key-value pairs. |
 
 #### Prompt
 
@@ -190,7 +219,9 @@ If the request is successful, the API responds with a 202 network code and an em
 | variables | Dict[key (string), string] | Variables used to render the template. Keys correspond to placeholder names in the template. |
 | query_variable_keys | [string] | Variable keys that contain the user query. Used for hallucination detection. |
 | context_variable_keys | [string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
-| tags | Dict[key (string), string] | Tags to attach to the prompt run. |
+| tags | Dict[key (string), any] | Tags to attach to the prompt run. |
+| _dd_context_variable_keys | [string] | Internal Datadog field for context variable keys. |
+| _dd_query_variable_keys | [string] | Internal Datadog field for query variable keys. |
 
 {{% /tab %}}
 {{% tab "Example" %}}
@@ -218,26 +249,24 @@ If the request is successful, the API responds with a 202 network code and an em
 #### Meta
 | Field       | Type              | Description  |
 |-------------|-------------------|--------------|
-| kind [*required*]    | string | The [span kind][2]: `"agent"`, `"workflow"`, `"llm"`, `"tool"`, `"task"`, `"embedding"`, or `"retrieval"`.      |
+| kind    | string | The [span kind][2]: `"agent"`, `"workflow"`, `"llm"`, `"tool"`, `"task"`, `"embedding"`, or `"retrieval"`.      |
 | error       | [Error](#error)             | Error information on the span.              |
 | input       | [IO](#io)                | The span's input information.               |
 | output      | [IO](#io)                | The span's output information.              |
 | metadata    | Dict[key (string), value] where the value is a float, bool, or string | Data about the span that is not input or output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, and `model_provider`. |
+| span | object | Span-level metadata containing a `kind` field. |
+| expected_output | [IO](#io) | The span's expected output information. |
+| tool_definitions | [[ToolDefinition](#tooldefinition)] | List of tools available for the LLM to use. |
+| intent | string | The intent of the span. |
+| embedding_for_prompt_idx | integer | Index denoting which prompt embeddings were computed for. |
+| model_name | string | The name of the model used. |
+| model_provider | string | The provider of the model. |
+| model_version | string | The version of the model. |
 
 #### Metrics
-| Field                  | Type    | Description  |
-|------------------------|---------|--------------|
-| input_tokens           | float64 | The number of input tokens. **Only valid for LLM spans.**      |
-| output_tokens          | float64 | The number of output tokens. **Only valid for LLM spans.**     |
-| total_tokens           | float64 | The total number of tokens associated with the span. **Only valid for LLM spans.**   |
-| time_to_first_token    | float64 | The time in seconds it takes for the first output token to be returned in streaming-based LLM applications. Set for root spans. |
-| time_per_output_token  | float64 | The time in seconds it takes for the per output token to be returned in streaming-based LLM applications. Set for root spans. |
-| input_cost             | float64 | The input cost in dollars. **Only valid for LLM and embedding spans.** |
-| output_cost            | float64 | The output cost in dollars. **Only valid for LLM spans.** |
-| total_cost             | float64 | The total cost in dollars. **Only valid for LLM spans.** |
-| non_cached_input_cost  | float64 | The non cached input cost in dollars. **Only valid for LLM spans.** |
-| cache_read_input_cost  | float64 | The cache read input cost in dollars. **Only valid for LLM spans.** |
-| cache_write_input_cost | float64 | The cache write input cost in dollars. **Only valid for LLM spans.** |
+Metrics is a key-value map where keys are metric names and values are floats. Common examples include `input_tokens`, `output_tokens`, `total_tokens`, `time_to_first_token`, `time_per_output_token`, `input_cost`, `output_cost`, `total_cost`, `non_cached_input_cost`, `cache_read_input_cost`, and `cache_write_input_cost`.
+
+You can also include custom metrics beyond these standard examples.
 
 #### Span
 
@@ -255,12 +284,16 @@ If the request is successful, the API responds with a 202 network code and an em
 | metrics     | [Metrics](#metrics)           | Datadog metrics to collect.         |
 | session_id  | string     | The span's `session_id`. Overrides the top-level `session_id` field.    |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular span.       |
+| service | string | The service name. |
+| ml_app | string | The ML application name. Can override the top-level `ml_app`. |
+| ml_app_version | string | The ML application version. |
+| _dd | object | Internal Datadog object containing `apm_trace_id` field. |
 
 #### SpansRequestData
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
-| type [*required*]        | string                        | Identifier for the request. Set to `span`. |
-| attributes [*required*]  | [SpansPayload](#spanspayload) | The body of the request.  |
+| type        | string                        | Identifier for the request. Set to `span`. |
+| attributes  | [SpansPayload](#spanspayload) | The body of the request.  |
 
 #### SpansPayload
 | Field    | Type                | Description  |
@@ -463,14 +496,18 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | Field                                                              | Type                | Description                                                                                            |
 |--------------------------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------|
 | ID                                                                 | string              | Evaluation metric UUID (generated upon submission).                                                    |
+| trace_id | string | The trace ID of the span this evaluation is associated with. |
+| span_id | string | The span ID of the span this evaluation is associated with. |
 | join_on [*required*]                                               | [[JoinOn](#joinon)] | How the evaluation is joined to a span.                                                                |
 | timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
+| ml_app_version | string | The version of the ML application. |
 | metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, or `"boolean"`.                                    |
 | label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
 | categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
 | score_value [*required if the metric_type is "score"*]             | number              | A score value of the evaluation.                                                                       |
 | boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value of the evaluation.                                                                     |
+| metadata | Dict[key (string), any] | Additional metadata as key-value pairs. |
 | assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
 | reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
 | tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
@@ -479,30 +516,30 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span | [[Span](#SpanContext)] | Uniquely identifies the span associated with this evaluation using span ID & trace ID. |
-| tag | [[Tag](#TagContext)] | Uniquely identifies the span associated with this evaluation using a tag key-value pair. |
+| span | [[Span](#spancontext)] | Uniquely identifies the span associated with this evaluation using span ID & trace ID. |
+| tag | [[Tag](#tagcontext)] | Uniquely identifies the span associated with this evaluation using a tag key-value pair. |
 
 #### SpanContext
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span_id | string | The span ID of the span that this evaluation is associated with. |
-| trace_id | string | The trace ID of the span that this evaluation is associated with. |
+| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. |
+| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. |
 
 #### TagContext
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| key | string | The tag key name. This must be the same key used when setting the tag on the span.  |
-| value | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
+| key [*required*] | string | The tag key name. This must be the same key used when setting the tag on the span.  |
+| value [*required*] | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
 
 
 #### EvalMetricsRequestData
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
-| attributes [*required*] | [[Attributes](#attributes)] | The body of the request. |
+| type      | string | Identifier for the request. Set to `evaluation_metric`. |
+| attributes | [[Attributes](#attributes)] | The body of the request. |
 
 ## Further Reading
 
