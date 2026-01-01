@@ -164,8 +164,10 @@ If the request is successful, the API responds with a 202 network code and an em
 
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
-| content [*required*] | string | The body of the message. |
+| content | string | The body of the message. |
 | role                 | string | The role of the entity.  |
+| tool_calls | [[ToolCall](#toolcall)] | List of tool calls made in this message. |
+| tool_results | [[ToolResult](#toolresult)] | List of tool results returned in this message. |
 
 #### Document
 | Field                | Type   | Description              |
@@ -174,6 +176,34 @@ If the request is successful, the API responds with a 202 network code and an em
 | name    | string | The name of the document.  |
 | score | float | The score associated with this document. |
 | id    | string | The id of this document.  |
+| ranking | int | The ranking position of this document. |
+| metadata | Dict[key (string), any] | Additional metadata for the document. |
+
+#### ToolCall
+
+| Field                | Type   | Description              |
+|----------------------|--------|--------------------------|
+| name | string | The name of the tool being called. |
+| arguments | Dict[key (string), any] | Arguments passed to the tool. |
+| tool_id | string | Unique identifier for this tool call. |
+| type | string | The type of tool call. |
+
+#### ToolResult
+
+| Field                | Type   | Description              |
+|----------------------|--------|--------------------------|
+| name | string | The name of the tool. |
+| result | string | The result returned by the tool. |
+| tool_id | string | Unique identifier for this tool result. |
+| type | string | The type of tool result. |
+
+#### ToolDefinition
+
+| Field                | Type   | Description              |
+|----------------------|--------|--------------------------|
+| name | string | The name of the tool. |
+| description | string | The description of the tool's function. |
+| schema | Dict[key (string), any] | Data about the arguments a tool accepts. |
 
 #### Prompt
 
@@ -183,7 +213,8 @@ If the request is successful, the API responds with a 202 network code and an em
 {{% tab "Model" %}}
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
-| id    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
+| name    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
+| id    | string | Alternative identifier for this prompt template (deprecated, use `name` instead).  |
 | version | string | Version tag for the prompt (for example, "1.0.0"). If not provided, LLM Observability automatically generates a version by computing a hash of the template content. |
 | template | string | Single string template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables. This should not be set with `chat_template`. |
 | chat_template | [[Message]](#message) | Multi-message template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables in message content. This should not be set with `template`. |
@@ -196,7 +227,7 @@ If the request is successful, the API responds with a 202 network code and an em
 {{% tab "Example" %}}
 {{< code-block lang="json" >}}
 {
-  "id": "translation-prompt",
+  "name": "translation-prompt",
   "chat_template": [
     {
       "role": "system",
@@ -222,9 +253,16 @@ If the request is successful, the API responds with a 202 network code and an em
 | error       | [Error](#error)             | Error information on the span.              |
 | input       | [IO](#io)                | The span's input information.               |
 | output      | [IO](#io)                | The span's output information.              |
-| metadata    | Dict[key (string), value] where the value is a float, bool, or string | Data about the span that is not input or output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, and `model_provider`. |
+| model_name  | string | The name of the model used in the request. Only applicable to LLM spans. |
+| model_provider | string | The provider for the model used in the request. Only applicable to LLM spans. |
+| model_version | string | The version of the model used in the request. Only applicable to LLM spans. |
+| tool_definitions | [[ToolDefinition](#tooldefinition)] | List of tools available in this LLM request. |
+| metadata    | Dict[key (string), value] where the value is a float, bool, or string | Data about the span that is not input or output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`. |
 
 #### Metrics
+
+Metrics is a flexible map structure (Dict[key (string), float64]) that accepts custom metric keys. Common metrics include:
+
 | Field                  | Type    | Description  |
 |------------------------|---------|--------------|
 | input_tokens           | float64 | The number of input tokens. **Only valid for LLM spans.**      |
@@ -269,6 +307,7 @@ If the request is successful, the API responds with a 202 network code and an em
 | spans [*required*]  | [[Span](#span)] | A list of spans.           |
 | tags                | [[Tag](#tag)]   | A list of top-level tags to apply to each span.        |
 | session_id          | string              | The session the list of spans belongs to. Can be overridden or set on individual spans as well. |
+| ml_app_version      | string              | The version of your LLM application. |
 
 #### Tag
 
@@ -466,6 +505,7 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | join_on [*required*]                                               | [[JoinOn](#joinon)] | How the evaluation is joined to a span.                                                                |
 | timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
+| ml_app_version                                                     | string              | The version of your LLM application.                                                                   |
 | metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, or `"boolean"`.                                    |
 | label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
 | categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
@@ -473,6 +513,9 @@ Evaluations must be joined to a unique span. You can identify the target span us
 | boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value of the evaluation.                                                                     |
 | assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
 | reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
+| trace_id                                                           | string              | The trace ID of the span (populated after joining).                                                    |
+| span_id                                                            | string              | The span ID (populated after joining).                                                                 |
+| metadata                                                           | Dict[key (string), any] | Additional metadata for the evaluation.                                                            |
 | tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
 
 #### JoinOn
@@ -486,15 +529,15 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| span_id | string | The span ID of the span that this evaluation is associated with. |
-| trace_id | string | The trace ID of the span that this evaluation is associated with. |
+| span_id [*required*] | string | The span ID of the span that this evaluation is associated with. |
+| trace_id [*required*] | string | The trace ID of the span that this evaluation is associated with. |
 
 #### TagContext
 
 | Field      | Type            | Description  |
 |------------|-----------------|--------------|
-| key | string | The tag key name. This must be the same key used when setting the tag on the span.  |
-| value | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
+| key [*required*] | string | The tag key name. This must be the same key used when setting the tag on the span.  |
+| value [*required*] | string | The tag value. This value must match exactly one span with the specified tag key/value pair. |
 
 
 #### EvalMetricsRequestData

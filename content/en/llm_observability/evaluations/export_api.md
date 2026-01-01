@@ -280,7 +280,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field | Type | Description |
 |-------|------|-------------|
-| limit | integer | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
+| limit | int64 | Maximum number of spans in the response. Default: 10. Maximum configurable limit: 5000. |
 | cursor | string | List following results with a cursor provided in the previous query. |
 
 ### SearchedSpanResource
@@ -301,8 +301,8 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | tags        | [string]                        | Array of tags associated with your span. |
 | name        | string                       | The name of the span. |
 | status        | string                       | Error status ("ok" or "error"). |
-| start_ns        | integer                       | The span’s start time in nanoseconds. |
-| duration        | float                       | The span’s duration in nanoseconds. |
+| start_ns        | uint64                       | The span's start time in nanoseconds. |
+| duration        | float                       | The span's duration in nanoseconds. |
 | ml_app        | string                       | The name of the span’s LLM Application. |
 | metadata        | Dict[key (string), any]                       | Data about the span that is not input or output related. |
 | span_kind        | string                       | The span kind: "agent", "workflow", "llm", "tool", "task", "embedding", or "retrieval". |
