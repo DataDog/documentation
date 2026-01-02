@@ -319,3 +319,6 @@ layouts/shortcodes/mdoc/en/**/*.ast.json
 
 # Deprecated generated file for LLMs (keep so it's not merged back in)
 static/llms.txt
+
+# AI
+.claude/*local*
