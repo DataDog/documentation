@@ -97,7 +97,7 @@ Canonical cloud resource IDs (CCRIDs) are cloud provider-assigned resource IDs t
 
 Enable CCRIDs to jump between resources and their associated metrics, traces, and logs for all resource types, eliminating context switching and giving you an end-to-end view of your resources within the same workflow.
 
-To use this feature, set the `datadog.ccrid` resource attribute to value of CCRID in all OTLP payloads.
+To use this feature, set the `datadog.ccrid` resource attribute to the value of the CCRID in all OTLP payloads.
 
 See below for the list of identifier formats per-cloud:
 | Cloud   | Identifier Type    | Example                                                                                                                                      |
