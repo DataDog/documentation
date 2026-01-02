@@ -40,11 +40,6 @@ Follow these steps to enable OTel Metrics API support in your Rust application.
 
 3. Configure your application:
    ```rust
-   use std::time::Duration;
-   
-   // Enable metrics via environment variable
-   std::env::set_var("DD_METRICS_OTEL_ENABLED", "true");
-   
    // Initialize metrics with default configuration
    let meter_provider = datadog_opentelemetry::metrics().init();
    
