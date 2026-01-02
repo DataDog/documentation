@@ -5188,7 +5188,7 @@ menu:
       identifier: jobs_monitoring_dataproc
       parent: data_jobs
       weight: 700000
-    - name: Custom Jobs
+    - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
       parent: data_jobs
