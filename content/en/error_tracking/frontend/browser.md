@@ -202,7 +202,7 @@ Refer to the [Browser SDK API Reference][9] for the full list of available confi
 
 ### Manage uploaded source maps
 
-See all uploaded symbols and manage your source maps on the [Debug Symbols][17] page.
+See all uploaded symbols and manage your source maps on the [Explore RUM Debug Symbols][17] page.
 
 **Note**: Source maps are limited in size to **500 MB** each.
 
@@ -230,6 +230,6 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [14]: https://bitbucket.org/product
 [15]: /integrations/guide/source-code-integration/
 [16]: /error_tracking/explorer
-[17]: /real_user_monitoring/guide/upload-javascript-source-maps
+[17]: https://app.datadoghq.com/source-code/setup/rum
 [18]: /getting_started/tagging/unified_service_tagging/
 [19]: /getting_started/tagging/
