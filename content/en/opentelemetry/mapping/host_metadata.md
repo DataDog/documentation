@@ -110,9 +110,9 @@ See below for the list of identifier formats per-cloud:
 How to form a CCRID:
  * [AWS (EC2 Instance)][13]: `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`. 
     Use this command to retrieve the `instanceId`:
- ```bash
- ec2metadata --instance-id
- ```
+    ```shell
+    ec2metadata --instance-id
+    ```
  * [Azure][11]: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
  * GCP: `//compute.googleapis.com/projects/{projectID}/zones/{zoneName}/instances/{instanceName}"`
  * OCI/Oracle: The CCRID can be obtained by [sending a request][12] at: `http://169.254.169.254/opc/v2/instance/id`
