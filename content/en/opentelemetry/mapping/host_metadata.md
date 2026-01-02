@@ -95,7 +95,7 @@ To collect these conventions with the OpenTelemetry Collector, set up the [recom
 
 Canonical cloud resource IDs (CCRIDs) are cloud provider-assigned resource IDs that uniquely identify a cloud resource. After adding CCRIDs across your different observability types, you can use them to consistently link different types of data for a given cloud resource. You can add CCRIDs in the same format across all cloud resource types. Widespread addition and adoption of CCRIDs gives you access to a variety of use cases across customers and internal teams.
 
-Enable to seamlessly jump between resources and their associated metrics, traces, and logs for all resource types, eliminating context switching and giving users an end-to-end view of their resources within the same workflow.
+Enable CCRIDs to jump between resources and their associated metrics, traces, and logs for all resource types, eliminating context switching and giving you an end-to-end view of your resources within the same workflow.
 
 To use this feature, set the `datadog.ccrid` resource attribute to value of CCRID in all OTLP payloads.
 
