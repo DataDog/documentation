@@ -5143,7 +5143,7 @@ menu:
       parent: business_intelligence_integrations
       weight: 3000000
     - name: Power BI
-      url: data_observability/quality_monitoring/integrations/business_intelligence/powerbi
+      url: data_observability/quality_monitoring/business_intelligence/powerbi
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
