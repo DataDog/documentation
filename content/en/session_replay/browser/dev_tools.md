@@ -34,19 +34,15 @@ The **Console** tab displays all [logs collected from the web browser][2] and er
 
 Click **Error**, **Warn**, **Info**, and **Debug** to filter your logs based on severity. To search for these logs in the [Log Explorer][3], click **View in Log Explorer**.
 
-{{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-console.png" alt="Console View in Log Explorer button" style="width:50%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-console-1.png" alt="Console View in Log Explorer button" style="width:50%;">}}
 
 The Log Explorer opens in a separate tab with a pre-filled search query. 
-
-#### Identify CSP violations
-
-Console logs also surface Content Security Policy (CSP) violations. If a legitimate resource is being blocked, these logs help you identify which CSP policies need updating.
 
 ### Errors
 
 The **Errors** tab displays [RUM errors][4] and [Error Tracking][5] issues that correlate to the session.
 
-{{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-errors.png" alt="Errors tab" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-errors.png" alt="Errors tab" style="width:100%;">}}
 
 ### Attributes
 
