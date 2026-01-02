@@ -17,10 +17,6 @@ further_reading:
       text: 'Data Jobs Monitoring'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for Apache Airflow is in preview" >}}
-To try the preview for Airflow monitoring, follow the setup instructions below.
-{{< /callout >}}
-
 [Data Jobs Monitoring][1] provides visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
 
 {{< tabs >}}

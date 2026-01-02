@@ -5,6 +5,9 @@ further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
     text: 'Learn about Data Observability'
+  - link: 'https://www.datadoghq.com/blog/understanding-dbt/'
+    tag: 'Blog'
+    text: 'Understanding dbt: basics and best practices'
 ---
 
 <div class="alert alert-info">dbt integrations are in Preview.</div>

@@ -5176,14 +5176,14 @@ menu:
     - name: Spark on Amazon EMR
       url: data_observability/jobs_monitoring/emr
       identifier: jobs_monitoring_emr
-      parent: transformation_integrations
+      parent: data_jobs
       weight: 500000
     - name: Spark on Google Dataproc
       url: data_observability/jobs_monitoring/dataproc
       identifier: jobs_monitoring_dataproc
       parent: data_jobs
       weight: 600000
-    - name: Custom Jobs
+    - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
       parent: data_jobs
