@@ -1,7 +1,5 @@
 ---
 title: Database Monitoring Guides
-aliases:
-- /database_monitoring/guide
 private: true
 disable_toc: true
 cascade:

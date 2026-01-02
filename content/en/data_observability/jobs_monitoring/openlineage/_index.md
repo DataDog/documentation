@@ -23,14 +23,11 @@ Replace the hostname in the examples with the relevant [Datadog site][2] for you
 
 **Note**: To centralize configuration and avoid distributing API keys to every application, you can [set up the Datadog Agent as an OpenLineage proxy][4].
 
-You can send [OpenLineage events][1] to Datadog in three ways:
-- [Direct HTTP with curl](#option-1-direct-http-with-curl)
-- [OpenLineage Python client (HTTP transport)](#option-2-openlineage-python-client-http-transport)
-- [OpenLineage Python client (Datadog transport)](#option-3-openlineage-python-client-datadog-transport)
+Use one of the following options to send [OpenLineage events][1] to Datadog:
 
-## Option 1: Direct HTTP with curl
-
-Send a raw [OpenLineage RunEvent][5] as JSON to Datadog's intake endpoint.
+{{< tabs >}}
+{{% tab "Direct HTTP with curl" %}}
+Send a raw [OpenLineage RunEvent][1] as JSON to Datadog's intake endpoint.
 
 ```shell
 curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
@@ -45,9 +42,14 @@ curl -X POST "https://data-obs-intake.datadoghq.com/api/v1/lineage" \
       }'
 ```
 
-## Option 2: OpenLineage Python client (HTTP transport)
+[1]: https://openlineage.io/docs/spec/run-cycle/
 
-Use the [OpenLineage Python client][6] with a manually specified HTTP transport.
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (HTTP transport)" %}}
+
+
+Use the [OpenLineage Python client][1] with a manually specified HTTP transport.
 
 ```python
 from datetime import datetime
@@ -71,9 +73,13 @@ event = RunEvent(
 client.emit(event)
 ```
 
-## Option 3: OpenLineage Python client (Datadog transport)
+[1]: https://openlineage.io/docs/client/python
 
-In OpenLineage 1.37.0+, use the [Datadog transport][7] for automatic configuration and optimized event delivery.
+{{% /tab %}}
+
+{{% tab "OpenLineage Python client (Datadog transport)" %}}
+
+In OpenLineage 1.37.0+, use the [Datadog transport][1] for automatic configuration and optimized event delivery.
 
 ```python
 from datetime import datetime
@@ -113,6 +119,11 @@ client = OpenLineageClient.from_environment()
 ```
 </div>
 
+[1]: https://openlineage.io/docs/client/python#datadog-transport
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -121,6 +132,3 @@ client = OpenLineageClient.from_environment()
 [2]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: /data_observability/integrations/openlineage/datadog_agent_for_openlineage
-[5]: https://openlineage.io/docs/spec/run-cycle/
-[6]: https://openlineage.io/docs/client/python
-[7]: https://openlineage.io/docs/client/python#datadog-transport
