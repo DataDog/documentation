@@ -5163,36 +5163,31 @@ menu:
       identifier: jobs_monitoring_airflow
       parent: data_jobs
       weight: 200000
-    - name: dbt Core
-      url: data_observability/jobs_monitoring/dbtcore
-      identifier: jobs_monitoring_dbtcore
+    - name: dbt
+      url: data_observability/jobs_monitoring/dbt
+      identifier: jobs_monitoring_dbt
       parent: data_jobs
       weight: 300000
-    - name: dbt Cloud
-      url: data_observability/jobs_monitoring/dbtcloud
-      identifier: jobs_monitoring_dbtcloud
-      parent: data_jobs
-      weight: 400000
     - name: Spark on Kubernetes
       url: data_observability/jobs_monitoring/kubernetes
       identifier: jobs_monitoring_kubernetes
       parent: data_jobs
-      weight: 500000
+      weight: 400000
     - name: Spark on Amazon EMR
       url: data_observability/jobs_monitoring/emr
       identifier: jobs_monitoring_emr
       parent: transformation_integrations
-      weight: 600000
+      weight: 500000
     - name: Spark on Google Dataproc
       url: data_observability/jobs_monitoring/dataproc
       identifier: jobs_monitoring_dataproc
       parent: data_jobs
-      weight: 700000
+      weight: 600000
     - name: Custom Jobs
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
       parent: data_jobs
-      weight: 800000
+      weight: 700000
     - name: Datadog Agent for OpenLineage Proxy
       url: data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage
       identifier: openlineage_datadog_agent_for_openlineage
