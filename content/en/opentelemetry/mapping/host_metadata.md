@@ -115,7 +115,7 @@ How to form a CCRID:
  ```
  * [Azure][11]: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
  * GCP: `//compute.googleapis.com/projects/{projectID}/zones/{zoneName}/instances/{instanceName}"`
- * OCI/Oracle: CCRID can be obtained by [sending a request][12] at: `http://169.254.169.254/opc/v2/instance/id`
+ * OCI/Oracle: The CCRID can be obtained by [sending a request][12] at: `http://169.254.169.254/opc/v2/instance/id`
 
 
 For example, to set an AWS CCRID for all resources in metrics, traces, and logs, use the [transform processor][2] with the following configuration:
