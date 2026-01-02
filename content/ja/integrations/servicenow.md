@@ -1,45 +1,45 @@
 ---
-"app_id": "servicenow"
-"app_uuid": "5bd1d6c7-614b-4c49-95ad-d200041735c3"
-"assets":
-  "integration":
-    "auto_install": false
-    "events":
-      "creates_events": false
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "105"
-    "source_type_name": "ServiceNow"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "alerting"
-- "incidents"
-- "notifications"
-- "network"
-- "collaboration"
-- "security"
-- "event management"
-"custom_kind": "インテグレーション"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "servicenow"
-"integration_id": "servicenow"
-"integration_title": "ServiceNow"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "servicenow"
-"public_title": "ServiceNow"
-"short_description": "ServiceNow のインシデントを作成し、CMDB の CI を取り込み、Datadog のリソース、ログ、イベントを CMDB データでエンリッチします。"
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
+app_id: servicenow
+app_uuid: 5bd1d6c7-614b-4c49-95ad-d200041735c3
+assets:
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int "105"
+    source_type_name: ServiceNow
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- alerting
+- incidents
+- notifications
+- network
+- collaboration
+- security
+- event management
+custom_kind: インテグレーション
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: servicenow
+integration_id: servicenow
+integration_title: ServiceNow
+integration_version: ""
+is_public: true
+manifest_version: 2.0.0
+name: servicenow
+public_title: ServiceNow
+short_description: ServiceNow のインシデントを作成し、CMDB の CI を取り込み、Datadog のリソース、ログ、イベントを CMDB データでエンリッチします。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
   - "Category::Alerting"
   - "Category::Incidents"
   - "Category::Notifications"
@@ -48,34 +48,34 @@
   - "Category::Security"
   - "Category::Event Management"
   - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "ServiceNow インシデントを作成し、CMDB CI に入力し、Datadog のリソース、ログ、イベントを CMDB データで強化します。
-  "media":
-  - "caption": "CMDB メタデータで Datadog ホストをエンリッチします。"
-    "image_url": "images/carousel_1.png"
-    "media_type": "image"
-  - "caption": "CMDB メタデータで Datadog ネットワーク デバイスをエンリッチします。"
-    "image_url": "images/carousel_2.png"
-    "media_type": "image"
-  - "caption": "CMDB リファレンス テーブルでログとイベントをエンリッチします。"
-    "image_url": "images/carousel_3.png"
-    "media_type": "image"
-  - "caption": "Datadog アラートから ServiceNow チケットを作成。"
-    "image_url": "images/carousel_4.png"
-    "media_type": "image"
-  - "caption": "Datadog Incident Management で ServiceNow インシデントを作成。"
-    "image_url": "images/carousel_5.png"
-    "media_type": "image"
-  "overview": "README.md#Overview"
-  "resources":
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/"
-  - "resource_type": "blog"
-    "url": "https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/"
-  - "resource_type": "ドキュメント"
-    "url": "https://docs.datadoghq.com/integrations/servicenow/"
-  "support": "README.md#Support"
-  "title": "ServiceNow"
+  configuration: README.md#Setup
+  description: ServiceNow インシデントを作成し、CMDB CI に入力し、Datadog のリソース、ログ、イベントを CMDB データで強化します。
+  media:
+  - caption: CMDB メタデータで Datadog ホストをエンリッチします。
+    image_url: images/carousel_1.png
+    media_type: image
+  - caption: CMDB メタデータで Datadog ネットワーク デバイスをエンリッチします。
+    image_url: images/carousel_2.png
+    media_type: image
+  - caption: CMDB リファレンス テーブルでログとイベントをエンリッチします。
+    image_url: images/carousel_3.png
+    media_type: image
+  - caption: Datadog アラートから ServiceNow チケットを作成。
+    image_url: images/carousel_4.png
+    media_type: image
+  - caption: Datadog Incident Management で ServiceNow インシデントを作成。
+    image_url: images/carousel_5.png
+    media_type: image
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/integrations/servicenow/
+  support: README.md#Support
+  title: ServiceNow
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
