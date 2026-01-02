@@ -92,9 +92,13 @@ See [Privacy Options][3].
 
 See [how Mobile Session Replay impacts app performance][4].
 
+## Dev tools
+
+See [Dev Tools][5].
+
 ## Troubleshooting
 
-Learn how to [troubleshoot Mobile Session Replay][5].
+Learn how to [troubleshoot Mobile Session Replay][6].
 
 <div class="alert alert-info">For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but not for smart TVs or wearables.</div>
 
@@ -106,4 +110,5 @@ Learn how to [troubleshoot Mobile Session Replay][5].
 [2]: /session_replay/mobile/setup_and_configuration
 [3]: /session_replay/mobile/privacy_options
 [4]: /session_replay/mobile/app_performance
-[5]: /session_replay/mobile/troubleshooting
+[5]: /session_replay/#dev-tools
+[6]: /session_replay/mobile/troubleshooting

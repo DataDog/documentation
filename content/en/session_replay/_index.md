@@ -78,31 +78,11 @@ You can create a playlist of Session Replays to organize them by any patterns yo
 
 ## Dev Tools
 
-Dev Tools is a built-in debugging panel in Session Replay that exposes key information during playback. Use it to identify issues, trace requests, and understand performance bottlenecks—all without reproducing the issue yourself. Dev Tools are available for both [RUM][1] and [Product Analytics][2] sessions.
+Dev Tools is a built-in debugging panel in Session Replay that exposes key information during playback. Use it to identify issues, trace requests, and understand performance bottlenecks—all without reproducing the issue yourself. Dev Tools are available for [RUM][1] sessions.
 
-To access Dev Tools, click the **Dev Tools** button in the Session Replay view.
+Learn more about Dev Tools for [browser][11] and [mobile][12].
 
-**Note:** Dev Tools are only available for sessions that have been retained.
-
-### Available tabs
-
-| Tab | Description |
-|-----|-------------|
-| **Console** | Displays logs collected during the session. Errors are highlighted in red. Filter by severity (Error, Warn, Info, Debug) and click **View in Log Explorer** to search logs in a separate tab. |
-| **Errors** | Shows [RUM errors][13] linked to the session and surfaces which errors are connected to larger issues affecting multiple users through [Error Tracking][11]. |
-| **Performance** | Displays a waterfall of events (actions, errors, resources, long tasks) with timestamps. Filter by action name or resource type and adjust the time range using the sliders. For browser sessions, this also includes Core Web Vitals. |
-| **Network** | Shows a waterfall view of network events. Filter by resource type or error type to identify long-running requests and bottlenecks. |
-| **Attributes** | Displays all attributes related to the session, including [default attributes][14]. |
-
-### Trace issues from frontend to backend
-
-If [APM is integrated with RUM][12], frontend requests are connected to backend traces automatically in Dev Tools. When a trace is associated with a request, an APM icon appears next to it in the Network waterfall. Click the icon to open the trace view and visualize the end-to-end path of the request.
-
-### Identify CSP violations
-
-Console logs also surface Content Security Policy (CSP) violations. If a legitimate resource is being blocked, these logs help you identify which CSP policies need updating.
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -116,7 +96,5 @@ Console logs also surface Content Security Policy (CSP) violations. If a legitim
 [8]: /notebooks/
 [9]: /account_management/audit_trail/
 [10]: /rum/replay/playlists/my-watch-history
-[11]: /error_tracking/
-[12]: /real_user_monitoring/correlate_with_other_telemetry/apm/
-[13]: /real_user_monitoring/application_monitoring/browser/collecting_browser_errors/
-[14]: /real_user_monitoring/application_monitoring/browser/data_collected/#default-attributes
+[11]: /session_replay/browser/dev_tools/
+[12]: /session_replay/mobile/dev_tools/

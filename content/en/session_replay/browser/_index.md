@@ -50,6 +50,10 @@ Learn how to [set up and configure Browser Session Replay][4].
 
 See [Privacy Options][5].
 
+## Dev tools
+
+See [Dev Tools][6].
+
 ## Troubleshooting
 
 Learn how to [troubleshoot Browser Session Replay][7].
@@ -67,5 +71,6 @@ Learn more about [Session Replay for Mobile][8].
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [4]: /session_replay/browser/setup_and_configuration
 [5]: /session_replay/browser/privacy_options
+[6]: /session_replay/#dev-tools
 [7]: /session_replay/browser/troubleshooting
 [8]: /session_replay/mobile/
