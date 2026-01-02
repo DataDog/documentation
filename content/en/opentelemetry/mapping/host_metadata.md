@@ -108,7 +108,8 @@ See below for the list of identifier formats per-cloud:
 | OCI     | OCID               | `ocid1.bucket.oc1.eu-frankfurt-1.aaaaaaaa5b5d7phlob22x4xin2lopq33ugriqiglek2ecxecrjx2awceb7eq`                                               |
 
 How to form a CCRID:
- * [AWS (EC2 Instance)][13]: `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`, To retrieve the `instanceId`:
+ * [AWS (EC2 Instance)][13]: `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`. 
+    Use this command to retrieve the `instanceId`:
  ```bash
  ec2metadata --instance-id
  ```
