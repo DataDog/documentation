@@ -136,7 +136,7 @@ processors:
           - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
 ```
 
-The OpenTelemetry semantic conventions also define the [cloud.resource_id][14] attribute , which can be mapped in the configuration using the [attributes processor][15].
+The OpenTelemetry semantic conventions also define the [cloud.resource_id][14] attribute, which can be mapped in the configuration using the [attributes processor][15].
 
 Example: 
 ```yaml
