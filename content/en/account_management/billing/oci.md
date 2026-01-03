@@ -12,7 +12,7 @@ If you run containers on OCI (for example, on Oracle Kubernetes Engine), contain
 
 ## OCI metric exclusion
 
-Use the Datadog–OCI integration tile to control which resources Datadog collects metrics from:
+Use the OCI integration tile to control which resources Datadog collects metrics from:
 
 1. Open the [OCI integration tile][1].
 2. Go to the **Metric Collection** tab.
@@ -20,7 +20,7 @@ Use the Datadog–OCI integration tile to control which resources Datadog collec
    - Limit metric collection to specific compartments or regions.
    - Limit metric collection to resources with specific [tags][2] using `key:value` pairs.
 
-When you add or change limits for an existing OCI tenancy, previously discovered Compute instances can remain in the [Infrastructure List][3] for up to two hours while filters propagate. During this transition period, affected instances can display a status of `???`. This does not count towards your billing.
+When you add or change limits for an existing OCI tenancy, previously discovered Compute instances can remain in the [Infrastructure List][3] for up to two hours while filters propagate. During this transition period, affected instances can display a status of `???`. This does not count toward your billing.
 
 Hosts with a running Datadog Agent continue to be included in billing. Limiting metric collection in the OCI integration tile applies to instances discovered by the integration and does not exclude hosts that report directly through the Agent.
 
