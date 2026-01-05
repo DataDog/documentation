@@ -7246,6 +7246,132 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
       weight: 107
+    - name: Workload Protection
+      url: security/workload_protection/
+      pre: security-workload-security
+      parent: security_platform_heading
+      identifier: workload_protection
+      weight: 60000
+    - name: Getting started
+      url: security/workload_protection/getting_started
+      parent: workload_protection
+      identifier: workload_protection_getting_started
+      weight: 90
+    - name: Docker
+      url: security/workload_protection/getting_started/docker
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_docker
+      weight: 10
+    - name: Kubernetes
+      url: security/workload_protection/getting_started/kubernetes
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_kubernetes
+      weight: 20
+    - name: ECS (EC2 compute)
+      url: security/workload_protection/getting_started/ecs_ec2
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_ecs_ec2
+      weight: 30
+    - name: Linux (eBPF)
+      url: security/workload_protection/getting_started/linux_ebpf
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_linux_ebpf
+      weight: 40
+    - name: Linux (eBPF-less)
+      url: security/workload_protection/getting_started/linux_ebpfless
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_linux_ebpfless
+      weight: 50
+    - name: Fargate
+      url: security/workload_protection/getting_started/fargate
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_fargate
+      weight: 60
+    - name: Windows
+      url: security/workload_protection/getting_started/windows
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_windows
+      weight: 70
+    - name: Advanced configuration
+      url: security/workload_protection/getting_started/advanced_configuration
+      parent: workload_protection_getting_started
+      identifier: workload_protection_getting_started_advanced_configuration
+      weight: 80
+    - name: Detection Rules
+      url: security/workload_protection/workload_security_rules
+      parent: workload_protection
+      identifier: workload_protection_workload_security_rules
+      weight: 201
+    - name: OOTB Rules
+      url: /security/workload_protection/setup/ootb_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_ootb_rules
+      weight: 100
+    - name: Custom Rules
+      url: security/workload_protection/workload_security_rules/custom_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_custom_rules
+      weight: 101
+    - name: Investigate Security Signals
+      url: security/workload_protection/security_signals
+      parent: workload_protection
+      identifier: workload_protection_security_signals
+      weight: 202
+    - name: Investigate Agent Events
+      url: security/workload_protection/investigate_agent_events
+      parent: workload_protection
+      identifier: workload_protection_agent_events
+      weight: 203
+    - name: Creating Agent Rule Expressions
+      url: security/workload_protection/agent_expressions
+      parent: workload_protection
+      identifier: workload_protection_agent_expressions
+      weight: 204
+    - name: Writing Custom Rule Expressions
+      url: security/workload_protection/secl_auth_guide
+      parent: workload_protection_agent_expressions
+      identifier: workload_protection_secl_guide
+      weight: 1
+    - name: Linux Syntax
+      url: security/workload_protection/linux_expressions
+      parent: workload_protection_agent_expressions
+      identifier: linux_expressions
+      weight: 2
+    - name: Windows Syntax
+      url: security/workload_protection/windows_expressions
+      parent: workload_protection_agent_expressions
+      identifier: windows_expressions
+      weight: 3
+    - name: Coverage and Posture Management
+      url: security/workload_protection/inventory
+      parent: workload_protection
+      identifier: workload_protection_inventory
+      weight: 205
+    - name: Hosts and Containers
+      url: security/workload_protection/inventory/hosts_and_containers
+      parent: workload_protection_inventory
+      identifier: workload_protection_hosts_and_containers
+      weight: 1
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_serverless
+      weight: 2
+    - name: Coverage
+      url: security/workload_protection/inventory/coverage_map
+      parent: workload_protection_inventory
+      identifier: workload_protection_coverage_map
+      weight: 3
+    - name: Guides
+      url: security/workload_protection/guide
+      parent: workload_protection
+      identifier: workload_protection_guides
+      weight: 206
+    - name: Troubleshooting
+      url: security/workload_protection/troubleshooting/threats
+      parent: workload_protection
+      identifier: workload_protection_troubleshooting
+      weight: 206
     - name: Security Graph
       url: security/cloud_security_management/security_graph/
       parent: csm
