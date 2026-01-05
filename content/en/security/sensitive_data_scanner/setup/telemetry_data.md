@@ -84,7 +84,6 @@ Whenever possible, use Datadog's out-of-the-box library rules. These rules are p
 
 For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
 
-#### Create a scanning rule
 
 To add scanning rules, perform the following steps:
 
@@ -279,8 +278,8 @@ Use suppressions to ignore sensitive data matches you consider operationally saf
 
 To make matches more precise, you can also do one of the following:
 
-- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like names, you might want to exclude attributes such as `resource_name` and `namespace`.
-- Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for names, you can choose specific attributes such as `first_name` and `last_name`.
+- Scan the entire event but exclude certain attributes from getting scanned. For example, if you are scanning for personally identifiable information (PII) like physical addresses, you might want to exclude attributes such as `ip_address`.
+- Scan for specific attributes to narrow the scope of the data that is scanned. For example, if you are scanning for physical addresses, you can choose specific attributes such as `street` and `city`.
 
 ### Edit scanning rules
 
