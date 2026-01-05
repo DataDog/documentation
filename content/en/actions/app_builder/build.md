@@ -53,7 +53,7 @@ To iterate on an existing app:
 
 Blueprints are helpful app templates that cover common use cases and showcase best practices for setting up apps. They come loaded with demo data you can use to familiarize yourself with the app's functions. Some blueprints create a starter app that you can customize, like [Manage Datastore][24] and [Export Synthetics][25]. Blueprints with "how to" in their title, like [How to: Custom Code][26], are templates with built-in tutorials for App Builder features.
 
-1. From [App Builder][1], click the [Blueprints][2] tab.
+1. From [App Builder][1], click the [**Blueprints**][2] tab.
 1. Click the blueprint you want to use. 
 1. Click **Open in Editor**.
 1. [Customize your app][15].
@@ -80,7 +80,7 @@ You can create an app by choosing an integration and specific actions from the [
 1. From [App Builder][1], click **New App**. 
 1. Click **Action** in the onboarding modal. 
 1. Choose an integration, then click **Continue**.
-1. Choose one or more actions. Each set of actions are templates that are specific to the integration you've selected. There is no limit to the number of actions you can choose.
+1. Choose one or more actions. Each set of actions is a template specific to the integration you've selected. There is no limit to the number of actions you can choose.
 1. Click **Create**.
 1. [Customize your app][15].
 
@@ -182,7 +182,7 @@ To edit an app with JSON, click **Settings** ({{< img src="icons/settings.png" i
 
 ### Export an app
 
-To copy an app layout across organizations or back up the app, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+To copy an app layout across organizations or back an app up, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
 To copy the app to another organization:
 1. Create an app. 
