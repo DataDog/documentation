@@ -74,14 +74,14 @@
     {{ $versionCount := (len $menuChild.Params.versions) }}
     <div class="row">
       <div class="col-12 {{ if gt (len $menuChild.Params.versions) 0 }}col-md-6{{ end }}">
-          <h2 class="mb-2" id="{{ $anchorStr | anchorize }}">
+          <h2 class="mb-2 api-task-description" id="{{ $anchorStr | anchorize }}">
               <a class="js-collapse-trigger" href="#{{ $anchorStr | anchorize }}">
                 {{- $anchorStr -}}
               </a>
           </h2>
       </div>
       {{ if gt (len $menuChild.Params.versions) 0 }}
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 api-version-label-wrapper">
           <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
             {{ range $versionIndex, $versionNum := $menuChild.Params.versions }}
               {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
@@ -89,7 +89,7 @@
               {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
               <li class="nav-item">
-                <a class="nav-link me-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-bs-toggle="collapse"{{- else -}}data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
+                <a class="nav-link me-1 api-version-label {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-bs-toggle="collapse"{{- else -}}data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
               </li>
             {{ end }}
           </ul>
@@ -148,13 +148,13 @@
                         </div>
                       {{ end }}
 
-                      <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ $endpoint.actionType }} bg-bg-api-{{ $endpoint.actionType }}">{{ $endpoint.actionType | upper }}</span>&nbsp;
+                      <p class="mb-0 api-url-info"><span style="padding: 3px" class="font-semibold api-method text-api-method text-api-{{ $endpoint.actionType }} bg-bg-api-{{ $endpoint.actionType }}">{{ $endpoint.actionType | upper }}</span>&nbsp;
                         {{- range $region, $url := $endpoint.regions -}}
-                            <span class="d-none" data-region="{{ $region }}">{{ $url }}{{ $endpoint.pathKey }}</span>
+                            <span class="api-url-pattern d-none" data-region="{{ $region }}">{{ $url }}{{ $endpoint.pathKey }}</span>
                         {{- end -}}
                         {{- range $region, $url := $generalRegions -}}
                             {{- if not (index ($endpoint.regions) $region) -}}
-                                <span class="d-none" data-region="{{ $region }}">Not supported in the {{ upper $region }} region</span>
+                                <span class="api-url-pattern d-none" data-region="{{ $region }}">Not supported in the {{ upper $region }} region</span>
                             {{- end -}}
                         {{- end -}}
                       </p>
