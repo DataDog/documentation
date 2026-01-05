@@ -4,6 +4,9 @@ description: "Overview of the mechanisms in the tracer and the Agent that contro
 aliases:
 - /tracing/trace_ingestion/mechanisms
 further_reading:
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 - link: "/tracing/trace_pipeline/ingestion_controls/"
   tag: "Documentation"
   text: "Ingestion Controls"

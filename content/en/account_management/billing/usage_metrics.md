@@ -4,6 +4,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations"
       tag: "Blog"
       text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
+    - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+      tag: "Blog"
+      text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 <style>tbody code {word-break: break-word !important;}</style>
