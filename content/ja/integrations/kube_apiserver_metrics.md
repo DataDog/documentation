@@ -101,7 +101,7 @@ Kubernetes クラスターにマスターノードがあり、`kube-apiserver` �
 `default` ネームスペース内の kubernetes サービスに次のアノテーションを付加できます。
 
 {{< tabs >}}
-{{% tab "アノテーション v2 (Datadog Agent v7.36+ 用)" %}}
+{{% tab "アノテーション v2 (Datadog Agent v7.36 用)" %}}
 
 ```yaml
 ad.datadoghq.com/endpoints.checks: |
@@ -113,11 +113,12 @@ ad.datadoghq.com/endpoints.checks: |
         }
       ]
     }
-  } 
-
+  }
 ```
+
 {{% /tab %}}
-{{% tab "アノテーション v1 (Datadog Agent < v7.36 用)" %}}
+
+{{% tab "アノテーション v1 (Datadog Agent v7.36 未満用)" %}}
 
 ```yaml
 annotations:
@@ -126,6 +127,7 @@ annotations:
   ad.datadoghq.com/endpoints.instances:
     '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics"}]'
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -139,8 +141,10 @@ annotations:
 
 クラスターチェックを設定するために、Cluster Agent に[構成][9]を提供します。
 
-{{< tabs >}} 
+{{< tabs >}}
+
 {{% tab "Helm" %}}
+
 ```yaml
 clusterAgent:
   confd:
@@ -154,6 +158,7 @@ clusterAgent:
       instances:
         - prometheus_url: "https://%%host%%:%%port%%/metrics"
 ```
+
 {{% /tab %}}
 
 {{% tab "Operator" %}}
@@ -175,7 +180,9 @@ spec:
             instances:
               - prometheus_url: "https://%%host%%:%%port%%/metrics"
 ```
+
 {{% /tab %}}
+
 {{< /tabs >}}
 
 これらの構成により、Agent は `default` ネームスペース内の `kubernetes` サービスに、定義されたエンドポイント IP アドレスとポートでリクエストを行います。
@@ -187,7 +194,7 @@ spec:
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "kube-apiserver-metrics" >}}
+{{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 
 ### サービスチェック
@@ -200,7 +207,8 @@ Kube_apiserver_metrics には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_apiserver_metrics/images/screenshot.png
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver
@@ -212,5 +220,4 @@ Kube_apiserver_metrics には、イベントは含まれません。
 [8]: https:docs.datadoghq.com//containers/cluster_agent/clusterchecks/?tab=datadogoperator#setting-up-check-configurations
 [9]: https://docs.datadoghq.com/ja/containers/cluster_agent/clusterchecks/?tab=helm#configuration-from-configuration-files
 [10]: https://docs.datadoghq.com/ja/agent/faq/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/ja/help/
