@@ -1,13 +1,13 @@
 ---
 title: Incident Response Billing
 further_reading:
-- link: "/service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
-- link: "/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call"
-- link: "/service_management/status_pages/"
+- link: "/incident_response/status_pages/"
   tag: "Documentation"
   text: "Status Pages"
 ---
@@ -39,11 +39,17 @@ In the On-Call product, a user does not need a seat to view existing pages, esca
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
 - Modify an incident (for example, update severity)
-- Add a comment, graph, or link to an [incident timeline][8]
+- Add a comment, graph, or link to an incident timeline
 
-In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement. 
+In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
 
 If your organization has committed to the Incident Response SKU, any user who meets the On-Call or Incident Management criteria can claim or be assigned an **Incident Response seat**.
+
+### Status Pages usage
+
+All paid Datadog customers can use Status Pages. Access depends on whether your organization has a committed Incident Management or Incident Response seat:
+- **With at least one committed seat**: Full access, including unlimited pages and custom domains.
+- **Without a committed seat**: Limited to one Status Page and no custom domain support.
 
 ## Manage seats
 
@@ -126,12 +132,12 @@ Your monthly bill contains the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/
-[2]: /service_management/on-call/
+[1]: /incident_response/incident_management/
+[2]: /incident_response/on-call/
 [3]: https://www.datadoghq.com/pricing/?product=incident-response#products
 [4]: https://app.datadoghq.com/billing/seats
-[5]: /service_management/on-call/schedules/
-[6]: /service_management/on-call/escalation_policies/
-[7]: /service_management/on-call/profile_settings/#notification-preferences
-[8]: /service_management/incident_management/investigate/timeline
+[5]: /incident_response/on-call/schedules/
+[6]: /incident_response/on-call/escalation_policies/
+[7]: /incident_response/on-call/profile_settings/#notification-preferences
+[8]: /incident_response/incident_management/investigate/timeline
 [9]: https://app.datadoghq.com/on-call/settings/notifications-preferences-admin

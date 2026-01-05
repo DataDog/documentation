@@ -22,6 +22,9 @@ further_reading:
   - link: "/real_user_monitoring/platform/dashboards/"
     tag: "Documentation"
     text: "Learn about RUM Dashboards"
+  - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+    tag: "Blog"
+    text: "From performance to impact: Bridging frontend teams through shared context"
 ---
 
 ## Overview

@@ -34,6 +34,7 @@ author:
 categories:
 - marketplace
 - sap
+custom_kind: 통합
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -42,7 +43,6 @@ integration_id: agentil-software-sap-netweaver
 integration_title: SAP S/4HANA & NetWeaver
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -67,7 +67,7 @@ tile:
   - Category::SAP
   - Offering::Integration
   - Supported OS::Linux
-  - 제출한 데이터 유형::메트릭
+  - Submitted Data Type::Metrics
   - Submitted Data Type::Events
   configuration: README.md#Setup
   description: S/4HANA와 NetWeaver 시스템의 ABAP 및 J2EE 스택 모니터링
@@ -94,6 +94,9 @@ tile:
     image_url: images/abap_background_jobs.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
   support: README.md#Support
   title: SAP S/4HANA & NetWeaver
   uninstallation: README.md#Uninstallation
@@ -160,10 +163,10 @@ SAP NetWeaver 통합은 SAP **NetWeaver**와 **S/4HANA**의 ABAP 및 J2EE 스택
 
 - [Datadog Marketplace에서 Netweaver Agentil 제품을 구입해 SAP NetWeaver 모니터링하기][5]
 
-*SAP이나 다른 플랫폼에 사용할 특정한 통합을 위해 신뢰할 만한 파트너를 찾고 있다면, 여기에서 찾으실 수 있습니다. 연락해 주세요.*
+*SAP이나 다른 플랫폼에 적용할 통합을 위해 신뢰할 만한 파트너를 찾고 있다면, 여기에서 찾으실 수 있습니다. 연락해 주세요.*
 
 ---
-이 제품은 스이스 제네바에서 설계 및 개발되었습니다.
+이 제품은 스위스 제네바에서 설계 및 개발되었습니다.
 
 [1]: https://www.agentil-software.com
 [2]: mailto:support@agentil-software.com
@@ -171,4 +174,4 @@ SAP NetWeaver 통합은 SAP **NetWeaver**와 **S/4HANA**의 ABAP 및 J2EE 스택
 [4]: https://wiki.agentil-software.com/doku.php?id=products:promonitor:6.8:userguide:configuration
 [5]: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
 ---
-이 애플리케이션은 Marketplace에서 사용할 수 있고 Datadog Technology Partner에서 지원됩니다. 이 애플리케이션을 구입하려면 <a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">여기를 클릭</a>하세요.
+이 애플리케이션은 Datadog Marketplace을 통해 제공되며 Datadog 기술 파트너의 지원을 받습니다. 사용하려면 <a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">Marketplace에서 이 애플리케이션을 구입하세요</a>.

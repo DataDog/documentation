@@ -21,6 +21,11 @@ Instrument your AWS Lambda applications with a Datadog Lambda Library to collect
 
 ## Quick start
 
+{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add the Datadog to your Lambda Functions.">}}
+  Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+{{< /callout >}} 
+
+
 To get started, [sign up for a Datadog account][1] if you don’t already have one. Then, follow the [in-app installation flow in Fleet Automation][8] for AWS Lambda to instrument your Lambda functions. This quick-start configuration enables your functions to send real-time metrics, logs, and traces to Datadog.
 
 A sample application is [available on GitHub][6] with instructions on how to deploy with multiple runtimes and infrastructure-as-code tools.
@@ -29,9 +34,9 @@ The quick start process configures your Lambda functions on the fly. To instrume
 
 ## Instrumentation instructions
 
-For Node.js and Python runtimes, you can use [remote instrumentation][5] to add instrumentation to your AWS Lambda functions and keep them instrumented securely. See [Remote instrumentation for AWS Lambda][5].
+You can use [remote instrumentation][5] to add instrumentation to your AWS Lambda functions and keep them instrumented securely. See [Remote instrumentation for AWS Lambda][5].
 
-For other Lambda runtimes (or to instrument your Node.js or Python functions without remote instrumentation) see detailed instrumentation instructions:
+To instrument your functions without remote instrumentation, see detailed instrumentation instructions:
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 

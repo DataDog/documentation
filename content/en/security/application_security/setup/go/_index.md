@@ -1,5 +1,9 @@
 ---
 title: Enabling App and API Protection for Go
+aliases:
+  - /security/application_security/setup/standalone/go
+  - /security/application_security/enabling/tracing_libraries/threat_detection/go
+  - /security/application_security/enabling/go
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
