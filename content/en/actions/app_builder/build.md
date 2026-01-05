@@ -110,17 +110,18 @@ To access the App Playground:
 Apps are made up of UI components and queries which interact with each other to form the user experience and logic behind each app. The query list and editor appear on the left side of the page, while the app canvas and UI components make up the right side of the page.
 
 To change basic elements of your app:
-- From [App Builder][1], hover over an app and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
-- Click the app name to edit these elements:
-  - Name
-  - Description
-  - Tags
-  - Appearance
-  - [Input parameters][29]
-- To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
-- Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
-- To save your app, click **Save**.
-- When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+1. From [App Builder][1], hover over an app and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
+1. Make edits to your app as required. 
+    1. Click the app name to edit these elements:
+        - Name
+        - Description
+        - Tags
+        - Appearance
+    1. Edit the [input parameters][29].
+    1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
+1. Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
+1. To save your app, click **Save**.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### App canvas and components
 
