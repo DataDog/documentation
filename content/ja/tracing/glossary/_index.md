@@ -41,7 +41,7 @@ _スパン_ や _インデックス化_ など、APM の重要な用語の定義
 | [トレース](#trace)                 | トレースは、アプリケーションがリクエストを処理するのにかかった時間とこのリクエストのステータスを追跡するために使用されます。各トレースは、1 つ以上のスパンで構成されます。                                                             |
 | [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention Filter は Datadog UI 内に設定されたタグベースのコントロールで、15 日間にわたって Datadog でインデックスするスパンの種類を決定します。                                                                                              |
-| [Ingestion Controls](#ingestion-controls) | Ingestion controls は Datadog に最大 100% のトレースを送信し、 15 分間の Live Search および分析を行う際に使用されます。
+| [Ingestion Controls](#ingestion-controls) | Ingestion controls は Datadog に最大 100% のトレースを送信し、 15 日間の Live Search および分析を行う際に使用されます。
 | [インスツルメンテーション](#instrumentation) | インスツルメンテーションとは、可観測性データをキャプチャしてレポートするために、アプリケーションにコードを追加するプロセスです。 |
 
 ## サービス

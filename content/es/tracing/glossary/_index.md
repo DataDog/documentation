@@ -41,7 +41,7 @@ Para más definiciones y descripciones de términos importantes de APM, como _sp
 | [Trazas](#trace)                 | Una traza se utiliza para realizar un seguimiento del tiempo empleado por una aplicación procesando una solicitud y el estado de esta solicitud. Cada traza consta de uno o varios tramos (spans).                                                             |
 | [Propagación de contexto de rastreo](#trace-context-propagation)| El método para pasar identificadores de traza (trace) entre servicios, lo que permite a Datadog juntar tramos (spans) individuales en una traza distribuida completa. |
 | [Filtros de retención](#retention-filters) | Los filtros de retención son controles basados en etiquetas establecidos en la interfaz de usuario de Datadog que determinan qué tramos se indexar en Datadog durante 15 días.                                                                                              |
-| [Controles de ingesta](#ingestion-controls) | Los controles de ingesta se utilizan para el envío de hasta el 100% de las trazas a Datadog para buscar en directo y analizar durante 15 minutos.
+| [Controles de ingesta](#ingestion-controls) | Los controles de ingesta se utilizan para el envío de hasta el 100% de las trazas a Datadog para buscar en directo y analizar durante 15 días.
 | [Instrumentación](#instrumentation) | La instrumentación es el proceso de añadir código a tu aplicación para capturar e informar los datos de observabilidad. |
 | [Equipaje](#baggage) | El equipaje es información contextual que se pasa entre trazas, métricas y logs en forma de pares clave-valor. |
 

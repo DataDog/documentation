@@ -41,7 +41,7 @@ Pour consulter les définitions et descriptions des termes clés d'APM comme _sp
 | [Trace](#trace)                 | Les traces servent à suivre le temps passé par une application à traiter une requête, ainsi que le statut de la requête. Chaque trace est composée d'une ou de plusieurs spans.                                                             |
 | [Propagation du contexte de trace](#propagation-du-contexte-de-trace)| Méthode de transmission des identifiants de trace entre services, permettant à Datadog d'assembler les spans individuelles en une trace distribuée complète. |
 | [Filtres de rétention](#filtres-de-retention) | Les filtres de rétention sont des règles basées sur des tags définies au sein de l'interface utilisateur de Datadog. Elles déterminent les spans à indexer dans Datadog pendant 15 jours.                                                                                              |
-| [Paramètres d'ingestion](#parametres-d-ingestion) | Les paramètres d'ingestion permettent d'envoyer jusqu'à 100 % des traces à Datadog pour effectuer des recherches et des analyses en temps réel pendant 15 minutes.
+| [Paramètres d'ingestion](#parametres-d-ingestion) | Les paramètres d'ingestion permettent d'envoyer jusqu'à 100 % des traces à Datadog pour effectuer des recherches et des analyses en temps réel pendant 15 jours.
 | [Instrumentation](#instrumentation) | L'instrumentation est le processus qui consiste à ajouter du code à votre application afin de collecter et remonter des données d'observabilité. |
 | [Bagage](#bagage) | Le bagage est une information contextuelle transmise entre les traces, les métriques et les logs sous forme de paires clé-valeur. |
 
