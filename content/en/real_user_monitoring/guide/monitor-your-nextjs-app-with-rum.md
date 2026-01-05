@@ -87,9 +87,9 @@ The App Router uses React Server Components by default. Since RUM must run in th
 [1]: https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates
 
 {{% /tab %}}
-{{% tab "CDN" %}}
+{{% tab "CDN async" %}}
 
-Use the Next.js `Script` component to load RUM from the CDN:
+Use the Next.js `Script` component to load RUM asynchronously:
 
 {{< code-block lang="tsx" filename="app/layout.tsx" disable_copy="false" >}}
 import Script from "next/script";
@@ -118,6 +118,44 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         `}
       </Script>
       <body>{children}</body>
+    </html>
+  );
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+Use `strategy="beforeInteractive"` to load RUM synchronously before the page becomes interactive:
+
+{{< code-block lang="tsx" filename="app/layout.tsx" disable_copy="false" >}}
+import Script from "next/script";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <Script
+          id="dd-rum-sync"
+          src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+          type="text/javascript"
+          strategy="beforeInteractive"
+        />
+        <Script id="datadog-rum">
+          {`
+            window.DD_RUM && window.DD_RUM.init({
+              clientToken: '<CLIENT_TOKEN>',
+              applicationId: '<YOUR_APPLICATION_ID>',
+              site: 'datadoghq.com',
+              service: '<SERVICE_NAME>',
+              env: '<ENV_NAME>',
+              sessionSampleRate: 100,
+              sessionReplaySampleRate: 20,
+            });
+          `}
+        </Script>
+        {children}
+      </body>
     </html>
   );
 }
@@ -164,9 +202,9 @@ The [Pages Router][10] runs on the client, so you can initialize RUM directly in
    {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "CDN" %}}
+{{% tab "CDN async" %}}
 
-Use the Next.js `Script` component in your custom App:
+Use the Next.js `Script` component to load RUM asynchronously:
 
 {{< code-block lang="tsx" filename="pages/_app.tsx" disable_copy="false" >}}
 import type { AppProps } from "next/app";
@@ -193,6 +231,43 @@ export default function App({ Component, pageProps }: AppProps) {
               sessionReplaySampleRate: 20,
             });
           })
+        `}
+      </Script>
+      <Component {...pageProps} />
+    </>
+  );
+}
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+Use `strategy="beforeInteractive"` to load RUM synchronously before the page becomes interactive:
+
+{{< code-block lang="tsx" filename="pages/_app.tsx" disable_copy="false" >}}
+import type { AppProps } from "next/app";
+import Script from "next/script";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Script
+        id="dd-rum-sync"
+        src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+        type="text/javascript"
+        strategy="beforeInteractive"
+      />
+      <Script id="datadog-rum">
+        {`
+          window.DD_RUM && window.DD_RUM.init({
+            clientToken: '<CLIENT_TOKEN>',
+            applicationId: '<YOUR_APPLICATION_ID>',
+            site: 'datadoghq.com',
+            service: '<SERVICE_NAME>',
+            env: '<ENV_NAME>',
+            sessionSampleRate: 100,
+            sessionReplaySampleRate: 20,
+          });
         `}
       </Script>
       <Component {...pageProps} />
