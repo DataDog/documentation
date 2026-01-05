@@ -21,7 +21,7 @@ Datadog provides full visibility into the metrics, logs, and traces emitted by y
 <div class="alert alert-info">
 <ul>
 <li><strong>Metrics, enhanced metrics, and log collection</strong>: Supported for all runtimes</li>
-<li><strong>Trace collection</strong>: Supported for Python, Node.js</li>
+<li><strong>Trace collection</strong>: Supported for Python, Node.js, Java, .NET</li>
 </ul>
  </div>
 
