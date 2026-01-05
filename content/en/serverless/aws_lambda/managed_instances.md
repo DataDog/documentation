@@ -47,12 +47,14 @@ See the [list of all metrics collected for AWS Lambda applications][4].
 To correlate your logs and traces, ensure that you have set `DD_TRACE_ENABLED` and `DD_LOGS_INJECTION ` to `true`.
 
 {{< whatsnext desc="See detailed instructions for your runtime:" >}}
-    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/python/#standard-library-logging" >}}Correlating Python Logs and Traces{{< /nextlink >}}
-    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/nodejs" >}}Correlating Node.js Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/python/" >}}Correlating Python Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/nodejs/" >}}Correlating Node.js Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/java/" >}}Correlating Java Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/dotnet/" >}}Correlating .Net Logs and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Known limitations
-During Preview, the Datadog Lambda Extension and Lambda Libraries only support trace collection for Python and Node.js runtimes.
+During Preview, the Datadog Lambda Extension and Lambda Libraries only support trace collection for Python, Node.js, Java, and .NET runtimes.
 
 ## Further Reading
 
