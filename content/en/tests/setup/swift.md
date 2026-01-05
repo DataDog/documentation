@@ -445,6 +445,7 @@ Additional Git configuration for physical device testing:
 | `GITHUB_SHA`         | `$(GITHUB_SHA)`         |
 | `GITHUB_SERVER_URL`  | `$(GITHUB_SERVER_URL)`  |
 | `GITHUB_RUN_ATTEMPT` | `$(GITHUB_RUN_ATTEMPT)` |
+| `GITHUB_JOB` | `$(GITHUB_JOB)` |
 
 Additional Git configuration for physical device testing:
 
