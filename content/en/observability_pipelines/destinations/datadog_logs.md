@@ -36,7 +36,7 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 
 **Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization, which is the organization that is tied to the API key when you install the Worker.
 
-###### Add an organization
+##### Add an organization
 
 1. Enter a name for the organization.
 	- **Note**: The name does not have to correspond to the actual name of the Datadog organization.
