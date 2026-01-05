@@ -1,11 +1,11 @@
 ---
 title: Setting up Workload Protection on Kubernetes
-code_lang: kubernetes
-type: multi-code-lang
-code_lang_weight: 60 # a number that represents relative weight.
+disable_toc: false
 ---
 
 Use the following instructions to enable Workload Protection.
+
+<div class="alert alert-info">If you wish to deploy Workload Protection on Amazon EKS configured with the Fargate compute option, we invite you to go to [the dedicated Fargate deployment page][3].</div>
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 
