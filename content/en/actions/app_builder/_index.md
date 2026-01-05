@@ -57,7 +57,7 @@ Datadog App Builder provides an [Action Catalog][1] of hundreds of actions acros
 
 You can use your apps from the Apps page or [access them directly from within your dashboards][6]. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-2.png" alt="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking a button on it" caption="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking a button on it" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-2.png" alt="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking the Scale Service button" caption="An ECS Task Balancer app embedded in a dashboard, with a cursor clicking a button on it" style="width:100%;" >}}
 
 ### Apps created by Datadog
 
