@@ -1,8 +1,6 @@
 ---
 title: Setting up Workload Protection on Windows
-code_lang: windows
-type: multi-code-lang
-code_lang_weight: 75 # a number that represents relative weight.
+disable_toc: false
 ---
 
 {{% wp-windows-setup %}}
