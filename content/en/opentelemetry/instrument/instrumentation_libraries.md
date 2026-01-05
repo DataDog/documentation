@@ -32,7 +32,7 @@ You can configure Datadog SDKs by setting the same [environment variables suppor
 
 ## Language support
 
-Datadog SDKs implement the OpenTelemetry Traces API by overriding the default implementations in the OpenTelemetry SDK. However, note the following limitations:
+Datadog SDKs implement the OpenTelemetry API by overriding the default implementations in the OpenTelemetry SDK. However, note the following limitations:
 
 Operations specific to the OpenTelemetry SDK are not supported (for example, SpanProcessors or OTLP Trace Exporters).
 
