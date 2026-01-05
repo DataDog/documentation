@@ -1,5 +1,6 @@
 ---
 title: Service Page
+description: Comprehensive service overview with health metrics, dependencies, deployments, error tracking, and security insights.
 aliases:
 - /tracing/visualization/service/
 further_reading:
@@ -37,7 +38,7 @@ Consult on this page:
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
 * [Dependencies](#dependencies)
 {{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
@@ -77,7 +78,7 @@ Datadog also proposes a list of monitors depending on your service type:
 
 Enable them directly or create your own [APM monitors][3].
 
-**Note**: Tag any monitor or Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
+**Note**: Monitors are attached to an APM service if `service:<SERVICE_NAME>` is tagged in the metadata, included in the monitor query, or if the query is grouped-by service. You can also tag any Synthetic Test with `service:<SERVICE_NAME>` to attach it to an APM service.
 
 ## Watchdog Insights
 
@@ -138,7 +139,7 @@ Choose what to display in your resources list:
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
 
-{{< site-region region="ap1,us3,us5,eu,us" >}}
+{{< site-region region="ap1,ap2,us3,us5,eu,us" >}}
 ## Dependencies
 
 Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.
@@ -197,7 +198,7 @@ This tab has overview graphs that show which resources have the most issues and 
 {{< img src="tracing/visualization/service/error_tracking_side_panel_1.jpg" alt="Error Tracking tab" style="width:90%;">}}
 
 ### Security
-Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
+Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [App and API Protection][18].
 
 The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user).
 
@@ -283,7 +284,7 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [15]: /profiler/
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
-[18]: /security/application_security/how-appsec-works/
+[18]: /security/application_security/how-it-works/
 [19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/

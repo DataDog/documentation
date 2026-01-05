@@ -1,0 +1,45 @@
+{{/*  "Inserts a banner at the top of the page if a site is not supported"  */}}
+{{ $dot := . }}
+
+{{/*  "Translation support"  */}}
+{{$text := .Site.Params.site_support_banner | default "" | safeHTML }}
+
+
+{{/* "First checks if the file has a site_support_id param. Falls back to the file path. " */}}
+{{ $site_support_id := .Page.Params.site_support_id }}
+{{ $product_paths := split .Page.Path "/" }}
+{{ $unsupported_sites := .Site.Params.unsupported_sites }}
+
+{{ $unsupported_product := dict }}
+{{ if $site_support_id }}
+    {{ if index $unsupported_sites $site_support_id }}
+        {{ $unsupported_product = index $unsupported_sites $site_support_id }}
+    {{ else }}
+        {{/* "Error if the site_support_id is not found in the unsupported_sites map" */}}
+        {{ errorf "site_support_id '%s' at '%s' not found in unsupported_sites. If the site_support_id is correct, add it to the params.yaml file." $site_support_id $dot.Page.Path }}
+    {{ end }}
+{{ else }}
+    {{ range $product_paths }}
+        {{ if index $unsupported_sites . }}
+            {{ $unsupported_product = index $unsupported_sites . }}
+            {{ break }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ if $unsupported_product }}
+    {{/*  "Concatenate the unsupported regions into a comma separated list"  */}}
+    {{ $unsupported_regions := "" }}
+    {{ range $unsupported_product }}
+        {{ $unsupported_regions = printf "%s%s," $unsupported_regions . }}
+    {{ end }}
+
+    {{/*  "Remove the trailing comma"  */}}
+    {{ $unsupported_regions = substr $unsupported_regions 0 -1 }}
+    
+    <div class="d-none site-region-container" data-region="{{ $unsupported_regions }}">
+        <div class="alert alert-danger">{{ $text }} ({{ partial "region-param" (dict "key" "dd_site_name") }}).</div>    
+    </div>
+{{ end }}
+
+

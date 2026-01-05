@@ -40,6 +40,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
       tag: 'Blog'
       text: 'Making profiling visualizations accessible to engineers at all levels'
+    - link: 'https://www.datadoghq.com/blog/continuous-profiling-fourth-pillar/'
+      tag: 'Blog'
+      text: 'Why continuous profiling is the fourth pillar of observability'
+    - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+      tag: Blog
+      text: Monitor your Kubernetes operators to keep applications running smoothly
 cascade:
     algolia:
         rank: 70

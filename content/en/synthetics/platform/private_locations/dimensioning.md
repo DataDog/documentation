@@ -39,7 +39,7 @@ For more information, see [Advanced configuration][4].
 
 Once you know which test type you want to execute and the maximum number of test runs you want to execute in parallel, define the total hardware requirements for your private location.  
 
-The base requirement for CPU is 150mCores and for memory, is 150 MiB.
+The base requirement for CPU is 150mCores (that is, 0.15 of a CPU core), and for memory, it is 150 MiB.
 
 Additional requirements vary based on the test type for the private location.
 

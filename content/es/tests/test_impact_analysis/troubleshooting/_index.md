@@ -8,10 +8,6 @@ further_reading:
 title: Solucionar problemas de Test Impact Analysis
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Impact Analysis no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 Esta página proporciona información para solucionar problemas con Test Impact Analysis. Si necesitas más información, ponte en contacto con el [soporte de Datadog][1].
@@ -45,7 +41,7 @@ El uso de [comprimir y fusionar][6] para integrar confirmaciones en la rama base
 
 Test Impact Analysis realiza un análisis del impacto de los tests basado en la cobertura del código para determinar qué tests se ven afectados por una confirmación o un conjunto de confirmaciones determinado. Aunque esta estrategia funciona para la mayoría de los tests, existen escenarios conocidos en los que Test Impact Analysis podría omitir un test que debería haberse ejecutado:
 
-- Cambios en las dependencias de biblioteca.
+- Cambios en las dependencias de librería.
 - Cambios en las opciones del compilador.
 - Cambios en los servicios externos.
 - Cambios en los archivos de datos en los tests basados en datos.

@@ -1,8 +1,8 @@
 ---
 categories:
-- クラウド
+- cloud
 - azure
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog を使用して Azure Deployment Manager でのカナリアデプロイを監視
 doc_link: https://docs.datadoghq.com/integrations/azure_deployment_manager/
@@ -197,7 +197,7 @@ Azure Deployment Manager は、メトリクスを報告しません。
 
 Azure Deployment Manager には、イベントは含まれません。
 
-### サービスチェック
+### サービス チェック
 
 Azure Deployment Manager には、サービスのチェック機能は含まれません。
 

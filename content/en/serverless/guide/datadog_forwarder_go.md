@@ -5,7 +5,7 @@ title: Instrumenting Go Serverless Applications Using the Datadog Forwarder
 
 ## Overview
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/go">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
@@ -25,7 +25,7 @@ After you have installed the [AWS integration][1] and the [Datadog Forwarder][2]
 Install the [Datadog Lambda library][3] locally by running the following command:
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### Instrument
@@ -33,18 +33,16 @@ go get github.com/DataDog/datadog-lambda-go
 Follow these steps to instrument the function:
 
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
-2. Import the required packages in the file declaring your Lambda function handler.
+2. Import the required packages in the file declaring your Lambda function handler. {{% tracing-go-v2 %}}
 
     ```go
     package main
 
     import (
       "github.com/aws/aws-lambda-go/lambda"
-      "github.com/DataDog/datadog-lambda-go"
-      "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-      // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
-      httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http" // 1.x
-      // httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2" // 2.x
+      ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
+      "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+      httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
     )
     ```
 3. Wrap your Lambda function handler using the wrapper provided by the Datadog Lambda library.
@@ -67,7 +65,7 @@ Follow these steps to instrument the function:
       // Trace an HTTP request
       req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
       client := http.Client{}
-      client = *httptrace.WrapClient(&client)
+      client = httptrace.WrapClient(&client)
       client.Do(req)
 
       // Connect your Lambda logs and traces
@@ -105,7 +103,7 @@ package main
 
 import (
   "github.com/aws/aws-lambda-go/lambda"
-  "github.com/DataDog/datadog-lambda-go"
+  ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
 )
 
 func main() {
@@ -118,7 +116,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
   ddlambda.Metric(
     "coffee_house.order_value", // Metric name
     12.45, // Metric value
-    "product:latte", "order:online" // Associated tags
+    "product:latte", "order:online", // Associated tags
   )
 
   // Submit a custom metric with timestamp
@@ -152,3 +150,4 @@ Learn more about [custom metric submission][7].
 [5]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [6]: https://app.datadoghq.com/functions
 [7]: /serverless/custom_metrics?tab=go
+[8]: /tracing/trace_collection/custom_instrumentation/go/migration

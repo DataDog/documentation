@@ -1,5 +1,6 @@
 ---
 title: Handling Private Action Credentials
+description: Configure credentials for private actions including HTTP, Jenkins, PostgreSQL, MongoDB, and Temporal authentication methods.
 aliases:
 - service_management/workflows/private_actions/private_action_credentials
 - service_management/app_builder/private_actions/private_action_credentials
@@ -12,9 +13,9 @@ Private actions allow your Datadog workflows and apps to interact with services 
 
 Some private actions, such as Jenkins and PostgreSQL, require credentials to function. To configure credentials for a private action, you must:
 1. Navigate to the directory where you stored your runner's configuration (default: `config/credentials/`).
-2. In this directory, create a JSON file using the JSON structure provided in Credential files. Alternatively, edit the default JSON file automatically generated during runner bootstrap. 
-   - **Note**: These files are available to the runner in its `/etc/dd-action-runner/credentials/` directory.
-3. Specify the path to the credential in the runner's connection. Use the path to the file on the container. For example: `/etc/dd-action-runner/credentials/jenkins_token.json`.
+2. In this directory, create a JSON file using the JSON structure provided in Credential files. Alternatively, edit the default JSON file automatically generated during runner bootstrap.
+   - **Note**: These files are available to the runner in its `/etc/dd-action-runner/config/credentials/` directory.
+3. Specify the path to the credential in the runner's connection. Use the path to the file on the container. For example: `/etc/dd-action-runner/config/credentials/jenkins_token.json`.
 
 ## Credential files
 
@@ -31,7 +32,7 @@ HTTP supports three authentication methods:
 
 Basic authentication requires a credential file with a username and a password:
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/http_basic.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/http_basic.json" disable_copy="false" collapsible="true" >}}
 {
 	"auth_type": "Basic Auth",
 	"credentials": [
@@ -45,15 +46,15 @@ Basic authentication requires a credential file with a username and a password:
 
 Replace `USERNAME` and `PASSWORD` with your username and password.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/http_basic.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/http_basic.json`.
 
-{{< img src="service_management/par-http-basic-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/http_basic.json'" style="width:80%;" >}}
+{{< img src="service_management/par-http-basic-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/http_basic.json'" style="width:80%;" >}}
 
 ### Token authentication
 
 Token authentication requires a credential file with an array of token names and values:
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/http_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/http_token.json" disable_copy="false" collapsible="true" >}}
 {
 	"auth_type": "Token Auth",
 	"credentials": [
@@ -71,9 +72,9 @@ Token authentication requires a credential file with an array of token names and
 
 Replace `TOKEN1`, `TOKEN2`, `VALUE1`, and `VALUE2` with your token names and values.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/http_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/http_token.json`.
 
-{{< img src="service_management/par-http-token-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/http_token.json'" style="width:80%;" >}}
+{{< img src="service_management/par-http-token-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/http_token.json'" style="width:80%;" >}}
 
 ### No authentication
 
@@ -97,7 +98,7 @@ The GitLab connection accepts the following credentials:
 
 Include all credentials in a single file:
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/gitlab_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/gitlab_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -117,9 +118,9 @@ Include all credentials in a single file:
 
 Replace `GITLAB_API_TOKEN` and `GITLAB_URL` with your credentials.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/gitlab_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/gitlab_token.json`.
 
-{{< img src="service_management/par-gitlab-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/gitlab_token.json'" style="width:80%;" >}}
+{{< img src="service_management/par-gitlab-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/gitlab_token.json'" style="width:80%;" >}}
 
 [201]: https://docs.gitlab.com/ee/api/
 {{% /tab %}}
@@ -137,7 +138,7 @@ The Jenkins connection accepts the following credentials:
 Include all credentials in a single file:
 
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/jenkins_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/jenkins_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -160,9 +161,9 @@ Include all credentials in a single file:
 Replace `USERNAME`, `API_TOKEN`, and `DOMAIN` with your credentials.
 
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/jenkins_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/jenkins_token.json`.
 
-{{< img src="service_management/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/jenkins_token.json'" style="width:80%;" >}}
+{{< img src="service_management/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/jenkins_token.json'" style="width:80%;" >}}
 
 {{% /tab %}}
 
@@ -186,7 +187,7 @@ The MongoDB SRV authentication requires the following credentials:
 
 Include all credentials in a single file:
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/mongodb_srv_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/mongodb_srv_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -212,9 +213,9 @@ Include all credentials in a single file:
 
 Replace `USERNAME`, `PASSWORD`, `SRV_HOST`, and `DATABASE` with your credentials.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/mongodb_srv_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/mongodb_srv_token.json`.
 
-{{< img src="service_management/par-mongodb-srv-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/mongodb_srv_token.json'" style="width:80%;" >}}
+{{< img src="service_management/par-mongodb-srv-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/mongodb_srv_token.json'" style="width:80%;" >}}
 
 ### Standard authentication
 
@@ -232,7 +233,7 @@ The MongoDB Standard authentication accepts the following credentials:
 
 Include all credentials in a single file:
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/mongodb_standard_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/mongodb_standard_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -270,9 +271,9 @@ Include all credentials in a single file:
 
 Replace `USERNAME`, `PASSWORD`, `HOST`, `PORT`, `DATABASE`, `AUTH_SOURCE`, and `AUTH_MECHANISM` with your credentials.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/mongodb_standard_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/mongodb_standard_token.json`.
 
-{{< img src="service_management/par-mongodb-standard-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/mongodb_standard_token.json'" style="width:80%;" >}}
+{{< img src="service_management/par-mongodb-standard-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/mongodb_standard_token.json'" style="width:80%;" >}}
 
 {{% /tab %}}
 
@@ -295,7 +296,7 @@ The PostgreSQL connection accepts the following credentials:
 Include all credentials in a single file:
 
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/postgresql_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/postgresql_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -338,9 +339,9 @@ Include all credentials in a single file:
 Replace the example values with your credentials.
 
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/postgresql_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/postgresql_token.json`.
 
-{{< img src="service_management/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/postgresql_token.json`'" style="width:80%;" >}}
+{{< img src="service_management/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/postgresql_token.json`'" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
 [102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
@@ -374,7 +375,7 @@ The Temporal mTLS authentication requires the following credentials:
 
 Include all credentials in a single file:
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/temporal_mTLS_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -404,9 +405,9 @@ Include all credentials in a single file:
 
 Replace `SERVER_ADDRESS`, `SERVER_NAME_OVERRIDE`, `SERVER_ROOT_CA_CERTIFICATE`, `CLIENT_CERTIFICATE`, and `CLIENT_KEY` with your credentials.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/temporal_mTLS_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json`.
 
-{{< img src="service_management/par-temporal-mtls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/temporal_mTLS_token.json'" style="width:80%;" >}}
+{{< img src="service_management/par-temporal-mtls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/temporal_mTLS_token.json'" style="width:80%;" >}}
 
 ### TLS authentication
 
@@ -420,7 +421,7 @@ The Temporal TLS authentication requires the following credentials:
 
 Include all credentials in a single file:
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/temporal_TLS_token.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/config/credentials/temporal_TLS_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -442,9 +443,9 @@ Include all credentials in a single file:
 
 Replace `SERVER_ADDRESS`, `SERVER_NAME_OVERRIDE`, and `SERVER_ROOT_CA_CERTIFICATE` with your credentials.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/temporal_TLS_token.json`.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/config/credentials/temporal_TLS_token.json`.
 
-{{< img src="service_management/par-temporal-tls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/temporal_TLS_token.json'" style="width:80%;" >}}
+{{< img src="service_management/par-temporal-tls-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/config/credentials/temporal_TLS_token.json'" style="width:80%;" >}}
 
 ### No authentication
 

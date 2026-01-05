@@ -15,6 +15,7 @@ cascade:
     - test fallido
     - flaky test
     - funciones compatibles
+  site_support_id: test_optimization
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: Notas de versiones
@@ -41,15 +42,11 @@ further_reading:
 title: Optimización de tests en Datadog
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La optimización de tests no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
 ## Información general
 
 La [optimización de tests][1] ofrece una vista del estado de tu CI que prioriza los tests al mostrar métricas y resultados importantes de tus tests. Puede ayudarte a investigar los problemas de rendimiento y las fallas de tests que son más relevantes para tu trabajo, centrándose en el código del que eres responsable, en lugar de en los procesos que ejecutan tus pruebas.
 
-## Configuración
+## Configurar
 
 Selecciona una opción para configurar la optimización de tests en Datadog:
 
@@ -68,7 +65,7 @@ Además de los tests, la optimización de tests proporciona visibilidad para tod
 | {{< ci-details title="Informes basados ​​en el Agent" >}}Capacidad de brindar información de tests a través del Datadog Agent.{{< /ci-details >}}                                                                                                  | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Informes sin Agent" >}}Capacidad de brindar información de tests sin el Datadog Agent.{{< /ci-details >}}                                                                                                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Visibilidad a nivel de conjunto de tests" >}}Visibilidad para todo el proceso de prueba, incluidas sesiones, módulos, conjuntos y tests.{{< /ci-details >}}                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="API manual" >}}Capacidad de crear mediante programación eventos de visibilidad de CI para marcos de test que no son compatibles con la instrumentación automática de Datadog.{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} |           |                        |
+| {{< ci-details title="API manual" >}}Capacidad de crear mediante programación eventos de visibilidad de CI para marcos de test que no son compatibles con la instrumentación automática de Datadog.{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |            |           |                        |
 | {{< ci-details title="Propietario de código por test" >}}Detección automática del propietario de un archivo de test basado en el archivo CODEOWNERS.{{< /ci-details >}}                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} | {{< X >}} (parcialmente)  |
 | {{< ci-details title="Inicio/fin del código fuente" >}}Informe automático de las líneas de inicio y final de un test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (solo inicio) | {{< X >}} | {{< X >}} (solo inicio)| {{< X >}} | {{< X >}} | {{< X >}} (solo inicio) |
 | {{< ci-details title="CI e información de Git" >}}Recopilación automática de metadatos del entorno de Git y CI, como el proveedor de CI, el SHA de confirmación de Git o la URL del pipeline.{{< /ci-details >}}                                                        | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
@@ -81,7 +78,7 @@ Además de los tests, la optimización de tests proporciona visibilidad para tod
 | {{< ci-details title="Repetir tests automáticamente*" >}}<a href="/tests/flaky_test_management/auto_test_retries">Repetir tests fallidos</a> automáticamente hasta N veces para evitar que la compilación falle debido a defectos en los tests.{{< /ci-details >}}    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Integración de Selenium RUM" >}}<a href="/tests/browser_tests">Vincular sesiones del navegador a casos de tests</a>automáticamente al probar aplicaciones instrumentadas con RUM.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
-\* Esta función es opcional y debe activarse en la página [**Configuración de optimización de pruebas**][2].
+\* Esta función es opcional y debe activarse en la [página **Test Optimization Settings**][2] (Configuración de Test Optimization).
 
 ## Configuraciones por defecto
 
@@ -93,7 +90,7 @@ Por ejemplo, supongamos que estás probando una única confirmación y tienes un
 
 ### Probar los atributos de configuración
 
-Cuando ejecutas tus tests con la optimización de tests, la biblioteca detecta e informa sobre el entorno en el que se ejecutan los tests como etiquetas (tags) de test. Por ejemplo, el nombre del sistema operativo, como `Windows` o `Linux`, y la arquitectura de la plataforma, como `arm64` o `x86_64`, se agregan como etiquetas en cada test. Estos valores se muestran en las páginas de confirmación y de información general de la rama cuando un test falla o es defectuoso para una configuración específica, pero no para otras.
+Cuando ejecutas tus tests con la optimización de tests, la librería detecta e informa sobre el entorno en el que se ejecutan los tests como etiquetas (tags) de test. Por ejemplo, el nombre del sistema operativo, como `Windows` o `Linux`, y la arquitectura de la plataforma, como `arm64` o `x86_64`, se agregan como etiquetas en cada test. Estos valores se muestran en las páginas de confirmación y de información general de la rama cuando un test falla o es defectuoso para una configuración específica, pero no para otras.
 
 Las siguientes etiquetas se recopilan automáticamente para identificar configuraciones de test y algunas pueden aplicarse solo a plataformas específicas:
 
@@ -115,7 +112,7 @@ Las siguientes etiquetas se recopilan automáticamente para identificar configur
 
 ### Configuraciones de tests parametrizados
 
-Cuando se ejecutan tests parametrizados, la biblioteca detecta y genera información sobre los parámetros utilizados. Los parámetros son parte de la configuración del test, por lo que el mismo caso de test ejecutado con diferentes parámetros se considera como dos pruebas diferentes en la optimización de tests.
+Cuando se ejecutan tests parametrizados, la librería detecta y genera información sobre los parámetros utilizados. Los parámetros son parte de la configuración del test, por lo que el mismo caso de test ejecutado con diferentes parámetros se considera como dos pruebas diferentes en la optimización de tests.
 
 Si un parámetro de test no es determinista y tiene un valor diferente cada vez que se ejecuta un test, cada ejecución de test se considera un nuevo test en la optimización de tests. Como consecuencia, es posible que algunas funciones del producto no funcionen correctamente para dichos tests: historial de ejecuciones, detección de defectos, análisis del impacto de los tests y otras.
 
@@ -130,7 +127,7 @@ Evita utilizar parámetros de test no deterministas. En caso de que esto no sea 
 
 ## Configuraciones personalizadas
 
-Hay algunas configuraciones que no se pueden identificar directamente ni informar de forma automática porque pueden depender de variables de entorno, argumentos de ejecución de tests u otros enfoques que utilizan los desarrolladores. En esos casos, debes proporcionar los detalles de configuración a la biblioteca para que la optimización de tests pueda identificarlos correctamente.
+Hay algunas configuraciones que no se pueden identificar directamente ni informar de forma automática porque pueden depender de variables de entorno, argumentos de ejecución de tests u otros enfoques que utilizan los desarrolladores. En esos casos, debes proporcionar los detalles de configuración a la librería para que la optimización de tests pueda identificarlos correctamente.
 
 Define estas etiquetas como parte de la variable de entorno `DD_TAGS` con el prefijo `test.configuration`.
 
@@ -148,11 +145,11 @@ Para filtrar utilizando estas etiquetas de configuraciones, [debes crear facetas
 
 ## Mejora el flujo de trabajo de tu desarrollador
 
-{{< whatsnext desc="Integra la optimización de tests con herramientas para informar datos de cobertura de código, mejorar los tests del navegador con RUM y acceder a información en todas las plataformas al agilizar la identificación y resolución de problemas en tu ciclo de desarrollo." >}}
-{{< nextlink href="/tests/developer_workflows/" >}}Mejorar los flujos de trabajo de los desarrolladores con Datadog{{< /nextlink >}}
-{{< nextlink href="/tests/code_coverage" >}}Obtén más información sobre la cobertura de código{{< /nextlink >}}
-{{< nextlink href="/tests/browser_tests" >}}Instrumentar tests de Cypress Browser con RUM de navegador{{< /nextlink >}}
-{{< nextlink href="/tests/swift_tests" >}}Instrumentar tests de Swift con RUM de navegador{{< /nextlink >}}
+{{< whatsnext desc="Integrar Test Optimization con herramientas para informar datos de cobertura de código, mejorar tests de navegador con RUM y acceder a información entre plataformas al mejorar la identificación de problemas y la resolución en tu ciclo de desarrollo." >}}
+{{< nextlink href="/tests/developer_workflows/" >}}Mejorar los procesos de desarrollo con Datadog{{< /nextlink >}}
+{{< nextlink href="/tests/code_coverage" >}}Obtén información sobre Code Coverage{{< /nextlink >}}
+{{< nextlink href="/tests/browser_tests" >}}Instrumentar tests de navegador de Cypress con Browser RUM{{< /nextlink >}}
+{{< nextlink href="/tests/swift_tests" >}}Instrumentar tests de Swift con RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Utilizar los datos de los tests CI

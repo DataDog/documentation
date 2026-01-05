@@ -1,5 +1,6 @@
 ---
 title: Events
+description: Configure UI component event triggers and reactions, including state functions for dynamic app interactions and behaviors.
 aliases:
 - /app_builder/events
 - /service_management/app_builder/events
@@ -11,17 +12,20 @@ further_reading:
 - link: "/service_management/app_builder/components/"
   tag: "Documentation"
   text: "Components"
+- link: "https://learn.datadoghq.com/courses/app-builder-integration"
+  tag: "Learning Center"
+  text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 UI components can trigger reactions on an **Event**. Event triggers differ according to the component. For example, a button component can trigger a reaction on a click event, and a table component event can trigger a reaction on a page change or table row click event. To see what event triggers are available for a given component, see [Components][1].
 
 An event can set the state of a UI component, open or close a modal, trigger another query, or even run custom JavaScript.
 
 For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
+
+In addition to working with events manually, you can use Bits AI to set up event handlers, configure event-driven actions, and optimize event logic:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt for an event, or try the prompt `How can you help me with events?`.
 
 ### State functions
 
@@ -62,4 +66,4 @@ To see what state functions are available for a given component, see [Components
 
 [1]: /service_management/app_builder/components
 [2]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
-[8]: https://datadoghq.slack.com/
+[8]: https://chat.datadoghq.com/

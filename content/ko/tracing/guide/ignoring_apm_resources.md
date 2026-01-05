@@ -9,7 +9,7 @@ title: APM에서 원하지 않는 리소스 무시하기
 - [트레이스 에이전트를 구성](#trace-agent-configuration-options)(Datadog 에이전트)하거나 또는
 - [트레이서를 구성](#tracer-configuration-options)하는 것입니다.
 
-<div class="alert alert-warning"><strong>참고</strong>: 다음 옵션으로 트레이스를 필터링하면 <a href="/tracing/guide/metrics_namespace/">트레이스 메트릭</a>에서 이 해당 요청을 삭제합니다. 트레이스 메트릭에 영향을 주지 않고 수집 데이터를 줄이는 방법을 알아보려면 <a href="/tracing/trace_ingestion/ingestion_controls">수집 통제</a>를 참고하세요.</div>
+<div class="alert alert-danger"><strong>참고</strong>: 다음 옵션으로 트레이스를 필터링하면 <a href="/tracing/guide/metrics_namespace/">트레이스 메트릭</a>에서 이 해당 요청을 삭제합니다. 트레이스 메트릭에 영향을 주지 않고 수집 데이터를 줄이는 방법을 알아보려면 <a href="/tracing/trace_ingestion/ingestion_controls">수집 통제</a>를 참고하세요.</div>
 
 도움이 필요하면 [Datadog 지원팀][1]에 문의하세요.
 
@@ -113,7 +113,7 @@ Datadog는 데이터 수집 후 백엔드에서 다음 스팬 태그를 생성�
 | `http.useragent_details.browser.family` | User-Agent에서 보고한 브라우저 제품군    |
 | `http.useragent_details.device.family`  | User-Agent에서 보고한 디바이스 제품군     |
 
-<div class="alert alert-warning"><strong>참고</strong>: 2022년 10월 1일부터 Datadog 백엔드에서는 수집한 스팬의 트레이스 전체에 <a href="/tracing/trace_collection/tracing_naming_convention">스팬 태그 시맨틱</a>을 적용하기 위해 리매핑을 적용합니다. Datadog 에이전트 수준에서 태그 기반 스팬을 모두 제외하고 싶으면 <strong>리맵</strong> 열에 있는 태그를 사용하세요.</div>
+<div class="alert alert-danger"><strong>참고</strong>: 2022년 10월 1일부터 Datadog 백엔드에서는 수집한 스팬의 트레이스 전체에 <a href="/tracing/trace_collection/tracing_naming_convention">스팬 태그 시맨틱</a>을 적용하기 위해 리매핑을 적용합니다. Datadog 에이전트 수준에서 태그 기반 스팬을 모두 제외하고 싶으면 <strong>리맵</strong> 열에 있는 태그를 사용하세요.</div>
 
 #### 네트워크 통신
 
@@ -382,13 +382,13 @@ Amazon ECS(예: EC2)를 사용하는 경우, Datadog 에이전트 컨테이너 �
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>참고</strong>: 이 방법으로 트레이스를 필터링하면 <a href="/tracing/guide/metrics_namespace/">트레이스 메트릭</a>에서 이 해당 요청을 삭제합니다. 트레이스 메트릭에 영향을 주지 않고 수집 데이터를 줄이는 방법을 알아보려면 <a href="/tracing/trace_ingestion/ingestion_controls">수집 통제</a>를 참고하세요.</div>
+<div class="alert alert-danger"><strong>참고</strong>: 이 방법으로 트레이스를 필터링하면 <a href="/tracing/guide/metrics_namespace/">트레이스 메트릭</a>에서 이 해당 요청을 삭제합니다. 트레이스 메트릭에 영향을 주지 않고 수집 데이터를 줄이는 방법을 알아보려면 <a href="/tracing/trace_ingestion/ingestion_controls">수집 통제</a>를 참고하세요.</div>
 
 ## 트레이서 구성 옵션
 
 일부 언어 특정 트레이서에서는 Datadog 에이전트로 전송하기 전에 스팬을 수정할 수 있습니다. 애플리케이션에서 필요한 특정 요구 사항 있고 아래 언어를 사용하는 경우 이 방법을 사용할 수 있습니다.
 
-<div class="alert alert-danger"><strong>중요</strong>: 요청이 분산된 트레이스와 연결되어 있을 경우, 이 필터링 규칙으로 트레이스 일부가 제외될 경우 결과 트레이스에 샘플링 부정확성이 있을 수 있으니 유의하세요.</div>
+<div class="alert alert-warning"><strong>중요</strong>: 요청이 분산된 트레이스와 연결되어 있을 경우, 이 필터링 규칙으로 트레이스 일부가 제외될 경우 결과 트레이스에 샘플링 부정확성이 있을 수 있으니 유의하세요.</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
@@ -487,7 +487,7 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-warning"><strong>참고</strong>: 이 방법으로 트레이스를 필터링하면 <a href="/tracing/guide/metrics_namespace/">트레이스 메트릭</a>에서 이 해당 요청을 삭제합니다. 트레이스 메트릭에 영향을 주지 않고 수집 데이터를 줄이는 방법을 알아보려면 <a href="/tracing/trace_ingestion/ingestion_controls">수집 통제</a>를 참고하세요.</div>
+<div class="alert alert-danger"><strong>참고</strong>: 이 방법으로 트레이스를 필터링하면 <a href="/tracing/guide/metrics_namespace/">트레이스 메트릭</a>에서 이 해당 요청을 삭제합니다. 트레이스 메트릭에 영향을 주지 않고 수집 데이터를 줄이는 방법을 알아보려면 <a href="/tracing/trace_ingestion/ingestion_controls">수집 통제</a>를 참고하세요.</div>
 
 [1]: /ko/help/
 [2]: /ko/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

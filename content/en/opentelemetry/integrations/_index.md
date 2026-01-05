@@ -8,19 +8,21 @@ further_reading:
 
 This page covers Datadog-supported OpenTelemetry (OTel) integrations. These integrations allow you to collect and monitor your observability data using OpenTelemetry in Datadog.
 
-<div class="alert alert-info">
-  <strong>Metric Pricing</strong><br>
-  <i>Standard</i> metrics are collected at no extra cost. These are:<br>
-  &hyphen; Documented in the <strong>Data collected</strong> table for each integration.<br>
-  &hyphen; Defined in the <code>metadata.yaml</code> file of the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver">corresponding OpenTelemetry receiver.</a><br><br>
-  Ensure you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.
-</div>
-
 ## Overview
 
 OpenTelemetry (OTel) integrations are components that enable the collection of observability data (metrics, traces, and logs) from various sources using the OpenTelemetry standard. These integrations are designed to work with the OpenTelemetry Collector, which receives, processes, and exports telemetry data to observability backends like Datadog.
 
 For a comprehensive list of all OpenTelemetry integrations, see the [OpenTelemetry Registry][1]. This registry provides information on receivers, exporters, and other components in the OpenTelemetry ecosystem.
+
+## Metric pricing
+
+Datadog collects metrics from supported OpenTelemetry receivers at no extra cost. These no-cost metrics are:
+- Defined in the `metadata.yaml` file for each receiver.
+- Listed in the [Metrics Mappings][14] table.
+
+For example, the [`dockerstatsreceiver`][15] `metadata.yaml` file lists metrics that you can collect at no extra cost.
+
+<div class="alert alert-danger">Ensure that you configure receivers according to OpenTelemetry receiver documentation. Incorrectly configured receivers may cause metrics to be classified as custom, resulting in additional charges.</div>
 
 ## Datadog-supported OpenTelemetry integrations
 
@@ -38,6 +40,7 @@ Monitor and optimize your application's performance:
 Monitor the health and performance of your OpenTelemetry Collector:
 
 - [Collector Health Metrics][4] - Track the performance of your OpenTelemetry Collector
+- [Datadog Extension][17] - View Collector configuration and build information in Datadog Infrastructure Monitoring
 
 ### Containers and hosts
 
@@ -45,6 +48,8 @@ Gain insights into your containerized environments and host systems:
 
 - [Docker Metrics][5] - Monitor Docker container performance
 - [Host Metrics][6] - Track system metrics such as CPU, disk, and memory usage
+- [Kubernetes Metrics][18] - Monitor Kubernetes cluster health and performance
+- [Podman Metrics][16] - Monitor Podman container performance
 
 ### Web servers and proxies
 
@@ -85,3 +90,9 @@ Monitor big data processing frameworks:
 [11]: /opentelemetry/integrations/mysql_metrics/
 [12]: /opentelemetry/integrations/kafka_metrics/
 [13]: /opentelemetry/integrations/spark_metrics/
+[14]: /opentelemetry/mapping/metrics_mapping/#metrics-mappings
+[15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/metadata.yaml
+[16]: /opentelemetry/integrations/podman_metrics/
+[17]: /opentelemetry/integrations/datadog_extension/
+[18]: /opentelemetry/integrations/kubernetes_metrics/
+

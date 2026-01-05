@@ -1,5 +1,6 @@
 ---
 title: Instrumenting a Ruby on Rails application on Heroku with Datadog
+description: Step-by-step guide to deploy and instrument a Ruby on Rails application on Heroku with Datadog to collect metrics, logs, traces, and integration data.
 further_reading:
 - link: "/agent/basic_agent_usage/heroku/"
   tag: "Documentation"

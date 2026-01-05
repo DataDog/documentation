@@ -2,6 +2,9 @@
 title: Host Agent Log collection
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
+- link: "agent/logs/agent_tags/"
+  tag: "Documentation"
+  text: "Agent tags automatically added to logs"
 - link: "agent/logs/advanced_log_collection/#filter-logs"
   tag: "Documentation"
   text: "Filter logs sent to Datadog"
@@ -29,13 +32,22 @@ Collecting logs is **not enabled** by default in the Datadog Agent. If you are r
 
 To enable log collection with an Agent running on your host, change `logs_enabled: false` to `logs_enabled: true` in the Agent's [main configuration file][5] (`datadog.yaml`).
 
-{{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
+{{< code-block lang="yaml" filename="datadog.yaml" disable_copy="false" collapsible="true" >}}
+logs_enabled: true
+logs_config:
+    auto_multi_line_detection: true
+    force_use_http: true
+{{< /code-block >}}
 
-Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details on how to enforce HTTPS/TCP transport, refer to the [Agent transport documentation][6].
+See the [sample config_template.yaml file][6] for all available configuration options.
 
-To send logs with environment variables, configure the following:
+<div class="alert alert-info">Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details, see <a href="/agent/logs/log_transport/">Agent transport</a>.</div>
 
-* `DD_LOGS_ENABLED=true`
+To send logs with **environment variables**, configure the following:
+
+```
+DD_LOGS_ENABLED=true
+```
 
 After activating log collection, the Agent is ready to forward logs to Datadog. Next, configure the Agent on where to collect logs from.
 
@@ -46,10 +58,10 @@ Datadog Agent v6 can collect logs and forward them to Datadog from files, the ne
 1. In the `conf.d/` directory at the root of your [Agent's configuration directory][5], create a new `<CUSTOM_LOG_SOURCE>.d/` folder that is accessible by the Datadog user.
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
-4. [Restart your Agent][7] to take into account this new configuration.
-5. Run the [Agent's status subcommand][8] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
+4. [Restart your Agent][8] to take into account this new configuration.
+5. Run the [Agent's status subcommand][9] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
 
-If there are permission errors, see [Permission issues tailing log files][9] to troubleshoot.
+If there are permission errors, see [Permission issues tailing log files][10] to troubleshoot.
 
 Below are examples of custom log collection setup:
 
@@ -66,7 +78,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
+On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read access to the log file.
 
 **Note**: A log line needs to be terminated with a newline character, `\n` or `\r\n`, otherwise the Agent waits indefinitely and does not send the log line.
 
@@ -75,6 +87,11 @@ On **Windows**, use the path `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.
 
 {{% tab "TCP/UDP" %}}
 
+To capture the sender IP address and include it in the log message payload, add the following configuration to your `datadog.yaml` file:
+```yaml
+ logs_config:
+   use_sourcehost_tag: true
+```
 To gather logs from your `<APP_NAME>` application that forwards its logs to TCP port **10518**, create a `<APP_NAME>.d/conf.yaml` file at the root of your [Agent's configuration directory][1] with the following content:
 
 ```yaml
@@ -154,10 +171,10 @@ Finally, [restart the Agent][2].
 {{% tab "Windows Private Location" %}}
 Follow the steps in these sections to send Windows Private Location logs to Datadog:
 
-### Configure the Agent 
+### Configure the Agent
 
-1. Enable Agent log collection by setting `logs_enabled: true` in the Agent configuration file. 
-2. Navigate to `C:\ProgramData\Datadog\conf.d` and create a folder named `synthetics_worker.d`. 
+1. Enable Agent log collection by setting `logs_enabled: true` in the Agent configuration file.
+2. Navigate to `C:\ProgramData\Datadog\conf.d` and create a folder named `synthetics_worker.d`.
 3. Inside the `synthetics_worker.d` folder, create a file named `conf.yaml` using the following example as a template:
 ```yaml
 logs:
@@ -175,7 +192,7 @@ logs:
 Since the Private Location installation folder is restricted to admin access, the Datadog Agent needs permission to access the log file. Follow these steps to verify the user running the Datadog Agent:
 
 1. Press the Windows key and `R`, and search for `Run`.
-2. Find the Datadog Agent, right-click it, and select `Properties`. 
+2. Find the Datadog Agent, right-click it, and select `Properties`.
 3. In the `Log On` tab, verify the account (the default is `ddagentuser`).
 4. Close the window.
 
@@ -183,7 +200,7 @@ Since the Private Location installation folder is restricted to admin access, th
 
 1. Go to `C:\Program Files` and find the `synthetics_worker.d` folder.
 2. Right-click the `synthetics_worker.d` folder and select `Properties`.
-3. Go to the `Security` tab. 
+3. Go to the `Security` tab.
 4. Click `Edit` and add `ddagentuser`.
 5. Grant the necessary permissions.
 6. Restart the Datadog Agent through the Services screen or command line to apply the changes and begin sending logs to Datadog.
@@ -198,15 +215,15 @@ List of all available parameters for log collection:
 | `port`           | Yes      | If `type` is **tcp** or **udp**, set the port for listening to logs.                                                                                                                                                                                                                                                                                     |
 | `path`           | Yes      | If `type` is **file** or **journald**, set the file path for gathering logs.                                                                                                                                                                                                                                                                             |
 | `channel_path`   | Yes      | If `type` is **windows_event**, list the Windows event channels for collecting logs.                                                                                                                                                                                                                                                                     |
-| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][10], this must be the same service name. Check the [unified service tagging][11] instructions when configuring `service` across multiple data types.                                                                                                          |
-| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][12] you are collecting, for example: `myapp` from `myapp.request.count`. |
+| `service`        | Yes      | The name of the service owning the log. If you instrumented your service with [Datadog APM][11], this must be the same service name. Check the [unified service tagging][12] instructions when configuring `service` across multiple data types.                                                                                                          |
+| `source`         | Yes      | The attribute that defines which integration is sending the logs. If the logs do not come from an existing integration, then this field may include a custom source name. However, it is recommended that you match this value to the namespace of any related [custom metrics][13] you are collecting, for example: `myapp` from `myapp.request.count`. |
 | `include_units`  | No       | If `type` is **journald**, list of the specific journald units to include.                                                                                                                                                                                                                                                                               |
 | `exclude_paths`  | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file or files to exclude from log collection. This is available for Agent version >= 6.18.                                                                                                                                                                            |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | No       | The attribute used to define the category a source attribute belongs to, for example: `source:postgres, sourcecategory:database` or `source: apache, sourcecategory: http_web_access`.                                                                                                                                                                                                                              |
 | `start_position` | No       | See [Start position](#start-position) for more information.|
 | `encoding`       | No       | If `type` is **file**, set the encoding for the Agent to read the file. Set it to `utf-16-le` for UTF-16 little-endian, `utf-16-be` for UTF-16 big-endian, or `shift-jis` for Shift JIS. If set to any other value, the Agent reads the file as UTF-8.  _Added `utf-16-le` and `utf-16be` in Agent v6.23/v7.23, `shift-jis` in Agent v6.34/v7.34_                                                                                      |
-| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][13]).                                                                                                                                                                                                                                                                             |
+| `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][14]).                                                                                                                                                                                                                                                                             |
 
 ### Start position
 
@@ -235,14 +252,15 @@ For both file and journald tailer types, if an `end` or `beginning` position is 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/observability_pipelines/
-[3]: /agent/kubernetes/log/
-[4]: /agent/docker/log/
+[3]: /containers/kubernetes/log/
+[4]: /containers/docker/log/
 [5]: /agent/configuration/agent-configuration-files/
-[6]: /agent/logs/log_transport/
-[7]: /agent/configuration/agent-commands/#restart-the-agent
-[8]: /agent/configuration/agent-commands/#agent-status-and-information
-[9]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files'
-[10]: /tracing/
-[11]: /getting_started/tagging/unified_service_tagging
-[12]: /metrics/custom_metrics/#overview
-[13]: /getting_started/tagging/
+[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[7]: /agent/logs/log_transport/
+[8]: /agent/configuration/agent-commands/#restart-the-agent
+[9]: /agent/configuration/agent-commands/#agent-status-and-information
+[10]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files
+[11]: /tracing/
+[12]: /getting_started/tagging/unified_service_tagging
+[13]: /metrics/custom_metrics/#overview
+[14]: /getting_started/tagging/

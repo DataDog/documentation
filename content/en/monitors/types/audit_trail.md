@@ -24,7 +24,7 @@ Audit Trail monitors alert you when a specified type of audit event exceeds a us
 
 To create an [Audit Trail monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Audit Trail*.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info">There is a default limit of 1000 monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 

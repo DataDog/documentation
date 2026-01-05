@@ -26,7 +26,7 @@ Cloudcraft サブスクリプションのキャンセルは、Cloudcraft アプ�
 - Datadog の営業チームを通じてサブスクリプションを購入した場合、自動更新されず、請求サイクルの終わりに期限が切れます。
 - AWS Marketplace を通じてサブスクリプションを購入した場合、キャンセル手続きは AWS アカウントを通じて行う必要があります。詳細については、AWS Marketplace のドキュメントページの[製品サブスクリプションのキャンセル][2]を参照してください。
 
-<div class="alert alert-danger">サブスクリプションをキャンセルしても、Cloudcraft のサーバーからデータが削除されるわけではありません。アカウントが無料プランに変更されるだけです。Cloudcraft のサーバーからアカウントとすべてのデータを削除したい場合は、<a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">Cloudcraft サポートチームに連絡</a>してください。
+<div class="alert alert-warning">サブスクリプションをキャンセルしても、Cloudcraft のサーバーからデータが削除されるわけではありません。アカウントが無料プランに変更されるだけです。Cloudcraft のサーバーからアカウントとすべてのデータを削除したい場合は、<a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">Cloudcraft サポートチームに連絡</a>してください。
 </div>
 
 [1]: /ja/cloudcraft/getting-started/using-bits-menu/

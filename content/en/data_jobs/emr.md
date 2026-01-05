@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Amazon EMR
+description: "Configure Data Jobs Monitoring for Apache Spark applications on Amazon EMR clusters using AWS Secrets Manager and bootstrap actions."
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -7,6 +8,8 @@ further_reading:
 ---
 
 [Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
+
+If you are using [EMR on EKS][13], follow these [instructions for setting up DJM on Kubernetes][14].
 
 ## Requirements
 
@@ -38,7 +41,7 @@ EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amaz
 
 #### Permissions to get secret value using AWS Secrets Manager
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These permissions are <strong>required</strong> if you are using AWS Secrets Manager.
 </div>
 
@@ -54,7 +57,7 @@ These permissions are <strong>required</strong> if you are using AWS Secrets Man
 
 #### Permissions to describe cluster
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 These permissions are <strong>required</strong> if you are <strong>NOT</strong> using the default role, <code>EMR_EC2_DefaultRole</code>.
 </div>
 
@@ -114,7 +117,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    ```
 
    Optionally, the script can be configured adding the following environment variables:
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.12.9.sh` to use version `0.12.9`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
 
    Optionally, the script can be configured by adding the following environment variables:
 
@@ -123,8 +126,10 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 | DD_TAGS                  | Add tags to EMR cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.   |         |
 | DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
+| DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][16] for more details. |         |
 
 [15]: /getting_started/tagging/
+[16]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
@@ -178,3 +183,5 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html
 [11]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-iam-role-for-ec2.html
 [12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/emr.go
+[13]: https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html
+[14]: /data_jobs/kubernetes/

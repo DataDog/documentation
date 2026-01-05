@@ -55,7 +55,7 @@ En el Agent 6.11 y anteriores:
 & "$env:ProgramFiles\Datadog\Datadog Agent\embedded\python" -m pip install <PACKAGE_NAME>
 ```
 
-También se puede añadir el paquete en la carpeta de biblioteca comprimida que se encuentra en
+También se puede añadir el paquete en la carpeta de librería comprimida que se encuentra en
 
 ```
 %ProgramFiles%\Datadog\Datadog Agent\files

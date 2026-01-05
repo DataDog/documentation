@@ -31,11 +31,20 @@ Mobile Session Replay only supports native frameworks. Within these frameworks, 
 - Advanced text styling
 
 ### Images do not render properly
-Depending on the SDK configuration of Mobile Session Replay, images may not always be displayed. 
-If privacy settings allow for it, Mobile Session Replay only captures Android images up to 100x100dp and iOS bundled images. All other images are replaced by a placeholder indicating the image size in the UI.
+Depending on the SDK configuration of Mobile Session Replay, images may not always be displayed.
+
+Image visibility depends on your SDK privacy configuration:
+- On iOS, if `maskNonBundledOnly` is enabled, only bundled images with UIKit and images up to 100x100 pts on SwiftUI are captured.
+- On Android, if `mask_large_only` is used, only images up to 100x100dp are captured.
+
+All other images are replaced by a "Content Image" placeholder in the UI.
+
+Learn more about [image privacy settings][1].
 
 Images follow a separate processing pipeline, which may introduce a small delay between uploading a replay and the image being available for rendering in the web player.
 In this case, wait a few minutes and then reload the replay. 
+
+On iOS, vector images are not supported in Session Replay and appear as "Unsupported image type" placeholders in the replay. To work around this, disable the "Preserve Vector Data" option in your asset catalog so that Xcode rasterizes the images, allowing them to be captured correctly. SF Symbols are also not supported.
 
 ### The session replay rendering looks does not exactly mirror my application
 Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images.
@@ -56,3 +65,5 @@ At any time during the lifetime of the host app, it's possible to change the tra
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /real_user_monitoring/session_replay/mobile/privacy_options/?platform=ios&tab=as-wrappers#image-masking

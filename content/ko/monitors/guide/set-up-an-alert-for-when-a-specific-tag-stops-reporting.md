@@ -4,10 +4,10 @@ aliases:
 further_reading:
 - link: /monitors/
   tag: 설명서
-  text: Learn how to create a monitor
+  text: 모니터 생성 방법
 - link: /monitors/notify/
   tag: 설명서
-  text: Configure your monitor notifications
+  text: 모니터 알림 설정
 title: 특정 태그 보고 중단 시 경고 설정하기
 ---
 
@@ -17,9 +17,11 @@ title: 특정 태그 보고 중단 시 경고 설정하기
 1. 가령, `system.cpu.user`와 같은 양수 메트릭에 대해 `a < -1`의 조건을 설정하는 것처럼 절대 작동되지 않는 경고 조건을 선택하세요.
 1. 이 예시에서 보는 것처럼, _Notify if data is missing_ 옵션을 활성화하세요.
 
-{{< img src="monitors/guide/tag_stop_reporting.png" alt="Tag stop reporting"  >}}
+{{< img src="monitors/guide/tag_stop_reporting.png" alt="Tag stop reporting" >}}
 
 태그가 보고를 중단하면 경고가 작동합니다.
+
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 

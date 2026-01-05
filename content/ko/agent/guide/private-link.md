@@ -22,7 +22,7 @@ title: AWS PrivateLink를 통해 Datadog에 연결
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
-<div class="alert alert-warning">Datadog PrivateLink는 선택한 Datadog site에서 지원되지 않습니다.</div>
+<div class="alert alert-danger">Datadog PrivateLink는 선택한 Datadog site에서 지원되지 않습니다.</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1" %}}

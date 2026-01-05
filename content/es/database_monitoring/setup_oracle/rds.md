@@ -9,7 +9,7 @@ title: Configuración de la Monitorización de base de datos para RDS Oracle
 
 {{% dbm-oracle-definition %}}
 
-El Agent recopila telemetría directamente de la base de datos iniciando sesión como usuario de sólo lectura.
+El Agent recopila telemetría directamente de la base de datos iniciando sesión como usuario de solo lectura.
 
 ## Antes de empezar
 
@@ -91,40 +91,30 @@ Para conocer los pasos de instalación, consulta las [instrucciones de instalaci
 
 Crea el archivo de configuración de Oracle Agent `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. Para ver todas las opciones de configuración disponibles, consulta el [archivo de configuración de ejemplo][9].
 
-**Nota:** El subdirectorio de configuración para las versiones del Agent anteriores a `7.53.0` es `oracle-dbm.d`.
+**Nota:** El subdirectorio de configuración para las versiones del Agent entre `7.50.1` y `7.53.0` es `oracle-dbm.d`. Para ver más detalles, consulta [Configuración de la integración de Oracle en el Agent v7.50.1 o posterior][11].
 
 ```yaml
 init_config:
 instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # Nombre del servicio Oracle CDB
+    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
     password: 'ENC[datadog_user_database_password]'
     dbm: true
-    tags:  # Opcional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # Nombre del servicio Oracle CDB
+    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
     password: 'ENC[datadog_user_database_password]'
     dbm: true
-    tags:  # Opcional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
 
 Una vez terminada la configuración del Agent, [reinicia el Datadog Agent][2].
-
-### Instalar o verificar la integración de Oracle
-
-#### Primeras instalaciones
-
-En la página de integraciones de Datadog, instala la [integración de Oracle][7] para tu organización. Se instala un [dashboard de Oracle][5] en tu cuenta que puedes utilizar para monitorizar el rendimiento de tus bases de datos Oracle.
-
-#### Instalaciones existentes
-
-{{% dbm-existing-oracle-integration-setup %}}
 
 ### Validar la configuración
 
@@ -134,7 +124,7 @@ En la página de integraciones de Datadog, instala la [integración de Oracle][7
 
 La Monitorización de base de datos admite consultas personalizadas para bases de datos Oracle. Para obtener más información sobre las opciones de configuración disponibles, consulta [conf.yaml.example][9].
 
-<div class="alert alert-warning">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
+<div class="alert alert-danger">La ejecución de consultas personalizadas puede dar lugar a costes o cargos adicionales evaluados por Oracle.</div>
 
 [1]: /es/database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /es/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
@@ -146,6 +136,7 @@ La Monitorización de base de datos admite consultas personalizadas para bases d
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [10]: /es/database_monitoring/architecture/
+[11]: /es/integrations/guide/oracle-check-upgrade-7.50.1/
 
 ## Referencias adicionales
 

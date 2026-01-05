@@ -12,10 +12,6 @@ further_reading:
 title: Définir les paramètres d'ingestion pour CI Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Présentation
 
 Les filtres d'exclusion permettent de contrôler précisément votre budget de CI Visibility en vous laissant définir une ou plusieurs conditions pour que Datadog ne traite pas certains événements.

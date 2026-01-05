@@ -70,4 +70,4 @@ For a list of supported platforms and operating systems, see [.NET Framework Com
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/remote_config/#enabling-remote-configuration
+[3]: /remote_configuration#enabling-remote-configuration

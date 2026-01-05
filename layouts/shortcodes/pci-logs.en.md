@@ -14,10 +14,10 @@ To begin **onboarding**:
 - `pci.browser-intake-datadoghq.com:443` for browser logs
 
 3. For example, add the following lines to the Agent configuration file:
-```
-logs_config:
-  logs_dd_url: <agent-http-intake-pci.logs.datadoghq.com:443>
-```
+   ```
+   logs_config:
+     logs_dd_url: agent-http-intake-pci.logs.datadoghq.com:443
+   ```
 4. All logs that are sent to the PCI compliant endpoint(s) automatically have a set of [Sensitive Data Scanner][106] PCI rules that are applied to scrub any cardholder data. These dedicated PCI rules must be enabled for PCI DSS compliance and are included with no additional charge. Note that Sensitive Data Scanner for PCI customers does not include the Summary page or estimated usage metric capabilities.
 
 To finish onboarding and be moved to **compliant**:

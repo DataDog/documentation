@@ -3,11 +3,15 @@ aliases:
 - /es/logs/log_collection/rsyslog
 categories:
 - recopilación de logs
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/rsyslog.md
 description: Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 doc_link: /integrations/rsyslog/
+further_reading:
+- link: https://www.datadoghq.com/architecture/using-rsyslog-to-send-logs-to-datadog/
+  tag: Centro de arquitectura
+  text: Uso de Rsyslog para enviar logs a Datadog
 has_logo: true
 integration_id: rsyslog
 integration_title: rsyslog
@@ -445,9 +449,8 @@ Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 
 {{< /tabs >}}
 
-## Solucionar problemas
+## Resolución de problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de soporte de Datadog][1].
-
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][1].
 
 [1]: /es/help/

@@ -31,14 +31,14 @@
         username: datadog
         password: 'ENC[datadog_user_database_password]'
         connector: 'odbc'
-        driver: '{ODBC Driver 18 for SQL Server}' # This is the section header of odbcinst.ini
+        driver: 'ODBC Driver 18 for SQL Server' # This is the section header of odbcinst.ini
         dsn: 'datadog' # This is the section header of odbc.ini
     ```
 5. Restart the Agent.
 
 ### Using AlwaysOn
 
-For AlwaysOn users, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint. This is because information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps to keep it up and running in the event of a failover.
+For AlwaysOn users, the Agent should be installed on each replica server and connected directly to each replica. The full set of AlwaysOn telemetry is collected from each individual replica, in addition to host-based telemetry (CPU, disk, memory, and so on) for each server.
 
 ```yaml
 instances:
@@ -48,15 +48,20 @@ instances:
     password: 'ENC[datadog_user_database_password]'
     connector: adodbapi
     adoprovider: MSOLEDBSQL
-    include_ao_metrics: true  # If Availability Groups is enabled
-    include_fci_metrics: true   # If Failover Clustering is enabled
+    database_metrics:
+      # If Availability Groups is enabled
+      ao_metrics:
+        enabled: true
+      # If Failover Clustering is enabled
+      fci_metrics:
+        enabled: true
 ```
 
 ### Monitoring SQL Server Agent Jobs
 
 <div class="alert alert-info">To enable monitoring of SQL Server Agent jobs, the Datadog Agent must have access to the [msdb] database.</div>
 
-<div class="alert alert-warning">SQL Server Agent Jobs monitoring is not available for Azure SQL Database.</div>
+<div class="alert alert-danger">SQL Server Agent Jobs monitoring is not available for Azure SQL Database.</div>
 
 Monitoring of SQL Server Agent jobs is supported on SQL Server versions 2016 and newer. Starting from Agent v7.57, the Datadog Agent can collect SQL Server Agent job metrics and histories. To enable this feature, set `enabled` to `true` in the `agent_jobs` section of the SQL Server integration configuration file. The `collection_interval` and `history_row_limit` fields are optional.
 
@@ -75,7 +80,9 @@ instances:
 ```
 
 ### Collecting schemas
-Starting from Agent v7.56, the Datadog Agent can collect schema information from SQLServer databases running SQLServer 2017 or higher. To enable this feature, use the `schemas_collection` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
+<div class="alert alert-danger">Datadog Agent v7.56+ and SQL Server 2017 or higher are required for SQL Server schema collection.</div>
+
+To enable this feature, use the `collect_schemas` option. Schemas are collected on databases for which the Agent has `CONNECT` access.
 
 <div class="alert alert-info">To collect schema information from RDS instances, you must grant the <code>datadog</code> user explicit <code>CONNECT</code> access to each database on the instance. For more information, see <a href="/database_monitoring/setup_sql_server/rds/?tab=windowshost#grant-the-agent-access">Grant the Agent access</a>.</div>
 
@@ -92,10 +99,12 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     database_autodiscovery: true
-    schemas_collection:
+    collect_schemas:
       enabled: true
-    # Optional: enable metric collection for indexes
-    include_index_usage_metrics: true
+    database_metrics:
+      # Optional: enable metric collection for indexes
+      index_usage_metrics:
+        enabled: true
 # This instance only collects schemas and index metrics from the `users` database
   - dbm: true
         host: 'shopist-prod,1433'
@@ -104,14 +113,20 @@ instances:
     connector: adodbapi
     adoprovider: MSOLEDBSQL
     database: users
-    schemas_collection:
+    collect_schemas:
       enabled: true
-    include_index_usage_metrics: true
+    database_metrics:
+      # Optional: enable metric collection for indexes
+      index_usage_metrics:
+        enabled: true
 ```
+**Note**: For Agent v7.68 and below, use `schemas_collection` instead of `collect_schemas`.
 
 ### One Agent connecting to multiple hosts
 It is common to configure a single Agent host to connect to multiple remote database instances (see [Agent installation architectures][1006] for DBM). To connect to multiple hosts, create an entry for each host in the SQL Server integration config.
-In these cases, Datadog recommends limiting the number of instances per Agent to a maximum of 10 database instances to guarantee reliable performance.
+
+<div class="alert alert-info">Datadog recommends using one Agent to monitor no more than 30 database instances.<br /><br />Benchmarks show that one Agent running on a t4g.medium EC2 instance (2 CPUs and 4GB of RAM) can successfully monitor 30 RDS db.t3.medium instances (2 CPUs and 4GB of RAM).</div>
+
 ```yaml
 init_config:
 instances:

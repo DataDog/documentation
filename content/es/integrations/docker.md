@@ -1,8 +1,8 @@
 ---
 categories:
-- Configuración y despliegue
-- contenedores
-custom_kind: integration
+- configuración y despliegue
+- rastreo
+custom_kind: integración
 dependencies: []
 description: Monitorización de métricas de Docker con Datadog
 doc_link: https://docs.datadoghq.com/integrations/docker/
@@ -16,18 +16,18 @@ further_reading:
   text: Prácticas recomendadas para la generación de logs en Docker
 git_integration_title: Docker
 has_logo: true
-integration_id: docker
+integration_id: Docker
 integration_title: Docker
 integration_version: ''
 is_public: true
 manifest_version: '1.0'
-name: docker
+name: Docker
 public_title: Integración de Datadog y Docker
 short_description: Monitorización de métricas de Docker con Datadog
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Docker es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software.
@@ -46,7 +46,7 @@ Si quieres ejecutar el Agent dentro de un contenedor, consulta la [documentació
 
 Para obtener información sobre métricas, eventos, y checks de servicio, consulta [Datos de Docker recopilados][2].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

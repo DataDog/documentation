@@ -107,7 +107,6 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 에이전트가 설명 계획을 수집할 수 있도록 `explain_statement` 절차를 생성합니다.
@@ -141,6 +140,14 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+인덱스 메트릭을 수집하려면, `datadog` 사용자에게 추가 권한을 부여합니다.
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+Datadog Agent는 v7.65부터 MySQL 데이터베이스에서 스키마 정보를 수집할 수 있습니다. Agent에 수집 권한을 부여하는 방법은 아래 [스키마 수집][10] 섹션을 참조하세요.
+
 ### 런타임 설정 컨슈머
 다음 절차를 생성하여 에이전트가 런타임에 `performance_schema.events_*` 컨슈머를 실행할 수 있는 기능을 제공하도록 합니다.
 
@@ -164,7 +171,7 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 Aurora 호스트를 모니터링하려면 인프라스트럭처에 Datadog Agent를 설치하고 각 인스턴스 엔드포인트에 원격으로 연결하도록 구성합니다. Agent는 데이터베이스에서 실행할 필요가 없으며 데이터베이스에 연결하기만 하면 됩니다. 여기에 언급되지 않은 추가 Agent 설치 방법은 [Agent 설치 지침][5]을 참조하세요.
 
 {{< tabs >}}
-{{% tab "호스트" %}}
+{{% tab "Host" %}}
 
 ### 자동탐지 설정(권장)
 
@@ -193,7 +200,7 @@ instances:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
-<div class="alert alert-warning"><strong>중요</strong>: 여기에서는 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 여기에서는 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 [에이전트를 재시작][3]하여 MySQL 메트릭을 Datadog에 전송하기 시작합니다.
 
@@ -243,12 +250,12 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-<div class="alert alert-warning"><strong>중요</strong>: 호스트로 클러스트 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 호스트로 클러스트 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 
 [1]: /ko/agent/docker/integrations/?tab=docker
 {{% /tab %}}
-{{% tab "쿠버네티스" %}}
+{{% tab "Kubernetes" %}}
 
 쿠버네티스 클러스터가 있는 경우 데이터베이스 모니터링에서  [Datadog 클러스터 에이전트][1]를 사용하세요.
 
@@ -338,7 +345,7 @@ spec:
     targetPort: 3306
     name: mysql
 ```
-<div class="alert alert-warning"><strong>중요</strong>: 여기에서는 Aurora 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
+<div class="alert alert-danger"><strong>중요</strong>: 여기에서는 Aurora 클러스터 엔드포인트가 아니라 Aurora 인스턴스 엔드포인트를 사용하세요.</div>
 
 Cluster 에이전트가 자동으로 이 설정을 등록하고 MySQL 검사를 실행합니다. 
 
@@ -380,3 +387,4 @@ DBM에서 데이터베이스 원격 분석과 함께 CPU와 같은 AWS의 인프
 [7]: https://app.datadoghq.com/databases
 [8]: /ko/integrations/amazon_rds
 [9]: /ko/database_monitoring/troubleshooting/?tab=mysql
+[10]: /ko/database_monitoring/setup_mysql/aurora?tab=mysql57#collecting-schemas

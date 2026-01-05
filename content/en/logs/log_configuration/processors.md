@@ -35,20 +35,25 @@ In [log configuration settings][1], you can configure processors such as the [Gr
 
 ## Grok parser
 
-Create custom grok rules to parse the full message or a specific attribute of your raw event. For more information, see the [parsing section][2]. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
+Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, limit your grok parser to 10 parsing rules. For more information on Grok syntax and parsing rules, see [Parsing][10].
+
+{{< img src="/logs/processing/processors/define_parsing_rules_syntax_suggestions.png" alt="Grok parser syntax suggestions in the UI" style="width:90%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-Define the Grok processor on the [**Pipelines** page][1]:
+Define the Grok processor on the [**Pipelines** page][1]. To configure Grok parsing rules:
 
-{{< img src="logs/log_configuration/processor/grok_parser.png" alt="Grok Parser" style="width:80%;" >}}
-
-Click **Parse my logs** to kickstart a set of three parsing rules for the logs flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of logs if needed. This feature requires that the corresponding logs are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
-
-Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
-
-Up to five samples can be saved with the processor, and each sample can be up to 5000 characters in length. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+1. Click **Parse my logs** to automatically generate a set of three parsing rules based on the logs flowing through the pipeline.
+   **Note**: This feature requires that the corresponding logs are indexed and actively flowing in. You can temporarily deactivate or sample down exclusion filters to allow the feature to detect logs.
+1. **Log Samples**: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
+1. **Define parsing rules**: Write your parsing rules in the rule editor. As you define rules, the Grok parser provides syntax assistance:
+   - **Matcher suggestions**: Type a rule name followed by `%{`. A dropdown appears with available matchers (such as `word`, `integer`, `ip`, `date`). Select a matcher from the list to insert it into your rule.<br>
+     ```
+     MyParsingRule %{
+     ```
+   - **Filter suggestions**: When adding a filter with `:`, a dropdown shows compatible filters for the selected matcher.
+1. **Test your rules**: Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -71,7 +76,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 |----------------------|------------------|----------|---------------------------------------------------------|
 | `type`               | String           | Yes      | Type of the processor.                                  |
 | `name`               | String           | No       | Name of the processor.                                  |
-| `is_enabled`         | Boolean          | No       | If the processors is enabled or not. Default: `false`.  |
+| `is_enabled`         | Boolean          | No       | If the processor is enabled or not. Default: `false`.  |
 | `source`             | String           | Yes      | Name of the log attribute to parse. Default: `message`. |
 | `samples`            | Array of strings | No       | List of (up to 5) sample logs for this grok parser.     |
 | `grok.support_rules` | String           | Yes      | List of Support rules for your grok parser.             |
@@ -148,8 +153,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log date remap
 ## Log status remapper
 
 Use the status remapper processor to assign attributes as an official status to your logs. For example, add a log severity level to your logs with the status remapper.
-
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log severity after remapping" style="width:40%;" >}}
 
 Each incoming status value is mapped as follows:
 
@@ -241,7 +244,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log service re
 
 ## Log message remapper
 
-`message` is a key attribute in Datadog. Its value is displayed in the **Content** column of the Log Explorer to provide context on the log. You can use the search bar to find a log by the log message. 
+`message` is a key attribute in Datadog. Its value is displayed in the **Content** column of the Log Explorer to provide context on the log. You can use the search bar to find a log by the log message.
 
 Use the log message remapper processor to define one or more attributes as the official log message. Define more than one attribute for cases where the attributes might not exist and an alternative is available. For example, if the defined message attributes are `attribute1`, `attribute2`, and `attribute3`, and `attribute1` does not exist, then `attribute2` is used. Similarly, if `attribute2` does not exist, then `attribute3` is used.
 
@@ -284,15 +287,27 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
+The remapper processor remaps one or more source attribute(s) or tags to a different target attribute or tag. For example, you can remap the `user` attribute to `firstname` to normalize log data in the Log Explorer.
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:60%;">}}
+If the remapper target is an attribute, the processor can also try to cast the value to a new type (`String`, `Integer`, or `Double`). If the cast fails, the original value and type are preserved.
 
-Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
+**Note**: The decimal separator for `Double` values must be `.`.
 
-If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept.
+### Naming constraints
 
-**Note**: The decimal separator for `Double` need to be `.`.
+Characters `:` and `,` are not allowed in the target attribute or tag names. Additionally, tag and attribute names must follow the conventions outlined in [Attributes and Aliasing][5].
+
+### Reserved attributes
+
+The Remapper processor **cannot be used to remap Datadog reserved attributes**. 
+- The `host` attribute cannot be remapped.
+- The following attributes require dedicated remapper processors and cannot be remapped with the generic Remapper. To remap any of the attributes, use the corresponding specialized remapper or processor instead.
+   - `message`: Log message remapper
+   - `service`: Service remapper
+   - `status`: Log status remapper
+   - `date`: Log date remapper
+   - `trace_id`: Trace remapper
+   - `span_id`: Span remapper
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -572,7 +587,7 @@ Returns the following:
 Request GET https://app.datadoghq.com/users was answered with response 200
 ```
 
-**Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. 
+**Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array.
 
 * For example, adding the block `%{array_ids}` returns:
 
@@ -672,15 +687,15 @@ The lookup processor performs the following actions:
 * Looks if the current log contains the source attribute.
 * Checks if the source attribute value exists in the mapping table.
   * If it does, creates the target attribute with the corresponding value in the table.
-  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab. 
-    
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab.
+
     {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="Lookup processor" style="width:80%;">}}
 
     The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform. However, Reference Tables support larger file sizes.
 
   * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the value of the reference table. You can select a value for a [Reference Table][101] on the **Reference Table** tab.
-   
-    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" 
+
+    {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor"
     style="width:80%;">}}
 
 
@@ -859,6 +874,38 @@ Extract a specific value from an object inside an array when it matches a condit
 ```
 
 {{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Extract Referrer URL",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "select",
+    "source": "httpRequest.headers",
+    "target": "referrer",
+    "filter": "name:Referrer",
+    "value_to_extract": "value"
+  }
+}
+```
+
+| Parameter    | Type             | Required | Description                                                   |
+|--------------|------------------|----------|---------------------------------------------------------------|
+| `type`       | String           | Yes      | Type of the processor.                                        |
+| `name`       | String           | No       | Name of the processor.                                        |
+| `is_enabled` | Boolean          | No       | Whether the processor is enabled. Default: `false`.        |
+| `operation.type`  | String      | Yes      | Type of array processor operation.                            |
+| `operation.source`  | String    | Yes      | Path of the array you want to select from.                    |
+| `operation.target`  | String    | Yes      | Target attribute.                                             |
+| `operation.filter`  | String    | Yes      | Expression to match an array element. The first matching element is selected. |
+| `operation.value_to_extract`  | String | Yes | Attribute to read in the selected element.                  |
+
+[1]: /api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Array length
@@ -891,6 +938,34 @@ Compute the number of elements in an array.
   "tagCount": 3
 }
 ```
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Compute number of tags",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "length",
+    "source": "tags",
+    "target": "tagCount"
+  }
+}
+```
+
+| Parameter           | Type      | Required | Description                                                   |
+|---------------------|-----------|----------|---------------------------------------------------------------|
+| `type`              | String    | Yes      | Type of the processor.                                        |
+| `name`              | String    | No       | Name of the processor.                                        |
+| `is_enabled`        | Boolean   | No       | Whether the processor is enabled. Default: `false`.        |
+| `operation.type`    | String    | Yes      | Type of array processor operation.                            |
+| `operation.source`  | String    | Yes      | Path of the array to extract the length of.                   |
+| `operation.target`  | String    | Yes      | Target attribute.                                             |
+
+[1]: /api/v1/logs-pipelines/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -937,7 +1012,80 @@ Add an attribute value to the end of a target array attribute in the log.
 }
 ```
 {{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Append client IP to sourceIps",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "append",
+    "source": "network.client.ip",
+    "target": "sourceIps"
+  }
+}
+```
+
+| Parameter                    | Type       | Required | Description                                                        |
+|------------------------------|------------|----------|--------------------------------------------------------------------|
+| `type`                       | String     | Yes      | Type of the processor.                                             |
+| `name`                       | String     | No       | Name of the processor.                                             |
+| `is_enabled`                 | Boolean    | No       | Whether the processor is enabled. Default: `false`.             |
+| `operation.type`             | String     | Yes      | Type of array processor operation.                                 |
+| `operation.source`           | String     | Yes      | Attribute to append.                                               |
+| `operation.target`           | String     | Yes      | Array attribute to append to.                                      |
+| `operation.preserve_source`  | Boolean    | No      | Whether to preserve the original source after remapping. Default: `false`.   |
+
+[1]: /api/v1/logs-pipelines/
+{{% /tab %}}
 {{< /tabs >}}
+
+## Decoder processor
+
+The Decoder processor translates binary-to-text encoded string fields (such as Base64 or Hex/Base16) into their original representation. This allows the data to be interpreted in its native context, whether as a UTF-8 string, ASCII command, or a numeric value (for example, an integer derived from a hex string). The Decoder processor is especially useful for analyzing encoded commands, logs from specific systems, or evasion techniques used by threat actors.
+
+**Notes**:
+
+- Truncated strings: The processor handles partially truncated Base64/Base16 strings gracefully by trimming or padding as needed.
+
+- Hex format: Hex input can be decoded into either a string (UTF-8) or an integer.
+
+- Failure handling: If decoding fails (because of invalid input), the processor skips the transformation, and the log remains unchanged
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+1. Set the source attribute: Provide the attribute path that contains the encoded string, such as `encoded.base64`.
+2. Select the source encoding: Choose the binary-to-text encoding of the source: `base64` or `base16/hex`.
+2. For `Base16/Hex`: Choose the output format: `string (UTF-8)` or `integer`.
+3. Set the target attribute: Enter the attribute path to store the decoded result.
+
+{{< img src="logs/log_configuration/processor/decoder-processor.png" alt="Decoder processor - Append" style="width:80%;" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Threat intel processor
+
+Add the Threat Intel Process to evaluate logs against the table using a specific Indicator of Compromise (IoC) key, such as an IP address. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
+
+For more information, see [Threat Intelligence][9].
+
+## OCSF processor
+
+Use the OCSF processor to normalize your security logs according to the [Open Cybersecurity Schema Framework (OCSF)][11]. The OCSF processor allows you to create custom mappings that remap your log attributes to OCSF schema classes and their corresponding attributes, including enumerated (ENUM) attributes.
+
+The processor enables you to:
+
+- Map source log attributes to OCSF target attributes
+- Configure ENUM attributes with specific numerical values
+- Create sub-pipelines for different OCSF target event classes
+- Pre-process logs before OCSF remapping
+
+For detailed setup instructions, configuration examples, and troubleshooting guidance, see [OCSF Processor][12].
 
 ## Further Reading
 
@@ -947,10 +1095,14 @@ Add an attribute value to the end of a target array attribute in the log.
 *Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/log_configuration/pipelines/
-[2]: /logs/log_configuration/parsing/
+[2]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /logs/log_collection/?tab=host#attributes-and-tags
+[5]: /logs/log_configuration/attributes_naming_convention/
 [6]: /logs/search_syntax/
 [7]: /integrations/guide/reference-tables/
 [8]: /tracing/other_telemetry/connect_logs_and_traces/
+[9]: /security/threat_intelligence/
+[10]: /logs/log_configuration/parsing/?tab=matchers
+[11]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
+[12]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor/

@@ -3,9 +3,8 @@ meta_title: Getting Started with Datadog
 meta_description: Datadog, the leading service for cloud-scale monitoring.
 disclaimer: "This page is not yet available in English. We are working on its translation. <br> If you have any questions or feedback about our current translation project, <a href=\"https://docs.datadoghq.com/fr/help/\">feel free to reach out to us!</a>"
 announcement_banner:
-  desktop_message: '<i class="icon-right-arrow-slim"></i><span>DASH 2025: June 10-11 | Join thousands of devs, SREs, and security experts at Datadog’s conference in NYC.</span><span>Register Now</span>'
-  mobile_message: 'June 10-11 | Join us in NYC for DASH 2025'
-  background_color: "#000000"
-  custom_classes: 'dash-announcement-banner'
-  external_link: https://dtdg.co/dash-docs
+    desktop_message: 'Read the 2025 State of Containers and Serverless Report!'
+    mobile_message: 'Read the State of Containers and Serverless Report!'
+    external_link: 'https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025'
 translate_status_banner: "This translation isn't up-to-date. For the latest English version, click here"
+site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."

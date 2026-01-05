@@ -8,14 +8,16 @@ further_reading:
 - link: /developers/integrations/
   tag: Documentation
   text: Learn about creating an Agent or API-based integration
-- link: /developers/integrations/oauth_for_integrations/
+- link: /developers/integrations/api_integration/
   tag: Documentation
-  text: Learn about using OAuth for integrations
+  text: Learn about using OAuth for API-based integrations
 title: Integration Assets Reference
 ---
 ## Overview
 
 This page walks you through the files that you need to populate in order to create an offering on the [**Integrations** page][12] or the [**Marketplace** page][9]. 
+
+<div class="alert alert-info">Some files apply only to legacy integrations that were <em>not</em> created using the Integration Developer Platform.</div>
 
 ## Configuration file
 
@@ -127,7 +129,7 @@ You can find the complete list of mandatory and optional attributes for the `met
 | `integration`   | Mandatory          | The name of the integration that emits the metric. Must be the normalized version of the `tile.title` from the `manifest.json` file. Any character besides letters, underscores, dashes, and numbers are converted to underscores. For example: `Openstack Controller` -> `openstack_controller`, `ASP.NET` -> `asp_net`, and `CRI-o` -> `cri-o`. |
 | `short_name`    | Mandatory          | A human-readable, abbreviated version of the metric name. Do not repeat the integration name. For example, `postgresql.index_blocks_hit` should be shortened to `idx blks hit`.                                                                                                                                                                                                                                                                                                     |
 | `curated_metric`| Optional           | Marks which metrics for an integration are noteworthy for a given type (`cpu` and `memory` are both accepted). These are displayed in the UI above the other integration metrics. |
-| `sample_tags` | Optional           | List of example tags associated with the metric, separated by commas without spaces. For example, `host,region,deployment`. |
+| `sample_tags` | Optional           | List of example tags associated with the metric, separated by commas (no spaces) and enclosed in quotes. For example, `"host,region,deployment"`. |
 
 ## Further Reading
 

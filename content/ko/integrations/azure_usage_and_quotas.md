@@ -1,28 +1,64 @@
 ---
+app_id: azure-usage-and-quotas
+app_uuid: 26bac8f2-d8b8-4623-8d55-3b4a5cc94abd
+assets:
+  dashboards:
+    azure_usage_and_quotas: assets/dashboards/azure_usage_and_quotas.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.usage.current_value
+      metadata_path: metadata.csv
+      prefix: azure.usage.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 306
+    source_type_name: Azure Usage and Quotas
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
-- cloud
-- 비용 관리
+- 클라우드
+- cost management
 - 네트워크
+custom_kind: 통합
 dependencies: []
-description: 구독에 따른 Azure 계산, 네트워크, 스토리지 리소스의 사전 구성된 제한량 추적하기
-doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_usage_and_quotas
-has_logo: true
 integration_id: azure-usage-and-quotas
-integration_title: Microsoft Azure 사용량 및 할당량
+integration_title: Azure Usage and Quotas
 integration_version: ''
 is_public: true
-custom_kind: 통합
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_usage_and_quotas
-public_title: Datadog-Microsoft Azure 사용량 및 할당량 통합
-short_description: Azure에 사전 구성된 제한량에 따라 사용량 추적하기.
-version: '1.0'
+public_title: Azure Usage and Quotas
+short_description: Azure Usage and Quotas allows you to keep track of your current
+  usages and limits.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Cost Management
+  - Category::Network
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Usage and Quotas allows you to keep track of your current usages
+    and limits.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Usage and Quotas
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Azure 구독에는 사전 구성된 리소스 제한량이 있습니다. 예상치 못한 프로비저닝 실패를 예방하려면 Azure 환경을 설계 및 규모 조정을 할 때 이 제한량을 염두에 두어야 합니다. Azure 사용량 및 할당량 메트릭을 얻으면 다음을 할 수 있습니다.
@@ -36,17 +72,17 @@ Azure 구독에는 사전 구성된 리소스 제한량이 있습니다. 예상�
 
 아직 설정하지 않았다면, [먼저 Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_usage_and_quotas" >}}
+{{< get-metrics-from-git "azure-usage-and-quotas" >}}
 
 
 ### 이벤트
 
 Azure Quota 통합에는 이벤트가 포함되어 있지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure Quota 통합에는 서비스 점검이 포함되지 않습니다.
 

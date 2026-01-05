@@ -6,10 +6,6 @@ further_reading:
     text: "Learn how to monitor your CI tests"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
 ## Overview
 
 This page provides information to help you troubleshot issues with Test Optimization. If you need additional help, contact [Datadog Support][2].
@@ -47,6 +43,34 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    : Full (40-character long SHA1) commit hash.<br/>
    **Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
+   `DD_GIT_COMMIT_AUTHOR_EMAIL` **(required)**
+   : Commit author email.<br/>
+   **Example**: `john@example.com`
+
+   `DD_GIT_COMMIT_AUTHOR_NAME`
+   : Commit author name.<br/>
+   **Example**: `John Smith`
+
+   `DD_GIT_COMMIT_AUTHOR_DATE`
+   : Commit author date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+   `DD_GIT_COMMIT_COMMITTER_EMAIL`
+   : Commit committer email.<br/>
+   **Example**: `jane@example.com`
+
+   `DD_GIT_COMMIT_COMMITTER_NAME`
+   : Commit committer name.<br/>
+   **Example**: `Jane Smith`
+
+   `DD_GIT_COMMIT_COMMITTER_DATE`
+   : Commit committer date in ISO 8601 format.<br/>
+   **Example**: `2021-03-12T16:00:28Z`
+
+   `DD_GIT_COMMIT_MESSAGE`
+   : Commit message.<br/>
+   **Example**: `Set release number`
+
    `DD_GIT_BRANCH`
    : Git branch being tested. Leave empty if providing tag information instead.<br/>
    **Example**: `develop`
@@ -54,34 +78,6 @@ If you can see test results data in the **Test Runs** tab, but not the **Tests**
    `DD_GIT_TAG`
    : Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
    **Example**: `1.0.1`
-
-   `DD_GIT_COMMIT_MESSAGE`
-   : Commit message.<br/>
-   **Example**: `Set release number`
-
-   `DD_GIT_COMMIT_AUTHOR_NAME`
-   : Commit author name.<br/>
-   **Example**: `John Smith`
-
-   `DD_GIT_COMMIT_AUTHOR_EMAIL`
-   : Commit author email.<br/>
-   **Example**: `john@example.com`
-
-   `DD_GIT_COMMIT_AUTHOR_DATE`
-   : Commit author date in ISO 8601 format.<br/>
-   **Example**: `2021-03-12T16:00:28Z`
-
-   `DD_GIT_COMMIT_COMMITTER_NAME`
-   : Commit committer name.<br/>
-   **Example**: `Jane Smith`
-
-   `DD_GIT_COMMIT_COMMITTER_EMAIL`
-   : Commit committer email.<br/>
-   **Example**: `jane@example.com`
-
-   `DD_GIT_COMMIT_COMMITTER_DATE`
-   : Commit committer date in ISO 8601 format.<br/>
-   **Example**: `2021-03-12T16:00:28Z`
 
 4. If no CI provider environment variables are found, tests results are sent with no Git metadata.
 
@@ -174,6 +170,10 @@ This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use
 ## Test Impact Analysis does not show any time saved
 
 This is also caused by an unstable test session fingerprint. See the [Session history, performance or code coverage tab only show a single execution](#session-history-performance-or-code-coverage-tab-only-show-a-single-execution) section for more information.
+
+## Flaky test management tags are missing or have an unexpected order in test events
+
+When retrying a flaky test multiple times within a short span of time (less than a second), test run events might contain unexpected `@test.is_flaky`, `@test.is_known_flaky`, or `@test.is_new_flaky` tags. This is a known limitation that occurs due to a race condition in the flaky test detection system. In some cases, test run events might be processed out of order, causing the tags to not follow the logical order of events.
 
 ## Further reading
 

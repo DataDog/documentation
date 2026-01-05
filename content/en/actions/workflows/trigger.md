@@ -1,5 +1,6 @@
 ---
 title: Trigger a workflow
+description: Learn how to trigger workflows manually or automatically from dashboards, monitors, security signals, and other sources.
 disable_toc: false
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
@@ -7,10 +8,13 @@ aliases:
 - /workflows/trigger
 - /service_management/workflows/trigger
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-automation-rules
+  tag: Blog
+  text: Instantly respond to changes in your data with Datadog automation rules
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/workflows/access/#service-accounts/"
+- link: "/actions/workflows/access_and_auth/#use-a-service-account"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
@@ -26,10 +30,6 @@ further_reading:
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog monitor and a Datadog dashboard.
 
@@ -174,7 +174,7 @@ Run the workflow from your Software Catalog entity:
 
 ## GitHub triggers
 
-<div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks to use this feature.</div>
+<div class="alert alert-info">Your GitHub account must have permission to create webhooks to use this feature.</div>
 
 You can trigger a workflow from GitHub using the following steps.
 
@@ -193,7 +193,9 @@ You can trigger a workflow from GitHub using the following steps.
 
 ## Slack triggers
 
-<div class="alert alert-info"><strong>Note</strong>: You must install the Datadog App in your Slack workspace to use this feature. For more information, see <a href="/integrations/slack/?tab=datadogforslack#setup">Slack Setup</a>.</div>
+<div class="alert alert-info">You must install the Datadog App in your Slack workspace to use this feature. For more information, see <a href="/integrations/slack/?tab=datadogforslack#setup">Slack Setup</a>.</div>
+
+<div class="alert alert-info"><strong>Quick start</strong>: Click to create a <a href="https://app.datadoghq.com/workflow/create?source=slack">workflow</a> with a Slack trigger.</div>
 
 You can trigger a workflow from Slack using the following steps.
 
@@ -277,13 +279,13 @@ After you trigger a workflow, the workflow page switches to the workflow's **Run
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][7].
 
-[1]: /service_management/workflows/access/#use-a-service-account
+[1]: /actions/workflows/access_and_auth/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
 [5]: /service_management/workflows/build/#input-parameters
 [6]: https://app.datadoghq.com/incidents/settings#Rules
-[7]: https://datadoghq.slack.com/
+[7]: https://chat.datadoghq.com/
 [8]: /account_management/api-app-keys/#api-keys
 [9]: /account_management/api-app-keys/#application-keys
 [10]: /account_management/api-app-keys/#scopes

@@ -194,7 +194,7 @@ La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'a
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "sqlserver" >}}
+{{< get-metrics-from-git "sql-server" >}}
 
 
 La plupart de ces métriques proviennent de la table `sys.dm_os_performance_counters` de SQL Server.

@@ -148,7 +148,7 @@ se pueden recopilar datos de replicación, proxy, listener, etc. Consulta la lis
 
 
 ### Métricas
-{{< get-metrics-from-git "redis_enterprise" >}}
+{{< get-metrics-from-git "redis-enterprise" >}}
 
 
 

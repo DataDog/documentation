@@ -4,8 +4,8 @@ title: Instrumentación de aplicaciones serverless de Node.js mediante el Datado
 
 ## Información general
 
-<div class="alert alert-warning">
-Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/nodejs">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes que la funcionalidad de Lambda lista para usar, utiliza esta guía para mantener tu instancia.
+<div class="alert alert-danger">
+Si eres un usuario nuevo de Datadog Serverless, sigue las <a href="/serverless/installation/nodejs">instrucciones para instrumentar tus funciones de Lambda utilizando la extensión de Datadog Lambda</a>. Si has configurado Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera una funcionalidad predefinida, utiliza esta guía para mantener tu instancia.
 </div>
 
 ## Requisitos previos
@@ -98,7 +98,7 @@ Para instalar y configurar el Datadog Serverless Plugin, sigue estos pasos:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la biblioteca Lambda de Datadog a tus funciones mediante las capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la biblioteca Lambda de Datadog a tus funciones mediante capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 ### Instalar
 
@@ -125,8 +125,8 @@ Transform:
       stackName: !Ref "AWS::StackName"
       nodeLayerVersion: "{{< latest-lambda-layer-version layer="node" >}}"
       forwarderArn: "<FORWARDER_ARN>"
-      service: "<SERVICE>" # Opcional
-      env: "<ENV>" # Opcional
+      service: "<SERVICE>" # Optional
+      env: "<ENV>" # Optional
 ```
 
 Para rellenar los parámetros, haz lo siguiente:
@@ -156,28 +156,28 @@ Ejecuta el siguiente comando de Yarn o NPM en tu proyecto del CDK para instalar 
 
 ```sh
 #Yarn
-yarn add --dev datadog-cdk-constructs
+yarn add --dev datadog-cdk-constructs-v2
 
 #NPM
-npm install datadog-cdk-constructs --save-dev
+npm install datadog-cdk-constructs-v2 --save-dev
 ```
 
 ### Instrumentar
 
-Para instrumentar la función, importa el módulo `datadog-cdk-construct` en tu aplicación de AWS CDK y añade las siguientes configuraciones (este ejemplo es de TypeScript, pero el uso en otros lenguajes es similar):
+Para instrumentar la función, importa el módulo `datadog-cdk-construct` en tu aplicación del AWS CDK y añade las siguientes configuraciones (este ejemplo es de TypeScript, pero el uso en otros lenguajes es similar):
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
-import { Datadog } from "datadog-cdk-constructs";
+import { DatadogLambda } from "datadog-cdk-constructs-v2";
 
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const datadog = new Datadog(this, "Datadog", {
+    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
       nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
-      service: "<SERVICE>",  // Opcional
-      env: "<ENV>",  // Opcional
+      service: "<SERVICE>",  // Optional
+      env: "<ENV>",  // Optional
     });
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
   }
@@ -194,7 +194,7 @@ Si configuraste tu función de Lambda para utilizar la firma de código, debes a
 Obtén más información y parámetros adicionales en la [página de NPM del Datadog CDK][1].
 
 
-[1]: https://www.npmjs.com/package/datadog-cdk-constructs
+[1]: https://www.npmjs.com/package/datadog-cdk-constructs-v2
 [2]: https://docs.datadoghq.com/es/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}
@@ -253,11 +253,12 @@ La versión secundaria del paquete `datadog-lambda-js` siempre coincide con la v
 [Configura las capas][8] de tu función de Lambda con el ARN en el siguiente formato.
 
 ```
-# Para las regiones us, us3, us5, eu y ap1
+# For us,us3,us5,eu, ap1, and ap2 regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
-# Para las regiones us-gov
+# For us-gov regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
+
 ```
 
 Las opciones disponibles en `RUNTIME` son {{< latest-lambda-layer-version layer="node-versions" >}}. La última `VERSION` es `{{< latest-lambda-layer-version layer="node" >}}`. Por ejemplo:
@@ -331,39 +332,39 @@ Si quieres enviar una métrica o un tramo (span) personalizados, consulta el sig
 const { sendDistributionMetric, sendDistributionMetricWithDate } = require("datadog-lambda-js");
 const tracer = require("dd-trace");
 
-// envía un tramo personalizado con el nombre "sleep"
+// submit a custom span named "sleep"
 const sleep = tracer.wrap("sleep", (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 });
 
 exports.handler = async (event) => {
-  // añade etiquetas personalizadas al tramo de la función de Lambda,
-  // NO funciona si el rastreo de X-Ray está habilitado
+  // add custom tags to the lambda function span,
+  // does NOT work when X-Ray tracing is enabled
   const span = tracer.scope().active();
   span.setTag('customer_id', '123456');
 
   await sleep(100);
 
-  // envía un tramo personalizado
+  // submit a custom span
   const sandwich = tracer.trace('hello.world', () => {
     console.log('Hello, World!');
   });
 
-  // envía una métrica personalizada
+  // submit a custom metric
   sendDistributionMetric(
-    "coffee_house.order_value", // el nombre de la métrica
-    12.45, // el valor de la métrica
-    "product:latte", // una etiqueta
-    "order:online", // otra etiqueta
+    "coffee_house.order_value", // metric name
+    12.45, // metric value
+    "product:latte", // tag
+    "order:online", // another tag
   );
 
-  // envía una métrica personalizada con una marca de tiempo
+  // submit a custom metric with timestamp
   sendDistributionMetricWithDate(
-    "coffee_house.order_value", // el nombre de la métrica
-    12.45, // el valor de la métrica
-    new Date(Date.now()), // la fecha, debe estar dentro de los últimos 20 minutos
-    "product:latte", // una etiqueta
-    "order:online", // otra etiqueta
+    "coffee_house.order_value", // metric name
+    12.45, // metric value
+    new Date(Date.now()), // date, must be within last 20 mins
+    "product:latte", // tag
+    "order:online", // another tag
   );
 
   const response = {

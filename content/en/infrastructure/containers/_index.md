@@ -5,6 +5,9 @@ aliases:
   - /graphing/infrastructure/livecontainers/
   - /infrastructure/livecontainers
 further_reading:
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitor your Kubernetes operators to keep applications running smoothly
 - link: "/infrastructure/livecontainers/configuration"
   tag: "Documentation"
   text: "Configure Containers View"
@@ -23,6 +26,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
   tag: "Blog"
   text: "Practical tips for rightsizing your Kubernetes workloads"
+- link: "https://www.datadoghq.com/blog/kubernetes-active-remediation-ai/"
+  tag: "Blog"
+  text: "Accelerate Kubernetes issue resolution with AI-powered guided remediation"
 ---
 
 In Datadog, the [Containers][1] page provides real-time visibility into all containers across your environment.
@@ -35,23 +41,25 @@ Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technol
 
 ## Setup
 
-To display data on the Containers view, enable the Process Agent.
+To display data on the Containers view, enable container collection.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Set the `DD_PROCESS_AGENT_ENABLED` env variable to `true`.
+The Datadog Agent enables container collection in Docker environments by default.
+
+For verification, ensure that `DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED` is set to `true`.
 
 For example:
 
 ```
 -v /etc/passwd:/etc/passwd:ro
--e DD_PROCESS_AGENT_ENABLED=true
+-e DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED=true
 ```
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator enables the Process Agent by default. 
+The Datadog Operator enables container collection by default.
 
 For verification, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
 
@@ -73,18 +81,20 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-If you are using the [official Helm chart][1], enable the `processAgent.enabled` parameter in your [`values.yaml`][2] file:
+If you are using the [official Helm chart][1], container collection is enabled by default.
+
+For verification, ensure that the `processAgent.containerCollection` parameter is set to `true` in your [`values.yaml`][2] file:
 
 ```yaml
 datadog:
   # (...)
   processAgent:
-    enabled: true
+    containerCollection: true
 ```
 
 Then, upgrade your Helm chart.
 
-In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
+In some setups, the Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
 
 ```yaml
 datadog:
@@ -92,7 +102,7 @@ datadog:
   clusterName: <YOUR_CLUSTER_NAME>
   #(...)
   processAgent:
-    enabled: true
+    containerCollection: true
 ```
 
 [1]: https://github.com/DataDog/helm-charts
@@ -100,11 +110,11 @@ datadog:
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-Update your Task Definitions with the following environment variable:
+Update your task definitions with the following environment variable:
 
 ```json
 {
-  "name": "DD_PROCESS_AGENT_ENABLED",
+  "name": "DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED",
   "value": "true"
 }
 ```
@@ -144,7 +154,7 @@ Use parentheses to group operators together. For example, `(NOT (elasticsearch O
 
 The screenshot below displays a system that has been filtered down to a Kubernetes cluster of 25 nodes. RSS and CPU utilization on containers is reported compared to the provisioned limits on the containers, when they exist. Here, it is apparent that the containers in this cluster are over-provisioned. You could use tighter limits and bin packing to achieve better utilization of resources.
 
-{{< img src="infrastructure/livecontainers/filter-by.png" alt="A system that has been filter down to a Kubernetes cluster of 25 nodes" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/filter-by.png" alt="A system that has been filtered down to a Kubernetes cluster of 25 nodes" style="width:80%;">}}
 
 Container environments are dynamic and can be hard to follow. The following screenshot displays a view that has been pivoted by `kube_service` and `host`—and, to reduce system noise, filtered to `kube_namespace:default`. You can see what services are running where, and how saturated key metrics are:
 
@@ -169,14 +179,13 @@ ECS containers are tagged by:
 Kubernetes containers are tagged by:
 
 * `pod_name`
-* `kube_pod_ip`
 * `kube_service`
 * `kube_namespace`
 * `kube_replica_set`
 * `kube_daemon_set`
 * `kube_job`
 * `kube_deployment`
-* `kube_cluster`
+* `kube_cluster_name`
 
 If you have a configuration for [Unified Service Tagging][7] in place, Datadog automatically picks up `env`, `service`, and `version` tags. Having these tags available lets you tie together APM, logs, metrics, and container data.
 
@@ -194,7 +203,7 @@ You can switch between the "Scatter Plot" and "Timeseries" tabs in the collapsib
 
 By default, the graph groups by the `short_image` tag key. The size of each dot represents the number of containers in that group, and clicking on a dot displays the individual containers and hosts that contribute to the group.
 
-The query at the top of the scatter plot analytic allows you to control your scatter plot analytic:
+The options at the top of the graph allow you to control your scatter plot analytic:
 
 * Selection of metrics to display.
 * Selection of the aggregation method for both metrics.
@@ -226,7 +235,7 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 
 {{< img src="infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Side panel" style="width:100%;">}}
 
-## Notes and known issues
+## Additional information
 
 * Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 * RBAC settings can restrict Kubernetes metadata collection. See the [RBAC entities for the Datadog Agent][14].

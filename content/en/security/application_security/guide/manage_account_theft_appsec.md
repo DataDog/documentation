@@ -140,7 +140,7 @@ To use custom In-App WAF rules, do the following:
 
 6. Select a specific user parameter as an input, either in the body or the query.   
 7. Set the `Tag` field to the name of the tag where you want to save the value captured using `usr.login`.
-   {{<img src="security/ato/guide_waf_instrumentation_tag.png" alt="Custom WAF rule creation form, with a complete condition selecting a parameter named login and storing it in a tag called usr.login" style="width:100%;" >}}
+   {{<img src="security/ato/guide_waf_instrumentation_tagged.png" alt="Custom WAF rule creation form, with a complete condition selecting a parameter named login and storing it in a tag called usr.login" style="width:100%;" >}}
 
 8. Click **Save**. The rule is automatically sent to every instance of the service and then begins capturing login failures. 
 
@@ -166,7 +166,7 @@ The actions covered in the next sections help you to identify and leverage detec
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select **Signal** and remove all entries except **Application Security**.
+3. Select **Signal** and remove all entries except **App and API Protection**.
 4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  
@@ -311,7 +311,7 @@ If the false positive was caused by a unique setting in your service, you can ad
 
 If the attack is ongoing, you might want to disrupt the attacker as you investigate further. Disrupting the attacker slows down the attack and reduce the number of compromised accounts. 
 
-<div class="alert alert-info"> <strong>Note</strong>: This is a common step, although you might want to skip this step in the following circumstances:
+<div class="alert alert-info">This is a common step, although you might want to skip this step in the following circumstances:
 
 * The accounts have little immediate value. You can block these post-compromise without causing harm.  
 * You want to maintain maximum visibility into the attack by avoiding any action that alerts the attacker to the investigation and causes them to change tactics.
@@ -349,7 +349,7 @@ Before blocking, Datadog recommends that you review the activity from the cluste
 
 The questions you're trying to answer are:
 
-- Is the traffic malicious? Did this traffic exist before the beginning of th attack?  
+- Is the traffic malicious? Did this traffic exist before the beginning of the attack?  
 - Can a meaningful volume of legitimate traffic be caught?  
 - Can blocking based on this cluster be effective?
 
@@ -386,12 +386,12 @@ To create the rule, do the following:
 2. Click **Create New Rule** and complete the configuration. 
 3. Follow the steps in **Define your custom rule**.   
 4. In **Select the services you want this rule to apply to**, select your login service, or the services where you want to block requests. You can also target blocking to the login route.
-{{<img src="security/ato/guide_waf_blocking.png" alt="Screenshot of the WAF rule creation modal selecting a specific route on a specific service" style="width:100%;" >}}
+   {{<img src="security/ato/guide_waf_blocking.png" alt="Screenshot of the WAF rule creation modal selecting a specific route on a specific service" style="width:100%;" >}}
 5. In **If incoming requests match these conditions**, configure the conditions of the rule. <!-- The following example uses the user agent. -->   
    1. If you want to block a specific user agent, paste it in **Values**. In **Operator**, you can use **matches value in list**, or, if you want more flexibility, you can also use **Matches RegEx**.
-{{<img src="security/ato/guide_waf_blocking_ua.png" alt="A screenshot of a user agent getting blocked" style="width:100%;" >}}
+   {{<img src="security/ato/guide_waf_blocking_ua.png" alt="A screenshot of a user agent getting blocked" style="width:100%;" >}}
 6. Use the **Preview matching traces** section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
-{{<img src="security/ato/guide_waf_blocking_traces.png" alt="Table showing traces matching your rules" style="width:100%;" >}}
+   {{<img src="security/ato/guide_waf_blocking_traces.png" alt="Table showing traces matching your rules" style="width:100%;" >}}
 
 Multiple blocking actions are available. Depending on the sophistication of the attackers, you might want a more stealthy answer so that they don't immediately realize they were blocked.
 
@@ -475,17 +475,15 @@ This gets you to the trace explorer with filters set to the flagged attributes. 
 
 {{<img src="security/ato/guide_distributed_credential_stuffing_traces.png" alt="Traces explorer filtered by the cluster attributes" style="width:100%;" >}}
 
-In the case those attributes are inaccurate or incomplete, you may try to identify further traits to isolate the attacker activity. The most useful traits are:
+In the case those attributes are inaccurate or incomplete, you may try to identify further traits to isolate the attacker activity. Going back to the full page signal and scrolling down to the **Traces** section, you'll find an **Analysis** button. This opens a view where the traffic from the attack is sliced by a large variety of attributes.
 
-1. User agent: `@http.user_agent`  
-2. ASN: `@http.client_ip_details.as.domain`  
-3. Threat intelligence: `@threat_intel.results.category`  
-4. URL: `@http.url`  
-5. Fingerprint, when available: `@appsec.fingerprint.*`
+{{<img src="security/ato/guide_investigate_overview.png" alt="Analysis side panel opened with an attack and some suggested attributes in a table" style="width:100%;" >}}
 
-You may use Top List or Timeseries to identify the traits whose distribution most closely matches the attack.
+The most common attributes are presented at the top of a table, but you can visualize their impact by scrolling down. Each row shows the share of traffic that matches this attribute and how closely this traffic matches the "shape" of the increase in trafic. Your goal is to identify the attributes that together isolate this increase in activity while excluding the steady-state traffic. Be mindful of the scale of the graphs, since not all traces may be tagged with every attribute (for instance, Threat Intelligence). Moreover, take note that some fields can't be used for blocking (Threat Intelligence, ASNs & IP geo).
 
-You may need multiple sets of filters, each possibly including multiple traits. Behind the scenes, the attacker may be using multiple randomized templates. This work identifies the constants in those templates.
+{{<img src="security/ato/guide_investigate_correlation.png" alt="Some timeseries from the Analysis tab demonstrating sometimes low correlation, and sometimes high correlation" style="width:100%;" >}}
+
+Upon identifying the attributes, select them from the list and double check their exhaustiveness by toggling on and off the **Filtering enabled** button. Once you're satisfied, click on **View Traces** to dive further into the impacted users.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -707,17 +705,17 @@ This is general guidance. Depending on your applications and environments, there
 
 [1]: /security/account_takeover_protection/
 [2]: https://app.datadoghq.com/services?query=service%3Auser-auth&env=%2A&fromUser=false&hostGroup=%2A&lens=Security&sort=-fave%2C-team&start=1735636008863&end=1735639608863
-[3]: /security/application_security/threats/setup/compatibility/
-[4]: /agent/remote_config/?tab=configurationyamlfile
+[3]: /security/application_security/setup/compatibility/
+[4]: /remote_configuration
 [5]: https://app.datadoghq.com/security/appsec/onboarding
 [6]: https://app.datadoghq.com/security/appsec/traces?query=&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036043639&end=1735640843639&paused=false
-[7]: /security/application_security/threats/setup/threat_detection/
+[7]: /security/application_security/setup/threat_detection/
 [8]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036164646&end=1735640964646&paused=false
-[9]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
-[10]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[11]: /agent/remote_config/?tab=configurationyamlfile
+[9]: /security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
+[10]: /security/application_security/how-it-works/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[11]: /tracing/guide/remote_config/
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
-[13]: /security/application_security/threats/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
+[13]: /security/application_security/how-it-works/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat
 [15]: /security/account_takeover_protection/#attacker-strategies
 [16]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
@@ -736,6 +734,6 @@ This is general guidance. Depending on your applications and environments, there
 [29]: /security/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 [30]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&mitreFilters=%7B%22visualize%22%3A%7B%22value%22%3A%5B%22all%22%5D%2C%22excluded%22%3Afalse%7D%2C%22ruleDensity%22%3A%7B%22value%22%3A%5B%5D%2C%22excluded%22%3Afalse%7D%7D&sort=date&viz=rules
 [28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[30]: /security/application_security/threats/inapp_waf_rules/
+[30]: /security/application_security/policies/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/

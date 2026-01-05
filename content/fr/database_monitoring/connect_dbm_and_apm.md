@@ -276,7 +276,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Cette fonctionnalité nécessite dʼactiver lʼinstrumentation automatique pour votre service .NET.
 </div>
 
@@ -295,7 +295,7 @@ Activez la fonctionnalité de propagation de Database Monitoring en définissan
 
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Afin de pouvoir utiliser cette fonctionnalité, l'extension du traceur doit être activée pour votre service PHP.
 </div>
 

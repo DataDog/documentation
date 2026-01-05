@@ -28,16 +28,6 @@ UI でパイプラインを構築する際にソースを選択してセット�
 
 ソースには、それぞれ異なる前提条件と設定があります。一部のソースでは、ログを Observability Pipelines Worker に送信するように構成する必要もあります。
 
-{{< whatsnext desc="詳細情報を確認するには、ソースを選択してください。" >}}
-    {{< nextlink href="observability_pipelines/sources/datadog_agent/" >}}Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/fluent/" >}}Fluentd および Fluent Bit{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/http_client/" >}}HTTP/S クライアント{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_hec/" >}}Splunk HTTP Event Collector (HEC){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/splunk_tcp/" >}}Splunk Heavy Forwarder および Universal Forwarder (TCP){{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/sumo_logic/" >}}Sumo Logic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/sources/syslog/" >}}rsyslog または syslog-ng{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## 標準メタデータフィールド
 
 すべてのソースは、取り込みイベントに以下の標準メタデータフィールドを追加します。

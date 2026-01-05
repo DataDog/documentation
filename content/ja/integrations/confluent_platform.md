@@ -167,7 +167,7 @@ _Agent バージョン 6.0 以降で利用可能_
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "confluent_platform" >}}
+{{< get-metrics-from-git "confluent-platform" >}}
 
 
 ### イベント
@@ -175,7 +175,7 @@ _Agent バージョン 6.0 以降で利用可能_
 Confluent Platform チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "confluent_platform" >}}
+{{< get-service-checks-from-git "confluent-platform" >}}
 
 
 ## トラブルシューティング

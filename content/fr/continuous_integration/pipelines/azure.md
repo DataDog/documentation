@@ -15,13 +15,9 @@ further_reading:
 title: Configurer le tracing sur un pipeline Azure
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Azure DevOps Server n'est pas officiellement pris en charge.
 </div>
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Compatibilité
 

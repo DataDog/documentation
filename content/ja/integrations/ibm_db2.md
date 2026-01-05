@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 4.0.0
+integration_version: 4.0.1
 is_public: true
 manifest_version: 2.0.0
 name: ibm_db2

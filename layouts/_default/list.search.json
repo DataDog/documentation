@@ -6,10 +6,13 @@
 
     {{ range (where (where (where .Site.AllPages "Kind" "!=" "home") "Type" "!=" "api") ".RelPermalink" "not in" $apiPagesWithoutTypeAPI) }}
         {{ $page := . }}
-        {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (not (in $page.RelPermalink "/faq")) (not $page.Draft) (not (isset .Params "external_redirect")) }}
+        {{ if and ($page.IsDescendant $section) (ne $page.Params.type "partners") (ne $page.Params.private true) (not (in $page.RelPermalink "/faq")) (not $page.Draft) (not (isset .Params "external_redirect")) }}
+            {{- /* Generate unique ID for each page. Use file path when available, fallback to RelPermalink for pages without files (e.g. virtual pages). This avoids duplicate IDs while preserving existing IDs for 300k+ items. */ -}}
             {{ $rel_path := "" }}
             {{ with $page.File }}
-              {{ $rel_path = (print .Lang "/" .Path) }}
+              {{ $rel_path = (print $page.Language.Lang "/" .Path) }}
+            {{ else }}
+              {{ $rel_path = $page.RelPermalink }}
             {{ end }}
             {{ $object_id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}

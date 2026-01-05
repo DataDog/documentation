@@ -24,7 +24,7 @@ further_reading:
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
-  - link: "/security/threats/setup"
+  - link: "/security/workload_protection/"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Workload Protection"
   - link: "https://securitylabs.datadoghq.com/"
@@ -78,6 +78,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
     tag: "Blog"
     text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
+  - link: "https://www.datadoghq.com/blog/cloud-security-roundup-2025"
+    tag: "Blog"
+    text: "2025 cloud security roundup: How attackers abused identities, supply chains, and AI"
 cascade:
     algolia:
         rank: 70
@@ -101,7 +104,7 @@ To learn more, check out the [30-second Product Guided Tour][14].
 
 [Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-siem/) to see more.
 
-{{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
+{{< img src="security/security_monitoring/cloud_siem_overview_2025.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
 ## Code Security
 
@@ -112,10 +115,12 @@ To learn more, check out the [30-second Product Guided Tour][14].
 - [Runtime Code Analysis (IAST)][29] for identifying vulnerabilities in the first-party code within your services
 - [Secret Scanning][30] for identifying and validating leaked secrets (in Preview)
 
-Code Security helps teams implement DevSecOps throughout the organization:
+With IDE integrations, pull request comments, and CI/CD gates, Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
 - **Security Administrators:** enhanced security posture, improved patch management in response to early vulnerability alerts, and compliance monitoring.
-- **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.
+- **Site Reliability Engineers (SREs):** automated security checks throughout CI/CD workflow, security compliance, and system resilience. SAST reduces manual overhead for SREs and ensures that each release is thoroughly tested for vulnerabilities.  
+
+{{< img src="code_security/gitlab_integration_light.png" alt="A SAST finding within a GitLab repository" width="100%">}}
 
 ## Cloud Security
 
@@ -130,11 +135,6 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 ##  App and API Protection
 
 Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
-
-In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
-- [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code
-- [Software Composition Analysis (SCA)][22] for identifying open source dependencies in both your repositories and your services
-- [Runtime Code Analysis (IAST)][23] for code-level vulnerabilities in your services
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
@@ -151,9 +151,9 @@ In addition to threat detection, Datadog provides end-to-end code and library vu
 
 [Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also scan for sensitive information within your cloud storage resources. 
 
-After you [set up Sensitive Data Scanner][25], use the Summary page to see details of sensitive data issues that have been identified, so that you can triage, investigate, and remediate the issues.
+After you [set up Sensitive Data Scanner][25], use the Findings page to see details of sensitive data findings that have been identified, so that you can triage, investigate, and remediate the findings.
 
-{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
 
 ## Further Reading
 

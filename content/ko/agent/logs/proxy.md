@@ -12,8 +12,8 @@ further_reading:
 title: 로그를 위한 TCP Agent 프록시
 ---
 
-{{% site-region region="us3,eu,us5,gov,ap1" %}}
-<div class="alert alert-warning">
+{{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
+<div class="alert alert-danger">
     < region-param key="dd_site_name" > }} 사이트에서는 TCP를 사용할 수 없습니다. 자세한 내용은 <a href="/도움/도움말/">지원팀에</a> 문의하세요.
 </div>
 {{% /site-region %}}
@@ -291,12 +291,12 @@ stream {
 {{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
+{{% /site-region %}}
 
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
-{{% /site-region %}}
 
 [1]: /ko/agent/logs/log_transport?tab=https
 [2]: /ko/agent/configuration/proxy/

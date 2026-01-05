@@ -159,7 +159,7 @@ For containerized environments, it is recommended to follow the [unified service
 
 #### Environment variables
 
-After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file. If you specify multiple tags, separate each one with a space.
+After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agent's main configuration file. If you specify multiple tags, separate each one with a space.
 
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
@@ -167,9 +167,9 @@ Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm,
 |------------------------------------|---------------------------------------------------------------------------------------------------------|
 | `DD_CONTAINER_LABELS_AS_TAGS`      | Extract container labels. This env is equivalent to the old `DD_DOCKER_LABELS_AS_TAGS` env.             |
 | `DD_CONTAINER_ENV_AS_TAGS`         | Extract container environment variables. This env is equivalent to the old `DD_DOCKER_ENV_AS_TAGS` env. |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels                                                                                      |
-| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics (low, orchestrator, high)                                                     |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics (low, orchestrator, high)                                                    |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extract pod labels.                                                                                     |
+| `DD_CHECKS_TAG_CARDINALITY`        | Add tags to check metrics (low, orchestrator, high).                                                    |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Add tags to custom metrics (low, orchestrator, high).                                                   |
 
 **Examples:**
 
@@ -194,13 +194,13 @@ When using the `DD_CONTAINER_LABELS_AS_TAGS` variable within a Docker Swarm `doc
 
 When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
 
- If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
+If the container needs to be labeled outside of this configuration, place the `labels:` keyword **inside** the `services:` section, **not** inside the `deploy:` section. Place the `labels:` keyword inside the `deploy:` section only when the service needs to be labeled. The Datadog Agent does not have any labels to extract from the containers without this placement.
 
-Below is a sample, working `docker-compose.yaml` file that shows this. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_CONTAINER_LABELS_AS_TAGS` environment variable in the `datadog:` section extracts the labels and produces these tags for the `myapplication` container:
+Below is a sample, working `docker-compose.yaml` file that shows this label placement. In the example below, the labels in the `myapplication:` section, `my.custom.label.project` and `my.custom.label.version` each have unique values. Using the `DD_CONTAINER_LABELS_AS_TAGS` environment variable in the `datadog:` section extracts the labels and produces these tags for the `myapplication` container:
 
 Inside the `myapplication` container the labels are: `my.custom.label.project` and `my.custom.label.version`
 
-After the Agent extracts the labels from the container the tags are:
+After the Agent extracts the labels from the container, the tags are:
 `projecttag:projectA`
 `versiontag:1`
 
@@ -259,12 +259,14 @@ The Datadog tracer can be configured with environment variables, system properti
 Regardless of the tracer used, span metadata must respect a typed tree structure. Each node of the tree is split by a `.` and is of a single type.
 
 For instance, a node can't be both an object (with sub-nodes) and a string:
+
 ```json
 {
   "key": "value",
   "key.subkey": "value_2"
 }
 ```
+
 The span metadata above is invalid since the value of `key` cannot reference a string (`"value"`) and also a subtree (`{"subkey": "value_2"}`).
 
 ### UI
@@ -272,7 +274,7 @@ The span metadata above is invalid since the value of `key` cannot reference a s
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma-separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
 
 {{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
 
@@ -281,7 +283,7 @@ Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (h
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma-separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
 
 {{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Infrastructure List with an Infrastructure details panel opened highlighting Add Tags button" style="width:80%;">}}
 
@@ -312,15 +314,16 @@ Create percentile aggregations within [Distribution Metrics][1] by applying an a
 {{% /tab %}}
 {{% tab "Integrations" %}}
 
-The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level. Use a comma separated list of tags in the form `<KEY>:<VALUE>`.
+The [AWS][1] integration tile allows you to assign additional tags to all metrics at the account level, as well as logs sent through [automatic subscription triggers][2]. Use a comma-separated list of tags in the form `<KEY>:<VALUE>`.
 
 {{< img src="tagging/assigning_tags/integrationtags.png" alt="AWS Tags" style="width:80%;">}}
 
 [1]: /integrations/amazon_web_services/
+[2]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
 {{% /tab %}}
 {{% tab "Service Level Objectives" %}}
 
-When creating an SLO, assign tags under step 3 *Add name and tags*:
+When creating an SLO, assign tags under step 3, **Add name and tags**:
 
 {{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags" style="width:80%;">}}
 
@@ -371,7 +374,7 @@ Web server 1: api.metric('page.views', [(1317652676, 100), ...], tags=['domain:e
 Web server 2: api.metric('page.views', [(1317652676, 500), ...], tags=['domain:example.com'])
 ```
 
-With the `domain:example.com` tag, the page views can be summed across hosts:
+With the `domain:example.com` tag, the pageviews can be summed across hosts:
 
 ```text
 sum:page.views{domain:example.com}

@@ -118,7 +118,7 @@ Zenoh ルーターのチェックをホストにインストールするには
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "zenoh_router" >}}
+{{< get-metrics-from-git "zenoh-router" >}}
 
 
 ### イベント
@@ -126,7 +126,7 @@ Zenoh ルーターのチェックをホストにインストールするには
 Zenoh ルーターには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "zenoh_router" >}}
+{{< get-service-checks-from-git "zenoh-router" >}}
 
 
 ## トラブルシューティング

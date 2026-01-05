@@ -71,7 +71,7 @@ if (user.isAuthenticated) {
 
 セッションリプレイの記録を停止するには、`stopSessionReplayRecording()` を呼び出してください。
 
-<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
+<div class="alert alert-danger">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call <code>startSessionReplayRecording()</code> to begin recording.</div>
 
 ## セッションリプレイを強制する
 
@@ -81,11 +81,13 @@ if (user.isAuthenticated) {
 
 force オプションを使用すると、セッションは最初のサンプリング決定にかかわらず、セッションが終了するまでリプレイ対象として扱われます。
 
+<div class="alert alert-danger">force オプションは、既にサンプリングされているセッションをリプレイ用にアップグレードする場合にのみ機能します。言い換えると、サンプリングがまだ開始されていない状態で force オプションを使用してもサンプリングは開始されず、リプレイも記録されません。</div>
+
 ## セッションリプレイを無効にする
 
-To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
+セッションの記録を停止するには、`sessionReplaySampleRate` を `0` に設定します。これにより、[Browser RUM & Session Replay プラン][6]のデータ収集が停止します。
 
-<div class="alert alert-warning">If you're using a version of the RUM Browser SDK previous to v5.0.0, set <code>replaySampleRate</code> to <code>0</code>.</div>
+<div class="alert alert-danger">RUM Browser SDK のバージョンが v5.0.0 より前の場合は、<code>replaySampleRate</code> を <code>0</code> に設定してください。</div>
 
 ## 保持
 

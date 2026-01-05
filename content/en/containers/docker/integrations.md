@@ -1,5 +1,6 @@
 ---
 title: Docker and Integrations
+description: Configure monitoring integrations for applications running in Docker containers using Autodiscovery
 aliases:
 - /agent/docker/integrations
 further_reading:
@@ -159,6 +160,20 @@ You can store Autodiscovery templates as local files inside the mounted `/conf.d
    ```
 
 2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+
+   **docker-compose.yaml**
+   ```yaml
+   volumes:
+     [...]
+     - <PATH_TO_LOCAL_FOLDER>/conf.d:/conf.d
+   ```
+
+   **docker run**
+   ```shell
+   docker run -d --name datadog-agent \
+     [...]
+     -v <PATH_TO_LOCAL_FOLDER>/conf.d:/conf.d \
+   ```
 
 {{% /tab %}}
 {{% tab "Key-value store" %}}

@@ -4,6 +4,18 @@ app_uuid: 74c33838-0310-4ef3-95db-c378aece9d8b
 assets:
   dashboards:
     f5xc_access: assets/dashboards/f5xc_access.json
+    f5xc_bot_defense_events_overview: assets/dashboards/f5xc_bot_defense_events_overview.json
+    f5xc_waf_events_overview: assets/dashboards/f5xc_waf_events_overview.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 22988204
+    source_type_name: F5 Distributed Cloud Services
+  logs:
+    source: f5xc
   saved_views:
     f5xc_all: assets/saved_views/all.json
 author:
@@ -15,7 +27,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/f5-distributed-cloud/README.md
 display_on_public_website: true
@@ -52,6 +64,12 @@ tile:
   - caption: F5 Distributed Cloud Services のアクセスログ概要ダッシュボードです。
     image_url: images/dashboard_image.png
     media_type: image
+  - caption: F5 Distributed Cloud Services の WAF イベント ダッシュボードです。
+    image_url: images/waf_events_overview.png
+    media_type: image
+  - caption: F5 Distributed Cloud Services の BOT Defense Events Overview ダッシュボードです。
+    image_url: images/defense_events_overview.png
+    media_type: image
   overview: README.md#Overview
   resources:
   - resource_type: その他
@@ -70,8 +88,14 @@ F5 XC プラットフォームには、Datadog HTTPS ロギングエンドポイ
 
 このインテグレーションには、以下のものが含まれます。
 
-- ダッシュボード - *アクセスログの概要*
+- ダッシュボード - *Access Log Overview* , *WAF Events Overview* , *BOT Defense Events Overview*
 - 保存ビュー - *よくクエリされるフィールドのためのファセットを含む*
+- 検知ルール - *Detection rules for F5 WAF and Bot Defense Events*
+    - F5 - WAF - High Number of Traffic Being Blocked : Web アプリケーション ファイアウォール (WAF) によってブロックされているトラフィックの大量発生を検知します。
+    - F5 - WAF - Unusual Traffic From Single Source IP : 単一の送信元 IP アドレスに由来する異常なトラフィック パターンを検知します。
+    - F5 - Bot Defense - Single Host Affected by Multiple Domains : ネットワーク内の単一のホストが複数のドメインに標的とされる、潜在的なボット活動を示す状況を検知します。
+    - F5 - Bot Defense - Multiple Hosts Affected From a Single Bot Client : 単一のボット クライアントからのトラフィックによって複数のホストが影響を受けている状況を検知します。
+    - F5 - Bot Defense- Abnormal Traffic Observed in Specific Country : 直近 30 分間に特定の国で観測された異常なトラフィック パターンを検知し、対応します。
 
 ## セットアップ
 
@@ -97,14 +121,14 @@ Global Log Receiver セクションで以下を実行します。
 1. Global Log Receiver セクション内で、メタデータセクションに名前を入力します。オプション: ラベルを設定し、説明を追加します。
 2. Log Type フィールドで Request Logs または Security Events を選択します。注: デフォルトでリクエストログが設定されています。
 3. 以下のオプションから、ネームスペースに基づいてストリームするイベントを選択します。
-    a. Select logs from the current namespace - 共有ネームスペースからログをストリームします。
+    a. Select logs from the current namespace - 共有ネームスペースからログをストリームします。 
     b. Select logs from all namespaces - すべてのネームスペースからログをストリームします。
-    c. Select logs in specific namespaces - 指定したネームスペースからログをストリームします。表示されたネームスペースのリストにネームスペース名を入力します。複数のネームスペースを追加するには、Add item を選択します。注: ネームスペースは、分散クラウドテナント内のオブジェクトの論理的なグループ化と分離を提供します。
+    c. Select logs in specific namespaces - 指定したネームスペースからログをストリームします。表示されたネームスペースのリストにネームスペース名を入力します。複数のネームスペースを追加するには、Add item を選択します。注: ネームスペースは、分散クラウドテナント内のオブジェクトの論理的なグループ化と分離を提供します。 
 4. Receiver Configuration ボックスで Datadog を選択します。Datadog レシーバーに以下を構成します。
     a. サイト名を datadoghq.com に設定します。
-    b. Datadog に移動し、組織設定内で [API キーの作成][3]を行います。
+    b. Datadog に移動し、組織設定内で [API キーの作成][3]を行います。 
     c. API キーをコピーします。
-    d.  F5 に戻り、Datadog の API キーを Datadog receiver フィールドに貼り付けます。
+    d.  F5 に戻り、Datadog の API キーを Datadog receiver フィールドに貼り付けます。 
 
 **オプションステップ 3: 高度な設定の構成**
 
@@ -112,15 +136,15 @@ Global Log Receiver セクションで以下を実行します。
 
 1. Show Advanced Fields トグルを選択します
 2. Batch Options セクション内で
-    a. Batch Timeout Options で Timeout Seconds を選択し、Timeout Seconds ボックスにタイムアウト値を入力します。
-    b. Batch Max Events で Max Events を選択し、Max Events のボックスに 32 から 2000 の値を入力します。
-    c. Batch Bytes で Max Bytes を選択し、Batch Bytes ボックスに 4096 から 1048576 の間の値を入力します。バッチサイズが指定されたバイトサイズと同じかそれ以上になると、ログが送信されます。
+    a. Batch Timeout Options で Timeout Seconds を選択し、Timeout Seconds ボックスにタイムアウト値を入力します。 
+    b. Batch Max Events で Max Events を選択し、Max Events のボックスに 32 から 2000 の値を入力します。 
+    c. Batch Bytes で Max Bytes を選択し、Batch Bytes ボックスに 4096 から 1048576 の間の値を入力します。バッチサイズが指定されたバイトサイズと同じかそれ以上になると、ログが送信されます。 
 3. TLS セクション内で
-    a. TLS フィールドの Use TLS を選択します。
-    b. Trusted CA フィールドで Server CA Certificates を選択します。Server CA Certificates ボックスに、PEM または Base64 形式の証明書を入力します。
-    c. mTLS 構成で Enable mTLS を選択し、Client Certificate ボックスに PEM または Base64 形式のクライアント証明書を入力します。
-    d. Client Private Key フィールドで Configure を選択し、Type を Text にしたボックスに秘密鍵を入力します。
-    e. Blindfold を選択し、オペレーションが完了するのを待ち、Apply をクリックします。
+    a. TLS フィールドの Use TLS を選択します。 
+    b. Trusted CA フィールドで Server CA Certificates を選択します。Server CA Certificates ボックスに、PEM または Base64 形式の証明書を入力します。 
+    c. mTLS 構成で Enable mTLS を選択し、Client Certificate ボックスに PEM または Base64 形式のクライアント証明書を入力します。 
+    d. Client Private Key フィールドで Configure を選択し、Type を Text にしたボックスに秘密鍵を入力します。 
+    e. Blindfold を選択し、オペレーションが完了するのを待ち、Apply をクリックします。 
 
 **ステップ 4: F5XC のセットアップを終了する*
 

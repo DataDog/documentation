@@ -20,17 +20,17 @@ title: Cuotas de métricas dinámicas
 
 ## Información general
 
-{{< callout url="#" btn_hidden="true" header="¡Obtén la vista previa!" >}}
-  Esta función se encuentra actualmente en vista previa.
+{{< callout url="#" btn_hidden="true" header="Únete a la vista previa" >}}
+  Esta función está en vista previa.
 {{< /callout >}} 
 
-Las cuotas de métricas dinámicas de Datadog te ofrecen un mayor control sobre el coste de tus métricas personalizadas gracias a cuotas de métricas personalizadas para cuentas, equipos o nombres de métrica. Puedes definir un monitor de métricas en tus [métricas de uso estimado[[10] y, cuando se activa, el monitor inicia un flujo de trabajo a través de la [Automatización del flujo de trabajo][3]. 
+Las cuotas de métricas dinámicas de Datadog te ofrecen un mayor control sobre el coste de tus métricas personalizadas a través de cuotas de métricas personalizadas para cuentas, equipos o nombres de métricas. Defines un monitor de métricas en tus [métricas de uso estimadas][10], y cuando se activa, el monitor lanza un proceso a través de [Workflow Automation (automatización de procesos)][3].
 
-El flujo de trabajo envía un mensaje de Slack (o Microsoft Teams) solicitando permiso para aplicar automáticamente configuraciones de [Metrics without LimitsTM][1] a las métricas desencadenantes, lo que reduce el uso y el coste de estas métricas en tu nombre. Estas actualizaciones de configuración son generadas por la información de consulta inteligente de Datadog, que utiliza una lista de las etiquetas (tags) consultadas activas para garantizar que tu configuración sea rentable y no sacrifique la visibilidad.
+El proceso envía un mensaje de Slack (o Microsoft Teams) solicitando permiso para aplicar automáticamente configuraciones de [Metrics without LimitsTM][1] a las métricas desencadenantes, reduciendo el uso y el coste de estas métricas en tu nombre. Estas actualizaciones de configuración son generadas por la información de consulta inteligente de Datadog, que utiliza una lista de las etiquetas consultadas activamente para garantizar que tu configuración de coste optimizado no sacrifica la visibilidad.
 
-Consulta la [Guía de prácticas recomendadas para la gobernanza de métricas personalizadas][11] para obtener más información sobre la monitorización y prevención de excesos y picos repentinos en el uso general de las métricas personalizadas de tu cuenta.
+Consulta la [Guía de buenas prácticas para la gobernanza de métricas personalizadas][11] para obtener más información sobre la supervisión y prevención de excesos y picos repentinos en el uso general de métricas personalizadas de tu cuenta.
 
-## Configuración
+## Configurar
 
 ### Requisitos previos
 
@@ -53,15 +53,22 @@ Consulta la [Guía de prácticas recomendadas para la gobernanza de métricas pe
 2. En la sección **Choose the detection method** (Elige el método de detección), Datadog recomienda utilizar el tipo de monitor `Threshold Alert`. También puedes utilizar Detección de cambios o anomalías.
 3. En la sección **Define the metric** (Definie la métrica), selecciona `datadog.estimated_usage.metrics.custom.by_metric` como nombre de métrica y elige el agregador de espacio `sum by`. 
 4. En **Set alert conditions** (Establecer condiciones de alerta), define tu umbral de cuota.
-5. En **Configure notifications & automations** (Configurar notificaciones y automatizaciones), actualiza el mensaje de notificación del monitor e incluye el identificador de mención del flujo de trabajo de la sección anterior.
-6. Selecciona ***Multi Alert*** (Alerta múltiple) para enviar una notificación por cada cuenta, equipo, nombre de métrica u otra etiqueta especificada en el campo `sum by`.
-7. Haz clic en ***Create*** (Crear) para crear el monitor de métricas.
+5. En **Configure notifications & automations** (Configurar notificaciones y automatizaciones), actualiza el mensaje de notificación del monitor e incluye el indicador de menciones de proceso de la sección anterior. Un ejemplo de mensaje de notificación puede tener el siguiente aspecto:
+```
+    {{#is_alert}}
+    @workflow-mwl-workflow-tags_4aab2
+    {{/is_alert}}
+
+```
+7. Selecciona **Multi Alert** (Alerta múltiple) para enviar una notificación por cada cuenta, equipo, nombre de métrica u otra etiqueta especificada en el campo `sum by`.
+8. Haz clic en **Create** (Crear) para crear el monitor de métrica.
 
 #### Completar la configuración del flujo de trabajo
 
 1. El proyecto del flujo de trabajo contiene varios cuadros de integración de Slack (o Microsoft Teams) que deben actualizarse. Para cada cuadro, introduce el canal o usuario(s) específico(s) que son responsable(s) de conceder permiso a Datadog para aplicar estas configuraciones de métricas rentables en tu nombre.
 2. En el lienzo del flujo de trabajo, haz clic en ***Save*** (Guardar).
-3. Haz clic en ***Publish*** (Publicar) y ***Run*** (Ejecutar) para empezar a gestionar automáticamente tus costes de métricas personalizadas. 
+3. Haz clic en **Publish** (Publicar).
+4. Haz clic en **Run** (Ejecutar), selecciona **Test from Monitor** (Test desde el monitor), e introduce el ID del monitor de métrica. Ahora puedes empezar a gestionar automáticamente los costes de tus métricas personalizadas.
 
 ## Referencias adicionales
 

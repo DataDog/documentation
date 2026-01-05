@@ -6,10 +6,6 @@ further_reading:
   text: 'Datadog On-Call'
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Teams are the central organizational unit of [Datadog On-Call][2]. Pages are sent to a Team, and the Team's schedules or escalation policies route the Page to an appropriate Team member.
 
 On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed on the [Teams][3] overview page, alongside Teams that do not perform on-call duties. Datadog recommends that you use existing Teams for your On-Call configuration whenever possible, as this increases your On-Call Team's discoverability.
@@ -17,7 +13,7 @@ On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed o
 ### Onboard a new or existing Team
 
 1. Go to [**On-Call** > **Teams**][4] and select **Set Up Team**.
-1. Create a new Team, select an existing Datadog Team, or import team configurations from PagerDuty or Opsgenie.
+1. Create a new Team, select an existing Datadog Team, or import team configurations from PagerDuty.
   {{< tabs >}}
   {{% tab "New Team" %}}
   - **Team Name**: Enter a name for your Team. Datadog recommends that you do not use acronyms here, unless the acronym is already widely used in your organization.

@@ -99,9 +99,9 @@ Datadog のゴールドパートナーであり、Datadog Mule® Integration お
 ## サポート
 サポートについては、[contact@ioconnectservices.com][2] または [https://www.ioconnectservices.com/contact-us/][3] までお問い合わせください。
 
-[1]: https://app.datadoghq.com/marketplace/app/iocs-dmi4apm/configuration/configuration?search=mule
+[1]: https://app.datadoghq.com/marketplace/app/iocs-dmi4apm/overview
 [2]: mailto:contact@ioconnectservices.com
 [3]: https://www.ioconnectservices.com/contact-us/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/io-connect-services-mule-apm-instrumentation" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/io-connect-services-mule-apm-instrumentation" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -21,6 +21,10 @@ Search your metrics by metric name or tag using the **Metric** or **Tag** search
 
 {{< img src="metrics/summary/tag_advanced_filtering.png" alt="The metrics summary page with NOT team:* entered in the Tag search bar" style="width:75%;">}}
 
+You can also discover relevant metrics using enhanced fuzzy matching support in the Metrics search field:
+
+{{< img src="metrics/summary/metric_advanced_filtering_fuzzy.png" alt="The metrics summary page with fuzzy search searching shopist checkout" style="width:75%;">}}
+
 Tag filtering supports Boolean and wildcard syntax so that you can identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
 * Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
@@ -121,6 +125,18 @@ The collection interval for the metric in seconds.
 
 The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
 
+## Metric Context Explorer
+
+The Metric Context Explorer provides a centralized view of every Custom Metric and its underlying context. 
+
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metrics Context Explorer is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+
+Use the Metric Context Explorer to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
+
+{{< img src="metrics/summary/metric_context_explorer_12112025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+
+To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
+
 ### Tags table
 
 The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric's data.
@@ -145,18 +161,15 @@ For any particular tag key, you can:
 
 ### Metrics Related Assets
 
-{{< img src="metrics/summary/related_assets_dashboards.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
+{{< img src="metrics/summary/related_assets_dashboards_08_05_2025.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
 
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
 
 1. Scroll to the bottom of the metric's details side panel to the **Related Assets** section.
 2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally use the search bar to validate specific assets.
+3. The **Tags** column shows exactly which tags are used in each asset.
    
 ## Custom Metrics Tags Cardinality Explorer 
-
-{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
-Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
-{{< /callout >}} 
 
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 To determine why a particular metric name is emitting a large number of custom metrics, or spiking, use the Custom Metrics Tags Cardinality Explorer. This helps you pinpoint the tag keys driving the spike, which you can immediately exclude using Metrics without Limits™ for cost savings.
@@ -250,3 +263,8 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [33]: /metrics/custom_metrics/agent_metrics_submission/
 [34]: https://app.datadoghq.com/metric/overview
+[35]: https://app.datadoghq.com/integrations?category=Source%20Control
+[36]: https://app.datadoghq.com/integrations/github/configuration
+[37]: https://app.datadoghq.com/integrations/gitlab-source-code
+[38]: https://app.datadoghq.com/integrations/azure-devops-source-code?subPath=configuration
+[39]: https://app.datadoghq.com/source-code/repositories

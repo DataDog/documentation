@@ -13,6 +13,12 @@ further_reading:
 - link: "/metrics/volume/"
   tag: "Documentation"
   text: "Metrics Volume Management"
+- link: "https://www.datadoghq.com/blog/custom-metrics-governance/"
+  tag: "Blog"
+  text: "Best practices for end-to-end custom metrics governance"
+- link: "https://www.datadoghq.com/blog/govern-custom-metrics/"
+  tag: "Blog"
+  text: "A FinOps engineer's guide to governing custom metrics"
 ---
 
 ## Overview
@@ -26,10 +32,11 @@ This guide provides best practices for managing your custom metrics volumes thro
 - [Reduce costs on less valuable, unused metrics](#value-based-metrics-governance)
 - [Monitor and control usage before incurring billing overages](#monitoring-and-prevention)
 
+Check out this [interactive walk through][17] of Datadog's custom metrics governance tools. 
 
 ## Prerequisites
 
-<div class="alert alert-warning">Some product features require Administrator access.</div> 
+<div class="alert alert-danger">Some product features require Administrator access.</div> 
 
 {{< whatsnext desc="This guide assumes you have an understanding of the following concepts in custom metrics:" >}}
     {{< nextlink href="/metrics/custom_metrics/" >}}What is considered a custom metric{{< /nextlink >}}
@@ -45,7 +52,7 @@ See the steps in this section to review your total account's monthly metric usag
 
 ### Account-level visibility
 
-<div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
+<div class="alert alert-danger">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
 The [Plan and Usage][1] provides you an out-of-the-box (OOTB) summary of your account's monthly billable custom metrics usage with detailed insights on your costs, burn rate, and Top Custom Metric names.
 
@@ -61,10 +68,6 @@ Additionally, review [Usage Attribution][3] information for a total breakdown of
 
 #### Metric-level visibility
 
-{{< callout url="https://forms.gle/H3dG9tTdR6bqzHAX9" >}}
-Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request access today.
-{{< /callout >}} 
-
 {{< img src="metrics/tagsexplorer.png" alt="Custom Metrics Tags Cardinality Explorer for a spiking metric name" style="width:80%;">}}
 
 Once you've identified which metric names are driving up your account's monthly usage and costs, you can navigate to the metric's details side panel to view the Custom Metrics Tags Cardinality Explorer. This shows you which tag keys are driving a particular metric's cardinality to spike. Any spammy or unbounded tag keys with large increases in the number of unique tag values are the likely cause. Exclude them using Metrics without Limits™ to achieve immediate cost savings.
@@ -76,7 +79,7 @@ Team-level visibility enables account administrators to hold teams accountable. 
 Individual teams might have limited insights into the costs of the metrics and tags they're submitting. This results in teams being less motivated to control their usage or even limit usage growth. It is crucial for everyone to have visibility into their usage and feel empowered to take ownership in managing those volumes and associated costs.
 
 #### Find the source of your largest custom metrics
-<div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
+<div class="alert alert-danger">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
 {{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Navigate to the Metrics Summary from the Plan & Usage page through the Top Custom Metrics table" style="width:90%;" >}}
 
@@ -118,7 +121,7 @@ Reduce your indexed custom metrics volumes on any metric name by setting a tag c
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
 
 With Metrics without Limits™, Datadog automatically provides the following:
-- Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
+- Up to date recommended tag configurations based on actively queried tags and tags used on assets (powered by our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
 - Intelligent query insights that continuously compute and analyze all users' interactions (both in-app and through the API) on any metrics submitted to Datadog so that your recommended tag configurations are always relevant.
 - Ability to roll back changes at any time to get full visibility into all your originally submitted data.
 
@@ -151,7 +154,7 @@ You can also reduce costs, without unintended side effects, by using the [Relate
 
 #### Identify all unqueried and unused metrics
 
-Use the [Related Assets facet][16] to gain visibility into the metrics that are unused in Datadog, which can help you reduce costs without accidentally breaking any assets. This facet lets you see which metrics are used on your dashboards, notebooks, monitors, and SLOs, allowing you to make informed decisions about your metric configurations. 
+Use the [Related Assets facet][16] to gain visibility into the metrics that are unused in Datadog, which can help you reduce costs without accidentally breaking any assets. This facet lets you see which metrics are used on your dashboards, notebooks, monitors, and SLOs, allowing you to make informed decisions about your metric configurations.
 
 Identify your organization's entire list of unqueried and unused metrics:
 
@@ -178,9 +181,9 @@ Based on Datadog's intelligent query insights across thousands of custom metrics
 
 Even though a metric is not queried for the past 30, 60, or 90 days, your teams might still derive value from it for incident management and outage remediation. Conversely, your teams could be underutilizing existing, actively queried metrics. So understanding the relative utility of your metrics is the next recommended step in your governance workflow. 
 
-Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with the [Metrics Related Assets][15] side panel. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
+Datadog's Metrics without Limits™ is a suite of features that also provide you with OOTB insights to assess the value of your actively queried metrics with the [Metrics Related Assets][15] side panel. A metrics related asset refers to any Datadog asset, such as a dashboard, notebook, monitor, or SLO that queries a particular metric. Use the **Tags** column to identify which specific tags are used on assets, ensuring your retain visibility when optimizing with Metrics without Limits™. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can use existing metrics to get more value from your observability spend. 
 
-{{< img src="metrics/related_assets_2025-01-27.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
+{{< img src="metrics/related_assets_08_05_2025.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to three dashboards" style="width:100%;" >}}
 
 To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
@@ -220,9 +223,9 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 ## Summary of best practices
 
 1. Start by identifying your largest metric names (your Top Custom Metrics table or the Metrics Volume Page), begin using Metrics without Limits™ to optimize these top metrics to the most cost-effective volume. 
-1. Use the Metrics Volume Management page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
-1. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
-1. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
+2. Use the Metrics Volume Management page to attribute any existing custom metrics usage spikes to the top spiking metric names causing that spike.
+3. For immediate cost savings, identify your unqueried custom metrics and use Metrics without Limits™ to configure these metrics with empty tag configurations.
+4. Set up monitors on your custom metrics usage using any of Datadog's OOTB estimated custom metrics usage metrics.
 
 ## Further reading
 
@@ -244,3 +247,4 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 [14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
 [15]: /metrics/summary/#metrics-related-assets
 [16]: /metrics/summary/#facet-panel
+[17]: https://tour.datadoghq.com/psl/swa0y11

@@ -118,7 +118,7 @@ For installation steps, see the [Agent installation instructions][1].
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
 
-**Note:** The configuration subdirectory for the Agent releases below `7.53.0` is `oracle-dbm.d`.
+**Note:** The configuration subdirectory for the Agent releases between `7.50.1` and `7.53.0` is `oracle-dbm.d`. See [Configuring the Oracle Integration on Agent 7.50.1+][10] for more details.
 
 {{< tabs >}}
 {{% tab "Multi-tenant" %}}
@@ -158,16 +158,6 @@ The Agent connects only to the root multitenant container database (CDB). It que
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
-### Install or verify the Oracle integration
-
-#### First-time installations
-
-On the Integrations page in Datadog, install the [Oracle integration][7] for your organization. This installs an [Oracle dashboard][2] in your account that can be used to monitor the performance of your Oracle databases.
-
-#### Existing installations
-
-{{% dbm-existing-oracle-integration-setup %}}
-
 ### Validate the setup
 
 [Run the Agent's status subcommand][8] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][2] and [Databases][3] page in Datadog to get started.
@@ -176,7 +166,7 @@ On the Integrations page in Datadog, install the [Oracle integration][7] for you
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][4] to learn more about the configuration options available.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+<div class="alert alert-danger">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
@@ -187,6 +177,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [7]: https://app.datadoghq.com/integrations/oracle
 [8]: /agent/configuration/agent-commands/#agent-status-and-information
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /integrations/guide/oracle-check-upgrade-7.50.1/
 
 ## Further reading
 

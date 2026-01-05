@@ -1,5 +1,6 @@
 ---
 title: HTTP Requests
+description: Make custom HTTP requests to endpoints with configurable authentication, methods, headers, and response handling for workflows and apps.
 disable_toc: false
 further_reading:
 - link: "/actions/connections/"
@@ -11,10 +12,6 @@ aliases:
 - /service_management/app_builder/connections/http_request/
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow Automation and App Builder are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Use the **Make request** action to make a custom request to an HTTP endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges API][1] for details.
 
 To add an HTTP Request:
@@ -24,14 +21,18 @@ To add an HTTP Request:
 - In a new workflow, click **Add step** and search for `Make request`. Select the **Make request** action to add it to your workflow.
 - In an existing workflow, click **+** and search for `Make request`. Select the **Make request** action to add it to your workflow.
 
-Specify the request method and any necessary [authentication][2]. Read the sections below for further information about the available configuration options. Optionally, the request can wait on conditions that you specify in the **Conditional wait** section, and retry at a given interval if the condition is not satisfied.
+Specify the request method and any necessary [authentication][1]. Read the sections below for further information about the available configuration options. Optionally, the request can wait on conditions that you specify in the **Conditional wait** section, and retry at a given interval if the condition is not satisfied.
+
+[1]: /actions/workflows/access_and_auth/
 {{% /tab %}}
 
 {{% tab "App Builder" %}}
 1. In your app, under **Data**, click **+ New** and select **Query**
 1. Search for `HTTP`, then select the **Make request** action to add it to your app.
 
-Specify the request method and any necessary [authentication][7]. Read the sections below for further information about the available configuration options.
+Specify the request method and any necessary [authentication][1]. Read the sections below for further information about the available configuration options.
+
+[1]: /actions/app_builder/access_and_auth/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -187,9 +188,7 @@ To configure a private HTTP request:
 <br>Do you have questions or feedback? Join the **#workflows** or **#app-builder** channel on the [Datadog Community Slack][4].
 
 [1]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
-[2]: /service_management/workflows/access/
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
-[4]: https://datadoghq.slack.com/
+[4]: https://chat.datadoghq.com/
 [5]: /actions/private_actions
 [6]: /actions/private_actions/private_action_credentials/?tab=httpsaction#credential-files
-[7]: /service_management/app_builder/auth/

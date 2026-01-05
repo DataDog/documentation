@@ -107,7 +107,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "ssh_check" >}}
+{{< get-metrics-from-git "ssh" >}}
 
 
 ### Événements
@@ -115,7 +115,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 Le check SSH ne comprend aucun événement.
 
 ### Checks de service
-{{< get-service-checks-from-git "ssh_check" >}}
+{{< get-service-checks-from-git "ssh" >}}
 
 
 ## Dépannage

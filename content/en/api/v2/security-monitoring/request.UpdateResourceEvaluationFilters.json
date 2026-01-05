@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "cloud_provider": {
+        "aws": {
+          "aws_account_id": [
+            "tag1:v1"
+          ]
+        }
+      }
+    },
+    "id": "csm_resource_filter",
+    "type": "csm_resource_filter"
+  }
+}

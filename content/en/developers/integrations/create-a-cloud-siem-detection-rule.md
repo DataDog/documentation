@@ -11,49 +11,38 @@ further_reading:
 
 ## Overview
 
+This guide provides steps for creating a Cloud SIEM detection rule and outlines best practices for rule configuration.
+
 [Datadog Cloud SIEM (Security Information and Event Management)][1] unifies developer, operation, and security teams through one platform. Datadog provides a set of out-of-the-box detection rules for many features and integrations. View these rules in your [SIEM Detection Rules list][2].
 
-Create an out-of-the-box detection rule to help users find security insights through your Datadog integration. This guide provides steps for creating an Cloud SIEM detection rule and best practices to follow during the creation process.
+Datadog Cloud SIEM detection rules are out-of-the-box content that can be added to integrations and are ready to use upon installation.
 
 To create a Datadog integration, see [Create a New Integration][3].
 
 ## Create a detection rule
-### Build a detection rule JSON schema
+### Build a detection rule
+To enhance security insights for users, partners can create their own out-of-the-box detection rules as part of a Datadog integration. Detection rules can be added as an out-of-the-box asset for integrations.
 
-1. From **Detection Rules**, [create a new rule][4].
+In your Datadog sandbox, [create a new rule][4].
 
+{{< img src="developers/integrations/detection_rule.png" alt="The Create a New Rule page in Datadog's Detection Rules area" style="width:100%;" >}}
 
-2. Follow the [best practices](#configuration-best-practices) in this guide to configure your detection rule.
- 
-3. Click **Export to JSON**.
+Follow [best practices](#configuration-best-practices) outlined in this guide to configure the detection rule.
 
-4. Save the JSON file and name it according to your detection rule title. For example, `your_integration_name_rule_name.json`.
+### Upload your Detection Rule
 
-5. In the detection rule JSON file, add and fill out the `partnerRuleId`, and remove the `isEnabled` attribute. For more information, see [Configuration best practices](#configuration-best-practices).
+Within your integration in the Integration Developer Platform, navigate to the Content tab. From here, select **Import Detection Rule** to choose from a list of available detection rules. You can select up to 10 detection rules to include with your integration.
 
-### Open a pull request
+{{< img src="developers/integrations/content_tab.png" alt="The Content tab in the Developer Platform" style="width:100%;" >}}
 
-1. Save the detection rule JSON file to your integration's `assets/security` folder.
-
-2. Open a pull request (PR) to update the corresponding integration folder in either the [`integrations-extras` GitHub repository][5] or [`Marketplace` Github repository][6]. The PR should include your detection rule JSON file, along with any new integration files.
-
-3. Datadog approves and merges the PR, and your integration-monitor template is pushed to production.
 
 ## Verify your detection rule in production
 
-To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog, and Cloud SIEM must be enabled. 
+To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog, and Cloud SIEM must be enabled.
 
-1. Find your detection rule in the [Detection Rules list][2], and expand it. 
+1. Find your detection rule in the [Detection Rules list][2], and click to expand it.
 2. Ensure that its logos render correctly.
 3. Verify that the rule is enabled.
-
-## Configuration best practices
-
-In addition to the detection rule definition, the `partnerRuleId` field is required for partner contributed detection rules. The `isEnabled` field should be removed as it does not apply to partner contributed detection rules.
-
-|      | Description    | Examples |
-| ---  | ----------- | ----------- |
-|partnerRuleId | Unique identifier for the rule, following the format `ext-00*-***` where * could be any alphanumeric characters. | `ext-003-bzd` |
 
 ### Example of a well-defined detection rule
 
@@ -79,7 +68,7 @@ This error means that the JSON located at `<FILE_PATH>` is considered invalid JS
 ```
 partnerRuleId is empty for rule name="<RULE_NAME>" - partnerRuleId=<NEW_RULE_ID> is available
 ```
-A `partnerRuleId` is required for each rule and is missing. Use the generated `<NEW_RULE_ID>`. 
+A `partnerRuleId` is required for each rule and is missing. Use the generated `<NEW_RULE_ID>`.
 
 ```
 partnerRuleId=<RULE_ID> is in the incorrect format for rule name="<RULE_NAME>", it must follow the format=^[a-z0-9]{3}-[a-z0-9]{3}-[a-z0-9]{3}$ - partnerRuleId=<NEW_RULE_ID> is available
@@ -141,9 +130,9 @@ Reach out to Datadog to address the issue.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/security/cloud_siem/
-[2]: https://app.datadoghq.com/security/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name 
+[2]: https://app.datadoghq.com/security/siem/rules?deprecated=hide&groupBy=tactic&product=siem&sort=rule_name
 [3]: https://docs.datadoghq.com/developers/integrations/agent_integration/
-[4]: https://app.datadoghq.com/security/rules/new?product=siem
-[5]: https://github.com/DataDog/integrations-extras 
+[4]: https://app.datadoghq.com/security/siem/rules/new?product=siem
+[5]: https://github.com/DataDog/integrations-extras
 [6]: https://github.com/DataDog/marketplace
 [7]: https://docs.datadoghq.com/security/cloud_siem/detection_rules

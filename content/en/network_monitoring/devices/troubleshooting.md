@@ -6,13 +6,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
+- link: "/network_monitoring/devices/glossary"
+  tag: "Doc"
+  text: "NDM terms and concepts"
 ---
 
 ## Overview
 
 Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
 
-### Device not visible in Datadog
+## Device not visible in Datadog
 
 The following assumes you are running Datadog Agent v7.61.0+.
 
@@ -59,36 +62,64 @@ The output should look similar to the following:
 
    - Run an `snmp walk` on the device's admin IP to determine why the Agent cannot connect to your device.
 
-   **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files.
+      **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files. 
+      
+      Refer to your vendor specific documentation for additional information on running these commands.
 
-   **Linux**: <br />
-     SNMP v2:
-     ```
-     sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
-     ```
-     SNMP v3:
-      ```
-      sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
-      ```
-      **Windows**:
-      ```
-      agent snmp walk <IP Address>[:Port]
+      {{< tabs >}}
+      {{% tab "Linux" %}}
 
-      Example:
-      agent.exe snmp walk  10.143.50.30 1.3.6
-      ```
+   SNMP v2:
 
-    Refer to your vendor specific documentation for additional information on running these commands.
+   ```shell
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
+   ```
 
-### Troubleshooting SNMP Errors
+   SNMP v3:
+
+   ```shell
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
+   ```
+
+      {{% /tab %}}
+      {{% tab "Windows" %}}
+
+   Navigate to the Agent installation directory:
+
+   ```shell
+   cd "c:\Program Files\Datadog\Datadog Agent\bin"
+   ```
+
+   Run the SNMP walk command:
+
+   ```shell
+   agent snmp walk <IP Address>[:Port]
+   ```
+
+   Example:
+
+   ```shell
+   agent.exe snmp walk 10.143.50.30 1.3.6
+   ```
+
+   **Note**: Run this command as administrator from the Agent installation directory to avoid the following error:
+
+   ```shell
+   Error: unable to read artifact: open C:\ProgramData\Datadog\auth_token: Access is denied.
+   ```
+
+      {{% /tab %}}
+      {{< /tabs >}}
+
+## Troubleshooting SNMP errors
 
 If either the SNMP status or Agent walk shows an error, it could indicate one of the following issues:
 
-#### Permission denied
+### Permission denied
 
 If you see a permission denied error while port binding in agent logs, the port number you've indicated may require elevated permissions. To bind to a port number under 1024, see [Using the default SNMP Trap port 162][8].
 
-#### Unreachable or misconfigured device:
+### Unreachable or misconfigured device:
 
    **Error**:
    ```plaintext
@@ -104,7 +135,7 @@ If you see a permission denied error while port binding in agent logs, the port 
 
       Run `iptables -L OUTPUT` and ensure there is no deny rule:
 
-      ```
+      ```shell
       vagrant@agent-dev-ubuntu-22:~$ sudo iptables -L OUTPUT
       Chain OUTPUT (policy ACCEPT)
       target     prot opt source               destination
@@ -112,7 +143,7 @@ If you see a permission denied error while port binding in agent logs, the port 
       ```
    3. Ensure your community string matches.
 
-#### Incorrect SNMPv2 credentials
+### Incorrect SNMPv2 credentials
 
    **Error**:
    ```
@@ -123,7 +154,7 @@ If you see a permission denied error while port binding in agent logs, the port 
 
    If using SNMPv2, ensure that a community string is set.
 
-#### Incorrect SNMPv3 privacy protocol
+### Incorrect SNMPv3 privacy protocol
 
    **Error**:
    ```
@@ -145,6 +176,65 @@ If you see a permission denied error while port binding in agent logs, the port 
    - privKey
    - privProtocol
 
+### Traps or Flows not being received at all
+
+If SNMP traps or NetFlow traffic are missing, a common cause is firewall rules blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow rely on UDP and use the ports defined in your [datadog.yaml][9] configuration.
+
+<div class="alert alert-info">Local firewalls like Uncomplicated Firewall (UFW) may block traffic even when configured with permissive settings. Check system logs for blocked packet entries, which typically indicate that traffic reached the network interface but was blocked before reaching the operating system.</div>
+
+Use the following platform-specific commands to check for firewall rules that may be blocking the traffic from reaching the Agent.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Linux has multiple types of firewalls, such as `iptables`, `nftables`, or `ufw`. Depending on which is in use, the following commands can be used:
+
+- `sudo iptables -S`
+
+- `sudo nft list ruleset`
+
+- `sudo ufw status`
+
+Check for rules blocking UDP traffic on the configured ports.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Starting with version `7.67`, the Agent's `datadog-agent diagnose` command automatically checks for blocking firewall rules and displays warnings if any are found.
+
+To manually inspect firewall rules:
+
+```powershell
+Get-NetFirewallRule -Action Block | ForEach-Object {
+    $rule = $_
+    Get-NetFirewallPortFilter -AssociatedNetFirewallRule $rule | Select-Object
+        @{Name="Name"; Expression={$rule.Name}},
+        @{Name="DisplayName"; Expression={'"' + $rule.DisplayName + '"'}},
+        @{Name="Direction"; Expression={$rule.Direction}},
+        @{Name="Protocol"; Expression={$_.Protocol}},
+        @{Name="LocalPort"; Expression={$_.LocalPort}},
+        @{Name="RemotePort"; Expression={$_.RemotePort}}
+} | Format-Table -AutoSize
+```
+
+Look for rules where:
+- **Direction** is inbound
+- **Protocol** is UDP
+- **LocalPort** matches one of your configured ports
+
+{{% /tab %}}
+{{% tab "MacOS" %}}
+
+Run the following command to review Packet Filter (pf) rules:
+
+```shell
+sudo pfctl -sr
+```
+
+Check for any rules blocking UDP traffic on your configured ports. For example:`block drop in proto udp from any to any port = <CONFIG_PORT>`.
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Traps not being received for devices
 
 1. Check the Datadog `agent.log` file to ensure that you can bind to the traps port. The following error indicates that you are unable to bind to the traps port:
@@ -156,11 +246,11 @@ If you see a permission denied error while port binding in agent logs, the port 
    **Solution**:
    Add a net bind capability to the Agent binary, which allows the Agent to bind to reserved ports:
 
-   ```
+   ```shell
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 
-#### Traps incorrectly formatted
+### Traps incorrectly formatted
 
 1. Navigate to the troubleshooting dashboard in NDM:
 
@@ -219,3 +309,4 @@ If you see a permission denied error while port binding in agent logs, the port 
 [6]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [7]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [8]: /network_monitoring/devices/snmp_traps/#using-the-default-snmp-trap-port-162
+[9]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

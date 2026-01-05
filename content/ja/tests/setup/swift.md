@@ -19,12 +19,6 @@ title: Swift テスト
 type: multi-code-lang
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-選択された Datadog サイト ({{< region-param key="dd_site_name" >}}) はサポートされていません。
-</div>
-{{< /site-region >}}
-
 ## 互換性
 
 対応言語:
@@ -119,7 +113,7 @@ Cocoapods やフレームワークのリンクなど他の方法と比較して�
 [1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>注</strong>: このフレームワークはテストにのみ有用であり、テストを実行するときのみアプリケーションとリンクさせる必要があります。フレームワークをユーザーに配布しないでください。 </div>
+<div class="alert alert-danger"><strong>注</strong>: このフレームワークはテストにのみ有用であり、テストを実行するときのみアプリケーションとリンクさせる必要があります。フレームワークをユーザーに配布しないでください。 </div>
 
 
 
@@ -134,7 +128,7 @@ Cocoapods やフレームワークのリンクなど他の方法と比較して�
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift 環境" >}}
 
-<div class="alert alert-warning">環境変数の変数展開にはメインターゲットを設定する必要があります。選択されていない場合、変数は無効になります。 </div>
+<div class="alert alert-danger">環境変数の変数展開にはメインターゲットを設定する必要があります。選択されていない場合、変数は無効になります。 </div>
 
 UITests の場合、フレームワークがこれらの値をアプリケーションに自動で注入するため、環境変数はテストターゲットにのみ設定する必要があります。
 
@@ -250,7 +244,7 @@ UITests では、テストターゲットと UITests から実行されるアプ
 
 `DD_DISABLE_CRASH_HANDLER`
 : クラッシュの処理およびレポートを無効化します (Boolean)
-<div class="alert alert-warning"><strong>重要</strong>: クラッシュレポートを無効にすると、クラッシュしたテストはまったく報告されず、テストの失敗として表示されません。いずれかのテストでクラッシュ処理を無効にする必要がある場合は、それらを個別のターゲットとして実行し、他のテストでは無効にしないようにします。</div>
+<div class="alert alert-danger"><strong>重要</strong>: クラッシュレポートを無効にすると、クラッシュしたテストはまったく報告されず、テストの失敗として表示されません。いずれかのテストでクラッシュ処理を無効にする必要がある場合は、それらを個別のターゲットとして実行し、他のテストでは無効にしないようにします。</div>
 
 ### ネットワークの自動インスツルメンテーション
 

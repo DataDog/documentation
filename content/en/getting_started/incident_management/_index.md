@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Incident Management
+description: Track and communicate issues from declaration through resolution with collaborative workflows, timelines, and postmortems.
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
@@ -35,10 +36,6 @@ further_reading:
       tag: 'Blog'
       text: 'How we manage incidents at Datadog'
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
 
 ## Overview
 
@@ -185,8 +182,8 @@ The [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google
 
 You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
 
-{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
-  
+{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

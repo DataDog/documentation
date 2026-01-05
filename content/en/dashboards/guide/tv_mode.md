@@ -1,5 +1,6 @@
 ---
 title: Using TV mode for Dashboards
+description: Display dashboards on large screens or TVs to showcase key performance metrics for team visibility and monitoring.
 further_reading:
 - link: "/dashboards/configure/"
   tag: "Documentation"

@@ -12,17 +12,23 @@ further_reading:
     text: "Learn more about creating custom rules"
 ---
 
+{{< site-region region="gov" >}}
+
+<div class="alert alert-danger">Cloud Storage scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+
+{{< /site-region >}}
+
 ## Overview
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Limited Availability!"  >}}
-Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click Request Access.
+{{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Preview Program!"  >}}
+Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click Request Access.
 {{< /callout >}}
 
-Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets and RDS instances, as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets and tables in your RDS instances.
+Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets.
 
 When an Agentless scanner finds a match with any of the [SDS library rules][2], the scanning instance sends the rule type and location of the match to Datadog. **Note**: Cloud storage resources and their files are only read in your environment - no sensitive data that was scanned is sent back to Datadog.
 
-In the Sensitive Data Scanner [Summary page][3], you can see what cloud storage resources have been scanned and any matches found, including the rules that matched them.
+In the Sensitive Data Scanner [Findings page][3], you can see what cloud storage resources have been scanned and any matches found, including the rules that matched them.
 
 This document walks you through:
 - [Enabling Remote Configuration](#enable-remote-configuration) to use Sensitive Data Scanner for Cloud Storage
@@ -31,10 +37,15 @@ This document walks you through:
 
 ## Enable Remote Configuration {#enable-remote-configuration}
 
-To use Sensitive Data Scanner in your AWS environments, you need to:
+Remote Configuration allows Datadog to send configuration data (such as which cloud storage resources to scan) to your deployed scanners. To use Sensitive Data Scanner in your AWS environments, you need to ensure that:
+- Remote Configuration is enabled for your Datadog organization.
+- You are using Remote-Configuration-enabled Datadog API keys for AWS accounts with scanners deployed to them.
 
-1. Enable Remote Configuration. Remote Configuration allows Datadog to send information to scanners, such as which cloud storage resources should be scanned. See the [Remote Configuration setup instructions][4].
-1. Use Remote-Configuration-enabled Datadog API keys for AWS accounts with scanners deployed to them. You need to manually enable Remote Configuration for the API keys you want to use for Agentless Scanning. See [Enable Remote Configuration on the API key][5] for instructions.
+Remote Configuration is enabled by default on most organizations. To verify this, navigate to the [Remote Configuration][4] settings page. If it is not enabled:
+1. Ensure your RBAC permissions include [`org_management`][7].
+1. From the Remote Configuration [setup page][5], click **Enable for your Organization** > **Next Step**.
+1. Search for and select the API keys that you want to use with Remote Configuration and click **Enable Keys**. 
+1. Click **Next Step** > **Done**. You do not need to configure Datadog components like the Agent or tracers.
 
 **Notes**:
 - Only AWS accounts that have scanners deployed to them need Remote-Configuration-enabled Datadog API keys.
@@ -62,7 +73,7 @@ To scan Amazon S3 buckets, these permissions are required:
 
 ## Deploy scanners
 
-Agentless scanners are EC2 instances that run in your environment. They scan your S3 buckets and the tables in your RDS instances for sensitive information.
+Agentless scanners are EC2 instances that run in your environment. They scan your S3 buckets for sensitive information.
 
 There are two methods for deploying scanners to your environment:
 - [Automatically deploy using CloudFormation](#automatically-deploy-scanners-using-cloudformation)
@@ -149,11 +160,12 @@ To uninstall Agentless Scanning, log in to your AWS console and delete the Cloud
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/remote_config/?tab=configurationyamlfile
+[1]: /remote_configuration
 [2]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/data-security
-[4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
-[5]: /agent/remote_config/?tab=configurationyamlfile#enable-remote-configuration-on-the-api-key
+[4]: https://app.datadoghq.com/organization-settings/remote-config
+[5]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [6]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/data-security
 [7]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner
 [8]: mailto:success@datadoghq.com
+[9]: /account_management/rbac/permissions#access-management

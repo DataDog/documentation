@@ -1,7 +1,6 @@
 {
   "data": {
     "attributes": {
-      "description": "Escalation Policy 1 description",
       "name": "Example-On-Call",
       "resolve_page_on_policy_end": true,
       "retries": 2,
@@ -15,6 +14,15 @@
               "type": "users"
             },
             {
+              "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+              "type": "schedules"
+            },
+            {
+              "config": {
+                "schedule": {
+                  "position": "previous"
+                }
+              },
               "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
               "type": "schedules"
             },

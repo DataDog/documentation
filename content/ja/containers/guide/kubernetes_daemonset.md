@@ -6,6 +6,10 @@ further_reading:
 title: Kubernetes 上の Datadog Agent を DaemonSet で手動でインストール、構成する
 ---
 
+<div class="alert alert-danger">
+  Datadog では、手動で行う DaemonSet による Datadog Agent のデプロイはエラーを招きやすいため推奨していません。Kubernetes に Agent をインストールする場合は、<a href="/containers/kubernetes/installation">Datadog Operator または Helm の利用</a>を推奨します。
+</div>
+
 ## インストール
 DaemonSet を利用して、すべてのノード (または [nodeSelectors を使用して][1]特定のノード) に Datadog Agent をデプロイすることができます。
 
@@ -35,7 +39,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
     |                                 |                                 |                                 |                                 | <i class="icon-check-bold"></i> |                                 | [マニフェストテンプレート][10] | テンプレートなし                          |
     | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 |                                 | [マニフェストテンプレート][11] | [マニフェストテンプレート][12]              |
 
-   トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][13]。それぞれの機能を個別に有効にする方法については、[ログ][14]、[APM][15]、[プロセス][16]、[ネットワークパフォーマンスモニタリング][17]、[セキュリティ][18]に関するドキュメントページを参照してください。
+     トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][13]。それぞれの機能を個別に有効にする方法については、[ログ][14]、[APM][15]、[プロセス][16]、[Cloud Network Monitoring][17]、[セキュリティ][18]に関するドキュメントページを参照してください。
 
     **注**: これらのマニフェストは、`default` ネームスペースに設定されています。カスタムネームスペースを使用している場合、適用する前に `metadata.namespace` パラメーターを更新します。
 
@@ -363,7 +367,7 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 [14]: /ja/agent/kubernetes/log/
 [15]: /ja/agent/kubernetes/apm/
 [16]: /ja/infrastructure/process/?tab=kubernetes#installation
-[17]: /ja/network_monitoring/performance/setup/
+[17]: /ja/network_monitoring/cloud_network_monitoring/setup/
 [18]: /ja/data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /ja/getting_started/site/

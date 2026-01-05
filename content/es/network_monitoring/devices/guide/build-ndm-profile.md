@@ -13,7 +13,7 @@ title: Crear un perfil NDM (Avanzado)
 
 Datadog Network Device Monitoring utiliza perfiles para recopilar métricas de dispositivos de red. Estos se definen de forma limitada mediante una MIB o para recopilar métricas de una marca y modelo de dispositivo específico. Este tutorial muestra los pasos para crear un perfil NDM básico que recopile métricas OID de dispositivos HP iLO4.
 
-Los perfiles NDM utilizan conceptos SNMP. Para obtener detalles básicos sobre SNMP, consulta la [terminología][1].
+Los perfiles NDM utilizan conceptos SNMP. Para obtener información básica sobre SNMP, consulta el [glosario][1].
 
 <div class="alert alert-info">
 Esta guía está destinada a usuarios avanzados. La mayoría de los dispositivos se pueden configurar mediante la interfaz gráfica de usuario que se incluye en la documentación <a href="/network_monitoring/devices/guide/device_profiles/">Introducción a los perfiles de dispositivos</a> o mediante los <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">perfiles de Datadog</a>.
@@ -79,7 +79,7 @@ En segundo lugar, prueba el perfil apuntando a una dirección IP de un dispositi
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /es/network_monitoring/devices/troubleshooting#terminology
+[1]: /es/network_monitoring/devices/glossary
 [2]: https://en.wikipedia.org/wiki/HP_Integrated_Lights-Out
 [3]: https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_53293d026fb147958b223069b6
 [4]: https://en.wikipedia.org/wiki/Networking_hardware

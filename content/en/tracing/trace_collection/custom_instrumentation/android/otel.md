@@ -1,6 +1,9 @@
 ---
 title: Android and Android TV Custom Instrumentation using the OpenTelemetry API
 description: 'Instrument your Android and Android TV application with the OpenTelemetry API, to send traces to Datadog.'
+code_lang: otel
+type: multi-code-lang
+code_lang_weight: 1
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -14,7 +17,7 @@ further_reading:
 
 ## Requirements and limitations
 
-- You need to download the [dd-sdk-android-trace][1] and [dd-sdk-android-trace-otel][2] dependencies starting 
+- You need to download the [dd-sdk-android-trace][1] and [dd-sdk-android-trace-otel][2] dependencies starting
 with 2.11.0+
 
 ## Setup
@@ -28,7 +31,7 @@ android {
 }
 dependencies {
     implementation "com.datadoghq:dd-sdk-android-trace:x.x.x"
-    implementation "com.datadoghq:dd-sdk-android-trace-otel:x.x.x" 
+    implementation "com.datadoghq:dd-sdk-android-trace-otel:x.x.x"
     //(...)
 }
 
@@ -273,6 +276,43 @@ android {
    {{< /tabs >}}
    {{< /site-region >}}
 
+   {{< site-region region="ap2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder(
+                    clientToken = <CLIENT_TOKEN>,
+                    env = <ENV_NAME>,
+                    variant = <APP_VARIANT_NAME>
+                )
+                .useSite(DatadogSite.AP2)
+                .build()
+            Datadog.initialize(this, configuration, trackingConsent)
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            Configuration configuration =
+                    new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                            .useSite(DatadogSite.AP2)
+                            .build();
+            Datadog.initialize(this, configuration, trackingConsent);
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    To be GDPR compliant, the SDK requires the tracking consent value at initialization.
    The tracking consent can be one of the following values [see Tracking Consent][6]:
    * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data
@@ -314,7 +354,7 @@ final TraceConfiguration traceConfig = TraceConfiguration.Builder().build();
 Trace.enable(traceConfig);
 ```
 {{% /tab %}}
-{{< /tabs >}}    
+{{< /tabs >}}
 
 4. Datadog tracer implements the [OpenTelemetry standard][18]. Create `OtelTracerProvider` and register `OpenTelemetrySdk` in `GlobalOpenTelemetry` in your `onCreate()` method:
 
@@ -334,8 +374,8 @@ GlobalOpenTelemetry.set(object : OpenTelemetry {
         return ContextPropagators.noop()
     }
 })
-// and later on if you want to access the tracer provider
-val tracerProvider = GlobalOpenTelemetry.get().getTracer(instrumentationName = "<instrumentation_name>")
+// and later on if you want to access the tracer
+val tracer = GlobalOpenTelemetry.get().getTracer(instrumentationName = "<instrumentation_name>")
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -355,8 +395,8 @@ GlobalOpenTelemetry.set(new OpenTelemetry() {
         return ContextPropagators.noop();
     }
 });
-// and later on if you want to access the tracer provider
-final TracerProvider tracerProvider = GlobalOpenTelemetry.get().getTracer("<instrumentation_name>");       
+// and later on if you want to access the tracer
+final Tracer tracer = GlobalOpenTelemetry.get().getTracer("<instrumentation_name>");
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -516,6 +556,164 @@ final Request:request = new Request.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
+11. (Optional) RxJava
+
+To provide a continuous trace inside a RxJava stream you need to follow the steps below:
+1. Add the [OpenTelemetry for RxJava][19] dependency into your project and follow the **Readme** file
+   for instructions. For example, for a continuous trace you would add:
+   ```kotlin
+   TracingAssembly.enable()
+   ```
+2. Then, in your project, open a scope when the Observable is subscribed and close it when it completes. Any span
+   created inside the stream operators is displayed inside this scope (parent Span):
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+var spanScope: Scope? = null
+Single.fromSupplier { }
+  .subscribeOn(Schedulers.io())
+  .map {
+    val span = GlobalOpenTelemetry.get().getTracer("<TRACER_NAME>")
+      .spanBuilder("<YOUR_OP_NAME>")
+      .startSpan()
+    // ...
+    span.end()
+  }
+  .doOnSubscribe {
+    val span = GlobalOpenTelemetry.get().getTracer("<TRACER_NAME>")
+      .spanBuilder("<YOUR_OP_NAME>")
+      .startSpan()
+    spanScope = span.makeCurrent()
+  }
+  .doFinally {
+    Span.current()?.end()
+    spanScope?.close()
+  }
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+ThreadLocal<Scope> scopeStorage = new ThreadLocal<>();
+// ...
+Single.fromSupplier({})
+  .subscribeOn(Schedulers.io())
+  .map(data -> {
+        final Span span = GlobalOpenTelemetry.get().getTracer("<TRACER_NAME>")
+            .spanBuilder("<YOUR_OP_NAME>")
+            .startSpan();
+        // ...
+        span.end();
+        // ...
+  })
+  .doOnSubscribe(disposable -> {
+        final Span span = GlobalOpenTelemetry.get().getTracer("<TRACER_NAME>")
+            .spanBuilder("<YOUR_OP_NAME>")
+            .startSpan();
+        Scope spanScope = span.makeCurrent();
+        scopeStorage.set(spanScope);
+  })
+  .doFinally(() -> {
+        final Span activeSpan = Span.current();
+        if (activeSpan != null) {
+            activeSpan.end();
+        }
+        Scope spanScope = scopeStorage.get();
+        if (spanScope != null) {
+            spanScope.close();
+            scopeStorage.remove();
+        }
+  });
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+12. (Optional) RxJava + Retrofit
+For a continuous trace inside a RxJava stream that uses Retrofit for the network requests:
+    * Configure the [Datadog Interceptor](#okhttp)
+    * Use the [Retrofit RxJava][20] adapters to use synchronous Observables for the network requests:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+Retrofit.Builder()
+    .baseUrl("<YOUR_URL>")
+    .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
+    .client(okHttpClient)
+    .build()
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+new Retrofit.Builder()
+    .baseUrl("<YOUR_URL>")
+    .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
+    .client(okHttpClient)
+    .build();
+ ```
+{{% /tab %}}
+{{< /tabs >}}
+
+* Open a scope around your Rx stream as follows:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+var spanScope: Scope? = null
+remoteDataSource.getData(query)
+    .subscribeOn(Schedulers.io())
+    .map {
+        // ...
+    }
+    .doOnSuccess {
+        localDataSource.persistData(it)
+    }
+    .doOnSubscribe {
+        val span = GlobalOpenTelemetry.get().getTracer("...")
+          .spanBuilder("<YOUR_OP_NAME>")
+          .startSpan()
+        spanScope = span.makeCurrent()
+    }
+    .doFinally {
+        Span.current()?.end()
+        spanScope?.close()
+    }
+```
+{{% /tab %}}
+{{% tab "Java" %}}
+```java
+ThreadLocal<Scope> scopeStorage = new ThreadLocal<>();
+// ...
+remoteDataSource.getData(query)
+    .subscribeOn(Schedulers.io())
+    .map(data -> {
+        // ...
+    })
+    .doOnSuccess(data -> {
+        localDataSource.persistData(data);
+    })
+    .doOnSubscribe(disposable -> {
+         final Span span = GlobalOpenTelemetry.get().getTracer("...")
+           .spanBuilder("<YOUR_OP_NAME>")
+           .startSpan();
+         Scope spanScope = span.makeCurrent();
+         scopeStorage.set(spanScope);
+    })
+    .doFinally(() -> {
+        final Span activeSpan = Span.current();
+        if (activeSpan != null) {
+            activeSpan.end();
+        }
+        Scope spanScope = scopeStorage.get();
+        if (spanScope != null) {
+            spanScope.close();
+            scopeStorage.remove();
+        }
+    });
+ ```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -525,8 +723,8 @@ final Request:request = new Request.Builder()
 [3]: https://app.datadoghq.com/rum/application/create
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /account_management/api-app-keys/#api-keys
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/application_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [8]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#attributes
 [10]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
@@ -535,6 +733,8 @@ final Request:request = new Request.Builder()
 [13]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
 [14]: /account_management/api-app-keys/#client-tokens
 [15]: /account_management/api-app-keys/#api-keys
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
-[17]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
+[16]: /real_user_monitoring/application_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[17]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [18]: https://opentelemetry.io/docs/concepts/signals/traces/
+[19]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/rxjava
+[20]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3

@@ -70,7 +70,7 @@ DatadogLogs.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code. 
+2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code.
 
 For more information about setting up a client token, see the [client token documentation][2].
 
@@ -87,7 +87,7 @@ Datadog.initialize(
 		clientToken: "<client token>",
 		env: "<environment>",
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -102,7 +102,8 @@ configuration.service = @"<service name>";
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -122,7 +123,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .eu1,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -138,7 +139,8 @@ configuration.site = [DDSite eu1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -158,7 +160,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .us3,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -167,7 +169,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -176,7 +178,8 @@ configuration.site = [DDSite us3];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -196,7 +199,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .us5,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -205,7 +208,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -214,7 +217,8 @@ configuration.site = [DDSite us5];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -234,7 +238,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .us1_fed,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -243,7 +247,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -252,7 +256,8 @@ configuration.site = [DDSite us1_fed];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -272,7 +277,7 @@ Datadog.initialize(
 		env: "<environment>",
 		site: .ap1,
 		service: "<service name>"
-	), 
+	),
 	trackingConsent: trackingConsent
 )
 
@@ -281,7 +286,7 @@ Logs.enable()
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
-@import DatadogObjc;
+@import DatadogLogs;
 
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
@@ -290,7 +295,47 @@ configuration.site = [DDSite ap1];
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];
 
-[DDLogs enable];
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
+{{< site-region region="ap2" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+import DatadogLogs
+
+Datadog.initialize(
+	with: Datadog.Configuration(
+		clientToken: "<client token>",
+		env: "<environment>",
+		site: .ap2,
+		service: "<service name>"
+	),
+	trackingConsent: trackingConsent
+)
+
+Logs.enable()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogLogs;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -312,7 +357,7 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
 
-When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level. 
+When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -475,13 +520,29 @@ Use the `addAttribute(forKey:value:)` method to add a custom attribute to all lo
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// This adds an attribute "device-model" with a string value
+// This adds an attribute "device-model" with a string value for this logger instance.
 logger.addAttribute(forKey: "device-model", value: UIDevice.current.model)
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 [logger addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+Attributes can be added globally across all Logs instances (for example: service name, environment) using:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This adds an attribute "device-model" with a string value in all Logs instances.
+Logs.addAttribute(forKey: "device-model", value: UIDevice.current.model)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs addAttributeForKey:@"device-model" value:UIDevice.currentDevice.model];
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -495,13 +556,29 @@ Use the `removeAttribute(forKey:)` method to remove a custom attribute from all 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-// This removes the attribute "device-model" from all further log send.
+// This removes the attribute "device-model" from all further logs sent from this logger instance.
 logger.removeAttribute(forKey: "device-model")
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
 [logger removeAttributeForKey:@"device-model"];
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+To remove a global attribute from all Logs instances:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+// This removes the attribute "device-model" from all further logs sent from all logger instances.
+Logs.removeAttribute(forKey: "device-model")
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[Logs removeAttributeForKey:@"device-model"];
 ```
 {{% /tab %}}
 {{< /tabs >}}

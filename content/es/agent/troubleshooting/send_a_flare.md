@@ -14,10 +14,6 @@ further_reading:
 title: Flare del Agent
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">El envío de un flare del Agent no es compatible con este sitio.</div>
-{{< /site-region >}}
-
 Un flare permite enviar la información necesaria para que el equipo de asistencia de Datadog pueda solucionar tu problema.
 
 Esta página cubre:
@@ -25,9 +21,23 @@ Esta página cubre:
 - [Envío de un flare desde el sitio de Datadog](#send-a-flare-from-the-Datadog-site), utilizando la configuración remota.
 - [Envío manual](#manual-submission).
 
-Un flare recopila todos los archivos de configuración y logs del Agent en un archivo de almacenamiento. También elimina la información confidencial, incluidas las contraseñas, las claves de API, las credenciales de proxy y las cadenas de la comunidad SNMP.
+Un flare reúne todos los archivos de configuración y registros del Agent en un archivo de almacenamiento. Elimina información confidencial, incluyendo contraseñas, claves de API, credenciales proxy y cadenas de comunidad SNMP. Si APM está habilitado, el flare incluye [logs de depuración del rastreador][4] cuando están disponibles.
 
 El Datadog Agent funciona en su totalidad con código abierto, lo que permite [comprobar el comportamiento del código][1]. Si es necesario, puedes revisar el flare antes de enviarlo, ya que este solicita una confirmación antes de subirlo.
+
+Cuando te pongas en contacto con el servicio de asistencia de Datadog con la configuración remota activada para el Agent, el equipo podrá iniciar un flare desde tu entorno para poder ayudarte mejor y de forma más rápida. Los flares proporcionan información de solución de problemas al servicio de asistencia de Datadog para ayudarte a resolver tu problema. 
+
+## Enviar un flare desde el sitio de Datadog 
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">El envío de un Flare del Agent desde Fleet Automation no es compatible con este sitio.</div>
+{{< /site-region >}}
+
+Para enviar un flare desde el sitio de Datadog, asegúrate de haber habilitado la [automatización de flotas][2] y la [configuración remota][3] en el Agent.
+
+{{% remote-flare %}}
+
+{{< img src="agent/fleet_automation/fleet_automation_remote_flare.png" alt="El botón Enviar tique lanza un formulario para eviar un flare para un tique de asistencia nuevo o existente" style="width:70%;" >}}
 
 ## Envía un flare utilizando el comando `flare` 
 
@@ -38,7 +48,7 @@ Si no tienes un ID de caso, introduce la dirección de correo electrónico que u
 **Confirma la carga del archivo para enviarlo inmediatamente al servicio de asistencia de Datadog**.
 
 {{< tabs >}}
-{{% tab "Agent v6 y v7" %}}
+{{% tab "Agent" %}}
 
 | Plataforma   | Comando                                                 |
 |------------|---------------------------------------------------------|
@@ -51,8 +61,8 @@ Si no tienes un ID de caso, introduce la dirección de correo electrónico que u
 | Fedora     | `sudo datadog-agent flare <CASE_ID>`                    |
 | RedHat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
-| Origen     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Windows    | Consulta la [documentación de Windows][2] específica.        |
+| Fuente     | `sudo datadog-agent flare <CASE_ID>`                    |
+| Windows    | `& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" flare <CASE_ID>`       |
 | Heroku     | Consulta la [documentación de Heroku][3] específica.         |
 | PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
@@ -119,26 +129,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 [4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/CHANGELOG.md
 [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 {{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Plataforma   | Comando                                                                 |
-|------------|-------------------------------------------------------------------------|
-| Docker     | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    |
-| macOS      | `datadog-agent flare <CASE_ID>`                                         |
-| CentOS     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Debian     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Kubernetes | `kubectl exec <POD_NAME> -it /etc/init.d/datadog-agent flare <CASE_ID>` |
-| Fedora     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| RedHat     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| SUSE       | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Origen     | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
-| Windows    | Consulta la [documentación de Windows][1] específica.                        |
-
-**Nota**: Si utilizas un sistema basado en Linux y el comando contenedor `service` no está disponible, [consulta la lista de alternativas][2].
-
-[1]: /es/agent/basic_agent_usage/windows/#agent-v5
-[2]: /es/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
-{{% /tab %}}
 
 {{% tab "Cluster Agent" %}}
 
@@ -149,14 +139,6 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Enviar un flare desde el sitio de Datadog 
-
-Para enviar un flare desde el sitio de Datadog, asegúrate de haber habilitado la [automatización de flotas][2] y la [configuración remota][3] en el Agent.
-
-{{% remote-flare %}}
-
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="El botón Send Ticket (Enviar ticket) genera un formulario para enviar un flare sobre un nuevo ticket de asistencia o sobre uno ya existente" style="width:100%;" >}}
 
 ## Envío manual
 
@@ -169,10 +151,11 @@ Para obtener el archivo de almacenamiento en Kubernetes, utiliza el comando kube
 kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
 [2]: /es/agent/fleet_automation/
-[3]: /es/agent/remote_config#enabling-remote-configuration
+[3]: /es/agent/guide/setup_remote_config
+[4]: /es/tracing/troubleshooting/tracer_debug_logs/?code-lang=dotnet#data-collected

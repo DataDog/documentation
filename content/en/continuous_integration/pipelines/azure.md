@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on an Azure Pipeline
+title: Azure Pipelines Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/azure
 further_reading:
@@ -14,30 +14,62 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Azure DevOps Server is not officially supported.
 </div>
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
 
 ## Overview
 
 [Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud.
 
-Set up tracing on Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
+Set up CI Visibility for Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
 
 ### Compatibility
 
-| Pipeline Visibility | Platform | Definition |
-|---|---|---|
-| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
-| [Custom spans][15] | Custom spans | Configure custom spans for your pipelines. |
-| [Filter CI Jobs on the critical path][19] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
-| [Execution time][20] | Execution time  | View the amount of time pipelines have been running jobs. |
+| Pipeline Visibility                             | Platform                            | Definition                                                |
+|-------------------------------------------------|-------------------------------------|-----------------------------------------------------------|
+| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime.       |
+| [Custom spans][15]                              | Custom spans                        | Configure custom spans for your pipelines.                |
+| [Filter CI Jobs on the critical path][19]       | Filter CI Jobs on the critical path | Filter by jobs on the critical path.                      |
+| [Execution time][20]                            | Execution time                      | View the amount of time pipelines have been running jobs. |
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Azure Pipelines:
+
+| Datadog                    | Azure Pipelines |
+|----------------------------|-----------------|
+| Pipeline                   | Pipeline        |
+| Stage                      | Stage           |
+| Job                        | Job             |
+| _Not available in Datadog_ | Step            |
 
 ## Configure the Datadog integration
+{{< tabs >}} {{% tab "Datadog Integration (recommended)" %}}
+
+### Enable CI Visibility in Datadog
+
+After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor. 
+
+1. Verify that your Azure DevOps organization is linked to a **Microsoft Entra tenant**. See the [Azure source code setup instructions][1] for guidance on connecting Azure DevOps projects to Datadog.
+
+2. In Datadog, navigate to [**Software Delivery → CI Visibility → Add a Pipeline Provider → Azure Pipelines**][2].
+
+3. Click **Configure** next to the Azure DevOps organization you want to enable.
+
+4. To enable CI Visibility for the entire organization, toggle **Enable CI Visibility**. Future projects detected by the Azure app will automatically be enabled.
+
+5. To enable CI Visibility for individual projects:
+   - Scroll through the projects list.
+   - Toggle **Enable CI Visibility** for each project you want to monitor.
+
+Pipelines appear in Datadog immediately after CI Visibility is enabled for an organization or project.
+
+[1]: /integrations/azure-devops-source-code/#setup
+[2]: https://app.datadoghq.com/ci/setup/pipeline?provider=azurepipelines
+
+{{% /tab %}}
+{{% tab "Service Hook Subscriptions" %}}
 
 The Datadog integration for [Azure Pipelines][16] works by using [service hooks][2] to send data to Datadog.
 
@@ -60,8 +92,6 @@ The Datadog integration for [Azure Pipelines][16] works by using [service hooks]
     - **Datadog API Key**: Your [Datadog API key][3].
 
 5. Click **Finish**.
-
-## Advanced configuration
 
 ### Configuring multiple projects in bulk
 
@@ -107,7 +137,18 @@ Example for enabling the hooks in specified projects:
     --az-org datadoghq \
     projectName1 projectName2
 ```
+[2]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
+[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
+[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
+[16]: /integrations/azure_devops/
 
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Advanced configuration
 
 ### Set custom tags
 
@@ -123,14 +164,21 @@ To enable job log collection:
 
 1. Install a Datadog app registration on your Azure console. Follow the steps in the [Azure integration tile][14].
 
-2. Add the Datadog app registration to your Azure DevOps organization:  
-  a. Navigate to **Organization settings** in your DevOps console.  
-  b. Click **Users** from the left side panel, then click on **Add Users**.  
-  **Note**: If you don't see the **Add Users** button, you may not have the necessary permissions.
+2. Add the Datadog app registration to your Azure DevOps organization:
+  <br>a. Navigate to **Organization settings** in your DevOps console.
+  <br>b. Click **Users** from the left side panel, then click **Add Users**.<br>**Note**: If you don't see the **Add Users** button, you may not have the necessary permissions.
 
 To enable log collection, add your app registration as a user with Basic Access Level to each project. Alternatively, you can click  **Add to all projects** to configure all projects in bulk.
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for Azure jobs can be identified by the `datadog.product:cipipeline` and `source:azurepipelines` tags.
+
+### CI jobs failure analysis
+
+If job logs collection is enabled, CI Visibility uses LLM models to compute the analysis for failed CI jobs based on relevant logs coming from Azure Pipelines.
+
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][22].
+
+For a full explanation, see the guide on [using CI jobs failure analysis][21].
 
 ## Visualize pipeline data in Datadog
 
@@ -143,21 +191,17 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://azure.microsoft.com/en-us/products/devops/pipelines
-[2]: https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks?view=azure-devops
-[3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
 [10]: /glossary/#custom-tag
 [11]: /glossary/#custom-measure
-[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
-[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
 [14]: https://app.datadoghq.com/integrations/azure
 [15]: /glossary/#custom-span
-[16]: /integrations/azure_devops/
 [17]: /continuous_integration/search/#search-for-pipelines
 [18]: /logs/guide/best-practices-for-log-management/
 [19]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [20]: /glossary/#pipeline-execution-time
+[21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments

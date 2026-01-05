@@ -1,5 +1,6 @@
 ---
 title: Table Widget
+description: Display tabular data with columns, rows, and sorting capabilities for detailed metric and event analysis.
 widget_type: "query_table"
 aliases:
 - /graphing/widgets/table/
@@ -34,17 +35,18 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 * Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
 
 #### Column formatting
+
 Customize the visualization of cell values for each column with Column Formatting Rules. Create color codes for your data to visualize trends and changes.
 * Threshold formatting: highlight cells with colors when specific value ranges are met.
 * Range formatting: color code cells with a range of values.
 * Text formatting: replace cells with alias text values to improve readability.
+* Trending information: visualize metrics and events queries.
 
-{{< img src="/dashboards/widgets/table/range_conditional_formatting.png" alt="Widget configuration showing the column formatting options" style="width:90%;" >}}
+{{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Table widget showing conditional formatting with trend indicators" style="width:100%;" >}}
 
 #### Context links
 
 [Context links][10] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
-
 
 ## N/A values
 

@@ -1,484 +1,1322 @@
 ---
 title: Mobile Session Replay Setup and Configuration
 description: Setting up and configuring Mobile Session Replay.
-aliases:
 further_reading:
-    - link: '/real_user_monitoring/session_replay/mobile'
-      tag: Documentation
-      text: Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/app_performance'
-      tag: Documentation
-      text: How Mobile Session Replay Impacts App Performance
-    - link: '/real_user_monitoring/session_replay/mobile/privacy_options'
-      tag: Documentation
-      text: Mobile Session Replay Privacy Options
-    - link: '/real_user_monitoring/session_replay/mobile/troubleshooting'
-      tag: Documentation
-      text: Troubleshoot Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay'
-      tag: Documentation
-      text: Session Replay
-    - link: '/real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking'
-      tag: Documentation
-      text: Web View Tracking
+  - link: /real_user_monitoring/session_replay/mobile
+    tag: Documentation
+    text: Mobile Session Replay
+  - link: /real_user_monitoring/session_replay/mobile/app_performance
+    tag: Documentation
+    text: How Mobile Session Replay Impacts App Performance
+  - link: /real_user_monitoring/session_replay/mobile/privacy_options
+    tag: Documentation
+    text: Mobile Session Replay Privacy Options
+  - link: /real_user_monitoring/session_replay/mobile/troubleshooting
+    tag: Documentation
+    text: Troubleshoot Mobile Session Replay
+  - link: /real_user_monitoring/session_replay
+    tag: Documentation
+    text: Session Replay
+  - link: /real_user_monitoring/application_monitoring/android/web_view_tracking
+    tag: Documentation
+    text: Web View Tracking
 ---
-
-## Setup
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-All Session Replay SDK versions can be found in the [Maven Central Repository][1].
-
-To set up Mobile Session Replay for Android:
-
-1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2] with views instrumentation enabled.
-
-2. Declare the Datadog Session Replay as a dependency:
-  {{< code-block lang="kotlin" filename="build.gradle.kts" disable_copy="false" collapsible="true" >}}
-    implementation("com.datadoghq:dd-sdk-android-rum:[datadog_version]")
-    implementation("com.datadoghq:dd-sdk-android-session-replay:[datadog_version]")
-    // in case you need Material support
-    implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
-    // in case you need Jetpack Compose support
-    implementation("com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]")
-   {{< /code-block >}}
-
-3. Enable Session Replay in your app:
-
-   {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-    // in case you need Material extension support
-    .addExtensionSupport(MaterialExtensionSupport())
-    // in case you need Jetpack Compose support
-    .addExtensionSupport(ComposeExtensionSupport())
-    .build()
-   SessionReplay.enable(sessionReplayConfig)
-   {{< /code-block >}}
-
-[1]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-android-session-replay/versions
-[2]: /real_user_monitoring/android/?tab=kotlin
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-To set up Mobile Session Replay for iOS:
-
-1. Make sure you've [set up and initialized the Datadog iOS RUM SDK][1] with views instrumentation enabled.
-
-2. Link the Datadog Session Replay library to your project based on your package manager:
-
-   | Package manager            | Installation step                                                                           |
-   |----------------------------|---------------------------------------------------------------------------------------------|
-   | [CocoaPods][2]             | Add `pod 'DatadogSessionReplay'` to your `Podfile`.                                         |
-   | [Swift Package Manager][3] | Add `DatadogSessionReplay` library as a dependency to your app target.                      |
-   | [Carthage][4]              | Add `DatadogSessionReplay.xcframework` as a dependency to your app target.                  |
-
-3. Enable Session Replay in your app:
-
-   {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-   import DatadogSessionReplay
-
-   SessionReplay.enable(
-       with: SessionReplay.Configuration(
-           replaySampleRate: sampleRate,
-           // Enable the experimental SwiftUI recording
-           featureFlags: [.swiftui: true]
-       )
-   )
-   {{< /code-block >}}
-
-[1]: /real_user_monitoring/ios/?tab=swift
-[2]: https://cocoapods.org/
-[3]: https://www.swift.org/package-manager/
-[4]: https://github.com/Carthage/Carthage
-
-{{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
-
-All Session Replay SDK versions can be found in the [Maven Central Repository][1].
-
-To set up Mobile Session Replay for Kotlin Multiplatform:
-
-1. Make sure you've [setup and initialized the Datadog Kotlin Multiplatform RUM SDK][2] with views instrumentation enabled.
-
-2. Add the `DatadogSessionReplay` iOS library as a link-only dependency. For instructions, see the [guide][3].
-
-3. Declare Datadog Session Replay as a dependency:
-  {{< code-block lang="kotlin" filename="build.gradle.kts" disable_copy="false" collapsible="true" >}}
-    kotlin {
-      sourceSets {
-        commonMain.dependencies {
-          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-rum:[datadog_version]")
-          implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-session-replay:[datadog_version]")
-        }
-
-        // in case you need Material support on Android
-        androidMain.dependencies {
-          implementation("com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]")
-        }
-      }
-    }
-   {{< /code-block >}}
-
-4. Enable Session Replay in your app:
-
-   {{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-   // in common source set
-   val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-    .build()
-   SessionReplay.enable(sessionReplayConfig)
-   {{< /code-block >}}
-
-5. In case you need Material support on Android, call the `SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())` method, available in the Android source set.
-
-[1]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
-[2]: /real_user_monitoring/kotlin_multiplatform/
-[3]: /real_user_monitoring/kotlin_multiplatform/#add-native-dependencies-for-ios
-
-{{% /tab %}}
-
-{{% tab "React Native" %}}
-
-<div class="alert alert-warning">To enable Session Replay, you must use at least version <code>2.0.4</code> of the Datadog <a href="https://github.com/DataDog/dd-sdk-reactnative">React Native SDK</a>, and ensure that the Session Replay SDK version matches the React Native SDK version you are using.</div>
-
-All Session Replay SDK versions can be found in the [npmjs repository][1].
-
-To set up Mobile Session Replay for React Native:
-
-1. Make sure you've [setup and initialized the Datadog React Native SDK][2] with views instrumentation enabled.
-
-2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [yarn][3] or [npm][4].
-
-   ```shell
-   yarn add @datadog/mobile-react-native-session-replay
-   ```
-
-   ```shell
-   npm install @datadog/mobile-react-native-session-replay
-   ```
-
-3. After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
-
-   - If you use the `DatadogProvider` component:
-
-     {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-
-     import { DatadogProvider, DatadogProviderConfiguration } from "@datadog/mobile-react-native";
-    import {
-      ImagePrivacyLevel,
-      SessionReplay,
-      TextAndInputPrivacyLevel,
-      TouchPrivacyLevel,
-    } from "@datadog/mobile-react-native-session-replay";
-
-     const configuration = new DatadogProviderConfiguration(/* ... */)
-
-     // Add this function as onInitialization prop to DatadogProvider
-     const onSDKInitialized = async () => {
-         await SessionReplay.enable({
-            replaySampleRate: 100,
-            textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS, 
-            imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE, 
-            touchPrivacyLevel: TouchPrivacyLevel.SHOW, 
-         });
-     };
-
-     const App = () => {
-       const navigationRef = React.useRef(null);
-       return (
-         <DatadogProvider configuration={configuration} onInitialization={onSDKInitialized}>
-           {/* App */}
-         </DatadogProvider>
-       );
-     };
-
-     export default App;
-    {{< /code-block >}}
-
-   - If you use the `DdSdkReactNative.initialize` method:
-
-     {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-
-     import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
-     import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
-
-     const configuration = new DdSdkReactNativeConfiguration(/* ... */)
-
-     DdSdkReactNative.initialize(configuration)
-       .then(() => SessionReplay.enable())
-       .catch((error) => { /* handle error */ });
-     
-    {{< /code-block >}}
-
-4. Enable Session Replay in your app, after initializing the Datadog SDK:
-   {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-
-   import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
-
-   SessionReplay.enable();
-
-   {{< /code-block >}}
-
-5. Define the configuration for Session Replay:
-
-   {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-
-      SessionReplay.enable({
-        replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
-      });
-
-   {{< /code-block >}}
-
-   During this step, you can also configure multiple [privacy levels][5] that apply to Session Replays.
-
-6. (iOS only) Update your iOS pods.
-   ```shell
-      cd ios && pod install
-   ```
-7. Rebuild your iOS and Android apps.
-
-[1]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions\
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
-[3]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
-[4]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[5]: /real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative
-
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## Web view instrumentation
-
-You can record the entire user journey across both [web and native views][1] on iOS or Android and watch it in a single Session Replay.
-
-The Session Replay is recorded through the Browser SDK, then the Mobile SDK handles the batching and uploading of the webview recording.
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-To instrument your consolidated web and native Session Replay views for Android:
-
-1. Ensure you are using version [`2.8.0`][2] or higher of the Android SDK.
-2. Enable [webview tracking][3] for your mobile application.
-3. Enable [Session Replay][4] for your web application.
-4. Enable Session Replay for your mobile application (see setup instructions above).
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/
-[2]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
-[4]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-To instrument your consolidated web and native Session Replay views for iOS:
-
-1. Ensure you are using version [`2.13.0`][1] or higher of the iOS SDK.
-2. Enable [webview tracking][2] for your mobile application.
-3. Enable [Session Replay][3] for your web application.
-4. Enable Session Replay for your mobile application (see setup instructions above).
-
-[1]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
-[3]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
-
-To instrument your consolidated web and native Session Replay views for Kotlin Multiplatform:
-
-1. Enable [webview tracking][1] for your mobile application.
-2. Enable [Session Replay][2] for your web application.
-3. Enable Session Replay for your mobile application (see setup instructions above).
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
-[2]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-To instrument your consolidated web and native Session Replay views for React Native:
-
-1. Enable [webview tracking][1] for your React Native application.
-2. Enable [Session Replay][2] for your web application.
-3. Enable Session Replay for your mobile application (see setup instructions above).
-
-**Note**: This feature is not compatible with React Native's [New Architecture][3] for Android.
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
-[2]: /real_user_monitoring/session_replay/browser/#setup
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Additional configuration
-### Set the sample rate for recorded sessions to appear
-
-The sample rate is an optional parameter in the Session Replay configuration. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all RUM sessions include a replay. If the sample rate is not specified in the configuration, the default value of 100 is applied.
-
-This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-  ...
-  .build()
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-var sessionReplayConfig = SessionReplay.Configuration(
-    replaySampleRate: sampleRate
-)
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-  ...
-  .build()
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
-
-SessionReplay.enable({
-  replaySampleRate: [sampleRate]
-});
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
-
-### Start or stop the recording manually
-
-By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-        .startRecordingImmediately(false)
-        .build()
-    // Do something
-    SessionReplay.startRecording()
-    SessionReplay.stopRecording()
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-    let sessionReplayConfig = SessionReplay.Configuration(
-        replaySampleRate: sampleRate,
-        startRecordingImmediately: false
-    )
-    // Do something
-    SessionReplay.startRecording()
-    SessionReplay.stopRecording()
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "Kotlin Multiplatform" %}}
-
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
-        .startRecordingImmediately(false)
-        .build()
-    // Do something
-    SessionReplay.startRecording()
-    SessionReplay.stopRecording()
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "React Native" %}}
-{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
-
-SessionReplay.enable({
-  replaySampleRate: sampleRate,
-  startRecordingImmediately: false
-});
-// Do something
-SessionReplay.startRecording();
-SessionReplay.stopRecording();
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
-
-### Validate whether Session Replay data is being sent
-
-To validate whether Session Replay data is being sent from the app, you can enable debug option in Datadog SDK:
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-Datadog.setVerbosity(Log.DEBUG)
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-{{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-Datadog.verbosityLevel = .debug
-{{< /code-block >}}
-
-If everything is fine, following logs should appear in the Xcode debug console in about 30 seconds after launching the app:
-
-{{< code-block lang="bash" filename="Xcode console" disable_copy="true" >}}
-
-[DATADOG SDK] 🐶 → 10:21:29.812 ⏳ (session-replay) Uploading batch...
-[DATADOG SDK] 🐶 → 10:21:30.442    → (session-replay) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: BD445EA-...-8AFCD3F3D16]
-
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Kotlin Multiplatform" %}}
-
-{{< code-block lang="kotlin" filename="Application.kt" disable_copy="false" collapsible="true" >}}
-Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-Set the verbosity to `DEBUG` when you initialize the SDK:
-
-{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
-
-import { SdkVerbosity } from "@datadog/mobile-react-native";
-
-...
-
-config.verbosity = SdkVerbosity.DEBUG;
-
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Privacy options
-
-See [Privacy Options][2].
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking
-[2]: /real_user_monitoring/session_replay/mobile/privacy_options
-[3]: https://reactnative.dev/architecture/landing-page
+<div id="cdoc-selector"><div id="cdoc-filters-menu"><div class="filter-selector-menu" id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
+    id="cdoc-platform-pills-label" 
+    class="cdoc-filter-label"
+  >SDK</p><button
+      class="cdoc-filter__option cdoc-pill selected" 
+      data-filter-id="platform" 
+      data-option-id="android"
+      aria-selected="true"
+      tabIndex="0"
+    >Android</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="platform" 
+      data-option-id="ios"
+      aria-selected="false"
+      tabIndex="0"
+    >iOS</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="platform" 
+      data-option-id="kotlin_multiplatform"
+      aria-selected="false"
+      tabIndex="0"
+    >Kotlin Multiplatform</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="platform" 
+      data-option-id="react_native"
+      aria-selected="false"
+      tabIndex="0"
+    >React Native</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="platform" 
+      data-option-id="flutter"
+      aria-selected="false"
+      tabIndex="0"
+    >Flutter</button></div></div><div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu"><div class="cdoc-dropdown-container"><p 
+    id="cdoc-platform-dropdown-label" 
+    class="cdoc-filter-label"
+  >SDK</p><div 
+    id="cdoc-dropdown-platform" 
+    class="cdoc-dropdown">
+    <button
+      class="cdoc-dropdown-btn" 
+      type="button"
+      tabIndex="0"
+      aria-haspopup="listbox"
+      aria-expanded="false" 
+      aria-labelledby="cdoc-platform-dropdown-label">
+      <span 
+        id="cdoc-dropdown-platform-label" 
+        class="cdoc-btn-label"
+      >Android</span>
+      <div class="cdoc-chevron"></div>
+    </button><div 
+    class="cdoc-dropdown-options-list" 
+    role="listbox" 
+    aria-labelledby="cdoc-platform-dropdown-label"><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option selected" 
+      data-filter-id="platform" 
+      data-option-id="android"
+      role="option" 
+      aria-selected="true"
+      tabIndex="0"
+    >Android</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="platform" 
+      data-option-id="ios"
+      role="option" 
+      aria-selected="false"
+      tabIndex="0"
+    >iOS</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="platform" 
+      data-option-id="kotlin_multiplatform"
+      role="option" 
+      aria-selected="false"
+      tabIndex="0"
+    >Kotlin Multiplatform</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="platform" 
+      data-option-id="react_native"
+      role="option" 
+      aria-selected="false"
+      tabIndex="0"
+    >React Native</a><a 
+      class="cdoc-dropdown-option 
+      cdoc-filter__option " 
+      data-filter-id="platform" 
+      data-option-id="flutter"
+      role="option" 
+      aria-selected="false"
+      tabIndex="0"
+    >Flutter</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
+  <h2 id="setup">Setup</h2>
+  <div class="cdoc__toggleable" data-description="SDK is Android" data-if="199">
+    <p>
+      All Session Replay SDK versions can be found in the
+      <a
+        href="https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions"
+        >Maven Central Repository</a
+      >.
+    </p>
+    <p>To set up Mobile Session Replay for Android:</p>
+    <h3 id="step-1--set-up-the-android-rum-sdk">
+      Step 1 - Set up the Android RUM SDK
+    </h3>
+    <p>
+      Make sure you've
+      <a href="/real_user_monitoring/android/?tab=kotlin"
+        >set up and initialized the Datadog Android RUM SDK</a
+      >
+      with views instrumentation enabled.
+    </p>
+    <h3 id="step-2--declare-the-datadog-session-replay-as-a-dependency">
+      Step 2 - Declare the Datadog Session Replay as a dependency
+    </h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">build.gradle.kts</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;com.datadoghq:dd-sdk-android-rum:[datadog_version]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;com.datadoghq:dd-sdk-android-session-replay:[datadog_version]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// in case you need Material support
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// in case you need Jetpack Compose support
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;com.datadoghq:dd-sdk-android-session-replay-compose:[datadog_version]&#34;</span><span class="p">)</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <h3 id="enable-android">Step 3 - Enable Session Replay</h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">val</span> <span class="py">sessionReplayConfig</span> <span class="p">=</span> <span class="nc">SessionReplayConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">([</span><span class="n">sampleRate</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// in case you need Material extension support
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">.</span><span class="n">addExtensionSupport</span><span class="p">(</span><span class="n">MaterialExtensionSupport</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// in case you need Jetpack Compose support
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">.</span><span class="n">addExtensionSupport</span><span class="p">(</span><span class="n">ComposeExtensionSupport</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nc">SessionReplay</span><span class="p">.</span><span class="n">enable</span><span class="p">(</span><span class="n">sessionReplayConfig</span><span class="p">)</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is iOS"
+    data-if="200"
+  >
+    <p>To set up Mobile Session Replay for iOS:</p>
+    <h3 id="step-1--set-up-the-ios-rum-sdk">Step 1 - Set up the iOS RUM SDK</h3>
+    <p>
+      Make sure you've
+      <a href="/real_user_monitoring/ios/?tab=swift"
+        >set up and initialized the Datadog iOS RUM SDK</a
+      >
+      with views instrumentation enabled.
+    </p>
+    <h3 id="step-2--declare-the-datadog-session-replay-as-a-dependency">
+      Step 2 - Declare the Datadog Session Replay as a dependency
+    </h3>
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="swift-package-manager"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Swift Package Manager"
+        >
+          <p>
+            Add <code>DatadogSessionReplay</code> library as a dependency to
+            your app target.
+          </p>
+        </div>
+        <div
+          data-lang="cocoapods"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="CocoaPods"
+        >
+          <p>
+            Add <code>pod 'DatadogSessionReplay</code> to your
+            <code>Podfile</code>.
+          </p>
+        </div>
+        <div
+          data-lang="carthage"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Carthage"
+        >
+          <p>
+            Add <code>DatadogSessionReplay.xcframework</code> as a dependency to
+            your app target.
+          </p>
+        </div>
+      </div>
+    </div>
+    <h3 id="enable-ios">Step 3 - Enable Session Replay</h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">AppDelegate.swift</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-swift">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogSessionReplay</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">SessionReplay</span><span class="p">.</span><span class="n">enable</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">with</span><span class="p">:</span> <span class="n">SessionReplay</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">replaySampleRate</span><span class="p">:</span> <span class="n">sampleRate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Enable the experimental SwiftUI recording</span>
+</span></span><span class="line"><span class="cl">    <span class="n">featureFlags</span><span class="p">:</span> <span class="p">[.</span><span class="n">swiftui</span><span class="p">:</span> <span class="kc">true</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Kotlin Multiplatform"
+    data-if="201"
+  >
+    <p>
+      All Session Replay SDK versions can be found in the
+      <a
+        href="https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-android-session-replay/versions"
+        >Maven Central Repository</a
+      >.
+    </p>
+    <p>To set up Mobile Session Replay for Kotlin Multiplatform:</p>
+    <h3 id="step-1--set-up-the-kotlin-multiplatform-rum-sdk">
+      Step 1 - Set up the Kotlin Multiplatform RUM SDK
+    </h3>
+    <p>
+      Make sure you've
+      <a href="/real_user_monitoring/kotlin_multiplatform/"
+        >set up and initialized the Datadog Kotlin Multiplatform RUM SDK</a
+      >
+      with views instrumentation enabled.
+    </p>
+    <h3 id="step-2--add-the-">
+      Step 2 - Add the <code>DatadogSessionReplay</code> iOS library as a
+      link-only dependency
+    </h3>
+    <p>
+      For instructions, see the
+      <a
+        href="/real_user_monitoring/kotlin_multiplatform/#add-native-dependencies-for-ios"
+        >guide</a
+      >.
+    </p>
+    <h3 id="step-3--declare-datadog-session-replay-as-a-dependency">
+      Step 3 - Declare Datadog Session Replay as a dependency
+    </h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">build.gradle.kts</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="n">kotlin</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sourceSets</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">commonMain</span><span class="p">.</span><span class="n">dependencies</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;com.datadoghq:dd-sdk-kotlin-multiplatform-rum:[datadog_version]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;com.datadoghq:dd-sdk-kotlin-multiplatform-session-replay:[datadog_version]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// in case you need Material support on Android
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">androidMain</span><span class="p">.</span><span class="n">dependencies</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">implementation</span><span class="p">(</span><span class="s2">&#34;com.datadoghq:dd-sdk-android-session-replay-material:[datadog_version]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <h3 id="step-4--enable-session-replay">Step 4 - Enable Session Replay</h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// in common source set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">val</span> <span class="py">sessionReplayConfig</span> <span class="p">=</span> <span class="nc">SessionReplayConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">([</span><span class="n">sampleRate</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nc">SessionReplay</span><span class="p">.</span><span class="n">enable</span><span class="p">(</span><span class="n">sessionReplayConfig</span><span class="p">)</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <h3 id="step-5--set-up-material-support-on-android--optional">
+      Step 5 - Set up Material support on Android (Optional)
+    </h3>
+    <p>If your app uses Material on Android, add:</p>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="nc">SessionReplayConfiguration</span><span class="p">.</span><span class="nc">Builder</span><span class="p">.</span><span class="n">addExtensionSupport</span><span class="p">(</span><span class="n">MaterialExtensionSupport</span><span class="p">())</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is React Native"
+    data-if="202"
+  >
+    <div class="alert alert-warning">
+      <p>
+        To enable Session Replay, you must use at least version
+        <code>2.0.4</code> of the Datadog
+        <a href="https://github.com/DataDog/dd-sdk-reactnative"
+          >React Native SDK</a
+        >, and ensure that the Session Replay SDK version matches the React
+        Native SDK version you are using.
+      </p>
+    </div>
+    <p>
+      All Session Replay SDK versions can be found in the
+      <a
+        href="https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions"
+        >npmjs repository</a
+      >.
+    </p>
+    <p>To set up Mobile Session Replay for React Native:</p>
+    <h3 id="step-1--set-up-the-react-native-sdk">
+      Step 1 - Set up the React Native SDK
+    </h3>
+    <p>
+      Make sure you've
+      <a href="/real_user_monitoring/application_monitoring/react_native/setup"
+        >set up and initialized the Datadog React Native SDK</a
+      >
+      with views instrumentation enabled.
+    </p>
+    <h3 id="step-2--declare-the-react-native-session-replay-as-a-dependency">
+      Step 2 - Declare the React Native Session Replay as a dependency
+    </h3>
+    <p>
+      Add the
+      <code>@datadog/mobile-react-native-session-replay</code> dependency, and
+      make sure it matches the
+      <code>@datadog/mobile-react-native</code> version, either through
+      <a
+        href="https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions"
+        >npm</a
+      >
+      or
+      <a
+        href="https://yarnpkg.com/package?q=datadog%20react%20native%20ses&amp;name=%40datadog%2Fmobile-react-native-session-replay"
+        >yarn</a
+      >.
+    </p>
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div data-lang="npm" class="tab-pane fade" role="tabpanel" title="npm">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-shell">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl">npm install @datadog/mobile-react-native-session-replay
+</span></span></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          data-lang="yarn"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="yarn"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-shell">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl">yarn add @datadog/mobile-react-native-session-replay
+</span></span></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 id="enable-react-native">Step 3 - Enable Session Replay</h3>
+    <p>
+      After the Datadog React Native SDK and Session Replay SDK dependencies are
+      imported, you can enable the feature when configuring the SDK.
+    </p>
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="datadogprovider"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="DatadogProvider"
+        >
+          <p>If you use the <code>DatadogProvider</code> component:</p>
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-between">
+              <p class="code-filename my-0">App.tsx</p>
+            </div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-typescript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DatadogProvider</span><span class="p">,</span> <span class="nx">DatadogProviderConfiguration</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@datadog/mobile-react-native&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">ImagePrivacyLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">SessionReplay</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">TextAndInputPrivacyLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">TouchPrivacyLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@datadog/mobile-react-native-session-replay&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DatadogProviderConfiguration</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Add this function as onInitialization prop to DatadogProvider
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">onSDKInitialized</span> <span class="o">=</span> <span class="kr">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">await</span> <span class="nx">SessionReplay</span><span class="p">.</span><span class="nx">enable</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">replaySampleRate</span>: <span class="kt">100</span><span class="p">,</span> <span class="c1">// Session Replay will be available for all sessions already captured by the SDK
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">textAndInputPrivacyLevel</span>: <span class="kt">TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">imagePrivacyLevel</span>: <span class="kt">ImagePrivacyLevel.MASK_NONE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">touchPrivacyLevel</span>: <span class="kt">TouchPrivacyLevel.SHOW</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">navigationRef</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">DatadogProvider</span> <span class="na">configuration</span><span class="o">=</span><span class="p">{</span><span class="nx">configuration</span><span class="p">}</span> <span class="na">onInitialization</span><span class="o">=</span><span class="p">{</span><span class="nx">onSDKInitialized</span><span class="p">}&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="cm">/* App */</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">DatadogProvider</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</span></span></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          data-lang="ddsdkreactnativeinitialize"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="DdSdkReactNative.initialize"
+        >
+          <p>If you use the <code>DdSdkReactNative.initialize</code> method:</p>
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-between">
+              <p class="code-filename my-0">App.tsx</p>
+            </div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-typescript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DdSdkReactNative</span><span class="p">,</span> <span class="nx">DdSdkReactNativeConfiguration</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@datadog/mobile-react-native&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SessionReplay</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@datadog/mobile-react-native-session-replay&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">configuration</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DdSdkReactNativeConfiguration</span><span class="p">(</span><span class="cm">/* ... */</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">DdSdkReactNative</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="nx">configuration</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">SessionReplay</span><span class="p">.</span><span class="nx">enable</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">replaySampleRate</span>: <span class="kt">100</span><span class="p">,</span> <span class="c1">// Session Replay will be available for all sessions already captured by the SDK
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">textAndInputPrivacyLevel</span>: <span class="kt">TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">imagePrivacyLevel</span>: <span class="kt">ImagePrivacyLevel.MASK_NONE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">touchPrivacyLevel</span>: <span class="kt">TouchPrivacyLevel.SHOW</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="k">catch</span><span class="p">((</span><span class="nx">error</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="cm">/* handle error */</span> <span class="p">});</span>
+</span></span></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p>
+      During this step, you can also configure multiple
+      <a
+        href="/real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative"
+        >privacy levels</a
+      >
+      that apply to Session Replays.
+    </p>
+    <h3 id="step-4---ios-only-update-your-ios-pods">
+      Step 4 - (iOS only) Update your iOS pods.
+    </h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-shell">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="nb">cd</span> ios <span class="o">&amp;&amp;</span> pod install
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <h3 id="step-5--rebuild-your-app">Step 5 - Rebuild your app</h3>
+    <p>Rebuild your iOS and Android apps</p>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Flutter"
+    data-if="203"
+  >
+    <div class="alert alert-info">
+      <p>Datadog Session Replay for Flutter is currently in Preview.</p>
+    </div>
+    <p>
+      All Session Replay SDK versions can be found in
+      <a href="https://pub.dev/packages/datadog_session_replay">Pub</a>.
+    </p>
+    <p>To set up Datadog Session Replay for Flutter:</p>
+    <h3 id="step-1--set-up-the-flutter-plugin">
+      Step 1 - Set up the Flutter plugin
+    </h3>
+    <p>
+      Make sure you have
+      <a
+        href="https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup?tab=rum"
+        >set up and initialized the Datadog Flutter Plugin</a
+      >.
+    </p>
+    <h3 id="step-2--add-the-package-to-your-">
+      Step 2 - Add the package to your <code>pubspec.yaml</code>
+    </h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">pubspec.yaml</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-yaml">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="nt">packages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># other packages</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">datadog_session_replay</span><span class="p">:</span><span class="w"> </span><span class="l">^x.x.x</span><span class="w">
+</span></span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <h3 id="step-3--enable-session-replay-in-your-">
+      Step 3 - Enable Session Replay in your <code>DatadogConfiguration</code>
+    </h3>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-dart">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">import</span> <span class="s1">&#39;package:datadog_session_replay/datadog_session_replay.dart&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ....
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">final</span> <span class="n">configuration</span> <span class="o">=</span> <span class="n">DatadogConfiguration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Normal Datadog configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nl">clientToken:</span> <span class="s1">&#39;client-token&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// RUM is required to use Datadog Session Replay
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nl">rumConfiguration:</span> <span class="n">RumConfiguration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">applicationId:</span> <span class="s1">&#39;&lt;application-id&#39;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)..</span><span class="n">enableSessionReplay</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DatadogSessionReplayConfiguration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Setup default text, image, and touch privacy
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nl">textAndInputPrivacyLevel:</span> <span class="n">TextAndInputPrivacyLevel</span><span class="p">.</span><span class="n">maskSensitiveInputs</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nl">touchPrivacyLevel:</span> <span class="n">TouchPrivacyLevel</span><span class="p">.</span><span class="n">show</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Setup session replay sample rate.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nl">replaySampleRate:</span> <span class="m">100.0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <h3 id="step-4--add-a-sessionreplaycapture-to-the-root-of-your-widget-tree">
+      Step 4 - Add a SessionReplayCapture to the root of your Widget tree
+    </h3>
+    <p>
+      Add a SessionReplayCapture widget to the root of your Widget tree, above
+      your MaterialApp or similar application widget.
+    </p>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-dart">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">MyApp</span> <span class="kd">extends</span> <span class="n">StatefulWidget</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">const</span> <span class="n">MyApp</span><span class="p">({</span><span class="k">super</span><span class="p">.</span><span class="n">key</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">State</span><span class="o">&lt;</span><span class="n">MyApp</span><span class="o">&gt;</span> <span class="n">createState</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="n">_MyAppState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">class</span> <span class="nc">_MyAppState</span> <span class="kd">extends</span> <span class="n">State</span><span class="o">&lt;</span><span class="n">MyApp</span><span class="o">&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Note a key is required for SessionReplayCapture
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">final</span> <span class="n">captureKey</span> <span class="o">=</span> <span class="n">GlobalKey</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Other App Configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="err">@</span><span class="n">override</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Widget</span> <span class="n">build</span><span class="p">(</span><span class="n">BuildContext</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">SessionReplayCapture</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">key:</span> <span class="n">captureKey</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">rum:</span> <span class="n">DatadogSdk</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">rum</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">sessionReplay:</span> <span class="n">DatadogSessionReplay</span><span class="p">.</span><span class="n">instance</span><span class="o">!</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nl">child:</span> <span class="n">MaterialApp</span><span class="p">.</span><span class="n">router</span><span class="p">(</span><span class="nl">color:</span> <span class="n">color</span><span class="p">,</span> <span class="nl">routerConfig:</span> <span class="n">router</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 id="web-view-instrumentation">Web view instrumentation</h2>
+  <p>
+    You can record the entire user journey across both
+    <a href="/real_user_monitoring/application_monitoring/ios/web_view_tracking"
+      >web and native views</a
+    >
+    on iOS or Android and watch it in a single Session Replay.
+  </p>
+  <p>
+    The Session Replay is recorded through the Browser SDK, then the Mobile SDK
+    handles the batching and uploading of the webview recording.
+  </p>
+  <div class="cdoc__toggleable" data-description="SDK is Android" data-if="204">
+    <p>
+      To instrument your consolidated web and native Session Replay views for
+      Android:
+    </p>
+    <ol>
+      <li>
+        Ensure you are using version
+        <a href="https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0"
+          ><code>2.8.0</code></a
+        >
+        or higher of the Android SDK.
+      </li>
+      <li>
+        Enable
+        <a
+          href="/real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views"
+          >webview tracking</a
+        >
+        for your mobile application.
+      </li>
+      <li>
+        Enable
+        <a href="/real_user_monitoring/session_replay/browser/#setup"
+          >Session Replay</a
+        >
+        for your web application.
+      </li>
+      <li>
+        Enable Session Replay for your mobile application (see setup
+        instructions above).
+      </li>
+    </ol>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is iOS"
+    data-if="205"
+  >
+    <p>
+      To instrument your consolidated web and native Session Replay views for
+      iOS:
+    </p>
+    <ol>
+      <li>
+        Ensure you are using version
+        <a href="https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0"
+          ><code>2.13.0</code></a
+        >
+        or higher of the iOS SDK.
+      </li>
+      <li>
+        Enable
+        <a
+          href="/real_user_monitoring/application_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views"
+          >webview tracking</a
+        >
+        for your mobile application.
+      </li>
+      <li>
+        Enable
+        <a href="/real_user_monitoring/session_replay/browser/#setup"
+          >Session Replay</a
+        >
+        for your web application.
+      </li>
+      <li>
+        Enable Session Replay for your mobile application (see setup
+        instructions above).
+      </li>
+    </ol>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Kotlin Multiplatform"
+    data-if="206"
+  >
+    <p>
+      To instrument your consolidated web and native Session Replay views for
+      Kotlin Multiplatform:
+    </p>
+    <ol>
+      <li>
+        Enable
+        <a
+          href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views"
+          >webview tracking</a
+        >
+        for your mobile application.
+      </li>
+      <li>
+        Enable
+        <a href="/real_user_monitoring/session_replay/browser/#setup"
+          >Session Replay</a
+        >
+        for your web application.
+      </li>
+      <li>
+        Enable Session Replay for your mobile application (see setup
+        instructions above).
+      </li>
+    </ol>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is React Native"
+    data-if="207"
+  >
+    <p>
+      To instrument your consolidated web and native Session Replay views for
+      React Native:
+    </p>
+    <ol>
+      <li>
+        Enable
+        <a
+          href="/real_user_monitoring/application_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views"
+          >webview tracking</a
+        >
+        for your React Native application.
+      </li>
+      <li>
+        Enable
+        <a href="/real_user_monitoring/session_replay/browser/#setup"
+          >Session Replay</a
+        >
+        for your web application.
+      </li>
+      <li>
+        Enable Session Replay for your mobile application (see setup
+        instructions above).
+      </li>
+    </ol>
+    <p>
+      <strong>Note</strong>: This feature is not compatible with React Native's
+      <a href="https://reactnative.dev/architecture/landing-page"
+        >New Architecture</a
+      >
+      for Android.
+    </p>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Flutter"
+    data-if="208"
+  >
+    <p>
+      Datadog Session Replay for Flutter does not currently support Web view
+      capture.
+    </p>
+  </div>
+  <h2 id="additional-configuration">Additional configuration</h2>
+  <h3 id="set-the-sample-rate-for-recorded-sessions-to-appear">
+    Set the sample rate for recorded sessions to appear
+  </h3>
+  <p>
+    The sample rate is an optional parameter in the Session Replay
+    configuration. It must be a number between 0.0 and 100.0, where 0 indicates
+    that no replays are recorded and 100 means that all sessions include a
+    replay. If the sample rate is not specified in the configuration, the
+    default value of 100 is applied.
+  </p>
+  <p>
+    This sample rate is applied in addition to the RUM sample rate. For example,
+    if RUM uses a sample rate of 80% and Session Replay uses a sample rate of
+    20%, it means that out of all user sessions, 80% are included in RUM, and
+    within those sessions, only 20% have replays.
+  </p>
+  <div class="cdoc__toggleable" data-description="SDK is Android" data-if="209">
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">val</span> <span class="py">sessionReplayConfig</span> <span class="p">=</span> <span class="nc">SessionReplayConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(&lt;</span><span class="n">SAMPLE_RATE</span><span class="p">&gt;)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is iOS"
+    data-if="210"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">AppDelegate.swift</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-swift">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kd">var</span> <span class="nv">sessionReplayConfig</span> <span class="p">=</span> <span class="n">SessionReplay</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">replaySampleRate</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">SAMPLE_RATE</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Kotlin Multiplatform"
+    data-if="211"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">val</span> <span class="py">sessionReplayConfig</span> <span class="p">=</span> <span class="nc">SessionReplayConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(&lt;</span><span class="n">SAMPLE_RATE</span><span class="p">&gt;)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">..</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is React Native"
+    data-if="212"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">App.tsx</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-typescript">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SessionReplay</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@datadog/mobile-react-native-session-replay&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">SessionReplay</span><span class="p">.</span><span class="nx">enable</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">replaySampleRate</span><span class="o">:</span> <span class="p">&lt;</span><span class="nt">SAMPLE_RATE</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cdoc__toggleable" data-description="SDK is Android" data-if="213">
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-dart">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kd">final</span> <span class="n">configuration</span> <span class="o">=</span> <span class="n">DatadogConfiguration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)..</span><span class="n">enableSessionReplay</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">DatadogSessionReplayConfiguration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nl">replaySampleRate:</span> <span class="o">&lt;</span><span class="n">SAMPLE_RATE</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 id="start-or-stop-the-recording-manually">
+    Start or stop the recording manually
+  </h3>
+  <p>
+    By default, Session Replay starts recording automatically. However, if you
+    prefer to manually start recording at a specific point in your application,
+    you can use the optional <code>startRecordingImmediately</code> parameter as
+    shown below, and later call <code>SessionReplay.startRecording()</code>. You
+    can also use <code>SessionReplay.stopRecording()</code> to stop the
+    recording anytime.
+  </p>
+  <div class="cdoc__toggleable" data-description="SDK is Android" data-if="214">
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">val</span> <span class="py">sessionReplayConfig</span> <span class="p">=</span> <span class="nc">SessionReplayConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(&lt;</span><span class="n">SAMPLE_RATE</span><span class="p">&gt;)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">startRecordingImmediately</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nc">SessionReplay</span><span class="p">.</span><span class="n">startRecording</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nc">SessionReplay</span><span class="p">.</span><span class="n">stopRecording</span><span class="p">()</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is iOS"
+    data-if="215"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">AppDelegate.swift</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-swift">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kd">let</span> <span class="nv">sessionReplayConfig</span> <span class="p">=</span> <span class="n">SessionReplay</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">replaySampleRate</span><span class="p">:</span> <span class="p">&lt;</span><span class="n">SAMPLE_RATE</span><span class="p">&gt;,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">startRecordingImmediately</span><span class="p">:</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Do something</span>
+</span></span><span class="line"><span class="cl"><span class="n">SessionReplay</span><span class="p">.</span><span class="n">startRecording</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">SessionReplay</span><span class="p">.</span><span class="n">stopRecording</span><span class="p">()</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Kotlin Multiplatform"
+    data-if="216"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">val</span> <span class="py">sessionReplayConfig</span> <span class="p">=</span> <span class="nc">SessionReplayConfiguration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(&lt;</span><span class="n">SAMPLE_RATE</span><span class="p">&gt;)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">startRecordingImmediately</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nc">SessionReplay</span><span class="p">.</span><span class="n">startRecording</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nc">SessionReplay</span><span class="p">.</span><span class="n">stopRecording</span><span class="p">()</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is React Native"
+    data-if="217"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">App.tsx</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-typescript">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SessionReplay</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@datadog/mobile-react-native-session-replay&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">SessionReplay</span><span class="p">.</span><span class="nx">enable</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">replaySampleRate</span>: <span class="kt">sampleRate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">startRecordingImmediately</span>: <span class="kt">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Do something
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">SessionReplay</span><span class="p">.</span><span class="nx">startRecording</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">SessionReplay</span><span class="p">.</span><span class="nx">stopRecording</span><span class="p">();</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Flutter"
+    data-if="218"
+  >
+    <p>
+      Datadog Session Replay for Flutter does not currently support manual
+      recording.
+    </p>
+  </div>
+  <h3 id="validate-whether-session-replay-data-is-being-sent">
+    Validate whether Session Replay data is being sent
+  </h3>
+  <p>
+    To validate whether Session Replay data is being sent from the app, you can
+    enable debug option in Datadog SDK.
+  </p>
+  <div class="cdoc__toggleable" data-description="SDK is Android" data-if="219">
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="nc">Datadog</span><span class="p">.</span><span class="n">setVerbosity</span><span class="p">(</span><span class="nc">Log</span><span class="p">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is iOS"
+    data-if="220"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">AppDelegate.swift</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-swift">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">verbosityLevel</span> <span class="p">=</span> <span class="p">.</span><span class="n">debug</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <p>
+      If everything is fine, following logs should appear in the Xcode debug
+      console in about 30 seconds after launching the app:
+    </p>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Xcode console</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-bash">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="o">[</span>DATADOG SDK<span class="o">]</span> 🐶 → 10:21:29.812 ⏳ <span class="o">(</span>session-replay<span class="o">)</span> Uploading batch...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>DATADOG SDK<span class="o">]</span> 🐶 → 10:21:30.442    → <span class="o">(</span>session-replay<span class="o">)</span> accepted, won<span class="err">&#39;</span>t be retransmitted: <span class="o">[</span>response code: <span class="m">202</span> <span class="o">(</span>accepted<span class="o">)</span>, request ID: BD445EA-...-8AFCD3F3D16<span class="o">]</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Kotlin Multiplatform"
+    data-if="221"
+  >
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">Application.kt</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="nc">Datadog</span><span class="p">.</span><span class="n">setVerbosity</span><span class="p">(</span><span class="nc">SdkLogVerbosity</span><span class="p">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is React Native"
+    data-if="222"
+  >
+    <p>Set the verbosity to <code>DEBUG</code> when you initialize the SDK:</p>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-between">
+        <p class="code-filename my-0">App.tsx</p>
+      </div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-typescript">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">SdkVerbosity</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;@datadog/mobile-react-native&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">config</span><span class="p">.</span><span class="nx">verbosity</span> <span class="o">=</span> <span class="nx">SdkVerbosity</span><span class="p">.</span><span class="nx">DEBUG</span><span class="p">;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="cdoc__toggleable cdoc__hidden"
+    data-description="SDK is Flutter"
+    data-if="223"
+  >
+    <p>
+      Set the SDKs verbosity to <code>CoreLoggerLevel.debug</code> before you
+      initialize the SDK:
+    </p>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-dart">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="n">DatadogSdk</span><span class="p">.</span><span class="n">instance</span><span class="p">.</span><span class="n">sdkVerbosity</span> <span class="o">=</span> <span class="n">CoreLoggerLevel</span><span class="p">.</span><span class="n">debug</span><span class="p">;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h3 id="privacy-options">Privacy options</h3>
+  <p>
+    See
+    <a href="/real_user_monitoring/session_replay/mobile/privacy_options"
+      >Privacy Options</a
+    >.
+  </p>
+<h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile"><span class="w-100 d-flex justify-content-between "><span class="text">Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile/app_performance"><span class="w-100 d-flex justify-content-between "><span class="text">How Mobile Session Replay Impacts App Performance</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile/privacy_options"><span class="w-100 d-flex justify-content-between "><span class="text">Mobile Session Replay Privacy Options</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay/mobile/troubleshooting"><span class="w-100 d-flex justify-content-between "><span class="text">Troubleshoot Mobile Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/session_replay"><span class="w-100 d-flex justify-content-between "><span class="text">Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/application_monitoring/android/web_view_tracking"><span class="w-100 d-flex justify-content-between "><span class="text">Web View Tracking</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
+</div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"199":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"199"},"200":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"200"},"201":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"kotlin_multiplatform"},"v":false,"r":"201"},"202":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"202"},"203":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"203"},"204":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"204"},"205":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"205"},"206":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"kotlin_multiplatform"},"v":false,"r":"206"},"207":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"207"},"208":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"208"},"209":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"209"},"210":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"210"},"211":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"kotlin_multiplatform"},"v":false,"r":"211"},"212":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"212"},"213":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"213"},"214":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"214"},"215":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"215"},"216":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"kotlin_multiplatform"},"v":false,"r":"216"},"217":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"217"},"218":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"218"},"219":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"android"},"v":true,"r":"219"},"220":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"ios"},"v":false,"r":"220"},"221":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"kotlin_multiplatform"},"v":false,"r":"221"},"222":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"react_native"},"v":false,"r":"222"},"223":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"android"},"1":"flutter"},"v":false,"r":"223"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"rum_session_replay_sdk_options","label":"SDK"},"defaultValsByOptionGroupId":{"rum_session_replay_sdk_options":"android"}}},"defaultValsByTraitId":{"platform":"android"},"optionGroupsById":{"rum_session_replay_sdk_options":[{"default":true,"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"react_native","label":"React Native"},{"id":"flutter","label":"Flutter"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>

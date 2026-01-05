@@ -14,11 +14,12 @@ further_reading:
   text: Case Management
 title: Correlación
 ---
+
 ## Información general
 
-La correlación de eventos agrupa eventos en función de sus relaciones o de configuraciones definidas por el usuario para reducir la cantidad de notificaciones y problemas identificados en el entorno. Utiliza la correlación y los casos para: 
-* Reducir la fatiga de alertas 
-* Reducir la cantidad de tickets y notificaciones que recibes 
+La correlación de eventos agrupa los eventos en función de sus relaciones o de configuraciones definidas por el usuario para reducir el número de notificaciones y problemas identificados del entorno. Utiliza la correlación y los casos para:
+* Reducir la fatiga por alerta
+* Reducir el número de tiques y notificaciones que recibes
 * Hacer que todos los equipos afectados sean conscientes de un único problema en lugar de trabajar en silos
 
 {{< whatsnext desc="Comienza con:">}}
@@ -27,6 +28,6 @@ La correlación de eventos agrupa eventos en función de sus relaciones o de con
     {{< nextlink href="/service_management/events/correlation/analytics/" >}}<u>Análisis</u>: analiza e investiga las métricas de las correlaciones, por ejemplo, el número de casos asignados o la cantidad por servicio, entre otras cosas {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

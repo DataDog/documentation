@@ -149,7 +149,7 @@ Datadog agent (v. 7.XX.X) started on <Hostname>
 Agent は、以下のサービスチェックを行うように設定されています。
 
   - `datadog.agent.up`: Agent が Datadog に接続すると `OK` を返します。
-    <div class="alert alert-warning">AIX Agent は <code>datadog.agent.up</code> サービスチェックを報告しませんが、<code>datadog.agent.running</code> メトリクスを使用して AIX Agent の稼働時間を監視することができます。このメトリクスは、Agent が Datadog に報告している場合、<code>1</code> を出力します。</div>
+    <div class="alert alert-danger">AIX Agent は <code>datadog.agent.up</code> サービスチェックを報告しませんが、<code>datadog.agent.running</code> メトリクスを使用して AIX Agent の稼働時間を監視することができます。このメトリクスは、Agent が Datadog に報告している場合、<code>1</code> を出力します。</div>
   - `datadog.agent.check_status`: Agent チェックが Datadog にメトリクスを送信できない場合は `CRITICAL` を返し、それ以外は `OK` を返します。
 
 

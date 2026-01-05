@@ -38,10 +38,21 @@ For more information on AWS network reachability, see the [AWS documentation][34
 
 An [S3 bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
+* _Public by bucket policy:_
+
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
 |The bucket policy allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that unauthenticated access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
 | None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `restrict_public_buckets` set to `true`. | None of the buckets or accounts explicitly block public access, meaning that the public bucket policy takes effect. |
+
+***OR***
+
+* _Public by Access Control List (ACL):_
+
+| **Criteria** | **Explanation** |
+|--------------|-----------------|
+|The bucket has ACL grants that allow insecure permissions to public grantees. |The bucket's ACL grants one or more of the following permissions (`full_control`, `read`, `write`, `write_acp`) to either authenticated users (`http://acs.amazonaws.com/groups/global/authenticatedusers`) or all users (`http://acs.amazonaws.com/groups/global/allusers`). |
+| None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `ignore_public_acls` set to `true`. | None of the buckets or accounts explicitly ignore public ACLs, meaning that the public ACL grants take effect. |
 
 See [Blocking public access to your Amazon S3 storage][2] for more information.
 
@@ -124,24 +135,14 @@ An [EC2 Instance][18] (`aws_ec2_instance`) is considered publicly accessible if:
 
 ***OR***
 
-* _ELB-determined access through autoscaling group:_
+* _ELB-determined access:_
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`.|This opens the load balancer to incoming traffic from the Internet on a specific port.|
-|The load balancer has a listener accepting traffic on port `X`|A [listener][37] is a process that checks for connection requests, using the protocol and port that you configure|
-|The load balancer has a target group forwarding traffic to some port `Y`.|[Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
-|An autoscaling group is attached to the load balancer's target group.|-|
-|The EC2 instance is part of the autoscaling group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (for example, `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|This opens the EC2 instance to traffic coming from the load balancer. The security group must allow traffic from the load balancer, and thus must be open either to all IPs, all IPs in the VPC, or that specific security group.|
-
-***OR***
-
-* _ELB-determined access through target group alone:_
-
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-|Criteria 1, 2 and 3 from above (_ELB-determined access through autoscaling group_) apply. |-|
-|The EC2 instance is listed as a target of the target group, and has a security group that has at least one rule that allows ingress traffic from port `Y`, either from `0.0.0.0/0`, from the CIDR of the VPC (for example, `10.0.0.0/8`), or from the security group of the load balancer (`SG1`).|Because the instance is listed as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group allows traffic from the load balancer.|
+| A security group (for example, `SG1`) attached to the load balancer is publicly accessible and allows ingress traffic to some port `X`. | This opens the load balancer to incoming traffic from the internet on a specific port. |
+| The load balancer has a listener accepting traffic on port `X`. | A [listener][37] is a process that checks for connection requests using the protocol and port that you configure. |
+| The load balancer has a target group forwarding traffic to some port `Y`. | [Target groups][38] route requests to one or more registered targets, such as EC2 instances, on a protocol and port that you specify. |
+| The EC2 instance is listed as a target of the target group, and has a security group with at least one rule that allows ingress traffic on port `Y` from `0.0.0.0/0`, from the VPC CIDR (for example, `10.0.0.0/8`), or from the load balancer's security group (`SG1`). | Because the instance is registered as a target of the target group, the load balancer can forward traffic to it through port `Y`. The security group must allow traffic coming from the load balancer. |
 
 See [Authorize inbound traffic for your Linux instances][19] for more information about EC2 Instances and public access. See [Example: VPC with servers in private subnets and NAT][36] for an example of EC2 instances that are exposed through a load balancer.
 

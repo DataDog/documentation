@@ -4,10 +4,14 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "App and API Protection"
-- link: "/security/application_security/how-appsec-works"
+- link: "/security/application_security/how-it-works"
   tag: "Documentation"
-  text: "How Application Security Works"
+  text: "How App and API Protection Works"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 [Datadog App and API Protection (AAP)][2] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into bad actors targeting your systems.
 

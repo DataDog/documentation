@@ -85,7 +85,7 @@ Para capturar logs de eventos de seguridad generada desde la configuración de s
 2. Busca **Gestión de identidad y acceso**..
 3. Haz clic en **Create API Client** (Crear cliente API)..
 4. En **Seleccionar las API**, busca **SIEM** y proporciona acceso de **SÓLO LECTURA**.
-5. En **Seleccionar grupos**, asigna **Gestionar SIEM** al grupo asociado con tu política de seguridad. 
+5. En **Seleccionar grupos**, asigna **Gestionar SIEM** al grupo asociado con tu política de seguridad.
 6. Después de crear el cliente API, haz clic en **Create credential** (Crear credenciales) para generar tu conjunto de credenciales.
 <!--4. Sigue las instrucciones que se indican a continuación para asignar los permisos correspondientes a tu producto Akamai. -->
 <!-- TODO: Cuando se añade otro producto Akamai, elimina 4-6 arriba, descomenta 4 arriba, descomenta esta sección e incluye
@@ -112,7 +112,7 @@ La integración Akamai no incluye métricas.
 
 ### Logs
 
-La integración Akamai recopila logs de eventos de seguridad de tu cuenta de Akamai. Debido a las limitaciones de las API Akamai, 
+La integración Akamai recopila logs de eventos de seguridad de tu cuenta de Akamai. Debido a las limitaciones de las API Akamai,
 Datadog sólo puede recopilar hasta las últimas 12 horas de eventos históricos.
 
 ### Eventos
@@ -120,7 +120,7 @@ Datadog sólo puede recopilar hasta las últimas 12 horas de eventos históricos
 La integración Akamai no incluye eventos.
 
 ### Checks de servicio
-{{< get-service-checks-from-git "akamai_application_security" >}}
+{{< get-service-checks-from-git "akamai" >}}
 
 
 ## Solucionar problemas

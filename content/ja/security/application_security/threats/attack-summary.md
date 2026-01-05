@@ -4,9 +4,9 @@ aliases:
 title: 攻撃サマリー
 ---
 
-{{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="ASM 攻撃サマリーページのスクリーンショット"  >}}
+{{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="AAP の Attack Summary ページのスクリーンショット" >}}
 
-ASM **攻撃サマリー**では、アプリケーションと API のポスチャを素早く確認できます。トレンド、サービスの露出、攻撃トラフィック、ビジネスロジックへの影響が浮き彫りになります。ウィジェットから関連するトレースへのピボットが可能です。
+AAP の **Attack Summary** は、アプリケーションと API のセキュリティ態勢を素早く把握するためのサマリーです。トレンド、サービスの公開状況、攻撃トラフィック、ビジネス ロジックへの影響が分かるようにハイライトされます。ウィジェットから関連するトレースへ移動できます。
 
 **攻撃サマリー**の各セクションでは、セキュリティのさまざまな側面に焦点を当て、その裏付けとなる情報を掲載しています。
 

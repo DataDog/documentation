@@ -1,149 +1,162 @@
 ---
+title: Intégrations
+disable_sidebar: true
 aliases:
-- /fr/integrations/verisign_openhybrid/
-- /fr/integrations/snyk/
-- /fr/integrations/lightstep_incident_response/
-- /fr/integrations/mainstorconcept_ziris/
-- /fr/integrations/rookout/
-- /fr/integrations/rookout_license/
-- /fr/integrations/shoreline/
-- /fr/integrations/shoreline_license/
-- /fr/integrations/shoreline_software_license/
+    - /integrations/verisign_openhybrid/
+    - /integrations/snyk/
+    - /integrations/lightstep_incident_response/
+    - /integrations/mainstorconcept_ziris/
+    - /integrations/rookout/
+    - /integrations/rookout_license/
+    - /integrations/shoreline/
+    - /integrations/shoreline_license/
+    - /integrations/shoreline_software_license/
+    - /integrations/pingdom_v3/
+description: Rassembler des données de tous vos systèmes, toutes vos applications et tous vos services
+algolia:
+    tags: ["intégration", "configuration de l'intégration"]
 cascade:
 - _target:
-    path: /integrations/akamai_datastream_2
+    path: /intégrations/akamai-datastream-2
     lang: fr
   aliases:
-  - /fr/integrations/akamai_datastream
+    - /integrations/akamai_datastream
 - _target:
     path: /integrations/azure
     lang: fr
   algolia:
-    category: Documentation
     rank: 80
+    category: Documentation
     subcategory: Intégrations
-    tags:
-    - azure
-    - microsoft azure
+    tags: ['azure', 'microsoft azure']
 - _target:
     path: /integrations/kubernetes_state_core
     lang: fr
   algolia:
-    category: Documentation
     rank: 60
+    category: Documentation
     subcategory: Intégrations
-    tags:
-    - ksm
+    tags: ['ksm']
 - _target:
     path: /integrations/google_cloud_platform
     lang: fr
   algolia:
-    category: Documentation
     rank: 80
+    category: Documentation
     subcategory: Intégrations
-    tags:
-    - gcp
-    - google cloud platform
+    tags: ['gcp', 'google cloud platform']
 - _target:
     path: /integrations/amazon_web_services
     lang: fr
   algolia:
-    category: Documentation
     rank: 80
+    category: Documentation
     subcategory: Intégrations
-    tags:
-    - aws
-    - amazon web services
+    tags: ['aws', 'amazon web services']
 - _target:
     path: /integrations/eks_fargate
     lang: fr
   algolia:
-    category: Documentation
     rank: 60
+    category: Documentation
     subcategory: Intégrations
-    tags:
-    - journalisation eks
+    tags: ['journalisation eks']
 - _target:
-    path: /integrations/win32_event_log
+    path: /integrations/event-viewer
     lang: fr
+  aliases:
+    - /integrations/eventviewer/
   algolia:
-    category: Documentation
     rank: 60
+    category: Documentation
     subcategory: Intégrations
-    tags:
-    - event viewer
-  aliases:
-  - /fr/integrations/eventviewer/
+    tags: ['event viewer']
 - _target:
-    path: /integrations/lambdatest_license
+    path: /intégrations/lambdatest-software-license
     lang: fr
   aliases:
-  - /fr/integrations/lambdatest_software_license/
+    - /integrations/lambdatest_software_license/
 - _target:
-    path: /integrations/mongo
+    path: /intégrations/rapdev-validator
     lang: fr
   aliases:
-  - /fr/integrations/mongodb/
-- _target:
-    path: /integrations/rapdev_validator
-    lang: fr
-  aliases:
-  - /fr/integrations/rapdev_dashboard_widget_pack/
+    - /integrations/rapdev_dashboard_widget_pack/
 - _target:
     path: /integrations/wmi_check
     lang: fr
   aliases:
-  - /fr/integrations/wmi/
+    - /integrations/wmi/
 - _target:
-    path: /integrations/jfrog_platform_self_hosted
+    path: /intégrations/jfrog-platform
     lang: fr
   aliases:
-  - /fr/integrations/jfrog_platform/
+    - /integrations/jfrog_platform/
 - _target:
     path: /integrations/komodor_license
     lang: fr
   aliases:
-  - /fr/integrations/komodor_komodor/
+    - /integrations/komodor_komodor/
 - _target:
     path: /integrations/stormforge_license
     lang: fr
   aliases:
-  - /fr/integrations/stormforge_stormforge_license/
+    - /integrations/stormforge_stormforge_license/
 - _target:
     path: /integrations/feed
     lang: fr
   aliases:
-  - /fr/integrations/rss/
+    - /integrations/rss/
 - _target:
     path: /integrations/java
     lang: fr
   aliases:
-  - /fr/agent/faq/jmx_integrations/
-  - /fr/agent/faq/docker-jmx/
+    - /agent/faq/jmx_integrations/
+    - /agent/faq/docker-jmx/
 - _target:
-    path: /integrations/amazon_elb
+    path: /intégrations/amazon-elb
     lang: fr
   aliases:
-  - /fr/integrations/awselb
+    - /integrations/awselb
 - _target:
-    path: /integrations/elastic
+    path: /intégrations/amazon-es
     lang: fr
   aliases:
-  - /fr/integrations/awses
+    - /integrations/awses
 - _target:
-    path: /integrations/amazon_s3
+    path: /intégrations/amazon-s3
     lang: fr
   aliases:
-  - /fr/integrations/awss3
+    - /integrations/awss3
 - _target:
-    path: /integrations/snowflake_web
+    path: /intégrations/snowflake-web
     lang: fr
   aliases:
-  - /fr/integrations/snowflake/
-description: Rassembler des données de tous vos systèmes, toutes vos applications
-  et tous vos services
-disable_sidebar: true
-title: Intégrations
+    - /integrations/snowflake/
+- _target:
+    path: /intégrations/redpeaks-sap-netweaver
+    lang: fr
+  aliases:
+    - /integrations/agentil_software_sap_netweaver/
+- _target:
+    path: /intégrations/redpeaks-sap-businessobjects
+    lang: fr
+  aliases:
+    - /integrations/agentil_software_sap_businessobjects/
+- _target:
+    path: /intégrations/redpeaks-services-5-jours
+    lang: fr
+  aliases:
+    - /integrations/agentil_software_services_5_days/
+- _target:
+    path: /intégrations/redpeaks-sap-hana
+    lang: fr
+  aliases:
+    - /integrations/agentil_software_sap_hana/
+- _target:
+    path: /intégrations/azure-virtual-network
+    lang: fr
+  aliases:
+    - /integrations/azure_virtual_networks
 ---
 
 Plus de {{< translate key="integration_count" >}} intégrations par défaut. Récupérez des données pour tous vos systèmes, toutes vos applications et tous vos services.
@@ -152,4 +165,4 @@ Qu'est-ce qu'une intégration ? Consultez la [Présentation des intégrations][
 
 {{< integrations >}}
 
-[1]: /fr/getting_started/integrations/
+[1]: /getting_started/integrations/

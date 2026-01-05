@@ -16,7 +16,6 @@
             "env": "default"
           }
         ],
-        "handle": "my-handle",
         "inputSchema": {
           "parameters": [
             {

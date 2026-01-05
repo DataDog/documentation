@@ -2,8 +2,8 @@
   <div class="examples-header">Try these examples:</div>
   <div class="examples-list">
     <button class="example-button" data-expression="i > 3">i > 3</button>
-    <button class="example-button" data-expression='i == b["a"]'>i == b["a"]</button>
-    <button class="example-button" data-expression="any(filter(b, {@value == i}))">any(filter(b, {@value == i}))</button>
+    <button class="example-button" data-expression='i == mySequence[0]'>i == mySequence[0]</button>
+    <button class="example-button" data-expression="any(myMap, {@value == i})">any(myMap, {@value == i})</button>
     <button class="example-button" data-expression="">Write your own!</button>
   </div>
 </div>
@@ -35,17 +35,17 @@
 
       <div class="code-line-container">
         <span class="line-number">14</span>
-        <div class="code-line"><span class="indent-1"></span><span class="variable">a</span> = [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]</div>
+        <div class="code-line"><span class="indent-1"></span><span class="variable">myString</span> = <span class="string">"hello world"</span></div>
       </div>
 
       <div class="code-line-container">
         <span class="line-number">15</span>
-        <div class="code-line"><span class="indent-1"></span><span class="variable">b</span> = {<span class="string">"a"</span>: <span class="number">1</span>, <span class="string">"b"</span>: <span class="number">2</span>, <span class="string">"c"</span>: <span class="number">3</span>}</div>
+        <div class="code-line"><span class="indent-1"></span><span class="variable">mySequence</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div>
       </div>
 
       <div class="code-line-container">
         <span class="line-number">16</span>
-        <div class="code-line"><span class="indent-1"></span><span class="variable">c</span> = <span class="string">"hello world"</span></div>
+        <div class="code-line"><span class="indent-1"></span><span class="variable">myMap</span> = {<span class="string">"a"</span>: <span class="number">1</span>, <span class="string">"b"</span>: <span class="number">2</span>, <span class="string">"c"</span>: <span class="number">3</span>}</span></div>
       </div>
 
       <div class="code-line-container">
@@ -71,7 +71,6 @@
         <div class="condition-label">when</div>
         <button class="clear-button">×</button>
         <input type="text" id="condition-input" class="condition-input" placeholder="Enter a condition...">
-        <button class="capture-variables-button non-interactive">+ Capture Variables</button>
         <div id="simulator-autocomplete-container" class="autocomplete-container"></div>
       </div>
     </div>

@@ -14,7 +14,7 @@ JMXFetch supports FIPS-140 compliant JVM configurations. It uses the default JSS
 {{% tab "Host" %}}
 
 - JVM configured to run in FIPS mode.
-- [Datadog FIPS Agent](/agent/guide/fips-agent/) installed on the host.
+- [Datadog FIPS Agent](/agent/configuration/fips-compliance) installed on the host.
 - Appropriate TLS/SSL certificates if encrypted JMX connection is required.
 
 **Note**: The Datadog Agent host installation does not include Java runtime. You must install and configure Java in FIPS-approved mode separately.
@@ -23,7 +23,7 @@ JMXFetch supports FIPS-140 compliant JVM configurations. It uses the default JSS
 
 {{% tab "Containers" %}}
 
-- [Datadog FIPS Agent](/agent/guide/fips-agent/) Docker image with JMX support.
+- [Datadog FIPS Agent](/agent/configuration/fips-compliance) Docker image with JMX support.
 - Appropriate TLS/SSL certificates if encrypted JMX connection is required. (Private keys must be generated
    with the `keytool` utility provided in the container. See [Generating certificates](#generating-certificates) for more details.)
 
@@ -45,7 +45,7 @@ connector) and the client (JMXFetch).
 Commands provided in this section are for reference only and should be adjusted based on your specific scenario.
 
 
-<div class="alert alert-warning">Configure the JVM in FIPS mode before generating certificates, as some Java FIPS modules reject private keys created in non-FIPS mode.</div>
+<div class="alert alert-danger">Configure the JVM in FIPS mode before generating certificates, as some Java FIPS modules reject private keys created in non-FIPS mode.</div>
 
 
 {{< tabs >}}

@@ -1,5 +1,6 @@
 ---
 title: Getting Started with APM Tracing
+description: Set up Application Performance Monitoring (APM) to identify bottlenecks, troubleshoot issues, and send traces to Datadog.
 aliases:
     - /getting_started/tracing/distributed-tracing
 further_reading:
@@ -74,7 +75,7 @@ To set up Datadog APM without needing to modify your application's code or the d
 1. Run the installation command:
 
    ```shell
-    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:3 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:4 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
     ```
  
     Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2], `<YOUR_DD_SITE>` with your [Datadog site][7], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
@@ -140,7 +141,7 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 
 1. In Datadog, go to [**APM** > **Services**][3]. You should see a Python service named `hello`:
 
-   {{< img src="/getting_started/apm/software-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
 
 1. Select the service to view its performance metrics, such as latency, throughput, and error rates.
 1. Go to [**APM** > **Traces**][4]. You should see a trace for the `hello` service:

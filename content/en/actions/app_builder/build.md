@@ -1,5 +1,6 @@
 ---
 title: Build Apps
+description: Create custom apps from blueprints or scratch using drag-and-drop UI components, queries, and JavaScript expressions.
 aliases:
   - /app_builder/build
   - /service_management/app_builder/build
@@ -7,12 +8,11 @@ disable_toc: false
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
-  text: "Actions Catalog"
+  text: "Action Catalog"
+- link: "https://learn.datadoghq.com/courses/getting-started-app-builder/"
+  tag: "Learning Center"
+  text: "Getting Started with App Builder"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
 - Author
@@ -22,7 +22,7 @@ You can create an app or edit existing apps from the [App Builder][1] page. The 
 
 On the App Builder page, you can access and filter your apps. Hover over an app for options to edit, delete, view, or clone the app. You can also enable the **My apps** toggle to see only apps that you created:
 
-{{< img src="service_management/app_builder/app-builder-my-apps.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
+{{< img src="service_management/app_builder/app-builder-my-apps-2025-11-19.png" alt="The App Builder page, filtered to show only 'My apps'" style="width:100%;" >}}
 
 ## Create an app
 
@@ -37,18 +37,40 @@ Blueprints are helpful starter apps that cover common use cases. They come loade
 1. Each blueprint template comes loaded with demo data. To customize the app, edit the **Connection** for each query.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+### Build an app with AI
+
+With Bits AI, you can generate a complete app from a single prompt. Describe the app you want to create, and the UI agent automatically generates the UI, actions, and logic mapped to your existing data and permissions. You can then iterate by chatting---refining components, flows, or styling---without writing any code.
+
+To build an app with Bits AI:
+1. From [App Builder][1], click **New App**.
+1. Click **Start with AI**.
+1. Click a suggested prompt, or enter a prompt that describes the app you want to create. Enter as much detail as possible to improve the results. Here are some example prompts:
+   - `Display a list of AWS Lambda functions in a table. Allow the user to filter by function name and specify the limit.`
+   - `Display GitHub pull requests in a table.`
+1. Press **Enter** to send your prompt. Bits AI automatically generates the UI, actions, and logic for your app, mapped to your existing data and permissions.
+1. While it's responding, Bits AI asks you to set up a connection to build the app with real data. You can complete this step, or skip it to build the app layout faster without data.
+1. Bits AI sometimes asks clarification questions while it responds to your prompt. If this happens, enter a response, then press **Enter**. 
+1. After Bits AI adds an action to the app, you are prompted to either **Mock with AI Data** or **skip configuration**. Configuring your action during UI agent execution helps connect the data types to other components.
+1. After Bits AI responds to your prompt, you can click **Edit with AI** or manually [customize your app][15].
+1. To save the app, click **Save**.
+1. To preview the app, click **View**. Click **Edit** to return to the configuration view.
+1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
+
+To iterate on an existing app:
+1. From an existing app, click **UI Agent Chat** (**<i class="icon-bits-ai"></i>**).
+1. Enter a detailed prompt for the behavior you'd like to add to your app. Include the integrations and actions you'd like to use.
+1. Press **Enter** to add the functionality to your app.
 
 ### Create a custom app
 
 1. From [App Builder][1], click **New App**.
 1. To change the app name and description, click the app name.
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab, then click the component or drag it onto the canvas.
-1. Use [queries](#queries) to populate or interact with your canvas.
+1. Use [queries][12] to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ## Customize your app
@@ -71,7 +93,7 @@ To delete or duplicate a component, select the component and click the three dot
 
 For a list of available UI components and their properties, see [Components][9].
 
-UI components can trigger reactions on an [Event][11]. 
+UI components can trigger reactions on an [Event][11].
 
 [Queries][12] populate your app with data from Datadog APIs or supported integrations. They take inputs from other queries or from UI components and return outputs for use in other queries or in UI components.
 
@@ -103,7 +125,7 @@ When you refresh the page, the starred app appears in a section at the top of yo
 
 App Builder keeps a record of every saved version of your app.
 
-To view the version history for your app, in the left-hand menu of your app, click the version history icon {{< img src="service_management/app_builder/version-history-icon.png" inline="true">}}.
+To view the version history for your app, in the left-hand menu of your app, click the version history {{< img src="icons/version-history.png" inline="true" style="width:14px;">}} icon.
 
 The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
 
@@ -120,19 +142,30 @@ You can perform the following operations:
 
 ### Edit an app
 
-To edit an app with JSON, click the cog (**Settings**) icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To edit an app with JSON, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 ### Export an app
 
-To copy an app layout across organizations or back it up, click the cog (**Settings**) icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+To copy an app layout across organizations or back up the app, click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
 To copy the app to another organization:
 1. Create an app. 
-1. Click the cog (**Settings**) icon and select **Switch to JSON**. 
+1. Click **Settings** {{< img src="icons/settings.png" inline="true" style="width:14px;">}} and select **Switch to JSON**. 
 1. Replace the existing JSON with the JSON that you previously copied. 
 
 The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
+## Debug an app
+
+The App Builder Debug Console provides a central place to view real-time logs, action executions, and errors. 
+
+To access the Debug Console, go to [your apps list][14] and click **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} for one of your apps. Click **Expand** {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} to see the entire Debug Console. Information inside the console includes:
+- **Action Executions:** Track the success and failure of action executions with their associated inputs and outputs.
+- **Errors:** View logs for errors, warnings, and info messages.
+- **Logs:** View configuration errors for your actions, transformers, variables, and components.
+- **App State:** Access real-time application state changes.
+
+{{< img src="service_management/app_builder/app-builder-debug-console.png" alt="The expanded panel of the Debug Console inside an app's editor view" style="width:100%;" >}}
 
 ## Further reading
 
@@ -147,10 +180,11 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 [5]: /service_management/workflows/connections
 [6]: /service_management/workflows
 [7]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=ecs_task_manager
-[8]: https://datadoghq.slack.com/
+[8]: https://chat.datadoghq.com/
 [9]: /service_management/app_builder/components
 [10]: https://app.datadoghq.com/app-builder/action-catalog
 [11]: /service_management/app_builder/events
 [12]: /service_management/app_builder/queries
 [13]: /service_management/app_builder/expressions
 [14]: https://app.datadoghq.com/app-builder/apps/list
+[15]: /actions/app_builder/build/#customize-your-app

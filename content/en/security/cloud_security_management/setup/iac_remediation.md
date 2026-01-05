@@ -1,5 +1,6 @@
 ---
 title: Setting up IaC Remediation for Cloud Security
+private: true
 aliases:
   - /security/cloud_security_management/setup/source_code_integrations
 further_reading:

@@ -43,6 +43,7 @@ function Send-DatadogMetric {
     #     * US3:        https://api.us3.datadoghq.com/api/v2/series
     #     * US5:        https://api.us5.datadoghq.com/api/v2/series
     #     * AP1:        https://api.ap1.datadoghq.com/api/v2/series
+    #     * AP2:        https://api.ap2.datadoghq.com/api/v2/series
     #     * US1-FED:    https://api.ddog-gov.com/api/v2/series
     $api_key = "<DATADOG_API_KEY>"          #provide your valid api key
     $app_key = "<DATADOG_APPLICATION_KEY>"  #provide your valid app key

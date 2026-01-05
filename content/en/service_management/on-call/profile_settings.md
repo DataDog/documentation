@@ -10,10 +10,6 @@ further_reading:
 To use Datadog On-Call on your mobile device, install the <a href="/mobile#installing">Datadog mobile app</a>.
 </div>
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 You must [configure your profile settings][1] before you can receive On-Call Pages. Your profile includes settings for contact methods, testing those methods, and notification preferences. These ensure that you receive timely and effective Pages.
 
 ## Configure your On-Call profile
@@ -26,10 +22,14 @@ Go to [My On-Call Profile][1] to configure your settings.
    - If the Datadog [mobile app][2] is installed on your device, your device appears automatically in this list. Check your settings in the mobile app to ensure that your device can receive notifications.
    - Datadog recommends that you test each of your contact methods. Hover over your contact method for test options.
 
+<div class="alert alert-info">
+Phone number support varies by country. To see the supported list, open the phone number <strong>Prefix</strong> menu when adding a phone contact method in your On-Call profile. If your country does not appear, phone calls and SMS are not available for that location.
+</div>
+
 #### Supported contact methods
 - Push notifications through the [Datadog mobile app][3]
 - Emails (HTML or text format)
-- SMS
+- SMS (Note, landlines, Voice Over Internet Protocol (VoIP) or virtual numbers are not supported.)
 - Phone calls
 
 To set up your mobile device, including how to **circumvent Do Not Disturb mode**, see [Set Up Your Mobile Device for Datadog On-Call][4].

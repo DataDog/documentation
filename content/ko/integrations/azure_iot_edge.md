@@ -177,7 +177,7 @@ Agent가 디바이스에 배포되면 [Agent의 상태 하위 명령을 실행][
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "azure_iot_edge" >}}
+{{< get-metrics-from-git "azure-iot-edge" >}}
 
 
 ### 이벤트
@@ -185,7 +185,7 @@ Agent가 디바이스에 배포되면 [Agent의 상태 하위 명령을 실행][
 Azure IoT Edge는 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "azure_iot_edge" >}}
+{{< get-service-checks-from-git "azure-iot-edge" >}}
 
 
 ## 트러블슈팅

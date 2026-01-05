@@ -42,7 +42,7 @@ Amazon Athena는 양방향 쿼리 서비스로, 표준 SQL을 사용해 Amazon S
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "amazon_athena" >}}
+{{< get-metrics-from-git "amazon-athena" >}}
 
 
 ### 이벤트

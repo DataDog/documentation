@@ -8,10 +8,6 @@ further_reading:
 
 ## Overview
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Case automation rules are not available in the US1-FED region.</div>
-{{< /site-region >}}
-
 Case Automation Rules streamline your incident management workflow by automatically triggering actions when specific conditions are met, allowing teams to standardize their response processes.
 
 You can define automated actions based on three key triggers:

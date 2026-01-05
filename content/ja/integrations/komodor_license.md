@@ -16,7 +16,7 @@ categories:
 - 問題追跡
 - kubernetes
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -93,6 +93,6 @@ Datadog マーケットプレイスでのご提供には、Komodor プラット�
 Komodor では、お客様の成功に必要なツールと情報の提供をお約束します。そのため、必要なときに必要なサポートを受けられるよう、以下のとおり複数の方法をご用意しています。Komodor アプリケーション内（右下のお問い合わせボタン）からメッセージを送信、ドキュメントで必要な情報を見つける、あるいは [support@komodor.com](mailto:support@komodor.com) までメールを送信しサポートチケットを作成してください。
 
 
-[1]: /ja/integrations/komodor
+[1]: https://app.datadoghq.com/integrations/komodor
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/komodor-komodor" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/komodor-komodor" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

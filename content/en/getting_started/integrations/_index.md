@@ -1,5 +1,6 @@
 ---
 title: Introduction to Integrations
+description: Unify metrics and logs from infrastructure using Agent-based, authentication-based, and library integrations.
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
@@ -7,6 +8,9 @@ further_reading:
   - link: '/integrations/'
     tag: 'Documentation'
     text: 'See a list of Datadog integrations'
+  - link: 'https://www.datadoghq.com/blog/1k-integrations-milestone/'
+    tag: 'Blog'
+    text: 'Scaling Datadog observability: 1,000 integrations and counting'
 ---
 
 ## Overview
@@ -136,12 +140,12 @@ If you set up [process collection][29], Datadog autodetects technologies running
 
 {{< img src="getting_started/integrations/ad_integrations_1.png" alt="Autodetected integrations" >}}
 
-Each integration has one of three status types:
+Each integration has one of four status types:
 
 - **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
 - **Installed**: This integration is installed and configured on a host.
 - **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
-- **No Data Received**: Integration metric has not been detected in the last 24 hours. 
+- **Missing Data**: Integration metrics have not been detected in the last 24 hours. 
 
 ## Security practices
 

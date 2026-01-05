@@ -1,5 +1,6 @@
 ---
 title: Autodiscovery Template Variables
+description: Reference guide for template variables available in Autodiscovery integration configuration for dynamic container environments
 aliases:
  - /agent/autodiscovery/template_variables
  - /agent/faq/template_variables

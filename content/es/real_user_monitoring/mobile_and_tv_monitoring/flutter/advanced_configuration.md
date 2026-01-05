@@ -24,7 +24,7 @@ title: Configuración avanzada de Flutter
 Si aún no has configurado el SDK de Datadog Flutter para RUM, sigue las [instrucciones de configuración dentro de la aplicación][1] o consulta la [documentación de configuración de RUM Flutter][2]. Aprende a configurar [OpenTelemetry con RUM Flutter](#opentelemetry-setup). Para obtener funciones de instrumentación manual adicionales, como el rastreo automático de vistas, consulta [Bibliotecas de Flutter para RUM][3].
 
 ## Parámetros de inicialización
-Puedes especificar los siguientes parámetros en tu configuración al inicializar el SDK:
+Puedes especificar los siguientes parámetros en tu configuración al inicializar el kit de desarrollo de software (SDK).
 
 `clientToken`
 : obligatorio<br/>
@@ -38,8 +38,8 @@ El nombre de entorno enviado a Datadog. Puedes utilizar `env` para filtrar event
 
 `site`
 : obligatorio<br/>
-**Tipo**: Enum<br/>
-El sitio de Datadog al que se envían los datos. Valores Enum: `us1`, `us3`, `us5`, `eu1`, `us1Fed` y `ap1`.
+**Tipo**: enum<br/>
+El sitio Datadog al que se envían los datos. Valores enum: `us1`, `us3`, `us5`, `eu1`, `us1Fed`, `ap1` y `ap2`.
 
 `nativeCrashReportEnabled`
 : opcional<br/>
@@ -54,31 +54,31 @@ El nombre de servicio de la aplicación.
 
 `uploadFrequency`
 : opcional<br/>
-**Tipo**: Enum<br/>
+**Tipo**: enum<br/>
 **Predeterminado**: `average`<br/>
-La frecuencia con la que el SDK de Datadog intenta cargar lotes de datos. Valores Enum: `frequent`, `average` y `rare`.
+La frecuencia con la que el SDK de Datadog intenta cargar lotes de datos. Valores enum: `frequent`, `average` y `rare`.
 
 `batchSize`
 : opcional<br/>
-**Tipo**: Enum<br/>
+**Tipo**: enum<br/>
 **Predeterminado**: `medium`<br/>
-Define la política del SDK de Datadog para el procesamiento por lotes de datos antes de subirlos a los servidores de Datadog. Los lotes más grandes dan lugar a solicitudes de red más grandes (pero menos numerosas). Los lotes más pequeños dan lugar a solicitudes de red más pequeñas (pero más numerosas). Valores de Enum: `small`, `medium` y `large`.
+Define la política del SDK de Datadog para el procesamiento por lotes de datos antes de subirlos a los servidores de Datadog. Los lotes más grandes dan lugar a solicitudes de red más grandes (pero menos numerosas). Los lotes más pequeños dan lugar a solicitudes de red más pequeñas (pero más numerosas). Valores de enum: `small`, `medium` y `large`.
 
 `batchProcessingLevel`
 : opcional<br/>
-**Tipo**: Enum<br/>
+**Tipo**: enum<br/>
 **Predeterminado**: `medium`
-Define el número máximo de lotes procesados secuencialmente sin retardo, dentro de un ciclo de lectura y subida. Con niveles más altos, se envían más datos en un solo ciclo de subida, y se utiliza más CPU y memoria para procesar los datos. Con niveles más bajos, se envían menos datos en un solo ciclo de carga, y se utiliza menos CPU y memoria para procesar los datos. Valores Enum: `low`, `medium` y `high`.
+Define el número máximo de lotes procesados secuencialmente sin retardo, dentro de un ciclo de lectura y subida. Con niveles más altos, se envían más datos en un solo ciclo de subida, y se utiliza más CPU y memoria para procesar los datos. Con niveles más bajos, se envían menos datos en un solo ciclo de carga, y se utiliza menos CPU y memoria para procesar los datos. Valores enum: `low`, `medium` y `high`.
 
 `version`
 : opcional<br/>
 **Tipo**: cadena<br/>
-El número de versión de la aplicación. Dado que `version` es una etiqueta de Datadog, debe cumplir las reglas de [Definición de etiquetas][4].
+El número de versión de la aplicación. Dado que `version` es una etiqueta (tag) de Datadog, debe cumplir las reglas de [Definición de etiquetas][4].
 
 `flavor`
 : opcional<br/>
 **Tipo**: cadena<br/>
-El tipo (variante) de la aplicación. Para el desenmascaramiento del stack trace, debe coincidir con el tipo establecido durante la carga de símbolos.
+El tipo (variante) de la aplicación. Para la desofuscación de la traza (trace) de stack tecnológico, debe coincidir con el tipo establecido durante la carga de símbolos.
 
 `firstPartyHosts`
 : opcional<br/>
@@ -133,9 +133,9 @@ La frecuencia de muestreo para el rastreo de recursos. Debe estar entre `0.0` (n
 
 `traceContextInjection`
 : opcional<br/>
-**Tipo**: Enum<br/>
+**Tipo**: enum<br/>
 **Predeterminado**: `all`<br/>
-La estrategia para inyectar el contexto de trazas en las solicitudes. Los valores de Enum pueden ser `all` (inyectar el contexto de trazas en todas las solicitudes) o `sampled` (inyectar el contexto de trazas sólo en las solicitudes muestreadas).
+La estrategia para inyectar el contexto de trazas en las solicitudes. Los valores enum pueden ser `all` (inyectar el contexto de trazas en todas las solicitudes) o `sampled` (inyectar el contexto de trazas solo en las solicitudes muestreadas).
 
 `detectLongTasks`
 : opcional<br/>
@@ -157,9 +157,9 @@ Activa [la recopilación automática de frustraciones de usuario][9].
 
 `vitalUpdateFrequency`
 : opcional<br/>
-**Tipo**: Enum<br/>
+**Tipo**: enum<br/>
 **Predeterminado**: `average`<br/>
-La frecuencia preferida para recopilar los signos de estado móviles. Valores Enum: `frequent` (100 ms),`average` (500 ms) y `rare` (1000 ms). Para desactivar la recopilación de signos de estado móviles, establece este parámetro en `null`.
+La frecuencia preferida para recopilar los signos de estado móviles. Valores enum: `frequent` (100 ms),`average` (500 ms) y `rare` (1000 ms). Para desactivar la recopilación de signos de estado móviles, establece este parámetro en `null`.
 
 `reportFlutterPerformance`
 : opcional<br/>
@@ -197,7 +197,7 @@ Para activar [Rastreo distribuido][13] de Datadog, configura la propiedad `Datad
 
 - `firstPartyHosts` no permite comodines, pero coincide con cualquier subdominio de un dominio determinado. Por ejemplo, `api.example.com` coincide con `staging.api.example.com` y `prod.api.example.com`, no con `news.example.com`.
 
-- `DatadogRumConfiguration.traceSampleRate` configura una tasa de muestreo por defecto del 20 %. Si deseas que todas las solicitudes de recursos generen una traza distribuida completa, configura este valor en `100.0`.
+- `DatadogRumConfiguration.traceSampleRate` configura una frecuencia de muestreo por defecto del 20%. Si quieres que todas las solicitudes de recursos generen una traza distribuida completa, configura este valor en `100.0`.
 
 ## Mejorar las sesiones de usuario
 
@@ -315,13 +315,11 @@ Al añadir información de usuario a tus sesiones de RUM, simplificas lo siguien
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="API de usuario en la interfaz de usuario de RUM" style="width:90%" >}}
 
-Los siguientes atributos son **opcionales**, proporciona **al menos** uno de ellos:
-
-| Atributo | Tipo   | Descripción                                                                                              |
-|-----------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.id`    | Cadena | Identificador único de usuario.                                                                                  |
-| `usr.name`  | Cadena | Nombre descriptivo, que se muestra por defecto en la interfaz de usuario de RUM.                                                  |
-| `usr.email` | Cadena | Correo electrónico del usuario, que se muestra en la interfaz de usuario de RUM si el nombre de usuario no está presente. También se usa para obtener Gravatars. |
+| Atributo   | Tipo   | Descripción                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | Cadena | (Obligatorio) Identificador único de usuario.                                              |
+| `usr.name`  | Cadena | (Opcional) Nombre de usuario sencillo, mostrado por defecto en la interfaz de usuario RUM.              |
+| `usr.email` | Cadena | (Opcional) Correo electrónico del usuario, mostrado en la interfaz de usuario RUM, si el nombre de usuario no está presente. |
 
 Para identificar las sesiones de usuario, utiliza `DatadogSdk.setUserInfo`.
 
@@ -390,21 +388,21 @@ Si se devuelve `null` desde el asignador de errores, recursos o acciones, se eli
 
 En función del tipo de evento, solo pueden modificarse algunas propiedades específicas:
 
-| Tipo de evento       | Clave de atributo                     | Descripción                                   |
-|------------------|-----------------------------------|-----------------------------------------------|
-| RumViewEvent     | `viewEvent.view.url`              | URL de la vista.                              |
-|                  | `viewEvent.view.referrer`         | Referente de la vista.                         |
-| RumActionEvent   | `actionEvent.action.target?.name` | Nombre de la acción.                           |
-|                  | `actionEvent.view.referrer`       | Referente de la vista vinculada a esta acción.   |
-|                  | `actionEvent.view.url`            | URL de la vista vinculada a esta acción.        |
-| RumErrorEvent    | `errorEvent.error.message`        | Mensaje de error.                                |
-|                  | `errorEvent.error.stack`          | Stack trace del error.                      |
-|                  | `errorEvent.error.resource?.url`  | URL del recurso al que se refiere el error.      |
-|                  | `errorEvent.view.referrer`        | Referente de la vista vinculada a esta acción.   |
-|                  | `errorEvent.view.url`             | URL de la vista vinculada a este error.         |
-| RumResourceEvent | `resourceEvent.resource.url`      | URL del recurso.                          |
-|                  | `resourceEvent.view.referrer`     | Referente de la vista vinculada a esta acción.   |
-|                  | `resourceEvent.view.url`          | URL de la vista vinculada a este recurso.      |
+| Tipo de evento       | Clave de atributo                     | Descripción                                 |
+| ---------------- | --------------------------------- | ------------------------------------------- |
+| RumViewEvent     | `viewEvent.view.url`              | URL de la vista.                            |
+|                  | `viewEvent.view.referrer`         | Referente de la vista.                       |
+| RumActionEvent   | `actionEvent.action.target?.name` | Nombre de la acción.                         |
+|                  | `actionEvent.view.referrer`       | Referente de la vista vinculada a esta acción. |
+|                  | `actionEvent.view.url`            | URL de la vista vinculada a esta acción.      |
+| RumErrorEvent    | `errorEvent.error.message`        | Mensaje de error.                              |
+|                  | `errorEvent.error.stack`          | Stack trace del error.                    |
+|                  | `errorEvent.error.resource?.url`  | URL del recurso al que se refiere el error.    |
+|                  | `errorEvent.view.referrer`        | Referente de la vista vinculada a esta acción. |
+|                  | `errorEvent.view.url`             | URL de la vista vinculada a este error.       |
+| RumResourceEvent | `resourceEvent.resource.url`      | URL del recurso.                        |
+|                  | `resourceEvent.view.referrer`     | Referente de la vista vinculada a esta acción. |
+|                  | `resourceEvent.view.url`          | URL de la vista vinculada a este recurso.    |
 
 ## Recuperar el ID de sesión de RUM
 
@@ -426,7 +424,7 @@ Tanto el paquete [Datadog Tracking HTTP Client][10] y el paquete [gRPC Intercept
 
 ### Generación de encabezados de Datadog
 
-Al configurar tu cliente de rastreo o gRPC Interceptor, puedes especificar los tipos de encabezados de rastreo que deseas que genere Datadog. Por ejemplo, si deseas enviar encabezados `b3` a `example.com` y encabezados `tracecontext` para `myapi.names`, puedes hacerlo con el siguiente código:
+Al configurar tu cliente de rastreo o gRPC Interceptor, puedes especificar los tipos de encabezados de rastreo que quieres que genere Datadog. Por ejemplo, si quieres enviar encabezados `b3` a `example.com` y encabezados `tracecontext` para `myapi.names`, puedes hacerlo con el siguiente código:
 
 ```dart
 final hostHeaders = {

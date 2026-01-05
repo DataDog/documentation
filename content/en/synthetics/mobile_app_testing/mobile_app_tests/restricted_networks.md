@@ -16,9 +16,6 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Some of your applications might not be available to the public Internet because they are accessing development or local environments, or they are internal applications intended for users within your corporate network (for example, your corporate intranet or VPN). 
@@ -57,9 +54,7 @@ The following is the list of IP ranges associated with the real devices used for
 `162.222.79.0/27`</br>
 `185.94.24.0/22`</br>
 
-### Sauce Connect Proxy
-
-`34.96.70.78`</br>
+### HTTP steps
 
 Below is the list of IP ranges required for executing HTTP steps within Synthetic Mobile Application Tests. You may disregard these ranges if your tests do not use HTTP steps.
 

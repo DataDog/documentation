@@ -16,13 +16,10 @@ further_reading:
   tag: 블로그
   text: GitHub 배포 보호 규칙 및 Datadog으로 실패한 품질 검사 감지
 title: Datadog 모니터로 GitHub Actions 배포 게이팅하기
+site_support_id: ci_visibility
 ---
 
 ## 개요
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility는 현재 선택한 사이트 ({{< region-param key="dd_site_name" >}})에서 사용할 수 없습니다.</div>
-{{< /site-region >}}
 
 Datadog은 최종 고객에게 고품질 애플리케이션을 제공할 수 있도록 도와드리는 [GitHub Actions 배포 보호 규칙][10]의 통합 파트너입니다. Datadog 모니터링을 사용하여 GitHub Actions 배포 워크플로에 품질 게이트를 적용할 수 있습니다.
 

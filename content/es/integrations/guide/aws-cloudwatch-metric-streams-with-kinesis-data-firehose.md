@@ -8,9 +8,6 @@ further_reading:
   text: Recopilación de métricas de Amazon CloudWatch con Metric Streams
 title: AWS CloudWatch Metric Streams con Amazon Data Firehose
 ---
-{{% site-region region="us3,gov" %}}
-AWS CloudWatch Metric Streams con Amazon Data Firehose no está disponible para el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).
-{{% /site-region %}}
 
 Con Amazon CloudWatch Metric Streams y Amazon Data Firehose, puedes obtener métricas de CloudWatch en Datadog con una latencia de solo dos a tres minutos. Esto es significativamente más rápido que el enfoque de sondeo de API predeterminado de Datadog, que proporciona métricas actualizadas cada 10 minutos. Puedes obtener más información sobre el enfoque de sondeo de API en la [documentación de Cloud Metric Delay][1].
 
@@ -22,22 +19,22 @@ Con Amazon CloudWatch Metric Streams y Amazon Data Firehose, puedes obtener mét
    - Opcionalmente, especifica un conjunto limitado de espacios de nombres o métricas para transmitir.
 2. Una vez que creas el Metric Stream, Datadog comienza a recibir inmediatamente las métricas transmitidas y las muestra en el sitio de Datadog sin necesidad de configuración adicional.
 
-<div class="alert alert-danger">El filtrado del espacio de nombres configurado en el cuadro de la integración de AWS <b>no se</b> aplica a CloudWatch Metric Streams. Consulta más abajo para ver más detalles.</div>
+<div class="alert alert-warning">El filtrado por espacio de nombres configurado en el cuadro de integración de AWS <b>también se</b> aplica a CloudWatch Metric Streams.</div>
 
 ### Transmisión de métricas versus sondeo de API {#streaming-vs-polling}
 
 A continuación se indican las principales diferencias entre el uso de CloudWatch Metric Streams y el sondeo de API.
 
-- **Filtrado de espacios de nombres en AWS**: los valores predeterminados por espacio de nombres y las configuraciones a nivel de cuenta en la página de integración de AWS solo se aplican al enfoque de sondeo de API. Gestiona todas las reglas para incluir y excluir espacios de nombres/métricas en los flujos (streams) mediante la configuración de CloudWatch Metric Streams en tus cuentas de AWS.
-
 - **Métricas que informan con un retraso de más de dos horas**: el sondeo de API continúa recopilando métricas como `aws.s3.bucket_size_bytes` y `aws.billing.estimated_charges` después de que se habilita la transmisión de métricas, ya que estas no se pueden enviar a través de CloudWatch Metric Stream.
 
+- **Metadatos de métricas**: Datadog sigue utilizando el sondeo de la API para recopilar etiquetas (tags) personalizadas y otros metadatos de tus métricas transmitidas. Para asegurarte de que sigues recibiendo estas métricas, no cambies la configuración en la integración AWS.
+
 #### Cambio del sondeo de API a los flujos de métricas
-Si ya recibes métricas para un espacio de nombres de CloudWatch determinado a través del método de sondeo de API, Datadog lo detecta automáticamente y deja de sondear las métricas para ese espacio de nombres una vez que comienzas a transmitirlas. Deja la configuración en la página de integración de AWS sin cambios, ya que Datadog continúa usando el sondeo de API para recopilar etiquetas (tags) personalizadas y otros metadatos para las métricas transmitidas.
+Si ya recibes métricas para un espacio de nombres de CloudWatch determinado a través del método de sondeo de API, Datadog lo detecta automáticamente y deja de sondear las métricas para ese espacio de nombres una vez que comienzas a transmitirlas. Deja la configuración en la página de integración de AWS sin cambios, ya que Datadog continúa usando el sondeo de API para recopilar etiquetas personalizadas y otros metadatos para las métricas transmitidas.
 
 #### Cambio de los flujos de métricas al sondeo de API
 
-Si más adelante decides que no deseas transmitir métricas para una cuenta y una región de AWS determinadas, o incluso solo para un espacio de nombres específico, Datadog comienza automáticamente a recopilar esas métricas mediante el sondeo de API nuevamente según los ajustes de configuración de la página de integración de AWS. Si deseas dejar de transmitir todas las métricas para una cuenta y una región de AWS, sigue las instrucciones de la [sección Deshabilitar la transmisión de métricas](#disable-metric-streaming) de este documento.
+Si más adelante decides que no deseas transmitir métricas para una cuenta y una región de AWS determinadas, o incluso solo para un espacio de nombres específico, Datadog comienza automáticamente a recopilar esas métricas mediante el sondeo de API nuevamente según los ajustes de configuración de la página de integración de AWS. Si deseas dejar de transmitir todas las métricas para una cuenta y una región de AWS, sigue las instrucciones de la sección [Deshabilitar la transmisión de métricas](#disable-metric-streaming) de este documento.
 
 ### Facturación
 
@@ -47,11 +44,13 @@ AWS factura en función del número de actualizaciones de métricas en CloudWatc
 
 Las métricas de EC2 o Lambda en la transmisión podrían aumentar la cantidad de hosts e invocaciones de Lambda facturables (si esos hosts y funciones aún no se monitorizan con la integración de AWS o el Datadog Agent en el caso de EC2).
 
-## Configuración
+**Nota**: Puedes crear filtros en CloudWatch para transmitir sólo las métricas especificadas. Para obtener más información, consulta la [Guía del usuario de Amazon CloudWatch][7].
+
+## Instalación
 
 ### Antes de empezar
 
-1. Lee atentamente la sección [Transmisión de métricas versus sondeo de API](#streaming-vs-polling) para comprender las diferencias antes de habilitar la transmisión de métricas.
+1. Lea atentamente la sección [Transmisión de métricas versus sondeo de la API](#streaming-vs-polling) para comprender las diferencias antes de activar la transmisión de métricas.
 
 2. Si aún no lo has hecho, conecta tu cuenta de AWS a Datadog. Para obtener más información, consulta las [Instrucciones de configuración de CloudFormation][3].
 
@@ -156,3 +155,4 @@ Para resolver cualquier problema que surja al configurar Metric Streams o los re
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account-Setup.html
 [5]: https://app.datadoghq.com/integrations/amazon-web-services
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
+[7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html

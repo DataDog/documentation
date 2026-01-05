@@ -14,10 +14,6 @@ further_reading:
 title: Configurer le tracing sur un pipeline Jenkins
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est actuellement pas disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Compatibilité
 
 Versions de Jenkins prises en charge :

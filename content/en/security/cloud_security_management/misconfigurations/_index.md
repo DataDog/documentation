@@ -19,7 +19,7 @@ View a high-level overview of your security posture on the [Overview page][1]. E
 
 Cloud Security Misconfigurations evaluates resources in increments between 15 minutes and 4 hours (depending on type). Datadog generates new misconfigurations as soon as a scan is completed, and stores a complete history of all misconfigurations for the past 15 months so they are available in case of an investigation or audit.
 
-{{< img src="security/cspm/misconfigurations_explorer_2.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
+{{< img src="security/cspm/misconfigurations_explorer_4.png" alt="Cloud Security Misconfigurations Findings page" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
@@ -27,7 +27,7 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed misconfigurations, a comprehensive breakdown of the number of resources with pass/fail misconfigurations, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_4.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="Cloud Security Misconfigurations compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 
@@ -43,9 +43,14 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 ## Review and remediate misconfigurations
 
-Investigate details using the [Misconfigurations Findings page][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
+Investigate details using the [Misconfigurations Findings page][10], where you can view detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
 
-You can also [create a Jira issue][15] and assign it to a team, use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying misconfiguration, and leverage [Workflow Automation][14] to create automated workflows (with or without human involvement).
+To remediate a misconfiguration, you can:
+- [Create a Jira issue][15] and assign it to a team
+- Use [Workflow Automation][14] to create automated remediation workflows (with or without human involvement)
+- For supported Terraform resources:
+  - Locate the file and line the misconfiguration is in and identify the code owners
+  - Generate a pull request in GitHub with code changes that fix the underlying misconfiguration
 
 ## Get started
 

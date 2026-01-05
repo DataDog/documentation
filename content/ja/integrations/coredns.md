@@ -12,7 +12,10 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: coredns.request_count
+      check:
+      - coredns.request_count
+      - coredns.request_count.count
+      - coredns.build_info
       metadata_path: metadata.csv
       prefix: coredns.
     process_signatures:

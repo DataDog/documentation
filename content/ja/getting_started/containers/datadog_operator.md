@@ -23,50 +23,54 @@ title: Datadog Operator の概要
 ## インストールとデプロイメント
 
 1. Helm で Datadog Operator をインストールします。
-  ```bash
-  helm repo add datadog https://helm.datadoghq.com
-  helm install my-datadog-operator datadog/datadog-operator
-  ```
-2. Create a Kubernetes secret with your API key:
-  ```bash
-  kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
-  ```
-  Replace `<DATADOG_API_KEY>` with your [Datadog API key][5].
+   ```bash
+   helm repo add datadog https://helm.datadoghq.com
+   helm install my-datadog-operator datadog/datadog-operator
+   ```
 
-  **Note**: add the application key for autoscaling using the external metrics server.
+2. API キーで Kubernetes Secret を作成する
+   ```bash
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
+   ```
+   `<DATADOG_API_KEY>` をお使いの [Datadog API キー][5] に置き換えます。
+
+   **注**: 外部メトリクス サーバーを使用してオートスケーリングを行う場合は、`--from-literal app-key=<DATADOG_APP_KEY>` を追加してアプリケーション キーを設定してください。
 
 3. `DatadogAgent` のデプロイメント構成の仕様を記述した `datadog-agent.yaml` ファイルを作成します。以下のサンプル構成では、メトリクス、ログ、APM を有効にしています。
-  ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      credentials:
-        apiSecret:
-          secretName: datadog-secret
-          keyName: api-key
-    features:
-      apm:
-        enabled: true
-      logCollection:
-        enabled: true
-  ```
-  For all configuration options, see the [Operator configuration spec][6].
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       site: datadoghq.com
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+     features:
+       apm:
+         enabled: true
+       logCollection:
+         enabled: true
+   ```
+   **注**: `site` には、使用している Datadog サイト (例: `datadoghq.eu`) を必ず設定してください。
+
+   For all configuration options, see the [Operator configuration spec][6].
 
 4. Datadog Agent をデプロイします。
-  ```bash
-  kubectl apply -f /path/to/your/datadog-agent.yaml
-  ```
+   ```bash
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
 
-### Running Agents in a single container
+### 単一コンテナでの Agent 実行
 
-<div class="alert alert-warning">Available in Operator v1.4.0 or later</div>
+<div class="alert alert-danger">Operator v1.4.0 以降で利用可能</div>
 
-By default, the Datadog Operator creates an Agent DaemonSet with pods running multiple Agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run Agents in a single container. In order to avoid elevating privileges for all Agents in the single container, this feature is only applicable when `system-probe` or `security-agent` is not required. For more details, see [Running as an unprivileged user][7] on the Agent Data Security page.
+デフォルトでは、Datadog Operator は複数の Agent コンテナを実行するポッドを持つ Agent DaemonSet を作成します。Datadog Operator v1.4.0 では、Agent を単一コンテナで実行できる設定が導入されました。単一コンテナ内のすべての Agent に特権を付与しないようにするため、この機能は `system-probe` または `security-agent` が不要な場合にのみ適用されます。詳細は Agent Data Security ページの [非特権ユーザーとしての実行][7] を参照してください。
 
-To enable this feature add `global.containerStrategy: single` to the `DatadogAgent` manifest:
+この機能を有効にするには、`DatadogAgent` マニフェストに `global.containerStrategy: single` を追加します:
 
 {{< highlight yaml "hl_lines=7" >}}
   apiVersion: datadoghq.com/v2alpha1
@@ -86,9 +90,9 @@ To enable this feature add `global.containerStrategy: single` to the `DatadogAge
       logCollection:
         enabled: true
 {{< /highlight >}}
-With the above configuration, Agent pods run as single containers with three Agent processes. The default for `global.containerStrategy` is `optimized` and runs each Agent process in a separate container.
+上記の設定では、Agent Pod は 3 つの Agent プロセスを含む単一コンテナとして実行されます。`global.containerStrategy` のデフォルトは `optimized` で、各 Agent プロセスを個別のコンテナで実行します。
 
-**Note**: Running multiple Agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Pods running multiple processes need their lifecycles to be managed by a process manager, which is not directly controllable by Kubernetes and potentially leads to inconsistencies or conflicts in the container lifecycle management.
+**注**: Kubernetes などのオーケストレーション環境では、単一コンテナで複数の Agent プロセスを実行することは推奨されません。複数プロセスを実行する Pod では、プロセス マネージャーによるライフサイクル管理が必要ですが、これは Kubernetes から直接制御できないため、コンテナのライフサイクル管理に不整合や競合が発生する可能性があります。
 
 ## 検証
 

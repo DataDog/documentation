@@ -41,7 +41,7 @@ short_description: Retool로 내부 도구를 빠르게 빌드할 수 있습니�
 supported_os:
 - linux
 - macos
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:

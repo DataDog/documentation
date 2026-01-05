@@ -5,6 +5,7 @@ data/service_checks/
 data/npm
 integrations_data
 .hugo_build.lock
+_vendor/
 
 # htmltest tmp files
 bin/htmltest
@@ -20,6 +21,12 @@ content/en/api/**/*.ts
 content/en/api/**/*.rs
 content/en/api/tsconfig.json
 
+# ignore full spec deref, generate during build instead
+data/api/v1/full_spec_deref.json
+data/api/v2/full_spec_deref.json
+static/resources/json/full_spec_v1.json
+static/resources/json/full_spec_v2.json
+
 # Ignoring all automated content
 temp
 
@@ -33,6 +40,11 @@ content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
+content/en/agent/supported_platforms/ansible.md
+content/en/agent/supported_platforms/chef.md
+content/en/agent/supported_platforms/heroku.md
+content/en/agent/supported_platforms/puppet.md
+content/en/agent/supported_platforms/saltstack.md
 content/en/agent/guide/ansible_standalone_role.md
 
 # Tracing
@@ -80,6 +92,11 @@ content/en/security/cloud_workload_security/backend.md
 content/en/security/threats/agent_expressions.md
 content/en/security/threats/backend.md
 content/en/security_platform/
+content/en/security/workload_protection/agent_expressions.md
+content/en/security/workload_protection/backend_linux.md
+content/en/security/workload_protection/backend_windows.md
+content/en/security/workload_protection/linux_expressions.md
+content/en/security/workload_protection/windows_expressions.md
 
 # security threat detection
 content/en/security/threats/backend_linux.md
@@ -127,6 +144,10 @@ content/en/code_analysis/static_analysis_rules/_index.md
 content/en/security/code_security/static_analysis/static_analysis_rules/*
 !content/en/security/code_security/static_analysis/static_analysis_rules/_index.md
 
+# IaC Kics Rules
+content/en/security/code_security/iac_security/iac_rules/*
+!content/en/security/code_security/iac_security/iac_rules/_index.md
+
 # Let's keep these so we don't accidentally re-add them to repo
 content/en/continuous_integration/static_analysis/github_actions.md
 content/en/continuous_integration/static_analysis/circleci_orbs.md
@@ -148,6 +169,7 @@ content/en/containers/guide/v2alpha1_migration.md
 content/en/serverless/libraries_integrations/plugin.md
 content/en/serverless/libraries_integrations/macro.md
 content/en/serverless/libraries_integrations/cli.md
+content/en/serverless/libraries_integrations/cli-cloud-run.md
 content/en/serverless/libraries_integrations/cdk.md
 content/en/serverless/libraries_integrations/extension.md
 
@@ -160,14 +182,6 @@ data/workflows/
 
 # semantic tag colors
 layouts/shortcodes/semantic-color.md
-
-# AWS resource collection permissions tables
-layouts/shortcodes/aws-resource-collection-cloud-cost-management.md
-layouts/shortcodes/aws-resource-collection-cloudcraft.md
-layouts/shortcodes/aws-resource-collection-cloud-security-monitoring.md
-layouts/shortcodes/aws-resource-collection-network-performance-monitoring.md
-layouts/shortcodes/aws-resource-collection-resource-catalog.md
-layouts/shortcodes/aws-resource-collection-upcoming-permissions.md
 
 # Runtime data
 pids
@@ -226,7 +240,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-.vscode
 
 # jetbrains
 .idea
@@ -283,6 +296,7 @@ local/bin/py/sh
 local/bin/py/js
 local/bin/js/
 local/bin/py/translations
+local/bin/py/blog_linker.py
 local/bin/py/add_notranslate_tag.py
 local/bin/py/placehold_translations.py
 local/bin/py/missing_metrics.py
@@ -294,6 +308,17 @@ local/bin/py/submit_github_status_check.py
 # CDOCS
 layouts/partials/markdoc-assets.html
 static/cdocs
+content/en/**/*.ast.json
+layouts/shortcodes/mdoc/en/**/*.ast.json
+*.tempAst.json
+.cdocs_temp
 
 # Cursor editor configuration
 .cursor/
+
+
+# Deprecated generated file for LLMs (keep so it's not merged back in)
+static/llms.txt
+
+# AI
+.claude/*local*

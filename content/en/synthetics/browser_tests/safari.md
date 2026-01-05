@@ -2,11 +2,8 @@
 title: Safari Browser Testing
 description: Use Synthetic Monitoring tests on your Safari Browser.
 private: true
+site_support_id: synthetics_safari
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Safari Browser Testing is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/safari-browser-testing/" >}}
   Safari Browser Testing is currently in Preview, but you can easily request access! Use this form to submit your request today. 

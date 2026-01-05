@@ -11,7 +11,14 @@ further_reading:
 
 ## Overview
 
-All stakeholder notifications for an incident are consolidated in the incident’s Notifications tab. You can manually create, save as draft, and send notifications directly from this page. Automated notifications sent by [Notification Rules][1] for the incident in question are also listed in this section.
+
+Effective incident response depends on notifying the right people at the right time. Datadog Incident Management provides two key ways to coordinate communication during an incident:
+
+- The **Notifications** tab centralizes stakeholder communications. From here, you can create and send manual updates, save drafts, and view all automated messages triggered by [Notification Rules][1].
+
+- The **Pages** tab helps you manage your on-call Pages. From this tab, you can page [Datadog On-Call][4] teams to prompt them to join the incident response. This tab also shows a history of all Pages sent, whether manually or through [Notification Rules][1], so that you can track which teams have been paged and when.
+
+These tools ensure that both stakeholders and technical responders are promptly and reliably informed throughout the incident lifecycle.
 
 ## Add a notification
 
@@ -25,13 +32,22 @@ To create a manual notification:
 1. Use the `{{incident.created}}` variable to customize your message timezone. This template variable will display the option to set your variable time zone.
 1. Send your notification or save it as a draft.
 
+## Trigger a Page from an incident
+
+To page a team or user using [Datadog On-Call][4]:
+1. Navigate to the **Pages** tab of an incident.
+1. Click **Page**.
+1. Select the team or user you want to alert.
+1. (Optional) Assign an incident role automatically to the person who acknowledges the Page.
+1. Click **Page**.
+
 ## View all notifications
 
 {{< img src="/service_management/incidents/notification/incident_notifications_sent.png" alt="Notification tab of an incident showing example list of sent messages" style="width:90%;" >}}
 
 The Notifications tab of an incident lists notifications as **Drafts** and **Sent**. Both lists display:
 - The (intended) recipients of a notification.
-- The contents of the notification’s message and any renotification messages that were sent.
+- The contents of the notification's message and any renotification messages that were sent.
 - When the notification was last updated.
 - The original author of the notification.
 
@@ -45,7 +61,7 @@ For more information on how to configure a new notification rule, see the [Incid
 
 ## Message templates
 
-Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. Template variables are supported in both the message’s title and body.
+Message templates are dynamic, reusable messages that can be used in [manual incident notifications](#add-a-notification), or automated [notification rules](#customize-notification-rules). Message templates leverage template variables, such as `{{incident.severity}}`, to dynamically inject the corresponding value from the incident that the notification is being sent for. Message templates have Markdown support so that incident notifications can include text formatting, tables, indented lists, and hyperlinks. Template variables are supported in both the message's subject and body.
 
 For more information on how to create a message template, see the [Incident Settings][3] documentation.
 
@@ -56,3 +72,4 @@ For more information on how to create a message template, see the [Incident Sett
 [1]: /service_management/incident_management/incident_settings/notification_rules
 [2]: /monitors/notify/variables/?tab=is_alert
 [3]: /service_management/incident_management/incident_settings/templates
+[4]: /service_management/on-call/

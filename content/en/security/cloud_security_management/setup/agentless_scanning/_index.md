@@ -9,10 +9,6 @@ further_reading:
     text: "Read more about Cloud Security Vulnerabilities"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning for Cloud Security is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
@@ -20,6 +16,8 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 ## How it works
 
 After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
+
+If you have [Cloud Security Evaluation Filters][15] configured, Agentless Scanning respects these filters and only scans resources that match the configured criteria.
 
 The following diagram illustrates how Agentless Scanning works:
 
@@ -36,8 +34,20 @@ The following diagram illustrates how Agentless Scanning works:
 
 **Notes**:
 - The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.
+- For AWS, scanner instances automatically scale based on workload. When there are no resources to scan, scanners scale to zero to minimize cloud provider costs.
 - The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
 - The scanner limits its use of the cloud provider API to prevent reaching any rate limit, and uses exponential backoff if needed.
+
+## On-demand scanning
+
+By default, Agentless Scanning automatically scans your resources every 12 hours. You can also trigger an immediate scan of a specific resource (host, container, Lambda function, or S3 bucket) using the On-Demand Scanning API.
+
+This is useful when you need to:
+- Verify a vulnerability has been patched
+- Get immediate results for newly deployed resources
+- Validate security posture before production deployment
+
+For more information, see the [On-Demand Scanning API documentation][14].
 
 ## What data is sent to Datadog
 The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private personal information is ever transmitted outside of your infrastructure.
@@ -75,13 +85,13 @@ The following diagram illustrates how Agentless scanning works with existing Age
 
 ## Cloud Storage scanning
 
-{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
-If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances.
+If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify sensitive data in your Amazon S3 buckets.
 
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
 Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security.
 
@@ -99,7 +109,7 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_security_management/setup/agentless_scanning#setup
-[2]: /agent/remote_config/?tab=configurationyamlfile
+[2]: /remote_configuration
 [3]: https://cyclonedx.org/
 [4]: /security/cloud_security_management/setup/agentless_scanning/enable#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
@@ -107,6 +117,8 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 [7]: mailto:success@datadoghq.com
 [8]: /security/sensitive_data_scanner
 [9]: /security/cloud_security_management
-[10]: /agent/remote_config
+[10]: /remote_configuration
 [11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration
+[14]: /api/latest/agentless-scanning/#create-aws-on-demand-task
+[15]: /security/cloud_security_management/guide/resource_evaluation_filters

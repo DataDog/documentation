@@ -47,7 +47,7 @@ Click on the **Customize** gear icon on the right hand side of the page to add a
 
 ### Facets and tags
 
-The **Synthetics Filters** panel on the left lists default facets you can use to search for your tests. 
+The **Synthetic Monitoring Filters** panel on the left lists default facets you can use to search for your tests. 
 
 By using [facets](#facets-and-tags), you can accomplish the following actions:
 
@@ -69,7 +69,7 @@ The default facets include the following:
 | `CI/CD Execution Rule` | The status of the test run: `Blocking`, `Non-blocking`, or `Skipped`. |
 | `Endpoint`     | The url or domain the test is targeting.                                      |
 
-<div class="alert alert-info"> Note: You might see facet values originating from tests you don't have access to. </div>
+<div class="alert alert-info">You might see facet values originating from tests you don't have access to.</div>
 
 The **Tags** panel below **Synthetic Filters** lists several default tags you can use to identify your tests. 
 
@@ -96,7 +96,7 @@ When you select and deselect facets, the search bar automatically reflects your 
 * **Exclude facets or text**: Click on an already-filled checkbox to deselect a facet value or prepend a term with `-` to exclude it from the search query. For example, `-state:paused`.
 * **Perform custom matches**: Use wildcards (`*`). For example, `valid*`.
 
-To search on a type of Synthetics test, select the test type under the **Type** facet.
+To search on a type of Synthetic Monitoring test, select the test type under the **Type** facet.
 
 {{< img src="synthetics/search/facet_search_2.mp4" alt="Search for tests using facets in the Tests page" video=true >}}
 
@@ -104,9 +104,9 @@ To search on a type of Synthetics test, select the test type under the **Type** 
 
 ### Bulk actions
 
-Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**. 
+Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1], then choose actions such as `Run Tests Now`, `Pause/Resume Scheduling`, `Download CSV`, `Edit Tags`, `Edit Envs`, `Edit Teams`, or `Delete`. 
 
-{{< img src="synthetics/search/edit_tags_2.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
+{{< img src="synthetics/search/edit_tags_3.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 
 ### Test actions
 
@@ -120,7 +120,7 @@ Creating, adding, and deleting Synthetic tests, global variables, and private lo
 
 {{< img src="synthetics/search/synthetic_events_2.png" alt="Synthetic test alerts in the Events Explorer" style="width:100%" >}}
 
-Find all Synthetics-related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
+Find all Synthetic Monitoring related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
 
 ## Further Reading
 

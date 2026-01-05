@@ -20,9 +20,9 @@ assets:
     source_type_id: 46
     source_type_name: IIS
   monitors:
-    '[IIS] Anomalous amount of requests for site: {{site.name}}': assets/monitors/req.json
-    '[IIS] Increase of locked error per second for site: {{site.name}}': assets/monitors/lock.json
-    '[IIS] Increase of not found error per second for site: {{site.name}}': assets/monitors/err.json
+    404 errors is high: assets/monitors/err.json
+    Locked errors is high: assets/monitors/lock.json
+    Request number is high: assets/monitors/req.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -36,6 +36,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - 로그 수집
+- 윈도우즈(Windows)
 custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/iis/README.md
@@ -44,22 +45,23 @@ draft: false
 git_integration_title: iis
 integration_id: iis
 integration_title: IIS
-integration_version: 3.1.1
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: iis
 public_title: IIS
 short_description: 총 메트릭 또는 사이트별 메트릭을 추적하고 각 사이트의 업/다운 상태를 모니터링하기.
 supported_os:
-- windows
+- 윈도우즈(Windows)
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
+  - Category::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup
-  description: 총 메트릭 또는 사이트별 메트릭을 추적하고 각 사이트의 업/다움 상태를 모니터링하기.
+  description: 총 메트릭 또는 사이트별 메트릭을 추적하고 각 사이트의 업/다운 상태를 모니터링하기.
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -95,7 +97,7 @@ IIS 점검은 에이전트 패키지에 포함되어 있습니다. IIS 메트릭
 
 ##### 로그 수집
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
+1. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
    ```yaml
    logs_enabled: true
@@ -113,7 +115,7 @@ IIS 점검은 에이전트 패키지에 포함되어 있습니다. IIS 메트릭
 
    `path`와 `service` 파라미터 값을 내 환경에 맞게 변경하세요. 사용할 수 있는 구성 옵션 전체를 보려면  [샘플 iis.d/conf.yaml][5]을 참고하세요.
 
-3. [에이전트를 재시작하세요][6].
+3. [에이전트를 재시작합니다][6].
 
 **참고**: 수집하고자하는 로그 파일을 테일링할 수 있도록`datadog-agent` 사용자에게 읽기 및 실행 액세스를 부여해야 합니다. IIS에서 새 하위 폴더를 생성할 때(새 사이트가 생성되었을 떄) 상위 폴더 권한이 자동으로 부여되지 않습니다. 자세한 정보는 [로그 파일 테일링 권한 문제][8]를 참고하세요.
 

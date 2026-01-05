@@ -1,5 +1,6 @@
 ---
 title: State Variables
+description: Encapsulate logic within apps using state variables to store and manipulate data across different app components.
 aliases:
 - /app_builder/variables
 - /service_management/app_builder/variables
@@ -13,15 +14,15 @@ further_reading:
   text: "JavaScript Expressions"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 If you want to encapsulate logic within your app, you can use state variables.
 
 ## Create a state variable
 
-To add a state variable to your app, perform the following steps:
+To add a state variable with Bits AI:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt for a variable, or try the prompt `How can you help me with variables?`.
+
+To add a state variable manually:
 
 1. In your app, click the Data (**{&nbsp;}**) icon to open the Data tab.
 1. Click the plus (**+**), then select **Variable**.
@@ -72,4 +73,4 @@ To create an app that uses a button to change a callout value component's style 
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][1].
 
-[1]: https://datadoghq.slack.com/
+[1]: https://chat.datadoghq.com/

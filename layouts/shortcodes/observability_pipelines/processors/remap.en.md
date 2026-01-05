@@ -1,5 +1,7 @@
 The remap processor can add, drop, or rename fields within your individual log data. Use this processor to enrich your logs with additional context, remove low-value fields to reduce volume, and standardize naming across important attributes. Select **add field**, **drop field**, or **rename field** in the dropdown menu to get started.
 
+See the [Remap Reserved Attributes][10220] guide on how to use the Edit Fields processor to remap attributes.
+
 ##### Add field
 Use **add field** to append a new key-value field to your log.
 
@@ -47,3 +49,5 @@ To set up the rename field processor:
 
 - Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
 - Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+
+[10220]: /observability_pipelines/guide/remap_reserved_attributes

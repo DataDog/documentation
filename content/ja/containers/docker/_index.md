@@ -32,13 +32,13 @@ title: Docker、containerd、Podman に対応した Docker Agent
 
 ## 概要
 
-Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバージョンです。Docker Agent は、Docker、containerd、Podman のランタイムをサポートしています。公式の [Docker イメージ][2]は Docker Hub、GCR 、および ECR-Public からご利用いただけます。
+The Datadog Docker Agent is the containerized version of the host [Agent][1]. The Docker Agent supports Docker, containerd, and Podman runtimes. The official [Docker image][2] is available on Docker Hub, Google Container Registry (GCR), and ECR-Public.
 
-<div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
+<div class="alert alert-danger">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
-| ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
+| ECR-Public                                                           | Google Container Registry                                       | Docker Hub                                             |
 |----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
 | [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          |
 | [Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` |
@@ -149,7 +149,7 @@ Agent の [メインコンフィギュレーションファイル][13]は `datad
 | `DD_DD_URL`          | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                                                                                                                                                      |
 | `DD_URL` (6.36+/7.36+)            | `DD_DD_URL` のエイリアス。すでに `DD_DD_URL` が設定されている場合は無視されます。                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | Agent はデフォルトですべてのチェックを同時に実行します (デフォルト値は `4` ランナーです)。チェックを順次実行する場合は、値を `1` に設定してください。ただし、多数のチェック (または時間のかかるチェック) を実行する必要がある場合、`collector-queue` コンポーネントが遅延して、ヘルスチェックに失敗する可能性があります。ランナーの数を増やすと、チェックを並行して実行できます。 |
-| `DD_APM_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about additional trace collection environment variables, see [Tracing Docker Applications][14].   |
+| `DD_APM_ENABLED`             | トレース収集を有効にします。デフォルトは `true` です。トレース収集の追加環境変数について詳しくは、[Docker アプリケーションのトレース][14]をご覧ください。   |
 | `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` | 環境によっては、ホストからの最初のログに正しいタグが含まれないことがあります。新しいホストのタグがログに含まれていない場合は、この環境変数を含めて `"10m"` に設定してください。|
 
 ### プロキシ設定
@@ -172,7 +172,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 |------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `DD_APM_NON_LOCAL_TRAFFIC`                     | [他のコンテナからのトレース][16]時に非ローカルなトラフィックを許可します。                                                                                             |
 | `DD_LOGS_ENABLED`                              | ログ Agent による[ログの収集][17]を有効にします。                                                                                                              |
-| `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. |
+| `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Process Agent で[ライブプロセス収集][18]を有効にします。Docker ソケットが利用可能な場合、[Live Container View][19] は既にデフォルトで有効になっています。 |
 
 ### DogStatsD (カスタムメトリクス)
 
@@ -280,9 +280,9 @@ Agent が Datadog に接続できない場合は、`CRITICAL` を返します。
 **datadog.agent.check_status**: <br>
 Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-## Uninstall Single Step APM Instrumentation
+## Single Step APM Instrumentation のアンインストール
 
-If you installed the Datadog Docker Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][33] to uninstall APM Instrumentation.
+Single Step APM Instrumentation とともに Datadog Docker Agent をインストールしていて、Agent をアンインストールする場合は、APM Instrumentation をアンインストールするために[追加のコマンド][33]を実行する必要があります。
 
 ## その他の参考資料
 

@@ -18,6 +18,7 @@ aliases:
     {{< nextlink href="agent/faq/kubernetes-state-cluster-check" >}}How do I run the kubernetes_state check as a cluster check?{{< /nextlink >}}
     {{< nextlink href="agent/faq/rpm-gpg-key-rotation-agent-6" >}}RPM GPG Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/faq/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
+    {{< nextlink href="agent/faq/agent-5-sectigo-root-ca-rotation" >}}Agent v5 - Certificate Authority Update (2025){{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-v6-changes" >}}Datadog Agent v6 Changes{{< /nextlink >}}
     {{< nextlink href="agent/faq/ec2_imdsv2_transition_payload_enabled" >}}IMDSv2 Enablement by Default{{< /nextlink >}}
     {{< nextlink href="agent/faq/ec2-use-win-prefix-detection" >}}Windows EC2 hostnames starting with EC2AMAZ-{{< /nextlink >}}
@@ -27,4 +28,6 @@ aliases:
     {{< nextlink href="agent/faq/docker-hub" >}}Docker Hub{{< /nextlink >}}
     {{< nextlink href="agent/faq/proxy_example_haproxy" >}}Send traffix to Datadog using HAProxy{{< /nextlink >}}
     {{< nextlink href="agent/faq/proxy_example_nginx" >}}Send traffix to Datadog using NGINX{{< /nextlink >}}
+    {{< nextlink href="agent/faq/fips_proxy" >}}Agent FIPS proxy{{< /nextlink >}}
+
 {{< /whatsnext >}}

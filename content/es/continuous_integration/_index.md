@@ -42,14 +42,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-detection-as-code/
   tag: Blog
   text: Cómo utilizamos Datadog para la detección como código
+- link: https://www.datadoghq.com/blog/cache-purge-ci-cd/
+  tag: Blog
+  text: Patrones para una purga de caché segura y eficaz en pipelines de Continuous
+    Integration Continuous Delivery
 title: Continuous Integration Visibility
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}) en este momento.</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">Esta página trata sobre traer tus métricas y datos de Continuous Integration (CI) a dashboards de Datadog. Si deseas ejecutar tests de Continuous Testing en tus pipelines de CI, consulta la sección <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing y CI/CD</a>.</div>
+<div class="alert alert-info">Esta página trata sobre traer tus métricas y datos de integración continua (CI) en dashboards de Datadog. Si deseas ejecutar tests de Continuous Testing en tus pipelines de CI, consulta la sección <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing y CI/CD</a>.</div>
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?etiquetas (tags).topics-0=CI">}}
   Únete a la sesión de Introducción a CI Visibility para comprender cómo Datadog CI Visibility mejora la eficiencia de los pipelines de CI y cómo configurar los productos de Testing Visibility y Pipeline Visibility. 

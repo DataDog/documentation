@@ -35,7 +35,7 @@ author:
 categories:
 - キャッシュ
 - data stores
-- マーケットプレイス
+- marketplace
 - sap
 custom_kind: インテグレーション
 dependencies: []
@@ -107,7 +107,7 @@ MaxDB インテグレーションは MaxDB インスタンスのデータ、ロ�
 4. MaxDB ロック使用率
 5. MaxDB ログ領域使用量
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 

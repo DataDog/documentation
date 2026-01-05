@@ -11,10 +11,6 @@ further_reading:
 title: Configurer le tracing sur les pipelines Codefresh
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">La solution CI Visibility n'est pas encore disponible pour le site que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Présentation
 
 [Codefresh][1] est une plateforme dʼintégration et de livraison en continu conçue pour Kubernetes. Elle propose des fonctions d'automatisation qui rationalisent la création, le testing et le déploiement de vos applications. 

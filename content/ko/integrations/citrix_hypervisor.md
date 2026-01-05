@@ -122,7 +122,7 @@ _에이전트 버전 > 6.0에서 사용 가능_
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "citrix_hypervisor" >}}
+{{< get-metrics-from-git "citrix-hypervisor" >}}
 
 
 ### 이벤트
@@ -130,7 +130,7 @@ _에이전트 버전 > 6.0에서 사용 가능_
 Citrix Hypervisor 통합은 이벤트를 포함하지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "citrix_hypervisor" >}}
+{{< get-service-checks-from-git "citrix-hypervisor" >}}
 
 
 ## 트러블슈팅

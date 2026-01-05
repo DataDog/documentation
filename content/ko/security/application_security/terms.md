@@ -16,10 +16,6 @@ further_reading:
 title: 조건 및 개념
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Application Security는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
-{{< /site-region >}}
-
 Datadog Application Security는 위협을 모니터링하고 코드 수준 취약점을 악용하려는 애플리케이션 수준 공격으로부터 보호합니다. 런타임 코드 실행 컨텍스트, 트레이스 및 오류 데이터, 사용자 속성을 활용합니다.
 
 ## 일반 애플리케이션 보안 용어
@@ -149,7 +145,7 @@ Object-Graph Navigation Language Injection (OGNLi)
 [10]: /ko/security/detection_rules/
 [11]: https://app.datadoghq.com/security/appsec/exclusions
 [12]: /ko/security/application_security/threats/inapp_waf_rules
-[13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
+[13]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&view=signal
 [14]: /ko/security/application_security/threats/add-user-info/
 [15]: /ko/security/application_security/threats/trace_qualification/
 [16]: /ko/security/application_security/threats/threat-intelligence/

@@ -1,6 +1,6 @@
 ---
-title: Automatic Multi-line Detection and Aggregation (Legacy)
-description: Use the Datadog Agent to detect and aggregate multi-line logs automatically 
+title: (Legacy) Automatic Multi-line Detection and Aggregation
+description: (Legacy) Use the Datadog Agent to detect and aggregate multi-line logs automatically
 further_reading:
 - link: "/logs/guide/getting-started-lwl/"
   tag: "Documentation"
@@ -27,8 +27,7 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-warning">This document applies to Agent versions earlier than <strong>v7.65.0</strong>, or when the legacy auto multi-line detection is explicitly enabled. For more recent Agent versions, see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a>.</div>
-
+<div class="alert alert-danger">This document applies to Agent versions earlier than <strong>v7.65.0</strong>, or when the legacy auto multi-line detection is explicitly enabled. For newer Agent versions, please see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a>.</div>
 
 ## Global automatic multi-line aggregation
 With Agent 7.37+, you can enable `auto_multi_line_detection` to automatically detect [common multi-line patterns][1] across **all** configured log integrations.
@@ -163,7 +162,9 @@ logs_config:
 ### Custom threshold
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
 
-If your multi-line logs aren't getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][3].
+If your multi-line logs aren't getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. 
+
+Restart the Datadog Agent to apply the new threshold value for newly ingested logs. To find the current threshold value, run the [Agent `status` command][3].
 
 ```yaml
 logs_config:
@@ -190,9 +191,9 @@ In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULT
 ### Custom threshold
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
 
-If your multi-line logs are not getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. 
+If your multi-line logs are not getting aggregated as expected, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter.
 
-Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. 
+Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value.
 
 To find the current threshold value, run the [Agent `status` command][4].
 
@@ -260,7 +261,7 @@ datadog:
 {{< /tabs >}}
 
 ## Detection process
-Automatic multi-line detection detects logs that begin and comply with the following date/time formats: 
+Automatic multi-line detection detects logs that begin and comply with the following date/time formats:
 - ANSIC
 - RFC822
 - RFC822Z

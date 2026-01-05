@@ -25,6 +25,10 @@ Depending on the [encapsulation mode][2] and the step objective, leverage browse
 
 ## Open mode
 
+<div class="alert alert-info">
+The following options are available to test a Shadow DOM in open mode. However, Datadog supports testing open mode by recording the steps as if the elements are not in a Shadow DOM. You can use the methods described in <a href="/getting_started/synthetics/browser_test/#create-recording">create a recording</a>, or <a href="/synthetics/browser_tests/?tab=requestoptions#record-your-steps"> record your steps.</a>
+</div>
+
 {{< img src="synthetics/guide/browser-tests-using-shadow-dom/open-shadow-dom.png" alt="Open Shadow DOM" style="width:50%;" >}}
 
 In `open` mode, normal assertions are unavailable. You can use JavaScript assertions to interact with and validate elements rendered in a shadow DOM with the `Element.shadowRoot` property. 
@@ -116,4 +120,5 @@ You can use the `Press Key` action to select the appropriate options. For exampl
 
 [1]: https://developers.google.com/web/fundamentals/web-components/shadowdom
 [2]: https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM#basic_usage
-[3]: https://docs.datadoghq.com/synthetics/browser_tests/actions#type-text
+[3]: /synthetics/browser_tests/test_steps#type-text
+

@@ -38,7 +38,7 @@ draft: false
 git_integration_title: spark
 integration_id: spark
 integration_title: Spark
-integration_version: 6.2.0
+integration_version: 6.4.0
 is_public: true
 manifest_version: 2.0.0
 name: spark
@@ -76,7 +76,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Spark および Databricks のジョブやクラスターを監視、トラブルシューティング、コスト最適化するのに役立ちます。<br/><br/>
 このページでは、Spark のメトリクスおよびログの取り込み方法のみを説明します。
 </div>
@@ -197,9 +197,9 @@ Spark チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-### AWS EMR 上の Spark
+### Amazon EMR 上の Spark
 
-AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールします。
+Amazon EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールします。
 
 Agent v5 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
 

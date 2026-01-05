@@ -1,6 +1,6 @@
 ---
 title: Enable RUM on Your WooCommerce Store
-
+description: "Set up RUM monitoring on WooCommerce stores to track customer behavior, optimize performance, and improve e-commerce conversion rates."
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
   tag: 'Documentation'
@@ -56,6 +56,6 @@ making data-driven decisions to improve your store
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/#choose-the-right-installation-method/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: /real_user_monitoring/session_replay/
 [3]: /real_user_monitoring/platform/generate_metrics/

@@ -1,21 +1,21 @@
 ---
 aliases:
 - /ko/monitors/manage_monitor/
-description: 모니터가 알림을 트리거하면 팀에 알림을 전송하세요.
+description: 모니터링이 알림을 트리거하면 팀에 알림을 전송하세요.
 further_reading:
 - link: /monitors/
   tag: 설명서
-  text: 모니터 생성
+  text: 모니터링 생성
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터링 알림
 - link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
   tag: 블로그
-  text: 모니터 태그 지정 모범 사례
+  text: 모니터링 태그 지정 모범 사례
 title: 모니터 관리
 ---
 
-[모니터 관리][1]를 사용하여 모니터를 검색, 삭제, 음소거 및 확인하고 모니터 태그를 대량으로 편집합니다. 또한,  검색 결과에서 개별 모니터를 복제하거나 편집할 수 있습니다.
+[Manage Monitors][1]를 사용하여 모니터를 검색, 삭제, 음소거 및 해결하고 모니터 태그를 대량으로 편집합니다. 또한, 검색 결과에서 개별 모니터를 복제하거나 편집할 수 있습니다.
 
 {{< img src="monitors/manage_monitor/monitor_page.jpg" alt="manage monitor page" >}}
 
@@ -25,24 +25,24 @@ title: 모니터 관리
 
 ## 관리하기
 
-검색 후, 하나 이상의 모니터를 선택하여 각 결과 옆에 있는 확인란을 사용하여 업데이트합니다. *상태* 열 머리글 옆에 있는 상단의 확인란을 사용하여 모든 결과를 선택합니다. 검색 결과 위 오른 쪽에 있는 버튼을 사용하여 모니터를 대량으로 수정합니다.
+검색 후, 하나 이상의 모니터를 선택하여 각 결과 옆에 있는 확인란을 사용하여 업데이트합니다. *STATUS* 열 머리글 옆에 있는 상단의 확인란을 사용하여 모든 결과를 선택합니다. 검색 결과 위 오른 쪽에 있는 버튼을 사용하여 모니터를 대량으로 수정합니다.
 
 | 옵션     | 설명                                                                      |
 |------------|----------------------------------------------------------------------------------|
-| 음소거       | `1h`, `4h`, `12h`, `1d`, `1w` 동안이나  `Forever` 선택한 모니터를 [음소거][3]합니다. |
+| 음소거       | 사전 정의된 기간(1시간, 하루, 영구 등) 동안 선택한 모니터를 [음소거][3]하거나 커스텀 타임프레임을 지정합니다.|
 | 음소거 해제     | 선택한 모니터가 음소거되면 음소거를 해제합니다.                                 |
 | 확인    | 선택한 모니터에 대한 알림을 [확인][4]합니다.                                |
 | 삭제     | 선택한 모니터를 삭제합니다.                                                    |
 | 태그 편집  | 선택한 모니터의 모니터 태그를 편집합니다.                                 |
 | 팀 편집 | 선택한 모니터의 [팀][5]을 편집합니다.                                  |
 
-개별 모니터를 편집하려면 모니터 위를 마우스로 가리키고 맨 오른쪽에 있는 편집, 복제, 음소거, 삭제 버튼을 사용합니다. 모니터에 대한 자세한 정보를 보려면 모니터 이름을 클릭해 상태 페이지를 확인합니다.
+개별 모니터를 편집하려면 모니터 위를 마우스로 가리키고 맨 오른쪽에 있는 Edit, Clone, Mute, Delete 버튼을 사용합니다. 모니터에 대한 자세한 정보를 보려면 모니터 이름을 클릭해 상태 페이지를 확인합니다.
 
 **참고**: 모바일 장치 홈 화면에서 저장된 모니터 보기를 확인할 수 있습니다. 또는 [Apple 앱 스토어][7] 또는 [Google Play 스토어][8]에서 [Datadog 모바일 앱[6]을 다운로드하여 모니터를 보고 음소거할 수 있습니다.
 
 ### 트리거된 모니터
 
-[트리거된 모니터][9] 페이지를 사용해 대량으로 트리거된 모니터를 [음소거][3]하거나 [확인][4]할 수 있습니다. 이 페이지는 트리거된 상태(알림, 경고 또는 데이터 없음)의 모니터만 표시합니다.
+[Triggered Monitors][9] 페이지를 사용해 대량으로 트리거된 모니터를 [음소거하거나][3] [확인][4]할 수 있습니다. 이 페이지는 트리거된 상태 (Alert, Warn, 또는 No Data)의 모니터만 표시합니다.
 
 #### 그룹화된 결과
 
@@ -68,10 +68,10 @@ title: 모니터 관리
 
 [1]: https://app.datadoghq.com/monitors/manage
 [2]: /ko/monitors/manage/search/
-[3]: /ko/monitors/manage/status/#mute
-[4]: /ko/monitors/manage/status/#resolve
+[3]: /ko/monitors/status/#mute
+[4]: /ko/monitors/status/#resolve
 [5]: /ko/account_management/teams/
-[6]: /ko/service_management/mobile/#monitors
+[6]: /ko/mobile/#monitors
 [7]: https://apps.apple.com/app/datadog/id1391380318
 [8]: https://play.google.com/store/apps/details?id=com.datadog.app
 [9]: https://app.datadoghq.com/monitors/triggered

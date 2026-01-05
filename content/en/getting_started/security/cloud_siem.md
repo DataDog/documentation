@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Cloud SIEM
+description: Learn to set up Datadog Cloud SIEM for real-time threat detection. Configure log ingestion, enable detection rules, and explore security signals for comprehensive monitoring.
 aliases:
     - /cloud-siem/getting_started/
     - /security_monitoring/getting_started/
@@ -107,8 +108,12 @@ After the index is moved to the first index position, review the settings and st
 
 ## Phase 4: Customization
 
-1. Set up [suppression rules][23] to reduce noise. 
+1. Set up [suppression rules][23] to reduce noise.
 2. Create [custom detection rules][24]. Review [Best Practices for Creating Detection Rules][25].
+
+## Disable Cloud SIEM
+
+Contact [support][26] to disable Cloud SIEM.
 
 ## Further Reading
 
@@ -122,20 +127,21 @@ After the index is moved to the first index position, review the settings and st
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
 [8]: https://app.datadoghq.com/security/landing
-[9]: https://app.datadoghq.com/security/content-packs
+[9]: https://app.datadoghq.com/security/siem/content-packs
 [10]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
 [12]: /security/default_rules/#cat-cloud-siem-log-detection
 [13]: /security/detection_rules/
-[14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[15]: /security/cloud_siem/investigate_security_signals
+[14]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
+[15]: /security/cloud_siem/triage_and_investigate/investigate_security_signals
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
 [17]: /security/notifications/rules/
 [18]: https://app.datadoghq.com/security/configuration/reports
-[19]: https://app.datadoghq.com/security/investigator/
-[20]: /security/cloud_siem/investigator
+[19]: https://app.datadoghq.com/security/siem/investigator/
+[20]: /security/cloud_siem/triage_and_investigate/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /dashboards/#overview
-[23]: /security/cloud_siem/detection_rules/?tab=threshold#advanced-options
-[24]: /security/cloud_siem/detection_rules/
+[23]: /security/suppressions/
+[24]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/
 [25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[26]: /help/

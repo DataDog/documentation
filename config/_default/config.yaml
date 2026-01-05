@@ -3,9 +3,15 @@ metadataformat: "yaml"
 canonifyURLs: true
 pygmentsuseclasses: true
 pygmentsCodeFences: true
+enableRobotsTXT: true
 
 # don't publish cdocs source files
-ignoreFiles: ["\\.mdoc\\.md$"]
+ignoreFiles:
+  - "\\.mdoc\\.md$"
+  - "^integrations_data/"
+  - "^hugpython/"
+  - "^examples/"
+  - "^local/"
 
 publishDir: "./public"
 
@@ -44,7 +50,7 @@ markup:
     guessSyntax: true
 
 module:
-  imports:  
+  imports:
    - path: github.com/DataDog/websites-modules
      disabled: false
      mounts:
@@ -93,16 +99,21 @@ module:
      - source: i18n
        target: i18n
 
-   - path: github.com/DataDog/websites-sources
-     disabled: false
-     mounts:
-     - source: content/en/integrations
-       target: content/integrations
-       lang: en
-     - source: data
-       target: data
-     - source: assets
-       target: assets
+  #  - path: github.com/DataDog/websites-sources
+  #    disabled: true
+  #    mounts:
+  #    - source: content/en/integrations
+  #      target: content/integrations
+  #      lang: en
+  #    - source: content/en/security/code_security/iac_security/iac_rules
+  #      target: content/security/code_security/iac_security/iac_rules
+  #      lang: en
+  #    - source: data
+  #      target: data
+  #    - source: assets
+  #      target: assets
+  #    - source: layouts/shortcodes
+  #      target: layouts/shortcodes
 
   mounts:
     # default mounts
@@ -140,20 +151,81 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    - source: _vendor/content/en
+      target: content
+      lang: en
+    - source: _vendor/content/fr
+      target: content
+      lang: fr
+    - source: _vendor/content/ja
+      target: content
+      lang: ja
+    - source: _vendor/content/ko
+      target: content
+      lang: ko
+    - source: _vendor/content/es
+      target: content
+      lang: es
+    - source: _vendor/data
+      target: data
+    - source: _vendor/layouts
+      target: layouts
+    - source: _vendor/assets
+      target: assets
 
 security:
   funcs:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
       - ^(HUGO_|CI_|IA_SUBDOMAIN)
+      # allows local translation builds (used by include-markdown shortcode)
+      - LOCAL_TRANSLATION_BUILD
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
+deployment:
+    order:
+      - "^.+\\.(woff2|woff|ttf|css|js|jpg|jpeg|png|avif|gif|mp4|vtt)$"
+    matchers:
+      # temporarily lets nocache this sh file
+      - pattern: "^resources/sh/rpm_check.sh$"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+      # dont cache rum/logs config
+      - pattern: "^static/dd-browser-logs-rum.js$"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+        gzip: true
+      - pattern: "^.+\\.(js|css|svg)$"
+        cacheControl: "max-age=31536000, no-transform, public"
+        gzip: true
+      - pattern: "^.+\\.(eot|ttf|woff|woff2|ico)$"
+        cacheControl: "max-age=31536000, no-transform, public"
+        gzip: false
+      - pattern: "^.+\\.(png|jpg|jpeg|gif|mp4|zip|pdf|txt|csv)$"
+        cacheControl: "max-age=31536000, no-transform, public"
+        gzip: false
+      - pattern: "^.+\\.html$"
+        gzip: true
+        contentType: "text/html; charset=utf-8"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+      - pattern: "^.+\\.xml$"
+        gzip: true
+        contentType: "text/xml; charset=utf-8"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+      - pattern: "^.+\\.json$"
+        gzip: true
+        contentType: "application/json; charset=utf-8"
+        cacheControl: "public, must-revalidate, proxy-revalidate, max-age=0"
+
 outputFormats:
   Search:
     baseName: "search"
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
+  Partners:
+    baseName: "partners"
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
@@ -163,7 +235,7 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
 
-timeout: "90s"
+timeout: 300s
 
 minify:
   disableSVG: true

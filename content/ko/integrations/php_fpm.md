@@ -207,7 +207,7 @@ PHP-FPM 설치가 유닉스 소켓을 사용하는 경우 `status_url`, `ping_ur
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "php_fpm" >}}
+{{< get-metrics-from-git "php-fpm" >}}
 
 
 ### 이벤트
@@ -215,7 +215,7 @@ PHP-FPM 설치가 유닉스 소켓을 사용하는 경우 `status_url`, `ping_ur
 PHP-FPM 점검에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
-{{< get-service-checks-from-git "php_fpm" >}}
+{{< get-service-checks-from-git "php-fpm" >}}
 
 
 ## 트러블슈팅

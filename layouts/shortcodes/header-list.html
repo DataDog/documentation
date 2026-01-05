@@ -1,0 +1,14 @@
+<div class="whatsnext">
+    {{- if .Get "desc" -}}
+        <p>{{- .Get "desc" -}}</p>
+    {{ else if .Get "header" }}
+        {{- $header := .Get "header" -}}
+        <h2 id="{{- anchorize $header -}}">{{- $header -}}</h2>
+    {{else}}
+        <p>{{ i18n "additional_sentence" }}:</p>
+    {{ end }}
+    <ul class="list-group">
+        {{.Inner}}
+    </ul>
+</div>
+<br>

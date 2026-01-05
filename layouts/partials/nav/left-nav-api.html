@@ -11,7 +11,7 @@
 {{ with index .Site.Menus $apiMenu }}
   {{ $dot.Scratch.Set "menu" . }}
 {{ else }}
-  {{ $dot.Scratch.Set "menu" (index .Sites.First.Menus $apiMenu) }}
+  {{ $dot.Scratch.Set "menu" (index .Sites.Default.Menus $apiMenu) }}
 {{ end }}
 {{ $menu := .Scratch.Get "menu" }}
 
@@ -29,7 +29,7 @@
     for use in providing english names for anchoring the nav-links (.nav-link)
 */}}
 {{ if ne $currentPage.Lang "en" }}
-{{$engMenu := (index .Sites.First.Menus $apiMenu) }}
+{{$engMenu := (index .Sites.Default.Menus $apiMenu) }}
 {{ range $engMenu }}
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/") }}
     {{ range .Children }}
@@ -41,12 +41,25 @@
 
 {{$engMenuChildren := $dot.Scratch.Get "engMenuChildren" | default dict}}
 
+{{ $path := (printf "%s/" $.Site.Params.branch) }}
+
+{{/* account for branch name in preview site for data-path */}}
+{{ if eq $.Site.Params.environment "preview"}}
+    {{ $.Scratch.Set "branch_path" $path }}
+{{ else }}
+    {{ $.Scratch.Set "branch_path" "" }}
+{{ end }}
+
+{{ $branchPath := trim ($.Scratch.Get "branch_path") "/" }}
+{{ $url_without_anchor := "" }}
+
 <ul class="list-unstyled">
 {{ range $menu }}
     <!-- check if on /api/ top level section page, don't generate sub anchors if true -->
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/" ) }}
         <li class="{{ if or ($currentPage.IsMenuCurrent $apiMenu .) ($currentPage.HasMenuCurrent $apiMenu .) (eq $currentEnURL .URL) }}active{{ end }}">
-            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}">
+            {{$url_without_anchor = ((index (split .URL "#") 0) | relLangURL)}}
+            <a href="{{ (strings.TrimLeft "/" .URL) | absLangURL }}" data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
                 <span>{{ .Name }}</span>
             </a>
             <ul class="nav">
@@ -62,7 +75,7 @@
                         {{ end }}
 
                         {{$engName := $dot.Scratch.Get "name"}}
-                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
+                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-path='{{ trim (print $branchPath $url_without_anchor) "/" }}'>
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>

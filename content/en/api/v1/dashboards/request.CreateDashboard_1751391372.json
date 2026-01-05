@@ -1,0 +1,35 @@
+{
+  "description": null,
+  "layout_type": "ordered",
+  "notify_list": [],
+  "reflow_type": "auto",
+  "restricted_roles": [],
+  "template_variables": [
+    {
+      "available_values": [
+        "service",
+        "datacenter",
+        "env"
+      ],
+      "defaults": [
+        "service",
+        "datacenter"
+      ],
+      "name": "group_by_var",
+      "type": "group"
+    }
+  ],
+  "title": "",
+  "widgets": [
+    {
+      "definition": {
+        "requests": {
+          "fill": {
+            "q": "avg:system.cpu.user{*}"
+          }
+        },
+        "type": "hostmap"
+      }
+    }
+  ]
+}

@@ -137,6 +137,8 @@ Define variables for your HTTP API tests with JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
+<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -144,6 +146,8 @@ Define variables for your HTTP API tests with JavaScript:
 ### Define assertions
 
 Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+
+<div class="alert alert-info">The assertions header, body, and JavaScript sections are only for defining assertions. They cannot be used to make additional HTTP requests.</div>
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -237,7 +241,10 @@ The most common errors include the following:
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
 `MALFORMED_RESPONSE`
-: The remote server responded with a payload that does not comply with HTTP specifications.
+: The remote server responded with a payload that does not comply with HTTP specifications. This error can happen when remote servers differ in their HTTP support. To prevent issues, run tests with a consistent HTTP version: either HTTP/2 (if available) or HTTP/1.1.
+
+`INCORRECT_ASSERTION`
+: The expected value of the assertion does not match the actual value. For example, when asserting on an HTTP response status code, if you expect `200` but the response returns `400`, the INCORRECT_ASSERTION error is thrown.
 
 ## Permissions
 

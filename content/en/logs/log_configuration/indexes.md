@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
   text: "Logging without Limits*"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#optimizing-log-usage-to-manage-volume-and-cost"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 Log Indexes provide fine-grained control over your Log Management budget by allowing you to segment data into value groups for differing retention, quotas, usage monitoring, and billing. Indexes are located on the [Configuration page][1] in the Indexes section. Double click on them or click on the *edit* button to see more information about the number of logs that were indexed in the past 3 days, as well as the retention period for those logs:
@@ -52,7 +55,7 @@ To delete an index from your organization, use the "Delete icon" in the index ac
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 You cannot recreate an index with the same name as the deleted one. 
 </div>
 
@@ -159,7 +162,7 @@ You can configure or remove this quota at any time when editing the Index:
 
 An event is generated when either the daily quota or the warning threshold is reached:
 
-{{< img src="logs/indexes/index_quota_event.png" alt="index quota notification" style="width:70%;">}}
+{{< img src="logs/indexes/daily_quota_warning_events.png" alt="Daily quota and warning events" style="width:90%;">}}
 
 See [Monitor log usage][20] on how to monitor and alert on your usage.
 

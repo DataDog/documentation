@@ -4,19 +4,19 @@ algolia:
   - grok
   - analizador grok
   - parseo de logs
-  - extracción de atributos
-  - reasignación de atributos
+  - Extracción de atributos
+  - Reasignación de atributos
   - parseo
 aliases:
 - /es/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 - /es/logs/languages
 - /es/integrations/windows_event_log/
-description: Configura tu entorno para recopilar logs desde tu host, contenedores
-  y servicios.
+description: Configura tu entorno para recopilar logs de tus host, contenedores y
+  servicios.
 further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: Blog
-  text: Cómo gestionar archivos de logs con Logrotate
+  text: Cómo gestionar archivos de log con Logrotate
 - link: /agent/logs/advanced_log_collection
   tag: Documentación
   text: Configuraciones avanzadas de recopilación de logs
@@ -25,13 +25,13 @@ further_reading:
   text: Descubre cómo procesar tus logs
 - link: /logs/log_configuration/parsing
   tag: Documentación
-  text: Más información sobre el parseo
+  text: Obtener más información sobre el análisis
 - link: /logs/live_tail/
   tag: Documentación
-  text: Función Live Tail de Datadog
+  text: La funcionalidad Live Tail de Datadog
 - link: /logs/explorer/
   tag: Documentación
-  text: Aprende a explorar tus logs
+  text: Aprender a explorar tus logs
 - link: /logs/logging_without_limits/
   tag: Documentación
   text: Logging Without Limits*
@@ -116,7 +116,7 @@ Las integraciones de Datadog y la recopilación de logs están asociadas. Puedes
 
 ## Reducir las tasas de transferencia de datos
 
-Utiliza [Network Performance Monitoring][7] de Datadog para identificar las aplicaciones de mayor rendimiento de tu organización. Conéctate a Datadog a través de conexiones privadas compatibles y envía datos a través de una red privada para evitar la Internet pública y reducir tus tarifas de transferencia de datos. Después de cambiar a conexiones privadas, utiliza las herramientas de [Cloud Cost Management][8] de Datadog para verificar el impacto y monitorizar la reducción en tus costes de nube.
+Utiliza [Cloud Network Monitoring][7] para identificar las aplicaciones de mayor rendimiento de tu organización. Conéctate a Datadog a través de conexiones privadas compatibles y envía datos a través de una red privada para evitar la Internet pública y reducir tus tarifas de transferencia de datos. Después de cambiar a conexiones privadas, utiliza las herramientas [Cloud Cost Management][8] de Datadog para verificar el impacto y monitorizar la reducción en tus costes de nube.
 
 Para más información, consulta [Cómo enviar logs a Datadog y reducir tarifas de transferencias de datos][9].
 
@@ -126,7 +126,7 @@ Para más información, consulta [Cómo enviar logs a Datadog y reducir tarifas 
 [4]: /es/agent/kubernetes/log/#autodiscovery
 [5]: /es/agent/docker/log/#log-integrations
 [6]: /es/integrations/#cat-log-collection
-[7]: /es/network_monitoring/performance/
+[7]: /es/network_monitoring/cloud_network_monitoring/
 [8]: /es/cloud_cost_management/
 [9]: /es/logs/guide/reduce_data_transfer_fees/
 
@@ -149,7 +149,6 @@ Utiliza el menú desplegable de selección del [sitio][13] situado a la derecha 
 | Sitio | Tipo        | Endpoint                                                                  | Puerto         | Descripción                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | EE. UU.   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Utilizado por el forwarder personalizado para enviar logs en formato JSON o de texto sin formato a través de HTTPS. Consulta la [documentación de la API HTTP de logs][1].                                                    |
-| EE. UU.   | HTTPS       | `agent-http-intake-pci.logs.datadoghq.com`                                | 443   | Utilizado por el Agent para enviar logs a través de HTTPS a una organización con cumplimiento de PCI DSS activado. Para obtener más información, consulta [Cumplimiento de PCI DSS para Log Management][3].                 |
 | EE. UU.   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Utilizado por el Agent para enviar logs en formato JSON a través de HTTPS. Consulta la [documentación Recopilación de logs del Agent de host][2].                                                             |
 | EE. UU.   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Utilizado por funciones de Lambda para enviar logs sin formato o en formato Syslog o JSON a través de HTTPS.                                                                                            |
 | EE. UU.   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Utilizado por el SDK del navegador para enviar logs en formato JSON a través de HTTPS.                                                                                                             |
@@ -161,7 +160,6 @@ Utiliza el menú desplegable de selección del [sitio][13] situado a la derecha 
 
 [1]: /es/api/latest/logs/#send-logs
 [2]: /es/agent/logs/#send-logs-over-https
-[3]: /es/data_security/logs/#pci-dss-compliance-for-log-management
 {{< /site-region >}}
 
 {{< site-region region="eu" >}}
@@ -222,13 +220,27 @@ Utiliza el menú desplegable de selección del [sitio][13] situado a la derecha 
 
 {{< /site-region >}}
 
+{{< site-region region="ap2" >}}
+
+| Sitio | Tipo  | Endpoint                                                                  | Puerto | Descripción                                                                                                              |
+|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
+| AP2  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | Utilizado por el forwarder personalizado para enviar logs en formato JSON o de texto sin formato a través de HTTPS. Consulta la [documentación de la API HTTP de logs][1]. |
+| AP2  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | Utilizado por funciones de Lambda para enviar logs sin formato o en formato Syslog o JSON a través de HTTPS.                                         |
+| AP2  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | Utilizado por el Agent para enviar logs en formato JSON a través de HTTPS. Consulta la [documentación Recopilación de logs del Agent de host][2].          |
+| AP2  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Utilizado por el SDK del navegador para enviar logs en formato JSON a través de HTTPS.                                                          |
+
+[1]: /es/api/latest/logs/#send-logs
+[2]: /es/agent/logs/#send-logs-over-https
+
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 
 | Sitio    | Tipo  | Endpoint                                                                  | Puerto | Descripción                                                                                                              |
 |---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
 | US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | Utilizado por el forwarder personalizado para enviar logs en formato JSON o de texto sin formato a través de HTTPS. Consulta la [documentación de la API HTTP de logs][1]. |
-| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.datadoghq.com`                          | 443  | Utilizado por funciones de Lambda para enviar logs sin formato o en formato Syslog o JSON a través de HTTPS.                                         |
-| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.datadoghq.com`                           | 443  | Utilizado por el Agent para enviar logs en formato JSON a través de HTTPS. Consulta la [documentación Recopilación de logs del Agent de host][2].          |
+| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.com`                                   | 443  | Utilizado por funciones de Lambda para enviar logs sin formato o en formato Syslog o JSON a través de HTTPS.                                         |
+| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.com`                                    | 443  | Utilizado por el Agent para enviar logs en formato JSON a través de HTTPS. Consulta la [documentación Recopilación de logs del Agent de host][2].          |
 | US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Utilizado por el SDK del navegador para enviar logs en formato JSON a través de HTTPS.                                                          |
 
 [1]: /es/api/latest/logs/#send-logs
@@ -315,7 +327,7 @@ No se recomienda el endpoint TCP para este sitio. Para obtener más información
 [1]: /es/help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5,ap1" >}}
+{{< site-region region="gov,us5,ap1,ap2" >}}
 
 El endpoint TCP no es compatible para este sitio.
 
@@ -330,10 +342,14 @@ El endpoint TCP no es compatible para este sitio.
 
 **Notas**:
 
-* La API HTTPS admite logs con tamaños de hasta 1 MB. Sin embargo, para disfrutar de un rendimiento óptimo, es recomendado que cada log no supere los 25 kB. Si utilizas el Datadog Agent para registro, está configurado para dividir un log en 256 kB (256 000 bytes).
+* La API HTTPS admite logs de tamaños de hasta 1 MB. Sin embargo, para un rendimiento óptimo, se recomienda que un log individual no supere los 25  Kbytes. Si utilizas el Datadog Agent para registro, está configurado para dividir un log en 900 kB (900 000 bytes).
 * Un evento de logs no debería tener más de 100 etiquetas, y cada etiqueta no debería superar los 256 caracteres para un máximo de 10 millones de etiquetas únicas al día.
 * Un evento de log convertido a formato JSON debe contener menos de 256 atributos. Cada una de las claves de esos atributos debe tener menos de 50 caracteres, estar anidada en menos de 20 niveles sucesivos, y su valor respectivo debe tener menos de 1024 caracteres si se promueve como faceta.
 * Los eventos de logs se pueden enviar con una [marca temporal][14] de hasta 18 h atrás.
+
+<div class="alert alert-info">
+<b>Vista previa disponible</b>: puedes enviar logs de los últimos 7 días, en lugar del límite actual de 18 horas. <a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">Regístrate para la vista previa</a>.
+</div>
 
 Los eventos de logs que no cumplen con estos límites pueden ser transformados o truncados por el sistema, o pueden no indexarse si están fuera del intervalo indicado. Sin embargo, Datadog intentará conservar la mayor cantidad de datos posible.
 

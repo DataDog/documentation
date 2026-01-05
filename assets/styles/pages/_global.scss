@@ -227,8 +227,11 @@ details {
 }
 
 .programming-lang-wrapper {
-    .code-snippet-wrapper {
+    .code-snippet-wrapper.tab-pane {
         display: none;
+    }
+    .code-snippet-wrapper.tab-pane.active.show {
+        display: block;
     }
 }
 
@@ -368,46 +371,6 @@ details {
     .chevron-down {
         margin-right: 14px;
         margin-top: 11px;
-    }
-}
-
-.code-lang-list-container {
-    padding: 0 !important;
-    margin-bottom: 20px;
-    &.nav-tabs {
-        .nav-item {
-            z-index: 1;
-
-            &:before {
-                content: none;
-            }
-
-            a {
-                background: #ffffff;
-                border: transparent;
-                padding: 6px 10px 7px 10px;
-                font-weight: 600;
-                font-size: 16px;
-                border-radius: 3px;
-                display: inline-block;
-                &.active {
-                    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
-                    border-radius: 3px;
-                    background-color: $ddpurple;
-                    color: white;
-                }
-
-                &:hover {
-                    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
-                    border: none;
-                }
-
-                &:active {
-                    box-shadow: 0px 1px 4px rgba(30, 5, 36, 0.24), 0px 1px 1px rgba(30, 5, 36, 0.16);
-                    border-radius: 3px;
-                }
-            }
-        }
     }
 }
 
@@ -590,7 +553,7 @@ h5 {
         }
     }
 
-    ol ol {    
+    ol ol {
         list-style-type: lower-alpha;
         ol {
             list-style-type: lower-roman;
@@ -605,7 +568,7 @@ h5 {
             }
         }
     }
-    
+
     ul,
     ol,
     dl,
@@ -635,83 +598,7 @@ h5 {
 }
 
 /* codetabs inside content */
-.code-tabs {
-    min-height: 200px;
-
-    & > ul {
-        list-style-type: none;
-        padding-top: 6px;
-
-        li {
-            padding-bottom: 6px;
-
-            &:lang(ja) {
-                font-style: normal;
-                font-weight: bold;
-                font-size: 14px;
-                line-height: 24px;
-            }
-
-            &:before {
-                content: '' !important;
-                margin: 0 !important;
-                float: none !important;
-            }
-            &.active {
-                a {
-                    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
-                    border-radius: 3px;
-                    background-color: $ddpurple;
-                    color: white;
-                }
-            }
-            a {
-                background: #ffffff;
-                border: transparent;
-                padding: 6px 10px 7px 10px;
-                font-weight: 600;
-                font-size: 16px;
-                border-radius: 3px;
-                display: inline-block;
-                margin-right: 0.625rem;
-
-                &:hover {
-                    box-shadow: 2px 5px 12px rgba(0, 0, 0, 0.1);
-                    border: none;
-                }
-            }
-        }
-    }
-    .nav-tabs-mobile {
-        .dropdown-item:hover {
-            color: white;
-        }
-    }
-    .nav-tabs {
-        border-bottom: none;
-        padding-left: 0 !important;
-    }
-    .tab-content {
-        padding-top: 12px;
-        h2 > a,
-        h3 > a,
-        h4 > a,
-        h5 > a {
-            color: #000;
-            border-bottom: 1px solid transparent;
-            &:hover {
-                color: #000;
-                border-bottom: 1px solid #000;
-            }
-        }
-        .text-center img {
-            border: 1px solid $ddgray;
-        }
-        .card-body img {
-            border: 0px solid $ddgray;
-        }
-    }
-}
+// Tab styling has been moved to _tab-toggle.scss
 
 .sticky {
     position: -webkit-sticky;

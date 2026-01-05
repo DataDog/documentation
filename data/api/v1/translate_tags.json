@@ -49,7 +49,7 @@
   },
   "key-management": {
     "name": "Key Management",
-    "description": "Manage your Datadog API and application keys. You need an API key and\nan application key for a user with the required permissions to interact\nwith these endpoints. The full list of API and application keys can be\nseen on your [Datadog API page](https://app.datadoghq.com/account/settings#api)."
+    "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
     "name": "Logs",
@@ -117,7 +117,7 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "Datadog Synthetic Monitoring uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Synthetic tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
+    "description": "Datadog Synthetic Monitoring uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Synthetic tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog's API to\nmanage both test types programmatically.\n\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
   },
   "tags": {
     "name": "Tags",

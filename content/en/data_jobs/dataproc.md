@@ -1,5 +1,6 @@
 ---
 title: Enable Data Jobs Monitoring for Spark on Google Cloud Dataproc
+description: "Set up Data Jobs Monitoring for Apache Spark applications on Google Cloud Dataproc clusters with API key configuration and service tagging."
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -58,14 +59,14 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    curl -L https://install.datadoghq.com/scripts/install-dataproc.sh > djm-install-script; bash djm-install-script || true
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.12.9.sh` to use version `0.12.9`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][13].
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][13].
 
    Optionally, the script can be configured by adding the following environment variable:
 
 | Variable                 | Description                                                                                                                                                      |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | DD_TAGS                  | Add tags to Dataproc cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |
-| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.  
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.
 
 [15]: /getting_started/tagging/
 

@@ -14,6 +14,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -25,6 +27,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -36,6 +40,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -47,6 +53,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -58,6 +66,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -69,6 +79,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -80,6 +92,8 @@
                         "optional": true,
                         "sort": true,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "int32"
                     },
                     {
@@ -91,6 +105,8 @@
                         "optional": false,
                         "sort": true,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "int32"
                     },
                     {
@@ -102,6 +118,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -113,6 +131,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -124,6 +144,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -135,6 +157,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string[]"
                     },
                     {
@@ -146,6 +170,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     },
                     {
@@ -157,6 +183,8 @@
                         "optional": true,
                         "sort": false,
                         "stem": false,
+                        "stem_dictionary": "",
+                        "store": true,
                         "type": "string"
                     }
                 ]
@@ -168,11 +196,11 @@
                 },
                 {
                     "id": "azure",
-                    "synonyms": ["microsoft azure", "azure"]
+                    "synonyms": ["microsoft azure", "azure", "azure integration"]
                 },
                 {
                     "id": "gcp",
-                    "synonyms": ["gcp", "google cloud platform"]
+                    "synonyms": ["gcp", "google cloud platform", "google cloud integration", "gcp integration"]
                 },
                 {
                     "id": "aws",
@@ -224,28 +252,40 @@
                 }
             ],
             "presets": [
-                  {
-                      "name": "docs_alias_view",
-                      "search_parameters": {
-                          "query_by": "tags,title,section_header,content",
-                          "query_by_weights": "4,3,2,2",
-                          "group_by": "distinct_base_url",
-                          "group_limit": 1,
-                          "stopwords": "stopwords"
-                      }
-                  },
-                  {
-                      "name": "docs_alias_api_view",
-                      "search_parameters": {
-                          "sort_by": "rank:asc,_text_match:desc",
-                          "query_by": "tags,content,title,section_header",
-                          "group_by": "distinct_base_url",
-                          "group_limit": 1,
-                          "stopwords": "stopwords"
-                      }
-                  }
-              ]
+                {
+                    "name": "docs_alias_view",
+                    "search_parameters": {
+                        "query_by": "tags,title,section_header,content",
+                        "query_by_weights": "4,3,2,2",
+                        "group_by": "distinct_base_url",
+                        "group_limit": 1,
+                        "stopwords": "stopwords"
+                    }
+                },
+                {
+                    "name": "docs_alias_api_view",
+                    "search_parameters": {
+                        "sort_by": "rank:asc,_text_match:desc",
+                        "query_by": "tags,content,title,section_header",
+                        "group_by": "distinct_base_url",
+                        "group_limit": 1,
+                        "stopwords": "stopwords"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "docs_partners_alias",
+            "file_path": "./public/partners.json",
+            "presets": [
+                {
+                    "name": "docs_partners_view",
+                    "search_parameters": {
+                        "query_by": "title,content",
+                        "sort_by": "_text_match:desc"
+                    }
+                }
+            ]
         }
     ]
 }
-

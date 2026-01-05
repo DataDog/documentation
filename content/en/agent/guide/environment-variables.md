@@ -1,5 +1,6 @@
 ---
 title: Agent Environment Variables
+description: Configure Datadog Agent settings using environment variables as an alternative to datadog.yaml, including naming conventions and systemd usage.
 further_reading:
   - link: "/agent/docker/#environment-variables"
     tag: "Documentation"
@@ -15,7 +16,7 @@ further_reading:
     text: "Proxy environment variables"
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub repo</a>.
 </div>
 

@@ -3,7 +3,7 @@ dependencies:
 - https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/Compatibility-v1.md
 title: (レガシー) Ruby 互換性要件
 ---
-<div class="alert alert-warning">このドキュメントは <code>ddtrace</code> gem v1.x 向けです。<code>datadog</code> gem v2.0 以降をお使いの場合は、最新の <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Ruby Compatibility Requirements</a> のドキュメントを参照してください。</div>
+<div class="alert alert-danger">このドキュメントは <code>ddtrace</code> gem v1.x 向けです。<code>datadog</code> gem v2.0 以降をお使いの場合は、最新の <a href="https://docs.datadoghq.com/tracing/trace_collection/compatibility/ruby/">Ruby Compatibility Requirements</a> のドキュメントを参照してください。</div>
 
 ## 互換性
 

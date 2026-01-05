@@ -1,29 +1,62 @@
 ---
-aliases:
-- /fr/integrations/azure_dbformysql
+app_id: azure-db-for-mysql
+app_uuid: e0f71c73-4783-4ada-8bcf-d7f870a7b933
+assets:
+  dashboards:
+    azure_db_for_mysql: assets/dashboards/azure_db_for_mysql.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - azure.dbformysql_servers.storage_used
+      - azure.dbformysql_flexibleservers.cpu_percent
+      metadata_path: metadata.csv
+      prefix: azure.dbformysql
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 225
+    source_type_name: Azure DB for MySQL
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
 - cloud
 - data stores
 custom_kind: integration
 dependencies: []
-description: Surveillez des métriques clés d'Azure Database pour MySQL.
-doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_db_for_mysql
-has_logo: true
 integration_id: azure-db-for-mysql
-integration_title: Microsoft Azure Database pour MySQL
+integration_title: Azure DB for MySQL
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_db_for_mysql
-public_title: Intégration Datadog/Microsoft Azure Database pour MySQL
+public_title: Azure DB for MySQL
 short_description: Surveillez des métriques clés d'Azure Database pour MySQL.
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Azure
+  - Category::Cloud
+  - Category::Data Stores
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Surveillez des métriques clés d'Azure Database pour MySQL.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure DB for MySQL
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## Section Overview
 
 Azure Database pour MySQL fournit une base de données en tant que service MySQL community entièrement managée et conçue pour l'entreprise.
@@ -42,7 +75,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Microsoft�
 ## Données collectées
 
 ### Métriques
-{{< get-metrics-from-git "azure_db_for_mysql" >}}
+{{< get-metrics-from-git "azure-db-for-mysql" >}}
 
 
 ### Événements

@@ -4,10 +4,10 @@ further_reading:
 - link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
-- link: "/security/cloud_siem/investigate_security_signals"
+- link: "/security/cloud_siem/triage_and_investigate/investigate_security_signals"
   tag: "Documentation"
   text: "Learn about the Security Signals Explorer"
-- link: "/security/cloud_siem/detection_rules/"
+- link: "/security/cloud_siem/detect_and_monitor/custom_detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
 - link: "/integrations/google_cloud_platform/#log-collection"
@@ -31,7 +31,7 @@ Use [Google Cloud Dataflow][2] and the [Datadog template][3] to forward logs fro
 1. [Create and run the Dataflow job](#create-and-run-the-dataflow-job)
 1. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Collecting Google Cloud logs with a Pub/Sub Push subscription</a> is in the process of being deprecated for the following reasons:
 
@@ -104,7 +104,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
     | Role | Path | Description |
     | -------------  | ----------- | ----------- |
     | [Dataflow Admin][12] | `roles/dataflow.admin` |  Allow this service account to perform Dataflow administrative tasks
-    | [Dataflow Worker][13] | `roles/dataflow.worker` |  Allow this service account to perform Dataflow job operations 
+    | [Dataflow Worker][13] | `roles/dataflow.worker` |  Allow this service account to perform Dataflow job operations
     | [Pub/Sub Viewer][14] | `roles/pubsub.viewer` | Allow this service account to view messages from the Pub/Sub subscription with your Google Cloud logs
     | [Pub/Sub Subscriber][15] | `roles/pubsub.subscriber` | Allow this service account to consume messages from the Pub/Sub subscription with your Google Cloud logs
     | [Pub/Sub Publisher][16] | `roles/pubsub.publisher` | Allow this service account to publish failed messages to a separate subscription, which allows for analysis or resending the logs
@@ -120,7 +120,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Click **Create Sink**.
 1. Enter a descriptive name for the sink.
 1. Click **Next**.
-1. In the **Select Sink Service** dropdown menu, select **Cloud Pub/Sub topic**.   
+1. In the **Select Sink Service** dropdown menu, select **Cloud Pub/Sub topic**.
     **Note**: The Cloud Pub/Sub topic can be located in a different project.
 1. In the **Select a Cloud Pub/Sub topic**, select the Pub/Sub created earlier.
 1. Click **Next**.
@@ -138,20 +138,20 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Enter a name for the job.
 1. Select a regional endpoint.
 1. In the **Dataflow template** dropdown menu, select **Pub/Sub to Datadog**.
-1. In **Required Parameters** section:  
-      a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a new [Pub/Sub system](#create-a-google-cloud-publishsubscription-pubsub-system).  
+1. In **Required Parameters** section:
+      a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a new [Pub/Sub system](#create-a-google-cloud-publishsubscription-pubsub-system).
       b. Enter the following in the **Datadog Logs API URL** field:
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
       ```
-      **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the URL above.  
-      c. In the **Output deadletter Pub/Sub topic** field, select the [additional topic](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) you created earlier for receiving messages rejected by the Datadog API.  
+      **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the URL above.
+      c. In the **Output deadletter Pub/Sub topic** field, select the [additional topic](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) you created earlier for receiving messages rejected by the Datadog API.
       d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
-1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:  
-    a. Click **Optional Parameters** to see the additional fields.  
-    b. Enter the resource name of the secret in the **Google Cloud Secret Manager ID** field.  
-        To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.  
-    c. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.  
+1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:
+    a. Click **Optional Parameters** to see the additional fields.
+    b. Enter the resource name of the secret in the **Google Cloud Secret Manager ID** field.
+        To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.
+    c. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.
 1. If you are not using a secret for your Datadog API key value:
     - **Recommended**:
         - Set `Source of API key passed` to `KMS`.
@@ -183,7 +183,7 @@ Cloud SIEM applies out-of-the-box detection rules to all processed logs, includi
 [4]: https://console.cloud.google.com/iam-admin/audit
 [5]: https://console.cloud.google.com/cloudpubsub/topic
 [6]: https://cloud.google.com/pubsub/quotas#quotas
-[7]: /integrations/google_cloud_platform/#monitor-the-cloud-pubsub-log-forwarding
+[7]: /logs/guide/google-cloud-log-forwarding/#monitor-the-cloud-pubsub-log-forwarding
 [8]: https://console.cloud.google.com/security/secret-manager
 [9]: https://app.datadoghq.com/organization-settings/api-keys
 [10]: https://cloud.google.com/compute/docs/access/service-accounts#default_service_account
@@ -199,7 +199,7 @@ Cloud SIEM applies out-of-the-box detection rules to all processed logs, includi
 [20]: https://console.cloud.google.com/dataflow/
 [21]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog#template-parameters
 [22]: https://app.datadoghq.com/logs/
-[23]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc&product=siem
+[23]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%29%20&column=time&order=desc
 [24]: https://app.datadoghq.com/dash/integration/30509/google-cloud-audit-log
 [25]: /security/default_rules/#cat-cloud-siem
 [26]: /security/detection_rules/

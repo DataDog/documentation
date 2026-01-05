@@ -11,7 +11,7 @@ algolia:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
@@ -20,8 +20,7 @@ algolia:
 
 If you don't use GitHub Actions, you can run the [datadog-ci][4] CLI directly in your CI pipeline platform and upload SARIF results to Datadog.
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
-`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][5].
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][5]. Afterwards, uploads from your non-default branches will succeed.
 
 Prerequisites:
 
@@ -81,6 +80,8 @@ datadog-ci sarif upload /tmp/report.sarif
 <div class="alert alert-info">
   This example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value below. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
 </div>
+
+<div id="unsupported-trigger" class="alert alert-danger"> Running a Datadog Static Code Analysis job as part of your CI/CD pipeline only supports workflows triggered by direct code commits (for example, a <code>push</code> event). Other types of triggers, such as pull, merge, or review request events are not supported. </div>
 
 ## Diff-aware scanning
 

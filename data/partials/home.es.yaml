@@ -3,8 +3,8 @@ guides:
   link: getting_started/agent/
   link_text: Empezando con el Agent
   title: Instalar el Agent
-- desc: Recopila métricas, trazas (traces) y logs con más de 850 integraciones incorporadas
-    para enviar a Datadog.
+- desc: Recopila métricas, trazas y logs con más de 1000 integraciones incorporadas
+    para enviarlos a Datadog.
   link: getting_started/integrations/
   link_text: Empezando con las integraciones
   title: Configurar integraciones
@@ -166,6 +166,16 @@ nav_sections:
       icon: llm-observability
       link: llm_observability/
       title: Observabilidad de LLM
+    - desc: Unificar la telemetría, los metadatos y los flujos de trabajo para acelerar
+        la entrega
+      icon: internal-developer-portal-wui
+      link: internal_developer_portal
+      title: Portal interno para desarrolladores
+    - desc: Gestiona los avisos, la escalada y los horarios de guardia en una sola
+        plataforma
+      icon: on-call
+      link: service_management/on-call/
+      title: On-Call
 - nav_section:
   - name: Configuración
   - navtiles:
@@ -185,6 +195,11 @@ nav_sections:
       icon: dev-code
       link: developers/
       title: Desarrolladores
+    - desc: Conoce las prácticas recomendadas y empieza a monitorizar los entornos
+        de tus clientes.
+      icon: colab
+      link: partners/
+      title: Socios
 popular_searches:
 - link: api/
   title: documentación de API

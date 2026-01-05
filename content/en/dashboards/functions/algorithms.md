@@ -1,5 +1,6 @@
 ---
 title: Algorithms
+description: Implement anomaly detection, outlier detection, and forecasting algorithms for metrics in Datadog dashboards.
 algolia:
   tags: ['anomaly', 'anomaly graph']
 aliases:

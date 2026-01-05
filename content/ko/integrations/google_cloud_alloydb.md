@@ -53,7 +53,7 @@ Google AlloyDB 로그는 Google Cloud Logging으로 수집되어 Cloud Pub/Sub �
 ## 수집한 데이터
 
 ### 메트릭
-{{< get-metrics-from-git "google_cloud_alloydb" >}}
+{{< get-metrics-from-git "google-cloud-alloydb" >}}
 
 
 ### 이벤트

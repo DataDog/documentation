@@ -1,5 +1,15 @@
-1. Download the [Helm chart values file][601]. If you are not using a managed service such as Amazon EKS, Google GKE, or Azure AKS, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
+The Observability Pipelines Worker supports all major Kubernetes distributions, such as:
+
+- Amazon Elastic Kubernetes Service (EKS)
+- Azure Kubernetes Service (AKS)
+- Google Kubernetes Engine (GKE)
+- Red Hat Openshift
+- Rancher
+
+1. Download the [Helm chart values file][601]. See the [full list of configuration options][603] available.
+    - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
 1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][604].
 1. Add the Datadog chart repository to Helm:
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -27,9 +37,15 @@
 
 See [Update Existing Pipelines][602] if you want to make changes to your pipeline's configuration.
 
+**Note**: If you enable [disk buffering][605] for destinations, you must enable Kubernetes [persistent volumes][606] in the Observability Pipelines helm chart .
+
 #### Self-hosted and self-managed Kubernetes clusters
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
 
 [601]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [602]: /observability_pipelines/update_existing_pipelines
+[603]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
+[604]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[605]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
+[606]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268

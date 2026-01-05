@@ -2,20 +2,19 @@
 title: Usage Attribution
 aliases:
     - /account_management/billing/advanced_usage_reporting/
-    - /account_management/billing/custom_usage_reporitng/
+    - /account_management/billing/custom_usage_reporting/
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"
   text: "Plan and Usage Settings"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#identifying-areas-for-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 algolia:
   tags: ['usage attribution', 'cost attribution']
 ---
 
 ## Overview
-
-<div class="alert alert-warning">
-Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
 
 Administrators or users with the Usage Read permission can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
@@ -97,7 +96,7 @@ A timeseries of Usage Attribution data can be viewed by clicking on "Track Usage
 
 For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle to enable monthly chargeback and cost allocation processes. 
 - Cost data for the preceding month is available no later than the 19th of the current month.
-- Cost attribution data is not currently available in GovCloud datacenters
+- For GovCloud customers, a disclaimer must be approved prior to feature enablement.
 - Monthly Cost Attribution data is [available with the API][4]
 
 {{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Cost Attribution report" style="width:100%;" >}}
