@@ -1,8 +1,6 @@
 ---
 title: Setting up Workload Protection on Docker
-code_lang: docker
-type: multi-code-lang
-code_lang_weight: 65 # a number that represents relative weight.
+disable_toc: false
 ---
 
 Use the following instructions to enable Workload Protection.

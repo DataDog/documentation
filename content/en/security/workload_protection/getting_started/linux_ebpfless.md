@@ -1,16 +1,11 @@
 ---
-title: Threat Detection for Linux Without eBPF Support
-aliases:
-  - /security/cloud_security_management/guide/ebpf-free-agent
+title: Setting up Workload Protection on Linux (without eBPF)
 disable_toc: false
 ---
 
-This guide describes how to set up the Workload Protection eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
+This guide describes how to set up the Workload Protection eBPF-less solution for eBPF disabled environments.
 
-This guide also describes some advantages of the ptrace solution.
-
-<div class="alert alert-info">Threat Detection for Linux Without eBPF Support is in Preview. Reach out to your Datadog representative to sign up.</div>
-
+<div class="alert alert-info">If you wish to deploy our eBPF-less agent on Fargate, we invite you to go to [the dedicated Fargate deployment page][3].</div>
 
 ## Summary of Agent options
 
@@ -59,7 +54,7 @@ A ptrace-based solution achieves a balance between robust threat detection and u
 
 You can set up the eBPF-less Agent on various platforms, including Docker and Linux hosts.
 
-This section covers Docker and Linux hosts. For steps on setting up an Amazon Fargate environment where eBPF is disabled, see [AWS Fargate Configuration Guide for Datadog Security][3].
+This section covers Docker and Linux hosts.
 
 ### eBPF-less Agent requirements
 
@@ -416,7 +411,7 @@ To attach to an application, you’ll need the following:
 
 [1]: https://ebpf.io/what-is-ebpf/
 [2]: https://github.com/DataDog/datadog-agent
-[3]: /security/guide/aws_fargate_config_guide/?tab=amazonecs
+[3]: /security/workload_protection/getting_started/fargate
 [4]: https://app.datadoghq.com/security/configuration/workload/setup
 [5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: https://docs.docker.com/network/
