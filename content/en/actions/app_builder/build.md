@@ -60,16 +60,15 @@ Blueprints are helpful app templates that cover common use cases and showcase be
 
 ### Build an app from a layout
 
-Choosing a layout is the fastest way to create a minimal, ready-to-edit app. There are three options: 
-- **Table Manager**: List, filter, and sort data from a query.
-- **Form**: Collect inputs and trigger actions (create, update, request, etc.).
-  - For more detailed form templates, see [Forms][27].
-- **Custom Chart**: Visualize a query by swapping your data into a prebuilt bar chart.
+Choosing a layout is the fastest way to create a minimal, ready-to-edit app. 
 
 To create an app from a layout:
 1. From [App Builder][1], click **New App**.
 1. Click **Layouts** in the onboarding modal.
-1. Select a layout. The pane on the right displays a preview of the app.
+1. Select a layout. There are three options: 
+    - **Table Manager:** List, filter, and sort data from a query.
+    - **Form:** Collect inputs and trigger actions (create, update, request, etc.). For more detailed form templates, see [**Forms**][27].
+    - **Custom Chart:** Visualize a query by swapping your data into a prebuilt bar chart.
 1. Click **Use Layout**.
 1. [Customize your app][15].
 
