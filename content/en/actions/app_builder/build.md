@@ -44,8 +44,8 @@ To build an app with Bits AI:
 1. After Bits AI has generated your app, you can click **Edit with AI** or manually [customize your app][15].
 
 To iterate on an existing app:
-1. From [your apps list][14], hover over an app and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
-1. Click **Build with AI** (**<i class="icon-bits-ai"></i>**).
+1. From [your apps list][14], hover over an app and click the edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
+1. Click the AI **<i class="icon-bits-ai"></i>** icon.
 1. Enter a detailed prompt for the behavior you'd like to add to your app. Include the integrations and actions you'd like to use.
 1. Press <kbd>Enter</kbd> to add the functionality to your app.
 
@@ -110,7 +110,7 @@ To access the App Playground:
 Apps are made up of UI components and queries which interact with each other to form the user experience and logic behind each app. The query list and editor appear on the left side of the page, while the app canvas and UI components make up the right side of the page.
 
 To change basic elements of your app:
-1. From [App Builder][1], hover over an app and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
+1. From [App Builder][1], hover over an app and click the edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
 1. Make edits to your app as required. 
     1. Click the app name to edit these elements:
         - Name
@@ -118,14 +118,14 @@ To change basic elements of your app:
         - Tags
         - Appearance
     1. Edit the [input parameters][29].
-    1. To add a [UI component](#app-canvas-and-components) to the app canvas, click **Add Component** (<i class="icon-component-wui" style="position:relative; top:4px;"></i>) to open the **Components** tab. Click the component or drag it onto the canvas.
+    1. To add a [UI component](#app-canvas-and-components) to the app canvas, click the **Add Component** <i class="icon-component-wui" style="position:relative; top:4px;"></i> icon to open the **Components** tab. Click the component or drag it onto the canvas.
 1. Click the **View** button to see your app from the user's perspective. Use view mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
 1. To save your app, click **Save**.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ### App canvas and components
 
-The app canvas represents the graphical interface that your users interact with. You can drag and drop components to move them around on the canvas. To see all available components, click the plus ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) to open the **Components** tab.
+The app canvas represents the graphical interface that your users interact with. You can drag and drop components to move them around on the canvas. To see all available components, click the plus {{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}} icon to open the **Components** tab.
 
 Each component features a list of corresponding configuration options that control how users interact with your app. For example, the **Text Input** component allows you to set a default value, placeholder text, and a label. The **Button** component includes a label and an event that triggers when the button is pressed. Components also feature an **Appearance** section that changes the way the components look and act. For example, you can disable a button or control its visibility.
 
@@ -155,7 +155,7 @@ The tag displays on the line for this app in the app list. You can click the tag
 
 Favoriting an app pins it to the top of your [app list][14]. 
 
-To favorite an app, click the star icon (<i class="icon-star-empty-wui" style="position:relative; top:4px;"></i>) next to the app's name. When you refresh the page, the starred app appears at the top of your app list.
+To favorite an app, click the star <i class="icon-star-empty-wui" style="position:relative; top:4px;"></i> icon next to the app's name. When you refresh the page, the starred app appears at the top of your app list.
 
 ## View app version history
 
@@ -178,11 +178,11 @@ You can perform the following operations:
 
 ### Edit an app
 
-To edit an app with JSON, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To edit an app with JSON, click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 ### Copy an app
 
-To copy an app layout across organizations or back an app up, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
+To copy an app layout across organizations or back an app up, click the settings {{< img src="icons/settings.png" inline="true" style="width:14px;">}} icon and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
 To copy the app to another organization:
 1. Create an app. 
@@ -195,7 +195,7 @@ The **Switch to GUI** option in the settings menu takes you back to the GUI edit
 
 The App Builder Debug Console provides a central place to view real-time logs, action executions, and errors. 
 
-To access the Debug Console, hover over an app in [your apps list][14] and click **Edit app** ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}). Click **Expand** ({{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}}) in the bottom right to see the entire Debug Console. Information inside the console includes:
+To access the Debug Console, hover over an app in [your apps list][14] and click the edit {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon. Click the expand {{< img src="icons/panel-bottom-grow.png" inline="true" style="width:14px;">}} icon in the bottom right to see the entire Debug Console. Information inside the console includes:
 - **Action Executions:** Track the success and failure of action executions with their associated inputs and outputs.
 - **Errors:** View logs for errors, warnings, and info messages.
 - **Logs:** View configuration errors for your actions, transformers, variables, and components.
