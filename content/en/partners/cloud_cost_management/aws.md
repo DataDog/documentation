@@ -40,7 +40,8 @@ Billing rates, credits and fees, and overhead costs can be customized at your di
 
 <div class="alert alert-warning">
 - Pro forma Cost and Usage Reports do not include discounts and taxes, which makes it difficult to compare costs in Datadog to AWS Cost Explorer.<br>
-- Adding accounts to a billing group impacts how Reservations and Savings Plans are shared across AWS accounts.
+- Adding accounts to a billing group changes how Reservations and Savings Plan are shared, which can lead to account-level cost differences.<br>
+- Datadog Cloud Cost Management is best used for **cost trends, anomaly detection, optimization insights, and FinOps workflows**, rather than as a replacement for AWS billing invoices.
 </div>
 
 To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user guide][3]. Ensure the CUR meets [Datadog's requirements][4].  
