@@ -15785,78 +15785,6 @@ components:
         type: string
       nullable: true
       type: array
-    DORADeploymentFetchResponse:
-      description: Response for fetching a single deployment event.
-      properties:
-        data:
-          $ref: '#/components/schemas/DORADeploymentObject'
-      type: object
-    DORADeploymentObject:
-      description: A DORA deployment event.
-      example:
-        attributes:
-          custom_tags:
-          - language:java
-          - department:engineering
-          - region:us-east-1
-          env: production
-          finished_at: 1693491984000000000
-          git:
-            commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-            repository_url: https://github.com/organization/example-repository
-          service: shopist
-          started_at: 1693491974000000000
-          team: backend
-          version: v1.12.07
-        id: 4242fcdd31586083
-        type: dora_deployment
-      properties:
-        attributes:
-          $ref: '#/components/schemas/DORADeploymentObjectAttributes'
-        id:
-          description: The ID of the deployment event.
-          type: string
-        type:
-          $ref: '#/components/schemas/DORADeploymentType'
-      type: object
-    DORADeploymentObjectAttributes:
-      description: The attributes of the deployment event.
-      properties:
-        custom_tags:
-          $ref: '#/components/schemas/DORACustomTags'
-        env:
-          description: Environment name to where the service was deployed.
-          example: production
-          type: string
-        finished_at:
-          description: Unix timestamp when the deployment finished.
-          example: 1693491984000000000
-          format: int64
-          type: integer
-        git:
-          $ref: '#/components/schemas/DORAGitInfo'
-        service:
-          description: Service name.
-          example: shopist
-          type: string
-        started_at:
-          description: Unix timestamp when the deployment started.
-          example: 1693491974000000000
-          format: int64
-          type: integer
-        team:
-          description: Name of the team owning the deployed service.
-          example: backend
-          type: string
-        version:
-          description: Version to correlate with APM Deployment Tracking.
-          example: v1.12.07
-          type: string
-      required:
-      - service
-      - started_at
-      - finished_at
-      type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -15947,53 +15875,18 @@ components:
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENT
-    DORADeploymentsListResponse:
-      description: Response for the list deployments endpoint.
-      example:
-        data:
-        - attributes:
-            custom_tags:
-            - language:java
-            - department:engineering
-            - region:us-east-1
-            env: production
-            finished_at: 1693491984000000000
-            git:
-              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-              repository_url: https://github.com/organization/example-repository
-            service: shopist
-            started_at: 1693491974000000000
-            team: backend
-            version: v1.12.07
-          id: 4242fcdd31586083
-          type: dora_deployment
-        - attributes:
-            custom_tags:
-            - language:go
-            - department:platform
-            env: production
-            finished_at: 1693492084000000000
-            git:
-              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-              repository_url: https://github.com/organization/api-service
-            service: api-service
-            started_at: 1693492074000000000
-            team: backend
-            version: v2.1.0
-          id: 4242fcdd31586084
-          type: dora_deployment
+    DORAEvent:
+      description: A DORA event.
       properties:
-        data:
-          description: The list of DORA deployment events.
-          items:
-            $ref: '#/components/schemas/DORADeploymentObject'
-          type: array
-      type: object
-    DORAFailureFetchResponse:
-      description: Response for fetching a single failure event.
-      properties:
-        data:
-          $ref: '#/components/schemas/DORAIncidentObject'
+        attributes:
+          description: The attributes of the event.
+          type: object
+        id:
+          description: The ID of the event.
+          type: string
+        type:
+          description: The type of the event.
+          type: string
       type: object
     DORAFailureRequest:
       description: Request to create a DORA failure event.
@@ -16097,45 +15990,11 @@ components:
       type: string
       x-enum-varnames:
       - DORA_FAILURE
-    DORAFailuresListResponse:
-      description: Response for the list failures endpoint.
-      example:
-        data:
-        - attributes:
-            custom_tags:
-            - incident_type:database
-            - department:engineering
-            env: production
-            finished_at: 1693492274000000000
-            name: Database outage
-            services:
-            - shopist
-            severity: SEV-1
-            started_at: 1693492174000000000
-            team: backend
-          id: 4242fcdd31586085
-          type: dora_incident
-        - attributes:
-            custom_tags:
-            - incident_type:service_down
-            - department:platform
-            env: production
-            finished_at: 1693492474000000000
-            name: API service outage
-            services:
-            - api-service
-            - payment-service
-            severity: SEV-2
-            started_at: 1693492374000000000
-            team: backend
-          id: 4242fcdd31586086
-          type: dora_incident
+    DORAFetchResponse:
+      description: Response for the DORA fetch endpoints.
       properties:
         data:
-          description: The list of DORA incident events.
-          items:
-            $ref: '#/components/schemas/DORAIncidentObject'
-          type: array
+          $ref: '#/components/schemas/DORAEvent'
       type: object
     DORAGitInfo:
       description: Git info for DORA Metrics events.
@@ -16147,82 +16006,6 @@ components:
       required:
       - repository_url
       - commit_sha
-      type: object
-    DORAIncidentObject:
-      description: A DORA incident event.
-      example:
-        attributes:
-          custom_tags:
-          - incident_type:database
-          - department:engineering
-          env: production
-          finished_at: 1693492274000000000
-          git:
-            commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-            repository_url: https://github.com/organization/example-repository
-          name: Database outage
-          services:
-          - shopist
-          severity: SEV-1
-          started_at: 1693492174000000000
-          team: backend
-        id: 4242fcdd31586085
-        type: dora_incident
-      properties:
-        attributes:
-          $ref: '#/components/schemas/DORAIncidentObjectAttributes'
-        id:
-          description: The ID of the incident event.
-          type: string
-        type:
-          $ref: '#/components/schemas/DORAFailureType'
-      type: object
-    DORAIncidentObjectAttributes:
-      description: The attributes of the incident event.
-      properties:
-        custom_tags:
-          $ref: '#/components/schemas/DORACustomTags'
-        env:
-          description: Environment name that was impacted by the incident.
-          example: production
-          type: string
-        finished_at:
-          description: Unix timestamp when the incident finished.
-          example: 1693491984000000000
-          format: int64
-          type: integer
-        git:
-          $ref: '#/components/schemas/DORAGitInfo'
-        name:
-          description: Incident name.
-          example: Database outage
-          type: string
-        services:
-          description: Service names impacted by the incident.
-          example:
-          - shopist
-          items:
-            type: string
-          type: array
-        severity:
-          description: Incident severity.
-          example: SEV-1
-          type: string
-        started_at:
-          description: Unix timestamp when the incident started.
-          example: 1693491974000000000
-          format: int64
-          type: integer
-        team:
-          description: Name of the team owning the services impacted.
-          example: backend
-          type: string
-        version:
-          description: Version to correlate with APM Deployment Tracking.
-          example: v1.12.07
-          type: string
-      required:
-      - started_at
       type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
@@ -16243,31 +16026,32 @@ components:
       type: object
     DORAListDeploymentsRequestAttributes:
       description: Attributes to get a list of deployments.
+      example:
+        from: '2025-01-01T00:00:00Z'
+        limit: 500
+        query: service:(shopist OR api-service OR payment-service) env:(production
+          OR staging) team:(backend OR platform)
+        sort: -started_at
+        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
-          example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
         limit:
           default: 10
           description: Maximum number of events in the response.
-          example: 500
           format: int32
           maximum: 1000
           type: integer
         query:
           description: Search query with event platform syntax.
-          example: service:(shopist OR api-service OR payment-service) env:(production
-            OR staging) team:(backend OR platform)
           type: string
         sort:
           description: Sort order (prefixed with `-` for descending).
-          example: -started_at
           type: string
         to:
           description: Maximum timestamp for requested events.
-          example: '2025-01-31T23:59:59Z'
           format: date-time
           type: string
       type: object
@@ -16290,11 +16074,9 @@ components:
       - attributes
       type: object
     DORAListDeploymentsRequestDataType:
-      default: dora_deployments_list_request
       description: The definition of `DORAListDeploymentsRequestDataType` object.
       enum:
       - dora_deployments_list_request
-      example: dora_deployments_list_request
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENTS_LIST_REQUEST
@@ -16317,31 +16099,32 @@ components:
       type: object
     DORAListFailuresRequestAttributes:
       description: Attributes to get a list of failures.
+      example:
+        from: '2025-01-01T00:00:00Z'
+        limit: 500
+        query: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
+          OR api-service OR payment-service) team:(backend OR platform OR payments)
+        sort: -started_at
+        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
-          example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
         limit:
           default: 10
           description: Maximum number of events in the response.
-          example: 500
           format: int32
           maximum: 1000
           type: integer
         query:
           description: Search query with event platform syntax.
-          example: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
-            OR api-service OR payment-service) team:(backend OR platform OR payments)
           type: string
         sort:
           description: Sort order (prefixed with `-` for descending).
-          example: -started_at
           type: string
         to:
           description: Maximum timestamp for requested events.
-          example: '2025-01-31T23:59:59Z'
           format: date-time
           type: string
       type: object
@@ -16364,14 +16147,54 @@ components:
       - attributes
       type: object
     DORAListFailuresRequestDataType:
-      default: dora_failures_list_request
       description: The definition of `DORAListFailuresRequestDataType` object.
       enum:
       - dora_failures_list_request
-      example: dora_failures_list_request
       type: string
       x-enum-varnames:
       - DORA_FAILURES_LIST_REQUEST
+    DORAListResponse:
+      description: Response for the DORA list endpoints.
+      example:
+        data:
+        - attributes:
+            custom_tags:
+            - language:java
+            - department:engineering
+            - region:us-east-1
+            env: production
+            finished_at: 1693491984000000000
+            git:
+              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+              repository_url: https://github.com/organization/example-repository
+            service: shopist
+            started_at: 1693491974000000000
+            team: backend
+            version: v1.12.07
+          id: 4242fcdd31586083
+          type: dora_deployment
+        - attributes:
+            custom_tags:
+            - language:go
+            - department:platform
+            env: production
+            finished_at: 1693492084000000000
+            git:
+              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+              repository_url: https://github.com/organization/api-service
+            service: api-service
+            started_at: 1693492074000000000
+            team: backend
+            version: v2.1.0
+          id: 4242fcdd31586084
+          type: dora_deployment
+      properties:
+        data:
+          description: The list of DORA events.
+          items:
+            $ref: '#/components/schemas/DORAEvent'
+          type: array
+      type: object
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -68260,7 +68083,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DORADeploymentsListResponse'
+                $ref: '#/components/schemas/DORAListResponse'
           description: OK
         '400':
           content:
@@ -68299,8 +68122,26 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                  attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: staging
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    service: shopist
+                    started_at: 1693491974000000000
+                    team: backend
+                    version: v1.12.07
+                  id: 4242fcdd31586083
+                  type: dora_deployment
               schema:
-                $ref: '#/components/schemas/DORADeploymentFetchResponse'
+                $ref: '#/components/schemas/DORAFetchResponse'
           description: OK
         '400':
           content:
@@ -68420,8 +68261,66 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                - attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: production
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    name: Web server is down; all requests are failing.
+                    services:
+                    - shopist
+                    severity: SEV-1
+                    started_at: 1693491974000000000
+                    team: backend
+                  id: 4242fcdd31586085
+                  type: dora_failure
+                - attributes:
+                    custom_tags:
+                    - language:go
+                    - department:platform
+                    env: production
+                    finished_at: 1693492084000000000
+                    git:
+                      commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+                      repository_url: https://github.com/organization/api-service
+                    name: Database connection timeout
+                    services:
+                    - api-service
+                    - payment-service
+                    severity: SEV-1
+                    started_at: 1693492074000000000
+                    team: platform
+                    version: v2.1.0
+                  id: 4242fcdd31586086
+                  type: dora_failure
+                - attributes:
+                    custom_tags:
+                    - language:python
+                    - department:payments
+                    - region:eu-west-1
+                    env: staging
+                    finished_at: 1693492204000000000
+                    git:
+                      commit_sha: 99edc9350f2cc9b250b69abddab733dd55e1a601
+                      repository_url: https://github.com/organization/payment-service
+                    name: Payment gateway API rate limit exceeded
+                    services:
+                    - payment-service
+                    severity: SEV-2
+                    started_at: 1693492174000000000
+                    team: payments
+                    version: v1.8.3
+                  id: 4242fcdd31586087
+                  type: dora_failure
               schema:
-                $ref: '#/components/schemas/DORAFailuresListResponse'
+                $ref: '#/components/schemas/DORAListResponse'
           description: OK
         '400':
           content:
@@ -68460,8 +68359,28 @@ paths:
         '200':
           content:
             application/json:
+              example:
+                data:
+                  attributes:
+                    custom_tags:
+                    - language:java
+                    - department:engineering
+                    - region:us-east-1
+                    env: staging
+                    finished_at: 1693491984000000000
+                    git:
+                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+                      repository_url: https://github.com/organization/example-repository
+                    name: Web server is down; all requests are failing.
+                    services:
+                    - shopist
+                    severity: High
+                    started_at: 1693491974000000000
+                    team: backend
+                  id: 4242fcdd31586085
+                  type: dora_failure
               schema:
-                $ref: '#/components/schemas/DORAFailureFetchResponse'
+                $ref: '#/components/schemas/DORAFetchResponse'
           description: OK
         '400':
           content:
