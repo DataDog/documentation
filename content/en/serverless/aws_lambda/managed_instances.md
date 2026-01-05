@@ -50,7 +50,7 @@ To correlate your logs and traces, ensure that you have set `DD_TRACE_ENABLED` a
     {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/python/" >}}Correlating Python Logs and Traces{{< /nextlink >}}
     {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/nodejs/" >}}Correlating Node.js Logs and Traces{{< /nextlink >}}
     {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/java/" >}}Correlating Java Logs and Traces{{< /nextlink >}}
-    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/dotnet/" >}}Correlating .Net Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/dotnet/" >}}Correlating .NET Logs and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Known limitations
