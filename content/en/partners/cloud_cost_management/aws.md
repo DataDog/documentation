@@ -138,22 +138,20 @@ These values define where AWS writes the CUR and where Datadog reads it.
    {{< img src="partners/cloud_cost/select_aws_account_ccm.png" alt="Select AWS Account for CCM" style="width:100%;" >}}
 
 2. Select the member account and enter the following fields using the exact values from **Step 3**:
-- Bucket Name  
-- Bucket Region  
-- Export Path Prefix  
-- Export Name  
+   - Bucket Name  
+   - Bucket Region
+   - Export Path Prefix
+   - Export Name
 
-3. Skip the **Create CloudFormation stack step**
+3. Skip the **Create CloudFormation stack step** (the stack was already deployed in **Step 3**).
 
-The stack was already deployed in **Step 3**
 
-4. Click **Activate now**
+4. Click **Activate now** to activate CCM for the member account.
 
-Activate CCM for the member account.
 
 {{< img src="partners/cloud_cost/configure_aws_ccm.png" alt="Configure AWS Cloud Cost Management" style="width:100%;" >}}
 
-If everything is configured correctly, the account status will update as shown below.
+After configuration is complete, the account status updates as shown below.
 
 {{< img src="partners/cloud_cost/complete_aws_ccm.png" alt="Complete AWS Cloud Cost Management" style="width:100%;" >}}
 
