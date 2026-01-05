@@ -117,8 +117,8 @@ Cross-Product Retention Filters are in Preview. Use this form to submit your req
 
 When configuring a RUM retention filter, you can enable two cross-product retention filters: one for session replays and one for APM traces.
 
-- **Session Replay filter**: Retains replays for the specified percentage of sessions retained by the parent RUM retention filter which have an available replay.
-- **APM traces filter**: Indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter which have available traces.
+- **Session Replay filter**: Retains replays for the specified percentage of sessions retained by the parent RUM retention filter that have an available replay.
+- **APM traces filter**: Indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter that have available traces.
   <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs (applies to RUM and APM, but not Session Replay): <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
 
 <div class="alert alert-danger">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
@@ -137,9 +137,9 @@ Consider a configuration where you set up a unique RUM retention filter configur
 
 If you have initialized the SDK with `sessionReplaySampleRate:30` and `traceSampleRate:40`, then the outcome is the following:
 
-- 60% of sessions with at least one error are retained
-- 50% x 30% = 15% of these retained sessions have a retained replay
-- 25% x 40% = 10% of these retained sessions have the APM traces retained
+- 60% of sessions with at least one error are retained.
+- 50% x 30% = 15% of these retained sessions have a retained replay.
+- 25% x 40% = 10% of these retained sessions have the APM traces retained.
 
 <div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
 
