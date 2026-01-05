@@ -24,6 +24,8 @@ There are no required setup steps.
 
 You can route logs to multiple Datadog organizations. After you set up routing to multiple organizations, you can [view metrics for the component or specific organizations](#view-metrics-for-the-component-or-specific-organizations) to which you are routing logs.
 
+{{< img src="observability_pipelines/destinations/multi_dd_orgs.png" alt="The Datadog Logs destination showing us1 and us3 org" style="width:45%;" >}}
+
 Click **Route to Multiple Organizations** to set up routing to multiple Datadog organizations.
 
 - If you haven't added any organizations yet, enter organization details as described in the [Add a Datadog organization](#add-an-organization) section.
@@ -91,6 +93,7 @@ To view metrics for a specific Datadog organization:
 1. Navigate to [Observability Pipelines][1].
 1. Select your pipeline.
 1. Click the **Datadog Logs** destination so the organizations show up.
+  {{< img src="observability_pipelines/destinations/multi_dd_orgs_highlighted.png" alt="The Datadog Logs destination showing us1 and us3 org highlighted" style="width:45%;" >}}
 1. Click the organization you want to see metrics for.
 1. Click **View Health Metrics**.
 
