@@ -3,10 +3,15 @@ aliases:
 - /fr/agent/autodiscovery/template_variables
 - /fr/agent/faq/template_variables
 - /fr/agent/guide/template_variables
+description: Guide de référence pour les variables de modèle disponibles dans la configuration
+  d'intégration Autodiscovery pour les environnements de conteneurs dynamiques
 further_reading:
-- link: /agent/kubernetes/integrations/
+- link: /containers/kubernetes/integrations/
   tag: Documentation
-  text: Créer et charger un modèle d'intégration Autodiscovery
+  text: Configurer les intégrations avec Autodiscovery sur Kubernetes
+- link: /containers/docker/integrations/
+  tag: Documentation
+  text: Configurer les intégrations avec Autodiscovery sur Docker
 - link: /agent/guide/ad_identifiers/
   tag: Documentation
   text: Associer un conteneur au modèle d'intégration correspondant
@@ -16,26 +21,28 @@ further_reading:
 title: Template variables Autodiscovery
 ---
 
-Utilisez les template variables suivantes lors de la configuration d'Autodiscovery afin d'attribuer de façon dynamique les valeurs de votre conteneur :
+[Autodiscovery][1] vous permet de définir des configurations statiques pour des ressources dynamiques comme les conteneurs.
 
-| Template variable           | Description                                                                                                                                                                                                 |
-| --------------------------  | ---                                                                                                                                                                                                         |
-| `"%%host%%"`                | Détecte automatiquement le réseau. Dans le cas des conteneurs à réseau unique, cette template variable renvoie l'adresse IP correspondante.                                                                                                                   |
-| `"%%host_<NOM_RÉSEAU>%%"` | Indique le nom du réseau à utiliser, en cas d'association à plusieurs réseaux.                                                                                                                                      |
-| `"%%port%%"`                | Utilise le port exposé le plus élevé lorsque les ports sont **triés numériquement par ordre croissant**.<br>Exemple : `8443` pour un conteneur qui expose les ports `80`, `443` et `8443`.                                    |
-| `"%%port_<NOMBRE_X>%%"`     | Utilise le port `<NOMBRE_X>` **trié numériquement par ordre croissant**.<br> Exemple : si un conteneur expose les ports `80`, `443` et `8443`, `"%%port_0%%` correspond au port `80` et `"%%port_1%%"` au port `443`. |
-| `"%%port_<NOM>%%"`     | Utilise le port associé au nom du port `<NOM>`.                                                                                                                                                           |
-| `"%%pid%%"`                 | Récupère l'ID du processus de conteneur renvoyé par `docker inspect --format '{{.State.Pid}}' <NOM_CONTENEUR>`.                                                                                              |
-| `"%%hostname%%"`            | Récupère la valeur `hostname` à partir de la configuration du conteneur. À n'utiliser que lorsque la variable `"%%host%%"` ne parvient pas à récupérer une adresse IP fiable (par exemple :  [ECS en mode AWSVPC][1]).                                       |
-| `"%%env_<VAR_ENV>%%"`       | Utilise le contenu de la variable d'environnement `$<VAR_ENV>` **comme l'indique le processus de l'Agent**.                                                                                                                |
-| `"%%kube_namespace%%"`      | Détecte automatiquement l'espace de nommage Kubernetes. |
-| `"%%kube_pod_name%%"`       | Détecte automatiquement le nom du pod Kubernetes.  |
-| `"%%kube_pod_uid%%"`        | Détecte automatiquement l'UID du pod Kubernetes.   |
+Vous pouvez utiliser les variables de modèle suivantes pour attribuer dynamiquement les valeurs de votre conteneur :
+
+| Template variable | Rôle |
+| --------------------------  | ---    |
+| `"%%host%%"`                | L'adresse IP réseau du conteneur. |
+| `"%%host_<NETWORK NAME>%%"` | Lorsque le conteneur est attaché à plusieurs réseaux, renvoie le nom de réseau à utiliser. |
+| `"%%port%%"`                | Le port exposé le plus élevé **trié numériquement et par ordre croissant**.<br>Par exemple, renvoie `8443` pour un conteneur qui expose les ports `80`, `443` et `8443`. |
+| `"%%port_<NUMBER_X>%%"`     | Le port `<NUMBER_X>` **trié numériquement et par ordre croissant**.<br>Par exemple, si un conteneur expose les ports `80`, `443` et `8443`, `"%%port_0%%` fait référence au port `80` et `"%%port_1%%"` fait référence au port `443`. |
+| `"%%port_<NAME>%%"`     | Le port associé au nom de port `<NAME>`. |
+| `"%%pid%%"`                 | L'ID de processus du conteneur, tel que renvoyé par `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`. |
+| `"%%hostname%%"`            | La valeur `hostname` de la configuration du conteneur. Utilisez cette variable uniquement si la variable `"%%host%%"` ne peut pas récupérer une adresse IP fiable (par exemple, en [mode ECS awsvpc][2]).                                       |
+| `"%%env_<ENV_VAR>%%"`       | Le contenu de la variable d'environnement `$<ENV_VAR>` **tel que vu par le processus de l'Agent**.  |
+| `"%%kube_namespace%%"`      | L'espace de nommage Kubernetes. |
+| `"%%kube_pod_name%%"`       | Le nom de pod Kubernetes.  |
+| `"%%kube_pod_uid%%"`        | L'UID de pod Kubernetes.   |
 
 **Alternative** :
 
-* Pour `"%%host%%"` : si l'Agent n'est pas capable de la trouver, l'IP de réseau `bridge` est utilisée comme valeur alternative pour cette template variable.
-* Pour `"%%host_<NOM_RÉSEAU>%%" : si le `<NOM_RÉSEAU>` spécifié n'a pas été trouvé, cette template variable se comporte comme `"%%host%%"`.
+* Pour la variable de modèle `"%%host%%"` : si l'Agent n'est pas en mesure de trouver l'adresse IP, cette variable de modèle revient à l'adresse IP du réseau `bridge`.
+* Pour `"%%host_<NETWORK NAME>%%"` : si le `<NETWORK_NAME>` spécifié est introuvable, cette variable de modèle se comporte comme `"%%host%%"`.
 
 Les template variables ne sont pas toutes prises en charge, selon votre plateforme :
 
@@ -49,4 +56,5 @@ Les template variables ne sont pas toutes prises en charge, selon votre platefor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
+[1]: /fr/getting_started/containers/autodiscovery
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html

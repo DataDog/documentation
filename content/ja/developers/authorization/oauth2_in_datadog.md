@@ -49,7 +49,7 @@ title: Datadog の OAuth2
 
    `API_KEYS_WRITE` スコープがクライアントに追加されていない場合、このステップは失敗します。このエンドポイントでは、一度だけ表示される API キーを生成し、ユーザーが Datadog アカウント内で削除しない限り、再生成することはできません。**この値は安全なデータベースまたは場所に保存してください**。
 
-OAuth クライアントの作成、テスト、公開については、[Datadog インテグレーションのための OAuth][5] を参照してください。
+OAuth クライアントの作成、テスト、公開については、[API ベースのインテグレーションを作成する][5] を参照してください。
 
 ### サードパーティロケーションからの認可の開始
 
@@ -101,7 +101,7 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 [2]: /ja/api/latest/scopes/
 [3]: /ja/developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /ja/developers/integrations/oauth_for_integrations
+[5]: /ja/developers/integrations/api_integration
 [6]: /ja/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /ja/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

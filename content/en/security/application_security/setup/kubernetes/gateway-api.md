@@ -3,6 +3,7 @@ title: Enabling AAP for Gateway API in Kubernetes
 aliases:
   - /security/application_security/threats/setup/threat_detection/gateway_api
   - /security/application_security/threats_detection/gateway_api
+  - /security/application_security/setup/gateway-api
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/k8s.io/gateway-api'
       tag: "Source Code"
