@@ -235,5 +235,5 @@ To access the Debug Console, hover over an app in [your apps list][14] and click
 [25]: https://app.datadoghq.com/app-builder/apps/edit?template=export-synthetics&viewMode=templatePreview
 [26]: https://app.datadoghq.com/app-builder/apps/edit?template=how_to__write_custom_code&viewMode=templatePreview
 [27]: /actions/forms/
-[28]: https://app.datadoghq.com/actions/action-catalog#com.datadoghq.dd/com.datadoghq.dd.apps_datastore
+[28]: /actions/datastores/
 [29]: /actions/app_builder/embedded_apps/input_parameters/
