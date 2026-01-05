@@ -9,116 +9,97 @@ title: Pruebas continuas y Bitrise
 
 ## Información general
 
-Con el paso `synthetics-test-automation-bitrise-step-upload-application`, puedes cargar una nueva versión de tu aplicación a Datadog para ejecutar tests Sintético durante tu Bitrise CI, asegurándote de que todos tus equipos que utilizan Bitrise puedan beneficiarse con las tests Sintético en cada etapa del ciclo de vida del software. Este paso utiliza el comando [Datadog CI Synthetics][2] y requiere que tu aplicación ya exista.
+Con el paso `synthetics-test-automation-bitrise-step-upload-application`, puedes cargar una nueva versión de tu aplicación en Datadog para ejecutar tests Synthetic durante tu Bitrise CI, asegurándote de que todos tus equipos que utilizan Bitrise puedan beneficiarse de los tests Synthetic en cada etapa del ciclo de vida del software.
+
+Este paso requiere que tu aplicación ya exista en Datadog.
+
+Para obtener más información sobre la configuración disponible, consulta la [documentación de `datadog-ci upload-application`][2].
 
 ## Configuración
 
-Este paso no está disponible en la página oficial Bitrise Step Library.
+Este paso no está disponible en la Biblioteca de pasos oficial de Bitrise.
 Para empezar:
 
 1. Añade la siguiente URL git a tu flujo de trabajo. Consulta la [documentación oficial de Bitrise][3] sobre cómo hacerlo a través de la aplicación Bitrise. También la puedes configurar localmente haciendo referencia a la URL git en tu archivo `bitrise.yml`.
 
 ```yml
-- git::https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application.git@1.10.0:
+- git::https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application.git@v2.7.0:
 ```
 
-2. Añada tus claves API y de aplicación a tus [secretos en Bitrise][4].
-3. [Configurar tus entradas de pasos][5]. También puedes configurarlas en ru archivo `bitrise.yml`. Las únicas entradas requeridas son los dos secretos que configuraste anteriormente. Para obtener una lista completa de entradas, consulta la [sección Entradas](#inputs).
+2. Añade tus claves de API y de aplicación a tus [secretos en Bitrise][4].
+3. [Configurar tus entradas de pasos][5]. También puedes configurarlas en tu archivo `bitrise.yml`. Las únicas entradas requeridas son los dos secretos que configuraste anteriormente. Para obtener una lista completa de entradas, consulta la [Sección de entradas](#inputs).
 
-## Cómo utilizar este paso a nivel local
+Cuando se ejecuta el paso localmente con la Bitrise CLI, los secretos deben almacenarse en un archivo `.bitrise.secrets.yml`. Consulta [Gestión local de secretos][6].
 
-Puedes ejecutar este paso directamente utilizando la [Bitrise CLI][6].
-
-Para ejecutar este paso localmente:
-
-1. Abre tu terminal o línea de comandos.
-2. `git clone` el [repositorio Bitrise][6].
-3. `cd` en el directorio del paso (el que acabas de `git clone`).
-4. Crea un archivo `.bitrise.secrets.yml` en el mismo directorio que `bitrise.yml`. El archivo `.bitrise.secrets.yml` es un archivo ignorado por Git, por lo que puedes almacenar tus secretos en él.
-5. Check el archivo `bitrise.yml` para cualquier secreto que debas configurar en `.bitrise.secrets.yml`.
-6. Una vez que tengas los parámetros secretos necesarios en tu archivo `.bitrise.secrets.yml`, ejecuta este paso con la [Bitrise CLI][6] con `bitrise run test`.
-
-Un ejemplo de archivo `.bitrise.secrets.yml`:
-
-```yml
-envs:
-- A_SECRET_PARAM_ONE: the value for secret one
-- A_SECRET_PARAM_TWO: the value for secret two
-```
-
-## Uso
+## Utilización
 
 ### Ejemplo de tarea que utiliza una anulación global de configuración con `configPath`
 
-Esta tarea anula la ruta al archivo global `datadog-ci.config.json`.
+Esta tarea anula la ruta del archivo global `datadog-ci.config.json`.
 
 ```yml
-- git::https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application.git@1.10.0:
+- git::https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application.git@v2.7.0:
    inputs:
    - api_key: <DATADOG_API_KEY>
    - app_key: <DATADOG_APP_KEY>
    - config_path: './synthetics-config.json'
 ```
 
-Para ver un ejemplo de archivo de configuración, consulta el [ archivo`global.config.json` ][7].
-
 ### Ejemplo con todas las configuraciones posibles
 
-Como referencia, este es un ejemplo de una configuración completa:
+Como referencia, este es un ejemplo de una configuración completo:
 
 ```yml
-- git::https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application.git@1.10.0:
+- git::https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application.git@v2.7.0:
    inputs:
    - api_key: <DATADOG_API_KEY>
    - app_key: <DATADOG_APP_KEY>
    - config_path: './global.config.json'
+   - datadog_site: 'datadoghq.com'
    - latest: true
-   - mobile_application_version_id: '123-123-123'
+   - mobile_application_id: '123-123-123'
    - mobile_application_version_file_path: 'path/to/application.apk'
-   - site: 'datadoghq.com'
    - version_name: 'example 1.0'
 ```
 
 ## Entradas
 
-| Nombre                               | Requisito | Descripción                                                                                                                             |
-| -----------------------------------| :---------: | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `apiKey`                           | _required_  | Su clave de API Datadog. Esta clave es creada por tu [organización Datadog][8] y se accederá a ella como una variable de entorno.         |
-| `appKey`                           | _required_  | Tu clave de aplicación Datadog. Esta clave es creada por tu [organización Datadog][8] y se accederá a ella como una variable de entorno. |
-| `configPath`                       | _opcional_  | La configuración global de JSON se utiliza al lanzar las tests. Consulta el [ejemplo de configuración][9] para obtener más detalles.                     |
-| `latest`                           | _opcional_  | Marca la aplicación como `latest`. Cualquier test que se ejecute en la última versión utilizará esta versión en la siguiente ejecución.                    |
-| `mobileApplicationVersionId`       | _required_  | ID de la aplicación a la que quieres cargar la nueva versión.                                                                            |
-| `mobileApplicationVersionFilePath` | _required_  | Anula la versión de la aplicación para [tests de la aplicación móvil Sintético][15].                                                                |
-| `site`                             | _opcional_  | El [sitio Datadog][14] al que enviar los datos.  Tu sitio Datadog es {{< region-param key="dd_site" code="true" >}}. Si la variable de entorno`DD_SITE` está configurada, tiene prioridad.                                    |
-| `versionName`                      | _required_  | Nombre de la nueva versión. Tiene que ser único.                                                                                           |
+Para obtener más información sobre la configuración disponible, consulta la [documentación de `datadog-ci upload-application`][2].
+
+| Nombre                                   | Descripción                                                                                                                                                                                                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api_key`                              | (**Obligatorio**) Tu clave de API Datadog. Esta clave se [crea en tu organización Datadog][8] y debe almacenarse como secreto.                                                                                                                                     |
+| `app_key`                              | (**Obligatorio**) Tu clave de aplicación Datadog. Esta clave se [crea en tu organización Datadog][8] y debe almacenarse como secreto.                                                                                                                             |
+| `config_path`                          | La ruta al [archivo de configuración global][9] que configura datadog-ci. <br><sub>**Por defecto:** `datadog-ci.json`</sub>                                                                                                                                         |
+| `datadog_site`                         | Tu sitio Datadog. Los valores posibles se enumeran [en esta tabla][14]. <br><sub>**Por defecto:** `datadoghq.com`</sub> <br><br> Configúralo como {{< region-param key="dd_site" code="true" >}} (asegurarse de seleccionar el SITIO correcto a la derecha).  |
+| `latest`                               | Marca la nueva versión como `latest`. Cualquier test que se ejecute en la versión más reciente utilizará esta versión en su próxima ejecución. <br><sub>**Por defecto:** `false`</sub>                                                                                                          |
+| `mobile_application_id`                | (**Obligatorio**) El ID de la aplicación a la que quieres cargar la nueva versión.                                                                                                                                                                                  |
+| `mobile_application_version_file_path` | (**Obligatorio**) La ruta a la nueva versión de tu aplicación móvil (`.apk` o `.ipa`). Puedes utilizar `$BITRISE_IPA_PATH` o `$BITRISE_APK_PATH` de los pasos de compilación anteriores.                                                                                 |
+| `version_name`                         | (**Obligatorio**) El nombre de la nueva versión. Tiene que ser único.                                                                                                                                                                                                 |
 
 ## Salidas
 
-| Nombre                                      | Descripción                                                                                                                                                                                               |
-| ------------------------------------------| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DATADOG_UPLOADED_APPLICATION_VERSION_ID` | El ID de la versión de la aplicación que se acaba de cargar. Pásalo al paso [`datadog-mobile-app-run-tests` ][10] con la entrada `mobile_application_version` para hacer un test de esta versión de la aplicación. |
+| Nombre                                      | Descripción                                                                                                                                                                                   |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATADOG_UPLOADED_APPLICATION_VERSION_ID` | El ID de la versión de la aplicación que se acaba de cargar. Pásalo al [paso de Bitrise para ejecutar tests][10] con la entrada `mobile_application_version` para probar esta versión de la aplicación. |
 
 ## Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
 - [Empezando con pruebas continuas][13]
 - [Pruebas continuas y configuración de CI/CD][11]
 - [Mejores prácticas para pruebas continuas con Datadog][12]
 
-<!-- Links to Marketplace -->
-[1]: https://bitrise.io/integrations/steps/datadog-mobile-app-upload
-[2]: https://docs.datadoghq.com/es/continuous_testing/cicd_integrations/configuration/?tab=npm#run-tests
+[2]: https://docs.datadoghq.com/es/continuous_testing/cicd_integrations/configuration/?tab=npm#upload-application-command
 [3]: https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps/adding-steps-to-a-workflow.html#adding-steps-from-alternative-sources
 [4]: https://devcenter.bitrise.io/en/builds/secrets.html#setting-a-secret
 [5]: https://devcenter.bitrise.io/en/steps-and-workflows/introduction-to-steps/step-inputs.html
-[6]: https://github.com/bitrise-io/bitrise
-[7]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
+[6]: https://devcenter.bitrise.io/en/bitrise-cli/managing-secrets-locally.html
 [8]: https://docs.datadoghq.com/es/account_management/api-app-keys/
-[9]: https://docs.datadoghq.com/es/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
-[10]: https://bitrise.io/integrations/steps/datadog-mobile-app-run-tests
+[9]: https://docs.datadoghq.com/es/continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file
+[10]: https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests
 [11]: https://docs.datadoghq.com/es/continuous_testing/cicd_integrations/configuration
 [12]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
 [13]: https://docs.datadoghq.com/es/getting_started/continuous_testing/
-[14]: https://docs.datadoghq.com/es/getting_started/site/
-[15]: https://docs.datadoghq.com/es/synthetics/mobile_app_testing/
+[14]: https://docs.datadoghq.com/es/getting_started/site/#access-the-datadog-site

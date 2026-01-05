@@ -4,11 +4,17 @@ description: Learn how to configure Evaluations for your LLM application.
 aliases:
     - /tracing/llm_observability/evaluations/
     - /llm_observability/configuration/
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
 
-LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Settings > Evaluations**][8].
+LLM Observability offers several ways to support evaluations. They can be configured by navigating to [**AI Observability > Evaluations**][8].
 
 ### Custom LLM-as-a-judge evaluations
 
@@ -40,6 +46,14 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 
 [`LLM Observability Write` permissions][7] are necessary to configure evaluations.
 
+### Retrieving spans
+
+LLM Observability offers an [Export API][9] that you can use to retrieve spans for running external evaluations. This helps circumvent the need to keep track of evaluation-relevant data at execution time.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 [2]: /llm_observability/evaluations/managed_evaluations
 [3]: /llm_observability/evaluations/external_evaluations
@@ -47,4 +61,5 @@ In addition to evaluating the input and output of LLM requests, agents, workflow
 [5]: /llm_observability/evaluations/submit_nemo_evaluations
 [6]: /security/sensitive_data_scanner/
 [7]: /account_management/rbac/permissions/#llm-observability
-[8]: https://app.datadoghq.com/llm/settings/evaluations
+[8]: https://app.datadoghq.com/llm/evaluations
+[9]: /llm_observability/evaluations/export_api

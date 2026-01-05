@@ -5,7 +5,7 @@ aliases:
     - /observability_pipelines/guide/upgrade_to_the_new_search_syntax/
 disable_toc: false
 further_reading:
-- link: "/observability_pipelines/search_syntax/"
+- link: "/observability_pipelines/search_syntax/logs/"
   tag: "Documentation"
   text: "Learn more about Observability Pipelines search syntax"
 ---
@@ -30,9 +30,9 @@ If you created your pipeline in the UI:
 
 1. [Upgrade to Observability Pipelines Worker][1] version 2.11.
 1. Navigate to the [Pipeline page][2] for that pipeline and update your filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
-1. On the pipeline editor page, by default the `Use legacy search syntax` box is checked because your pipeline is running the old search syntax of Worker 2.10 or older.
-{{< img src="observability_pipelines/guide/legacy_search_checkbox.png" alt="The pipelines editor showing the legacy search checkbox selected" style="width:100%;" >}}
-1. After you've updated all queries in that pipeline, uncheck the `Use legacy search syntax` box and deploy your pipeline.
+1. On the pipeline editor page, by default **Legacy Search Syntax** is enabled because your pipeline is running the search syntax of Worker 2.10 or older.
+{{< img src="observability_pipelines/guide/legacy_search_syntax_toggle.png" alt="The pipelines editor showing the legacy search toggle enabled" style="width:85%;" >}}
+1. After you've updated all queries in that pipeline, toggle the switch to **New Search Syntax** and deploy your pipeline.
 
 ### Created the pipeline using the API or Terraform
 
@@ -127,5 +127,5 @@ See [Reserved attributes][3] for more information.
 [1]: /observability_pipelines/install_the_worker/?tab=docker#upgrade-the-worker
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[4]: /observability_pipelines/search_syntax/#attribute-search
+[4]: /observability_pipelines/search_syntax/logs/#attribute-search
 [5]: /observability_pipelines/live_capture/

@@ -9,5 +9,4 @@ cascade:
     render: never
     list: always
     publishResources: false
-external_redirect: /api/latest/
 ---

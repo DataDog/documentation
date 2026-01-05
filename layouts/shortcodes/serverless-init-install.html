@@ -1,4 +1,6 @@
-Datadog publishes new releases of the `serverless-init` container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
+{{ if eq (.Get "cloudservice") "jobs" }}<div class="alert alert-info">Serverless-init automatically creates a span for the duration of a task, even if the tracer is not installed. You can disable this by setting <code>DD_APM_ENABLED=false</code>. However, tracing is <strong>recommended</strong> because it is required for task-level visibility.</div>
+<div class="alert alert-info">Cloud Run Jobs requires <code>serverless-init</code> version 1.9.0 or later.</div>{{ end }}
+Datadog publishes new releases of the <code>serverless-init</code> container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
 
 | hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
@@ -10,10 +12,10 @@ Images are tagged based on semantic versioning, with each new version receiving 
 - `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
 - `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
 
-Add the following instructions and arguments to your Dockerfile.
+{{ if eq (.Get "mode") "in-container" }}Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
+COPY --from=datadog/serverless-init:<YOUR_TAG> /datadog-init /app/datadog-init
 ENTRYPOINT ["/app/datadog-init"]
 CMD [{{ .Get "cmd" | safeHTML }}]
 ```
@@ -54,3 +56,4 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
   </div>
 </details>
 <br/>
+{{ end }}

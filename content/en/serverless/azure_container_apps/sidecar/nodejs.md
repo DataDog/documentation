@@ -38,10 +38,24 @@ ENV NODE_OPTIONS="--require dd-trace/init"
 
 2. **Install serverless-init as a sidecar**.
 
+   {{% serverless-init-install mode="sidecar" %}}
+
    {{< tabs >}}
+
+   {{% tab "Datadog CLI" %}}
+   {{% aca-install-sidecar-datadog-ci %}}
+   {{% /tab %}}
 
    {{% tab "Terraform" %}}
    {{% aca-install-sidecar-terraform %}}
+   {{% /tab %}}
+
+   {{% tab "Bicep" %}}
+   {{% aca-install-sidecar-bicep %}}
+   {{% /tab %}}
+
+   {{% tab "ARM Template" %}}
+   {{% aca-install-sidecar-arm-template %}}
    {{% /tab %}}
 
    {{% tab "Manual" %}}

@@ -21,6 +21,10 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
 ## Setup
 
+1. Set up the [Google Cloud integration][6].
+1. Enable log collection with the [Dataflow Method][14] to collect your Cloud Function logs.
+1. Configure tracing, runtime metrics, and custom metrics for your function's runtime.
+
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
 1. **Install dependencies**. Run the following commands:
@@ -400,3 +404,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 [12]: https://cloud.google.com/run/docs/configuring/services/labels
 [13]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
+[14]: /integrations/google-cloud-platform/?tab=organdfolderlevelprojectdiscovery#log-collection
