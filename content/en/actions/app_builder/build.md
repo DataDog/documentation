@@ -180,7 +180,7 @@ You can perform the following operations:
 
 To edit an app with JSON, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
-### Export an app
+### Copy an app
 
 To copy an app layout across organizations or back an app up, click **Settings** ({{< img src="icons/settings.png" inline="true" style="width:14px;">}}) and select **Switch to JSON**. This shows the JSON code for the entire app. Copy this JSON code and save it in a text editor. You can save intermediate states of your app during development and return to them if necessary.
 
