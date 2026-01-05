@@ -22,28 +22,44 @@ To make it easier to search for security findings throughout Datadog, the syntax
 
 This change comes with a set of [new features](#new-features) that use the new schema, and may also impact your existing workflows. This page details what is changing, the workflows that Datadog automatically updates, and the changes you need to make to avoid interruptions in your existing workflows.
 
+<div class="alert alert-warning">Datadog will start rolling out changes January 28, 2026. You should plan to update any affected workflows in the first half of 2026 to avoid any interruptions as Datadog deprecates the old syntax.
+</div>
+
 {{< learning-center-callout header="" btn_title="View the schema" btn_url="/security/guide/findings-schema/" hide_image="true" >}}
   View the new security findings schema so you can understand how finding details will be stored.
 {{< /learning-center-callout >}}
 
 ### Required action
 
-This change affects all interfaces where you can query security findings data. While some queries will receive automatic updates, others require updates on your part:
-- **No change required** - queries are updated automatically
-  - Explorers, dashboards, notification rules, and automation pipelines
-- **Changes required** - update your queries by **April 1, 2026**
-  - Workflow Automation and Sheets
-  - API endpoints: [List findings][15] and [Get a finding][16]
-  - Terraform resource: `datadog_security_notification_rule`
-  <div class="alert alert-warning">Datadog will deprecate legacy API and Terraform resources. Update your queries on time so you can avoid workflow interruptions.</div>
+- If you use certain API endpoints or Terraform resources, **changes will be required**:
+  - For [List findings][15] and [Get a finding][16] API endpoints, update your API calls to use the new unified Findings API. The documentation for this API will be published in early January 2026.
+  - For [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, update `query` values to use the new search syntax, starting January 28, 2026.
+- If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required**. The following queries are updated automatically in the UI:
+  - Explorers
+  - Dashboards
+  - Notification rules
+  - Automation pipelines
+  - Workflows
 
 If you need assistance with your migration, contact [Datadog support][14].
 
 ## What is changing
 
+### New querying syntax
+
+Following this change, you can use the same query syntax for all security findings, using attributes organized around namespaces. Here are some practical examples:
+
+| Before | After (all findings) |
+|--------|----------------------|
+| **Misconfigurations:** `@workflow.triage.status:open status:critical`<br>**Library vulnerabilities:** `status:open severity:Critical` | `@status:open @severity:critical` |
+| **Misconfigurations:** `@dd_computed_attributes.is_publicly_accessible:true`<br>**Host Vulnerabilities:** `is_publicly_accessible:Accessible` | `@risk.is_publicly_accessible:true` |
+| **Library Vulnerabilities:** `library_name:org.apache.logging.log4j`<br>**Host Vulnerabilities:** `package:org.apache.logging.log4j` | `@package.name:org.apache.logging.log4j` |
+
+View the full specification at [Security Findings Schema Reference][1].
+
 ### New features
 
-Starting late January 2026, the following features use the new data model:
+Starting January 28, 2026, the following features will be made available and use the new data model:
 - Unified search queries for Cloud Security [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
 - A new unified public findings API
 - [Dashboard][2] support for Code Security
@@ -114,17 +130,6 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
   </tbody>
 </table>
 
-### New querying syntax
-
-Following this change, you can use the same query syntax for all security findings, using attributes organized around namespaces. Here are some practical examples:
-
-| Before | After (all findings) |
-|--------|----------------------|
-| **Misconfigurations:** `@workflow.triage.status:open status:critical`<br>**Library vulnerabilities:** `status:open severity:Critical` | `@status:open @severity:critical` |
-| **Misconfigurations:** `@dd_computed_attributes.is_publicly_accessible:true`<br>**Host Vulnerabilities:** `is_publicly_accessible:Accessible` | `@risk.is_publicly_accessible:true` |
-| **Library Vulnerabilities:** `library_name:org.apache.logging.log4j`<br>**Host Vulnerabilities:** `package:org.apache.logging.log4j` | `@package.name:org.apache.logging.log4j` |
-
-View the full specification at [Security Findings Schema Reference][1].
 
 ## Further reading
 
@@ -146,3 +151,4 @@ View the full specification at [Security Findings Schema Reference][1].
 [14]: /help
 [15]: /api/latest/security-monitoring/#list-findings
 [16]: /api/latest/security-monitoring/#get-a-finding
+[17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_notification_rule
