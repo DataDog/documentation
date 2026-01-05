@@ -9,6 +9,11 @@ disable_toc: true
     {{< nextlink href="/security/guide/byoti_guide" >}}Bring Your Own Threat Intelligence{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Reference:" >}}
+   {{< nextlink href="/security/guide/findings-schema/" >}}Security Findings Schema Reference
+{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Cloud SIEM Guides:" >}}
     {{< nextlink href="/getting_started/cloud_siem" >}}Getting Started with Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/automate-the-remediation-of-detected-threats" >}}Automate the remediation of detected threats with Cloud SIEM{{< /nextlink >}}
