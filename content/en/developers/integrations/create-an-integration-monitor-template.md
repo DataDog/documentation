@@ -47,6 +47,29 @@ Start by reviewing the [full list of monitor types][6] to understand what kinds 
 
 [Create and configure your monitor][5] within your partner developer organization. These monitors serve as reusable templates that integration users can enable directly in their own Datadog organizations.
 
+See the following best practices for your monitor template's title and description:
+
+#### Write a title for your monitor template
+
+The title allows users to understand the underlying failure mode the alert is covering.
+- Use the active voice and start with an object followed by a verb. 
+- Do not use template variables.
+
+| Needs revision                                       | Better                                 | Best                                        |
+| -----------                                          | -----------                            | -----------                                 |
+|High Unacknowledged Messages reported on {{host.name}}| High Unacknowledged Messages reported  |Unacknowledged Messages are higher than usual|
+
+#### Write a description for your monitor template
+
+The description provides extra context around the failure mode and also about the impact this mode can have on the system. It should allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it. The description should not be a copy of the title. 
+- Define the problem stated by the title.
+- Answer why this is an issue worth alerting on.
+- Describe the impact of the problem.
+
+| Needs revision                                         | Better                                       | Best                                    |
+| -----------                                          | -----------                                  | -----------                             |
+|Notify your team when unacked message are high. | Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages.|Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages to avoid potential bottlenecks which could lead to delays in message processing.|
+
 ### Test your monitor
 
 1. Ingest telemetry that triggers your monitor.
