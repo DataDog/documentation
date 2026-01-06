@@ -123,10 +123,10 @@ Allocated Memory
 : The amount of heap memory allocated by each function during the profiling period (default: 60s), including allocations which were subsequently freed. Go calls this `alloc_space`. Stack allocations are not tracked. This is useful for investigating garbage collection load. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
 
 Heap Live Objects
-: The number of objects allocated by each function in heap memory that have not yet been garbage collected. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+: The number of objects allocated by each function in heap memory that remain in use after garbage collection. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that has not yet been garbage collected. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and [identifying potential memory leaks][4].
+: The amount of heap memory allocated by each function that remains in use after garbage collection. Under default settings (GOGC=100), this will be ~50% of the RSS usage of the process. Go calls this `inuse_space`. This is useful for investigating the overall memory usage of your service and [identifying potential memory leaks][4]. See [Go memory metrics demystified][5] and [A Guide to the Go Garbage Collector][6] for more information.
 
 Mutex
 : The time functions have been waiting on mutexes during the profiling period (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
@@ -145,6 +145,8 @@ Goroutines
 [2]: https://github.com/DataDog/go-profiler-notes/blob/main/goroutine.md
 [3]: /profiler/enabling/go#requirements
 [4]: /profiler/guide/solve-memory-leaks
+[5]: https://www.datadoghq.com/blog/go-memory-metrics/
+[6]: https://go.dev/doc/gc-guide
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -230,7 +232,7 @@ Garbage Collector CPU consumption (v3.19+)
 : The time garbage collector's threads spent running on the CPU.<br />
 _Requires: .NET Framework (with Datadog Agent 7.51+ and v3.2+) / .NET 5+_
 
-**Note**: Before .NET 10, **Allocations** and **Live Heap** profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results. 
+**Note**: Before .NET 10, **Allocations** and **Live Heap** profiling might show bigger objects more than smaller ones due to the sampling algorithm used by the .NET runtime. Datadog recommends using .NET 10+ for more statistically correct results.
 
 
 [1]: /profiler/enabling/dotnet/#requirements
