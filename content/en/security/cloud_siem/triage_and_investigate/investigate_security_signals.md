@@ -61,12 +61,12 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Click on a security signal from the table.
 1. In the **What Happened** section, see the logs that matched the query. Hover over the query to see the query details.
     - You can also see specific information like username or network IP. In **Rule Details**, click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
-1. In the **Next Steps** section:   
+1. In the **Next Steps** section:
   a. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
       - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
       - `Under Review`: During an active investigation, change the triage status to `Under Review`. From the `Under Review` state, you can move the status to `Archived` or `Open` as needed.
       - `Archived`: When the detection that caused the signal has been resolved, update the status to `Archived`. When a signal is archived, you can give a reason and description for future reference. If an archived issue resurfaces, or if further investigation is necessary, the status can be changed back to `Open`. All signals are locked 30 days after they have been created.</ul>
-  b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.  
+  b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
   c. Under **Take Action**, you can create a case, declare an incident, edit suppressions, or run workflows. Creating a case automatically assigns the signal to you and sets the triage status to `Under Review`.
 
 {{< img src="security/security_monitoring/investigate_security_signals/signal_side_panel.png" alt="The signal side panel of a compromised AWS IAM user access key showing two IP addresses and their locations" style="width:90%;" >}}
@@ -130,7 +130,7 @@ Click the **Logs** tab to view the logs related to the signal. Click **View All 
 To investigate entities:
 
 1. Click the **Entities** tab to see entities related to the signal, such as users or IP addresses.
-1. Click the down arrow next to **View Related Logs** and:   
+1. Click the down arrow next to **View Related Logs** and:
     - Select **View IP Dashboard** to see more information about the IP address in the IP Investigation dashboard.
     - Select **View Related Signals** to open Signals Explorer and see the other signals associated with the IP address.
 1. For cloud environment entities, such as an assumed role or IAM user, view the activity graph to see what other actions the user took. Click **View in Investigator** to go to the Investigator to see more details.
@@ -209,9 +209,9 @@ You can also launch this query directly from the signal panel:
 [2]: /account_management/audit_trail/events/#cloud-security-platform-events
 [3]: /account_management/rbac/
 [4]: /logs/explorer/saved_views/
-[5]: https://app.datadoghq.com/security/home
-[6]: /service_management/case_management/
-[7]: /service_management/incident_management/
+[5]: https://app.datadoghq.com/security/siem/home
+[6]: /incident_response/case_management/
+[7]: /incident_response/incident_management/
 [8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /security/cloud_security_management/workflows/
 [10]: /security/threat_intelligence

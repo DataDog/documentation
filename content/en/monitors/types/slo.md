@@ -4,10 +4,10 @@ description: "Create SLO alerts to monitor error budget consumption and burn rat
 aliases :
   - /monitors/create/types/slo/
 further_reading:
-- link: "/service_management/service_level_objectives/burn_rate"
+- link: "/service_level_objectives/burn_rate"
   tag: "Documentation"
   text: "Burn Rate Alerts"
-- link: "/service_management/service_level_objectives/error_budget"
+- link: "/service_level_objectives/error_budget"
   tag: "Documentation"
   text: "Error Budget Alerts"
 ---
@@ -53,9 +53,9 @@ In addition to the [standard template variables][6] available across all monitor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/
+[1]: /service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo
-[3]: /service_management/service_level_objectives/error_budget/
-[4]: /service_management/service_level_objectives/burn_rate/
+[3]: /service_level_objectives/error_budget/
+[4]: /service_level_objectives/burn_rate/
 [5]: /monitors/notify/#overview
 [6]: /monitors/notify/variables/?tab=is_alert#template-variables

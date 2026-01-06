@@ -9,9 +9,71 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your processed logs to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific log fields. See [Template syntax](#template-syntax) for more information.
+Use the Observability Pipelines Worker to send your processed logs and metrics ({{< tooltip glossary="preview" case="title" >}}) to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
 Select a destination in the left navigation menu to see more information about it.
+
+## Destinations
+
+These are the available destinations:
+
+{{< tabs >}}
+{{% tab "Logs" %}}
+
+- [Amazon OpenSearch][1]
+- [Amazon S3][2]
+- [Amazon Security Lake][3]
+- [Azure Storage][4]
+- [Datadog CloudPrem][5]
+- [CrowdStrike Next-Gen SIEM][6]
+- [Datadog Logs][7]
+- [Elasticsearch][8]
+- [Google Chronicle][9]
+- [Google Cloud Storage][10]
+- [Google Pub/Sub][11]
+- [HTTP Client][12]
+- [Kafka][13]
+- [Microsoft Sentinel][14]
+- [New Relic][15]
+- [OpenSearch][16]
+- [SentinelOne][17]
+- [Socket][18]
+- [Splunk HTTP Event Collector (HEC)][19]
+- [Sumo Logic Hosted Collector][20]
+- [Syslog][21]
+
+[1]: /observability_pipelines/destinations/amazon_opensearch/
+[2]: /observability_pipelines/destinations/amazon_s3/
+[3]: /observability_pipelines/destinations/amazon_security_lake/
+[4]: /observability_pipelines/destinations/azure_storage/
+[5]: /observability_pipelines/destinations/cloudprem/
+[6]: /observability_pipelines/destinations/crowdstrike_ng_siem/
+[7]: /observability_pipelines/destinations/datadog_logs/
+[8]: /observability_pipelines/destinations/elasticsearch/
+[9]: /observability_pipelines/destinations/google_chronicle/
+[10]: /observability_pipelines/destinations/google_cloud_storage/
+[11]: /observability_pipelines/destinations/google_pubsub/
+[12]: /observability_pipelines/destinations/http_client/
+[13]: /observability_pipelines/destinations/kafka/
+[14]: /observability_pipelines/destinations/microsoft_sentinel/
+[15]: /observability_pipelines/destinations/new_relic/
+[16]: /observability_pipelines/destinations/opensearch/
+[17]: /observability_pipelines/destinations/sentinelone/
+[18]: /observability_pipelines/destinations/socket/
+[19]: /observability_pipelines/destinations/splunk_hec/
+[20]: /observability_pipelines/destinations/sumo_logic_hosted_collector/
+[21]: /observability_pipelines/destinations/syslog/
+
+{{% /tab %}}
+
+{{% tab "Metrics" %}}
+
+- [Datadog Metrics][1]
+
+[1]: /observability_pipelines/destinations/datadog_metrics/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Template syntax
 

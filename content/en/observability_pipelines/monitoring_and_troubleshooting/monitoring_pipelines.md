@@ -10,9 +10,9 @@ further_reading:
 - link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Configure a metric monitor"
-- link: "/observability_pipelines/monitoring_and_maintenance/metrics/"
+- link: "/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/"
   tag: "Documentation"
-  text: "Observability Pipelines metrics"
+  text: "Observability Pipelines usage metrics"
 ---
 
 ## Overview
@@ -69,7 +69,7 @@ To see available out-of-the-box monitors:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com//observability-pipelines/
-[2]: /service_management/incident_management/
+[2]: /incident_response/incident_management/
 [3]: /monitors/types/metric/
 [4]: /notebooks/
-[5]: /observability_pipelines/monitoring_and_maintenance/metrics/
+[5]: /observability_pipelines/monitoring_and_troubleshooting/metrics/

@@ -1,7 +1,16 @@
 ---
 title: OpenTelemetry Source
 disable_toc: false
+further_reading:
+  - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+    tag: Blog
+    text: Manage metric volume and tags in your environment with Observability Pipelines
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -36,35 +45,41 @@ Optionally, toggle the switch to enable TLS. If you enable TLS, the following ce
 
 {{< img src="observability_pipelines/sources/otel_env_vars.png" alt="The install page showing the OpenTelemetry environment variable field" style="width:75%;" >}}
 
-{{% observability_pipelines/configure_existing_pipelines/source_env_vars/splunk_hec %}}
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
 
 ## Send logs to the Observability Pipelines Worker
 
-Configure your OTel exporters to point to HTTP or gRPC.
+Configure your OTel exporters to point to HTTP or gRPC. The Worker exposes configurable listener ports for each protocol.
+
+<div class="alert alert-info">The ports 4318 (HTTP) and 4317 (gRPC) shown below are examples only. You can configure the port value for either protocol in the Worker. Ensure your OTel exporters match the port value you choose.</a></div>
 
 ### HTTP configuration example
 
-The Worker exposes the HTTP endpoint on port 4317. This is an example of configuring your OTel exporters with HTTP using Python:
+The Worker exposes the HTTP endpoint on port 4318, which is the default port. You can configure the port value in the Worker.
+
+For example, to configure an OTel exporter over HTTP in Python:
 
 ```python
     from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
     http_exporter = OTLPLogExporter(
-        endpoint="http://worker:4317/v1/logs"
+        endpoint="http://worker:4318/v1/logs"
     )
 ```
 
 ### gRPC configuration example
 
-The Worker exposes the gRPC endpoint on port 4318. This is an example of configuring your OTel exporters with gRPC:
+The Worker exposes the gRPC endpoint on port 4317, which is the default port. You can configure the port value in the Worker.
+
+For example, to configure an OTel exporter over gRPC in Python:
 
 ```python
     from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
     grpc_exporter = OTLPLogExporter(
-        endpoint="grpc://worker:4318"
+        endpoint="grpc://worker:4317"
     )
 ```
 
-Based on these example configurations, these are values you enter for the following environment variables:
+Set the listener address environment variables to the following default values. If you configured different port values in the Worker, use those instead.
 
 - HTTP listener address: `worker:4318`
 - gRPC listener address: `worker:4317`
@@ -101,6 +116,10 @@ To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`
 - Logs sent from DDOT might have nested objects that prevent Datadog from parsing the logs correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/collector/
 [2]: /observability_pipelines/sources/

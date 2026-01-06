@@ -1,7 +1,12 @@
 ---
 title: Google Pub/Sub Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -161,4 +166,4 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [4]: https://console.cloud.google.com/iam-admin/serviceaccounts
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[8]: /observability_pipelines/monitoring_and_maintenance/pipeline_usage_metrics/
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

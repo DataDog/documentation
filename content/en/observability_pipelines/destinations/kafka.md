@@ -1,7 +1,12 @@
 ---
 title: Kafka Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -28,11 +33,13 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 1. Enter the name of the topic you want to send logs to.
 1. In the **Encoding** dropdown menu, select either `JSON` or `Raw message` as the output format.
 
+{{< img src="observability_pipelines/destinations/kafka_settings.png" alt="The Kafka destination with sample values" style="width:30%;" >}}
+
 #### Optional settings
 
 ##### Enable TLS
 
-Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
@@ -78,6 +85,8 @@ Click **Advanced** if you want to set any of the following fields:
 
 ### Set environment variables
 
+{{< img src="observability_pipelines/destinations/kafka_env_var.png" alt="The install page showing the Kafka environment variable field" style="width:70%;" >}}
+
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
 
 ## librdkafka options
@@ -119,7 +128,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [3]: https://docs.databricks.com/aws/en/connect/streaming/kafka
 [4]: https://learn.microsoft.com/en-us/azure/event-hubs/azure-event-hubs-apache-kafka-overview
 [5]: https://app.datadoghq.com/observability-pipelines
-[6]: /observability_pipelines/advanced_configurations/
+[6]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [7]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
 [8]: /observability_pipelines/monitoring/metrics/
 [9]: /observability_pipelines/destinations/#event-batching
