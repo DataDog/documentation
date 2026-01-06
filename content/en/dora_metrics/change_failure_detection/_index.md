@@ -10,6 +10,8 @@ further_reading:
   text: 'Set up data sources for DORA Metrics'
 ---
 
+{{< jqmath-vanilla >}}
+
 {{< callout url="" btn_hidden="true" header="Join the Preview!" >}}
 Change Failure Detection is in Preview.
 {{< /callout >}}
@@ -21,7 +23,9 @@ Datadog Change Failure Detection automatically identifies deployments that remed
 A **change failure** is a deployment that causes issues in production and requires remediation. Change failures are used to calculate the following metrics:
 
 - Change Failure Rate
-: Calculated as `Number of change failures`/(`Number of total deployments - Number of rollback deployments`)
+: The percentage of deployments causing a failure in production, calculated as the following:
+
+ $$\text"Change Failure Rate" = \text"Number of change failures" / (\text"Total deployments" - \text"Rollback deployments")$$
 
 - Failed Deployment Recovery Time
 : The median duration between a failed deployment and its remediation, either through a rollback or rollforward deployment.
