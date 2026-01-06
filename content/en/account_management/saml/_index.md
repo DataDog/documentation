@@ -142,3 +142,4 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 [6]: /account_management/login_methods/#reviewing-user-overrides
 [7]: https://developer.okta.com/docs/concepts/saml/
 [8]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
+[9]: /account_management/users/default_roles/
