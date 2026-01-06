@@ -7598,6 +7598,11 @@ menu:
       url: synthetics/api_tests/grpc_tests
       parent: api_tests
       weight: 108
+    - name: Error codes
+      identifier: synthetics_api_tests_errors
+      url: synthetics/api_tests/errors
+      parent: api_tests
+      weight: 109
     - name: Multistep API Testing
       url: synthetics/multistep
       parent: synthetics
