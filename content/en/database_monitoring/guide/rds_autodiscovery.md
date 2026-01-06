@@ -332,7 +332,7 @@ instances:
     dbm: true
     database_autodiscovery:
       enabled: true
-      global_view_db: "%%global_view_db%%"
+      global_view_db: "%%extra_global_view_db%%"
     aws:
       instance_endpoint: "%%host%%"
       region: "%%extra_region%%"
@@ -357,7 +357,7 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered RDS instance, if one exists                                                                                       |
 | %%extra_dbm%% | Whether DBM is enabled on the instance. Determined by the presence of `dbm_tag`, which defaults to `datadoghq.com/dbm:true`.                                              |
 | %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the instance. <br/>This is used to determine if managed authentication should be used for the connection. |
-| %%global_view_db%%                       | The value of the `global_view_db_tag`, which defaults to `datadoghq.com/global_view_db`.                                                      |
+| %%extra_global_view_db%%                 | The value of the `global_view_db_tag`, which defaults to `datadoghq.com/global_view_db`.                                                      |
 
 [1]: /database_monitoring/setup_postgres/rds/?tab=postgres10
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
