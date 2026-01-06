@@ -149,7 +149,7 @@ Applies to Browser and Mobile tests.
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
 
-Review the [conditional alerting][2] page for an example of how to use this variable in a notification.
+<p>For a complete list of API test error codes, see <a href="/synthetics/api_tests/errors/">API Testing Errors</a>. Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.failure</code> variable in a notification.</p>
 
 {{% /tab %}}
 {{% tab "Count" %}}
@@ -639,4 +639,6 @@ Combine any reference method with a property:
 
 [1]: /synthetics/explore/results_explorer
 [2]: /synthetics/notifications/template_variables/?tab=apitests#step-execution-details
+[3]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code
+[4]: /synthetics/api_tests/errors/
 
