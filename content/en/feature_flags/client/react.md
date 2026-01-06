@@ -192,7 +192,7 @@ function Content() {
 }
 
 function WelcomeMessage() {
-  const { value: showNewMessage } = useBooleanFlag('show-new-welcome-message', false, { suspense: true });
+  const { value: showNewMessage } = useBooleanFlag('show-new-welcome-message', false, { suspend: true });
 
   return (
     <>
