@@ -94,9 +94,58 @@ After setting up the Azure DevOps integration, enable IaC Security for your repo
 {{% /tab %}}
 {{< /tabs >}}
 
+## Upload third-party static analysis results to IaC Security
+
+<div class="alert alert-info">
+  You can import SARIF results from third-party Infrastructure-as-Code (IaC) scanners, including Checkov, into IaC Security. See <a href="https://docs.datadoghq.com/security/code_security/static_analysis/setup/?tab=github#upload-third-party-static-analysis-results-to-datadog">
+  Upload third-party static analysis results</a> for SARIF-compliant tools supported for SAST. Node.js version 14 or later is required.
+</div>
+
+To upload a SARIF report:
+
+1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
+2. Optionally, set a [`DD_SITE` variable][5] (this defaults to `datadoghq.com`).
+3. Install the `datadog-ci` utility (version 2.0 or later):
+
+   ```bash
+   npm install -g @datadog/datadog-ci
+   ```
+
+4. Run the third-party IaC scanning tool ((e.g., Checkov, Trivy, KICS) on your code and output the results in the SARIF v2.1.0 format.
+5. Upload the results to Datadog:
+
+   ```bash
+   datadog-ci sarif upload $OUTPUT_LOCATION
+   ```
+   - Upload Options
+       - `--tags:` Add custom tags (format: `key:value`)
+       - `--max-concurrency:` Set concurrent uploads (default: 20)
+       - `--dry-run:` Validate without uploading
+### Required SARIF Attributes
+To ensure proper ingestion and display in Datadog IaC Scanning, your SARIF file MUST include the following attributes to be recognized as an IaC security finding:
+1. `Runs[...].tool.driver.name: Datadog IaC Scanning`
+2. `Runs[...].tool.driver.version: "code_update"` or `"full_scan"`
+    - `"full_scan”` for complete repository scans
+    - `"code_update"` for pull request / incremental scans
+4. `Runs[...].tool.driver.rules[...].properties.tags:`
+    - `["DATADOG_RULE_TYPE:IAC_SCANNING"]`
+    - `[“DATADOG_SCANNED_FILE_COUNT: <number>”]`, where `"number"` specifies the number of scanned files 
+5. `Runs[...].results[...].locations[...].physicalLocation:`
+    - `artifactLocation.uri`: Relative path to file from repository root
+    - `region.startLine`: Starting line number
+    - `region.endLine`: Ending line number
+    - `region.startColumn`: Starting column number
+    - `region.endColumn`: Ending column number
+<div class="alert alert-info">Important: Suppressions will silently drop violations - If <code>results[ ].suppressions</code> exists, the violation is completely ignored</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/github/#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
+[3]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
+[4]: /account_management/api-app-keys/
+[5]: /getting_started/site/
+[6]: https://docs.datadoghq.com/security/code_security/static_analysis/setup/?tab=github#upload-third-party-static-analysis-results-to-datadog
+[7]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
