@@ -30,7 +30,7 @@ Cloud Security Misconfigurations uses the following rule types to validate the c
   - **Linux workloads**, using CIS host benchmarks for Linux distributions including Ubuntu, Red Hat, Amazon Linux, and AlmaLinux.
 
     Cloud Security Misconfigurations supports a subset of the Linux distributions that the Agent supports. For more information, see [Supported Platforms][6].
-  
+
   {{% cloud-sec-cloud-infra %}}
 
 ## Explore default compliance rules
@@ -56,24 +56,6 @@ For example, you can exclude resources tagged with `env:staging` using the **Thi
 After you customize a rule, click **Update Rule** at the bottom of the page to apply your changes.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-misconfiguration.png" alt="Customize how your environment is scanned by selecting tags to include or exclude from a rule's scope" >}}
-
-## Set notification targets for compliance rules
-
-You can send real-time notifications when a new misconfiguration is detected in your environment by adding notification targets. The available notification options are:
-
-- [Slack][14]
-- [Jira][15]
-- [PagerDuty][16]
-- [ServiceNow][17]
-- [Microsoft Teams][18]
-- [Webhooks][19]
-- Email
-
-On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for detailed instructions on configuring notifications for compliance rules.
-
-Alternatively, create [notification rules][21] that span across multiple compliance rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual compliance rules.
-
-{{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="The Set severity and notifications section of the rule details page" >}}
 
 ## Create custom rules
 
