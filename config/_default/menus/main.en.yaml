@@ -5722,11 +5722,16 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_android
       weight: 101
+    - name: Browser
+      url: feature_flags/client/browser
+      parent: feature_flags_client
+      identifier: feature_flags_client_browser
+      weight: 102
     - name: iOS and tvOS
       url: feature_flags/client/ios
       parent: feature_flags_client
       identifier: feature_flags_client_ios
-      weight: 102
+      weight: 103
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
