@@ -10,12 +10,81 @@ This guide is for large-scale production-level deployments.
 
 ## Overview
 
-Deploy Observability Pipelines Worker into your infrastructure like any other service to intercept and manipulate data, and then forward it to your destinations. Each Observability Pipelines Worker instance operates independently, so that you can scale the architecture with a simple load balancer.
+Deploy the Observability Pipelines Worker into your infrastructure, like you would any other service, to intercept, manipulate, and forward data to your destinations. Each Observability Pipelines Worker instance is designed to operate independently, allowing you to easily scale your architecture with load balancing.
 
-This guide walks you through the recommended aggregator architecture for new Observability Pipelines Worker users. Specifically these topics:
+This guide walks you through the recommended aggregator pattern for new Observability Pipelines Worker users. Specifically these topics:
 
+- [Architecture models and approaches](#architecture)
 - [Optimizing the instance](#optimize-the-instance) so you can horizontally scale the Observability Pipelines Worker aggregator.
 - Starting points to estimate your resource capacity for [capacity planning and scaling](#capacity-planning-and-scaling) the Observability Pipelines Worker.
+
+## Architecture
+
+This section goes over the following:  
+
+- Architecture models:  
+	- [VM-based model](#vm-based-architecture)
+	- [Kubernetes- based model](#kubernetes-based-architecture)
+- [Centralized vs decentralized approach](#centralized-vs-decentralized-approach)
+- [Choosing a VM-based vs Kubernetes-based architecture](#choosing-a-vm-based-vs-kubernetes-based-architecture)
+
+### Architecture models
+
+There are two common architecture models:
+
+- Virtual-machine-based (VM-based) architecture: A host-based model fronted by a load balancer.  
+- Kubernetes-based architecture: A container-based model that can optionally be fronted with an ingress controller or load balancer (for sources external to the cluster, a Kubernetes service handles internal cluster requests).
+
+Both models can be applied to a centralized or decentralized approach. In a centralized approach, Workers operate on a global scale, across datacenters or regions. In a decentralized approach, Workers operate on a local scale, so in the region, datacenter, or cluster where the data source is located. For large scale environments spanning many datacenters, regions, or cloud provider accounts, a hybrid model may be appropriate.
+
+Generally, Datadog recommends operating the Worker as close to the data source as possible. This might require more administrative and infrastructure overhead, but it reduces concerns about network transit issues and single point of failures.
+
+For both models, Datadog recommends scaling Workers [horizontally](https://docs.datadoghq.com/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#horizontal-scaling) to meet scaling demands and maintain high availability, which can be done either:
+
+- As part of a managed instance group (for example, an autoscaling group).  
+- With horizontal pod autoscaling.
+
+The Worker can also be scaled [vertically](https://docs.datadoghq.com/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#vertical-scaling), which takes advantage of additional cores and memory without any additional configuration. For certain processors, such as Sensitive Data Scanner with many rules enabled, or heavy processing use cases, the Worker benefits from additional cores to allow for parallel thread execution. When vertically scaling, Datadog recommends capping an instance’s size to process no more than 33% of your total volume. This allows for high availability in the event of a node failure.
+
+#### VM-based architecture
+
+The following architecture diagram is for a host-based architecture, where a load balancer accepts traffic from push-based sources. If only pull-based sources are being used, then a load balancer is not required. In the diagram, the Worker is part of a managed instance group that scales based on processing needs. The Observability Pipelines Worker is almost always CPU constrained and CPU utilization is the strongest signal for autoscaling since CPU utilization metrics do not produce false positives.
+
+![][image1]
+
+#### Kubernetes-based architecture
+
+The following architecture diagram is for a container-based architecture, where the Kubernetes service acts as the router to the statefulset and accepts traffic from push-based sources. If you are sending telemetry from outside the cluster, you need to set the [service.type to “LoadBalancer”](https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L208-L209) or you may choose to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) and configure an [ingress](https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L238) for routing. The Worker is part of a statefulset and horizontal pod autoscaling can be enabled to scale based on processing needs. Just like the VM-based architecture, the Worker can be scaled vertically and can benefit from multiple cores allowing for parallel processing.
+
+![][image2]
+
+### Choosing a VM-based vs Kubernetes-based architecture
+
+Choose the Kubernetes-based architecture if:  
+
+- Your log sources are within a Kubernetes cluster and you want to use the decentralized approach  
+- Your organization uses Kubernetes heavily and is proficient with it.
+
+Choose the VM-based architecture if your organization is more VM centric and not proficient with Kubernetes.
+
+Choosing between the two models comes down to what your organization is best equipped to do from an infrastructure perspective. Each model offers the ability to automatically scale based on CPU utilization, which is generally the primary constraint for Observability Pipelines. See [Optimize the instance](https://docs.datadoghq.com/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#optimize-the-instance) for more information.
+
+### Centralized vs decentralized approach
+
+Datadog recommends the decentralized approach of deploying the Workers as close to the data source as possible. This means placing Workers within each location where the data originates, such as the region, cluster, or datacenter. The decentralized model is better for environments with large volumes of data because it:
+
+- Minimizes cross-region or -datacenter network transit  
+- Avoids potential performance issues related to inter-region or inter-account data transfer  
+- Helps reduce data transfer costs by keeping processing local to the data sources.
+
+The centralized deployment model involves deploying Workers in a single location and sending data from multiple origins, such as regions, clusters, datacenters, and so on, to that central location. This approach may be suitable when handling lower volumes of data or when network peering between environments is already in place. However, centralized deployments can lead to increased data transfer fees, especially when sending high volumes of data across regions or accounts.
+
+A hybrid model is a good compromise between the decentralized and centralized approaches, particularly for large wide-spread infrastructure deployments. For example, if you have 6 regions and in each region you have 10 Kubernetes clusters, rather than:
+
+- Deploying Workers into each cluster, which results in 60 deployments  
+- Deploying Workers into one region and routing traffic across regions, which introduces a single point of failure
+
+A hybrid approach is to have a dedicated Kubernetes cluster or manage instance group per region, which results in only 6 deployments. The 10 clusters in each region send data to the dedicated OPW deployment in that region.
 
 ## Optimize the instance
 
