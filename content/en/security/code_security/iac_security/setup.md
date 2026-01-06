@@ -111,7 +111,7 @@ To upload a SARIF report:
    npm install -g @datadog/datadog-ci
    ```
 
-4. Run the third-party IaC scanning tool ((e.g., Checkov, Trivy, KICS) on your code and output the results in the SARIF v2.1.0 format.
+4. Run the third-party IaC scanning tool (e.g., Checkov, Trivy, KICS) on your code and output the results in the SARIF v2.1.0 format.
 5. Upload the results to Datadog:
 
    ```bash
@@ -136,7 +136,7 @@ To ensure proper ingestion and display in Datadog IaC Scanning, your SARIF file 
     - `region.endLine`: Ending line number
     - `region.startColumn`: Starting column number
     - `region.endColumn`: Ending column number
-<div class="alert alert-info">Important: Suppressions will silently drop violations - If <code>results[ ].suppressions</code> exists, the violation is completely ignored</div>
+<div class="alert alert-info">Suppressions will silently drop violations. If <code>results[ ].suppressions</code> exists, the violation is completely ignored</div>
 
 ## Further reading
 
