@@ -28,10 +28,12 @@ Configure and manage incident-related integrations from the **Incident Settings*
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
     {{< nextlink href="/incident_response/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/integrations/googlechat" >}}Google Chat{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/servicenow" >}}ServiceNow{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/status_pages" >}}Status Pages{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/statuspage" >}}Atlassian Statuspage{{< /nextlink >}}
+    
 {{< /whatsnext >}}
 
 ## Further reading
