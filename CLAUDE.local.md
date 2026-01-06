@@ -1,1 +1,0 @@
-- To format links, run: `./local/bin/py/build/actions/format_link.py`
