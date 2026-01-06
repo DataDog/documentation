@@ -13,7 +13,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 299
-    source_type_name: Dirección IP pública de Azure
+    source_type_name: Azure Public IP Address
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,12 +28,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: azure_public_ip_address
 integration_id: azure-publicipaddress
-integration_title: Dirección IP pública de Azure
+integration_title: Azure Public IP Address
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: azure_public_ip_address
-public_title: Dirección IP pública de Azure
+public_title: Azure Public IP Address
 short_description: Rastrea las métricas principales de Azure Public IP Address.
 supported_os: []
 tile:
@@ -47,7 +47,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Dirección IP pública de Azure
+  title: Azure Public IP Address
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
@@ -66,7 +66,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{ get-metrics-from-git "azure-publicipaddress" }}
+{{< get-metrics-from-git "azure_public_ip_address" >}}
 
 
 ### Eventos

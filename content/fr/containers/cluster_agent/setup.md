@@ -6,6 +6,8 @@ aliases:
 - /fr/agent/cluster_agent/setup
 - /fr/agent/cluster_agent/event_collection
 - /fr/containers/cluster_agent/event_collection
+description: Installer et configurer l'Agent de cluster Datadog pour la surveillance
+  et la mise à l'échelle automatique des clusters Kubernetes
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
@@ -26,6 +28,30 @@ title: Configurer l'Agent de cluster Datadog
 Si vous déployez l'Agent Datadog à l'aide du chart Helm v2.7.0+ ou de l'Operator Datadog v0.7.0+, l'Agent de cluster est désactivé par défaut.
 
 {{< tabs >}}
+{{% tab "Operator Datadog" %}}
+
+Depuis la version 1.0.0 de l'Operator Datadog, l'Agent de cluster est activé par défaut. L'Operator crée les autorisations RBAC requises, déploie l'Agent de cluster et modifie la configuration du DaemonSet de l'Agent.
+
+Un token aléatoire est également automatiquement généré dans un `Secret` commun à l'Agent de cluster et l'Agent Datadog. Il permet de sécuriser les communications. Vous pouvez définir manuellement ce token avec le champ `global.clusterAgentToken`. Il est également possible de faire référence au nom du `Secret` existant et à la clé de données contenant le token en question.
+
+  ```yaml
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiKey: <DATADOG_API_KEY>
+      clusterAgentTokenSecret:
+        secretName: <SECRET_NAME>
+        keyName: <KEY_NAME>
+  ```
+
+Lorsque le token est défini manuellement, il doit être composé de 32 caractères alphanumériques.
+
+[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
+{{% /tab %}}
 {{% tab "Helm" %}}
 
 Depuis la version 2.7.0 du chart Helm, l'Agent de cluster est activé par défaut.
@@ -47,30 +73,6 @@ Un token aléatoire est également automatiquement généré dans un `Secret` co
 Lorsque le token est défini manuellement, il doit être composé de 32 caractères alphanumériques.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
-
-Depuis la version 1.0.0 de l'Operator Datadog, l'Agent de cluster est activé par défaut. L'Operator crée les autorisations RBAC requises, déploie l'Agent de cluster et modifie la configuration du DaemonSet de l'Agent.
-
-Un token aléatoire est également automatiquement généré dans un `Secret` commun à l'Agent de cluster et l'Agent Datadog. Il permet de sécuriser les communications. Vous pouvez définir manuellement ce token avec le champ `global.clusterAgentToken`. Il est également possible de faire référence au nom du `Secret` existant et à la clé de données contenant le token en question.
-
-  ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      credentials:
-        apiKey: <CLÉ_API_DATADOG>
-      clusterAgentTokenSecret:
-        secretName: <NOM_SECRET>
-        keyName: <NOM_CLÉ>
-  ```
-
-Lorsque le token est défini manuellement, il doit être composé de 32 caractères alphanumériques.
-
-[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{% tab "Configuration manuelle (DaemonSet)" %}}
 
@@ -236,7 +238,7 @@ datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 Pour vérifier que l'Agent Datadog est bien connecté à l'Agent de cluster, consultez la [sortie de la commande status de l'Agent][1].
 
 ```shell
-kubectl exec -it <NOM_POD_AGENT> agent status
+kubectl exec -it <AGENT_POD_NAME> agent status
 [...]
 =====================
 Datadog Cluster Agent
@@ -255,20 +257,20 @@ L'Agent de cluster Datadog ne peut être déployé que sur des nœuds Linux.
 
 Pour surveiller les conteneurs Windows, utilisez deux installations du chart Helm dans un cluster mixte. Le premier chart Helm déploie l'Agent de cluster Datadog et le DaemonSet de l'Agent pour les nœuds Linux (avec `targetSystem: linux`). Le deuxième chart Helm (avec `targetSystem: windows`) déploie l'Agent uniquement sur les nœuds Windows et se connecte à l'Agent de cluster existant déployé au sein du premier chart Helm.
 
-Utilisez le fichier `values.yaml` suivant pour configurer les communications entre les Agents déployés sur les nœuds Windows et l'Agent de cluster.
+Utilisez le fichier `datadog-values.yaml` suivant pour configurer les communications entre les Agents déployés sur les nœuds Windows et l'Agent de cluster.
 
 ```yaml
 targetSystem: windows
 existingClusterAgent:
   join: true
-  serviceName: "<NOM_SECRET_EXISTANT_AGENT_CLUSTER_DATADOG>" # provenant du premier chart Helm Datadog
-  tokenSecretName: "<NOM_SERVICE_EXISTANT_AGENT_CLUSTER_DATADOG>" # provenant du premier chart Helm Datadog
+  serviceName: "<EXISTING_DCA_SECRET_NAME>" # from the first Datadog Helm chart
+  tokenSecretName: "<EXISTING_DCA_SERVICE_NAME>" # from the first Datadog Helm chart
 
-# Désactiver le déploiement de datadogMetrics, car il est déjà réalisé par le premier chart
+# Disable datadogMetrics deployment since it should have been already deployed with the first chart.
 datadog-crds:
   crds:
     datadogMetrics: false
-# Désactiver le déploiement de kube-state-metrics 
+# Disable kube-state-metrics deployment
 datadog:
   kubeStateMetricsEnabled: false
 ```
@@ -277,9 +279,9 @@ Pour en savoir plus, consultez la documentation relative au [dépannage des prob
 
 ## Surveillance des services AWS gérés
 
-Pour surveiller un service AWS géré comme MSK, ElastiCache ou RDS, définissez `clusterChecksRunner` afin de créer un pod avec un rôle IAM attribué via l'annotation serviceAccountAnnotation dans le chart Helm. Définissez ensuite les configurations de l'intégration dans `clusterAgent.confd`.
+Pour surveiller un service AWS géré tel qu'Amazon Managed Streaming for Apache Kafka (MSK), ElastiCache ou Relational Database Service (RDS), définissez `clusterChecksRunner` dans votre Helm chart pour créer un Pod avec un rôle IAM attribué via `serviceAccountAnnotation`. Ensuite, définissez les configurations d'intégration sous `clusterAgent.confd`.
 
-{{< code-block lang="yaml" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml">}}
 clusterChecksRunner:
   enabled: true
   rbac:
@@ -301,5 +303,5 @@ clusterAgent:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/fr/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/fr/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows
