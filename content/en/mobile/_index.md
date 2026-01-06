@@ -343,8 +343,8 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [17]: https://docs.datadoghq.com/software_catalog/manage/
 [18]: https://docs.datadoghq.com/notebooks/
 [19]: https://docs.datadoghq.com/notebooks/#notebook-tags
-[20]: https://docs.datadoghq.com/service_management/on-call/
-[21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[20]: https://docs.datadoghq.com/incident_response/on-call/
+[21]: /incident_response/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
 [24]: /dashboards/configure/#configuration-actions

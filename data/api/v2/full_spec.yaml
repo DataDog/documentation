@@ -9146,6 +9146,11 @@ components:
     CaseCreateAttributes:
       description: Case creation attributes
       properties:
+        custom_attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/CustomAttributeValue'
+          description: Case custom attributes
+          type: object
         description:
           description: Description
           type: string
@@ -14619,9 +14624,9 @@ components:
         type: number
       type: array
     CustomAttributeMultiStringValue:
-      description: Value of multi TEXT/URL custom attribute
+      description: Value of multi TEXT/URL/NUMBER/SELECT custom attribute
       items:
-        description: TEXT/URL Value
+        description: TEXT/URL/NUMBER/SELECT Value
         type: string
       type: array
     CustomAttributeNumberValue:
@@ -14629,7 +14634,7 @@ components:
       format: double
       type: number
     CustomAttributeStringValue:
-      description: Value of TEXT/URL custom attribute
+      description: Value of TEXT/URL/NUMBER/SELECT custom attribute
       type: string
     CustomAttributeType:
       description: Custom attributes type
@@ -14637,12 +14642,14 @@ components:
       - URL
       - TEXT
       - NUMBER
+      - SELECT
       example: NUMBER
       type: string
       x-enum-varnames:
       - URL
       - TEXT
       - NUMBER
+      - SELECT
     CustomAttributeValue:
       description: Custom attribute values
       properties:
@@ -15785,6 +15792,78 @@ components:
         type: string
       nullable: true
       type: array
+    DORADeploymentFetchResponse:
+      description: Response for fetching a single deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentObject'
+      type: object
+    DORADeploymentObject:
+      description: A DORA deployment event.
+      example:
+        attributes:
+          custom_tags:
+          - language:java
+          - department:engineering
+          - region:us-east-1
+          env: production
+          finished_at: 1693491984000000000
+          git:
+            commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+            repository_url: https://github.com/organization/example-repository
+          service: shopist
+          started_at: 1693491974000000000
+          team: backend
+          version: v1.12.07
+        id: 4242fcdd31586083
+        type: dora_deployment
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentObjectAttributes'
+        id:
+          description: The ID of the deployment event.
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentType'
+      type: object
+    DORADeploymentObjectAttributes:
+      description: The attributes of the deployment event.
+      properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
+        env:
+          description: Environment name to where the service was deployed.
+          example: production
+          type: string
+        finished_at:
+          description: Unix timestamp when the deployment finished.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        service:
+          description: Service name.
+          example: shopist
+          type: string
+        started_at:
+          description: Unix timestamp when the deployment started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        team:
+          description: Name of the team owning the deployed service.
+          example: backend
+          type: string
+        version:
+          description: Version to correlate with APM Deployment Tracking.
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      - finished_at
+      type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -15875,18 +15954,53 @@ components:
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENT
-    DORAEvent:
-      description: A DORA event.
+    DORADeploymentsListResponse:
+      description: Response for the list deployments endpoint.
+      example:
+        data:
+        - attributes:
+            custom_tags:
+            - language:java
+            - department:engineering
+            - region:us-east-1
+            env: production
+            finished_at: 1693491984000000000
+            git:
+              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+              repository_url: https://github.com/organization/example-repository
+            service: shopist
+            started_at: 1693491974000000000
+            team: backend
+            version: v1.12.07
+          id: 4242fcdd31586083
+          type: dora_deployment
+        - attributes:
+            custom_tags:
+            - language:go
+            - department:platform
+            env: production
+            finished_at: 1693492084000000000
+            git:
+              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+              repository_url: https://github.com/organization/api-service
+            service: api-service
+            started_at: 1693492074000000000
+            team: backend
+            version: v2.1.0
+          id: 4242fcdd31586084
+          type: dora_deployment
       properties:
-        attributes:
-          description: The attributes of the event.
-          type: object
-        id:
-          description: The ID of the event.
-          type: string
-        type:
-          description: The type of the event.
-          type: string
+        data:
+          description: The list of DORA deployment events.
+          items:
+            $ref: '#/components/schemas/DORADeploymentObject'
+          type: array
+      type: object
+    DORAFailureFetchResponse:
+      description: Response for fetching a single failure event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentObject'
       type: object
     DORAFailureRequest:
       description: Request to create a DORA failure event.
@@ -15990,11 +16104,45 @@ components:
       type: string
       x-enum-varnames:
       - DORA_FAILURE
-    DORAFetchResponse:
-      description: Response for the DORA fetch endpoints.
+    DORAFailuresListResponse:
+      description: Response for the list failures endpoint.
+      example:
+        data:
+        - attributes:
+            custom_tags:
+            - incident_type:database
+            - department:engineering
+            env: production
+            finished_at: 1693492274000000000
+            name: Database outage
+            services:
+            - shopist
+            severity: SEV-1
+            started_at: 1693492174000000000
+            team: backend
+          id: 4242fcdd31586085
+          type: dora_incident
+        - attributes:
+            custom_tags:
+            - incident_type:service_down
+            - department:platform
+            env: production
+            finished_at: 1693492474000000000
+            name: API service outage
+            services:
+            - api-service
+            - payment-service
+            severity: SEV-2
+            started_at: 1693492374000000000
+            team: backend
+          id: 4242fcdd31586086
+          type: dora_incident
       properties:
         data:
-          $ref: '#/components/schemas/DORAEvent'
+          description: The list of DORA incident events.
+          items:
+            $ref: '#/components/schemas/DORAIncidentObject'
+          type: array
       type: object
     DORAGitInfo:
       description: Git info for DORA Metrics events.
@@ -16006,6 +16154,82 @@ components:
       required:
       - repository_url
       - commit_sha
+      type: object
+    DORAIncidentObject:
+      description: A DORA incident event.
+      example:
+        attributes:
+          custom_tags:
+          - incident_type:database
+          - department:engineering
+          env: production
+          finished_at: 1693492274000000000
+          git:
+            commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+            repository_url: https://github.com/organization/example-repository
+          name: Database outage
+          services:
+          - shopist
+          severity: SEV-1
+          started_at: 1693492174000000000
+          team: backend
+        id: 4242fcdd31586085
+        type: dora_incident
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAIncidentObjectAttributes'
+        id:
+          description: The ID of the incident event.
+          type: string
+        type:
+          $ref: '#/components/schemas/DORAFailureType'
+      type: object
+    DORAIncidentObjectAttributes:
+      description: The attributes of the incident event.
+      properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
+        env:
+          description: Environment name that was impacted by the incident.
+          example: production
+          type: string
+        finished_at:
+          description: Unix timestamp when the incident finished.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        name:
+          description: Incident name.
+          example: Database outage
+          type: string
+        services:
+          description: Service names impacted by the incident.
+          example:
+          - shopist
+          items:
+            type: string
+          type: array
+        severity:
+          description: Incident severity.
+          example: SEV-1
+          type: string
+        started_at:
+          description: Unix timestamp when the incident started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        team:
+          description: Name of the team owning the services impacted.
+          example: backend
+          type: string
+        version:
+          description: Version to correlate with APM Deployment Tracking.
+          example: v1.12.07
+          type: string
+      required:
+      - started_at
       type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
@@ -16026,32 +16250,31 @@ components:
       type: object
     DORAListDeploymentsRequestAttributes:
       description: Attributes to get a list of deployments.
-      example:
-        from: '2025-01-01T00:00:00Z'
-        limit: 500
-        query: service:(shopist OR api-service OR payment-service) env:(production
-          OR staging) team:(backend OR platform)
-        sort: -started_at
-        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
+          example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
         limit:
           default: 10
           description: Maximum number of events in the response.
+          example: 500
           format: int32
           maximum: 1000
           type: integer
         query:
           description: Search query with event platform syntax.
+          example: service:(shopist OR api-service OR payment-service) env:(production
+            OR staging) team:(backend OR platform)
           type: string
         sort:
           description: Sort order (prefixed with `-` for descending).
+          example: -started_at
           type: string
         to:
           description: Maximum timestamp for requested events.
+          example: '2025-01-31T23:59:59Z'
           format: date-time
           type: string
       type: object
@@ -16074,9 +16297,11 @@ components:
       - attributes
       type: object
     DORAListDeploymentsRequestDataType:
+      default: dora_deployments_list_request
       description: The definition of `DORAListDeploymentsRequestDataType` object.
       enum:
       - dora_deployments_list_request
+      example: dora_deployments_list_request
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENTS_LIST_REQUEST
@@ -16099,32 +16324,31 @@ components:
       type: object
     DORAListFailuresRequestAttributes:
       description: Attributes to get a list of failures.
-      example:
-        from: '2025-01-01T00:00:00Z'
-        limit: 500
-        query: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
-          OR api-service OR payment-service) team:(backend OR platform OR payments)
-        sort: -started_at
-        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
+          example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
         limit:
           default: 10
           description: Maximum number of events in the response.
+          example: 500
           format: int32
           maximum: 1000
           type: integer
         query:
           description: Search query with event platform syntax.
+          example: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
+            OR api-service OR payment-service) team:(backend OR platform OR payments)
           type: string
         sort:
           description: Sort order (prefixed with `-` for descending).
+          example: -started_at
           type: string
         to:
           description: Maximum timestamp for requested events.
+          example: '2025-01-31T23:59:59Z'
           format: date-time
           type: string
       type: object
@@ -16147,54 +16371,14 @@ components:
       - attributes
       type: object
     DORAListFailuresRequestDataType:
+      default: dora_failures_list_request
       description: The definition of `DORAListFailuresRequestDataType` object.
       enum:
       - dora_failures_list_request
+      example: dora_failures_list_request
       type: string
       x-enum-varnames:
       - DORA_FAILURES_LIST_REQUEST
-    DORAListResponse:
-      description: Response for the DORA list endpoints.
-      example:
-        data:
-        - attributes:
-            custom_tags:
-            - language:java
-            - department:engineering
-            - region:us-east-1
-            env: production
-            finished_at: 1693491984000000000
-            git:
-              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-              repository_url: https://github.com/organization/example-repository
-            service: shopist
-            started_at: 1693491974000000000
-            team: backend
-            version: v1.12.07
-          id: 4242fcdd31586083
-          type: dora_deployment
-        - attributes:
-            custom_tags:
-            - language:go
-            - department:platform
-            env: production
-            finished_at: 1693492084000000000
-            git:
-              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-              repository_url: https://github.com/organization/api-service
-            service: api-service
-            started_at: 1693492074000000000
-            team: backend
-            version: v2.1.0
-          id: 4242fcdd31586084
-          type: dora_deployment
-      properties:
-        data:
-          description: The list of DORA events.
-          items:
-            $ref: '#/components/schemas/DORAEvent'
-          type: array
-      type: object
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -54642,6 +54826,143 @@ components:
             $ref: '#/components/schemas/TeamLink'
           type: array
       type: object
+    TeamNotificationRule:
+      description: Team notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributes'
+        id:
+          description: The identifier of the team notification rule
+          example: b8626d7e-cedd-11eb-abf5-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamNotificationRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamNotificationRuleAttributes:
+      description: Team notification rule attributes
+      properties:
+        email:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesEmail'
+        ms_teams:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesMsTeams'
+        pagerduty:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesPagerduty'
+        slack:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesSlack'
+      type: object
+    TeamNotificationRuleAttributesEmail:
+      description: Email notification settings for the team
+      properties:
+        enabled:
+          description: Flag indicating email notification
+          type: boolean
+      type: object
+    TeamNotificationRuleAttributesMsTeams:
+      description: MS Teams notification settings for the team
+      properties:
+        connector_name:
+          description: Handle for MS Teams
+          type: string
+      type: object
+    TeamNotificationRuleAttributesPagerduty:
+      description: PagerDuty notification settings for the team
+      properties:
+        service_name:
+          description: Service name for PagerDuty
+          type: string
+      type: object
+    TeamNotificationRuleAttributesSlack:
+      description: Slack notification settings for the team
+      properties:
+        channel:
+          description: Channel for Slack notification
+          type: string
+        workspace:
+          description: Workspace for Slack notification
+          type: string
+      type: object
+    TeamNotificationRuleRequest:
+      description: Request to create or update a team notification rule
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamNotificationRule'
+      required:
+      - data
+      type: object
+    TeamNotificationRuleResponse:
+      description: Team notification rule response
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamNotificationRule'
+      type: object
+    TeamNotificationRuleType:
+      default: team_notification_rules
+      description: Team notification rule type
+      enum:
+      - team_notification_rules
+      example: team_notification_rules
+      type: string
+      x-enum-varnames:
+      - TEAM_NOTIFICATION_RULES
+    TeamNotificationRulesResponse:
+      description: Team notification rules response
+      properties:
+        data:
+          description: Team notification rules response data
+          items:
+            $ref: '#/components/schemas/TeamNotificationRule'
+          type: array
+        meta:
+          $ref: '#/components/schemas/TeamNotificationRulesResponseMeta'
+      type: object
+    TeamNotificationRulesResponseMeta:
+      description: Metadata that is included in the response when querying the team
+        notification rules
+      properties:
+        page:
+          $ref: '#/components/schemas/TeamNotificationRulesResponseMetaPage'
+      type: object
+    TeamNotificationRulesResponseMetaPage:
+      description: Metadata related to paging information that is included in the
+        response when querying the team notification rules
+      properties:
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          format: int64
+          type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: The offset.
+          format: int64
+          type: integer
+        prev_offset:
+          description: The previous offset.
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Total results.
+          format: int64
+          type: integer
+        type:
+          description: Offset type.
+          type: string
+      type: object
     TeamOnCallResponders:
       description: Root object representing a team's on-call responder configuration.
       example:
@@ -67946,7 +68267,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DORAListResponse'
+                $ref: '#/components/schemas/DORADeploymentsListResponse'
           description: OK
         '400':
           content:
@@ -67985,26 +68306,8 @@ paths:
         '200':
           content:
             application/json:
-              example:
-                data:
-                  attributes:
-                    custom_tags:
-                    - language:java
-                    - department:engineering
-                    - region:us-east-1
-                    env: staging
-                    finished_at: 1693491984000000000
-                    git:
-                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-                      repository_url: https://github.com/organization/example-repository
-                    service: shopist
-                    started_at: 1693491974000000000
-                    team: backend
-                    version: v1.12.07
-                  id: 4242fcdd31586083
-                  type: dora_deployment
               schema:
-                $ref: '#/components/schemas/DORAFetchResponse'
+                $ref: '#/components/schemas/DORADeploymentFetchResponse'
           description: OK
         '400':
           content:
@@ -68124,66 +68427,8 @@ paths:
         '200':
           content:
             application/json:
-              example:
-                data:
-                - attributes:
-                    custom_tags:
-                    - language:java
-                    - department:engineering
-                    - region:us-east-1
-                    env: production
-                    finished_at: 1693491984000000000
-                    git:
-                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-                      repository_url: https://github.com/organization/example-repository
-                    name: Web server is down; all requests are failing.
-                    services:
-                    - shopist
-                    severity: SEV-1
-                    started_at: 1693491974000000000
-                    team: backend
-                  id: 4242fcdd31586085
-                  type: dora_failure
-                - attributes:
-                    custom_tags:
-                    - language:go
-                    - department:platform
-                    env: production
-                    finished_at: 1693492084000000000
-                    git:
-                      commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-                      repository_url: https://github.com/organization/api-service
-                    name: Database connection timeout
-                    services:
-                    - api-service
-                    - payment-service
-                    severity: SEV-1
-                    started_at: 1693492074000000000
-                    team: platform
-                    version: v2.1.0
-                  id: 4242fcdd31586086
-                  type: dora_failure
-                - attributes:
-                    custom_tags:
-                    - language:python
-                    - department:payments
-                    - region:eu-west-1
-                    env: staging
-                    finished_at: 1693492204000000000
-                    git:
-                      commit_sha: 99edc9350f2cc9b250b69abddab733dd55e1a601
-                      repository_url: https://github.com/organization/payment-service
-                    name: Payment gateway API rate limit exceeded
-                    services:
-                    - payment-service
-                    severity: SEV-2
-                    started_at: 1693492174000000000
-                    team: payments
-                    version: v1.8.3
-                  id: 4242fcdd31586087
-                  type: dora_failure
               schema:
-                $ref: '#/components/schemas/DORAListResponse'
+                $ref: '#/components/schemas/DORAFailuresListResponse'
           description: OK
         '400':
           content:
@@ -68222,28 +68467,8 @@ paths:
         '200':
           content:
             application/json:
-              example:
-                data:
-                  attributes:
-                    custom_tags:
-                    - language:java
-                    - department:engineering
-                    - region:us-east-1
-                    env: staging
-                    finished_at: 1693491984000000000
-                    git:
-                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-                      repository_url: https://github.com/organization/example-repository
-                    name: Web server is down; all requests are failing.
-                    services:
-                    - shopist
-                    severity: High
-                    started_at: 1693491974000000000
-                    team: backend
-                  id: 4242fcdd31586085
-                  type: dora_failure
               schema:
-                $ref: '#/components/schemas/DORAFetchResponse'
+                $ref: '#/components/schemas/DORAFailureFetchResponse'
           description: OK
         '400':
           content:
@@ -87708,7 +87933,7 @@ paths:
       summary: Delete team connections
       tags:
       - Teams
-      x-menu-order: 3
+      x-menu-order: 26
       x-permission:
         operator: OR
         permissions:
@@ -87784,7 +88009,7 @@ paths:
       summary: List team connections
       tags:
       - Teams
-      x-menu-order: 1
+      x-menu-order: 24
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -87825,7 +88050,7 @@ paths:
       summary: Create team connections
       tags:
       - Teams
-      x-menu-order: 2
+      x-menu-order: 25
       x-permission:
         operator: OR
         permissions:
@@ -88708,6 +88933,235 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+  /api/v2/team/{team_id}/notification-rules:
+    get:
+      operationId: GetTeamNotificationRules
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRulesResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team notification rules
+      tags:
+      - Teams
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    post:
+      operationId: CreateTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamNotificationRuleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Create team notification rule
+      tags:
+      - Teams
+      x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+  /api/v2/team/{team_id}/notification-rules/{rule_id}:
+    delete:
+      operationId: DeleteTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Delete team notification rule
+      tags:
+      - Teams
+      x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    get:
+      operationId: GetTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team notification rule
+      tags:
+      - Teams
+      x-menu-order: 29
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    put:
+      operationId: UpdateTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamNotificationRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Update team notification rule
+      tags:
+      - Teams
+      x-menu-order: 30
       x-permission:
         operator: OR
         permissions:
