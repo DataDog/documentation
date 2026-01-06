@@ -111,7 +111,7 @@ To begin profiling applications:
 
 6. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
 
-7. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+7. A couple of minutes after receiving a request, your profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 
