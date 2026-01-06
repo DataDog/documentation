@@ -348,6 +348,21 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_258152475",
+      "description": "Create a new dashboard with sankey widget and network data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_373890042",
+      "description": "Create a new dashboard with sankey widget and product analytics data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2932151909",
+      "description": "Create a new dashboard with sankey widget and rum data source"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2342457693",
       "description": "Create a new dashboard with scatterplot widget"
     },

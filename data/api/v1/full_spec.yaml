@@ -2644,6 +2644,43 @@ components:
       type: string
       x-enum-varnames:
       - EVENT_TIMELINE
+    EventsAggregation:
+      description: The type of aggregation that can be performed on events-based queries.
+      example: avg
+      oneOf:
+      - $ref: '#/components/schemas/EventsAggregationValue'
+      - $ref: '#/components/schemas/EventsAggregationPercentile'
+    EventsAggregationPercentile:
+      description: Percentile aggregation.
+      pattern: ^pc[0-9]+(\.[0-9]+)?$
+      type: string
+    EventsAggregationValue:
+      description: Standard aggregation types for events-based queries.
+      enum:
+      - avg
+      - cardinality
+      - count
+      - delta
+      - earliest
+      - latest
+      - max
+      - median
+      - min
+      - most_frequent
+      - sum
+      type: string
+      x-enum-varnames:
+      - AVG
+      - CARDINALITY
+      - COUNT
+      - DELTA
+      - EARLIEST
+      - LATEST
+      - MAX
+      - MEDIAN
+      - MIN
+      - MOST_FREQUENT
+      - SUM
     FormulaAndFunctionApmDependencyStatName:
       description: APM statistic.
       enum:
@@ -11096,6 +11133,55 @@ components:
       required:
       - metric
       type: object
+    ProductAnalyticsAudienceAccountSubquery:
+      description: Product Analytics audience account subquery.
+      properties:
+        name:
+          type: string
+        query:
+          type: string
+      type: object
+    ProductAnalyticsAudienceFilters:
+      description: Product Analytics/RUM audience filters.
+      properties:
+        accounts:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsAudienceAccountSubquery'
+          type: array
+        filter_condition:
+          type: string
+        segments:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsAudienceSegmentSubquery'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsAudienceUserSubquery'
+          type: array
+      type: object
+    ProductAnalyticsAudienceOccurrenceFilter:
+      properties:
+        operator:
+          type: string
+        value:
+          type: string
+      type: object
+    ProductAnalyticsAudienceSegmentSubquery:
+      description: Product Analytics audience segment subquery.
+      properties:
+        name:
+          type: string
+        segment_id:
+          type: string
+      type: object
+    ProductAnalyticsAudienceUserSubquery:
+      description: Product Analytics audience user subquery.
+      properties:
+        name:
+          type: string
+        query:
+          type: string
+      type: object
     QuerySortOrder:
       default: desc
       description: Direction of sort.
@@ -12872,6 +12958,252 @@ components:
       type: string
       x-enum-varnames:
       - SLO
+    SankeyJoinKeys:
+      additionalProperties: false
+      description: Join keys.
+      properties:
+        primary:
+          description: Primary join key.
+          example: session.id
+          type: string
+        secondary:
+          description: Secondary join keys.
+          items:
+            description: Secondary join key.
+            type: string
+          type: array
+      required:
+      - primary
+      type: object
+    SankeyNetworkDataSource:
+      default: network
+      description: Network data source type.
+      enum:
+      - network_device_flows
+      - network
+      example: network
+      type: string
+      x-enum-varnames:
+      - NETWORK_DEVICE_FLOWS
+      - NETWORK
+    SankeyNetworkQuery:
+      additionalProperties: false
+      description: Query configuration for Sankey network widget.
+      properties:
+        compute:
+          $ref: '#/components/schemas/SankeyNetworkQueryCompute'
+        data_source:
+          $ref: '#/components/schemas/SankeyNetworkDataSource'
+        group_by:
+          description: Fields to group by.
+          example:
+          - source
+          - destination
+          items:
+            type: string
+          type: array
+        limit:
+          description: Maximum number of results.
+          example: 100
+          format: int64
+          type: integer
+        mode:
+          $ref: '#/components/schemas/SankeyNetworkQueryMode'
+        query_string:
+          description: Query string for filtering network data.
+          example: '*'
+          type: string
+        should_exclude_missing:
+          description: Whether to exclude missing values.
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/SankeyNetworkQuerySort'
+      required:
+      - data_source
+      - query_string
+      - group_by
+      - limit
+      type: object
+    SankeyNetworkQueryCompute:
+      additionalProperties: false
+      description: Compute aggregation for network queries.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/EventsAggregation'
+        metric:
+          description: Metric to aggregate.
+          example: ''
+          type: string
+      required:
+      - aggregation
+      - metric
+      type: object
+    SankeyNetworkQueryMode:
+      default: target
+      description: Sankey mode for network queries.
+      enum:
+      - target
+      example: target
+      type: string
+      x-enum-varnames:
+      - TARGET
+    SankeyNetworkQuerySort:
+      description: Sort configuration for network queries.
+      properties:
+        field:
+          description: Field to sort by.
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+      type: object
+    SankeyNetworkRequest:
+      additionalProperties: false
+      description: Sankey widget request for network data source.
+      properties:
+        query:
+          $ref: '#/components/schemas/SankeyNetworkQuery'
+        request_type:
+          $ref: '#/components/schemas/SankeyNetworkRequestType'
+      required:
+      - query
+      - request_type
+      type: object
+    SankeyNetworkRequestType:
+      default: netflow_sankey
+      description: Type of request for network Sankey widget.
+      enum:
+      - netflow_sankey
+      example: netflow_sankey
+      type: string
+      x-enum-varnames:
+      - NETFLOW_SANKEY
+    SankeyRumDataSource:
+      default: rum
+      description: Sankey widget with RUM data source.
+      enum:
+      - rum
+      - product_analytics
+      example: rum
+      type: string
+      x-enum-varnames:
+      - RUM
+      - PRODUCT_ANALYTICS
+    SankeyRumQuery:
+      additionalProperties: false
+      description: Sankey widget with RUM data source query.
+      properties:
+        audience_filters:
+          $ref: '#/components/schemas/ProductAnalyticsAudienceFilters'
+        data_source:
+          $ref: '#/components/schemas/SankeyRumDataSource'
+        entries_per_step:
+          description: Entries per step.
+          format: int64
+          type: integer
+        join_keys:
+          $ref: '#/components/schemas/SankeyJoinKeys'
+        mode:
+          $ref: '#/components/schemas/SankeyRumQueryMode'
+        number_of_steps:
+          description: Number of steps.
+          format: int64
+          type: integer
+        occurrences:
+          $ref: '#/components/schemas/ProductAnalyticsAudienceOccurrenceFilter'
+        query_string:
+          description: Query string.
+          example: '@type:view'
+          type: string
+        source:
+          description: Source.
+          type: string
+        subquery_id:
+          description: Subquery ID.
+          type: string
+        target:
+          description: Target.
+          type: string
+      required:
+      - data_source
+      - query_string
+      - mode
+      type: object
+    SankeyRumQueryMode:
+      default: source
+      description: Sankey mode for RUM queries.
+      enum:
+      - source
+      - target
+      example: source
+      type: string
+      x-enum-varnames:
+      - SOURCE
+      - TARGET
+    SankeyRumRequest:
+      additionalProperties: false
+      description: Sankey widget with RUM data source.
+      properties:
+        query:
+          $ref: '#/components/schemas/SankeyRumQuery'
+        request_type:
+          $ref: '#/components/schemas/SankeyWidgetDefinitionType'
+      required:
+      - query
+      - request_type
+      type: object
+    SankeyWidgetDefinition:
+      additionalProperties: false
+      description: The Sankey diagram visualizes the flow of data between categories,
+        stages or sets of values.
+      properties:
+        requests:
+          description: List of Sankey widget requests.
+          example:
+          - query:
+              data_source: rum
+              mode: source
+              query_string: '@type:view'
+            request_type: sankey
+          items:
+            $ref: '#/components/schemas/SankeyWidgetRequest'
+          minItems: 1
+          type: array
+        show_other_links:
+          description: Whether to show links for "other" category.
+          type: boolean
+        sort_nodes:
+          description: Whether to sort nodes in the Sankey diagram.
+          type: boolean
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/SankeyWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    SankeyWidgetDefinitionType:
+      default: sankey
+      description: Type of the Sankey widget.
+      enum:
+      - sankey
+      example: sankey
+      type: string
+      x-enum-varnames:
+      - SANKEY
+    SankeyWidgetRequest:
+      description: Request definition for Sankey widget.
+      oneOf:
+      - $ref: '#/components/schemas/SankeyRumRequest'
+      - $ref: '#/components/schemas/SankeyNetworkRequest'
     ScatterPlotRequest:
       description: Updated scatter plot.
       properties:
@@ -25116,6 +25448,7 @@ components:
       - $ref: '#/components/schemas/SLOListWidgetDefinition'
       - $ref: '#/components/schemas/SLOWidgetDefinition'
       - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
+      - $ref: '#/components/schemas/SankeyWidgetDefinition'
       - $ref: '#/components/schemas/ServiceMapWidgetDefinition'
       - $ref: '#/components/schemas/ServiceSummaryWidgetDefinition'
       - $ref: '#/components/schemas/SplitGraphWidgetDefinition'
