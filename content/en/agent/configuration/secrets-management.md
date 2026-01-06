@@ -835,7 +835,7 @@ On Windows, your executable must:
 
 ## Refreshing secrets at runtime
 
-Starting in Agent v7.67, configure the Agent to refresh resolved secrets without requiring a restart.
+Starting in Agent v7.67, you can configure the Agent to refresh resolved secrets without requiring a restart.
 
 Set a refresh interval:
 ```yaml
@@ -893,7 +893,7 @@ annotations:
     }
 ```
 
-Now the Agent can trigger secrets refresh at either the interval set in `secret_refresh_interval` or manually with `datadog-agent secret refresh`.
+The Agent can then trigger secrets refresh at either the interval set in `secret_refresh_interval` or manually with `datadog-agent secret refresh`.
 
 ### Enabling DDOT collector refresh
 If you are using [DDOT collector][6] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
