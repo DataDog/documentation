@@ -257,7 +257,9 @@ For step-by-step instructions on setting up and configuring this integration for
 
 ## Sync data bidirectionally between ServiceNow and Case/Incident Management {#sync-bidirectionally}
 
-In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management. **Note**: Data only syncs from ServiceNow back to Datadog if the change is made by a user with the ITIL role who is **not** the user configured in the ServiceNow integration tile in Datadog.
+In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management.
+
+**Note**: Data only syncs from ServiceNow back to Datadog if the change is made by a user with the ITIL role who is **not** the user configured in the ServiceNow integration tile in Datadog.
 
 1. In Datadog, follow the instructions to [create a service account application key][7].<br />**Note**: Datadog recommends creating this key instead of using a personal one, which risks breaking the ServiceNow sync if the user's account is deactivated or if their permissions change.
 1. In ServiceNow, click the globe icon in the top-right corner, then make sure the **Application Scope** is set to **ITOM/ITSM Integration for Datadog**.
