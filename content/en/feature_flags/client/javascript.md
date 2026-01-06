@@ -81,7 +81,7 @@ await OpenFeature.setProviderAndWait(provider, evaluationContext);
 
 ## Evaluate flags
 
-Once the provider is initialized, you can evaluate flags anywhere in your application. Flag evaluation is _local and instantaneous_ - the SDK uses locally cached data, so no network requests occur when evaluating flags.
+After the provider is initialized, you can evaluate flags anywhere in your application. Flag evaluation is _local and instantaneous_—the SDK uses locally cached data, so no network requests occur when evaluating flags.
 
 ### Get a client
 
