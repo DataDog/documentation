@@ -24,11 +24,11 @@ To ensure notifications are delivered properly, always include a notification ha
 
 For more detailed information, see the <a href="https://docs.datadoghq.com/monitors/notify/variables/?tab=is_alert#examples">Monitor documentation.</a></div>
 
-### Examples
+## Examples
 
-**Send alerts based on status code:**
+### Send alerts based on status code
 
-```handlebars
+```shell
 {{!
 If a test triggers an alert for an API test and returns a 500 statuscode, notify the backend team.
 }}
@@ -37,13 +37,36 @@ If a test triggers an alert for an API test and returns a 500 statuscode, notify
 {{/is_alert}}
 ```
 
-**Send alerts to a specific Slack channel based on failed step:**
+### Send alerts based on an error code
+```shell
+{{!
+Use multiple is_exact_match conditions to display specific failure codes in your notification. 
+This example checks for DNS and INCORRECT_ASSERTION failure codes
+}}
 
-```handlebars
+{{#if synthetics.attributes.result.failure}}
+
+{{#is_exact_match "synthetics.attributes.result.failure.code" "DNS"}}
+print out failure code: The failure code is DNS
+{{/is_exact_match}}
+
+{{#is_exact_match "synthetics.attributes.result.failure.code" "INCORRECT_ASSERTION"}}
+print out failure code: The failure code is an INCORRECT ASSERTION
+{{/is_exact_match}}
+
+{{/if}}
+```
+
+For a complete list of API test error codes, see [API Testing Errors][1].
+
+### Send alerts to a specific Slack channel based on failed step
+
+```shell
 {{!
 If a test triggers an alert for browser or mobile tests, loop through each step and find the failed step.
 If the failed step's description field matches Checkout, notify the recipient
 }}
+
 {{#is_alert}}
   {{#each synthetics.attributes.result.steps}}
     {{#is_match "status" "failed"}}
@@ -55,24 +78,26 @@ If the failed step's description field matches Checkout, notify the recipient
 
 **Send alerts to a specific Slack channel based on failed step using a variable shortcut:**
 
-```handlebars
+```shell
 {{!
 This alert uses the `{{synthetics.failed_step}}` object which is a variable shortcut that points to the relevant step data contained in `{{synthetics.attributes.result.steps}}`.
 If the test triggers an alert for browser or mobile tests, and if the failed step's description field matches Checkout, notify the recipient.
 }}
+
 {{#is_alert}}
   {{#is_match "synthetics.failed_step.description" "Checkout"}}@notify-slack-payments{{/is_match}}
 {{/is_alert}}
 ```
 
-**Set different alert priorities:**
+### Set different alert priorities
 
-```handlebars
+```shell
 {{!
 If a test triggers an alert for a multistep API test, loop through each step and find the failed step.
 If the step's name matches the staging domain, set the priority to P2. Otherwise, set it to P4.
 }}
-{{#is_alert}}send a message to thang @thang.nguyen@datadoghq.com 
+
+{{#is_alert}}send a message to <name> @example@email.com 
   {{#each synthetics.attributes.result.steps}}
     {{#is_match "status" "failed"}}
       {{#is_match "name" "stagedomain"}}Stage domain failed. Overriding priority to P2.
@@ -84,9 +109,9 @@ If the step's name matches the staging domain, set the priority to P2. Otherwise
 {{/is_alert}}
 ```
 
-**Set different alert priorities using variable shortcut:**
+### Set different alert priorities using variable shortcut
 
-```handlebars
+```shell
 {{!
 This alert uses the `{{synthetics.failed_step}}` object which is a variable shortcut that points to the relevant step data contained in `{{synthetics.attributes.result.steps}}`.
 If the test triggers an alert for multistep API test and if the failed step's name field matches the domain, override the priority.
@@ -101,3 +126,5 @@ If the test triggers an alert for multistep API test and if the failed step's na
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /synthetics/api_tests/errors

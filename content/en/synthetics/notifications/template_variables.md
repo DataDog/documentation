@@ -103,13 +103,15 @@ Applies to browser and mobile tests.
 : Epoch timestamps in milliseconds
 
 `{{synthetics.attributes.result.failure}}`
-: The `failure` object contains information about why the test failed
+: The `failure` object contains information about why the test failed 
 
 `{{synthetics.attributes.result.failure.message}}`
 : The failure message
 
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
+
+Review the [conditional alerting][2] page for an example of how to use this variable in a notification.
 
 {{% /tab %}}
 {{% tab "Count" %}}
@@ -575,3 +577,4 @@ Combine any reference method with a property:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/explore/results_explorer
+[2]: /synthetics/notifications/conditional_alerting/#send-alerts-based-on-an-error-code
