@@ -81,7 +81,7 @@ To begin profiling applications:
 
 5. Optional: Set up [Source Code Integration][9] to connect your profiling data with your Git repositories.
 
-6. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][10].
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][10].
 
 **Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][22] and [profile types][23]. For legacy v1 documentation, view [profiler.WithProfileTypes][11] to enable additional [profile types][12].
 

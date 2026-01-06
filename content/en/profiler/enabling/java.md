@@ -155,7 +155,7 @@ When the service binary is built, you can use environment variables to enable an
 
 4. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
 
-5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][8].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiling page][8].
 
 ### Enabling CPU profiler engine options
 
