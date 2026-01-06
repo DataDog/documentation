@@ -4,6 +4,9 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
+  tag: "Blog"
+  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: Blog
   text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
@@ -128,7 +131,11 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 
 #### Message attribute
 
-By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [Log Explorer][1], where it is indexed for [full text search][2].
+By default, Datadog ingests the message value as the body of the log entry. That value is then highlighted and displayed in the [Log Explorer][1], where it is indexed for [full text search][2]. However, if a JSON formatted log file includes one of the following attributes, Datadog interprets its value as the log's official message:
+
+* `message`
+* `msg`
+* `log`
 
 Specify alternate attributes to use as the source of a log's message by setting a [log message remapper processor][3].
 
@@ -160,6 +167,7 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 
 * `service`
 * `syslog.appname`
+* `dd.service`
 
 Specify alternate attributes to use as the source of a log's service by setting a [log service remapper processor][1].
 
@@ -174,6 +182,8 @@ By default, [Datadog tracers can automatically inject trace and span IDs into yo
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
+* `named_tags.dd.trace_id`
+* `trace_id`
 
 Specify alternate attributes to use as the source of a log's trace ID by setting a [trace ID remapper processor][2].
 
@@ -190,6 +200,8 @@ By default, Datadog tracers can [automatically inject span IDs into your logs][1
 
 * `dd.span_id`
 * `contextMap.dd.span_id`
+* `named_tags.dd.span_id`
+* `span_id`
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 {{% /tab %}}
@@ -277,6 +289,8 @@ Identify when the last change to a pipeline or processor was made and which user
 Reorder pipelines precisely with the `Move to` option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the `Move to` modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="How to reorder your pipelines precisely using the move to modal" style="width:50%;">}}
+
+Clone pipelines to reuse existing rules and processors without having to start over. When you clone a pipeline, Datadog automatically disables the pipeline you cloned. Click the toggle to enable.
 
 ## Estimated usage metrics
 

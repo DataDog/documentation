@@ -344,7 +344,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [28]: /integrations/network/
 [29]: /network_monitoring/cloud_network_monitoring/
 [30]: /software_catalog/
-[31]: /service_management/events/
+[31]: /events/
 [32]: /error_tracking/
 [33]: /software_catalog/endpoints/
 [34]: /agent/fleet_automation/

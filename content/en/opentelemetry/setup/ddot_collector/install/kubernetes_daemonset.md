@@ -36,11 +36,11 @@ Install and set up the following on your machine:
 - [Helm (v3+)][54]
 - [kubectl][5]
 
-{{< callout btn_hidden="true" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
-{{< /callout >}}
+**Network**: {{% otel-network-requirements %}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Select installation method
 
@@ -123,7 +123,7 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
 
 The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
 
-4. (Optional) Enable additional Datadog features:
+3. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
@@ -819,38 +819,28 @@ env:
 
 [Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-Unified service tagging ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
+In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from containers.
 
-In containerized environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables or Kubernetes labels on your deployments and pods. The DDOT detects this tagging configuration and applies it to the data it collects from containers.
-
-To get the full range of unified service tagging, add **both** the environment variables and the deployment/pod labels:
+Add the following environment variables to your application's deployment manifest:
 
 {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-...
-template:
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
-  containers:
-  -  ...
-     env:
-      - name: OTEL_SERVICE_NAME
-        value: "<SERVICE>"
-      - name: OTEL_RESOURCE_ATTRIBUTES
-        value: >-
-          service.name=$(OTEL_SERVICE_NAME),
-          service.version=<VERSION>,
-          deployment.environment.name=<ENV>
+  name: <SERVICE>
+spec:
+  template:
+    spec:
+      containers:
+      - name: <SERVICE>
+        env:
+          - name: OTEL_SERVICE_NAME
+            value: "<SERVICE>"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "service.version=<VERSION>,deployment.environment.name=<ENV>"
 {{< /code-block >}}
+
+<div class="alert alert-info">Alternatively, you can use <a href="/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration">Datadog-specific Kubernetes labels</a> to configure unified service tagging. Do not use both approaches, as this creates duplicate tags.</div>
 
 ### Run the application
 

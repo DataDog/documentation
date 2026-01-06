@@ -2,6 +2,15 @@
 title: Custom LLM-as-a-Judge Evaluations
 description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
 further_reading:
+- link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
+  tag: "Blog"
+  text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
+- link: https://www.datadoghq.com/blog/llm-aws-strands
+  tag: Blog
+  text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
+  tag: "Blog"
+  text: "Building an LLM evaluation framework: best practices"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -11,9 +20,6 @@ further_reading:
 - link: "/llm_observability/evaluations/managed_evaluations"
   tag: "Documentation"
   text: "Learn about managed evaluations"
-- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
-  tag: "Blog"
-  text: "Building an LLM evaluation framework: best practices"
 - link: "https://huggingface.co/learn/cookbook/llm_judge"
   tag: "Hugging Face"
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
@@ -30,21 +36,17 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
-   {{< img src="llm_observability/evaluations/custom_llm_judge_1.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
-
-2. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
-
-3. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
-
-4. Use the **Model** drop-down menu to select a model to use for your LLM judge.
-
-5. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
+   {{< img src="llm_observability/evaluations/custom_llm_judge_1-2.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
+1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
+1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
+    - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
+    - If you select a **Vertex** account, choose a project and location.
+1. Use the **Model** drop-down menu to select a model to use for your LLM judge.
+1. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
    - **Create from scratch**: Use your own custom prompt (defined in the next step).
    - **Failure to Answer**, **Prompt Injection**, **Sentiment**, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
-
-6. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
+1. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
    For custom prompts, provide clear instructions describing what the evaluator should assess. 
-
    - Focus on a single evaluation goal 
    - Include 2–3 few-shot examples showing input/output pairs, expected results, and reasoning.
 
@@ -89,7 +91,9 @@ For OpenAI or Azure OpenAI models, configure [Structured Output](#structured-out
 
 For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI)" level="h4" expanded="true" id="structured-output" %}}
+For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
+
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, AI Gateway)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
@@ -186,7 +190,7 @@ Select the categories that should map to a passing state. For example, if you ha
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock)" level="h4" expanded="true" id="keyword-search-output" %}}
+{{% collapse-content title="Keyword Search Output (Anthropic, Amazon Bedrock, AI Gateway)" level="h4" expanded="true" id="keyword-search-output" %}}
 1. Select the **Boolean** output type.
    <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
 
@@ -208,7 +212,7 @@ Select the categories that should map to a passing state. For example, if you ha
    This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog LLM Observability, enabling monitors and dashboards to flag regressions or track overall health.
 {{% /collapse-content %}}
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_5.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_5-2.png" alt="Configuring the custom evaluation output under Structured Output, including reasoning and assessment criteria." style="width:100%;" >}}
 
 ### Define the evaluation scope: Filtering and sampling
 
@@ -229,12 +233,14 @@ You can enter sample `{{span_input}}` and `{{span_output}}` values and click **R
 Refine your prompt and schema until outputs are consistent and interpretable.
 
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_2-2.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-3.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
 
 
 ## Viewing and using results
 
-After you save your evaluation, Datadog automatically runs your evaluation on targeted spans. Results are available across LLM Observability in near-real-time. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
+After you **Save and Publish** your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can **Save as Draft** and edit or enable your evaluation later.
+
+Results are available across LLM Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the **Evaluations** tab, alongside other evaluations.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
 
@@ -274,9 +280,9 @@ You can:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/llm/settings/evaluations
+[1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
-[3]: /service_management/events/explorer/facets/
+[3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility

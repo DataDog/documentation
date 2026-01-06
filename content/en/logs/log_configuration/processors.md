@@ -37,7 +37,7 @@ In [log configuration settings][1], you can configure processors such as the [Gr
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, limit your grok parser to 10 parsing rules. For more information on Grok syntax and parsing rules, see [Parsing][10].
 
-{{< img src="logs/log_configuration/processor/grok_parser.png" alt="Grok Parser" style="width:80%;" >}}
+{{< img src="/logs/processing/processors/define_parsing_rules_syntax_suggestions.png" alt="Grok parser syntax suggestions in the UI" style="width:90%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -154,8 +154,6 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log date remap
 ## Log status remapper
 
 Use the status remapper processor to assign attributes as an official status to your logs. For example, add a log severity level to your logs with the status remapper.
-
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="Log severity after remapping" style="width:40%;" >}}
 
 Each incoming status value is mapped as follows:
 
@@ -290,15 +288,27 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer:
+The remapper processor remaps one or more source attribute(s) or tags to a different target attribute or tag. For example, you can remap the `user` attribute to `firstname` to normalize log data in the Log Explorer.
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="Attribute after remapping" style="width:60%;">}}
+If the remapper target is an attribute, the processor can also try to cast the value to a new type (`String`, `Integer`, or `Double`). If the cast fails, the original value and type are preserved.
 
-Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
+**Note**: The decimal separator for `Double` values must be `.`.
 
-If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept.
+### Naming constraints
 
-**Note**: The decimal separator for `Double` need to be `.`.
+Characters `:` and `,` are not allowed in the target attribute or tag names. Additionally, tag and attribute names must follow the conventions outlined in [Attributes and Aliasing][5].
+
+### Reserved attributes
+
+The Remapper processor **cannot be used to remap Datadog reserved attributes**. 
+- The `host` attribute cannot be remapped.
+- The following attributes require dedicated remapper processors and cannot be remapped with the generic Remapper. To remap any of the attributes, use the corresponding specialized remapper or processor instead.
+   - `message`: Log message remapper
+   - `service`: Service remapper
+   - `status`: Log status remapper
+   - `date`: Log date remapper
+   - `trace_id`: Trace remapper
+   - `span_id`: Span remapper
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -1065,6 +1075,19 @@ Add the Threat Intel Process to evaluate logs against the table using a specific
 
 For more information, see [Threat Intelligence][9].
 
+## OCSF processor
+
+Use the OCSF processor to normalize your security logs according to the [Open Cybersecurity Schema Framework (OCSF)][11]. The OCSF processor allows you to create custom mappings that remap your log attributes to OCSF schema classes and their corresponding attributes, including enumerated (ENUM) attributes.
+
+The processor enables you to:
+
+- Map source log attributes to OCSF target attributes
+- Configure ENUM attributes with specific numerical values
+- Create sub-pipelines for different OCSF target event classes
+- Pre-process logs before OCSF remapping
+
+For detailed setup instructions, configuration examples, and troubleshooting guidance, see [OCSF Processor][12].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1076,9 +1099,11 @@ For more information, see [Threat Intelligence][9].
 [2]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /logs/log_collection/?tab=host#attributes-and-tags
+[5]: /logs/log_configuration/attributes_naming_convention/
 [6]: /logs/search_syntax/
 [7]: /integrations/guide/reference-tables/
 [8]: /tracing/other_telemetry/connect_logs_and_traces/
 [9]: /security/threat_intelligence/
 [10]: /logs/log_configuration/parsing/?tab=matchers
+[11]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
+[12]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/ocsf_processor/

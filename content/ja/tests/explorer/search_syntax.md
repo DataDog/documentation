@@ -1,6 +1,9 @@
 ---
 description: Test Optimization Explorer ですべてのテスト実行を検索する方法について学びます。
 further_reading:
+- link: /getting_started/search/
+  tag: ドキュメント
+  text: Datadog で検索を始める
 - link: /tests/explorer/facets
   tag: ドキュメント
   text: ファセットについて
@@ -76,7 +79,7 @@ test.service:*mongo
 
 タグが[タグのベストプラクティス][5]に従わず、`key:value` 構文も使用していない場合は、`tags:<MY_TAG>` の検索クエリを使用します。
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 

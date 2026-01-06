@@ -16,7 +16,7 @@ further_reading:
 - link: "/cloud_cost_management/setup/saas_costs"
   tag: "Documentation"
   text: "Learn about SaaS Cost Integrations"
-- link: "/cloud_cost_management/tags/tag_pipelines"
+- link: "/cloud_cost_management/allocation/tag_pipelines"
   tag: "Documentation"
   text: "Learn about Tag Pipelines"
 ---
@@ -163,7 +163,7 @@ You can choose preferred tags from any of your existing cost data tags, includin
 
 [1]: /cloud_cost_management/
 [2]: https://app.datadoghq.com/cost/tags
-[3]: /cloud_cost_management/tags/tag_pipelines
+[3]: /cloud_cost_management/allocation/tag_pipelines
 [4]: /cloud_cost_management/setup/custom
 [5]: /cloud_cost_management/datadog_costs
 [6]: /cloud_cost_management/setup/saas_costs

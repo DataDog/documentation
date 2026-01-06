@@ -18,7 +18,7 @@ further_reading:
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
 
-The Datadog Android SDK supports Android 5.0+ (API level 21) and Android TV. It works for Android apps written using Java or Kotlin.
+The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV. It works for Android apps written using Java or Kotlin.
 
 ## Start monitoring Android applications
 

@@ -113,7 +113,13 @@ This bash script is intended to run as the startup command, which installs the t
 
 #### Locally
 
-Install the [Datadog CLI][201] and [Azure CLI][202], and login to your Azure account using the Azure CLI by running `az login`.
+Install the [Datadog CLI][201]
+
+```shell
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+```
+
+Install the [Azure CLI][202] and authenticate with `az login`.
 
 Then, run the following command to set up the sidecar container:
 
@@ -129,11 +135,12 @@ Additional flags, like `--service` and `--env`, can be used to set the service a
 
 #### Azure Cloud Shell
 
-To use the Datadog CLI in [Azure Cloud Shell][203], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
+To use the Datadog CLI in [Azure Cloud Shell][203], open a cloud shell, set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and use `npx` to run the CLI directly:
+
 ```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-npx @datadog/datadog-ci@4 aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 ```
 
 
@@ -206,6 +213,146 @@ The [Datadog Linux Web App module][4] only deploys the Web App resource, so you 
 [5]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
 
 {{% /tab %}}
+{{% tab "Bicep" %}}
+
+Update your existing Web App to include the necessary Datadog App Settings and sidecar, as follows:
+
+```bicep
+resource webApp 'Microsoft.Web/sites@2025-03-01' = {
+  // ...
+  properties: {
+    // ...
+    siteConfig: {
+      // ...
+      appSettings: concat(datadogAppSettings, [
+        //... Your existing app settings
+      ])
+    }
+  }
+}
+
+@secure()
+param datadogApiKey string
+
+var datadogAppSettings = [
+  { name: 'DD_API_KEY', value: datadogApiKey }
+  { name: 'DD_SITE', value: 'datadoghq.com' }  // Replace with your Datadog site
+  { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
+  { name: 'DD_ENV', value: 'prod' }            // Replace with your environment (e.g. prod, staging)
+  { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+  // Uncomment for .NET applications
+  // { name: 'DD_DOTNET_TRACER_HOME', value: '/datadog/tracer' }
+  // { name: 'CORECLR_ENABLE_PROFILING', value: '1' }
+  // { name: 'CORECLR_PROFILER', value: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}' }
+  // { name: 'CORECLR_PROFILER_PATH', value: '/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so' }
+  { name: 'DD_LOGS_INJECTION', value: 'true' }
+  { name: 'DD_TRACE_ENABLED', value: 'true' }
+  // Add any additional options here
+]
+
+resource sidecar 'Microsoft.Web/sites/sitecontainers@2025-03-01' = {
+  parent: webApp
+  name: 'datadog-sidecar'
+  properties: {
+    image: 'index.docker.io/datadog/serverless-init:latest'
+    isMain: false
+    targetPort: '8126'
+    environmentVariables: [for v in datadogAppSettings: { name: v.name, value: v.name }]
+  }
+}
+```
+
+Redeploy your updated template:
+
+```shell
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+
+
+{{% /tab %}}
+{{% tab "ARM Template" %}}
+
+Update your existing Web App to include the necessary Datadog App Settings and sidecar, as follows:
+
+```jsonc
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string"
+    },
+    // ...
+    "datadogApiKey": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "datadogAppSettings": [
+      { "name": "DD_API_KEY", "value": "[parameters('datadogApiKey')]" },
+      { "name": "DD_SITE", "value": "datadoghq.com" }, // Replace with your Datadog site
+      { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
+      { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
+      { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+      // Uncomment for .NET applications
+      // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
+      // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
+      // { "name": "CORECLR_PROFILER", "value": "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}" }
+      // { "name": "CORECLR_PROFILER_PATH", "value": "/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so" }
+      { "name": "DD_LOGS_INJECTION", "value": "true" },
+      { "name": "DD_TRACE_ENABLED", "value": "true" }
+      // Add any additional options here
+    ],
+    "yourAppSettings": [
+      // Add your app settings here
+    ]
+  },
+  "resources": {
+    "webApp": {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2025-03-01",
+      "name": "[parameters('webAppName')]",
+      // ...
+      "properties": {
+        // ...
+        "siteConfig": {
+          // ...
+          "appSettings": "[concat(variables('datadogAppSettings'), variables('yourAppSettings'))]"
+        }
+      }
+    },
+    "sidecar": {
+      "type": "Microsoft.Web/sites/sitecontainers",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/datadog-sidecar')]",
+      "properties": {
+        "image": "index.docker.io/datadog/serverless-init:latest",
+        "isMain": false,
+        "targetPort": "8126",
+        "copy": [{
+          "name": "environmentVariables", "count": "[length(variables('datadogAppSettings'))]",
+          "input": {
+            "name": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]",
+            "value": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]"
+          }
+        }],
+      }
+    }
+  }
+}
+```
+
+Redeploy your updated template:
+
+```bash
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+
+{{% /tab %}}
 {{% tab "Manual" %}}
 
 1. **Configure environment variables**.
@@ -262,10 +409,6 @@ For .NET applications, the following environment variables are **required**. See
 `DD_DOTNET_TRACER_HOME`
 : **Value**: `/home/site/wwwroot/datadog`<br>
 Path to the directory containing the .NET tracing libraries.<br>
-
-`DD_TRACE_LOG_DIRECTORY`
-: **Value**: `/home/LogFiles/dotnet`<br>
-Path where the .NET tracing library will write its logs.<br>
 
 `CORECLR_ENABLE_PROFILING`
 : **Value**: `1`<br>

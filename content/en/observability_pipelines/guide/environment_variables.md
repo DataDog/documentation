@@ -39,6 +39,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Logstash
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
+### OpenTelemetry
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
+
 ### Socket
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
@@ -80,7 +83,10 @@ Some Observability Pipelines components require setting up environment variables
 ### CrowdStrike NG-SIEM
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
-### Datadog
+### Datadog Logs
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+### Datadog Metrics
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Datadog Archives
@@ -90,6 +96,12 @@ Some Observability Pipelines components require setting up environment variables
 
 ### Elasticsearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
+
+### Kafka
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
+
+### Google Pub/Sub
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
 
 ### HTTP Client
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}

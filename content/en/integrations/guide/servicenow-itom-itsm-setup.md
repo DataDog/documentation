@@ -249,11 +249,17 @@ Send cases from Datadog to either the Datadog Cases ITOM or ITSM table in Servic
 
 ### Configure Datadog Incident Management {#incident-management}
 
+The Datadog ServiceNow integration allows you to create incidents in ServiceNow from Datadog incidents and [sync data bidirectionally](#sync-bidirectionally) between the two platforms. This integration with Datadog Incident Management provides improved visibility, automatic bidirectional sync of the incident's state, severity, and any status updates, and support for your existing ServiceNow workflows.
+
 After installing the integration, in Datadog, go to the [Integration Settings][9] page. Click the **ServiceNow** tile to configure ServiceNow incident creation.
 
-#### Sync data bidirectionally between ServiceNow and Case/Incident Management
+For step-by-step instructions on setting up and configuring this integration for incident management, see [Integrate ServiceNow with Datadog Incident Management][12].
+
+## Sync data bidirectionally between ServiceNow and Case/Incident Management {#sync-bidirectionally}
 
 In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management.
+
+**Note**: Data only syncs from ServiceNow back to Datadog if the change is made by a user with the ITIL role who is **not** the user configured in the ServiceNow integration tile in Datadog.
 
 1. In Datadog, follow the instructions to [create a service account application key][7].<br />**Note**: Datadog recommends creating this key instead of using a personal one, which risks breaking the ServiceNow sync if the user's account is deactivated or if their permissions change.
 1. In ServiceNow, click the globe icon in the top-right corner, then make sure the **Application Scope** is set to **ITOM/ITSM Integration for Datadog**.
@@ -265,46 +271,13 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with both
    1. Paste in your **Service Account Application Key** you created.
    1. Check the **Enabled** box.
 1. Click **Save**.
-1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br />The transform maps for Datadog Cases ITOM and ITSM tables contain an example transform script that runs onBefore. By default, the script is commented out, but you can enable it by uncommenting it and modifying it to fit your use case.
+1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br /> Instructions on how to do so can be found below under **Transform correlated alert data**.
 
-{{% collapse-content title="Incident Management field mappings" level="h4" expanded=false id="incident-management-field-mappings" %}}
-This section describes the fields that are synced between Incident Management and ServiceNow:
 
-| **Incident Management** | **ServiceNow Cases Table** | **ServiceNow Incident** | **Sync Status**                         |
-| ----------------------- | -------------------------- | ----------------------- | --------------------------------------- |
-| Title                   | Title - String             | Short Description       | One way sync from Datadog -> ServiceNow |
-| What Happened           | Description - String       | Description             | One way sync from Datadog -> ServiceNow |
-| State                   | State - String             | State                   | Bi-directionally synced                 |
-| DD Incident URL         | Incident URL - String      | Work Notes              | One way sync from Datadog -> ServiceNow |
-| Severity                | Incident Urgency (int)     | Urgency                 | Bi-directionally synced                 |
-| Severity                | Incident Impact (int)      | Impact                  | Bi-directionally synced                 |
-
-| **Datadog Monitor State**                      | **ServiceNow Incident State** |
-| ---------------------------------------------- | ----------------------------- |
-| Alert                                          | In Progress                   |
-| Warn                                           | In Progress                   |
-| OK                                             | Resolved                      |
-| Completed _(optional, configured in settings)_ | Resolved                      |
-
-| **Datadog Incident Severity** | **ServiceNow Urgency** | **ServiceNow Impact** | **ServiceNow Priority** |
-|-------------------------------|------------------------|-----------------------|-------------------------|
-| SEV-1                         | 1                      | 1                     | 1 - Critical            |
-| SEV-2                         | 1                      | 2                     | 2 - High                |
-| SEV-2                         | 2                      | 1                     | 2 - High                |
-| SEV-3                         | 1                      | 3                     | 3 - Moderate            |
-| SEV-3                         | 2                      | 2                     | 3 - Moderate            |
-| SEV-3                         | 3                      | 1                     | 3 - Moderate            |
-| SEV-4                         | 2                      | 3                     | 4 - Low                 |
-| SEV-4                         | 3                      | 2                     | 4 - Low                 |
-| SEV-5 (Minor)                 | 3                      | 3                     | 5 - Planning            |
-| Unknown                       | 3                      | 3                     | 5 - Planning            |
-
-**Note**: If `Start at SEV-0` is enabled in Incident Management settings, the values in `ServiceNow Urgency`, `ServiceNow Impact`, and `ServiceNow Priority` will all stay the same, but the `Datadog Incident Severity` shifts down by 1. For example, in the first row of this table, the Datadog Incident Severity would be 0, but the rest of the values in the rest of the row would stay the same.
-{{% /collapse-content %}}
 
 ## Customize data with transform maps {#transform-maps}
 
-The ServiceNow integration writes from Datadog to interim tables, which transform to records in ServiceNow. For any customizations (for example, custom field mappings), you can extend the transform maps to specify what fields you want to map to from Datadog to ServiceNow.
+The ServiceNow integration writes from Datadog to interim tables, which transform to records in ServiceNow. For any customizations (for example, [custom field mappings](#custom-field-mappings)), you can extend the transform maps to specify what fields you want to map to from Datadog to ServiceNow.
 
 ## Additional configuration options
 
@@ -343,7 +316,7 @@ answer = (function transformEntry(source)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
-To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map. 
+To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map.
 
 To populate data into the ServiceNow incident, you have to modify your script to parse data that has been sent from Datadog and stored in the EM Correlated Alert column, and specify which fields in the incident you want to send the parsed data to. Below is a sample script that you can customize for your needs:
 
@@ -430,9 +403,10 @@ Need additional help? Contact [Datadog support][10].
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/cases/settings
-[6]: /service_management/case_management/notifications_integrations/#servicenow
+[6]: /incident_response/case_management/notifications_integrations/#servicenow
 [7]: /account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [8]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
 [9]: https://app.datadoghq.com/incidents/settings?section=integrations
 [10]: /help/
 [11]: /monitors/configuration/?tab=thresholdalert#multi-alert
+[12]: /incident_response/incident_management/integrations/servicenow

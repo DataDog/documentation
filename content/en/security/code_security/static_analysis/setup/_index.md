@@ -5,6 +5,7 @@ aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
 - /security/code_security/static_analysis/circleci_orbs/
+- /code_analysis/static_analysis/setup/
 is_beta: false
 algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
@@ -91,23 +92,102 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Customize your configuration
 
-By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
+By default, Datadog Static Code Analysis (SAST) scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
 
 ### Configuration locations
 
-Datadog Static Code Analysis can be configured within Datadog and/or by using a file within your repository's **root directory**.
+Datadog Static Code Analysis (SAST) can be configured within Datadog and/or by using a file within your repository's **root directory**.
 
 There are three levels of configuration:
 
-* Org Level Configuration (Datadog)
-* Repo Level Configuration (Datadog)
-* Repo Level Configuration (Repo File)
+* Org-level configuration (Datadog)
+* Repository-level configuration (Datadog)
+* Repository-level configuration (Repo File)
 
 <div class="alert alert-danger">
 By default, when no configuration is defined at the org or repo level, Datadog uses a default configuration with all default rules enabled. If you define an org-level configuration without default rules, default rules are not used. If want to use default rules in this scenario, you must enable them.
 </div>
 
-All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method. For example, lets look at these two sample YAML files:
+All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method.
+
+#### Default rulesets (baseline configuration)
+
+All three configuration methods described below customize the **same default rulesets**.  
+Use the configuration file below as your baseline when configuring rules at the Org level, Repo level, or through a Repo file.
+
+You can paste and edit the YAML content below directly into:
+
+- **Org-level configuration (Datadog)**  
+- **Repository-level configuration (Datadog)**  
+
+or create the file:
+
+- **`static-analysis.datadog.yaml`** in the root of your repository (required only for the *Repository-level configuration file* option).
+
+To customize rulesets, **remove any rulesets you do not want to apply**:
+
+```yaml
+schema-version: v1
+rulesets:
+  - apex-code-style
+  - apex-security
+  - csharp-best-practices
+  - csharp-code-style
+  - csharp-security
+  - csharp-inclusive
+  - docker-best-practices
+  - github-actions
+  - go-best-practices
+  - go-inclusive
+  - go-security
+  - java-best-practices
+  - java-code-style
+  - java-security
+  - javascript-best-practices
+  - javascript-browser-security
+  - javascript-code-style
+  - javascript-inclusive
+  - javascript-common-security
+  - javascript-express
+  - javascript-node-security
+  - jsx-react
+  - kotlin-security
+  - kotlin-inclusive
+  - kotlin-code-style
+  - kotlin-best-practices
+  - php-best-practices
+  - php-security
+  - python-best-practices
+  - python-code-style
+  - python-django
+  - python-flask
+  - python-inclusive
+  - python-pandas
+  - python-security
+  - ruby-code-style
+  - ruby-security
+  - ruby-best-practices
+  - rails-best-practices
+  - swift-code-style
+  - swift-security
+  - swift-inclusive
+  - tsx-react
+  - typescript-best-practices
+  - typescript-browser-security
+  - typescript-code-style
+  - typescript-common-security
+  - typescript-express
+  - typescript-inclusive
+  - typescript-node-security
+````
+
+#### How org-level, repo-level, and file-level settings interact
+
+All configuration levels use the same YAML format. These configurations are merged in order using an **overlay/patch merge method**.
+
+For example, consider the following two YAML files:
+
+**File 1:**
 
 ```yaml
 rulesets:
@@ -117,6 +197,8 @@ rulesets:
         ignore: ["**"]
         args: ["my_arg1", "my_arg2"]
 ```
+
+**File 2:**
 
 ```yaml
 rulesets:
@@ -130,7 +212,7 @@ rulesets:
 
 ```
 
-If these YAML files were merged in order, first file with the second, the merge of these YAML files with a overlay/patch method would be the following:
+If these YAML files were merged in order (first File 1, then File 2), the result would be:
 
 ```yaml
 rulesets:
@@ -146,7 +228,7 @@ rulesets:
 
 ```
 
-As you can see, the `ignore: ["**"]` from the first file was overlayed with the `ignore: ["my_ignored_file.file"]`. This happened because there was a conflict and the second file's value took precedence due to merge order. The `args` field from the first file is retained because there is no conflicting value in the second file.
+As you can see, the `ignore: ["**"]` from File 1 was **overlayed** by the `ignore: ["my_ignored_file.file"]` value from File 2 due to merge order. This happened because there was a conflict and the second file's value took precedence due to merge order. The `args` field from File 1 is retained because the second file does not override it.
 
 #### Org level configuration
 
@@ -425,73 +507,10 @@ my_foo = 1
 myBar = 2
 ```
 
-## Link results to Datadog services and teams
+## Link findings to Datadog services and teams
 
-### Link results to services
-Datadog associates static code and library scan results with relevant services by using the following mechanisms:
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
-{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
-The [schema version `v3`][14] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
-
-The `paths` attribute is a list of globs that should match paths in the repository.
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
-
-If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - "**"
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
-Datadog detects file usage in additional products such as Error Tracking and associate
-files with the runtime service. For example, if a service called `foo` has
-a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
-it associates files `/modules/foo/bar.py` to service `foo`.
-{{% /collapse-content %}}
-
-{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
-Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
-
-For a repository match, if there is a service called `myservice` and
-the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it associates `myservice` to all files in the repository.
-
-If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name closest to the filename is selected.
-{{% /collapse-content %}}
-
-If one method succeeds (in order), no further mapping attempts are made.
-
-### Link results to teams
-
-Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
-is associated with `myservice`, then the team `myservice` will be associated to any violation
-detected in this file.
-
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
-
-**Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
 ## Diff-aware scanning
 
@@ -658,10 +677,14 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [11]: /security/code_security/dev_tool_int/github_pull_requests
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
-[14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
 [16]: https://www.first.org/cvss/
 [17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
+[22]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[24]: https://docs.datadoghq.com/account_management/teams/
+[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[103]: https://docs.datadoghq.com/data_security/data_retention_periods/
