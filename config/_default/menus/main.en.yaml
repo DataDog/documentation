@@ -5727,6 +5727,16 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_ios
       weight: 102
+    - name: JavaScript
+      url: feature_flags/client/javascript
+      parent: feature_flags_client
+      identifier: feature_flags_client_javascript
+      weight: 103
+    - name: React
+      url: feature_flags/client/react
+      parent: feature_flags_client
+      identifier: feature_flags_client_react
+      weight: 104
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
