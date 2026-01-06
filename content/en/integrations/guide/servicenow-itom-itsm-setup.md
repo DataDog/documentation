@@ -259,6 +259,8 @@ For step-by-step instructions on setting up and configuring this integration for
 
 In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management.
 
+**Note**: Data only syncs from ServiceNow back to Datadog if the change is made by a user with the ITIL role who is **not** the user configured in the ServiceNow integration tile in Datadog.
+
 1. In Datadog, follow the instructions to [create a service account application key][7].<br />**Note**: Datadog recommends creating this key instead of using a personal one, which risks breaking the ServiceNow sync if the user's account is deactivated or if their permissions change.
 1. In ServiceNow, click the globe icon in the top-right corner, then make sure the **Application Scope** is set to **ITOM/ITSM Integration for Datadog**.
 1. In the top-left navigation menu, click **All**.
@@ -269,7 +271,9 @@ In ServiceNow, you can sync state, impact, and urgency bidirectionally with both
    1. Paste in your **Service Account Application Key** you created.
    1. Check the **Enabled** box.
 1. Click **Save**.
-1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br />The transform maps for Datadog Cases ITOM and ITSM tables contain an example transform script that runs onBefore. By default, the script is commented out, but you can enable it by uncommenting it and modifying it to fit your use case.
+1. (Optional) If you have ITOM/ITSM integration version 2.7.0 or newer, you can use information from correlated alerts to populate values in ServiceNow.<br /> Instructions on how to do so can be found below under **Transform correlated alert data**.
+
+
 
 ## Customize data with transform maps {#transform-maps}
 
@@ -312,7 +316,7 @@ answer = (function transformEntry(source)
 {{% /collapse-content %}}
 
 {{% collapse-content title="Transform correlated alert data" level="h4" expanded=false id="transform-correlated-alert-data" %}}
-To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map. 
+To use information from correlated alerts to populate values in ServiceNow, add a new onBefore transform script under the Datadog Cases ITSM/ITOM table transform map.
 
 To populate data into the ServiceNow incident, you have to modify your script to parse data that has been sent from Datadog and stored in the EM Correlated Alert column, and specify which fields in the incident you want to send the parsed data to. Below is a sample script that you can customize for your needs:
 

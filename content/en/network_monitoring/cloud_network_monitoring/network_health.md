@@ -10,6 +10,9 @@ further_reading:
     - link: '/network_monitoring/cloud_network_monitoring/network_analytics'
       tag: 'Documentation'
       text: 'Learn more about Network Analytics'
+    - link: "https://www.datadoghq.com/blog/cnm-network-health"
+      tag: "Blog"
+      text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"
 ---
 <div class="alert alert-info">Network Health is in Preview. Contact your Datadog representative to sign up.
 </div>

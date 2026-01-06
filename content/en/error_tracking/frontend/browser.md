@@ -223,7 +223,7 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [7]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [8]: /real_user_monitoring/platform/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[10]: /real_user_monitoring/session_replay/browser/privacy_options#mask-action-names
+[10]: /session_replay/browser/privacy_options#mask-action-names
 [11]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [12]: https://github.com
 [13]: https://about.gitlab.com
