@@ -46,6 +46,10 @@ The system cycles through your configured notification preferences until you eit
 
 Configure your high-urgency Pages (P1 monitor alerts, SEV-1 security threats, SEV-1 incidents, etc.), to demand immediate attention and escalation.
 
+<div class="alert alert-warning">
+If you are paged for a high urgency incident and have not configured any notification preferences, Datadog automatically falls back to sending an email notification to ensure you are notified of critical issues.
+</div>
+
 For example, you can configure On-Call to start with a push notification, call after one minute, and send a follow-up push notification if unacknowledged after two minutes.
 
 ##### Best practices for high urgency
