@@ -846,7 +846,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         html += `
         <div class="row ${outerRowClasses}">
           <div class="col-12 first-column">
-            <div class="row ${nestedRowClasses}">
+            <div ${parentKey ? `data-parent-field="${parentKey}"` : ""} class="row ${nestedRowClasses}">
               ${fieldColumn(key, value, toggleArrow, required, parentKey)}
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
