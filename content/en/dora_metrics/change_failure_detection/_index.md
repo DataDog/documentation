@@ -12,7 +12,7 @@ further_reading:
   text: 'Set up data sources for DORA Metrics'
 ---
 
-{{< callout url="" btn_hidden="true" header="Coming Soon!" >}}
+{{< callout url="" btn_hidden="true" header="Join the Preview!" >}}
 Change Failure Detection is in Preview.
 {{< /callout >}}
 
@@ -33,11 +33,11 @@ Change Failure Detection identifies two types of remediation deployments:
 - **Rollforwards**: Detected through custom rules that match metadata patterns (such as revert PRs and hotfix labels)
 
 
-## Rollback
+## Rollbacks
 
 A rollback occurs when a previously deployed version is redeployed to restore the system after a failed or faulty change.
 
-### How classification works
+### How rollback classification works
 
 A deployment is classified as a `rollback` when it deploys a version that matches a previously deployed version but differs from the immediately preceding deployment.
 
@@ -46,7 +46,7 @@ A deployment is classified as a `rollback` when it deploys a version that matche
 
 When a rollback is detected, the change failure is the first deployment after the rollback target (the version you reverted to).
 
-### Example
+### Example: Rollback detection
 
 For the sequence V1 → V2 → V3 → V1, the rollback target is the original V1, so V2 is marked as the change failure and V1 as a rollback deployment.
 
@@ -54,7 +54,7 @@ For the sequence V1 → V2 → V3 → V1, the rollback target is the original V1
 
 **Note**: Redeploying the same version back‑to‑back (for example, V1 → V1) is not considered a rollback.
 
-## Rollforward
+## Rollforwards
 
 A rollforward occurs when a new deployment is made to fix or override a failed or faulty change. Unlike rollbacks (which redeploy a previous version), rollforwards deploy new code to remediate issues. This can include revert pull requests that restore previous behavior through a new release.
 
@@ -77,7 +77,7 @@ You can enter regex rules that include one of these variables:
 | `$pr_number`  | Matches PR numbers    |
 | `$version`    | Matches version tags  |
 
-#### How classification works
+#### How variable-based classification works
 
 When a rule matches:
 1. The variable value is extracted from the current deployment.
@@ -117,7 +117,7 @@ You can define regex rules that match specific types of metadata. The following 
 | **Commit&nbsp;message**      | `^Revert ".*"$ `          | Matches commit messages starting with `Revert` and ending with `"`|
 | **Version tag**      | `.*_hotfix`            | Matches version tags ending with `_hotfix`   |
 
-#### How classification works
+#### How static rule classification works
 
 When a static rule matches:
 1. The current deployment is marked as a rollforward.
