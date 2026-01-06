@@ -243,7 +243,7 @@ function Page() {
 }
 {{< /code-block >}}
 
-## Updating the evaluation context
+## Update the evaluation context
 
 To update the evaluation context after initialization (for example, when a user logs in), use `OpenFeature.setContext()`:
 
