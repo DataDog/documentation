@@ -10,6 +10,10 @@ const oneOfLimit = 50;
 
 const supportedLangs = ['en'];
 
+// Create a renderer once so we don't recreate it on every call set paragraph tag to table-cell
+const renderer = new marked.Renderer();
+renderer.paragraph = (text) => `<p class="table-cell">${text}</p>`;
+
 /**
  * Update the menu yaml file with api
  * @param {object} apiYaml - object with data
@@ -665,7 +669,7 @@ const fieldColumn = (key, value, toggleMarkup, requiredMarkup, parentKey = '') =
   }
   return `
     <div class="col-4 column">
-      <p class="key">${toggleMarkup}${field}${requiredMarkup}</p>
+      <p class="key table-cell">${toggleMarkup}${field}${requiredMarkup}</p>
     </div>
   `.trim();
 };
@@ -699,10 +703,10 @@ const typeColumn = (key, value, readOnlyMarkup) => {
       typeVal = (value.format || value.type || '');
     }
   if(value.type === 'array') {
-    return `<div class="col-2 column"><p>[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
+    return `<div class="col-2 column"><p class="table-cell">[${(value.items === '[Circular]') ? 'object' : (value.items.type || '')}${oneOfLabel}]${readOnlyMarkup}</p></div>`;
   } else {
     // return `<div class="col-2"><p>${validKeys.includes(key) ? value : (value.enum ? 'enum' : (value.format || value.type || ''))}${readOnlyMarkup}</p></div>`;
-    return `<div class="col-2 column"><p>${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim();
+    return `<div class="col-2 column"><p class="table-cell">${typeVal}${oneOfLabel}${readOnlyMarkup}</p></div>`.trim();
   }
 };
 
@@ -727,8 +731,9 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
+  const descHtml = desc ? marked.parse(desc, { renderer }).trim() : "";
   const def = (value.default) ? `<p>default: <code>${value.default}</code></p>` : '';
-  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}${def}</div>`.trim();
+  return `<div class="col-6 column">${descHtml}${def}</div>`.trim();
 };
 
 
@@ -846,7 +851,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         html += `
         <div class="row ${outerRowClasses}">
           <div class="col-12 first-column">
-            <div ${parentKey ? `data-parent-field="${parentKey}"` : ""} class="row ${nestedRowClasses}">
+            <div ${parentKey ? `data-parent-field="${parentKey}"` : ""} class="row table-row ${nestedRowClasses}">
               ${fieldColumn(key, value, toggleArrow, required, parentKey)}
               ${typeColumn(key, value, readOnlyField)}
               ${descColumn(key, value)}
