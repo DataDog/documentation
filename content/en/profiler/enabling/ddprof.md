@@ -107,7 +107,7 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{< /tabs >}}
 
 
-5. A few minutes after starting your application, your profiles appear on the [Datadog APM > Profiler page][3].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][3].
 
 ### Library
 

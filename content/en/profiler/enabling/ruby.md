@@ -107,7 +107,7 @@ end
 
 6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
+7. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5].
 
 ## Configuration
 

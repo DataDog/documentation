@@ -231,7 +231,7 @@ To install the .NET Profiler per-webapp:
 
 5. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
 
-6. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 [2]: /integrations/guide/source-code-integration/?tab=net
@@ -288,7 +288,7 @@ To install the .NET Profiler per-webapp:
 
 5. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
 
-6. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 [2]: /integrations/guide/source-code-integration/?tab=net
@@ -359,7 +359,7 @@ To install the .NET Profiler per-webapp:
 
 4. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
 
-5. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 [2]: /integrations/guide/source-code-integration/?tab=net
@@ -401,7 +401,7 @@ To install the .NET Profiler per-webapp:
 
 4. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
 
-5. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 [2]: /integrations/guide/source-code-integration/?tab=net

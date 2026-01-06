@@ -63,7 +63,7 @@ See [Configuration](#configuration) for more advanced usage.
 
 Optionally, set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][5].
+A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5].
 
 If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.Profiler` object:
 
