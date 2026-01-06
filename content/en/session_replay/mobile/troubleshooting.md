@@ -3,19 +3,19 @@ title: Troubleshooting Mobile Session Replay
 description: How to troubleshoot Mobile Session Replay.
 aliases:
 further_reading:
-    - link: '/real_user_monitoring/session_replay/mobile'
+    - link: '/session_replay/mobile'
       tag: Documentation
       text: Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/setup_and_configuration'
+    - link: '/session_replay/mobile/setup_and_configuration'
       tag: Documentation
       text: Setup and Configure Mobile Session Replay
-    - link: '/real_user_monitoring/session_replay/mobile/app_performance'
+    - link: '/session_replay/mobile/app_performance'
       tag: Documentation
       text: How Mobile Session Replay Impacts App Performance
-    - link: '/real_user_monitoring/session_replay/mobile/privacy_options'
+    - link: '/session_replay/mobile/privacy_options'
       tag: Documentation
       text: Mobile Session Replay Privacy Options
-    - link: '/real_user_monitoring/session_replay'
+    - link: '/session_replay/'
       tag: Documentation
       text: Session Replay
 ---
@@ -66,4 +66,4 @@ At any time during the lifetime of the host app, it's possible to change the tra
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/privacy_options/?platform=ios&tab=as-wrappers#image-masking
+[1]: /session_replay/mobile/privacy_options/?platform=ios&tab=as-wrappers#image-masking

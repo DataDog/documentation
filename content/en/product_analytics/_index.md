@@ -123,9 +123,9 @@ Suppose you want to make changes to your application interface but want to first
 [6]: /product_analytics/segmentation/
 [8]: https://app.datadoghq.com/rum/
 [9]: https://app.datadoghq.com/rum/list
-[10]: /product_analytics/session_replay/heatmaps
-[11]: /product_analytics/session_replay/
-[12]: /product_analytics/session_replay/playlists
+[10]: /session_replay/heatmaps
+[11]: /session_replay/
+[12]: /session_replay/playlists
 [13]: /product_analytics/charts/analytics_explorer
 [14]: /real_user_monitoring/application_monitoring/browser
 [15]: /real_user_monitoring/application_monitoring/ios
