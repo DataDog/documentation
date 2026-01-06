@@ -43,6 +43,8 @@ By default, no handle is set in these monitors. To be alerted in case one of you
 
 Monitors in the **Monitors** tab either have a group that corresponds to your private location ID or are tagged with `location_id:<ID_OF_THE_PL>`.
 
+> **Note:** These default monitors are created **only once**, when the first private location is created. If you previously had a private location that was deleted, creating a new private location later will **not** recreate the default monitors.  
+
 ## Monitor your private locations with the Datadog Agent
 
 In addition to the out-of-the-box private location metrics, Datadog recommends installing the [Datadog Agent][7] alongside your private location. 
