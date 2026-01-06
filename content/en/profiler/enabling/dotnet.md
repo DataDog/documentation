@@ -229,7 +229,9 @@ To install the .NET Profiler per-webapp:
 
 4. For standalone applications, manually restart the application as you normally would.
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
+
+6. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -283,7 +285,9 @@ To install the .NET Profiler per-webapp:
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
+
+6. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -351,7 +355,9 @@ To install the .NET Profiler per-webapp:
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environment -Value $v
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
+
+5. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -390,7 +396,9 @@ To install the .NET Profiler per-webapp:
    REM start the application here
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
+
+5. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -496,3 +504,4 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
 [15]: /profiler/guide/solve-memory-leaks/
+[16]: /integrations/guide/source-code-integration/?tab=net

@@ -109,7 +109,9 @@ To begin profiling applications:
         with datadog-profiling v1.13.0, Copyright Datadog, by Datadog
     ```
 
-5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+6. Optional: Set up [Source Code Integration][16] to connect your profiling data with your Git repositories.
+
+7. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 
