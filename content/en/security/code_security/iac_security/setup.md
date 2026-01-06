@@ -136,7 +136,7 @@ To ensure proper ingestion and display in Datadog IaC Scanning, your SARIF file 
     - `region.endLine`: Ending line number
     - `region.startColumn`: Starting column number
     - `region.endColumn`: Ending column number
-<div class="alert alert-info">Suppressions will silently drop violations. If <code>results[ ].suppressions</code> exists, the violation is completely ignored</div>
+<div class="alert alert-info">Suppressions silently drop violations. If <code>results[ ].suppressions</code> exists, the violation is completely ignored</div>
 
 ## Further reading
 
