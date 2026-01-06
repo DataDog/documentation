@@ -18,14 +18,14 @@ Create a RUM application in Datadog to get your credentials:
 
 1. Go to [**Digital Experience > Performance Summary**][2].
 2. Click **New Application**.
-3. Select **JS**, enter an application name, and click **Create New RUM Application**.
+3. Select **JS**, enter an application name, and click **Create Application**.
 4. Copy the `applicationId` and `clientToken` values.
 
 <div class="alert alert-info">If you store these in <code>.env.local</code>, prefix them with <code>NEXT_PUBLIC_</code> to expose them to the browser. See <a href="https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser" target="_blank">Next.js environment variables</a>.</div>
 
 ## Install the RUM SDK
 
-Choose the section below that matches your Next.js routing setup (App Router or Page Router).
+For routing setup instructions, see the section that matches your Next.js configuration: [App Router](#app-router) or [Pages Router](#pages-router).
 
 ### App Router
 
