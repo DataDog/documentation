@@ -41,7 +41,7 @@ A rollback occurs when a previously deployed version is redeployed to restore th
 
 ### How rollback classification works
 
-A deployment is classified as a `rollback` when it deploys a version that matches a previously deployed version but differs from the immediately preceding deployment.
+A deployment is classified as a rollback when it deploys a version that matches a previously deployed version but differs from the immediately preceding deployment.
 
 - If Git metadata is present, the match is based on the commit SHA.
 - If Git metadata is not present, the match is based on the version tag.
@@ -64,9 +64,9 @@ Rollforwards are detected through custom rules that match deployment metadata pa
 
 ## Custom rules
 
-DORA Metrics lets you define custom rules to automatically classify rollforward deployments based on repository or release metadata. Rules can operate in two ways:
-- **Linking deployments**: Match deployments through shared variable values (for example, PR number and version)
-- **Static patterns**: Match metadata patterns without variables (for example, labels and branch names)
+You can define custom rules to automatically classify rollforward deployments based on repository or release metadata. Rules can operate in two ways:
+- **Linking deployments**: Match deployments through shared variable values (for example, PR number or version)
+- **Static patterns**: Match metadata patterns without variables (for example, labels or branch names)
 
 ### Rules linked to failed deployments
 
@@ -81,7 +81,7 @@ You can enter regex rules that include one of these variables:
 
 #### How variable-based classification works
 
-When a rule matches:
+When a rule matches a deployment, the following actions occur:
 1. The variable value is extracted from the current deployment.
 2. The system finds the earlier deployment with the same extracted value.
 3. The current deployment is marked as a rollforward linked to that earlier deployment.
@@ -97,11 +97,11 @@ Revert pull requests are a common recovery pattern. For example, a PR titled `Re
 Revert "$pr_title"
 ```
 
-When a PR title matches this pattern:
-- The system extracts the original PR title from the revert PR (the value of `$pr_title`)
-- It finds the earlier deployment that included that original PR
-- The earlier deployment is marked as the change failure
-- The current deployment (with the revert) is marked as the rollforward
+When a PR title matches this pattern, the following actions occur:
+1. The system extracts the original PR title from the revert PR (the value of `$pr_title`).
+2. It finds the earlier deployment that includes that original PR title.
+3. The current deployment (with the revert) is marked as the rollforward.
+4. The earlier deployment is marked as the change failure.
 
 **Note**: If the original PR isn't found in any prior deployment, or if both the original PR and its revert are in the same deployment, no classification is applied.
 
@@ -121,7 +121,7 @@ You can define regex rules that match specific types of metadata. The following 
 
 #### How static rule classification works
 
-When a static rule matches:
+When a static rule matches a deployment, the following actions occur:
 1. The current deployment is marked as a rollforward.
 2. The immediately preceding deployment is marked as the change failure.
 
@@ -135,7 +135,7 @@ Datadog provides default rules that are automatically enabled:
 - **Revert PRs**: PR titles following revert naming conventions (for example, "Revert" referencing a prior PR) are treated as rollforwards. The earlier deployment containing the original change is marked as the change failure, using the variable-based linking rules described above.
 - **Hotfix indicators**: PR labels, titles, or branch names containing "hotfix" are treated as rollforwards, with the preceding deployment marked as the change failure.
 
-These default rules are fully configurable in the [DORA Settings][1] page. They are intended as opinionated starting points that interpret common signals as likely rollforward activity. Teams are encouraged to adapt the patterns (for example, naming conventions, labels, or version tags) to reflect their own workflows and improve accuracy over time.
+These default rules are fully configurable in the [DORA metrics settings][1] page. They are intended as opinionated starting points that interpret common signals as likely rollforward activity. You should adapt the patterns (such as naming conventions, labels, or version tags) as needed to reflect your own workflows and improve accuracy over time.
 
 ## Further reading
 
