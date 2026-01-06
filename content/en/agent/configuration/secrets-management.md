@@ -44,7 +44,7 @@ secret_backend_config:
 ```
 
 
-More specific setup instructions depend on the backend type used. Refer to the appropriate section bellow for further information:
+More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
 
 {{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-secrets" %}}
