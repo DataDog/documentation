@@ -32,7 +32,7 @@ receivers:
 ```
 
 <div class="alert alert-warning">
-When you have an OpenTelemetry Collector or DDOT Collector with a Prometheus metrics pipeline to scrape Collector health metrics, and you have a Datadog Agent running on the same host, ensure that the [OpenMetrics integration][4] in the Datadog Agent is either turned off or scraping a different endpoint than the Collector health metrics endpoint. Otherwise you may see duplicated Collector health metrics being scraped by both the Collector and Datadog Agent.
+When you have an OpenTelemetry Collector or DDOT Collector with a Prometheus metrics pipeline to scrape Collector health metrics, and you have a Datadog Agent running on the same host, ensure that the <a href="/integrations/openmetrics/">OpenMetrics integration</a> in the Datadog Agent is either turned off or scraping a different endpoint than the Collector health metrics endpoint. Otherwise you may see duplicated Collector health metrics being scraped by both the Collector and Datadog Agent.
 </div>
 
 ## Data collected
@@ -135,4 +135,3 @@ Descriptor:
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector-metrics.yaml
 [3]: https://pkg.go.dev/runtime#MemStats.Sys
-[4]: /integrations/openmetrics/
