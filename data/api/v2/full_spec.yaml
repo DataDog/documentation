@@ -38148,6 +38148,11 @@ components:
     ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternOptions:
       description: Options for defining a custom regex pattern.
       properties:
+        description:
+          description: Human-readable description providing context about a sensitive
+            data scanner rule
+          example: "Custom regex for internal API\u202Fkeys"
+          type: string
         rule:
           description: A regular expression used to detect sensitive values. Must
             be a valid regex.
@@ -38203,6 +38208,11 @@ components:
       description: Options for selecting a predefined library pattern and enabling
         keyword support.
       properties:
+        description:
+          description: Human-readable description providing context about a sensitive
+            data scanner rule
+          example: Credit card pattern
+          type: string
         id:
           description: Identifier for a predefined pattern from the sensitive data
             scanner pattern library.
