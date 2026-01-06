@@ -1943,6 +1943,22 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "ListPipelines": {
+    "description": "Retrieve a list of pipelines.",
+    "summary": "List pipelines"
+  },
+  "CreatePipeline": {
+    "description": "Create a new pipeline.",
+    "summary": "Create a new pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
+  "ValidatePipeline": {
+    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.",
+    "summary": "Validate an observability pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
@@ -2352,22 +2368,6 @@
     "summary": "Update a Workload Protection policy",
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
-  },
-  "ListPipelines": {
-    "description": "Retrieve a list of pipelines.",
-    "summary": "List pipelines"
-  },
-  "CreatePipeline": {
-    "description": "Create a new pipeline.",
-    "summary": "Create a new pipeline",
-    "request_description": "",
-    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
-  },
-  "ValidatePipeline": {
-    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.",
-    "summary": "Validate an observability pipeline",
-    "request_description": "",
-    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
   },
   "DeletePipeline": {
     "description": "Delete a pipeline.",
