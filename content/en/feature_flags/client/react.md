@@ -171,6 +171,41 @@ function Banner() {
 }
 {{< /code-block >}}
 
+### Suspense support
+
+Built-in [suspense](https://react.dev/reference/react/Suspense) support makes this easy to avoid displaying components with feature flags until provider initialization is complete, or when the context changes. Pass `{ suspend: true }` in the hook options to leverage this functionality.
+
+For example:
+
+{{< code-block lang="jsx" >}}
+import { useBooleanFlag } from '@openfeature/react-sdk';
+import { Suspense } from 'react';
+
+import
+function Content() {
+  // Display a loading message if the component uses feature flags and the provider is not ready
+  return (
+    <Suspense fallback={"Loading..."}>
+      <WelcomeMessage />
+    </Suspense>
+  );
+}
+
+function WelcomeMessage() {
+  const { value: showNewMessage } = useBooleanFlag('show-new-welcome-message', false, { suspense: true });
+
+  return (
+    <>
+      {showNewMessage ? (
+        <p>Welcome! You're seeing the new experience.</p>
+      ) : (
+        <p>Welcome back!</p>
+      )}
+    </>
+  );
+}
+{{< /code-block >}}
+
 ### Flag evaluation details
 
 When you need more than just the flag value, use the detail hooks. These return both the evaluated value and metadata explaining the evaluation:
@@ -203,6 +238,7 @@ Flag details help you debug evaluation behavior and understand why a user receiv
 Here's a complete example showing how to set up and use Datadog Feature Flags in a React application:
 
 {{< code-block lang="jsx" >}}
+import { Suspense } from 'react';
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeatureProvider, OpenFeature, useBooleanFlagValue } from '@openfeature/react-sdk';
 
@@ -222,12 +258,14 @@ const evaluationContext = {
 
 OpenFeature.setProvider(provider, evaluationContext);
 
-// Wrap your app with the OpenFeatureProvider
+// Wrap your app with the OpenFeatureProvider and Suspense for loading state
 function App() {
   return (
-    <OpenFeatureProvider>
-      <Page />
-    </OpenFeatureProvider>
+    <Suspense fallback={<Loading />}>
+      <OpenFeatureProvider suspendUntilReady>
+        <Page />
+      </OpenFeatureProvider>
+    </Suspense>
   );
 }
 
@@ -249,7 +287,7 @@ To update the evaluation context after initialization (for example, when a user 
 
 {{< code-block lang="javascript" >}}
 // When a user logs in
-OpenFeature.setContext({
+await OpenFeature.setContext({
   targetingKey: user.id,
   user_id: user.id,
   email: user.email,
