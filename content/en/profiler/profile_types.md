@@ -126,7 +126,7 @@ Heap Live Objects
 : The number of objects allocated by each function in heap memory that remain in use after garbage collection. Go calls this `inuse_objects`. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 
 Heap Live Size
-: The amount of heap memory allocated by each function that remains in use after garbage collection. Under default settings (GOGC=100), this will be ~50% of the RSS usage of the process. Go calls this `inuse_space`. Use this metric to review [memory consumption][4] and diagnose leaks. For more details about Go's memory model, see [Go memory metrics demystified][5] and [A Guide to the Go Garbage Collector][6] for more information.
+: The amount of heap memory allocated by each function that remains in use after garbage collection. Under default settings (GOGC=100), this will be ~50% of the RSS usage of the process. Go calls this `inuse_space`. Use this metric to review memory consumption and [diagnose leaks][4]. For more details about Go's memory model, see [Go memory metrics demystified][5] and [A Guide to the Go Garbage Collector][6] for more information.
 
 Mutex
 : The time functions have been waiting on mutexes during the profiling period (default: 60s). The stack traces in this profile point the `Unlock()` operation that allowed another goroutine blocked on the mutex to proceed. Short mutex contentions using spinlocks are not captured by this profile, but can be seen in the CPU profile. See also the note about how this measure changes in version `1.33.0` in [Delta profiles](#delta-profiles).
