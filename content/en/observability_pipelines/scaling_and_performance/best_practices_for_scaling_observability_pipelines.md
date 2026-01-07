@@ -59,8 +59,8 @@ The following architecture diagram is for a container-based architecture, where 
 
 Choose the Kubernetes-based architecture if:
 
-- Your log sources are within a Kubernetes cluster and you want to use the decentralized approach.
-- Your organization uses Kubernetes heavily and is proficient with it.
+- Your log sources are within a Kubernetes cluster and you want to use the decentralized approach
+- Your organization uses Kubernetes heavily and is proficient with it
 
 Choose the VM-based architecture if your organization is more VM centric and not proficient with Kubernetes.
 
@@ -72,13 +72,13 @@ Datadog recommends the decentralized approach of deploying the Workers as close 
 
 - Minimizes cross-region or cross-datacenter network transit
 - Avoids potential performance issues related to inter-region or inter-account data transfer
-- Helps reduce data transfer costs by keeping processing local to the data sources.
+- Helps reduce data transfer costs by keeping processing local to the data sources
 
 The centralized deployment model involves deploying Workers in a single location and sending data from multiple origins, such as regions, clusters, datacenters, and so on, to that central location. This approach may be suitable when handling lower volumes of data or when network peering between environments is already in place. However, centralized deployments can lead to increased data transfer fees, especially when sending high volumes of data across regions or accounts.
 
 A hybrid model is a good compromise between the decentralized and centralized approaches, particularly for large wide-spread infrastructure deployments. For example, if you have six regions and in each region you have 10 Kubernetes clusters, rather than:
 
-- Deploying Workers into each cluster, which results in 60 deployments, or
+- Deploying Workers into each cluster, which results in 60 deployments
 - Deploying Workers into one region and routing traffic across regions, which introduces a single point of failure
 
 A hybrid approach is to have a dedicated Kubernetes cluster or manage instance group per region, which results in only six deployments. The 10 clusters in each region send data to the dedicated OPW deployment in that region.
