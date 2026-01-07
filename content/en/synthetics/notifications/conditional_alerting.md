@@ -38,6 +38,7 @@ If a test triggers an alert for an API test and returns a 500 statuscode, notify
 ```
 
 ### Send alerts based on an error code
+
 ```shell
 {{!
 Use multiple is_exact_match conditions to display specific failure codes in your notification. 
@@ -76,11 +77,11 @@ If the failed step's description field matches Checkout, notify the recipient
 {{/is_alert}}
 ```
 
-**Send alerts to a specific Slack channel based on failed step using a variable shortcut:**
+### Send alerts to a specific Slack channel based on failed step using a variable shortcut
 
 ```shell
 {{!
-This alert uses the `{{synthetics.failed_step}}` object which is a variable shortcut that points to the relevant step data contained in `{{synthetics.attributes.result.steps}}`.
+This alert uses the {{synthetics.failed_step}} object which is a variable shortcut that points to the relevant step data contained in {{synthetics.attributes.result.steps}}.
 If the test triggers an alert for browser or mobile tests, and if the failed step's description field matches Checkout, notify the recipient.
 }}
 
@@ -113,7 +114,7 @@ If the step's name matches the staging domain, set the priority to P2. Otherwise
 
 ```shell
 {{!
-This alert uses the `{{synthetics.failed_step}}` object which is a variable shortcut that points to the relevant step data contained in `{{synthetics.attributes.result.steps}}`.
+This alert uses the {{synthetics.failed_step}} object which is a variable shortcut that points to the relevant step data contained in `{{synthetics.attributes.result.steps}}`.
 If the test triggers an alert for multistep API test and if the failed step's name field matches the domain, override the priority.
 }}
 {{#is_alert}}

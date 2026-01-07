@@ -57,6 +57,8 @@ Use these variables to access common test execution data such as failure message
 : Lists all the tags added to the synthetics test.
 : To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
 
+<p> Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.response.statusCode</code> variable in a notification.</p>
+
 ### Result attributes
 
 Path: `synthetics.attributes`
@@ -179,7 +181,11 @@ Applies to Multistep, Browser, and Mobile tests.
 `{{synthetics.failed_step}}`
 : The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly. 
 
-For example, `{{synthetics.failed_step.name}}` maps to `{{synthetics.attributes.result.steps.<step-index>.name}}` for Multistep API tests, and to `{{synthetics.attributes.result.steps.<step-index>.description}}` for Browser and Mobile tests.
+For example, `{{synthetics.failed_step.name}}` maps to `{{synthetics.attributes.result.steps.<step-index>.name}}` for Multistep API tests, and to `synthetics.failed_step.description` maps to`{{synthetics.attributes.result.steps.<step-index>.description}}` for Browser and Mobile tests.
+
+Review the [conditional alerting][1] page for an example of how to use the `synthetics.failed_step.description` shortcut variable in Browser Test notification.
+
+[1]: /synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -625,6 +631,8 @@ Use the step's unique identifier:
 
 `.steps.abc-def-ghi`
 
+Review the [conditional alerting][6] page for an example of how to use the `synthetics.attributes.result.step` variable in a slack notification based on a failed step.
+
 #### Accessing step properties
 
 Combine any reference method with a property:
@@ -641,4 +649,6 @@ Combine any reference method with a property:
 [2]: /synthetics/notifications/template_variables/?tab=apitests#step-execution-details
 [3]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code
 [4]: /synthetics/api_tests/errors/
+[5]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code
+[6]: /synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step
 
