@@ -45,7 +45,8 @@ Use these variables to access common test execution data such as failure message
 : The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
 
 `{{synthetics.attributes.result.response.statusCode}}`
-: The HTTP status code (for example, `403`).
+: The HTTP status code (for example, `403`). </br>
+<strong>Tip:</strong> Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code">conditional alerting</a> page for an example of how to use this variable in a notification.
 
 `{{synthetics.result.step_count}}`
 : Number of steps (for example, `4`).
@@ -149,6 +150,8 @@ Applies to Browser and Mobile tests.
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
 
+<p>For a complete list of API test error codes, see <a href="/synthetics/api_tests/errors/">API Testing Errors</a>. Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.failure</code> variable in a notification.</p>
+
 {{% /tab %}}
 {{% tab "Count" %}}
 
@@ -175,9 +178,31 @@ Applies to Multistep, Browser, and Mobile tests.
 Applies to Multistep, Browser, and Mobile tests.
 
 `{{synthetics.failed_step}}`
-: The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly. 
+: The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly. </br>
 
-For example, `{{synthetics.failed_step.name}}` maps to `{{synthetics.attributes.result.steps.<step-index>.name}}` for Multistep API tests, and to `{{synthetics.attributes.result.steps.<step-index>.description}}` for Browser and Mobile tests.
+<table>
+<thead>
+<tr>
+<th style="min-width: 240px;">Shortcut</th>
+<th>Test Type</th>
+<th>Maps To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{{synthetics.failed_step.name}}</code></td>
+<td>Multistep API</td>
+<td><code>{{synthetics.attributes.result.steps.&lt;step-index&gt;.name}}</code></td>
+</tr>
+<tr>
+<td><code>{{synthetics.failed_step.description}}</code></td>
+<td>Browser, Mobile</td>
+<td><code>{{synthetics.attributes.result.steps.&lt;step-index&gt;.description}}</code></td>
+</tr>
+</tbody>
+</table>
+
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut">conditional alerting</a> page for an example of how to use the <code>synthetics.failed_step.description</code> shortcut variable in a Browser Test notification.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -623,6 +648,8 @@ Use the step's unique identifier:
 
 `.steps.abc-def-ghi`
 
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.step</code> variable in a Slack notification based on a failed step.</div>
+
 #### Accessing step properties
 
 Combine any reference method with a property:
@@ -637,3 +664,8 @@ Combine any reference method with a property:
 
 [1]: /synthetics/explore/results_explorer
 [2]: /synthetics/notifications/template_variables/?tab=apitests#step-execution-details
+[3]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code
+[4]: /synthetics/api_tests/errors/
+[5]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code
+[6]: /synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step
+
