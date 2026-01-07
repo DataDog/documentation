@@ -44,7 +44,7 @@ Replays collected through the [force collection][1] mechanism are kept by the de
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-session-filter.png" alt="When force collection is enabled, it is positioned first in the list of retention filters." style="width:90%" >}}
 
-**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are kept by default.
+**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are retained by default.
 
 ## Creating a retention filter
 
