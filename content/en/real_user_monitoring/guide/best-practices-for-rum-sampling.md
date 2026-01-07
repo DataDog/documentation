@@ -82,7 +82,7 @@ To modify the sampling rate for browser SDK client-side sampling, you can either
 
 To modify the sampling rate for mobile SDKs, redeploy your application with an updated `sessionSampleRate` value.
 
-During live outages, incidents, or bug investigations, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or to have more examples of a particular issue.
+During live outages, incidents, or bug investigations, you can increase sampling to collect 100% of your sessions to help ensure nothing is missed, or to have more examples of a particular issue.
 
 ## Further Reading
 
