@@ -27,6 +27,9 @@ further_reading:
     - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Learn how to troubleshoot Test Optimization"
+    - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+      tag: "Blog"
+      text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 cascade:
     site_support_id: test_optimization
     algolia:

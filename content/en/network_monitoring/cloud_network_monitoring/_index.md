@@ -7,6 +7,9 @@ aliases:
   - /network_performance_monitoring/
   - /network_monitoring/performance/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cnm-network-health"
+  tag: "Blog"
+  text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"
 - link: '/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/'
   tag: 'Guide'
   text: 'Detecting Application Availability using Network Insights'
