@@ -155,7 +155,7 @@ When the service binary is built, you can use environment variables to enable an
 
 4. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
 
-5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiling page][8].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiling page][8]. If they do not, refer to the [Troubleshooting][16] guide.
 
 ### Enabling CPU profiler engine options
 
@@ -363,3 +363,4 @@ The [Getting Started with Profiler][11] guide takes a sample service with a perf
 [13]: /profiler/enabling/supported_versions/
 [14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
 [15]: https://docs.datadoghq.com/profiler/enabling/java/?tab=datadogprofiler#
+[16]: /profiler/profiler_troubleshooting/java/
