@@ -239,6 +239,10 @@
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization. See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/) for more information."
   },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\nSee the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information."
+  },
   "rum": {
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
