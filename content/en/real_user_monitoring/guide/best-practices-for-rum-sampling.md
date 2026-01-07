@@ -72,17 +72,17 @@ Configuring sampling based on specific attributes, such as sampling 100% of sess
 
 ### Changing the sampling rate in the Datadog RUM UI
 
-You can only change the sampling rate from the Datadog UI for browser server-side sampling. To do this, [modify the sampling rate][15] on the SDK Configuration page.
+During live outages, incidents, or bug investigations, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or to have more examples of a particular issue.
+
+You can only change the sampling rate from the Datadog UI for **browser server-side sampling**. To do this, [modify the sampling rate][15] on the SDK Configuration page.
 
 {{< img src="/real_user_monitoring/browser/browser-change-sampling.png" alt="Session Sampling and Session Replay Sampling sliders visible from the RUM SDK Configuration page." style="width:100%;" >}}
 
-To modify the sampling rate for browser SDK client-side sampling, you can either:
+To modify the sampling rate for **browser client-side sampling**, you can either:
 - Deploy a new version of your application with an updated `sessionSampleRate` value
 - Use a feature flag or remote configuration service to dynamically set the rate when the SDK initializes 
 
-To modify the sampling rate for mobile SDKs, redeploy your application with an updated `sessionSampleRate` value.
-
-During live outages, incidents, or bug investigations, you can increase sampling to collect 100% of your sessions to ensure nothing is missed, or to have more examples of a particular issue.
+To modify the sampling rate for **mobile SDKs**, redeploy your application with an updated `sessionSampleRate` value.
 
 ## Further Reading
 
