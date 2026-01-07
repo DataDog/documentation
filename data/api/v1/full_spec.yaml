@@ -16804,7 +16804,7 @@ components:
         tests:
           description: Array of Synthetic tests configuration.
           items:
-            $ref: '#/components/schemas/SyntheticsTestDetails'
+            $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           type: array
       type: object
     SyntheticsLocalVariableParsingOptionsType:
@@ -17835,7 +17835,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: For browser test, the steps of the test.
+          description: The steps of the test if they exist.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -17887,6 +17887,52 @@ components:
       - API
       - BROWSER
       - MOBILE
+    SyntheticsTestDetailsWithoutSteps:
+      description: Object containing details about your Synthetic test, without test
+        steps.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsTestConfig'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        locations:
+          description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        message:
+          description: Notification message associated with the test.
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsTestOptions'
+        public_id:
+          description: The test public ID.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
+        tags:
+          description: Array of tags attached to the test.
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsTestDetailsType'
+      type: object
     SyntheticsTestExecutionRule:
       description: Execution rule for a Synthetic test.
       enum:
@@ -36321,7 +36367,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SyntheticsTestDetails'
+                $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           description: OK
         '403':
           content:
