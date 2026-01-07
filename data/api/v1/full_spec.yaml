@@ -4388,6 +4388,7 @@ components:
       - appsec_usage
       - asm_serverless_traced_invocations_usage
       - asm_serverless_traced_invocations_percentage
+      - bits_ai_investigations_usage
       - browser_usage
       - ci_pipeline_indexed_spans_usage
       - ci_test_indexed_spans_usage
@@ -4471,6 +4472,7 @@ components:
       - APPSEC_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
+      - BITS_AI_INVESTIGATIONS_USAGE
       - BROWSER_USAGE
       - CI_PIPELINE_INDEXED_SPANS_USAGE
       - CI_TEST_INDEXED_SPANS_USAGE
@@ -8809,6 +8811,8 @@ components:
       - appsec_percentage
       - asm_serverless_traced_invocations_usage
       - asm_serverless_traced_invocations_percentage
+      - bits_ai_investigations_usage
+      - bits_ai_investigations_percentage
       - browser_usage
       - browser_percentage
       - ci_visibility_itr_usage
@@ -8970,6 +8974,8 @@ components:
       - APPSEC_PERCENTAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
+      - BITS_AI_INVESTIGATIONS_USAGE
+      - BITS_AI_INVESTIGATIONS_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
       - CI_VISIBILITY_ITR_USAGE
@@ -9181,6 +9187,14 @@ components:
         asm_serverless_traced_invocations_usage:
           description: The Application Security Monitoring Serverless traced invocations
             usage by tag(s).
+          format: double
+          type: number
+        bits_ai_investigations_percentage:
+          description: The percentage of Bits AI `SRE` investigation usage by tag(s).
+          format: double
+          type: number
+        bits_ai_investigations_usage:
+          description: The Bits AI `SRE` investigation usage by tag(s).
           format: double
           type: number
         browser_percentage:
