@@ -125,7 +125,7 @@ In addition to the out-of-the-box integrations described above, Change Tracking 
 
 #### Supported widget types
 
-Change Tracking is available as a data source for the following widget types: **Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change,and Bar Chart**.
+Change Tracking is available as a data source for the following widget types: **Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, and Bar Chart**.
 
 Change Tracking can also be displayed as an **Event Overlay on Timeseries widgets**, making it easier to correlate tracked changes with metric behavior.
 
