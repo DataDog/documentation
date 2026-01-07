@@ -76,7 +76,7 @@ data/private_action_runner_version.json                       @Datadog/documenta
 # Serverless
 
 /content/en/serverless/                                 @DataDog/serverless @DataDog/documentation
-/layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/serverless-onboarding-and-enablement @DataDog/documentation
+/layouts/shortcodes/latest-lambda-layer-version.html    @DataDog/serverless @DataDog/serverless-onboarding-and-enablement @DataDog/documentation
 
 # Database Management
 /content/en/database_monitoring/                        @DataDog/database-monitoring @DataDog/documentation
