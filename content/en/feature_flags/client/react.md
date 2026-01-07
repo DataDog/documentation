@@ -173,7 +173,7 @@ function Banner() {
 
 ### Suspense support
 
-Built-in [suspense](https://react.dev/reference/react/Suspense) support makes this easy to avoid displaying components with feature flags until provider initialization is complete, or when the context changes. Pass `{ suspend: true }` in the hook options to leverage this functionality.
+Built-in [suspense](https://react.dev/reference/react/Suspense) support allows you to avoid displaying components with feature flags until provider initialization is complete, or when the context changes. Pass `{ suspend: true }` in the hook options to use this functionality.
 
 For example:
 
