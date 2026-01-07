@@ -1,5 +1,5 @@
 ---
-title: Oracle Cloud Infrastructure Integration Billing
+title: OCI Integration Billing
 ---
 
 ## Overview
