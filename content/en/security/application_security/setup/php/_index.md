@@ -6,6 +6,9 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/php
   - /security/application_security/threats_detection/php
   - /security/application_security/setup/aws/fargate/php
+  - /security/application_security/setup/threat_detection/php
+  - /security/application_security/setup/standalone/php
+  - /security/application_security/enabling/compatibility/php
 ---
 {{< partial name="app_and_api_protection/callout.html" >}}
 

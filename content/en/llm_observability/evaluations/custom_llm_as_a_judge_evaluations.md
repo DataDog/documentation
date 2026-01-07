@@ -2,9 +2,15 @@
 title: Custom LLM-as-a-Judge Evaluations
 description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
 further_reading:
+- link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
+  tag: "Blog"
+  text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
   text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
+  tag: "Blog"
+  text: "Building an LLM evaluation framework: best practices"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -14,9 +20,6 @@ further_reading:
 - link: "/llm_observability/evaluations/managed_evaluations"
   tag: "Documentation"
   text: "Learn about managed evaluations"
-- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
-  tag: "Blog"
-  text: "Building an LLM evaluation framework: best practices"
 - link: "https://huggingface.co/learn/cookbook/llm_judge"
   tag: "Hugging Face"
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
@@ -34,20 +37,16 @@ Learn more about the [compatibility requirements][6].
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
    {{< img src="llm_observability/evaluations/custom_llm_judge_1-2.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
-
-2. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
-
-3. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
-
-4. Use the **Model** drop-down menu to select a model to use for your LLM judge.
-
-5. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
+1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
+1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
+    - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
+    - If you select a **Vertex** account, choose a project and location.
+1. Use the **Model** drop-down menu to select a model to use for your LLM judge.
+1. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
    - **Create from scratch**: Use your own custom prompt (defined in the next step).
    - **Failure to Answer**, **Prompt Injection**, **Sentiment**, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
-
-6. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
+1. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
    For custom prompts, provide clear instructions describing what the evaluator should assess. 
-
    - Focus on a single evaluation goal 
    - Include 2–3 few-shot examples showing input/output pairs, expected results, and reasoning.
 
@@ -283,7 +282,7 @@ You can:
 
 [1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
-[3]: /service_management/events/explorer/facets/
+[3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility

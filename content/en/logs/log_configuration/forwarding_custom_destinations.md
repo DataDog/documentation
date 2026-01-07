@@ -47,7 +47,7 @@ The following metrics report on logs that have been forwarded successfully, incl
 5. Enter the query to filter your logs for forwarding. See [Search Syntax][5] for more information.
 6. Select the **Destination Type**.
 
-{{< img src="logs/log_configuration/forwarding/log-forwarding-tag-sentinel.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
+{{< img src="logs/log_configuration/forwarding/log-forwarding-gzip-opt-out.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
