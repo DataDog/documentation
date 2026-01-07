@@ -1,0 +1,428 @@
+Location (v2),Description
+custom,"Groups core attributes of the security finding that describe its nature, impact, and status."
+custom.severity,"Indicates the datadog adjusted severity level of the finding. Valid values: critical, high, medium, low, info, none, unknown."
+custom.base_severity,"Indicates the base severity level of the finding. Valid values: critical, high, medium, low, info, none, unknown."
+custom.status,"Indicates the workflow status of the finding. Possible values: open, muted, auto_closed."
+custom.resource_id,The unique identifier of the resource affected by the finding.
+custom.resource_name,Human-readable name of the resource affected by the finding.
+custom.resource_type,Specifies the type of the resource.
+custom.title,Human-readable title for the finding.
+custom.origin,"Lists the detection origin that produced the finding, such as agentless scans, APM, SCI, or CI."
+custom.description,Provides a human-readable explanation of the finding. May include Markdown formatting.
+custom.exposure_time_seconds,"Indicates the time elapsed, in seconds, between when the finding was last closed and when it was first seen again."
+custom.finding_type,"Defines the category of the finding. Possible values: api_security, attack_path, runtime_code_vulnerability, static_code_vulnerability, host_and_container_vulnerability, iac_misconfiguration, identity_risk, library_vulnerability, misconfiguration, secret, workload_activity."
+custom.finding_id,Unique identifier of the finding.
+custom.first_seen_at,Timestamp (UTC) of the first time the finding was detected.
+custom.last_seen_at,Timestamp (UTC) of the most recent detection of the finding.
+custom.is_in_security_inbox,True if the finding appears in the Security Inbox; false otherwise.
+custom.detection_changed_at,Timestamp (UTC) of the last time the finding’s evaluation or detection state changed.
+tags,Key-value metadata in the format name:value. Enables flexible filtering and grouping of findings. Must include at least source and origin.
+custom.metadata,"Additional metadata about the finding, such as schema version or source context."
+custom.metadata.schema_version,Indicates the findings schema version used for this finding. Current value: 2.
+custom.source_finding_raw_data,Raw data from third-party integrations that generated this finding.
+custom.detection_tool,Indicates the tool responsible for detecting the security finding
+custom.detection_tool.name,Name of the detection tool or engine that generated this finding.
+custom.detection_tool.version,Version of the detection tool or engine that generated this finding.
+custom._dd,Contains internal Datadog attributes used for advanced processing or analytics.
+custom._dd.rule.language,Indicates the language used to define the rule or query that produced the finding.
+custom._dd.detection_changed,Whether the finding’s evaluation or detection state changed in this specific event or not.
+custom._dd.rule.query,Contains the query string associated with the rule that generated the finding.
+custom._dd.finding_publisher,"Identifies the component or service that generated the finding (for example, rego-processor or ciem)."
+custom._dd.valid_since,UNIX timestamp (UTC) marking the start of the validity period for the finding.
+custom._dd.valid_until,UNIX timestamp (UTC) marking the end of the validity period for the finding.
+custom._dd.is_detected_by_shadow_rule,True if the finding was detected by a shadow (test) rule; false otherwise.
+custom._dd.schema_version,Lists schema versions applied during migration or transformation.
+custom._dd.pass,Contains the rule identifier if the finding passed that rule.
+custom._dd.workflow.integrations.cases,Internal cases object. Used to store internal metadata about the case.
+custom._dd.workflow.integrations.cases.status_group,"Indicates the case management status of the finding. Possible values: sg_open, sg_in_progress , sg_closed."
+custom._dd.fail,Contains the rule identifier if the finding failed that rule.
+custom._dd.finding_key,Unique key used internally for routing and correlation of finding events.
+custom._dd.expire_at,Timestamp (UTC) when the finding will expire and no longer appear in views.
+custom._dd.creation_code_path,"Indicates the processing path used to create the finding (for example, update, detection, or timer)."
+custom._dd.update_code_path,"Indicates the processing path used to update the finding (for example, update, detection, or timer)."
+custom._dd.closed_finding,True if this event represents a closed finding; false otherwise.
+custom._dd.remediations_text,"The fields contains the list of remediations.
+This field is used by the public API of vulnerabilities.
+
+This list of remediations is a json stored as a string. This is a workaround of ddsql/evp where an entire subfield can not be queried.
+This field will be removed once the public API of vulnerabilities is removed, in favor of the new public API of findings."
+custom._dd.vulnerability_key,DEPRECATED. this field should no longer be used and will be removed when all existing usage is deleted We just need this to maintain backward compability during the transition
+custom._dd.remediation_types,Array of all the remediation types included used for debugging.
+custom._dd.visualization_context,
+custom._dd.iast_evidence,"This object stores evidences of an IAST vulnerability, e.g. the parts of a query vulnerable to a SQL injection.
+
+This object is optimized for the FE, to resurface nicely the evidences with vulnerable parts being highlighted.
+The structure of the object is not user friendly, it is hardly understandable for a user (e.g. public doc, sheets, etc).
+We are not sure how to structure it nicely for users, so we are deciding to hide this field in v2 under _dd .
+
+If in the future some users are asking to have the evidences public, we'll gather their requirements to be sure to fill their needs."
+custom._dd.iast_evidence.value_parts,
+custom._dd.iast_evidence.value_parts.value,
+custom._dd.iast_evidence.value_parts.source,
+custom._dd.iast_evidence.value_parts.redacted,
+custom._dd.iast_evidence.value_parts.index,
+custom._dd.iast_evidence.sources,
+custom._dd.iast_evidence.sources.redacted,
+custom._dd.iast_evidence.sources.origin,
+custom._dd.iast_evidence.sources.name,
+custom._dd.iast_evidence.sources.index,
+custom._dd.iast_evidence.sources.value,
+custom.severity_details,"Contains detailed severity information for the finding, including base and adjusted severity."
+custom.severity_details.base,"Describes the base severity of the finding as defined by the original rule, advisory, or scanner, before any contextual adjustments."
+custom.severity_details.base.value,"Base severity level of the finding. Valid values: critical, high, medium, low, info, none, unknown."
+custom.severity_details.base.value_id,"Numeric representation of the base severity. Values: critical = 10, high = 9, medium = 7, low = 4, none = 0."
+custom.severity_details.base.score,"Base numeric severity score of the finding (for example, CVSS score)."
+custom.severity_details.base.vector,Base CVSS vector string that describes how the vulnerability can be exploited.
+custom.severity_details.adjusted,Represents the adjusted severity of the finding after accounting for contextual or environmental factors.
+custom.severity_details.adjusted.value,"Adjusted severity level after contextual weighting. Possible values: critical, high, medium, low, info, none, unknown."
+custom.severity_details.adjusted.value_id,"Numeric representation of the adjusted severity. Values: critical = 10, high = 9, medium = 7, low = 4, none = 0."
+custom.severity_details.adjusted.score,Adjusted numeric score. Derived from Datadog’s internal scoring and aligned with CVSS scale.
+custom.severity_details.adjusted.vector,Adjusted CVSS vector string that reflects contextual modifications.
+custom.workflow,"The workflow namespace contains all mutable information related to the management of a finding, after it was detected. These should only be fields that can be updated manually by users through the UI, or automatically through the Automation Pipeline.
+""the finding is muted (with a reason)
+assignment to a JIRA ticket"""
+custom.workflow.triage,The triage section contains assignment and status information. Assignement is potentially synchronized with case/Jira information when present
+custom.workflow.triage.assignee,Contains the user assigned to this finding.
+custom.workflow.triage.assignee.name,Display name of the assigned user.
+custom.workflow.triage.assignee.id,Unique identifier for the assigned user in UUID format.
+custom.workflow.triage.assignee.updated_at,Timestamp in milliseconds (UTC) when the assignee was last modified.
+custom.workflow.triage.assignee.updated_by,Contains the user who last modified the assignee.
+custom.workflow.triage.assignee.updated_by.id,Unique identifier in UUID format for the user who last modified the assignee.
+custom.workflow.triage.assignee.updated_by.name,Display name of the user who last modified the assignee.
+custom.workflow.triage.time_to_acknowledge_seconds,"Time, in seconds, between when the finding was first detected and the first manual triage action (such as creating a ticket, assigning an owner, or muting the finding)."
+custom.workflow.triage.time_to_resolution_seconds,"Time, in seconds, between when the finding was first detected and when it was resolved (confirmed as fixed or muted) for findings that were previously triaged only, or muted "
+custom.workflow.auto_closed_at,Timestamp in milliseconds (UTC) when the finding was automatically closed by the system.
+custom.workflow.due_date,Describes the due date rule applied to this finding.
+custom.workflow.due_date.due_at,Timestamp in milliseconds (UTC) when the finding must be resolved.
+custom.workflow.due_date.is_overdue,"True if the due date was reached, false otherwise."
+custom.workflow.due_date.rule_id,Unique identifier for the due date rule applied to this finding.
+custom.workflow.mute,Contains muting information and metadata
+custom.workflow.mute.is_muted,"Indicates whether the finding is currently muted. True means the finding is muted, false means it is active."
+custom.workflow.mute.reason,"Reason provided for muting the finding. Possible values: none, no pending fix, human error, no longer accepted risk, other, pending fix, false positive, accepted risk, no fix, duplicate, risk accepted"
+custom.workflow.mute.description,Free-text explanation for why the finding was muted.
+custom.workflow.mute.expire_at,"Timestamp in milliseconds (UTC) when the mute expires. If not set, the mute is permanent."
+custom.workflow.mute.is_muted_by_rule,"Indicate if the finding is muted by an automation rule. If true, the relevant automation rule is referenced in the workflow.automation section."
+custom.workflow.mute.rule_id,Unique identifier for the automation rule that muted this finding. Only set when is_muted_by_rule is true.
+custom.workflow.mute.rule_name,Human-readable name of the automation rule that muted this finding. Only set when is_muted_by_rule is true.
+custom.workflow.mute.muted_at,Timestamp in milliseconds (UTC) when the finding was muted.
+custom.workflow.mute.muted_by,User who muted the finding.
+custom.workflow.mute.muted_by.id,Unique identifier in UUID format for the user who muted the finding.
+custom.workflow.mute.muted_by.name,Display name of the user who muted the finding.
+custom.workflow.automations,Contains data of automation rules applying on the finding.
+custom.workflow.automations.rule_id,Unique identifier for the automation rule.
+custom.workflow.automations.rule_type,"Type of the automation rule applying on the finding. Possible values: mute, due_date, security_inbox"
+custom.workflow.automations.rule_name,Human-readable name of the automation rule applying on the findings.
+custom.workflow.integrations,"Base information for integrations like Jira, Case management and/or ServiceNow, used to triage the finding.
+Relates to how the finding is managed by customers, in order to track and remediate.
+https://datadoghq.atlassian.net/wiki/spaces/SharedXP/pages/4765483198/Data+model+for+case+management+integration+in+findings"
+custom.workflow.integrations.cases,Contains an array of cases attached to the finding.
+custom.workflow.integrations.cases.id,Unique identifier of the case in UUID format.
+custom.workflow.integrations.cases.key,"Human-readable identifier for the case in the format PROJECT-NUMBER (e.g., CSMINV-66)."
+custom.workflow.integrations.cases.title,Title of the case.
+custom.workflow.integrations.cases.status,Status of the case.
+custom.workflow.integrations.cases.assignee,User assigned to the case (if any).
+custom.workflow.integrations.cases.assignee.id,Unique identifier of the assigned user in UUID format.
+custom.workflow.integrations.cases.assignee.name,Display name of the assigned user.
+custom.workflow.integrations.cases.jira_issue,Jira issue attached to the case (if any).
+custom.workflow.integrations.cases.jira_issue.key,"Jira issue identifier in the format PROJECT-NUMBER (e.g., CSMSEC-103991)."
+custom.workflow.integrations.cases.jira_issue.url,Full URL to the Jira issue.
+custom.workflow.integrations.cases.jira_issue.status,Current status of the Jira issue.
+custom.workflow.integrations.cases.created_at,Timestamp in milliseconds (UTC) when the case was created.
+custom.workflow.integrations.cases.created_by,User who created the case.
+custom.workflow.integrations.cases.created_by.id,Unique identifier in UUID format of the user who created the case.
+custom.workflow.integrations.cases.created_by.name,Display name of the user who created the case.
+custom.workflow.integrations.cases.updated_at,Timestamp in milliseconds (UTC) when the case was last updated.
+custom.workflow.integrations.cases.updated_by,User who last updated the case.
+custom.workflow.integrations.cases.updated_by.id,Unique identifier in UUID format of the user who last updated the case.
+custom.workflow.integrations.cases.updated_by.name,Display name of the user who last updated the case.
+custom.workflow.integrations.jira,"List of Jira issue keys attached to this finding in the format PROJECT-NUMBER (e.g., [""PROJ-123"", ""PROJ-456""])."
+custom.workflow.integrations.pull_requests,List of pull requests used to remediate this finding. Each entry contains metadata about a pull request in a source control system.
+custom.workflow.integrations.pull_requests.created_by,User who created the pull request.
+custom.workflow.integrations.pull_requests.created_by.id,Unique identifier in UUID format of the user who created the pull request.
+custom.workflow.integrations.pull_requests.created_by.name,Display name of the user who created the pull request.
+custom.workflow.integrations.pull_requests.host_name,Domain name of the source control system hosting the pull request.
+custom.workflow.integrations.pull_requests.organization_name,Name of the organization or group in the source control system.
+custom.workflow.integrations.pull_requests.repository_name,Name of the repository containing the pull request.
+custom.workflow.integrations.pull_requests.url,Full URL to the pull request in the source control system.
+custom.risk,Groups risk-related attributes for the finding. Each key must have a matching key in the risk_details namespace.
+custom.risk.has_sensitive_data,True is the finding has access to a resource that contains sensitive data (e.g. an S3 bucket). The field can be missing when this information is unknown.
+custom.risk.is_function_reachable,True if the vulnerable function may be executed.
+custom.risk.is_exposed_to_attacks,True if attacks have already been detected on this resource. Those attacks may be unrelated to the finding but indicates a higher likelyhood of facing threats.
+custom.risk.has_privileged_access,True if the finding's resource is running with elevated privileges (e.g. administrator) or has the ability to assume a privileged role.
+custom.risk.is_production,True if the finding's resource is running in production. This is detected through the `env` [tag](/getting_started/tagging/)
+custom.risk.is_publicly_accessible,"True if the finding's resource is publicly accessible. For instance a host with a public IP and open ports, or a publicly accessible S3 bucket."
+custom.risk.has_exploit_available,True if known exploits exist for this finding.
+custom.risk.has_high_exploitability_chance,True if the vulnerability is likely to be exploited. This is set if the FIRST EPSS score (Exploit Prediction Scoring System) is above 1%.
+custom.risk.is_tainted_from_request_url,"True if the final URL contains tainted parts originating from the request URL, which may lower the risk due to typical framework validation (e.g. Java Spring)."
+custom.risk.is_tainted_from_query_string,True if the problematic string contains elements derived from an HTTP query string.
+custom.risk.is_tainted_from_database,True if the string is tainted due to originating from an untrusted database source.
+custom.risk.is_using_sha1,"True if SHA1 is used in a weak hash, which reduces the risk score due to its security being stronger than algorithms like MD5.
+"
+custom.risk_details,"Groups contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation. All findings should have their risk reported here. if a risk is not significant enough to impact the score, it may be placed somewhere else. The name of each key must explicitely show the boolean nature of the risk (typically prefixed with is_ or has_). Though, a risk might be undefined (for instance, we can't tell fi a service is under attack if the users don't have APM nor AAP).
+Each item of risk_details must be accompanied by a top level boolean risk item enabling to easily search for a specific risk."
+custom.risk_details.has_sensitive_data,Groups evidence and indicators about whether the affected resource has sensitive data.
+custom.risk_details.has_sensitive_data.impact_cvss,"Describes how sensitive data presence changes the CVSS score. Possible values: `riskier`, `neutral`, `safer`, `unknown`. For instance considering a vulnerability theoretically exploitable through internet:
+ - `safer`: the impacted resource is on a private network, requiring the attacker to be on this private network rather than on the internet.
+ - `neutral`: if the impacted resource has an actual internet access.
+ - `unknown`: we cannot detect network related information on the impacted resource or about the vulnerability."
+custom.risk_details.has_sensitive_data.value,Same as `risk.has_sensitive_data`.
+custom.risk_details.has_sensitive_data.evidence,Evidence supporting the presence of sensitive data.
+custom.risk_details.has_sensitive_data.evidence.sds_id,ID of a sensitive data entry such as discover by Datadog Sensitive Data Scanning.
+custom.risk_details.is_function_reachable,Groups evidence and indicators about whether the vulnerable function or module is used in the code.
+custom.risk_details.is_function_reachable.impact_cvss,"Describes how function reachability changes the CVSS risk assessment. Valid values: riskier, neutral, safer, unknown."
+custom.risk_details.is_function_reachable.value,True if the function is reachable.
+custom.risk_details.is_function_reachable.evidence,Describes the evidence used to determine whether the function is reachable
+custom.risk_details.is_function_reachable.evidence.locations,"Array of CodeLocation items (the filename, line, column, and symbol fields are required)"
+custom.risk_details.is_exposed_to_attacks,Is the service where the finding was detected exposed to attacks?
+custom.risk_details.is_exposed_to_attacks.impact_cvss,Describes how the resource’s exposure affects the CVSS scoring.
+custom.risk_details.is_exposed_to_attacks.value,Same as `risk.is_exposed_to_attacks`.
+custom.risk_details.is_exposed_to_attacks.evidence,Evidences for the presence of attacks.
+custom.risk_details.is_exposed_to_attacks.evidence.trace_example,Example of a trace with attacks detected on the finding's resource.
+custom.risk_details.is_exposed_to_attacks.evidence.trace_query,Query used to find traces with attacks related to the resource associated with the finding.
+custom.risk_details.is_exposed_to_attacks.evidence.attacks_details,Details about one of the detected attacks.
+custom.risk_details.has_privileged_access,Object describing further detail about custom.risk.has_privileged_access
+custom.risk_details.has_privileged_access.impact_cvss,Describes how privileged access changes the CVSS scoring.
+custom.risk_details.has_privileged_access.value,True if the resource associated with the finding has privileged access.
+custom.risk_details.has_privileged_access.evidence,Object of unknown shape showing proof of the Privileged Access
+custom.risk_details.has_privileged_access.evidence.resource_key,Canonical Cloud Resource Identifier with proof of the Privileged Access (i.e. an aws_iam_policy CCRID)        
+custom.risk_details.is_production,Groups evidence and indicators about whether the resource associated with the finding is running in a production environment.
+custom.risk_details.is_production.impact_cvss,"How is this affecting the CVSS scoring? Typically, if `in_production=true`, the CVSS risk impact is `neutral`, and if `in_production=false`, the CVSS risk impact is `safer`."
+custom.risk_details.is_production.value,Same as `risk.is_production`.
+custom.risk_details.is_production.evidence,The `env` value triggering the conclusion for `is_production`.
+custom.risk_details.is_publicly_accessible,Groups information about whether the affected resource is accessible from the public internet.
+custom.risk_details.is_publicly_accessible.impact_cvss,"How is this affecting the CVSS scoring? Possible values: `riskier`, `neutral`, `safer`, `unknown`. For instance, a resource with an exploitability exploitable through internet was detected on a private network. Hence the CVSS impact on risk is `safer`. Though, if this resource had an actual internet access, the CVSS impact on risk would be `neutral`."
+custom.risk_details.is_publicly_accessible.value,Equals custom.risk.is_publicly_accessible (may change to enum in future).
+custom.risk_details.is_publicly_accessible.evidence,Object of unknown shape showing proof of access from the internet.
+custom.risk_details.is_publicly_accessible.evidence.resource_key,CCRID of the resource accessible from the internet (i.e an AWS ELBv2 ARN).
+custom.risk_details.has_exploit_available,Groups information about whether a known exploit exists for this finding advisory.
+custom.risk_details.has_exploit_available.impact_cvss,Describes how the availability of known exploits changes the CVSS scoring.
+custom.risk_details.has_exploit_available.value,True if known exploits exist for this finding.
+custom.risk_details.has_exploit_available.evidence,Provides evidence about the exploit availability
+custom.risk_details.has_exploit_available.evidence.type,"Type of evidence. Valid values: `production_ready`, `poc`, `unavailable`."
+custom.risk_details.has_exploit_available.evidence.exploit_urls,Lists exploit urls entries associated with the finding.
+custom.risk_details.has_exploit_available.evidence.exploit_sources,"Lists exploit sources entries associated with the finding. (i.e. NIST, CISA, Exploit-DB etc)"
+custom.risk_details.has_high_exploitability_chance,Is the vulnerability likely to be exploited. Derived from EPSS
+custom.risk_details.has_high_exploitability_chance.impact_cvss,Describes how the availability of known exploits changes the CVSS scoring.
+custom.risk_details.has_high_exploitability_chance.value,"True if this vulnerability is assessed as having a high chance of exploitation (EPSS above 1%), false otherwise."
+custom.risk_details.has_high_exploitability_chance.evidence,Object providing the evidence of the EPSS score
+custom.risk_details.has_high_exploitability_chance.evidence.epss_score,"FIRST EPSS score (first.org Exploit Prediction Scoring System), a percentage representing the chance of exploitation"
+custom.risk_details.has_high_exploitability_chance.evidence.epss_severity,"EPSS score severity, valid values are Critical/High/Medium/Low, being Critical any vulnerability with a high chance of exploitation"
+custom.risk_details.is_tainted_from_request_url,Groups information about whether the tainted parts originating from the request URL.
+custom.risk_details.is_tainted_from_request_url.impact_cvss,Describes how it changes the CVSS scoring.
+custom.risk_details.is_tainted_from_request_url.value,"True if the final URL contains tainted parts originating from the request URL, which may lower the risk due to typical framework validation (e.g. Java Spring)."
+custom.risk_details.is_tainted_from_query_string,Groups information about whether the tainted parts originating from a query string.
+custom.risk_details.is_tainted_from_query_string.impact_cvss,Describes how it changes the CVSS scoring.
+custom.risk_details.is_tainted_from_query_string.value,True if the problematic string contains elements derived from an HTTP query string.
+custom.risk_details.is_tainted_from_database,Groups information about whether the tainted parts originating from a database.
+custom.risk_details.is_tainted_from_database.impact_cvss,Describes how it changes the CVSS scoring.
+custom.risk_details.is_tainted_from_database.value,True if the string is tainted due to originating from an untrusted database source.
+custom.risk_details.is_using_sha1,"Groups information about whether SHA1 is used in a weak hash.
+"
+custom.risk_details.is_using_sha1.impact_cvss,Describes how it changes the CVSS scoring.
+custom.risk_details.is_using_sha1.value,"True if SHA1 is used in a weak hash, which reduces the risk score due to its security being stronger than algorithms like MD5.
+"
+custom.risk_details.has_high_exploitability_chance.evidence.threshold,Defines the minimum EPSS score required for a vulnerability to be considered as having a high exploitability chance when has_high_exploitability_chance is set to true.
+custom.rule,"A rule indicates how to discover a vulnerability. For instance, the rule python-flask/ssrf-requests describes how to find some kinds of SSRF in Python code.
+Vulnerability findings with rules mean that the vulnerability was spotted either in your source code, or in running code.
+
+Rules are also used for non-vulnerability findings such as misconfigurations or API security."
+custom.rule.type,Contains the type of the rule that generated the finding.
+custom.rule.name,Contains the name of the rule that generated the finding.
+custom.rule.id,Contains the id of the rule that generated the finding
+custom.rule.version,Indicates the version of the rule that generated the finding
+custom.rule.default_rule_id,Contains the default rule id of the rule. Custom rules will not have default rule ids.
+custom.advisory,"An advisory ties a vulnerability to a set of specific software versions. For instance, CVE-2021-44228 indicates that Log4j2 versions 2.0-beta9 through 2.15.0 are vulnerable to injection. 
+Vulnerability findings with advisories mean that a vulnerable version of the software was detected (typically through SBOMs)."
+custom.advisory.id,"Represents the internal ID of the field, and should not be exposed publicly"
+custom.advisory.cve,"Represents the primary, globally recognized identifier for a security vulnerability, following the CVE-YYYY-NNNN format."
+custom.advisory.aliases,"Contains the additional identifiers referring to the same vulnerability, created by other entities. "
+custom.advisory.published_at,UNIX timestamp (UTC) of when the advisory was published
+custom.advisory.modified_at,UNIX timestamp (UTC) of when the advisory was last updated
+custom.advisory.summary,A short summary of the advisory.
+custom.advisory.type,"Specifies the type of the advisory. Possible values are component_with_known_vulnerability, unmaintained, end_of_life, dangerous_workflows, risky_license, and malicious_package"
+custom.vulnerability,The vulnerability namespace contains information specific to vulnerabilities.
+custom.vulnerability.cwes,"CWE (Common Weakness Enumeration) identifier associated with this vulnerability. Each entry must use the CWE-<id> format, for example CWE-416."
+custom.vulnerability.hash,Vulnerability hash used to correlate the same vulnerability across SCA runtime and static.
+custom.vulnerability.first_commit,Identifies the commit in which this vulnerability is first introduced.
+custom.vulnerability.last_commit,Identifies the commit in which this vulnerability is fixed.
+custom.vulnerability.owasp_top10_years,Indicates the years the vulnerability appeared in the OWASP Top 10 list of critical vulnerabilities.
+custom.vulnerability.confidence,Assesses the likelihood of the vulnerability being a true positive.
+custom.vulnerability.confidence_reason,"Provides the rationale behind the assigned confidence level, explaining reasons for low or high assessments."
+custom.vulnerability.is_emerging,True if this vulnerability is classified as an emerging threat.
+custom.vulnerability.stack,Specifies the technological stack the vulnerability was found on.
+custom.vulnerability.stack.language,Specifies the language the vulnerability was found on
+custom.vulnerability.stack.ecosystem,"Indicates the package management ecosystem or source registry from which the vulnerable component originates. Possible values include:go,maven,npm,deb,apk,windows, and others."
+custom.remediation,Groups information about the finding's remediation.
+custom.remediation.codegen,Track a finding for the codegen platform.
+custom.remediation.codegen.status,"Status of the fix with codegen. Valid values: generated, not_available_non_default_branch, not_available_unsupported_tool, not_available_unsupported_rule, not_available_confidence_low, not_available_disabled, not_available_git_provider_not_supported, not_available_confidence_too_low, error."
+custom.remediation.codegen.id,String that is used to track the remediation in the codegen backend.
+custom.remediation.is_available,"True if a remediation is currently available for this finding, false otherwise."
+custom.remediation.description,Remediation description
+custom.remediation.recommended_type,"Indicates the recommended remediation type for this finding, such as applying a code change, upgrading a package, or upgrading the host image version."
+custom.remediation.recommended,The recommended remediation
+custom.remediation.package,Groups remediation package information.
+custom.remediation.package.latest_no_critical,Indicates a remediation (if present) that will suggest the latest version of the package that has no critical vulnerabilities (using their base score)
+custom.remediation.package.latest_no_critical.fixed_advisories,A list containing all the advisories that will be fixed if this remediation is applied
+custom.remediation.package.latest_no_critical.fixed_advisories.id,"Contains each advisory ID, that identifies one particular advisory, that will be fixed if this remediation is applied"
+custom.remediation.package.latest_no_critical.fixed_advisories.base_severity,The base severity of the advisory that will be fixed by this remediation.
+custom.remediation.package.latest_no_critical.new_advisories,"A list containing all the advisories that will appear if this remediation is applied (if any), that were not present in the current version"
+custom.remediation.package.latest_no_critical.remaining_advisories,A list containing all the advisories that remain unfixed (if any) if this remediation is applied
+custom.remediation.package.latest_no_critical.name,The recommmended package name that fixes this particular finding
+custom.remediation.package.latest_no_critical.original_name,The original name of the recommmended package that fixes this particular finding
+custom.remediation.package.latest_no_critical.version,The recommmended package version that fixes this particular finding
+custom.remediation.package.closest_no_critical,Indicates a remediation (if present) that will suggest the closest version (to the current one) of the package that has no critical vulnerabilities (using their base score)
+custom.remediation.package.latest_no_vulnerabilities,Indicates a remediation (if present) that will suggest the latest version of the package that has no vulnerability
+custom.remediation.package.closest_no_vulnerabilities,Indicates a remediation (if present) that will suggest the closest version (to the current one) of the package that has no vulnerability
+custom.remediation.package.base,
+custom.remediation.root_package,Groups remediation root package information.
+custom.remediation.host_image,Indicates a remediation (if present) that will suggest the latest version of a host image that may remediate the vulnerability.
+custom.remediation.host_image.latest_major,Contains information about the latest Amazon Machine Image that may remediate the vulnerability. 
+custom.remediation.host_image.latest_major.name,"Indicates the name of the latest Amazon Machine Image (AMI), such as ""ami-12345678"" that may remediate the vulnerability."
+custom.remediation.container_image,Indicates a remediation (if present) that will suggest a newer version of a container image that may remediate the vulnerability.
+custom.remediation.container_image.closest_no_vulnerabilities,
+custom.remediation.container_image.closest_no_vulnerabilities.registry_url,
+custom.remediation.container_image.closest_no_vulnerabilities.name,
+custom.remediation.container_image.closest_no_vulnerabilities.tag,
+custom.remediation.code_update,
+custom.remediation.code_update.edits,Lists the code changes required to remediate the finding
+custom.remediation.code_update.edits.type,The nature of the code change
+custom.remediation.code_update.edits.line_start,The line where the code change starts
+custom.remediation.code_update.edits.column_start,The column where the code change starts
+custom.remediation.code_update.edits.line_end,The line where the code change ends
+custom.remediation.code_update.edits.column_end,The column where the code change ends
+custom.remediation.code_update.edits.content,The contents of the code change
+custom.remediation.microsoft_kb,Details a remediation strategy using a Microsoft Knowledge Base article.
+custom.remediation.microsoft_kb.closest_fix_advisory,Specifies the closest patch available to address the current advisory based on your system's last installed update.
+custom.remediation.microsoft_kb.closest_fix_advisory.article,Identifies the article name for the closest patch.
+custom.compliance,"The compliance namespace contains information specific to compliance findings. For example compliance rule, or evaluation (pass/fail)."
+custom.compliance.evaluation,Cloud misconfigurations can fail (the resource is misconfigured) or pass (the resource isn't).
+custom.compliance.frameworks,Lists the compliance frameworks mapped to this finding.
+custom.compliance.framework_requirements,Lists the requirements within the compliance framework that this finding relates to.
+custom.compliance.framework_requirement_controls,Lists the controls within the framework requirement that this finding maps to.
+,"The following namespaces contains information about the resource/entity affected by a security finding. This includes identifier, type, name, and metadata that help identify and understand the impacted resource. "
+custom.cloud_resource,Groups attributes identifying the cloud resource affected by the finding.
+custom.cloud_resource.tags,Lists tags applied to the cloud resource. Those tags are also duplicated in the root-level tag item.
+custom.cloud_resource.category,The category the resource type belongs to.
+custom.cloud_resource.key,The Canonical Cloud Resource Identifier (CCRID)
+custom.cloud_resource.cloud_provider_url,The link to the respective cloud provider.
+custom.cloud_resource.cloud_provider,"Indicates the cloud provider hosting the resource. Valid values: aws, azure, gcp."
+custom.cloud_resource.configuration,"The configuration of the cloud resource, as returned by the cloud provider."
+custom.cloud_resource.account,"Cloud account or equivalent that owns the cloud resource (for example, AWS account, Azure subscription, GCP project, OCI tenancy)."
+custom.cloud_resource.display_name,The display name of the resource.
+custom.cloud_resource.region,The cloud region where the resource belongs to.
+custom.cloud_resource.public_accessibility_paths,"Describes the network paths through which the resource is accessible from the public internet, for example via public endpoints, gateways, or load balancers."
+custom.cloud_resource.public_port_ranges,List of port ranges on the resource that are exposed to the public internet.
+custom.cloud_resource.public_port_ranges.from_port,The starting port number of the exposed range.
+custom.cloud_resource.public_port_ranges.to_port,The ending port number of the exposed range.
+custom.iac_resource,Groups attributes identifying the Infrastructure as Code (IaC) resource related to the finding.
+custom.iac_resource.provider,"Indicates the IaC (Infrastructure as Code) provider on which the resource is. For example platform Terraform could have “aws”, “gcp” or “azure” as a provider. Some iac platform (e.g. Kubernetes, Dockerfile) don’t have a provider."
+custom.iac_resource.platform,"Indicates which IaC (Infrastructure as Code) platform the vulnerability was found on (e.g. `terraform`, `kubernetes`)."
+custom.k8s,Kubernetes fields for findings generated against Kubenertes resources
+custom.k8s.cluster_id,The Kubernetes cluster id.
+custom.host,Contains host information
+custom.host.name,Host name
+custom.host.key,The Canonical Cloud Resource Identifier (CCRID)
+custom.host.cloud_provider,The cloud provider the host belongs to.
+custom.host.image,"The name of the host image used to build the host, e.g. ""ami-1234""."
+custom.host.os,Groups attributes of the operating system running on the host.
+custom.host.os.name,The host OS name
+custom.host.os.version,The host OS version
+custom.service,
+custom.service.name,The name of the service where this finding was detected
+custom.service.git_commit_sha,"Git commit SHA of the latest commit where this finding is detected for the service, available only when Source Code Integration is configured: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts"
+custom.service.git_repository_url,"URL of the Git repository for the service associated with this finding, available only when Source Code Integration is configured: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts"
+custom.container_image,
+custom.container_image.registries,Indicates the container registry where the image is stored or from which it was pulled.
+custom.container_image.repository,Specifies the repository of the container image
+custom.container_image.repo_digests,"Contains the repository digests of the container image, where this finding was detected."
+custom.container_image.git_repository_url,"URL of the Git repository for the code used to build the container image associated with this finding, available only when Source Code Integration is configured: https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=go#embed-git-information-in-your-build-artifacts"
+custom.container_image.oses,"Today, we group container images by name, hence they may have several OS."
+custom.container_image.oses.name,The OS name
+custom.container_image.oses.version,The OS version
+custom.container_image.architectures,"Today, we group container images by name, hence they may have several architectures."
+custom.container_image.image_layer_digests,
+custom.container_image.image_layer_diff_ids,
+custom.container_image.name,The full name of the container image.
+custom.container_image.tags,"It represents the tag part of the container image name, e.g. ""latest"" or ""1.2.3"""
+custom.git,"Contains Git metadata linking a finding to source code context. It contains information about the repository, branch, commit, author, and committer."
+custom.git.repository_id,The normalized id of the Git repository
+custom.git.repository_url,The Git repository URL related to the current finding
+custom.git.repository_visibility,"Indicates the visibility of the repository. Valid values: public, private, not_detected. Used to modify severity and assist in triage for secrets detections (publicly exposed secrets are more severe than private secrets)"
+custom.git.branch,The name of the Git branch related to the current finding
+custom.git.default_branch,Contains the default branch defined for Git repository to which the current finding is related
+custom.git.is_default_branch,True the current branch is the default branch for the repository
+custom.git.sha,Contains the Git commit unique ID usually called SHA
+custom.git.author,Details about the author of the commit
+custom.git.author.name,The name of the commit author.
+custom.git.author.email,The email address of the commit author.
+custom.git.author.authored_at,The date when the original changes were made.
+custom.git.committer,Groups details about the committer
+custom.git.committer.name,The name of the committer.
+custom.git.committer.email,The email address of the committer.
+custom.git.committer.committed_at,"The date when the changes were last significantly modified, for example, during a rebase or amend operation."
+custom.git.codeowners,"Includes codeowner teams extracted from an SCM provider’s CODEOWNERS file (for example, GitHub)."
+custom.code_location,Groups attributes pinpointing the specific file and line numbers where the finding is located.
+custom.code_location.filename,"The relative path to the file in the repository (e.g., src/main/app.js)."
+custom.code_location.line_start,The first line of the finding’s code block.
+custom.code_location.column_start,The first column of the finding’s code block.
+custom.code_location.line_end,The last line of the finding’s code block.
+custom.code_location.column_end,The last column of the finding’s code block.
+custom.code_location.is_test_file,"True if the code file is a test file, false otherwise."
+custom.code_location.url,"The URL in to watch the file online. For instance the file view in github.com, highlighting the code location described by this object"
+custom.code_location.symbol,The symbol that we found to be reachable
+custom.api_endpoint,The object representation of the HTTP endpoint
+custom.api_endpoint.operation_name,"Name of the entry-point into a service. examples: http.request, grpc.server"
+custom.api_endpoint.path,The relative path of the endpoint
+custom.api_endpoint.method,"The method of the endpoint (HTTP verb, gRPC method, etc)"
+custom.api_endpoint.resource_name,"The internal identification of the endpoint, in the form of a string composed of ""{method} {path}"""
+custom.package,"A package manager is a tool that automates the installation, upgrading, configuration, and removal of software packages, managing dependencies and versioning to ensure consistency in development or runtime environments. Examples: Bundle, NPM, Aptitude, Yum, ..."
+custom.package.name,The name of the package or library where the vulnerability is identified. 
+custom.package.version,The version of the package or library where the vulnerability is identified.
+custom.package.additional_names,Contains the list of affected package names when a cloud vulnerability impacts multiple packages derived from the same source package.
+custom.package.normalized_name,The normalized name according to the ecosystem of the package or library where the vulnerability is identified. 
+custom.package.manager,Indicates the package management ecosystem or source registry from which the vulnerable component originates
+custom.package.dependency_type,"Indicates whether this package is a direct or a transitive dependency, or not supported if the information can not be retrieved"
+custom.package.loading_type,"Used for runtime detection, indicates if the component is always loaded and running (hot), running infrequently (cold) or loaded on demand (lazy)"
+custom.package.dependency_location_text,
+custom.package.declaration,Code locations of the package definition
+custom.package.declaration.block,Indicates the location of the code that declares the whole dependency declaration
+custom.package.declaration.block.filename,Name of the file where the package declaration block is defined.
+custom.package.declaration.block.line_start,Line number where the package declaration block starts in the file.
+custom.package.declaration.block.line_end,Line number where the package declaration block ends in the file.
+custom.package.declaration.block.column_start,Column position where the package declaration block starts on the line.
+custom.package.declaration.block.column_end,Column position where the package declaration block ends on the line.
+custom.package.declaration.name,Indicates the location of the code that declares the name of the dependency
+custom.package.declaration.name.filename,File name where the package name is declared.
+custom.package.declaration.name.line_start,Line number where the package name declaration starts in the file.
+custom.package.declaration.name.line_end,Line number where the package name declaration ends in the file.
+custom.package.declaration.name.column_start,Column position where the package name declaration starts on the line.
+custom.package.declaration.name.column_end,Column position where the package name declaration ends on the line.
+custom.package.declaration.name.symbol,
+custom.package.declaration.version,Indicates the location of the code that declares the version of the dependency
+custom.package.declaration.version.filename,Name of the file where the dependency package version is declared.
+custom.package.declaration.version.line_start,Line number where the package version declaration starts in the file.
+custom.package.declaration.version.line_end,Line number where the package version declaration ends in the file.
+custom.package.declaration.version.column_start,Column position where the package version declaration starts on the line.
+custom.package.declaration.version.column_end,Column position where the package version declaration ends on the line.
+custom.package.declaration.version.symbol,
+custom.package.scope,Indicates the intended usage scope of the package (production or development)
+custom.package.root_parents,Contains a list of the dependencies for which this package is a transitive dependency. One of them will be root_parent.name
+custom.package.root_parents.name,Contains a dependency name for which this package is a transitive dependency. One of them will be root_parent.name
+custom.package.root_parents.version,Contains a dependency version for which this package is a transitive dependency. One of them will be root_parent.version
+custom.package.root_parents.language,Contains a dependency language for which this package is a transitive dependency.
+custom.package.root_parents.declaration,Indicates the location of the code that declates the version of a root parent
+custom.package.root_parents.declaration.version,The version declared for the root parent
+custom.package.root_parents.declaration.version.filename,Name of the file where the root parent package version is declared.
+custom.package.root_parents.declaration.version.line_start,Line number where the root parent package version declaration starts in the file.
+custom.package.root_parents.declaration.version.line_end,Line number where the root parent package version declaration ends in the file.
+custom.package.root_parents.declaration.version.column_start,Column position where the root parent package version declaration starts on the line.
+custom.package.root_parents.declaration.version.column_end,Column position where the root parent package version declaration ends on the line.
+custom.secret,
+custom.secret.validation_status,Represents the result of attempting to validate if the secret is active
+custom.additional_resources,"List of additional resources. For example, an AWS EC2 instance can have security groups and Auto Scaling groups as additional resources."
+custom.additional_resources.category,"Category of the additional resource. Valid values: cloud,k8s,host,services,container,container_image,git"
+custom.additional_resources.configuration,The configuration of the additional resource.
+custom.runtime_context.span_id,Represents the span id where the finding has been found. Currently only for IAST.
+custom.runtime_context.trace_id,Represents the trace id where the finding has been found. Currently only for IAST.
+custom.runtime_context.stacktrace_id,Represents the stack trace id where the finding has been found. Currently only for IAST.
+custom.related_services,The services that are inferred (e.g. from SCI for SAST)
