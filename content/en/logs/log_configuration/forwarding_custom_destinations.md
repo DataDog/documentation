@@ -131,8 +131,8 @@ The following metrics report on logs that have been forwarded successfully, incl
 {{< /tabs >}}
 
 10. In the **Select Tags to Forward** section:
-  a. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
-  b. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
+    1. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
+    1. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
 11. Click **Save**.
 
 
