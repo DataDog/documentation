@@ -327,6 +327,7 @@ unsupported_sites:
   safety_center: [gov]
   scorecards: [gov]
   self_service_actions: [gov]
+  service_remapping_rules: [gov]
   snmp_profile_manager: [gov]
   status_pages: [gov]
   synthetics_email_validation: [gov]

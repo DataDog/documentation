@@ -1,14 +1,12 @@
 ---
 title: Service remapping rules
+site_support_id: service_remapping_rules
 ---
 
-{{< callout url=false
- btn_hidden="true" header="Join the Preview!">}}
+{{< callout url="https://www.datadoghq.com/product-preview/service-remapping-rules/"
+ btn_hidden="false" header="Join the Preview!">}}
 Service remapping rules are in Preview.
 {{< /callout >}}
-
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Service remapping rules are unavailable in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 

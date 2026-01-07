@@ -4413,6 +4413,7 @@ components:
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
+      - flex_stored_logs
       - functions_usage
       - incident_management_monthly_active_users_usage
       - indexed_spans_usage
@@ -4495,6 +4496,7 @@ components:
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
+      - FLEX_STORED_LOGS
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
       - INDEXED_SPANS_USAGE
@@ -8849,6 +8851,8 @@ components:
       - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
+      - flex_stored_logs_usage
+      - flex_stored_logs_percentage
       - functions_usage
       - functions_percentage
       - incident_management_monthly_active_users_usage
@@ -9008,6 +9012,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
+      - FLEX_STORED_LOGS_USAGE
+      - FLEX_STORED_LOGS_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -9367,6 +9373,14 @@ components:
           type: number
         fargate_usage:
           description: The Fargate usage by tags.
+          format: double
+          type: number
+        flex_stored_logs_percentage:
+          description: The percentage of Flex Stored Logs usage by tags.
+          format: double
+          type: number
+        flex_stored_logs_usage:
+          description: The Flex Stored Logs usage by tags.
           format: double
           type: number
         functions_percentage:
