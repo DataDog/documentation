@@ -27,10 +27,13 @@ further_reading:
 
 ### 1. Install the required packages
 
-Install the Datadog PHP tracer and OpenTelemetry SDK packages:
+Follow these steps to enable OTel Metrics API support in your PHP application.
+
+1. Install the Datadog PHP tracer following the [official installation instructions][2].
+
+2. Install the required OpenTelemetry packages:
 
 ```sh
-composer require datadog/dd-trace
 composer require open-telemetry/sdk
 composer require open-telemetry/exporter-otlp
 ```
@@ -41,6 +44,12 @@ Set the `DD_METRICS_OTEL_ENABLED` environment variable to enable OpenTelemetry M
 
 ```sh
 export DD_METRICS_OTEL_ENABLED=true
+```
+
+Alternatively, set it in your `php.ini`:
+
+```php
+datadog.metrics_otel_enabled = true
 ```
 
 ### 3. Configure your application:
@@ -78,7 +87,7 @@ $counter->add(1, ['method' => 'GET', 'route' => '/api/users']);
 
 ## Supported configuration
 
-To enable this feature, you must set `DD_METRICS_OTEL_ENABLED=true`.
+To enable this feature, you must set `DD_METRICS_OTEL_ENABLED=true` (or `datadog.metrics_otel_enabled = true` in php.ini).
 
 All OTLP exporter settings (such as endpoints, protocols, and timeouts), resource attributes, and temporality preferences are configured using a shared set of OpenTelemetry environment variables.
 
@@ -90,7 +99,7 @@ For a complete list of all shared OTLP environment variables, see [OpenTelemetry
 
 If you are using the OTel SDK with your own manual OTLP exporter configuration:
 
-1. Add the Datadog SDK (`datadog/dd-trace`) to your project.
+1. Install the Datadog PHP tracer following the [official installation instructions][2].
 2. Remove any code that manually configures the OTLP exporter. The Datadog SDK handles this configuration automatically.
 3. Set the `DD_METRICS_OTEL_ENABLED=true` environment variable.
 
@@ -114,3 +123,4 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/config/environment_variable_support
+[2]: /tracing/trace_collection/dd_libraries/php/#install-the-extension
