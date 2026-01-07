@@ -35,3 +35,10 @@ rum_browser_sdk_version_for_proxying_options:
   default: true
 - id: gte_4_34_0
 - id: lt_4_34_0
+
+sdk_product_options:
+- id: rum
+  default: true
+- id: error_tracking
+- id: product_analytics
+- id: session_replay
