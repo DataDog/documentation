@@ -14,17 +14,7 @@ further_reading:
 
 ## Overview
 
-The Google Chat integration for Datadog Incident Management connects your incident response workflows directly to Google Chat, so teams can declare incidents within Google Chat.
-
-With the integration, you can:
-
-- Respond faster by declaring Datadog incidents directly from Google Chat.
-- Automatically create Google Chat spaces for collaboration when Datadog incidents are declared.
-
-The Google Chat integration documentation is organized around the typical lifecycle of using Google Chat with Incident Management:
-
-1. [**Install and connect Google Chat**](#prerequisites): Set up the integration between your Google Workspace and Datadog.
-2. [**Declare incidents**](#declaring-incidents-from-google-chat): Learn how to start incidents using Google commands.
+The Google Chat integration for Datadog Incident Management connects your incident response workflows directly to Google Chat by automatically creating Google Chat spaces for collaboration when Datadog incidents are declared.
 
 ## Prerequisites
 
@@ -54,6 +44,9 @@ To use incident spaces, go to **[Incident Response > Incident Management > Setti
 * `{{random_noun}}`: Random noun
 * `{{slug}}`: Slug (when slug source is set to 'servicenow', this will display the ServiceNow record number)
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations/google-hangouts-chat
 [2]: /integrations/google-hangouts-chat/
