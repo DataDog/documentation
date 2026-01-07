@@ -33,9 +33,19 @@ container_include: ["name:frontend.*"]
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
-### Scrubbing sensitive information
+### Scrubbing sensitive information from manifests
 
-To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
+To help prevent sensitive data from leaking, the agent can be configured to scrub tje collected Kubernetes YAML manifests. This scrubbing feature is applied to:
+
+- Annotation values
+- Label values
+- Probe configurations (HTTP headers & commands)
+- Environment variables 
+- Container exec commands
+
+The scrubbing algorithm attempts to detect key-value pairs containing secrets based on a set of sensitive keywords, replacing corresponding values with `********`. This logic is applied to structured key-value pairs (such as environment variables) as well as values that look like JSON or YAML blobs which may contain their own pairs.
+
+Scrubbing is enabled by default using the following sensitive keywords:
 
 - `password`
 - `passwd`
@@ -49,20 +59,18 @@ To prevent the leaking of sensitive data, you can scrub sensitive words in conta
 - `credentials`
 - `stripetoken`
 
-You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words.
+You can supply additional sensitive keywords by providing a space-delimited list in the environment variable: `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. You need to set up this environment variable for the following agents:
 
-**Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
-
-You need to setup this environment variable for the following agents:
-
-- process-agent
-- cluster-agent
+- Core Agent
+- Cluster Agent
 
 ```yaml
 env:
     - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
       value: "customword1 customword2 customword3"
 ```
+
+**Note**: Additional sensitive words must be provided as lowercase strings. The Agent lowercases content before matching. This means the sensitive word `password` scrubs `MY_PASSWORD=1234` to `MY_PASSWORD=********`, while the sensitive word `PASSWORD` will never match anything.
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
@@ -71,6 +79,7 @@ password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
+config={"password":"<MY_PASSWORD>"}
 ```
 
 However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
