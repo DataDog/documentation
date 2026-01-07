@@ -35891,7 +35891,7 @@ components:
           items:
             $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
           type: array
-        processors:
+        processor_groups:
           description: A list of processor groups that transform or enrich log data.
           example:
           - enabled: true
