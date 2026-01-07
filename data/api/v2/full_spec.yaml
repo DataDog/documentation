@@ -35596,6 +35596,43 @@ components:
       type: string
       x-enum-varnames:
       - ADD_FIELDS
+    ObservabilityPipelineAddHostnameProcessor:
+      description: The `add_hostname` processor adds the hostname to log events.
+      properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: add-hostname-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAddHostnameProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - enabled
+      type: object
+    ObservabilityPipelineAddHostnameProcessorType:
+      default: add_hostname
+      description: The processor type. The value should always be `add_hostname`.
+      enum:
+      - add_hostname
+      example: add_hostname
+      type: string
+      x-enum-varnames:
+      - ADD_HOSTNAME
     ObservabilityPipelineAmazonDataFirehoseSource:
       description: The `amazon_data_firehose` source ingests logs from AWS Data Firehose.
       properties:
@@ -36018,24 +36055,27 @@ components:
     ObservabilityPipelineConfigProcessorItem:
       description: A processor for the pipeline.
       oneOf:
-      - $ref: '#/components/schemas/ObservabilityPipelineFilterProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineSampleProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineOcsfMapperProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineAddEnvVarsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddHostnameProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineCustomProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineFilterProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineOcsfMapperProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseXMLProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSampleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
@@ -37697,6 +37737,72 @@ components:
       type: string
       x-enum-varnames:
       - PARSE_JSON
+    ObservabilityPipelineParseXMLProcessor:
+      description: The `parse_xml` processor parses XML from a specified field and
+        extracts it into the event.
+      properties:
+        always_use_text_key:
+          description: Whether to always use a text key for element content.
+          type: boolean
+        attr_prefix:
+          description: The prefix to use for XML attributes in the parsed output.
+          type: string
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
+        field:
+          description: The name of the log field that contains an XML string.
+          example: message
+          type: string
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: parse-xml-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        include_attr:
+          description: Whether to include XML attributes in the parsed output.
+          type: boolean
+        parse_bool:
+          description: Whether to parse boolean values from strings.
+          type: boolean
+        parse_null:
+          description: Whether to parse null values.
+          type: boolean
+        parse_number:
+          description: Whether to parse numeric values from strings.
+          type: boolean
+        text_key:
+          description: The key name to use for text content within XML elements. Must
+            be at least 1 character if specified.
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineParseXMLProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - field
+      - enabled
+      type: object
+    ObservabilityPipelineParseXMLProcessorType:
+      default: parse_xml
+      description: The processor type. The value should always be `parse_xml`.
+      enum:
+      - parse_xml
+      example: parse_xml
+      type: string
+      x-enum-varnames:
+      - PARSE_XML
     ObservabilityPipelinePipelineKafkaSourceSaslMechanism:
       description: SASL mechanism used for Kafka authentication.
       enum:
@@ -38860,6 +38966,68 @@ components:
       - type
       - attributes
       type: object
+    ObservabilityPipelineSplitArrayProcessor:
+      description: The `split_array` processor splits array fields into separate events
+        based on configured rules.
+      properties:
+        arrays:
+          description: A list of array split configurations.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessorArrayConfig'
+          maxItems: 15
+          minItems: 1
+          type: array
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: split-array-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets. For split_array, this should typically be `*`.
+          example: '*'
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - arrays
+      - enabled
+      type: object
+    ObservabilityPipelineSplitArrayProcessorArrayConfig:
+      description: Configuration for a single array split operation.
+      properties:
+        field:
+          description: The path to the array field to split.
+          example: tags
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this array
+            split operation targets.
+          example: '*'
+          type: string
+      required:
+      - include
+      - field
+      type: object
+    ObservabilityPipelineSplitArrayProcessorType:
+      default: split_array
+      description: The processor type. The value should always be `split_array`.
+      enum:
+      - split_array
+      example: split_array
+      type: string
+      x-enum-varnames:
+      - SPLIT_ARRAY
     ObservabilityPipelineSplunkHecDestination:
       description: The `splunk_hec` destination forwards logs to Splunk using the
         HTTP Event Collector (HEC).
