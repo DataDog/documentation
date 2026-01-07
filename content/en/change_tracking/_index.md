@@ -129,9 +129,9 @@ Change Tracking is available as a data source for the following widget types: **
 
 Change Tracking can also be displayed as an **Event Overlay on Timeseries widgets**, making it easier to correlate tracked changes with metric behavior.
 
-#### Viewing related changes
+#### View change details
 
-To view information about a change or set of changes, click a data point in the widget and select **View Changes**. This opens the Change Tracking side panel.
+To view information about a change or set of changes, click a datapoint in the widget and select **View Changes**. This opens the Change Tracking side panel.
 
 ## Tracked changes
 Change Tracking follows these types of changes across your infrastructure:
