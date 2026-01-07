@@ -8,6 +8,8 @@ aliases:
 content_filters:
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options
+  - trait_id: rum_browser_sdk_version
+    option_group_id: rum_browser_sdk_version_for_advanced_config_options
 
 further_reading:
 - link: "/real_user_monitoring/application_monitoring/browser/tracking_user_actions"
@@ -30,21 +32,6 @@ further_reading:
   text: "Datadog standard attributes"
 ---
 
-  <!-- NPM -->
-  {% if equals($lib_src, "npm") %}
-  NPM-specific content goes here.
-  {% /if %}
-
-  <!-- CDN async -->
-  {% if equals($lib_src, "cdn_async") %}
-  CDN async-specific content goes here.
-  {% /if %}
-
-  <!-- CDN sync -->
-  {% if equals($lib_src, "cdn_sync") %}
-  CDN sync-specific content goes here.
-  {% /if %}
-
 ## Overview
 
 There are various ways you can modify the [data and context collected][1] by RUM, to support your needs for:
@@ -54,6 +41,8 @@ There are various ways you can modify the [data and context collected][1] by RUM
 - Reducing how much RUM data you're collecting, through sampling the data.
 - Providing more context than what the default attributes provide about where the data is coming from.
 
+<!-- Version must meet 2.17.0 -->
+{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
 ## Override default RUM view names
 
 The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable IDs are removed automatically. A path segment that contains at least one number is considered a variable ID. For example, `/dashboard/1234` and `/dashboard/9a` become `/dashboard/?`.
@@ -156,6 +145,7 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
    })
    ```
   {% /if %}
+{% /if %}
 
 </details>
 <details>
