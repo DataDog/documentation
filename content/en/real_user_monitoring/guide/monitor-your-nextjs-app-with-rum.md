@@ -281,8 +281,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
 ## Verify and deploy
 
-1. Run your app locally and check the browser console for RUM initialization.
-2. Deploy your changes. After deployment, view your [collected data][3] in [RUM dashboards][4].
+1. Run your app locally and visualize the [data collected][12] in [dashboards][13] or create a search query in the [RUM Explorer][14].
+2. Deploy your changes. While doing so, don't forget to change your env and version so you can find your production sessions later.
 
 ## Backend monitoring
 
@@ -306,3 +306,6 @@ To connect RUM with your backend traces:
 [9]: https://nextjs.org/docs/app/building-your-application/rendering/client-components
 [10]: https://nextjs.org/docs/pages
 [11]: https://nextjs.org/docs/pages/building-your-application/routing/custom-app
+[12]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[13]: /real_user_monitoring/platform/dashboards/
+[14]: https://app.datadoghq.com/rum/sessions
