@@ -2616,231 +2616,231 @@ menu:
       parent: events
       weight: 10
     - name: Incident Management
-      url: service_management/incident_management/
+      url: incident_response/incident_management/
       pre: incidents
       parent: incident_response_heading
       identifier: incidents
       weight: 20000
     - name: Declare an Incident
-      url: service_management/incident_management/declare
+      url: incident_response/incident_management/declare
       parent: incidents
       identifier: incident_declare
       weight: 1
     - name: Describe an Incident
-      url: service_management/incident_management/describe
+      url: incident_response/incident_management/describe
       parent: incidents
       identifier: incident_describe
       weight: 2
     - name: Response Team
-      url: service_management/incident_management/response_team
+      url: incident_response/incident_management/response_team
       parent: incidents
       identifier: response_team
       weight: 3
     - name: Notification
-      url: service_management/incident_management/notification
+      url: incident_response/incident_management/notification
       parent: incidents
       identifier: incident_notification
       weight: 4
     - name: Investigate an Incident
-      url: service_management/incident_management/investigate
+      url: incident_response/incident_management/investigate
       parent: incidents
       identifier: incident_investigate
       weight: 5
     - name: Timeline
-      url: service_management/incident_management/investigate/timeline
+      url: incident_response/incident_management/investigate/timeline
       parent: incident_investigate
       identifier: incident_investigate_timeline
       weight: 501
     - name: Follow-ups
-      url: service_management/incident_management/follow-ups
+      url: incident_response/incident_management/follow-ups
       parent: incident_investigate
       identifier: incident_investigate_follow_ups
       weight: 502
     - name: Incident AI
-      url: service_management/incident_management/incident_ai
+      url: incident_response/incident_management/incident_ai
       identifier: incident_ai
       parent: incidents
       weight: 6
     - name: Incident Settings
-      url: service_management/incident_management/incident_settings
+      url: incident_response/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
       weight: 7
     - name: Information
-      url: service_management/incident_management/incident_settings/information
+      url: incident_response/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
       weight: 701
     - name: Property Fields
-      url: service_management/incident_management/incident_settings/property_fields
+      url: incident_response/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
       weight: 702
     - name: Responder Types
-      url: service_management/incident_management/incident_settings/responder_types
+      url: incident_response/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
       weight: 703
     - name: Integrations
-      url: service_management/incident_management/incident_settings/integrations
+      url: incident_response/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
       weight: 704
     - name: Notification Rules
-      url: service_management/incident_management/incident_settings/notification_rules
+      url: incident_response/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
       weight: 705
     - name: Templates
-      url: service_management/incident_management/incident_settings/templates
+      url: incident_response/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
       weight: 706
     - name: Incident Analytics
-      url: service_management/incident_management/analytics
+      url: incident_response/incident_management/analytics
       parent: incidents
       identifier: analytics
       weight: 8
     - name: Integrations
-      url: service_management/incident_management/integrations
+      url: incident_response/incident_management/integrations
       parent: incidents
       identifier: incidents_integrations
       weight: 9
     - name: Slack
-      url: service_management/incident_management/integrations/slack
+      url: incident_response/incident_management/integrations/slack
       parent: incidents_integrations
       identifier: incidents_integrations_slack
       weight: 901
     - name: Microsoft Teams
-      url: service_management/incident_management/integrations/microsoft_teams
+      url: incident_response/incident_management/integrations/microsoft_teams
       parent: incidents_integrations
       identifier: incidents_microsoft_teams
       weight: 902
     - name: Jira
-      url: service_management/incident_management/integrations/jira
+      url: incident_response/incident_management/integrations/jira
       parent: incidents_integrations
       identifier: incidents_integrations_jira
       weight: 903
     - name: ServiceNow
-      url: service_management/incident_management/integrations/servicenow
+      url: incident_response/incident_management/integrations/servicenow
       parent: incidents_integrations
       identifier: incidents_integrations_servicenow
       weight: 904
     - name: Status Pages
-      url: service_management/incident_management/integrations/status_pages
+      url: incident_response/incident_management/integrations/status_pages
       parent: incidents_integrations
       identifier: incidents_integrations_status_pages
       weight: 905
     - name: Atlassian Statuspage
-      url: service_management/incident_management/integrations/statuspage
+      url: incident_response/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 906
     - name: On-Call
-      url: service_management/on-call/
+      url: incident_response/on-call/
       pre: on-call
       parent: incident_response_heading
       identifier: oncall
       weight: 30000
     - name: Datadog Clipboard
-      url: service_management/incident_management/datadog_clipboard
+      url: incident_response/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
       weight: 10
     - name: Onboard a Team
-      url: service_management/on-call/teams/
+      url: incident_response/on-call/teams/
       parent: oncall
       identifier: oncall_teams
       weight: 1
     - name: Trigger a Page
-      url: service_management/on-call/triggering_pages/
+      url: incident_response/on-call/triggering_pages/
       parent: oncall
       identifier: oncall_triggering_pages
       weight: 2
     - name: Live Call Routing
-      url: service_management/on-call/triggering_pages/live_call_routing
+      url: incident_response/on-call/triggering_pages/live_call_routing
       identifier: oncall_live_call_routing
       parent: oncall_triggering_pages
       weight: 201
     - name: Routing Rules
-      url: service_management/on-call/routing_rules/
+      url: incident_response/on-call/routing_rules/
       parent: oncall
       identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
-      url: service_management/on-call/escalation_policies/
+      url: incident_response/on-call/escalation_policies/
       parent: oncall
       identifier: oncall_escalation_policies
       weight: 4
     - name: Schedules
-      url: service_management/on-call/schedules/
+      url: incident_response/on-call/schedules/
       parent: oncall
       identifier: oncall_schedules
       weight: 5
     - name: Automations
-      url: service_management/on-call/automations
+      url: incident_response/on-call/automations
       parent: oncall
       identifier: oncall_automations
       weight: 6
     - name: Profile Settings
-      url: service_management/on-call/profile_settings/
+      url: incident_response/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
       weight: 7
     - name: Guides
-      url: service_management/on-call/guides/
+      url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
       weight: 8
     - name: Status Pages
-      url: service_management/status_pages/
+      url: incident_response/status_pages/
       pre: status-page-wui
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
     - name: Case Management
-      url: service_management/case_management/
+      url: incident_response/case_management/
       pre: case-management
       parent: incident_response_heading
       identifier: case_management
       weight: 60000
     - name: Projects
-      url: service_management/case_management/projects
+      url: incident_response/case_management/projects
       parent: case_management
       identifier: case_management_projects
       weight: 1
     - name: Settings
-      url: service_management/case_management/settings
+      url: incident_response/case_management/settings
       parent: case_management_projects
       identifier: case_management_settings
       weight: 102
     - name: Create a Case
-      url: service_management/case_management/create_case
+      url: incident_response/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
       weight: 2
     - name: Customization
-      url: service_management/case_management/customization
+      url: incident_response/case_management/customization
       parent: case_management
       identifier: case_management_customization
       weight: 3
     - name: View and Manage Cases
-      url: service_management/case_management/view_and_manage
+      url: incident_response/case_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
       weight: 4
     - name: Notifications and Integrations
-      url: service_management/case_management/notifications_integrations
+      url: incident_response/case_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
       weight: 5
     - name: Case Automation Rules
-      url: service_management/case_management/automation_rules
+      url: incident_response/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
     - name: Troubleshooting
-      url: service_management/case_management/troubleshooting
+      url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
