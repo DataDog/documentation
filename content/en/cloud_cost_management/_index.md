@@ -40,6 +40,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-oci/"
     tag: "Blog"
     text: "Manage and optimize your OCI costs with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/cambia-health-cost-optimization"
+    tag: "Blog"
+    text: "How Cambia Health Solutions saved $30,000 monthly with Cloud Cost Management and the Datadog Resource Catalog"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

@@ -5,7 +5,7 @@ further_reading:
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
-- link: "/service_management/incident_management/incident_ai"
+- link: "/incident_response/incident_management/incident_ai"
   tag: "Documentation"
   text: "Coordinate incidents with Incident AI"
 aliases:
