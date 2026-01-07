@@ -142,7 +142,7 @@ Applies to Browser and Mobile tests.
 : Epoch timestamps in milliseconds
 
 `{{synthetics.attributes.result.failure}}`
-: The `failure` object contains information about why the test failed 
+: The `failure` object contains information about why the test failed
 
 `{{synthetics.attributes.result.failure.message}}`
 : The failure message
