@@ -122,7 +122,7 @@ To upload a SARIF report:
        - `--max-concurrency:` Set concurrent uploads (default: 20)
        - `--dry-run:` Validate without uploading
 ### Required SARIF Attributes
-To ensure proper ingestion and display in Datadog IaC Scanning, your SARIF file MUST include the following attributes to be recognized as an IaC security finding:
+To ensure proper ingestion and display in Datadog IaC Scanning for third-party scanners (excluding Checkov), your SARIF file MUST include the following attributes to be recognized as an IaC security finding:
 1. `Runs[...].tool.driver.name: Datadog IaC Scanning`
 2. `Runs[...].tool.driver.version: "code_update"` or `"full_scan"`
     - `"full_scan”` for complete repository scans
