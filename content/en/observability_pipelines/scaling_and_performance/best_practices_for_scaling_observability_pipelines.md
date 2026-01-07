@@ -39,9 +39,9 @@ Both models can be applied to a centralized or decentralized approach. In a cent
 
 Generally, Datadog recommends operating the Worker as close to the data source as possible. This might require more administrative and infrastructure overhead, but it reduces concerns about network transit issues and single point of failures.
 
-For both models, Datadog recommends scaling Workers [horizontally](https://docs.datadoghq.com/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#horizontal-scaling) to meet scaling demands and maintain high availability, which can be done either as part of a managed instance group (for example, an autoscaling group) or with horizontal pod autoscaling.
+For both models, Datadog recommends scaling Workers [horizontally][1] to meet scaling demands and maintain high availability, which can be done either as part of a managed instance group (for example, an autoscaling group) or with horizontal pod autoscaling.
 
-The Worker can also be scaled [vertically](https://docs.datadoghq.com/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#vertical-scaling), which takes advantage of additional cores and memory without any additional configuration. For certain processors, such as the Sensitive Data Scanner processor with many rules enabled, or heavy processing use cases, the Worker benefits from additional cores to allow for parallel thread execution. When vertically scaling, Datadog recommends capping an instance's size to process no more than 33% of your total volume. This allows for high availability in the event of a node failure.
+The Worker can also be scaled [vertically][2], which takes advantage of additional cores and memory without any additional configuration. For certain processors, such as the Sensitive Data Scanner processor with many rules enabled, or heavy processing use cases, the Worker benefits from additional cores to allow for parallel thread execution. When vertically scaling, Datadog recommends capping an instance's size to process no more than 33% of your total volume. This allows for high availability in the event of a node failure.
 
 #### VM-based architecture
 
@@ -51,7 +51,7 @@ The following architecture diagram is for a host-based architecture, where a loa
 
 #### Kubernetes-based architecture
 
-The following architecture diagram is for a container-based architecture, where the Kubernetes service acts as the router to the statefulset and accepts traffic from push-based sources. If you are sending telemetry from outside the cluster, you need to set the [service.type to `LoadBalancer`](https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L208-L209) or you may choose to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/) and configure an [ingress](https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L238) for routing. The Worker is part of a statefulset and horizontal pod autoscaling can be enabled to scale based on processing needs. Just like the VM-based architecture, the Worker can be scaled vertically and can benefit from multiple cores, allowing parallel processing.
+The following architecture diagram is for a container-based architecture, where the Kubernetes service acts as the router to the statefulset and accepts traffic from push-based sources. If you are sending telemetry from outside the cluster, you need to set the [service.type to `LoadBalancer`][3] or you may choose to install an [ingress controller][4] and configure an [ingress][5] for routing. The Worker is part of a statefulset and horizontal pod autoscaling can be enabled to scale based on processing needs. Just like the VM-based architecture, the Worker can be scaled vertically and can benefit from multiple cores, allowing parallel processing.
 
 {{< img src="observability_pipelines/scaling_best_practices/containerized-infra.png" alt="Diagram showing the Worker as part of a statefulset" style="width:100%;" >}}
 
@@ -64,7 +64,7 @@ Choose the Kubernetes-based architecture if:
 
 Choose the VM-based architecture if your organization is more VM centric and not proficient with Kubernetes.
 
-Choosing between the two models comes down to what your organization is best equipped to do from an infrastructure perspective. Each model offers the ability to automatically scale based on CPU utilization, which is generally the primary constraint for Observability Pipelines. See [Optimize the instance](https://docs.datadoghq.com/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#optimize-the-instance) for more information.
+Choosing between the two models comes down to what your organization is best equipped to do from an infrastructure perspective. Each model offers the ability to automatically scale based on CPU utilization, which is generally the primary constraint for Observability Pipelines. See [Optimize the instance][6] for more information.
 
 ### Centralized vs decentralized approach
 
@@ -87,9 +87,9 @@ A hybrid approach is to have a dedicated Kubernetes cluster or manage instance g
 
 ### Instance sizing
 
-Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][1] enabled. Do not rely on a statically configured number of VMs or containers. This ensures that if the number of events spike, you can safely handle the traffic without data loss. It also ensures high availability should a Worker go down for any reason.
+Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][7] enabled. Do not rely on a statically configured number of VMs or containers. This ensures that if the number of events spike, you can safely handle the traffic without data loss. It also ensures high availability should a Worker go down for any reason.
 
-For high throughput environments, Datadog recommends larger machine types because they typically have higher network bandwidth. Consult your cloud provider's documentation for details (for example, [Amazon EC2 instance network bandwith][2]).
+For high throughput environments, Datadog recommends larger machine types because they typically have higher network bandwidth. Consult your cloud provider's documentation for details (for example, [Amazon EC2 instance network bandwith][8]).
 
 | Cloud Provider| Recommendation (minimum) |
 | ------------- | ------------------------ |
@@ -205,5 +205,11 @@ Auto-scaling should be based on average CPU utilization. For the vast majority o
 - Average CPU with a 85% utilization target.
 - A five minute stabilization period for scaling up and down.
 
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L70-L85
-[2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html
+[1]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#horizontal-scaling
+[2]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#vertical-scaling
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L208-L209
+[4]: https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+[5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L238
+[6]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#optimize-the-instance
+[7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L70-L85
+[8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html
