@@ -6670,6 +6670,8 @@ components:
           description: Optional prefix for blobs written to the container.
           example: logs/
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         container_name:
           description: The name of the Azure Blob Storage container to store logs
             in.
@@ -33752,6 +33754,8 @@ components:
       description: The `microsoft_sentinel` destination forwards logs to Microsoft
         Sentinel.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         client_id:
           description: Azure AD client ID used for authentication.
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
@@ -35629,6 +35633,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to.
           example: logs-index
@@ -35705,6 +35711,8 @@ components:
           description: S3 bucket name.
           example: error-logs
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: Unique identifier for the destination component.
           example: amazon-s3-destination
@@ -35816,6 +35824,8 @@ components:
           description: Name of the Amazon S3 bucket in Security Lake (3-63 characters).
           example: security-lake-bucket
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         custom_source_name:
           description: Custom source name for the logs in Security Lake.
           example: my-custom-source
@@ -35873,6 +35883,39 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineBufferOptions:
+      description: Configuration for buffer settings on destination components.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineDiskBufferOptions'
+      - $ref: '#/components/schemas/ObservabilityPipelineMemoryBufferOptions'
+      - $ref: '#/components/schemas/ObservabilityPipelineMemoryBufferSizeOptions'
+    ObservabilityPipelineBufferOptionsDiskType:
+      default: disk
+      description: The type of the buffer that will be configured, a disk buffer.
+      enum:
+      - disk
+      type: string
+      x-enum-varnames:
+      - DISK
+    ObservabilityPipelineBufferOptionsMemoryType:
+      default: memory
+      description: The type of the buffer that will be configured, a memory buffer.
+      enum:
+      - memory
+      type: string
+      x-enum-varnames:
+      - MEMORY
+    ObservabilityPipelineBufferOptionsWhenFull:
+      default: block
+      description: Behavior when the buffer is full (block and stop accepting new
+        events, or drop new events)
+      enum:
+      - block
+      - drop_newest
+      type: string
+      x-enum-varnames:
+      - BLOCK
+      - DROP_NEWEST
     ObservabilityPipelineComponentDisplayName:
       description: The display name for a component.
       example: my component
@@ -36059,6 +36102,8 @@ components:
       description: The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
         Next Gen SIEM.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
         encoding:
@@ -36267,6 +36312,8 @@ components:
     ObservabilityPipelineDatadogLogsDestination:
       description: The `datadog_logs` destination forwards logs to Datadog Log Management.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: datadog-logs-destination
@@ -36438,12 +36485,27 @@ components:
       type: string
       x-enum-varnames:
       - DEDUPE
+    ObservabilityPipelineDiskBufferOptions:
+      description: Options for configuring a disk buffer.
+      properties:
+        max_size:
+          description: Maximum size of the disk buffer.
+          example: 4096
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsDiskType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
+      type: object
     ObservabilityPipelineElasticsearchDestination:
       description: The `elasticsearch` destination writes logs to an Elasticsearch
         cluster.
       properties:
         api_version:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to in Elasticsearch.
           example: logs-index
@@ -36914,6 +36976,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         customer_id:
           description: The Google Chronicle customer ID.
           example: abcdefg123456789
@@ -36977,6 +37041,8 @@ components:
           description: Name of the GCS bucket.
           example: error-logs
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: Unique identifier for the destination component.
           example: gcs-destination
@@ -37056,6 +37122,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
         id:
@@ -37343,6 +37411,28 @@ components:
       type: string
       x-enum-varnames:
       - LOGSTASH
+    ObservabilityPipelineMemoryBufferOptions:
+      description: Options for configuring a memory buffer by byte size.
+      properties:
+        max_size:
+          description: Maximum size of the disk buffer.
+          example: 4096
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+      type: object
+    ObservabilityPipelineMemoryBufferSizeOptions:
+      description: Options for configuring a memory buffer by queue length.
+      properties:
+        max_events:
+          description: Maximum events for the memory buffer.
+          example: 500
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+      type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
       properties:
@@ -37366,6 +37456,8 @@ components:
     ObservabilityPipelineNewRelicDestination:
       description: The `new_relic` destination sends logs to the New Relic platform.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: new-relic-destination
@@ -37502,6 +37594,8 @@ components:
     ObservabilityPipelineOpenSearchDestination:
       description: The `opensearch` destination writes logs to an OpenSearch cluster.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to.
           example: logs-index
@@ -38053,6 +38147,8 @@ components:
       description: The `rsyslog` destination forwards logs to an external `rsyslog`
         server over TCP or UDP using the syslog protocol.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: rsyslog-destination
@@ -38523,6 +38619,8 @@ components:
     ObservabilityPipelineSentinelOneDestination:
       description: The `sentinel_one` destination sends logs to SentinelOne.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: sentinelone-destination
@@ -38572,6 +38670,8 @@ components:
       description: The `socket` destination sends logs over TCP or UDP to a remote
         server.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationEncoding'
         framing:
@@ -38871,6 +38971,8 @@ components:
             If `false`, Splunk assigns the time the event was received.'
           example: true
           type: boolean
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding'
         id:
@@ -38980,6 +39082,8 @@ components:
     ObservabilityPipelineSumoLogicDestination:
       description: The `sumo_logic` destination forwards logs to Sumo Logic.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
         header_custom_fields:
@@ -39083,6 +39187,8 @@ components:
       description: The `syslog_ng` destination forwards logs to an external `syslog-ng`
         server over TCP or UDP using the syslog protocol.
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: syslog-ng-destination
