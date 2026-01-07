@@ -45,58 +45,70 @@ There are various ways you can modify the [data and context collected][1] by RUM
 {% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
 ## Override default RUM view names
 
+Starting with [version 2.17.0][3], you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option.
+
 The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable IDs are removed automatically. A path segment that contains at least one number is considered a variable ID. For example, `/dashboard/1234` and `/dashboard/9a` become `/dashboard/?`.
 
-Starting with [version 2.17.0][3], you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option:
+To override default RUM view names:
 
 1. Set `trackViewsManually` to true when initializing the RUM Browser SDK.
 
    <!-- NPM -->
-  {% if equals($lib_src, "npm") %}
-  ```javascript
+   {% if equals($lib_src, "npm") %}
+   ```javascript
    import { datadogRum } from '@datadog/browser-rum';
 
    datadogRum.init({
-       ...,
-       trackViewsManually: true,
-       ...
+         ...,
+         trackViewsManually: true,
+         ...
    });
    ```
-  {% /if %}
+   {% /if %}
 
-  <!-- CDN async -->
-  {% if equals($lib_src, "cdn_async") %}
-  ```javascript
+   <!-- CDN async -->
+   {% if equals($lib_src, "cdn_async") %}
+   ```javascript
    window.DD_RUM.onReady(function() {
-       window.DD_RUM.init({
-           ...,
-           trackViewsManually: true,
-           ...
-       })
+         window.DD_RUM.init({
+            ...,
+            trackViewsManually: true,
+            ...
+         })
    })
    ```
-  {% /if %}
+   {% /if %}
 
-  <!-- CDN sync -->
-  {% if equals($lib_src, "cdn_sync") %}
-  ```javascript
+   <!-- CDN sync -->
+   {% if equals($lib_src, "cdn_sync") %}
+   ```javascript
    window.DD_RUM &&
-       window.DD_RUM.init({
-           ...,
-           trackViewsManually: true,
-           ...
-       });
+         window.DD_RUM.init({
+            ...,
+            trackViewsManually: true,
+            ...
+         });
    ```
-  {% /if %}
+   {% /if %}
 
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0][16], you can also optionally define the associated service name and version.
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts.
 
-   - View Name: Defaults to the page URL path.
-   - Service: Defaults to the default service specified when creating your RUM application.
-   - Version: Defaults to the default version specified when creating your RUM application.
-   - Context: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
+
+   <!-- Version must meet 4.13.0 -->
+   {% if versionMeets($rum_browser_sdk_version, "4.13.0") %}
+   Starting with [version 4.13.0][16], you can also optionally define the associated service name and version.
+
+   - **View Name**: Defaults to the page URL path.
+   - **Service**: Defaults to the default service specified when creating your RUM application.
+   - **Version**: Defaults to the default version specified when creating your RUM application.
+   <!-- Version must meet 5.28.0 -->
+   {% if versionMeets($rum_browser_sdk_version, "5.28.0") %}
+   - **Context**: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
+   {% /if %}
 
    For more information, see [Setup Browser Monitoring][4].
+   {% /if %}
+   
 
    <details open>
      <summary>Latest version</summary>
