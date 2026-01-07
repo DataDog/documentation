@@ -58,7 +58,7 @@ print out failure code: The failure code is an INCORRECT ASSERTION
 {{/if}}
 ```
 
-For a complete list of API test error codes, see [API Testing Errors][1].
+  <div class="alert alert-info">For a complete list of API test error codes, see <a href="/synthetics/api_tests/errors/">API Testing Errors</a>.</div>
 
 ### Send alerts to a specific Slack channel based on failed step
 
@@ -127,5 +127,3 @@ If the test triggers an alert for multistep API test and if the failed step's na
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /synthetics/api_tests/errors
