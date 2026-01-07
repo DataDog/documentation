@@ -25,7 +25,7 @@ Before installing the integration, ensure you have the [ServiceNow tile configur
 
 There are two ways to install the integration:
 - Datadog recommends installing the latest version of the [ITOM/ITSM Integration for Datadog][1] integration from the ServiceNow store.
-- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.7.xml][2]) and upload it to your ServiceNow instance manually.
+- Alternatively, you can download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.9.xml][2]) and upload it to your ServiceNow instance manually.
 
 ## Configure the integration
 
@@ -399,7 +399,7 @@ Need additional help? Contact [Datadog support][10].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.7.xml
+[2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
 [5]: https://app.datadoghq.com/cases/settings
