@@ -49,4 +49,4 @@ To use incident spaces:
 
 [1]: https://app.datadoghq.com/integrations/google-hangouts-chat
 [2]: /integrations/google-hangouts-chat/
-[3]: https://app.datadoghq.com/incidents/settings#Integrations
+[3]: https://app.datadoghq.com/incidents/settings?section=integrations
