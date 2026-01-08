@@ -6640,16 +6640,21 @@ menu:
       parent: log_management_heading
       identifier: cloudprem
       weight: 30000
+    - name: Quickstart
+      url: /cloudprem/quickstart
+      parent: cloudprem
+      identifier: cloudprem_quickstart
+      weight: 1
     - name: Architecture
       url: /cloudprem/architecture
       parent: cloudprem
       identifier: cloudprem_architecture
-      weight: 1
+      weight: 2
     - name: Installation
       url: /cloudprem/install
       parent: cloudprem
       identifier: cloudprem_installation
-      weight: 2
+      weight: 3
     - name: AWS EKS
       url: /cloudprem/install/aws_eks
       parent: cloudprem_installation
