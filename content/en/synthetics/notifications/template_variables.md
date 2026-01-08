@@ -15,7 +15,7 @@ further_reading:
 
 Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix. 
 
-**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab of a test run in the [Results Explorer][1], then reference the path directly within your monitor configuration. 
+**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab of a test run in the [Results Explorer][1], then reference the path directly within your monitor configuration. Additionally, when running synthetic tests on a private location, ensure the private location is on version 1.59.0 or later, as earlier versions may not fully support all of the variables.
 
 {{< img src="synthetics/notifications/action_tab.png" alt="Actions tab from the Synthetics Result Explorer with Export Result JSON highlighted" style="width:90%;" >}}
 
