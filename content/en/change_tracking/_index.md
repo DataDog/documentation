@@ -125,7 +125,7 @@ In addition to the out-of-the-box integrations described above, **Change Trackin
 
 To configure a widget using Change Tracking data:
 
-1.	In a dashboard or notebook, add or edit a  supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
+1.	In a dashboard or notebook, add or edit a supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
 3.	From the **Data source** dropdown, select **Change Tracking**.
 4.	Configure your filters (**Service** is required).
 5.	(Optional) For widgets that support grouping, use **Group by** to split results.
