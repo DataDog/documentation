@@ -135,41 +135,41 @@ Telemetry is available:
   : `logs.bytes_missed`: Bytes lost before consumption
   : `logs.dropped`: Total logs dropped per destination -->
 
-#### Buffer Health and Data Loss
+#### Buffer health and data loss
   - `logs.bytes_missed`
   - `logs.dropped`
 
-#### Performance and Latency
+#### Performance and latency
   - `logs.sender_latency`
   - `logs.retry_count`
   - `logs.network_errors`
 
-#### Throughput and Volume
+#### Throughput and volume
   - `logs.decoded`
   - `logs.processed`
   - `logs.sent`
   - `logs.bytes_sent`
   - `logs.encoded_bytes_sent`
 
-#### Connection Health
+#### Connection health
   - `logs_client_http_destination__idle_ms`
   - `logs_client_http_destination__in_use_ms`
 
-#### HTTP Response Health
+#### HTTP Response health
   - `logs.destination_http_resp`
 
-#### Buffer Capacity and Utilization
+#### Buffer capacity and utilization
   - `logs_component_utilization__ratio`
   - `logs_component_utilization__items`
   - `logs_component_utilization__bytes`
 
-### Dual Shipping
+### Dual shipping
 When dual shipping is enabled:
   - The Agent sends logs to the first available endpoint
   - If one endpoint fails, payloads to that endpoint are dropped
   - Log consumption continues as long as at least one endpoint succeeds
 
-#### Reliable Mode
+#### Reliable mode
 When `is_reliable` is enabled for an endpoint:
   - All reliable endpoints are treated with equal priority
   - If all reliable endpoints are unavailable, the Agent stops sending logs
@@ -180,7 +180,7 @@ When `is_reliable` is enabled for an endpoint:
 
 ## APM and traces 
 
-### APM Retry Behavior
+### APM retry behavior
 The Agent retries failed APM payloads using [exponential backoff][2].
 
 A failed request is defined as:
@@ -194,7 +194,7 @@ The APM intake has the following default configurations:
 
 Retry behavior and retriable status codes are not configurable.
 
-### In-Memory queues
+### In-memory queues
 
 Failed APM payloads are:
   - Compressed
