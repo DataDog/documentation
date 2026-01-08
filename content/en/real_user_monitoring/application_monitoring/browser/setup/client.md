@@ -326,7 +326,7 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 ### Step 4 - Visualize your data
 
-Now that you’ve completed the basic setup for RUM, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
+Now that you've completed the basic setup for RUM, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
 
 Visualize the [data collected][8] in [dashboards][9] or create a search query in the [RUM Explorer][10].
 
