@@ -25370,6 +25370,61 @@ components:
       required:
       - type
       type: object
+    GlobalVariableData:
+      description: Synthetics global variable data. Wrapper around the global variable
+        object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        id:
+          description: Global variable identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/GlobalVariableType'
+      type: object
+    GlobalVariableJsonPatchRequest:
+      description: JSON Patch request for global variable.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestData'
+      required:
+      - data
+      type: object
+    GlobalVariableJsonPatchRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchType'
+      type: object
+    GlobalVariableJsonPatchRequestDataAttributes:
+      properties:
+        json_patch:
+          description: JSON Patch operations following RFC 6902.
+          items:
+            $ref: '#/components/schemas/JsonPatchOperation'
+          type: array
+      type: object
+    GlobalVariableJsonPatchType:
+      description: Global variable JSON Patch type.
+      enum:
+      - global_variables_json_patch
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES_JSON_PATCH
+    GlobalVariableResponse:
+      description: Global variable response.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableData'
+      type: object
+    GlobalVariableType:
+      description: Global variable type.
+      enum:
+      - global_variables
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
       nullable: true
@@ -29876,6 +29931,40 @@ components:
       - to
       - index
       type: object
+    JsonPatchOperation:
+      description: A JSON Patch operation as per RFC 6902.
+      properties:
+        op:
+          $ref: '#/components/schemas/JsonPatchOperationOp'
+        path:
+          description: A JSON Pointer path (e.g., "/name", "/value/secure").
+          example: /name
+          type: string
+        value:
+          description: The value to use for the operation (not applicable for "remove"
+            and "test" operations).
+      required:
+      - op
+      - path
+      type: object
+    JsonPatchOperationOp:
+      description: The operation to perform.
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: add
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     KindAttributes:
       description: Kind attributes.
       properties:
@@ -53939,6 +54028,178 @@ components:
           type: array
         suppression:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
+      type: object
+    SyntheticsGlobalVariable:
+      description: Synthetic global variable.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
+        name:
+          description: Name of the global variable. Unique across Synthetic global
+            variables.
+          example: MY_VARIABLE
+          type: string
+        parse_test_options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      - value
+      type: object
+    SyntheticsGlobalVariableAttributes:
+      description: Attributes of the global variable.
+      properties:
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+      type: object
+    SyntheticsGlobalVariableOptions:
+      description: Options for the Global Variable for MFA.
+      properties:
+        totp_parameters:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableTOTPParameters'
+      type: object
+    SyntheticsGlobalVariableParseTestOptions:
+      description: Parser options to use for retrieving a Synthetic global variable
+        from a Synthetic test. Used in conjunction with `parse_test_public_id`.
+      properties:
+        field:
+          description: When type is `http_header`, name of the header to use to extract
+            the value.
+          example: content-type
+          type: string
+        localVariableName:
+          description: When type is `local_variable`, name of the local variable to
+            use to extract the value.
+          example: LOCAL_VARIABLE
+          type: string
+        parser:
+          $ref: '#/components/schemas/SyntheticsVariableParser'
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+      required:
+      - type
+      type: object
+    SyntheticsGlobalVariableParseTestOptionsType:
+      description: Type of value to extract from a test for a Synthetic global variable.
+      enum:
+      - http_body
+      - http_header
+      - http_status_code
+      - local_variable
+      example: http_body
+      type: string
+      x-enum-varnames:
+      - HTTP_BODY
+      - HTTP_HEADER
+      - HTTP_STATUS_CODE
+      - LOCAL_VARIABLE
+    SyntheticsGlobalVariableParserType:
+      description: Type of parser for a Synthetic global variable from a synthetics
+        test.
+      enum:
+      - raw
+      - json_path
+      - regex
+      - x_path
+      example: raw
+      type: string
+      x-enum-varnames:
+      - RAW
+      - JSON_PATH
+      - REGEX
+      - X_PATH
+    SyntheticsGlobalVariableTOTPParameters:
+      description: Parameters for the TOTP/MFA variable
+      properties:
+        digits:
+          description: Number of digits for the OTP code.
+          example: 6
+          format: int32
+          maximum: 10
+          minimum: 4
+          type: integer
+        refresh_interval:
+          description: Interval for which to refresh the token (in seconds).
+          example: 30
+          format: int32
+          maximum: 999
+          minimum: 0
+          type: integer
+      type: object
+    SyntheticsGlobalVariableValue:
+      description: Value of the global variable.
+      example:
+        secure: true
+        value: value
+      properties:
+        options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableOptions'
+        secure:
+          description: Determines if the value of the variable is hidden.
+          type: boolean
+        value:
+          description: 'Value of the global variable. When reading a global variable,
+
+            the value will not be present if the variable is hidden with the `secure`
+            property.'
+          example: example-value
+          type: string
+      type: object
+    SyntheticsRestrictedRoles:
+      description: A list of role identifiers that can be pulled from the Roles API,
+        for restricting read and write access.
+      example:
+      - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      items:
+        description: UUID for a role.
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        type: string
+      type: array
+    SyntheticsVariableParser:
+      description: Details of the parser to use for the global variable.
+      example:
+        type: regex
+        value: .*
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+        value:
+          description: Regex or JSON path used for the parser. Not used with type
+            `raw`.
+          type: string
+      required:
+      - type
       type: object
     TableResultV2:
       description: A reference table resource containing its full configuration and
@@ -87743,6 +88004,61 @@ paths:
         operator: OR
         permissions:
         - billing_edit
+  /api/v2/synthetics/variables/{variable_id}/jsonpatch:
+    patch:
+      description: 'Patch a global variable using JSON Patch (RFC 6902).
+
+        This endpoint allows partial updates to a global variable by specifying only
+        the fields to modify.
+
+
+        Common operations include:
+
+        - Replace field values: `{"op": "replace", "path": "/name", "value": "new_name"}`
+
+        - Update nested values: `{"op": "replace", "path": "/value/value", "value":
+        "new_value"}`
+
+        - Add/update tags: `{"op": "add", "path": "/tags/-", "value": "new_tag"}`
+
+        - Remove fields: `{"op": "remove", "path": "/description"}`'
+      operationId: PatchGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalVariableJsonPatchRequest'
+        description: JSON Patch document with operations to apply.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalVariableResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch a global variable
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
   /api/v2/tags/enrichment:
     get:
       description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline
