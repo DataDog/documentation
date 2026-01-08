@@ -4553,7 +4553,17 @@ menu:
       url: internal_developer_portal/software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
-      weight: 1003
+      weight: 1003    
+    - name: Dynamic Instrumentation
+      url: tracing/dynamic_instrumentation/
+      identifier: dyninst
+      parent: tracing
+      weight: 11
+    - name: Enabling
+      url: tracing/dynamic_instrumentation/enabling
+      identifier: dyninst_enable
+      parent: dyninst
+      weight: 1101
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger

@@ -4,8 +4,6 @@ description: Add instrumentation to your running production systems without rest
 aliases:
     - /dynamic_instrumentation/how-it-works/
     - /dynamic_instrumentation/
-    - /dynamic_instrumentation/enabling/
-    - /tracing/dynamic_instrumentation/enabling
     - /tracing/dynamic_instrumentation/
 is_beta: false
 private: false
