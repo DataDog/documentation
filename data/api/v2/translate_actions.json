@@ -3185,6 +3185,12 @@
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
   },
+  "PatchGlobalVariable": {
+    "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
+    "summary": "Patch a global variable",
+    "request_description": "JSON Patch document with operations to apply.",
+    "request_schema_description": "JSON Patch request for global variable."
+  },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
     "summary": "List tag pipeline rulesets"
