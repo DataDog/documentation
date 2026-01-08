@@ -143,11 +143,7 @@ Horizontal scaling refers to distributing traffic across multiple Observability 
 
 For push-based sources, front your Observability Pipelines Worker instances with a network load balancer and scale them up and down as needed.
 
-{{< img src="observability_pipelines/production_deployment_overview/horizontal_scaling_push.png" alt="A diagram showing a cloud region broken down into agents, network load balancers, and an Observability Pipelines Worker aggregator, and the data from the agents are sent to the load balancer, Observability Pipelines Workers, and then to other destinations" style="width:60%;" >}}
-
 A load balancer is not required for pull-based sources. Deploy Observability Pipelines Worker and scale it up and down as needed. Your publish-subscription system coordinates exclusive access to the data when Observability Pipelines Worker asks to read it.
-
-{{< img src="observability_pipelines/production_deployment_overview/horizontal_scaling_pull.png" alt="A diagram showing a cloud region broken down into agents, brokers, and an Observability Pipelines aggregator. Data from the agents are sent to the brokers, and then sent and received between the broker and the Observability Pipelines Workers, and then sent from the Workers out to the other destinations" style="width:60%;" >}}
 
 ##### Load balancing
 
