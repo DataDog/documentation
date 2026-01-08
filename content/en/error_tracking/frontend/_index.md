@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
-It is critical for your system’s health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting.
+It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting.
 
 Error Tracking simplifies debugging by grouping thousands of similar errors into a single issue. Error Tracking enables you to:
 
