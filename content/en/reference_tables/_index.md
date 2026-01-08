@@ -163,15 +163,18 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 
 Create reference tables programmatically using the [Datadog API][8] or the [Datadog Terraform provider][9].
 
+**Note**: The API and Terraform provider support the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
+
 ### API
 
-Use the [Create Reference Table endpoint][10] to create reference tables from cloud storage or local files. For cloud storage sources (S3, GCS, Azure), provide `access_details` in `file_metadata` pointing to a CSV file in cloud storage. For local files, call `POST /api/latest/reference-tables/uploads` to get an upload ID, upload CSV data chunks, then call the create endpoint with the `upload_id` in `file_metadata`.
+Use the [Create Reference Table endpoint][10] to create reference tables from cloud storage or local files.
+- For cloud storage sources (S3, Azure, GCS), provide `access_details` in `file_metadata` pointing to a CSV file in cloud storage.
+- For local files, call `POST /api/latest/reference-tables/uploads` to get an upload ID and upload your CSV data. Then, call the Create Reference Table endpoint with the `upload_id` in `file_metadata`.
 
 ### Terraform
 
 Use the `datadog_reference_table` resource to manage reference tables as infrastructure as code. Configure the resource with your table schema, primary keys, and cloud storage access details.
 
-**Note**: The API and Terraform provider support the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
 
 [8]: /api/latest/reference-tables/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/reference_table
