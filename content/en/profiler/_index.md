@@ -46,6 +46,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
       tag: Blog
       text: Monitor your Kubernetes operators to keep applications running smoothly
+    - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+      tag: "Blog"
+      text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 cascade:
     algolia:
         rank: 70

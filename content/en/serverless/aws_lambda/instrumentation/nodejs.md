@@ -24,8 +24,6 @@ aliases:
 
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
 You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].

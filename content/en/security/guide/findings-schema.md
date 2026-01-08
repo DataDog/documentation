@@ -20,6 +20,10 @@ Security findings in Datadog represent vulnerabilities, misconfigurations, and s
 
 All findings share a common schema that enables unified querying and analysis across different security products.
 
+{{< learning-center-callout header="" btn_title="Learn more" btn_url="/security/guide/security-findings-migration/" hide_image="true" >}}
+  Learn about migrating to this new schema so you can avoid any interruptions to your workflows.
+{{< /learning-center-callout >}}
+
 ## Examples
 
 There are eleven different categories for security findings. Click on a category to view a sample security finding belonging to that category.
