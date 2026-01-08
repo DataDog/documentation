@@ -50,13 +50,13 @@ The following table shows feature compatibility across different setups:
 
 ## API support
 
-Datadog provides support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
+Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
 
 | Language | Traces API | Metrics API | Logs API |
 | :--- | :---: | :---: | :---: |
 | [.NET][31] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Python][32] | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Node.js][33] | {{< X >}} | *Not Yet Supported* | {{< X >}} |
+| [Node.js][33] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Java][34] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 | [Go][35] | {{< X >}} | *Not Yet Supported* | *Not Yet Supported* |
 | [Ruby][36] | {{< X >}} | Alpha | *Not Yet Supported* |

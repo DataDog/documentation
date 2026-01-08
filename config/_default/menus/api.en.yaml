@@ -3722,6 +3722,18 @@ menu:
       url: /api/latest/synthetics/
       identifier: synthetics
       generated: true
+    - name: Patch a global variable
+      url: '#patch-a-global-variable'
+      identifier: synthetics-patch-a-global-variable
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchGlobalVariable
+        unstable: []
+        order: 20
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
@@ -9964,6 +9976,22 @@ menu:
           - v2
         operationids:
           - ListProcesses
+        unstable: []
+        order: 1
+    - name: Product Analytics
+      url: /api/latest/product-analytics/
+      identifier: product-analytics
+      generated: true
+    - name: Send server-side events
+      url: '#send-server-side-events'
+      identifier: product-analytics-send-server-side-events
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SubmitProductAnalyticsEvent
         unstable: []
         order: 1
     - name: RUM

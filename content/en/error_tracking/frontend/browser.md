@@ -202,7 +202,7 @@ Refer to the [Browser SDK API Reference][9] for the full list of available confi
 
 ### Manage uploaded source maps
 
-See all uploaded symbols and manage your source maps on the [Debug Symbols][17] page.
+See all uploaded symbols and manage your source maps on the [Explore RUM Debug Symbols][17] page.
 
 **Note**: Source maps are limited in size to **500 MB** each.
 
@@ -223,13 +223,13 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [7]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [8]: /real_user_monitoring/platform/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[10]: /real_user_monitoring/session_replay/browser/privacy_options#mask-action-names
+[10]: /session_replay/browser/privacy_options#mask-action-names
 [11]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [12]: https://github.com
 [13]: https://about.gitlab.com
 [14]: https://bitbucket.org/product
 [15]: /integrations/guide/source-code-integration/
 [16]: /error_tracking/explorer
-[17]: /real_user_monitoring/guide/upload-javascript-source-maps
+[17]: https://app.datadoghq.com/source-code/setup/rum
 [18]: /getting_started/tagging/unified_service_tagging/
 [19]: /getting_started/tagging/

@@ -45,16 +45,16 @@ You can perform an action using the Action Interface. Let's look at an example w
 
 1. Go to the [Action Interface][8].  
   {{< img src="/service_management/action_interface/action_interface_landing.png" alt="Action Interface home page" >}}
-2. Enter the prompt, `List ECS clusters`, and press **Enter**.
+2. Enter the prompt, `List ECS clusters`, and press <span class="ui">Enter</span>.
   Bits AI responds a request for the AWS region.
 3. Enter a region.
     Bits AI responds with something like, `Here's a Datadog Action to address your request. Review and click 'Execute Action' to proceed.`
-4. Click the **List ECS cluster** action.
-5. In the action, in **Connection**, select the connection to the AWS account you want to use. Connections are set up in [Action Catalog][1].
+4. Click the <span class="ui">List ECS cluster</span> action.
+5. In the action, in <span class="ui">Connection</span>, select the connection to the AWS account you want to use. Connections are set up in [Action Catalog][1].
   Bits AI will continue to use the same connection for the duration of the chat session.
-6. In **Region**, select the AWS region where the clusters are hosted.
-7. In **Limit**, enter `5`.
-8. Click **Run**.
+6. In <span class="ui">Region</span>, select the AWS region where the clusters are hosted.
+7. In <span class="ui">Limit</span>, enter `5`.
+8. Click <span class="ui">Run</span>.
   Bits AI runs the action. In this example, it responds with a list of the custer names and ARNs.
   
   Bits AI also suggests additional prompts related to the clusters it retrieved.

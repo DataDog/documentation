@@ -2141,6 +2141,12 @@
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
   },
+  "SubmitProductAnalyticsEvent": {
+    "description": "Send server-side events to Product Analytics. Server-side events are retained for 15 months.\n\nServer-Side events in Product Analytics are helpful for tracking events that occur on the server,\nas opposed to client-side events, which are captured by Real User Monitoring (RUM) SDKs.\nThis allows for a more comprehensive view of the user journey by including actions that happen on the server.\nTypical examples could be `checkout.completed` or `payment.processed`.\n\nIngested server-side events are integrated into Product Analytics to allow users to select and filter\nthese events in the event picker, similar to how views or actions are handled.\n\n**Requirements:**\n- At least one of `usr`, `account`, or `session` must be provided with a valid ID.\n- The `application.id` must reference a Product Analytics-enabled application.\n\n**Custom Attributes:**\nAny additional fields in the payload are flattened and searchable as facets.\nFor example, a payload with `{\"customer\": {\"tier\": \"premium\"}}` is searchable with\nthe syntax `@customer.tier:premium` in Datadog.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: The request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
+    "summary": "Send server-side events",
+    "request_description": "Server-side event to send (JSON format).",
+    "request_schema_description": "A Product Analytics server-side event."
+  },
   "GetAccountFacetInfo": {
     "description": "Get facet information for account attributes including possible values and counts",
     "summary": "Get account facet info",
@@ -3178,6 +3184,12 @@
     "summary": "Save new value for on-demand concurrency cap",
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
+  },
+  "PatchGlobalVariable": {
+    "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
+    "summary": "Patch a global variable",
+    "request_description": "JSON Patch document with operations to apply.",
+    "request_schema_description": "JSON Patch request for global variable."
   },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
