@@ -78,7 +78,7 @@ You can only change the **head-based** sampling rate from the Datadog UI if you 
 
 {{< img src="/real_user_monitoring/browser/browser-change-sampling.png" alt="Session Sampling and Session Replay Sampling sliders visible from the RUM SDK Configuration page." style="width:100%;" >}}
 
-If you are not using server-side injection to add RUM to your web application, then to modify the **head-based** sampling rate, you can either:
+For other instrumentation methods (such as npm or CDN), to modify the **head-based** sampling rate:
 - Deploy a new version of your application with an updated `sessionSampleRate` value
 - Use a feature flag or remote configuration service to dynamically set the rate when the SDK initializes 
 
