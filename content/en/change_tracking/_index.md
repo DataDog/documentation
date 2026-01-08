@@ -119,19 +119,27 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 3. Hover over any change indicator or overlay to view a summary of the change.
 4. Click the change indicator or overlay to view detailed information and take remediation actions.
 
-### Custom widgets
+### Visualize Change Tracking data in widgets
 
-In addition to the out-of-the-box integrations described above, Change Tracking can be used in widgets across Datadog, including Dashboards and Notebooks.
+In addition to the out-of-the-box integrations described above, **Change Tracking is available as a data source for widgets** across Datadog, including Dashboards and Notebooks.
 
-#### Supported widget types
+To configure a widget using Change Tracking data:
 
-Change Tracking is available as a data source for the following widget types: **Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, and Bar Chart**.
+1.	In a dashboard or notebook, add or edit a  supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
+3.	From the **Data source** dropdown, select **Change Tracking**.
+4.	Configure your filters (**Service** is required).
+5.	(Optional) For widgets that support grouping, use **Group by** to split results.
 
-Change Tracking can also be displayed as an **Event Overlay on Timeseries widgets**, making it easier to correlate tracked changes with metric behavior.
+{{< img src="/change_tracking/change-tracking-datasource-widget.png" alt="Change Tracking datasource widgets" style="width:50%;" >}}
+
+For Timeseries widgets, Change Tracking can also be enabled as an **event overlay** from the **Event Overlays** section. This displays changes overlaid on top of a timeseries to help correlate them with metric behavior.
+
+{{< img src="/change_tracking/change-tracking-datasource-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:50%;" >}}
+
 
 #### View change details
 
-To view information about a change or set of changes, click a datapoint in the widget and select **View Changes**. This opens the Change Tracking side panel.
+To view information about a change or set of changes, click a datapoint in the widget and select **View Changes**. This opens the Change Tracking side panel with additional details.
 
 ## Tracked changes
 Change Tracking follows these types of changes across your infrastructure:
