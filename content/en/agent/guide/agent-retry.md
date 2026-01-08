@@ -40,57 +40,56 @@ Retries use an [exponential backoff strategy][2] with randomized jitter. These a
 
 
 ### Metrics buffer logic
-When a metric fails top send, it is compressed and stored in an in-memory retry buffer. The default maximum size is 15MB and is configurable using `forwarder_retry_queue_payloads_max_size` configuration setting. 
+When a metric fails to send to the Datadog intake, it is compressed and stored in an in-memory retry buffer. The default maximum size is 15MB and is configurable using the`forwarder_retry_queue_payloads_max_size` configuration setting. 
 
-The Agent supports an optional [on-disk retry buffer][4]. When enabled: 
+The Agent supports an optional [on-disk retry buffer][4], and when enabled: 
 1. The Agent fills the in-memory buffer first.
 1. Once the in-memory buffer is full:
     - Older payloads are evicted from memory
     - Evicted payloads are serialized to disk
-3. New payloads continue to be accepted.
-4. The Agent retries payloads in the following order:
+1. New payloads continue to be accepted.
+1. The Agent retries payloads in the following order:
     - In-memory payloads (newest first)
-    - On-disk payloads (newest first)
-This prioritization ensures that recent and live metrics are sent before backfilling older data.
+    - On-disk payloads (newest first).
+
+    This prioritization ensures that recent and live metrics are sent before backfilling older data.
 
 #### Default Datadog infrastructure configuration 
-On Datadog infrastructure, these are the default colnfigurations:
+The Datadog infrastructure has the following default configurations for metric retry buffering:
 - On-disk buffer size: 2 GB
 - Maximum disk usage ratio: 0.8
 - Maximum in-memory buffer size: 15 MB
 
-#### Capacity planning
-To estimate required buffer capacity during an outage, use the metric:
+#### Planning buffer capacity
+To estimate required buffer capacity during an outage, use the metric: `datadog.agent.retry_queue_duration.bytes_per_sec`
 
--  `datadog.agent.retry_queue_duration.bytes_per_sec`
-
-This metric is available by default when on-disk buffering is enabled and can be used to estimate disk requirements based on expected outage duration.
+This metric  can be used to estimate disk requirements based on expected outage duration and is available by default when on-disk buffering is enabled.
 
 #### Restart and shutdown behavior 
 During Agent restart:
 - In-memory payloads are lost
 - On-disk payloads are preserved and resent
-- Payloads are written to disk only after the in-memory buffer is full; therefore, some metric loss may still occur
+- Payloads are written to disk only after the in-memory buffer is full (some metric loss may still occur)
 
 During Agent shutdown:
 - Only in-flight requests are flushed
 - Payloads in retry queues are not flushed
 
 
-#### Dropped metrics visibility 
-The Agent reports the number of dropped metric points to the customer’s Datadog organization.
+#### Dropped metrics  
+The Agent reports the number of dropped metric points to the customer’s Datadog organization. (WHICH METRIC CAN THEY USE TO SEE THIS?)
 
 
 ## Logs 
 ### Logs retry strategy
-The Logs Agent retries failed HTTP requests indefinitely using exponential backoff with randomized jitter. A failed request is defined as:
-- Any HTTP response code greater than `400`, excluding:
+The Logs Agent retries failed HTTP requests indefinitely using [exponential backoff][2] with randomized jitter. A failed request is defined as:
+- Any HTTP response code greater than `400`, excluding codes:
   - `400`
   - `401`
   - `403`
   - `413`
 
-The default configurations are:
+The logs retry default configurations are:
   - Base backoff time: 2 seconds
   - Maximum backoff time: 120 seconds
 
@@ -101,21 +100,17 @@ The Logs Agent guarantees log delivery. When a payload fails to send:
 - Back pressure is applied
 - The Agent stops reading from the log source
 
-Once the intake becomes available, the Agent resumes reading from the last known position.
+When the intake becomes available, the Agent resumes reading from the last known position.
 
-Some potential data loss scenarios are:
+There are some potential data loss scenarios:
   - Kubernetes: log files may rotate before intake recovery
   - Host-based systems: files may be removed by tools such as `logrotate`
 
 
 ### Registry and restart behavior 
-The Logs Agent maintains a registry that tracks:
-  - Log sources
-  - Current read offsets
+The Logs Agent maintains a registry that tracks log sources and current read offsets. 
 
-Registry behavior:
-  - Flushed to disk every second (not configurable)
-  - Reloaded on Agent restart
+The registry is flushed to disk every second (this is not configurable) and is reloaded when the Agent restarts.
 
 On restart, the Agent resumes reading from the position recorded in the registry. A small amount of duplicate logs may occur if a payload was sent but the registry had not yet been flushed.
 
@@ -127,23 +122,27 @@ On restart, the Agent resumes reading from the position recorded in the registry
 - TCP logs:
     - Buffer limited to 100 log lines
     - Logs are sent line by line
-    - TCP is still used by some EU1 charts
+    - TCP is still used by some EU1 charts (SHOULD THIS BE INCLUDED?)
 
 
-### Monitoring Retries and Data Loss
+### Monitoring log retries and data loss
 The Logs Agent exposes telemetry metrics for monitoring buffer health, performance, and potential data loss.
 Telemetry is available:
-  - Via Agent metrics
-  - In telemetry.log included in a flare
+  - In Agent metrics
+  - In the `telemetry.log` file included in an Agent flare
+
+<!-- Buffer Health and Data Loss
+  : `logs.bytes_missed`: Bytes lost before consumption
+  : `logs.dropped`: Total logs dropped per destination -->
 
 #### Buffer Health and Data Loss
-  - logs.bytes_missed
-  - logs.dropped
+  - `logs.bytes_missed`
+  - `logs.dropped`
 
 #### Performance and Latency
-  - logs.sender_latency
-  - logs.retry_count
-  - logs.network_errors
+  - `logs.sender_latency`
+  - `logs.retry_count`
+  - `logs.network_errors`
 
 #### Throughput and Volume
   - `logs.decoded`
@@ -157,12 +156,12 @@ Telemetry is available:
   - `logs_client_http_destination__in_use_ms`
 
 #### HTTP Response Health
-  - logs.destination_http_resp
+  - `logs.destination_http_resp`
 
 #### Buffer Capacity and Utilization
-  - logs_component_utilization__ratio
-  - logs_component_utilization__items
-  - logs_component_utilization__bytes
+  - `logs_component_utilization__ratio`
+  - `logs_component_utilization__items`
+  - `logs_component_utilization__bytes`
 
 ### Dual Shipping
 When dual shipping is enabled:
@@ -181,20 +180,21 @@ When `is_reliable` is enabled for an endpoint:
 
 ## APM and traces 
 
-### Retry Behavior
-The Agent retries failed APM payloads using exponential backoff.
+### APM Retry Behavior
+The Agent retries failed APM payloads using [exponential backoff][2].
+
 A failed request is defined as:
   - Network connectivity errors
-  - HTTP 408
-  - HTTP 5xx responses
+  - HTTP `408` responses
+  - HTTP `5xx` responses
 
-Default configuration:
+The APM intake has the following default configurations:
   - Base backoff time: 2 seconds
   - Maximum backoff time: 10 seconds
 
 Retry behavior and retriable status codes are not configurable.
 
-### In-Memory Queues
+### In-Memory queues
 
 Failed APM payloads are:
   - Compressed
@@ -204,35 +204,36 @@ Failed APM payloads are:
 #### Traces
   - Configurable via `apm_config.trace_writer.queue_size`
   - Default calculation:
-     - max(1, max_memory / max_payload_size)
-     - Typically defaults to 163 payloads
+     - `max(1, max_memory / max_payload_size)`
+     - Typically defaults to **163 payloads**
 
 #### Stats
   - Configurable via apm_config.stats_writer.queue_size
   - Default calculation:
-      - max(1, max_memory / payload_size)
-      - Typically defaults to 174 payloads
+      - `max(1, max_memory / payload_size)`
+      - Typically defaults to **174 payloads**
 
-When dual shipping is enabled, each endpoint has an independent sender and queue.
+### Dual shipping
+When dual shipping is enabled for the APM intake, each endpoint has an independent sender and queue.
 
-### Other Payload Types
+### Additional payload types
 #### Processes
 
 The Process Agent buffers check results before forwarding them via the metrics forwarder.
 
-Default buffering behavior:
+The processes payload has the following default buffering behavior:
   - Approximately 30 minutes of process data buffered
-  - Based on:
-    - DefaultProcessQueueSize = 256
-    - DefaultProcessQueueBytes = 60 MB
+  - Buffering based on:
+    - `DefaultProcessQueueSize` = 256
+    - `DefaultProcessQueueBytes` = 60 MB
     
-From Agent version 7.39 onward:
+Starting with Agent version 7.39:
   - Process and Network (NPM) payloads use separate queues
-  - Allows buffering of approximately 40 minutes of process data with default settings
+  - Agent allows buffering of approximately 40 minutes of process data with default settings
 
-These settings are rarely overridden.
+These settings are rarely overridden.`(IS THIS A "SHOULD BE RARELOY OVERRIDEN? WHAT AR WE TRYING TO CONVEY TO THE USER HERE?")`
 
-Downstream delivery uses the **metrics forwarder**, and retry behavior is consistent with metrics, except that on-disk buffering is not supported.
+Downstream delivery for Processes uses the **metrics forwarder**, and retry behavior is consistent with [metrics](#metrics-retry-strategy), except that on-disk buffering is not supported.
 
 
 
