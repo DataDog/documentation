@@ -10,6 +10,17 @@
       },
       "aws_account_id": "123456789012",
       "aws_partition": "aws",
+      "ccm_config": {
+        "data_export_configs": [
+          {
+            "bucket_name": "my-bucket",
+            "bucket_region": "us-east-1",
+            "report_name": "my-report",
+            "report_prefix": "reports",
+            "report_type": "CUR2.0"
+          }
+        ]
+      },
       "logs_config": {
         "lambda_forwarder": {
           "lambdas": [

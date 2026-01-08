@@ -148,5 +148,5 @@ When Dynamic Sampling is applied, the following steps are recommended:
 
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /error_tracking/troubleshooting/?tab=java#errors-are-not-found-in-error-tracking
-[4]: /service_management/events/
+[4]: /events/
 [5]: https://app.datadoghq.com/error-tracking/settings/rate-limits

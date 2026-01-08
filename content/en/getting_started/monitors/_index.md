@@ -48,7 +48,7 @@ When you install the Datadog Agent, Datadog automatically detects your stack and
 Automatic Monitors can include:
 - Host-level monitors (CPU and memory utilization)
 - Kubernetes monitors (pod restarts, node health)
-- APM monitors (error rates or latency per web service)
+- APM monitors (error rates or latency per service)
 
 You can view these monitors immediately on the Datadog [**Monitors**][17] page.
 From there, you can edit, clone, or disable them like any other monitor.
@@ -159,6 +159,6 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
 [14]: /service_management/workflows/
-[15]: /service_management/case_management/
+[15]: /incident_response/case_management/
 [16]: /account_management/teams/
 [17]: https://app.datadoghq.com/monitors/manage

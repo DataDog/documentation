@@ -13,18 +13,30 @@ further_reading:
 
 ## Overview
 
-Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. Access these variables using the `synthetics.attributes` prefix. For example:
+Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix. 
 
-```text
-Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.failed_step.failure.message}}.
-```
+**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab of a test run in the [Results Explorer][1], then reference the path directly within your monitor configuration. 
 
-**Note**: For information about accessing local (config) variables, see the [Variables](#variables) section.
+{{< img src="synthetics/notifications/action_tab.png" alt="Actions tab from the Synthetics Result Explorer with Export Result JSON highlighted" style="width:90%;" >}}
 
-### Common variable shortcuts
+The following table provides a reference to the available variable categories and their base paths:
 
-`{{synthetics.failed_step.name}}`
-: The name of the failing step (for example, `Test div #title content`).
+| Section | Path |
+|---------|------|
+| [Test execution variables](#test-execution-variables) | `synthetics` (various shortcuts) |
+| [Result attributes](#result-attributes) | `synthetics.attributes` |
+| [Local and global variables](#local-and-global-variables) | `synthetics.attributes.result.variables` |
+| [Extracted variable values](#extracted-variable-values) | `synthetics.attributes.result.steps.<step-index>.extractedValue` (Browser/Mobile) |
+| [Step execution details](#step-execution-details) | `synthetics.attributes.variables.extracted` |
+| [Step summary](#step-summary) | `synthetics.attributes.result.steps` |
+
+## Available variables
+
+### Test execution variables
+
+Path: `synthetics` (various shortcuts)
+
+Use these variables to access common test execution data such as failure messages, step counts, duration, and tags.
 
 `{{synthetics.failed_step.failure.message}}`
 : The error message (for example, `Element's content should match the given regex`).
@@ -33,7 +45,8 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 : The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
 
 `{{synthetics.attributes.result.response.statusCode}}`
-: The HTTP status code (for example, `403`).
+: The HTTP status code (for example, `403`). </br>
+<strong>Tip:</strong> Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code">conditional alerting</a> page for an example of how to use this variable in a notification.
 
 `{{synthetics.result.step_count}}`
 : Number of steps (for example, `4`).
@@ -41,118 +54,164 @@ Test failed at step {{synthetics.failed_step.name}} with error: {{synthetics.fai
 `{{synthetics.result.duration}}`
 : Duration of the test run (in milliseconds) (for example, `9096`).
 
-`{{tags.env}}`
-: The environment tag value (for example, `prod`).
-
-**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab, then reference the path directly within your monitor configuration.
-
+`{{tags}}`
+: Lists all the tags added to the synthetics test.
+: To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
 
 ### Result attributes
+
+Path: `synthetics.attributes`
+
+Use these variables to include details about the test, execution location, device, counts, and result status in your notification messages.
 
 {{< tabs >}}
 {{% tab "Test Info" %}}
 
-`.test`
-: Info about the test
+`{{synthetics.attributes.test}}`
+: The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
 
-`.test.id`
-: Public ID (for example, `abc-def-ghi`)
+`{{synthetics.attributes.test.name}}`
+: The name of the test
 
-`.test.type`
+`{{synthetics.attributes.test.type}}`
 : Test type (for example, `api`)
 
-`.test.subType`
-: Subtype for API tests (for example, `http`)
+`{{synthetics.attributes.test.subType}}`
+: Subtype for API tests (for example, `http`, `dns`, and `multi`)
+
+`{{synthetics.attributes.test.id}}`
+: The test's public ID (for example, `abc-def-ghi`)
 
 {{% /tab %}}
 {{% tab "Location" %}}
 
-`.location.id`
+`{{synthetics.attributes.location}}`
+: The `location` object contains information about the location of where the test is run from
+
+`{{synthetics.attributes.location.id}}`
 : Location ID (for example, `aws:eu-central-1`)
 
-`.location.privateLocation`
+`{{synthetics.attributes.location.name}}`
+: Name of the location (for example, `Frankfurt (AWS)`)
+
+`{{synthetics.attributes.location.privateLocation}}`
 : `true` for Private Locations
 
 {{% /tab %}}
 {{% tab "Device" %}}
 
-Applies to browser and mobile tests.
+Applies to Browser and Mobile tests.
 
-`.device.id`
+`{{synthetics.attributes.device}}`
+: The `device` object contains information about the device on which the test is run on
+
+`{{synthetics.attributes.device.id}}`
 : Device identifier
 
-`.device.name`
+`{{synthetics.attributes.device.name}}`
 : Human-readable device name
 
-`.device.type`
+`{{synthetics.attributes.device.type}}`
 : Device type classification
 
-`.device.resolution.width`, `.device.resolution.height`
+`{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
 : Screen resolution dimensions
 
-`.device.browser.type`
+`{{synthetics.attributes.device.browser.type}}`
 : Browser type (browser tests only)
 
-`.device.platform.name`, `.device.platform.version`
+`{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (mobile tests only)
-
-**Example values:**
-```json
-{
-  "device": {
-    "id": "chrome.laptop_large",
-    "name": "Laptop Large",
-    "type": "laptop",
-    "resolution": {"width": 1440, "height": 1100},
-    "browser": {"type": "Chrome"},
-    "platform": {"name": "Android", "version": "14"}
-  }
-}
-```
 
 {{% /tab %}}
 {{% tab "Result" %}}
 
-`.result.id`
+`{{synthetics.attributes.result}}`
+: The `result` object contains information about the executed test run
+
+`{{synthetics.attributes.result.id}}`
 : Unique result ID
 
-`.result.status`
-: Test execution status
+`{{synthetics.attributes.result.status}}`
+: Test execution status (for example, `passed` or `failed`)
 
-`.result.duration`
+`{{synthetics.attributes.result.duration}}`
 : Test duration in milliseconds
 
-`.result.testStartedAt`, `.result.testFinishedAt`, `.result.testTriggeredAt`
+`{{synthetics.attributes.result.testStartedAt}}`, `{{synthetics.attributes.result.testFinishedAt}}`, `{{synthetics.attributes.result.testTriggeredAt}}`
 : Epoch timestamps in milliseconds
 
-`.result.failure.message`
-: Description of failure
+`{{synthetics.attributes.result.failure}}`
+: The `failure` object contains information about why the test failed
 
-`.result.failure.code`
-: Error code
+`{{synthetics.attributes.result.failure.message}}`
+: The failure message
 
-**Example values:**
-```json
-{
-  "result": {
-    "id": "3015485096247415772",
-    "status": "failed",
-    "duration": 9096,
-    "testStartedAt": 1743760758904,
-    "testFinishedAt": 1743760772025,
-    "testTriggeredAt": 1743760758593,
-    "failure": {
-      "message": "Error: Element's content should match the given regex",
-      "code": "ASSERTION_FAILURE"
-    }
-  }
-}
-```
+`{{synthetics.attributes.result.failure.code}}`
+: The failure code
+
+<p>For a complete list of API test error codes, see <a href="/synthetics/api_tests/errors/">API Testing Errors</a>. Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.failure</code> variable in a notification.</p>
+
+{{% /tab %}}
+{{% tab "Count" %}}
+
+Applies to Multistep, Browser, and Mobile tests.
+
+`{{synthetics.attributes.count}}`
+: The `count` object contains step statistics about the test
+
+`{{synthetics.attributes.count.steps.total}}`
+: The total number of steps
+
+`{{synthetics.attributes.count.steps.completed}}`
+: The number of steps that were run
+
+`{{synthetics.attributes.count.errors}}`
+: The total number of errors that occurred while running the test. For multistep and mobile tests, this is the number of failed steps. For browser tests, this is the sum of all browser errors. 
+
+`{{synthetics.attributes.count.hops}}`
+: The number of traceroute hops for TCP and ICMP tests
+
+{{% /tab %}}
+{{% tab "Failed Step" %}}
+
+Applies to Multistep, Browser, and Mobile tests.
+
+`{{synthetics.failed_step}}`
+: The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly. </br>
+
+<table>
+<thead>
+<tr>
+<th style="min-width: 240px;">Shortcut</th>
+<th>Test Type</th>
+<th>Maps To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{{synthetics.failed_step.name}}</code></td>
+<td>Multistep API</td>
+<td><code>{{synthetics.attributes.result.steps.&lt;step-index&gt;.name}}</code></td>
+</tr>
+<tr>
+<td><code>{{synthetics.failed_step.description}}</code></td>
+<td>Browser, Mobile</td>
+<td><code>{{synthetics.attributes.result.steps.&lt;step-index&gt;.description}}</code></td>
+</tr>
+</tbody>
+</table>
+
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut">conditional alerting</a> page for an example of how to use the <code>synthetics.failed_step.description</code> shortcut variable in a Browser Test notification.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Variables
+### Local and global variables
+
+Path: `synthetics.attributes.result.variables`
+
+These variables provide access to local and global variable values used during test execution. Use them to include variable names, types, and values in your notifications.
 
 {{< tabs >}}
 {{% tab "Local config variables" %}}
@@ -161,27 +220,17 @@ These are local variables configured for API tests or defined outside individual
 
 Located at `{{synthetics.attributes.result.variables.config}}`:
 
-`.name`
+`{{synthetics.attributes.result.variables.config.name}}`
 : Variable name
 
-`.type`
+`{{synthetics.attributes.result.variables.config.type}}`
 : Variable type
 
-`.secure`
+`{{synthetics.attributes.result.variables.config.secure}}`
 : Whether the variable value is obfuscated
 
-`.value`
+`{{synthetics.attributes.result.variables.config.value}}`
 : Variable value (non-obfuscated only)
-
-**Examples:**
-```json
-{
-  "name": "RANDOM_NUMBER",
-  "type": "text",
-  "secure": false,
-  "value": "133245995"
-}
-```
 
 {{% /tab %}}
 {{% tab "Global variables" %}}
@@ -190,583 +239,253 @@ These are extracted variables whose value updates a global variable value.
 
 Available only for **successful test results** and **recovery notifications**.
 
-Located at `result.variables.extracted`:
+Located at `{{synthetics.attributes.result.variables.extracted}}`:
 
-`.id`
+`{{synthetics.attributes.result.variables.extracted.id}}`
 : Global variable ID
 
-`.name`
+`{{synthetics.attributes.result.variables.extracted.name}}`
 : Variable name
 
-`.secure`
+`{{synthetics.attributes.result.variables.extracted.secure}}`
 : Whether the variable value is obfuscated
 
-`.val`
+`{{synthetics.attributes.result.variables.extracted.val}}`
 : Variable value (note: uses `.val`, not `.value`)
-
-**Examples:**
-```json
-{
-  "id": "ec734823-536e-4aba-8b5f-55733189d936",
-  "name": "EXTRACTED_NUMBER",
-  "secure": false,
-  "val": "250661"
-}
-```
-
-{{% /tab %}}
-{{% tab "Step extracted variables" %}}
-
-For tests with steps, step data is contained in `.steps`.
-
-`.extractedValue.name`
-: Variable name
-
-`.extractedValue.secure`
-: Whether the variable value is obfuscated
-
-`.extractedValue.value`
-: Variable value (if step was successful)
-
-**Examples:**
-```json
-{
-  "extractedValue": {
-    "name": "EXTRACTED_COUNT",
-    "secure": false,
-    "value": "12"
-  }
-}
-```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Variables extracted by steps
+### Extracted variable values
 
-Similar to standard API tests, the variables are listed in the `variables.extracted` property, but inside steps themselves. These values are available as long as the step is successful.
+Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
+
+**Applies to:** Browser and Mobile tests.
+
+These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
+
+For information on how to access the `<step-index>`, see the [step summary](#step-summary) section below.
+
+**Note:** For Multistep API tests, use [API tests][2] instead.
+
+`synthetics.attributes.result.steps.<step-index>.extractedValue.name`
+: Variable name
+
+`synthetics.attributes.result.steps.<step-index>.extractedValue.secure`
+: Whether the variable value is obfuscated
+
+`synthetics.attributes.result.steps.<step-index>.extractedValue.value`
+: Variable value (if step was successful)
+
+### Step execution details
+
+Path: `synthetics.attributes.variables.extracted`
+
+These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
 
 {{< tabs >}}
 {{% tab "General steps" %}}
 
 **For multistep/browser/mobile tests**:
 
-`.steps.allowFailure`
+`synthetics.attributes.variables.extracted.steps.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
 
-`.steps.duration`
+`synthetics.attributes.variables.extracted.steps.duration`
 : Step execution duration in milliseconds
 
-`.steps.failure`
+`synthetics.attributes.variables.extracted.steps.failure`
 : Failure information object containing `.code` and `.message`
 
-`.steps.id`
+`synthetics.attributes.variables.extracted.steps.id`
 : Unique step identifier
 
-`.steps.isCritical`
+`synthetics.attributes.variables.extracted.steps.isCritical`
 : Whether the step is critical to the test
 
-`.steps.status`
+`synthetics.attributes.variables.extracted.steps.status`
 : Step execution status
 
-`.steps.type`
+`synthetics.attributes.variables.extracted.steps.type`
 : Type of step being executed
 
 **Subtest information:**
 
-`.steps.subTest.id`
+`synthetics.attributes.variables.extracted.steps.subTest.id`
 : Subtest identifier
 
-`.steps.subStep.parentStep.id`
+`synthetics.attributes.variables.extracted.steps.subStep.parentStep.id`
 : Parent step identifier
 
-`.steps.subStep.parentTest.id`
+`synthetics.attributes.variables.extracted.steps.subStep.parentTest.id`
 : Parent test identifier
 
-`.steps.subStep.level`
+`synthetics.attributes.variables.extracted.steps.subStep.level`
 : Nesting level (1 for subtests, 2 for subtests of subtests)
-
-**Examples:**
-```json
-{
-  "steps": [
-    {
-      "allowFailure": false,
-      "duration": 10955,
-      "failure": {
-        "code": "ASSERTION_FAILURE",
-        "message": "Element's content should not equal given value."
-      },
-      "id": "g8e-q4a-fix",
-      "isCritical": true,
-      "status": "failed",
-      "type": "assertElementContent",
-      "subTest": {
-        "id": "m2i-fcy-eva"
-      },
-      "subStep": {
-        "parentStep": {"id": "ikj-juk-z2u"},
-        "parentTest": {"id": "th5-wic-5mj"},
-        "level": 1
-      }
-    }
-  ]
-}
-```
 
 {{% /tab %}}
 {{% tab "Browser Tests" %}}
 
 **General:**
 
-`.startUrl`
+`{{synthetics.attributes.result.startUrl}}`
 : URL from test configuration
 
 **Steps:**
 
-`.apiTest.request`
+`synthetics.attributes.variables.extracted.apiTest.request`
 : API test request configuration (only for "Run API Test" steps where `type` is `runApiTest`)
 
-`.apiTest.result`
+`synthetics.attributes.variables.extracted.apiTest.result`
 : API test result data (similar to `attributes.result` for API tests)
 
-`.assertionResult.expected`
+`synthetics.attributes.variables.extracted.assertionResult.expected`
 : Expected value for assertions
 
-`.assertionResults.checkType`
+`synthetics.attributes.variables.extracted.assertionResults.checkType`
 : Type of assertion check
 
-`.assertionResults.actual`
+`synthetics.attributes.variables.extracted.assertionResults.actual`
 : Actual value found during assertion
 
-`.browserErrors`
+`synthetics.attributes.variables.extracted.browserErrors`
 : List of browser errors encountered
 
-`.timings.firstByte`
+`synthetics.attributes.variables.extracted.timings.firstByte`
 : Time to first byte
 
-`.timings.tcp`
+`synthetics.attributes.variables.extracted.timings.tcp`
 : TCP connection timing
 
-`.description`
+`synthetics.attributes.variables.extracted.description`
 : Step description
 
-**Examples:**
-```json
-{
-  "startUrl": "https://datadoghq.com",
-  "apiTest": {
-    "request": {
-      "subType": "http",
-      "method": "GET",
-      "url": "https://datadoghq.com"
-    },
-    "result": {
-      "statusCode": 200
-    }
-  },
-  "assertionResults": {
-    "expected": "100",
-    "checkType": "equals",
-    "actual": "200"
-  },
-  "timings": {
-    "firstByte": 7.1,
-    "tcp": 5.2
-  }
-}
-```
-
-Examples for `.browserErrors`:
-
-```json
-{
-    "name": "Console error",
-    "description": "Failed to load resource: the server responded with a status of 403 ()",
-    "type": "js"
-},
-{
-    "name": "[GET] 403 - https://accounts.google.com/v3/signin/identifier?dsh=S688774280%3A1687962864348747&conti",
-    "description": "https://accounts.google.com/v3/signin/identifier?dsh=S688774280%3A1687962864348747&continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3D%252Fsignin_passive%26feature%3Dpassive&hl=en&ifkv=AeDOFXjMKzxp0wt-b9IzWKz6RS9Kk-VmW5z_fzLP_cjbSWd4hWeP5g53fvdrhX6b2cDVQrNtJ5B7vA&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin\n<html lang=en><meta charset=utf-8><meta name=viewport content=\"initial-scale=1, minimum-sca",
-    "type": "network",
-    "status": 403
-},
-{
-    "method": "POST",
-    "name": "https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-",
-    "description": "Request was pending when step timed out: POST - https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-    "type": "network",
-    "url": {
-        "protocol": "https:",
-        "search": "?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-        "domain": "datadoghq.com",
-        "origin": "https://8b61d74c.datadoghq.com",
-        "full": "https://8b61d74c.datadoghq.com/api/v2/rum?batch_time=1752830394872&dd-request-id=8c0e7b8c-3d52-4b96-b1a0-627e7070b863&dd-evp-origin=browser&dd-evp-origin-version=5.27.0&dd-api-key=pub0b466265cd4de08394d4e1979fb79787&ddtags=sdk_version%3A5.27.0%2Capi%3Abeacon%2Cenv%3Alive%2Cservice%3Acorp%2Cversion%3Ae0fdd625&ddsource=browser",
-      "pathname": "/api/v2/rum"
-    }
-},
-```
 {{% /tab %}}
 {{% tab "Mobile Tests" %}}
 
-`.application.versionId`
+`synthetics.attributes.variables.extracted.application.versionId`
 : Mobile application version identifier
 
-`.apiTest`
+`synthetics.attributes.variables.extracted.apiTest`
 : API test data (for API test steps within mobile tests)
 
-`.description`
+`synthetics.attributes.variables.extracted.description`
 : Step description
-
-**Examples:**
-```json
-{
-  "application": {
-    "versionId": "4408df2e-9b7a-4665-9510-b9041b2ae1e8"
-  },
-  "description": "Tap on Button Sign In"
-}
-```
 
 {{% /tab %}}
 {{% tab "API Tests" %}}
 
 **Multistep:**
 
-`.name`
+`synthetics.attributes.variables.extracted.name`
 : Step name
 
-`.type`
+`synthetics.attributes.variables.extracted.type`
 : Step type
 
 *Note: Follow regular API fields per subType*
-
-**Non-Multistep:**
-
-`.assertions.actual`
-: Actual value from assertion
-
-`.assertions.expected`
-: Expected value for assertion
-
-`.assertions.operator`
-: Assertion operator
-
-`.assertions.type`
-: Assertion type
-
-`.dnsResolution.resolvedIp`
-: Resolved IP address
-
-`.dnsResolution.server`
-: DNS server used
-
-`.timings.dns`
-: DNS resolution time
-
-`.timings.tcp`
-: TCP connection time
-
-`.request.url`
-: Request URL
-
-`.request.host`
-: Request host
-
-`.response.body`
-: Response body content
-
-`.response.statusCode`
-: HTTP status code
-
-`.response.headers`
-: Response headers
-
-`.response.httpVersion`
-: HTTP version
-
-`.response.redirects`
-: Redirect information
-
-**Examples:**
-```json
-{
-  "name": "Check API endpoint",
-  "type": "http",
-  "assertions": {
-    "actual": 1.5145,
-    "expected": 1000,
-    "operator": "moreThan",
-    "type": "latency"
-  },
-  "dnsResolution": {
-    "resolvedIp": "18.245.199.78",
-    "server": "8.8.4.4"
-  },
-  "timings": { //Dependent on the sub-type
-    "tcp": 6.9,
-      "download": 33.5,
-      "total": 75,
-      "dns": 7.5,
-      "firstByte": 17.2,
-      "ssl": 9.9
-    },
-  },
-  "request": {
-    "url": "https://www.datadogh.com",
-    "host": "datadoghq.com",
-    "method": "GET"
-  },
-  "response": {
-    "body": "Example Page Content", // Raw text (even if it's JSON, its contents can't be accessed individually), and it's truncated if too big (only the start is available)
-    "statusCode": 200,
-    "headers": { // Object/dictionary of headers, the key is the header name and the value its value
-      "content-type": "text/html; charset=utf-8",
-      "content-length": "250661"
-    },
-    "httpVersion": "1.1",
-    "redirects": [ // List of redirect items
-      {
-        "location": "https://datadoghq.com",
-        "statusCode": 302
-      }
-    ]
-  }
-```
 
 {{% /tab %}}
 {{% tab "Network tests" %}}
 
 {{% collapse-content title="Websocket" level="h4" expanded=false %}}
 
-`.timings.open`
+`synthetics.attributes.variables.extracted.timings.open`
 : Time to open connection (in milliseconds)
 
-`.timings.receive`
+`synthetics.attributes.variables.extracted.timings.receive`
 : Time to receive response
 
-`.handshake.request`
+`synthetics.attributes.variables.extracted.handshake.request`
 : Handshake request data
 
-`.handshake.response`
+`synthetics.attributes.variables.extracted.handshake.response`
 : Handshake response data
 
-`.request.message`
+`synthetics.attributes.variables.extracted.request.message`
 : WebSocket request message
 
-`.response.message`
+`synthetics.attributes.variables.extracted.response.message`
 : WebSocket response message
 
-`.close.reason`
+`synthetics.attributes.variables.extracted.close.reason`
 : Connection close reason
 
-`.close.statusCode`
+`synthetics.attributes.variables.extracted.close.statusCode`
 : Connection close status code
-
-**Examples:**
-```json
-{
-  "timings": {
-    "tcp": 96,
-    "receive": 97,
-    "download": 0,
-    "total": 201.9,
-    "dns": 7.7,
-    "firstByte": 0,
-    "ssl": 1,
-    "open": 0.2
-  },
-  "handshake": {
-    "response": {
-      "statusCode": 101
-    }
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong"
-  },
-  "close": {
-    "reason": "message_received",
-    "statusCode": 1000
-  }
-}
-```
 
 {{< /collapse-content >}}
 
 {{% collapse-content title= "gRPC" level="h4" expanded=false %}}
 
-`.callType`
+`synthetics.attributes.variables.extracted.callType`
 : Call type (`unary` or `healthcheck`)
 
-`.timings.rpc`
+`synthetics.attributes.variables.extracted.timings.rpc`
 : RPC call timing
 
-`.response.healthcheck.status`
+`synthetics.attributes.variables.extracted.response.healthcheck.status`
 : Health check status
 
-`.request.message`
+`synthetics.attributes.variables.extracted.request.message`
 : gRPC request message
 
-`.response.message`
+`synthetics.attributes.variables.extracted.response.message`
 : gRPC response message
-
-**Examples:**
-```json
-{
-  "callType": "healthcheck",
-  "timings": {
-    "total": 55.3,
-    "rpc": 9.2,
-    "dns": 46.1
-  },
-  "response": {
-    "healthcheck": {
-      "status": 1
-    }
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong" // Responses can be truncated if too big (only the start is available)
-  }
-}
-```
 
 {{< /collapse-content >}}
 
 {{% collapse-content title= "UDP" level="h4" expanded=false %}}
 
-`.request.message`
+`synthetics.attributes.variables.extracted.request.message`
 : UDP request message
 
-`.response.message`
+`synthetics.attributes.variables.extracted.response.message`
 : UDP response message
 
-`.timings.message`
+`synthetics.attributes.variables.extracted.timings.message`
 : Message timing
-
-**Examples:**
-```json
-{
-  "timings": {
-    "total": 135.3,
-    "dns": 14.4,
-    "message": 120.9
-  },
-  "request": {
-    "message": "Ping"
-  },
-  "response": {
-    "message": "Pong"
-  }
-}
-```
 
 {{< /collapse-content >}}
 
 {{% collapse-content title= "TCP" level="h4" expanded=false %}}
 
-`.connectionOutcome`
+`synthetics.attributes.variables.extracted.connectionOutcome`
 : Connection result
 
-`.netpath.routers.ip`
+`synthetics.attributes.variables.extracted.netpath.routers.ip`
 : Router IP addresses
 
-`.traceroute.latency.min`
+`synthetics.attributes.variables.extracted.traceroute.latency.min`
 : Minimum latency
 
-`.traceroute.latency.max`
+`synthetics.attributes.variables.extracted.traceroute.latency.max`
 : Maximum latency
 
-`.traceroute.latency.avg`
+`synthetics.attributes.variables.extracted.traceroute.latency.avg`
 : Average latency
 
-`.traceroute.latency.stddev`
+`synthetics.attributes.variables.extracted.traceroute.latency.stddev`
 : Standard deviation
 
-`.traceroute.latency.values`
+`synthetics.attributes.variables.extracted.traceroute.latency.values`
 : Latency values array
-
-**Examples:**
-```json
-[
-      {
-        "packetLossPercentage": 1,
-        "packetsReceived": 0,
-        "packetsSent": 2,
-        "routers": [
-          {
-            "ip": "???"
-          }
-        ]
-      },
-      {
-        "packetLossPercentage": 0,
-        "packetsReceived": 2,
-        "latency": {
-          "avg": 0.2375,
-          "min": 0.189,
-          "max": 0.286,
-          "values": [
-            0.189,
-            0.286
-          ],
-          "stddev": 0.04849999999999999
-        },
-        "packetsSent": 2,
-        "routers": [
-          {
-            "ip": "10.241.134.75"
-          }
-        ]
-      }
-]
-```
 
 {{< /collapse-content >}}
 
 {{% collapse-content title= "ICMP" level="h4" expanded=false %}}
 
-`.traceroute`
+`synthetics.attributes.variables.extracted.traceroute`
 : Same structure as TCP traceroute
 
-`.request.host`
+`synthetics.attributes.variables.extracted.request.host`
 : Target host
 
-`.ping`
+`synthetics.attributes.variables.extracted.ping`
 : Ping results
 
-`.latency.min`, `.latency.max`, `.latency.avg`, `.latency.stddev`, `.latency.values`
+`synthetics.attributes.variables.extracted.latency.min`, `synthetics.attributes.variables.extracted.latency.max`, `synthetics.attributes.variables.extracted.latency.avg`, `synthetics.attributes.variables.extracted.latency.stddev`, `synthetics.attributes.variables.extracted.latency.values`
 : Latency measurements (same as TCP)
-
-**Examples:**
-```json
-{
-  "ping": {
-    "packetLossPercentage": 0,
-    "packetsReceived": 4,
-    "latency": {
-      "avg": 1.47375,
-      "min": 1.442,
-      "max": 1.516,
-      "values": [
-        1.467,
-        1.442,
-        1.47,
-        1.516
-      ],
-      "stddev": 0.02670557057993708
-    },
-    "resolvedIp": "18.245.199.70",
-    "packetsSent": 4,
-    "packetSize": 56
-  }
-}
-```
 
 {{< /collapse-content >}}
 
@@ -775,125 +494,178 @@ Examples for `.browserErrors`:
 
 {{% collapse-content title= "SSL" level="h4" expanded=false %}}
 
-`.cert`
+`synthetics.attributes.variables.extracted.cert`
 : SSL certificate information
 
-`.cipher`
+`synthetics.attributes.variables.extracted.cipher`
 : Cipher suite used
 
-`.issuer`
+`synthetics.attributes.variables.extracted.issuer`
 : Certificate issuer
 
-`.subject`
+`synthetics.attributes.variables.extracted.subject`
 : Certificate subject
 
-`.valid.from`
+`synthetics.attributes.variables.extracted.valid.from`
 : Certificate valid from date
 
-`.valid.to`
+`synthetics.attributes.variables.extracted.valid.to`
 : Certificate valid to date
 
-`.ocsp`
+`synthetics.attributes.variables.extracted.ocsp`
 : OCSP (Online Certificate Status Protocol) information
 
-`.timings.handshake`
+`synthetics.attributes.variables.extracted.timings.handshake`
 : SSL handshake timing
-
-**Examples:**
-```json
-      "cipher": TLS_AES_128_GCM_SHA256,
-      "issuer": {
-        "C": "US",
-        "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
-        "O": "DigiCert Inc"
-      },
-```
-```json
-{
-  "issuer": {
-    "C": "US",
-    "CN": "DigiCert Global G2 TLS RSA SHA256 2020 CA1",
-    "O": "DigiCert Inc"
-  },
-  "valid.from": 1751414400000, //milliseconds
-  "valid.to": 1783036799000 //milliseconds
-}     
-```
 
 {{< /collapse-content >}}
 
 {{% collapse-content title= "DNS" level="h4" expanded=false %}}
 
-`.response.records.type`
+`synthetics.attributes.variables.extracted.response.records.type`
 : DNS record type
 
-`.response.records.values`
+`synthetics.attributes.variables.extracted.response.records.values`
 : DNS record values
 
-**Examples:**
-```json
-{
-  "dns": {
-    "response": {
-      "records": {
-        "type": "A",
-        "values": ["192.0.2.1", "192.0.2.2"]
-      }
-    }
-  }
-}
-```
+{{< /collapse-content >}}
+
+{{% collapse-content title= "HTTP" level="h4" expanded=false %}}
+
+**Request:**
+
+`synthetics.attributes.variables.extracted.request`
+: Information about the request
+
+`synthetics.attributes.variables.extracted.request.method`
+: The HTTP method
+
+`synthetics.attributes.variables.extracted.request.body`
+: The request body if set
+
+`synthetics.attributes.variables.extracted.request.headers`
+: The request headers
+
+**Response:**
+
+`synthetics.attributes.variables.extracted.response`
+: Information about the response
+
+`synthetics.attributes.variables.extracted.response.body`
+: The response body as string (truncated if too big)
+
+`synthetics.attributes.variables.extracted.response.bodySize`
+: The size of the full response body
+
+`synthetics.attributes.variables.extracted.response.cacheHeaders`
+: A dictionary of caching-related headers
+
+`synthetics.attributes.variables.extracted.response.cdn`
+: The response CDN info if any
+
+`synthetics.attributes.variables.extracted.response.cdn.provider`
+: The CDN provider name (for example, `akamai`, `cloudflare`)
+
+`synthetics.attributes.variables.extracted.response.cdn.cache`
+: The cache info
+
+`synthetics.attributes.variables.extracted.response.cdn.cache.cached`
+: If the data was cached
+
+`synthetics.attributes.variables.extracted.response.cdn.cache.status`
+: The cache status as provided in associated cache header
+
+`synthetics.attributes.variables.extracted.response.headers`
+: The response headers
+
+`synthetics.attributes.variables.extracted.response.httpVersion`
+: The HTTP version
+
+`synthetics.attributes.variables.extracted.response.redirects`
+: A list of redirections if any
+
+`synthetics.attributes.variables.extracted.response.redirects.statusCode`
+: The HTTP status code for the redirect
+
+`synthetics.attributes.variables.extracted.response.redirects.location`
+: The returned location to redirect to
+
+`synthetics.attributes.variables.extracted.response.statusCode`
+: The response HTTP status code
+
+**Timings:**
+
+`synthetics.attributes.variables.extracted.timings.authentication`
+: The time spent for the authentication challenge (for example, NTLM)
+
+`synthetics.attributes.variables.extracted.timings.download`
+: The time spent downloading the response
+
+`synthetics.attributes.variables.extracted.timings.firstByte`
+: The time spent waiting for the first byte of response to be received
+
+`synthetics.attributes.variables.extracted.timings.redirect`
+: The time spent in HTTP redirections
+
+`synthetics.attributes.variables.extracted.timings.ssl`
+: The duration of the TLS handshake (only when testing an HTTPS endpoint)
 
 {{< /collapse-content >}}
 
 {{% /tab %}}
-{{% tab "Step summary" %}}
-
-**Step Summary:**
-- `.result.steps.<step_id>`
-  - `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, `.url`
-
-The step summary contains the same data as described in [steps](#variables-extracted-by-steps), but you can access it in several ways:
-
-By step index (0-based):
-- `.steps.0` - first step
-- `.steps.1` - second step
-- `.steps.-1` - last step
-- `.steps.-2` - step before last
-
-By step name:
-- `.steps[Click button]`
-
-By step id:
-- `.steps.abc-def-ghi`
-
-Then you access the data as usual, for example:
-- `.steps.-1.status`
-- `.steps[Click button].status`
-- `.steps.abc-def-ghi.status`
-
-**Summary Data:**
-- `.count.steps.{total,completed}`, `.count.errors`, `.count.hops` (for example, `4`)
-
-**Service Tag:**
-If `service` tag is set:
-- `{{service.name}}`
-- `{{service.team}}`
-- `{{service.docs}}`, `{{service.links}}`
-
-**Examples**:
-```json
-{
-  "service.name": "API Server",
-  "service.team": "Backend team",
-  "service.docs": "https://docs.datadoghq.com/api/"
-}
-```
-
-{{% /tab %}}
 {{< /tabs >}}
 
+### Step summary
+
+Path: `synthetics.attributes.result.steps`
+
+Access step data by index, name, or ID to reference specific steps in your notification messages.
+
+Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, and `.url`.
+
+You can reference steps in three ways:
+
+#### By index (0-based)
+
+Use positive numbers to count from the beginning, or negative numbers to count from the end:
+
+| Syntax | Description |
+|--------|-------------|
+| `synthetics.attributes.result.steps.0` | First step |
+| `synthetics.attributes.result.steps.1` | Second step |
+| `synthetics.attributes.result.steps.-1` | Last step |
+| `synthetics.attributes.result.steps.-2` | Second to last step |
+
+#### By step name
+
+Use the step name in brackets:
+
+`.steps[Click button]`
+
+#### By step ID
+
+Use the step's unique identifier:
+
+`.steps.abc-def-ghi`
+
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.step</code> variable in a Slack notification based on a failed step.</div>
+
+#### Accessing step properties
+
+Combine any reference method with a property:
+
+- `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
+- `{{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
+- `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /synthetics/explore/results_explorer
+[2]: /synthetics/notifications/template_variables/?tab=apitests#step-execution-details
+[3]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code
+[4]: /synthetics/api_tests/errors/
+[5]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code
+[6]: /synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step
+

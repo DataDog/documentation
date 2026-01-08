@@ -278,6 +278,8 @@ Use [granular access control][22] to limit who has access to your test based on 
 | Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
 | Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
 
+**Note**: Restricting a variable prevents other users from adding it to a test and using it; it does not hide the name of the variable if it is already used in an existing test.
+
 ## Integration settings
 
 {{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
@@ -323,7 +325,7 @@ To allow Datadog to collect RUM data from your mobile application test runs, con
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
-[16]: /synthetics/browser_tests/actions/#use-variables
+[16]: /synthetics/browser_tests/test_steps/#use-variables
 [17]: /synthetics/mobile_app_testing/
 [18]: /synthetics/mobile_app_testing/settings/
 [19]: /synthetics/mobile_app_testing/#use-global-variables

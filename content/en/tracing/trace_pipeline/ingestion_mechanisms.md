@@ -13,6 +13,9 @@ further_reading:
 - link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#improving-tracing-efficiency-through-targeted-changes"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}

@@ -103,7 +103,9 @@ attributes:
        - **Incidents**: Retained for the duration of the account
   - product: LLM Observability
     data_type: |
-       - **Traces and spans**: 15 days
+       - **Production Traces and spans**: 15 days
+       - **Experiments Traces and spans**: 90 days
+       - **Datasets**: 3 years
   - product: Log Management
     data_type: |
        - **Logs**: Determined by customer plan
@@ -121,7 +123,7 @@ attributes:
        - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Network Device Monitoring
     data_type: |
-       - **Netflow**: 30 days
+       - **NetFlow**: 30 days
        - **SNMP traps**: 15 days
   - product: Cloud Network Monitoring
     data_type: |
@@ -144,8 +146,7 @@ attributes:
        - **Service metadata**: Retained for the duration of the account
   - product: Service Level Objectives
     data_type: |
-       - **Monitor-based results**: 3 months
-       - **Metric and time slice-based results**: 15 months
+       - **SLO results**: 15 months
   - product: Session Replay
     data_type: |
        - **Replays (extension option in UI is unchecked)**: 30 days
@@ -153,6 +154,9 @@ attributes:
   - product: Software Composition Analysis (SCA)
     data_type: |
        - **Detected vulnerabilities**: 15 months
+  - product: Source Code Integration
+    data_type: |
+       - **Source Code**: 7 days
   - product: Synthetics
     data_type: |
        - **Test results (not displayed in UI)**: 2 months
