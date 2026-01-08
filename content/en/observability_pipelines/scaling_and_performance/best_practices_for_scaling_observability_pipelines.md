@@ -10,7 +10,7 @@ This guide is for large-scale production-level deployments.
 
 ## Overview
 
-Deploy the Observability Pipelines Worker into your infrastructure, like you would any other service, to intercept, manipulate, and forward data to your destinations. Each Observability Pipelines Worker instance is designed to operate independently, allowing you to scale your architecture using simple load balancing.
+Deploy the Observability Pipelines Worker into your infrastructure, like you would any other service, to intercept, manipulate, and forward data to your destinations. Each Observability Pipelines Worker instance is designed to operate independently, allowing you to scale your architecture with load balancing.
 
 This guide walks you through the recommended aggregator pattern for new Observability Pipelines Worker users, specifically:
 
@@ -20,11 +20,11 @@ This guide walks you through the recommended aggregator pattern for new Observab
 
 ## Architecture
 
-This section goes over:
+This section covers:
 
 - Architecture models:
 	- [VM-based model](#vm-based-architecture)
-	- [Kubernetes- based model](#kubernetes-based-architecture)
+	- [Kubernetes-based model](#kubernetes-based-architecture)
 - [Centralized vs decentralized approach](#centralized-vs-decentralized-approach)
 - [Choosing a VM-based vs Kubernetes-based architecture](#choosing-a-vm-based-vs-kubernetes-based-architecture)
 
@@ -39,19 +39,19 @@ Both models can be applied to a centralized or decentralized approach. In a cent
 
 Generally, Datadog recommends operating the Worker as close to the data source as possible. This might require more administrative and infrastructure overhead, but it reduces concerns about network transit issues and single point of failures.
 
-For both models, Datadog recommends scaling Workers [horizontally][1] to meet scaling demands and maintain high availability, which can be done either as part of a managed instance group (for example, an autoscaling group) or with horizontal pod autoscaling.
+For both models, Datadog recommends scaling Workers [horizontally][1] to handle increased load and maintain high availability. You can achieve this using a managed instance group (such as an autoscaling group) or horizontal pod autoscaling.
 
 The Worker can also be scaled [vertically][2], which takes advantage of additional cores and memory without any additional configuration. For certain processors, such as the Sensitive Data Scanner processor with many rules enabled, or heavy processing use cases, the Worker benefits from additional cores to allow for parallel thread execution. When vertically scaling, Datadog recommends capping an instance's size to process no more than 33% of your total volume. This allows for high availability in the event of a node failure.
 
 #### VM-based architecture
 
-The following architecture diagram is for a host-based architecture, where a load balancer accepts traffic from push-based sources. If only pull-based sources are being used, then a load balancer is not required. In the diagram, the Worker is part of a managed instance group that scales based on processing needs. The Observability Pipelines Worker is almost always CPU constrained. CPU utilization is the strongest signal for autoscaling because CPU utilization metrics do not produce false positives.
+The following architecture diagram is for a host-based architecture, where a load balancer accepts traffic from push-based sources. If only pull-based sources are being used, a load balancer is not required. In the diagram, the Worker is part of a managed instance group that scales based on processing needs. The Observability Pipelines Worker is almost always CPU constrained. CPU utilization is the strongest signal for autoscaling because CPU utilization metrics do not produce false positives.
 
 {{< img src="observability_pipelines/scaling_best_practices/vm-infra.png" alt="Diagram showing the Worker as part of a managed instance group" style="width:100%;" >}}
 
 #### Kubernetes-based architecture
 
-The following architecture diagram is for a container-based architecture, where the Kubernetes service acts as the router to the statefulset and accepts traffic from push-based sources. If you are sending telemetry from outside the cluster, you need to set the [service.type to `LoadBalancer`][3] or you may choose to install an [ingress controller][4] and configure an [ingress][5] for routing. The Worker is part of a statefulset and horizontal pod autoscaling can be enabled to scale based on processing needs. Just like the VM-based architecture, the Worker can be scaled vertically and can benefit from multiple cores, allowing parallel processing.
+The following architecture diagram is for a container-based architecture, where the Kubernetes service acts as the router to the statefulset and accepts traffic from push-based sources. If you are sending telemetry from outside the cluster, set the [service.type to `LoadBalancer`][3] or install an [ingress controller][4] and configure an [ingress][5] for routing. The Worker runs as part of a statefulset and supports horizontal pod autoscaling to adjust capacity based on processing needs. Like the VM-based architecture, Workers can also scale vertically and take advantage of multiple cores for parallel processing.
 
 {{< img src="observability_pipelines/scaling_best_practices/containerized-infra.png" alt="Diagram showing the Worker as part of a statefulset" style="width:100%;" >}}
 
@@ -74,20 +74,20 @@ Datadog recommends the decentralized approach of deploying the Workers as close 
 - Avoids potential performance issues related to inter-region or inter-account data transfer
 - Helps reduce data transfer costs by keeping processing local to the data sources
 
-The centralized deployment model involves deploying Workers in a single location and sending data from multiple origins, such as regions, clusters, datacenters, and so on, to that central location. This approach may be suitable when handling lower volumes of data or when network peering between environments is already in place. However, centralized deployments can lead to increased data transfer fees, especially when sending high volumes of data across regions or accounts.
+A centralized deployment runs Workers in a single location, aggregating data from multiple regions, clusters, or datacenters. This approach works best for lower data volumes or when network peering already exists. Be aware that high-volume data transfers across regions or accounts may incur additional costs.
 
 A hybrid model is a good compromise between the decentralized and centralized approaches, particularly for large wide-spread infrastructure deployments. For example, if you have six regions and in each region you have 10 Kubernetes clusters, rather than:
 
 - Deploying Workers into each cluster, which results in 60 deployments
 - Deploying Workers into one region and routing traffic across regions, which introduces a single point of failure
 
-A hybrid approach is to have a dedicated Kubernetes cluster or manage instance group per region, which results in only six deployments. The 10 clusters in each region send data to the dedicated OPW deployment in that region.
+A hybrid approach uses a dedicated Kubernetes cluster or managed instance group in each region, resulting in only six deployments. The 10 clusters within each region send their data to the regional Observability Pipelines Worker (OPW) deployment.
 
 ## Optimize the instance
 
 ### Instance sizing
 
-Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][7] enabled. Do not rely on a statically configured number of VMs or containers. This ensures that if the number of events spike, you can safely handle the traffic without data loss. It also ensures high availability should a Worker go down for any reason.
+Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][7] enabled. Do not rely on a statically configured number of VMs or containers. This helps ensure you can safely handle traffic spikes without data loss and maintain high availability if a Worker goes down.
 
 For high throughput environments, Datadog recommends larger machine types because they typically have higher network bandwidth. Consult your cloud provider's documentation for details (for example, [Amazon EC2 instance network bandwith][8]).
 
