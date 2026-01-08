@@ -576,6 +576,8 @@ List all projects, sorted by creation date. The most recently created projects a
 | ---- | ---- | --- |
 | `filter[id]` | string | The ID of a project to search for. |
 | `filter[name]` | string | The name of a project to search for. |
+| `filter[is_deleted]` | boolean | Filter for deleted projects. |
+| `include[user_data]` | boolean | Include user data in the response. |
 | `page[cursor]` | string | List results with a cursor provided in the previous query. |
 | `page[limit]` | int | Limits the number of results. |
 
@@ -605,6 +607,7 @@ Create a project. If there is an existing project with the same name, the API re
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
+| `ml_app` | string | ML app identifier. |
 | `name` (_required_) | string | Unique project name. |
 | `description` | string | Project description. |
 
@@ -628,6 +631,7 @@ Partially update a project object. Specify the fields to update in the payload.
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
+| `ml_app` | string | ML app identifier. |
 | `name` | string | Unique project name. |
 | `description` | string | Project description. |
 
@@ -636,10 +640,13 @@ Partially update a project object. Specify the fields to update in the payload.
 | Field | Type | Description |
 | ---- | ---- | ---- |
 | `id` | UUID | Unique project ID. Set at the top level `id` field within the [Data](#object-data) object. |
+| `ml_app` | string | ML app identifier. |
 | `name` | string | Unique project name. |
 | `description` | string | Project description. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+| `deleted_at` | timestamp | Timestamp representing when the resource was deleted (soft delete). |
+| `author` | object | User who created the project. |
 
 {{% /collapse-content %}}
 
@@ -651,7 +658,7 @@ Delete one or more projects.
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
-| `project_ids` (_required_) | []UUID | List of project IDs to delete. |
+| `project_ids` (_required_) | array of strings | List of project IDs to delete. |
 
 **Response**
 
@@ -673,6 +680,8 @@ List all datasets, sorted by creation date. The most recently-created datasets a
 | ---- | ---- | --- |
 | `filter[name]` | string | The name of a dataset to search for. |
 | `filter[id]` | string | The ID of a dataset to search for. |
+| `filter[is_deleted]` | boolean | Filter for deleted datasets. |
+| `include[user_data]` | boolean | Include user data in the response. |
 | `page[cursor]` | string | List results with a cursor provided in the previous query. |
 | `page[limit]` | int | Limits the number of results. |
 
@@ -687,12 +696,16 @@ List all datasets, sorted by creation date. The most recently-created datasets a
 | Field | Type | Description |
 | ---- | ---- | ---- |
 | `id` | string | Unique dataset ID. Set at the top level `id` field within the [Data](#object-data) object. |
+| `project_id` | string | Unique project ID. |
 | `name` | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
 | `current_version` | int | The current version number of the dataset. Versions start at 0 and increment when records are added or modified. |
+| `dataset_type` | string | Type of dataset. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+| `deleted_at` | timestamp | Timestamp representing when the resource was deleted (soft delete). |
+| `author` | object | User who created the dataset. |
 
 {{% /collapse-content %}}
 
@@ -707,6 +720,7 @@ Create a dataset. If there is an existing dataset with the same name, the API re
 | `name` (_required_) | string | Unique dataset name. |
 | `description` | string | Dataset description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the dataset. |
+| `dataset_type` | string | Type of dataset. |
 
 **Response**
 
@@ -751,11 +765,18 @@ List all dataset records, sorted by creation date. The most recently-created rec
 | ---- | ---- | ---- |
 | `id` | string | Unique record ID. |
 | `dataset_id` | string | Unique dataset ID. |
+| `span_id` | string | Associated span ID. |
+| `trace_id` | string | Associated trace ID. |
 | `input` | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
 | `expected_output` | any (string, number, Boolean, object, array) | Expected output. |
 | `metadata` | json | Arbitrary key-value metadata associated with the record. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+| `deleted_at` | timestamp | Timestamp representing when the resource was deleted (soft delete). |
+| `ttl` | string | Time-to-live for the record. |
+| `version` | int | Record version number. |
+| `author` | object | User who created the record. |
+| `_dd` | object | Internal Datadog attributes including content preview metadata. |
 
 {{% /collapse-content %}}
 
@@ -769,12 +790,14 @@ Appends records for a given dataset.
 | ---- | ---- | --- |
 | `deduplicate` | bool | If `true`, deduplicates appended records. Defaults to `true`. |
 | `records` (_required_) | [][RecordReq](#object-recordreq) | List of records to create. |
+| `create_new_version` | bool | If `true`, creates a new dataset version. |
 
 #### Object: RecordReq
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
-| `input` (_required_) | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
+| `id` | string | Optional record ID. |
+| `input` | any (string, number, Boolean, object, array) | Data that serves as the starting point for an experiment. |
 | `expected_output` | any (string, number, Boolean, object, array) | Expected output. |
 | `metadata` | json | Arbitrary key-value metadata associated with the record. |
 
@@ -902,12 +925,19 @@ List all experiments, sorted by creation date. The most recently-created experim
 | `id` | UUID | Unique experiment ID. Set at the top level `id` field within the [Data](#object-data) object. |
 | `project_id` | string | Unique project ID. |
 | `dataset_id` | string | Unique dataset ID. |
+| `dataset_version` | int | Dataset version number. |
+| `dataset_name` | string | Dataset name. |
+| `experiment` | string | Experiment identifier. |
 | `name` | string | Unique experiment name. |
 | `description` | string | Experiment description. |
 | `metadata` | json | Arbitrary key-value metadata associated with the experiment. |
+| `aggregate_data` | json | Aggregated experiment data. |
+| `run_count` | int | Number of experiment runs. |
 | `config` | json | Configuration used when creating the experiment. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
+| `deleted_at` | timestamp | Timestamp representing when the resource was deleted (soft delete). |
+| `author` | object | User who created the experiment. |
 
 {{% /collapse-content %}}
 
@@ -927,6 +957,7 @@ Create an experiment. If there is an existing experiment with the same name, the
 | `ensure_unique` | bool | If `true`, Datadog generates a new experiment with a unique name in the case of a conflict. Default is `true`. |
 | `metadata` | json | Arbitrary key-value metadata associated with the experiment. |
 | `config` | json | Configuration used when creating the experiment. |
+| `run_count` | int | Number of runs for the experiment. |
 
 **Response**
 
@@ -954,6 +985,8 @@ Partially update an experiment object. Specify the fields to update in the paylo
 | ---- | ---- | ---- |
 | `name` | string | Unique experiment name. |
 | `description` | string | Experiment description. |
+| `dataset_id` | string | Unique dataset ID. |
+| `metadata` | json | Arbitrary key-value metadata associated with the experiment. |
 
 **Response**
 
@@ -1004,8 +1037,10 @@ Push events (spans and metrics) for an experiment.
 | ---- | ---- | ---- |
 | `trace_id` | string | Trace ID. |
 | `span_id` | string | Span ID. |
+| `parent_id` | string | Parent span ID. |
 | `project_id` | string | Project ID. |
 | `dataset_id` | string | Dataset ID. |
+| `dataset_record_id` | string | Dataset record ID associated with this span. |
 | `name` | string | Span name (for example, task name). |
 | `start_ns` | number | Span start time in nanoseconds. |
 | `duration` | number | Span duration in nanoseconds. |
@@ -1015,19 +1050,25 @@ Push events (spans and metrics) for an experiment.
 | `meta.output` | json | Output payload associated with the span. |
 | `meta.expected_output` | json | Expected output for the span. |
 | `meta.error` | object | Error details: `message`, `stack`, `type`. |
+| `meta.span` | object | Span-specific metadata (for example, `kind`). |
+| `meta.metadata` | json | Arbitrary key-value metadata. |
 
 #### Object: Metric
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
+| `id` | string | Metric ID (internally generated UUID). |
 | `span_id` | string | Associated span ID. |
-| `metric_type` | string | Metric type. One of: `score`, `categorical`. |
+| `metric_type` | string | Metric type. One of: `score`, `categorical`, `boolean`. |
 | `timestamp_ms` | number | UNIX timestamp in milliseconds. |
 | `label` | string | Metric label (evaluator name). |
 | `score_value` | number | Score value (when `metric_type` is `score`). |
 | `categorical_value` | string | Categorical value (when `metric_type` is `categorical`). |
+| `boolean_value` | boolean | Boolean value (when `metric_type` is `boolean`). |
+| `metric_source` | string | Source of the metric (for example, `custom`, `summary`). |
+| `eval_metric_type` | string | Type of evaluation metric. |
 | `metadata` | json | Arbitrary key-value metadata associated with the metric. |
-| `error.message` | string | Optional error message for the metric. |
+| `error` | object | Error details: `message`, `stack`, `type`. |
 
 **Response**
 
