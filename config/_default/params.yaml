@@ -265,7 +265,6 @@ core_product:
 unsupported_sites:
   actions: [gov]
   adaptive_sampling: [gov]
-  adobe_experience_manager: [us3,ap1,ap2]
   agent_flare: [gov]
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
@@ -327,6 +326,7 @@ unsupported_sites:
   safety_center: [gov]
   scorecards: [gov]
   self_service_actions: [gov]
+  service_remapping_rules: [gov]
   snmp_profile_manager: [gov]
   status_pages: [gov]
   synthetics_email_validation: [gov]

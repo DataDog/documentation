@@ -196,7 +196,7 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 [1]: https://app.datadoghq.com/ci/test/flaky
 [2]: https://app.datadoghq.com/source-code/repositories
 [3]: /tests/explorer
-[4]: /service_management/case_management
+[4]: /incident_response/case_management
 [5]: /integrations/slack/?tab=datadogforslack
 [6]: /tests/setup/dotnet/
 [7]: /tests/setup/go/
