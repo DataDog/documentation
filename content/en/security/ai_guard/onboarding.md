@@ -467,6 +467,42 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 
 [1]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.54.0
 {{% /tab %}}
+{{% tab "Ruby" %}}
+Starting with [dd-trace-rb v2.25.0][1], a new Ruby SDK is available. This SDK offers a simplified interface for interacting with the REST API directly from JavaScript applications.
+
+The following sections provide practical usage examples:
+
+#### Example: Evaluate a user prompt {#ruby-example-evaluate-user-prompt}
+
+```ruby
+result = Datadog::AIGuard.evaluate(
+  Datadog::AIGuard.message(role: :system, content: "You are an AI Assistant"),
+  Datadog::AIGuard.message(role: :user, content: "What is the weather like today?"),
+  allow_raise: false
+)
+```
+
+The evaluate method receives the following parameters:
+- `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
+- `allow_raise` (optional): boolean flag; if set to `true`, the SDK raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled.
+
+The method returns an Evaluation object containing:
+- `action`: `ALLOW`, `DENY`, or `ABORT`.
+- `reason`: natural language summary of the decision.
+- `tags`: list of tags linked to the evaluation (e.g. ```["indirect-prompt-injection", "instruction-override", "destructive-tool-call"]```)
+
+#### Example: Evaluate a tool call {#ruby-example-evaluate-tool-call}
+
+Like evaluating user prompts, the method can also be used to evaluate tool calls:
+
+```ruby
+result = Datadog::AIGuard.evaluate(
+  Datadog::AIGuard.assistant(id: "call_1", tool_name: "shell", arguments: '{"command": "shutdown"}'),
+)
+```
+
+[1]: https://github.com/DataDog/dd-trace-rb/releases
+{{% /tab %}}
 {{< /tabs >}}
 
 ## View AI Guard data in Datadog {#in-datadog}
