@@ -40,6 +40,8 @@ rum_browser_sdk_version_for_advanced_config_options:
 - id: lte_2_13_0
 - id: gte_2_17_0
 - id: gte_4_13_0
+- id: gte_4_49_0
 - id: gte_5_22_0
 - id: gte_5_28_0
-  default: true
+- id: gte_6_4_0
+  default: true 

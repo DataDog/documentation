@@ -24,6 +24,10 @@ options:
 - label: ">=5.4.0"
   id: gte_5_4_0
 
+# 4.49.0 or later
+- label: ">=4.49.0"
+  id: gte_4_49_0
+
 # 5.4.0 or later
 - label: ">=5.22.0"
   id: gte_5_22_0
@@ -31,3 +35,7 @@ options:
 # 5.4.0 or later
 - label: ">=5.28.0"
   id: gte_5_28_0
+
+# 6.4.0
+- label: ">=6.4.0"
+  id: gte_6_4_0
