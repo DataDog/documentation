@@ -40898,7 +40898,6 @@ components:
                 type: STRING
               primary_keys:
               - id
-            sync_enabled: false
             tags:
             - test_tag
           type: reference_table
@@ -40930,10 +40929,6 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadata'
         schema:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesSchema'
-        sync_enabled:
-          description: Whether this table is synced automatically.
-          example: false
-          type: boolean
         tags:
           description: Tags for organizing and filtering reference tables.
           example:
