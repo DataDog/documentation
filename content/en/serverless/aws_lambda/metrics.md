@@ -480,12 +480,6 @@ Distributions provide `avg`, `sum`, `max`, `min`, `count` aggregations by defaul
 
 Datadog provides granular information about the custom metrics you're ingesting, the tag cardinality, and management tools for your custom metrics within the [Metrics Summary page][15] of the Datadog app. You can view all serverless custom metrics under the 'Serverless' tag in the Distribution Metric Origin [facet panel][16]. You can also control custom metrics volumes and costs with [Metrics without Limits™][17].
 
-### Estimate your serverless pricing
-
-Deploy the Datadog Lambda pricing estimator to get an estimate of your serverless monitoring costs. This CloudFormation stack analyzes your Lambda usage and provides cost projections.
-
-[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=dd-serverless-pricing-estimator&templateURL=https%3A%2F%2Fserverless-pricing-estimator.s3.us-east-1.amazonaws.com%2Fdd-serverless-pricing-estimator.yaml)
-
 [9]: /logs/logs_to_metrics/
 [10]: /tracing/trace_pipeline/generate_metrics/
 [11]: /metrics/distributions/
