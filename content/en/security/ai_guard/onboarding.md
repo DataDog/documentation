@@ -458,7 +458,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
             AIGuard.ToolCall.toolCall(
                 "call_1",
                 "shell",
-                "{"command": "shutdown"}"
+                "{\"command\": \"shutdown\"}"
             )
         )
     )
