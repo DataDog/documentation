@@ -39,7 +39,7 @@ To help prevent leaking sensitive data, the Agent can be configured to scrub the
 
 - Annotation values
 - Label values
-- Probe configurations (HTTP headers & commands)
+- Probe configurations (HTTP headers and commands)
 - Environment variables 
 - Container exec commands
 
