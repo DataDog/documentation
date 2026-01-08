@@ -59,7 +59,7 @@ Scrubbing is enabled by default using the following sensitive keywords:
 - `credentials`
 - `stripetoken`
 
-You can supply additional sensitive keywords by providing a space-delimited list in the environment variable: `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words. You need to set up this environment variable for the following agents:
+You can supply additional sensitive keywords by providing a space-delimited list in the environment variable: `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to the default words and does not overwrite them. To use this environment variable, you must set it up for the following Agents:
 
 - Core Agent
 - Cluster Agent
