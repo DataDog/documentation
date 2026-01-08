@@ -14,7 +14,7 @@ further_reading:
 
 {{< img src="/incident_response/incident_automations_workflow.png" alt="Incident automations workflow diagram showing automation actions." style="width:100%;" >}}
 
-Automations enable you to customize and extend incident management to fit your organization's specific processes. Automatically trigger actions based on incident events such as severity changes, role assignments, state transitions, or postmortem generation.
+Automations enable you to customize and extend incident management to fit your organization's specific processes. Automatically trigger actions based on incident events such as severity changes, or state transitions.
 
 Automations are powered by [Datadog Workflow Automation][1] and are included in your Incident Management billing at no additional cost.
 
@@ -196,7 +196,7 @@ To run automations on private incidents, use a user or service account with the 
 
 ### Security considerations
 
-Be aware that execution history (including private incident data) is visible to anyone in your organization. To run automations on private incidents securely:
+By default, execution history (including private incident data) is visible to anyone in your organization. To run automations on private incidents securely:
 
 1. Use a service account with `Private Incidents Global Access` permission.
 1. Restrict viewer access to only users who should see private incident data.
