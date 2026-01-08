@@ -130,11 +130,11 @@ To configure a widget using Change Tracking data:
 4.	Configure your filters (**Service** is required).
 5.	(Optional) For widgets that support grouping, use **Group by** to split results.
 
-{{< img src="/change_tracking/change-tracking-datasource-widget.png" alt="Change Tracking datasource widgets" style="width:50%;" >}}
+{{< img src="/change_tracking/change-tracking-datasource-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
 
 For Timeseries widgets, Change Tracking can also be enabled as an **event overlay** from the **Event Overlays** section. This displays changes overlaid on top of a timeseries to help correlate them with metric behavior.
 
-{{< img src="/change_tracking/change-tracking-datasource-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:50%;" >}}
+{{< img src="/change_tracking/change-tracking-datasource-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
 
 
 #### View change details
