@@ -15890,7 +15890,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Deployment ID.
+          description: Deployment ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         service:
           description: Service name.
@@ -16028,8 +16030,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Failure ID. Must have at least 16 characters. Required to update
-            a previously sent failure.
+          description: Failure ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         name:
           description: Failure name.
