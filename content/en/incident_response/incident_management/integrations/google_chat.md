@@ -18,7 +18,7 @@ The Google Chat integration for Datadog Incident Management connects your incide
 
 ## Prerequisites
 
-Install the integration through the [Google Chat Integration tile][1]. A Google Workspace admin must configure delegated user permissions and set up a target audience and add that to the integration tile. For more information, see the [Google Chat integration][2] documentation.
+Install the integration through the [Google Chat Integration tile][1]. A Google Workspace administrator must configure delegated user permissions and set up a target audience and add that to the integration tile. For more information, see the [Google Chat integration][2] documentation.
 
 ## Incident Spaces
 
