@@ -60,7 +60,7 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Click the **Signals** tab at the top of the page.
 1. Click on a security signal from the table.
 1. In the **What Happened** section, see the logs that matched the query. Hover over the query to see the query details.
-    - You can also see specific information like username or network IP. In **Rule Details**, click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details. you will like thiss
+    - You can also see specific information like username or network IP. In **Rule Details**, click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
 1. In the **Next Steps** section:
    1. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
       - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
