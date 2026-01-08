@@ -65,7 +65,7 @@ Datadog goes through all Software Catalog definitions and checks whether the fin
 Some findings might not contain a file path. In those cases, Datadog cannot evaluate `codeLocations` for that finding, and this mechanism is skipped.
 
 <div class="alert alert-danger">
-Services defined with a **Software Catalog schema v2.x** do *not* support `codeLocations`. Existing definitions can be upgraded to the v3 schema in the [Software Catalog][102]. After migration is completed, changes might take up to 24 hours to apply to findings. If you are unable to upgrade to v3, Datadog falls back to alternative linking techniques (described below). These rely on less precise heuristics, so accuracy might vary depending on the Code Security product and your use of other Datadog features.
+Services defined with a Software Catalog schema v2.x do not support codeLocations. Existing definitions can be upgraded to the v3 schema in the Software Catalog. After migration is completed, changes might take up to 24 hours to apply to findings. If you are unable to upgrade to v3, Datadog falls back to alternative linking techniques (described below). These rely on less precise heuristics, so accuracy might vary depending on the Code Security product and your use of other Datadog features.
 </div>
 
 #### Example (v3 schema)

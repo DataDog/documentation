@@ -1,5 +1,8 @@
 ---
 title: Enabling App and API Protection for Nginx
+aliases:
+  - /security/application_security/setup/standalone/nginx
+  - /security/application_security/setup/threat_detection/nginx
 further_reading:
     - link: 'https://github.com/DataDog/nginx-datadog/'
       tag: "Source Code"
