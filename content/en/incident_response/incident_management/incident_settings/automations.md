@@ -43,6 +43,8 @@ From this page, you can view, create, enable, disable, and manage your automatio
 
 ## Creating an automation
 
+You can build automations entirely from the Incident Management settings UI. For more advanced workflows, open the automation in the [Workflow Automation][1] editor to access additional actions and logic capabilities.
+
 When you click **New Automation**, you have two options for building your workflow:
 
 ### Start with a blueprint
@@ -51,7 +53,7 @@ Blueprints provide pre-configured automation templates for common use cases, suc
 
 ### Choose an action
 
-For custom processes, you can build an automation from scratch by starting with an individual action. You can choose from incident-specific actions (such as "Create a postmortem") or explore the full Datadog [Action Catalog][5], which contains thousands of integrations.
+For custom processes, you can build an automation from scratch by starting with an individual action. You can choose from incident-specific actions or explore the full Datadog [Action Catalog][5], which contains thousands of integrations.
 
 ## Configuring triggers and conditions
 
@@ -176,16 +178,6 @@ To use a service account:
 
 You must have the `Service Account Write` permission to configure service accounts for automations.
 
-### Viewer access
-
-By default, anyone in your organization can view automations and their execution history. To restrict viewer access:
-
-1. Open the automation.
-2. Click the **Permissions** icon.
-3. Select **No access** for the **Viewers** role.
-
-<!-- TODO **Note**: This capability is scheduled for release in early January 2026. -->
-
 ## Private incidents
 
 Automations can run on private incidents with the following considerations:
@@ -220,34 +212,16 @@ Use notification rules for straightforward notifications and automations for com
 
 Use the following examples to help you build your own incident automations.
 
-{{% collapse-content title="Enforce postmortem requirements" level="h4" expanded=false %}}
-
-**Trigger**: On a schedule (every day)<br>
-**Condition**: State is `Resolved`, no postmortem exists, and resolved more than 3 days ago<br>
-**Actions**:
-1. Reopen the incident
-2. Send Slack message to incident commander
-3. Update incident timeline with reminder
-{{% /collapse-content %}}
-
-{{% collapse-content title="Auto-page team on assignment" level="h4" expanded=false %}}
+{{% collapse-content title="Add teams to the incident channel" level="h4" expanded=false %}}
 
 **Trigger**: When declared or updated<br>
 **Condition**: Severity is `SEV-1` or `SEV-2`<br>
 **Actions**:
 1. Detect when teams field changes
-2. Page the on-call engineer for the newly added team
-3. Send welcome message to incident channel
-{{% /collapse-content %}}
+2. Add new teams to the incident teams list
+3. For all users in the team, invite them to the incident slack channel
 
-{{% collapse-content title="Generate enhanced postmortems" level="h4" expanded=false %}}
-
-**Trigger**: When declared or updated<br>
-**Condition**: State changes to `Resolved`<br>
-**Actions**:
-1. Query external monitoring systems
-2. Fetch relevant dashboards and logs
-3. Generate postmortem with aggregated data
+Access the [blueprint in Datadog][9].
 {{% /collapse-content %}}
 
 {{% collapse-content title="Periodic status reminders" level="h4" expanded=false %}}
@@ -258,6 +232,9 @@ Use the following examples to help you build your own incident automations.
 1. Check time since last update
 2. Send Slack reminder if > 30 minutes
 3. Prompt commander to update incident status
+
+Access the [blueprint in Datadog][10].
+
 {{% /collapse-content %}}
 
 
@@ -273,3 +250,5 @@ Use the following examples to help you build your own incident automations.
 [6]: /incident_response/incident_management/incident_settings/information#test-incidents
 [7]: /incident_response/incident_management/investigate/timeline
 [8]: /incident_response/incident_management/incident_settings/notification_rules
+[9]: https://app.datadoghq.com/workflow/blueprints/add-datadog-team-to-incident-channel
+[10]: https://app.datadoghq.com/workflow/blueprints/nudge-incident-commander-old-incident
