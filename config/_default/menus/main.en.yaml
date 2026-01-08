@@ -4274,21 +4274,26 @@ menu:
       identifier: dyninst
       parent: tracing_trace_collection
       weight: 204
+    - name: Enabling
+      url: tracing/trace_collection/dynamic_instrumentation/enabling/
+      identifier: dyninst_enable
+      parent: dyninst
+      weight: 2041
     - name: Autocomplete and Search
       url: tracing/trace_collection/dynamic_instrumentation/symdb
       identifier: dyninst_symdb
       parent: dyninst
-      weight: 2041
+      weight: 2042
     - name: Expression Language
       url: tracing/trace_collection/dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 2042
+      weight: 2043
     - name: Sensitive Data Scrubbing
       url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
       identifier: dyninst_sensitive_data_scrubbing
       parent: dyninst
-      weight: 2043
+      weight: 2044
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -4553,17 +4558,7 @@ menu:
       url: internal_developer_portal/software_catalog/endpoints/monitor_endpoints
       identifier: monitor_endpoints
       parent: endpoint_observability
-      weight: 1003    
-    - name: Dynamic Instrumentation
-      url: tracing/dynamic_instrumentation/
-      identifier: dyninst
-      parent: tracing
-      weight: 11
-    - name: Enabling
-      url: tracing/dynamic_instrumentation/enabling
-      identifier: dyninst_enable
-      parent: dyninst
-      weight: 1101
+      weight: 1003
     - name: Live Debugger
       url: tracing/live_debugger/
       identifier: live_debugger
