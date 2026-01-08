@@ -2847,24 +2847,18 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
-      weight: 10000
     - name: Agents
       url: actions/agents/
       pre: robot-wui
       identifier: agents
       parent: actions_heading
-      weight: 20000
+      weight: 10000
     - name: Workflow Automation
       url: actions/workflows/
       pre: workflows
       identifier: workflows
       parent: actions_heading
-      weight: 30000
+      weight: 20000
     - name: Build Workflows
       url: actions/workflows/build/
       parent: workflows
@@ -2925,7 +2919,7 @@ menu:
       pre: app-builder
       identifier: app_builder
       parent: actions_heading
-      weight: 40000
+      weight: 30000
     - name: Build Apps
       url: actions/app_builder/build/
       parent: app_builder
@@ -2996,12 +2990,6 @@ menu:
       parent: app_builder
       identifier: app_builder_saved_actions
       weight: 10
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
-      weight: 30000
     - name: Datastores
       url: actions/datastores/
       pre: datastores-wui
