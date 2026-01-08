@@ -43,7 +43,7 @@ To help prevent leaking sensitive data, the Agent can be configured to scrub the
 - Environment variables 
 - Container exec commands
 
-The scrubbing algorithm attempts to detect key-value pairs containing secrets based on a set of sensitive keywords, replacing corresponding values with `********`. This logic is applied to structured key-value pairs (such as environment variables) as well as values that look like JSON or YAML blobs which may contain their own pairs.
+The scrubbing algorithm attempts to detect key-value pairs containing secrets based on a set of sensitive keywords, replacing corresponding values with `********`. This logic is applied to structured key-value pairs (such as environment variables) as well as values that look like JSON or YAML content, which may contain key-value pairs within the content.
 
 Scrubbing is enabled by default using the following sensitive keywords:
 
