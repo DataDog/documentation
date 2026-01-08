@@ -70,7 +70,7 @@ env:
       value: "customword1 customword2 customword3"
 ```
 
-**Note**: Additional sensitive words must be provided as lowercase strings. The Agent lowercases content before matching. This means the sensitive word `password` scrubs `MY_PASSWORD=1234` to `MY_PASSWORD=********`, while the sensitive word `PASSWORD` will never match anything.
+**Note**: Any additional sensitive words must be provided as lowercase strings. The Agent converts text to lowercase before matching for sensitive words. If the sensitive word is `password`, `MY_PASSWORD=1234` is scrubbed to `MY_PASSWORD=********` because the Agent converts `MY_PASSWORD` to `my_password`, which mean the sensitive word `PASSWORD` does not match anything.
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
