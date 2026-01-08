@@ -35,7 +35,7 @@ container_include: ["name:frontend.*"]
 
 ### Scrubbing sensitive information from manifests
 
-To help prevent sensitive data from leaking, the agent can be configured to scrub tje collected Kubernetes YAML manifests. This scrubbing feature is applied to:
+To help prevent leaking sensitive data, the Agent can be configured to scrub the collected Kubernetes YAML manifests. This scrubbing feature is applied to:
 
 - Annotation values
 - Label values
