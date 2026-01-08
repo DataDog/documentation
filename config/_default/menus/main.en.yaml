@@ -5784,11 +5784,16 @@ menu:
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_failures
       weight: 102
+    - name: Change Failure Detection
+      url: dora_metrics/change_failure_detection/
+      parent: dora_metrics
+      identifier: dora_metrics_change_failure_detection
+      weight: 2
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 2
+      weight: 3
     - name: Feature Flags
       url: feature_flags/
       pre: ci
