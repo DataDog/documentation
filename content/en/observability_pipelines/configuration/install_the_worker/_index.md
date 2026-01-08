@@ -37,34 +37,48 @@ After setting up your pipeline using the API or Terraform, follow the instructio
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Run the below command to install the Worker.
+1. If you are using:
+    - **Secrets Manager**: Run this command to install the Worker:
+        ```
+        docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+            -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+            -e DD_SITE=<DATADOG_SITE> \
+            -v /path/to/local/bootstrap.yaml:/etc/observability-pipelines-worker/bootstrap.yaml \
+            datadog/observability-pipelines-worker run
+        ```
+    - **Environment variables**: Run this command to install the Worker:
 
-```shell
-docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
-    -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
-    -e DD_SITE=<DATADOG_SITE> \
-    -e <SOURCE_ENV_VARIABLE> \
-    -e <DESTINATION_ENV_VARIABLE> \
-    -p 8088:8088 \
-    datadog/observability-pipelines-worker run
-```
+        ```shell
+        docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+            -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+            -e DD_SITE=<DATADOG_SITE> \
+            -e <SOURCE_ENV_VARIABLE> \
+            -e <DESTINATION_ENV_VARIABLE> \
+            -p 8088:8088 \
+            datadog/observability-pipelines-worker run
+        ```
 
-You must replace the placeholders with the following values:
-- `<DATADOG_API_KEY>`: Your Datadog API.
-    - **Note**: The API key must be [enabled for Remote Configuration][1].
-- `<PIPELINE_ID>`: The ID of your pipeline.
-- `<DATADOG_SITE>`: The [Datadog site][2].
-- `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
-    - See [Environment Variables][3] for a list of source environment variables.
-- `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
-    - See [Environment Variables][3] for a list of destination environment variables.
+    Replace the placeholders with the following values, if applicable:
+    - `<DATADOG_API_KEY>`: Your Datadog API.
+        - **Note**: The API key must be [enabled for Remote Configuration][1].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][2].
+    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+        - See [Environment Variables][3] for a list of source environment variables.
+    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+        - See [Environment Variables][3] for a list of destination environment variables.
 
-**Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
-```
--p 8282:8088 datadog/observability-pipelines-worker run
-```
+    **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
+    ```
+    -p 8282:8088 datadog/observability-pipelines-worker run
+    ```
+1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+1. Restart the Worker to use the updated bootstrap file:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
 
 See [Update Existing Pipelines][3] if you want to make changes to your pipeline's configuration.
 
@@ -208,28 +222,29 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 After you set up your source, destinations, and processors on the Build page of the pipeline UI, follow the steps on the Install page to install the Worker.
 
 1. Select the platform on which you want to install the Worker.
-1. Enter the [environment variables][7] for your sources and destinations, if applicable.
-1. Follow the instructions on installing the Worker for your platform. The command provided in the UI to install the Worker has the relevant environment variables populated.
+1. In **Review your secrets management**, if you select:
+    - **Secrets Manager** (Recommended): Ensure that your secrets are configured in your secrets manager.
+    - **Environment Variables**: Enter the [environment variables][7] for your sources and destinations, if applicable.
+1. Follow the instructions on installing the Worker for your platform.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
 1. Click **Select API key** to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][1].
-1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-    ```shell
-    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
-        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
-        -e DD_SITE=<DATADOG_SITE> \
-        -e <SOURCE_ENV_VARIABLE> \
-        -e <DESTINATION_ENV_VARIABLE> \
-        -p 8088:8088 \
-        datadog/observability-pipelines-worker run
-    ```   
-    **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
-    ```
-    -p 8282:8088 datadog/observability-pipelines-worker run
-    ```
+1. Run the command provided in the UI to install the Worker. If you are using:
+    - Secrets Manager: The command points to the Worker bootstrap file that you configure to resolve secrets using your secrets manager.
+    - Environment variables: The command is automatically populated with the environment variables you entered earlier.
+    -  **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
+        ```
+        -p 8282:8088 datadog/observability-pipelines-worker run
+        ```
+1. If you are using **Secrets Manager**:
+    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+    1. Restart the Worker to use the updated bootstrap file:
+        ```
+        sudo systemctl restart observability-pipelines-worker
+        ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
@@ -303,7 +318,13 @@ Follow the steps below if you want to use the one-line installation script to in
     - **Note**: The API key must be [enabled for Remote Configuration][2].
 1. Run the one-step command provided in the UI to install the Worker.
 
-    **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+    **Note**: If you are using environment variables, the environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+1. If you are using **Secrets Manager**:
+    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+    1. Restart the Worker to use the updated bootstrap file:
+        ```
+        sudo systemctl restart observability-pipelines-worker
+        ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
