@@ -1,6 +1,8 @@
 ---
 title: Enable Data Jobs Monitoring for Databricks
 description: "Enable Data Jobs Monitoring for Databricks workspaces with OAuth or Personal Access Token authentication and Datadog Agent installation."
+aliases:
+  - /data_jobs/databricks
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
@@ -10,11 +12,7 @@ further_reading:
       text: "Detect issues and optimize spend with Databricks serverless job monitoring"
 ---
 
-[Data Jobs Monitoring][7] gives visibility into the performance and reliability of your Apache Spark and Databricks jobs.
-
-{{< callout url="https://www.datadoghq.com/product-preview/databricks-serverless-job-monitoring" btn_hidden="false" header="Join the Preview: Databricks Serverless Job Monitoring">}}
-Databricks Serverless Job Monitoring helps you detect issues with jobs running on Serverless or SQL Warehouse compute. Complete the form to request access.
-{{< /callout >}}
+[Data Jobs Monitoring][7] gives visibility into the performance and reliability of your Databricks jobs and workflows running on clusters or serverless compute.
 
 ## Setup
 

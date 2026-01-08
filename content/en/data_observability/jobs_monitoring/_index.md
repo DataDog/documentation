@@ -1,6 +1,8 @@
 ---
 title: Data Jobs Monitoring
 description: "Monitor performance, reliability, and cost efficiency of data processing jobs across platforms like EMR, Databricks, Dataproc, and Kubernetes."
+aliases:
+  - /data_jobs/
 further_reading:
   - link: '/data_streams'
     tag: 'Documentation'
@@ -22,11 +24,15 @@ Data Jobs Monitoring provides visibility into the performance, reliability, and 
 
 ## Setup
 
-Data Jobs Monitoring supports the monitoring of jobs on Amazon EMR, Databricks (AWS, Azure, Google Cloud), Google Dataproc, Spark on Kubernetes, and Apache Airflow.
-
-To get started, select your platform and follow the installation instructions:
+Data Jobs Monitoring supports multiple job technologies. To get started, select your technology and follow the installation instructions:
 
 {{< partial name="data_jobs/setup-platforms.html" >}}
+
+<br/>
+
+Data Jobs Monitoring also supports Apache Spark jobs on the following platforms:
+
+{{< partial name="data_jobs/setup-platforms-spark.html" >}}
 
 <br/>
 
