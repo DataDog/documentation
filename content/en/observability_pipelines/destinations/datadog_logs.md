@@ -24,6 +24,8 @@ There are no required setup steps.
 
 You can route logs to multiple Datadog organizations. After routing has been set up, you can [view metrics for the component or specific organizations](#view-metrics-for-the-component-or-specific-organizations) to which you are routing logs.
 
+**Note**: You can route up to 100 Datadog organizations.
+
 {{< img src="observability_pipelines/destinations/multi_dd_orgs.png" alt="The Datadog Logs destination showing us1 and us3 org" style="width:45%;" >}}
 
 Click **Route to Multiple Organizations** to set up routing to multiple Datadog organizations.
