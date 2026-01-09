@@ -38,6 +38,8 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
 
 ##### Add an organization
 
+<div class="alert alert-warning">Logs that do not match any of the organizations' filters are dropped. The <a href="#component-level-metrics">component metric</a> <code>Data dropped (intentional)</code> shows the number logs that do not match the filters and are dropped.</div>
+
 1. Enter a name for the organization.
 	- **Note**: The name does not have to correspond to the actual name of the Datadog organization.
 1. Define a filter query. Only logs that match the specified filter query are sent to the organization. See [Observability Pipelines Search Syntax][3] for more information on writing filter queries.
