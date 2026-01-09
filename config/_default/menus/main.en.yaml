@@ -2847,11 +2847,6 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
       weight: 10000
     - name: Agents
       url: actions/agents/
@@ -2996,11 +2991,6 @@ menu:
       parent: app_builder
       identifier: app_builder_saved_actions
       weight: 10
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
       weight: 30000
     - name: Datastores
       url: actions/datastores/
