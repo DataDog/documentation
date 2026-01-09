@@ -11453,6 +11453,190 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Status Pages
+      url: /api/latest/status-pages/
+      identifier: status-pages
+      generated: true
+    - name: Update degradation
+      url: '#update-degradation'
+      identifier: status-pages-update-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDegradation
+        unstable: []
+        order: 12
+    - name: Get degradation
+      url: '#get-degradation'
+      identifier: status-pages-get-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDegradation
+        unstable: []
+        order: 14
+    - name: Delete degradation
+      url: '#delete-degradation'
+      identifier: status-pages-delete-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDegradation
+        unstable: []
+        order: 15
+    - name: Create degradation
+      url: '#create-degradation'
+      identifier: status-pages-create-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDegradation
+        unstable: []
+        order: 11
+    - name: Update component
+      url: '#update-component'
+      identifier: status-pages-update-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateComponent
+        unstable: []
+        order: 7
+    - name: Get component
+      url: '#get-component'
+      identifier: status-pages-get-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetComponent
+        unstable: []
+        order: 9
+    - name: Delete component
+      url: '#delete-component'
+      identifier: status-pages-delete-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteComponent
+        unstable: []
+        order: 10
+    - name: Create component
+      url: '#create-component'
+      identifier: status-pages-create-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateComponent
+        unstable: []
+        order: 6
+    - name: List components
+      url: '#list-components'
+      identifier: status-pages-list-components
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListComponents
+        unstable: []
+        order: 8
+    - name: Update status page
+      url: '#update-status-page'
+      identifier: status-pages-update-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatusPage
+        unstable: []
+        order: 2
+    - name: Get status page
+      url: '#get-status-page'
+      identifier: status-pages-get-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStatusPage
+        unstable: []
+        order: 4
+    - name: Delete status page
+      url: '#delete-status-page'
+      identifier: status-pages-delete-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatusPage
+        unstable: []
+        order: 5
+    - name: List degradations
+      url: '#list-degradations'
+      identifier: status-pages-list-degradations
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDegradations
+        unstable: []
+        order: 13
+    - name: Create status page
+      url: '#create-status-page'
+      identifier: status-pages-create-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatusPage
+        unstable: []
+        order: 1
+    - name: List status pages
+      url: '#list-status-pages'
+      identifier: status-pages-list-status-pages
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStatusPages
+        unstable: []
+        order: 3
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
