@@ -36,7 +36,7 @@ SNMP Profile Manager テンプレートでは、GUI ベースのガイド付き�
   - [NDM Device Profiles Edit][20]: デバイス プロファイルの編集を許可します (Datadog Admin Role に含まれます)。
 - Remote Configuration を使って [作成したデバイス プロファイルを自動適用する](#apply-a-profile-to-created-devices) には、`datadog-agent/conf.d/snmp.d/conf.yaml` ファイルで次の設定を有効にしてください。
 
-  {{< highlight yaml "hl_lines=5" >}}{{< highlight yaml "hl_lines=5" >}}
+  {{< highlight yaml "hl_lines=5" >}}
     init_config:
       loader: core
       use_device_id_as_hostname: true
