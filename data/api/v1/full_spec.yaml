@@ -4388,6 +4388,7 @@ components:
       - appsec_usage
       - asm_serverless_traced_invocations_usage
       - asm_serverless_traced_invocations_percentage
+      - bits_ai_investigations_usage
       - browser_usage
       - ci_pipeline_indexed_spans_usage
       - ci_test_indexed_spans_usage
@@ -4413,6 +4414,7 @@ components:
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
+      - flex_stored_logs
       - functions_usage
       - incident_management_monthly_active_users_usage
       - indexed_spans_usage
@@ -4422,6 +4424,7 @@ components:
       - invocations_usage
       - lambda_traced_invocations_usage
       - llm_observability_usage
+      - llm_spans_usage
       - logs_indexed_15day_usage
       - logs_indexed_180day_usage
       - logs_indexed_1day_usage
@@ -4469,6 +4472,7 @@ components:
       - APPSEC_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
+      - BITS_AI_INVESTIGATIONS_USAGE
       - BROWSER_USAGE
       - CI_PIPELINE_INDEXED_SPANS_USAGE
       - CI_TEST_INDEXED_SPANS_USAGE
@@ -4494,6 +4498,7 @@ components:
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
+      - FLEX_STORED_LOGS
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
       - INDEXED_SPANS_USAGE
@@ -4503,6 +4508,7 @@ components:
       - INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
       - LLM_OBSERVABILITY_USAGE
+      - LLM_SPANS_USAGE
       - LOGS_INDEXED_15DAY_USAGE
       - LOGS_INDEXED_180DAY_USAGE
       - LOGS_INDEXED_1DAY_USAGE
@@ -8805,6 +8811,8 @@ components:
       - appsec_percentage
       - asm_serverless_traced_invocations_usage
       - asm_serverless_traced_invocations_percentage
+      - bits_ai_investigations_usage
+      - bits_ai_investigations_percentage
       - browser_usage
       - browser_percentage
       - ci_visibility_itr_usage
@@ -8847,6 +8855,8 @@ components:
       - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
+      - flex_stored_logs_usage
+      - flex_stored_logs_percentage
       - functions_usage
       - functions_percentage
       - incident_management_monthly_active_users_usage
@@ -8859,6 +8869,8 @@ components:
       - lambda_traced_invocations_percentage
       - llm_observability_usage
       - llm_observability_percentage
+      - llm_spans_usage
+      - llm_spans_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
       - ndm_netflow_usage
@@ -8962,6 +8974,8 @@ components:
       - APPSEC_PERCENTAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
+      - BITS_AI_INVESTIGATIONS_USAGE
+      - BITS_AI_INVESTIGATIONS_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
       - CI_VISIBILITY_ITR_USAGE
@@ -9004,6 +9018,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
+      - FLEX_STORED_LOGS_USAGE
+      - FLEX_STORED_LOGS_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -9016,6 +9032,8 @@ components:
       - LAMBDA_TRACED_INVOCATIONS_PERCENTAGE
       - LLM_OBSERVABILITY_USAGE
       - LLM_OBSERVABILITY_PERCENTAGE
+      - LLM_SPANS_USAGE
+      - LLM_SPANS_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
       - NDM_NETFLOW_USAGE
@@ -9169,6 +9187,14 @@ components:
         asm_serverless_traced_invocations_usage:
           description: The Application Security Monitoring Serverless traced invocations
             usage by tag(s).
+          format: double
+          type: number
+        bits_ai_investigations_percentage:
+          description: The percentage of Bits AI `SRE` investigation usage by tag(s).
+          format: double
+          type: number
+        bits_ai_investigations_usage:
+          description: The Bits AI `SRE` investigation usage by tag(s).
           format: double
           type: number
         browser_percentage:
@@ -9363,6 +9389,14 @@ components:
           description: The Fargate usage by tags.
           format: double
           type: number
+        flex_stored_logs_percentage:
+          description: The percentage of Flex Stored Logs usage by tags.
+          format: double
+          type: number
+        flex_stored_logs_usage:
+          description: The Flex Stored Logs usage by tags.
+          format: double
+          type: number
         functions_percentage:
           description: The percentage of Lambda function usage by tag(s).
           format: double
@@ -9434,6 +9468,14 @@ components:
           type: number
         llm_observability_usage:
           description: The LLM Observability usage by tag(s).
+          format: double
+          type: number
+        llm_spans_percentage:
+          description: The percentage of LLM Spans usage by tag(s).
+          format: double
+          type: number
+        llm_spans_usage:
+          description: The LLM Spans usage by tag(s).
           format: double
           type: number
         logs_indexed_15day_percentage:
@@ -16776,7 +16818,7 @@ components:
         tests:
           description: Array of Synthetic tests configuration.
           items:
-            $ref: '#/components/schemas/SyntheticsTestDetails'
+            $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           type: array
       type: object
     SyntheticsLocalVariableParsingOptionsType:
@@ -17807,7 +17849,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: For browser test, the steps of the test.
+          description: The steps of the test if they exist.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -17859,6 +17901,52 @@ components:
       - API
       - BROWSER
       - MOBILE
+    SyntheticsTestDetailsWithoutSteps:
+      description: Object containing details about your Synthetic test, without test
+        steps.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsTestConfig'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        locations:
+          description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        message:
+          description: Notification message associated with the test.
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsTestOptions'
+        public_id:
+          description: The test public ID.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
+        tags:
+          description: Array of tags attached to the test.
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsTestDetailsType'
+      type: object
     SyntheticsTestExecutionRule:
       description: Execution rule for a Synthetic test.
       enum:
@@ -36293,7 +36381,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SyntheticsTestDetails'
+                $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           description: OK
         '403':
           content:
@@ -37768,7 +37856,10 @@ paths:
         code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
-        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\nThe
+        following values have been **deprecated**:\n    `estimated_indexed_spans_usage`,
+        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`,
+        `llm_observability_usage`, `llm_observability_percentage`."
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -38355,7 +38446,7 @@ paths:
           The following values have been **deprecated**:
 
           `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
-          `estimated_ingested_spans_percentage`.'
+          `estimated_ingested_spans_percentage`, `llm_observability_usage`, `llm_observability_percentage`.'
         in: query
         name: fields
         required: true

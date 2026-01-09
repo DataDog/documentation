@@ -339,6 +339,9 @@
     "request_description": "The updated definition of the retention filter.",
     "request_schema_description": "The body of the retention filter to be updated."
   },
+  "GetServiceList": {
+    "summary": "Get service list"
+  },
   "DeleteApps": {
     "description": "Delete multiple apps in a single request from a list of app IDs. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Delete Multiple Apps",
@@ -1185,14 +1188,22 @@
     "request_schema_description": "Update request for an incident."
   },
   "ListIncidentAttachments": {
-    "description": "Get all attachments for a given incident.",
-    "summary": "Get a list of attachments"
+    "description": "List incident attachments.",
+    "summary": "List incident attachments"
   },
-  "UpdateIncidentAttachments": {
-    "description": "The bulk update endpoint for creating, updating, and deleting attachments for a given incident.",
-    "summary": "Create, update, and delete incident attachments",
-    "request_description": "Incident Attachment Payload.",
-    "request_schema_description": "The update request for an incident's attachments."
+  "CreateIncidentAttachment": {
+    "description": "Create an incident attachment.",
+    "summary": "Create incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentAttachment": {
+    "summary": "Delete incident attachment"
+  },
+  "UpdateIncidentAttachment": {
+    "summary": "Update incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
@@ -2026,6 +2037,30 @@
     "description": "Get a notification channel for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
     "summary": "Get an On-Call notification channel for a user"
   },
+  "ListUserNotificationRules": {
+    "description": "List the notification rules for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "List On-Call notification rules for a user"
+  },
+  "CreateUserNotificationRule": {
+    "description": "Create a new notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Create an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for creating a notification rule for a user"
+  },
+  "DeleteUserNotificationRule": {
+    "description": "Delete a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Delete an On-Call notification rule for a user"
+  },
+  "GetUserNotificationRule": {
+    "description": "Get a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Get an On-Call notification rule for a user"
+  },
+  "UpdateUserNotificationRule": {
+    "description": "Update a notification rule for a user. The authenticated user must be the target user or have the `on_call_admin` permission",
+    "summary": "Update an On-Call notification rule for a user",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -2105,6 +2140,12 @@
   "ListProcesses": {
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
+  },
+  "SubmitProductAnalyticsEvent": {
+    "description": "Send server-side events to Product Analytics. Server-side events are retained for 15 months.\n\nServer-Side events in Product Analytics are helpful for tracking events that occur on the server,\nas opposed to client-side events, which are captured by Real User Monitoring (RUM) SDKs.\nThis allows for a more comprehensive view of the user journey by including actions that happen on the server.\nTypical examples could be `checkout.completed` or `payment.processed`.\n\nIngested server-side events are integrated into Product Analytics to allow users to select and filter\nthese events in the event picker, similar to how views or actions are handled.\n\n**Requirements:**\n- At least one of `usr`, `account`, or `session` must be provided with a valid ID.\n- The `application.id` must reference a Product Analytics-enabled application.\n\n**Custom Attributes:**\nAny additional fields in the payload are flattened and searchable as facets.\nFor example, a payload with `{\"customer\": {\"tier\": \"premium\"}}` is searchable with\nthe syntax `@customer.tier:premium` in Datadog.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: The request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
+    "summary": "Send server-side events",
+    "request_description": "Server-side event to send (JSON format).",
+    "request_schema_description": "A Product Analytics server-side event."
   },
   "GetAccountFacetInfo": {
     "description": "Get facet information for account attributes including possible values and counts",
@@ -2628,6 +2669,10 @@
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
   },
+  "ListSecurityFindings": {
+    "description": "Get a list of security findings that match a search query.\n\nThis endpoint requires one of the following permissions:\n- `security_monitoring_findings_read`\n- `appsec_vm_read`\n\n### Query Syntax\n\nThis endpoint uses the logs query syntax. Findings attributes (living in the custom. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "summary": "List security findings"
+  },
   "DetachCase": {
     "description": "Detach security findings from their case.\nThis operation dissociates security findings from their associated cases without deleting the cases themselves. You can detach security findings from multiple different cases in a single request, with a limit of 50 security findings per request. Security findings that are not currently attached to any case will be ignored.",
     "summary": "Detach security findings from their case",
@@ -2657,6 +2702,12 @@
     "summary": "Create Jira issues for security findings",
     "request_description": "",
     "request_schema_description": "List of requests to create Jira issues for security findings."
+  },
+  "SearchSecurityFindings": {
+    "description": "Get a list of security findings that match a search query.\n\nThis endpoint requires one of the following permissions:\n- `security_monitoring_findings_read`\n- `appsec_vm_read`\n\n### Query Syntax\n\nThe API uses the logs query syntax. Findings attributes (living in the custom. namespace) are prefixed by @ when queried. Tags are queried without a prefix.\n\nExample: `@severity:(critical OR high) @status:open team:platform`",
+    "summary": "Search security findings",
+    "request_description": "",
+    "request_schema_description": "The request body for searching security findings."
   },
   "ListAssetsSBOMs": {
     "description": "Get a list of assets SBOMs for an organization.\n\n### Pagination\n\nPlease review the [Pagination section](#pagination) for the \"List Vulnerabilities\" endpoint.\n\n### Filtering\n\nPlease review the [Filtering section](#filtering) for the \"List Vulnerabilities\" endpoint.\n\n### Metadata\n\nPlease review the [Metadata section](#metadata) for the \"List Vulnerabilities\" endpoint.",
@@ -3144,6 +3195,12 @@
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
   },
+  "PatchGlobalVariable": {
+    "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
+    "summary": "Patch a global variable",
+    "request_description": "JSON Patch document with operations to apply.",
+    "request_schema_description": "JSON Patch request for global variable."
+  },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
     "summary": "List tag pipeline rulesets"
@@ -3305,6 +3362,25 @@
     "summary": "Update a user's membership attributes on a team",
     "request_description": "",
     "request_schema_description": "Team membership request"
+  },
+  "GetTeamNotificationRules": {
+    "summary": "Get team notification rules"
+  },
+  "CreateTeamNotificationRule": {
+    "summary": "Create team notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a team notification rule"
+  },
+  "DeleteTeamNotificationRule": {
+    "summary": "Delete team notification rule"
+  },
+  "GetTeamNotificationRule": {
+    "summary": "Get team notification rule"
+  },
+  "UpdateTeamNotificationRule": {
+    "summary": "Update team notification rule",
+    "request_description": "",
+    "request_schema_description": "Request to create or update a team notification rule"
   },
   "GetTeamPermissionSettings": {
     "description": "Get all permission settings for a given team.",

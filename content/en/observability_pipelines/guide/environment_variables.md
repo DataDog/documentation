@@ -77,13 +77,13 @@ Some Observability Pipelines components require setting up environment variables
 ### Amazon Security Lake
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
 
-### Chronicle
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
-
 ### CrowdStrike NG-SIEM
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
-### Datadog
+### Datadog Logs
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+### Datadog Metrics
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
 ### Datadog Archives
@@ -99,6 +99,9 @@ Some Observability Pipelines components require setting up environment variables
 
 ### Google Pub/Sub
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
+
+### Google SecOps
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
 
 ### HTTP Client
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}

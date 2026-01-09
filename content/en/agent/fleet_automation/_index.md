@@ -3,6 +3,9 @@ title: Fleet Automation
 description: "Centrally govern and remotely manage Datadog Agents and OpenTelemetry Collectors at scale with configuration views, upgrades, flare collection, and API key rotation."
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/fleet-automation-central-configuration
+  tag: Blog
+  text: Centrally set up and scale monitoring of your infrastructure and apps with Datadog Fleet Automation
 - link: https://www.datadoghq.com/blog/manage-opentelemetry-collectors-with-datadog-fleet-automation
   tag: Blog
   text: Manage all your OpenTelemetry collectors with Datadog Fleet Automation
@@ -49,6 +52,11 @@ Fleet Automation enables you to centrally manage Datadog Agents across all your 
   - The Agent and Datadog Distribution of OTel Collector (DDOT) configuration view is enabled by default in Agent versions 7.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
   - The upstream OTel Collector configuration view is enabled by setting the [Datadog Extension][8] in your collector configuration file.
 - **View Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
+
+### Fleet Automation API
+Fleet Automation provides a public API that allows you to programmatically view and manage Datadog Agents at scale. For full endpoint details and usage examples, see the [Fleet Automation API documentation][9]. 
+
+**Note**: The Fleet Automation API does not support all Datadog Agent configuration capabilities.
 
 <div class="alert alert-info">
 Remote management of Agents in containerized workloads is not supported.
@@ -120,3 +128,4 @@ For information on setting up roles and permissions, see [Access Control][5].
 [6]: /agent/fleet_automation/remote_management/
 [7]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site
 [8]: https://docs.datadoghq.com/opentelemetry/integrations/datadog_extension/#setup
+[9]: https://docs.datadoghq.com/api/latest/fleet-automation/

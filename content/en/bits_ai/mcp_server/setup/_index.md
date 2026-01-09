@@ -272,6 +272,14 @@ Queries and analyzes historical or real-time metric data, supporting custom quer
 - Get Redis latency metrics for the production environment.
 - Display memory usage trends for our database servers.
 
+### `get_datadog_metric_context`
+*Toolset: **core***\
+Retrieves detailed information about a metric including metadata, available tags, and tag values for filtering and grouping.
+
+- What tags are available for the `system.cpu.user` metric?
+- Show me all possible values for the `env` tag on `redis.info.latency_ms`.
+- Get metadata and dimensions for the `requests.count` metric.
+
 ### `search_datadog_monitors`
 *Toolset: **core***\
 Retrieves information about Datadog monitors, including their statuses, thresholds, and alert conditions.
@@ -299,6 +307,21 @@ Lists available Datadog dashboards and key details.
 - Find shared dashboards for the engineering team.
 
 **Note**: This tool lists relevant dashboards but provides limited detail about their contents.
+
+### `get_datadog_notebook`
+*Toolset: **core***\
+Retrieves detailed information about a specific notebook by ID, including name, status, and author.
+
+- Get details for notebook abc-123-def.
+- Show me the contents of the debugging notebook from yesterday.
+
+### `search_datadog_notebooks`
+*Toolset: **core***\
+Lists and searches Datadog notebooks with filtering by author, tags, and content.
+
+- Show me all notebooks created by the platform team.
+- Find notebooks related to performance investigation.
+- List notebooks tagged with `incident-response`.
 
 ### `search_datadog_hosts`
 *Toolset: **core***\
@@ -332,6 +355,14 @@ Lists services in Datadog's Software Catalog with details and team information.
 - List services owned by the platform team.
 - Find services related to payment processing.
 
+### `search_datadog_service_dependencies`
+*Toolset: **core***\
+Retrieves service dependencies (upstream/downstream) and services owned by a team.
+
+- Show me all upstream services that call the checkout service.
+- What downstream services does the payment API depend on?
+- List all services owned by the platform team.
+
 ### `search_datadog_spans`
 *Toolset: **core***\
 Retrieves spans from APM traces with filters such as service, time, resource, and so on.
@@ -339,6 +370,14 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 - Show me spans with errors from the checkout service.
 - Find slow database queries in the last 30 minutes.
 - Get spans for failed API requests to our payment service.
+
+### `analyze_datadog_logs`
+*Toolset: **core***\
+Analyze Datadog logs using SQL queries for counting, aggregations, and numerical analysis. Use this for statistical analysis.
+
+- Count error logs by service in the last hour.
+- Show me the top 10 HTTP status codes with their counts.
+- Which services were logging the most during that time period?
 
 ### `search_datadog_logs`
 *Toolset: **core***\
@@ -398,11 +437,19 @@ Aggregates CI pipeline events to produce statistics, metrics, and grouped analyt
 
 ### `get_datadog_flaky_tests`
 *Toolset: **software-delivery***\
-Searches Datadog [Test Optimization][25] for flaky tests and returns triage-ready details, including failure-rate stats, flaky state/category, ownership context (`codeowners`, `services`, `module`, `suite`), branch/SHA history, CI pipeline impact, and recent test-run metadata. Supports pagination with `page_cursor` and sorting by fields such as `failure_rate` or `pipelines_failed`.
+Searches Datadog [Test Optimization][25] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
 
 - Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
 - List flaky tests in the `timeout` category with high failure rate (50%+) so I can prioritize fixes.
+
+### `aggregate_datadog_test_events`
+*Toolset: **software-delivery***\
+Aggregates Datadog Test Optimization events to quantify reliability and performance trends with aggregation functions, optional metrics, group-by facets, and configurable test levels.
+
+- Count the number of failed tests over the last week, grouped by branch.
+- Show me the 95th-percentile duration for each test suite to identify the slowest ones.
+- Count all passing and failing tests, grouped by code owners.
 
 ## Context efficiency
 

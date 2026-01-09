@@ -54,12 +54,16 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.143.0 or higher.
+    * Datadog Helm chart version 3.160.0 or higher.
     * [kubectl][4].
+* **Network**:
+  {{% otel-network-requirements %}}
 
 ## Installation and configuration
 
 This guide uses the Datadog Helm chart to configure the DDOT Collector gateway. Check out all the available configurations on the [Datadog Helm chart README][8].
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Deploying the gateway with a daemonset
 
@@ -102,6 +106,8 @@ exporters:
     tls:
       insecure: true
 processors:
+  infraattributes:
+    cardinality: 2
   batch:
     timeout: 10s
 connectors:
@@ -112,15 +118,15 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
+      processors: [infraattributes, batch]
       exporters: [otlphttp, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [batch]
+      processors: [infraattributes, batch]
       exporters: [otlphttp]
     logs:
       receivers: [otlp]
-      processors: [batch]
+      processors: [infraattributes, batch]
       exporters: [otlphttp]
 ```
 
@@ -143,6 +149,11 @@ exporters:
 processors:
   batch:
     timeout: 10s
+extension:
+  datadog:
+    api:
+      key: ${env:DD_API_KEY}
+    deployment_type: gateway
 service:
   pipelines:
     traces:
@@ -539,17 +550,29 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
                 exporters: [otlp]
     ```
     
+## View gateway pods on Fleet Automation
+
+The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
+
+To view your gateway pods:
+
+1. Navigate to **Integrations > Fleet Automation**.
+
+  {{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Fleet Automation page showing DDOT gateway pods" style="width:100%;" >}}
+
+2. Select a gateway pod to view detailed build information and the running Collector configuration.
+
+  {{< img src="opentelemetry/embedded_collector/fleet_automation3.png" alt="Fleet Automation page showing the collector config of one DDOT gateway pod" style="width:100%;" >}}
+
 ## Known limitations
 
-  * **Gateway pods on Fleet Automation**: Standalone gateway pods are not yet visible on the Fleet Automation page. Only DaemonSet Collectors are displayed. This is being actively addressed.
   * **Startup race condition**: When deploying the DaemonSet and gateway in the same release, DaemonSet pods might start before the gateway service is ready, causing initial connection error logs. The OTLP exporter automatically retries, so these logs can be safely ignored. Alternatively, deploy the gateway first and wait for it to become ready before deploying the DaemonSet.
-  * **`infraattributes` processor requirement**: The `infraattributes` processor requires a `datadog` exporter to be defined in the same Collector configuration, even if it's not used in a pipeline. The Collector will fail to start if the exporter is missing. To resolve this, add a `datadog` exporter to your configuration, even if you do not reference it in a service pipeline.
   * **Ignorable Core Agent Connection Logs**: Gateway pods might generate warning logs about failing to connect to a core Datadog Agent (for example, `grpc: addrConn.createTransport failed to connect`). This occurs because the gateway deployment does not include a core agent in the same pod. These logs are expected and can be safely ignored. This is being actively addressed.
-  
+
 ## Further reading
   
 {{< partial name="whats-next/whats-next.html" >}}
-
+  
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
 [3]: https://helm.sh
@@ -560,3 +583,4 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
 [8]: http://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [9]: http://github.com/kubernetes-sigs/metrics-server
 [10]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/datadogextension

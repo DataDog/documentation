@@ -7,6 +7,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
+    tag: "Blog"
+    text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
     tag: "Blog"
     text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
@@ -37,6 +40,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-oci/"
     tag: "Blog"
     text: "Manage and optimize your OCI costs with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/cambia-health-cost-optimization"
+    tag: "Blog"
+    text: "How Cambia Health Solutions saved $30,000 monthly with Cloud Cost Management and the Datadog Resource Catalog"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'

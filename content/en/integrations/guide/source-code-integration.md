@@ -40,11 +40,11 @@ Datadog's Source Code Integration allows you to connect your Git repositories to
 
 ## Connect your Git repositories to Datadog
 
-To use most source code-related features, you must connect your Git repositories to Datadog. By default, when synchronizing your repositories, Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
+To use most source code-related features, you must connect your Git repositories to Datadog through Datadog's first-party source code management (SCM) provider integrations. After connecting your repositories, Datadog may store the contents of your repositories for up to 7 days to reduce repeated requests to the repository and support feature performance.
 
 ### Source code management providers
 
-Datadog supports the following features for the following source code management (SCM) providers. See [Usage](#usage) for more details about each feature:
+Datadog supports the following features for the SCM providers listed below. See [Usage](#usage) for more details about each feature:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
@@ -82,7 +82,7 @@ Install Datadog's [GitLab Source Code integration][101] using the [integration t
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
 <div class="alert alert-warning">
-Repositories from Azure DevOps instances are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not<strong> supported.
+Repositories from Azure DevOps instances are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not</strong> supported.
 </div>
 
 Install Datadog's Azure DevOps Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Azure DevOps repositories.
