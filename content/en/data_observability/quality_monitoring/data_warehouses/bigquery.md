@@ -1,6 +1,8 @@
 ---
 title: BigQuery
 description: 'Connect BigQuery to Datadog Data Observability to monitor data quality, track usage, and detect issues.'
+aliases:
+  - /data_observability/datasets/?tab=bigquery
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'

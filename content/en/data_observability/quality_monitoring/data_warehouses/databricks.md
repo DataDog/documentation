@@ -1,6 +1,8 @@
 ---
 title: Databricks
 description: "Connect Databricks to Datadog Data Observability to monitor data quality, track usage, and detect issues."
+aliases:
+  - /data_observability/datasets/?tab=databricks
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
