@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-You can customize Synthetic monitor messages using [Handlebars][1] templating. This page covers advanced techniques such as comments, conditions, and iterations.
+You can customize Synthetic monitor messages using [handlebars][1] templating. This page covers advanced techniques such as comments, conditions, and iterations.
 
 Use advanced notifications when you need to:
 
