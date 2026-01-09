@@ -30,7 +30,7 @@ Datadog supports tracking LaunchDarkly flags using the [LaunchDarkly integration
 To track LaunchDarkly feature flags in your services' Change Tracking timeline:
 
 1. Enable the [Datadog integration][1] in LaunchDarkly.
-1. Go to **Flags > `<your-feature-flag-name>` > Settings** in LaunchDarkly.
+1. Go to **Flags > `<your-feature-flag-name>` in LaunchDarkly.
 1. In **Datadog tags**, add a tag with key `service` and value `<your-service-name>`, matching your Datadog service name exactly.
 1. Click **Save changes**.
 
