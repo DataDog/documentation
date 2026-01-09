@@ -6,6 +6,9 @@ aliases:
   - /security/cspm/resource_catalog
   - /security/misconfigurations/resource_catalog
 further_reading:
+- link: "https://www.datadoghq.com/blog/cambia-health-cost-optimization"
+  tag: "Blog"
+  text: "How Cambia Health Solutions saved $30,000 monthly with Cloud Cost Management and the Datadog Resource Catalog"
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Cloud Security Misconfigurations"

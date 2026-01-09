@@ -3,10 +3,10 @@ title: Reliability Overview
 aliases:
 - /software_catalog/eng_reports/reliability_overview/
 further_reading:
-- link: "/service_management/service_level_objectives/"
+- link: "/service_level_objectives/"
   tag: "Documentation"
   text: "Service Level Objectives"
-- link: "service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
 - link: "dashboards/"
