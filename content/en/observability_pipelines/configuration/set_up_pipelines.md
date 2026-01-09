@@ -178,7 +178,7 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 
 <div class="alert alert-info">Creating pipelines using Terraform is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
-<div class="alert alert-warning">Terraform 3.84.0 replaces standalone processors with <a href="/observability_pipelines/processors/#processor-groups">processor groups</a> and is a breaking change. If you want to upgrade to Terraform 3.84.0, see the <a href="https://github.com/DataDog/terraform-provider-datadog/pull/3346">PR description</a> for instructions on how to migrate your existing resources.</div>
+<div class="alert alert-warning"><a href="https://github.com/DataDog/terraform-provider-datadog/releases/tag/v3.84.0">Terraform 3.84.0</a> replaces standalone processors with <a href="/observability_pipelines/processors/#processor-groups">processor groups</a> and is a breaking change. If you want to upgrade to Terraform 3.84.0, see the <a href="https://github.com/DataDog/terraform-provider-datadog/pull/3346">PR description</a> for instructions on how to migrate your existing resources.</div>
 
 1. You can use the [datadog_observability_pipeline][10] module to create a pipeline using Terraform.
 
