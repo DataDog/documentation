@@ -14,14 +14,14 @@ further_reading:
 ---
 
 ## Overview
-Data Observability helps data teams detect, resolve, and prevent issues that affect data quality, performance, and cost. It enables teams to monitor anomalies, troubleshoot faster, and maintain trust in the data powering downstream systems.
+Data Observability (DO) helps data teams deliver reliable data for analytics, production systems, and AI applications. By unifying quality and jobs monitoring from production to consumption, teams can detect and remediate issues faster while optimizing cost and performance.
 
 ## Key capabilities
 
-With Data Observability, you can:
-- Catch data quality issues with ML-powered monitoring for volume, freshness, and column distributions
-- Trace data dependencies and assess blast radius with column-level lineage from source to downstream systems
-- Monitor Databricks and Spark jobs across K8s, Amazon EMR, and Google Dataproc to identify failures and optimize costs
+- **Detect failures early**: Catch bad data and stalled pipelines in warehouses like Snowflake, Databricks, and BigQuery via ML-powered monitors before dashboards, stakeholders, or AI models are impacted.
+- **Accelerate remediation**: Triage faster using end-to-end lineage to pinpoint root causes, assess incident blast radius, and route to the right owner.
+- **Optimize cost & performance**: Control spend and improve efficiency with job-level visibility and proactive query recommendations to fix inefficiencies in Databricks and Spark jobs across K8s, Amazon EMR, and Google Dataproc.
+- **Unify end-to-end observability**: Correlate data quality, pipeline execution, and infrastructure signals in one place, spanning the entire data lifecycle.
 
 ## Get started
 
