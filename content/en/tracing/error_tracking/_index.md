@@ -36,7 +36,7 @@ To get started with configuring your repository, see the [Source Code Integratio
 
 ## Use span attributes to track error spans
 
-The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. An error span must contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] to be tracked. If an error is reported multiple times within a service, only the top-most error is kept.
+The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. An error span must contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] and belong to a complete trace to be tracked. If an error is reported multiple times within a service, only the top-most error is kept.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 
