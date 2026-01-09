@@ -1,6 +1,8 @@
 ---
 title: Quality Monitoring
 description: "Detect data freshness delays, unusual patterns, and column-level metric changes before they impact downstream systems."
+aliases:
+  - /data_observability/datasets
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
