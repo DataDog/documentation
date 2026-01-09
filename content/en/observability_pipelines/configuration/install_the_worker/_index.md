@@ -58,7 +58,7 @@ After setting up your pipeline using the API or Terraform, follow the instructio
             datadog/observability-pipelines-worker run
         ```
 
-    Replace the placeholders with the following values, if applicable:
+    You must replace the placeholders with the following values, if applicable:
     - `<DATADOG_API_KEY>`: Your Datadog API.
         - **Note**: The API key must be [enabled for Remote Configuration][1].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -162,11 +162,16 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
 
-1. Run the one-step command below to install the Worker.
+1. If you are using:
+    - **Secrets Manager**: Run this one-step command to install the Worker:
+    ```bash
+    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
+    ```
+    - **Environment variables**: Run this one-step command to install the Worker:
     ```bash
     DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
     ```
-    Replace the placeholders with the following values, if applicable:
+    You must replace the placeholders with the following values, if applicable:
     - `<DATADOG_API_KEY>`: Your Datadog API.
         - **Note**: The API key must be [enabled for Remote Configuration][1].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -321,7 +326,7 @@ Follow the steps below if you want to use the one-line installation script to in
 1. Click **Select API key** to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][2].
 1. Run the one-step command provided in the UI to install the Worker.
-    **Note**: If you are using environment variables, the environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+    - **Note**: If you are using environment variables, the environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
 1. If you are using **Secrets Manager**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management][3] for more information.
     1. Restart the Worker to use the updated bootstrap file:
@@ -398,16 +403,25 @@ If you prefer not to use the one-line installation script for Linux, follow thes
     sudo apt-get update
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
-1. Add your keys, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
-    ```shell
-    sudo cat <<EOF > /etc/default/observability-pipelines-worker
-    DD_API_KEY=<DATADOG_API_KEY>
-    DD_OP_PIPELINE_ID=<PIPELINE_ID>
-    DD_SITE=<DATADOG_SITE>
-    <SOURCE_ENV_VARIABLES>
-    <DESTINATION_ENV_VARIABLES>
-    EOF
-    ```
+1. If you are using:
+    - **Secrets Manager**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
+        ```shell
+        sudo cat <<EOF > /etc/default/observability-pipelines-worker
+        DD_API_KEY=<DATADOG_API_KEY>
+        DD_OP_PIPELINE_ID=<PIPELINE_ID>
+        DD_SITE=<DATADOG_SITE>
+        EOF
+        ```
+    - **Environment variables**: Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
+        ```shell
+        sudo cat <<EOF > /etc/default/observability-pipelines-worker
+        DD_API_KEY=<DATADOG_API_KEY>
+        DD_OP_PIPELINE_ID=<PIPELINE_ID>
+        DD_SITE=<DATADOG_SITE>
+        <SOURCE_ENV_VARIABLES>
+        <DESTINATION_ENV_VARIABLES>
+        EOF
+        ```
 1. Start the worker:
     ```
     sudo systemctl restart observability-pipelines-worker
@@ -442,16 +456,25 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
     sudo yum makecache
     sudo yum install observability-pipelines-worker
     ```
-1. Add your keys, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
-    ```shell
-    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
-    DD_API_KEY=<API_KEY>
-    DD_OP_PIPELINE_ID=<PIPELINE_ID>
-    DD_SITE=<SITE>
-    <SOURCE_ENV_VARIABLES>
-    <DESTINATION_ENV_VARIABLES>
-    EOF
-    ```
+1. If you are using:
+    - **Secrets Manager**: Add your API key, site (for example, `datadoghq.com` for US1), and pipelines ID to the Worker's environment file:
+        ```shell
+        sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+        DD_API_KEY=<API_KEY>
+        DD_OP_PIPELINE_ID=<PIPELINE_ID>
+        DD_SITE=<SITE>
+        EOF
+        ```
+    - **Environment variables**: Add your API key, site (for example, `datadoghq.com` for US1), source, and destination environment variables to the Worker's environment file:
+        ```shell
+        sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+        DD_API_KEY=<API_KEY>
+        DD_OP_PIPELINE_ID=<PIPELINE_ID>
+        DD_SITE=<SITE>
+        <SOURCE_ENV_VARIABLES>
+        <DESTINATION_ENV_VARIABLES>
+        EOF
+        ```
 1. Start the worker:
     ```shell
     sudo systemctl restart observability-pipelines-worker
