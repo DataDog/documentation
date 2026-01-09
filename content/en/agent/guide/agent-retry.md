@@ -77,8 +77,7 @@ During Agent shutdown:
 
 
 #### Dropped metrics  
-The Agent reports the number of dropped metric points to the customer’s Datadog organization. (WHICH METRIC CAN THEY USE TO SEE THIS?)
-
+The Agent reports the number of dropped metric points to the customer’s Datadog organization.`(WHICH METRIC CAN THEY USE TO SEE THIS?)`
 
 ## Logs 
 ### Logs retry strategy
@@ -122,7 +121,7 @@ On restart, the Agent resumes reading from the position recorded in the registry
 - TCP logs:
     - Buffer limited to 100 log lines
     - Logs are sent line by line
-    - TCP is still used by some EU1 charts (SHOULD THIS BE INCLUDED?)
+    - TCP is still used by some EU1 charts `(SHOULD THIS BE INCLUDED IN THE PUBLIC FACING DOC?)`
 
 
 ### Monitoring log retries and data loss
@@ -131,37 +130,40 @@ Telemetry is available:
   - In Agent metrics
   - In the `telemetry.log` file included in an Agent flare
 
-<!-- Buffer Health and Data Loss
-  : `logs.bytes_missed`: Bytes lost before consumption
-  : `logs.dropped`: Total logs dropped per destination -->
 
-#### Buffer health and data loss
-  - `logs.bytes_missed`
-  - `logs.dropped`
+Buffer Health and Data Loss
+: `logs.bytes_missed`: Bytes lost before consumption
+: `logs.dropped`: Total logs dropped per destination 
 
-#### Performance and latency
-  - `logs.sender_latency`
-  - `logs.retry_count`
-  - `logs.network_errors`
+Performance and latency
+: `logs.sender_latency`: HTTP sender latency histogram (ms)
+: `logs.retry_count`: Total retried payloads
+: `logs.network_errors`: Total network errors
 
-#### Throughput and volume
-  - `logs.decoded`
-  - `logs.processed`
-  - `logs.sent`
-  - `logs.bytes_sent`
-  - `logs.encoded_bytes_sent`
+Throughput and volume
+: `logs.decoded`: Total decoded logs
+: `logs.processed`: Total processed logs
+: `logs.sent`: Total sent logs
+: `logs.bytes_sent`: Bytes sent before encoding 
+: `logs.encoded_bytes_sent`: Bytes sent after encoding
 
-#### Connection health
-  - `logs_client_http_destination__idle_ms`
-  - `logs_client_http_destination__in_use_ms`
+Connection health
+: `logs_client_http_destination__idle_ms`: Time spent idle (ms) by sender
+: `logs_client_http_destination__in_use_ms`: Time spent sending (ms) by sender
 
-#### HTTP Response health
-  - `logs.destination_http_resp`
+Data loss & errors
+: `logs_client_http_destination__payloads_dropped`: Payloads  dropped due to unrecoverable errors
+: `logs_client_http_destination__send`: Send attempts by `endpoint_host` and error type
 
-#### Buffer capacity and utilization
-  - `logs_component_utilization__ratio`
-  - `logs_component_utilization__items`
-  - `logs_component_utilization__bytes`
+HTTP Response health
+: `logs.destination_http_resp`: HTTP responses by status_code and url
+
+Buffer capacity and utilization
+: `logs_component_utilization__ratio`: Utilization ratio (0-1) by component name and instance
+: `logs_component_utilization__items`: Items in buffer/queue by component name and instance
+: `logs_component_utilization__bytes`: Bytes in buffer/queue by component name and instance
+
+
 
 ### Dual shipping
 When dual shipping is enabled:
@@ -202,13 +204,13 @@ Failed APM payloads are:
   - Older payloads are dropped when queues are full
 
 #### Traces
-  - Configurable via `apm_config.trace_writer.queue_size`
+  - Configurable using `apm_config.trace_writer.queue_size`
   - Default calculation:
      - `max(1, max_memory / max_payload_size)`
      - Typically defaults to **163 payloads**
 
 #### Stats
-  - Configurable via apm_config.stats_writer.queue_size
+  - Configurable using apm_config.stats_writer.queue_size
   - Default calculation:
       - `max(1, max_memory / payload_size)`
       - Typically defaults to **174 payloads**
@@ -219,7 +221,7 @@ When dual shipping is enabled for the APM intake, each endpoint has an independe
 ### Additional payload types
 #### Processes
 
-The Process Agent buffers check results before forwarding them via the metrics forwarder.
+The Process Agent buffers check results before forwarding them using the metrics forwarder.
 
 The processes payload has the following default buffering behavior:
   - Approximately 30 minutes of process data buffered
@@ -231,52 +233,6 @@ Starting with Agent version 7.39:
   - Process and Network (NPM) payloads use separate queues
   - Agent allows buffering of approximately 40 minutes of process data with default settings
 
-These settings are rarely overridden.`(IS THIS A "SHOULD BE RARELOY OVERRIDEN? WHAT AR WE TRYING TO CONVEY TO THE USER HERE?")`
-
-Downstream delivery for Processes uses the **metrics forwarder**, and retry behavior is consistent with [metrics](#metrics-retry-strategy), except that on-disk buffering is not supported.
-
-
-
-
-
-
-<!-- ```sh 
-// Buffer Health & Data Loss
-logs.bytes_missed - Bytes lost before consumption (log rotation, etc.)
-logs.dropped - Total logs dropped per destination
-
-// Performance & Latency
-logs.sender_latency - HTTP sender latency histogram (ms)
-logs.retry_count - Total retried payloads
-logs.network_errors - Total network errors
-
-// Throughput & Volume
-logs.decoded - Total decoded logs
-logs.processed - Total processed logs
-logs.sent - Total sent logs
-logs.bytes_sent - Bytes sent before encoding 
-logs.encoded_bytes_sent - Bytes sent after encoding
-
-// Connection Health
-logs_client_http_destination__idle_ms - Time spent idle (ms) by sender
-logs_client_http_destination__in_use_ms - Time spent sending (ms) by sender
-
-// Data Loss & Errors
-logs_client_http_destination__payloads_dropped - Payloads dropped due to unrecoverable errors
-logs_client_http_destination__send - Send attempts by endpoint_host and error type
-
-// HTTP Response Health
-logs.destination_http_resp - HTTP responses by status_code and url
-
-// Buffer Capacity & Health (processor, sender, strategy)
-logs_component_utilization__ratio - Utilization ratio (0-1) by component name and instance
-logs_component_utilization__items - Items in buffer/queue by component name and instance
-logs_component_utilization__bytes - Bytes in buffer/queue by component name and instance
-
-```
--->
-
-<!--  
 ```sh
 // Assuming we generate ~8 checks/minute (for process/network),
 // this should allow buffering of ~30 minutes of data assuming 
@@ -288,11 +244,12 @@ DefaultProcessQueueSize = 256
 // Allow buffering up to 60 megabytes of payload data in total
 DefaultProcessQueueBytes = 60 * 1000 * 1000
 ```
--->
 
-These settings are rarely overridden by customers.
+These settings are rarely overridden.`(IS THIS A "should BE RARELY OVERRIDEN"? WHAT AR WE TRYING TO CONVEY TO THE USER HERE?")`
 
-Downstream, the Metrics forwarder is used (see above section), and the behavior is therefore similar (with the exception that on-disk buffering is not enabled).
+Downstream delivery for Processes uses the **metrics forwarder**, and retry behavior is consistent with [metrics](#metrics-retry-strategy), except that on-disk buffering is not supported.
+
+
 
 
 <!-- DIAGRAM
