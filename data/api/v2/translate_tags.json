@@ -319,6 +319,10 @@
     "name": "Static Analysis",
     "description": "API for static analysis"
   },
+  "status-pages": {
+    "name": "Status Pages",
+    "description": "Auto-generated tag Status Pages"
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."

@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "name": "[DD Integration Tests] 5e2fd69be33e79aa",
+      "domain_prefix": "dd-integrations-tests-5e2fd69be33e79aa",
+      "enabled": true,
+      "type": "internal",
+      "visualization_type": "bars_and_uptime_percentage"
+    },
+    "type": "status_pages"
+  }
+}

@@ -1889,6 +1889,48 @@
       "description": "Update a span-based metric returns \"OK\" response"
     }
   ],
+  "CreateComponent": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create component returns \"Created\" response"
+    }
+  ],
+  "CreateDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create degradation returns \"Created\" response"
+    }
+  ],
+  "CreateStatusPage": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create status page returns \"Created\" response"
+    }
+  ],
+  "UpdateComponent": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update component returns \"OK\" response"
+    }
+  ],
+  "UpdateDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update degradation returns \"OK\" response"
+    }
+  ],
+  "UpdateStatusPage": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update status page returns \"OK\" response"
+    }
+  ],
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",

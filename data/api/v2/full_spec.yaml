@@ -13081,6 +13081,100 @@ components:
       - findings
       - project
       type: object
+    CreateComponentRequest:
+      example:
+        data:
+          attributes:
+            name: Metrics Intake
+            position: 0
+            type: component
+          relationships:
+            group:
+              data: null
+          type: components
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateComponentRequestData'
+      type: object
+    CreateComponentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    CreateComponentRequestDataAttributes:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/CreateComponentRequestDataAttributesComponentsItems'
+          type: array
+        name:
+          example: ''
+          type: string
+        position:
+          example: 0
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      required:
+      - name
+      - position
+      - type
+      type: object
+    CreateComponentRequestDataAttributesComponentsItems:
+      properties:
+        name:
+          example: ''
+          type: string
+        position:
+          example: 0
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      required:
+      - name
+      - position
+      - type
+      type: object
+    CreateComponentRequestDataAttributesType:
+      enum:
+      - component
+      - group
+      example: component
+      type: string
+      x-enum-varnames:
+      - COMPONENT
+      - GROUP
+    CreateComponentRequestDataRelationships:
+      properties:
+        group:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationshipsGroup'
+      type: object
+    CreateComponentRequestDataRelationshipsGroup:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    CreateComponentRequestDataRelationshipsGroupData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
     CreateConnectionRequest:
       example:
         data:
@@ -13180,6 +13274,76 @@ components:
       required:
       - data
       type: object
+    CreateDegradationRequest:
+      example:
+        data:
+          attributes:
+            components_affected:
+            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+              status: degraded
+            description: Our API is experiencing elevated latency. We are investigating
+              the issue.
+            status: investigating
+            title: Elevated API Latency
+          type: degradations
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDegradationRequestData'
+      type: object
+    CreateDegradationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    CreateDegradationRequestDataAttributes:
+      properties:
+        components_affected:
+          items:
+            $ref: '#/components/schemas/CreateDegradationRequestDataAttributesComponentsAffectedItems'
+          type: array
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+        title:
+          example: ''
+          type: string
+      required:
+      - components_affected
+      - status
+      - title
+      type: object
+    CreateDegradationRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    CreateDegradationRequestDataAttributesStatus:
+      enum:
+      - investigating
+      - identified
+      - monitoring
+      - resolved
+      example: investigating
+      type: string
+      x-enum-varnames:
+      - INVESTIGATING
+      - IDENTIFIED
+      - MONITORING
+      - RESOLVED
     CreateDeploymentGateParams:
       description: Parameters for creating a deployment gate.
       properties:
@@ -13833,6 +13997,138 @@ components:
       type: string
       x-enum-varnames:
       - CREATE_RULESET
+    CreateStatusPageRequest:
+      example:
+        data:
+          attributes:
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            components:
+            - name: API
+              position: 0
+              type: component
+            - components:
+              - name: Login
+                position: 0
+                type: component
+              - name: Settings
+                position: 1
+                type: component
+              name: Web App
+              position: 1
+              type: group
+            - name: Webhooks
+              position: 2
+              type: component
+            domain_prefix: status-page-us1
+            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+            enabled: true
+            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            name: Status Page US1
+            subscriptions_enabled: true
+            type: public
+            visualization_type: bars_and_uptime_percentage
+          type: status_pages
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateStatusPageRequestData'
+      type: object
+    CreateStatusPageRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    CreateStatusPageRequestDataAttributes:
+      properties:
+        company_logo:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItems'
+          type: array
+        domain_prefix:
+          example: ''
+          type: string
+        email_header_image:
+          type: string
+        enabled:
+          example: false
+          type: boolean
+        favicon:
+          type: string
+        name:
+          example: ''
+          type: string
+        subscriptions_enabled:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      required:
+      - domain_prefix
+      - enabled
+      - name
+      - type
+      - visualization_type
+      type: object
+    CreateStatusPageRequestDataAttributesComponentsItems:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    CreateStatusPageRequestDataAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    CreateStatusPageRequestDataAttributesType:
+      enum:
+      - public
+      - internal
+      example: public
+      type: string
+      x-enum-varnames:
+      - PUBLIC
+      - INTERNAL
+    CreateStatusPageRequestDataAttributesVisualizationType:
+      enum:
+      - bars_and_uptime_percentage
+      - bars_only
+      - component_name_only
+      example: bars_and_uptime_percentage
+      type: string
+      x-enum-varnames:
+      - BARS_AND_UPTIME_PERCENTAGE
+      - BARS_ONLY
+      - COMPONENT_NAME_ONLY
     CreateTableRequest:
       description: Request body for creating a new reference table from a local file
         or cloud storage.
@@ -17090,6 +17386,184 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    Degradation:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationData'
+        included:
+          items:
+            $ref: '#/components/schemas/DegradationArrayIncluded'
+          type: array
+      type: object
+    DegradationArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DegradationData'
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/DegradationArrayIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    DegradationArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+      - $ref: '#/components/schemas/StatusPageAsIncluded'
+    DegradationData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DegradationDataAttributes'
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/DegradationDataRelationships'
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    DegradationDataAttributes:
+      properties:
+        components_affected:
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesComponentsAffectedItems'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        description:
+          type: string
+        modified_at:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+        title:
+          type: string
+        updates:
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesUpdatesItems'
+          type: array
+      type: object
+    DegradationDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    DegradationDataAttributesUpdatesItems:
+      properties:
+        components_affected:
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesUpdatesItemsComponentsAffectedItems'
+          type: array
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          type: string
+        id:
+          readOnly: true
+          type: string
+        modified_at:
+          format: date-time
+          readOnly: true
+          type: string
+        started_at:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+      type: object
+    DegradationDataAttributesUpdatesItemsComponentsAffectedItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    DegradationDataRelationships:
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/DegradationDataRelationshipsCreatedByUser'
+        last_modified_by_user:
+          $ref: '#/components/schemas/DegradationDataRelationshipsLastModifiedByUser'
+        status_page:
+          $ref: '#/components/schemas/DegradationDataRelationshipsStatusPage'
+      type: object
+    DegradationDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    DegradationDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    DegradationDataRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsStatusPageData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
     DeleteAppResponse:
       description: The response object after an app is successfully deleted.
       properties:
@@ -40831,6 +41305,114 @@ components:
         title:
           type: string
       type: object
+    PatchComponentRequest:
+      example:
+        data:
+          attributes:
+            name: Metrics Intake Service
+            position: 4
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: components
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchComponentRequestData'
+      type: object
+    PatchComponentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchComponentRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    PatchComponentRequestDataAttributes:
+      properties:
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+      type: object
+    PatchDegradationRequest:
+      example:
+        data:
+          attributes:
+            components_affected:
+            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+              status: operational
+            description: We've deployed a fix and latency has returned to normal.
+              This issue has been resolved.
+            status: resolved
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: degradations
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchDegradationRequestData'
+      type: object
+    PatchDegradationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchDegradationRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    PatchDegradationRequestDataAttributes:
+      properties:
+        components_affected:
+          items:
+            $ref: '#/components/schemas/PatchDegradationRequestDataAttributesComponentsAffectedItems'
+          type: array
+        description:
+          type: string
+        status:
+          $ref: '#/components/schemas/PatchDegradationRequestDataAttributesStatus'
+        title:
+          $ref: '#/components/schemas/PatchDegradationRequestDataAttributesTitle'
+      type: object
+    PatchDegradationRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          example: ''
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    PatchDegradationRequestDataAttributesStatus:
+      enum:
+      - investigating
+      - identified
+      - monitoring
+      - resolved
+      type: string
+      x-enum-varnames:
+      - INVESTIGATING
+      - IDENTIFIED
+      - MONITORING
+      - RESOLVED
+    PatchDegradationRequestDataAttributesTitle:
+      type: string
+    PatchDegradationRequestDataType:
+      default: degradations
+      description: Degradations resource type.
+      enum:
+      - degradations
+      example: degradations
+      type: string
+      x-enum-varnames:
+      - DEGRADATIONS
     PatchIncidentNotificationTemplateRequest:
       description: Update request for a notification template.
       properties:
@@ -40877,6 +41459,63 @@ components:
         version:
           $ref: '#/components/schemas/Version'
       type: object
+    PatchStatusPageRequest:
+      example:
+        data:
+          attributes:
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            domain_prefix: status-page-us1-east
+            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+            enabled: false
+            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            name: Status Page US1 East
+            subscriptions_enabled: false
+            type: internal
+            visualization_type: bars_only
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: status_pages
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchStatusPageRequestData'
+      type: object
+    PatchStatusPageRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchStatusPageRequestDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    PatchStatusPageRequestDataAttributes:
+      properties:
+        company_logo:
+          $ref: '#/components/schemas/PatchStatusPageRequestDataAttributesCompanyLogo'
+        domain_prefix:
+          type: string
+        email_header_image:
+          $ref: '#/components/schemas/PatchStatusPageRequestDataAttributesEmailHeaderImage'
+        enabled:
+          type: boolean
+        favicon:
+          $ref: '#/components/schemas/PatchStatusPageRequestDataAttributesFavicon'
+        name:
+          type: string
+        subscriptions_enabled:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      type: object
+    PatchStatusPageRequestDataAttributesCompanyLogo:
+      type: string
+    PatchStatusPageRequestDataAttributesEmailHeaderImage:
+      type: string
+    PatchStatusPageRequestDataAttributesFavicon:
+      type: string
     PatchTableRequest:
       description: Request body for updating an existing reference table.
       example:
@@ -53943,6 +54582,666 @@ components:
       required:
       - type
       type: object
+    StatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageData'
+        included:
+          items:
+            $ref: '#/components/schemas/StatusPageArrayIncluded'
+          type: array
+      type: object
+    StatusPageArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StatusPageData'
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/StatusPageArrayIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    StatusPageArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+    StatusPageAsIncluded:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPageAsIncludedAttributes'
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    StatusPageAsIncludedAttributes:
+      properties:
+        company_logo:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPageAsIncludedAttributesComponentsItems'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        custom_domain:
+          type: string
+        custom_domain_enabled:
+          type: boolean
+        domain_prefix:
+          type: string
+        email_header_image:
+          type: string
+        enabled:
+          type: boolean
+        favicon:
+          type: string
+        modified_at:
+          format: date-time
+          type: string
+        name:
+          type: string
+        page_url:
+          type: string
+        subscriptions_enabled:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      type: object
+    StatusPageAsIncludedAttributesComponentsItems:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPageAsIncludedAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    StatusPageAsIncludedAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPageAsIncludedRelationships:
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsCreatedByUser'
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsLastModifiedByUser'
+      type: object
+    StatusPageAsIncludedRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageAsIncludedRelationshipsCreatedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageAsIncludedRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageAsIncludedRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPageDataAttributes'
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPageDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    StatusPageDataAttributes:
+      properties:
+        company_logo:
+          type: string
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPageDataAttributesComponentsItems'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        custom_domain:
+          type: string
+        custom_domain_enabled:
+          type: boolean
+        domain_prefix:
+          type: string
+        email_header_image:
+          type: string
+        enabled:
+          type: boolean
+        favicon:
+          type: string
+        modified_at:
+          format: date-time
+          type: string
+        name:
+          type: string
+        page_url:
+          type: string
+        subscriptions_enabled:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      type: object
+    StatusPageDataAttributesComponentsItems:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPageDataAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    StatusPageDataAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPageDataRelationships:
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsCreatedByUser'
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsLastModifiedByUser'
+      type: object
+    StatusPageDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageDataType:
+      default: status_pages
+      description: Status pages resource type.
+      enum:
+      - status_pages
+      example: status_pages
+      type: string
+      x-enum-varnames:
+      - STATUS_PAGES
+    StatusPagesComponent:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentData'
+        included:
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentArrayIncluded'
+          type: array
+      type: object
+    StatusPagesComponentArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentData'
+          type: array
+        included:
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentArrayIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    StatusPagesComponentArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+      - $ref: '#/components/schemas/StatusPageAsIncluded'
+      - $ref: '#/components/schemas/StatusPagesComponentGroup'
+    StatusPagesComponentData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributes'
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentDataAttributes:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentDataAttributesComponentsItems'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        modified_at:
+          format: date-time
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentDataAttributesComponentsItems:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPagesComponentDataAttributesStatus:
+      enum:
+      - operational
+      - degraded
+      - partial_outage
+      - major_outage
+      example: operational
+      type: string
+      x-enum-varnames:
+      - OPERATIONAL
+      - DEGRADED
+      - PARTIAL_OUTAGE
+      - MAJOR_OUTAGE
+    StatusPagesComponentDataRelationships:
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsCreatedByUser'
+        group:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsGroup'
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsLastModifiedByUser'
+        status_page:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsStatusPage'
+      type: object
+    StatusPagesComponentDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsGroup:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsGroupData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsStatusPageData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroup:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributes'
+        id:
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentGroupAttributes:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItems'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        modified_at:
+          format: date-time
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentGroupAttributesComponentsItems:
+      properties:
+        id:
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPagesComponentGroupAttributesComponentsItemsStatus:
+      enum:
+      - operational
+      - degraded
+      - partial_outage
+      - major_outage
+      readOnly: true
+      type: string
+      x-enum-varnames:
+      - OPERATIONAL
+      - DEGRADED
+      - PARTIAL_OUTAGE
+      - MAJOR_OUTAGE
+    StatusPagesComponentGroupAttributesComponentsItemsType:
+      enum:
+      - component
+      example: component
+      type: string
+      x-enum-varnames:
+      - COMPONENT
+    StatusPagesComponentGroupRelationships:
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsCreatedByUser'
+        group:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsGroup'
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsLastModifiedByUser'
+        status_page:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsStatusPage'
+      type: object
+    StatusPagesComponentGroupRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsCreatedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsGroup:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsGroupData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsStatusPageData:
+      properties:
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupType:
+      default: components
+      description: Components resource type.
+      enum:
+      - components
+      example: components
+      type: string
+      x-enum-varnames:
+      - COMPONENTS
+    StatusPagesUser:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesUserAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      type: object
+    StatusPagesUserAttributes:
+      properties:
+        email:
+          type: string
+        handle:
+          type: string
+        icon:
+          type: string
+        name:
+          type: string
+        uuid:
+          type: string
+      type: object
+    StatusPagesUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     Step:
       description: A Step is a sub-component of a workflow. Each Step performs an
         action.
@@ -87953,6 +89252,665 @@ paths:
       - Security Monitoring
       x-menu-order: 28
       x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/statuspages:
+    get:
+      description: Lists all status pages for the organization.
+      operationId: ListStatusPages
+      parameters:
+      - description: Offset to use as the start of the page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          type: integer
+      - description: The number of status pages to return per page.
+        in: query
+        name: page[limit]
+        schema:
+          default: 50
+          type: integer
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPageArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List status pages
+      tags:
+      - Status Pages
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    post:
+      description: Creates a new status page.
+      operationId: CreateStatusPage
+      parameters:
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStatusPageRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create status page
+      tags:
+      - Status Pages
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/degradations:
+    get:
+      description: Lists all degradations for the organization. Optionally filter
+        by status and page.
+      operationId: ListDegradations
+      parameters:
+      - description: Optional page id filter.
+        in: query
+        name: filter[page_id]
+        schema:
+          type: string
+      - description: Offset to use as the start of the page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          type: integer
+      - description: The number of degradations to return per page.
+        in: query
+        name: page[limit]
+        schema:
+          default: 50
+          type: integer
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: 'Optional degradation status filter. Supported values: investigating,
+          identified, monitoring, resolved.'
+        in: query
+        name: filter[status]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DegradationArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List degradations
+      tags:
+      - Status Pages
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+  /api/v2/statuspages/{page_id}:
+    delete:
+      description: Deletes a status page by its ID.
+      operationId: DeleteStatusPage
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete status page
+      tags:
+      - Status Pages
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+    get:
+      description: Retrieves a specific status page by its ID.
+      operationId: GetStatusPage
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get status page
+      tags:
+      - Status Pages
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing status page's attributes.
+      operationId: UpdateStatusPage
+      parameters:
+      - description: Whether to delete existing subscribers when updating a status
+          page's type.
+        in: query
+        name: delete_subscribers
+        schema:
+          default: false
+          type: boolean
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchStatusPageRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update status page
+      tags:
+      - Status Pages
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/components:
+    get:
+      description: Lists all components for a status page.
+      operationId: ListComponents
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponentArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List components
+      tags:
+      - Status Pages
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    post:
+      description: Creates a new component.
+      operationId: CreateComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateComponentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create component
+      tags:
+      - Status Pages
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/components/{component_id}:
+    delete:
+      description: Deletes a component by its ID.
+      operationId: DeleteComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete component
+      tags:
+      - Status Pages
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+    get:
+      description: Retrieves a specific component by its ID.
+      operationId: GetComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get component
+      tags:
+      - Status Pages
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing component's attributes.
+      operationId: UpdateComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchComponentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update component
+      tags:
+      - Status Pages
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/degradations:
+    post:
+      description: Creates a new degradation.
+      operationId: CreateDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the degradation or maintenance.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDegradationRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create degradation
+      tags:
+      - Status Pages
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/degradations/{degradation_id}:
+    delete:
+      description: Deletes a degradation by its ID.
+      operationId: DeleteDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete degradation
+      tags:
+      - Status Pages
+      x-menu-order: 15
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+    get:
+      description: Retrieves a specific degradation by its ID.
+      operationId: GetDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get degradation
+      tags:
+      - Status Pages
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing degradation's attributes.
+      operationId: UpdateDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the degradation or maintenance.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDegradationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update degradation
+      tags:
+      - Status Pages
+      x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -92304,6 +94262,8 @@ tags:
   name: Spans Metrics
 - description: API for static analysis
   name: Static Analysis
+- description: Auto-generated tag Status Pages
+  name: Status Pages
 - description: "Datadog Synthetics uses simulated user requests and browser rendering
     to help you ensure uptime,\nidentify regional issues, and track your application
     performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
