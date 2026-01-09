@@ -74,7 +74,7 @@ After setting up your pipeline using the API or Terraform, follow the instructio
     ```
     -p 8282:8088 datadog/observability-pipelines-worker run
     ```
-1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management][4] for more information.
 1. Restart the Worker to use the updated bootstrap file:
     ```
     sudo systemctl restart observability-pipelines-worker
@@ -85,6 +85,7 @@ See [Update Existing Pipelines][3] if you want to make changes to your pipeline'
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
 [3]: /observability_pipelines/environment_variables/
+[4]: /observability_pipelines/configuration/secrets_management
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -177,7 +178,7 @@ Follow the steps below if you want to use the one-line installation script to in
         - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
         - See [Environment Variables][3] for a list of destination environment variables.
     **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management][5] for more information.
 1. Restart the Worker to use the updated bootstrap file:
     ```
     sudo systemctl restart observability-pipelines-worker
@@ -189,6 +190,7 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
 [2]: /getting_started/site/
 [3]: /observability_pipelines/environment_variables/
 [4]: /observability_pipelines/update_existing_pipelines
+[5]: /observability_pipelines/configuration/secrets_management
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
@@ -241,7 +243,7 @@ After you set up your source, destinations, and processors on the Build page of 
         -p 8282:8088 datadog/observability-pipelines-worker run
         ```
 1. If you are using **Secrets Manager**:
-    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management][3] for more information.
     1. Restart the Worker to use the updated bootstrap file:
         ```
         sudo systemctl restart observability-pipelines-worker
@@ -252,6 +254,7 @@ See [Update Existing Pipelines][2] if you want to make changes to your pipeline'
 
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
+[3]: /observability_pipelines/configuration/secrets_management
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -320,7 +323,7 @@ Follow the steps below if you want to use the one-line installation script to in
 1. Run the one-step command provided in the UI to install the Worker.
     **Note**: If you are using environment variables, the environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
 1. If you are using **Secrets Manager**:
-    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management][3] for more information.
     1. Restart the Worker to use the updated bootstrap file:
         ```
         sudo systemctl restart observability-pipelines-worker
@@ -331,6 +334,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 [1]: /observability_pipelines/configuration/update_existing_pipelines
 [2]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[3]: /observability_pipelines/configuration/secrets_management
 
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
