@@ -16,7 +16,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
-- link: "/service_management/case_management"
+- link: "/incident_response/case_management"
   tag: "Documentation"
   text: "Learn about Case Management"
 ---
@@ -171,8 +171,8 @@ IDE plugins and extensions are required to view your test in your IDE.
 [4]: /integrations/github/
 [5]: /continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
-[7]: /service_management/case_management/settings/#jira
-[8]: /service_management/case_management/view_and_manage#take-action
+[7]: /incident_response/case_management/settings/#jira
+[8]: /incident_response/case_management/view_and_manage#take-action
 [9]: https://app.datadoghq.com/cases
 [10]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [11]: https://app.datadoghq.com/ci/test-repositories

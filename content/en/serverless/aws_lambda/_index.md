@@ -34,6 +34,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitoring-lwa-with-datadog/"
     tag: "Blog"
     text: "Monitor Lambda-hosted web apps with the Lambda Web Adapter integration"
+  - link: https://www.datadoghq.com/blog/lambda-managed-instances
+    tag: Blog
+    text: Monitor AWS Lambda Managed Instances with Datadog
 ---
 
 Datadog Serverless Monitoring for AWS Lambda gives you visibility into your Lambda functions.

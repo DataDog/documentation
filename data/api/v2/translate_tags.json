@@ -3,6 +3,10 @@
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
   },
+  "apm": {
+    "name": "APM",
+    "description": "Observe, troubleshoot, and improve cloud-scale applications with all telemetry in context"
+  },
   "apm-retention-filters": {
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
@@ -235,6 +239,10 @@
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization. See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/) for more information."
   },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\nSee the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information."
+  },
   "rum": {
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
@@ -314,10 +322,6 @@
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
-  },
-  "team-connections": {
-    "name": "Team Connections",
-    "description": "View and manage relationships between Datadog teams and teams from external sources, such as GitHub."
   },
   "teams": {
     "name": "Teams",

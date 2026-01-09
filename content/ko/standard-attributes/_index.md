@@ -24,7 +24,6 @@ attributes:
   name: 소스
   product_source:
   - icon-log
-  - icon-apm
   type: 문자열
 - description: 이는 데이터의 수준 또는 심각도를 가르킵니다. 로그의 경우 [로그 패턴](/logs/explorer/patterns/)
     을 정의하는 데 사용되며 로그 관리 UI에 전용 레이아웃이 있습니다.
@@ -34,11 +33,10 @@ attributes:
   - icon-log
   - icon-apm
   type: 문자열
-- description: 데이터를 생성하는 애플리케이션 또는 서비스 의 [통합 서비스 이름](/getting_started/tagging/unified_service_tagging/))은
-    사용자 세션을 상호 연계하는 데 사용됩니다. 애플리케이션 성능 모니터링(APM)에서 다른 제품으로 전환하는 데 사용되므로 두 제품을 모두 사용할
-    때 동일한 값을 정의해야 합니다. RUM 브라우저 SDK에서 서비스는 브라우저 애플리케이션에서 특정 기능을 제공하는, 팀에서 구축한 페이지
-    집합을 나타냅니다. [수동 보기 추적](/real_user_monitoring/browser/advanced_configuration/?탭=npm#override-default-rum-view-names)을
-    사용하여 서비스에 웹 페이지를 할당할 수 있습니다.
+- description: 데이터를 생성하는 애플리케이션 또는 서비스의 [통합 서비스 이름](/getting_started/tagging/unified_service_tagging/)으로,
+    사용자 세션을 상호 연계하는 데 사용됩니다. APM에서 다른 제품으로 전환하는 데 사용되므로 두 제품을 모두 사용할 때는 동일한 값을 정의해야
+    합니다. RUM SDK에서 서비스는 브라우저 애플리케이션에서 특정 기능을 제공하는 팀에서 구축한 페이지 집합을 나타냅니다. [수동 보기 추적]을
+    사용하여 서비스에 웹 페이지를 할당할 수 있습니다(/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names).
   domain: 예약됨
   name: 서비스
   product_source:
@@ -63,38 +61,14 @@ attributes:
   product_source:
   - icon-log
   type: 문자열
-- description: TCP 연결을 시작한 클라이언트의 IP 주소입니다.
-  domain: 네트워크 커뮤니케이션
-  name: network.client.ip
-  product_source:
-  - icon-log
-  type: 문자열
-- description: 클라이언트가 연결하는 IP 주소입니다.
-  domain: 네트워크 커뮤니케이션
-  name: network.destination.ip
-  product_source:
-  - icon-log
-  type: 문자열
-- description: 연결을 시작한 클라이언트의 포트.
-  domain: 네트워크 커뮤니케이션
-  name: network.client.port
-  product_source:
-  - icon-log
-  type: 숫자
-- description: 클라이언트가 연결하는 TCP 포트입니다.
-  domain: 네트워크 커뮤니케이션
-  name: network.destination.port
-  product_source:
-  - icon-log
-  type: 숫자
 - description: 로그 전송 시 클라이언트에서 서버로 전송된 총 바이트 수입니다.
-  domain: 네트워크 커뮤니케이션
+  domain: 네트워크 통신
   name: network.bytes_read
   product_source:
   - icon-log
   type: 숫자
 - description: 로그 전송 시 서버에서 클라이언트로 전송된 총 바이트 수입니다.
-  domain: 네트워크 커뮤니케이션
+  domain: 네트워크 통신
   name: network.bytes_written
   product_source:
   - icon-log
@@ -144,24 +118,6 @@ attributes:
   product_source:
   - icon-log
   type: 문자열
-- description: HTTP 요청의 URL입니다.
-  domain: HTTP
-  name: http.url
-  product_source:
-  - icon-log
-  type: 문자열
-- description: HTTP 응답 상태 코드입니다.
-  domain: HTTP
-  name: http.status_code
-  product_source:
-  - icon-log
-  type: 숫자
-- description: 주어진 리소스에 대해 수행하려는 작업을 나타냅니다.
-  domain: HTTP
-  name: http.method
-  product_source:
-  - icon-log
-  type: 문자열
 - description: 요청 중인 리소스에 연결된 웹페이지의 주소를 식별하는 HTTP 헤더 필드입니다.
   domain: HTTP
   name: http.referer
@@ -174,49 +130,42 @@ attributes:
   product_source:
   - icon-log
   type: 문자열
-- description: 전송되는 사용자-에이전트(원시 형식)입니다. 사용자-에이전트 속성도 참조하세요.
-  domain: HTTP
-  name: http.useragent
-  product_source:
-  - icon-log
-  type: 문자열
-- description: 요청에 사용된 HTTP 버전입니다.
-  domain: HTTP
-  name: http.version
-  product_source:
-  - icon-log
-  type: 문자열
 - description: URL의 HTTP 호스트 부분.
   domain: HTTP, URL 세부 정보
   name: http.url_details.host
   product_source:
   - icon-log
+  - icon-apm
   type: 문자열
 - description: URL의 HTTP 호스트 부분.
   domain: HTTP, URL 세부 정보
   name: http.url_details.port
   product_source:
   - icon-log
+  - icon-apm
   type: 숫자
 - description: URL의 HTTP 호스트 부분.
   domain: HTTP, URL 세부 정보
   name: http.url_details.path
   product_source:
   - icon-log
+  - icon-apm
   type: 문자열
 - description: URL의 HTTP 쿼리 문자열 부분은 쿼리 파라미터 키/값 속성으로 나누어볼 수 있습니다.
   domain: HTTP, URL 세부 정보
   name: http.url_details.queryString
   product_source:
   - icon-log
+  - icon-apm
   type: 오브젝트
 - description: URL의 프로토콜 이름(HTTP 또는 HTTPS).
   domain: HTTP, URL 세부 정보
   name: http.url_details.scheme
   product_source:
   - icon-log
+  - icon-apm
   type: 문자열
-- description: 사용자가 보고한 OS 제품군-에이전트입니다.
+- description: User-Agent에서 보고한 OS 제품군입니다.
   domain: 사용자-에이전트
   name: http.useragent_details.os.family
   product_source:
@@ -264,49 +213,34 @@ attributes:
   product_source:
   - icon-log
   type: 문자열
-- description: 이벤트를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.
-  domain: 소스 코드
-  name: error.message
-  product_source:
-  - icon-log
-  type: 문자열
-- description: 오류에 대한 스택 트레이스 또는 보완 정보.
-  domain: 소스 코드
-  name: error.stack
-  product_source:
-  - icon-log
-  type: 문자열
-- description: 데이터베이스 인스턴스 이름입니다. 예를 들어 자바(Java) 에서 `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`이면
-    인스턴스 이름은 `customers` 입니다.
-  domain: 데이터베이스ㅜ
+- description: 연결 중인 데이터베이스 이름입니다. 예를 들어 Java에서 `jdbc.url="jdbc:MySQL://127.0.0.1:3306/customers"`
+    인스턴스 이름은 `customers`입니다.
+  domain: 데이터베이스
   name: db.instance
   product_source:
+  - icon-apm
   - icon-log
   type: 문자열
 - description: '지정된 데이터베이스 유형에 대한 데이터베이스 문입니다. 예를 들어, mySQL의 경우: `''SELECT * FROM
     wuser_table'';`, Redis의 경우: `''SET mykey ''WuValue''''` 입니다.'
-  domain: 데이터베이스ㅜ
+  domain: 데이터베이스
   name: db.statement
   product_source:
-  - icon-log
-  type: 문자열
-- description: 수행한 작업("쿼리", "업데이트", "삭제" 등)입니다.
-  domain: 데이터베이스ㅜ
-  name: db.operation
-  product_source:
+  - icon-apm
   - icon-log
   type: 문자열
 - description: 작업을 수행하는 사용자입니다.
-  domain: 데이터베이스ㅜ
+  domain: 데이터베이스
   name: db.user
   product_source:
+  - icon-apm
   - icon-log
   type: 문자열
 - description: '모든 종류의 기간(**나노초** 단위): HTTP 응답 시간, 데이터베이스 쿼리 시간, 지연 시간 등이 있습니다. 로그
     이내의 모든 기간을 이 속성에 [리매핑](/logs/log_configuration/processors/#remapper)하면 Datadog가
     트레이스 검색의 기본 측정 단위로 이를 표시하고 사용합니다.'
   domain: 성능
-  name: duration
+  name: 기간
   product_source:
   - icon-log
   type: 숫자
@@ -456,7 +390,7 @@ attributes:
   type: 정수
 - description: '이벤트 유형 (예: `view` 또는 `resource`).'
   domain: RUM 핵심 속성
-  name: 타입
+  name: 유형
   product_source:
   - icon-rum
   - android
@@ -649,32 +583,35 @@ attributes:
   - roku
   type: 문자열
 - description: 사용자의 식별자.
-  domain: RUM 사용자 속성(iOS)
+  domain: RUM 사용자 속성(iOS, 브라우저)
   name: usr.id
   product_source:
   - icon-rum
   - ios
+  - 브라우저
   type: 문자열
 - description: 사용자의 이름.
-  domain: 글로벌 사용자 속성(Android, iOS, 로쿠(Roku))
+  domain: 글로벌 사용자 속성(Android, iOS, 브라우저, Roku)
   name: usr.name
   product_source:
   - icon-rum
   - android
   - ios
+  - 브라우저
   - roku
   type: 문자열
 - description: 사용자의 이메일.
-  domain: 글로벌 사용자 속성(Android, iOS, 로쿠(Roku))
+  domain: 글로벌 사용자 속성(Android, iOS, 브라우저, Roku)
   name: usr.email
   product_source:
   - icon-rum
   - android
   - ios
+  - 브라우저
   - roku
   type: 문자열
 - description: 세션의 고유 ID.
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: session.id
   product_source:
   - icon-rum
@@ -683,7 +620,7 @@ attributes:
   - roku
   type: 문자열
 - description: 세션 유형 (`user`).
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: 세션 유형
   product_source:
   - icon-rum
@@ -693,7 +630,7 @@ attributes:
   type: 문자열
 - description: 세션이 현재 활성 상태인지 여부를 나타냅니다. 사용자가 애플리케이션에서 벗어나 탐색하거나 브라우저 창을 닫으면 세션이 종료되며,
     4시간 동안 활동 후 또는 15분 동안 활동하지 않을 시 만료됩니다.
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: session.is_active
   product_source:
   - icon-rum
@@ -702,7 +639,7 @@ attributes:
   - roku
   type: boolean
 - description: 세션의 초기 보기 URL.
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: session.initial_view.url
   product_source:
   - icon-rum
@@ -720,7 +657,7 @@ attributes:
   - roku
   type: 문자열
 - description: 세션의 마지막 보기 URL.
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: session.last_view.url
   product_source:
   - icon-rum
@@ -729,7 +666,7 @@ attributes:
   - roku
   type: 문자열
 - description: 세션의 마지막 보기 이름.
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: session.last_view.name
   product_source:
   - icon-rum
@@ -739,7 +676,7 @@ attributes:
   type: 문자열
 - description: 인테이크의 TCP 연결에서 추출한 세션의 IP 주소입니다. 이 속성 수집을 중지하려면 [애플리케이션 세부 정보](/data_security/real_user_monitoring/#ip-address)에서
     설정을 변경하세요.
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: session.ip
   product_source:
   - icon-rum
@@ -748,7 +685,7 @@ attributes:
   - roku
   type: 문자열
 - description: 시스템 `User-Agent` 정보를 통해 장치 정보를 해석합니다.
-  domain: 세션(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 세션(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: session.useragent
   product_source:
   - icon-rum
@@ -785,7 +722,7 @@ attributes:
   - roku
   type: 문자열
 - description: 리소스의 고유 식별자.
-  domain: 리소스(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 리소스(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: resource.id
   product_source:
   - icon-rum
@@ -794,7 +731,7 @@ attributes:
   - roku
   type: 문자열
 - description: '수집 중인 리소스 유형 (예: `xhr`, `image`, `font`, `css`, 또는 `js`).'
-  domain: 리소스(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 리소스(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: resource.type
   product_source:
   - icon-rum
@@ -803,7 +740,7 @@ attributes:
   - roku
   type: 문자열
 - description: 'HTTP 메서드 (예: `POST`, `GET`, `PATCH`, 또는 `DELETE`).'
-  domain: 리소스(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 리소스(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: resource.method
   product_source:
   - icon-rum
@@ -812,7 +749,7 @@ attributes:
   - roku
   type: 문자열
 - description: 응답 상태 코드.
-  domain: 리소스(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 리소스(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: resource.status_code
   product_source:
   - icon-rum
@@ -821,7 +758,7 @@ attributes:
   - roku
   type: 숫자
 - description: 리소스 URL.
-  domain: 리소스(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 리소스(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: resource.url
   product_source:
   - icon-rum
@@ -830,7 +767,7 @@ attributes:
   - roku
   type: 문자열
 - description: 리소스 공급자 이름. 기본값은 `unknown`.
-  domain: 리소스(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 리소스(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: resource.provider.name
   product_source:
   - icon-rum
@@ -839,7 +776,7 @@ attributes:
   - roku
   type: 문자열
 - description: 리소스 공급자 도메인.
-  domain: 리소스(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 리소스(Android 이벤트, iOS 이벤트, Roku 이벤트)
   name: resource.provider.domain
   product_source:
   - icon-rum
@@ -867,9 +804,10 @@ attributes:
   - roku
   type: 문자열
 - description: 오류 유형(또는 경우에 따라 오류 코드).
-  domain: 오류(브라우저 이벤트, Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 오류(브라우저 이벤트, 안드로이드 이벤트, iOS 이벤트, 로쿠 이벤트)
   name: error.type
   product_source:
+  - icon-apm
   - icon-rum
   - android
   - 브라우저
@@ -877,9 +815,11 @@ attributes:
   - roku
   type: 문자열
 - description: 이벤트를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.
-  domain: 오류(브라우저 이벤트, Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 오류(브라우저 이벤트, 안드로이드 이벤트, iOS 이벤트, 로쿠 이벤트)
   name: error.message
   product_source:
+  - icon-apm
+  - icon-log
   - icon-rum
   - android
   - 브라우저
@@ -887,9 +827,11 @@ attributes:
   - roku
   type: 문자열
 - description: 스택 트레이스 또는 오류에 대한 보완 정보.
-  domain: 네트워크 오류(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 오류(브라우저 이벤트, 안드로이드 이벤트, iOS 이벤트, 로쿠 이벤트)
   name: error.stack
   product_source:
+  - icon-apm
+  - icon-log
   - icon-rum
   - android
   - 브라우저
@@ -906,7 +848,7 @@ attributes:
   - roku
   type: 문자열
 - description: 응답 상태 코드.
-  domain: 네트워크 오류(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 네트워크 오류 (안드로이드 이벤트, iOS 이벤트, 로쿠 이벤트)
   name: error.resource.status_code
   product_source:
   - icon-rum
@@ -915,7 +857,7 @@ attributes:
   - roku
   type: 숫자
 - description: 'HTTP 메서드 (예: `POST` 또는 `GET`).'
-  domain: 네트워크 오류(Android 이벤트, iOS 이벤트, 로쿠(Roku) 이벤트)
+  domain: 네트워크 오류 (안드로이드 이벤트, iOS 이벤트, 로쿠 이벤트)
   name: error.resource.method
   product_source:
   - icon-rum
@@ -969,8 +911,8 @@ attributes:
   - ios
   - roku
   type: 문자열
-- description: '사용자 액션의 유형(예: `tap` 또는 `application_start`). 커스텀 브라우저 사용자 액션](/real_user_monitoring/browser/tracking_user_actions/?탭=npm#커스텀-actions)의
-    경우 `custom` 로 설정됩니다.'
+- description: '사용자 작업 유형(예: `tap` 또는 `application_start`)입니다. 사용자 지정 브라우저 사용자 작업](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions)의
+    경우 `custom`으로 설정됩니다.'
   domain: 액션(브라우저 이벤트, 안드로이드 이벤트, iOS 이벤트, 로쿠 이벤트)
   name: action.type
   product_source:
@@ -980,8 +922,8 @@ attributes:
   - ios
   - roku
   type: 문자열
-- description: '사용자 친화적인 이름(예: `Click on checkout`). 커스텀 브라우저 사용자 액션](/real_user_monitoring/browser/tracking_user_actions/?탭=npm#커스텀-actions)의
-    경우, API 호출에 지정된 액션 이름입니다.'
+- description: '사용자 친화적인 이름(예: `Click on checkout`). 사용자 지정 브라우저 사용자 작업](/real_user_monitoring/application_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions)의
+    경우, API 호출에 지정된 작업 이름입니다.'
   domain: 액션(브라우저 이벤트, 안드로이드 이벤트, iOS 이벤트, 로쿠 이벤트)
   name: action.name
   product_source:
@@ -1008,8 +950,8 @@ attributes:
   - icon-rum
   - 브라우저
   type: 문자열
-- description: 페이지 로드 유형, `initial_load` 또는 `route_change`. 자세한 내용은 [단일 페이지 애플리케이션
-    지원 문서](/real_user_monitoring/브라우저/모니터링_페이지_성능/#모니터링-single-page-applications-spa)를
+- description: 페이지 로드 유형으로, `initial_load` 또는 `route_change`입니다. 자세한 내용은 [단일 페이지 애플리케이션
+    지원 설명서](/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#monitoring-single-Page-applications-spa)를
     참조하세요.
   domain: 보기(브라우저)
   name: view.loading_type
@@ -1124,7 +1066,7 @@ attributes:
   - 브라우저
   type: 문자열
 - description: 각 세션에 대해 임의로 생성된 ID.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.id
   product_source:
   - icon-rum
@@ -1154,28 +1096,28 @@ attributes:
   - 브라우저
   type: 문자열
 - description: 현재 요청된 페이지로 연결되는 링크를 따라간 이전 웹 페이지의 URL.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: 세션.참조자
   product_source:
   - icon-rum
   - 브라우저
   type: 문자열
 - description: 사용자가 생성한 첫 번째 RUM 보기의 ID.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.initial_view.id
   product_source:
   - icon-rum
   - 브라우저
   type: 문자열
 - description: URL의 호스트 부분.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.initial_view.url_host
   product_source:
   - icon-rum
   - 브라우저
   type: 문자열
 - description: URL의 경로 부분.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.initial_view.url_path
   product_source:
   - icon-rum
@@ -1183,42 +1125,42 @@ attributes:
   type: 문자열
 - description: '유사한 URL(예: `/dashboard/123`및 `/dashboard/456`의 경우 `/dashboard/?`)에
     대해 생성된 자동 URL 그룹.'
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.initial_view.url_path_group
   product_source:
   - icon-rum
   - 브라우저
   type: 문자열
 - description: URL의 쿼리 문자열 부분이 쿼리 파라미터 키/값 속성으로 분해됩니다.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.initial_view.url_query
   product_source:
   - icon-rum
   - 브라우저
   type: 오브젝트
 - description: URL의 스키마 부분.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.initial_view.url_scheme
   product_source:
   - icon-rum
   - 브라우저
   type: 오브젝트
 - description: 사용자가 생성한 마지막 RUM 보기의 ID.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.last_view.id
   product_source:
   - icon-rum
   - 브라우저
   type: 문자열
 - description: URL의 호스트 부분.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.last_view.url_host
   product_source:
   - icon-rum
   - 브라우저
   type: 문자열
 - description: URL의 경로 부분.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.last_view.url_path
   product_source:
   - icon-rum
@@ -1226,21 +1168,21 @@ attributes:
   type: 문자열
 - description: '유사한 URL(예: `/dashboard/123`및 `/dashboard/456`의 경우 `/dashboard/?`)에
     대해 생성된 자동 URL 그룹.'
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.last_view.url_path_group
   product_source:
   - icon-rum
   - 브라우저
   type: 문자열
 - description: URL의 쿼리 문자열 부분이 쿼리 파라미터 키/값 속성으로 분해됩니다.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.last_view.url_query
   product_source:
   - icon-rum
   - 브라우저
   type: 오브젝트
 - description: URL의 스키마 부분.
-  domain: 세션(브라우저 이벤트)
+  domain: 세션 (브라우저 이벤트)
   name: session.last_view.url_scheme
   product_source:
   - icon-rum
@@ -1323,13 +1265,6 @@ attributes:
   - icon-rum
   - 브라우저
   type: 문자열
-- description: 오류 유형(또는 경우에 따라 오류 코드).
-  domain: 소스 오류(브라우저 이벤트)
-  name: error.type
-  product_source:
-  - icon-rum
-  - 브라우저
-  type: 문자열
 - description: RUM Browser SDK에서 감지한 데드 클릭 수.
   domain: 좌절 신호(브라우저 이벤트)
   name: action.frustration.type:dead_click
@@ -1352,7 +1287,7 @@ attributes:
   - 브라우저
   type: 문자열
 - description: 트래픽의 원본을 추적하는 URL의 파라미터.
-  domain: UTM 브라우저 이벤트)
+  domain: UTM(브라우저 이벤트)
   name: view.url_query.utm_source
   product_source:
   - icon-rum
@@ -1419,56 +1354,60 @@ attributes:
   product_source:
   - icon-apm
   type: 문자열
-- description: 인바운드 연결을 시작한 클라이언트의 IP 주소입니다.
-  domain: 네트워크 커뮤니케이션
+- description: 인바운드 연결을 시작한 클라이언트의 IP 주소.
+  domain: 네트워크 통신
   name: network.client.ip
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
-- description: 아웃바운드 연결이 이루어지는 IP 주소입니다.
-  domain: 네트워크 커뮤니케이션
+- description: 아웃바운드 연결이 이루어지는 IP 주소.
+  domain: 네트워크 통신
   name: network.destination.ip
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
 - description: 로컬 호스트 IP 주소.
-  domain: 네트워크 커뮤니케이션
+  domain: 네트워크 통신
   name: network.host.ip
   product_source:
   - icon-apm
   type: 문자열
 - description: 연결을 시작한 클라이언트의 포트.
-  domain: 네트워크 커뮤니케이션
+  domain: 네트워크 통신
   name: network.client.port
   product_source:
   - icon-apm
+  - icon-log
   type: 숫자
 - description: 아웃바운드 연결의 원격 포트 번호.
-  domain: 네트워크 커뮤니케이션
+  domain: 네트워크 통신
   name: network.destination.port
   product_source:
   - icon-apm
+  - icon-log
   type: 숫자
 - description: 인바운드 연결을 시작한 클라이언트의 호스트 이름.
-  domain: 네트워크 커뮤니케이션
+  domain: 네트워크 통신
   name: network.client.name
   product_source:
   - icon-apm
   type: 문자열
-- description: 로컬 호스트네임.
-  domain: 네트워크 커뮤니케이션
+- description: 로컬 호스트 이름.
+  domain: 네트워크 통신
   name: network.host.name
   product_source:
   - icon-apm
   type: 문자열
-- description: 인바운드 연결을 만드는 데 사용되는 트랜스포트 프로토콜.
-  domain: 네트워크 커뮤니케이션
+- description: 인바운드 연결을 만드는 데 사용되는 전송 프로토콜.
+  domain: 네트워크 통신
   name: network.client.transport
   product_source:
   - icon-apm
   type: 문자열
 - description: 아웃바운드 연결을 만드는 데 사용되는 전송 프로토콜.
-  domain: 네트워크 커뮤니케이션
+  domain: 네트워크 통신
   name: network.destination.transport
   product_source:
   - icon-apm
@@ -1478,24 +1417,29 @@ attributes:
   name: http.status_code
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
-- description: 난독화된 쿼리 문자열을 포함한 HTTP 요청의 URL입니다. 난독화에 대한 자세한 내용은 설정하다 데이터 보안을 참조하세요.
+- description: 난독화된 쿼리 문자열을 포함하는 HTTP 요청의 URL입니다. 난독화에 관한 자세한 내용은 [데이터 보안 구성](https://docs.datadoghq.com/tracing/configure_data_security/)을
+    참조하세요.
   domain: HTTP 요청
   name: http.url
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
 - description: 요청에 사용된 HTTP 버전입니다.
   domain: HTTP 요청
   name: http.version
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
 - description: 연결을 시작한 클라이언트의 포트.
   domain: HTTP 요청
   name: http.method
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
 - description: '일치하는 경로(경로 템플릿)입니다. 예: `/users/:userID`.'
   domain: HTTP 요청
@@ -1515,6 +1459,7 @@ attributes:
   name: http.useragent
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
 - description: 요청 페이로드 본문의 바이트 단위 크기입니다.
   domain: HTTP 요청
@@ -1553,27 +1498,16 @@ attributes:
   product_source:
   - icon-apm
   type: 문자열
+- description: 응답 HTTP 헤더입니다. 기본적으로 수집되는 헤더는 없지만 `DD_TRACE_HEADER_TAGS`를 사용하여 선택적으로
+    구성할 수 있습니다.
+  domain: HTTP 요청
+  name: http.response.headers.*
+  product_source:
+  - icon-apm
+  type: 문자열
 - description: 데이터베이스 연결에 사용되는 연결 문자열.
   domain: 데이터베이스 스팬(span)
   name: db.connection_string
-  product_source:
-  - icon-apm
-  type: 문자열
-- description: 데이터베이스에 액세스한 사용자 이름입니다.
-  domain: 데이터베이스 스팬(span)
-  name: db.user
-  product_source:
-  - icon-apm
-  type: 문자열
-- description: 연결되는 데이터베이스의 이름.
-  domain: 데이터베이스 스팬(span)
-  name: db.instance
-  product_source:
-  - icon-apm
-  type: 문자열
-- description: 실행 중인 데이터베이스 문.
-  domain: 데이터베이스 스팬(span)
-  name: db.statement
   product_source:
   - icon-apm
   type: 문자열
@@ -1582,13 +1516,14 @@ attributes:
   name: db.operation
   product_source:
   - icon-apm
+  - icon-log
   type: 문자열
-- description: 데이터베이스 이름(해당되는 경우)을 포함하여 작업이 수행되는 기본 테이블의 이름입니다.
+- description: 데이터베이스 이름(해당되는 경우)을 포함하여 작업이 수행되는 기본 테이블의 이름.
   domain: 데이터베이스 스팬(span)
   name: db.sql.table
   product_source:
   - icon-apm
-  type: 숫자
+  type: 문자열
 - description: 쿼리 또는 작업의 행/결과 수.
   domain: 데이터베이스 스팬(span)
   name: db.row_count
@@ -1680,33 +1615,20 @@ attributes:
   product_source:
   - icon-apm
   type: 문자열
-- description: 오류 유형 또는 종류(또는 경우에 따라 코드).
-  domain: 오류
-  name: error.type
-  product_source:
-  - icon-apm
-  type: 문자열
-- description: 이벤트를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지.
-  domain: 오류
-  name: error.message
-  product_source:
-  - icon-apm
-  type: 문자열
-- description: 오류에 대한 스택 트레이스 또는 보완 정보.
-  domain: 오류
-  name: error.stack
-  product_source:
-  - icon-apm
-  type: 문자열
 content: 다음 표에는 데이터 도메인에 해당하는 각 RUM, 로그, 애플리케이션 성능 모니터링(APM) 제품에 의해 에이전트 에서 Datadog로
   전송된 데이터에 자동으로 적용되는 속성이 나열되어 있습니다. 선택적으로 제품별로 목록을 필터링하거나 키워드나 설명 텍스트로 검색하여 관심 있는
   속성을 찾을 수 있습니다.
+description: Agent가 Datadog으로 전송하는 데이터에 각각의 RUM, Logs, APM 제품별로 (해당 데이터 도메인에) 자동 적용되는
+  속성들의 표입니다.
 disable_sidebar: true
 filter_all: 전체
 further_reading:
 - link: /data_security/
   tag: 설명서
   text: Datadog에 전송되는 데이터 보안 보장
+- link: /tracing/trace_collection/tracing_naming_convention/
+  tag: 설명서
+  text: 스팬 태그 시맨틱
 title: 기본 표준 속성
 ---
 
