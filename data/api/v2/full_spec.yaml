@@ -83363,13 +83363,6 @@ paths:
       description: 'Get a list of security findings that match a search query.
 
 
-        This endpoint requires one of the following permissions:
-
-        - `security_monitoring_findings_read`
-
-        - `appsec_vm_read`
-
-
         ### Query Syntax
 
 
@@ -83432,8 +83425,6 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_findings_read
-      - AuthZ:
-        - appsec_vm_read
       summary: List security findings
       tags:
       - Security Monitoring
@@ -83448,9 +83439,6 @@ paths:
         permissions:
         - security_monitoring_findings_read
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is in beta and subject to change.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/findings/cases:
     delete:
       description: 'Detach security findings from their case.
@@ -83680,13 +83668,6 @@ paths:
       description: 'Get a list of security findings that match a search query.
 
 
-        This endpoint requires one of the following permissions:
-
-        - `security_monitoring_findings_read`
-
-        - `appsec_vm_read`
-
-
         ### Query Syntax
 
 
@@ -83720,8 +83701,6 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - security_monitoring_findings_read
-      - AuthZ:
-        - appsec_vm_read
       summary: Search security findings
       tags:
       - Security Monitoring
@@ -83737,9 +83716,6 @@ paths:
         permissions:
         - security_monitoring_findings_read
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is in beta and subject to change.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/sboms:
     get:
       description: 'Get a list of assets SBOMs for an organization.
