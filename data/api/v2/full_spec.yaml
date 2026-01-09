@@ -59823,13 +59823,14 @@ paths:
         results.'
       operationId: ListFleetAgents
       parameters:
-      - description: Page number for pagination (must be greater than 0).
+      - description: Page number for pagination (starts at 0).
         in: query
         name: page_number
         required: false
         schema:
+          default: 0
           format: int64
-          minimum: 1
+          minimum: 0
           type: integer
       - description: Number of results per page (must be greater than 0 and less than
           or equal to 100).
