@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
   - /observability_pipelines/set_up_pipelines/
 further_reading:
-- link: "observability_pipelines/update_existing_pipelines/"
+- link: "observability_pipelines/configuration/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update an existing pipeline"
 - link: "observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
