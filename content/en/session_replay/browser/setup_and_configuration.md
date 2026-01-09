@@ -165,7 +165,7 @@ See [Connect Session Replay to your third-party tools][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/
 [2]: /real_user_monitoring/guide/sampling-browser-plans/
 [3]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#startsessionreplayrecording
 [4]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumGlobal.html#stopsessionreplayrecording

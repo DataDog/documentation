@@ -307,7 +307,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 
 Installing through CDN sync is recommended for collecting all events. The Browser SDK loads from Datadog's CDN synchronously, ensuring the SDK loads first and collects all errors, resources, and user actions. This method may impact page load performance.
 
-Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Placing the script tag higher and loading it synchronously ensures Datadog RUM can collect all performance data and errors.
+Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Placing the script tag higher and loading it synchronously helps ensure Datadog RUM can collect all performance data and errors.
 
 {% site-region region="us" %}
 
@@ -466,7 +466,35 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```
 
 {% /site-region %}
+
+#### TypeScript (optional)
+
+If you are initializing the SDK in a TypeScript project, use the code snippet below. Types are compatible with TypeScript >= 3.8.2.
+
+<div class="alert alert-info">For earlier versions of TypeScript, import JavaScript sources and use global variables to avoid any compilation issues.</div>
+
+```javascript
+import '@datadog/browser-rum/bundle/datadog-rum'
+
+window.DD_RUM.init({
+  applicationId: 'XXX',
+  clientToken: 'XXX',
+  site: 'datadoghq.com',
+  trackUserInteractions: true,
+  trackResources: true,
+  ...
+})
+```
+
 {% /if %}
+
+### Step 3 - Initialize the Browser SDK
+
+The SDK should be initialized as early as possible in the app lifecycle. This ensures all measurements are captured correctly.
+
+In the initialization snippet, set an environment name, service name, and client token. See the full list of [initialization parameters][3].
+
+
 
 {% alert level="info" %}
 Change any of the filters for this page to update the 1 lines below.

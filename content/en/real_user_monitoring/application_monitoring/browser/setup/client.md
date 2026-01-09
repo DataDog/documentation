@@ -181,7 +181,7 @@ further_reading:
     <li>Product Analytics</li>
     <li>Session Replay</li>
   </ul>
-  <div class="cdoc__toggleable" data-description="Product is RUM" data-if="625">
+  <div class="cdoc__toggleable" data-description="Product is RUM" data-if="0">
     <p>
       Real User Monitoring (RUM) provides comprehensive visibility into user
       experience and web application performance. Monitor page load times, user
@@ -213,7 +213,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Product is Error Tracking"
-    data-if="626"
+    data-if="1"
   >
     <p>
       <a href="/error_tracking/">Error Tracking</a> processes errors collected
@@ -239,7 +239,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Product is Product Analytics"
-    data-if="627"
+    data-if="2"
   >
     <p>
       <a href="/product_analytics/">Product Analytics</a> helps you gain insight
@@ -251,7 +251,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Product is Session Replay"
-    data-if="628"
+    data-if="3"
   >
     <p>
       Session Replay expands your user experience monitoring by allowing you to
@@ -268,7 +268,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="(Product is RUM) or (Product is Product Analytics) or (Product is Session Replay)"
-    data-if="632"
+    data-if="7"
   >
     <p>
       To start sending RUM data from your browser application to Datadog, follow
@@ -296,7 +296,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Product is Error Tracking"
-    data-if="633"
+    data-if="8"
   >
     <p>
       To start sending Error Tracking data from your browser application to
@@ -326,7 +326,7 @@ further_reading:
     </ol>
   </div>
   <h3 id="step-2--install-the-browser-sdk">Step 2 - Install the Browser SDK</h3>
-  <div class="cdoc__toggleable" data-description="Source is NPM" data-if="634">
+  <div class="cdoc__toggleable" data-description="Source is NPM" data-if="9">
     <p>
       Installing through Node Package Manager (npm) registry is recommended for
       modern web applications. The Browser SDK is packaged with the rest of your
@@ -396,7 +396,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Source is CDN async"
-    data-if="635"
+    data-if="10"
   >
     <p>
       Installing through CDN async is recommended for web applications with
@@ -644,7 +644,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Source is CDN sync"
-    data-if="636"
+    data-if="11"
   >
     <p>
       Installing through CDN sync is recommended for collecting all events. The
@@ -655,8 +655,8 @@ further_reading:
     <p>
       Add the generated code snippet to the head tag (in front of any other
       script tags) of every HTML page you want to monitor in your application.
-      Placing the script tag higher and loading it synchronously ensures Datadog
-      RUM can collect all performance data and errors.
+      Placing the script tag higher and loading it synchronously helps ensure
+      Datadog RUM can collect all performance data and errors.
     </p>
     <div class="d-none site-region-container" data-region="us">
       <div class="code-snippet-wrapper">
@@ -896,31 +896,76 @@ further_reading:
         </div>
       </div>
     </div>
+    <h4 id="typescript--optional">TypeScript (optional)</h4>
+    <p>
+      If you are initializing the SDK in a TypeScript project, use the code
+      snippet below. Types are compatible with TypeScript &gt;= 3.8.2.
+    </p>
+    <p>
+      &lt;div class=&quot;alert alert-info&quot;&gt;For earlier versions of
+      TypeScript, import JavaScript sources and use global variables to avoid
+      any compilation issues.&lt;/div&gt;
+    </p>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-javascript">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="s1">&#39;@datadog/browser-rum/bundle/datadog-rum&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">DD_RUM</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">applicationId</span><span class="o">:</span> <span class="s1">&#39;XXX&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">clientToken</span><span class="o">:</span> <span class="s1">&#39;XXX&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">site</span><span class="o">:</span> <span class="s1">&#39;datadoghq.com&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">trackUserInteractions</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">trackResources</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
   </div>
+  <h3 id="step-3--initialize-the-browser-sdk">
+    Step 3 - Initialize the Browser SDK
+  </h3>
+  <p>
+    The SDK should be initialized as early as possible in the app lifecycle.
+    This ensures all measurements are captured correctly.
+  </p>
+  <p>
+    In the initialization snippet, set an environment name, service name, and
+    client token. See the full list of [initialization parameters][3].
+  </p>
   <div class="alert alert-info">
     <p>Change any of the filters for this page to update the 1 lines below.</p>
   </div>
-  <div class="cdoc__toggleable" data-description="Product is RUM" data-if="637">
+  <div class="cdoc__toggleable" data-description="Product is RUM" data-if="12">
     <p>RUM-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Product is Error Tracking"
-    data-if="638"
+    data-if="13"
   >
     <p>Error Tracking-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Product is Product Analytics"
-    data-if="639"
+    data-if="14"
   >
     <p>Product Analytics-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Product is Session Replay"
-    data-if="640"
+    data-if="15"
   >
     <p>Session Replay-specific content goes here.</p>
   </div>
@@ -1002,4 +1047,4 @@ further_reading:
   </ul>
 <h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/application_monitoring/browser/advanced_configuration/"><span class="w-100 d-flex justify-content-between "><span class="text">Advanced configuration</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/session_replay/browser/"><span class="w-100 d-flex justify-content-between "><span class="text">Setup Session Replay</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/error_tracking/browser/"><span class="w-100 d-flex justify-content-between "><span class="text">Setup Error Tracking</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/real_user_monitoring/correlate_with_other_telemetry/"><span class="w-100 d-flex justify-content-between "><span class="text">Correlate RUM Events with Other Telemetry</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"625":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"rum"},"v":true,"r":"625"},"626":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"error_tracking"},"v":false,"r":"626"},"627":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"product_analytics"},"v":false,"r":"627"},"628":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"session_replay"},"v":false,"r":"628"},"632":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"rum"},"v":true,"r":"629"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"product_analytics"},"v":false,"r":"630"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"session_replay"},"v":false,"r":"631"}},"v":true,"r":"632"},"633":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"error_tracking"},"v":false,"r":"633"},"634":{"m":"F","n":"e","p":{"0":{"m":"V","p":["lib_src"],"v":"npm"},"1":"npm"},"v":true,"r":"634"},"635":{"m":"F","n":"e","p":{"0":{"m":"V","p":["lib_src"],"v":"npm"},"1":"cdn_async"},"v":false,"r":"635"},"636":{"m":"F","n":"e","p":{"0":{"m":"V","p":["lib_src"],"v":"npm"},"1":"cdn_sync"},"v":false,"r":"636"},"637":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"rum"},"v":true,"r":"637"},"638":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"error_tracking"},"v":false,"r":"638"},"639":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"product_analytics"},"v":false,"r":"639"},"640":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"session_replay"},"v":false,"r":"640"}},    filtersManifest: {"filtersByTraitId":{"sdk_product":{"config":{"trait_id":"sdk_product","option_group_id":"sdk_product_options","label":"Product"},"defaultValsByOptionGroupId":{"sdk_product_options":"rum"}},"lib_src":{"config":{"trait_id":"lib_src","option_group_id":"rum_browser_sdk_source_options","label":"Source"},"defaultValsByOptionGroupId":{"rum_browser_sdk_source_options":"npm"}}},"defaultValsByTraitId":{"sdk_product":"rum","lib_src":"npm"},"optionGroupsById":{"sdk_product_options":[{"default":true,"id":"rum","label":"RUM"},{"id":"error_tracking","label":"Error Tracking"},{"id":"product_analytics","label":"Product Analytics"},{"id":"session_replay","label":"Session Replay"}],"rum_browser_sdk_source_options":[{"default":true,"id":"npm","label":"NPM"},{"id":"cdn_async","label":"CDN async"},{"id":"cdn_sync","label":"CDN sync"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"rum"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"error_tracking"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"product_analytics"},"v":false,"r":"2"},"3":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"session_replay"},"v":false,"r":"3"},"7":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"rum"},"v":true,"r":"4"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"product_analytics"},"v":false,"r":"5"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"session_replay"},"v":false,"r":"6"}},"v":true,"r":"7"},"8":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"error_tracking"},"v":false,"r":"8"},"9":{"m":"F","n":"e","p":{"0":{"m":"V","p":["lib_src"],"v":"npm"},"1":"npm"},"v":true,"r":"9"},"10":{"m":"F","n":"e","p":{"0":{"m":"V","p":["lib_src"],"v":"npm"},"1":"cdn_async"},"v":false,"r":"10"},"11":{"m":"F","n":"e","p":{"0":{"m":"V","p":["lib_src"],"v":"npm"},"1":"cdn_sync"},"v":false,"r":"11"},"12":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"rum"},"v":true,"r":"12"},"13":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"error_tracking"},"v":false,"r":"13"},"14":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"product_analytics"},"v":false,"r":"14"},"15":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk_product"],"v":"rum"},"1":"session_replay"},"v":false,"r":"15"}},    filtersManifest: {"filtersByTraitId":{"sdk_product":{"config":{"trait_id":"sdk_product","option_group_id":"sdk_product_options","label":"Product"},"defaultValsByOptionGroupId":{"sdk_product_options":"rum"}},"lib_src":{"config":{"trait_id":"lib_src","option_group_id":"rum_browser_sdk_source_options","label":"Source"},"defaultValsByOptionGroupId":{"rum_browser_sdk_source_options":"npm"}}},"defaultValsByTraitId":{"sdk_product":"rum","lib_src":"npm"},"optionGroupsById":{"sdk_product_options":[{"default":true,"id":"rum","label":"RUM"},{"id":"error_tracking","label":"Error Tracking"},{"id":"product_analytics","label":"Product Analytics"},{"id":"session_replay","label":"Session Replay"}],"rum_browser_sdk_source_options":[{"default":true,"id":"npm","label":"NPM"},{"id":"cdn_async","label":"CDN async"},{"id":"cdn_sync","label":"CDN sync"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
