@@ -489,7 +489,7 @@ The evaluate method receives the following parameters:
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
 - `reason`: natural language summary of the decision.
-- `tags`: list of tags linked to the evaluation (e.g. ```["indirect-prompt-injection", "instruction-override", "destructive-tool-call"]```)
+- `tags`: list of tags linked to the evaluation (for example, ```["indirect-prompt-injection", "instruction-override", "destructive-tool-call"]```)
 
 #### Example: Evaluate a tool call {#ruby-example-evaluate-tool-call}
 
