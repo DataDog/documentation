@@ -84,9 +84,9 @@ When you launch the Dev Agent, it runs the setup command at startup and can use 
 
 ### Creation of PRs fails unexpectedly
 
-In some cases, especially in repositories with many branches, GitHub fails to run the permission check when creating the branch for the session. If you're using a custom GitHub app, you can work around this by adding the `workflows:write` permission to your app in [Source Code Integration][5].
+In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [Source Code Integration][5].
 
-**Note**: This allows Bits AI to create workflows on your repository, which has security implications.
+**Note**: This permission allows Bits AI to create workflows in your repository and has security implications.
 
 [1]: /error_tracking
 [2]: /security/code_security  
