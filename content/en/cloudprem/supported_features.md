@@ -23,7 +23,7 @@ The following log features are already supported:
 - Correlation from a log to metrics sent to Datadog SaaS (the reverse is not yet supported)
 - Correlation from a log to traces sent to Datadog SaaS (the reverse is not yet supported)
 
-## Not yet supported features
+## Unsupported features
 
 Feature support is actively evolving. The following are not currently supported:
 - Bits AI SRE
