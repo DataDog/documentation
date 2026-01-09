@@ -1,2 +1,2 @@
-- Google Chronicle endpoint URL:
+- Google SecOps endpoint URL:
    - The default environment variable is `DD_OP_DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.

@@ -4277,21 +4277,26 @@ menu:
       identifier: dyninst
       parent: tracing_trace_collection
       weight: 204
+    - name: Enabling
+      url: tracing/trace_collection/dynamic_instrumentation/enabling/
+      identifier: dyninst_enable
+      parent: dyninst
+      weight: 2041
     - name: Autocomplete and Search
       url: tracing/trace_collection/dynamic_instrumentation/symdb
       identifier: dyninst_symdb
       parent: dyninst
-      weight: 2041
+      weight: 2042
     - name: Expression Language
       url: tracing/trace_collection/dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 2042
+      weight: 2043
     - name: Sensitive Data Scrubbing
       url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
       identifier: dyninst_sensitive_data_scrubbing
       parent: dyninst
-      weight: 2043
+      weight: 2044
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -6176,20 +6181,20 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
       weight: 409
-    - name: Google Chronicle
-      url: observability_pipelines/destinations/google_chronicle
-      parent: observability_pipelines_destinations
-      identifier: observability_pipelines_google_chronicle
-      weight: 410
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 411
+      weight: 410
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
+      weight: 411
+    - name: Google SecOps
+      url: observability_pipelines/destinations/google_secops/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_google_secops
       weight: 412
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
@@ -6733,16 +6738,21 @@ menu:
       parent: log_management_heading
       identifier: cloudprem
       weight: 30000
+    - name: Quickstart
+      url: /cloudprem/quickstart
+      parent: cloudprem
+      identifier: cloudprem_quickstart
+      weight: 1
     - name: Architecture
       url: /cloudprem/architecture
       parent: cloudprem
       identifier: cloudprem_architecture
-      weight: 1
+      weight: 2
     - name: Installation
       url: /cloudprem/install
       parent: cloudprem
       identifier: cloudprem_installation
-      weight: 2
+      weight: 3
     - name: AWS EKS
       url: /cloudprem/install/aws_eks
       parent: cloudprem_installation
@@ -6753,6 +6763,11 @@ menu:
       parent: cloudprem_installation
       identifier: cloudprem_azure_aks
       weight: 202
+    - name: Install Locally with Docker
+      url: /cloudprem/install/docker
+      parent: cloudprem_installation
+      identifier: cloudprem_docker
+      weight: 203
     - name: Log Ingestion
       url: /cloudprem/ingest_logs/
       parent: cloudprem

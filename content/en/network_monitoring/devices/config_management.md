@@ -1,5 +1,5 @@
 ---
-title: Network Device Configuration Management
+title: Network Configuration Management
 description: "View and compare device configuration changes in NDM."
 further_reading:
   - link: "/network_monitoring/devices/troubleshooting"
