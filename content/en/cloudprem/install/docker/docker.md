@@ -165,6 +165,23 @@ curl http://localhost:7280/api/v1/version
 
 You should see a response with version information.
 
+### Send a log
+
+In your terminal, send a "Hello World" log entry directly to your local CloudPrem instance using the API:
+
+```shell
+curl -X POST "http://localhost:7280/api/v2/logs" \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -d '[
+    {
+      "message": "Hello world from CloudPrem",
+      "level": "info",
+      "service": "demo"
+    }
+  ]'
+```
+
 ### Search your local logs from the Log Explorer
 
 After verifying that CloudPrem is running, you can search and analyze your logs in the Logs Explorer by searching into the `cloudprem` index!
