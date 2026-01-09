@@ -14,7 +14,7 @@ After installing and configuring CloudPrem, you need to set up log ingestion to 
 ## Log ingestion methods
 
 {{< whatsnext desc="Choose the appropriate ingestion method based on your infrastructure and requirements:">}}
-   {{< nextlink href="/cloudprem/ingest_logs/datadog_agent/" >}}Datadog Agent{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingest_logs/observability_pipelines/" >}}Observability Pipelines{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/ingest_logs/rest_api/" >}}REST API Integration{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/ingest/agent/" >}}Datadog Agent{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/ingest/observability_pipelines/" >}}Observability Pipelines{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/ingest/api/" >}}REST API Integration{{< /nextlink >}}
 {{< /whatsnext >}}
