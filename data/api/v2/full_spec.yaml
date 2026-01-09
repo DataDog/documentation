@@ -7061,19 +7061,27 @@ components:
     BatchUpsertRowsRequestDataAttributes:
       description: Attributes containing row data values for row creation or update
         operations.
+      example:
+        values: {}
       properties:
         values:
           additionalProperties:
-            x-required-field: true
-          description: Key-value pairs representing row data, where keys are field
-            names from the schema.
-          example:
-            example_key_value: primary_key_value
-            name: row_name
+            $ref: '#/components/schemas/BatchUpsertRowsRequestDataAttributesValue'
+          description: Key-value pairs representing row data, where keys are schema
+            field names and values match the corresponding column types.
           type: object
       required:
       - values
       type: object
+    BatchUpsertRowsRequestDataAttributesValue:
+      description: Types allowed for Reference Table row values.
+      oneOf:
+      - example: row_name
+        type: string
+      - example: 25
+        format: int32
+        maximum: 2147483647
+        type: integer
     BillConfig:
       description: Bill config.
       properties:
@@ -80008,6 +80016,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              happy_path:
+                summary: Upsert a row with mixed string and int values
+                value:
+                  data:
+                  - attributes:
+                      values:
+                        age: 25
+                        example_key_value: primary_key_value
+                        name: row_name
+                    id: primary_key_value
+                    type: row
             schema:
               $ref: '#/components/schemas/BatchUpsertRowsRequestArray'
         required: true
