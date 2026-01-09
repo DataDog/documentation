@@ -25,10 +25,11 @@ The following log features are already supported:
 
 ## Not yet supported features
 
-- Bits AI SRE -- Coming soon
-- Index management for multiple retention periods and segmentation needs -- Coming soon
-- Notebooks -- Coming soon
-- Federated search -- Coming soon
+Feature support is actively evolving. The following are not currently supported:
+- Bits AI SRE
+- Index management for multiple retention periods and segmentation needs
+- Notebooks
+- Federated search
 - LiveTail
 - Watchdogs
 
