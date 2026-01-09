@@ -22,7 +22,7 @@ There are no required setup steps.
 
 ##### Route logs to multiple Datadog organizations
 
-You can route logs to multiple Datadog organizations. After you set up routing to multiple organizations, you can [view metrics for the component or specific organizations](#view-metrics-for-the-component-or-specific-organizations) to which you are routing logs.
+You can route logs to multiple Datadog organizations. After routing has been set up, you can [view metrics for the component or specific organizations](#view-metrics-for-the-component-or-specific-organizations) to which you are routing logs.
 
 {{< img src="observability_pipelines/destinations/multi_dd_orgs.png" alt="The Datadog Logs destination showing us1 and us3 org" style="width:45%;" >}}
 
@@ -33,12 +33,13 @@ Click **Route to Multiple Organizations** to set up routing to multiple Datadog 
   - Click on an organization in the table to edit or delete it.
   - Use the search bar to find a specific organization by name, filter query, or Datadog site, and then select the organization to edit or delete it.
   - [View metrics](#view-metrics-for-the-component-or-specific-organizations) for an organization.
+  - Click **Add organization** to route to another Datadog organization.
 
 **Note**: If you don't set up routing to multiple Datadog organizations, logs are routed to the default Datadog organization, which is the organization that is tied to the API key when you install the Worker.
 
 ##### Add an organization
 
-<div class="alert alert-warning">Logs that do not match any of the organizations' filters are dropped. The <a href="#component-level-metrics">component metric</a> <code>Data dropped (intentional)</code> shows the number logs that do not match the filters and are dropped.</div>
+<div class="alert alert-warning">Logs that do not match any of the organization filters are dropped. The <a href="#component-level-metrics">component metric</a> <code>Data dropped (intentional)</code> shows the number logs that do not match the filters and are dropped.</div>
 
 1. Enter a name for the organization.
 	- **Note**: The name does not have to correspond to the actual name of the Datadog organization.
@@ -76,7 +77,7 @@ There are no secret identifiers for this destination.
 
 ## View metrics for the component or specific organizations
 
-You can view metrics at the component level or organization level.
+You can view metrics at the [component level](#component-level-metrics) or [organization level](#organization-level-metrics).
 
 ### Component-level metrics
 
