@@ -198,14 +198,6 @@ Learn more about [tagging][19] in Datadog.
 
 Refer to the [Browser SDK API Reference][9] for the full list of available configuration options.
 
-## Advanced features (optional)
-
-### Manage uploaded source maps
-
-See all uploaded symbols and manage your source maps on the [Explore RUM Debug Symbols][17] page.
-
-**Note**: Source maps are limited in size to **500 MB** each.
-
 ## Next steps
 
 You can monitor unhandled exceptions, unhandled promise rejections, handled exceptions, handled promise rejections, and other errors that the Browser SDK does not automatically track. Learn more about [Collecting Browser Errors][3].
@@ -230,6 +222,6 @@ You can monitor unhandled exceptions, unhandled promise rejections, handled exce
 [14]: https://bitbucket.org/product
 [15]: /integrations/guide/source-code-integration/
 [16]: /error_tracking/explorer
-[17]: https://app.datadoghq.com/source-code/setup/rum
+[17]: /real_user_monitoring/guide/upload-javascript-source-maps
 [18]: /getting_started/tagging/unified_service_tagging/
 [19]: /getting_started/tagging/
