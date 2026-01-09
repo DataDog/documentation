@@ -29,5 +29,5 @@ Data Observability (DO) helps data teams deliver reliable data for analytics, pr
 
 {{< whatsnext desc="Data Observability consists of the following:" >}}
    {{< nextlink href="/data_observability/quality_monitoring/" >}}Quality Monitoring: Identify data issues before downstream BI and AI applications are impacted.{{< /nextlink >}}
-   {{< nextlink href=/data_observability/jobs_monitoring/" >}}Jobs Monitoring: Observe, troubleshoot, and optimize jobs across your data pipelines.{{< /nextlink >}}
+   {{< nextlink href="/data_observability/jobs_monitoring/" >}}Jobs Monitoring: Observe, troubleshoot, and optimize jobs across your data pipelines.{{< /nextlink >}}
 {{< /whatsnext >}}
