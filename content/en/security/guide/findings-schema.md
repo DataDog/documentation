@@ -20,6 +20,10 @@ Security findings in Datadog represent vulnerabilities, misconfigurations, and s
 
 All findings share a common schema that enables unified querying and analysis across different security products.
 
+{{< learning-center-callout header="" btn_title="Learn more" btn_url="/security/guide/security-findings-migration/" hide_image="true" >}}
+  Learn about migrating to this new schema so you can avoid any interruptions to your workflows.
+{{< /learning-center-callout >}}
+
 ## Examples
 
 There are eleven different categories for security findings. Click on a category to view a sample security finding belonging to that category.
@@ -447,46 +451,38 @@ There are eleven different categories for security findings. Click on a category
 ```json
 {
   "advisory": {
-    "id": "DD-UNMAINT#GITHUB.COM/EXAMPLE/DEPRECATED-LIB",
-    "modified_at": 1765995600000,
-    "published_at": 1709251200000,
-    "summary": "Archived repository for github.com/example/deprecated-lib",
-    "type": "unmaintained"
+    "aliases": [
+      "CVE-2023-26242"
+    ],
+    "cve": "CVE-2023-26242",
+    "id": "TRIVY-CVE-2023-26242",
+    "modified_at": 1746461731000,
+    "published_at": 1676942111000,
+    "summary": "CVE-2023-26242 found in linux-tools-common 5.15.0-161.171",
+    "type": "component_with_known_vulnerability"
   },
-  "base_severity": "low",
-  "container_image": {
-    "architectures": [
-      "amd64"
-    ],
-    "image_layer_diff_ids": [
-      "sha256:abc123def456789012345678901234567890abcdef12345678901234567890ab",
-      "sha256:def456abc789012345678901234567890abcdef12345678901234567890abcd"
-    ],
-    "image_layer_digests": [
-      "sha256:def456abc789012345678901234567890abcdef12345678901234567890abcd"
-    ],
-    "name": "docker.io/example-org/web-server",
-    "oses": [
-      {
-        "name": "ubuntu",
-        "version": "23.04"
-      }
-    ],
-    "registries": [
-      "docker.io"
-    ],
-    "repo_digests": [
-      "sha256:abc123def456789012345678901234567890abcdef123456789012345678abcd"
-    ],
-    "repository": "example-org/web-server"
+  "base_severity": "high",
+  "cloud_resource": {
+    "account": "123456789012",
+    "cloud_provider": "aws",
+    "display_name": "i-0abc123def456789a",
+    "region": "us-east-1"
   },
-  "detection_changed_at": 1766095204457,
-  "exposure_time_seconds": 25482896,
-  "finding_id": "ZXhhbXBsZS1ob3N0LWNvbnRhaW5lci12dWxuLTEyMzQ1Ng==",
+  "detection_changed_at": 1766504273553,
+  "finding_id": "ZXhhbXBsZS1ob3N0LXZ1bG4tMTIzNDU2Nzg5MGFiY2RlZg==",
   "finding_type": "host_and_container_vulnerability",
-  "first_seen_at": 1740514410349,
+  "first_seen_at": 1766504260849,
+  "host": {
+    "cloud_provider": "aws",
+    "image": "ami-0abc123def456789a",
+    "name": "i-0abc123def456789a",
+    "os": {
+      "name": "ubuntu",
+      "version": "22.04"
+    }
+  },
   "is_in_security_inbox": false,
-  "last_seen_at": 1766095204457,
+  "last_seen_at": 1766504273553,
   "metadata": {
     "schema_version": "2"
   },
@@ -495,65 +491,106 @@ There are eleven different categories for security findings. Click on a category
   ],
   "package": {
     "additional_names": [
-      "github.com/example/deprecated-lib"
+      "linux-libc-dev",
+      "linux-tools-common"
     ],
-    "name": "github.com/example/deprecated-lib",
-    "normalized_name": "github.com/example/deprecated-lib",
-    "version": "v0.5.11"
+    "name": "linux",
+    "normalized_name": "linux",
+    "version": "5.15.0-161.171"
   },
+  "related_services": [
+    "exposed_to_attacks:false"
+  ],
   "remediation": {
-    "description": "Update 1 image to docker.io/example-org/web-server:2.0.0",
-    "is_available": true
+    "is_available": false
   },
   "resource_id": "abc123def456789012345678901234ab",
-  "resource_name": "docker.io/example-org/web-server",
-  "resource_type": "image",
+  "resource_name": "i-0abc123def456789a",
+  "resource_type": "host",
   "risk": {
-    "is_production": true
+    "has_exploit_available": false,
+    "has_high_exploitability_chance": false,
+    "is_production": true,
+    "is_publicly_accessible": false
   },
   "risk_details": {
+    "has_exploit_available": {
+      "evidence": {
+        "type": "unavailable"
+      },
+      "impact_cvss": "safer",
+      "value": false
+    },
+    "has_high_exploitability_chance": {
+      "evidence": {
+        "epss_score": 0.00017,
+        "epss_severity": "low"
+      },
+      "impact_cvss": "safer",
+      "value": false
+    },
     "is_production": {
       "impact_cvss": "neutral",
       "value": true
+    },
+    "is_publicly_accessible": {
+      "value": false
     }
   },
-  "severity": "low",
+  "severity": "medium",
   "severity_details": {
     "adjusted": {
-      "score": 2.7,
-      "value": "low",
-      "value_id": 1,
-      "vector": "CVSS:3.1/AV:P/AC:H/PR:H/UI:R/S:U/C:N/I:L/A:L/E:X/RL:X/RC:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MPR:X/MUI:X/MS:X/MC:X/MI:X/MA:X"
+      "score": 6.4,
+      "value": "medium",
+      "value_id": 2,
+      "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H/E:U/RL:X/RC:X/CR:X/IR:X/AR:X/MAV:X/MAC:H/MPR:X/MUI:X/MS:X/MC:X/MI:X/MA:X"
     },
     "base": {
-      "score": 2.7,
-      "value": "low",
-      "value_id": 1,
-      "vector": "CVSS:3.0/AV:P/AC:H/PR:H/UI:R/S:U/C:N/I:L/A:L"
+      "score": 7.8,
+      "value": "high",
+      "value_id": 3,
+      "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
     }
   },
-  "status": "auto_closed",
+  "status": "open",
   "tags": [
-    "env:dev",
     "origin:agentless-scanner",
-    "scored:false",
-    "short_name:web-server",
-    "os_name:ubuntu",
-    "dd_rule_type:not-empty",
-    "registry:docker.io",
+    "package_name:linux",
+    "package_version:5.15.0-161.171",
+    "fix_available:unavailable",
+    "availability-zone:us-east-1e",
     "source:datadog",
-    "arch:amd64"
+    "vulnerability_status:open",
+    "scored:false",
+    "alias:cve-2023-26242",
+    "asset_type:host",
+    "os_name:ubuntu",
+    "in_production:true",
+    "cve:cve-2023-26242",
+    "public_exploit_available:false",
+    "base_score:7.8",
+    "score:6.4",
+    "severity:medium",
+    "dd_rule_type:not-empty",
+    "region:us-east-1",
+    "ecosystem:deb",
+    "os_version:22.04",
+    "base_severity:high",
+    "cloud_provider:aws",
+    "type:component_with_known_vulnerability",
+    "epss_raw_score:0.00017"
   ],
-  "title": "Archived repository for github.com/example/deprecated-lib",
+  "title": "CVE-2023-26242 found in linux-tools-common 5.15.0-161.171",
   "vulnerability": {
+    "cwes": [
+      "CWE-190"
+    ],
     "hash": "abc123def456789012345678901234567890abcdef12345678901234567890ab",
     "stack": {
-      "ecosystem": "go",
-      "language": "go"
+      "ecosystem": "deb"
     }
   },
   "workflow": {
-    "auto_closed_at": 1766095204430,
     "mute": {
       "is_muted": false
     }
@@ -791,71 +828,166 @@ There are eleven different categories for security findings. Click on a category
 ```json
 {
   "advisory": {
-    "id": "DD-UNMAINT#GITHUB.COM/EXAMPLE/DEPRECATED-LIB",
-    "type": "unmaintained"
+    "aliases": [
+      "CVE-2025-46392"
+    ],
+    "cve": "CVE-2025-46392",
+    "id": "GHSA-pvp8-3xj6-8c6x",
+    "type": "component_with_known_vulnerability"
   },
-  "base_severity": "low",
-  "detection_changed_at": 1766095094192,
-  "finding_id": "ZXhhbXBsZS1saWJyYXJ5LXZ1bG4tMTIzNDU2",
+  "base_severity": "medium",
+  "code_location": {
+    "column_end": 22,
+    "column_start": 9,
+    "filename": "test/plugin/scenarios/hystrix-scenario/pom.xml",
+    "line_end": 77,
+    "line_start": 73
+  },
+  "detection_changed_at": 1766518394577,
+  "finding_id": "ZXhhbXBsZS1saWJyYXJ5LXZ1bG4tMTIzNDU2Nzg5MGFi",
   "finding_type": "library_vulnerability",
-  "first_seen_at": 1747434028807,
+  "first_seen_at": 1763488117383,
   "git": {
-    "repository_id": "github.com/example-org/web-app",
-    "repository_url": "github.com/example-org/web-app"
+    "author": {
+      "name": "ci-bot"
+    },
+    "default_branch": "main",
+    "is_default_branch": true,
+    "repository_id": "github.com/example-org/java-app",
+    "repository_url": "github.com/example-org/java-app",
+    "sha": "abc123def456789012345678901234567890abcd"
   },
   "is_in_security_inbox": false,
-  "last_seen_at": 1766095094192,
+  "last_seen_at": 1766522443454,
   "metadata": {
     "schema_version": "2"
   },
   "origin": [
-    "apm"
+    "ci"
   ],
   "package": {
+    "declaration": {
+      "block": {
+        "column_end": 22,
+        "column_start": 9,
+        "filename": "test/plugin/scenarios/hystrix-scenario/pom.xml",
+        "line_end": 77,
+        "line_start": 73
+      },
+      "name": {
+        "column_end": 37,
+        "column_start": 25,
+        "filename": "test/plugin/scenarios/hystrix-scenario/pom.xml",
+        "line_end": 75,
+        "line_start": 75
+      },
+      "version": {
+        "column_end": 39,
+        "column_start": 33,
+        "filename": "test/plugin/scenarios/hystrix-scenario/pom.xml",
+        "line_end": 34,
+        "line_start": 34
+      }
+    },
     "dependency_type": "transitive",
-    "loading_type": "hot",
-    "name": "github.com/example/deprecated-date-lib",
-    "normalized_name": "github.com/example/deprecated-date-lib",
+    "manager": "maven",
+    "name": "commons-configuration:commons-configuration",
+    "normalized_name": "commons-configuration:commons-configuration",
     "root_parents": [
       {
-        "language": "go",
-        "name": "github.com/example/auth-lib",
-        "version": "0.9.24"
+        "declaration": {
+          "version": {
+            "column_end": 39,
+            "column_start": 33,
+            "filename": "test/plugin/scenarios/hystrix-scenario/pom.xml",
+            "line_end": 34,
+            "line_start": 34
+          }
+        },
+        "language": "jvm",
+        "name": "com.netflix.hystrix:hystrix-core",
+        "version": "1.4.20"
       }
     ],
     "scope": "production",
-    "version": "0.3.0"
+    "version": "1.8"
   },
+  "related_services": [
+    "example-service"
+  ],
   "remediation": {
-    "description": "Avoid the usage of this package, find an equivalent one instead",
-    "is_available": false,
+    "description": "Try upgrading to a version > 1.10 (if released)",
+    "is_available": true,
     "package": {
-      "base": [
+      "closest_no_vulnerabilities": [
         {
-          "name": "github.com/example/deprecated-date-lib",
-          "version": "Avoid the usage of this package, find an equivalent one instead"
+          "fixed_advisories": [
+            {
+              "base_severity": "medium",
+              "id": "GHSA-pvp8-3xj6-8c6x"
+            }
+          ],
+          "name": "org.apache.commons:commons-configuration2",
+          "version": "2.10.1"
+        }
+      ],
+      "latest_no_vulnerabilities": [
+        {
+          "fixed_advisories": [
+            {
+              "base_severity": "medium",
+              "id": "GHSA-pvp8-3xj6-8c6x"
+            }
+          ],
+          "name": "commons-configuration:commons-configuration",
+          "version": "20041012.002804"
         }
       ]
+    },
+    "recommended": {
+      "fixed_advisories": [
+        {
+          "base_severity": "medium",
+          "id": "GHSA-pvp8-3xj6-8c6x"
+        }
+      ],
+      "name": "org.apache.commons:commons-configuration2",
+      "original_library_name": "commons-configuration:commons-configuration",
+      "version": "2.10.1",
+      "vulnerable_package": true
     }
   },
   "resource_id": "abc123def456789012345678901234ab",
-  "resource_name": "orders-service",
-  "resource_type": "service",
+  "resource_name": "github.com/example-org/java-app",
+  "resource_type": "repository",
   "risk": {
-    "has_high_exploitability_chance": true,
+    "has_exploit_available": false,
+    "has_high_exploitability_chance": false,
     "is_exposed_to_attacks": false,
+    "is_function_reachable": false,
     "is_production": true
   },
   "risk_details": {
     "has_exploit_available": {
-      "impact_cvss": "neutral"
+      "evidence": {
+        "type": "unavailable"
+      },
+      "impact_cvss": "safer",
+      "value": false
     },
     "has_high_exploitability_chance": {
-      "impact_cvss": "neutral",
-      "value": true
+      "evidence": {
+        "epss_score": 0.00181,
+        "epss_severity": "low"
+      },
+      "impact_cvss": "safer",
+      "value": false
     },
     "is_exposed_to_attacks": {
       "impact_cvss": "neutral",
+      "value": false
+    },
+    "is_function_reachable": {
       "value": false
     },
     "is_production": {
@@ -863,41 +995,41 @@ There are eleven different categories for security findings. Click on a category
       "value": true
     }
   },
-  "service": {
-    "git_repository_url": "github.com/example-org/web-app",
-    "name": "orders-service"
-  },
   "severity": "low",
   "severity_details": {
     "adjusted": {
-      "score": 2.7,
+      "score": 1.7,
       "value": "low",
       "value_id": 1,
-      "vector": "CVSS:3.1/AV:P/AC:H/PR:H/UI:R/S:U/C:N/I:L/A:L/E:X/RL:X/RC:X/CR:X/IR:X/AR:X/MAV:X/MAC:X/MPR:X/MUI:X/MS:X/MC:X/MI:X/MA:X"
+      "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:U/MAC:H"
     },
     "base": {
-      "score": 2.7,
-      "value": "low",
-      "value_id": 1,
-      "vector": "CVSS:3.0/AV:P/AC:H/PR:H/UI:R/S:U/C:N/I:L/A:L"
+      "score": 6.9,
+      "value": "medium",
+      "value_id": 2,
+      "vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:U"
     }
   },
   "status": "open",
   "tags": [
-    "service:orders-service",
     "dd_rule_type:not-empty",
-    "env:prod",
-    "scored:false",
-    "source:datadog",
     "team:backend",
-    "origin:apm"
+    "scored:false",
+    "origin:ci",
+    "source:datadog",
+    "service:example-service"
   ],
-  "title": "Archived repository for github.com/example/deprecated-date-lib",
+  "title": "Apache Commons Configuration Uncontrolled Resource Consumption",
   "vulnerability": {
+    "cwes": [
+      "CWE-400"
+    ],
+    "first_commit": "abc123def456789012345678901234567890aaaa",
     "hash": "abc123def456789012345678901234567890abcdef12345678901234567890ab",
+    "last_commit": "abc123def456789012345678901234567890abcd",
     "stack": {
-      "ecosystem": "go",
-      "language": "go"
+      "ecosystem": "maven",
+      "language": "jvm"
     }
   },
   "workflow": {
@@ -1181,7 +1313,7 @@ The following sections describe all available attributes in the Security Finding
 
 
 
-{{% collapse-content title="Core Attributes" level="h3" %}}
+{{% collapse-content title="Core Attributes" level="h3" id="core-attributes" %}}
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
 
@@ -1284,7 +1416,7 @@ These attributes are present on all security findings and describe the fundament
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Workflow" level="h3" %}}
+{{% collapse-content title="Workflow" level="h3" id="workflow" %}}
 
 All mutable information related to the management of a finding after it was detected. Includes fields that can be updated manually through the UI or automatically through pipelines.
 
@@ -1574,7 +1706,7 @@ Integrations like Jira, Case Management, or ServiceNow used to triage and remedi
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Risk" level="h3" %}}
+{{% collapse-content title="Risk" level="h3" id="risk" %}}
 
 Risk-related attributes for the finding. Each key must have a matching key in the `risk_details` namespace.
 
@@ -1652,7 +1784,7 @@ Risk-related attributes for the finding. Each key must have a matching key in th
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Risk Details" level="h3" %}}
+{{% collapse-content title="Risk Details" level="h3" id="risk-details" %}}
 
 Contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation.
 
@@ -2315,7 +2447,7 @@ Groups information about whether SHA1 is used in a weak hash.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Rule" level="h3" %}}
+{{% collapse-content title="Rule" level="h3" id="rule" %}}
 
 Describes how to discover a vulnerability. Vulnerability findings with rules mean the vulnerability was detected in source code or running code. Rules are also used for non-vulnerability findings such as misconfigurations or API security.
 
@@ -2358,7 +2490,7 @@ Describes how to discover a vulnerability. Vulnerability findings with rules mea
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Advisory" level="h3" %}}
+{{% collapse-content title="Advisory" level="h3" id="advisory" %}}
 
 Ties a vulnerability to a set of specific software versions. Vulnerability findings with advisories mean a vulnerable version of the software was detected (typically through SBOMs).
 
@@ -2411,7 +2543,7 @@ Ties a vulnerability to a set of specific software versions. Vulnerability findi
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Vulnerability" level="h3" %}}
+{{% collapse-content title="Vulnerability" level="h3" id="vulnerability" %}}
 
 Contains information specific to vulnerabilities.
 
@@ -2500,7 +2632,7 @@ Specifies the technological stack where the vulnerability was found.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Remediation" level="h3" %}}
+{{% collapse-content title="Remediation" level="h3" id="remediation" %}}
 
 Groups information about the finding's remediation.
 
@@ -2841,7 +2973,7 @@ Specifies the closest patch available to address the current advisory.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Compliance" level="h3" %}}
+{{% collapse-content title="Compliance" level="h3" id="compliance" %}}
 
 Contains information specific to compliance findings, such as compliance rule or evaluation (pass/fail).
 
@@ -2879,7 +3011,7 @@ Contains information specific to compliance findings, such as compliance rule or
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Cloud Resource" level="h3" %}}
+{{% collapse-content title="Cloud Resource" level="h3" id="cloud-resource" %}}
 
 Groups attributes identifying the cloud resource affected by the finding.
 
@@ -2957,7 +3089,7 @@ Groups attributes identifying the cloud resource affected by the finding.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Iac Resource" level="h3" %}}
+{{% collapse-content title="Iac Resource" level="h3" id="iac-resource" %}}
 
 Groups attributes identifying the Infrastructure as Code (IaC) resource related to the finding.
 
@@ -2985,7 +3117,7 @@ Groups attributes identifying the Infrastructure as Code (IaC) resource related 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="K8S" level="h3" %}}
+{{% collapse-content title="K8S" level="h3" id="k8s" %}}
 
 Contains Kubernetes fields for findings generated against Kubernetes resources.
 
@@ -3008,7 +3140,7 @@ Contains Kubernetes fields for findings generated against Kubernetes resources.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Host" level="h3" %}}
+{{% collapse-content title="Host" level="h3" id="host" %}}
 
 Contains host information.
 
@@ -3077,7 +3209,7 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Service" level="h3" %}}
+{{% collapse-content title="Service" level="h3" id="service" %}}
 
 <table>
   <thead>
@@ -3108,7 +3240,7 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Container Image" level="h3" %}}
+{{% collapse-content title="Container Image" level="h3" id="container-image" %}}
 
 <table>
   <thead>
@@ -3174,7 +3306,7 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Git" level="h3" %}}
+{{% collapse-content title="Git" level="h3" id="git" %}}
 
 Contains Git metadata linking a finding to source code context. Includes information about the repository, branch, commit, author, and committer.
 
@@ -3304,7 +3436,7 @@ Contains details about the committer.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Code Location" level="h3" %}}
+{{% collapse-content title="Code Location" level="h3" id="code-location" %}}
 
 Groups attributes pinpointing the specific file and line numbers where the finding is located.
 
@@ -3362,7 +3494,7 @@ Groups attributes pinpointing the specific file and line numbers where the findi
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Package" level="h3" %}}
+{{% collapse-content title="Package" level="h3" id="package" %}}
 
 Contains package manager information. A package manager automates the installation, upgrading, configuration, and removal of software packages.
 
@@ -3634,7 +3766,7 @@ Version declared for the root parent.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Secret" level="h3" %}}
+{{% collapse-content title="Secret" level="h3" id="secret" %}}
 
 <table>
   <thead>
@@ -3655,7 +3787,7 @@ Version declared for the root parent.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Api Endpoint" level="h3" %}}
+{{% collapse-content title="Api Endpoint" level="h3" id="api-endpoint" %}}
 
 Contains the HTTP endpoint representation.
 

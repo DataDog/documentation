@@ -18,7 +18,8 @@ further_reading:
 
 - **Datadog SDK**: `dd-trace-js` version 5.81.0 or later.
 - **OpenTelemetry API**: `@opentelemetry/api` version 1.0.0 to 1.10.0. (The Datadog SDK provides the implementation for this API).
-- **An OTLP-compatible destination**: You must have a destination ready to receive OTLP data, such as the Datadog Agent or OpenTelemetry Collector.
+- **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
+- **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][3], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 
 ## Setup
 
@@ -114,4 +115,5 @@ For more details, see the [OpenTelemetry Node.js onboarding docs][2].
 
 [1]: /opentelemetry/config/environment_variable_support
 [2]: https://github.com/open-telemetry/opentelemetry-js/blob/4dded45ec67f90998d75e3ddbde9872b6b466183/doc/metrics.md#getting-started
+[3]: /tracing/metrics/runtime_metrics/
 [200]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent 

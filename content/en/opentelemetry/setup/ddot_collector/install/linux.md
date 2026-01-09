@@ -29,7 +29,13 @@ To complete this guide, you need the following:
 - A supported Linux distribution (for example, Debian, Ubuntu, CentOS, RHEL, Fedora, SUSE).
 - `curl` must be installed to use the one-line installation script.
 
+**Network**:
+
+{{% otel-network-requirements %}}
+
 ## Install the Datadog Agent with OpenTelemetry Collector
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Installation
 

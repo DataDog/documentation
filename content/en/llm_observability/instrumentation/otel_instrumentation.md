@@ -13,7 +13,6 @@ LLM Observability supports ingesting OpenTelemetry traces that follow the [OpenT
 - An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
 
 To send <a href="/llm_observability/evaluations/external_evaluations#submitting-external-evaluations-with-the-api">external evaluations directly to the API</a> for OpenTelemetry spans, you must include the <code>source:otel</code> tag in the evaluation.
-</div>
 
 ## Setup
 
@@ -61,16 +60,16 @@ To generate traces compatible with LLM Observability, do one of the following:
 After your application starts sending data, the traces automatically appear in the [**LLM Observability Traces** page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
 <div class="alert alert-danger">
-
-- <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
-- OpenInference is not supported.
-- There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
-
+<ul>
+<li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
+<li/> OpenInference is not supported.
+<li/> There may be a 3-5 minute delay between sending traces and seeing them appear on the LLM Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
+</ul>
 </div>
 
 ## Examples
 
-#### Using Strands Agents
+### Using Strands Agents
 
 The following example demonstrates a complete application using [Strands Agents][7] with the OpenTelemetry integration. This same approach works with any framework that supports OpenTelemetry version 1.37+ semantic conventions for generative AI.
 
@@ -105,7 +104,7 @@ if __name__ == "__main__":
     print(f"Agent: {result}")
 ```
 
-#### Custom OpenTelemetry instrumentation
+### Custom OpenTelemetry instrumentation
 
 The following example demonstrates how to instrument your LLM application using custom OpenTelemetry code. This approach gives you full control over the traces and spans emitted by your application.
 
@@ -201,7 +200,7 @@ provider.force_flush()
 
 After running this example, search for `ml_app:simple-llm-example` in the LLM Observability UI to find the generated trace.
 
-#### Using OpenLLMetry
+### Using OpenLLMetry
 
 The following example demonstrates using [OpenLLMetry](https://github.com/traceloop/openllmetry) to automatically instrument OpenAI calls with OpenTelemetry.
 

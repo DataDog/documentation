@@ -19,7 +19,7 @@ further_reading:
 title: Monitor de procesos en directo
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-info">
 Live Processes y Live Process Monitoring están incluidos en el plan Enterprise. Para todos los demás planes, ponte en contacto con tu representante de cuenta o <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitar esta función.
 </div>
 

@@ -1,10 +1,12 @@
 ---
 aliases:
 - /fr/agent/guide/build-container-agent
+description: Instructions pour créer des images Docker personnalisées de l'Agent Datadog
+  à partir du code source
 title: Créer l'image de l'Agent Datadog
 ---
 
-Suivez les instructions ci-dessous pour créer l'image Docker de l'Agent Datadog pour une `<VERSION_AGENT>` spécifique (à partir de la version 6.0).
+Suivez les instructions ci-dessous pour créer l'image Docker de l'Agent Datadog pour une `<AGENT_VERSION>` spécifique (à partir de la version 6.0).
 
 1. Dupliquez le référentiel de l'Agent Datadog :
 
@@ -12,7 +14,7 @@ Suivez les instructions ci-dessous pour créer l'image Docker de l'Agent Datadog
     git clone https://github.com/DataDog/datadog-agent.git
     ```
 
-2. Accédez au dossier `datadog-agent/Dockerfile/agent/` :
+2. Accédez au dossier `datadog-agent/Dockerfiles/agent/` :
 
     ```shell
     cd datadog-agent/Dockerfiles/agent/
@@ -30,14 +32,14 @@ Suivez les instructions ci-dessous pour créer l'image Docker de l'Agent Datadog
 {{% tab "AMD" %}}
 
 ```shell
-curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<VERSION_AGENT>-1_amd64.deb -o datadog-agent_<VERSION_AGENT>-1_amd64.deb
+curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_amd64.deb -o datadog-agent_<AGENT_VERSION>-1_amd64.deb
 ```
 
 {{% /tab %}}
 {{% tab "ARM" %}}
 
 ```shell
-curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<VERSION_AGENT>-1_arm64.deb -o datadog-agent_<VERSION_AGENT>-1_arm64.deb
+curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_VERSION>-1_arm64.deb -o datadog-agent_<AGENT_VERSION>-1_arm64.deb
 ```
 
 {{% /tab %}}
@@ -51,14 +53,14 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<VERSION
 {{% tab "AMD" %}}
 
 ```shell
-docker build --build-arg <ARGUMENTS_BUILD> --file amd64/Dockerfile --pull --tag <TAG_IMAGE> .
+docker build --build-arg <BUILD_ARGS> --file amd64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
 {{% /tab %}}
 {{% tab "ARM" %}}
 
 ```shell
-docker build --build-arg <ARGUMENTS_BUILD> --file arm64/Dockerfile --pull --tag <TAG_IMAGE> .
+docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAGE_TAG> .
 ```
 
 {{% /tab %}}
@@ -70,7 +72,7 @@ docker build --build-arg <ARGUMENTS_BUILD> --file arm64/Dockerfile --pull --tag 
     docker build --build-arg DD_AGENT_ARTIFACT=./datadog-agent_7.17.0-1_amd64.deb --file amd64/Dockerfile --pull --tag documentation-example .
     ```
 
-     Les `<ARGUMENTS_BUILD>` acceptés sont :
+     Les `<BUILD_ARGS>` acceptés sont :
 
     | Argument          | Définition                                                                  | Défaut |
     | ----------------- | --------------------------------------------------------------------------- | ------- |

@@ -7,7 +7,7 @@ aliases:
 private: false
 code_lang: ruby
 type: multi-code-lang
-code_lang_weight: 30
+code_lang_weight: 60
 further_reading:
     - link: 'agent'
       tag: 'Documentation'
