@@ -52,6 +52,7 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 ```
 -Ddatadog.slf4j.simpleLogger.jsonEnabled=true
 ```
+Since version `1.58.0`, you can use the `DD_LOG_FORMAT_JSON` environment variable to control the Datadog Java Tracer log format.
 
 
 [1]: https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html

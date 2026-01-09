@@ -47,7 +47,7 @@ Set up the Google Cloud Storage destination and its environment variables when y
 
 ### Set the environment variables
 
-{{% observability_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_google_cloud_storage %}}
 
 ## How the destination works
 

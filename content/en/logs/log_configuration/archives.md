@@ -438,4 +438,4 @@ This directory structure simplifies the process of querying your historical log 
 [12]: /account_management/rbac/permissions#logs_read_index_data
 [13]: /account_management/rbac/permissions#logs_read_data
 [14]: /logs/explorer/live_tail/
-[15]: /service_management/events/explorer/
+[15]: /events/explorer/

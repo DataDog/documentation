@@ -6,6 +6,9 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog RUM releases! (App login required)"
@@ -249,13 +252,13 @@ You must have edit access to restore general access to a restricted application.
 [5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
 [7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[8]: /real_user_monitoring/ios/mobile_vitals/
-[9]: /real_user_monitoring/android/mobile_vitals/
-[10]: /real_user_monitoring/ios/web_view_tracking/
-[11]: /real_user_monitoring/android/web_view_tracking/
-[12]: /real_user_monitoring/session_replay/browser/
-[13]: /real_user_monitoring/session_replay/browser/privacy_options/
-[14]: /real_user_monitoring/session_replay/browser/developer_tools/
+[8]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/
+[9]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
+[10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
+[11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
+[12]: /session_replay/browser/
+[13]: /session_replay/browser/privacy_options/
+[14]: /session_replay/browser/developer_tools/
 [15]: /real_user_monitoring/application_monitoring/browser/setup/
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect

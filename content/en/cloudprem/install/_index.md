@@ -38,9 +38,3 @@ CloudPrem supports the following object storage types:
   {{< nextlink href="/cloudprem/install/azure_aks/" >}}Install on Azure AKS{{< /nextlink >}}
   {{< nextlink href="/cloudprem/install/docker/" >}}Install locally with Docker for testing{{< /nextlink >}}
 {{< /whatsnext >}}
-
-<!-- ## Self-managed Kubernetes
-
-{{< whatsnext desc=" ">}}
-  {{< nextlink href="cloudprem/install/kubernetes_nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
-{{< /whatsnext >}} -->

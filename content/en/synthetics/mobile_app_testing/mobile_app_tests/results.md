@@ -8,7 +8,7 @@ further_reading:
 - link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
-- link: "/service_management/events/explorer"
+- link: "/events/explorer"
   tag: "Documentation"
   text: "Learn about the Events Explorer"
 ---
