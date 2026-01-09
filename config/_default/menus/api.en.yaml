@@ -3116,8 +3116,7 @@ menu:
           - v2
         operationids:
           - SearchSecurityFindings
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Create Jira issues for security findings
       url: '#create-jira-issues-for-security-findings'
@@ -3191,8 +3190,7 @@ menu:
           - v2
         operationids:
           - ListSecurityFindings
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Get a finding
       url: '#get-a-finding'
