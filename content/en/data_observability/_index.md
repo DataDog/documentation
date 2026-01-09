@@ -1,54 +1,31 @@
 ---
-title: Quality Monitoring
-description: "Detect data freshness delays, unusual patterns, and column-level metric changes before they impact downstream systems."
+title: Data Observability
+description: "Monitor data quality, performance, and cost with Data Observability to detect anomalies, analyze data lineage, and prevent issues affecting downstream systems."
 further_reading:
-  - link: '/data_observability/'
-    tag: 'Documentation'
-    text: 'Data Observability'
-  - link: '/data_observability/jobs_monitoring'
-    tag: 'Documentation'
-    text: 'Jobs Monitoring'
+ - link: '/data_observability/quality_monitoring/'
+   tag: 'Documentation'
+   text: 'Quality Monitoring'
+ - link: '/data_observability/jobs_monitoring'
+   tag: 'Documentation'
+   text: 'Jobs Monitoring'
+ - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/'
+   tag: 'Blog'
+   text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
 ---
 
 ## Overview
-
-Quality Monitoring detects issues such as data freshness delays, unusual data patterns, and changes in column-level metrics before they affect dashboards, machine learning models, or other downstream systems. It alerts you to potential problems and provides context to trace them back to upstream jobs or sources.
+Data Observability helps data teams detect, resolve, and prevent issues that affect data quality, performance, and cost. It enables teams to monitor anomalies, troubleshoot faster, and maintain trust in the data powering downstream systems.
 
 ## Key capabilities
 
-With Quality Monitoring, you can:
-- Detect delayed updates and unexpected row count behavior in your tables
-- Surface changes in column-level metrics such as null counts or uniqueness
-- Set up monitors using static thresholds or historical baselines
-- Trace quality issues using lineage views that show upstream jobs and downstream impact
+With Data Observability, you can:
+- Catch data quality issues with ML-powered monitoring for volume, freshness, and column distributions
+- Trace data dependencies and assess blast radius with column-level lineage from source to downstream systems
+- Monitor Databricks and Spark jobs across K8s, Amazon EMR, and Google Dataproc to identify failures and optimize costs
 
-## Supported data sources
+## Get started
 
-{{< whatsnext desc="Connect to these data warehouses:" >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/snowflake" >}}Snowflake{{< /nextlink >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/databricks" >}}Databricks{{< /nextlink >}}
-   {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
+{{< whatsnext desc="Data Observability consists of the following:" >}}
+   {{< nextlink href="/data_observability/quality_monitoring/" >}}Quality Monitoring: Identify data issues before downstream BI and AI applications are impacted.{{< /nextlink >}}
+   {{< nextlink href=/data_observability/jobs_monitoring/" >}}Jobs Monitoring: Observe, troubleshoot, and optimize jobs across your data pipelines.{{< /nextlink >}}
 {{< /whatsnext >}}
-
-{{< whatsnext desc="Integrate with these transformation and orchestration tools:" >}}
-   {{< nextlink href="data_observability/jobs_monitoring/databricks" >}}Databricks{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/airflow" >}}Airflow{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/dbtcore" >}}dbt Core{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/kubernetes" >}}Spark on Kubernetes{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/openlineage" >}}Custom Jobs using OpenLineage{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="Track downstream impact in these BI tools:" >}}
-   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/tableau" >}}Tableau{{< /nextlink >}}
-   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/sigma" >}}Sigma{{< /nextlink >}}
-   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/metabase" >}}Metabase{{< /nextlink >}}
-   {{< nextlink href="data_observability/quality_monitoring/business_intelligence/powerbi" >}}Power BI{{< /nextlink >}}
-{{< /whatsnext >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
