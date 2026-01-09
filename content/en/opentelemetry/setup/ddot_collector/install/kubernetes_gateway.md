@@ -54,7 +54,7 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.156.0 or higher.
+    * Datadog Helm chart version 3.160.0 or higher.
     * [kubectl][4].
 * **Network**:
   {{% otel-network-requirements %}}

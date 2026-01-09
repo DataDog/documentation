@@ -99,10 +99,10 @@ nav_sections:
         link: data_streams/
         icon: datastreams-monitoring
         desc: Track and improve performance of your data streaming pipelines
-      - title: Data Jobs Monitoring
-        link: data_jobs/
+      - title: Data Observability
+        link: data_observability/quality_monitoring/
         icon: data-jobs-monitoring
-        desc: Monitor and optimize your data processing jobs
+        desc: Monitor data quality, performance, and cost
       - title: Universal Service Monitoring
         link: universal_service_monitoring/
         icon: usm

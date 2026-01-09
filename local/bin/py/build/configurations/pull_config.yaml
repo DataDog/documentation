@@ -485,11 +485,13 @@
             globs:
               - 'docs/kubectl-plugin.md'
             options:
-              dest_path: '/containers/datadog_operator/'
+              dest_path: '/containers/kubernetes/'
               file_name: 'kubectl_plugin.md'
               front_matters:
-                title: Datadog Operator Plugin for kubectl
+                title: Datadog Plugin for kubectl
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/kubectl-plugin.md"]
+                aliases:
+                  - /containers/datadog_operator/kubectl_plugin
           - action: pull-and-push-file
             branch: main
             globs:

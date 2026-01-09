@@ -21,24 +21,27 @@ menu:
     - name: Application Performance
       identifier: apm_heading
       weight: 7000000
+    - name: Data Observability
+      identifier: data_observability_heading
+      weight: 8000000
     - name: Digital Experience
       identifier: digital_experience_heading
-      weight: 8000000
+      weight: 9000000
     - name: Software Delivery
       identifier: software_delivery_heading
-      weight: 9000000
+      weight: 10000000
     - name: Security
       identifier: security_platform_heading
-      weight: 10000000
+      weight: 11000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 11000000
+      weight: 12000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 12000000
+      weight: 13000000
     - name: Administration
       identifier: administration_heading
-      weight: 13000000
+      weight: 14000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -2616,231 +2619,231 @@ menu:
       parent: events
       weight: 10
     - name: Incident Management
-      url: service_management/incident_management/
+      url: incident_response/incident_management/
       pre: incidents
       parent: incident_response_heading
       identifier: incidents
       weight: 20000
     - name: Declare an Incident
-      url: service_management/incident_management/declare
+      url: incident_response/incident_management/declare
       parent: incidents
       identifier: incident_declare
       weight: 1
     - name: Describe an Incident
-      url: service_management/incident_management/describe
+      url: incident_response/incident_management/describe
       parent: incidents
       identifier: incident_describe
       weight: 2
     - name: Response Team
-      url: service_management/incident_management/response_team
+      url: incident_response/incident_management/response_team
       parent: incidents
       identifier: response_team
       weight: 3
     - name: Notification
-      url: service_management/incident_management/notification
+      url: incident_response/incident_management/notification
       parent: incidents
       identifier: incident_notification
       weight: 4
     - name: Investigate an Incident
-      url: service_management/incident_management/investigate
+      url: incident_response/incident_management/investigate
       parent: incidents
       identifier: incident_investigate
       weight: 5
     - name: Timeline
-      url: service_management/incident_management/investigate/timeline
+      url: incident_response/incident_management/investigate/timeline
       parent: incident_investigate
       identifier: incident_investigate_timeline
       weight: 501
     - name: Follow-ups
-      url: service_management/incident_management/follow-ups
+      url: incident_response/incident_management/follow-ups
       parent: incident_investigate
       identifier: incident_investigate_follow_ups
       weight: 502
     - name: Incident AI
-      url: service_management/incident_management/incident_ai
+      url: incident_response/incident_management/incident_ai
       identifier: incident_ai
       parent: incidents
       weight: 6
     - name: Incident Settings
-      url: service_management/incident_management/incident_settings
+      url: incident_response/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
       weight: 7
     - name: Information
-      url: service_management/incident_management/incident_settings/information
+      url: incident_response/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
       weight: 701
     - name: Property Fields
-      url: service_management/incident_management/incident_settings/property_fields
+      url: incident_response/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
       weight: 702
     - name: Responder Types
-      url: service_management/incident_management/incident_settings/responder_types
+      url: incident_response/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
       weight: 703
     - name: Integrations
-      url: service_management/incident_management/incident_settings/integrations
+      url: incident_response/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
       weight: 704
     - name: Notification Rules
-      url: service_management/incident_management/incident_settings/notification_rules
+      url: incident_response/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
       weight: 705
     - name: Templates
-      url: service_management/incident_management/incident_settings/templates
+      url: incident_response/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
       weight: 706
     - name: Incident Analytics
-      url: service_management/incident_management/analytics
+      url: incident_response/incident_management/analytics
       parent: incidents
       identifier: analytics
       weight: 8
     - name: Integrations
-      url: service_management/incident_management/integrations
+      url: incident_response/incident_management/integrations
       parent: incidents
       identifier: incidents_integrations
       weight: 9
     - name: Slack
-      url: service_management/incident_management/integrations/slack
+      url: incident_response/incident_management/integrations/slack
       parent: incidents_integrations
       identifier: incidents_integrations_slack
       weight: 901
     - name: Microsoft Teams
-      url: service_management/incident_management/integrations/microsoft_teams
+      url: incident_response/incident_management/integrations/microsoft_teams
       parent: incidents_integrations
       identifier: incidents_microsoft_teams
       weight: 902
     - name: Jira
-      url: service_management/incident_management/integrations/jira
+      url: incident_response/incident_management/integrations/jira
       parent: incidents_integrations
       identifier: incidents_integrations_jira
       weight: 903
     - name: ServiceNow
-      url: service_management/incident_management/integrations/servicenow
+      url: incident_response/incident_management/integrations/servicenow
       parent: incidents_integrations
       identifier: incidents_integrations_servicenow
       weight: 904
     - name: Status Pages
-      url: service_management/incident_management/integrations/status_pages
+      url: incident_response/incident_management/integrations/status_pages
       parent: incidents_integrations
       identifier: incidents_integrations_status_pages
       weight: 905
     - name: Atlassian Statuspage
-      url: service_management/incident_management/integrations/statuspage
+      url: incident_response/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 906
     - name: On-Call
-      url: service_management/on-call/
+      url: incident_response/on-call/
       pre: on-call
       parent: incident_response_heading
       identifier: oncall
       weight: 30000
     - name: Datadog Clipboard
-      url: service_management/incident_management/datadog_clipboard
+      url: incident_response/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
       weight: 10
     - name: Onboard a Team
-      url: service_management/on-call/teams/
+      url: incident_response/on-call/teams/
       parent: oncall
       identifier: oncall_teams
       weight: 1
     - name: Trigger a Page
-      url: service_management/on-call/triggering_pages/
+      url: incident_response/on-call/triggering_pages/
       parent: oncall
       identifier: oncall_triggering_pages
       weight: 2
     - name: Live Call Routing
-      url: service_management/on-call/triggering_pages/live_call_routing
+      url: incident_response/on-call/triggering_pages/live_call_routing
       identifier: oncall_live_call_routing
       parent: oncall_triggering_pages
       weight: 201
     - name: Routing Rules
-      url: service_management/on-call/routing_rules/
+      url: incident_response/on-call/routing_rules/
       parent: oncall
       identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
-      url: service_management/on-call/escalation_policies/
+      url: incident_response/on-call/escalation_policies/
       parent: oncall
       identifier: oncall_escalation_policies
       weight: 4
     - name: Schedules
-      url: service_management/on-call/schedules/
+      url: incident_response/on-call/schedules/
       parent: oncall
       identifier: oncall_schedules
       weight: 5
     - name: Automations
-      url: service_management/on-call/automations
+      url: incident_response/on-call/automations
       parent: oncall
       identifier: oncall_automations
       weight: 6
     - name: Profile Settings
-      url: service_management/on-call/profile_settings/
+      url: incident_response/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
       weight: 7
     - name: Guides
-      url: service_management/on-call/guides/
+      url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
       weight: 8
     - name: Status Pages
-      url: service_management/status_pages/
+      url: incident_response/status_pages/
       pre: status-page-wui
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
     - name: Case Management
-      url: service_management/case_management/
+      url: incident_response/case_management/
       pre: case-management
       parent: incident_response_heading
       identifier: case_management
       weight: 60000
     - name: Projects
-      url: service_management/case_management/projects
+      url: incident_response/case_management/projects
       parent: case_management
       identifier: case_management_projects
       weight: 1
     - name: Settings
-      url: service_management/case_management/settings
+      url: incident_response/case_management/settings
       parent: case_management_projects
       identifier: case_management_settings
       weight: 102
     - name: Create a Case
-      url: service_management/case_management/create_case
+      url: incident_response/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
       weight: 2
     - name: Customization
-      url: service_management/case_management/customization
+      url: incident_response/case_management/customization
       parent: case_management
       identifier: case_management_customization
       weight: 3
     - name: View and Manage Cases
-      url: service_management/case_management/view_and_manage
+      url: incident_response/case_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
       weight: 4
     - name: Notifications and Integrations
-      url: service_management/case_management/notifications_integrations
+      url: incident_response/case_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
       weight: 5
     - name: Case Automation Rules
-      url: service_management/case_management/automation_rules
+      url: incident_response/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
     - name: Troubleshooting
-      url: service_management/case_management/troubleshooting
+      url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
@@ -3303,16 +3306,21 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
       weight: 410
+    - name: kubectl Plugin
+      url: containers/kubernetes/kubectl_plugin
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_kubectlplugin
+      weight: 411
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 411
+      weight: 412
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 412
+      weight: 413
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -3403,11 +3411,6 @@ menu:
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
       weight: 804
-    - name: kubectl Plugin
-      url: containers/datadog_operator/kubectl_plugin
-      identifier: containers_datadog_operator_kubectlplugin
-      parent: containers_datadog_operator
-      weight: 805
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
@@ -4274,21 +4277,26 @@ menu:
       identifier: dyninst
       parent: tracing_trace_collection
       weight: 204
+    - name: Enabling
+      url: tracing/trace_collection/dynamic_instrumentation/enabling/
+      identifier: dyninst_enable
+      parent: dyninst
+      weight: 2041
     - name: Autocomplete and Search
       url: tracing/trace_collection/dynamic_instrumentation/symdb
       identifier: dyninst_symdb
       parent: dyninst
-      weight: 2041
+      weight: 2042
     - name: Expression Language
       url: tracing/trace_collection/dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 2042
+      weight: 2043
     - name: Sensitive Data Scrubbing
       url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
       identifier: dyninst_sensitive_data_scrubbing
       parent: dyninst
-      weight: 2043
+      weight: 2044
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -4534,11 +4542,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Service Override Removal
+      url: tracing/services/service_override_removal
+      parent: tracing_services
+      identifier: tracing_service_override_removal
+      weight: 909
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 909
+      weight: 910
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -5087,23 +5100,103 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Data Jobs Monitoring
-      url: data_jobs/
+    - name: Quality Monitoring
+      url: data_observability/quality_monitoring/
+      pre: inventories
+      identifier: quality_monitoring
+      parent: data_observability_heading
+      weight: 60000
+    - name: Data Warehouses
+      url: data_observability/quality_monitoring/data_warehouses
+      identifier: data_warehouses
+      parent: quality_monitoring
+      weight: 200000
+    - name: Snowflake
+      url: data_observability/quality_monitoring/data_warehouses/snowflake
+      identifier: snowflake
+      parent: data_warehouses
+      weight: 1000000
+    - name: Databricks
+      url: data_observability/quality_monitoring/data_warehouses/databricks
+      identifier: databricks
+      parent: data_warehouses
+      weight: 2000000
+    - name: BigQuery
+      url: data_observability/quality_monitoring/data_warehouses/bigquery
+      identifier: bigquery
+      parent: data_warehouses
+      weight: 3000000
+    - name: Business Intelligence Integrations
+      url: data_observability/quality_monitoring/business_intelligence
+      identifier: business_intelligence_integrations
+      parent: quality_monitoring
+      weight: 300000
+    - name: Tableau
+      url: data_observability/quality_monitoring/business_intelligence/tableau
+      identifier: business_intelligence_integrations_tableau
+      parent: business_intelligence_integrations
+      weight: 1000000
+    - name: Sigma
+      url: data_observability/quality_monitoring/business_intelligence/sigma
+      identifier: business_intelligence_integrations_sigma
+      parent: business_intelligence_integrations
+      weight: 2000000
+    - name: Metabase
+      url: data_observability/quality_monitoring/business_intelligence/metabase
+      identifier: business_intelligence_integrations_metabase
+      parent: business_intelligence_integrations
+      weight: 3000000
+    - name: Power BI
+      url: data_observability/quality_monitoring/business_intelligence/powerbi
+      identifier: business_intelligence_integrations_powerbi
+      parent: business_intelligence_integrations
+      weight: 4000000
+    - name: Jobs Monitoring
+      url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
       identifier: data_jobs
-      parent: apm_heading
-      weight: 60000
-    - name: Data Observability
-      url: data_observability/
-      pre: inventories
-      identifier: data_observability
-      parent: apm_heading
+      parent: data_observability_heading
       weight: 70000
-    - name: Datasets
-      url: data_observability/datasets
-      identifier: datasets
-      parent: data_observability
+    - name: Databricks
+      url: data_observability/jobs_monitoring/databricks
+      identifier: jobs_monitoring_databricks
+      parent: data_jobs
       weight: 100000
+    - name: Airflow
+      url: data_observability/jobs_monitoring/airflow
+      identifier: jobs_monitoring_airflow
+      parent: data_jobs
+      weight: 200000
+    - name: dbt
+      url: data_observability/jobs_monitoring/dbt
+      identifier: jobs_monitoring_dbt
+      parent: data_jobs
+      weight: 300000
+    - name: Spark on Kubernetes
+      url: data_observability/jobs_monitoring/kubernetes
+      identifier: jobs_monitoring_kubernetes
+      parent: data_jobs
+      weight: 400000
+    - name: Spark on Amazon EMR
+      url: data_observability/jobs_monitoring/emr
+      identifier: jobs_monitoring_emr
+      parent: data_jobs
+      weight: 500000
+    - name: Spark on Google Dataproc
+      url: data_observability/jobs_monitoring/dataproc
+      identifier: jobs_monitoring_dataproc
+      parent: data_jobs
+      weight: 600000
+    - name: Custom Jobs (OpenLineage)
+      url: data_observability/jobs_monitoring/openlineage
+      identifier: openlineage_integrations
+      parent: data_jobs
+      weight: 700000
+    - name: Datadog Agent for OpenLineage Proxy
+      url: data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage
+      identifier: openlineage_datadog_agent_for_openlineage
+      parent: openlineage_integrations
+      weight: 1000000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
@@ -5701,11 +5794,16 @@ menu:
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_failures
       weight: 102
+    - name: Change Failure Detection
+      url: dora_metrics/change_failure_detection/
+      parent: dora_metrics
+      identifier: dora_metrics_change_failure_detection
+      weight: 2
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 2
+      weight: 3
     - name: Feature Flags
       url: feature_flags/
       pre: ci
@@ -5727,6 +5825,16 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_ios
       weight: 102
+    - name: JavaScript
+      url: feature_flags/client/javascript
+      parent: feature_flags_client
+      identifier: feature_flags_client_javascript
+      weight: 103
+    - name: React
+      url: feature_flags/client/react
+      parent: feature_flags_client
+      identifier: feature_flags_client_react
+      weight: 104
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
@@ -6073,20 +6181,20 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
       weight: 409
-    - name: Google Chronicle
-      url: observability_pipelines/destinations/google_chronicle
-      parent: observability_pipelines_destinations
-      identifier: observability_pipelines_google_chronicle
-      weight: 410
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 411
+      weight: 410
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
+      weight: 411
+    - name: Google SecOps
+      url: observability_pipelines/destinations/google_secops/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_google_secops
       weight: 412
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
@@ -6630,16 +6738,21 @@ menu:
       parent: log_management_heading
       identifier: cloudprem
       weight: 30000
+    - name: Quickstart
+      url: /cloudprem/quickstart
+      parent: cloudprem
+      identifier: cloudprem_quickstart
+      weight: 1
     - name: Architecture
       url: /cloudprem/architecture
       parent: cloudprem
       identifier: cloudprem_architecture
-      weight: 1
+      weight: 2
     - name: Installation
       url: /cloudprem/install
       parent: cloudprem
       identifier: cloudprem_installation
-      weight: 2
+      weight: 3
     - name: AWS EKS
       url: /cloudprem/install/aws_eks
       parent: cloudprem_installation
@@ -6650,6 +6763,11 @@ menu:
       parent: cloudprem_installation
       identifier: cloudprem_azure_aks
       weight: 202
+    - name: Install Locally with Docker
+      url: /cloudprem/install/docker
+      parent: cloudprem_installation
+      identifier: cloudprem_docker
+      weight: 203
     - name: Log Ingestion
       url: /cloudprem/ingest_logs/
       parent: cloudprem

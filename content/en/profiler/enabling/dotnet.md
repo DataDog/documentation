@@ -229,9 +229,13 @@ To install the .NET Profiler per-webapp:
 
 4. For standalone applications, manually restart the application as you normally would.
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
@@ -283,9 +287,13 @@ To install the .NET Profiler per-webapp:
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+6. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "Windows services" %}}
@@ -351,9 +359,13 @@ To install the .NET Profiler per-webapp:
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environment -Value $v
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "Windows Standalone applications" %}}
@@ -390,9 +402,13 @@ To install the .NET Profiler per-webapp:
    REM start the application here
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. Optional: Set up [Source Code Integration][2] to connect your profiling data with your Git repositories.
+
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][1]. If they do not, refer to the [Troubleshooting][3] guide.
 
 [1]: https://app.datadoghq.com/profiling
+[2]: /integrations/guide/source-code-integration/?tab=net
+[3]: /profiler/profiler_troubleshooting/dotnet/
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
