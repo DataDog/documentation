@@ -2,9 +2,15 @@
 title: Custom LLM-as-a-Judge Evaluations
 description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
 further_reading:
+- link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
+  tag: "Blog"
+  text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
   text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
+  tag: "Blog"
+  text: "Building an LLM evaluation framework: best practices"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -14,9 +20,6 @@ further_reading:
 - link: "/llm_observability/evaluations/managed_evaluations"
   tag: "Documentation"
   text: "Learn about managed evaluations"
-- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
-  tag: "Blog"
-  text: "Building an LLM evaluation framework: best practices"
 - link: "https://huggingface.co/learn/cookbook/llm_judge"
   tag: "Hugging Face"
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
@@ -279,7 +282,7 @@ You can:
 
 [1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
-[3]: /service_management/events/explorer/facets/
+[3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
