@@ -125,17 +125,16 @@ In addition to the out-of-the-box integrations described above, **Change Trackin
 
 {{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
 
-
 To configure a widget using Change Tracking data:
 
 1.	In a dashboard or notebook, add or edit a supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
-3.	From the **Data source** dropdown, select **Change Tracking**.
+3.	From the **data source** dropdown, select `Change Tracking`.
 4.	Configure your filters (**Service** is required).
 5.	(Optional) For widgets that support grouping, use **Group by** to split results.
 
 {{< img src="/change_tracking/change-tracking-datasource-edit-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
 
-For Timeseries widgets, Change Tracking can also be enabled as an **event overlay** from the **Event Overlays** section. This displays changes overlaid on top of a timeseries to help correlate them with metric behavior.
+For Timeseries widgets, Change Tracking can also be enabled as an **Event Overlay**. This displays changes overlaid on top of a timeseries to help correlate them with metric behavior.
 
 {{< img src="/change_tracking/change-tracking-datasource-edit-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
 
