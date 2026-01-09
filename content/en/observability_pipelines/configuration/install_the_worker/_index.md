@@ -161,26 +161,27 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
 
-Run the one-step command below to install the Worker.
-
-```bash
-DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
-```
-
-You must replace the placeholders with the following values:
-
-- `<DATADOG_API_KEY>`: Your Datadog API.
-    - **Note**: The API key must be [enabled for Remote Configuration][1].
-- `<PIPELINE_ID>`: The ID of your pipeline.
-- `<DATADOG_SITE>`: The [Datadog site][2].
-- `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
-    - See [Environment Variables][3] for a list of source environment variables.
-- `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
-    - See [Environment Variables][3] for a list of destination environment variables.
-
-**Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+1. Run the one-step command below to install the Worker.
+    ```bash
+    DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
+    ```
+    Replace the placeholders with the following values, if applicable:
+    - `<DATADOG_API_KEY>`: Your Datadog API.
+        - **Note**: The API key must be [enabled for Remote Configuration][1].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][2].
+    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+        - See [Environment Variables][3] for a list of source environment variables.
+    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+        - See [Environment Variables][3] for a list of destination environment variables.
+    **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
+1. Restart the Worker to use the updated bootstrap file:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
 
 See [Update Existing Pipelines][4] if you want to make changes to your pipeline's configuration.
 
@@ -317,7 +318,6 @@ Follow the steps below if you want to use the one-line installation script to in
 1. Click **Select API key** to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][2].
 1. Run the one-step command provided in the UI to install the Worker.
-
     **Note**: If you are using environment variables, the environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
 1. If you are using **Secrets Manager**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secret Management] for more information.
