@@ -158,7 +158,7 @@ Access local variables configured for your test using the `config` field:
 ```shell
 {{!
 The test is configured with three local variables: APP_NAME, APP_URL, and APP_ENVIRONMENT.
-Access values using: synthetics.attributes.result.variables.config[<variable-name>].value
+Access values using: {{synthetics.attributes.result.variables.config[<variable-name>].value}}
 }}
 Application: {{synthetics.attributes.result.variables.config[APP_NAME].value}}
 URL Tested: {{synthetics.attributes.result.variables.config[APP_URL].value}}
