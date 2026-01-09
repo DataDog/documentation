@@ -3722,6 +3722,18 @@ menu:
       url: /api/latest/synthetics/
       identifier: synthetics
       generated: true
+    - name: Patch a global variable
+      url: '#patch-a-global-variable'
+      identifier: synthetics-patch-a-global-variable
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchGlobalVariable
+        unstable: []
+        order: 20
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
