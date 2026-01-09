@@ -25892,9 +25892,9 @@ components:
     WidgetTime:
       description: Time setting for the widget.
       oneOf:
-      - $ref: '#/components/schemas/WidgetLegacyLiveSpan'
       - $ref: '#/components/schemas/WidgetNewLiveSpan'
       - $ref: '#/components/schemas/WidgetNewFixedSpan'
+      - $ref: '#/components/schemas/WidgetLegacyLiveSpan'
     WidgetTimeWindows:
       description: Define a time window.
       enum:
