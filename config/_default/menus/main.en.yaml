@@ -6176,20 +6176,20 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
       weight: 409
-    - name: Google Chronicle
-      url: observability_pipelines/destinations/google_chronicle
-      parent: observability_pipelines_destinations
-      identifier: observability_pipelines_google_chronicle
-      weight: 410
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 411
+      weight: 410
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
+      weight: 411
+    - name: Google SecOps
+      url: observability_pipelines/destinations/google_secops/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_google_secops
       weight: 412
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
