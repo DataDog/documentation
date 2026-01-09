@@ -484,7 +484,7 @@ result = Datadog::AIGuard.evaluate(
 
 The evaluate method receives the following parameters:
 - `messages` (required): list of messages (prompts or tool calls) for AI Guard to evaluate.
-- `allow_raise` (optional): boolean flag; if set to `true`, the SDK raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled.
+- `allow_raise` (optional): Boolean flag; if set to `true`, the SDK raises an `AIGuardAbortError` when the assessment is `DENY` or `ABORT` and the service is configured with blocking enabled.
 
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
