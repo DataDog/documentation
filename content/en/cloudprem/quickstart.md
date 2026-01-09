@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-In this quickstart, you will:
+This quickstart covers the following:
 1. Start CloudPrem locally using Docker.
 2. Verify the cluster status.
 3. Send a "Hello World" log.
@@ -24,9 +24,9 @@ In this quickstart, you will:
 
 ## Prerequisites
 
-- Ask for the [CloudPrem Preview](https://www.datadoghq.com/product-preview/cloudprem/).
-- **Datadog API Key**: [Get your API key](https://app.datadoghq.com/organization-settings/api-keys).
-- **Docker**: [Install Docker](https://docs.docker.com/get-docker/).
+- Ask for the [CloudPrem Preview][1].
+- **Datadog API Key**: [Get your API key][2].
+- **Docker**: [Install Docker][3].
 
 ## Step 1: Start CloudPrem
 
@@ -47,21 +47,23 @@ docker run -d \
 
 ## Step 2: Verify status in the CloudPrem console
 
-Go to the [CloudPrem console](https://app.datadoghq.com/cloudprem) and check that your cluster is connected. You should see the `connected` status. 
+In Datadog, go to the [CloudPrem console][4] and check that your cluster is connected. You should see the `connected` status.
 
-You can edit the cluster metadata and rename your cluster to `demo`.
+In the CloudPrem console, you can edit the cluster metadata and rename your cluster to `demo`.
+
+{{< img src="/cloudprem/quickstart/clouprem_console.png" alt="Screenshot of the CloudPrem console showing the cluster connected status" style="width:100%;" >}}
 
 ## Step 3: Send a log
 
-Send a "Hello World" log entry directly to your local CloudPrem instance using the API:
+In your terminal, send a "Hello World" log entry directly to your local CloudPrem instance using the API:
 
 ```shell
-curl -X POST "http://localhost:7280/api/v1/datadog/ingest?commit=force" \
+curl -X POST "http://localhost:7280/api/v2/logs" \
   -H "Content-Type: application/json" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
   -d '[
     {
-      "timestamp": "$(date +%s000)",
-      "message": "Hello world from CloudPrem!",
+      "message": "Hello world from CloudPrem",
       "level": "info",
       "service": "demo"
     }
@@ -70,11 +72,22 @@ curl -X POST "http://localhost:7280/api/v1/datadog/ingest?commit=force" \
 
 ## Step 4: Explore logs
 
-1. Go to the [Datadog Log Explorer](https://app.datadoghq.com/logs?query=index=cloudprem-demo&storage=hot).
-2. You should see your "Hello world from CloudPrem!" log entry.
+1. Go to the [Datadog Log Explorer][5].
+2. On the left facet panel, select the checkbox for your index under **CLOUDPREM INDEXES**.
+3. You should see your "Hello world from CloudPrem" log entry.
+
+{{< img src="/cloudprem/quickstart/cloudprem_indexes.png" alt="The CloudPrem index selection in the Datadog Log Explorer" style="width:100%;" >}}
 
 ## Next steps
 
-Now that you have CloudPrem running, you can:
-- [Send logs with the Datadog Agent](/cloudprem/ingest_logs/datadog_agent) to automatically collect logs from your containers.
-- [Send logs with Observability Pipelines](/cloudprem/ingest_logs/observability_pipelines/).
+With CloudPrem running, you can:
+- [Send logs with the Datadog Agent][6] to automatically collect logs from your containers.
+- [Send logs with Observability Pipelines][7].
+
+[1]: https://www.datadoghq.com/product-preview/cloudprem/
+[2]: /account_management/api-app-keys/#add-an-api-key-or-client-token
+[3]: https://docs.docker.com/get-docker/
+[4]: https://app.datadoghq.com/cloudprem
+[5]: https://app.datadoghq.com/logs?query=index=cloudprem-demo&storage=hot
+[6]: /cloudprem/ingest_logs/datadog_agent
+[7]: /cloudprem/ingest_logs/observability_pipelines/
