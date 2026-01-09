@@ -5,6 +5,7 @@ type: actioncatalog
 disable_toc: true
 disable_sidebar: false
 aliases:
+- /actions/action_interface/
 - /workflows/actions_catalog
 - /service_management/service_management/workflows/actions_catalog
 - /service_management/workflows/actions_catalog
