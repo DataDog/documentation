@@ -183,6 +183,10 @@ data/workflows/
 !content/en/service_management/workflows/actions_catalog/generic_actions.md
 !content/en/service_management/workflows/actions_catalog/logic_actions.md
 
+# session replay
+content/en/product_analytics/session_replay/**/*
+content/en/real_user_monitoring/session_replay/**/*
+
 # semantic tag colors
 layouts/shortcodes/semantic-color.md
 
