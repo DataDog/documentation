@@ -11655,6 +11655,61 @@ components:
           example: UTC
           type: string
       type: object
+    SLOCountDefinition:
+      description: 'A count-based (metric) SLI specification, composed of three parts:
+        the good events formula, the total events formula,
+
+        and the underlying queries. Usage is not permitted when request payload contains
+        `query` field.'
+      example:
+        good_events_formula: query1 - query2
+        queries:
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+        - data_source: metrics
+          name: query2
+          query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+        total_events_formula: query1
+      properties:
+        good_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+        queries:
+          example:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          minItems: 1
+          type: array
+        total_events_formula:
+          $ref: '#/components/schemas/SLOFormula'
+      required:
+      - good_events_formula
+      - total_events_formula
+      - queries
+      type: object
+    SLOCountSpec:
+      additionalProperties: false
+      description: A metric SLI specification.
+      example:
+        count:
+          good_events_formula: query1 - query2
+          queries:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          - data_source: metrics
+            name: query2
+            query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+          total_events_formula: query1
+      properties:
+        count:
+          $ref: '#/components/schemas/SLOCountDefinition'
+      required:
+      - count
+      type: object
     SLOCreator:
       description: The creator of the SLO
       nullable: true
@@ -12502,8 +12557,16 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+          description: 'The metric query of good / total events. This is not allowed
+            if the `sli_specification` field
+
+            is used in the same request.'
         sli_specification:
           $ref: '#/components/schemas/SLOSliSpec'
+          description: 'A generic SLI specification. This is currently used for time-slice
+            and count-based (metric) SLOs only.
+
+            This is not allowed if the `query` field is used in the same request.'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -12560,9 +12623,10 @@ components:
       type: object
     SLOSliSpec:
       description: A generic SLI specification. This is currently used for time-slice
-        SLOs only.
+        and count-based (metric) SLOs only.
       oneOf:
       - $ref: '#/components/schemas/SLOTimeSliceSpec'
+      - $ref: '#/components/schemas/SLOCountSpec'
     SLOState:
       description: State of the SLO.
       enum:
@@ -13745,13 +13809,15 @@ components:
       - type
       type: object
     ServiceLevelObjectiveQuery:
-      description: 'A metric-based SLO. **Required if type is `metric`**. Note that
+      description: 'A count-based (metric) SLO query. This field has been superseded
+        by `sli_specification` but is retained for backwards compatibility. Note that
         Datadog only allows the sum by aggregator
 
         to be used because this will sum up all request counts instead of averaging
         them, or taking the max or
 
-        min of all of those requests.'
+        min of all of those requests. Usage is not permitted when request payload
+        contains `sli_specification` field.'
       properties:
         denominator:
           description: A Datadog metric query for total (valid) events.
