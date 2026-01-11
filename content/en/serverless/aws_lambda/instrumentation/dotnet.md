@@ -17,6 +17,21 @@ further_reading:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
+## Prerequisites
+
+Before you begin, complete these prerequisites:
+
+1. **Review compatibility requirements:** See [.NET Core Compatibility](/tracing/trace_collection/compatibility/dotnet-core) for supported .NET versions and integrations.
+2. **Understand Lambda-specific differences:**
+   - Uses Lambda layers instead of MSI/system installation
+   - Custom instrumentation requires the NuGet package version to match the Lambda layer version
+   - Environment variables are set in Lambda configuration, not system-wide
+3. **Learn about .NET tracing:** If new to Datadog .NET tracing, read [Tracing .NET Core Applications](/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core) for background concepts.
+
+<div class="alert alert-info">
+Looking for setup on hosts, containers, or Kubernetes instead? See <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">Tracing .NET Core Applications</a>.
+</div>
+
 ## Setup
 
 {{< tabs >}}
@@ -320,6 +335,21 @@ When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second 
 ```
 
 You can then add custom spans and span tags using the .NET tracer. For instructions on how to add spans, see [.NET custom instrumentation][10].
+
+## Configuration
+
+Lambda functions support most standard .NET tracer configuration options. See [.NET Core Library Configuration](/tracing/trace_collection/library_config/dotnet-core/) for the full list of environment variables.
+
+**Lambda-specific configuration notes:**
+- Set environment variables in Lambda function configuration (not through IConfiguration or System.Environment.SetEnvironmentVariable)
+- Some Agent-related settings (like `DD_AGENT_HOST`) are managed by the Datadog Extension
+- Tracer version is determined by the Lambda layer version
+
+## Troubleshooting
+
+For common issues and debugging steps, see:
+- [.NET Diagnostic Tool](/tracing/troubleshooting/dotnet_diagnostic_tool)
+- [Troubleshoot Serverless Monitoring](/serverless/guide/troubleshoot_serverless_monitoring)
 
 ## FIPS compliance
 
