@@ -25,17 +25,13 @@ further_reading:
   text: "Exception Replay"
 ---
 
-{{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
-    Live Debugger is in Limited Preview. Request access to join the waiting list.
-    <br>
-    To submit questions, feedback, or requests related to Live Debugger, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSdM9SV4fxrM_OvQ2CtI7CMl7evN0jasFb6X1QiPAbW6dPTQVQ/viewform?usp=header">this form</a> with details.
-    <br>
-    For time-sensitive issues, contact <a href="https://www.datadoghq.com/support/">Datadog support</a>.
-{{< /beta-callout-private >}}
-
 ## Overview
 
-With Live Debugger, you can debug running applications in real time, without redeploying code or interrupting service. Powered by Datadog's [Dynamic Instrumentation][1], Live Debugger uses logpoints&mdash;auto-expiring, "non-breaking breakpoints"&mdash;to collect information from running applications without pausing execution. This makes it ideal for investigating issues in environments where traditional debugging methods aren't practical.
+Live Debugger lets you inspect application behavior in real time, directly in running services, without redeploying code or interrupting execution.
+
+Instead of adding temporary debug logs or reproducing issues locally, you can dynamically capture application state—such as variable values, method inputs, and execution context—at specific points in the code. This makes Live Debugger well suited for diagnosing issues in production or other long-running environments where traditional debugging is impractical.
+
+Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Since execution continues normally, Live Debugger can be used safely on production systems to investigate problems as they happen.
 
 {{< img src="tracing/live_debugger/live-debugger-demo-2025050702.mp4" alt="Live Debugger Product Demo" video="true" >}}
 
@@ -43,12 +39,12 @@ With Live Debugger, you can debug running applications in real time, without red
 
 Live Debugger provides:
 
-- **Real-time inspection** of variable states, method arguments, and execution paths in running code.
-- **Non-invasive data collection** that captures debugging information without stopping applications or degrading performance.
-- **Code instrumentation** with logpoints that can be added anywhere in your code, including third-party libraries.
-- **Auto-expiring logpoints** that are automatically deactivated after a set time (default: 48 hours).
-- **Conditional logging** based on user-defined criteria to capture data only when specific conditions are met.
-- **Built-in [sensitive data scrubbing][3]** to prevent exposure of personal information, passwords, and secrets.
+- **Real-time inspection** of variable values, method arguments, and execution context in running code.
+- **Safe, non-invasive data capture** that collects debugging information without pausing applications or requiring redeploys.
+- **Dynamic logpoint placement** anywhere in your codebase, including in third-party libraries.
+- **Auto-expiring logpoints** that deactivate automatically after a configurable duration (default: 48 hours).
+- **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
+- **Built-in [sensitive data scrubbing][3]** to help prevent exposure of personal data, secrets, and credentials.
 
 ## Getting started
 
