@@ -2,13 +2,10 @@
 title: Install CloudPrem on AWS EKS
 description: Learn how to install and configure CloudPrem on AWS EKS
 further_reading:
-- link: "/cloudprem/configure/aws_config/"
-  tag: "Documentation"
-  text: "AWS Configuration"
-- link: "/cloudprem/configure/ingress/"
+- link: "/cloudprem/install/network/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/ingest_logs/"
+- link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 ---
@@ -19,37 +16,79 @@ further_reading:
 
 ## Overview
 
-This document walks you through the process of installing CloudPrem on AWS EKS.
+This document walks you through the process of configuring your AWS environment and installing CloudPrem on AWS EKS.
 
 ## Prerequisites
 
-Before getting started with CloudPrem, ensure you have:
+To deploy CloudPrem on AWS, you need to configure:
+- AWS credentials and authentication
+- AWS region selection
+- IAM permissions for S3 object storage
+- RDS PostgreSQL database (recommended)
+- EKS cluster with AWS Load Balancer Controller
 
-- AWS account with necessary permissions
-- Kubernetes `1.25+` ([EKS][1] recommended)
-- [AWS Load Balancer Controller installed][2] (optional)
-- PostgreSQL database ([RDS][3] recommended)
-- S3 bucket for log storage
-- Datadog Agent
-- Kubernetes command line tool (`kubectl`)
-- Helm command line tool (`helm`)
+### AWS credentials
 
-## Installation steps
+When starting a node, CloudPrem attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][2] and looks for credentials in this order:
 
-1. [Prepare your AWS environment](#prepare-your-aws-environment)
-2. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
-3. [Verify installation](#verification)
-4. [Configure your Datadog account](#configure-your-datadog-account)
+1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).
+2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
+3. Amazon ECS container credentials, loaded from the Amazon ECS container if the environment variable `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is set.
+4. Instance profile credentials, used on Amazon EC2 instances, and delivered through the Amazon EC2 metadata service.
 
-## Prepare your AWS environment
+An error is returned if no credentials are found in the chain.
 
-Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide][7].
+### AWS Region
 
-Key requirements:
-- AWS credentials configured (IAM role or access keys)
-- Appropriate IAM permissions for S3 access
-- EKS cluster with AWS Load Balancer Controller installed
-- RDS PostgreSQL instance or compatible database
+CloudPrem attempts to find the AWS region from multiple sources, using the following order of precedence:
+
+1. **Environment variables**: Checks `AWS_REGION`, then `AWS_DEFAULT_REGION`.
+2. **AWS config file**: Typically located at `~/.aws/config`, or at the path specified by the `AWS_CONFIG_FILE` environment variable (if set and not empty).
+3. **EC2 instance metadata**: Uses the region of the currently running Amazon EC2 instance.
+4. **Default**: Falls back to `us-east-1` if no other source provides a region.
+
+### IAM permissions for S3
+
+Required authorized actions:
+
+* `ListBucket` (on the bucket directly)
+* `GetObject`
+* `PutObject`
+* `DeleteObject`
+* `ListMultipartUploadParts`
+* `AbortMultipartUpload`
+
+Here is an example of a bucket policy:
+
+```json
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:ListBucket"
+     ],
+     "Resource": [
+       "arn:aws:s3:::my-bucket"
+     ]
+   },
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:GetObject",
+       "s3:PutObject",
+       "s3:DeleteObject",
+       "s3:ListMultipartUploadParts",
+       "s3:AbortMultipartUpload"
+     ],
+     "Resource": [
+       "arn:aws:s3:::my-bucket/*"
+     ]
+   }
+ ]
+}
+```
 
 ### Create an RDS database
 
@@ -76,6 +115,12 @@ echo "🔗 Full URI:"
 echo "postgres://cloudprem:FixMeCloudPrem@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
+
+## Installation steps
+
+1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
+2. [Verify installation](#verification)
+3. [Configure your Datadog account](#configure-your-datadog-account)
 
 ## Install the CloudPrem Helm chart
 
@@ -168,8 +213,6 @@ echo ""
    #
    # Additional annotations can be added to customize the ALB behavior.
    ingress:
-     # The internal ingress is used by Datadog Agents and other collectors running outside
-     # the Kubernetes cluster to send their logs to CloudPrem.
      internal:
        enabled: true
        name: cloudprem-internal
@@ -270,10 +313,6 @@ helm uninstall <RELEASE_NAME>
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/eks/
-[2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller
+[2]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
 [3]: https://aws.amazon.com/rds/
-[4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[5]: /getting_started/containers/datadog_operator/#installation-and-deployment
-[6]: /help/
-[7]: /cloudprem/configure/aws_config
-[8]: /cloudprem/ingest_logs/datadog_agent/
+[8]: /cloudprem/ingest/agent/

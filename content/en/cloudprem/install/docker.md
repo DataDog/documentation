@@ -2,7 +2,7 @@
 title: Install CloudPrem locally with Docker
 description: Learn how to get started with CloudPrem locally using Docker or Docker Compose
 further_reading:
-- link: "/cloudprem/ingest_logs/"
+- link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 - link: "/cloudprem/configure/"

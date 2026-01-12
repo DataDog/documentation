@@ -34,7 +34,8 @@ CloudPrem supports the following object storage types:
 ## Cloud-managed Kubernetes
 
 {{< whatsnext desc="Select the installation guide that matches your environment:">}}
-  {{< nextlink href="/cloudprem/install/aws_eks/" >}}Install on AWS EKS{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/install/azure_aks/" >}}Install on Azure AKS{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/install/docker/docker/" >}}Install locally with Docker for testing{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/aws_eks" >}}Install on AWS EKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/azure_aks" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/docker" >}}Install locally with Docker for testing{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/custom_k8s" >}}Install on Custom Kubernetes (manual){{< /nextlink >}}
 {{< /whatsnext >}}
