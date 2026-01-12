@@ -14,7 +14,7 @@ further_reading:
 ---
 
 ## Overview
-Data Observability (DO) helps data teams imrpove the reliability of data for analytics and AI applications and optimize the performance & costs of data pipelines. By unifying quality and jobs monitoring from production to consumption, teams can detect and remediate issues faster while optimizing cost and performance.
+Data Observability (DO) helps data teams improve the reliability of data for analytics and AI applications and optimize the performance and costs of data pipelines. By unifying quality and jobs monitoring from production to consumption, teams can detect and remediate issues faster while optimizing cost and performance.
 
 {{< img src="data_observability/do_suite_root_cause_analysis-1.png" alt="Datadog Data Observability end-to-end lineage with Spark job traces." style="width:100%;" >}}
 
