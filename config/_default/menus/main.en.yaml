@@ -5292,12 +5292,12 @@ menu:
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_quality
       weight: 40101
-    - name: Agent Evaluations
+    - name: Security and Safety Evaluations
       url: llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
       weight: 40102
-    - name: Agent Evaluations
+    - name: Session Level Evaluations
       url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_session
