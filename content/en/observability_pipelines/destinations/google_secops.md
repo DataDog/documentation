@@ -1,5 +1,5 @@
 ---
-title: Google Chronicle Destination
+title: Google SecOps Destination
 disable_toc: false
 products:
 - name: Logs
@@ -8,19 +8,19 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Google Chronicle destination to send logs to Google Chronicle.
+Use Observability Pipelines' Google SecOps destination to send logs to Google SecOps.
 
 The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][3] for more information about choosing the authentication method for your use case.
 
 ## Setup
 
-Set up the Google Chronicle destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the Google SecOps destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 ### Set up the destination
 
-To set up the Worker's Google Chronicle destination:
+To set up the Worker's Google SecOps destination:
 
-1. Enter the customer ID for your Google Chronicle instance.
+1. Enter the customer ID for your Google SecOps instance.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
     - The Worker uses standard [Google authentication methods][7].
@@ -32,7 +32,7 @@ To set up the Worker's Google Chronicle destination:
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 
-**Note**: Logs sent to the Google Chronicle destination must have ingestion labels. For example, if the logs are from a A10 load balancer, it must have the ingestion label `A10_LOAD_BALANCER`. See Google Cloud's [Support log types with a default parser][5] for a list of available log types and their respective ingestion labels.
+**Note**: Logs sent to the Google SecOps destination must have ingestion labels. For example, if the logs are from a A10 load balancer, it must have the ingestion label `A10_LOAD_BALANCER`. See Google Cloud's [Support log types with a default parser][5] for a list of available log types and their respective ingestion labels.
 
 ### Set the environment variables
 
