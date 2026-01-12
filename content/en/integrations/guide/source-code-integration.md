@@ -478,7 +478,7 @@ that was used to deploy them. Connection is done using Kubernetes annotations.
 Depending on how resources deployed `origin.datadoghq.com/location` should have different content.
 
 {{< tabs >}}
-{{% Raw Kubernetes YAML %}}
+{{% tab "Raw Kubernetes YAML" %}}
 If you deploy resource using `kubectl` use the following annotation form:
 
 ```
@@ -493,7 +493,7 @@ origin.datadoghq.com/location:
 ```
 
 {{% /tab %}}
-{{% Helm chart %}}
+{{% tab "Helm chart" %}}
 If you deploy resource using `Helm` use the following annotation form:
 
 ```
