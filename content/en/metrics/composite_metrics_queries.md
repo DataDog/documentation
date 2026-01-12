@@ -1,5 +1,5 @@
 ---
-title: Reference Table Joins for Metrics
+title: Reference Table Joins with Metrics
 further_reading:
 - link: "/reference_tables/"
   tag: "Documentation"
