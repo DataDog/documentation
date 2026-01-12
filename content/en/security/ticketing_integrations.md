@@ -67,17 +67,17 @@ Bidirectional syncing is supported for the following Code and Cloud Security fin
 
 ### Single source of truth
 
-Bidirectional syncing with Jira enables you to sync Jira tickets with Datadog cases, but Datadog is the single source of truth for issue detection and resolution.
+Bidirectional syncing with Jira enables you to sync Jira tickets with Datadog cases. However, Datadog is the single source of truth for issue detection and resolution.
 
-A Datadog finding's related Jira ticket can be closed manually, but the Datadog finding remains open if Datadog cannot confirm that the issue is fixed. This restriction ensures that a finding is not closed and removed when someone closes a related Jira ticket.
+A Datadog finding's related Jira ticket can be closed manually. However, the Datadog finding remains open if Datadog cannot confirm that the issue is fixed. This restriction ensures that a finding is not closed and removed when someone closes a related Jira ticket.
 
 Closing a Datadog case without remediation does not close the finding either.
 
-Remediation of the finding in Datadog or defining an exception by [muting the finding][14] are the only ways to close a finding. Once the finding is remediated, its related cases and Jira tickets are closed.
+Remediation of the finding in Datadog or defining an exception by [muting the finding][14] are the only ways to close a finding. After the finding is remediated, its related cases and Jira tickets are closed.
 
 ### Set up bidirectional syncing
 
-The following steps set up bidirectional syncing with Jira and use Code Security findings to verify that setup is successful.
+The following steps set up bidirectional syncing with Jira and verify that setup is successful.
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
    1. The [Datadog Jira integration][2].
@@ -88,25 +88,30 @@ The following steps set up bidirectional syncing with Jira and use Code Security
       2. In **Title**, select **Two-way sync**.
       3. Complete the remaining settings, and then click **Save changes**.
 2. Verify that bidirectional Case Management integration with Jira is working:
-   1. Open Code Security [findings][5].
-   2. Open any finding.
-   3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**).
+   1. Open [any product supporting bidirectional ticket syncing][20].
+   2. Open any Security finding.
+   3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button will open a **Create ticket** modal.
    4. Click the **Jira** tab.
-   5. Verify the **Sync with Datadog (via Case Management)** section exists.
+   5. Verify that the **Case Management  <-> Jira Integration** section exists and bidirectional sync is enabled.
+
+{{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:100%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
-If you do not see the **Sync with Datadog (via Case Management)** section, ensure that you have set up the prerequisites.
+If you do not see the **Case Management  <-> Jira Integration** section, ensure that you have completed the prerequisites.
 
-### Create bidirectional Case Management tickets
+### Create bidirectional tickets
 
-The following steps create a bidirectional Case Management ticket for a Code Security finding.
+The following steps create a bidirectional ticket for a Security finding.
 
-1. Open Code Security [findings][5].
-2. Open any finding.
-3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**).
+1. Open [any product supporting bidirectional ticket syncing][20].
+2. Open any Security finding.
+3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button will open a **Create ticket** modal.
+4. Create ticket for any third party tool supported (see sections below)
+
+{{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
 4. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating new Jira ticket.
-5. In **Sync with Datadog (via Case Management)**, complete the following settings:
+5. In **Case Management  <-> Jira Integration**, complete the following settings:
    1. **Case Management project:** select a Case Management project that has [Jira integration enabled][3].
    2. **Jira account:** select the Jira account where you want the ticket created.
    3. **Project:** select the Jira project to use.
@@ -116,16 +121,16 @@ The following steps create a bidirectional Case Management ticket for a Code Sec
 
 Notes:
 
-- Once you select a **Case Management project**, you can click **Edit integration** to verify that the integration is configured with **Two-way sync**.
 - Bidirectional sync with Jira is available for certain Jira ticket attributes, such as status, assignee, and comments, but not all Jira fields are available.
+{{% /collapse-content %}}
 
 ### Manage bidirectional Case Management tickets
 
-Existing bidirectional Jira tickets are listed in a signal or finding's **Ticketing** or **Next Steps** sections.
+Existing bidirectional Jira tickets are listed in finding's **Ticketing** or **Next Steps** sections.
 
 Here's an example from a Static Code (SAST) finding:
 
-{{< img src="security/bidir-jira-existing.png" alt="signal with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
+{{< img src="security/bidir-jira-existing.png" alt="finding with existing Jira ticket: in the Next Steps section, under Ticket Created, a pill with the Jira logo and text 'CJT-16'" responsive="true" style="width:100%;">}}
 
 Hover over the Jira ticket to see its details.
 
@@ -137,7 +142,14 @@ Closed Jira tickets are green.
 
 In **Datadog Associated Case**, the related Datadog case is provided. Click the case name to open it in [Case Management][1].
 
-Deleting a case does not delete related Jira tickets, but deleting a case project detaches all tickets from related signals.
+#### Automatic detachment and ticket opening/closing
+
+Archiving a case does not delete related Jira tickets, but deleting a case project detaches all tickets from related Security findings.
+
+Detaching a ticket from a Security finding does not delete it.
+
+If there are no open findings left attached to a ticket (because they are all detached or resolved or muted), it will be automatically closed.
+Similarly, if at least one open finding is attached to a closed ticket (because it was attached or detected again or unmuted), it will be automatically reopened.
 
 ### Bidirectional Case Management facets
 
@@ -152,7 +164,7 @@ You can query attributes and create dashboards using these facets.
 
 ## Ticketing integration API
 
-The link between Datadog Cases and existing Security findings can be managed via the public API.
+The link between Datadog Cases and existing Security findings can be managed with the public API.
 
 Dedicated endpoints allow users to [create Datadog case for existing security findings][15], [attach security findings to an existing Datadog case][16], and [detach security findings from their case][17].
 
@@ -162,19 +174,20 @@ User can also [create Jira issues for security findings][18] and [attach securit
 [1]: /service_management/case_management/
 [2]: /integrations/jira/
 [3]: /service_management/case_management/notifications_integrations/#third-party-tickets
-[4]: /security/siem/signals
-[5]: /security/code-security
-[6]: /security/appsec/signals
-[7]: /security/workload-protection/signals
+[4]: https://app.datadoghq.com/security/siem/signals
+[5]: https://app.datadoghq.com/security/code-security
+[6]: https://app.datadoghq.com/security/appsec/signals
+[7]: https://app.datadoghq.com/security/workload-protection/signals
 [8]: /integrations/jira/#configure-a-jira-webhook
 [9]: /service_management/case_management/projects/
 [10]: /security/ticketing_integrations/#prerequisites
-[11]: /security/compliance
-[12]: /security/appsec/inventory/finding
-[13]: /security/workload-protection/findings
-[14]: /security/automation_pipelines/mute
+[11]: https://app.datadoghq.com/security/compliance
+[12]: https://app.datadoghq.com/security/appsec/inventory/finding
+[13]: https://app.datadoghq.com/security/workload-protection/findings
+[14]: https://app.datadoghq.com/security/automation_pipelines/mute
 [15]: /api/latest/security-monitoring/#create-cases-for-security-findings
 [16]: /api/latest/security-monitoring/#attach-security-findings-to-a-case
 [17]: /api/latest/security-monitoring/#detach-security-findings-from-their-case
 [18]: /api/latest/security-monitoring/#create-jira-issues-for-security-findings
 [19]: /api/latest/security-monitoring/#attach-security-findings-to-a-jira-issue
+[20]: /security/ticketing_integrations/#supported-products
