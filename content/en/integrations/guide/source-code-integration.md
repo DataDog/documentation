@@ -470,6 +470,109 @@ If your build process is executed in CI within a Docker container, perform the f
 
 For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example/repo`, the value for the `git.repository_url` tag should be `github.com/example/repo`.
 
+## Kubernetes source code and resource mapping
+
+Datadog's Source Code and resource mapping allows you to conect cluster resource to the source code
+that was used to deploy them. Connection is done using Kubernetes annotations.
+
+Depending on how resources deployed `origin.datadoghq.com/location` should have different content.
+
+{{< tabs >}}
+{{% Raw Kubernetes YAML %}}
+If you deploy resource using `kubectl` use the following annotation form:
+
+```
+origin.datadoghq.com/location:
+{
+	"repo": {
+		"url": <repo URL>
+		"targetRevision": "sha1 fo commit being deployed"
+		"path": <file path of the resource>
+	}
+}
+```
+
+{{% /tab %}}
+{{% Helm chart %}}
+If you deploy resource using `Helm` use the following annotation form:
+
+```
+origin.datadoghq.com/location:
+{
+	"helm": {
+		"charURL": <chart location if different from repoURL>
+		"repoURL": <chart and/or values files location>,
+		"targetRevision": "sha1 for repoURL",
+		"valuesPath": ["path relative to <repoURL>"],
+		"chartPath": <relative to repoURL>
+	}
+}
+```
+
+`chartPath` could point to a folder or an archive relative to <repoURL>.
+If chart was unpacked, `chartPath` contains the folder unpack path.
+
+There are 6 ways to run `helm install`. Depending on the way you need to configure annotation correctly.
+
+1. Chart reference
+
+Chart is stored in the git repo.
+Installation command `helm install <release> <chart/path>`
+
+`repoURL`: repo where the chart and values files are stored
+`targetRevision`: commit SHA of <repoURL>
+`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+`chartPath`: <chart/path> relative <repoURL>
+
+2. Path to a packaged chart
+
+Chart is stored in the git repo.
+Installation command `helm install <release> <chart/path/arch-x.y.z.tgz>`
+
+`repoURL`: repo where the chart is stored
+`targetRevision`: commit SHA of <repoURL>
+`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+`chartPath`: <chart/path/arch-x.y.z.tgz> relative <repoURL>
+
+3. Path to an unpacked chart directory
+
+Chart is stored somewhere and unpacked in the current git repo during the installation.
+Installation command `helm install <release> <unpacked/path/dir>`
+
+`repoURL`: repo where the values files are stored
+`targetRevision`: commit SHA of <repoURL>
+`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+`chartPath`: <chart/path/arch-x.y.z.tgz> relative <repoURL>
+
+If you want to provide real chart location use `DD_HELM_CHART_URL` environment variable.
+
+4. Absolute URL
+Installation command `helm install mynginx https://example.com/charts/nginx-1.2.3.tgz`
+
+`charURL`: shoudl be `https://example.com/charts/nginx-1.2.3.tgz`
+`repoURL`: repo where the values files are stored
+`targetRevision`: commit SHA of <repoURL>
+`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+
+5. Chart reference and repo url
+Installation command `helm install --repo https://example.com/charts/ mynginx nginx`
+
+`charURL`: `https://example.com/charts/nginx`
+`repoURL`: repo where the values files are stored
+`targetRevision`: commit SHA of <repoURL>
+`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+
+6. OCI registries
+Installation command `helm install mynginx --version 1.2.3 oci://example.com/charts/nginx`
+
+`charURL`: `oci://example.com/charts/nginx`
+`repoURL`: repo where the values files are stored
+`targetRevision`: commit SHA of <repoURL>
+`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Usage
 
 ### Links to Git providers & code snippets
