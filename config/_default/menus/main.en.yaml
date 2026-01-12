@@ -2286,16 +2286,36 @@ menu:
       parent: error_tracking
       identifier: error_tracking_manage_data
       weight: 13
+    - name: Ticketing Systems Integration
+      url: error_tracking/ticketing_systems
+      parent: error_tracking
+      identifier: error_tracking_ticketing_systems
+      weight: 14
+    - name: Jira
+      url: error_tracking/ticketing_systems/jira
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_jira
+      weight: 100
+    - name: Case Management
+      url: error_tracking/ticketing_systems/case_management
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_case_management
+      weight: 101
+    - name: Troubleshooting
+      url: error_tracking/ticketing_systems/troubleshooting
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_ticketing_troubleshooting
+      weight: 102
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 14
+      weight: 15
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 15
+      weight: 16
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
@@ -4031,7 +4051,7 @@ menu:
       url: tracing/trace_collection/dd_libraries/rust
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_rust
-      weight: 2028  
+      weight: 2028
     - name: .NET Core
       url: tracing/trace_collection/dd_libraries/dotnet-core
       parent: auto_dd_libraries
@@ -4040,7 +4060,7 @@ menu:
     - name: .NET Framework
       url: tracing/trace_collection/dd_libraries/dotnet-framework
       parent: auto_dd_libraries
-      identifier: auto_dd_libraries_dotnet_framework  
+      identifier: auto_dd_libraries_dotnet_framework
       weight: 2030
     - name: Android
       url: tracing/trace_collection/dd_libraries/android
