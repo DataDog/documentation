@@ -5098,8 +5098,8 @@ menu:
       weight: 60000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
-      pre: inventories
-      identifier: data-observability-wui
+      pre: data-observability-wui
+      identifier: quality_monitoring
       parent: data_observability_heading
       weight: 70000
     - name: Data Warehouses
