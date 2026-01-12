@@ -25,7 +25,7 @@ This guide explains how to install and enable the SDK, create an OpenFeature cli
 Before setting up the .NET Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration][2] enabled
-- **Datadog .NET tracer** `dd-trace-dotnet` version 3.0.0 or later
+- **Datadog .NET tracer** `dd-trace-dotnet` version 3.36.0 or later
 - **.NET runtime** version 6.0 or later
 
 Set the following environment variables:
@@ -52,7 +52,7 @@ Or add them to your `.csproj` file:
 
 {{< code-block lang="xml" filename="MyProject.csproj" >}}
 <ItemGroup>
-  <PackageReference Include="Datadog.Trace" Version="3.0.0" />
+  <PackageReference Include="Datadog.Trace" Version="3.36.0" />
   <PackageReference Include="OpenFeature" Version="2.0.0" />
 </ItemGroup>
 {{< /code-block >}}
