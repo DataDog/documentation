@@ -3106,6 +3106,18 @@ menu:
         unstable:
           - v2
         order: 28
+    - name: Search security findings
+      url: '#search-security-findings'
+      identifier: security-monitoring-search-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSecurityFindings
+        unstable: []
+        order: 2
     - name: Create Jira issues for security findings
       url: '#create-jira-issues-for-security-findings'
       identifier: security-monitoring-create-jira-issues-for-security-findings
@@ -3168,6 +3180,18 @@ menu:
           - DetachCase
         unstable: []
         order: 46
+    - name: List security findings
+      url: '#list-security-findings'
+      identifier: security-monitoring-list-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindings
+        unstable: []
+        order: 1
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3722,6 +3746,18 @@ menu:
       url: /api/latest/synthetics/
       identifier: synthetics
       generated: true
+    - name: Patch a global variable
+      url: '#patch-a-global-variable'
+      identifier: synthetics-patch-a-global-variable
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchGlobalVariable
+        unstable: []
+        order: 20
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
@@ -9964,6 +10000,22 @@ menu:
           - v2
         operationids:
           - ListProcesses
+        unstable: []
+        order: 1
+    - name: Product Analytics
+      url: /api/latest/product-analytics/
+      identifier: product-analytics
+      generated: true
+    - name: Send server-side events
+      url: '#send-server-side-events'
+      identifier: product-analytics-send-server-side-events
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SubmitProductAnalyticsEvent
         unstable: []
         order: 1
     - name: RUM

@@ -21,7 +21,7 @@ further_reading:
   - link: "/api/latest/security-monitoring/#create-cases-for-security-findings"
     tag: "API"
     text: "Ticketing integration API"
-  - link: "/service_management/case_management/"
+  - link: "/incident_response/case_management/"
     tag: "Documentation"
     text: "Case Management"
 ---
@@ -171,15 +171,15 @@ Dedicated endpoints allow users to [create Datadog case for existing security fi
 User can also [create Jira issues for security findings][18] and [attach security findings to a Jira issue][19].
 
 
-[1]: /service_management/case_management/
+[1]: /incident_response/case_management/
 [2]: /integrations/jira/
-[3]: /service_management/case_management/notifications_integrations/#third-party-tickets
+[3]: /incident_response//case_management/notifications_integrations/#third-party-tickets
 [4]: https://app.datadoghq.com/security/siem/signals
 [5]: https://app.datadoghq.com/security/code-security
 [6]: https://app.datadoghq.com/security/appsec/signals
 [7]: https://app.datadoghq.com/security/workload-protection/signals
 [8]: /integrations/jira/#configure-a-jira-webhook
-[9]: /service_management/case_management/projects/
+[9]: /incident_response/case_management/projects/
 [10]: /security/ticketing_integrations/#prerequisites
 [11]: https://app.datadoghq.com/security/compliance
 [12]: https://app.datadoghq.com/security/appsec/inventory/finding

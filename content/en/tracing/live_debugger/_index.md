@@ -2,6 +2,9 @@
 title: Live Debugger
 description: Debug running applications in real time using non-breaking logpoints that collect information without stopping execution or redeploying code.
 further_reading:
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: "/dynamic_instrumentation/"
   tag: "Documentation"
   text: "Dynamic Instrumentation"

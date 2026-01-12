@@ -17,7 +17,7 @@ further_reading:
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
-- link: "/service_management/events"
+- link: "/events"
   tag: "Documentation"
   text: "Learn about Event Management"
 - link: "/monitors/types/metric"

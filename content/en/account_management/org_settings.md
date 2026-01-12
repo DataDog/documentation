@@ -168,7 +168,7 @@ Users with the `Org Management` permission can enable or disable the idle time s
 [9]: /account_management/rbac/
 [10]: /remote_configuration#how-it-works
 [11]: /account_management/api-app-keys/#client-tokens
-[12]: /service_management/events/guides/email/
+[12]: /events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview
 [14]: /account_management/safety_center
 [15]: /account_management/org_settings/oauth_apps
