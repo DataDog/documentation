@@ -168,6 +168,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -246,7 +248,7 @@ The default Agent configuration for Database Monitoring is conservative, but you
 
 #### High value for `pg_stat_statements.max` {#high-pg-stat-statements-max-configuration}
 The recommended value for `pg_stat_statements.max` is `10000`. Setting this configuration to a higher value
-may cause the collection query to take longer to run which can lead to query timeouts and gaps in query metric collection. If the Agent reports this warning, make sure that `pg_stat_statements.max` is set to `10000` on the database. 
+may cause the collection query to take longer to run which can lead to query timeouts and gaps in query metric collection. If the Agent reports this warning, make sure that `pg_stat_statements.max` is set to `10000` on the database.
 
 
 [1]: /database_monitoring/setup_postgres/
