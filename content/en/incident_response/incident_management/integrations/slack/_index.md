@@ -170,6 +170,10 @@ You can view the full list of available Slack commands at any time by typing `/d
       <td>Make the incident private (if private incidents are enabled).</td>
     </tr>
     <tr>
+      <td><code>/datadog incident public</code></td>
+      <td>Make the incident public.</td>
+    </tr>
+    <tr>
       <td><code>/datadog incident responders</code></td>
       <td>Manage the incident's response team (add responders and assign response roles).</td>
     </tr>
@@ -188,6 +192,10 @@ You can view the full list of available Slack commands at any time by typing `/d
     <tr>
       <td><code>/datadog followup list</code></td>
       <td>View and manage existing follow-ups for the incident.</td>
+    </tr>
+    <tr>
+      <td><code>/datadog incident summary</code></td>
+      <td>Generate the incident’s summary with AI.</td>
     </tr>
   </tbody>
 </table>
