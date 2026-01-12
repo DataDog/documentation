@@ -96,7 +96,7 @@ The following limitations apply to static dependencies analysis:
 
 * **Requires eager loading**: Only works when your code is eager loaded in tests. If constants are loaded dynamically, their source locations cannot be resolved correctly.
 * **Dynamic lookups not supported**: Constants accessed through metaprogramming (such as `const_get` or `constantize`) are not detected.
-* **Unqualified constant names**: Constants accessed without their full namespace path may not be resolved correctly (e.g. `MyConst` instead of `MyModule::MyConst`)
+* **Unqualified constant names**: Constants accessed without their full namespace path may not be resolved correctly (for example `MyConst` instead of `MyModule::MyConst`)
 
 ## Disabling skipping for specific tests
 
