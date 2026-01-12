@@ -177,25 +177,25 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 
 [Quality evaluations][4] help ensure your LLM-powered applications generate accurate, relevant, and safe responses. Managed evaluations automatically score model outputs on key quality dimensions and attach results to traces, helping you detect issues, monitor trends, and improve response quality over time. Datadog offers the following quality evaluations:
 
-- [Topic relevancy][5] - ...
-- [Hallucination][6] - ...
-- [Failure to Answer][7] - ...
-- [Language Mismatch][8] - ...
-- [Sentiment][9] - ...
+- [Topic relevancy][5] - Measures whether the model’s response stays relevant to the user’s input or task
+- [Hallucination][6] - Detects when the model generates incorrect or unsupported information presented as fact
+- [Failure to Answer][7] - Identifies cases where the model does not meaningfully answer the user’s question
+- [Language Mismatch][8] - Flags responses that are written in a different language than the user’s input
+- [Sentiment][9] - Evaluates the emotional tone of the model’s response to ensure it aligns with expectations
 
 ### Security and Safety evaluations
 
 [Security and Safety evaluations][10] help ensure your LLM-powered applications resist malicious inputs and unsafe outputs. Managed evaluations automatically detect risks like prompt injection and toxic content by scoring model interactions and tying results to trace data for investigation. Datadog offers the following security and safety evaluations:
 
-- [Toxicity][11] - ...
-- [Prompt Injection][12] - ...
-- [Sensitive Data Scanning][13] - ...
+- [Toxicity][11] - Detects harmful, offensive, or abusive language in model inputs or outputs
+- [Prompt Injection][12] - Identifies attempts to manipulate the model into ignoring instructions or revealing unintended behavior
+- [Sensitive Data Scanning][13] - Flags the presence of sensitive or regulated information in model inputs or outputs
 
 ### Session level evaluations
 
 [Session level evaluations][14] help ensure your LLM-powered applications successfully achieve intended user outcomes across entire interactions. These managed evaluations analyze multi-turn sessions to assess higher-level goals and behaviors that span beyond individual spans, giving insight into overall effectiveness and user satisfaction. Datadog offers the following session-level evaluations:
 
-- [Goal Completeness][15] - ...
+- [Goal Completeness][15] - Evaluates whether the user’s intended goal was successfully achieved over the course of the entire session
 
 ### Agent evaluations
 

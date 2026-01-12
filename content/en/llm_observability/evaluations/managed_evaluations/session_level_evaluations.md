@@ -26,13 +26,13 @@ An agent can call tools correctly but still fail to achieve the user’s intende
 | Evaluated on LLM spans | Evaluated using LLM | Checks whether the agent resolved the user’s intent by analyzing full session spans. Runs only on sessions marked as completed. |
 
 ##### How to Use
-<div class="alert alert-info">Goal completeness is only available for OpenAI and Azure OpenAI.</div>
+<div class="alert alert-info">Goal Completeness is only available for OpenAI and Azure OpenAI.</div>
 
 To enable Goal Completeness evaluation, you need to instrument your application to track sessions and their completion status. This evaluation works by analyzing complete sessions to determine if all user intentions were successfully addressed.
 
 The evaluation requires sending a span with a specific tag when the session ends. This signal allows the evaluation to identify session boundaries and trigger the completeness assessment:
 
-For optimal evaluation accuracy and cost control, it is preferable to send a tag when the session is finished and configure the evaluation to run only on session with this tag. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
+For optimal evaluation accuracy and cost control, it is preferable to send a tag when the session is finished and configure the evaluation to run only on sessions with this tag. The evaluation returns a detailed breakdown including resolved intentions, unresolved intentions, and reasoning for the assessment. A session is considered incomplete if more than 50% of identified intentions remain unresolved.
 
 
 {{< code-block lang="python" >}}
@@ -60,7 +60,7 @@ After instrumenting your application to send session-end spans, configure the ev
 
 1. Go to the **Goal Completeness** settings
 2. Configure the evaluation data:
-   - Select **spans** as the data type since Goal Completeness runs on LLM spans which contains the full session history.
+   - Select **spans** as the data type since Goal Completeness runs on LLM spans which contain the full session history.
    - Choose the tag name associated with the span that corresponds to your session-end function (for example, `send_session_ended_span`).
    - In the **tags** section, specify the tag you configured in your instrumentation (for example, `session_status:completed`).
 
