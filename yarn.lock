@@ -6548,9 +6548,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semver-bug-fix/cdocs-data-v1.3.3.tgz":
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/versionBetween/cdocs-data-v1.3.3.tgz":
   version: 1.3.3
-  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semver-bug-fix/cdocs-data-v1.3.3.tgz"
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/versionBetween/cdocs-data-v1.3.3.tgz"
   dependencies:
     "@types/semver": "npm:^7.7.0"
     js-yaml: "npm:^4.1.0"
@@ -6562,18 +6562,18 @@ __metadata:
     typedoc-plugin-zod: "npm:^1.3.1"
     uuid: "npm:^11.0.5"
     zod: "npm:^4.1.12"
-  checksum: 10/702b05c51820c108cd0caa32e399e37facb75cb78041bba9d8b9ea5820f52cc62ca750576e7617eac5e2852c4ac624d503e2228ff6480d408fd55250fdebc900
+  checksum: 10/d6badb8e01edc5d008c55c0f2b5623aa13a8d27df05bbf1b77b6a222fccf4b7f8101a28c92b1d6d57fa8b92a49076763e7375ee9fbba35fb7c18b27be9aafb63
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.15.tgz":
-  version: 5.5.15
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.15.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.16.tgz":
+  version: 5.5.16
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.16.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
     "@vitejs/plugin-react": "npm:^4.3.3"
-    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semver-bug-fix/cdocs-data-v1.3.3.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/versionBetween/cdocs-data-v1.3.3.tgz"
     cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/markdoc-semantic-versioning-updates/cdocs-markdoc-v1.1.4.tgz"
     chokidar: "npm:^4.0.3"
     chroma-highlight: "npm:^2.4.2"
@@ -6593,7 +6593,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/1d7e63e3915d7ff793ed7163b604048bf271533b184d1124e84a66b6be39a9a4f624db5fe1b2513f6cea014549e522d1fe562fe4c062ddc754cfbaf4d0fec1cd
+  checksum: 10/161f347a325d480f295b8e4c45e2ff0283034b76ec5bad444acce177316f08f64d25421be254aaea2e63b382336dfa5944dbee529242080563890a655cd5860d
   languageName: node
   linkType: hard
 
@@ -7640,7 +7640,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.15.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.16.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"

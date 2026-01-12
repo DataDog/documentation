@@ -43,6 +43,7 @@ There are various ways you can modify the [data and context collected][1] by RUM
 
 <!-- Version must meet 2.17.0 -->
 {% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
+
 ## Override default RUM view names
 
 Starting with [version 2.17.0][3], you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option.
@@ -65,6 +66,7 @@ To override default RUM view names:
    });
    ```
    {% /if %}
+   <!-- ends NPM sync -->
 
    <!-- CDN async -->
    {% if equals($lib_src, "cdn_async") %}
@@ -78,6 +80,7 @@ To override default RUM view names:
    })
    ```
    {% /if %}
+   <!-- ends CDN async -->
 
    <!-- CDN sync -->
    {% if equals($lib_src, "cdn_sync") %}
@@ -90,34 +93,42 @@ To override default RUM view names:
          });
    ```
    {% /if %}
-
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts.
+   <!-- ends CDN sync -->
 {% /if %}
+<!-- Ends 2.17.0 -->
 
-   <!-- Version must meet 4.13.0 -->
-   {% if versionMeets($rum_browser_sdk_version, "4.13.0") %}
-   Starting with [version 4.13.0][16], you can also optionally define the associated service name and version.
+<!-- Version must meet 2.17.0 -->
+{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts.
 
-   - **View Name**: Defaults to the page URL path.
-   - **Service**: Defaults to the default service specified when creating your RUM application.
-   - **Version**: Defaults to the default version specified when creating your RUM application.
-   <!-- Version must meet 5.28.0 -->
-   {% if versionMeets($rum_browser_sdk_version, "5.28.0") %}
-   - **Context**: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
-   {% /if %}
-   <!-- ends 5.28.0 -->
+<!-- Version must meet 4.13.0 -->
+{% if versionMeets($rum_browser_sdk_version, "4.13.0") %}
 
-   For more information, see [Setup Browser Monitoring][4].
-   {% /if %}
-   <!-- ends 4.13.0 -->
+### Define service name and version
+
+Starting with [version 4.13.0][16], you can also optionally define the associated service name and version.
+
+- **View Name**: Defaults to the page URL path.
+- **Service**: Defaults to the default service specified when creating your RUM application.
+- **Version**: Defaults to the default version specified when creating your RUM application.
+
+<!-- Version must meet 5.28.0 -->
+{% if versionMeets($rum_browser_sdk_version, "5.28.0") %}
+- **Context**: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
+{% /if %}
+<!-- ends 5.28.0 -->
+
+For more information, see [Setup Browser Monitoring][4].
+{% /if %}
+<!-- ends 4.13.0 -->
 
    <!-- Version must meet 5.28.0 -->
    {% if versionMeets($rum_browser_sdk_version, "5.28.0") %}
    The following example manually tracks the pageviews on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
 
    <!-- NPM -->
-  {% if equals($lib_src, "npm") %}
-  ```javascript
+   {% if equals($lib_src, "npm") %}
+   ```javascript
    datadogRum.startView({
         name: 'checkout',
         service: 'purchase',
@@ -127,11 +138,12 @@ To override default RUM view names:
         },
    })
    ```
-  {% /if %}
+   {% /if %}
+   <!-- ends NPM -->
 
-  <!-- CDN async -->
-  {% if equals($lib_src, "cdn_async") %}
-  ```javascript
+   <!-- CDN async -->
+   {% if equals($lib_src, "cdn_async") %}
+   ```javascript
    window.DD_RUM.onReady(function() {
       window.DD_RUM.startView({
             name: 'checkout',
@@ -143,11 +155,12 @@ To override default RUM view names:
       })
    })
    ```
-  {% /if %}
+   {% /if %}
+   <!-- ends CDN async  -->
 
-  <!-- CDN sync -->
-  {% if equals($lib_src, "cdn_sync") %}
-  ```javascript
+   <!-- CDN sync -->
+   {% if equals($lib_src, "cdn_sync") %}
+   ```javascript
    window.DD_RUM && window.DD_RUM.startView({
         name: 'checkout',
         service: 'purchase',
@@ -157,13 +170,15 @@ To override default RUM view names:
         },
    })
    ```
-  {% /if %}
+   {% /if %}
+   <!-- ends CDN sync -->
 
-  {% /if %}
-  <!-- ends 5.28.0 -->
-   
-<!-- Version must meet 5.22.0 -->
-{% if versionMeets($rum_browser_sdk_version, "5.22.0") %}
+   {% /if %}
+   <!-- ends 5.28.0 -->
+
+   <!-- Version must meet 5.22.0 -->
+   {% if versionMeets($rum_browser_sdk_version, "5.22.0") %}
+
 The following example manually tracks the pageviews on the `checkout` page in a RUM application. It uses `checkout` for the view name and associates the `purchase` service with version `1.2.3`.
 
 <!-- NPM -->
@@ -201,40 +216,47 @@ window.DD_RUM && window.DD_RUM.startView({
 })
 ```
 {% /if %}
-{% /if %}
-<!-- ends 5.22.0 -->
+   {% /if %}
+   <!-- ends 5.22.0 -->
 
-<!-- Version must meet 4.13.0 -->
-{% if versionMeets($rum_browser_sdk_version, "4.13.0") %}
-The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-datadogRum.startView('checkout')
-```
-{% /if %}
+   <!-- Version must meet 4.13.0 -->
+   {% if versionMeets($rum_browser_sdk_version, "4.13.0") %}
+   The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
 
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-      window.DD_RUM.startView('checkout')
-})
-```
-{% /if %}
+   <!-- NPM -->
+   {% if equals($lib_src, "npm") %}
+   ```javascript
+   datadogRum.startView('checkout')
+   ```
+   {% /if %}
 
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM && window.DD_RUM.startView('checkout')
-```
-{% /if %}
-{% /if %}
-<!-- ends 4.13.0 -->
+   <!-- CDN async -->
+   {% if equals($lib_src, "cdn_async") %}
+   ```javascript
+   window.DD_RUM.onReady(function() {
+         window.DD_RUM.startView('checkout')
+   })
+   ```
+   {% /if %}
 
-If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
+   <!-- CDN sync -->
+   {% if equals($lib_src, "cdn_sync") %}
+   ```javascript
+   window.DD_RUM && window.DD_RUM.startView('checkout')
+   ```
+   {% /if %}
+   {% /if %}
+   <!-- ends 4.13.0 -->
+
+{% /if %}
+<!-- Ends 2.17.0 -->
+
+<!-- Version must meet 2.17.0 -->
+{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
 
 ### React router instrumentation
+
+If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
 To override default RUM view names so that they are aligned with how you've defined them in your React application, you need to follow the below steps.
 
@@ -384,7 +406,11 @@ To override default RUM view names so that they are aligned with how you've defi
    }
    ```
    {% /if %}
+{% /if %}
+<!-- Ends 2.17.0 -->
 
+<!-- Version must meet 2.17.0 -->
+{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
 ### Set view name
 
 Use `setViewName(name: string)` to update the name of the current view. This allows you to change the view name during the view without starting a new one.
@@ -425,7 +451,8 @@ Use `setViewName(name: string)` to update the name of the current view. This all
    {% /if %}
 
 **Note**: Changing the view name affects the view and its child events from the time the method is called.
-
+{% /if %}
+<!-- Ends 2.17.0 -->
 ## Enrich and control RUM data
 
 The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM Browser SDK before it is sent to Datadog.
