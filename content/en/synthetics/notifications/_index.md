@@ -27,7 +27,7 @@ You can customize notifications using:
 - **[Custom notification display](#display-custom-notifications-message)**: Show only your custom message without default enriched content.
 - **[Simulate notifications](#simulate-notifications)**: Test your notification messages by sending simulated notifications.
 
-**Note**: For information about accessing local (config) variables, see the [Variables][6] section.
+**Note**: To learn how Synthetic Monitoring notifications evaluate test results and trigger alerts, review the [Understanding Synthetic Monitor Alerting][6] guide.
 
 ## Pre-filled monitor messages
 
@@ -48,8 +48,10 @@ These values appear by default in most notification channels. You can override o
 {{< tabs >}}
 {{% tab "API request response" %}}
 
+Display the HTTP request and response details from an API test, including the method, URL, headers, body, status code, and any redirects.
+
 **Request:**
-```handlebars
+```shell
 {{#with synthetics.attributes.result.request}}
 We made a {{method}} request to `{{{url}}}`{{#if headers}} with the following headers:
 
@@ -67,7 +69,7 @@ We made a {{method}} request to `{{{url}}}`{{#if headers}} with the following he
 ```
 
 **Response:**
-```handlebars
+```shell
 {{#with synthetics.attributes.result.response}}
 We received an HTTP {{httpVersion}} response with a {{statusCode}} status code{{#if headers}} with the following headers:
 
@@ -93,7 +95,9 @@ The body's size was {{eval "humanize_bytes(bodySize)"}}{{#if body}} and containe
 {{% /tab %}}
 {{% tab "WebSocket tests" %}}
 
-```handlebars
+Display WebSocket test details including the handshake status, request message, and response close status with reason.
+
+```shell
 {{! Websocket request and response details }}
 {{#with synthetics.attributes.result}}
 {{#if handshake }}
@@ -119,10 +123,10 @@ and the response closed with status code {{response.close.statusCode}} and reaso
 {{% /tab %}}
 {{% tab "API tests variables" %}}
 
-Iterate over extracted variables for API tests:
+List all config and extracted variables from an API test, showing their names, types, and values. Obfuscated values are hidden for security.
 
 **Config variables:**
-```handlebars
+```shell
 {{#each synthetics.attributes.result.variables.config}}
 * **Name:** {{name}}
   Type: {{type}}
@@ -131,7 +135,7 @@ Iterate over extracted variables for API tests:
 ```
 
 **Extracted Variables (Only visible for recovery notifications):**
-```handlebars
+```shell
 {{#each synthetics.attributes.result.variables.extracted}}
 * **Name:** {{name}}
   Global Variable ID: {{id}}
@@ -142,9 +146,9 @@ Iterate over extracted variables for API tests:
 {{% /tab %}}
 {{% tab "Multistep API variables" %}}
 
-Iterate over steps extracting variables for multistep API tests:
+Loop through all steps in a multistep API test and display variables extracted by each successful step.
 
-```handlebars
+```shell
 {{! List extracted variables across all successful steps }}
 # Extracted Variables
 {{#each synthetics.attributes.result.steps}}
@@ -158,9 +162,9 @@ Iterate over steps extracting variables for multistep API tests:
 {{% /tab %}}
 {{% tab "Browser and mobile test variables" %}}
 
-Iterate over steps extracting variables for browser and mobile tests:
+Loop through all steps in a browser or mobile test and display variables extracted by steps that use the "Extract variable" action.
 
-```handlebars
+```shell
 {{#each synthetics.attributes.result.steps}}
   {{#if extractedValue}}
   * **Name**: {{extractedValue.name}}
@@ -249,6 +253,7 @@ Simulated notifications include **[TEST]** in their subject lines and use a defa
 [3]: /synthetics/notifications/conditional_alerting
 [4]: /synthetics/notifications/advanced_notifications
 [5]: /monitors/notifications
-[6]: /synthetics/notifications/template_variables/?tab=testinfo#variables
+[6]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
+
 
 
