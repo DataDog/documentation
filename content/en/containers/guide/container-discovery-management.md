@@ -299,7 +299,7 @@ You can also configure CEL-backed workload exclusion using one of the following 
 - Set the `DD_CEL_WORKLOAD_EXCLUDE` environment variable with a JSON-formatted string containing your rules, in any containerized Agent setup.
 - For the Datadog Operator or Helm Chart, add your CEL rules to the appropriate configuration option (as shown in the examples below).
 
-{{% collapse-content title="Setting environment variables" level="h4" expanded=false id="setting-environment-variables" %}}
+{{% collapse-content title="Configuring CEL exclusion rules" level="h4" expanded=false id="setting-environment-variables" %}}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
