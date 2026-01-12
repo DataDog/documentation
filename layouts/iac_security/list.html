@@ -18,9 +18,9 @@
     {{ .Content }}
 
     {{ $products := slice }}
-    {{ $ruleset_params := .Params }}
+    {{ $cloud_provider := "" }}
     {{ $pad := newScratch }}
-
+    
     <!-- Build slice of unique cloud_providers to validate against url param `cloud_providers` on page load -->
     {{ range ($list.GroupByParam "group_id") }}
         {{ range .Pages }}
@@ -31,7 +31,6 @@
 
     {{ $valid_clouds := $pad.Get "providers" }}
     {{ $valid_platforms := $pad.Get "platforms" }}
-    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "aws" "variant" "avatar") }}
     <div
     class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
     x-data="{
@@ -159,12 +158,12 @@
                     const logoName = this.provider_aliases[value.toLowerCase()] ?? value
                     const displayName = cloudAliasMap[value.toLowerCase()] ?? value
                     const cloudLookupName = cloudAliasMap[value.toLowerCase()] ? `,${value}`: ''
-                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${cloudLookupName}`)
+                    this.filterTypes[key].push(`${displayName}`)
                 } else if ((key === 'platform') && validPlatformsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
                     const logoName = this.platform_aliases[value.toLowerCase()] ?? value
                     const displayName = platformAliasMap[value.toLowerCase()] ?? value
                     const platformLookupName = platformAliasMap[value.toLowerCase()] ? `,${value}`: ''
-                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${platformLookupName}`)
+                    this.filterTypes[key].push(`${displayName}`)
                 } else if (key != 'providers' && key != 'platforms'){
                     this.filterTypes[key]?.push(value)
                 }
@@ -237,7 +236,6 @@
             <div class="ps-0">
                 {{ range $list.GroupByParam "group_id" }}
                 {{ $group_id := .Key }}
-                {{ $ruleset_title := index (index $ruleset_params.rulesets .Key) "title"}}
                 <div
                 data-group-id="{{ $group_id }}" 
                 class="set d-flex flex-column"
@@ -248,13 +246,13 @@
                         </div>
                         <div class="ps-0 mt-1">
                             {{ range .Pages }}
-                            {{ $rule_provider := ( .Params.meta.cloud_provider ) }}
                             {{/*
-                                build a string with rule's lookup info for filtering and searching against
+                            build a string with rule's lookup info for filtering and searching against
                             */}}
+                            {{ $cloud_provider = ( .Params.meta.cloud_provider ) }}
                             {{ $rule_id := index (split .Params.meta.name "/") 1}}
-                            {{ $filter_info := (printf "%s,%s,%s,%s" .Params.meta.cloud_provider .Params.meta.category .Params.meta.severity .Params.meta.platform) }}
-                            {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
+                            {{ $filter_info := (printf "%s,%s,%s,%s" $cloud_provider .Params.meta.category .Params.meta.severity .Params.meta.platform) }}
+                            {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) .Params.group_id .Title ) ";")) }}
                             <div 
                             class="item container justify-content-between border p-1 position-relative"
                             data-info="{{ $rule_info }}"
@@ -263,7 +261,7 @@
                             >
                                 <div class="row">
                                     <div class="item-name-container col-8 d-flex align-items-center">
-                                        {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $rule_provider "variant" "avatar") $rule_provider "avatar" }}
+                                        {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $cloud_provider "variant" "avatar") $cloud_provider "avatar" }}
                                         {{ if $int_logo }}
                                         <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                         {{ else }}
@@ -301,7 +299,7 @@
                                     ...
                                 }
                             */}}
-                            {{ $pad.SetInMap "cloudProviderByRuleSet" $group_id (union (index ($pad.Get "cloudProviderByRuleSet") $group_id) (slice $rule_provider)) }}
+                            {{ $pad.SetInMap "cloudProviderByRuleSet" $group_id (union (index ($pad.Get "cloudProviderByRuleSet") $group_id) (slice $cloud_provider)) }}
                             {{ end }}
                         </div>
                     </div>
@@ -319,14 +317,14 @@
                                 {{ if $int_logo }}
                                 <img class="set-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                 {{ else }}
-                                {{ partial "icon" (dict "name" "cloud-thicc" ) }}
+                                {{ partial "icon" (dict "name" "cloud-thicc" "style" "style='margin: 0;'") }}
                                 {{ end }}
                                 {{ if gt (len $ruleset_providers) 1 }}
                                 <span class="set-header__plus fw-semibold">+{{sub (len $ruleset_providers) 1}}</span>
                                 {{ end }}
                             </div>
-                            <span class="set-header__text fw-semibold">{{$ruleset_title}}</span>
-                            <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $ruleset_title) ) }}</span>
+                            <span class="set-header__text fw-semibold">{{$cloud_provider}}</span>
+                            <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $cloud_provider) ) }}</span>
                             <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
                         </div>
                         <div class="set-header__arrow fw-semibold">></div>
@@ -365,9 +363,6 @@
                                     <div
                                     :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')"
                                     class="selection-container rounded d-flex align-items-center">
-                                        <template x-if="filter.split(',')[1]">
-                                            <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
-                                        </template>
                                         <span class="selection-name" x-text="filter.split(',')[0]"></span>
                                         <div
                                         :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')"
@@ -402,6 +397,7 @@
                             <div class="filter-selection-container">
 
                                 {{ $cloud_lookup_name := . }}
+                                {{ $filter_type_anchor := (print $cloud_lookup_name "-" $filter_type) | anchorize }}
                                 {{ $int_logo := partialCached "integrations-logo.html" 
                                     (dict "context" $dot "basename"
                                         (cond (eq
@@ -413,22 +409,20 @@
                                      $cloud_lookup_name "avatar" 
                                 }}
                                 {{/*  store $int_logo and $cloud_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
-                                {{ $value := (printf "%s,%s" $cloud_lookup_name $int_logo)}}
                                 <input
-                                id="{{ $cloud_lookup_name | anchorize }}"
+                                id="{{ $filter_type_anchor }}"
                                 type="checkbox"
-                                value='{{ cond ($int_logo | not ) . $value }}'
+                                value='{{ $cloud_lookup_name }}'
                                 x-model="filterTypes['{{$filter_type}}']"
                                 @change="resetFilteredRulesets"
                                 @change.debounce="pushState('{{ $filter_type }}', '{{ $cloud_lookup_name }}')"
                                 >
-
-                                <label for="{{ $cloud_lookup_name | anchorize }}" class="d-flex align-items-center">
+                                <label for="{{ $filter_type_anchor }}" class="d-flex align-items-center">
                                     {{ if and ( or (eq $filter_type "providers") (eq $filter_type "platforms")) }}
                                         {{ if $int_logo }}
                                         <img src="{{ $int_logo }}" height="16" alt="{{ $cloud_lookup_name }}"/>
                                         {{ else }}
-                                        {{ partial "icon" (dict "name" "cloud-thicc" ) }}
+                                        {{ partial "icon" (dict "name" "cloud-thicc" "style" "style='padding: 0 4px;'") }}
                                         {{ end }}
                                     {{ end }}
                                     {{$cloud_lookup_name}}
