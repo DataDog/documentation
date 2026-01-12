@@ -307,6 +307,7 @@ unsupported_sites:
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
   incident_ai: [gov]
+  inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
   linear: [gov]
   live_debugger: [gov]

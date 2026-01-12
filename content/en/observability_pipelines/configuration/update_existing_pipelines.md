@@ -72,6 +72,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
 {{% /tab %}}
+{{% tab "OpenTelemetry" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
+
+{{% /tab %}}
 {{% tab "Socket" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/socket %}}
@@ -115,7 +120,12 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Logs" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
+{{% /tab %}}
+{{% tab "Datadog Metrics" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
@@ -134,6 +144,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
 {{% /tab %}}
+{{% tab "Google Pub/Sub" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
+
+{{% /tab %}}
 {{% tab "Google SecOps" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
@@ -142,6 +157,11 @@ On the Worker installation page:
 {{% tab "HTTP Client" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}
+
+{{% /tab %}}
+{{% tab "Kafka" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
 
 {{% /tab %}}
 {{% tab "Microsoft Sentinel" %}}

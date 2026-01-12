@@ -39,6 +39,10 @@ further_reading:
 - link: /tests/troubleshooting/
   tag: Documentación
   text: Aprende a solucionar problemas de optimización de tests
+- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
+  tag: Blog
+  text: Solucionar problemas más rápidamente con la integración de GitLab Source Code
+    en Datadog
 title: Optimización de tests en Datadog
 ---
 
@@ -46,7 +50,7 @@ title: Optimización de tests en Datadog
 
 La [optimización de tests][1] ofrece una vista del estado de tu CI que prioriza los tests al mostrar métricas y resultados importantes de tus tests. Puede ayudarte a investigar los problemas de rendimiento y las fallas de tests que son más relevantes para tu trabajo, centrándose en el código del que eres responsable, en lugar de en los procesos que ejecutan tus pruebas.
 
-## Configurar
+## Instalación
 
 Selecciona una opción para configurar la optimización de tests en Datadog:
 
@@ -65,7 +69,7 @@ Además de los tests, la optimización de tests proporciona visibilidad para tod
 | {{< ci-details title="Informes basados ​​en el Agent" >}}Capacidad de brindar información de tests a través del Datadog Agent.{{< /ci-details >}}                                                                                                  | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Informes sin Agent" >}}Capacidad de brindar información de tests sin el Datadog Agent.{{< /ci-details >}}                                                                                                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Visibilidad a nivel de conjunto de tests" >}}Visibilidad para todo el proceso de prueba, incluidas sesiones, módulos, conjuntos y tests.{{< /ci-details >}}                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="API manual" >}}Capacidad de crear mediante programación eventos de visibilidad de CI para marcos de test que no son compatibles con la instrumentación automática de Datadog.{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |            |           |                        |
+| {{< ci-details title="API manual" >}}Capacidad de crear mediante programación eventos de visibilidad de CI para frameworks de test que no son compatibles con la instrumentación automática de Datadog.{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |            |           |                        |
 | {{< ci-details title="Propietario de código por test" >}}Detección automática del propietario de un archivo de test basado en el archivo CODEOWNERS.{{< /ci-details >}}                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} | {{< X >}} (parcialmente)  |
 | {{< ci-details title="Inicio/fin del código fuente" >}}Informe automático de las líneas de inicio y final de un test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (solo inicio) | {{< X >}} | {{< X >}} (solo inicio)| {{< X >}} | {{< X >}} | {{< X >}} (solo inicio) |
 | {{< ci-details title="CI e información de Git" >}}Recopilación automática de metadatos del entorno de Git y CI, como el proveedor de CI, el SHA de confirmación de Git o la URL del pipeline.{{< /ci-details >}}                                                        | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
@@ -76,6 +80,7 @@ Además de los tests, la optimización de tests proporciona visibilidad para tod
 | {{< ci-details title="Tests parametrizados" >}}Detección automática de tests parametrizados.{{< /ci-details >}}                                                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} |           |                        |
 | {{< ci-details title="Detección temprana de defectos*" >}}<a href="/tests/flaky_test_management/early_flake_detection">Repetir tests nuevos</a> automáticamente para detectar defectos.{{< /ci-details >}}                                          | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Repetir tests automáticamente*" >}}<a href="/tests/flaky_test_management/auto_test_retries">Repetir tests fallidos</a> automáticamente hasta N veces para evitar que la compilación falle debido a defectos en los tests.{{< /ci-details >}}    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Failed test replay *" >}}<a href="/tests/flaky_test_management/auto_test_retries#failed-test-replay">Acceder a información local variable</a> en tests fallidos reintentados.{{< /ci-details >}}                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |                       |           |           |                        |
 | {{< ci-details title="Integración de Selenium RUM" >}}<a href="/tests/browser_tests">Vincular sesiones del navegador a casos de tests</a>automáticamente al probar aplicaciones instrumentadas con RUM.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
 \* Esta función es opcional y debe activarse en la [página **Test Optimization Settings**][2] (Configuración de Test Optimization).
@@ -90,7 +95,7 @@ Por ejemplo, supongamos que estás probando una única confirmación y tienes un
 
 ### Probar los atributos de configuración
 
-Cuando ejecutas tus tests con la optimización de tests, la librería detecta e informa sobre el entorno en el que se ejecutan los tests como etiquetas (tags) de test. Por ejemplo, el nombre del sistema operativo, como `Windows` o `Linux`, y la arquitectura de la plataforma, como `arm64` o `x86_64`, se agregan como etiquetas en cada test. Estos valores se muestran en las páginas de confirmación y de información general de la rama cuando un test falla o es defectuoso para una configuración específica, pero no para otras.
+Cuando ejecutas tus tests con la optimización de tests, la biblioteca detecta e informa sobre el entorno en el que se ejecutan los tests como etiquetas (tags) de test. Por ejemplo, el nombre del sistema operativo, como `Windows` o `Linux`, y la arquitectura de la plataforma, como `arm64` o `x86_64`, se agregan como etiquetas en cada test. Estos valores se muestran en las páginas de confirmación y de información general de la rama cuando un test falla o es defectuoso para una configuración específica, pero no para otras.
 
 Las siguientes etiquetas se recopilan automáticamente para identificar configuraciones de test y algunas pueden aplicarse solo a plataformas específicas:
 
@@ -112,7 +117,7 @@ Las siguientes etiquetas se recopilan automáticamente para identificar configur
 
 ### Configuraciones de tests parametrizados
 
-Cuando se ejecutan tests parametrizados, la librería detecta y genera información sobre los parámetros utilizados. Los parámetros son parte de la configuración del test, por lo que el mismo caso de test ejecutado con diferentes parámetros se considera como dos pruebas diferentes en la optimización de tests.
+Cuando se ejecutan tests parametrizados, la biblioteca detecta y genera información sobre los parámetros utilizados. Los parámetros son parte de la configuración del test, por lo que el mismo caso de test ejecutado con diferentes parámetros se considera como dos pruebas diferentes en la optimización de tests.
 
 Si un parámetro de test no es determinista y tiene un valor diferente cada vez que se ejecuta un test, cada ejecución de test se considera un nuevo test en la optimización de tests. Como consecuencia, es posible que algunas funciones del producto no funcionen correctamente para dichos tests: historial de ejecuciones, detección de defectos, análisis del impacto de los tests y otras.
 
@@ -123,11 +128,11 @@ Algunos ejemplos de parámetros de test no deterministas son:
 - un valor que depende del entorno de ejecución del test (como una ruta de archivo absoluta o el nombre de usuario actual)
 - un valor que no tiene una representación de cadena determinista (por ejemplo, una instancia de una clase Java cuyo método `toString()` no se anula)
 
-Evita utilizar parámetros de test no deterministas. En caso de que esto no sea posible, algunos marcos de test ofrecen una forma de especificar una representación de cadena determinista para un parámetro no determinista (como anular el nombre de visualización del parámetro).
+Evita utilizar parámetros de test no deterministas. En caso de que esto no sea posible, algunos frameworks de test ofrecen una forma de especificar una representación de cadena determinista para un parámetro no determinista (como anular el nombre de visualización del parámetro).
 
 ## Configuraciones personalizadas
 
-Hay algunas configuraciones que no se pueden identificar directamente ni informar de forma automática porque pueden depender de variables de entorno, argumentos de ejecución de tests u otros enfoques que utilizan los desarrolladores. En esos casos, debes proporcionar los detalles de configuración a la librería para que la optimización de tests pueda identificarlos correctamente.
+Hay algunas configuraciones que no se pueden identificar directamente ni informar de forma automática porque pueden depender de variables de entorno, argumentos de ejecución de tests u otros enfoques que utilizan los desarrolladores. En esos casos, debes proporcionar los detalles de configuración a la biblioteca para que la optimización de tests pueda identificarlos correctamente.
 
 Define estas etiquetas como parte de la variable de entorno `DD_TAGS` con el prefijo `test.configuration`.
 

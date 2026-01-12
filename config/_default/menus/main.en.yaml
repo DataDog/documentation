@@ -2847,11 +2847,6 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
       weight: 10000
     - name: Agents
       url: actions/agents/
@@ -2996,11 +2991,6 @@ menu:
       parent: app_builder
       identifier: app_builder_saved_actions
       weight: 10
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
       weight: 30000
     - name: Datastores
       url: actions/datastores/
@@ -4542,11 +4532,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Service Override Removal
+      url: tracing/services/service_override_removal
+      parent: tracing_services
+      identifier: tracing_service_override_removal
+      weight: 909
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 909
+      weight: 910
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -5095,12 +5090,18 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Quality Monitoring
-      url: data_observability/quality_monitoring/
-      pre: inventories
-      identifier: quality_monitoring
+    - name: Data Observability
+      url: data_observability/
+      pre: data-observability-wui
+      identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Quality Monitoring
+      url: data_observability/quality_monitoring/
+      pre: data-observability-wui
+      identifier: quality_monitoring
+      parent: data_observability_heading
+      weight: 70000
     - name: Data Warehouses
       url: data_observability/quality_monitoring/data_warehouses
       identifier: data_warehouses
@@ -5151,7 +5152,7 @@ menu:
       pre: data-jobs-monitoring
       identifier: data_jobs
       parent: data_observability_heading
-      weight: 70000
+      weight: 80000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
