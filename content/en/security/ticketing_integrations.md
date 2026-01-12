@@ -94,7 +94,7 @@ The following steps set up bidirectional syncing with Jira and verify that setup
    4. Click the **Jira** tab.
    5. Verify that the **Case Management  <-> Jira Integration** section exists and bidirectional sync is enabled.
 
-{{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:100%;">}}
+{{< img src="security/jira_modal.png" alt="Modal used to create a Jira ticket for a Security finding, with bidirectional sync enabled." responsive="true" style="width:50%;">}}
 
 You are ready to start creating bidirectional Case Management tickets.
 
@@ -110,17 +110,16 @@ The following steps create a bidirectional ticket for a Security finding.
 4. Create ticket for any third party tool supported (see sections below)
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
-4. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating new Jira ticket.
-5. In **Case Management  <-> Jira Integration**, complete the following settings:
+1. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating new Jira ticket.
+2. In **Case Management  <-> Jira Integration**, complete the following settings:
    1. **Case Management project:** select a Case Management project that has [Jira integration enabled][3].
    2. **Jira account:** select the Jira account where you want the ticket created.
    3. **Project:** select the Jira project to use.
    4. **Issue type:** select the Jira issue type to create.
-6. To add more fields to the Jira ticket Datadog creates, use **Add Optional Field** to add the fields.
-7. Click **Create Ticket**.
+3. To add more fields to the Jira ticket Datadog creates, use **Add Optional Field** to add the fields.
+4. Click **Create Ticket**.
 
 Notes:
-
 - Bidirectional sync with Jira is available for certain Jira ticket attributes, such as status, assignee, and comments, but not all Jira fields are available.
 {{% /collapse-content %}}
 
