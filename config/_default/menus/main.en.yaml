@@ -7752,6 +7752,11 @@ menu:
       parent: synthetics
       identifier: synthetics_network_path_tests
       weight: 4
+    - name: Terms and Concepts
+      url: synthetics/network_path_tests/glossary
+      parent: synthetics_network_path_tests
+      identifier: synthetics_network_path_tests_glossary
+      weight: 401
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
