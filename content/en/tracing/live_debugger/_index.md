@@ -29,7 +29,7 @@ further_reading:
 
 Live Debugger lets you inspect application behavior in real time, directly in running services, without redeploying code or interrupting execution.
 
-Instead of adding temporary debug logs or reproducing issues locally, you can dynamically capture application state—such as variable values, method inputs, and execution context—at specific points in the code. This makes Live Debugger well suited for diagnosing issues in production or other long-running environments where traditional debugging is impractical.
+Instead of adding temporary debug logs or reproducing issues locally, you can dynamically capture application state—such as variable values, method inputs, and execution context—at specific points in the code. This makes Live Debugger well suited for diagnosing issues in production or other long-running environments.
 
 Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Since execution continues normally, Live Debugger can be used safely on production systems to investigate problems as they happen.
 
@@ -42,7 +42,7 @@ Live Debugger provides:
 - **Real-time inspection** of variable values, method arguments, and execution context in running code.
 - **Safe, non-invasive data capture** that collects debugging information without pausing applications or requiring redeploys.
 - **Dynamic logpoint placement** anywhere in your codebase, including in third-party libraries.
-- **Auto-expiring logpoints** that deactivate automatically after a configurable duration (default: 48 hours).
+- **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
 - **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
 - **Built-in [sensitive data scrubbing][3]** to help prevent exposure of personal data, secrets, and credentials.
 
@@ -89,15 +89,15 @@ When you enable or disable Live Debugger, the same action applies to Dynamic Ins
 
 ### Creating and using a Debug Session
 
-Debug Sessions let you inspect your code at runtime with auto-expiring logpoints. To create and use a Debug Session:
+A Debug Session lets you inspect running code using auto-expiring logpoints. To create and use a Debug Session:
 
-1. Start a Debug Session from one of the following:
-    - On the [Live Debugger page][14], click **Create Debug Session**.
-    - (Requires Code Origin feature) In the [Trace Explorer][22], click on a trace to open the side panel, find the Code Origin section, and click **Start Debug Session**.
-2. Add the first logpoint to start the session.
-3. Add, remove, and modify logpoints within the session.
+1. Start a Debug Session from one of the following locations:
+   - On the [Live Debugger page][14], click **Create Debug Session**.
+   - (Requires the Code Origin feature) In the [Trace Explorer][22], open a trace, locate the Code Origin section in the side panel, and click **Start Debug Session**.
+2. Add a logpoint to begin collecting diagnostic data.
+3. Add, remove, or modify logpoints as needed during the session.
 
-Debug Sessions automatically expire after 48 hours. You can manually disable and re-enable both sessions and individual logpoints at any time.
+Debug Sessions expire automatically. You can also manually disable or re-enable a session, as well as individual logpoints, at any time.
 
 ### Creating logpoints
 
@@ -136,7 +136,6 @@ The following constraints apply to Live Debugger usage and configuration:
 - **Rate limits:**
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
-- **Session duration:** Debug Sessions automatically expire after 48 hours by default.
 
 ## Further Reading
 
