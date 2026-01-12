@@ -9,11 +9,11 @@ further_reading:
       text: "Set up Sensitive Data Scanner"
 ---
 
+## Overview
+
 {{< site-region region="eu,gov" >}}
 <div class="alert alert-info">Human Name Scanner detects personal names in logs using machine learning. The feature is in Preview for the {{< region-param key="dd_site_name" >}} site. Fill out the <a href="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/">form</a> to request access.</a></div>
 {{< /site-region >}}
-
-## Overview
 
 The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. The recommended keywords are used by default when library rules are created.
 
