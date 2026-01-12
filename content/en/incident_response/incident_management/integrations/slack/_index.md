@@ -130,77 +130,45 @@ Under the hood, this feature is a built-in, hidden [incident notification rule][
 
 You can view the full list of available Slack commands at any time by typing `/dd help` or `/datadog help` in Slack. This will open the command reference directly in your Slack workspace. To open the action tray for common incident management actions, type `/datadog`.
 
-<table>
-  <thead>
-    <tr>
-      <th scope="col">Category</th>
-      <th scope="col">Command</th>
-      <th scope="col">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3">Global commands (run anywhere)</td>
-      <td><code>/datadog incident</code></td>
-      <td>Declare a new incident.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog incident test</code></td>
-      <td>Declare a new test incident (if test incidents are enabled for the incident type).</td>
-    </tr>
-    <tr>
-      <td><code>/datadog incident list</code></td>
-      <td>List all open (active and stable) incidents.</td>
-    </tr>
-    <tr>
-      <td rowspan="11">Incident channel commands</td>
-      <td><code>/datadog</code></td>
-      <td>Open the incident action tray to perform common actions.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog incident update</code></td>
-      <td>Update the incident state, severity, or other attribute of the incident.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog incident notify</code></td>
-      <td>Notify <code>@</code>-handles about the incident.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog incident private</code></td>
-      <td>Make the incident private (if private incidents are enabled).</td>
-    </tr>
-    <tr>
-      <td><code>/datadog incident public</code></td>
-      <td>Make the incident public.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog incident responders</code></td>
-      <td>Manage the incident's response team (add responders and assign response roles).</td>
-    </tr>
-    <tr>
-      <td><code>/datadog task</code></td>
-      <td>Create a new incident task.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog task list</code></td>
-      <td>List existing incident tasks.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog followup</code></td>
-      <td>Create a new follow-up for the incident.</td>
-    </tr>
-    <tr>
-      <td><code>/datadog followup list</code></td>
-      <td>View and manage existing follow-ups for the incident.</td>
-    </tr>
-    {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-    <tr>
-      <td><code>/datadog incident summary</code></td>
-      <td>Generate the incident's summary with AI.</td>
-    </tr>
-    {{< /site-region >}}
-  </tbody>
-</table>
+### Global commands (run anywhere)
+
+| Command | Description |
+| ------- | ----------- |
+| `/datadog incident` | Declare a new incident. |
+| `/datadog incident test` | Declare a new test incident (if test incidents are enabled for the incident type). |
+| `/datadog incident list` | List all open (active and stable) incidents. |
+
+### Incident channel commands
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+| Command | Description |
+| ------- | ----------- |
+| `/datadog` | Open the incident action tray to perform common actions. |
+| `/datadog incident update` | Update the incident state, severity, or other attribute of the incident. |
+| `/datadog incident notify` | Notify `@`-handles about the incident. |
+| `/datadog incident private` | Make the incident private (if private incidents are enabled). |
+| `/datadog incident public` | Make the incident public. |
+| `/datadog incident responders` | Manage the incident's response team (add responders and assign response roles). |
+| `/datadog task` | Create a new incident task. |
+| `/datadog task list` | List existing incident tasks. |
+| `/datadog followup` | Create a new follow-up for the incident. |
+| `/datadog followup list` | View and manage existing follow-ups for the incident. |
+| `/datadog incident summary` | Generate the incident's summary with AI. |
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+| Command | Description |
+| ------- | ----------- |
+| `/datadog` | Open the incident action tray to perform common actions. |
+| `/datadog incident update` | Update the incident state, severity, or other attribute of the incident. |
+| `/datadog incident notify` | Notify `@`-handles about the incident. |
+| `/datadog incident private` | Make the incident private (if private incidents are enabled). |
+| `/datadog incident public` | Make the incident public. |
+| `/datadog incident responders` | Manage the incident's response team (add responders and assign response roles). |
+| `/datadog task` | Create a new incident task. |
+| `/datadog task list` | List existing incident tasks. |
+| `/datadog followup` | Create a new follow-up for the incident. |
+| `/datadog followup list` | View and manage existing follow-ups for the incident. |
+{{< /site-region >}}
 
 
 ## Further reading
