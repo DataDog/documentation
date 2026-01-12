@@ -7061,19 +7061,27 @@ components:
     BatchUpsertRowsRequestDataAttributes:
       description: Attributes containing row data values for row creation or update
         operations.
+      example:
+        values: {}
       properties:
         values:
           additionalProperties:
-            x-required-field: true
-          description: Key-value pairs representing row data, where keys are field
-            names from the schema.
-          example:
-            example_key_value: primary_key_value
-            name: row_name
+            $ref: '#/components/schemas/BatchUpsertRowsRequestDataAttributesValue'
+          description: Key-value pairs representing row data, where keys are schema
+            field names and values match the corresponding column types.
           type: object
       required:
       - values
       type: object
+    BatchUpsertRowsRequestDataAttributesValue:
+      description: Types allowed for Reference Table row values.
+      oneOf:
+      - example: row_name
+        type: string
+      - example: 25
+        format: int32
+        maximum: 2147483647
+        type: integer
     BillConfig:
       description: Bill config.
       properties:
@@ -15890,7 +15898,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Deployment ID.
+          description: Deployment ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         service:
           description: Service name.
@@ -16028,8 +16038,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Failure ID. Must have at least 16 characters. Required to update
-            a previously sent failure.
+          description: Failure ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         name:
           description: Failure name.
@@ -25370,6 +25381,61 @@ components:
       required:
       - type
       type: object
+    GlobalVariableData:
+      description: Synthetics global variable data. Wrapper around the global variable
+        object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        id:
+          description: Global variable identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/GlobalVariableType'
+      type: object
+    GlobalVariableJsonPatchRequest:
+      description: JSON Patch request for global variable.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestData'
+      required:
+      - data
+      type: object
+    GlobalVariableJsonPatchRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchType'
+      type: object
+    GlobalVariableJsonPatchRequestDataAttributes:
+      properties:
+        json_patch:
+          description: JSON Patch operations following RFC 6902.
+          items:
+            $ref: '#/components/schemas/JsonPatchOperation'
+          type: array
+      type: object
+    GlobalVariableJsonPatchType:
+      description: Global variable JSON Patch type.
+      enum:
+      - global_variables_json_patch
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES_JSON_PATCH
+    GlobalVariableResponse:
+      description: Global variable response.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableData'
+      type: object
+    GlobalVariableType:
+      description: Global variable type.
+      enum:
+      - global_variables
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
       nullable: true
@@ -29876,6 +29942,40 @@ components:
       - to
       - index
       type: object
+    JsonPatchOperation:
+      description: A JSON Patch operation as per RFC 6902.
+      properties:
+        op:
+          $ref: '#/components/schemas/JsonPatchOperationOp'
+        path:
+          description: A JSON Pointer path (e.g., "/name", "/value/secure").
+          example: /name
+          type: string
+        value:
+          description: The value to use for the operation (not applicable for "remove"
+            and "test" operations).
+      required:
+      - op
+      - path
+      type: object
+    JsonPatchOperationOp:
+      description: The operation to perform.
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: add
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     KindAttributes:
       description: Kind attributes.
       properties:
@@ -31058,6 +31158,19 @@ components:
           description: Link for the next set of rules.
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
+      type: object
+    ListSecurityFindingsResponse:
+      description: The expected response schema when listing security findings.
+      properties:
+        data:
+          description: Array of security findings matching the search query.
+          items:
+            $ref: '#/components/schemas/SecurityFindingsData'
+          type: array
+        links:
+          $ref: '#/components/schemas/SecurityFindingsLinks'
+        meta:
+          $ref: '#/components/schemas/SecurityFindingsMeta'
       type: object
     ListTagsResponse:
       description: List tags response.
@@ -40806,7 +40919,6 @@ components:
                 type: STRING
               primary_keys:
               - id
-            sync_enabled: false
             tags:
             - test_tag
           type: reference_table
@@ -40838,10 +40950,6 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadata'
         schema:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesSchema'
-        sync_enabled:
-          description: Whether this table is synced automatically.
-          example: false
-          type: boolean
         tags:
           description: Tags for organizing and filtering reference tables.
           example:
@@ -41478,6 +41586,114 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    ProductAnalyticsServerSideEventError:
+      description: Error details.
+      properties:
+        detail:
+          description: Error message.
+          example: Malformed payload
+          type: string
+        status:
+          description: Error code.
+          example: '400'
+          type: string
+        title:
+          description: Error title.
+          example: Bad Request
+          type: string
+      type: object
+    ProductAnalyticsServerSideEventErrors:
+      description: Error response.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsServerSideEventError'
+          type: array
+      type: object
+    ProductAnalyticsServerSideEventItem:
+      description: A Product Analytics server-side event.
+      properties:
+        account:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemAccount'
+        application:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemApplication'
+        event:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemEvent'
+        session:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemSession'
+        type:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemType'
+        usr:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemUsr'
+      required:
+      - application
+      - event
+      - type
+      type: object
+    ProductAnalyticsServerSideEventItemAccount:
+      description: The account linked to your event.
+      properties:
+        id:
+          description: The account ID used in Datadog.
+          example: account-67890
+          type: string
+      required:
+      - id
+      type: object
+    ProductAnalyticsServerSideEventItemApplication:
+      description: The application in which you want to send your events.
+      properties:
+        id:
+          description: 'The application ID of your application. It can be found in
+            your
+
+            [application management page](https://app.datadoghq.com/rum/list).'
+          example: 123abcde-123a-123b-1234-123456789abc
+          type: string
+      required:
+      - id
+      type: object
+    ProductAnalyticsServerSideEventItemEvent:
+      description: Fields used for the event.
+      properties:
+        name:
+          description: The name of your event, which is used for search in the same
+            way as view or action names.
+          example: payment.processed
+          type: string
+      required:
+      - name
+      type: object
+    ProductAnalyticsServerSideEventItemSession:
+      description: The session linked to your event.
+      properties:
+        id:
+          description: The session ID captured by the SDK.
+          example: session-abcdef
+          type: string
+      required:
+      - id
+      type: object
+    ProductAnalyticsServerSideEventItemType:
+      description: The type of Product Analytics event. Must be `server` for server-side
+        events.
+      enum:
+      - server
+      example: server
+      type: string
+      x-enum-varnames:
+      - SERVER
+    ProductAnalyticsServerSideEventItemUsr:
+      description: The user linked to your event.
+      properties:
+        id:
+          description: The user ID used in Datadog.
+          example: user-12345
+          type: string
+      required:
+      - id
+      type: object
     Project:
       description: A Project
       properties:
@@ -47850,6 +48066,148 @@ components:
         meta:
           $ref: '#/components/schemas/SecurityFilterMeta'
       type: object
+    SecurityFindingsAttributes:
+      description: The JSON object containing all attributes of the security finding.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: The custom attributes of the security finding.
+          example:
+            severity: high
+            status: open
+          type: object
+        tags:
+          description: List of tags associated with the security finding.
+          example:
+          - team:platform
+          - env:prod
+          items:
+            type: string
+          type: array
+        timestamp:
+          description: The Unix timestamp at which the detection changed for the resource.
+            Same value as @detection_changed_at.
+          example: 1765901760
+          format: int64
+          type: integer
+      type: object
+    SecurityFindingsData:
+      description: A single security finding.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsAttributes'
+        id:
+          description: The unique ID of the security finding.
+          example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityFindingsDataType'
+      type: object
+    SecurityFindingsDataType:
+      default: finding
+      description: The type of the security finding resource.
+      enum:
+      - finding
+      example: finding
+      type: string
+      x-enum-varnames:
+      - FINDING
+    SecurityFindingsLinks:
+      description: Links for pagination.
+      properties:
+        next:
+          description: Link for the next page of results. Note that paginated requests
+            can also be made using the POST endpoint.
+          example: https://app.datadoghq.com/api/v2/security/findings?page[cursor]=eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==&page[limit]=25
+          type: string
+      type: object
+    SecurityFindingsMeta:
+      description: Metadata about the response.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 548
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/SecurityFindingsPage'
+        request_id:
+          description: The identifier of the request.
+          example: pddv1ChZwVlMxMUdYRFRMQ1lyb3B4MGNYbFlnIi0KHQu35LDbucx
+          type: string
+        status:
+          $ref: '#/components/schemas/SecurityFindingsStatus'
+      type: object
+    SecurityFindingsPage:
+      description: Pagination information.
+      properties:
+        after:
+          description: The cursor used to get the next page of results.
+          example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+          type: string
+      type: object
+    SecurityFindingsSearchRequest:
+      description: The request body for searching security findings.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestData'
+      type: object
+    SecurityFindingsSearchRequestData:
+      description: Request data for searching security findings.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestDataAttributes'
+      type: object
+    SecurityFindingsSearchRequestDataAttributes:
+      description: Request attributes for searching security findings.
+      properties:
+        filter:
+          default: '*'
+          description: The search query following log search syntax.
+          example: '@severity:(critical OR high) @status:open team:platform'
+          type: string
+        page:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestPage'
+        sort:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      type: object
+    SecurityFindingsSearchRequestPage:
+      description: Pagination attributes for the search request.
+      properties:
+        cursor:
+          description: Get the next page of results with a cursor provided in the
+            previous query.
+          example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+          type: string
+        limit:
+          default: 10
+          description: The maximum number of security findings in the response.
+          example: 25
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      type: object
+    SecurityFindingsSort:
+      default: -@detection_changed_at
+      description: The sort parameters when querying security findings.
+      enum:
+      - '@detection_changed_at'
+      - -@detection_changed_at
+      type: string
+      x-enum-varnames:
+      - DETECTION_CHANGED_AT_ASC
+      - DETECTION_CHANGED_AT_DESC
+    SecurityFindingsStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -53832,6 +54190,178 @@ components:
         suppression:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
       type: object
+    SyntheticsGlobalVariable:
+      description: Synthetic global variable.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
+        name:
+          description: Name of the global variable. Unique across Synthetic global
+            variables.
+          example: MY_VARIABLE
+          type: string
+        parse_test_options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      - value
+      type: object
+    SyntheticsGlobalVariableAttributes:
+      description: Attributes of the global variable.
+      properties:
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+      type: object
+    SyntheticsGlobalVariableOptions:
+      description: Options for the Global Variable for MFA.
+      properties:
+        totp_parameters:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableTOTPParameters'
+      type: object
+    SyntheticsGlobalVariableParseTestOptions:
+      description: Parser options to use for retrieving a Synthetic global variable
+        from a Synthetic test. Used in conjunction with `parse_test_public_id`.
+      properties:
+        field:
+          description: When type is `http_header`, name of the header to use to extract
+            the value.
+          example: content-type
+          type: string
+        localVariableName:
+          description: When type is `local_variable`, name of the local variable to
+            use to extract the value.
+          example: LOCAL_VARIABLE
+          type: string
+        parser:
+          $ref: '#/components/schemas/SyntheticsVariableParser'
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+      required:
+      - type
+      type: object
+    SyntheticsGlobalVariableParseTestOptionsType:
+      description: Type of value to extract from a test for a Synthetic global variable.
+      enum:
+      - http_body
+      - http_header
+      - http_status_code
+      - local_variable
+      example: http_body
+      type: string
+      x-enum-varnames:
+      - HTTP_BODY
+      - HTTP_HEADER
+      - HTTP_STATUS_CODE
+      - LOCAL_VARIABLE
+    SyntheticsGlobalVariableParserType:
+      description: Type of parser for a Synthetic global variable from a synthetics
+        test.
+      enum:
+      - raw
+      - json_path
+      - regex
+      - x_path
+      example: raw
+      type: string
+      x-enum-varnames:
+      - RAW
+      - JSON_PATH
+      - REGEX
+      - X_PATH
+    SyntheticsGlobalVariableTOTPParameters:
+      description: Parameters for the TOTP/MFA variable
+      properties:
+        digits:
+          description: Number of digits for the OTP code.
+          example: 6
+          format: int32
+          maximum: 10
+          minimum: 4
+          type: integer
+        refresh_interval:
+          description: Interval for which to refresh the token (in seconds).
+          example: 30
+          format: int32
+          maximum: 999
+          minimum: 0
+          type: integer
+      type: object
+    SyntheticsGlobalVariableValue:
+      description: Value of the global variable.
+      example:
+        secure: true
+        value: value
+      properties:
+        options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableOptions'
+        secure:
+          description: Determines if the value of the variable is hidden.
+          type: boolean
+        value:
+          description: 'Value of the global variable. When reading a global variable,
+
+            the value will not be present if the variable is hidden with the `secure`
+            property.'
+          example: example-value
+          type: string
+      type: object
+    SyntheticsRestrictedRoles:
+      description: A list of role identifiers that can be pulled from the Roles API,
+        for restricting read and write access.
+      example:
+      - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      items:
+        description: UUID for a role.
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        type: string
+      type: array
+    SyntheticsVariableParser:
+      description: Details of the parser to use for the global variable.
+      example:
+        type: regex
+        value: .*
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+        value:
+          description: Regex or JSON path used for the parser. Not used with type
+            `raw`.
+          type: string
+      required:
+      - type
+      type: object
     TableResultV2:
       description: A reference table resource containing its full configuration and
         state.
@@ -59278,6 +59808,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            appsec_vm_read: View infrastructure, application code, and library vulnerability
+              findings.
             billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
@@ -78521,6 +79053,219 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
+  /api/v2/prodlytics:
+    post:
+      description: 'Send server-side events to Product Analytics. Server-side events
+        are retained for 15 months.
+
+
+        Server-Side events in Product Analytics are helpful for tracking events that
+        occur on the server,
+
+        as opposed to client-side events, which are captured by Real User Monitoring
+        (RUM) SDKs.
+
+        This allows for a more comprehensive view of the user journey by including
+        actions that happen on the server.
+
+        Typical examples could be `checkout.completed` or `payment.processed`.
+
+
+        Ingested server-side events are integrated into Product Analytics to allow
+        users to select and filter
+
+        these events in the event picker, similar to how views or actions are handled.
+
+
+        **Requirements:**
+
+        - At least one of `usr`, `account`, or `session` must be provided with a valid
+        ID.
+
+        - The `application.id` must reference a Product Analytics-enabled application.
+
+
+        **Custom Attributes:**
+
+        Any additional fields in the payload are flattened and searchable as facets.
+
+        For example, a payload with `{"customer": {"tier": "premium"}}` is searchable
+        with
+
+        the syntax `@customer.tier:premium` in Datadog.
+
+
+        The status codes answered by the HTTP API are:
+
+        - 202: Accepted: The request has been accepted for processing
+
+        - 400: Bad request (likely an issue in the payload formatting)
+
+        - 401: Unauthorized (likely a missing API Key)
+
+        - 403: Permission issue (likely using an invalid API Key)
+
+        - 408: Request Timeout, request should be retried after some time
+
+        - 413: Payload too large (batch is above 5MB uncompressed)
+
+        - 429: Too Many Requests, request should be retried after some time
+
+        - 500: Internal Server Error, the server encountered an unexpected condition
+        that prevented it from fulfilling the request, request should be retried after
+        some time
+
+        - 503: Service Unavailable, the server is not ready to handle the request
+        probably because it is overloaded, request should be retried after some time'
+      operationId: SubmitProductAnalyticsEvent
+      requestBody:
+        content:
+          application/json:
+            examples:
+              event-with-account:
+                description: Send a server-side event linked to an account.
+                summary: Event with account ID
+                value:
+                  account:
+                    id: account-456
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  event:
+                    name: checkout.completed
+                  type: server
+              event-with-custom-attributes:
+                description: Send a server-side event with additional custom attributes.
+                summary: Event with custom attributes
+                value:
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  customer:
+                    tier: premium
+                  event:
+                    name: payment.processed
+                  type: server
+                  usr:
+                    id: '123'
+              event-with-session:
+                description: Send a server-side event linked to a session.
+                summary: Event with session ID
+                value:
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  event:
+                    name: form.submitted
+                  session:
+                    id: session-789
+                  type: server
+              simple-event-with-user:
+                description: Send a server-side event linked to a user.
+                summary: Simple event with user ID
+                value:
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  event:
+                    name: payment.processed
+                  type: server
+                  usr:
+                    id: '123'
+            schema:
+              $ref: '#/components/schemas/ProductAnalyticsServerSideEventItem'
+        description: Server-side event to send (JSON format).
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Request accepted for processing (always 202 empty JSON).
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Forbidden
+        '408':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Request Timeout
+        '413':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Payload Too Large
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Too Many Requests
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Internal Server Error
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Service Unavailable
+      security:
+      - apiKeyAuth: []
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for customers.
+            enum:
+            - datadoghq.com
+            - us3.datadoghq.com
+            - us5.datadoghq.com
+            - ap1.datadoghq.com
+            - ap2.datadoghq.com
+            - datadoghq.eu
+          subdomain:
+            default: browser-intake
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: browser-intake-datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: browser-intake
+            description: The subdomain where the API is deployed.
+      summary: Send server-side events
+      tags:
+      - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
   /api/v2/product-analytics/accounts/facet_info:
     post:
       description: Get facet information for account attributes including possible
@@ -79271,6 +80016,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              happy_path:
+                summary: Upsert a row with mixed string and int values
+                value:
+                  data:
+                  - attributes:
+                      values:
+                        age: 25
+                        example_key_value: primary_key_value
+                        name: row_name
+                    id: primary_key_value
+                    type: row
             schema:
               $ref: '#/components/schemas/BatchUpsertRowsRequestArray'
         required: true
@@ -82601,6 +83358,87 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_cws_agent_rules_read
+  /api/v2/security/findings:
+    get:
+      description: 'Get a list of security findings that match a search query.
+
+
+        ### Query Syntax
+
+
+        This endpoint uses the logs query syntax. Findings attributes (living in the
+        custom. namespace) are prefixed by @ when queried. Tags are queried without
+        a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: ListSecurityFindings
+      parameters:
+      - description: The search query following log search syntax.
+        example: '@severity:(critical OR high) @status:open team:platform'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          default: '*'
+          type: string
+      - description: Get the next page of results with a cursor provided in the previous
+          query.
+        example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of findings in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      - description: Sorts by @detection_changed_at.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List security findings
+      tags:
+      - Security Monitoring
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
   /api/v2/security/findings/cases:
     delete:
       description: 'Detach security findings from their case.
@@ -82825,6 +83663,59 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and is subject to change.
 
         Please check the documentation regularly for updates.'
+  /api/v2/security/findings/search:
+    post:
+      description: 'Get a list of security findings that match a search query.
+
+
+        ### Query Syntax
+
+
+        The API uses the logs query syntax. Findings attributes (living in the custom.
+        namespace) are prefixed by @ when queried. Tags are queried without a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: SearchSecurityFindings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityFindingsSearchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Search security findings
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
   /api/v2/security/sboms:
     get:
       description: 'Get a list of assets SBOMs for an organization.
@@ -87422,6 +88313,61 @@ paths:
         operator: OR
         permissions:
         - billing_edit
+  /api/v2/synthetics/variables/{variable_id}/jsonpatch:
+    patch:
+      description: 'Patch a global variable using JSON Patch (RFC 6902).
+
+        This endpoint allows partial updates to a global variable by specifying only
+        the fields to modify.
+
+
+        Common operations include:
+
+        - Replace field values: `{"op": "replace", "path": "/name", "value": "new_name"}`
+
+        - Update nested values: `{"op": "replace", "path": "/value/value", "value":
+        "new_value"}`
+
+        - Add/update tags: `{"op": "add", "path": "/tags/-", "value": "new_tag"}`
+
+        - Remove fields: `{"op": "remove", "path": "/description"}`'
+      operationId: PatchGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalVariableJsonPatchRequest'
+        description: JSON Patch document with operations to apply.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalVariableResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch a global variable
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
   /api/v2/tags/enrichment:
     get:
       description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline
@@ -91552,6 +92498,18 @@ tags:
     See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/)
     for more information.
   name: Processes
+- description: 'Send server-side events to Product Analytics. Server-Side Events Ingestion
+    allows you to collect custom events
+
+    from any server-side source, and retains events for 15 months. Server-side events
+    are helpful for understanding
+
+    causes of a funnel drop-off which are external to the client-side (for example,
+    payment processing error).
+
+    See the [Product Analytics page](https://docs.datadoghq.com/product_analytics/)
+    for more information.'
+  name: Product Analytics
 - description: Manage your Real User Monitoring (RUM) applications, and search or
     aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
     for more information

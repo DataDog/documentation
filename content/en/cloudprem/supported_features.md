@@ -14,7 +14,8 @@ Datadog CloudPrem brings core Log Explorer capabilities to your self-hosted envi
 
 The following log features are already supported:
 - Full text search on any log attributes
-- Group into Fields with all functions except the monthly timeshift
+- List, Timeseries, Top List, Table, Tree Map, Pie Chart, Scatter Plot visualizations
+- Group by into Fields and Patterns (except the monthly timeshift)
 - Dashboards
 - Log monitors
 - RBAC through [Log Restriction Queries][1]
@@ -24,6 +25,12 @@ The following log features are already supported:
 
 ## Unsupported features
 
-Features like LiveTail, Notebooks, Watchdogs, Sheets, Joins, Filter with Subquery, and search on multiple indexes are not supported.
+Feature support is actively evolving. The following are not currently supported:
+- Bits AI SRE
+- Index management for multiple retention periods and segmentation needs
+- Notebooks
+- Federated search
+- LiveTail
+- Watchdogs
 
 [1]: /api/latest/logs-restriction-queries/
