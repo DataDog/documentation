@@ -6663,8 +6663,11 @@ components:
       x-enum-varnames:
       - AZURE_SCAN_OPTIONS
     AzureStorageDestination:
-      description: The `azure_storage` destination forwards logs to an Azure Blob
+      description: 'The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
+
+
+        **Supported pipeline types:** logs'
       properties:
         blob_prefix:
           description: Optional prefix for blobs written to the container.
@@ -6695,6 +6698,8 @@ components:
       - inputs
       - container_name
       type: object
+      x-pipeline-types:
+      - logs
     AzureStorageDestinationType:
       default: azure_storage
       description: The destination type. The value should always be `azure_storage`.
@@ -33862,8 +33867,11 @@ components:
       - query
       type: object
     MicrosoftSentinelDestination:
-      description: The `microsoft_sentinel` destination forwards logs to Microsoft
+      description: 'The `microsoft_sentinel` destination forwards logs to Microsoft
         Sentinel.
+
+
+        **Supported pipeline types:** logs'
       properties:
         client_id:
           description: Azure AD client ID used for authentication.
@@ -33904,6 +33912,8 @@ components:
       - dcr_immutable_id
       - table
       type: object
+      x-pipeline-types:
+      - logs
     MicrosoftSentinelDestinationType:
       default: microsoft_sentinel
       description: The destination type. The value should always be `microsoft_sentinel`.
@@ -35608,8 +35618,11 @@ components:
       - data
       type: object
     ObservabilityPipelineAddEnvVarsProcessor:
-      description: The `add_env_vars` processor adds environment variable values to
-        log events.
+      description: 'The `add_env_vars` processor adds environment variable values
+        to log events.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -35641,6 +35654,8 @@ components:
       - variables
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAddEnvVarsProcessorType:
       default: add_env_vars
       description: The processor type. The value should always be `add_env_vars`.
@@ -35666,7 +35681,10 @@ components:
       - name
       type: object
     ObservabilityPipelineAddFieldsProcessor:
-      description: The `add_fields` processor adds static key-value fields to logs.
+      description: 'The `add_fields` processor adds static key-value fields to logs.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -35700,6 +35718,8 @@ components:
       - fields
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAddFieldsProcessorType:
       default: add_fields
       description: The processor type. The value should always be `add_fields`.
@@ -35709,8 +35729,53 @@ components:
       type: string
       x-enum-varnames:
       - ADD_FIELDS
+    ObservabilityPipelineAddHostnameProcessor:
+      description: 'The `add_hostname` processor adds the hostname to log events.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: add-hostname-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAddHostnameProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - enabled
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineAddHostnameProcessorType:
+      default: add_hostname
+      description: The processor type. The value should always be `add_hostname`.
+      enum:
+      - add_hostname
+      example: add_hostname
+      type: string
+      x-enum-varnames:
+      - ADD_HOSTNAME
     ObservabilityPipelineAmazonDataFirehoseSource:
-      description: The `amazon_data_firehose` source ingests logs from AWS Data Firehose.
+      description: 'The `amazon_data_firehose` source ingests logs from AWS Data Firehose.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -35728,6 +35793,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonDataFirehoseSourceType:
       default: amazon_data_firehose
       description: The source type. The value should always be `amazon_data_firehose`.
@@ -35738,7 +35805,10 @@ components:
       x-enum-varnames:
       - AMAZON_DATA_FIREHOSE
     ObservabilityPipelineAmazonOpenSearchDestination:
-      description: The `amazon_opensearch` destination writes logs to Amazon OpenSearch.
+      description: 'The `amazon_opensearch` destination writes logs to Amazon OpenSearch.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuth'
@@ -35766,6 +35836,8 @@ components:
       - inputs
       - auth
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonOpenSearchDestinationAuth:
       description: 'Authentication settings for the Amazon OpenSearch destination.
 
@@ -35809,8 +35881,11 @@ components:
       x-enum-varnames:
       - AMAZON_OPENSEARCH
     ObservabilityPipelineAmazonS3Destination:
-      description: The `amazon_s3` destination sends your logs in Datadog-rehydratable
+      description: 'The `amazon_s3` destination sends your logs in Datadog-rehydratable
         format to an Amazon S3 bucket for archiving.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -35851,6 +35926,8 @@ components:
       - region
       - storage_class
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonS3DestinationStorageClass:
       description: S3 storage class.
       enum:
@@ -35887,7 +35964,10 @@ components:
     ObservabilityPipelineAmazonS3Source:
       description: 'The `amazon_s3` source ingests logs from an Amazon S3 bucket.
 
-        It supports AWS authentication and TLS encryption.'
+        It supports AWS authentication and TLS encryption.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -35910,6 +35990,8 @@ components:
       - type
       - region
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonS3SourceType:
       default: amazon_s3
       description: The source type. Always `amazon_s3`.
@@ -35920,8 +36002,11 @@ components:
       x-enum-varnames:
       - AMAZON_S3
     ObservabilityPipelineAmazonSecurityLakeDestination:
-      description: The `amazon_security_lake` destination sends your logs to Amazon
+      description: 'The `amazon_security_lake` destination sends your logs to Amazon
         Security Lake.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -35961,6 +36046,8 @@ components:
       - region
       - custom_source_name
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonSecurityLakeDestinationType:
       default: amazon_security_lake
       description: The destination type. Always `amazon_security_lake`.
@@ -35986,6 +36073,42 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineCloudPremDestination:
+      description: 'The `cloud_prem` destination sends logs to Datadog CloudPrem.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: cloud-prem-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineCloudPremDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineCloudPremDestinationType:
+      default: cloud_prem
+      description: The destination type. The value should always be `cloud_prem`.
+      enum:
+      - cloud_prem
+      example: cloud_prem
+      type: string
+      x-enum-varnames:
+      - CLOUD_PREM
     ObservabilityPipelineComponentDisplayName:
       description: The display name for a component.
       example: my component
@@ -36004,6 +36127,8 @@ components:
           items:
             $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
           type: array
+        pipeline_type:
+          $ref: '#/components/schemas/ObservabilityPipelineConfigPipelineType'
         processors:
           description: A list of processor groups that transform or enrich log data.
           example:
@@ -36040,25 +36165,40 @@ components:
     ObservabilityPipelineConfigDestinationItem:
       description: A destination for the pipeline.
       oneOf:
-      - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Destination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
+      - $ref: '#/components/schemas/AzureStorageDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineCloudPremDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGoogleChronicleDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineKafkaDestination'
+      - $ref: '#/components/schemas/MicrosoftSentinelDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineNewRelicDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgDestination'
-      - $ref: '#/components/schemas/AzureStorageDestination'
-      - $ref: '#/components/schemas/MicrosoftSentinelDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineGoogleChronicleDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineNewRelicDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogMetricsDestination'
+    ObservabilityPipelineConfigPipelineType:
+      default: logs
+      description: The type of data being ingested. Defaults to `logs` if not specified.
+      enum:
+      - logs
+      - metrics
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - METRICS
     ObservabilityPipelineConfigProcessorGroup:
       description: A group of processors.
       example:
@@ -36132,45 +36272,53 @@ components:
       description: A processor for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineFilterProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineSampleProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineOcsfMapperProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineAddEnvVarsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddHostnameProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineCustomProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineOcsfMapperProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseXMLProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSampleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
-      - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSplunkTcpSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Source'
-      - $ref: '#/components/schemas/ObservabilityPipelineFluentdSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineFluentBitSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineHttpServerSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgSource'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonDataFirehoseSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Source'
+      - $ref: '#/components/schemas/ObservabilityPipelineFluentBitSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineFluentdSource'
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubSource'
       - $ref: '#/components/schemas/ObservabilityPipelineHttpClientSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineHttpServerSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
       - $ref: '#/components/schemas/ObservabilityPipelineLogstashSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogSource'
       - $ref: '#/components/schemas/ObservabilityPipelineSocketSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplunkTcpSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineOpentelemetrySource'
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
-      description: The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
+      description: 'The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
         Next Gen SIEM.
+
+
+        **Supported pipeline types:** logs'
       properties:
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
@@ -36198,6 +36346,8 @@ components:
       - inputs
       - encoding
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression:
       description: Compression configuration for log events.
       properties:
@@ -36241,9 +36391,12 @@ components:
       x-enum-varnames:
       - CROWDSTRIKE_NEXT_GEN_SIEM
     ObservabilityPipelineCustomProcessor:
-      description: The `custom_processor` processor transforms events using [Vector
+      description: 'The `custom_processor` processor transforms events using [Vector
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -36277,6 +36430,8 @@ components:
       - remaps
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineCustomProcessorRemap:
       description: Defines a single VRL remap rule with its own filtering and transformation
         logic.
@@ -36352,7 +36507,11 @@ components:
       - config
       type: object
     ObservabilityPipelineDatadogAgentSource:
-      description: The `datadog_agent` source collects logs from the Datadog Agent.
+      description: 'The `datadog_agent` source collects logs/metrics from the Datadog
+        Agent.
+
+
+        **Supported pipeline types:** logs, metrics'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -36368,6 +36527,9 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
+      - metrics
     ObservabilityPipelineDatadogAgentSourceType:
       default: datadog_agent
       description: The source type. The value should always be `datadog_agent`.
@@ -36378,7 +36540,10 @@ components:
       x-enum-varnames:
       - DATADOG_AGENT
     ObservabilityPipelineDatadogLogsDestination:
-      description: The `datadog_logs` destination forwards logs to Datadog Log Management.
+      description: 'The `datadog_logs` destination forwards logs to Datadog Log Management.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -36399,6 +36564,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineDatadogLogsDestinationType:
       default: datadog_logs
       description: The destination type. The value should always be `datadog_logs`.
@@ -36408,9 +36575,48 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_LOGS
+    ObservabilityPipelineDatadogMetricsDestination:
+      description: 'The `datadog_metrics` destination forwards metrics to Datadog.
+
+
+        **Supported pipeline types:** metrics'
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: datadog-metrics-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this component.
+          example:
+          - metric-tags-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogMetricsDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+      x-pipeline-types:
+      - metrics
+    ObservabilityPipelineDatadogMetricsDestinationType:
+      default: datadog_metrics
+      description: The destination type. The value should always be `datadog_metrics`.
+      enum:
+      - datadog_metrics
+      example: datadog_metrics
+      type: string
+      x-enum-varnames:
+      - DATADOG_METRICS
     ObservabilityPipelineDatadogTagsProcessor:
-      description: The `datadog_tags` processor includes or excludes specific Datadog
+      description: 'The `datadog_tags` processor includes or excludes specific Datadog
         tags in your logs.
+
+
+        **Supported pipeline types:** logs'
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
@@ -36453,6 +36659,8 @@ components:
       - keys
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineDatadogTagsProcessorAction:
       description: The action to take on tags with matching keys.
       enum:
@@ -36495,7 +36703,10 @@ components:
       - DECODE_JSON
       - DECODE_SYSLOG
     ObservabilityPipelineDedupeProcessor:
-      description: The `dedupe` processor removes duplicate fields in log events.
+      description: 'The `dedupe` processor removes duplicate fields in log events.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -36532,6 +36743,8 @@ components:
       - mode
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
       enum:
@@ -36552,8 +36765,11 @@ components:
       x-enum-varnames:
       - DEDUPE
     ObservabilityPipelineElasticsearchDestination:
-      description: The `elasticsearch` destination writes logs to an Elasticsearch
+      description: 'The `elasticsearch` destination writes logs to an Elasticsearch
         cluster.
+
+
+        **Supported pipeline types:** logs'
       properties:
         api_version:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
@@ -36561,6 +36777,8 @@ components:
           description: The index to write logs to in Elasticsearch.
           example: logs-index
           type: string
+        data_stream:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationDataStream'
         id:
           description: The unique identifier for this component.
           example: elasticsearch-destination
@@ -36580,6 +36798,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineElasticsearchDestinationApiVersion:
       description: The Elasticsearch API version to use. Set to `auto` to auto-detect.
       enum:
@@ -36594,6 +36814,23 @@ components:
       - V6
       - V7
       - V8
+    ObservabilityPipelineElasticsearchDestinationDataStream:
+      description: Configuration options for writing to Elasticsearch Data Streams
+        instead of a fixed index.
+      properties:
+        dataset:
+          description: The data stream dataset for your logs. This groups logs by
+            their source or application.
+          type: string
+        dtype:
+          description: The data stream type for your logs. This determines how logs
+            are categorized within the data stream.
+          type: string
+        namespace:
+          description: The data stream namespace for your logs. This separates logs
+            into different environments or domains.
+          type: string
+      type: object
     ObservabilityPipelineElasticsearchDestinationType:
       default: elasticsearch
       description: The destination type. The value should always be `elasticsearch`.
@@ -36733,8 +36970,12 @@ components:
       - path
       type: object
     ObservabilityPipelineEnrichmentTableProcessor:
-      description: The `enrichment_table` processor enriches logs using a static CSV
-        file or GeoIP database.
+      description: 'The `enrichment_table` processor enriches logs using a static
+        CSV file, GeoIP database, or reference table. Exactly one of `file`, `geoip`,
+        or `reference_table` must be configured.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -36755,6 +36996,8 @@ components:
             targets.
           example: source:my-source
           type: string
+        reference_table:
+          $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableReferenceTable'
         target:
           description: Path where enrichment results should be stored in the log.
           example: enriched.geoip
@@ -36768,6 +37011,8 @@ components:
       - target
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineEnrichmentTableProcessorType:
       default: enrichment_table
       description: The processor type. The value should always be `enrichment_table`.
@@ -36777,6 +37022,28 @@ components:
       type: string
       x-enum-varnames:
       - ENRICHMENT_TABLE
+    ObservabilityPipelineEnrichmentTableReferenceTable:
+      description: Uses a Datadog reference table to enrich logs.
+      properties:
+        columns:
+          description: List of column names to include from the reference table. If
+            not provided, all columns are included.
+          items:
+            type: string
+          type: array
+        key_field:
+          description: Path to the field in the log event to match against the reference
+            table.
+          example: log.user.id
+          type: string
+        table_id:
+          description: The unique identifier of the reference table.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - key_field
+      - table_id
+      type: object
     ObservabilityPipelineFieldValue:
       description: Represents a static key-value pair used in various processors.
       properties:
@@ -36793,9 +37060,12 @@ components:
       - value
       type: object
     ObservabilityPipelineFilterProcessor:
-      description: The `filter` processor allows conditional processing of logs based
-        on a Datadog search query. Logs that match the `include` query are passed
-        through; others are discarded.
+      description: 'The `filter` processor allows conditional processing of logs/metrics
+        based on a Datadog search query. Logs/metrics that match the `include` query
+        are passed through; others are discarded.
+
+
+        **Supported pipeline types:** logs, metrics'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -36810,9 +37080,9 @@ components:
           example: filter-processor
           type: string
         include:
-          description: A Datadog search query used to determine which logs should
-            pass through the filter. Logs that match this query continue to downstream
-            components; others are dropped.
+          description: A Datadog search query used to determine which logs/metrics
+            should pass through the filter. Logs/metrics that match this query continue
+            to downstream components; others are dropped.
           example: service:my-service
           type: string
         type:
@@ -36823,6 +37093,9 @@ components:
       - include
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
+      - metrics
     ObservabilityPipelineFilterProcessorType:
       default: filter
       description: The processor type. The value should always be `filter`.
@@ -36833,7 +37106,10 @@ components:
       x-enum-varnames:
       - FILTER
     ObservabilityPipelineFluentBitSource:
-      description: The `fluent_bit` source ingests logs from Fluent Bit.
+      description: 'The `fluent_bit` source ingests logs from Fluent Bit.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -36849,6 +37125,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineFluentBitSourceType:
       default: fluent_bit
       description: The source type. The value should always be `fluent_bit`.
@@ -36859,7 +37137,10 @@ components:
       x-enum-varnames:
       - FLUENT_BIT
     ObservabilityPipelineFluentdSource:
-      description: The `fluentd` source ingests logs from a Fluentd-compatible service.
+      description: 'The `fluentd` source ingests logs from a Fluentd-compatible service.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -36875,6 +37156,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineFluentdSourceType:
       default: fluentd
       description: The source type. The value should always be `fluentd.
@@ -36899,7 +37182,10 @@ components:
         from logs and sends them to Datadog.
 
         Metrics can be counters, gauges, or distributions and optionally grouped by
-        log fields.'
+        log fields.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -36929,6 +37215,8 @@ components:
       - type
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGenerateMetricsProcessorType:
       default: generate_datadog_metrics
       description: The processor type. Always `generate_datadog_metrics`.
@@ -37023,7 +37311,10 @@ components:
       - GAUGE
       - DISTRIBUTION
     ObservabilityPipelineGoogleChronicleDestination:
-      description: The `google_chronicle` destination sends logs to Google Chronicle.
+      description: 'The `google_chronicle` destination sends logs to Google Chronicle.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
@@ -37057,6 +37348,8 @@ components:
       - inputs
       - customer_id
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGoogleChronicleDestinationEncoding:
       description: The encoding format for the logs sent to Chronicle.
       enum:
@@ -37080,7 +37373,10 @@ components:
       description: 'The `google_cloud_storage` destination stores logs in a Google
         Cloud Storage (GCS) bucket.
 
-        It requires a bucket name, GCP authentication, and metadata fields.'
+        It requires a bucket name, GCP authentication, and metadata fields.
+
+
+        **Supported pipeline types:** logs'
       properties:
         acl:
           $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationAcl'
@@ -37122,6 +37418,8 @@ components:
       - bucket
       - storage_class
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
       enum:
@@ -37164,8 +37462,11 @@ components:
       x-enum-varnames:
       - GOOGLE_CLOUD_STORAGE
     ObservabilityPipelineGooglePubSubDestination:
-      description: The `google_pubsub` destination publishes logs to a Google Cloud
+      description: 'The `google_pubsub` destination publishes logs to a Google Cloud
         Pub/Sub topic.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
@@ -37203,6 +37504,8 @@ components:
       - project
       - topic
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGooglePubSubDestinationEncoding:
       description: Encoding format for log events.
       enum:
@@ -37223,8 +37526,11 @@ components:
       x-enum-varnames:
       - GOOGLE_PUBSUB
     ObservabilityPipelineGooglePubSubSource:
-      description: The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
+      description: 'The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
         subscription.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
@@ -37255,6 +37561,8 @@ components:
       - project
       - subscription
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGooglePubSubSourceType:
       default: google_pubsub
       description: The source type. The value should always be `google_pubsub`.
@@ -37264,9 +37572,94 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_PUBSUB
+    ObservabilityPipelineHttpClientDestination:
+      description: 'The `http_client` destination sends data to an HTTP endpoint.
+
+
+        **Supported pipeline types:** logs, metrics'
+      properties:
+        auth_strategy:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationAuthStrategy'
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: http-client-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      type: object
+      x-pipeline-types:
+      - logs
+      - metrics
+    ObservabilityPipelineHttpClientDestinationAuthStrategy:
+      description: HTTP authentication strategy.
+      enum:
+      - none
+      - basic
+      - bearer
+      example: basic
+      type: string
+      x-enum-varnames:
+      - NONE
+      - BASIC
+      - BEARER
+    ObservabilityPipelineHttpClientDestinationCompression:
+      description: Compression configuration for HTTP requests.
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationCompressionAlgorithm'
+      required:
+      - algorithm
+      type: object
+    ObservabilityPipelineHttpClientDestinationCompressionAlgorithm:
+      description: Compression algorithm.
+      enum:
+      - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - GZIP
+    ObservabilityPipelineHttpClientDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+    ObservabilityPipelineHttpClientDestinationType:
+      default: http_client
+      description: The destination type. The value should always be `http_client`.
+      enum:
+      - http_client
+      example: http_client
+      type: string
+      x-enum-varnames:
+      - HTTP_CLIENT
     ObservabilityPipelineHttpClientSource:
-      description: The `http_client` source scrapes logs from HTTP endpoints at regular
+      description: 'The `http_client` source scrapes logs from HTTP endpoints at regular
         intervals.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientSourceAuthStrategy'
@@ -37297,14 +37690,18 @@ components:
       - type
       - decoding
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineHttpClientSourceAuthStrategy:
       description: Optional authentication strategy for HTTP requests.
       enum:
+      - none
       - basic
       - bearer
       example: basic
       type: string
       x-enum-varnames:
+      - NONE
       - BASIC
       - BEARER
     ObservabilityPipelineHttpClientSourceType:
@@ -37317,8 +37714,11 @@ components:
       x-enum-varnames:
       - HTTP_CLIENT
     ObservabilityPipelineHttpServerSource:
-      description: The `http_server` source collects logs over HTTP POST from external
+      description: 'The `http_server` source collects logs over HTTP POST from external
         services.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceAuthStrategy'
@@ -37338,6 +37738,8 @@ components:
       - auth_strategy
       - decoding
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineHttpServerSourceAuthStrategy:
       description: HTTP authentication method.
       enum:
@@ -37357,8 +37759,161 @@ components:
       type: string
       x-enum-varnames:
       - HTTP_SERVER
+    ObservabilityPipelineKafkaDestination:
+      description: 'The `kafka` destination sends logs to Apache Kafka topics.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationEncoding'
+        headers_key:
+          description: The field name to use for Kafka message headers.
+          example: headers
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: kafka-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        key_field:
+          description: The field name to use as the Kafka message key.
+          example: message_id
+          type: string
+        librdkafka_options:
+          description: Optional list of advanced Kafka producer configuration options,
+            defined as key-value pairs.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaLibrdkafkaOption'
+          type: array
+        message_timeout_ms:
+          description: Maximum time in milliseconds to wait for message delivery confirmation.
+          example: 300000
+          format: int64
+          minimum: 1
+          type: integer
+        rate_limit_duration_secs:
+          description: Duration in seconds for the rate limit window.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+        rate_limit_num:
+          description: Maximum number of messages allowed per rate limit duration.
+          example: 1000
+          format: int64
+          minimum: 1
+          type: integer
+        sasl:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSasl'
+        socket_timeout_ms:
+          description: Socket timeout in milliseconds for network requests.
+          example: 60000
+          format: int64
+          maximum: 300000
+          minimum: 10
+          type: integer
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topic:
+          description: The Kafka topic name to publish logs to.
+          example: logs-topic
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - topic
+      - encoding
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineKafkaDestinationCompression:
+      description: Compression codec for Kafka messages.
+      enum:
+      - none
+      - gzip
+      - snappy
+      - lz4
+      - zstd
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - NONE
+      - GZIP
+      - SNAPPY
+      - LZ4
+      - ZSTD
+    ObservabilityPipelineKafkaDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineKafkaDestinationType:
+      default: kafka
+      description: The destination type. The value should always be `kafka`.
+      enum:
+      - kafka
+      example: kafka
+      type: string
+      x-enum-varnames:
+      - KAFKA
+    ObservabilityPipelineKafkaLibrdkafkaOption:
+      description: Represents a key-value pair used to configure low-level `librdkafka`
+        client options for Kafka source and destination, such as timeouts, buffer
+        sizes, and security settings.
+      properties:
+        name:
+          description: The name of the `librdkafka` configuration option to set.
+          example: fetch.message.max.bytes
+          type: string
+        value:
+          description: The value assigned to the specified `librdkafka` configuration
+            option.
+          example: '1048576'
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineKafkaSasl:
+      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
+      properties:
+        mechanism:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSaslMechanism'
+      type: object
+    ObservabilityPipelineKafkaSaslMechanism:
+      description: SASL mechanism used for Kafka authentication.
+      enum:
+      - PLAIN
+      - SCRAM-SHA-256
+      - SCRAM-SHA-512
+      type: string
+      x-enum-varnames:
+      - PLAIN
+      - SCRAMNOT_SHANOT_256
+      - SCRAMNOT_SHANOT_512
     ObservabilityPipelineKafkaSource:
-      description: The `kafka` source ingests data from Apache Kafka topics.
+      description: 'The `kafka` source ingests data from Apache Kafka topics.
+
+
+        **Supported pipeline types:** logs'
       properties:
         group_id:
           description: Consumer group ID used by the Kafka client.
@@ -37374,10 +37929,10 @@ components:
           description: Optional list of advanced Kafka client configuration options,
             defined as key-value pairs.
           items:
-            $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceLibrdkafkaOption'
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaLibrdkafkaOption'
           type: array
         sasl:
-          $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceSasl'
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSasl'
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
         topics:
@@ -37397,30 +37952,8 @@ components:
       - group_id
       - topics
       type: object
-    ObservabilityPipelineKafkaSourceLibrdkafkaOption:
-      description: Represents a key-value pair used to configure low-level `librdkafka`
-        client options for Kafka sources, such as timeouts, buffer sizes, and security
-        settings.
-      properties:
-        name:
-          description: The name of the `librdkafka` configuration option to set.
-          example: fetch.message.max.bytes
-          type: string
-        value:
-          description: The value assigned to the specified `librdkafka` configuration
-            option.
-          example: '1048576'
-          type: string
-      required:
-      - name
-      - value
-      type: object
-    ObservabilityPipelineKafkaSourceSasl:
-      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
-      properties:
-        mechanism:
-          $ref: '#/components/schemas/ObservabilityPipelinePipelineKafkaSourceSaslMechanism'
-      type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineKafkaSourceType:
       default: kafka
       description: The source type. The value should always be `kafka`.
@@ -37431,7 +37964,10 @@ components:
       x-enum-varnames:
       - KAFKA
     ObservabilityPipelineLogstashSource:
-      description: The `logstash` source ingests logs from a Logstash forwarder.
+      description: 'The `logstash` source ingests logs from a Logstash forwarder.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -37447,6 +37983,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineLogstashSourceType:
       default: logstash
       description: The source type. The value should always be `logstash`.
@@ -37471,13 +38009,112 @@ components:
       - name
       - value
       type: object
+    ObservabilityPipelineMetricTagsProcessor:
+      description: 'The `metric_tags` processor filters metrics based on their tags
+        using Datadog tag key patterns.
+
+
+        **Supported pipeline types:** metrics'
+      properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: metric-tags-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which metrics this
+            processor targets.
+          example: '*'
+          type: string
+        rules:
+          description: A list of rules for filtering metric tags.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorRule'
+          maxItems: 100
+          minItems: 1
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - rules
+      - enabled
+      type: object
+      x-pipeline-types:
+      - metrics
+    ObservabilityPipelineMetricTagsProcessorRule:
+      description: Defines a rule for filtering metric tags based on key patterns.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorRuleAction'
+        include:
+          description: A Datadog search query used to determine which metrics this
+            rule targets.
+          example: '*'
+          type: string
+        keys:
+          description: A list of tag keys to include or exclude.
+          example:
+          - env
+          - service
+          - version
+          items:
+            type: string
+          type: array
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorRuleMode'
+      required:
+      - include
+      - mode
+      - action
+      - keys
+      type: object
+    ObservabilityPipelineMetricTagsProcessorRuleAction:
+      description: The action to take on tags with matching keys.
+      enum:
+      - include
+      - exclude
+      example: include
+      type: string
+      x-enum-varnames:
+      - INCLUDE
+      - EXCLUDE
+    ObservabilityPipelineMetricTagsProcessorRuleMode:
+      description: The processing mode for tag filtering.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
+    ObservabilityPipelineMetricTagsProcessorType:
+      default: metric_tags
+      description: The processor type. The value should always be `metric_tags`.
+      enum:
+      - metric_tags
+      example: metric_tags
+      type: string
+      x-enum-varnames:
+      - METRIC_TAGS
     ObservabilityPipelineMetricValue:
       description: Specifies how the value of the generated metric is computed.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByOne'
       - $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByField'
     ObservabilityPipelineNewRelicDestination:
-      description: The `new_relic` destination sends logs to the New Relic platform.
+      description: 'The `new_relic` destination sends logs to the New Relic platform.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -37501,6 +38138,8 @@ components:
       - inputs
       - region
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineNewRelicDestinationRegion:
       description: The New Relic region.
       enum:
@@ -37521,8 +38160,11 @@ components:
       x-enum-varnames:
       - NEW_RELIC
     ObservabilityPipelineOcsfMapperProcessor:
-      description: The `ocsf_mapper` processor transforms logs into the OCSF schema
+      description: 'The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -37554,6 +38196,8 @@ components:
       - mappings
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineOcsfMapperProcessorMapping:
       description: Defines how specific events are transformed to OCSF using a mapping
         configuration.
@@ -37613,7 +38257,10 @@ components:
       - OKTA_SYSTEM_LOG_AUTHENTICATION
       - PALO_ALTO_NETWORKS_FIREWALL_TRAFFIC
     ObservabilityPipelineOpenSearchDestination:
-      description: The `opensearch` destination writes logs to an OpenSearch cluster.
+      description: 'The `opensearch` destination writes logs to an OpenSearch cluster.
+
+
+        **Supported pipeline types:** logs'
       properties:
         bulk_index:
           description: The index to write logs to.
@@ -37638,6 +38285,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineOpenSearchDestinationType:
       default: opensearch
       description: The destination type. The value should always be `opensearch`.
@@ -37647,9 +38296,56 @@ components:
       type: string
       x-enum-varnames:
       - OPENSEARCH
+    ObservabilityPipelineOpentelemetrySource:
+      description: 'The `opentelemetry` source receives telemetry data using the OpenTelemetry
+        Protocol (OTLP) over gRPC and HTTP.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        grpc_address_key:
+          description: Environment variable name containing the gRPC server address
+            for receiving OTLP data. Must be a valid environment variable name (alphanumeric
+            characters and underscores only).
+          example: OTEL_GRPC_ADDRESS
+          type: string
+        http_address_key:
+          description: Environment variable name containing the HTTP server address
+            for receiving OTLP data. Must be a valid environment variable name (alphanumeric
+            characters and underscores only).
+          example: OTEL_HTTP_ADDRESS
+          type: string
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: opentelemetry-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineOpentelemetrySourceType'
+      required:
+      - id
+      - type
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineOpentelemetrySourceType:
+      default: opentelemetry
+      description: The source type. The value should always be `opentelemetry`.
+      enum:
+      - opentelemetry
+      example: opentelemetry
+      type: string
+      x-enum-varnames:
+      - OPENTELEMETRY
     ObservabilityPipelineParseGrokProcessor:
-      description: The `parse_grok` processor extracts structured fields from unstructured
+      description: 'The `parse_grok` processor extracts structured fields from unstructured
         log messages using Grok patterns.
+
+
+        **Supported pipeline types:** logs'
       properties:
         disable_library_rules:
           default: false
@@ -37688,6 +38384,8 @@ components:
       - rules
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineParseGrokProcessorRule:
       description: 'A Grok parsing rule used in the `parse_grok` processor. Each rule
         defines how to extract structured fields
@@ -37767,9 +38465,12 @@ components:
       x-enum-varnames:
       - PARSE_GROK
     ObservabilityPipelineParseJSONProcessor:
-      description: The `parse_json` processor extracts JSON from a specified field
+      description: 'The `parse_json` processor extracts JSON from a specified field
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -37801,6 +38502,8 @@ components:
       - field
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineParseJSONProcessorType:
       default: parse_json
       description: The processor type. The value should always be `parse_json`.
@@ -37810,28 +38513,92 @@ components:
       type: string
       x-enum-varnames:
       - PARSE_JSON
-    ObservabilityPipelinePipelineKafkaSourceSaslMechanism:
-      description: SASL mechanism used for Kafka authentication.
+    ObservabilityPipelineParseXMLProcessor:
+      description: 'The `parse_xml` processor parses XML from a specified field and
+        extracts it into the event.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        always_use_text_key:
+          description: Whether to always use a text key for element content.
+          type: boolean
+        attr_prefix:
+          description: The prefix to use for XML attributes in the parsed output.
+          type: string
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
+        field:
+          description: The name of the log field that contains an XML string.
+          example: message
+          type: string
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: parse-xml-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        include_attr:
+          description: Whether to include XML attributes in the parsed output.
+          type: boolean
+        parse_bool:
+          description: Whether to parse boolean values from strings.
+          type: boolean
+        parse_null:
+          description: Whether to parse null values.
+          type: boolean
+        parse_number:
+          description: Whether to parse numeric values from strings.
+          type: boolean
+        text_key:
+          description: The key name to use for text content within XML elements. Must
+            be at least 1 character if specified.
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineParseXMLProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - field
+      - enabled
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineParseXMLProcessorType:
+      default: parse_xml
+      description: The processor type. The value should always be `parse_xml`.
       enum:
-      - PLAIN
-      - SCRAM-SHA-256
-      - SCRAM-SHA-512
+      - parse_xml
+      example: parse_xml
       type: string
       x-enum-varnames:
-      - PLAIN
-      - SCRAMNOT_SHANOT_256
-      - SCRAMNOT_SHANOT_512
+      - PARSE_XML
     ObservabilityPipelineQuotaProcessor:
-      description: The Quota Processor measures logging traffic for logs that match
+      description: 'The `quota` processor measures logging traffic for logs that match
         a specified filter. When the configured daily quota is met, the processor
         can drop or alert.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         drop_events:
-          description: If set to `true`, logs that matched the quota filter and sent
-            after the quota has been met are dropped; only logs that did not match
-            the filter query continue through the pipeline.
+          description: 'If set to `true`, logs that match the quota filter and are
+            sent after the quota is exceeded are dropped. Logs that do not match the
+            filter continue through the pipeline. **Note**: You can set either `drop_events`
+            or `overflow_action`, but not both.'
           example: false
           type: boolean
         enabled:
@@ -37875,6 +38642,8 @@ components:
           items:
             type: string
           type: array
+        too_many_buckets_action:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorOverflowAction'
         type:
           $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorType'
       required:
@@ -37885,6 +38654,8 @@ components:
       - limit
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineQuotaProcessorLimit:
       description: The maximum amount of data or number of events allowed before the
         quota is enforced. Can be specified in bytes or events.
@@ -37912,7 +38683,8 @@ components:
       - BYTES
       - EVENTS
     ObservabilityPipelineQuotaProcessorOverflowAction:
-      description: 'The action to take when the quota is exceeded. Options:
+      description: 'The action to take when the quota or bucket limit is exceeded.
+        Options:
 
         - `drop`: Drop the event.
 
@@ -37956,8 +38728,11 @@ components:
       x-enum-varnames:
       - QUOTA
     ObservabilityPipelineReduceProcessor:
-      description: The `reduce` processor aggregates and merges logs based on matching
+      description: 'The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -37998,6 +38773,8 @@ components:
       - merge_strategies
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineReduceProcessorMergeStrategy:
       description: Defines how a specific field should be merged across grouped events.
       properties:
@@ -38051,7 +38828,10 @@ components:
       x-enum-varnames:
       - REDUCE
     ObservabilityPipelineRemoveFieldsProcessor:
-      description: The `remove_fields` processor deletes specified fields from logs.
+      description: 'The `remove_fields` processor deletes specified fields from logs.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -38087,6 +38867,8 @@ components:
       - fields
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRemoveFieldsProcessorType:
       default: remove_fields
       description: The processor type. The value should always be `remove_fields`.
@@ -38097,7 +38879,10 @@ components:
       x-enum-varnames:
       - REMOVE_FIELDS
     ObservabilityPipelineRenameFieldsProcessor:
-      description: The `rename_fields` processor changes field names.
+      description: 'The `rename_fields` processor changes field names.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -38132,6 +38917,8 @@ components:
       - fields
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRenameFieldsProcessorField:
       description: Defines how to rename a field in log events.
       properties:
@@ -38163,8 +38950,11 @@ components:
       x-enum-varnames:
       - RENAME_FIELDS
     ObservabilityPipelineRsyslogDestination:
-      description: The `rsyslog` destination forwards logs to an external `rsyslog`
+      description: 'The `rsyslog` destination forwards logs to an external `rsyslog`
         server over TCP or UDP using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -38193,6 +38983,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRsyslogDestinationType:
       default: rsyslog
       description: The destination type. The value should always be `rsyslog`.
@@ -38203,8 +38995,11 @@ components:
       x-enum-varnames:
       - RSYSLOG
     ObservabilityPipelineRsyslogSource:
-      description: The `rsyslog` source listens for logs over TCP or UDP from an `rsyslog`
-        server using the syslog protocol.
+      description: 'The `rsyslog` source listens for logs over TCP or UDP from an
+        `rsyslog` server using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -38223,6 +39018,8 @@ components:
       - type
       - mode
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRsyslogSourceType:
       default: rsyslog
       description: The source type. The value should always be `rsyslog`.
@@ -38233,8 +39030,11 @@ components:
       x-enum-varnames:
       - RSYSLOG
     ObservabilityPipelineSampleProcessor:
-      description: The `sample` processor allows probabilistic sampling of logs at
+      description: 'The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -38242,6 +39042,16 @@ components:
           description: Whether this processor is enabled.
           example: true
           type: boolean
+        group_by:
+          description: Optional list of fields to group events by. Each group is sampled
+            independently.
+          example:
+          - service
+          - host
+          items:
+            type: string
+          minItems: 1
+          type: array
         id:
           description: The unique identifier for this component. Used to reference
             this component in other parts of the pipeline (for example, as the `input`
@@ -38258,20 +39068,17 @@ components:
           example: 10.0
           format: double
           type: number
-        rate:
-          description: Number of events to sample (1 in N).
-          example: 10
-          format: int64
-          minimum: 1
-          type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineSampleProcessorType'
       required:
       - id
       - type
       - include
+      - percentage
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSampleProcessorType:
       default: sample
       description: The processor type. The value should always be `sample`.
@@ -38282,8 +39089,11 @@ components:
       x-enum-varnames:
       - SAMPLE
     ObservabilityPipelineSensitiveDataScannerProcessor:
-      description: The `sensitive_data_scanner` processor detects and optionally redacts
-        sensitive data in log events.
+      description: 'The `sensitive_data_scanner` processor detects and optionally
+        redacts sensitive data in log events.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -38317,6 +39127,8 @@ components:
       - rules
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSensitiveDataScannerProcessorAction:
       description: Defines what action to take when sensitive data is matched.
       oneOf:
@@ -38438,6 +39250,11 @@ components:
     ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternOptions:
       description: Options for defining a custom regex pattern.
       properties:
+        description:
+          description: Human-readable description providing context about a sensitive
+            data scanner rule
+          example: "Custom regex for internal API\u202Fkeys"
+          type: string
         rule:
           description: A regular expression used to detect sensitive values. Must
             be a valid regex.
@@ -38493,6 +39310,11 @@ components:
       description: Options for selecting a predefined library pattern and enabling
         keyword support.
       properties:
+        description:
+          description: Human-readable description providing context about a sensitive
+            data scanner rule
+          example: Credit card pattern
+          type: string
         id:
           description: Identifier for a predefined pattern from the sensitive data
             scanner pattern library.
@@ -38634,7 +39456,10 @@ components:
       x-enum-varnames:
       - SENSITIVE_DATA_SCANNER
     ObservabilityPipelineSentinelOneDestination:
-      description: The `sentinel_one` destination sends logs to SentinelOne.
+      description: 'The `sentinel_one` destination sends logs to SentinelOne.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -38658,6 +39483,8 @@ components:
       - inputs
       - region
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSentinelOneDestinationRegion:
       description: The SentinelOne region to send logs to.
       enum:
@@ -38682,8 +39509,11 @@ components:
       x-enum-varnames:
       - SENTINEL_ONE
     ObservabilityPipelineSocketDestination:
-      description: The `socket` destination sends logs over TCP or UDP to a remote
+      description: 'The `socket` destination sends logs over TCP or UDP to a remote
         server.
+
+
+        **Supported pipeline types:** logs'
       properties:
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationEncoding'
@@ -38716,6 +39546,8 @@ components:
       - framing
       - mode
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSocketDestinationEncoding:
       description: Encoding format for log events.
       enum:
@@ -38810,7 +39642,10 @@ components:
       x-enum-varnames:
       - SOCKET
     ObservabilityPipelineSocketSource:
-      description: The `socket` source ingests logs over TCP or UDP.
+      description: 'The `socket` source ingests logs over TCP or UDP.
+
+
+        **Supported pipeline types:** logs'
       properties:
         framing:
           $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFraming'
@@ -38833,6 +39668,8 @@ components:
       - mode
       - framing
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSocketSourceFraming:
       description: Framing method configuration for the socket source.
       oneOf:
@@ -38973,9 +39810,79 @@ components:
       - type
       - attributes
       type: object
+    ObservabilityPipelineSplitArrayProcessor:
+      description: 'The `split_array` processor splits array fields into separate
+        events based on configured rules.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        arrays:
+          description: A list of array split configurations.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessorArrayConfig'
+          maxItems: 15
+          minItems: 1
+          type: array
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Whether this processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: split-array-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets. For split_array, this should typically be `*`.
+          example: '*'
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - arrays
+      - enabled
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineSplitArrayProcessorArrayConfig:
+      description: Configuration for a single array split operation.
+      properties:
+        field:
+          description: The path to the array field to split.
+          example: tags
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this array
+            split operation targets.
+          example: '*'
+          type: string
+      required:
+      - include
+      - field
+      type: object
+    ObservabilityPipelineSplitArrayProcessorType:
+      default: split_array
+      description: The processor type. The value should always be `split_array`.
+      enum:
+      - split_array
+      example: split_array
+      type: string
+      x-enum-varnames:
+      - SPLIT_ARRAY
     ObservabilityPipelineSplunkHecDestination:
-      description: The `splunk_hec` destination forwards logs to Splunk using the
+      description: 'The `splunk_hec` destination forwards logs to Splunk using the
         HTTP Event Collector (HEC).
+
+
+        **Supported pipeline types:** logs'
       properties:
         auto_extract_timestamp:
           description: 'If `true`, Splunk tries to extract timestamps from incoming
@@ -39015,6 +39922,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSplunkHecDestinationEncoding:
       description: Encoding format for log events.
       enum:
@@ -39035,8 +39944,11 @@ components:
       x-enum-varnames:
       - SPLUNK_HEC
     ObservabilityPipelineSplunkHecSource:
-      description: The `splunk_hec` source implements the Splunk HTTP Event Collector
+      description: 'The `splunk_hec` source implements the Splunk HTTP Event Collector
         (HEC) API.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -39052,6 +39964,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSplunkHecSourceType:
       default: splunk_hec
       description: The source type. Always `splunk_hec`.
@@ -39065,7 +39979,10 @@ components:
       description: 'The `splunk_tcp` source receives logs from a Splunk Universal
         Forwarder over TCP.
 
-        TLS is supported for secure transmission.'
+        TLS is supported for secure transmission.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -39081,6 +39998,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSplunkTcpSourceType:
       default: splunk_tcp
       description: The source type. Always `splunk_tcp`.
@@ -39091,7 +40010,10 @@ components:
       x-enum-varnames:
       - SPLUNK_TCP
     ObservabilityPipelineSumoLogicDestination:
-      description: The `sumo_logic` destination forwards logs to Sumo Logic.
+      description: 'The `sumo_logic` destination forwards logs to Sumo Logic.
+
+
+        **Supported pipeline types:** logs'
       properties:
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
@@ -39132,6 +40054,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSumoLogicDestinationEncoding:
       description: The output encoding format.
       enum:
@@ -39169,7 +40093,10 @@ components:
       x-enum-varnames:
       - SUMO_LOGIC
     ObservabilityPipelineSumoLogicSource:
-      description: The `sumo_logic` source receives logs from Sumo Logic collectors.
+      description: 'The `sumo_logic` source receives logs from Sumo Logic collectors.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -39183,6 +40110,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSumoLogicSourceType:
       default: sumo_logic
       description: The source type. The value should always be `sumo_logic`.
@@ -39193,8 +40122,11 @@ components:
       x-enum-varnames:
       - SUMO_LOGIC
     ObservabilityPipelineSyslogNgDestination:
-      description: The `syslog_ng` destination forwards logs to an external `syslog-ng`
+      description: 'The `syslog_ng` destination forwards logs to an external `syslog-ng`
         server over TCP or UDP using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -39223,6 +40155,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSyslogNgDestinationType:
       default: syslog_ng
       description: The destination type. The value should always be `syslog_ng`.
@@ -39233,8 +40167,11 @@ components:
       x-enum-varnames:
       - SYSLOG_NG
     ObservabilityPipelineSyslogNgSource:
-      description: The `syslog_ng` source listens for logs over TCP or UDP from a
+      description: 'The `syslog_ng` source listens for logs over TCP or UDP from a
         `syslog-ng` server using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component. Used to reference
@@ -39253,6 +40190,8 @@ components:
       - type
       - mode
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSyslogNgSourceType:
       default: syslog_ng
       description: The source type. The value should always be `syslog_ng`.
@@ -39273,8 +40212,11 @@ components:
       - TCP
       - UDP
     ObservabilityPipelineThrottleProcessor:
-      description: The `throttle` processor limits the number of events that pass
+      description: 'The `throttle` processor limits the number of events that pass
         through over a given time window.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
@@ -39320,6 +40262,8 @@ components:
       - window
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineThrottleProcessorType:
       default: throttle
       description: The processor type. The value should always be `throttle`.
@@ -76962,6 +77906,228 @@ paths:
       tags:
       - Cloud Network Monitoring
       x-menu-order: 2
+  /api/v2/obs-pipelines/pipelines:
+    get:
+      description: Retrieve a list of pipelines.
+      operationId: ListPipelines
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPipelinesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List pipelines
+      tags:
+      - Observability Pipelines
+      x-menu-order: 0
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    post:
+      description: Create a new pipeline.
+      operationId: CreatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineSpec'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+  /api/v2/obs-pipelines/pipelines/validate:
+    post:
+      description: 'Validates a pipeline configuration without creating or updating
+        any resources.
+
+        Returns a list of validation errors, if any.'
+      operationId: ValidatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineSpec'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Validate an observability pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+  /api/v2/obs-pipelines/pipelines/{pipeline_id}:
+    delete:
+      description: Delete a pipeline.
+      operationId: DeletePipeline
+      parameters:
+      - description: The ID of the pipeline to delete.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_delete
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    get:
+      description: Get a specific pipeline by its ID.
+      operationId: GetPipeline
+      parameters:
+      - description: The ID of the pipeline to retrieve.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    put:
+      description: Update a pipeline.
+      operationId: UpdatePipeline
+      parameters:
+      - description: The ID of the pipeline to update.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipeline'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/on-call/escalation-policies:
     post:
       description: Create a new On-Call escalation policy
@@ -80705,228 +81871,6 @@ paths:
       - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 9
-  /api/v2/remote_config/products/obs_pipelines/pipelines:
-    get:
-      description: Retrieve a list of pipelines.
-      operationId: ListPipelines
-      parameters:
-      - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageNumber'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListPipelinesResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: List pipelines
-      tags:
-      - Observability Pipelines
-      x-menu-order: 0
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    post:
-      description: Create a new pipeline.
-      operationId: CreatePipeline
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipelineSpec'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '409':
-          $ref: '#/components/responses/ConflictResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a new pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-  /api/v2/remote_config/products/obs_pipelines/pipelines/validate:
-    post:
-      description: 'Validates a pipeline configuration without creating or updating
-        any resources.
-
-        Returns a list of validation errors, if any.'
-      operationId: ValidatePipeline
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipelineSpec'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Validate an observability pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 5
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-  /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
-    delete:
-      description: Delete a pipeline.
-      operationId: DeletePipeline
-      parameters:
-      - description: The ID of the pipeline to delete.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
-        '409':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Conflict
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 4
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_delete
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    get:
-      description: Get a specific pipeline by its ID.
-      operationId: GetPipeline
-      parameters:
-      - description: The ID of the pipeline to retrieve.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a specific pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 2
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    put:
-      description: Update a pipeline.
-      operationId: UpdatePipeline
-      parameters:
-      - description: The ID of the pipeline to update.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipeline'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '409':
-          $ref: '#/components/responses/ConflictResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 3
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
