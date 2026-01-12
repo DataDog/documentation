@@ -20,7 +20,7 @@ Data Observability (DO) helps data teams improve the reliability of data for ana
 
 ## Key capabilities
 
-- **Detect failures early**: Catch bad data and in warehouses like Snowflake, Databricks, and BigQuery via ML-powered monitors before dashboards, stakeholders, or AI models are impacted. Detect upstream pipeline failures in jobs run on Databricks, Spark, Airflow, or dbt.
+- **Detect failures early**: Catch bad data in warehouses like Snowflake, Databricks, and BigQuery through ML-powered monitors before dashboards, stakeholders, or AI models are impacted. Detect upstream pipeline failures in jobs run on Databricks, Spark, Airflow, or dbt.
 - **Accelerate remediation**: Triage faster using end-to-end lineage to pinpoint root causes, assess incident blast radius, and route to the right owner. View which job in the pipeline failed or was delayed, and quickly pivot into job execution traces and logs to determine why.
 - **Optimize cost & performance**: Get visibility into the cost and efficiency of Spark and Datrbicks jobs and clusters, and use recommendations to optimize cluster configuration, code and queries.
 - **Unify end-to-end observability**: Correlate data quality, pipeline execution, and infrastructure signals in one place, spanning the entire data lifecycle.
