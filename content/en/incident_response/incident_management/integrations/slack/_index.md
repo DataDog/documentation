@@ -195,7 +195,7 @@ You can view the full list of available Slack commands at any time by typing `/d
     </tr>
     <tr>
       <td><code>/datadog incident summary</code></td>
-      <td>Generate the incident’s summary with AI.</td>
+      <td>Generate the incident's summary with AI.</td>
     </tr>
   </tbody>
 </table>
