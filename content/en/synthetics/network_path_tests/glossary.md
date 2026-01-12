@@ -11,7 +11,3 @@ further_reading:
 ---
 
 {{< include-markdown "network_monitoring/network_path/glossary" >}}
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
