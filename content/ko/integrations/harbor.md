@@ -10,7 +10,7 @@ media: []
 supported_os:
 - linux
 - macos
-- 윈도우즈(Windows)
+- windows
 title: Harbor
 ---
 ## 개요
@@ -103,10 +103,10 @@ Datadog Agent에서는 로그 수집 기능이 기본적으로 비활성화되�
 
 | | |
 | --- | --- |
-| **harbor.disk.free** <br>(게이지) | 사용 가능한 스토리지 공간의 양.<br>Byte로 표시됨 |
-| **harbor.disk.total** <br>(게이지) | 총 스토리지 공간의 양.<br>Byte로 표시됨 |
-| **harbor.projects.count** <br>(게이지) | 총 프로젝트의 수.|
-| **harbor.registry.read_only** <br>(게이지) | 레지스트리의 '읽기 전용' 상태.|
+| **harbor.disk.free** <br>(gauge) | 사용 가능한 스토리지 공간의 양.<br>_byte로 표시됨_ |
+| **harbor.disk.total** <br>(gauge) | 총 스토리지 공간의 양.<br>_byte로 표시됨_ |
+| **harbor.projects.count** <br>(gauge) | 총 프로젝트의 수.|
+| **harbor.registry.read_only** <br>(gauge) | 레지스트리의 '읽기 전용' 상태.|
 
 ### 이벤트
 
@@ -116,13 +116,13 @@ Harbor 통합은 이벤트를 포함하지 않습니다.
 
 **harbor.can_connect**
 
-Harbor API에 연결할 수 있고 인증에 성공하면 `OK`를, 그렇지 않으면 `CRITICAL`을 반환합니다.
+Harbor API에 연결할 수 있고 인증에 성공하면 `OK`를, 아니면`CRITICAL`을 반환합니다.
 
 _상태: ok, critical_
 
 **harbor.status**
 
-지정된 Harbor 컴포넌트가 정상이면 `OK`를 , 그렇지 않으면 `CRITICAL`을 반환합니다. Harbor \< 1.5면 `UNKNOWN`을 반환합니다.
+지정된 Harbor 컴포넌트가 정상이면 `OK`를 , 아니면 `CRITICAL`을 반환합니다. Harbor \< 1.5면 `UNKNOWN`을 반환합니다.
 
 _상태: ok, unknown, critical_
 
