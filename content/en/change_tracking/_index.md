@@ -121,7 +121,7 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 
 ### Widgets
 
-In addition to the out-of-the-box integrations described above, **Change Tracking is available as a data source for widgets** across Datadog, including Dashboards and Notebooks.
+In addition to the out-of-the-box integrations, Change Tracking is available as a data source for widgets across Datadog, including Dashboards and Notebooks.
 
 {{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
 
