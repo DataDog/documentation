@@ -14,15 +14,15 @@ further_reading:
 ---
 
 ## Overview
-Data Observability (DO) helps data teams deliver reliable data for analytics, production systems, and AI applications. By unifying quality and jobs monitoring from production to consumption, teams can detect and remediate issues faster while optimizing cost and performance.
+Data Observability (DO) helps data teams imrpove the reliability of data for analytics and AI applications and optimize the performance & costs of data pipelines. By unifying quality and jobs monitoring from production to consumption, teams can detect and remediate issues faster while optimizing cost and performance.
 
 {{< img src="data_observability/do_suite_root_cause_analysis-1.png" alt="Datadog Data Observability end-to-end lineage with Spark job traces." style="width:100%;" >}}
 
 ## Key capabilities
 
-- **Detect failures early**: Catch bad data and stalled pipelines in warehouses like Snowflake, Databricks, and BigQuery via ML-powered monitors before dashboards, stakeholders, or AI models are impacted.
-- **Accelerate remediation**: Triage faster using end-to-end lineage to pinpoint root causes, assess incident blast radius, and route to the right owner.
-- **Optimize cost & performance**: Control spend and improve efficiency with job-level visibility and proactive query recommendations to fix inefficiencies in Databricks and Spark jobs across K8s, Amazon EMR, and Google Dataproc.
+- **Detect failures early**: Catch bad data and in warehouses like Snowflake, Databricks, and BigQuery via ML-powered monitors before dashboards, stakeholders, or AI models are impacted. Detect upstream pipeline failures in jobs run on Databricks, Spark, Airflow, or dbt.
+- **Accelerate remediation**: Triage faster using end-to-end lineage to pinpoint root causes, assess incident blast radius, and route to the right owner. View which job in the pipeline failed or was delayed, and quickly pivot into job execution traces and logs to determine why.
+- **Optimize cost & performance**: Get visibility into the cost and efficiency of Spark and Datrbicks jobs and clusters, and use recommendations to optimize cluster configuration, code and queries.
 - **Unify end-to-end observability**: Correlate data quality, pipeline execution, and infrastructure signals in one place, spanning the entire data lifecycle.
 
 ## Get started
