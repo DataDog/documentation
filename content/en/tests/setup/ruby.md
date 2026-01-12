@@ -51,11 +51,6 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{< tabs >}}
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
-
-<div class="alert alert-danger">
-  <strong>Note</strong>: Auto-instrumentation is not supported for JRuby. Follow the <a href="/tests/setup/ruby/?tab=ciproviderwithautoinstrumentationsupport#manually-instrumenting-your-tests">manual instrumentation steps</a> instead.
-</div>
-
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
@@ -78,33 +73,29 @@ This section is <strong>only required</strong> if your CI provider does not supp
 
 If your CI provider does not support auto-instrumentation (for example, if you selected **Cloud CI provider (Agentless)** or **On-Premises CI Provider (Datadog Agent)**), follow these steps to install the library and instrument your tests manually.
 
-1. Add the [Ruby test optimization gem][10] to your Gemfile
+1. Add the [Ruby test optimization gem][10] to your Gemfile:
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
 gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
-2. Set the following environment variables to configure the tracer:
+2. Set the following required environment variables:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
 
-`DD_TEST_SESSION_NAME`
-: Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
-
 `DD_ENV` (Required)
 : Environment where the tests are being run (`ci` when running them on a CI provider).
 
-`DD_SERVICE` (Optional)
-: Name of the service or library being tested.
+3. [Configure the reporting method](#configuring-reporting-method)
 
-3. Set `RUBYOPT` environment variable:
+4. Set `RUBYOPT` environment variable:
 
 `RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument"`
 
-4. Run your tests
+5. Run your tests as you normally do.
 
-4a. (Optional) If you cannot change `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
+5a. (Optional) If you would prefer not to set `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
 
 ```bash
 bundle exec ddcirb exec rspec
@@ -114,17 +105,23 @@ bundle exec ddcirb exec rspec
 
 The following is a list of the most important configuration settings that can be used with the test optimization library:
 
-`service`
-: Name of the service or library under test.<br/>
-**Environment variable**: `DD_SERVICE`<br/>
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the Test Optimization product.
+**Default**: `false`
+
+`DD_ENV` (Required)
+: Environment where the tests are being run (`ci` when running them on a CI provider).
+**Default**: `none`
+**Example**: `ci`
+
+`DD_SERVICE` (Optional)
+: Name of the service or library under test.
 **Default**: `$PROGRAM_NAME`<br/>
 **Example**: `my-ruby-app`
 
-`env`
-: Name of the environment where tests are being run.<br/>
-**Environment variable**: `DD_ENV`<br/>
-**Default**: `none`<br/>
-**Examples**: `local`, `ci`
+`DD_TEST_SESSION_NAME` (Optional)
+: Use this to identify a group of tests (see ["Test session name"](#test-session-name-dd_test_session_name))
+**Example**: `integration-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][4].
 
