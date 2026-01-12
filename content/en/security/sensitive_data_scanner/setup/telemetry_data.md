@@ -34,7 +34,7 @@ For each scanning rule, one of the following actions can be applied to matched s
 
 **Notes**:
 - When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
-- Sensitive Data Scanner does not scan integer, float and double values. If the number is in a string format, the string gets scanned.
+- Sensitive Data Scanner does not scan integer, float, and double values. If the number is in a string format, the string gets scanned.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
