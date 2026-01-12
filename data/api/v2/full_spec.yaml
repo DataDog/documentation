@@ -78604,7 +78604,13 @@ paths:
         cursorPath: meta.page.cursor
         limitParam: page[limit]
         resultsPath: data
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
@@ -78706,7 +78712,13 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 2
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/powerpacks:
@@ -83321,15 +83333,16 @@ paths:
         - security_monitoring_cws_agent_rules_read
   /api/v2/security/findings:
     get:
-      description: 'Get a list of security findings that match a search query.
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
 
 
         ### Query Syntax
 
 
         This endpoint uses the logs query syntax. Findings attributes (living in the
-        custom. namespace) are prefixed by @ when queried. Tags are queried without
-        a prefix.
+        attributes.attributes. namespace) are prefixed by @ when queried. Tags are
+        queried without a prefix.
 
 
         Example: `@severity:(critical OR high) @status:open team:platform`'
@@ -83626,13 +83639,14 @@ paths:
         Please check the documentation regularly for updates.'
   /api/v2/security/findings/search:
     post:
-      description: 'Get a list of security findings that match a search query.
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
 
 
         ### Query Syntax
 
 
-        The API uses the logs query syntax. Findings attributes (living in the custom.
+        The API uses the logs query syntax. Findings attributes (living in the attributes.attributes.
         namespace) are prefixed by @ when queried. Tags are queried without a prefix.
 
 
