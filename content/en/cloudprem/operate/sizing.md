@@ -2,13 +2,13 @@
 title: Cluster Sizing
 description: Learn about cluster sizing for CloudPrem
 further_reading:
-- link: "/cloudprem/configure/ingress/"
+- link: "/cloudprem/install/network/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/configure/processing/"
+- link: "/cloudprem/configure/pipelines/"
   tag: "Documentation"
   text: "Configure CloudPrem Log Processing"
-- link: "/cloudprem/architecture/"
+- link: "/cloudprem/introduction/architecture/"
   tag: "Documentation"
   text: "Learn more about CloudPrem Architecture"
 ---
