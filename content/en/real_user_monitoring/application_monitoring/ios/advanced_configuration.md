@@ -807,35 +807,28 @@ class CustomInterceptorProvider: DefaultInterceptorProvider {
 {{% /tab %}}
 {{% tab "Apollo iOS 2.0+" %}}
 
-Apollo 2.0 requires creating a custom URLSession delegate (unlike Apollo 1.0 which uses the built-in `URLSessionClient`):
-
-First, create a custom URLSession delegate class:
+Configure network instrumentation using the provided `DatadogApolloDelegate` and `DatadogApolloURLSession`:
 
 ```swift
-class ApolloURLSessionDelegate: NSObject, URLSessionDataDelegate {
-    // Datadog will automatically instrument this delegate
-}
-```
+import Apollo
+import DatadogApollo
+import DatadogCore
 
-Then, enable instrumentation for your custom delegate:
+// Create the Datadog delegate
+let delegate = DatadogApolloDelegate()
 
-```swift
-URLSessionInstrumentation.enable(with: .init(delegateClass: ApolloURLSessionDelegate.self))
-```
-
-Configure your Apollo Client to use the custom URLSession with this delegate:
-
-```swift
-// Create custom URLSession with the delegate for Datadog tracking
-let configuration = URLSessionConfiguration.default
-let sessionDelegate = ApolloURLSessionDelegate()
-let customSession = URLSession(
-    configuration: configuration,
-    delegate: sessionDelegate,
-    delegateQueue: nil
+// Create the custom URLSession wrapper
+let customSession = DatadogApolloURLSession(
+    configuration: .default,
+    delegate: delegate
 )
 
-// Pass the custom session to your RequestChainNetworkTransport
+// Enable Datadog instrumentation for the delegate
+URLSessionInstrumentation.enable(
+    with: .init(delegateClass: DatadogApolloDelegate.self)
+)
+
+// Configure Apollo Client with the custom session
 let networkTransport = RequestChainNetworkTransport(
     urlSession: customSession,
     interceptorProvider: NetworkInterceptorProvider(),
