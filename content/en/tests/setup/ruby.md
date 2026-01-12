@@ -79,23 +79,15 @@ If your CI provider does not support auto-instrumentation (for example, if you s
 gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
-2. Set the following required environment variables:
+2. [Configure the reporting method](#configuring-reporting-method)
 
-`DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
-
-`DD_ENV` (Required)
-: Environment where the tests are being run (`ci` when running them on a CI provider).
-
-3. [Configure the reporting method](#configuring-reporting-method)
-
-4. Set `RUBYOPT` environment variable:
+3. Set `RUBYOPT` environment variable:
 
 `RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument"`
 
-5. Run your tests as you normally do.
+4. Run your tests as you normally do.
 
-5a. (Optional) If you would prefer not to set `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
+4a. (Optional) If you would prefer not to set `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
 
 ```bash
 bundle exec ddcirb exec rspec
@@ -123,15 +115,20 @@ The following is a list of the most important configuration settings that can be
 : Use this to identify a group of tests (see ["Test session name"](#test-session-name-dd_test_session_name))
 **Example**: `integration-tests`
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][4].
-
-The following environment variable can be used to configure the location of the Datadog Agent:
+The following environment variables can be used to configure tests reporting:
 
 `DD_TRACE_AGENT_URL`
 : Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
 **Default**: `http://localhost:8126`
 
+`DD_CIVISIBILITY_AGENTLESS_ENABLED`
+: Enables agentless mode to send data directly to Datadog without a Datadog agent. Requires `DD_API_KEY` to be set.
+**Default**: `false`
+**Example**: `true`
+
 All other [Datadog Tracer configuration][5] options can also be used.
+
+Additional Test Optimization features have their own configuration options documented on their respective pages.
 
 ## Adding custom tags to tests
 
