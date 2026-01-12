@@ -855,7 +855,7 @@ struct NetworkInterceptorProvider: InterceptorProvider {
 
 This automatically adds Datadog headers to your GraphQL requests, enabling them to be tracked by Datadog.
 
-<div class="alert alert-danger">
+<div class="alert alert-info">
   <ul>
     <li>The integration supports Apollo iOS versions <code>1.0+</code> and <code>2.0+</code>.</li>
     <li>The <code>query</code> and <code>mutation</code> type operations are tracked, <code>subscription</code> operations are not.</li>
