@@ -31,7 +31,7 @@ These explorers correspond to the common API security operational flow:
 
 ## API Endpoints
 
-API Endpoints monitors your API traffic to provide visibility into the security posture of your APIs, including:
+[API Endpoints][7] monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
 - **Authentication**: Whether the API enforces authentication.
 - **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
@@ -85,7 +85,7 @@ The following risks are calculated for each endpoint.
 
 ### Data sources
 
-In the **API Endpoints** explorer, the **Data Sources** show where visibility originates.
+In the [API Endpoints][7] explorer, the **Data Sources** show where visibility originates.
 
 The following data sources are explored.
 
@@ -114,13 +114,36 @@ What actions you take depend on each of the attack surfaces:
 
 ### Processing sensitive data
 
-[App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
+[App and API Protection][2] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed.
 
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 
 #### Supported data types
 
-To see the supported data types, use the **Personal Information (PII)** facet. You can also see the data type used in the **Sensitive Data** column.
+To see the supported data types (for example, `payment:card`), use the **Schema Sensitive Data** facet. You can also see the data type used in the **Sensitive Data** column.
+
+#### Create custom scanners
+
+{{< callout url=https://www.datadoghq.com/support/ >}}
+App and API Protection Sensitive Data Detection is in Preview. To sign up, contact Datadog support.
+{{< /callout >}}
+
+By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides custom scanners to define scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
+
+In a custom scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key and value conditions that trigger the scanner.
+
+When sensitive data is detected, the scanner tags the API endpoint with the category and type and displays it in [API Endpoints][7].
+
+To create a customer scanner and view its results, do the following:
+
+1. In App and API Protection **Settings**, go to [Sensitive Data Detection][14].
+2. Click **New Scanner**.
+3. In **Select your scanner tags**, define the category and type to classify the senstive data. The scanner tags API endpoints with the format `category:type`.
+4. In **Define conditions on JSON keys and values**, define the JSON key and value conditions to trigger the scanner.
+5. Click **Save Scanner**. The scanner is enabled by default.
+6. To view the results of the scanner, go to App and API Protection [API Endpoints][7].
+7. In the **Schema Sensitive Data** facet, the category and type of your custom scanner is listed in the format `category:type`. Customer scanner `category:type` tags are also visible in the **Sensitive Data** column of the explorer.
+
 
 ### Business logic
 
@@ -234,3 +257,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [11]: /security/application_security/setup/
 [12]: /security/application_security/policies/custom_rules/
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
+[14]: https://app.datadoghq.com/security/configuration/asm/scanners
