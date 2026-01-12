@@ -5090,12 +5090,18 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
+    - name: Data Observability
+      url: data_observability/
+      pre: data-observability-wui
+      identifier: data_observability
+      parent: data_observability_heading
+      weight: 60000
     - name: Quality Monitoring
       url: data_observability/quality_monitoring/
       pre: inventories
-      identifier: quality_monitoring
+      identifier: data-observability-wui
       parent: data_observability_heading
-      weight: 60000
+      weight: 70000
     - name: Data Warehouses
       url: data_observability/quality_monitoring/data_warehouses
       identifier: data_warehouses
@@ -5146,7 +5152,7 @@ menu:
       pre: data-jobs-monitoring
       identifier: data_jobs
       parent: data_observability_heading
-      weight: 70000
+      weight: 80000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
