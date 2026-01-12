@@ -716,11 +716,6 @@
     },
     {
       "group": "monitors",
-      "suffix": "_3626832481",
-      "description": "Create a Data Quality monitor returns \"OK\" response"
-    },
-    {
-      "group": "monitors",
       "suffix": "_3883669300",
       "description": "Create a RUM formula and functions monitor returns \"OK\" response"
     },
