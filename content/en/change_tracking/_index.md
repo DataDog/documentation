@@ -119,7 +119,7 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 3. Hover over any change indicator or overlay to view a summary of the change.
 4. Click the change indicator or overlay to view detailed information and take remediation actions.
 
-### Visualize Change Tracking data in widgets
+### Widgets
 
 In addition to the out-of-the-box integrations described above, **Change Tracking is available as a data source for widgets** across Datadog, including Dashboards and Notebooks.
 
