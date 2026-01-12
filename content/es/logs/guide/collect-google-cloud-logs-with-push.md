@@ -15,16 +15,16 @@ further_reading:
 title: Recopilar logs de Google Cloud con una suscripción Pub/Sub Push
 ---
 
-</div>
-
-Esta página describe funciones obsoletas con información de configuración relevante para las suscripciones Pub/Sub Push legacy, útil para solucionar problemas o para modificar configuraciones legacy. La suscripción Pub/Sub Push se va a discontinuar por las siguientes razones:
-- En las VPC de Google Cloud, las nuevas suscripciones Push no pueden configurarse con endpoints externos (consulta la página [Productos compatibles y limitaciones][12] de Google Cloud para obtener más información).
-- La suscripción Push no proporciona compresión ni agrupación de eventos por lotes
-
-La documentación de la suscripción <strong>Push</strong> sólo se mantiene para solucionar problemas o para modificar configuraciones legacy. 
-
-Utiliza una suscripción <strong>Pull</strong> con la plantilla Datadog Dataflow para reenviar tus logs de Google Cloud a Datadog. Para obtener instrucciones, consulta <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Recopilación de logs</a> en la página de la integración Google Cloud.
 <div class="alert alert-warning">
+
+Esta página describe funciones obsoletas con información de configuración relevante para las suscripciones Pub/Sub Push legacy, útil para solucionar problemas o modificar configuraciones legacy. La suscripción Pub/Sub Push está obsoleta por las siguientes razones:
+- En las VPC de Google Cloud, las nuevas suscripciones Push no pueden configurarse con endpoints externos (consulta la página [Productos compatibles y limitaciones][12] de Google Cloud para obtener más información).
+- La suscripción Push no proporciona compresión ni agrupación de eventos en lotes.
+
+La documentación de la suscripción <strong>Push</strong> solo se conserva para solucionar problemas o modificar configuraciones legacy. 
+
+En su lugar, utiliza una suscripción <strong>Pull</strong> con la plantilla Datadog Dataflow para reenviar tus logs de Google Cloud a Datadog. Consulta <a href="https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection" target="_blank">Recopilación de logs</a> en la página de la integración de Google Cloud para obtener instrucciones.
+</div>
 
 ## Información general
 
