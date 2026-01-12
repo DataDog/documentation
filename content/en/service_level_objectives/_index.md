@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/"
   tag: "Blog"
   text: "Burn Rate is a Better Error Rate"
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
 ---
 
 {{< jqmath-vanilla >}}
