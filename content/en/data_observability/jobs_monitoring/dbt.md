@@ -1,6 +1,9 @@
 ---
 title: dbt
 description: "Connect dbt Cloud or dbt Core to Datadog for job run metadata and model lineage."
+aliases:
+  - /data_observability/jobs_monitoring/dbtcore
+  - /data_observability/jobs_monitoring/dbtcloud
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
