@@ -31,6 +31,7 @@
 
     {{ $valid_clouds := $pad.Get "providers" }}
     {{ $valid_platforms := $pad.Get "platforms" }}
+    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "aws" "variant" "avatar") }}
     <div
     class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
     x-data="{
@@ -265,6 +266,8 @@
                                         {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $rule_provider "variant" "avatar") $rule_provider "avatar" }}
                                         {{ if $int_logo }}
                                         <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                        {{ else }}
+                                        {{ partial "icon" (dict "name" "cloud-thicc" ) }}
                                         {{ end }}
                                         <a href="{{.Permalink}}" class="stretched-link">{{.Params.meta.display_name}}</a>
                                     </div>
@@ -315,9 +318,11 @@
                                 {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" (index $ruleset_providers 0) "variant" "avatar") (index $ruleset_providers 0) "avatar" }}
                                 {{ if $int_logo }}
                                 <img class="set-header__logo" src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
+                                {{ else }}
+                                {{ partial "icon" (dict "name" "cloud-thicc" ) }}
+                                {{ end }}
                                 {{ if gt (len $ruleset_providers) 1 }}
                                 <span class="set-header__plus fw-semibold">+{{sub (len $ruleset_providers) 1}}</span>
-                                {{ end }}
                                 {{ end }}
                             </div>
                             <span class="set-header__text fw-semibold">{{$ruleset_title}}</span>
@@ -419,8 +424,12 @@
                                 >
 
                                 <label for="{{ $cloud_lookup_name | anchorize }}" class="d-flex align-items-center">
-                                    {{ if and ( or (eq $filter_type "providers") (eq $filter_type "platforms")) $int_logo }}
-                                    <img src="{{ $int_logo }}" height="16" alt="{{ $cloud_lookup_name }}"/>
+                                    {{ if and ( or (eq $filter_type "providers") (eq $filter_type "platforms")) }}
+                                        {{ if $int_logo }}
+                                        <img src="{{ $int_logo }}" height="16" alt="{{ $cloud_lookup_name }}"/>
+                                        {{ else }}
+                                        {{ partial "icon" (dict "name" "cloud-thicc" ) }}
+                                        {{ end }}
                                     {{ end }}
                                     {{$cloud_lookup_name}}
                                 </label>
