@@ -4,19 +4,19 @@ code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40
 aliases:
-  - /continuous_integration/setup_tests/ruby
-  - /continuous_integration/tests/ruby
-  - /continuous_integration/tests/setup/ruby
+    - /continuous_integration/setup_tests/ruby
+    - /continuous_integration/tests/ruby
+    - /continuous_integration/tests/setup/ruby
 further_reading:
-    - link: "/continuous_integration/tests/containers/"
-      tag: "Documentation"
-      text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/tests"
-      tag: "Documentation"
-      text: "Explore Test Results and Performance"
-    - link: "/tests/troubleshooting/"
-      tag: "Documentation"
-      text: "Troubleshooting Test Optimization"
+    - link: '/continuous_integration/tests/containers/'
+      tag: 'Documentation'
+      text: 'Forwarding Environment Variables for Tests in Containers'
+    - link: '/continuous_integration/tests'
+      tag: 'Documentation'
+      text: 'Explore Test Results and Performance'
+    - link: '/tests/troubleshooting/'
+      tag: 'Documentation'
+      text: 'Troubleshooting Test Optimization'
 ---
 
 ## Compatibility
@@ -24,25 +24,25 @@ further_reading:
 Supported languages:
 
 | Language | Version |
-|---|---|
-| Ruby | >= 2.7 |
-| JRuby | >= 9.4 |
+| -------- | ------- |
+| Ruby     | >= 2.7  |
+| JRuby    | >= 9.4  |
 
 Supported test frameworks:
 
-| Test Framework | Version |
-|---|---|
-| RSpec | >= 3.0.0 |
-| Minitest | >= 5.0.0 |
-| Cucumber | >= 3.0 |
+| Test Framework | Version  |
+| -------------- | -------- |
+| RSpec          | >= 3.0.0 |
+| Minitest       | >= 5.0.0 |
+| Cucumber       | >= 3.0   |
 
 Supported test runners:
 
-| Test runner | Version |
-|---|---|
-| Knapsack Pro | >= 7.2.0 |
-| parallel_tests | >= 4.0.0 |
-| ci-queue | >= 0.53.0 |
+| Test runner    | Version   |
+| -------------- | --------- |
+| Knapsack Pro   | >= 7.2.0  |
+| parallel_tests | >= 4.0.0  |
+| ci-queue       | >= 0.53.0 |
 
 ## Configuring reporting method
 
@@ -70,28 +70,21 @@ To report test results to Datadog, you need to configure the `datadog-ci` gem:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Installing the Ruby test optimization library
+## Manual instrumentation
 
-To install the [Ruby test optimization gem][10] run:
+<div class="alert alert-info">
+This section is <strong>only required</strong> if your CI provider does not support auto-instrumentation. If you selected <strong>CI Provider with Auto-Instrumentation Support</strong> in the <a href="#configuring-reporting-method">Configuring reporting method</a> section above, skip this section and proceed to <a href="#configuration-settings">Configuration settings</a>.
+</div>
 
-```bash
-bundle add datadog-ci --group "test"
-```
-Alternatively, add it to your Gemfile manually:
+If your CI provider does not support auto-instrumentation (for example, if you selected **Cloud CI provider (Agentless)** or **On-Premises CI Provider (Datadog Agent)**), follow these steps to install the library and instrument your tests manually.
 
-1. Add the `datadog-ci` gem to your `Gemfile`:
+1. Add the [Ruby test optimization gem][10] to your Gemfile
 
 {{< code-block lang="ruby" filename="Gemfile" >}}
 gem "datadog-ci", "~> 1.0", group: :test
 {{< /code-block >}}
 
-2. Install the gem by running `bundle install`
-
-## Instrumenting your tests
-
-Follow these steps if your CI Provider is not supported for auto-instrumentation (see [Configuring reporting method](#configuring-reporting-method)).
-
-1. Set the following environment variables to configure the tracer:
+2. Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables the Test Optimization product.
@@ -100,52 +93,26 @@ Follow these steps if your CI Provider is not supported for auto-instrumentation
 : Use this to identify a group of tests (for example: `unit-tests` or `integration-tests`).
 
 `DD_ENV` (Required)
-: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+: Environment where the tests are being run (`ci` when running them on a CI provider).
 
 `DD_SERVICE` (Optional)
 : Name of the service or library being tested.
 
-2. Prepend your test command with this datadog-ci CLI wrapper:
+3. Set `RUBYOPT` environment variable:
+
+`RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument"`
+
+4. Run your tests
+
+4a. (Optional) If you cannot change `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
 
 ```bash
-bundle exec ddcirb exec bundle exec rake test
+bundle exec ddcirb exec rspec
 ```
-
-Alternatively, set `RUBYOPT` environment variable to `"-rbundler/setup -rdatadog/ci/auto_instrument"` and don't modify your test command.
-
-### Adding custom tags to tests
-
-You can add custom tags to your tests by using the current active test:
-
-```ruby
-require "datadog/ci"
-
-# inside your test
-Datadog::CI.active_test&.set_tag("test_owner", "my_team")
-# test continues normally
-# ...
-```
-
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][2] section of the Ruby custom instrumentation documentation.
-
-### Adding custom measures to tests
-
-Like tags, you can add custom measures to your tests by using the current active test:
-
-```ruby
-require "datadog/ci"
-
-# inside your test
-Datadog::CI.active_test&.set_metric("memory_allocations", 16)
-# test continues normally
-# ...
-```
-
-For more information on custom measures, see the [Add Custom Measures Guide][3].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the test optimization library, either in code by using a `Datadog.configure` block, or using environment variables:
+The following is a list of the most important configuration settings that can be used with the test optimization library:
 
 `service`
 : Name of the service or library under test.<br/>
@@ -169,26 +136,43 @@ The following environment variable can be used to configure the location of the 
 
 All other [Datadog Tracer configuration][5] options can also be used.
 
+## Adding custom tags to tests
+
+You can add custom tags to your tests by using the current active test:
+
+```ruby
+require "datadog/ci"
+
+# inside your test
+Datadog::CI.active_test&.set_tag("test_owner", "my_team")
+# test continues normally
+# ...
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][2] section of the Ruby custom instrumentation documentation.
+
+## Adding custom measures to tests
+
+Like tags, you can add custom measures to your tests by using the current active test:
+
+```ruby
+require "datadog/ci"
+
+# inside your test
+Datadog::CI.active_test&.set_metric("memory_allocations", 16)
+# test continues normally
+# ...
+```
+
+For more information on custom measures, see the [Add Custom Measures Guide][3].
+
 ## Using additional instrumentation
 
 It can be useful to have rich tracing information about your tests that includes time spent performing database operations or other external calls, as seen in the following flame graph:
 
 {{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Test trace with Redis instrumented" >}}
 
-To achieve this, configure additional instrumentation in your `configure` block:
-
-```ruby
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    #  ... ci configs and instrumentation here ...
-    c.tracing.instrument :redis
-    c.tracing.instrument :pg
-    # ... any other instrumentations supported by datadog gem ...
-  end
-end
-```
-
-Alternatively, you can enable automatic APM instrumentation in `test_helper/spec_helper`:
+You can enable automatic APM instrumentation by adding the following line in your `test_helper/spec_helper`:
 
 ```ruby
 require "datadog/auto_instrument" if ENV["DD_ENV"] == "ci"
@@ -201,158 +185,6 @@ For the full list of available instrumentation methods, see the [tracing documen
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
-
-## Manually instrumenting your tests
-
-<div class="alert alert-info">
-<strong>Attention</strong>: when using manual instrumentation, run your tests like you normally do:
-don't change `RUBYOPT` env variable and don't prepend `bundle exec ddcirb exec` to your test command
-</div>
-
-Auto-instrumentation adds additional performance overhead at the code loading stage. It can be especially noticeable for
-large repositories with a lot of dependencies. If your project takes 20+ seconds to start, you are likely
-to benefit from manually instrumenting your tests.
-
-{{< tabs >}}
-{{% tab "RSpec" %}}
-
-The RSpec integration traces all executions of example groups and examples when using the `rspec` test framework.
-
-To activate your integration, add this to the `spec_helper.rb` file:
-
-```ruby
-require "rspec"
-require "datadog/ci"
-
-# Only activates test instrumentation on CI
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    # enables test optimization
-    c.ci.enabled = true
-
-    # The name of the service or library under test
-    c.service = "my-ruby-app"
-
-    # Enables the RSpec instrumentation
-    c.ci.instrument :rspec
-  end
-end
-```
-
-Run your tests as you normally do, specifying the environment where tests are being run in the `DD_ENV` environment variable.
-
-You could use the following environments:
-
-* `local` when running tests on a developer workstation
-* `ci` when running them on a CI provider
-
-For example:
-
-```bash
-DD_ENV=ci bundle exec rake spec
-```
-
-{{% /tab %}}
-
-{{% tab "Minitest" %}}
-
-The Minitest integration traces all executions of tests when using the `minitest` framework.
-
-To activate your integration, add this to the `test_helper.rb` file:
-
-```ruby
-require "minitest"
-require "datadog/ci"
-
-# Only activates test instrumentation on CI
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    # enables test optimization
-    c.ci.enabled = true
-
-    # The name of the service or library under test
-    c.service = "my-ruby-app"
-
-    c.ci.instrument :minitest
-  end
-end
-```
-
-Run your tests as you normally do, specifying the environment where tests are being run in the `DD_ENV` environment variable.
-
-You could use the following environments:
-
-* `local` when running tests on a developer workstation
-* `ci` when running them on a CI provider
-
-For example:
-
-```bash
-DD_ENV=ci bundle exec rake test
-```
-
-<div class="alert alert-danger">
-<strong>Note:</strong> When using `minitest/autorun`, ensure that `datadog/ci` is required before `minitest/autorun`.
-</div>
-
-Example configuration with `minitest/autorun`:
-
-```ruby
-require "datadog/ci"
-require "minitest/autorun"
-
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    c.ci.enabled = true
-
-    c.service = "my-ruby-app"
-
-    c.ci.instrument :minitest
-  end
-end
-```
-
-{{% /tab %}}
-
-{{% tab "Cucumber" %}}
-
-The Cucumber integration traces executions of scenarios and steps when using the `cucumber` framework.
-
-To activate your integration, add the following code to your application:
-
-```ruby
-require "cucumber"
-require "datadog/ci"
-
-# Only activates test instrumentation on CI
-if ENV["DD_ENV"] == "ci"
-  Datadog.configure do |c|
-    # enables test optimization
-    c.ci.enabled = true
-
-    # The name of the service or library under test
-    c.service = "my-ruby-app"
-
-    # Enables the Cucumber instrumentation
-    c.ci.instrument :cucumber
-  end
-end
-```
-
-Run your tests as you normally do, specifying the environment where tests are being run in the `DD_ENV` environment variable.
-You could use the following environments:
-
-* `local` when running tests on a developer workstation
-* `ci` when running them on a CI provider
-
-For example:
-
-```bash
-DD_ENV=ci bundle exec rake cucumber
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Using library's public API for unsupported test frameworks
 
@@ -455,26 +287,25 @@ Datadog::CI.active_test_session&.finish
 
 Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
 
-- `unit-tests`
-- `integration-tests`
-- `smoke-tests`
-- `flaky-tests`
-- `ui-tests`
-- `backend-tests`
+-   `unit-tests`
+-   `integration-tests`
+-   `smoke-tests`
+-   `flaky-tests`
+-   `ui-tests`
+-   `backend-tests`
 
 If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
 
-- CI job name
-- Command used to run the tests (such as `yarn test`)
+-   CI job name
+-   Command used to run the tests (such as `yarn test`)
 
 The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
 #### When to use `DD_TEST_SESSION_NAME`
 
-There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a list of files to execute, Datadog considers the sessions to be unrelated to each other. For example:
 
-- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
-- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+-   `bundle exec rspec my_spec.rb my_other_spec.rb`
 
 Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
