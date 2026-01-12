@@ -80,7 +80,7 @@ Static dependencies analysis addresses this limitation by analyzing Ruby's compi
 Static dependencies analysis requires:
 
 * `datadog-ci >= 1.26.0`
-* `Ruby >= 3.2` (relies on `opt_getconstant_path` YARV instruction)
+* `Ruby >= 3.2`
 
 ### Enabling static dependencies analysis
 
