@@ -5287,11 +5287,26 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
+    - name: Quality Evaluations
+      url: llm_observability/evaluations/managed_evaluations/quality_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_quality
+      weight: 40101
+    - name: Agent Evaluations
+      url: llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_security
+      weight: 40102
+    - name: Agent Evaluations
+      url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_session
+      weight: 40103
     - name: Agent Evaluations
       url: llm_observability/evaluations/managed_evaluations/agent_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_agent
-      weight: 40101
+      weight: 40104
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_external_evaluations
