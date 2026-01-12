@@ -134,7 +134,7 @@ To configure a widget using Change Tracking data:
 
 {{< img src="/change_tracking/change-tracking-datasource-edit-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
 
-For Timeseries widgets, Change Tracking can also be enabled as an **Event Overlay**. This displays changes overlaid on top of a timeseries to help correlate them with metric behavior.
+For Timeseries widgets, you can also enable Change Tracking as an **Event Overlay**, which displays changes on top of the timeseries to help correlate them with metric behavior.
 
 {{< img src="/change_tracking/change-tracking-datasource-edit-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
 
