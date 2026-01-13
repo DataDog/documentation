@@ -39,7 +39,7 @@ After completing setup, run your tests as you normally do.
 
 ## Known limitations
 
-Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. There are some situations where this coverage data may not be sufficient to make this determination.
+Test Impact Analysis uses code coverage data to determine whether or not tests should be skipped. In certain situations, code coverage data alone is not enough to determine whether to skip a test.
 
 ### Coverage limitations
 
@@ -98,7 +98,7 @@ The following limitations apply to static dependencies analysis:
 * **Dynamic lookups not supported**: Constants accessed through metaprogramming (such as `const_get` or `constantize`) are not detected.
 * **Unqualified constant names**: Constants accessed without their full namespace path may not be resolved correctly (for example `MyConst` instead of `MyModule::MyConst`)
 
-## Disabling skipping for specific tests
+## Unskippable tests
 
 You can override the Test Impact Analysis's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
 
