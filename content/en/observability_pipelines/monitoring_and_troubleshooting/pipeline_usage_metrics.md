@@ -82,7 +82,7 @@ Timed out events
 : **Description**: The number of events that timed out.
 : **Available for**: Sources, processors, and destinations.
 
-Time out requests
+Timed out requests
 : **Metric**: `pipelines.component_timed_out_requests_total`
 : **Description**: The number of requests that timed out.
 : **Available for**: Sources, processors, and destinations.
