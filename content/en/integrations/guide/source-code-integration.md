@@ -479,7 +479,7 @@ that was used to deploy them, using Kubernetes annotations.
 
 {{< tabs >}}
 {{% tab "Raw Kubernetes YAML" %}}
-If you deploy resource using `kubectl` use the following annotation form:
+If you deploy resource using `kubectl`, use the following annotation format:
 
 ```
 origin.datadoghq.com/location:
