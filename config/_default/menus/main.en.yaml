@@ -6808,6 +6808,11 @@ menu:
       parent: cloudprem_configure
       identifier: cloudprem_configure_activate
       weight: 501
+    - name: Retention Policy
+      url: /cloudprem/configure/retention_policy
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_retention_policy
+      weight: 501
     - name: Pipelines
       url: /cloudprem/configure/pipelines
       parent: cloudprem_configure
