@@ -14,16 +14,60 @@ further_reading:
 
 ## Overview
 
-To collect traces from your ECS containers, update the Task Definitions for both your Agent and your application container as described below.
-
-One option for doing this is to modify the previously used [Task Definition file][4] and [register your updated Task Definition][5]. Alternatively, you can edit the Task Definition directly from the Amazon Web UI.
+To collect traces from your ECS containers, update the Task Definitions for both your Agent and your application container as described below. Either modify the previously used [Task Definition file][3] and [register your updated Task Definition][4]. Alternatively, you can edit the Task Definition directly from the Amazon Web UI.
 
 Once enabled, the Datadog Agent container collects the traces emitted from the other application containers on the same host as itself.
 
-## Configure the Datadog Agent to accept traces
-1. To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][6] with the configuration below.
+There are two main options for APM connectivity, Unix Domain Socket (UDS) and the TCP/IP method of fetching the Host IP Address from the AWS Instance Metadata Service (IMDS). Datadog recommends to use the UDS option as it is the most resource efficient, does not require modifying your startup parameters nor require access to IMDS, and has the same setup per language. In Windows based environments use TCP/IP as UDS is not supported.
 
-    Use [datadog-agent-ecs-apm.json][3] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
+## Configure the Datadog Agent to accept traces
+
+{{< tabs >}}
+{{% tab "Unix Domain Socket (UDS)" %}}
+### Unix domain socket (UDS)
+To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][1] with the configuration below.
+
+Use [datadog-agent-ecs-apm-uds.json][2] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `mountPoints` and `volumes` to configure the `dd-sockets` mount. This mounts the source path of the underlying host `/var/run/datadog` into the Agent container.
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            ...
+            "mountPoints": [
+                ...
+                {
+                    "containerPath": "/var/run/datadog",
+                    "readOnly": false,
+                    "sourceVolume": "dd-sockets"
+                }
+            ]
+        }
+    ],
+    "volumes": [
+        ...
+        {
+            "host": {
+                "sourcePath": "/var/run/datadog"
+            },
+            "name": "dd-sockets"
+        }
+    ]
+}
+```
+The Datadog Agent will maintain socket files defaulting `/var/run/datadog/apm.socket` and `/var/run/datadog/dsd.socket` that will be used for APM and DogStatsD based communication.
+
+[1]: /containers/amazon_ecs/?tab=awscli#setup
+[2]: /resources/json/datadog-agent-ecs-apm-uds.json
+{{% /tab %}}
+{{% tab "TCP" %}}
+
+### TCP/IP
+1. To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][1] with the configuration below.
+
+    Use [datadog-agent-ecs-apm.json][2] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
 
     ```json
     {
@@ -62,15 +106,70 @@ Once enabled, the Datadog Agent container collects the traces emitted from the o
     ]
     ```
 
-3. If you are updating a local file for your Agent's Task Definition, [register your updated Task Definition][5]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
+[1]: /containers/amazon_ecs/?tab=awscli#setup
+[2]: /resources/json/datadog-agent-ecs-apm.json
+{{% /tab %}}
+{{< /tabs >}}
+
+
+If you are updating a local file for your Agent's Task Definition, [register your updated Task Definition][4]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
 
 ## Configure your application container to submit traces to Datadog Agent
 
 ### Install the tracing library
 Follow the [setup instructions for installing the Datadog tracing library][2] for your application's language. For ECS install the tracer into your application's container image.
 
+### Provide the UDS configuration
+
+The recommended strategy is to configure your application to communicate over the Unix Domain Socket (UDS) that the Datadog Agent is maintaining. If you are using the TCP/IP method proceed instead to the [Providing the Private IP Address](#provide-the-private-ip-address-for-the-ec2-instance) steps.
+
+To configure this in your application's Task Definition:
+- Mirror the `dd-sockets` approach from the Datadog Agent
+- Provide the environment variables `DD_TRACE_AGENT_URL` and `DD_DOGSTATSD_URL` to target the sockets
+
+```json
+{
+  "family": "APM-Example",
+  "containerDefinitions": [
+    {
+      "name": "<CONTAINER_NAME>",
+      "image": "<CONTAINER_IMAGE>",
+      "environment": [
+        {
+          "name": "DD_TRACE_AGENT_URL",
+          "value": "unix:///var/run/datadog/apm.socket"
+        },
+        {
+          "name": "DD_DOGSTATSD_URL",
+          "value": "unix:///var/run/datadog/dsd.socket"
+        }
+      ],
+      "mountPoints": [
+        {
+          "containerPath": "/var/run/datadog",
+          "readOnly": true,
+          "sourceVolume": "dd-sockets"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "/var/run/datadog"
+      },
+      "name": "dd-sockets"
+    }
+  ]
+}
+```
+
+**Note:** The `DD_DOGSTATSD_URL` is only necessary if you are submitting custom DogStatsD metrics or [Runtime Metrics][5].
+
+Once deployed the Application container and Datadog Agent container will share the `sourcePath` typed volume at `/var/run/datadog` and can communicate through the sockets in this folder.
+
 ### Provide the private IP address for the EC2 instance
-Provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
+If not using UDS, provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
 
 Use one of the following methods to dynamically get the private IP address:
 
@@ -95,13 +194,16 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-t
 {{% /tab %}}
 {{% tab "ECS container metadata file" %}}
 
-The [Amazon's ECS container metadata file][1] allows discovery of the private IP address. To get the private IP address for each host, run the following command:
+The [Amazon's ECS container metadata file][1] allows discovery of the private IP address without making a request to IMDS. To get the private IP address for each host first turn on [Amazon ECS Container metadata][2]. Once enabled on your host the containers will have access to JSON formatted metadata file located at the path stored in the `ECS_CONTAINER_METADATA_FILE` environment variable.
+
+This file can be read and the value of the `HostPrivateIPv4Address` can be used as the IP address.
 
 {{< code-block lang="curl" >}}
 cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
 {{< /code-block >}}
     
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-metadata.html#metadata-file-format
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/enable-metadata.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -317,7 +419,6 @@ When using IMDSv2, the equivalent `entryPoint` configuration looks like the foll
 
 [1]: /container/amazon_ecs/
 [2]: /tracing/trace_collection/
-[3]: /resources/json/datadog-agent-ecs-apm.json
-[4]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
-[5]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
-[6]: /containers/amazon_ecs/?tab=awscli#setup
+[3]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
+[4]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
+[5]: /tracing/metrics/runtime_metrics
