@@ -93,7 +93,7 @@ Extraction uses Grok parsing rules to capture values from raw log messages or at
 
 For example, you can extract the first three words of a message into separate fields:
 ```
-%{WORD:first} %{WORD:second} %{WORD:third}
+%{word:first} %{word:second} %{word:third}
 ```
 
 Extraction rules are evaluated globally across all logs in your session. For more details and syntax examples, see [Extractions][4].
