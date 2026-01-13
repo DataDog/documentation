@@ -509,8 +509,8 @@ origin.datadoghq.com/location:
 }
 ```
 
-`chartPath` could point to a folder or an archive relative to <repoURL>.
-If chart was unpacked, `chartPath` contains the folder unpack path.
+`chartPath` can either point to a folder or an archive relative to `<repoURL>`.
+If the chart was unpacked, `chartPath` contains the folder unpack path.
 
 There are 6 ways to run `helm install`. Depending on the way you need to configure annotation correctly.
 
