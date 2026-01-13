@@ -69,7 +69,7 @@ CRITICAL: Always use format `<name>/<description>` with forward slash. Without t
 - CI will fail
 
 ### PR Checklist
-- Leave the “Ready for merge” checkbox unchecked unless explicitly requested.
+- Leave the "Ready for merge" checkbox unchecked unless explicitly requested.
 
 ### Content Guidelines
 Follow the CONTRIBUTING.md style guide:
