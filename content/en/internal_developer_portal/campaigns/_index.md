@@ -9,9 +9,6 @@ further_reading:
   text: "Coordinate large-scale engineering initiatives with IDP Campaigns"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Campaigns!" >}}
-{{< /callout >}}
-
 {{< img src="/tracing/software_catalog/campaign-manage.png" alt="List of Campaigns in Internal Developer Portal" style="width:90%;" >}}
 
 ## Overview
@@ -30,6 +27,8 @@ If your service is part of a campaign, related rules and deadlines appear in the
 ## Creating a campaign
 
 Create and manage campaigns from the [**Campaigns** tab in Scorecards][2]. 
+
+**Note:** Creating a campaign requires the Service Catalog Write and Case Management Write permissions. 
 
 {{< img src="/tracing/software_catalog/campaign-creation.png" alt="Campaign creation page with fields filled out" style="width:90%;" >}}
 

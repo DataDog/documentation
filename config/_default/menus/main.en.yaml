@@ -5090,12 +5090,18 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Quality Monitoring
-      url: data_observability/quality_monitoring/
-      pre: inventories
-      identifier: quality_monitoring
+    - name: Data Observability
+      url: data_observability/
+      pre: data-observability-wui
+      identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Quality Monitoring
+      url: data_observability/quality_monitoring/
+      pre: data-observability-wui
+      identifier: quality_monitoring
+      parent: data_observability_heading
+      weight: 70000
     - name: Data Warehouses
       url: data_observability/quality_monitoring/data_warehouses
       identifier: data_warehouses
@@ -5146,7 +5152,7 @@ menu:
       pre: data-jobs-monitoring
       identifier: data_jobs
       parent: data_observability_heading
-      weight: 70000
+      weight: 80000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
@@ -5272,7 +5278,7 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Managed
+    - name: Managed Evaluations
       url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_managed_evaluations
@@ -5282,16 +5288,31 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 401
-    - name: External
+    - name: External Evaluations
       url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
+    - name: Quality Evaluations
+      url: llm_observability/evaluations/managed_evaluations/quality_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_quality
+      weight: 40101
+    - name: Security and Safety Evaluations
+      url: llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_security
+      weight: 40102
+    - name: Session Level Evaluations
+      url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_session
+      weight: 40103
     - name: Agent Evaluations
       url: llm_observability/evaluations/managed_evaluations/agent_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_agent
-      weight: 40101
+      weight: 40104
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_external_evaluations
@@ -7746,6 +7767,11 @@ menu:
       parent: synthetics
       identifier: synthetics_network_path_tests
       weight: 4
+    - name: Terms and Concepts
+      url: synthetics/network_path_tests/glossary
+      parent: synthetics_network_path_tests
+      identifier: synthetics_network_path_tests_glossary
+      weight: 401
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
