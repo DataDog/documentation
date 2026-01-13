@@ -193,6 +193,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1093147852",
+      "description": "Create a new dashboard with distribution widget with markers and num_buckets"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2432046716",
       "description": "Create a new dashboard with event_stream list_stream widget"
     },
@@ -205,6 +210,11 @@
       "group": "dashboards",
       "suffix": "_3250131584",
       "description": "Create a new dashboard with event_timeline widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1617893815",
+      "description": "Create a new dashboard with formula and function distribution widget"
     },
     {
       "group": "dashboards",
@@ -235,6 +245,11 @@
       "group": "dashboards",
       "suffix": "_1177423752",
       "description": "Create a new dashboard with heatmap widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2823363212",
+      "description": "Create a new dashboard with heatmap widget with markers and num_buckets"
     },
     {
       "group": "dashboards",
@@ -716,6 +731,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_3626832481",
+      "description": "Create a Data Quality monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3883669300",
       "description": "Create a RUM formula and functions monitor returns \"OK\" response"
     },
@@ -917,6 +937,11 @@
       "group": "synthetics",
       "suffix": "_1717840259",
       "description": "Create a multi-step api test with every type of basicAuth returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_2106135939",
+      "description": "Create a multistep test with subtest returns \"OK\" response"
     },
     {
       "group": "synthetics",

@@ -94,9 +94,6 @@ Some Observability Pipelines components require setting up environment variables
 ### Elasticsearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/elasticsearch %}}
 
-### Kafka
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
-
 ### Google Pub/Sub
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
 
@@ -105,6 +102,9 @@ Some Observability Pipelines components require setting up environment variables
 
 ### HTTP Client
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/http_client %}}
+
+### Kafka
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
 
 ### Microsoft Sentinel
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}
