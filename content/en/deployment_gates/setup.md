@@ -25,7 +25,11 @@ Setting up Deployment Gates involves two steps:
 1. Configure the gate and rules in the Datadog UI.
 2. Update your deployment pipeline to interact with the Deployment Gates API.
 
-## Create a Deployment Gate
+## Create and Manage a Deployment Gate
+
+
+{{< tabs >}}
+{{% tab "UI" %}}
 
 1. Go to [**Software Delivery > Deployment Gates > Configuration**][1].
 2. Click **Create Gate**.
@@ -40,6 +44,58 @@ Setting up Deployment Gates involves two steps:
 a dry run gate always responds with a pass status, but the in-app result is the real status based
 on rules evaluation. This is particularly useful when performing an initial evaluation of the
 gate behavior without impacting the deployment pipeline.
+
+{{% /tab %}}
+
+{{% tab "API" %}}
+
+You can use the [Deployment Gates API][1] to create and manage Deployment Gates.
+
+{{% /tab %}}
+
+{{% tab "Terraform" %}}
+
+You can use the [Datadog Terraform provider][2] to create and manage Deployment Gates. For example:
+
+```yaml
+# Create new deployment_gate resource
+
+resource "datadog_deployment_gate" "foo" {
+  dry_run    = "false"
+  env        = "production"
+  identifier = "my-gate"
+  service    = "my-service"
+
+  rule {
+    name    = "fdd"
+    type    = "faulty_deployment_detection"
+    dry_run = false
+    options {
+      duration           = 1300
+      excluded_resources = ["GET api/v1/test"]
+    }
+  }
+
+  rule {
+    name    = "monitor"
+    type    = "monitor"
+    dry_run = false
+    options {
+      query    = "service:test-service"
+      duration = 1300
+    }
+  }
+}
+```
+
+Will create a deployment gate and it will be completely manage by terraform. Any changes to the gate applied in the UI will be overwritten by the terraform configuration.
+
+{{% /tab %}}
+
+{{</ tabs>}}
+
+[1]: https://docs.datadoghq.com/api/latest/deployments/gates/
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate
 
 ## Add rules to a gate
 
