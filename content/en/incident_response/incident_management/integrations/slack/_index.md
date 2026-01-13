@@ -162,6 +162,10 @@ You can view the full list of available Slack commands at any time by typing `/d
       <td>Update the incident state, severity, or other attribute of the incident.</td>
     </tr>
     <tr>
+      <td><code>/datadog incident summary</code></td>
+      <td>Get an AI-generated summary of the incident that is visible only to you.</td>
+    </tr>
+    <tr>
       <td><code>/datadog incident notify</code></td>
       <td>Notify <code>@</code>-handles about the incident.</td>
     </tr>
