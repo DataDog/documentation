@@ -23987,6 +23987,13 @@ components:
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
           type: boolean
+        is_global_location_enabled:
+          default: true
+          description: When enabled, Datadog collects metrics where location is explicitly
+            stated as "global" or where location information cannot be deduced from
+            GCP labels.
+          example: true
+          type: boolean
         is_per_project_quota_enabled:
           default: false
           description: When enabled, Datadog applies the `X-Goog-User-Project` header,
@@ -24027,6 +24034,18 @@ components:
             type: gce_instance
           items:
             $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
+        region_filter_configs:
+          description: Configurations for GCP location filtering, such as region,
+            multi-region, or zone. Only monitored resources that match the specified
+            regions are imported into Datadog. By default, Datadog collects from all
+            locations.
+          example:
+          - nam4
+          - europe-north1
+          items:
+            description: Region Filter Configs
+            type: string
           type: array
         resource_collection_enabled:
           description: When enabled, Datadog scans for all resources in your GCP environment.
