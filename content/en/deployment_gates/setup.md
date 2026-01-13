@@ -111,17 +111,8 @@ The analysis is automatically done for all APM-instrumented services, and no pri
 
 You can manage Deployment Gates via the UI, API or Terraform.
 
-{{< tabs >}}
-
-{{% tab "API" %}}
-
-You can use the [Deployment Gates API][1] to create and manage Deployment Gates.
-
-{{% /tab %}}
-
-{{% tab "Terraform" %}}
-
-You can use the [Datadog Terraform provider][2] to create and manage Deployment Gates. For example:
+- **API**: You can use the [Deployment Gates API][1] to create and manage Deployment Gates.
+- **Terraform**: You can use the [Datadog Terraform provider][2] to create and manage Deployment Gates. For example:
 
 ```yaml
 # Create new deployment_gate resource
@@ -156,9 +147,6 @@ resource "datadog_deployment_gate" "foo" {
 
 Will create a deployment gate and it will be completely managed by terraform. Any changes to the gate applied in the UI will be overwritten by the terraform configuration.
 
-{{% /tab %}}
-
-{{</tabs>}}
 
 [1]: https://docs.datadoghq.com/api/latest/deployment-gates/
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate
