@@ -481,12 +481,12 @@ that was used to deploy them, using Kubernetes annotations.
 {{% tab "Raw Kubernetes YAML" %}}
 If you deploy resource using `kubectl`, use the following annotation format:
 
-```
+```json
 origin.datadoghq.com/location:
 {
 	"repo": {
 		"url": <repo URL>
-		"targetRevision": "sha1 for commit being deployed"
+		"targetRevision": <sha1 for commit being deployed>
 		"path": <file path of the resource>
 	}
 }
@@ -496,14 +496,14 @@ origin.datadoghq.com/location:
 {{% tab "Helm chart" %}}
 If you deploy resource using `Helm`, use the following annotation format:
 
-```
+```json
 origin.datadoghq.com/location:
 {
 	"helm": {
 		"charURL": <chart location if different from repoURL>
-		"repoURL": <chart and/or values files location>,
-		"targetRevision": "sha1 for repoURL",
-		"valuesPath": ["path relative to <repoURL>"],
+		"repoURL": <chart and/or values.yaml files location>,
+		"targetRevision": <sha1 for repoURL>,
+		"valuesPath": ["paths relative to <repoURL>"],
 		"chartPath": <relative to repoURL>
 	}
 }
@@ -512,64 +512,72 @@ origin.datadoghq.com/location:
 `chartPath` can either point to a folder or an archive relative to `<repoURL>`.
 If the chart was unpacked, `chartPath` contains the folder unpack path.
 
-There are 6 ways to run `helm install`, depending on the annotation configuration method.
+There are 6 ways to set the annotation depending on how `helm install` is invoked.
 
-1. Chart reference
+{{% collapse-content title="1. Chart reference" level="h4" expanded=false id="chart-reference" %}}
 
-Chart is stored in the git repo.
+Chart is stored in the git repo in unpacked form.
 Installation command `helm install <release> <chart/path>`
 
-`repoURL`: repo where the chart and values files are stored
-`targetRevision`: commit SHA of <repoURL>
-`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
-`chartPath`: <chart/path> relative <repoURL>
+* `repoURL`: repo where the chart and `values.yaml` files are stored
+* `targetRevision`: commit SHA of `repoURL`
+* `valuesPath`: array should contain `values.yaml` files relative to `<repoURL>` as supplied to HELM
+* `chartPath`: `<chart/path>` relative `repoURL`
 
-2. Path to a packaged chart
+{{% /collapse-content %}}
+{{% collapse-content title="2. Path to a packaged chart" level="h4" expanded=false id="path-to-chart" %}}
 
-Chart is stored in the git repo.
+Chart is stored in the git repo in the form of an archive.
 Installation command `helm install <release> <chart/path/arch-x.y.z.tgz>`
 
-`repoURL`: repo where the chart is stored
-`targetRevision`: commit SHA of <repoURL>
-`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
-`chartPath`: <chart/path/arch-x.y.z.tgz> relative <repoURL>
+* `repoURL`: repo where the chart is stored and `values.yaml` files are stored
+* `targetRevision`: commit SHA of `repoURL`
+* `valuesPath`: array should contain `values.yaml` files relative to `<repoURL>` as supplied to HELM
+* `chartPath`: <chart/path/arch-x.y.z.tgz> relative `repoURL`
 
-3. Path to an unpacked chart directory
+{{% /collapse-content %}}
+{{% collapse-content title="3. Path to an unpacked chart directory" level="h4" expanded=false id="path-to-unpacked-chart" %}}
 
 Chart is stored somewhere and unpacked in the current git repo during the installation.
 Installation command `helm install <release> <unpacked/path/dir>`
 
-`repoURL`: repo where the values files are stored
-`targetRevision`: commit SHA of <repoURL>
-`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
-`chartPath`: <chart/path/arch-x.y.z.tgz> relative <repoURL>
+* `charURL`: should be set to URL of the chart
+* `repoURL`: repo where the `values.yaml` files are stored
+* `targetRevision`: commit SHA of `<repoURL>`
+* `valuesPath`: array should contain `values.yaml` files relative to `<repoURL>` as supplied to HELM
+* `chartPath`: `<unpacked/path/dir>` relative `<repoURL>`
 
-If you want to provide real chart location use `DD_HELM_CHART_URL` environment variable.
+{{% /collapse-content %}}
+{{% collapse-content title="4. Absolute URL" level="h4" expanded=false id="absolute-url" %}}
 
-4. Absolute URL
 Installation command `helm install mynginx https://example.com/charts/nginx-1.2.3.tgz`
 
-`charURL`: shoudl be `https://example.com/charts/nginx-1.2.3.tgz`
-`repoURL`: repo where the values files are stored
-`targetRevision`: commit SHA of <repoURL>
-`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+* `charURL`: should be `https://example.com/charts/nginx-1.2.3.tgz`
+* `repoURL`: repo where the `values.yaml` files are stored
+* `targetRevision`: commit SHA of `<repoURL>`
+* `valuesPath`: array should contain `values.yaml` files relative to `<repoURL>` as supplied to HELM
 
-5. Chart reference and repo url
+{{% /collapse-content %}}
+{{% collapse-content title="5. Chart reference and repo url" level="h4" expanded=false id="chart-reference-and-repo" %}}
+
 Installation command `helm install --repo https://example.com/charts/ mynginx nginx`
 
-`charURL`: `https://example.com/charts/nginx`
-`repoURL`: repo where the values files are stored
-`targetRevision`: commit SHA of <repoURL>
-`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+* `charURL`: `https://example.com/charts/nginx`
+* `repoURL`: repo where the `values.yaml` files are stored
+* `targetRevision`: commit SHA of `<repoURL>`
+* `valuesPath`: array should contain `values.yaml` files relative to `<repoURL>` as supplied to HELM
 
-6. OCI registries
+{{% /collapse-content %}}
+{{% collapse-content title="6. OCI registries" level="h4" expanded=false id="oci-registries" %}}
+
 Installation command `helm install mynginx --version 1.2.3 oci://example.com/charts/nginx`
 
-`charURL`: `oci://example.com/charts/nginx`
-`repoURL`: repo where the values files are stored
-`targetRevision`: commit SHA of <repoURL>
-`valuesPath`: array should contain values files relative to <repoURL> as supplied to HELM
+* `charURL`: `oci://example.com/charts/nginx`
+* `repoURL`: repo where the `values.yaml` files are stored
+* `targetRevision`: commit SHA of `<repoURL>`
+* `valuesPath`: array should contain `values.yaml` files relative to `<repoURL>` as supplied to HELM
 
+{{% /collapse-content %}}
 {{% /tab %}}
 {{< /tabs >}}
 
