@@ -475,7 +475,7 @@ For unsupported languages, use the `git.commit.sha` and `git.repository_url` tag
 Datadog's Source Code and resource mapping allow you to connect cluster resources to the source code
 that was used to deploy them, using Kubernetes annotations.
 
-Depending on how resources deployed `origin.datadoghq.com/location` should have different content.
+`origin.datadoghq.com/location` contains different content depending on how the resources were deployed.
 
 {{< tabs >}}
 {{% tab "Raw Kubernetes YAML" %}}
