@@ -30,6 +30,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
       tag: "Blog"
       text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+    - link: "https://www.datadoghq.com/blog/dbt-data-quality-testing"
+      tag: "Blog"
+      text: "Implement dbt data quality checks with dbt-expectations"
 cascade:
     site_support_id: test_optimization
     algolia:

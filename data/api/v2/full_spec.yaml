@@ -1471,8 +1471,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1538,8 +1536,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         created_at:
           description: Timestamp of when the account integration was created.
           format: date-time
@@ -1613,8 +1609,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1745,15 +1739,6 @@ components:
           type: string
       required:
       - role_name
-      type: object
-    AWSCCMConfig:
-      description: AWS Cloud Cost Management config.
-      properties:
-        data_export_configs:
-          description: List of data export configurations for Cost and Usage Reports.
-          items:
-            $ref: '#/components/schemas/DataExportConfig'
-          type: array
       type: object
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
@@ -7061,19 +7046,27 @@ components:
     BatchUpsertRowsRequestDataAttributes:
       description: Attributes containing row data values for row creation or update
         operations.
+      example:
+        values: {}
       properties:
         values:
           additionalProperties:
-            x-required-field: true
-          description: Key-value pairs representing row data, where keys are field
-            names from the schema.
-          example:
-            example_key_value: primary_key_value
-            name: row_name
+            $ref: '#/components/schemas/BatchUpsertRowsRequestDataAttributesValue'
+          description: Key-value pairs representing row data, where keys are schema
+            field names and values match the corresponding column types.
           type: object
       required:
       - values
       type: object
+    BatchUpsertRowsRequestDataAttributesValue:
+      description: Types allowed for Reference Table row values.
+      oneOf:
+      - example: row_name
+        type: string
+      - example: 25
+        format: int32
+        maximum: 2147483647
+        type: integer
     BillConfig:
       description: Bill config.
       properties:
@@ -15890,7 +15883,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Deployment ID.
+          description: Deployment ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         service:
           description: Service name.
@@ -16028,8 +16023,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Failure ID. Must have at least 16 characters. Required to update
-            a previously sent failure.
+          description: Failure ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         name:
           description: Failure name.
@@ -16574,30 +16570,6 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
-    DataExportConfig:
-      description: AWS Cost and Usage Report data export configuration.
-      properties:
-        bucket_name:
-          description: Name of the S3 bucket where the Cost and Usage Report is stored.
-          example: billing
-          type: string
-        bucket_region:
-          description: AWS region of the S3 bucket.
-          example: us-east-1
-          type: string
-        report_name:
-          description: Name of the Cost and Usage Report.
-          example: cost-and-usage-report
-          type: string
-        report_prefix:
-          description: S3 prefix where the Cost and Usage Report is stored.
-          example: reports
-          type: string
-        report_type:
-          description: Type of the Cost and Usage Report.
-          example: CUR2.0
-          type: string
-      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -24015,6 +23987,13 @@ components:
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
           type: boolean
+        is_global_location_enabled:
+          default: true
+          description: When enabled, Datadog collects metrics where location is explicitly
+            stated as "global" or where location information cannot be deduced from
+            GCP labels.
+          example: true
+          type: boolean
         is_per_project_quota_enabled:
           default: false
           description: When enabled, Datadog applies the `X-Goog-User-Project` header,
@@ -24055,6 +24034,18 @@ components:
             type: gce_instance
           items:
             $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
+        region_filter_configs:
+          description: Configurations for GCP location filtering, such as region,
+            multi-region, or zone. Only monitored resources that match the specified
+            regions are imported into Datadog. By default, Datadog collects from all
+            locations.
+          example:
+          - nam4
+          - europe-north1
+          items:
+            description: Region Filter Configs
+            type: string
           type: array
         resource_collection_enabled:
           description: When enabled, Datadog scans for all resources in your GCP environment.
@@ -25370,6 +25361,61 @@ components:
       required:
       - type
       type: object
+    GlobalVariableData:
+      description: Synthetics global variable data. Wrapper around the global variable
+        object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        id:
+          description: Global variable identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/GlobalVariableType'
+      type: object
+    GlobalVariableJsonPatchRequest:
+      description: JSON Patch request for global variable.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestData'
+      required:
+      - data
+      type: object
+    GlobalVariableJsonPatchRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchType'
+      type: object
+    GlobalVariableJsonPatchRequestDataAttributes:
+      properties:
+        json_patch:
+          description: JSON Patch operations following RFC 6902.
+          items:
+            $ref: '#/components/schemas/JsonPatchOperation'
+          type: array
+      type: object
+    GlobalVariableJsonPatchType:
+      description: Global variable JSON Patch type.
+      enum:
+      - global_variables_json_patch
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES_JSON_PATCH
+    GlobalVariableResponse:
+      description: Global variable response.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableData'
+      type: object
+    GlobalVariableType:
+      description: Global variable type.
+      enum:
+      - global_variables
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
       nullable: true
@@ -29876,6 +29922,40 @@ components:
       - to
       - index
       type: object
+    JsonPatchOperation:
+      description: A JSON Patch operation as per RFC 6902.
+      properties:
+        op:
+          $ref: '#/components/schemas/JsonPatchOperationOp'
+        path:
+          description: A JSON Pointer path (e.g., "/name", "/value/secure").
+          example: /name
+          type: string
+        value:
+          description: The value to use for the operation (not applicable for "remove"
+            and "test" operations).
+      required:
+      - op
+      - path
+      type: object
+    JsonPatchOperationOp:
+      description: The operation to perform.
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: add
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     KindAttributes:
       description: Kind attributes.
       properties:
@@ -31058,6 +31138,19 @@ components:
           description: Link for the next set of rules.
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
+      type: object
+    ListSecurityFindingsResponse:
+      description: The expected response schema when listing security findings.
+      properties:
+        data:
+          description: Array of security findings matching the search query.
+          items:
+            $ref: '#/components/schemas/SecurityFindingsData'
+          type: array
+        links:
+          $ref: '#/components/schemas/SecurityFindingsLinks'
+        meta:
+          $ref: '#/components/schemas/SecurityFindingsMeta'
       type: object
     ListTagsResponse:
       description: List tags response.
@@ -40806,7 +40899,6 @@ components:
                 type: STRING
               primary_keys:
               - id
-            sync_enabled: false
             tags:
             - test_tag
           type: reference_table
@@ -40838,10 +40930,6 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadata'
         schema:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesSchema'
-        sync_enabled:
-          description: Whether this table is synced automatically.
-          example: false
-          type: boolean
         tags:
           description: Tags for organizing and filtering reference tables.
           example:
@@ -42993,6 +43081,9 @@ components:
       description: Attributes of the SPA Recommendation resource. Contains recommendations
         for both driver and executor components.
       properties:
+        confidence_level:
+          format: double
+          type: number
         driver:
           $ref: '#/components/schemas/ComponentRecommendation'
         executor:
@@ -47958,6 +48049,148 @@ components:
         meta:
           $ref: '#/components/schemas/SecurityFilterMeta'
       type: object
+    SecurityFindingsAttributes:
+      description: The JSON object containing all attributes of the security finding.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: The custom attributes of the security finding.
+          example:
+            severity: high
+            status: open
+          type: object
+        tags:
+          description: List of tags associated with the security finding.
+          example:
+          - team:platform
+          - env:prod
+          items:
+            type: string
+          type: array
+        timestamp:
+          description: The Unix timestamp at which the detection changed for the resource.
+            Same value as @detection_changed_at.
+          example: 1765901760
+          format: int64
+          type: integer
+      type: object
+    SecurityFindingsData:
+      description: A single security finding.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsAttributes'
+        id:
+          description: The unique ID of the security finding.
+          example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityFindingsDataType'
+      type: object
+    SecurityFindingsDataType:
+      default: finding
+      description: The type of the security finding resource.
+      enum:
+      - finding
+      example: finding
+      type: string
+      x-enum-varnames:
+      - FINDING
+    SecurityFindingsLinks:
+      description: Links for pagination.
+      properties:
+        next:
+          description: Link for the next page of results. Note that paginated requests
+            can also be made using the POST endpoint.
+          example: https://app.datadoghq.com/api/v2/security/findings?page[cursor]=eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==&page[limit]=25
+          type: string
+      type: object
+    SecurityFindingsMeta:
+      description: Metadata about the response.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 548
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/SecurityFindingsPage'
+        request_id:
+          description: The identifier of the request.
+          example: pddv1ChZwVlMxMUdYRFRMQ1lyb3B4MGNYbFlnIi0KHQu35LDbucx
+          type: string
+        status:
+          $ref: '#/components/schemas/SecurityFindingsStatus'
+      type: object
+    SecurityFindingsPage:
+      description: Pagination information.
+      properties:
+        after:
+          description: The cursor used to get the next page of results.
+          example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+          type: string
+      type: object
+    SecurityFindingsSearchRequest:
+      description: The request body for searching security findings.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestData'
+      type: object
+    SecurityFindingsSearchRequestData:
+      description: Request data for searching security findings.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestDataAttributes'
+      type: object
+    SecurityFindingsSearchRequestDataAttributes:
+      description: Request attributes for searching security findings.
+      properties:
+        filter:
+          default: '*'
+          description: The search query following log search syntax.
+          example: '@severity:(critical OR high) @status:open team:platform'
+          type: string
+        page:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestPage'
+        sort:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      type: object
+    SecurityFindingsSearchRequestPage:
+      description: Pagination attributes for the search request.
+      properties:
+        cursor:
+          description: Get the next page of results with a cursor provided in the
+            previous query.
+          example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+          type: string
+        limit:
+          default: 10
+          description: The maximum number of security findings in the response.
+          example: 25
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      type: object
+    SecurityFindingsSort:
+      default: -@detection_changed_at
+      description: The sort parameters when querying security findings.
+      enum:
+      - '@detection_changed_at'
+      - -@detection_changed_at
+      type: string
+      x-enum-varnames:
+      - DETECTION_CHANGED_AT_ASC
+      - DETECTION_CHANGED_AT_DESC
+    SecurityFindingsStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -53940,6 +54173,178 @@ components:
         suppression:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
       type: object
+    SyntheticsGlobalVariable:
+      description: Synthetic global variable.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
+        name:
+          description: Name of the global variable. Unique across Synthetic global
+            variables.
+          example: MY_VARIABLE
+          type: string
+        parse_test_options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      - value
+      type: object
+    SyntheticsGlobalVariableAttributes:
+      description: Attributes of the global variable.
+      properties:
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+      type: object
+    SyntheticsGlobalVariableOptions:
+      description: Options for the Global Variable for MFA.
+      properties:
+        totp_parameters:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableTOTPParameters'
+      type: object
+    SyntheticsGlobalVariableParseTestOptions:
+      description: Parser options to use for retrieving a Synthetic global variable
+        from a Synthetic test. Used in conjunction with `parse_test_public_id`.
+      properties:
+        field:
+          description: When type is `http_header`, name of the header to use to extract
+            the value.
+          example: content-type
+          type: string
+        localVariableName:
+          description: When type is `local_variable`, name of the local variable to
+            use to extract the value.
+          example: LOCAL_VARIABLE
+          type: string
+        parser:
+          $ref: '#/components/schemas/SyntheticsVariableParser'
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+      required:
+      - type
+      type: object
+    SyntheticsGlobalVariableParseTestOptionsType:
+      description: Type of value to extract from a test for a Synthetic global variable.
+      enum:
+      - http_body
+      - http_header
+      - http_status_code
+      - local_variable
+      example: http_body
+      type: string
+      x-enum-varnames:
+      - HTTP_BODY
+      - HTTP_HEADER
+      - HTTP_STATUS_CODE
+      - LOCAL_VARIABLE
+    SyntheticsGlobalVariableParserType:
+      description: Type of parser for a Synthetic global variable from a synthetics
+        test.
+      enum:
+      - raw
+      - json_path
+      - regex
+      - x_path
+      example: raw
+      type: string
+      x-enum-varnames:
+      - RAW
+      - JSON_PATH
+      - REGEX
+      - X_PATH
+    SyntheticsGlobalVariableTOTPParameters:
+      description: Parameters for the TOTP/MFA variable
+      properties:
+        digits:
+          description: Number of digits for the OTP code.
+          example: 6
+          format: int32
+          maximum: 10
+          minimum: 4
+          type: integer
+        refresh_interval:
+          description: Interval for which to refresh the token (in seconds).
+          example: 30
+          format: int32
+          maximum: 999
+          minimum: 0
+          type: integer
+      type: object
+    SyntheticsGlobalVariableValue:
+      description: Value of the global variable.
+      example:
+        secure: true
+        value: value
+      properties:
+        options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableOptions'
+        secure:
+          description: Determines if the value of the variable is hidden.
+          type: boolean
+        value:
+          description: 'Value of the global variable. When reading a global variable,
+
+            the value will not be present if the variable is hidden with the `secure`
+            property.'
+          example: example-value
+          type: string
+      type: object
+    SyntheticsRestrictedRoles:
+      description: A list of role identifiers that can be pulled from the Roles API,
+        for restricting read and write access.
+      example:
+      - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      items:
+        description: UUID for a role.
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        type: string
+      type: array
+    SyntheticsVariableParser:
+      description: Details of the parser to use for the global variable.
+      example:
+        type: regex
+        value: .*
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+        value:
+          description: Regex or JSON path used for the parser. Not used with type
+            `raw`.
+          type: string
+      required:
+      - type
+      type: object
     TableResultV2:
       description: A reference table resource containing its full configuration and
         state.
@@ -59386,6 +59791,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            appsec_vm_read: View infrastructure, application code, and library vulnerability
+              findings.
             billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
@@ -59564,13 +59971,14 @@ paths:
         results.'
       operationId: ListFleetAgents
       parameters:
-      - description: Page number for pagination (must be greater than 0).
+      - description: Page number for pagination (starts at 0).
         in: query
         name: page_number
         required: false
         schema:
+          default: 0
           format: int64
-          minimum: 1
+          minimum: 0
           type: integer
       - description: Number of results per page (must be greater than 0 and less than
           or equal to 100).
@@ -78219,7 +78627,13 @@ paths:
         cursorPath: meta.page.cursor
         limitParam: page[limit]
         resultsPath: data
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
@@ -78321,7 +78735,13 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 2
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/powerpacks:
@@ -79592,6 +80012,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              happy_path:
+                summary: Upsert a row with mixed string and int values
+                value:
+                  data:
+                  - attributes:
+                      values:
+                        age: 25
+                        example_key_value: primary_key_value
+                        name: row_name
+                    id: primary_key_value
+                    type: row
             schema:
               $ref: '#/components/schemas/BatchUpsertRowsRequestArray'
         required: true
@@ -82922,6 +83354,88 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_cws_agent_rules_read
+  /api/v2/security/findings:
+    get:
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
+
+
+        ### Query Syntax
+
+
+        This endpoint uses the logs query syntax. Findings attributes (living in the
+        attributes.attributes. namespace) are prefixed by @ when queried. Tags are
+        queried without a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: ListSecurityFindings
+      parameters:
+      - description: The search query following log search syntax.
+        example: '@severity:(critical OR high) @status:open team:platform'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          default: '*'
+          type: string
+      - description: Get the next page of results with a cursor provided in the previous
+          query.
+        example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of findings in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      - description: Sorts by @detection_changed_at.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List security findings
+      tags:
+      - Security Monitoring
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
   /api/v2/security/findings/cases:
     delete:
       description: 'Detach security findings from their case.
@@ -83146,6 +83660,60 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and is subject to change.
 
         Please check the documentation regularly for updates.'
+  /api/v2/security/findings/search:
+    post:
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
+
+
+        ### Query Syntax
+
+
+        The API uses the logs query syntax. Findings attributes (living in the attributes.attributes.
+        namespace) are prefixed by @ when queried. Tags are queried without a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: SearchSecurityFindings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityFindingsSearchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Search security findings
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
   /api/v2/security/sboms:
     get:
       description: 'Get a list of assets SBOMs for an organization.
@@ -87344,21 +87912,21 @@ paths:
       x-unstable: '**Note**: This feature is in private beta. To request access, use
         the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
         docs.'
-  /api/v2/spa/recommendations/{service}/{shard}:
+  /api/v2/spa/recommendations/{service}:
     get:
-      description: Retrieve resource recommendations for a Spark job. The caller (Spark
-        Gateway or DJM UI) provides a service name and shard identifier, and SPA returns
-        structured recommendations for driver and executor resources.
+      description: This endpoint is currently experimental and restricted to Datadog
+        internal use only. Retrieve resource recommendations for a Spark job. The
+        caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured
+        recommendations for driver and executor resources. The version with a shard
+        should be preferred, where possible, as it gives more accurate results.
       operationId: GetSPARecommendations
       parameters:
-      - description: The shard tag for a spark job, which differentiates jobs within
-          the same service that have different resource needs
-        in: path
-        name: shard
-        required: true
+      - description: The recommendation service should not use its metrics cache.
+        in: query
+        name: bypass_cache
         schema:
           type: string
-      - description: The service name for a spark job
+      - description: The service name for a spark job.
         in: path
         name: service
         required: true
@@ -87402,12 +87970,86 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ: []
       summary: Get SPA Recommendations
       tags:
       - Spa
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in preview and may change in the future.
+        It is not yet recommended for production use.'
+  /api/v2/spa/recommendations/{service}/{shard}:
+    get:
+      description: This endpoint is currently experimental and restricted to Datadog
+        internal use only. Retrieve resource recommendations for a Spark job. The
+        caller (Spark Gateway or DJM UI) provides a service name and shard identifier,
+        and SPA returns structured recommendations for driver and executor resources.
+      operationId: GetSPARecommendationsWithShard
+      parameters:
+      - description: The shard tag for a spark job, which differentiates jobs within
+          the same service that have different resource needs
+        in: path
+        name: shard
+        required: true
+        schema:
+          type: string
+      - description: The service name for a spark job
+        in: path
+        name: service
+        required: true
+        schema:
+          type: string
+      - description: The recommendation service should not use its metrics cache.
+        in: query
+        name: bypass_cache
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  attributes:
+                    driver:
+                      estimation:
+                        cpu:
+                          max: 1500
+                          p75: 1000
+                          p95: 1200
+                        ephemeral_storage: 896
+                        heap: 6144
+                        memory: 7168
+                        overhead: 1024
+                    executor:
+                      estimation:
+                        cpu:
+                          max: 2000
+                          p75: 1200
+                          p95: 1500
+                        ephemeral_storage: 512
+                        heap: 3072
+                        memory: 4096
+                        overhead: 1024
+                  id: dedupeactivecontexts:adp_dedupeactivecontexts_org2
+                  type: recommendation
+              schema:
+                $ref: '#/components/schemas/RecommendationDocument'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ: []
+      summary: Get SPA Recommendations with a shard parameter
+      tags:
+      - Spa
       x-menu-order: 1
-      x-unstable: '**Note**: This endpoint is in public beta and may change in the
-        future. It is not yet recommended for production use.'
+      x-unstable: '**Note**: This endpoint is in preview and may change in the future.
+        It is not yet recommended for production use.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
@@ -87743,6 +88385,61 @@ paths:
         operator: OR
         permissions:
         - billing_edit
+  /api/v2/synthetics/variables/{variable_id}/jsonpatch:
+    patch:
+      description: 'Patch a global variable using JSON Patch (RFC 6902).
+
+        This endpoint allows partial updates to a global variable by specifying only
+        the fields to modify.
+
+
+        Common operations include:
+
+        - Replace field values: `{"op": "replace", "path": "/name", "value": "new_name"}`
+
+        - Update nested values: `{"op": "replace", "path": "/value/value", "value":
+        "new_value"}`
+
+        - Add/update tags: `{"op": "add", "path": "/tags/-", "value": "new_tag"}`
+
+        - Remove fields: `{"op": "remove", "path": "/description"}`'
+      operationId: PatchGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalVariableJsonPatchRequest'
+        description: JSON Patch document with operations to apply.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalVariableResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch a global variable
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
   /api/v2/tags/enrichment:
     get:
       description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline

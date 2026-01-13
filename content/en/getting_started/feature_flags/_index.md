@@ -157,5 +157,5 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/environments
+[3]: https://app.datadoghq.com/feature-flags/settings/environments
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
