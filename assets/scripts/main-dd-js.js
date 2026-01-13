@@ -4,11 +4,10 @@ import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/tab';
 import 'bootstrap/js/dist/collapse';
 
+
 import './datadog-docs';
 import './utms';
 import './alpine';
-import './cookie-banner';
-
 import './components/copy-code';
 import './components/global-modals';
 import './components/platforms';
