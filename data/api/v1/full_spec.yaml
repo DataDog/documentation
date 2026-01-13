@@ -3972,7 +3972,6 @@ components:
 
             points (group distributions use the roll-up modifier).'
           format: int64
-          minimum: 1
           type: integer
       type: object
     Host:
