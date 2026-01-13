@@ -494,7 +494,7 @@ origin.datadoghq.com/location:
 
 {{% /tab %}}
 {{% tab "Helm chart" %}}
-If you deploy resource using `Helm` use the following annotation form:
+If you deploy resource using `Helm`, use the following annotation format:
 
 ```
 origin.datadoghq.com/location:
