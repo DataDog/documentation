@@ -184,7 +184,7 @@ This approach is recommended for clusters in **Standard** access mode.
 
 **Configure the compute policy**
 
-1. In **Compute**, navigate to the **Policies** tab. Click **Create Policy** or navigate to an existing policy to edit it.
+1. In **Compute**, navigate to the **Policies** tab. If you already have a cluster policy applied to your clusters, navigate to that existing policy to edit it. This is the easier approach as the policy will automatically apply to all clusters using it. Otherwise, click **Create Policy** to create a new one.
 1. To add the init script to the cluster policy, in the **Definition** section, click **Add Definition**. In the modal that opens, fill in the fields:
    1. In the **Field** dropdown, select **init_scripts**.
    1. In the **Source** dropdown, select **Volume**.
@@ -214,7 +214,13 @@ This approach is recommended for clusters in **Standard** access mode.
       | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
       | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
-1. Click **Create**. The cluster policy can now be used when configuring new clusters or editing existing ones.
+1. Click **Create** if creating a new policy or **Save** if updating an existing policy. If you updated an existing policy, all clusters using that policy will automatically apply the changes on their next restart. If you created a new policy, follow the steps below to apply it to your clusters.
+
+**Apply the cluster policy to clusters**
+
+1. In **Compute**, select the cluster you want to update or click **Create Compute** for a new cluster.
+1. In the **Policy** dropdown at the top, select the policy you created.
+1. Click **Confirm** to save the changes. The cluster will need to be restarted for the policy to take effect.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
