@@ -486,7 +486,7 @@ origin.datadoghq.com/location:
 {
 	"repo": {
 		"url": <repo URL>
-		"targetRevision": "sha1 fo commit being deployed"
+		"targetRevision": "sha1 for commit being deployed"
 		"path": <file path of the resource>
 	}
 }
