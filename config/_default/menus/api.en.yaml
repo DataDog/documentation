@@ -4242,7 +4242,7 @@ menu:
           - CreateHostTags
         unstable: []
         order: 3
-    - name: Get host tags
+    - name: Get Host Tags
       url: '#get-host-tags'
       identifier: tags-get-host-tags
       parent: tags
@@ -4266,9 +4266,9 @@ menu:
           - DeleteHostTags
         unstable: []
         order: 5
-    - name: Get Tags
-      url: '#get-tags'
-      identifier: tags-get-tags
+    - name: Get All Host Tags
+      url: '#get-all-host-tags'
+      identifier: tags-get-all-host-tags
       parent: tags
       generated: true
       params:
