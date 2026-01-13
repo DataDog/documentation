@@ -104,7 +104,7 @@ Click **New Reference Table +**, then add a name, select Amazon S3, fill out all
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 {{% collapse-content title="Azure storage" level="h4" id="azure-storage" %}}
 
 1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
@@ -128,7 +128,7 @@ For more information, see the [Azure integration documentation][4].
 [3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
 [4]: /integrations/azure/
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 {{% collapse-content title="Google Cloud storage" level="h4" id="google-cloud-storage" %}}
 
 ### Google Cloud storage
@@ -157,6 +157,28 @@ After reviewing and assigning the role, you can import into Reference Tables fro
 
 [1]: /integrations/google_cloud_platform/#setup
 [2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
+
+{{% /collapse-content %}}
+{{% collapse-content title="API or Terraform" level="h4" id="api-or-terraform" %}}
+
+Create reference tables programmatically using the [Datadog API][8] or the [Datadog Terraform provider][9].
+
+**Note**: The API and Terraform provider support the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
+
+### API
+
+Use the [Create Reference Table endpoint][10] to create reference tables from cloud storage or local files.
+- For cloud storage sources (S3, Azure, GCS), provide `access_details` in `file_metadata` pointing to a CSV file in cloud storage.
+- For local files, call `POST /api/latest/reference-tables/uploads` to get an upload ID and upload your CSV data. Then, call the Create Reference Table endpoint with the `upload_id` in `file_metadata`.
+
+### Terraform
+
+Use the `datadog_reference_table` resource to manage reference tables as infrastructure as code. Configure the resource with your table schema, primary keys, and cloud storage access details.
+
+
+[8]: /api/latest/reference-tables/
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/reference_table
+[10]: /api/latest/reference-tables/#create-reference-table
 
 {{% /collapse-content %}}
 
