@@ -74,7 +74,7 @@ Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tag
 <!-- JAVA TRACES -->
 {% if equals($prog_lang, "java") %}
 
-## Setup
+## Setup {% #setup-java %}
 
 {% alert level="info" %}
 OpenTelemetry is supported in Java after version 1.24.0.
@@ -88,9 +88,9 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 3. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-java %}
 
-### Add custom span tags
+### Add custom span tags {% #add-custom-span-tags-java %}
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
@@ -103,7 +103,7 @@ public void doSomething() {
 }
 ```
 
-### Adding tags globally to all spans
+### Adding tags globally to all spans {% #adding-tags-globally-java %}
 
 The `dd.tags` property allows you to set tags across all generated spans for an application. This is useful for grouping stats for your applications, data centers, or any other tags you would like to see in Datadog.
 
@@ -113,7 +113,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
     -jar <YOUR_APPLICATION_PATH>.jar
 ```
 
-### Setting errors on span
+### Setting errors on span {% #setting-errors-java %}
 
 To set an error on a span, use the `setStatus` method:
 
@@ -127,7 +127,7 @@ public void doSomething() {
 }
 ```
 
-### Setting tags and errors on a root span from a child span
+### Setting tags and errors on a root span from a child span {% #setting-root-span-java %}
 
 When you want to set tags or errors on the root span from within a child span, you can use the OpenTelemetry Context API:
 
@@ -170,7 +170,7 @@ public class Example {
 }
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-java %}
 
 If you aren't using a [supported framework instrumentation][101], or you would like additional depth in your application's [traces][102], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
@@ -178,7 +178,7 @@ If modifying application code is not possible, use the environment variable `dd.
 
 If you have existing `@Trace` or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
 
-### Trace annotations
+### Trace annotations {% #trace-annotations-java %}
 
 Add `@WithSpan` to methods to have them be traced when running OpenTelemetry and the `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
 
@@ -196,7 +196,7 @@ public class SessionManager {
 }
 ```
 
-### Manually creating a new span
+### Manually creating a new span {% #manually-creating-span-java %}
 
 To manually create new spans within the current trace context:
 
@@ -222,7 +222,7 @@ public class Example {
 }
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-java %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 1.40.0 or higher.
@@ -249,7 +249,7 @@ span.addEvent("Event With Some Attributes", eventAttributes);
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-java %}
 
 To record exceptions, use the `recordException` API:
 
@@ -261,15 +261,15 @@ span.recordException(new Exception("Error Message"),
 
 Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
-## Trace client and Agent configuration
+## Trace client and Agent configuration {% #trace-client-agent-config-java %}
 
 Both the tracing client and Datadog Agent offer additional configuration options for context propagation. You can also exclude specific resources from sending traces to Datadog if you don't want those traces to be included in calculated metrics, such as traces related to health checks.
 
-### Propagating context with headers extraction and injection
+### Propagating context with headers extraction and injection {% #propagating-context-java %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
-### Resource filtering
+### Resource filtering {% #resource-filtering-java %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][106] page or in [Ignoring Unwanted Resources][107].
 
@@ -279,7 +279,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 <!-- PYTHON TRACES -->
 {% if equals($prog_lang, "python") %}
 
-## Setup
+## Setup {% #setup-python %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -287,7 +287,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 2. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
-### Creating custom spans
+### Creating custom spans {% #creating-custom-spans-python %}
 
 To create custom spans within an existing trace context:
 
@@ -303,7 +303,7 @@ def do_work():
         # When the 'with' block ends, the span is automatically closed
 ```
 
-## Accessing active spans
+## Accessing active spans {% #accessing-active-spans-python %}
 
 To access the currently active span, use the `get_current_span()` function:
 
@@ -314,7 +314,7 @@ current_span = trace.get_current_span()
 # enrich 'current_span' with information
 ```
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-python %}
 
 Add attributes to a span to provide additional context or metadata:
 
@@ -326,7 +326,7 @@ current_span = trace.get_current_span()
 current_span.set_attribute("attribute_key1", 1)
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-python %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 2.9.0 or higher.
@@ -341,7 +341,7 @@ span.add_event("Event With Some Attributes", {"int_val": 1, "string_val": "two",
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-python %}
 
 To record exceptions, use the `record_exception` API:
 
@@ -358,7 +358,7 @@ Read the [OpenTelemetry specification for recording exceptions][104] for more in
 <!-- NODE.JS TRACES -->
 {% if equals($prog_lang, "node_js") %}
 
-## Setup
+## Setup {% #setup-nodejs %}
 
 To instrument your application, initialize the Datadog tracer (`dd-trace`) and explicitly register its `TracerProvider` with the OpenTelemetry API. This ensures all OpenTelemetry calls are routed through Datadog.
 
@@ -369,7 +369,7 @@ To instrument your application, initialize the Datadog tracer (`dd-trace`) and e
 
 2. **Initialize and register the tracer** in your application's entry file (for example, `index.js`), before any other imports:
 
-### Complete example
+### Complete example {% #complete-example-nodejs %}
 
 ```javascript
 // 1. Import the dd-trace library (do not initialize it yet)
@@ -396,7 +396,7 @@ const otelTracer = otel.trace.getTracer(
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [integration instrumentation][120] and [OpenTelemetry automatic instrumentation][121].
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-nodejs %}
 
 Add custom attributes to your spans to provide additional context:
 
@@ -413,7 +413,7 @@ function processData(i, param1, param2) {
 }
 ```
 
-## Creating spans
+## Creating spans {% #creating-spans-nodejs %}
 
 To create a new span and properly close it, use the `startActiveSpan` method:
 
@@ -432,7 +432,7 @@ function performTask(iterations, param1, param2) {
 }
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-nodejs %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 5.17.0/4.41.0 or higher.
@@ -447,7 +447,7 @@ span.addEvent('Event With Some Attributes', {"int_val": 1, "string_val": "two", 
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-nodejs %}
 
 To record exceptions, use the `recordException` API:
 
@@ -457,7 +457,7 @@ span.recordException(new TestError())
 
 Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
-## Filtering requests
+## Filtering requests {% #filtering-requests-nodejs %}
 
 In some cases, you may want to exclude certain requests from being instrumented, such as health checks or synthetic traffic. You can use the `blocklist` or `allowlist` option on the `http` plugin to ignore these requests.
 
@@ -486,7 +486,7 @@ Additionally, you can exclude traces based on their resource name to prevent the
 <!-- GO TRACES -->
 {% if equals($prog_lang, "go") %}
 
-## Imports
+## Imports {% #imports-go %}
 
 Import the following packages to setup the Datadog trace provider:
 
@@ -505,7 +505,7 @@ import (
 )
 ```
 
-## Setup
+## Setup {% #setup-go %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -542,7 +542,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 7. Run your application.
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-go %}
 
 Add custom tags to your spans to attach additional metadata and context:
 
@@ -553,7 +553,7 @@ ctx, span := t.Start(ctx, "read.file")
 span.SetAttributes(attribute.String(ext.ResourceName, "test.json"))
 ```
 
-### Adding tags globally to all spans
+### Adding tags globally to all spans {% #adding-tags-globally-go %}
 
 Add tags to all spans by configuring the tracer with the `WithGlobalTag` option:
 
@@ -568,7 +568,7 @@ otel.SetTracerProvider(provider)
 t := otel.Tracer("")
 ```
 
-### Setting errors on a span
+### Setting errors on a span {% #setting-errors-go %}
 
 To set an error on a span:
 
@@ -584,7 +584,7 @@ EndOptions(span, tracer.WithError(errors.New("myErr")))
 span.End()
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-go %}
 
 Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans.
 
@@ -595,7 +595,7 @@ ctx, span := t.Start(
 span.End()
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-go %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 1.67.0 or higher.
@@ -612,13 +612,13 @@ span.Finish()
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-## Trace client and Agent configuration
+## Trace client and Agent configuration {% #trace-client-agent-config-go %}
 
-### Propagating context with headers extraction and injection
+### Propagating context with headers extraction and injection {% #propagating-context-go %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
-### Resource filtering
+### Resource filtering {% #resource-filtering-go %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][106] page.
 
@@ -628,7 +628,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 <!-- RUBY TRACES -->
 {% if equals($prog_lang, "ruby") %}
 
-## Requirements and limitations
+## Requirements and limitations {% #requirements-limitations-ruby %}
 
 - Datadog Ruby tracing library `dd-trace-rb` version 1.9.0 or greater.
 - Gem version support 1.1.0 or greater.
@@ -643,7 +643,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through custom logging. |
 | Trace/span ID generators         | ID generation is performed by the tracing library, with support for 128-bit trace IDs.     |
 
-## Configuring OpenTelemetry to use the Datadog tracing library
+## Configuring OpenTelemetry to use the Datadog tracing library {% #setup-ruby %}
 
 1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][140]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
@@ -670,7 +670,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][141] and [OpenTelemetry Automatic instrumentation][142] also.
 
-## Adding span events
+## Adding span events {% #adding-span-events-ruby %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 2.3.0 or higher.
@@ -688,7 +688,7 @@ span.add_event(
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-ruby %}
 
 To record exceptions, use the `record_exception` API:
 
@@ -710,7 +710,7 @@ Read the [OpenTelemetry specification for recording exceptions][104] for more in
 <!-- .NET TRACES -->
 {% if equals($prog_lang, "dot_net") %}
 
-## Setup
+## Setup {% #setup-dotnet %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -724,7 +724,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [OpenTelemetry instrumentation libraries][154].
 
-## Creating custom spans
+## Creating custom spans {% #creating-custom-spans-dotnet %}
 
 To manually create spans that start a new, independent trace:
 
@@ -740,7 +740,7 @@ using (Activity? activity = Telemetry.ActivitySource.StartActivity("<RESOURCE NA
 }
 ```
 
-## Creating spans
+## Creating spans {% #creating-spans-dotnet %}
 
 To create custom spans within an existing trace context:
 
@@ -759,7 +759,7 @@ using (Activity? parentScope = Telemetry.ActivitySource.StartActivity("<RESOURCE
 }
 ```
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-dotnet %}
 
 Add custom tags to your spans to provide additional context:
 
@@ -783,7 +783,7 @@ public class ShoppingCartController : Controller
 }
 ```
 
-## Setting errors on spans
+## Setting errors on spans {% #setting-errors-dotnet %}
 
 Set error information on a span when an error occurs during its execution:
 
@@ -801,7 +801,7 @@ catch(Exception e)
 }
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-dotnet %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 2.53.0 or higher.
@@ -825,7 +825,7 @@ activity.AddEvent(new ActivityEvent("Event With Some Attributes", DateTimeOffset
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-## Propagating context with headers extraction and injection
+## Propagating context with headers extraction and injection {% #propagating-context-dotnet %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
@@ -835,7 +835,7 @@ You can configure the propagation of context for distributed traces by injecting
 <!-- PHP TRACES -->
 {% if equals($prog_lang, "php") %}
 
-## Setup
+## Setup {% #setup-php %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -852,7 +852,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-php %}
 
 You can add attributes at the exact moment as you are starting the span:
 
@@ -869,7 +869,7 @@ $activeSpan = OpenTelemetry\API\Trace\Span::getCurrent();
 $activeSpan->setAttribute('key', 'value');
 ```
 
-## Setting errors on a span
+## Setting errors on a span {% #setting-errors-php %}
 
 Exception information is captured and attached to a span if one is active when the exception is raised:
 
@@ -897,7 +897,7 @@ try {
 }
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-php %}
 
 To add a span:
 
@@ -915,7 +915,7 @@ $span = $tracer->spanBuilder('mySpan')->startSpan();
 $span->end();
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-php %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 1.3.0 or higher.
@@ -939,7 +939,7 @@ $span->addEvent(
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-php %}
 
 To record exceptions, use the `recordException` API:
 
@@ -950,7 +950,7 @@ $span->recordException(new \Exception("Error Message"), [ "status" => "failed" ]
 
 Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
-## Accessing active spans
+## Accessing active spans {% #accessing-active-spans-php %}
 
 To access the currently active span:
 
@@ -972,11 +972,11 @@ Datadog provides support for custom instrumentation in Rust applications through
 
 Because this library is built on OpenTelemetry, you use the standard OpenTelemetry API to create traces and spans.
 
-## Setup
+## Setup {% #setup-rust %}
 
 To configure your Rust application to send OpenTelemetry traces to Datadog:
 
-### 1. Add dependencies
+### 1. Add dependencies {% #add-dependencies-rust %}
 
 Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.toml`:
 
@@ -984,7 +984,7 @@ Add `datadog-opentelemetry` and the core `opentelemetry` crate to your `Cargo.to
 cargo add datadog-opentelemetry opentelemetry
 ```
 
-### 2. Initialize the Tracer
+### 2. Initialize the Tracer {% #initialize-tracer-rust %}
 
 In your application's main function, initialize the Datadog tracer provider:
 
@@ -1019,17 +1019,17 @@ fn main() {
 }
 ```
 
-### 3. Ensure Agent is running
+### 3. Ensure Agent is running {% #ensure-agent-rust %}
 
 The Datadog exporter sends traces to the Datadog Agent, which must be running and accessible.
 
-## Configuration
+## Configuration {% #configuration-rust %}
 
 The Datadog Rust SDK is configured using environment variables. For a complete list of options, see the [Configuration documentation][171].
 
-## Examples
+## Examples {% #examples-rust %}
 
-### Get a Tracer
+### Get a Tracer {% #get-tracer-rust %}
 
 Get an instance of a `Tracer` from the global provider:
 
@@ -1039,7 +1039,7 @@ use opentelemetry::global;
 let tracer = global::tracer("my-component");
 ```
 
-### Create a span
+### Create a span {% #create-span-rust %}
 
 Use `tracer.in_span` to create a new span. The span is automatically ended when the closure finishes:
 
@@ -1056,7 +1056,7 @@ fn do_work() {
 }
 ```
 
-### Create a child span
+### Create a child span {% #create-child-span-rust %}
 
 To create a child span, nest `in_span` calls:
 
@@ -1076,7 +1076,7 @@ fn parent_operation() {
 }
 ```
 
-### Add span tags
+### Add span tags {% #add-span-tags-rust %}
 
 Add attributes to a span using the `set_attribute` method:
 
@@ -1096,7 +1096,7 @@ fn add_tags_to_span() {
 }
 ```
 
-### Add span events
+### Add span events {% #add-span-events-rust %}
 
 Add time-stamped log messages to a span using the `add_event` method:
 
@@ -1122,7 +1122,7 @@ fn add_events_to_span() {
 }
 ```
 
-## Context propagation
+## Context propagation {% #context-propagation-rust %}
 
 Because Rust does not have automatic instrumentation, you must manually propagate the trace context when making or receiving remote calls to connect traces across services.
 
@@ -1632,7 +1632,7 @@ Follow these steps to enable OTel Logs API support in your application.
 ## Examples
 
 {% if equals($prog_lang, "dot_net") %}
-### Standard logging
+### Standard logging {% #standard-logging-dotnet %}
 
 ```csharp
 using Microsoft.Extensions.Logging;
@@ -1650,7 +1650,7 @@ var logger = loggerFactory.CreateLogger<Program>();
 logger.LogInformation("This is a standard log message.");
 ```
 
-### Trace and log correlation
+### Trace and log correlation {% #trace-log-correlation-dotnet %}
 
 This example shows how logs emitted within an active Datadog span are automatically correlated. If you are using the OTel Tracing API or built-in .NET Activity API to create spans, ensure OTel Tracing API support is enabled by setting `DD_TRACE_OTEL_ENABLED=true`.
 
@@ -1683,7 +1683,7 @@ using (var activity = activitySource.StartActivity("do.work"))
 {% /if %}
 
 {% if equals($prog_lang, "node_js") %}
-### Emitting a log
+### Emitting a log {% #emitting-log-nodejs %}
 
 After the Datadog SDK is initialized, you can use the standard OpenTelemetry Logs API to get a logger and emit log records.
 
@@ -1706,7 +1706,7 @@ logger.emit({
 })
 ```
 
-### Trace and log correlation
+### Trace and log correlation {% #trace-log-correlation-nodejs %}
 
 Trace and log correlation is automatic. When you emit a log using the OTel Logs API within an active Datadog trace, the `trace_id` and `span_id` are automatically added to the log record.
 
@@ -1737,7 +1737,7 @@ app.listen(3000)
 {% if equals($prog_lang, "python") %}
 The Datadog SDK supports the OpenTelemetry Logs API for Python's built-in `logging` module. You do not need to change your existing logging code.
 
-### Standard logging
+### Standard logging {% #standard-logging-python %}
 
 This example shows a standard log message. With `DD_LOGS_OTEL_ENABLED=true`, this log is automatically captured, formatted as OTLP, and exported.
 
@@ -1757,7 +1757,7 @@ logger.addHandler(handler)
 logger.info("This is a standard log message.")
 ```
 
-### Trace and log correlation
+### Trace and log correlation {% #trace-log-correlation-python %}
 
 This example shows how logs emitted within an active Datadog span are automatically correlated.
 
