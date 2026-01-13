@@ -1471,8 +1471,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1538,8 +1536,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         created_at:
           description: Timestamp of when the account integration was created.
           format: date-time
@@ -1613,8 +1609,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1745,15 +1739,6 @@ components:
           type: string
       required:
       - role_name
-      type: object
-    AWSCCMConfig:
-      description: AWS Cloud Cost Management config.
-      properties:
-        data_export_configs:
-          description: List of data export configurations for Cost and Usage Reports.
-          items:
-            $ref: '#/components/schemas/DataExportConfig'
-          type: array
       type: object
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
@@ -16585,30 +16570,6 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
-    DataExportConfig:
-      description: AWS Cost and Usage Report data export configuration.
-      properties:
-        bucket_name:
-          description: Name of the S3 bucket where the Cost and Usage Report is stored.
-          example: billing
-          type: string
-        bucket_region:
-          description: AWS region of the S3 bucket.
-          example: us-east-1
-          type: string
-        report_name:
-          description: Name of the Cost and Usage Report.
-          example: cost-and-usage-report
-          type: string
-        report_prefix:
-          description: S3 prefix where the Cost and Usage Report is stored.
-          example: reports
-          type: string
-        report_type:
-          description: Type of the Cost and Usage Report.
-          example: CUR2.0
-          type: string
-      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -43101,6 +43062,9 @@ components:
       description: Attributes of the SPA Recommendation resource. Contains recommendations
         for both driver and executor components.
       properties:
+        confidence_level:
+          format: double
+          type: number
         driver:
           $ref: '#/components/schemas/ComponentRecommendation'
         executor:
@@ -59988,13 +59952,14 @@ paths:
         results.'
       operationId: ListFleetAgents
       parameters:
-      - description: Page number for pagination (must be greater than 0).
+      - description: Page number for pagination (starts at 0).
         in: query
         name: page_number
         required: false
         schema:
+          default: 0
           format: int64
-          minimum: 1
+          minimum: 0
           type: integer
       - description: Number of results per page (must be greater than 0 and less than
           or equal to 100).
@@ -78643,7 +78608,13 @@ paths:
         cursorPath: meta.page.cursor
         limitParam: page[limit]
         resultsPath: data
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
@@ -78745,7 +78716,13 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 2
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/powerpacks:
@@ -83360,15 +83337,16 @@ paths:
         - security_monitoring_cws_agent_rules_read
   /api/v2/security/findings:
     get:
-      description: 'Get a list of security findings that match a search query.
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
 
 
         ### Query Syntax
 
 
         This endpoint uses the logs query syntax. Findings attributes (living in the
-        custom. namespace) are prefixed by @ when queried. Tags are queried without
-        a prefix.
+        attributes.attributes. namespace) are prefixed by @ when queried. Tags are
+        queried without a prefix.
 
 
         Example: `@severity:(critical OR high) @status:open team:platform`'
@@ -83665,13 +83643,14 @@ paths:
         Please check the documentation regularly for updates.'
   /api/v2/security/findings/search:
     post:
-      description: 'Get a list of security findings that match a search query.
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
 
 
         ### Query Syntax
 
 
-        The API uses the logs query syntax. Findings attributes (living in the custom.
+        The API uses the logs query syntax. Findings attributes (living in the attributes.attributes.
         namespace) are prefixed by @ when queried. Tags are queried without a prefix.
 
 
@@ -87914,21 +87893,21 @@ paths:
       x-unstable: '**Note**: This feature is in private beta. To request access, use
         the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
         docs.'
-  /api/v2/spa/recommendations/{service}/{shard}:
+  /api/v2/spa/recommendations/{service}:
     get:
-      description: Retrieve resource recommendations for a Spark job. The caller (Spark
-        Gateway or DJM UI) provides a service name and shard identifier, and SPA returns
-        structured recommendations for driver and executor resources.
+      description: This endpoint is currently experimental and restricted to Datadog
+        internal use only. Retrieve resource recommendations for a Spark job. The
+        caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured
+        recommendations for driver and executor resources. The version with a shard
+        should be preferred, where possible, as it gives more accurate results.
       operationId: GetSPARecommendations
       parameters:
-      - description: The shard tag for a spark job, which differentiates jobs within
-          the same service that have different resource needs
-        in: path
-        name: shard
-        required: true
+      - description: The recommendation service should not use its metrics cache.
+        in: query
+        name: bypass_cache
         schema:
           type: string
-      - description: The service name for a spark job
+      - description: The service name for a spark job.
         in: path
         name: service
         required: true
@@ -87972,12 +87951,86 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ: []
       summary: Get SPA Recommendations
       tags:
       - Spa
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in preview and may change in the future.
+        It is not yet recommended for production use.'
+  /api/v2/spa/recommendations/{service}/{shard}:
+    get:
+      description: This endpoint is currently experimental and restricted to Datadog
+        internal use only. Retrieve resource recommendations for a Spark job. The
+        caller (Spark Gateway or DJM UI) provides a service name and shard identifier,
+        and SPA returns structured recommendations for driver and executor resources.
+      operationId: GetSPARecommendationsWithShard
+      parameters:
+      - description: The shard tag for a spark job, which differentiates jobs within
+          the same service that have different resource needs
+        in: path
+        name: shard
+        required: true
+        schema:
+          type: string
+      - description: The service name for a spark job
+        in: path
+        name: service
+        required: true
+        schema:
+          type: string
+      - description: The recommendation service should not use its metrics cache.
+        in: query
+        name: bypass_cache
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  attributes:
+                    driver:
+                      estimation:
+                        cpu:
+                          max: 1500
+                          p75: 1000
+                          p95: 1200
+                        ephemeral_storage: 896
+                        heap: 6144
+                        memory: 7168
+                        overhead: 1024
+                    executor:
+                      estimation:
+                        cpu:
+                          max: 2000
+                          p75: 1200
+                          p95: 1500
+                        ephemeral_storage: 512
+                        heap: 3072
+                        memory: 4096
+                        overhead: 1024
+                  id: dedupeactivecontexts:adp_dedupeactivecontexts_org2
+                  type: recommendation
+              schema:
+                $ref: '#/components/schemas/RecommendationDocument'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ: []
+      summary: Get SPA Recommendations with a shard parameter
+      tags:
+      - Spa
       x-menu-order: 1
-      x-unstable: '**Note**: This endpoint is in public beta and may change in the
-        future. It is not yet recommended for production use.'
+      x-unstable: '**Note**: This endpoint is in preview and may change in the future.
+        It is not yet recommended for production use.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
