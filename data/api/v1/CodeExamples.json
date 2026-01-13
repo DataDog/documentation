@@ -940,6 +940,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_2106135939",
+      "description": "Create a multistep test with subtest returns \"OK\" response"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1402674167",
       "description": "Create an API GRPC test returns \"OK - Returns the created test details.\" response"
     },

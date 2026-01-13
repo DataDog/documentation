@@ -3972,7 +3972,6 @@ components:
 
             points (group distributions use the roll-up modifier).'
           format: int64
-          minimum: 1
           type: integer
       type: object
     Host:
@@ -15002,6 +15001,61 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAPITestStep'
       - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
+      - $ref: '#/components/schemas/SyntheticsAPISubtestStep'
+    SyntheticsAPISubtestStep:
+      description: The subtest step used in a Synthetics multi-step API test.
+      properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        subtestPublicId:
+          description: Public ID of the test to be played as part of a `playSubTest`
+            step type.
+          example: ''
+          type: string
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPISubtestStepSubtype'
+      required:
+      - name
+      - subtype
+      - subtestPublicId
+      type: object
+    SyntheticsAPISubtestStepSubtype:
+      description: The subtype of the Synthetic multi-step API subtest step.
+      enum:
+      - playSubTest
+      example: playSubTest
+      type: string
+      x-enum-varnames:
+      - PLAY_SUB_TEST
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
