@@ -6773,11 +6773,6 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 303
-    - name: Custom Kubernetes
-      url: /cloudprem/install/custom_k8s
-      parent: cloudprem_install
-      identifier: cloudprem_custom_k8s
-      weight: 304
     - name: Networking
       url: /cloudprem/install/network/connectivity
       parent: cloudprem_install
