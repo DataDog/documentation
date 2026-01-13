@@ -77,6 +77,16 @@ Data dropped intentionally or unintentionally
 : **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
 : **Available for**: Sources, processors, and destinations.
 
+Timed out events
+: **Metric**: `pipelines.component_timed_out_events_total`
+: **Description**: The number of events that timed out.
+: **Available for**: Sources, processors, and destinations.
+
+Time out requests
+: **Metric**: `pipelines.component_timed_out_requests_total`
+: **Description**: The number of requests that timed out.
+: **Available for**: Sources, processors, and destinations.
+
 Utilization
 : **Metric**: `pipelines.utilization`
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.

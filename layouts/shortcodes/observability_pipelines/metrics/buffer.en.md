@@ -20,3 +20,21 @@ Track buffer behavior with these additional metrics:
 
 `pipelines.buffer_discarded_events_total`
 : Events discarded from the buffer (for example, due to overflow).
+
+`pipelines.source_buffer_max_event_size`
+: Maximum event size for a source's buffer.
+
+`pipelines.source_buffer_utilization`
+: The percentage of a source's buffer that is used.
+
+`pipelines.source_buffer_utilization_level`
+: Utilization level for a source's buffer.
+
+`pipelines.transform_buffer_max_event_size`
+: Max event size for a transform's buffer.
+
+`pipelines.transform_buffer_utilization`
+: The percentage of a transform's buffer that is used.
+
+`pipelines.transform_buffer_utilization_level`
+: Utilization level for a transform's buffer.
