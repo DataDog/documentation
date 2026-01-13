@@ -18,7 +18,12 @@ To collect traces from your ECS containers, update the Task Definitions for both
 
 Once enabled, the Datadog Agent container collects the traces emitted from the other application containers on the same host as itself.
 
-There are two main options for APM connectivity, Unix Domain Socket (UDS) and the TCP/IP method of fetching the Host IP Address from the AWS Instance Metadata Service (IMDS). Datadog recommends to use the UDS option as it is the most resource efficient, does not require modifying your startup parameters nor require access to IMDS, and has the same setup per language. In Windows based environments use TCP/IP as UDS is not supported.
+There are two main options for APM connectivity, Unix Domain Socket (UDS) and the TCP/IP method of fetching the Host IP Address from the AWS Instance Metadata Service (IMDS). Datadog recommends to use the UDS option as it is the most resource efficient, does not require modifying your startup parameters nor require access to IMDS, and has the same setup per language.
+
+The TCP/IP strategy should be used:
+- In Windows based environments as UDS is not supported
+- If you change the `user` of the Datadog Agent container from the default root user
+- For security requirements if you cannot use [ECS Host Volumes][6] in your application containers
 
 ## Configure the Datadog Agent to accept traces
 
@@ -422,3 +427,4 @@ When using IMDSv2, the equivalent `entryPoint` configuration looks like the foll
 [3]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
 [4]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
 [5]: /tracing/metrics/runtime_metrics
+[6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-ecs-taskdefinition-hostvolumeproperties.html
