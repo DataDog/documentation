@@ -7641,6 +7641,104 @@ components:
       - data_source
       - query
       type: object
+    MonitorFormulaAndFunctionDataQualityDataSource:
+      description: Data source for data quality queries.
+      enum:
+      - data_quality_metrics
+      example: data_quality_metrics
+      type: string
+      x-enum-varnames:
+      - DATA_QUALITY_METRICS
+    MonitorFormulaAndFunctionDataQualityMeasure:
+      description: 'The data quality measure to query. Common values include:
+
+        `bytes`, `cardinality`, `custom`, `freshness`, `max`, `mean`, `min`,
+
+        `nullness`, `percent_negative`, `percent_zero`, `row_count`, `stddev`,
+
+        `sum`, `uniqueness`. Additional values may be supported.'
+      example: row_count
+      type: string
+    MonitorFormulaAndFunctionDataQualityModelTypeOverride:
+      description: Override for the model type used in anomaly detection.
+      enum:
+      - freshness
+      - percentage
+      - any
+      type: string
+      x-enum-varnames:
+      - FRESHNESS
+      - PERCENTAGE
+      - ANY
+    MonitorFormulaAndFunctionDataQualityMonitorOptions:
+      description: Monitor configuration options for data quality queries.
+      properties:
+        crontab_override:
+          description: Crontab expression to override the default schedule.
+          example: '* * * 10'
+          type: string
+        custom_sql:
+          description: Custom SQL query for the monitor.
+          example: SELECT COUNT(*) FROM users AS dd_value
+          type: string
+        custom_where:
+          description: Custom WHERE clause for the query.
+          example: USER_ID = 123
+          type: string
+        group_by_columns:
+          description: Columns to group results by.
+          example:
+          - col1
+          - col2
+          items:
+            type: string
+          type: array
+        model_type_override:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride'
+      type: object
+    MonitorFormulaAndFunctionDataQualityQueryDefinition:
+      description: A formula and functions data quality query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityDataSource'
+        filter:
+          description: Filter expression used to match on data entities. Uses Aastra
+            query syntax.
+          example: search for column where `database:production AND table:users`
+          type: string
+        group_by:
+          description: Optional grouping fields for aggregation.
+          example:
+          - entity_id
+          items:
+            type: string
+          type: array
+        measure:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityMeasure'
+        monitor_options:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityMonitorOptions'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        schema_version:
+          description: Schema version for the data quality query.
+          example: 0.0.1
+          type: string
+        scope:
+          description: 'Optional scoping expression to further filter metrics. Uses
+            metrics filter syntax.
+
+            This is useful when an entity has been configured to emit metrics with
+            additional tags.'
+          example: env:production
+          type: string
+      required:
+      - name
+      - data_source
+      - measure
+      - filter
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7792,6 +7890,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -8630,6 +8729,7 @@ components:
       - database-monitoring alert
       - network-performance alert
       - cost alert
+      - data-quality alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -8652,6 +8752,7 @@ components:
       - DATABASE_MONITORING_ALERT
       - NETWORK_PERFORMANCE_ALERT
       - COST_ALERT
+      - DATA_QUALITY_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
