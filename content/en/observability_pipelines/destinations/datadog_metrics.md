@@ -5,6 +5,7 @@ disable_toc: false
 products:
 - name: Metrics
   icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
 
 {{< product-availability >}}
