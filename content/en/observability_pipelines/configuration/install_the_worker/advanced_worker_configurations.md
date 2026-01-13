@@ -77,7 +77,7 @@ The following is a list of bootstrap options, their related pipeline environment
 : <li style="list-style-type: '- '">The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.</li>
 : <li style="list-style-type: '- '">The <code>DD_PROXY_HTTP(S)</code> and <code>HTTP(S)_PROXY</code> environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.</li>
 
-`secrets`
+`secret`
 : **Description**: Connects the Worker to your secrets manager. See [Secrets Management][12] for configuration information.
 
 `site`
