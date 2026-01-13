@@ -427,7 +427,7 @@ This directory structure simplifies the process of querying your historical log 
 [1]: /logs/indexes/#exclusion-filters
 [2]: /logs/archives/rehydrating/
 [3]: https://app.datadoghq.com/logs/pipelines/log-forwarding
-[4]: /observability_pipelines/archive_logs/
+[4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
 [5]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 [7]: /integrations/azure/
@@ -438,4 +438,4 @@ This directory structure simplifies the process of querying your historical log 
 [12]: /account_management/rbac/permissions#logs_read_index_data
 [13]: /account_management/rbac/permissions#logs_read_data
 [14]: /logs/explorer/live_tail/
-[15]: /service_management/events/explorer/
+[15]: /events/explorer/

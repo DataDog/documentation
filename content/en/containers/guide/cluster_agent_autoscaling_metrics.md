@@ -23,6 +23,8 @@ further_reading:
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
 
+<div class="alert alert-info">This page describes using Kubernetes Horizontal Pod Autoscaler (HPA). For Datadog Kubernetes Autoscaling, see <a href="/containers/autoscaling">Kubernetes Autoscaling</a>.</div>
+
 ## Overview
 
 Horizontal Pod Autoscaling, introduced in [Kubernetes v1.2][1], allows autoscaling off of basic metrics like `CPU`, but it requires a resource called `metrics-server` to run alongside your application. As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].

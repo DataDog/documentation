@@ -793,13 +793,6 @@
       "description": "Update an existing incident returns \"OK\" response"
     }
   ],
-  "UpdateIncidentAttachments": [
-    {
-      "group": "incidents",
-      "suffix": "_3881702075",
-      "description": "Create an incident attachment returns \"OK\" response"
-    }
-  ],
   "CreateIncidentIntegration": [
     {
       "group": "incidents",
@@ -1237,6 +1230,20 @@
       "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
+  "CreateUserNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification channel for a user returns \"Created\" response"
+    }
+  ],
+  "CreateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification rule for a user returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
@@ -1256,6 +1263,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Update On-Call schedule returns \"OK\" response"
+    }
+  ],
+  "UpdateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update an On-Call notification rule for a user returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -1434,18 +1448,6 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
-  "AttachJiraIssue": [
-    {
-      "group": "security_monitoring",
-      "suffix": "_3042842144",
-      "description": "Attach security finding to a Jira issue returns \"OK\" response"
-    },
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Attach security findings to a Jira issue returns \"OK\" response"
-    }
-  ],
   "AttachCase": [
     {
       "group": "security_monitoring",
@@ -1479,23 +1481,6 @@
       "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
     }
   ],
-  "CreateJiraIssues": [
-    {
-      "group": "security_monitoring",
-      "suffix": "_379590688",
-      "description": "Create Jira issue for security finding returns \"Created\" response"
-    },
-    {
-      "group": "security_monitoring",
-      "suffix": "_829823123",
-      "description": "Create Jira issue for security findings returns \"Created\" response"
-    },
-    {
-      "group": "security_monitoring",
-      "suffix": "",
-      "description": "Create Jira issues for security findings returns \"Created\" response"
-    }
-  ],
   "CreateSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -1506,6 +1491,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2323193894",
+      "description": "Create a detection rule with detection method 'anomaly_detection' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1656,6 +1646,18 @@
       "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
+  "SearchSecurityFindings": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Search security findings returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3678541639",
+      "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
   "TestSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -1708,6 +1710,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2609327779",
+      "description": "Validate a detection rule with detection method 'new_value' with enabled feature 'instantaneousBaseline' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1927,6 +1934,13 @@
       "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
+  "CreateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create team notification rule returns \"OK\" response"
+    }
+  ],
   "SyncTeams": [
     {
       "group": "teams",
@@ -1953,6 +1967,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update permission setting for team returns \"OK\" response"
+    }
+  ],
+  "UpdateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update team notification rule returns \"OK\" response"
     }
   ],
   "CreateUser": [

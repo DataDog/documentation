@@ -1,7 +1,12 @@
 ---
 title: Send Logs to Observability Pipelines with Filebeat
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
 ---
+
+{{< product-availability >}}
 
 ## Overview
 

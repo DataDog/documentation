@@ -379,4 +379,4 @@ Lock screen widgets for On-Call, Monitors, SLOs, Incidents, and Dashboards are s
 [2]: /dashboards/widgets/slo/#setup
 [3]: /monitors/
 [4]: /dashboards/
-[5]: /service_management/on-call/
+[5]: /incident_response/on-call/

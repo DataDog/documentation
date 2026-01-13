@@ -48,8 +48,8 @@ tile:
   title: Rollbar
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar エラーイベント" popup="true">}}
+<!-- SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+![Rollbar エラー イベント][1]
 
 ## 概要
 
@@ -67,7 +67,7 @@ Rollbar を Datadog に接続して、以下のことができます。
 
 ### インストール
 
-1. [Rollbar インテグレーションタイル][1]に移動し、**Install Integration** をクリックします。
+1. [Rollbar integration tile][2] に移動し、**Install Integration** をクリックします。
 2. インテグレーションタイルから、既存の API キーをクリックして選択するか、このインテグレーション用に新しい API キーを作成します。
 
 ### 構成
@@ -77,12 +77,12 @@ Rollbar を Datadog に接続して、以下のことができます。
 1. Rollbar で、Projects ページに移動します。
 2. プラスボタン **\[ + \]** をクリックして、プロジェクトにインテグレーションを追加します。
 
-   {{< img src="/integrations/rollover/rollover_project.png" alt="Rollbar プロジェクトページ" style="width:100%" >}}
+   ![Rollbar プロジェクト ページ][3]
 
 3. リストから Datadog を選択します。
 4. Datadog の Rollbar インテグレーションタイルから API キーをコピーし、Rollbar の API キーボックスに貼り付けます。
 
-この時点で、**Send Test Notification** ボタンをクリックし、構成が正しく行われていることを確認します。これをクリックすると、[イベントエクスプローラー][2]に Rollbar からのイベントが表示されます。
+ここで、設定が正しいことを確認するために **Send Test Notification** ボタンをクリックします。クリック後、[Events Explorer][4] に Rollbar からのイベントが表示されるはずです。
 
 ## 収集データ
 
@@ -100,8 +100,10 @@ Rollbar インテグレーションには、サービスチェックは含まれ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/rollbar
-[2]: https://app.datadoghq.com/event/explorer
-[3]: https://docs.datadoghq.com/ja/help/
+[1]: images/rollbar_error.png
+[2]: https://app.datadoghq.com/account/settings#integrations/rollbar
+[3]: images/rollover_project.png
+[4]: https://app.datadoghq.com/event/explorer
+[5]: https://docs.datadoghq.com/ja/help/
