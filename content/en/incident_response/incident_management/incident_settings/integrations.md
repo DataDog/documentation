@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Datadog Incident Management integrates with popular collaboration tools, such as Slack, Microsoft Teams, Zoom, Jira, Confluence, ServiceNow, Google Meet, and Google Drive.
+Datadog Incident Management integrates with popular collaboration tools, such as Slack, Microsoft Teams, Google Chat, Zoom, Jira, Confluence, ServiceNow, Google Meet, and Google Drive.
 
 To integrate Incident Management with a third-party application, install that application's integration in the [Datadog integrations library][1].
 
@@ -23,6 +23,10 @@ For a full overview of Slack configuration options in Datadog Incident Managemen
 ## Microsoft Teams
 
 For a full overview of Microsoft Teams configuration options in Datadog Incident Management, including incident declaration, channel automation, message syncing, responder management, and notification settings, see [Integrate Microsoft Teams with Datadog Incident Management][17].
+
+## Google Chat
+
+For a full overview of Google Chat configuration options in Datadog Incident Management, including space automation, see [Integrate Google Chat with Datadog Incident Management][18].
 
 ## Other integrations
 
@@ -57,3 +61,4 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 [15]: /integrations/servicenow/
 [16]: /integrations/zoom_incident_management/
 [17]: /incident_response/incident_management/integrations/microsoft_teams
+[18]: /incident_response/incident_management/integrations/google_chat

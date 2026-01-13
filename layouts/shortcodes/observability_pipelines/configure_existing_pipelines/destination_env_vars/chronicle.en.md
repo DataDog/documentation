@@ -1,2 +1,2 @@
-- Google Chronicle endpoint URL:
+- Google SecOps endpoint URL:
    - Stored in the environment variable `DD_OP_DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.
