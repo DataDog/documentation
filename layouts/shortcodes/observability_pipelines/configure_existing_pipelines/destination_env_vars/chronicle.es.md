@@ -1,0 +1,2 @@
+- URL del endpoint de Google Chronicle:
+   - Almacenado en la variable de entorno `DD_OP_DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.

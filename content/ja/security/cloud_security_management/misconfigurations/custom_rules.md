@@ -12,7 +12,7 @@ further_reading:
   text: 独自の Rego ルールを作成する
 - link: security/default_rules
   tag: ドキュメント
-  text: デフォルトの CSM Misconfigurations クラウド構成コンプライアンスルールを調べる
+  text: デフォルトの Cloud Security Misconfigurations クラウド構成コンプライアンス ルールを確認する
 - link: security/misconfigurations/frameworks_and_benchmarks
   tag: ドキュメント
   text: フレームワークおよび業界のベンチマークの詳細
@@ -31,7 +31,7 @@ title: カスタムルールを作成する
 
 1. コピーしたいルールを探すには、次のいずれかの方法を行います。
    - [**Misconfigurations Rules**][1] ページに移動します。コピーしたいルールを選択し、その詳細ページを開きます。
-   - [**Misconfigurations Explorer**][2] に移動します。誤構成を選択してその詳細を開き、**Edit Rule** を選択します。
+   - [**Misconfigurations explorer**][2] に移動します。誤構成を選択して詳細を開き、 **Edit Rule** を選択します。
 2. 新しいルールのために必要な変更を行います。
 3. 詳細ページの一番下までスクロールして、**Clone Rule** をクリックします。
 
@@ -59,7 +59,7 @@ title: カスタムルールを作成する
 
 ## 誤構成のタグ付け
 
-CSM Misconfigurations コンプライアンスルールを作成、複製、または修正するときに、誤構成に適用するタグを指定して、誤構成をタグでグループ化、フィルター、および検索できるようにすることができます。ルールを複製する場合、一部のタグは新しいルールに引き継がれ、他のタグは引き継がれません (以下の表を参照)。
+Cloud Security Misconfigurations のコンプライアンス ルールを作成・複製・変更する際は、誤構成に適用するタグを指定できます。タグで誤構成をグループ化、フィルタリング、検索できます。ルールを複製すると、一部のタグは新しいルールに引き継がれますが、引き継がれないものもあります (下表を参照)。
 
 ほぼすべての Key-Value をタグとして割り当てることができます。次の表は、一般的なセキュリティシナリオで有用なタグを示したものです。
 

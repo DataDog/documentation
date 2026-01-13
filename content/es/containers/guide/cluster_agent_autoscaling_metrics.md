@@ -3,6 +3,8 @@ aliases:
 - /es/agent/guide/cluster-agent-custom-metrics-server
 - /es/agent/cluster_agent/external_metrics
 - /es/containers/cluster_agent/external_metrics
+description: Configurar el Horizontal Pod Autoscaler en Kubernetes para utilizar métricas
+  personalizadas y externas de Datadog con el Cluster Agent
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
@@ -22,17 +24,19 @@ further_reading:
 title: Escalado automático con Cluster Agent personalizado y métricas externas
 ---
 
+<div class="alert alert-info">Esta página describe el uso del Horizontal Pod Autoscaler (HPA) en Kubernetes. Para Datadog Kubernetes Autoscaling, consulta <a href="/containers/autoscaling">Kubernetes Autoscaling</a>.</div>
+
 ## Información general
 
-El escalado automático horizontal de pods, introducido en [Kubernetes v1.2][1], permite el escalado automático a partir de métricas básicas como `CPU`, pero requiere un recurso llamado `metrics-server` para ejecutarse junto a tu aplicación. A partir de Kubernetes v1.6, es posible el escalado automático a partir de [métricas personalizadas][2].
+El escalado automático horizontal de pods de Kubernetes, introducido en [Kubernetes v1.2][1], permite el escalado automático a partir de métricas básicas como `CPU`, pero requiere un recurso llamado `metrics-server` para ejecutarse junto a tu aplicación. A partir de Kubernetes v1.6, es posible el escalado automático a partir de [métricas personalizadas][2].
 
 Las métricas personalizadas son definidas por el usuario y se recopilan desde dentro del clúster. A partir de Kubernetes v1.10, se introdujo el soporte para métricas externas para escalar automáticamente cualquier métrica procedente de fuera de clúster, como las recopiladas por Datadog.
 
-Primero debes registrar Cluster Agent como proveedor de métricas externas. A continuación, adapta tus HPA para que se basen en las métricas proporcionadas por Cluster Agent.
+Primero debes registrar el Cluster Agent como proveedor de métricas externas. A continuación, adapta tus HPA para que se basen en las métricas proporcionadas por Cluster Agent.
 
 A partir de la v1.0.0, el Custom Metrics Server de Datadog Cluster Agent implementa el Proveedor de métricas externas para las métricas externas. En esta página, se explica cómo configurarlo y cómo escalar automáticamente tu carga de trabajo de Kubernetes en función de las métricas de Datadog.
 
-## Configuración
+## Instalación
 
 ### Requisitos
 
@@ -43,32 +47,7 @@ A partir de la v1.0.0, el Custom Metrics Server de Datadog Cluster Agent impleme
 ### Instalación
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Para habilitar el servidor de métricas externas con tu Cluster Agent en Helm, actualiza tu archivo [values.yaml][1] con las siguientes configuraciones. Proporciona una Clave de API de Datadog válida, una clave de aplicación, y configura el `clusterAgent.metricsProvider.enabled` en `true`. Luego vuelve a desplegar tu tabla de Datadog Helm:
-
-  ```yaml
-  datadog:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-    #(...)
-
-  clusterAgent:
-    enabled: true
-    # Habilite metricsProvider para poder escalar según las métricas en Datadog
-    metricsProvider:
-      # clusterAgent.metricsProvider.enabled
-      # Establézca esto como verdadero para habilitar el Proveedor de métricas
-      enabled: true
-  ```
-
-Esto actualiza automáticamente las configuraciones RBAC necesarias y establece las correspondientes `Service` y `APIService` para que Kubernetes las utilice.
-
-Alternativamente, las claves pueden establecerse haciendo referencia a los nombres de `Secrets` creados previamente que contienen las claves de datos `api-key` y `app-key` con las configuraciones `datadog.apiKeyExistingSecret` y `datadog.appKeyExistingSecret`.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Para habilitar el servidor de métricas externas con tu Cluster Agent gestionado por el Datadog Operator, primero [configura el Datadog Operator][1]. A continuación, proporciona una clave de API de Datadog válida, una clave de aplicación, y configura `features.externalMetricsServer.enabled` en `true` en tu recurso personalizado `DatadogAgent`:
 
@@ -81,14 +60,14 @@ Para habilitar el servidor de métricas externas con tu Cluster Agent gestionado
     global:
       credentials:
         apiKey: <DATADOG_API_KEY>
-        appKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_APP_KEY>
 
     features:
       externalMetricsServer:
         enabled: true
   ```
 
-Operator actualiza automáticamente las configuraciones RBAC necesarias y establece los correspondientes `Service` y `APIService` para que Kubernetes los utilice.
+El Operator actualiza automáticamente las configuraciones RBAC necesarias y establece los correspondientes `Service` y `APIService` para que Kubernetes los utilice.
 
 Las claves pueden establecerse alternativamente haciendo referencia a los nombres de `Secrets` creados previamente y a las claves de datos que almacenan tus claves de API y de aplicación de Datadog.
   ```yaml
@@ -113,9 +92,35 @@ Las claves pueden establecerse alternativamente haciendo referencia a los nombre
 
 [1]: /es/agent/guide/operator-advanced
 {{% /tab %}}
-{{% tab "Daemonset" %}}
+{{% tab "Helm" %}}
 
-#### Custom Metrics Server
+Para habilitar el servidor de métricas externo con tu Cluster Agent en Helm, actualiza tu archivo [datadog-values.yaml][1] con las siguientes configuraciones. Proporciona una clave de API y una clave de aplicación Datadog válidas, y configura `clusterAgent.metricsProvider.enabled` como `true`. A continuación, vuelva a desplegar tu Datadog Helm chart:
+
+  ```yaml
+  datadog:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+    #(...)
+
+  clusterAgent:
+    enabled: true
+    # Enable the metricsProvider to be able to scale based on metrics in Datadog
+    metricsProvider:
+      # clusterAgent.metricsProvider.enabled
+      # Set this to true to enable Metrics Provider
+      enabled: true
+  ```
+
+Esto actualiza automáticamente las configuraciones RBAC necesarias y establece las correspondientes `Service` y `APIService` para que Kubernetes las utilice.
+
+Alternativamente, las claves pueden establecerse haciendo referencia a los nombres de `Secrets` creados previamente que contienen las claves de datos `api-key` y `app-key` con las configuraciones `datadog.apiKeyExistingSecret` y `datadog.appKeyExistingSecret`.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
+
+#### Servidor de métricas personalizadas
 
 Para activar Custom Metrics Server, primero sigue las instrucciones para [configurar el Datadog Cluster Agent][1] dentro de tu clúster. Una vez que hayas verificado que el despliegue base se ha realizado correctamente, edita tu manifiesto `Deployment` para el Datadog Cluster Agent con los siguientes pasos:
 
@@ -142,7 +147,7 @@ Una vez que Datadog Cluster Agent esté en funcionamiento, aplica algunas polít
         port: 8443
         targetPort: 8443
     ```
-    **Nota:** Por defecto, Cluster Agent espera estas solicitudes a través del puerto `8443`. Sin embargo, si tu Cluster Agent `Deployment` ha establecido la variable de entorno `DD_EXTERNAL_METRICS_PROVIDER_PORT` en algún otro valor de puerto, cambia el `targetPort` de este `Service` en consecuencia.
+    **Nota:** Por defecto, el Cluster Agent espera estas solicitudes a través del puerto `8443`. Sin embargo, si tu Cluster Agent `Deployment` ha establecido la variable de entorno `DD_EXTERNAL_METRICS_PROVIDER_PORT` en algún otro valor de puerto, cambia el `targetPort` de este `Service` en consecuencia.
 
     Aplica este `Service` ejecutando `kubectl apply -f custom-metric-server.yaml`
 2. Descarga el archivo [archivo de reglas RBAC `rbac-hpa.yaml`][2].
@@ -183,27 +188,7 @@ Para que el escalado automático funcione correctamente, las consultas personali
 La Definición personalizada de recursos (CRD) para el objeto `DatadogMetric` puede ser añadida a tu clúster de Kubernetes usando Helm, Datadog Operator, o Daemonset:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Para activar el uso de `DatadogMetric` CRD, actualiza tu configuración [values.yaml][1] de Helm para establecer `clusterAgent.metricsProvider.useDatadogMetrics` en `true`. A continuación, vuelve a desplegar tu tabla Helm de Datadog:
-
-  ```yaml
-  clusterAgent:
-    enabled: true
-    metricsProvider:
-      enabled: true
-      # clusterAgent.metricsProvider.useDatadogMetrics
-      # Habilitar el uso de DatadogMetric CRD para el escalado automático en consultas arbitrarias de Datadog
-      useDatadogMetrics: true
-  ```
-
-**Nota:** Esto intenta instalar `DatadogMetric` CRD automáticamente. Si ese CRD ya existe antes de la instalación inicial de Helm, puede entrar en conflicto.
-
-Esto actualiza automáticamente los archivos RBAC necesarios y dirige el Cluster Agent para gestionar estas consultas HPA a través de estos recursos `DatadogMetric`.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Para activar el uso de `DatadogMetric` CRD, actualiza tu recurso personalizado de `DatadogAgent` y establece `features.externalMetricsServer.useDatadogMetrics` en `true`.
 
@@ -216,7 +201,7 @@ Para activar el uso de `DatadogMetric` CRD, actualiza tu recurso personalizado d
     global:
       credentials:
         apiKey: <DATADOG_API_KEY>
-        appKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_APP_KEY>
     features:
       externalMetricsServer:
         enabled: true
@@ -226,8 +211,28 @@ Para activar el uso de `DatadogMetric` CRD, actualiza tu recurso personalizado d
 Operator actualiza automáticamente las configuraciones RBAC necesarias y dirige el Cluster Agent para gestionar estas consultas HPA a través de estos recursos `DatadogMetric`.
 
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
-Para activar el uso de `DatadogMetric` CRD, sigue estos pasos adicionales:
+{{% tab "Helm" %}}
+
+Para activar el uso de `DatadogMetric` CRD, actualiza tu configuración [values.yaml][1] de Helm para establecer `clusterAgent.metricsProvider.useDatadogMetrics` en `true`. A continuación, vuelve a desplegar tu tabla Helm de Datadog:
+
+  ```yaml
+  clusterAgent:
+    enabled: true
+    metricsProvider:
+      enabled: true
+      # clusterAgent.metricsProvider.useDatadogMetrics
+      # Enable usage of DatadogMetric CRD to autoscale on arbitrary Datadog queries
+      useDatadogMetrics: true
+  ```
+
+**Nota:** Esto intenta instalar `DatadogMetric` CRD automáticamente. Si ese CRD ya existe antes de la instalación inicial de Helm, puede entrar en conflicto.
+
+Esto actualiza automáticamente los archivos RBAC necesarios y dirige el Cluster Agent para gestionar estas consultas HPA a través de estos recursos `DatadogMetric`.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Manual (DaemonSet)" %}}
+Para activar el uso del CRD `DatadogMetric`, sigue estos pasos adicionales:
 
 1. Instala el `DatadogMetric` CRD en tu clúster.
 
@@ -279,8 +284,6 @@ Una vez configurado tu Cluster Agent y creado `DatadogMetric`, actualiza tu HPA 
 #### Ejemplo de HPA con DatadogMetric
 Una HPA que utiliza el `DatadogMetric` denominado `nginx-requests`, suponiendo que ambos objetos se encuentran en el espacio de nombres `nginx-demo`.
 
-Uso de `apiVersion: autoscaling/v2`:
-
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -303,29 +306,8 @@ spec:
         value: 9
 ```
 
-Uso de `apiVersion: autoscaling/v2beta1`:
-
-```yaml
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginxext
-spec:
-  minReplicas: 1
-  maxReplicas: 3
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx
-  metrics:
-  - type: External
-    external:
-      metricName: datadogmetric@nginx-demo:nginx-requests
-      targetValue: 9
-```
-
-En estos manifiestos:
-- La HPA está configurada para escalar automáticamente el despliegue denominado `nginx`.
+En este manifiesto:
+- La HPA está configurada para el escalado automático del despliegue denominado `nginx`.
 - El número máximo de réplicas creadas es `3` y el mínimo es `1`.
 - La HPA se basa en el `DatadogMetric` `nginx-requests` en el espacio de nombres `nginx-demo`.
 
@@ -348,7 +330,7 @@ spec:
 ```
 
 ### Ejemplo de HPA sin DatadogMetric
-Un manifiesto HPA para el escalado automático de un despliegue NGINX basado en la métrica de Datadog `nginx.net.request_per_s` usando `apiVersion: autoscaling/v2`:
+Un manifiesto HPA para escalar automáticamente un despliegue NGINX basado en la métrica `nginx.net.request_per_s` de Datadog:
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -372,30 +354,7 @@ spec:
         value: 9
 ```
 
-A continuación, se muestra el mismo manifiesto HPA anterior utilizando `apiVersion: autoscaling/v2beta1`:
-```yaml
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: nginxext
-spec:
-  minReplicas: 1
-  maxReplicas: 3
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: nginx
-  metrics:
-  - type: External
-    external:
-      metricName: nginx.net.request_per_s
-      metricSelector:
-        matchLabels:
-            kube_container_name: nginx
-      targetValue: 9
-```
-
-En estos manifiestos:
+En este manifiesto:
 
 - La HPA está configurada para el escalado automático del despliegue denominado `nginx`.
 - El número máximo de réplicas creadas es `3` y el mínimo es `1`.
@@ -413,6 +372,13 @@ Para ello, Datadog Cluster Agent crea automáticamente recursos de `DatadogMetri
 
 Si decides migrar una HPA posteriormente para hacer referencia a un `DatadogMetric`, Datadog Cluster Agent limpia el recurso generado automáticamente al cabo de unas horas.
 
+Opcionalmente, puedes desactivar este comportamiento configurando `DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN` como `false`, como:
+
+```yaml
+- name: DD_EXTERNAL_METRICS_PROVIDER_ENABLE_DATADOGMETRIC_AUTOGEN
+  value: "false"
+```
+
 ## Consultas al Cluster Agent
 El Cluster Agent realiza las consultas de los objetos `DatadogMetric` cada 30 segundos. Cluster Agent también agrupa en lotes de 35 las consultas realizadas a la métrica. Por lo tanto, se incluyen 35 consultas `DatadogMetric` en una única solicitud a la API de métricas de Datadog.
 
@@ -429,7 +395,7 @@ Cluster Agent también consulta los últimos cinco minutos de datos por defecto 
   value: "900"
 ```
 
-## Resolución de problemas
+## Solucionar problemas
 
 ### Estado de DatadogMetric
 Datadog Cluster Agent se encarga de actualizar el subrecurso `status` de todos los recursos `DatadogMetric` para reflejar los resultados de las consultas a Datadog. Esta es la principal fuente de información para entender qué ocurre si algo está fallando. Puedes ejecutar lo siguiente para obtener esta información:
@@ -502,9 +468,7 @@ Por su parte, `AverageValue` luce así:
         averageValue: <METRIC_VALUE>
 ```
 
-Para `apiVersion: autoscaling/v2beta1`, las opciones respectivas son `targetValue` y `targetAverageValue`.
-
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

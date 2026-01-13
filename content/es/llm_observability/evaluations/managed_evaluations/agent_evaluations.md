@@ -9,9 +9,6 @@ further_reading:
 - link: /llm_observability/setup
   tag: Documentación
   text: Aprende a configurar la observabilidad de LLM
-- link: https://www.datadoghq.com/blog/llm-observability-hallucination-detection/
-  tag: Blog
-  text: Detecta alucinaciones en tus aplicaciones RAG LLM con Datadog LLM Observability
 title: Evaluaciones del Agent
 ---
 
@@ -203,66 +200,6 @@ result = triage_agent.run_sync(
 - Asegúrate de que tus herramientas utilizan sugerencias de tipos: la evaluación se basa en definiciones de esquemas.
 - Asegúrate de incluir una descripción de la herramienta (por ejemplo, la descripción entre comillas bajo el nombre de la función), ya que se utiliza en el proceso de autoinstrumentación para analizar el esquema de la herramienta.
 - Valida que tu prompt de LLM incluye suficiente contexto para la correcta construcción de argumentos.
-
-
-## Cumplimiento de objetivos
-
-Un agent puede llamar a las herramientas correctamente y aun así no lograr el objetivo previsto por el usuario. Esta evaluación comprueba si tu chatbot de LLM puede llevar a cabo con éxito una sesión completa satisfaciendo eficazmente las necesidades del usuario de principio a fin. Esta medida de cumplimiento sirve como indicador de la satisfacción del usuario a lo largo de una interacción de varios turnos y es especialmente valiosa para las aplicaciones de chatbot de LLM.
-
-### Resumen de la evaluación
-| **Tipo de tramo** | **Método** | **Definición** | 
-|---|---|---|
-| Evaluado en tramos LLM | Evaluado mediante un LLM | Comprueba si el agent ha resuelto la intención del usuario analizando períodos de sesión completos. Solo se ejecuta en sesiones marcadas como completadas. |
-
-### Ejemplo
-{{< img src="llm_observability/evaluations/goal_completeness_1.png" alt="Una evaluación de Cumplimiento de objetivos detectada por un LLM en LLM Observability" style="width:100%;" >}}
-
-
-##### Cómo utilizarlo
-<div class="alert alert-info">El cumplimiento de objetivos solo está disponible para OpenAI y Azure OpenAI.</div>
-
-Para habilitar la evaluación de cumplimiento de objetivos, debes instrumentar tu aplicación para realizar un seguimiento de las sesiones y su estado de finalización. Esta evaluación analiza las sesiones completas para determinar si se han cumplido todas las intenciones del usuario.
-
-La evaluación requiere el envío de un tramo con una etiqueta específica cuando finaliza la sesión. Esta señal permite a la evaluación identificar los límites de la sesión y activar la evaluación de integridad:
-
-Para una precisión óptima de la evaluación y el control de costes, es preferible enviar una etiqueta cuando la sesión haya terminado y configurar la evaluación para que se ejecute solo en la sesión con esta etiqueta. La evaluación devuelve un desglose detallado que incluye las intenciones resueltas, las intenciones no resueltas y el razonamiento de la evaluación. Una sesión se considera incompleta si más del 50% de las intenciones identificadas siguen sin resolverse.
-
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import llm
-
-# Llama a esta función cuando tu sesión haya terminado
-@llm(model_name="model_name", model_provider="model_provider")
-def send_session_ended_span(input_data, output_data) -> None:
-    """Send a span to indicate the chat session has ended."""
-    LLMObs.annotate(
-        input_data=input_data,
-        output_data=output_data,
-        tags={"session_status": "completed"}
-    )
-{{< /code-block >}}
-
-Sustituye `session_status` y `completed` por la clave y el valor de etiqueta que prefieras.
-
-El tramo debe contener `input_data` y `output_data` significativos que representen el estado final de la sesión. Esto ayuda a la evaluación a comprender el contexto y los resultados de la sesión cuando se evalúa la integridad.
-
-##### Configuración del cumplimiento de los objetivos
-
-Después de instrumentar tu aplicación para enviar intervalos de fin de sesión, configura la evaluación para que se ejecute solo en sesiones con tu etiqueta específica. Este enfoque específico garantiza que la evaluación analice sesiones completas en lugar de interacciones parciales.
-
-1. Ve a la configuración de **Goal Completeness** (Cumplimiento de objetivos).
-2. Configura los datos de evaluación:
-   - Selecciona **tramos** como tipo de datos, ya que Cumplimiento de objetivos se ejecuta en tramos LLM, que contiene el historial completo de la sesión.
-   - Elige el nombre de etiqueta asociado al tramo que corresponda a tu función de fin de sesión (por ejemplo, `send_session_ended_span`).
-   - En la sección **tags** (etiquetas), especifica la etiqueta que configuraste en tu instrumentación (por ejemplo, `session_status:completed`).
-
-Esta configuración garantiza que las evaluaciones se ejecuten solo en sesiones completas. Esto proporciona evaluaciones precisas de la resolución de la intención del usuario.
-
-### Solucionar problemas
-- Si se omiten evaluaciones, comprueba que estás etiquetando correctamente los tramos de fin de sesión.
-- Asegúrate de que tu agent está configurado para señalar el final del ciclo de solicitud de un usuario.
-
 
 [1]: /es/llm_observability/evaluations/managed_evaluations/#create-new-evaluations
 [2]: /es/llm_observability/evaluations/managed_evaluations/#edit-existing-evaluations
