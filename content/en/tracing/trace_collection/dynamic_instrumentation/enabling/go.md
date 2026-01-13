@@ -14,29 +14,30 @@ further_reading:
 ---
 
 {{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
-    Dynamic Instrumentation for Go is in limited preview, and is not available to all customers.
-    Request access to join the waiting list.
-    Note that <a href="#limitations">some limitations</a> apply to the preview.
+    Dynamic Instrumentation for Go is in limited preview and is not available to all customers.
+    Request access to join the waiting list.<br>
+    **Note**: <a href="#unsupported-features">Some limitations</a> apply to the preview.
 {{< /beta-callout-private >}}
 
-Dynamic Instrumentation is a feature of supporting Datadog tracing libraries.
+Dynamic Instrumentation is a feature provided by the Datadog tracing library.
 
 ## Installation
 
-### Datadog Agent configuration
+To use Dynamic Instrumentation, you must enable it in both the Datadog Agent and your application.
+
+### Datadog Agent
 
 1. Install or upgrade your Agent to version [7.73.0][6] or higher.
-2. Update Agent configuration to enable Dynamic Instrumentation (note below you'll need to do something similiar for your service as well).
+2. Enable Dynamic Instrumentation in the Agent configuration using one of the following methods, depending on how you deploy the Agent:
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
-Update your `system-probe.yaml` file with:
+Update your `system-probe.yaml` file with the following. This file should be located along `datadog.yaml`, see [agent configuration][101] for location details.
 ```yaml
 dynamic_instrumentation:
   enabled: true
 ```
 
-[101]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Environment variable" %}}
 Add the following to your Datadog Agent manifest:
@@ -56,11 +57,21 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Application / Tracing library configuration
+### Application (tracing library)
 
 1. Install or upgrade the Go tracing library to version >=1.74.6 or >=2.2.3, by following the [relevant instructions][2].
-2. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
-3. After starting your service with Dynamic Instrumentation enabled, you can start using Live Debugger on the [APM > Live Debugger page][3].
+2. Run your service with Dynamic Instrumentation enabled by setting the following environment variable:
+
+   ```
+   DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+   ```
+
+3. Configure Unified Service Tags so that you can filter and group your instrumentations and target active clients across these dimensions:
+   - `DD_SERVICE`
+   - `DD_ENV`
+   - `DD_VERSION`
+4. Restart your service.
+5. After the service starts, you can add and manage instrumentations from the [**APM** > **Live Debugger**][3] page.
 
 ## Configuration
 
@@ -69,32 +80,28 @@ Configure Dynamic Instrumentation using the following environment variables:
 | Environment variable                             | Type          | Description                                                                                                               |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | `DD_DYNAMIC_INSTRUMENTATION_ENABLED`             | Boolean       | Set to `true` to enable Dynamic Instrumentation.                                                                          |
-| `DD_SERVICE`                                     | String        | The [service][5] name, for example, `web-backend`.                                                                        |
-| `DD_ENV`                                         | String        | The [environment][5] name, for example, `production`.                                                                     |
+| `DD_SERVICE`                                     | String        | The [service][5] name. For example: `web-backend`.                                                                        |
+| `DD_ENV`                                         | String        | The [environment][5] name. for example: `production`.                                                                     |
 | `DD_VERSION`                                     | String        | The [version][5] of your service.                                                                                         |
 
 ## What to do next
 
-See [Live Debugger][4] for information about adding instrumentations and browsing and indexing the data.
+See [Live Debugger][4] for information about adding instrumentations, capturing application state, and browsing and indexing the collected data.
 
-## Limitations
+## Supported features
 
-The following limitations apply to the Go implementation:
-
-### Supported features
-
-- [Live Debugger][4] probes for method calls, returns and specific code lines
-- Symbol search for quick probe location selection
+- Adding probes for method calls, returns, and specific code lines
+- Symbol search for probe location selection
 - Capturing variables and return values available at the selected probe location
 - [Sensitive data redaction][7]
 - [Source code integration][8]
 
-### Unsupported features
+## Unsupported features
 
-- Dynamic Instrumenetation log, metrics, spans and span tag probes
+- Dynamic Instrumentation for logs, metrics, spans, and span tag probes
 - Log templates and condition expressions
 - PII redaction based on specific classes or types
-- Propagation of additional `DD_TAGS` set on the service to the probe results tags
+- Propagation of additional `DD_TAGS` set on the service to probe result tags
 
 ## Further reading
 
