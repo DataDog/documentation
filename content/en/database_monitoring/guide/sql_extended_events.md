@@ -1,5 +1,7 @@
 ---
 title: Configuring Query Completion and Query Error Capture on SQL Server
+aliases:
+- /database_monitoring/sql_extended_events
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"

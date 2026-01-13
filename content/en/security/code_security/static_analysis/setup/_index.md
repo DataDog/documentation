@@ -532,7 +532,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 ## Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.

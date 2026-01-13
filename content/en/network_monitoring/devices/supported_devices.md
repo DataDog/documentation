@@ -10,6 +10,180 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
       tag: 'Blog'
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
+
+multifiltersearch:
+  headers:
+    - name: Vendor
+      id: vendor
+    - name: Config Files
+      id: config_files
+  data:
+    - vendor: 3com
+      config_files: '[3com.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com.yaml) <br> [3com-huawei.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com-huawei.yaml)'
+    - vendor: TP-Link
+      config_files: '[tp-link.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tp-link.yaml)'
+    - vendor: A10
+      config_files: '[a10.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/a10.yaml)'
+    - vendor: Alcatel-Lucent
+      config_files: '[alcatel-lucent.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/alcatel-lucent.yaml)'
+    - vendor: Anue
+      config_files: '[anue.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/anue.yaml)'
+    - vendor: APC
+      config_files: '[_apc.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc.yaml) <br> [apc_ups.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/apc_ups.yaml) <br> [_apc-metadata.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc-metadata.yaml)'
+    - vendor: '[Arista](https://docs.datadoghq.com/integrations/snmp_arista/)'
+      config_files: '[arista.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/arista.yaml) <br> [_arista.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_arista.yaml)'
+    - vendor: '[Aruba](https://docs.datadoghq.com/integrations/snmp_aruba/)'
+      config_files: '[aruba-switch.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-switch.yaml) <br> [_aruba-base.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_aruba-base.yaml) <br> [aruba-access-point.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-access-point.yaml) <br> [aruba.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba.yaml)'
+    - vendor: Audiocodes
+      config_files: '[audiocodes-mediant-sbc.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/audiocodes-mediant-sbc.yaml)'
+    - vendor: Avaya
+      config_files: '[avaya.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avaya.yaml)'
+    - vendor: Avocent
+      config_files: '[avocent-acs.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avocent-acs.yaml)'
+    - vendor: Avtech
+      config_files: '[avtech.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avtech.yaml)'
+    - vendor: '[Barracuda](https://docs.datadoghq.com/integrations/crest_data_systems_barracuda_waf/)'
+      config_files: '[barracuda.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/barracuda.yaml)'
+    - vendor: BlueCat
+      config_files: '[bluecat-server.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/bluecat-server.yaml)'
+    - vendor: Brocade
+      config_files: '[brocade.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brocade.yaml)'
+    - vendor: Brother
+      config_files: '[brother.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brother.yaml)'
+    - vendor: '[Chatsworth](https://docs.datadoghq.com/integrations/snmp_chatsworth_products/#overview)'
+      config_files: '[chatsworth_pdu.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chatsworth_pdu.yaml)'
+    - vendor: Checkpoint
+      config_files: '[checkpoint.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint.yaml) <br> [checkpoint-firewall.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint-firewall.yaml)'
+    - vendor: Chrysalis
+      config_files: '[chrysalis.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chrysalis.yaml)'
+    - vendor: '[Cisco](https://docs.datadoghq.com/integrations/snmp_cisco/)'
+      config_files: '[cisco-3850.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml) <br> [cisco-csr1000v.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-csr1000v.yaml) <br> [_cisco-metadata.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-metadata.yaml) <br> [cisco_uc_virtual_machine.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_uc_virtual_machine.yaml) <br> [_cisco-voice.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-voice.yaml)'
+    - vendor: '[Cisco ACI](https://docs.datadoghq.com/integrations/cisco_aci/?tab=host)'
+      config_files: '[cisco-aci.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-aci.yaml)'
+    - vendor: '[Cisco ASA](https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/)'
+      config_files: '[cisco-asa.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa.yaml) <br> [cisco-asa-5525.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa-5525.yaml)'
+    - vendor: Cisco ASR
+      config_files: '[cisco-asr.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asr.yaml)'
+    - vendor: Cisco Catalyst
+      config_files: '[cisco-catalyst.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-catalyst.yaml) <br> [cisco-catalyst-wlc.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-catalyst-wlc.yaml)'
+    - vendor: Cisco ICM
+      config_files: '[cisco_icm.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_icm.yaml)'
+    - vendor: '[Cisco ISE](https://docs.datadoghq.com/integrations/crest_data_systems_cisco_ise/)'
+      config_files: '[cisco-ise.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-ise.yaml)'
+    - vendor: Cisco ISR
+      config_files: '[cisco-isr.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-isr.yaml) <br> [cisco_isr_4431.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_isr_4431.yaml)'
+    - vendor: Cisco Nexus
+      config_files: '[cisco-nexus.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-nexus.yaml)'
+    - vendor: Cisco SB
+      config_files: '[cisco-sb.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-sb.yaml)'
+    - vendor: Cisco UCS
+      config_files: '[cisco-ucs.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-ucs.yaml)'
+    - vendor: Cisco WLC
+      config_files: '[_cisco-wlc.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-wlc.yaml) <br> [cisco-legacy-wlc.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-legacy-wlc.yaml)'
+    - vendor: Citrix
+      config_files: '[citrix.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/citrix.yaml)'
+    - vendor: Cradlepoint
+      config_files: '[cradlepoint.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cradlepoint.yaml)'
+    - vendor: Cyberpower
+      config_files: '[cyberpower-pdu.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cyberpower-pdu.yaml)'
+    - vendor: '[Dell](https://docs.datadoghq.com/integrations/snmp_dell/)'
+      config_files: '[dell-poweredge.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dell-poweredge.yaml) <br> [_dell.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_dell.yaml) <br> [idrac.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/idrac.yaml) <br> [isilon.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/isilon.yaml)'
+    - vendor: Dialogic
+      config_files: '[dialogic-media-gateway.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dialogic-media-gateway.yaml)'
+    - vendor: D-Link
+      config_files: '[dlink.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dlink.yaml)'
+    - vendor: Eaton
+      config_files: '[eaton-epdu.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/eaton-epdu.yaml)'
+    - vendor: ExaGrid
+      config_files: '[exagrid.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/exagrid.yaml)'
+    - vendor: Extreme Networks
+      config_files: '[extreme-switching.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/extreme-switching.yaml)'
+    - vendor: '[F5](https://docs.datadoghq.com/integrations/snmp_f5/)'
+      config_files: '[f5-big-ip.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/f5-big-ip.yaml)'
+    - vendor: FireEye
+      config_files: '[fireeye.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fireeye.yaml)'
+    - vendor: '[Fortinet](https://docs.datadoghq.com/integrations/snmp_fortinet/)'
+      config_files: '[fortinet.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet.yaml) <br> [fortinet-fortigate.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet-fortigate.yaml)'
+    - vendor: Gigamon
+      config_files: '[gigamon.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/gigamon.yaml)'
+    - vendor: '[HP](https://docs.datadoghq.com/integrations/snmp_hewlett_packard_enterprise/)'
+      config_files: '[hp-ilo.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hp-ilo.yaml) <br> [_hp.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_hp.yaml) <br> [hpe-proliant.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hpe-proliant.yaml)'
+    - vendor: Huawei
+      config_files: '[huawei.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/huawei.yaml)'
+    - vendor: iXsystems
+      config_files: '[ixsystems-truenas.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ixsystems-truenas.yaml)'
+    - vendor: IBM
+      config_files: '[ibm.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ibm.yaml)'
+    - vendor: Infinera
+      config_files: '[infinera-coriant-groove.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infinera-coriant-groove.yaml)'
+    - vendor: '[Infoblox](https://docs.datadoghq.com/integrations/rapdev_infoblox/)'
+      config_files: '[infoblox-ipam.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infoblox-ipam.yaml)'
+    - vendor: '[Juniper Networks](https://docs.datadoghq.com/integrations/snmp_juniper/)'
+      config_files: '[juniper.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper.yaml) <br> [juniper-ex.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-ex.yaml) <br> [_juniper-junos-generic.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_juniper-junos-generic.yaml) <br> [juniper-mx.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-mx.yaml)'
+    - vendor: Linksys
+      config_files: '[linksys.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/linksys.yaml)'
+    - vendor: McAfee
+      config_files: '[mcafee-web-gateway.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/mcafee-web-gateway.yaml)'
+    - vendor: '[Meraki](https://docs.datadoghq.com/integrations/meraki/)'
+      config_files: '[meraki-cloud-controller.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki-cloud-controller.yaml) <br> [meraki.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki.yaml)'
+    - vendor: Mikrotik
+      config_files: '[mikrotik-router.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/mikrotik-router.yaml)'
+    - vendor: Nasuni
+      config_files: '[nasuni-filer.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nasuni-filer.yaml)'
+    - vendor: NEC
+      config_files: '[nec-univerge.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nec-univerge.yaml)'
+    - vendor: NetApp
+      config_files: '[netapp.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/netapp.yaml)'
+    - vendor: Netgear
+      config_files: '[netgear.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/netgear.yaml)'
+    - vendor: NVIDIA
+      config_files: '[nvidia.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nvidia.yaml)'
+    - vendor: Omron
+      config_files: '[omron-cj-ethernet-ip.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/omron-cj-ethernet-ip.yaml)'
+    - vendor: Opengear
+      config_files: '[_opengear.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_opengear.yaml)'
+    - vendor: '[Palo Alto Networks](https://docs.datadoghq.com/integrations/pan_firewall/)'
+      config_files: '[palo-alto.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto.yaml) <br> [palo-alto-base.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto-base.yaml)'
+    - vendor: Peplink
+      config_files: '[peplink.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/peplink.yaml)'
+    - vendor: '[pfSense](https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/)'
+      config_files: '[pf-sense.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/pf-sense.yaml)'
+    - vendor: Raritan
+      config_files: '[raritan-dominion.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/raritan-dominion.yaml)'
+    - vendor: Riverbed
+      config_files: '[riverbed.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/riverbed.yaml)'
+    - vendor: Ruckus
+      config_files: '[ruckus-zd.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ruckus-zd.yaml)'
+    - vendor: Server Iron
+      config_files: '[server-iron-switch.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/server-iron-switch.yaml)'
+    - vendor: Servertech
+      config_files: '[servertech.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/servertech.yaml)'
+    - vendor: Silverpeak
+      config_files: '[silverpeak-edgeconnect.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/silverpeak-edgeconnect.yaml)'
+    - vendor: Sinetica
+      config_files: '[sinetica-eagle-i.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml)'
+    - vendor: Sophos
+      config_files: '[sophos-xgs-firewall.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/sophos-xgs-firewall.yaml)'
+    - vendor: Synology
+      config_files: '[synology-disk-station.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/synology-disk-station.yaml)'
+    - vendor: Tripplite
+      config_files: '[tripplite_pdu.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tripplite_pdu.yaml)'
+    - vendor: Ubiquiti
+      config_files: '[_ubiquiti.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_ubiquiti.yaml)'
+    - vendor: Velocloud
+      config_files: '[velocloud-edge.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/velocloud-edge.yaml)'
+    - vendor: Vertiv
+      config_files: '[_vertiv.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_vertiv.yaml)'
+    - vendor: VMware
+      config_files: '[vmware-esx.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/vmware-esx.yaml)'
+    - vendor: Watchguard
+      config_files: '[watchguard.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/watchguard.yaml)'
+    - vendor: Western Digital
+      config_files: '[western-digital-mycloud-ex2-ultra.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/western-digital-mycloud-ex2-ultra.yaml)'
+    - vendor: Zebra
+      config_files: '[zebra-printer.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml)'
+    - vendor: Zyxel
+      config_files: '[zyxel-switch.yaml](https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml)'
 ---
 
 ## Supported devices
@@ -23,7 +197,14 @@ The [generic profile][114] collects metrics for all devices not supported by a v
 ### Vendor profiles
 
 The following vendor devices are supported with dedicated profiles.
+If a vendor or device type isn't listed, see the [Troubleshooting](#troubleshooting) section below.
+
+{{< multifilter-search >}}
+
+## Troubleshooting
+
 If a vendor or device type is supported, but the specific model isn't, you can:
+
 * Create new [profiles][2] to start monitoring new device models.
 
 * Contact [Datadog support][1] to put in a request to support your specific model.
@@ -44,213 +225,12 @@ If a vendor or device type is supported, but the specific model isn't, you can:
   snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
   ```
 
-  **Note**: If you do not know the `sysobjectid` of your device, run an `snmpwalk` on a host that can reach your device. Use the output to list the profile to match against.
-<br></br>
-
-| Vendor                                                                                                                                                                                                               | Config files |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ----------- |
-| 3com                                                                                                                                                                                                                 | [3com.yaml][3] <br> [3com-huawei.yaml][126] <br>|
-| TP-Link                                                                                                                                                                                                              | [tp-link.yaml][4] <br> |
-| A10                                                                                                                                                                                                                  | [a10.yaml][5] <br> |
-| Alcatel-lucent                                                                                                                                                                                                       | [alcatel-lucent.yaml][6] <br> |
-| Anue                                                                                                                                                                                                                 | [anue.yaml][7] <br> |
-| Apc                                                                                                                                                                                                                  | [_apc.yaml][8] <br>[apc_ups.yaml][9] [_apc-metadata.yaml][127]<br> |
-| [Arista][10]                                                                                                                                                                                                         | [arista.yaml][11] <br>[_arista.yaml][12] <br> |
-| [Aruba][13]                                                                                                                                                                                                          | [aruba-switch.yaml][14] <br>[_aruba-base.yaml][15] <br>[aruba-access-point.yaml][16] <br>[aruba.yaml][17] <br> |
-| Audiocodes                                                                                                                                                                                                           | [audiocodes-mediant-sbc.yaml][18] <br> |
-| Avaya                                                                                                                                                                                                                | [avaya.yaml][19] <br> |
-| Avocent                                                                                                                                                                                                              | [avocent-acs.yaml][20] <br> |
-| Avtech                                                                                                                                                                                                               | [avtech.yaml][21] <br> |
-| [Barracuda][22]                                                                                                                                                                                                      | [barracuda.yaml][23]<br> |
-| Bluecat                                                                                                                                                                                                              | [bluecat-server.yaml][24] <br> |
-| Brocade                                                                                                                                                                                                              | [brocade.yaml][25] <br> |
-| Brother                                                                                                                                                                                                              | [brother.yaml][26] <br> |
-| [Chatsworth][27]                                                                                                                                                                                                     | [chatsworth_pdu.yaml][28] <br> |
-| Checkpoint                                                                                                                                                                                                           | [checkpoint.yaml][29] <br>[checkpoint-firewall.yaml][30] <br> |
-| Chrysalis                                                                                                                                                                                                            | [chrysalis.yaml][31] <br> |
-| [Cisco][32] </br> [Cisco ACI][33] </br> [Cisco ASA][34] </br> Cisco ASR </br> Cisco Catalyst </br> Cisco ICM </br> [Cisco ISE][35] </br> Cisco ISR </br> Cisco Nexus </br> Cisco SB </br> Cisco UCS  </br> Cisco WLC | [cisco-3850.yaml][36]</br> [cisco-asa.yaml][37]  </br>[cisco-asa-5525.yaml][38]  </br>[cisco-asr.yaml][39]  </br>[cisco-catalyst-wlc.yaml][40]  </br>[cisco-catalyst.yaml][41]  </br>[cisco-csr1000v.yaml][42]  </br>[cisco_icm.yaml][43]  </br>[cisco-ise.yaml][44]  </br>[cisco-isr.yaml][45]  </br>[cisco_isr_4431.yaml][46]  </br>[cisco-nexus.yaml][47]  </br>[cisco-sb.yaml][48]  </br>[cisco-ucs.yaml][49]  </br>[_cisco-metadata.yaml][50]  </br>[_cisco-wlc.yaml][51] </br>[cisco-legacy-wlc.yaml][52]  </br>[cisco_uc_virtual_machine.yaml][53] </br>[_cisco-voice.yaml][128]|
-| Citrix                                                                                                                                                                                                               | [citrix.yaml][54] <br> |
-| Cradlepoint                                                                                                                                                                                                          | [cradlepoint.yaml][55] <br> |
-| Cyberpower                                                                                                                                                                                                           | [cyberpower-pdu.yaml][56] <br> |
-| [Dell][57]                                                                                                                                                                                                           | [dell-poweredge.yaml][58] <br>[_dell.yaml][59] <br> [idrac.yaml][60] <br> [isilon.yaml][61] <br> |
-| Dialogic                                                                                                                                                                                                             | [dialogic-media-gateway.yaml][62] <br> |
-| Dlink                                                                                                                                                                                                                | [dlink.yaml][63] <br> |
-| Eaton                                                                                                                                                                                                                | [eaton-epdu.yaml][64] <br> |
-| Exagrid                                                                                                                                                                                                              | [exagrid.yaml][65] <br> |
-| Extreme Networks                                                                                                                                                                                                     | [extreme-switching.yaml][66] <br> |
-| [F5][67]                                                                                                                                                                                                             | [f5-big-ip.yaml][68] <br> |
-| Fireeye                                                                                                                                                                                                              | [fireeye.yaml][69] <br> |
-| [Fortinet][70]                                                                                                                                                                                                       | [fortinet.yaml][71] <br>[fortinet-fortigate.yaml][72] <br> |
-| Gigamon                                                                                                                                                                                                              | [gigamon.yaml][73] <br> |
-| [HP][74]                                                                                                                                                                                                             | [hp-ilo4.yaml][75] <br>[_hp.yaml][76] <br>[hpe-proliant.yaml][77] <br> |
-| Huawei                                                                                                                                                                                                               | [_huawei.yaml][78] <br> |
-| iXsystems                                                                                                                                                                                                            | [ixsystems-truenas.yaml][79] <br> |
-| IBM                                                                                                                                                                                                                  | [ibm.yaml][80] <br> |
-| Infinera                                                                                                                                                                                                             | [infinera-coriant-groove.yaml][81] <br> |
-| [Infoblox][82]                                                                                                                                                                                                       | [infoblox-ipam.yaml][83] <br> |
-| [Juniper Networks][84]                                                                                                                                                                                               | [_juniper.yaml][85] <br>[juniper-ex.yaml][86] <br>[_juniper-junos-generic.yaml][87] <br>[juniper-mx.yaml][88]
-| Linksys                                                                                                                                                                                                              | [linksys.yaml][89] <br> |
-| McAfee                                                                                                                                                                                                               | [mcafee-web-gateway.yaml][90] <br> |
-| [Meraki][91]                                                                                                                                                                                                         | [meraki-cloud-controller.yaml][92] <br>[meraki.yaml][93] <br> |
-| Mikrotik                                                                                                                                                                                                             | [mikrotik-router.yaml][94] <br> |
-| Nasuni                                                                                                                                                                                                               | [nasuni-filer.yaml][95] <br> |
-| NEC                                                                                                                                                                                                                  | [nec-univerge.yaml][96] <br> |
-| NetApp                                                                                                                                                                                                               | [netapp.yaml][97] <br> |
-| Netgear                                                                                                                                                                                                              | [netgear.yaml][98] <br> |
-| NVIDIA                                                                                                                                                                                                               | [nvidia.yaml][99] <br> |
-| Omron                                                                                                                                                                                                                | [omron-cj-ethernet-ip.yaml][100] <br> |
-| Opengear                                                                                                                                                                                                             | [_opengear.yaml][101] <br> |
-| [Palo Alto Networks][102]                                                                                                                                                                                            | [palo-alto.yaml][103] <br>[_palo-alto.yaml][104] <br> |
-| Peplink                                                                                                                                                                                                              | [peplink.yaml][105] <br> |
-| [pfSense][106]                                                                                                                                                                                                       | [pf-sense.yaml][107] <br> |
-| Raritan                                                                                                                                                                                                              | [raritan-dominion.yaml][108] <br> |
-| Riverbed                                                                                                                                                                                                             | [riverbed.yaml][109] <br> |
-| Ruckus                                                                                                                                                                                                               | [ruckus.yaml][110] <br> |
-| Server Iron                                                                                                                                                                                                          | [server-iron-switch.yaml][111] <br> |
-| Servertech                                                                                                                                                                                                           | [servertech.yaml][112] <br> |
-| Silverpeak                                                                                                                                                                                                           | [silverpeak-edgeconnect.yaml][113] <br> |
-| Sinetica                                                                                                                                                                                                             | [sinetica-eagle-i.yaml][114] <br> |
-| Sophos                                                                                                                                                                                                               | [sophos-xgs-firewall.yaml][115] <br> |
-| Synology                                                                                                                                                                                                             | [synology-disk-station.yaml][116] <br> |
-| Tripplite                                                                                                                                                                                                            | [tripplite.yaml][117] <br> |
-| Ubiquiti                                                                                                                                                                                                             | [_ubiquiti.yaml][118] <br> |
-| Velocloud                                                                                                                                                                                                            | [velocloud-edge.yaml][119] <br> |
-| Vertiv                                                                                                                                                                                                               | [_vertiv.yaml][120] <br> |
-| VMware                                                                                                                                                                                                               | [vmware-esx.yaml][121] <br> |
-| Watchguard                                                                                                                                                                                                           | [watchguard.yaml][122] <br> |
-| Western Digital                                                                                                                                                                                                      | [western-digital-mycloud-ex2-ultra.yaml][123] <br> |
-| Zebra                                                                                                                                                                                                                | [zebra-printer.yaml][124] <br> |
-| Zyxel                                                                                                                                                                                                                | [zyxel-switch.yaml][125] <br> |
+  **Note**: If you do not know the `sysobjectid` of your device, run an `snmpwalk` on a host that can reach your device. Use the output to list the profile to match against
 
 
 [1]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
 [2]: /network_monitoring/devices/profiles/
-[3]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com.yaml
-[4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tp-link.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/a10.yaml
-[6]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/alcatel-lucent.yaml
-[7]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/anue.yaml
-[8]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc.yaml
-[9]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/apc_ups.yaml
-[10]: https://docs.datadoghq.com/integrations/snmp_arista/
-[11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/arista.yaml
-[12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_arista.yaml
-[13]: https://docs.datadoghq.com/integrations/snmp_aruba/
-[14]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-switch.yaml
-[15]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_aruba-base.yaml
-[16]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-access-point.yaml
-[17]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba.yaml
-[18]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/audiocodes-mediant-sbc.yaml
-[19]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avaya.yaml
-[20]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avocent-acs.yaml
-[21]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/avtech.yaml
-[22]: https://docs.datadoghq.com/integrations/crest_data_systems_barracuda_waf/
-[23]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/barracuda.yaml
-[24]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/bluecat-server.yaml
-[25]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brocade.yaml
-[26]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/brother.yaml
-[27]: https://docs.datadoghq.com/integrations/snmp_chatsworth_products/#overview
-[28]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chatsworth_pdu.yaml
-[29]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint.yaml
-[30]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/checkpoint-firewall.yaml
-[31]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/chrysalis.yaml
-[32]: https://docs.datadoghq.com/integrations/snmp_cisco/
-[33]: https://docs.datadoghq.com/integrations/cisco_aci/?tab=host
-[34]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/
-[35]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_ise/
-[36]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
-[37]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa.yaml
-[38]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asa-5525.yaml
-[39]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-asr.yaml
-[40]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-catalyst-wlc.yaml
-[41]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-catalyst.yaml
-[42]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-csr1000v.yaml
-[43]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_icm.yaml
-[44]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-ise.yaml
-[45]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-isr.yaml
-[46]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_isr_4431.yaml
-[47]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-nexus.yaml
-[48]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-sb.yaml
-[49]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-ucs.yaml
-[50]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-metadata.yaml
-[51]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-wlc.yaml
-[52]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-legacy-wlc.yaml
-[53]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco_uc_virtual_machine.yaml
-[54]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/citrix.yaml
-[55]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cradlepoint.yaml
-[56]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cyberpower-pdu.yaml
-[57]: https://docs.datadoghq.com/integrations/snmp_dell/
-[58]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dell-poweredge.yaml
-[59]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_dell.yaml
-[60]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/idrac.yaml
-[61]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/isilon.yaml
-[62]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dialogic-media-gateway.yaml
-[63]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/dlink.yaml
-[64]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/eaton-epdu.yaml
-[65]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/exagrid.yaml
-[66]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/extreme-switching.yaml
-[67]: https://docs.datadoghq.com/integrations/snmp_f5/
-[68]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/f5-big-ip.yaml
-[69]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fireeye.yaml
-[70]: https://docs.datadoghq.com/integrations/snmp_fortinet/
-[71]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet.yaml
-[72]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/fortinet-fortigate.yaml
-[73]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/gigamon.yaml
-[74]: https://docs.datadoghq.com/integrations/snmp_hewlett_packard_enterprise/
-[75]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hp-ilo.yaml
-[76]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_hp.yaml
-[77]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/hpe-proliant.yaml
-[78]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/huawei.yaml
-[79]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ixsystems-truenas.yaml
-[80]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ibm.yaml
-[81]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infinera-coriant-groove.yaml
-[82]: https://docs.datadoghq.com/integrations/rapdev_infoblox/
-[83]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infoblox-ipam.yaml
-[84]: https://docs.datadoghq.com/integrations/snmp_juniper/
-[85]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper.yaml
-[86]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-ex.yaml
-[87]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_juniper-junos-generic.yaml
-[88]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-mx.yaml
-[89]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/linksys.yaml
-[90]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/mcafee-web-gateway.yaml
-[91]: https://docs.datadoghq.com/integrations/meraki/
-[92]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki-cloud-controller.yaml
-[93]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/meraki.yaml
-[94]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/mikrotik-router.yaml
-[95]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nasuni-filer.yaml
-[96]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nec-univerge.yaml
-[97]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/netapp.yaml
-[98]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/netgear.yaml
-[99]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/nvidia.yaml
-[100]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/omron-cj-ethernet-ip.yaml
-[101]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_opengear.yaml
-[102]: https://docs.datadoghq.com/integrations/pan_firewall/
-[103]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto.yaml
-[104]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/palo-alto-base.yaml
-[105]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/peplink.yaml
-[106]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
-[107]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/pf-sense.yaml
-[108]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/raritan-dominion.yaml
-[109]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/riverbed.yaml
-[110]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ruckus-zd.yaml
-[111]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/server-iron-switch.yaml
-[112]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/servertech.yaml
-[113]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/silverpeak-edgeconnect.yaml
 [114]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
-[115]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/sophos-xgs-firewall.yaml
-[116]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/synology-disk-station.yaml
-[117]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tripplite_pdu.yaml
-[118]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_ubiquiti.yaml
-[119]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/velocloud-edge.yaml
-[120]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_vertiv.yaml
-[121]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/vmware-esx.yaml
-[122]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/watchguard.yaml
-[123]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/western-digital-mycloud-ex2-ultra.yaml
-[124]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml
-[125]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml
-[126]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com-huawei.yaml
-[127]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc-metadata.yaml
-[128]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_cisco-voice.yaml
 
 ## Further Reading
 

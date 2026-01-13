@@ -265,7 +265,6 @@ core_product:
 unsupported_sites:
   actions: [gov]
   adaptive_sampling: [gov]
-  adobe_experience_manager: [us3,ap1,ap2]
   agent_flare: [gov]
   agentless_scanning: [gov]
   amazon_event_bridge: [gov]
@@ -308,6 +307,7 @@ unsupported_sites:
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
   incident_ai: [gov]
+  inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
   linear: [gov]
   live_debugger: [gov]
@@ -320,6 +320,7 @@ unsupported_sites:
   pr_gates: [gov]
   resource_based_sampling: [gov]
   remote_config: [gov]
+  remote_config_for_fa: [gov] #For the Guides page
   remote_configuration: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]
