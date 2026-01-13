@@ -42,7 +42,7 @@ To start sending RUM or Error Tracking data from your Flutter application to Dat
    {{< img src="real_user_monitoring/flutter/flutter-new-application.png" alt="Create a RUM application for Flutter in Datadog" style="width:90%;">}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/ios/data_collected/
+[2]: /real_user_monitoring/application_monitoring/flutter/data_collected/
 
 {{% /tab %}}
 {{% tab "Error Tracking" %}}
@@ -54,6 +54,8 @@ To start sending RUM or Error Tracking data from your Flutter application to Dat
 
    {{< img src="real_user_monitoring/error_tracking/mobile-new-application-1.png" alt="Create an application for Flutter in Datadog" style="width:90%;">}}
 
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/application_monitoring/flutter/data_collected/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -332,6 +334,8 @@ This means that even if users open your application while offline, no data is lo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /real_user_monitoring/
+[2]: /error_tracking/
 [3]: /account_management/api-app-keys/#client-tokens
 [4]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html

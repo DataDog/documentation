@@ -91,6 +91,8 @@ RUMMonitor.shared().startFeatureOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">The Operation's name cannot contain any whitespaces.</div>
+
 ### Stop an operation with success
 
 Every started operation must have a stop. Use `succeedFeatureOperation` to stop an operation with a successful outcome.
@@ -139,6 +141,8 @@ RUMMonitor.shared().succeedFeatureOperation(
 
 {{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-warning">The <code>operationKey</code> must be the same in the start and end Operation event.</div>
 
 ### Stop an operation with failure
 

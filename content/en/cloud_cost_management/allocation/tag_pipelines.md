@@ -32,6 +32,8 @@ All new users have the recommended rule for [turning on tag normalization][6] en
 
 ## Create a ruleset
 
+You can manage tag pipeline rulesets using the [API][7], [Terraform][8], or directly in Datadog by following the instructions below.
+
 To create a ruleset, navigate to [**Cloud Cost > Settings > Tag Pipelines**][1].
 
 <div class="alert alert-danger"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
@@ -103,3 +105,5 @@ To delete a tag created using Tag Pipelines, delete the rule that created it. Wi
 [4]: /getting_started/tagging/
 [5]: /help/
 [6]: /cloud_cost_management/tags#how-tags-are-normalized
+[7]: /api/latest/cloud-cost-management/#create-tag-pipeline-ruleset
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/tag_pipeline_ruleset

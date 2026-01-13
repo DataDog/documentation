@@ -223,7 +223,7 @@ To **disable** origin detection in a client, perform one of the following action
 #### In the Datadog Agent
 Origin detection is not enabled by default in the Datadog Agent. To **enable** origin detection in the Datadog Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
 
-<div class="alert alert-info">Origin detection is not supported for Fargate environments.</div>
+<div class="alert alert-info">Origin detection is not supported for EKS Fargate.</div>
 
 #### How origins are detected
 
@@ -602,7 +602,7 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 
 {{< whatsnext desc="">}}
 {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}Send metrics to Datadog with DogStatsD.{{< /nextlink >}}
-{{< nextlink href="/service_management/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
+{{< nextlink href="/events/guides/dogstatsd/" >}}Send events to Datadog with DogStatsD.{{< /nextlink >}}
 {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}Send service checks to Datadog with DogStatsD.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -617,7 +617,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /metrics/custom_metrics/
-[6]: /service_management/events/guides/dogstatsd/
+[6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /getting_started/tagging/unified_service_tagging
 [9]: /developers/dogstatsd/datagram_shell/
