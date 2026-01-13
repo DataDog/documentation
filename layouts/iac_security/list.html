@@ -265,7 +265,7 @@
                                         {{ if $int_logo }}
                                         <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}"/>
                                         {{ else }}
-                                        {{ partial "icon" (dict "name" "cloud-thicc" ) }}
+                                        {{ partial "icon" (dict "name" "cloud-thicc" "style" "style='position: relative; top: 3px;'") }}
                                         {{ end }}
                                         <a href="{{.Permalink}}" class="stretched-link">{{.Params.meta.display_name}}</a>
                                     </div>
