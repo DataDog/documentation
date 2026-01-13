@@ -68,6 +68,9 @@ CRITICAL: Always use format `<name>/<description>` with forward slash. Without t
 - No branch preview will be generated
 - CI will fail
 
+### PR Checklist
+- Leave the “Ready for merge” checkbox unchecked unless explicitly requested.
+
 ### Content Guidelines
 Follow the CONTRIBUTING.md style guide:
 - Use American English (en_US)
