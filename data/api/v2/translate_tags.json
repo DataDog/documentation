@@ -177,7 +177,7 @@
   },
   "logs-custom-destinations": {
     "name": "Logs Custom Destinations",
-    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\n**Note**: Log forwarding is not available for the Government (US1-FED) site. Contact your account representative for more information.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
+    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",
