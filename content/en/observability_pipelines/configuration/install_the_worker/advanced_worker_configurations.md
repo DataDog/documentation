@@ -35,7 +35,7 @@ To set bootstrap options, do one of the following:
 - Use environmental variables.
 - Create a `bootstrap.yaml` and start the Worker instance with `--bootstrap-config /path/to/bootstrap.yaml`.
 
-The following is a list of bootstrap options, their related pipeline environment variables, and whether the bootstrap option or the environment variable has a higher precedence (priority), if both are set.
+The following is a list of bootstrap options, their related pipeline environment variables, and whether the bootstrap value or the environment variable has a higher precedence (priority), if both have been set.
 
 `api`
 : **Pipeline environment variable**: `DD_OP_API_ENABLED`
