@@ -162,7 +162,7 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 
 {{% /tab %}}
 
-{{% tab "Manually configure on a cluster policy" %}}
+{{% tab "Manually configure a cluster policy" %}}
 
 This approach is recommended for clusters in **Standard** access mode.
 
