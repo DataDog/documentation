@@ -83,7 +83,7 @@ gem "datadog-ci", "~> 1.0", group: :test
 
 3. Set `RUBYOPT` environment variable:
 
-`RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument"`
+   `RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument"`
 
 4. Run your tests as you normally do.
 
