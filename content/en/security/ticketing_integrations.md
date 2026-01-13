@@ -90,7 +90,7 @@ The following steps set up bidirectional syncing with Jira and verify that setup
 2. Verify that bidirectional Case Management integration with Jira is working:
    1. Open [any product supporting bidirectional ticket syncing][20].
    2. Open any Security finding.
-   3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button will open a **Create ticket** modal.
+   3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button opens a **Create Ticket** modal.
    4. Click the **Jira** tab.
    5. Verify that the **Case Management  <-> Jira Integration** section exists and bidirectional sync is enabled.
 
@@ -106,11 +106,11 @@ The following steps create a bidirectional ticket for a Security finding.
 
 1. Open [any product supporting bidirectional ticket syncing][20].
 2. Open any Security finding.
-3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button will open a **Create ticket** modal.
-4. Create ticket for any third party tool supported (see sections below)
+3. Locate the **Create Ticket** option. The option is available in **Next Steps** or **Repositories** (in **Libraries (SCA)**). The button opens a **Create Ticket** modal.
+4. Create ticket for any third-party tool supported (see sections below)
 
 {{% collapse-content title="Jira ticket" level="h4" expanded=false %}}
-1. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating new Jira ticket.
+1. Click the **Jira** tab. You can use a new or existing ticket. Let's look at creating a new Jira ticket.
 2. In **Case Management  <-> Jira Integration**, complete the following settings:
    1. **Case Management project:** select a Case Management project that has [Jira integration enabled][3].
    2. **Jira account:** select the Jira account where you want the ticket created.
@@ -125,7 +125,7 @@ Notes:
 
 ### Manage bidirectional Case Management tickets
 
-Existing bidirectional Jira tickets are listed in finding's **Ticketing** or **Next Steps** sections.
+Existing bidirectional Jira tickets are listed in the finding's **Ticketing** or **Next Steps** sections.
 
 Here's an example from a Static Code (SAST) finding:
 
@@ -147,8 +147,8 @@ Archiving a case does not delete related Jira tickets, but deleting a case proje
 
 Detaching a ticket from a Security finding does not delete it.
 
-If there are no open findings left attached to a ticket (because they are all detached or resolved or muted), it will be automatically closed.
-Similarly, if at least one open finding is attached to a closed ticket (because it was attached or detected again or unmuted), it will be automatically reopened.
+If there are no open findings left attached to a ticket (because they are all detached or resolved or muted), it is automatically closed.
+Similarly, if at least one open finding is attached to a closed ticket (because it was attached or detected again or unmuted), it is automatically reopened.
 
 ### Bidirectional Case Management facets
 
@@ -167,7 +167,7 @@ The link between Datadog Cases and existing Security findings can be managed wit
 
 Dedicated endpoints allow users to [create Datadog case for existing security findings][15], [attach security findings to an existing Datadog case][16], and [detach security findings from their case][17].
 
-User can also [create Jira issues for security findings][18] and [attach security findings to a Jira issue][19].
+Users can also [create Jira issues for security findings][18] and [attach security findings to a Jira issue][19].
 
 
 [1]: /incident_response/case_management/
