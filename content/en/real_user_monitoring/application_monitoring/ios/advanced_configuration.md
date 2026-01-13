@@ -754,6 +754,7 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 {{< /tabs >}}
 
 #### Apollo instrumentation
+Instrumenting Apollo in your iOS application gives RUM visibility into GraphQL errors and performance. Because GraphQL requests all go to a single endpoint and often return 200 OK even on errors, default HTTP instrumentation lacks context. It lets RUM capture the operation name, operation type, and variables (and optionally the payload). This provides more detailed context for each network request.
 
 This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the instructions for the Apollo iOS version you have below.
 
