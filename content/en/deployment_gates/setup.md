@@ -113,7 +113,7 @@ You can manage Deployment Gates via the UI, API or Terraform.
 
 {{< tabs >}}
 
-{% tab "API" %}}
+{{% tab "API" %}}
 
 You can use the [Deployment Gates API][1] to create and manage Deployment Gates.
 
@@ -158,7 +158,7 @@ Will create a deployment gate and it will be completely managed by terraform. An
 
 {{% /tab %}}
 
-{{</ tabs>}}
+{{</tabs>}}
 
 [1]: https://docs.datadoghq.com/api/latest/deployment-gates/
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate
