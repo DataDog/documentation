@@ -25,6 +25,24 @@ APM metric monitors work like regular [metric monitors][1], but with controls ta
 
 Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed Spans. For example, use an Analytics monitor to receive alerts on a spike in slow requests.
 
+### Automatic APM Monitors
+
+Automatic Monitors for APM are available to new organizations and activate as soon as the Datadog Agent is installed and spans begin flowing into Datadog. This provides immediate alerting coverage on your key services with minimal configuration.
+
+Datadog automatically creates monitors for service entry points to provide immediate alerting coverage on your key services with minimal configuration. These entry points are identified by operations tagged with [span.kind][8]:server or span.kind:consumer and represent where requests enter your service. 
+
+Automatic Monitors for APM include:
+Error rate threshold monitors
+Created per service entry point using APM trace metrics. These alert you when error behavior spikes and ensure your most critical endpoints are covered by default. A default error rate of 10% is set, which you can configure. 
+Watchdog anomaly monitors
+Automatically detect unusual patterns in latency, errors, and request volume (hits) for all services without requiring you to manually configure thresholds.
+
+
+Note: Datadog continues to automatically create monitors as new service entry points are observed to maintain coverage without gaps. This automatic creation capability is currently only available during a trial.
+
+You can view and manage all automatically created monitors on the Monitors page, where they can be edited, cloned, or disabled like any other monitor.
+
+
 ## Monitor creation
 
 To create an [APM monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> APM*.
@@ -114,6 +132,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [5]: /monitors/configuration/#advanced-alert-conditions
 [6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filter-types
+[8]: /standard-attributes/?search=span.kind&product=apm
 {{% /tab %}}
 {{< /tabs >}}
 
