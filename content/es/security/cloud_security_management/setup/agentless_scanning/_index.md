@@ -6,6 +6,9 @@ further_reading:
 - link: /security/vulnerabilities
   tag: Documentación
   text: Más información sobre Cloud Security Vulnerabilities
+- link: /security/sensitive_data_scanner/setup/cloud_storage
+  tag: Documentación
+  text: Configurar Sensitive Data Scanner para el almacenamiento en la nube
 title: Cloud Security Agentless Scanning
 ---
 
