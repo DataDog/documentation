@@ -44,17 +44,6 @@
         openedFilterForm: null,
         showEmptyResultsMsg: false,
         filteredRulesets: new Set(),
-        provider_aliases: {
-            // if logo name different than 'providers' name,
-            // map to appropriate integration logo name (e.g. csharp: 'net')
-            gcp: 'google-cloud-platform',
-            aws: 'amazon-web-services',
-        },
-        platform_aliases: {
-            cicd: 'github_cicd',
-            // if logo name different than 'platforms' name,
-            // map to appropriate integration logo name (e.g. csharp: 'net')
-        },
         resetFilteredRulesets () {
             // Empty filtered rulesets
 
@@ -150,17 +139,15 @@
                 acc[platform.toLowerCase()] = displayName
                 return acc
             }, {})
-
+            
             Array.from(url.searchParams.entries()).forEach(([key, value]) => {
                 if (key === 'search'){
                     this.searchValue = value
-                } else if ((key === 'providers') && validCloudsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
-                    const logoName = this.provider_aliases[value.toLowerCase()] ?? value
+                } else if ((key === 'providers') && validCloudsArr.some(l => l.toLowerCase() === value.toLowerCase())){
                     const displayName = cloudAliasMap[value.toLowerCase()] ?? value
                     const cloudLookupName = cloudAliasMap[value.toLowerCase()] ? `,${value}`: ''
                     this.filterTypes[key].push(`${displayName}`)
-                } else if ((key === 'platform') && validPlatformsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
-                    const logoName = this.platform_aliases[value.toLowerCase()] ?? value
+                } else if ((key === 'platforms') && validPlatformsArr.some(l => l.toLowerCase() === value.toLowerCase())){
                     const displayName = platformAliasMap[value.toLowerCase()] ?? value
                     const platformLookupName = platformAliasMap[value.toLowerCase()] ? `,${value}`: ''
                     this.filterTypes[key].push(`${displayName}`)
