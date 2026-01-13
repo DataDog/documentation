@@ -755,26 +755,26 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 
 #### Apollo instrumentation
 
-This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. The setup differs between versions, so please follow the instructions for your Apollo iOS version below.
+This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the instructions for the Apollo iOS version you have below.
 
 1. [Set up][2] RUM monitoring with Datadog iOS RUM.
 
 2. Add the following to your application's `Package.swift` file:
 
 ```swift
-dependencies: [
-    // For Apollo iOS 1.0+
-    .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
+   dependencies: [
+       // For Apollo iOS 1.0+
+       .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
     
-    // For Apollo iOS 2.0+
-    .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "2.0.0"))
-]
+       // For Apollo iOS 2.0+
+       .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "2.0.0"))
+   ]
 ```
 
-Alternatively, you can add it using Xcode:
-- Go to **File** → **Add Package Dependencies**
-- Enter the repository URL: `https://github.com/DataDog/dd-sdk-ios-apollo-interceptor`
-- Select the package version that matches your Apollo major version (choose `1.x.x` for Apollo iOS 1.0+ or `2.x.x` for Apollo iOS 2.0+).
+   Alternatively, you can add it using Xcode:
+   1. Go to **File** → **Add Package Dependencies**.
+   2. Enter the repository URL: `https://github.com/DataDog/dd-sdk-ios-apollo-interceptor`.
+   3. Select the package version that matches your Apollo major version (choose `1.x.x` for Apollo iOS 1.0+ or `2.x.x` for Apollo iOS 2.0+).
 
 3. Set up network instrumentation based on your Apollo iOS version:
 
@@ -853,7 +853,7 @@ struct NetworkInterceptorProvider: InterceptorProvider {
 {{% /tab %}}
 {{< /tabs >}}
 
-This automatically adds Datadog headers to your GraphQL requests, enabling them to be tracked by Datadog.
+   This automatically adds Datadog headers to your GraphQL requests, enabling them to be tracked by Datadog.
 
 <div class="alert alert-info">
   <ul>
