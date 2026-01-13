@@ -16,7 +16,7 @@ further_reading:
 {{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
     Dynamic Instrumentation for Go is in limited preview and is not available to all customers.
     Request access to join the waiting list.<br>
-    **Note**: <a href="#unsupported-features">Some limitations</a> apply to the preview.
+    <b>Note</b>: <a href="#unsupported-features">Some limitations</a> apply to the preview.
 {{< /beta-callout-private >}}
 
 Dynamic Instrumentation is a feature provided by the Datadog tracing library.
@@ -32,11 +32,12 @@ To use Dynamic Instrumentation, you must enable it in both the Datadog Agent and
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
-Update your `system-probe.yaml` file with the following. This file should be located along `datadog.yaml`, see [agent configuration][101] for location details.
+Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][101].
 ```yaml
 dynamic_instrumentation:
   enabled: true
 ```
+[101]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 
 {{% /tab %}}
 {{% tab "Environment variable" %}}
@@ -59,34 +60,25 @@ datadog:
 
 ### Application (tracing library)
 
-1. Install or upgrade the Go tracing library to version >=1.74.6 or >=2.2.3, by following the [relevant instructions][2].
+1. Install or upgrade the Go tracing library to version >=1.74.6 or >=2.2.3, by following the [Go tracing library installation instructions][2]..
 2. Run your service with Dynamic Instrumentation enabled by setting the following environment variable:
 
    ```
    DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
    ```
 
-3. Configure Unified Service Tags so that you can filter and group your instrumentations and target active clients across these dimensions:
+3. Configure [Unified Service Tags][201] so that you can filter and group your instrumentations and target active clients across these dimensions:
    - `DD_SERVICE`
    - `DD_ENV`
    - `DD_VERSION`
 4. Restart your service.
 5. After the service starts, you can add and manage instrumentations from the [**APM** > **Live Debugger**][3] page.
 
-## Configuration
-
-Configure Dynamic Instrumentation using the following environment variables:
-
-| Environment variable                             | Type          | Description                                                                                                               |
-| ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `DD_DYNAMIC_INSTRUMENTATION_ENABLED`             | Boolean       | Set to `true` to enable Dynamic Instrumentation.                                                                          |
-| `DD_SERVICE`                                     | String        | The [service][5] name. For example: `web-backend`.                                                                        |
-| `DD_ENV`                                         | String        | The [environment][5] name. for example: `production`.                                                                     |
-| `DD_VERSION`                                     | String        | The [version][5] of your service.                                                                                         |
+[201]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 ## What to do next
 
-See [Live Debugger][4] for information about adding instrumentations, capturing application state, and browsing and indexing the collected data.
+See the [Live Debugger documentation][4] for information about adding instrumentations, capturing application state, and browsing and indexing the collected data.
 
 ## Supported features
 

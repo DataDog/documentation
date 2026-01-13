@@ -51,7 +51,7 @@ Dynamic Instrumentation requires the following:
 - For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
-- (Limited Preview) For Go applications, tracing library [`dd-trace-go`][21] >=1.74.6 or >=2.2.3.
+- (Limited Preview) For Go applications, tracing library [`dd-trace-go`][21] >=1.74.6 (major version 1), or >=2.2.3 (major version 2).
 - (Limited Preview) For Go applications, the Agent and your application must run on the same host, with Linux kernel >=5.17.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended, [autocomplete and search (in Preview)][17] is enabled.
