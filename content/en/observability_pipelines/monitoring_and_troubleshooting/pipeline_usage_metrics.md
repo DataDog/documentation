@@ -96,26 +96,7 @@ Utilization
 
 Track buffer behavior with these metrics:
 
-`pipelines.buffer_events`
-: **Description**: Number of events currently in the buffer.
-
-`pipelines.buffer_byte_size`
-: **Description**: Current buffer size in bytes.
-
-`pipelines.buffer_received_events_total`
-: **Description**: Total events added to the buffer.
-
-`pipelines.buffer_received_event_bytes_total`
-: **Description**: Total bytes added to the buffer.
-
-`pipelines.buffer_sent_events_total`
-: **Description**: Total events successfully flushed from the buffer.
-
-`pipelines.buffer_sent_event_bytes_total`
-: **Description**: Total bytes successfully flushed from the buffer.
-
-`pipelines.buffer_discarded_events_total`
-: **Description**: Events discarded from the buffer (for example, due to overflow).
+{{% observability_pipelines/metrics/buffer %}}
 
 ## Further reading
 
