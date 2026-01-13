@@ -51,6 +51,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
   tag: "Blog"
   text: "Best practices for monitoring progressive web applications"
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
 algolia:
   tags: ['rum', 'real user monitoring']
 cascade:

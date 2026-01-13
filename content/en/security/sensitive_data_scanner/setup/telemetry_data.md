@@ -32,7 +32,9 @@ For each scanning rule, one of the following actions can be applied to matched s
 - **Hash**: Replace the entire matched data with a non-reversible unique identifier.
 - **Mask** (available for logs only): Obfuscate all matching values. Users with the `Data Scanner Unmask` permission can de-obfuscate (unmask) and view this data in Datadog. See [Mask action](#mask-action) for more information.
 
-**Note**: When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
+**Notes**:
+- When scanning sampled data, you will not be able to select actions that obfuscate the data it scans.
+- Sensitive Data Scanner does not scan integer, float, and double values. If the number is in a string format, the string gets scanned.
 
 You submit logs and events to the Datadog backend, so the data leaves your environment before it gets redacted. The logs and events are scanned and redacted in the Datadog backend during processing, so sensitive data is redacted before events are indexed and shown in the Datadog UI.
 
