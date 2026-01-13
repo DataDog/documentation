@@ -121,7 +121,7 @@ Datadog can install and manage a global init script in the Databricks workspace.
 
 <div class="alert alert-danger">
 <ul>
-<li>This setup does not work on Databricks clusters in <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, you must follow the instructions to <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> for installation on those specific clusters.</li>
+<li>This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, it's recommended to <a href="?tab=manuallyconfigureonaclusterpolicy#install-the-datadog-agent">Manually configure on a cluster policy</a> or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.</li>
 <li>This install option, in which Datadog installs and manages your Datadog global init script, requires a Databricks Access Token with <strong>Workspace Admin</strong> permissions. A token with CAN VIEW access does not allow Datadog to manage the global init script of your Databricks account.</li>
 </ul>
 </div>
@@ -162,10 +162,74 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 
 {{% /tab %}}
 
+{{% tab "Manually configure on a cluster policy" %}}
+
+This approach is recommended for clusters in **Standard** access mode.
+
+**Create the init script**
+
+1. In Databricks, create an init script file in a [Unity Catalog volume][26] with the following content. Be sure to make note of the volume path (for example, `/Volumes/catalog_name/schema_name/volume_name/datadog-init-script.sh`).
+
+    ```shell
+    #!/bin/bash
+
+    # Download and run the latest init script
+    curl -L https://install.datadoghq.com/scripts/install-databricks.sh > djm-install-script
+    bash djm-install-script || true
+    ```
+
+    The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
+
+1. **Add the init script to the allowlist**: For clusters in **Standard** access mode, you must add the init script path to the Unity Catalog allowlist. Follow the instructions in the [Databricks documentation][27] to add your init script path to the allowlist.
+
+**Configure the compute policy**
+
+1. In **Compute**, navigate to the **Policies** tab. Click **Create Policy** or navigate to an existing policy to edit it.
+1. To add the init script to the cluster policy, in the **Definition** section, click **Add Definition**. In the modal that opens, fill in the fields:
+   1. In the **Field** dropdown, select **init_scripts**.
+   1. In the **Source** dropdown, select **Volume**.
+   1. Under **Destination**, enter the volume path to your init script.
+   1. Click **Add**.
+1. Configure the environment variables. You must add each of the following environment variables to the cluster policy you created:
+
+   | Key                  | Description                  |
+   |----------------------|------------------------------|
+   | DD_API_KEY           | Your [Datadog API key][1].   |
+   | DD_SITE              | Your [Datadog site][2].      |
+   | DATABRICKS_WORKSPACE | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespaces. |
+
+   1. For each of the above variables, in the **Definition** section, click **Add Definition**. In the modal that opens, fill in the fields:
+       1. In the **Field** dropdown, select **spark_env_vars**.
+       1. In the **Key** field, enter the environment variable key.
+       1. In the **Value** field, enter the environment variable value.
+       1. Under the **Type** drop-down, select `Fixed`.
+       1. Check the **Hidden** checkbox to reduce exposure of sensitive values.
+   1. Optionally, set other init script parameters and Datadog environment variables, such as `DD_ENV` and `DD_SERVICE`. You can configure the script using the following parameters:
+
+      | Variable                 |  Description                                                                                                                                                      |  Default |
+      |--------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------|
+      | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
+      | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                            | false   |
+      | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics, using comma- or space-separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+      | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
+      | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
+
+1. Click **Create**. The cluster policy can now be used when configuring new clusters or editing existing ones.
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
+[4]: /getting_started/tagging/
+[5]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
+[26]: https://docs.databricks.com/en/connect/unity-catalog/volumes.html
+[27]: https://docs.databricks.com/en/data-governance/unity-catalog/manage-privileges/allowlist#how-to-add-items-to-the-allowlist
+
+{{% /tab %}}
+
 {{% tab "Manually install a global init script" %}}
 
 <div class="alert alert-danger">
-This setup does not work on Databricks clusters in <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, you must follow the instructions to <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> for installation on those specific clusters.
+This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, it's recommended to <a href="?tab=manuallyconfigureonaclusterpolicy#install-the-datadog-agent">Manually configure on a cluster policy</a> or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.
 </div>
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
@@ -225,7 +289,8 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 {{% tab "Manually install on a specific cluster" %}}
 
-1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
+1. In Databricks, create an init script file in a [Unity Catalog volume][26] with the following content. Be sure to make note of the volume path (for example, `/Volumes/catalog_name/schema_name/volume_name/datadog-init-script.sh`).
+
    ```shell
    #!/bin/bash
 
@@ -236,13 +301,15 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
    The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL (for example, `install-databricks-0.13.5.sh` to use version `0.13.5`). You can find the source code used to generate this script, and the changes between script versions, on the [Datadog Agent repository][3].
 
+1. **Add the init script to the allowlist** (required for **Standard** access mode clusters): If your cluster uses **Standard** access mode, you must add the init script path to the Unity Catalog allowlist. Follow the instructions in the [Databricks documentation][27] to add your init script path to the allowlist.
+
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
 
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
 
-   - Under the **Destination** drop-down, select `Workspace`.
-   - Under **Init script path**, enter the path to your init script.
+   - Under the **Destination** drop-down, select `Volume`.
+   - Under **Init script path**, enter the volume path to your init script.
    - Click **Add**.
 
 #### Set the required init script parameters
@@ -281,61 +348,6 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 3. Click **Confirm**.
 
-{{% /tab %}}
-
-{{% tab "Manually configure on a cluster policy" %}}
-
-**Create the init script**
-1. In Databricks, create a init script file in **Workspace** with the following content. Be sure to make note of the file path.
-
-    ```shell
-    #!/bin/bash
-
-    # Download and run the latest init script
-    curl -L https://install.datadoghq.com/scripts/install-databricks.sh > djm-install-script
-    bash djm-install-script || true
-    ```
-
-    The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
-
-**Configure the compute policy**
-1. In **Compute**, navigate to the **Policies** tab. Click **Create Policy** or navigate to an existing policy to edit it.
-1. To add the init script to the cluster policy, in the **Definition** section, click **Add Definition**. In the modal that opens, fill in the fields:
-   1. In the **Field** dropdown, select **init_scripts**.
-   1. In the **Source** dropdown, select **Workspace**.
-   1. Under **File path**, enter the path to your init script.
-   1. Click **Add**.
-1. Configure the environment variables. You must add each of the following environment variables to the cluster policy you created:
-
-   | Key                  | Description                  |
-   |----------------------|------------------------------|
-   | DD_API_KEY           | Your [Datadog API key][1].   |
-   | DD_SITE              | Your [Datadog site][2].      |
-   | DATABRICKS_WORKSPACE | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespaces. |
-
-   1. For each of the above variables, in the **Definition** section, click **Add Definition**. In the modal that opens, fill in the fields:
-       1. In the **Field** dropdown, select **spark_env_vars**.
-       1. In the **Key** field, enter the environment variable key.
-       1. In the **Value** field, enter the environment variable value.
-       1. Under the **Type** drop-down, select `Fixed`.
-       1. Check the **Hidden** checkbox to reduce exposure of sensitive values.
-   1. Optionally, set other init script parameters and Datadog environment variables, such as `DD_ENV` and `DD_SERVICE`. You can configure the script using the following parameters:
-
-      | Variable                 |  Description                                                                                                                                                      |  Default |
-      |--------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------|
-      | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
-      | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                            | false   |
-      | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics, using comma- or space-separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
-      | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
-      | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
-
-1. Click **Create**. The cluster policy can now be used when configuring new clusters or editing existing ones.
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
-[4]: /getting_started/tagging/
-[5]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
 {{% /tab %}}
 
 {{< /tabs >}}
