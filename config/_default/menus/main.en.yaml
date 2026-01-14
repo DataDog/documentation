@@ -2689,16 +2689,21 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_integrations
       weight: 704
+    - name: Automations
+      url: incident_response/incident_management/incident_settings/automations
+      parent: incidents_settings
+      identifier: incidents_settings_automations
+      weight: 705
     - name: Notification Rules
       url: incident_response/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 705
+      weight: 706
     - name: Templates
       url: incident_response/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 706
+      weight: 707
     - name: Incident Analytics
       url: incident_response/incident_management/analytics
       parent: incidents
