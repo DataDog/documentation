@@ -1,4 +1,7 @@
 ---
+description: Aprende a delimitar correctamente los tiempos de inactividad a monitores
+  y grupos específicos mediante etiquetas de monitor, alcances de grupo y filtrado
+  detallado.
 disable_toc: false
 further_reading:
 - link: /monitors/downtimes
@@ -57,7 +60,7 @@ Los ejemplos de esta guía muestran cómo el `Group scope` puede aplicarse a mon
 1. Para programar un tiempo de inactividad en un solo grupo (en este caso, `service:web-store`), introduce ese grupo en el campo `Group scope`.
 2. Haz clic en **Preview affected monitors** (Previsualizar monitores afectados) para comprobar que el monitor elegido sigue en el contexto, a fin de que las alertas del grupo `service:web-store` se silencien durante el tiempo de inactividad programado.
 
-{{< img src="monitors/downtimes/downtime_example_byname.png" alt="Ejemplo de tiempo de inactividad 'Por nombre de monitor' que muestra la vista previa de los monitores afectados" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_example_byname.png" alt="Ejemplo de tiempo de inactividad "Por nombre de monitor" que muestra la vista previa de los monitores afectados" style="width:90%;">}}
 
 Una vez que se inicia el tiempo de inactividad programado, sólo se silencian las alertas del grupo `service:web-store` de ese monitor.
 
@@ -117,7 +120,7 @@ Si estás ejecutando tu aplicación y tu infraestructura en varios entornos, pro
 4. Este tiempo de inactividad se limita al grupo `service:web-store`.
 5. Haz clic en **Preview affected monitors** (Previsualizar monitores afectados) para verificar los monitores que están en el contexto. En este ejemplo se muestra que ambos monitores tienen el grupo `service:web-store` en el contexto.
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.png" alt="Ejemplo de tiempo de inactividad 'Por etiquetas de monitor' que muestra la previsualización de los monitores afectados" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.png" alt="Ejemplo de tiempo de inactividad "Por etiquetas de monitor" que muestra la previsualización de los monitores afectados" style="width:80%;">}}
 
 6. El *monitor A* muestra que se ha iniciado el tiempo de inactividad, pero sólo para el grupo en el contexto: `service:web-store`
 
