@@ -9,7 +9,7 @@ further_reading:
 - link: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
   tag: Documentación
   text: Configuración avanzada
-- link: /real_user_monitoring/session_replay/browser/
+- link: /session_replay/browser/
   tag: Documentación
   text: Configurar Session Replay
 - link: /real_user_monitoring/error_tracking/browser/

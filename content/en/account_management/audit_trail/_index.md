@@ -62,7 +62,7 @@ To see who enabled Audit Trail:
 
 
 ### Permissions
-Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer.
 
 ### Archiving
 
@@ -240,3 +240,4 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
 [17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
+
