@@ -9,7 +9,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Cross-org paging is in public Preview and only supported for automated workflows (for example: monitor alerts, incident notification rules). Manual paging through the Datadog UI or API is limited to local organizations and data centers.
+Cross-org paging is in Public Preview and is supported only for automated workflows, such as monitor alerts and incident notification rules. Manual paging through the Datadog UI or API is limited to the local organization and data center.
 </div>
 
 ## Overview
