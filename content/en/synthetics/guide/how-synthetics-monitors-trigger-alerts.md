@@ -191,7 +191,7 @@ The following example demonstrates how a 95.83% global uptime is calculated.
 
 <div class="alert alert-info">To understand alert timing across locations, use the <strong>Show all locations</strong> toggle instead of relying only on global uptime.</div>
 
-### Status descriptions
+## Status descriptions
 
 OK
 : The monitor is healthy. Either all test runs are passing, or failures have not met the alerting conditions (minimum duration and location requirements).
