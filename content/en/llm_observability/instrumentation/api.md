@@ -153,6 +153,8 @@ If the request is successful, the API responds with a 202 network code and an em
 | messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
 | documents| [Document](#document) | List of documents. This should only be used as the output for retrieval spans |
 | prompt | [Prompt](#prompt) | Structured prompt metadata that includes the template and variables used for the LLM input. This should only be used for input IO on LLM spans. |
+| embedding | [float] | Array of embedding values. **Only valid for embedding spans.** |
+| parameters | Dict[key (string), value] | Additional parameters for the input or output. |
 
 
 **Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
@@ -166,6 +168,26 @@ If the request is successful, the API responds with a 202 network code and an em
 |----------------------|--------|--------------------------|
 | content [*required*] | string | The body of the message. |
 | role                 | string | The role of the entity.  |
+| tool_calls           | [[ToolCall](#toolcall)] | List of tool calls made in this message. |
+| tool_results         | [[ToolResult](#toolresult)] | List of tool results returned in this message. |
+
+#### ToolCall
+
+| Field     | Type   | Description              |
+|-----------|--------|--------------------------|
+| name      | string | The name of the tool being called. |
+| arguments | Dict[key (string), value] | Arguments passed to the tool. |
+| tool_id   | string | Unique identifier for this tool call. |
+| type      | string | The type of tool call. |
+
+#### ToolResult
+
+| Field   | Type   | Description              |
+|---------|--------|--------------------------|
+| name    | string | The name of the tool that was called. |
+| result  | string | The result returned by the tool. |
+| tool_id | string | Unique identifier matching the original tool call. |
+| type    | string | The type of tool result. |
 
 #### Document
 | Field                | Type   | Description              |
@@ -215,6 +237,14 @@ If the request is successful, the API responds with a 202 network code and an em
 {{% /tab %}}
 {{< /tabs >}}
 
+#### ToolDefinition
+
+| Field       | Type              | Description  |
+|-------------|-------------------|--------------|
+| name        | string            | The name of the tool. |
+| description | string            | A description of what the tool does. |
+| schema      | Dict[key (string), value] | The schema defining the tool's parameters. |
+
 #### Meta
 | Field       | Type              | Description  |
 |-------------|-------------------|--------------|
@@ -222,7 +252,12 @@ If the request is successful, the API responds with a 202 network code and an em
 | error       | [Error](#error)             | Error information on the span.              |
 | input       | [IO](#io)                | The span's input information.               |
 | output      | [IO](#io)                | The span's output information.              |
-| metadata    | Dict[key (string), value] where the value is a float, bool, or string | Data about the span that is not input or output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, and `model_provider`. |
+| expected_output | [IO](#io) | Expected output for evaluation purposes. |
+| tool_definitions | [[ToolDefinition](#tooldefinition)] | List of available tool definitions. |
+| intent      | string | The intent or purpose of the span. |
+| model_name  | string | The name of the model used. **Only valid for LLM and embedding spans.** |
+| model_provider | string | The provider of the model. **Only valid for LLM and embedding spans.** |
+| metadata    | Dict[key (string), value] where the value is a float, bool, or string | Data about the span that is not input or output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`. |
 
 #### Metrics
 | Field                  | Type    | Description  |
