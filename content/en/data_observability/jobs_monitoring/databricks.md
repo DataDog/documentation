@@ -121,7 +121,7 @@ Datadog can install and manage a global init script in the Databricks workspace.
 
 <div class="alert alert-danger">
 <ul>
-<li>This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, it's recommended to <a href="?tab=manuallyconfigureonaclusterpolicy#install-the-datadog-agent">configure across multiple clusters using a cluster policy</a> or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.</li>
+<li>This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, Datadog recommends to <a href="?tab=manuallyconfigureaclusterpolicy#install-the-datadog-agent">Manually configure a cluster policy</a> across multiple clusters or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.</li>
 <li>This install option, in which Datadog installs and manages your Datadog global init script, requires a Databricks Access Token with <strong>Workspace Admin</strong> permissions. A token with CAN VIEW access does not allow Datadog to manage the global init script of your Databricks account.</li>
 </ul>
 </div>
@@ -184,7 +184,7 @@ This approach is recommended for clusters in **Standard** access mode.
 
 **Configure the compute policy**
 
-1. In **Compute**, navigate to the **Policies** tab. If you already have a cluster policy applied to your clusters, navigate to that existing policy to edit it. This is the easier approach as the policy will automatically apply to all clusters using it. Otherwise, click **Create Policy** to create a new one.
+1. In **Compute**, navigate to the **Policies** tab. If you already have a cluster policy applied to your clusters, navigate to that existing policy to edit it. This is the simpler approach as the policy automatically applies to all clusters using it. Otherwise, click **Create Policy** to create a new policy.
 1. To add the init script to the cluster policy, in the **Definition** section, click **Add Definition**. In the modal that opens, fill in the fields:
    1. In the **Field** dropdown, select **init_scripts**.
    1. In the **Source** dropdown, select **Volume**.
@@ -214,13 +214,13 @@ This approach is recommended for clusters in **Standard** access mode.
       | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
       | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][5] for more details. |         |
 
-1. Click **Create** if creating a new policy or **Save** if updating an existing policy. If you updated an existing policy, all clusters using that policy will automatically apply the changes on their next restart. If you created a new policy, follow the steps below to apply it to your clusters.
+1. Click **Create** if creating a new policy or **Save** if updating an existing policy. If you update an existing policy, all clusters using that policy automatically apply the changes on their next restart. If you create a new policy, follow the steps below to apply it to your clusters.
 
 **Apply the cluster policy to clusters**
 
 1. In **Compute**, select the cluster you want to update or click **Create Compute** for a new cluster.
 1. In the **Policy** dropdown at the top, select the policy you created.
-1. Click **Confirm** to save the changes. The cluster will need to be restarted for the policy to take effect.
+1. Click **Confirm** to save the changes. The cluster needs to be restarted for the policy to take effect.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
@@ -235,7 +235,7 @@ This approach is recommended for clusters in **Standard** access mode.
 {{% tab "Manually install a global init script" %}}
 
 <div class="alert alert-danger">
-This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, it's recommended to <a href="?tab=manuallyconfigureonaclusterpolicy#install-the-datadog-agent">Manually configure on a cluster policy</a> or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.
+This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, Datadog recommends to <a href="?tab=manuallyconfigureaclusterpolicy#install-the-datadog-agent">Manually configure a cluster policy</a> or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.
 </div>
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
