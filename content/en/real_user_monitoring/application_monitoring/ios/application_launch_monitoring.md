@@ -14,10 +14,6 @@ further_reading:
     text: "Datadog Real User Monitoring"
 ---
 
-<div class="alert alert-danger">
-  The <code>application_start</code> action is not collected in Android SDK versions 3.5.0+. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
-</div>
-
 ## Overview
 
 Application launch monitoring helps you understand how fast your iOS app becomes usable after a user taps the app icon. Use it to identify slow startup times, track performance regressions, and optimize the user’s first impression of your app.
@@ -30,6 +26,10 @@ With this feature, you can:
 ## How it works
 
 During initialization, the RUM iOS SDK creates a view called `ApplicationLaunch`. This view’s start time matches the start of the iOS process. The `ApplicationLaunch` view includes any logs, actions, and resources created before your first call to `startView`. 
+
+<div class="alert alert-danger">
+  The <code>application_start</code> action is not collected in iOS SDK versions 3.5.0+. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
+</div>
 
 ### Time to initial display and time to full display
 
