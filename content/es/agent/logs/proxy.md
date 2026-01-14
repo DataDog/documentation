@@ -14,7 +14,9 @@ further_reading:
 title: Proxy TCP del Agent para el envío de logs
 ---
 
-{{% site-region region="us3,eu,us5,gov,ap1,ap2" %}}
+{{% logs-tcp-disclaimer %}}
+
+{{% site-region region="us3,us5,gov,ap1,ap2" %}}
 <div class="alert alert-danger">
     TCP no está disponible para el sitio {{< region-param key="dd_site_name" >}}. Ponte en contacto con el <a href="/help/">servicio de asistencia</a> para obtener más información.
 </div>

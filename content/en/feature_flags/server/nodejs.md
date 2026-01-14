@@ -73,12 +73,12 @@ const client = OpenFeature.getClient();
 app.get('/my-endpoint', async (req, res) => {
   await initializationPromise;
 
-  OpenFeature.setContext({
-    userID: req.session?.userID,
+  const evaluationContext = {
+    targetingKey: req.session?.userID,
     companyID: req.session?.companyID
-  });
+  };
 
-  const value = client.getBooleanValue('my-flag', false);
+  const value = client.getBooleanValue('my-flag', false, evaluationContext);
   if (value) {
     res.send('feature enabled!');
   } else {
@@ -102,14 +102,15 @@ Each flag is identified by a _key_ (a unique string) and can be evaluated with a
 Use `getBooleanValue()` for flags that represent on/off or true/false conditions. Optionally set the context for specific targeting rules.
 
 ```javascript
-OpenFeature.setContext({
-  userID: req.session?.userID,
+const evaluationContext = {
+  targetingKey: req.session?.userID,
   companyID: req.session?.companyID
-});
+};
 
 const isNewCheckoutEnabled = client.getBooleanValue(
     'new-checkout-flow', // flag key
     false, // default value
+    evaluationContext, // context
 );
 
 if (isNewCheckoutEnabled) {
@@ -124,14 +125,15 @@ if (isNewCheckoutEnabled) {
 Use `getStringValue()` for flags that select between multiple variants or configuration strings. For example:
 
 ```javascript
-OpenFeature.setContext({
-  userID: req.session?.userID,
+const evaluationContext = {
+  targetingKey: req.session?.userID,
   companyID: req.session?.companyID
-});
+};
 
 const theme = client.getStringValue(
   'ui-theme', // flag key
   'light', // default value
+  evaluationContext,
 );
 
 switch (theme) {
@@ -154,19 +156,21 @@ switch (theme) {
 For number flags, use `getNumberValue()`. This is appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
 ```javascript
-OpenFeature.setContext({
-  userID: req.session?.userID,
-  companyID: req.session?.companyID
-});
+const evalutationContext = {
+  targetingKey: req.session?.userID,
+  companyID: req.session?.companyID,
+};
 
 const maxItems = client.getNumberValue(
     'max-cart-items', // flag key
     20, // default value
+    evaluationContext,
 );
 
 const priceMultiplier = client.getNumberValue(
     'pricing-multiplier', // flag key
     1.3, // default value
+    evaluationContext,
 );
 ```
 
@@ -176,7 +180,7 @@ For structured JSON data, use `getObjectValue()`. This method returns an `object
 
 ```javascript
 OpenFeature.setContext({
-  userID: req.session?.userID,
+  targetingKey: req.session?.userID,
   companyID: req.session?.companyID
 });
 

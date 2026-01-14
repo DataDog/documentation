@@ -18,6 +18,7 @@ Datadog CloudPrem is a self-hosted log management solution that enables cost-eff
 ## Get started
 
 {{< whatsnext desc="Follow our guides to get CloudPrem up and running:">}}
+  {{< nextlink href="/cloudprem/quickstart/" >}}Quickstart: Run CloudPrem locally in 5 minutes{{< /nextlink >}}
   {{< nextlink href="/cloudprem/install/" >}}Install CloudPrem{{< /nextlink >}}
   {{< nextlink href="/cloudprem/ingest_logs/datadog_agent/" >}}Ingest logs with Datadog Agent{{< /nextlink >}}
   {{< nextlink href="/cloudprem/configure/datadog_account" >}}Configure your Datadog account{{< /nextlink >}}

@@ -6,6 +6,9 @@ aliases:
 - /continuous_integration/integrate_tests/code_coverage/
 - /continuous_integration/tests/code_coverage/
 further_reading:
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: "/tests"
   tag: "Documentation"
   text: "Learn about Test Optimization"

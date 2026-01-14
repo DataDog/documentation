@@ -100,63 +100,12 @@ These constraints are usually held in your `android/app/build.gradle` file, or i
 
 #### Web
 
-For Web, add the following to your `index.html` under the `head` tag, for **{{<region-param key="dd_site_name">}}** site:
-{{< site-region region="us" >}}
+For Web, add the following to your `index.html` under the `head` tag:
 
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_logs_cdn_path >}}"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_rum_cdn_path >}}"></script>
 ```
-
-{{</ site-region>}}
-{{< site-region region="ap1" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="ap2" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v6/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v6/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="gov" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v6.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v6.js"></script>
-```
-
-{{</ site-region>}}
 
 This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchronous CDN-delivered version of the Browser SDK is the only version supported by the Datadog Flutter Plugin.
 

@@ -507,73 +507,10 @@ my_foo = 1
 myBar = 2
 ```
 
-## Link results to Datadog services and teams
+## Link findings to Datadog services and teams
 
-### Link results to services
-Datadog associates static code and library scan results with relevant services by using the following mechanisms:
+{{% security-products/link-findings-to-datadog-services-and-teams %}}
 
-{{% collapse-content title="Identifying the code location in the Software Catalog" level="h4" %}}
-The [schema version `v3`][14] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
-
-The `paths` attribute is a list of globs that should match paths in the repository.
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - path/to/service/code/**
-{{< /code-block >}}
-
-If you want all the files in a repository to be associated with a service, you can use the glob `**` as follows:
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: my-service
-datadog:
-  codeLocations:
-    - repositoryURL: https://github.com/myorganization/myrepo.git
-      paths:
-        - "**"
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Detecting file usage patterns" level="h4" %}}
-Datadog detects file usage in additional products such as Error Tracking and associate
-files with the runtime service. For example, if a service called `foo` has
-a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
-it associates files `/modules/foo/bar.py` to service `foo`.
-{{% /collapse-content %}}
-
-{{% collapse-content title="Detecting service name in paths and repository names" level="h4" %}}
-Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
-
-For a repository match, if there is a service called `myservice` and
-the repository URL is `https://github.com/myorganization/myservice.git`, then,
-it associates `myservice` to all files in the repository.
-
-If no repository match is found, Datadog attempts to find a match in the
-`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
-in the path, the service name closest to the filename is selected.
-{{% /collapse-content %}}
-
-If one method succeeds (in order), no further mapping attempts are made.
-
-### Link results to teams
-
-Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
-is associated with `myservice`, then the team `myservice` will be associated to any violation
-detected in this file.
-
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
-
-**Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
 ## Diff-aware scanning
 
@@ -595,7 +532,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 ## Upload third-party static analysis results to Datadog
 
 <div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
 You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.
@@ -740,10 +677,14 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 [11]: /security/code_security/dev_tool_int/github_pull_requests
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
 [13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
-[14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [15]: https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html
 [16]: https://www.first.org/cvss/
 [17]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [18]: /security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
+[22]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[24]: https://docs.datadoghq.com/account_management/teams/
+[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[103]: https://docs.datadoghq.com/data_security/data_retention_periods/

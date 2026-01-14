@@ -177,7 +177,7 @@
   },
   "logs-custom-destinations": {
     "name": "Logs Custom Destinations",
-    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\n**Note**: Log forwarding is not available for the Government (US1-FED) site. Contact your account representative for more information.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
+    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",
@@ -238,6 +238,10 @@
   "processes": {
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization. See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/) for more information."
+  },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\nSee the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information."
   },
   "rum": {
     "name": "RUM",
