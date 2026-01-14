@@ -8,7 +8,7 @@ aliases:
 further_reading:
     - link: 'https://www.datadoghq.com/blog/data-jobs-monitoring/'
       tag: 'blog'
-      text: 'Troubleshoot and optimize data processing workloads with Data Observability: Jobs Monitoring'
+      text: 'Troubleshoot and optimize data processing workloads with Data Jobs Monitoring'
     - link: 'https://www.datadoghq.com/blog/data-observability-monitoring'
       tag: 'blog'
       text: 'Observing the data lifecycle with Datadog'
