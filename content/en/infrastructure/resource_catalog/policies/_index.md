@@ -13,7 +13,13 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-resource-policies/"
     tag: "Blog"
     text: "Proactively enforce infrastructure best practices with Datadog Resource Policies"
+  - link: https://www.datadoghq.com/blog/automate-infrastructure-operations-with-datadog-infrastructure-management
+    tag: Blog
+    text: Automate infrastructure operations with Datadog Infrastructure Management
 ---
+
+{{< site-region region="gov" >}}<div class="alert alert-danger"> Resource Catalog Policies is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/infra-governance-policies/" btn_hidden="false" header="Join the Preview!">}}
   Resource Policies are in Preview.

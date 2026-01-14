@@ -21,7 +21,7 @@ Network Device Monitoring (NDM) supports a growing set of integrations for route
 
 ## SNMP
 
-These integrations use the **SNMP protocol** to collect metrics directly from network hardware such as routers, switches, and firewalls. NDM automatically applies the appropriate SNMP profile when it detects one of these devices.
+These integrations use the **SNMP protocol** to collect metrics directly from network hardware such as routers, switches, and firewalls. NDM automatically applies the appropriate SNMP profile when it detects one of these devices. Beyond the integrations shown below, NDM includes built-in SNMP profiles for over 80 [supported vendors][3].
 
 {{< partial name="ndm/ndm_integrations.html" >}}
 
@@ -54,3 +54,4 @@ NDM can also monitor **virtualized environments** that expose network telemetry 
 
 [1]: /network_monitoring/devices/supported_devices
 [2]: /network_monitoring/devices/profiles/
+[3]: /network_monitoring/devices/supported_devices/

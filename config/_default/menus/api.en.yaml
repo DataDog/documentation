@@ -2416,9 +2416,9 @@ menu:
       url: /api/latest/security-monitoring/
       identifier: security-monitoring
       generated: true
-    - name: Returns list of Secrets rules
-      url: '#returns-list-of-secrets-rules'
-      identifier: security-monitoring-returns-list-of-secrets-rules
+    - name: Returns a list of Secrets rules
+      url: '#returns-a-list-of-secrets-rules'
+      identifier: security-monitoring-returns-a-list-of-secrets-rules
       parent: security-monitoring
       generated: true
       params:
@@ -2753,6 +2753,18 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 4
+    - name: Get a suppression's version history
+      url: '#get-a-suppressions-version-history'
+      identifier: security-monitoring-get-a-suppressions-version-history
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSuppressionVersionHistory
+        unstable: []
+        order: 0
     - name: Update a suppression rule
       url: '#update-a-suppression-rule'
       identifier: security-monitoring-update-a-suppression-rule
@@ -3094,6 +3106,92 @@ menu:
         unstable:
           - v2
         order: 28
+    - name: Search security findings
+      url: '#search-security-findings'
+      identifier: security-monitoring-search-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSecurityFindings
+        unstable: []
+        order: 2
+    - name: Create Jira issues for security findings
+      url: '#create-jira-issues-for-security-findings'
+      identifier: security-monitoring-create-jira-issues-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJiraIssues
+        unstable:
+          - v2
+        order: 47
+    - name: Attach security findings to a Jira issue
+      url: '#attach-security-findings-to-a-jira-issue'
+      identifier: security-monitoring-attach-security-findings-to-a-jira-issue
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachJiraIssue
+        unstable:
+          - v2
+        order: 48
+    - name: Attach security findings to a case
+      url: '#attach-security-findings-to-a-case'
+      identifier: security-monitoring-attach-security-findings-to-a-case
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachCase
+        unstable: []
+        order: 45
+    - name: Create cases for security findings
+      url: '#create-cases-for-security-findings'
+      identifier: security-monitoring-create-cases-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCases
+        unstable: []
+        order: 44
+    - name: Detach security findings from their case
+      url: '#detach-security-findings-from-their-case'
+      identifier: security-monitoring-detach-security-findings-from-their-case
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DetachCase
+        unstable: []
+        order: 46
+    - name: List security findings
+      url: '#list-security-findings'
+      identifier: security-monitoring-list-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindings
+        unstable: []
+        order: 1
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3648,6 +3746,18 @@ menu:
       url: /api/latest/synthetics/
       identifier: synthetics
       generated: true
+    - name: Patch a global variable
+      url: '#patch-a-global-variable'
+      identifier: synthetics-patch-a-global-variable
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchGlobalVariable
+        unstable: []
+        order: 20
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
@@ -4132,7 +4242,7 @@ menu:
           - CreateHostTags
         unstable: []
         order: 3
-    - name: Get host tags
+    - name: Get Host Tags
       url: '#get-host-tags'
       identifier: tags-get-host-tags
       parent: tags
@@ -4156,9 +4266,9 @@ menu:
           - DeleteHostTags
         unstable: []
         order: 5
-    - name: Get Tags
-      url: '#get-tags'
-      identifier: tags-get-tags
+    - name: Get All Host Tags
+      url: '#get-all-host-tags'
+      identifier: tags-get-all-host-tags
       parent: tags
       generated: true
       params:
@@ -5038,6 +5148,22 @@ menu:
         unstable:
           - v2
         order: 4
+    - name: APM
+      url: /api/latest/apm/
+      identifier: apm
+      generated: true
+    - name: Get service list
+      url: '#get-service-list'
+      identifier: apm-get-service-list
+      parent: apm
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetServiceList
+        unstable: []
+        order: 1
     - name: APM Retention Filters
       url: /api/latest/apm-retention-filters/
       identifier: apm-retention-filters
@@ -7443,6 +7569,127 @@ menu:
         unstable:
           - v2
         order: 3
+    - name: Deployment Gates
+      url: /api/latest/deployment-gates/
+      identifier: deployment-gates
+      generated: true
+    - name: Update deployment gate
+      url: '#update-deployment-gate'
+      identifier: deployment-gates-update-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDeploymentGate
+        unstable:
+          - v2
+        order: 3
+    - name: Get deployment gate
+      url: '#get-deployment-gate'
+      identifier: deployment-gates-get-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentGate
+        unstable:
+          - v2
+        order: 2
+    - name: Delete deployment gate
+      url: '#delete-deployment-gate'
+      identifier: deployment-gates-delete-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDeploymentGate
+        unstable:
+          - v2
+        order: 4
+    - name: Update deployment rule
+      url: '#update-deployment-rule'
+      identifier: deployment-gates-update-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDeploymentRule
+        unstable:
+          - v2
+        order: 7
+    - name: Get deployment rule
+      url: '#get-deployment-rule'
+      identifier: deployment-gates-get-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentRule
+        unstable:
+          - v2
+        order: 6
+    - name: Delete deployment rule
+      url: '#delete-deployment-rule'
+      identifier: deployment-gates-delete-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDeploymentRule
+        unstable:
+          - v2
+        order: 8
+    - name: Create deployment rule
+      url: '#create-deployment-rule'
+      identifier: deployment-gates-create-deployment-rule
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDeploymentRule
+        unstable:
+          - v2
+        order: 5
+    - name: Get rules for a deployment gate
+      url: '#get-rules-for-a-deployment-gate'
+      identifier: deployment-gates-get-rules-for-a-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDeploymentGateRules
+        unstable:
+          - v2
+        order: 9
+    - name: Create deployment gate
+      url: '#create-deployment-gate'
+      identifier: deployment-gates-create-deployment-gate
+      parent: deployment-gates
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDeploymentGate
+        unstable:
+          - v2
+        order: 1
     - name: Domain Allowlist
       url: /api/latest/domain-allowlist/
       identifier: domain-allowlist
@@ -7675,7 +7922,7 @@ menu:
           - TriggerFleetSchedule
         unstable:
           - v2
-        order: 5
+        order: 13
     - name: Update a schedule
       url: '#update-a-schedule'
       identifier: fleet-automation-update-a-schedule
@@ -7688,7 +7935,7 @@ menu:
           - UpdateFleetSchedule
         unstable:
           - v2
-        order: 3
+        order: 11
     - name: Get a schedule by ID
       url: '#get-a-schedule-by-id'
       identifier: fleet-automation-get-a-schedule-by-id
@@ -7701,7 +7948,7 @@ menu:
           - GetFleetSchedule
         unstable:
           - v2
-        order: 2
+        order: 10
     - name: Delete a schedule
       url: '#delete-a-schedule'
       identifier: fleet-automation-delete-a-schedule
@@ -7714,7 +7961,7 @@ menu:
           - DeleteFleetSchedule
         unstable:
           - v2
-        order: 4
+        order: 12
     - name: Create a schedule
       url: '#create-a-schedule'
       identifier: fleet-automation-create-a-schedule
@@ -7727,7 +7974,7 @@ menu:
           - CreateFleetSchedule
         unstable:
           - v2
-        order: 1
+        order: 9
     - name: List all schedules
       url: '#list-all-schedules'
       identifier: fleet-automation-list-all-schedules
@@ -7740,7 +7987,7 @@ menu:
           - ListFleetSchedules
         unstable:
           - v2
-        order: 0
+        order: 8
     - name: Cancel a deployment
       url: '#cancel-a-deployment'
       identifier: fleet-automation-cancel-a-deployment
@@ -7753,7 +8000,7 @@ menu:
           - CancelFleetDeployment
         unstable:
           - v2
-        order: 4
+        order: 7
     - name: Get a configuration deployment by ID
       url: '#get-a-configuration-deployment-by-id'
       identifier: fleet-automation-get-a-configuration-deployment-by-id
@@ -7766,7 +8013,7 @@ menu:
           - GetFleetDeployment
         unstable:
           - v2
-        order: 3
+        order: 6
     - name: Upgrade hosts
       url: '#upgrade-hosts'
       identifier: fleet-automation-upgrade-hosts
@@ -7779,7 +8026,7 @@ menu:
           - CreateFleetDeploymentUpgrade
         unstable:
           - v2
-        order: 2
+        order: 5
     - name: Create a configuration deployment
       url: '#create-a-configuration-deployment'
       identifier: fleet-automation-create-a-configuration-deployment
@@ -7792,7 +8039,7 @@ menu:
           - CreateFleetDeploymentConfigure
         unstable:
           - v2
-        order: 1
+        order: 4
     - name: List all deployments
       url: '#list-all-deployments'
       identifier: fleet-automation-list-all-deployments
@@ -7805,7 +8052,33 @@ menu:
           - ListFleetDeployments
         unstable:
           - v2
-        order: 0
+        order: 3
+    - name: Get detailed information about an agent
+      url: '#get-detailed-information-about-an-agent'
+      identifier: fleet-automation-get-detailed-information-about-an-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetAgentInfo
+        unstable:
+          - v2
+        order: 2
+    - name: List all Datadog Agents
+      url: '#list-all-datadog-agents'
+      identifier: fleet-automation-list-all-datadog-agents
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgents
+        unstable:
+          - v2
+        order: 1
     - name: List all available Agent versions
       url: '#list-all-available-agent-versions'
       identifier: fleet-automation-list-all-available-agent-versions
@@ -8129,8 +8402,7 @@ menu:
           - v2
         operationids:
           - DeleteIncidentImpact
-        unstable:
-          - v2
+        unstable: []
         order: 9
     - name: Create an incident impact
       url: '#create-an-incident-impact'
@@ -8142,9 +8414,8 @@ menu:
           - v2
         operationids:
           - CreateIncidentImpact
-        unstable:
-          - v2
-        order: 7
+        unstable: []
+        order: 8
     - name: List an incident's impacts
       url: '#list-an-incidents-impacts'
       identifier: incidents-list-an-incidents-impacts
@@ -8155,25 +8426,50 @@ menu:
           - v2
         operationids:
           - ListIncidentImpacts
-        unstable:
-          - v2
-        order: 6
-    - name: 'Create, update, and delete incident attachments'
-      url: '#create,-update,-and-delete-incident-attachments'
-      identifier: 'incidents-create,-update,-and-delete-incident-attachments'
+        unstable: []
+        order: 7
+    - name: Update incident attachment
+      url: '#update-incident-attachment'
+      identifier: incidents-update-incident-attachment
       parent: incidents
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateIncidentAttachments
+          - UpdateIncidentAttachment
         unstable:
           - v2
-        order: 8
-    - name: Get a list of attachments
-      url: '#get-a-list-of-attachments'
-      identifier: incidents-get-a-list-of-attachments
+        order: 37
+    - name: Delete incident attachment
+      url: '#delete-incident-attachment'
+      identifier: incidents-delete-incident-attachment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentAttachment
+        unstable:
+          - v2
+        order: 36
+    - name: Create incident attachment
+      url: '#create-incident-attachment'
+      identifier: incidents-create-incident-attachment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentAttachment
+        unstable:
+          - v2
+        order: 35
+    - name: List incident attachments
+      url: '#list-incident-attachments'
+      identifier: incidents-list-incident-attachments
       parent: incidents
       generated: true
       params:
@@ -8183,7 +8479,7 @@ menu:
           - ListIncidentAttachments
         unstable:
           - v2
-        order: 7
+        order: 34
     - name: Update an existing incident
       url: '#update-an-existing-incident'
       identifier: incidents-update-an-existing-incident
@@ -8752,6 +9048,19 @@ menu:
         unstable:
           - v2
         order: 8
+    - name: Replace a restriction query
+      url: '#replace-a-restriction-query'
+      identifier: logs-restriction-queries-replace-a-restriction-query
+      parent: logs-restriction-queries
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReplaceRestrictionQuery
+        unstable:
+          - v2
+        order: 4
     - name: Update a restriction query
       url: '#update-a-restriction-query'
       identifier: logs-restriction-queries-update-a-restriction-query
@@ -9193,6 +9502,114 @@ menu:
       url: /api/latest/on-call/
       identifier: on-call
       generated: true
+    - name: Update an On-Call notification rule for a user
+      url: '#update-an-on-call-notification-rule-for-a-user'
+      identifier: on-call-update-an-on-call-notification-rule-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateUserNotificationRule
+        unstable: []
+        order: 21
+    - name: Get an On-Call notification rule for a user
+      url: '#get-an-on-call-notification-rule-for-a-user'
+      identifier: on-call-get-an-on-call-notification-rule-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserNotificationRule
+        unstable: []
+        order: 20
+    - name: Delete an On-Call notification rule for a user
+      url: '#delete-an-on-call-notification-rule-for-a-user'
+      identifier: on-call-delete-an-on-call-notification-rule-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserNotificationRule
+        unstable: []
+        order: 19
+    - name: Create an On-Call notification rule for a user
+      url: '#create-an-on-call-notification-rule-for-a-user'
+      identifier: on-call-create-an-on-call-notification-rule-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateUserNotificationRule
+        unstable: []
+        order: 17
+    - name: List On-Call notification rules for a user
+      url: '#list-on-call-notification-rules-for-a-user'
+      identifier: on-call-list-on-call-notification-rules-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserNotificationRules
+        unstable: []
+        order: 18
+    - name: Get an On-Call notification channel for a user
+      url: '#get-an-on-call-notification-channel-for-a-user'
+      identifier: on-call-get-an-on-call-notification-channel-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserNotificationChannel
+        unstable: []
+        order: 14
+    - name: Delete an On-Call notification channel for a user
+      url: '#delete-an-on-call-notification-channel-for-a-user'
+      identifier: on-call-delete-an-on-call-notification-channel-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserNotificationChannel
+        unstable: []
+        order: 13
+    - name: Create an On-Call notification channel for a user
+      url: '#create-an-on-call-notification-channel-for-a-user'
+      identifier: on-call-create-an-on-call-notification-channel-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateUserNotificationChannel
+        unstable: []
+        order: 16
+    - name: List On-Call notification channels for a user
+      url: '#list-on-call-notification-channels-for-a-user'
+      identifier: on-call-list-on-call-notification-channels-for-a-user
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserNotificationChannels
+        unstable: []
+        order: 15
     - name: Set On-Call team routing rules
       url: '#set-on-call-team-routing-rules'
       identifier: on-call-set-on-call-team-routing-rules
@@ -9229,9 +9646,9 @@ menu:
           - GetTeamOnCallUsers
         unstable: []
         order: 12
-    - name: Get the schedule on-call user
-      url: '#get-the-schedule-on-call-user'
-      identifier: on-call-get-the-schedule-on-call-user
+    - name: Get scheduled on-call user
+      url: '#get-scheduled-on-call-user'
+      identifier: on-call-get-scheduled-on-call-user
       parent: on-call
       generated: true
       params:
@@ -9585,6 +10002,22 @@ menu:
           - ListProcesses
         unstable: []
         order: 1
+    - name: Product Analytics
+      url: /api/latest/product-analytics/
+      identifier: product-analytics
+      generated: true
+    - name: Send server-side events
+      url: '#send-server-side-events'
+      identifier: product-analytics-send-server-side-events
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SubmitProductAnalyticsEvent
+        unstable: []
+        order: 1
     - name: RUM
       url: /api/latest/rum/
       identifier: rum
@@ -9701,6 +10134,18 @@ menu:
           - CreateReferenceTableUpload
         unstable: []
         order: 1
+    - name: Upsert rows
+      url: '#upsert-rows'
+      identifier: reference-tables-upsert-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpsertRows
+        unstable: []
+        order: 8
     - name: Get rows by id
       url: '#get-rows-by-id'
       identifier: reference-tables-get-rows-by-id
@@ -9713,6 +10158,18 @@ menu:
           - GetRowsByID
         unstable: []
         order: 5
+    - name: Delete rows
+      url: '#delete-rows'
+      identifier: reference-tables-delete-rows
+      parent: reference-tables
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRows
+        unstable: []
+        order: 9
     - name: Update reference table
       url: '#update-reference-table'
       identifier: reference-tables-update-reference-table
@@ -10847,6 +11304,19 @@ menu:
       url: /api/latest/spa/
       identifier: spa
       generated: true
+    - name: Get SPA Recommendations with a shard parameter
+      url: '#get-spa-recommendations-with-a-shard-parameter'
+      identifier: spa-get-spa-recommendations-with-a-shard-parameter
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendationsWithShard
+        unstable:
+          - v2
+        order: 1
     - name: Get SPA Recommendations
       url: '#get-spa-recommendations'
       identifier: spa-get-spa-recommendations
@@ -10859,7 +11329,7 @@ menu:
           - GetSPARecommendations
         unstable:
           - v2
-        order: 1
+        order: 2
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -11034,6 +11504,66 @@ menu:
           - GetTeamPermissionSettings
         unstable: []
         order: 17
+    - name: Update team notification rule
+      url: '#update-team-notification-rule'
+      identifier: teams-update-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTeamNotificationRule
+        unstable: []
+        order: 30
+    - name: Get team notification rule
+      url: '#get-team-notification-rule'
+      identifier: teams-get-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRule
+        unstable: []
+        order: 29
+    - name: Delete team notification rule
+      url: '#delete-team-notification-rule'
+      identifier: teams-delete-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamNotificationRule
+        unstable: []
+        order: 31
+    - name: Create team notification rule
+      url: '#create-team-notification-rule'
+      identifier: teams-create-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamNotificationRule
+        unstable: []
+        order: 28
+    - name: Get team notification rules
+      url: '#get-team-notification-rules'
+      identifier: teams-get-team-notification-rules
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRules
+        unstable: []
+        order: 27
     - name: Update a user's membership attributes on a team
       url: '#update-a-users-membership-attributes-on-a-team'
       identifier: teams-update-a-users-membership-attributes-on-a-team
@@ -11227,9 +11757,104 @@ menu:
           - v2
         operationids:
           - SyncTeams
-        unstable:
-          - v2
+        unstable: []
         order: 19
+    - name: Get team sync configurations
+      url: '#get-team-sync-configurations'
+      identifier: teams-get-team-sync-configurations
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamSync
+        unstable: []
+        order: 18
+    - name: Create team connections
+      url: '#create-team-connections'
+      identifier: teams-create-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamConnections
+        unstable: []
+        order: 25
+    - name: List team connections
+      url: '#list-team-connections'
+      identifier: teams-list-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamConnections
+        unstable: []
+        order: 24
+    - name: Delete team connections
+      url: '#delete-team-connections'
+      identifier: teams-delete-team-connections
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamConnections
+        unstable: []
+        order: 26
+    - name: Get a team hierarchy link
+      url: '#get-a-team-hierarchy-link'
+      identifier: teams-get-a-team-hierarchy-link
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamHierarchyLink
+        unstable: []
+        order: 21
+    - name: Remove a team hierarchy link
+      url: '#remove-a-team-hierarchy-link'
+      identifier: teams-remove-a-team-hierarchy-link
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveTeamHierarchyLink
+        unstable: []
+        order: 23
+    - name: Create a team hierarchy link
+      url: '#create-a-team-hierarchy-link'
+      identifier: teams-create-a-team-hierarchy-link
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddTeamHierarchyLink
+        unstable: []
+        order: 22
+    - name: Get team hierarchy links
+      url: '#get-team-hierarchy-links'
+      identifier: teams-get-team-hierarchy-links
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTeamHierarchyLinks
+        unstable: []
+        order: 20
     - name: Create a team
       url: '#create-a-team'
       identifier: teams-create-a-team

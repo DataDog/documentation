@@ -9,6 +9,12 @@ further_reading:
     - link: '/llm_observability/instrumentation/sdk/'
       tag: 'Documentation'
       text: 'LLM Observability SDK Reference'
+    - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+      tag: Blog
+      text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+    - link: https://www.datadoghq.com/blog/mcp-client-monitoring
+      tag: Blog
+      text: Gain end-to-end visibility into MCP clients with Datadog LLM Observability
 ---
 
 ## Overview
@@ -26,10 +32,9 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [Amazon Bedrock](#amazon-bedrock)               | >= 1.31.57         | >= 2.9.0       |
 | [Amazon Bedrock Agents](#amazon-bedrock-agents) | >= 1.38.26         | >= 3.10.0      |
 | [Anthropic](#anthropic)                         | >= 0.28.0          | >= 2.10.0      |
-| [CrewAI](#crewai)                             | >= 0.105.0         | >= 3.5.0       |
+| [CrewAI](#crewai)                               | >= 0.105.0         | >= 3.5.0       |
 | [Google ADK](#google-adk)                       | >= 1.0.0           | >= 3.15.0      |
 | [Google GenAI](#google-genai)                   | >= 1.21.1          | >= 3.11.0      |
-| [Google GenerativeAI](#google-generativeai)     | >= 0.7.2           | >= 2.14.0      |
 | [LangChain](#langchain)                         | >= 0.0.192         | >= 2.9.0       |
 | [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
 | [LiteLLM](#litellm)                             | >= 1.70.0          | >= 3.9.0       |
@@ -50,6 +55,7 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
+| [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
 
 {{% collapse-content title="Support for ESMAScript Modules (ESM)" level="h4" expanded=false id="esm-support" %}}
 Automatic instrumentation for ESM projects is supported starting from `dd-trace@>=5.38.0`. To enable automatic instrumentation in your ESM projects, run your application with the following Node option:
@@ -93,32 +99,16 @@ To use this custom loader, run your application with the following Node option:
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Support for bundled applications (esbuild, Webpack, Next.js)" level="h4" expanded=false id="bundling-support" %}}
-To use LLM Observability integrations in bundled applications (esbuild, Webpack, Next.js), you must exclude these integrations' modules from bundling.
+{{% collapse-content title="Support for bundled applications (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
+To use LLM Observability integrations in bundled applications (esbuild, Webpack), you must exclude these integrations' modules from bundling.
 
 ##### esbuild
 If you are using esbuild, see [Bundling with the Node.js tracer](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
 
-##### Webpack or Next.js
-For Webpack or Next.js bundling, specify the corresponding integration in the `externals` section of the webpack configuration:
+##### Webpack
+For Webpack, specify the corresponding integration in the `externals` section of the webpack configuration:
 
 ```javascript
-// next.config.js
-module.exports = {
-  webpack: (config) => {
-    // this may be a necessary inclusion
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      graphql: false,
-    }
-
-    // exclude OpenAI from bundling
-    config.externals.push('openai')
-
-    return config
-  }
-}
-
 // webpack.config.js
 module.exports = {
   resolve: {
@@ -129,6 +119,48 @@ module.exports = {
   externals: {
     openai: 'openai'
   }
+}
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Support for Next.js" level="h4" expanded=false id="nextjs-support" %}}
+Properly initialize the tracer in your application to ensure auto-instrumentation works correctly. If using TypeScript or ESM for your Next.js application, initialize the tracer in a `instrumentation.{ts/js}` file as follows, specifying your configuration options as environment variables:
+
+```typescript
+// instrumentation.ts
+export async function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    const initializeImportName = 'dd-trace/initialize.mjs';
+    await import(/* webpackIgnore: true */ initializeImportName as 'dd-trace/initialize.mjs')
+  }
+
+  // ...
+}
+```
+
+Otherwise, for CommonJS Next.js applications, you can use the `init` function directly:
+
+```javascript
+// instrumentation.js
+const tracer = require('dd-trace')
+
+function register () {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    tracer.init({}); // specify options here or they will be read from environment variables
+  }
+
+  // ...
+}
+
+module.exports = register;
+```
+
+
+Then, make sure to specify `dd-trace` and any other supported integrations in `serverExternalPackages` in your `next.config.{ts/js}` file:
+```javascript
+// next.config.ts
+module.exports = {
+  serverExternalPackages: ['dd-trace', 'openai'], // add any other supported integrations here to be auto-instrumented
 }
 ```
 {{% /collapse-content %}}
@@ -329,25 +361,24 @@ The Google GenAI integration instruments the following methods:
 [2]: https://ai.google.dev/api/generate-content#method:-models.generatecontent
 [3]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
 {{% /tab %}}
-{{< /tabs >}}
-{{% /collapse-content %}}
+{{% tab "Node.js" %}}
+The Google GenAI integration automatically traces methods in the [Google GenAI Node.js SDK][1] by instrumenting the [`@google/genai` package][4].
 
-{{% collapse-content title="Google GenerativeAI" level="h3" expanded=false id="google-generativeai" %}}
-{{< tabs >}}
-{{% tab "Python" %}}
-The Google GenerativeAI integration provides automatic tracing for the Google GenerativeAI Python SDK content generation calls.
-
-**Note:** The [Google Generative AI SDK][1] is deprecated, and succeeded by Google GenAI.
+**Note:** The [Google GenAI Node.js SDK][1] succeeds the [Google GenerativeAI SDK][6], and exposes both Gemini Developer API as well as Vertex.
 
 ### Traced methods
 
-The Google GenerativeAI integration instruments the following methods:
+The Google GenAI integration instruments the following methods:
 
-- Generating content (including streamed calls):
-  - `model.generate_content()` (Also captures `chat.send_message()`)
-  - `model.generate_content_async()` (Also captures `chat.send_message_async()`)
+- [Generating content][2] (including [streamed calls][5])
+- [Embedding content][3]
 
-[1]: https://github.com/google-gemini/deprecated-generative-ai-python
+[1]: https://ai.google.dev/gemini-api/docs#javascript
+[2]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt-JAVASCRIPT
+[3]: https://ai.google.dev/api/embeddings#embed_content-JAVASCRIPT
+[4]: https://www.npmjs.com/package/@google/genai
+[5]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt_streaming-JAVASCRIPT
+[6]: https://www.npmjs.com/package/@google/generative-ai
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
@@ -517,6 +548,8 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Responses][5]:
    - `OpenAI().responses.create()`
    - `AsyncOpenAI().responses.create()`
+   - `OpenAI().responses.parse()` (as of `ddtrace==3.17.0`)
+   - `AsyncOpenAI().responses.parse()` (as of `ddtrace==3.17.0`)
 -  [Calls made to DeepSeek through the OpenAI Python SDK][6] (as of `ddtrace==3.1.0`)
 
 [1]: /integrations/openai/

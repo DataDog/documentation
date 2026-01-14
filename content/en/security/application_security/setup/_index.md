@@ -35,7 +35,7 @@ Learn how to enable App and API Protection on all the following supported platfo
 {{< appsec-integrations >}}
   {{< appsec-integration name="NGINX" avatar="nginx" link="./nginx" >}}
   {{< appsec-integration name="Envoy" avatar="envoy" link="./envoy" >}}
-  {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
+  {{< appsec-integration name="HAProxy" avatar="haproxy" link="./haproxy" >}}
 {{< /appsec-integrations >}}
 
 ## Hosts
@@ -50,9 +50,10 @@ Learn how to enable App and API Protection on all the following supported platfo
 ## Kubernetes (K8s)
 
 {{< appsec-integrations >}}
-  {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./kubernetes" >}}
-  {{< appsec-integration name="Istio" avatar="istio" link="./istio" >}}
-  {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./gateway-api" >}}
+  {{< appsec-integration name="Istio" avatar="istio" link="./kubernetes/istio" >}}
+  {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./kubernetes/envoy-gateway" >}}
+  {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./kubernetes/gateway-api" >}}
+  {{< appsec-integration name="Ingress NGINX Controller" avatar="nginx" link="./nginx/ingress-controller" >}}
 {{< /appsec-integrations >}}
 
 ## Cloud Platforms
@@ -79,4 +80,3 @@ Learn how to enable App and API Protection on all the following supported platfo
 {{< appsec-integrations >}}
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
 {{< /appsec-integrations >}}
-

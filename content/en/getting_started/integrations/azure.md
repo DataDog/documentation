@@ -54,8 +54,13 @@ The `Datadog Admin Role`, or any other role with the `azure_configurations_manag
 
 {{% /collapse-content %}}
 
-<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, use the instructions on this page to create an app registration.
+{{< site-region region="us3" >}}
+
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> require the app registration setup method. For Datadog accounts using the Azure Native integration, follow the setup steps on this page to create an app registration. If a subscription is connected through both methods, a redundancy warning appears in the Azure integration tile. This warning can be safely ignored for Cloud Cost Management and Log Archives.
 </div>
+
+{{< /site-region >}}
+
 
 ## Setup
 
@@ -126,17 +131,16 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
    - App Service Plans
    - Container Apps
 
-You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
-
+   You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
 4. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
 5. Configure log collection:
-   a. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
-   b. If you're creating a new log forwarder:
-      a. Enter a resource group name to store the log forwarder control plane.
-      b. Select a control plane subscription for the log-forwarding orchestration (LFO).
-      c. Select a region for the control plane.
-   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
+   - If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
+   - If you're creating a new log forwarder:
+     1. Enter a resource group name to store the log forwarder control plane.
+     1. Select a control plane subscription for the log-forwarding orchestration (LFO).
+     1. Select a region for the control plane.
 
+   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
 6. Copy and run the command under **Initialize and apply the Terraform**.
 
 [100]: https://app.datadoghq.com/integrations/azure/
@@ -254,9 +258,12 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 4. Acknowledge deployment warnings on the [Deployment tab][32].
 5. Start the deployment process on the [Review + create tab][33].
 
+{{< site-region region="us3" >}}
 
-<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log archives</a> are only supported with the app registration setup method. If you set up the Datadog Azure Native integration for a US3 Datadog account, you need to create an <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#create-an-app-registration">App registration</a> to access this functionality.
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> require the app registration setup method. For Datadog accounts using the Azure Native integration, follow the steps on this page to create an app registration.
 </div>
+
+{{< /site-region >}}
 
 See [Azure Automated Log Forwarding Architecture][34] for more details.
 

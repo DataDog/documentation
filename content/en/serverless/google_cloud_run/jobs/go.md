@@ -18,7 +18,7 @@ further_reading:
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
 ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
-and are using <a href="https://hub.docker.com/r/datadog/serverless-init#180">serverless-init version 1.8.0 or later</a>.
+and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
 1. **Install the Datadog Go tracer**.
@@ -50,7 +50,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 2. **Install serverless-init**.
 
-   {{% serverless-init-install mode="in-container" cmd="./your-binary" %}}
+   {{% serverless-init-install mode="in-container" cmd="./your-binary" cloudservice="jobs" %}}
 
 3. **Set up logs**.
 
@@ -74,7 +74,9 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 5. {{% gcr-service-label %}}
 
-6. **Send custom metrics**.
+6. {{% gcr-jobs-retention-filter %}}
+
+7. **Send custom metrics**.
 
    To send custom metrics, [install the DogStatsD client][5] and [view code examples][6]. In serverless, only the *distribution* metric type is supported.
 

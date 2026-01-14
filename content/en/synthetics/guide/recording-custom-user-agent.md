@@ -2,7 +2,7 @@
 title: Record Steps With A Custom User-Agent
 description: Record browser test steps with a custom User-Agent string 
 further_reading:
-- link: "/synthetics/browser_tests/actions"
+- link: "/synthetics/browser_tests/test_steps"
   tag: "Documentation"
   text: "Learn about steps for browser tests"
 - link: "/synthetics/browser_tests/advanced_options/"
