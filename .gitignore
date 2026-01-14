@@ -166,6 +166,7 @@ content/en/containers/datadog_operator/custom_check.md
 content/en/containers/datadog_operator/data_collected.md
 content/en/containers/datadog_operator/secret_management.md
 content/en/containers/guide/v2alpha1_migration.md
+content/en/containers/datadog_operator/kubectl_plugin.md
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md

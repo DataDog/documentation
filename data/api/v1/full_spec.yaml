@@ -1741,6 +1741,9 @@ components:
           type: string
         markers:
           description: List of markers.
+          example:
+          - display_type: percentile
+            value: '90'
           items:
             $ref: '#/components/schemas/WidgetMarker'
           type: array
@@ -1799,14 +1802,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
-    DistributionWidgetHistogramRequestType:
-      description: Request type for the histogram request.
-      enum:
-      - histogram
-      example: histogram
-      type: string
-      x-enum-varnames:
-      - HISTOGRAM
     DistributionWidgetRequest:
       description: Updated distribution widget.
       properties:
@@ -1816,6 +1811,11 @@ components:
           $ref: '#/components/schemas/ApmStatsQueryDefinition'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -1827,10 +1827,17 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
         query:
           $ref: '#/components/schemas/DistributionWidgetHistogramRequestQuery'
         request_type:
-          $ref: '#/components/schemas/DistributionWidgetHistogramRequestType'
+          $ref: '#/components/schemas/WidgetHistogramRequestType'
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -1854,6 +1861,12 @@ components:
           description: Specifies minimum value to show on the x-axis. It takes a number,
             percentile (p90 === 90th percentile), or auto for default behavior.
           type: string
+        num_buckets:
+          description: Number of value buckets to target, also known as the resolution
+            of the value bins.
+          format: int64
+          minimum: 1
+          type: integer
         scale:
           default: linear
           description: Specifies the scale type. Possible values are `linear`.
@@ -3859,6 +3872,14 @@ components:
           type: array
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
+        markers:
+          description: List of markers.
+          example:
+          - display_type: percentile
+            value: '90'
+          items:
+            $ref: '#/components/schemas/WidgetMarker'
+          type: array
         requests:
           description: List of widget types.
           example:
@@ -3883,6 +3904,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/HeatMapWidgetDefinitionType'
+        xaxis:
+          $ref: '#/components/schemas/HeatMapWidgetXAxis'
         yaxis:
           $ref: '#/components/schemas/WidgetAxis'
       required:
@@ -3926,6 +3949,10 @@ components:
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
+        query:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
+        request_type:
+          $ref: '#/components/schemas/WidgetHistogramRequestType'
         response_format:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
@@ -3934,6 +3961,18 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
+      type: object
+    HeatMapWidgetXAxis:
+      description: X Axis controls for the heat map widget.
+      properties:
+        num_buckets:
+          description: 'Number of time buckets to target, also known as the resolution
+
+            of the time bins. This is only applicable for distribution of
+
+            points (group distributions use the roll-up modifier).'
+          format: int64
+          type: integer
       type: object
     Host:
       description: Object representing a host.
@@ -4287,14 +4326,14 @@ components:
           type: boolean
       type: object
     HostTags:
-      description: Set of tags to associate with your host.
+      description: Host name and an array of its tags
       properties:
         host:
           description: Your host name.
           example: test.host
           type: string
         tags:
-          description: A list of tags to apply to the host.
+          description: A list of tags associated with a host.
           items:
             description: A given tag in a list.
             example: environment:production
@@ -7641,6 +7680,104 @@ components:
       - data_source
       - query
       type: object
+    MonitorFormulaAndFunctionDataQualityDataSource:
+      description: Data source for data quality queries.
+      enum:
+      - data_quality_metrics
+      example: data_quality_metrics
+      type: string
+      x-enum-varnames:
+      - DATA_QUALITY_METRICS
+    MonitorFormulaAndFunctionDataQualityMeasure:
+      description: 'The data quality measure to query. Common values include:
+
+        `bytes`, `cardinality`, `custom`, `freshness`, `max`, `mean`, `min`,
+
+        `nullness`, `percent_negative`, `percent_zero`, `row_count`, `stddev`,
+
+        `sum`, `uniqueness`. Additional values may be supported.'
+      example: row_count
+      type: string
+    MonitorFormulaAndFunctionDataQualityModelTypeOverride:
+      description: Override for the model type used in anomaly detection.
+      enum:
+      - freshness
+      - percentage
+      - any
+      type: string
+      x-enum-varnames:
+      - FRESHNESS
+      - PERCENTAGE
+      - ANY
+    MonitorFormulaAndFunctionDataQualityMonitorOptions:
+      description: Monitor configuration options for data quality queries.
+      properties:
+        crontab_override:
+          description: Crontab expression to override the default schedule.
+          example: '* * * 10'
+          type: string
+        custom_sql:
+          description: Custom SQL query for the monitor.
+          example: SELECT COUNT(*) FROM users AS dd_value
+          type: string
+        custom_where:
+          description: Custom WHERE clause for the query.
+          example: USER_ID = 123
+          type: string
+        group_by_columns:
+          description: Columns to group results by.
+          example:
+          - col1
+          - col2
+          items:
+            type: string
+          type: array
+        model_type_override:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride'
+      type: object
+    MonitorFormulaAndFunctionDataQualityQueryDefinition:
+      description: A formula and functions data quality query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityDataSource'
+        filter:
+          description: Filter expression used to match on data entities. Uses Aastra
+            query syntax.
+          example: search for column where `database:production AND table:users`
+          type: string
+        group_by:
+          description: Optional grouping fields for aggregation.
+          example:
+          - entity_id
+          items:
+            type: string
+          type: array
+        measure:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityMeasure'
+        monitor_options:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityMonitorOptions'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        schema_version:
+          description: Schema version for the data quality query.
+          example: 0.0.1
+          type: string
+        scope:
+          description: 'Optional scoping expression to further filter metrics. Uses
+            metrics filter syntax.
+
+            This is useful when an entity has been configured to emit metrics with
+            additional tags.'
+          example: env:production
+          type: string
+      required:
+      - name
+      - data_source
+      - measure
+      - filter
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7792,6 +7929,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -8630,6 +8768,7 @@ components:
       - database-monitoring alert
       - network-performance alert
       - cost alert
+      - data-quality alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -8652,6 +8791,7 @@ components:
       - DATABASE_MONITORING_ALERT
       - NETWORK_PERFORMANCE_ALERT
       - COST_ALERT
+      - DATA_QUALITY_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -14861,6 +15001,61 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAPITestStep'
       - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
+      - $ref: '#/components/schemas/SyntheticsAPISubtestStep'
+    SyntheticsAPISubtestStep:
+      description: The subtest step used in a Synthetics multi-step API test.
+      properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        subtestPublicId:
+          description: Public ID of the test to be played as part of a `playSubTest`
+            step type.
+          example: ''
+          type: string
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPISubtestStepSubtype'
+      required:
+      - name
+      - subtype
+      - subtestPublicId
+      type: object
+    SyntheticsAPISubtestStepSubtype:
+      description: The subtype of the Synthetic multi-step API subtest step.
+      enum:
+      - playSubTest
+      example: playSubTest
+      type: string
+      x-enum-varnames:
+      - PLAY_SUB_TEST
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -16818,7 +17013,7 @@ components:
         tests:
           description: Array of Synthetic tests configuration.
           items:
-            $ref: '#/components/schemas/SyntheticsTestDetails'
+            $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           type: array
       type: object
     SyntheticsLocalVariableParsingOptionsType:
@@ -17849,7 +18044,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: For browser test, the steps of the test.
+          description: The steps of the test if they exist.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -17901,6 +18096,52 @@ components:
       - API
       - BROWSER
       - MOBILE
+    SyntheticsTestDetailsWithoutSteps:
+      description: Object containing details about your Synthetic test, without test
+        steps.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsTestConfig'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        locations:
+          description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        message:
+          description: Notification message associated with the test.
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsTestOptions'
+        public_id:
+          description: The test public ID.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
+        tags:
+          description: Array of tags attached to the test.
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsTestDetailsType'
+      type: object
     SyntheticsTestExecutionRule:
       description: Execution rule for a Synthetic test.
       enum:
@@ -18967,18 +19208,18 @@ components:
       - match
       type: object
     TagToHosts:
-      description: In this object, the key is the tag, the value is a list of host
-        names that are reporting that tag.
+      description: In this object, the key is the tag, and the value is a list of
+        host names that are reporting that tag.
       properties:
         tags:
           additionalProperties:
-            description: A list of additional properties for tags.
+            description: A list of host names which contain this tag
             items:
               description: A given tag in a list.
               example: test.metric.host
               type: string
             type: array
-          description: A list of tags to apply to the host.
+          description: A mapping of tags to host names
           type: object
       type: object
     TargetFormatType:
@@ -25319,6 +25560,14 @@ components:
       x-enum-varnames:
       - CHECK
       - CLUSTER
+    WidgetHistogramRequestType:
+      description: Request type for the histogram request.
+      enum:
+      - histogram
+      example: histogram
+      type: string
+      x-enum-varnames:
+      - HISTOGRAM
     WidgetHorizontalAlign:
       description: Horizontal alignment.
       enum:
@@ -25523,7 +25772,7 @@ components:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n
             \ - A line type: dashed, solid, or bold\nIn this case of a Distribution
-            widget, this can be set to be `x_axis_percentile`."
+            widget, this can be set to be `percentile`."
           example: error dashed
           type: string
         label:
@@ -25534,8 +25783,13 @@ components:
           description: Timestamp for the widget.
           type: string
         value:
-          description: Value to apply. Can be a single value y = 15 or a range of
+          description: 'Value to apply. Can be a single value y = 15 or a range of
             values 0 < y < 10.
+
+            For Distribution widgets with `display_type` set to `percentile`, this
+            should be
+
+            a numeric percentile value (for example, "90" for P90).'
           example: y = 15
           type: string
       required:
@@ -36335,7 +36589,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SyntheticsTestDetails'
+                $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           description: OK
         '403':
           content:
@@ -36908,11 +37162,13 @@ paths:
         - synthetics_global_variable_write
   /api/v1/tags/hosts:
     get:
-      description: Return a mapping of tags to hosts for your whole infrastructure.
+      description: Returns a mapping of tags to hosts. For each tag, the response
+        returns a list of host names that contain this tag. There is a restriction
+        of 10k total host names from the org that can be attached to tags and returned.
       operationId: ListHostTags
       parameters:
-      - description: When specified, filters host list to those tags with the specified
-          source.
+      - description: Source to filter. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags.
         in: query
         name: source
         required: false
@@ -36943,7 +37199,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get Tags
+      summary: Get All Host Tags
       tags:
       - Tags
       x-menu-order: 1
@@ -36952,21 +37208,21 @@ paths:
         permissions: []
   /api/v1/tags/hosts/{host_name}:
     delete:
-      description: 'This endpoint allows you to remove all user-assigned tags
+      description: 'This endpoint allows you to remove all tags
 
-        for a single host.'
+        for a single host. If no source is specified, only deletes from the source
+        "User".'
       operationId: DeleteHostTags
       parameters:
-      - description: This endpoint allows you to remove all user-assigned tags for
-          a single host.
+      - description: Specified host name to delete tags
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (for example chef, puppet).
-
-          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+      - description: Source of the tags to be deleted. [Complete list of source attribute
+          values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags.
         in: query
         name: source
         required: false
@@ -36997,14 +37253,14 @@ paths:
       description: Return the list of tags that apply to a given host.
       operationId: GetHostTags
       parameters:
-      - description: When specified, filters list of tags to those tags with the specified
-          source.
+      - description: Name of the host to retrieve tags for
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: Source to filter.
+      - description: Source to filter. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags.
         in: query
         name: source
         required: false
@@ -37031,26 +37287,26 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get host tags
+      summary: Get Host Tags
       tags:
       - Tags
       x-menu-order: 2
     post:
       description: 'This endpoint allows you to add new tags to a host,
 
-        optionally specifying where these tags come from.'
+        optionally specifying what source these tags come from. If tags already exist,
+        appends new tags to the tag list. If no source is specified, defaults to "user".'
       operationId: CreateHostTags
       parameters:
-      - description: This endpoint allows you to add new tags to a host, optionally
-          specifying where the tags came from.
+      - description: Specified host name to add new tags
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: 'The source of the tags.
-
-          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+      - description: Source to add tags. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags. If no source is specified, defaults
+          to "user".
         example: chef
         in: query
         name: source
@@ -37096,16 +37352,15 @@ paths:
         an integration source with those supplied in the request.'
       operationId: UpdateHostTags
       parameters:
-      - description: This endpoint allows you to update/replace all in an integration
-          source with those supplied in the request.
+      - description: Specified host name to change tags
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (for example chef, puppet).
-
-          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value)'
+      - description: Source to update tags. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags. If no source specified, defaults
+          to "user".
         in: query
         name: source
         required: false
@@ -40240,7 +40495,8 @@ tags:
 
     by a source. For example, some valid sources include nagios, hudson, jenkins,
 
-    users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.
+    users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc. Find a complete
+    list of source type names under [API Source Attributes](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
 
 
     Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).'
