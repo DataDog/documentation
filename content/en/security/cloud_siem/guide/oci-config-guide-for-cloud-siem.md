@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure resource modification. The threats are surfaced as Security Signals in the Security Signals Explorer for triaging.
+Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats such as targeted attacks, communication with threat intel-listed IPs, or insecure resource modifications. Detected threats are surfaced as Security Signals in the Security Signals Explorer for triage.
 
 This guide walks you through the following steps to start detecting threats with your OCI Audit logs:
 
@@ -24,7 +24,7 @@ This guide walks you through the following steps to start detecting threats with
 
 ## Set up Datadog’s OCI integration
 
-Set up Datadog’s [OCI integration](https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/?tab=createvcnrecommended) using either the QuickStart (recommended) or Terraform methods.
+Set up Datadog’s [OCI integration][5] using either the QuickStart (recommended) or the Terraform method.
 
 ## Enable log collection
 
@@ -38,7 +38,7 @@ Cloud SIEM applies out-of-the-box detection rules to all processed logs, includi
 
 - Go to the [Cloud SIEM Signals Explorer][1] to view and triage threats. See [Investigate Security Signals][2] for further details.  
 - See [out-of-the-box detection rules][3] that are applied to your logs.  
-- Create [new rules][4] to detect threats that match your specific use case.
+- [Create rules][4] to detect threats that match your specific use case.
 
 ## Further reading
 
@@ -48,3 +48,4 @@ Cloud SIEM applies out-of-the-box detection rules to all processed logs, includi
 [2]: /security/cloud_siem/triage_and_investigate/investigate_security_signals/
 [3]: /security/default_rules/#cat-cloud-siem
 [4]: /security/detection_rules/#create-detection-rules
+[5]: /integrations/oracle-cloud-infrastructure/?tab=createvcnrecommended
