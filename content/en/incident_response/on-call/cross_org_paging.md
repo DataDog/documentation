@@ -2,7 +2,6 @@
 title: Cross-org Paging
 aliases:
 - /service_management/on-call/cross_org_paging/
-private: true
 further_reading:
 - link: '/incident_response/on-call/'
   tag: 'Documentation'
@@ -10,12 +9,12 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Cross-org paging is in Preview and only supported for automated workflows (for example: monitor alerts, incident notification rules). Manual paging through the Datadog UI or API is limited to local organizations and data centers.
+Cross-org paging is in public Preview and only supported for automated workflows (for example: monitor alerts, incident notification rules). Manual paging through the Datadog UI or API is limited to local organizations and data centers.
 </div>
 
 ## Overview
 
-Cross-org paging enables users to automatically trigger alerts to On-Call teams that reside in other Datadog organizations or data centers. Cross-org paging is useful when your operational or organizational setup spans multiple Datadog orgs or data centers, and you want to centralize incident response in one single org. 
+Cross-org paging enables users to automatically trigger alerts to On-Call teams that reside in other Datadog organizations or data centers. Cross-org paging is useful when your operational or organizational setup spans multiple Datadog orgs or data centers, and you want to centralize incident response in one single org.
 
 With cross-org paging, you can:
 
@@ -31,10 +30,10 @@ To enable paging between orgs or datacenters, you must establish a secure connec
 
 1. In your destination org, [create a service account][1] with On-Call API access. Assign the service account to a role that includes the following permissions:
    - `on_call_read` - Read access to On-Call teams and configurations
-   - `on_call_page` - Ability to trigger pages to On-Call teams  
+   - `on_call_page` - Ability to trigger pages to On-Call teams
    - `on_call_respond` - Respond to On-Call Pages
    - `user_access_read` - Read user information (automatically included in most roles)
- 
+
    <div class="alert alert-danger">
    Service accounts created with Terraform may be missing the <code>user_access_read</code> permission. This permission is automatically added to roles created through the UI, but it cannot be manually added through the UI and may not be included in Terraform-configured roles. If cross-org paging fails with permission errors, add an additional role to your service account that includes the <code>user_access_read</code> permission.
    </div>
@@ -66,7 +65,7 @@ High memory usage detected on backend services. @oncall-core-infra
 
 When an alert is triggered, Datadog detects that the handle is external, and the page is routed to the correct destination org using the stored service account credentials.
 
-## Limitations 
+## Limitations
 - Manual paging (for example, through the API or web UI) is not supported across orgs. Manual paging is only supported within your current org or data center.
 - Links in cross-org notifications (for example, monitor or incident URLs) point to the source org. They may not resolve cleanly in the destination org UI.
 - Handle syncing happens periodically; changes in destination org On-Call teams may take time to propagate.
