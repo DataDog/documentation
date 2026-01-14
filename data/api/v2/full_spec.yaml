@@ -70571,15 +70571,49 @@ paths:
         events with the `change` or `alert` category** are in General Availability.
         For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
         for more details.\n\n\u274C For use cases involving other event categories,
-        use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
-        Notifications are not yet supported for events sent to this endpoint. Use
-        the V1 endpoint for notification functionality."
+        use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/)."
       operationId: CreateEvent
       requestBody:
         content:
           application/json:
             examples:
-              json-request-body:
+              alert-event:
+                description: Example of an alert event for tracking alerts and monitoring
+                  events.
+                summary: Alert Event
+                value:
+                  data:
+                    attributes:
+                      aggregation_key: deduplication_key_here
+                      attributes:
+                        custom:
+                          my-object-attribute:
+                            my-array-attribute:
+                            - 1
+                            - 2
+                            - 3
+                            my-array-object-attribute:
+                            - name: test-object-1
+                            - name: test-object-2
+                            my-integer-attribute: 1
+                          my-string-attribute: my-custom-value
+                        links:
+                        - category: runbook
+                          title: Datadog website
+                          url: https://datadoghq.com
+                        priority: '1'
+                        status: error
+                      category: alert
+                      message: Something is broken!
+                      tags:
+                      - service:my-test-service
+                      - datacenter:primary
+                      title: My Alerting Event
+                    type: event
+              change-event:
+                description: Example of a change event for tracking configuration
+                  or feature flag changes.
+                summary: Change Event
                 value:
                   data:
                     attributes:
