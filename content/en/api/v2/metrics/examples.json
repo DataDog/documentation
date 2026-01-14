@@ -1029,7 +1029,7 @@
                 "formula": "a+b",
                 "limit": {
                   "count": 10,
-                  "order": "string"
+                  "order": "asc"
                 }
               }
             ],
@@ -1144,7 +1144,7 @@
                 "formula": "a+b",
                 "limit": {
                   "count": 10,
-                  "order": "string"
+                  "order": "asc"
                 }
               }
             ],

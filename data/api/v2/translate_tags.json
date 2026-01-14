@@ -315,6 +315,10 @@
     "name": "Spans Metrics",
     "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/) for more information."
   },
+  "spreadsheets": {
+    "name": "Spreadsheets",
+    "description": "Manage spreadsheets and their contents."
+  },
   "static-analysis": {
     "name": "Static Analysis",
     "description": "API for static analysis"

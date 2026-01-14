@@ -1172,6 +1172,24 @@ components:
           schema:
             $ref: '#/components/schemas/HTTPCDRulesNotFoundResponse'
       description: Deployment rule not found.
+    JSONAPIBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: Bad Request
+    JSONAPIForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: Forbidden
+    JSONAPIUnauthorizedResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: Unauthorized
     NotAuthorizedResponse:
       content:
         application/json:
@@ -2809,6 +2827,16 @@ components:
       type: string
       x-enum-varnames:
       - ACTION
+    ActionsDatastoreImportParams:
+      properties:
+        id:
+          description: The ID of the actions datastore.
+          example: ''
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -2877,6 +2905,35 @@ components:
       - id
       - base_severity
       type: object
+    AggregationFunction:
+      description: Aggregation function to apply.
+      enum:
+      - count
+      - count_unique
+      - sum
+      - average
+      - min
+      - max
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - COUNT_UNIQUE
+      - SUM
+      - AVERAGE
+      - MIN
+      - MAX
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
     AlertEventAttributes:
       description: Alert event attributes.
       properties:
@@ -8959,6 +9016,27 @@ components:
       - severity
       - vector
       type: object
+    CalculatedColumn:
+      properties:
+        column_id:
+          description: The ID of the column being created.
+          example: ''
+          format: uuid
+          type: string
+        expression:
+          description: The calculation expression.
+          example: ''
+          type: string
+        id:
+          description: The ID of the calculated column step.
+          example: ''
+          format: uuid
+          type: string
+      required:
+      - id
+      - column_id
+      - expression
+      type: object
     CalculatedField:
       description: Calculated field.
       properties:
@@ -8973,6 +9051,16 @@ components:
       required:
       - name
       - expression
+      type: object
+    CalendarTimeFrameParams:
+      properties:
+        offset:
+          description: Offset for calendar-based time frames.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - offset
       type: object
     Case:
       description: A case
@@ -9623,6 +9711,77 @@ components:
           description: Total number of pages
           format: int64
           type: integer
+      type: object
+    Cell:
+      properties:
+        column:
+          description: Column index (zero-indexed).
+          example: 0
+          format: int64
+          type: integer
+        content:
+          description: Cell content.
+          example: ''
+          type: string
+        row:
+          description: Row index (zero-indexed).
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - row
+      - column
+      - content
+      type: object
+    CellRange:
+      properties:
+        column_end:
+          description: End column index (inclusive, zero-indexed).
+          example: 0
+          format: int64
+          type: integer
+        column_start:
+          description: Start column index (zero-indexed).
+          example: 0
+          format: int64
+          type: integer
+        row_end:
+          description: End row index (inclusive, zero-indexed).
+          example: 0
+          format: int64
+          type: integer
+        row_start:
+          description: Start row index (zero-indexed).
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - row_start
+      - row_end
+      - column_start
+      - column_end
+      type: object
+    CellRangeStyle:
+      properties:
+        cell_range:
+          $ref: '#/components/schemas/CellRange'
+        style:
+          $ref: '#/components/schemas/CellStyle'
+      required:
+      - cell_range
+      - style
+      type: object
+    CellStyle:
+      properties:
+        background_color:
+          description: Background color (hex, rgb, rgba, hsl, or hsla).
+          type: string
+        format:
+          $ref: '#/components/schemas/ColumnFormat'
+        text_align:
+          $ref: '#/components/schemas/TextAlign'
+        text_style:
+          $ref: '#/components/schemas/TextStyle'
       type: object
     ChangeEventAttributes:
       description: Change event attributes.
@@ -11251,6 +11410,92 @@ components:
       required:
       - location
       type: object
+    ColumnData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ColumnDataAttributes'
+        id:
+          description: The ID of the column.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ColumnDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ColumnDataAttributes:
+      properties:
+        formatted_rows:
+          description: Formatted data values.
+          items:
+            type: string
+          type: array
+        rows:
+          description: Raw data values.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - rows
+      type: object
+    ColumnDataType:
+      description: The resource type.
+      enum:
+      - column_data
+      example: column_data
+      type: string
+      x-enum-varnames:
+      - COLUMN_DATA
+    ColumnFormat:
+      properties:
+        as:
+          $ref: '#/components/schemas/ColumnFormatAs'
+        metadata:
+          $ref: '#/components/schemas/ColumnFormatMetadata'
+        unit:
+          $ref: '#/components/schemas/ColumnFormatUnit'
+      required:
+      - as
+      type: object
+    ColumnFormatAs:
+      description: Format type.
+      enum:
+      - string
+      - datetime
+      - date
+      - number
+      - currency
+      example: string
+      type: string
+      x-enum-varnames:
+      - STRING
+      - DATETIME
+      - DATE
+      - NUMBER
+      - CURRENCY
+    ColumnFormatMetadata:
+      properties:
+        currency_format:
+          $ref: '#/components/schemas/CurrencyFormat'
+        datetime_format:
+          $ref: '#/components/schemas/DatetimeFormat'
+        number_format:
+          $ref: '#/components/schemas/NumberFormat'
+      type: object
+    ColumnFormatUnit:
+      description: Unit for the column value.
+      enum:
+      - second
+      - millisecond
+      type: string
+      x-enum-varnames:
+      - SECOND
+      - MILLISECOND
     CompletionCondition:
       description: The definition of `CompletionCondition` object.
       properties:
@@ -11551,6 +11796,26 @@ components:
         type:
           $ref: '#/components/schemas/ConfigCatSDKKeyType'
       required:
+      - type
+      type: object
+    ConfigErrorRelationship:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ConfigErrorRelationshipDataItems'
+          type: array
+      type: object
+    ConfigErrorRelationshipDataItems:
+      properties:
+        id:
+          description: The ID of the sheet with errors.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SpreadsheetConfigErrorType'
+      required:
+      - id
       - type
       type: object
     ConfiguredSchedule:
@@ -14493,6 +14758,19 @@ components:
         data:
           $ref: '#/components/schemas/CsmServerlessCoverageAnalysisData'
       type: object
+    CurrencyFormat:
+      properties:
+        currency_code:
+          description: Currency code (e.g., USD, EUR).
+          example: ''
+          type: string
+        precision:
+          description: Number of decimal places.
+          format: int64
+          type: integer
+      required:
+      - currency_code
+      type: object
     CustomAttributeConfig:
       description: The definition of `CustomAttributeConfig` object.
       properties:
@@ -17059,6 +17337,52 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    DatetimeFormat:
+      properties:
+        pattern:
+          description: Date/time format pattern.
+          type: string
+      type: object
+    DebugInfo:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DebugInfoAttributes'
+        id:
+          description: The ID of the sheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/DebugInfoType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    DebugInfoAttributes:
+      properties:
+        query:
+          description: The generated SQL query.
+          example: ''
+          type: string
+      required:
+      - query
+      type: object
+    DebugInfoType:
+      description: The resource type.
+      enum:
+      - debug
+      example: debug
+      type: string
+      x-enum-varnames:
+      - DEBUG
+    DebugResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/DebugInfo'
+      required:
+      - data
+      type: object
     DeleteAppResponse:
       description: The response object after an app is successfully deleted.
       properties:
@@ -20509,6 +20833,37 @@ components:
             the default subdomain.
           type: string
       type: object
+    EventImportParams:
+      properties:
+        end:
+          description: End time in seconds since Unix epoch.
+          example: 0
+          format: int32
+          maximum: 21474836470
+          type: integer
+        indexes:
+          description: Scopes/indexes to query.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        query:
+          description: Query string for filtering events.
+          type: string
+        relative_time_frame:
+          $ref: '#/components/schemas/RelativeTimeFrame'
+        start:
+          description: Start time in seconds since Unix epoch.
+          example: 0
+          format: int32
+          maximum: 21474836470
+          type: integer
+      required:
+      - start
+      - end
+      - indexes
+      type: object
     EventPayload:
       additionalProperties: false
       description: Event attributes.
@@ -21665,6 +22020,66 @@ components:
             $ref: '#/components/schemas/FastlyServiceData'
           type: array
       type: object
+    FavoriteMeta:
+      properties:
+        is_favorite:
+          description: Whether the spreadsheet is favorited by the current user.
+          example: false
+          type: boolean
+      required:
+      - is_favorite
+      type: object
+    Filter:
+      properties:
+        column_id:
+          description: The ID of the column to filter.
+          example: ''
+          format: uuid
+          type: string
+        operator:
+          $ref: '#/components/schemas/FilterOperator'
+        value:
+          description: Filter value.
+          type: string
+        values:
+          description: Multiple filter values.
+          items:
+            type: string
+          type: array
+      required:
+      - column_id
+      - operator
+      type: object
+    FilterOperator:
+      description: Filter operator.
+      enum:
+      - equal
+      - not_equal
+      - greater_than
+      - less_than
+      - greater_than_or_equal
+      - less_than_or_equal
+      - contains
+      - not_contains
+      - is_any_of
+      - is_none_of
+      - is_empty
+      - is_not_empty
+      example: equal
+      type: string
+      x-enum-varnames:
+      - EQUAL
+      - NOT_EQUAL
+      - GREATER_THAN
+      - LESS_THAN
+      - GREATER_THAN_OR_EQUAL
+      - LESS_THAN_OR_EQUAL
+      - CONTAINS
+      - NOT_CONTAINS
+      - IS_ANY_OF
+      - IS_NONE_OF
+      - IS_EMPTY
+      - IS_NOT_EMPTY
     FiltersPerProduct:
       description: Product-specific filters for the dataset.
       properties:
@@ -22092,6 +22507,12 @@ components:
           items:
             $ref: '#/components/schemas/FindingData'
           type: array
+      type: object
+    FindingsImportParams:
+      properties:
+        query:
+          description: Query string for filtering findings.
+          type: string
       type: object
     FlakyTest:
       description: A flaky test object.
@@ -26067,6 +26488,87 @@ components:
           type: string
           x-mimetype: application/xml
       type: object
+    Import:
+      properties:
+        actions_datastore_params:
+          $ref: '#/components/schemas/ActionsDatastoreImportParams'
+        cloud_cost_params:
+          $ref: '#/components/schemas/SquireImportParams'
+        columns:
+          description: Source columns from the import.
+          items:
+            $ref: '#/components/schemas/SourceColumn'
+          type: array
+        event_params:
+          $ref: '#/components/schemas/EventImportParams'
+        findings_params:
+          $ref: '#/components/schemas/FindingsImportParams'
+        id:
+          description: The ID of the import step.
+          example: ''
+          format: uuid
+          type: string
+        managed_resource_params:
+          $ref: '#/components/schemas/RedaplResourceImportParams'
+        metrics_params:
+          $ref: '#/components/schemas/SquireImportParams'
+        published_dataset_params:
+          $ref: '#/components/schemas/PublishedDatasetParams'
+        reference_table_params:
+          $ref: '#/components/schemas/ReferenceTableImportParams'
+        type:
+          $ref: '#/components/schemas/ImportType'
+      required:
+      - id
+      - type
+      - columns
+      type: object
+    ImportType:
+      description: The type of data source.
+      enum:
+      - logs
+      - rum
+      - cloud_cost
+      - reference_table
+      - managed_resource
+      - metrics
+      - llm_observability
+      - compliance_findings
+      - security_findings
+      - events
+      - audit
+      - database_queries
+      - security_signals
+      - ci_pipelines
+      - spans
+      - product_analytics
+      - synthetics_test_runs
+      - on_call_events
+      - ddsql_editor
+      - actions_datastores
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - RUM
+      - CLOUD_COST
+      - REFERENCE_TABLE
+      - MANAGED_RESOURCE
+      - METRICS
+      - LLM_OBSERVABILITY
+      - COMPLIANCE_FINDINGS
+      - SECURITY_FINDINGS
+      - EVENTS
+      - AUDIT
+      - DATABASE_QUERIES
+      - SECURITY_SIGNALS
+      - CI_PIPELINES
+      - SPANS
+      - PRODUCT_ANALYTICS
+      - SYNTHETICS_TEST_RUNS
+      - ON_CALL_EVENTS
+      - DDSQL_EDITOR
+      - ACTIONS_DATASTORES
     IncidentAttachmentType:
       default: incident_attachments
       description: The incident attachment resource type.
@@ -32425,6 +32927,21 @@ components:
             from the other indexes
           type: string
       type: object
+    Lookups:
+      properties:
+        reference_table_lookups:
+          description: Reference table lookups.
+          items:
+            $ref: '#/components/schemas/ReferenceTableLookup'
+          type: array
+        tablesheet_lookups:
+          description: Table sheet lookups.
+          items:
+            $ref: '#/components/schemas/TablesheetLookup'
+          type: array
+      required:
+      - reference_table_lookups
+      type: object
     MSTeamsIntegrationMetadata:
       description: Incident integration metadata for the Microsoft Teams integration.
       properties:
@@ -35578,6 +36095,13 @@ components:
       required:
       - id
       - type
+      type: object
+    NumberFormat:
+      properties:
+        precision:
+          description: Number of decimal places.
+          format: int64
+          type: integer
       type: object
     ObservabilityPipeline:
       description: Top-level schema representing a pipeline.
@@ -39817,6 +40341,166 @@ components:
           format: binary
           type: string
       type: object
+    OpenSheet:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OpenSheetAttributes'
+        id:
+          description: The ID of the open sheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/OpenSheetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    OpenSheetAttributes:
+      properties:
+        cells:
+          description: Cell contents.
+          items:
+            $ref: '#/components/schemas/Cell'
+          type: array
+        column_configs:
+          description: Column dimension configurations.
+          items:
+            $ref: '#/components/schemas/OpenSheetDimensionConfig'
+          type: array
+        frozen_column_count:
+          description: Number of frozen columns.
+          format: int64
+          type: integer
+        frozen_row_count:
+          description: Number of frozen rows.
+          format: int64
+          type: integer
+        name:
+          description: The name of the open sheet.
+          example: ''
+          type: string
+        num_cols:
+          description: Number of columns in the open sheet.
+          format: int64
+          type: integer
+        num_rows:
+          description: Number of rows in the open sheet.
+          format: int64
+          type: integer
+        row_configs:
+          description: Row dimension configurations.
+          items:
+            $ref: '#/components/schemas/OpenSheetDimensionConfig'
+          type: array
+        styles:
+          description: Cell styling information.
+          items:
+            $ref: '#/components/schemas/CellRangeStyle'
+          type: array
+      required:
+      - name
+      type: object
+    OpenSheetDimensionConfig:
+      properties:
+        index:
+          description: Index of the row or column.
+          example: 0
+          format: int64
+          type: integer
+        size:
+          description: Size in pixels.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - index
+      - size
+      type: object
+    OpenSheetInput:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OpenSheetAttributes'
+        type:
+          $ref: '#/components/schemas/OpenSheetType'
+      required:
+      - type
+      - attributes
+      type: object
+    OpenSheetRelationship:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OpenSheetRelationshipDataItems'
+          type: array
+      type: object
+    OpenSheetRelationshipDataItems:
+      properties:
+        id:
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/OpenSheetType'
+      required:
+      - id
+      - type
+      type: object
+    OpenSheetRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/OpenSheetInput'
+      required:
+      - data
+      type: object
+    OpenSheetResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/OpenSheet'
+      required:
+      - data
+      type: object
+    OpenSheetSummary:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OpenSheetSummaryAttributes'
+        id:
+          description: The ID of the open sheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/OpenSheetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    OpenSheetSummaryAttributes:
+      properties:
+        name:
+          description: The name of the open sheet.
+          example: ''
+          type: string
+      required:
+      - name
+      type: object
+    OpenSheetSummaryRelationship:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/OpenSheetRelationshipDataItems'
+          type: array
+      type: object
+    OpenSheetType:
+      description: The resource type.
+      enum:
+      - open_sheets
+      example: open_sheets
+      type: string
+      x-enum-varnames:
+      - OPEN_SHEETS
     OpsgenieServiceCreateAttributes:
       description: The Opsgenie service attributes for a create request.
       properties:
@@ -41095,6 +41779,24 @@ components:
       type: string
       x-enum-varnames:
       - REFERENCE_TABLE
+    PausedTimeFrame:
+      properties:
+        end:
+          description: End time in seconds since Unix epoch.
+          example: 0
+          format: int32
+          maximum: 21474836470
+          type: integer
+        start:
+          description: Start time in seconds since Unix epoch.
+          example: 0
+          format: int32
+          maximum: 21474836470
+          type: integer
+      required:
+      - start
+      - end
+      type: object
     Permission:
       description: Permission object.
       properties:
@@ -41152,6 +41854,505 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    PivotCalculation:
+      properties:
+        calculation:
+          $ref: '#/components/schemas/PivotCalculationCalculation'
+        column:
+          description: The ID of the calculation column.
+          example: ''
+          format: uuid
+          type: string
+        display:
+          $ref: '#/components/schemas/PivotCalculationDisplay'
+        source_column:
+          $ref: '#/components/schemas/PivotSourceColumn'
+      required:
+      - column
+      - source_column
+      - calculation
+      type: object
+    PivotCalculationCalculation:
+      description: The calculation type.
+      enum:
+      - count
+      - count_unique
+      - average
+      - sum
+      - min
+      - max
+      - median
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      example: count
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - COUNT_UNIQUE
+      - AVERAGE
+      - SUM
+      - MIN
+      - MAX
+      - MEDIAN
+      - PC75
+      - PC90
+      - PC95
+      - PC98
+      - PC99
+    PivotCalculationDisplay:
+      description: Display mode for the calculation.
+      enum:
+      - percent_of_column
+      - percent_of_row
+      - percent_of_total
+      - default
+      type: string
+      x-enum-varnames:
+      - PERCENT_OF_COLUMN
+      - PERCENT_OF_ROW
+      - PERCENT_OF_TOTAL
+      - DEFAULT
+    PivotCalculationIndex:
+      properties:
+        column_id:
+          description: The ID of the calculation column.
+          example: ''
+          format: uuid
+          type: string
+        formatted_index:
+          description: Formatted index of the calculation.
+          format: int64
+          type: integer
+        index:
+          description: Index of the calculation.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - column_id
+      - index
+      type: object
+    PivotDimension:
+      properties:
+        are_totals_displayed:
+          description: Whether to display totals for this dimension.
+          example: false
+          type: boolean
+        collapsed:
+          description: Collapsed dimension values.
+          items:
+            type: string
+          type: array
+        column:
+          description: The ID of the pivot column.
+          example: ''
+          format: uuid
+          type: string
+        preprocessing:
+          $ref: '#/components/schemas/PivotDimensionPreprocessing'
+        sort:
+          $ref: '#/components/schemas/PivotSort'
+        source_column:
+          $ref: '#/components/schemas/PivotSourceColumn'
+      required:
+      - column
+      - source_column
+      - are_totals_displayed
+      - sort
+      type: object
+    PivotDimensionPreprocessing:
+      properties:
+        date_truncation:
+          $ref: '#/components/schemas/PivotDimensionPreprocessingDateTruncation'
+      type: object
+    PivotDimensionPreprocessingDateTruncation:
+      description: Date truncation type for time-based dimensions.
+      enum:
+      - month
+      - day
+      - week
+      type: string
+      x-enum-varnames:
+      - MONTH
+      - DAY
+      - WEEK
+    PivotDimensions:
+      properties:
+        columns:
+          description: Column dimensions.
+          items:
+            $ref: '#/components/schemas/PivotDimension'
+          type: array
+        rows:
+          description: Row dimensions.
+          items:
+            $ref: '#/components/schemas/PivotDimension'
+          type: array
+      required:
+      - rows
+      - columns
+      type: object
+    PivotHeaderNode:
+      properties:
+        children:
+          description: Child header nodes.
+          items:
+            $ref: '#/components/schemas/PivotHeaderNode'
+          type: array
+        formatted_label:
+          description: Formatted label of the header node.
+          type: string
+        index:
+          description: Index of the header node.
+          example: 0
+          format: int64
+          type: integer
+        label:
+          description: Label of the header node.
+          type: string
+      required:
+      - index
+      type: object
+    PivotSheetHeader:
+      properties:
+        width:
+          description: Width of the header in pixels.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    PivotSort:
+      properties:
+        column:
+          description: The ID of the column to sort by.
+          example: ''
+          format: uuid
+          type: string
+        direction:
+          $ref: '#/components/schemas/QuerySortOrder'
+      required:
+      - column
+      type: object
+    PivotSourceColumn:
+      properties:
+        id:
+          description: The ID of the source column.
+          example: ''
+          format: uuid
+          type: string
+        label:
+          description: The label of the source column.
+          type: string
+      required:
+      - id
+      type: object
+    PivotTable:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PivotTableAttributes'
+        id:
+          description: The ID of the pivot table.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/PivotTableType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    PivotTableAttributes:
+      properties:
+        calculations:
+          description: Calculations to perform.
+          items:
+            $ref: '#/components/schemas/PivotCalculation'
+          type: array
+        column_headers:
+          additionalProperties:
+            $ref: '#/components/schemas/PivotSheetHeader'
+          description: Column header configurations.
+          type: object
+        dimensions:
+          $ref: '#/components/schemas/PivotDimensions'
+        display_settings:
+          $ref: '#/components/schemas/PivotTableDisplaySettings'
+        filter:
+          description: Filters applied to the pivot table.
+          items:
+            $ref: '#/components/schemas/Filter'
+          type: array
+        inherit_filters:
+          description: Whether to inherit filters from the source table sheet.
+          type: boolean
+        name:
+          description: The name of the pivot table.
+          example: ''
+          type: string
+        source:
+          description: The ID of the source table sheet.
+          example: ''
+          format: uuid
+          type: string
+        visualizations:
+          description: Visualizations for the pivot table.
+          items:
+            $ref: '#/components/schemas/PivotVisualization'
+          type: array
+      required:
+      - name
+      - source
+      - dimensions
+      type: object
+    PivotTableData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PivotTableDataAttributes'
+        id:
+          description: The ID of the pivot table.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/PivotTableDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    PivotTableDataAttributes:
+      properties:
+        calculations:
+          description: Calculation indices and metadata.
+          items:
+            $ref: '#/components/schemas/PivotCalculationIndex'
+          type: array
+        columns:
+          $ref: '#/components/schemas/PivotHeaderNode'
+        data:
+          description: Three-dimensional array of pivot data values.
+          example:
+          - - - ''
+          items:
+            items:
+              items:
+                type: string
+              type: array
+            type: array
+          type: array
+        errors:
+          description: Runtime errors encountered.
+          items:
+            $ref: '#/components/schemas/PivotTableRuntimeError'
+          type: array
+        rows:
+          $ref: '#/components/schemas/PivotHeaderNode'
+      required:
+      - data
+      - calculations
+      - rows
+      - columns
+      type: object
+    PivotTableDataResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/PivotTableData'
+      required:
+      - data
+      type: object
+    PivotTableDataType:
+      description: The resource type.
+      enum:
+      - pivot_table_result
+      example: pivot_table_result
+      type: string
+      x-enum-varnames:
+      - PIVOT_TABLE_RESULT
+    PivotTableDisplaySettings:
+      properties:
+        hide_column_grand_totals:
+          description: Whether to hide column grand totals.
+          type: boolean
+        hide_row_grand_totals:
+          description: Whether to hide row grand totals.
+          type: boolean
+        layout:
+          $ref: '#/components/schemas/PivotTableDisplaySettingsLayout'
+        tabular_sort:
+          description: Sort configuration for tabular layout.
+          items:
+            $ref: '#/components/schemas/PivotSort'
+          type: array
+        unfreeze_label_columns:
+          description: Whether to unfreeze label columns.
+          type: boolean
+        unfreeze_label_rows:
+          description: Whether to unfreeze label rows.
+          type: boolean
+      required:
+      - layout
+      type: object
+    PivotTableDisplaySettingsLayout:
+      description: The layout option for the pivot table.
+      enum:
+      - grouped
+      - tabular
+      example: grouped
+      type: string
+      x-enum-varnames:
+      - GROUPED
+      - TABULAR
+    PivotTableInput:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PivotTableAttributes'
+        type:
+          $ref: '#/components/schemas/PivotTableType'
+      required:
+      - type
+      - attributes
+      type: object
+    PivotTableRelationship:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PivotTableRelationshipDataItems'
+          type: array
+      type: object
+    PivotTableRelationshipDataItems:
+      properties:
+        id:
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/PivotTableType'
+      required:
+      - id
+      - type
+      type: object
+    PivotTableRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/PivotTableInput'
+      required:
+      - data
+      type: object
+    PivotTableResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/PivotTable'
+      required:
+      - data
+      type: object
+    PivotTableRuntimeError:
+      properties:
+        error_type:
+          $ref: '#/components/schemas/PivotTableRuntimeErrorErrorType'
+        message:
+          description: Error message.
+          example: ''
+          type: string
+      required:
+      - error_type
+      - message
+      type: object
+    PivotTableRuntimeErrorErrorType:
+      description: The type of error.
+      enum:
+      - unknown_column_dimension
+      - unknown_calculation_source_column
+      - pivot_source_column_error
+      example: unknown_column_dimension
+      type: string
+      x-enum-varnames:
+      - UNKNOWN_COLUMN_DIMENSION
+      - UNKNOWN_CALCULATION_SOURCE_COLUMN
+      - PIVOT_SOURCE_COLUMN_ERROR
+    PivotTableSummary:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PivotTableSummaryAttributes'
+        id:
+          description: The ID of the pivot table.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/PivotTableType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    PivotTableSummaryAttributes:
+      properties:
+        name:
+          description: The name of the pivot table.
+          example: ''
+          type: string
+      required:
+      - name
+      type: object
+    PivotTableSummaryRelationship:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PivotTableRelationshipDataItems'
+          type: array
+      type: object
+    PivotTableType:
+      description: The resource type.
+      enum:
+      - pivot_tables
+      example: pivot_tables
+      type: string
+      x-enum-varnames:
+      - PIVOT_TABLES
+    PivotVisualization:
+      properties:
+        calculation_id:
+          description: The ID of the calculation to visualize.
+          example: ''
+          format: uuid
+          type: string
+        dimensions:
+          description: Dimensions for the visualization.
+          example:
+          - ''
+          items:
+            format: uuid
+            type: string
+          type: array
+        limit:
+          description: Limit for the number of items to display.
+          format: int64
+          type: integer
+        sort_direction:
+          $ref: '#/components/schemas/QuerySortOrder'
+        type:
+          $ref: '#/components/schemas/PivotVisualizationType'
+      required:
+      - type
+      - calculation_id
+      - dimensions
+      type: object
+    PivotVisualizationType:
+      description: The visualization type.
+      enum:
+      - sunburst
+      - toplist
+      - treemap
+      example: sunburst
+      type: string
+      x-enum-varnames:
+      - SUNBURST
+      - TOPLIST
+      - TREEMAP
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -41858,6 +43059,19 @@ components:
         data:
           $ref: '#/components/schemas/Deployment'
       type: object
+    PublishedDatasetParams:
+      properties:
+        published_dataset_id:
+          description: The ID of the published dataset.
+          example: ''
+          type: string
+        relative_time_frame:
+          $ref: '#/components/schemas/RelativeTimeFrame'
+        timeframe:
+          $ref: '#/components/schemas/PausedTimeFrame'
+      required:
+      - published_dataset_id
+      type: object
     PutAppsDatastoreItemResponseArray:
       description: Response after successfully inserting multiple items into a datastore,
         containing the identifiers of the created items.
@@ -42140,6 +43354,7 @@ components:
       enum:
       - asc
       - desc
+      example: asc
       type: string
       x-enum-varnames:
       - ASC
@@ -43126,6 +44341,18 @@ components:
       type: string
       x-enum-varnames:
       - RECOMMENDATION
+    RedaplResourceImportParams:
+      properties:
+        namespace:
+          description: The namespace of the resource.
+          type: string
+        resource_type:
+          description: (Deprecated) The resource type.
+          type: string
+        table:
+          description: The table name of the resource.
+          type: string
+      type: object
     ReferenceTableCreateSourceType:
       description: The source type for creating reference table data. Only these source
         types can be created through this API.
@@ -43141,6 +44368,66 @@ components:
       - S3
       - GCS
       - AZURE
+    ReferenceTableImportParams:
+      properties:
+        table_name:
+          description: The name of the reference table.
+          example: ''
+          type: string
+      required:
+      - table_name
+      type: object
+    ReferenceTableLookup:
+      properties:
+        columns:
+          description: Columns to fetch from the reference table.
+          items:
+            $ref: '#/components/schemas/SourceColumn'
+          type: array
+        condition:
+          $ref: '#/components/schemas/ReferenceTableLookupCondition'
+        conditions:
+          description: Multiple lookup conditions.
+          items:
+            $ref: '#/components/schemas/ReferenceTableLookupCondition'
+          type: array
+        id:
+          description: The ID of the lookup step.
+          example: ''
+          format: uuid
+          type: string
+        source_params:
+          $ref: '#/components/schemas/ReferenceTableImportParams'
+      required:
+      - id
+      - source_params
+      - columns
+      type: object
+    ReferenceTableLookupCondition:
+      properties:
+        lookup_key_column:
+          $ref: '#/components/schemas/ReferenceTableLookupKeyColumn'
+        operator:
+          $ref: '#/components/schemas/TablesheetLookupConditionOperator'
+        source_column_id:
+          description: The ID of the source column.
+          example: ''
+          format: uuid
+          type: string
+      required:
+      - source_column_id
+      - operator
+      - lookup_key_column
+      type: object
+    ReferenceTableLookupKeyColumn:
+      properties:
+        name:
+          description: The name of the lookup key column.
+          example: ''
+          type: string
+      required:
+      - name
+      type: object
     ReferenceTableSchemaFieldType:
       description: The field type for reference table schema fields.
       enum:
@@ -43850,6 +45137,36 @@ components:
       required:
       - data
       type: object
+    RelativeTimeFrame:
+      properties:
+        calendar_time_frame_params:
+          $ref: '#/components/schemas/CalendarTimeFrameParams'
+        mode:
+          $ref: '#/components/schemas/RelativeTimeFrameMode'
+        sliding_time_frame_params:
+          $ref: '#/components/schemas/SlidingTimeFrameParams'
+        timezone:
+          description: Timezone for the time frame.
+          example: ''
+          type: string
+      required:
+      - timezone
+      - mode
+      type: object
+    RelativeTimeFrameMode:
+      description: Mode for the relative time frame.
+      enum:
+      - sliding
+      - daily
+      - weekly
+      - monthly
+      example: sliding
+      type: string
+      x-enum-varnames:
+      - SLIDING
+      - DAILY
+      - WEEKLY
+      - MONTHLY
     Remediation:
       description: Vulnerability remediation.
       properties:
@@ -52506,6 +53823,31 @@ components:
           description: Link to the Incident created on ServiceNow
           type: string
       type: object
+    SheetColumn:
+      properties:
+        format:
+          $ref: '#/components/schemas/ColumnFormat'
+        id:
+          description: The ID of the column.
+          example: ''
+          format: uuid
+          type: string
+        is_hidden:
+          description: Whether the column is hidden.
+          type: boolean
+        label:
+          description: The display label of the column.
+          example: ''
+          type: string
+        width:
+          description: Width of the column in pixels.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+      - id
+      - label
+      type: object
     Shift:
       description: An on-call shift with its associated data and relationships.
       example:
@@ -52905,6 +54247,16 @@ components:
       required:
       - slackTrigger
       type: object
+    SlidingTimeFrameParams:
+      properties:
+        interval:
+          description: Interval in seconds for sliding window.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - interval
+      type: object
     SloReportCreateRequest:
       description: The SLO report request body.
       properties:
@@ -52963,6 +54315,19 @@ components:
       required:
       - softwareCatalogTrigger
       type: object
+    Sort:
+      properties:
+        column_id:
+          description: The ID of the column to sort by.
+          example: ''
+          format: uuid
+          type: string
+        order:
+          $ref: '#/components/schemas/QuerySortOrder'
+      required:
+      - column_id
+      - order
+      type: object
     SortDirection:
       default: desc
       description: The direction to sort by.
@@ -52973,6 +54338,60 @@ components:
       x-enum-varnames:
       - DESC
       - ASC
+    SourceColumn:
+      properties:
+        id:
+          description: The ID of the source column.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          description: The name of the source column.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/SourceColumnType'
+      required:
+      - id
+      - name
+      - type
+      type: object
+    SourceColumnType:
+      description: The data type of the column.
+      enum:
+      - string
+      - integer
+      - double
+      - boolean
+      - interval
+      - json
+      - hstore
+      - group
+      - array<string>
+      - array<int64>
+      - array<float64>
+      - array<timestamp>
+      - array<interval>
+      - array<bool>
+      - array<json>
+      example: string
+      type: string
+      x-enum-varnames:
+      - STRING
+      - INTEGER
+      - DOUBLE
+      - BOOLEAN
+      - INTERVAL
+      - JSON
+      - HSTORE
+      - GROUP
+      - ARRAYLTSTRINGGT
+      - ARRAYLTINT64GT
+      - ARRAYLTFLOAT64GT
+      - ARRAYLTTIMESTAMPGT
+      - ARRAYLTINTERVALGT
+      - ARRAYLTBOOLGT
+      - ARRAYLTJSONGT
     Span:
       description: Object description of a spans after being processed and stored
         by Datadog.
@@ -53960,6 +55379,337 @@ components:
       required:
       - type
       type: object
+    Spreadsheet:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpreadsheetAttributes'
+        id:
+          description: The ID of the spreadsheet.
+          example: ''
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SpreadsheetRelationships'
+        type:
+          $ref: '#/components/schemas/SpreadsheetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SpreadsheetAttributes:
+      properties:
+        created_at:
+          description: Creation time of the spreadsheet.
+          example: ''
+          format: date-time
+          type: string
+        name:
+          description: The name of the spreadsheet.
+          example: ''
+          type: string
+        time_frame:
+          $ref: '#/components/schemas/TimeFrame'
+        updated_at:
+          description: Last update time of the spreadsheet.
+          example: ''
+          format: date-time
+          type: string
+      required:
+      - name
+      - created_at
+      - updated_at
+      type: object
+    SpreadsheetBulkDeleteRequest:
+      properties:
+        data:
+          description: List of spreadsheet IDs to delete.
+          items:
+            $ref: '#/components/schemas/SpreadsheetDelete'
+          type: array
+      required:
+      - data
+      type: object
+    SpreadsheetConfigErrorType:
+      description: The resource type.
+      enum:
+      - table_sheet_config_error
+      - pivot_table_config_error
+      example: table_sheet_config_error
+      type: string
+      x-enum-varnames:
+      - TABLE_SHEET_CONFIG_ERROR
+      - PIVOT_TABLE_CONFIG_ERROR
+    SpreadsheetCreate:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpreadsheetCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/SpreadsheetCreateRelationships'
+        type:
+          $ref: '#/components/schemas/SpreadsheetType'
+      required:
+      - type
+      - attributes
+      type: object
+    SpreadsheetCreateAttributes:
+      properties:
+        name:
+          description: The name of the spreadsheet.
+          example: ''
+          type: string
+        time_frame:
+          $ref: '#/components/schemas/TimeFrame'
+      required:
+      - name
+      type: object
+    SpreadsheetCreateRelationships:
+      properties:
+        open_sheets:
+          $ref: '#/components/schemas/OpenSheetRelationship'
+        pivot_tables:
+          $ref: '#/components/schemas/PivotTableRelationship'
+        sheets:
+          $ref: '#/components/schemas/TableSheetRelationship'
+      type: object
+    SpreadsheetCreateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SpreadsheetCreate'
+      required:
+      - data
+      type: object
+    SpreadsheetDelete:
+      properties:
+        id:
+          description: The ID of the spreadsheet to delete.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SpreadsheetType'
+      required:
+      - id
+      - type
+      type: object
+    SpreadsheetListResponse:
+      properties:
+        data:
+          description: List of spreadsheets.
+          items:
+            $ref: '#/components/schemas/SpreadsheetSummary'
+          type: array
+        included:
+          description: Related resources that can be referenced.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/SpreadsheetUser'
+            - $ref: '#/components/schemas/TableSheetSummary'
+            - $ref: '#/components/schemas/PivotTableSummary'
+            - $ref: '#/components/schemas/OpenSheetSummary'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ResponseMetaAttributes'
+      required:
+      - data
+      type: object
+    SpreadsheetRelatedUserType:
+      description: The related spreadsheet user type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    SpreadsheetRelationships:
+      properties:
+        created_by:
+          $ref: '#/components/schemas/UserRelationship'
+        errors:
+          $ref: '#/components/schemas/ConfigErrorRelationship'
+        open_sheets:
+          $ref: '#/components/schemas/OpenSheetRelationship'
+        pivot_tables:
+          $ref: '#/components/schemas/PivotTableRelationship'
+        sheets:
+          $ref: '#/components/schemas/TableSheetRelationship'
+      type: object
+    SpreadsheetResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/Spreadsheet'
+        included:
+          description: Related resources that can be referenced.
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/SpreadsheetUser'
+            - $ref: '#/components/schemas/TableSheet'
+            - $ref: '#/components/schemas/PivotTable'
+            - $ref: '#/components/schemas/OpenSheet'
+          type: array
+        meta:
+          $ref: '#/components/schemas/FavoriteMeta'
+      required:
+      - data
+      type: object
+    SpreadsheetSummary:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpreadsheetSummaryAttributes'
+        id:
+          description: The ID of the spreadsheet.
+          example: ''
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SpreadsheetSummaryRelationships'
+        type:
+          $ref: '#/components/schemas/SpreadsheetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SpreadsheetSummaryAttributes:
+      properties:
+        created_at:
+          description: Creation time of the spreadsheet.
+          example: ''
+          format: date-time
+          type: string
+        is_favorite:
+          description: Whether the spreadsheet is favorited by the current user.
+          example: false
+          type: boolean
+        name:
+          description: The name of the spreadsheet.
+          example: ''
+          type: string
+        updated_at:
+          description: Last update time of the spreadsheet.
+          example: ''
+          format: date-time
+          type: string
+      required:
+      - name
+      - created_at
+      - updated_at
+      - is_favorite
+      type: object
+    SpreadsheetSummaryRelationships:
+      properties:
+        created_by:
+          $ref: '#/components/schemas/UserRelationship'
+        open_sheets:
+          $ref: '#/components/schemas/OpenSheetSummaryRelationship'
+        pivot_tables:
+          $ref: '#/components/schemas/PivotTableSummaryRelationship'
+        sheets:
+          $ref: '#/components/schemas/TableSheetSummaryRelationship'
+      type: object
+    SpreadsheetType:
+      description: The resource type.
+      enum:
+      - spreadsheets
+      example: spreadsheets
+      type: string
+      x-enum-varnames:
+      - SPREADSHEETS
+    SpreadsheetUpdate:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpreadsheetCreateAttributes'
+        id:
+          description: The ID of the spreadsheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SpreadsheetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SpreadsheetUpdateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SpreadsheetUpdate'
+      required:
+      - data
+      type: object
+    SpreadsheetUser:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpreadsheetUserAttributes'
+        id:
+          description: The ID of the user.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SpreadsheetRelatedUserType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SpreadsheetUserAttributes:
+      properties:
+        handle:
+          description: The handle/email of the user.
+          example: ''
+          type: string
+        icon:
+          description: The icon URL of the user.
+          example: ''
+          type: string
+        name:
+          description: The name of the user.
+          example: ''
+          type: string
+      required:
+      - name
+      - handle
+      - icon
+      type: object
+    SpreadsheetUserRelationshipData:
+      properties:
+        id:
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SpreadsheetRelatedUserType'
+      required:
+      - id
+      - type
+      type: object
+    SquireImportParams:
+      properties:
+        end:
+          description: End time in seconds since Unix epoch.
+          example: 0
+          format: int32
+          maximum: 21474836470
+          type: integer
+        query:
+          description: Query string.
+          example: ''
+          type: string
+        relative_time_frame:
+          $ref: '#/components/schemas/RelativeTimeFrame'
+        start:
+          description: Start time in seconds since Unix epoch.
+          example: 0
+          format: int32
+          maximum: 21474836470
+          type: integer
+      required:
+      - query
+      - start
+      - end
+      type: object
     StartStepNames:
       description: A list of steps that run first after a trigger fires.
       example:
@@ -54743,6 +56493,378 @@ components:
       type: string
       x-enum-varnames:
       - ROW
+    TableSheet:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TableSheetAttributes'
+        id:
+          description: The ID of the table sheet.
+          example: ''
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TableSheetRelationships'
+        type:
+          $ref: '#/components/schemas/TableSheetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    TableSheetAttributes:
+      properties:
+        calculated_columns:
+          description: Calculated column definitions.
+          items:
+            $ref: '#/components/schemas/CalculatedColumn'
+          type: array
+        filter:
+          description: Filters applied to the table sheet.
+          items:
+            $ref: '#/components/schemas/Filter'
+          type: array
+        import:
+          $ref: '#/components/schemas/Import'
+        lookups:
+          $ref: '#/components/schemas/Lookups'
+        name:
+          description: The name of the table sheet.
+          example: ''
+          type: string
+        schema:
+          description: Column definitions for the table sheet.
+          items:
+            $ref: '#/components/schemas/SheetColumn'
+          type: array
+        sort:
+          description: Sort configuration for the table sheet.
+          items:
+            $ref: '#/components/schemas/Sort'
+          type: array
+        use_spreadsheet_time:
+          description: Whether to use the spreadsheet's time frame.
+          type: boolean
+      required:
+      - name
+      - schema
+      - import
+      type: object
+    TableSheetColumnAggregation:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TableSheetColumnAggregationAttributes'
+        id:
+          description: The ID of the table sheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/TableSheetColumnAggregationType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    TableSheetColumnAggregationAttributes:
+      properties:
+        data:
+          description: The aggregated value.
+          example: 0.0
+          format: double
+          type: number
+      required:
+      - data
+      type: object
+    TableSheetColumnAggregationResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/TableSheetColumnAggregation'
+      required:
+      - data
+      type: object
+    TableSheetColumnAggregationType:
+      description: The resource type.
+      enum:
+      - table_sheet_column_aggregation
+      example: table_sheet_column_aggregation
+      type: string
+      x-enum-varnames:
+      - TABLE_SHEET_COLUMN_AGGREGATION
+    TableSheetCount:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TableSheetCountAttributes'
+        id:
+          description: The ID of the table sheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/TableSheetCountType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    TableSheetCountAttributes:
+      properties:
+        filtered:
+          description: Number of filtered rows.
+          format: int64
+          type: integer
+        total:
+          description: Total number of rows.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - total
+      type: object
+    TableSheetCountResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/TableSheetCount'
+      required:
+      - data
+      type: object
+    TableSheetCountType:
+      description: The resource type.
+      enum:
+      - table_sheet_count
+      example: table_sheet_count
+      type: string
+      x-enum-varnames:
+      - TABLE_SHEET_COUNT
+    TableSheetDataResponse:
+      properties:
+        data:
+          description: Column data for the table sheet.
+          items:
+            $ref: '#/components/schemas/ColumnData'
+          type: array
+      required:
+      - data
+      type: object
+    TableSheetExport:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TableSheetExportAttributes'
+        id:
+          description: The ID of the table sheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/TableSheetExportType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    TableSheetExportAttributes:
+      properties:
+        data:
+          description: CSV formatted data.
+          example: ''
+          type: string
+        headers:
+          description: Column headers.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        num_rows:
+          description: Number of rows in the export.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - data
+      - headers
+      - num_rows
+      type: object
+    TableSheetExportResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/TableSheetExport'
+      required:
+      - data
+      type: object
+    TableSheetExportType:
+      description: The resource type.
+      enum:
+      - table_sheet_export
+      example: table_sheet_export
+      type: string
+      x-enum-varnames:
+      - TABLE_SHEET_EXPORT
+    TableSheetRelationship:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TableSheetRelationshipDataItems'
+          type: array
+      type: object
+    TableSheetRelationshipDataItems:
+      properties:
+        id:
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/TableSheetType'
+      required:
+      - id
+      - type
+      type: object
+    TableSheetRelationships:
+      properties:
+        errors:
+          $ref: '#/components/schemas/ConfigErrorRelationship'
+      type: object
+    TableSheetRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/TableSheet'
+      required:
+      - data
+      type: object
+    TableSheetResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/TableSheet'
+        included:
+          description: Related configuration errors.
+          items:
+            $ref: '#/components/schemas/ConfigErrorRelationshipDataItems'
+          type: array
+      required:
+      - data
+      type: object
+    TableSheetSummary:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TableSheetSummaryAttributes'
+        id:
+          description: The ID of the table sheet.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/TableSheetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    TableSheetSummaryAttributes:
+      properties:
+        name:
+          description: The name of the table sheet.
+          example: ''
+          type: string
+      required:
+      - name
+      type: object
+    TableSheetSummaryRelationship:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TableSheetRelationshipDataItems'
+          type: array
+      type: object
+    TableSheetType:
+      description: The resource type.
+      enum:
+      - table_sheets
+      example: table_sheets
+      type: string
+      x-enum-varnames:
+      - TABLE_SHEETS
+    TablesheetLookup:
+      properties:
+        columns:
+          description: Columns to create from the lookup.
+          items:
+            $ref: '#/components/schemas/TablesheetLookupCreatedColumn'
+          type: array
+        condition:
+          $ref: '#/components/schemas/TablesheetLookupCondition'
+        conditions:
+          description: Multiple lookup conditions.
+          items:
+            $ref: '#/components/schemas/TablesheetLookupCondition'
+          type: array
+        id:
+          description: The ID of the lookup step.
+          example: ''
+          format: uuid
+          type: string
+        source_params:
+          $ref: '#/components/schemas/TablesheetLookupSourceParams'
+      required:
+      - id
+      - source_params
+      - columns
+      type: object
+    TablesheetLookupColumn:
+      properties:
+        id:
+          description: The ID of the column in the lookup table.
+          example: ''
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    TablesheetLookupCondition:
+      properties:
+        lookup_key_column:
+          $ref: '#/components/schemas/TablesheetLookupColumn'
+        operator:
+          $ref: '#/components/schemas/TablesheetLookupConditionOperator'
+        source_column_id:
+          description: The ID of the source column.
+          example: ''
+          format: uuid
+          type: string
+      required:
+      - source_column_id
+      - operator
+      - lookup_key_column
+      type: object
+    TablesheetLookupConditionOperator:
+      description: The lookup operator.
+      enum:
+      - in
+      example: in
+      type: string
+      x-enum-varnames:
+      - IN
+    TablesheetLookupCreatedColumn:
+      properties:
+        id:
+          description: The ID of the created column.
+          example: ''
+          format: uuid
+          type: string
+        lookup_column:
+          $ref: '#/components/schemas/TablesheetLookupColumn'
+      required:
+      - id
+      - lookup_column
+      type: object
+    TablesheetLookupSourceParams:
+      properties:
+        tablesheet_id:
+          description: The ID of the source table sheet.
+          example: ''
+          format: uuid
+          type: string
+      required:
+      - tablesheet_id
+      type: object
     TagFilter:
       description: Tag filter for the budget's entries.
       properties:
@@ -56415,6 +58537,53 @@ components:
           description: Offset type.
           type: string
       type: object
+    TextAlign:
+      properties:
+        horizontal:
+          $ref: '#/components/schemas/TextAlignHorizontal'
+        vertical:
+          $ref: '#/components/schemas/TextAlignVertical'
+      type: object
+    TextAlignHorizontal:
+      description: Horizontal alignment.
+      enum:
+      - left
+      - center
+      - right
+      type: string
+      x-enum-varnames:
+      - LEFT
+      - CENTER
+      - RIGHT
+    TextAlignVertical:
+      description: Vertical alignment.
+      enum:
+      - top
+      - middle
+      - bottom
+      type: string
+      x-enum-varnames:
+      - TOP
+      - MIDDLE
+      - BOTTOM
+    TextStyle:
+      properties:
+        bold:
+          description: Whether text is bold.
+          type: boolean
+        color:
+          description: Text color (hex, rgb, rgba, hsl, or hsla).
+          type: string
+        font:
+          description: Font family.
+          type: string
+        italic:
+          description: Whether text is italic.
+          type: boolean
+        underlined:
+          description: Whether text is underlined.
+          type: boolean
+      type: object
     ThreatHuntingJobDataType:
       description: Type of payload.
       enum:
@@ -56560,6 +58729,27 @@ components:
       example: 86400
       format: int64
       type: integer
+    TimeFrame:
+      properties:
+        paused_time_frame:
+          $ref: '#/components/schemas/PausedTimeFrame'
+        relative_time_frame:
+          $ref: '#/components/schemas/RelativeTimeFrame'
+        type:
+          $ref: '#/components/schemas/TimeFrameType'
+      required:
+      - type
+      type: object
+    TimeFrameType:
+      description: The type of time frame.
+      enum:
+      - paused
+      - relative
+      example: paused
+      type: string
+      x-enum-varnames:
+      - PAUSED
+      - RELATIVE
     TimeRestriction:
       description: Defines a single time restriction rule with start and end times
         and the applicable weekdays.
@@ -58419,6 +60609,11 @@ components:
       type: string
       x-enum-varnames:
       - USER_INVITATIONS
+    UserRelationship:
+      properties:
+        data:
+          $ref: '#/components/schemas/SpreadsheetUserRelationshipData'
+      type: object
     UserRelationshipData:
       description: Relationship to user object.
       properties:
@@ -88231,6 +90426,818 @@ paths:
         cursorPath: meta.page.after
         limitParam: body.data.attributes.page.limit
         resultsPath: data
+  /api/v2/spreadsheets:
+    delete:
+      description: Deletes multiple spreadsheets by ID.
+      operationId: DeleteSpreadsheets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpreadsheetBulkDeleteRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Bulk delete spreadsheets
+      tags:
+      - Spreadsheets
+      x-menu-order: 3
+    get:
+      description: Returns a list of spreadsheets accessible by the user.
+      operationId: ListSpreadsheets
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: Filter spreadsheets by creator user ID.
+        in: query
+        name: filter[created_by]
+        schema:
+          format: uuid
+          type: string
+      - description: Filter spreadsheets by name query.
+        in: query
+        name: filter[query]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpreadsheetListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List spreadsheets
+      tags:
+      - Spreadsheets
+      x-menu-order: 1
+    post:
+      description: Creates a new spreadsheet with optional table sheets, pivot tables,
+        and open sheets.
+      operationId: CreateSpreadsheet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpreadsheetCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpreadsheetResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create spreadsheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 2
+  /api/v2/spreadsheets/{spreadsheet_id}:
+    delete:
+      description: Deletes a spreadsheet by ID.
+      operationId: DeleteSpreadsheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete spreadsheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 6
+    get:
+      description: Returns a single spreadsheet by ID with all its sheets and configuration.
+      operationId: GetSpreadsheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpreadsheetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get spreadsheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 4
+    put:
+      description: Updates a spreadsheet's name and time frame.
+      operationId: UpdateSpreadsheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpreadsheetUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpreadsheetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update spreadsheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 5
+  /api/v2/spreadsheets/{spreadsheet_id}/open-sheets/{sheet_id}:
+    delete:
+      description: Deletes an open sheet from a spreadsheet.
+      operationId: DeleteOpenSheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the open sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete open sheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 18
+    put:
+      description: Updates or creates an open sheet within a spreadsheet.
+      operationId: UpdateOpenSheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the open sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenSheetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenSheetResponse'
+          description: OK
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenSheetResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Upsert open sheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 2
+  /api/v2/spreadsheets/{spreadsheet_id}/pivot-tables/{pivot_id}:
+    delete:
+      description: Deletes a pivot table from a spreadsheet.
+      operationId: DeletePivotTable
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the pivot table.
+        in: path
+        name: pivot_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete pivot table
+      tags:
+      - Spreadsheets
+      x-menu-order: 15
+    put:
+      description: Updates or creates a pivot table within a spreadsheet.
+      operationId: UpdatePivotTable
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the pivot table.
+        in: path
+        name: pivot_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PivotTableRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PivotTableResponse'
+          description: OK
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PivotTableResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update pivot table
+      tags:
+      - Spreadsheets
+      x-menu-order: 14
+  /api/v2/spreadsheets/{spreadsheet_id}/pivot-tables/{pivot_id}/data-formatted:
+    get:
+      description: Returns formatted data for a pivot table with rows, columns, and
+        calculations.
+      operationId: GetPivotTableDataFormatted
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the pivot table.
+        in: path
+        name: pivot_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PivotTableDataResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get pivot table data formatted
+      tags:
+      - Spreadsheets
+      x-menu-order: 16
+  /api/v2/spreadsheets/{spreadsheet_id}/pivot-tables/{pivot_id}/debug:
+    get:
+      description: Returns the SQL query generated for a pivot table for debugging
+        purposes.
+      operationId: DebugPivotTable
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the pivot table.
+        in: path
+        name: pivot_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebugResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Debug pivot table
+      tags:
+      - Spreadsheets
+      x-menu-order: 17
+  /api/v2/spreadsheets/{spreadsheet_id}/table-sheets/{sheet_id}:
+    delete:
+      description: Deletes a table sheet from a spreadsheet.
+      operationId: DeleteTableSheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the table sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete table sheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 8
+    put:
+      description: Updates or creates a table sheet within a spreadsheet.
+      operationId: UpdateTableSheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the table sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TableSheetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableSheetResponse'
+          description: OK
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableSheetResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update table sheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 7
+  /api/v2/spreadsheets/{spreadsheet_id}/table-sheets/{sheet_id}/columns/{column_id}/data:
+    get:
+      description: Returns aggregated data for a specific column in a table sheet.
+      operationId: GetTableSheetColumnData
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the table sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the column.
+        in: path
+        name: column_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Aggregation function to apply.
+        in: query
+        name: function
+        required: true
+        schema:
+          $ref: '#/components/schemas/AggregationFunction'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableSheetColumnAggregationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get table sheet column data
+      tags:
+      - Spreadsheets
+      x-menu-order: 12
+  /api/v2/spreadsheets/{spreadsheet_id}/table-sheets/{sheet_id}/count:
+    get:
+      description: Returns the row count for a table sheet.
+      operationId: GetTableSheetCount
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the table sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableSheetCountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get table sheet count
+      tags:
+      - Spreadsheets
+      x-menu-order: 9
+  /api/v2/spreadsheets/{spreadsheet_id}/table-sheets/{sheet_id}/data:
+    get:
+      description: Returns the data for a table sheet with pagination.
+      operationId: GetTableSheetData
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the table sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Number of rows to return.
+        in: query
+        name: page[size]
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Page number to return (zero-indexed).
+        in: query
+        name: page[number]
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      - description: Row offset to use as the beginning of the returned page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableSheetDataResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get table sheet data
+      tags:
+      - Spreadsheets
+      x-menu-order: 10
+  /api/v2/spreadsheets/{spreadsheet_id}/table-sheets/{sheet_id}/data/export:
+    get:
+      description: Exports table sheet data as CSV format.
+      operationId: GetTableSheetDataExport
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the table sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Number of rows to export.
+        in: query
+        name: page[size]
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Page number to export (zero-indexed).
+        in: query
+        name: page[number]
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      - description: Row offset to use as the beginning of the export.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableSheetExportResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Export table sheet data
+      tags:
+      - Spreadsheets
+      x-menu-order: 11
+  /api/v2/spreadsheets/{spreadsheet_id}/table-sheets/{sheet_id}/debug:
+    get:
+      description: Returns the SQL query generated for a table sheet for debugging
+        purposes.
+      operationId: DebugTableSheet
+      parameters:
+      - description: The ID of the spreadsheet.
+        in: path
+        name: spreadsheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The ID of the table sheet.
+        in: path
+        name: sheet_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: Number of rows for the query.
+        in: query
+        name: page[size]
+        schema:
+          default: 1000
+          format: int64
+          type: integer
+      - description: Page number for the query (zero-indexed).
+        in: query
+        name: page[number]
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebugResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/JSONAPIBadRequestResponse'
+        '401':
+          $ref: '#/components/responses/JSONAPIUnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/JSONAPIForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Debug table sheet
+      tags:
+      - Spreadsheets
+      x-menu-order: 13
   /api/v2/static-analysis-sca/dependencies:
     post:
       operationId: CreateSCAResult
@@ -92685,6 +95692,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/metrics/metrics_namespace/
   name: Spans Metrics
+- description: Manage spreadsheets and their contents.
+  name: Spreadsheets
 - description: API for static analysis
   name: Static Analysis
 - description: "Datadog Synthetics uses simulated user requests and browser rendering

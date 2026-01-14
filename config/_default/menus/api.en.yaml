@@ -11434,6 +11434,238 @@ menu:
           - ListSpansMetrics
         unstable: []
         order: 1
+    - name: Spreadsheets
+      url: /api/latest/spreadsheets/
+      identifier: spreadsheets
+      generated: true
+    - name: Debug table sheet
+      url: '#debug-table-sheet'
+      identifier: spreadsheets-debug-table-sheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DebugTableSheet
+        unstable: []
+        order: 13
+    - name: Export table sheet data
+      url: '#export-table-sheet-data'
+      identifier: spreadsheets-export-table-sheet-data
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTableSheetDataExport
+        unstable: []
+        order: 11
+    - name: Get table sheet data
+      url: '#get-table-sheet-data'
+      identifier: spreadsheets-get-table-sheet-data
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTableSheetData
+        unstable: []
+        order: 10
+    - name: Get table sheet count
+      url: '#get-table-sheet-count'
+      identifier: spreadsheets-get-table-sheet-count
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTableSheetCount
+        unstable: []
+        order: 9
+    - name: Get table sheet column data
+      url: '#get-table-sheet-column-data'
+      identifier: spreadsheets-get-table-sheet-column-data
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTableSheetColumnData
+        unstable: []
+        order: 12
+    - name: Update table sheet
+      url: '#update-table-sheet'
+      identifier: spreadsheets-update-table-sheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTableSheet
+        unstable: []
+        order: 7
+    - name: Delete table sheet
+      url: '#delete-table-sheet'
+      identifier: spreadsheets-delete-table-sheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTableSheet
+        unstable: []
+        order: 8
+    - name: Debug pivot table
+      url: '#debug-pivot-table'
+      identifier: spreadsheets-debug-pivot-table
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DebugPivotTable
+        unstable: []
+        order: 17
+    - name: Get pivot table data formatted
+      url: '#get-pivot-table-data-formatted'
+      identifier: spreadsheets-get-pivot-table-data-formatted
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPivotTableDataFormatted
+        unstable: []
+        order: 16
+    - name: Update pivot table
+      url: '#update-pivot-table'
+      identifier: spreadsheets-update-pivot-table
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePivotTable
+        unstable: []
+        order: 14
+    - name: Delete pivot table
+      url: '#delete-pivot-table'
+      identifier: spreadsheets-delete-pivot-table
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePivotTable
+        unstable: []
+        order: 15
+    - name: Upsert open sheet
+      url: '#upsert-open-sheet'
+      identifier: spreadsheets-upsert-open-sheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOpenSheet
+        unstable: []
+        order: 2
+    - name: Delete open sheet
+      url: '#delete-open-sheet'
+      identifier: spreadsheets-delete-open-sheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOpenSheet
+        unstable: []
+        order: 18
+    - name: Update spreadsheet
+      url: '#update-spreadsheet'
+      identifier: spreadsheets-update-spreadsheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSpreadsheet
+        unstable: []
+        order: 5
+    - name: Get spreadsheet
+      url: '#get-spreadsheet'
+      identifier: spreadsheets-get-spreadsheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSpreadsheet
+        unstable: []
+        order: 4
+    - name: Delete spreadsheet
+      url: '#delete-spreadsheet'
+      identifier: spreadsheets-delete-spreadsheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSpreadsheet
+        unstable: []
+        order: 6
+    - name: Create spreadsheet
+      url: '#create-spreadsheet'
+      identifier: spreadsheets-create-spreadsheet
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSpreadsheet
+        unstable: []
+        order: 2
+    - name: List spreadsheets
+      url: '#list-spreadsheets'
+      identifier: spreadsheets-list-spreadsheets
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSpreadsheets
+        unstable: []
+        order: 1
+    - name: Bulk delete spreadsheets
+      url: '#bulk-delete-spreadsheets'
+      identifier: spreadsheets-bulk-delete-spreadsheets
+      parent: spreadsheets
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSpreadsheets
+        unstable: []
+        order: 3
     - name: Static Analysis
       url: /api/latest/static-analysis/
       identifier: static-analysis

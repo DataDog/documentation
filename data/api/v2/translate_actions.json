@@ -3169,6 +3169,94 @@
     "request_description": "",
     "request_schema_description": "The request for a spans list."
   },
+  "DeleteSpreadsheets": {
+    "description": "Deletes multiple spreadsheets by ID.",
+    "summary": "Bulk delete spreadsheets",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListSpreadsheets": {
+    "description": "Returns a list of spreadsheets accessible by the user.",
+    "summary": "List spreadsheets"
+  },
+  "CreateSpreadsheet": {
+    "description": "Creates a new spreadsheet with optional table sheets, pivot tables, and open sheets.",
+    "summary": "Create spreadsheet",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteSpreadsheet": {
+    "description": "Deletes a spreadsheet by ID.",
+    "summary": "Delete spreadsheet"
+  },
+  "GetSpreadsheet": {
+    "description": "Returns a single spreadsheet by ID with all its sheets and configuration.",
+    "summary": "Get spreadsheet"
+  },
+  "UpdateSpreadsheet": {
+    "description": "Updates a spreadsheet's name and time frame.",
+    "summary": "Update spreadsheet",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteOpenSheet": {
+    "description": "Deletes an open sheet from a spreadsheet.",
+    "summary": "Delete open sheet"
+  },
+  "UpdateOpenSheet": {
+    "description": "Updates or creates an open sheet within a spreadsheet.",
+    "summary": "Upsert open sheet",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeletePivotTable": {
+    "description": "Deletes a pivot table from a spreadsheet.",
+    "summary": "Delete pivot table"
+  },
+  "UpdatePivotTable": {
+    "description": "Updates or creates a pivot table within a spreadsheet.",
+    "summary": "Update pivot table",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetPivotTableDataFormatted": {
+    "description": "Returns formatted data for a pivot table with rows, columns, and calculations.",
+    "summary": "Get pivot table data formatted"
+  },
+  "DebugPivotTable": {
+    "description": "Returns the SQL query generated for a pivot table for debugging purposes.",
+    "summary": "Debug pivot table"
+  },
+  "DeleteTableSheet": {
+    "description": "Deletes a table sheet from a spreadsheet.",
+    "summary": "Delete table sheet"
+  },
+  "UpdateTableSheet": {
+    "description": "Updates or creates a table sheet within a spreadsheet.",
+    "summary": "Update table sheet",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetTableSheetColumnData": {
+    "description": "Returns aggregated data for a specific column in a table sheet.",
+    "summary": "Get table sheet column data"
+  },
+  "GetTableSheetCount": {
+    "description": "Returns the row count for a table sheet.",
+    "summary": "Get table sheet count"
+  },
+  "GetTableSheetData": {
+    "description": "Returns the data for a table sheet with pagination.",
+    "summary": "Get table sheet data"
+  },
+  "GetTableSheetDataExport": {
+    "description": "Exports table sheet data as CSV format.",
+    "summary": "Export table sheet data"
+  },
+  "DebugTableSheet": {
+    "description": "Returns the SQL query generated for a table sheet for debugging purposes.",
+    "summary": "Debug table sheet"
+  },
   "CreateSCAResult": {
     "summary": "Post dependencies for analysis",
     "request_description": "",
