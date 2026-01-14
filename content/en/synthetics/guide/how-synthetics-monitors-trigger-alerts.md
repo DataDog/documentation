@@ -35,7 +35,7 @@ A monitor transitions to **alert** only when *all alerting rules are satisfied*.
 When a Synthetic Monitoring test runs, Datadog evaluates alerting in the following order:
 
 1. The test runs based on its configured schedule.
-2. **[Fast retries][3]** are applied, if configured.
+2. Fast retries are applied, if configured.
 3. Test results are aggregated across locations.
 4. Failures are evaluated over time using the alerting rules.
 5. The monitor transitions between **OK**, **Alert**, or **No Data** as conditions are met or no longer met.
@@ -82,11 +82,7 @@ Because the test only runs every 15 minutes, Datadog can only evaluate failures 
 - Use a longer minimum duration to reduce noise from transient issues.
 - Align minimum duration with test frequency to avoid unexpected delays.
 
-## Fast retries vs standard retries
-
-Synthetic Monitoring supports two types of retries, which affect alert evaluation differently.
-
-### Fast retries
+## Fast retries
 
 Fast retries are designed to efficiently re-run a failed request or step **within the same test execution**.
 
@@ -100,9 +96,8 @@ A test run is only considered failed if **all fast retries fail**.
 
 Fast retries affect whether a single run is marked as failed, but they do **not** extend the alert evaluation timeline.
 
-### Standard retries
 
-Standard retries occur **after a failed test run**, with a configurable wait period between attempts.
+Fast retries occur **after a failed test run**, with a configurable wait period between attempts.
 
 Characteristics:
 
@@ -128,7 +123,7 @@ Location rules determine **how many locations must fail, and when**, for an aler
 
 Common patterns include:
 
-- Fail from any 1 of N locations
+- Fail from any 1 of _N_ locations
 - Fail from all locations
 - At one moment, all locations were failing
 
@@ -145,9 +140,54 @@ A recovery does not require all test runs to pass, only that the alerting condit
 
 ## Global uptime and alert state
 
-**Global uptime** represents the percentage of successful test results over time. It does not indicate how long a monitor has been in an alert state.
+**Global uptime** represents the percentage of time your monitor was healthy (`OK` status) during the selected time period. 
+
+It is calculated based on how long the monitor remained healthy compared to the total monitoring period. Any time spent in an `ALERT` state reduces the global uptime accordingly. Since this metric is based on the duration of the monitor's status, it can be approximated by the ratio of successful test results to the total number of test executions over the same period.
+
+The formula for calculating global uptime is:
+
+```
+Global Uptime = ((Total Period - Time in Alert) / Total Period) × 100
+```
+
+### Example calculation
+
+The following example demonstrates how a 95.83% global uptime is calculated.
+
+**Step 1:** Identify the monitoring period.
+
+The monitor is scoped to `Jan 12, 10:56 AM-Jan 12, 4:56 PM`, a 360-minute window.
+
+{{< img src="synthetics/guide/monitors_trigger_alerts/global_uptime.png" alt="A synthetics test run showing global uptime of 95.83%" style="width:100%;" >}}
+
+**Step 2:** Determine the time spent in alert status.
+
+Zoom into the time range to identify when the monitor was in an alert state:
+
+{{< img src="synthetics/guide/monitors_trigger_alerts/global_uptime_video.mp4" alt="Video of a Synthetics test run, scoping into the datetime period of the alert" video=true >}}
+
+The alert period is `Jan 12, 3:46 PM–Jan 12, 4:01 PM`, approximately 15 minutes.
+
+**Step 3:** Apply the formula.
+
+```
+Total Period = 360 minutes
+Time in Alert = 15 minutes
+Global Uptime = ((360 - 15) / 360) × 100 = 95.83%
+```
 
 To understand alert timing across locations, use **Show all locations** instead of relying only on global uptime.
+
+### Status descriptions
+
+OK
+: Some text
+
+ALERT
+: Some text
+
+NO DATA
+: some text
 
 ## Test runs that generate alerts
 
@@ -182,4 +222,3 @@ If a monitor does not alert or recovers unexpectedly, check for the following:
 
 [1]: /synthetics/guide/synthetic-test-retries-monitor-status/
 [2]: /synthetics/guide/uptime-percentage-widget/
-[3]: /synthetics/browser_tests/#fast-retry
