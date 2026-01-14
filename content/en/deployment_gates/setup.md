@@ -107,6 +107,47 @@ The analysis is automatically done for all APM-instrumented services, and no pri
 {{% /tab %}}
 {{< /tabs >}}
 
+## Manage Deployment Gates
+
+In addition to using the Deployment Gates UI, you can manage gates with the API or Terraform.
+
+- **API**: You can use the [Deployment Gates API][2] to create and manage Deployment Gates.
+- **Terraform**: You can use the [Datadog Terraform provider][3] to create and manage Deployment Gates. For example:
+
+```yaml
+# Create new deployment_gate resource
+
+resource "datadog_deployment_gate" "foo" {
+  dry_run    = "false"
+  env        = "production"
+  identifier = "my-gate"
+  service    = "my-service"
+
+  rule {
+    name    = "fdd"
+    type    = "faulty_deployment_detection"
+    dry_run = false
+    options {
+      duration           = 1300
+      excluded_resources = ["GET api/v1/test"]
+    }
+  }
+
+  rule {
+    name    = "monitor"
+    type    = "monitor"
+    dry_run = false
+    options {
+      query    = "service:test-service"
+      duration = 1300
+    }
+  }
+}
+```
+
+**Note**: Any changes to the gate applied in the Deployment Gates UI are overwritten by the Terraform configuration.
+
+
 ## Evaluate Deployment Gates
 
 Once you have configured the gates and rules, you can request a gate evaluation when deploying the related service, and decide whether to block or continue the deployment based on the result.
@@ -568,3 +609,5 @@ When integrating Deployment Gates into your Continuous Delivery workflow, an eva
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/deployment-gates/gates
+[2]: https://docs.datadoghq.com/api/latest/deployment-gates/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate
