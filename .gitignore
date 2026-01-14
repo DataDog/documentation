@@ -156,14 +156,17 @@ content/en/static_analysis/github_actions.md
 content/en/static_analysis/circleci_orbs.md
 content/en/static_analysis/rules/
 
+# containers - kubernetes
+content/en/containers/kubernetes/kubectl_plugin.md
+
 # containers - datadog-operator
 content/en/containers/datadog_operator/advanced_install.md
 content/en/containers/datadog_operator/configuration.md
 content/en/containers/datadog_operator/custom_check.md
 content/en/containers/datadog_operator/data_collected.md
-content/en/containers/datadog_operator/kubectl_plugin.md
 content/en/containers/datadog_operator/secret_management.md
 content/en/containers/guide/v2alpha1_migration.md
+content/en/containers/datadog_operator/kubectl_plugin.md
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md
@@ -319,3 +322,6 @@ layouts/shortcodes/mdoc/en/**/*.ast.json
 
 # Deprecated generated file for LLMs (keep so it's not merged back in)
 static/llms.txt
+
+# AI
+.claude/*local*

@@ -27,7 +27,7 @@ You can chain multiple patterns together to parse complex log messages.
 
 ## Supported matchers and filters at query time
 
-<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>) For long-term parsing needs, define a log pipeline.</div>
+<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>). For long-term parsing needs, define a log pipeline.</div>
 
 Query-time Grok parsing in the Log Explorer supports a limited subset of matchers and filters. Each matcher or filter is used in a Grok pattern with the format:
 
@@ -39,19 +39,19 @@ Query-time Grok parsing in the Log Explorer supports a limited subset of matcher
 
 | Matcher | Example Grok Pattern |
 | ------- | -------------------- |
-| `DATA`<br>_Any sequence of characters (non-greedy)_ | `status=%{DATA:status}` |
-| `WORD`<br>_Alphanumeric characters_ | `country=%{WORD:country}` |
-| `NUMBER`<br>_Floating-point numbers_ | `value=%{NUMBER:float_val}` |
-| `INTEGER`<br>_Integer values_ | `count=%{INTEGER:count}` |
-| `NOTSPACE`<br>_Non-whitespace characters_ | `path=%{NOTSPACE:request_path}` |
+| `data`<br>_Any sequence of characters (non-greedy)_ | `status=%{data:status}` |
+| `word`<br>_Alphanumeric characters_ | `country=%{word:country}` |
+| `number`<br>_Floating-point numbers_ | `value=%{number:float_val}` |
+| `integer`<br>_Integer values_ | `count=%{integer:count}` |
+| `notSpace`<br>_Non-whitespace characters_ | `path=%{notSpace:request_path}` |
 
 ### Filters
 Apply filters to cast extracted values into numeric types. Filters use the same pattern syntax as matches.
 
 | Filter | Example Grok Pattern |
 | ------ | -------------------- |
-| `NUMBER`<br>_Parses numeric strings as numbers_ | `latency=%{NUMBER:lat}` |
-| `INTEGER`<br>_Parses numeric strings as integers_ | `users=%{INTEGER:user_count}` |
+| `number`<br>_Parses numeric strings as numbers_ | `latency=%{number:lat}` |
+| `integer`<br>_Parses numeric strings as integers_ | `users=%{integer:user_count}` |
 
 ### Example
 Use this feature to analyze log fields on-demand without modifying your ingestion pipeline.
@@ -63,7 +63,7 @@ country=Brazil duration=123ms path=/index.html status=200 OK
 
 **Extraction grok rule**:
 ```
-country=%{WORD:country} duration=%{INTEGER:duration} path=%{NOTSPACE:request_path} status=%{DATA:status}
+country=%{word:country} duration=%{integer:duration} path=%{notSpace:request_path} status=%{data:status}
 ```
 **Resulting calculated fields**:
 - `#country = Brazil`

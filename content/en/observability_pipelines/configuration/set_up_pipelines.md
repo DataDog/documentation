@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
   - /observability_pipelines/set_up_pipelines/
 further_reading:
-- link: "observability_pipelines/update_existing_pipelines/"
+- link: "observability_pipelines/configuration/update_existing_pipelines/"
   tag: "Documentation"
   text: "Update an existing pipeline"
 - link: "observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
@@ -83,10 +83,14 @@ To delete a processor group, you need to delete all destinations linked to that 
 If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
 
 To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
-
-**Notes**:
 - If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
 - If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
+
+**Notes**:
+
+- A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
+- You can add a total of three destinations for a pipeline.
+- A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
 
 [1]: /observability_pipelines/sources/
 [2]: /observability_pipelines/processors/
@@ -159,7 +163,7 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 
 ## Set up a pipeline with the API
 
-<div class="alert alert-danger">Creating pipelines using the Observability Pipelines API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
+<div class="alert alert-info">Creating pipelines using the Observability Pipelines API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
 
 1. Use the Observability Pipelines API to [create a pipeline][6]. See the API reference for example request payloads.
 
@@ -172,7 +176,9 @@ See [Advanced Worker Configurations][5] for bootstrapping options.
 
 ## Set up a pipeline with Terraform
 
-<div class="alert alert-danger">Creating pipelines using Terraform is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
+<div class="alert alert-info">Creating pipelines using Terraform is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
+
+<div class="alert alert-warning"><a href="https://github.com/DataDog/terraform-provider-datadog/releases/tag/v3.84.0">Terraform 3.84.0</a> replaces standalone processors with <a href="/observability_pipelines/processors/#processor-groups">processor groups</a> and is a breaking change. If you want to upgrade to Terraform 3.84.0, see the <a href="https://github.com/DataDog/terraform-provider-datadog/pull/3346">PR description</a> for instructions on how to migrate your existing resources.</div>
 
 1. You can use the [datadog_observability_pipeline][10] module to create a pipeline using Terraform.
 

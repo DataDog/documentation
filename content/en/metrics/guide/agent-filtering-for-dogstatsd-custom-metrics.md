@@ -1,7 +1,6 @@
 
 ---
 title: Agent-Side Filtering for DogStatsD Custom Metrics 
-private: true
 further_reading:
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"

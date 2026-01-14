@@ -4,7 +4,7 @@ description: Set up Dynamic Instrumentation for Node.js applications to add prob
 private: false
 code_lang: nodejs
 type: multi-code-lang
-code_lang_weight: 30
+code_lang_weight: 40
 aliases:
     - /dynamic_instrumentation/enabling/nodejs
     - /tracing/dynamic_instrumentation/enabling/nodejs

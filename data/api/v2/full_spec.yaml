@@ -1471,8 +1471,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1538,8 +1536,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         created_at:
           description: Timestamp of when the account integration was created.
           format: date-time
@@ -1613,8 +1609,6 @@ components:
           $ref: '#/components/schemas/AWSAccountPartition'
         aws_regions:
           $ref: '#/components/schemas/AWSRegions'
-        ccm_config:
-          $ref: '#/components/schemas/AWSCCMConfig'
         logs_config:
           $ref: '#/components/schemas/AWSLogsConfig'
         metrics_config:
@@ -1745,15 +1739,6 @@ components:
           type: string
       required:
       - role_name
-      type: object
-    AWSCCMConfig:
-      description: AWS Cloud Cost Management config.
-      properties:
-        data_export_configs:
-          description: List of data export configurations for Cost and Usage Reports.
-          items:
-            $ref: '#/components/schemas/DataExportConfig'
-          type: array
       type: object
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
@@ -6663,8 +6648,11 @@ components:
       x-enum-varnames:
       - AZURE_SCAN_OPTIONS
     AzureStorageDestination:
-      description: The `azure_storage` destination forwards logs to an Azure Blob
+      description: 'The `azure_storage` destination forwards logs to an Azure Blob
         Storage container.
+
+
+        **Supported pipeline types:** logs'
       properties:
         blob_prefix:
           description: Optional prefix for blobs written to the container.
@@ -6695,6 +6683,8 @@ components:
       - inputs
       - container_name
       type: object
+      x-pipeline-types:
+      - logs
     AzureStorageDestinationType:
       default: azure_storage
       description: The destination type. The value should always be `azure_storage`.
@@ -7061,19 +7051,27 @@ components:
     BatchUpsertRowsRequestDataAttributes:
       description: Attributes containing row data values for row creation or update
         operations.
+      example:
+        values: {}
       properties:
         values:
           additionalProperties:
-            x-required-field: true
-          description: Key-value pairs representing row data, where keys are field
-            names from the schema.
-          example:
-            example_key_value: primary_key_value
-            name: row_name
+            $ref: '#/components/schemas/BatchUpsertRowsRequestDataAttributesValue'
+          description: Key-value pairs representing row data, where keys are schema
+            field names and values match the corresponding column types.
           type: object
       required:
       - values
       type: object
+    BatchUpsertRowsRequestDataAttributesValue:
+      description: Types allowed for Reference Table row values.
+      oneOf:
+      - example: row_name
+        type: string
+      - example: 25
+        format: int32
+        maximum: 2147483647
+        type: integer
     BillConfig:
       description: Bill config.
       properties:
@@ -9146,6 +9144,11 @@ components:
     CaseCreateAttributes:
       description: Case creation attributes
       properties:
+        custom_attributes:
+          additionalProperties:
+            $ref: '#/components/schemas/CustomAttributeValue'
+          description: Case custom attributes
+          type: object
         description:
           description: Description
           type: string
@@ -14619,9 +14622,9 @@ components:
         type: number
       type: array
     CustomAttributeMultiStringValue:
-      description: Value of multi TEXT/URL custom attribute
+      description: Value of multi TEXT/URL/NUMBER/SELECT custom attribute
       items:
-        description: TEXT/URL Value
+        description: TEXT/URL/NUMBER/SELECT Value
         type: string
       type: array
     CustomAttributeNumberValue:
@@ -14629,7 +14632,7 @@ components:
       format: double
       type: number
     CustomAttributeStringValue:
-      description: Value of TEXT/URL custom attribute
+      description: Value of TEXT/URL/NUMBER/SELECT custom attribute
       type: string
     CustomAttributeType:
       description: Custom attributes type
@@ -14637,12 +14640,14 @@ components:
       - URL
       - TEXT
       - NUMBER
+      - SELECT
       example: NUMBER
       type: string
       x-enum-varnames:
       - URL
       - TEXT
       - NUMBER
+      - SELECT
     CustomAttributeValue:
       description: Custom attribute values
       properties:
@@ -15785,6 +15790,78 @@ components:
         type: string
       nullable: true
       type: array
+    DORADeploymentFetchResponse:
+      description: Response for fetching a single deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentObject'
+      type: object
+    DORADeploymentObject:
+      description: A DORA deployment event.
+      example:
+        attributes:
+          custom_tags:
+          - language:java
+          - department:engineering
+          - region:us-east-1
+          env: production
+          finished_at: 1693491984000000000
+          git:
+            commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+            repository_url: https://github.com/organization/example-repository
+          service: shopist
+          started_at: 1693491974000000000
+          team: backend
+          version: v1.12.07
+        id: 4242fcdd31586083
+        type: dora_deployment
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentObjectAttributes'
+        id:
+          description: The ID of the deployment event.
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentType'
+      type: object
+    DORADeploymentObjectAttributes:
+      description: The attributes of the deployment event.
+      properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
+        env:
+          description: Environment name to where the service was deployed.
+          example: production
+          type: string
+        finished_at:
+          description: Unix timestamp when the deployment finished.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        service:
+          description: Service name.
+          example: shopist
+          type: string
+        started_at:
+          description: Unix timestamp when the deployment started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        team:
+          description: Name of the team owning the deployed service.
+          example: backend
+          type: string
+        version:
+          description: Version to correlate with APM Deployment Tracking.
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      - finished_at
+      type: object
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -15811,7 +15888,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Deployment ID.
+          description: Deployment ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         service:
           description: Service name.
@@ -15875,18 +15954,53 @@ components:
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENT
-    DORAEvent:
-      description: A DORA event.
+    DORADeploymentsListResponse:
+      description: Response for the list deployments endpoint.
+      example:
+        data:
+        - attributes:
+            custom_tags:
+            - language:java
+            - department:engineering
+            - region:us-east-1
+            env: production
+            finished_at: 1693491984000000000
+            git:
+              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+              repository_url: https://github.com/organization/example-repository
+            service: shopist
+            started_at: 1693491974000000000
+            team: backend
+            version: v1.12.07
+          id: 4242fcdd31586083
+          type: dora_deployment
+        - attributes:
+            custom_tags:
+            - language:go
+            - department:platform
+            env: production
+            finished_at: 1693492084000000000
+            git:
+              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
+              repository_url: https://github.com/organization/api-service
+            service: api-service
+            started_at: 1693492074000000000
+            team: backend
+            version: v2.1.0
+          id: 4242fcdd31586084
+          type: dora_deployment
       properties:
-        attributes:
-          description: The attributes of the event.
-          type: object
-        id:
-          description: The ID of the event.
-          type: string
-        type:
-          description: The type of the event.
-          type: string
+        data:
+          description: The list of DORA deployment events.
+          items:
+            $ref: '#/components/schemas/DORADeploymentObject'
+          type: array
+      type: object
+    DORAFailureFetchResponse:
+      description: Response for fetching a single failure event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentObject'
       type: object
     DORAFailureRequest:
       description: Request to create a DORA failure event.
@@ -15914,8 +16028,9 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Failure ID. Must have at least 16 characters. Required to update
-            a previously sent failure.
+          description: Failure ID. Must be 16-128 characters and contain only alphanumeric
+            characters, hyphens, underscores, periods, and colons (a-z, A-Z, 0-9,
+            -, _, ., :).
           type: string
         name:
           description: Failure name.
@@ -15990,11 +16105,45 @@ components:
       type: string
       x-enum-varnames:
       - DORA_FAILURE
-    DORAFetchResponse:
-      description: Response for the DORA fetch endpoints.
+    DORAFailuresListResponse:
+      description: Response for the list failures endpoint.
+      example:
+        data:
+        - attributes:
+            custom_tags:
+            - incident_type:database
+            - department:engineering
+            env: production
+            finished_at: 1693492274000000000
+            name: Database outage
+            services:
+            - shopist
+            severity: SEV-1
+            started_at: 1693492174000000000
+            team: backend
+          id: 4242fcdd31586085
+          type: dora_incident
+        - attributes:
+            custom_tags:
+            - incident_type:service_down
+            - department:platform
+            env: production
+            finished_at: 1693492474000000000
+            name: API service outage
+            services:
+            - api-service
+            - payment-service
+            severity: SEV-2
+            started_at: 1693492374000000000
+            team: backend
+          id: 4242fcdd31586086
+          type: dora_incident
       properties:
         data:
-          $ref: '#/components/schemas/DORAEvent'
+          description: The list of DORA incident events.
+          items:
+            $ref: '#/components/schemas/DORAIncidentObject'
+          type: array
       type: object
     DORAGitInfo:
       description: Git info for DORA Metrics events.
@@ -16006,6 +16155,82 @@ components:
       required:
       - repository_url
       - commit_sha
+      type: object
+    DORAIncidentObject:
+      description: A DORA incident event.
+      example:
+        attributes:
+          custom_tags:
+          - incident_type:database
+          - department:engineering
+          env: production
+          finished_at: 1693492274000000000
+          git:
+            commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
+            repository_url: https://github.com/organization/example-repository
+          name: Database outage
+          services:
+          - shopist
+          severity: SEV-1
+          started_at: 1693492174000000000
+          team: backend
+        id: 4242fcdd31586085
+        type: dora_incident
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAIncidentObjectAttributes'
+        id:
+          description: The ID of the incident event.
+          type: string
+        type:
+          $ref: '#/components/schemas/DORAFailureType'
+      type: object
+    DORAIncidentObjectAttributes:
+      description: The attributes of the incident event.
+      properties:
+        custom_tags:
+          $ref: '#/components/schemas/DORACustomTags'
+        env:
+          description: Environment name that was impacted by the incident.
+          example: production
+          type: string
+        finished_at:
+          description: Unix timestamp when the incident finished.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        name:
+          description: Incident name.
+          example: Database outage
+          type: string
+        services:
+          description: Service names impacted by the incident.
+          example:
+          - shopist
+          items:
+            type: string
+          type: array
+        severity:
+          description: Incident severity.
+          example: SEV-1
+          type: string
+        started_at:
+          description: Unix timestamp when the incident started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        team:
+          description: Name of the team owning the services impacted.
+          example: backend
+          type: string
+        version:
+          description: Version to correlate with APM Deployment Tracking.
+          example: v1.12.07
+          type: string
+      required:
+      - started_at
       type: object
     DORAListDeploymentsRequest:
       description: Request to get a list of deployments.
@@ -16026,32 +16251,31 @@ components:
       type: object
     DORAListDeploymentsRequestAttributes:
       description: Attributes to get a list of deployments.
-      example:
-        from: '2025-01-01T00:00:00Z'
-        limit: 500
-        query: service:(shopist OR api-service OR payment-service) env:(production
-          OR staging) team:(backend OR platform)
-        sort: -started_at
-        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
+          example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
         limit:
           default: 10
           description: Maximum number of events in the response.
+          example: 500
           format: int32
           maximum: 1000
           type: integer
         query:
           description: Search query with event platform syntax.
+          example: service:(shopist OR api-service OR payment-service) env:(production
+            OR staging) team:(backend OR platform)
           type: string
         sort:
           description: Sort order (prefixed with `-` for descending).
+          example: -started_at
           type: string
         to:
           description: Maximum timestamp for requested events.
+          example: '2025-01-31T23:59:59Z'
           format: date-time
           type: string
       type: object
@@ -16074,9 +16298,11 @@ components:
       - attributes
       type: object
     DORAListDeploymentsRequestDataType:
+      default: dora_deployments_list_request
       description: The definition of `DORAListDeploymentsRequestDataType` object.
       enum:
       - dora_deployments_list_request
+      example: dora_deployments_list_request
       type: string
       x-enum-varnames:
       - DORA_DEPLOYMENTS_LIST_REQUEST
@@ -16099,32 +16325,31 @@ components:
       type: object
     DORAListFailuresRequestAttributes:
       description: Attributes to get a list of failures.
-      example:
-        from: '2025-01-01T00:00:00Z'
-        limit: 500
-        query: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
-          OR api-service OR payment-service) team:(backend OR platform OR payments)
-        sort: -started_at
-        to: '2025-01-31T23:59:59Z'
       properties:
         from:
           description: Minimum timestamp for requested events.
+          example: '2025-01-01T00:00:00Z'
           format: date-time
           type: string
         limit:
           default: 10
           description: Maximum number of events in the response.
+          example: 500
           format: int32
           maximum: 1000
           type: integer
         query:
           description: Search query with event platform syntax.
+          example: severity:(SEV-1 OR SEV-2) env:(production OR staging) service:(shopist
+            OR api-service OR payment-service) team:(backend OR platform OR payments)
           type: string
         sort:
           description: Sort order (prefixed with `-` for descending).
+          example: -started_at
           type: string
         to:
           description: Maximum timestamp for requested events.
+          example: '2025-01-31T23:59:59Z'
           format: date-time
           type: string
       type: object
@@ -16147,54 +16372,14 @@ components:
       - attributes
       type: object
     DORAListFailuresRequestDataType:
+      default: dora_failures_list_request
       description: The definition of `DORAListFailuresRequestDataType` object.
       enum:
       - dora_failures_list_request
+      example: dora_failures_list_request
       type: string
       x-enum-varnames:
       - DORA_FAILURES_LIST_REQUEST
-    DORAListResponse:
-      description: Response for the DORA list endpoints.
-      example:
-        data:
-        - attributes:
-            custom_tags:
-            - language:java
-            - department:engineering
-            - region:us-east-1
-            env: production
-            finished_at: 1693491984000000000
-            git:
-              commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-              repository_url: https://github.com/organization/example-repository
-            service: shopist
-            started_at: 1693491974000000000
-            team: backend
-            version: v1.12.07
-          id: 4242fcdd31586083
-          type: dora_deployment
-        - attributes:
-            custom_tags:
-            - language:go
-            - department:platform
-            env: production
-            finished_at: 1693492084000000000
-            git:
-              commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-              repository_url: https://github.com/organization/api-service
-            service: api-service
-            started_at: 1693492074000000000
-            team: backend
-            version: v2.1.0
-          id: 4242fcdd31586084
-          type: dora_deployment
-      properties:
-        data:
-          description: The list of DORA events.
-          items:
-            $ref: '#/components/schemas/DORAEvent'
-          type: array
-      type: object
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -16390,30 +16575,6 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
-    DataExportConfig:
-      description: AWS Cost and Usage Report data export configuration.
-      properties:
-        bucket_name:
-          description: Name of the S3 bucket where the Cost and Usage Report is stored.
-          example: billing
-          type: string
-        bucket_region:
-          description: AWS region of the S3 bucket.
-          example: us-east-1
-          type: string
-        report_name:
-          description: Name of the Cost and Usage Report.
-          example: cost-and-usage-report
-          type: string
-        report_prefix:
-          description: S3 prefix where the Cost and Usage Report is stored.
-          example: reports
-          type: string
-        report_type:
-          description: Type of the Cost and Usage Report.
-          example: CUR2.0
-          type: string
-      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -23831,6 +23992,13 @@ components:
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
           type: boolean
+        is_global_location_enabled:
+          default: true
+          description: When enabled, Datadog collects metrics where location is explicitly
+            stated as "global" or where location information cannot be deduced from
+            GCP labels.
+          example: true
+          type: boolean
         is_per_project_quota_enabled:
           default: false
           description: When enabled, Datadog applies the `X-Goog-User-Project` header,
@@ -23871,6 +24039,18 @@ components:
             type: gce_instance
           items:
             $ref: '#/components/schemas/GCPMonitoredResourceConfig'
+          type: array
+        region_filter_configs:
+          description: Configurations for GCP location filtering, such as region,
+            multi-region, or zone. Only monitored resources that match the specified
+            regions are imported into Datadog. By default, Datadog collects from all
+            locations.
+          example:
+          - nam4
+          - europe-north1
+          items:
+            description: Region Filter Configs
+            type: string
           type: array
         resource_collection_enabled:
           description: When enabled, Datadog scans for all resources in your GCP environment.
@@ -25186,6 +25366,61 @@ components:
       required:
       - type
       type: object
+    GlobalVariableData:
+      description: Synthetics global variable data. Wrapper around the global variable
+        object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariable'
+        id:
+          description: Global variable identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/GlobalVariableType'
+      type: object
+    GlobalVariableJsonPatchRequest:
+      description: JSON Patch request for global variable.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestData'
+      required:
+      - data
+      type: object
+    GlobalVariableJsonPatchRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/GlobalVariableJsonPatchType'
+      type: object
+    GlobalVariableJsonPatchRequestDataAttributes:
+      properties:
+        json_patch:
+          description: JSON Patch operations following RFC 6902.
+          items:
+            $ref: '#/components/schemas/JsonPatchOperation'
+          type: array
+      type: object
+    GlobalVariableJsonPatchType:
+      description: Global variable JSON Patch type.
+      enum:
+      - global_variables_json_patch
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES_JSON_PATCH
+    GlobalVariableResponse:
+      description: Global variable response.
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalVariableData'
+      type: object
+    GlobalVariableType:
+      description: Global variable type.
+      enum:
+      - global_variables
+      type: string
+      x-enum-varnames:
+      - GLOBAL_VARIABLES
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
       nullable: true
@@ -29692,6 +29927,40 @@ components:
       - to
       - index
       type: object
+    JsonPatchOperation:
+      description: A JSON Patch operation as per RFC 6902.
+      properties:
+        op:
+          $ref: '#/components/schemas/JsonPatchOperationOp'
+        path:
+          description: A JSON Pointer path (e.g., "/name", "/value/secure").
+          example: /name
+          type: string
+        value:
+          description: The value to use for the operation (not applicable for "remove"
+            and "test" operations).
+      required:
+      - op
+      - path
+      type: object
+    JsonPatchOperationOp:
+      description: The operation to perform.
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: add
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     KindAttributes:
       description: Kind attributes.
       properties:
@@ -30874,6 +31143,19 @@ components:
           description: Link for the next set of rules.
           example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
           type: string
+      type: object
+    ListSecurityFindingsResponse:
+      description: The expected response schema when listing security findings.
+      properties:
+        data:
+          description: Array of security findings matching the search query.
+          items:
+            $ref: '#/components/schemas/SecurityFindingsData'
+          type: array
+        links:
+          $ref: '#/components/schemas/SecurityFindingsLinks'
+        meta:
+          $ref: '#/components/schemas/SecurityFindingsMeta'
       type: object
     ListTagsResponse:
       description: List tags response.
@@ -33565,8 +33847,11 @@ components:
       - query
       type: object
     MicrosoftSentinelDestination:
-      description: The `microsoft_sentinel` destination forwards logs to Microsoft
+      description: 'The `microsoft_sentinel` destination forwards logs to Microsoft
         Sentinel.
+
+
+        **Supported pipeline types:** logs'
       properties:
         client_id:
           description: Azure AD client ID used for authentication.
@@ -33607,6 +33892,8 @@ components:
       - dcr_immutable_id
       - table
       type: object
+      x-pipeline-types:
+      - logs
     MicrosoftSentinelDestinationType:
       default: microsoft_sentinel
       description: The destination type. The value should always be `microsoft_sentinel`.
@@ -35311,13 +35598,16 @@ components:
       - data
       type: object
     ObservabilityPipelineAddEnvVarsProcessor:
-      description: The `add_env_vars` processor adds environment variable values to
-        log events.
+      description: 'The `add_env_vars` processor adds environment variable values
+        to log events.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
@@ -35344,6 +35634,8 @@ components:
       - variables
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAddEnvVarsProcessorType:
       default: add_env_vars
       description: The processor type. The value should always be `add_env_vars`.
@@ -35369,12 +35661,15 @@ components:
       - name
       type: object
     ObservabilityPipelineAddFieldsProcessor:
-      description: The `add_fields` processor adds static key-value fields to logs.
+      description: 'The `add_fields` processor adds static key-value fields to logs.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         fields:
@@ -35384,8 +35679,8 @@ components:
             $ref: '#/components/schemas/ObservabilityPipelineFieldValue'
           type: array
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (for example, as the `input`
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: add-fields-processor
           type: string
@@ -35403,6 +35698,8 @@ components:
       - fields
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAddFieldsProcessorType:
       default: add_fields
       description: The processor type. The value should always be `add_fields`.
@@ -35412,15 +35709,60 @@ components:
       type: string
       x-enum-varnames:
       - ADD_FIELDS
+    ObservabilityPipelineAddHostnameProcessor:
+      description: 'The `add_hostname` processor adds the hostname to log events.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
+          example: add-hostname-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAddHostnameProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - enabled
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineAddHostnameProcessorType:
+      default: add_hostname
+      description: The processor type. The value should always be `add_hostname`.
+      enum:
+      - add_hostname
+      example: add_hostname
+      type: string
+      x-enum-varnames:
+      - ADD_HOSTNAME
     ObservabilityPipelineAmazonDataFirehoseSource:
-      description: The `amazon_data_firehose` source ingests logs from AWS Data Firehose.
+      description: 'The `amazon_data_firehose` source ingests logs from AWS Data Firehose.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: amazon-firehose-source
           type: string
         tls:
@@ -35431,6 +35773,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonDataFirehoseSourceType:
       default: amazon_data_firehose
       description: The source type. The value should always be `amazon_data_firehose`.
@@ -35441,7 +35785,10 @@ components:
       x-enum-varnames:
       - AMAZON_DATA_FIREHOSE
     ObservabilityPipelineAmazonOpenSearchDestination:
-      description: The `amazon_opensearch` destination writes logs to Amazon OpenSearch.
+      description: 'The `amazon_opensearch` destination writes logs to Amazon OpenSearch.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuth'
@@ -35469,6 +35816,8 @@ components:
       - inputs
       - auth
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonOpenSearchDestinationAuth:
       description: 'Authentication settings for the Amazon OpenSearch destination.
 
@@ -35512,8 +35861,11 @@ components:
       x-enum-varnames:
       - AMAZON_OPENSEARCH
     ObservabilityPipelineAmazonS3Destination:
-      description: The `amazon_s3` destination sends your logs in Datadog-rehydratable
+      description: 'The `amazon_s3` destination sends your logs in Datadog-rehydratable
         format to an Amazon S3 bucket for archiving.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -35554,6 +35906,8 @@ components:
       - region
       - storage_class
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonS3DestinationStorageClass:
       description: S3 storage class.
       enum:
@@ -35590,14 +35944,17 @@ components:
     ObservabilityPipelineAmazonS3Source:
       description: 'The `amazon_s3` source ingests logs from an Amazon S3 bucket.
 
-        It supports AWS authentication and TLS encryption.'
+        It supports AWS authentication and TLS encryption.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: aws-s3-source
           type: string
         region:
@@ -35613,6 +35970,8 @@ components:
       - type
       - region
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonS3SourceType:
       default: amazon_s3
       description: The source type. Always `amazon_s3`.
@@ -35623,8 +35982,11 @@ components:
       x-enum-varnames:
       - AMAZON_S3
     ObservabilityPipelineAmazonSecurityLakeDestination:
-      description: The `amazon_security_lake` destination sends your logs to Amazon
+      description: 'The `amazon_security_lake` destination sends your logs to Amazon
         Security Lake.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAwsAuth'
@@ -35664,6 +36026,8 @@ components:
       - region
       - custom_source_name
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineAmazonSecurityLakeDestinationType:
       default: amazon_security_lake
       description: The destination type. Always `amazon_security_lake`.
@@ -35689,6 +36053,42 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineCloudPremDestination:
+      description: 'The `cloud_prem` destination sends logs to Datadog CloudPrem.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: cloud-prem-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineCloudPremDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineCloudPremDestinationType:
+      default: cloud_prem
+      description: The destination type. The value should always be `cloud_prem`.
+      enum:
+      - cloud_prem
+      example: cloud_prem
+      type: string
+      x-enum-varnames:
+      - CLOUD_PREM
     ObservabilityPipelineComponentDisplayName:
       description: The display name for a component.
       example: my component
@@ -35702,12 +36102,14 @@ components:
           example:
           - id: datadog-logs-destination
             inputs:
-            - filter-processor
+            - my-processor-group
             type: datadog_logs
           items:
             $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
           type: array
-        processors:
+        pipeline_type:
+          $ref: '#/components/schemas/ObservabilityPipelineConfigPipelineType'
+        processor_groups:
           description: A list of processor groups that transform or enrich log data.
           example:
           - enabled: true
@@ -35728,6 +36130,17 @@ components:
           items:
             $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorGroup'
           type: array
+        processors:
+          deprecated: true
+          description: 'A list of processor groups that transform or enrich log data.
+
+
+            **Deprecated:** This field is deprecated, you should now use the processor_groups
+            field.'
+          example: []
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorGroup'
+          type: array
         sources:
           description: A list of configured data sources for the pipeline.
           example:
@@ -35743,25 +36156,40 @@ components:
     ObservabilityPipelineConfigDestinationItem:
       description: A destination for the pipeline.
       oneOf:
-      - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Destination'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
+      - $ref: '#/components/schemas/AzureStorageDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineCloudPremDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGoogleChronicleDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineKafkaDestination'
+      - $ref: '#/components/schemas/MicrosoftSentinelDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineNewRelicDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogDestination'
       - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgDestination'
-      - $ref: '#/components/schemas/AzureStorageDestination'
-      - $ref: '#/components/schemas/MicrosoftSentinelDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineGoogleChronicleDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineNewRelicDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineSentinelOneDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineSocketDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineAmazonSecurityLakeDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestination'
-      - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestination'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogMetricsDestination'
+    ObservabilityPipelineConfigPipelineType:
+      default: logs
+      description: The type of data being ingested. Defaults to `logs` if not specified.
+      enum:
+      - logs
+      - metrics
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - METRICS
     ObservabilityPipelineConfigProcessorGroup:
       description: A group of processors.
       example:
@@ -35835,45 +36263,53 @@ components:
       description: A processor for the pipeline.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineFilterProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineSampleProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineOcsfMapperProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineAddEnvVarsProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
-      - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddHostnameProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineCustomProcessor'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineGenerateMetricsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineOcsfMapperProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseGrokProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseXMLProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineReduceProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSampleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSensitiveDataScannerProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineThrottleProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessor'
     ObservabilityPipelineConfigSourceItem:
       description: A data source for the pipeline.
       oneOf:
-      - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
       - $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSplunkTcpSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Source'
-      - $ref: '#/components/schemas/ObservabilityPipelineFluentdSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineFluentBitSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineHttpServerSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogSource'
-      - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgSource'
       - $ref: '#/components/schemas/ObservabilityPipelineAmazonDataFirehoseSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineAmazonS3Source'
+      - $ref: '#/components/schemas/ObservabilityPipelineFluentBitSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineFluentdSource'
       - $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubSource'
       - $ref: '#/components/schemas/ObservabilityPipelineHttpClientSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineHttpServerSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
       - $ref: '#/components/schemas/ObservabilityPipelineLogstashSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineRsyslogSource'
       - $ref: '#/components/schemas/ObservabilityPipelineSocketSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplunkHecSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSplunkTcpSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSumoLogicSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineSyslogNgSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineOpentelemetrySource'
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
-      description: The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
+      description: 'The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike
         Next Gen SIEM.
+
+
+        **Supported pipeline types:** logs'
       properties:
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
@@ -35901,6 +36337,8 @@ components:
       - inputs
       - encoding
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression:
       description: Compression configuration for log events.
       properties:
@@ -35944,14 +36382,17 @@ components:
       x-enum-varnames:
       - CROWDSTRIKE_NEXT_GEN_SIEM
     ObservabilityPipelineCustomProcessor:
-      description: The `custom_processor` processor transforms events using [Vector
+      description: 'The `custom_processor` processor transforms events using [Vector
         Remap Language (VRL)](https://vector.dev/docs/reference/vrl/) scripts with
         advanced filtering capabilities.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
@@ -35980,6 +36421,8 @@ components:
       - remaps
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineCustomProcessorRemap:
       description: Defines a single VRL remap rule with its own filtering and transformation
         logic.
@@ -36055,12 +36498,16 @@ components:
       - config
       type: object
     ObservabilityPipelineDatadogAgentSource:
-      description: The `datadog_agent` source collects logs from the Datadog Agent.
+      description: 'The `datadog_agent` source collects logs/metrics from the Datadog
+        Agent.
+
+
+        **Supported pipeline types:** logs, metrics'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: datadog-agent-source
           type: string
         tls:
@@ -36071,6 +36518,9 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
+      - metrics
     ObservabilityPipelineDatadogAgentSourceType:
       default: datadog_agent
       description: The source type. The value should always be `datadog_agent`.
@@ -36081,7 +36531,10 @@ components:
       x-enum-varnames:
       - DATADOG_AGENT
     ObservabilityPipelineDatadogLogsDestination:
-      description: The `datadog_logs` destination forwards logs to Datadog Log Management.
+      description: 'The `datadog_logs` destination forwards logs to Datadog Log Management.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -36102,6 +36555,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineDatadogLogsDestinationType:
       default: datadog_logs
       description: The destination type. The value should always be `datadog_logs`.
@@ -36111,21 +36566,60 @@ components:
       type: string
       x-enum-varnames:
       - DATADOG_LOGS
+    ObservabilityPipelineDatadogMetricsDestination:
+      description: 'The `datadog_metrics` destination forwards metrics to Datadog.
+
+
+        **Supported pipeline types:** metrics'
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: datadog-metrics-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this component.
+          example:
+          - metric-tags-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogMetricsDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+      x-pipeline-types:
+      - metrics
+    ObservabilityPipelineDatadogMetricsDestinationType:
+      default: datadog_metrics
+      description: The destination type. The value should always be `datadog_metrics`.
+      enum:
+      - datadog_metrics
+      example: datadog_metrics
+      type: string
+      x-enum-varnames:
+      - DATADOG_METRICS
     ObservabilityPipelineDatadogTagsProcessor:
-      description: The `datadog_tags` processor includes or excludes specific Datadog
+      description: 'The `datadog_tags` processor includes or excludes specific Datadog
         tags in your logs.
+
+
+        **Supported pipeline types:** logs'
       properties:
         action:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogTagsProcessorAction'
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (for example, as the `input`
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: datadog-tags-processor
           type: string
@@ -36156,6 +36650,8 @@ components:
       - keys
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineDatadogTagsProcessorAction:
       description: The action to take on tags with matching keys.
       enum:
@@ -36198,12 +36694,15 @@ components:
       - DECODE_JSON
       - DECODE_SYSLOG
     ObservabilityPipelineDedupeProcessor:
-      description: The `dedupe` processor removes duplicate fields in log events.
+      description: 'The `dedupe` processor removes duplicate fields in log events.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         fields:
@@ -36235,6 +36734,8 @@ components:
       - mode
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
       enum:
@@ -36255,8 +36756,11 @@ components:
       x-enum-varnames:
       - DEDUPE
     ObservabilityPipelineElasticsearchDestination:
-      description: The `elasticsearch` destination writes logs to an Elasticsearch
+      description: 'The `elasticsearch` destination writes logs to an Elasticsearch
         cluster.
+
+
+        **Supported pipeline types:** logs'
       properties:
         api_version:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
@@ -36264,6 +36768,8 @@ components:
           description: The index to write logs to in Elasticsearch.
           example: logs-index
           type: string
+        data_stream:
+          $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationDataStream'
         id:
           description: The unique identifier for this component.
           example: elasticsearch-destination
@@ -36283,6 +36789,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineElasticsearchDestinationApiVersion:
       description: The Elasticsearch API version to use. Set to `auto` to auto-detect.
       enum:
@@ -36297,6 +36805,23 @@ components:
       - V6
       - V7
       - V8
+    ObservabilityPipelineElasticsearchDestinationDataStream:
+      description: Configuration options for writing to Elasticsearch Data Streams
+        instead of a fixed index.
+      properties:
+        dataset:
+          description: The data stream dataset for your logs. This groups logs by
+            their source or application.
+          type: string
+        dtype:
+          description: The data stream type for your logs. This determines how logs
+            are categorized within the data stream.
+          type: string
+        namespace:
+          description: The data stream namespace for your logs. This separates logs
+            into different environments or domains.
+          type: string
+      type: object
     ObservabilityPipelineElasticsearchDestinationType:
       default: elasticsearch
       description: The destination type. The value should always be `elasticsearch`.
@@ -36436,13 +36961,17 @@ components:
       - path
       type: object
     ObservabilityPipelineEnrichmentTableProcessor:
-      description: The `enrichment_table` processor enriches logs using a static CSV
-        file or GeoIP database.
+      description: 'The `enrichment_table` processor enriches logs using a static
+        CSV file, GeoIP database, or reference table. Exactly one of `file`, `geoip`,
+        or `reference_table` must be configured.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         file:
@@ -36458,6 +36987,8 @@ components:
             targets.
           example: source:my-source
           type: string
+        reference_table:
+          $ref: '#/components/schemas/ObservabilityPipelineEnrichmentTableReferenceTable'
         target:
           description: Path where enrichment results should be stored in the log.
           example: enriched.geoip
@@ -36471,6 +37002,8 @@ components:
       - target
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineEnrichmentTableProcessorType:
       default: enrichment_table
       description: The processor type. The value should always be `enrichment_table`.
@@ -36480,6 +37013,28 @@ components:
       type: string
       x-enum-varnames:
       - ENRICHMENT_TABLE
+    ObservabilityPipelineEnrichmentTableReferenceTable:
+      description: Uses a Datadog reference table to enrich logs.
+      properties:
+        columns:
+          description: List of column names to include from the reference table. If
+            not provided, all columns are included.
+          items:
+            type: string
+          type: array
+        key_field:
+          description: Path to the field in the log event to match against the reference
+            table.
+          example: log.user.id
+          type: string
+        table_id:
+          description: The unique identifier of the reference table.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+      - key_field
+      - table_id
+      type: object
     ObservabilityPipelineFieldValue:
       description: Represents a static key-value pair used in various processors.
       properties:
@@ -36496,26 +37051,29 @@ components:
       - value
       type: object
     ObservabilityPipelineFilterProcessor:
-      description: The `filter` processor allows conditional processing of logs based
-        on a Datadog search query. Logs that match the `include` query are passed
-        through; others are discarded.
+      description: 'The `filter` processor allows conditional processing of logs/metrics
+        based on a Datadog search query. Logs/metrics that match the `include` query
+        are passed through; others are discarded.
+
+
+        **Supported pipeline types:** logs, metrics'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (for example, as the `input`
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: filter-processor
           type: string
         include:
-          description: A Datadog search query used to determine which logs should
-            pass through the filter. Logs that match this query continue to downstream
-            components; others are dropped.
+          description: A Datadog search query used to determine which logs/metrics
+            should pass through the filter. Logs/metrics that match this query continue
+            to downstream components; others are dropped.
           example: service:my-service
           type: string
         type:
@@ -36526,6 +37084,9 @@ components:
       - include
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
+      - metrics
     ObservabilityPipelineFilterProcessorType:
       default: filter
       description: The processor type. The value should always be `filter`.
@@ -36536,11 +37097,14 @@ components:
       x-enum-varnames:
       - FILTER
     ObservabilityPipelineFluentBitSource:
-      description: The `fluent_bit` source ingests logs from Fluent Bit.
+      description: 'The `fluent_bit` source ingests logs from Fluent Bit.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (for example, as the `input`
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: fluent-source
           type: string
@@ -36552,6 +37116,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineFluentBitSourceType:
       default: fluent_bit
       description: The source type. The value should always be `fluent_bit`.
@@ -36562,11 +37128,14 @@ components:
       x-enum-varnames:
       - FLUENT_BIT
     ObservabilityPipelineFluentdSource:
-      description: The `fluentd` source ingests logs from a Fluentd-compatible service.
+      description: 'The `fluentd` source ingests logs from a Fluentd-compatible service.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (for example, as the `input`
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: fluent-source
           type: string
@@ -36578,6 +37147,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineFluentdSourceType:
       default: fluentd
       description: The source type. The value should always be `fluentd.
@@ -36602,12 +37173,15 @@ components:
         from logs and sends them to Datadog.
 
         Metrics can be counters, gauges, or distributions and optionally grouped by
-        log fields.'
+        log fields.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
@@ -36632,6 +37206,8 @@ components:
       - type
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGenerateMetricsProcessorType:
       default: generate_datadog_metrics
       description: The processor type. Always `generate_datadog_metrics`.
@@ -36726,7 +37302,10 @@ components:
       - GAUGE
       - DISTRIBUTION
     ObservabilityPipelineGoogleChronicleDestination:
-      description: The `google_chronicle` destination sends logs to Google Chronicle.
+      description: 'The `google_chronicle` destination sends logs to Google Chronicle.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
@@ -36760,6 +37339,8 @@ components:
       - inputs
       - customer_id
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGoogleChronicleDestinationEncoding:
       description: The encoding format for the logs sent to Chronicle.
       enum:
@@ -36783,7 +37364,10 @@ components:
       description: 'The `google_cloud_storage` destination stores logs in a Google
         Cloud Storage (GCS) bucket.
 
-        It requires a bucket name, GCP authentication, and metadata fields.'
+        It requires a bucket name, GCP authentication, and metadata fields.
+
+
+        **Supported pipeline types:** logs'
       properties:
         acl:
           $ref: '#/components/schemas/ObservabilityPipelineGoogleCloudStorageDestinationAcl'
@@ -36825,6 +37409,8 @@ components:
       - bucket
       - storage_class
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGoogleCloudStorageDestinationAcl:
       description: Access control list setting for objects written to the bucket.
       enum:
@@ -36867,8 +37453,11 @@ components:
       x-enum-varnames:
       - GOOGLE_CLOUD_STORAGE
     ObservabilityPipelineGooglePubSubDestination:
-      description: The `google_pubsub` destination publishes logs to a Google Cloud
+      description: 'The `google_pubsub` destination publishes logs to a Google Cloud
         Pub/Sub topic.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
@@ -36906,6 +37495,8 @@ components:
       - project
       - topic
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGooglePubSubDestinationEncoding:
       description: Encoding format for log events.
       enum:
@@ -36926,17 +37517,20 @@ components:
       x-enum-varnames:
       - GOOGLE_PUBSUB
     ObservabilityPipelineGooglePubSubSource:
-      description: The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
+      description: 'The `google_pubsub` source ingests logs from a Google Cloud Pub/Sub
         subscription.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
         decoding:
           $ref: '#/components/schemas/ObservabilityPipelineDecoding'
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: google-pubsub-source
           type: string
         project:
@@ -36958,6 +37552,8 @@ components:
       - project
       - subscription
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineGooglePubSubSourceType:
       default: google_pubsub
       description: The source type. The value should always be `google_pubsub`.
@@ -36967,18 +37563,103 @@ components:
       type: string
       x-enum-varnames:
       - GOOGLE_PUBSUB
+    ObservabilityPipelineHttpClientDestination:
+      description: 'The `http_client` destination sends data to an HTTP endpoint.
+
+
+        **Supported pipeline types:** logs, metrics'
+      properties:
+        auth_strategy:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationAuthStrategy'
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationEncoding'
+        id:
+          description: The unique identifier for this component.
+          example: http-client-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the input for
+            this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - encoding
+      type: object
+      x-pipeline-types:
+      - logs
+      - metrics
+    ObservabilityPipelineHttpClientDestinationAuthStrategy:
+      description: HTTP authentication strategy.
+      enum:
+      - none
+      - basic
+      - bearer
+      example: basic
+      type: string
+      x-enum-varnames:
+      - NONE
+      - BASIC
+      - BEARER
+    ObservabilityPipelineHttpClientDestinationCompression:
+      description: Compression configuration for HTTP requests.
+      properties:
+        algorithm:
+          $ref: '#/components/schemas/ObservabilityPipelineHttpClientDestinationCompressionAlgorithm'
+      required:
+      - algorithm
+      type: object
+    ObservabilityPipelineHttpClientDestinationCompressionAlgorithm:
+      description: Compression algorithm.
+      enum:
+      - gzip
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - GZIP
+    ObservabilityPipelineHttpClientDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+    ObservabilityPipelineHttpClientDestinationType:
+      default: http_client
+      description: The destination type. The value should always be `http_client`.
+      enum:
+      - http_client
+      example: http_client
+      type: string
+      x-enum-varnames:
+      - HTTP_CLIENT
     ObservabilityPipelineHttpClientSource:
-      description: The `http_client` source scrapes logs from HTTP endpoints at regular
+      description: 'The `http_client` source scrapes logs from HTTP endpoints at regular
         intervals.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpClientSourceAuthStrategy'
         decoding:
           $ref: '#/components/schemas/ObservabilityPipelineDecoding'
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: http-client-source
           type: string
         scrape_interval_secs:
@@ -37000,14 +37681,18 @@ components:
       - type
       - decoding
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineHttpClientSourceAuthStrategy:
       description: Optional authentication strategy for HTTP requests.
       enum:
+      - none
       - basic
       - bearer
       example: basic
       type: string
       x-enum-varnames:
+      - NONE
       - BASIC
       - BEARER
     ObservabilityPipelineHttpClientSourceType:
@@ -37020,8 +37705,11 @@ components:
       x-enum-varnames:
       - HTTP_CLIENT
     ObservabilityPipelineHttpServerSource:
-      description: The `http_server` source collects logs over HTTP POST from external
+      description: 'The `http_server` source collects logs over HTTP POST from external
         services.
+
+
+        **Supported pipeline types:** logs'
       properties:
         auth_strategy:
           $ref: '#/components/schemas/ObservabilityPipelineHttpServerSourceAuthStrategy'
@@ -37041,6 +37729,8 @@ components:
       - auth_strategy
       - decoding
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineHttpServerSourceAuthStrategy:
       description: HTTP authentication method.
       enum:
@@ -37060,27 +37750,180 @@ components:
       type: string
       x-enum-varnames:
       - HTTP_SERVER
+    ObservabilityPipelineKafkaDestination:
+      description: 'The `kafka` destination sends logs to Apache Kafka topics.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        compression:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationCompression'
+        encoding:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationEncoding'
+        headers_key:
+          description: The field name to use for Kafka message headers.
+          example: headers
+          type: string
+        id:
+          description: The unique identifier for this component.
+          example: kafka-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        key_field:
+          description: The field name to use as the Kafka message key.
+          example: message_id
+          type: string
+        librdkafka_options:
+          description: Optional list of advanced Kafka producer configuration options,
+            defined as key-value pairs.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaLibrdkafkaOption'
+          type: array
+        message_timeout_ms:
+          description: Maximum time in milliseconds to wait for message delivery confirmation.
+          example: 300000
+          format: int64
+          minimum: 1
+          type: integer
+        rate_limit_duration_secs:
+          description: Duration in seconds for the rate limit window.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+        rate_limit_num:
+          description: Maximum number of messages allowed per rate limit duration.
+          example: 1000
+          format: int64
+          minimum: 1
+          type: integer
+        sasl:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSasl'
+        socket_timeout_ms:
+          description: Socket timeout in milliseconds for network requests.
+          example: 60000
+          format: int64
+          maximum: 300000
+          minimum: 10
+          type: integer
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topic:
+          description: The Kafka topic name to publish logs to.
+          example: logs-topic
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      - topic
+      - encoding
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineKafkaDestinationCompression:
+      description: Compression codec for Kafka messages.
+      enum:
+      - none
+      - gzip
+      - snappy
+      - lz4
+      - zstd
+      example: gzip
+      type: string
+      x-enum-varnames:
+      - NONE
+      - GZIP
+      - SNAPPY
+      - LZ4
+      - ZSTD
+    ObservabilityPipelineKafkaDestinationEncoding:
+      description: Encoding format for log events.
+      enum:
+      - json
+      - raw_message
+      example: json
+      type: string
+      x-enum-varnames:
+      - JSON
+      - RAW_MESSAGE
+    ObservabilityPipelineKafkaDestinationType:
+      default: kafka
+      description: The destination type. The value should always be `kafka`.
+      enum:
+      - kafka
+      example: kafka
+      type: string
+      x-enum-varnames:
+      - KAFKA
+    ObservabilityPipelineKafkaLibrdkafkaOption:
+      description: Represents a key-value pair used to configure low-level `librdkafka`
+        client options for Kafka source and destination, such as timeouts, buffer
+        sizes, and security settings.
+      properties:
+        name:
+          description: The name of the `librdkafka` configuration option to set.
+          example: fetch.message.max.bytes
+          type: string
+        value:
+          description: The value assigned to the specified `librdkafka` configuration
+            option.
+          example: '1048576'
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineKafkaSasl:
+      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
+      properties:
+        mechanism:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSaslMechanism'
+      type: object
+    ObservabilityPipelineKafkaSaslMechanism:
+      description: SASL mechanism used for Kafka authentication.
+      enum:
+      - PLAIN
+      - SCRAM-SHA-256
+      - SCRAM-SHA-512
+      type: string
+      x-enum-varnames:
+      - PLAIN
+      - SCRAMNOT_SHANOT_256
+      - SCRAMNOT_SHANOT_512
     ObservabilityPipelineKafkaSource:
-      description: The `kafka` source ingests data from Apache Kafka topics.
+      description: 'The `kafka` source ingests data from Apache Kafka topics.
+
+
+        **Supported pipeline types:** logs'
       properties:
         group_id:
           description: Consumer group ID used by the Kafka client.
           example: consumer-group-0
           type: string
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: kafka-source
           type: string
         librdkafka_options:
           description: Optional list of advanced Kafka client configuration options,
             defined as key-value pairs.
           items:
-            $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceLibrdkafkaOption'
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaLibrdkafkaOption'
           type: array
         sasl:
-          $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceSasl'
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSasl'
         tls:
           $ref: '#/components/schemas/ObservabilityPipelineTls'
         topics:
@@ -37100,30 +37943,8 @@ components:
       - group_id
       - topics
       type: object
-    ObservabilityPipelineKafkaSourceLibrdkafkaOption:
-      description: Represents a key-value pair used to configure low-level `librdkafka`
-        client options for Kafka sources, such as timeouts, buffer sizes, and security
-        settings.
-      properties:
-        name:
-          description: The name of the `librdkafka` configuration option to set.
-          example: fetch.message.max.bytes
-          type: string
-        value:
-          description: The value assigned to the specified `librdkafka` configuration
-            option.
-          example: '1048576'
-          type: string
-      required:
-      - name
-      - value
-      type: object
-    ObservabilityPipelineKafkaSourceSasl:
-      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
-      properties:
-        mechanism:
-          $ref: '#/components/schemas/ObservabilityPipelinePipelineKafkaSourceSaslMechanism'
-      type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineKafkaSourceType:
       default: kafka
       description: The source type. The value should always be `kafka`.
@@ -37134,12 +37955,15 @@ components:
       x-enum-varnames:
       - KAFKA
     ObservabilityPipelineLogstashSource:
-      description: The `logstash` source ingests logs from a Logstash forwarder.
+      description: 'The `logstash` source ingests logs from a Logstash forwarder.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: logstash-source
           type: string
         tls:
@@ -37150,6 +37974,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineLogstashSourceType:
       default: logstash
       description: The source type. The value should always be `logstash`.
@@ -37174,13 +38000,112 @@ components:
       - name
       - value
       type: object
+    ObservabilityPipelineMetricTagsProcessor:
+      description: 'The `metric_tags` processor filters metrics based on their tags
+        using Datadog tag key patterns.
+
+
+        **Supported pipeline types:** metrics'
+      properties:
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
+          example: metric-tags-processor
+          type: string
+        include:
+          description: A Datadog search query that determines which metrics the processor
+            targets.
+          example: '*'
+          type: string
+        rules:
+          description: A list of rules for filtering metric tags.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorRule'
+          maxItems: 100
+          minItems: 1
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - rules
+      - enabled
+      type: object
+      x-pipeline-types:
+      - metrics
+    ObservabilityPipelineMetricTagsProcessorRule:
+      description: Defines a rule for filtering metric tags based on key patterns.
+      properties:
+        action:
+          $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorRuleAction'
+        include:
+          description: A Datadog search query used to determine which metrics this
+            rule targets.
+          example: '*'
+          type: string
+        keys:
+          description: A list of tag keys to include or exclude.
+          example:
+          - env
+          - service
+          - version
+          items:
+            type: string
+          type: array
+        mode:
+          $ref: '#/components/schemas/ObservabilityPipelineMetricTagsProcessorRuleMode'
+      required:
+      - include
+      - mode
+      - action
+      - keys
+      type: object
+    ObservabilityPipelineMetricTagsProcessorRuleAction:
+      description: The action to take on tags with matching keys.
+      enum:
+      - include
+      - exclude
+      example: include
+      type: string
+      x-enum-varnames:
+      - INCLUDE
+      - EXCLUDE
+    ObservabilityPipelineMetricTagsProcessorRuleMode:
+      description: The processing mode for tag filtering.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
+    ObservabilityPipelineMetricTagsProcessorType:
+      default: metric_tags
+      description: The processor type. The value should always be `metric_tags`.
+      enum:
+      - metric_tags
+      example: metric_tags
+      type: string
+      x-enum-varnames:
+      - METRIC_TAGS
     ObservabilityPipelineMetricValue:
       description: Specifies how the value of the generated metric is computed.
       oneOf:
       - $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByOne'
       - $ref: '#/components/schemas/ObservabilityPipelineGeneratedMetricIncrementByField'
     ObservabilityPipelineNewRelicDestination:
-      description: The `new_relic` destination sends logs to the New Relic platform.
+      description: 'The `new_relic` destination sends logs to the New Relic platform.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -37204,6 +38129,8 @@ components:
       - inputs
       - region
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineNewRelicDestinationRegion:
       description: The New Relic region.
       enum:
@@ -37224,13 +38151,16 @@ components:
       x-enum-varnames:
       - NEW_RELIC
     ObservabilityPipelineOcsfMapperProcessor:
-      description: The `ocsf_mapper` processor transforms logs into the OCSF schema
+      description: 'The `ocsf_mapper` processor transforms logs into the OCSF schema
         using a predefined mapping configuration.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
@@ -37257,6 +38187,8 @@ components:
       - mappings
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineOcsfMapperProcessorMapping:
       description: Defines how specific events are transformed to OCSF using a mapping
         configuration.
@@ -37316,7 +38248,10 @@ components:
       - OKTA_SYSTEM_LOG_AUTHENTICATION
       - PALO_ALTO_NETWORKS_FIREWALL_TRAFFIC
     ObservabilityPipelineOpenSearchDestination:
-      description: The `opensearch` destination writes logs to an OpenSearch cluster.
+      description: 'The `opensearch` destination writes logs to an OpenSearch cluster.
+
+
+        **Supported pipeline types:** logs'
       properties:
         bulk_index:
           description: The index to write logs to.
@@ -37341,6 +38276,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineOpenSearchDestinationType:
       default: opensearch
       description: The destination type. The value should always be `opensearch`.
@@ -37350,9 +38287,56 @@ components:
       type: string
       x-enum-varnames:
       - OPENSEARCH
+    ObservabilityPipelineOpentelemetrySource:
+      description: 'The `opentelemetry` source receives telemetry data using the OpenTelemetry
+        Protocol (OTLP) over gRPC and HTTP.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        grpc_address_key:
+          description: Environment variable name containing the gRPC server address
+            for receiving OTLP data. Must be a valid environment variable name (alphanumeric
+            characters and underscores only).
+          example: OTEL_GRPC_ADDRESS
+          type: string
+        http_address_key:
+          description: Environment variable name containing the HTTP server address
+            for receiving OTLP data. Must be a valid environment variable name (alphanumeric
+            characters and underscores only).
+          example: OTEL_HTTP_ADDRESS
+          type: string
+        id:
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
+          example: opentelemetry-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineOpentelemetrySourceType'
+      required:
+      - id
+      - type
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineOpentelemetrySourceType:
+      default: opentelemetry
+      description: The source type. The value should always be `opentelemetry`.
+      enum:
+      - opentelemetry
+      example: opentelemetry
+      type: string
+      x-enum-varnames:
+      - OPENTELEMETRY
     ObservabilityPipelineParseGrokProcessor:
-      description: The `parse_grok` processor extracts structured fields from unstructured
+      description: 'The `parse_grok` processor extracts structured fields from unstructured
         log messages using Grok patterns.
+
+
+        **Supported pipeline types:** logs'
       properties:
         disable_library_rules:
           default: false
@@ -37363,7 +38347,7 @@ components:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
@@ -37391,6 +38375,8 @@ components:
       - rules
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineParseGrokProcessorRule:
       description: 'A Grok parsing rule used in the `parse_grok` processor. Each rule
         defines how to extract structured fields
@@ -37470,14 +38456,17 @@ components:
       x-enum-varnames:
       - PARSE_GROK
     ObservabilityPipelineParseJSONProcessor:
-      description: The `parse_json` processor extracts JSON from a specified field
+      description: 'The `parse_json` processor extracts JSON from a specified field
         and flattens it into the event. This is useful when logs contain embedded
         JSON as a string.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         field:
@@ -37504,6 +38493,8 @@ components:
       - field
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineParseJSONProcessorType:
       default: parse_json
       description: The processor type. The value should always be `parse_json`.
@@ -37513,37 +38504,101 @@ components:
       type: string
       x-enum-varnames:
       - PARSE_JSON
-    ObservabilityPipelinePipelineKafkaSourceSaslMechanism:
-      description: SASL mechanism used for Kafka authentication.
+    ObservabilityPipelineParseXMLProcessor:
+      description: 'The `parse_xml` processor parses XML from a specified field and
+        extracts it into the event.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        always_use_text_key:
+          description: Whether to always use a text key for element content.
+          type: boolean
+        attr_prefix:
+          description: The prefix to use for XML attributes in the parsed output.
+          type: string
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        field:
+          description: The name of the log field that contains an XML string.
+          example: message
+          type: string
+        id:
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
+          example: parse-xml-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        include_attr:
+          description: Whether to include XML attributes in the parsed output.
+          type: boolean
+        parse_bool:
+          description: Whether to parse boolean values from strings.
+          type: boolean
+        parse_null:
+          description: Whether to parse null values.
+          type: boolean
+        parse_number:
+          description: Whether to parse numeric values from strings.
+          type: boolean
+        text_key:
+          description: The key name to use for text content within XML elements. Must
+            be at least 1 character if specified.
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineParseXMLProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - field
+      - enabled
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineParseXMLProcessorType:
+      default: parse_xml
+      description: The processor type. The value should always be `parse_xml`.
       enum:
-      - PLAIN
-      - SCRAM-SHA-256
-      - SCRAM-SHA-512
+      - parse_xml
+      example: parse_xml
       type: string
       x-enum-varnames:
-      - PLAIN
-      - SCRAMNOT_SHANOT_256
-      - SCRAMNOT_SHANOT_512
+      - PARSE_XML
     ObservabilityPipelineQuotaProcessor:
-      description: The Quota Processor measures logging traffic for logs that match
+      description: 'The `quota` processor measures logging traffic for logs that match
         a specified filter. When the configured daily quota is met, the processor
         can drop or alert.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         drop_events:
-          description: If set to `true`, logs that matched the quota filter and sent
-            after the quota has been met are dropped; only logs that did not match
-            the filter query continue through the pipeline.
+          description: 'If set to `true`, logs that match the quota filter and are
+            sent after the quota is exceeded are dropped. Logs that do not match the
+            filter continue through the pipeline. **Note**: You can set either `drop_events`
+            or `overflow_action`, but not both.'
           example: false
           type: boolean
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (for example, as the `input`
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: quota-processor
           type: string
@@ -37578,6 +38633,8 @@ components:
           items:
             type: string
           type: array
+        too_many_buckets_action:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorOverflowAction'
         type:
           $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorType'
       required:
@@ -37588,6 +38645,8 @@ components:
       - limit
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineQuotaProcessorLimit:
       description: The maximum amount of data or number of events allowed before the
         quota is enforced. Can be specified in bytes or events.
@@ -37615,7 +38674,8 @@ components:
       - BYTES
       - EVENTS
     ObservabilityPipelineQuotaProcessorOverflowAction:
-      description: 'The action to take when the quota is exceeded. Options:
+      description: 'The action to take when the quota or bucket limit is exceeded.
+        Options:
 
         - `drop`: Drop the event.
 
@@ -37659,13 +38719,16 @@ components:
       x-enum-varnames:
       - QUOTA
     ObservabilityPipelineReduceProcessor:
-      description: The `reduce` processor aggregates and merges logs based on matching
+      description: 'The `reduce` processor aggregates and merges logs based on matching
         keys and merge strategies.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         group_by:
@@ -37701,6 +38764,8 @@ components:
       - merge_strategies
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineReduceProcessorMergeStrategy:
       description: Defines how a specific field should be merged across grouped events.
       properties:
@@ -37754,12 +38819,15 @@ components:
       x-enum-varnames:
       - REDUCE
     ObservabilityPipelineRemoveFieldsProcessor:
-      description: The `remove_fields` processor deletes specified fields from logs.
+      description: 'The `remove_fields` processor deletes specified fields from logs.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         fields:
@@ -37771,9 +38839,9 @@ components:
             type: string
           type: array
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: remove-fields-processor
           type: string
         include:
@@ -37790,6 +38858,8 @@ components:
       - fields
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRemoveFieldsProcessorType:
       default: remove_fields
       description: The processor type. The value should always be `remove_fields`.
@@ -37800,12 +38870,15 @@ components:
       x-enum-varnames:
       - REMOVE_FIELDS
     ObservabilityPipelineRenameFieldsProcessor:
-      description: The `rename_fields` processor changes field names.
+      description: 'The `rename_fields` processor changes field names.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         fields:
@@ -37835,6 +38908,8 @@ components:
       - fields
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRenameFieldsProcessorField:
       description: Defines how to rename a field in log events.
       properties:
@@ -37866,8 +38941,11 @@ components:
       x-enum-varnames:
       - RENAME_FIELDS
     ObservabilityPipelineRsyslogDestination:
-      description: The `rsyslog` destination forwards logs to an external `rsyslog`
+      description: 'The `rsyslog` destination forwards logs to an external `rsyslog`
         server over TCP or UDP using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -37896,6 +38974,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRsyslogDestinationType:
       default: rsyslog
       description: The destination type. The value should always be `rsyslog`.
@@ -37906,13 +38986,16 @@ components:
       x-enum-varnames:
       - RSYSLOG
     ObservabilityPipelineRsyslogSource:
-      description: The `rsyslog` source listens for logs over TCP or UDP from an `rsyslog`
-        server using the syslog protocol.
+      description: 'The `rsyslog` source listens for logs over TCP or UDP from an
+        `rsyslog` server using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: rsyslog-source
           type: string
         mode:
@@ -37926,6 +39009,8 @@ components:
       - type
       - mode
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineRsyslogSourceType:
       default: rsyslog
       description: The source type. The value should always be `rsyslog`.
@@ -37936,18 +39021,31 @@ components:
       x-enum-varnames:
       - RSYSLOG
     ObservabilityPipelineSampleProcessor:
-      description: The `sample` processor allows probabilistic sampling of logs at
+      description: 'The `sample` processor allows probabilistic sampling of logs at
         a fixed rate.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
+        group_by:
+          description: Optional list of fields to group events by. Each group is sampled
+            independently.
+          example:
+          - service
+          - host
+          items:
+            type: string
+          minItems: 1
+          type: array
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (for example, as the `input`
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
             to downstream components).
           example: sample-processor
           type: string
@@ -37961,20 +39059,17 @@ components:
           example: 10.0
           format: double
           type: number
-        rate:
-          description: Number of events to sample (1 in N).
-          example: 10
-          format: int64
-          minimum: 1
-          type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineSampleProcessorType'
       required:
       - id
       - type
       - include
+      - percentage
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSampleProcessorType:
       default: sample
       description: The processor type. The value should always be `sample`.
@@ -37985,19 +39080,22 @@ components:
       x-enum-varnames:
       - SAMPLE
     ObservabilityPipelineSensitiveDataScannerProcessor:
-      description: The `sensitive_data_scanner` processor detects and optionally redacts
-        sensitive data in log events.
+      description: 'The `sensitive_data_scanner` processor detects and optionally
+        redacts sensitive data in log events.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: sensitive-scanner
           type: string
         include:
@@ -38020,6 +39118,8 @@ components:
       - rules
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSensitiveDataScannerProcessorAction:
       description: Defines what action to take when sensitive data is matched.
       oneOf:
@@ -38141,6 +39241,11 @@ components:
     ObservabilityPipelineSensitiveDataScannerProcessorCustomPatternOptions:
       description: Options for defining a custom regex pattern.
       properties:
+        description:
+          description: Human-readable description providing context about a sensitive
+            data scanner rule
+          example: "Custom regex for internal API\u202Fkeys"
+          type: string
         rule:
           description: A regular expression used to detect sensitive values. Must
             be a valid regex.
@@ -38196,6 +39301,11 @@ components:
       description: Options for selecting a predefined library pattern and enabling
         keyword support.
       properties:
+        description:
+          description: Human-readable description providing context about a sensitive
+            data scanner rule
+          example: Credit card pattern
+          type: string
         id:
           description: Identifier for a predefined pattern from the sensitive data
             scanner pattern library.
@@ -38337,7 +39447,10 @@ components:
       x-enum-varnames:
       - SENSITIVE_DATA_SCANNER
     ObservabilityPipelineSentinelOneDestination:
-      description: The `sentinel_one` destination sends logs to SentinelOne.
+      description: 'The `sentinel_one` destination sends logs to SentinelOne.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -38361,6 +39474,8 @@ components:
       - inputs
       - region
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSentinelOneDestinationRegion:
       description: The SentinelOne region to send logs to.
       enum:
@@ -38385,8 +39500,11 @@ components:
       x-enum-varnames:
       - SENTINEL_ONE
     ObservabilityPipelineSocketDestination:
-      description: The `socket` destination sends logs over TCP or UDP to a remote
+      description: 'The `socket` destination sends logs over TCP or UDP to a remote
         server.
+
+
+        **Supported pipeline types:** logs'
       properties:
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationEncoding'
@@ -38419,6 +39537,8 @@ components:
       - framing
       - mode
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSocketDestinationEncoding:
       description: Encoding format for log events.
       enum:
@@ -38513,14 +39633,17 @@ components:
       x-enum-varnames:
       - SOCKET
     ObservabilityPipelineSocketSource:
-      description: The `socket` source ingests logs over TCP or UDP.
+      description: 'The `socket` source ingests logs over TCP or UDP.
+
+
+        **Supported pipeline types:** logs'
       properties:
         framing:
           $ref: '#/components/schemas/ObservabilityPipelineSocketSourceFraming'
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: socket-source
           type: string
         mode:
@@ -38536,6 +39659,8 @@ components:
       - mode
       - framing
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSocketSourceFraming:
       description: Framing method configuration for the socket source.
       oneOf:
@@ -38676,9 +39801,79 @@ components:
       - type
       - attributes
       type: object
+    ObservabilityPipelineSplitArrayProcessor:
+      description: 'The `split_array` processor splits array fields into separate
+        events based on configured rules.
+
+
+        **Supported pipeline types:** logs'
+      properties:
+        arrays:
+          description: A list of array split configurations.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessorArrayConfig'
+          maxItems: 15
+          minItems: 1
+          type: array
+        display_name:
+          $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
+          example: split-array-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets. For split_array, this should typically be `*`.
+          example: '*'
+          type: string
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineSplitArrayProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - arrays
+      - enabled
+      type: object
+      x-pipeline-types:
+      - logs
+    ObservabilityPipelineSplitArrayProcessorArrayConfig:
+      description: Configuration for a single array split operation.
+      properties:
+        field:
+          description: The path to the array field to split.
+          example: tags
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this array
+            split operation targets.
+          example: '*'
+          type: string
+      required:
+      - include
+      - field
+      type: object
+    ObservabilityPipelineSplitArrayProcessorType:
+      default: split_array
+      description: The processor type. The value should always be `split_array`.
+      enum:
+      - split_array
+      example: split_array
+      type: string
+      x-enum-varnames:
+      - SPLIT_ARRAY
     ObservabilityPipelineSplunkHecDestination:
-      description: The `splunk_hec` destination forwards logs to Splunk using the
+      description: 'The `splunk_hec` destination forwards logs to Splunk using the
         HTTP Event Collector (HEC).
+
+
+        **Supported pipeline types:** logs'
       properties:
         auto_extract_timestamp:
           description: 'If `true`, Splunk tries to extract timestamps from incoming
@@ -38690,9 +39885,9 @@ components:
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding'
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: splunk-hec-destination
           type: string
         index:
@@ -38718,6 +39913,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSplunkHecDestinationEncoding:
       description: Encoding format for log events.
       enum:
@@ -38738,13 +39935,16 @@ components:
       x-enum-varnames:
       - SPLUNK_HEC
     ObservabilityPipelineSplunkHecSource:
-      description: The `splunk_hec` source implements the Splunk HTTP Event Collector
+      description: 'The `splunk_hec` source implements the Splunk HTTP Event Collector
         (HEC) API.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: splunk-hec-source
           type: string
         tls:
@@ -38755,6 +39955,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSplunkHecSourceType:
       default: splunk_hec
       description: The source type. Always `splunk_hec`.
@@ -38768,12 +39970,15 @@ components:
       description: 'The `splunk_tcp` source receives logs from a Splunk Universal
         Forwarder over TCP.
 
-        TLS is supported for secure transmission.'
+        TLS is supported for secure transmission.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: splunk-tcp-source
           type: string
         tls:
@@ -38784,6 +39989,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSplunkTcpSourceType:
       default: splunk_tcp
       description: The source type. Always `splunk_tcp`.
@@ -38794,7 +40001,10 @@ components:
       x-enum-varnames:
       - SPLUNK_TCP
     ObservabilityPipelineSumoLogicDestination:
-      description: The `sumo_logic` destination forwards logs to Sumo Logic.
+      description: 'The `sumo_logic` destination forwards logs to Sumo Logic.
+
+
+        **Supported pipeline types:** logs'
       properties:
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
@@ -38835,6 +40045,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSumoLogicDestinationEncoding:
       description: The output encoding format.
       enum:
@@ -38872,12 +40084,15 @@ components:
       x-enum-varnames:
       - SUMO_LOGIC
     ObservabilityPipelineSumoLogicSource:
-      description: The `sumo_logic` source receives logs from Sumo Logic collectors.
+      description: 'The `sumo_logic` source receives logs from Sumo Logic collectors.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: sumo-logic-source
           type: string
         type:
@@ -38886,6 +40101,8 @@ components:
       - id
       - type
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSumoLogicSourceType:
       default: sumo_logic
       description: The source type. The value should always be `sumo_logic`.
@@ -38896,8 +40113,11 @@ components:
       x-enum-varnames:
       - SUMO_LOGIC
     ObservabilityPipelineSyslogNgDestination:
-      description: The `syslog_ng` destination forwards logs to an external `syslog-ng`
+      description: 'The `syslog_ng` destination forwards logs to an external `syslog-ng`
         server over TCP or UDP using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
           description: The unique identifier for this component.
@@ -38926,6 +40146,8 @@ components:
       - type
       - inputs
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSyslogNgDestinationType:
       default: syslog_ng
       description: The destination type. The value should always be `syslog_ng`.
@@ -38936,13 +40158,16 @@ components:
       x-enum-varnames:
       - SYSLOG_NG
     ObservabilityPipelineSyslogNgSource:
-      description: The `syslog_ng` source listens for logs over TCP or UDP from a
+      description: 'The `syslog_ng` source listens for logs over TCP or UDP from a
         `syslog-ng` server using the syslog protocol.
+
+
+        **Supported pipeline types:** logs'
       properties:
         id:
-          description: The unique identifier for this component. Used to reference
-            this component in other parts of the pipeline (e.g., as input to downstream
-            components).
+          description: The unique identifier for this component. Used in other parts
+            of the pipeline to reference this component (for example, as the `input`
+            to downstream components).
           example: syslog-ng-source
           type: string
         mode:
@@ -38956,6 +40181,8 @@ components:
       - type
       - mode
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineSyslogNgSourceType:
       default: syslog_ng
       description: The source type. The value should always be `syslog_ng`.
@@ -38976,13 +40203,16 @@ components:
       - TCP
       - UDP
     ObservabilityPipelineThrottleProcessor:
-      description: The `throttle` processor limits the number of events that pass
+      description: 'The `throttle` processor limits the number of events that pass
         through over a given time window.
+
+
+        **Supported pipeline types:** logs'
       properties:
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
-          description: Whether this processor is enabled.
+          description: Indicates whether the processor is enabled.
           example: true
           type: boolean
         group_by:
@@ -39023,6 +40253,8 @@ components:
       - window
       - enabled
       type: object
+      x-pipeline-types:
+      - logs
     ObservabilityPipelineThrottleProcessorType:
       default: throttle
       description: The processor type. The value should always be `throttle`.
@@ -40622,7 +41854,6 @@ components:
                 type: STRING
               primary_keys:
               - id
-            sync_enabled: false
             tags:
             - test_tag
           type: reference_table
@@ -40654,10 +41885,6 @@ components:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesFileMetadata'
         schema:
           $ref: '#/components/schemas/PatchTableRequestDataAttributesSchema'
-        sync_enabled:
-          description: Whether this table is synced automatically.
-          example: false
-          type: boolean
         tags:
           description: Tags for organizing and filtering reference tables.
           example:
@@ -41294,6 +42521,114 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    ProductAnalyticsServerSideEventError:
+      description: Error details.
+      properties:
+        detail:
+          description: Error message.
+          example: Malformed payload
+          type: string
+        status:
+          description: Error code.
+          example: '400'
+          type: string
+        title:
+          description: Error title.
+          example: Bad Request
+          type: string
+      type: object
+    ProductAnalyticsServerSideEventErrors:
+      description: Error response.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/ProductAnalyticsServerSideEventError'
+          type: array
+      type: object
+    ProductAnalyticsServerSideEventItem:
+      description: A Product Analytics server-side event.
+      properties:
+        account:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemAccount'
+        application:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemApplication'
+        event:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemEvent'
+        session:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemSession'
+        type:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemType'
+        usr:
+          $ref: '#/components/schemas/ProductAnalyticsServerSideEventItemUsr'
+      required:
+      - application
+      - event
+      - type
+      type: object
+    ProductAnalyticsServerSideEventItemAccount:
+      description: The account linked to your event.
+      properties:
+        id:
+          description: The account ID used in Datadog.
+          example: account-67890
+          type: string
+      required:
+      - id
+      type: object
+    ProductAnalyticsServerSideEventItemApplication:
+      description: The application in which you want to send your events.
+      properties:
+        id:
+          description: 'The application ID of your application. It can be found in
+            your
+
+            [application management page](https://app.datadoghq.com/rum/list).'
+          example: 123abcde-123a-123b-1234-123456789abc
+          type: string
+      required:
+      - id
+      type: object
+    ProductAnalyticsServerSideEventItemEvent:
+      description: Fields used for the event.
+      properties:
+        name:
+          description: The name of your event, which is used for search in the same
+            way as view or action names.
+          example: payment.processed
+          type: string
+      required:
+      - name
+      type: object
+    ProductAnalyticsServerSideEventItemSession:
+      description: The session linked to your event.
+      properties:
+        id:
+          description: The session ID captured by the SDK.
+          example: session-abcdef
+          type: string
+      required:
+      - id
+      type: object
+    ProductAnalyticsServerSideEventItemType:
+      description: The type of Product Analytics event. Must be `server` for server-side
+        events.
+      enum:
+      - server
+      example: server
+      type: string
+      x-enum-varnames:
+      - SERVER
+    ProductAnalyticsServerSideEventItemUsr:
+      description: The user linked to your event.
+      properties:
+        id:
+          description: The user ID used in Datadog.
+          example: user-12345
+          type: string
+      required:
+      - id
+      type: object
     Project:
       description: A Project
       properties:
@@ -42701,6 +44036,9 @@ components:
       description: Attributes of the SPA Recommendation resource. Contains recommendations
         for both driver and executor components.
       properties:
+        confidence_level:
+          format: double
+          type: number
         driver:
           $ref: '#/components/schemas/ComponentRecommendation'
         executor:
@@ -47666,6 +49004,148 @@ components:
         meta:
           $ref: '#/components/schemas/SecurityFilterMeta'
       type: object
+    SecurityFindingsAttributes:
+      description: The JSON object containing all attributes of the security finding.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: The custom attributes of the security finding.
+          example:
+            severity: high
+            status: open
+          type: object
+        tags:
+          description: List of tags associated with the security finding.
+          example:
+          - team:platform
+          - env:prod
+          items:
+            type: string
+          type: array
+        timestamp:
+          description: The Unix timestamp at which the detection changed for the resource.
+            Same value as @detection_changed_at.
+          example: 1765901760
+          format: int64
+          type: integer
+      type: object
+    SecurityFindingsData:
+      description: A single security finding.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsAttributes'
+        id:
+          description: The unique ID of the security finding.
+          example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityFindingsDataType'
+      type: object
+    SecurityFindingsDataType:
+      default: finding
+      description: The type of the security finding resource.
+      enum:
+      - finding
+      example: finding
+      type: string
+      x-enum-varnames:
+      - FINDING
+    SecurityFindingsLinks:
+      description: Links for pagination.
+      properties:
+        next:
+          description: Link for the next page of results. Note that paginated requests
+            can also be made using the POST endpoint.
+          example: https://app.datadoghq.com/api/v2/security/findings?page[cursor]=eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==&page[limit]=25
+          type: string
+      type: object
+    SecurityFindingsMeta:
+      description: Metadata about the response.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 548
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/SecurityFindingsPage'
+        request_id:
+          description: The identifier of the request.
+          example: pddv1ChZwVlMxMUdYRFRMQ1lyb3B4MGNYbFlnIi0KHQu35LDbucx
+          type: string
+        status:
+          $ref: '#/components/schemas/SecurityFindingsStatus'
+      type: object
+    SecurityFindingsPage:
+      description: Pagination information.
+      properties:
+        after:
+          description: The cursor used to get the next page of results.
+          example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+          type: string
+      type: object
+    SecurityFindingsSearchRequest:
+      description: The request body for searching security findings.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestData'
+      type: object
+    SecurityFindingsSearchRequestData:
+      description: Request data for searching security findings.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestDataAttributes'
+      type: object
+    SecurityFindingsSearchRequestDataAttributes:
+      description: Request attributes for searching security findings.
+      properties:
+        filter:
+          default: '*'
+          description: The search query following log search syntax.
+          example: '@severity:(critical OR high) @status:open team:platform'
+          type: string
+        page:
+          $ref: '#/components/schemas/SecurityFindingsSearchRequestPage'
+        sort:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      type: object
+    SecurityFindingsSearchRequestPage:
+      description: Pagination attributes for the search request.
+      properties:
+        cursor:
+          description: Get the next page of results with a cursor provided in the
+            previous query.
+          example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+          type: string
+        limit:
+          default: 10
+          description: The maximum number of security findings in the response.
+          example: 25
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      type: object
+    SecurityFindingsSort:
+      default: -@detection_changed_at
+      description: The sort parameters when querying security findings.
+      enum:
+      - '@detection_changed_at'
+      - -@detection_changed_at
+      type: string
+      x-enum-varnames:
+      - DETECTION_CHANGED_AT_ASC
+      - DETECTION_CHANGED_AT_DESC
+    SecurityFindingsStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -53648,6 +55128,178 @@ components:
         suppression:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
       type: object
+    SyntheticsGlobalVariable:
+      description: Synthetic global variable.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
+        description:
+          description: Description of the global variable.
+          example: Example description
+          type: string
+        id:
+          description: Unique identifier of the global variable.
+          readOnly: true
+          type: string
+        is_fido:
+          description: Determines if the global variable is a FIDO variable.
+          type: boolean
+        is_totp:
+          description: Determines if the global variable is a TOTP/MFA variable.
+          type: boolean
+        name:
+          description: Name of the global variable. Unique across Synthetic global
+            variables.
+          example: MY_VARIABLE
+          type: string
+        parse_test_options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptions'
+        parse_test_public_id:
+          description: A Synthetic test ID to use as a test to generate the variable
+            value.
+          example: abc-def-123
+          type: string
+        tags:
+          description: Tags of the global variable.
+          example:
+          - team:front
+          - test:workflow-1
+          items:
+            description: Tag name.
+            type: string
+          type: array
+        value:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableValue'
+      required:
+      - description
+      - name
+      - tags
+      - value
+      type: object
+    SyntheticsGlobalVariableAttributes:
+      description: Attributes of the global variable.
+      properties:
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+      type: object
+    SyntheticsGlobalVariableOptions:
+      description: Options for the Global Variable for MFA.
+      properties:
+        totp_parameters:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableTOTPParameters'
+      type: object
+    SyntheticsGlobalVariableParseTestOptions:
+      description: Parser options to use for retrieving a Synthetic global variable
+        from a Synthetic test. Used in conjunction with `parse_test_public_id`.
+      properties:
+        field:
+          description: When type is `http_header`, name of the header to use to extract
+            the value.
+          example: content-type
+          type: string
+        localVariableName:
+          description: When type is `local_variable`, name of the local variable to
+            use to extract the value.
+          example: LOCAL_VARIABLE
+          type: string
+        parser:
+          $ref: '#/components/schemas/SyntheticsVariableParser'
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
+      required:
+      - type
+      type: object
+    SyntheticsGlobalVariableParseTestOptionsType:
+      description: Type of value to extract from a test for a Synthetic global variable.
+      enum:
+      - http_body
+      - http_header
+      - http_status_code
+      - local_variable
+      example: http_body
+      type: string
+      x-enum-varnames:
+      - HTTP_BODY
+      - HTTP_HEADER
+      - HTTP_STATUS_CODE
+      - LOCAL_VARIABLE
+    SyntheticsGlobalVariableParserType:
+      description: Type of parser for a Synthetic global variable from a synthetics
+        test.
+      enum:
+      - raw
+      - json_path
+      - regex
+      - x_path
+      example: raw
+      type: string
+      x-enum-varnames:
+      - RAW
+      - JSON_PATH
+      - REGEX
+      - X_PATH
+    SyntheticsGlobalVariableTOTPParameters:
+      description: Parameters for the TOTP/MFA variable
+      properties:
+        digits:
+          description: Number of digits for the OTP code.
+          example: 6
+          format: int32
+          maximum: 10
+          minimum: 4
+          type: integer
+        refresh_interval:
+          description: Interval for which to refresh the token (in seconds).
+          example: 30
+          format: int32
+          maximum: 999
+          minimum: 0
+          type: integer
+      type: object
+    SyntheticsGlobalVariableValue:
+      description: Value of the global variable.
+      example:
+        secure: true
+        value: value
+      properties:
+        options:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableOptions'
+        secure:
+          description: Determines if the value of the variable is hidden.
+          type: boolean
+        value:
+          description: 'Value of the global variable. When reading a global variable,
+
+            the value will not be present if the variable is hidden with the `secure`
+            property.'
+          example: example-value
+          type: string
+      type: object
+    SyntheticsRestrictedRoles:
+      description: A list of role identifiers that can be pulled from the Roles API,
+        for restricting read and write access.
+      example:
+      - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+      items:
+        description: UUID for a role.
+        example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        type: string
+      type: array
+    SyntheticsVariableParser:
+      description: Details of the parser to use for the global variable.
+      example:
+        type: regex
+        value: .*
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsGlobalVariableParserType'
+        value:
+          description: Regex or JSON path used for the parser. Not used with type
+            `raw`.
+          type: string
+      required:
+      - type
+      type: object
     TableResultV2:
       description: A reference table resource containing its full configuration and
         state.
@@ -54641,6 +56293,143 @@ components:
           items:
             $ref: '#/components/schemas/TeamLink'
           type: array
+      type: object
+    TeamNotificationRule:
+      description: Team notification rule
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributes'
+        id:
+          description: The identifier of the team notification rule
+          example: b8626d7e-cedd-11eb-abf5-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamNotificationRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamNotificationRuleAttributes:
+      description: Team notification rule attributes
+      properties:
+        email:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesEmail'
+        ms_teams:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesMsTeams'
+        pagerduty:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesPagerduty'
+        slack:
+          $ref: '#/components/schemas/TeamNotificationRuleAttributesSlack'
+      type: object
+    TeamNotificationRuleAttributesEmail:
+      description: Email notification settings for the team
+      properties:
+        enabled:
+          description: Flag indicating email notification
+          type: boolean
+      type: object
+    TeamNotificationRuleAttributesMsTeams:
+      description: MS Teams notification settings for the team
+      properties:
+        connector_name:
+          description: Handle for MS Teams
+          type: string
+      type: object
+    TeamNotificationRuleAttributesPagerduty:
+      description: PagerDuty notification settings for the team
+      properties:
+        service_name:
+          description: Service name for PagerDuty
+          type: string
+      type: object
+    TeamNotificationRuleAttributesSlack:
+      description: Slack notification settings for the team
+      properties:
+        channel:
+          description: Channel for Slack notification
+          type: string
+        workspace:
+          description: Workspace for Slack notification
+          type: string
+      type: object
+    TeamNotificationRuleRequest:
+      description: Request to create or update a team notification rule
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamNotificationRule'
+      required:
+      - data
+      type: object
+    TeamNotificationRuleResponse:
+      description: Team notification rule response
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamNotificationRule'
+      type: object
+    TeamNotificationRuleType:
+      default: team_notification_rules
+      description: Team notification rule type
+      enum:
+      - team_notification_rules
+      example: team_notification_rules
+      type: string
+      x-enum-varnames:
+      - TEAM_NOTIFICATION_RULES
+    TeamNotificationRulesResponse:
+      description: Team notification rules response
+      properties:
+        data:
+          description: Team notification rules response data
+          items:
+            $ref: '#/components/schemas/TeamNotificationRule'
+          type: array
+        meta:
+          $ref: '#/components/schemas/TeamNotificationRulesResponseMeta'
+      type: object
+    TeamNotificationRulesResponseMeta:
+      description: Metadata that is included in the response when querying the team
+        notification rules
+      properties:
+        page:
+          $ref: '#/components/schemas/TeamNotificationRulesResponseMetaPage'
+      type: object
+    TeamNotificationRulesResponseMetaPage:
+      description: Metadata related to paging information that is included in the
+        response when querying the team notification rules
+      properties:
+        first_offset:
+          description: The first offset.
+          format: int64
+          type: integer
+        last_offset:
+          description: The last offset.
+          format: int64
+          type: integer
+        limit:
+          description: Pagination limit.
+          format: int64
+          type: integer
+        next_offset:
+          description: The next offset.
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: The offset.
+          format: int64
+          type: integer
+        prev_offset:
+          description: The previous offset.
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Total results.
+          format: int64
+          type: integer
+        type:
+          description: Offset type.
+          type: string
       type: object
     TeamOnCallResponders:
       description: Root object representing a team's on-call responder configuration.
@@ -58957,6 +60746,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            appsec_vm_read: View infrastructure, application code, and library vulnerability
+              findings.
             billing_read: View your organization's billing information.
             cases_read: View Cases.
             cases_write: Create and update cases.
@@ -59135,13 +60926,14 @@ paths:
         results.'
       operationId: ListFleetAgents
       parameters:
-      - description: Page number for pagination (must be greater than 0).
+      - description: Page number for pagination (starts at 0).
         in: query
         name: page_number
         required: false
         schema:
+          default: 0
           format: int64
-          minimum: 1
+          minimum: 0
           type: integer
       - description: Number of results per page (must be greater than 0 and less than
           or equal to 100).
@@ -67946,7 +69738,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DORAListResponse'
+                $ref: '#/components/schemas/DORADeploymentsListResponse'
           description: OK
         '400':
           content:
@@ -67985,26 +69777,8 @@ paths:
         '200':
           content:
             application/json:
-              example:
-                data:
-                  attributes:
-                    custom_tags:
-                    - language:java
-                    - department:engineering
-                    - region:us-east-1
-                    env: staging
-                    finished_at: 1693491984000000000
-                    git:
-                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-                      repository_url: https://github.com/organization/example-repository
-                    service: shopist
-                    started_at: 1693491974000000000
-                    team: backend
-                    version: v1.12.07
-                  id: 4242fcdd31586083
-                  type: dora_deployment
               schema:
-                $ref: '#/components/schemas/DORAFetchResponse'
+                $ref: '#/components/schemas/DORADeploymentFetchResponse'
           description: OK
         '400':
           content:
@@ -68124,66 +69898,8 @@ paths:
         '200':
           content:
             application/json:
-              example:
-                data:
-                - attributes:
-                    custom_tags:
-                    - language:java
-                    - department:engineering
-                    - region:us-east-1
-                    env: production
-                    finished_at: 1693491984000000000
-                    git:
-                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-                      repository_url: https://github.com/organization/example-repository
-                    name: Web server is down; all requests are failing.
-                    services:
-                    - shopist
-                    severity: SEV-1
-                    started_at: 1693491974000000000
-                    team: backend
-                  id: 4242fcdd31586085
-                  type: dora_failure
-                - attributes:
-                    custom_tags:
-                    - language:go
-                    - department:platform
-                    env: production
-                    finished_at: 1693492084000000000
-                    git:
-                      commit_sha: 77bdc9350f2cc9b250b69abddab733dd55e1a599
-                      repository_url: https://github.com/organization/api-service
-                    name: Database connection timeout
-                    services:
-                    - api-service
-                    - payment-service
-                    severity: SEV-1
-                    started_at: 1693492074000000000
-                    team: platform
-                    version: v2.1.0
-                  id: 4242fcdd31586086
-                  type: dora_failure
-                - attributes:
-                    custom_tags:
-                    - language:python
-                    - department:payments
-                    - region:eu-west-1
-                    env: staging
-                    finished_at: 1693492204000000000
-                    git:
-                      commit_sha: 99edc9350f2cc9b250b69abddab733dd55e1a601
-                      repository_url: https://github.com/organization/payment-service
-                    name: Payment gateway API rate limit exceeded
-                    services:
-                    - payment-service
-                    severity: SEV-2
-                    started_at: 1693492174000000000
-                    team: payments
-                    version: v1.8.3
-                  id: 4242fcdd31586087
-                  type: dora_failure
               schema:
-                $ref: '#/components/schemas/DORAListResponse'
+                $ref: '#/components/schemas/DORAFailuresListResponse'
           description: OK
         '400':
           content:
@@ -68222,28 +69938,8 @@ paths:
         '200':
           content:
             application/json:
-              example:
-                data:
-                  attributes:
-                    custom_tags:
-                    - language:java
-                    - department:engineering
-                    - region:us-east-1
-                    env: staging
-                    finished_at: 1693491984000000000
-                    git:
-                      commit_sha: 66adc9350f2cc9b250b69abddab733dd55e1a588
-                      repository_url: https://github.com/organization/example-repository
-                    name: Web server is down; all requests are failing.
-                    services:
-                    - shopist
-                    severity: High
-                    started_at: 1693491974000000000
-                    team: backend
-                  id: 4242fcdd31586085
-                  type: dora_failure
               schema:
-                $ref: '#/components/schemas/DORAFetchResponse'
+                $ref: '#/components/schemas/DORAFailureFetchResponse'
           description: OK
         '400':
           content:
@@ -68875,15 +70571,49 @@ paths:
         events with the `change` or `alert` category** are in General Availability.
         For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking)
         for more details.\n\n\u274C For use cases involving other event categories,
-        use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n\u274C
-        Notifications are not yet supported for events sent to this endpoint. Use
-        the V1 endpoint for notification functionality."
+        use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/)."
       operationId: CreateEvent
       requestBody:
         content:
           application/json:
             examples:
-              json-request-body:
+              alert-event:
+                description: Example of an alert event for tracking alerts and monitoring
+                  events.
+                summary: Alert Event
+                value:
+                  data:
+                    attributes:
+                      aggregation_key: deduplication_key_here
+                      attributes:
+                        custom:
+                          my-object-attribute:
+                            my-array-attribute:
+                            - 1
+                            - 2
+                            - 3
+                            my-array-object-attribute:
+                            - name: test-object-1
+                            - name: test-object-2
+                            my-integer-attribute: 1
+                          my-string-attribute: my-custom-value
+                        links:
+                        - category: runbook
+                          title: Datadog website
+                          url: https://datadoghq.com
+                        priority: '1'
+                        status: error
+                      category: alert
+                      message: Something is broken!
+                      tags:
+                      - service:my-test-service
+                      - datacenter:primary
+                      title: My Alerting Event
+                    type: event
+              change-event:
+                description: Example of a change event for tracking configuration
+                  or feature flag changes.
+                summary: Change Event
                 value:
                   data:
                     attributes:
@@ -76205,6 +77935,228 @@ paths:
       tags:
       - Cloud Network Monitoring
       x-menu-order: 2
+  /api/v2/obs-pipelines/pipelines:
+    get:
+      description: Retrieve a list of pipelines.
+      operationId: ListPipelines
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPipelinesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List pipelines
+      tags:
+      - Observability Pipelines
+      x-menu-order: 0
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    post:
+      description: Create a new pipeline.
+      operationId: CreatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineSpec'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+  /api/v2/obs-pipelines/pipelines/validate:
+    post:
+      description: 'Validates a pipeline configuration without creating or updating
+        any resources.
+
+        Returns a list of validation errors, if any.'
+      operationId: ValidatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineSpec'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Validate an observability pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+  /api/v2/obs-pipelines/pipelines/{pipeline_id}:
+    delete:
+      description: Delete a pipeline.
+      operationId: DeletePipeline
+      parameters:
+      - description: The ID of the pipeline to delete.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_delete
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    get:
+      description: Get a specific pipeline by its ID.
+      operationId: GetPipeline
+      parameters:
+      - description: The ID of the pipeline to retrieve.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_read
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
+    put:
+      description: Update a pipeline.
+      operationId: UpdatePipeline
+      parameters:
+      - description: The ID of the pipeline to update.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipeline'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - observability_pipelines_deploy
+      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
+        to request access.'
   /api/v2/on-call/escalation-policies:
     post:
       description: Create a new On-Call escalation policy
@@ -77886,7 +79838,13 @@ paths:
         cursorPath: meta.page.cursor
         limitParam: page[limit]
         resultsPath: data
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     patch:
@@ -77988,7 +79946,13 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 2
-      x-unstable: '**Note**: This endpoint is in public beta.
+      x-unstable: '**Note**: This endpoint uses the legacy security findings data
+        model and is planned for deprecation.
+
+        Use the [search security findings endpoint](https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings),
+
+        which is based on the [new security findings schema](https://docs.datadoghq.com/security/guide/findings-schema/),
+        to search security findings.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/powerpacks:
@@ -78296,6 +80260,219 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
+  /api/v2/prodlytics:
+    post:
+      description: 'Send server-side events to Product Analytics. Server-side events
+        are retained for 15 months.
+
+
+        Server-Side events in Product Analytics are helpful for tracking events that
+        occur on the server,
+
+        as opposed to client-side events, which are captured by Real User Monitoring
+        (RUM) SDKs.
+
+        This allows for a more comprehensive view of the user journey by including
+        actions that happen on the server.
+
+        Typical examples could be `checkout.completed` or `payment.processed`.
+
+
+        Ingested server-side events are integrated into Product Analytics to allow
+        users to select and filter
+
+        these events in the event picker, similar to how views or actions are handled.
+
+
+        **Requirements:**
+
+        - At least one of `usr`, `account`, or `session` must be provided with a valid
+        ID.
+
+        - The `application.id` must reference a Product Analytics-enabled application.
+
+
+        **Custom Attributes:**
+
+        Any additional fields in the payload are flattened and searchable as facets.
+
+        For example, a payload with `{"customer": {"tier": "premium"}}` is searchable
+        with
+
+        the syntax `@customer.tier:premium` in Datadog.
+
+
+        The status codes answered by the HTTP API are:
+
+        - 202: Accepted: The request has been accepted for processing
+
+        - 400: Bad request (likely an issue in the payload formatting)
+
+        - 401: Unauthorized (likely a missing API Key)
+
+        - 403: Permission issue (likely using an invalid API Key)
+
+        - 408: Request Timeout, request should be retried after some time
+
+        - 413: Payload too large (batch is above 5MB uncompressed)
+
+        - 429: Too Many Requests, request should be retried after some time
+
+        - 500: Internal Server Error, the server encountered an unexpected condition
+        that prevented it from fulfilling the request, request should be retried after
+        some time
+
+        - 503: Service Unavailable, the server is not ready to handle the request
+        probably because it is overloaded, request should be retried after some time'
+      operationId: SubmitProductAnalyticsEvent
+      requestBody:
+        content:
+          application/json:
+            examples:
+              event-with-account:
+                description: Send a server-side event linked to an account.
+                summary: Event with account ID
+                value:
+                  account:
+                    id: account-456
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  event:
+                    name: checkout.completed
+                  type: server
+              event-with-custom-attributes:
+                description: Send a server-side event with additional custom attributes.
+                summary: Event with custom attributes
+                value:
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  customer:
+                    tier: premium
+                  event:
+                    name: payment.processed
+                  type: server
+                  usr:
+                    id: '123'
+              event-with-session:
+                description: Send a server-side event linked to a session.
+                summary: Event with session ID
+                value:
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  event:
+                    name: form.submitted
+                  session:
+                    id: session-789
+                  type: server
+              simple-event-with-user:
+                description: Send a server-side event linked to a user.
+                summary: Simple event with user ID
+                value:
+                  application:
+                    id: 123abcde-123a-123b-1234-123456789abc
+                  event:
+                    name: payment.processed
+                  type: server
+                  usr:
+                    id: '123'
+            schema:
+              $ref: '#/components/schemas/ProductAnalyticsServerSideEventItem'
+        description: Server-side event to send (JSON format).
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Request accepted for processing (always 202 empty JSON).
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Forbidden
+        '408':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Request Timeout
+        '413':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Payload Too Large
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Too Many Requests
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Internal Server Error
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductAnalyticsServerSideEventErrors'
+          description: Service Unavailable
+      security:
+      - apiKeyAuth: []
+      servers:
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: The regional site for customers.
+            enum:
+            - datadoghq.com
+            - us3.datadoghq.com
+            - us5.datadoghq.com
+            - ap1.datadoghq.com
+            - ap2.datadoghq.com
+            - datadoghq.eu
+          subdomain:
+            default: browser-intake
+            description: The subdomain where the API is deployed.
+      - url: '{protocol}://{name}'
+        variables:
+          name:
+            default: browser-intake-datadoghq.com
+            description: Full site DNS name.
+          protocol:
+            default: https
+            description: The protocol for accessing the API.
+      - url: https://{subdomain}.{site}
+        variables:
+          site:
+            default: datadoghq.com
+            description: Any Datadog deployment.
+          subdomain:
+            default: browser-intake
+            description: The subdomain where the API is deployed.
+      summary: Send server-side events
+      tags:
+      - Product Analytics
+      x-codegen-request-body-name: body
+      x-menu-order: 1
   /api/v2/product-analytics/accounts/facet_info:
     post:
       description: Get facet information for account attributes including possible
@@ -79046,6 +81223,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              happy_path:
+                summary: Upsert a row with mixed string and int values
+                value:
+                  data:
+                  - attributes:
+                      values:
+                        age: 25
+                        example_key_value: primary_key_value
+                        name: row_name
+                    id: primary_key_value
+                    type: row
             schema:
               $ref: '#/components/schemas/BatchUpsertRowsRequestArray'
         required: true
@@ -79723,228 +81912,6 @@ paths:
       - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 9
-  /api/v2/remote_config/products/obs_pipelines/pipelines:
-    get:
-      description: Retrieve a list of pipelines.
-      operationId: ListPipelines
-      parameters:
-      - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageNumber'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListPipelinesResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: List pipelines
-      tags:
-      - Observability Pipelines
-      x-menu-order: 0
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    post:
-      description: Create a new pipeline.
-      operationId: CreatePipeline
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipelineSpec'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '409':
-          $ref: '#/components/responses/ConflictResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Create a new pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-  /api/v2/remote_config/products/obs_pipelines/pipelines/validate:
-    post:
-      description: 'Validates a pipeline configuration without creating or updating
-        any resources.
-
-        Returns a list of validation errors, if any.'
-      operationId: ValidatePipeline
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipelineSpec'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Validate an observability pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 5
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-  /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
-    delete:
-      description: Delete a pipeline.
-      operationId: DeletePipeline
-      parameters:
-      - description: The ID of the pipeline to delete.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '204':
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Not Found
-        '409':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Conflict
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Delete a pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 4
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_delete
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    get:
-      description: Get a specific pipeline by its ID.
-      operationId: GetPipeline
-      parameters:
-      - description: The ID of the pipeline to retrieve.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '403':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get a specific pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 2
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
-    put:
-      description: Update a pipeline.
-      operationId: UpdatePipeline
-      parameters:
-      - description: The ID of the pipeline to update.
-        in: path
-        name: pipeline_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ObservabilityPipeline'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ObservabilityPipeline'
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '403':
-          $ref: '#/components/responses/NotAuthorizedResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
-        '409':
-          $ref: '#/components/responses/ConflictResponse'
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Update a pipeline
-      tags:
-      - Observability Pipelines
-      x-menu-order: 3
-      x-permission:
-        operator: OR
-        permissions:
-        - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -82376,6 +84343,88 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_cws_agent_rules_read
+  /api/v2/security/findings:
+    get:
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
+
+
+        ### Query Syntax
+
+
+        This endpoint uses the logs query syntax. Findings attributes (living in the
+        attributes.attributes. namespace) are prefixed by @ when queried. Tags are
+        queried without a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: ListSecurityFindings
+      parameters:
+      - description: The search query following log search syntax.
+        example: '@severity:(critical OR high) @status:open team:platform'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          default: '*'
+          type: string
+      - description: Get the next page of results with a cursor provided in the previous
+          query.
+        example: eyJhZnRlciI6IkF3QUFBWnPcm1pd0FBQUJbVlBQUKBa1pqRTVdZUzSTBNemN0YWiIsLTE3Mjk0MzYwMjFdfQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: The maximum number of findings in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int64
+          maximum: 150
+          minimum: 1
+          type: integer
+      - description: Sorts by @detection_changed_at.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityFindingsSort'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List security findings
+      tags:
+      - Security Monitoring
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
   /api/v2/security/findings/cases:
     delete:
       description: 'Detach security findings from their case.
@@ -82600,6 +84649,60 @@ paths:
       x-unstable: '**Note**: This endpoint is in beta and is subject to change.
 
         Please check the documentation regularly for updates.'
+  /api/v2/security/findings/search:
+    post:
+      description: 'Get a list of security findings that match a search query. [See
+        the schema for security findings](https://docs.datadoghq.com/security/guide/findings-schema/).
+
+
+        ### Query Syntax
+
+
+        The API uses the logs query syntax. Findings attributes (living in the attributes.attributes.
+        namespace) are prefixed by @ when queried. Tags are queried without a prefix.
+
+
+        Example: `@severity:(critical OR high) @status:open team:platform`'
+      operationId: SearchSecurityFindings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityFindingsSearchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Search security findings
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+        - appsec_vm_read
   /api/v2/security/sboms:
     get:
       description: 'Get a list of assets SBOMs for an organization.
@@ -86798,21 +88901,21 @@ paths:
       x-unstable: '**Note**: This feature is in private beta. To request access, use
         the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
         docs.'
-  /api/v2/spa/recommendations/{service}/{shard}:
+  /api/v2/spa/recommendations/{service}:
     get:
-      description: Retrieve resource recommendations for a Spark job. The caller (Spark
-        Gateway or DJM UI) provides a service name and shard identifier, and SPA returns
-        structured recommendations for driver and executor resources.
+      description: This endpoint is currently experimental and restricted to Datadog
+        internal use only. Retrieve resource recommendations for a Spark job. The
+        caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured
+        recommendations for driver and executor resources. The version with a shard
+        should be preferred, where possible, as it gives more accurate results.
       operationId: GetSPARecommendations
       parameters:
-      - description: The shard tag for a spark job, which differentiates jobs within
-          the same service that have different resource needs
-        in: path
-        name: shard
-        required: true
+      - description: The recommendation service should not use its metrics cache.
+        in: query
+        name: bypass_cache
         schema:
           type: string
-      - description: The service name for a spark job
+      - description: The service name for a spark job.
         in: path
         name: service
         required: true
@@ -86856,12 +88959,86 @@ paths:
           $ref: '#/components/responses/NotAuthorizedResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ: []
       summary: Get SPA Recommendations
       tags:
       - Spa
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in preview and may change in the future.
+        It is not yet recommended for production use.'
+  /api/v2/spa/recommendations/{service}/{shard}:
+    get:
+      description: This endpoint is currently experimental and restricted to Datadog
+        internal use only. Retrieve resource recommendations for a Spark job. The
+        caller (Spark Gateway or DJM UI) provides a service name and shard identifier,
+        and SPA returns structured recommendations for driver and executor resources.
+      operationId: GetSPARecommendationsWithShard
+      parameters:
+      - description: The shard tag for a spark job, which differentiates jobs within
+          the same service that have different resource needs
+        in: path
+        name: shard
+        required: true
+        schema:
+          type: string
+      - description: The service name for a spark job
+        in: path
+        name: service
+        required: true
+        schema:
+          type: string
+      - description: The recommendation service should not use its metrics cache.
+        in: query
+        name: bypass_cache
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                data:
+                  attributes:
+                    driver:
+                      estimation:
+                        cpu:
+                          max: 1500
+                          p75: 1000
+                          p95: 1200
+                        ephemeral_storage: 896
+                        heap: 6144
+                        memory: 7168
+                        overhead: 1024
+                    executor:
+                      estimation:
+                        cpu:
+                          max: 2000
+                          p75: 1200
+                          p95: 1500
+                        ephemeral_storage: 512
+                        heap: 3072
+                        memory: 4096
+                        overhead: 1024
+                  id: dedupeactivecontexts:adp_dedupeactivecontexts_org2
+                  type: recommendation
+              schema:
+                $ref: '#/components/schemas/RecommendationDocument'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - AuthZ: []
+      summary: Get SPA Recommendations with a shard parameter
+      tags:
+      - Spa
       x-menu-order: 1
-      x-unstable: '**Note**: This endpoint is in public beta and may change in the
-        future. It is not yet recommended for production use.'
+      x-unstable: '**Note**: This endpoint is in preview and may change in the future.
+        It is not yet recommended for production use.'
   /api/v2/spans/analytics/aggregate:
     post:
       description: 'The API endpoint to aggregate spans into buckets and compute metrics
@@ -87197,6 +89374,61 @@ paths:
         operator: OR
         permissions:
         - billing_edit
+  /api/v2/synthetics/variables/{variable_id}/jsonpatch:
+    patch:
+      description: 'Patch a global variable using JSON Patch (RFC 6902).
+
+        This endpoint allows partial updates to a global variable by specifying only
+        the fields to modify.
+
+
+        Common operations include:
+
+        - Replace field values: `{"op": "replace", "path": "/name", "value": "new_name"}`
+
+        - Update nested values: `{"op": "replace", "path": "/value/value", "value":
+        "new_value"}`
+
+        - Add/update tags: `{"op": "add", "path": "/tags/-", "value": "new_tag"}`
+
+        - Remove fields: `{"op": "remove", "path": "/description"}`'
+      operationId: PatchGlobalVariable
+      parameters:
+      - description: The ID of the global variable.
+        in: path
+        name: variable_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalVariableJsonPatchRequest'
+        description: JSON Patch document with operations to apply.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalVariableResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch a global variable
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
   /api/v2/tags/enrichment:
     get:
       description: List all tag pipeline rulesets - Retrieve a list of all tag pipeline
@@ -87708,7 +89940,7 @@ paths:
       summary: Delete team connections
       tags:
       - Teams
-      x-menu-order: 3
+      x-menu-order: 26
       x-permission:
         operator: OR
         permissions:
@@ -87784,7 +90016,7 @@ paths:
       summary: List team connections
       tags:
       - Teams
-      x-menu-order: 1
+      x-menu-order: 24
       x-pagination:
         limitParam: page[size]
         pageParam: page[number]
@@ -87825,7 +90057,7 @@ paths:
       summary: Create team connections
       tags:
       - Teams
-      x-menu-order: 2
+      x-menu-order: 25
       x-permission:
         operator: OR
         permissions:
@@ -88708,6 +90940,235 @@ paths:
       - Teams
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+  /api/v2/team/{team_id}/notification-rules:
+    get:
+      operationId: GetTeamNotificationRules
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRulesResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team notification rules
+      tags:
+      - Teams
+      x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    post:
+      operationId: CreateTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamNotificationRuleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Create team notification rule
+      tags:
+      - Teams
+      x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+  /api/v2/team/{team_id}/notification-rules/{rule_id}:
+    delete:
+      operationId: DeleteTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Delete team notification rule
+      tags:
+      - Teams
+      x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    get:
+      operationId: GetTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team notification rule
+      tags:
+      - Teams
+      x-menu-order: 29
+      x-permission:
+        operator: OR
+        permissions:
+        - teams_read
+    put:
+      operationId: UpdateTeamNotificationRule
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamNotificationRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamNotificationRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Update team notification rule
+      tags:
+      - Teams
+      x-menu-order: 30
       x-permission:
         operator: OR
         permissions:
@@ -90943,11 +93404,6 @@ tags:
   name: Logs Archives
 - description: 'Custom Destinations forward all the logs ingested to an external destination.
 
-
-    **Note**: Log forwarding is not available for the Government (US1-FED) site. Contact
-    your account representative for more information.
-
-
     See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)
 
     for a list of the custom destinations currently configured in web UI.'
@@ -91098,6 +93554,18 @@ tags:
     See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/)
     for more information.
   name: Processes
+- description: 'Send server-side events to Product Analytics. Server-Side Events Ingestion
+    allows you to collect custom events
+
+    from any server-side source, and retains events for 15 months. Server-side events
+    are helpful for understanding
+
+    causes of a funnel drop-off which are external to the client-side (for example,
+    payment processing error).
+
+    See the [Product Analytics page](https://docs.datadoghq.com/product_analytics/)
+    for more information.'
+  name: Product Analytics
 - description: Manage your Real User Monitoring (RUM) applications, and search or
     aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
     for more information

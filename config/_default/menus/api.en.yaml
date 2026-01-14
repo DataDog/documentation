@@ -3106,6 +3106,18 @@ menu:
         unstable:
           - v2
         order: 28
+    - name: Search security findings
+      url: '#search-security-findings'
+      identifier: security-monitoring-search-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSecurityFindings
+        unstable: []
+        order: 2
     - name: Create Jira issues for security findings
       url: '#create-jira-issues-for-security-findings'
       identifier: security-monitoring-create-jira-issues-for-security-findings
@@ -3168,6 +3180,18 @@ menu:
           - DetachCase
         unstable: []
         order: 46
+    - name: List security findings
+      url: '#list-security-findings'
+      identifier: security-monitoring-list-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindings
+        unstable: []
+        order: 1
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3722,6 +3746,18 @@ menu:
       url: /api/latest/synthetics/
       identifier: synthetics
       generated: true
+    - name: Patch a global variable
+      url: '#patch-a-global-variable'
+      identifier: synthetics-patch-a-global-variable
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchGlobalVariable
+        unstable: []
+        order: 20
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
@@ -4206,7 +4242,7 @@ menu:
           - CreateHostTags
         unstable: []
         order: 3
-    - name: Get host tags
+    - name: Get Host Tags
       url: '#get-host-tags'
       identifier: tags-get-host-tags
       parent: tags
@@ -4230,9 +4266,9 @@ menu:
           - DeleteHostTags
         unstable: []
         order: 5
-    - name: Get Tags
-      url: '#get-tags'
-      identifier: tags-get-tags
+    - name: Get All Host Tags
+      url: '#get-all-host-tags'
+      identifier: tags-get-all-host-tags
       parent: tags
       generated: true
       params:
@@ -9966,6 +10002,22 @@ menu:
           - ListProcesses
         unstable: []
         order: 1
+    - name: Product Analytics
+      url: /api/latest/product-analytics/
+      identifier: product-analytics
+      generated: true
+    - name: Send server-side events
+      url: '#send-server-side-events'
+      identifier: product-analytics-send-server-side-events
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SubmitProductAnalyticsEvent
+        unstable: []
+        order: 1
     - name: RUM
       url: /api/latest/rum/
       identifier: rum
@@ -11252,6 +11304,19 @@ menu:
       url: /api/latest/spa/
       identifier: spa
       generated: true
+    - name: Get SPA Recommendations with a shard parameter
+      url: '#get-spa-recommendations-with-a-shard-parameter'
+      identifier: spa-get-spa-recommendations-with-a-shard-parameter
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendationsWithShard
+        unstable:
+          - v2
+        order: 1
     - name: Get SPA Recommendations
       url: '#get-spa-recommendations'
       identifier: spa-get-spa-recommendations
@@ -11264,7 +11329,7 @@ menu:
           - GetSPARecommendations
         unstable:
           - v2
-        order: 1
+        order: 2
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -11439,6 +11504,66 @@ menu:
           - GetTeamPermissionSettings
         unstable: []
         order: 17
+    - name: Update team notification rule
+      url: '#update-team-notification-rule'
+      identifier: teams-update-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTeamNotificationRule
+        unstable: []
+        order: 30
+    - name: Get team notification rule
+      url: '#get-team-notification-rule'
+      identifier: teams-get-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRule
+        unstable: []
+        order: 29
+    - name: Delete team notification rule
+      url: '#delete-team-notification-rule'
+      identifier: teams-delete-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamNotificationRule
+        unstable: []
+        order: 31
+    - name: Create team notification rule
+      url: '#create-team-notification-rule'
+      identifier: teams-create-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamNotificationRule
+        unstable: []
+        order: 28
+    - name: Get team notification rules
+      url: '#get-team-notification-rules'
+      identifier: teams-get-team-notification-rules
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRules
+        unstable: []
+        order: 27
     - name: Update a user's membership attributes on a team
       url: '#update-a-users-membership-attributes-on-a-team'
       identifier: teams-update-a-users-membership-attributes-on-a-team
@@ -11657,7 +11782,7 @@ menu:
         operationids:
           - CreateTeamConnections
         unstable: []
-        order: 2
+        order: 25
     - name: List team connections
       url: '#list-team-connections'
       identifier: teams-list-team-connections
@@ -11669,7 +11794,7 @@ menu:
         operationids:
           - ListTeamConnections
         unstable: []
-        order: 1
+        order: 24
     - name: Delete team connections
       url: '#delete-team-connections'
       identifier: teams-delete-team-connections
@@ -11681,7 +11806,7 @@ menu:
         operationids:
           - DeleteTeamConnections
         unstable: []
-        order: 3
+        order: 26
     - name: Get a team hierarchy link
       url: '#get-a-team-hierarchy-link'
       identifier: teams-get-a-team-hierarchy-link

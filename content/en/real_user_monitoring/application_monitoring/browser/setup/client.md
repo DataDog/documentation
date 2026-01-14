@@ -8,7 +8,7 @@ further_reading:
 - link: '/real_user_monitoring/application_monitoring/browser/advanced_configuration/'
   tag: 'Documentation'
   text: 'Advanced configuration'
-- link: '/real_user_monitoring/session_replay/browser/'
+- link: '/session_replay/browser/'
   tag: 'Documentation'
   text: 'Setup Session Replay'
 - link: '/real_user_monitoring/error_tracking/browser/'
