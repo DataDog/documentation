@@ -221,9 +221,9 @@ The following list is an example of log sources that are good candidates for sen
 
 ### Flex Logs for multiple-organization accounts
 
-For each organization in which you want Flex Logs, you must enable a compute size per organization. Only one compute can be used per organization, and compute sizes cannot be shared across organizations. Starter and scalable compute cannot be used simultaneously in an organization.
+<div class="alert alert-danger">Each organization can only use one compute size at a time. Compute sizes cannot be shared across organizations, and Starter and scalable compute cannot be used simultaneously within the same organization.</div>
 
-Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
+For each organization in which you want Flex Logs, you must enable a compute size per organization. Datadog recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
 
 ### When the compute limit is reached
 
