@@ -35,10 +35,10 @@ A monitor transitions to **alert** only when *all alerting rules are satisfied*.
 When a Synthetic Monitoring test runs, Datadog evaluates alerting in the following order:
 
 1. The test runs based on its configured schedule.
-2. Fast retries are applied, if configured.
+2. [Fast retries](#fast-retries) are applied, if configured.
 3. Test results are aggregated across locations.
 4. Failures are evaluated over time using the alerting rules.
-5. The monitor transitions between **OK**, **Alert**, or **No Data** as conditions are met or no longer met.
+5. The monitor transitions between **OK**, **Alert**, or **No Data** [status](#status-descriptions) as conditions are met or no longer met.
 
 Alerts are always the result of **aggregated evaluation**, not a single datapoint.
 
