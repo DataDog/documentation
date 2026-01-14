@@ -8,6 +8,8 @@ aliases:
 - /es/account_management/users/default_roles
 - /es/account_management/users/custom_roles
 - /es/account_management/rbac/log_management
+description: Gestiona el acceso de usuarios con permisos basados en roles, roles personalizados
+  y control de acceso exclusivo a dashboards, monitores y otros recursos de Datadog.
 further_reading:
 - link: /api/v2/roles/
   tag: Documentación
@@ -23,8 +25,8 @@ further_reading:
   text: Habilita el inicio único de sesión con SAML
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: Blog
-  text: Incrementa el cumplimiento, la gobernabilidad y la transparencia en todos
-    tus equipos con Datadog Audit Trail
+  text: Mejora el control, la gestión y la transparencia en todos tus equipos con
+    Datadog Audit Trail
 title: Control de acceso
 ---
 
@@ -52,8 +54,8 @@ Si un usuario en una [child organization (organización secundaria)][3] tiene pe
 Función de administrador Datadog
 : Los usuarios tienen acceso a la información de facturación y la capacidad de revocar claves API. Pueden gestionar usuarios y configurar [read-only dashboards (dashboards de solo lectura)][5]. También pueden promover usuarios estándar a administradores.
 
-Función estándar Datadog
-: Los usuarios pueden ver y modificar todas las funciones de monitorización que ofrece Datadog, como [dashboards][5], [monitors (monitores)][6], [events (eventos)][7] y [notebooks][8]. Los usuarios estándar también pueden invitar a otros usuarios a organizaciones.
+Rol estándar de Datadog
+: Los usuarios pueden ver y modificar todas las funciones de monitorización que ofrece Datadog, como [dashboards][5], [monitores][6], [eventos][7] y [notebooks][11]. Los usuarios estándar también pueden invitar a otros usuarios a las organizaciones.
 
 Función de solo lectura Datadog
 : Los usuarios no tienen acceso para editar dentro de Datadog. Esto resulta útil cuando se desea compartir vistas específicas de solo lectura con un cliente, o cuando un miembro de una unidad de negocio necesita compartir un [dashboard][5] con alguien fuera de su unidad.
@@ -209,3 +211,4 @@ Al crear o actualizar un rol en el sitio Datadog, utiliza una plantilla de roles
 [8]: /es/api/v2/roles/
 [9]: https://app.datadoghq.com/organization-settings/
 [10]: /es/api/latest/roles/#create-role
+[11]: /es/notebooks
