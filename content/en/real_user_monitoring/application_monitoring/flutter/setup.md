@@ -67,7 +67,7 @@ To ensure the safety of your data, you must use a client token. For more informa
 First, ensure that you have your environment set up properly for each platform.
 
 <div class="alert alert-info">
-Datadog supports Flutter Monitoring for iOS, Android and Web for Flutter 3.27+.
+Datadog supports Flutter Monitoring for iOS, Android, and Web for Flutter 3.27+.
 </div>
 
 Datadog supports Flutter Web starting with v3 of the SDK, with a few known limitations.
