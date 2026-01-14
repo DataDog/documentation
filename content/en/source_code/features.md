@@ -1,10 +1,16 @@
 ---
-title: Source Code Integration Features
+title: Features of Source Code Integration
 description: "Learn about the various features enabled by source code integration across Datadog."
 further_reading:
 - link: "/tracing/error_tracking/"
   tag: "Documentation"
   text: "Learn about Error Tracking for Backend Services"
+- link: "/logs/error_tracking/"
+  tag: "Documentation"
+  text: "Learn about Error Tracking for Logs"
+- link: "/real_user_monitoring/error_tracking/"
+  tag: "Documentation"
+  text: "Learn about Error Tracking for RUM"
 - link: "/profiler/"
   tag: "Documentation"
   text: "Learn about the Continuous Profiler"
@@ -23,6 +29,9 @@ further_reading:
 - link: "/dynamic_instrumentation/"
   tag: "Documentation"
   text: "Learn about Dynamic Instrumentation"
+- link: "https://www.datadoghq.com/blog/live-debugging/"
+  tag:  "Blog"
+  text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
 
 ## Overview

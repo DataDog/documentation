@@ -8,6 +8,9 @@ further_reading:
 - link: "/integrations/gitlab-source-code/"
   tag: "Documentation"
   text: "Learn about the GitLab Source Code Integration"
+- link: "/integrations/azure-devops-source-code/"
+  tag: "Documentation"
+  text: "Learn about the Azure DevOps Source Code Integration"
 ---
 
 ## Overview
