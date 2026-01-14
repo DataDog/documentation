@@ -305,7 +305,7 @@ This setup deploys the delegate role required for [cross-account scanning][18] a
 
    The `ScannerInstanceRoleARN` establishes a trust relationship between the delegate role (created in target accounts) and your scanner instances (already running in the central account). This enables cross-account scanning where:
    1. The scanner runs in Account A.
-   2. The delegate role exists in Accounts B, C, D (deployed via StackSet).
+   2. The delegate role exists in Accounts B, C, D (deployed through the StackSet).
    3. The scanner assumes the delegate roles to scan resources in those accounts.
 7. Set **Deployment targets** to deploy across your Organization or specific OUs.
 8. Enable **Automatic deployment** to automatically configure new accounts added to your Organization.
