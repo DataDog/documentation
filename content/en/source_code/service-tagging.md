@@ -1,5 +1,5 @@
 ---
-title: Service Tagging
+title: Service Tagging for Source Code Integration
 description: "Tag your APM telemetry with Git information to link services to source code."
 further_reading:
 - link: "/tracing/"

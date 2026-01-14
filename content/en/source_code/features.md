@@ -1,6 +1,6 @@
 ---
-title: Features
-description: "Learn about the various features enabled by source code integration across the Datadog platform."
+title: Source Code Integration Features
+description: "Learn about the various features enabled by source code integration across Datadog."
 further_reading:
 - link: "/tracing/error_tracking/"
   tag: "Documentation"
@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Once you have connected your Git repositories and tagged your services, you can use source code integration features across various Datadog products.
+After you have connected your Git repositories and tagged your services, you can use source code integration features across various Datadog products.
 
 ## Links to Git providers & code snippets
 
