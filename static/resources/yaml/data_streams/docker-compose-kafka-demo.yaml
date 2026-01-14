@@ -8,14 +8,12 @@
 #
 # This starts:
 #   - Kafka (KRaft mode, no ZooKeeper) + Schema Registry
-#   - Datadog Agent with Kafka Consumer integration (cluster monitoring enabled)
+#   - Datadog Agent with Kafka Consumer integration
 #   - Producer app (sends orders every 2s, APM + Data Streams enabled)
 #   - Consumer app (processes orders, APM + Data Streams enabled)
 #
 # View in Datadog (wait 2-3 min):
-#   - Metrics: kafka.consumer_lag (filter: cluster:kafka-demo)
-#   - APM: Services -> order-producer, order-consumer
-#   - Data Streams: Full pathway visualization
+#  - Navigate to Data Streams Monitoring and view your Kafka cluster & consumer / producer apps.
 
 version: '3.8'
 
