@@ -68,9 +68,10 @@ Enter the following details for your Cost and Usage Report:
 
 **Note**:
 - These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
-- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
+- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][101].
 
 [100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
+[101]: /help/
 
 {{% /tab %}}
 
