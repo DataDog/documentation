@@ -25,7 +25,9 @@ Setting up Deployment Gates involves two steps:
 1. Configure the gate and rules in the Datadog UI.
 2. Update your deployment pipeline to interact with the Deployment Gates API.
 
-## Create a Deployment Gate
+## Create Deployment Gates
+
+### Create a gate
 
 <div class="alert alert-info">In addition to using the Deployment Gates UI, you can manage gates and rules programmaticaly with the <a href="https://docs.datadoghq.com/api/latest/deployment-gates">Deployment Gates API</a> or <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate">Datadog Terraform provider</a>.</div>
 
@@ -109,7 +111,7 @@ The analysis is automatically done for all APM-instrumented services, and no pri
 {{% /tab %}}
 {{< /tabs >}}
 
-## Evaluate a Deployment Gate
+## Evaluate Deployment Gates
 
 Once you have configured the gates and rules, you can request a gate evaluation when deploying the related service, and decide whether to block or continue the deployment based on the result.
 
