@@ -22,7 +22,7 @@ further_reading:
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components templates, see [Reusable Modules][12].
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as templates, see [Reusable Modules][12].
 <br><br> 
 
 {{% collapse-content title="Button" level="h3" %}}
