@@ -23,6 +23,8 @@ The following diagram illustrates how Agentless scanning works when deployed in 
 
 {{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
 
+[5]: /security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup
+
 {{% /tab %}}
 {{% tab "Same account scanning" %}}
 
