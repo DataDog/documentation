@@ -86613,6 +86613,14 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
+      - description: A search query to filter security rules. You can filter by attributes
+          such as `type`, `source`, `tags`.
+        example: type:signal_correlation source:cloudtrail
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
