@@ -1,25 +1,25 @@
 ---
-title: Enable Data Jobs Monitoring for Apache Airflow
-description: "Monitor Apache Airflow DAG workflows with Data Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
+title: "Enable Data Observability: Jobs Monitoring for Apache Airflow"
+description: "Monitor Apache Airflow DAG workflows with Data Observability:  Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
 is_beta: true
 private: true
 further_reading:
     - link: 'https://www.datadoghq.com/blog/data-jobs-monitoring/'
       tag: 'blog'
-      text: 'Troubleshoot and optimize data processing workloads with Data Jobs Monitoring'
+      text: 'Troubleshoot and optimize data processing workloads with Data Observability: Jobs Monitoring'
     - link: 'https://www.datadoghq.com/blog/data-observability-monitoring'
       tag: 'blog'
       text: 'Observing the data lifecycle with Datadog'
     - link: '/data_jobs'
       tag: 'Documentation'
-      text: 'Data Jobs Monitoring'
+      text: 'Data Observability: Jobs Monitoring'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Data Jobs Monitoring for Apache Airflow is in Preview" >}}
+{{< callout url="#" btn_hidden="true" header="Data Observability: Jobs Monitoring for Apache Airflow is in Preview" >}}
 To try the preview for Airflow monitoring, follow the setup instructions below.
 {{< /callout >}}
 
-[Data Jobs Monitoring][1] provides visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
+[Data Observability: Jobs Monitoring][1] provides visibility into the performance and reliability of workflows run by Apache Airflow DAGs.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -116,7 +116,7 @@ To get started, follow the instructions below.
 
 3. Trigger an update to your Airflow pods and wait for them to finish.
 
-4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6].
+4. Optionally, set up log collection for correlating task logs to DAG run executions in Data Observability: Jobs Monitoring. Correlation requires the logs directory to follow the [default log filename format][6].
 
    The `PATH_TO_AIRFLOW_LOGS` value is `$AIRFLOW_HOME/logs` in standard deployments, but may differ if customized. Add the following annotation to your pod:
    ```yaml
@@ -146,7 +146,7 @@ To get started, follow the instructions below.
 
 ### Validation
 
-In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
+In Datadog, view the [Data Observability: Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
 
 ### Troubleshooting
 
@@ -219,7 +219,7 @@ To get started, follow the instructions below.
 
 ### Validation
 
-In Datadog, view the [Data Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
+In Datadog, view the [Data Observability: Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
 
 ### Troubleshooting
 
@@ -233,7 +233,7 @@ Set `OPENLINEAGE_CLIENT_LOGGING` to `DEBUG` in the [Amazon MWAA start script][3]
 {{% tab "Astronomer" %}}
 
 <div class="alert alert-danger">
-For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
+For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Observability: Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
 </div>
 
 ### Requirements
@@ -283,7 +283,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
 ### Validation
 
-In Datadog, view the [Data Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
+In Datadog, view the [Data Observability: Jobs Monitoring][2] page to see a list of your Airflow job runs after the setup.
 
 
 ### Troubleshooting
@@ -293,7 +293,7 @@ Check that the OpenLineage environment variables are correctly set on the Astron
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
 <div class="alert alert-danger">
-Data Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Jobs Monitoring overrides your existing Dataplex transport configuration.
+Data Observability: Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Observability: Jobs Monitoring overrides your existing Dataplex transport configuration.
 </div>
 
 ### Requirements
@@ -349,7 +349,7 @@ Check official [Airflow][4] and [Composer][3] documentation pages for other supp
 
 ### Validation
 
-In Datadog, view the [Data Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
+In Datadog, view the [Data Observability: Jobs Monitoring][7] page to see a list of your Airflow job runs after the setup.
 
 ### Troubleshooting
 
@@ -402,7 +402,7 @@ OpenLineage integration can automatically inject Airflow's parent job informatio
 
 1. **Verify operator compatibility**: Check the [Apache Airflow OpenLineage documentation][8] to confirm your Spark operators are supported. This feature only works with specific operators like SparkSubmitOperator and LivyOperator.
 
-2. Make sure your Spark jobs are actively monitored through [Data Jobs Monitoring][2].
+2. Make sure your Spark jobs are actively monitored through [Data Observability: Jobs Monitoring][2].
 
 3. Enable automatic parent job information injection by setting the following configuration:
 

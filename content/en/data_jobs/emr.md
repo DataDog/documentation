@@ -1,13 +1,13 @@
 ---
-title: Enable Data Jobs Monitoring for Spark on Amazon EMR
-description: "Configure Data Jobs Monitoring for Apache Spark applications on Amazon EMR clusters using AWS Secrets Manager and bootstrap actions."
+title: "Enable Data Observability: Jobs Monitoring for Spark on Amazon EMR"
+description: "Configure Data Observability: Jobs Monitoring for Apache Spark applications on Amazon EMR clusters using AWS Secrets Manager and bootstrap actions."
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
-      text: 'Data Jobs Monitoring'
+      text: 'Data Observability: Jobs Monitoring'
 ---
 
-[Data Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
+[Data Observability: Jobs Monitoring][9] gives visibility into the performance and reliability of Apache Spark applications on Amazon EMR.
 
 If you are using [EMR on EKS][13], follow these [instructions for setting up DJM on Kubernetes][14].
 
@@ -17,7 +17,7 @@ If you are using [EMR on EKS][13], follow these [instructions for setting up DJM
 
 ## Setup
 
-Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
+Follow these steps to enable Data Observability: Jobs Monitoring for Amazon EMR.
 
 1. [Store your Datadog API key](#store-your-datadog-api-key-in-aws-secrets-manager-recommended) in AWS Secrets Manager (Recommended).
 1. [Grant permissions to EMR EC2 instance profile](#grant-permissions-to-emr-ec2-instance-profile).
@@ -37,7 +37,7 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 1. In AWS Secrets Manager, open the secret you created. Take note of the **Secret ARN**.
 
 ### Grant permissions to EMR EC2 instance profile
-EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches. Follow [the Amazon guide][11] to prepare this role based on your application's need to interact with other AWS services. The following additional permissions may be required for Data Jobs Monitoring.
+EMR EC2 instance profile is a IAM role assigned to every EC2 instance in an Amazon EMR cluster when the instance launches. Follow [the Amazon guide][11] to prepare this role based on your application's need to interact with other AWS services. The following additional permissions may be required for Data Observability: Jobs Monitoring.
 
 #### Permissions to get secret value using AWS Secrets Manager
 
@@ -117,7 +117,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    ```
 
    Optionally, the script can be configured adding the following environment variables:
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Observability: Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.13.5.sh` to use version `0.13.5`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
 
    Optionally, the script can be configured by adding the following environment variables:
 
@@ -156,7 +156,7 @@ spark-submit \
 
 ## Validation
 
-In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
+In Datadog, view the [Data Observability: Jobs Monitoring][8] page to see a list of all your data processing jobs.
 
 ## Troubleshooting
 
