@@ -30,18 +30,21 @@ menu:
     - name: Software Delivery
       identifier: software_delivery_heading
       weight: 10000000
+    - name: Developer Workflows
+      identifier: developer_workflows_heading
+      weight: 11000000
     - name: Security
       identifier: security_platform_heading
-      weight: 11000000
+      weight: 12000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 12000000
+      weight: 13000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 13000000
+      weight: 14000000
     - name: Administration
       identifier: administration_heading
-      weight: 14000000
+      weight: 15000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -5865,6 +5868,27 @@ menu:
       parent: feature_flags
       identifier: feature_flags_guide
       weight: 9
+    - name: Source Code Integration
+      url: source_code/
+      pre: dev-code
+      identifier: source_code_integration
+      parent: developer_workflows_heading
+      weight: 90000
+    - name: Source Code Management
+      url: source_code/source-code-management/
+      parent: source_code_integration
+      identifier: source_code_management
+      weight: 1
+    - name: Service Tagging
+      url: source_code/service-tagging/
+      parent: source_code_integration
+      identifier: service_tagging
+      weight: 2
+    - name: Features
+      url: source_code/features/
+      parent: source_code_integration
+      identifier: developer_workflows_features
+      weight: 3
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
