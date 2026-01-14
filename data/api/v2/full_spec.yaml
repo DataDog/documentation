@@ -86613,6 +86613,14 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
+      - description: A search query to filter security rules. You can filter by attributes
+          such as `type`, `source`, `tags`.
+        example: type:signal_correlation source:cloudtrail
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -93403,6 +93411,11 @@ tags:
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
 - description: 'Custom Destinations forward all the logs ingested to an external destination.
+
+
+    **Note**: Log forwarding is not available for the Government (US1-FED) site. Contact
+    your account representative for more information.
+
 
     See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)
 
