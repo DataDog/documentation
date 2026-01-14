@@ -18,11 +18,19 @@ Use the OCI integration tile to control which resources Datadog collects metrics
 2. Go to the **Metric Collection** tab.
 3. For each connected tenancy, optionally:
    - Limit metric collection to specific compartments or regions.
-   - Limit metric collection to resources with specific [tags][2] using `key:value` pairs.
+
+## OCI log exclusion
+
+Use the OCI integration tile to control which resources Datadog collects logs from:
+
+1. Open the [OCI integration tile][1].
+2. Go to the **Log Collection** tab.
+3. For each connected tenancy, optionally:
+   - Limit log collection to specific compartments or regions.
 
 When you add or change limits for an existing OCI tenancy, previously discovered Compute instances can remain in the [Infrastructure List][3] for up to two hours while filters propagate. During this transition period, affected instances can display a status of `???`. This does not count toward your billing.
 
-Hosts with a running Datadog Agent continue to be included in billing. Limiting metric collection in the OCI integration tile applies to instances discovered by the integration and does not exclude hosts that report directly through the Agent.
+Hosts with a running Datadog Agent continue to be included in billing. Limiting metric and log collection in the OCI integration tile applies to instances discovered by the integration and does not exclude hosts that report directly through the Agent.
 
 ## Check if a host is monitored by the Agent or OCI
 
@@ -43,7 +51,6 @@ For technical questions, contact [Datadog support][4].
 For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/integrations?integrationId=oracle-cloud-infrastructure
-[2]: /getting_started/tagging/using_tags/#integrations
 [3]: /infrastructure/
 [4]: /help/
 [5]: mailto:success@datadoghq.com
