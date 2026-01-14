@@ -351,6 +351,8 @@ Optionally, you can also set other init script parameters and Datadog environmen
 [3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
 [4]: /getting_started/tagging/
 [5]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
+[26]: https://docs.databricks.com/en/connect/unity-catalog/volumes.html
+[27]: https://docs.databricks.com/en/data-governance/unity-catalog/manage-privileges/allowlist#how-to-add-items-to-the-allowlist
 
 3. Click **Confirm**.
 
