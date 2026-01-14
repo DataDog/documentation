@@ -39,16 +39,16 @@ Change lead time
 : The amount of time it takes a commit to get into production.
 
 Change failure rate
-: The percentage of deployments causing a failure in production.
+: The ratio of deployments that fail and require immediate intervention.
 
-Time to restore service
-: How long it takes an organization to recover from a failure in production.
+Failed deployment recovery time
+: The time it takes to recover from a deployment that fails and requires immediate intervention.
 
 Defining and tracking DORA metrics can help you identify areas of improvement for your team or organization's speed and quality of software delivery.
 
 ## Set up DORA Metrics
 
-To start configuring data sources to send deployment and failure events to Datadog, see the [Setup documentation][2].
+To start configuring data sources to send deployment events to Datadog, see the [Setup documentation][2].
 
 ## Analyze DORA Metrics
 
@@ -56,13 +56,13 @@ After you've set up the data sources for your deployment and failure events, nav
 
 {{< img src="dora_metrics/dora_ui_3.png" alt="An overview of DORA Metrics calculations filtered by the Language custom tag" style="width:100%;" >}}
 
-Click **View Deployments** to open a new tab with the Deployment Frequency and Change Lead Time metrics in addition to a list of deployment events.
+Click **View Deployments** to open a new tab with the list of deployment events.
 
 {{< img src="dora_metrics/deployments_list.png" alt="The Deployments Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
-Click **View Failures** to open a side panel with the Change Failure Rate and Time To Restore metrics in addition to a list of failure events.
+Click **View Change Failures** to open a side panel with the list of deployments events marked as change failures.
 
-{{< img src="dora_metrics/failures_list.png" alt="The Failures Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
+{{< img src="dora_metrics/change_failures_list.png" alt="The Failures Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
 ## Use DORA Metrics data
 
