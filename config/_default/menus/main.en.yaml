@@ -5815,11 +5815,16 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_change_failure_detection
       weight: 2
+    - name: DORA Metrics Calculation
+      url: dora_metrics/calculation/
+      parent: dora_metrics
+      identifier: dora_metrics_calculation
+      weight: 3
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 3
+      weight: 4
     - name: Feature Flags
       url: feature_flags/
       pre: ci
@@ -7545,7 +7550,7 @@ menu:
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
       parent: sec_static_analysis
-      weight: 5     
+      weight: 5
     - name: SAST Custom Rule Creation Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
