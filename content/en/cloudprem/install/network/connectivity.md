@@ -1,5 +1,7 @@
 ---
 title: Reverse Connection
+aliases:
+- /cloudprem/configure/reverse_connection/
 further_reading:
 - link: "/cloudprem/install/"
   tag: "Documentation"

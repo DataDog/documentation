@@ -1,5 +1,7 @@
 ---
 title: Install CloudPrem on AWS EKS
+aliases:
+- /cloudprem/configure/aws_config/
 description: Learn how to install and configure CloudPrem on AWS EKS
 further_reading:
 - link: "/cloudprem/install/network/ingress/"
