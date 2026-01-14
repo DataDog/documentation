@@ -296,9 +296,9 @@ This setup deploys the delegate role required for [cross-account scanning][18] a
 2. Click **Create StackSet**.
 3. Select **Service-managed permissions**.
 4. Under **Specify template**, select **Amazon S3 URL** and enter the following URL:
-   ```
+{{< code-block lang="text" >}}
    https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/v4.3.1/datadog_agentless_delegate_role_stackset.yaml
-   ```
+{{< /code-block >}}
 5. Enter a **StackSet name** (for example, `DatadogAgentlessScanningStackSet`).
 6. Configure the required parameters:
    - **ScannerInstanceRoleARN**: The ARN of the IAM role attached to your Agentless scanner instances.
