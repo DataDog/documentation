@@ -1,5 +1,7 @@
 ---
 title: Install CloudPrem on Azure AKS
+aliases:
+- /cloudprem/configure/azure_config/
 description: Learn how to install and configure CloudPrem on Azure AKS
 ---
 

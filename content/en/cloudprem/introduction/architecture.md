@@ -1,5 +1,7 @@
 ---
 title: Architecture
+aliases:
+- /cloudprem/architecture/
 further_reading:
 - link: "/cloudprem/install/"
   tag: "Documentation"

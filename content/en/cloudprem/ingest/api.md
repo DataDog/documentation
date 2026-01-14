@@ -1,5 +1,7 @@
 ---
 title: Send logs to CloudPrem with REST API
+aliases:
+- /cloudprem/ingest_logs/rest_api/
 description: Learn how to integrate with CloudPrem using direct API calls
 further_reading:
 - link: "/cloudprem/ingest_logs/datadog_agent/"

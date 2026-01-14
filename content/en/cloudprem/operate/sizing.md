@@ -1,5 +1,7 @@
 ---
 title: Cluster Sizing
+aliases:
+- /cloudprem/configure/cluster_sizing/
 description: Learn about cluster sizing for CloudPrem
 further_reading:
 - link: "/cloudprem/install/network/ingress/"
