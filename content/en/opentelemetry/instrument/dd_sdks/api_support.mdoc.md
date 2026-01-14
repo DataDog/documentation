@@ -4,6 +4,25 @@ description: "Use the OpenTelemetry API with Datadog SDKs to send traces, metric
 aliases:
   - /opentelemetry/interoperability/api_support
   - /opentelemetry/interoperability/otel_api_tracing_interoperability/
+  - /opentelemetry/instrument/api_support/dotnet/
+  - /opentelemetry/instrument/api_support/dotnet/logs
+  - /opentelemetry/instrument/api_support/dotnet/metrics
+  - /opentelemetry/instrument/api_support/dotnet/traces
+  - /opentelemetry/instrument/api_support/go
+  - /opentelemetry/instrument/api_support/java
+  - /opentelemetry/instrument/api_support/nodejs/
+  - /opentelemetry/instrument/api_support/nodejs/logs
+  - /opentelemetry/instrument/api_support/nodejs/metrics
+  - /opentelemetry/instrument/api_support/nodejs/traces
+  - /opentelemetry/instrument/api_support/php
+  - /opentelemetry/instrument/api_support/python/
+  - /opentelemetry/instrument/api_support/python/logs
+  - /opentelemetry/instrument/api_support/python/metrics
+  - /opentelemetry/instrument/api_support/python/traces
+  - /opentelemetry/instrument/api_support/ruby/
+  - /opentelemetry/instrument/api_support/ruby/metrics
+  - /opentelemetry/instrument/api_support/ruby/traces
+  - /opentelemetry/instrument/api_support/rust
 content_filters:
   - trait_id: prog_lang
     option_group_id: otel_api_support_language_options
