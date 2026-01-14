@@ -35,7 +35,7 @@ The following table shows feature compatibility across different setups:
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) | {{< X >}}<br>(Java, .NET, Go only) |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
-| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
 | [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | | |
