@@ -1,12 +1,7 @@
 ---
 title: Send Datadog Lambda Forwarder Logs to Observability Pipelines
 disable_toc: false
-products:
-- name: Logs
-  icon: logs
 ---
-
-{{< product-availability >}}
 
 This document walks through how to send AWS vended logs with the Datadog Lambda Forwarder to Observability Pipelines. The setup steps are:
 
