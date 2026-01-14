@@ -60,7 +60,7 @@ Los ejemplos de esta guía muestran cómo el `Group scope` puede aplicarse a mon
 1. Para programar un tiempo de inactividad en un solo grupo (en este caso, `service:web-store`), introduce ese grupo en el campo `Group scope`.
 2. Haz clic en **Preview affected monitors** (Previsualizar monitores afectados) para comprobar que el monitor elegido sigue en el contexto, a fin de que las alertas del grupo `service:web-store` se silencien durante el tiempo de inactividad programado.
 
-{{< img src="monitors/downtimes/downtime_example_byname.png" alt="Ejemplo de tiempo de inactividad "Por nombre de monitor" que muestra la vista previa de los monitores afectados" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_example_byname.png" alt="Ejemplo de tiempo de inactividad 'Por nombre de monitor' que muestra la vista previa de los monitores afectados" style="width:90%;">}}
 
 Una vez que se inicia el tiempo de inactividad programado, sólo se silencian las alertas del grupo `service:web-store` de ese monitor.
 
