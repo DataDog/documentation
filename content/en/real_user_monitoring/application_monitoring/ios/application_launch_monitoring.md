@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-  The <code>application_start</code> action is no longer collected starting from Android SDK version 3.5.0. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
+  The <code>application_start</code> action is not collected in Android SDK versions 3.5.0+. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
 </div>
 
 ## Overview
@@ -33,7 +33,7 @@ During initialization, the RUM iOS SDK creates a view called `ApplicationLaunch`
 
 ### Time to initial display and time to full display
 
-Starting from iOS SDK version 3.5.0, the time to initial display (TTID) and time to full display (TTFD) will be collected during the application launch period.
+In iOS SDK versions 3.5.0+, the time to initial display (TTID) and time to full display (TTFD) are collected during the application launch period.
 
 | Measurement       | Summary  | Details                                                                                                                |
 |----------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
@@ -54,7 +54,7 @@ Either cold or warm starts can be [prewarmed][2], which is an iOS-specific optim
 The iOS SDK automatically measures the time to initial display. The time to initial display can be optionally profiled using the iOS Mobile Profiler.
 
 ### Measuring the time to full display
-Since every application behaves differently, the iOS SDK does not automatically detect when to measure time to full display. As a result, the SDK needs to be notified when the application reaches the fully drawn state.
+Every application behaves differently, so the iOS SDK does not automatically detect when to measure time to full display. As a result, the SDK needs to be notified when the application reaches the fully drawn state.
 
 The time to full display is manually defined using the `Monitor.reportAppFullyDisplayed()` API in the iOS SDK based on the application’s specific definition of “fully drawn.” 
 
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
 {{< /tabs >}}
 
 <div class="alert alert-danger">
-  If the time to full display is not defined, the iOS SDK will only collect the time to initial display. 
+  If the time to full display is not defined, the iOS SDK only collects the time to initial display. 
 </div>
 
 ### RUM summary
@@ -100,7 +100,7 @@ The time to initial display and time to full display are presented in the RUM Su
 
 ### Vital events
 
-The time to initial display and time to full display are presented as vital events in the RUM session. They are also found under the first view after the `ApplicationLaunch` view. TTID and TTFD will be captured if the user launched the application in the session. Neither TTID nor TTFD will appear if the user did not launch the application during the session. 
+The time to initial display and time to full display are presented as vital events in the RUM session. They are also found under the first view after the `ApplicationLaunch` view. TTID and TTFD are captured if the user launches the application in the session. Neither TTID nor TTFD appear if the user does not launch the application during the session. 
 
   {{< img src="real_user_monitoring/ios/ios-app-launch-session.png" alt="iOS session side panel" style="width:90%;">}}
 
@@ -127,10 +127,10 @@ These metrics contain attributes to specify the launch type for accurate monitor
 
 
 <div class="alert alert-danger">
-  The <code>rum.measure.app.startup_to_full_display</code> metric will not be calculated if the time to full display is not defined. 
+  The <code>rum.measure.app.startup_to_full_display</code> metric are not calculated if the time to full display is undefined. 
 </div>
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

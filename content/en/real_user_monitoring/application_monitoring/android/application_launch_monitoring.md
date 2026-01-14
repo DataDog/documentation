@@ -15,7 +15,7 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-  The <code>application_start</code> action is no longer collected starting from Android SDK version 3.5.0. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
+  The <code>application_start</code> action is not collected in Android SDK versions 3.5.0+. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
 </div>
 
 ## Overview
@@ -33,7 +33,7 @@ During initialization, the RUM Android SDK creates a view called `ApplicationLau
 
 ### Time to initial display and time to full display
 
-Starting from Android SDK version 3.5.0, the time to initial display (TTID) and time to full display (TTFD) will be collected during the application launch period.
+In Android SDK versions 3.5.0+, the time to initial display (TTID) and time to full display (TTFD) are collected during the application launch period.
 
 | Measurement       | Summary  | Details                                                                                                                |
 |----------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
@@ -86,7 +86,7 @@ The TTID and TTFD are presented in the RUM Summary under Mobile Performance. The
 
 ### Vital events
 
-The time to initial display and time to full display are presented as vital events in the RUM session. They are also found under the first view after the `ApplicationLaunch` view. TTID and TTFD will be captured if the user launched the application in the session. Neither the TTID nor the TTFD will appear if the user did not launch the application during the session. 
+The time to initial display and time to full display are presented as vital events in the RUM session. They are also found under the first view after the `ApplicationLaunch` view. TTID and TTFD are captured if the user launches the application in the session. Neither the TTID nor the TTFD appear if the user does not launch the application during the session. 
 
   {{< img src="real_user_monitoring/android/android-app-launch-session.png" alt="Android session side panel" style="width:90%;">}}
 
@@ -109,10 +109,10 @@ The time to initial display and time to full display are calculated as metrics:
 These metrics contain the `@vital.startup_type` attribute to specify the launch type for accurate monitoring.
 
 <div class="alert alert-danger">
-  The <code>rum.measure.app.startup_to_full_display</code> metric will not be calculated if the time to full display is not defined. 
+  The <code>rum.measure.app.startup_to_full_display</code> metric is not calculated if the time to full display is undefined. 
 </div>
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
