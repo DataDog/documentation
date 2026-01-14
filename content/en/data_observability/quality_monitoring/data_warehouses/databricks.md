@@ -1,6 +1,8 @@
 ---
 title: Databricks
 description: "Connect Databricks to Datadog Data Observability to monitor data quality, track usage, and detect issues."
+aliases:
+  - /data_observability/datasets/?tab=databricks
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
@@ -12,7 +14,7 @@ further_reading:
 
 ## Overview
 
-The Databricks integration connects Datadog to your Databricks workspace to sync metadata, query history, and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your data stack.
+The Databricks integration connects Datadog to your Databricks workspace to sync metadata and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your data stack.
 
 **Note**: The instructions below are for Quality Monitoring. For Jobs Monitoring, see [Enable Data Jobs Monitoring for Databricks][1].
 
@@ -29,7 +31,14 @@ The Databricks integration connects Datadog to your Databricks workspace to sync
 
 ### Step 2 - Grant access
 
-Grant read-only access to the scope of data you want to monitor:
+First, grant access to system schemas for lineage:
+```sql
+GRANT USE CATALOG ON CATALOG system TO `<application_id>`;
+GRANT USE SCHEMA ON CATALOG system TO `<application_id>`;
+GRANT SELECT ON CATALOG system TO `<application_id>`;
+```
+
+Then, grant read-only access to the scope of data you want to monitor:
 
 {{< tabs >}}
 {{% tab "Full catalog access" %}}
@@ -65,7 +74,7 @@ These permissions are needed for the following reasons:
 
 ## Next steps
 
-After you configure the integration, Datadog begins syncing your metadata and query history in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
+After you configure the integration, Datadog begins syncing your metadata and column-level lineage in the background. Initial syncs can take several hours depending on the size of your Databricks deployment.
 
 ## Further reading
 

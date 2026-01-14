@@ -1,6 +1,8 @@
 ---
 title: Quality Monitoring
 description: "Detect data freshness delays, unusual patterns, and column-level metric changes before they impact downstream systems."
+aliases:
+  - /data_observability/datasets
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
@@ -33,8 +35,8 @@ With Quality Monitoring, you can:
 {{< whatsnext desc="Integrate with these transformation and orchestration tools:" >}}
    {{< nextlink href="data_observability/jobs_monitoring/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/airflow" >}}Airflow{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/dbtcore" >}}dbt Core{{< /nextlink >}}
-   {{< nextlink href="data_observability/jobs_monitoring/dbtcloud" >}}dbt Cloud{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/dbt/?tab=dbtcore" >}}dbt Core{{< /nextlink >}}
+   {{< nextlink href="data_observability/jobs_monitoring/dbt/?tab=dbtcloud" >}}dbt Cloud{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/kubernetes" >}}Spark on Kubernetes{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/emr" >}}Spark on Amazon EMR{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/dataproc" >}}Spark on Google Dataproc{{< /nextlink >}}

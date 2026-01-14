@@ -232,6 +232,8 @@ Located at `{{synthetics.attributes.result.variables.config}}`:
 `{{synthetics.attributes.result.variables.config.value}}`
 : Variable value (non-obfuscated only)
 
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification">advanced notifications</a> page for an example of how to use local variables in a notification.</div>
+
 {{% /tab %}}
 {{% tab "Global variables" %}}
 
