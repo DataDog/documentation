@@ -153,7 +153,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 | `/datadog task list` | List existing incident tasks. |
 | `/datadog followup` | Create a follow-up for the incident. |
 | `/datadog followup list` | View and manage existing follow-ups for the incident. |
-| `/datadog incident summary` | Generate the incident's summary with AI. |
+| `/datadog incident summary` | Get an AI-generated summary of the incident that is visible only to you. |
 {{< /site-region >}}
 {{< site-region region="gov" >}}
 | Command | Description |
