@@ -42,6 +42,33 @@ When a Synthetic Monitoring test runs, Datadog evaluates alerting in the followi
 
 Alerts are always the result of **aggregated evaluation**, not a single datapoint.
 
+## Test runs that generate alerts
+| Test run type                           | Evaluated for alerting |
+|-----------------------------------------|------------------------|
+| Scheduled runs                          | Yes                    |
+| CI/CD-triggered runs                    | No                     |
+| Manually triggered runs (unpaused test) | Yes, if state changes  |
+| Manually triggered runs (paused test)   | No                     |
+
+<div class="alert alert-info">Manually triggered runs on paused tests do not generate alerts.</div>
+
+## Fast retries
+
+Fast retries automatically re-run a failed request or step **within the same test execution**. They continue until either a run succeeds or the configured retry count is reached.
+
+{{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry.png" alt="Retry conditions step of a synthetics test" style="width:80%;" >}}
+
+**Key behaviors:**
+
+- A test configured with *n* retries can execute up to *n + 1* times per scheduled run (including the original attempt).
+- A test run is only considered failed if **all fast retries fail**.
+- Only the final result counts toward alerting conditions and uptime calculations.
+- Fast retry runs appear in test results with a `(fast retry)` label in the **Run Type** column. <br></br>
+
+   {{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_test_runs.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:100%;" >}}
+
+- Fast retries do **not** extend the alert evaluation timeline; they only affect whether a single run is marked as failed.
+
 ## Alerting rules
 
 Alerting rules define when a monitor is allowed to change state based on test failures over time.
@@ -71,51 +98,37 @@ Datadog cannot evaluate failures more frequently than the test runs.
 
 ### Example
 
-- Test frequency: 15 minutes  
-- Minimum duration: 5 minutes  
+When minimum duration (13 minutes) is shorter than test frequency (15 minutes), alerts trigger efficiently:
 
-Because the test only runs every 15 minutes, Datadog can only evaluate failures at that interval. If the minimum duration is shorter than the test frequency, alerts may be delayed.
+| Time | Event | Result |
+|------|-------|--------|
+| t0 | Test passes | — |
+| t15 | Test fails | Minimum duration timer starts |
+| t28 | 13 minutes elapsed | Alert triggers |
+
+With aligned settings, only one failed test run is needed before alerting.
+
+### Example: Fast retries causing delays
+
+When fast retries overlap with scheduled test runs, alerting can behave unexpectedly:
+
+| Time | Event | Result |
+|------|-------|--------|
+| t0 | Test passes | — |
+| t15 | Test fails | Timer does **not** start (waiting for retries) |
+| t25 | First fast retry fails | — |
+| t30 | Test passes | — |
+| t35 | Second fast retry fails | Minimum duration timer starts |
+| t45 | Test passes | Timer resets (only 10 min elapsed) |
+
+In this scenario, the fast retries overlap with scheduled runs, causing confusion about which failure triggered the timer.
 
 ### Best practices
 
 - Set the minimum duration to `0` to alert as soon as a failure occurs.
-- Use a longer minimum duration to reduce noise from transient issues.
+- Enable fast retries to handle transient issues like network blips. For frequently running tests, pair this with a longer minimum duration to reduce alert noise.
 - Align minimum duration with test frequency to avoid unexpected delays.
-
-## Fast retries
-
-Fast retries are designed to efficiently re-run a failed request or step **within the same test execution**.
-
-Characteristics:
-
-- Executed immediately after a failure
-- Do not count as separate test runs
-- Used to reduce noise from transient issues
-
-A test run is only considered failed if **all fast retries fail**.
-
-Fast retries affect whether a single run is marked as failed, but they do **not** extend the alert evaluation timeline.
-
-
-Fast retries occur **after a failed test run**, with a configurable wait period between attempts.
-
-Characteristics:
-
-- Count as separate test executions
-- Extend the overall evaluation time
-- Can delay alerting when combined with longer schedules or minimum durations
-
-## How retries affect alerting
-
-Retries are applied **before** alert conditions are evaluated.
-
-If retries are configured:
-
-- A test run is only marked as failed after all retries fail
-- Temporary issues may be filtered out before alerting
-- Alerting may be delayed depending on retry count and wait time
-
-Retries help reduce noise but do not replace alerting rules.
+- Avoid [overlapping fast retries with scheduled test runs][3], which can cause unexpected alerting behavior.
 
 ## Location-based evaluation
 
@@ -154,51 +167,40 @@ Global Uptime = ((Total Period - Time in Alert) / Total Period) × 100
 
 The following example demonstrates how a 95.83% global uptime is calculated.
 
-**Step 1:** Identify the monitoring period.
+1. Identify the monitoring period.
 
-The monitor is scoped to `Jan 12, 10:56 AM-Jan 12, 4:56 PM`, a 360-minute window.
+   The monitor is scoped to `Jan 12, 10:56 AM - Jan 12, 4:56 PM`, a 360-minute period:
 
-{{< img src="synthetics/guide/monitors_trigger_alerts/global_uptime.png" alt="A synthetics test run showing global uptime of 95.83%" style="width:100%;" >}}
+   {{< img src="synthetics/guide/monitors_trigger_alerts/global_uptime.png" alt="A synthetics test run showing global uptime of 95.83%" style="width:100%;" >}}
 
-**Step 2:** Determine the time spent in alert status.
+2. Determine the time spent in alert status.
 
-Zoom into the time range to identify when the monitor was in an alert state:
+   Zoom into the time range to identify when the monitor was in an alert state:
 
-{{< img src="synthetics/guide/monitors_trigger_alerts/global_uptime_video.mp4" alt="Video of a Synthetics test run, scoping into the datetime period of the alert" video=true >}}
+   {{< img src="synthetics/guide/monitors_trigger_alerts/global_uptime_video.mp4" alt="Video of a Synthetics test run, scoping into the datetime period of the alert" video=true >}}
 
-The alert period is `Jan 12, 3:46 PM–Jan 12, 4:01 PM`, approximately 15 minutes.
+   The alert period is `Jan 12, 3:46 PM – Jan 12, 4:01 PM`, approximately 15 minutes.
 
-**Step 3:** Apply the formula.
+3. Apply the formula.
 
-```
-Total Period = 360 minutes
-Time in Alert = 15 minutes
-Global Uptime = ((360 - 15) / 360) × 100 = 95.83%
-```
+   ```
+   Total Period = 360 minutes
+   Time in Alert = 15 minutes
+   Global Uptime = ((360 - 15) / 360) × 100 = 95.83%
+   ```
 
-To understand alert timing across locations, use **Show all locations** instead of relying only on global uptime.
+<div class="alert alert-info">To understand alert timing across locations, use the <strong>Show all locations</strong> toggle instead of relying only on global uptime.</div>
 
 ### Status descriptions
 
 OK
-: Some text
+: The monitor is healthy. Either all test runs are passing, or failures have not met the alerting conditions (minimum duration and location requirements).
 
 ALERT
-: Some text
+: The alerting conditions have been met. The test has been failing continuously for the configured minimum duration across the required number of locations.
 
 NO DATA
-: some text
-
-## Test runs that generate alerts
-
-| Test run type | Evaluated for alerting |
-|--------------|------------------------|
-| Scheduled runs | Yes |
-| CI/CD-triggered runs | No |
-| Manually triggered runs (unpaused test) | Yes, if state changes |
-| Manually triggered runs (paused test) | No |
-
-<div class="alert alert-info">Manually triggered runs on paused tests do not generate alerts.</div>
+: The monitor has not received any test results. This can occur if the test is paused, has not yet run, or there is an issue with data collection.
 
 ## Why alerts may behave unexpectedly
 
@@ -222,3 +224,4 @@ If a monitor does not alert or recovers unexpectedly, check for the following:
 
 [1]: /synthetics/guide/synthetic-test-retries-monitor-status/
 [2]: /synthetics/guide/uptime-percentage-widget/
+[3]: /synthetics/guide/synthetic-test-retries-monitor-status/#retries-that-overlap-with-other-test-runs
