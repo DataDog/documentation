@@ -17,7 +17,7 @@ With cross-account scanning, Agentless scanners are deployed across multiple reg
 
 For larger accounts with 250 or more hosts, this is the most cost-effective option as it avoids cross-region scans, and reduces friction for managing your Agentless scanners. You can either create a dedicated account for your Agentless scanners or choose an existing one. The account where the Agentless scanners are located can also be scanned.
 
-For AWS Organizations, you can use a [CloudFormation StackSet](/security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup) to deploy the delegate role across all member accounts, automating the onboarding process for cross-account scanning.
+For AWS Organizations, you can use a [CloudFormation StackSet][5] to deploy the delegate role across all member accounts, automating the onboarding process for cross-account scanning.
 
 The following diagram illustrates how Agentless scanning works when deployed in a central cloud account:
 
