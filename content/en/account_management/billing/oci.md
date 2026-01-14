@@ -17,7 +17,9 @@ Use the OCI integration tile to control which resources Datadog collects metrics
 1. Open the [OCI integration tile][1].
 2. Go to the **Metric Collection** tab.
 3. For each connected tenancy, optionally:
-   - Limit metric collection to specific compartments or regions.
+   - Limit metric collection to specific compartments.
+  
+**Note**: You can exclude OCI regions from all data collection (metrics and logs) on the **General** tab of the OCI integration tile.
 
 ## OCI log exclusion
 
@@ -26,7 +28,9 @@ Use the OCI integration tile to control which resources Datadog collects logs fr
 1. Open the [OCI integration tile][1].
 2. Go to the **Log Collection** tab.
 3. For each connected tenancy, optionally:
-   - Limit log collection to specific compartments or regions.
+   - Limit log collection to specific compartments.
+  
+**Note**: You can exclude OCI regions from all data collection (metrics and logs) on the **General** tab of the OCI integration tile.
 
 When you add or change limits for an existing OCI tenancy, previously discovered Compute instances can remain in the [Infrastructure List][3] for up to two hours while filters propagate. During this transition period, affected instances can display a status of `???`. This does not count toward your billing.
 
