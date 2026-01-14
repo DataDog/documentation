@@ -50,8 +50,6 @@ Alerts are always the result of **aggregated evaluation**, not a single datapoin
 | Manually triggered runs (unpaused test) | Yes, if state changes  |
 | Manually triggered runs (paused test)   | No                     |
 
-<div class="alert alert-info">Manually triggered runs on paused tests do not generate alerts.</div>
-
 ## Fast retries
 
 Fast retries automatically re-run a failed request or step **within the same test execution**. They continue until either a run succeeds or the configured retry count is reached.
