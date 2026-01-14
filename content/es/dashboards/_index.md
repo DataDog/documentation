@@ -45,12 +45,12 @@ title: Dashboards
 
 Los dashboards proporcionan información en tiempo real sobre el rendimiento y el estado de los sistemas y las aplicaciones de una organización. Permiten a los usuarios analizar visualmente los datos, realizar un seguimiento de los indicadores clave de rendimiento (KPI) y monitorizar tendencias de forma eficaz. Con los dashboards, los equipos pueden identificar anomalías, priorizar problemas, detectar problemas de forma proactiva, diagnosticar sus causas raíz y garantizar el cumplimiento de los objetivos de confiabilidad. Permite a tus equipos tomar decisiones informadas, optimizar las operaciones del sistema e impulsar el éxito empresarial, proporcionando una interfaz centralizada y fácil de utilizar para monitorizar y analizar los indicadores críticos de métricas y de rendimiento.
 
-{{< whatsnext desc="Dashboard features:">}}
-    {{< nextlink href="/dashboards/configure" >}}Configurar: Información general de las opciones de configuración de los dashboards{{< /nextlink >}}
-    {{< nextlink href="/dashboards/list" >}}Listas de dashboards: Buscar, ver o crear dashboards y listas{{< /nextlink >}}
-    {{< nextlink href="/dashboards/template_variables" >}}Variable de plantilla: Filtrar dinámicamente los widgets de un dashboard{{< /nextlink >}}
-    {{< nextlink href="/service_management/incident_management/datadog_clipboard/" >}}Portapapeles de Datadog{{< /nextlink >}}
-    {{< nextlink href="/api/latest/dashboards" >}}API: Gestionar dashboards mediante programación{{< /nextlink >}}
+{{< whatsnext desc="Funciones del dashboard:">}}
+    {{< nextlink href="/dashboards/configure" >}}Configuración: Información general sobre las opciones de configuración de dashboards{{< /nextlink >}}
+    {{< nextlink href="/dashboards/list" >}}Lista de dashboards: Búsqueda, visualización o creación de dashboards y listas{{< /nextlink >}}
+    {{< nextlink href="/dashboards/template_variables" >}}Variable de plantilla: Filtrado dinámico de widgets en un dashboard{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/datadog_clipboard/" >}}Portapapeles de Datadog{{< /nextlink >}}
+    {{< nextlink href="/api/latest/dashboards" >}}API: Gestión de dashboards mediante programación{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Funciones gráficas:">}}

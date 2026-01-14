@@ -1,6 +1,9 @@
 ---
 title: dbt
 description: "Connect dbt Cloud or dbt Core to Datadog for job run metadata and model lineage."
+aliases:
+  - /data_observability/jobs_monitoring/dbtcore
+  - /data_observability/jobs_monitoring/dbtcloud
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
@@ -90,11 +93,18 @@ Follow the steps below to connect dbt Core to Datadog.
 
 ## Update the dbt invocation
 
-1. Change the dbt invocation to use the OpenLineage wrapper (`dbt-ol`).
+1. Change your dbt invocations to use the OpenLineage wrapper (`dbt-ol`) instead of calling `dbt` directly. This applies to any dbt command you want to track in Datadog, such as `run`, `build`, and `test`. For the full list of available commands, see the [dbt documentation][7].
 2. Add the `--consume-structured-logs` flag to view dbt jobs while the command is still running.
 
    ```shell
+   # Run models
    dbt-ol run --consume-structured-logs --openlineage-dbt-job-name <YOUR_DBT_JOB_NAME>
+
+   # Run tests (required to see test failures in Datadog)
+   dbt-ol test --consume-structured-logs --openlineage-dbt-job-name <YOUR_DBT_JOB_NAME>
+
+   # Run build (runs models, tests, seeds, and snapshots)
+   dbt-ol build --consume-structured-logs --openlineage-dbt-job-name <YOUR_DBT_JOB_NAME>
    ```
 
 ## What's next
@@ -109,6 +119,7 @@ After your next dbt job run, you should start seeing job run and lineage data in
 [4]: /getting_started/site/#access-the-datadog-site
 [5]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
 [6]: https://app.datadoghq.com/datasets/catalog?integration=dbt
+[7]: https://docs.getdbt.com/docs/running-a-dbt-project/run-your-dbt-projects
 
 {{% /tab %}}
 {{< /tabs >}}
