@@ -17,7 +17,7 @@
   {{- $pages := partialCached "pages-json-cache.html" "pages.json" -}}
 
   {{- if index $pages $mdURL -}}
-    <button data-md-url="{{$mdURL}}" id="copy-plaintext-button">Copy page text</button>
+    <button data-md-url="{{$mdURL}}" id="old-copy-plaintext-button">Copy page text</button>
   {{- end -}}
   {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 {{ end }}
