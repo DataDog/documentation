@@ -9,7 +9,7 @@ This page details common issues with setting up and using Database Monitoring wi
 
 ### Incompatible metrics
 
-The following metrics are not supported for Amazon DocumentDB
+The following metrics are not supported for Amazon DocumentDB:
 
 | Metric Name                                           |
 | ----------------------------------------------------- |
