@@ -854,7 +854,7 @@ This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the i
    {{% /tab %}}
    {{< /tabs >}}
 
-   This automatically adds Datadog headers to your GraphQL requests, enabling them to be tracked by Datadog.
+   This lets Datadog RUM extract Operation type, name, variables and Payloads (optional) automatically from the requests to enrich GraphQL Requests RUM Resources.
 
    <div class="alert alert-info">
      <ul>
