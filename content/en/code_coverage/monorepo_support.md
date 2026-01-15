@@ -5,38 +5,291 @@ further_reading:
   - link: "/code_coverage/setup"
     tag: "Documentation"
     text: "Set up Code Coverage"
+  - link: "https://www.datadoghq.com/software-catalog/"
+    tag: "Documentation"
+    text: "Datadog Software Catalog"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
 Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
 {{< /callout >}}
 
-Datadog allows viewing (and gating on) coverage data for
-- a codeowner
-- a Software Catalog service
-- a manually mapped set of paths in your repository
+## Overview
 
-... write how split coverage data is available in PR / Branch / Commit pages ...
-... write how split is enabled automatically and nothing has to be done (given that Source Code Provider integration is configured) ...
+For large monorepos containing multiple projects or components, or where multiple teams collaborate, viewing code coverage data for the entire repository may not provide actionable insights. Code Coverage supports splitting coverage data by services and codeowners, allowing you to:
 
-... give a screenshot of coverage data selector ....
+- View total coverage, patch coverage, and detailed coverage data for individual services, components, or codeowner teams within a monorepo
+- Set up PR gates that apply to specific services or codeowners
+- Track coverage trends for individual services and codeowner teams over time
 
-... write about gating on split coverage data ...
+Code Coverage automatically calculates separate coverage metrics for each service and codeowner based on the file paths that belong to that service or are owned by that team.
 
-... give a screenshot of coverage data gate on a service/codeowner ....
+## Ways to split coverage data
 
-## Codeowners
+Code Coverage provides two ways to split coverage data in a monorepo:
 
-TBD
+### By service
 
-## Software Catalog
+1. **[Software Catalog][1] integration** (recommended): Automatically use service definitions from Datadog Software Catalog
+2. **Manual configuration**: Define services using a YAML configuration file in your repository
 
-TBD
+### By codeowner
 
-## Manual Services Mapping
+Automatically split coverage by codeowner teams based on the `CODEOWNERS` file in your repository.
 
-TBD
+These methods can be used together. Service splitting and codeowner splitting work independently—you can have coverage split by both services and codeowners simultaneously. For service definitions, Software Catalog integration takes priority over manual configuration. Coverage is calculated for up to 200 services and codeowners per coverage report, with a total limit of 2000 services across your organization.
+
+## Software Catalog integration
+
+If you use [Software Catalog][1], Code Coverage automatically uses the `codeLocations` attribute from your service definitions to calculate coverage for each service.
+
+<div class="alert alert-info">Using Software Catalog for service definitions is the recommended approach, as code locations configured in Software Catalog can be utilized by multiple Datadog products, including Code Coverage, Error Tracking, and Code Security. Use manual configuration only when Software Catalog integration is not available.</div>
+
+### How it works
+
+When you define services in Software Catalog with `codeLocations` pointing to your repository, Code Coverage automatically:
+1. Reads the service definitions from Software Catalog
+2. Calculates coverage for each service based on the specified paths
+3. Displays coverage data in the Code Coverage UI
+
+No additional configuration is needed in your repository.
+
+### Service definition example
+
+<div class="alert alert-info">You can add or update service definitions by adding YAML files to your repository, using the Datadog UI, enabling automatic service discovery, or importing from a third-party integration. See the <a href="/internal_developer_portal/software_catalog/set_up/">Software Catalog documentation</a> for more details.</div>
+
+{{< code-block lang="yaml" filename="service.datadog.yml" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: checkout-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/my-org/my-monorepo.git
+      paths:
+        - services/checkout/**
+        - shared/payment/**
+        - shared/cart/**
+{{< /code-block >}}
+
+See the [Service Definition documentation][4] for complete details on the service definition format and available options.
+
+## Codeowner-based splitting
+
+Code Coverage can automatically split coverage data based on the `CODEOWNERS` file in your repository. Codeowner splitting works independently from service splitting—coverage can be split by both services and codeowners simultaneously.
+
+### How it works
+
+When a `CODEOWNERS` file is present, Code Coverage:
+1. Reads the codeowner assignments from your repository
+2. Groups file paths by codeowner team
+3. Calculates separate coverage metrics for each team's owned code
+
+This happens automatically without requiring any configuration file.
+
+### Requirements
+
+- A `CODEOWNERS` file must exist in your repository (typically at `.github/CODEOWNERS`, `docs/CODEOWNERS`, or `CODEOWNERS` in the root)
+- Source Code Provider integration must be configured (see [Setup][2])
+- Codeowner teams must be properly formatted according to your source code provider's requirements
+
+## Manual service configuration
+
+<div class="alert alert-info">Manual service configuration should only be used when you cannot use Software Catalog integration. Software Catalog is the preferred method because code locations defined there can be utilized by multiple Datadog products.</div>
+
+To manually define services in your repository, create a `code-coverage.datadog.yml` file at the root of your repository.
+
+### Configuration file format
+
+The configuration file uses the following YAML format:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+services:
+  - id: frontend
+    paths:
+      - frontend/**
+      - shared/ui/**
+  - id: backend-api
+    paths:
+      - backend/api/**
+      - backend/.*\.go
+  - id: data-pipeline
+    paths:
+      - pipeline/jobs/**
+      - pipeline/.*\.(py|js)
+{{< /code-block >}}
+
+### Configuration options
+
+- `schema-version` (required): Must be `v1`
+- `services` (required): List of service definitions
+  - `id` (required): Unique identifier for the service (used in tags and filters)
+  - `paths` (required): List of path patterns that belong to this service
+
+### Path patterns
+
+All paths must be relative to the repository root. You can use glob patterns or regular expressions:
+
+- **Glob patterns**: Use `*` for single-level matching and `**` for multi-level matching
+  - `module-a/**` - Matches all files under the `module-a` directory
+  - `src/*.js` - Matches all `.js` files directly in the `src` directory
+  - `**/test/**` - Matches all files in any `test` directory at any level
+
+- **Regular expressions**: Patterns containing any of these characters are treated as regular expressions: `+{}|()^$\`
+  - `[a-zA-Z0-9]+\.json` - Matches JSON files with alphanumeric names in the root
+  - `(test|spec)_.*\.py` - Matches Python test files with specific naming patterns
+  - `src/.*\.(ts|tsx)` - Matches TypeScript files in the src directory
+
+### Example configuration
+
+{{% collapse-content title="JavaScript/TypeScript monorepo" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+services:
+  - id: web-app
+    paths:
+      - packages/web/**
+      - packages/shared/ui/**
+  - id: mobile-app
+    paths:
+      - packages/mobile/**
+      - packages/shared/core/**
+  - id: admin-dashboard
+    paths:
+      - packages/admin/**
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Multi-language monorepo" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+services:
+  - id: backend-service
+    paths:
+      - services/backend/**
+      - services/backend/.*\.go
+  - id: frontend-web
+    paths:
+      - services/frontend/**
+      - services/frontend/.*\.(ts|tsx)
+  - id: data-processing
+    paths:
+      - services/data/**
+      - scripts/.*\.py
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+## Viewing coverage data for services and codeowners
+
+Once services or codeowners are configured using any of the methods above, coverage data becomes available filtered by service or codeowner for any coverage reports uploaded after the configuration changes.
+
+On the Branch overview, Pull Request details, and Commit details pages in [Code Coverage UI][5], a service/codeowner selector dropdown appears at the top of the page, allowing you to:
+- View coverage metrics or detailed coverage data filtered to a specific service or codeowner
+- See which files belong to each service or are owned by specific teams
+- Compare coverage across different services or codeowners
+- View coverage trends over time for a specific service or codeowner
+
+{{< img src="/code_coverage/pr_codeowners.png" text="Code Coverage PR details page with Codeowners selector in Datadog" style="width:100%" >}}
+
+## Setting up PR gates for services and codeowners
+
+You can configure PR gates to enforce coverage thresholds for specific services or codeowners.
+
+### Creating a service or codeowner-specific gate
+
+1. Navigate to [PR Gates rule creation][3]
+2. Configure the coverage threshold (total or patch coverage)
+3. In the **per service** or **per code owner** field, select one or more services or codeowner teams the gate should apply to
+4. Save the rule
+
+{{< img src="/code_coverage/pr_gate_codeowners.png" text="Code Coverage PR gate creation page in Datadog" style="width:100%" >}}
+
+### How service and codeowner gates work
+
+- **With services or codeowners specified**: The gate evaluates coverage separately for each selected service or codeowner team. When multiple services or codeowners are specified, each is evaluated independently against the threshold. The gate does not combine coverage across services or codeowners.
+- **Without services or codeowners specified**: The gate evaluates coverage for the entire repository.
+
+### Example configurations
+
+**Enforce high coverage for backend services:**
+
+{{< img src="/code_coverage/pr_gate_backend_services.png" text="Code Coverage PR gate configured for backend services" style="width:100%" >}}
+
+**Require all new code in frontend to be tested:**
+
+{{< img src="/code_coverage/pr_gate_frontend.png" text="Code Coverage PR gate configured for frontend services" style="width:100%" >}}
+
+**Enforce coverage for specific team's code:**
+
+{{< img src="/code_coverage/pr_gate_codeowners_team.png" text="Code Coverage PR gate configured for a specific team" style="width:100%" >}}
+
+### Multiple gates per repository
+
+You can create multiple gates for the same repository, each applying to different services or codeowners. This allows you to enforce different coverage standards for different parts of your monorepo or for different teams.
+
+## Troubleshooting
+
+### Software Catalog services are not appearing in the UI
+
+When using Software Catalog integration, changes to service definitions in Software Catalog may take up to 10 minutes to synchronize with Code Coverage. After creating or updating service definitions in Software Catalog:
+
+1. Verify that the service definition in Software Catalog includes `codeLocations` with the correct `repositoryURL`
+2. Ensure the paths specified in `codeLocations` match the actual file structure
+3. Wait up to 10 minutes for the changes to propagate
+4. Upload a new coverage report after the synchronization completes
+
+Software Catalog is queried when processing coverage reports, so changes only take effect for newly uploaded reports.
+
+### Manual service configuration not taking effect
+
+If manually configured services don't appear in the UI:
+
+1. Ensure the `code-coverage.datadog.yml` file is at the repository root
+2. Validate the YAML syntax (use a YAML validator to check for errors)
+3. Verify that Source Code Provider integration is properly configured (see [Setup][2])
+4. Upload a new coverage report after adding or modifying the configuration file
+
+The configuration file is read when processing coverage reports, so changes only take effect for newly uploaded reports.
+
+### Coverage values don't match expected service or codeowner boundaries
+
+Check that:
+1. Path patterns in your configuration correctly match the intended files
+2. Paths in coverage reports are relative to the repository root (as expected by Code Coverage)
+
+If paths in coverage reports are relative to a subdirectory, use the `--base-path` option when uploading:
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --base-path=src .
+{{< /code-block >}}
+
+### Coverage not calculated for some services or codeowners
+
+Code Coverage has the following limits:
+
+- **Per-report limit (200)**: Up to 200 services and codeowners combined per coverage report
+- **Organization-wide service limit (2000)**: Up to 2000 services total across all repositories in your organization
+
+If you exceed these limits, coverage will not be calculated for services or codeowners beyond the limit.
+
+To stay within limits:
+1. Consolidate related services into broader categories
+2. Remove unused or redundant service definitions
+
+### Codeowner-based coverage not appearing
+
+Confirm that:
+1. A `CODEOWNERS` file exists in the standard location (`.github/CODEOWNERS`, `docs/CODEOWNERS`, or `CODEOWNERS` in the root)
+2. Source Code Provider integration has access to read the file (see [Setup][2])
+3. The codeowner format follows your provider's syntax requirements
+4. At least one coverage report has been uploaded after the `CODEOWNERS` file was added or updated
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /service_catalog/
+[2]: /code_coverage/setup
+[3]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[4]: /service_catalog/service_definition_api/
+[5]: https://app.datadoghq.com/ci/code-coverage
