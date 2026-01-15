@@ -1,0 +1,18 @@
+client_sdk_options:
+  - id: browser
+    default: true
+  - id: android
+  - id: ios
+  - id: flutter
+  - id: kotlin_multiplatform
+  - id: react_native
+  - id: roku
+  - id: unity
+
+client_sdk_product_options:
+  - id: rum
+    default: true
+  - id: product_analytics
+  - id: error_tracking
+  - id: session_replay
+  - id: logs

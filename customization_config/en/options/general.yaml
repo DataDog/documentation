@@ -85,6 +85,9 @@ options:
 - label: CDN sync
   id: cdn_sync
 
+- label: CentOS
+  id: centos
+
 - label: Check Alert
   id: check_alert
 
@@ -163,6 +166,12 @@ options:
 - label: Elasticsearch
   id: elasticsearch
 
+- label: Error Tracking
+  id: error_tracking
+
+- label: Fluent
+  id: fluent
+
 - label: Flutter
   id: flutter
 
@@ -201,6 +210,9 @@ options:
 
 - label: HTTP/HTTPS
   id: http_https
+
+- label: HTTP Client
+  id: http_client
 
 - label: SOCKS
   id: socks
@@ -307,6 +319,9 @@ options:
 - label: Postgres
   id: postgres
 
+- label: Product Analytics
+  id: product_analytics
+
 - label: Puppet
   id: puppet
 
@@ -328,11 +343,8 @@ options:
 - label: RedHat
   id: redhat
 
-- label: CentOS
-  id: centos
-
-- label: SUSE
-  id: suse
+- label: Roku
+  id: roku
 
 - label: Reduce
   id: reduce
@@ -343,6 +355,12 @@ options:
 - label: Ruby
   id: ruby
 
+- label: RUM
+  id: rum
+
+- label: Self-hosted
+  id: self_hosted
+
 - label: Sensitive Data Scanner
   id: sensitive_data_scanner
 
@@ -352,8 +370,14 @@ options:
 - label: Serverless Framework
   id: serverless_framework
 
+- label: Session Replay
+  id: session_replay
+
 - label: Sharded Cluster
   id: sharded_cluster
+
+- label: Splunk Forwarders (TCP)
+  id: splunk_forwarders
 
 - label: Splunk HEC
   id: splunk_hec
@@ -366,6 +390,12 @@ options:
 
 - label: Sumo Logic
   id: sumo_logic
+
+- label: Sumo Logic Hosted Collector
+  id: sumo_logic_hosted_collector
+
+- label: SUSE
+  id: suse
 
 - label: Swift
   id: swift
@@ -391,6 +421,9 @@ options:
 - label: TOML
   id: toml
 
+- label: Unity
+  id: unity
+
 - label: Wget
   id: wget
 
@@ -405,21 +438,4 @@ options:
 
 - label: YAML
   id: yaml
-
-- label: SQL Server
-  id: sql_server
-
-- label: Self-hosted
-  id: self_hosted
-
-- label: Fluent
-  id: fluent
-
-- label: HTTP Client
-  id: http_client
-
-- label: Splunk Forwarders (TCP)
-  id: splunk_forwarders
   
-- label: Sumo Logic Hosted Collector
-  id: sumo_logic_hosted_collector
