@@ -156,6 +156,7 @@ module:
         - "/metrics/**"
         - "/notebooks/**"
         - "/product_analytics/**"
+        - "/session_replay/**"
     # load in integrations
     - source: _vendor/content/en
       target: content

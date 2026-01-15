@@ -9,12 +9,15 @@ further_reading:
     - link: "https://www.datadoghq.com/product/platform/bits-ai/"
       tag: "Product page"
       text: "Bits AI"
+      hide_in_studio: true
     - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
       tag: "Blog"
       text: "Introducing Bits AI SRE, your AI on-call teammate"
+      hide_in_studio: true
     - link: "https://www.datadoghq.com/blog/bits-ai-security-analyst/"
       tag: "Blog"
       text: "Automate Cloud SIEM investigations with Bits AI Security Analyst"
+      hide_in_studio: true
     - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
       text: "How to use AI tools more effectively: Tips from Datadog Engineers"
@@ -25,10 +28,10 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
 ## Features
 
 {{< whatsnext desc="Learn about how you can use Bits AI:" >}}
-   {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts with Bits AI SRE{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_ai_sre" hide_in_studio="true" >}}Investigate alerts with Bits AI SRE{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits AI Dev Agent{{< /nextlink >}}
-   <!-- {{< nextlink href="link" >}}Automate Cloud SIEM investigations with Bits AI Security Analyst{{< /nextlink >}} -->
-   {{< nextlink href="bits_ai/chat_with_bits_ai" >}}Chat with Bits about your observability data{{< /nextlink >}}
+   <!-- {{< nextlink href="link" hide_in_studio="true" >}}Automate Cloud SIEM investigations with Bits AI Security Analyst{{< /nextlink >}} -->
+   {{< nextlink href="bits_ai/chat_with_bits_ai" hide_in_studio="true" >}}Chat with Bits about your observability data{{< /nextlink >}}
    {{< nextlink href="bits_ai/mcp_server" >}}Get observability insights from AI agents with the Datadog MCP server{{< /nextlink >}}
 {{< /whatsnext >}}
 

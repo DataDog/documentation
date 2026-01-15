@@ -3,7 +3,9 @@
 {{- $tag := .Get "tag" -}}
 {{- $img := .Get "img" -}}
 {{- $text := .Inner -}}
+{{- $hide_in_studio := .Get "hide_in_studio" -}}
 
+{{- if not (and (eq $hide_in_studio "true") (eq site.Language.Lang "studio")) -}}
 {{ if eq (substr $href 0 4) "http"}}
     {{ $.Scratch.Set "link" $href}}
 {{ else }}
@@ -45,3 +47,4 @@
         {{ partial "img.html" (dict "root" $dot "src" "icons/list-group-arrow-r.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") }}
     </a>
 {{- end }}
+{{- end -}}

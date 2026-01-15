@@ -3,6 +3,7 @@
   <p>{{- i18n "additional_sentence" -}}:</p>
   <div class="list-group">
     {{- range $dot.Page.Params.further_reading -}}
+      {{- if not (and .hide_in_studio (eq site.Language.Lang "studio")) -}}
       {{- if eq (substr .link 0 4) "http" -}}
           {{- $.Scratch.Set "link" .link -}}
       {{- else -}}
@@ -32,6 +33,7 @@
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-2.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") -}}
       </a>
+      {{- end -}}
     {{- end -}}
     </div>
 </div>
