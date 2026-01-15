@@ -93,8 +93,7 @@ Ensure all S3-related permissions are granted for [Resource Collection][509].
 
    4. Navigate to **S3** > **Destination bucket** > **Permissions** > **Bucket policy**. Add or update the bucket policy on the destination bucket to allow the S3 service (`s3.amazonaws.com`) to write inventory objects from the source bucket(s). 
 
-      Use the following **example bucket policy** to allow S3 to write inventory files to your destination bucket. 
-      You can copy and adapt this example for your use: replace `<DESTINATION_BUCKET>`, `<DESTINATION_PREFIX>` (optional), and `<ACCOUNT_ID>` with your actual bucket name, bucket prefix, and AWS account ID. 
+      Use the following example bucket policy to allow S3 to write inventory files to your destination bucket. Replace `<DESTINATION_BUCKET>`, `<DESTINATION_PREFIX>` (optional), and `<ACCOUNT_ID>` with your actual bucket name, bucket prefix, and AWS account ID. 
 
       ```json
       {
