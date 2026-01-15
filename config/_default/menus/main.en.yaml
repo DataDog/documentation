@@ -8762,67 +8762,67 @@ menu:
       parent: digital_experience_heading
       weight: 60000
     - name: Browser
-      url: /session_replay/browser
+      url: session_replay/browser
       parent: session_replay
       identifier: session_replay_browser
       weight: 1
     - name: Setup
-      url: /session_replay/browser/setup_and_configuration
+      url: session_replay/browser/setup_and_configuration
       parent: session_replay_browser
       identifier: session_replay_browser_setup
       weight: 101
     - name: Privacy Options
-      url: /session_replay/browser/privacy_options
+      url: session_replay/browser/privacy_options
       parent: session_replay_browser
       identifier: session_replay_browser_privacy_options
       weight: 102
     - name: Developer Tools
-      url: /session_replay/browser/dev_tools
+      url: session_replay/browser/dev_tools
       parent: session_replay_browser
       identifier: session_replay_browser_developer_tools
       weight: 103
     - name: Troubleshooting
-      url: /session_replay/browser/troubleshooting
+      url: session_replay/browser/troubleshooting
       parent: session_replay_browser
       identifier: session_replay_browser_troubleshooting
       weight: 104
     - name: Mobile
-      url: /session_replay/mobile
+      url: session_replay/mobile
       parent: session_replay
       identifier: session_replay_mobile
       weight: 2
     - name: Setup and Configuration
-      url: /session_replay/mobile/setup_and_configuration
+      url: session_replay/mobile/setup_and_configuration
       parent: session_replay_mobile
       identifier: session_replay_mobile_setup_and_configuration
       weight: 101
     - name: Privacy Options
-      url: /session_replay/mobile/privacy_options
+      url: session_replay/mobile/privacy_options
       parent: session_replay_mobile
       identifier: session_replay_mobile_privacy_options
       weight: 102
     - name: Developer Tools
-      url: /session_replay/mobile/dev_tools
+      url: session_replay/mobile/dev_tools
       parent: session_replay_mobile
       identifier: session_replay_mobile_developer_tools
       weight: 103
     - name: Impact on App Performance
-      url: /session_replay/mobile/app_performance
+      url: session_replay/mobile/app_performance
       parent: session_replay_mobile
       identifier: session_replay_mobile_app_performance
       weight: 104
     - name: Troubleshooting
-      url: /session_replay/mobile/troubleshooting
+      url: session_replay/mobile/troubleshooting
       parent: session_replay_mobile
       identifier: session_replay_mobile_troubleshooting
       weight: 105
     - name: Playlists
-      url: /session_replay/playlists
+      url: session_replay/playlists
       parent: session_replay
       identifier: session_replay_playlists
       weight: 3
     - name: Heatmaps
-      url: /session_replay/heatmaps
+      url: session_replay/heatmaps
       parent: session_replay
       identifier: session_replay_heatmaps
       weight: 4
