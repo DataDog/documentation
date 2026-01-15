@@ -139,6 +139,63 @@ If you want to add another group of processors for a destination:
 [6]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}
+{{% tab "Rehydration" %}}
+
+### Set up the pipeline components
+
+1. Navigate to [Observability Pipelines][1] and click the [Rehydrations][2] tab.
+1. Click **+ New Rehydration**.
+1. Select and set up your [source][3].
+1. Add [processors][4] to transform, redact, and enrich your log data.
+    - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
+1. Select and set up [destinations][5] for your processed logs.
+
+#### Add or remove components
+
+##### Add another processor group
+
+If you want to add another group of processors for a destination:
+1. Click the plus sign (**+**) at the bottom of the existing processor group.
+1. Click the name of the processor group to update it.
+1. Optionally, enter a group filter. See [Search Syntax][6] for more information.
+1. Click **Add** to add processors to the group.
+1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
+    1. Click the three dots on the processor group.
+    1. Select **Copy all processors**.
+    1. Select the desired processor group, and then paste the processors into it.
+1. You can toggle the switch to enable and disable the processor group and also each individual processor.
+
+**Notes**:
+<br>- Configuring a pipeline with processor groups is available for Worker versions 2.7 and later.
+<br>- There is a limit of 10 processor groups for a pipeline canvas.
+
+##### Add another destination to a processor group
+
+If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
+
+To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
+- If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
+- If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
+
+**Notes**:
+
+- A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
+- You can add a total of three destinations for a pipeline.
+- A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
+
+### Rehydration completed notification
+
+1. Click **Next: Configure Notifications**.
+1. Review the **Rehydration Completed** notification and update if needed.
+
+[1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/rehydration/
+[3]: /observability_pipelines/sources/
+[4]: /observability_pipelines/processors/
+[5]: /observability_pipelines/destinations/
+[6]: /observability_pipelines/search_syntax/logs/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Worker and deploy the pipeline
