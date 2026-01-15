@@ -71,7 +71,7 @@ dataset = LLMObs.create_dataset_from_csv(
 
 ```
 
-See [Datasets][1] for more information about datasets, including how to manually create them, how to retrieve and manage datasets, and how Datadog retains dataset versions.
+See [Datasets][1] for more information about datasets, including: how to manually create datasets, how to retrieve and manage datasets, and how Datadog retains dataset versions.
 
 ## Create an experiment
 An _experiment_ lets you systematically test your LLM application by running your agent across a set of scenarios from your dataset and measuring performance against the expected outputs using evaluators. You can then compare how different app configurations perform, side by side.
