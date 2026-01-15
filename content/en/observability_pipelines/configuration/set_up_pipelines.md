@@ -53,20 +53,7 @@ You can create a pipeline with one of the following methods:
 
 {{< img src="observability_pipelines/setup/another_processor_group.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
 
-If you want to add another group of processors for a destination:
-1. Click the plus sign (**+**) at the bottom of the existing processor group.
-1. Click the name of the processor group to update it.
-1. Optionally, enter a group filter. See [Search Syntax][11] for more information.
-1. Click **Add** to add processors to the group.
-1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
-    1. Click the three dots on the processor group.
-    1. Select **Copy all processors**.
-    1. Select the desired processor group, and then paste the processors into it.
-1. You can toggle the switch to enable and disable the processor group and also each individual processor.
-
-**Notes**:
-<br>- Configuring a pipeline with processor groups is available for Worker versions 2.7 and later.
-<br>- There is a limit of 10 processor groups for a pipeline canvas.
+{{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
 
 #### Add another set of processors and destinations
 
@@ -76,21 +63,11 @@ If you want to add another set of processors and destinations, click the plus si
 
 To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
 
-### Add another destination to a processor group
+#### Add another destination to a processor group
 
 {{< img src="observability_pipelines/setup/another_destination.png" alt="The Pipelines page showing one processor group sending logs to two different destinations" style="width:100%;" >}}
 
-If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
-
-To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
-- If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
-- If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
-
-**Notes**:
-
-- A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
-- You can add a total of three destinations for a pipeline.
-- A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
+{{% observability_pipelines/set_up_pipelines/add_another_destination %}}
 
 [1]: /observability_pipelines/sources/
 [2]: /observability_pipelines/processors/
@@ -118,25 +95,14 @@ To delete a destination, click on the pencil icon to the top right of the destin
 
 {{< img src="observability_pipelines/setup/another_processor_group_metrics.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
 
-If you want to add another group of processors for a destination:
-1. Click the plus sign (**+**) at the bottom of the existing processor group.
-1. Click the name of the processor group to update it.
-1. Optionally, enter a group filter. See [Search Syntax][6] for more information.
-1. Click **Add** to add processors to the group.
-1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
-    1. Click the three dots on the processor group.
-    1. Select **Copy all processors**.
-    1. Select the desired processor group, and then paste the processors into it.
-1. You can toggle the switch to enable and disable the processor group and also each individual processor.
-
-**Notes**: There is a limit of 10 processor groups for a pipeline canvas.
+{{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
 [3]: /observability_pipelines/sources/datadog_agent/?tab=metrics
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/datadog_metrics/
-[6]: /observability_pipelines/search_syntax/metrics/
+[11]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}
 {{< /tabs >}}
