@@ -40,6 +40,8 @@ You can create a pipeline with one of the following methods:
 {{< tabs >}}
 {{% tab "Logs" %}}
 
+### Set up pipeline components
+
 1. Navigate to [Observability Pipelines][7].
 1. Select a [template][4] based on your use case.
 1. Select and set up your [source][1].
@@ -47,15 +49,15 @@ You can create a pipeline with one of the following methods:
     - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
 1. Select and set up [destinations][3] for your processed logs.
 
-### Add or remove components
+#### Add or remove components
 
-#### Add another processor group
+##### Add another processor group
 
 {{< img src="observability_pipelines/setup/another_processor_group.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
 
 {{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
 
-#### Add another set of processors and destinations
+##### Add another set of processors and destinations
 
 {{< img src="observability_pipelines/setup/another_set_processor_destination.png" alt="The Pipelines page showing two processor groups sending logs to two different destinations" style="width:100%;" >}}
 
@@ -63,7 +65,7 @@ If you want to add another set of processors and destinations, click the plus si
 
 To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
 
-#### Add another destination to a processor group
+##### Add another destination to a processor group
 
 {{< img src="observability_pipelines/setup/another_destination.png" alt="The Pipelines page showing one processor group sending logs to two different destinations" style="width:100%;" >}}
 
@@ -84,6 +86,8 @@ To delete a processor group, you need to delete all destinations linked to that 
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
+### Set up pipeline components
+
 1. Navigate to [Observability Pipelines][1].
 1. Select the [Metric Tag Governance][2] template.
 1. Set up the [Datadog Agent][3] source.
@@ -91,7 +95,7 @@ To delete a processor group, you need to delete all destinations linked to that 
     - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
 1. Set up the [Datadog Metrics][5] destination.
 
-### Add another processor group
+#### Add another processor group
 
 {{< img src="observability_pipelines/setup/another_processor_group_metrics.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
 
