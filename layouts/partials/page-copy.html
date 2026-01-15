@@ -1,9 +1,18 @@
-{{ $ctx := .ctx }}
-{{- with .plaintextUrl -}}
+{{- $ctx := .ctx -}}
+
+{{- with $ctx.File -}}
+  {{- $mdURL := printf "https://docs.datadoghq.com/%s" .Path -}}
   {{- $pages := partialCached "pages-json-cache.html" "pages.json" -}}
 
-  {{- if index $pages . -}}
-  <div class="pb-2 toc-edit-btn"><a class="text-primary text-uppercase font-semibold">{{ partial "img.html" (dict "root" $ctx "src" "icons/copy.svg" "class" "static" "alt" "copy" "width" "25") }} {{ i18n "copy"}}</a></div>
-  <div id="sidebar-copy-btn" data-md-url="{{ . }}">Copy</div>
+  {{- if index $pages $mdURL -}}
+    <div class="pb-2 toc-edit-btn">
+      <a href="#" class="text-primary text-uppercase font-semibold" role="button" id="copy-plaintext-button" data-md-url="{{ $mdURL }}">
+        {{ partial "img.html" (dict "root" $ctx "src" "icons/copy.svg" "class" "static" "alt" "copy" "width" "25") }}
+        {{ i18n "copy" }}
+      </a>
+    </div>
+
+    <!-- (optional) if you still want the div too -->
+    <div id="sidebar-copy-btn" data-md-url="{{ $mdURL }}">Copy</div>
   {{- end -}}
 {{- end -}}

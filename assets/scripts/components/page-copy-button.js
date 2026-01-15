@@ -34,6 +34,8 @@ async function copyPageText(copyButton) {
 const copyButton = document.getElementById('copy-plaintext-button');
 
 if (copyButton) {
+    console.log('Old copy button found');
+    console.log(copyButton);
     copyButton.addEventListener('click', function () {
         copyPageText(this);
     });
@@ -43,6 +45,7 @@ const sidebarCopyButton = document.getElementById('sidebar-copy-btn');
 
 if (sidebarCopyButton) {
     console.log('Sidebar copy button found');
+    console.log(sidebarCopyButton);
     sidebarCopyButton.addEventListener('click', function () {
         console.log('Sidebar copy button clicked');
     });
