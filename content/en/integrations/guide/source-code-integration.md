@@ -501,7 +501,9 @@ There are six possible ways to do it:
 
 Use this option when the chart is stored in the git repo in unpacked form.
 
-Use the installation command `helm install <release> <chart/path>` with the following information in the above format:
+Use the installation command `helm install <release> <chart/path>`.
+
+Use the following annotation format:
 
 ```json
 origin.datadoghq.com/location:
@@ -520,7 +522,9 @@ origin.datadoghq.com/location:
 
 Use this option when the chart is stored in the git repo in the form of an archive.
 
-Use the installation command `helm install <release> <chart/path/arch-x.y.z.tgz>` with the following information in the above format:
+Use the installation command `helm install <release> <chart/path/arch-x.y.z.tgz>`.
+
+Use the following annotation format:
 
 ```json
 origin.datadoghq.com/location:
@@ -539,7 +543,9 @@ origin.datadoghq.com/location:
 
 Use this option when the chart is stored somewhere in the current git repo and unpacked during the installation.
 
-Use the installation command `helm install <release> <unpacked/path/dir>` with the following information in the above format:
+Use the installation command `helm install <release> <unpacked/path/dir>`.
+
+Use the following annotation format:
 
 ```json
 origin.datadoghq.com/location:
@@ -557,7 +563,9 @@ origin.datadoghq.com/location:
 {{% /collapse-content %}}
 {{% collapse-content title="Absolute URL" level="h4" expanded=false id="absolute-url" %}}
 
-Use the installation command `helm install mynginx https://example.com/charts/nginx-1.2.3.tgz` with the following information in the above format:
+Use the installation command `helm install mynginx https://example.com/charts/nginx-1.2.3.tgz`.
+
+Use the following annotation format:
 
 ```json
 origin.datadoghq.com/location:
@@ -574,7 +582,9 @@ origin.datadoghq.com/location:
 {{% /collapse-content %}}
 {{% collapse-content title="Chart reference and repo URL" level="h4" expanded=false id="chart-reference-and-repo" %}}
 
-Use the installation command `helm install --repo https://example.com/charts/ mynginx nginx` with the following information in the above format:
+Use the installation command `helm install --repo https://example.com/charts/ mynginx nginx`.
+
+Use the following annotation format:
 
 ```json
 origin.datadoghq.com/location:
@@ -591,7 +601,9 @@ origin.datadoghq.com/location:
 {{% /collapse-content %}}
 {{% collapse-content title="OCI registries" level="h4" expanded=false id="oci-registries" %}}
 
-Use the installation command `helm install mynginx --version 1.2.3 oci://example.com/charts/nginx` with the following information in the above format:
+Use the installation command `helm install mynginx --version 1.2.3 oci://example.com/charts/nginx`.
+
+Use the following annotation format:
 
 ```json
 origin.datadoghq.com/location:
