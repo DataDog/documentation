@@ -793,13 +793,6 @@
       "description": "Update an existing incident returns \"OK\" response"
     }
   ],
-  "UpdateIncidentAttachments": [
-    {
-      "group": "incidents",
-      "suffix": "_3881702075",
-      "description": "Create an incident attachment returns \"OK\" response"
-    }
-  ],
   "CreateIncidentIntegration": [
     {
       "group": "incidents",
@@ -1016,6 +1009,20 @@
       "description": "Update a log-based metric with include_percentiles field returns \"OK\" response"
     }
   ],
+  "CreateRestrictionQuery": [
+    {
+      "group": "logs_restriction_queries",
+      "suffix": "",
+      "description": "Create a restriction query returns \"OK\" response"
+    }
+  ],
+  "AddRoleToRestrictionQuery": [
+    {
+      "group": "logs_restriction_queries",
+      "suffix": "",
+      "description": "Grant role to a restriction query returns \"OK\" response"
+    }
+  ],
   "CreateBulkTagsMetricsConfiguration": [
     {
       "group": "metrics",
@@ -1108,6 +1115,11 @@
       "group": "monitors",
       "suffix": "_1181818787",
       "description": "Create a monitor notification rule with conditional recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1379932371",
+      "description": "Create a monitor notification rule with scope returns \"OK\" response"
     }
   ],
   "CreateMonitorUserTemplate": [
@@ -1134,6 +1146,11 @@
       "group": "monitors",
       "suffix": "_1400905713",
       "description": "Update a monitor notification rule with conditional_recipients returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1446058210",
+      "description": "Update a monitor notification rule with scope returns \"OK\" response"
     }
   ],
   "UpdateMonitorUserTemplate": [
@@ -1213,6 +1230,20 @@
       "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
+  "CreateUserNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification channel for a user returns \"Created\" response"
+    }
+  ],
+  "CreateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification rule for a user returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
@@ -1232,6 +1263,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Update On-Call schedule returns \"OK\" response"
+    }
+  ],
+  "UpdateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update an On-Call notification rule for a user returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -1410,6 +1448,18 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
+  "AttachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_897782765",
+      "description": "Attach security finding to a case returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Attach security findings to a case returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -1441,6 +1491,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2323193894",
+      "description": "Create a detection rule with detection method 'anomaly_detection' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1476,6 +1531,13 @@
       "group": "security_monitoring",
       "suffix": "_868881438",
       "description": "Create a scheduled detection rule returns \"OK\" response"
+    }
+  ],
+  "CreateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a critical asset returns \"OK\" response"
     }
   ],
   "CreateCustomFramework": [
@@ -1516,6 +1578,30 @@
       "group": "security_monitoring",
       "suffix": "_3192265332",
       "description": "Create a suppression rule with an exclusion query returns \"OK\" response"
+    }
+  ],
+  "CreateCases": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_2385516013",
+      "description": "Create case for security finding returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2798851680",
+      "description": "Create case for security findings returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create cases for security findings returns \"Created\" response"
+    }
+  ],
+  "DetachCase": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Detach security findings from their case returns \"No Content\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [
@@ -1567,6 +1653,18 @@
       "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
+  "SearchSecurityFindings": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Search security findings returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3678541639",
+      "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
   "TestSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -1584,6 +1682,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a critical asset returns \"OK\" response"
     }
   ],
   "UpdateCustomFramework": [
@@ -1619,6 +1724,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2609327779",
+      "description": "Validate a detection rule with detection method 'new_value' with enabled feature 'instantaneousBaseline' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1812,6 +1922,13 @@
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
+  "AddTeamHierarchyLink": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create a team hierarchy link returns \"OK\" response"
+    }
+  ],
   "CreateTeamLink": [
     {
       "group": "teams",
@@ -1829,6 +1946,13 @@
       "group": "teams",
       "suffix": "_252121814",
       "description": "Create a team with V2 fields returns \"CREATED\" response"
+    }
+  ],
+  "CreateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create team notification rule returns \"OK\" response"
     }
   ],
   "SyncTeams": [
@@ -1857,6 +1981,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update permission setting for team returns \"OK\" response"
+    }
+  ],
+  "UpdateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update team notification rule returns \"OK\" response"
     }
   ],
   "CreateUser": [

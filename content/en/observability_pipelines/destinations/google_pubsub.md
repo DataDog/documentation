@@ -1,7 +1,13 @@
 ---
 title: Google Pub/Sub Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
