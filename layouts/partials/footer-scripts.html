@@ -58,10 +58,12 @@ hugo defaults to environment development with hugo server
 
 {{- $tooltipOpts := dict "targetPath" "static/tooltip.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
 {{- $tooltipJs := resources.Get "scripts/components/tooltip.js" | js.Build $tooltipOpts -}}
+{{- $copyButtonJs := resources.Get "scripts/components/page-copy-button.js" | js.Build -}}
 {{- $anePopupBannerOpts := dict "targetPath" "static/ane-popup-banner.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
 {{- $anePopupBannerJs := resources.Get "scripts/helpers/ane-popup-banner.js" | js.Build $anePopupBannerOpts -}}
 {{- if $isProd -}}
   {{- $tooltipJs = $tooltipJs | fingerprint "sha512" -}}
 {{- end -}}
 <script type="text/javascript" src="{{ $tooltipJs.Permalink }}" {{ if $isProd }} integrity="{{ $tooltipJs.Data.Integrity }}" {{ end }}></script>
+<script type="text/javascript" src="{{ $copyButtonJs.Permalink }}" {{ if $isProd }} integrity="{{ $copyButtonJs.Data.Integrity }}" {{ end }}></script>
 <script type="text/javascript" src="{{ $anePopupBannerJs.Permalink }}" {{ if $isProd }} integrity="{{ $anePopupBannerJs.Data.Integrity }}" {{ end }}></script>

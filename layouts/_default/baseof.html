@@ -10,12 +10,6 @@
     {{ partialCached "markdoc-assets.html" . }}
   {{ end }}
 
-  {{- $mdURL := printf "https://docs.datadoghq.com%s.md" (strings.TrimSuffix "/" .RelPermalink) -}}
-  {{- $pages := partialCached "pages-json-cache.html" "pages.json" -}}
-
-  {{- if index $pages $mdURL -}}
-    <meta name="dd:plaintext-md-url" content="{{ $mdURL }}">
-  {{- end -}}
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
   {{ partial "preload.html" . }}
