@@ -4,7 +4,7 @@ aliases:
 - /cloudprem/configure/cluster_sizing/
 description: Learn about cluster sizing for CloudPrem
 further_reading:
-- link: "/cloudprem/install/network/ingress/"
+- link: "/cloudprem/introduction/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
 - link: "/cloudprem/configure/pipelines/"

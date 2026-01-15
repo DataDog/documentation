@@ -8,6 +8,9 @@ further_reading:
 - link: "/cloudprem/operate/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting CloudPrem"
+- link: "/logs/explorer/search_syntax/"
+  tag: "Documentation"
+  text: "Log Search Syntax"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}

@@ -13,6 +13,10 @@ CloudPrem can be deployed in various environments, from cloud-managed Kubernetes
 
 ## Prerequisites
 
+<div class="alert alert-info">
+If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not activated on your account. Join the <a href="https://www.datadoghq.com/product-preview/cloudprem/">CloudPrem Preview</a> to activate CloudPrem on your account.
+</div>
+
 ### Kubernetes cluster requirements
 
 | Requirement            | Details                                                                                  |
@@ -39,3 +43,5 @@ CloudPrem supports the following object storage types:
   {{< nextlink href="/cloudprem/install/docker" >}}Install locally with Docker for testing{{< /nextlink >}}
   {{< nextlink href="/cloudprem/install/custom_k8s" >}}Install on Custom Kubernetes (manual){{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: https://www.datadoghq.com/product-preview/cloudprem/

@@ -4,7 +4,7 @@ aliases:
 - /cloudprem/configure/aws_config/
 description: Learn how to install and configure CloudPrem on AWS EKS
 further_reading:
-- link: "/cloudprem/install/network/ingress/"
+- link: "/cloudprem/introduction/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
 - link: "/cloudprem/ingest/"
@@ -122,7 +122,6 @@ echo ""
 
 1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
 2. [Verify installation](#verification)
-3. [Configure your Datadog account](#configure-your-datadog-account)
 
 ## Install the CloudPrem Helm chart
 
