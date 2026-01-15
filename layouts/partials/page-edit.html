@@ -1,6 +1,7 @@
 {{ $ctx := .ctx }}
 {{ $type := .type}}
 {{ $editLink := "" }}
+{{ $plaintextUrl := "" }}
 {{ if ne $ctx.Params.disable_edit true }}
 {{ if $ctx.Params.dependencies }}
 {{/* Files with dependencies link to corresponding URL */}}
@@ -40,6 +41,8 @@
     {{ with $ctx.File }}
         {{ $editLink = ( printf "https://github.com/DataDog/documentation/edit/master/content/%s/%s/" $ctx.Page.Lang $ctx.File.Path ) }}
         {{ partial "page-edit-body.html" (dict "ctx" $ctx "link" $editLink "type" $type) }}
+        {{ $plaintextUrl = ( printf "https://github.com/DataDog/documentation/edit/master/content/%s" $ctx.File.Path ) }}
+        {{ partial "page-copy.html" (dict "ctx" $ctx "plaintextUrl" $plaintextUrl) }}
     {{ end }}
 
 {{ end }}
