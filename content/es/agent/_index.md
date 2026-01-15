@@ -173,16 +173,16 @@ Los resultados que se muestran a continuación se obtuvieron a partir de una rec
 ## Recursos adicionales
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Instala y configura el Datadog Agent en Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/cluster_agent">]]<u>Agent del clúster</u>: Instala y configura el Agent del clúster para Kubernetes, una versión del Datadog Agent creada para recopilar eficazmente datos de monitorización de todo un clúster orquestado.{{< /nextlink >}}
+  {{< nextlink href="/agent/cluster_agent">}}<u>Agent del clúster</u>: Instala y configura el Agent del clúster para Kubernetes, una versión del Datadog Agent creada para recopilar eficazmente datos de monitorización de todo un clúster orquestado.{{< /nextlink >}}
   {{< nextlink href="/agent/amazon_ecs">}}Amazon<u>ECS</u>: Instala y configura el Datadog Agent en Amazon ECS.{{< /nextlink >}}
   {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: Instala y configura el Datadog Agent con Amazon ECS en AWS Fargate{{< /nextlink >}}
-  {{< nextlink href="/agent/iot"><u>}}IoT</u>: Instala y configura el Datadog IoT Agent, una versión del Datadog Agent optimizada para monitorizar dispositivos y aplicaciones integradas de IoT.{{< /nextlink >}}
+  {{< nextlink href="/agent/iot">}}<u>IoT</u>: Instala y configura el Datadog IoT Agent, una versión del Datadog Agent optimizada para monitorizar dispositivos y aplicaciones integradas de IoT.{{< /nextlink >}}
   {{< nextlink href="/agent/logs">}}<u>Recopilación de logs</u>: Activa y configura la recopilación de logs en la aplicación del Datadog Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/configuration/proxy"><u>}}Proxy</u>: Si la configuración de tu red restringe el tráfico saliente, utiliz un proxy para el tráfico del Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/versions/"><u>}}Versiones</u>: El Agent 7 es la última versión principal del Datadog Agent. Más información sobre los cambios entre las versiones principales del Agent y cómo actualizarlo.{{< /nextlink >}}
-  {{< nextlink href="/agent/troubleshooting">]]<u>Solucionar problemas</u>: Encuentra información sobre solucionar problemas para el Datadog Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/guide">]]<u>Guías</u>: Se trata de tutoriales detallados, paso a paso, para el uso del Agent.{{< /nextlink >}}
-  {{< nextlink href="/agent/security">]]<u>Seguridad</u>: Información sobre las principales capacidades y funciones de seguridad a disposición de los clientes para garantizar la seguridad de su entorno.{{< /nextlink >}}
+  {{< nextlink href="/agent/configuration/proxy">}}<u>Proxy</u>: Si la configuración de tu red restringe el tráfico saliente, utiliz un proxy para el tráfico del Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/versions/">}}<u>Versiones</u>: El Agent 7 es la última versión principal del Datadog Agent. Más información sobre los cambios entre las versiones principales del Agent y cómo actualizarlo.{{< /nextlink >}}
+  {{< nextlink href="/agent/troubleshooting">}}<u>Solucionar problemas</u>: Encuentra información sobre solucionar problemas para el Datadog Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/guide">}}<u>Guías</u>: Se trata de tutoriales detallados, paso a paso, para el uso del Agent.{{< /nextlink >}}
+  {{< nextlink href="/agent/security">}}<u>Seguridad</u>: Información sobre las principales capacidades y funciones de seguridad a disposición de los clientes para garantizar la seguridad de su entorno.{{< /nextlink >}}
   {{< nextlink href="/getting_started/observability_pipelines">}}<u>Configura Observability Pipelines y Datadog</u>: Despliega Observability Pipelines Worker como agregador para recopilar, transformar y redirigir todos tus logs y métricas a cualquier destino.{{< /nextlink >}}
 {{< /whatsnext >}}
 
