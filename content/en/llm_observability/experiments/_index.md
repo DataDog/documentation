@@ -29,7 +29,7 @@ LLM Observability [Experiments][9] supports the entire lifecycle of building LLM
 1. Install Datadog's LLM Observability Python SDK:
 
    ```shell
-   pip install ddtrace>=3.18.0
+   pip install ddtrace>=4.1.0
    ```
 
 2. Enable LLM Observability:
@@ -480,7 +480,7 @@ jobs:
         with:
           python-version: '3.13.0' # Or your desired Python version
       - name: Install Dependencies
-        run: pip install ddtrace>=3.15.0 dotenv
+        run: pip install ddtrace>=4.1.0 dotenv
       - name: Run Script
         run: python ./experiment_sdk_demo/main.py
         env:

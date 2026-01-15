@@ -2921,6 +2921,78 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: Update a critical asset
+      url: '#update-a-critical-asset'
+      identifier: security-monitoring-update-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Get a critical asset
+      url: '#get-a-critical-asset'
+      identifier: security-monitoring-get-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Delete a critical asset
+      url: '#delete-a-critical-asset'
+      identifier: security-monitoring-delete-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Get critical assets affecting a specific rule
+      url: '#get-critical-assets-affecting-a-specific-rule'
+      identifier: security-monitoring-get-critical-assets-affecting-a-specific-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCriticalAssetsAffectingRule
+        unstable: []
+        order: 0
+    - name: Create a critical asset
+      url: '#create-a-critical-asset'
+      identifier: security-monitoring-create-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Get all critical assets
+      url: '#get-all-critical-assets'
+      identifier: security-monitoring-get-all-critical-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringCriticalAssets
+        unstable: []
+        order: 0
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -4242,7 +4314,7 @@ menu:
           - CreateHostTags
         unstable: []
         order: 3
-    - name: Get host tags
+    - name: Get Host Tags
       url: '#get-host-tags'
       identifier: tags-get-host-tags
       parent: tags
@@ -4266,9 +4338,9 @@ menu:
           - DeleteHostTags
         unstable: []
         order: 5
-    - name: Get Tags
-      url: '#get-tags'
-      identifier: tags-get-tags
+    - name: Get All Host Tags
+      url: '#get-all-host-tags'
+      identifier: tags-get-all-host-tags
       parent: tags
       generated: true
       params:
