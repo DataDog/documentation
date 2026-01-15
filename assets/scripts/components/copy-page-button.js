@@ -1,4 +1,4 @@
-async function oldCopyPageText(copyButton) {
+async function copyPageText(copyButton) {
     console.log('Copying page text to clipboard ...');
     const mdUrl = copyButton.dataset.mdUrl;
 
@@ -12,7 +12,7 @@ async function oldCopyPageText(copyButton) {
         const response = await fetch(mdUrl, { credentials: 'omit' });
 
         if (!response.ok) {
-            throw new Error(`Failed to fetch markdown: ${response.status}`);
+            throw new Error(`Failed to fetch Markdown: ${response.status}`);
         }
 
         const text = await response.text();
@@ -20,43 +20,19 @@ async function oldCopyPageText(copyButton) {
         await navigator.clipboard.writeText(text);
 
         // Optional UX feedback
-        copyButton.textContent = 'Copied!';
-        setTimeout(() => {
-            copyButton.textContent = 'Copy page text';
-        }, 1500);
-        console.log('... text copied to clipboard.');
-    } catch (err) {
-        console.error('Error copying plaintext markdown:', err);
-        alert('Failed to copy page text. Please try again.');
-    }
-}
+        const copyText = document.getElementById('page-copy-text');
+        const copiedText = document.getElementById('page-copied-text');
 
-async function newCopyPageText(copyButton) {
-    console.log('Copying page text to clipboard ...');
-    const mdUrl = copyButton.dataset.mdUrl;
+        if (copyText && copiedText) {
+            copyText.style.display = 'none';
+            copiedText.style.display = 'inline';
 
-    if (!mdUrl) {
-        console.error('No data-md-url found on button');
-        return;
-    }
-
-    try {
-        // TODO: See if you can just get rid of the credentials option
-        const response = await fetch(mdUrl, { credentials: 'omit' });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch markdown: ${response.status}`);
+            setTimeout(() => {
+                copyText.style.display = 'inline';
+                copiedText.style.display = 'none';
+            }, 1500);
         }
 
-        const text = await response.text();
-
-        await navigator.clipboard.writeText(text);
-
-        // Optional UX feedback
-        copyButton.textContent = 'Copied!';
-        setTimeout(() => {
-            copyButton.textContent = 'Copy page text';
-        }, 1500);
         console.log('... text copied to clipboard.');
     } catch (err) {
         console.error('Error copying plaintext markdown:', err);
@@ -64,22 +40,10 @@ async function newCopyPageText(copyButton) {
     }
 }
 
-const oldCopyButton = document.getElementById('old-copy-plaintext-button');
+const copyBtn = document.getElementById('page-copy-btn');
 
-if (oldCopyButton) {
-    console.log('Old copy button found');
-    console.log(oldCopyButton);
-    oldCopyButton.addEventListener('click', function () {
-        oldCopyPageText(this);
-    });
-}
-
-const sidebarCopyButton = document.getElementById('sidebar-copy-btn');
-
-if (sidebarCopyButton) {
-    console.log('Sidebar copy button found');
-    console.log(sidebarCopyButton);
-    sidebarCopyButton.addEventListener('click', function () {
-        newCopyPageText(this);
+if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+        copyPageText(this);
     });
 }

@@ -13,11 +13,5 @@
   {{ partial "site_support_banner/site_support_banner.html" . }}
 
   {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }}
-  {{- $mdURL := printf "https://docs.datadoghq.com%s.md" (strings.TrimSuffix "/" .RelPermalink) -}}
-  {{- $pages := partialCached "pages-json-cache.html" "pages.json" -}}
-
-  {{- if index $pages $mdURL -}}
-    <button data-md-url="{{$mdURL}}" id="old-copy-plaintext-button">Copy page text</button>
-  {{- end -}}
   {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 {{ end }}

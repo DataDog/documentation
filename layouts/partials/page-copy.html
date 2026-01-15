@@ -5,14 +5,12 @@
   {{- $pages := partialCached "pages-json-cache.html" "pages.json" -}}
 
   {{- if index $pages $mdURL -}}
-    <div class="pb-2 toc-edit-btn">
-      <a href="#" class="text-primary text-uppercase font-semibold" role="button" id="copy-plaintext-button" data-md-url="{{ $mdURL }}">
+    <div id="page-copy-btn" data-md-url="{{ $mdURL }}" class="pb-2 toc-copy-btn">
+      <a href="#" class="text-primary text-uppercase font-semibold" role="button" data-md-url="{{ $mdURL }}">
         {{ partial "img.html" (dict "root" $ctx "src" "icons/copy.svg" "class" "static" "alt" "copy" "width" "25") }}
-        {{ i18n "copy" }}
+        <span id="page-copy-text">{{ i18n "copy" }}</span>
+        <span id="page-copied-text">{{ i18n "copied" }}</span>
       </a>
     </div>
-
-    <!-- (optional) if you still want the div too -->
-    <div id="sidebar-copy-btn" data-md-url="{{ $mdURL }}">Copy</div>
   {{- end -}}
 {{- end -}}
