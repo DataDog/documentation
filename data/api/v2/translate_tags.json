@@ -147,6 +147,10 @@
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
+  "google-chat-integration": {
+    "name": "Google Chat Integration",
+    "description": "Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)\ndirectly through the Datadog API."
+  },
   "ip-allowlist": {
     "name": "IP Allowlist",
     "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information."
@@ -177,7 +181,7 @@
   },
   "logs-custom-destinations": {
     "name": "Logs Custom Destinations",
-    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
+    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\n**Note**: Log forwarding is not available for the Government (US1-FED) site. Contact your account representative for more information.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",
