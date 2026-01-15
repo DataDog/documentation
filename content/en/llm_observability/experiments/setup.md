@@ -49,8 +49,29 @@ A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ t
 - **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
 - **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
 
-See [Datasets][1] for details on how to create, retrieve, and manage datasets.
+To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
 
+```python
+# Create dataset from CSV
+dataset = LLMObs.create_dataset_from_csv(
+    csv_path="questions.csv",
+    dataset_name="capitals-of-the-world",
+    project_name="capitals-project",              # Optional: defaults to the project name from LLMObs.enable
+    description="Geography quiz dataset",         # Optional: Dataset description
+    input_data_columns=["question", "category"],  # Columns to use as input
+    expected_output_columns=["answer"],           # Optional: Columns to use as expected output
+    metadata_columns=["difficulty"],              # Optional: Additional columns as metadata
+    csv_delimiter=","                             # Optional: Defaults to comma
+)
+
+# Example "questions.csv":
+# question,category,answer,difficulty
+# What is the capital of Japan?,geography,Tokyo,medium
+# What is the capital of Brazil?,geography,Brasília,medium
+
+```
+
+See [Datasets][1] for more information about datasets, including how to manually create them, how to retrieve and manage datasets, and how Datadog retains dataset versions.
 
 ## Create an experiment
 An _experiment_ lets you systematically test your LLM application by running your agent across a set of scenarios from your dataset and measuring performance against the expected outputs using evaluators. You can then compare how different app configurations perform, side by side.
