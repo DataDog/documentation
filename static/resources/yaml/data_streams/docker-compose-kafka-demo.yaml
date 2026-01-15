@@ -78,7 +78,7 @@ services:
       DD_API_KEY: ${DD_API_KEY:?DD_API_KEY is required}
       DD_SITE: ${DD_SITE:-datadoghq.com}
       DD_HOSTNAME: kafka-demo-agent
-      DD_TAGS: "env:demo cluster:kafka-demo"
+      DD_TAGS: "env:demo kafka_cluster:dd-kafka-demo"
       DD_DATA_STREAMS_ENABLED: "true"
       DD_APM_ENABLED: "true"
       DD_APM_NON_LOCAL_TRAFFIC: "true"
