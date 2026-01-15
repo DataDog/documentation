@@ -122,6 +122,25 @@ end_of_record
 {{< /code-block >}}
 {{% /collapse-content %}}
 
+{{% collapse-content title="Go Coverprofile" level="h4" expanded=false id="go-coverprofile" %}}
+{{< code-block lang="text" >}}
+mode: atomic
+example/calculator.go:51.148,53.2 1 0
+example/calculator.go:55.190,61.15 3 0
+example/calculator.go:61.15,64.3 2 0
+example/calculator.go:66.2,67.16 2 0
+example/calculator.go:67.16,69.3 1 0
+example/clients/api_client.go:27.87,31.2 3 2
+example/clients/api_client.go:34.85,36.2 1 3
+example/clients/api_client.go:39.126,44.2 4 3
+example/clients/api_client.go:47.106,50.2 2 3
+example/notifications/notifier.go:49.79,51.2 1 3
+example/notifications/notifier.go:60.33,69.2 1 0
+example/notifications/notifier.go:79.131,86.15 3 2
+example/notifications/notifier.go:104.3,104.10 1 3
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 {{% collapse-content title="Cobertura XML" level="h4" expanded=false id="cobertura-xml" %}}
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
