@@ -2,6 +2,12 @@
 title: Forms
 description: Build forms to collect input, analyze responses, and trigger automations.
 disable_toc: false
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/datadog-forms
+    tag: Blog
+    text: Turn feedback into action across your engineering org with Datadog Forms
+
 ---
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSe_OxTl8E_djqF107dKJDhcUuLxh1n9ytEKT6CZa-u8ZPqokg/viewform" btn_hidden="false" header="Join the Preview!" >}}
@@ -89,6 +95,10 @@ To visualize form responses in a dashboard:
 1. [Create a dashboard][9], then [add a widget][14]. For forms, all widgets except Timeseries are supported.
 1. When [defining the metric][15], select **DDSQL Editor** and the datastore query you created earlier.
 1. Finish [configuring your widget][12], then click **Save**.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/actions/forms
 [2]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder

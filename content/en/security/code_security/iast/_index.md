@@ -7,6 +7,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-code-security/"
     tag: "Blog"
     text: "Protect the life cycle of your application code and libraries with Datadog Code Security"
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
 ---
 
 ## Overview

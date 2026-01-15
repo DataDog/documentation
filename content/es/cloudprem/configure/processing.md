@@ -11,8 +11,8 @@ further_reading:
 title: Configuración de procesamiento
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem está en Vista previa.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem está en vista previa" >}}
+  Únete a la vista previa de CloudPrem para acceder a las nuevas funciones de gestión de logs autoalojadas.
 {{< /callout >}}
 
 ## Información general

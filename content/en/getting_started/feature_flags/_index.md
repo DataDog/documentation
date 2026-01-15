@@ -2,15 +2,21 @@
 title: Getting Started with Feature Flags
 description: Manage feature delivery with integrated observability, real-time metrics, and OpenFeature-compatible gradual rollouts.
 further_reading:
-- link: 'https://openfeature.dev/docs/reference/technologies/client/web/'
-  tag: 'External Site'
-  text: 'OpenFeature Web SDK documentation'
+- link: '/feature_flags/client/'
+  tag: 'Documentation'
+  text: 'Client-Side SDKs'
+- link: '/feature_flags/server/'
+  tag: 'Documentation'
+  text: 'Server-Side SDKs'
 - link: 'https://www.datadoghq.com/blog/feature-flags/'
   tag: 'Blog'
   text: 'Ship features faster and safer with Datadog Feature Flags'
 - link: 'https://www.datadoghq.com/blog/experimental-data-datadog/'
   tag: 'Blog'
   text: 'How to bridge speed and quality in experiments through unified data'
+- link: 'https://www.datadoghq.com/blog/datadog-feature-flags-cloud-resilience/'
+  tag: 'Blog'
+  text: 'How Datadog Feature Flags is resilient to cloud provider failures'
 site_support_id: getting_started_feature_flags
 ---
 
@@ -29,6 +35,18 @@ Datadog feature flags offer a powerful, integrated way to manage feature deliver
 * **Built for experimentation:** Target specific audiences for A/B tests, roll out features gradually with canary releases, and automatically roll back when regressions are detected.
 
 * **OpenFeature compatible:** Built on the OpenFeature standard, ensuring compatibility with existing OpenFeature implementations and providing a vendor-neutral approach to feature flag management.
+
+## Feature Flags SDKs
+
+This guide uses the JavaScript browser SDK as an example. You can integrate Datadog Feature Flags into any application using one of the following SDKs:
+
+### Client-side SDKs
+
+{{< partial name="feature_flags/feature_flags_client.html" >}}
+
+### Server-side SDKs
+
+{{< partial name="feature_flags/feature_flags_server.html" >}}
 
 ## Configure your environments
 
@@ -139,5 +157,5 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 [1]: https://openfeature.dev/docs/reference/technologies/client/web/
 [2]: https://app.datadoghq.com/feature-flags/create
-[3]: https://app.datadoghq.com/feature-flags/environments
+[3]: https://app.datadoghq.com/feature-flags/settings/environments
 [4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens

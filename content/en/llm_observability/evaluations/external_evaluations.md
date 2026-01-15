@@ -27,7 +27,11 @@ While LLM Observability provides a few out-of-the-box evaluations for your trace
   * Unicode is not supported.
 * Evaluation labels must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
 
-<div class="alert alert-info">Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.</div>
+<div class="alert alert-info">
+
+Evaluation labels must be unique for a given LLM application (<code>ml_app</code>) and organization.
+
+</div>
 
 ## Submitting external evaluations with the SDK
 
@@ -56,7 +60,10 @@ def llm_call():
         label="harmfulness",
         metric_type="score", # can be score or categorical
         value=my_harmfulness_eval(completion),
-        tags={"reasoning": "it makes sense", "type": "custom"},
+        tags={"type": "custom"},
+        timestamp_ms=1765990800016, # optional, unix timestamp in milliseconds
+        assessment="pass", # optional, "pass" or "fail"
+        reasoning="it makes sense", # optional, judge llm reasoning
     )
 {{< /code-block >}}
 
@@ -64,6 +71,8 @@ def llm_call():
 ## Submitting external evaluations with the API
 
 You can use the evaluations API provided by LLM Observability to send evaluations associated with spans to Datadog. See the [Evaluations API][2] for more details on the API specifications.
+
+To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation.
 
 ### Example
 
@@ -88,7 +97,12 @@ You can use the evaluations API provided by LLM Observability to send evaluation
           "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
-          "score_value": 3
+          "score_value": 3,
+          // source:otel required only for OpenTelemetry spans
+          "tags": ["source:otel"],
+          "timestamp_ms": 1765990800016,
+          "assessment": "pass",
+          "reasoning": "it makes sense"
         }
       ]
     }
@@ -104,3 +118,4 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 [2]: /llm_observability/setup/api/?tab=model#evaluations-api
 [3]: /llm_observability/setup/sdk/python/#evaluations
 [4]: /llm_observability/setup/sdk/nodejs/#evaluations
+[5]: /llm_observability/instrumentation/otel_instrumentation
