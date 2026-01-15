@@ -40,10 +40,12 @@ async function copyPageText(copyButton) {
     }
 }
 
-const copyBtn = document.getElementById('page-copy-btn');
+export function initCopyPageButton() {
+    const copyBtn = document.getElementById('page-copy-btn');
 
-if (copyBtn) {
-    copyBtn.addEventListener('click', function () {
-        copyPageText(this);
-    });
+    if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+            copyPageText(this);
+        });
+    }
 }
