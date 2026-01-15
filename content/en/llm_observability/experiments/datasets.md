@@ -1,8 +1,11 @@
-## Datasets
+---
+title: Datasets
+description: Using datasets in LLM Observability Experiments, including how to create, retrieve, and manage datasets, as well as information about versioning.
+---
 
-A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
+In LLM Observability Experiments, a _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
 
-- **input** (required): Represents all the information that the agent can access in a [task](#task).
+- **input** (required): Represents all the information that the agent can access in a task.
 - **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
 - **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
 
@@ -92,7 +95,7 @@ print(len(dataset))
 
 #### Exporting a dataset to pandas
 
-The Dataset class also provides the method `as_dataframe()`, which allows you to transform a dataset as a [pandas DataFrame][11].
+The Dataset class also provides the method `as_dataframe()`, which allows you to transform a dataset as a [pandas DataFrame][1].
 
 <div class="alert alert-info"><a href="https://pandas.pydata.org/docs/index.html">Pandas</a> is required for this operation. To install pandas, <code>pip install pandas</code>.</div>
 
@@ -181,3 +184,5 @@ dataset.delete(1)  # Deletes the second record
 # Save changes to Datadog
 dataset.push()
 ```
+
+[1]: https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html

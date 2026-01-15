@@ -1,14 +1,13 @@
 ---
 title: Experiments API
-description: HTTP API
+description: Reference the LLM Observability Experiments HTTP API
 ---
 
-
-## HTTP API
+As an alternative to [using LLM Observability Experiments with the Python SDK][1], you can use the Experiments HTTP API to create and run experiments.
 
 ### Postman quickstart
 
-Datadog highly recommends importing the [Experiments Postman collection][7] into [Postman][8]. Postman's _View documentation_ feature can help you better understand this API.
+Datadog highly recommends importing the [Experiments Postman collection][2] into [Postman][3]. Postman's _View documentation_ feature can help you better understand this API.
 
 ### Request format
 
@@ -546,3 +545,7 @@ Push events (spans and metrics) for an experiment.
 Empty body on success.
 
 {{% /collapse-content %}}
+
+[1]: /llm_observability/experiments/setup
+[2]: https://github.com/DataDog/llm-observability/tree/main/experiments
+[3]: https://www.postman.com/

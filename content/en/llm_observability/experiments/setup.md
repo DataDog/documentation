@@ -3,19 +3,19 @@ title: Setup and Usage
 description: How to set up LLM Observability Experiments and start running experiments.
 ---
 
-This page describes how to set up and use LLM Observability Experiments.
+This page describes how to set up and use LLM Observability Experiments with the Python SDK.
 
-## Set up LLM Observability
+## Setup LLM Observability
 
-If you have not already set up Datadog LLM Observability: 
+If you have not already set up LLM Observability:
 
-1. **Install Datadog's LLM Observability Python SDK**:
+1. Install Datadog's LLM Observability Python SDK:
 
    ```shell
-   pip install ddtrace>=3.18.0
+   pip install ddtrace>=4.1.0
    ```
 
-2. **Enable LLM Observability**:
+2. Enable LLM Observability:
 
    ```python
    from ddtrace.llmobs import LLMObs
@@ -45,11 +45,9 @@ LLMObs.enable(
 
 A _dataset_ is a collection of _inputs_, and _expected outputs_ and _metadata_ that represent scenarios you want to tests your agent on. Each dataset is associated with a _project_.  
 
-- **input** (required): Represents all the information that the agent can access in a [task](#create-an-experiment).
+- **input** (required): Represents all the information that the agent can access in a task.
 - **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assesss. 
 - **metadata** (optional): Contains any useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, notes.
-
-You can construct datasets from production data in the Datadog UI by selecting **Add to Dataset** in any span page, or by using the [Experiments SDK][1]. 
 
 See [Datasets][1] for details on how to create, retrieve, and manage datasets.
 
@@ -65,16 +63,16 @@ An _experiment_ lets you systematically test your LLM application by running you
    - **score**: returns a numeric value (float)
    - **categorical**: returns a labeled category (string)
 
-### Summary Evaluators
-Summary Evaluators are optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary Evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
+- **summary evaluators**: Optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
 
-Datadog supports the following Summary Evaluator types:
-- **Boolean**: returns true or false
-- **score**: returns a numeric value (float)
-- **categorical**: returns a labeled category (string)
+   Datadog supports the following Summary Evaluator types:
+   - **Boolean**: returns true or false
+   - **score**: returns a numeric value (float)
+   - **categorical**: returns a labeled category (string)
 
 
 To create an experiment:
+
 
 1. Load a dataset
    ```python
@@ -95,8 +93,8 @@ To create an experiment:
    A task can take any non-null type as `input_data` (string, number, Boolean, object, array). The output that will be used in the Evaluators can be of any type.
    This example generates a string, but a dict can be generated as output to store any intermediary information and compare in the Evaluators.
 
-   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][12] you use in production.
-   If you use a [supported framework][13] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+   You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][2] you use in production.
+   If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
 4. Define evaluator functions.
@@ -179,11 +177,11 @@ To create an experiment:
    print(f"View experiment: {experiment.url}")
    ```
 
-## Set up an automated experiment in CI/CD
+### Setting up an automated experiment in CI/CD
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
-### GitHub Actions
-This section assumes you have completed the [setup][14], [projects][15], [datasets][16], and [experiments][17] sections successfully. You can use the following Python script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
+#### GitHub Actions
+This section assumes you have completed the [setup](#setup), [projects](#create-a-project), [datasets](#create-a-dataset), and [experiments](#create-an-experiment) sections successfully. You can use the following Python script and GitHub Actions workflow as templates to run an experiment automatically whenever code is pushed to your repository.
 
 **Note**: Workflow files live in the `.github/workflows` directory and must use YAML syntax with the `.yml` extension.
 
@@ -290,7 +288,7 @@ jobs:
         with:
           python-version: '3.13.0' # Or your desired Python version
       - name: Install Dependencies
-        run: pip install ddtrace>=3.15.0 dotenv
+        run: pip install ddtrace>=4.1.0 dotenv
       - name: Run Script
         run: python ./experiment_sdk_demo/main.py
         env:
@@ -299,3 +297,5 @@ jobs:
 ```
 
 [1]: /llm_observability/experiments/datasets
+[2]: /llm_observability/instrumentation/custom_instrumentation?tab=decorators#trace-an-llm-application
+[3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
