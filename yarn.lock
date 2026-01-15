@@ -6566,15 +6566,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.16.tgz":
-  version: 5.5.16
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.16.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.17.tgz":
+  version: 5.5.17
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.17.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
     "@vitejs/plugin-react": "npm:^4.3.3"
     cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/versionBetween/cdocs-data-v1.3.3.tgz"
-    cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/markdoc-semantic-versioning-updates/cdocs-markdoc-v1.1.4.tgz"
+    cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz"
     chokidar: "npm:^4.0.3"
     chroma-highlight: "npm:^2.4.2"
     interweave: "npm:^13.1.0"
@@ -6593,13 +6593,13 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/161f347a325d480f295b8e4c45e2ff0283034b76ec5bad444acce177316f08f64d25421be254aaea2e63b382336dfa5944dbee529242080563890a655cd5860d
+  checksum: 10/425b51420306a7555e183a7487ddc288b16a8d406ec58a01bcb2e4f56479ee06bf6cacff226370941846494a543b4a9d88e8b973c540fa4268e4f0decd8e4e32
   languageName: node
   linkType: hard
 
-"cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/markdoc-semantic-versioning-updates/cdocs-markdoc-v1.1.4.tgz":
-  version: 1.1.4
-  resolution: "cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/markdoc-semantic-versioning-updates/cdocs-markdoc-v1.1.4.tgz"
+"cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz":
+  version: 1.0.2
+  resolution: "cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz"
   dependencies:
     "@types/linkify-it": "npm:^3.0.1"
     "@types/markdown-it": "npm:12.2.3"
@@ -6608,7 +6608,7 @@ __metadata:
       optional: true
     "@types/markdown-it":
       optional: true
-  checksum: 10/5a6e3b920a96e11b1c2430e81c93c17fe39401be5c3724327ae18364c6cc649d663cbe3ed3434fc702dfb75381b8613d92b3c906c220abc695517307c6a0a946
+  checksum: 10/844190c9cbb525414c8f24cf874908535504cacb8d5ecbe86edfff00bb595f233d29044ed763b0b612e6fdccaa2376aa4999a56e3d94cfef0f4b325fcad9602e
   languageName: node
   linkType: hard
 
@@ -7640,7 +7640,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.16.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/heston/semantic-versioning/cdocs-hugo-integration-v5.5.17.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"
