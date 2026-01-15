@@ -10,4 +10,4 @@ If you want to add another group of processors for a destination:
 1. You can toggle the switch to enable and disable the processor group and also each individual processor.
 
 **Notes**:
-<br>- There is a limit of 10 processor groups for a pipeline canvas.
+- There is a limit of 10 processor groups for a pipeline canvas.
