@@ -73,6 +73,53 @@ These are the available destinations:
 [1]: /observability_pipelines/destinations/datadog_metrics/
 
 {{% /tab %}}
+{{% tab "Rehydration" %}}
+
+- [Amazon OpenSearch][1]
+- [Amazon S3][2]
+- [Amazon Security Lake][3]
+- [Azure Storage][4]
+- [Datadog CloudPrem][5]
+- [CrowdStrike Next-Gen SIEM][6]
+- [Datadog Logs][7]
+- [Elasticsearch][8]
+- [Google Cloud Storage][9]
+- [Google Pub/Sub][10]
+- [Google SecOps][11]
+- [HTTP Client][12]
+- [Kafka][13]
+- [Microsoft Sentinel][14]
+- [New Relic][15]
+- [OpenSearch][16]
+- [SentinelOne][17]
+- [Socket][18]
+- [Splunk HTTP Event Collector (HEC)][19]
+- [Sumo Logic Hosted Collector][20]
+- [Syslog][21]
+
+[1]: /observability_pipelines/destinations/amazon_opensearch/
+[2]: /observability_pipelines/destinations/amazon_s3/
+[3]: /observability_pipelines/destinations/amazon_security_lake/
+[4]: /observability_pipelines/destinations/azure_storage/
+[5]: /observability_pipelines/destinations/cloudprem/
+[6]: /observability_pipelines/destinations/crowdstrike_ng_siem/
+[7]: /observability_pipelines/destinations/datadog_logs/
+[8]: /observability_pipelines/destinations/elasticsearch/
+[9]: /observability_pipelines/destinations/google_cloud_storage/
+[10]: /observability_pipelines/destinations/google_pubsub/
+[11]: /observability_pipelines/destinations/google_secops/
+[12]: /observability_pipelines/destinations/http_client/
+[13]: /observability_pipelines/destinations/kafka/
+[14]: /observability_pipelines/destinations/microsoft_sentinel/
+[15]: /observability_pipelines/destinations/new_relic/
+[16]: /observability_pipelines/destinations/opensearch/
+[17]: /observability_pipelines/destinations/sentinelone/
+[18]: /observability_pipelines/destinations/socket/
+[19]: /observability_pipelines/destinations/splunk_hec/
+[20]: /observability_pipelines/destinations/sumo_logic_hosted_collector/
+[21]: /observability_pipelines/destinations/syslog/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Template syntax
