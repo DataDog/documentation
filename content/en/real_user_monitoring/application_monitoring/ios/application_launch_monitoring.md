@@ -58,7 +58,7 @@ Every application behaves differently, so the iOS SDK does not automatically det
 
 The time to full display is manually defined using the `Monitor.reportAppFullyDisplayed()` API in the iOS SDK based on the application’s specific definition of “fully drawn.” 
 
-The example below calls `Monitor.reportAppFullyDisplayed()` to measure the time to full display after the app finishes loading the data needed to render its initial UI. The signal is sent only once the UI has been updated with the received content or the error has been properly handled
+The example below calls `Monitor.reportAppFullyDisplayed()` to measure the time to full display after the app finishes loading the data needed to render its initial UI. The signal is sent only once the UI has been updated with the received content or the error has been properly handled.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -106,8 +106,8 @@ The time to initial display and time to full display are presented as vital even
 
 
 The TTID and TTFD can be queried in the RUM Sessions Explorer using the following attributes on the vital event type:
-- `@vital.type: app_launch`
-- `@vital.name: time_to_initial_display` or `@vital.name: time_to_full_display`
+- `@vital.type:app_launch`
+- `@vital.name:time_to_initial_display` or `@vital.name:time_to_full_display`
 
 Each TTID and TTFD side panel contains a distribution visualization, an indication of whether the launch was cold or warm, and an event waterfall. 
 

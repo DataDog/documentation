@@ -42,13 +42,13 @@ In Android SDK versions 3.5.0+, the time to initial display (TTID) and time to f
 
 Each time to initial display and time to full display is categorized by launch type:
 - [Cold start][3]: The application is launched from scratch. Cold starts happen when the application is launched for the first time since device boot or since the system terminated the process of the application.
-- [Warm start][4]: The application is launched using a subset of the operations that take place during a cold start. Warm starts result from situations such as a user backing out of the application or re-launching the application. Warm starts can also result from the user launching the `Activity` when the OS-process already exists, such as the arrival of a silent push or `WorkManager` job execution."
+- [Warm start][4]: The application is launched using a subset of the operations that take place during a cold start. Warm starts result from situations such as a user backing out of the application or re-launching the application. Warm starts can also result from the user launching the `Activity` when the OS-process already exists, such as the arrival of a silent push or `WorkManager` job execution.
 
 ### Measuring the time to initial display
 The Android SDK automatically measures the TTID. The TTID can be optionally profiled using the Android Mobile Profiler.
 
 ### Measuring the time to full display
-The time to full display is manually defined using the `GlobalRumMonitor.get().reportAppFullyDisplayed` API in the Android SDK based on the application’s specific definition of “fully drawn.” 
+The time to full display is manually defined using the `GlobalRumMonitor.get().reportAppFullyDisplayed()` API in the Android SDK based on the application’s specific definition of “fully drawn.” 
 
 Below is an example where time to full display is determined when home activity is fully loaded.
 
@@ -72,7 +72,7 @@ class SampleApplication : Application() {
 {{% /tab %}}
 {{< /tabs >}}
 
-If you use reportFullyDrawn to identify the moment of full display, you can use getFullyDrawnReporter to subscribe to `reportFullyDrawn` and call `RumMonitor.reportFullyDrawn`. If you do not use reportFullyDrawn, you can still call `RumMonitor.reportFullyDrawn`, but it will make sense only for cold and warm starts, rather than hot starts.
+If you use `reportFullyDrawn` to identify the moment of full display, you can use `getFullyDrawnReporter` to subscribe to `reportFullyDrawn` and call `GlobalRumMonitor.get().reportAppFullyDisplayed()`. If you do not use `reportFullyDrawn`, you can still call `GlobalRumMonitor.get().reportAppFullyDisplayed()`, but it will make sense only for cold and warm starts, rather than hot starts.
 
 <div class="alert alert-danger">
   If the time to full display is not defined, the Android SDK only collects the TTID.
@@ -92,8 +92,8 @@ The time to initial display and time to full display are presented as vital even
 
 
 The TTID and TTFD can be queried in the RUM Sessions Explorer using the following attributes on the vital event type:
-- `@vital.type: app_launch`
-- `@vital.name: time_to_initial_display` or `@vital.name: time_to_full_display`
+- `@vital.type:app_launch`
+- `@vital.name:time_to_initial_display` or `@vital.name:time_to_full_display`
 
 Each TTID and TTFD side panel contains a distribution visualization, an indication of whether the launch was cold or warm, and an event waterfall. 
 
