@@ -1,4 +1,5 @@
 async function copyPageText(copyButton) {
+    console.log('Copying page text to clipboard ...');
     const mdUrl = copyButton.dataset.mdUrl;
 
     if (!mdUrl) {
@@ -23,6 +24,7 @@ async function copyPageText(copyButton) {
         setTimeout(() => {
             copyButton.textContent = 'Copy page text';
         }, 1500);
+        console.log('... text copied to clipboard.');
     } catch (err) {
         console.error('Error copying plaintext markdown:', err);
         alert('Failed to copy page text. Please try again.');
