@@ -11,6 +11,9 @@ further_reading:
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
+  - link: "/code_coverage/monorepo_support"
+    tag: "Documentation"
+    text: "Learn how Code Coverage supports large monorepos"
 algolia:
   tags: ["code coverage"]
 ---
@@ -24,6 +27,10 @@ Code Coverage is in Preview. This product replaces Test Optimization's <a href="
 For setup instructions, see [Set up Code Coverage][2].
 
 {{< img src="/code_coverage/pr_details.png" text="Code Coverage PR details page in Datadog" style="width:100%" >}}
+
+## Gating on Code Coverage
+
+TBD
 
 ## Further reading
 
