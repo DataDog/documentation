@@ -458,7 +458,7 @@ To verify your setup:
 ### Troubleshooting
 
 If you don't see data for buckets you set up for Storage Management:
-   - Check **Storage Management** > **Amazon S3** > **Enable Buckets** for any errors:
+   - Check **Storage Management** > **Amazon S3** > [**Enable Buckets**][6] for any errors:
         
       - **IAM Role(s) Lacking Permissions**: Ensure `s3:GetObject` and `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role. Verify all S3-related permissions are granted as part of [Resource Collection][2].
         
@@ -474,10 +474,11 @@ If you don't see data for buckets you set up for Storage Management:
 | `aws.s3.inventory.average_prefix_size`                        | `bucketname`, `prefix`, `region`                                 | Average object size, in bytes, for objects in a prefix.                                                                                                                                                                         |
 | `aws.s3.inventory.prefix_object_count`                        | `bucketname`, `prefix`, `region`, `storagetype`, `extension`, `delete_marker`, `is_latest`                               | The total number of objects stored in a prefix.                                                                                                                                                                             |
 | `aws.s3.inventory.prefix_object_count.levels`                 | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Object counts aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                                   |
-| `aws.s3.inventory.total_prefix_size.levels`                 | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Prefix size aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                              |
+| `aws.s3.inventory.total_prefix_size.levels`                   | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Prefix size aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                              |
 | `aws.s3.inventory.prefix_age_days`                            | `bucketname`, `prefix`, `region`                               | Age, in days, of the oldest object in the bucket or prefix.                                                                                                                                                  |
-| `aws.s3.inventory.access_logs.total_requests_by_method`       | `bucketname`, `prefix`, `region`, `method` | Total number of requests for objects in a prefix, optionally split by request method (for example, GET or PUT).                                                                                                                            |
-| `aws.s3.inventory.access_logs.request_latency_by_method`      | `bucketname`, `prefix`, `region`, `method` | Server response time for requests in a prefix, optionally split by request method.                                                                                                                      |
+| `aws.s3.inventory.prefix_small_file_size`                     | `bucketname`, `prefix`, `storagetype`, `extension`                                | Number of files smaller than 128KB.                                                                                                                                                               |
+| `aws.s3.inventory.access_logs.total_requests_by_method`       | `bucketname`, `prefix`, `region`, `method` | Total number of requests for objects in a prefix, optionally split by request method (for example, GET or PUT). Requires S3 Access Logs in Datadog.                                                                                                                           |
+| `aws.s3.inventory.access_logs.request_latency_by_method`      | `bucketname`, `prefix`, `region`, `method` | Server response time for requests in a prefix, optionally split by request method. Requires S3 Access Logs in Datadog.                                                                                                                      |
 
 
 ## Act on optimizations with Storage Management Recommendations
@@ -504,3 +505,4 @@ Seeing recommendations requires the following prerequisites:
 [3]: https://app.datadoghq.com/storage-monitoring
 [4]: https://docs.datadoghq.com/cloud_cost_management/recommendations
 [5]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html#example-bucket-policies-s3-inventory
+[6]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
