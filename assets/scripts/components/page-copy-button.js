@@ -36,3 +36,12 @@ if (copyButton) {
         copyPageText(this);
     });
 }
+
+const sidebarCopyButton = document.getElementById('sidebar-copy-btn');
+
+if (sidebarCopyButton) {
+    console.log('Sidebar copy button found');
+    sidebarCopyButton.addEventListener('click', function () {
+        console.log('Sidebar copy button clicked');
+    });
+}
