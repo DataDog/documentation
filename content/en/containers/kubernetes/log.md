@@ -387,7 +387,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% /tab %}}
 {{< /tabs >}}
 
-To match a log configuration towards a set of containers with more granularity than the containers' short image name, refer to [Autodiscovery Container Identifiers][22].
+To match a log configuration to a set of containers with more granularity than the container short image name, see [Autodiscovery Container Identifiers][22].
 
 ## Advanced log collection
 
