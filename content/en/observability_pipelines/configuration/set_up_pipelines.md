@@ -61,9 +61,7 @@ You can create a pipeline with one of the following methods:
 
 {{< img src="observability_pipelines/setup/another_set_processor_destination.png" alt="The Pipelines page showing two processor groups sending logs to two different destinations" style="width:100%;" >}}
 
-If you want to add another set of processors and destinations, click the plus sign (**+**) to the left of the processor group to add another set of processors and destinations to the source.
-
-To delete a processor group, you need to delete all destinations linked to that processor group. When the last destination is deleted, the processor group is removed with it.
+{{% observability_pipelines/set_up_pipelines/add_another_set_of_processors_and_destinations %}}
 
 ##### Add another destination to a processor group
 
