@@ -28,10 +28,6 @@ For setup instructions, see [Set up Code Coverage][2].
 
 {{< img src="/code_coverage/pr_details.png" text="Code Coverage PR details page in Datadog" style="width:100%" >}}
 
-## Gating on Code Coverage
-
-TBD
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
