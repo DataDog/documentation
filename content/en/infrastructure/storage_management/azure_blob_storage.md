@@ -68,7 +68,7 @@ For Each Storage Account you wish to monitor, follow all of the steps here:
     - Members: Click **+ Select members** and search for your App Registration by its name and select it.
     - **Note**: This should be an App Registration set up in the Datadog Azure integration. Keep in mind the Client ID for later.
 7.  Click **Review + assign**.
-8.  After you finish with the above steps, go to **Datadog** -> **Storage Management** > **Azure Blob Storage** > **Enable buckets**. Select the storage accounts you enabled inventory on and click **Confirm**.
+8.  Go to **Datadog** -> **Storage Management** > **Azure Blob Storage** > **Enable buckets**. Select the storage accounts you enabled inventory on and click **Confirm**.
 
 {{% /tab %}}
 {{< /tabs >}}

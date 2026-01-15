@@ -91,9 +91,9 @@ Ensure all S3-related permissions are granted for [Resource Collection][509].
 
    3. Complete the inventory configuration in Datadog. The first inventory report may take up to 24 hours to generate.
 
-   4. Finally, add or update the bucket policy on the destination bucket to allow the S3 service (`s3.amazonaws.com`) to write inventory objects from the source bucket(s). Navigate to **S3** > **Destination bucket** > **Permissions** > **Bucket policy**.
+   4. Navigate to **S3** > **Destination bucket** > **Permissions** > **Bucket policy**. Add or update the bucket policy on the destination bucket to allow the S3 service (`s3.amazonaws.com`) to write inventory objects from the source bucket(s). 
 
-      If inventory is enabled for many buckets in the same account, use a wildcard `SourceArn` combined with `SourceAccount`. Replace `<DESTINATION_BUCKET>`, `<DESTINATION_PREFIX>` (optional), and `<ACCOUNT_ID>` with your actual bucket name, prefix, and AWS account ID in the following:
+      If inventory is enabled for many buckets in the same account, use a wildcard `SourceArn` combined with `SourceAccount`. Replace `<DESTINATION_BUCKET>`, `<DESTINATION_PREFIX>` (optional), and `<ACCOUNT_ID>` with your bucket name, bucket prefix, and AWS account ID:
 
       ```json
       {
@@ -325,9 +325,9 @@ If you need to manage multiple buckets, complex inventory policies, encryption, 
 
 ### Troubleshooting
 
-- Ensure destination bucket policy allows S3 to write inventory files to your destination bucket. [Example Bucket Policy][403]
+- Verify that the destination bucket policy allows Amazon S3 to write inventory files to the destination bucket. See [Example Bucket Policy][403].
 - If cross-account access is needed, confirm that the inventory destination prefix (`datadog-inventory/` in the example) is correct and accessible to Datadog.
-- S3 Inventory files are delivered daily, and may take up to 24 hours to appear after setup.
+- If you recently enabled S3 Inventory, wait up to 24 hours for the first inventory files to be delivered. Inventory reports are generated once per day.
 
 [401]: https://docs.google.com/forms/d/e/1FAIpQLScd0xor8RQ76N6BemvvMzg9UU7Q90svFrNGY8n83sMF2JXhkA/viewform
 [402]: https://github.com/terraform-aws-modules/terraform-aws-s3-bucket/tree/master/examples/s3-inventory
@@ -355,7 +355,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 2. Ensure the destination bucket policy allows S3 to write inventory files to your destination bucket. 
 
-      Example Bucket Policy
+      Example bucket policy:
       ```json
       {
         "Sid": "AllowS3InventoryWriteFromAccountBuckets",
@@ -375,7 +375,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
       }
       ```
 
-3. Follow the steps in the [Amazon S3 user guide][202] to add a bucket policy to your destination bucket allowing write access (`s3:PutObject`) from your source buckets.
+3. Follow the steps in the [Amazon S3 User Guide][202] to add a bucket policy to your destination bucket that allows Amazon S3 to write inventory objects (`s3:PutObject`) from your source bucket or buckets.
 
 [202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
 {{% /collapse-content %}}
@@ -462,22 +462,22 @@ If you don't see data for buckets you set up for Storage Management:
         
       - **IAM Role(s) Lacking Permissions**: Ensure `s3:GetObject` and `s3:ListBucket` permissions for the destination buckets are set on the Datadog AWS Integration Role. Verify all S3-related permissions are granted as part of [Resource Collection][2].
         
-      - **Problem reading inventory**: Ensure the destination bucket policy allows S3 to write inventory files. See [Example Bucket Policy][5]. Note: This error may also appear if the first inventory file has not yet been generated (takes up to 24 hours) or if the buckets you are enabling are empty.
+      - **Problem reading inventory**: Ensure the destination bucket policy allows S3 to write inventory files. See [Example Bucket Policy][5]. **Note**: This error may also appear if the first inventory file has not yet been generated (takes up to 24 hours) or if the buckets you are enabling are empty.
       
    - If you're still encountering issues, [contact Datadog][1].
 
-## Visualize granular usage with new metrics
+## Visualize granular S3 usage with inventory metrics
 
 | Metric Name                                                   | Notable Tags                                                                     | Description                                                                                                                                                                                                                 |
 |---------------------------------------------------------------|----------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `aws.s3.inventory.total_prefix_size`                          | `bucketname`, `prefix`, `region`, `storagetype`, `extension`, `delete_marker`, `is_latest`                               | The amount of data in bytes stored in a prefix.                                                                                                                                                                             |
-| `aws.s3.inventory.average_prefix_size`                        | `bucketname`, `prefix`, `region`                                 | The average size of an object in a prefix in bytes.                                                                                                                                                                         |
+| `aws.s3.inventory.total_prefix_size`                          | `bucketname`, `prefix`, `region`, `storagetype`, `extension`, `delete_marker`, `is_latest`                               | Total amount of data, in bytes, stored in a prefix.                                                                                                                                                                             |
+| `aws.s3.inventory.average_prefix_size`                        | `bucketname`, `prefix`, `region`                                 | Average object size, in bytes, for objects in a prefix.                                                                                                                                                                         |
 | `aws.s3.inventory.prefix_object_count`                        | `bucketname`, `prefix`, `region`, `storagetype`, `extension`, `delete_marker`, `is_latest`                               | The total number of objects stored in a prefix.                                                                                                                                                                             |
-| `aws.s3.inventory.prefix_object_count.levels`                 | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Used for treemap visualizations: object counts aggregated to hierarchical prefix levels.                                                                                                                                    |
-| `aws.s3.inventory.total_prefix_size.levels`                 | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Used for treemap visualizations: size aggregated to hierarchical prefix levels.                                                                                                                              |
-| `aws.s3.inventory.prefix_age_days`                            | `bucketname`, `prefix`, `region`                               | Age in days of oldest object in bucket/prefix.                                                                                                                                                   |
-| `aws.s3.inventory.access_logs.total_requests_by_method`       | `bucketname`, `prefix`, `region`, `method` | Number of requests for objects in a prefix, optionally split by request method (e.g., GET, PUT).                                                                                                                            |
-| `aws.s3.inventory.access_logs.request_latency_by_method`      | `bucketname`, `prefix`, `region`, `method` | The time taken by the server to respond to requests in a prefix, optionally split by request method.                                                                                                                        |
+| `aws.s3.inventory.prefix_object_count.levels`                 | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Object counts aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                                   |
+| `aws.s3.inventory.total_prefix_size.levels`                 | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Prefix size aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                              |
+| `aws.s3.inventory.prefix_age_days`                            | `bucketname`, `prefix`, `region`                               | Age, in days, of the oldest object in the bucket or prefix.                                                                                                                                                  |
+| `aws.s3.inventory.access_logs.total_requests_by_method`       | `bucketname`, `prefix`, `region`, `method` | Total number of requests for objects in a prefix, optionally split by request method (for example, GET or PUT).                                                                                                                            |
+| `aws.s3.inventory.access_logs.request_latency_by_method`      | `bucketname`, `prefix`, `region`, `method` | Server response time for requests in a prefix, optionally split by request method.                                                                                                                      |
 
 
 ## Act on optimizations with Storage Management Recommendations
