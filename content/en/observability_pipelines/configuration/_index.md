@@ -121,6 +121,9 @@ See [Metric Types][3] for more information.
 {{% /tab %}}
 {{% tab "Rehydration" %}}
 
+<div class="alert alert-info">
+Rehydration is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/rehydration-for-observability-pipelines/">form</a> to request access.</div>
+
 Use a Rehydration pipeline to pull archived logs from object storage and process them in Observability Pipelines. See [Rehydration][1] for more information.
 
 See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
