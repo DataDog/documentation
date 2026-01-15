@@ -34,7 +34,7 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | **Active** | The test is known to be flaky and is running in CI. |
 | **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. |
 | **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. |
-| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm a fix and automatically apply this status, instead of manually changing it. |
+| **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this status after it is merged into the default branch. |
 
 <div class="alert alert-info">Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
 
@@ -117,7 +117,7 @@ For any flaky test, you can create a case and use [Case Management][4] to track 
 
 ## Confirm fixes for flaky tests
 
-When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. If successful, the test's status is automatically updated to `Fixed`. To enable the remediation flow:
+When you fix a flaky test, Test Optimization's remediation flow can confirm the fix by retrying the test multiple times. To enable the remediation flow:
 
 1. For the test you are fixing, click **Link commit to Flaky Test fix** in the Flaky Tests Management UI.
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
@@ -125,8 +125,18 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
     - Retries any tests you're attempting to fix 20 times.
     - Runs tests even if they are marked as `Disabled`.
-    - If all retries pass, updates the test's status to `Fixed`.
+    - If all retries pass, marks the fix as **in progress**, associates it with the branch used for the fix, and waits for that branch to be merged.
     - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
+
+### Track fixes that are in progress
+
+After a successful remediation run, Flaky Tests Management tracks the branch containing the fix and displays a **Fix in progress** indicator until the fix reaches the repository's default branch. When the associated pull request merges, the test automatically moves to `Fixed` and the indicator is removed. If the fix is pushed directly to the default branch, the test is marked `Fixed` immediately.
+
+Requirements and limitations:
+- Source Code Integration must be configured for a supported SCM provider (GitHub, GitLab, or Azure DevOps) so Datadog can receive pull request merge webhooks. See [Source Code Integration setup][17].
+- Renaming or deleting the feature branch after the remediation run prevents Datadog from detecting the merge.
+- Branches with fixes older than three months stop being monitored; rerun the remediation flow to refresh tracking.
+- If your SCM provider isn't supported or Source Code Integration isn't set up, Datadog cannot detect merges automatically. Manually transition the test to `Fixed` after the fix is deployed.
 
 ## AI-powered flaky test fixes
 
@@ -196,7 +206,7 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 [1]: https://app.datadoghq.com/ci/test/flaky
 [2]: https://app.datadoghq.com/source-code/repositories
 [3]: /tests/explorer
-[4]: /service_management/case_management
+[4]: /incident_response/case_management
 [5]: /integrations/slack/?tab=datadogforslack
 [6]: /tests/setup/dotnet/
 [7]: /tests/setup/go/
@@ -207,3 +217,4 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
 [16]: /bits_ai/bits_ai_dev_agent/
+[17]: /integrations/guide/source-code-integration/

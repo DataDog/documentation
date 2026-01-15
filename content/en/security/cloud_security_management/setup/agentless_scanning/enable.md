@@ -157,7 +157,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 1. Click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 
 {{% /tab %}}
 
@@ -172,7 +172,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 
 {{% /tab %}}
 
@@ -272,6 +272,54 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 3. Click **Replace existing template**.
 4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][14]. Paste that URL into the **Amazon S3 URL** field.
 5. Click **Next** to advance through the next several pages without modifying them, then submit the form.
+{{% /collapse-content %}}
+
+<br />
+
+### AWS CloudFormation StackSet (Multi-Account)
+
+For AWS Organizations with multiple accounts, use a CloudFormation StackSet to deploy the Agentless Scanning delegate role across all member accounts. This approach automates the onboarding process and ensures new accounts added to your Organization are automatically configured.
+
+{{% collapse-content title="AWS CloudFormation StackSet setup guide" level="h4" id="aws-cloudformation-stackset-setup" %}}
+
+This setup deploys the delegate role required for [cross-account scanning][18] across your AWS Organization or specific Organizational Units (OUs).
+
+##### Prerequisites
+
+1. Access to the AWS management account.
+2. [Trusted Access with AWS Organizations][19] must be enabled for CloudFormation StackSets.
+3. Agentless Scanning must already be configured in your central scanning account. See [AWS CloudFormation](#aws-cloudformation-setup) or [Terraform](#terraform-setup) setup.
+
+##### Deploy the StackSet
+
+1. Log in to your AWS management account and navigate to **CloudFormation > StackSets**.
+
+2. Click **Create StackSet**.
+3. Select **Service-managed permissions**.
+4. Under **Specify template**, select **Amazon S3 URL** and enter the following URL:
+
+{{< code-block lang="text" >}}
+   https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/v4.3.1/datadog_agentless_delegate_role_stackset.yaml
+{{< /code-block >}}
+
+5. Enter a **StackSet name** (for example, `DatadogAgentlessScanningStackSet`).
+6. Configure the required parameters:
+   - **ScannerInstanceRoleARN**: The ARN of the IAM role attached to your Agentless scanner instances.
+
+   The `ScannerInstanceRoleARN` establishes a trust relationship between the delegate role (created in target accounts) and your scanner instances (already running in the central account). This enables cross-account scanning where:
+   1. The scanner runs in Account A.
+   2. The delegate role exists in Accounts B, C, D (deployed through the StackSet).
+   3. The scanner assumes the delegate roles to scan resources in those accounts.
+7. Set **Deployment targets** to deploy across your Organization or specific OUs.
+8. Enable **Automatic deployment** to automatically configure new accounts added to your Organization.
+9. Select a **single region** for deployment (the IAM role is global and only needs to be deployed once per account).
+10. Review and submit the StackSet.
+
+After the StackSet deploys successfully, the member accounts are configured to allow cross-account scanning from your central scanner account.
+
+[18]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[19]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
+
 {{% /collapse-content %}}
 
 <br />

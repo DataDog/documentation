@@ -1,13 +1,13 @@
 ---
 title: Incident Response Billing
 further_reading:
-- link: "/service_management/incident_management/"
+- link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
-- link: "/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call"
-- link: "/service_management/status_pages/"
+- link: "/incident_response/status_pages/"
   tag: "Documentation"
   text: "Status Pages"
 ---
@@ -132,12 +132,12 @@ Your monthly bill contains the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/incident_management/
-[2]: /service_management/on-call/
+[1]: /incident_response/incident_management/
+[2]: /incident_response/on-call/
 [3]: https://www.datadoghq.com/pricing/?product=incident-response#products
 [4]: https://app.datadoghq.com/billing/seats
-[5]: /service_management/on-call/schedules/
-[6]: /service_management/on-call/escalation_policies/
-[7]: /service_management/on-call/profile_settings/#notification-preferences
-[8]: /service_management/incident_management/investigate/timeline
+[5]: /incident_response/on-call/schedules/
+[6]: /incident_response/on-call/escalation_policies/
+[7]: /incident_response/on-call/profile_settings/#notification-preferences
+[8]: /incident_response/incident_management/investigate/timeline
 [9]: https://app.datadoghq.com/on-call/settings/notifications-preferences-admin
