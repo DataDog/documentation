@@ -93,7 +93,8 @@ Ensure all S3-related permissions are granted for [Resource Collection][509].
 
    4. Navigate to **S3** > **Destination bucket** > **Permissions** > **Bucket policy**. Add or update the bucket policy on the destination bucket to allow the S3 service (`s3.amazonaws.com`) to write inventory objects from the source bucket(s). 
 
-      If inventory is enabled for many buckets in the same account, use a wildcard `SourceArn` combined with `SourceAccount`. Replace `<DESTINATION_BUCKET>`, `<DESTINATION_PREFIX>` (optional), and `<ACCOUNT_ID>` with your bucket name, bucket prefix, and AWS account ID:
+      Use the following **example bucket policy** to allow S3 to write inventory files to your destination bucket. 
+      You can copy and adapt this example for your use: replace `<DESTINATION_BUCKET>`, `<DESTINATION_PREFIX>` (optional), and `<ACCOUNT_ID>` with your actual bucket name, bucket prefix, and AWS account ID. 
 
       ```json
       {
@@ -473,12 +474,13 @@ If you don't see data for buckets you set up for Storage Management:
 | aws.s3.inventory.total_prefix_size                          | `bucketname`, `prefix`, `region`, `storagetype`, `extension`, `delete_marker`, `is_latest`                               | Total amount of data, in bytes, stored in a prefix.                                                                                                                                                                             |
 | aws.s3.inventory.average_prefix_size                        | `bucketname`, `prefix`, `region`                                 | Average object size, in bytes, for objects in a prefix.                                                                                                                                                                         |
 | aws.s3.inventory.prefix_object_count                        | `bucketname`, `prefix`, `region`, `storagetype`, `extension`, `delete_marker`, `is_latest`                               | The total number of objects stored in a prefix.                                                                                                                                                                             |
-| aws.s3.inventory.prefix_object_count.levels                 | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Object counts aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                                   |
-| aws.s3.inventory.total_prefix_size.levels                   | `bucketname`, `prefix0`, `prefix1`, `prefix2`... `region`, `storagetype`, `extension`, `delete_marker`                        | Prefix size aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                              |
+| aws.s3.inventory.prefix_object_count.levels                 | `bucketname`, `prefixN*`, `region`, `storagetype`, `extension`, `delete_marker`                        | Object counts aggregated to hierarchical prefix levels, used for treemap visualizations. |
+
+| aws.s3.inventory.total_prefix_size.levels                   | `bucketname`, `prefixN*`, `region`, `storagetype`, `extension`, `delete_marker`                        | Prefix size aggregated to hierarchical prefix levels, used for treemap visualizations.                                                                                                                              |
 | aws.s3.inventory.prefix_age_days                            | `bucketname`, `prefix`, `region`                               | Age, in days, of the oldest object in the bucket or prefix.                                                                                                                                                  |
 | aws.s3.inventory.access_logs.total_requests_by_method       | `bucketname`, `prefix`, `region`, `method` | Total number of requests for objects in a prefix, optionally split by request method (for example, GET or PUT). Requires S3 Access Logs in Datadog.                                                                                                                           |
 | aws.s3.inventory.access_logs.request_latency_by_method      | `bucketname`, `prefix`, `region`, `method` | Server response time for requests in a prefix, optionally split by request method. Requires S3 Access Logs in Datadog.                                                                                                                      |
-
+<sup>\*<code>prefixN</code> can be <code>prefix0</code>, <code>prefix1</code>, <code>prefix2</code>, etc.</sup>
 
 ## Act on optimizations with Storage Management Recommendations
 
