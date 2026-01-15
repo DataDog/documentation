@@ -1009,6 +1009,13 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringCriticalAssetID:
+      description: The ID of the critical asset.
+      in: path
+      name: critical_asset_id
+      required: true
+      schema:
+        type: string
     SecurityMonitoringRuleID:
       description: The ID of the rule.
       in: path
@@ -49146,6 +49153,237 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+    SecurityMonitoringCriticalAsset:
+      description: The critical asset's properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetAttributes'
+        id:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetID'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetType'
+      type: object
+    SecurityMonitoringCriticalAssetAttributes:
+      description: The attributes of the critical asset.
+      properties:
+        creation_author_id:
+          description: ID of user who created the critical asset.
+          example: 367742
+          format: int64
+          type: integer
+        creation_date:
+          description: A Unix millisecond timestamp given the creation date of the
+            critical asset.
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SecurityMonitoringUser'
+        enabled:
+          description: Whether the critical asset is enabled.
+          example: true
+          type: boolean
+        query:
+          description: The query for the critical asset. It uses the same syntax as
+            the queries to search signals in the Signals Explorer.
+          example: security:monitoring
+          type: string
+        rule_query:
+          description: The rule query of the critical asset, with the same syntax
+            as the search bar for detection rules. This determines which rules this
+            critical asset will apply to.
+          example: type:log_detection source:cloudtrail
+          type: string
+        severity:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetSeverity'
+        tags:
+          description: List of tags associated with the critical asset.
+          example:
+          - team:database
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
+        update_author_id:
+          description: ID of user who updated the critical asset.
+          example: 367743
+          format: int64
+          type: integer
+        update_date:
+          description: A Unix millisecond timestamp given the update date of the critical
+            asset.
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/SecurityMonitoringUser'
+        version:
+          description: The version of the critical asset; it starts at 1, and is incremented
+            at each update.
+          example: 2
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SecurityMonitoringCriticalAssetCreateAttributes:
+      description: Object containing the attributes of the critical asset to be created.
+      properties:
+        enabled:
+          default: true
+          description: Whether the critical asset is enabled. Defaults to `true` if
+            not specified.
+          example: true
+          type: boolean
+        query:
+          description: The query for the critical asset. It uses the same syntax as
+            the queries to search signals in the Signals Explorer.
+          example: security:monitoring
+          type: string
+        rule_query:
+          description: The rule query of the critical asset, with the same syntax
+            as the search bar for detection rules. This determines which rules this
+            critical asset will apply to.
+          example: type:(log_detection OR signal_correlation OR workload_security
+            OR application_security) source:cloudtrail
+          type: string
+        severity:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetSeverity'
+        tags:
+          description: List of tags associated with the critical asset.
+          example:
+          - team:database
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
+      required:
+      - query
+      - severity
+      - rule_query
+      type: object
+    SecurityMonitoringCriticalAssetCreateData:
+      description: Object for a single critical asset.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetCreateAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringCriticalAssetCreateRequest:
+      description: Request object that includes the critical asset that you would
+        like to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetCreateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringCriticalAssetID:
+      description: The ID of the critical asset.
+      example: 4e2435a5-6670-4b8f-baff-46083cd1c250
+      type: string
+    SecurityMonitoringCriticalAssetResponse:
+      description: Response object containing a single critical asset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAsset'
+      type: object
+    SecurityMonitoringCriticalAssetSeverity:
+      description: Severity associated with this critical asset. Either an explicit
+        severity can be set, or the severity can be increased or decreased.
+      enum:
+      - info
+      - low
+      - medium
+      - high
+      - critical
+      - increase
+      - decrease
+      example: increase
+      type: string
+      x-enum-varnames:
+      - INFO
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+      - INCREASE
+      - DECREASE
+    SecurityMonitoringCriticalAssetType:
+      default: critical_assets
+      description: The type of the resource. The value should always be `critical_assets`.
+      enum:
+      - critical_assets
+      example: critical_assets
+      type: string
+      x-enum-varnames:
+      - CRITICAL_ASSETS
+    SecurityMonitoringCriticalAssetUpdateAttributes:
+      description: The critical asset properties to be updated.
+      properties:
+        enabled:
+          description: Whether the critical asset is enabled.
+          example: true
+          type: boolean
+        query:
+          description: The query for the critical asset. It uses the same syntax as
+            the queries to search signals in the Signals Explorer.
+          example: security:monitoring
+          type: string
+        rule_query:
+          description: The rule query of the critical asset, with the same syntax
+            as the search bar for detection rules. This determines which rules this
+            critical asset will apply to.
+          example: type:log_detection source:cloudtrail
+          type: string
+        severity:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetSeverity'
+        tags:
+          description: List of tags associated with the critical asset.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
+        version:
+          description: The version of the critical asset being updated. Used for optimistic
+            locking to prevent concurrent modifications.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SecurityMonitoringCriticalAssetUpdateData:
+      description: The new critical asset properties; partial updates are supported.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringCriticalAssetUpdateRequest:
+      description: Request object containing the fields to update on the critical
+        asset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetUpdateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringCriticalAssetsResponse:
+      description: Response object containing the available critical assets.
+      properties:
+        data:
+          description: A list of critical assets objects.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringCriticalAsset'
+          type: array
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -60802,6 +61040,8 @@ components:
               & unsubscribing from apps in the marketplace, and enabling & disabling
               Remote Configuration for the entire organization.
             security_comments_read: Read comments of vulnerabilities.
+            security_monitoring_critical_assets_read: Read Critical Assets.
+            security_monitoring_critical_assets_write: Write Critical Assets.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
@@ -86146,6 +86386,190 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_cws_agent_rules_write
+  /api/v2/security_monitoring/configuration/critical_assets:
+    get:
+      description: Get the list of all critical assets.
+      operationId: ListSecurityMonitoringCriticalAssets
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_read
+      summary: Get all critical assets
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+    post:
+      description: Create a new critical asset.
+      operationId: CreateSecurityMonitoringCriticalAsset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringCriticalAssetCreateRequest'
+        description: The definition of the new critical asset.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_write
+      summary: Create a critical asset
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 0
+  /api/v2/security_monitoring/configuration/critical_assets/rules/{rule_id}:
+    get:
+      description: Get the list of critical assets that affect a specific existing
+        rule by the rule's ID.
+      operationId: GetCriticalAssetsAffectingRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_read
+      summary: Get critical assets affecting a specific rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+  /api/v2/security_monitoring/configuration/critical_assets/{critical_asset_id}:
+    delete:
+      description: Delete a specific critical asset.
+      operationId: DeleteSecurityMonitoringCriticalAsset
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringCriticalAssetID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_write
+      summary: Delete a critical asset
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+    get:
+      description: Get the details of a specific critical asset.
+      operationId: GetSecurityMonitoringCriticalAsset
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringCriticalAssetID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_read
+      summary: Get a critical asset
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+    patch:
+      description: Update a specific critical asset.
+      operationId: UpdateSecurityMonitoringCriticalAsset
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringCriticalAssetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringCriticalAssetUpdateRequest'
+        description: New definition of the critical asset. Supports partial updates.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_write
+      summary: Update a critical asset
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
   /api/v2/security_monitoring/configuration/security_filters:
     get:
       description: Get the list of configured security filters with their definitions.
@@ -93411,6 +93835,11 @@ tags:
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
 - description: 'Custom Destinations forward all the logs ingested to an external destination.
+
+
+    **Note**: Log forwarding is not available for the Government (US1-FED) site. Contact
+    your account representative for more information.
+
 
     See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)
 
