@@ -198,7 +198,12 @@ ALERT
 : The alerting conditions have been met. The test has been failing continuously for the configured minimum duration across the required number of locations.
 
 NO DATA
-: The monitor has not received any test results. This can occur if the test is paused, has not yet run, or there is an issue with data collection.
+: The monitor has not received any test results from any location (managed, private, or Datadog Agent) during the queried time period. Common causes include:
+
+  - **The test is paused**: Paused tests do not execute and produce no data.
+  - **Advanced schedule configuration**: The queried time period falls outside the test's configured schedule windows.
+  - **Delay in test execution**: The test has not yet run during the queried period. This is more common with private locations but can also occur with managed locations.
+  - **Delay in data ingestion**: Test results have not yet been processed and are not available for the queried time period.
 
 ## Why alerts may behave unexpectedly
 
