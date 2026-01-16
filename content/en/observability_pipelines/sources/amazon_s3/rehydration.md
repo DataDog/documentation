@@ -1,5 +1,6 @@
 ---
 title: Amazon S3
+description: Learn how to set up the Amazon S3 source for a rehydration pipeline.
 disable_toc: false
 code_lang: rehydration
 type: multi-code-lang

@@ -1,5 +1,6 @@
 ---
 title: Amazon S3
+description: Learn how to set up the Amazon S3 source for a logs pipelines.
 disable_toc: false
 code_lang: logs
 type: multi-code-lang
