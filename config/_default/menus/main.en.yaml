@@ -6774,11 +6774,21 @@ menu:
       parent: cloudprem_introduction
       identifier: cloudprem_architecture
       weight: 101
+    - name: Connectivity
+      url: /cloudprem/introduction/connectivity
+      parent: cloudprem_introduction
+      identifier: cloudprem_connectivity
+      weight: 102
+    - name: Ingress
+      url: /cloudprem/introduction/ingress
+      parent: cloudprem_introduction
+      identifier: cloudprem_ingress
+      weight: 103
     - name: Supported Features
       url: /cloudprem/introduction/features
       parent: cloudprem_introduction
       identifier: cloudprem_features
-      weight: 102
+      weight: 104
     - name: Quickstart
       url: /cloudprem/quickstart
       parent: cloudprem
@@ -6804,11 +6814,6 @@ menu:
       parent: cloudprem_install
       identifier: cloudprem_docker
       weight: 303
-    - name: Networking
-      url: /cloudprem/install/network/connectivity
-      parent: cloudprem_install
-      identifier: cloudprem_network
-      weight: 305
     - name: Ingest
       url: /cloudprem/ingest/
       parent: cloudprem
@@ -6834,13 +6839,8 @@ menu:
       parent: cloudprem
       identifier: cloudprem_configure
       weight: 5
-    - name: Activate CloudPrem
-      url: /cloudprem/configure/activate_cloudprem
-      parent: cloudprem_configure
-      identifier: cloudprem_configure_activate
-      weight: 501
     - name: Retention Policy
-      url: /cloudprem/configure/retention_policy
+      url: /cloudprem/configure/retention
       parent: cloudprem_configure
       identifier: cloudprem_configure_retention_policy
       weight: 501

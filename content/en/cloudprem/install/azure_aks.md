@@ -199,7 +199,6 @@ Optionally, you can add a DNS entry pointing to the IP of the public load balanc
 
 1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
 2. [Verify installation](#verification)
-3. [Configure your Datadog account](#configure-your-datadog-account)
 
 ## Install the CloudPrem Helm chart
 
