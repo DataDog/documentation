@@ -4,7 +4,7 @@ aliases:
 - /cloudprem/configure/aws_config/
 description: Learn how to install and configure CloudPrem on AWS EKS
 further_reading:
-- link: "/cloudprem/introduction/ingress/"
+- link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
 - link: "/cloudprem/ingest/"

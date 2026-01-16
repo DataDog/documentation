@@ -16,33 +16,29 @@ further_reading:
 
 ## Overview
 
-Datadog CloudPrem is a hybrid log management solution that runs in your own environment and stores logs in your object storage (such as Amazon S3, Azure Blob Storage, or Google Cloud Storage). Similar to Observability Pipelines, CloudPrem keeps your log data within your infrastructure while integrating with the Datadog platform for search, visualization, and alerting.
+CloudPrem is Datadog BYOC log management solution. It runs in your own infrastructure, indexes and stores logs in your object storage, execute search and analytics queries and connects to Datadog UI to give a fully integrated experience with Datadog products.
 
-Built on a decoupled architecture that separates compute and storage, CloudPrem enables you to:
+Here is a high-level overview of how CloudPrem works:
 
-- **Store logs at scale** - Process and index petabytes of log data using your own object storage
-- **Search with Datadog** - Query and analyze your self-hosted logs through the familiar Datadog Log Explorer interface
-- **Meet compliance requirements** - Keep sensitive log data within your infrastructure boundaries while leveraging Datadog's visualization and alerting
-- **Control costs** - Optimize log storage costs by using your own infrastructure and object storage
+{{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="CloudPrem architecture overview showing how logs flow from sources through CloudPrem to the Datadog platform" style="width:100%;" >}}
+
+The diagram illustrates the CloudPrem hybrid architecture, highlighting how data is processed and stored within your infrastructure:
+
+*   **Ingestion**: Logs are collected from Datadog Agents and other sources using standard protocols.
+*   **Your Infrastructure**: The CloudPrem platform runs entirely inside your infrastructure. It processes and stores logs in your own storage (S3, Azure Blob, MinIO).
+*   **Datadog SaaS**: The Datadog platform is CloudPrem's Control Plane, it hosts the Datadog UI and communicates with CloudPrem via a secure connection to send log queries and receive results.
 
 ## Use cases
 
-CloudPrem is designed for organizations with specific data management needs:
-
-**Data residency and privacy requirements**
-- Healthcare, financial services, and other regulated industries
-- Organizations operating in regions where data must remain in-country (such as China, India, Vietnam, UAE, and other locations without a Datadog datacenter)
-- Customers with strict data sovereignty or privacy policies
-
-**High-volume log management**
-- Processing more than 50TB of logs per day
-- Looking for cost-effective alternatives to solutions like Elastic or self-built systems (such as ClickHouse)
-- Need to scale log management without proportional cost increases
+CloudPrem is designed for organizations with specific requirements:
+- Data residency, privacy and regulatory requirements
+- High volume requirements 
 
 ## Learn about CloudPrem
 
 {{< whatsnext desc="Explore CloudPrem's architecture and capabilities:">}}
   {{< nextlink href="/cloudprem/introduction/architecture/" >}}Architecture - Understand how CloudPrem components work together{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/introduction/network/" >}}Network - Understand how CloudPrem communicates with Datadog{{< /nextlink >}}
   {{< nextlink href="/cloudprem/introduction/features/" >}}Supported Features - See which Log Explorer features are available in CloudPrem{{< /nextlink >}}
 {{< /whatsnext >}}
 

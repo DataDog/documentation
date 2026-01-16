@@ -18,7 +18,7 @@ If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not
    {{< nextlink href="/cloudprem/install/azure_aks" >}}Azure Configuration{{< /nextlink >}}
    {{< nextlink href="/cloudprem/operate/sizing/" >}}Size your cluster{{< /nextlink >}}
    {{< nextlink href="/cloudprem/configure/pipelines/" >}}Configure processing{{< /nextlink >}}
-   {{< nextlink href="/cloudprem/introduction/ingress/" >}}Understand Ingress{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/configure/ingress/" >}}Configure Ingress{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://www.datadoghq.com/product-preview/cloudprem/
