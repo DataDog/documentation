@@ -31,11 +31,13 @@ cascade:
     {{< nextlink href="/logs/guide/aws-account-level-logs/" >}}Set up AWS account-level log subscriptions{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Send Amazon EKS Fargate Logs with Amazon Data Firehose{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/google-cloud-log-forwarding" >}}Google Cloud Log Forwarding Setup{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-automated-log-forwarding" >}}Azure Automated Log Forwarding{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-manual-log-forwarding" >}}Azure Manual Log Forwarding{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/fluentbit" >}}Send Fluent Bit Logs{{< /nextlink >}}
     {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Collect Google Cloud logs with the Datadog Dataflow template{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/google-cloud-logging-recommendations" >}}Google Cloud Log Forwarding Configuration Recommendations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Collect Google Cloud logs with a Pub/Sub Push subscription{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}

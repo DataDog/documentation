@@ -24,7 +24,8 @@ further_reading:
 title: Reglas personalizadas
 ---
 
-Datadog proporciona [reglas predeterminadas][1] para que puedas empezar a utilizar Scorecards rápidamente, pero también puedes crear reglas personalizadas.
+Las reglas personalizadas te permiten codificar las expectativas de tu organización sobre tus componentes de software, equipos, etc. Tú decides los criterios de evaluación, la frecuencia y la entrada de datos. Puedes crear reglas personalizadas a través de la [API Scorecards][2] o a través de [Datadog Workflow Automation][9]. Si no estás familiarizado con el producto Workflow Automation, puedes empezar [a crear tu primera regla personalizada de Scorecards con IA][10].
+
 
 ## Creación de reglas personalizadas
 
@@ -131,3 +132,5 @@ También puedes vincular un flujo de trabajo existente a cualquier regla persona
 [6]: https://app.datadoghq.com/actions/action-catalog#/com.datadoghq.dd.softwarecatalog.listCatalogEntity
 [7]: https://app.datadoghq.com/workflow/action-catalog#//com.datadoghq.core.forLoop
 [8]: /es/api/latest/service-scorecards/
+[9]: /es/actions/workflows/
+[10]: /es/actions/workflows/build/#create-a-workflow-with-ai

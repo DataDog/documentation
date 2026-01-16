@@ -13,7 +13,7 @@ Operations Monitoring is in Preview.
 
 ## Overview
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-1-temp.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
 In Datadog RUM, a feature represents a major user-facing area of your application like checkout, login, or search. Each feature includes operations, which are the critical technical steps that make the experience work. 
 
@@ -91,6 +91,8 @@ RUMMonitor.shared().startFeatureOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">The Operation's name cannot contain any whitespaces.</div>
+
 ### Stop an operation with success
 
 Every started operation must have a stop. Use `succeedFeatureOperation` to stop an operation with a successful outcome.
@@ -140,6 +142,8 @@ RUMMonitor.shared().succeedFeatureOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">The <code>operationKey</code> must be the same in the start and end Operation event.</div>
+
 ### Stop an operation with failure
 
 Every started operation must have a stop. Use `failFeatureOperation` to stop an operation with a failure outcome.
@@ -155,7 +159,7 @@ enableExperimentalFeatures: ["feature_operation_vital"], // this flag needs to b
 
 GlobalRumMonitor.get().failFeatureOperation: (
 name: string, 
-failureReason: FailureReason, //'error' | 'abandoned' | 'timeout'| 'other'
+failureReason: FailureReason, //'error' | 'abandoned' | 'other'
 options?: {
  operationKey?: string,
  context?: Context,
@@ -171,7 +175,7 @@ options?: {
 GlobalRumMonitor.get().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-	reason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
+	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, .other
 	attributes: Map<String, Any?>
 )
 ```
@@ -184,7 +188,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
+  reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .other
 	attributes: [AttributeKey: AttributeValue]
 )
 ```
@@ -198,7 +202,7 @@ You may have cases where users are starting several feature operations in parall
 
 ## Monitor your availability on Datadog
 
-{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-2-temp-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
 After you've configured the SDK APIs, you can monitor your operations by navigating to **RUM > Performance Monitoring > Operations**.
 
@@ -213,7 +217,7 @@ Both metrics are retained for 15 months, and include several dimensions:
 
 - `operation.name`, which is defined on the client side
 - `operation.status`, which is either a success or failure
-- `operation.failure_reason`, which can be an error, or abandoned, or timeout, or other
+- `operation.failure_reason`, which can be an error, or abandoned, or other
 
 Those metrics are included in the price of RUM Measure and available to all RUM without Limits customers that define one or more operations.
 

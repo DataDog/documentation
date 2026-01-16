@@ -18,11 +18,11 @@ further_reading:
   text: "Destinations"
 ---
 
-<div class="alert alert-danger">In-memory and disk buffering options for destinations are in Preview. Contact your account manager to request access.</a></div>
+<div class="alert alert-info">In-memory and disk buffering options for destinations are in Preview. Contact your account manager to request access.</a></div>
 
 ## Overview
 
-Sometimes problems can occur even when you try to ensure your Observability Pipelines deployments are sized for the expected load. For example, an application might start generating more logs than usual, or the downstream service you are sending data to starts responding slower than expected. To address these issues:
+Sometimes problems can occur even when you try to ensure your Observability Pipelines deployments are sized for the expected load. For example, an application might start generating more data than usual, or the downstream service you are sending data to starts responding slower than expected. To address these issues:
 - Observability Pipelines propagates backpressure, which signals that the system cannot process events immediately upon receiving them.
 - Observability Pipelines components also have in-memory buffering in case the next component is busy processing incoming data.
 
@@ -42,8 +42,14 @@ Observability Pipelines destination's buffers are configured to block events, wh
 
 ## Disk buffers
 
-Observability Pipelines destinations can be configured with disk buffers (in Preview). When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
+Observability Pipelines destinations can be configured with disk buffers (in Preview). When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. Disk buffers can be used to mitigate back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
+
+### Kubernetes persistent volumes
+
+If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the Observability Pipelines helm chart. With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes and then sent downstream.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278

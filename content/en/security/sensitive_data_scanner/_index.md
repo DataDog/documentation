@@ -14,9 +14,6 @@ further_reading:
     - link: "coterm"
       tag: "Documentation"
       text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
-    - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
-      tag: "Documentation"
-      text: "Best practices for creating custom rules"
     - link: "/data_security/"
       tag: "Documentation"
       text: "Reducing data related risks"
@@ -41,6 +38,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/sds-for-insurance-companies/"
       tag: "Blog"
       text: "How insurance companies discover, classify, and act on sensitive data risks with Datadog"
+    - link: https://www.datadoghq.com/blog/llm-aws-strands
+      tag: Blog
+      text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
 ---
 
 ## Overview
