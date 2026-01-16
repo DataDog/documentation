@@ -26,7 +26,7 @@ further_reading:
 
 {{< img src="profiler/search_profiles3.mp4" alt="Search profiles by tags" video=true >}}
 
-Go to **APM -> Profiles** and select a service to view its profiles.
+Go to **APM > Profiles** and select a service to view its profiles.
 
 You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][1]. By default the following facets are available:
 
@@ -42,7 +42,7 @@ You can filter according to infrastructure tags or application tags set up from 
 
 ### Flame graph
 
-The flame graph is the default visualization for Continuous Profiler. The below one shows how much CPU each method used and how each method was called. Other [Profile types][4] are available depending on the language.
+The flame graph is the default visualization for Continuous Profiler. The one below shows how much CPU each method used and how each method was called. Other [Profile types][4] are available depending on the language.
 
 {{< img src="profiler/profiling_viz-flamegraph2.png" alt="A flame graph" >}}
 
@@ -159,19 +159,19 @@ For each runtime, there is a broad set of metrics available, which you can see [
 
 The call graph takes the same profiling data used in flame graphs, but displays each method just once, as a single node, with edges used to convey which methods have called each other.
 
-Edge thickness is used to show time spent calling other methods, whilst color and size indicate self time.
+Edge thickness is used to show time spent calling other methods, while color and size indicate self time.
 
 {{< img src="profiler/profiling_viz-callgraph.png" alt="A call graph" >}}
 
 ### Single profile
 
-By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15s and 60s.
+By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15 and 60 seconds.
 
 To view a specific profile, set the **Visualize as** option to **Profile List** and click an item in the list:
 
 {{< img src="profiler/profiling_single-profile2.png" alt="Select a single profile" >}}
 
-The header contains information associated with your profile, like the service that generated it, or the environment and code version associated to it.
+The header contains information associated with your profile, like the service that generated it, or the environment and code version associated with it.
 
 Four tabs are below the profile header:
 
