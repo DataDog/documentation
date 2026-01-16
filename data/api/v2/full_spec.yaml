@@ -1747,6 +1747,82 @@ components:
       required:
       - role_name
       type: object
+    AWSCcmConfig:
+      description: AWS Cloud Cost Management config.
+      properties:
+        data_export_configs:
+          description: List of data export configurations for Cost and Usage Reports.
+          items:
+            $ref: '#/components/schemas/DataExportConfig'
+          type: array
+      required:
+      - data_export_configs
+      type: object
+    AWSCcmConfigRequest:
+      description: AWS CCM Config Create/Update Request body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSCcmConfigRequestData'
+      required:
+      - data
+      type: object
+    AWSCcmConfigRequestAttributes:
+      description: AWS CCM Config attributes for Create/Update requests.
+      properties:
+        ccm_config:
+          $ref: '#/components/schemas/AWSCcmConfig'
+      required:
+      - ccm_config
+      type: object
+    AWSCcmConfigRequestData:
+      description: AWS CCM Config Create/Update Request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSCcmConfigRequestAttributes'
+        type:
+          $ref: '#/components/schemas/AWSCcmConfigType'
+      required:
+      - attributes
+      - type
+      type: object
+    AWSCcmConfigResponse:
+      description: AWS CCM Config response body.
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSCcmConfigResponseData'
+      required:
+      - data
+      type: object
+    AWSCcmConfigResponseAttributes:
+      description: AWS CCM Config response attributes.
+      properties:
+        data_export_configs:
+          description: List of data export configurations for Cost and Usage Reports.
+          items:
+            $ref: '#/components/schemas/DataExportConfig'
+          type: array
+      type: object
+    AWSCcmConfigResponseData:
+      description: AWS CCM Config response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSCcmConfigResponseAttributes'
+        id:
+          $ref: '#/components/schemas/AWSAccountConfigID'
+        type:
+          $ref: '#/components/schemas/AWSCcmConfigType'
+      required:
+      - type
+      type: object
+    AWSCcmConfigType:
+      default: ccm_config
+      description: AWS CCM Config resource type.
+      enum:
+      - ccm_config
+      example: ccm_config
+      type: string
+      x-enum-varnames:
+      - CCM_CONFIG
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
       oneOf:
@@ -9095,10 +9171,6 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
-        status_group:
-          $ref: '#/components/schemas/CaseStatusGroup'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9165,8 +9237,6 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9335,9 +9405,7 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      deprecated: true
-      description: Deprecated way of representing the case status, which only supports
-        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
+      description: Case status
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9348,23 +9416,6 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
-    CaseStatusGroup:
-      description: Status group of the case.
-      enum:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-      example: SG_OPEN
-      type: string
-      x-enum-varnames:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-    CaseStatusName:
-      description: Status of the case. Must be one of the existing statuses for the
-        case's type.
-      example: Open
-      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9588,9 +9639,8 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-          deprecated: true
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
+      required:
+      - status
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -16608,6 +16658,37 @@ components:
       - INTEGRATION_SCREENBOARD
       - INTEGRATION_TIMEBOARD
       - HOST_TIMEBOARD
+    DataExportConfig:
+      description: AWS Cost and Usage Report data export configuration.
+      properties:
+        bucket_name:
+          description: Name of the S3 bucket where the Cost and Usage Report is stored.
+          example: billing
+          type: string
+        bucket_region:
+          description: AWS region of the S3 bucket.
+          example: us-east-1
+          type: string
+        report_name:
+          description: Name of the Cost and Usage Report.
+          example: cost-and-usage-report
+          type: string
+        report_prefix:
+          description: S3 prefix where the Cost and Usage Report is stored.
+          example: reports
+          type: string
+        report_type:
+          description: Type of the Cost and Usage Report. Currently only `CUR2.0`
+            is supported.
+          example: CUR2.0
+          type: string
+      required:
+      - report_name
+      - report_prefix
+      - report_type
+      - bucket_name
+      - bucket_region
+      type: object
     DataRelationshipsTeams:
       description: Associates teams with this schedule in a data structure.
       properties:
@@ -72774,6 +72855,151 @@ paths:
         operator: OR
         permissions:
         - aws_configuration_edit
+  /api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config:
+    delete:
+      description: 'Delete the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: DeleteAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete AWS CCM config
+      tags:
+      - AWS Integration
+      x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: 'Get the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: GetAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCcmConfigResponse'
+          description: AWS CCM Config object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS CCM config
+      tags:
+      - AWS Integration
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Update the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: UpdateAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSCcmConfigRequest'
+        description: Update a Cloud Cost Management config for an AWS Account Integration
+          Config.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCcmConfigResponse'
+          description: AWS CCM Config object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update AWS CCM config
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create the Cloud Cost Management config for an AWS Account Integration
+        Config using Cost and Usage Report
+
+        (CUR) 2.0 by config ID.'
+      operationId: CreateAWSAccountCCMConfig
+      parameters:
+      - $ref: '#/components/parameters/AWSAccountConfigIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSCcmConfigRequest'
+        description: Create a Cloud Cost Management config for an AWS Account Integration
+          Config.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCcmConfigResponse'
+          description: AWS CCM Config object
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create AWS CCM config
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/aws/available_namespaces:
     get:
       description: Get a list of available AWS CloudWatch namespaces that can send
@@ -87850,7 +88076,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
@@ -87995,7 +88221,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:

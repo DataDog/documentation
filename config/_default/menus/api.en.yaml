@@ -70,6 +70,58 @@ menu:
           - ListAWSNamespaces
         unstable: []
         order: 1
+    - name: Create AWS CCM config
+      url: '#create-aws-ccm-config'
+      identifier: aws-integration-create-aws-ccm-config
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAWSAccountCCMConfig
+        unstable:
+          - v2
+        order: 8
+    - name: Update AWS CCM config
+      url: '#update-aws-ccm-config'
+      identifier: aws-integration-update-aws-ccm-config
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAWSAccountCCMConfig
+        unstable:
+          - v2
+        order: 9
+    - name: Get AWS CCM config
+      url: '#get-aws-ccm-config'
+      identifier: aws-integration-get-aws-ccm-config
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSAccountCCMConfig
+        unstable:
+          - v2
+        order: 7
+    - name: Delete AWS CCM config
+      url: '#delete-aws-ccm-config'
+      identifier: aws-integration-delete-aws-ccm-config
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAWSAccountCCMConfig
+        unstable:
+          - v2
+        order: 10
     - name: Get an AWS integration by config ID
       url: '#get-an-aws-integration-by-config-id'
       identifier: aws-integration-get-an-aws-integration-by-config-id
