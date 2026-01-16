@@ -303,7 +303,7 @@ As an alternative to the Metro Configuration, starting from `@datadog/mobile-rea
 
 Usage instructions are available on the [command documentation page][201].
 
-[201]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/react-native/README.md#inject-debug-id
+[201]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
 
 {{% /collapse-content %}}
 
