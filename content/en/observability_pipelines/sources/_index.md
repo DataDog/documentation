@@ -74,6 +74,15 @@ These are the available sources:
 [1]: /observability_pipelines/sources/datadog_agent/
 
 {{% /tab %}}
+{{% tab "Rehydration" %}}
+
+- [Amazon S3][1]
+- [Azure Storage][2]
+
+[1]: /observability_pipelines/sources/amazon_s3/
+[2]: /observability_pipelines/sources/azure_storage/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Standard metadata fields

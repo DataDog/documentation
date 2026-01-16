@@ -34,7 +34,7 @@ Build and deploy pipelines to collect, transform, and route your data using one 
 
 ## Pipeline types
 
-There are two types of pipelines:
+You can create these types of pipelines:
 
 {{< tabs >}}
 {{% tab "Logs" %}}
@@ -52,7 +52,7 @@ Use one of the [logs templates][1] to create a log pipeline.
 See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
 
 [1]: /observability_pipelines/configuration/explore_templates/?tab=logs#templates
-[2]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: /observability_pipelines/configuration/set_up_pipelines/?tab=logs
 
 {{% /tab %}}
 
@@ -115,8 +115,21 @@ The available metric types:
 See [Metric Types][3] for more information.
 
 [1]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
-[2]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: /observability_pipelines/configuration/set_up_pipelines/?tab=metrics
 [3]: /metrics/types/?tab=gauge#metric-types
+
+{{% /tab %}}
+{{% tab "Rehydration" %}}
+
+<div class="alert alert-info">
+Rehydration is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/rehydration-for-observability-pipelines/">form</a> to request access.</div>
+
+Use a Rehydration pipeline to pull archived logs from object storage and process them in Observability Pipelines. See [Rehydration][1] for more information.
+
+See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
+
+[1]: /observability_pipelines/rehydration/
+[2]: /observability_pipelines/configuration/set_up_pipelines/?tab=rehydration
 
 {{% /tab %}}
 {{< /tabs >}}

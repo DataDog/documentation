@@ -2,6 +2,8 @@
 aliases:
 - /es/service_management/workflows/actions/data_transformation/
 - /es/service_management/workflows/expressions
+description: Utiliza expresiones JavaScript en línea y acciones de función/expresión
+  dedicadas para transformaciones de datos personalizadas en procesos.
 disable_toc: false
 further_reading:
 - link: /service_management/workflows/variables/
@@ -18,7 +20,7 @@ Puedes utilizar expresiones JavaScript (JS) directamente en los pasos del flujo 
 
 Para utilizar una expresión en línea en tu flujo de trabajo, encierra la expresión en `${}`. Por ejemplo, para convertir un ID de cadena (`Trigger.stringId`) en un número entero, utiliza `${ parseInt(Trigger.stringId) }`.
 
-La librería de utilidades [Lodash][1] está disponible en expresiones en línea. El prefijo de guión bajo de Lodash (`_`) es opcional. Por ejemplo, tanto `${ _.toNumber("1") }` como `${ toNumber("1") }` son expresiones en línea válidas.
+La biblioteca de utilidades [Lodash][1] está disponible en expresiones en línea. El prefijo de guión bajo de Lodash (`_`) es opcional. Por ejemplo, tanto `${ _.toNumber("1") }` como `${ toNumber("1") }` son expresiones en línea válidas.
 
 ### Ejemplos
 
@@ -101,6 +103,6 @@ Consulta la página de test y depuración para saber cómo [probar un paso del f
 <br>¿Tienes preguntas o comentarios? Únete al canal **#workflows** en [Datadog Community Slack][2].
 
 [1]: https://lodash.com/
-[2]: https://datadoghq.slack.com/
+[2]: https://chat.datadoghq.com/
 [3]: /es/service_management/workflows/test_and_debug/#test-a-step
 [4]: /es/service_management/workflows/actions/set_variables

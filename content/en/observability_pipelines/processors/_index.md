@@ -77,6 +77,47 @@ These are the available processors:
 [2]: /observability_pipelines/processors/tag_control/
 
 {{% /tab %}}
+{{% tab "Rehydration" %}}
+
+- [Add Environment Variables Processor][1]
+- [Add Hostname Processor][2]
+- [Custom Processor][3]
+- [Deduplicate Processor][4]
+- [Edit Fields Processor][5]
+- [Enrichment Table Processor][6]
+- [Filter Processor][7]
+- [Grok Parser Processor][8]
+- [Parse JSON Processor][9]
+- [Parse XML Processor][10]
+- [Quota Processor][11]
+- [Reduce Processor][12]
+- [Remap to OCSF Processor][13]
+- [Sample Processor][14]
+- [Sensitive Data Scanner Processor][15]
+- [Split Array][16]
+- [Tags][17]
+- [Throttle][18]
+
+[1]: /observability_pipelines/processors/add_environment_variables/
+[2]: /observability_pipelines/processors/add_hostname/
+[3]: /observability_pipelines/processors/custom_processor/
+[4]: /observability_pipelines/processors/dedupe/
+[5]: /observability_pipelines/processors/edit_fields/
+[6]: /observability_pipelines/processors/enrichment_table/
+[7]: /observability_pipelines/processors/filter/
+[8]: /observability_pipelines/processors/grok_parser/
+[9]: /observability_pipelines/processors/parse_json/
+[10]: /observability_pipelines/processors/parse_xml/
+[11]: /observability_pipelines/processors/quota/
+[12]: /observability_pipelines/processors/reduce/
+[13]: /observability_pipelines/processors/remap_ocsf/
+[14]: /observability_pipelines/processors/sample/
+[15]: /observability_pipelines/processors/sensitive_data_scanner/
+[16]: /observability_pipelines/processors/split_array/
+[17]: /observability_pipelines/processors/tag_control/logs/
+[18]: /observability_pipelines/processors/throttle/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Processor groups

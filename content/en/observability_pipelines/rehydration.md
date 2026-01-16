@@ -26,6 +26,8 @@ Rehydration for Observability Pipelines enables you to pull archived logs from o
 
 Organizations often store large volumes of logs in cost-efficient, long-term archives to control spend and meet compliance requirements. However, historical data often becomes difficult to access when there is a security incident, audit request, or operational investigation. Retrieving archived logs from cold storage can be slow, manual, and disruptive, requiring ad-hoc scripts, decompression, or dedicated engineering effort. Rehydration for Observability Pipelines solves these issues.
 
+See [Set Up Pipelines][2] on how to set up a source, processors, and destinations for a Rehydration pipeline.
+
 {{< img src="observability_pipelines/rehydration_pipeline.png" alt="A pipeline with the Amazon S3 rehydration source" style="width:100%;" >}}
 
 ## How Rehydration works
@@ -66,3 +68,4 @@ Rehydration provides a structured, predictable way to pull archived data back in
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /observability_pipelines/packs/
+[2]: /observability_pipelines/configuration/set_up_pipelines/?tabs=rehydration
