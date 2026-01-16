@@ -206,7 +206,10 @@ NO DATA
 
   - **The test is paused**: Paused tests do not execute and produce no data.
   - **Advanced schedule configuration**: The queried time period falls outside the test's configured schedule windows.
-  - **Delay in test execution**: The test has not yet run during the queried period. This is more common with private locations but can also occur with managed locations.
+  - **Delay in test execution**: The test has not yet run within the selected time period. This typically occurs when tests are running against a Private Location that may be overloaded. Common symptoms of overloaded Private Location include intermittent test execution timeouts, high variability in test metrics, missed or delayed scheduled runs (like gaps in the test schedule), or the Private Location stopped reporting altogether.
+
+   When these symptoms are present, it means that too many tests are assigned to the Private Location for it to handle. Adding additional workers, increasing worker concurrency, and increasing available compute resources can help alleviate the symptoms. See [Dimensioning Private Locations][4] for more information.
+
   - **Delay in data ingestion**: Test results have not yet been processed and are not available for the queried time period.
 
 ## Why alerts may behave unexpectedly
@@ -232,3 +235,4 @@ If a monitor does not alert or recovers unexpectedly, check for the following:
 [1]: /synthetics/guide/synthetic-test-retries-monitor-status/
 [2]: /synthetics/guide/uptime-percentage-widget/
 [3]: /synthetics/guide/synthetic-test-retries-monitor-status/#retries-that-overlap-with-other-test-runs
+[4]: /synthetics/platform/private_locations/dimensioning
