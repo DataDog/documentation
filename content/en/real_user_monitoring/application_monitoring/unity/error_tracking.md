@@ -30,4 +30,4 @@ If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup i
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/unity#setup
-[4]: /error_tracking/frontend/mobile/unity.md
+[4]: /error_tracking/frontend/mobile/unity
