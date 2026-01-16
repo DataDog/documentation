@@ -79,13 +79,13 @@ Data dropped intentionally or unintentionally
 
 Timed out events
 : **Metric**: `pipelines.component_timed_out_events_total`
-: **Description**: The number of events that timed out.
-: **Available for**: Sources, processors, and destinations.
+: **Description**: The number of events that waited more than 5 seconds to be sent to the first processor and resulted in a HTTP 503 error. This could happen when delivery of events are blocked.
+: **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
 
 Timed out requests
 : **Metric**: `pipelines.component_timed_out_requests_total`
-: **Description**: The number of requests that timed out.
-: **Available for**: Sources, processors, and destinations.
+: **Description**: The number of requests that timed out for sources that send events to the Worker in batches using HTTP requests.
+: **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
 
 Utilization
 : **Metric**: `pipelines.utilization`
