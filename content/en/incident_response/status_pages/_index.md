@@ -126,11 +126,11 @@ If you selected:
 
 Notices on Status Pages are carefully crafted messages posted to a public website to communicate system status. When an issue arises, you can communicate it clearly through your status page.
 
-From a status page, click **Publish Notice** to open a "Publish Status Page Notice" modal and provide:
+From a status page, click **Publish Notice** to open a "Publish Notice" modal and provide:
    | Field | Description |
    | ---- | ---- |
-   | **Title** | Short, clear description of the incident <br>*Example: Increased error rates on US region* |
-   | **Notice Type** | Type of notice: <br>- **Degradation**: For unplanned issues or incidents affecting service <br>- **Scheduled Maintenance**: For planned maintenance windows or updates. See [Schedule maintenance windows](#schedule-maintenance-windows). |
+| **Notice Type** | Type of notice: <br>- **Degradation**: For unplanned issues or incidents affecting service <br>- **Scheduled Maintenance**: For planned maintenance windows or updates. See [Schedule maintenance windows](#schedule-maintenance-windows). |
+| **Notice Title** | Short, clear description of the incident <br>*Example: Increased error rates on US region* |
    | **Status** | Current state of the incident: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
    | **Message** | Additional details for your users <br>*Examples: known cause, expected resolution time* |
    | **Components impacted** | One or more components impacted by the incident |
@@ -158,13 +158,13 @@ Maintenance windows allow you to proactively communicate planned downtime or ser
    | ---- | ---- |
    | **Title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
    | **Maintenance window** | Scheduled time range for the maintenance window, including start and end times |
-   | **Message** | Set the message that you want to automatically publish for each status update |
+   | **Messages** | Set the messages that you want to automatically publish for each status update |
    | **Components impacted** | One or more components that will be affected during maintenance |
-   | **Impact** | Expected level of impact per component during the window: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
+   | **Impact** | Default impact per component during a maintenance window: <br>- Maintenance <br>|
    | **Notify Subscribers** | Toggle to send advance notification to subscribers |
 1. Click **Review Notice** and then **Publish Notice**.
 
-After scheduling, the maintenance window appears on the status page with the scheduled time range. When the window begins, component status automatically updates to "Under Maintenance" and returns to "Operational" when it ends (unless manually overridden). You can post updates if plans change, reschedule the window, or cancel it if no longer needed.
+After scheduling, the maintenance window appears on the status page under "Upcoming Maintenance" with the scheduled time range. When the window begins, component status automatically updates to "Maintenance" and returns to "Operational" when it ends (unless manually overridden). You can post updates if plans change or reschedule the window.
 
 ## Email subscriptions
 
