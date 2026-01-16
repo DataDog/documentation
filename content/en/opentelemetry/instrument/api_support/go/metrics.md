@@ -16,7 +16,7 @@ further_reading:
 
 ## Prerequisites
 
-- **Datadog SDK**: dd-trace-go version 2.5.0 or later.
+- **Datadog SDK**: dd-trace-go version 2.6.0 or later.
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
 
 ## Setup
