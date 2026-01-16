@@ -87824,7 +87824,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
@@ -87969,7 +87969,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
