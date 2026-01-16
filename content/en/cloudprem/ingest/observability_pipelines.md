@@ -1,5 +1,7 @@
 ---
 title: Send logs to CloudPrem with Observability Pipelines
+aliases:
+- /cloudprem/ingest_logs/observability_pipelines/
 description: Configure Observability Pipelines to send logs to CloudPrem with optional dual shipping
 further_reading:
 - link: "/cloudprem/ingest_logs/datadog_agent/"

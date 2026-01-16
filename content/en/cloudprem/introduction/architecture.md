@@ -1,5 +1,7 @@
 ---
 title: Architecture
+aliases:
+- /cloudprem/architecture/
 further_reading:
 - link: "/cloudprem/install/"
   tag: "Documentation"
@@ -47,5 +49,5 @@ There are two ways to connect the Datadog UI to CloudPrem:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloudprem/configure/reverse_connection/
+[1]: /cloudprem/introduction/connectivity/
 [2]: /cloudprem/configure/ingress/

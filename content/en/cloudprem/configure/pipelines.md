@@ -1,5 +1,7 @@
 ---
 title: Processing Configuration
+aliases:
+- /cloudprem/configure/processing/
 description: Learn how to configure your processing pipelines in CloudPrem
 further_reading:
 - link: "/cloudprem/architecture/"

@@ -1,5 +1,7 @@
 ---
 title: Troubleshooting
+aliases:
+- /cloudprem/troubleshooting/
 further_reading:
 - link: "/cloudprem/architecture/"
   tag: "Documentation"
