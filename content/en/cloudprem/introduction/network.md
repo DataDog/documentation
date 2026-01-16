@@ -12,7 +12,7 @@ further_reading:
   Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
-## Network between Datadog and CloudPrem
+This document provides an overview of how CloudPrem and Datadog communicate with each other.
 
 ### Default behavior: CloudPrem initiates the connection
 

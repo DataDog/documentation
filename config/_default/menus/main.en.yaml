@@ -6743,10 +6743,10 @@ menu:
       parent: cloudprem_introduction
       identifier: cloudprem_architecture
       weight: 101
-    - name: Connectivity
+    - name: Network
       url: /cloudprem/introduction/network
       parent: cloudprem_introduction
-      identifier: cloudprem_connectivity
+      identifier: cloudprem_network
       weight: 102
     - name: Supported Features
       url: /cloudprem/introduction/features

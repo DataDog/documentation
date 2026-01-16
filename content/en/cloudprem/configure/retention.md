@@ -7,8 +7,6 @@ description: Learn how to configure data retention for CloudPrem
   Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
-## Retention policy
-
 The retention policy specifies how long data is stored before being deleted. By default, the retention period is set to 30 days. Data is automatically removed daily by the janitor, which deletes splits (index files) older than the defined retention threshold.
 
 To change the retention period, update the `cloudprem.index.retention` parameter in the Helm chart values file, then upgrade the Helm release and optionally restart the janitor pod to apply the changes immediately:
