@@ -42,7 +42,7 @@ There are various ways you can modify the [data and context collected][1] by RUM
 - Providing more context than what the default attributes provide about where the data is coming from.
 
 <!-- Version must meet 2.17.0 -->
-{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "2.17.0") %}
 
 ## Override default RUM view names
 
@@ -94,15 +94,13 @@ To override default RUM view names:
    ```
    {% /if %}
    <!-- ends CDN sync -->
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts.
 {% /if %}
 <!-- Ends 2.17.0 -->
 
-<!-- Version must meet 2.17.0 -->
-{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts.
 
 <!-- Version must meet 4.13.0 -->
-{% if versionMeets($rum_browser_sdk_version, "4.13.0") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "4.13.0") %}
 
 ### Define service name and version
 
@@ -111,20 +109,91 @@ Starting with [version 4.13.0][16], you can also optionally define the associate
 - **View Name**: Defaults to the page URL path.
 - **Service**: Defaults to the default service specified when creating your RUM application.
 - **Version**: Defaults to the default version specified when creating your RUM application.
-
-<!-- Version must meet 5.28.0 -->
-{% if versionMeets($rum_browser_sdk_version, "5.28.0") %}
-- **Context**: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
-{% /if %}
-<!-- ends 5.28.0 -->
-
-For more information, see [Setup Browser Monitoring][4].
 {% /if %}
 <!-- ends 4.13.0 -->
 
-   <!-- Version must meet 5.28.0 -->
-   {% if versionMeets($rum_browser_sdk_version, "5.28.0") %}
-   The following example manually tracks the pageviews on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
+<!-- version exclusive examples below-->
+
+<!-- before 4.13 -->
+{% if and(equals($rum_browser_sdk_version, "lt_2_13_0"), equals($rum_browser_sdk_version, "gte_2_13_0")) %}
+The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
+
+<!-- NPM -->
+{% if equals($lib_src, "npm") %}
+```javascript
+datadogRum.startView('checkout')
+```
+{% /if %}
+
+<!-- CDN async -->
+{% if equals($lib_src, "cdn_async") %}
+```javascript
+window.DD_RUM.onReady(function() {
+        window.DD_RUM.startView('checkout')
+})
+```
+{% /if %}
+
+<!-- CDN sync -->
+{% if equals($lib_src, "cdn_sync") %}
+```javascript
+window.DD_RUM && window.DD_RUM.startView('checkout')
+```
+{% /if %}
+{% /if %}
+<!-- ends before 4.13 -->
+
+<!-- before 5.28 -->
+{% if and(equals($rum_browser_sdk_version, "gte_4_13_0"), equals($rum_browser_sdk_version, "gte_4_49_0"), equals($rum_browser_sdk_version, "gte_5_22_0")) %}
+
+
+The following example manually tracks the pageviews on the `checkout` page in a RUM application. It uses `checkout` for the view name and associates the `purchase` service with version `1.2.3`.
+
+<!-- NPM -->
+{% if equals($lib_src, "npm") %}
+```javascript
+datadogRum.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+{% /if %}
+
+<!-- CDN async -->
+{% if equals($lib_src, "cdn_async") %}
+```javascript
+window.DD_RUM.onReady(function() {
+  window.DD_RUM.startView({
+    name: 'checkout',
+    service: 'purchase',
+    version: '1.2.3'
+  })
+})
+```
+{% /if %}
+
+<!-- CDN sync -->
+{% if equals($lib_src, "cdn_sync") %}
+
+```javascript
+window.DD_RUM && window.DD_RUM.startView({
+  name: 'checkout',
+  service: 'purchase',
+  version: '1.2.3'
+})
+```
+{% /if %}
+{% /if %}
+<!-- ends before 5.28 -->
+<!-- ends version exclusive examples -->
+
+<!-- Version must meet 5.28.0 -->
+{% if semverIsAtLeast($rum_browser_sdk_version, "5.28.0") %}
+
+- **Context**: Starting with [version 5.28.0][19], you can add context to views and the child events of views.
+
+The following example manually tracks the pageviews on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
 
    <!-- NPM -->
    {% if equals($lib_src, "npm") %}
@@ -172,87 +241,11 @@ For more information, see [Setup Browser Monitoring][4].
    ```
    {% /if %}
    <!-- ends CDN sync -->
-
-   {% /if %}
-   <!-- ends 5.28.0 -->
-
-   <!-- Version must meet 5.22.0 -->
-   {% if versionMeets($rum_browser_sdk_version, "5.22.0") %}
-
-The following example manually tracks the pageviews on the `checkout` page in a RUM application. It uses `checkout` for the view name and associates the `purchase` service with version `1.2.3`.
-
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-datadogRum.startView({
-  name: 'checkout',
-  service: 'purchase',
-  version: '1.2.3'
-})
-```
 {% /if %}
-
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-  window.DD_RUM.startView({
-    name: 'checkout',
-    service: 'purchase',
-    version: '1.2.3'
-  })
-})
-```
-{% /if %}
-
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-
-```javascript
-window.DD_RUM && window.DD_RUM.startView({
-  name: 'checkout',
-  service: 'purchase',
-  version: '1.2.3'
-})
-```
-{% /if %}
-   {% /if %}
-   <!-- ends 5.22.0 -->
-
-   <!-- Version must meet 4.13.0 -->
-   {% if versionMeets($rum_browser_sdk_version, "4.13.0") %}
-   The following example manually tracks the pageviews on the `checkout` page in a RUM application. No service or version can be specified.
-
-   <!-- NPM -->
-   {% if equals($lib_src, "npm") %}
-   ```javascript
-   datadogRum.startView('checkout')
-   ```
-   {% /if %}
-
-   <!-- CDN async -->
-   {% if equals($lib_src, "cdn_async") %}
-   ```javascript
-   window.DD_RUM.onReady(function() {
-         window.DD_RUM.startView('checkout')
-   })
-   ```
-   {% /if %}
-
-   <!-- CDN sync -->
-   {% if equals($lib_src, "cdn_sync") %}
-   ```javascript
-   window.DD_RUM && window.DD_RUM.startView('checkout')
-   ```
-   {% /if %}
-   {% /if %}
-   <!-- ends 4.13.0 -->
-
-{% /if %}
-<!-- Ends 2.17.0 -->
+<!-- ends 5.28.0 -->
 
 <!-- Version must meet 2.17.0 -->
-{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "2.17.0") %}
 
 ### React router instrumentation
 
@@ -410,7 +403,7 @@ To override default RUM view names so that they are aligned with how you've defi
 <!-- Ends 2.17.0 -->
 
 <!-- Version must meet 2.17.0 -->
-{% if versionMeets($rum_browser_sdk_version, "2.17.0") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "2.17.0") %}
 ### Set view name
 
 Use `setViewName(name: string)` to update the name of the current view. This allows you to change the view name during the view without starting a new one.
@@ -453,6 +446,10 @@ Use `setViewName(name: string)` to update the name of the current view. This all
 **Note**: Changing the view name affects the view and its child events from the time the method is called.
 {% /if %}
 <!-- Ends 2.17.0 -->
+
+For more information, see [Setup Browser Monitoring][4].
+
+
 ## Enrich and control RUM data
 
 The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM Browser SDK before it is sent to Datadog.
@@ -464,7 +461,7 @@ Intercepting the RUM events allows you to:
 - Discard selected RUM events
 
 <!-- Version must meet 2.13.0 -->
-{% if versionMeets($rum_browser_sdk_version, "2.13.0") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "2.13.0") %}
 Starting with [version 2.13.0][5], `beforeSend` takes two arguments: the `event` generated by the RUM Browser SDK, and the `context` that triggered the creation of the RUM event.
 
 ```javascript
@@ -706,7 +703,7 @@ Adding user information to your RUM sessions helps you:
 {% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
 
 <!-- Version must meet 6.4.0 -->
-{% if versionMeets($rum_browser_sdk_version, "6.4.0") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "6.4.0") %}
 In versions 6.4.0 and above, the following attributes are available:
 
 | Attribute  | Type | Required |  Description                                                                                              |
@@ -718,7 +715,7 @@ In versions 6.4.0 and above, the following attributes are available:
 <!-- ends  6.4.0 -->
 
 <!-- Version must not meet 6.4.0 -->
-{% if not(versionMeets($rum_browser_sdk_version, "6.4.0")) %}
+{% if not(semverIsAtLeast($rum_browser_sdk_version, "6.4.0")) %}
 The below attributes are optional in versions before 6.4.0, but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
 
 | Attribute  | Type | Description                                                                                              |
@@ -1468,7 +1465,7 @@ By default, global context and user context are stored in the current page memor
 To add them to all events of the session, they must be attached to every page.
 
 <!-- Version must meet 4.49.0 -->
-{% if versionMeets($rum_browser_sdk_version, "4.49.0") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "4.49.0") %}
 With the introduction of the `storeContextsAcrossPages` configuration option in version 4.49.0, those contexts can be stored in [`localStorage`][18], allowing the following behaviors:
 
 - Contexts are preserved after a full reload
@@ -1546,7 +1543,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 {% /if %}
 
 <!-- Version must meet 5.22 -->
-{% if versionMeets($rum_browser_sdk_version, "5.22") %}
+{% if semverIsAtLeast($rum_browser_sdk_version, "5.22") %}
 ## Micro frontend
 
 Starting with version 5.22, the RUM Browser SDK supports micro frontend architectures. The mechanism is based on stacktrace. To use it, you must be able to extract service and version properties from your application's file paths and filenames.

@@ -37,7 +37,8 @@ rum_browser_sdk_version_for_proxying_options:
 - id: lt_4_34_0
 
 rum_browser_sdk_version_for_advanced_config_options:
-- id: lte_2_13_0
+- id: lt_2_13_0
+- id: gte_2_13_0
 - id: gte_2_17_0
 - id: gte_4_13_0
 - id: gte_4_49_0

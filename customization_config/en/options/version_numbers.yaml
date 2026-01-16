@@ -1,8 +1,12 @@
 options:
 
-# 2.13.0 or earlier
-- label: "<=2.13.0"
-  id: lte_2_13_0
+# earlier than 2.13.0
+- label: "<2.13.0"
+  id: lt_2_13_0
+
+# 2.13.0 or later
+- label: ">=2.13.0"
+  id: gte_2_13_0
 
 # 2.17.0 or later
 - label: ">=2.17.0"
