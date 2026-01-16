@@ -17,7 +17,7 @@ products:
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 - name: Rehydration
   icon: archive-wui
-  url: /observability_pipelines/rehydration/
+  url: /observability_pipelines/configuration/?tab=rehydration#pipeline-types
 ---
 
 {{< product-availability >}}
