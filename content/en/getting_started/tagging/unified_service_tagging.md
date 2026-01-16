@@ -217,8 +217,8 @@ For APM data, Datadog sets the `version` tag for you in the following priority o
 
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
-- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
-- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][9] 
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
+- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][9].
 
 
 [1]: /agent/cluster_agent/admission_controller/
@@ -294,8 +294,8 @@ For APM data, Datadog sets the `version` tag for you in the following priority o
 
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
-- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
-- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
+- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][3].
  
 
 [1]: /tracing/services/deployment_tracking/
@@ -368,8 +368,8 @@ For APM data, Datadog sets the `version` tag for you in the following priority o
 
 Requirements: 
 - Datadog Agent Version 7.52.0 or greater
-- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed
-- If your services are not running in a containerized environment, or if you'd also like to have the git SHA included, [embed Git information in your build artifacts][3] 
+- If your services run in a containerized environment and `image_tag` is sufficient for tracking new version deployments, no further configuration is needed.
+- If your services are not running in a containerized environment, or if you'd also like to have the Git SHA included, [embed Git information in your build artifacts][3].
 
 [1]: /tracing/services/deployment_tracking/
 [2]: /watchdog/faulty_deployment_detection/
@@ -424,7 +424,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 
 [1]: /real_user_monitoring/correlate_with_other_telemetry/apm/
-[2]: /real_user_monitoring/browser/setup/
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}

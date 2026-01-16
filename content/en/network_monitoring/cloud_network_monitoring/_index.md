@@ -7,6 +7,9 @@ aliases:
   - /network_performance_monitoring/
   - /network_monitoring/performance/
 further_reading:
+- link: "https://www.datadoghq.com/blog/cnm-network-health"
+  tag: "Blog"
+  text: "Detect, diagnose, and resolve network issues easily with CNM Network Health"
 - link: '/network_monitoring/cloud_network_monitoring/guide/detecting_application_availability/'
   tag: 'Guide'
   text: 'Detecting Application Availability using Network Insights'
@@ -28,6 +31,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
   tag: "Blog"
   text: "Best practices for monitoring and remediating connection churn"
+- link: "/network_monitoring/cloud_network_monitoring/glossary"
+  tag: "Doc"
+  text: "CNM Terms and Concepts"
 algolia:
   tags: ['Cloud Network Monitoring', 'Network Performance Monitoring', 'CNM', 'NPM']
 ---
@@ -43,13 +49,12 @@ Datadog Cloud Network Monitoring (CNM) gives you visibility into your network tr
 * Identify outages of cloud provider regions and third-party tools
 * Troubleshoot client-side and server-side DNS server issues
 
-CNM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
-
-Additionally, [Network path][5], a feature of CNM, is available in Preview, which allows you to see hop-by-hop traffic in your network.
-
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/cloud_network_monitoring/network_health" >}}<u>Network Health</u>: Review the health of your network environment.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/network_path/setup/#scheduled-tests" >}}<u>Network Path Scheduled Tests</u>: Visualize the route that network traffic follows from its origin to its destination using scheduled tests.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/network_path/setup/#dynamic-tests-preview" >}}<u>Network Path Dynamic Tests</u>: Dynamically create tests to allow the Agent to automatically discover and monitor network paths.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
     {{< nextlink href="monitors/types/cloud_network_monitoring/#common-monitors" >}}<u>Common Monitors</u>: Configure Common CNM monitors.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -60,6 +65,5 @@ Additionally, [Network path][5], a feature of CNM, is available in Preview, whic
 
 [1]: https://app.datadoghq.com/network
 [2]: https://app.datadoghq.com/network/map
-[3]: https://www.datadoghq.com/blog/npm-windows-support/
-[4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
-[5]: /network_monitoring/network_path/
+
+

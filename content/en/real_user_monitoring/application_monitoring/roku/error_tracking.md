@@ -17,7 +17,7 @@ site_support_id: rum_roku
 
 ## Overview
 
-Error Tracking processes errors collected from the Roku SDK. 
+Error Tracking processes errors collected from the Roku SDK.
 
 Enable Roku Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 
@@ -37,6 +37,36 @@ For any given error, you can access the file path, line number, and a code snipp
 
 After setting up Roku, [follow the steps on this page to enable Roku Crash Reporting and Error Tracking][6].
 
+The SDK supports stack trace in crash reporting on Roku OS 13+, while on Roku OS <13, the stack trace is empty.
+
+## Test your implementation
+
+To verify your Roku Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
+
+To test your implementation:
+
+1. Run your application on an Roku device.
+2. Execute some code containing a crash. For example:
+
+   ```brightscript
+   sub explodingMethod()
+       x = 1
+       print x.foo
+   ```
+
+3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [**Error Tracking**][1].
+
+### Forward errors to Datadog
+
+Whenever you perform an operation that might throw an exception, you can forward the error to Datadog by adding the following code snippet:
+
+```brightscript
+    try
+        doSomethingThatMightThrowAnException()
+    catch error
+        m.global.datadogRumAgent.callfunc("addError", error)
+    end try
+```
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create

@@ -2,13 +2,13 @@
 title: Set Up Push Notifications on Mobile App
 description: "Configure push notifications on iOS and Android for on-call alerts, incidents, and workflow updates with critical alert settings."
 further_reading:
-- link: "https://docs.datadoghq.com/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
-- link: "https://docs.datadoghq.com/service_management/incident_management/notification/"
+- link: "/incident_response/incident_management/notification/"
   tag: "Documentation"
   text: "Incident Notification Rules Documentation"
-- link: "https://docs.datadoghq.com/getting_started/workflow_automation/"
+- link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Workflow Automation Documentation"
 ---
@@ -32,9 +32,20 @@ By default, the mobile app is not allowed to send you notifications. To receive 
 
    {{< img src="service_management/mobile/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog highly recommends you also enable the **Sound** and **Badges** toggles.
+3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog recommends you also enable the **Sound** and **Badges** toggles.
 
 Make sure you grant the mobile app the necessary permissions.
+
+### Custom sounds
+
+You can override the default system notification sounds with custom sounds preloaded in the Datadog mobile app.
+
+To customize notification sounds:
+
+1. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+2. Select the notification category you want to customize.
+3. Select a sound from the available options.
+
 {{% /tab %}}
 
 {{% tab "Android" %}}
@@ -46,11 +57,22 @@ Make sure you grant the mobile app the necessary permissions.
 
    {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
+### Custom sounds
+
+You can override the default system notification sounds with custom sounds preloaded in the Datadog mobile app.
+
+To customize notification sounds:
+
+1. Go to **Device Settings** > **Notifications** > **Advanced Settings**.
+2. Select **Manage notification categories for each app** and make sure Datadog is selected.
+3. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+4. Select the notification category you want to customize.
+5. Select a sound from the available options.
+
+**Note**: The volume for push notifications is dictated by your device's system volume settings.
+
 {{% /tab %}}
 {{< /tabs >}}
-
-### Custom sounds
-On both iOS and Android, you have the option to override the default system notification sounds. The Datadog app comes preloaded with a selection of custom sounds.   
 
 ## Circumvent mute and Do Not Disturb mode for On-Call
 You can override your device's system volume and Do Not Disturb mode for both push notifications (from the Datadog mobile app) and telephony notifications (such as voice call and SMS).
@@ -147,6 +169,6 @@ Create [workflow automations][3] that send mobile push notifications.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:https://app.datadoghq.com/incidents/settings?_gl=1*334tvl*_gcl_aw*R0NMLjE3NDUwMDYwODQuQ2p3S0NBand0ZGlfQmhBQ0Vpd0E5N3k4QkxnWmU4cTdmazJtUlJoQ3o1OTZXcTNmRWJIQTk1Rzg4dnAtUmZtUHBQUGx0OVNVSjRlSk9Sb0Nwek1RQXZEX0J3RQ..*_gcl_au*MTAxODMyNDk1My4xNzQwNDk1NzA3LjExNzUxOTU1MTUuMTc0NjQ5NTU3OS4xNzQ2NDk1NTc5*_ga*MjExMzI1MjUyOS4xNzQ1ODU2NjMx*_ga_KN80RDFSQK*czE3NDY0OTQzMzYkbzU4JGcxJHQxNzQ2NDk5MzA0JGowJGwwJGg5NTQ2NTk0Ng..*_fplc*Q2V5WVJmNnRSV2R0RmljTDZyWmg3ZEVZMFZPeDNlTFhLZkxnenFCOXBvTUslMkZTWWk0a3JzVEw1cDU5YlZzTW55TE5YazY5bjdhJTJGOXpySzJ0TFMxTEozZms0WTVlOWVibEN5ZFBNNm1XYmJJQll0R0d4YnlralJ2eU1CS1NoUSUzRCUzRA..#Rules
-[2]:https://docs.datadoghq.com/service_management/incident_management/incident_settings/notification_rules/
+[2] /incident_response/incident_management/incident_settings/notification_rules/
 [3]:https://docs.datadoghq.com/getting_started/workflow_automation/
-[4]:/service_management/on-call/guides/configure-mobile-device-for-on-call
+[4]: /incident_response/on-call/guides/configure-mobile-device-for-on-call

@@ -22,15 +22,17 @@ further_reading:
 
 To use Azure Cloud Cost Management in Datadog, you must configure the Datadog Azure integration and create **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup. 
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup.
 
 To determine your account type, see the [Azure documentation][10]. **Note:** If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
 
 ## Setup
 
+You can setup using the [API][13], [Terraform][14], or directly in Datadog by following the instructions below.
 
 {{% site-region region="us3" %}}
-**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an app registration][2].
+
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -140,9 +142,8 @@ To resolve this, add Datadog's webhook IPs to your network allowlist by visiting
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Getting historical data
-Datadog automatically ingests up to 15 months of available historical cost data.
 
-Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
+Azure exports cost data starting from the month you created the export. Datadog automatically ingests up to 15 months of available historical cost data from these exports. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
@@ -203,7 +204,7 @@ The following out-of-the-box tags are derived from your [usage cost report][9] a
 | `frequency` | Indicates whether a charge is expected to repeat. Charges can either happen once (`OneTime`), repeat on a monthly or yearly basis (`Recurring`), or be based on usage (`Usage`) |
 | `InvoiceId` | The unique document ID listed on the invoice PDF. |
 | `invoicesectionid` | The ID of the MCA invoice section. |
-| `invoicesectionname` | The name of the EA department. |
+| `invoicesectionname` | The name of the Enterprise Agreement (EA) department. |
 | `isazurecrediteligible` | `true` if the charge is eligible to be paid for using Azure credits. |
 | `location` | The data center location where the resource is running. |
 | `metercategory` | The top level service that this usage belongs to (such as `Networking`). |
@@ -260,3 +261,5 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
 [11]: /help/
 [12]: /cloud_cost_management/tags
+[13]: /api/latest/cloud-cost-management/#create-cloud-cost-management-azure-configs
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/azure_uc_config

@@ -4,6 +4,12 @@ disable_toc: true
 aliases:
   - /security/cloud_siem/content_packs
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
+- link: https://www.datadoghq.com/blog/oci-content-pack
+  tag: Blog
+  text: Monitor OCI Audit Logs with Datadog Cloud SIEM
 - link: "/security/cloud_siem/detection_rules"
   tag: "Documentation"
   text: "Create log detection rules"
@@ -43,7 +49,7 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/content-packs
+[1]: https://app.datadoghq.com/security/siem/content-packs
 [2]: /security/detection_rules/
 [3]: /security/cloud_siem/triage_and_investigate/investigator
 [4]: /service_management/workflows/

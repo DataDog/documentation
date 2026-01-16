@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"
   text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
+- link: "/opentelemetry/integrations/datadog_extension/"
+  tag: "Documentation"
+  text: "Enable the Datadog Extension to inspect collector configurations in Fleet Automation"
 ---
 
 ## Overview
@@ -274,6 +277,10 @@ Configure each of the following components to suit your needs:
     {{< nextlink href="/opentelemetry/collector_exporter/collector_batch_memory/" >}}Batch and Memory Settings{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Validate your collector configurations in Fleet Automation
+
+Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Automation by enabling the Datadog Extension. 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -284,7 +291,7 @@ Configure each of the following components to suit your needs:
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
 [6]: /api/latest/logs/
 [7]: /api/latest/metrics/#submit-metrics
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/internal/e2e/examples/collector.yaml
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
 [9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
 [10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://opentelemetry.io/docs/instrumentation/

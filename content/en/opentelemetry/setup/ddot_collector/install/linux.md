@@ -1,5 +1,5 @@
 ---
-title: Install the Datadog Distribution of OTel Collector on Linux
+title: Install the DDOT Collector on Linux
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 3
@@ -12,10 +12,6 @@ further_reading:
 {{< callout header="false" btn_hidden="true">}}
   Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is currently in Preview.
 {{< /callout >}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -33,7 +29,13 @@ To complete this guide, you need the following:
 - A supported Linux distribution (for example, Debian, Ubuntu, CentOS, RHEL, Fedora, SUSE).
 - `curl` must be installed to use the one-line installation script.
 
+**Network**:
+
+{{% otel-network-requirements %}}
+
 ## Install the Datadog Agent with OpenTelemetry Collector
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Installation
 
@@ -279,7 +281,7 @@ Use Datadog to explore the observability data for your application.
 
 ### Fleet automation
 
-Explore your Datadog Agent and Collector configuration.
+Explore your Datadog Agent, DDOT, and upstream OpenTelemetry Collector configurations.
 
 {{< img src="/opentelemetry/embedded_collector/fleet_automation.png" alt="Review your Agent and Collector configuration from the Fleet Automation page." style="width:100%;" >}}
 

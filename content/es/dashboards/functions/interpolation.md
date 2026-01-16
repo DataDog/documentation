@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/graphing/functions/interpolation/
+description: Rellena los valores de métricas faltantes utilizando métodos de interpolación
+  lineal, de último valor, cero o nulo en datos de series temporales.
 further_reading:
 - link: /dashboards/functions/
   tag: Documentación
@@ -37,7 +39,7 @@ Lee la sección de [La interpolación y el modificador de relleno][1] para obten
 
 La función `default_zero()` rellena los intervalos de tiempo vacíos con el valor 0 o, si la interpolación se encuentra habilitada, con la interpolación. **Nota**: La interpolación se encuentra habilitada por defecto para las métricas de tipo `GAUGE`. Como la mayoría de las funciones, `default_zero()` se aplica **después** de la [agregación temporal y espacial][2].
 
-### Casos de uso
+### Casos prácticos
 
 La función `default_zero()` está destinada a abordar los siguientes casos de uso (aunque también puede servir para otros):
 
@@ -92,7 +94,7 @@ default_zero(avg:custom_metric{*})
 +---------------------+-----------------------------+
 ```
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

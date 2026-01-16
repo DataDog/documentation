@@ -13,12 +13,30 @@ further_reading:
   - link: "/dashboards/guide/quick-graphs/"
     tag: "Documentation"
     text: "Quick Graphs"
+  - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+    tag: Blog
+    text: Manage metric volume and tags in your environment with Observability Pipelines
     
 ---
 
 ## Overview
 
 The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [notebook][2] or dashboard ([screenboard][3], or [timeboard][4]).
+
+## Natural language queries
+
+{{< callout url="https://www.datadoghq.com/product-preview/natural-language-querying-for-metrics/">}}
+Natural Language Querying (NLQ) on the Metrics Explorer is in Preview. If you're interested in this feature, click <strong>Request Access</strong> and complete the form.
+{{< /callout >}}
+
+
+Use Natural Language Queries (NLQ) to describe what you're looking for in plain English. Datadog automatically translates your request into a structured metric query, understanding context such as your services, attributes, and tags. This makes it easier to explore metrics without needing to write complex syntax.
+
+To access this feature, click **Ask** in the search field and type your query.
+
+{{< img src="/metrics/explorer/metrics_nlq_example_10152025.mp4" alt="Natural language query in Metrics Explorer showing how to search for metrics using plain English phrases" video=true >}}
+
+To disable NLQ for your organization, you must have [org_management permissions][11]. Navigate to **Organization Settings > Preferences** and toggle off the Natural Language Queries feature.
 
 ## Graphing
 
@@ -51,9 +69,19 @@ The possible options are:
 
 You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
 
+### Split graph
+
+Use the **Split Graph** button to view the data split into individual graphs by values for tags such as region, service, or environment.
+
 ### Export
 
-Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
+Use the **Export** button (<i class="icon-export"></i>) to export your graph:
+
+- Copy a link to the graph for sharing
+- Add it to an [incident][8]
+- Create a [monitor][9]
+- Save it to a [dashboard][10]
+- Save it to a [notebook][2] 
 
 ### Quick Graphs
 
@@ -72,3 +100,7 @@ For more information, see the [Quick Graphs][7] documentation.
 [5]: /metrics/introduction/#space-aggregation
 [6]: /dashboards/querying/#advanced-graphing
 [7]: /dashboards/guide/quick-graphs/
+[8]: /incident_response/incident_management/
+[9]: /monitors/
+[10]: /dashboards/
+[11]: /account_management/rbac/permissions/#access-management

@@ -1,7 +1,6 @@
 
 ---
 title: Agent-Side Filtering for DogStatsD Custom Metrics 
-private: true
 further_reading:
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"
@@ -186,6 +185,196 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 {{< img src="metrics/guide/agent_filtering_for_dogstatsd_custom_metrics/delete_policy.png" alt="The delete policy button on a metric filtering policy detail view" style="width:100%;" >}}
 
+## Manage metric filtering policies through the API
+
+<div class="alert alert-danger">These endpoints are subject to change while Agent-side filtering for DogStatsD custom metrics is in Preview.</div>
+
+These endpoints require a valid Datadog API key and application key. See [Getting started][8] in the API Reference for more information.
+
+### Create a filtered metric policy
+
+The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**POST** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies`
+
+#### Example body
+
+{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{
+  "data": {
+    "type": "filtered_metrics",
+    "attributes": {
+      "policy_name": "my policy",
+      "metric_names": [
+        "metric.name.one",
+        "metric.name.two"
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+### Update a filtered metric policy (partial update)
+
+The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**PATCH** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+
+#### Example body
+
+{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{
+  "data": {
+    "type": "filtered_metrics",
+    "attributes": {
+      "policy_name": "my policy",
+      "metrics_to_add": [
+        "metric.name.three",
+        "metric.name.four"
+      ],
+      "metrics_to_remove": [
+        "metric.name.five",
+        "metric.name.six"
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+### Update a filtered metric policy (full replace)
+
+The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**PUT** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+
+#### Example body
+
+{{< code-block lang="json" disable_copy="false" collapsible="true" >}}
+{
+  "data": {
+    "type": "filtered_metrics",
+    "attributes": {
+      "policy_name": "my policy",
+      "metric_names": [
+        "metric.name.seven",
+        "metric.name.eight"
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+### Delete a policy
+
+The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**DELETE** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+
+### Get a filtered metric policy
+
+The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**GET** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}`
+
+#### Example response body
+
+{{< code-block lang="json" disable_copy="true" collapsible="true" >}}
+{
+  "data": [
+    {
+      "type": "filtered_metrics",
+      "id": "metric.name.one",
+      "attributes": {
+        "updated_timestamp": 1745954352
+      }
+    },
+    {
+      "type": "filtered_metrics",
+      "id": "metric.name.two"
+      "attributes": {
+        "updated_timestamp": 1745954389
+      }
+    }
+    // ... up to ~10,000 entries
+  ],
+  "links": {
+    "self": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=200&page[limit]=100",
+    "next": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=300&page[limit]=100",
+    "prev": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=100&page[limit]=100",
+    "first": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=0&page[limit]=100",
+    "last": "/api/unstable/remote_config/products/metric_control/filtered_metrics/policies/{policy-id}?page[offset]=9900&page[limit]=100"
+  },
+  "meta": {
+    "agent_coverage_percent": 100,
+    "agents_with_latest_policy_count": 4,
+    "deployment_failure": {
+        "failed_agent_count": 0,
+        "failure_message": ""
+    },
+    "deployment_status": "Deployed to all Agents",
+    "deployment_strategy": "all",
+    "policy_name": "test_policy_1",
+    "total": 7,
+    "total_agent_count": 4,
+    "updated_by": "user@datadoghq.com",
+    "updated_timestamp": 1758912365
+  }
+}
+{{< /code-block >}}
+
+### List filtered metric policies
+
+The base URL for your selected [Datadog site][9] is: {{<region-param key="dd_api" code="true">}}
+
+Substitute `<BASE_URL>` in the example below with the base URL.
+
+**GET** `<BASE_URL>/api/unstable/remote_config/products/metric_control/filtered_metrics/policies`
+
+#### Example response body
+
+{{< code-block lang="json" disable_copy="true" collapsible="true" >}}
+{
+    "data": [
+        {
+            "id": "06b-fab-47e",
+            "type": "filtered_metrics",
+            "attributes": {
+                "count": 85,
+                "deployment_status": "Deployed to all Agents",
+                "deployment_strategy": "all",
+                "policy_name": "policy one",
+                "updated_by": "user@datadoghq.com",
+                "updated_timestamp": 1758547485,
+                "version": 4            
+            }
+        },
+        {
+            "id": "07b-201-47e",
+            "type": "filtered_metrics",
+            "attributes": {
+                "count": 8,
+                "deployment_status": "Deployed to all Agents",
+                "deployment_strategy": "all",
+                "policy_name": "policy two",
+                "updated_by": "user@datadoghq.com",
+                "updated_timestamp": 1758547212,
+                "version": 1
+            }
+        }
+    ]
+}
+{{< /code-block >}}
+
 ## Preview limitations
 
 This initial preview release includes the following limitations:
@@ -204,4 +393,7 @@ This initial preview release includes the following limitations:
 [4]: /account_management/rbac/permissions#api-and-application-keys
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/metric/summary
-[7]: https://app.datadoghq.com/metric/settings/policies
+[7]: https://app.datadoghq.com/metric/settings/policies                                            
+[8]: /api/latest/#getting-started
+[9]: /getting_started/site/
+

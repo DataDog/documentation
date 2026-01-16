@@ -67,4 +67,4 @@ If you did not create the action, you cannot edit it directly. Instead select th
 
 [1]: https://app.datadoghq.com/workflow/action-catalog
 [2]: https://app.datadoghq.com/workflow/
-[3]: https://datadoghq.slack.com/
+[3]: https://chat.datadoghq.com/

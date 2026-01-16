@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a Jenkins Pipeline
+title: Jenkins Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/jenkins
 further_reading:
@@ -18,7 +18,7 @@ further_reading:
 
 [Jenkins][19] is an automation server with continuous integration and delivery features. With its plugin architecture, Jenkins can be customized to fit any CI/CD need and automates all aspects of project development, testing, and deployment.
 
-Set up tracing in Jenkins to collect data across various stages of your pipeline executions, identify performance bottlenecks, resolve operational challenges, and refine your deployment processes.
+Set up CI Visibility for Jenkins to collect data across various stages of your pipeline executions, identify performance bottlenecks, resolve operational challenges, and refine your deployment processes.
 
 ### Compatibility
 
@@ -43,6 +43,16 @@ The following Jenkins versions are supported:
 
 This integration supports both Agentless and Agent-based installation.
 Installing the Agent is required for infrastructure metrics correlation.
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Jenkins:
+
+| Datadog  | Jenkins  |
+|----------|----------|
+| Pipeline | Pipeline |
+| Stage    | Stage    |
+| Job      | Step     |
 
 ## Install the Datadog Agent
 
@@ -78,8 +88,27 @@ There are several ways you can configure the Datadog Jenkins plugin.
 
 ### Configure with the Jenkins configuration UI
 
-{{< tabs >}}
-{{% tab "Agentless (using an API key)" %}}
+#### Report through the Datadog Agent (recommended)
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
+2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
+3. Select the mode `Use the Datadog Agent to report to Datadog`.
+4. Configure the `Agent` host.
+5. Configure CI Visibility:
+   1. Configure the `Traces Collection Port` if not using the default port `8126`.
+   2. Click the `Test traces connection` button to verify that your configuration is valid.
+   3. Enable the `Enable CI Visibility` checkbox.
+   4. (Optional) Configure your CI Instance name.
+6. (Optional) Configure logs collection:
+   1. Configure the `Log Collection` port as configured in the Datadog Agent.
+   2. Click the `Test logs connection` button to verify that your configuration is valid.
+   3. Enable the `Enable Log Collection` checkbox.
+7. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the `Datadog App hostname` field.
+8. Save your configuration.
+
+{{< img src="ci/ci-jenkins-plugin-config-agentful-app-hostname.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
+
+#### Agentless (using an API key)
 
 Use this option to make the Jenkins plugin report directly to Datadog without using the Datadog Agent. It requires an API Key.
 
@@ -100,239 +129,16 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 {{< img src="ci/ci-jenkins-plugin-config-agentless-app-hostname.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
 
 [1]: /getting_started/site/#access-the-datadog-site
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent (recommended)" %}}
-
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Configure System**.
-2. Go to the `Datadog Plugin` section, scrolling down the configuration screen.
-3. Select the mode `Use the Datadog Agent to report to Datadog`.
-4. Configure the `Agent` host.
-5. Configure CI Visibility:
-   1. Configure the `Traces Collection Port` if not using the default port `8126`.
-   2. Click the `Test traces connection` button to verify that your configuration is valid.
-   3. Enable the `Enable CI Visibility` checkbox.
-   4. (Optional) Configure your CI Instance name.
-6. (Optional) Configure logs collection:
-   1. Configure the `Log Collection` port as configured in the Datadog Agent.
-   2. Click the `Test logs connection` button to verify that your configuration is valid.
-   3. Enable the `Enable Log Collection` checkbox.
-7. (Optional) Enter the name of the host that you use to access Datadog UI (for example, `app.datadoghq.com`) in the `Datadog App hostname` field.
-8. Save your configuration.
-
-{{< img src="ci/ci-jenkins-plugin-config-agentful-app-hostname.png" alt="Datadog Plugin configuration for Jenkins" style="width:100%;">}}
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Use Configuration-as-Code
 
-{{< tabs >}}
-
-{{% tab "Agentless (using an API key)" %}}
+#### Report through the Datadog Agent (recommended)
 
 If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
 
-    {{% site-region region="us" %}}
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-unclassified:
-  datadogGlobalConfiguration:
-    datadogClientConfiguration:
-      # Select the `Agentless` mode (using API key).
-      datadogApiConfiguration:
-        intake:
-          datadogIntakeSite:
-            # Configure your Datadog site
-            site: 'US1'
-        apiKey:
-          datadogCredentialsApiKey:
-            # Configure ID of Jenkins credentials that store your API key
-            credentialsId: 'my-api-key-credentials-id'
-    # Enable CI Visibility flag
-    enableCiVisibility: true
-    # (Optional) Configure your CI Instance name
-    ciInstanceName: 'jenkins'
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    datadogAppHostname: 'app.datadoghq.com'
-    # (Optional) Enable logs collection
-    collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="eu" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-unclassified:
-  datadogGlobalConfiguration:
-    datadogClientConfiguration:
-      # Select the `Agentless` mode (using API key).
-      datadogApiConfiguration:
-        intake:
-          datadogIntakeSite:
-            # Configure your Datadog site
-            site: 'EU1'
-        apiKey:
-          datadogCredentialsApiKey:
-            # Configure ID of Jenkins credentials that store your API key
-            credentialsId: 'my-api-key-credentials-id'
-    # Enable CI Visibility flag
-    enableCiVisibility: true
-    # (Optional) Configure your CI Instance name
-    ciInstanceName: 'jenkins'
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    datadogAppHostname: 'app.datadoghq.eu'
-    # (Optional) Enable logs collection
-    collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-unclassified:
-  datadogGlobalConfiguration:
-    datadogClientConfiguration:
-      # Select the `Agentless` mode (using API key).
-      datadogApiConfiguration:
-        intake:
-          datadogIntakeSite:
-            # Configure your Datadog site
-            site: 'US1_FED'
-        apiKey:
-          datadogCredentialsApiKey:
-            # Configure ID of Jenkins credentials that store your API key
-            credentialsId: 'my-api-key-credentials-id'
-    # Enable CI Visibility flag
-    enableCiVisibility: true
-    # (Optional) Configure your CI Instance name
-    ciInstanceName: 'jenkins'
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    datadogAppHostname: 'app.ddog-gov.com'
-    # (Optional) Enable logs collection
-    collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-unclassified:
-  datadogGlobalConfiguration:
-    datadogClientConfiguration:
-      # Select the `Agentless` mode (using API key).
-      datadogApiConfiguration:
-        intake:
-          datadogIntakeSite:
-            # Configure your Datadog site
-            site: 'US3'
-        apiKey:
-          datadogCredentialsApiKey:
-            # Configure ID of Jenkins credentials that store your API key
-            credentialsId: 'my-api-key-credentials-id'
-    # Enable CI Visibility flag
-    enableCiVisibility: true
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    ciInstanceName: 'jenkins'
-    # (Optional) Configure your Datadog app hostname
-    datadogAppHostname: 'app.us3.datadoghq.com'
-    # (Optional) Enable logs collection
-    collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-unclassified:
-  datadogGlobalConfiguration:
-    datadogClientConfiguration:
-      # Select the `Agentless` mode (using API key).
-      datadogApiConfiguration:
-        intake:
-          datadogIntakeSite:
-            # Configure your Datadog site
-            site: 'US5'
-        apiKey:
-          datadogCredentialsApiKey:
-            # Configure ID of Jenkins credentials that store your API key
-            credentialsId: 'my-api-key-credentials-id'
-    # Enable CI Visibility flag
-    enableCiVisibility: true
-    # (Optional) Configure your CI Instance name
-    ciInstanceName: 'jenkins'
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    datadogAppHostname: 'app.us5.datadoghq.com'
-    # (Optional) Enable logs collection
-    collectBuildLogs: true
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-unclassified:
-  datadogGlobalConfiguration:
-    datadogClientConfiguration:
-      # Select the `Agentless` mode (using API key).
-      datadogApiConfiguration:
-        intake:
-          datadogIntakeSite:
-            # Configure your Datadog site
-            site: 'AP1'
-        apiKey:
-          datadogCredentialsApiKey:
-            # Configure ID of Jenkins credentials that store your API key
-            credentialsId: 'my-api-key-credentials-id'
-    # Enable CI Visibility flag
-    enableCiVisibility: true
-    # (Optional) Configure your CI Instance name
-    ciInstanceName: 'jenkins'
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    datadogAppHostname: 'app.ap1.datadoghq.com'
-    # (Optional) Enable logs collection
-    collectBuildLogs: true
-    {{< /code-block >}}
-    {{% /site-region %}}
-    {{% site-region region="ap2" %}}
-
-    {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
-unclassified:
-  datadogGlobalConfiguration:
-    datadogClientConfiguration:
-      # Select the `Agentless` mode (using API key).
-      datadogApiConfiguration:
-        intake:
-          datadogIntakeSite:
-            # Configure your Datadog site
-            site: 'AP2'
-        apiKey:
-          datadogCredentialsApiKey:
-            # Configure ID of Jenkins credentials that store your API key
-            credentialsId: 'my-api-key-credentials-id'
-    # Enable CI Visibility flag
-    enableCiVisibility: true
-    # (Optional) Configure your CI Instance name
-    ciInstanceName: 'jenkins'
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    datadogAppHostname: 'app.ap2.datadoghq.com'
-    # (Optional) Enable logs collection
-    collectBuildLogs: true
-    {{< /code-block >}}
-    {{% /site-region %}}
-
-2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
-3. Apply or reload the configuration.
-4. Check the configuration using the `View Configuration` button.
-
-[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent (recommended)" %}}
-
-If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
-
-1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
-
-   {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+```yaml
 unclassified:
   datadogGlobalConfiguration:
     datadogClientConfiguration:
@@ -354,7 +160,7 @@ unclassified:
     datadogAppHostname: 'app.datadoghq.com'
     # (Optional) Enable logs collection
     collectBuildLogs: true
-   {{< /code-block >}}
+```
 
 2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
 3. Apply or reload the configuration.
@@ -362,227 +168,50 @@ unclassified:
 
 [1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 
-{{% /tab %}}
-{{< /tabs >}}
+#### Agentless (using an API key)
+
+If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
+
+1. Create or modify the configuration YAML by adding an entry for `datadogGlobalConfiguration`:
+
+```yaml
+unclassified:
+  datadogGlobalConfiguration:
+    datadogClientConfiguration:
+      # Select the `Agentless` mode (using API key).
+      datadogApiConfiguration:
+        intake:
+          datadogIntakeSite:
+            # Configure your Datadog site
+            site: '{{< region-param key=jenkins_site_name >}}'
+        apiKey:
+          datadogCredentialsApiKey:
+            # Configure ID of Jenkins credentials that store your API key
+            credentialsId: 'my-api-key-credentials-id'
+    # Enable CI Visibility flag
+    enableCiVisibility: true
+    # (Optional) Configure your CI Instance name
+    ciInstanceName: 'jenkins'
+    # (Optional) Configure the name of the host that you use to access Datadog UI
+    datadogAppHostname: '{{< region-param key=dd_full_site >}}'
+    # (Optional) Enable logs collection
+    collectBuildLogs: true
+```
+
+2. In your Jenkins instance web interface, go to **Manage Jenkins > Configuration as Code**.
+3. Apply or reload the configuration.
+4. Check the configuration using the `View Configuration` button.
+
+[1]: https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md
 
 ### Configure with Groovy
 
-{{< tabs >}}
-{{% tab "Agentless (using an API key)" %}}
+#### Report through the Datadog Agent (recommended)
 
 1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
 2. Run the configuration script:
 
-    {{% site-region region="us" %}}
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-import hudson.util.Secret
-import jenkins.model.Jenkins
-import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
-
-def jenkins = Jenkins.getInstance()
-def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
-
-def site = new DatadogIntakeSite(DatadogSite.US1) // Pick your Datadog site
-def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
-datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
-
-datadog.datadogAppHostname = 'app.datadoghq.com' // the name of the host that you use to access Datadog UI
-datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
-
-datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
-
-// Save config
-datadog.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="eu" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-import hudson.util.Secret
-import jenkins.model.Jenkins
-import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
-
-def jenkins = Jenkins.getInstance()
-def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
-
-def site = new DatadogIntakeSite(DatadogSite.EU1) // Pick your Datadog site
-def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
-datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
-
-datadog.datadogAppHostname = 'app.datadoghq.eu' // the name of the host that you use to access Datadog UI
-datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
-
-datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
-
-// Save config
-datadog.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-import hudson.util.Secret
-import jenkins.model.Jenkins
-import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
-
-def jenkins = Jenkins.getInstance()
-def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
-
-def site = new DatadogIntakeSite(DatadogSite.US1_FED) // Pick your Datadog site
-def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
-datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
-
-datadog.datadogAppHostname = 'app.ddog-gov.com' // the name of the host that you use to access Datadog UI
-datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
-
-datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
-
-// Save config
-datadog.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-import hudson.util.Secret
-import jenkins.model.Jenkins
-import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
-
-def jenkins = Jenkins.getInstance()
-def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
-
-def site = new DatadogIntakeSite(DatadogSite.US3) // Pick your Datadog site
-def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
-datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
-
-datadog.datadogAppHostname = 'app.us3.datadoghq.com' // the name of the host that you use to access Datadog UI
-datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
-
-datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
-
-// Save config
-datadog.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-import hudson.util.Secret
-import jenkins.model.Jenkins
-import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
-
-def jenkins = Jenkins.getInstance()
-def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
-
-def site = new DatadogIntakeSite(DatadogSite.US5) // Pick your Datadog site
-def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
-datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
-
-datadog.datadogAppHostname = 'app.us5.datadoghq.com' // the name of the host that you use to access Datadog UI
-datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
-
-datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
-
-// Save config
-datadog.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-import hudson.util.Secret
-import jenkins.model.Jenkins
-import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
-
-def jenkins = Jenkins.getInstance()
-def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
-
-def site = new DatadogIntakeSite(DatadogSite.AP1) // Pick your Datadog site
-def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
-datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
-
-datadog.datadogAppHostname = 'app.ap1.datadoghq.com' // the name of the host that you use to access Datadog UI
-datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
-
-datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
-
-// Save config
-datadog.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap2" %}}
-
-    {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
-import hudson.util.Secret
-import jenkins.model.Jenkins
-import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
-import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
-
-def jenkins = Jenkins.getInstance()
-def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
-
-def site = new DatadogIntakeSite(DatadogSite.AP2) // Pick your Datadog site
-def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
-datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
-
-datadog.datadogAppHostname = 'app.ap2.datadoghq.com' // the name of the host that you use to access Datadog UI
-datadog.enableCiVisibility = true
-datadog.collectBuildLogs = true // (Optional) Enable logs collection
-
-datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
-
-// Save config
-datadog.save()
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent (recommended)" %}}
-
-1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
-2. Run the configuration script:
-
-   {{< code-block lang="groovy" disable_copy="true" collapsible="true" >}}
+```groovy
 import jenkins.model.Jenkins
 import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
 import org.datadog.jenkins.plugins.datadog.configuration.DatadogAgentConfiguration
@@ -604,235 +233,101 @@ datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
 
 // Save config
 datadog.save()
-    {{< /code-block >}}
+```
 
-{{% /tab %}}
-{{< /tabs >}}
+#### Agentless (using an API key)
+
+1. In your Jenkins instance web interface, go to **Manage Jenkins > Script Console**.
+2. Run the configuration script:
+
+```groovy
+import hudson.util.Secret
+import jenkins.model.Jenkins
+import org.datadog.jenkins.plugins.datadog.DatadogGlobalConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.DatadogApiConfiguration
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogIntakeSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.intake.DatadogSite
+import org.datadog.jenkins.plugins.datadog.configuration.api.key.DatadogTextApiKey
+
+def jenkins = Jenkins.getInstance()
+def datadog = jenkins.getDescriptorByType(DatadogGlobalConfiguration)
+
+def site = new DatadogIntakeSite(DatadogSite.{{< region-param key=jenkins_site_name >}}) // Pick your Datadog site
+def apiKey = new DatadogTextApiKey(Secret.fromString('<YOUR_API_KEY>')) // or `new DatadogCredentialsApiKey('<YOUR_CREDENTIALS_ID>')`
+datadog.datadogClientConfiguration = new DatadogApiConfiguration(site, apiKey)
+
+datadog.datadogAppHostname = '{{< region-param key=dd_full_site >}}' // the name of the host that you use to access Datadog UI
+datadog.enableCiVisibility = true
+datadog.collectBuildLogs = true // (Optional) Enable logs collection
+
+datadog.ciInstanceName = 'jenkins' // (Optional) Set your CI Instance name
+
+// Save config
+datadog.save()
+```
 
 ### Use environment variables
 
-{{< tabs >}}
-{{% tab "Agentless (using an API key)" %}}
+#### Report through the Datadog Agent (recommended)
 
 1. Set the following environment variables on your Jenkins instance machine:
 
-    {{% site-region region="us" %}}
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
+```bash
+# Select the Datadog Agent mode
+DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
 
-    # Configure your Datadog site
-    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US1
+# Configure the Agent host
+DATADOG_JENKINS_PLUGIN_TARGET_HOST=your-agent-host
 
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
+# Configure the Traces Collection port (default 8126)
+DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT=8126
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+# Enable CI Visibility
+DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+# (Optional) Configure your CI Instance name
+DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
+# (Optional) Configure Log Collection port as configured in your Datadog Agent
+DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
 
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.com
-    {{< /code-block >}}
+# (Optional) Enable logs collection
+DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
-    {{% /site-region %}}
-
-    {{% site-region region="eu" %}}
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
-
-    # Configure your Datadog site
-    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=EU1
-
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
-
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
-
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.eu
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="gov" %}}
-
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
-
-    # Configure your Datadog site
-    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US1_FED
-
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
-
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
-
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.ddog-gov.com
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us3" %}}
-
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
-
-    # Configure your Datadog site
-    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US3
-
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
-
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
-
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.us3.datadoghq.com
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="us5" %}}
-
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
-
-    # Configure your Datadog site
-    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=US5
-
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
-
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
-
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.us5.datadoghq.com
-    {{< /code-block >}}
-
-    {{% /site-region %}}
-    {{% site-region region="ap1" %}}
-
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
-
-    # Configure your Datadog site
-    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=AP1
-
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
-
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
-
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.ap1.datadoghq.com
-    {{< /code-block >}}
-    {{% /site-region %}}
-
-    {{% site-region region="ap2" %}}
-
-    {{< code-block lang="bash" disable_copy="true" collapsible="true" >}}
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
-
-    # Configure your Datadog site
-    DATADOG_JENKINS_PLUGIN_DATADOG_SITE=AP2
-
-    # Configure your API key
-    DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
-
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
-
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
-
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.ap2.datadoghq.com
-    {{< /code-block >}}
-    {{% /site-region %}}
+# (Optional) Configure the name of the host that you use to access Datadog UI
+DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.com
+```
 
 2. Restart your Jenkins instance.
-{{% /tab %}}
-{{% tab "Report through the Datadog Agent (recommended)" %}}
+
+#### Agentless (using an API key)
 
 1. Set the following environment variables on your Jenkins instance machine:
 
-    ```bash
-    # Select the Datadog Agent mode
-    DATADOG_JENKINS_PLUGIN_REPORT_WITH=DSD
+```bash
+# Select the Datadog Agent mode
+DATADOG_JENKINS_PLUGIN_REPORT_WITH=HTTP
 
-    # Configure the Agent host
-    DATADOG_JENKINS_PLUGIN_TARGET_HOST=your-agent-host
+# Configure your Datadog site
+DATADOG_JENKINS_PLUGIN_DATADOG_SITE={{< region-param key=jenkins_site_name >}}
 
-    # Configure the Traces Collection port (default 8126)
-    DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT=8126
+# Configure your API key
+DATADOG_JENKINS_PLUGIN_TARGET_API_KEY=your-api-key
 
-    # Enable CI Visibility
-    DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
+# Enable CI Visibility
+DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY=true
 
-    # (Optional) Configure your CI Instance name
-    DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
+# (Optional) Configure your CI Instance name
+DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME=jenkins
 
-    # (Optional) Configure Log Collection port as configured in your Datadog Agent
-    DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT=10518
+# (Optional) Enable logs collection
+DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
 
-    # (Optional) Enable logs collection
-    DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS=true
-
-    # (Optional) Configure the name of the host that you use to access Datadog UI
-    DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME=app.datadoghq.com
-    ```
+# (Optional) Configure the name of the host that you use to access Datadog UI
+DATADOG_JENKINS_PLUGIN_DATADOG_APP_HOSTNAME={{< region-param key=dd_full_site >}}
+```
 
 2. Restart your Jenkins instance.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Collect job logs
 
@@ -953,12 +448,13 @@ However, depending on the Jenkins version and the pipeline details, there may be
 
 In this case you can make the Git information available to the plugin by using the `.each {k,v -> env.setProperty(k, v)}` function after executing the `checkout` or `git` steps. For example:
 
-{{< tabs >}}
-{{% tab "Using Declarative Pipelines" %}}
+#### Using Declarative Pipelines
+
 If you're using a declarative pipeline to configure your pipeline, propagate Git information using a `script` block as follows:
 
 Using the `checkout` step:
-{{< code-block lang="groovy" >}}
+
+```groovy
 pipeline {
   stages {
     stage('Checkout') {
@@ -969,10 +465,11 @@ pipeline {
     ...
   }
 }
-{{< /code-block >}}
+```
 
 Using the `git` step:
-{{< code-block lang="groovy" >}}
+
+```groovy
 pipeline {
   stages {
     stage('Checkout') {
@@ -983,34 +480,33 @@ pipeline {
     ...
   }
 }
-{{< /code-block >}}
+```
 
-{{% /tab %}}
-{{% tab "Using Scripted Pipelines" %}}
+#### Using Scripted Pipelines
+
 If you're using a scripted pipeline to configure your pipeline, you can propagate the git information to environment variables directly.
 
 Using the `checkout` step:
-{{< code-block lang="groovy" >}}
+
+```groovy
 node {
   stage('Checkout') {
     checkout(...).each {k,v -> env.setProperty(k,v)}
   }
   ...
 }
-{{< /code-block >}}
+```
 
 Using the `git` step:
-{{< code-block lang="groovy" >}}
+
+```groovy
 node {
   stage('Checkout') {
     git(...).each {k,v -> env.setProperty(k,v)}
   }
   ...
 }
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+```
 
 
 ### Set Git information manually

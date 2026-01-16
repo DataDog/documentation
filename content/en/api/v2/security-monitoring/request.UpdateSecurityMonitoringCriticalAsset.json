@@ -1,0 +1,15 @@
+{
+  "data": {
+    "type": "critical_assets",
+    "attributes": {
+      "enabled": false,
+      "query": "no:alert",
+      "rule_query": "type:(log_detection OR signal_correlation OR workload_security OR application_security) ruleId:djg-ktx-ipq",
+      "severity": "decrease",
+      "tags": [
+        "env:production"
+      ],
+      "version": 1
+    }
+  }
+}

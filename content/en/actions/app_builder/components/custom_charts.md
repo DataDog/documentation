@@ -22,6 +22,10 @@ The basic workflow for creating a custom chart is as follows:
 1. Add the custom chart component and choose a chart style from the App Builder UI or the [Vega-Lite example gallery][1].
 1. Replace the values in the example with your query data.
 
+Alternatively, you can use Bits AI to get started with a custom chart:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt, or try the prompt `Can you help me create a custom chart?`.
+
 ## Example setup flow
 
 The following example shows how to create a histogram chart illustrating Datadog Logs grouped by service.
@@ -96,5 +100,5 @@ A histogram chart with your Datadog Logs data displays.
 
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][0].
 
-[0]: https://datadoghq.slack.com/
+[0]: https://chat.datadoghq.com/
 [1]: https://vega.github.io/vega-lite/examples/

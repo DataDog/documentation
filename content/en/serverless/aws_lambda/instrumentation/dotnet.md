@@ -17,11 +17,22 @@ further_reading:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
+{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
+Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+{{< /callout >}}
+
 ## Setup
 
-If your application is deployed as a container image, use the _Container Image_ method.
-
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+You can instrument your .NET AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+{{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
 The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
@@ -29,7 +40,7 @@ The Datadog CLI modifies existing Lambda functions' configurations to enable ins
 1. Install the Datadog CLI client
 
     ```sh
-    npm install -g @datadog/datadog-ci
+    npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
     ```
 
 2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
@@ -159,6 +170,11 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="dotnet" layer="dd-trace-dotnet" layerParamTypescript="dotnetLayerVersion" layerParamPython="dotnet_layer_version">}}
+{{% /tab %}}
+
 {{% tab "Container image" %}}
 
 1. Install the Datadog Lambda Extension

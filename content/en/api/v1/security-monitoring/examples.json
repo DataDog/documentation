@@ -5,7 +5,7 @@
         "json": {
           "status": "string"
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Status of the response.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Status of the response.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "400": {
         "json": {
@@ -13,7 +13,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "403": {
         "json": {
@@ -21,7 +21,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "404": {
         "json": {
@@ -29,7 +29,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "429": {
         "json": {
@@ -37,7 +37,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -49,7 +49,7 @@
         "incident_id": 2066,
         "version": 0
       },
-      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">add_to_signal_timeline</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Whether to post the signal on the incident timeline.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">incident_id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Public ID attribute of the incident to which the signal will be added.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">version</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Version of the updated signal. If server side version is higher, update will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">add_to_signal_timeline</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">boolean</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Whether to post the signal on the incident timeline.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">incident_id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Public ID attribute of the incident to which the signal will be added.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">version</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Version of the updated signal. If server side version is higher, update will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
     }
   },
   "EditSecurityMonitoringSignalAssignee": {
@@ -58,7 +58,7 @@
         "json": {
           "status": "string"
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Status of the response.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Status of the response.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "400": {
         "json": {
@@ -66,7 +66,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "403": {
         "json": {
@@ -74,7 +74,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "404": {
         "json": {
@@ -82,7 +82,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "429": {
         "json": {
@@ -90,7 +90,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -101,7 +101,7 @@
         "assignee": "773b045d-ccf8-4808-bd3b-955ef6a8c940",
         "version": 0
       },
-      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">assignee&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>The UUID of the user being assigned. Use empty string to return signal to unassigned.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">version</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Version of the updated signal. If server side version is higher, update will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">assignee&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The UUID of the user being assigned. Use empty string to return signal to unassigned.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">version</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Version of the updated signal. If server side version is higher, update will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
     }
   },
   "EditSecurityMonitoringSignalState": {
@@ -110,7 +110,7 @@
         "json": {
           "status": "string"
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Status of the response.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">status</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Status of the response.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "400": {
         "json": {
@@ -118,7 +118,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "403": {
         "json": {
@@ -126,7 +126,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "404": {
         "json": {
@@ -134,7 +134,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       },
       "429": {
         "json": {
@@ -142,7 +142,7 @@
             "Bad Request"
           ]
         },
-        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Array of errors returned by the API.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
       }
     },
     "request": {
@@ -155,7 +155,7 @@
         "state": "open",
         "version": 0
       },
-      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">archiveComment</p>\n    </div>\n              <div class=\"col-2 column\"><p>string</p></div>\n              <div class=\"col-6 column\"><p>Optional comment to explain why a signal is being archived.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">archiveReason</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>Reason why a signal has been archived. \nAllowed enum values: <code>none,false_positive,testing_or_maintenance,investigated_case_opened,true_positive_benign,true_positive_malicious,other</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">state&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p>enum</p></div>\n              <div class=\"col-6 column\"><p>The new triage state of the signal. \nAllowed enum values: <code>open,archived,under_review</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">version</p>\n    </div>\n              <div class=\"col-2 column\"><p>int64</p></div>\n              <div class=\"col-6 column\"><p>Version of the updated signal. If server side version is higher, update will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">archiveComment</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Optional comment to explain why a signal is being archived.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">archiveReason</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Reason why a signal has been archived. \nAllowed enum values: <code>none,false_positive,testing_or_maintenance,investigated_case_opened,true_positive_benign,true_positive_malicious,other</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">state&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The new triage state of the signal. \nAllowed enum values: <code>open,archived,under_review</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">version</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int64</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Version of the updated signal. If server side version is higher, update will be rejected.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
     }
   }
 }

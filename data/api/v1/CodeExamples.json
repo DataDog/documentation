@@ -83,8 +83,18 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_9836563",
+      "description": "Create a geomap widget with conditional formats and text formats"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2345541687",
+      "description": "Create a new dashboard with a bar_chart widget with stacked type and no legend specified"
     },
     {
       "group": "dashboards",
@@ -120,6 +130,16 @@
       "group": "dashboards",
       "suffix": "_1284514532",
       "description": "Create a new dashboard with a timeseries widget using formulas and functions cloud cost query"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_865807520",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with combined semantic_mode"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3685886950",
+      "description": "Create a new dashboard with a timeseries widget using formulas and functions metrics query with native semantic_mode"
     },
     {
       "group": "dashboards",
@@ -163,6 +183,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1712853070",
+      "description": "Create a new dashboard with bar_chart widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2617251399",
+      "description": "Create a new dashboard with bar_chart widget sorted by group"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2607944105",
       "description": "Create a new dashboard with check_status widget"
     },
@@ -178,6 +208,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1093147852",
+      "description": "Create a new dashboard with distribution widget with markers and num_buckets"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2432046716",
       "description": "Create a new dashboard with event_stream list_stream widget"
     },
@@ -190,6 +225,11 @@
       "group": "dashboards",
       "suffix": "_3250131584",
       "description": "Create a new dashboard with event_timeline widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1617893815",
+      "description": "Create a new dashboard with formula and function distribution widget"
     },
     {
       "group": "dashboards",
@@ -220,6 +260,11 @@
       "group": "dashboards",
       "suffix": "_1177423752",
       "description": "Create a new dashboard with heatmap widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2823363212",
+      "description": "Create a new dashboard with heatmap widget with markers and num_buckets"
     },
     {
       "group": "dashboards",
@@ -650,8 +695,23 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2256674867",
+      "description": "Create a pipeline with Schema Processor and preserve_source false returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1745625064",
+      "description": "Create a pipeline with Schema Processor and preserve_source true returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_2707101123",
       "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_501419705",
+      "description": "Create a pipeline with schema processor"
     }
   ],
   "SubmitDistributionPoints": [
@@ -683,6 +743,11 @@
       "group": "monitors",
       "suffix": "_1303514967",
       "description": "Create a Cost Monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_3626832481",
+      "description": "Create a Data Quality monitor returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -723,6 +788,11 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_3541766733",
+      "description": "Create a monitor with assets returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -882,6 +952,11 @@
       "group": "synthetics",
       "suffix": "_1717840259",
       "description": "Create a multi-step api test with every type of basicAuth returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_2106135939",
+      "description": "Create a multistep test with subtest returns \"OK\" response"
     },
     {
       "group": "synthetics",

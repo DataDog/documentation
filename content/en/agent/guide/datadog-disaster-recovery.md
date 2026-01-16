@@ -1,5 +1,6 @@
 ---
 title: Datadog Disaster Recovery
+site_support_id: datadog_disaster_recovery
 private: true
 further_reading:
 - link: "agent/remote_config/?tab=configurationyamlfile"
@@ -14,7 +15,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-disaster-recovery/" header="Join the Preview!">}}
-Datadog Disaster Recovery is in Preview, but you can request access! Use this form to submit your request.
+Datadog Disaster Recovery is in Limited Availability. Use this form to request access!
 {{< /callout >}}
 
 ## Overview 
