@@ -157,9 +157,10 @@ The Notification Center lists all push notifications received so that notificati
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it. Click timeframe on bottom right to customize the dashboard range. 
 
-**Notes**: 
+**Note**: 
 - To set up or edit a dashboard, you need to [log in to the Datadog browser app][10]. For more information, see [Dashboards][11].
 - Dashboard links configured in UTC open in UTC on the mobile app. For more information, see [Dashboard Configurations][24].
+- Not all widget types are available, which means they do not display data on the mobile app. This includes Topology Map, List Widget (all data sources), Legacy treemap widget, and SLO Summary widget.
 
 ## Monitors
 
@@ -342,8 +343,8 @@ For help with troubleshooting, [contact Datadog support][13]. You can also send 
 [17]: https://docs.datadoghq.com/software_catalog/manage/
 [18]: https://docs.datadoghq.com/notebooks/
 [19]: https://docs.datadoghq.com/notebooks/#notebook-tags
-[20]: https://docs.datadoghq.com/service_management/on-call/
-[21]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[20]: https://docs.datadoghq.com/incident_response/on-call/
+[21]: /incident_response/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [22]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
 [23]: https://docs.datadoghq.com/logs/explorer/search_syntax/
 [24]: /dashboards/configure/#configuration-actions

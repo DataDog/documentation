@@ -27,10 +27,10 @@ NPM または Yarn を使用して Datadog CLI をインストールします。
 
 ```sh
 # NPM
-npm install -g @datadog/datadog-ci
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
 
 # Yarn
-yarn global add @datadog/datadog-ci
+yarn global add @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
 ```
 
 ### インスツルメントする

@@ -5,7 +5,8 @@ code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/envoy
   - /security/application_security/threats_detection/envoy
-  - /security/application_security/setup/threat_detection/envoy/
+  - /security/application_security/setup/threat_detection/envoy
+  - /security/application_security/setup/standalone/envoy
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -17,10 +18,6 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
-
-{{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy is in Preview" >}}
-To try the preview of App and API Protection for Envoy, use the following setup instructions.
-{{< /callout >}}
 
 You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 

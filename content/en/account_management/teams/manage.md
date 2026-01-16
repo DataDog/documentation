@@ -50,23 +50,43 @@ From the settings dialog, use the menu to customize the following team settings:
 
 ## Team membership
 
-To differentiate members of your team, designate them as team managers. In the member list, a "TEAM MANAGER" badge appears next to team managers' names.
+### Team manager
 
-Under the team's settings, specify which users can modify the team membership. The following options are available:
+To differentiate members of your team, designate some of them as team managers. In the member list, a "TEAM MANAGER" badge appears next to team managers' names.
+
+### Team modification permissions
+
+Under the team's settings, in the **Permissions** tab, specify which users can modify the team membership. The following options are available:
 - Only users with the `user_access_manage` permission
 - Team managers
 - Team managers and members
 - Anyone in the organization
 
+The list is sorted in order of increasing permissiveness. Each option in the list includes the group in the entries above it. For example, selecting "team managers" means that both team managers and users with `user_access_manage` can modify membership.
+
+The option that you select for which users can add and remove members determines whether you can add the team to access control lists. Two types of teams exist: invite only teams and open teams.
+
+Invite only teams
+: Teams with restricted membership. Can be set as access control recipients. Created when you restrict team membership modification to one of the first three options.
+
+Open teams
+: Teams with unrestricted membership. Cannot be set as access control recipients. Created when you allow **Anyone in the organization** to modify team membership.
+
 Users with the `user_access_manage` permission can set default rules on who can add or remove members, or edit team details. Set default rules with the **Default Settings** button on the team directory page. Override these policies for an individual team on the team details panel.
+
+### Teams managed outside Datadog
+
+In some cases, a team's membership cannot be directly modified within Datadog by anyone (including a user with `user_access_manage`):
+- If your org has selected SAML as the only team provisioning source, then the SAML team mappings control team membership. You cannot modify the team membership through Datadog.
+- If a team is managed through an identity provider, then the identity provider controls team membership. You cannot modify the team membership through Datadog.
 
 ### Subteams (hierarchical teams)
 
 With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
     {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}
-    
-On the **Subteams** tab, you can add and remove existing teams. For a clear view of a team's place in its hierarchy, go to [**Service Management** > **Teams** > **Map View**][4], then search for the team by name.
-To automate subteam management based on your organization’s hierarchical structure, use the [Teams APIs][5].
+
+On the **Subteams** tab, you can add and remove existing teams. For a clear view of a team's place in its hierarchy, go to [**Teams** > **Map View**][4], then search for the team by name.
+To automate subteam management based on your organization's hierarchical structure, use the [Teams APIs][5].
 
 ## Manage teams through an identity provider
 

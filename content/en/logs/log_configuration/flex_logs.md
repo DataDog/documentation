@@ -109,7 +109,7 @@ Scalable (XS, S, M, L) compute tiers are billed at a flat rate. Flex Logs Starte
 
 ## Enable and disable Flex Logs
 
-You can enable or disable Flex Logs at the organization level. You must have the [`flex_logs_config_write`][8] permission to do so.
+You can enable or disable Flex Logs at the organization level. You must have the [`flex_logs_config_write`][8] permission.
 
 If Flex Logs is part of your contract, the compute options available on your contract is shown in the UI.
 
@@ -144,9 +144,9 @@ If you select one of the scalable compute options for Flex Logs (for example, XS
 
 Flex Logs is set up within log index configurations. [Index filters][1] that apply to that index also apply to Flex Logs. With Flex Logs Starter, you can store logs for 3, 6, 12, or 15 months. With a scalable compute option, you can store logs for 30-450 days. 
 
-Configure Flex Tier in the [Logs Index Configuration][2] page:
+Configure Flex Tier in the [Flex Logs Controls][5] page:
 
-1. Navigate to the [Indexes][2] page.
+1. Click [Indexes Configuration][2].
 2. Edit the index you wish to enable with Flex Logs or create a new index.
 3. Select **Flex Tier** and set the retention under *Configure Storage Tier and Retention*.
 
@@ -221,9 +221,9 @@ The following list is an example of log sources that are good candidates for sen
 
 ### Flex Logs for multiple-organization accounts
 
-For each organization in which you want Flex Logs, you must enable a compute size per organization. Only one compute can be used per organization, and compute sizes cannot be shared across organizations. Starter and scalable compute cannot be used simultaneously in an organization.
+<div class="alert alert-danger">Each organization can only use one compute size at a time. Compute sizes cannot be shared across organizations, and starter and scalable compute cannot be used simultaneously within the same organization.</div>
 
-Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
+For each organization where you want to use Flex Logs, you must enable a compute size. Datadog recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
 
 ### When the compute limit is reached
 

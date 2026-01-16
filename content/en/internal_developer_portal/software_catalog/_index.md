@@ -10,6 +10,9 @@ aliases:
   - /service_catalog/
   - /software_catalog/
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "/internal_developer_portal/use_cases"
   tag: "Documentation"
   text: "Learn about Software Catalog Use Cases"
@@ -17,7 +20,7 @@ algolia:
   tags: ['software catalog']
 ---
 
-{{< img src="tracing/software_catalog/software-catalog-landing-vid.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/software-catalog-landing-page.mp4" video=true alt="Navigating the Software Catalog" style="width:100%;" >}}
 
 ## Overview
 

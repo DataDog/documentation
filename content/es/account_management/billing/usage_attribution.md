@@ -5,7 +5,7 @@ algolia:
   - atribución de costes
 aliases:
 - /es/account_management/billing/advanced_usage_reporting/
-- /es/account_management/billing/custom_usage_reporitng/
+- /es/account_management/billing/custom_usage_reporting/
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación
@@ -14,10 +14,6 @@ title: Atribución de uso
 ---
 
 ## Información general
-
-<div class="alert alert-danger">L
-Atribución de uso es una prestación incluida en el plan empresarial. Si quieres usarla en otros planes, ponte en contacto con la persona encargada de tu cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitarla.
-</div>
 
 Los administradores o usuarios con permiso de Lectura de uso pueden acceder a la Atribución de uso pestaña desde la sección Plan y uso en Datadog. La página de Atribución de uso proporciona la siguiente información y funcionalidad:
 

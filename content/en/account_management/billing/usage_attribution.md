@@ -2,11 +2,14 @@
 title: Usage Attribution
 aliases:
     - /account_management/billing/advanced_usage_reporting/
-    - /account_management/billing/custom_usage_reporitng/
+    - /account_management/billing/custom_usage_reporting/
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"
   text: "Plan and Usage Settings"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#identifying-areas-for-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 algolia:
   tags: ['usage attribution', 'cost attribution']
 ---

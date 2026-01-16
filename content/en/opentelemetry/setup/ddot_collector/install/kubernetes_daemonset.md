@@ -1,5 +1,5 @@
 ---
-title: Install the DDOT Collector as a Kubernetes DaemonSet 
+title: Install the DDOT Collector as a Kubernetes DaemonSet
 aliases:
 - "/opentelemetry/agent/install_agent_with_collector"
 - "/opentelemetry/setup/ddot_collector/install/kubernetes"
@@ -36,11 +36,11 @@ Install and set up the following on your machine:
 - [Helm (v3+)][54]
 - [kubectl][5]
 
-{{< callout btn_hidden="true" >}}
-Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is in Preview. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
-{{< /callout >}}
+**Network**: {{% otel-network-requirements %}}
 
 ## Install the Datadog Agent with OpenTelemetry Collector
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Select installation method
 
@@ -123,7 +123,7 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
 
 The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
 
-4. (Optional) Enable additional Datadog features:
+3. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
 
@@ -209,8 +209,6 @@ datadog:
   ...
   apm:
     portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
     peer_service_aggregation: true
   orchestratorExplorer:
     enabled: true
@@ -251,8 +249,6 @@ datadog:
         name: otel-http
   apm:
     portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
     peer_service_aggregation: true
   orchestratorExplorer:
     enabled: true
@@ -346,6 +342,8 @@ In the snippet below, the Collector configuration is placed directly under the `
                 processors: [infraattributes, batch]
                 exporters: [debug, datadog]
 {{< /code-block >}}
+
+{{% otel-infraattributes-prereq %}}
 
 When you apply the `datadog-agent.yaml` file containing this `DatadogAgent` resource, the Operator automatically mounts the Collector configuration into the Agent DaemonSet.
 
@@ -672,6 +670,8 @@ service:
 
 {{< /code-block >}}
 
+{{% otel-infraattributes-prereq %}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -732,10 +732,11 @@ Deploy the Datadog Agent with the configuration file:
 kubectl apply -f datadog-agent.yaml
 ```
 
-This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
+This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
+[3]: /opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
 {{% /tab %}}
 {{% tab "Helm" %}}
 To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use one of the following Helm commands:
@@ -757,10 +758,11 @@ Replace `<RELEASE_NAME>` with the Helm release name you are using.
 
 <div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
-This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
+This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
+[3]: /opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -817,38 +819,28 @@ env:
 
 [Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-Unified service tagging ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
+In containerized environments, set `env`, `service`, and `version` using OpenTelemetry Resource Attributes environment variables. The DDOT Collector detects this tagging configuration and applies it to the data it collects from containers.
 
-In containerized environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables or Kubernetes labels on your deployments and pods. The DDOT detects this tagging configuration and applies it to the data it collects from containers.
-
-To get the full range of unified service tagging, add **both** the environment variables and the deployment/pod labels:
+Add the following environment variables to your application's deployment manifest:
 
 {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    tags.datadoghq.com/env: "<ENV>"
-    tags.datadoghq.com/service: "<SERVICE>"
-    tags.datadoghq.com/version: "<VERSION>"
-...
-template:
-  metadata:
-    labels:
-      tags.datadoghq.com/env: "<ENV>"
-      tags.datadoghq.com/service: "<SERVICE>"
-      tags.datadoghq.com/version: "<VERSION>"
-  containers:
-  -  ...
-     env:
-      - name: OTEL_SERVICE_NAME
-        value: "<SERVICE>"
-      - name: OTEL_RESOURCE_ATTRIBUTES
-        value: >-
-          service.name=$(OTEL_SERVICE_NAME),
-          service.version=<VERSION>,
-          deployment.environment.name=<ENV>
+  name: <SERVICE>
+spec:
+  template:
+    spec:
+      containers:
+      - name: <SERVICE>
+        env:
+          - name: OTEL_SERVICE_NAME
+            value: "<SERVICE>"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "service.version=<VERSION>,deployment.environment.name=<ENV>"
 {{< /code-block >}}
+
+<div class="alert alert-info">Alternatively, you can use <a href="/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration">Datadog-specific Kubernetes labels</a> to configure unified service tagging. Do not use both approaches, as this creates duplicate tags.</div>
 
 ### Run the application
 

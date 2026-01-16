@@ -1,7 +1,13 @@
 ---
 title: Elasticsearch Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Elasticsearch destination to send logs to Elasticsearch.
 

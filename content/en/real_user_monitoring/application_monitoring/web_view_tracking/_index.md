@@ -28,7 +28,7 @@ further_reading:
   - link: /real_user_monitoring
     tag: Documentation
     text: Explore Datadog RUM
-  - link: /real_user_monitoring/session_replay/mobile/setup_and_configuration#web-view-instrumentation
+  - link: /session_replay/mobile/setup_and_configuration#web-view-instrumentation
     tag: Documentation
     text: Web View Instrumentation
 ---
@@ -58,7 +58,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 Set up the RUM Browser SDK for the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
 
-[1]: /real_user_monitoring/browser/setup/#npm
+[1]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -107,8 +107,8 @@ DatadogWebViewTracking.xcframework
 [1]: https://github.com/Carthage/Carthage
 {{% /collapse-content %}}
 
-[1]: /real_user_monitoring/browser/setup/#npm
-[2]: /real_user_monitoring/ios/
+[1]: /real_user_monitoring/application_monitoring/browser/setup/#npm
+[2]: /real_user_monitoring/application_monitoring/ios/
 [3]: https://docs.datadoghq.com/logs/log_collection/ios
 
 {{% /tab %}}
@@ -116,14 +116,14 @@ DatadogWebViewTracking.xcframework
 
 Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
 
-[1]: /real_user_monitoring/browser/setup/#npm
+[1]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
 Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][1].
 
-[1]: /real_user_monitoring/browser/setup/#npm
+[1]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 
 {{% /tab %}}
 {{% tab "Kotlin Multiplatform" %}}
@@ -166,7 +166,7 @@ In order for instrumentation to work on the WebView component, it is very import
 ```
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
-[2]: /real_user_monitoring/android/?tab=kotlin#setup
+[2]: /real_user_monitoring/application_monitoring/android/?tab=kotlin#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
 [4]: /logs/log_collection/android/?tab=kotlin#setup
 
@@ -379,8 +379,8 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
-[2]: /real_user_monitoring/browser/setup/#npm
+[1]: /session_replay/mobile/setup_and_configuration/#web-view-instrumentation
+[2]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/application_monitoring/ios/setup
 [4]: /logs/log_collection/ios
 [5]: https://app.datadoghq.com/rum/explorer

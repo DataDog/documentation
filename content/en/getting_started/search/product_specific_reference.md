@@ -17,7 +17,7 @@ There are two main families of search syntaxes across Datadog products:
 
 **Metrics-based syntax**: Used by Metrics and Cloud Cost Management for time-series data queries with tag-based filtering and aggregation.
 
-**Event-based syntax**: Used by Log Management and adopted by most other Datadog products including traces, RUM, CI/CD, and more. This syntax provides flexible faceted search with boolean operators and pattern matching.
+**Event-based syntax**: Used by Log Management and adopted by most other Datadog products including traces, RUM, CI/CD, Observability Pipelines, and more. This syntax provides flexible faceted search with boolean operators and pattern matching.
 
 ## Metrics
 
@@ -131,9 +131,10 @@ service:database @db.statement:"SELECT *" @db.row_count:>1000
   {{< nextlink href="/quality_gates/explorer/search_syntax" >}}Quality Gates Explorer Syntax: Query quality gate rules and evaluation results{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/explorer/search_syntax" >}}RUM Explorer Search: Search user sessions, views, actions, and errors{{< /nextlink >}}
   {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/custom_rules" >}}Sensitive Data Scanner Custom Rules: Regex patterns and matching syntax for scanning sensitive data{{< /nextlink >}}
-  {{< nextlink href="/service_management/events/explorer/searching" >}}Service Management Events Search: Query and filter service management events{{< /nextlink >}}
+  {{< nextlink href="/events/explorer/searching" >}}Service Management Events Search: Query and filter service management events{{< /nextlink >}}
   {{< nextlink href="/logs/workspaces/sql_reference" >}}SQL Reference for Logs: SQL syntax for advanced log analysis in Workspaces{{< /nextlink >}}
   {{< nextlink href="/tests/explorer/search_syntax" >}}Test Optimization Explorer Search Syntax: Search and analyze test execution data{{< /nextlink >}}
+  {{< nextlink href="/observability_pipelines/search_syntax/logs" >}}Observability Pipelines Search Syntax: Filter logs for your processors{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

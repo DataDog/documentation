@@ -62,7 +62,7 @@ Están disponibles las siguientes variables condicionales:
 
 ### Ejemplos
 
-La variable condicional debe tener un par de apertura y cierre con el texto y **@-notifications** en medio.
+Las variables condicionales deben tener un par de apertura y cierre con el texto y **@-notifications** en medio. Las variables basadas en el estado del monitor (como `is_alert` o `is_warning`) deben tener su propio bloque de mensajes. Dado que un monitor solo puede estar en un estado a la vez, no puedes combinarlos. Sin embargo, puedes anidar condicionales que coincidan en atributos, consulta los ejemplos de `is_renotify`.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
@@ -111,7 +111,7 @@ Busca una subcadena en una [variable de etiqueta](#attribute-and-tag-variables) 
 Para notificar a tu equipo de base de datos si un host desencadenante tiene la etiqueta `role:db_cassandra` o `role:db_postgres`, utiliza lo siguiente:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -120,7 +120,7 @@ Para notificar a tu equipo de base de datos si un host desencadenante tiene la e
 La condición `is_match` también permite unir varias cadenas:
 
 ```text
-{{#is_match "role.name" "db" "database"}}
+{{#is_match "host.role.name" "db" "database"}}
   This displays if the host triggering the alert contains `db` or `database`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -129,7 +129,7 @@ La condición `is_match` también permite unir varias cadenas:
 Para enviar una notificación diferente si la etiqueta no contiene `db`, utiliza la negación de la condición como se indica a continuación:
 
 ```text
-{{^is_match "role.name" "db"}}
+{{^is_match "host.role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
@@ -138,7 +138,7 @@ Para enviar una notificación diferente si la etiqueta no contiene `db`, utiliza
 O utiliza el parámetro `{{else}}` del primer ejemplo:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{else}}
@@ -146,7 +146,7 @@ O utiliza el parámetro `{{else}}` del primer ejemplo:
   @slack-example
 {{/is_match}}
 ```
-**Nota**: Para comprobar si un `<TAG_VARIABLE>` no existe o si está vacío, utiliza `is_exact_match`. Consulta la pestaña `is_exact_match` para más detalles. 
+**Nota**: Para comprobar si uns `<TAG_VARIABLE>` no existe o si está vacía, utiliza `is_exact_match`. Consulta la pestaña `is_exact_match` para más detalles.
 
 {{% /tab %}}
 {{% tab "is_exact_match" %}}
@@ -197,7 +197,7 @@ La variable condicional `is_exact_match` también admite una cadena vacía para 
 ```text
 {{#is_exact_match "host.datacenter" ""}}
   This displays if the attribute or tag does not exist or if it's empty
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 
@@ -242,9 +242,10 @@ Este es el mensaje de escalada @dev-team@company.com
 ```
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
-Si configuras un bloque condicional para una transición de estado en condiciones `alert` o `warning` con un identificador **@-notifications**, se recomienda configurar una condición `recovery` correspondiente para que se envíe una notificación de recuperación al identificador.
+Si configura un bloque condicional para una transición de estado en condiciones `alert` o `warning` con un identificador **@-notifications**, Datadog recomienda que configures una condición `recovery` correspondiente para enviar una notificación de recuperación al identificador.
 
 **Nota**: Cualquier texto o identificador de notificación colocado **fuera** de las variables condicionales configuradas se invoca con cada transición de estado del monitor. Cualquier texto o identificador de notificación colocado **dentro** de las variables condicionales configuradas solo se invoca si la transición de estado del monitor coincide con su condición.
 
@@ -264,7 +265,7 @@ Atributos
 
 ### Variables de alerta múltiple
 
-Configura variables de multialertas en [monitores de multialertas][1] en función de la dimensión seleccionada en el cuadro de grupo de multialertas. Mejora las notificaciones incluyendo dinámicamente en cada alerta el valor asociado a la dimensión agrupada. 
+Configura variables de multialertas en [monitores de multialertas][1] en función de la dimensión seleccionada en el cuadro de grupo de multialertas. Enriquece las notificaciones incluyendo dinámicamente en cada alerta el valor asociado a la dimensión agrupada.
 
 **Nota**: Cuando se utiliza el campo `group_by` en la agregación, las etiquetas y alertas adicionales del monitor pueden heredarse automáticamente. Esto significa que cualquier alerta o configuración establecida en el endpoint supervisado podría aplicarse a cada grupo resultante de la agregación.
 
@@ -381,31 +382,23 @@ Para documentos y enlaces también puedes acceder a un elemento específico con 
 ```
 {{% /collapse-content %}}
 
-
-
 ### Unión de variables de atributo/etiqueta
 
-<div class="alert alert-info">Disponible para
-  <a href="/monitors/types/log/">monitores de log</a>,
-  <a href="/monitors/types/apm/?tab=analytics">monitores de Trace Analytics (APM)</a>,
-  <a href="/monitors/types/error_tracking/"> monitores de Error Tracking</a>,
-  <a href="/monitors/types/real_user_monitoring/">monitores RUM</a>,
-  <a href="/monitors/types/ci/">monitores de CI </a> y
-  <a href="/monitors/types/database_monitoring/">monitores de Database Monitoring</a>.
-</div>
+Puedes incluir cualquier atributo o etiqueta de un log, tramo de traza, evento RUM, CI pipeline, o evento de CI test que coincida con la consulta de monitor. La siguiente tabla muestra ejemplos de atributos y variables que puedes añadir de diferentes tipos de monitor.
 
-Para incluir **cualquier** atributo o etiqueta de un log, un tramo (span) de traza (trace), un evento RUM, un CI Pipeline, o un evento de CI Test que coincida con la consulta del monitor, utiliza las siguientes variables:
+<div class="alert alert-info">Para ver la lista completa de variables disponibles para tu monitor, en la parte inferior de la configuración de notificaciones, haz clic en <strong>Add Variable</strong> (Añadir variable) y selecciona una de las opciones del menú desplegado.</div>
 
-| Tipo de monitor    | Sintaxis de la variable                                  |
-|-----------------|--------------------------------------------------|
-| Log             | `{{log.attributes.key}}` o `{{log.tags.key}}`   |
-| Trace Analytics | `{{span.attributes.key}}` o `{{span.tags.key}}` |
-| Error Tracking  | `{{issue.attributes.key}}`                         |
-| RUM             | `{{rum.attributes.key}}` o `{{rum.tags.key}}`   |
-| Audit Trail     | `{{audit.attributes.key}}` o `{{audit.message}}`    |
-| CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
-| CI Test         | `{{citest.attributes.key}}`                      |
-| Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
+| Tipo de monitor             | Sintaxis de la variable                                         |
+|--------------------------|--------------------------------------------------------|
+| [Audit Trail][16]        | `{{audit.attributes.key}}` o `{{audit.message}}`      |
+| [CI Pipeline][17]        | `{{cipipeline.attributes.key}}`                        |
+| [CI Test][18]            | `{{citest.attributes.key}}`                            |
+| [Database Monitoring][19]| `{{databasemonitoring.attributes.key}}`                |
+| [Error Tracking][14]     | `{{issue.attributes.key}}`                             |
+| [Log][12]                | `{{log.attributes.key}}` o `{{log.tags.key}}`         |
+| [RUM][15]                | `{{rum.attributes.key}}` o `{{rum.tags.key}}`         |
+| [Synthetic Monitoring][20]| `{{synthetics.attributes.key}}`                       |
+| [Trace Analytics][13]    | `{{span.attributes.key}}` o `{{span.tags.key}}`       |
 
 {{% collapse-content title="Ejemplo de uso de sintaxis" level="h4" %}}
 - Para cualquier par `key:value`, la variable `{{log.tags.key}}` se convierte en `value` en el mensaje de alerta.
@@ -425,9 +418,7 @@ Para incluir **cualquier** atributo o etiqueta de un log, un tramo (span) de tra
   {{ event.tags.[dot.key.test] }}
   ```
 
-
 {{% /collapse-content %}}
-
 
 #### Notas importantes
 
@@ -515,7 +506,7 @@ Las variables de plantilla de monitor `{{first_triggered_at}}`, `{{first_trigger
 
  {{< img src="monitors/notifications/triggered_variables.png" alt="Muestra cuatro transiciones con marcas temporales A: 1419 OK a WARN, B: 1427 WARN a ALERT, C: 1445 ALERT a NO DATA, D: 1449 NO DATA a OK" style="width:90%;">}}
 
-**Ejemplo**: Cuando el monitor pasa de `OK` → `WARN`, los valores de `{{first_triggered_at}}` y `{{last_triggered_at}}` tienen ambos la marca temporal A. La tabla siguiente muestra los valores hasta que el monitor se recupera.
+**Ejemplo**: Cuando el monitor pasa de `OK` → `WARN`, los valores de `{{first_triggered_at}}` y `{{last_triggered_at}}` tienen ambos la marca temporal A. La tabla siguiente muestra los valores hasta que el monitor se recupere.
 
 | Transición         | first_triggered_at     | last_triggered_at      | triggered_duration_sec           |
 |------------------  |--------------------------------  |--------------------------------  |--------------------------------  |
@@ -566,7 +557,7 @@ Para evitar notificaciones perdidas al usar identificadores dinámicos con estas
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
   // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 
@@ -717,3 +708,12 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [9]: /es/monitors/types/error_tracking/
 [10]: /es/software_catalog/service_definitions/
 [11]: https://docs.datadoghq.com/es/software_catalog/service_definitions/v2-2/#example-yaml
+[12]: /es/monitors/types/log/
+[13]: /es/monitors/types/apm/?tab=analytics
+[14]: /es/monitors/types/error_tracking/
+[15]: /es/monitors/types/real_user_monitoring/
+[16]: /es/monitors/types/audit_trail/
+[17]: /es/monitors/types/ci/?tab=tests
+[18]: /es/monitors/types/ci/?tab=pipelines
+[19]: /es/monitors/types/database_monitoring/
+[20]: /es/synthetics/notifications/template_variables/

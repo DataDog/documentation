@@ -25,7 +25,7 @@ Data privacy
 APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
 
 - `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
-- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. 
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load.
 - `disabled` mode disables propagation and does not send any information from applications.
 
 | DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |    Oracle    |  MongoDB   |
@@ -35,7 +35,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \* Full propagation mode on Aurora MySQL requires version 3.
 
-\*\* Full propagation mode on Oracle is curerntly only supported when using Java.
+\*\* Full propagation mode on Oracle is only supported when using Java.
 
 
 **Supported application tracers and drivers**
@@ -93,7 +93,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 \*\*\*\* Service/Full mode MongoDB for Node.js:
   - Prerequisite:
-    - Node.js tracer 5.37.0 or greater
+    - Node.js tracer 5.80.0 or greater
 
 \*\*\*\*\* Service/Full mode MongoDB for Python:
   - Prerequisite:

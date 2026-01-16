@@ -1,7 +1,7 @@
 ---
 title: iOS and tvOS Monitoring Setup
 beta: true
-description: "Collect RUM or Error Tracking data from your iOS and tvOS applications."
+description: "Collect RUM data from your iOS and tvOS applications."
 aliases:
   - /real_user_monitoring/ios
   - /real_user_monitoring/ios/getting_started
@@ -36,15 +36,29 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] or [Error Tracking][2] with the iOS SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking), or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your iOS and tvOS applications for [Real User Monitoring (RUM)][1] using the Datadog iOS SDK. Follow the steps below to set up RUM monitoring, which includes Error Tracking.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+- Xcode 12.0 or later
+- iOS 11.0+ or tvOS 11.0+ deployment target
+- A Datadog account with RUM or Error Tracking enabled
 
 ## Setup
 
-To start sending RUM or Error Tracking data from your iOS or tvOS application to Datadog:
+**Choose your setup method:**
 
-### Step 1 - Declare the iOS SDK as a dependency
+- **[Agentic Onboarding (in Preview)][14]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your iOS application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **Manual setup** (below): Follow the instructions to manually add and configure the RUM SDK in your iOS application.
 
-Declare the iOS library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
+### Manual setup
+
+To send RUM data from your iOS or tvOS application to Datadog, complete the following steps.
+
+### Step 1 - Add the iOS SDK as a dependency
+
+Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
 
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
@@ -69,7 +83,6 @@ pod 'DatadogCore'
 pod 'DatadogRUM'
 ```
 
-
 [1]: https://cocoapods.org/
 {{% /tab %}}
 {{% tab "Carthage" %}}
@@ -79,7 +92,7 @@ You can use [Carthage][1] to install `dd-sdk-ios`:
 github "DataDog/dd-sdk-ios"
 ```
 
-**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage will build the SDK from source.
+**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage builds the SDK from source.
 To build and integrate the SDK, run:
 ```
 carthage bootstrap --use-xcframeworks --no-use-binaries
@@ -98,50 +111,21 @@ DatadogRUM.xcframework
 
 ### Step 2 - Specify application details in the UI
 
-{{< tabs >}}
-{{% tab "RUM" %}}
-
-1. Navigate to [**Digital Experience** > **Add an Application**][1].
+1. Navigate to [**Digital Experience** > **Add an Application**][10].
 2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for client IP or geolocation data, use the toggles for those settings. For more information, see [RUM iOS Data Collected][3].
-
-   {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Create a RUM application for iOS in Datadog" style="width:100%;border:none" >}}
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/ios/web_view_tracking/
-[3]: /real_user_monitoring/ios/data_collected/
-
-{{% /tab %}}
-{{% tab "Error Tracking" %}}
-
-1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][1].
-2. Select `iOS` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][2].
-4. To disable automatic user data collection for either client IP or geolocation data, use the toggles for those settings. For more information, see [iOS Data Collected][3].
-
-   {{< img src="real_user_monitoring/error_tracking/mobile-new-application-1.png" alt="Create an application for iOS in Datadog" style="width:90%;">}}
-
-[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/ios/web_view_tracking/
-[3]: /real_user_monitoring/ios/data_collected/
-
-{{% /tab %}}
-{{< /tabs >}}
-
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the `dd-sdk-ios` library, they would be exposed client-side in the iOS application's byte code.
-
-For more information about setting up a client token, see the [Client token documentation][4].
+3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][11].
 
 ### Step 3 - Initialize the library
 
 In the initialization snippet, set an environment name, service name, and client token.
 
-The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. This ensures all measurements, including application startup duration, are captured correctly. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
+The SDK should be initialized as early as possible in the app lifecycle, specifically in the `AppDelegate`'s `application(_:didFinishLaunchingWithOptions:)` callback. The `AppDelegate` is your app's main entry point that handles app lifecycle events. 
+
+This ensures the SDK can correctly capture all measurements, including application startup duration. For apps built with SwiftUI, you can use `@UIApplicationDelegateAdaptor` to hook into the `AppDelegate`.
 
 <div class="alert alert-warning">Initializing the SDK elsewhere (for example later during view loading) may result in inaccurate or missing telemetry, especially around app startup performance.</div>
 
-For more information, see [Using Tags][5].
+For more information, see [Using Tags][4].
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -150,13 +134,14 @@ For more information, see [Using Tags][5].
 ```swift
 import DatadogCore
 
+// Initialize Datadog SDK with your configuration
 Datadog.initialize(
   with: Datadog.Configuration(
-    clientToken: "<client token>",
-    env: "<environment>",
-    service: "<service name>"
+    clientToken: "<client token>",  // From Datadog UI
+    env: "<environment>",             // for example, "production", "staging"
+    service: "<service name>"        // Your app's service name
   ),
-  trackingConsent: trackingConsent
+  trackingConsent: trackingConsent  // GDPR compliance setting
 )
 ```
 {{% /tab %}}
@@ -164,11 +149,12 @@ Datadog.initialize(
 ```objective-c
 @import DatadogCore;
 
+// Initialize Datadog SDK with your configuration
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.service = @"<service name>";
+configuration.service = @"<service name>";  // Your app's service name
 
 [DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
+                       trackingConsent:trackingConsent];  // GDPR compliance setting
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -366,34 +352,36 @@ configuration.site = [DDSite ap2];
 {{< /tabs >}}
 {{< /site-region >}}
 
-The iOS SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][6] to the SDK configuration, see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
+The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. To add GDPR compliance for your EU users (required for apps targeting European users) and configure other [initialization parameters][5], see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 
 #### Sample session rates
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][7]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM iOS SDK][6]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to only keep 50% of sessions use:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+// Configure RUM with 50% session sampling
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
-    sessionSampleRate: 50
+    sessionSampleRate: 50  // Only track 50% of user sessions
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
+// Configure RUM with 50% session sampling
 DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
-configuration.sessionSampleRate = 50;
+configuration.sessionSampleRate = 50;  // Only track 50% of user sessions
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Set tracking consent (GDPR compliance)
 
-To be compliant with the GDPR regulation, the iOS SDK requires the tracking consent value at initialization.
+To be compliant with the GDPR regulation (required for apps targeting European users), the iOS SDK requires the tracking consent value at initialization.
 
 The `trackingConsent` setting can be one of the following values:
 
@@ -517,8 +505,8 @@ import DatadogRUM
 struct BarView: View {
 
     var body: some View {
-        Button("BarButton") { {
-            ...
+        Button("BarButton") {
+            // Your button action here
         }
         .trackRUMTapAction(name: "Bar")
     }
@@ -527,7 +515,21 @@ struct BarView: View {
 
 ## Track iOS errors
 
-[iOS Crash Reporting and Error Tracking][8] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][9].
+[iOS Crash Reporting and Error Tracking][7] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][8].
+
+## Disable automatic user data collection
+
+You may want to disable automatic collection of user data to comply with privacy regulations or organizational data governance policies.
+
+To disable automatic user data collection for client IP or geolocation data:
+
+1. After creating your application, go to the [Application Management][13] page and click your application.
+2. Click **User Data Collection**.
+3. Use the toggles for those settings. For more information, see [RUM iOS Data Collected][12].
+
+To ensure the safety of your data, you must use a client token. Using only [Datadog API keys][2] to configure the `dd-sdk-ios` library would expose them client-side in your iOS application's byte code.
+
+For more information about setting up a client token, see the [Client token documentation][3].
 
 ## Sending data when device is offline
 
@@ -539,19 +541,23 @@ This means that even if users open your application while offline, no data is lo
 
 ## Supported versions
 
-See [Supported versions][10] for a list operating system versions and platforms that are compatible with the iOS SDK.
+See [Supported versions][9] for a list of operating system versions and platforms that are compatible with the iOS SDK.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/
-[2]: /error_tracking/
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /getting_started/tagging/using_tags/#rum--session-replay
-[6]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
-[7]: https://github.com/DataDog/dd-sdk-ios
-[8]: /real_user_monitoring/error_tracking/ios/
-[9]: /real_user_monitoring/explorer/
-[10]: /real_user_monitoring/application_monitoring/ios/supported_versions/
+[2]: /account_management/api-app-keys/#api-keys
+[3]: /account_management/api-app-keys/#client-tokens
+[4]: /getting_started/tagging/using_tags/#rum--session-replay
+[5]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
+[6]: https://github.com/DataDog/dd-sdk-ios
+[7]: /error_tracking/frontend/mobile/ios
+[8]: /real_user_monitoring/explorer/
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[10]: https://app.datadoghq.com/rum/application/create
+[11]: /real_user_monitoring/ios/web_view_tracking/
+[12]: /real_user_monitoring/ios/data_collected/
+[13]: https://app.datadoghq.com/rum/application/
+[14]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring

@@ -25,7 +25,7 @@ author:
 categories:
 - キャッシュ
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md
 display_on_public_website: true
@@ -112,9 +112,10 @@ Akamai DataStream 2 には、イベントは含まれません。
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog で Akamai Datastream 2 を監視する][2]
+- [Datadog で Akamai Datastream 2 を監視する][5]
 
 [1]: https://techdocs.akamai.com/datastream2/docs
-[2]: https://www.datadoghq.com/blog/monitor-akamai-datastream2/
+[2]: https://docs.datadoghq.com/ja/getting_started/site/
 [3]: https://app.datadoghq.com/logs?query=source%3Aakamai.datastream
 [4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-akamai-datastream2/

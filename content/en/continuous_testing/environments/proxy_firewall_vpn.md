@@ -53,56 +53,22 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 | Port | Endpoint                                                                                             | Description                                                                                                                             |
 | ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-us1.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
+| 443 | {{< region-param key="synthetics_tunnel_endpoint" code="true" >}}   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
 | 443 | `intake.synthetics.datadoghq.com` | Required to get the presigned URL and to trigger the Synthetic tests. |
-| 443 | `api.datadoghq.com` | Required to search for Synthetic tests, get them, and poll their results. |
+| 443 | {{< region-param key="api_endpoint" code="true" >}} | Required to search for Synthetic tests, get them, and poll their results. |
 
 {{< /site-region >}}
+{{< site-region region="us3,us5,eu,ap1,ap2" >}}
 
+| Port | Endpoint                                                                                             | Description                                                                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| 443 | {{< region-param key="synthetics_tunnel_endpoint" code="true" >}}   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
+| 443 | {{< region-param key="api_endpoint" code="true" >}} | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
+
+{{< /site-region >}}
 {{< site-region region="eu" >}}
 
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-eu1.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.datadoghq.eu` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
-
 **Note**: Although the tunnel service top level domain is `.com` (and not `.eu`), the endpoint is located in EU (Frankfurt AWS).
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-us3.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.us3.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-us5.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.us5.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
- Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-ap1.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.ap1.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
-
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-
- Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443 | `tunnel-ap2.synthetics.datadoghq.com`   | Required to open the WSS connection from the `datadog-ci` client to the tunnel service. |
-| 443 | `api.ap2.datadoghq.com` | Required to get the presigned URL, search for Synthetic tests, get them, trigger them, and poll their results. |
 
 {{< /site-region >}}
 
@@ -118,7 +84,7 @@ For `resourceUrlSubstitutionRegexes`, specify an array of strings, each containi
 
 For example:
 
-```
+```text
 https://prod.my-app.com/assets/(.*)|http://localhost:3000/assets/$1
 ```
 

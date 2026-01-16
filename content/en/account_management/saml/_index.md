@@ -22,41 +22,13 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
 - If you don't have SAML enabled on your Datadog account, reach out to [support][2] to enable it.
+{{% /site-region %}}
 - This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], and [SafeNet][8].
 - SAML configuration requires [Datadog Administrator][9] access.
-{{% /site-region %}}
-
-{{% site-region region="gov" %}}
-- This documentation assumes that you already have a SAML Identity Provider (IdP). If you do not have a SAML IdP, there are several IdPs that have integrations with Datadog such as [Active Directory][3], [Auth0][4], [Google][5], [LastPass][6], [Microsoft Entra ID][3], [Okta][7], and [SafeNet][8].
-- SAML configuration requires [Datadog Administrator][9] access.
-{{% /site-region %}}
 
 ## Configuring SAML
 
-1. To begin configuration, see your IdP's documentation:
-
-    * [Active Directory][10]
-    * [Auth0][11]
-    * [Google][13]
-    * [Microsoft Entra ID][12]
-    * [NoPassword][14]
-    * [Okta][15]
-    * [SafeNet][16]
-
-2. In the Datadog app, hover over your username in the bottom left corner and select Organization Settings. Select [Login Methods][17] and click on **Configure** under SAML.
-
-3. Upload the IdP metadata from your SAML identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
-
-**Note:** The IdP metadata must contain ASCII characters only.
-
-4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
-
-5. After you upload the IdP metadata and configure your IdP, enable SAML in Datadog by clicking the **Upload and Enable** button.
-    {{< img src="account_management/saml/saml_enable_cropped.png" alt="Configure SAML by uploading your IdP metadata" >}}
-    
-6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
-
-**Note**: To configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][21].
+See [Configuring Single Sign-On With SAML][2] for instructions.
 
 ## Using SAML
 
@@ -64,7 +36,7 @@ After SAML is configured in Datadog and your IdP is set up to accept requests fr
 
 ### SP-initiated login
 
-SP-initiated, or Service Provider-initiated, means login initiated from Datadog. Users log in through the **Single Sign-on URL** shown in the status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL only displays if SAML is enabled for your account and you are using SP-initiated login.
+SP-initiated, or Service Provider-initiated, means login initiated from Datadog. Users log in through the **Single Sign-on URL** shown in the status box at the top of the [SAML Configuration page][4]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL only displays if SAML is enabled for your account and you are using SP-initiated login.
 
 {{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmation that SAML Enabled" >}}
 
@@ -88,7 +60,7 @@ When a login occurs, a SAML Assertion containing user authorization is sent from
 
 * Assertions must be signed.
 * Assertions can be encrypted, but unencrypted assertions are accepted.
-* Reference [Datadog's Service Provider metadata][18] for more information. You must be signed in to Datadog to access the file.
+* Reference [Datadog's Service Provider metadata][3] for more information. You must be signed in to Datadog to access the file.
 
 ### Supported attributes
 
@@ -120,9 +92,9 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 ## Additional features
 
-To map attributes in your identity provider's response to Datadog roles and teams, see [SAML group mapping][22].
+To map attributes in your identity provider's response to Datadog roles and teams, see [SAML group mapping][5].
 
-The following features can be enabled through the [SAML Configuration dialog][19]:
+The following features can be enabled through the [SAML Configuration dialog][4]:
 
 **Note:** You must have Admin permissions to see the SAML Configuration dialog.
 
@@ -150,7 +122,7 @@ If you do not use the updated SP metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-You can make your organization SAML Strict by disabling other login method types in the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][23] to allow certain users to be SAML Strict exempt.
+You can make your organization SAML Strict by disabling other login method types in the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username and password, or Google OAuth login, does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider or directory service to access your Datadog account. Org administrators can set per-user [overrides][6] to allow certain users to be SAML Strict exempt.
 
 ### Self-updating Datadog SP metadata
 
@@ -163,25 +135,11 @@ Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://en.wikipedia.org/wiki/Security_Assertion_Markup_Language
-[2]: /help/
-[3]: https://learn.microsoft.com/en-us/entra/architecture/auth-saml
-[4]: https://auth0.com/docs/protocols/saml-protocol
-[5]: https://cloud.google.com/architecture/identity/single-sign-on
-[6]: https://support.logmeininc.com/lastpass/help/lastpass-admin-toolkit-using-single-sign-on-sso
+[2]: /account_management/saml/configuration
+[3]: https://app.datadoghq.com/account/saml/metadata.xml
+[4]: https://app.datadoghq.com/organization-settings/login-methods/saml
+[5]: /account_management/saml/mapping/
+[6]: /account_management/login_methods/#reviewing-user-overrides
 [7]: https://developer.okta.com/docs/concepts/saml/
 [8]: https://thalesdocs.com/sta/operator/applications/apps_saml/index.html
 [9]: /account_management/users/default_roles/
-[10]: /account_management/saml/activedirectory/
-[11]: /account_management/saml/auth0/
-[12]: /account_management/saml/entra/
-[13]: /account_management/saml/google/
-[14]: /account_management/saml/nopassword/
-[15]: /account_management/saml/okta/
-[16]: /account_management/saml/safenet/
-[17]: https://app.datadoghq.com/organization-settings/login-methods
-[18]: https://app.datadoghq.com/account/saml/metadata.xml
-[19]: https://app.datadoghq.com/saml/saml_setup
-[20]: https://app.datadoghq.com/account/team
-[21]: /account_management/multi_organization/#setting-up-saml
-[22]: /account_management/saml/mapping/
-[23]: /account_management/login_methods/#reviewing-user-overrides

@@ -15,7 +15,9 @@ This feature is in Preview. If you have any feedback, contact <a href="/help/">D
 
 ## Overview
 
-The Datadog exporter supports sending system information about your hosts to Datadog, which you can see in the [Infrastructure List][6]. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys. 
+The Datadog exporter supports sending system information about your hosts to Datadog, which you can see in the [Infrastructure List][6]. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys.
+
+<div class="alert alert-danger">Only metadata sent through the Datadog Exporter will populate the Infrastructure Host List. Metadata sent using the direct OTLP ingest endpoint does not support this feature.</div>
 
 Datadog uses [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. Follow the instructions for [setting up for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 
@@ -88,6 +90,65 @@ To collect these conventions with the OpenTelemetry Collector, set up the [recom
 
 **Note:** You need to add these processors and receivers in the Collector running on the host that you want to monitor. A gateway host does not collect this information from remote hosts.
 
+
+## Canonical cloud resource IDs
+
+Canonical cloud resource IDs (CCRIDs) are cloud provider-assigned resource IDs that uniquely identify a cloud resource. After adding CCRIDs across your different observability types, you can use them to consistently link different types of data for a given cloud resource. You can add CCRIDs in the same format across all cloud resource types. Widespread addition and adoption of CCRIDs gives you access to a variety of use cases across customers and internal teams.
+
+Enable CCRIDs to jump between resources and their associated metrics, traces, and logs for all resource types, eliminating context switching and giving you an end-to-end view of your resources within the same workflow.
+
+To use this feature, set the `datadog.ccrid` resource attribute to the value of the CCRID in all OTLP payloads.
+
+See below for the list of identifier formats per-cloud:
+| Cloud   | Identifier Type    | Example                                                                                                                                      |
+|---------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| AWS     | ARN                | `arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi`                                                                                    |
+| Azure   | Resource ID        | `/subscriptions/0b62a232-b8db-4380-9da6-640f7272ed6d/resourcegroups/lfotriggertest/providers/microsoft.web/sites/resources-task-19cb7afdcbbc`|
+| GCP     | CAI Resource Name  | `//file.googleapis.com/projects/datadog-sandbox/locations/us-central1/backups/kevin-test-backup`                                             |
+| OCI     | OCID               | `ocid1.bucket.oc1.eu-frankfurt-1.aaaaaaaa5b5d7phlob22x4xin2lopq33ugriqiglek2ecxecrjx2awceb7eq`                                               |
+
+How to form a CCRID:
+ * [AWS (EC2 Instance)][13]: `arn:aws:ec2:{region}:{accountId}:instance/{instanceId}`. 
+    Use this command to retrieve the `instanceId`:
+    ```shell
+    ec2metadata --instance-id
+    ```
+ * [Azure][11]: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
+ * GCP: `//compute.googleapis.com/projects/{projectID}/zones/{zoneName}/instances/{instanceName}"`
+ * OCI/Oracle: The CCRID can be obtained by [sending a request][12] at: `http://169.254.169.254/opc/v2/instance/id`
+
+
+For example, to set an AWS CCRID for all resources in metrics, traces, and logs, use the [transform processor][2] with the following configuration:
+```yaml
+processors:
+  transform:
+    metric_statements:
+      - context: resource
+        statements:
+          - set(attributes["datadog.ccrid"], "arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi")
+    trace_statements:
+      - context: resource
+        statements:
+          - set(attributes["datadog.ccrid"], "arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi")
+    log_statements:
+      - context: resource
+        statements:
+          - set(attributes["datadog.ccrid"], "arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi")
+```
+
+The OpenTelemetry semantic conventions also define the [cloud.resource_id][14] attribute, which can be mapped in the configuration using the [attributes processor][15].
+
+Example: 
+```yaml
+processors:
+  attributes/example:
+    actions:
+      - key: datadog.ccrid
+        from_attribute: cloud.resource_id
+        action: upsert
+```
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -102,3 +163,8 @@ To collect these conventions with the OpenTelemetry Collector, set up the [recom
 [8]: https://opentelemetry.io/docs/specs/semconv/resource/os/
 [9]: https://opentelemetry.io/docs/collector/deployment/
 [10]: /opentelemetry/schema_semantics/hostname/
+[11]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-resource-group-and-subscription?tabs=azure-cli
+[12]: https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/gettingmetadata.htm
+[13]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-policies-for-amazon-ec2.html#policy-syntax
+[14]: https://opentelemetry.io/docs/specs/semconv/registry/attributes/cloud/#cloud-resource-id
+[15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor
