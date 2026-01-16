@@ -9127,21 +9127,26 @@ menu:
       url: account_management/billing/google_cloud/
       parent: account_management_billing
       weight: 1316
+    - name: OCI Integration
+      identifier: account_management_billing_oci
+      url: account_management/billing/oci/
+      parent: account_management_billing
+      weight: 1317
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1317
+      weight: 1318
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1318
+      weight: 1319
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1319
+      weight: 1320
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
