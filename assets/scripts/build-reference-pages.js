@@ -1140,6 +1140,20 @@ const processSpecs = (specs) => {
             fs.writeFileSync(`${pageDir}widgets.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
           }
 
+          // Generate processors.json file for Log Processor API tables
+          if(deref.components.schemas && deref.components.schemas.LogsPipeline && deref.components.schemas.LogsPipeline.properties.processors.items.oneOf) {
+            const jsonData = {};
+            const pageDir = `./content/en/api/${version}/logs-pipelines/`;
+            deref.components.schemas.LogsPipeline.properties.processors.items.oneOf.forEach((processor) => {
+              const requestJson = filterExampleJson("request", processor);
+              const requestCurlJson = filterExampleJson("curl", processor);
+              const html = schemaTable("request", processor);
+              jsonData[processor.properties.type.default] = {"json_curl": requestCurlJson, "json": requestJson, "html": html};
+            });
+            fs.writeFileSync(`${pageDir}processors.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
+            console.log(`successfully wrote ${pageDir}processors.json`);
+          }
+
         }).catch((e) => {
           console.log(e);
           process.exitCode = 1;
