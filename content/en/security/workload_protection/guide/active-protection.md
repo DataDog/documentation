@@ -28,7 +28,7 @@ The end result is crypto mining threat detection followed by immediate surgical 
 
 ## RBAC for Active Protection
 
-Here are some important [role and permissions][11] to use for custom rules and Active Protection RBAC:
+Here are some important [role and permissions][5] to use for custom rules and Active Protection RBAC:
 
 - The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the Active Protection feature. 
   - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
@@ -82,7 +82,7 @@ Consequently, you do not need to worry that enabling Active Protection immediate
 
 To enable Active Protection:
 
-1. Go to CSM [Agent Configuration][2] rules.
+1. Go to Workload Protection [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
     <!-- {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}} -->
@@ -149,3 +149,4 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule
 [4]: /security/workload_protection/workload_security_rules
+[5]: /account_management/rbac/permissions

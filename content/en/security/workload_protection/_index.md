@@ -36,72 +36,71 @@ cascade:
 
 ---
 
-Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of Workload Protection with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+## Overview
 
-## Detect threats to your production workloads in real-time
+Datadog Workload Protection provides real-time visibility and defense for your infrastructure by continuously monitoring file, network, and process activity across your environments. It detects threats as they occur, helping you identify, investigate, and stop malicious behaviors before they impact your workloads.
 
-Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine Workload Protection with [Cloud Network Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
+### Actionable, prioritized and contextualized threat detection in real-time
 
-Workload Protection Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for Workload Protection:
+Workload Protection relies on event correlation to surface contextualized and prioritized alerts. As part of the Datadog Security platform, Workload Protection correlates runtime threat detection with findings from misconfiguration scans, vulnerability assessments, and code security. This deep integration enables you to link runtime attacks with preexisting weaknesses, providing the complete context you need to investigate and remediate security incidents. Because Workload Protection is built on the Datadog platform, it also connects with your infrastructure telemetry — including metrics, traces, and logs — so you can understand the scope and impact of threats across your systems. Simply put, investigations are enriched with full context so you can easily reconstruct the entire attack story from detection to resolution.
 
-1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
-2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
-4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
+{{< img src="security/workload_protection/workload_protection_signal.jpg" alt="Workload Protection signal with an investigation and a threat timeline" width="100%">}}
 
-<!-- {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}} -->
+### Response, remediation and hardening capabilities
 
-## Proactively block threats with Active Protection
+You can also take action directly from the Datadog App to block malicious behaviors, trigger remediation workflows, or integrate with your existing response pipelines. Whether your goal is to enforce compliance, strengthen your runtime security posture, or address workload hardening use cases, Workload Protection can take action on your behalf to keep your environments secure and resilient.
 
-By default, all OOTB Agent crypto mining threat detection rules are enabled and actively monitoring for threats.
+### Beyond threat detection: expanded use cases
 
-[Active Protection][10] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
+Workload Protection is not limited to runtime threat detection. Many organizations leverage it across a range of security and operational use cases:
 
-## Manage out-of-the-box and custom detection rules
+- **Compliance Validation:** Workload Protection helps you validate compliance with regulatory frameworks such as PCI, FedRAMP, and SOC 2 by continuously monitoring runtime activity for policy violations, risky configurations, and unauthorized changes.
 
-Workload Protection Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
+- **Runtime Security Posture:** Workload Protection improves your security posture by identifying unsafe runtime practices and sensitive configuration drifts, helping you catch weaknesses before they can be exploited.
 
-Set up [Cloud Security][1] with {{< tooltip glossary="Remote Configuration" case="title" >}} to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
+- **Infrastructure Monitoring:** Acting as a Swiss army knife for runtime observability, Workload Protection enables teams to track any kind of runtime behavior — security-related or otherwise. From debugging custom workloads to monitoring system-level processes and remote user sessions, Workload Protection offers deep, real-time visibility into how your environments operate.
 
-<!-- {{< img src="security/cws/threats_detection_rules.png" alt="Workload Protection detection rules in the Datadog app" width="100%">}} -->
+{{< img src="security/workload_protection/k8s_remote_access_image.png" alt="Breakdown of Kubernetes remote user sessions" width="100%">}}
 
-## Set up real-time notifications
+### Detection Rules, automation, and fleet management
 
-[Send real-time notifications][3] when a threat is detected in your environment, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][4].
+Workload Protection comes out of the box (OOTB) with a comprehensive set of security rules and visibility tools. It includes over 350 agent rules and 200 detection rules, carefully designed to cover most of the MITRE ATT&CK tactics and techniques used by attackers today. This extensive coverage allows teams to detect and mitigate threats across various stages of exploitation, even if they lack the time or specialized expertise to craft detection rules themselves. To complement these detections, the platform provides in-app coverage maps that help users visualize what’s deployed, where it’s active, and what’s protected — ensuring complete and transparent visibility across the entire infrastructure.
 
-Use template variables and Markdown to [customize notification messages][5]. Edit, disable, and delete existing notification rules, or create new rules and define custom logic for when a notification is triggered based on severity and rule type.
+For advanced detection and response capabilities, our platform enables custom rule writing, correlation, and automated actions. It supports over 40 event types on Linux and Windows, spanning process, file system, kernel, and network activities. Security teams can define in-agent state machines, enabling contextualized detection logic that triggers alerts only on meaningful and complex indicators of compromise (IOCs).
 
-## Investigate and remediate security signals
+Managing and scaling protection across large environments is simplified with powerful agent fleet and rule management capabilities. Using {{< tooltip glossary="Remote Configuration" case="title" >}}, teams can push agent rules directly from the UI and receive automatic threat definition updates from Datadog to stay current with evolving attack techniques. The platform also offers flexible configuration and customization options through the UI, CLI, or Terraform, allowing security teams to tailor their detection strategy and deployment workflows to their specific operational needs.
 
-Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+## High level architecture overview
 
-<!-- {{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}} -->
+Workload Protection is built on top of the Datadog Agent, which continuously collects real-time runtime telemetry from your workloads. Agent rules determine which security-relevant events are streamed to Datadog for centralized analysis. Once ingested, these events are processed by backend detection and finding rules, which analyze the data to generate detailed, prioritized Signals or Findings.
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
+Using Remote Configuration, you can manage agent rule deployments and trigger response or remediation actions directly from the Datadog app. In addition, Workload Protection integrates with the Datadog Terraform provider, allowing you to define, version, and maintain your rules as code outside the app.
 
-Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in Preview. Fill out the form to request access.
-{{< /callout >}}
+{{< img src="security/workload_protection/workload_protection_architecture.png" alt="Workload Protection architecture overview" width="100%">}}
 
-## Get started
+## Next steps
 
-{{< whatsnext >}}
-  {{< nextlink href="/security/cloud_security_management/setup/">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for Workload Protection{{< /nextlink >}}
-  {{< nextlink href="/security/workload_protection/workload_security_rules">}}Learn about Workload Protection detection rules{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Workload Protection detection rules{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
+### Getting started
+
+Begin by exploring our Getting Started guide, which introduces the high-level architecture of Workload Protection. You’ll learn about supported environments, how to deploy the agent, and how to experiment with Workload Protection’s features using our playground scripts.
+
+### Detect and Monitor
+
+Dive into our Detect and Monitor resources to understand how agent events translate into Workload Protection signals and findings. These pages will help you explore the built-in (OOTB) detections and guide you in creating your own detection logic.
+
+### Investigate and Triage
+
+Visit our Investigate and Triage sections to discover the different explorers and in-app views available in Workload Protection. These pages will help you make the most of the events, signals, and findings generated by the platform.
+
+### Respond and Report
+
+Head to our Respond and Report pages to learn how to configure Workload Protection for automated remediation and team performance reporting. You’ll find guidance on mitigating threats and tracking metrics like Mean Time to Remediation (MTTR).
+
+### Guides
+
+{{< whatsnext desc="We've put together use case driven examples to help you discover and learn about Workload Protection:" >}}
+{{< nextlink href="/security/workload_protection/guide/active-protection" >}}Proactively block crypto mining threats with Active Protection{{< /nextlink >}}
+{{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Best Practices for Fine-Tuning Workload Protection Security Signals{{< /nextlink >}}
+{{< nextlink href="/security/workload_protection/secl_auth_guide" >}}Writing custom rule expressions{{< /nextlink >}}
+{{< nextlink href="/security/workload_protection/guide/ebpf-free-agent" >}}Threat Detection for Linux Without eBPF Support{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /security/cloud_security_management/setup/
-[2]: /agent/
-[3]: /security/notifications/
-[4]: /security/notifications/#notification-channels
-[5]: /security/notifications/#detection-rule-notifications
-[6]: /security/workload_protection/agent_expressions
-[8]: /security/workload_protection/security_signals
-[9]: /network_monitoring/performance/
-[10]: /security/workload_protection/guide/active-protection

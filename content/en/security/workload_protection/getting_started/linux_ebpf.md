@@ -1,8 +1,6 @@
 ---
-title: Setting up Workload Protection on Linux
-code_lang: linux
-type: multi-code-lang
-code_lang_weight: 80 # a number that represents relative weight.
+title: Setting up Workload Protection on Linux (with eBPF)
+disable_toc: false
 ---
 
 Use the following instructions to enable Workload Protection.
