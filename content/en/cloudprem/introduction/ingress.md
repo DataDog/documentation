@@ -4,12 +4,12 @@ aliases:
 - /cloudprem/configure/ingress/
 description: Learn how to configure and manage ingress controllers for your CloudPrem deployment
 further_reading:
-- link: "/cloudprem/ingest_logs/"
+- link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Set up Log Ingestion"
-- link: "/cloudprem/manage/"
+- link: "/cloudprem/operate/monitoring/"
   tag: "Documentation"
-  text: "Manage and Monitor"
+  text: "Monitor CloudPrem"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
