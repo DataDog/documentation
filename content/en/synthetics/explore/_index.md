@@ -16,7 +16,7 @@ further_reading:
 - link: "/synthetics/explore/results_explorer"
   tag: "Documentation"
   text: "Learn about the Synthetic Monitoring & Testing Results Explorer"
-- link: "/service_management/events/explorer"
+- link: "/events/explorer"
   tag: "Documentation"
   text: "Learn about the Events Explorer"
 ---
@@ -69,7 +69,7 @@ The default facets include the following:
 | `CI/CD Execution Rule` | The status of the test run: `Blocking`, `Non-blocking`, or `Skipped`. |
 | `Endpoint`     | The url or domain the test is targeting.                                      |
 
-<div class="alert alert-info"> Note: You might see facet values originating from tests you don't have access to. </div>
+<div class="alert alert-info">You might see facet values originating from tests you don't have access to.</div>
 
 The **Tags** panel below **Synthetic Filters** lists several default tags you can use to identify your tests. 
 

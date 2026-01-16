@@ -60,7 +60,7 @@ php_value datadog.service my-app
 
 ## NGINX y PHP-FPM
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Nota:</strong> PHP-FPM no admite el valor <code>falso</code> en las directivas <code>env[...]</code>. Utiliza <code>1</code> en lugar de <code>verdadero</code> y <code>0</code> en lugar de <code>false</code>.
 </div>
 
@@ -603,7 +603,7 @@ Al definir la configuración específica de una integración, utiliza el nombre,
 
 ## Asignar nombres de recursos a URI normalizados
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Ten en cuenta que al configurar cualquiera de los siguientes: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code> y <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> se optará por el nuevo enfoque de normalización de recursos y cualquier valor en <code>DD_TRACE_RESOURCE_URI_MAPPING</code> será ignorado.
 </div>
 

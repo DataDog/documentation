@@ -1,5 +1,6 @@
 ---
 title: Visualize
+description: "Create visualizations from RUM data including lists, timeseries, tables, and graphs to analyze performance and user behavior trends."
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"

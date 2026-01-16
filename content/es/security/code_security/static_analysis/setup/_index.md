@@ -17,7 +17,7 @@ title: Configurar Static Code Analysis (SAST)
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security no está disponible en el sitio {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}
@@ -65,7 +65,7 @@ Al instalar una aplicación GitHub, se requieren los siguientes permisos para ha
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios de instancias GitLab son compatibles en Vista previa cerrada. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Únete a la Vista previa</a>.
 </div>
 
@@ -76,7 +76,7 @@ Si GitLab es tu proveedor de gestión de código fuente, antes de comenzar la in
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Los repositorios de Azure DevOps son compatibles con la Vista previa cerrada. Tus organizaciones Azure DevOps deben estar conectadas a un inquilino de Microsoft Entra. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Únete a la Vista previa</a>.
 </div>
 

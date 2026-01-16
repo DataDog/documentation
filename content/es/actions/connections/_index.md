@@ -176,7 +176,7 @@ Para utilizar un grupo de conexión:
 
 **Nota**: Sólo puedes utilizar conexiones dentro de un grupo si tienes el [permiso Resolver][12] para esas conexiones. Si un flujo de trabajo o una aplicación intenta utilizar una conexión para la que no tiene permiso Resolver, se producirá un error en `403 Forbidden`. Para solucionar este problema, puedes:
 - Configura el flujo de trabajo o la aplicación para que no pueda apuntar a una conexión que no tenga permiso Resolver.
-- Elimina la conexión que no tiene un permiso Resolver del grupo de conexiones. <div class="alert alert-danger"><strong>Nota</strong>: Si utilizas un grupo de conexiones para varios flujos de trabajo o varias aplicaciones, la eliminación de una conexión de la que depende otro flujo de trabajo provocará el fallo de ese flujo de trabajo.</div>
+- Elimina la conexión que no tiene un permiso Resolver del grupo de conexiones. <div class="alert alert-warning"><strong>Nota</strong>: Si utilizas un grupo de conexiones para varios flujos de trabajo o varias aplicaciones, la eliminación de una conexión de la que depende otro flujo de trabajo provocará el fallo de ese flujo de trabajo.</div>
 
 ### Actualizar un grupo de conexión
 
@@ -192,7 +192,7 @@ Para eliminar un grupo de conexión:
 1. Pasa el ratón por encima del grupo que quieras eliminar y haz clic en el icono  **delete (trash can)** (eliminar (papelera)).
 1. Haz clic en **Delete** (Borrar).
 
-<div class="alert alert-warning"><strong>Nota</strong>: La eliminación de un grupo de conexiones afecta a todos los flujos de trabajo y aplicaciones que utilizan ese grupo.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: La eliminación de un grupo de conexiones afecta a todos los flujos de trabajo y aplicaciones que utilizan ese grupo.</div>
 
 ## Referencias adicionales
 

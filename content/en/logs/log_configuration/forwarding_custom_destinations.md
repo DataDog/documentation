@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams' workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP.
+Log Forwarding allows you to send logs from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. This means that you can use [Log Pipelines][1] to centrally collect, process, and standardize your logs in Datadog. Then, send the logs from Datadog to other tools to support individual teams' workflows. You can choose to forward any of the ingested logs, whether or not they are indexed, to custom destinations. Logs are forwarded in JSON format and compressed with GZIP by default.
 
 **Note**: Only Datadog users with the [`logs_write_forwarding_rules`][2] permission can [create][6], [edit][7], and [delete][8] custom destinations for forwarding logs.
 
@@ -37,17 +37,17 @@ The following metrics report on logs that have been forwarded successfully, incl
 ## Set up log forwarding to custom destinations
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending logs to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+<div class="alert alert-danger">Sending logs to a custom destination is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
 {{< /site-region >}}
 
 1. Add webhook IPs from the {{< region-param key="ip_ranges_url" link="true" text="IP ranges list">}} to the allowlist.
-1. Navigate to [Log Forwarding][4].
+1. Navigate to [Log Archiving & Forwarding][4].
 3. Select **Custom Destinations**.
 4. Click **New Destination**.
 5. Enter the query to filter your logs for forwarding. See [Search Syntax][5] for more information.
 6. Select the **Destination Type**.
 
-{{< img src="logs/log_configuration/forwarding/log-forwarding-tag-sentinel.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
+{{< img src="logs/log_configuration/forwarding/log-forwarding-gzip-opt-out.png" alt="The destination configuration page, showing the steps to set up a new destination." style="width:70%;">}}
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
@@ -55,7 +55,8 @@ The following metrics report on logs that have been forwarded successfully, incl
 7. Enter a name for the destination.
 8. In the **Define endpoint** field, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
     - For example, if you want to send logs to Sumo Logic, follow their [Configure HTTP Source for Logs and Metrics documentation][1] to get the HTTP Source Address URL to send data to their collector. Enter the HTTP Source Address URL in the **Define endpoint** field.
-9. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
+9. (Optional) Disable GZIP compression if your HTTP endpoint does not support compressed payloads.
+10. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
   | Authentication Type      | Description                                                                                                              | Example                                                             |
 |--------------------------|--------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
 | **Basic Authentication** | Provide the username and password for the account to which you want to send logs.                                        | Username: `myaccount`<br>Password: `mypassword`                       |
@@ -131,8 +132,8 @@ The following metrics report on logs that have been forwarded successfully, incl
 {{< /tabs >}}
 
 10. In the **Select Tags to Forward** section:
-  a. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
-  b. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
+    1. Select whether you want **All tags**, **No tags**, or **Specific Tags** to be included.
+    1. Select whether you want to **Include** or **Exclude specific tags**, and specify which tags to include or exclude.
 11. Click **Save**.
 
 

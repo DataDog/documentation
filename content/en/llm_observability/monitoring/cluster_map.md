@@ -48,5 +48,5 @@ Select a topic cluster from the list to examine how inputs or outputs about spec
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/clusters
-[2]: /llm_observability/evaluations/ootb_evaluations/#enter-a-topic
+[2]: /llm_observability/evaluations/managed_evaluations/#enter-a-topic
 [3]: /llm_observability/terms/#evaluations

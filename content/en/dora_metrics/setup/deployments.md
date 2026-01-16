@@ -109,7 +109,6 @@ The [`datadog-ci`][22] CLI tool provides a shortcut to send deployment events wi
 
 For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}} and set the `DD_API_KEY` environment variable to your [Datadog API Key][27]:
 ```shell
-export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="<DD_SITE>"
 export DD_API_KEY="<DD_API_KEY>"
 
@@ -117,6 +116,8 @@ export deploy_start=`date +%s`
 ./your-deploy-script.sh
 datadog-ci dora deployment --service shopist --env prod \
     --started-at $deploy_start --finished-at `date +%s` \
+    --version v1.12.07 --custom-tags department:engineering \
+    --custom-tags app_type:backend \
     --git-repository-url "https://github.com/organization/example-repository" \
     --git-commit-sha 66adc9350f2cc9b250b69abddab733dd55e1a588
 ```
@@ -159,7 +160,8 @@ For service deployments tracked by APM to contribute to change lead time, ensure
 
 ### Requirements for calculating change lead time
 - Your application telemetry is tagged with Git information. You can enable this [in APM][101] or see the [Source Code Integration documentation][102].
-- Your repository metadata is synchronized to Datadog through the [GitHub integration][103] or by the `datadog-ci git-metadata upload` command.
+- Your repository metadata is [synchronized](#synchronize-repository-metadata-to-datadog) to Datadog.
+
 
 [101]: https://app.datadoghq.com/source-code/setup/apm
 [102]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
@@ -173,7 +175,7 @@ For service deployments tracked by the DORA Metrics API or the `datadog-ci dora 
 ### Requirements for calculating change lead time
 
 - The attributes `repository_url` and `commit_sha` are included in the deployment events payload.
-- Your repository metadata is synchronized to Datadog through the [GitHub integration][101] or by the `datadog-ci git-metadata upload` command.
+- Your repository metadata is [synchronized](#synchronize-repository-metadata-to-datadog) to Datadog.
 
 [101]: /integrations/github/
 
@@ -192,7 +194,7 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 GitHub workflows running on <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not currently supported by the GitHub integration.
 If you are using the <code>pull_request</code> trigger, use the alternative method.
 </div>
@@ -217,6 +219,27 @@ If the [GitLab integration][1] is not already installed, install it on the [GitH
 
 **Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
+#### Handling GitLab groups and subgroups
+
+If your repositories are organized under [**GitLab groups or subgroups**][1] (for example,
+`https://gitlab.com/my-org/group(/subgroup)/repo`),
+the automatic service path detection may not resolve correctly due to GitLab's nested group structure.
+
+To ensure that DORA metrics handle your service's source code paths correctly,
+you can use the following configuration in your service definition:
+
+```yaml
+extensions:
+  datadoghq.com/dora-metrics:
+    source_patterns:
+      # All paths relative to the repository URL provided with the deployment
+      - **
+      # or specific paths related to this service (for monorepos)
+      - src/apps/shopist/**
+      - src/libs/utils/**
+```
+[1]: https://docs.gitlab.com/user/group/
+
 {{% /tab %}}
 
 {{% tab "Other Git Providers" %}}
@@ -226,7 +249,7 @@ When this command is executed, Datadog receives the repository URL, the commit S
 
 Run this command in CI for every new commit. If a deployment is executed for a specific commit SHA, ensure that the `datadog-ci git-metadata upload` command is run for that commit **before** the deployment event is sent.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Do not provide the <code>--no-gitsync</code> option to the <code>datadog-ci git-metadata upload</code> command.
 When that option is included, the commit information is not sent to Datadog and the change lead time metric is not calculated.
 </div>
@@ -238,7 +261,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 ✅  Handled in 0.077 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 

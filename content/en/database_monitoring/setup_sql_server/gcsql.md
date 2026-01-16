@@ -11,6 +11,9 @@ further_reading:
 - link: "/database_monitoring/guide/sql_extended_events/"
   tag: "Documentation"
   text: "Configure Query Completion and Query Error Collection"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -353,7 +356,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 
 ```yaml

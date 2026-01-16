@@ -15,7 +15,7 @@ title: Activación del generador de perfiles nativo para lenguajes compilados
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>ddprof</code> está en fase beta. Datadog recomienda evaluar el generador de perfiles en un entorno no sensible antes de desplegarlo en producción.
 </div>
 

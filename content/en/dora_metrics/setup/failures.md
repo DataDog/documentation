@@ -56,7 +56,7 @@ If provided with incidents, the `Severity` tag is added to failure events.
 
 You can retroactively include incidents from the past two years by selecting **Backfill Data** in the [DORA settings][202], which creates failures from those incidents. Backfilling data can take up to an hour to complete.
 
-[201]: /service_management/incident_management/
+[201]: /incident_response/incident_management/
 [202]: https://app.datadoghq.com/ci/settings/dora
 [203]: https://app.datadoghq.com/incidents/settings?section=property-fields
 
@@ -134,7 +134,7 @@ The matching algorithm works in the following steps:
 5. If the PagerDuty service name of the incident matches a team name in the Software Catalog, the incident metrics and events are emitted with the team.
 6. If there have been no matches up to this point, the incident metrics and events are emitted with the PagerDuty service and PagerDuty team provided in the incident.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 If an incident is resolved manually in PagerDuty instead of from a monitor notification, the incident resolution event does not contain monitor information and the first step of the matching algorithm is skipped.
 </div>
 
@@ -182,7 +182,7 @@ See the [DORA Metrics API reference documentation][13] for the full spec and add
 For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 
 ```shell
-curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
+curl -X POST "https://api.<DD_SITE>/api/v2/dora/failure" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -209,7 +209,7 @@ curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
 EOF
 ```
 
-[13]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[13]: /api/latest/dora-metrics/#send-a-failure-event-for-dora-metrics
 [14]: https://app.datadoghq.com/ci/dora
 [15]: https://app.datadoghq.com/ci/settings/dora
 

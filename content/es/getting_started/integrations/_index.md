@@ -1,4 +1,6 @@
 ---
+description: Unifica métricas y logs de infraestructura utilizando integraciones basadas
+  en el Agent, basadas en la autenticación y de biblioteca.
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-integrations
   tag: Centro de aprendizaje
@@ -6,6 +8,9 @@ further_reading:
 - link: /integrations/
   tag: Documentación
   text: Consulta la lista de integraciones de Datadog
+- link: https://www.datadoghq.com/blog/1k-integrations-milestone/
+  tag: Blog
+  text: 'Escalado de la observabilidad de Datadog: 1.000 integraciones y más'
 title: Introducción a las integraciones
 ---
 
@@ -147,7 +152,7 @@ Cada integración tiene uno de los cuatro tipos de estado:
 
 Para obtener información sobre cómo Datadog maneja tus datos y otras cuestiones de seguridad, consulta la [documentación acerca de la seguridad][30].
 
-## Control de acceso granular
+## Control de acceso preciso
 Por defecto, el acceso a los recursos de una integración (cuentas, servicios, webhooks) no está restringido. Se pueden utilizar controles de acceso granulares para restringir el comportamiento de usuarios, equipos, funciones o toda la organización a nivel de recursos de la integración.
 
 **Nota**: La opción de acceso restringido sólo es visible si integración admite el control de acceso granular. Para verificar si el control de acceso granular es compatible con una integración, consulta la [documentación de la integración][46].
@@ -157,7 +162,7 @@ Por defecto, el acceso a los recursos de una integración (cuentas, servicios, w
 2. Haz clic en **Set Permissions** (Configurar permisos).
 3. Por defecto, todos los miembros de tu organización tienen acceso total. Haz clic en **Restrict Access** (Restringir el acceso).
 4. El cuadro de diálogo se actualiza para mostrar que los miembros de tu organización tienen por omisión el permiso de acceso **Viewer** (Visualización).
-5. Utiliza el menú desplegable para seleccionar uno o varios roles, equipos o usuarios que pueden editar el monitor.
+5. Utiliza el menú desplegable para seleccionar uno o varios equipos, roles o usuarios que puedan editar el monitor.
     **Nota**: El permiso de [gestión de integraciones][45] también es necesario para editar recursos individuales.
 6. Haz clic en **Add** (Añadir).
 7. El cuadro de diálogo se actualiza para mostrar los permisos actualizados.

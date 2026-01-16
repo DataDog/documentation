@@ -57,7 +57,7 @@ Enabled toggle
 
 The `Spans Indexed` column for each retention filter is powered by the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track your indexed span usage. For more information, read [Usage Metrics][2], or explore the [out-of-the-box usage dashboard][4] available in your account.
 
-<div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). To control ingestion, use dedicated <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a>.</div>
+<div class="alert alert-info">Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). To control ingestion, use dedicated <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a>.</div>
 
 
 ### Retention filter types
@@ -79,7 +79,7 @@ There are two types of retention filters:
 
 The following retention filters are enabled by default: 
 - The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
-- The `App and API Protection Monitoring Default` retention filter is enabled if you are using [App and API Protection][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
+- The `App and API Protection Default` retention filter is enabled if you are using [App and API Protection][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
 - The `Synthetics Default` retention filter is enabled if you are using Synthetic Monitoring. It ensures that traces generated from synthetic API and browser tests remain available by default. See [Synthetic APM][15] for more information, including how to correlate traces with synthetic tests.
 - The `Dynamic Instrumentation Default` retention filter is enabled if you are using [Dynamic Instrumentation][17]. It ensures spans created dynamically with Dynamic instrumentation remain available in the long term by default.
 
@@ -107,7 +107,9 @@ The set of data captured by diversity sampling is not uniformly sampled (that is
 
 #### One percent flat sampling
 
-The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12]. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
+The flat 1% sampling captures:
+1. All **traces correlated with 1% of ingested RUM sessions**, ensuring all indexed sessions have associated trace data. This improves [correlation between APM and RUM][20], allowing you to debug user issues by viewing both frontend sessions and backend traces together. The sample is applied based on the `session_id`, meaning all traces linked to the same RUM session share a consistent indexing decision.
+2. A **uniform 1% sample** of [ingested spans][12], applied based on the `trace_id` so all spans in the same trace share the same sampling decision. Use this sample for general system health monitoring and trend analysis.
 
 This sampling mechanism is uniform, and it is proportionally representative of the full ingested traffic. As a result, low-traffic services and endpoints might be missing from that dataset if you filter on a short time frame.
 
@@ -140,7 +142,7 @@ To create a retention filter:
 1. Set a name for the filter.
 1. Click **Add Filter** to save the filter.
 
-<div class="alert alert-danger">Configuring a trace rate can significantly increase your indexed spans usage.</div>
+<div class="alert alert-warning">Configuring a trace rate can significantly increase your indexed spans usage.</div>
 
 For example, if you configure a retention filter to index spans from `service:my-service`:
 - Configuring a span rate of `100%` ensures that all spans matching `service:my-service` are indexed.
@@ -161,7 +163,9 @@ The `retained_by` attribute is present on all retained spans. Its value is:
 - `retained_by:retention_filter` if the span was captured by a [custom retention filter](#create-your-own-retention-filter), including the [default retention filters](#default-retention-filters) and **no trace rate** was configured. These spans are not included in Trace Queries as trace queries require all spans of a trace to be indexed.
 - `retained_by:trace_retention_filter` if the span is captured by a retention filter for which a trace rate was configured.
 - `retained_by:diversity_sampling` if the span was captured by [diversity sampling](#diversity-sampling) (part of the [Intelligent retention filter](#datadog-intelligent-retention-filter)).
-- `retained_by:flat_sampled` if the span was indexed by the [1% flat sampling](#one-percent-flat-sampling).
+- `retained_by:flat_sampled` if the span was indexed by the [1% flat sampling](#one-percent-flat-sampling). Filter further by retention reason:
+  - `@retention_reason:rum` for traces linked to RUM sessions sampled based on the `session_id`. Use this to analyze traces correlated with user sessions.
+  - `@retention_reason:apm` for traces sampled uniformly based on the `trace_id`. Use this for general performance trends and system-wide analysis.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}
 
@@ -192,3 +196,4 @@ Spans indexed by the intelligent retention filter are **excluded** from APM trac
 [17]: /dynamic_instrumentation/
 [18]: https://app.datadoghq.com/apm/traces/retention-filters
 [19]: /monitors/types/apm/?tab=traceanalytics
+[20]: /tracing/other_telemetry/rum/

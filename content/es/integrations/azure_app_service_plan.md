@@ -13,7 +13,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 279
-    source_type_name: Plan Azure App servicio
+    source_type_name: Plan del servicio Azure App
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,12 +28,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: azure_app_service_plan
 integration_id: azure-appserviceplan
-integration_title: 'Plan Azure App servicio '
+integration_title: Plan del servicio Azure App
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: azure_app_service_plan
-public_title: 'Plan Azure App servicio '
+public_title: Plan del servicio Azure App
 short_description: Rastrea las métricas principales de Azure App Service Plan.
 supported_os: []
 tile:
@@ -47,13 +47,13 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Plan Azure App servicio
+  title: Plan del servicio Azure App
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
-Azure App servicio Plan define un conjunto de recursos informáticos utilizados para ejecutar una aplicación web, similar a una granja de servidores en el alojamiento web tradicional. 
+El plan del servicio Azure App define un conjunto de recursos informáticos utilizados para ejecutar una aplicación web, similar a una granja de servidores en un alojamiento web tradicional.
 
 Utiliza la integración de Azure con Datadog para recopilar métricas de Azure App Service Plan.
 
@@ -61,12 +61,12 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure A
 
 ### Instalación
 
-Si aún no lo ha hecho, configure [Microsoft Azure integración][1]. No se requiere ningún paso de instalación adicional.
+Si aún no lo has hecho, configura la [integración de Microsoft Azure][1]. No se requiere ningún paso de instalación adicional.
 
 ## Datos recopilados
 
 ### Métricas
-{{ get-metrics-from-git "azure-appserviceplan" }}
+{{< get-metrics-from-git "azure_app_service_plan" >}}
 
 
 ### Eventos

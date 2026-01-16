@@ -414,7 +414,7 @@ GitHub 통합을 설정하면 [**오류 추적**][103], [**연속 프로파일�
 {{% /tab %}}
 {{% tab "GitLab" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 GitLab 인스턴스의 리포지토리는 제한된 평가판 상태로 제공됩니다. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">평가판을 신청하세요</a>.
 </div>
 
@@ -452,7 +452,7 @@ Successfully synced git DB in 3.579 seconds.
 {{% /tab %}}
 {{% tab "Other Git Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 자체 호스팅 인스턴스 또는 비공개 URL의 리포지토리는 소스 코드 통합에서 기본적으로 지원되지 않습니다. 이 기능을 사용 설정하려면 <a href="/도움/도움말">지원팀에 문의하세요</a>.
 </div>
 

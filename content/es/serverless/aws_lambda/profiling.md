@@ -13,7 +13,7 @@ title: Continuous Profiler para AWS Lambda
 
 [Continuous Profiler][1] de Datadog para las funciones de AWS Lambda te permite saber el nombre del método, el nombre de la clase y el número de línea exactos de tu código de Lambda que provoca cuellos de botella en la CPU o en la E/S.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Continuous Profiler para AWS Lambda está en la beta pública. Durante el periodo beta, la creación de perfiles para Node y Python está disponible sin coste adicional.
 </div>
 

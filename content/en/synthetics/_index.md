@@ -1,10 +1,12 @@
 ---
 title: Synthetic Testing and Monitoring
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
-disable_sidebar: true
 aliases:
   - /integrations/synthetics/
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
 - link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
@@ -35,17 +37,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
   tag: "Blog"
   text: "How I helped my client scale their browser tests with Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-terraform-synthetic-testing/"
+  tag: "Blog"
+  text: "Automating your synthetic test infrastructure with Datadog Synthetic Monitoring and Terraform"
 algolia:
   tags: ['synthetics']
 cascade:
     algolia:
         rank: 70
 ---
-
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
-
-<br/>
-
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
   Explore and register for Foundation Enablement sessions. Learn how Datadog Synthetic Monitoring is a proactive monitoring solution that enables you to create code-free API, browser, and mobile tests to automatically simulate user flows and requests to your applications, key endpoints, and network layers.
@@ -74,6 +74,17 @@ Use [Synthetic browser tests][14] to monitor how your customers experience your 
 Use [Synthetic mobile application tests][21] to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
 
 {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
+
+## Create network path tests
+
+Create [Synthetic network path tests][25] from managed locations to perform TCP, UDP, and ICMP checks and visualize packet routes across global endpoints.
+
+{{< img src="synthetics/network_tests/syn_network_path.png" alt="Examples of a Synthetic TCP network test" style="width:100%;">}}
+## Test suites
+
+Use [Synthetic Test Suites][25] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and troubleshooting. 
+
+{{< img src="synthetics/test_suites/test_suite_summary.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
 
 ## Launch private locations
 
@@ -160,3 +171,5 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [22]: /synthetics/test_coverage
 [23]: /synthetics/guide/version_history/
 [24]: /synthetics/notifications/
+[25]: /synthetics/network_path_tests/
+[25]: /synthetics/test_suites/

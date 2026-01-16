@@ -1,5 +1,6 @@
 ---
 title: Analysis Features
+description: "Perform advanced data analysis in Notebooks with SQL queries, data transformations, joins, and visualizations across multiple datasets."
 aliases:
 - /logs/workspaces/
 - /logs/workspaces/export/
@@ -13,10 +14,14 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Notebooks Advanced Analysis is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
+
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+If you want to query data sources not yet available, use this form to submit your request.
+{{< /callout >}}
 
 ## Overview
 
@@ -99,7 +104,7 @@ After adding the transformation cell, you can add any number of transformation o
 | Group | Select what you want to group the data by in the dropdown menus. |
 | Join | Select the type of join, the dataset to join against, and the fields to join on. |
 | Filter | Add a filter query for the dataset. |
-| Calculate | Add a name for the field and the function formula, using the [calculated field expression language][3]. |
+| Calculate | Add a name for the field and the function formula, using the [calculated field formulas][3]. |
 | Limit | Enter the number of rows of the dataset you want to display. |
 | Sort | Select the sort order and column to sort on. |
 | Convert | Allows you to convert a column into a different type. Select the column and the column type to be converted. |
@@ -150,12 +155,56 @@ To download your dataset as a CSV file:
 3. Select the number of rows you want to export (up to the maximum available).
 4. The CSV file automatically downloads to your computer.
 
+### Schedule a CSV report
+
+With scheduled reports, you can automatically receive query results from notebook analysis cells by email or Slack.
+
+To schedule a report on an analysis cell:
+
+1. Open the dropdown next to **Save to Dashboard** and select **Schedule report**.
+
+   {{< img src="/notebooks/analysis_features/schedule_report_from_cell_v2.png" alt="Dropdown menu showing the Schedule report option highlighted" style="width:50%;" >}}
+
+2. In the modal, select a schedule to configure when and how often the report is sent.
+
+   {{< img src="/notebooks/analysis_features/select_schedule.png" alt="Schedule selection step in the report configuration modal" style="width:80%;" >}}
+
+3. Enter a report name and select a time frame to define the data included in the report.
+
+   **Note**: If the analysis cell has not yet been published as a dataset, you can specify the name of the dataset created when the report is scheduled.
+
+4. Add email recipients. 
+    - The email associated with your Datadog account is included automatically. To remove it, hover over your email and click the trash icon. 
+    - To preview the report before saving the schedule, click **Send Test Email**. 
+
+    **Note**: Only Enterprise and Pro accounts can send reports to email addresses that aren't associated with registered Datadog users.
+    
+    Example report email:
+    {{< img src="/notebooks/analysis_features/report_email.png" alt="Example report email" style="width:90%;" >}}
+
+5. Add Slack recipients. 
+   - Click on the **Slack** tab, then choose a workspace and channel. 
+     - If no workspaces appear, verify that the Datadog [Slack Integration][6] is installed. 
+     - Public channels are listed automatically. To send to a private channel, invite the Datadog Slack bot to your channel.
+   - To preview the message, add a channel and click **Send Test Message.**
+
+   {{< img src="/notebooks/analysis_features/add_slack_recipients.png" alt="Slack recipient selection in the report scheduling modal" style="width:100%;" >}}
+
+6.  Save your schedule.
+
+You can view, search, edit, and delete existing report schedules from the **Reports** tab:
+
+{{< img src="/notebooks/analysis_features/reports_page.png" alt="Filtered view of the Reports tab" style="width:90%;" >}}
+
+**Note**: To schedule reports and view other users' schedules, users need the **CSV Report Schedules Write** permission. To edit other users' schedules, users need the **CSV Report Schedules Manage** permission. These permissions can be granted by a user with the **Org Management** permission.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs
 [2]: /logs/log_configuration/parsing/
-[3]: /logs/explorer/calculated_fields/expression_language/
+[3]: /logs/explorer/calculated_fields/formulas/
 [4]: /ddsql_reference/
 [5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/
+[6]: /integrations/slack/?tab=datadogforslack

@@ -109,7 +109,7 @@ Para configurar el muestreo probabilístico, realiza una de las siguientes accio
 - El muestreo probabilístico se aplicará a tramos (spans) procedentes tanto de Datadog como de librerías de rastreo de OTel.
 - Si envías tramos (spans) tanto a las instancias del Datadog Agent **como** a OTel Collector, configura la misma inicialización entre el Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) y OTel Collector (`hash_seed`) para garantizar un muestreo coherente.
 
-<div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> está obsoleto y se ha sustituido por <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
+<div class="alert alert-danger"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> está obsoleto y se ha sustituido por <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
 #### Consideraciones
 

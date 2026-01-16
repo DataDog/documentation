@@ -1,5 +1,6 @@
 ---
 title: Container Discovery Management
+description: Control which containers the Datadog Agent monitors by configuring discovery rules and inclusion/exclusion patterns
 aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management
@@ -18,11 +19,9 @@ By default, the Datadog Agent automatically discovers all containers available. 
 
 ## Container discovery patterns
 
-In a containerized environment, you should deploy the Datadog Agent once per host. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host.
+In a containerized environment, you should deploy the Datadog Agent once per host. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host. When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers.
 
-You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any [Autodiscovery][2]-based Agent integrations. 
-
-When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. These filtering options do not affect log collection if `containerCollectAll` is not enabled.
+You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any [Autodiscovery][2]-based Agent integrations.
 
 You can set exceptions in two ways:
 
@@ -31,20 +30,22 @@ You can set exceptions in two ways:
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
 
-## Agent configuration
+## Simple pattern matching
 
 Use the environment variables in the table below to configure container filtering. Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their:
+
 - container name (`name`)
 - container image name (`image`)
 - Kubernetes namespace (`kube_namespace`)
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 
 The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
 
 </div>
 
 ### Environment variables
+
 In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
 
 | Environment variable           | Description                                         |
@@ -56,7 +57,77 @@ In **Agent v7.20+**, use the following environment variables to exclude containe
 | `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics are included. |
 | `DD_CONTAINER_INCLUDE_LOGS`    | Allowlist of containers whose logs are included.    |
 
-In **Agent <=v7.19**, use the environment variables `DD_AC_INCLUDE` and `DD_AC_EXCLUDE` to include or exclude a container by image or name. These environment variables are deprecated in later Agent versions.
+{{% collapse-content title="Setting environment variables" level="h4" expanded=false id="setting-environment-variables" %}}
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+In the Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
+
+##### Example
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  override:
+    nodeAgent:
+      env:
+      - name: DD_CONTAINER_EXCLUDE
+        value: "image:<IMAGE_NAME>"
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In your Helm chart, supply a space-separated string to one or more of the following:
+- `datadog.containerExclude`
+- `datadog.containerInclude`
+- `datadog.containerExcludeLogs`
+- `datadog.containerIncludeLogs`
+- `datadog.containerExcludeMetrics`
+- `datadog.containerIncludeMetrics`
+
+##### Example
+
+```yaml
+datadog:
+  containerExclude: "image:<IMAGE_NAME_1> image:<IMAGE_NAME_2>"
+  containerInclude: "image:<IMAGE_NAME_3> image:<IMAGE_NAME_4>"
+```
+
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+
+In environments where you are not using the Datadog Operator or Helm, the following environment variables can be passed to the Agent container at startup.
+
+##### Example Docker
+
+```shell
+docker run -e DD_CONTAINER_EXCLUDE=image:<IMAGE_NAME> ...
+```
+
+##### Example ECS
+
+```json
+"environment": [
+  {
+    "name": "DD_CONTAINER_EXCLUDE",
+    "value": "image:<IMAGE_NAME>"
+  },
+  ...
+]
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
 
 <div class="alert alert-info">
 
@@ -65,6 +136,7 @@ Image name filters (`image`) are matched across full image name, including the r
 </div>
 
 #### Examples
+
 To exclude the container with the name `dd-agent`:
 
 ```
@@ -131,67 +203,7 @@ DD_CONTAINER_INCLUDE_LOGS = "image:^docker.io/library/foo(@sha256)?:.*"
 
 There is no interaction between the global lists and the selective (logs and metrics) lists. In other words, you cannot exclude a container globally (`DD_CONTAINER_EXCLUDE`) and then include it with `DD_CONTAINER_INCLUDE_LOGS` and `DD_CONTAINER_INCLUDE_METRICS`.
 
-### Setting environment variables
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-In Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
-
-##### Example
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-  override:
-    nodeAgent:
-      env:
-      - name: DD_CONTAINER_EXCLUDE
-        value: "image:<IMAGE_NAME>"
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-In your Helm chart, supply a space-separated string to `datadog.containerExclude`, `datadog.containerInclude`, `datadog.containerExcludeLogs`, `datadog.containerIncludeLogs`, `datadog.containerExcludeMetrics`, or `datadog.containerIncludeMetrics`.
-
-##### Example
-
-```yaml
-datadog:
-  containerExclude: "image:<IMAGE_NAME_1> image:<IMAGE_NAME_2>"
-  containerInclude: "image:<IMAGE_NAME_3> image:<IMAGE_NAME_4>"
-```
-
-{{% /tab %}}
-{{% tab "Containerized Agent" %}}
-
-In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
-
-##### Example Docker
-```shell
-docker run -e DD_CONTAINER_EXCLUDE=image:<IMAGE_NAME> ...
-```
-
-##### Example ECS
-```json
-"environment": [
-  {
-    "name": "DD_CONTAINER_EXCLUDE",
-    "value": "image:<IMAGE_NAME>"
-  },
-  ...
-]
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Pause containers
+### Pause containers
 
 The Datadog Agent excludes Kubernetes and OpenShift pause containers by default. This prevents their metric collection and counting as billable containers. They are still counted in the container count metrics such as `kubernetes.containers.running` and `docker.containers.running`.
 
@@ -219,6 +231,7 @@ spec:
       - name: DD_EXCLUDE_PAUSE_CONTAINER
         value: "false"
 ```
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -242,6 +255,212 @@ Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Advanced CEL exclusion
+
+In **Agent v7.73+**, you can use the `cel_workload_exclude` configuration option to filter containers from Autodiscovery. This feature allows you to define [Common Expression Langauge][3] rules to target containers to be excluded from telemetry collection.
+
+Use the following attributes to represent the container object in your filtering rules:
+
+| Attribute                   | Description                                                             |
+|-----------------------------|-------------------------------------------------------------------------|
+| `container.name`            | The name of the container.                                              |
+| `container.image.reference` | The full reference of the container image (registry, repo, tag/digest). |
+| `container.pod.name`        | The name of the pod running the container.                              |
+| `container.pod.namespace`   | The Kubernetes namespace of the pod.                                    |
+| `container.pod.annotations` | The annotations applied to the pod (key-value map).                     |
+
+### Configuration structure
+
+The `cel_workload_exclude` configuration option is structured as a list of rule sets evaluated as logical ORs, where a container is excluded if it matches any rule. Each rule set defines the `products` to exclude and the corresponding CEL `rules` to match against containers.
+
+The `products` field accepts `metrics`, `logs`, and `global` (exclude container from all listed products).
+
+<div class="alert alert-danger">
+If the configuration contains structural errors or CEL syntax issues, the Agent exits with an error to prevent collecting unintended telemetry that could impact billing.
+</div>
+
+In the example below, metrics and logs are excluded for any container with `nginx` in its name running in the `staging` namespace. Additionally, logs are excluded for any container running the `redis` image, OR any container within a pod that has the annotation `low_priority: "true"`. The [Agent's configuration file][4] can be directly updated as seen by this example.
+
+```yaml
+# datadog.yaml
+cel_workload_exclude:
+- products: [metrics, logs]
+  rules:
+    containers:
+      - container.name.matches("nginx") && container.pod.namespace == "staging"
+- products: [logs]
+  rules:
+    containers:
+      - container.image.reference.matches("redis")
+      - container.pod.annotations["low_priority"] == "true"
+```
+
+You can also configure CEL-backed workload exclusion using one of the following methods:
+- Set the `DD_CEL_WORKLOAD_EXCLUDE` environment variable with a JSON-formatted string containing your rules, in any containerized Agent setup.
+- For the Datadog Operator or Helm Chart, add your CEL rules to the appropriate configuration option (as shown in the examples below).
+
+{{% collapse-content title="Configuring CEL exclusion rules" level="h4" expanded=false id="setting-environment-variables" %}}
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+In Datadog Operator (>=v1.23.0), use the `spec.override.nodeAgent.celWorkloadExclude` and `spec.override.clusterAgent.celWorkloadExclude` options.
+
+##### Example
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  override:
+    nodeAgent:
+      celWorkloadExclude:
+        - products: [ global ]
+          rules:
+            containers:
+              - container.name == "redis"
+    clusterAgent:
+      celWorkloadExclude:
+        - products: [ global ]
+          rules:
+            containers:
+              - container.name == "redis"
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In your Helm chart, use the `datadog.celWorkloadExclude` configuration option.
+
+##### Example
+
+```yaml
+datadog:
+  celWorkloadExclude:
+  - products: [global]
+    rules:
+      containers:
+        - container.name == "redis"
+```
+
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+
+##### Example Docker
+
+```shell
+docker run -e DD_CEL_WORKLOAD_EXCLUDE=<JSON_CEL_RULES> ...
+```
+
+##### Example ECS
+
+```json
+"environment": [
+  {
+    "name": "DD_CEL_WORKLOAD_EXCLUDE",
+    "value": "<JSON_CEL_RULES>"
+  },
+  ...
+]
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Validating configuration option" level="h4" expanded=false id="validating-configuration-option" %}}
+
+Use the `agent workloadfilter verify-cel` command to validate your configuration syntax before deployment. It accepts YAML or JSON input via stdin. The following example demonstrates validation catching an undefined field error:
+
+```json
+### cel-config.json
+[
+  {
+    "products": ["metrics"],
+    "rules":
+      {
+        "containers":
+          [
+            'container.undefined_field == "test"',
+            'container.name.startsWith("-agent")',
+          ],
+      },
+  },
+]
+```
+
+```bash
+agent workloadfilter verify-cel < cel-config.json
+
+-> Validating CEL Configuration
+    Loading YAML file...
+✓ YAML loaded successfully (1 bundle(s))
+
+-> Validating configuration structure...
+✓ Configuration structure is valid
+
+-> Compiling CEL rules...
+
+  -> metrics
+    Resource: container (2 rule(s))
+      ✗ Compilation failed: ERROR: <input>:1:10: undefined field 'undefined_field'
+ | container.undefined_field == "test" || container.name.startsWith("-agent")
+ | .........^
+        Rule 1: container.undefined_field == "test"
+        Rule 2: container.name.startsWith("-agent")
+
+✗ Validation failed - some rules have errors
+Error: CEL compilation failed
+```
+
+{{% /collapse-content %}}
+
+#### Example rules
+
+To exclude the container with a specific pod annotation:
+
+```yaml
+container.pod.annotations["monitoring"] == "false"
+```
+
+To exclude the container in namespaces without the substring `-dev`:
+
+```yaml
+!container.pod.namespace.matches("-dev")
+```
+
+To exclude the container with the name `nginx-server` only in the namespace `prod`:
+
+```yaml
+container.name == "nginx-server" && container.pod.namespace == "prod"
+```
+
+To exclude the container running an image with the substring `nginx`:
+
+```yaml
+container.image.reference.matches("nginx")
+```
+
+To exclude the container using grouped logic (for example, a specific container name in either of two namespaces):
+
+```yaml
+container.name == "redis" && (container.pod.namespace == "production" || container.pod.namespace == "staging")
+```
+
+To exclude containers based on their pod's owner name (for example, targeting all containers created by a Deployment or CronJob named `my-app`):
+
+```yaml
+container.pod.name.startsWith("my-app")
+```
+
 ## Pod exclude configuration
 
 In **Agent v7.45+** you can set annotations on your Kubernetes pods to control Autodiscovery. Set the following annotations with the value `"true"` to add exclusion rules.
@@ -259,7 +478,8 @@ The `ad.datadoghq.com/exclude` annotation set on the application pod takes the h
 
 When applying annotation-based exclusions, the Agent checks for all relevant exclusion annotations on the container. For example, when configuring logs for an NGINX container, the Agent will look for `ad.datadoghq.com/exclude`, `ad.datadoghq.com/logs_exclude`, `ad.datadoghq.com/nginx.exclude`, or `ad.datadoghq.com/nginx.logs_exclude` annotations to be `true` on the pod. The same applies for metrics.
 
-#### Exclude the entire pod:
+#### Exclude the entire pod
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -275,7 +495,8 @@ spec:
         #(...)
 ```
 
-#### Exclude log collection from a container:
+#### Exclude log collection from a container
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -309,9 +530,55 @@ metadata:
   ...
 ```
 
+## Security configuration
+
+In **Agent v7.70+**, you can restrict security monitoring for specific containers, so you only get billed for the containers you want to have monitored. This functionality is not supported for the Datadog Operator.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+| Feature                               | Include container                                   | Exclude container                                   |
+|---------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `datadog.securityAgent.compliance.containerInclude` | `datadog.securityAgent.compliance.containerExclude` |
+| [Cloud Security Vulnerabilities][2]   | `datadog.sbom.containerImage.containerInclude`      | `datadog.sbom.containerImage.containerExclude`      |
+| [Workload Protection][3]              | `datadog.securityAgent.runtime.containerInclude`    | `datadog.securityAgent.runtime.containerExclude`    |
+
+[1]: /security/cloud_security_management/misconfigurations/
+[2]: /security/cloud_security_management/vulnerabilities
+[3]: /security/workload_protection/
+{{% /tab %}}
+{{% tab "Config file" %}}
+For [Cloud Security Vulnerabilities][1], you can use the following format in your config file to include or exclude containers:
+
+```
+---
+sbom:
+  container_image:
+    container_include: ...
+    container_exclude: ...
+```
+[1]: /security/cloud_security_management/vulnerabilities
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+
+| Feature                               | Include container                              | Exclude container                              |
+|---------------------------------------|------------------------------------------------|------------------------------------------------|
+| [Cloud Security Misconfigurations][1] | `DD_COMPLIANCE_CONFIG_CONTAINER_INCLUDE`       | `DD_COMPLIANCE_CONFIG_CONTAINER_EXCLUDE`       |
+| [Cloud Security Vulnerabilities][2]   | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_INCLUDE`    | `DD_SBOM_CONTAINER_IMAGE_CONTAINER_EXCLUDE`    |
+| [Workload Protection][3]              | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_INCLUDE` | `DD_RUNTIME_SECURITY_CONFIG_CONTAINER_EXCLUDE` |
+
+[1]: /security/cloud_security_management/misconfigurations/
+[2]: /security/cloud_security_management/vulnerabilities
+[3]: /security/workload_protection/
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /containers/kubernetes/log/?tab=helm#log-collection
 [2]: /getting_started/containers/autodiscovery
+[3]: https://github.com/google/cel-spec/blob/master/doc/langdef.md
+[4]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file

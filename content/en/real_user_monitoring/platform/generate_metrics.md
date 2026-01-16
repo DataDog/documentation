@@ -27,6 +27,8 @@ Real User Monitoring (RUM) allows you to capture events that occur in your brows
 
 RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months.
 
+**Note:** Custom metrics are computed based on 100% of the ingested RUM traffic, not only the data retained in the RUM Explorer. This ensures accurate metrics even when using [RUM without Limits][16] retention filters that may retain only a subset of your sessions.
+
 **Billing Note:** Metrics created from RUM events are billed as [Custom Metrics][3].
 
 ## Create a RUM-based custom metric
@@ -51,14 +53,14 @@ To create a custom metric from a search query in the [RUM Explorer][5], click th
 
 5. Select a path to group by from the dropdown menu next to **group by**. The metric tag name is the original attribute or tag name without the `@`. By default, custom metrics generated from RUM events do not contain tags unless they are explicitly added. You can use an attribute or tag dimension that exists in your RUM events such as `@error.source` or `env` to create metric tags. 
    
-   <div class="alert alert-warning">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
+   <div class="alert alert-danger">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
    </div>
 
 6. For custom metrics created on sessions and views, select **The active session/view starts matching the query** or **The session/view becomes inactive or is completed** to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).
 
 7. Add percentile aggregations for distribution metrics. You can opt-in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99). 
 
-   <div class="alert alert-warning">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.
+   <div class="alert alert-danger">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.
 
 8. Click **Create Metric**.
 
@@ -120,4 +122,5 @@ You can use RUM-based custom metrics for the following actions:
 [12]: /dashboards/querying/#configuring-a-graph
 [13]: /monitors/types/anomaly/
 [14]: /monitors/types/forecasts/
-[15]: /service_management/service_level_objectives/metric/
+[15]: /service_level_objectives/metric/
+[16]: /real_user_monitoring/rum_without_limits/

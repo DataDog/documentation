@@ -6,7 +6,7 @@ title: Instrumenting 1st Gen Cloud Run Functions
 
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run functions (1st gen), previously known as Cloud Functions.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <strong>Migrating to 2nd gen Cloud Run functions</strong> 
 <br/>
 Datadog recommends using 2nd gen <a href="/serverless/google_cloud_run/functions">Cloud Run functions</a>, which offer improved performance, better scaling, and better monitoring with Datadog.
@@ -20,6 +20,10 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
 
 ## Setup
+
+1. Set up the [Google Cloud integration][6].
+1. Enable log collection with the [Dataflow Method][14] to collect your Cloud Function logs.
+1. Configure tracing, runtime metrics, and custom metrics for your function's runtime.
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go" >}}
 {{< programming-lang lang="nodejs" >}}
@@ -122,7 +126,7 @@ Google has integrated Cloud Run functions into the Cloud Run UI. Starting August
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `datadog-serverless-compat-go/datadogserverlesscompat` and `dd-trace-go.v1/ddtrace/trace` to ensure you have access to enhancements and bug fixes.
 
-   For more information, see [Tracing Go Applications][1] and [Datadog Severless Compatability Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
+   For more information, see [Tracing Go Applications][1] and [Datadog Serverless Compatibility Layer for Go](https://pkg.go.dev/github.com/DataDog/datadog-serverless-compat-go/datadogserverlesscompat).
 
 
 2. **Start the Datadog serverless compatibility layer and initialize the Go tracer**. Add the following lines to your main application entry point file (for example, `main.go`):
@@ -400,3 +404,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 [12]: https://cloud.google.com/run/docs/configuring/services/labels
 [13]: https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site
+[14]: /integrations/google-cloud-platform/?tab=organdfolderlevelprojectdiscovery#log-collection

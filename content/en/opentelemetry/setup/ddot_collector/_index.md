@@ -3,13 +3,19 @@ title: Datadog Distribution of OpenTelemetry Collector
 aliases:
 - "/opentelemetry/agent/"
 further_reading:
+- link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+  tag: Blog
+  text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+- link: https://www.datadoghq.com/blog/ddot-gateway
+  tag: Blog
+  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "https://www.datadoghq.com/blog/datadog-distribution-otel-collector/"
   tag: "Blog"
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
+<div class="alert alert-warning"><strong>The Datadog Distribution of OpenTelemetry Collector (DDOT) is not yet FedRAMP/FIPS compliant.</strong><br>
 &bull; If you require a FedRAMP or FIPS-compliant data collection pipeline, use the <a href="/agent/configuration/fips-compliance/?tab=linux">FIPS-enabled Datadog Agent</a>.<br>
 &bull; If you are a GovCloud customer whose only requirement is data residency in the GovCloud (US1-FED) data center, you <strong>may</strong> use the DDOT Collector.</div>
 {{< /site-region >}}

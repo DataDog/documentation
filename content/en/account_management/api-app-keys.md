@@ -19,10 +19,24 @@ API keys are unique to your organization. An [API key][1] is required by the Dat
 
 ### One-Time Read mode
 
-All application keys for new parent organizations (and their child organizations) created after August 20th, 2025 are in One-Time Read (OTR) mode. OTR mode is a security feature that limits the visibility of application key secrets to creation time only. All application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
+One-Time Read (OTR) mode is a security feature that limits the visibility of application key secrets to creation time only. When OTR mode is enabled, application key secrets are only displayed once during creation and cannot be retrieved later for security purposes.
 
-### Scopes 
+#### For new organizations
 
+All application keys for new parent organizations (and their child organizations) created after August 20th, 2025 have OTR mode enabled by default. This setting is permanent and cannot be changed.
+
+#### For existing organizations
+
+Organization administrators can enable or disable OTR mode from [**Organization Settings** > **Application Keys**][2]. After enabling OTR mode:
+
+- Application key secrets are visible only once, at the time of creation
+- They are no longer retrievable through the UI or API
+- The setting can be toggled on or off by organization administrators for 3 months after enabling
+- After 3 months of being continuously enabled, OTR mode becomes permanent and the toggle is removed
+
+**Permissions**: Users must have both the `org_app_keys_write` and `org_management` permissions to enable or disable OTR mode for their organization.
+
+### Scopes
 
 To better protect and secure your applications, you can specify authorization scopes for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
 
@@ -42,9 +56,11 @@ Action APIs include:
 - [Actions Connections][6]
 - [Workflow Automation][7]
 
-In order to use application keys with these APIs, you must enable Actions API access on the application key. This can be done [through the UI][2] or [API][5]. By default, application keys cannot be used with these APIs.
+In order to use application keys with these APIs, you must enable Actions API access on the application key. This can be done [through the UI][2] or [API][21]. By default, application keys cannot be used with these APIs.
 
 {{< img src="account_management/click-enable-actions-api-access.png" alt="Click Enable for Actions API Access" style="width:80%;" >}}
+
+**Note**: The **Last used** section only shows if [Audit Trail is enabled][22] in the account and you have [`Audit Trail Read`][23] permission.
 
 ## Client tokens
 
@@ -85,8 +101,10 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 {{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
 {{< site-region region="ap2,gov" >}}
-<div class="alert alert-warning">Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+<div class="alert alert-danger">Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
 {{< /site-region >}}
+
+<div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
 
 **Notes:**
 
@@ -177,3 +195,6 @@ Need help? Contact [Datadog support][19].
 [18]: /api/latest/service-accounts/
 [19]: /help/
 [20]: /account_management/org_settings/service_accounts/
+[21]: /api/latest/action-connection/#register-a-new-app-key
+[22]: /account_management/audit_trail/#setup
+[23]: /account_management/rbac/permissions/#compliance

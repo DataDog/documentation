@@ -28,7 +28,7 @@ title: Live processes
 ---
 
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 Les Live Processes et la surveillance des live processes sont inclus dans la formule Enterprise. Pour les autres formule, contactez votre représentant commercial ou <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> pour demander l'activation de cette fonctionnalité.
 </div>
 
@@ -159,7 +159,7 @@ Consultez la section sur l'[installation DaemonSet][1] standard et les pages d'i
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-warning">Vous pouvez consulter vos processus ECS Fargate dans Datadog. Pour visualiser leur relation avec les conteneurs ECS Fargate, utilisez l'Agent Datadog v7.50.0 ou une version ultérieure.</div>
+<div class="alert alert-info">Vous pouvez consulter vos processus ECS Fargate dans Datadog. Pour visualiser leur relation avec les conteneurs ECS Fargate, utilisez l'Agent Datadog v7.50.0 ou une version ultérieure.</div>
 
 Pour collecter les processus, l'Agent Datadog doit s'exécuter en tant que conteneur au sein de la tâche.
 
@@ -472,7 +472,7 @@ agents:
 
 ## Requêtes
 
-### Déterminer le contexte des processus 
+### Déterminer le contexte des processus
 
 De par leur nature, les processus sont des objets caractérisés par une très forte cardinalité. Vous pouvez utiliser les filtres de texte et de tag pour préciser votre contexte afin d'afficher uniquement les processus pertinents.
 
@@ -620,7 +620,7 @@ Les processus sont normalement collectés avec une résolution de 10 secondes. 
 ## Informations supplémentaires
 
 - La collecte de données en temps réel (toutes les 2 s) est désactivée après 30 minutes. Pour reprendre la collecte en temps réel, actualisez la page.
-- Dans les déploiements en conteneur, le fichier `/etc/passwd` monté dans le `docker-dd-agent` est nécessaire pour collecter les noms d'utilisateur associés à chaque processus. Ce fichier est public et l'Agent de processus n'utilise aucun champ en dehors du nom d'utilisateur. Si l'Agent s'exécute sans privilèges, le montage n'a pas lieu. Même sans accès au fichier `/etc/passwd`, toutes les fonctionnalités restent disponibles, à l'exception du champ de métadonnées `user`. 
+- Dans les déploiements en conteneur, le fichier `/etc/passwd` monté dans le `docker-dd-agent` est nécessaire pour collecter les noms d'utilisateur associés à chaque processus. Ce fichier est public et l'Agent de processus n'utilise aucun champ en dehors du nom d'utilisateur. Si l'Agent s'exécute sans privilèges, le montage n'a pas lieu. Même sans accès au fichier `/etc/passwd`, toutes les fonctionnalités restent disponibles, à l'exception du champ de métadonnées `user`.
 **Remarque** : Live Processes utilise uniquement le fichier `passwd` du host et ne résout pas les noms d'utilisateur créés à l'intérieur des conteneurs.
 
 ## Pour aller plus loin

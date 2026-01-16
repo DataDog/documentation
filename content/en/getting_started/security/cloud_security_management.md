@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Cloud Security
+description: Deploy Datadog Cloud Security for unified visibility across your infrastructure. Configure threat detection, misconfigurations, identity risks, and vulnerabilities.
 aliases:
 - /getting_started/cloud_security_management
 further_reading:

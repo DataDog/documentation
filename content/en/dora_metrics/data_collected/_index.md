@@ -1,5 +1,6 @@
 ---
 title: DORA Metrics Data Collected
+description: "Learn about DORA Metrics events, fields, tags, and change lead time stages for deployment frequency, change lead time, and failure analysis."
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'
@@ -25,7 +26,9 @@ DORA Metrics generates events that have associated fields and tags.
 |Commit | A commit event is generated for each individual commit included in a deployment. These events contain metadata and are automatically linked to the corresponding deployment.
 |Failure | A failure in production, such as an incident, rollback, or alert.
 
-#### Default tags
+**Note**: DORA Metrics events have a 2-year retention period.
+
+### Default tags
 
 All events contain the following tags if any are available:
 
@@ -40,7 +43,7 @@ All events contain the following tags if any are available:
 
 For more information about using tags, see [Getting Started with Tags][6].
 
-#### Custom tags
+### Custom tags
 
 In addition to the tags above, deployment and failure events can be enriched with custom tags to filter DORA Metrics. There are three potential sources for these tags:
 
@@ -126,7 +129,7 @@ Using commit-level granularity provides a more accurate view of engineering perf
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/events/explorer/
+[1]: /events/explorer/
 [2]: /api/latest/metrics/#query-timeseries-points
 [3]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [5]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
@@ -139,5 +142,5 @@ Using commit-level granularity provides a more accurate view of engineering perf
 [12]: /dora_metrics/deployments/#limitations
 [13]: https://www.datadoghq.com/blog/service-catalog-setup/
 [14]: https://app.datadoghq.com/incidents
-[15]: /service_management/incident_management/describe#attributes
+[15]: /incident_response/incident_management/describe#attributes
 [16]: /dora_metrics/

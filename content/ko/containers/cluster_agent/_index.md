@@ -34,7 +34,7 @@ Docker를 사용하는 경우 Docker 허브 및 GCR에서 Datadog 클러스터 �
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
 
-<div class="alert alert-warning">Docker Hub는 이미지 풀 속도 제한에 영향을 받습니다. Datadog에서는 Docker Hub를 사용하지 않는 사용자의 경우 Datadog 에이전트와 클러스터 에이전트 구성을 GCR 또는 ECR에서 Datadog 에이전트에서 풀하여 업데이트할 것을 권장합니다. 자세한 설명은 <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.</div>
+<div class="alert alert-danger">Docker Hub는 이미지 풀 속도 제한에 영향을 받습니다. Datadog에서는 Docker Hub를 사용하지 않는 사용자의 경우 Datadog 에이전트와 클러스터 에이전트 구성을 GCR 또는 ECR에서 Datadog 에이전트에서 풀하여 업데이트할 것을 권장합니다. 자세한 설명은 <a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경</a>을 참고하세요.</div>
 
 ### 최소 에이전트 및 클러스터 에이전트 버전
 

@@ -38,7 +38,7 @@ Instrument your main application with the `dd-trace-js` library. See [Tracing No
 Custom metrics are also collected through the tracer. See the [code examples][102].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -57,7 +57,7 @@ Instrument your main application with the `dd-trace-py` library. See [Tracing Py
 Custom metrics are also collected through the tracer. See the [code examples][202].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -76,7 +76,7 @@ Instrument your main application with the `dd-trace-java` library. See [Tracing 
 Custom metrics are also collected through the tracer. See the [code examples][302].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -96,8 +96,8 @@ Instrument your main application with the `dd-trace-dotnet` library.
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
 
-   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
-   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
+   ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
+   RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
    {{< /code-block >}}
 
 2. Build the image and push it to your preferred container registry.
@@ -130,8 +130,8 @@ COPY --from=build /app/out ./
 RUN mkdir -p /datadog/tracer
 RUN mkdir -p /home/LogFiles/dotnet
 
-ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v2.51.0/datadog-dotnet-apm-2.51.0.tar.gz /datadog/tracer
-RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-2.51.0.tar.gz
+ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
+RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
 
 # Set the entry point for the application
 ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
@@ -143,7 +143,7 @@ For more information, see [Tracing .NET Applications][401].
 Custom metrics are also collected through the tracer. See the [code examples][402].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -163,7 +163,7 @@ Instrument your main application with the `dd-trace-go` library. See [Tracing Go
 Custom metrics are also collected through the tracer. See the [code examples][502].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -182,7 +182,7 @@ Instrument your main application with the `dd-trace-php` library. See [Tracing P
 Custom metrics are also collected through the tracer. See the [code examples][602].
 
 #### Logs
-The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts. 
+The Datadog sidecar uses file tailing to collect logs. Datadog recommends writing application logs to `/home/LogFiles/` because this directory is persisted across restarts.
 
 You can also create a subdirectory, such as `/home/LogFiles/myapp`, if you want more control over what is sent to Datadog. However, if you do not tail all log files in `/home/LogFiles`, then Azure App Service application logs related to startups and errors are not collected.
 
@@ -202,39 +202,50 @@ Instrumentation is done using a sidecar container. This sidecar container collec
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-#### Using the Datadog CLI
+#### Locally
 
-First, install the [Datadog CLI][601] and [Azure CLI][602].
+Install the [Datadog CLI][601]
 
-Login to your Azure account using the Azure CLI:
+```shell
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
+```
 
-{{< code-block lang="shell" >}}
-az login
-{{< /code-block >}}
+Install the [Azure CLI][602] and authenticate with `az login`.
 
 Then, run the following command to set up the sidecar container:
 
-{{< code-block lang="shell" >}}
+```shell
 export DD_API_KEY=<DATADOG_API_KEY>
 export DD_SITE=<DATADOG_SITE>
-datadog-ci aas instrument -s <subscription-id> -r <resource-group-name> -n <app-service-name>
-{{< /code-block >}}
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
 
 Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
 
-**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer.
+**Note:** For .NET applications, add the `--dotnet` flag to include the additional environment variables required by the .NET tracer, and additionally the `--musl` flag if your container is using dotnet on a musl libc image (such as Alpine Linux).
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
+#### Azure Cloud Shell
+
+To use the Datadog CLI in [Azure Cloud Shell][603], open cloud shell and use `npx` to run the CLI directly. Set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and then run the CLI:
+```shell
+export DD_API_KEY=<DATADOG_API_KEY>
+export DD_SITE=<DATADOG_SITE>
+npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
+```
 
 [601]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 [602]: https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+[603]: https://portal.azure.com/#cloudshell/
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-<div class="alert alert-warning">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
+<div class="alert alert-danger">Because the Azure Web App for Containers resource does not directly support sitecontainers, you should expect drift in your configuration.</div>
 
-If you don't already have Terraform set up, [install Terraform][250], create a new directory, and make a file called `main.tf`.
+The [Datadog Terraform module for Linux Web Apps][1] wraps the [azurerm_linux_web_app][2] resource and automatically configures your Web App for Datadog Serverless Monitoring by adding required environment variables and the serverless-init sidecar.
+
+If you don't already have Terraform set up, [install Terraform][3], create a new directory, and make a file called `main.tf`.
 
 Then, add the following to your Terraform configuration, updating it as necessary based on your needs:
 
@@ -260,7 +271,7 @@ resource "azurerm_service_plan" "my_asp" {
 
 module "my_web_app" {
   source  = "DataDog/web-app-datadog/azurerm//modules/linux"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   name                = "my-web-app"        // Replace with your web app name
   resource_group_name = "my-resource-group" // Replace with your resource group name
@@ -286,11 +297,175 @@ module "my_web_app" {
 
 Finally, run `terraform apply`, and follow any prompts.
 
-The [Datadog Linux Web App module][251] only deploys the Web App resource, so you need to [deploy your code][252] separately.
+The [Datadog Linux Web App module][1] only deploys the Web App resource, so you need to build and push your container separately.
 
-[250]: https://developer.hashicorp.com/terraform/install
-[251]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
-[252]: https://learn.microsoft.com/en-us/azure/app-service/getting-started
+[1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
+[2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
+[3]: https://developer.hashicorp.com/terraform/install
+
+{{% /tab %}}
+{{% tab "Bicep" %}}
+
+To use the sidecar with Web Apps for Containers, you must use the `SITECONTAINERS` linuxFxVersion with `kind` set to `app,linux,container`. Update your existing Web App to include the necessary Datadog App Settings and sidecar, as follows:
+
+```bicep
+resource webApp 'Microsoft.Web/sites@2025-03-01' = {
+  kind: 'app,linux,container'
+  // ...
+  properties: {
+    // ...
+    siteConfig: {
+      // ...
+      linuxFxVersion: 'SITECONTAINERS'
+      appSettings: concat(datadogAppSettings, [
+        //... Your existing app settings
+      ])
+    }
+  }
+}
+
+resource mainContainer 'Microsoft.Web/sites/sitecontainers@2025-03-01' = {
+  parent: webApp
+  name: 'main'
+  properties: {
+    isMain: true
+    image: 'index.docker.io/your/image:tag' // Replace with your Application Image
+    targetPort: '8080'                      // Replace with your Application's Port
+  }
+}
+
+@secure()
+param datadogApiKey string
+
+var datadogAppSettings = [
+  { name: 'DD_API_KEY', value: datadogApiKey }
+  { name: 'DD_SITE', value: 'datadoghq.com' }  // Replace with your Datadog site
+  { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
+  { name: 'DD_ENV', value: 'prod' }            // Replace with your environment (e.g. prod, staging)
+  { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+  // Uncomment for .NET applications
+  // { name: 'DD_DOTNET_TRACER_HOME', value: '/datadog/tracer' }
+  // { name: 'CORECLR_ENABLE_PROFILING', value: '1' }
+  // { name: 'CORECLR_PROFILER', value: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}' }
+  // { name: 'CORECLR_PROFILER_PATH', value: '/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so' }
+  { name: 'DD_LOGS_INJECTION', value: 'true' }
+  { name: 'DD_TRACE_ENABLED', value: 'true' }
+  // Add any additional options here
+]
+
+resource sidecar 'Microsoft.Web/sites/sitecontainers@2025-03-01' = {
+  parent: webApp
+  name: 'datadog-sidecar'
+  properties: {
+    image: 'index.docker.io/datadog/serverless-init:latest'
+    isMain: false
+    targetPort: '8126'
+    environmentVariables: [for v in datadogAppSettings: { name: v.name, value: v.name }]
+  }
+}
+```
+
+Redeploy your updated template:
+
+```bash
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
+
+
+{{% /tab %}}
+{{% tab "ARM Template" %}}
+
+Update your existing Web App to include the necessary Datadog App Settings and sidecar, as follows:
+
+```jsonc
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string"
+    },
+    // ...
+    "datadogApiKey": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "datadogAppSettings": [
+      { "name": "DD_API_KEY", "value": "[parameters('datadogApiKey')]" },
+      { "name": "DD_SITE", "value": "datadoghq.com" }, // Replace with your Datadog site
+      { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
+      { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
+      { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+      // Uncomment for .NET applications
+      // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
+      // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
+      // { "name": "CORECLR_PROFILER", "value": "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}" }
+      // { "name": "CORECLR_PROFILER_PATH", "value": "/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so" }
+      { "name": "DD_LOGS_INJECTION", "value": "true" },
+      { "name": "DD_TRACE_ENABLED", "value": "true" }
+      // Add any additional options here
+    ],
+    "yourAppSettings": [
+      // Add your app settings here
+    ]
+  },
+  "resources": {
+    "webApp": {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2025-03-01",
+      "name": "[parameters('webAppName')]",
+      "kind": "app,linux,container",
+      // ...
+      "properties": {
+        // ...
+        "siteConfig": {
+          // ...
+          "linuxFxVersion": "SITECONTAINERS",
+          "appSettings": "[concat(variables('datadogAppSettings'), variables('yourAppSettings'))]"
+        }
+      }
+    },
+    "mainContainer": {
+      "type": "Microsoft.Web/sites/sitecontainers",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/main')]",
+      "properties": {
+        "isMain": true,
+        "image": "index.docker.io/your/image:tag", // Replace with your Application Image
+        "targetPort": "8080"                       // Replace with your Application's Port
+      }
+    },
+    "sidecar": {
+      "type": "Microsoft.Web/sites/sitecontainers",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/datadog-sidecar')]",
+      "properties": {
+        "image": "index.docker.io/datadog/serverless-init:latest",
+        "isMain": false,
+        "targetPort": "8126",
+        "copy": [{
+          "name": "environmentVariables", "count": "[length(variables('datadogAppSettings'))]",
+          "input": {
+            "name": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]",
+            "value": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]"
+          }
+        }]
+      }
+    }
+  }
+}
+```
+
+Redeploy your updated template:
+
+```shell
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+See the [Manual tab](?tab=manual#instrumentation) for descriptions of all environment variables.
 
 {{% /tab %}}
 {{% tab "Manual" %}}
@@ -317,8 +492,14 @@ In your **App settings** in Azure, set the following environment variables on bo
 - `DD_ENV`: How you want to tag your env. For example, `prod`
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
+- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: An optional file descriptor used for more precise file tailing. Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.
+
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
+
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
+: **Value**: `true`<br>
+Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 <details open>
 <summary>
@@ -330,7 +511,6 @@ If you are setting up monitoring for a .NET application, configure the following
 | Variable name | Value |
 | ------------- | ----- |
 | `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
-| `DD_TRACE_LOG_DIRECTORY` | `/home/LogFiles/dotnet` |
 | `CORECLR_ENABLE_PROFILING` | `1` |
 | `CORECLR_PROFILER` | `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` |
 | `CORECLR_PROFILER_PATH` | `/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so` |

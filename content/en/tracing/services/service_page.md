@@ -1,5 +1,6 @@
 ---
 title: Service Page
+description: Comprehensive service overview with health metrics, dependencies, deployments, error tracking, and security insights.
 aliases:
 - /tracing/visualization/service/
 further_reading:
@@ -271,8 +272,8 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [2]: /tracing/services/resource_page/
 [3]: /monitors/types/apm/
 [4]: /tracing/error_tracking/
-[5]: /service_management/service_level_objectives/
-[6]: /service_management/incident_management/
+[5]: /service_level_objectives/
+[6]: /incident_response/incident_management/
 [7]: /watchdog/
 [8]: /tracing/metrics/metrics_namespace/
 [10]: /dashboards/

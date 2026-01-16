@@ -11,7 +11,7 @@ further_reading:
 title: SAML을 이용한 Single Sign On
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">정부 사이트용 Datadog은 SAML 로그인만 지원합니다.</div>
+<div class="alert alert-danger">정부 사이트용 Datadog은 SAML 로그인만 지원합니다.</div>
 {{< /site-region >}}
 
 ## 개요
@@ -134,7 +134,7 @@ JIT 프로비저닝을 사용하면 첫 로그인 시에 Datadog 사용자가 �
 
 관리자는 새 JIT 사용자의 기본 역할을 설정할 수 있습니다. 기본 역할은 **Standard**입니다. 그러나 **Read-Only**, **Administrators**, 또는 커스텀 역할을 가진 새 JIT 사용자를   추가할 수 있습니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>중요:</strong> 역할 매핑을 활성화하면 JIT 프로비저닝 중에 설정한 역할보다 역할 매핑이 우선순위가 높아집니다. 적절한 그룹 속성 문이 없으면 역할이 없는 상태가 되어 Datadog에 액세스가 불가한 상황이 발생할 수 있습니다. JIT 프로비저닝 후에 액세스 불가한 상황을 예방하려면 매핑 정의를 다시 검토하고 매핑과 JIT를 활성화하기 전에 어설션을 검토해야 합니다.
 </div>
 

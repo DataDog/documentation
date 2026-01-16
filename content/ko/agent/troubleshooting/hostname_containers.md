@@ -1,4 +1,6 @@
 ---
+description: Kubernetes, Docker 및 클라우드 플랫폼 기반 컨테이너화된 Datadog Agent 배포에서 호스트 이름 확인
+  오류 문제를 해결하세요.
 title: 컨테이너에서 호스트 이름 탐지
 ---
 

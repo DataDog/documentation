@@ -3,6 +3,10 @@
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."
   },
+  "apm": {
+    "name": "APM",
+    "description": "Observe, troubleshoot, and improve cloud-scale applications with all telemetry in context"
+  },
   "apm-retention-filters": {
     "name": "APM Retention Filters",
     "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
@@ -67,9 +71,17 @@
     "name": "Case Management",
     "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
+  "case-management-attribute": {
+    "name": "Case Management Attribute",
+    "description": "View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
+  "case-management-type": {
+    "name": "Case Management Type",
+    "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+  },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
-    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and GCP. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
+    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
   "cloud-network-monitoring": {
     "name": "Cloud Network Monitoring",
@@ -93,7 +105,7 @@
   },
   "dora-metrics": {
     "name": "DORA Metrics",
-    "description": "Search or send events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
+    "description": "Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.\n\n**Note**: DORA Metrics are not available in the US1-FED site."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -102,6 +114,10 @@
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
+  },
+  "deployment-gates": {
+    "name": "Deployment Gates",
+    "description": "Manage Deployment Gates using this API to reduce the likelihood and impact of incidents caused by deployments. See the [Deployment Gates documentation](https://docs.datadoghq.com/deployment_gates/) for more information."
   },
   "domain-allowlist": {
     "name": "Domain Allowlist",
@@ -122,6 +138,10 @@
   "fastly-integration": {
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
+  },
+  "fleet-automation": {
+    "name": "Fleet Automation",
+    "description": "Manage automated deployments across your fleet of hosts.\n\nFleet Automation provides two types of deployments:\n\nConfiguration Deployments (`/configure`):\n- Apply configuration file changes to target hosts\n- Support merge-patch operations to update specific configuration fields\n- Support delete operations to remove configuration files\n- Useful for updating Datadog Agent settings, integration configs, and more\n\nPackage Upgrade Deployments (`/upgrade`):\n- Upgrade the Datadog Agent to specific versions"
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -219,9 +239,17 @@
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization. See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/) for more information."
   },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\nSee the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information."
+  },
   "rum": {
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+  },
+  "reference-tables": {
+    "name": "Reference Tables",
+    "description": "View and manage Reference Tables in your organization."
   },
   "restriction-policies": {
     "name": "Restriction Policies",
@@ -230,6 +258,10 @@
   "roles": {
     "name": "Roles",
     "description": "The Roles API is used to create and manage Datadog roles, what\n[global permissions](https://docs.datadoghq.com/account_management/rbac/)\nthey grant, and which users belong to them.\n\nPermissions related to specific account assets can be granted to roles\nin the Datadog application without using this API. For example, granting\nread access on a specific log index to a role can be done in Datadog from the\n[Pipelines page](https://app.datadoghq.com/logs/pipelines)."
+  },
+  "rum-audience-management": {
+    "name": "Rum Audience Management",
+    "description": "Auto-generated tag Rum Audience Management"
   },
   "rum-metrics": {
     "name": "Rum Metrics",
@@ -283,6 +315,10 @@
     "name": "Spans Metrics",
     "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/) for more information."
   },
+  "static-analysis": {
+    "name": "Static Analysis",
+    "description": "API for static analysis"
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
@@ -290,6 +326,10 @@
   "teams": {
     "name": "Teams",
     "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
+  },
+  "test-optimization": {
+    "name": "Test Optimization",
+    "description": "Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information."
   },
   "usage-metering": {
     "name": "Usage Metering",

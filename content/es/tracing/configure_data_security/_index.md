@@ -623,7 +623,7 @@ export DD_INSTRUMENTATION_TELEMETRY_ENABLED=false
 
 {{< site-region region="us" >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 El cumplimiento del estándar PCI para APM solo está disponible para las organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
 

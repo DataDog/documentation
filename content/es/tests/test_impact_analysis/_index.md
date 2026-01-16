@@ -16,7 +16,7 @@ further_reading:
 title: Test Impact Analysis
 ---
 
-<div class="alert alert-warning"> Esta función se conocía anteriormente como Intelligent Test Runner, y algunas etiquetas (tags) todavía contienen "itr".</div>
+<div class="alert alert-danger"> Esta función se conocía anteriormente como Intelligent Test Runner, y algunas etiquetas (tags) todavía contienen "itr".</div>
 
 ## Información general
 

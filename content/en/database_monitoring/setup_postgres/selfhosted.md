@@ -5,6 +5,9 @@ further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -18,7 +21,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Prerequisites
 : Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
@@ -146,6 +149,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -210,7 +215,7 @@ When it prompts for a password, use the password you entered when you created th
 Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres.
 If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
 
-Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][1].
+Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][9].
 
 ```yaml
 init_config:
@@ -227,10 +232,7 @@ instances:
 
 **Note**: If your password includes special characters, wrap it in single quotes.
 
-[Restart the Agent][2] to apply the changes.
-
-[1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /agent/configuration/agent-commands/#restart-the-agent
+[Restart the Agent][16] to apply the changes.
 
 ### Collecting logs (optional)
 
@@ -291,7 +293,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.postgresql.org/docs/12/contrib.html
+[1]: https://www.postgresql.org/docs/current/contrib.html
 [2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
@@ -306,3 +308,4 @@ If you have installed and configured the integrations and Agent as described and
 [13]: /agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /database_monitoring/troubleshooting/?tab=postgres
+[16]: /agent/configuration/agent-commands/#restart-the-agent

@@ -43,7 +43,7 @@ Las métricas de tiempo de ejecución están disponibles para varios lenguajes d
 - **Versión de la librería**: 0.29.0 o posterior
 - **Tiempos de ejecución**: Java 8 o posterior
 
-<div class="alert alert-warning">La recopilación de métricas de JMX no es compatible con los entornos AWS Lambda.</div>
+<div class="alert alert-danger">La recopilación de métricas de JMX no es compatible con los entornos AWS Lambda.</div>
 
 {{% /tab %}}
 
@@ -104,12 +104,12 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-warning">No se admiten métricas en tiempo de ejecución para PHP.</div>
+<div class="alert alert-danger">No se admiten métricas en tiempo de ejecución para PHP.</div>
 
 {{% /tab %}}
 {{% tab "C++" %}}
 
-<div class="alert alert-warning">No se admiten métricas en tiempo de ejecución para C++.</div>
+<div class="alert alert-danger">No se admiten métricas en tiempo de ejecución para C++.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -188,7 +188,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-warning">Esto sólo se aplica si no estás utilizando <code>ddtrace-run</code></div>
+<div class="alert alert-danger">Esto sólo se aplica si no estás utilizando <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}

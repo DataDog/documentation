@@ -122,7 +122,7 @@ Log4j 2 incluye una estructura JSON.
   <Configuration>
     <Appenders>
       <File name="FILE" fileName="logs/app.log" >
-        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>
+        <JsonTemplateLayout eventTemplateUri="classpath:MyLayout.json"/>      
       </File>
     </Appenders>
     <Loggers>
@@ -152,7 +152,62 @@ Log4j 2 incluye una estructura JSON.
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-2. Añade las dependencias de diseño JSON a tu `pom.xml`. Por ejemplo:
+2. Añade el archivo de plantilla de diseño JSON (como `MyLayout.json`) en el directorio `src/main/resources` de tu proyecto Java. Por ejemplo:
+    ```json
+    {
+       "timestamp":{
+          "$resolver":"timestamp",
+          "pattern":{
+             "format":"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+             "timeZone":"UTC"
+          }
+       },
+       "status":{
+          "$resolver":"level",
+          "field":"name"
+       },
+       "thread_name":{
+          "$resolver":"thread",
+          "field":"name"
+       },
+       "logger_name":{
+          "$resolver":"logger",
+          "field":"name"
+       },
+       "message":{
+          "$resolver":"message",
+          "stringified":true
+       },
+       "exception_class":{
+          "$resolver":"exception",
+          "field":"className"
+       },
+       "exception_message":{
+          "$resolver":"exception",
+          "field":"message"
+       },
+       "stack_trace":{
+          "$resolver":"exception",
+          "field":"stackTrace",
+          "stackTrace":{
+             "stringified":true
+          }
+       },
+       "host":"${hostName}",
+       "service":"${env:DD_SERVICE}",
+       "version":"${env:DD_VERSION}",
+       "dd.trace_id":{
+          "$resolver":"mdc",
+          "key":"dd.trace_id"
+       },
+       "dd.span_id":{
+          "$resolver":"mdc",
+          "key":"dd.span_id"
+       }
+    }
+    ```
+
+3. Añade las dependencias de diseño JSON a tu `pom.xml`. Por ejemplo:
     ```xml
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -237,11 +292,8 @@ writer.field.dd.env        = {context: dd.env}
 ```
 
 [1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}{{< /tabs >}}
-
-#### Inserta los ID de trazas en tus logs
-
-Si tienes APM activado para esta aplicación, puedes correlacionar los logs y las trazas activando la inserción de ID de trazas. Consulta [Conectar logs y trazas Java][3] para obtener más información.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Formato sin procesar
 
@@ -260,7 +312,7 @@ Configura un appender de archivos en `log4j.xml`. Por ejemplo:
     <param name="Append" value="true"/>
 
     <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </layout>
   </appender>
 
@@ -282,7 +334,7 @@ Configura un appender de archivos en `log4j2.xml`. Por ejemplo:
 <Configuration>
   <Appenders>
     <File name="FILE" fileName="logs/app.log">
-      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n"/>
     </File>
   </Appenders>
 
@@ -307,7 +359,7 @@ Configurar un anexador de archivos en `logback.xml`. Por ejemplo:
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
@@ -333,13 +385,27 @@ writer.file     = log.txt
 ```
 
 [1]: https://tinylog.org/v2/configuration/#json-writer
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Inserta los ID de trazas en tus logs
 
 Si APM está activada para esta aplicación, puedes correlacionar logs y trazas activando la inserción de ID de trazas. Consulta [Conectar logs y trazas Java][3].
 
-Si _no_ correlacionas logs y trazas, puedes eliminar los marcadores MDC (`%X{dd.trace_id} %X{dd.span_id}`) de los patrones de log incluidos en los ejemplos de configuración de arriba.
+Si _no_ correlacionas logs y trazas, elimina los parámetros MDC (`%X{dd.trace_id} %X{dd.span_id}`) de los patrones de logs incluidos en los ejemplos de configuración anteriores.
+
+Por ejemplo, si utilizas Log4j 2 pero no correlacionas logs y trazas, elimina el siguiente bloque de la plantilla de diseño de logs de ejemplo, `MyLayout.json`:
+
+```json
+"dd.trace_id":{
+   "$resolver":"mdc",
+   "key":"dd.trace_id"
+},
+"dd.span_id":{
+   "$resolver":"mdc",
+   "key":"dd.span_id"
+}
+```
 
 
 ## Configurar el Datadog Agent
@@ -372,11 +438,11 @@ Si los logs están en formato JSON, Datadog [parsea los mensajes del log][9] de 
 
 ## Registro de logs sin Agent
 
-En caso excepcional de que tu aplicación se esté ejecutando en una máquina a la que no tengas acceso o que no puedas registrar logs en un archivo, es posible transmitir logs a Datadog o al Datadog Agent directamente. Esta configuración no es la más recomendable porque requiere que la aplicación gestione los problemas de conexión.
+En caso excepcional de que tu aplicación se esté ejecutando en una máquina a la que no tengas acceso o que no puedas registrar logs en un archivo, es posible transmitir logs a Datadog o al Datadog Agent directamente. Esta configuración no es la más recomendable porque requiere que la aplicación gestione los problemas de conexión. 
 
 Para transmitir logs directamente a Datadog:
 
-1. Añade la librería de registro de logs a tu código o **crea un puente entre tu logger actual y Logback**.
+1. Añade la biblioteca de registro de logs a tu código o **crea un puente entre tu logger actual y Logback**.
 2. **Configura Logback** para que envíe logs a Datadog.
 
 ### Crear un puente desde las bibliotecas de registro de logs de Java y Logback
@@ -454,18 +520,18 @@ Log4j 2 permite registrar logs en un host remoto, pero no ofrece la posibilidad 
 ### Configurar Logback
 
 {{< site-region region="us3,us5,ap1,ap2,gov" >}}
-  <div class="alert alert-warning">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
+  <div class="alert alert-danger">El endpoint TCP no es compatible con el <a href="/getting_started/site">sitio Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}). Para obtener una lista de los endpoints de generación de logs, consulta <a href="/logs/log_collection/?tab=tcp#additional-configuration-options">Recopilación de logs e integraciones</a>.</div>
 {{< /site-region >}}
 
 
 {{< site-region region="us,eu" >}}
 
-Utiliza la librería de registro de logs [logstash-logback-encoder][11] junto con Logback para enviar los logs directamente a Datadog.
+Utiliza la biblioteca de registro de logs [logstash-logback-encoder][11] junto con Logback para enviar los logs directamente a Datadog.
 
 1. Configura un appender TCP en tu archivo `logback.xml`. Con esta configuración, tu clave de API se recupera de la variable de entorno `DD_API_KEY`. Alternativamente, puedes insertar tu clave de API directamente en el archivo de configuración:
 
-   Para la siguiente configuración, sustituye `<YOUR REGION INTAKE>` por la entrada basada en tu región:{{< region-param key="dd_site_name" code="true" >}}.
-    - **US1**: `intake.logs.datadoghq.com:10516`
+   Para la siguiente configuración, sustituye `<YOUR REGION INTAKE>` por la entrada basada en tu región:{{< region-param key="dd_site_name" code="true" >}}. 
+    - **US1**: `intake.logs.datadoghq.com:10516`    
     - **UE**: `tcp-intake.logs.datadoghq.eu:443`
 
     ```xml

@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
+- link: "/network_monitoring/devices/glossary"
+  tag: "Doc"
+  text: "NDM terms and concepts"
 ---
 
 ## Overview
@@ -59,26 +62,54 @@ The output should look similar to the following:
 
    - Run an `snmp walk` on the device's admin IP to determine why the Agent cannot connect to your device.
 
-   **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files.
+      **Note**: Provide your credentials directly in the CLI. If credentials aren't provided, the Agent attempts to locate them in your running Agent configuration files. 
+      
+      Refer to your vendor specific documentation for additional information on running these commands.
 
-   **Linux**: <br />
-     SNMP v2:
-     ```
-     sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
-     ```
-     SNMP v3:
-      ```
-      sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
-      ```
-      **Windows**:
-      ```
-      agent snmp walk <IP Address>[:Port]
+      {{< tabs >}}
+      {{% tab "Linux" %}}
 
-      Example:
-      agent.exe snmp walk  10.143.50.30 1.3.6
-      ```
+   SNMP v2:
 
-    Refer to your vendor specific documentation for additional information on running these commands.
+   ```shell
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
+   ```
+
+   SNMP v3:
+
+   ```shell
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
+   ```
+
+      {{% /tab %}}
+      {{% tab "Windows" %}}
+
+   Navigate to the Agent installation directory:
+
+   ```shell
+   cd "c:\Program Files\Datadog\Datadog Agent\bin"
+   ```
+
+   Run the SNMP walk command:
+
+   ```shell
+   agent snmp walk <IP Address>[:Port]
+   ```
+
+   Example:
+
+   ```shell
+   agent.exe snmp walk 10.143.50.30 1.3.6
+   ```
+
+   **Note**: Run this command as administrator from the Agent installation directory to avoid the following error:
+
+   ```shell
+   Error: unable to read artifact: open C:\ProgramData\Datadog\auth_token: Access is denied.
+   ```
+
+      {{% /tab %}}
+      {{< /tabs >}}
 
 ## Troubleshooting SNMP errors
 
@@ -104,7 +135,7 @@ If you see a permission denied error while port binding in agent logs, the port 
 
       Run `iptables -L OUTPUT` and ensure there is no deny rule:
 
-      ```
+      ```shell
       vagrant@agent-dev-ubuntu-22:~$ sudo iptables -L OUTPUT
       Chain OUTPUT (policy ACCEPT)
       target     prot opt source               destination
@@ -148,6 +179,8 @@ If you see a permission denied error while port binding in agent logs, the port 
 ### Traps or Flows not being received at all
 
 If SNMP traps or NetFlow traffic are missing, a common cause is firewall rules blocking UDP packets before they reach the Agent. Both SNMP traps and NetFlow rely on UDP and use the ports defined in your [datadog.yaml][9] configuration.
+
+<div class="alert alert-info">Local firewalls like Uncomplicated Firewall (UFW) may block traffic even when configured with permissive settings. Check system logs for blocked packet entries, which typically indicate that traffic reached the network interface but was blocked before reaching the operating system.</div>
 
 Use the following platform-specific commands to check for firewall rules that may be blocking the traffic from reaching the Agent.
 
@@ -213,7 +246,7 @@ Check for any rules blocking UDP traffic on your configured ports. For example:`
    **Solution**:
    Add a net bind capability to the Agent binary, which allows the Agent to bind to reserved ports:
 
-   ```
+   ```shell
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 

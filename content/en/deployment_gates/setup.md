@@ -1,10 +1,15 @@
 ---
 title: Set Up Deployment Gates
+description: "Configure gates and rules in Datadog UI, then integrate with deployment pipelines using the datadog-ci CLI, Argo Rollouts, or API calls."
 further_reading:
 - link: "/deployment_gates/explore"
   tag: "Documentation"
   text: "Learn about the Deployment Gates explorer"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Deployment Gates are not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
 Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
@@ -20,7 +25,11 @@ Setting up Deployment Gates involves two steps:
 1. Configure the gate and rules in the Datadog UI.
 2. Update your deployment pipeline to interact with the Deployment Gates API.
 
-## Create a Deployment Gate
+## Create Deployment Gates
+
+### Create a gate
+
+<div class="alert alert-info">In addition to using the Deployment Gates UI, you can manage gates and rules programmaticaly with the <a href="https://docs.datadoghq.com/api/latest/deployment-gates">Deployment Gates API</a> or <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate">Datadog Terraform provider</a>.</div>
 
 1. Go to [**Software Delivery > Deployment Gates > Configuration**][1].
 2. Click **Create Gate**.
@@ -36,7 +45,7 @@ a dry run gate always responds with a pass status, but the in-app result is the 
 on rules evaluation. This is particularly useful when performing an initial evaluation of the
 gate behavior without impacting the deployment pipeline.
 
-## Add rules to a gate
+### Add rules to a gate
 
 Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
 
@@ -46,7 +55,7 @@ Each gate requires one or more rules to evaluate. All rules must pass for the ga
 4. **Evaluation Mode**: When a rule is set as a `Dry Run`, its result is not taken into account when computing the overall gate result.
 
 
-### Rule types
+#### Rule types
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
@@ -55,7 +64,7 @@ The Monitors rule allows you to evaluate the state of a set of monitors over a c
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
 
-#### Configuration settings
+##### Configuration settings
 
 * **Search Query**: Enter the query that is used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
   * Monitor static tags - `service:transaction-backend`
@@ -63,14 +72,14 @@ The Monitors rule allows you to evaluate the state of a set of monitors over a c
   * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
 * **Duration**: Enter the period of time (in seconds) for which the matching monitors should be evaluated. The default duration is 0, which means that monitors are evaluated instantly.
 
-#### Example queries
+##### Example queries
 
 * `env:prod service:transaction-backend`
 * `env:prod (service:transaction-backend OR group:"service:transaction-backend" OR scope:"service:transaction-backend")`
 * `tag:"use_deployment_gates" team:payment`
 * `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
 
-#### Notes
+##### Notes
 * `group` filters evaluate only matching groups.
 * Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
 
@@ -84,13 +93,13 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to 
 
 The analysis is automatically done for all APM-instrumented services, and no prior setup is required.
 
-#### Configuration settings
+##### Configuration settings
 
 * **Operation Name**: Auto-populated from the service's [APM primary operation][3] settings.
 * **Duration**: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
 * **Excluded Resources**: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
-#### Notes
+##### Notes
 - The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it when [requesting a gate evaluation](#evaluate-deployment-gates) (see below).
 - New errors and error rate increases are detected at the resource level.
 - This rule type does not support services marked as `database` or `inferred service`.
@@ -127,8 +136,8 @@ The command has the following behavior:
 Note that the `deployment gate` command is available in datadog-ci versions v3.17.0 and above.
 
 **Required environment variables**:
-* `DD_API_KEY`: Your [Datadog API key][2], used to authenticate the requests.
-* `DD_APP_KEY`: Your [Datadog application key][3], used to authenticate the requests.
+* `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Application key][3], used to authenticate the requests.
 * `DD_BETA_COMMANDS_ENABLED=1`: The `deployment gate` command is a beta command, so datadog-ci needs to be run with beta commands enabled.
 
 For complete configuration options and detailed usage examples, refer to the [`deployment gate` command documentation][4].
@@ -136,7 +145,7 @@ For complete configuration options and detailed usage examples, refer to the [`d
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/deployment#gate
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
@@ -234,7 +243,61 @@ spec:
 [4]: https://argo-rollouts.readthedocs.io/en/stable/features/analysis/#analysis-template-arguments
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
-[7]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/deployment#gate
+[7]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#gate
+
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
+The [`Datadog Deployment Gate GitHub Action`][4] includes all the required logic to evaluate a Deployment Gate during the deployment of a service.
+
+Add a `DataDog/deployment-gate-github-action` step to your existing deployment workflow, for example:
+
+```yaml
+name: Deploy with Datadog Deployment Gate
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Canary
+        run: |
+          echo "Deploying canary release for service:'my-service' in 'production'. Version 1.0.1"
+          # Your deployment commands here
+
+      - name: Evaluate Deployment Gate
+        uses: DataDog/deployment-gate-github-action@v1.0.0
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+        with:
+          service: my-service
+          env: production
+          identifier: default
+
+      - name: Deploy
+        run: |
+          echo "Deployment Gate passed, proceeding with deployment"
+          # Your deployment commands here
+```
+
+If the Deployment Gate being evaluated contains APM Faulty Deployment Detection rules, you must also specify the version (for example, `version: 1.0.1`).
+The action has the following behavior:
+* It sends a request to start the gate evaluation and blocks until the evaluation is complete.
+* It provides a configurable timeout to determine the maximum amount of time to wait for an evaluation to complete.
+* It has built-in automatic retries for errors.
+* It allows you to customize its behavior in case of unexpected Datadog errors with the `fail-on-error` parameter.
+
+**Required environment variables**:
+* `DD_API_KEY`: Your [API key][2], used to authenticate the requests.
+* `DD_APP_KEY`: Your [Application key][3], used to authenticate the requests.
+
+For complete configuration options and detailed usage examples, see the [`DataDog/deployment-gate-github-action` repository][4].
+
+[1]: https://github.com/DataDog/datadog-ci
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/organization-settings/application-keys
+[4]: https://github.com/DataDog/deployment-gate-github-action
 
 {{% /tab %}}
 {{% tab "Generic script" %}}

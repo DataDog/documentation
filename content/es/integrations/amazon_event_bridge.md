@@ -11,7 +11,7 @@ title: Amazon EventBridge
 ---
 {{< site-region region="gov" >}}
 
-<div class="alert alert-warning">El sitio Datadog para el Gobierno no es compatible con Amazon EventBridge.</div>
+<div class="alert alert-danger">El sitio Datadog para el Gobierno no es compatible con Amazon EventBridge.</div>
 {{< /site-region >}}
 
 ## Información general

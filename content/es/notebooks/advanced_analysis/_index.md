@@ -1,4 +1,9 @@
 ---
+aliases:
+- /es/logs/workspaces/
+- /es/logs/workspaces/export/
+description: Realiza análisis avanzados de datos en notebooks con consultas SQL, transformaciones
+  de datos, uniones y visualizaciones en varios conjuntos de datos.
 further_reading:
 - link: /notebooks
   tag: Documentación
@@ -10,8 +15,8 @@ title: Analysis Features
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Analysis Features para notebooks no está disponible en el <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).
+<div class="alert alert-danger">
+Los análisis avanzados en notebooks no están disponibles en el <a href="/getting_started/site">sitio Datadog</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
@@ -21,53 +26,54 @@ La función de análisis de los notebooks permite realizar análisis avanzados d
 
 Los notebooks son editores de texto colaborativos que permiten incrustar gráficos de Datadog directamente en los documentos. Aunque esto es ideal para explorar y narrar, las investigaciones más profundas pueden requerir un control más avanzado sobre las consultas de datos. Las funciones de análisis te permiten realizar consultas que te ayudarán a:
 
-* Consultar en cadena, como la agregación de datos agregados existentes o la unión de dos conjuntos de datos agregados. 
+* Encadena consultas, como la agregación de datos agregados existentes o la unión de dos conjuntos de datos agregados.
 * Unir datos de múltiples fuentes de logs y otros conjuntos de datos.
-* Realizar parseos avanzados, extraer datos y añadir campos calculados en el momento de la consulta.  
+* Realiza análisis avanzados, extrae datos y añade campos calculados en el momento de la consulta.
 * Visualizar conjuntos de datos transformados con gráficos.
 
 ## Añadir datos a tu notebook
 
-Para ejecutar consultas complejas en un notebook, añade primero una celda **Data Source** (Fuente de datos). Hay dos maneras de hacerlo: 
+Para ejecutar consultas complejas en un notebook, añade primero una celda **Fuente de datos**. Hay dos maneras de hacerlo:
 
 **Desde un notebook**:
-1. Escribe `/datasource` y pulsa <kbd>Enter</kbd> (Intro), o haz clic en el cuadro **Data Source** (Fuente de datos) situado en la parte inferior de página.
-2. Escribe o selecciona la fuente de datos deseada en el menú desplegable y pulsa <kbd>Enter</kbd> (Intro).
+1. Escribe `/datasource` y presiona <kbd>Intro</kbd> o haz clic en el cuadro **Data Source** (Fuente de datos) situado en la parte inferior de la página.
+2. Escribe o seleccione tu fuente de datos deseada en el menú desplegable y presiona <kbd>Intro</kbd>.<br/>
+**Nota**: Si buscas una fuente de datos y no está disponible, solicítala [aquí][5].
 3. Introduce tu consulta. Los atributos reservados de los logs filtrados se añaden automáticamente como columnas.
 
-**Desde el [Log Explorer][1]**:
+**Desde el [Explorador de logs][1]**:
 
-1. Introduce tu consulta en el Log Explorer.
-2. Haz clic en **Analyze in Notebooks** (Analizar en notebooks).  
-3. Marca la casilla **Use as a computational data source** (Utilizar como fuente de datos computacionales) y selecciona el notebook que deseas utilizar.   
-4. Se añade una celda de fuente de datos al notebook seleccionado con la misma consulta introducida en el Log Explorer. Por defecto, las columnas mostradas en el Log Explorer se incluyen en la celda de fuente de datos.
+1. Introduce tu consulta en el Explorador de logs.
+2. Haz clic en **Analyze in Notebooks** (Analizar en notebooks).
+3. Marca la casilla **Use as a computational data source** (Utilizar como fuente de datos de cálculo) y selecciona el notebook que quieres utilizar.
+4. Se añade una celda de fuente de datos al notebook seleccionado con la misma consulta introducida en el Explorador de logs. Por defecto, las columnas mostradas en el Explorador de logs se incluyen en la celda de fuente de datos.
 
 ## Configuración de una celda de fuente de datos
 
-Después de añadir una celda de fuente de datos a un notebook, puedes seguir modificándola para estructurar los datos de forma que se adapten a tus necesidades de análisis. 
+Después de añadir una celda de fuente de datos a un notebook, puedes seguir modificándola para estructurar los datos según tus necesidades de análisis.
 
 ### Cambiar el marco temporal de los datos
 
-Por defecto, las celdas de fuente de datos creadas a partir de notebooks utilizan el marco temporal global del notebook. Las celdas de fuente de datos creadas a partir del Log Explorer utilizan una hora local fijada al marco temporal en el momento de la exportación.
+Por defecto, las celdas de fuente de datos creadas a partir de notebooks utilizan el marco temporal global del notebook. Las celdas de fuente de datos creadas a partir del Explorador de logs utilizan una hora local fijada al marco temporal en el momento de la exportación.
 
-Puedes cambiar cualquier celda de fuente de datos entre un marco temporal local o global utilizando el botón de alternancia situado en la esquina superior derecha de la celda. 
+Puedes cambiar cualquier celda de fuente de datos entre un marco temporal local o global, utilizando el botón conmutador situado en la esquina superior derecha de la celda.
 
 ### Filtrar la fuente de datos
 
-Independientemente de cómo crees la celda de fuente de datos, puedes modificar la consulta utilizando la barra de búsqueda. Cualquier cambio en la consulta reejecuta automáticamente la celda de fuente de datos y cualquier celda posterior, actualizando la vista previa de los datos. 
+Independientemente de cómo crees la celda de fuente de datos, puedes modificar la consulta utilizando la barra de búsqueda. Cualquier cambio en la consulta vuelve a ejecutar automáticamente la celda de fuente de datos y cualquier celda posterior, actualizando la vista previa de los datos.
 
 ### Añadir o modificar una columna
 
 Puedes añadir o modificar columnas en tu celda de fuente de datos. Hay dos formas de ajustar las columnas:
 
-- En la sección de vista previa, haz clic en **columnas** para buscar entre los atributos disponibles para tus fuente de datos.
+- En la sección de vista previa, haz clic en **columns** (columnas) para buscar entre los atributos disponibles para tu fuente de datos.
 - En la vista previa, haz clic en una fila para abrir el panel lateral de detalles. Haz clic en el atributo que desees añadir como columna y, en la opción emergente, selecciona "@your_column" a tu conjunto de datos "@your_datasource".
 
 {{< img src="/notebooks/analysis_features/add_column_to_dataset.png" alt="Panel lateral de detalles abierto con la opción para añadir una columna de atributos a la celda de fuente de datos" style="width:100%;" >}}
 
 ### Consultas de campos calculados
 
-Puedes tomar consultas existentes del Log Explorer que incluyan [Campos calculados][4] y abrirlas en notebooks. Para transferir estas consultas desde el Log Explorer, haz clic en **More** (Más) y selecciona **Analyze in Notebooks** (Analizar en notebooks). Los campos calculados se convierten automáticamente en una celda de transformación.
+Puedes tomar consultas existentes del Explorador de logs que incluyan [Campos calculados][4] y abrirlas en notebooks. Para transferir estas consultas desde el Explorador de logs, haz clic en **More** (Más) y selecciona **Analyze in Notebooks** (Analizar en notebooks). Los campos calculados se convierten automáticamente en una celda de transformación.
 
 También puedes crear campos calculados directamente en un notebook para definir un campo calculado a partir de fuentes de datos existentes. Estos campos pueden reutilizarse en análisis posteriores:
 1. Abre un Workspace con una fuente de datos.
@@ -85,7 +91,7 @@ Puedes añadir varios tipos de celdas para mejorar tus capacidades de análisis.
 
 Añade una celda de transformación para filtrar, agrupar, unir o extraer datos definidos en una celda de fuente de datos.
 
-1. Escribe `/transformation` y pulsa <kbd>Enter</kbd> (Intro), o bien haz clic en el cuadro del conjunto de datos de transformación situado en la parte inferior de la página.
+1. Escribe `/transformation` y presiona <kbd>Intro</kbd> o haz clic en el cuadro del conjunto de datos de transformación situado en la parte inferior de la página.
 2. Selecciona la fuente de datos que quieres transformar en el menú desplegable del conjunto de datos fuente.
 
 Después de añadir la celda de transformación, puedes añadir cualquier número de operaciones de transformación dentro de la celda. Elige una operación de la lista de transformaciones admitidas:
@@ -104,9 +110,9 @@ Después de añadir la celda de transformación, puedes añadir cualquier númer
 
 También puedes transformar tus datos utilizando SQL añadiendo una celda de análisis a tu notebook.
 
-1. Escribe `/sql` o `/analysis` y pulsa <kbd>Enter</kbd> (Intro), o haz clic en el cuadro **SQL Query** (Consulta SQL) situada en la parte inferior de la página.
-2. En el desplegable del conjunto de datos fuente, selecciona la fuente de datos que deseas transformar.  
-3. Escribe tu consulta SQL. Para conocer la sintaxis SQL compatible, consulta la [Referencia de DDSQL][4].
+1. Escribe `/sql` o `/analysis` y presiona <kbd>Intro</kbd> o haz clic en el cuadro **SQL Query** (Consulta SQL) situado en la parte inferior de la página.
+2. En el desplegable del conjunto de datos de la fuente, selecciona la fuente de datos que quieres transformar.
+3. Escribe tu consulta SQL. Para conocer la sintaxis SQL compatible, consulta la [referencia de DDSQL][4].
 4. Haz clic en **Run** (Ejecutar) en la esquina superior derecha de la celda de análisis para ejecutar la consulta.
 
 {{< img src="/notebooks/analysis_features/analysis_cell_example.png" alt="Ejemplo de una celda de análisis con datos de transformación de consulta SQL en un notebook" style="width:100%;" >}}
@@ -117,9 +123,9 @@ Puedes representar gráficamente los datos que has transformado utilizando celda
 
 Para representar gráficamente los datos:
 
-1. Escribe `/graph` y pulsa <kbd>Enter</kbd> (Intro), o haz clic en el cuadro **graph dataset** (Conjunto de datos de gráfico) situado en la parte inferior de página.
-2. Escribe o selecciona la fuente de datos deseada en el menú desplegable y pulsa <kbd>Enter</kbd> (Intro).
-3. Selecciona el tipo de visualización en el menú de gráficos y pulsa <kbd>Enter</kbd> (Intro).
+1. Escribe `/graph` y presiona <kbd>Intro</kbd> o haz clic en el cuadro **Graph Dataset** (Graficar conjunto de datos) situado en la parte inferior de la página.
+2. Escribe o selecciona tu fuente de datos deseada en el menú desplegable y presiona <kbd>Intro</kbd>.
+3. Selecciona el tipo de visualización en el menú de gráficos y presiona <kbd>Intro</kbd>.
 
 ## Visualización y exportación de datos
 
@@ -154,3 +160,4 @@ Para descargar tu conjunto de datos como archivo CSV:
 [2]: /es/logs/log_configuration/parsing/
 [3]: /es/logs/explorer/calculated_fields/expression_language/
 [4]: /es/ddsql_reference/
+[5]: https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/

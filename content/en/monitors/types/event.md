@@ -5,7 +5,7 @@ aliases :
     - /monitors/monitor_types/event
     - /monitors/create/types/event/
 further_reading:
-- link: "/service_management/events/"
+- link: "/events/"
   tag: "Documentation"
   text: "Event Management Overview"
 - link: "/monitors/notify/"
@@ -31,7 +31,7 @@ Event monitors alert on ingested events that match a search query, allowing you 
 
 To create an event monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Event**][1].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/#set-alert-aggregation">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info">There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/#set-alert-aggregation">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -104,7 +104,7 @@ Configure the alert grouping strategy:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors/create/event
-[2]: /service_management/events/explorer/searching
+[2]: /events/explorer/searching
 [3]: /help/
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/

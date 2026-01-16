@@ -1,5 +1,6 @@
 ---
 title: Datadog Admission Controller
+description: Automatically inject environment variables and standard tags into Kubernetes pods using the Datadog Admission Controller
 aliases:
 - /agent/cluster_agent/admission_controller
 further_reading:
@@ -147,11 +148,12 @@ Finally, run the following commands:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Instrumentation library injection
-You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries. Read [Instrumentation library injection with Admission Controller][2] for more information.
+### APM Instrumentation library injection
+You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries using Single Step Instrumentation. Read [Single Step APM Instrumentation][2] for more information.
 
+If you do not want to use Single Step Instrumentation, the Datadog Admission Controller can be used to inject APM tracer libraries directly as a manual, pod-level alternative. Read [Local SDK Injection][7] for more information.
 
-### APM and DogStatsD
+### APM and DogStatsD environment variable injection
 
 To configure DogStatsD clients or other APM libraries that do not support library injection, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by doing one of the following:
 - Add the label `admission.datadoghq.com/enabled: "true"` to your Pod.
@@ -209,8 +211,9 @@ See [Admission Controller Troubleshooting][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
-[2]: /tracing/trace_collection/library_injection_local/
+[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/
 [3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 [5]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
 [6]: /containers/troubleshooting/admission-controller
+[7]: https://docs.datadoghq.com/tracing/guide/local_sdk_injection/

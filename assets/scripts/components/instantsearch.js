@@ -335,16 +335,52 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             aisSearchBoxInput.blur();
         }
     };
+
+    const getVisibleSearchResultItems = () => {
+        return Array.from(document.querySelectorAll('#hits:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category), #hits-partners:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category)'));
+    }
     
     const handleSearchbarKeydown = (e) => {
+        // Only handle navigation and selection keys; exit early for all others
+        if (!['ArrowDown', 'ArrowUp', 'Enter'].includes(e.code)) return;
+
+        e.preventDefault();
+        const searchResultItems = getVisibleSearchResultItems();
+        const currentSelectedIndex = Array.from(searchResultItems).findIndex((item) => item.classList.contains('selected-item'));
+
         if (e.code === 'Enter') {
-            e.preventDefault();
+            const link = searchResultItems[currentSelectedIndex]?.querySelector('a[href]');
+            if (link?.href) {
+                return navigateToUrl(link.href);
+            }
+
             sendSearchRumAction(search.helper.state.query);
 
             // Give query-url sync 500ms to update
             setTimeout(() => {
                 window.location.pathname = searchPathname;
             }, 500);
+        } else if (e.code === 'ArrowDown') {
+            if (searchResultItems.length === 0) {
+                return;
+            }
+            if (currentSelectedIndex === -1) {
+                // No item is currently selected, select the first one
+                searchResultItems[0].classList.add('selected-item');
+            } else if (currentSelectedIndex < searchResultItems.length - 1) {
+                searchResultItems[currentSelectedIndex].classList.remove('selected-item');
+                searchResultItems[currentSelectedIndex + 1].classList.add('selected-item');
+            }
+        }
+        else if (e.code === 'ArrowUp') {
+            if (currentSelectedIndex > 0) {
+                searchResultItems[currentSelectedIndex].classList.remove('selected-item');
+                searchResultItems[currentSelectedIndex - 1].classList.add('selected-item');
+            } else if (currentSelectedIndex === 0) {
+                // If it's the first item, move focus to input
+                searchResultItems[currentSelectedIndex].classList.remove('selected-item');
+                aisSearchBoxInput.focus();
+            }
         }
     };
 

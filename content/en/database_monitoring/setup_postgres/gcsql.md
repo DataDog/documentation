@@ -5,6 +5,9 @@ further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -90,6 +93,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -273,7 +278,7 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
     ```shell
     kubectl apply -f datadog-agent.yaml
     ```
-  
+
 ### Helm
 
 Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
@@ -330,7 +335,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
 
 #### Autodiscovery annotations v2
 

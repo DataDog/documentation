@@ -94,7 +94,7 @@ Datadog 에이전트 또는 RFC5424 형식을 사용하면 로그에서 호스�
 
 **참고**: 공식 날짜가 지난 18시간 이전인 경우 Datadog는 로그 항목을 거부합니다.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 인식되는 날짜 형식: <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>, <a href="https://en.wikipedia.org/wiki/Unix_time">UNIX(밀리초 EPOCH 형식</a>) 및 <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164입니다</a>.
 </div>
 

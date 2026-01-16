@@ -1,5 +1,6 @@
 ---
 title: Sheets
+description: "Analyze Datadog data in a familiar spreadsheet interface with pivot tables, lookups, calculated columns, and complex analysis tools."
 further_reading:
 - link: "/sheets/functions_operators"
   tag: "Documentation"
@@ -8,6 +9,10 @@ further_reading:
   tag: "Blog"
   text: "Explore your data with Sheets, DDSQL Editor, and Notebooks for advanced analysis in Datadog"
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/flexible-spreadsheets-in-datadog-sheets/">}}
+Create flexible spreadsheets: built to let you start from scratch, build models, track operations, and more.
+{{< /callout >}}
 
 ## Overview
 
@@ -68,6 +73,10 @@ After you have your pivot table, you can click **Show Graphs** and add up to six
 
 ## Supported data sources
 
+{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
+If you want to query data sources not yet available, use this form to submit your request.
+{{< /callout >}}
+
 Create tables and analyze the data pulled from the following data sources:
 
 | Data Source          | Product page       |
@@ -78,7 +87,7 @@ Create tables and analyze the data pulled from the following data sources:
 | Cloud Cost           | [Cloud Cost Analytics][5] |
 | Database Queries     | [Database Monitoring][16] |
 | Events               | [Event Management][14] |
-| Infrastructure Data (Preview) | [Infrastructure Data][6] |
+| Infrastructure       | [DDSQL Editor][6] |
 | LLM Observability    | [LLM Observability][13] |
 | Logs                 | [Logs Explorer][2] |
 | Metrics              | [Metrics Explorer][7] |
@@ -120,7 +129,7 @@ You must have edit access to restore general access to a restricted spreadsheet.
 [3]: /sheets/functions_operators
 [4]: https://docs.datadoghq.com/integrations/guide/reference-tables/?tab=manualupload
 [5]: https://app.datadoghq.com/cost
-[6]: https://app.datadoghq.com/infrastructure
+[6]: https://app.datadoghq.com/ddsql/editor
 [7]: https://app.datadoghq.com/metric/explorer
 [8]: https://app.datadoghq.com/rum/sessions
 [9]: https://app.datadoghq.com/reference-tables

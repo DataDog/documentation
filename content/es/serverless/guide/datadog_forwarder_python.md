@@ -3,8 +3,8 @@ title: Instrumentación de aplicaciones serverless de Python mediante el Datadog
 ---
 ## Información general
 
-<div class="alert alert-warning">
-Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/python">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad lista para usar, utiliza esta guía para mantener tu instancia.
+<div class="alert alert-danger">
+Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/python">instrucciones para instrumentar tus funciones Lambda utilizando la extensión Lambda en Datadog</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes de que Lambda ofreciera la funcionalidad predefinida, utiliza esta guía para conservar tu instancia.
 </div>
 
 ## Requisitos previos
@@ -43,7 +43,7 @@ datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws
 Para rellenar los parámetros, haz lo siguiente:
 - Reemplaza `<functionname>` y `<another_functionname>` por los nombres de tu función de Lambda.
 - Reemplaza `<aws_region>` por el nombre de la región de AWS.
-- Reemplaza `<layer_version>` por la versión de la librería Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="python" >}}`.
+- Reemplaza `<layer_version>` por la versión de la biblioteca Lambda de Datadog que quieres utilizar. La última versión es `{{< latest-lambda-layer-version layer="python" >}}`.
 - Reemplaza `<forwarder_arn>` por el nombre de recurso de Amazon (ARN) del Forwarder (consulta la [documentación del Forwarder][2]).
 
 Por ejemplo:
@@ -63,7 +63,7 @@ Obtén más información y parámetros adicionales en la [documentación de la C
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-El complemento [Datadog Serverless Plugin][1] añade la librería Lambda de Datadog automáticamente a tus funciones mediante una capa y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+El complemento [Datadog Serverless Plugin][1] añade la biblioteca Lambda de Datadog automáticamente a tus funciones mediante una capa y configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][4] de tu función antes de poder instalar el Datadog Serverless Plugin.
 
@@ -92,7 +92,7 @@ Para instalar y configurar el Datadog Serverless Plugin, sigue estos pasos:
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
 
-La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la librería Lambda de Datadog a tus funciones mediante las capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de SAM para añadir la biblioteca Lambda de Datadog a tus funciones mediante las capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 ### Instalar
 
@@ -119,8 +119,8 @@ Transform:
       pythonLayerVersion: "{{< latest-lambda-layer-version layer="python" >}}"
       stackName: !Ref "AWS::StackName"
       forwarderArn: "<FORWARDER_ARN>"
-      service: "<SERVICE>" # Opcional
-      env: "<ENV>" # Opcional
+      service: "<SERVICE>" # Optional
+      env: "<ENV>" # Optional
 ```
 
 Para rellenar los parámetros, haz lo siguiente:
@@ -138,7 +138,7 @@ Obtén más información y parámetros adicionales en la [documentación de la m
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
 
-La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de CloudFormation generada con el AWS CDK para añadir la librería Lambda de Datadog a tus funciones mediante capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
+La [macro de CloudFormation de Datadog][1] transforma automáticamente tu plantilla de aplicación de CloudFormation generada con el AWS CDK para añadir la biblioteca Lambda de Datadog a tus funciones mediante capas. Además, configura las funciones para enviar métricas, trazas y logs a Datadog a través del [Datadog Forwarder][2].
 
 ### Instalar
 
@@ -171,8 +171,8 @@ class CdkStack(core.Stack):
           "pythonLayerVersion": "{{< latest-lambda-layer-version layer="python" >}}",
           "forwarderArn": "<FORWARDER_ARN>",
           "stackName": self.stackName,
-          "service": "<SERVICE>",  # Opcional
-          "env": "<ENV>",  # Opcional
+          "service": "<SERVICE>",  # Optional
+          "env": "<ENV>",  # Optional
         }
       })
 ```
@@ -282,7 +282,7 @@ Suscribe la función de Lambda del Datadog Forwarder a cada uno de los grupos de
 
 ### Instalar
 
-Si vas a desplegar tu función de Lambda como una imagen de contenedor, no puedes utilizar la librería Lambda de Datadog como una capa. En su lugar, debes instalar la librería Lambda de Datadog como una dependencia de tu función dentro de la imagen.
+Si vas a desplegar tu función de Lambda como una imagen de contenedor, no puedes utilizar la biblioteca Lambda de Datadog como una capa. En su lugar, debes instalar la biblioteca Lambda de Datadog como una dependencia de tu función dentro de la imagen.
 
 
 ```sh
@@ -317,7 +317,7 @@ Suscribe la función de Lambda del Datadog Forwarder a cada uno de los grupos de
 
 ### Instalar
 
-Puedes instalar la librería Lambda de Datadog como una capa (recomendado) o como un paquete de Python.
+Puedes instalar la biblioteca Lambda de Datadog como una capa (recomendado) o como un paquete de Python.
 
 La versión secundaria del paquete `datadog-lambda` siempre coincide con la versión de la capa. Por ejemplo, la versión 0.5.0 de datadog-lambda coincide con el contenido de la versión 5 de la capa.
 
@@ -326,10 +326,10 @@ La versión secundaria del paquete `datadog-lambda` siempre coincide con la vers
 [Configura las capas][1] de tu función de Lambda con el ARN en el siguiente formato:
 
 ```
-# Para las regiones us, us3, us5, ap1 y eu
+# For us,us3,us5,ap1, ap2, and eu regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 
-# Para las regiones us-gov
+# For us-gov regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
@@ -339,7 +339,7 @@ Las opciones disponibles en `RUNTIME` son {{< latest-lambda-layer-version layer=
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
-Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][9] de tu función antes de poder añadir la librería Lambda de Datadog como una capa.
+Si configuraste tu función de Lambda para utilizar la firma de código, debes añadir el ARN del perfil de firma de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) a la [configuración de firma de código][9] de tu función antes de poder añadir la biblioteca Lambda de Datadog como una capa.
 
 
 #### Como un paquete
@@ -399,21 +399,21 @@ from ddtrace import tracer
 from datadog_lambda.metric import lambda_metric
 
 def lambda_handler(event, context):
-    # añade etiquetas personalizadas al tramo de la función de Lambda,
-    # NO funciona si el rastreo de X-Ray está habilitado
+    # add custom tags to the lambda function span,
+    # does NOT work when X-Ray tracing is enabled
     current_span = tracer.current_span()
     if current_span:
         current_span.set_tag('customer.id', '123456')
 
-    # envía un tramo personalizado
+    # submit a custom span
     with tracer.trace("hello.world"):
         print('Hello, World!')
 
-    # envía una métrica personalizada
+    # submit a custom metric
     lambda_metric(
         metric_name='coffee_house.order_value',
         value=12.45,
-        timestamp=int(time.time()), # opcional, debe estar dentro de los últimos 20 minutos
+        timestamp=int(time.time()), # optional, must be within last 20 mins
         tags=['product:latte', 'order:online']
     )
 
@@ -422,7 +422,7 @@ def lambda_handler(event, context):
         'body': get_message()
     }
 
-# rastrea una función
+# trace a function
 @tracer.wrap()
 def get_message():
     return 'Hello from serverless!'

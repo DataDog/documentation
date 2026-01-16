@@ -2,6 +2,8 @@
 aliases:
 - /es/agent/cluster_agent/troubleshooting
 - /es/containers/cluster_agent/troubleshooting
+description: Solucionar problemas frecuentes con el despliegue y la configuración
+  del Datadog Cluster Agent
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-cluster-agent/
   tag: Blog
@@ -9,7 +11,7 @@ further_reading:
 - link: /containers/kubernetes/installation/
   tag: Documentación
   text: Instalación de Kubernetes
-- link: /containers/kubernetes/integrations/
+- link: /contenedores/Kubernetes/integraciones/
   tag: Documentación
   text: Integraciones personalizadas
 title: Solucionar problemas del Cluster Agent
@@ -22,10 +24,10 @@ Este documento contiene información sobre cómo solucionar los problemas de los
 
 ## Datadog Cluster Agent
 
-Para ejecutar los comandos de resolución de problemas del Cluster Agent, primero debes estar dentro del Cluster Agent o del pod Agent basado en nodos. Para ello, utiliza:
+Para ejecutar los comandos de resolución de problemas del Cluster Agent, primero debes encontrarte dentro del Cluster Agent o del pod Agent basado en nodos. Para ello, utiliza:
 
 ```text
-kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> bash
+kubectl exec -it <DATADOG_CLUSTER_AGENT_POD_NAME> -- bash
 ```
 
 Para ver qué metadatos de clúster proporciona el Datadog Cluster Agent, ejecuta lo siguiente:
@@ -144,6 +146,6 @@ root@datadog-agent-9d5bl:/# echo ${DD_CLUSTER_AGENT_AUTH_TOKEN}
 DD_CLUSTER_AGENT_AUTH_TOKEN=1234****9
 ```
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

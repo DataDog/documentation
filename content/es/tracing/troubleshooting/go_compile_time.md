@@ -10,7 +10,7 @@ title: Solucionar problemas de instrumentación del tiempo de compilación Go
 
 Esta guía explica cómo solucionar los problemas de las compilaciones que gestiona [Orchestrion][1]. Estos procedimientos pueden ayudar a Datadog a recopilar información sobre los procesos de compilación y pueden ayudar con los informes de errores.
 
-<div class="alert alert-warning">Los archivos generados pueden contener información confidencial del proyecto, como el código fuente y los nombres de las dependencias. Si te preocupa compartir esta información públicamente, ponte en contacto con el servicio de asistencia de Datadog para compartir los datos de forma privada.</div>
+<div class="alert alert-danger">Los archivos generados pueden contener información confidencial del proyecto, como el código fuente y los nombres de las dependencias. Si te preocupa compartir esta información públicamente, ponte en contacto con el servicio de asistencia de Datadog para compartir los datos de forma privada.</div>
 
 ## Conservar el árbol de trabajo
 
@@ -42,7 +42,7 @@ Controla el resultado de la generación de logs de Orchestrion utilizando la var
 | `DEBUG` | Generación de logs detallada |
 | `TRACE` | Generación de logs extremadamente detallada |
 
-<div class="alert alert-warning">Configurar el<code>NIVEL_DE_LOGS_DE_ORCHESTRION</code> en los niveles <code>DEPURAR</code> o <code>RASTREAR</code> puede tener un impacto significativo en el rendimiento de la compilación. Estos parámetros no son recomendado para operaciones normales.</div>
+<div class="alert alert-danger">Configurar el<code>NIVEL_DE_LOGS_DE_ORCHESTRION</code> en los niveles <code>DEPURAR</code> o <code>RASTREAR</code> puede tener un impacto significativo en el rendimiento de la compilación. Estos parámetros no son recomendado para operaciones normales.</div>
 
 ### Resultado del archivo de logs
 

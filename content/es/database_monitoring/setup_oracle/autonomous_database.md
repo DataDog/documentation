@@ -140,7 +140,7 @@ En la página de integraciones de Datadog, instala la [integración Oracle][9] p
 
 Database Monitoring admite consultas personalizadas para bases de datos Oracle. Para obtener más información sobre las opciones de configuración disponibles, consulta [conf.yaml.example][12].
 
-<div class="alert alert-warning">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
+<div class="alert alert-danger">La ejecución de consultas personalizadas puede dar lugar a costes o tasas adicionales evaluados por Oracle.</div>
 
 [1]: /es/database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /es/database_monitoring/data_collected/#sensitive-information

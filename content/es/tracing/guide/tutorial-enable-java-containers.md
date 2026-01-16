@@ -2,19 +2,19 @@
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: Documentación
-  text: Opciones adicionales de configuración de librerías de rastreo
+  text: Opciones adicionales de configuración de bibliotecas de rastreo
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: Documentación
-  text: Instrucciones detalladas de configuración de librerías de rastreo
+  text: Instrucciones detalladas de configuración de bibliotecas de rastreo
 - link: /tracing/trace_collection/compatibility/java/
   tag: Documentación
-  text: Marcos de trabajo compatibles Java para la instrumentación automática
+  text: Frameworks compatibles Java para la instrumentación automática
 - link: /tracing/trace_collection/custom_instrumentation/java/
   tag: Documentación
   text: Configuración manual de trazas (traces) y tramos (spans)
 - link: https://github.com/DataDog/dd-trace-java
   tag: Código fuente
-  text: Rastreo del repositorio de código fuente abierto de librerías
+  text: Rastreo del repositorio de código fuente abierto de bibliotecas
 title: Tutorial - Habilitación del rastreo de una aplicación Java y el Datadog Agent
   en contenedores
 ---
@@ -112,7 +112,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
 
    De este modo, la aplicación se instrumenta automáticamente con servicios Datadog.
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Las marcas de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+   <div class="alert alert-warning">Los indicadores de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos ajenos a este tutorial. Para obtener información sobre lo que debes utilizar en tu entorno real, lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
 
 3. El [Etiquetado unificado de servicios][10] identifica servicios rastreados en diferentes versiones y entornos de despliegue, para que puedan correlacionarse en Datadog y puedas utilizarlos para buscar y filtrar. Las tres variables de entorno utilizadas para el etiquetado unificado de servicios son `DD_SERVICE`, `DD_ENV` y `DD_VERSION`. Para las aplicaciones desplegadas con Docker, estas variables de entorno pueden añadirse en el archivo Docker o en el archivo `docker-compose`.
    Para este tutorial, el archivo `all-docker-compose.yaml` ya tiene definidas estas variables de entorno:
@@ -185,7 +185,7 @@ Añade el Datadog Agent en la sección de servicios de su archivo `all-docker-co
 
 ## Inicio de los contenedores para observar el rastreo automático
 
-Ahora que la librería de rastreo está instalada, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
+Ahora que la biblioteca de rastreo está instalada, reinicia tu aplicación para empezar a recibir trazas. Ejecuta los siguientes comandos:
 
 ```
 docker-compose -f all-docker-compose.yaml build notes
@@ -234,13 +234,13 @@ Una traza `GET /notes` tiene este aspecto:
 
 ### Configuración del rastreo
 
-La librería de rastreo Java utiliza el Agent incorporado y el soporte de monitorización Java. La marca `-javaagent:../dd-java-agent.jar` en el archivo Docker indica a la máquina virtual Java dónde encontrar la librería de rastreo Java para que pueda ejecutarse como un Agent Java. Para obtener más información sobre Agents Java, consulta [https://www.baeldung.com/java-instrumentation][7].
+La biblioteca de rastreo Java utiliza el Agent incorporado y el soporte de monitorización Java. La marca `-javaagent:../dd-java-agent.jar` en el archivo Docker indica a la máquina virtual Java dónde encontrar la biblioteca de rastreo Java para que pueda ejecutarse como un Agent Java. Para obtener más información sobre Agents Java, consulta [https://www.baeldung.com/java-instrumentation][7].
 
 La marca `dd.trace.sample.rate` configura la frecuencia de muestreo para esta aplicación. El comando ENTRYPOINT en el archivo Docker configura su valor en `1`, lo que significa que el 100% de todas las solicitudes al servicio `notes` se envían al backend Datadog para su análisis y visualización. Para una aplicación de prueba de bajo volumen, esto está bien. Pero no lo hagas en producción o en entornos de gran volumen, ya que esto generará un volumen muy elevado de datos. En su lugar, muestrea algunas de tus solicitudes. Elige un valor entre 0 y 1. Por ejemplo, `-Ddd.trace.sample.rate=0.1` envía trazas del 10% de tus solicitudes a Datadog. Consulta la documentación para obtener más información sobre [parámetros de configuración del rastreo][14] y [mecanismos de muestreo][15].
 
 Fíjate que la marca de la frecuencia de muestreo en el comando aparece antes que la marca `-jar`. Esto se debe a que se trata de un parámetro para la máquina virtual Java y no para tu aplicación. Cuando añadas el Agent Java a tu aplicación, asegúrate de especificar la marca en la ubicación correcta.
 
-## Añadir la instrumentación manual a la aplicación Java
+## Añadir la instrumentación manual a la aplicación Java 
 
 La instrumentación automática es práctica, pero a veces prefieres utilizar tramos más precisos. La API de rastreo DD Java Datadog te permite especificar tramos en tu código mediante anotaciones o código.
 
@@ -301,7 +301,7 @@ Los siguientes pasos te guiarán a través de la adición de anotaciones al cód
         }
    ```
 
-5. Actualiza tu compilación Maven abriendo `notes/pom.xml` y descomentando las líneas que configuran dependencias para el rastreo manual. La librería `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
+5. Actualiza tu compilación Maven abriendo `notes/pom.xml` y descomentando las líneas que configuran dependencias para el rastreo manual. La biblioteca `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
 
 6. Reconstruye los contenedores:
 
@@ -327,7 +327,7 @@ El rastreo de una única aplicación es un buen comienzo, pero el verdadero valo
 
 El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que devuelve una fecha aleatoria cada vez que se invoca. El endpoint `POST` de la aplicación de notas tiene un segundo parámetro de consulta llamado `add_date`. Cuando se configura en `y`, la aplicación de notas llama a la aplicación de calendario para obtener una fecha y añadirla a una nota.
 
-1. Configura la aplicación de calendario para el rastreo añadiendo `dd-java-agent` al comando de inicio en el archivo Docker, como hiciste anteriormente para la aplicación de notas. Abre `calendar/dockerfile.calendar.maven` y comprueba que ya está descargando `dd-java-agent`:
+1. Configura la aplicación de calendario para el rastreo añadiendo `dd-java-agent` al comando de inicio en el archivo Docker, como hiciste anteriormente para la aplicación de notas. Abre `calendar/Dockerfile.calendar.maven` y comprueba que ya está descargando `dd-java-agent`:
 
    ```
    RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
@@ -339,7 +339,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que de
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Nuevamente, las marcas, en particular la frecuencia de muestreo, no son necesariamente apropiadas para los entornos que no figuran en este tutorial. Para obtener más información sobre qué necesitas utilizar en tu entorno real, consulta <a href="#tracing-configuration">Configuración del rastreo</a>.</div>
+   <div class="alert alert-warning">Nuevamente, los indicadores, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos ajenos a este tutorial. Para obtener información sobre qué utilizar en tu entorno real, lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
 
 3. Abre `docker/all-docker-compose.yaml` y descomenta las variables de entorno del servicio `calendar` para configurar el host del Agent y las etiquetas de servicio unificadas para la aplicación y para Docker:
 
@@ -402,7 +402,7 @@ El proyecto de ejemplo incluye una segunda aplicación llamada `calendar` que de
 
    {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="Gráfico de llamas de una traza distribuida." style="width:100%;" >}}
 
-Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la librería `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la librería Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando un rastreo distribuido.
+Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la biblioteca `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la biblioteca Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando un rastreo distribuido.
 
 ## Solucionar problemas
 

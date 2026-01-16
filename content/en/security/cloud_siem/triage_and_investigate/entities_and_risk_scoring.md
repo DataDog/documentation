@@ -21,7 +21,7 @@ With Risk Insights, you can:
 
 ## Prerequisites
 
-- For Risk Insights coverage, either [Azure][6], [GCP][5], or [AWS must be configured for Cloud SIEM][1].
+- For Risk Insights coverage, either GitHub, [Azure][6], [GCP][5], or [AWS][1] must be configured for Cloud SIEM.
 - (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 
@@ -51,7 +51,7 @@ The **Next steps** section of the entity side panel includes the available mitig
 
 ## Risk scoring
 
-An entity's risk score approximates the entity's risk level over the past 14 days of activity. 
+An entity's risk score approximates the entity's risk level over the past 14 days of activity.
 
 The risk score is calculated from the characteristics of the entity's associated signals, such as the severity level of the signal and how many times the signal has fired.
 
@@ -87,6 +87,6 @@ The severity threshold of an entity is calculated by adding up the score impact 
 [1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
-[4]: https://app.datadoghq.com/security/entities
+[4]: https://app.datadoghq.com/security/siem/risk-insights
 [5]: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
 [6]: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/

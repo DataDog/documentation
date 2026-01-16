@@ -1,10 +1,11 @@
 ---
 title: Getting Started with Incident Management
+description: Track and communicate issues from declaration through resolution with collaborative workflows, timelines, and postmortems.
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
       text: 'Introduction to Incident Management'
-    - link: '/service_management/incident_management/datadog_clipboard'
+    - link: '/incident_response/incident_management/datadog_clipboard'
       tag: 'Documentation'
       text: 'Datadog Clipboard'
     - link: 'https://www.youtube.com/watch?v=QIambwILy_M'
@@ -19,7 +20,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
       tag: 'Blog'
       text: 'Incident Management with Datadog'
-    - link: '/service_management/incident_management/incident_settings'
+    - link: '/incident_response/incident_management/incident_settings'
       tag: 'Documentation'
       text: 'Notification Rules'
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
@@ -35,10 +36,6 @@ further_reading:
       tag: 'Blog'
       text: 'How we manage incidents at Datadog'
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
 
 ## Overview
 
@@ -192,15 +189,15 @@ You can also declare and edit incidents and quickly communicate to your teams th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/slack/
-[2]: /service_management/incident_management/datadog_clipboard
+[2]: /incident_response/incident_management/datadog_clipboard
 [3]: /notebooks/#overview
-[4]: /service_management/incident_management/#from-a-graph
-[5]: /service_management/incident_management/#from-a-monitor
+[4]: /incident_response/incident_management/#from-a-graph
+[5]: /incident_response/incident_management/#from-a-monitor
 [6]: /api/latest/incidents/#create-an-incident
 [7]: https://app.datadoghq.com/notebook/list
 [8]: https://app.datadoghq.com/incidents/settings#Messages
-[9]: /service_management/incident_management/#status-levels
-[10]: /service_management/incident_management/incident_settings
+[9]: /incident_response/incident_management/#status-levels
+[10]: /incident_response/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
 [12]: /mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318

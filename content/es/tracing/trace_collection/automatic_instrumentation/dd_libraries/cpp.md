@@ -23,12 +23,12 @@ title: Rastreo de de aplicaciones C++
 type: lenguaje de código múltiple
 ---
 
-<div class="alert alert-warning">
- <strong>Nota:</strong> C++ no proporciona integraciones para la instrumentación automática, pero es utilizado por el rastreo de proxy como <a href="/tracing/setup/envoy/">Envoy</a> y <a href="/tracing/setup/nginx/">Nginx</a>.
+<div class="alert alert-danger">
+  <strong>Nota:</strong> C++ no proporciona integraciones para la instrumentación automática, pero es utilizado por el rastreo de proxies como <a href="/tracing/setup/envoy/">Envoy</a> y <a href="/tracing/setup/nginx/">NGINX</a>.
 </div>
 
 ## Requisitos de compatibilidad
-La librería de rastreo de C++ requiere la cadena de herramientas C++17 para su compilación. Para ver la lista completa de los requisitos para las bibliotecas de rastreo y la compatibilidad de la arquitectura de procesadores de Datadog, consulta la página de [requisitos de compatibilidad][3].
+La biblioteca de rastreo de C++ requiere la cadena de herramientas C++17 para su compilación. Para ver la lista completa de los requisitos para las bibliotecas de rastreo y la compatibilidad de la arquitectura de procesadores de Datadog, consulta la página de [requisitos de compatibilidad][3].
 
 ## Para empezar
 Antes de empezar, asegúrate de haber [instalado y configurado el Agent][6].
@@ -107,7 +107,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 {{% /tab %}}
 
 {{% tab "CMake" %}}
-Para integrar la librería `dd-trace-cpp` en tu proyecto C++ utilizando CMake, sigue estos pasos:
+Para integrar la biblioteca `dd-trace-cpp` en tu proyecto C++ utilizando CMake, sigue estos pasos:
 ````CMake
 include(FetchContent)
 
@@ -143,7 +143,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 
 {{% tab "Manual" %}}
 
-Para descargar e instalar manualmente la librería `dd-trace-cpp`, ejecuta el siguiente script bash:
+Para descargar e instalar manualmente la biblioteca `dd-trace-cpp`, ejecuta el siguiente script bash:
 ```bash
 # Requiere el comando "jq", que puede instalarse a través del
 # gestor de paquetes:
@@ -162,7 +162,7 @@ get_latest_release() {
 
 DD_TRACE_CPP_VERSION="$(get_latest_release DataDog/dd-trace-cpp)"
 
-# Descarga e instala la librería dd-trace-cpp.
+# Descarga e instala la biblioteca dd-trace-cpp.
 wget https://github.com/DataDog/dd-trace-cpp/archive/${DD_TRACE_CPP_VERSION}.tar.gz -O dd-trace-cpp.tar.gz
 mkdir dd-trace-cpp && tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
 cd dd-trace-cpp
@@ -174,11 +174,11 @@ cmake --build build -j
 cmake --install build
 ```
 
-Por defecto, `cmake --install` coloca los encabezados compartidos públicos y de librerías en los directorios apropiados del sistema (por ejemplo, `/usr/local/[...]`).
+Por defecto, `cmake --install` coloca los encabezados compartidos públicos y de bibliotecas en los directorios apropiados del sistema (por ejemplo, `/usr/local/[...]`).
 Para instalarlos en una localización específica, utiliza `cmake --install build --prefix <INSTALL_DIR>`.
 
 ### Vinculación dinámica
-Vincula a `libdd_trace_cpp.so`, asegurándote de que la librería compartids está en `LD_LIBRARY_PATH`.
+Vincula a `libdd_trace_cpp.so`, asegurándote de que la biblioteca compartids está en `LD_LIBRARY_PATH`.
 
 ````bash
 clang -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
@@ -192,7 +192,7 @@ DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type"
 
 ## Configuración
 
-Si es necesario, configura la librería de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de librerías][5].
+Si es necesario, configura la biblioteca de rastreo para que envíe datos de telemetría sobre el rendimiento de la aplicación, según sea necesario, incluida la configuración del etiquetado unificado de servicios. Para ver más detalles, consulta la [configuración de bibliotecas][5].
 
 ## Para leer más
 

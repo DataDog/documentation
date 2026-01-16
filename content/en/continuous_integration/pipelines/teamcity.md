@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on a TeamCity Pipeline
+title: TeamCity Setup for CI Visibility
 aliases:
   - /continuous_integration/setup_pipelines/teamcity
 further_reading:
@@ -15,7 +15,7 @@ further_reading:
 
 [TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.
 
-Set up tracing in TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
+Set up CI Visibility for TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
 
 ### Compatibility
 
@@ -30,6 +30,16 @@ Set up tracing in TeamCity to collect data about your pipeline executions, debug
 The following TeamCity versions are supported:
 
 - TeamCity >= 2021.2 or later
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and TeamCity:
+
+| Datadog                    | TeamCity    |
+|----------------------------|-------------|
+| Pipeline                   | Build Chain |
+| Job                        | Build       |
+| _Not available in Datadog_ | Step        |
 
 ## Configure the Datadog integration
 
@@ -69,7 +79,7 @@ provide information about the user email.
 
 When one of the other username styles is used (**UserId** or **Author Name**), the plugin automatically generates an email for the user by appending `@Teamcity` to the username. For example, if the **UserId** username style is used and the Git author username is `john.doe`, the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11], and can be modified in the VCS Root settings.
 
-<div class="alert alert-warning"> The Git author email is used for
+<div class="alert alert-danger"> The Git author email is used for
 <a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility">billing purposes</a>,
 therefore there might be cost implications when username styles not providing email
 (<strong>UserId</strong> or <strong>Author Name</strong>) are used. <a href="/help/">Reach out to the Datadog support team</a> if you have any questions about your use case.

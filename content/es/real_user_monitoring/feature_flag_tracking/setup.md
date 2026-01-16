@@ -121,7 +121,7 @@ Para activar la recopilación de datos de indicadores de características para t
 
 Puedes empezar a recopilar datos de indicadores de características con [soluciones personalizadas de gestión de indicadores de características](#custom-feature-flag-management), o utilizando uno de los socios de integración de Datadog que se enumeran a continuación.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 
 **Nota**: Los siguientes caracteres especiales no son compatibles con Feature Flag Tracking: `.` `:` , `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recomienda evitar estos caracteres siempre que sea posible en los nombres de los indicadores de características. Si tienes que utilizar uno de estos caracteres, sustitúyelo antes de enviar los datos a Datadog. Por ejemplo
 

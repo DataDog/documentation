@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Software Delivery
+description: Explore CI Visibility, feature flags, test optimization, and test impact analysis tools for software delivery workflows.
 disable_toc: true
 ---
 

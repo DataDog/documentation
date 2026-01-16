@@ -6,7 +6,7 @@ aliases:
 title: 애플리케이션 분석
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 페이지는 사용 중단된 기능과 레거시 애플리케이션 분석과 관련된 설정 정보를 설명합니다. 기존 설정을 수정하거나 트러블슈팅에 유용할 수 있습니다. 트레이스를 완벽히 제어하려면 대신 <a href="/tracing/trace_pipeline">수집 제어 및 보존 필터</a>를 사용하세요.
 </div>
 
@@ -479,7 +479,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### Datadog 에이전트
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 이 섹션은 레거시 애플리케이션 분석과 관련된 설정 정보와 사용 중단된 기능을 설명합니다.
 </div>
 

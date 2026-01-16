@@ -78,7 +78,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 ### 일치기 및 필터
 
-<div class="alert alert-warning"><em>query-time</em>에 사용 가능한 Grok 파싱 기능(<a href="/logs/workspaces/#transformation-cell">Log Workspaces</a> 및 <a href="/logs/explorer/calculated_fields/">Log Explorer</a>에서)은 매처(<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, <strong>word</strong>)와 필터(<strong>number</strong> 및 <strong>integer1</strong>)의 제한된 하위 세트를 지원합니다.<br><br>
+<div class="alert alert-danger"><em>query-time</em>에 사용 가능한 Grok 파싱 기능(<a href="/logs/workspaces/#transformation-cell">Log Workspaces</a> 및 <a href="/logs/explorer/calculated_fields/">Log Explorer</a>에서)은 매처(<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, <strong>word</strong>)와 필터(<strong>number</strong> 및 <strong>integer1</strong>)의 제한된 하위 세트를 지원합니다.<br><br>
 다음 매처 및 필터의 전체 세트는 <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> 기능에만 적용됩니다.</div>
 
 다음은 Datadog에서 기본적으로 구현된 모든 일치기와 필터 목록을 보여줍니다.

@@ -329,7 +329,7 @@ El SDK de RUM iOS rastrea automáticamente las sesiones de usuario en función d
 
 ### Muestreo de sesiones de RUM
 
-<div class="alert alert-warning">La configuración de la frecuencia de muestreo de la sesión no se aplica a Error Tracking.</div>
+<div class="alert alert-danger">La configuración de la frecuencia de muestreo de la sesión no se aplica a Error Tracking.</div>
 
 Para controlar los datos que tu aplicación envía a Datadog RUM, puedes especificar una tasa de muestreo para las sesiones de RUM mientras [inicializas el SDK de iOS de RUM][7]. La tasa es un porcentaje entre 0 y 100. Por defecto, `sessionSamplingRate` se establece en 100 (mantener todas las sesiones).
 

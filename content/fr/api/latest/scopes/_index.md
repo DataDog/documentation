@@ -1,13 +1,13 @@
 ---
 disable_sidebar: true
 title: Contextes d'autorisation
-type: documentation
+type: api
 ---
 ## Portées d'autorisation pour les clients OAuth
 
 Les portées sont un mécanisme d'autorisation qui permet de contrôler et de restreindre précisément l'accès des applications aux données d'une organisation dans Datadog. Lorsqu'une application est autorisée à accéder aux données pour le compte d'un utilisateur ou d'un compte de service, elle ne peut consulter que les informations explicitement permises par les portées qui lui sont assignées.
 
-<div class="alert alert-warning">Cette page répertorie uniquement les portées d'autorisation pouvant être attribuées aux clients OAuth. Pour consulter la liste complète des autorisations attribuables aux clés d'application avec portée, consultez la page <a href="/account_management/rbac/permissions/#permissions-list">Autorisations des rôles Datadog</a>
+<div class="alert alert-danger">Cette page répertorie uniquement les portées d'autorisation pouvant être attribuées aux clients OAuth. Pour consulter la liste complète des autorisations attribuables aux clés d'application avec portée, consultez la page <a href="/account_management/rbac/permissions/#permissions-list">Autorisations des rôles Datadog</a>
 
 <ul>
   <li><strong>Clients OAuth</strong> → Peuvent uniquement se voir attribuer des portées d'autorisation (ensemble limité).</li>

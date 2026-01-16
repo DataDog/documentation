@@ -1,5 +1,6 @@
 ---
 title: Tracer Debug Logs
+description: Enable and collect debug logs from APM tracers to troubleshoot configuration and connectivity issues.
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"
@@ -7,7 +8,7 @@ further_reading:
 ---
 
 ## Automated debug log collection
-<div class="alert alert-warning">Automated debug logs are supported for Java, Python, Node.js, and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
+<div class="alert alert-danger">Automated debug logs are supported for Java, Python, Node.js, and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">manual debug log collection</a> instead.</div>
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
 
@@ -24,7 +25,7 @@ A flare allows you to send necessary troubleshooting information to the Datadog 
 To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][3] on the Agent.
 {{% remote-flare %}}
 
-<div class="alert alert-warning">If you don't see the option for your service, there is likely a connection error between the application and the Datadog Agent and you should default to the manual option of providing debug tracer logs.</div>
+<div class="alert alert-danger">If you don't see the option for your service, there is likely a connection error between the application and the Datadog Agent and you should default to the manual option of providing debug tracer logs.</div>
 
 For example:
 
@@ -51,6 +52,7 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 ```
 -Ddatadog.slf4j.simpleLogger.jsonEnabled=true
 ```
+Since version `1.58.0`, you can use the `DD_LOG_FORMAT_JSON` environment variable to control the Datadog Java Tracer log format.
 
 
 [1]: https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html

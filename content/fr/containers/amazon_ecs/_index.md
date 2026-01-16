@@ -4,7 +4,12 @@ algolia:
   - ecs
 aliases:
 - /fr/agent/amazon_ecs/
+description: Installer et configurer l'Agent Datadog sur Amazon Elastic Container
+  Service
 further_reading:
+- link: https://www.datadoghq.com/blog/ecs-managed-instances
+  tag: Blog
+  text: Surveiller les instances gérées ECS avec Datadog
 - link: /agent/amazon_ecs/logs/
   tag: Documentation
   text: Recueillir les logs de votre application
@@ -21,6 +26,13 @@ further_reading:
   tag: blog
   text: Analysez vos dépenses liées à Kubernetes et ECS avec la solution Cloud Cost
     Management de Datadog
+- link: https://www.datadoghq.com/blog/ecs-default-monitors/
+  tag: Blog
+  text: Détecter et remédier aux problèmes ECS plus rapidement avec les monitors par
+    défaut et ECS Explorer
+- link: https://www.datadoghq.com/architecture/using-datadog-with-ecs-fargate/
+  tag: Centre d'architecture
+  text: Utiliser Datadog avec ECS Fargate
 title: Amazon ECS
 ---
 
@@ -28,11 +40,21 @@ title: Amazon ECS
 
 Amazon ECS est un service d'orchestration de conteneurs évolutif et à hautes performances qui prend en charge les conteneurs Docker. Grâce à l'Agent Datadog, vous pouvez surveiller des conteneurs et tâches ECS sur chaque instance EC2 de votre cluster.
 
+Pour configurer Amazon ECS avec Datadog, vous pouvez utiliser **Fleet Automation** ou **effectuer une installation manuelle**. Si vous préférez effectuer une installation manuelle, exécutez un conteneur d'Agent par host Amazon EC2 en créant une définition de tâche de l'Agent Datadog et en la déployant en tant que service daemon. Chaque Agent surveille ensuite les autres conteneurs sur son host. Consultez la section [Effectuer une installation manuelle](#effectuer-une-installation-manuelle) pour plus de détails.
+
+
+## Configuration de Fleet Automation
+Suivez le [guide d'installation dans l'application de Fleet Automation][32] pour terminer la configuration sur ECS. Après avoir effectué les étapes décrites dans le guide dans l'application, [Fleet Automation][33] génère une définition de tâche ou un modèle CloudFormation prêt à l'emploi, avec votre clé API pré-injectée.
+
+{{< img src="agent/basic_agent_usage/ecs_install_page.png" alt="Étapes d'installation dans l'application pour l'Agent Datadog sur ECS." style="width:90%;">}}
+
 <div class="alert alert-info">
-Si vous souhaitez surveiller <strong>ECS sur Fargate</strong>, consultez la section <a href="/integrations/ecs_fargate/">Amazon ECS sur AWS Fargate</a>.
+Si vous souhaitez surveiller <strong>ECS sur Fargate</strong>, consultez la section <a href="/integrations/ecs_fargate/">Amazon ECS sur AWS Fargate</a>.
 </div>
 
-## Configuration
+<br>
+
+## Configuration manuelle
 
 Pour surveiller vos conteneurs et tâches ECS, déployez l'Agent Datadog en tant que conteneur **une fois sur chaque instance EC2** de votre cluster ECS. Pour cela, créez une définition de tâche pour le conteneur de l'Agent Datadog et déployez-le en tant que service daemon. Chaque conteneur d'Agent Datadog surveille alors les autres conteneurs sur son instance EC2 respective.
 
@@ -43,6 +65,14 @@ Les instructions suivantes supposent que vous avez déjà configuré un cluster 
 3. [Configurer des fonctionnalités supplémentaires pour l'Agent Datadog][29] (facultatif)
 
 **Remarque** : la fonction [Autodiscovery][5] de Datadog peut être utilisée avec ECS et Docker afin de découvrir et de surveiller automatiquement les tâches s'exécutant dans votre environnement.
+
+{{% site-region region="gov" %}}
+## Conformité à la norme FIPS
+
+Certaines étapes de configuration diffèrent pour la conformité FIPS. Veuillez tenir compte des instructions de configuration spécifiques dans la documentation [Conformité FIPS][32].
+
+[32]: /fr/agent/configuration/fips-compliance/
+{{< /site-region >}}
 
 ### Créer une définition de tâche ECS
 
@@ -92,7 +122,7 @@ L'exemple suivant montre comment effectuer une surveillance générale de l'infr
 Une fois votre fichier de définition de tâche créé, exécutez la commande suivante afin d'enregistrer le fichier dans AWS.
 
 ```bash
-aws ecs register-task-definition --cli-input-json file://<chemin vers datadog-agent-ecs.json>
+aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Interface Web" %}}
@@ -150,7 +180,7 @@ Si vous utilisez [DogStatsD][8], modifiez la définition du conteneur de l'Agent
    "environment" : [
      {
        "name": "DD_API_KEY",
-       "value": "<VOTRE_CLÉ_API_DATADOG>"
+       "value": "<YOUR_DATADOG_API_KEY>"
      },
      {
        "name": "DD_SITE",
@@ -184,7 +214,7 @@ Pour recueillir des informations sur les live processes pour l'ensemble de vos c
    "environment" : [
      {
        "name": "DD_API_KEY",
-       "value": "<VOTRE_CLÉ_API_DATADOG>"
+       "value": "<YOUR_DATADOG_API_KEY>"
      },
      {
        "name": "DD_SITE",
@@ -201,10 +231,10 @@ Pour recueillir des informations sur les live processes pour l'ensemble de vos c
 }
 {{< /highlight >}}
 
-#### Network Performance Monitoring
+#### Cloud Network Monitoring
 
-<div class="alert alert-warning">
-Cette fonctionnalité est uniquement disponible sous Linux.
+<div class="alert alert-danger">
+Cette fonctionnalité est uniquement disponible pour Linux.
 </div>
 
 Consultez le fichier d'exemple [datadog-agent-sysprobe-ecs.json][25].
@@ -263,143 +293,54 @@ Si vous disposez déjà d'une définition de tâche, modifiez votre fichier de f
    "family": "datadog-agent-task"
  }
  ```
+#### Chemin réseau
 
+<div class="alert alert-info">Network Path pour Datadog Cloud Network Monitoring est en disponibilité limitée. Contactez votre représentant Datadog pour vous inscrire.</div>
+
+1. Pour activer [Network Path][31] sur vos clusters ECS, activez le module traceroute `system-probe` en ajoutant la variable d'environnement suivante dans votre fichier `datadog-agent-sysprobe-ecs.json` :
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. Pour surveiller des chemins individuels, suivez les instructions ici pour [configurer des fonctionnalités supplémentaires de l'Agent](#configurer-des-fonctionnalites-supplementaires-de-l-agent) :
+
+   Ces fichiers déploient un conteneur d'Agent avec une configuration de base pour recueillir les métriques principales concernant les conteneurs de votre cluster ECS. L'Agent peut également exécuter des intégrations de l'Agent en fonction des Docker Labels découvertes sur vos conteneurs.
+
+3. Pour surveiller les chemins de trafic réseau et permettre à l'Agent de découvrir et surveiller automatiquement les chemins réseau en fonction du trafic réseau réel, sans avoir à spécifier manuellement les endpoints, ajoutez les variables d'environnement supplémentaires suivantes à votre `datadog-agent-sysprobe-ecs.json` :
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. En option, pour configurer le nombre de workers (la valeur par défaut est 4), ajustez la variable d'environnement suivante dans votre fichier `datadog-agent-sysprobe-ecs.json` :
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## Mode AWSVPC
 
 Pour l'Agent 6.10 et les versions ultérieures, le mode `awsvpc` est pris en charge par les conteneurs d'application, tant que les groupes de sécurité autorisent le groupe de sécurité de l'instance de host de se connecter aux conteneurs d'application sur les ports concernés.
 
 Vous pouvez exécuter l'Agent en mode `awsvpc`. Toutefois, Datadog vous le déconseille, car il serait difficile de récupérer l'IP de l'interface réseau Elastic (ENI) afin d'accéder à l'Agent pour les métriques DogStatsD et les traces APM. Exécutez plutôt l'Agent en mode bridge avec un mappage de port, afin de pouvoir récupérer plus facilement l'[adresse IP du host via le serveur de métadonnées][6].
-
-{{% site-region region="gov" %}}
-#### Proxy FIPS pour Datadog (environnements gouvernementaux)
-
-<div class="alert alert-warning">
-Cette fonctionnalité est uniquement disponible sous Linux.
-</div>
-
-Pour envoyer des données à Datadog pour le site gouvernemental, ajoutez le conteneur de sidecar `fips-proxy` et ouvrez les ports du conteneur afin que les [fonctionnalités prises en charge][1] fonctionnent correctement.
-
-```json
- {
-   "containerDefinitions": [
-     (...)
-          {
-            "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.4",
-            "portMappings": [
-                {
-                    "containerPort": 9803,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9804,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9805,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9806,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9807,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9808,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9809,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9810,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9811,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9812,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9813,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9814,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9815,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9816,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9817,
-                    "protocol": "tcp"
-                },
-                {
-                    "containerPort": 9818,
-                    "protocol": "tcp"
-                }
-            ],
-            "essential": true,
-            "environment": [
-                {
-                    "name": "DD_FIPS_PORT_RANGE_START",
-                    "value": "9803"
-                },
-                {
-                    "name": "DD_FIPS_LOCAL_ADDRESS",
-                    "value": "127.0.0.1"
-                }
-            ]
-        }
-   ],
-   "family": "datadog-agent-task"
-}
-```
-
-Vous devez également mettre à jour les variables d'environnement du conteneur de l'Agent Datadog pour permettre l'envoi de trafic via le proxy FIPS :
-
-```json
-{
-    "containerDefinitions": [
-        {
-            "name": "datadog-agent",
-            "image": "public.ecr.aws/datadog/agent:latest",
-            (...)
-            "environment": [
-              (...)
-                {
-                    "name": "DD_FIPS_ENABLED",
-                    "value": "true"
-                },
-                {
-                    "name": "DD_FIPS_PORT_RANGE_START",
-                    "value": "9803"
-                },
-                {
-                    "name": "DD_FIPS_HTTPS",
-                    "value": "false"
-                },
-             ],
-        },
-    ],
-   "family": "datadog-agent-task"
-}
-```
-[1]: https://docs.datadoghq.com/fr/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
-{{< /site-region >}}
 
 ## Dépannage
 
@@ -434,3 +375,6 @@ Besoin d'aide ? Contactez [l'assistance Datadog][11].
 [28]: #run-the-agent-as-a-daemon-service
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /fr/network_monitoring/network_path
+[32]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs
+[33]: https://app.datadoghq.com/fleet/install-agent/latest?platform=ecs

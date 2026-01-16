@@ -257,7 +257,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security는 {{< region-param key="dd_site_name" >}} 사이트에서 사용할 수 없습니다.
 </div>
 {{% /site-region %}}

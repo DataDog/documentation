@@ -53,7 +53,7 @@ Para habilitar el rastreo distribuido para tus AWS Step Functions. Consulta [Mon
 
 #### Habilitar el rastreo a través de AWS X-Ray
 
-<div class="alert alert-warning">Esta opción no recopila <a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">métricas mejoradas para AWS Step Functions</a>. Para recopilar estas métricas, debes habilitar el rastreo a través de <a href="https://docs.datadoghq.com/serverless/step_functions">Datadog APM para AWS Step Functions</a>.</div>
+<div class="alert alert-danger">Esta opción no recopila <a href="https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics">métricas mejoradas para AWS Step Functions</a>. Para recopilar estas métricas, debes habilitar el rastreo a través de <a href="https://docs.datadoghq.com/serverless/step_functions">Datadog APM para AWS Step Functions</a>.</div>
 
 Para recopilar trazas de tus AWS Step Functions a través de AWS X-Ray:
 

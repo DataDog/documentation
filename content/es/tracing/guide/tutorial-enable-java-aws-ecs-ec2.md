@@ -1,20 +1,22 @@
 ---
+description: Tutorial paso a paso para habilitar el rastreo distribuido para una aplicación
+  Java desplegada en Amazon ECS utilizando el tipo de lanzamiento EC2.
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: Documentación
-  text: Opciones adicionales de configuración de la librería de rastreo
+  text: Opciones adicionales de configuración de la biblioteca de rastreo
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: Documentación
-  text: Instrucciones de configuración detalladas de la librería de rastreo
+  text: Instrucciones de configuración detalladas de la biblioteca de rastreo
 - link: /tracing/trace_collection/compatibility/java/
   tag: Documentación
-  text: Marcos de Java compatibles para la instrumentación automática
+  text: Frameworks compatibles Java para la instrumentación automática
 - link: /tracing/trace_collection/custom_instrumentation/java/
   tag: Documentación
   text: Configuración manual de trazas y tramos
 - link: https://github.com/DataDog/dd-trace-java
   tag: Código fuente
-  text: Repositorio de código fuente abierto de la librería de rastreo
+  text: Repositorio de código fuente abierto de la biblioteca de rastreo
 title: 'Tutorial: Activación del rastreo para una aplicación Java en Amazon ECS con
   EC2'
 ---
@@ -90,7 +92,7 @@ aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AW
    {{< code-block lang="sh" >}}
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build{{< /code-block >}}
 
-3. Etiqueta los contenedores con el destino de ECR:
+3. Etiqueta (tag) los contenedores con el destino ECR:
    {{< code-block lang="sh" >}}
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
 docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
@@ -105,7 +107,7 @@ Tu aplicación (sin el rastreo activado) está en un contenedor y está disponib
 
 ### Despliegue de la aplicación
 
-Inicia la aplicación y envía algunas solicitudes sin rastreo. Después de haber visto cómo funciona la aplicación, la instrumentarás utilizando la librería de rastreo y el Datadog Agent.
+Inicia la aplicación y envía algunas solicitudes sin rastreo. Después de haber visto cómo funciona la aplicación, la instrumentarás utilizando la biblioteca de rastreo y el Datadog Agent.
 
 Para empezar, utiliza un script Terraform para desplegar en Amazon ECS:
 
@@ -174,7 +176,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
 
    Ahora ambos servicios tendrán la instrumentación automática.
 
-   <div class="alert alert-warning"><strong>Nota</strong>: Los indicadores de estos comandos de muestreo, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos fuera de este tutorial. Para obtener información sobre qué utilizar en tu entorno real , lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
+   <div class="alert alert-danger">Los indicadores de estos comandos de ejemplo, en particular la frecuencia de muestreo, no son necesariamente apropiados para entornos ajenos a este tutorial. Para obtener información sobre lo que debes utilizar en tu entorno real, lee <a href="#tracing-configuration">Configuración de rastreo</a>.</div>
 
 3. La instrumentación automática es práctica, pero a veces es preferible utilizar tramos más precisos. La API de rastreo DD Java de Datadog te permite especificar tramos en tu código mediante anotaciones o código. Añade algunas anotaciones al código para rastrear en algunos métodos de ejemplo.
 
@@ -233,7 +235,7 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
         }
    ```
 
-7. Actualiza tu compilación Maven al abrir `notes/pom.xml` y eliminar los comentarios de las líneas que configuran dependencias para el rastreo manual. La librería `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
+7. Actualiza tu compilación Maven al abrir `notes/pom.xml` y eliminar los comentarios de las líneas que configuran dependencias para el rastreo manual. La biblioteca `dd-trace-api` se utiliza para las anotaciones `@Trace`, y `opentracing-util` y `opentracing-api` se utilizan para la creación manual de tramos.
 
 8. El [Etiquetado unificado de servicios][10] identifica servicios rastreados en diferentes versiones y entornos de despliegue, para que puedan correlacionarse en Datadog y puedas utilizarlos para buscar y filtrar. Las tres variables de entorno utilizadas para el etiquetado unificado de servicios son `DD_SERVICE`, `DD_ENV` y `DD_VERSION`. Para las aplicaciones desplegadas con ECS, estas variables de entorno se configuran dentro de la definición de tarea para los contenedores.
 
@@ -307,17 +309,17 @@ Ahora que ya tienes una aplicación Java en funcionamiento, configúrala para ha
       ...
    ```
 
-   También puedes ver que se configuran las etiquetas (labels) de Docker para los mismos valores de etiquetas unificadas de servicios `service` , `env` y `version`. Esto también te permite obtener métricas de Docker una vez que tu aplicación se esté ejecutando.
+   También puedes ver que se configuran etiquetas (labels) de Docker para los mismos valores de etiquetas (tags) unificadas de servicios `service` , `env` y `version`. Esto también te permite obtener métricas de Docker una vez que tu aplicación se esté ejecutando.
 
 ### Configuración del rastreo
 
-La librería de rastreo de Java utiliza el Agent incorporado y el soporte de monitorización de Java. El indicador `-javaagent:../dd-java-agent.jar` en el archivo Docker indica a la máquina virtual Java dónde encontrar la librería de rastreo de Java para que pueda ejecutarse como un Agent de Java. Para obtener más información sobre Agents de Java, consulta [https://www.baeldung.com/java-instrumentation][7].
+La biblioteca de rastreo de Java utiliza el Agent incorporado y el soporte de monitorización de Java. El indicador `-javaagent:../dd-java-agent.jar` en el archivo Docker indica a la máquina virtual Java dónde encontrar la biblioteca de rastreo de Java para que pueda ejecutarse como un Agent de Java. Para obtener más información sobre Agents de Java, consulta [https://www.baeldung.com/java-instrumentation][7].
 
 El indicador `dd.trace.sample.rate` configura la frecuencia de muestreo para esta aplicación. El comando ENTRYPOINT en el archivo Docker configura su valor en `1`, lo que significa que el 100% de todas las solicitudes de servicio se envían al backend de Datadog para su análisis y visualización. Para una aplicación de prueba de bajo volumen, esto está bien. Sin embargo, no lo hagas en producción o en entornos de gran volumen, ya que esto generará un volumen muy elevado de datos. En su lugar, muestrea algunas de tus solicitudes. Elige un valor entre 0 y 1. Por ejemplo, `-Ddd.trace.sample.rate=0.1` envía trazas del 10% de tus solicitudes a Datadog. Consulta la documentación para obtener más información sobre [parámetros de configuración del rastreo][14] y [mecanismos de muestreo][15].
 
 Fíjate que el indicador de la frecuencia de muestreo en el comando aparece antes que el indicador `-jar`. Esto se debe a que se trata de un parámetro para la máquina virtual Java y no para tu aplicación. Cuando añadas el Agent de Java a tu aplicación, asegúrate de especificar el indicador en la localización correcta.
 
-### Reconstrucción y carga de la imagen de la aplicación
+### Recrear y cargar la imagen de la aplicación
 
 Reconstruye la imagen con el rastreo habilitado utilizando los [mismos pasos que antes](#build-and-upload-the-application-image):
 {{< code-block lang="sh" >}}
@@ -328,13 +330,13 @@ docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar
 docker push <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-Tu aplicación de multiservicio con rastreo activado está en contenedores y se encuentra disponible para su extracción por ECS.
+Tu aplicación multiservicio con rastreo habilitado está contenedorizada y disponible para que ECS la extraiga.
 
 ## Despliegue del Agent en ECS
 
 A continuación, despliega el Datadog Agent para recopilar los datos de traza de tu aplicación instrumentada. Para un entorno de ECS, no debes descargar nada para ejecutar el Agent. En su lugar, sigue estos pasos para crear una definición de tarea de Datadog Agent, carga la definición de tarea en AWS, y crea un servicio de Agent en tu clúster utilizando esa definición de tarea.
 
-1. Abre `terraform/EC2/dd_agent_task_definition.json`, que proporciona una configuración básica para ejecutar el Agent con el rastreo de APM activado. Proporciona la clave de API de tu organización de Datadog y el sitio de Datadog según corresponda:
+1. Abre `terraform/EC2/dd_agent_task_definition.json`, que proporciona una configuración básica para ejecutar el Agent con el rastreo APM activado. Proporciona la clave de API de tu organización de Datadog y el sitio de Datadog según corresponda:
 
    ```yaml
    ...
@@ -356,15 +358,15 @@ A continuación, despliega el Datadog Agent para recopilar los datos de traza de
    aws ecs register-task-definition --cli-input-json file://dd_agent_task_definition.json --profile <AWS_PROFILE> --region <AWS_REGION>
    ```
 
-   En la salida, anota el valor `taskDefinitionArn`, que se utilizará en el paso siguiente.
+   En el resultado, anota el valor `taskDefinitionArn`, que se utilizará en el paso siguiente.
 
-3. Crea el servicio del Agent en el clúster ejecutando este comando, al brindar el ARN de definición de tarea del paso anterior, tu perfil de AWS y la región de AWS:
+3. Crea el servicio del Agent en el clúster ejecutando este comando y proporciona el ARN de definición de tarea del paso anterior, tu perfil de AWS y la región de AWS:
 
    ```sh
    aws ecs create-service --cluster apm-tutorial-ec2-java --task-definition <TASK_DEFINITION_ARN> --launch-type EC2 --scheduling-strategy DAEMON --service-name datadog-agent --profile <PROFILE> --region <AWS_REGION>
    ```
 
-## Inicio de la aplicación para ver trazas
+## Iniciar la aplicación para ver trazas
 
 Vuelve a desplegar la aplicación y ejercita la API:
 
@@ -376,9 +378,9 @@ Vuelve a desplegar la aplicación y ejercita la API:
    terraform state show 'aws_alb.application_load_balancer'
    ```
 
-2. Anota el nombre del DNS del equilibrador de carga. Utilizarás ese dominio básico en las llamadas de la API a la aplicación de ejemplo.
+2. Anota el nombre DNS del balanceador de carga. Utilizarás ese dominio de base en las llamadas de API de la aplicación de ejemplo.
 
-3. Espera unos minutos a que se inicien las instancias. Espera unos minutos para asegurarte de que los contenedores para las aplicaciones están listos. Ejecuta algunos comandos curl para ejercitar la aplicación instrumentada:
+3. Espera unos minutos a que se inicien las instancias. Espera unos minutos para asegurarte de que los contenedores de las aplicaciones están listos. Ejecuta algunos comandos curl para ejercitar la aplicación instrumentada:
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[]`
@@ -400,7 +402,7 @@ Vuelve a desplegar la aplicación y ejercita la API:
 
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
-   : Este comando llama tanto al servicio `notes` como a `calendar`.
+   : Este comando llama a servicios tanto `notes` como `calendar`.
 
 4. Espera unos instantes y ve a [**APM > Traces** (APM > Trazas)][11] en Datadog, donde podrás ver una lista de trazas correspondiente a tus llamadas de API:
 
@@ -410,11 +412,11 @@ Vuelve a desplegar la aplicación y ejercita la API:
 
 Si no ves trazas después de varios minutos, borra cualquier filtro en el campo de búsqueda de trazas (a veces se filtra sobre una variable de entorno como `ENV` que no estás utilizando).
 
-### Análisis de una traza
+### Examinar una traza
 
 En la página Traces (Trazas), haz clic en una traza `POST /notes` para ver una gráfica de llamas que muestra cuánto tiempo ha tardado cada tramo y qué otros tramos han ocurrido antes de que se completara un tramo. La barra de la parte superior del gráfico es el tramo seleccionado en la pantalla anterior (en este caso, el punto de entrada inicial en la aplicación de notas).
 
-El ancho de una barra indica el tiempo que ha tardado en completarse. Una barra más angosta representa un tramo que se completa durante el tiempo de vida de una barra de mayor ancho.
+El ancho de una barra indica el tiempo que tardó en completarse. Una barra más angosta representa un tramo que se completa durante el tiempo de vida de una barra de mayor ancho.
 
 En el Trace Explorer, haz clic en una de las nuevas solicitudes `GET` y verás una gráfica de llamas como ésta:
 
@@ -428,7 +430,7 @@ El rastreo de un único servicio es un buen comienzo, pero el verdadero valor de
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="Gráfico de llamas de una traza distribuida." style="width:100%;" >}}
 
-Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la librería `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la librería Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando una traza distribuida.
+Observa que no has cambiado nada en la aplicación `notes`. Datadog instrumenta automáticamente tanto la biblioteca `okHttp` utilizada para realizar la llamada HTTP de `notes` a `calendar`, como la biblioteca Jetty utilizada para escuchar solicitudes HTTP en `notes` y `calendar`. Esto permite que la información de rastreo pase de una aplicación a la otra, registrando una traza distribuida.
 
 Cuando hayas terminado de explorar, limpia todos los recursos y elimina los despliegues:
 
@@ -441,7 +443,7 @@ terraform destroy
 
 Si no recibes trazas como esperabas, configura el modo de depuración para el rastreador de Java. Para obtener más información, consulta [Habilitar el modo de depuración][13].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

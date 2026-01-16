@@ -59,7 +59,7 @@ Para configurar el rastreador utilizando variables de entorno, configura las var
 
 Para configurar el rastreador en el código de la aplicación, crea una instancia `TracerSettings` a partir de las fuentes de configuración predeterminadas. Define las propiedades de esta instancia `TracerSettings` antes de llamar a `Tracer.Configure()`. Por ejemplo:
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota:</strong> Los parámetros deben configurarse en <code>TracerSettings</code> (Parámetros del rastreador) <em>antes</em> de crear el <code>rastreador</code>. Los cambios realizados en las propiedades de <code>TracerSettings</code> después de crear el <code>rastreador</code> se ignoran.
 </div>
 

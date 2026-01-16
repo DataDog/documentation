@@ -12,86 +12,67 @@ further_reading:
 - link: /continuous_integration/tests
   tag: Documentación
   text: Exploración de los resultados de tests y del rendimiento
-- link: /continuous_integration/intelligent_test_runner/dotnet
+- link: /tests/test_impact_analysis/dotnet
   tag: Documentación
-  text: Acelerar tus tests con Intelligent Test Runner
-- link: /continuous_integration/troubleshooting/
+  text: Acelerar tus tests con Test Impact Analysis
+- link: /tests/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas de CI Visibility
+  text: Solucionar problemas de Test Optimization
 title: Tests de .NET
 type: multi-code-lang
 ---
 
 ## Compatibilidad
 
-Marcos compatibles:
+Para obtener una lista de los tiempos de ejecución y las plataformas compatibles, consulta [Compatibilidad con .NET Framework][18] y [Compatibilidad con .NET/.NET Core][19].
 
-| Marco | Versión |
-|---|---|
-| .NET Framework | >= 4.6.1 |
-| .NET Core | >= 2.1 |
-| .NET Core | >= 3.1 |
-| .NET | >= 5 |
-| .NET | >= 6 |
-| .NET | >= 7 |
-| .NET | >= 8 |
+Frameworks para tests compatibles:
 
-Marcos de test compatibles:
-
-| Marco de test | Versión |
+| Framework para tests | Versión |
 |---|---|
 | xUnit | >= 2.2 |
 | NUnit | >= 3.0 |
 | MsTestV2 | >= 14 |
 | [BenchmarkDotNet][1] | >= 0.13.2 |
 
-## Configuración del método de informe
+## Configuración del método de notificación
 
-Para informar resultados de test a Datadog, debes configurar la librería de Datadog .NET:
+Para informar de los resultados de tests a Datadog, debes configurar la biblioteca .NET de Datadog:
 
 {{< tabs >}}
-{{% tab "Github Actions" %}}
-Puedes usar la [acción de Datadog Test Visibility Github][1] dedicada para activar la visibilidad de test.
-Si lo haces, el resto de los pasos de configuración a continuación pueden omitirse.
 
-[1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
+{{% tab "Proveedor de CI con compatibilidad para la instrumentación automática" %}}
+{{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
-{{% tab "Jenkins" %}}
-Puedes usar [la configuración basada en interfaz de usuario][1] para activar la Visibilidad de test para tus trabajos y pipelines.
-Si lo haces, el resto de los pasos de configuración a continuación pueden omitirse.
-
-[1]: /es/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1
-{{% /tab %}}
-
-{{% tab "Other cloud CI provider" %}}
-<div class="alert alert-info">El modo sin Agent está disponible en las versiones de librería de Datadog .NET >= 2.5.1</div>
+{{% tab "Otro proveedor de CI en la nube" %}}
 {{% ci-agentless %}}
-
 {{% /tab %}}
-{{% tab "On-Premises CI Provider" %}}
+
+{{% tab "Proveedor de CI on-premises" %}}
 {{% ci-agent %}}
 {{% /tab %}}
+
 {{< /tabs >}}
 
-## Instalación de la CLI del rastreador de .NET
+## Instalación de la CLI del rastreador .NET
 
 Instala o actualiza el comando `dd-trace` de una de las siguientes maneras:
 
-- Uso del SDK de .NET al ejecutar el comando:
+- Con el SDK de .NET ejecutando el comando:
    ```
    dotnet tool update -g dd-trace
    ```
-- Descargando la versión apropiada:
+- Descargando la versión adecuada:
     * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][2]
     * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][3]
     * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][4]
 
-- O descargando [desde la página de versiones de GitHub][5].
+- O descargándolo [de la página de la versión de GitHub][5].
 
 ## Instrumentación de tests
 
-<div class="alert alert-warning"><strong>Nota</strong>: Para BenchmarkDotNet sigue <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
+<div class="alert alert-warning">Para BenchmarkDotNet sigue <a href="#instrumenting-benchmarkdotnet-tests">estas instrucciones</a>.</div>
 
 Para instrumentar tu conjunto de tests, antepone a tu comando de test `dd-trace ci run`, proporcionando el nombre de servicio o biblioteca en proceso de test como el parámetro `--dd-service` parameter, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) as the `--dd-env`. Por ejemplo:
 
@@ -102,7 +83,7 @@ Para instrumentar tu conjunto de tests, antepone a tu comando de test `dd-trace 
 Con <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+dd-trace ci run --dd-service=my-dotnet-app -- dotnet test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -112,7 +93,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 Con <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+dd-trace ci run --dd-service=my-dotnet-app -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -135,7 +116,7 @@ La solución es cambiar de instrumentación dinámica a [instrumentación estát
             <DataCollector friendlyName="Code Coverage">
               <Configuration>
                 <CodeCoverage>
-                  <!-- Cambio a la instrumentación estática (la instrumentación dinámica colapsa cn la instrumentación dd-trace) -->
+                  <!-- Switching to static instrumentation (dynamic instrumentation collides with dd-trace instrumentation) -->
                   <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
                   <EnableDynamicManagedInstrumentation>False</EnableDynamicManagedInstrumentation>
                   <UseVerifiableInstrumentation>False</UseVerifiableInstrumentation>
@@ -177,21 +158,27 @@ En la siguiente lista, se muestran los valores por defecto de los ajustes de con
 **Variable de entorno**: `DD_TRACE_AGENT_URL`<br/>
 **Por defecto**: `http://localhost:8126`
 
+`test_session.name` (solo disponible como variable de entorno)
+: Identifica un grupo de tests, como `integration-tests`, `unit-tests` o `smoke-tests`.<br/>
+**Variable de entorno**: `DD_TEST_SESSION_NAME`<br/>
+**Por defecto**: (nombre del trabajo CI (genérico) + comando de test)<br/>
+**Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
+
 Para más información sobre etiquetas reservadas `service` y `env`, consulta [etiquetado de servicios unificado][6]. También se pueden utilizar todas las demás opciones de [configuración del rastreador de Datadog][7].
 
-### Añadir etiquetas personalizadas a los tests
+### Añadir etiquetas (tags) personalizadas a los tests
 
 Para añadir etiquetas personalizadas a los tests, configura la [instrumentación personalizada](#custom-instrumentation) primero.
 
 Puedes añadir etiquetas personalizadas a tus tests con el tramo activo en ese momento:
 
 ```csharp
-// dentro de tu test
+// inside your test
 var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
 if (scope != null) {
     scope.Span.SetTag("test_owner", "my_team");
 }
-// test sigue con normalidad
+// test continues normally
 // ...
 ```
 
@@ -204,12 +191,12 @@ Para añadir medidas personalizadas a los tests, configura la [instrumentación 
 Al igual que con las etiquetas, puedes añadir medidas personalizadas a tus tests utilizando el tramo activo en ese momento:
 
 ```csharp
-// dentro de tu test
+// inside your test
 var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
 if (scope != null) {
     scope.Span.SetTag("memory_allocations", 16);
 }
-// test sigue normalmente
+// test continues normally
 // ...
 ```
 
@@ -223,7 +210,7 @@ Cuando la cobertura del código está disponible, el rastreador de Datadog (v2.3
 
 Si utilizas [Coverlet][10] para calcular la cobertura del código, indica la ruta del archivo de informe en la variable de entorno `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` al ejecutar `dd-trace`. El archivo de informe debe estar en los formatos OpenCover o Cobertura. Alternativamente, puedes activar el cálculo de cobertura del código integrado del rastreador de Datadog con la variable de entorno `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`.
 
-**Nota**: Cuando se utiliza Intelligent Test Runner, la cobertura del código integrada en el rastreador está activada de forma predeterminada.
+**Nota**: Cuando se utiliza Test Impact Analysis, la cobertura de código integrada en el rastreador está activada por defecto.
 
 Puedes ver la evolución de la cobertura de los tests en la pestaña **Coverage** (Cobertura) de una sesión de tests.
 
@@ -278,25 +265,25 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 ## Instrumentación personalizada
 
-<div class="alert alert-warning">
- <strong>Nota:</strong> Tu configuración de instrumentación personalizada depende de la versión <code>dd-trace</code>. Para utilizar la instrumentación personalizada, debes mantener sincronizadas las versiones del paquete para <code>dd-trace</code> y <code>Datadog.Trace</code> de NuGet.
+<div class="alert alert-danger">
+  <strong>Nota:</strong> La configuración de su instrumentación personalizada depende de la versión de <code>dd-trace</code>. Para usar la instrumentación personalizada, debes mantener las versiones del paquete para <code>dd-trace</code> y los paquetes NuGet <code>Datadog.Trace</code> sincronizados.
 </div>
 
 Para utilizar la instrumentación personalizada en tu aplicación .NET:
 
 1. Ejecuta `dd-trace --version` para obtener la versión de la herramienta.
 2. Añade el [paquete de NuGet][14] `Datadog.Trace` con la misma versión a tu aplicación.
-3. En tu código de aplicación, accede al rastreador global por medio de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
+3. En tu código de aplicación, accede al rastreador global a través de la propiedad de `Datadog.Trace.Tracer.Instance` para crear nuevos tramos.
 
 Para más información sobre cómo añadir tramos y etiquetas para la instrumentación personalizada, consulta la [documentación de instrumentación personalizada de .NET][15].
 
 ## API para tests manuales
 
-<div class="alert alert-warning">
- <strong>Nota:</strong> Para utilizar la API de tests manuales, debes añadir el paquete de NuGet <code>Datadog.Trace</code> en el proyecto .NET de destino.
+<div class="alert alert-danger">
+  <strong>Nota:</strong> Para usar la API de test manual, debes agregar el paquete NuGet <code>Datadog.Trace</code> en el proyecto .NET de destino.
 </div>
 
-Si utilizas XUnit, NUnit o MSTest con tus proyectos de .NET, CI Visibility los instrumenta automáticamente y envía los resultados de los tests a Datadog. Si utilizas un marco de test no compatible o si tienes un mecanismo de test diferente, puedes utilizar la API para informar de los resultados de los tests a Datadog.
+Si utilizas XUnit, NUnit o MSTest con tus proyectos .NET, Test Optimization los instrumenta automáticamente y envía los resultados de los tests a Datadog. Si utilizas un framework no compatible o si tienes un mecanismo de test diferente, puedes utilizar la API para informar de los resultados de los tests a Datadog.
 
 La API se basa en tres conceptos: módulo de test, conjuntos de tests y tests.
 
@@ -306,7 +293,7 @@ Un módulo de test representa el ensamblado de .NET que incluye los tests.
 
 Para iniciar un módulo de test, llama a `TestModule.Create()` y pasa el nombre del módulo o el nombre del ensamblado de .NET donde se encuentran los tests.
 
-Cuando todos tus tests hayan finalizado, llama a `module.Close()` o `module.CloseAsync()`, lo que obliga a la librería a enviar todos los resultados de los tests restantes al backend.
+Cuando todos tus tests hayan finalizado, llama a `module.Close()` o `module.CloseAsync()`, lo que obliga a la biblioteca a enviar todos los resultados de los tests restantes al backend.
 
 ### Conjuntos de tests
 
@@ -329,488 +316,6 @@ Un test puede tener opcionalmente información adicional como:
 - Datos de referencia
 
 Crea tests en un conjunto llamando a `suite.CreateTest()` y pasando el nombre del test. Cuando un test finaliza, llama a `test.Close()` con uno de los estados predefinidos.
-
-### API de interfaz
-
-{{< code-block lang="csharp" >}}
-namespace Datadog.Trace.Ci
-{
-    /// <summary>
-    /// CI Visibility test module
-    /// </summary>
-    public sealed class TestModule
-    {
-        /// <summary>
-        /// Gets the test framework
-        /// </summary>
-        public string? Framework { get; }
-        /// <summary>
-        /// Gets the module name
-        /// </summary>
-        public string Name { get; }
-        /// <summary>
-        /// Gets the test module start date
-        /// </summary>
-        public System.DateTimeOffset StartTime { get; }
-        /// <summary>
-        /// Close test module
-        /// </summary>
-        /// <remarks>Use CloseAsync() version whenever possible.</remarks>
-        public void Close() { }
-        /// <summary>
-        /// Close test module
-        /// </summary>
-        /// <remarks>Use CloseAsync() version whenever possible.</remarks>
-        /// <param name="duration">Duration of the test module</param>
-        public void Close(System.TimeSpan? duration) { }
-        /// <summary>
-        /// Close test module
-        /// </summary>
-        /// <returns>Task instance </returns>
-        public System.Threading.Tasks.Task CloseAsync() { }
-        /// <summary>
-        /// Close test module
-        /// </summary>
-        /// <param name="duration">Duration of the test module</param>
-        /// <returns>Task instance </returns>
-        public System.Threading.Tasks.Task CloseAsync(System.TimeSpan? duration) { }
-        /// <summary>
-        /// Create a new test suite for this session
-        /// </summary>
-        /// <param name="name">Name of the test suite</param>
-        /// <returns>Test suite instance</returns>
-        public Datadog.Trace.Ci.TestSuite GetOrCreateSuite(string name) { }
-        /// <summary>
-        /// Create a new test suite for this session
-        /// </summary>
-        /// <param name="name">Name of the test suite</param>
-        /// <param name="startDate">Test suite start date</param>
-        /// <returns>Test suite instance</returns>
-        public Datadog.Trace.Ci.TestSuite GetOrCreateSuite(string name, System.DateTimeOffset? startDate) { }
-        /// <summary>
-        /// Set Error Info from Exception
-        /// </summary>
-        /// <param name="exception">Exception instance</param>
-        public void SetErrorInfo(System.Exception exception) { }
-        /// <summary>
-        /// Set Error Info
-        /// </summary>
-        /// <param name="type">Error type</param>
-        /// <param name="message">Error message</param>
-        /// <param name="callStack">Error callstack</param>
-        public void SetErrorInfo(string type, string message, string? callStack) { }
-        /// <summary>
-        /// Sets a number tag into the test
-        /// </summary>
-        /// <param name="key">Key of the tag</param>
-        /// <param name="value">Value of the tag</param>
-        public void SetTag(string key, double? value) { }
-        /// <summary>
-        /// Sets a string tag into the test
-        /// </summary>
-        /// <param name="key">Key of the tag</param>
-        /// <param name="value">Value of the tag</param>
-        public void SetTag(string key, string? value) { }
-        /// <summary>
-        /// Create a new Test Module
-        /// </summary>
-        /// <param name="name">Test module name</param>
-        /// <returns>New test module instance</returns>
-        public static Datadog.Trace.Ci.TestModule Create(string name) { }
-        /// <summary>
-        /// Create a new Test Module
-        /// </summary>
-        /// <param name="name">Test module name</param>
-        /// <param name="framework">Testing framework name</param>
-        /// <param name="frameworkVersion">Testing framework version</param>
-        /// <returns>New test module instance</returns>
-        public static Datadog.Trace.Ci.TestModule Create(string name, string framework, string frameworkVersion) { }
-        /// <summary>
-        /// Create a new Test Module
-        /// </summary>
-        /// <param name="name">Test module name</param>
-        /// <param name="framework">Testing framework name</param>
-        /// <param name="frameworkVersion">Testing framework version</param>
-        /// <param name="startDate">Test session start date</param>
-        /// <returns>New test module instance</returns>
-        public static Datadog.Trace.Ci.TestModule Create(string name, string framework, string frameworkVersion, System.DateTimeOffset startDate) { }
-    }
-
-    /// <summary>
-    /// CI Visibility test suite
-    /// </summary>
-    public sealed class TestSuite
-    {
-        /// <summary>
-        /// Gets the test module for this suite
-        /// </summary>
-        public Datadog.Trace.Ci.TestModule Module { get; }
-        /// <summary>
-        /// Gets the test suite name
-        /// </summary>
-        public string Name { get; }
-        /// <summary>
-        /// Gets the test suite start date
-        /// </summary>
-        public System.DateTimeOffset StartTime { get; }
-        /// <summary>
-        /// Close test suite
-        /// </summary>
-        public void Close() { }
-        /// <summary>
-        /// Close test suite
-        /// </summary>
-        /// <param name="duration">Duration of the test suite</param>
-        public void Close(System.TimeSpan? duration) { }
-        /// <summary>
-        /// Create a new test for this suite
-        /// </summary>
-        /// <param name="name">Name of the test</param>
-        /// <returns>Test instance</returns>
-        public Datadog.Trace.Ci.Test CreateTest(string name) { }
-        /// <summary>
-        /// Create a new test for this suite
-        /// </summary>
-        /// <param name="name">Name of the test</param>
-        /// <param name="startDate">Test start date</param>
-        /// <returns>Test instance</returns>
-        public Datadog.Trace.Ci.Test CreateTest(string name, System.DateTimeOffset startDate) { }
-        /// <summary>
-        /// Set Error Info from Exception
-        /// </summary>
-        /// <param name="exception">Exception instance</param>
-        public void SetErrorInfo(System.Exception exception) { }
-        /// <summary>
-        /// Set Error Info
-        /// </summary>
-        /// <param name="type">Error type</param>
-        /// <param name="message">Error message</param>
-        /// <param name="callStack">Error callstack</param>
-        public void SetErrorInfo(string type, string message, string? callStack) { }
-        /// <summary>
-        /// Sets a number tag into the test
-        /// </summary>
-        /// <param name="key">Key of the tag</param>
-        /// <param name="value">Value of the tag</param>
-        public void SetTag(string key, double? value) { }
-        /// <summary>
-        /// Sets a string tag into the test
-        /// </summary>
-        /// <param name="key">Key of the tag</param>
-        /// <param name="value">Value of the tag</param>
-        public void SetTag(string key, string? value) { }
-    }
-
-    /// <summary>
-    /// CI Visibility test
-    /// </summary>
-    public sealed class Test
-    {
-        /// <summary>
-        /// Gets the test name
-        /// </summary>
-        public string? Name { get; }
-        /// <summary>
-        /// Gets the test start date
-        /// </summary>
-        public System.DateTimeOffset StartTime { get; }
-        /// <summary>
-        /// Gets the test suite for this test
-        /// </summary>
-        public Datadog.Trace.Ci.TestSuite Suite { get; }
-        /// <summary>
-        /// Add benchmark data
-        /// </summary>
-        /// <param name="measureType">Measure type</param>
-        /// <param name="info">Measure info</param>
-        /// <param name="statistics">Statistics values</param>
-        public void AddBenchmarkData(Datadog.Trace.Ci.BenchmarkMeasureType measureType, string info, in Datadog.Trace.Ci.BenchmarkDiscreteStats statistics) { }
-        /// <summary>
-        /// Close test
-        /// </summary>
-        /// <param name="status">Test status</param>
-        public void Close(Datadog.Trace.Ci.TestStatus status) { }
-        /// <summary>
-        /// Close test
-        /// </summary>
-        /// <param name="status">Test status</param>
-        /// <param name="duration">Duration of the test suite</param>
-        public void Close(Datadog.Trace.Ci.TestStatus status, System.TimeSpan? duration) { }
-        /// <summary>
-        /// Close test
-        /// </summary>
-        /// <param name="status">Test status</param>
-        /// <param name="duration">Duration of the test suite</param>
-        /// <param name="skipReason">In case </param>
-        public void Close(Datadog.Trace.Ci.TestStatus status, System.TimeSpan? duration, string? skipReason) { }
-        /// <summary>
-        /// Set benchmark metadata
-        /// </summary>
-        /// <param name="hostInfo">Host info</param>
-        /// <param name="jobInfo">Job info</param>
-        public void SetBenchmarkMetadata(in Datadog.Trace.Ci.BenchmarkHostInfo hostInfo, in Datadog.Trace.Ci.BenchmarkJobInfo jobInfo) { }
-        /// <summary>
-        /// Set Error Info from Exception
-        /// </summary>
-        /// <param name="exception">Exception instance</param>
-        public void SetErrorInfo(System.Exception exception) { }
-        /// <summary>
-        /// Set Error Info
-        /// </summary>
-        /// <param name="type">Error type</param>
-        /// <param name="message">Error message</param>
-        /// <param name="callStack">Error callstack</param>
-        public void SetErrorInfo(string type, string message, string? callStack) { }
-        /// <summary>
-        /// Set Test parameters
-        /// </summary>
-        /// <param name="parameters">TestParameters instance</param>
-        public void SetParameters(Datadog.Trace.Ci.TestParameters parameters) { }
-        /// <summary>
-        /// Sets a number tag into the test
-        /// </summary>
-        /// <param name="key">Key of the tag</param>
-        /// <param name="value">Value of the tag</param>
-        public void SetTag(string key, double? value) { }
-        /// <summary>
-        /// Sets a string tag into the test
-        /// </summary>
-        /// <param name="key">Key of the tag</param>
-        /// <param name="value">Value of the tag</param>
-        public void SetTag(string key, string? value) { }
-        /// <summary>
-        /// Set Test method info
-        /// </summary>
-        /// <param name="methodInfo">Test MethodInfo instance</param>
-        public void SetTestMethodInfo(System.Reflection.MethodInfo methodInfo) { }
-        /// <summary>
-        /// Set Test traits
-        /// </summary>
-        /// <param name="traits">Traits dictionary</param>
-        public void SetTraits(System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> traits) { }
-    }
-
-    /// <summary>
-    /// Test status
-    /// </summary>
-    public enum TestStatus
-    {
-        /// <summary>
-        /// Pass test status
-        /// </summary>
-        Pass = 0,
-        /// <summary>
-        /// Fail test status
-        /// </summary>
-        Fail = 1,
-        /// <summary>
-        /// Skip test status
-        /// </summary>
-        Skip = 2,
-    }
-
-    /// <summary>
-    /// Test parameters
-    /// </summary>
-    public class TestParameters
-    {
-        /// <summary>
-        /// Gets or sets the test arguments
-        /// </summary>
-        public System.Collections.Generic.Dictionary<string, object>? Arguments { get; set; }
-        /// <summary>
-        /// Gets or sets the test parameters metadata
-        /// </summary>
-        public System.Collections.Generic.Dictionary<string, object>? Metadata { get; set; }
-    }
-
-    /// <summary>
-    /// Benchmark measurement discrete stats
-    /// </summary>
-    public readonly struct BenchmarkDiscreteStats
-    {
-        /// <summary>
-        /// Kurtosis value
-        /// </summary>
-        public readonly double Kurtosis;
-        /// <summary>
-        /// Max value
-        /// </summary>
-        public readonly double Max;
-        /// <summary>
-        /// Mean value
-        /// </summary>
-        public readonly double Mean;
-        /// <summary>
-        /// Median value
-        /// </summary>
-        public readonly double Median;
-        /// <summary>
-        /// Min value
-        /// </summary>
-        public readonly double Min;
-        /// <summary>
-        /// Number of samples
-        /// </summary>
-        public readonly int N;
-        /// <summary>
-        /// 90 percentile value
-        /// </summary>
-        public readonly double P90;
-        /// <summary>
-        /// 95 percentile value
-        /// </summary>
-        public readonly double P95;
-        /// <summary>
-        /// 99 percentile value
-        /// </summary>
-        public readonly double P99;
-        /// <summary>
-        /// Skewness value
-        /// </summary>
-        public readonly double Skewness;
-        /// <summary>
-        /// Standard deviation value
-        /// </summary>
-        public readonly double StandardDeviation;
-        /// <summary>
-        /// Standard error value
-        /// </summary>
-        public readonly double StandardError;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BenchmarkDiscreteStats"/> struct.
-        /// </summary>
-        /// <param name="n">Number of samples</param>
-        /// <param name="max">Max value</param>
-        /// <param name="min">Min value</param>
-        /// <param name="mean">Mean value</param>
-        /// <param name="median">Median value</param>
-        /// <param name="standardDeviation">Standard deviation value</param>
-        /// <param name="standardError">Standard error value</param>
-        /// <param name="kurtosis">Kurtosis value</param>
-        /// <param name="skewness">Skewness value</param>
-        /// <param name="p99">99 percentile value</param>
-        /// <param name="p95">95 percentile value</param>
-        /// <param name="p90">90 percentile value</param>
-        public BenchmarkDiscreteStats(int n, double max, double min, double mean, double median, double standardDeviation, double standardError, double kurtosis, double skewness, double p99, double p95, double p90) { }
-        /// <summary>
-        /// Get benchmark discrete stats from an array of doubles
-        /// </summary>
-        /// <param name="values">Array of doubles</param>
-        /// <returns>Benchmark discrete stats instance</returns>
-        public static Datadog.Trace.Ci.BenchmarkDiscreteStats GetFrom(double[] values) { }
-    }
-
-    /// <summary>
-    /// Benchmark host info
-    /// </summary>
-    public struct BenchmarkHostInfo
-    {
-        /// <summary>
-        /// Chronometer Frequency
-        /// </summary>
-        public double? ChronometerFrequencyHertz;
-        /// <summary>
-        /// Chronometer resolution
-        /// </summary>
-        public double? ChronometerResolution;
-        /// <summary>
-        ///  Logical core count
-        /// </summary>
-        public int? LogicalCoreCount;
-        /// <summary>
-        /// OS Version
-        /// </summary>
-        public string? OsVersion;
-        /// <summary>
-        /// Physical core count
-        /// </summary>
-        public int? PhysicalCoreCount;
-        /// <summary>
-        /// Physical processor count
-        /// </summary>
-        public int? ProcessorCount;
-        /// <summary>
-        /// Processor max frequency hertz
-        /// </summary>
-        public double? ProcessorMaxFrequencyHertz;
-        /// <summary>
-        /// Processor Name
-        /// </summary>
-        public string? ProcessorName;
-        /// <summary>
-        /// Runtime version
-        /// </summary>
-        public string? RuntimeVersion;
-    }
-
-    /// <summary>
-    /// Benchmark job info
-    /// </summary>
-    public struct BenchmarkJobInfo
-    {
-        /// <summary>
-        /// Job description
-        /// </summary>
-        public string? Description;
-        /// <summary>
-        /// Job platform
-        /// </summary>
-        public string? Platform;
-        /// <summary>
-        /// Job runtime moniker
-        /// </summary>
-        public string? RuntimeMoniker;
-        /// <summary>
-        /// Job runtime name
-        /// </summary>
-        public string? RuntimeName;
-    }
-
-    /// <summary>
-    /// Benchmark measure type
-    /// </summary>
-    public enum BenchmarkMeasureType
-    {
-        /// <summary>
-        /// Duration in nanoseconds
-        /// </summary>
-        Duration = 0,
-        /// <summary>
-        /// Run time in nanoseconds
-        /// </summary>
-        RunTime = 1,
-        /// <summary>
-        /// Mean heap allocations in bytes
-        /// </summary>
-        MeanHeapAllocations = 2,
-        /// <summary>
-        /// Total heap allocations in bytes
-        /// </summary>
-        TotalHeapAllocations = 3,
-        /// <summary>
-        /// Application launch in nanoseconds
-        /// </summary>
-        ApplicationLaunch = 4,
-        /// <summary>
-        /// Garbage collector gen0 count
-        /// </summary>
-        GarbageCollectorGen0 = 5,
-        /// <summary>
-        /// Garbage collector gen1 count
-        /// </summary>
-        GarbageCollectorGen1 = 6,
-        /// <summary>
-        /// Garbage collector gen2 count
-        /// </summary>
-        GarbageCollectorGen2 = 7,
-        /// <summary>
-        /// Memory total operations count
-        /// </summary>
-        MemoryTotalOperations = 8,
-    }
-}
-{{< /code-block >}}
 
 ### Ejemplo de código
 
@@ -859,6 +364,34 @@ await module.CloseAsync();
 
 Llama siempre a `module.Close()` o `module.CloseAsync()` al final para que todos los datos del test se envíen a Datadog.
 
+## Prácticas recomendadas
+
+### Nombre de la sesión de test `DD_TEST_SESSION_NAME`
+
+Utiliza `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de test y del grupo de tests relacionado. Algunos ejemplos de valores para esta etiqueta serían:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+Si no se especifica `DD_TEST_SESSION_NAME`, el valor por defecto utilizado es una combinación de:
+
+- Nombre del trabajo CI
+- Comando utilizado para ejecutar los tests (como `yarn test`)
+
+El nombre de la sesión de test debe ser único dentro de un repositorio para ayudar a distinguir diferentes grupos de tests.
+
+#### Cuándo utilizar `DD_TEST_SESSION_NAME`
+
+Hay un conjunto de parámetros que Datadog comprueba para establecer la correspondencia entre las sesiones de test. El comando de test utilizado para ejecutar los tests es uno de ellos. Si el comando de test contiene una cadena que cambia en cada ejecución, como una carpeta temporal, Datadog considera que las sesiones no están relacionadas entre sí. Por ejemplo:
+
+- `dotnet test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recomienda utilizar `DD_TEST_SESSION_NAME` si tus comandos de test varían entre diferentes ejecuciones.
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -881,3 +414,5 @@ Llama siempre a `module.Close()` o `module.CloseAsync()` al final para que todos
 [15]: /es/tracing/trace_collection/custom_instrumentation/dotnet/
 [16]: https://github.com/microsoft/codecoverage/blob/main/docs/instrumentation.md
 [17]: https://github.com/microsoft/codecoverage/blob/main/samples/Calculator/scenarios/scenario07/README.md
+[18]: /es/tracing/trace_collection/compatibility/dotnet-framework/
+[19]: /es/tracing/trace_collection/compatibility/dotnet-core/

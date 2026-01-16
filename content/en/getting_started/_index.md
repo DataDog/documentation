@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Introduction to Datadog's observability platform with guides for installation, configuration, and getting started with key features.
 disable_sidebar: true
 aliases:
     - /overview
@@ -43,7 +44,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Testing</strong></p></td>
         <td>
             <ul>
-                <li>Block faulty code from deploying to production with <a href="/quality_gates/">Quality Gates</a>.</li>
+                <li>Block faulty code from deploying to production with <a href="/pr_gates/">PR Gates</a>.</li>
                 <li>Simulate users around the globe to test your web app, API, or mobile application with <a href="/synthetics/">Synthetic Monitoring</a>.</li>
             </ul>
         </td>
@@ -62,7 +63,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Troubleshooting</strong></p></td>
         <td>
             <ul>
-                <li>Manage <a href="/error_tracking/">errors</a> and <a href="/service_management/incident_management/">incidents</a>, summarizing issues and suggesting fixes.</li>
+                <li>Manage <a href="/error_tracking/">errors</a> and <a href="/incident_response/incident_management/">incidents</a>, summarizing issues and suggesting fixes.</li>
                 <li>Measure user churn and detect user frustration with <a href="/real_user_monitoring/">Real User Monitoring</a>.</li>
             </ul>
         </td>
@@ -98,6 +99,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Send metrics and events from your hosts to Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started with the Datadog HTTP API.{{< /nextlink >}}
 {{< nextlink href="/getting_started/integrations" >}}<u>Integrations</u>: Learn how to collect metrics, traces, and logs with Datadog integrations.{{< /nextlink >}}
+{{< nextlink href="/getting_started/search" >}}<u>Search</u>: Learn the fundamentals of searching and filtering across Datadog products.{{< /nextlink >}}
 {{< nextlink href="/getting_started/tagging" >}}<u>Tags</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
 {{< nextlink href="/getting_started/opentelemetry" >}}<u>OpenTelemetry</u>: Learn how to send OpenTelemetry metrics, traces, and logs to Datadog.{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Follow a learning path, take a self-guided class or lab, and explore the Datadog certification program.{{< /nextlink >}}
@@ -105,15 +107,16 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 
 {{< whatsnext desc="Platform Services:">}}
 {{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Create, share, and maintain dashboards that answer the work questions that matter to you.{{< /nextlink >}}
-{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
 {{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
+{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Set up alerts and notifications so that your team knows when critical changes occur.{{< /nextlink >}}
+{{< nextlink href="/getting_started/notebooks" >}}<u>Notebooks</u>: Combine live graphs, metrics, logs, and monitors to isolate issues and create interactive guides.{{< /nextlink >}}
 {{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Product:">}}
 {{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
-{{< nextlink href="/getting_started/software_catalog" >}}<u>Software Catalog</u>: Manage service ownership, reliability, and performance at scale in Software Catalog. {{< /nextlink >}}
+{{< nextlink href="/getting_started/internal_developer_portal" >}}<u>Internal Developer Portal</u>: Unify telemetry, metadata, and workflows to accelerate delivery. {{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}

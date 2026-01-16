@@ -1,5 +1,6 @@
 ---
 title: Remote Configuration for Fleet Automation
+description: Configure Remote Configuration with Fleet Automation to enable Agent flares, remote upgrades, and centralized configuration management.
 disable_toc: false
 further_reading:
 - link: "/remote_configuration"
@@ -21,7 +22,7 @@ This page covers configuring and using {{< tooltip glossary="Remote Configuratio
 |---------|-------------|------------------------|
 | **[Agent flares][9]** | Send a flare from the Datadog site using Fleet Automation | 7.47+<br>7.66+ recommended |
 | **[Agent upgrades][10]** | Remotely upgrade your Agents | 7.66+ |
-| **[Agent configuration][11]**<br>(**{{< tooltip glossary="preview" case="title" >}}**) | Remotely configure your Agents | 7.66+ |
+| **[Agent configuration][11]** | Remotely configure your Agents | 7.73+ |
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
@@ -35,7 +36,7 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][3] settings page. If you need to enable it:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
-1. From your Organization Settings page, enable **Remote Configuration**. This enables Datadog components across your organization to receive configurations from Datadog.
+1. From your Organization Settings page, enable [**Remote Configuration**][3]. This enables Datadog components across your organization to receive configurations from Datadog.
 
 ## Agent Remote Configuration status
 
@@ -99,7 +100,7 @@ datadog:
 
 ### At the organization level
 
-<div class="alert alert-danger"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level prevents Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
+<div class="alert alert-warning"><strong>Datadog does not recommend disabling Remote Configuration at the organization level. Disabling Remote Configuration at the organization level prevents Datadog components in several products across your organization from receiving configurations from Datadog.</strong></div>
 
 To disable Remote Configuration at the organization level:
 1. Ensure you have the required `org_management` permission.

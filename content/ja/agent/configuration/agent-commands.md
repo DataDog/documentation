@@ -7,6 +7,7 @@ aliases:
 - /ja/agent/faq/start-stop-restart-the-datadog-agent
 - /ja/agent/faq/agent-commands
 - /ja/agent/guide/agent-commands
+description: Datadog Agent を起動・停止・トラブルシュートし、Agent を管理するための Agent コマンドの完全なリファレンスです。
 further_reading:
 - link: /agent/troubleshooting/
   tag: ドキュメント
@@ -14,7 +15,7 @@ further_reading:
 title: Agent のコマンド
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 <code>service</code> ラッパーコマンドを使用できない Linux ベースのシステムをご使用の場合は、<a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">代替リストを参照してください</a>。
 </div>
 
@@ -144,7 +145,7 @@ Agent のコマンドライン インターフェイスはサブコマンド ベ
 | `stopservice`     | サービスコントロールマネージャー内で Agent を停止します。Windows のみです。            |
 | `version`         | バージョン情報を出力します。                                                         |
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -18,7 +18,7 @@ further_reading:
 - link: /data_security/real_user_monitoring/
   tag: Documentación
   text: Seguridad de los datos en RUM
-- link: /real_user_monitoring/session_replay/browser/privacy_options
+- link: /session_replay/browser/privacy_options
   tag: Documentación
   text: Opciones de privacidad de Session Replay
 - link: /security/sensitive_data_scanner/
@@ -41,7 +41,7 @@ Los datos que se transmiten a través de las herramientas proporcionadas por Dat
 
 ### El Datadog Agent
 
-El Agent representa el principal canal de transmisión de los datos desde tus sistemas a Datadog. [Consulta todo lo que debes saber sobre las medidas de seguridad que aplica el Agent para proteger tus datos][4].
+El Agent representa el principal canal de transmisión de los datos desde tus sistemas a Datadog. [Consulta todo lo que debes saber sobre las medidas de seguridad que aplica el Agent para proteger tus datos][4]. 
 
 Para saber cómo evitar que se almacenen secretos en texto sin formato en los archivos de configuración del Agent, consulta [Gestión de secretos][5].
 
@@ -69,9 +69,9 @@ Sensitive Data Scanner es un servicio de flujos (streams) que hace comparaciones
 
 ### Gestión de logs
 
-Los logs son los registros que producen tus sistemas y servicios, así como también las actividades derivadas de ellos. Para obtener información sobre cómo proteger los datos de los logs, por ejemplo, cómo filtrarlos y enmascararlos, consulta [Seguridad de los datos en Log Management][11].
+Los logs son los registros que producen tus sistemas y servicios, así como también las actividades derivadas de ellos. Para obtener información sobre cómo proteger los datos de los logs, por ejemplo, cómo filtrarlos y enmascararlos, consulta [Seguridad de los datos en Log Management][11]. 
 
-Y si quieres información más detallada, puedes consultar la guía [Controlar los datos confidenciales de los logs][12] y el artículo sobre la [configuración avanzada de Agent para recopilar logs][13].
+Para profundizar en el control de los datos de logs consulta la guía [Gestionar el acceso a datos confidenciales de logs][12] y [Configuración avanzada del Agent para logs][13].
 
 Para reducir los riesgos que amenazan la seguridad de los datos en los logs, es fundamental controlar los accesos. Descubre cómo [configurar RBAC en los logs][14] y cómo [funcionan los permisos de RBAC][15] en Datadog.
 
@@ -79,7 +79,7 @@ Para reducir los riesgos que amenazan la seguridad de los datos en los logs, es 
 
 Para que no se filtren datos confidenciales cuando estás monitorizando procesos activos y contenedores activos, Datadog te ofrece la función predeterminada de limpieza de contraseñas confidenciales en argumentos de procesos y charts de Helm. Puedes enmascarar más secuencias confidenciales en comandos o argumentos de procesos con el [parámetro `custom_sensitive_words`][16] y añadirlas a la lista de palabras para limpiar en contenedores con la [variable de entorno `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`][17].
 
-### APM y otros productos de librerías de rastreo
+### APM y otros productos de bibliotecas de rastreo
 
 Las bibliotecas de rastreo de Datadog sirven para instrumentar aplicaciones, servicios, tests y pipelines, y enviar datos de funcionamiento a Datadog a través del Agent. Se generan datos de trazas y tramos (spans), entre muchos otros, para que puedan utilizarlos los siguientes productos:
 
@@ -88,7 +88,7 @@ Las bibliotecas de rastreo de Datadog sirven para instrumentar aplicaciones, ser
 - CI Visibility
 - App and API Protection
 
-Para obtener información detallada sobre cómo se gestionan los datos que proceden de librerías de rastreo, sobre las configuraciones de seguridad básicas y sobre las operaciones predeterminadas de enmascaramiento, limpieza, exclusión y modificación de elementos relacionados con trazas, consulta la [configuración del Agent y el rastreador para proteger los datos de trazas][18].
+Para obtener información detallada sobre cómo se gestionan los datos que proceden de bibliotecas de rastreo, sobre las configuraciones de seguridad básicas y sobre las operaciones predeterminadas de enmascaramiento, limpieza, exclusión y modificación de elementos relacionados con trazas, consulta la [configuración del Agent y el rastreador para proteger los datos de trazas][18].
 
 ### Rastreo distribuido sin servidor
 
@@ -122,7 +122,7 @@ Métricas
 : Las métricas (incluidas las métricas de infraestructura y las métricas provenientes de las integraciones) y los demás datos consumidos (como logs, trazas, RUM y tests Synthetic) son cronologías que sirven para rellenar gráficos. Suelen tener etiquetas asociadas.
 
 Datos de APM
-: Entre los datos de APM se incluyen servicios, recursos, perfiles, trazas y tramos, además de sus etiquetas asociadas. Consulta el [glosario de APM][25] para ver una explicación de cada uno.
+: Entre los datos de APM se incluyen servicios, recursos, perfiles, trazas y tramos, además de sus etiquetas asociadas. Consulta el [glosario de APM][25] para ver una explicación de cada uno. 
 
 Firmas de consultas de la base de datos
 : Entre los datos de monitorización de la base de datos se incluyen las métricas y las muestras (junto con sus etiquetas asociadas) que recopila el Agent y se utilizan para controlar cómo han funcionado las consultas normalizadas en el pasado. El nivel de detalle de estos datos viene determinado por la firma de la consulta normalizada correspondiente y el identificador de host único. Todos los parámetros de las consultas quedan enmascarados y se descartan de las muestras recopiladas antes de enviarse a Datadog.
@@ -152,7 +152,7 @@ Pipelines y tests de integración continua
 [9]: /es/integrations/google_cloud_platform/
 [10]: /es/security/sensitive_data_scanner/
 [11]: /es/data_security/logs/
-[12]: /es/logs/guide/control-sensitive-logs-data/
+[12]: /es/logs/guide/manage-sensitive-logs-data-access/
 [13]: /es/agent/logs/advanced_log_collection
 [14]: /es/logs/guide/logs-rbac
 [15]: /es/logs/guide/logs-rbac-permissions
@@ -161,8 +161,8 @@ Pipelines y tests de integración continua
 [18]: /es/tracing/configure_data_security/
 [19]: /es/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /es/data_security/synthetics/
-[21]: /es/real_user_monitoring/browser/advanced_configuration/
-[22]: /es/real_user_monitoring/session_replay/browser/privacy_options
+[21]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[22]: /es/session_replay/browser/privacy_options
 [23]: /es/database_monitoring/data_collected/#sensitive-information
 [24]: /es/getting_started/tagging/
 [25]: /es/tracing/glossary/

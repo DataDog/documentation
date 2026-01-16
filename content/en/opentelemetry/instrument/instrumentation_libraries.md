@@ -35,17 +35,18 @@ You can configure Datadog SDKs by setting the same [environment variables suppor
 Datadog SDKs implement the OpenTelemetry API by overriding the default implementations in the OpenTelemetry SDK. However, note the following limitations:
 
 Operations specific to the OpenTelemetry SDK are not supported (for example, SpanProcessors or OTLP Trace Exporters).
-Datadog SDKs do not support OpenTelemetry Metrics and Logs APIs. To use OpenTelemetry Logs and Metrics APIs, use OTLP Ingest.
 
-| Language | Minimum version          |
-|----------|--------------------------|
-| Java     | 1.35.0                   |
-| Python   | 2.10.0                   |
-| Ruby     | 2.1.0                    |
-| Go       | 1.67.0                   |
-| Node.js  | 4.3.0                    |
-| PHP      | 0.94.0                   |
-| .NET     | 2.53.0                   |
+Datadog SDKs also support OpenTelemetry Metrics and Logs APIs in some langauges. See [OTel API support][25] for details. To use OpenTelemetry Logs and Metrics APIs for unsupported languages, use OTLP Ingest.
+
+| Language | Minimum version for Traces API |
+|----------|--------------------------------|
+| Java     | 1.35.0                         |
+| Python   | 2.10.0                         |
+| Ruby     | 2.1.0                          |
+| Go       | 1.67.0                         |
+| Node.js  | 4.3.0                          |
+| PHP      | 0.94.0                         |
+| .NET     | 2.53.0                         |
 
 {{< tabs >}}
 
@@ -59,7 +60,7 @@ Datadog SDKs do not support OpenTelemetry Metrics and Logs APIs. To use OpenTele
 4. The Datadog SDK for Java also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9] build, for example the [R2DBC instrumentation JAR][11].
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 OpenTelemetry incubator APIs are not supported.
 </div>
 
@@ -95,7 +96,7 @@ mvn spring-boot:run -Dstart-class=com.baeldung.pagination.PaginationApplication 
 Open `http://127.0.0.1:8080/products` to exercise the product query. With this setup, you are using OpenTelemetry's instrumentation to ensure full observability for R2DBC queries.
 
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not supported by the Datadog Java SDK.
 </div>
 
@@ -457,3 +458,4 @@ To use OpenTelemetry integrations with the Datadog Ruby SDK, perform the followi
 [12]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
 [16]: /opentelemetry/interoperability/environment_variable_support
 [24]: /getting_started/tracing/#set-up-datadog-apm
+[25]: /opentelemetry/compatibility/#api-support

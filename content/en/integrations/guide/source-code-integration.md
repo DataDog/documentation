@@ -40,19 +40,19 @@ Datadog's Source Code Integration allows you to connect your Git repositories to
 
 ## Connect your Git repositories to Datadog
 
-To use most source code-related features, you must connect your Git repositories to Datadog. By default, when synchronizing your repositories, Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
+To use most source code-related features, you must connect your Git repositories to Datadog through Datadog's first-party source code management (SCM) provider integrations. After connecting your repositories, Datadog may store the contents of your repositories for up to 7 days to reduce repeated requests to the repository and support feature performance.
 
 ### Source code management providers
 
-Datadog supports the following features for the following source code management (SCM) providers. See [Usage](#usage) for more details about each feature:
+Datadog supports the following features for the SCM providers listed below. See [Usage](#usage) for more details about each feature:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
 | **Connect SaaS Instance** | Yes <br />(GitHub.com and GitHub Enterprise Cloud) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
 | **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed or Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center or Server)|
 | **Context Links** | Yes | Yes | Yes | Yes |
-| **Code Snippets** | Yes | Yes | Yes | No | 
-| **PR Comments** | Yes | Yes | Yes | No | 
+| **Code Snippets** | Yes | Yes | Yes | No |
+| **PR Comments** | Yes | Yes | Yes | No |
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
@@ -69,30 +69,30 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
-<div class="alert alert-warning">
-Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
+<div class="alert alert-info">
+Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
 Install Datadog's [GitLab Source Code integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
 
-[101]: https://www.datadoghq.com/product-preview/gitlab-source-code-integration/
+[101]: https://docs.datadoghq.com/integrations/gitlab-source-code/
 [102]: https://app.datadoghq.com/integrations/gitlab-source-code/
 
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
 <div class="alert alert-warning">
-Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
+Repositories from Azure DevOps instances are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not</strong> supported.
 </div>
 
-Install Datadog's Azure DevOps Source Code integration while onboarding to [Datadog Code Security][101]. This integration's functionality is limited to Code Security.
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Azure DevOps repositories.
 
-[101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
+[101]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
@@ -117,7 +117,7 @@ Successfully synced git DB in 3.579 seconds.
 ✅ Uploaded in 5.207 seconds.
 ```
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/git-metadata
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -310,31 +310,45 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 #### Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have several options: using a plugin if your application is bundled, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
-##### Option 1: Docker
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Docker
 
 {{% sci-docker %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Serverless
 
-If you are using Serverless, you have two options depending on your serverless application's setup.
+If you are using Serverless, you have several options depending on your serverless application's setup.
 
-##### Option 1: Datadog Tooling
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: Datadog Tooling
 
 {{% sci-dd-serverless %}}
 
-##### Option 2: `DD_GIT_*` Environment Variables
+##### Option 3: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
 #### Host
 
-If you are using a host, configure your application with `DD_GIT_*` environment variables.
+For host-based environments, you have two options based on your build and deploy configuration.
+
+##### Option 1: Bundler plugin
+
+{{% sci-dd-tags-bundled-node-js %}}
+
+##### Option 2: `DD_GIT_*` Environment Variables
 
 {{% sci-dd-git-env-variables %}}
 
@@ -411,7 +425,7 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-info">The PHP client library version 1.2.0 or later is required.</div>
+<div class="alert alert-info">PHP client library version 1.13.0 or later is required, or 1.2.0 or later if using tracing only without profiling.</div>
 
 #### Containers
 
@@ -474,24 +488,45 @@ You can see links from stack frames to their source repository in [Error Trackin
 [2]: https://app.datadoghq.com/apm/error-tracking
 
 {{% /tab %}}
+{{% tab "RUM" %}}
+
+You can see links from stack frames to their source repository in [Error Tracking for RUM][1].
+
+Source code integration is supported for the following RUM platforms when sourcemaps or debug symbols are uploaded with Git metadata:
+
+- **Browser**: Requires [JavaScript source maps][3] to be uploaded with Git information using the [`datadog-ci sourcemaps upload`][4] command
+- **React Native**: Requires [source maps and debug symbols][5] to be uploaded with Git information
+- **Android**: Requires [Proguard mapping files][6] to be uploaded with Git information
+
+**Note**: Source code integration is not supported for iOS RUM errors.
+
+1. Navigate to [**Digital Experience** > **Error Tracking**][2].
+2. Click on an issue. The **Issue Details** panel appears on the right.
+3. Under **Latest Available Errors** or error samples, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
+
+[1]: /real_user_monitoring/error_tracking/
+[2]: https://app.datadoghq.com/rum/error-tracking
+[3]: /real_user_monitoring/guide/upload-javascript-source-maps/
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
+[6]: /real_user_monitoring/application_monitoring/android/error_tracking/
+
+{{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see a source code preview for profile frames in the [Continuous Profiler][1].
+You can see source code previews directly in [Continuous Profiler][1] flame graphs.
 
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph.
-3. If needed, press `Opt` or `Alt` to enable the preview.
-4. If you're using the GitHub or GitLab integrations, click **Connect to preview** to see inline code snippets directly in the flame graph.
+1. Navigate to [**APM** > **Profiles** > **Explorer**][2].
+2. Select the service you want to investigate.
+3. Hover your cursor over a method in the flame graph.
+4. Press `Opt` (on macOS) or `Ctrl` (on other operating systems) to lock the tooltip so you can interact with its contents.
+5. If prompted, click **Connect to preview**. The first time you do this for a repository, you will be redirected to GitHub to **Authorize** the Datadog application.
+6. After authorizing, the source code preview appears in the tooltip.
+7. Click the file link in the tooltip to open the full source code file in your repository.
 
-{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
-
-You can also see links from profile frames to their source repository. This is supported for profiles broken down by line, method, or file.
-
-1. Navigate to [**APM** > **Profile Search**][2].
-2. Hover your cursor over a method in the flame graph. A kebab icon with the **More actions** label appears on the right.
-3. Click **More actions** > **View in repo** to open the trace in its source code repository.
-
-{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview-2.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
 [1]: /profiler/
 [2]: https://app.datadoghq.com/profiling/explorer
@@ -580,9 +615,19 @@ For more information, see the [Dynamic Instrumentation documentation][102].
 
 ### PR comments
 
+<div class="alert alert-warning">
+  PR comments are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository).
+</div>
+
+PR comments are automated comments added by Datadog's [source code management integrations][10] to inform developers of issues detected in their code changes and, in certain cases, suggest remediation.
+
+There is a maximum of 31 unique comments per PR at any time to reduce noise and clutter. These comments include:
+* One summary comment is always posted to give a high-level view of all the issues Datadog detected in the PR. This comment is edited by Datadog as new commits pushed to the PR change the results.
+* When applicable, up to 30 inline comments are posted on specific lines of code that triggered a violation. If more than 30 violations are introduced in the PR's diff, the 30 highest severity violations are posted.
+
 {{< tabs >}}
 {{% tab "CI Visibility" %}}
-PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request. 
+PR comments are enabled by default when first onboarding to CI Visibility if the GitHub or GitLab integration is installed correctly. These integrations post a comment summarizing the failed jobs detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/ci-visibility-pr-comment.png" alt="PR Comment summarizing failed jobs detected by CI Visibility" style="width:100%;">}}
 
@@ -593,9 +638,9 @@ To disable PR comments for CI Visibility, go to the [CI Visibility Repository Se
 {{% /tab %}}
 {{% tab "Code Security" %}}
 
-PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests: 
+PR comments are enabled by default when first onboarding to Code Security if the GitHub, GitLab, or Azure DevOps integration is installed correctly. These integrations post two types of comments on your pull requests:
 
-1. A single comment summarizing the new violations detected in your pull request. 
+1. A single comment summarizing the new violations detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/code-security-summary-pr-comment.png" alt="PR Comment summarizing the new violations detected by Code Security" style="width:100%;">}}
 
@@ -610,7 +655,7 @@ To disable PR comments for Code Security, go to the [Code Security Repository Se
 {{% /tab %}}
 {{% tab "Test Optimization" %}}
 
-PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request. 
+PR comments are enabled by default when first onboarding to Test Optimization if the GitHub or GitLab integration is installed correctly. The integration posts a comment summarizing the failed and flaky tests detected in your pull request.
 
 {{< img src="integrations/guide/source_code_integration/test-optimization-pr-comment.png" alt="PR Comment summarizing failed and flaky tests detected by Test Optimization" style="width:100%;">}}
 
@@ -633,3 +678,4 @@ To disable PR comments for Test Optimization, go to the [Test Optimization Advan
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
 [9]: /tracing/trace_collection/dd_libraries/
+[10]: #source-code-management-providers

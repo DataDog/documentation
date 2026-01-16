@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - C#
+  - APM
 aliases:
 - /es/tracing/trace_collection/otel_instrumentation/dotnet/
 - /es/tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
@@ -24,15 +28,15 @@ type: multi-code-lang
 
 Para configurar OpenTelemetry para utilizar el proveedor de traza de Datadog:
 
-1. Añade la instrumentación manual de OpenTelemetry deseada a tu código .NET siguiendo la [documentación de la Instrumentación manual de OpenTelemetry .NET][5]. **Nota**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la librería de rastreo de Datadog en su lugar.
+1. Añade la instrumentación manual de OpenTelemetry deseada a tu código .NET siguiendo la [documentación de la Instrumentación manual de OpenTelemetry .NET][5]. **Nota**: Cuando esas instrucciones indiquen que tu código debe llamar al SDK de OpenTelemetry, llama a la biblioteca de rastreo de Datadog en su lugar.
 
-2. Instala la librería de rastreo Datadog .NET y activa el rastreador para tu [servicio .NET Framework][10] o tu [servicio .NET Core (y .NET v5 o posterior)][11]. **Vista previa**: también puedes hacerlo con la [instrumentación APM de un solo paso][13].
+2. Instala la biblioteca de rastreo Datadog .NET y activa el rastreador para tu [servicio .NET Framework][10] o tu [servicio .NET Core (y .NET v5 o posterior)][11]. **Vista previa**: también puedes hacerlo con la [instrumentación APM de un solo paso][13].
 
 3. Establece la variable de entorno `DD_TRACE_OTEL_ENABLED` en `true`.
 
 4. Ejecuta tu aplicación.
 
-Datadog combina estos tramos de OpenTelemetry con otros tramos de Datadog APM en una traza única de tu aplicación. También es compatible con [la librería de instrumentación de OpenTelemetry][8].
+Datadog combina estos tramos de OpenTelemetry con otros tramos de Datadog APM en una traza única de tu aplicación. También es compatible con [la biblioteca de instrumentación de OpenTelemetry][8].
 
 ## Creación de tramos personalizados
 
@@ -123,12 +127,12 @@ catch(Exception e)
 
 Puedes añadir eventos de tramos utilizando la API `AddEvent`. Este método requiere un `ActivityEvent` creado con un parámetro de `name` y acepta opcionalmente los parámetros `attributes` y `timestamp`. El método crea un nuevo evento de tramo con las propiedades especificadas y lo asocia al tramo correspondiente.
 
-- **Name** (Nombre) [_obligatorio_]: una cadena que representa el nombre del evento.
+- **Nombre** [_obligatorio_]: una cadena que representa el nombre del evento.
 - **Marca de tiempo** [_opcional_]: una marca de tiempo UNIX que representa la hora en que se produjo un evento. Se espera un objeto `DateTimeOffset`.
 - **Atributos** [_opcional_]: cero o más pares clave-valor con las siguientes propiedades:
   - La clave debe ser una cadena no vacía.
   - El valor puede ser:
-    - Un tipo primitivo: cadena, booleano o número.
+    - Un tipo primitivo: string, Boolean o number.
     - Una matriz homogénea de valores de tipo primitivo (por ejemplo, una matriz de cadenas).
   - Las matrices anidadas y las matrices que contienen elementos de distintos tipos de datos no están permitidas.
 

@@ -40,7 +40,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ```
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 It's highly recommended to <a href="/profiler/enabling/java/?tab=datadog#requirements">use the Datadog profiler</a> instead of Java Flight Recorder (JFR).
 </div>
 

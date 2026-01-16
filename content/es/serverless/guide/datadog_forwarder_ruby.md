@@ -4,7 +4,7 @@ title: Instrumentación de aplicaciones serverless de Ruby mediante el Datadog F
 
 ## Información general
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Si recién empiezas a utilizar Datadog Serverless, sigue las <a href="/serverless/installation/ruby">instrucciones para instrumentar tus funciones de Lambda mediante la Datadog Lambda Extension</a>. Si configuraste Datadog Serverless con el Datadog Forwarder antes que la funcionalidad de Lambda lista para usar, utiliza esta guía para mantener tu instancia.
 </div>
 

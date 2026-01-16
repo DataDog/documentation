@@ -3,8 +3,8 @@ title: Install CloudPrem
 description: Learn how to deploy CloudPrem on various platforms and environments
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
@@ -12,6 +12,10 @@ description: Learn how to deploy CloudPrem on various platforms and environments
 CloudPrem can be deployed in various environments, from cloud-managed Kubernetes services to bare metal servers. The provided installation instructions are specific to **Kubernetes distributions**.
 
 ## Prerequisites
+
+<div class="alert alert-info">
+If you don't see the CloudPrem entry in the Logs menu, it means CloudPrem is not activated on your account. Join the <a href="https://www.datadoghq.com/product-preview/cloudprem/">CloudPrem Preview</a> to activate CloudPrem on your account.
+</div>
 
 ### Kubernetes cluster requirements
 
@@ -34,12 +38,10 @@ CloudPrem supports the following object storage types:
 ## Cloud-managed Kubernetes
 
 {{< whatsnext desc="Select the installation guide that matches your environment:">}}
-  {{< nextlink href="/cloudprem/install/aws_eks/" >}}Install on AWS EKS{{< /nextlink >}}
-  {{< nextlink href="/cloudprem/install/azure_aks/" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/aws_eks" >}}Install on AWS EKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/azure_aks" >}}Install on Azure AKS{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/docker" >}}Install locally with Docker for testing{{< /nextlink >}}
+  {{< nextlink href="/cloudprem/install/custom_k8s" >}}Install on Custom Kubernetes (manual){{< /nextlink >}}
 {{< /whatsnext >}}
 
-<!-- ## Self-managed Kubernetes
-
-{{< whatsnext desc=" ">}}
-  {{< nextlink href="cloudprem/install/kubernetes_nginx/" >}}Install on a K8s cluster with NGINX Ingress Controller{{< /nextlink >}}
-{{< /whatsnext >}} -->
+[1]: https://www.datadoghq.com/product-preview/cloudprem/

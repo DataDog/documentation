@@ -1,7 +1,11 @@
 ---
 title: Service Overrides
+description: Understand service overrides and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
 further_reading:
+- link: "/tracing/services/service_override_removal"
+  tag: "Documentation"
+  text: "Remove Service Overrides"
 - link: "/tracing/services/inferred_services"
   tag: "Documentation"
   text: "Inferred services"
@@ -55,7 +59,7 @@ To give less importance to service overrides, these are treated differently visu
 
 #### In service and resource pages
 
-Services that are service overrides are flagged as such in the service page header. On hover, find the list of base services where the service name is overriden, in a [custom](#custom-service-overrides) way, or as the default setting of the [integration](#integration-service-overrides).
+Services that are service overrides are flagged as such in the service page header. On hover, find the list of base services where the service name is overridden, in a [custom](#custom-service-overrides) way, or as the default setting of the [integration](#integration-service-overrides).
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
 
@@ -67,66 +71,14 @@ In service maps, service overrides are represented as part of the edge going fro
 
 #### In traces
 
-In the trace side panel, the client span header represents the call going from the base service to the inferred service. The top of the overview section also shows information about the base service name, the overriden service name, and the inferred entity name.
+In the trace side panel, the client span header represents the call going from the base service to the inferred service. The top of the overview section also shows information about the base service name, the overridden service name, and the inferred entity name.
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_traces.png" alt="Trace side panel service overrides" style="width:80%;">}}
 
 
 ## Remove service overrides
 
-To remove *integration service overrides*, set the environment variable:
-
-```sh
-DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
-```
-
-This ensures the `service` attribute always uses the base service name instead of appending the integration name (for example,`*-postgres`, `*-http-client`).
-
-<div class="alert alert-danger">Removing service overrides is a <b>breaking change</b>. Metrics, monitors, or dashboard queries based on the overridden service name will stop matching.</div>
-
-It is recommended to remove service overrides progressively, proceeding service by service, to ensure that no critical assets (such as dashboards, monitors, retention filters, and so on) are affected by the change. Follow the [detailed instructions](#remove-service-overrides-progressively) to ensure a smooth transition to the new model.
-
-### Examples 
-
-For example:
-
-- .NET tags gRPC calls as `service:<DD_SERVICE>-grpc-client`
-- Python tags gRPC calls as `service:grpc-client`
-
-With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This ensures all spans are always tagged with the *default service name* emitting the span; [`peer.*`][6] attributes are used to describe the called dependency (for example, database or queue).
-
-| Scenario | Service Name | Additional `peer.*` Attributes |
-|----------|--------------|--------------------------------|
-| *Without* inferred services and *with* service overrides | `service:my-service-grpc-client` or `service:grpc-client` | No `peer.*` attributes set |
-| *With* inferred services and *without* service overrides | `service:myservice` | `@peer.service:otherservice` (where `otherservice` is the name of the remote service being called with gRPC) |
-
-Similarly, for a span representing a call to a mySQL database:
-
-| Scenario | Service Name | Additional `peer.*` Attributes |
-|----------|--------------|--------------------------------|
-| *Without* inferred services and *with* service overrides | `service:my-service-mysql` or `service:mysql` | No `peer.*` tags set |
-| *With* inferred services and *without* service overrides | `service:myservice` | `@peer.db.name:user-db`, `@peer.db.system:mysql` |
-
-### Remove service overrides progressively
-
-1. Identify the service override you want to remove and navigate to its **service page**.
-2. Hover over the service override pill in the page header and note the underlying base service names. These are the original services emitting spans with overrides. You need to update the configuration for these instrumented services.
-
-{{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
-
-3. Scan through your existing assets that might contain queries using the override service name:
-
-   - Any monitors, dashboards, or notebooks queries based on [APM Trace metrics][5]
-   - [APM metrics from spans][2]
-   - [Trace analytics monitors][3] (based on indexed spans)
-   - [Retention filters][4]
-   - Sensitive data scanner pipelines
-
-4. Update these queries to use the base service name (`service:<DD_SERVICE>`). This allows queries to continue to match when you remove service overrides
-
-5. Set `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` for integration service overrides.
-
-**Note**: The configuration above only removes [integration service overrides](#integration-service-overrides). Custom service overrides must be removed directly in the code.
+With inferred services, integration service overrides are no longer necessary and may clutter your service maps. You can remove them directly in Datadog. For step-by-step instructions, see [Service Override Removal][2].
 
 ## Glossary
 
@@ -141,8 +93,4 @@ The default `DD_SERVICE` name.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/services/inferred_services
-[2]: /tracing/trace_pipeline/generate_metrics
-[3]: /monitors/types/apm/?tab=traceanalytics
-[4]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[5]: /tracing/metrics/metrics_namespace/
-[6]: /tracing/services/inferred_services/#peer-tags
+[2]: /tracing/services/service_override_removal

@@ -91,7 +91,7 @@ You can also filter the output by **Status** to see only `info`, `warn`, or `err
 
 ## Track workflow billing in Usage Attribution
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 
@@ -109,7 +109,7 @@ To track billing for your workflow executions, perform the following steps:
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][1].
 
 
-[1]: https://datadoghq.slack.com/
+[1]: https://chat.datadoghq.com/
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /service_management/workflows/build/#workflow-notifications
 [4]: https://app.datadoghq.com/monitors/create

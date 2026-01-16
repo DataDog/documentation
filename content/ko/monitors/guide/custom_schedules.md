@@ -25,7 +25,7 @@ title: 모니터 평가 빈도 사용자 지정
 
 **Add Custom Schedule**를 클릭하여 평가 주기를 설정합니다.
 
-<div class="alert alert-warning">커스텀 일정이 모니터에서 활성화되면 일정을 비활성화할 수 없습니다. 커스텀 일정은 모니터 생성 중에만 추가하거나 제거할 수 있습니다.</div>
+<div class="alert alert-danger">커스텀 일정이 모니터에서 활성화되면 일정을 비활성화할 수 없습니다. 커스텀 일정은 모니터 생성 중에만 추가하거나 제거할 수 있습니다.</div>
 
 {{< tabs >}}
 {{% tab "Day" %}}

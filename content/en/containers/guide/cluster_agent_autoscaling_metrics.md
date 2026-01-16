@@ -1,5 +1,6 @@
 ---
 title: Autoscaling with Cluster Agent Custom & External Metrics
+description: Configure Kubernetes Horizontal Pod Autoscaler to use custom and external Datadog metrics with the Cluster Agent
 aliases:
 - /agent/guide/cluster-agent-custom-metrics-server
 - /agent/cluster_agent/external_metrics
@@ -21,6 +22,8 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
 ---
+
+<div class="alert alert-info">This page describes using Kubernetes Horizontal Pod Autoscaler (HPA). For Datadog Kubernetes Autoscaling, see <a href="/containers/autoscaling">Kubernetes Autoscaling</a>.</div>
 
 ## Overview
 

@@ -33,9 +33,19 @@ container_include: ["name:frontend.*"]
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
-### Scrubbing sensitive information
+### Scrubbing sensitive information from manifests
 
-To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
+To help prevent leaking sensitive data, the Agent can be configured to scrub the collected Kubernetes YAML manifests. This scrubbing feature is applied to:
+
+- Annotation values
+- Label values
+- Probe configurations (HTTP headers and commands)
+- Environment variables 
+- Container exec commands
+
+The scrubbing algorithm attempts to detect key-value pairs containing secrets based on a set of sensitive keywords, replacing corresponding values with `********`. This logic is applied to structured key-value pairs (such as environment variables) as well as values that look like JSON or YAML content, which may contain key-value pairs within the content.
+
+Scrubbing is enabled by default using the following sensitive keywords:
 
 - `password`
 - `passwd`
@@ -49,20 +59,18 @@ To prevent the leaking of sensitive data, you can scrub sensitive words in conta
 - `credentials`
 - `stripetoken`
 
-You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words.
+You can supply additional sensitive keywords by providing a space-delimited list in the environment variable: `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to the default words and does not overwrite them. To use this environment variable, you must configure it for following Agents:
 
-**Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
-
-You need to setup this environment variable for the following agents:
-
-- process-agent
-- cluster-agent
+- Core Agent
+- Cluster Agent
 
 ```yaml
 env:
     - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
       value: "customword1 customword2 customword3"
 ```
+
+**Note**: Any additional sensitive words must be provided as lowercase strings. The Agent converts text to lowercase before matching for sensitive words. If the sensitive word is `password`, `MY_PASSWORD=1234` is scrubbed to `MY_PASSWORD=********` because the Agent converts `MY_PASSWORD` to `my_password`, which mean the sensitive word `PASSWORD` does not match anything.
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
@@ -71,6 +79,7 @@ password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
+config={"password":"<MY_PASSWORD>"}
 ```
 
 However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
@@ -194,9 +203,30 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 ### Collect custom resources
 
-The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default.
+The [Kubernetes Explorer][3] automatically collects Custom Resource Definitions (CRDs) by default.
 
-Follow these steps to collect the custom resources that these CRDs define:
+#### Automatic custom resource collection compatibility matrix
+
+When the following CRDs are present in your cluster, the Agent automatically collects their Custom Resources (CRs). If a CRD you use is **not** listed here—or your Agent version is older—follow the **manual configuration** steps below.
+
+| CRD group          | CRD kind             | CRD versions | Minimal Agent version |
+| ------------------ | -------------------- | ------------ | --------------------- |
+| datadoghq.com      | datadogslo           | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogdashboard     | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogagentprofile  | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmonitor       | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogmetric        | v1alpha1     | 7.71.0                |
+| datadoghq.com      | datadogpodautoscaler | v1alpha2     | 7.71.0                |
+| datadoghq.com      | datadogagent         | v2alpha1     | 7.71.0                |
+| argoproj.io        | rollout              | v1alpha1     | 7.71.0                |
+| karpenter.sh       | *                    | v1           | 7.71.0                |
+| karpenter.k8s.aws  | *                    | v1           | 7.71.0                |
+| azure.karpenter.sh | *                    | v1beta1      | 7.71.0                |
+
+
+#### Manual Configuration
+
+For the other CRDs, follow these steps to collect the custom resources that these CRDs define:
 
 1. In Datadog, open [Kubernetes Explorer][3]. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
 
@@ -390,6 +420,119 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 <div class="alert alert-info">You can select up to 50 fields per resource. You can use the preview to validate your indexing choices.</div>
 
+### Collect custom resource metrics using Kubernetes State Core check
+
+<div class="alert alert-info">This functionality requires Cluster Agent 7.63.0+.</div>
+
+You can use the `kubernetes_state_core` check to collect custom resource metrics when running the Datadog Cluster Agent.
+
+1. Write definitions for your custom resources and the fields to turn into metrics according to the following format:
+   ```yaml
+   #=(...)
+   collectCrMetrics:
+     - groupVersionKind:
+         group: "crd.k8s.amazonaws.com"
+         kind: "ENIConfig"
+         version: "v1alpha1"
+       commonLabels:
+         crd_type: "eniconfig"
+       labelsFromPath:
+         crd_name: [metadata, name]
+       metricNamePrefix: "userPrefix"
+       metrics:
+         - name: "eniconfig"
+           help: "ENI Config"
+           each:
+             type: gauge
+             gauge:
+               path: [metadata, generation]
+     - groupVersionKind:
+         group: "vpcresources.k8s.aws"
+         kind: "CNINode"
+         version: "v1alpha1"
+         resource: "cninode-pluralized"
+       commonLabels:
+         crd_type: "cninode"
+       labelsFromPath:
+         crd_name: [metadata, name]
+       metrics:
+         - name: "cninode"
+           help: "CNI Node"
+           each:
+             type: gauge
+             gauge:
+               path: [metadata, generation]
+   ```
+
+   By default, RBAC and API resource names are derived from the kind in groupVersionKind by converting it to lowercase, and adding an "s" suffix (for example, Kind: ENIConfig → eniconfigs). If the Custom Resource Definition (CRD) uses a different plural form, you can override this behavior by specifying the resource field. In the example above, CNINode overrides the default by setting resource: "cninode-pluralized".
+
+   Metric names are produced using the following rules:
+   - No prefix: `kubernetes_state_customresource.<metrics.name>`
+   - Prefix: `kubernetes_state_customresource.<metricNamePrefix>_<metric.name>`
+
+   For more details, see [Custom Resource State Metrics][5].
+
+2. Update your Helm or Datadog Operator configuration:
+
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
+
+   1. Add the following configuration to `datadog-values.yaml`:
+
+      ```yaml
+      datadog:
+        #(...)
+        kubeStateMetricsCore:
+          collectCrMetrics:
+            - <CUSTOM_RESOURCE_METRIC>
+      ```
+
+       Replace `<CUSTOM_RESOURCE_METRIC>` with the definitions you wrote in the first step.
+
+   1. Upgrade your Helm chart:
+
+      ```
+      helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+      ```
+
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
+
+   <div class="alert alert-info">
+      This functionality requires Agent Operator v1.20+.
+   </div>
+
+   1. Install the Datadog Operator with an option that grants the Datadog Agent permission to collect custom resources:
+
+      ```
+      helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+      ```
+
+   1. Add the following configuration to your `DatadogAgent` manifest, `datadog-agent.yaml`:
+
+      ```yaml
+      apiVersion: datadoghq.com/v2alpha1
+      kind: DatadogAgent
+      metadata:
+        name: datadog
+      spec:
+        #(...)
+        features:
+          kubeStateMetricsCore:
+            collectCrMetrics:
+              - <CUSTOM_RESOURCE_METRIC>
+      ```
+
+      Replace `<CUSTOM_RESOURCE_METRIC>` with the definitions you wrote in the first step.
+
+   1. Apply your new configuration:
+
+      ```
+      kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+      ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
 
 ## Further reading
 
@@ -399,4 +542,4 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 [2]: /infrastructure/containers
 [3]: https://app.datadoghq.com/orchestration/explorer/pod
 [4]: https://app.datadoghq.com/orchestration/explorer/crd
-
+[5]: https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md

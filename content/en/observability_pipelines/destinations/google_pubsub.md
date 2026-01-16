@@ -1,11 +1,17 @@
 ---
 title: Google Pub/Sub Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
-Use Observability Pipelines' Google Pub/Sub destination to publish logs to the Google Cloud Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
+Use Observability Pipelines' Google Pub/Sub destination to publish logs to the Google Pub/Sub messaging system, so the logs can be sent to downstream services, data lakes, or custom applications.
 
 ### When to use this destination
 
@@ -114,11 +120,7 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 {{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field" style="width:70%;" >}}
 
-By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
-
-If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][5] for more information.
-
-Stored as the environment variable: `DD_OP_DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
 
 ## Troubleshooting
 
@@ -145,47 +147,11 @@ See the [Observability Pipelines Metrics][8] for a full list of available health
 
 #### Component metrics
 
-Monitor the health of your Pub/Sub destination with the following key metrics:
-
-`pipelines.component_sent_events_total`
-: Events successfully delivered.
-
-`pipelines.component_discarded_events_total`
-: Events dropped.
-
-`pipelines.component_errors_total`
-: Errors in the destination component.
-
-`pipelines.component_sent_event_bytes_total`
-: Total event bytes sent.
-
-`pipelines.utilization`
-: Worker resource usage.
+{{% observability_pipelines/metrics/component %}}
 
 #### Buffer metrics (when buffering is enabled)
 
-Track buffer behavior with these additional metrics:
-
-`pipelines.buffer_events`
-: Number of events currently in the buffer.
-
-`pipelines.buffer_byte_size`
-: Current buffer size in bytes.
-
-`pipelines.buffer_received_events_total`
-: Total events added to the buffer.
-
-`pipelines.buffer_received_event_bytes_total`
-: Total bytes added to the buffer.
-
-`pipelines.buffer_sent_events_total`
-: Total events successfully flushed from the buffer.
-
-`pipelines.buffer_sent_event_bytes_total`
-: Total bytes successfully flushed from the buffer.
-
-`pipelines.buffer_discarded_events_total`
-: Events discarded from the buffer (for example, due to overflow).
+{{% observability_pipelines/metrics/buffer %}}
 
 ### Event batching
 
@@ -199,7 +165,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [2]: https://cloud.google.com/docs/authentication#auth-flowchart
 [3]: https://cloud.google.com/pubsub/docs/access-control#roles
 [4]: https://console.cloud.google.com/iam-admin/serviceaccounts
-[5]: https://cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
 [6]: /observability_pipelines/destinations/#event-batching
 [7]:https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
-[8]: /observability_pipelines/monitoring/metrics/
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

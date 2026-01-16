@@ -16,7 +16,7 @@ title: Carga de archivos de informes de tests JUnit en Datadog
 type: lenguaje de código múltiple
 ---
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
  <strong>Nota</strong>: Datadog recomienda la instrumentación nativa de los tests sobre la carga de archivos XML JUnit,
   ya que la instrumentación nativa proporciona resultados de tiempo más precisos, admite trazas distribuidas en tests de integraciones
   y otras características que no están disponibles con las cargas XML JUnit.
@@ -48,7 +48,7 @@ npm install -g @datadog/datadog-ci
 
 ### Binario independiente (Beta)
 
-<div class="alert alert-warning"><strong>Nota</strong>: Los binarios independientes están en <strong>fase beta</strong> y su estabilidad no está garantizada.</div>
+<div class="alert alert-danger"><strong>Nota</strong>: Los binarios independientes están en <strong>fase beta</strong> y su estabilidad no está garantizada.</div>
 
 Si la instalación de Node.js en el CI es un problema, se proporcionan binarios independientes con las [versiones de Datadog CI][4]. Sólo son compatibles linux-x64, darwin-x64, (MacOS) y win-x64 (Windows). Para instalarlos, ejecuta lo siguiente en tu terminal:
 
@@ -109,7 +109,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 </code>
 </pre>
 
-<div class="alert alert-warning">Asegúrate de que este comando se ejecuta en tu CI, incluso si tus tests han fallado. Normalmente, cuando los tests fallan, la tarea CI aborta la ejecución y el comando de carga no se ejecuta.</div>
+<div class="alert alert-danger">Asegúrate de que este comando se ejecuta en tu CI, incluso si tus tests han fallado. Normalmente, cuando los tests fallan, la tarea CI aborta la ejecución y el comando de carga no se ejecuta.</div>
 
 {{< tabs >}}
 
@@ -484,7 +484,7 @@ datadog-ci junit upload --service service_name \
 
 {{< /tabs >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   Cuando utilices bash desde Git para Windows, define la variable de entorno <strong>MSYS_NO_PATHCONV=1</strong>.
   De lo contrario, cualquier argumento que empiece por <strong>/</strong> se expandirá a una ruta Windows.
 </div>

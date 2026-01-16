@@ -78,7 +78,7 @@ Después de procesar, se genera el siguiente log estructurado:
 
 ### Emparejador y filtro
 
-<div class="alert alert-warning">Las funciones de análisis de Grok en <em>tiempo de consulta</em> (en <a href="/logs/workspaces/#transformation-cell">áreas de trabajo de logs</a> y en el <a href="/logs/explorer/calculated_fields/">Explorer de logs</a>) admiten un subconjunto limitado de comparadores (<strong>datos</strong>, <strong>número entero</strong>, <strong>notSpace</strong>, <strong>número</strong> y <strong>palabra</strong>) y filtros (<strong>número</strong> y <strong>número entero</strong>).<br><br>
+<div class="alert alert-danger">Las funciones de análisis de Grok en <em>tiempo de consulta</em> (en <a href="/logs/workspaces/#transformation-cell">áreas de trabajo de logs</a> y en el <a href="/logs/explorer/calculated_fields/">Explorer de logs</a>) admiten un subconjunto limitado de comparadores (<strong>datos</strong>, <strong>número entero</strong>, <strong>notSpace</strong>, <strong>número</strong> y <strong>palabra</strong>) y filtros (<strong>número</strong> y <strong>número entero</strong>).<br><br>
 El siguiente conjunto completo de comparadores y filtros es específico de la función de <em>analizador Grok de</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">tiempo de ingesta</a>.</div>
 
 En esta lista encontrarás todos los emparejadores y filtros implementados de forma nativa por Datadog:

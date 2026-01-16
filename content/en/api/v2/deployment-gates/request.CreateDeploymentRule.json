@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "dry_run": false,
+      "name": "My deployment rule",
+      "options": {
+        "excluded_resources": []
+      },
+      "type": "faulty_deployment_detection"
+    },
+    "type": "deployment_rule"
+  }
+}

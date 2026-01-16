@@ -4,6 +4,7 @@ description: "Create intelligent, self-maintaining mobile tests to ensure the mo
 aliases:
 - /mobile_testing
 - /mobile_app_testing
+- /mobile_app_testing/mobile_app_tests/
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
@@ -23,6 +24,9 @@ further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 cascade:
   algolia:
     tags: ['mobile_testing']
@@ -274,5 +278,5 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
-[15]: /real_user_monitoring/mobile_and_tv_monitoring/
+[15]: /real_user_monitoring/application_monitoring/
 [16]: /synthetics/mobile_app_testing/devices
