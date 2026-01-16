@@ -1,7 +1,5 @@
 ---
 title: CloudPrem Ingress Configuration
-aliases:
-- /cloudprem/configure/ingress/
 description: Learn how to configure and manage ingress controllers for your CloudPrem deployment
 further_reading:
 - link: "/cloudprem/ingest/"

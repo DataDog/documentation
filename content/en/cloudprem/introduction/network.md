@@ -1,7 +1,5 @@
 ---
 title: Network
-aliases:
-- /cloudprem/introduction/network/
 further_reading:
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"

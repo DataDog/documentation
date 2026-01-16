@@ -6844,6 +6844,11 @@ menu:
       parent: cloudprem_configure
       identifier: cloudprem_configure_pipelines
       weight: 502
+    - name: Ingress
+      url: /cloudprem/configure/ingress
+      parent: cloudprem_configure
+      identifier: cloudprem_ingress
+      weight: 503
     - name: Operate
       url: /cloudprem/operate/
       parent: cloudprem
