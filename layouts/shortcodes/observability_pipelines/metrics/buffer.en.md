@@ -19,7 +19,7 @@ Track buffer behavior with these additional metrics:
 : Total bytes successfully flushed from the buffer.
 
 `pipelines.buffer_discarded_events_total`
-: Events discarded from the buffer (for example, due to overflow).
+: Total number of events discarded from the buffer (for example, due to overflow).
 
 `pipelines.source_buffer_max_event_size`
 : Maximum event size for a source's buffer.
