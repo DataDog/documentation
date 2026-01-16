@@ -153,7 +153,11 @@ A recovery does not require all test runs to pass, only that the alerting condit
 
 **Global uptime** represents the percentage of time your monitor was healthy (`OK` status) during the selected time period. 
 
-It is calculated based on how long the monitor remained healthy compared to the total monitoring period. Any time spent in an `ALERT` state reduces the global uptime accordingly. Since this metric is based on the duration of the monitor's status, it can be approximated by the ratio of successful test results to the total number of test executions over the same period.
+It is based on how long the monitor stayed in an OK state compared to the total monitoring period. Any time the monitor spends in an `ALERT` state lowers the global uptime.
+
+Because this metric is based on the duration of the monitor's status and not on the status of a test execution, it cannot be reliably calculated based on the ratio of successful test results to the total number of test executions over the same period. 
+
+Depending on the test frequency, there may be times when the ratio can be used to "approximate" the global uptime. In some basic alerting configurations, such as a test that runs every minute with a minimum duration of 0, the ratio might roughly approximate the global uptime.
 
 The formula for calculating global uptime is:
 
