@@ -2,7 +2,13 @@
 title: Azure Storage
 description: Learn how to set up the Azure Storage source.
 disable_toc: false
+products:
+- name: Rehydration
+  icon: archive-wui
+  url: /observability_pipelines/configuration/?tab=rehydration#pipeline-types
 ---
+
+{{< product-availability >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/rehydration-for-observability-pipelines/"
  btn_hidden="false">}}
