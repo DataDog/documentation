@@ -9095,6 +9095,10 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
+        status_group:
+          $ref: '#/components/schemas/CaseStatusGroup'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9161,6 +9165,8 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9329,7 +9335,9 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      description: Case status
+      deprecated: true
+      description: Deprecated way of representing the case status, which only supports
+        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9340,6 +9348,23 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
+    CaseStatusGroup:
+      description: Status group of the case.
+      enum:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+      example: SG_OPEN
+      type: string
+      x-enum-varnames:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+    CaseStatusName:
+      description: Status of the case. Must be one of the existing statuses for the
+        case's type.
+      example: Open
+      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9563,8 +9588,9 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-      required:
-      - status
+          deprecated: true
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -87826,7 +87852,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
@@ -87971,7 +87997,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
