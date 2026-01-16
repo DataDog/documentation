@@ -6744,15 +6744,10 @@ menu:
       identifier: cloudprem_architecture
       weight: 101
     - name: Connectivity
-      url: /cloudprem/introduction/connectivity
+      url: /cloudprem/introduction/network
       parent: cloudprem_introduction
       identifier: cloudprem_connectivity
       weight: 102
-    - name: Ingress
-      url: /cloudprem/introduction/ingress
-      parent: cloudprem_introduction
-      identifier: cloudprem_ingress
-      weight: 103
     - name: Supported Features
       url: /cloudprem/introduction/features
       parent: cloudprem_introduction
