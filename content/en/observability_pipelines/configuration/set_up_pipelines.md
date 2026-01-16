@@ -122,34 +122,15 @@ You can create a pipeline with one of the following methods:
 
 ##### Add another processor group
 
-If you want to add another group of processors for a destination:
-1. Click the plus sign (**+**) at the bottom of the existing processor group.
-1. Click the name of the processor group to update it.
-1. Optionally, enter a group filter. See [Search Syntax][6] for more information.
-1. Click **Add** to add processors to the group.
-1. If you want to copy all processors in a group and paste them into the same processor group or a different group:
-    1. Click the three dots on the processor group.
-    1. Select **Copy all processors**.
-    1. Select the desired processor group, and then paste the processors into it.
-1. You can toggle the switch to enable and disable the processor group and also each individual processor.
+{{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
 
-**Notes**:
-<br>- Configuring a pipeline with processor groups is available for Worker versions 2.7 and later.
-<br>- There is a limit of 10 processor groups for a pipeline canvas.
+##### Add another set of processors and destinations
+
+{{% observability_pipelines/set_up_pipelines/add_another_set_of_processors_and_destinations %}}
 
 ##### Add another destination to a processor group
 
-If you want to add an additional destination to a processor group, click the plus sign (**+**) to the right of the processor group.
-
-To delete a destination, click on the pencil icon to the top right of the destination, and select **Delete node**.
-- If you delete a destination from a processor group that has multiple destinations, only the deleted destination is removed.
-- If you delete a destination from a processor group that only has one destination, both the destination and the processor group are removed.
-
-**Notes**:
-
-- A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
-- You can add a total of three destinations for a pipeline.
-- A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
+{{% observability_pipelines/set_up_pipelines/add_another_destination %}}
 
 ### Rehydration completed notification
 
@@ -162,6 +143,7 @@ To delete a destination, click on the pencil icon to the top right of the destin
 [4]: /observability_pipelines/processors/
 [5]: /observability_pipelines/destinations/
 [6]: /observability_pipelines/search_syntax/logs/
+[11]: /observability_pipelines/search_syntax/logs/
 
 {{% /tab %}}
 {{< /tabs >}}
