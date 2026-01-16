@@ -107,6 +107,45 @@ You can create a pipeline with one of the following methods:
 [11]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}
+{{% tab "Rehydration" %}}
+
+### Set up the pipeline components
+
+1. Navigate to [Observability Pipelines][1] and click the [Rehydrations][2] tab.
+1. Click **+ New Rehydration**.
+1. Select and set up your [source][3].
+1. Add [processors][4] to transform, redact, and enrich your log data.
+    - If you want to copy a processor, click the copy icon for that processor and then use `command-v` to paste it.
+1. Select and set up [destinations][5] for your processed logs.
+
+#### Add or remove components
+
+##### Add another processor group
+
+{{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
+
+##### Add another set of processors and destinations
+
+{{% observability_pipelines/set_up_pipelines/add_another_set_of_processors_and_destinations %}}
+
+##### Add another destination to a processor group
+
+{{% observability_pipelines/set_up_pipelines/add_another_destination %}}
+
+### Rehydration completed notification
+
+1. Click **Next: Configure Notifications**.
+1. Review the **Rehydration Completed** notification and update if needed.
+
+[1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/rehydration/
+[3]: /observability_pipelines/sources/
+[4]: /observability_pipelines/processors/
+[5]: /observability_pipelines/destinations/
+[6]: /observability_pipelines/search_syntax/logs/
+[11]: /observability_pipelines/search_syntax/logs/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Worker and deploy the pipeline
