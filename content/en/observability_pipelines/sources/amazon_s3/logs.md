@@ -1,15 +1,14 @@
 ---
-title: Amazon S3 Source
+title: Amazon S3
 disable_toc: false
-products:
-- name: Logs
-  icon: logs
-  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+code_lang: logs
+type: multi-code-lang
+weight: 1
 ---
 
-{{< product-availability >}}
+## Overview
 
-Use Observability Pipelines' Amazon S3 source to receive logs from Amazon S3. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Amazon S3 source in a logs pipeline to receive logs from Amazon S3. Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 
