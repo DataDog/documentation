@@ -33,7 +33,7 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-After setting up Roku, follow the steps on this page to enable React Native Crash Reporting and Error Tracking.
+After setting up the Roku SDK, follow the steps on this page to enable Roku Crash Reporting and Error Tracking.
 
 ### Step 1 - Declare the SDK as a dependency
 
