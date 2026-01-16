@@ -1,5 +1,5 @@
 {{ $dot := . }}
-{{ if ne $dot.Page.Lang "en"}}
+{{ if and (ne $dot.Page.Lang "en") (ne $dot.Page.Lang "studio")}}
 
   {{ $dot.Scratch.Set "outdated" false }}
   {{ if .IsTranslated }}

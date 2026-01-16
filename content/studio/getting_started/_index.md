@@ -12,7 +12,34 @@ type: studio
 
 Datadog Studio gives small development teams production-grade observability without the overhead. Instead of manually configuring individual products and piecing together monitoring tools, Studio provides pre-configured monitoring packages for frontend, backend, or LLM/AI applications that work out of the box. 
 
-Choose **agentic setup** to let AI assistants (Cursor or Claude) automatically detect your application type and configure the right features for your codebase, or use **manual setup** for full control. After configuration, your application immediately sends telemetry to Datadog for error tracking, performance insights, and user analytics—so you can focus on building features instead of debugging infrastructure.
+Choose [**agentic setup**](#agentic-setup) to let AI assistants (Cursor or Claude) automatically detect your application type and configure the right features for your codebase, or use [**manual setup**](#manual-setup) for full control. After configuration, your application immediately sends telemetry to Datadog for error tracking, performance insights, and user analytics—so you can focus on building features instead of debugging infrastructure.
+
+## Studio vs Datadog
+
+Studio is built for developers at AI-native companies who prioritize rapid iteration, fast deployment, and verifying their application works—not optimizing infrastructure or fine-tuning CI/CD pipelines.
+
+| | Studio | Datadog |
+|---|--------|---------|
+| **Best for** | Developers at lean, fast-moving companies | Enterprise teams with dedicated DevOps/SRE |
+| **Focus** | Ship fast, catch bugs, understand users | Infrastructure monitoring, performance optimization, compliance |
+| **Setup** | 5-10 minutes with pre-configured packages | Full control over 20+ products |
+| **Unique capabilities** | Automated validation agent, live debugging, production-aware coding assistance | Advanced APM, infrastructure monitoring, security |
+
+### What Studio helps you do
+
+**Ship code fast without breaking things**
+Go from idea → code → deploy with minimal friction. Studio's automated validation agent detects what changed across code, configs, and UI on every PR, commit, merge, or deploy—catching regressions before they reach users.
+
+**Catch and fix production errors early**
+Get alerted to errors that impact your business. Studio gathers debugging context automatically, so you can fix issues without redeploying or reproducing locally. Live debugging lets you investigate directly in production.
+
+**Understand your users**
+See who your users are and what they do. Use session context to diagnose issues, improve flows, and enhance user experience.
+
+**Choose Datadog if you:**
+- Need comprehensive infrastructure monitoring across complex environments
+- Require advanced APM distributed tracing or security compliance
+- Have dedicated DevOps/SRE teams managing observability
 
 ## Features by application type
 
@@ -246,7 +273,7 @@ Set up server-side monitoring for APIs and services. Start with your primary log
    {{< nextlink href="https://app.datadoghq.com/integrations" >}}Integrations metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Llm observability
+### LLM Observability
 
 Monitor AI applications, agents, and LLM API calls. Works with OpenAI, Anthropic, LangChain, LangGraph, and more.
 
