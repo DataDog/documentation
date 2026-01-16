@@ -2689,16 +2689,21 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_integrations
       weight: 704
+    - name: Automations
+      url: incident_response/incident_management/incident_settings/automations
+      parent: incidents_settings
+      identifier: incidents_settings_automations
+      weight: 705
     - name: Notification Rules
       url: incident_response/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 705
+      weight: 706
     - name: Templates
       url: incident_response/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 706
+      weight: 707
     - name: Incident Analytics
       url: incident_response/incident_management/analytics
       parent: incidents
@@ -9122,21 +9127,26 @@ menu:
       url: account_management/billing/google_cloud/
       parent: account_management_billing
       weight: 1316
+    - name: OCI Integration
+      identifier: account_management_billing_oci
+      url: account_management/billing/oci/
+      parent: account_management_billing
+      weight: 1317
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1317
+      weight: 1318
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1318
+      weight: 1319
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1319
+      weight: 1320
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
