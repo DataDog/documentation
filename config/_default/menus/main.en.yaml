@@ -6323,7 +6323,7 @@ menu:
       identifier: observability_pipelines_packs_fortinet_firewall
       weight: 509
     - name: HAProxy Ingress
-      url: observability_pipelines/packs/haproxy_ingress/
+      url: observability_pipelines /packs/haproxy_ingress/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_haproxy_ingress
       weight: 510
@@ -6843,7 +6843,12 @@ menu:
       url: /cloudprem/configure/pipelines
       parent: cloudprem_configure
       identifier: cloudprem_configure_pipelines
-      weight: 502
+      weight: 50
+    - name: Ingress
+      url: /cloudprem/configure/ingress
+      parent: cloudprem_configure
+      identifier: cloudprem_ingress
+      weight: 503`
     - name: Operate
       url: /cloudprem/operate/
       parent: cloudprem
