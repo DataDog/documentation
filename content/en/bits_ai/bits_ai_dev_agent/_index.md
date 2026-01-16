@@ -20,6 +20,7 @@ Bits AI Dev Agent is a generative AI coding assistant that uses observability da
 
 Bits AI Dev Agent is available for the following Datadog products:
 
+{{% not_available_in_studio %}}
 | Product                   | Availability         | Capabilities                                                       |
 |---------------------------|----------------------|--------------------------------------------------------------------|
 | [Error Tracking][1]       | Preview              | Diagnoses issues and generates code fixes on-demand or autonomously|
@@ -30,6 +31,13 @@ Bits AI Dev Agent is available for the following Datadog products:
 | [Containers][12]          | Preview              | Provides code changes for [Kubernetes Remediations][13]                  |
 
 **Note**: Enabling Bits AI Dev Agent is product-specific. Even if it's active for one Datadog product, it must be separately enabled for each additional product you use.
+{{% /not_available_in_studio %}}
+
+{{% only_in_studio %}}
+| Product                   | Availability         | Capabilities                                                       |
+|---------------------------|----------------------|--------------------------------------------------------------------|
+| [Error Tracking][1]       | Preview              | Diagnoses issues and generates code fixes on-demand or autonomously|
+{{% /only_in_studio %}}
 
 ## Key capabilities 
 

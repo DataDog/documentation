@@ -21,11 +21,6 @@ menu:
       parent: onboarding_heading
       identifier: getting_started
       weight: 1
-    - name: Test
-      url: /studio/test/
-      parent: essentials_heading
-      identifier: test
-      weight: 2
     - name: Dashboards
       parent: essentials_heading
       params:
@@ -35,15 +30,28 @@ menu:
       parent: essentials_heading
       params:
         ref_id: notebooks
-    - name: Monitors
+    - name: Monitors & Alerting
       parent: essentials_heading
       params:
         ref_id: alerting
         # Exclude specific monitor types
-        includes:
-          - monitors_types_metric
-          - monitors_types_error_tracking
-          - monitors_types_logs
+        excludes:
+          - monitor_types_host
+          - monitor_types_analysis
+          - monitor_types_apm
+          - monitor_types_auditlogs
+          - monitor_types_ci
+          - monitor_types_cloud_cost
+          - monitor_types_database_monitoring
+          - monitor_types_event
+          - monitor_types_network
+          - monitor_types_netflow
+          - monitor_types_process
+          - monitor_types_process_check
+          - monitor_types_service_check
+          - monitor_types_slo
+          - monitor_types_syn
+          - monitor_types_watchdog
     - name: Bits AI
       parent: essentials_heading
       params:
