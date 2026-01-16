@@ -29,7 +29,7 @@ further_reading:
   App and API Protection for Kubernetes automatically configures supported Kubernetes ingress proxies and gateways. Try it today!
 {{< /learning-center-callout >}}
 
-This page describes how to set up [11][App and API Protection] for Kubernetes to automatically configure supported Kubernetes ingress proxies and gateways to run API discovery, threat detection, and inline blocking at the edge of the infrastructure.
+This page describes how to set up [App and API Protection][11] for Kubernetes to automatically configure supported Kubernetes ingress proxies and gateways to run API discovery, threat detection, and inline blocking at the edge of the infrastructure.
 
 ## Overview
 
@@ -180,15 +180,15 @@ datadog:
     injector:
       enabled: true
 
-# Enable automatic proxy detection (enabled by default)
-autoDetect: true
+      # Enable automatic proxy detection (enabled by default)
+      autoDetect: true
 
-# External processor configuration (required)
-processor:
-  service:
-    name: datadog-aap-extproc-service # Required: name of the processor service
-    namespace: datadog                # Optional: defaults to Cluster Agent namespace
-  port: 443
+      # External processor configuration (required)
+      processor:
+        service:
+          name: datadog-aap-extproc-service # Required: name of the processor service
+          namespace: datadog                # Optional: defaults to Cluster Agent namespace
+        port: 443
 ```
 
 Install or upgrade the Datadog Helm chart:
