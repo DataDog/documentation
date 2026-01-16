@@ -20,7 +20,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup instructions][2] or see the [Unity setup documentation][3]. Then, follow the steps in the [Error Tracking documentation to enable React Native Crash Reporting and Error Tracking][4].
+If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup instructions][2] or see the [Unity setup documentation][3]. Then, follow the steps in the [Error Tracking documentation to enable Unity Crash Reporting and Error Tracking][4].
 
 
 ## Further reading
