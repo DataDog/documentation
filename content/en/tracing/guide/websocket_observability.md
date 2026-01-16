@@ -11,18 +11,18 @@ further_reading:
 
 ## Overview
 
-WebSocket Observability provides comprehensive tracing for WebSocket connections in your applications. This feature captures the HTTP handshake, incoming and outgoing messages, and connection close events, enabling you to monitor the full lifecycle of WebSocket sessions in your traces.
+WebSocket observability provides comprehensive tracing for WebSocket connections in your applications. This feature captures the HTTP handshake, incoming and outgoing messages, and connection close events, enabling you to monitor the full lifecycle of WebSocket sessions in your traces.
 
 ## Requirements
 
 ### Tracer Versions
 
-The following tracer versions support WebSocket Observability:
+The following tracer versions support WebSocket observability out of the box:
 
 | Tracer   | Version    |
 |----------|------------|
-| Node.js  | `>=5.81.0` |
-| Python   | `>=4.1.0`  |
+| Node.js  | `>=5.82.0` |
+| Python   | `>=4.1.5`  |
 | Java     | `>=1.50.0` |
 | PHP      | `>=1.8.0`  |
 
@@ -41,7 +41,7 @@ The following library versions are supported:
 
 ## How it works
 
-WebSocket Observability traces the complete lifecycle of a WebSocket session:
+WebSocket observability traces the complete lifecycle of a WebSocket session:
 
 1. **HTTP Handshake**: The initial HTTP upgrade request that establishes the WebSocket connection
 2. **Incoming Messages**: Messages received by your application
@@ -195,9 +195,9 @@ DD_TRACE_WEBSOCKET_MESSAGES_ENABLED=false
 
 ## Distributed tracing
 
-In order to properly support distributed tracing tools like Datadog need to inject metadata into messages. For protocols like HTTP or Kafka this means adding arbitrary metadata into the existing headers concept. While it's true that Websockets is built upon HTTP and the initial handshake does support headers, individual message send and receive operations do not support headers. While some libraries may support adding arbitrary data (for example if a message is guaranteed to be a JSON object) it's not guaranteed that all libraries work this way. For this reason Datadog does not support adding arbitrary distributed tracing metadata to websocket messages.
+In order to properly support distributed tracing tools like Datadog need to inject metadata into messages. For protocols like HTTP or Kafka this means adding arbitrary metadata into the existing headers concept. While it's true that WebSockets are built upon HTTP and the initial handshake does support headers, individual message send and receive operations do not support headers. While some libraries may support adding arbitrary data (for example if a message is guaranteed to be a JSON object) it's not guaranteed that all libraries work this way. For this reason Datadog does not support adding arbitrary distributed tracing metadata to WebSocket messages.
 
-However, since the tracing information is known during a handshake, and each individual message sent and received over a webscoket connection can be counted, we are able to infer a trace identifier by combining the concept of a connection identifier with the the message counter.
+However, since the tracing information is known during a handshake, and each individual message sent and received over a WebSocket connection can be counted, we are able to infer a trace identifier by combining the concept of a connection identifier with the message counter.
 
 This means that distributed tracing works from the perspective of associating upstream operations with downstream operations. However other commonly expected facets of distributed tracing does not work, such as the ability to associate arbitrary baggage values.
 
@@ -215,7 +215,7 @@ Span pointers connect related WebSocket messages using span links with the follo
 
 The message counter increments separately for sent and received messages, allowing precise correlation between related messages in distributed WebSocket communications.
 
-Within the Datadog trace view interface the span link is clickable, allowing you to jump between individual spans and the hadnshake.
+Within the Datadog trace view interface the span link is clickable, allowing you to jump between individual spans and the handshake.
 
 ## Trace statistics
 
