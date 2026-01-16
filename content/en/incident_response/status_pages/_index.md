@@ -152,7 +152,7 @@ Maintenance windows allow you to proactively communicate planned downtime or ser
 
 ### Publish a maintenance window
 
-1. From a status page, click **Schedule Maintenance** to open the maintenance window modal.
+1. From the "Scheduled Maintenance" tab of status page, click **Schedule Maintenance** to open the maintenance window modal. You can also schedule a maintenance window with the **Publish Notice** button.
 1. Under **Notice type**, select the "Scheduled Maintenance" tab and provide:
    | Field | Description |
    | ---- | ---- |
