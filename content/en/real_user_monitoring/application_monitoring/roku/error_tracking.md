@@ -35,7 +35,7 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-After setting up Roku, [follow the steps on this page to enable Roku Crash Reporting and Error Tracking][6].
+After setting up the Roku SDK, [follow the steps on this page to enable Roku Crash Reporting and Error Tracking][6].
 
 The SDK supports stack trace in crash reporting on Roku OS 13+, while on Roku OS <13, the stack trace is empty.
 

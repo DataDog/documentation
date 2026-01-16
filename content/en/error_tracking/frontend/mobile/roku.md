@@ -39,13 +39,13 @@ After setting up the Roku SDK, follow the steps on this page to enable Roku Cras
 
 #### Using ROPM (recommended)
 
-`ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][6]. Once your project is set up to use `ROPM`, you can use the following command to install the Datadog dependency:
+`ROPM` is a package manager for the Roku platform (based on NPM). If you're not already using `ROPM` in your Roku project, read their [Getting started guide][6]. Once your project is set up to use `ROPM`, run the following command to install the Datadog dependency:
 
 ```shell
 ropm install datadog-roku
 ```
 
-#### Setup manually
+#### Manual setup
 
 If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][4] zip archive
 and unzipping it in your project's root folder.
@@ -240,12 +240,12 @@ This means that even if users open your application while offline, no data is lo
 
 ## Limitations
 
-Crash reporting on Roku doesn't yet support stacktraces. 
+Crash reporting on Roku does not support stacktraces. 
 
 
 ## Test your implementation
 
-To verify your Roku Crash Reporting and Error Tracking configuration, you need to trigger a crash in your application and confirm that the error appears in Datadog.
+To verify your Roku Crash Reporting and Error Tracking configuration, trigger a crash in your application and confirm that the error appears in Datadog.
 
 To test your implementation:
 
@@ -258,7 +258,7 @@ To test your implementation:
        print x.foo
    ```
 
-3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [**Error Tracking**][1].
+3. After the crash happens, restart your application and wait for the crash report to appear in [**Error Tracking**][1].
 
 
 
