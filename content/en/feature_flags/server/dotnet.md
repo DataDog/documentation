@@ -41,7 +41,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 ## Installation
 
-Install the Datadog .NET tracer and OpenFeature SDK via NuGet:
+Install the Datadog .NET tracer and OpenFeature SDK using NuGet:
 
 {{< code-block lang="bash" >}}
 dotnet add package Datadog.Trace
