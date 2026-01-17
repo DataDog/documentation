@@ -3,6 +3,9 @@ aliases:
 - /es/tracing/terminology/
 - /es/tracing/faq/what-is-the-difference-between-type-service-resource-and-name
 - /es/tracing/visualization/
+description: Aprende la terminología esencial de APM, incluyendo servicios, recursos,
+  trazas (traces), tramos (spans), instrumentación y otros conceptos clave del rastreo
+  distribuido.
 further_reading:
 - link: /tracing/trace_collection/
   tag: Documentación
@@ -15,7 +18,7 @@ further_reading:
   text: Más información sobre servicios en Datadog
 - link: /tracing/services/resource_page/
   tag: Documentación
-  text: Profundiza en el rendimiento de tus recursos y trazas (traces)
+  text: Profundiza en el rendimiento de tus recursos y trazas
 - link: /tracing/trace_explorer/trace_view/
   tag: Documentación
   text: Aprende a leer trazas en Datadog
@@ -38,8 +41,8 @@ Para más definiciones y descripciones de términos importantes de APM, como _sp
 | [Servicio](#services)            | Los servicios son los bloques de construcción de las modernas arquitecturas de micro servicios: en términos generales, un servicio agrupa endpoints, consultas o trabajos con el fin de construir tu aplicación.                                  |
 | [Recurso](#resources)          | Los recursos representan un dominio concreto de una aplicación del cliente: suelen ser un endpoint web instrumentado, una consulta a una base de datos o un trabajo en segundo plano.                                                              |
 | [Monitores][23]                   | Los monitores APM de métrica funcionan como los monitores de métrica normales, pero con controles adaptados específicamente a APM. Utiliza estos monitores para recibir alertas al nivel de servicio sobre aciertos, errores y una variedad en las medidas de latencia. |
-| [Trazas](#trace)                 | Una traza se utiliza para realizar un seguimiento del tiempo empleado por una aplicación procesando una solicitud y el estado de esta solicitud. Cada traza consta de uno o varios tramos (spans).                                                             |
-| [Propagación de contexto de rastreo](#trace-context-propagation)| El método para pasar identificadores de traza (trace) entre servicios, lo que permite a Datadog juntar tramos (spans) individuales en una traza distribuida completa. |
+| [Trazas](#trace)                 | Una traza se utiliza para realizar un seguimiento del tiempo empleado por una aplicación procesando una solicitud y el estado de esta solicitud. Cada traza consta de uno o varios tramos.                                                             |
+| [Propagación de contexto de rastreo](#trace-context-propagation)| El método para pasar identificadores de traza entre servicios, lo que permite a Datadog juntar tramos individuales en una traza distribuida completa. |
 | [Filtros de retención](#retention-filters) | Los filtros de retención son controles basados en etiquetas establecidos en la interfaz de usuario de Datadog que determinan qué tramos se indexar en Datadog durante 15 días.                                                                                              |
 | [Controles de ingesta](#ingestion-controls) | Los controles de ingesta se utilizan para el envío de hasta el 100% de las trazas a Datadog para buscar en directo y analizar durante 15 minutos.
 | [Instrumentación](#instrumentation) | La instrumentación es el proceso de añadir código a tu aplicación para capturar e informar los datos de observabilidad. |
@@ -85,7 +88,7 @@ Una traza se utiliza para realizar un seguimiento del tiempo empleado por una ap
 
 ## Propagación del contexto de rastreo
 
-La propagación del contexto de rastreo es el método para pasar identificadores de traza entre servicios en un sistema distribuido. Permite a Datadog unir tramos individuales de diferentes servicios en una única traza distribuida. La propagación de contexto de rastreo funciona inyectando identificadores, como el ID de traza y el ID de tramo principal, en los encabezados HTTP a medida que la solicitud fluye por el sistema. Luego, el servicio de descarga extrae estos identificadores y continúa la traza. Esto permite a Datadog reconstruir la ruta completa de una solicitud a través de múltiples servicios.
+La propagación del contexto de rastreo es el método para pasar identificadores de trazas entre servicios en un sistema distribuido. Permite a Datadog unir tramos individuales de diferentes servicios en una única traza distribuida. La propagación del contexto de rastreo funciona insertando identificadores, como el ID de traza y el ID de tramo principal, en los encabezados HTTP a medida que la solicitud fluye por el sistema. Luego, el servicio de descarga extrae estos identificadores y continúa el rastreo. Esto permite que Datadog reconstruya la ruta completa de una solicitud a través de múltiples servicios.
 
 Para más información, consulta la [propagación del contexto de rastreo][27] para el lenguaje de tu aplicación.
 
@@ -99,7 +102,7 @@ Para más información, consulta la [propagación del contexto de rastreo][27] p
 
 ## Instrumentación
 
-La instrumentación es el proceso de añadir código a tu aplicación para capturar e informar datos de observabilidad a Datadog, como trazas, métricas y logs. Datadog proporciona bibliotecas de instrumentación para varios lenguajes y marcos de programación.
+La instrumentación es el proceso de añadir código a tu aplicación para capturar e informar datos de observabilidad a Datadog, como trazas, métricas y logs. Datadog proporciona bibliotecas de instrumentación para varios lenguajes y frameworks de programación.
 
 Puedes instrumentar automáticamente tu aplicación cuando instales el Datadog Agent con la [Instrumentación de paso único][24] o cuando [añadas de forma manual bibliotecas de rastreo de Datadog][25] a tu código.
 
@@ -107,7 +110,7 @@ Puedes utilizar la instrumentación personalizada al incrustar código de rastre
 
 Para saber más, lee [Instrumentación de aplicación][26].
 
-## Equipaje
+## Baggage
 
 El equipaje te permite propagar pares clave-valor (también conocidos como elementos de equipaje) a través de los límites de servicio en un sistema distribuido. A diferencia del contexto de traza, que se centra en los identificadores de traza, el equipaje permite transmitir datos empresariales y otra información contextual junto con trazas. 
 

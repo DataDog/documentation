@@ -180,6 +180,32 @@ A custom endpoint for sending RUM data.
 **Default**: `20.0`
 The sampling rate for telemetry data, such as errors and debug logs.
 
+## Tracking from background isolates
+
+Starting with v3, Datadog Flutter SDK is capable of monitoring from multiple isolates, but monitoring must be initialized from the background isolate:
+
+When initializing your background isolate, call `DatadogSdk.instance.attachToBackgroundIsolate`. For example:
+
+```dart
+Future<void> _spawnIsolate() async {
+    final receivePort = ReceivePort();
+    receivePort.listen((message) {
+      //
+    });
+    await Isolate.spawn(_backgroundWork, receivePort.sendPort);
+  }
+
+void _backgroundWork(SendPort port) async {
+  await DatadogSdk.instance.attachToBackgroundIsolate();
+
+  // Your background work
+}
+```
+
+`attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call will silently fail and tracking will not be available.
+
+If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` will automatically start tracking resources from the calling isolate.  However, using `Client` from the `http` package or `Dio` will require you re-initialize HTTP tracking for those packages from the background isolate.
+
 ## Automatically track resources
 
 Use the [Datadog Tracking HTTP Client][10] package to enable automatic tracking of resources and HTTP calls from your views.
