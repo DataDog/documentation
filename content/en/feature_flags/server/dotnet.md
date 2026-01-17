@@ -123,6 +123,8 @@ var evalCtx = EvaluationContext.Builder()
     .Build();
 {{< /code-block >}}
 
+**Note:** In server-side applications, build the evaluation context once per request based on the current user, then pass the same context to all flag evaluations within that request. Only rebuild the context if user attributes change.
+
 The targeting key is used for consistent traffic distribution (percentage rollouts). Additional attributes enable targeting rules, such as "enable for users in the US" or "enable for premium tier users" in the example above.
 
 ## Evaluate flags
