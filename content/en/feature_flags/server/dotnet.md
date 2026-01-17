@@ -287,7 +287,7 @@ environment:
 ### Remote Configuration not working
 
 Verify the following to ensure that Remote Configuration is working:
-- Datadog Agent is version 7.55 or later
+- Datadog Agent is the [required version](#prerequisites)
 - Remote Configuration is enabled on the Agent
 - `DD_SERVICE` and `DD_ENV` environment variables are set
 - The tracer can communicate with the Agent
