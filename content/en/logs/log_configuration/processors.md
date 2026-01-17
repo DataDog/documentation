@@ -439,6 +439,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following user-agent par
 
 ## Category processor
 
+<div class="alert alert-danger">To update a category, you must delete the original category and recreate it. You cannot use the Category processor to update an existing category.</div>
+
 Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query. Then, use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
 **Notes**:
