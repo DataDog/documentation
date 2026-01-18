@@ -46,12 +46,16 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over a facet or an attribute**: If a an attribute is selected, the monitor alerts over the `Unique value count` of the attribute. For example, if you have an attribute such as `user.email`, the unique value count is the number of unique user emails. Any attribute can be used in a monitor, but only facets are shown in the autocompletion.
     * **Monitor over measure**: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group logs by multiple dimensions (optional):
+   All logs matching the query are aggregated into groups based on the value of tags, attributes, and up to four facets. When there are multiple dimensions, the number of top or bottom values can be selected for each dimension specifically.
 
-   All logs matching the query are aggregated into groups based on the value of tags, attributes, and up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
-   * **1 facet**: 1000 top values
-   * **2 facets**: 30 top values per facet (at most 900 groups)
-   * **3 facets**: 10 top values per facet (at most 1000 groups)
-   * **4 facets**: 5 top values per facet (at most 625 groups)
+   The total limit, irrespective of the number of facets, is 1000 top values. If this is increased above 1000, the top values for the other dimensions are adjusted to ensure the number of the resulting combinations is less than 1000. The default top values for every group-by is 10, with the exception of the fourth which will default to 5 top values.
+
+   As an example, a Log Monitor with 4 groupings on the search query could have:
+   * **1st facet**: 10 top values
+   * **2nd facet**: 10 top values
+   * **3rd facet**: 5 top values
+   * **4th facet**: 2 top values
+
 4. Configure the alerting grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * **Multi Alert**: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
