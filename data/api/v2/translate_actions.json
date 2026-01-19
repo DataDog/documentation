@@ -1197,6 +1197,12 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "CreateIncidentPostmortemAttachment": {
+    "description": "Create a postmortem attachment for an incident.",
+    "summary": "Create postmortem attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteIncidentAttachment": {
     "summary": "Delete incident attachment"
   },
@@ -1360,38 +1366,6 @@
     "summary": "Create a Datadog GCP principal",
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
-  },
-  "ListJiraAccounts": {
-    "description": "Get all Jira accounts for the organization.",
-    "summary": "List Jira accounts"
-  },
-  "DeleteJiraAccount": {
-    "description": "Delete a Jira account by ID.",
-    "summary": "Delete Jira account"
-  },
-  "ListJiraIssueTemplates": {
-    "description": "Get all Jira issue templates for the organization.",
-    "summary": "List Jira issue templates"
-  },
-  "CreateJiraIssueTemplate": {
-    "description": "Create a new Jira issue template.",
-    "summary": "Create Jira issue template",
-    "request_description": "",
-    "request_schema_description": "Request to create a Jira issue template"
-  },
-  "DeleteJiraIssueTemplate": {
-    "description": "Delete a Jira issue template by ID.",
-    "summary": "Delete Jira issue template"
-  },
-  "GetJiraIssueTemplate": {
-    "description": "Get a Jira issue template by ID.",
-    "summary": "Get Jira issue template"
-  },
-  "UpdateJiraIssueTemplate": {
-    "description": "Update a Jira issue template by ID.",
-    "summary": "Update Jira issue template",
-    "request_description": "",
-    "request_schema_description": "Request to update a Jira issue template"
   },
   "GetChannelByName": {
     "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
