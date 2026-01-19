@@ -51,11 +51,11 @@ As you define the search query, the graph above the search fields updates.
 
    The total limit, irrespective of the number of facets, is 1000 top values. If this is increased above 1000, the top values for the other dimensions are adjusted to ensure the number of the resulting combinations is less than 1000. The default top values for every group-by is 10, with the exception of the fourth which will default to 5 top values.
 
-   As an example, a Log Monitor with 4 groupings on the search query could have:
-   * **1st facet**: 10 top values
-   * **2nd facet**: 10 top values
-   * **3rd facet**: 5 top values
-   * **4th facet**: 2 top values
+   As an example, a Log Monitor with four groupings on the search query could have:
+   * **First facet**: 10 top values
+   * **Second facet**: 10 top values
+   * **Third facet**: 5 top values
+   * **Fourth facet**: 2 top values
 
 4. Configure the alerting grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
