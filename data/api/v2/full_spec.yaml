@@ -467,6 +467,34 @@ components:
         items:
           $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
         type: array
+    GoogleChatHandleIdPathParameter:
+      description: Your organization handle ID.
+      in: path
+      name: handle_id
+      required: true
+      schema:
+        type: string
+    GoogleChatOrganizationBindingIdPathParameter:
+      description: Your organization binding ID.
+      in: path
+      name: organization_binding_id
+      required: true
+      schema:
+        type: string
+    GoogleChatOrganizationDomainNamePathParameter:
+      description: The Google Chat domain name.
+      in: path
+      name: domain_name
+      required: true
+      schema:
+        type: string
+    GoogleChatOrganizationSpaceDisplayNamePathParameter:
+      description: The Google Chat space display name.
+      in: path
+      name: space_display_name
+      required: true
+      schema:
+        type: string
     IncidentIDPathParameter:
       description: The UUID of the incident.
       in: path
@@ -25428,6 +25456,204 @@ components:
       type: string
       x-enum-varnames:
       - GLOBAL_VARIABLES
+    GoogleChatAppNamedSpaceResponse:
+      description: Response of a Google Chat app named space.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatAppNamedSpaceResponseData'
+      required:
+      - data
+      type: object
+    GoogleChatAppNamedSpaceResponseAttributes:
+      description: Google Chat app named space attributes.
+      properties:
+        display_name:
+          description: Google space display name.
+          example: Fake Space Name
+          maxLength: 255
+          type: string
+        organization_binding_id:
+          description: Organization binding ID.
+          example: 2f18a894-adb5-4c53-8248-39fd3f5386a5
+          maxLength: 255
+          type: string
+        resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+        space_uri:
+          description: Google space URI.
+          example: https://chat.google.com/room/AAAAAAAAA
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatAppNamedSpaceResponseData:
+      description: Google Chat app named space data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatAppNamedSpaceResponseAttributes'
+        id:
+          description: The ID of the app named space.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/GoogleChatAppNamedSpaceType'
+      type: object
+    GoogleChatAppNamedSpaceType:
+      default: google-chat-app-named-space
+      description: Google Chat app named space resource type.
+      enum:
+      - google-chat-app-named-space
+      example: google-chat-app-named-space
+      type: string
+      x-enum-varnames:
+      - GOOGLE_CHAT_APP_NAMED_SPACE_TYPE
+    GoogleChatCreateOrganizationHandleRequest:
+      description: Create organization handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatCreateOrganizationHandleRequestData'
+        type:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleType'
+      required:
+      - type
+      - data
+      type: object
+    GoogleChatCreateOrganizationHandleRequestAttributes:
+      description: Organization handle attributes for a create request.
+      properties:
+        name:
+          description: Organization handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        space_resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+      required:
+      - name
+      - space_resource_name
+      type: object
+    GoogleChatCreateOrganizationHandleRequestData:
+      description: Organization handle data for a create request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatCreateOrganizationHandleRequestAttributes'
+      required:
+      - attributes
+      type: object
+    GoogleChatOrganizationHandleResponse:
+      description: Response of a organization handle.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleResponseData'
+      required:
+      - data
+      type: object
+    GoogleChatOrganizationHandleResponseAttributes:
+      description: Organization handle attributes.
+      properties:
+        name:
+          description: Organization handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        space_display_name:
+          description: Google space display name.
+          example: Fake Space Name
+          maxLength: 255
+          type: string
+        space_resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatOrganizationHandleResponseData:
+      description: Organization handle data from a response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleResponseAttributes'
+        id:
+          description: The ID of the organization handle.
+          example: 596da4af-0563-4097-90ff-07230c3f9db3
+          maxLength: 100
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleType'
+      type: object
+    GoogleChatOrganizationHandleType:
+      default: google-chat-organization-handle
+      description: Organization handle resource type.
+      enum:
+      - google-chat-organization-handle
+      example: google-chat-organization-handle
+      type: string
+      x-enum-varnames:
+      - GOOGLE_CHAT_ORGANIZATION_HANDLE_TYPE
+    GoogleChatOrganizationHandlesResponse:
+      description: Response with a list of organization handles.
+      properties:
+        data:
+          description: An array of organization handles.
+          example:
+          - attributes:
+              name: general-handle
+              space_display_name: General
+              space_resource_name: spaces/AAAAAAAAA
+            id: 596da4af-0563-4097-90ff-07230c3f9db3
+            type: google-chat-organization-handle
+          - attributes:
+              name: general-handle-2
+              space_display_name: General2
+              space_resource_name: spaces/BBBBBBBBB
+            id: 596da4af-0563-4097-90ff-07230c3f9db4
+            type: google-chat-organization-handle
+          items:
+            $ref: '#/components/schemas/GoogleChatOrganizationHandleResponseData'
+          type: array
+      required:
+      - data
+      type: object
+    GoogleChatUpdateOrganizationHandleRequest:
+      description: Update organization handle request.
+      properties:
+        data:
+          $ref: '#/components/schemas/GoogleChatUpdateOrganizationHandleRequestData'
+        type:
+          $ref: '#/components/schemas/GoogleChatOrganizationHandleType'
+      required:
+      - type
+      - data
+      type: object
+    GoogleChatUpdateOrganizationHandleRequestAttributes:
+      description: Organization handle attributes for an update request.
+      properties:
+        name:
+          description: Organization handle name.
+          example: fake-handle-name
+          maxLength: 255
+          type: string
+        space_resource_name:
+          description: Google space resource name.
+          example: spaces/AAAAAAAAA
+          maxLength: 255
+          type: string
+      type: object
+    GoogleChatUpdateOrganizationHandleRequestData:
+      description: Organization handle data for an update request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GoogleChatUpdateOrganizationHandleRequestAttributes'
+      required:
+      - attributes
+      type: object
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
       nullable: true
@@ -73321,6 +73547,173 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_edit
+  /api/v2/integration/google-chat/organizations/app/named-spaces/{domain_name}/{space_display_name}:
+    get:
+      description: Get the resource name and organization binding ID of a space in
+        the Datadog Google Chat integration.
+      operationId: GetSpaceByDisplayName
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationDomainNamePathParameter'
+      - $ref: '#/components/parameters/GoogleChatOrganizationSpaceDisplayNamePathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatAppNamedSpaceResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get space information by display name
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles:
+    get:
+      description: Get a list of all organization handles from the Datadog Google
+        Chat integration.
+      operationId: ListOrganizationHandles
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandlesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all organization handles
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+    post:
+      description: Create an organization handle in the Datadog Google Chat integration.
+      operationId: CreateOrganizationHandle
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleChatCreateOrganizationHandleRequest'
+        description: Organization handle payload.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create organization handle
+      tags:
+      - Google Chat Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+  /api/v2/integration/google-chat/organizations/{organization_binding_id}/organization-handles/{handle_id}:
+    delete:
+      description: Delete an organization handle from the Datadog Google Chat integration.
+      operationId: DeleteOrganizationHandle
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      - $ref: '#/components/parameters/GoogleChatHandleIdPathParameter'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete organization handle
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+    get:
+      description: Get an organization handle from the Datadog Google Chat integration.
+      operationId: GetOrganizationHandle
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      - $ref: '#/components/parameters/GoogleChatHandleIdPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get organization handle
+      tags:
+      - Google Chat Integration
+      x-menu-order: 1
+    patch:
+      description: Update an organization handle from the Datadog Google Chat integration.
+      operationId: UpdateOrganizationHandle
+      parameters:
+      - $ref: '#/components/parameters/GoogleChatOrganizationBindingIdPathParameter'
+      - $ref: '#/components/parameters/GoogleChatHandleIdPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoogleChatUpdateOrganizationHandleRequest'
+        description: Organization handle payload.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleChatOrganizationHandleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update organization handle
+      tags:
+      - Google Chat Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 1
   /api/v2/integration/ms-teams/configuration/channel/{tenant_name}/{team_name}/{channel_name}:
     get:
       description: Get the tenant, team, and channel ID of a channel in the Datadog
@@ -93975,6 +94368,14 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/google_cloud_platform
   name: GCP Integration
+- description: 'Configure your [Datadog Google Chat integration](https://docs.datadoghq.com/integrations/google-hangouts-chat/)
+
+    directly through the Datadog API.'
+  externalDocs:
+    description: For more information about the Datadog Google Chat integration, see
+      the integration page.
+    url: https://docs.datadoghq.com/integrations/google-hangouts-chat/
+  name: Google Chat Integration
 - description: 'The IP allowlist API is used to manage the IP addresses that
 
     can access the Datadog API and web UI. It does not block

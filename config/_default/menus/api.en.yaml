@@ -8164,6 +8164,82 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: Google Chat Integration
+      url: /api/latest/google-chat-integration/
+      identifier: google-chat-integration
+      generated: true
+    - name: Update organization handle
+      url: '#update-organization-handle'
+      identifier: google-chat-integration-update-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get organization handle
+      url: '#get-organization-handle'
+      identifier: google-chat-integration-get-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Delete organization handle
+      url: '#delete-organization-handle'
+      identifier: google-chat-integration-delete-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Create organization handle
+      url: '#create-organization-handle'
+      identifier: google-chat-integration-create-organization-handle
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrganizationHandle
+        unstable: []
+        order: 1
+    - name: Get all organization handles
+      url: '#get-all-organization-handles'
+      identifier: google-chat-integration-get-all-organization-handles
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrganizationHandles
+        unstable: []
+        order: 1
+    - name: Get space information by display name
+      url: '#get-space-information-by-display-name'
+      identifier: google-chat-integration-get-space-information-by-display-name
+      parent: google-chat-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSpaceByDisplayName
+        unstable: []
+        order: 1
     - name: IP Allowlist
       url: /api/latest/ip-allowlist/
       identifier: ip-allowlist
