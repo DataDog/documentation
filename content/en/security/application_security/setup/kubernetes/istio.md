@@ -59,28 +59,6 @@ Use automatic configuration if you want to:
 **Note:** The processor service name must match the name of the Service you deployed in Step 1.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Add the following to your `values.yaml`:
-
-```yaml
-datadog:
-  appsec:
-    injector:
-      enabled: true
-      processor:
-        service:
-          name: datadog-aap-extproc-service  # Required: must match your external processor service name
-          namespace: datadog                 # Must match the namespace where the service is deployed
-```
-
-Install or upgrade the Datadog Helm chart:
-
-```bash
-helm upgrade -i datadog-agent datadog/datadog -f values.yaml
-```
-
-{{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
 Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
@@ -102,6 +80,30 @@ Apply the configuration:
 
 ```bash
 kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+
+
+{{% tab "Helm" %}}
+
+Add the following to your `values.yaml`:
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      processor:
+        service:
+          name: datadog-aap-extproc-service  # Required: must match your external processor service name
+          namespace: datadog                 # Must match the namespace where the service is deployed
+```
+
+Install or upgrade the Datadog Helm chart:
+
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
 
 {{% /tab %}}

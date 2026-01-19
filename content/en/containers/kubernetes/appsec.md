@@ -68,8 +68,8 @@ Before enabling App and API Protection for Kubernetes, ensure you have:
 - 1. A running Kubernetes cluster (version 1.20 or later)
 - 2. [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
 - 3. One or more supported proxies installed:
--   - [Envoy Gateway][2]
--   - [Istio][3]
+    - [Envoy Gateway][2]
+    - [Istio][3]
 - 4. [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
 
 ## How it works
@@ -176,28 +176,6 @@ Configure the integration using either Helm or the Datadog Operator:
 **Note:** The processor service name (`datadog-aap-extproc-service`) must match the name of the Service you deployed in Step 1.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-Configure App and API Protection for Kubernetes using Helm values. Add the following to your `values.yaml`:
-
-```yaml
-datadog:
-  appsec:
-    injector:
-      enabled: true
-      processor:
-        service:
-          name: datadog-aap-extproc-service  # Required: must match your external processor service name
-          namespace: datadog                 # Must match the namespace where the service is deployed
-```
-
-Install or upgrade the Datadog Helm chart (v3.153+):
-
-```bash
-helm upgrade -i datadog-agent datadog/datadog -f values.yaml
-```
-
-{{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
 You have installed the Datadog Operator (v1.22.0+):
@@ -221,6 +199,28 @@ Apply the configuration:
 
 ```bash
 kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Configure App and API Protection for Kubernetes using Helm values. Add the following to your `values.yaml`:
+
+```yaml
+datadog:
+  appsec:
+    injector:
+      enabled: true
+      processor:
+        service:
+          name: datadog-aap-extproc-service  # Required: must match your external processor service name
+          namespace: datadog                 # Must match the namespace where the service is deployed
+```
+
+Install or upgrade the Datadog Helm chart (v3.153+):
+
+```bash
+helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
 
 {{% /tab %}}
