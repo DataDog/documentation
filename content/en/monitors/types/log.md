@@ -46,7 +46,8 @@ As you define the search query, the graph above the search fields updates.
     * **Monitor over a facet or an attribute**: If a an attribute is selected, the monitor alerts over the `Unique value count` of the attribute. For example, if you have an attribute such as `user.email`, the unique value count is the number of unique user emails. Any attribute can be used in a monitor, but only facets are shown in the autocompletion.
     * **Monitor over measure**: If a [measure][6] is selected, the monitor alerts over the numerical value of the log facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group logs by multiple dimensions (optional):
-   All logs matching the query are aggregated into groups based on the value of tags, attributes, and up to four facets. When there are multiple dimensions, the number of top or bottom values can be selected for each dimension specifically.
+
+   Datadog aggregates all logs matching the query into groups based on the values of tags, attributes, and up to four facets. When there are multiple dimensions, you can select the number of top or bottom values for each dimension.
 
    The total limit, irrespective of the number of facets, is 1000 top values. If this is increased above 1000, the top values for the other dimensions are adjusted to ensure the number of the resulting combinations is less than 1000. The default top values for every group-by is 10, with the exception of the fourth which will default to 5 top values.
 
