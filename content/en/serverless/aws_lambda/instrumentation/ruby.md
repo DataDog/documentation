@@ -31,7 +31,27 @@ Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI co
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Ruby AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Ruby AWS Lambda application directly within Datadog.
+
+1. Configure your Lambda functions
+
+    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
+
+    ```ruby
+    require 'datadog/lambda'
+
+    Datadog::Lambda.configure_apm do |c|
+    # Enable the instrumentation
+    end
+
+    def handler(event:, context:)
+        Datadog::Lambda.wrap(event, context) do
+            return { statusCode: 200, body: 'Hello World' }
+        end
+    end
+    ```
+
+2. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
