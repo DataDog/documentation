@@ -65,12 +65,12 @@ More proxies are available via manual installation on the global [setup page][10
 
 Before enabling App and API Protection for Kubernetes, ensure you have:
 
-- 1. A running Kubernetes cluster (version 1.20 or later)
-- 2. [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
-- 3. One or more supported proxies installed:
-    - [Envoy Gateway][2]
-    - [Istio][3]
-- 4. [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
+- A running Kubernetes cluster (version 1.20 or later)
+- [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
+- One or more supported proxies installed:
+  - [Envoy Gateway][2]
+  - [Istio][3]
+- [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
 
 ## How it works
 
