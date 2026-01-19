@@ -163,10 +163,6 @@
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
-  "jira-integration": {
-    "name": "Jira Integration",
-    "description": "Manage your Jira Integration. Atlassian Jira is a project management and issue tracking tool for teams to coordinate work and handle tasks efficiently."
-  },
   "key-management": {
     "name": "Key Management",
     "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
