@@ -50,19 +50,24 @@ Use automatic configuration if you want to:
 
 **1. Deploy the external processor** using the deployment manifest shown in [Step 1](#1-deploy-the-datadog-external-processor-service) below.
 
-**2. Enable automatic configuration** using Helm values:
+**2. Enable automatic configuration** using Helm or the Datadog Operator.
+
+**Note:** The processor service name must match the name of the Service you deployed in Step 1.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Add the following to your `values.yaml`:
 
 ```yaml
 datadog:
   appsec:
     injector:
       enabled: true
-      autoDetect: true
       processor:
         service:
-          name: datadog-aap-extproc-service  # Required: name of the processor service
-          namespace: datadog                  # Optional: defaults to Cluster Agent namespace
-        port: 443
+          name: datadog-aap-extproc-service  # Required: must match your external processor service name
+          namespace: datadog                 # Must match the namespace where the service is deployed
 ```
 
 Install or upgrade the Datadog Helm chart:
@@ -70,6 +75,33 @@ Install or upgrade the Datadog Helm chart:
 ```bash
 helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
+
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/appsec.injector.enabled: "true"
+    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required
+    agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
+spec:
+  # ... your existing DatadogAgent configuration
+```
+
+Apply the configuration:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **3. Once enabled, the Datadog Cluster Agent:**
 - Detects your Envoy Gateway installations
