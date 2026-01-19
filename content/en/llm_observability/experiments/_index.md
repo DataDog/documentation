@@ -1025,7 +1025,7 @@ Push events (spans and metrics) for an experiment.
 | `timestamp_ms` | number | UNIX timestamp in milliseconds. |
 | `label` | string | Metric label (evaluator name). |
 | `score_value` | number | Score value (when `metric_type` is `score`). |
-| `categorical_value` | string | Categorical value (when `metric_type` is `categorical`). |
+| `categorical_value` | string | Categorical value (when `metric_type` is `categorical`). May not be empty string. |
 | `metadata` | json | Arbitrary key-value metadata associated with the metric. |
 | `error.message` | string | Optional error message for the metric. |
 
