@@ -83,7 +83,7 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-7. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
+7. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. An autocomplete dropdown appears when you type `{{` to help you select available fields.
 
 ### Define the evaluation output
 
