@@ -47,49 +47,48 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
     {{< img src="tests/flaky-policies-2.png" alt="Flaky Test Policies page with the Edit Policies flyout open to configure a policy" style="width:100%;" >}}
 
 3. Use the toggles to enable specific automated actions, and use automation rules to further customize how tests get quarantined, disabled, or retried:
-
-<table>
-  <thead>
-    <tr>
-      <th>Action</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Quarantine</strong></td>
-      <td>
-        <p>Toggle to allow flaky tests to be quarantined for this repository.</p>
-        <p>Customize automation rules based on:</p>
-        <ul>
-          <li><strong>Time</strong>: Quarantine a test if its status is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
-          <li><strong>Branch</strong>: Quarantine an <code>Active</code> test if it flakes in one or more specified branches.</li>
-          <li><strong>Failure rate</strong>: Quarantine an <code>Active</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Disable</strong></td>
-      <td>
-        <p>Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness.</p>
-        <p>Customize automation rules based on:</p>
-        <ul>
-          <li><strong>Status and time</strong>: Disable a test if it has a specified status for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
-          <li><strong>Branch</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if it flakes in one or more specified branches.</li>
-          <li><strong>Failure rate</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><strong>Attempt&nbsp;to&nbsp;Fix</strong></td>
-      <td>When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix.</td>
-    </tr>
-    <tr>
-      <td><strong>Fixed</strong></td>
-      <td>If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized.</td>
-    </tr>
-  </tbody>
-  </table>
+   <table>
+     <thead>
+       <tr>
+         <th>Action</th>
+         <th>Description</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td><strong>Quarantine</strong></td>
+         <td>
+           <p>Toggle to allow flaky tests to be quarantined for this repository.</p>
+           <p>Customize automation rules based on:</p>
+           <ul>
+             <li><strong>Time</strong>: Quarantine a test if its status is <code>Active</code> for a specified number of days. The rule is triggered every day at 12:15 UTC.</li>
+             <li><strong>Branch</strong>: Quarantine an <code>Active</code> test if it flakes in one or more specified branches.</li>
+             <li><strong>Failure rate</strong>: Quarantine an <code>Active</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
+           </ul>
+         </td>
+       </tr>
+       <tr>
+         <td><strong>Disable</strong></td>
+         <td>
+           <p>Toggle to allow flaky tests to be disabled for this repository. You may want to do this after quarantining or to protect specific branches from flakiness.</p>
+           <p>Customize automation rules based on:</p>
+           <ul>
+             <li><strong>Status and time</strong>: Disable a test if it has a specified status for a specified number of days. The rule is triggered every day at 12:30 UTC.</li>
+             <li><strong>Branch</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if it flakes in one or more specified branches.</li>
+             <li><strong>Failure rate</strong>: Disable an <code>Active</code> or <code>Quarantined</code> test if its failure rate over the last 7 days is greater or equal to the specified threshold. The rule is triggered every 15 minutes.</li>
+           </ul>
+         </td>
+       </tr>
+       <tr>
+         <td><strong>Attempt&nbsp;to&nbsp;Fix</strong></td>
+         <td>When you attempt to fix a flaky test, automatically retry the test a specified number of times on the commit containing the fix.</td>
+       </tr>
+       <tr>
+         <td><strong>Fixed</strong></td>
+         <td>If a flaky test no longer flakes for 30 days, it is automatically moved to Fixed status. This automation is default behavior and can't be customized.</td>
+       </tr>
+     </tbody>
+   </table>
 
 ## Track evolution of flaky tests
 
