@@ -3542,6 +3542,34 @@
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
   },
+  "ListWebIntegrationAccounts": {
+    "description": "Retrieve all configured accounts for a specific integration within your organization.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "List integration accounts"
+  },
+  "CreateWebIntegrationAccount": {
+    "description": "Create a new account for a specific integration. The account configuration must conform\nto the schema defined for the integration, which can be retrieved using the schema endpoint.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "Create integration account",
+    "request_description": "",
+    "request_schema_description": "Payload for creating a web integration account."
+  },
+  "GetWebIntegrationAccountSchema": {
+    "description": "Get the JSON schema that defines the structure and validation rules for account configuration\nof a specific integration. This schema describes the required and optional fields for both\nsettings and secrets when creating or updating an account.\n\nRate limit: 12000 requests per organization every 60 seconds.",
+    "summary": "Get account schema for an integration"
+  },
+  "DeleteWebIntegrationAccount": {
+    "description": "Delete a specific account by its ID for a given integration. This will remove the\naccount configuration and stop any data collection associated with it.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "Delete integration account"
+  },
+  "GetWebIntegrationAccount": {
+    "description": "Retrieve a specific account by its ID for a given integration. The response includes\nthe account name and settings, but excludes sensitive secret values.\n\nRate limit: 12000 requests per organization every 60 seconds.",
+    "summary": "Get integration account"
+  },
+  "UpdateWebIntegrationAccount": {
+    "description": "Update an existing account for a specific integration. You can update the name, settings,\nand/or secrets. Only the fields provided in the request will be updated.\n\nRate limit: 50 requests per user every 20 seconds.",
+    "summary": "Update integration account",
+    "request_description": "",
+    "request_schema_description": "Payload for updating a web integration account."
+  },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",
     "summary": "Create a Workflow",

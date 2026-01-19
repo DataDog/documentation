@@ -1251,6 +1251,394 @@ components:
             $ref: '#/components/schemas/JSONAPIErrorResponse'
       description: The server cannot process the request because it contains invalid
         data.
+    WebIntegrationAccountSchemaBadRequestResponse:
+      content:
+        application/json:
+          examples:
+            invalid_integration_name:
+              summary: Invalid integration name format
+              value:
+                errors:
+                - detail: Invalid integration name format
+                  status: '400'
+                  title: Bad Request
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Bad Request: The integration name format is invalid.'
+    WebIntegrationAccountSchemaForbiddenResponse:
+      content:
+        application/json:
+          examples:
+            integration_not_allowed:
+              summary: Integration not allowed
+              value:
+                errors:
+                - detail: The API is currently disabled for this integration
+                  status: '403'
+                  title: Integration Not Allowed
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Forbidden: The integration is not enabled for API access.'
+    WebIntegrationAccountSchemaNotFoundResponse:
+      content:
+        application/json:
+          examples:
+            schema_not_found:
+              summary: Schema not found for integration
+              value:
+                errors:
+                - detail: 'Schema not found for integration: twilio'
+                  status: '404'
+                  title: Not Found
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Not Found: The integration does not exist or has no schema available.'
+    WebIntegrationAccountSchemaTooManyRequestsResponse:
+      content:
+        application/json:
+          examples:
+            rate_limit_exceeded:
+              summary: Rate limit exceeded
+              value:
+                errors:
+                - detail: Rate limit exceeded. Please retry after the rate limit window
+                    expires.
+                  status: '429'
+                  title: Too Many Requests
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Too Many Requests: Rate limit exceeded.
+
+        This endpoint has a rate limit of 12000 requests per organization every 60
+        seconds.'
+    WebIntegrationCreateAccountBadRequestResponse:
+      content:
+        application/json:
+          examples:
+            invalid_request:
+              summary: Invalid request body
+              value:
+                errors:
+                - detail: 'Invalid request body: missing required field ''name'''
+                  status: '400'
+                  title: Bad Request
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Bad Request: The request body is malformed or the integration
+        name format is invalid.'
+    WebIntegrationCreateAccountForbiddenResponse:
+      content:
+        application/json:
+          examples:
+            permission_denied:
+              summary: Permission denied
+              value:
+                errors:
+                - detail: User does not have permission to manage integrations
+                  status: '403'
+                  title: Forbidden
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Forbidden: The integration is not enabled for API access or the
+        user lacks permissions to manage integrations.'
+    WebIntegrationCreateAccountNotFoundResponse:
+      content:
+        application/json:
+          examples:
+            integration_not_found:
+              summary: Integration not found
+              value:
+                errors:
+                - detail: 'Integration not found: unknown_integration'
+                  status: '404'
+                  title: Not Found
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Not Found: The integration does not exist.'
+    WebIntegrationCreateAccountTooManyRequestsResponse:
+      content:
+        application/json:
+          examples:
+            rate_limit_exceeded:
+              summary: Rate limit exceeded
+              value:
+                errors:
+                - detail: Rate limit exceeded. Please retry after 20 seconds.
+                  status: '429'
+                  title: Too Many Requests
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Too Many Requests: Rate limit exceeded.
+
+        This endpoint has a rate limit of 50 requests per user every 20 seconds.'
+    WebIntegrationCreateAccountUnprocessableEntityResponse:
+      content:
+        application/json:
+          examples:
+            validation_failed:
+              summary: Validation failed
+              value:
+                errors:
+                - detail: settings.account_sid is required
+                  status: '422'
+                  title: Unprocessable Entity
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Unprocessable Entity: The account configuration does not match
+        the integration schema.'
+    WebIntegrationDeleteAccountBadRequestResponse:
+      content:
+        application/json:
+          examples:
+            invalid_account_id:
+              summary: Invalid account ID format
+              value:
+                errors:
+                - detail: Invalid account ID format
+                  status: '400'
+                  title: Bad Request
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Bad Request: The integration name or account ID format is invalid.'
+    WebIntegrationDeleteAccountForbiddenResponse:
+      content:
+        application/json:
+          examples:
+            permission_denied:
+              summary: Permission denied
+              value:
+                errors:
+                - detail: User does not have permission to delete this account
+                  status: '403'
+                  title: Forbidden
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Forbidden: The integration is not enabled for API access or the
+        user lacks permissions to manage this account.'
+    WebIntegrationDeleteAccountNotFoundResponse:
+      content:
+        application/json:
+          examples:
+            account_not_found:
+              summary: Account not found
+              value:
+                errors:
+                - detail: 'Account not found: abc123def456'
+                  status: '404'
+                  title: Not Found
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Not Found: The integration or account does not exist.'
+    WebIntegrationDeleteAccountTooManyRequestsResponse:
+      content:
+        application/json:
+          examples:
+            rate_limit_exceeded:
+              summary: Rate limit exceeded
+              value:
+                errors:
+                - detail: Rate limit exceeded. Please retry after 20 seconds.
+                  status: '429'
+                  title: Too Many Requests
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Too Many Requests: Rate limit exceeded.
+
+        This endpoint has a rate limit of 50 requests per user every 20 seconds.'
+    WebIntegrationGetAccountBadRequestResponse:
+      content:
+        application/json:
+          examples:
+            invalid_account_id:
+              summary: Invalid account ID format
+              value:
+                errors:
+                - detail: Invalid account ID format
+                  status: '400'
+                  title: Bad Request
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Bad Request: The integration name or account ID format is invalid.'
+    WebIntegrationGetAccountForbiddenResponse:
+      content:
+        application/json:
+          examples:
+            permission_denied:
+              summary: Permission denied
+              value:
+                errors:
+                - detail: User does not have permission to access this account
+                  status: '403'
+                  title: Forbidden
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Forbidden: The integration is not enabled for API access or the
+        user lacks required permissions.'
+    WebIntegrationGetAccountNotFoundResponse:
+      content:
+        application/json:
+          examples:
+            account_not_found:
+              summary: Account not found
+              value:
+                errors:
+                - detail: 'Account not found: abc123def456'
+                  status: '404'
+                  title: Not Found
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Not Found: The integration or account does not exist.'
+    WebIntegrationGetAccountTooManyRequestsResponse:
+      content:
+        application/json:
+          examples:
+            rate_limit_exceeded:
+              summary: Rate limit exceeded
+              value:
+                errors:
+                - detail: Rate limit exceeded. Please retry after 60 seconds.
+                  status: '429'
+                  title: Too Many Requests
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Too Many Requests: Rate limit exceeded.
+
+        This endpoint has a rate limit of 12000 requests per organization every 60
+        seconds.'
+    WebIntegrationListAccountsBadRequestResponse:
+      content:
+        application/json:
+          examples:
+            invalid_integration_name:
+              summary: Invalid integration name format
+              value:
+                errors:
+                - detail: Invalid integration name format
+                  status: '400'
+                  title: Bad Request
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Bad Request: The integration name format is invalid.'
+    WebIntegrationListAccountsForbiddenResponse:
+      content:
+        application/json:
+          examples:
+            integration_not_allowed:
+              summary: Integration not allowed
+              value:
+                errors:
+                - detail: The API is currently disabled for this integration
+                  status: '403'
+                  title: Forbidden
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Forbidden: The integration is not enabled for API access or the
+        user lacks required permissions.'
+    WebIntegrationListAccountsNotFoundResponse:
+      content:
+        application/json:
+          examples:
+            integration_not_found:
+              summary: Integration not found
+              value:
+                errors:
+                - detail: 'Integration not found: unknown_integration'
+                  status: '404'
+                  title: Not Found
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Not Found: The integration does not exist.'
+    WebIntegrationListAccountsTooManyRequestsResponse:
+      content:
+        application/json:
+          examples:
+            rate_limit_exceeded:
+              summary: Rate limit exceeded
+              value:
+                errors:
+                - detail: Rate limit exceeded. Please retry after 20 seconds.
+                  status: '429'
+                  title: Too Many Requests
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Too Many Requests: Rate limit exceeded.
+
+        This endpoint has a rate limit of 50 requests per user every 20 seconds.'
+    WebIntegrationUpdateAccountBadRequestResponse:
+      content:
+        application/json:
+          examples:
+            invalid_request:
+              summary: Invalid request body
+              value:
+                errors:
+                - detail: Invalid request body format
+                  status: '400'
+                  title: Bad Request
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Bad Request: The request body is malformed or the integration
+        name/account ID format is invalid.'
+    WebIntegrationUpdateAccountForbiddenResponse:
+      content:
+        application/json:
+          examples:
+            permission_denied:
+              summary: Permission denied
+              value:
+                errors:
+                - detail: User does not have permission to update this account
+                  status: '403'
+                  title: Forbidden
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Forbidden: The integration is not enabled for API access or the
+        user lacks permissions to manage this account.'
+    WebIntegrationUpdateAccountNotFoundResponse:
+      content:
+        application/json:
+          examples:
+            account_not_found:
+              summary: Account not found
+              value:
+                errors:
+                - detail: 'Account not found: abc123def456'
+                  status: '404'
+                  title: Not Found
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Not Found: The integration or account does not exist.'
+    WebIntegrationUpdateAccountTooManyRequestsResponse:
+      content:
+        application/json:
+          examples:
+            rate_limit_exceeded:
+              summary: Rate limit exceeded
+              value:
+                errors:
+                - detail: Rate limit exceeded. Please retry after 20 seconds.
+                  status: '429'
+                  title: Too Many Requests
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Too Many Requests: Rate limit exceeded.
+
+        This endpoint has a rate limit of 50 requests per user every 20 seconds.'
+    WebIntegrationUpdateAccountUnprocessableEntityResponse:
+      content:
+        application/json:
+          examples:
+            validation_failed:
+              summary: Validation failed
+              value:
+                errors:
+                - detail: settings.api_key must be at least 32 characters
+                  status: '422'
+                  title: Unprocessable Entity
+          schema:
+            $ref: '#/components/schemas/APIErrorResponse'
+      description: 'Unprocessable Entity: The account configuration does not match
+        the integration schema.'
   schemas:
     APIErrorResponse:
       description: API error response.
@@ -49490,18 +49878,6 @@ components:
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
-    SecurityMonitoringPaginatedSuppressionsResponse:
-      description: Response object containing the available suppression rules with
-        pagination metadata.
-      properties:
-        data:
-          description: A list of suppressions objects.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringSuppression'
-          type: array
-        meta:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionsMeta'
-      type: object
     SecurityMonitoringReferenceTable:
       description: Reference tables used in the queries.
       properties:
@@ -51651,31 +52027,6 @@ components:
         data:
           $ref: '#/components/schemas/SecurityMonitoringSuppression'
       type: object
-    SecurityMonitoringSuppressionSort:
-      description: The sort parameters used for querying suppression rules.
-      enum:
-      - name
-      - start_date
-      - expiration_date
-      - update_date
-      - enabled
-      - -name
-      - -start_date
-      - -expiration_date
-      - -update_date
-      - -enabled
-      type: string
-      x-enum-varnames:
-      - NAME
-      - START_DATE
-      - EXPIRATION_DATE
-      - UPDATE_DATE
-      - ENABLED
-      - NAME_DESCENDING
-      - START_DATE_DESCENDING
-      - EXPIRATION_DATE_DESCENDING
-      - UPDATE_DATE_DESCENDING
-      - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
       description: The type of the resource. The value should always be `suppressions`.
@@ -51770,31 +52121,6 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
       required:
       - data
-      type: object
-    SecurityMonitoringSuppressionsMeta:
-      description: Metadata for the suppression list response.
-      properties:
-        page:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionsPageMeta'
-      type: object
-    SecurityMonitoringSuppressionsPageMeta:
-      description: Pagination metadata.
-      properties:
-        pageNumber:
-          description: Current page number.
-          example: 0
-          format: int64
-          type: integer
-        pageSize:
-          description: Current page size.
-          example: 2
-          format: int64
-          type: integer
-        totalCount:
-          description: Total count of suppressions.
-          example: 2
-          format: int64
-          type: integer
       type: object
     SecurityMonitoringSuppressionsResponse:
       description: Response object containing the available suppression rules.
@@ -60732,6 +61058,412 @@ components:
       - X_CONTENT_TYPE_HEADER_MISSING
       - X_PATH_INJECTION
       - XSS
+    WebIntegrationAccountAttributes:
+      description: Attributes for a web integration account.
+      properties:
+        name:
+          description: The name of the account.
+          example: My Production Account
+          type: string
+        settings:
+          additionalProperties: {}
+          description: 'Integration-specific settings for the account. The structure
+            and required fields vary by integration type.
+
+            Use the schema endpoint to retrieve the specific requirements for each
+            integration.'
+          example:
+            account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            alerts: false
+            api_key: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            call_summaries: true
+            ccm_enabled: true
+            censor_logs: true
+            events: true
+            messages: true
+          type: object
+      required:
+      - name
+      - settings
+      type: object
+    WebIntegrationAccountCreateRequest:
+      description: Payload for creating a web integration account.
+      properties:
+        data:
+          $ref: '#/components/schemas/WebIntegrationAccountCreateRequestData'
+      required:
+      - data
+      type: object
+    WebIntegrationAccountCreateRequestAttributes:
+      description: Attributes for creating a web integration account.
+      properties:
+        name:
+          description: The name of the account.
+          example: My Production Account
+          type: string
+        secrets:
+          additionalProperties: {}
+          description: 'Sensitive credentials for the account. The structure and required
+            fields vary by integration type.
+
+            These values are write-only and never returned in responses. Use the schema
+            endpoint to determine
+
+            which secret fields are required for your specific integration.'
+          example:
+            api_key_token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          type: object
+        settings:
+          additionalProperties: {}
+          description: 'Integration-specific settings for the account. The structure
+            and required fields vary by integration type.
+
+            Use the schema endpoint (GET /api/v2/web-integrations/{integration_name}/accounts/schema)
+            to retrieve
+
+            the specific requirements for your integration before creating an account.'
+          example:
+            account_sid: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            alerts: true
+            api_key: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            call_summaries: true
+            ccm_enabled: true
+            censor_logs: true
+            events: true
+            messages: true
+          type: object
+      required:
+      - name
+      - settings
+      - secrets
+      type: object
+    WebIntegrationAccountCreateRequestData:
+      description: Data object for creating a web integration account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WebIntegrationAccountCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/WebIntegrationAccountType'
+      required:
+      - type
+      - attributes
+      type: object
+    WebIntegrationAccountResponse:
+      description: Response containing a single web integration account.
+      properties:
+        data:
+          $ref: '#/components/schemas/WebIntegrationAccountResponseData'
+        integration_name:
+          description: The name of the integration.
+          example: twilio
+          type: string
+      type: object
+    WebIntegrationAccountResponseData:
+      description: Data object for a web integration account response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WebIntegrationAccountAttributes'
+        id:
+          description: The unique identifier for the account.
+          example: abc123def456
+          type: string
+        type:
+          $ref: '#/components/schemas/WebIntegrationAccountType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    WebIntegrationAccountSchemaResponse:
+      description: 'Response containing the JSON schema for an integration''s account
+        configuration.
+
+        This schema defines the required and optional fields for both settings and
+        secrets,
+
+        including field types, validation rules, and descriptions.
+
+
+        The response is a standard [JSON Schema (draft-07)](https://json-schema.org/draft-07/schema#)
+        document describing the account
+
+        configuration structure. Since this is a dynamic JSON Schema, the exact properties
+
+        will vary by integration.'
+      example:
+        $schema: http://json-schema.org/draft-07/schema#
+        properties:
+          secrets:
+            $ref: '#/components/schemas/WebIntegrationAccountSchemaResponseExampleSecrets'
+          settings:
+            $ref: '#/components/schemas/WebIntegrationAccountSchemaResponseExampleSettings'
+        required:
+        - settings
+        - secrets
+        type: object
+      properties:
+        $schema:
+          description: The JSON Schema version URI.
+          example: http://json-schema.org/draft-07/schema#
+          type: string
+        additionalProperties:
+          description: Whether additional properties are allowed at the root level
+            (typically false).
+          example: false
+          type: boolean
+        properties:
+          $ref: '#/components/schemas/WebIntegrationAccountSchemaResponseProperties'
+        required:
+          description: List of required top-level properties.
+          example:
+          - settings
+          - secrets
+          items:
+            type: string
+          type: array
+        type:
+          description: The root type of the schema (always "object").
+          example: object
+          type: string
+      required:
+      - $schema
+      - type
+      - properties
+      - required
+      type: object
+    WebIntegrationAccountSchemaResponseExampleSecrets:
+      additionalProperties: false
+      properties:
+        api_key_token:
+          description: Twilio API Key Secret (token) corresponding to the API Key
+            SID. Keep this secure as it provides authentication access.
+          example: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          minLength: 1
+          type: string
+      required:
+      - api_key_token
+      type: object
+    WebIntegrationAccountSchemaResponseExampleSettings:
+      additionalProperties: false
+      properties:
+        account_sid:
+          description: Twilio Account SID that uniquely identifies your Twilio account.
+            Found in Twilio Console > Account Info.
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          minLength: 1
+          type: string
+        alerts:
+          default: false
+          description: Enable collection of Twilio Alerts logs to monitor account
+            alerts and notifications.
+          type: boolean
+        api_key:
+          description: Twilio API Key SID for authentication. Create from Twilio Console
+            > Account > API Keys & Tokens.
+          example: SKxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          minLength: 1
+          type: string
+        call_summaries:
+          default: false
+          description: Enable collection of Twilio Voice call summaries to track voice
+            call performance and metadata.
+          type: boolean
+        ccm_enabled:
+          default: false
+          description: Enable Cloud Cost Management to monitor Twilio usage costs
+            and identify optimization opportunities.
+          type: boolean
+        censor_logs:
+          default: false
+          description: Enable censoring of sensitive data in logs. When true, phone
+            numbers and SMS message bodies are censored for privacy.
+          type: boolean
+        events:
+          default: false
+          description: Enable collection of Twilio Events logs to monitor account-level
+            events and activities.
+          type: boolean
+        messages:
+          default: false
+          description: Enable collection of Twilio Messages logs to track SMS and
+            messaging activity.
+          type: boolean
+      required:
+      - api_key
+      - account_sid
+      type: object
+    WebIntegrationAccountSchemaResponseProperties:
+      description: 'The properties object containing settings and secrets schema definitions.
+
+        Both are always present in every integration schema.'
+      properties:
+        secrets:
+          $ref: '#/components/schemas/WebIntegrationAccountSchemaResponseSecretsObject'
+        settings:
+          $ref: '#/components/schemas/WebIntegrationAccountSchemaResponseSettingsObject'
+      required:
+      - settings
+      - secrets
+      type: object
+    WebIntegrationAccountSchemaResponseSecretsObject:
+      description: 'JSON Schema definition for the secrets object.
+
+        Contains sensitive credentials required for the integration such as API keys,
+
+        tokens, and passwords. These values are write-only and never returned in responses.'
+      properties:
+        additionalProperties:
+          description: Whether additional properties are allowed (typically false).
+          example: false
+          type: boolean
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/WebIntegrationAccountSchemaResponseSettingsField'
+          description: 'The individual secret fields for this integration.
+
+            Field names and types vary by integration.'
+          type: object
+        required:
+          description: List of required secret field names.
+          items:
+            type: string
+          type: array
+        type:
+          description: Always "object" for the secrets container.
+          example: object
+          type: string
+      type: object
+    WebIntegrationAccountSchemaResponseSettingsField:
+      description: 'JSON Schema definition for a single field within settings or secrets.
+
+        The exact fields vary by integration.'
+      properties:
+        additionalProperties:
+          description: Whether additional properties are allowed for this field.
+          example: false
+          type: boolean
+        default:
+          description: Default value for the field if not provided.
+        description:
+          description: Human-readable description of the field's purpose.
+          example: API key for authentication
+          type: string
+        items:
+          description: Schema for array items when type is "array".
+          type: object
+        minLength:
+          description: Minimum length for string fields.
+          example: 1
+          format: int64
+          type: integer
+        type:
+          description: The data type of the field (string, boolean, integer, array,
+            object).
+          example: string
+          type: string
+      type: object
+    WebIntegrationAccountSchemaResponseSettingsObject:
+      description: 'JSON Schema definition for the settings object.
+
+        Contains integration-specific configuration fields such as account identifiers,
+
+        feature toggles, and non-sensitive configuration options.'
+      properties:
+        additionalProperties:
+          description: Whether additional properties are allowed (typically false).
+          example: false
+          type: boolean
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/WebIntegrationAccountSchemaResponseSettingsField'
+          description: 'The individual setting fields for this integration.
+
+            Field names and types vary by integration.'
+          type: object
+        required:
+          description: List of required setting field names.
+          items:
+            type: string
+          type: array
+        type:
+          description: Always "object" for the settings container.
+          example: object
+          type: string
+      type: object
+    WebIntegrationAccountType:
+      default: Account
+      description: The JSON:API type for web integration accounts.
+      enum:
+      - Account
+      example: Account
+      type: string
+      x-enum-varnames:
+      - ACCOUNT
+    WebIntegrationAccountUpdateRequest:
+      description: Payload for updating a web integration account.
+      properties:
+        data:
+          $ref: '#/components/schemas/WebIntegrationAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    WebIntegrationAccountUpdateRequestAttributes:
+      description: 'Attributes for updating a web integration account. All fields
+        are optional -
+
+        only provide the fields you want to update. Partial updates are supported,
+
+        allowing you to modify specific settings or secrets without providing all
+        fields.'
+      properties:
+        name:
+          description: The name of the account.
+          example: My Production Account (Updated)
+          type: string
+        secrets:
+          additionalProperties: {}
+          description: 'Sensitive credentials to update. Only the secrets provided
+            will be updated.
+
+            These values are write-only and never returned in responses.'
+          example:
+            api_key_token: new_secret_token_value
+          type: object
+        settings:
+          additionalProperties: {}
+          description: 'Integration-specific settings to update. Only the fields provided
+            will be updated.
+
+            The structure varies by integration type. Refer to the integration''s
+            schema for available fields.'
+          example:
+            ccm_enabled: true
+            events: true
+            messages: false
+          type: object
+      type: object
+    WebIntegrationAccountUpdateRequestData:
+      description: Data object for updating a web integration account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WebIntegrationAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/WebIntegrationAccountType'
+      required:
+      - type
+      type: object
+    WebIntegrationAccountsResponse:
+      description: Response containing a list of web integration accounts.
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WebIntegrationAccountResponseData'
+          type: array
+        integration_name:
+          description: The name of the integration.
+          example: twilio
+          type: string
+      type: object
     Weekday:
       description: A day of the week.
       enum:
@@ -86939,29 +87671,12 @@ paths:
         required: false
         schema:
           type: string
-      - description: Attribute used to sort the list of suppression rules. Prefix
-          with `-` to sort in descending order.
-        in: query
-        name: sort
-        required: false
-        schema:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionSort'
-      - description: Size for a given page. Use `-1` to return all items.
-        in: query
-        name: page[size]
-        required: false
-        schema:
-          default: -1
-          example: 10
-          format: int64
-          type: integer
-      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringPaginatedSuppressionsResponse'
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -93370,6 +94085,286 @@ paths:
         operator: OR
         permissions:
         - teams_read
+  /api/v2/web-integrations/{integration_name}/accounts:
+    get:
+      description: 'Retrieve all configured accounts for a specific integration within
+        your organization.
+
+
+        Rate limit: 50 requests per user every 20 seconds.'
+      operationId: ListWebIntegrationAccounts
+      parameters:
+      - description: The name of the integration.
+        example: twilio
+        in: path
+        name: integration_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebIntegrationAccountsResponse'
+          description: 'OK: List of all accounts for the specified integration.'
+        '400':
+          $ref: '#/components/responses/WebIntegrationListAccountsBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/WebIntegrationListAccountsForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/WebIntegrationListAccountsNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/WebIntegrationListAccountsTooManyRequestsResponse'
+      summary: List integration accounts
+      tags:
+      - Web Integrations
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
+    post:
+      description: 'Create a new account for a specific integration. The account configuration
+        must conform
+
+        to the schema defined for the integration, which can be retrieved using the
+        schema endpoint.
+
+
+        Rate limit: 50 requests per user every 20 seconds.'
+      operationId: CreateWebIntegrationAccount
+      parameters:
+      - description: The name of the integration.
+        example: twilio
+        in: path
+        name: integration_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebIntegrationAccountCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebIntegrationAccountResponse'
+          description: 'Created: The account was successfully created.'
+        '400':
+          $ref: '#/components/responses/WebIntegrationCreateAccountBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/WebIntegrationCreateAccountForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/WebIntegrationCreateAccountNotFoundResponse'
+        '422':
+          $ref: '#/components/responses/WebIntegrationCreateAccountUnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/WebIntegrationCreateAccountTooManyRequestsResponse'
+      summary: Create integration account
+      tags:
+      - Web Integrations
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
+  /api/v2/web-integrations/{integration_name}/accounts/schema:
+    get:
+      description: 'Get the JSON schema that defines the structure and validation
+        rules for account configuration
+
+        of a specific integration. This schema describes the required and optional
+        fields for both
+
+        settings and secrets when creating or updating an account.
+
+
+        Rate limit: 12000 requests per organization every 60 seconds.'
+      operationId: GetWebIntegrationAccountSchema
+      parameters:
+      - description: The name of the integration.
+        example: twilio
+        in: path
+        name: integration_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebIntegrationAccountSchemaResponse'
+          description: 'OK: The JSON schema for the integration''s account configuration.'
+        '400':
+          $ref: '#/components/responses/WebIntegrationAccountSchemaBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/WebIntegrationAccountSchemaForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/WebIntegrationAccountSchemaNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/WebIntegrationAccountSchemaTooManyRequestsResponse'
+      summary: Get account schema for an integration
+      tags:
+      - Web Integrations
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
+  /api/v2/web-integrations/{integration_name}/accounts/{account_id}:
+    delete:
+      description: 'Delete a specific account by its ID for a given integration. This
+        will remove the
+
+        account configuration and stop any data collection associated with it.
+
+
+        Rate limit: 50 requests per user every 20 seconds.'
+      operationId: DeleteWebIntegrationAccount
+      parameters:
+      - description: The name of the integration.
+        example: twilio
+        in: path
+        name: integration_name
+        required: true
+        schema:
+          type: string
+      - description: The unique identifier of the account.
+        example: abc123def456
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK: The account was successfully deleted.'
+        '400':
+          $ref: '#/components/responses/WebIntegrationDeleteAccountBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/WebIntegrationDeleteAccountForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/WebIntegrationDeleteAccountNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/WebIntegrationDeleteAccountTooManyRequestsResponse'
+      summary: Delete integration account
+      tags:
+      - Web Integrations
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
+    get:
+      description: 'Retrieve a specific account by its ID for a given integration.
+        The response includes
+
+        the account name and settings, but excludes sensitive secret values.
+
+
+        Rate limit: 12000 requests per organization every 60 seconds.'
+      operationId: GetWebIntegrationAccount
+      parameters:
+      - description: The name of the integration.
+        example: twilio
+        in: path
+        name: integration_name
+        required: true
+        schema:
+          type: string
+      - description: The unique identifier of the account.
+        example: abc123def456
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebIntegrationAccountResponse'
+          description: 'OK: The account details for the specified integration.'
+        '400':
+          $ref: '#/components/responses/WebIntegrationGetAccountBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/WebIntegrationGetAccountForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/WebIntegrationGetAccountNotFoundResponse'
+        '429':
+          $ref: '#/components/responses/WebIntegrationGetAccountTooManyRequestsResponse'
+      summary: Get integration account
+      tags:
+      - Web Integrations
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
+    patch:
+      description: 'Update an existing account for a specific integration. You can
+        update the name, settings,
+
+        and/or secrets. Only the fields provided in the request will be updated.
+
+
+        Rate limit: 50 requests per user every 20 seconds.'
+      operationId: UpdateWebIntegrationAccount
+      parameters:
+      - description: The name of the integration.
+        example: twilio
+        in: path
+        name: integration_name
+        required: true
+        schema:
+          type: string
+      - description: The unique identifier of the account.
+        example: abc123def456
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebIntegrationAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebIntegrationAccountResponse'
+          description: 'OK: The account was successfully updated.'
+        '400':
+          $ref: '#/components/responses/WebIntegrationUpdateAccountBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/WebIntegrationUpdateAccountForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/WebIntegrationUpdateAccountNotFoundResponse'
+        '422':
+          $ref: '#/components/responses/WebIntegrationUpdateAccountUnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/WebIntegrationUpdateAccountTooManyRequestsResponse'
+      summary: Update integration account
+      tags:
+      - Web Integrations
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
   /api/v2/workflows:
     post:
       description: Create a new workflow, returning the workflow ID. This API requires
@@ -94340,6 +95335,14 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/account_management/users
   name: Users
+- description: "Configure and manage third-party web integrations with Datadog. This
+    API provides a unified\ninterface for managing integration accounts across various
+    external services.\n\nEach integration has its own unique schema that defines
+    the required settings and secrets.\nBefore creating or updating an account, use
+    the schema endpoint to retrieve the specific\nrequirements, field types, validation
+    rules, and available configuration options for your\nintegration.\n\nSupported
+    Integrations:\n  - twilio\n  - snowflake-web\n  - databricks"
+  name: Web Integrations
 - description: Datadog Workflow Automation allows you to automate your end-to-end
     processes by connecting Datadog with the rest of your tech stack. Build workflows
     to auto-remediate your alerts, streamline your incident and security processes,

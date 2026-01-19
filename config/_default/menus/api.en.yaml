@@ -11981,6 +11981,82 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Web Integrations
+      url: /api/latest/web-integrations/
+      identifier: web-integrations
+      generated: true
+    - name: Update integration account
+      url: '#update-integration-account'
+      identifier: web-integrations-update-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateWebIntegrationAccount
+        unstable: []
+        order: 5
+    - name: Get integration account
+      url: '#get-integration-account'
+      identifier: web-integrations-get-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWebIntegrationAccount
+        unstable: []
+        order: 4
+    - name: Delete integration account
+      url: '#delete-integration-account'
+      identifier: web-integrations-delete-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteWebIntegrationAccount
+        unstable: []
+        order: 6
+    - name: Get account schema for an integration
+      url: '#get-account-schema-for-an-integration'
+      identifier: web-integrations-get-account-schema-for-an-integration
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetWebIntegrationAccountSchema
+        unstable: []
+        order: 1
+    - name: Create integration account
+      url: '#create-integration-account'
+      identifier: web-integrations-create-integration-account
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWebIntegrationAccount
+        unstable: []
+        order: 3
+    - name: List integration accounts
+      url: '#list-integration-accounts'
+      identifier: web-integrations-list-integration-accounts
+      parent: web-integrations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListWebIntegrationAccounts
+        unstable: []
+        order: 2
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation

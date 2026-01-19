@@ -339,6 +339,10 @@
     "name": "Users",
     "description": "Create, edit, and disable users."
   },
+  "web-integrations": {
+    "name": "Web Integrations",
+    "description": "Configure and manage third-party web integrations with Datadog. This API provides a unified\ninterface for managing integration accounts across various external services.\n\nEach integration has its own unique schema that defines the required settings and secrets.\nBefore creating or updating an account, use the schema endpoint to retrieve the specific\nrequirements, field types, validation rules, and available configuration options for your\nintegration.\n\nSupported Integrations:\n  - twilio\n  - snowflake-web\n  - databricks"
+  },
   "workflow-automation": {
     "name": "Workflow Automation",
     "description": "Datadog Workflow Automation allows you to automate your end-to-end processes by connecting Datadog with the rest of your tech stack. Build workflows to auto-remediate your alerts, streamline your incident and security processes, and reduce manual toil. Workflow Automation supports over 1,000+ OOTB actions, including AWS, JIRA, ServiceNow, GitHub, and OpenAI. Learn more in our Workflow Automation docs [here](https://docs.datadoghq.com/service_management/workflows/)."
