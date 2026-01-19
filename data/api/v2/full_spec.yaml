@@ -29730,6 +29730,81 @@ components:
       required:
       - errors
       type: object
+    JiraAccountAttributes:
+      description: Attributes of a Jira account
+      properties:
+        consumer_key:
+          description: The consumer key for the Jira account
+          example: consumer-key-1
+          type: string
+        instance_url:
+          description: The URL of the Jira instance
+          example: https://example.atlassian.net
+          type: string
+        last_webhook_timestamp:
+          description: Timestamp of the last webhook received
+          example: '2024-01-15T10:30:00Z'
+          format: date-time
+          type: string
+      required:
+      - consumer_key
+      - instance_url
+      type: object
+    JiraAccountData:
+      description: Data object for a Jira account
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraAccountAttributes'
+        id:
+          description: Unique identifier for the Jira account
+          example: account-1
+          type: string
+        type:
+          $ref: '#/components/schemas/JiraAccountType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraAccountRelationship:
+      description: Relationship to a Jira account
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountData'
+      required:
+      - data
+      type: object
+    JiraAccountType:
+      description: Type identifier for Jira account resources
+      enum:
+      - jira-account
+      example: jira-account
+      type: string
+      x-enum-varnames:
+      - JIRA_ACCOUNT
+    JiraAccountsData:
+      description: Array of Jira account data objects
+      items:
+        $ref: '#/components/schemas/JiraAccountData'
+      type: array
+    JiraAccountsMeta:
+      description: Metadata for Jira accounts response
+      properties:
+        public_key:
+          description: Public key for the Jira integration
+          example: c29tZSBkYXRhIHdpdGggACBhbmQg77u/
+          type: string
+      type: object
+    JiraAccountsResponse:
+      description: Response containing Jira accounts
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountsData'
+        meta:
+          $ref: '#/components/schemas/JiraAccountsMeta'
+      required:
+      - data
+      type: object
     JiraIntegrationMetadata:
       description: Incident integration metadata for the Jira integration.
       properties:
@@ -29794,6 +29869,181 @@ components:
         project_key:
           description: Jira project key
           type: string
+      type: object
+    JiraIssueTemplateCreateRequest:
+      description: Request to create a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestData'
+      type: object
+    JiraIssueTemplateCreateRequestAttributes:
+      description: Attributes for creating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '12730'
+          type: string
+        jira-account:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributesJiraAccount'
+        name:
+          description: The name of the issue template
+          example: test-template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '10772'
+          type: string
+      type: object
+    JiraIssueTemplateCreateRequestAttributesJiraAccount:
+      description: Reference to the Jira account
+      properties:
+        id:
+          description: The ID of the Jira account
+          example: 80f16d40-1fba-486e-b1fc-983e6ca19bec
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    JiraIssueTemplateCreateRequestData:
+      description: Data object for creating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      type: object
+    JiraIssueTemplateData:
+      description: Data object for a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateDataAttributes'
+        id:
+          description: Unique identifier for the Jira issue template
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/JiraIssueTemplateDataRelationships'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplateDataAttributes:
+      description: Attributes of a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test Description
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '456'
+          type: string
+        name:
+          description: The name of the issue template
+          example: Test Template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '123'
+          type: string
+      required:
+      - name
+      - project_id
+      - issue_type_id
+      - fields
+      type: object
+    JiraIssueTemplateDataRelationships:
+      description: Relationships of a Jira issue template
+      properties:
+        jira-account:
+          $ref: '#/components/schemas/JiraAccountRelationship'
+      required:
+      - jira-account
+      type: object
+    JiraIssueTemplateResponse:
+      description: Response containing a single Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateType:
+      description: Type identifier for Jira issue template resources
+      enum:
+      - jira-issue-template
+      example: jira-issue-template
+      type: string
+      x-enum-varnames:
+      - JIRA_ISSUE_TEMPLATE
+    JiraIssueTemplateUpdateRequest:
+      description: Request to update a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateUpdateRequestAttributes:
+      description: Attributes for updating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Updated Description
+              type: json
+          type: object
+        name:
+          description: The name of the issue template
+          example: test_template_updated
+          type: string
+      type: object
+    JiraIssueTemplateUpdateRequestData:
+      description: Data object for updating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplatesData:
+      description: Array of Jira issue template data objects
+      items:
+        $ref: '#/components/schemas/JiraIssueTemplateData'
+      type: array
+    JiraIssueTemplatesResponse:
+      description: Response containing Jira issue templates
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplatesData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
       type: object
     JiraIssuesDataType:
       default: jira_issues
@@ -73259,6 +73509,220 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_edit
+  /api/v2/integration/jira/accounts:
+    get:
+      description: Get all Jira accounts for the organization.
+      operationId: ListJiraAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraAccountsResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira accounts
+      tags:
+      - Jira Integration
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/accounts/{account_id}:
+    delete:
+      description: Delete a Jira account by ID.
+      operationId: DeleteJiraAccount
+      parameters:
+      - description: The ID of the Jira account to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: account_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira account
+      tags:
+      - Jira Integration
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates:
+    get:
+      description: Get all Jira issue templates for the organization.
+      operationId: ListJiraIssueTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplatesResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira issue templates
+      tags:
+      - Jira Integration
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new Jira issue template.
+      operationId: CreateJiraIssueTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates/{issue_template_id}:
+    delete:
+      description: Delete a Jira issue template by ID.
+      operationId: DeleteJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a Jira issue template by ID.
+      operationId: GetJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to retrieve
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a Jira issue template by ID.
+      operationId: UpdateJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to update
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/ms-teams/configuration/channel/{tenant_name}/{team_name}/{channel_name}:
     get:
       description: Get the tenant, team, and channel ID of a channel in the Datadog
@@ -93919,6 +94383,9 @@ tags:
     and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
     for more information.
   name: Incidents
+- description: Manage your Jira Integration. Atlassian Jira is a project management
+    and issue tracking tool for teams to coordinate work and handle tasks efficiently.
+  name: Jira Integration
 - description: 'Manage your Datadog API and application keys. You need an API key
     and an
 
