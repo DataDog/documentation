@@ -108,7 +108,7 @@ The set of data captured by diversity sampling is not uniformly sampled (that is
 #### One percent flat sampling
 
 The flat 1% sampling captures:
-1. All **traces correlated with 1% of ingested RUM sessions that had traces ingested**, ensuring you can always find some indexed sessions have associated trace data. This improves [correlation between APM and RUM][20], allowing you to debug user issues by viewing both frontend sessions and backend traces together. The sample is applied based on the `session_id`, meaning all traces linked to the same RUM session share a consistent indexing decision.
+1. All **traces correlated with 1% of ingested RUM sessions which had traces ingested**, ensuring you can always find some indexed sessions have associated trace data. This improves [correlation between APM and RUM][20], allowing you to debug user issues by viewing both frontend sessions and backend traces together. The sample is applied based on the `session_id`, meaning all traces linked to the same RUM session share a consistent indexing decision.
 2. A **uniform 1% sample** of [ingested spans][12], applied based on the `trace_id` so all spans in the same trace share the same sampling decision. Use this sample for general system health monitoring and trend analysis.
 
 This sampling mechanism is uniform, and it is proportionally representative of the full ingested traffic. As a result, low-traffic services and endpoints might be missing from that dataset if you filter on a short time frame.
