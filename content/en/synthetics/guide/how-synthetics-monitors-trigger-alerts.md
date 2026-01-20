@@ -17,22 +17,9 @@ Use this page to understand:
 - Why a monitor recovered even though failures are still visible
 - Why a test failure did not trigger an alert
 
-## Monitor evaluation criteria
-
-A Synthetic monitor does not alert based on a single failed run by default. Instead, it continuously evaluates test results using your configured alert conditions.
-
-When determining whether to trigger an alert, Datadog evaluates:
-
-- **Test schedule**: How often the test runs
-- **Test results**: Pass or fail outcomes (after retries)
-- **Locations**: Which locations are failing and when
-- **Alerting rules**: Minimum duration and location requirements
-
-A monitor transitions to **alert** only when *all alerting rules are satisfied*.
-
 ## How alert evaluation works
 
-When a Synthetic Monitoring test runs, Datadog evaluates alerting in the following order:
+Synthetic monitor does not alert based on a single failed run by default. Instead, it continuously evaluates test results using your configured alert conditions, and in the following order:
 
 1. The test runs based on its configured schedule.
 2. [Fast retries](#fast-retries) are applied, if configured.
@@ -41,6 +28,7 @@ When a Synthetic Monitoring test runs, Datadog evaluates alerting in the followi
 5. The monitor transitions between **OK**, **Alert**, or **No Data** [status](#status-descriptions) as conditions are met or no longer met.
 
 Alerts are always the result of **aggregated evaluation**, not a single datapoint.
+A monitor transitions to **alert** only when *all alerting rules are satisfied*.
 
 ## Test runs that generate alerts
 | Test run type                           | Evaluated for alerting |
