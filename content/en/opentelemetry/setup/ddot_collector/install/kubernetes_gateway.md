@@ -54,7 +54,7 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.160.1 or higher, or Datadog Operator version 1.23.0 or higher.
+    * Datadog Helm chart version 3.160.1+ or Datadog Operator version 1.23.0+.
     * [kubectl][4].
 * **Network**:
   {{% otel-network-requirements %}}
@@ -133,6 +133,10 @@ spec:
     # Enable the standalone Gateway Deployment
     otelAgentGateway:
       enabled: true
+
+  override:
+    otelAgentGateway:
+      # Number of replicas
       replicas: 3
       # Control placement of gateway pods
       nodeSelector:
@@ -255,7 +259,8 @@ service:
 ```
 
 <div class="alert alert-tip">
-Always configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control the nodes where the gateway pods are scheduled.<br>Adjust <code>otelAgentGateway.replicas</code> (default is 1) to scale the number of gateway pods based on your needs.</div>
+<strong>For Helm users:</strong> Configure <code>otelAgentGateway.affinity</code> or <code>otelAgentGateway.nodeSelector</code> to control pod placement, and adjust <code>otelAgentGateway.replicas</code> to scale the gateway.<br>
+<strong>For Operator users:</strong> Use <code>override.otelAgentGateway.affinity</code>, <code>override.otelAgentGateway.nodeSelector</code>, and <code>override.otelAgentGateway.replicas</code> for these settings.</div>
 
 ### Deploying a standalone gateway
 
@@ -279,11 +284,15 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
+
+  override:
+    otelAgentGateway:
+      # Number of replicas
       replicas: 3
+      # Control placement of gateway pods
       nodeSelector:
         gateway: "true"
 
-  override:
     # Disable the Agent DaemonSet
     nodeAgent:
       disabled: true
@@ -335,7 +344,7 @@ kind: ConfigMap
 metadata:
   name: otel-gateway-config
 data:
-  otel-config.yaml: |
+  otel-gateway-config.yaml: |
     receivers:
       otlp:
         protocols:
@@ -384,11 +393,14 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
-      replicas: 3
       # Reference the custom ConfigMap
       config:
         configMap:
           name: otel-gateway-config
+
+  override:
+    otelAgentGateway:
+      replicas: 3
 ```
 
 For multi-item ConfigMaps or inline configuration, see the [DatadogAgent examples][1].
@@ -481,7 +493,7 @@ The example configurations use insecure TLS for simplicity. Follow the [OTel con
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator provides additional configuration options for the OTel Agent Gateway:
+The Datadog Operator provides additional configuration options for the OTel Agent Gateway under `override.otelAgentGateway` (**NOT** `features.otelAgentGateway` except `featureGates`):
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -498,6 +510,13 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
+
+      # Feature gates for OTel collector (feature-specific configuration)
+      featureGates: "telemetry.UseLocalHostAsDefaultMetricsAddress"
+
+  override:
+    otelAgentGateway:
+      # Number of replicas
       replicas: 3
 
       # Node selector for pod placement
@@ -534,17 +553,23 @@ spec:
       - name: OTEL_LOG_LEVEL
         value: "info"
 
+      # Environment variables from ConfigMaps or Secrets
+      envFrom:
+      - configMapRef:
+          name: otel-gateway-config
+
       # Custom image (optional)
       image:
-        name: gcr.io/datadoghq/ddot-collector
+        name: ddot-collector
         tag: "7.74.0"
         pullPolicy: IfNotPresent
 
-      # Feature gates for OTel collector
-      featureGates: "telemetry.UseLocalHostAsDefaultMetricsAddress"
+      # Pod-level security context
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
 
-  override:
-    otelAgentGateway:
       # Configure resources
       containers:
         otel-agent:
@@ -555,12 +580,6 @@ spec:
             limits:
               cpu: 500m
               memory: 1Gi
-
-      # Pod-level security context
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
 
       # Additional labels and annotations
       labels:
@@ -637,7 +656,7 @@ kind: ConfigMap
 metadata:
   name: otel-gateway-tailsampling-config
 data:
-  otel-config.yaml: |
+  otel-gateway-config.yaml: |
     receivers:
       otlp:
         protocols:
@@ -703,11 +722,14 @@ spec:
 
     otelAgentGateway:
       enabled: true
-      replicas: 3
       # Reference the custom gateway config
       config:
         configMap:
           name: otel-gateway-tailsampling-config
+
+  override:
+    otelAgentGateway:
+      replicas: 3
 ```
 
 Create a ClusterRole for the DaemonSet to access endpoints:
@@ -835,6 +857,16 @@ To ensure APM Stats are calculated on 100% of your traces before sampling, the <
 
 To use a custom-built Collector image for your gateway, specify the image repository and tag. If you need instructions on how to build the custom images, see [Use Custom OpenTelemetry Components][5].
 
+<div class="alert alert-info">
+<strong>Note:</strong> The Datadog Operator supports the following image name formats:
+<ul>
+  <li><code>name</code> - Just the image name (for example, <code>ddot-collector</code>)</li>
+  <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:7.74.0</code>)</li>
+  <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:7.74.0</code>)</li>
+</ul>
+The <code>registry/name</code> format (without tag in the name field) is <strong>not supported</strong> when using a separate <code>tag</code> field. Either include the full image reference with tag in the <code>name</code> field, or use just the image name with a separate <code>tag</code> field.
+</div>
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
@@ -853,6 +885,9 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
+
+  override:
+    otelAgentGateway:
       image:
         name: <YOUR REPO>
         tag: <IMAGE TAG>
@@ -938,10 +973,10 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
-      replicas: 4  # Initial replicas, HPA will override based on metrics
 
   override:
     otelAgentGateway:
+      replicas: 4  # Initial replicas, HPA will override based on metrics
       containers:
         otel-agent:
           resources:
@@ -1022,14 +1057,16 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
-      replicas: 3
-      nodeSelector:
-        gateway: "gw-node-1"
       config:
         configMap:
           name: gw-layer-1-config
 
   override:
+    otelAgentGateway:
+      replicas: 3
+      nodeSelector:
+        gateway: "gw-node-1"
+
     nodeAgent:
       disabled: true
     clusterAgent:
@@ -1040,7 +1077,7 @@ kind: ConfigMap
 metadata:
   name: gw-layer-1-config
 data:
-  otel-config.yaml: |
+  otel-gateway-config.yaml: |
     receivers:
       otlp:
         protocols:
@@ -1080,14 +1117,16 @@ spec:
   features:
     otelAgentGateway:
       enabled: true
-      replicas: 3
-      nodeSelector:
-        gateway: "gw-node-2"
       config:
         configMap:
           name: gw-layer-2-config
 
   override:
+    otelAgentGateway:
+      replicas: 3
+      nodeSelector:
+        gateway: "gw-node-2"
+
     nodeAgent:
       disabled: true
     clusterAgent:
@@ -1098,7 +1137,7 @@ kind: ConfigMap
 metadata:
   name: gw-layer-2-config
 data:
-  otel-config.yaml: |
+  otel-gateway-config.yaml: |
     receivers:
       otlp:
         protocols:
