@@ -32789,7 +32789,7 @@ components:
       x-enum-varnames:
       - ACTIVELY_QUERIED_CONFIGURATIONS
     MetricAllTags:
-      description: Object for a single metric's indexed tags.
+      description: Object for a single metric's indexed and ingested tags.
       properties:
         attributes:
           $ref: '#/components/schemas/MetricAllTagsAttributes'
@@ -32799,21 +32799,33 @@ components:
           $ref: '#/components/schemas/MetricType'
       type: object
     MetricAllTagsAttributes:
-      description: Object containing the definition of a metric's tags.
+      description: Object containing the definition of a metric's indexed and ingested
+        tags.
       properties:
+        ingested_tags:
+          description: List of ingested tags that are not indexed.
+          example:
+          - env:prod
+          - service:web
+          - version:1.0
+          items:
+            description: Ingested tags for the metric.
+            type: string
+          type: array
         tags:
-          description: List of indexed tag value pairs.
+          description: List of indexed tags.
           example:
           - sport:golf
           - sport:football
           - animal:dog
           items:
-            description: Tag key-value pairs.
+            description: Indexed tags for the metric.
             type: string
           type: array
       type: object
     MetricAllTagsResponse:
-      description: Response object that includes a single metric's indexed tags.
+      description: Response object that includes a single metric's indexed and ingested
+        tags.
       properties:
         data:
           $ref: '#/components/schemas/MetricAllTags'
@@ -77234,11 +77246,74 @@ paths:
         - metrics_read
   /api/v2/metrics/{metric_name}/all-tags:
     get:
-      description: View indexed tag key-value pairs for a given metric name over the
-        previous hour.
+      description: 'View indexed and ingested tags for a given metric name.
+
+        Results are filtered by the `window[seconds]` parameter, which defaults to
+        14400 (4 hours).'
       operationId: ListTagsByMetricName
       parameters:
       - $ref: '#/components/parameters/MetricName'
+      - description: 'The number of seconds of look back (from now) to query for tag
+          data.
+
+          Default value is 14400 (4 hours), minimum value is 14400 (4 hours).'
+        example: 14400
+        in: query
+        name: window[seconds]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: 'Filter results to tags from data points that have the specified
+          tags.
+
+          For example, `filter[tags]=env:staging,host:123` returns tags only from
+          data points with both `env:staging` and `host:123`.'
+        example: env:staging,host:123
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: 'Filter returned tags to those matching a substring.
+
+          For example, `filter[match]=env` returns tags like `env:prod`, `environment:staging`,
+          etc.'
+        example: env
+        in: query
+        name: filter[match]
+        required: false
+        schema:
+          type: string
+      - description: 'Whether to include tag values in the response.
+
+          Defaults to true.'
+        example: true
+        in: query
+        name: filter[include_tag_values]
+        required: false
+        schema:
+          type: boolean
+      - description: 'Whether to allow partial results.
+
+          Defaults to false.'
+        example: false
+        in: query
+        name: filter[allow_partial]
+        required: false
+        schema:
+          type: boolean
+      - description: Maximum number of results to return.
+        example: 1000
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 1000000
+          format: int32
+          maximum: 1000000
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:

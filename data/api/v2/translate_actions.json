@@ -1824,7 +1824,7 @@
     "summary": "List active tags and aggregations"
   },
   "ListTagsByMetricName": {
-    "description": "View indexed tag key-value pairs for a given metric name over the previous hour.",
+    "description": "View indexed and ingested tags for a given metric name.\nResults are filtered by the `window[seconds]` parameter, which defaults to 14400 (4 hours).",
     "summary": "List tags by metric name"
   },
   "ListMetricAssets": {
