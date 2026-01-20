@@ -15,11 +15,13 @@ further_reading:
 
 ## Setup
 
+<div class="alert alert-info">Azure Marketplace integration is not supported with Storage Management. You must use an <a href="/integrations/azure">App Registration</a> to connect Azure to Datadog.</div>
+
 {{< tabs >}}
 
 {{% tab "Azure CLI" %}}
 
-1. Go to **Storage Management** > **Azure Blob Storage** > **Enable buckets**.
+1. Go to **Storage Management** > **Azure Blob Storage** > [**Enable buckets**][304].
 2. Select the storage accounts you want to enable for Storage Management.
 3. Run the CLI commands in your [Azure Cloud Shell][301] generated at the bottom of the table. Before running the script, set your shell environment to Bash. 
 4. After running the script, click **Confirm** and wait 24-48 hours for Storage Management metrics to become available.
@@ -27,6 +29,8 @@ further_reading:
 [301]: https://shell.azure.com
 [302]: /integrations/azure/#setup
 [303]: https://learn.microsoft.com/en-us/azure/cloud-shell/get-started/classic?tabs=azurecli#select-your-shell-environment
+[304]: https://app.datadoghq.com/storage-management?mConfigure=true&mView=azure
+
 {{% /tab %}}
 
 {{% tab "Azure Portal" %}}
