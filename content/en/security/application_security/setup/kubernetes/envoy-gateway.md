@@ -51,8 +51,6 @@ Use automatic configuration if you want to:
 1. **Deploy the external processor** using the deployment manifest shown in [Step 1](#step-1-deploy-the-datadog-external-processor-service) below.
 2. **Enable automatic configuration** using Helm or the Datadog Operator.
 
-   **Note:** The processor service name must match the name of the Service you deployed in Step 1.
-
    {{< tabs >}}
    {{% tab "Datadog Operator" %}}
 

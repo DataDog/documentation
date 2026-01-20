@@ -172,13 +172,14 @@ kubectl apply -f datadog-aap-extproc-service.yaml
 
 Enable automatic configuration in the Datadog Cluster Agent and configure it to use your external processor service.
 
-Configure the integration using either Helm or the Datadog Operator:
-**Note:** The processor service name (`datadog-aap-extproc-service`) must match the name of the Service you deployed in Step 1.
+Configure the integration using either Helm or the Datadog Operator.
+
+**Note:** The processor service name (`datadog-aap-extproc-service`) must match the name of the service you deployed in Step 1.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-You have installed the Datadog Operator (v1.22.0+):
+This option requires Datadog Operator v1.22.0+.
 
 Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
 
@@ -189,7 +190,7 @@ metadata:
   name: datadog
   annotations:
     agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required
+    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your external processor service name
     agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
 spec:
   # ... your existing DatadogAgent configuration
@@ -268,10 +269,10 @@ Send requests through your gateway and verify they appear in the Datadog App and
 |----------------|----------------------------|------|---------|-------------|
 | `enabled` | `agent.datadoghq.com/appsec.injector.enabled` | Boolean | `false` | Enable or disable the integration |
 | `autoDetect` | `agent.datadoghq.com/appsec.injector.autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
-| `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON Array | `[]` | Manual list of proxy types to configure. Valid values: `["envoy-gateway"]`, `["istio"]` |
+| `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. Valid values: `["envoy-gateway"]`, `["istio"]` |
 | `processor.service.name` | `agent.datadoghq.com/appsec.injector.processor.service.name` | String |   | **Required.** Name of the external processor Kubernetes Service |
-| `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Cluster Agent namespace | Namespace where the external processor Service is deployed. Defaults to the namespace where the Cluster Agent is running |
-| `processor.address` | `agent.datadoghq.com/appsec.injector.processor.address` | String | `{service.name}.{service.namespace}.svc` | (Optional) Full service address override |
+| `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Defaults to the namespace where the Cluster Agent is running | Namespace where the external processor Service is deployed |
+| `processor.address` | `agent.datadoghq.com/appsec.injector.processor.address` | String | `{service.name}.{service.namespace}.svc` | Full service address override |
 | `processor.port` | `agent.datadoghq.com/appsec.injector.processor.port` | Integer | `443` | Port of the external processor service |
 
 ### Proxy types
