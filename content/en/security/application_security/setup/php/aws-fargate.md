@@ -15,7 +15,7 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{% aap/aap_and_api_protection_php_overview %}}
+{{% app_and_api_protection_php_overview %}}
 
 ## Prerequisites
 
@@ -56,9 +56,8 @@ Install the Datadog Agent in your Fargate task definition:
 
 ## 2. Enabling App and API Protection monitoring
 
-{{% aap/aap_and_api_protection_php_navigation_menu %}}
-
-{{% aap/aap_and_api_protection_php_remote_config_activation %}}
+{{% app_and_api_protection_php_navigation_menu %}}
+{{% appsec-remote-config-activation %}}
 
 ### Manually enabling App and API Protection monitoring
 
