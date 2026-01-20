@@ -355,6 +355,106 @@ Reported code coverage is reported as `@test.code_coverage.lines_pct`, which rep
 
 {{< img src="/continuous_integration/graph_code_coverage.png" text="Graph code coverage" style="width:100%" >}}
 
+## Ignoring paths
+
+You can exclude specific files or directories from code coverage reporting by creating a code coverage configuration file in your repository.
+
+### Configuration file
+
+Create a file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository with the following structure:
+
+```yaml
+ignore:
+  - "test/**/*"           # Exclude all files in test directory
+  - "*.pb.go"             # Exclude all protobuf generated files
+  - "vendor/"             # Exclude vendor directory
+```
+
+### Supported pattern types
+
+Datadog automatically detects the pattern type based on the syntax you use:
+
+#### Regex patterns
+
+Patterns containing regex-specific characters (`+`, `{`, `}`, `|`, `(`, `)`, `^`, `$`, `\`) are treated as regular expressions:
+
+```yaml
+ignore:
+  - ".*\\.pb\\.go$"       # Exclude files ending with .pb.go
+  - "^generated/.*"       # Exclude files in the generated directory
+  - ".*_test\\.go$"       # Exclude test files
+```
+
+**Note**: Regex patterns are automatically anchored with `^...$` for whole-path matching. Use forward slashes (`/`) as path separators in regex patterns.
+
+#### Glob patterns
+
+Patterns containing glob-specific characters (`*`, `?`, `[`, `]`) are treated as glob patterns:
+
+```yaml
+ignore:
+  - "**/*.java"           # Exclude all Java files
+  - "src/test/**/*"       # Exclude all files under src/test
+  - "*.pb.go"             # Exclude protobuf files
+```
+
+**Note**: Use `**` to match directories recursively. The pattern `folder/*` matches only direct children, while `folder/**/*` matches all descendants.
+
+#### Prefix patterns
+
+Simple path prefixes without special characters are treated as prefix matches:
+
+```yaml
+ignore:
+  - "vendor/"             # Exclude all files under vendor directory
+  - "third_party/"        # Exclude third-party code
+  - "generated/"          # Exclude generated code
+```
+
+### Exclusion operator
+
+Use the `!` prefix to create negative patterns that **override** ignore rules:
+
+```yaml
+ignore:
+  - "generated/"          # Ignore all generated files
+  - "!generated/important/" # But include files in generated/important
+```
+
+**Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path is excluded from being ignored.
+
+### Examples
+
+#### Exclude test files and generated code
+
+```yaml
+ignore:
+  - "**/*_test.go"        # Exclude Go test files
+  - "**/*.pb.go"          # Exclude protobuf files
+  - "vendor/"             # Exclude vendor directory
+  - "mocks/"              # Exclude mock files
+```
+
+#### Exclude with exceptions
+
+```yaml
+ignore:
+  - "generated/"          # Ignore all generated code
+  - "!generated/core/"    # Except core generated files
+  - "test/"               # Ignore test directory
+  - "!test/integration/"  # Except integration tests
+```
+
+#### Mixed pattern types
+
+```yaml
+ignore:
+  - "^vendor/.*"          # Regex: exclude vendor (anchored)
+  - "**/*.min.js"         # Glob: exclude minified JS files
+  - "dist/"               # Prefix: exclude dist directory
+  - ".*\\.pb\\.go$"       # Regex: exclude protobuf files
+```
+
 ## Test Session coverage tab
 
 Reported code coverage also appears on the **Coverage** tab in a test session's details page:
