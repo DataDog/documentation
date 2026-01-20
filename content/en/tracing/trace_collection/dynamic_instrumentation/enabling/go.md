@@ -27,7 +27,7 @@ To use Dynamic Instrumentation, you must enable it in both the Datadog Agent and
 
 ### Datadog Agent
 
-1. Install or upgrade your Agent to version [7.73.0][6] or later.
+1. Install or upgrade your Agent to version [v7.73.0][6] or later.
 2. Enable Dynamic Instrumentation in the Agent configuration using one of the following methods, depending on how you deploy the Agent:
 
 {{< tabs >}}
