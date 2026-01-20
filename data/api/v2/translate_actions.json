@@ -1197,6 +1197,12 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "CreateIncidentPostmortemAttachment": {
+    "description": "Create a postmortem attachment for an incident.",
+    "summary": "Create postmortem attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteIncidentAttachment": {
     "summary": "Delete incident attachment"
   },
@@ -1360,6 +1366,38 @@
     "summary": "Create a Datadog GCP principal",
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
+  },
+  "ListJiraAccounts": {
+    "description": "Get all Jira accounts for the organization.",
+    "summary": "List Jira accounts"
+  },
+  "DeleteJiraAccount": {
+    "description": "Delete a Jira account by ID.",
+    "summary": "Delete Jira account"
+  },
+  "ListJiraIssueTemplates": {
+    "description": "Get all Jira issue templates for the organization.",
+    "summary": "List Jira issue templates"
+  },
+  "CreateJiraIssueTemplate": {
+    "description": "Create a new Jira issue template.",
+    "summary": "Create Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to create a Jira issue template"
+  },
+  "DeleteJiraIssueTemplate": {
+    "description": "Delete a Jira issue template by ID.",
+    "summary": "Delete Jira issue template"
+  },
+  "GetJiraIssueTemplate": {
+    "description": "Get a Jira issue template by ID.",
+    "summary": "Get Jira issue template"
+  },
+  "UpdateJiraIssueTemplate": {
+    "description": "Update a Jira issue template by ID.",
+    "summary": "Update Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to update a Jira issue template"
   },
   "GetChannelByName": {
     "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
@@ -2800,6 +2838,34 @@
     "summary": "Update a Workload Protection agent rule (US1-FED)",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
+  },
+  "ListSecurityMonitoringCriticalAssets": {
+    "description": "Get the list of all critical assets.",
+    "summary": "Get all critical assets"
+  },
+  "CreateSecurityMonitoringCriticalAsset": {
+    "description": "Create a new critical asset.",
+    "summary": "Create a critical asset",
+    "request_description": "The definition of the new critical asset.",
+    "request_schema_description": "Request object that includes the critical asset that you would like to create."
+  },
+  "GetCriticalAssetsAffectingRule": {
+    "description": "Get the list of critical assets that affect a specific existing rule by the rule's ID.",
+    "summary": "Get critical assets affecting a specific rule"
+  },
+  "DeleteSecurityMonitoringCriticalAsset": {
+    "description": "Delete a specific critical asset.",
+    "summary": "Delete a critical asset"
+  },
+  "GetSecurityMonitoringCriticalAsset": {
+    "description": "Get the details of a specific critical asset.",
+    "summary": "Get a critical asset"
+  },
+  "UpdateSecurityMonitoringCriticalAsset": {
+    "description": "Update a specific critical asset.",
+    "summary": "Update a critical asset",
+    "request_description": "New definition of the critical asset. Supports partial updates.",
+    "request_schema_description": "Request object containing the fields to update on the critical asset."
   },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",

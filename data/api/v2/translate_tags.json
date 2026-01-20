@@ -163,6 +163,10 @@
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
+  "jira-integration": {
+    "name": "Jira Integration",
+    "description": "Manage your Jira Integration. Atlassian Jira is a project management and issue tracking tool for teams to coordinate work and handle tasks efficiently."
+  },
   "key-management": {
     "name": "Key Management",
     "description": "Manage your Datadog API and application keys. You need an API key and an\napplication key for a user with the required permissions to interact with these endpoints.\n\nConsult the following pages to view and manage your keys:\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
@@ -177,7 +181,7 @@
   },
   "logs-custom-destinations": {
     "name": "Logs Custom Destinations",
-    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
+    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\n**Note**: Log forwarding is not available for the Government (US1-FED) site. Contact your account representative for more information.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
   },
   "logs-metrics": {
     "name": "Logs Metrics",

@@ -1009,6 +1009,13 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringCriticalAssetID:
+      description: The ID of the critical asset.
+      in: path
+      name: critical_asset_id
+      required: true
+      schema:
+        type: string
     SecurityMonitoringRuleID:
       description: The ID of the rule.
       in: path
@@ -29723,6 +29730,81 @@ components:
       required:
       - errors
       type: object
+    JiraAccountAttributes:
+      description: Attributes of a Jira account
+      properties:
+        consumer_key:
+          description: The consumer key for the Jira account
+          example: consumer-key-1
+          type: string
+        instance_url:
+          description: The URL of the Jira instance
+          example: https://example.atlassian.net
+          type: string
+        last_webhook_timestamp:
+          description: Timestamp of the last webhook received
+          example: '2024-01-15T10:30:00Z'
+          format: date-time
+          type: string
+      required:
+      - consumer_key
+      - instance_url
+      type: object
+    JiraAccountData:
+      description: Data object for a Jira account
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraAccountAttributes'
+        id:
+          description: Unique identifier for the Jira account
+          example: account-1
+          type: string
+        type:
+          $ref: '#/components/schemas/JiraAccountType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraAccountRelationship:
+      description: Relationship to a Jira account
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountData'
+      required:
+      - data
+      type: object
+    JiraAccountType:
+      description: Type identifier for Jira account resources
+      enum:
+      - jira-account
+      example: jira-account
+      type: string
+      x-enum-varnames:
+      - JIRA_ACCOUNT
+    JiraAccountsData:
+      description: Array of Jira account data objects
+      items:
+        $ref: '#/components/schemas/JiraAccountData'
+      type: array
+    JiraAccountsMeta:
+      description: Metadata for Jira accounts response
+      properties:
+        public_key:
+          description: Public key for the Jira integration
+          example: c29tZSBkYXRhIHdpdGggACBhbmQg77u/
+          type: string
+      type: object
+    JiraAccountsResponse:
+      description: Response containing Jira accounts
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountsData'
+        meta:
+          $ref: '#/components/schemas/JiraAccountsMeta'
+      required:
+      - data
+      type: object
     JiraIntegrationMetadata:
       description: Incident integration metadata for the Jira integration.
       properties:
@@ -29787,6 +29869,181 @@ components:
         project_key:
           description: Jira project key
           type: string
+      type: object
+    JiraIssueTemplateCreateRequest:
+      description: Request to create a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestData'
+      type: object
+    JiraIssueTemplateCreateRequestAttributes:
+      description: Attributes for creating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '12730'
+          type: string
+        jira-account:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributesJiraAccount'
+        name:
+          description: The name of the issue template
+          example: test-template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '10772'
+          type: string
+      type: object
+    JiraIssueTemplateCreateRequestAttributesJiraAccount:
+      description: Reference to the Jira account
+      properties:
+        id:
+          description: The ID of the Jira account
+          example: 80f16d40-1fba-486e-b1fc-983e6ca19bec
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    JiraIssueTemplateCreateRequestData:
+      description: Data object for creating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      type: object
+    JiraIssueTemplateData:
+      description: Data object for a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateDataAttributes'
+        id:
+          description: Unique identifier for the Jira issue template
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/JiraIssueTemplateDataRelationships'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplateDataAttributes:
+      description: Attributes of a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test Description
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '456'
+          type: string
+        name:
+          description: The name of the issue template
+          example: Test Template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '123'
+          type: string
+      required:
+      - name
+      - project_id
+      - issue_type_id
+      - fields
+      type: object
+    JiraIssueTemplateDataRelationships:
+      description: Relationships of a Jira issue template
+      properties:
+        jira-account:
+          $ref: '#/components/schemas/JiraAccountRelationship'
+      required:
+      - jira-account
+      type: object
+    JiraIssueTemplateResponse:
+      description: Response containing a single Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateType:
+      description: Type identifier for Jira issue template resources
+      enum:
+      - jira-issue-template
+      example: jira-issue-template
+      type: string
+      x-enum-varnames:
+      - JIRA_ISSUE_TEMPLATE
+    JiraIssueTemplateUpdateRequest:
+      description: Request to update a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateUpdateRequestAttributes:
+      description: Attributes for updating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Updated Description
+              type: json
+          type: object
+        name:
+          description: The name of the issue template
+          example: test_template_updated
+          type: string
+      type: object
+    JiraIssueTemplateUpdateRequestData:
+      description: Data object for updating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplatesData:
+      description: Array of Jira issue template data objects
+      items:
+        $ref: '#/components/schemas/JiraIssueTemplateData'
+      type: array
+    JiraIssueTemplatesResponse:
+      description: Response containing Jira issue templates
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplatesData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
       type: object
     JiraIssuesDataType:
       default: jira_issues
@@ -36548,6 +36805,18 @@ components:
           items:
             type: string
           type: array
+        routes:
+          description: A list of routing rules that forward matching logs to Datadog
+            using dedicated API keys.
+          example:
+          - api_key_key: API_KEY_IDENTIFIER
+            include: service:api
+            route_id: datadog-logs-route-us1
+            site: us1
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationRoute'
+          maxItems: 100
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationType'
       required:
@@ -36557,6 +36826,29 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineDatadogLogsDestinationRoute:
+      description: Defines how the `datadog_logs` destination routes matching logs
+        to a Datadog site using a specific API key.
+      properties:
+        api_key_key:
+          description: Name of the environment variable or secret that stores the
+            Datadog API key used by this route.
+          example: API_KEY_IDENTIFIER
+          type: string
+        include:
+          description: A Datadog search query that determines which logs are forwarded
+            using this route.
+          example: service:api
+          type: string
+        route_id:
+          description: Unique identifier for this route within the destination.
+          example: datadog-logs-route-us
+          type: string
+        site:
+          description: Datadog site where matching logs are sent (for example, `us1`).
+          example: us1
+          type: string
+      type: object
     ObservabilityPipelineDatadogLogsDestinationType:
       default: datadog_logs
       description: The destination type. The value should always be `datadog_logs`.
@@ -42107,6 +42399,83 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    PostmortemAttachmentRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/PostmortemAttachmentRequestData'
+      required:
+      - data
+      type: object
+    PostmortemAttachmentRequestAttributes:
+      description: Postmortem attachment attributes
+      properties:
+        cells:
+          description: The cells of the postmortem
+          items:
+            $ref: '#/components/schemas/PostmortemCell'
+          type: array
+        content:
+          description: The content of the postmortem
+          example: '# Incident Report - IR-123
+
+            [...]'
+          type: string
+        postmortem_template_id:
+          description: The ID of the postmortem template
+          example: 93645509-874e-45c4-adfa-623bfeaead89-123
+          type: string
+        title:
+          description: The title of the postmortem
+          example: Postmortem-IR-123
+          type: string
+      type: object
+    PostmortemAttachmentRequestData:
+      description: Postmortem attachment data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemAttachmentRequestAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      - attributes
+      type: object
+    PostmortemCell:
+      description: A cell in the postmortem
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemCellAttributes'
+        id:
+          description: The unique identifier of the cell
+          example: cell-1
+          type: string
+        type:
+          $ref: '#/components/schemas/PostmortemCellType'
+      type: object
+    PostmortemCellAttributes:
+      description: Attributes of a postmortem cell
+      properties:
+        definition:
+          $ref: '#/components/schemas/PostmortemCellDefinition'
+      type: object
+    PostmortemCellDefinition:
+      description: Definition of a postmortem cell
+      properties:
+        content:
+          description: The content of the cell in markdown format
+          example: '## Incident Summary
+
+            This incident was caused by...'
+          type: string
+      type: object
+    PostmortemCellType:
+      description: The postmortem cell resource type.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -49146,6 +49515,237 @@ components:
       x-enum-varnames:
       - DONE
       - TIMEOUT
+    SecurityMonitoringCriticalAsset:
+      description: The critical asset's properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetAttributes'
+        id:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetID'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetType'
+      type: object
+    SecurityMonitoringCriticalAssetAttributes:
+      description: The attributes of the critical asset.
+      properties:
+        creation_author_id:
+          description: ID of user who created the critical asset.
+          example: 367742
+          format: int64
+          type: integer
+        creation_date:
+          description: A Unix millisecond timestamp given the creation date of the
+            critical asset.
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SecurityMonitoringUser'
+        enabled:
+          description: Whether the critical asset is enabled.
+          example: true
+          type: boolean
+        query:
+          description: The query for the critical asset. It uses the same syntax as
+            the queries to search signals in the Signals Explorer.
+          example: security:monitoring
+          type: string
+        rule_query:
+          description: The rule query of the critical asset, with the same syntax
+            as the search bar for detection rules. This determines which rules this
+            critical asset will apply to.
+          example: type:log_detection source:cloudtrail
+          type: string
+        severity:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetSeverity'
+        tags:
+          description: List of tags associated with the critical asset.
+          example:
+          - team:database
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
+        update_author_id:
+          description: ID of user who updated the critical asset.
+          example: 367743
+          format: int64
+          type: integer
+        update_date:
+          description: A Unix millisecond timestamp given the update date of the critical
+            asset.
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/SecurityMonitoringUser'
+        version:
+          description: The version of the critical asset; it starts at 1, and is incremented
+            at each update.
+          example: 2
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SecurityMonitoringCriticalAssetCreateAttributes:
+      description: Object containing the attributes of the critical asset to be created.
+      properties:
+        enabled:
+          default: true
+          description: Whether the critical asset is enabled. Defaults to `true` if
+            not specified.
+          example: true
+          type: boolean
+        query:
+          description: The query for the critical asset. It uses the same syntax as
+            the queries to search signals in the Signals Explorer.
+          example: security:monitoring
+          type: string
+        rule_query:
+          description: The rule query of the critical asset, with the same syntax
+            as the search bar for detection rules. This determines which rules this
+            critical asset will apply to.
+          example: type:(log_detection OR signal_correlation OR workload_security
+            OR application_security) source:cloudtrail
+          type: string
+        severity:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetSeverity'
+        tags:
+          description: List of tags associated with the critical asset.
+          example:
+          - team:database
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
+      required:
+      - query
+      - severity
+      - rule_query
+      type: object
+    SecurityMonitoringCriticalAssetCreateData:
+      description: Object for a single critical asset.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetCreateAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringCriticalAssetCreateRequest:
+      description: Request object that includes the critical asset that you would
+        like to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetCreateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringCriticalAssetID:
+      description: The ID of the critical asset.
+      example: 4e2435a5-6670-4b8f-baff-46083cd1c250
+      type: string
+    SecurityMonitoringCriticalAssetResponse:
+      description: Response object containing a single critical asset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAsset'
+      type: object
+    SecurityMonitoringCriticalAssetSeverity:
+      description: Severity associated with this critical asset. Either an explicit
+        severity can be set, or the severity can be increased or decreased.
+      enum:
+      - info
+      - low
+      - medium
+      - high
+      - critical
+      - increase
+      - decrease
+      example: increase
+      type: string
+      x-enum-varnames:
+      - INFO
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+      - INCREASE
+      - DECREASE
+    SecurityMonitoringCriticalAssetType:
+      default: critical_assets
+      description: The type of the resource. The value should always be `critical_assets`.
+      enum:
+      - critical_assets
+      example: critical_assets
+      type: string
+      x-enum-varnames:
+      - CRITICAL_ASSETS
+    SecurityMonitoringCriticalAssetUpdateAttributes:
+      description: The critical asset properties to be updated.
+      properties:
+        enabled:
+          description: Whether the critical asset is enabled.
+          example: true
+          type: boolean
+        query:
+          description: The query for the critical asset. It uses the same syntax as
+            the queries to search signals in the Signals Explorer.
+          example: security:monitoring
+          type: string
+        rule_query:
+          description: The rule query of the critical asset, with the same syntax
+            as the search bar for detection rules. This determines which rules this
+            critical asset will apply to.
+          example: type:log_detection source:cloudtrail
+          type: string
+        severity:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetSeverity'
+        tags:
+          description: List of tags associated with the critical asset.
+          example:
+          - technique:T1110-brute-force
+          - source:cloudtrail
+          items:
+            type: string
+          type: array
+        version:
+          description: The version of the critical asset being updated. Used for optimistic
+            locking to prevent concurrent modifications.
+          example: 1
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SecurityMonitoringCriticalAssetUpdateData:
+      description: The new critical asset properties; partial updates are supported.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringCriticalAssetUpdateRequest:
+      description: Request object containing the fields to update on the critical
+        asset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringCriticalAssetUpdateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringCriticalAssetsResponse:
+      description: Response object containing the available critical assets.
+      properties:
+        data:
+          description: A list of critical assets objects.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringCriticalAsset'
+          type: array
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -49174,6 +49774,18 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    SecurityMonitoringPaginatedSuppressionsResponse:
+      description: Response object containing the available suppression rules with
+        pagination metadata.
+      properties:
+        data:
+          description: A list of suppressions objects.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSuppression'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsMeta'
       type: object
     SecurityMonitoringReferenceTable:
       description: Reference tables used in the queries.
@@ -51324,6 +51936,31 @@ components:
         data:
           $ref: '#/components/schemas/SecurityMonitoringSuppression'
       type: object
+    SecurityMonitoringSuppressionSort:
+      description: The sort parameters used for querying suppression rules.
+      enum:
+      - name
+      - start_date
+      - expiration_date
+      - update_date
+      - enabled
+      - -name
+      - -start_date
+      - -expiration_date
+      - -update_date
+      - -enabled
+      type: string
+      x-enum-varnames:
+      - NAME
+      - START_DATE
+      - EXPIRATION_DATE
+      - UPDATE_DATE
+      - ENABLED
+      - NAME_DESCENDING
+      - START_DATE_DESCENDING
+      - EXPIRATION_DATE_DESCENDING
+      - UPDATE_DATE_DESCENDING
+      - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
       description: The type of the resource. The value should always be `suppressions`.
@@ -51418,6 +52055,31 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
       required:
       - data
+      type: object
+    SecurityMonitoringSuppressionsMeta:
+      description: Metadata for the suppression list response.
+      properties:
+        page:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsPageMeta'
+      type: object
+    SecurityMonitoringSuppressionsPageMeta:
+      description: Pagination metadata.
+      properties:
+        pageNumber:
+          description: Current page number.
+          example: 0
+          format: int64
+          type: integer
+        pageSize:
+          description: Current page size.
+          example: 2
+          format: int64
+          type: integer
+        totalCount:
+          description: Total count of suppressions.
+          example: 2
+          format: int64
+          type: integer
       type: object
     SecurityMonitoringSuppressionsResponse:
       description: Response object containing the available suppression rules.
@@ -60802,6 +61464,8 @@ components:
               & unsubscribing from apps in the marketplace, and enabling & disabling
               Remote Configuration for the entire organization.
             security_comments_read: Read comments of vulnerabilities.
+            security_monitoring_critical_assets_read: Read Critical Assets.
+            security_monitoring_critical_assets_write: Write Critical Assets.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View a list of findings that include
@@ -71753,6 +72417,47 @@ paths:
       x-unstable: '**Note**: This endpoint is in Preview.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/attachments/postmortems:
+    post:
+      description: Create a postmortem attachment for an incident.
+      operationId: CreateIncidentPostmortemAttachment
+      parameters:
+      - description: The ID of the incident
+        in: path
+        name: incident_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostmortemAttachmentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create postmortem attachment
+      tags:
+      - Incidents
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/attachments/{attachment_id}:
     delete:
       operationId: DeleteIncidentAttachment
@@ -72901,6 +73606,220 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_edit
+  /api/v2/integration/jira/accounts:
+    get:
+      description: Get all Jira accounts for the organization.
+      operationId: ListJiraAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraAccountsResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira accounts
+      tags:
+      - Jira Integration
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/accounts/{account_id}:
+    delete:
+      description: Delete a Jira account by ID.
+      operationId: DeleteJiraAccount
+      parameters:
+      - description: The ID of the Jira account to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: account_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira account
+      tags:
+      - Jira Integration
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates:
+    get:
+      description: Get all Jira issue templates for the organization.
+      operationId: ListJiraIssueTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplatesResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira issue templates
+      tags:
+      - Jira Integration
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new Jira issue template.
+      operationId: CreateJiraIssueTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates/{issue_template_id}:
+    delete:
+      description: Delete a Jira issue template by ID.
+      operationId: DeleteJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a Jira issue template by ID.
+      operationId: GetJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to retrieve
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a Jira issue template by ID.
+      operationId: UpdateJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to update
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/ms-teams/configuration/channel/{tenant_name}/{team_name}/{channel_name}:
     get:
       description: Get the tenant, team, and channel ID of a channel in the Datadog
@@ -76062,11 +76981,8 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: '(Preview) Filter custom metrics that have or have not been queried
-          in the specified window[seconds].
-
-          If no window is provided or the window is less than 2 hours, a default of
-          2 hours will be applied.'
+      - description: (Preview) Filter custom metrics that have or have not been queried
+          in the past 30 days.
         example: true
         in: query
         name: filter[queried]
@@ -86146,6 +87062,190 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_cws_agent_rules_write
+  /api/v2/security_monitoring/configuration/critical_assets:
+    get:
+      description: Get the list of all critical assets.
+      operationId: ListSecurityMonitoringCriticalAssets
+      parameters:
+      - description: Query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_read
+      summary: Get all critical assets
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+    post:
+      description: Create a new critical asset.
+      operationId: CreateSecurityMonitoringCriticalAsset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringCriticalAssetCreateRequest'
+        description: The definition of the new critical asset.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_write
+      summary: Create a critical asset
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 0
+  /api/v2/security_monitoring/configuration/critical_assets/rules/{rule_id}:
+    get:
+      description: Get the list of critical assets that affect a specific existing
+        rule by the rule's ID.
+      operationId: GetCriticalAssetsAffectingRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_read
+      summary: Get critical assets affecting a specific rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+  /api/v2/security_monitoring/configuration/critical_assets/{critical_asset_id}:
+    delete:
+      description: Delete a specific critical asset.
+      operationId: DeleteSecurityMonitoringCriticalAsset
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringCriticalAssetID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_write
+      summary: Delete a critical asset
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+    get:
+      description: Get the details of a specific critical asset.
+      operationId: GetSecurityMonitoringCriticalAsset
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringCriticalAssetID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_read
+      summary: Get a critical asset
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+    patch:
+      description: Update a specific critical asset.
+      operationId: UpdateSecurityMonitoringCriticalAsset
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringCriticalAssetID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringCriticalAssetUpdateRequest'
+        description: New definition of the critical asset. Supports partial updates.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringCriticalAssetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_critical_assets_write
+      summary: Update a critical asset
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
   /api/v2/security_monitoring/configuration/security_filters:
     get:
       description: Get the list of configured security filters with their definitions.
@@ -86338,12 +87438,29 @@ paths:
         required: false
         schema:
           type: string
+      - description: Attribute used to sort the list of suppression rules. Prefix
+          with `-` to sort in descending order.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionSort'
+      - description: Size for a given page. Use `-1` to return all items.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: -1
+          example: 10
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+                $ref: '#/components/schemas/SecurityMonitoringPaginatedSuppressionsResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -86613,6 +87730,14 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
+      - description: A search query to filter security rules. You can filter by attributes
+          such as `type`, `source`, `tags`.
+        example: type:signal_correlation source:cloudtrail
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -93372,6 +94497,9 @@ tags:
     and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
     for more information.
   name: Incidents
+- description: Manage your Jira Integration. Atlassian Jira is a project management
+    and issue tracking tool for teams to coordinate work and handle tasks efficiently.
+  name: Jira Integration
 - description: 'Manage your Datadog API and application keys. You need an API key
     and an
 
@@ -93403,6 +94531,11 @@ tags:
     url: https://docs.datadoghq.com/logs/archives/
   name: Logs Archives
 - description: 'Custom Destinations forward all the logs ingested to an external destination.
+
+
+    **Note**: Log forwarding is not available for the Government (US1-FED) site. Contact
+    your account representative for more information.
+
 
     See the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)
 
