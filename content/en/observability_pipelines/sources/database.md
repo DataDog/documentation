@@ -35,7 +35,7 @@ Before you configure the Database source, complete the following prerequisites t
 
 1. Create a database role for log collection, if you don't already have one. The role must:
 - Only have read-only access, so no permissions to modify or write data.
-- Have permission to execute the target queries that will be used for log collection.
+- Have permission to execute the target queries used for log collection.
 - Be scoped to only the databases, schemas, and tables required for your log collection
 
 1. Validate the connection string. The connection string must:
@@ -109,7 +109,7 @@ Set up the Database source and its environment variables when you [set up a pipe
 
 ### Incremental query syntax
 
-For incremental querying, SQL queries must have the following to ensure consistent results.
+For incremental querying, SQL queries must have the following to help ensure consistent results.
 
 - A `WHERE <incremental_column> <operation> <placeholder>` clause so that the source on each scheduled run can replace `placeholder` with the checkpoint value, and retrieve the latest results.
   - `incremental_column`: A column with incremental values. This value must be the same as the column value set in the Database source configuration.
