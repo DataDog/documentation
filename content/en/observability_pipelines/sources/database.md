@@ -63,7 +63,7 @@ Datadog recommends these tools for testing:
 
 ## Set up the source in the pipeline UI
 
-Set up the Database source and its environment variables when you [set up a pipeline](https://app.datadoghq.com/observability-pipelines). The information below is configured in the pipelines UI.
+Set up the Database source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 1. Ensure you have completed the [prerequisite steps](#prerequisites).
 1. Select the type of database you want to collect data from:
@@ -81,11 +81,11 @@ Set up the Database source and its environment variables when you [set up a pipe
 1. Set the SQL query parameters.
   1. Enter the name of your query.
   1. Enter the path to local file containing the validated SQL query.
-      - This is the SQL query you intend to execute needs to be stored in its own local file.
-      - **Note**: All file paths are made relative to the configuration data directory, which is /var/lib/observability-pipelines-worker/config/ by default. See [Advanced Worker Configurations](https://docs.datadoghq.com/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/) for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+      - The SQL query the Worker executes needs to be stored in its own local file.
+      - See [Incremental query syntax](#incremental-query-syntax) for details about formatting and [Queries](#queries) for additional information.
+      - **Note**: All file paths are made relative to the configuration data directory, which is /var/lib/observability-pipelines-worker/config/ by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
         - For example, if the SQL file path is `/DD_OP_DATA_DIR/config/db_queries/retrieve_incremental_with_start.sql`, enter the path `db_queries/retrieve_incremental_with_start.sql`.
-      - See [Incremental Queries](#incremental-queries) for more details about formatting and [Limits and requirements](#limits-and-requirements) for additional information.
-5. Determine your query type.
+5. Select your query type.
     - **Batch**: The Worker executes the same database query each time and returns all the results specified. This option does not keep track of the rows you queried previously.
       - An example use case: You want to pull the same table of monthly financial statements from a database.
     - **Incremental**: The Worker tracks which rows are new from one input execution to another. It relies on using an incremental column to pull the latest sets of data. See [Incremental query syntax](#incremental-query-syntax) for details on creating an incremental query.
@@ -194,3 +194,6 @@ Datadog recommends creating these monitors:
 
 - Connection timeout monitor to alert you when the Worker cannot connect to the database.
 - Query failure monitor to alert you when the query is timing out and failing.
+
+[1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
