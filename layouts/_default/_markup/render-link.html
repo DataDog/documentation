@@ -6,6 +6,12 @@
 {{- /* In studio md content links starting with / go to normal docs we trim to go to /studio/ */ -}}
 {{- if and (eq site.Language.Lang "studio") (not (hasPrefix $link "/studio")) -}}
 {{- $link = (strings.TrimPrefix "/" $link) -}}
+    {{- if and (hasPrefix $link "/") (not (hasPrefix $link "/studio") (not (findRE `\.(png|jpg|jpeg|gif|pdf|svg|zip)$` $link)) -}}
+        {{- if site.GetPage $link -}}
+            {{- /* The page exists in Studio (likely pulled from /en/), so prepend /studio/ */ -}}
+            {{- $link = printf "/studio/%s" (strings.TrimPrefix "/" $link) -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}
 <a href="{{ $link | safeURL }}">{{ .Text | safeHTML }}</a>
 {{- /*  Do not add extra empty lines or spaces to this render hook. will cause a space to render after anchor */ -}}
