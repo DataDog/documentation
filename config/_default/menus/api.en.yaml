@@ -11981,6 +11981,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update flaky test states
+      url: '#update-flaky-test-states'
+      identifier: test-optimization-update-flaky-test-state
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFlakyTestState
+        unstable:
+          - v2
+        order: 2
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation

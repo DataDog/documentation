@@ -3460,6 +3460,12 @@
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
   },
+  "UpdateFlakyTestState": {
+    "description": "Update the state of one or more flaky tests in Flaky Test Management.",
+    "summary": "Update flaky test states",
+    "request_description": "",
+    "request_schema_description": "The request to update flaky test states."
+  },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Get hourly usage for application security .\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for application security"

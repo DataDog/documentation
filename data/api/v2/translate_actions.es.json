@@ -3206,6 +3206,12 @@
     "request_description": "",
     "request_schema_description": "La solicitud de búsqueda de flaky tests."
   },
+  "UpdateFlakyTestState": {
+    "description": "Actualizar el estado de uno o más flaky tests en Flaky Test Management.",
+    "summary": "Actualizar estados de flaky tests",
+    "request_description": "",
+    "request_schema_description": "La solicitud para actualizar estados de flaky tests."
+  },
   "GetUsageApplicationSecurityMonitoring": {
     "description": "Muestra el uso por hora de la protección de aplicaciones.\n**Nota:** Este endpoint ha quedado obsoleto. Ahora pueden consultarse los datos de uso por hora de todos los productos con la [API para ver el uso por hora según la gama de productos](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Ver el uso por hora de la protección de aplicaciones"

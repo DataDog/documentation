@@ -22473,6 +22473,109 @@ components:
       - PIPELINES_FAILED_DESCENDING
       - PIPELINES_DURATION_LOST_ASCENDING
       - PIPELINES_DURATION_LOST_DESCENDING
+    UpdateFlakyTestStateRequest:
+      description: Request to update the state of multiple flaky tests.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateFlakyTestStateRequestData'
+      required:
+      - data
+      type: object
+    UpdateFlakyTestStateRequestAttributes:
+      description: Attributes for updating flaky test states.
+      properties:
+        tests:
+          description: List of flaky tests to update.
+          items:
+            $ref: '#/components/schemas/UpdateFlakyTestStateRequestTest'
+          type: array
+      required:
+      - tests
+      type: object
+    UpdateFlakyTestStateRequestData:
+      description: The JSON:API data for updating flaky test states.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateFlakyTestStateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/UpdateFlakyTestStateRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    UpdateFlakyTestStateRequestDataType:
+      description: The definition of `UpdateFlakyTestStateRequestDataType` object.
+      enum:
+      - update_flaky_test_state_request
+      type: string
+      x-enum-varnames:
+      - UPDATE_FLAKY_TEST_STATE_REQUEST
+    UpdateFlakyTestStateRequestTest:
+      description: A flaky test to update.
+      properties:
+        fingerprint_fqn:
+          description: The fingerprint FQN of the flaky test.
+          example: 4eb1887a8adb1847
+          type: string
+        new_state:
+          description: The new state to set for the flaky test.
+          enum:
+          - active
+          - quarantined
+          - disabled
+          - fixed
+          type: string
+      required:
+      - fingerprint_fqn
+      - new_state
+      type: object
+    UpdateFlakyTestStateResponse:
+      description: Response object for updating flaky test states.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateFlakyTestStateResponseData'
+      type: object
+    UpdateFlakyTestStateResponseAttributes:
+      description: Attributes for the update flaky test state response.
+      properties:
+        results:
+          description: Results of the update operation for each test.
+          items:
+            $ref: '#/components/schemas/UpdateFlakyTestStateResponseResult'
+          type: array
+      type: object
+    UpdateFlakyTestStateResponseData:
+      description: The JSON:API data for the update flaky test state response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateFlakyTestStateResponseAttributes'
+        id:
+          description: The ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateFlakyTestStateResponseDataType'
+      type: object
+    UpdateFlakyTestStateResponseDataType:
+      description: The definition of `UpdateFlakyTestStateResponseDataType` object.
+      enum:
+      - update_flaky_test_state_response
+      type: string
+      x-enum-varnames:
+      - UPDATE_FLAKY_TEST_STATE_RESPONSE
+    UpdateFlakyTestStateResponseResult:
+      description: Result of updating a single flaky test state.
+      properties:
+        fingerprint_fqn:
+          description: The fingerprint FQN of the flaky test.
+          example: 4eb1887a8adb1847
+          type: string
+        success:
+          description: Whether the update was successful.
+          type: boolean
+        error:
+          description: Error message if the update failed.
+          type: string
+      type: object
     FleetAgentAttributes:
       description: Attributes of a Datadog Agent in the list view.
       properties:
@@ -92144,6 +92247,45 @@ paths:
         operator: OR
         permissions:
         - test_optimization_read
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update the state of multiple flaky tests from Flaky Test Management.
+      operationId: UpdateFlakyTestState
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFlakyTestStateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFlakyTestStateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - test_optimization_write
+      summary: Update flaky test states
+      tags:
+      - Test Optimization
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - test_optimization_write
       x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
