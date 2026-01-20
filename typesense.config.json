@@ -249,6 +249,10 @@
                 {
                     "id": "rbac",
                     "synonyms": ["rbac", "role based access control"]
+                },
+                {
+                    "id": "oci",
+                    "synonyms": ["oracle cloud infrastructure", "oci integration"]
                 }
             ],
             "presets": [
