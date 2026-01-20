@@ -3,12 +3,25 @@
 {{- $branch_name := (print site.Params.branch "/") -}}
 {{- $link = replace $link $branch_name "" 1 -}}
 {{- end -}}
-{{- /* In studio md content links starting with / go to normal docs we trim to go to /studio/ */ -}}
-{{- if and (eq site.Language.Lang "studio") (not (hasPrefix $link "/studio")) -}}
-{{- $link = (strings.TrimPrefix "/" $link) -}}
-    {{- if and (hasPrefix $link "/") (not (hasPrefix $link "/studio") (not (findRE `\.(png|jpg|jpeg|gif|pdf|svg|zip)$` $link)) -}}
-        {{- if site.GetPage $link -}}
-            {{- /* The page exists in Studio (likely pulled from /en/), so prepend /studio/ */ -}}
+{{- if eq site.Language.Lang "studio" -}}
+    {{- /*
+        Only process internal links that don't already start with /studio/
+        and aren't static assets.
+    */ -}}
+    {{- if and (hasPrefix $link "/") (not (hasPrefix $link "/studio")) (not (findRE `\.(png|jpg|jpeg|gif|pdf|svg|zip)$` $link)) -}}
+        {{- $is_studio_content := false -}}
+
+        {{- /* These prefixes match your includeFiles in config.yaml */ -}}
+        {{- $studio_allowed_prefixes := slice "/api/latest/" "/account_management/" "/agent/" "/bits_ai/" "/data_security/" "/dashboards/" "/error_tracking/" "/integrations/" "/llm_observability/" "/logs/" "/monitors/" "/metrics/" "/notebooks/" "/product_analytics/" "/session_replay/" -}}
+
+        {{- range $prefix := $studio_allowed_prefixes -}}
+            {{- if hasPrefix $link $prefix -}}
+                {{- $is_studio_content = true -}}
+                {{- break -}}
+            {{- end -}}
+        {{- end -}}
+
+        {{- if $is_studio_content -}}
             {{- $link = printf "/studio/%s" (strings.TrimPrefix "/" $link) -}}
         {{- end -}}
     {{- end -}}
