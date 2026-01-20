@@ -79665,8 +79665,10 @@ paths:
         schema:
           example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           type: string
-      - description: Retrieves the on-call user at the given timestamp (ISO-8601).
-          Defaults to the current time if omitted."
+      - description: Retrieves the on-call user at the given timestamp in RFC3339
+          format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`).
+          When using timezone offsets with `+` or `-`, ensure proper URL encoding
+          (`+` should be encoded as `%2B`). Defaults to the current time if omitted.
         in: query
         name: filter[at_ts]
         schema:
