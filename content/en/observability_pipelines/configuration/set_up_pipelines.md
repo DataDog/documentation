@@ -90,7 +90,6 @@ To delete a destination, click on the pencil icon to the top right of the destin
 
 - A pipeline must have at least one destination. If a processor group only has one destination, that destination cannot be deleted.
 - You can add a total of three destinations for a pipeline.
-- A specific destination can only be added once. For example, you cannot add multiple Splunk HEC destinations.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/explore_templates/
