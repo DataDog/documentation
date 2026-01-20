@@ -32,8 +32,8 @@ Use the status drop-down to change how a flaky test is handled in your CI pipeli
 | Status    | Description |
 | ----------- | ----------- |
 | **Active** | The test is known to be flaky and is running in CI. |
-| **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Test Runs events are tagged with `@test.test_management.is_quarantined:true` when quarantined. |
-| **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Test Runs events are tagged with `@test.test_management.is_disabled:true` when disabled. |
+| **Quarantined** | Keep the test running in the background, but failures don't affect CI status or break pipelines. This is useful for isolating flaky tests without blocking merges. Datadog tags test run events with `@test.test_management.is_quarantined:true` when quarantined. |
+| **Disabled** | Skip the test entirely in CI. Use this when a test is no longer relevant or needs to be temporarily removed from the pipeline. Datadog tags test run events with `@test.test_management.is_disabled:true` when disabled. |
 | **Fixed** | The test has passed consistently and is no longer flaky. If supported, use the [remediation flow](#confirm-fixes-for-flaky-tests) to confirm the fix and automatically apply this status after it is merged into the default branch. |
 
 <div class="alert alert-info">Status actions have minimum version requirements for each programming language's instrumentation library. See <a href="#compatibility">Compatibility</a> for details.</div>
@@ -122,14 +122,14 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
 1. Copy the unique flaky test key that is displayed (for example, `DD_ABC123`).
 1. Include the test key in your Git commit title or message for the fix (for example, `git commit -m "DD_ABC123"`).
 1. When Datadog detects the test key in your commit, it automatically triggers the remediation flow for that test:
-    - Retries any tests you're attempting to fix 20 times (the number of retries is configurable in Flaky Tests Policies settings). 
-      - Every retry is tagged with `@test.test_management.is_attempt_to_fix:true` in Test Runs events.
+    - Retries any tests you're attempting to fix 20 times (or the number of retries you specified in your [Flaky Test Policies configuration](#configure-policies-to-automate-the-flaky-test-lifecycle)).
+      - Tags every retry with `@test.test_management.is_attempt_to_fix:true` in test run events.
     - Runs tests even if they are marked as `Disabled`.
-    - If all retries pass, marks the fix as **in progress** in Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
-      - The last test retry is tagged with `@test.test_management.attempt_to_fix_passed:true` tag in Test Runs events.
-      - We put the test under a 14 days [grace period](#grace-period-mechanism) to give time for the fix to propagate everywhere in the repository.
+    - If all retries pass, marks the fix as **in progress** in the Flaky Tests Management UI, associates it with the branch used for the fix, and waits for that branch to be merged.
+      - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:true` in test run events.
+      - Starts a 14-day [grace period](#grace-period-mechanism) to give time for the fix to propagate everywhere in the repository.
     - If any retry fails, keeps the test's current status (`Active`, `Quarantined`, or `Disabled`).
-      - The last test retry is tagged with `@test.test_management.attempt_to_fix_passed:false` in Test Runs events.
+      - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:false` in test run events.
 
 ### Track fixes that are in progress
 
@@ -143,11 +143,14 @@ Requirements and limitations:
 
 ### Grace period mechanism
 
-When a flaky test is fixed, it can take time for the fix to propagate to all branches. This causes the test to keep flaking in stale branches. A "grace period" mechanism avoids showing as "flaky" tests that have been fixed but keep flaking in stale branches.
+After you fix a flaky test, it can take time for the fix to propagate to all branches, which can cause the test to keep flaking in stale branches. A grace period mechanism prevents flaky tests from appearing on stale branches after the fix is applied.
 
-A 14-day grace period applies to every flaky test with a successful attempt to fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog checks if the commit where the test runs contains the fix. If the fix is not present in the commit and the test was `Active` or `Quarantined`, then the test is treated as `Quarantined`. If the test was `Disabled`, then it is treated as `Disabled`. This method avoids unnecessary CI failures and saves developer time.
+A 14-day grace period applies to every flaky test with a successful fix after using the [remediation flow](#confirm-fixes-for-flaky-tests). During this period, Datadog checks if the commit where the test run contains the fix:
+- If the fix is not present in the commit and the test was **Active** or **Quarantined**, Datadog treats the test as **Quarantined**.
+- If the test was **Disabled**, Datadog treats the test as **Disabled**.
+This method avoids unnecessary CI failures and saves developer time.
 
-If a test inside the grace period flakes and the commit doesn't contain the fix, the test run event is tagged with `@test.test_management.flaky_fix_missing:true`.
+If a test inside the grace period flakes and the commit doesn't contain the fix, Datadog tags the test run event with `@test.test_management.flaky_fix_missing:true`.
 
 ## AI-powered flaky test fixes
 
