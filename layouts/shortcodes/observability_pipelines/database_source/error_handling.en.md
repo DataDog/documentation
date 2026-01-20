@@ -1,0 +1,6 @@
+- Connection timeouts
+  - The time in milliseconds to wait for a connection attempt before timing out. This is used to prevent the source from retrying indefinitely.
+- Maximum retry attempts
+  - The number of retry attempts the source makes to the database before failing. This is used to prevent infinite retry attempts when the connection is failing.
+- Query timeout
+  - The time limit for a query before failing. This is used to prevent a long running query from continuing to execute indefinitely.
