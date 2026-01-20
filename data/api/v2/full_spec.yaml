@@ -17217,6 +17217,70 @@ components:
       required:
       - data
       type: object
+    DeletedSuiteResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeletedSuiteResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteTypes'
+      type: object
+    DeletedSuiteResponseDataAttributes:
+      properties:
+        deleted_at:
+          description: Deletion timestamp of the Synthetic suite ID.
+          type: string
+        public_id:
+          description: The Synthetic suite ID deleted.
+          type: string
+      type: object
+    DeletedSuitesRequestDelete:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeletedSuitesRequestDeleteAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/DeletedSuitesRequestType'
+      required:
+      - attributes
+      type: object
+    DeletedSuitesRequestDeleteAttributes:
+      properties:
+        force_delete_dependencies:
+          type: boolean
+        public_ids:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - public_ids
+      type: object
+    DeletedSuitesRequestDeleteRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/DeletedSuitesRequestDelete'
+      required:
+      - data
+      type: object
+    DeletedSuitesRequestType:
+      default: delete_suites_request
+      enum:
+      - delete_suites_request
+      example: delete_suites_request
+      type: string
+      x-enum-varnames:
+      - DELETE_SUITES_REQUEST
+    DeletedSuitesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DeletedSuiteResponseData'
+          type: array
+      type: object
     DependencyLocation:
       description: Static library vulnerability location.
       properties:
@@ -49740,18 +49804,6 @@ components:
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
-    SecurityMonitoringPaginatedSuppressionsResponse:
-      description: Response object containing the available suppression rules with
-        pagination metadata.
-      properties:
-        data:
-          description: A list of suppressions objects.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringSuppression'
-          type: array
-        meta:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionsMeta'
-      type: object
     SecurityMonitoringReferenceTable:
       description: Reference tables used in the queries.
       properties:
@@ -51901,31 +51953,6 @@ components:
         data:
           $ref: '#/components/schemas/SecurityMonitoringSuppression'
       type: object
-    SecurityMonitoringSuppressionSort:
-      description: The sort parameters used for querying suppression rules.
-      enum:
-      - name
-      - start_date
-      - expiration_date
-      - update_date
-      - enabled
-      - -name
-      - -start_date
-      - -expiration_date
-      - -update_date
-      - -enabled
-      type: string
-      x-enum-varnames:
-      - NAME
-      - START_DATE
-      - EXPIRATION_DATE
-      - UPDATE_DATE
-      - ENABLED
-      - NAME_DESCENDING
-      - START_DATE_DESCENDING
-      - EXPIRATION_DATE_DESCENDING
-      - UPDATE_DATE_DESCENDING
-      - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
       description: The type of the resource. The value should always be `suppressions`.
@@ -52020,31 +52047,6 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
       required:
       - data
-      type: object
-    SecurityMonitoringSuppressionsMeta:
-      description: Metadata for the suppression list response.
-      properties:
-        page:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionsPageMeta'
-      type: object
-    SecurityMonitoringSuppressionsPageMeta:
-      description: Pagination metadata.
-      properties:
-        pageNumber:
-          description: Current page number.
-          example: 0
-          format: int64
-          type: integer
-        pageSize:
-          description: Current page size.
-          example: 2
-          format: int64
-          type: integer
-        totalCount:
-          description: Total count of suppressions.
-          example: 2
-          format: int64
-          type: integer
       type: object
     SecurityMonitoringSuppressionsResponse:
       description: Response object containing the available suppression rules.
@@ -55729,6 +55731,31 @@ components:
           format: double
           type: number
       type: object
+    SuiteCreateEdit:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsSuite'
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteTypes'
+      required:
+      - attributes
+      - type
+      type: object
+    SuiteCreateEditRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SuiteCreateEdit'
+      required:
+      - data
+      type: object
+    SuiteSearchResponseType:
+      default: suites_search
+      enum:
+      - suites_search
+      example: suites_search
+      type: string
+      x-enum-varnames:
+      - SUITES_SEARCH
     SuppressionVersionHistory:
       description: Response object containing the version history of a suppression.
       properties:
@@ -55912,6 +55939,149 @@ components:
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         type: string
       type: array
+    SyntheticsSuite:
+      description: Object containing details about a Synthetic suite.
+      properties:
+        message:
+          description: Notification message associated with the suite.
+          example: Notification message
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the suite.
+          example: Example suite name
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsSuiteOptions'
+        public_id:
+          description: The public ID for the test.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        tags:
+          description: Array of tags attached to the suite.
+          example:
+          - env:production
+          items:
+            description: A tag attached to the suite.
+            type: string
+          type: array
+        tests:
+          items:
+            $ref: '#/components/schemas/SyntheticsSuiteTest'
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteType'
+      required:
+      - name
+      - type
+      - tests
+      - options
+      type: object
+    SyntheticsSuiteOptions:
+      description: Object describing the extra options for a Synthetic suite.
+      properties:
+        alerting_threshold:
+          description: Percentage of critical tests failure needed for a suite to
+            fail.
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+      type: object
+    SyntheticsSuiteResponse:
+      description: Synthetics suite response
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsSuiteResponseData'
+      type: object
+    SyntheticsSuiteResponseData:
+      description: Synthetics suite response data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsSuite'
+        id:
+          description: The public ID for the suite.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteTypes'
+      type: object
+    SyntheticsSuiteSearchResponse:
+      description: Synthetics suite search response
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsSuiteSearchResponseData'
+      type: object
+    SyntheticsSuiteSearchResponseData:
+      description: Synthetics suite search response data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsSuiteSearchResponseDataAttributes'
+        id:
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SuiteSearchResponseType'
+      type: object
+    SyntheticsSuiteSearchResponseDataAttributes:
+      description: Synthetics suite search response data attributes
+      properties:
+        suites:
+          items:
+            $ref: '#/components/schemas/SyntheticsSuite'
+          type: array
+        total:
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SyntheticsSuiteTest:
+      description: Object containing details about a Synthetic test included in a
+        Synthetic suite.
+      properties:
+        alerting_criticality:
+          $ref: '#/components/schemas/SyntheticsSuiteTestAlertingCriticality'
+        public_id:
+          example: ''
+          type: string
+      required:
+      - public_id
+      type: object
+    SyntheticsSuiteTestAlertingCriticality:
+      description: Alerting criticality for each the test.
+      enum:
+      - ignore
+      - critical
+      example: critical
+      type: string
+      x-enum-varnames:
+      - IGNORE
+      - CRITICAL
+    SyntheticsSuiteType:
+      default: suite
+      description: Type of the Synthetic suite, `suite`.
+      enum:
+      - suite
+      example: suite
+      type: string
+      x-enum-varnames:
+      - SUITE
+    SyntheticsSuiteTypes:
+      default: suites
+      description: Type for the Synthetics suites responses, `suites`.
+      enum:
+      - suites
+      example: suites
+      type: string
+      x-enum-varnames:
+      - SUITES
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
       example:
@@ -87403,29 +87573,12 @@ paths:
         required: false
         schema:
           type: string
-      - description: Attribute used to sort the list of suppression rules. Prefix
-          with `-` to sort in descending order.
-        in: query
-        name: sort
-        required: false
-        schema:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionSort'
-      - description: Size for a given page. Use `-1` to return all items.
-        in: query
-        name: page[size]
-        required: false
-        schema:
-          default: -1
-          example: 10
-          format: int64
-          type: integer
-      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringPaginatedSuppressionsResponse'
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -90464,6 +90617,232 @@ paths:
         operator: OR
         permissions:
         - billing_edit
+  /api/v2/synthetics/suites:
+    post:
+      operationId: CreateSyntheticsSuite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuiteCreateEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Create a test suite'
+      tags:
+      - Synthetics
+      x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+        - synthetics_create_edit_trigger
+  /api/v2/synthetics/suites/bulk-delete:
+    post:
+      operationId: DeleteSyntheticsSuites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletedSuitesRequestDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedSuitesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Bulk delete suites'
+      tags:
+      - Synthetics
+      x-menu-order: 40
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+  /api/v2/synthetics/suites/search:
+    get:
+      description: Search for Synthetics suites.
+      operationId: SearchSuites
+      parameters:
+      - description: The search query.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: name,asc
+          type: string
+      - description: If true, return only facets instead of full test details.
+        in: query
+        name: facets_only
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - description: The offset from which to start returning results.
+        in: query
+        name: start
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      - description: The maximum number of results to return.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 50
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteSearchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Search Synthetics suites
+      tags:
+      - Synthetics
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+  /api/v2/synthetics/suites/{public_id}:
+    get:
+      operationId: GetSyntheticsSuite
+      parameters:
+      - description: The public ID of the suite to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: 'Synthetics: Get a suite'
+      tags:
+      - Synthetics
+      x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+    put:
+      operationId: EditSyntheticsSuite
+      parameters:
+      - description: The public ID of the suite to edit.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuiteCreateEditRequest'
+        description: New suite details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Edit a test suite'
+      tags:
+      - Synthetics
+      x-menu-order: 35
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
   /api/v2/synthetics/variables/{variable_id}/jsonpatch:
     patch:
       description: 'Patch a global variable using JSON Patch (RFC 6902).
@@ -90514,7 +90893,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 45
       x-permission:
         operator: OR
         permissions:
