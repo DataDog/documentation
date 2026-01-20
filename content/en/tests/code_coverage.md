@@ -355,13 +355,45 @@ Reported code coverage is reported as `@test.code_coverage.lines_pct`, which rep
 
 {{< img src="/continuous_integration/graph_code_coverage.png" text="Graph code coverage" style="width:100%" >}}
 
-## Ignoring paths
+## Configuration file
 
-You can exclude specific files or directories from code coverage reporting by creating a code coverage configuration file in your repository.
+You can configure code coverage behavior by creating a configuration file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository.
 
-### Configuration file
+### Pattern syntax
 
-Create a file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository with the following structure:
+Configuration options that accept file paths support automatic pattern type detection based on the syntax you use.
+
+#### Regex patterns
+
+Patterns containing regex-specific characters (`+`, `{`, `}`, `|`, `(`, `)`, `^`, `$`, `\`) are treated as regular expressions:
+
+- `".*\\.pb\\.go$"` - Matches files ending with .pb.go
+- `"^generated/.*"` - Matches files in the generated directory
+- `".*_test\\.go$"` - Matches test files
+
+**Note**: Regex patterns are automatically anchored with `^...$` for whole-path matching. Use forward slashes (`/`) as path separators in regex patterns.
+
+#### Glob patterns
+
+Patterns containing glob-specific characters (`*`, `?`, `[`, `]`) are treated as glob patterns:
+
+- `"**/*.java"` - Matches all Java files
+- `"src/test/**/*"` - Matches all files under src/test
+- `"*.pb.go"` - Matches protobuf files in any directory
+
+**Note**: Use `**` to match directories recursively. The pattern `folder/*` matches only direct children, while `folder/**/*` matches all descendants.
+
+#### Prefix patterns
+
+Simple path prefixes without special characters are treated as prefix matches:
+
+- `"vendor/"` - Matches all files under vendor directory
+- `"third_party/"` - Matches third-party code
+- `"generated/"` - Matches generated code
+
+### Ignoring paths
+
+You can exclude specific files or directories from code coverage reporting using the `ignore` field:
 
 ```yaml
 ignore:
@@ -370,62 +402,21 @@ ignore:
   - "vendor/"             # Exclude vendor directory
 ```
 
-### Supported pattern types
-
-Datadog automatically detects the pattern type based on the syntax you use:
-
-#### Regex patterns
-
-Patterns containing regex-specific characters (`+`, `{`, `}`, `|`, `(`, `)`, `^`, `$`, `\`) are treated as regular expressions:
-
-```yaml
-ignore:
-  - ".*\\.pb\\.go$"       # Exclude files ending with .pb.go
-  - "^generated/.*"       # Exclude files in the generated directory
-  - ".*_test\\.go$"       # Exclude test files
-```
-
-**Note**: Regex patterns are automatically anchored with `^...$` for whole-path matching. Use forward slashes (`/`) as path separators in regex patterns.
-
-#### Glob patterns
-
-Patterns containing glob-specific characters (`*`, `?`, `[`, `]`) are treated as glob patterns:
-
-```yaml
-ignore:
-  - "**/*.java"           # Exclude all Java files
-  - "src/test/**/*"       # Exclude all files under src/test
-  - "*.pb.go"             # Exclude protobuf files
-```
-
-**Note**: Use `**` to match directories recursively. The pattern `folder/*` matches only direct children, while `folder/**/*` matches all descendants.
-
-#### Prefix patterns
-
-Simple path prefixes without special characters are treated as prefix matches:
-
-```yaml
-ignore:
-  - "vendor/"             # Exclude all files under vendor directory
-  - "third_party/"        # Exclude third-party code
-  - "generated/"          # Exclude generated code
-```
-
-### Exclusion operator
+#### Exclusion operator
 
 Use the `!` prefix to create negative patterns that **override** ignore rules:
 
 ```yaml
 ignore:
-  - "generated/"          # Ignore all generated files
-  - "!generated/important/" # But include files in generated/important
+  - "generated/"          # Ignore all generated code
+  - "!generated/core/"    # Except core generated files
 ```
 
 **Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path is excluded from being ignored.
 
-### Examples
+#### Examples
 
-#### Exclude test files and generated code
+**Exclude test files and generated code:**
 
 ```yaml
 ignore:
@@ -435,7 +426,7 @@ ignore:
   - "mocks/"              # Exclude mock files
 ```
 
-#### Exclude with exceptions
+**Exclude with exceptions:**
 
 ```yaml
 ignore:
@@ -445,7 +436,7 @@ ignore:
   - "!test/integration/"  # Except integration tests
 ```
 
-#### Mixed pattern types
+**Mixed pattern types:**
 
 ```yaml
 ignore:
