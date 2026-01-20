@@ -138,7 +138,7 @@ Datadog recommends using an incremental ID for the incremental column . If you u
 
 Checkpoint values are updated every job run. To monitor the checkpoint value, there are Worker logs that contain the message `Checkpoint updated` and the latest value that was published. If a job fails or the Worker is restarted mid-job or it crashes, the checkpoint value reverts to the start value. To recover the checkpoint value:
 
-1. Navigate to Log Explorer and search for the logs with the message `Checkpoint updated`.
+1. Navigate to [Log Explorer][3] and search for the logs with the message `Checkpoint updated`.
 1. Check the value found in the latest Worker log to see what the Worker tracked.
 1. Check the log in the destination to which your logs were sent and determine the last value sent.
 1. Manually reset the checkpoint value in the Database source in the pipelines UI.
@@ -198,3 +198,4 @@ Datadog recommends creating these monitors:
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: https://app.datadoghq.com/logs
