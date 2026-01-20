@@ -102,8 +102,6 @@ Each TTID and TTFD side panel contains a distribution visualization, an indicati
 
   {{< img src="real_user_monitoring/android/android-ttid-vital.png" alt="Time to initial display vital event" style="width:90%;">}}
 
-If Android profiling is enabled and the session is sampled, the time to initial display may include profiling data.
-
 ### Metrics
 The time to initial display and time to full display are calculated as metrics:
 - `rum.measure.app.startup_to_initial_display`, which represents the time to initial display 
