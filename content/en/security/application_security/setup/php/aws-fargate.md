@@ -158,7 +158,7 @@ aws ecs run-task --cluster your-cluster --task-definition your-task-definition
 
 If you encounter issues while setting up App and API Protection for your PHP application, see the [PHP App and API Protection troubleshooting guide][2].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
