@@ -183,7 +183,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 - The local file that contains the query for the Worker to run can only have one query.
 - Parameterized queries are supported for incremental execution.
 
-## Manage credentials and IAM externally
+### Manage credentials and IAM externally
 
 - Database users, roles, and permission must be created and managed outside of Datadog.
 - Connection strings should reference environment variables for secrets.
