@@ -2753,6 +2753,18 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 4
+    - name: Preview a rule query with applied filters
+      url: '#preview-a-rule-query-with-applied-filters'
+      identifier: security-monitoring-preview-a-rule-query-with-applied-filters
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewSecurityMonitoringRuleQuery
+        unstable: []
+        order: 12
     - name: Get a suppression's version history
       url: '#get-a-suppressions-version-history'
       identifier: security-monitoring-get-a-suppressions-version-history

@@ -2935,6 +2935,12 @@
     "description": "Get a suppression's version history.",
     "summary": "Get a suppression's version history"
   },
+  "PreviewSecurityMonitoringRuleQuery": {
+    "description": "Preview a security monitoring rule query with security filters, group by fields, and distinct fields applied.\nThis endpoint is used in the rule editor to show how the query will be transformed after applying additional filters.",
+    "summary": "Preview a rule query with applied filters",
+    "request_description": "",
+    "request_schema_description": "Request to preview a rule query with applied filters."
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"

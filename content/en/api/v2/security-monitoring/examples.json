@@ -4280,7 +4280,7 @@
             "resourceType": "aws_acm"
           },
           "decreaseCriticalityBasedOnEnv": false,
-          "detectionMethod": "string",
+          "detectionMethod": "threshold",
           "evaluationWindow": "integer",
           "hardcodedEvaluatorType": "string",
           "impossibleTravelOptions": {
@@ -4791,6 +4791,65 @@
       "html": ""
     }
   },
+  "PreviewSecurityMonitoringRuleQuery": {
+    "responses": {
+      "200": {
+        "json": {
+          "query": "source:java (service:payment OR service:auth)"
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">query</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The modified query with all filters applied.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "dataSource": "logs",
+        "detectionMethod": "threshold",
+        "query": "source:java",
+        "queryIndex": 0,
+        "type": "log_detection"
+      },
+      "json": {
+        "dataSource": "logs",
+        "detectionMethod": "threshold",
+        "distinctFields": [],
+        "filters": [
+          {
+            "action": "string",
+            "query": "string"
+          }
+        ],
+        "groupByFields": [],
+        "query": "source:java",
+        "queryIndex": 0,
+        "type": "log_detection"
+      },
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">dataSource&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Data source for the query.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">detectionMethod&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The detection method. \nAllowed enum values: <code>threshold,new_value,anomaly_detection,impossible_travel,hardcoded,third_party,anomaly_threshold,sequence_detection</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">distinctFields</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Fields to apply distinct on.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> filters</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Additional security filters to apply.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"filters\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">action</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The type of filtering action. \nAllowed enum values: <code>require,suppress</code></p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"filters\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">query</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Query for selecting logs to apply the filtering action.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">groupByFields</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Fields to group by.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">query&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The query to preview.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">queryIndex&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">int32</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Index of the query in the rule.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The rule type. \nAllowed enum values: <code>log_detection,infrastructure_configuration,workload_security,cloud_configuration,application_security,api_security</code></p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+    }
+  },
   "ListSecurityMonitoringRules": {
     "responses": {
       "200": {
@@ -4871,7 +4930,7 @@
                   "resourceType": "aws_acm"
                 },
                 "decreaseCriticalityBasedOnEnv": false,
-                "detectionMethod": "string",
+                "detectionMethod": "threshold",
                 "evaluationWindow": "integer",
                 "hardcodedEvaluatorType": "string",
                 "impossibleTravelOptions": {
@@ -4954,7 +5013,7 @@
                   "status": "critical"
                 }
               ],
-              "type": "string",
+              "type": "log_detection",
               "updateAuthorId": "integer",
               "updatedAt": "integer",
               "version": "integer"
@@ -5070,7 +5129,7 @@
               "resourceType": "aws_acm"
             },
             "decreaseCriticalityBasedOnEnv": false,
-            "detectionMethod": "string",
+            "detectionMethod": "threshold",
             "evaluationWindow": "integer",
             "hardcodedEvaluatorType": "string",
             "impossibleTravelOptions": {
@@ -5153,7 +5212,7 @@
               "status": "critical"
             }
           ],
-          "type": "string",
+          "type": "log_detection",
           "updateAuthorId": "integer",
           "updatedAt": "integer",
           "version": "integer"
@@ -5272,7 +5331,7 @@
             "resourceType": "aws_acm"
           },
           "decreaseCriticalityBasedOnEnv": false,
-          "detectionMethod": "string",
+          "detectionMethod": "threshold",
           "evaluationWindow": "integer",
           "hardcodedEvaluatorType": "string",
           "impossibleTravelOptions": {
@@ -5501,7 +5560,7 @@
             "resourceType": "aws_acm"
           },
           "decreaseCriticalityBasedOnEnv": false,
-          "detectionMethod": "string",
+          "detectionMethod": "threshold",
           "evaluationWindow": "integer",
           "hardcodedEvaluatorType": "string",
           "impossibleTravelOptions": {
@@ -5730,7 +5789,7 @@
               "resourceType": "aws_acm"
             },
             "decreaseCriticalityBasedOnEnv": false,
-            "detectionMethod": "string",
+            "detectionMethod": "threshold",
             "evaluationWindow": "integer",
             "hardcodedEvaluatorType": "string",
             "impossibleTravelOptions": {
@@ -5950,7 +6009,7 @@
             "resourceType": "aws_acm"
           },
           "decreaseCriticalityBasedOnEnv": false,
-          "detectionMethod": "string",
+          "detectionMethod": "threshold",
           "evaluationWindow": "integer",
           "hardcodedEvaluatorType": "string",
           "impossibleTravelOptions": {
@@ -6151,7 +6210,7 @@
               "resourceType": "aws_acm"
             },
             "decreaseCriticalityBasedOnEnv": false,
-            "detectionMethod": "string",
+            "detectionMethod": "threshold",
             "evaluationWindow": "integer",
             "hardcodedEvaluatorType": "string",
             "impossibleTravelOptions": {
@@ -6234,7 +6293,7 @@
               "status": "critical"
             }
           ],
-          "type": "string",
+          "type": "log_detection",
           "updateAuthorId": "integer",
           "updatedAt": "integer",
           "version": "integer"
@@ -6342,7 +6401,7 @@
               "resourceType": "aws_acm"
             },
             "decreaseCriticalityBasedOnEnv": false,
-            "detectionMethod": "string",
+            "detectionMethod": "threshold",
             "evaluationWindow": "integer",
             "hardcodedEvaluatorType": "string",
             "impossibleTravelOptions": {
@@ -6425,7 +6484,7 @@
               "status": "critical"
             }
           ],
-          "type": "string",
+          "type": "log_detection",
           "updateAuthorId": "integer",
           "updatedAt": "integer",
           "version": "integer"
@@ -6559,7 +6618,7 @@
             "resourceType": "aws_acm"
           },
           "decreaseCriticalityBasedOnEnv": false,
-          "detectionMethod": "string",
+          "detectionMethod": "threshold",
           "evaluationWindow": "integer",
           "hardcodedEvaluatorType": "string",
           "impossibleTravelOptions": {
@@ -6834,7 +6893,7 @@
               "resourceType": "aws_acm"
             },
             "decreaseCriticalityBasedOnEnv": false,
-            "detectionMethod": "string",
+            "detectionMethod": "threshold",
             "evaluationWindow": "integer",
             "hardcodedEvaluatorType": "string",
             "impossibleTravelOptions": {
@@ -7029,7 +7088,7 @@
                         "resourceType": "aws_acm"
                       },
                       "decreaseCriticalityBasedOnEnv": false,
-                      "detectionMethod": "string",
+                      "detectionMethod": "threshold",
                       "evaluationWindow": "integer",
                       "hardcodedEvaluatorType": "string",
                       "impossibleTravelOptions": {
@@ -7112,7 +7171,7 @@
                         "status": "critical"
                       }
                     ],
-                    "type": "string",
+                    "type": "log_detection",
                     "updateAuthorId": "integer",
                     "updatedAt": "integer",
                     "version": "integer"
@@ -7956,7 +8015,7 @@
                       "learningDuration": "integer",
                       "learningPeriodBaseline": "integer"
                     },
-                    "detectionMethod": "string",
+                    "detectionMethod": "threshold",
                     "evaluationWindow": "integer",
                     "impossibleTravelOptions": {
                       "baselineUserLocations": true
@@ -8220,7 +8279,7 @@
                   "learningDuration": "integer",
                   "learningPeriodBaseline": "integer"
                 },
-                "detectionMethod": "string",
+                "detectionMethod": "threshold",
                 "evaluationWindow": "integer",
                 "impossibleTravelOptions": {
                   "baselineUserLocations": true
@@ -8485,7 +8544,7 @@
                     "learningDuration": "integer",
                     "learningPeriodBaseline": "integer"
                   },
-                  "detectionMethod": "string",
+                  "detectionMethod": "threshold",
                   "evaluationWindow": "integer",
                   "impossibleTravelOptions": {
                     "baselineUserLocations": true

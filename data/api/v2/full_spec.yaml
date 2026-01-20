@@ -50002,6 +50002,7 @@ components:
       - third_party
       - anomaly_threshold
       - sequence_detection
+      example: threshold
       type: string
       x-enum-varnames:
       - THRESHOLD
@@ -50101,6 +50102,58 @@ components:
       - SIX_HOURS
       - TWELVE_HOURS
       - ONE_DAY
+    SecurityMonitoringRuleLivetailRequest:
+      description: Request to preview a rule query with applied filters.
+      properties:
+        dataSource:
+          description: Data source for the query.
+          example: logs
+          type: string
+        detectionMethod:
+          $ref: '#/components/schemas/SecurityMonitoringRuleDetectionMethod'
+        distinctFields:
+          description: Fields to apply distinct on.
+          items:
+            type: string
+          type: array
+        filters:
+          description: Additional security filters to apply.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        groupByFields:
+          description: Fields to group by.
+          items:
+            type: string
+          type: array
+        query:
+          description: The query to preview.
+          example: source:java
+          type: string
+        queryIndex:
+          description: Index of the query in the rule.
+          example: 0
+          format: int32
+          maximum: 9
+          minimum: 0
+          type: integer
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeRead'
+      required:
+      - query
+      - queryIndex
+      - type
+      - detectionMethod
+      - dataSource
+      type: object
+    SecurityMonitoringRuleLivetailResponse:
+      description: Response containing the modified query with applied filters.
+      properties:
+        query:
+          description: The modified query with all filters applied.
+          example: source:java (service:payment OR service:auth)
+          type: string
+      type: object
     SecurityMonitoringRuleMaxSignalDuration:
       description: 'A signal will "close" regardless of the query being matched once
         the time exceeds the maximum duration.
@@ -50446,6 +50499,7 @@ components:
       - cloud_configuration
       - application_security
       - api_security
+      example: log_detection
       type: string
       x-enum-varnames:
       - LOG_DETECTION
@@ -87688,6 +87742,47 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 0
+  /api/v2/security_monitoring/livetail:
+    post:
+      description: 'Preview a security monitoring rule query with security filters,
+        group by fields, and distinct fields applied.
+
+        This endpoint is used in the rule editor to show how the query will be transformed
+        after applying additional filters.'
+      operationId: PreviewSecurityMonitoringRuleQuery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleLivetailRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleLivetailResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Preview a rule query with applied filters
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
   /api/v2/security_monitoring/rules:
     get:
       description: List rules.
