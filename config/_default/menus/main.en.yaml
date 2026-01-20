@@ -5358,6 +5358,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
+    - name: Setup and Usage
+      url: llm_observability/experiments/setup
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_setup
+      weight: 501
+    - name: Datasets
+      url: llm_observability/experiments/datasets
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_datasets
+      weight: 502
+    - name: Experiments API
+      url: llm_observability/experiments/api
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_api
+      weight: 503
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs

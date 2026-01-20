@@ -131,7 +131,7 @@ Enabling Live Debugger and Dynamic Instrumentation on a service does not trigger
 
 The following constraints apply to Live Debugger usage and configuration:
 
-- **Language support:** Live Debugger is available for the same runtime languages as [Dynamic Instrumentation][1], including: Java, Python, .NET, PHP (preview), Node.js (preview), Ruby (preview).
+- **Language support:** Live Debugger supports the same runtime languages as [Dynamic Instrumentation][14].
 - **Configuration scope:** Live Debugger and Dynamic Instrumentation are enabled or disabled together for the same service and environment.
 - **Rate limits:**
    - Logpoints with variable capture: Limited to 1 execution per second.

@@ -17,6 +17,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [AWS Secrets Manager](#id-for-secrets)
 - [AWS SSM](#id-for-ssm)
 - [Azure KeyVault](#id-for-azure)
+- [GCP Secret Manager](#id-for-gcp)
 - [HashiCorp Vault](#id-for-hashicorp)
 - [File JSON](#id-for-json-yaml)
 - [File YAML](#id-for-json-yaml)
@@ -412,6 +413,102 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 ```
 
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+
+The following GCP services are supported:
+
+| secret_backend_type value                               | GCP Service                    |
+| ------------------------------------------------------- | ------------------------------ |
+| `gcp.secretmanager` | [GCP Secret Manager][5000] |
+
+##### GCP authentication and access policy
+
+The GCP Secret Manager implementation uses [Application Default Credentials (ADC)][5001] for authentication with Google.
+
+To interact with GCP Secret Manager, the service account used by the Datadog Agent (such as the VM's service account, a workload identity, or locally activated credentials) requires the `secretmanager.versions.access` permission.
+
+This can be granted with the predefined role **Secret Manager Secret Accessor** (`roles/secretmanager.secretAccessor`) or a custom role with equivalent [access][5002].
+
+On GCE or GKE runtimes, ADC is configured automatically through the instance or pod's attached service account. The attached service account needs to have the proper roles to access GCP Secret Manager. In addition, the GCE or GKE runtime requires the `cloud-platform` [OAuth access scope][5003].
+
+##### GCP configuration example
+
+Configure the Datadog Agent to use GCP Secret Manager to resolve secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: gcp.secretmanager
+secret_backend_config:
+  gcp_session:
+    project_id: <PROJECT_ID>
+```
+
+After configuring the Agent to use GCP Secret Manager, reference secrets in your configurations with `ENC[secret-name]` or `ENC[secret-name;key;version;]`.
+
+The ENC notation is composed of:
+
+- `secret`: the secret name in GCP Secret Manager (for example, `datadog-api-key`).
+- `key`: (optional) the key to extract from a JSON-formatted secret. If you're using plain-text secrets you can ommit this (example: `ENC[secret-name;;version]`).
+- `version`: (optional) the secret version number. If not specified, the `latest` version is used.
+  + Version syntax examples:
+    - `secret-key` - Implicit `latest` version
+    - `secret-key;;latest` - Explicit `latest` version
+    - `secret-key;;1` - Specific version number
+
+For example, assuming GCP secrets named `datadog-api-key` with two versions and `datadog-app-key`:
+
+```yaml
+# datadog.yaml
+api_key: ENC[datadog-api-key;;1] # specify the first version of the api key
+app_key: ENC[datadog-app-key] # latest version
+
+secret_backend_type: gcp.secretmanager
+secret_backend_config:
+  gcp_session:
+    project_id: <PROJECT_ID>
+```
+
+For JSON-formatted secrets, assuming a secret named `datadog-keys` contains:
+
+```json
+{
+  "api_key": "your_api_key_value",
+  "app_key": "your_app_key_value"
+}
+```
+
+Reference specific keys like this:
+
+```yaml
+# datadog.yaml
+api_key: ENC[datadog-keys;api_key;1] # specify the first version of the api key 
+app_key: ENC[datadog-keys;app_key] # latest
+
+secret_backend_type: gcp.secretmanager
+secret_backend_config:
+  gcp_session:
+    project_id: <PROJECT_ID>
+```
+
+##### Secret versioning
+
+GCP Secret Manager supports secret versions. The Agent implementation also supports secret versioning using the `;` delimiter. If no version is specified, the `latest` version is used.
+
+
+##### JSON secret support
+
+The Datadog Agent supports extracting specific keys from JSON-formatted secrets using the `;` delimiter:
+
+- `datadog;api_key` - Extracts the `api_key` field from the `datadog` secret with an implicit `latest` version
+- `datadog;api_key;1`  - Extracts the `api_key` field from the `datadog` secret from version `1`
+
+[5000]: https://cloud.google.com/security/products/secret-manager
+[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
+[5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
+[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
 
 {{% /collapse-content %}}
 
@@ -894,6 +991,22 @@ annotations:
 ```
 
 The Agent can then trigger secrets refresh at either the interval set in `secret_refresh_interval` or manually with `datadog-agent secret refresh`.
+
+### Automatic secrets refresh on API key failure / invalidation
+
+Starting in Agent version v7.74, the Agent can automatically refresh secrets when it detects an invalid API key. This happens when the Agent receives a 403 Forbidden response from Datadog or when the periodic health check detects an invalid or expired API key.
+
+To enable this feature, set `secret_refresh_on_api_key_failure_interval` to an interval in minutes in your `datadog.yaml` file. Set to `0` to disable (default).
+
+This interval is the minimum amount of time between 2 refreshes to avoid spamming your secrets management solution when an invalid API key is detected.
+
+```yaml
+api_key: ENC[<secret_handle>]
+
+secret_refresh_on_api_key_failure_interval: 10
+```
+
+This setting is compatible with `secret_refresh_interval`.
 
 ### Enabling DDOT collector refresh
 If you are using [DDOT collector][6] and want to enable API/APP refresh you must add the following additional configuration to your `datadog.yaml` file:
