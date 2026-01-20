@@ -1,5 +1,5 @@
 ---
-title: Jira Integration
+title: Integrate Jira with Error Tracking
 is_beta: false
 private: false
 further_reading:
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The Jira integration for Error Tracking allows you to create and link Jira tickets to Error Tracking issues:
+Integrate Jira with Error Tracking to create and link Jira tickets to Error Tracking issues. With Jira for Error tracking, you can: 
 
 - Create Jira tickets directly from the Error Tracking issue panel
 - Group multiple Error Tracking issues into a single ticket
@@ -25,7 +25,7 @@ The Jira integration for Error Tracking allows you to create and link Jira ticke
 
 ## Setup
 
-You need the following [permissions][1] to use the Jira integration for Error Tracking:
+You need the following [permissions][6] to use the Jira integration for Error Tracking:
 
 - Error Tracking Read
 - Error Tracking Issue Write
@@ -39,7 +39,7 @@ You can create a Jira ticket directly from the Issue Panel to group investigatio
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the Issue Panel.
 3. In the Issue Panel, in the **Actions** dropdown, click **Add Jira ticket**.
-4. Choose the Jira account and project in which the ticket should be created. Choose the ticket type you want to create.
+4. Choose the Jira account and project in which the ticket should be created. Then, choose the ticket type you want to create.
 5. Optionally, access Data Sync settings to configure how data should be synced between Datadog and Jira.
 6. Click **Create** to create the ticket.
 
@@ -66,27 +66,19 @@ You can attach multiple Error Tracking issues to a single Jira ticket to group c
 
 {{< img src="error_tracking/add-to-existing-ticket.png" alt="Add an Error Tracking issue to an existing Jira ticket" style="height:300px;" >}}
 
-When several issues are linked to a single ticket, their state, assignee and comments are two-way synced.
-See [State dual-way sync between issues and tickets](#state-dual-way-sync-between-issues-and-tickets) for more information
-on how the issues states and ticket status are synced.
+When several issues are linked to a single ticket, their state, assignee and comments are two-way synced. See [State dual-way sync between issues and tickets](#state-dual-way-sync-between-issues-and-tickets) for more information on how the issues states and ticket status are synced.
 
-The relationship between tickets and issues is a 1:N relationship. A single ticket can be linked to multiple issues, but
-an issue can only be linked to one single Jira ticket.
+The relationship between tickets and issues is a 1:N relationship. A single ticket can be linked to multiple issues, but an issue can only be linked to one single Jira ticket.
 
 ## State dual-way sync between issues and tickets
 
-If two-way sync is enabled and configured between your Datadog and Jira projects, the states of your Error Tracking issues
-and Jira tickets are mirrored. If you encounter any unexpected behavior on this states sync, see our [Troubleshooting][5]
-page to fix your configuration.
+If two-way sync is enabled and configured between Datadog and Jira projects, the states of Error Tracking issues and Jira tickets are mirrored. If you encounter any unexpected behavior on this states sync, see the [Troubleshooting][5] section for how to fix your configuration.
 
-When a single Error Tracking issue is linked to a Jira ticket, their states are two-way synced. The mapping between these
-states can be configured in the Data Sync settings of the ticket creation or automation rule forms:
+When a single Error Tracking issue is linked to a Jira ticket, their states are two-way synced. The mapping between these states can be configured in the Data Sync settings of the ticket creation or automation rule forms:
 
 {{< img src="error_tracking/jira-status-mapping.png" alt="Map Error Tracking issue states to Jira ticket statuses" style="width:100%;" >}}
 
-When multiple Error Tracking issues are linked to the same Jira ticket, there is also a sync between their states,
-depending on the situation. If you update the status of the ticket, all linked issues are updated to mirror this state
-according to your mapping.
+When multiple Error Tracking issues are linked to the same Jira ticket, there is also a sync between their states, depending on the situation. If you update the status of the ticket, all linked issues are updated to mirror this state according to your mapping.
 
 Assuming that your mapping is defined as follows:
 
@@ -98,7 +90,7 @@ Assuming that your mapping is defined as follows:
 
 If you update the state of an issue, the resulting state of other linked issues and the Jira ticket follows these rules:
 
-| State before                                                       | Action                                                 | Resulting state                                                                                    |
+| Initial state                                                      | Action                                                 | Resulting state                                                                                    |
 |--------------------------------------------------------------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | The ticket is `Done` and all issues are `Resolved`.                | You update one issue to `For Review`.                  | The ticket is `To Do` but all other issues remain `Resolved`.                                      |
 | The ticket is `To Do` and all issues are `For Review`.             | You update one issue to `Resolved`.                    | The ticket is `To Do`, one issue is `Resolved`, all other issues remain `For Review`.              |
@@ -107,14 +99,13 @@ If you update the state of an issue, the resulting state of other linked issues 
 
 ## Automation rules
 
-Configure rules to match specific issues to Jira boards. When an issue matches a rule, any ticket created for
-that issue will be defaulted into the board specified by your rule - whether it’s a ticket that you manually create, or
-a ticket that we create automatically for you.
+You can configure rules to match specific issues to Jira boards. When an issue matches a rule, any ticket created manually or automatically for that issue will be defaulted into the board specified by your rule.
 
 ### Setup
 
-You need either Error Tracking Write or Error Tracking Settings Write [permission][1] to create automation rules for your
-Error Tracking issues.
+To create automation rules for your Error Tracking issues, you need one (1) of the following [permissions][6] :
+	- Error Tracking Write
+	- Error Tracking Settings Write 
 
 ### Create an Automation Rule
 
@@ -165,3 +156,4 @@ your rule, and attached to the matching issue.
 [3]: /error_tracking/explorer/
 [4]: https://app.datadoghq.com/error-tracking/settings
 [5]: /error_tracking/ticketing_systems/troubleshooting#sync-is-broken-between-jira-and-error-tracking
+[6]: /account_management/rbac/permissions/

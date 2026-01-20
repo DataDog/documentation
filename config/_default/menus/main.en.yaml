@@ -2286,7 +2286,7 @@ menu:
       parent: error_tracking
       identifier: error_tracking_manage_data
       weight: 13
-    - name: Ticketing Systems Integration
+    - name: Ticketing Systems
       url: error_tracking/ticketing_systems
       parent: error_tracking
       identifier: error_tracking_ticketing_systems
