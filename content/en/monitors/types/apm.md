@@ -41,7 +41,7 @@ Watchdog anomaly monitors automatically detect unusual patterns in latency, erro
 
 **Note**: Datadog automatically creates monitors as new service entry points are observed to maintain coverage without gaps. This automatic creation capability is only available during a trial.
 
-You can view and manage all automatically created monitors on the Monitors page, where they can be edited, cloned, or disabled like any other monitor.
+You can view and manage all automatically created monitors on the Monitors page, where they can be edited, cloned, or disabled.
 
 
 ## Monitor creation
