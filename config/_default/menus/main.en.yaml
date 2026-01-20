@@ -5788,11 +5788,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_setup
       weight: 1
+    - name: Configuration
+      url: code_coverage/configuration/
+      parent: code_coverage
+      identifier: code_coverage_configuration
+      weight: 2
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 2
+      weight: 3
     - name: PR Gates
       url: pr_gates/
       pre: ci

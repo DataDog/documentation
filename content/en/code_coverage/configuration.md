@@ -40,7 +40,7 @@ The pattern type is automatically detected based on the syntax you use.
 
 Patterns containing regex-specific characters (`+`, `{`, `}`, `|`, `(`, `)`, `^`, `$`, `\`) are treated as regular expressions:
 
-- `".*\\.pb\\.go$"` - Matches files ending with .pb.go
+- `".*\\.pb\\.go$"` - Matches files ending with `.pb.go`
 - `"^generated/.*"` - Matches files in the generated directory
 - `".*_test\\.go$"` - Matches test files
 
