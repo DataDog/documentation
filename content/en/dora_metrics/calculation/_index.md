@@ -19,17 +19,17 @@ further_reading:
 
 This page explains how Datadog calculates each of the four key DORA metrics.
 
-## Deployment Frequency
+## Deployment frequency
 
 Deployment frequency is calculated based on the count of deployment events over a specific time frame.
 
-## Change Lead Time
+## Change lead time
 
 For a single Git commit, change lead time (CLT) is calculated as time from the creation of the commit to when the deployment including that commit was executed.
 
 To calculate change lead time for a deployment, Datadog runs a git log between the deployment commit SHA and the previous deployment commit SHA to find all the commits being deployed. Then, it aggregates the related change lead time values for all these commits. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
-### Example
+### Example: Calculating change lead time
 
 {{< img src="dora_metrics/git_log_example.png" alt="An example of a detected rollback deployment" style="width:75%;" >}}
 
@@ -51,7 +51,7 @@ In the graph above, C is the first commit, followed by C1 and C2. A feature bran
 
 At a higher level, DORA metrics in Datadog use the median across deployments, which is preferred because it is less sensitive to outliers and gives a more accurate and reliable view of typical performance.
 
-### Recommendations
+### Recommendations for change lead time
 
 Using commit-level granularity provides a more accurate view of engineering performance. At the deployment level, metrics are calculated as an average of averages, which can obscure key insights. This approach treats all deployments equally, even if one contains one commit and another contains ten, misrepresenting their impact.
 
@@ -66,11 +66,11 @@ Using commit-level granularity provides a more accurate view of engineering perf
 * When using "Rebase", either manually or to merge pull requests:
   * For all Git providers: Metrics are calculated using the original commit timestamps, but the SHA shown reflects the newly created rebased commit.
 
-## Change lead time stages
+### Change lead time stages
 
 Datadog breaks down change lead time into the following fields, which represent the different stages from commit creation to deployment.
 
-**Note**: These fields are measured for every commit and not per deployment or pull request. There are several edge cases depending on the way the commits were introduced to the deployment. For details, see the [limitations](#limitations) below.
+**Note**: These fields are measured for every commit and not per deployment or pull request. There are several edge cases depending on the way the commits were introduced to the deployment. For details, see the [limitations](#limitations-clt-stages) for change lead time stages.
 
 | Metric                     | Description                |
 |----------------------------|----------------------------|
@@ -82,13 +82,13 @@ Datadog breaks down change lead time into the following fields, which represent 
 
 These stages are only computed when the source of the repository metadata is GitHub or GitLab, and for most stages, there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
 
-### Limitations
+#### Limitations {#limitations-clt-stages}
 
 * Change lead time stage breakdown metrics are only available for GitHub and GitLab.
 * When using "Rebase", either manually or to merge pull requests:
   * For all Git providers: Because rebased commits are not associated with any pull request, the change lead time breakdown is unavailable for these commits.
 
-## Change Failure Rate
+## Change failure rate
 
 The Change Failure Rate, the percentage of deployments causing a failure in production, is calculated as:
 
@@ -109,7 +109,7 @@ Failed deployment recovery time is calculated as the duration between the change
 
 * For static rules, recovery time is calculated between the matched deployment and the immediately preceding deployment.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
