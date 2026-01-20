@@ -497,12 +497,6 @@ secret_backend_config:
 
 GCP Secret Manager supports secret versions. The Agent implementation also supports secret versioning using the `;` delimiter. If no version is specified, the `latest` version is used.
 
-Version syntax:
-
-- `secret-key` - Implicit `latest` version
-- `secret-key;;latest` - Explicit `latest` version
-- `secret-key;;1` - Specific version number
-- `secret-key;;n` - Version `n`
 
 ##### JSON secret support
 
