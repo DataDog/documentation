@@ -31,7 +31,7 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 **Note**: This option is not available for FIPS-enabled Agents at this time.
 
-Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`. 
+Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`.
 
 `secret_backend_type` is used to specify which secret management solution to use, and `secret_backend_config` holds additional configuration relevant to that solution.
 
@@ -44,7 +44,7 @@ secret_backend_config:
 ```
 
 
-More specific setup instructions depend on the backend type used. Refer to the appropriate section bellow for further information: 
+More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
 
 {{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-secrets" %}}
@@ -80,7 +80,7 @@ DD_SECRET_BACKEND_TYPE="aws.secrets"
 DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'
 ```
 
-After configuring the Agent to use AWS Secrets, you can reference any secrets in your configurations with `ENC[secretId;secretKey]`. 
+After configuring the Agent to use AWS Secrets, you can reference any secrets in your configurations with `ENC[secretId;secretKey]`.
 
 The ENC notation is composed of:
 * `secretId`: either the secret "friendly name" (for example, `/DatadogAgent/Production`) or the ARN (for example, `arn:aws:secretsmanager:us-east-1:123456789012:secret:/DatadogAgent/Production-FOga1K`).
@@ -117,7 +117,7 @@ secret_backend_config:
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html 
+[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
@@ -130,8 +130,8 @@ Configure the Datadog Agent to use AWS Secrets to resolve secrets in Helm using 
 
 ##### Integration check
 
-```sh 
-datadog: 
+```sh
+datadog:
   confd:
   # This is an example
     <INTEGRATION_NAME>.yaml: |-
@@ -139,7 +139,7 @@ datadog:
         - <SHORT_IMAGE>
       instances:
         - [...]
-          password: "ENC[secretId;secretKey]" 
+          password: "ENC[secretId;secretKey]"
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
@@ -159,7 +159,7 @@ agents:
 
 ##### Cluster check: without cluster check runners enabled
 ```sh
-datadog: 
+datadog:
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
@@ -170,19 +170,19 @@ agents:
     # IAM role ARN required to grant the Agent permissions to access the AWS secret
     serviceAccountAnnotations:
       eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
-clusterAgent:  
+clusterAgent:
   confd:
     # This is an example
     <INTEGRATION_NAME>.yaml: |-
       cluster_check: true
       instances:
         - [...]
-          password: "ENC[secretId;secretKey]" 
+          password: "ENC[secretId;secretKey]"
 ```
 
 ##### Cluster check: with cluster check runners enabled
 ```sh
-datadog: 
+datadog:
   env:
    - name: DD_SECRET_BACKEND_TYPE
      value: "aws.secrets"
@@ -195,8 +195,8 @@ clusterAgent:
       cluster_check: true
       instances:
         - [...]
-          password: "ENC[secretId;secretKey]" 
-clusterChecksRunner: 
+          password: "ENC[secretId;secretKey]"
+clusterChecksRunner:
   enabled: true
   env:
    - name: DD_SECRET_BACKEND_TYPE
@@ -272,7 +272,7 @@ spec:
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
-    clusterAgent:  
+    clusterAgent:
       extraConfd:
         configDataMap:
         # This is an example
@@ -280,7 +280,7 @@ spec:
             cluster_check: true
             instances:
               - [...]
-                password: "ENC[secretId;secretKey]" 
+                password: "ENC[secretId;secretKey]"
 ```
 
 <br>
@@ -309,7 +309,7 @@ spec:
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
       serviceAccountAnnotations:
         eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
-    clusterAgent:  
+    clusterAgent:
       extraConfd:
         configDataMap:
         # This is an example
@@ -317,7 +317,7 @@ spec:
             cluster_check: true
             instances:
               - [...]
-                password: "ENC[secretId;secretKey]" 
+                password: "ENC[secretId;secretKey]"
 
 ```
 
@@ -325,7 +325,7 @@ spec:
 {{< /tabs >}}
 
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
 The following AWS services are supported:
@@ -367,12 +367,12 @@ property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 [1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 [1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html 
+[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
 [1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
 [1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-azure" %}}
@@ -413,7 +413,7 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 [2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-hashicorp" %}}
@@ -425,7 +425,7 @@ The following HashiCorp services are supported:
 | `hashicorp.vault` | [HashiCorp Vault (Secrets Engine Versions 1 and 2)][3000] |
 
 ##### How to set up HashiCorp Vault
-1. Run your HashiCorp Vault. See the [official HashiCorp Vault documentation][3001] for more information. 
+1. Run your HashiCorp Vault. See the [official HashiCorp Vault documentation][3001] for more information.
 2. Write a policy that gives the permission to pull secrets from your vault. Create a `*.hcl` file, and include the following permission if using Secrets Engine Version 1:
 ```
 path "<your mount path>/<additional subpath>" {
@@ -448,7 +448,7 @@ path "sys/mounts" {
 ```
 3. Run `vault policy write <policy_name> <path_to_*.hcl_file>`
 
-4. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`. 
+4. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`.
 
 ##### AWS instance profile instructions
 
@@ -468,7 +468,7 @@ The following example fetches the API key value from HashiCorp Vault leveraging 
 
 ```yaml
 # datadog.yaml
-api_key: "ENC[/Datadog/Production;apikey]" 
+api_key: "ENC[/Datadog/Production;apikey]"
 
 secret_backend_type: hashicorp.vault
 secret_backend_config:
@@ -484,7 +484,7 @@ secret_backend_config:
 [3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
 [3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="JSON or YAML File Secret Backends" level="h4" expanded=false id="id-for-json-yaml" %}}
 
@@ -556,7 +556,7 @@ secret_backend_config:
 [4001]: https://en.wikipedia.org/wiki/JSON
 [4002]: https://en.wikipedia.org/wiki/YAML
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 ### Option 2: Using the built-in Script for Kubernetes and Docker
@@ -833,34 +833,67 @@ On Windows, your executable must:
 
 **Note**: Your executable shares the same environment variables as the Agent.
 
-## Refreshing API/APP keys at runtime
+## Refreshing secrets at runtime
 
-Starting in Agent version v7.67, you can configure the Agent to refresh its API and APP keys at regular intervals without requiring a restart. This relies on the API key and APP key being pulled as secrets.
+Starting in Agent v7.67, you can configure the Agent to refresh resolved secrets without requiring a restart.
 
-To enable this, set `secret_refresh_interval` (in seconds) in your `datadog.yaml` file:
+Set a refresh interval:
+```yaml
+secret_refresh_interval: 3600  # refresh every hour
+```
+
+Or, trigger a refresh manually:
+```shell
+datadog-agent secret refresh
+```
+
+### API/APP key refresh
+API/APP keys pulled as secrets support runtime refresh.
+
+You can enable this by setting `secret_refresh_interval` (in seconds) in `datadog.yaml`:
 ```yaml
 api_key: ENC[<secret_handle>]
 
 secret_refresh_interval: 3600  # refresh every hour
 ```
 
-By default the Agent randomly spreads its first refresh within the specified `secret_refresh_interval` window. This
-means that it resolves the API key at startup, then refreshes it within the first interval and every interval after that.
-This avoids having a fleet of Agents refreshing their API/APP key at the same time.
+By default, the Agent randomizes the initial refresh within the `secret_refresh_interval` window to prevent a fleet of
+Agents from refreshing simultaneously. The key is resolved at startup, then refreshed once within the first interval
+and every interval thereafter.
 
-To prevent downtime, only invalidate the previous API key and APP key when your entire fleet of Agents has
-pulled the updated keys from your secret management solution. You can track usage of your API keys in the [Fleet
-Management](https://app.datadoghq.com/fleet) page.
+To prevent downtime, invalidate old keys only after your entire fleet has pulled the updated keys. You can track key
+usage on the [Fleet Management](https://app.datadoghq.com/fleet) page.
 
 You can disable this behavior by setting:
 ```yaml
 secret_refresh_scatter: false
 ```
 
-To refresh manually, use:
+### Autodiscovery check secrets refresh
+Starting in Agent v7.76, scheduled [Autodiscovery][1] checks can refresh secrets at runtime if the template uses the `ENC[]` syntax.
+
+```yaml
+labels:
+  tags.datadoghq.com/redis.env: "prod"
+  tags.datadoghq.com/redis.service: "my-redis"
+  tags.datadoghq.com/redis.version: "6.0.3"
+annotations:
+  ad.datadoghq.com/redis.checks: |
+    {
+      "redisdb": {
+        "init_config": {},
+        "instances": [
+          {
+            "host": "%%host%%",
+            "port":"6379",
+            "password":"ENC[<secret_handle>]"
+          }
+        ]
+      }
+    }
 ```
-datadog-agent secret refresh
-```
+
+The Agent can then trigger secrets refresh at either the interval set in `secret_refresh_interval` or manually with `datadog-agent secret refresh`.
 
 ### Automatic secrets refresh on API key failure / invalidation
 

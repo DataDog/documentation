@@ -17217,6 +17217,70 @@ components:
       required:
       - data
       type: object
+    DeletedSuiteResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeletedSuiteResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteTypes'
+      type: object
+    DeletedSuiteResponseDataAttributes:
+      properties:
+        deleted_at:
+          description: Deletion timestamp of the Synthetic suite ID.
+          type: string
+        public_id:
+          description: The Synthetic suite ID deleted.
+          type: string
+      type: object
+    DeletedSuitesRequestDelete:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeletedSuitesRequestDeleteAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/DeletedSuitesRequestType'
+      required:
+      - attributes
+      type: object
+    DeletedSuitesRequestDeleteAttributes:
+      properties:
+        force_delete_dependencies:
+          type: boolean
+        public_ids:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - public_ids
+      type: object
+    DeletedSuitesRequestDeleteRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/DeletedSuitesRequestDelete'
+      required:
+      - data
+      type: object
+    DeletedSuitesRequestType:
+      default: delete_suites_request
+      enum:
+      - delete_suites_request
+      example: delete_suites_request
+      type: string
+      x-enum-varnames:
+      - DELETE_SUITES_REQUEST
+    DeletedSuitesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DeletedSuiteResponseData'
+          type: array
+      type: object
     DependencyLocation:
       description: Static library vulnerability location.
       properties:
@@ -29730,6 +29794,81 @@ components:
       required:
       - errors
       type: object
+    JiraAccountAttributes:
+      description: Attributes of a Jira account
+      properties:
+        consumer_key:
+          description: The consumer key for the Jira account
+          example: consumer-key-1
+          type: string
+        instance_url:
+          description: The URL of the Jira instance
+          example: https://example.atlassian.net
+          type: string
+        last_webhook_timestamp:
+          description: Timestamp of the last webhook received
+          example: '2024-01-15T10:30:00Z'
+          format: date-time
+          type: string
+      required:
+      - consumer_key
+      - instance_url
+      type: object
+    JiraAccountData:
+      description: Data object for a Jira account
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraAccountAttributes'
+        id:
+          description: Unique identifier for the Jira account
+          example: account-1
+          type: string
+        type:
+          $ref: '#/components/schemas/JiraAccountType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraAccountRelationship:
+      description: Relationship to a Jira account
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountData'
+      required:
+      - data
+      type: object
+    JiraAccountType:
+      description: Type identifier for Jira account resources
+      enum:
+      - jira-account
+      example: jira-account
+      type: string
+      x-enum-varnames:
+      - JIRA_ACCOUNT
+    JiraAccountsData:
+      description: Array of Jira account data objects
+      items:
+        $ref: '#/components/schemas/JiraAccountData'
+      type: array
+    JiraAccountsMeta:
+      description: Metadata for Jira accounts response
+      properties:
+        public_key:
+          description: Public key for the Jira integration
+          example: c29tZSBkYXRhIHdpdGggACBhbmQg77u/
+          type: string
+      type: object
+    JiraAccountsResponse:
+      description: Response containing Jira accounts
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountsData'
+        meta:
+          $ref: '#/components/schemas/JiraAccountsMeta'
+      required:
+      - data
+      type: object
     JiraIntegrationMetadata:
       description: Incident integration metadata for the Jira integration.
       properties:
@@ -29794,6 +29933,181 @@ components:
         project_key:
           description: Jira project key
           type: string
+      type: object
+    JiraIssueTemplateCreateRequest:
+      description: Request to create a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestData'
+      type: object
+    JiraIssueTemplateCreateRequestAttributes:
+      description: Attributes for creating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '12730'
+          type: string
+        jira-account:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributesJiraAccount'
+        name:
+          description: The name of the issue template
+          example: test-template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '10772'
+          type: string
+      type: object
+    JiraIssueTemplateCreateRequestAttributesJiraAccount:
+      description: Reference to the Jira account
+      properties:
+        id:
+          description: The ID of the Jira account
+          example: 80f16d40-1fba-486e-b1fc-983e6ca19bec
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    JiraIssueTemplateCreateRequestData:
+      description: Data object for creating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      type: object
+    JiraIssueTemplateData:
+      description: Data object for a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateDataAttributes'
+        id:
+          description: Unique identifier for the Jira issue template
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/JiraIssueTemplateDataRelationships'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplateDataAttributes:
+      description: Attributes of a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test Description
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '456'
+          type: string
+        name:
+          description: The name of the issue template
+          example: Test Template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '123'
+          type: string
+      required:
+      - name
+      - project_id
+      - issue_type_id
+      - fields
+      type: object
+    JiraIssueTemplateDataRelationships:
+      description: Relationships of a Jira issue template
+      properties:
+        jira-account:
+          $ref: '#/components/schemas/JiraAccountRelationship'
+      required:
+      - jira-account
+      type: object
+    JiraIssueTemplateResponse:
+      description: Response containing a single Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateType:
+      description: Type identifier for Jira issue template resources
+      enum:
+      - jira-issue-template
+      example: jira-issue-template
+      type: string
+      x-enum-varnames:
+      - JIRA_ISSUE_TEMPLATE
+    JiraIssueTemplateUpdateRequest:
+      description: Request to update a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateUpdateRequestAttributes:
+      description: Attributes for updating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Updated Description
+              type: json
+          type: object
+        name:
+          description: The name of the issue template
+          example: test_template_updated
+          type: string
+      type: object
+    JiraIssueTemplateUpdateRequestData:
+      description: Data object for updating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplatesData:
+      description: Array of Jira issue template data objects
+      items:
+        $ref: '#/components/schemas/JiraIssueTemplateData'
+      type: array
+    JiraIssueTemplatesResponse:
+      description: Response containing Jira issue templates
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplatesData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
       type: object
     JiraIssuesDataType:
       default: jira_issues
@@ -42114,6 +42428,83 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    PostmortemAttachmentRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/PostmortemAttachmentRequestData'
+      required:
+      - data
+      type: object
+    PostmortemAttachmentRequestAttributes:
+      description: Postmortem attachment attributes
+      properties:
+        cells:
+          description: The cells of the postmortem
+          items:
+            $ref: '#/components/schemas/PostmortemCell'
+          type: array
+        content:
+          description: The content of the postmortem
+          example: '# Incident Report - IR-123
+
+            [...]'
+          type: string
+        postmortem_template_id:
+          description: The ID of the postmortem template
+          example: 93645509-874e-45c4-adfa-623bfeaead89-123
+          type: string
+        title:
+          description: The title of the postmortem
+          example: Postmortem-IR-123
+          type: string
+      type: object
+    PostmortemAttachmentRequestData:
+      description: Postmortem attachment data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemAttachmentRequestAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      - attributes
+      type: object
+    PostmortemCell:
+      description: A cell in the postmortem
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemCellAttributes'
+        id:
+          description: The unique identifier of the cell
+          example: cell-1
+          type: string
+        type:
+          $ref: '#/components/schemas/PostmortemCellType'
+      type: object
+    PostmortemCellAttributes:
+      description: Attributes of a postmortem cell
+      properties:
+        definition:
+          $ref: '#/components/schemas/PostmortemCellDefinition'
+      type: object
+    PostmortemCellDefinition:
+      description: Definition of a postmortem cell
+      properties:
+        content:
+          description: The content of the cell in markdown format
+          example: '## Incident Summary
+
+            This incident was caused by...'
+          type: string
+      type: object
+    PostmortemCellType:
+      description: The postmortem cell resource type.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -55340,6 +55731,31 @@ components:
           format: double
           type: number
       type: object
+    SuiteCreateEdit:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsSuite'
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteTypes'
+      required:
+      - attributes
+      - type
+      type: object
+    SuiteCreateEditRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SuiteCreateEdit'
+      required:
+      - data
+      type: object
+    SuiteSearchResponseType:
+      default: suites_search
+      enum:
+      - suites_search
+      example: suites_search
+      type: string
+      x-enum-varnames:
+      - SUITES_SEARCH
     SuppressionVersionHistory:
       description: Response object containing the version history of a suppression.
       properties:
@@ -55523,6 +55939,149 @@ components:
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         type: string
       type: array
+    SyntheticsSuite:
+      description: Object containing details about a Synthetic suite.
+      properties:
+        message:
+          description: Notification message associated with the suite.
+          example: Notification message
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the suite.
+          example: Example suite name
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsSuiteOptions'
+        public_id:
+          description: The public ID for the test.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        tags:
+          description: Array of tags attached to the suite.
+          example:
+          - env:production
+          items:
+            description: A tag attached to the suite.
+            type: string
+          type: array
+        tests:
+          items:
+            $ref: '#/components/schemas/SyntheticsSuiteTest'
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteType'
+      required:
+      - name
+      - type
+      - tests
+      - options
+      type: object
+    SyntheticsSuiteOptions:
+      description: Object describing the extra options for a Synthetic suite.
+      properties:
+        alerting_threshold:
+          description: Percentage of critical tests failure needed for a suite to
+            fail.
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+      type: object
+    SyntheticsSuiteResponse:
+      description: Synthetics suite response
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsSuiteResponseData'
+      type: object
+    SyntheticsSuiteResponseData:
+      description: Synthetics suite response data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsSuite'
+        id:
+          description: The public ID for the suite.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsSuiteTypes'
+      type: object
+    SyntheticsSuiteSearchResponse:
+      description: Synthetics suite search response
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsSuiteSearchResponseData'
+      type: object
+    SyntheticsSuiteSearchResponseData:
+      description: Synthetics suite search response data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsSuiteSearchResponseDataAttributes'
+        id:
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/SuiteSearchResponseType'
+      type: object
+    SyntheticsSuiteSearchResponseDataAttributes:
+      description: Synthetics suite search response data attributes
+      properties:
+        suites:
+          items:
+            $ref: '#/components/schemas/SyntheticsSuite'
+          type: array
+        total:
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SyntheticsSuiteTest:
+      description: Object containing details about a Synthetic test included in a
+        Synthetic suite.
+      properties:
+        alerting_criticality:
+          $ref: '#/components/schemas/SyntheticsSuiteTestAlertingCriticality'
+        public_id:
+          example: ''
+          type: string
+      required:
+      - public_id
+      type: object
+    SyntheticsSuiteTestAlertingCriticality:
+      description: Alerting criticality for each the test.
+      enum:
+      - ignore
+      - critical
+      example: critical
+      type: string
+      x-enum-varnames:
+      - IGNORE
+      - CRITICAL
+    SyntheticsSuiteType:
+      default: suite
+      description: Type of the Synthetic suite, `suite`.
+      enum:
+      - suite
+      example: suite
+      type: string
+      x-enum-varnames:
+      - SUITE
+    SyntheticsSuiteTypes:
+      default: suites
+      description: Type for the Synthetics suites responses, `suites`.
+      enum:
+      - suites
+      example: suites
+      type: string
+      x-enum-varnames:
+      - SUITES
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
       example:
@@ -71993,6 +72552,47 @@ paths:
       x-unstable: '**Note**: This endpoint is in Preview.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/attachments/postmortems:
+    post:
+      description: Create a postmortem attachment for an incident.
+      operationId: CreateIncidentPostmortemAttachment
+      parameters:
+      - description: The ID of the incident
+        in: path
+        name: incident_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostmortemAttachmentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create postmortem attachment
+      tags:
+      - Incidents
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/attachments/{attachment_id}:
     delete:
       operationId: DeleteIncidentAttachment
@@ -73141,6 +73741,220 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_edit
+  /api/v2/integration/jira/accounts:
+    get:
+      description: Get all Jira accounts for the organization.
+      operationId: ListJiraAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraAccountsResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira accounts
+      tags:
+      - Jira Integration
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/accounts/{account_id}:
+    delete:
+      description: Delete a Jira account by ID.
+      operationId: DeleteJiraAccount
+      parameters:
+      - description: The ID of the Jira account to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: account_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira account
+      tags:
+      - Jira Integration
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates:
+    get:
+      description: Get all Jira issue templates for the organization.
+      operationId: ListJiraIssueTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplatesResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira issue templates
+      tags:
+      - Jira Integration
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new Jira issue template.
+      operationId: CreateJiraIssueTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates/{issue_template_id}:
+    delete:
+      description: Delete a Jira issue template by ID.
+      operationId: DeleteJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a Jira issue template by ID.
+      operationId: GetJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to retrieve
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a Jira issue template by ID.
+      operationId: UpdateJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to update
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/ms-teams/configuration/channel/{tenant_name}/{team_name}/{channel_name}:
     get:
       description: Get the tenant, team, and channel ID of a channel in the Datadog
@@ -76302,11 +77116,8 @@ paths:
         required: false
         schema:
           type: boolean
-      - description: '(Preview) Filter custom metrics that have or have not been queried
-          in the specified window[seconds].
-
-          If no window is provided or the window is less than 2 hours, a default of
-          2 hours will be applied.'
+      - description: (Preview) Filter custom metrics that have or have not been queried
+          in the past 30 days.
         example: true
         in: query
         name: filter[queried]
@@ -89806,6 +90617,232 @@ paths:
         operator: OR
         permissions:
         - billing_edit
+  /api/v2/synthetics/suites:
+    post:
+      operationId: CreateSyntheticsSuite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuiteCreateEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Create a test suite'
+      tags:
+      - Synthetics
+      x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+        - synthetics_create_edit_trigger
+  /api/v2/synthetics/suites/bulk-delete:
+    post:
+      operationId: DeleteSyntheticsSuites
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletedSuitesRequestDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedSuitesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Bulk delete suites'
+      tags:
+      - Synthetics
+      x-menu-order: 40
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+  /api/v2/synthetics/suites/search:
+    get:
+      description: Search for Synthetics suites.
+      operationId: SearchSuites
+      parameters:
+      - description: The search query.
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+      - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
+        in: query
+        name: sort
+        required: false
+        schema:
+          default: name,asc
+          type: string
+      - description: If true, return only facets instead of full test details.
+        in: query
+        name: facets_only
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - description: The offset from which to start returning results.
+        in: query
+        name: start
+        required: false
+        schema:
+          default: 0
+          format: int64
+          type: integer
+      - description: The maximum number of results to return.
+        in: query
+        name: count
+        required: false
+        schema:
+          default: 50
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteSearchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Search Synthetics suites
+      tags:
+      - Synthetics
+      x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+  /api/v2/synthetics/suites/{public_id}:
+    get:
+      operationId: GetSyntheticsSuite
+      parameters:
+      - description: The public ID of the suite to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: 'Synthetics: Get a suite'
+      tags:
+      - Synthetics
+      x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+    put:
+      operationId: EditSyntheticsSuite
+      parameters:
+      - description: The public ID of the suite to edit.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SuiteCreateEditRequest'
+        description: New suite details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsSuiteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Edit a test suite'
+      tags:
+      - Synthetics
+      x-menu-order: 35
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
   /api/v2/synthetics/variables/{variable_id}/jsonpatch:
     patch:
       description: 'Patch a global variable using JSON Patch (RFC 6902).
@@ -89856,7 +90893,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 45
       x-permission:
         operator: OR
         permissions:
@@ -93804,6 +94841,9 @@ tags:
     and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
     for more information.
   name: Incidents
+- description: Manage your Jira Integration. Atlassian Jira is a project management
+    and issue tracking tool for teams to coordinate work and handle tasks efficiently.
+  name: Jira Integration
 - description: 'Manage your Datadog API and application keys. You need an API key
     and an
 
