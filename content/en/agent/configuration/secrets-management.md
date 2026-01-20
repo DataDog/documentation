@@ -508,8 +508,8 @@ Version syntax:
 
 The Datadog Agent supports extracting specific keys from JSON-formatted secrets using the `;` delimiter:
 
-- `secret;key` - Extracts the `key` value with an implicit `latest` version
-- `secret;key;1` - Extracts the `key` value from version `1`
+- `datadog;api_key` - Extracts the `api_key` field from the `datadog` secret with an implicit `latest` version
+- `datadog;api_key;1`  - Extracts the `api_key` field from the `datadog` secret from version `1`
 
 [5000]: https://cloud.google.com/security/products/secret-manager
 [5001]: https://cloud.google.com/docs/authentication/application-default-credentials
