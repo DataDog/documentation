@@ -56,16 +56,19 @@ Below is an example where time to full display is determined when home activity 
 {{% tab "Kotlin" %}}
 
 ```kotlin
-class SampleApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-        ).build()
+class HomeActivity : AppCompatActivity() {
 
-        Datadog.initialize(this, configuration, trackingConsent)
+    private val viewModel: HomeViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setContentView(R.layout.activity_home)
+        super.onCreate(savedInstanceState)
+
+        viewModel.uiState.observe(this) { state ->
+            if (state.isLoaded) {
+                 GlobalRumMonitor.get().reportAppFullyDisplayed()
+            }
+        }
     }
 }
 ```
