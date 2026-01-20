@@ -92,7 +92,7 @@ These stages are only computed when the source of the repository metadata is Git
 
 The Change Failure Rate, the percentage of deployments causing a failure in production, is calculated as:
 
- $$\text"Change Failure Rate" = \text"Number of change failures" / (\text"Total deployments" - \text"Rollback deployments")$$
+ $$\text"Change Failure Rate" = \text"Number of change failures" / \text"Number of total deployments"$$
 
 A deployment is marked as a change failure through the detection of Rollbacks and Rollforward deployments. For more information, see the [Change Failure Detection documentation][1].
 
