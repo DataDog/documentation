@@ -143,7 +143,7 @@ Update your task definition to include the PHP application container with App an
 
 {{% /collapse-content %}}
 
-## 3. Run your application
+## 3. Running your application
 
 Deploy your Fargate task with the updated configuration:
 
