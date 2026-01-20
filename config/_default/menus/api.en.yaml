@@ -3162,8 +3162,7 @@ menu:
           - v2
         operationids:
           - GetSBOM
-        unstable:
-          - v2
+        unstable: []
         order: 27
     - name: List assets SBOMs
       url: '#list-assets-sboms'
@@ -3175,8 +3174,7 @@ menu:
           - v2
         operationids:
           - ListAssetsSBOMs
-        unstable:
-          - v2
+        unstable: []
         order: 28
     - name: Search security findings
       url: '#search-security-findings'

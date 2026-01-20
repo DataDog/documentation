@@ -49490,18 +49490,6 @@ components:
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
-    SecurityMonitoringPaginatedSuppressionsResponse:
-      description: Response object containing the available suppression rules with
-        pagination metadata.
-      properties:
-        data:
-          description: A list of suppressions objects.
-          items:
-            $ref: '#/components/schemas/SecurityMonitoringSuppression'
-          type: array
-        meta:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionsMeta'
-      type: object
     SecurityMonitoringReferenceTable:
       description: Reference tables used in the queries.
       properties:
@@ -51651,31 +51639,6 @@ components:
         data:
           $ref: '#/components/schemas/SecurityMonitoringSuppression'
       type: object
-    SecurityMonitoringSuppressionSort:
-      description: The sort parameters used for querying suppression rules.
-      enum:
-      - name
-      - start_date
-      - expiration_date
-      - update_date
-      - enabled
-      - -name
-      - -start_date
-      - -expiration_date
-      - -update_date
-      - -enabled
-      type: string
-      x-enum-varnames:
-      - NAME
-      - START_DATE
-      - EXPIRATION_DATE
-      - UPDATE_DATE
-      - ENABLED
-      - NAME_DESCENDING
-      - START_DATE_DESCENDING
-      - EXPIRATION_DATE_DESCENDING
-      - UPDATE_DATE_DESCENDING
-      - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
       description: The type of the resource. The value should always be `suppressions`.
@@ -51770,31 +51733,6 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
       required:
       - data
-      type: object
-    SecurityMonitoringSuppressionsMeta:
-      description: Metadata for the suppression list response.
-      properties:
-        page:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionsPageMeta'
-      type: object
-    SecurityMonitoringSuppressionsPageMeta:
-      description: Pagination metadata.
-      properties:
-        pageNumber:
-          description: Current page number.
-          example: 0
-          format: int64
-          type: integer
-        pageSize:
-          description: Current page size.
-          example: 2
-          format: int64
-          type: integer
-        totalCount:
-          description: Total count of suppressions.
-          example: 2
-          format: int64
-          type: integer
       type: object
     SecurityMonitoringSuppressionsResponse:
       description: Response object containing the available suppression rules.
@@ -85247,9 +85185,6 @@ paths:
         operator: OR
         permissions:
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/sboms/{asset_type}:
     get:
       description: Get a single SBOM related to an asset by its type and name.
@@ -85323,9 +85258,6 @@ paths:
         operator: OR
         permissions:
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/scanned-assets-metadata:
     get:
       description: "Get a list of security scanned assets metadata for an organization.\n\n###
@@ -86939,29 +86871,12 @@ paths:
         required: false
         schema:
           type: string
-      - description: Attribute used to sort the list of suppression rules. Prefix
-          with `-` to sort in descending order.
-        in: query
-        name: sort
-        required: false
-        schema:
-          $ref: '#/components/schemas/SecurityMonitoringSuppressionSort'
-      - description: Size for a given page. Use `-1` to return all items.
-        in: query
-        name: page[size]
-        required: false
-        schema:
-          default: -1
-          example: 10
-          format: int64
-          type: integer
-      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringPaginatedSuppressionsResponse'
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
