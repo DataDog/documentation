@@ -133,7 +133,7 @@ You can combine multiple criteria to create precise routing rules. The issue mat
 
 <div class="alert alert-info"> Rules are ordered. The first rule that matches an issue is applied.</div>
 
-### Automatic Case Creation
+### Automatic case creation
 
 When adding an automation rule, you can enable automatic case creation for issues matching your rule.
 

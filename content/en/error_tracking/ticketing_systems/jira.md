@@ -107,17 +107,17 @@ To create automation rules for your Error Tracking issues, you need one (1) of t
 	- Error Tracking Write
 	- Error Tracking Settings Write 
 
-### Create an Automation Rule
+### Create an automation rule
 
 To create an automation rule for Jira:
 
 1. Navigate to [Error Tracking Settings][3], in the **Ticketing & Automation** section.
 2. Click **New Rule**.
 3. Configure the rule:
-- **Match Criteria**: Define conditions that issues must meet to trigger the rule
-- **Destination**: Select the destination Jira account and project when tickets are created from issues that match the
+    - **Match Criteria**: Define conditions that issues must meet to trigger the rule
+    - **Destination**: Select the destination Jira account and project when tickets are created from issues that match the
 rule. Select the type of ticket you want to create, and provide values for any required fields of the ticket.
-- **Auto-create**: Optionally enable automatic ticket creation when issues match
+    - **Auto-create**: Optionally enable automatic ticket creation when issues match
 4. Click **Save Rule**.
 
 {{< img src="error_tracking/create-jira-automation-rule.png" alt="Create a Jira automation rule" style="width:100%;" >}}
@@ -131,21 +131,19 @@ Configure rules based on the following attributes:
 
 You can combine multiple criteria to create precise routing rules. The issue matching query supports the following operators:
 
-- **AND**: logical AND (for example, `service:web-store AND team:Shopist`)
-- **OR**: logical OR (for example, `service:web-store OR team:Shopist`)
-- **-**: logical NOT (for example, `service:web-store -team:Shopist`)
+- `**AND**`: logical AND (for example, `service:web-store AND team:Shopist`)
+- `**OR**`: logical OR (for example, `service:web-store OR team:Shopist`)
+- `**-**`: logical NOT (for example, `service:web-store -team:Shopist`)
 
-Rules are ordered. The first rule that matches an issue is applied.
+<div class="alert alert-info"> Rules are ordered. The first rule that matches an issue is applied.</div>
 
-### Automatic Ticket Creation
+### Automatic ticket creation
 
 When adding an automation rule, you can enable automatic Jira ticket creation for issues matching your rule.
 
 {{< img src="error_tracking/enable-auto-ticket-creation.png" alt="Enable automatic case creation" style="height:300px;" >}}
 
-When a new Error Tracking issue is created, rules are evaluated and the first rule that matches is applied. If automatic
-ticket creation is enabled on that matching rule, a new Jira ticket will be created in the Jira board specified in
-your rule, and attached to the matching issue.
+When a new Error Tracking issue is created, rules are evaluated and the first rule that matches is applied. If automatic ticket creation is enabled on that matching rule, a new Jira ticket will be created on the Jira board specified in your rule, and attached to the matching issue.
 
 ## Further reading
 
@@ -156,4 +154,5 @@ your rule, and attached to the matching issue.
 [3]: /error_tracking/explorer/
 [4]: https://app.datadoghq.com/error-tracking/settings
 [5]: /error_tracking/ticketing_systems/troubleshooting#sync-is-broken-between-jira-and-error-tracking
+[6]: /account_management/rbac/permissions/
 [6]: /account_management/rbac/permissions/
