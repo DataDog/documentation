@@ -889,8 +889,7 @@ spec:
   override:
     otelAgentGateway:
       image:
-        name: <YOUR REPO>
-        tag: <IMAGE TAG>
+        name: <YOUR REPO>:<IMAGE TAG>
 ```
 
 {{% /tab %}}
