@@ -4,7 +4,7 @@ description: "Connect your business intelligence tools to Datadog to visualize d
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Data Observability'
+    text: 'Data Observability Overview'
 ---
 ## Overview
 
