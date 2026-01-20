@@ -1,17 +1,38 @@
 import { getConfig } from '../helpers/getConfig';
 import Typesense from 'typesense';
-import marked from 'marked';
+import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
 
 const { env } = document.documentElement.dataset;
 const typesenseConfig = getConfig(env).typesense;
 
-// Configure marked for safe rendering (v1.x syntax)
-marked.setOptions({
-    breaks: true,      // Convert \n to <br>
-    gfm: true,         // GitHub Flavored Markdown
-    headerIds: false,  // Don't add IDs to headers
-    smartLists: true   // Use smarter list behavior
-});
+// Configure marked with highlight.js
+marked.use(
+    markedHighlight({
+        emptyLangClass: 'hljs',
+        langPrefix: 'hljs language-',
+        highlight(code, lang) {
+            if (lang && hljs.getLanguage(lang)) {
+                return hljs.highlight(code, { language: lang }).value;
+            }
+            return hljs.highlightAuto(code).value;
+        }
+    }),
+    {
+        breaks: true,   // Convert \n to <br>
+        gfm: true       // GitHub Flavored Markdown
+    }
+);
+
+// Custom renderer for links (open in new tab)
+const renderer = {
+    link({ href, title, text }) {
+        return `<a href="${href}"${title ? ` title="${title}"` : ''} target="_blank" rel="noopener noreferrer">${text}</a>`;
+    }
+};
+
+marked.use({ renderer });
 
 // Conversation model ID for the docs collection
 const CONVERSATION_MODEL_ID = 'CONVERSATION-MODEL-DOCS-OPENAI-GPT-4.1';
@@ -66,9 +87,9 @@ class ConversationalSearch {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
             </svg>
-            <span>Ask AI</span>
+            <span>Ask Docs AI</span>
         `;
-        this.floatButton.setAttribute('aria-label', 'Ask AI');
+        this.floatButton.setAttribute('aria-label', 'Ask Docs AI');
 
         // Create sidebar overlay
         this.overlay = document.createElement('div');
@@ -96,8 +117,21 @@ class ConversationalSearch {
                 </div>
             </div>
             <div class="conv-search-messages">
-                <div class="conv-search-welcome">
-                    <p>Ask me anything about Datadog documentation.</p>
+                <div class="conv-search-empty-state">
+                    <div class="conv-search-empty-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+                            <path d="M5 19l1 3 3-1-3 1z" opacity="0.6"/>
+                            <path d="M19 5l1 3 3-1-3 1z" opacity="0.6"/>
+                        </svg>
+                    </div>
+                    <h3 class="conv-search-empty-title">How can I help you today?</h3>
+                    <p class="conv-search-empty-subtitle">Ask me anything about Datadog documentation</p>
+                    <div class="conv-search-suggestions">
+                        <button class="conv-search-suggestion" data-query="How to setup LLM Observability for an existing AWS Lambda function?">How to setup LLM Observability for an existing AWS Lambda function?</button>
+                        <button class="conv-search-suggestion" data-query="What is the Datadog Agent?">What is the Datadog Agent?</button>
+                        <button class="conv-search-suggestion" data-query="How do I set up APM tracing step by step?">How do I set up APM tracing step by step?</button>
+                    </div>
                 </div>
             </div>
             <div class="conv-search-footer">
@@ -157,6 +191,18 @@ class ConversationalSearch {
                 this.close();
             }
         });
+
+        // Suggestion chips click handler
+        this.messagesContainer.addEventListener('click', (e) => {
+            const suggestionBtn = e.target.closest('.conv-search-suggestion');
+            if (suggestionBtn) {
+                const query = suggestionBtn.dataset.query;
+                if (query) {
+                    this.input.value = query;
+                    this.sendMessage();
+                }
+            }
+        });
     }
 
     open() {
@@ -196,10 +242,23 @@ class ConversationalSearch {
         this.isLoading = false;
         this.sendBtn.disabled = false;
 
-        // Clear messages and restore welcome
+        // Clear messages and restore empty state with suggestions
         this.messagesContainer.innerHTML = `
-            <div class="conv-search-welcome">
-                <p>Ask me anything about Datadog documentation.</p>
+            <div class="conv-search-empty-state">
+                <div class="conv-search-empty-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+                        <path d="M5 19l1 3 3-1-3 1z" opacity="0.6"/>
+                        <path d="M19 5l1 3 3-1-3 1z" opacity="0.6"/>
+                    </svg>
+                </div>
+                <h3 class="conv-search-empty-title">How can I help you today?</h3>
+                <p class="conv-search-empty-subtitle">Ask me anything about Datadog documentation</p>
+                <div class="conv-search-suggestions">
+                    <button class="conv-search-suggestion" data-query="How to setup LLM Observability for an existing AWS Lambda function?">How to setup LLM Observability for an existing AWS Lambda function?</button>
+                    <button class="conv-search-suggestion" data-query="What is the Datadog Agent?">What is the Datadog Agent?</button>
+                    <button class="conv-search-suggestion" data-query="How do I set up APM tracing step by step?">How do I set up APM tracing step by step?</button>
+                </div>
             </div>
         `;
 
@@ -210,10 +269,10 @@ class ConversationalSearch {
     }
 
     addMessage(role, content) {
-        // Remove welcome message on first interaction
-        const welcome = this.messagesContainer.querySelector('.conv-search-welcome');
-        if (welcome) {
-            welcome.remove();
+        // Remove empty state on first interaction
+        const emptyState = this.messagesContainer.querySelector('.conv-search-empty-state');
+        if (emptyState) {
+            emptyState.remove();
         }
 
         const messageDiv = document.createElement('div');
@@ -226,7 +285,8 @@ class ConversationalSearch {
         messageDiv.appendChild(contentDiv);
         this.messagesContainer.appendChild(messageDiv);
         
-        this.scrollToBottom();
+        // Force scroll when user sends a message
+        this.scrollToBottom(true);
         
         return contentDiv;
     }
@@ -247,13 +307,24 @@ class ConversationalSearch {
         messageDiv.appendChild(contentDiv);
         this.messagesContainer.appendChild(messageDiv);
         
-        this.scrollToBottom();
+        // Force scroll when assistant starts responding
+        this.scrollToBottom(true);
         
         return contentDiv;
     }
 
-    scrollToBottom() {
-        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+    // Check if user is near the bottom of scroll (within 100px)
+    isNearBottom() {
+        const container = this.messagesContainer;
+        const threshold = 100;
+        return container.scrollHeight - container.scrollTop - container.clientHeight < threshold;
+    }
+
+    scrollToBottom(force = false) {
+        // Only auto-scroll if user is near bottom or force is true
+        if (force || this.isNearBottom()) {
+            this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+        }
     }
 
     async sendMessage() {
@@ -346,6 +417,8 @@ class ConversationalSearch {
             const decoder = new TextDecoder();
             let accumulatedMessage = '';
             let buffer = '';
+            let lastRenderTime = 0;
+            const RENDER_THROTTLE = 50; // Render markdown every 50ms max
 
             responseContainer.innerHTML = '';
 
@@ -379,9 +452,14 @@ class ConversationalSearch {
                             // Streaming chunks have incremental message content
                             if (parsed.message !== undefined) {
                                 accumulatedMessage += parsed.message;
-                                // During streaming, show plain text for performance
-                                responseContainer.textContent = accumulatedMessage;
-                                this.scrollToBottom();
+                                
+                                // Render markdown progressively (throttled)
+                                const now = Date.now();
+                                if (now - lastRenderTime > RENDER_THROTTLE) {
+                                    responseContainer.innerHTML = marked.parse(accumulatedMessage);
+                                    lastRenderTime = now;
+                                    this.scrollToBottom();
+                                }
                             }
 
                             // Final chunk contains full conversation object
@@ -398,7 +476,8 @@ class ConversationalSearch {
 
             // Render markdown after streaming completes
             if (accumulatedMessage) {
-                responseContainer.innerHTML = marked(accumulatedMessage);
+                responseContainer.innerHTML = marked.parse(accumulatedMessage);
+                this.addMessageActions(responseContainer.parentElement, query, accumulatedMessage);
                 this.scrollToBottom();
             } else {
                 responseContainer.textContent = 'No response received. Please try again.';
@@ -426,18 +505,149 @@ class ConversationalSearch {
             }
 
             if (fullAnswer) {
-                responseContainer.innerHTML = marked(fullAnswer);
+                responseContainer.innerHTML = marked.parse(fullAnswer);
+                this.addMessageActions(responseContainer.parentElement, query, fullAnswer);
             } else {
                 responseContainer.textContent = 'No response received.';
             }
         }
     }
+
+    addMessageActions(messageDiv, query, response) {
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'conv-search-message-actions';
+        
+        // SVG icons - outline (default) and filled (active)
+        const thumbsUpOutline = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>`;
+        const thumbsUpFilled = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>`;
+        const thumbsDownOutline = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>`;
+        const thumbsDownFilled = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>`;
+        const copyOutline = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+        const copyFilled = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+        
+        actionsDiv.innerHTML = `
+            <button class="conv-search-action-btn" data-action="thumbs-up" data-outline="${encodeURIComponent(thumbsUpOutline)}" data-filled="${encodeURIComponent(thumbsUpFilled)}" title="Good response">
+                ${thumbsUpOutline}
+            </button>
+            <button class="conv-search-action-btn" data-action="thumbs-down" data-outline="${encodeURIComponent(thumbsDownOutline)}" data-filled="${encodeURIComponent(thumbsDownFilled)}" title="Bad response">
+                ${thumbsDownOutline}
+            </button>
+            <button class="conv-search-action-btn" data-action="copy" data-outline="${encodeURIComponent(copyOutline)}" data-filled="${encodeURIComponent(copyFilled)}" title="Copy response">
+                ${copyOutline}
+            </button>
+        `;
+
+        // Bind event handlers
+        const buttons = actionsDiv.querySelectorAll('.conv-search-action-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const action = btn.dataset.action;
+                this.handleMessageAction(action, query, response, btn);
+            });
+        });
+
+        messageDiv.appendChild(actionsDiv);
+    }
+
+    handleMessageAction(action, query, response, button) {
+        const logData = {
+            conversational_search: {
+                action,
+                query,
+                response_length: response.length,
+                conversation_id: this.conversationId
+            }
+        };
+
+        // Helper to swap icon to filled/outline
+        const setButtonIcon = (btn, filled) => {
+            const icon = filled ? btn.dataset.filled : btn.dataset.outline;
+            if (icon) btn.innerHTML = decodeURIComponent(icon);
+        };
+
+        switch (action) {
+            case 'thumbs-up':
+                this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: 'positive' } });
+                button.classList.add('active');
+                setButtonIcon(button, true);
+                // Reset thumbs-down
+                const thumbsDown = button.parentElement.querySelector('[data-action="thumbs-down"]');
+                if (thumbsDown) {
+                    thumbsDown.classList.remove('active');
+                    setButtonIcon(thumbsDown, false);
+                }
+                break;
+
+            case 'thumbs-down':
+                this.logAction('Conversational Search Feedback', { ...logData, conversational_search: { ...logData.conversational_search, feedback: 'negative' } });
+                button.classList.add('active');
+                setButtonIcon(button, true);
+                // Reset thumbs-up
+                const thumbsUp = button.parentElement.querySelector('[data-action="thumbs-up"]');
+                if (thumbsUp) {
+                    thumbsUp.classList.remove('active');
+                    setButtonIcon(thumbsUp, false);
+                }
+                break;
+
+            case 'copy':
+                navigator.clipboard.writeText(response).then(() => {
+                    this.logAction('Conversational Search Copy', logData);
+                    // Show copied feedback - filled icon for 3 seconds
+                    const originalTitle = button.title;
+                    const filledIcon = decodeURIComponent(button.dataset.filled);
+                    const outlineIcon = decodeURIComponent(button.dataset.outline);
+                    
+                    button.title = 'Copied!';
+                    button.classList.add('copied');
+                    button.innerHTML = filledIcon;
+                    
+                    setTimeout(() => {
+                        button.title = originalTitle;
+                        button.classList.remove('copied');
+                        button.innerHTML = outlineIcon;
+                    }, 3000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                });
+                break;
+        }
+    }
+
+    logAction(message, data) {
+        if (window.DD_LOGS?.logger) {
+            window.DD_LOGS.logger.log(message, data, 'info');
+        }
+        if (window.DD_RUM) {
+            window.DD_RUM.addAction('conversational_search_action', data.conversational_search);
+        }
+    }
 }
+
+// Store instance globally for external access
+let conversationalSearchInstance = null;
 
 // Initialize when DOM is ready
 function initConversationalSearch() {
-    new ConversationalSearch();
+    conversationalSearchInstance = new ConversationalSearch();
 }
+
+// Open the modal and send a query (for external use)
+function askDocsAI(query) {
+    if (conversationalSearchInstance) {
+        conversationalSearchInstance.open();
+        if (query && query.trim()) {
+            conversationalSearchInstance.input.value = query;
+            // Small delay to ensure modal is fully open
+            setTimeout(() => {
+                conversationalSearchInstance.sendMessage();
+            }, 100);
+        }
+    }
+}
+
+// Expose globally for search bar integration
+window.askDocsAI = askDocsAI;
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initConversationalSearch);
@@ -445,4 +655,4 @@ if (document.readyState === 'loading') {
     initConversationalSearch();
 }
 
-export { ConversationalSearch, typesenseClient };
+export { ConversationalSearch, typesenseClient, askDocsAI };

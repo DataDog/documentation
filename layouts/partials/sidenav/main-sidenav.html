@@ -4,7 +4,15 @@
     <div class="row sticky">
         <div class="col">
 
-            <p class="h4 text-brand-primary"><a class="text-primary" href="{{ "" | absLangURL  }}">{{ i18n "datadog_docs" }}</a></p>
+            <div class="sidenav-header">
+                <p class="h4 text-brand-primary mb-0"><a class="text-primary" href="{{ "" | absLangURL  }}">{{ i18n "datadog_docs" }}</a></p>
+                <button type="button" class="ask-ai-sidebar-btn" onclick="window.askDocsAI && window.askDocsAI()" title="Ask Docs AI">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z"/>
+                    </svg>
+                    <span>Ask AI</span>
+                </button>
+            </div>
             {{/*
                 load searchbar if not on search results page, else
                 append the searchbar asynchronously (async-loading.js)
