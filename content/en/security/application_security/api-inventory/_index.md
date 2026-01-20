@@ -136,7 +136,7 @@ When sensitive data is detected, the scanner tags the API endpoint with the cate
 
 To create a customer scanner and view its results, do the following:
 
-1. In App and API Protection **Settings**, go to [Sensitive Data Detection][14].
+1. In App and API Protection **Policies**, go to [Sensitive Data Detection][14].
 2. Click **New Scanner**.
 3. In **Select your scanner tags**, define the category and type to classify the senstive data. The scanner tags API endpoints with the format `category:type`.
 4. In **Define conditions on JSON keys and values**, define the JSON key and value conditions to trigger the scanner.
@@ -257,4 +257,4 @@ Click a finding to view its details and perform a workflow such as Validate > In
 [11]: /security/application_security/setup/
 [12]: /security/application_security/policies/custom_rules/
 [13]: /internal_developer_portal/software_catalog/entity_model/native_entities/?tab=api#native-entity-types
-[14]: https://app.datadoghq.com/security/configuration/asm/scanners
+[14]: https://app.datadoghq.com/security/appsec/policies/scanners
