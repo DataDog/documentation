@@ -72,7 +72,7 @@ class SampleApplication : Application() {
 {{% /tab %}}
 {{< /tabs >}}
 
-If you use `reportFullyDrawn` to identify the moment of full display, you can use `getFullyDrawnReporter` to subscribe to `reportFullyDrawn` and call `GlobalRumMonitor.get().reportAppFullyDisplayed()`. If you do not use `reportFullyDrawn`, you can still call `GlobalRumMonitor.get().reportAppFullyDisplayed()`, but it will make sense only for cold and warm starts, rather than hot starts.
+If you use `reportFullyDrawn` to identify the moment of full display, you can use [getFullyDrawnReporter][7] to subscribe to `reportFullyDrawn` and call `GlobalRumMonitor.get().reportAppFullyDisplayed()`. 
 
 <div class="alert alert-danger">
   If the time to full display is not defined, the Android SDK only collects the TTID.
@@ -122,3 +122,4 @@ These metrics contain the `@vital.startup_type` attribute to specify the launch 
 [4]: https://developer.android.com/topic/performance/vitals/launch-time#warm
 [5]: https://developer.android.com/reference/android/app/Activity#reportFullyDrawn()
 [6]: https://developer.android.com/reference/androidx/activity/ComponentActivity#getFullyDrawnReporter%28%29
+[7]: https://developer.android.com/reference/androidx/activity/ComponentActivity#getFullyDrawnReporter() 
