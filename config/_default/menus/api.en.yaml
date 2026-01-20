@@ -8526,6 +8526,19 @@ menu:
         unstable:
           - v2
         order: 36
+    - name: Create postmortem attachment
+      url: '#create-postmortem-attachment'
+      identifier: incidents-create-postmortem-attachment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentPostmortemAttachment
+        unstable:
+          - v2
+        order: 5
     - name: Create incident attachment
       url: '#create-incident-attachment'
       identifier: incidents-create-incident-attachment

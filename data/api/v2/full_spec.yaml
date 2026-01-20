@@ -9095,10 +9095,6 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
-        status_group:
-          $ref: '#/components/schemas/CaseStatusGroup'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9165,8 +9161,6 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9335,9 +9329,7 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      deprecated: true
-      description: Deprecated way of representing the case status, which only supports
-        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
+      description: Case status
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9348,23 +9340,6 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
-    CaseStatusGroup:
-      description: Status group of the case.
-      enum:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-      example: SG_OPEN
-      type: string
-      x-enum-varnames:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-    CaseStatusName:
-      description: Status of the case. Must be one of the existing statuses for the
-        case's type.
-      example: Open
-      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9588,9 +9563,8 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-          deprecated: true
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
+      required:
+      - status
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -29906,6 +29880,7 @@ components:
       description: Attributes for creating a Jira issue template
       properties:
         fields:
+          additionalProperties: {}
           description: Custom fields for the Jira issue template
           example:
             description:
@@ -29969,6 +29944,7 @@ components:
       description: Attributes of a Jira issue template
       properties:
         fields:
+          additionalProperties: {}
           description: Custom fields for the Jira issue template
           example:
             description:
@@ -30031,6 +30007,7 @@ components:
       description: Attributes for updating a Jira issue template
       properties:
         fields:
+          additionalProperties: {}
           description: Custom fields for the Jira issue template
           example:
             description:
@@ -36828,6 +36805,18 @@ components:
           items:
             type: string
           type: array
+        routes:
+          description: A list of routing rules that forward matching logs to Datadog
+            using dedicated API keys.
+          example:
+          - api_key_key: API_KEY_IDENTIFIER
+            include: service:api
+            route_id: datadog-logs-route-us1
+            site: us1
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationRoute'
+          maxItems: 100
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationType'
       required:
@@ -36837,6 +36826,29 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineDatadogLogsDestinationRoute:
+      description: Defines how the `datadog_logs` destination routes matching logs
+        to a Datadog site using a specific API key.
+      properties:
+        api_key_key:
+          description: Name of the environment variable or secret that stores the
+            Datadog API key used by this route.
+          example: API_KEY_IDENTIFIER
+          type: string
+        include:
+          description: A Datadog search query that determines which logs are forwarded
+            using this route.
+          example: service:api
+          type: string
+        route_id:
+          description: Unique identifier for this route within the destination.
+          example: datadog-logs-route-us
+          type: string
+        site:
+          description: Datadog site where matching logs are sent (for example, `us1`).
+          example: us1
+          type: string
+      type: object
     ObservabilityPipelineDatadogLogsDestinationType:
       default: datadog_logs
       description: The destination type. The value should always be `datadog_logs`.
@@ -42387,6 +42399,83 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    PostmortemAttachmentRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/PostmortemAttachmentRequestData'
+      required:
+      - data
+      type: object
+    PostmortemAttachmentRequestAttributes:
+      description: Postmortem attachment attributes
+      properties:
+        cells:
+          description: The cells of the postmortem
+          items:
+            $ref: '#/components/schemas/PostmortemCell'
+          type: array
+        content:
+          description: The content of the postmortem
+          example: '# Incident Report - IR-123
+
+            [...]'
+          type: string
+        postmortem_template_id:
+          description: The ID of the postmortem template
+          example: 93645509-874e-45c4-adfa-623bfeaead89-123
+          type: string
+        title:
+          description: The title of the postmortem
+          example: Postmortem-IR-123
+          type: string
+      type: object
+    PostmortemAttachmentRequestData:
+      description: Postmortem attachment data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemAttachmentRequestAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentAttachmentType'
+      required:
+      - type
+      - attributes
+      type: object
+    PostmortemCell:
+      description: A cell in the postmortem
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemCellAttributes'
+        id:
+          description: The unique identifier of the cell
+          example: cell-1
+          type: string
+        type:
+          $ref: '#/components/schemas/PostmortemCellType'
+      type: object
+    PostmortemCellAttributes:
+      description: Attributes of a postmortem cell
+      properties:
+        definition:
+          $ref: '#/components/schemas/PostmortemCellDefinition'
+      type: object
+    PostmortemCellDefinition:
+      description: Definition of a postmortem cell
+      properties:
+        content:
+          description: The content of the cell in markdown format
+          example: '## Incident Summary
+
+            This incident was caused by...'
+          type: string
+      type: object
+    PostmortemCellType:
+      description: The postmortem cell resource type.
+      enum:
+      - markdown
+      example: markdown
+      type: string
+      x-enum-varnames:
+      - MARKDOWN
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -49686,6 +49775,18 @@ components:
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
       type: object
+    SecurityMonitoringPaginatedSuppressionsResponse:
+      description: Response object containing the available suppression rules with
+        pagination metadata.
+      properties:
+        data:
+          description: A list of suppressions objects.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSuppression'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsMeta'
+      type: object
     SecurityMonitoringReferenceTable:
       description: Reference tables used in the queries.
       properties:
@@ -51835,6 +51936,31 @@ components:
         data:
           $ref: '#/components/schemas/SecurityMonitoringSuppression'
       type: object
+    SecurityMonitoringSuppressionSort:
+      description: The sort parameters used for querying suppression rules.
+      enum:
+      - name
+      - start_date
+      - expiration_date
+      - update_date
+      - enabled
+      - -name
+      - -start_date
+      - -expiration_date
+      - -update_date
+      - -enabled
+      type: string
+      x-enum-varnames:
+      - NAME
+      - START_DATE
+      - EXPIRATION_DATE
+      - UPDATE_DATE
+      - ENABLED
+      - NAME_DESCENDING
+      - START_DATE_DESCENDING
+      - EXPIRATION_DATE_DESCENDING
+      - UPDATE_DATE_DESCENDING
+      - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
       description: The type of the resource. The value should always be `suppressions`.
@@ -51929,6 +52055,31 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
       required:
       - data
+      type: object
+    SecurityMonitoringSuppressionsMeta:
+      description: Metadata for the suppression list response.
+      properties:
+        page:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsPageMeta'
+      type: object
+    SecurityMonitoringSuppressionsPageMeta:
+      description: Pagination metadata.
+      properties:
+        pageNumber:
+          description: Current page number.
+          example: 0
+          format: int64
+          type: integer
+        pageSize:
+          description: Current page size.
+          example: 2
+          format: int64
+          type: integer
+        totalCount:
+          description: Total count of suppressions.
+          example: 2
+          format: int64
+          type: integer
       type: object
     SecurityMonitoringSuppressionsResponse:
       description: Response object containing the available suppression rules.
@@ -55787,10 +55938,8 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
-      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access. This field is deprecated, use the restriction
-        policies API to manage permissions.
+        for restricting read and write access.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
@@ -72268,6 +72417,47 @@ paths:
       x-unstable: '**Note**: This endpoint is in Preview.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/attachments/postmortems:
+    post:
+      description: Create a postmortem attachment for an incident.
+      operationId: CreateIncidentPostmortemAttachment
+      parameters:
+      - description: The ID of the incident
+        in: path
+        name: incident_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostmortemAttachmentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create postmortem attachment
+      tags:
+      - Incidents
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/attachments/{attachment_id}:
     delete:
       operationId: DeleteIncidentAttachment
@@ -87248,12 +87438,29 @@ paths:
         required: false
         schema:
           type: string
+      - description: Attribute used to sort the list of suppression rules. Prefix
+          with `-` to sort in descending order.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionSort'
+      - description: Size for a given page. Use `-1` to return all items.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: -1
+          example: 10
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+                $ref: '#/components/schemas/SecurityMonitoringPaginatedSuppressionsResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -88313,7 +88520,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
@@ -88458,7 +88665,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:

@@ -1197,6 +1197,12 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "CreateIncidentPostmortemAttachment": {
+    "description": "Create a postmortem attachment for an incident.",
+    "summary": "Create postmortem attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteIncidentAttachment": {
     "summary": "Delete incident attachment"
   },
