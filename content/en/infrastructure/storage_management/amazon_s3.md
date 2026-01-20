@@ -479,7 +479,7 @@ If you don't see data for buckets you set up for Storage Management:
 | aws.s3.inventory.access_logs.total_requests_by_method  | `bucketname`, `prefix`, `region`, `method`                                                    | Total number of requests for objects in a prefix, optionally split by request method (for example, GET or PUT). Requires S3 Access Logs in Datadog.   |
 | aws.s3.inventory.access_logs.request_latency_by_method | `bucketname`, `prefix`, `region`, `method`                                                    | Server response time for requests in a prefix, optionally split by request method. Requires S3 Access Logs in Datadog.                          |
 
-  *`prefixN` refers to prefix levels such as `prefix0`, `prefix1`, `prefix2`, etc.
+  *`prefixN` refers to prefix levels such as `prefix0`, `prefix1`, `prefix2`, and so on.
 
   **Note:** For the most accurate monitoring and visualization, ensure that S3 inventory reports use the CSV format and include all object versions if you wish to view non-current object recommendations or metrics. 
 
