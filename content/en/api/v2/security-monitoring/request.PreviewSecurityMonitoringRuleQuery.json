@@ -1,0 +1,10 @@
+{
+  "query": "source:cloudtrail",
+  "queryIndex": 0,
+  "filters": [],
+  "type": "log_detection",
+  "detectionMethod": "threshold",
+  "dataSource": "logs",
+  "groupByFields": [],
+  "distinctFields": []
+}

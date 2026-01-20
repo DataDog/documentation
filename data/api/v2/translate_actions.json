@@ -2935,6 +2935,12 @@
     "description": "Get a suppression's version history.",
     "summary": "Get a suppression's version history"
   },
+  "PreviewSecurityMonitoringRuleQuery": {
+    "description": "Preview a security monitoring rule query with security filters, group by fields, and distinct fields applied.\nThis endpoint is used in the rule editor to show how the query will be transformed after applying additional filters.",
+    "summary": "Preview a rule query with applied filters",
+    "request_description": "",
+    "request_schema_description": "Request to preview a rule query with applied filters."
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -3264,28 +3270,6 @@
     "summary": "Save new value for on-demand concurrency cap",
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
-  },
-  "CreateSyntheticsSuite": {
-    "summary": "Synthetics: Create a test suite",
-    "request_description": "",
-    "request_schema_description": ""
-  },
-  "DeleteSyntheticsSuites": {
-    "summary": "Synthetics: Bulk delete suites",
-    "request_description": "",
-    "request_schema_description": ""
-  },
-  "SearchSuites": {
-    "description": "Search for Synthetics suites.",
-    "summary": "Search Synthetics suites"
-  },
-  "GetSyntheticsSuite": {
-    "summary": "Synthetics: Get a suite"
-  },
-  "EditSyntheticsSuite": {
-    "summary": "Synthetics: Edit a test suite",
-    "request_description": "New suite details to be saved.",
-    "request_schema_description": ""
   },
   "PatchGlobalVariable": {
     "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",

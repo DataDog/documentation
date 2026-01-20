@@ -1646,6 +1646,13 @@
       "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
+  "PreviewSecurityMonitoringRuleQuery": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Preview a rule query with applied filters returns \"OK\" response"
+    }
+  ],
   "RunThreatHuntingJob": [
     {
       "group": "security_monitoring",
@@ -1920,13 +1927,6 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
-    }
-  ],
-  "CreateSyntheticsSuite": [
-    {
-      "group": "synthetics",
-      "suffix": "",
-      "description": "Synthetics: Create a test suite returns \"OK\" response"
     }
   ],
   "AddTeamHierarchyLink": [
