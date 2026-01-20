@@ -75,9 +75,9 @@ ignore:
   - "vendor/"             # Exclude vendor directory
 ```
 
-### Exclusion operator
+### Exceptions
 
-Use the `!` prefix to create negative patterns that **override** ignore rules. This allows you to exclude a broad set of files while including specific exceptions.
+Add `!` before a pattern to create an exception to your ignore rules. This lets you include specific files or folders that would otherwise be excluded.
 
 ```yaml
 ignore:
