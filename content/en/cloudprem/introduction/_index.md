@@ -10,7 +10,7 @@ description: Learn about CloudPrem architecture, components, and supported featu
 ## Overview
 
 CloudPrem is Datadog BYOC log management solution. It runs in your own infrastructure, indexes and stores logs in your object storage, execute search and analytics queries and connects to Datadog UI to give a fully integrated experience with Datadog products. CloudPrem is designed for organizations with specific requirements:
-- Data residency, privacy and regulatory requirements
+- Data residency, privacy, and regulatory requirements
 - High volume requirements
 
 Here is a high-level overview of how CloudPrem works:
