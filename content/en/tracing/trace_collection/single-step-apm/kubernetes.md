@@ -50,11 +50,17 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through label extraction (recommended) or in deployment manifests.
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through automatic label extraction (recommended), explicit configuration with `ddTraceConfigs`, or in deployment manifests.
 
-### (Recommended) Configure USTs through label extraction
+<div class="alert alert-warning">
+If you are using <a href="/agent/remote_config/">Remote Configuration</a>, <a href="#recommended-configure-usts-through-automatic-label-extraction">automatic label extraction</a> is not compatible. You must <a href="#configure-usts-explicitly-with-ddtraceconfigs">configure USTs explicitly</a> using <code>ddTraceConfigs</code>.
+</div>
+
+### (Recommended) Configure USTs through automatic label extraction
 
 With SSI, you can automatically extract UST values from pod labels and metadata without modifying individual deployments. To do this, configure `kubernetesResourcesLabelsAsTags` to map your existing Kubernetes labels to Datadog service tags.
+
+**Note:** This method is not compatible with Remote Configuration. If you're using Remote Configuration, see [Configure USTs explicitly with ddTraceConfigs](#configure-usts-explicitly-with-ddtraceconfigs).
 
 #### Prerequisites
 
@@ -64,7 +70,7 @@ With SSI, you can automatically extract UST values from pod labels and metadata 
 | `datadog-operator` | 1.16.0   |
 | `datadog-helm-chart` | 3.120.0 |
 
-#### Automatic configuration
+#### Configuration
 
 Replace `app.kubernetes.io/name` in the following example with any label that contains your service name (for example, `service.kubernetes.io/name` or `component`). You can configure multiple labels this way.
 
@@ -90,7 +96,7 @@ datadog:
 
 With this configuration, Datadog automatically sets the `service` tag using the value of the `app.kubernetes.io/name` label for any instrumented workload that includes this label.
 
-#### Explicit control with ddTraceConfigs
+### Configure USTs explicitly with ddTraceConfigs
 
 In most cases, automatic configuration is sufficient. However, if you need granular control over settings for specific workloads, use `ddTraceConfigs` to explicitly map labels to service configurations:
 
