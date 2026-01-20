@@ -66,7 +66,7 @@ Alerting rules typically include:
   How long failures must persist before triggering an alert.
 
 - **Location scope**  
-  For example, *any 1 of N locations* or *all locations*.
+  For example, *any 1 of N locations* or *all locations*. <br></br>
 
   {{< img src="synthetics/guide/monitors_trigger_alerts/schedule_and_alert_2.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:80%;" >}}
 
@@ -93,7 +93,7 @@ With the above settings, the alert triggers 13 minutes after the scheduled test 
 |------|-------|--------|----------------|
 | t0 | Scheduled test runs | Pass | OK |
 | t15 | Scheduled test runs | Fail | OK (Minimum duration timer starts)|
-| t28 | --- |Fail | ALERT (13 minutes elapsed)|
+| t28 | N/A |Fail | ALERT (13 minutes elapsed)|
 
 If you want alerts after one test execution, this is a recommended configuration. 
 
@@ -111,7 +111,7 @@ With the above settings, the minimum duration timer starts when the second fast 
 | t30 | Scheduled test runs | Fail | OK |
 | t31 | First fast retry for scheduled test run at t30  | Fail | OK |
 | t32 | Second fast retry for scheduled test run at t30 | Fail | OK (Minimum duration timer starts)|
-| t37 | --- | Fail | ALERT (5 minutes elapsed) |
+| t37 | N/A | Fail | ALERT (5 minutes elapsed) |
 | t60 | Scheduled test runs| Pass | OK |
 
 **Note**: Because fast retries were configured, the alert triggered at t37 instead of t35, adding a 2-minute delay.
