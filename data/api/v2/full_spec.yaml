@@ -36805,6 +36805,18 @@ components:
           items:
             type: string
           type: array
+        routes:
+          description: A list of routing rules that forward matching logs to Datadog
+            using dedicated API keys.
+          example:
+          - api_key_key: API_KEY_IDENTIFIER
+            include: service:api
+            route_id: datadog-logs-route-us1
+            site: us1
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationRoute'
+          maxItems: 100
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationType'
       required:
@@ -36814,6 +36826,29 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineDatadogLogsDestinationRoute:
+      description: Defines how the `datadog_logs` destination routes matching logs
+        to a Datadog site using a specific API key.
+      properties:
+        api_key_key:
+          description: Name of the environment variable or secret that stores the
+            Datadog API key used by this route.
+          example: API_KEY_IDENTIFIER
+          type: string
+        include:
+          description: A Datadog search query that determines which logs are forwarded
+            using this route.
+          example: service:api
+          type: string
+        route_id:
+          description: Unique identifier for this route within the destination.
+          example: datadog-logs-route-us
+          type: string
+        site:
+          description: Datadog site where matching logs are sent (for example, `us1`).
+          example: us1
+          type: string
+      type: object
     ObservabilityPipelineDatadogLogsDestinationType:
       default: datadog_logs
       description: The destination type. The value should always be `datadog_logs`.
