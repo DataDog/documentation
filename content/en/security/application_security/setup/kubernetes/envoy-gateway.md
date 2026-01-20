@@ -30,17 +30,17 @@ You can enable Datadog App and API Protection for traffic managed by [Envoy Gate
     - Ensure [APM is enabled][4] in the Agent to allow the external processor service to send its own traces to the Agent.
       - Optionally, enable the [Cluster Agent Admission Controller][5] to automatically inject the Datadog Agent host information to the App and API Protection External Processor service.
 
-## Automated configuration with Gateway Injector
+## Automated configuration with App and API Protection for Kubernetes
 
 <div class="alert alert-info">
-  The AppSec Gateway Injector can automatically configure your Envoy Gateway for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
+  App and API Protection for Kubernetes automatically configures your Envoy Gateway for Application Security monitoring. This is the recommended approach for most users as it eliminates manual configuration and simplifies operations.
 </div>
 
-Instead of manually deploying the external processor and configuring `EnvoyExtensionPolicy` (as shown in the manual configuration section below), use the Injector to handle this automatically.
+Instead of manually deploying the external processor and configuring `EnvoyExtensionPolicy` (as shown in the manual configuration section below), enable App and API Protection for Kubernetes automatic configuration to handle this for you.
 
-### When to use the Gateway Injector
+### When to use automatic configuration
 
-Use the Gateway Injector if you want to:
+Use automatic configuration if you want to:
 - Automatically configure multiple Envoy Gateways across namespaces
 - Simplify deployment and ongoing maintenance
 - Manage configuration through infrastructure-as-code with Helm
@@ -50,7 +50,7 @@ Use the Gateway Injector if you want to:
 
 **1. Deploy the external processor** using the deployment manifest shown in [Step 1](#1-deploy-the-datadog-external-processor-service) below.
 
-**2. Enable the Injector** using Helm values:
+**2. Enable automatic configuration** using Helm values:
 
 ```yaml
 datadog:
@@ -71,7 +71,7 @@ Install or upgrade the Datadog Helm chart:
 helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
 
-**3. The injector automatically:**
+**3. Once enabled, the Datadog Cluster Agent:**
 - Detects your Envoy Gateway installations
 - Creates `EnvoyExtensionPolicy` resources for each Gateway
 - Configures the policies to route traffic to the external processor
@@ -82,7 +82,7 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 kubectl get envoyextensionpolicy -A
 ```
 
-For detailed configuration options, advanced features, and troubleshooting, see the [Gateway Injector documentation](/containers/kubernetes/appsec).
+For detailed configuration options, advanced features, and troubleshooting, see [App and API Protection for Kubernetes](/containers/kubernetes/appsec).
 
 ## Manual configuration (alternative)
 

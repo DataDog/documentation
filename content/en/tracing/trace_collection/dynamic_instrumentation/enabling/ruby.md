@@ -20,7 +20,7 @@ further_reading:
     Note that <a href="#limitations">some limitations</a> apply to the preview.
 {{< /beta-callout-private >}}
 
-Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 **Note**: Dynamic Instrumentation is supported only for applications running in `production` environment (`RAILS_ENV`, `RACK_ENV`, etc.).
 

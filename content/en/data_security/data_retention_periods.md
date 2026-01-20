@@ -81,7 +81,7 @@ attributes:
   - product: CoScreen
     data_type: |
        - **Sessions**: 15 months
-  - product: Data Jobs Monitoring
+  - product: "Data Observability: Jobs Monitoring"
     data_type: |
        - **Job traces**: 90 days
   - product: Database Monitoring

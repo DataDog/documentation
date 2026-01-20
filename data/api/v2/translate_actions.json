@@ -1072,7 +1072,7 @@
     "summary": "Get a list of events"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).\n\n❌ Notifications are not yet supported for events sent to this endpoint. Use the V1 endpoint for notification functionality.",
+    "description": "This endpoint allows you to publish events.\n\n**Note:** To utilize this endpoint with our client libraries, please ensure you are using the latest version released on or after July 1, 2025. Earlier versions do not support this functionality.\n\n**Important:** Upgrade to the latest client library version to use the updated endpoint at `https://event-management-intake.{site}/api/v2/events`. Older client library versions of the Post an event (v2) API send requests to a deprecated endpoint (`https://api.{site}/api/v2/events`).\n\n✅ **Only events with the `change` or `alert` category** are in General Availability. For change events, see [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, use the V1 endpoint or reach out to [support](https://www.datadoghq.com/support/).",
     "summary": "Post an event",
     "request_description": "Event creation request payload.",
     "request_schema_description": "Payload for creating an event."
@@ -1194,6 +1194,12 @@
   "CreateIncidentAttachment": {
     "description": "Create an incident attachment.",
     "summary": "Create incident attachment",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateIncidentPostmortemAttachment": {
+    "description": "Create a postmortem attachment for an incident.",
+    "summary": "Create postmortem attachment",
     "request_description": "",
     "request_schema_description": ""
   },
@@ -1360,6 +1366,38 @@
     "summary": "Create a Datadog GCP principal",
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
+  },
+  "ListJiraAccounts": {
+    "description": "Get all Jira accounts for the organization.",
+    "summary": "List Jira accounts"
+  },
+  "DeleteJiraAccount": {
+    "description": "Delete a Jira account by ID.",
+    "summary": "Delete Jira account"
+  },
+  "ListJiraIssueTemplates": {
+    "description": "Get all Jira issue templates for the organization.",
+    "summary": "List Jira issue templates"
+  },
+  "CreateJiraIssueTemplate": {
+    "description": "Create a new Jira issue template.",
+    "summary": "Create Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to create a Jira issue template"
+  },
+  "DeleteJiraIssueTemplate": {
+    "description": "Delete a Jira issue template by ID.",
+    "summary": "Delete Jira issue template"
+  },
+  "GetJiraIssueTemplate": {
+    "description": "Get a Jira issue template by ID.",
+    "summary": "Get Jira issue template"
+  },
+  "UpdateJiraIssueTemplate": {
+    "description": "Update a Jira issue template by ID.",
+    "summary": "Update Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to update a Jira issue template"
   },
   "GetChannelByName": {
     "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
@@ -1943,6 +1981,36 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "ListPipelines": {
+    "description": "Retrieve a list of pipelines.",
+    "summary": "List pipelines"
+  },
+  "CreatePipeline": {
+    "description": "Create a new pipeline.",
+    "summary": "Create a new pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
+  "ValidatePipeline": {
+    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.",
+    "summary": "Validate an observability pipeline",
+    "request_description": "",
+    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
+  },
+  "DeletePipeline": {
+    "description": "Delete a pipeline.",
+    "summary": "Delete a pipeline"
+  },
+  "GetPipeline": {
+    "description": "Get a specific pipeline by its ID.",
+    "summary": "Get a specific pipeline"
+  },
+  "UpdatePipeline": {
+    "description": "Update a pipeline.",
+    "summary": "Update a pipeline",
+    "request_description": "",
+    "request_schema_description": "Top-level schema representing a pipeline."
+  },
   "CreateOnCallEscalationPolicy": {
     "description": "Create a new On-Call escalation policy",
     "summary": "Create On-Call escalation policy",
@@ -2359,36 +2427,6 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
-  "ListPipelines": {
-    "description": "Retrieve a list of pipelines.",
-    "summary": "List pipelines"
-  },
-  "CreatePipeline": {
-    "description": "Create a new pipeline.",
-    "summary": "Create a new pipeline",
-    "request_description": "",
-    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
-  },
-  "ValidatePipeline": {
-    "description": "Validates a pipeline configuration without creating or updating any resources.\nReturns a list of validation errors, if any.",
-    "summary": "Validate an observability pipeline",
-    "request_description": "",
-    "request_schema_description": "Input schema representing an observability pipeline configuration. Used in create and validate requests."
-  },
-  "DeletePipeline": {
-    "description": "Delete a pipeline.",
-    "summary": "Delete a pipeline"
-  },
-  "GetPipeline": {
-    "description": "Get a specific pipeline by its ID.",
-    "summary": "Get a specific pipeline"
-  },
-  "UpdatePipeline": {
-    "description": "Update a pipeline.",
-    "summary": "Update a pipeline",
-    "request_description": "",
-    "request_schema_description": "Top-level schema representing a pipeline."
-  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -2800,6 +2838,34 @@
     "summary": "Update a Workload Protection agent rule (US1-FED)",
     "request_description": "New definition of the agent rule",
     "request_schema_description": "Request object that includes the Agent rule with the attributes to update"
+  },
+  "ListSecurityMonitoringCriticalAssets": {
+    "description": "Get the list of all critical assets.",
+    "summary": "Get all critical assets"
+  },
+  "CreateSecurityMonitoringCriticalAsset": {
+    "description": "Create a new critical asset.",
+    "summary": "Create a critical asset",
+    "request_description": "The definition of the new critical asset.",
+    "request_schema_description": "Request object that includes the critical asset that you would like to create."
+  },
+  "GetCriticalAssetsAffectingRule": {
+    "description": "Get the list of critical assets that affect a specific existing rule by the rule's ID.",
+    "summary": "Get critical assets affecting a specific rule"
+  },
+  "DeleteSecurityMonitoringCriticalAsset": {
+    "description": "Delete a specific critical asset.",
+    "summary": "Delete a critical asset"
+  },
+  "GetSecurityMonitoringCriticalAsset": {
+    "description": "Get the details of a specific critical asset.",
+    "summary": "Get a critical asset"
+  },
+  "UpdateSecurityMonitoringCriticalAsset": {
+    "description": "Update a specific critical asset.",
+    "summary": "Update a critical asset",
+    "request_description": "New definition of the critical asset. Supports partial updates.",
+    "request_schema_description": "Request object containing the fields to update on the critical asset."
   },
   "ListSecurityFilters": {
     "description": "Get the list of configured security filters with their definitions.",
