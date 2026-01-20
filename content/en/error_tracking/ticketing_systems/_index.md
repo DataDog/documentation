@@ -29,12 +29,11 @@ These features help your teams respond to errors faster by bridging the gap betw
 
 ## Getting started
 
-
-
 {{< whatsnext desc="Select your ticketing system to get started:" >}}
     {{< nextlink href="error_tracking/ticketing_systems/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="error_tracking/ticketing_systems/case_management" >}}Case Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}

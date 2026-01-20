@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Integrate Jira with Error Tracking to create and link Jira tickets to Error Tracking issues. With Jira for Error tracking, you can: 
+Integrate Jira with Error Tracking to create and link Jira tickets to Error Tracking issues. With Jira for Error tracking, you can:
 
 - Create Jira tickets directly from the Error Tracking issue panel
 - Group multiple Error Tracking issues into a single ticket
@@ -45,12 +45,9 @@ You can create a Jira ticket directly from the Issue Panel to group investigatio
 
 {{< img src="error_tracking/create-ticket.png" alt="Create a Jira ticket from an Error Tracking issue" style="width:100%;" >}}
 
-Once created, the ticket is linked to the Error Tracking issue. The ticket link appears in the Issue Panel, and the issue
-status automatically changes to **REVIEWED**.
+Once created, the ticket is linked to the Error Tracking issue. The ticket link appears in the Issue Panel, and the issue status automatically changes to **REVIEWED**.
 
-When an issue is linked to a ticket, their state, assignee and comments are two-way synced.
-See [State dual-way sync between issues and tickets](#state-dual-way-sync-between-issues-and-tickets) for more information
-on how the issue state and ticket status are synced.
+When an issue is linked to a ticket, their state, assignee and comments are two-way synced. See [State dual-way sync between issues and tickets](#state-dual-way-sync-between-issues-and-tickets) for more information on how the issue state and ticket status are synced.
 
 ## Group multiple issues into a single ticket
 
@@ -105,7 +102,7 @@ You can configure rules to match specific issues to Jira boards. When an issue m
 
 To create automation rules for your Error Tracking issues, you need one (1) of the following [permissions][6] :
 	- Error Tracking Write
-	- Error Tracking Settings Write 
+	- Error Tracking Settings Write
 
 ### Create an automation rule
 
@@ -115,8 +112,7 @@ To create an automation rule for Jira:
 2. Click **New Rule**.
 3. Configure the rule:
     - **Match Criteria**: Define conditions that issues must meet to trigger the rule
-    - **Destination**: Select the destination Jira account and project when tickets are created from issues that match the
-rule. Select the type of ticket you want to create, and provide values for any required fields of the ticket.
+    - **Destination**: Select the destination Jira account and project when tickets are created from issues that match the rule. Select the type of ticket you want to create, and provide values for any required fields of the ticket.
     - **Auto-create**: Optionally enable automatic ticket creation when issues match
 4. Click **Save Rule**.
 

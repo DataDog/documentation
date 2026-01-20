@@ -8,8 +8,7 @@ further_reading:
     text: 'Configure a Jira webhook'
 ---
 
-If you experience unexpected behavior with Error Tracking ticketing integrations, the troubleshooting steps below can
-help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1].
+If you experience unexpected behavior with Error Tracking ticketing integrations, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][1].
 
 ### Sync is broken between Jira and Error Tracking
 
