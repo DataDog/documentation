@@ -7656,6 +7656,7 @@ __metadata:
     eslint-plugin-standard: "npm:^4.1.0"
     fancy-log: "npm:^1.3.3"
     geo-locate: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.2.tgz"
+    highlight.js: "npm:^11.11.1"
     hugo-bin: "npm:0.148.0"
     husky: "npm:^9.1.7"
     instantsearch.js: "npm:^4.74.1"
@@ -7667,7 +7668,8 @@ __metadata:
     json2csv: "npm:^4.5.4"
     lazypipe: "npm:1.0.2"
     lodash: "npm:^4.17.21"
-    marked: "npm:^1.2.9"
+    marked: "npm:^17.0.1"
+    marked-highlight: "npm:^2.2.1"
     merge-stream: "npm:2.0.0"
     minimist: "npm:^1.2.8"
     mixitup: "npm:^3.3.1"
@@ -9993,6 +9995,13 @@ __metadata:
   dependencies:
     function-bind: "npm:^1.1.2"
   checksum: 10/7898a9c1788b2862cf0f9c345a6bec77ba4a0c0983c7f19d610c382343d4f98fa260686b225dfb1f88393a66679d2ec58ee310c1d6868c081eda7918f32cc70a
+  languageName: node
+  linkType: hard
+
+"highlight.js@npm:^11.11.1":
+  version: 11.11.1
+  resolution: "highlight.js@npm:11.11.1"
+  checksum: 10/205272f12f2c8ab1760452a75c58b043b11129cf3a5d2a9c0c90d43993580d0f5c385a73a4b8aba197eef20c0ec37d64000e6b35c4ed5991324f4c2dc78f4e43
   languageName: node
   linkType: hard
 
@@ -12491,12 +12500,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^1.2.9":
-  version: 1.2.9
-  resolution: "marked@npm:1.2.9"
+"marked-highlight@npm:^2.2.1":
+  version: 2.2.3
+  resolution: "marked-highlight@npm:2.2.3"
+  peerDependencies:
+    marked: ">=4 <18"
+  checksum: 10/ae66c9141700ae168d000155baa9a3fc304eba36edd960e04d0c6bdcfd0408fada6ad4f2645e08a60662d68f72cef9500bd93ad80f5dce19e6b5cbaf14c9350b
+  languageName: node
+  linkType: hard
+
+"marked@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "marked@npm:17.0.1"
   bin:
-    marked: bin/marked
-  checksum: 10/ad88455b9e2f0ffc44fa3bb89efc3aed7c0cdcd3af874ebff05d86ce9fef1593ac33bb7a582cbc8925acb802bad80c4480f759e255da39f3b5a99f8759f5ce74
+    marked: bin/marked.js
+  checksum: 10/8d39cf5a1eb97288d09d47dba57a613b8c45a212287b27aa16b4bc41baaebb147340c359d379da1bc6d351474d169aa3a63f981770b67f7663ed0a479dd950c2
   languageName: node
   linkType: hard
 

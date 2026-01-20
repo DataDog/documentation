@@ -19,7 +19,16 @@
             <div class="col-12 offset-0 col-md-8 offset-md-2">
                 <h1 class="mt-3 mt-md-8 mb-0 mb-md-1 text-white font-regular text-center">{{ $datafile.heading }}</h1>
 
-                {{ partial "search.html" . }}
+                <div class="home-search-row">
+                    {{ partial "search.html" . }}
+                    <span class="home-ai-divider">or</span>
+                    <button type="button" class="home-ai-btn" onclick="window.askDocsAI && window.askDocsAI()" title="Ask Docs AI">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z"/>
+                        </svg>
+                        <span>Ask Docs AI</span>
+                    </button>
+                </div>
 
                 <p class="smaller text-white text-center font-semibold popular-search">
                     Popular searches include

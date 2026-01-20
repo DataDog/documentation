@@ -2,14 +2,50 @@ import { getHitData, getSnippetForDisplay } from './getHitData';
 import { bodyClassContains } from '../../helpers/helpers';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
+// Generate the "Ask Docs AI" suggestion HTML
+const generateAskAISuggestion = (query) => {
+    if (!query || !query.trim()) return null;
+    
+    return `
+        <li class="ais-Hits-item ais-Hits-ai-suggestion" data-query="${query.replace(/"/g, '&quot;')}">
+            <a href="#" class="ask-docs-ai-link">
+                <div class="ask-ai-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
+                        <path d="M5 19l1 3 3-1-3 1z" opacity="0.6"/>
+                        <path d="M19 5l1 3 3-1-3 1z" opacity="0.6"/>
+                    </svg>
+                </div>
+                <div class="ask-ai-content">
+                    <p class="ask-ai-title">Ask Docs AI</p>
+                    <p class="ask-ai-query">"${query}"</p>
+                </div>
+            </a>
+        </li>
+    `;
+};
+
 const renderHits = (renderOptions, isFirstRender) => {
-    const handleFirstRender = (containerDiv) => {
-        // Create hits container div, category divs (x5), and hit lists (x5). Then append everthing together and to the DOM.
+    const handleFirstRender = (containerDiv, isDocsContainer) => {
+        // Create hits container div, AI suggestion div, category divs (x5), and hit lists (x5). Then append everthing together and to the DOM.
         const readyHitsContainer = () => {
             const aisHits = document.createElement('div');
             aisHits.id = 'ais-Hits';
             aisHits.classList.add('ais-Hits');
             return aisHits;
+        };
+
+        // Create AI suggestion container (only for docs container, not partners)
+        const createAISuggestionContainer = () => {
+            if (!isDocsContainer) return null;
+            const aiContainer = document.createElement('div');
+            aiContainer.id = 'ais-Hits-ai-container';
+            aiContainer.classList.add('ais-Hits-ai-container');
+            const aiList = document.createElement('ol');
+            aiList.id = 'ais-Hits-ai-list';
+            aiList.classList.add('ais-Hits-list', 'ais-Hits-ai-list');
+            aiContainer.appendChild(aiList);
+            return aiContainer;
         };
 
         const generateElements = ({ name, count, classArray } = item) => {
@@ -42,6 +78,13 @@ const renderHits = (renderOptions, isFirstRender) => {
             list: { name: 'list', count: 5, classArray: ['ais-Hits-list', 'no-hits'] }
         };
         const hitsContainer = readyHitsContainer();
+        
+        // Add AI suggestion container first (only for docs container)
+        const aiSuggestionContainer = createAISuggestionContainer();
+        if (aiSuggestionContainer) {
+            appendChildElements(hitsContainer, aiSuggestionContainer);
+        }
+        
         const categoryElements = generateElements(elementDictionary['category']);
         const listElements = generateElements(elementDictionary['list']);
 
@@ -52,11 +95,32 @@ const renderHits = (renderOptions, isFirstRender) => {
         });
 
         appendChildElements(containerDiv, hitsContainer);
+        
+        // Add click handler for AI suggestion
+        containerDiv.addEventListener('click', (e) => {
+            const aiLink = e.target.closest('.ask-docs-ai-link');
+            if (aiLink) {
+                e.preventDefault();
+                const queryItem = aiLink.closest('.ais-Hits-ai-suggestion');
+                const query = queryItem?.dataset?.query || '';
+                if (window.askDocsAI) {
+                    window.askDocsAI(query);
+                }
+            }
+        });
     };
 
-    const handleNRender = (containerDiv, allJoinedListItemsArray, numHits) => {
+    const handleNRender = (containerDiv, allJoinedListItemsArray, numHits, aiSuggestionHTML, isDocsContainer) => {
         // On non-first renders, add organized hits to applicable divs
         const addHitsToEmptyElements = (container) => {
+            // Add AI suggestion first (only for docs container)
+            if (isDocsContainer) {
+                const aiList = container.querySelector('#ais-Hits-ai-list');
+                if (aiList) {
+                    aiList.innerHTML = aiSuggestionHTML || '';
+                }
+            }
+            
             allJoinedListItemsArray.forEach((joinedList, index) => {
                 if (joinedList) {
                     const target = container.querySelector(`#ais-Hits-category-${index} .ais-Hits-list`);
@@ -66,7 +130,7 @@ const renderHits = (renderOptions, isFirstRender) => {
         };
 
         const hideOrShowElements = (container) => {
-            const finalHitsLists = container.querySelectorAll('.ais-Hits-list');
+            const finalHitsLists = container.querySelectorAll('.ais-Hits-list:not(.ais-Hits-ai-list)');
             
             finalHitsLists.forEach((list) => {
                 if (list.childElementCount) {
@@ -76,11 +140,26 @@ const renderHits = (renderOptions, isFirstRender) => {
                 }
             });
 
-            numHits === 0 ? container.classList.add('no-hits') : container.classList.remove('no-hits');
+            // Only add no-hits to container if there are no hits AND no AI suggestion (no query)
+            const hasAISuggestion = !!container.querySelector('.ais-Hits-ai-suggestion');
+            (numHits === 0 && !hasAISuggestion) ? container.classList.add('no-hits') : container.classList.remove('no-hits');
         };
 
         addHitsToEmptyElements(containerDiv);
         hideOrShowElements(containerDiv);
+        
+        // Auto-select AI suggestion as default (for keyboard navigation)
+        if (isDocsContainer) {
+            // First, clear any existing selection
+            containerDiv.querySelectorAll('.selected-item').forEach(item => {
+                item.classList.remove('selected-item');
+            });
+            // Then select the AI suggestion if it exists
+            const aiSuggestion = containerDiv.querySelector('.ais-Hits-ai-suggestion');
+            if (aiSuggestion) {
+                aiSuggestion.classList.add('selected-item');
+            }
+        }
     };
 
     // Returns a bunch of <li>s
@@ -124,8 +203,11 @@ const renderHits = (renderOptions, isFirstRender) => {
             : null;
     };
 
-    const { widgetParams, hits } = renderOptions;
+    const { widgetParams, hits, results } = renderOptions;
     const { container, basePathName } = widgetParams;
+    
+    // Check if this is the main docs container (not partners)
+    const isDocsContainer = container.id === 'hits' || container.querySelector('#hits') !== null;
 
     const partnersHitsArray = hits.filter((hit) => hit.type === 'partners');
 
@@ -136,6 +218,10 @@ const renderHits = (renderOptions, isFirstRender) => {
     const integrationsHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'integrations');
     const guidesHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'guide');
     const apiHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'api');
+    
+    // Always show AI suggestion when there's a query
+    const currentQuery = results?.query || '';
+    const aiSuggestionHTML = generateAskAISuggestion(currentQuery);
 
     // Remove null from array
     const allJoinedListItemsHTML = [
@@ -154,9 +240,9 @@ const renderHits = (renderOptions, isFirstRender) => {
     }
 
     if (isFirstRender) {
-        handleFirstRender(container);
+        handleFirstRender(container, isDocsContainer);
     } else {
-        handleNRender(container, allJoinedListItemsHTML, hits.length);
+        handleNRender(container, allJoinedListItemsHTML, hits.length, aiSuggestionHTML, isDocsContainer);
     }
 };
 

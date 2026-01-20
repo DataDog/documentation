@@ -2,7 +2,7 @@
 const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const marked = require('marked');
+const { marked } = require('marked');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
@@ -734,7 +734,7 @@ const descColumn = (key, value, defaultMarkup) => {
   //const regex = /!?\[([^\]]*)?\]\:\s+((https?:\/\/)?[A-Za-z0-9\:\/\. ]+)(\"(.+)\")?/gm;
   //const subst = `[$1]($2)`;
   //const descModified = desc.replace(regex, subst);
-  let fmtDesc = marked(desc) ? marked(desc).trim() : "";
+  let fmtDesc = marked.parse(desc) ? marked.parse(desc).trim() : "";
   return `<div class="col-5 column">${(fmtDesc) ? fmtDesc : desc}${defaultMarkup}</div>`.trim();
 };
 
