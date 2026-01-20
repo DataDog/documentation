@@ -17217,70 +17217,6 @@ components:
       required:
       - data
       type: object
-    DeletedSuiteResponseData:
-      properties:
-        attributes:
-          $ref: '#/components/schemas/DeletedSuiteResponseDataAttributes'
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/SyntheticsSuiteTypes'
-      type: object
-    DeletedSuiteResponseDataAttributes:
-      properties:
-        deleted_at:
-          description: Deletion timestamp of the Synthetic suite ID.
-          type: string
-        public_id:
-          description: The Synthetic suite ID deleted.
-          type: string
-      type: object
-    DeletedSuitesRequestDelete:
-      properties:
-        attributes:
-          $ref: '#/components/schemas/DeletedSuitesRequestDeleteAttributes'
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/DeletedSuitesRequestType'
-      required:
-      - attributes
-      type: object
-    DeletedSuitesRequestDeleteAttributes:
-      properties:
-        force_delete_dependencies:
-          type: boolean
-        public_ids:
-          example:
-          - ''
-          items:
-            type: string
-          type: array
-      required:
-      - public_ids
-      type: object
-    DeletedSuitesRequestDeleteRequest:
-      properties:
-        data:
-          $ref: '#/components/schemas/DeletedSuitesRequestDelete'
-      required:
-      - data
-      type: object
-    DeletedSuitesRequestType:
-      default: delete_suites_request
-      enum:
-      - delete_suites_request
-      example: delete_suites_request
-      type: string
-      x-enum-varnames:
-      - DELETE_SUITES_REQUEST
-    DeletedSuitesResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DeletedSuiteResponseData'
-          type: array
-      type: object
     DependencyLocation:
       description: Static library vulnerability location.
       properties:
@@ -49177,6 +49113,263 @@ components:
       type: string
       x-enum-varnames:
       - SECRET_RULE
+    SecurityEntityConfigRisks:
+      description: Configuration risks associated with the entity
+      properties:
+        hasIdentityRisk:
+          description: Whether the entity has identity risks
+          example: false
+          type: boolean
+        hasMisconfiguration:
+          description: Whether the entity has misconfigurations
+          example: true
+          type: boolean
+        hasPrivilegedRole:
+          description: Whether the entity has privileged roles
+          example: true
+          type: boolean
+        isPrivileged:
+          description: Whether the entity has privileged access
+          example: false
+          type: boolean
+        isProduction:
+          description: Whether the entity is in a production environment
+          example: true
+          type: boolean
+        isPubliclyAccessible:
+          description: Whether the entity is publicly accessible
+          example: true
+          type: boolean
+      required:
+      - hasMisconfiguration
+      - hasIdentityRisk
+      - isPubliclyAccessible
+      - isProduction
+      - hasPrivilegedRole
+      - isPrivileged
+      type: object
+    SecurityEntityMetadata:
+      description: Metadata about the entity from cloud providers
+      properties:
+        accountID:
+          description: Cloud account ID (AWS)
+          example: '123456789012'
+          type: string
+        environments:
+          description: Environment tags associated with the entity
+          example:
+          - production
+          - us-east-1
+          items:
+            type: string
+          type: array
+        mitreTactics:
+          description: MITRE ATT&CK tactics detected
+          example:
+          - Credential Access
+          - Privilege Escalation
+          items:
+            type: string
+          type: array
+        mitreTechniques:
+          description: MITRE ATT&CK techniques detected
+          example:
+          - T1078
+          - T1098
+          items:
+            type: string
+          type: array
+        projectID:
+          description: Cloud project ID (GCP)
+          example: my-gcp-project
+          type: string
+        services:
+          description: Services associated with the entity
+          example:
+          - api-gateway
+          - lambda
+          items:
+            type: string
+          type: array
+        sources:
+          description: Data sources that detected this entity
+          example:
+          - cloudtrail
+          - cloud-security-posture-management
+          items:
+            type: string
+          type: array
+        subscriptionID:
+          description: Cloud subscription ID (Azure)
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          type: string
+      required:
+      - sources
+      - environments
+      - services
+      - mitreTactics
+      - mitreTechniques
+      type: object
+    SecurityEntityRiskScore:
+      description: An entity risk score containing security risk assessment information
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityEntityRiskScoreAttributes'
+        id:
+          description: Unique identifier for the entity
+          example: arn:aws:iam::123456789012:user/john.doe
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityEntityRiskScoreType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityEntityRiskScoreAttributes:
+      description: Attributes of an entity risk score
+      properties:
+        configRisks:
+          $ref: '#/components/schemas/SecurityEntityConfigRisks'
+        entityID:
+          description: Unique identifier for the entity
+          example: arn:aws:iam::123456789012:user/john.doe
+          type: string
+        entityMetadata:
+          $ref: '#/components/schemas/SecurityEntityMetadata'
+        entityName:
+          description: Human-readable name of the entity
+          example: john.doe
+          type: string
+        entityProviders:
+          description: Cloud providers associated with the entity
+          example:
+          - aws
+          items:
+            type: string
+          type: array
+        entityRoles:
+          description: Roles associated with the entity
+          example:
+          - Admin
+          - Developer
+          items:
+            type: string
+          type: array
+        entityType:
+          description: Type of the entity (e.g., aws_iam_user, aws_ec2_instance)
+          example: aws_iam_user
+          type: string
+        firstDetected:
+          description: Timestamp when the entity was first detected (Unix milliseconds)
+          example: 1704067200000
+          format: int64
+          type: integer
+        lastActivityTitle:
+          description: Title of the most recent signal detected for this entity
+          example: Suspicious API call detected
+          type: string
+        lastDetected:
+          description: Timestamp when the entity was last detected (Unix milliseconds)
+          example: 1705276800000
+          format: int64
+          type: integer
+        riskScore:
+          description: Current risk score for the entity
+          example: 85.5
+          format: double
+          type: number
+        riskScoreEvolution:
+          description: Change in risk score compared to previous period
+          example: 12.3
+          format: double
+          type: number
+        severity:
+          $ref: '#/components/schemas/SecurityEntityRiskScoreAttributesSeverity'
+        signalsDetected:
+          description: Number of security signals detected for this entity
+          example: 15
+          format: int64
+          type: integer
+      required:
+      - entityID
+      - entityType
+      - entityProviders
+      - riskScore
+      - riskScoreEvolution
+      - severity
+      - firstDetected
+      - lastDetected
+      - lastActivityTitle
+      - signalsDetected
+      - configRisks
+      - entityMetadata
+      type: object
+    SecurityEntityRiskScoreAttributesSeverity:
+      description: Severity level based on risk score
+      enum:
+      - critical
+      - high
+      - medium
+      - low
+      - info
+      example: critical
+      type: string
+      x-enum-varnames:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFO
+    SecurityEntityRiskScoreType:
+      description: Resource type
+      enum:
+      - security_entity_risk_score
+      example: security_entity_risk_score
+      type: string
+      x-enum-varnames:
+      - SECURITY_ENTITY_RISK_SCORE
+    SecurityEntityRiskScoresMeta:
+      description: Metadata for pagination
+      properties:
+        pageNumber:
+          description: Current page number (1-indexed)
+          example: 1
+          format: int64
+          type: integer
+        pageSize:
+          description: Number of items per page
+          example: 10
+          format: int64
+          type: integer
+        queryId:
+          description: Query ID for pagination consistency
+          example: abc123def456
+          type: string
+        totalRowCount:
+          description: Total number of entities matching the query
+          example: 150
+          format: int64
+          type: integer
+      required:
+      - queryId
+      - totalRowCount
+      - pageSize
+      - pageNumber
+      type: object
+    SecurityEntityRiskScoresResponse:
+      description: Response containing a list of entity risk scores
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SecurityEntityRiskScore'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SecurityEntityRiskScoresMeta'
+      required:
+      - data
+      - meta
+      type: object
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -49803,6 +49996,18 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    SecurityMonitoringPaginatedSuppressionsResponse:
+      description: Response object containing the available suppression rules with
+        pagination metadata.
+      properties:
+        data:
+          description: A list of suppressions objects.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSuppression'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsMeta'
       type: object
     SecurityMonitoringReferenceTable:
       description: Reference tables used in the queries.
@@ -51953,6 +52158,31 @@ components:
         data:
           $ref: '#/components/schemas/SecurityMonitoringSuppression'
       type: object
+    SecurityMonitoringSuppressionSort:
+      description: The sort parameters used for querying suppression rules.
+      enum:
+      - name
+      - start_date
+      - expiration_date
+      - update_date
+      - enabled
+      - -name
+      - -start_date
+      - -expiration_date
+      - -update_date
+      - -enabled
+      type: string
+      x-enum-varnames:
+      - NAME
+      - START_DATE
+      - EXPIRATION_DATE
+      - UPDATE_DATE
+      - ENABLED
+      - NAME_DESCENDING
+      - START_DATE_DESCENDING
+      - EXPIRATION_DATE_DESCENDING
+      - UPDATE_DATE_DESCENDING
+      - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
       description: The type of the resource. The value should always be `suppressions`.
@@ -52047,6 +52277,31 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
       required:
       - data
+      type: object
+    SecurityMonitoringSuppressionsMeta:
+      description: Metadata for the suppression list response.
+      properties:
+        page:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsPageMeta'
+      type: object
+    SecurityMonitoringSuppressionsPageMeta:
+      description: Pagination metadata.
+      properties:
+        pageNumber:
+          description: Current page number.
+          example: 0
+          format: int64
+          type: integer
+        pageSize:
+          description: Current page size.
+          example: 2
+          format: int64
+          type: integer
+        totalCount:
+          description: Total count of suppressions.
+          example: 2
+          format: int64
+          type: integer
       type: object
     SecurityMonitoringSuppressionsResponse:
       description: Response object containing the available suppression rules.
@@ -55731,31 +55986,6 @@ components:
           format: double
           type: number
       type: object
-    SuiteCreateEdit:
-      properties:
-        attributes:
-          $ref: '#/components/schemas/SyntheticsSuite'
-        type:
-          $ref: '#/components/schemas/SyntheticsSuiteTypes'
-      required:
-      - attributes
-      - type
-      type: object
-    SuiteCreateEditRequest:
-      properties:
-        data:
-          $ref: '#/components/schemas/SuiteCreateEdit'
-      required:
-      - data
-      type: object
-    SuiteSearchResponseType:
-      default: suites_search
-      enum:
-      - suites_search
-      example: suites_search
-      type: string
-      x-enum-varnames:
-      - SUITES_SEARCH
     SuppressionVersionHistory:
       description: Response object containing the version history of a suppression.
       properties:
@@ -55939,149 +56169,6 @@ components:
         example: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         type: string
       type: array
-    SyntheticsSuite:
-      description: Object containing details about a Synthetic suite.
-      properties:
-        message:
-          description: Notification message associated with the suite.
-          example: Notification message
-          type: string
-        monitor_id:
-          description: The associated monitor ID.
-          example: 12345678
-          format: int64
-          readOnly: true
-          type: integer
-        name:
-          description: Name of the suite.
-          example: Example suite name
-          type: string
-        options:
-          $ref: '#/components/schemas/SyntheticsSuiteOptions'
-        public_id:
-          description: The public ID for the test.
-          example: 123-abc-456
-          readOnly: true
-          type: string
-        tags:
-          description: Array of tags attached to the suite.
-          example:
-          - env:production
-          items:
-            description: A tag attached to the suite.
-            type: string
-          type: array
-        tests:
-          items:
-            $ref: '#/components/schemas/SyntheticsSuiteTest'
-          type: array
-        type:
-          $ref: '#/components/schemas/SyntheticsSuiteType'
-      required:
-      - name
-      - type
-      - tests
-      - options
-      type: object
-    SyntheticsSuiteOptions:
-      description: Object describing the extra options for a Synthetic suite.
-      properties:
-        alerting_threshold:
-          description: Percentage of critical tests failure needed for a suite to
-            fail.
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-      type: object
-    SyntheticsSuiteResponse:
-      description: Synthetics suite response
-      properties:
-        data:
-          $ref: '#/components/schemas/SyntheticsSuiteResponseData'
-      type: object
-    SyntheticsSuiteResponseData:
-      description: Synthetics suite response data
-      properties:
-        attributes:
-          $ref: '#/components/schemas/SyntheticsSuite'
-        id:
-          description: The public ID for the suite.
-          example: 123-abc-456
-          readOnly: true
-          type: string
-        type:
-          $ref: '#/components/schemas/SyntheticsSuiteTypes'
-      type: object
-    SyntheticsSuiteSearchResponse:
-      description: Synthetics suite search response
-      properties:
-        data:
-          $ref: '#/components/schemas/SyntheticsSuiteSearchResponseData'
-      type: object
-    SyntheticsSuiteSearchResponseData:
-      description: Synthetics suite search response data
-      properties:
-        attributes:
-          $ref: '#/components/schemas/SyntheticsSuiteSearchResponseDataAttributes'
-        id:
-          format: uuid
-          type: string
-        type:
-          $ref: '#/components/schemas/SuiteSearchResponseType'
-      type: object
-    SyntheticsSuiteSearchResponseDataAttributes:
-      description: Synthetics suite search response data attributes
-      properties:
-        suites:
-          items:
-            $ref: '#/components/schemas/SyntheticsSuite'
-          type: array
-        total:
-          format: int32
-          maximum: 2147483647
-          type: integer
-      type: object
-    SyntheticsSuiteTest:
-      description: Object containing details about a Synthetic test included in a
-        Synthetic suite.
-      properties:
-        alerting_criticality:
-          $ref: '#/components/schemas/SyntheticsSuiteTestAlertingCriticality'
-        public_id:
-          example: ''
-          type: string
-      required:
-      - public_id
-      type: object
-    SyntheticsSuiteTestAlertingCriticality:
-      description: Alerting criticality for each the test.
-      enum:
-      - ignore
-      - critical
-      example: critical
-      type: string
-      x-enum-varnames:
-      - IGNORE
-      - CRITICAL
-    SyntheticsSuiteType:
-      default: suite
-      description: Type of the Synthetic suite, `suite`.
-      enum:
-      - suite
-      example: suite
-      type: string
-      x-enum-varnames:
-      - SUITE
-    SyntheticsSuiteTypes:
-      default: suites
-      description: Type for the Synthetics suites responses, `suites`.
-      enum:
-      - suites
-      example: suites
-      type: string
-      x-enum-varnames:
-      - SUITES
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
       example:
@@ -85361,6 +85448,125 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security-entities/risk-scores:
+    get:
+      description: Get a list of entity risk scores for your organization. Entity
+        risk scores provide security risk assessment for entities like cloud resources,
+        identities, or services based on detected signals, misconfigurations, and
+        identity risks.
+      operationId: ListEntityRiskScores
+      parameters:
+      - description: Start time for the query in Unix timestamp (milliseconds). Defaults
+          to 2 weeks ago.
+        in: query
+        name: from
+        required: false
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: End time for the query in Unix timestamp (milliseconds). Defaults
+          to now.
+        in: query
+        name: to
+        required: false
+        schema:
+          example: 1705276800000
+          format: int64
+          type: integer
+      - description: Size of the page to return. Maximum is 1000.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 10
+          example: 10
+          type: integer
+      - description: Page number to return (1-indexed).
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          default: 1
+          example: 1
+          type: integer
+      - description: Query ID for pagination consistency.
+        in: query
+        name: page[queryId]
+        required: false
+        schema:
+          example: abc123def456
+          type: string
+      - description: 'Sort order for results. Format: `field:direction` where direction
+          is `asc` or `desc`.
+
+          Supported fields: `riskScore`, `lastDetected`, `firstDetected`, `entityName`,
+          `signalsDetected`.'
+        in: query
+        name: filter[sort]
+        required: false
+        schema:
+          example: riskScore:desc
+          type: string
+      - description: 'Supports filtering by entity attributes, risk scores, severity,
+          and more.
+
+          Example: `severity:critical AND entityType:aws_iam_user`'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          example: severity:critical
+          type: string
+      - description: Filter by entity type(s). Can specify multiple values.
+        explode: true
+        in: query
+        name: entityType
+        required: false
+        schema:
+          example:
+          - aws_iam_user
+          - aws_ec2_instance
+          items:
+            example: aws_iam_user
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityEntityRiskScoresResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Entity Risk Scores
+      tags:
+      - Entity Risk Scores
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Workload Protection policy file
@@ -87573,12 +87779,29 @@ paths:
         required: false
         schema:
           type: string
+      - description: Attribute used to sort the list of suppression rules. Prefix
+          with `-` to sort in descending order.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionSort'
+      - description: Size for a given page. Use `-1` to return all items.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: -1
+          example: 10
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+                $ref: '#/components/schemas/SecurityMonitoringPaginatedSuppressionsResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -90617,232 +90840,6 @@ paths:
         operator: OR
         permissions:
         - billing_edit
-  /api/v2/synthetics/suites:
-    post:
-      operationId: CreateSyntheticsSuite
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SuiteCreateEditRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SyntheticsSuiteResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: API error response.
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_write
-      summary: 'Synthetics: Create a test suite'
-      tags:
-      - Synthetics
-      x-menu-order: 30
-      x-permission:
-        operator: OR
-        permissions:
-        - synthetics_write
-        - synthetics_create_edit_trigger
-  /api/v2/synthetics/suites/bulk-delete:
-    post:
-      operationId: DeleteSyntheticsSuites
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeletedSuitesRequestDeleteRequest'
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeletedSuitesResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: API error response.
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_write
-      summary: 'Synthetics: Bulk delete suites'
-      tags:
-      - Synthetics
-      x-menu-order: 40
-      x-permission:
-        operator: OR
-        permissions:
-        - synthetics_write
-  /api/v2/synthetics/suites/search:
-    get:
-      description: Search for Synthetics suites.
-      operationId: SearchSuites
-      parameters:
-      - description: The search query.
-        in: query
-        name: query
-        required: false
-        schema:
-          type: string
-      - description: The sort order for the results (e.g., `name,asc` or `name,desc`).
-        in: query
-        name: sort
-        required: false
-        schema:
-          default: name,asc
-          type: string
-      - description: If true, return only facets instead of full test details.
-        in: query
-        name: facets_only
-        required: false
-        schema:
-          default: false
-          type: boolean
-      - description: The offset from which to start returning results.
-        in: query
-        name: start
-        required: false
-        schema:
-          default: 0
-          format: int64
-          type: integer
-      - description: The maximum number of results to return.
-        in: query
-        name: count
-        required: false
-        schema:
-          default: 50
-          format: int64
-          type: integer
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SyntheticsSuiteSearchResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: API error response.
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_read
-      summary: Search Synthetics suites
-      tags:
-      - Synthetics
-      x-menu-order: 20
-      x-permission:
-        operator: OR
-        permissions:
-        - synthetics_read
-  /api/v2/synthetics/suites/{public_id}:
-    get:
-      operationId: GetSyntheticsSuite
-      parameters:
-      - description: The public ID of the suite to get details from.
-        in: path
-        name: public_id
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SyntheticsSuiteResponse'
-          description: OK
-        '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: API error response.
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_read
-      summary: 'Synthetics: Get a suite'
-      tags:
-      - Synthetics
-      x-menu-order: 25
-      x-permission:
-        operator: OR
-        permissions:
-        - synthetics_read
-    put:
-      operationId: EditSyntheticsSuite
-      parameters:
-      - description: The public ID of the suite to edit.
-        in: path
-        name: public_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SuiteCreateEditRequest'
-        description: New suite details to be saved.
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SyntheticsSuiteResponse'
-          description: OK
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: API error response.
-        '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - synthetics_write
-      summary: 'Synthetics: Edit a test suite'
-      tags:
-      - Synthetics
-      x-menu-order: 35
-      x-permission:
-        operator: OR
-        permissions:
-        - synthetics_write
   /api/v2/synthetics/variables/{variable_id}/jsonpatch:
     patch:
       description: 'Patch a global variable using JSON Patch (RFC 6902).
@@ -90893,7 +90890,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 45
+      x-menu-order: 20
       x-permission:
         operator: OR
         permissions:
@@ -94771,6 +94768,8 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
+- description: Retrieves security risk scores for entities in your organization.
+  name: Entity Risk Scores
 - description: View and manage issues within Error Tracking. See the [Error Tracking
     page](https://docs.datadoghq.com/error_tracking/) for more information.
   name: Error Tracking

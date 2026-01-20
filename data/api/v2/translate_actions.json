@@ -2703,6 +2703,10 @@
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
   },
+  "ListEntityRiskScores": {
+    "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
+    "summary": "List Entity Risk Scores"
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
     "summary": "Download the Workload Protection policy (US1-FED)"
@@ -3264,28 +3268,6 @@
     "summary": "Save new value for on-demand concurrency cap",
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
-  },
-  "CreateSyntheticsSuite": {
-    "summary": "Synthetics: Create a test suite",
-    "request_description": "",
-    "request_schema_description": ""
-  },
-  "DeleteSyntheticsSuites": {
-    "summary": "Synthetics: Bulk delete suites",
-    "request_description": "",
-    "request_schema_description": ""
-  },
-  "SearchSuites": {
-    "description": "Search for Synthetics suites.",
-    "summary": "Search Synthetics suites"
-  },
-  "GetSyntheticsSuite": {
-    "summary": "Synthetics: Get a suite"
-  },
-  "EditSyntheticsSuite": {
-    "summary": "Synthetics: Edit a test suite",
-    "request_description": "New suite details to be saved.",
-    "request_schema_description": ""
   },
   "PatchGlobalVariable": {
     "description": "Patch a global variable using JSON Patch (RFC 6902).\nThis endpoint allows partial updates to a global variable by specifying only the fields to modify.\n\nCommon operations include:\n- Replace field values: `{\"op\": \"replace\", \"path\": \"/name\", \"value\": \"new_name\"}`\n- Update nested values: `{\"op\": \"replace\", \"path\": \"/value/value\", \"value\": \"new_value\"}`\n- Add/update tags: `{\"op\": \"add\", \"path\": \"/tags/-\", \"value\": \"new_tag\"}`\n- Remove fields: `{\"op\": \"remove\", \"path\": \"/description\"}`",
