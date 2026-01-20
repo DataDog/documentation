@@ -194,7 +194,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 Datadog recommends creating these monitors:
 
 - Connection timeout monitor to alert you when the Worker cannot connect to the database.
-- Query failure monitor to alert you when the query is timing out and failing.
+- Query failure monitor to alert you when the query is times out and fails.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
