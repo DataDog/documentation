@@ -216,15 +216,17 @@ From a notebook, click the cog icon and click **Version history** to open the Ve
 
 ### Graph snapshots
 
-Notebooks automatically take snapshots of graphs with fixed time ranges that might expire. You do not need to do anything to enable this. Use the kebab menu next to a graph to view or download a snapshot.
+Notebooks automatically take snapshots of graphs with fixed time ranges that might expire to preserve the view of your notebook before data retention limits are hit. You do not need to do anything to enable this. Use the kebab menu next to a graph to view or download a snapshot.
 
 {{< img src="notebooks/kebab_snapshots.png" alt="Kebab menu option to view or download a snapshot" style="width:100%;">}}
 
 Snapshots are a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
-You can preview how many snapshots have been successfully created on a notebook by hovering over the graph snapshot indicator under the notebook title. You can see the time the last snapshot was updated and how many snapshots have been sucessfully created.
+You can preview how many snapshots have been successfully created on a notebook by hovering over the graph snapshot indicator under the notebook title. You can see the time the last snapshot was updated and how many snapshots have been successfully created.
 
 {{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator to determine how many snapshots have been generated" style="width:100%;">}}
+
+Once a notebook contains a graph with data that is past its data retention limits, the notebook will display a snapshot of the graph in-line. The snapshot itself is a static image – if you edit the underlying graph, the image will be updated and replaced.
 
 ### Permissions
 
