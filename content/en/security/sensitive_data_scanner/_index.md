@@ -41,6 +41,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/llm-aws-strands
       tag: Blog
       text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+    - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+      tag: "Blog"
+      text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
 ---
 
 ## Overview

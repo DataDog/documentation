@@ -6,6 +6,9 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
+- link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
+  tag: "Blog"
+  text: "Building reliable dashboard agents with Datadog LLM Observability"
 - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
   tag: "Blog"
   text: "From performance to impact: Bridging frontend teams through shared context"
