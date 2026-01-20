@@ -6,6 +6,12 @@ further_reading:
     - link: '/synthetics/browser_tests'
       tag: 'Documentation'
       text: 'Learn about Browser Tests'
+    - link: '/synthetics/guide/synthetic-test-retries-monitor-status/'
+      tag: 'Guide'
+      text: 'Understand test retries and monitor status'
+    - link: '/synthetics/guide/uptime-percentage-widget/'
+      tag: 'Guide'
+      text: 'Monitor website uptime with SLOs'
 ---
 
 Synthetic Monitoring monitors evaluate test results **over time**, not individual test executions.  
@@ -19,7 +25,7 @@ Use this page to understand:
 
 ## How alert evaluation works
 
-Synthetic monitor does not alert based on a single failed run by default. Instead, it continuously evaluates test results using your configured alert conditions, and in the following order:
+Synthetic Monitoring does not trigger alerts based on a single failed run. Instead, it continuously evaluates test results through the following steps:
 
 1. The test runs based on its configured schedule.
 2. [Fast retries](#fast-retries) are applied, if configured.
@@ -27,9 +33,7 @@ Synthetic monitor does not alert based on a single failed run by default. Instea
 4. Failures are evaluated over time using the alerting rules.
 5. The monitor transitions between **OK**, **Alert**, or **No Data** [status](#status-descriptions) as conditions are met or no longer met.
 
-Alerts are always the result of **aggregated evaluation**, not a single datapoint.
-A monitor transitions to **alert** only when *all alerting rules are satisfied*.
-
+A monitor transitions to **Alert** only when all alerting rules are satisfied.
 ## Test runs that generate alerts
 | Test run type                           | Evaluated for alerting |
 |-----------------------------------------|------------------------|
@@ -64,57 +68,63 @@ Alerting rules typically include:
 - **Location scope**  
   For example, *any 1 of N locations* or *all locations*.
 
-- **Failure aggregation rules**  
-  For example, whether failures must overlap in time (such as *at one moment, all locations were failing*).
+  {{< img src="synthetics/guide/monitors_trigger_alerts/schedule_and_alert_2.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:80%;" >}}
 
-<div class="alert alert-info">If any part of the alerting rule stops being true during the evaluation window, the alert timer resets.</div>
+<div class="alert alert-info">If any part of the alerting rule stops being true during the evaluation window, the minimum duration timer resets.</div>
 
 ## Test frequency and minimum duration
 
 Two commonly confused settings are:
 
 - **Test frequency**: How often the test runs
-- **Minimum duration**: How long the test must continuously fail before alerting
+- **Minimum duration**: How long the test must continuously fail before alerting 
+  <br>**Note**: If you have [fast retries](#fast-retries) enabled, the minimum duration timer starts when the final fast retry test execution fails.
 
-Datadog cannot evaluate failures more frequently than the test runs.
+### Example: Alerts triggered immediately
 
-### Example
+- Fast retries (not configured)
+- Test frequency: 15 minutes
+- Minimum duration: 13 minutes
+- Location scope: 1 of 1 
 
-When minimum duration (13 minutes) is shorter than test frequency (15 minutes), alerts trigger efficiently:
+With the above settings, the alert triggers 13 minutes after the scheduled test runs have failed:
 
-| Time | Event | Result |
-|------|-------|--------|
-| t0 | Test passes | — |
-| t15 | Test fails | Minimum duration timer starts |
-| t28 | 13 minutes elapsed | Alert triggers |
+| Time | Event | Result | Monitor status |
+|------|-------|--------|----------------|
+| t0 | Scheduled test runs | Pass | OK |
+| t15 | Scheduled test runs | Fail | OK (Minimum duration timer starts)|
+| t28 | --- |Fail | ALERT (13 minutes elapsed)|
 
-With aligned settings, only one failed test run is needed before alerting.
+If you want alerts after one test execution, this is a recommended configuration. 
 
-### Example: Fast retries causing delays
+### Example: Fast retries
 
-When fast retries overlap with scheduled test runs, alerting can behave unexpectedly:
+- Fast retries: 2 retries, with 1 minutes between retries
+- Test frequency: 30 minutes
+- Minimum duration: 5 minutes
+- Location scope: 1 of 1
 
-| Time | Event | Result |
-|------|-------|--------|
-| t0 | Test passes | — |
-| t15 | Test fails | Timer does **not** start (waiting for retries) |
-| t25 | First fast retry fails | — |
-| t30 | Test passes | — |
-| t35 | Second fast retry fails | Minimum duration timer starts |
-| t45 | Test passes | Timer resets (only 10 min elapsed) |
+With the above settings, the minimum duration timer starts when the second fast retry fails:
+| Time | Event | Result | Monitor status |
+|------|-------|--------|----------------|
+| t0 | Scheduled test runs | Pass | OK |
+| t30 | Scheduled test runs | Fail | OK |
+| t31 | First fast retry for scheduled test run at t30  | Fail | OK |
+| t32 | Second fast retry for scheduled test run at t30 | Fail | OK (Minimum duration timer starts)|
+| t37 | --- | Fail | ALERT (5 minutes elapsed) |
+| t60 | Scheduled test runs| Pass | OK |
 
-In this scenario, the fast retries overlap with scheduled runs, causing confusion about which failure triggered the timer.
+**Note**: Because fast retries were configured, the alert triggered at t37 instead of t35, adding a 2-minute delay.
 
 ### Best practices
 
-- Set the minimum duration to `0` to alert as soon as a failure occurs.
+- If you want immediate alerting, set the minimum duration to `0` to alert as soon as a failure occurs.
 - Enable fast retries to handle transient issues like network blips. For frequently running tests, pair this with a longer minimum duration to reduce alert noise.
-- Align minimum duration with test frequency to avoid unexpected delays.
-- Avoid [overlapping fast retries with scheduled test runs][3], which can cause unexpected alerting behavior.
+- Avoid [overlapping fast retries with scheduled test runs][3] to help you determine which fast retries are associated with its related scheduled test runs.
 
 ## Location-based evaluation
 
-Location rules determine **how many locations must fail, and when**, for an alert to trigger.
+Location rules determine **how many locations must fail** for an alert to trigger.
 
 Common patterns include:
 
@@ -126,12 +136,10 @@ A monitor can recover even if **some locations are still failing**, as long as t
 
 ## Alert and recovery behavior
 
-Alert and recovery notifications are evaluated independently.
+A recovery does not require all test runs to pass, only that the alerting conditions are no longer true.
 
 - **Alert** notifications are sent when alerting rules are met.
 - **Recovery** notifications are sent when alerting rules are no longer met.
-
-A recovery does not require all test runs to pass, only that the alerting conditions are no longer true.
 
 ## Global uptime and alert state
 
@@ -197,22 +205,14 @@ NO DATA
 If a monitor does not alert or recovers unexpectedly, check for the following:
 
 - Minimum duration and test frequency alignment
-- Retry configuration
-- Location rules and overlap requirements
-- Passing runs within the evaluation window
+- Fast retry configuration
+- Location scope
+- Test execution results within the evaluation window
 - Whether the test was paused
-- Interpretation of global uptime
-
-## Next steps
-
-- [Understand test retries and monitor status][1]
-- [Monitor website uptime with SLOs][2]
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/guide/synthetic-test-retries-monitor-status/
-[2]: /synthetics/guide/uptime-percentage-widget/
 [3]: /synthetics/guide/synthetic-test-retries-monitor-status/#retries-that-overlap-with-other-test-runs
 [4]: /synthetics/platform/private_locations/dimensioning
