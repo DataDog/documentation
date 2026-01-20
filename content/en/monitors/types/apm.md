@@ -25,7 +25,7 @@ APM metric monitors work like regular [metric monitors][1], but with controls ta
 
 Analytics monitors allow you to visualize APM data over time and set up alerts based on Indexed Spans. For example, use an Analytics monitor to receive alerts on a spike in slow requests.
 
-### Automatic APM Monitors
+### Automatic APM monitors
 
 Automatic Monitors for APM are available to new organizations and activate as soon as the Datadog Agent is installed and spans begin flowing into Datadog. This provides immediate alerting coverage on your key services with minimal configuration.
 
