@@ -1,6 +1,6 @@
 ---
-title: Database Source
-description: Learn how to use the Database source in a logs pipeline.
+title: MySQL Source
+description: Learn how to use the MySQL source in a logs pipeline.
 disable_toc: false
 products:
 - name: Logs
@@ -14,7 +14,7 @@ products:
 
 Databases are often used to store many historical, audit, or operational records. For many legacy, enterprise resource planning (ERP), and IoT-based systems, these databases serve as storage layers for important information. Teams often depend on these records for monitoring, alerting, and creating dashboards in their preferred logging or security tool.
 
-The Observability Pipelines' Database source allows you to connect to your database so you can query and process the data in Observability Pipelines, and route your log events that are stored as database records.
+The Observability Pipelines' MySQL source (includes AWS Aurora) allows you to connect to your database so you can query and process the data in Observability Pipelines, and route your log events that are stored as database records.
 
 **Note**: The Observability Pipelines Worker can only execute read-only SQL queries against supported databases.
 
@@ -31,7 +31,7 @@ Common scenarios when you might use this source:
 
 ## Prerequisites
 
-Before you configure the Database source, complete the following prerequisites to help ensure that credentials, connectivity, and queries are validated before they are used in Observability Pipelines. These steps must be completed using [external tools](#external-tools-for-testing), such as in your database or with third-party tools.
+Before you configure the source, complete the following prerequisites to help ensure that credentials, connectivity, and queries are validated before they are used in Observability Pipelines. These steps must be completed using [external tools](#external-tools-for-testing), such as in your database or with third-party tools.
 
 1. Create a database role for log collection, if you don't already have one. The role must:
     - Only have read-only access, so no permissions to modify or write data.
@@ -55,19 +55,13 @@ Datadog recommends these tools for testing:
   - DataGrip
   - TablePlus
   - DbVisualizer
-- Native tools:
-  - For MySQL: MySQL Workbench
-  - For Postgres: psql or pgAdmin
+- Native MySQL tools: MySQL Workbench
 
 ## Set up the source in the pipeline UI
 
 Set up the Database source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 1. Ensure you have completed the [prerequisite steps](#prerequisites).
-1. Select the type of database you want to collect data from:
-    - **MySQL**
-      - Includes AWS Aurora
-    - **Postgres**
 1. Configure the connection between the Observability Pipelines Worker and the database.
     1. Enter the connection string.
         - **MySQL** connection string format: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
@@ -196,4 +190,3 @@ Datadog recommends creating these monitors:
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
-[3]: https://app.datadoghq.com/logs

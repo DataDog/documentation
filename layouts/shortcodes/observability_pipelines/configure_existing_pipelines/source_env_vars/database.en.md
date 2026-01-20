@@ -1,0 +1,3 @@
+- URI connection string
+  - THE URI that contains the necessary parameters, such as the database engine, host, port, and credentials, to connect to a database.
+  - Stored as environment variable: `DB_SOURCE_DATABASE_CONNECTION_STRING`
