@@ -6566,9 +6566,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-filter-menu-fixes/cdocs-hugo-integration-v2.5.5.tgz":
-  version: 2.5.5
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-filter-menu-fixes/cdocs-hugo-integration-v2.5.5.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-filter-menu-fixes/cdocs-hugo-integration-v2.5.7.tgz":
+  version: 2.5.7
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-filter-menu-fixes/cdocs-hugo-integration-v2.5.7.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
@@ -6593,7 +6593,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/6632ea86b136799ac775661259c5009f9dd64cc6a0ed79edd06285f1d594c62e1cfc55939ec0756de231b09301d69973c0e7150b4b6dc646e72a7065a2c893d5
+  checksum: 10/fd66b2bbc2e0d4f36854ba22d60ea47dfb44a68e34f789a4ab925e3d27faba0d0d00f6484b1c3818938f85a5860782b0a940e3d7e8462d4b95814875427346f0
   languageName: node
   linkType: hard
 
@@ -7640,7 +7640,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-filter-menu-fixes/cdocs-hugo-integration-v2.5.5.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/jen.gilbert/cdocs-filter-menu-fixes/cdocs-hugo-integration-v2.5.7.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"
