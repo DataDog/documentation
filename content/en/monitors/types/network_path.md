@@ -16,8 +16,8 @@ further_reading:
   text: "Network Path Overview"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/network-path/" btn_hidden="false" header="Join the Preview!">}}
-The Network Path monitor is in Preview. You must have access to Datadog Cloud Network Monitoring (CNM) to use this monitor.
+{{< callout url=# btn_hidden="true" header="Join the Preview!">}}
+The Network Path monitor is in Preview. To request access, contact your Datadog account team or reach out to <a href="https://docs.datadoghq.com/help/">Datadog Support.
 {{< /callout >}}
 
 ## Overview
@@ -46,7 +46,6 @@ To create a Network Path monitor in Datadog, use the main navigation: [**Monitor
 5. (Optional) Add multiple queries and apply formulas and functions:
    * **Multiple queries**: Click **Add Query** to analyze multiple different sets of Network Path data in relation to each other.
    * **Formulas and functions**: After adding your desired queries, click the **Add Function** icon to add a mathematical computation.
-
 
 ### Metric Definitions
 
@@ -89,8 +88,6 @@ The jitter monitor alerts you if there is a change in RTT variance for your netw
 
 {{< img src="monitors/monitor_types/network_path/common_monitors_jitter.png" alt="Example configuration for a jitter monitor" style="width:100%;" >}}
 {{% /collapse-content %}}
-
-
 
 ## Further reading
 
