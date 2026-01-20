@@ -52,25 +52,21 @@ Alerts are always the result of **aggregated evaluation**, not a single datapoin
 
 ## Fast retries
 
-Fast retries automatically re-run a failed request or step **within the same test execution**. They continue until either a run succeeds or the configured retry count is reached.
+Fast retries automatically re-run failed test executions. 
 
-{{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry.png" alt="Retry conditions step of a synthetics test" style="width:80%;" >}}
+{{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_2.png" alt="Retry conditions step of a synthetics test" style="width:80%;" >}}
 
-**Key behaviors:**
+**Example behaviors of fast retries:**
 
 - A test configured with *n* retries can execute up to *n + 1* times per scheduled run (including the original attempt).
-- A test run is only considered failed if **all fast retries fail**.
-- Only the final result counts toward alerting conditions and uptime calculations.
+- If you have a [minimum duration](#alerting-rules) configured as an alerting rule, the timer starts when the final fast retry execution fails. 
 - Fast retry runs appear in test results with a `(fast retry)` label in the **Run Type** column. <br></br>
 
-   {{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_test_runs.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:100%;" >}}
-
-- Fast retries do **not** extend the alert evaluation timeline; they only affect whether a single run is marked as failed.
+   {{< img src="synthetics/guide/monitors_trigger_alerts/fast_retry_test_runs_2.png" alt="Test runs screen of a Synthetics test, highlighting the Scheduled (fast retry) run type" style="width:100%;" >}}
 
 ## Alerting rules
 
-Alerting rules define when a monitor is allowed to change state based on test failures over time.
-An alert is triggered only when **all alerting rules are satisfied continuously** for the configured duration.
+Alerting rules define when a monitor is allowed to change state based on test failures over time. When fast retries are enabled, a test run is not considered failed, and alerting evaluation does not begin, until all retries have been exhausted. An alert triggers only when all alerting conditions are met continuously for the configured duration.
 
 Alerting rules typically include:
 
@@ -153,7 +149,7 @@ A recovery does not require all test runs to pass, only that the alerting condit
 
 **Global uptime** represents the percentage of time your monitor was healthy (`OK` status) during the selected time period. 
 
-It is based on how long the monitor stayed in an OK state compared to the total monitoring period. Any time the monitor spends in an `ALERT` state lowers the global uptime.
+It is based on how long the monitor stayed in an `OK` state compared to the total monitoring period. Any time the monitor spends in an `ALERT` state lowers the global uptime.
 
 Because this metric is based on the duration of the monitor's status and not on the status of a test execution, it cannot be reliably calculated based on the ratio of successful test results to the total number of test executions over the same period. 
 
@@ -185,13 +181,11 @@ The following example demonstrates how a 95.83% global uptime is calculated.
 
 3. Apply the formula.
 
-   ```
+   ```text {hl_lines=[3]}
    Total Period = 360 minutes
    Time in Alert = 15 minutes
    Global Uptime = ((360 - 15) / 360) × 100 = 95.83%
    ```
-
-<div class="alert alert-info">To understand alert timing across locations, use the <strong>Show all locations</strong> toggle instead of relying only on global uptime.</div>
 
 ## Status descriptions
 
@@ -202,14 +196,12 @@ ALERT
 : The alerting conditions have been met. The test has been failing continuously for the configured minimum duration across the required number of locations.
 
 NO DATA
-: The monitor has not received any test results from any location (managed, private, or Datadog Agent) during the queried time period. Common causes include:
+: The monitor has not received any test results from any location (managed, private, or Datadog Agent) during the queried time period. Common causes include: <br></br>
 
   - **The test is paused**: Paused tests do not execute and produce no data.
   - **Advanced schedule configuration**: The queried time period falls outside the test's configured schedule windows.
-  - **Delay in test execution**: The test has not yet run within the selected time period. This typically occurs when tests are running against a Private Location that may be overloaded. Common symptoms of overloaded Private Location include intermittent test execution timeouts, high variability in test metrics, missed or delayed scheduled runs (like gaps in the test schedule), or the Private Location stopped reporting altogether.
-
-   When these symptoms are present, it means that too many tests are assigned to the Private Location for it to handle. Adding additional workers, increasing worker concurrency, and increasing available compute resources can help alleviate the symptoms. See [Dimensioning Private Locations][4] for more information.
-
+  - **Delay in test execution**: The test has not yet run during the selected time period. This typically occurs with overloaded private locations, which may cause intermittent timeouts, missed runs, gaps in the test schedule, or the private location stopped reporting. 
+      When these symptoms are present, too many tests are assigned to the private location for it to handle. You can resolve this by adding workers, increasing concurrency, or adding compute resources. See [Dimensioning Private Locations][4] for more information.
   - **Delay in data ingestion**: Test results have not yet been processed and are not available for the queried time period.
 
 ## Why alerts may behave unexpectedly
