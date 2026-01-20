@@ -1,6 +1,6 @@
 ---
 title: iOS Mobile App Launch Monitoring
-description: "Measure Android mobile application launch performance, including the time to initial display and time to full display."
+description: "Measure iOS mobile application launch performance, including the time to initial display and time to full display."
 aliases:
 - /real_user_monitoring/ios/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/ios/
