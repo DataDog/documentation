@@ -276,6 +276,125 @@ del(.my_tag)
    "timestamp": "2025-005-27T05:26:18.205Z"
 }
 ```
+## Add a tag to the log event
+
+Tags are used to correlate logs with other telemetry and services. Tags are stored in arrays and for Datadog specifically, are nested within the Datadog tags (`ddtags`) array. Use the following scripts below to either convert a tag from an existing attribute, or add a new tag. Tags are stored as key:value pairs wrapped in quotes (e.g. "service:payments-app").
+
+### Example to convert an attribute to a tag
+
+#### Input
+
+Sample log containing the `ddtags` array with Datadog tags. In this example, we are trying to add the `service` field as a tag.
+
+```json
+{
+    "timestamp": "2025-005-27T05:26:18.205Z",
+    "status": "info",
+    "service": "chaos-engineering",
+    "ddsource": "python",
+    "hostname": "gke-prod-node-abc123.internal",
+    "message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+    "source_type": "datadog_agent",
+    "ddtags": [
+        "env:prod",
+        "team:sre",
+        "version:1.0.0",
+        "pod_name:load-generator-main-abcde"
+    ]
+}
+```
+
+#### Custom function to convert the `service` attribute to a tag
+
+```yaml
+# First, check if the attribute 'ddtags' exists, you can replace 'ddtags' with the name of any array
+if !exists(.ddtags) {
+    .ddtags = []
+}
+
+# This checks if 'service' exists, then adds the templatized value of service as a tag. Also, converts to type string
+if exists(.service) {
+  .ddtags = push(array!(.ddtags), "service:" + to_string!({{.service}}) )
+}
+
+```
+
+#### Output
+
+```json
+{
+    "timestamp": "2025-005-27T05:26:18.205Z",
+    "status": "info",
+    "service": "chaos-engineering",
+    "ddsource": "python",
+    "hostname": "gke-prod-node-abc123.internal",
+    "message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+    "source_type": "datadog_agent",
+    "ddtags": [
+        "env:prod",
+        "team:sre",
+        "version:1.0.0",
+        "pod_name:load-generator-main-abcde"
+    ]
+}
+```
+### Example to create a new tag and add it
+
+#### Input
+
+Sample log containing the `ddtags` array with Datadog tags. In this example, we are creating a new tag called `"system:service-mesh"` and appending it to the array.
+
+```json
+{
+    "timestamp": "2025-005-27T05:26:18.205Z",
+    "status": "info",
+    "service": "chaos-engineering",
+    "ddsource": "python",
+    "hostname": "gke-prod-node-abc123.internal",
+    "message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+    "source_type": "datadog_agent",
+    "ddtags": [
+        "env:prod",
+        "team:sre",
+        "version:1.0.0",
+        "pod_name:load-generator-main-abcde"
+    ]
+}
+```
+
+#### Custom function to create and add the `system` tag
+
+```yaml
+# First, check if the attribute 'ddtags' exists, you can replace 'ddtags' with the name of any array
+if !exists(.ddtags) {
+    .ddtags = []
+}
+
+# Appends a new tag to the array by defining a separate key:value pair
+.ddtags = push(array!(.ddtags), "system:service-mesh")
+
+```
+
+#### Output
+
+```json
+{
+	"ddsource": "python",
+	"ddtags": [
+		"env:prod",
+		"team:sre",
+		"version:1.0.0",
+		"pod_name:load-generator-main-abcde",
+		"system:service-mesh"
+	],
+	"hostname": "gke-prod-node-abc123.internal",
+	"message": "2025-05-27 05:26:17,609 -- Sending request to rails: checkout_v2",
+	"service": "chaos-engineering",
+	"source_type": "datadog_agent",
+	"status": "info",
+	"timestamp": "2025-005-27T05:26:18.205Z"
+}
+```
 
 ## Reference another field's value
 
