@@ -29,7 +29,7 @@ Analytics monitors allow you to visualize APM data over time and set up alerts b
 
 Automatic Monitors for APM are available to new organizations and activate as soon as the Datadog Agent is installed and spans begin flowing into Datadog. This provides immediate alerting coverage on your key services with minimal configuration.
 
-Monitors are automatically created for service entry points, which are identified by operations tagged with [span.kind][8]:server or span.kind:consumer and represent where requests enter your service. 
+Monitors are automatically created for service entry points, which are identified by operations tagged with [span.kind][6]:server or span.kind:consumer and represent where requests enter your service. 
 
 Automatic monitors for APM include:
 
@@ -133,7 +133,6 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [5]: /monitors/configuration/#advanced-alert-conditions
 [6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filter-types
-[8]: /standard-attributes/?search=span.kind&product=apm
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -152,3 +151,5 @@ For detailed instructions on the **Configure notifications and automations** sec
 [3]: /monitors/notify/
 [4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map
+[6]: /standard-attributes/?search=span.kind&product=apm
+
