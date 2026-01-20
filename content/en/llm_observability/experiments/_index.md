@@ -1,6 +1,6 @@
 ---
 title: Experiments
-description: An overview of Datadog's LLM Observability Experiments feature
+description: An overview of Datadog's LLM Observability Experiments feature.
 aliases:
   - /llm_observability/experiments_preview
 further_reading:

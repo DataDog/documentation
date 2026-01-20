@@ -5,7 +5,7 @@ description: How to set up LLM Observability Experiments and start running exper
 
 This page describes how to set up and use LLM Observability Experiments with the Python SDK.
 
-## Setup LLM Observability
+## Set up LLM Observability
 
 If you have not already set up LLM Observability:
 
