@@ -32,7 +32,7 @@ Configuration options that accept file paths support three types of patterns:
 
 - `regex`
 - `glob`
-- `path_refix`
+- `path_prefix`
 
 The pattern type is automatically detected based on the syntax you use.
 
