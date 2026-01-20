@@ -50,7 +50,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 ## Configure Unified Service Tags
 
-Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through automatic label extraction (recommended), explicit configuration with `ddTraceConfigs`, or in deployment manifests.
+Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through automatic label extraction (recommended), through explicit configuration with `ddTraceConfigs`, or in deployment manifests.
 
 <div class="alert alert-warning">
 If you are using <a href="/agent/remote_config/">Remote Configuration</a>, <a href="#recommended-configure-usts-through-automatic-label-extraction">automatic label extraction</a> is not compatible. You must <a href="#configure-usts-explicitly-with-ddtraceconfigs">configure USTs explicitly</a> using <code>ddTraceConfigs</code>.
