@@ -34,7 +34,7 @@ Monitors are automatically created for service entry points, which are identifie
 Automatic Monitors for APM include:
 
 #### Error rate threshold monitors
-Created per service entry point using APM trace metrics. These alert you when error behavior spikes and ensure your most critical endpoints are covered by default. A default error rate of 10% is set, which you can configure. 
+Error rate threshold monitors are created per service entry point using APM trace metrics. These alert you when error behavior spikes and helps ensure your most critical endpoints are covered by default. A default error rate of 10% is set, which you can configure. 
 Watchdog anomaly monitors
 Automatically detect unusual patterns in latency, errors, and request volume (hits) for all services without requiring you to manually configure thresholds.
 
