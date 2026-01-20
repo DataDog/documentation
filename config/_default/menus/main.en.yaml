@@ -2302,11 +2302,6 @@ menu:
       identifier: error_tracking_case_management
       weight: 101
     - name: Troubleshooting
-      url: error_tracking/ticketing_systems/troubleshooting
-      parent: error_tracking_ticketing_systems
-      identifier: error_tracking_ticketing_troubleshooting
-      weight: 102
-    - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting

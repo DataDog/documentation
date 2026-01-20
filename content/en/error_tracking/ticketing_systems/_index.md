@@ -1,5 +1,5 @@
 ---
-title: Ticketing Systems Integration
+title: Ticketing Systems
 is_beta: false
 private: false
 further_reading:
@@ -21,7 +21,7 @@ Link Error Tracking issues to Jira tickets or Case Management cases to track and
 
 With ticketing system integrations, you can:
 
-- **Create tickets directly from issues**: Open Jira tickets or Case Management cases from the Error Tracking Issue Panel to centralize investigation efforts.
+- **Create tickets directly from issues**: Open Jira tickets or Case Management cases from the Error Tracking issue panel to centralize investigation efforts.
 - **Group multiple issues into a single ticket**: Attach several related Error Tracking issues to one ticket or case, consolidating correlated issues into a single unit of work.
 - **Automate ticket creation**: Configure rules to automatically create tickets in specific Jira boards or Case Management projects when issues match specific criteria.
 
