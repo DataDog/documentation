@@ -2689,16 +2689,21 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_integrations
       weight: 704
+    - name: Automations
+      url: incident_response/incident_management/incident_settings/automations
+      parent: incidents_settings
+      identifier: incidents_settings_automations
+      weight: 705
     - name: Notification Rules
       url: incident_response/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 705
+      weight: 706
     - name: Templates
       url: incident_response/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 706
+      weight: 707
     - name: Incident Analytics
       url: incident_response/incident_management/analytics
       parent: incidents
@@ -2765,6 +2770,11 @@ menu:
       identifier: oncall_live_call_routing
       parent: oncall_triggering_pages
       weight: 201
+    - name: Cross-org Paging
+      url: incident_response/on-call/cross_org_paging
+      identifier: oncall_cross_org_paging
+      parent: oncall_triggering_pages
+      weight: 202
     - name: Routing Rules
       url: incident_response/on-call/routing_rules/
       parent: oncall
@@ -3266,51 +3276,56 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
       weight: 404
+    - name: App and API Protection
+      url: containers/kubernetes/appsec/
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_appsec
+      weight: 405
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 405
+      weight: 406
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 406
+      weight: 407
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 407
+      weight: 408
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 408
+      weight: 409
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 409
+      weight: 410
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 410
+      weight: 411
     - name: kubectl Plugin
       url: containers/kubernetes/kubectl_plugin
       parent: containers_kubernetes
       identifier: containers_kubernetes_kubectlplugin
-      weight: 411
+      weight: 412
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 412
+      weight: 413
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 413
+      weight: 414
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -5090,12 +5105,18 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Quality Monitoring
-      url: data_observability/quality_monitoring/
-      pre: inventories
-      identifier: quality_monitoring
+    - name: Data Observability Overview
+      url: data_observability/
+      pre: data-observability-wui
+      identifier: data_observability
       parent: data_observability_heading
       weight: 60000
+    - name: Quality Monitoring
+      url: data_observability/quality_monitoring/
+      pre: data-observability-wui
+      identifier: quality_monitoring
+      parent: data_observability_heading
+      weight: 70000
     - name: Data Warehouses
       url: data_observability/quality_monitoring/data_warehouses
       identifier: data_warehouses
@@ -5146,7 +5167,7 @@ menu:
       pre: data-jobs-monitoring
       identifier: data_jobs
       parent: data_observability_heading
-      weight: 70000
+      weight: 80000
     - name: Databricks
       url: data_observability/jobs_monitoring/databricks
       identifier: jobs_monitoring_databricks
@@ -5223,6 +5244,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
       weight: 204
+    - name: Tracing Proxy Services
+      url: llm_observability/trace_proxy_services
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_instrumentation_trace_proxy_services
+      weight: 205
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
@@ -5272,7 +5298,7 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Managed
+    - name: Managed Evaluations
       url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_managed_evaluations
@@ -5282,16 +5308,31 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 401
-    - name: External
+    - name: External Evaluations
       url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
+    - name: Quality Evaluations
+      url: llm_observability/evaluations/managed_evaluations/quality_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_quality
+      weight: 40101
+    - name: Security and Safety Evaluations
+      url: llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_security
+      weight: 40102
+    - name: Session Level Evaluations
+      url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_session
+      weight: 40103
     - name: Agent Evaluations
       url: llm_observability/evaluations/managed_evaluations/agent_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_agent
-      weight: 40101
+      weight: 40104
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_external_evaluations
@@ -6728,111 +6769,116 @@ menu:
       parent: log_management_heading
       identifier: cloudprem
       weight: 30000
+    - name: Introduction
+      url: /cloudprem/introduction/
+      parent: cloudprem
+      identifier: cloudprem_introduction
+      weight: 1
+    - name: Architecture
+      url: /cloudprem/introduction/architecture
+      parent: cloudprem_introduction
+      identifier: cloudprem_architecture
+      weight: 101
+    - name: Network
+      url: /cloudprem/introduction/network
+      parent: cloudprem_introduction
+      identifier: cloudprem_network
+      weight: 102
+    - name: Supported Features
+      url: /cloudprem/introduction/features
+      parent: cloudprem_introduction
+      identifier: cloudprem_features
+      weight: 104
     - name: Quickstart
       url: /cloudprem/quickstart
       parent: cloudprem
       identifier: cloudprem_quickstart
-      weight: 1
-    - name: Architecture
-      url: /cloudprem/architecture
-      parent: cloudprem
-      identifier: cloudprem_architecture
       weight: 2
-    - name: Installation
-      url: /cloudprem/install
+    - name: Install
+      url: /cloudprem/install/
       parent: cloudprem
-      identifier: cloudprem_installation
+      identifier: cloudprem_install
       weight: 3
     - name: AWS EKS
       url: /cloudprem/install/aws_eks
-      parent: cloudprem_installation
+      parent: cloudprem_install
       identifier: cloudprem_aws_eks
-      weight: 201
+      weight: 301
     - name: Azure AKS
       url: /cloudprem/install/azure_aks
-      parent: cloudprem_installation
+      parent: cloudprem_install
       identifier: cloudprem_azure_aks
-      weight: 202
-    - name: Install Locally with Docker
-      url: /cloudprem/install/docker
-      parent: cloudprem_installation
-      identifier: cloudprem_docker
-      weight: 203
-    - name: Log Ingestion
-      url: /cloudprem/ingest_logs/
-      parent: cloudprem
-      identifier: cloudprem_log_ingestion
-      weight: 3
-    - name: Datadog Agent
-      url: /cloudprem/ingest_logs/datadog_agent
-      parent: cloudprem_log_ingestion
-      identifier: cloudprem_ingest_datadog_agent
-      weight: 301
-    - name: Observability Pipelines
-      url: /cloudprem/ingest_logs/observability_pipelines
-      parent: cloudprem_log_ingestion
-      identifier: cloudprem_ingest_observability_pipelines
       weight: 302
+    - name: Docker (Local)
+      url: /cloudprem/install/docker
+      parent: cloudprem_install
+      identifier: cloudprem_docker
+      weight: 303
+    - name: Ingest
+      url: /cloudprem/ingest/
+      parent: cloudprem
+      identifier: cloudprem_ingest
+      weight: 4
+    - name: Datadog Agent
+      url: /cloudprem/ingest/agent
+      parent: cloudprem_ingest
+      identifier: cloudprem_ingest_agent
+      weight: 401
+    - name: Observability Pipelines
+      url: /cloudprem/ingest/observability_pipelines
+      parent: cloudprem_ingest
+      identifier: cloudprem_ingest_op
+      weight: 402
     - name: REST API
-      url: /cloudprem/ingest_logs/rest_api/
-      parent: cloudprem_log_ingestion
+      url: /cloudprem/ingest/api
+      parent: cloudprem_ingest
       identifier: cloudprem_ingest_api
-      weight: 304
-    - name: Configuration
+      weight: 403
+    - name: Configure
       url: /cloudprem/configure/
       parent: cloudprem
-      identifier: cloudprem_advanced_configuration
-      weight: 4
-    - name: Datadog Account
-      url: /cloudprem/configure/datadog_account
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_datadog_account
-      weight: 401
-    - name: AWS Configuration
-      url: /cloudprem/configure/aws_config
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_aws_configuration
-      weight: 402
-    - name: Azure Configuration
-      url: /cloudprem/configure/azure_config
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_azure_configuration
-      weight: 403
-    - name: Cluster Sizing
-      url: /cloudprem/configure/cluster_sizing
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_cluster_sizing
-      weight: 404
+      identifier: cloudprem_configure
+      weight: 5
+    - name: Retention Policy
+      url: /cloudprem/configure/retention
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_retention_policy
+      weight: 501
+    - name: Pipelines
+      url: /cloudprem/configure/pipelines
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_pipelines
+      weight: 502
     - name: Ingress
       url: /cloudprem/configure/ingress
-      parent: cloudprem_advanced_configuration
+      parent: cloudprem_configure
       identifier: cloudprem_ingress
-      weight: 405
-    - name: Processing
-      url: /cloudprem/configure/processing
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_processing
-      weight: 406
-    - name: Reverse Connection
-      url: /cloudprem/configure/reverse_connection
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_reverse_connection
-      weight: 407
-    - name: Management
-      url: /cloudprem/manage/
+      weight: 503
+    - name: Operate
+      url: /cloudprem/operate/
       parent: cloudprem
-      identifier: cloudprem_manage
-      weight: 5
-    - name: Supported Features
-      url: /cloudprem/supported_features/
-      parent: cloudprem
-      identifier: cloudprem_supported_features
+      identifier: cloudprem_operate
       weight: 6
+    - name: Sizing
+      url: /cloudprem/operate/sizing
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_sizing
+      weight: 600
+    - name: Monitoring
+      url: /cloudprem/operate/monitoring
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_monitoring
+      weight: 601
     - name: Troubleshooting
-      url: /cloudprem/troubleshooting/
-      parent: cloudprem
-      identifier: cloudprem_troubleshooting
-      weight: 7
+      url: /cloudprem/operate/troubleshooting
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_troubleshooting
+      weight: 602
+    - name: Search Logs
+      url: /cloudprem/operate/search_logs
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_search
+      weight: 603
     - name: Security Overview
       url: security/
       pre: security-platform
@@ -7746,6 +7792,11 @@ menu:
       parent: synthetics
       identifier: synthetics_network_path_tests
       weight: 4
+    - name: Terms and Concepts
+      url: synthetics/network_path_tests/glossary
+      parent: synthetics_network_path_tests
+      identifier: synthetics_network_path_tests_glossary
+      weight: 401
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
@@ -9086,21 +9137,26 @@ menu:
       url: account_management/billing/google_cloud/
       parent: account_management_billing
       weight: 1316
+    - name: OCI Integration
+      identifier: account_management_billing_oci
+      url: account_management/billing/oci/
+      parent: account_management_billing
+      weight: 1317
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1317
+      weight: 1318
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1318
+      weight: 1319
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1319
+      weight: 1320
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

@@ -4,7 +4,7 @@ description: "Monitor jobs from in-house tools, custom pipelines, and orchestrat
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Data Observability'
+    text: 'Data Observability Overview'
   - link: '/data_observability/integrations/openlineage/datadog_agent_for_openlineage'
     tag: 'Documentation'
     text: 'Set up Datadog Agent for OpenLineage Proxy'

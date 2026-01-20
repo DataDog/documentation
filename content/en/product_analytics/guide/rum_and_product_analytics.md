@@ -27,6 +27,7 @@ The transition happened on **June 1st 2025**.
 
 - Both Product Analytics and Real User Monitoring rely on the Browser and/or Mobile SDKs.
 - Product Analytics offers 15-month retention on behavioral events (Sessions, Views, and Actions). Real User Monitoring is dedicated to performance monitoring.
+- Product Analytics uses the complete, unsampled dataset captured by the SDK. When paired with RUM without Limits, Product Analytics offers full visibility into user behavior, while RUM applies client-side sampling to support faster issue investigation and reduce noise.
 - Users have the option to purchase both products together, or each individually.
 
 ### How are RUM customers affected?
