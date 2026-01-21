@@ -120,7 +120,7 @@ For example, you may notice that the SM activity timeseries graph dips lower tha
 
 This widget also helps you to identify "noisy neighbors" (where one or more pods consume a disproportionately large amount of shared resources on a host). For example, another pod can be using all of a given host's CPU, depriving other pods on the host.
 
-### Zombie processes (Processes required)
+### Zombie processes (Live Processes required)
 
 **Note**: This section is only available for customers who have installed [Live Processes][2]. 
 
