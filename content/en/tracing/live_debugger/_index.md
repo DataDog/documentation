@@ -75,6 +75,18 @@ Live Debugger is built on <a href="/tracing/dynamic_instrumentation/">Dynamic In
 setup instructions and limitations also apply here.
 </div>
 
+### Permissions
+
+The following permissions are required to use Live Debugger:
+
+- **Dynamic Instrumentation Read Configuration** (`debugger_read`) - Required to access the Live Debugger page.
+- One of the following write permissions:
+  - **Dynamic Instrumentation Write Configuration** (`debugger_write`) - Required to create or modify debug logs in any environment.
+  - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`) - Required to create or modify debug logs in known pre-production environments only (such as staging or QA).
+- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the **Capture method parameters and local variables** option.
+
+For more information about roles and how to assign roles to users, see [Role Based Access Control][21].
+
 ### Create a logs index
 
 Live Debugger generates logs that are sent to Datadog and appear alongside your application logs.
@@ -171,3 +183,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [18]: https://app.datadoghq.com/account/billing
 [19]: /dynamic_instrumentation/
 [20]: /tracing/code_origin
+[21]: /account_management/rbac/permissions#apm
