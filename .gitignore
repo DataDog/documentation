@@ -316,6 +316,15 @@ layouts/shortcodes/mdoc/en/**/*.ast.json
 *.tempAst.json
 .cdocs_temp
 
+# Generated .md files from .mdoc.md sources (custom instrumentation OTel pages)
+content/en/tracing/trace_collection/custom_instrumentation/dotnet/otel.md
+content/en/tracing/trace_collection/custom_instrumentation/go/otel.md
+content/en/tracing/trace_collection/custom_instrumentation/java/otel.md
+content/en/tracing/trace_collection/custom_instrumentation/nodejs/otel.md
+content/en/tracing/trace_collection/custom_instrumentation/php/otel.md
+content/en/tracing/trace_collection/custom_instrumentation/python/otel.md
+content/en/tracing/trace_collection/custom_instrumentation/ruby/otel.md
+
 # Cursor editor configuration
 .cursor/
 
