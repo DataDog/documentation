@@ -141,11 +141,9 @@ To create an experiment:
        return fake_llm_call
 
    def detailed_fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
-       fake_llm_call = "excellent"
-       fake_llm_reasoning = "the model explains itself"
        return EvaluatorResult(
-           value=fake_llm_call,
-           reasoning=fake_llm_reasoning,
+           value="excellent",
+           reasoning="the model explains itself",
            assessment="pass", # or fail
            tags={"task": "judge_llm_call"},
        )
@@ -286,11 +284,9 @@ def fake_llm_as_a_judge(
 
 
 def detailed_fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
-       fake_llm_call = "excellent"
-       fake_llm_reasoning = "the model explains itself"
        return EvaluatorResult(
-           value=fake_llm_call,
-           reasoning=fake_llm_reasoning,
+           value="excellent",
+           reasoning="the model explains itself",
            assessment="pass", # or fail
            tags={"task": "judge_llm_call"},
        )
