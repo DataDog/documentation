@@ -29,7 +29,7 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Datadog Ruby tracer** `datadog` version 2.23.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
 - **Service and environment configured** - Feature flags are targeted by service and environment
-- **Supported Operating System** - Feature Flags are only [supported on Linux operating systems][2]. Windows and macOS are not natively supported, but Dockerized Linux environments running on those operating systems are.
+- **Supported operating system** - Feature flags are only [supported on Linux operating systems][2]. Windows and macOS are not natively supported, but Dockerized Linux environments running on those operating systems are.
 
 
 ## Installing and initializing
