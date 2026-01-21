@@ -141,7 +141,7 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 
 {{% tab "OpenAI" %}}
 
-**IMPORTANT**: An **admin-scoped API key is required** to collect OpenAI cost data for Cloud Cost Management. Project-scoped API keys cannot collect cost data.
+<div class="alert alert-danger">An <strong>admin-scoped API key is required</strong> to collect OpenAI cost data for Cloud Cost Management. Project-scoped API keys cannot collect cost data.</div>
 
 1. Create an [admin API key][103] in your OpenAI account settings:
    - Log in to your [OpenAI Account][104].
