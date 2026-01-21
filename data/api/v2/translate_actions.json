@@ -3275,6 +3275,78 @@
     "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
     "summary": "Returns a list of Secrets rules"
   },
+  "ListStatusPages": {
+    "description": "Lists all status pages for the organization.",
+    "summary": "List status pages"
+  },
+  "CreateStatusPage": {
+    "description": "Creates a new status page.",
+    "summary": "Create status page",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListDegradations": {
+    "description": "Lists all degradations for the organization. Optionally filter by status and page.",
+    "summary": "List degradations"
+  },
+  "DeleteStatusPage": {
+    "description": "Deletes a status page by its ID.",
+    "summary": "Delete status page"
+  },
+  "GetStatusPage": {
+    "description": "Retrieves a specific status page by its ID.",
+    "summary": "Get status page"
+  },
+  "UpdateStatusPage": {
+    "description": "Updates an existing status page's attributes.",
+    "summary": "Update status page",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListComponents": {
+    "description": "Lists all components for a status page.",
+    "summary": "List components"
+  },
+  "CreateComponent": {
+    "description": "Creates a new component.",
+    "summary": "Create component",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteComponent": {
+    "description": "Deletes a component by its ID.",
+    "summary": "Delete component"
+  },
+  "GetComponent": {
+    "description": "Retrieves a specific component by its ID.",
+    "summary": "Get component"
+  },
+  "UpdateComponent": {
+    "description": "Updates an existing component's attributes.",
+    "summary": "Update component",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateDegradation": {
+    "description": "Creates a new degradation.",
+    "summary": "Create degradation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteDegradation": {
+    "description": "Deletes a degradation by its ID.",
+    "summary": "Delete degradation"
+  },
+  "GetDegradation": {
+    "description": "Retrieves a specific degradation by its ID.",
+    "summary": "Get degradation"
+  },
+  "UpdateDegradation": {
+    "description": "Updates an existing degradation's attributes.",
+    "summary": "Update degradation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
     "summary": "Get the on-demand concurrency cap"
