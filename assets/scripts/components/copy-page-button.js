@@ -24,12 +24,19 @@ async function copyPageText(copyButton) {
         const copiedText = document.getElementById('page-copied-text');
 
         if (copyText && copiedText) {
+            const icon = copyButton.closest('.copy-btn-icon');
+            if (icon) {
+                icon.src = icon.src.replace('clipboard-mdi.svg', 'clipboard-mdi-success.svg');
+            }
             copyText.style.display = 'none';
             copiedText.style.display = 'inline';
 
             setTimeout(() => {
                 copyText.style.display = 'inline';
                 copiedText.style.display = 'none';
+                if (icon) {
+                    icon.src = icon.src.replace('clipboard-mdi-success.svg', 'clipboard-mdi.svg');
+                }
             }, 1500);
         }
 

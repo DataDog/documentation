@@ -223,6 +223,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     display: none;
     @media (min-width: 991px) {
         display: block;
+        margin-top: -0.6rem;
     }
 
     a {
