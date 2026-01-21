@@ -50143,6 +50143,55 @@ components:
       - TWO_DAYS
       - ONE_WEEK
       - TWO_WEEKS
+    SecurityMonitoringRuleBulkExportAttributes:
+      description: Attributes for bulk exporting security monitoring rules.
+      properties:
+        ruleIds:
+          description: 'List of rule IDs to export. Each rule will be included in
+            the resulting ZIP file
+
+            as a separate JSON file.'
+          example:
+          - def-000-u7q
+          - def-000-7dd
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - ruleIds
+      type: object
+    SecurityMonitoringRuleBulkExportData:
+      description: Data for bulk exporting security monitoring rules.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringRuleBulkExportAttributes'
+        id:
+          description: Request ID.
+          example: bulk_export
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleBulkExportDataType'
+      required:
+      - attributes
+      - type
+      type: object
+    SecurityMonitoringRuleBulkExportDataType:
+      description: The type of the resource.
+      enum:
+      - security_monitoring_rules_bulk_export
+      example: security_monitoring_rules_bulk_export
+      type: string
+      x-enum-varnames:
+      - SECURITY_MONITORING_RULES_BULK_EXPORT
+    SecurityMonitoringRuleBulkExportPayload:
+      description: Payload for bulk exporting security monitoring rules.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringRuleBulkExportData'
+      required:
+      - data
+      type: object
     SecurityMonitoringRuleCase:
       description: Case when signal is generated.
       properties:
@@ -88176,6 +88225,52 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_rules_write
+  /api/v2/security_monitoring/rules/bulk_export:
+    post:
+      description: 'Export a list of security monitoring rules as a ZIP file containing
+        JSON rule definitions.
+
+        The endpoint accepts a list of rule IDs and returns a ZIP archive where each
+        rule is
+
+        saved as a separate JSON file named after the rule.'
+      operationId: BulkExportSecurityMonitoringRules
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleBulkExportPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/zip:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_read
+      summary: Bulk export security monitoring rules
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_rules_read
   /api/v2/security_monitoring/rules/convert:
     post:
       description: 'Convert a rule that doesn''t (yet) exist from JSON to Terraform

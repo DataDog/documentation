@@ -1460,6 +1460,13 @@
       "description": "Attach security findings to a case returns \"OK\" response"
     }
   ],
+  "BulkExportSecurityMonitoringRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Bulk export security monitoring rules returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
