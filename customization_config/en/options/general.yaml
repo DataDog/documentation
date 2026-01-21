@@ -423,3 +423,14 @@ options:
   
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
+
+- id: rum
+  label: RUM
+
+- id: error_tracking
+  label: Error Tracking
+  
+- id: product_analytics
+  label: Product Analytics
+- id: session_replay
+  label: Session Replay
