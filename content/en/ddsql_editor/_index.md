@@ -14,14 +14,14 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
-If you want to query data sources not yet available, use this form to submit your request. All data sources listed [here](https://docs.datadoghq.com/ddsql_reference/data_directory/) are supported.
+If you want to query data sources not yet available, use this form to submit your request. For a full list of supported data sources, see the <a href="/ddsql_reference/data_directory/">Data Directory</a>.
 {{< /callout >}}
 
 ## Overview
 
 With [DDSQL Editor][1], you can get deeper visibility into your telemetry by querying your resources with natural language or with [DDSQL](#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags.
 
-You can also export the results of a SQL query to visualize in a Dashboard/Notebook or automate in a Datadog Workflow via DDSQL Action, see [below](#save-and-share-queries).
+You can also export the results of a SQL query to visualize in a Dashboard/Notebook or automate in a Datadog Workflow through [DDSQL Action](#save-and-share-queries).
 
 {{< img src="/ddsql_editor/query-results-cloud-provider-host-count.png" alt="The result of a SQL query showing cloud provider host count on the DDSQL page in Datadog" style="width:100%;" >}}
 
