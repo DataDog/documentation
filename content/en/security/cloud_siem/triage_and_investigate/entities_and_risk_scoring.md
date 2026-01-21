@@ -8,6 +8,8 @@ further_reading:
       text: "Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and AWS Entity Analytics"
 ---
 
+<div class="alert alert-info">This feature is not available for the Legacy product.</a></div>
+
 ## Overview
 
 [Cloud SIEM's Risk Insights][4] consolidates multiple data sources, such as SIEM threats and Cloud Security insights, into a profile representing a single security entity, such as an IAM user.
