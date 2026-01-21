@@ -64,7 +64,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
 
 
-To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][501] to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
+To ensure the safety of your data, you must use a client token. If you use only Datadog API keys to configure the `dd-sdk-roku` library, they are exposed client-side in the Roku channel's BrightScript code.
 
 For more information about setting up a client token, see the [Client Token documentation][601].
 
