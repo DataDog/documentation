@@ -7550,7 +7550,7 @@ menu:
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
       parent: sec_static_analysis
-      weight: 5
+      weight: 5     
     - name: SAST Custom Rule Creation Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
