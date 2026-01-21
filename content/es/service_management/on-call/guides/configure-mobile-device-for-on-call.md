@@ -112,9 +112,9 @@ Para mayor fiabilidad, Datadog utiliza un conjunto rotatorio de números de tel�
 
 {{< img src="service_management/mobile/ios_sync_card_may_2025.png" alt="Anula el modo No molestar del dispositivo iOS para SMS y llamadas de voz" style="width:100%;" >}}
 
-1. En la aplicación móvil de Datadog, ve a **Account** > **Settings** > **Notifications** (Cuenta > Configuración > Notificaciones).
+1. En la aplicación móvil Datadog, ve a **Settings** > **Preferences** > **On-Call** (Configuración > Preferencias > On-Call).
 
-2. Activa **Enable Automatic Contact Card Sync** (Activar sincronización automática de tarjetas de contacto). Esto crea un contacto llamado "Datadog On-Call", que se actualiza regularmente con los últimos números de teléfono de Datadog.
+2. Activa **Automatic Contact Card Sync** (Sincronización automática de tarjetas de contacto). Esto crea un contacto llamado "Datadog On-Call" que se actualiza regularmente con los últimos números de teléfono de Datadog.
 
 3. Una vez creado este contacto, abre los ajustes del sistema iOS y ve a **Focus** > **Do Not Disturb** (Enfoque > No molestar).
 
