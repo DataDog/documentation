@@ -617,13 +617,13 @@ export default {
     gov: 'datadog-logs-v5.js'
   },
   flutter_web_rum_cdn_path: {
-    us: 'us1/v5/datadog-rum-slim.js',
-    us3: 'us3/v5/datadog-rum-slim.js',
-    us5: 'us5/v5/datadog-rum-slim.js',
-    eu: 'eu1/v5/datadog-rum-slim.js',
-    ap1: 'ap1/v5/datadog-rum-slim.js',
-    ap2: 'ap2/v5/datadog-rum-slim.js',
-    gov: 'datadog-rum-slim-v5.js'
+    us: 'us1/v6/datadog-rum-slim.js',
+    us3: 'us3/v6/datadog-rum-slim.js',
+    us5: 'us5/v6/datadog-rum-slim.js',
+    eu: 'eu1/v6/datadog-rum-slim.js',
+    ap1: 'ap1/v6/datadog-rum-slim.js',
+    ap2: 'ap2/v6/datadog-rum-slim.js',
+    gov: 'datadog-rum-slim-v6.js'
   },
   reactnative_sdk_init: {
     us: '',

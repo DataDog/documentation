@@ -127,6 +127,10 @@
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
   },
+  "entity-risk-scores": {
+    "name": "Entity Risk Scores",
+    "description": "Retrieves security risk scores for entities in your organization."
+  },
   "error-tracking": {
     "name": "Error Tracking",
     "description": "View and manage issues within Error Tracking. See the [Error Tracking page](https://docs.datadoghq.com/error_tracking/) for more information."
@@ -147,6 +151,10 @@
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
+  "high-availability-multiregion": {
+    "name": "High Availability MultiRegion",
+    "description": "Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.\nHAMR provides disaster recovery capabilities by maintaining synchronized data between primary\nand secondary organizations across different datacenters."
+  },
   "ip-allowlist": {
     "name": "IP Allowlist",
     "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information."
@@ -162,6 +170,10 @@
   "incidents": {
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
+  },
+  "jira-integration": {
+    "name": "Jira Integration",
+    "description": "Manage your Jira Integration. Atlassian Jira is a project management and issue tracking tool for teams to coordinate work and handle tasks efficiently."
   },
   "key-management": {
     "name": "Key Management",

@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-This quickstart covers the following:
+Get started with CloudPrem locally in less than 5 minutes. This quickstart covers the following:
 1. Start CloudPrem locally using Docker.
 2. Verify the cluster status.
 3. Send a "Hello World" log.
@@ -89,5 +89,5 @@ With CloudPrem running, you can:
 [3]: https://docs.docker.com/get-docker/
 [4]: https://app.datadoghq.com/cloudprem
 [5]: https://app.datadoghq.com/logs?query=index=cloudprem-demo&storage=hot
-[6]: /cloudprem/ingest_logs/datadog_agent
-[7]: /cloudprem/ingest_logs/observability_pipelines/
+[6]: /cloudprem/ingest/agent/
+[7]: /cloudprem/ingest/observability_pipelines/
