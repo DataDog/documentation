@@ -104,7 +104,7 @@ Use automatic configuration if you want to:
    {{% /tab %}}
    {{< /tabs >}}
 
-   Once enabled, the Datadog Cluster Agent:**
+   Once enabled, the Datadog Cluster Agent:
    - Detects your Istio installation
    - Creates `EnvoyFilter` resources in the Istio system namespace (typically `istio-system`)
    - Configures the filters to route traffic to the external processor
