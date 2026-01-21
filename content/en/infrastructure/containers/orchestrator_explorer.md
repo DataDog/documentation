@@ -14,7 +14,7 @@ Orchestrator Explorer requires **Agent version >= 7.27.0** and **Cluster Agent v
 
 ## Setup
 
-Ensure that you have [enabled the Process Agent][2]. If you are using Datadog Operator or the official Helm chart, the Orchestrator Explorer is enabled by default.
+If you are using Datadog Operator or the official Helm chart, the Orchestrator Explorer is enabled by default.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -50,8 +50,6 @@ For verification, ensure that the `orchestratorExplorer.enabled` parameter is se
 datadog:
   clusterName: <CLUSTER_NAME>
   # (...)
-  processAgent:
-    enabled: true
   orchestratorExplorer:
     enabled: true
 ```
@@ -352,7 +350,6 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][15] for more details.
 
 [1]: https://app.datadoghq.com/orchestration/overview
-[2]: /infrastructure/containers/?tab=datadogoperator#setup
 [9]: /logs
 [10]: /metrics
 [11]: /tracing

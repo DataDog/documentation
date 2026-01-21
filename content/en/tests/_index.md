@@ -30,6 +30,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
       tag: "Blog"
       text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+    - link: "https://www.datadoghq.com/blog/dbt-data-quality-testing"
+      tag: "Blog"
+      text: "Implement dbt data quality checks with dbt-expectations"
 cascade:
     site_support_id: test_optimization
     algolia:
@@ -62,7 +65,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites, and tests.{{< /ci-details >}}                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |            |           |                        |
 | {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} | {{< X >}} (partially)  |
-| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start)| {{< X >}} | {{< X >}} | {{< X >}} (only start) |
+| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (only start) |
 | {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                                        | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for <a href="/tests/test_impact_analysis">Test Impact Analysis</a>.{{< /ci-details >}}                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Test Impact Analysis *" >}}Capability to enable <a href="/tests/test_impact_analysis">Test Impact Analysis</a>, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}} | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |

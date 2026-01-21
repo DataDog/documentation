@@ -223,7 +223,7 @@ To **disable** origin detection in a client, perform one of the following action
 #### In the Datadog Agent
 Origin detection is not enabled by default in the Datadog Agent. To **enable** origin detection in the Datadog Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
 
-<div class="alert alert-info">Origin detection is not supported for Fargate environments.</div>
+<div class="alert alert-info">Origin detection is not supported for EKS Fargate.</div>
 
 #### How origins are detected
 

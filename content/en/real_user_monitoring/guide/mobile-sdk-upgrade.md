@@ -121,7 +121,7 @@ In Xcode, you **must** link the following frameworks:
 
 Then, you can select the modules you want to use:
   ```
-  DatadogCrashReporting.xcframework + CrashReporter.xcframework
+  DatadogCrashReporting.xcframework
   DatadogLogs.xcframework
   DatadogRUM.xcframework
   DatadogSessionReplay.xcframework
@@ -432,7 +432,7 @@ Legacy delegate types have been replaced by a unified instrumentation API:
 |`DDURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 |`DDNSURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 
-[1]: /real_user_monitoring/session_replay/mobile/privacy_options?platform=ios
+[1]: /session_replay/mobile/privacy_options?platform=ios
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -447,7 +447,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][2] on Android and iOS applications.
 
-[2]: /real_user_monitoring/session_replay/mobile/
+[2]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -458,7 +458,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][3] on Android and iOS applications.
 
-[3]: /real_user_monitoring/session_replay/mobile/
+[3]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -987,7 +987,7 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][6].
 
-[6]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+[6]: /session_replay/mobile/setup_and_configuration/?tab=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -1182,7 +1182,7 @@ WebViewTracking.enable(webView: webView)
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][7].
 
-[7]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+[7]: /session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}

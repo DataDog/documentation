@@ -28,4 +28,4 @@
 Consultez la section [Mise à jour des pipelines existants][702] si vous souhaitez apporter des modifications à la configuration de votre pipeline.
 
 [701]: /resources/yaml/observability_pipelines/v2/setup/azure_aks.yaml
-[702]: /fr/observability_pipelines/update_existing_pipelines
+[702]: /fr/observability_pipelines/configuration/update_existing_pipelines

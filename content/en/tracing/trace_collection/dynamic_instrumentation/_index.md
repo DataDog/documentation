@@ -4,8 +4,6 @@ description: Add instrumentation to your running production systems without rest
 aliases:
     - /dynamic_instrumentation/how-it-works/
     - /dynamic_instrumentation/
-    - /dynamic_instrumentation/enabling/
-    - /tracing/dynamic_instrumentation/enabling
     - /tracing/dynamic_instrumentation/
 is_beta: false
 private: false
@@ -45,7 +43,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
+- [Datadog Agent][1] 7.49.0 or higher (7.73.0+ for Go) is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
@@ -53,14 +51,23 @@ Dynamic Instrumentation requires the following:
 - For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
+- (Limited Preview) For Go applications, tracing library [`dd-trace-go`][21] >=1.74.6 (major version 1), or >=2.2.3 (major version 2).
+- (Limited Preview) For Go applications, the Agent and your application must run on the same host, with Linux kernel >=5.17.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended, [autocomplete and search (in Preview)][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
-- The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
-- The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
-- The **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) permission is required to use the **Capture method parameters and local variables** option.
 
- For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
+### Permissions
+
+The following permissions are required to use Dynamic Instrumentation:
+
+- **Dynamic Instrumentation Read Configuration** (`debugger_read`) - Required to access the Dynamic Instrumentation page.
+- One of the following write permissions:
+  - **Dynamic Instrumentation Write Configuration** (`debugger_write`) - Required to create or modify instrumentations in any environment.
+  - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`) - Required to create or modify instrumentations in known pre-production environments only (such as staging or QA).
+- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the **Capture method parameters and local variables** option.
+
+For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
 ### Create a logs index
 
@@ -235,3 +242,4 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 [18]: https://github.com/DataDog/dd-trace-js
 [19]: https://github.com/DataDog/dd-trace-rb
 [20]: https://github.com/DataDog/dd-trace-php
+[21]: https://github.com/DataDog/dd-trace-go

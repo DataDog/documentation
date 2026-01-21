@@ -25,7 +25,11 @@ Setting up Deployment Gates involves two steps:
 1. Configure the gate and rules in the Datadog UI.
 2. Update your deployment pipeline to interact with the Deployment Gates API.
 
-## Create a Deployment Gate
+## Create Deployment Gates
+
+### Create a gate
+
+<div class="alert alert-info">In addition to using the Deployment Gates UI, you can manage gates and rules programmaticaly with the <a href="https://docs.datadoghq.com/api/latest/deployment-gates">Deployment Gates API</a> or <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/deployment_gate">Datadog Terraform provider</a>.</div>
 
 1. Go to [**Software Delivery > Deployment Gates > Configuration**][1].
 2. Click **Create Gate**.
@@ -41,7 +45,7 @@ a dry run gate always responds with a pass status, but the in-app result is the 
 on rules evaluation. This is particularly useful when performing an initial evaluation of the
 gate behavior without impacting the deployment pipeline.
 
-## Add rules to a gate
+### Add rules to a gate
 
 Each gate requires one or more rules to evaluate. All rules must pass for the gate to succeed. For each rule, specify:
 
@@ -51,7 +55,7 @@ Each gate requires one or more rules to evaluate. All rules must pass for the ga
 4. **Evaluation Mode**: When a rule is set as a `Dry Run`, its result is not taken into account when computing the overall gate result.
 
 
-### Rule types
+#### Rule types
 
 {{< tabs >}}
 {{% tab "Monitors" %}}
@@ -60,7 +64,7 @@ The Monitors rule allows you to evaluate the state of a set of monitors over a c
 - More than 50 monitors match the query.
 - Any matching monitor is in `ALERT` or `NO_DATA` state.
 
-#### Configuration settings
+##### Configuration settings
 
 * **Search Query**: Enter the query that is used to find the monitors to evaluate, based on the [Search Monitor syntax][1]. Use the following syntax to filter on specific monitors tags:
   * Monitor static tags - `service:transaction-backend`
@@ -68,14 +72,14 @@ The Monitors rule allows you to evaluate the state of a set of monitors over a c
   * Tags within a [monitor grouping][2] - `group:"service:transaction-backend"`
 * **Duration**: Enter the period of time (in seconds) for which the matching monitors should be evaluated. The default duration is 0, which means that monitors are evaluated instantly.
 
-#### Example queries
+##### Example queries
 
 * `env:prod service:transaction-backend`
 * `env:prod (service:transaction-backend OR group:"service:transaction-backend" OR scope:"service:transaction-backend")`
 * `tag:"use_deployment_gates" team:payment`
 * `tag:"use_deployment_gates" AND (NOT group:("team:frontend"))`
 
-#### Notes
+##### Notes
 * `group` filters evaluate only matching groups.
 * Muted monitors are automatically excluded from the evaluation (the query always includes `muted:false`).
 
@@ -89,13 +93,13 @@ This rule type uses Watchdog's [APM Faulty Deployment Detection][1] analysis to 
 
 The analysis is automatically done for all APM-instrumented services, and no prior setup is required.
 
-#### Configuration settings
+##### Configuration settings
 
 * **Operation Name**: Auto-populated from the service's [APM primary operation][3] settings.
 * **Duration**: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
 * **Excluded Resources**: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
 
-#### Notes
+##### Notes
 - The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it when [requesting a gate evaluation](#evaluate-deployment-gates) (see below).
 - New errors and error rate increases are detected at the resource level.
 - This rule type does not support services marked as `database` or `inferred service`.
