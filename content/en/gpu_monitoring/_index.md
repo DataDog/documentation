@@ -21,7 +21,7 @@ GPU Monitoring is in Preview. To join the preview, click <strong>Request Access<
 {{< /callout >}}
 
 ## Overview
-Datadog's [GPU Monitoring][1] provides a centralized view into GPU fleet health, cost, and performance. GPU Monitoring enables teams to make better provisioning decisions, troubleshoot failed workloads, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). You can access insights into your GPU fleet by deploying the Datadog Agent.
+Datadog's [GPU Monitoring][1] provides a centralized view into your GPU fleet's health, cost, and performance, regardless of if it's deployed across one of the major cloud providers, hosted on-premises, or provisioned through GPU-as-a-Service platforms like Coreweave and Lambda Labs. GPU Monitoring enables teams to make better provisioning decisions, optimize and troubleshoot AI workload performance, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). You can access insights into your GPU fleet by deploying the Datadog Agent.
 
 For setup instructions, see [Set up GPU Monitoring][2].
 
@@ -35,15 +35,16 @@ Understand your current device availability and forecast how many devices are ne
 
 {{< img src="gpu_monitoring/device_allocation.png" alt="Charts to help visualize GPU allocation. A line graph titled 'Device Allocation Over Time', plotting counts of total/allocated/active devices, including a 4-week future forecast. A donut chart titled 'Cloud Provider Instance Breakdown', displaying prevalence of cloud provider instances across the fleet. A 'Device Type Breakdown' displaying allocated/total for various GPU devices." style="width:100%;" >}}
 
+### Maximize model and application performance
+With GPU Monitoring's resource telemetry, you can analyze trends in GPU resources and metrics (including GPU utilization, power, and memory) over time, helping you understand their effects on your model and application performance.
+
+{{< img src="gpu_monitoring/device_metrics.png" alt="Detail view of a device, displaying configurable timeseries visualizations for SM activity, memory utilization, power, and engine activity." style="width:100%;" >}}
+
 ### Identify and eliminate wasted, idle GPU costs
 Identify total spend on GPU infrastructure and attribute those costs to specific workloads and instances. Directly correlate GPU usage to related pods or processes.
 
 {{< img src="gpu_monitoring/fleet_costs.png" alt="Detail view of a cluster, displaying funnel visualization of devices (total/allocated/active/effective), total cloud cost, idle cloud cost, and visualizations and details of various connected entitles (pods, processors, SLURM jobs)." style="width:100%;" >}}
 
-### Maximize model and application performance
-With GPU Monitoring's resource telemetry, you can analyze trends in GPU resources and metrics (including GPU utilization, power, and memory) over time, helping you understand their effects on your model and application performance.
-
-{{< img src="gpu_monitoring/device_metrics.png" alt="Detail view of a device, displaying configurable timeseries visualizations for SM activity, memory utilization, power, and engine activity." style="width:100%;" >}}
 
 ## Ready to start?
 
