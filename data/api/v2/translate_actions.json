@@ -2949,6 +2949,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "BulkExportSecurityMonitoringRules": {
+    "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
+    "summary": "Bulk export security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk exporting security monitoring rules."
+  },
   "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
     "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
     "summary": "Convert a rule from JSON to Terraform",
