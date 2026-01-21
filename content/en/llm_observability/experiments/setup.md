@@ -12,7 +12,7 @@ If you have not already set up LLM Observability:
 1. Install Datadog's LLM Observability Python SDK:
 
    ```shell
-   pip install ddtrace>=4.1.0
+   pip install ddtrace>=4.3.0
    ```
 
 2. Enable LLM Observability:
