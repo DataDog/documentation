@@ -3,6 +3,7 @@ title: OpenTelemetry API Support
 aliases:
   - /opentelemetry/interoperability/api_support
   - /opentelemetry/interoperability/otel_api_tracing_interoperability/
+  - /opentelemetry/instrument/api_support/
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
