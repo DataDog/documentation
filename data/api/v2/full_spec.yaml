@@ -178,6 +178,14 @@ components:
       required: true
       schema:
         type: string
+    AttachmentIDPathParameter:
+      description: The ID of the attachment.
+      in: path
+      name: attachment_id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        type: string
     AttachmentIncludeQueryParameter:
       description: 'Resource to include in the response. Supported value: `last_modified_by_user`.'
       explode: false
@@ -5326,6 +5334,8 @@ components:
       - project
       type: object
     Attachment:
+      description: An attachment response containing the attachment data and related
+        objects.
       properties:
         data:
           $ref: '#/components/schemas/AttachmentData'
@@ -5335,22 +5345,9 @@ components:
           type: array
       type: object
     AttachmentArray:
+      description: A list of incident attachments.
       properties:
         data:
-          example:
-          - attributes:
-              attachment:
-                documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
-                title: Postmortem IR-123
-              attachment_type: postmortem
-              modified: '2025-01-01T01:01:01.000000001Z'
-            id: 00000000-abcd-0002-0000-000000000000
-            relationships:
-              last_modified_by_user:
-                data:
-                  id: 00000000-0000-0000-cccc-000000000000
-                  type: users
-            type: incident_attachments
           items:
             $ref: '#/components/schemas/AttachmentData'
           type: array
@@ -5362,24 +5359,12 @@ components:
       - data
       type: object
     AttachmentData:
-      example:
-        attributes:
-          attachment:
-            documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
-            title: Postmortem IR-123
-          attachment_type: postmortem
-          modified: '2025-01-01T01:01:01.000000001Z'
-        id: 00000000-abcd-0002-0000-000000000000
-        relationships:
-          last_modified_by_user:
-            data:
-              id: 00000000-0000-0000-cccc-000000000000
-              type: users
-        type: incident_attachments
+      description: Attachment data from a response.
       properties:
         attributes:
           $ref: '#/components/schemas/AttachmentDataAttributes'
         id:
+          description: The unique identifier of the attachment.
           example: 00000000-abcd-0002-0000-000000000000
           type: string
         relationships:
@@ -5393,56 +5378,52 @@ components:
       - id
       type: object
     AttachmentDataAttributes:
+      description: The attachment's attributes.
       properties:
         attachment:
           $ref: '#/components/schemas/AttachmentDataAttributesAttachment'
         attachment_type:
           $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
         modified:
+          description: Timestamp when the attachment was last modified.
+          example: '2025-01-01T01:01:01.000000001Z'
           format: date-time
           type: string
       type: object
     AttachmentDataAttributesAttachment:
+      description: The attachment object.
       properties:
         documentUrl:
+          description: The URL of the attachment.
+          example: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
           type: string
         title:
+          description: The title of the attachment.
+          example: Postmortem IR-123
           type: string
       type: object
     AttachmentDataAttributesAttachmentType:
+      description: The type of the attachment.
       enum:
       - postmortem
       - link
+      example: postmortem
       type: string
       x-enum-varnames:
       - POSTMORTEM
       - LINK
     AttachmentDataRelationships:
+      description: The attachment's resource relationships.
       properties:
+        incident:
+          $ref: '#/components/schemas/RelationshipToIncident'
         last_modified_by_user:
-          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUser'
-      type: object
-    AttachmentDataRelationshipsLastModifiedByUser:
-      properties:
-        data:
-          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUserData'
-      required:
-      - data
-      type: object
-    AttachmentDataRelationshipsLastModifiedByUserData:
-      properties:
-        id:
-          example: ''
-          type: string
-        type:
-          $ref: '#/components/schemas/UserType'
-      required:
-      - type
-      - id
+          $ref: '#/components/schemas/RelationshipToUser'
       type: object
     AttachmentIncluded:
+      description: Objects related to an attachment.
       oneOf:
-      - $ref: '#/components/schemas/User140420082644000'
+      - $ref: '#/components/schemas/IncidentUserData'
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -12990,20 +12971,13 @@ components:
       - type
       type: object
     CreateAttachmentRequest:
-      example:
-        data:
-          attributes:
-            attachment:
-              documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
-              title: Postmortem-IR-123
-            attachment_type: postmortem
-          id: 00000000-0000-0000-0000-000000000000
-          type: incident_attachments
+      description: Create request for an attachment.
       properties:
         data:
           $ref: '#/components/schemas/CreateAttachmentRequestData'
       type: object
     CreateAttachmentRequestData:
+      description: Attachment data for a create request.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateAttachmentRequestDataAttributes'
@@ -13015,6 +12989,7 @@ components:
       - type
       type: object
     CreateAttachmentRequestDataAttributes:
+      description: The attributes for creating an attachment.
       properties:
         attachment:
           $ref: '#/components/schemas/CreateAttachmentRequestDataAttributesAttachment'
@@ -13022,10 +12997,15 @@ components:
           $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
       type: object
     CreateAttachmentRequestDataAttributesAttachment:
+      description: The attachment object for creating an attachment.
       properties:
         documentUrl:
+          description: The URL of the attachment.
+          example: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
           type: string
         title:
+          description: The title of the attachment.
+          example: Postmortem-IR-123
           type: string
       type: object
     CreateCaseRequestArray:
@@ -42878,22 +42858,19 @@ components:
           type: array
       type: object
     PatchAttachmentRequest:
-      example:
-        data:
-          attributes:
-            attachment:
-              documentUrl: https://app.datadoghq.com/notebook/124/Postmortem-IR-124
-              title: Postmortem-IR-124
-          type: incident_attachments
+      description: Request to update an attachment.
       properties:
         data:
           $ref: '#/components/schemas/PatchAttachmentRequestData'
       type: object
     PatchAttachmentRequestData:
+      description: Attachment data for an update request.
       properties:
         attributes:
           $ref: '#/components/schemas/PatchAttachmentRequestDataAttributes'
         id:
+          description: The unique identifier of the attachment.
+          example: 00000000-abcd-0002-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/IncidentAttachmentType'
@@ -42901,15 +42878,21 @@ components:
       - type
       type: object
     PatchAttachmentRequestDataAttributes:
+      description: The attributes for updating an attachment.
       properties:
         attachment:
           $ref: '#/components/schemas/PatchAttachmentRequestDataAttributesAttachment'
       type: object
     PatchAttachmentRequestDataAttributesAttachment:
+      description: The updated attachment object.
       properties:
         documentUrl:
+          description: The updated URL for the attachment.
+          example: https://app.datadoghq.com/notebook/124/Postmortem-IR-124
           type: string
         title:
+          description: The updated title for the attachment.
+          example: Postmortem-IR-124
           type: string
       type: object
     PatchComponentRequest:
@@ -62214,17 +62197,6 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
-    User140420082644000:
-      properties:
-        attributes:
-          $ref: '#/components/schemas/UserAttributes'
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/UserType'
-      required:
-      - type
-      type: object
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -62675,15 +62647,6 @@ components:
         meta:
           $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
-    UserType:
-      default: users
-      description: Users resource type.
-      enum:
-      - users
-      example: users
-      type: string
-      x-enum-varnames:
-      - USERS
     UserUpdateAttributes:
       description: Attributes of the edited user.
       properties:
@@ -74938,12 +74901,7 @@ paths:
       operationId: DeleteIncidentAttachment
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - description: The ID of the attachment.
-        in: path
-        name: attachment_id
-        required: true
-        schema:
-          example: 00000000-0000-0000-0000-000000000002
+      - $ref: '#/components/parameters/AttachmentIDPathParameter'
       responses:
         '204':
           description: No Content
@@ -74975,12 +74933,7 @@ paths:
       operationId: UpdateIncidentAttachment
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - description: The ID of the attachment.
-        in: path
-        name: attachment_id
-        required: true
-        schema:
-          example: 00000000-0000-0000-0000-000000000002
+      - $ref: '#/components/parameters/AttachmentIDPathParameter'
       - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
       requestBody:
         content:

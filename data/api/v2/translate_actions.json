@@ -1205,7 +1205,7 @@
     "description": "Create an incident attachment.",
     "summary": "Create incident attachment",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Create request for an attachment."
   },
   "CreateIncidentPostmortemAttachment": {
     "description": "Create a postmortem attachment for an incident.",
@@ -1219,7 +1219,7 @@
   "UpdateIncidentAttachment": {
     "summary": "Update incident attachment",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request to update an attachment."
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
