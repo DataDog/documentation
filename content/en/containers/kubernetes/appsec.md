@@ -1,6 +1,6 @@
 ---
-title: Kubernetes Application Security using Gateway Injector
-description: Automatically enable Application Security monitoring for ingress proxies and gateways in Kubernetes
+title: App and API Protection for Kubernetes
+description: Automatically enable App and API Protection for your Kubernetes ingress proxies and gateways
 aliases:
     - /agent/kubernetes/appsec
     - /security/application_security/setup/kubernetes/appsec-injector
@@ -25,19 +25,19 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Gateway Security Injector is in Preview" >}}
-The Injector feature is in Preview. Use the following instructions to try the preview.
-{{< /callout >}}
+{{< learning-center-callout header="App and API Protection for Kubernetes is in Preview" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/kubernetes-gateway-security-injector/">}}
+  App and API Protection for Kubernetes automatically configures supported Kubernetes ingress proxies and gateways. Try it today!
+{{< /learning-center-callout >}}
 
-This page describes how to set up the Datadog Gateway Injector to automatically enable Application Security monitoring, API Posture and catalog and protection for your Kubernetes ingress proxies and gateways.
+This page describes how to set up [App and API Protection][11] for Kubernetes to automatically configure supported Kubernetes ingress proxies and gateways to run API discovery, threat detection, and inline blocking at the edge of the infrastructure.
 
 ## Overview
 
-The Datadog AppSec Gateway Injector automatically configures ingress proxies and gateways in your Kubernetes cluster to enable Application Security monitoring. This eliminates the need for manual proxy configuration and provides API-wide security coverage without modifying individual services or deploying tracers across your application fleet.
+App and API Protection for Kubernetes automatically configures supported ingress proxies and gateways in your Kubernetes cluster to enable Application Security monitoring. This eliminates the need for manual proxy configuration and provides API-wide security coverage without modifying individual services or deploying tracers across your application fleet.
 
-### What is the Gateway Injector?
+### What performs the automatic configuration?
 
-The Gateway Injector is a Kubernetes controller that:
+App and API Protection for Kubernetes uses a Kubernetes controller (running in the Datadog Cluster Agent) that:
 - **Automatically detects** supported proxies in your cluster (Envoy Gateway, Istio)
 - **Configures proxies** to route traffic through an external Application Security processor
 - **Enables threat detection** for all traffic passing through your ingress layer
@@ -63,24 +63,24 @@ More proxies are available via manual installation on the global [setup page][10
 
 ## Prerequisites
 
-Before enabling the Security Injector, ensure you have:
+Before enabling App and API Protection for Kubernetes, ensure you have:
 
-- 1. A running Kubernetes cluster (version 1.20 or later)
-- 2. [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
-- 3. One or more supported proxies installed:
--   - [Envoy Gateway][2]
--   - [Istio][3]
-- 4. [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
+- A running Kubernetes cluster (version 1.20 or later)
+- [Datadog Cluster Agent 7.73.0+][1] installed and configured in your cluster
+- One or more supported proxies installed:
+  - [Envoy Gateway][2]
+  - [Istio][3]
+- [Remote Configuration][4] enabled to allow blocking attackers through the Datadog UI
 
 ## How it works
 
-The Gateway Injector operates in **External Mode**, where a single Application Security processor deployment serves all gateway traffic in your cluster.
+App and API Protection for Kubernetes uses **External Mode**, where a single Application Security processor deployment serves all gateway traffic in your cluster.
 
 ### Architecture
 
 -  **External Processor Deployment**: You deploy a centralized Application Security processor as a Kubernetes Deployment with an associated Service.
--  **Automatic Proxy Detection**: The Injector controller watches for supported proxy resources in your cluster using Kubernetes informers.
--  **Automatic Configuration**: When proxies are detected, the injector creates the necessary configuration:
+-  **Automatic Proxy Detection**: The controller watches for supported proxy resources in your cluster using Kubernetes informers.
+-  **Automatic Configuration**: When proxies are detected, the controller creates the necessary configuration:
    - For Envoy Gateway: Creates `EnvoyExtensionPolicy` resources that reference the external processor service
    - For Istio: Creates `EnvoyFilter` resources in the Istio system namespace
 -  **Traffic Processing**: Gateways route traffic to the external processor via the Kubernetes service for security analysis.
@@ -168,44 +168,74 @@ Apply the manifest:
 kubectl apply -f datadog-aap-extproc-service.yaml
 ```
 
-### Step 2: Configure the Injector
+### Step 2: Enable automatic configuration
 
-Enable the injector and configure it to use your external processor service.
+Enable automatic configuration in the Datadog Cluster Agent and configure it to use your external processor service.
 
-Configure the Gateway Injector using Helm values. Add the following to your `values.yaml`:
+Configure the integration using either Helm or the Datadog Operator.
+
+**Note:** The processor service name (`datadog-aap-extproc-service`) must match the name of the service you deployed in Step 1.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+This option requires Datadog Operator v1.22.0+.
+
+Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your external processor service:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/appsec.injector.enabled: "true"
+    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your external processor service name
+    agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
+spec:
+  # ... your existing DatadogAgent configuration
+```
+
+Apply the configuration:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Configure App and API Protection for Kubernetes using Helm values. Add the following to your `values.yaml`:
 
 ```yaml
 datadog:
   appsec:
     injector:
       enabled: true
-
-      # Enable automatic proxy detection (enabled by default)
-      autoDetect: true
-
-      # External processor configuration (required)
       processor:
         service:
-          name: datadog-aap-extproc-service # Required: name of the processor service
-          namespace: datadog                # Optional: defaults to Cluster Agent namespace
-        port: 443
+          name: datadog-aap-extproc-service  # Required: must match your external processor service name
+          namespace: datadog                 # Must match the namespace where the service is deployed
 ```
 
-Install or upgrade the Datadog Helm chart:
+Install or upgrade the Datadog Helm chart (v3.153+):
 
 ```bash
 helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Step 3: Verify installation
 
-After applying your configuration, verify the injector is running:
+After applying your configuration, verify the Datadog Cluster Agent has started automatic configuration:
 
 ```bash
 kubectl logs -n datadog deployment/datadog-cluster-agent | grep appsec
 ```
 
-Look for log messages indicating the injector has started and detected proxies.
+Look for log messages indicating it has started and detected proxies.
 
 #### Verify proxy configuration
 
@@ -221,7 +251,7 @@ For **Istio**, check that `EnvoyFilter` resources were created:
 kubectl get envoyfilter -n istio-system
 ```
 
-The Injector will produce events for each operation done in the cluster whenever it resulted in failure or success.
+The Datadog Cluster Agent will produce events for each operation done in the cluster whenever it resulted in failure or success.
 
 #### Test traffic processing
 
@@ -233,17 +263,17 @@ Send requests through your gateway and verify they appear in the Datadog App and
 
 ## Configuration reference
 
-### Injector options
+### Automatic configuration options
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `enabled` | Boolean | `false` | Enable or disable the Appsec Injector |
-| `autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
-| `proxies` | Array | `[]` | Manual list of proxy types to configure. Valid values: `"envoy-gateway"`, `"istio"` |
-| `processor.service.name` | String |   | **Required.** Name of the external processor Kubernetes Service |
-| `processor.service.namespace` | String | Cluster Agent namespace | Namespace where the external processor Service is deployed. Defaults to the namespace where the Cluster Agent is running |
-| `processor.address` | String | `{service.name}.{service.namespace}.svc` | (Optional) Full service address override |
-| `processor.port` | Integer | `443` | Port of the external processor service |
+| Helm Parameter | Datadog Operator Annotation | Type | Default | Description |
+|----------------|----------------------------|------|---------|-------------|
+| `enabled` | `agent.datadoghq.com/appsec.injector.enabled` | Boolean | `false` | Enable or disable the integration |
+| `autoDetect` | `agent.datadoghq.com/appsec.injector.autoDetect` | Boolean | `true` | Automatically detect and configure supported proxies |
+| `proxies` | `agent.datadoghq.com/appsec.injector.proxies` | JSON array | `[]` | Manual list of proxy types to configure. Valid values: `["envoy-gateway"]`, `["istio"]` |
+| `processor.service.name` | `agent.datadoghq.com/appsec.injector.processor.service.name` | String |   | **Required.** Name of the external processor Kubernetes Service |
+| `processor.service.namespace` | `agent.datadoghq.com/appsec.injector.processor.service.namespace` | String | Defaults to the namespace where the Cluster Agent is running | Namespace where the external processor Service is deployed |
+| `processor.address` | `agent.datadoghq.com/appsec.injector.processor.address` | String | `{service.name}.{service.namespace}.svc` | Full service address override |
+| `processor.port` | `agent.datadoghq.com/appsec.injector.processor.port` | Integer | `443` | Port of the external processor service |
 
 ### Proxy types
 
@@ -252,7 +282,7 @@ Send requests through your gateway and verify they appear in the Datadog App and
 
 ### Opting out specific resources
 
-You can exclude specific Gateway or GatewayClass resources from automatic Appsec Injector configuration by adding a label:
+You can exclude specific Gateway or GatewayClass resources from automatic configuration by adding a label:
 
 ```yaml
 apiVersion: gateway.networking.k8s.io/v1
@@ -266,18 +296,18 @@ spec:
   # ... gateway configuration
 ```
 
-Resources with the `appsec.datadoghq.com/enabled: "false"` label will be ignored by the injector. This is useful when you want to:
+Resources with the `appsec.datadoghq.com/enabled: "false"` label will be ignored. This is useful when you want to:
 - Manually configure specific gateways
-- Temporarily disable Appsec for testing
+- Temporarily disable App and API Protection for testing
 - Exclude certain gateways from security monitoring
 
 **Note**: By default, all resources are included. Only resources with the label explicitly set to `"false"` are excluded.
 
 ## Troubleshooting
 
-All errors are logs as Kubernetes events. Make sure to check for events on the Gateway or GatewayClass you wish to instrument.
+All errors are logged as Kubernetes events. Make sure to check for events on the Gateway or GatewayClass you wish to instrument.
 
-### Injector not detecting proxies
+### Automatic configuration not detecting proxies
 
 **Symptom**: No `EnvoyExtensionPolicy` or `EnvoyFilter` resources are created.
 
@@ -289,7 +319,7 @@ All errors are logs as Kubernetes events. Make sure to check for events on the G
 
 ### EnvoyExtensionPolicy or EnvoyFilter not created
 
-**Symptom**: Injector is running but configuration resources are missing.
+**Symptom**: The controller is running but configuration resources are missing.
 
 **Solutions**:
 - Check Cluster Agent logs for RBAC permission errors
@@ -347,3 +377,4 @@ All errors are logs as Kubernetes events. Make sure to check for events on the G
 [8]: /security/application_security/setup/compatibility/envoy-gateway
 [9]: /security/application_security/setup/compatibility/istio
 [10]: /security/application_security/setup/kubernetes/
+[11]: /security/application_security/
