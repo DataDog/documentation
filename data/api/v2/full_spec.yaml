@@ -29730,6 +29730,81 @@ components:
       required:
       - errors
       type: object
+    JiraAccountAttributes:
+      description: Attributes of a Jira account
+      properties:
+        consumer_key:
+          description: The consumer key for the Jira account
+          example: consumer-key-1
+          type: string
+        instance_url:
+          description: The URL of the Jira instance
+          example: https://example.atlassian.net
+          type: string
+        last_webhook_timestamp:
+          description: Timestamp of the last webhook received
+          example: '2024-01-15T10:30:00Z'
+          format: date-time
+          type: string
+      required:
+      - consumer_key
+      - instance_url
+      type: object
+    JiraAccountData:
+      description: Data object for a Jira account
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraAccountAttributes'
+        id:
+          description: Unique identifier for the Jira account
+          example: account-1
+          type: string
+        type:
+          $ref: '#/components/schemas/JiraAccountType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraAccountRelationship:
+      description: Relationship to a Jira account
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountData'
+      required:
+      - data
+      type: object
+    JiraAccountType:
+      description: Type identifier for Jira account resources
+      enum:
+      - jira-account
+      example: jira-account
+      type: string
+      x-enum-varnames:
+      - JIRA_ACCOUNT
+    JiraAccountsData:
+      description: Array of Jira account data objects
+      items:
+        $ref: '#/components/schemas/JiraAccountData'
+      type: array
+    JiraAccountsMeta:
+      description: Metadata for Jira accounts response
+      properties:
+        public_key:
+          description: Public key for the Jira integration
+          example: c29tZSBkYXRhIHdpdGggACBhbmQg77u/
+          type: string
+      type: object
+    JiraAccountsResponse:
+      description: Response containing Jira accounts
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraAccountsData'
+        meta:
+          $ref: '#/components/schemas/JiraAccountsMeta'
+      required:
+      - data
+      type: object
     JiraIntegrationMetadata:
       description: Incident integration metadata for the Jira integration.
       properties:
@@ -29794,6 +29869,181 @@ components:
         project_key:
           description: Jira project key
           type: string
+      type: object
+    JiraIssueTemplateCreateRequest:
+      description: Request to create a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestData'
+      type: object
+    JiraIssueTemplateCreateRequestAttributes:
+      description: Attributes for creating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '12730'
+          type: string
+        jira-account:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributesJiraAccount'
+        name:
+          description: The name of the issue template
+          example: test-template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '10772'
+          type: string
+      type: object
+    JiraIssueTemplateCreateRequestAttributesJiraAccount:
+      description: Reference to the Jira account
+      properties:
+        id:
+          description: The ID of the Jira account
+          example: 80f16d40-1fba-486e-b1fc-983e6ca19bec
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    JiraIssueTemplateCreateRequestData:
+      description: Data object for creating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      type: object
+    JiraIssueTemplateData:
+      description: Data object for a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateDataAttributes'
+        id:
+          description: Unique identifier for the Jira issue template
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/JiraIssueTemplateDataRelationships'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplateDataAttributes:
+      description: Attributes of a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Test Description
+              type: json
+          type: object
+        issue_type_id:
+          description: The ID of the Jira issue type
+          example: '456'
+          type: string
+        name:
+          description: The name of the issue template
+          example: Test Template
+          type: string
+        project_id:
+          description: The ID of the Jira project
+          example: '123'
+          type: string
+      required:
+      - name
+      - project_id
+      - issue_type_id
+      - fields
+      type: object
+    JiraIssueTemplateDataRelationships:
+      description: Relationships of a Jira issue template
+      properties:
+        jira-account:
+          $ref: '#/components/schemas/JiraAccountRelationship'
+      required:
+      - jira-account
+      type: object
+    JiraIssueTemplateResponse:
+      description: Response containing a single Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateType:
+      description: Type identifier for Jira issue template resources
+      enum:
+      - jira-issue-template
+      example: jira-issue-template
+      type: string
+      x-enum-varnames:
+      - JIRA_ISSUE_TEMPLATE
+    JiraIssueTemplateUpdateRequest:
+      description: Request to update a Jira issue template
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestData'
+      required:
+      - data
+      type: object
+    JiraIssueTemplateUpdateRequestAttributes:
+      description: Attributes for updating a Jira issue template
+      properties:
+        fields:
+          additionalProperties: {}
+          description: Custom fields for the Jira issue template
+          example:
+            description:
+              payload: Updated Description
+              type: json
+          type: object
+        name:
+          description: The name of the issue template
+          example: test_template_updated
+          type: string
+      type: object
+    JiraIssueTemplateUpdateRequestData:
+      description: Data object for updating a Jira issue template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/JiraIssueTemplateUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/JiraIssueTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    JiraIssueTemplatesData:
+      description: Array of Jira issue template data objects
+      items:
+        $ref: '#/components/schemas/JiraIssueTemplateData'
+      type: array
+    JiraIssueTemplatesResponse:
+      description: Response containing Jira issue templates
+      properties:
+        data:
+          $ref: '#/components/schemas/JiraIssueTemplatesData'
+        included:
+          $ref: '#/components/schemas/JiraAccountsData'
+      required:
+      - data
       type: object
     JiraIssuesDataType:
       default: jira_issues
@@ -36555,6 +36805,18 @@ components:
           items:
             type: string
           type: array
+        routes:
+          description: A list of routing rules that forward matching logs to Datadog
+            using dedicated API keys.
+          example:
+          - api_key_key: API_KEY_IDENTIFIER
+            include: service:api
+            route_id: datadog-logs-route-us1
+            site: us1
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationRoute'
+          maxItems: 100
+          type: array
         type:
           $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationType'
       required:
@@ -36564,6 +36826,29 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineDatadogLogsDestinationRoute:
+      description: Defines how the `datadog_logs` destination routes matching logs
+        to a Datadog site using a specific API key.
+      properties:
+        api_key_key:
+          description: Name of the environment variable or secret that stores the
+            Datadog API key used by this route.
+          example: API_KEY_IDENTIFIER
+          type: string
+        include:
+          description: A Datadog search query that determines which logs are forwarded
+            using this route.
+          example: service:api
+          type: string
+        route_id:
+          description: Unique identifier for this route within the destination.
+          example: datadog-logs-route-us
+          type: string
+        site:
+          description: Datadog site where matching logs are sent (for example, `us1`).
+          example: us1
+          type: string
+      type: object
     ObservabilityPipelineDatadogLogsDestinationType:
       default: datadog_logs
       description: The destination type. The value should always be `datadog_logs`.
@@ -48863,6 +49148,263 @@ components:
       type: string
       x-enum-varnames:
       - SECRET_RULE
+    SecurityEntityConfigRisks:
+      description: Configuration risks associated with the entity
+      properties:
+        hasIdentityRisk:
+          description: Whether the entity has identity risks
+          example: false
+          type: boolean
+        hasMisconfiguration:
+          description: Whether the entity has misconfigurations
+          example: true
+          type: boolean
+        hasPrivilegedRole:
+          description: Whether the entity has privileged roles
+          example: true
+          type: boolean
+        isPrivileged:
+          description: Whether the entity has privileged access
+          example: false
+          type: boolean
+        isProduction:
+          description: Whether the entity is in a production environment
+          example: true
+          type: boolean
+        isPubliclyAccessible:
+          description: Whether the entity is publicly accessible
+          example: true
+          type: boolean
+      required:
+      - hasMisconfiguration
+      - hasIdentityRisk
+      - isPubliclyAccessible
+      - isProduction
+      - hasPrivilegedRole
+      - isPrivileged
+      type: object
+    SecurityEntityMetadata:
+      description: Metadata about the entity from cloud providers
+      properties:
+        accountID:
+          description: Cloud account ID (AWS)
+          example: '123456789012'
+          type: string
+        environments:
+          description: Environment tags associated with the entity
+          example:
+          - production
+          - us-east-1
+          items:
+            type: string
+          type: array
+        mitreTactics:
+          description: MITRE ATT&CK tactics detected
+          example:
+          - Credential Access
+          - Privilege Escalation
+          items:
+            type: string
+          type: array
+        mitreTechniques:
+          description: MITRE ATT&CK techniques detected
+          example:
+          - T1078
+          - T1098
+          items:
+            type: string
+          type: array
+        projectID:
+          description: Cloud project ID (GCP)
+          example: my-gcp-project
+          type: string
+        services:
+          description: Services associated with the entity
+          example:
+          - api-gateway
+          - lambda
+          items:
+            type: string
+          type: array
+        sources:
+          description: Data sources that detected this entity
+          example:
+          - cloudtrail
+          - cloud-security-posture-management
+          items:
+            type: string
+          type: array
+        subscriptionID:
+          description: Cloud subscription ID (Azure)
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          type: string
+      required:
+      - sources
+      - environments
+      - services
+      - mitreTactics
+      - mitreTechniques
+      type: object
+    SecurityEntityRiskScore:
+      description: An entity risk score containing security risk assessment information
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityEntityRiskScoreAttributes'
+        id:
+          description: Unique identifier for the entity
+          example: arn:aws:iam::123456789012:user/john.doe
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityEntityRiskScoreType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityEntityRiskScoreAttributes:
+      description: Attributes of an entity risk score
+      properties:
+        configRisks:
+          $ref: '#/components/schemas/SecurityEntityConfigRisks'
+        entityID:
+          description: Unique identifier for the entity
+          example: arn:aws:iam::123456789012:user/john.doe
+          type: string
+        entityMetadata:
+          $ref: '#/components/schemas/SecurityEntityMetadata'
+        entityName:
+          description: Human-readable name of the entity
+          example: john.doe
+          type: string
+        entityProviders:
+          description: Cloud providers associated with the entity
+          example:
+          - aws
+          items:
+            type: string
+          type: array
+        entityRoles:
+          description: Roles associated with the entity
+          example:
+          - Admin
+          - Developer
+          items:
+            type: string
+          type: array
+        entityType:
+          description: Type of the entity (e.g., aws_iam_user, aws_ec2_instance)
+          example: aws_iam_user
+          type: string
+        firstDetected:
+          description: Timestamp when the entity was first detected (Unix milliseconds)
+          example: 1704067200000
+          format: int64
+          type: integer
+        lastActivityTitle:
+          description: Title of the most recent signal detected for this entity
+          example: Suspicious API call detected
+          type: string
+        lastDetected:
+          description: Timestamp when the entity was last detected (Unix milliseconds)
+          example: 1705276800000
+          format: int64
+          type: integer
+        riskScore:
+          description: Current risk score for the entity
+          example: 85.5
+          format: double
+          type: number
+        riskScoreEvolution:
+          description: Change in risk score compared to previous period
+          example: 12.3
+          format: double
+          type: number
+        severity:
+          $ref: '#/components/schemas/SecurityEntityRiskScoreAttributesSeverity'
+        signalsDetected:
+          description: Number of security signals detected for this entity
+          example: 15
+          format: int64
+          type: integer
+      required:
+      - entityID
+      - entityType
+      - entityProviders
+      - riskScore
+      - riskScoreEvolution
+      - severity
+      - firstDetected
+      - lastDetected
+      - lastActivityTitle
+      - signalsDetected
+      - configRisks
+      - entityMetadata
+      type: object
+    SecurityEntityRiskScoreAttributesSeverity:
+      description: Severity level based on risk score
+      enum:
+      - critical
+      - high
+      - medium
+      - low
+      - info
+      example: critical
+      type: string
+      x-enum-varnames:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFO
+    SecurityEntityRiskScoreType:
+      description: Resource type
+      enum:
+      - security_entity_risk_score
+      example: security_entity_risk_score
+      type: string
+      x-enum-varnames:
+      - SECURITY_ENTITY_RISK_SCORE
+    SecurityEntityRiskScoresMeta:
+      description: Metadata for pagination
+      properties:
+        pageNumber:
+          description: Current page number (1-indexed)
+          example: 1
+          format: int64
+          type: integer
+        pageSize:
+          description: Number of items per page
+          example: 10
+          format: int64
+          type: integer
+        queryId:
+          description: Query ID for pagination consistency
+          example: abc123def456
+          type: string
+        totalRowCount:
+          description: Total number of entities matching the query
+          example: 150
+          format: int64
+          type: integer
+      required:
+      - queryId
+      - totalRowCount
+      - pageSize
+      - pageNumber
+      type: object
+    SecurityEntityRiskScoresResponse:
+      description: Response containing a list of entity risk scores
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SecurityEntityRiskScore'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SecurityEntityRiskScoresMeta'
+      required:
+      - data
+      - meta
+      type: object
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -49489,6 +50031,18 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/ResponseMetaAttributes'
+      type: object
+    SecurityMonitoringPaginatedSuppressionsResponse:
+      description: Response object containing the available suppression rules with
+        pagination metadata.
+      properties:
+        data:
+          description: A list of suppressions objects.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSuppression'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsMeta'
       type: object
     SecurityMonitoringReferenceTable:
       description: Reference tables used in the queries.
@@ -51639,6 +52193,31 @@ components:
         data:
           $ref: '#/components/schemas/SecurityMonitoringSuppression'
       type: object
+    SecurityMonitoringSuppressionSort:
+      description: The sort parameters used for querying suppression rules.
+      enum:
+      - name
+      - start_date
+      - expiration_date
+      - update_date
+      - enabled
+      - -name
+      - -start_date
+      - -expiration_date
+      - -update_date
+      - -enabled
+      type: string
+      x-enum-varnames:
+      - NAME
+      - START_DATE
+      - EXPIRATION_DATE
+      - UPDATE_DATE
+      - ENABLED
+      - NAME_DESCENDING
+      - START_DATE_DESCENDING
+      - EXPIRATION_DATE_DESCENDING
+      - UPDATE_DATE_DESCENDING
+      - ENABLED_DESCENDING
     SecurityMonitoringSuppressionType:
       default: suppressions
       description: The type of the resource. The value should always be `suppressions`.
@@ -51733,6 +52312,31 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
       required:
       - data
+      type: object
+    SecurityMonitoringSuppressionsMeta:
+      description: Metadata for the suppression list response.
+      properties:
+        page:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionsPageMeta'
+      type: object
+    SecurityMonitoringSuppressionsPageMeta:
+      description: Pagination metadata.
+      properties:
+        pageNumber:
+          description: Current page number.
+          example: 0
+          format: int64
+          type: integer
+        pageSize:
+          description: Current page size.
+          example: 2
+          format: int64
+          type: integer
+        totalCount:
+          description: Total count of suppressions.
+          example: 2
+          format: int64
+          type: integer
       type: object
     SecurityMonitoringSuppressionsResponse:
       description: Response object containing the available suppression rules.
@@ -73259,6 +73863,220 @@ paths:
         operator: OR
         permissions:
         - gcp_configuration_edit
+  /api/v2/integration/jira/accounts:
+    get:
+      description: Get all Jira accounts for the organization.
+      operationId: ListJiraAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraAccountsResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira accounts
+      tags:
+      - Jira Integration
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/accounts/{account_id}:
+    delete:
+      description: Delete a Jira account by ID.
+      operationId: DeleteJiraAccount
+      parameters:
+      - description: The ID of the Jira account to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: account_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira account
+      tags:
+      - Jira Integration
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates:
+    get:
+      description: Get all Jira issue templates for the organization.
+      operationId: ListJiraIssueTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplatesResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Jira issue templates
+      tags:
+      - Jira Integration
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new Jira issue template.
+      operationId: CreateJiraIssueTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/jira/issue-templates/{issue_template_id}:
+    delete:
+      description: Delete a Jira issue template by ID.
+      operationId: DeleteJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a Jira issue template by ID.
+      operationId: GetJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to retrieve
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a Jira issue template by ID.
+      operationId: UpdateJiraIssueTemplate
+      parameters:
+      - description: The ID of the Jira issue template to update
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: issue_template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JiraIssueTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JiraIssueTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Jira issue template
+      tags:
+      - Jira Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/ms-teams/configuration/channel/{tenant_name}/{team_name}/{channel_name}:
     get:
       description: Get the tenant, team, and channel ID of a channel in the Datadog
@@ -79104,8 +79922,10 @@ paths:
         schema:
           example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
           type: string
-      - description: Retrieves the on-call user at the given timestamp (ISO-8601).
-          Defaults to the current time if omitted."
+      - description: Retrieves the on-call user at the given timestamp in RFC3339
+          format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`).
+          When using timezone offsets with `+` or `-`, ensure proper URL encoding
+          (`+` should be encoded as `%2B`). Defaults to the current time if omitted.
         in: query
         name: filter[at_ts]
         schema:
@@ -84665,6 +85485,125 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security-entities/risk-scores:
+    get:
+      description: Get a list of entity risk scores for your organization. Entity
+        risk scores provide security risk assessment for entities like cloud resources,
+        identities, or services based on detected signals, misconfigurations, and
+        identity risks.
+      operationId: ListEntityRiskScores
+      parameters:
+      - description: Start time for the query in Unix timestamp (milliseconds). Defaults
+          to 2 weeks ago.
+        in: query
+        name: from
+        required: false
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: End time for the query in Unix timestamp (milliseconds). Defaults
+          to now.
+        in: query
+        name: to
+        required: false
+        schema:
+          example: 1705276800000
+          format: int64
+          type: integer
+      - description: Size of the page to return. Maximum is 1000.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 10
+          example: 10
+          type: integer
+      - description: Page number to return (1-indexed).
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          default: 1
+          example: 1
+          type: integer
+      - description: Query ID for pagination consistency.
+        in: query
+        name: page[queryId]
+        required: false
+        schema:
+          example: abc123def456
+          type: string
+      - description: 'Sort order for results. Format: `field:direction` where direction
+          is `asc` or `desc`.
+
+          Supported fields: `riskScore`, `lastDetected`, `firstDetected`, `entityName`,
+          `signalsDetected`.'
+        in: query
+        name: filter[sort]
+        required: false
+        schema:
+          example: riskScore:desc
+          type: string
+      - description: 'Supports filtering by entity attributes, risk scores, severity,
+          and more.
+
+          Example: `severity:critical AND entityType:aws_iam_user`'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          example: severity:critical
+          type: string
+      - description: Filter by entity type(s). Can specify multiple values.
+        explode: true
+        in: query
+        name: entityType
+        required: false
+        schema:
+          example:
+          - aws_iam_user
+          - aws_ec2_instance
+          items:
+            example: aws_iam_user
+            type: string
+          type: array
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityEntityRiskScoresResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Entity Risk Scores
+      tags:
+      - Entity Risk Scores
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Workload Protection policy file
@@ -86877,12 +87816,29 @@ paths:
         required: false
         schema:
           type: string
+      - description: Attribute used to sort the list of suppression rules. Prefix
+          with `-` to sort in descending order.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionSort'
+      - description: Size for a given page. Use `-1` to return all items.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: -1
+          example: 10
+          format: int64
+          type: integer
+      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+                $ref: '#/components/schemas/SecurityMonitoringPaginatedSuppressionsResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -93849,6 +94805,8 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
+- description: Retrieves security risk scores for entities in your organization.
+  name: Entity Risk Scores
 - description: View and manage issues within Error Tracking. See the [Error Tracking
     page](https://docs.datadoghq.com/error_tracking/) for more information.
   name: Error Tracking
@@ -93919,6 +94877,9 @@ tags:
     and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
     for more information.
   name: Incidents
+- description: Manage your Jira Integration. Atlassian Jira is a project management
+    and issue tracking tool for teams to coordinate work and handle tasks efficiently.
+  name: Jira Integration
 - description: 'Manage your Datadog API and application keys. You need an API key
     and an
 

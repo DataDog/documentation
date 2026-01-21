@@ -1367,6 +1367,38 @@
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
   },
+  "ListJiraAccounts": {
+    "description": "Get all Jira accounts for the organization.",
+    "summary": "List Jira accounts"
+  },
+  "DeleteJiraAccount": {
+    "description": "Delete a Jira account by ID.",
+    "summary": "Delete Jira account"
+  },
+  "ListJiraIssueTemplates": {
+    "description": "Get all Jira issue templates for the organization.",
+    "summary": "List Jira issue templates"
+  },
+  "CreateJiraIssueTemplate": {
+    "description": "Create a new Jira issue template.",
+    "summary": "Create Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to create a Jira issue template"
+  },
+  "DeleteJiraIssueTemplate": {
+    "description": "Delete a Jira issue template by ID.",
+    "summary": "Delete Jira issue template"
+  },
+  "GetJiraIssueTemplate": {
+    "description": "Get a Jira issue template by ID.",
+    "summary": "Get Jira issue template"
+  },
+  "UpdateJiraIssueTemplate": {
+    "description": "Update a Jira issue template by ID.",
+    "summary": "Update Jira issue template",
+    "request_description": "",
+    "request_schema_description": "Request to update a Jira issue template"
+  },
   "GetChannelByName": {
     "description": "Get the tenant, team, and channel ID of a channel in the Datadog Microsoft Teams integration.",
     "summary": "Get channel information by name"
@@ -2670,6 +2702,10 @@
     "summary": "Update an existing rule",
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
+  },
+  "ListEntityRiskScores": {
+    "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",
+    "summary": "List Entity Risk Scores"
   },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "The download endpoint generates a Workload Protection policy file from your currently active\nWorkload Protection agent rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour agents to update the policy running in your environment.\n\n**Note**: This endpoint should only be used for the Government (US1-FED) site.",
