@@ -14,16 +14,16 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources/" header="Advanced Data Sources">}}
-If you want to query data sources not yet available, use this form to submit your request. For a full list of supported data sources, see the <a href="/ddsql_reference/data_directory/">Data Directory</a>.
+If you want to query data sources not yet available, use the following form to submit your request. For a full list of supported data sources, see the <a href="/ddsql_reference/data_directory/">Data Directory</a>.
 {{< /callout >}}
 
 ## Overview
 
 With [DDSQL Editor][1], you can get deeper visibility into your telemetry by querying your resources with natural language or with [DDSQL](#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags.
 
-You can also export the results of a SQL query to visualize in a Dashboard/Notebook or automate in a Datadog Workflow through [DDSQL Action](#save-and-share-queries).
+You can also export the results of a SQL query to visualize in a Dashboard or Notebook or to automate in a Datadog Workflow through [DDSQL Action](#save-and-share-queries).
 
-{{< img src="/ddsql_editor/query-results-cloud-provider-host-count.png" alt="The result of a SQL query showing cloud provider host count on the DDSQL page in Datadog" style="width:100%;" >}}
+{{< img src="/ddsql_editor/query-results-avg-cpu-usage-by-host.png" alt="The result of a SQL query showing average CPU usage by host on the DDSQL page in Datadog" style="width:100%;" >}}
 
 ## Query in natural language
 
@@ -56,15 +56,15 @@ For data sources such as Logs, use the query builder to generate table functions
 
 Save useful queries for future reference or download the data as CSV. Browse and re-run recent or saved queries in the side panel.
 
-{{< img src="/ddsql_editor/save_export.png" alt="DDSQL Editor interface showing query results with save and export options highlighted" style="width:90%;" >}}
+{{< img src="/ddsql_editor/save-and-actions.png" alt="DDSQL Editor interface showing query results with save and actions downdown highlighted" style="width:90%;" >}}
 
 Export the results of a saved query to:
 - A Dashboard or Notebook for visualization and reporting
-- Automate using a [DDSQL Action](https://app.datadoghq.com/actions/action-catalog#com.datadoghq.dd/com.datadoghq.dd.ddsql/com.datadoghq.dd.ddsql.tableQuery) in a Datadog Workflow, which you can
+- Automate using a [DDSQL Action](https://app.datadoghq.com/actions/action-catalog#com.datadoghq.dd/com.datadoghq.dd.ddsql/com.datadoghq.dd.ddsql.tableQuery) in a Datadog Workflow, with which you can:
   - [Create a custom metric from a DDSQL query](https://app.datadoghq.com/workflow/blueprints/create-a-metric-from-a-ddsql-query)
   - [Programmatically export the results of a DDSQL query](https://app.datadoghq.com/workflow/blueprints/export-ebs-volumes-not-in-ddsql-as-s3-csv)
   - [Schedule a Slack message for checking compliance of resources](https://app.datadoghq.com/workflow/blueprints/idle-compute-check-via-ddsql-with-slack-updates)
-- Alert on a DDSQL query in Preview (Logs, Metrics, RUM, Spans, Product Analytics only) - contact support for access
+- Alert on a DDSQL query in Preview (Logs, Metrics, RUM, Spans, and Product Analytics only; [contact support][8] for access)
 
 {{< img src="/ddsql_editor/queries-tab-recent-queries.png" alt="Side panel showing the Queries tab with a list of saved and recent queries in the DDSQL Editor" style="width:70%;" >}}
 
@@ -83,3 +83,4 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 [5]: /help/
 [6]: /ddsql_reference/ddsql_default/
 [7]: https://docs.datadoghq.com/ddsql_editor/#save-and-share-queries
+[8]: /help/
