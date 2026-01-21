@@ -103,16 +103,8 @@ You can add components to your status page either on intial setup or through the
 
 ### Component hierarchy
 
-If there are multiple notices that affect the same component, the worst severity takes precedent.
-
-| Status         | Severity (least to greatest) |
-|----------------|------------------------------|
-| Operational    | 0                            |
-| Maintenance    | 1                            |
-| Degraded       | 2                            |
-| Partial Outage | 3                            |
-| Major Outage   | 4                            |
-
+If multiple notices affect the same component, the notice with the greatest impact takes precedence:
+Major Outage > Partial Outage > Degraded Performance > Maintenance > Operational
 
 ## Publish your status page
 
@@ -124,47 +116,55 @@ If you selected:
 
 ## Add a notice
 
-Notices on Status Pages are carefully crafted messages posted to a public website to communicate system status. When an issue arises, you can communicate it clearly through your status page.
+Notices are messages published to a status page to communicate system status. Status Pages support two types of notices: **degradations** for unplanned service impact and **maintenance windows** for planned downtime.
 
-From a status page, click **Publish Notice** to open a "Publish Notice" modal and provide:
-   | Field | Description |
-   | ---- | ---- |
-| **Notice Type** | Type of notice: <br>- **Degradation**: For unplanned issues or incidents affecting service <br>- **Scheduled Maintenance**: For planned maintenance windows or updates. See [Schedule maintenance windows](#schedule-maintenance-windows). |
-| **Notice Title** | Short, clear description of the incident <br>*Example: Increased error rates on US region* |
-   | **Status** | Current state of the incident: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
-   | **Message** | Additional details for your users <br>*Examples: known cause, expected resolution time* |
-   | **Components impacted** | One or more components impacted by the incident |
-   | **Impact** | Level of impact per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
-   | **Notify Subscribers** | Toggle to send the notice to subscribers |
 
-After a notice is reviewed and published, the notice:
-- Appears on the Status Pages List under **Active Notices**.
+### Publish a degradation
+
+Degradation notices communicate **unplanned service impact**, such as incidents or service disruptions. Use degradation notices to keep users informed as an issue is investigated, mitigated, and resolved.
+
+From a status page, click **Publish Notice** and select **Degradation**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Short, clear description of the issue <br>*Example: Increased error rates in US region* |
+| **Status** | Current state of the issue: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
+| **Message** | Additional details for your users, such as known cause or next steps <br>*Examples: known cause, expected resolution time*|
+| **Components impacted** | One or more components affected by the degradation |
+| **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
+| **Notify subscribers** | Toggle to send updates to subscribed users |
+
+After a degradation notice is reviewed and published, it:
+- Appears on the **Status Pages List** under Active Notices.
 - Updates the uptime bars for impacted components.
 - Is visible in the notice history timeline.
 
-You can post **updates** over time to keep users informed, and then mark the notice as **Resolved**.
+You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
 
-## Schedule maintenance windows
+### Schedule a maintenance window
 <!-- Image placeholder
 {{< img src="#" alt="Status page showing a scheduled maintenance window for upcoming infrastructure work" style="width:100%;" >}}-->
 
 Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degredations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. Proactively communicate scheduled downtime so you can keep your customers informed and lessen the load on the support team.
 
-### Publish a maintenance window
+1. From the status page, click **Schedule Maintenance**, or click **Publish Notice** and select **Scheduled Maintenance**.
+1. Provide the following details:
 
-1. From the "Scheduled Maintenance" tab of status page, click **Schedule Maintenance** to open the maintenance window modal. You can also schedule a maintenance window with the **Publish Notice** button.
-1. Under **Notice type**, select the "Scheduled Maintenance" tab and provide:
-   | Field | Description |
-   | ---- | ---- |
-   | **Title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
-   | **Maintenance window** | Scheduled time range for the maintenance window, including start and end times |
-   | **Messages** | Set the messages that you want to automatically publish for each status update |
-   | **Components impacted** | One or more components that will be affected during maintenance |
-   | **Impact** | Default impact per component during a maintenance window: <br>- Maintenance <br>|
-   | **Notify Subscribers** | Toggle to send advance notification to subscribers |
-1. Click **Review Notice** and then **Publish Notice**.
+| Field | Description |
+| ---- | ---- |
+| **Title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+| **Maintenance window** | Scheduled start and end time for the maintenance |
+| **Messages** | Messages that are automatically published as the window progresses |
+| **Components impacted** | Components affected during the maintenance window |
+| **Impact** | Default component status during maintenance: <br>- Maintenance |
+| **Notify subscribers** | Toggle to send advance notification to subscribers |
 
-After scheduling, the maintenance window appears on the status page under "Upcoming Maintenance" with the scheduled time range. When the window begins, component status automatically updates to "Maintenance" and returns to "Operational" when it ends (unless manually overridden). You can post updates if plans change or reschedule the window.
+After reviewing and scheduling, the maintenance window:
+- Appears under **Upcoming Maintenance** on the status page
+- Automatically updates component status to **Maintenance** when the window begins
+- Returns components to **Operational** when the window ends (unless manually overridden)
+
+You can post updates if plans change or reschedule the maintenance window as needed.
 
 ## Email subscriptions
 
