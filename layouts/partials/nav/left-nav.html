@@ -40,7 +40,7 @@
                         <span>{{ .Name }}</span>
                         </div>
                     </a>
-                    <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types")) }} d-none {{ end }}">
+                    <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types") (eq .Name "Monitor Types")) }} d-none {{ end }}">
                         {{/*  LEVEL 2  */}}
                         {{ range .Children }}
                             <li class="{{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }} {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
@@ -53,7 +53,7 @@
                                     <span>{{ .Name }}</span>
                                 </a>
                             {{ if .HasChildren }}
-                                <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types")) }} d-none {{ end }}">
+                                <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types") (eq .Name "Monitor Types")) }} d-none {{ end }}">
                                 {{/*  LEVEL 3  */}}
                                 {{ range .Children }}
                                     <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
