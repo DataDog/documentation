@@ -83,6 +83,7 @@ An _experiment_ lets you systematically test your LLM application by running you
    - **Boolean**: returns true or false
    - **score**: returns a numeric value (float)
    - **categorical**: returns a labeled category (string)
+   - **EvaluatorResult**: returns a composite class to capture `reasoning`, `assessment` and `tags` in addition to the evaluation `value`
 
 - **summary evaluators**: Optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
 
@@ -136,6 +137,16 @@ To create an experiment:
    def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
        fake_llm_call = "excellent"
        return fake_llm_call
+
+   def detailed_fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
+       fake_llm_call = "excellent"
+       fake_llm_reasoning = "the model explains itself"
+       return EvaluatorResult(
+           value=fake_llm_call,
+           reasoning=fake_llm_reasoning,
+           assessment="pass", # or fail
+           tags={"task": "judge_llm_call"},
+       )
    ```
    Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
    Evaluators can only return a string, a number, or a Boolean.
@@ -156,7 +167,7 @@ To create an experiment:
        name="capital-cities-test",
        task=task,
        dataset=dataset,
-       evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+       evaluators=[exact_match, overlap, fake_llm_as_a_judge, detailed_fake_llm_as_a_judge],
        summary_evaluators=[num_exact_matches], # optional
        description="Testing capital cities knowledge",
        config={
@@ -208,6 +219,7 @@ This section assumes you have completed the [setup](#setup), [projects](#create-
 
 ```python
 from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs._experiment import EvaluatorResult
 from typing import Dict, Any, Optional, List
 
 LLMObs.enable(
@@ -271,6 +283,17 @@ def fake_llm_as_a_judge(
     return fake_llm_call
 
 
+def detailed_fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
+       fake_llm_call = "excellent"
+       fake_llm_reasoning = "the model explains itself"
+       return EvaluatorResult(
+           value=fake_llm_call,
+           reasoning=fake_llm_reasoning,
+           assessment="pass", # or fail
+           tags={"task": "judge_llm_call"},
+       )
+
+
 def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
     return evaluators_results["exact_match"].count(True)
 
@@ -279,7 +302,7 @@ experiment = LLMObs.experiment(
     name="capital-cities-test",
     task=task,
     dataset=dataset,
-    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
+    evaluators=[exact_match, overlap, fake_llm_as_a_judge, detailed_fake_llm_as_a_judge],
     summary_evaluators=[num_exact_matches],  # optional
     description="Testing capital cities knowledge",
     config={"model_name": "gpt-4", "version": "1.0"},
