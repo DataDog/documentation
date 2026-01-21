@@ -49,6 +49,8 @@ Datadog Cloud Network Monitoring (CNM) gives you visibility into your network tr
 * Identify outages of cloud provider regions and third-party tools
 * Troubleshoot client-side and server-side DNS server issues
 
+<div class="alert alert-info"><a href="/network_monitoring/network_path/">Network Path</a> can use CNM data to automatically discover and monitor network paths based on actual traffic. See <a href="/network_monitoring/network_path/setup/#dynamic-tests-preview">Dynamic tests</a> to get started.</div>
+
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
     {{< nextlink href="network_monitoring/cloud_network_monitoring/network_health" >}}<u>Network Health</u>: Review the health of your network environment.{{< /nextlink >}}
