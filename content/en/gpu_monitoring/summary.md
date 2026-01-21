@@ -23,13 +23,13 @@ Click on the section titles below to access the corresponding section:
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
 
-## Usage across Fleet
+## Usage across Fleet
 
 Operational efficiency is a key driver of overall cost. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
 
 ### GPU fleet funnel visualization
 
-This visualization provides a breakdown of your entire GPU fleet across multiple cloud providers, showing all your Kubernetes clusters, hosts, and GPU devices.
+This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
 The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
 
