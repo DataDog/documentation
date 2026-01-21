@@ -83,7 +83,9 @@ An _experiment_ lets you systematically test your LLM application by running you
    - **Boolean**: returns true or false
    - **score**: returns a numeric value (float)
    - **categorical**: returns a labeled category (string)
-   - **EvaluatorResult**: returns a composite class to capture `reasoning`, `assessment` and `tags` in addition to the evaluation `value`
+
+   Additionally, you can also return an `EvaluatorResult` to capture more aspects of the evaluation, such as `reasoning` (`str`), `assessment` (`"pass"` or `"fail"`)
+   and `tags` (`Dict[str, str]`). The `value` field of the EvaluatorResult captures the final evaluation result, and works the same way as the simple use case specified above.
 
 - **summary evaluators**: Optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
 
