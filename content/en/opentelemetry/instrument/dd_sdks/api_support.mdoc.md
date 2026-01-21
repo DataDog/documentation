@@ -53,12 +53,12 @@ further_reading:
 {% if or(equals($prog_lang, "go"), equals($prog_lang, "php"), equals($prog_lang, "java"), equals($prog_lang, "rust")) %}
 {% if equals($platform, "metrics") %}
 {% alert level="danger" %}
-OpenTelemetry API support for metrics is not available for this language. Select **Traces** to see available instrumentation options.
+OpenTelemetry API support for metrics is not available for this language. Use [DogStatsD][200] to send custom metrics instead.
 {% /alert %}
 {% /if %}
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
-OpenTelemetry API support for logs is not available for this language. Select **Traces** to see available instrumentation options.
+OpenTelemetry API support for logs is not available for this language. Use [Datadog log collection with trace correlation][210] instead.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -67,18 +67,10 @@ OpenTelemetry API support for logs is not available for this language. Select **
 {% if equals($prog_lang, "ruby") %}
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
-OpenTelemetry API support for logs is not available for Ruby. Select **Traces** or **Metrics** to see available instrumentation options.
+OpenTelemetry API support for logs is not available for Ruby. Use [Datadog log collection with trace correlation][210] instead.
 {% /alert %}
 {% /if %}
 {% /if %}
-
-Datadog SDKs implement the [OpenTelemetry API][1], allowing you to instrument your code with vendor-neutral APIs while benefiting from Datadog's native implementation and features. Your code remains free of vendor-specific calls and doesn't depend on Datadog SDKs at compile time.
-
-{% img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" /%}
-
-{% alert level="info" %}
-You can also send OTel-instrumented data via the [OTel Collector][7]. See the [feature compatibility table][8] for supported Datadog features.
-{% /alert %}
 
 <!-- ============================================== -->
 <!-- TRACES CONTENT -->
@@ -855,11 +847,6 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 <!-- GLOBAL LINK REFERENCES -->
 <!-- ============================================== -->
 
-[1]: https://opentelemetry.io/docs/specs/otel/trace/api/
-[2]: /tracing/trace_collection/otel_instrumentation/
-[7]: /opentelemetry/setup/collector_exporter/
-[8]: /opentelemetry/compatibility/#feature-compatibility
-
 <!-- Java traces -->
 [100]: /tracing/setup/java/
 [101]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
@@ -910,6 +897,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 [204]: /opentelemetry/config/environment_variable_support
 [205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
 [206]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics
+[210]: /tracing/other_telemetry/connect_logs_and_traces/
 
 <!-- .NET logs -->
 [301]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.31.0
