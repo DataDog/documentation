@@ -17,15 +17,20 @@ further_reading:
 
 ## Overview
 
-This page explains how Datadog calculates each of the four key DORA metrics.
+This page explains how Datadog calculates each of the four key DORA metrics:
+
+- [Deployment frequency](#deployment-frequency)
+- [Change lead time](#change-lead-time)
+- [Change failure rate](#change-failure-rate)
+- [Failed deployment recovery time](#failed-deployment-recovery-time)
 
 ## Deployment frequency
 
-Deployment frequency is calculated based on the count of deployment events over a specific time frame.
+Deployment frequency measures how often an organization successfully releases to production. It is calculated based on the count of deployment events over a specific time frame.
 
 ## Change lead time
 
-For a single Git commit, change lead time (CLT) is calculated as the time from the commit's creation to when the deployment including that commit was executed.
+Change lead time measures how long it takes a commit to get into production. For a single Git commit, change lead time (CLT) is calculated as the time from the commit's creation to when the deployment including that commit was executed.
 
 To calculate a deployment's change lead time, Datadog runs a `git log` between the deployment's commit SHA and the previous deployment's commit SHA to find all the commits being deployed. Then, it aggregates the related change lead time values for all these commits. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
 
@@ -91,7 +96,7 @@ Datadog breaks down change lead time into the following fields, which represent 
 
 ## Change failure rate
 
-The change failure rate, the percentage of deployments causing a failure in production, is calculated as:
+Change failure rate measures the percentage of deployments causing a failure in production. It is calculated as:
 
  $$\text"Change Failure Rate" = \text"Number of change failures" / \text"Number of total deployments"$$
 
@@ -104,7 +109,7 @@ A deployment is marked as a change failure through the detection of rollbacks an
 
 ## Failed deployment recovery time
 
-Failed deployment recovery time is calculated as the duration between the change that resulted in degraded service and its remediation, either through a rollback or rollforward deployment.
+Failed deployment recovery time measures how long it takes to recover from a failure in production. It is calculated as the duration between the change that resulted in degraded service and its remediation, either through a rollback or rollforward deployment.
 
 ### Limitations
 
