@@ -25936,6 +25936,171 @@ components:
       - type
       - value
       type: object
+    HamrOrgConnectionAttributesRequest:
+      properties:
+        hamr_status:
+          $ref: '#/components/schemas/HamrOrgConnectionStatus'
+        is_primary:
+          description: 'Indicates whether this organization is the primary organization
+            in the HAMR relationship.
+
+            If true, this is the primary organization. If false, this is the secondary/backup
+            organization.'
+          example: true
+          type: boolean
+        modified_by:
+          description: Username or identifier of the user who last modified this HAMR
+            connection.
+          example: admin@example.com
+          type: string
+        target_org_datacenter:
+          description: Datacenter location of the target organization (e.g., us1,
+            eu1, us5).
+          example: us1
+          type: string
+        target_org_name:
+          description: Name of the target organization in the HAMR relationship.
+          example: Production Backup Org
+          type: string
+        target_org_uuid:
+          description: UUID of the target organization in the HAMR relationship.
+          example: 660f9511-f3ac-52e5-b827-557766551111
+          type: string
+      required:
+      - target_org_uuid
+      - target_org_name
+      - target_org_datacenter
+      - hamr_status
+      - is_primary
+      - modified_by
+      type: object
+    HamrOrgConnectionAttributesResponse:
+      properties:
+        hamr_status:
+          $ref: '#/components/schemas/HamrOrgConnectionStatus'
+        is_primary:
+          description: 'Indicates whether this organization is the primary organization
+            in the HAMR relationship.
+
+            If true, this is the primary organization. If false, this is the secondary/backup
+            organization.'
+          example: true
+          type: boolean
+        modified_at:
+          description: Timestamp of when this HAMR connection was last modified (RFC3339
+            format).
+          example: '2026-01-13T17:26:48.830968Z'
+          type: string
+        modified_by:
+          description: Username or identifier of the user who last modified this HAMR
+            connection.
+          example: admin@example.com
+          type: string
+        target_org_datacenter:
+          description: Datacenter location of the target organization (e.g., us1,
+            eu1, us5).
+          example: us1
+          type: string
+        target_org_name:
+          description: Name of the target organization in the HAMR relationship.
+          example: Production Backup Org
+          type: string
+        target_org_uuid:
+          description: UUID of the target organization in the HAMR relationship.
+          example: 660f9511-f3ac-52e5-b827-557766551111
+          type: string
+      required:
+      - target_org_uuid
+      - target_org_name
+      - target_org_datacenter
+      - hamr_status
+      - is_primary
+      - modified_at
+      - modified_by
+      type: object
+    HamrOrgConnectionDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/HamrOrgConnectionAttributesRequest'
+        id:
+          description: The organization UUID for this HAMR connection. Must match
+            the authenticated organization's UUID.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        type:
+          $ref: '#/components/schemas/HamrOrgConnectionType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    HamrOrgConnectionDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/HamrOrgConnectionAttributesResponse'
+        id:
+          description: The organization UUID for this HAMR connection.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+        type:
+          $ref: '#/components/schemas/HamrOrgConnectionType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    HamrOrgConnectionRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/HamrOrgConnectionDataRequest'
+      required:
+      - data
+      type: object
+    HamrOrgConnectionResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/HamrOrgConnectionDataResponse'
+      required:
+      - data
+      type: object
+    HamrOrgConnectionStatus:
+      description: 'Status of the HAMR connection:
+
+        - 0: UNSPECIFIED - Connection status not specified
+
+        - 1: ONBOARDING - Initial setup of HAMR connection
+
+        - 2: PASSIVE - Secondary organization in passive standby mode
+
+        - 3: FAILOVER - Liminal status between PASSIVE and ACTIVE
+
+        - 4: ACTIVE - Organization is an active failover
+
+        - 5: RECOVERY - Recovery operation in progress'
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      example: 4
+      type: integer
+      x-enum-varnames:
+      - UNSPECIFIED
+      - ONBOARDING
+      - PASSIVE
+      - FAILOVER
+      - ACTIVE
+      - RECOVERY
+    HamrOrgConnectionType:
+      description: Type of the HAMR organization connection resource.
+      enum:
+      - hamr_org_connections
+      example: hamr_org_connections
+      type: string
+      x-enum-varnames:
+      - HAMR_ORG_CONNECTIONS
     HourlyUsage:
       description: Hourly usage for a product family for an org.
       properties:
@@ -71968,6 +72133,107 @@ paths:
         operator: OR
         permissions:
         - events_read
+  /api/v2/hamr:
+    get:
+      description: 'Retrieve the High Availability Multi-Region (HAMR) organization
+        connection details for the authenticated organization.
+
+        This endpoint returns information about the HAMR connection configuration,
+        including the target organization,
+
+        datacenter, status, and whether this is the primary or secondary organization
+        in the HAMR relationship.'
+      operationId: GetHamrOrgConnection
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HamrOrgConnectionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get HAMR organization connection
+      tags:
+      - High Availability MultiRegion
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create or update the High Availability Multi-Region (HAMR) organization
+        connection.
+
+        This endpoint allows you to configure the HAMR connection between the authenticated
+        organization
+
+        and a target organization, including setting the connection status (ONBOARDING,
+        PASSIVE, FAILOVER, ACTIVE, RECOVERY)'
+      operationId: CreateHamrOrgConnection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HamrOrgConnectionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HamrOrgConnectionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create or update HAMR organization connection
+      tags:
+      - High Availability MultiRegion
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -95387,6 +95653,14 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/google_cloud_platform
   name: GCP Integration
+- description: 'Configure High Availability Multi-Region (HAMR) connections between
+    Datadog organizations.
+
+    HAMR provides disaster recovery capabilities by maintaining synchronized data
+    between primary
+
+    and secondary organizations across different datacenters.'
+  name: High Availability MultiRegion
 - description: 'The IP allowlist API is used to manage the IP addresses that
 
     can access the Datadog API and web UI. It does not block
