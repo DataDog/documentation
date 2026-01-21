@@ -26,14 +26,7 @@ Your crash reports appear in [**Error Tracking**][1].
 
 ## Setup
 
-If you have not set up the Roku SDK yet, follow the [in-app setup instructions][2] or see the [Roku setup documentation][3]. 
-
-1. Add the latest version of the [Roku SDK][4] to your ROPM dependencies (or download the zip archive).
-2. Configure your application's `env` when [initializing the SDK][5].
-
-For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
-
-After setting up the Roku SDK, follow the steps on this page to enable Roku Crash Reporting and Error Tracking.
+Follow the [in-app setup instructions][2] or the steps on this page to install the SDK and enable Roku Crash Reporting and Error Tracking.
 
 ### Step 1 - Declare the SDK as a dependency
 
