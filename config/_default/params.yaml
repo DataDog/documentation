@@ -329,6 +329,7 @@ unsupported_sites:
   scorecards: [gov]
   self_service_actions: [gov]
   service_remapping_rules: [gov]
+  service_override_removal: [gov]
   snmp_profile_manager: [gov]
   status_pages: [gov]
   synthetics_email_validation: [gov]

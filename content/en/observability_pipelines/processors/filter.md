@@ -11,8 +11,10 @@ further_reading:
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 - name: Metrics
   icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
 
 {{< product-availability >}}

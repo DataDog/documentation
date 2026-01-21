@@ -22,12 +22,12 @@ Datadog Change Failure Detection automatically identifies deployments that remed
 
 A **change failure** is a deployment that causes issues in production and requires remediation. Change failures are used to calculate the following metrics:
 
-- Change Failure Rate
+- [Change Failure Rate][2]
 : The percentage of deployments causing a failure in production, calculated as the following:
 
- $$\text"Change Failure Rate" = \text"Number of change failures" / (\text"Total deployments" - \text"Rollback deployments")$$
+ $$\text"Change Failure Rate" = \text"Number of change failures" / \text"Number of total deployments"$$
 
-- Failed Deployment Recovery Time
+- [Failed Deployment Recovery Time][3]
 : The median duration between a failed deployment and its remediation, either through a rollback or rollforward deployment.
 
 Change Failure Detection identifies two types of remediation deployments:
@@ -142,3 +142,5 @@ These default rules are fully configurable in the [DORA metrics settings][1] pag
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/settings/dora
+[2]: /dora_metrics/calculation/#change-failure-rate
+[3]: /dora_metrics/calculation/#failed-deployment-recovery-time

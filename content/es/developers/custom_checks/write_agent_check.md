@@ -20,7 +20,7 @@ Esta página te guía por el proceso para crear un check básico personalizado d
 
 Antes de crear un check del Agent personalizado, instala el [Datadog Agent][1].
 
-<div class="alert alert-danger">Para trabajar con la última versión del Agent, tu check del Agent personalizado debe ser compatible con Python 3.</div>
+<div class="alert alert-danger">Para funcionar con la última versión del Agent, tu check personalizada del Agent debe ser compatible con Python 3.</div>
 
 ### Configuración
 
@@ -98,7 +98,7 @@ Después de verificar que tu check está funcionando, [reinicia el Agent][3] par
 
 Es posible crear un check personalizado que ejecute un programa de línea de comandos y capture su salida como un archivo de métrica personalizada. Por ejemplo, el check puede ejecutar el comando `vgs` para obtener información sobre grupos de volúmenes.
 
-Debido a que el intérprete de Python que ejecuta los checks está incrustado en el tiempo de ejecución de múltiples subprocesos de Go, no se permite el uso de los módulos `subprocess` o `multithreading` de la librería estándar de Python. Para ejecutar un subproceso dentro de un check, utiliza la [función`get_subprocess_output()`][5] del módulo `datadog_checks.base.utils.subprocess_output`. El comando y sus argumentos se pasan a `get_subprocess_output()` en forma de lista, con el comando y sus argumentos como una cadena dentro de lista.
+Debido a que el intérprete de Python que ejecuta los checks está incrustado en el tiempo de ejecución de múltiples subprocesos de Go, no se permite el uso de los módulos `subprocess` o `multithreading` de la biblioteca estándar de Python. Para ejecutar un subproceso dentro de un check, utiliza la [función`get_subprocess_output()`][5] del módulo `datadog_checks.base.utils.subprocess_output`. El comando y sus argumentos se pasan a `get_subprocess_output()` en forma de lista, con el comando y sus argumentos como una cadena dentro de lista.
 
 Por ejemplo, un comando que se introduce en el símbolo del sistema de la siguiente manera:
 
@@ -166,7 +166,7 @@ instances:
 Utiliza el siguiente bloque try/except para hacer que el check personalizado sea compatible con cualquier versión del Agent:
 
 {{< code-block lang="python" >}}
-intenta:
+try:
     # primero intenta importar la clase de base de versiones nuevas del Agent
     from datadog_checks.base import AgentCheck
 except ImportError:
