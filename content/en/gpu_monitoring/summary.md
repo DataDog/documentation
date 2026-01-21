@@ -82,7 +82,7 @@ To understand if any device type pools need additional provisioning, check this 
 
 Use this section to identify the number of unmet GPU requests for your Kubernetes clusters.
 
-{{< img src="gpu_monitoring/unmet_requests-2.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:90%;" >}}
+{{< img src="gpu_monitoring/unmet-requests-2.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:90%;" >}}
 
 If you have Kubernetes clusters with a large number of unmet GPU requests, you can also look at their **Device Type Breakdown** widget to understand which device type the particular service relies on, and the **Device Allocation over time** widget to track historical demands. This helps you to confirm if these clusters and device types are consistently underprovisioned.
 
