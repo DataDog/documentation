@@ -47,6 +47,10 @@ Install the Datadog Agent in your Fargate task definition:
         {
           "name": "DD_APM_NON_LOCAL_TRAFFIC",
           "value": "true"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "{{< region-param key=\"dd_site\" >}}"
         }
       ]
     }
@@ -98,6 +102,10 @@ Update your task definition to include the PHP application container with App an
         {
           "name": "DD_ENV",
           "value": "<YOUR_ENVIRONMENT>"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "{{< region-param key=\"dd_site\" >}}"
         }
       ]
     }
@@ -134,6 +142,10 @@ Update your task definition to include the PHP application container with App an
         {
           "name": "DD_ENV",
           "value": "<YOUR_ENVIRONMENT>"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "{{< region-param key=\"dd_site\" >}}"
         }
       ]
     }
