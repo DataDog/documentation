@@ -520,7 +520,7 @@ Here is the minimum version required for each instrument type:
 {% if equals($platform, "logs") %}
 
 <!-- Show content only for languages that support logs -->
-{% if or(or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")), equals($prog_lang, "python")) %}
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python")) %}
 
 ## Overview
 
