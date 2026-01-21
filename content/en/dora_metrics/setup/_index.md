@@ -7,13 +7,13 @@ aliases:
 - /continuous_integration/dora_metrics/setup/incidents
 - /dora_metrics/setup/incidents
 - /dora_metrics/setup/deployments
+- /dora_metrics/setup/failures/
 - /dora_metrics/deployments/apm
 - /dora_metrics/deployments/deployment_api
 - /dora_metrics/deployments
 - /dora_metrics/failures/incident_api
 - /dora_metrics/failures/pagerduty
 - /dora_metrics/failures/
-is_beta: true
 further_reading:
 - link: '/dora_metrics/'
   tag: 'Documentation'
