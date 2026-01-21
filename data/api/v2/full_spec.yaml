@@ -13086,6 +13086,123 @@ components:
       - findings
       - project
       type: object
+    CreateComponentRequest:
+      example:
+        data:
+          attributes:
+            name: Metrics Intake
+            position: 0
+            type: component
+          relationships:
+            group:
+              data: null
+          type: components
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateComponentRequestData'
+      type: object
+    CreateComponentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    CreateComponentRequestDataAttributes:
+      description: The supported attributes for creating a component.
+      properties:
+        components:
+          description: If creating a component of type `group`, the components to
+            create within the group.
+          example:
+          - name: Login
+            position: 0
+            type: component
+          - name: Settings
+            position: 1
+            type: component
+          items:
+            $ref: '#/components/schemas/CreateComponentRequestDataAttributesComponentsItems'
+          type: array
+        name:
+          description: The name of the component.
+          example: Web App
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          example: 0
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+          description: The type of the component.
+          example: group
+      required:
+      - name
+      - position
+      - type
+      type: object
+    CreateComponentRequestDataAttributesComponentsItems:
+      properties:
+        name:
+          description: The name of the grouped component.
+          example: ''
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component relative
+            to the other components in the group.
+          example: 0
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      required:
+      - name
+      - position
+      - type
+      type: object
+    CreateComponentRequestDataAttributesType:
+      description: The type of the component.
+      enum:
+      - component
+      - group
+      example: component
+      type: string
+      x-enum-varnames:
+      - COMPONENT
+      - GROUP
+    CreateComponentRequestDataRelationships:
+      description: The supported relationships for creating a component.
+      properties:
+        group:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationshipsGroup'
+          description: The group to create the component within.
+      type: object
+    CreateComponentRequestDataRelationshipsGroup:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    CreateComponentRequestDataRelationshipsGroupData:
+      nullable: true
+      properties:
+        id:
+          description: The ID of the group.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
     CreateConnectionRequest:
       example:
         data:
@@ -13185,6 +13302,90 @@ components:
       required:
       - data
       type: object
+    CreateDegradationRequest:
+      example:
+        data:
+          attributes:
+            components_affected:
+            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+              status: degraded
+            description: Our API is experiencing elevated latency. We are investigating
+              the issue.
+            status: investigating
+            title: Elevated API Latency
+          type: degradations
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDegradationRequestData'
+      type: object
+    CreateDegradationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    CreateDegradationRequestDataAttributes:
+      description: The supported attributes for creating a degradation.
+      properties:
+        components_affected:
+          description: The components affected by the degradation.
+          example:
+          - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+            status: degraded
+          items:
+            $ref: '#/components/schemas/CreateDegradationRequestDataAttributesComponentsAffectedItems'
+          type: array
+        description:
+          description: The description of the degradation.
+          example: Our API is experiencing elevated latency. We are investigating
+            the issue.
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+          description: The status of the degradation.
+          example: investigating
+        title:
+          description: The title of the degradation.
+          example: Elevated API Latency
+          type: string
+      required:
+      - components_affected
+      - status
+      - title
+      type: object
+    CreateDegradationRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    CreateDegradationRequestDataAttributesStatus:
+      description: The status of the degradation.
+      enum:
+      - investigating
+      - identified
+      - monitoring
+      - resolved
+      example: investigating
+      type: string
+      x-enum-varnames:
+      - INVESTIGATING
+      - IDENTIFIED
+      - MONITORING
+      - RESOLVED
     CreateDeploymentGateParams:
       description: Parameters for creating a deployment gate.
       properties:
@@ -13838,6 +14039,186 @@ components:
       type: string
       x-enum-varnames:
       - CREATE_RULESET
+    CreateStatusPageRequest:
+      example:
+        data:
+          attributes:
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            components:
+            - name: API
+              position: 0
+              type: component
+            - components:
+              - name: Login
+                position: 0
+                type: component
+              - name: Settings
+                position: 1
+                type: component
+              name: Web App
+              position: 1
+              type: group
+            - name: Webhooks
+              position: 2
+              type: component
+            domain_prefix: status-page-us1
+            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+            enabled: true
+            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            name: Status Page US1
+            subscriptions_enabled: true
+            type: public
+            visualization_type: bars_and_uptime_percentage
+          type: status_pages
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateStatusPageRequestData'
+      type: object
+    CreateStatusPageRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    CreateStatusPageRequestDataAttributes:
+      description: The supported attributes for creating a status page.
+      properties:
+        company_logo:
+          description: The base64-encoded image data displayed on the status page.
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          type: string
+        components:
+          description: The components displayed on the status page.
+          example:
+          - components:
+            - name: Login
+              position: 0
+              type: component
+            - name: Settings
+              position: 1
+              type: component
+            name: Web App
+            position: 0
+            type: group
+          - name: API
+            position: 1
+            type: component
+          - name: Webhooks
+            position: 2
+            type: component
+          items:
+            $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItems'
+          type: array
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          example: status-page-us1
+          type: string
+        email_header_image:
+          description: Base64-encoded image data included in email notifications sent
+            to status page subscribers.
+          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          example: true
+          type: boolean
+        favicon:
+          description: Base64-encoded image data displayed in the browser tab.
+          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          type: string
+        name:
+          description: The name of the status page.
+          example: Status Page US1
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          example: true
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+          example: public
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+          example: bars_and_uptime_percentage
+      required:
+      - domain_prefix
+      - enabled
+      - name
+      - type
+      - visualization_type
+      type: object
+    CreateStatusPageRequestDataAttributesComponentsItems:
+      properties:
+        components:
+          description: If creating a component of type `group`, the components to
+            create within the group.
+          items:
+            $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          description: The ID of the component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    CreateStatusPageRequestDataAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          description: The ID of the grouped component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the grouped component.
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component. Relative
+            to the other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    CreateStatusPageRequestDataAttributesType:
+      description: The type of the status page controlling how the status page is
+        accessed.
+      enum:
+      - public
+      - internal
+      example: public
+      type: string
+      x-enum-varnames:
+      - PUBLIC
+      - INTERNAL
+    CreateStatusPageRequestDataAttributesVisualizationType:
+      description: The visualization type of the status page.
+      enum:
+      - bars_and_uptime_percentage
+      - bars_only
+      - component_name_only
+      example: bars_and_uptime_percentage
+      type: string
+      x-enum-varnames:
+      - BARS_AND_UPTIME_PERCENTAGE
+      - BARS_ONLY
+      - COMPONENT_NAME_ONLY
     CreateTableRequest:
       description: Request body for creating a new reference table from a local file
         or cloud storage.
@@ -17071,6 +17452,217 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    Degradation:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationData'
+        included:
+          description: The included related resources of a degradation. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/DegradationArrayIncluded'
+          type: array
+      type: object
+    DegradationArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DegradationData'
+          type: array
+        included:
+          description: The included related resources of a degradation. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/DegradationArrayIncluded'
+          type: array
+        meta:
+          $ref: '#/components/schemas/StatusPagesResponseMeta'
+      required:
+      - data
+      type: object
+    DegradationArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+      - $ref: '#/components/schemas/StatusPageAsIncluded'
+    DegradationData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DegradationDataAttributes'
+        id:
+          description: The ID of the degradation.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/DegradationDataRelationships'
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    DegradationDataAttributes:
+      description: The attributes of a degradation.
+      properties:
+        components_affected:
+          description: Components affected by the degradation.
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesComponentsAffectedItems'
+          type: array
+        created_at:
+          description: Timestamp of when the degradation was created.
+          format: date-time
+          type: string
+        description:
+          description: Description of the degradation.
+          type: string
+        modified_at:
+          description: Timestamp of when the degradation was last modified.
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+        title:
+          description: Title of the degradation.
+          type: string
+        updates:
+          description: Past updates made to the degradation.
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesUpdatesItems'
+          type: array
+      type: object
+    DegradationDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    DegradationDataAttributesUpdatesItems:
+      properties:
+        components_affected:
+          description: The components affected at the time of the update.
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesUpdatesItemsComponentsAffectedItems'
+          type: array
+        created_at:
+          description: Timestamp of when the update was created.
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the update.
+          type: string
+        id:
+          description: Identifier of the update.
+          format: uuid
+          readOnly: true
+          type: string
+        modified_at:
+          description: Timestamp of when the update was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+      type: object
+    DegradationDataAttributesUpdatesItemsComponentsAffectedItems:
+      properties:
+        id:
+          description: Identifier of the component affected at the time of the update.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          description: The name of the component affected at the time of the update.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+          description: The status of the component affected at the time of the update.
+      required:
+      - id
+      - status
+      type: object
+    DegradationDataRelationships:
+      description: The relationships of a degradation.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/DegradationDataRelationshipsCreatedByUser'
+          description: The Datadog user who created the degradation.
+        last_modified_by_user:
+          $ref: '#/components/schemas/DegradationDataRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the degradation.
+        status_page:
+          $ref: '#/components/schemas/DegradationDataRelationshipsStatusPage'
+          description: The status page the degradation belongs to.
+      type: object
+    DegradationDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the degradation.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    DegradationDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the degradation.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    DegradationDataRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsStatusPageData:
+      properties:
+        id:
+          description: The ID of the status page.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
     DeleteAppResponse:
       description: The response object after an app is successfully deleted.
       properties:
@@ -42320,6 +42912,136 @@ components:
         title:
           type: string
       type: object
+    PatchComponentRequest:
+      example:
+        data:
+          attributes:
+            name: Metrics Intake Service
+            position: 4
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: components
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchComponentRequestData'
+      type: object
+    PatchComponentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchComponentRequestDataAttributes'
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    PatchComponentRequestDataAttributes:
+      description: The supported attributes for updating a component.
+      properties:
+        name:
+          description: The name of the component.
+          example: Web App
+          type: string
+        position:
+          description: The position of the component. If the component belongs to
+            a group, the position is relative to the other components in the group.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    PatchDegradationRequest:
+      example:
+        data:
+          attributes:
+            components_affected:
+            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+              status: operational
+            description: We've deployed a fix and latency has returned to normal.
+              This issue has been resolved.
+            status: resolved
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: degradations
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchDegradationRequestData'
+      type: object
+    PatchDegradationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchDegradationRequestDataAttributes'
+        id:
+          description: The ID of the degradation.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    PatchDegradationRequestDataAttributes:
+      description: The supported attributes for updating a degradation.
+      properties:
+        components_affected:
+          description: The components affected by the degradation.
+          example:
+          - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+            status: operational
+          items:
+            $ref: '#/components/schemas/PatchDegradationRequestDataAttributesComponentsAffectedItems'
+          type: array
+        description:
+          description: The description of the degradation.
+          example: We've deployed a fix and latency has returned to normal. This issue
+            has been resolved.
+          type: string
+        status:
+          $ref: '#/components/schemas/PatchDegradationRequestDataAttributesStatus'
+          example: resolved
+        title:
+          description: The title of the degradation.
+          example: Elevated API Latency
+          type: string
+      type: object
+    PatchDegradationRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    PatchDegradationRequestDataAttributesStatus:
+      description: The status of the degradation.
+      enum:
+      - investigating
+      - identified
+      - monitoring
+      - resolved
+      type: string
+      x-enum-varnames:
+      - INVESTIGATING
+      - IDENTIFIED
+      - MONITORING
+      - RESOLVED
+    PatchDegradationRequestDataType:
+      default: degradations
+      description: Degradations resource type.
+      enum:
+      - degradations
+      example: degradations
+      type: string
+      x-enum-varnames:
+      - DEGRADATIONS
     PatchIncidentNotificationTemplateRequest:
       description: Update request for a notification template.
       properties:
@@ -42365,6 +43087,78 @@ components:
           $ref: '#/components/schemas/TimeAggregation'
         version:
           $ref: '#/components/schemas/Version'
+      type: object
+    PatchStatusPageRequest:
+      example:
+        data:
+          attributes:
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            domain_prefix: status-page-us1-east
+            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+            enabled: false
+            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            name: Status Page US1 East
+            subscriptions_enabled: false
+            type: internal
+            visualization_type: bars_only
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: status_pages
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchStatusPageRequestData'
+      type: object
+    PatchStatusPageRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchStatusPageRequestDataAttributes'
+        id:
+          description: The ID of the status page.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    PatchStatusPageRequestDataAttributes:
+      description: The supported attributes for updating a status page.
+      properties:
+        company_logo:
+          description: The base64-encoded image data displayed on the status page.
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          type: string
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          example: status-page-us1
+          type: string
+        email_header_image:
+          description: The base64-encoded image data displayed in email notifications
+            sent to status page subscribers.
+          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          example: true
+          type: boolean
+        favicon:
+          description: The base64-encoded image data displayed in the browser tab.
+          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          type: string
+        name:
+          description: The name of the status page.
+          example: Status Page US1
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          example: true
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+          example: public
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+          example: bars_and_uptime_percentage
       type: object
     PatchTableRequest:
       description: Request body for updating an existing reference table.
@@ -56253,6 +57047,871 @@ components:
       required:
       - type
       type: object
+    StatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageData'
+        included:
+          description: The included related resources of a status page. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPageArrayIncluded'
+          type: array
+      type: object
+    StatusPageArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StatusPageData'
+          type: array
+        included:
+          description: The included related resources of a status page. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPageArrayIncluded'
+          type: array
+        meta:
+          $ref: '#/components/schemas/StatusPagesResponseMeta'
+      required:
+      - data
+      type: object
+    StatusPageArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+    StatusPageAsIncluded:
+      description: The included status page resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPageAsIncludedAttributes'
+        id:
+          description: The ID of the status page.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    StatusPageAsIncludedAttributes:
+      description: The attributes of a status page.
+      properties:
+        company_logo:
+          description: The base64-encoded image data displayed in the company logo.
+          type: string
+        components:
+          description: Components displayed on the status page.
+          items:
+            $ref: '#/components/schemas/StatusPageAsIncludedAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the status page was created.
+          format: date-time
+          type: string
+        custom_domain:
+          description: If configured, the url that the status page is accessible at.
+          type: string
+        custom_domain_enabled:
+          description: Whether the custom domain is configured.
+          type: boolean
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          type: string
+        email_header_image:
+          description: Base64-encoded image data included in email notifications sent
+            to status page subscribers.
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          type: boolean
+        favicon:
+          description: Base64-encoded image data displayed in the browser tab.
+          type: string
+        modified_at:
+          description: Timestamp of when the status page was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the status page.
+          type: string
+        page_url:
+          description: The url that the status page is accessible at.
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      type: object
+    StatusPageAsIncludedAttributesComponentsItems:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPageAsIncludedAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          description: The ID of the component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    StatusPageAsIncludedAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          description: The ID of the grouped component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the grouped component.
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component. Relative
+            to the other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPageAsIncludedRelationships:
+      description: The relationships of a status page.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsCreatedByUser'
+          description: The Datadog user who created the status page.
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the status page.
+      type: object
+    StatusPageAsIncludedRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageAsIncludedRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageAsIncludedRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageAsIncludedRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPageDataAttributes'
+        id:
+          description: The ID of the status page.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPageDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    StatusPageDataAttributes:
+      description: The attributes of a status page.
+      properties:
+        company_logo:
+          description: Base64-encoded image data displayed on the status page.
+          nullable: true
+          type: string
+        components:
+          description: Components displayed on the status page.
+          items:
+            $ref: '#/components/schemas/StatusPageDataAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the status page was created.
+          format: date-time
+          type: string
+        custom_domain:
+          description: If configured, the url that the status page is accessible at.
+          nullable: true
+          type: string
+        custom_domain_enabled:
+          description: Whether the custom domain is configured.
+          type: boolean
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          type: string
+        email_header_image:
+          description: Base64-encoded image data included in email notifications sent
+            to status page subscribers.
+          nullable: true
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          type: boolean
+        favicon:
+          description: Base64-encoded image data displayed in the browser tab.
+          nullable: true
+          type: string
+        modified_at:
+          description: Timestamp of when the status page was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the status page.
+          type: string
+        page_url:
+          description: The url that the status page is accessible at.
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      type: object
+    StatusPageDataAttributesComponentsItems:
+      properties:
+        components:
+          description: If the component is of type `group`, the components within
+            the group.
+          items:
+            $ref: '#/components/schemas/StatusPageDataAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    StatusPageDataAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component. Relative to the
+            other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPageDataRelationships:
+      description: The relationships of a status page.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsCreatedByUser'
+          description: The Datadog user who created the status page.
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the status page.
+      type: object
+    StatusPageDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageDataType:
+      default: status_pages
+      description: Status pages resource type.
+      enum:
+      - status_pages
+      example: status_pages
+      type: string
+      x-enum-varnames:
+      - STATUS_PAGES
+    StatusPagesComponent:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentData'
+        included:
+          description: The included related resources of a component. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentArrayIncluded'
+          type: array
+      type: object
+    StatusPagesComponentArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentData'
+          type: array
+        included:
+          description: The included related resources of a component. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentArrayIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    StatusPagesComponentArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+      - $ref: '#/components/schemas/StatusPageAsIncluded'
+      - $ref: '#/components/schemas/StatusPagesComponentGroup'
+    StatusPagesComponentData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributes'
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentDataAttributes:
+      description: The attributes of a component.
+      properties:
+        components:
+          description: If the component is of type `group`, the components within
+            the group.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentDataAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the component was created.
+          format: date-time
+          type: string
+        modified_at:
+          description: Timestamp of when the component was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentDataAttributesComponentsItems:
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPagesComponentDataAttributesStatus:
+      description: The status of the component.
+      enum:
+      - operational
+      - degraded
+      - partial_outage
+      - major_outage
+      example: operational
+      type: string
+      x-enum-varnames:
+      - OPERATIONAL
+      - DEGRADED
+      - PARTIAL_OUTAGE
+      - MAJOR_OUTAGE
+    StatusPagesComponentDataRelationships:
+      description: The relationships of a component.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsCreatedByUser'
+          description: The Datadog user who created the component.
+        group:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsGroup'
+          description: The group the component belongs to.
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the component.
+        status_page:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsStatusPage'
+          description: The status page the component belongs to.
+      type: object
+    StatusPagesComponentDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the component.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsGroup:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsGroupData:
+      nullable: true
+      properties:
+        id:
+          description: The ID of the group the component belongs to.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the component.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsStatusPageData:
+      properties:
+        id:
+          description: The ID of the status page the component belongs to.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroup:
+      description: The included component group resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributes'
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentGroupAttributes:
+      description: The attributes of a component group.
+      properties:
+        components:
+          description: If the component is of type `group`, the components within
+            the group.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the component was created.
+          format: date-time
+          type: string
+        modified_at:
+          description: Timestamp of when the component was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentGroupAttributesComponentsItems:
+      properties:
+        id:
+          description: The ID of the grouped component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the grouped component.
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component. Relative
+            to the other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPagesComponentGroupAttributesComponentsItemsStatus:
+      description: The status of the component.
+      enum:
+      - operational
+      - degraded
+      - partial_outage
+      - major_outage
+      readOnly: true
+      type: string
+      x-enum-varnames:
+      - OPERATIONAL
+      - DEGRADED
+      - PARTIAL_OUTAGE
+      - MAJOR_OUTAGE
+    StatusPagesComponentGroupAttributesComponentsItemsType:
+      description: The type of the component.
+      enum:
+      - component
+      example: component
+      type: string
+      x-enum-varnames:
+      - COMPONENT
+    StatusPagesComponentGroupRelationships:
+      description: The relationships of a component group.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsCreatedByUser'
+        group:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsGroup'
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsLastModifiedByUser'
+        status_page:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsStatusPage'
+      type: object
+    StatusPagesComponentGroupRelationshipsCreatedByUser:
+      description: The Datadog user who created the component group.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the component group.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsGroup:
+      description: The group the component group belongs to.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsGroupData:
+      nullable: true
+      properties:
+        id:
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsLastModifiedByUser:
+      description: The Datadog user who last modified the component group.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the component
+            group.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsStatusPage:
+      description: The status page the component group belongs to.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsStatusPageData:
+      properties:
+        id:
+          description: The ID of the status page.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupType:
+      default: components
+      description: Components resource type.
+      enum:
+      - components
+      example: components
+      type: string
+      x-enum-varnames:
+      - COMPONENTS
+    StatusPagesPagination:
+      description: Offset-based pagination schema.
+      properties:
+        first_offset:
+          description: Integer representing the offset to fetch the first page of
+            results.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Integer representing the offset to fetch the last page of results.
+          example: 900
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Integer representing the number of elements to returned in
+            the results.
+          example: 100
+          format: int64
+          type: integer
+        next_offset:
+          description: Integer representing the index of the first element in the
+            next page of results. Equal to page size added to the current offset.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Integer representing the index of the first element in the
+            results.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Integer representing the index of the first element in the
+            previous page of results.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Integer representing the total number of elements available.
+          example: 1000
+          format: int64
+          nullable: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/StatusPagesPaginationType'
+      type: object
+    StatusPagesPaginationType:
+      default: offset_limit
+      enum:
+      - offset_limit
+      example: offset_limit
+      type: string
+      x-enum-varnames:
+      - OFFSET_LIMIT
+    StatusPagesResponseMeta:
+      description: Response metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/StatusPagesPagination'
+      readOnly: true
+      type: object
+    StatusPagesUser:
+      description: The included Datadog user resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesUserAttributes'
+        id:
+          description: The ID of the Datadog user.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      type: object
+    StatusPagesUserAttributes:
+      description: Attributes of the Datadog user.
+      properties:
+        email:
+          description: The email of the Datadog user.
+          type: string
+        handle:
+          description: The handle of the Datadog user.
+          type: string
+        icon:
+          description: The icon of the Datadog user.
+          type: string
+        name:
+          description: The name of the Datadog user.
+          type: string
+        uuid:
+          description: The UUID of the Datadog user.
+          type: string
+      type: object
+    StatusPagesUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     Step:
       description: A Step is a sub-component of a workflow. Each Step performs an
         action.
@@ -91496,6 +93155,683 @@ paths:
       - Security Monitoring
       x-menu-order: 28
       x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/statuspages:
+    get:
+      description: Lists all status pages for the organization.
+      operationId: ListStatusPages
+      parameters:
+      - description: Offset to use as the start of the page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          type: integer
+      - description: The number of status pages to return per page.
+        in: query
+        name: page[limit]
+        schema:
+          default: 50
+          type: integer
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPageArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List status pages
+      tags:
+      - Status Pages
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    post:
+      description: Creates a new status page.
+      operationId: CreateStatusPage
+      parameters:
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStatusPageRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create status page
+      tags:
+      - Status Pages
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/degradations:
+    get:
+      description: Lists all degradations for the organization. Optionally filter
+        by status and page.
+      operationId: ListDegradations
+      parameters:
+      - description: Optional page id filter.
+        in: query
+        name: filter[page_id]
+        schema:
+          type: string
+      - description: Offset to use as the start of the page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          type: integer
+      - description: The number of degradations to return per page.
+        in: query
+        name: page[limit]
+        schema:
+          default: 50
+          type: integer
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: 'Optional degradation status filter. Supported values: investigating,
+          identified, monitoring, resolved.'
+        in: query
+        name: filter[status]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DegradationArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List degradations
+      tags:
+      - Status Pages
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+  /api/v2/statuspages/{page_id}:
+    delete:
+      description: Deletes a status page by its ID.
+      operationId: DeleteStatusPage
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete status page
+      tags:
+      - Status Pages
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+    get:
+      description: Retrieves a specific status page by its ID.
+      operationId: GetStatusPage
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get status page
+      tags:
+      - Status Pages
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing status page's attributes.
+      operationId: UpdateStatusPage
+      parameters:
+      - description: Whether to delete existing subscribers when updating a status
+          page's type.
+        in: query
+        name: delete_subscribers
+        schema:
+          default: false
+          type: boolean
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchStatusPageRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update status page
+      tags:
+      - Status Pages
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/components:
+    get:
+      description: Lists all components for a status page.
+      operationId: ListComponents
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponentArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List components
+      tags:
+      - Status Pages
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    post:
+      description: Creates a new component.
+      operationId: CreateComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateComponentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create component
+      tags:
+      - Status Pages
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/components/{component_id}:
+    delete:
+      description: Deletes a component by its ID.
+      operationId: DeleteComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete component
+      tags:
+      - Status Pages
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+    get:
+      description: Retrieves a specific component by its ID.
+      operationId: GetComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get component
+      tags:
+      - Status Pages
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing component's attributes.
+      operationId: UpdateComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchComponentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update component
+      tags:
+      - Status Pages
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/degradations:
+    post:
+      description: Creates a new degradation.
+      operationId: CreateDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the degradation.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDegradationRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create degradation
+      tags:
+      - Status Pages
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/degradations/{degradation_id}:
+    delete:
+      description: Deletes a degradation by its ID.
+      operationId: DeleteDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete degradation
+      tags:
+      - Status Pages
+      x-menu-order: 15
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+    get:
+      description: Retrieves a specific degradation by its ID.
+      operationId: GetDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get degradation
+      tags:
+      - Status Pages
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing degradation's attributes.
+      operationId: UpdateDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the degradation.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDegradationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update degradation
+      tags:
+      - Status Pages
+      x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -96086,6 +98422,10 @@ tags:
   name: Spans Metrics
 - description: API for static analysis
   name: Static Analysis
+- description: Manage your status pages and communicate service disruptions to stakeholders
+    via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/)
+    for more information.
+  name: Status Pages
 - description: "Datadog Synthetics uses simulated user requests and browser rendering
     to help you ensure uptime,\nidentify regional issues, and track your application
     performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
