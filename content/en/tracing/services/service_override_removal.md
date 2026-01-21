@@ -2,6 +2,7 @@
 title: Service Override Removal
 description: Learn how to remove integration service overrides from Datadog.
 disable_toc: false
+site_support_id: service_override_removal
 further_reading:
 - link: "/tracing/guide/service_overrides"
   tag: "Documentation"
@@ -10,6 +11,11 @@ further_reading:
   tag: "Documentation"
   text: "Inferred Services"
 ---
+
+{{< callout url="#"
+ btn_hidden="true" header="Join the Preview!">}}
+Service override removal is in Preview.
+{{< /callout >}}
 
 This page explains how to remove integration service overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Service Overrides][10] and [Inferred Services][8].
 

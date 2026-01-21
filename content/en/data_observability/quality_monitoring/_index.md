@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Data Observability'
+    text: 'Data Observability Overview'
   - link: '/data_observability/jobs_monitoring'
     tag: 'Documentation'
     text: 'Jobs Monitoring'

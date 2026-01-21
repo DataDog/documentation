@@ -895,6 +895,174 @@ components:
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
+    BarChartWidgetDefinition:
+      description: The bar chart visualization displays categorical data using vertical
+        bars, allowing you to compare values across different groups.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        requests:
+          description: List of bar chart widget requests.
+          example:
+          - q: system.load.1
+          items:
+            $ref: '#/components/schemas/BarChartWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        style:
+          $ref: '#/components/schemas/BarChartWidgetStyle'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/BarChartWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    BarChartWidgetDefinitionType:
+      default: bar_chart
+      description: Type of the bar chart widget.
+      enum:
+      - bar_chart
+      example: bar_chart
+      type: string
+      x-enum-varnames:
+      - BAR_CHART
+    BarChartWidgetDisplay:
+      description: Bar chart widget display options.
+      oneOf:
+      - $ref: '#/components/schemas/BarChartWidgetStacked'
+      - $ref: '#/components/schemas/BarChartWidgetFlat'
+    BarChartWidgetFlat:
+      description: Bar chart widget flat display.
+      properties:
+        type:
+          $ref: '#/components/schemas/BarChartWidgetFlatType'
+      required:
+      - type
+      type: object
+    BarChartWidgetFlatType:
+      default: flat
+      description: Bar chart widget flat display type.
+      enum:
+      - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+      - FLAT
+    BarChartWidgetLegend:
+      description: Bar chart widget stacked legend behavior.
+      enum:
+      - automatic
+      - inline
+      - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - AUTOMATIC
+      - INLINE
+      - NONE
+    BarChartWidgetRequest:
+      description: Updated bar chart widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        conditional_formats:
+          description: List of conditional formats.
+          example:
+          - comparator: '>='
+            palette: blue
+            value: 1.0
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
+          type: array
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
+        style:
+          $ref: '#/components/schemas/WidgetRequestStyle'
+      type: object
+    BarChartWidgetScaling:
+      description: Bar chart widget scaling definition.
+      enum:
+      - absolute
+      - relative
+      type: string
+      x-enum-varnames:
+      - ABSOLUTE
+      - RELATIVE
+    BarChartWidgetStacked:
+      description: Bar chart widget stacked display options.
+      properties:
+        legend:
+          $ref: '#/components/schemas/BarChartWidgetLegend'
+        type:
+          $ref: '#/components/schemas/BarChartWidgetStackedType'
+      required:
+      - type
+      type: object
+    BarChartWidgetStackedType:
+      default: stacked
+      description: Bar chart widget stacked display type.
+      enum:
+      - stacked
+      example: stacked
+      type: string
+      x-enum-varnames:
+      - STACKED
+    BarChartWidgetStyle:
+      description: Style customization for a bar chart widget.
+      properties:
+        display:
+          $ref: '#/components/schemas/BarChartWidgetDisplay'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+        scaling:
+          $ref: '#/components/schemas/BarChartWidgetScaling'
+      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -14756,6 +14924,7 @@ components:
     SplitGraphSourceWidgetDefinition:
       description: The original widget we are splitting on.
       oneOf:
+      - $ref: '#/components/schemas/BarChartWidgetDefinition'
       - $ref: '#/components/schemas/ChangeWidgetDefinition'
       - $ref: '#/components/schemas/GeomapWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
@@ -25348,6 +25517,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/AlertGraphWidgetDefinition'
       - $ref: '#/components/schemas/AlertValueWidgetDefinition'
+      - $ref: '#/components/schemas/BarChartWidgetDefinition'
       - $ref: '#/components/schemas/ChangeWidgetDefinition'
       - $ref: '#/components/schemas/CheckStatusWidgetDefinition'
       - $ref: '#/components/schemas/DistributionWidgetDefinition'
