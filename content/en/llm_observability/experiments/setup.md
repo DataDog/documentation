@@ -164,7 +164,7 @@ To create an experiment:
        name="capital-cities-test",
        task=task,
        dataset=dataset,
-       evaluators=[exact_match, overlap, fake_llm_as_a_judge, detailed_fake_llm_as_a_judge],
+       evaluators=[exact_match, overlap, fake_llm_as_a_judge],
        summary_evaluators=[num_exact_matches], # optional
        description="Testing capital cities knowledge",
        config={
@@ -291,7 +291,7 @@ experiment = LLMObs.experiment(
     name="capital-cities-test",
     task=task,
     dataset=dataset,
-    evaluators=[exact_match, overlap, fake_llm_as_a_judge, detailed_fake_llm_as_a_judge],
+    evaluators=[exact_match, overlap, fake_llm_as_a_judge],
     summary_evaluators=[num_exact_matches],  # optional
     description="Testing capital cities knowledge",
     config={"model_name": "gpt-4", "version": "1.0"},
