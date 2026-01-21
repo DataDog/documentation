@@ -332,6 +332,7 @@ unsupported_sites:
   service_remapping_rules: [gov]
   snmp_profile_manager: [gov]
   status_pages: [gov]
+  supported_deployment_types: [gov]
   synthetics_email_validation: [gov]
   synthetics_safari: [gov]
   test_optimization: [gov]
