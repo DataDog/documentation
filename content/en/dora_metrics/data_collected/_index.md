@@ -22,8 +22,8 @@ DORA Metrics generates events that have associated fields and tags.
 
 | Event Type | Description |
 | :--- | :--- |
-|Deployment | A single code deployment uniquely identified by env, service, and version tags.<br><br>Deployments can be [marked as failed][17] and are used to compute `Deployment Frequency`, `Change Failure Rate`, and `Failed Deployment Recovery Time`.
-|Commit | Generated for each individual commit included in a deployment. Contains metadata and is automatically linked to the corresponding deployment.<br><br>Commits are used to compute `Change Lead Time`.
+|Deployment | A single code deployment uniquely identified by env, service, and version tags.<br><br>Deployments can be [marked as failed][17] and are used to compute deployment frequency, change failure rate, and failed deployment recovery time.
+|Commit | An event generated for each individual commit included in a deployment. Contains metadata and is automatically linked to the corresponding deployment.<br><br>Commits are used to compute change lead time.
 |Incident | An incident declared in production.<br><br>Tracking incidents provides a side-by-side view of how failed deployments translate into real-world incidents, including their severity and frequency.
 
 **Note**: DORA Metrics events have a 2-year retention period.
@@ -67,8 +67,8 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 | `Avg Time to Deploy`       | The average duration of [time to deploy](#commit-fields) of all commits. |
 | `Number of Commits`        | Count of all commits included in a deployment. |
 | `Deployment Type` | Type of deployment (`standard`, `rollback`, or `rollforward`). |
-| `Change Failure` | Boolean indicating whether this deployment is marked as a change failure. |
-| `Recovery Time` | Duration in seconds between this failed deployment's `finished_at` and its remediation's `finished_at`. Only available for deployments marked as failures. |
+| `Change Failure` | Boolean indicating whether a deployment is marked as a change failure. |
+| `Recovery Time` | Duration in seconds between a failed deployment's `finished_at` and its remediation's `finished_at`. Only available for deployments marked as failures. |
 | `Remediation Type` | The type of remediation applied (`rollback` or `rollforward`). Only available for deployments marked as failures. |
 
 
