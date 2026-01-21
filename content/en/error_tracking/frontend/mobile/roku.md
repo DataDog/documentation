@@ -276,7 +276,7 @@ To test your implementation:
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
-[5]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters 
+[5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/roku/setup/?tab=rum#step-3---initialize-the-library
 [6]: https://github.com/rokucommunity/ropm
 [101]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [201]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
