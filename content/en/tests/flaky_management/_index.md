@@ -166,6 +166,8 @@ Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been 
 
 To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimization by following the setup instructions in the [Bits AI Dev Agent documentation][16]. Bits AI Dev Agent automatically create fixes for flaky tests detected by Test Optimization.
 
+<div class="alert alert-info">A flaky test must have at least one failed execution that includes both <code>@error.message</code> and <code>@test.source.file</code> tags to be eligible for a fix. Generating a fix may take some time.</div>
+
 ## AI-powered flaky test categorization
 
 Flaky Tests Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
