@@ -5715,11 +5715,16 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_change_failure_detection
       weight: 2
+    - name: DORA Metrics Calculation
+      url: dora_metrics/calculation/
+      parent: dora_metrics
+      identifier: dora_metrics_calculation
+      weight: 3
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 3
+      weight: 4
     - name: Feature Flags
       url: feature_flags/
       pre: ci
