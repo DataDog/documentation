@@ -56,11 +56,18 @@ Dynamic Instrumentation requires the following:
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended, [autocomplete and search (in Preview)][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
-- The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
-- The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
-- The **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) permission is required to use the **Capture method parameters and local variables** option.
 
- For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
+### Permissions
+
+The following permissions are required to use Dynamic Instrumentation:
+
+- **Dynamic Instrumentation Read Configuration** (`debugger_read`) - Required to access the Dynamic Instrumentation page.
+- One of the following write permissions:
+  - **Dynamic Instrumentation Write Configuration** (`debugger_write`) - Required to create or modify instrumentations in any environment.
+  - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`) - Required to create or modify instrumentations in known pre-production environments only (such as staging or QA).
+- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the **Capture method parameters and local variables** option.
+
+For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
 ### Create a logs index
 
