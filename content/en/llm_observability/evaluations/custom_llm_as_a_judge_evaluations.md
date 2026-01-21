@@ -84,7 +84,7 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate. Usually this will be Span Input (`{{span_input}}`) and/or Span Output (`{{span_output}}`). There are other variables available, which you can see when you type `{{`.
+8. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate. Usually this is the Span Input (`{{span_input}}`) and/or Span Output (`{{span_output}}`). There are other variables available, which you can see when you type `{{`.
 
 ### Define the evaluation output
 
@@ -228,9 +228,9 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
 
 ### Test and preview
 
-The pane on the right will show **Filtered Spans** (or traces) corresponding to the evaluation scope you configured.
+The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
 
-Clicking one of these spans will show JSON data available for use in your evaluation, with a **Test Evaluation** button to test your evaluation against the data. When you click this button, inputs to your evaluation will be pre-filled with data from the span. Click **Run** to test.
+Selecting a span shows JSON data available for use in an evaluation. The **Test Evaluation** button tests the evaluation against this data. When this button is clicked, inputs to your evaluation are pre-filled with data from the span. Click **Run** to test.
 
 From the JSON, you can also use the three-dots menu to the left of each row and select **Add variable to message** to add that row's data as a variable in your user message.
 
