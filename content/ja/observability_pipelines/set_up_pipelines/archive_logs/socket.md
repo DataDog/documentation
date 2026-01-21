@@ -1,40 +1,85 @@
 ---
-aliases:
-- /es/observability_pipelines/sensitive_data_redaction/datadog_agent/
 disable_toc: false
-title: Redacción de datos confidenciales para el Datadog Agent
+title: Socket ソースのログをアーカイブする (TCP または UDP)
 ---
 
-## Información general
+## 概要
 
-Los datos confidenciales, como números de tarjetas de crédito, números de ruta bancaria y claves de API, pueden revelarse de manera involuntaria en tus logs, lo que puede exponer a tu organización a riesgos financieros y de privacidad.
+ソケット接続でログを Observability Pipelines Worker に送信し、Datadog Log Archives にルーティングする前に、Datadog でリハイドレートできる形式へ整形します。
 
-Usa Observability Pipelines para identificar, etiquetar y, de manera opcional, redactar o codificar información confidencial antes de enviar los logs a diferentes destinos y fuera de tu infraestructura. Puedes utilizar reglas de escaneo listas para usar con el fin de detectar patrones comunes, como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización y más. O bien crea reglas de escaneo personalizadas con patrones de expresiones regulares para buscar información confidencial.
+{{% observability_pipelines/use_case_images/archive_logs %}}
 
-{{% observability_pipelines/use_case_images/sensitive_data_redaction %}}
+このドキュメントでは、以下について説明します。
+1. Observability Pipelines の設定に必要な[前提条件](#prerequisites)
+1. [ログ アーカイブの設定](#configure-a-log-archive)
+1. [Observability Pipelines のセットアップ](#set-up-observability-pipelines)
 
-Este documento te guiará a través de los siguientes pasos:
-1. Los [requisitos previos](#prerequisites) necesarios para configurar Observability Pipelines
-1. [Configuración de Observability Pipelines](#set-up-observability-pipelines)
-1. [Conexión del Datadog Agent al worker de Observability Pipelines](#connect-the-datadog-agent-to-the-observability-pipelines-worker)
+## 前提条件
 
-## Requisitos previos
+{{% observability_pipelines/prerequisites/socket %}}
 
-{{% observability_pipelines/prerequisites/datadog_agent %}}
+## ログ アーカイブを設定する
 
-## Configurar Observability Pipelines
+Observability Pipelines 用の Datadog Log Archive をすでに設定している場合は、[Observability Pipelines のセットアップ](#set-up-observability-pipelines) に進んでください。
 
-1. Ve a [Observability Pipelines][1].
-1. Selecciona la plantilla **Sensitive Data Redaction** (Redacción de datos confidenciales) para crear un pipeline nuevo.
-1. Selecciona **Datadog Agent** como fuente.
+Datadog Log Archive をセットアップするには、使用しているクラウド プロバイダー向けの Datadog インテグレーションをインストールしておく必要があります。詳しくは、[AWS インテグレーション][1]、[Google Cloud Platform][2]、[Azure インテグレーション][3] のドキュメントを参照してください。
 
-### Configurar la fuente
+ログをアーカイブするために使用しているクラウド プロバイダーを選択します。
 
-{{% observability_pipelines/source_settings/datadog_agent %}}
+{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
 
-### Configurar el destino
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-Introduce la siguiente información en función de los destinos de logs seleccionados.
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
+
+{{% /tab %}}
+{{% tab "Amazon EKS" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
+
+{{% /collapse-content %}}
+
+## 観測可能性パイプラインを設定する
+
+1. [Observability Pipelines][4] に移動します。
+1. 新しいパイプラインを作成するために、**Archive Logs** テンプレートを選択します。
+1. **Socket** ソースを選択します。
+
+### ソースの設定
+
+{{% observability_pipelines/source_settings/socket %}}
+
+### 宛先の設定
+
+選択したログの送信先に応じて、以下の情報を入力します。
 
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -42,17 +87,6 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-##### Requisitos previos
-
-{{% observability_pipelines/prerequisites/amazon_security_lake %}}
-
-##### Configurar el destino
-
-{{% observability_pipelines/destination_settings/amazon_security_lake %}}
-
-{{% /tab %}} 
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -72,9 +106,7 @@ Introduce la siguiente información en función de los destinos de logs seleccio
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
-
-Para configurar el destino, sigue las instrucciones del proveedor de la nube que utilices para archivar tus logs.
+ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -140,20 +172,20 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Añadir destinos adicionales
+#### 送信先を追加する
 
 {{% observability_pipelines/multiple_destinations %}}
 
-### Configurar procesadores
+### プロセッサーの設定
 
 {{% observability_pipelines/processors/intro %}}
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{% observability_pipelines/processors/add_processors_sds %}}
+{{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "Añadir variables de entorno" %}}
+{{% tab "Add env vars" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
@@ -163,7 +195,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% observability_pipelines/processors/add_hostname %}}
 
 {{% /tab %}}
-{{% tab "Procesador personalizado" %}}
+{{% tab "Custom Processor" %}}
 
 {{% observability_pipelines/processors/custom_processor %}}
 
@@ -173,22 +205,22 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% observability_pipelines/processors/dedupe %}}
 
 {{% /tab %}}
-{{% tab "Editar campos" %}}
+{{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
 
 {{% /tab %}}
-{{% tab "Tabla de enriquecimiento" %}}
+{{% tab "Enrichment table" %}}
 
 {{% observability_pipelines/processors/enrichment_table %}}
 
 {{% /tab %}}
-{{% tab "Filtro" %}}
+{{% tab "Filter" %}}
 
 {{% observability_pipelines/processors/filter %}}
 
 {{% /tab %}}
-{{% tab "Generar métricas" %}}
+{{% tab "Generate metrics" %}}
 
 {{% observability_pipelines/processors/generate_metrics %}}
 
@@ -203,12 +235,12 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
-{{% tab "Analizar XML" %}}
+{{% tab "Parse XML" %}}
 
 {{% observability_pipelines/processors/parse_xml %}}
 
 {{% /tab %}}
-{{% tab "Cuota" %}}
+{{% tab "Quota" %}}
 
 {{% observability_pipelines/processors/quota %}}
 
@@ -218,7 +250,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% observability_pipelines/processors/reduce %}}
 
 {{% /tab %}}
-{{% tab "Reasignar a OCSF" %}}
+{{% tab "Remap to OCSF" %}}
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
@@ -227,7 +259,6 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
 
 {{% /collapse-content %}}
-
 {{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
@@ -237,7 +268,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% observability_pipelines/processors/filter_syntax %}}
 
 {{% /tab %}}
-{{% tab "Ejemplo" %}}
+{{% tab "Sample" %}}
 
 {{% observability_pipelines/processors/sample %}}
 
@@ -258,40 +289,36 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Dividir matriz" %}}
+{{% tab "Split array" %}}
 
 {{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
-{{% tab "Procesador de tags (etiquetas)" %}}
+{{% tab "Tags Processor" %}}
 
 {{% observability_pipelines/processors/tags_processor %}}
 
 {{% /tab %}}
-{{% tab "Limitar" %}}
+{{% tab "Throttle" %}}
 
 {{% observability_pipelines/processors/throttle %}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Añadir otro conjunto de procesadores y destinos
+#### 別のプロセッサーと送信先のセットを追加する
 
 {{% observability_pipelines/multiple_processors %}}
 
-### Instalar el worker de Observability Pipelines
-1. Selecciona tu plataforma en el menú desplegable **Elige tu plataforma de instalación**.
-1. Introduce la dirección de escucha, que es la dirección y el puerto en los que el Observability Pipelines Worker escucha los logs entrantes desde el Datadog Agent. Por ejemplo, `0.0.0.0:<port_number>`.
-1. Proporciona las variables de entorno para cada uno de los destinos seleccionados.
+### 観測可能性パイプラインワーカーのインストール
+1. **Choose your installation platform** ドロップダウンメニューで使用するプラットフォームを選択します。
+1. `0.0.0.0:9000` のように、ソケット アドレスとポートを入力します。これは、受信ログを待ち受ける Observability Pipelines Worker のアドレスとポートです。ソケット アドレスには必ずポート番号を含めてください。
+1. TLS を有効化している場合は、TLS パスフレーズを入力します。
+1. 選択した各送信先の環境変数を指定します。詳しくは、[前提条件](#prerequisites) を参照してください。
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
-
-{{% /tab %}}
-{{% tab "Amazon Security Lake" %}}
-
-{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}
@@ -311,7 +338,7 @@ Para configurar el destino, sigue las instrucciones del proveedor de la nube que
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
-Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de la nube que utilices para archivar tus logs.
+Datadog Archives の送信先については、ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -376,7 +403,8 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 
 {{% /tab %}}
 {{< /tabs >}}
-1. Sigue las instrucciones de tu entorno para instalar el worker.
+
+1. 環境に合わせた手順に従い、Worker をインストールしてください。
 {{< tabs >}}
 {{% tab "Docker" %}}
 
@@ -405,21 +433,7 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% /tab %}}
 {{< /tabs >}}
 
-## Conectar el Datadog Agent al worker de Observability Pipelines
-
-Utiliza el archivo de configuración del Agent o el archivo de valores del Helm chart del Agent para conectar el Datadog Agent al worker de Observability Pipelines.
-
-{{< tabs >}}
-{{% tab "Archivo de configuración del Agent" %}}
-
-{{% observability_pipelines/log_source_configuration/datadog_agent %}}
-
-{{% /tab %}}
-{{% tab "Archivo de valores del Helm del Agent" %}}
-
-{{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-[1]: https://app.datadoghq.com/observability-pipelines
+[1]: /ja/integrations/amazon_web_services/#setup
+[2]: /ja/integrations/google_cloud_platform/#setup
+[3]: /ja/integrations/azure/#setup
+[4]: https://app.datadoghq.com/observability-pipelines
