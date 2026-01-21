@@ -198,6 +198,8 @@ To create an experiment:
    print(f"View experiment: {experiment.url}")
    ```
 
+Note: LLM Experiments traces are retained for 90 days.
+
 ### Setting up an automated experiment in CI/CD
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
