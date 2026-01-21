@@ -40,7 +40,7 @@ For instructions on setting up CI Visibility for your GitLab jobs, see [Set up P
 
 To test that you have performed the setup successfully, you can try running a GitLab pipeline and checking if it appears on the [**Executions** page][8].
 
-You are required to enable the collection of job logs. You can check if Datadog is receiving the logs correctly by clicking on the Logs tab of your pipeline execution.
+You are required to enable the collection of job logs. You can check if Datadog is receiving the logs correctly by clicking on the Logs tab of your pipeline execution. Ensure GitLab job logs are indexed and include messages in the form `Instance <hostname> connected`, as values are parsed from this format for correlation. Users also need [log read access][11] to see the Infrastructure tab. Logs for GitLab jobs include the `datadog.product:cipipeline` and `source:gitlab` tags, which you can use in [Log Indexes][10] filters.
 
 After you have completed these steps, your GitLab jobs should be correlated with infrastructure metrics. The correlation is per job and not pipeline, as different jobs may run on different hosts. The **Infrastructure** tab appears after the job is finished and Datadog receives the logs for that job.
 
@@ -57,3 +57,5 @@ After you have completed these steps, your GitLab jobs should be correlated with
 [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: /continuous_integration/explorer/?tab=pipelineexecutions
+[10]: /logs/indexes/
+[11]: /logs/guide/logs-rbac/
