@@ -28,7 +28,7 @@ See the [How Rehydration works][1] documentation for more details.
 
 ## Prerequisites
 
-To use Observability Pipelines' Amazon S3 Rehydration source, you must configure a SQS queue to receive your S3 bucket notifications.
+To use Observability Pipelines' Amazon S3 Rehydration source, you must configure an Amazon SQS queue to receive your S3 bucket notifications.
 
 ## Set up the source in the pipeline UI
 
@@ -54,7 +54,7 @@ Select an AWS authentication option. If you select Assume role:
 
 - Amazon S3 SQS URL:
     - The URL of the SQS queue to which the S3 bucket sends the notification events.
-    -Stored in the environment variable: `DD_OP_SOURCE_AWS_S3_SQS_URL`
+    - Stored in the environment variable: `DD_OP_SOURCE_AWS_S3_SQS_URL`
 
 - AWS_CONFIG_FILE path:
     - The path to the AWS configuration file local to this node.
