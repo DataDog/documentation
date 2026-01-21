@@ -76,9 +76,9 @@ The following are **not supported**:
 ### Configure the recipients
 
 Specify which recipients to notify when a monitor notification matches the rule's scope. You can always notify all recipients, or set conditional recipients that are only notified when certain conditions are met (for example, route critical alerts to your on-call recipient, and send warnings to a Slack channel).
-Conditions can be based on alert status (Alert, OK, Warn, or No data) or on tags:
-- **Status-based conditions**: Trigger recipients on specific monitor statuses: Alert, OK, Warn, or No data.
-- **Tag-based conditions**: Trigger recipients when a specific tag key has a given value (for example, `env:prod`). Only one tag key is supported per condition.
+Conditions can be based on monitor status or tags:
+- **Status-based conditions**: Notify recipients when the monitor transitions to a specific status (Alert, OK, Warn, or No data).
+- **Tag-based conditions**: Notify recipients when a specific tag key has a given value (for example, `env:prod`). Each condition supports only one tag key.
 
 Notifications can be sent to email or any integration channel. There is a limit of 50 notification recipients per rule. For more information, see [Notifications][2].
 
