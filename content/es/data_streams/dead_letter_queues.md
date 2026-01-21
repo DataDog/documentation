@@ -6,7 +6,7 @@ title: Colas de mensajes fallidos
 <div class="alert alert-danger">
     Data Streams Monitoring no está disponible para el sitio {{< region-param key="dd_site_name" >}}.
 </div>
-{{% /región del sitio %}}
+{{% /site-region %}}
 
 Data Streams Monitoring (DSM) proporciona visibilidad de tus colas de mensajes faliidos (DLQ) no vacías, lo que te permite monitorizar e inspeccionar los fallos en el procesamiento de mensajes. DSM también te permite corregir estos fallos de procesamiento de mensajes directamente en Datadog.
 
