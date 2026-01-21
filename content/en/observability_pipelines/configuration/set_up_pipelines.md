@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to on-premises logging environments. To aggregate, process, and route cloud-based logs, see <a href="https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source">Log Management Pipelines</a>.</div>
+<div class="alert alert-info">The log pipelines and processors outlined in this documentation are specific to on-premises logging environments. To aggregate, process, and route cloud-based logs, see <a href="https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source">Log Management Pipelines</a>.</div>
 
 In Observability Pipelines, a pipeline is a sequential path with three types of components:
 - [Source][1]: Receives data from your data source (for example, the Datadog Agent).
@@ -29,7 +29,7 @@ In Observability Pipelines, a pipeline is a sequential path with three types of 
 
 {{< img src="observability_pipelines/archive_log_pipeline.png" alt="Pipeline with one source connected to two processor groups and two destinations" style="width:100%;" >}}
 
-You can create a pipeline with one of the following methods:
+There are three types of pipelines: Logs, metrics ({{< tooltip glossary="preview" case="title" >}}), and rehydration ({{< tooltip glossary="preview" case="title" >}}). You can create a pipeline with one of the following methods:
 
 - [Pipeline UI](#set-up-a-pipeline-in-the-ui)
 - [API](#set-up-a-pipeline-with-the-api)
@@ -111,6 +111,9 @@ You can create a pipeline with one of the following methods:
 
 ### Set up the pipeline components
 
+<div class="alert alert-info">
+Rehydration is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/rehydration-for-observability-pipelines/">form</a> to request access.</div>
+
 1. Navigate to [Observability Pipelines][1] and click the [Rehydrations][2] tab.
 1. Click **+ New Rehydration**.
 1. Select and set up your [source][3].
@@ -122,13 +125,19 @@ You can create a pipeline with one of the following methods:
 
 ##### Add another processor group
 
+{{< img src="observability_pipelines/setup/another_processor_group_rehydration.png" alt="The Pipelines page showing two processor groups sending rehydrated logs to the same destination" style="width:100%;" >}}
+
 {{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
 
 ##### Add another set of processors and destinations
 
+{{< img src="observability_pipelines/setup/another_set_processor_destination_rehydration.png" alt="The Pipelines page showing two processor groups sending rehydrated logs to two different destinations" style="width:100%;" >}}
+
 {{% observability_pipelines/set_up_pipelines/add_another_set_of_processors_and_destinations %}}
 
 ##### Add another destination to a processor group
+
+{{< img src="observability_pipelines/setup/another_destination_rehydration.png" alt="The Pipelines page showing one processor group sending rehydrated logs to two different destinations" style="width:100%;" >}}
 
 {{% observability_pipelines/set_up_pipelines/add_another_destination %}}
 
