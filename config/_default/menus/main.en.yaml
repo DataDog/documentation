@@ -5761,31 +5761,36 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: .NET
+      url: feature_flags/server/dotnet
+      parent: feature_flags_server
+      identifier: feature_flags_server_dotnet
+      weight: 201
     - name: Go
       url: feature_flags/server/go
       parent: feature_flags_server
       identifier: feature_flags_server_go
-      weight: 201
+      weight: 202
     - name: Java
       url: feature_flags/server/java
       parent: feature_flags_server
       identifier: feature_flags_server_java
-      weight: 202
+      weight: 203
     - name: Node.js
       url: feature_flags/server/nodejs
       parent: feature_flags_server
       identifier: feature_flags_server_nodejs
-      weight: 203
+      weight: 204
     - name: Python
       url: feature_flags/server/python
       parent: feature_flags_server
       identifier: feature_flags_server_python
-      weight: 204
+      weight: 205
     - name: Ruby
       url: feature_flags/server/ruby
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
-      weight: 205
+      weight: 206
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
