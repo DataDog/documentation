@@ -58,7 +58,7 @@ OpenTelemetry API support for metrics is not available for this language. Use [D
 {% /if %}
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
-OpenTelemetry API support for logs is not available for this language. Use [Datadog log collection with trace correlation][210] instead.
+OpenTelemetry API support for logs is not available for this language. Use [Datadog Log Collection][210] instead.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -67,7 +67,7 @@ OpenTelemetry API support for logs is not available for this language. Use [Data
 {% if equals($prog_lang, "ruby") %}
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
-OpenTelemetry API support for logs is not available for Ruby. Use [Datadog log collection with trace correlation][210] instead.
+OpenTelemetry API support for logs is not available for Ruby. Use [Datadog Log Collection][210] instead.
 {% /alert %}
 {% /if %}
 {% /if %}
@@ -897,7 +897,7 @@ If you are using Datadog's traditional log injection (where `DD_LOGS_INJECTION=t
 [204]: /opentelemetry/config/environment_variable_support
 [205]: /opentelemetry/setup/otlp_ingest_in_the_agent/?tab=host#enabling-otlp-ingestion-on-the-datadog-agent
 [206]: https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.metrics
-[210]: /tracing/other_telemetry/connect_logs_and_traces/
+[210]: /logs/log_collection/
 
 <!-- .NET logs -->
 [301]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v3.31.0
