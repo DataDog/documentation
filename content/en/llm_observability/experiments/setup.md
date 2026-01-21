@@ -136,13 +136,10 @@ To create an experiment:
 
        return intersection / union
 
-   def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
+   def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
        fake_llm_call = "excellent"
-       return fake_llm_call
-
-   def detailed_fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
        return EvaluatorResult(
-           value="excellent",
+           value=fake_llm_call,
            reasoning="the model explains itself",
            assessment="pass", # or fail
            tags={"task": "judge_llm_call"},
@@ -276,20 +273,14 @@ def overlap(
     return intersection / union
 
 
-def fake_llm_as_a_judge(
-    input_data: Dict[str, Any], output_data: str, expected_output: str
-) -> str:
+def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
     fake_llm_call = "excellent"
-    return fake_llm_call
-
-
-def detailed_fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
-       return EvaluatorResult(
-           value="excellent",
-           reasoning="the model explains itself",
-           assessment="pass", # or fail
-           tags={"task": "judge_llm_call"},
-       )
+    return EvaluatorResult(
+        value=fake_llm_call,
+        reasoning="the model explains itself",
+        assessment="pass", # or fail
+        tags={"task": "judge_llm_call"},
+    )
 
 
 def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
