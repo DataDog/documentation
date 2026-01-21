@@ -50,7 +50,7 @@ further_reading:
 <!-- ============================================== -->
 
 <!-- Languages with only traces: Go, PHP, Java, Rust -->
-{% if or(or(or(equals($prog_lang, "go"), equals($prog_lang, "php")), equals($prog_lang, "java")), equals($prog_lang, "rust")) %}
+{% if or(equals($prog_lang, "go"), equals($prog_lang, "php"), equals($prog_lang, "java"), equals($prog_lang, "rust")) %}
 {% if equals($platform, "metrics") %}
 {% alert level="danger" %}
 OpenTelemetry API support for metrics is not available for this language. Select **Traces** to see available instrumentation options.
