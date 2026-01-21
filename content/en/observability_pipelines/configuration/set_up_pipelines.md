@@ -29,7 +29,12 @@ In Observability Pipelines, a pipeline is a sequential path with three types of 
 
 {{< img src="observability_pipelines/archive_log_pipeline.png" alt="Pipeline with one source connected to two processor groups and two destinations" style="width:100%;" >}}
 
-There are three types of pipelines: Logs, metrics ({{< tooltip glossary="preview" case="title" >}}), and rehydration ({{< tooltip glossary="preview" case="title" >}}). You can create a pipeline with one of the following methods:
+There are three types of pipelines:
+- Logs
+- Metrics ({{< tooltip glossary="preview" case="title" >}})
+- Rehydration ({{< tooltip glossary="preview" case="title" >}}).
+
+You can create a pipeline with one of the following methods:
 
 - [Pipeline UI](#set-up-a-pipeline-in-the-ui)
 - [API](#set-up-a-pipeline-with-the-api)
