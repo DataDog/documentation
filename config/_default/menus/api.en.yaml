@@ -2729,6 +2729,18 @@ menu:
           - ConvertSecurityMonitoringRuleFromJSONToTerraform
         unstable: []
         order: 12
+    - name: Bulk export security monitoring rules
+      url: '#bulk-export-security-monitoring-rules'
+      identifier: security-monitoring-bulk-export-security-monitoring-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkExportSecurityMonitoringRules
+        unstable: []
+        order: 13
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
@@ -8241,6 +8253,36 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: High Availability MultiRegion
+      url: /api/latest/high-availability-multiregion/
+      identifier: high-availability-multiregion
+      generated: true
+    - name: Create or update HAMR organization connection
+      url: '#create-or-update-hamr-organization-connection'
+      identifier: high-availability-multiregion-create-or-update-hamr-organization-connection
+      parent: high-availability-multiregion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateHamrOrgConnection
+        unstable:
+          - v2
+        order: 1
+    - name: Get HAMR organization connection
+      url: '#get-hamr-organization-connection'
+      identifier: high-availability-multiregion-get-hamr-organization-connection
+      parent: high-availability-multiregion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHamrOrgConnection
+        unstable:
+          - v2
+        order: 2
     - name: IP Allowlist
       url: /api/latest/ip-allowlist/
       identifier: ip-allowlist
