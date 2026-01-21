@@ -7790,6 +7790,23 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
+    - name: Entity Risk Scores
+      url: /api/latest/entity-risk-scores/
+      identifier: entity-risk-scores
+      generated: true
+    - name: List Entity Risk Scores
+      url: '#list-entity-risk-scores'
+      identifier: entity-risk-scores-list-entity-risk-scores
+      parent: entity-risk-scores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEntityRiskScores
+        unstable:
+          - v2
+        order: 1
     - name: Error Tracking
       url: /api/latest/error-tracking/
       identifier: error-tracking
@@ -8838,6 +8855,101 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Jira Integration
+      url: /api/latest/jira-integration/
+      identifier: jira-integration
+      generated: true
+    - name: Update Jira issue template
+      url: '#update-jira-issue-template'
+      identifier: jira-integration-update-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateJiraIssueTemplate
+        unstable:
+          - v2
+        order: 2
+    - name: Get Jira issue template
+      url: '#get-jira-issue-template'
+      identifier: jira-integration-get-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetJiraIssueTemplate
+        unstable:
+          - v2
+        order: 3
+    - name: Delete Jira issue template
+      url: '#delete-jira-issue-template'
+      identifier: jira-integration-delete-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJiraIssueTemplate
+        unstable:
+          - v2
+        order: 1
+    - name: Create Jira issue template
+      url: '#create-jira-issue-template'
+      identifier: jira-integration-create-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJiraIssueTemplate
+        unstable:
+          - v2
+        order: 4
+    - name: List Jira issue templates
+      url: '#list-jira-issue-templates'
+      identifier: jira-integration-list-jira-issue-templates
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListJiraIssueTemplates
+        unstable:
+          - v2
+        order: 5
+    - name: Delete Jira account
+      url: '#delete-jira-account'
+      identifier: jira-integration-delete-jira-account
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJiraAccount
+        unstable:
+          - v2
+        order: 6
+    - name: List Jira accounts
+      url: '#list-jira-accounts'
+      identifier: jira-integration-list-jira-accounts
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListJiraAccounts
+        unstable:
+          - v2
+        order: 7
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives

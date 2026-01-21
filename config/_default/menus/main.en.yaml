@@ -1726,141 +1726,6 @@ menu:
       parent: alerting
       identifier: monitor_types
       weight: 4
-    - name: Host
-      url: monitors/types/host/
-      parent: monitor_types
-      identifier: monitor_types_host
-      weight: 401
-    - name: Metric
-      url: monitors/types/metric/
-      parent: monitor_types
-      identifier: monitor_types_metrics
-      weight: 402
-    - name: Analysis
-      url: monitors/types/analysis/
-      parent: monitor_types
-      identifier: monitor_types_analysis
-      weight: 403
-    - name: Anomaly
-      url: monitors/types/anomaly/
-      parent: monitor_types
-      identifier: monitor_types_anomaly
-      weight: 404
-    - name: APM
-      url: monitors/types/apm/
-      parent: monitor_types
-      identifier: monitor_types_apm
-      weight: 405
-    - name: Audit Trail
-      url: monitors/types/audit_trail/
-      parent: monitor_types
-      identifier: monitor_types_auditlogs
-      weight: 406
-    - name: Change
-      url: monitors/types/change-alert/
-      parent: monitor_types
-      identifier: monitor_types_change
-      weight: 406
-    - name: CI/CD & Test
-      url: monitors/types/ci/
-      parent: monitor_types
-      identifier: monitor_types_ci
-      weight: 407
-    - name: Cloud Cost
-      url: monitors/types/cloud_cost/
-      parent: monitor_types
-      identifier: monitor_types_cloud_cost
-      weight: 408
-    - name: Composite
-      url: monitors/types/composite/
-      parent: monitor_types
-      identifier: monitor_types_composite
-      weight: 409
-    - name: Database Monitoring
-      url: monitors/types/database_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_database_monitoring
-      weight: 410
-    - name: Error Tracking
-      url: monitors/types/error_tracking/
-      parent: monitor_types
-      identifier: monitor_types_error_tracking
-      weight: 412
-    - name: Event
-      url: monitors/types/event/
-      parent: monitor_types
-      identifier: monitor_types_event
-      weight: 413
-    - name: Forecast
-      url: monitors/types/forecasts/
-      parent: monitor_types
-      identifier: monitor_types_forecasts
-      weight: 414
-    - name: Integration
-      url: monitors/types/integration/
-      parent: monitor_types
-      identifier: monitor_types_integration
-      weight: 415
-    - name: Live Process
-      url: monitors/types/process/
-      parent: monitor_types
-      identifier: monitor_types_process
-      weight: 416
-    - name: Logs
-      url: monitors/types/log/
-      parent: monitor_types
-      identifier: monitor_types_log
-      weight: 417
-    - name: Network
-      url: monitors/types/network/
-      parent: monitor_types
-      identifier: monitor_types_network
-      weight: 418
-    - name: Cloud Network Monitoring
-      url: monitors/types/cloud_network_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_cnm
-      weight: 419
-    - name: NetFlow
-      url: monitors/types/netflow/
-      parent: monitor_types
-      identifier: monitor_types_netflow
-      weight: 420
-    - name: Outlier
-      url: monitors/types/outlier/
-      parent: monitor_types
-      identifier: monitor_types_outlier
-      weight: 421
-    - name: Process Check
-      url: monitors/types/process_check/
-      parent: monitor_types
-      identifier: monitor_types_process_check
-      weight: 422
-    - name: Real User Monitoring
-      url: monitors/types/real_user_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_rum
-      weight: 423
-    - name: Service Check
-      url: monitors/types/service_check/
-      parent: monitor_types
-      identifier: monitor_types_service_check
-      weight: 424
-    - name: SLO Alerts
-      url: monitors/types/slo/
-      parent: monitor_types
-      identifier: monitor_types_slo
-      weight: 425
-    - name: Synthetic Monitoring
-      url: monitors/types/synthetic_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_syn
-      weight: 426
-    - name: Watchdog
-      url: monitors/types/watchdog/
-      parent: monitor_types
-      identifier: monitor_types_watchdog
-      weight: 427
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -5358,6 +5223,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
+    - name: Setup and Usage
+      url: llm_observability/experiments/setup
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_setup
+      weight: 501
+    - name: Datasets
+      url: llm_observability/experiments/datasets
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_datasets
+      weight: 502
+    - name: Experiments API
+      url: llm_observability/experiments/api
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_api
+      weight: 503
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
