@@ -1533,6 +1533,13 @@
       "description": "Create a scheduled detection rule returns \"OK\" response"
     }
   ],
+  "CreateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a critical asset returns \"OK\" response"
+    }
+  ],
   "CreateCustomFramework": [
     {
       "group": "security_monitoring",
@@ -1675,6 +1682,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a critical asset returns \"OK\" response"
     }
   ],
   "UpdateCustomFramework": [
@@ -1906,6 +1920,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
+    }
+  ],
+  "CreateSyntheticsSuite": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Synthetics: Create a test suite returns \"OK\" response"
     }
   ],
   "AddTeamHierarchyLink": [
