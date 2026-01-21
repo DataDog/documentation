@@ -1,5 +1,5 @@
 ---
-title: Getting Started with the Software Delivery MCP Server
+title: Getting Started with Software Delivery MCP Tools
 description: Connect AI agents to your CI Visibility and Test Optimization data using the Datadog MCP Server.
 further_reading:
 - link: "bits_ai/mcp_server/setup"
@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Software Delivery MCP Server toolset is in Preview. If you're interested in this feature, complete this form to request access. Learn more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
+The Software Delivery MCP tools are in Preview. If you're interested in this feature, complete this form to request access. Learn more about the Datadog MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
 {{< /callout >}}
 
 ## Overview
@@ -26,7 +26,7 @@ The [Datadog MCP Server][1] enables AI agents to access your Software Delivery d
 
 ## Use cases
 
-The Software Delivery MCP Server unlocks AI-assisted workflows for:
+The Software Delivery MCP tools unlock AI-assisted workflows for:
 
 - **Debugging pipeline failures**: Ask your AI agent to find recent pipeline failures, analyze error logs, and suggest fixes.
 - **Identifying flaky tests**: Query for flaky tests in your repository and get prioritized recommendations for which to fix first.
