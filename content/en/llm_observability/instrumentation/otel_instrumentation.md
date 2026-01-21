@@ -247,7 +247,7 @@ After running this example, search for `ml_app:simple-openllmetry-test` in the L
 
 ## Attribute mapping reference
 
-This section provides the mapping between OpenTelemetry GenAI semantic conventions (v1.37+) as well as Openllmetry to Datadog LLM Observability span schema.
+This section provides the mapping between OpenTelemetry GenAI semantic conventions (v1.37+) as well as OpenLLMetry to Datadog' LLM Observability span schema.
 
 <div class="alert alert-info">OpenLLMetry-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a> section.</div>
 
@@ -255,7 +255,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Base span attributes
 
-| OTLP Field | LLMObs Field | Notes |
+| OTLP Field | LLM Observability Field | Notes |
 |------------|--------------|-------|
 | `resource.attributes.service.name` | `ml_app`, `tags.service` | |
 | `name` | `name` | Overridden by `gen_ai.tool.name` if present |
@@ -268,7 +268,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Span kind resolution
 
-| `gen_ai.operation.name` | LLMObs `span.kind` |
+| `gen_ai.operation.name` | LLM Observability `span.kind` |
 |-------------------------|-------------------|
 | `generate_content`, `chat`, `text_completion`, `completion` | `llm` |
 | `embeddings`, `embedding` | `embedding` |
@@ -278,7 +278,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Model information
 
-| OTel Attribute | LLMObs Field | Notes |
+| OTel Attribute | LLM Observability Field | Notes |
 |----------------|--------------|-------|
 | `gen_ai.operation.name` | `meta.span.kind` | See resolution table above |
 | `gen_ai.provider.name` | `meta.model_provider` | Falls back to `gen_ai.system`, then `custom` |
@@ -287,7 +287,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 #### Token usage metrics
 
-| OTel Attribute | LLMObs Field |
+| OTel Attribute | LLM Observability Field |
 |----------------|--------------|
 | `gen_ai.usage.input_tokens` | `metrics.input_tokens` |
 | `gen_ai.usage.output_tokens` | `metrics.output_tokens` |
@@ -299,7 +299,7 @@ This section provides the mapping between OpenTelemetry GenAI semantic conventio
 
 All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix stripped.
 
-| OTel Attribute | LLMObs Field |
+| OTel Attribute | LLM Observability Field |
 |----------------|--------------|
 | `gen_ai.request.seed` | `metadata.seed` |
 | `gen_ai.request.frequency_penalty` | `metadata.frequency_penalty` |
@@ -312,7 +312,7 @@ All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix strip
 
 #### Tool attributes
 
-| OTel Attribute | LLMObs Field | Notes |
+| OTel Attribute | LLM Observability Field | Notes |
 |----------------|--------------|-------|
 | `gen_ai.tool.name` | `name` | Overrides span name |
 | `gen_ai.tool.call.id` | `metadata.tool_id` | |
@@ -324,13 +324,13 @@ All `gen_ai.request.*` parameters map to `meta.metadata.*` with the prefix strip
 
 #### Session and conversation
 
-| OTel Attribute | LLMObs Field | Notes |
+| OTel Attribute | LLM Observability Field | Notes |
 |----------------|--------------|-------|
 | `gen_ai.conversation.id` | `session_id` | Also added to `metadata.conversation_id` and tags |
 
 #### Response attributes
 
-| OTel Attribute | LLMObs Field |
+| OTel Attribute | LLM Observability Field |
 |----------------|--------------|
 | `gen_ai.response.model` | `meta.model_name` |
 | `gen_ai.response.finish_reasons` | `metadata.finish_reasons` |
@@ -342,7 +342,7 @@ Input and output messages are extracted from the following sources, in priority 
 1. Direct attributes: `gen_ai.input.messages`, `gen_ai.output.messages`, `gen_ai.system_instructions`
 2. Span events (`meta["events"]`) with name `gen_ai.client.inference.operation.details`
 
-| OTel Source | LLMObs Field | Notes |
+| OTel Source | LLM Observability Field | Notes |
 |-------------|--------------|-------|
 | `gen_ai.input.messages` | `meta.input.messages` (llm) / `meta.input.value` (others) | |
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (others) | |
@@ -350,7 +350,7 @@ Input and output messages are extracted from the following sources, in priority 
 
 ##### Embedding spans
 
-| OTel Source | LLMObs Field |
+| OTel Source | LLM Observability Field |
 |-------------|--------------|
 | `gen_ai.input.messages` | `meta.input.documents` |
 | N/A | `meta.output.value` = `[N embedding(s) returned]` |
@@ -373,7 +373,7 @@ This section documents OpenLLMetry-specific attribute mappings that differ from 
 
 `llm.request.type` is used as a fallback when `gen_ai.operation.name` is absent.
 
-| `llm.request.type` | LLMObs `span.kind` |
+| `llm.request.type` | LLM Observability `span.kind` |
 |--------------------|-------------------|
 | `chat` | `llm` |
 | `completion` | `llm` |
@@ -383,13 +383,13 @@ This section documents OpenLLMetry-specific attribute mappings that differ from 
 
 #### Model information
 
-| OpenLLMetry Attribute | LLMObs Field | Notes |
+| OpenLLMetry Attribute | LLM Observability Field | Notes |
 |-----------------------|--------------|-------|
 | `gen_ai.system` | `meta.model_provider` | Fallback when `gen_ai.provider.name` absent |
 
 #### Token usage metrics
 
-| OpenLLMetry Attribute | LLMObs Field | Notes |
+| OpenLLMetry Attribute | LLM Observability Field | Notes |
 |-----------------------|--------------|-------|
 | `llm.usage.total_tokens` | `metrics.total_tokens` | Fallback when `gen_ai.usage.total_tokens` absent |
 
@@ -434,7 +434,7 @@ Tool calls are nested within completion attributes.
 
 ##### Tool response messages
 
-When `role = "tool"` and `tool_call_id` is present, the message is converted to a tool result:
+When `role = "tool"` and `tool_call_id` are present, the message is converted to a tool result:
 
 | OpenLLMetry Attribute | Maps To |
 |-----------------------|---------|
@@ -445,7 +445,7 @@ When `role = "tool"` and `tool_call_id` is present, the message is converted to 
 
 For embedding spans, documents are extracted from prompt content attributes.
 
-| OpenLLMetry Source | LLMObs Field |
+| OpenLLMetry Source | LLM Observability Field |
 |--------------------|--------------|
 | `gen_ai.prompt.<index>.content` | `meta.input.documents[].text` |
 
