@@ -280,15 +280,19 @@ After these steps, CI Visibility adds the hostname to each job. To see the metri
 {{% /tab %}}
 
 {{% tab "Docker Autoscaler" %}}
-CI Visibility supports Infrastructure metrics for "Docker Autoscaler" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
+CI Visibility supports Infrastructure metrics for "Docker Autoscaler" executors through log-based correlation. Make sure GitLab job logs are indexed (not excluded) so Datadog can link jobs to hosts. Logs for GitLab jobs include the `datadog.product:cipipeline` and `source:gitlab` tags, which you can use in [Log Indexes][2] filters. Users also need [log read access][3] to see the Infrastructure tab. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
 
 [1]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[2]: /logs/indexes/
+[3]: /logs/guide/logs-rbac/
 {{% /tab %}}
 
 {{% tab "Instance" %}}
-CI Visibility supports Infrastructure metrics for "Instance" executors. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
+CI Visibility supports Infrastructure metrics for "Instance" executors through log-based correlation. Make sure GitLab job logs are indexed (not excluded) so Datadog can link jobs to hosts. Logs for GitLab jobs include the `datadog.product:cipipeline` and `source:gitlab` tags, which you can use in [Log Indexes][2] filters. Users also need [log read access][3] to see the Infrastructure tab. For more information, see the [Correlate Infrastructure Metrics with GitLab Jobs guide][1].
 
 [1]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[2]: /logs/indexes/
+[3]: /logs/guide/logs-rbac/
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
