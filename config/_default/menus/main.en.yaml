@@ -5668,11 +5668,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_setup
       weight: 1
+    - name: Configuration
+      url: code_coverage/configuration/
+      parent: code_coverage
+      identifier: code_coverage_configuration
+      weight: 2
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 2
+      weight: 3
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -5710,11 +5715,16 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_change_failure_detection
       weight: 2
+    - name: DORA Metrics Calculation
+      url: dora_metrics/calculation/
+      parent: dora_metrics
+      identifier: dora_metrics_calculation
+      weight: 3
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 3
+      weight: 4
     - name: Feature Flags
       url: feature_flags/
       pre: ci

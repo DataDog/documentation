@@ -121,7 +121,7 @@ In Xcode, you **must** link the following frameworks:
 
 Then, you can select the modules you want to use:
   ```
-  DatadogCrashReporting.xcframework + CrashReporter.xcframework
+  DatadogCrashReporting.xcframework
   DatadogLogs.xcframework
   DatadogRUM.xcframework
   DatadogSessionReplay.xcframework
