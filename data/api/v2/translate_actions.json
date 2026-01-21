@@ -1087,6 +1087,16 @@
     "description": "Get the details of an event by `event_id`.",
     "summary": "Get an event"
   },
+  "GetHamrOrgConnection": {
+    "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
+    "summary": "Get HAMR organization connection"
+  },
+  "CreateHamrOrgConnection": {
+    "description": "Create or update the High Availability Multi-Region (HAMR) organization connection.\nThis endpoint allows you to configure the HAMR connection between the authenticated organization\nand a target organization, including setting the connection status (ONBOARDING, PASSIVE, FAILOVER, ACTIVE, RECOVERY)",
+    "summary": "Create or update HAMR organization connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
