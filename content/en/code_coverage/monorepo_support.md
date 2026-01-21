@@ -97,88 +97,7 @@ This happens automatically without requiring any configuration file.
 
 <div class="alert alert-info">Manual service configuration should only be used when you cannot use Software Catalog integration. Software Catalog is the preferred method because code locations defined there can be utilized by multiple Datadog products.</div>
 
-To manually define services in your repository, create a `code-coverage.datadog.yml` file at the root of your repository.
-
-### Configuration file format
-
-The configuration file uses the following YAML format:
-
-{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
-schema-version: v1
-services:
-  - id: frontend
-    paths:
-      - frontend/**
-      - shared/ui/**
-  - id: backend-api
-    paths:
-      - backend/api/**
-      - backend/.*\.go
-  - id: data-pipeline
-    paths:
-      - pipeline/jobs/**
-      - pipeline/.*\.(py|js)
-{{< /code-block >}}
-
-### Configuration options
-
-- `schema-version` (required): Must be `v1`
-- `services` (required): List of service definitions
-  - `id` (required): Unique identifier for the service (used in tags and filters)
-  - `paths` (required): List of path patterns that belong to this service
-
-### Path patterns
-
-All paths must be relative to the repository root. You can use glob patterns or regular expressions:
-
-- **Glob patterns**: Use `*` for single-level matching and `**` for multi-level matching
-  - `module-a/**` - Matches all files under the `module-a` directory
-  - `src/*.js` - Matches all `.js` files directly in the `src` directory
-  - `**/test/**` - Matches all files in any `test` directory at any level
-
-- **Regular expressions**: Patterns containing any of these characters are treated as regular expressions: `+{}|()^$\`
-  - `[a-zA-Z0-9]+\.json` - Matches JSON files with alphanumeric names in the root
-  - `(test|spec)_.*\.py` - Matches Python test files with specific naming patterns
-  - `src/.*\.(ts|tsx)` - Matches TypeScript files in the src directory
-
-### Example configuration
-
-{{% collapse-content title="JavaScript/TypeScript monorepo" level="h4" %}}
-{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
-schema-version: v1
-services:
-  - id: web-app
-    paths:
-      - packages/web/**
-      - packages/shared/ui/**
-  - id: mobile-app
-    paths:
-      - packages/mobile/**
-      - packages/shared/core/**
-  - id: admin-dashboard
-    paths:
-      - packages/admin/**
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Multi-language monorepo" level="h4" %}}
-{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
-schema-version: v1
-services:
-  - id: backend-service
-    paths:
-      - services/backend/**
-      - services/backend/.*\.go
-  - id: frontend-web
-    paths:
-      - services/frontend/**
-      - services/frontend/.*\.(ts|tsx)
-  - id: data-processing
-    paths:
-      - services/data/**
-      - scripts/.*\.py
-{{< /code-block >}}
-{{% /collapse-content %}}
+To manually define services, add a `services` section to the `code-coverage.datadog.yml` file in your repository. See [Configuration][6] for file format details, configuration options, pattern syntax, and examples.
 
 ## Viewing coverage data for services and codeowners
 
@@ -293,3 +212,4 @@ Confirm that:
 [3]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [4]: /service_catalog/service_definition_api/
 [5]: https://app.datadoghq.com/ci/code-coverage
+[6]: /code_coverage/configuration
