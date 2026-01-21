@@ -83,7 +83,6 @@ An _experiment_ lets you systematically test your LLM application by running you
    - **Boolean**: returns true or false
    - **score**: returns a numeric value (float)
    - **categorical**: returns a labeled category (string)
-
    Additionally, you can also return an `EvaluatorResult` to capture more aspects of the evaluation, such as `reasoning` (`str`), `assessment` (`"pass"` or `"fail"`)
    and `tags` (`Dict[str, str]`). The `value` field of the EvaluatorResult captures the final evaluation result, and works the same way as the simple use case specified above.
 
