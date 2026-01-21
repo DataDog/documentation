@@ -21,7 +21,7 @@ If you want to query data sources not yet available, use the following form to s
 
 With [DDSQL Editor][1], you can get deeper visibility into your telemetry by querying your resources with natural language or with [DDSQL](#use-sql-syntax-ddsql), a dialect of SQL with additional support for querying tags.
 
-You can also export the results of a SQL query to visualize in a Dashboard or Notebook or to automate in a Datadog Workflow through [DDSQL Action](#save-and-share-queries).
+You can also export the results of a DDSQL query to visualize in a Dashboard or Notebook or to automate in a Datadog Workflow through [DDSQL Action](#save-and-share-queries).
 
 {{< img src="/ddsql_editor/query-results-avg-cpu-usage-by-host.png" alt="The result of a SQL query showing average CPU usage by host on the DDSQL page in Datadog" style="width:100%;" >}}
 
