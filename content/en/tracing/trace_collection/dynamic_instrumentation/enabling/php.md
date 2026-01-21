@@ -4,7 +4,9 @@ description: Set up Dynamic Instrumentation for PHP applications to add probes a
 aliases:
     - /dynamic_instrumentation/enabling/php/
     - /tracing/dynamic_instrumentation/enabling/php
-private: true
+private: false
+code_lang: php
+type: multi-code-lang
 further_reading:
     - link: 'agent'
       tag: 'Documentation'
