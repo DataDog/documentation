@@ -47558,12 +47558,12 @@ components:
           $ref: '#/components/schemas/RumRetentionFilterData'
       type: object
     RumRetentionFilterSampleRate:
-      description: The sample rate for a RUM retention filter, between 0 and 100.
-      example: 25
-      format: int64
+      description: The sample rate for a RUM retention filter, between 0.1 and 100.
+      example: 50.5
+      format: double
       maximum: 100
-      minimum: 0
-      type: integer
+      minimum: 0.1
+      type: number
     RumRetentionFilterType:
       default: retention_filters
       description: The type of the resource. The value should always be retention_filters.
