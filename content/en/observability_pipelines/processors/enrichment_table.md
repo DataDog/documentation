@@ -89,7 +89,8 @@ To set up the enrichment table processor:
 
   1. Enter the file path.
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
-  1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment file example](#enrichment-file-example).
+  1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value.
+      - See the [Enrichment file example](#enrichment-file-example).
   1. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
@@ -100,7 +101,7 @@ To set up the enrichment table processor:
   {{% tab "GeoIP" %}}
 
   1. For GeoIP, enter the GeoIP path to your `.mmdb` file relative to the `<DD_OP_DATA_DIR>/config` directory.
-    - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
+      - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
