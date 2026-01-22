@@ -765,13 +765,22 @@
     "request_description": "",
     "request_schema_description": "The definition of the `BudgetWithEntries` object."
   },
+  "ValidateCsvBudget": {
+    "summary": "Validate CSV budget"
+  },
+  "ValidateBudget": {
+    "description": "Validate a budget configuration without creating or modifying it",
+    "summary": "Validate budget",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteBudget": {
-    "description": "Delete a budget.",
-    "summary": "Delete a budget"
+    "description": "Delete a budget",
+    "summary": "Delete budget"
   },
   "GetBudget": {
-    "description": "Get a budget.",
-    "summary": "Get a budget"
+    "description": "Get a budget",
+    "summary": "Get budget"
   },
   "ListBudgets": {
     "description": "List budgets.",
