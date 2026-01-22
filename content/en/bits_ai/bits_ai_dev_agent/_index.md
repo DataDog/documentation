@@ -16,6 +16,8 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
+Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][7], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+
 ## Supported Datadog products
 
 Bits AI Dev Agent is available for the following Datadog products:
@@ -57,10 +59,6 @@ Auto-push allows the Dev Agent to create branches, push code, and open PRs when 
 Auto-push only opens PRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
 Auto-push is available for Error Tracking and Test Optimization. 
-
-#### Security considerations
-
-Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Dev Agent, but it is not foolproof. 
 
 #### Security considerations
 
@@ -120,7 +118,7 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [4]: /tests/
 [5]: https://app.datadoghq.com/integrations/github
 [6]: /bits_ai/bits_ai_dev_agent/setup/
-[7]: https://app.datadoghq.com/code?tab=my-sessions
+[7]: https://app.datadoghq.com/code
 [8]: /bits_ai/bits_ai_sre/
 [10]: /profiler/automated_analysis/
 [11]: /tracing/trace_explorer/
