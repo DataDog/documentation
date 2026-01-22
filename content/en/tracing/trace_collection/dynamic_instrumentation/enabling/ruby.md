@@ -14,11 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< beta-callout-private url="https://www.datadoghq.com/product-preview/dynamic-instrumentation-for-ruby/" >}}
-    Dynamic Instrumentation for Ruby is in limited preview, and is not available to all customers.
-    Request access to join the waiting list.
-    Note that <a href="#limitations">some limitations</a> apply to the preview.
-{{< /beta-callout-private >}}
+{{< partial name="dynamic_instrumentation/beta-callout.html" language="Ruby" limitations_anchor="unsupported-features" >}}
 
 Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
@@ -48,18 +44,14 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
 
-## Limitations
-
-The following limitations apply to the limited preview:
-
-### Supported features
+## Supported features
 
 - [Dynamic Logs][8]
 - Capturing of variables for Dynamic Logs attached to a specific file/line
 - [PII redaction][10]
 - [Source code integration][9]
 
-### Unsupported features
+## Unsupported features
 
 - Dynamic Metrics, Spans, and Span Tags
 - Dynamic Log conditions
