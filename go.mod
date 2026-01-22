@@ -2,6 +2,6 @@ module documentation
 
 go 1.24.4
 
-require github.com/DataDog/websites-modules v1.4.281 // indirect
+require github.com/DataDog/websites-modules v1.5.1-0.20260122171923-c904012814ca // indirect
 
 // replace github.com/DataDog/websites-modules => /Users/lisiane.turlure/guac/websites-modules
