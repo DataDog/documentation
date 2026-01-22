@@ -94,7 +94,6 @@ Utilization
 
 ## Buffer metrics (when buffering is enabled)
 
-Track buffer behavior with these metrics:
 
 {{% observability_pipelines/metrics/buffer %}}
 
