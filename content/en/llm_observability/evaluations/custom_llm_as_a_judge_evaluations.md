@@ -232,7 +232,7 @@ The pane on the right shows **Filtered Spans** (or traces) corresponding to the 
 
 Select a span to show JSON data available for use in an evaluation. Then, click **Test Evaluation** to pre-fill inputs to your evaluation with data from the span, and click **Run** to test.
 
-To add a JSON data as a variable in your user message, use the three-dots menu to the left of each JSON row JSON  and select **Add variable to message**. 
+To add JSON data as a variable in your user message, use the three-dots menu to the left of a row and select **Add variable to message**.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
