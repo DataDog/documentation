@@ -124,10 +124,6 @@ To see the supported data types (for example, `payment:card`), use the **Schema 
 
 #### Create custom scanners
 
-{{< callout url=https://www.datadoghq.com/support/ >}}
-App and API Protection Sensitive Data Detection is in Preview. To sign up, contact Datadog support.
-{{< /callout >}}
-
 By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides custom scanners to define scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
 
 In a custom scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
