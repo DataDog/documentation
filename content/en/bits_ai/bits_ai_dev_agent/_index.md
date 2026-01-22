@@ -62,6 +62,12 @@ Auto-push is available for Error Tracking and Test Optimization.
 
 Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Dev Agent, but it is not foolproof. 
 
+#### Security considerations
+
+Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data the Dev Agent works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
+
+To balance safety and automation, you can configure auto-push behavior in [Datadog][14] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
+
 ### Error tracking
 
 In [Error Tracking][1], Bits AI Dev Agent diagnoses and remediates code issues with context and unit-tested fixes:
@@ -120,3 +126,4 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [11]: /tracing/trace_explorer/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
+[14]: https://app.datadoghq.com/code/settings
