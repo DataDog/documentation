@@ -302,7 +302,7 @@ Is Loading
 **Provided values**: on, off
 
 Is Visible
-: Determines whether the image component is visible.<br>
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
 ### Inspect data
