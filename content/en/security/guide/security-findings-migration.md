@@ -32,7 +32,7 @@ This change comes with a set of [new features](#new-features) that use the new s
 ### Required action
 
 - If you use certain API endpoints or Terraform resources, **changes will be required**:
-  - For [List findings][15] and [Get a finding][16] API endpoints, update your API calls to use the new unified Findings API. The documentation for this API will be published in early January 2026.
+  - For [List findings][15] and [Get a finding][16] API endpoints, update your API calls to use the new unified [Search security findings][18] endpoint.
   - For [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, update `query` values to use the new search syntax, starting January 28, 2026.
 - If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required**. The following queries are updated automatically in the UI:
   - Explorers
@@ -61,7 +61,7 @@ View the full specification at [Security Findings Schema Reference][1].
 
 Starting January 28, 2026, the following features will be made available and use the new data model:
 - Unified search queries for Cloud Security [Misconfigurations][9], [Identity Risks][10], [Attack Paths][11], [IaC][12], and [API][13] findings
-- A new unified public findings API
+- A new unified [public findings API][18]
 - [Dashboard][2] support for Code Security
 - Graphing security findings in [Datadog Sheets][3]
 - Datadog [Workflow Automation][4] support for all finding types
@@ -152,3 +152,4 @@ Security findings encompass misconfigurations, vulnerabilities, and security ris
 [15]: /api/latest/security-monitoring/#list-findings
 [16]: /api/latest/security-monitoring/#get-a-finding
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/security_notification_rule
+[18]: https://docs.datadoghq.com/api/latest/security-monitoring/#search-security-findings

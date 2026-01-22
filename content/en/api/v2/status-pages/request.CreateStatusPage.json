@@ -1,0 +1,24 @@
+{
+  "data": {
+    "attributes": {
+      "name": "A Status Page",
+      "domain_prefix": "status-page-5e2fd69be33e79aa",
+      "components": [
+        {
+          "name": "Login",
+          "type": "component",
+          "position": 0
+        },
+        {
+          "name": "Settings",
+          "type": "component",
+          "position": 1
+        }
+      ],
+      "enabled": true,
+      "type": "internal",
+      "visualization_type": "bars_and_uptime_percentage"
+    },
+    "type": "status_pages"
+  }
+}
