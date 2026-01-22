@@ -811,8 +811,8 @@ Flutter Web を使用するクライアントは、Datadog Browser SDK v5 を使
 ```diff
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
-+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
-+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js" crossorigin></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js" crossorigin></script>
 ```
 
 **注**: Datadog はサイトごとに1つの CDN バンドルを提供しています。すべてのサイト URL については [Browser SDK README](https://github.com/DataDog/browser-sdk/#cdn-bundles) を参照してください。

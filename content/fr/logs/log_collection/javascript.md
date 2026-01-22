@@ -61,7 +61,7 @@ Chargez et configurez le SDK dans la section head de vos pages. Pour le site **{
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
+        d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
@@ -85,7 +85,7 @@ Chargez et configurez le SDK dans la section head de vos pages. Pour le site **{
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
+        d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js','DD_LOGS')
       DD_LOGS.onReady(function() {
@@ -109,7 +109,7 @@ Chargez et configurez le SDK dans la section head de vos pages. Pour le site **{
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
+        d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
@@ -133,7 +133,7 @@ Chargez et configurez le SDK dans la section head de vos pages. Pour le site **{
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
+        d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
@@ -157,7 +157,7 @@ Chargez et configurez le SDK dans la section head de vos pages. Pour le site **{
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
+        d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
@@ -181,7 +181,7 @@ Chargez et configurez le SDK dans la section head de vos pages. Pour le site **{
       <script>
       (function(h,o,u,n,d) {
         h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
+        d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v5.js','DD_LOGS')
       window.DD_LOGS.onReady(function() {
@@ -210,7 +210,7 @@ Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK 
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js" crossorigin></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -229,7 +229,7 @@ Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK 
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js" crossorigin></script>
     <script>
       window.DD_LOGS &&
         DD_LOGS.init({
@@ -248,7 +248,7 @@ Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK 
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js" crossorigin></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -267,7 +267,7 @@ Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK 
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js" crossorigin></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -286,7 +286,7 @@ Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK 
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js" crossorigin></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
@@ -305,7 +305,7 @@ Pour recevoir tous les logs et toutes les erreurs, chargez et configurez le SDK 
 <html>
   <head>
     <title>Exemple pour envoyer les logs à Datadog</title>
-    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js" crossorigin></script>
     <script>
       window.DD_LOGS &&
         window.DD_LOGS.init({
