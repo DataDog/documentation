@@ -7183,7 +7183,10 @@ components:
           type: string
         type:
           description: The type of the object, must be `budget`.
+          example: ''
           type: string
+      required:
+      - type
       type: object
     BudgetArray:
       description: An array of budgets.
@@ -7208,6 +7211,8 @@ components:
           items:
             $ref: '#/components/schemas/Budget'
           type: array
+      required:
+      - data
       type: object
     BudgetAttributes:
       description: The attributes of a budget.
@@ -7227,9 +7232,8 @@ components:
           format: int64
           type: integer
         entries:
-          description: The entries of the budget.
           items:
-            $ref: '#/components/schemas/BudgetEntry'
+            $ref: '#/components/schemas/BudgetWithEntriesDataAttributesEntriesItems'
           type: array
         metrics_query:
           description: The cost query used to track against the budget.
@@ -7264,25 +7268,89 @@ components:
           example: 00000000-0a0a-0a0a-aaa0-00000000000a
           type: string
       type: object
-    BudgetEntry:
-      description: The entry of a budget.
+    BudgetValidationRequest:
+      example:
+        data:
+          attributes:
+            created_at: 1738258683590
+            created_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+            end_month: 202502
+            entries:
+            - amount: 500
+              month: 202501
+              tag_filters:
+              - tag_key: service
+                tag_value: ec2
+            - amount: 500
+              month: 202502
+              tag_filters:
+              - tag_key: service
+                tag_value: ec2
+            metrics_query: aws.cost.amortized{service:ec2} by {service}
+            name: my budget
+            org_id: 123
+            start_month: 202501
+            total_amount: 1000
+            updated_at: 1738258683590
+            updated_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+          id: '1'
+          type: budget
       properties:
-        amount:
-          description: The `amount` of the budget entry.
-          example: 500
-          format: double
-          type: number
-        month:
-          description: The `month` of the budget entry.
-          example: 202501
-          format: int64
-          type: integer
-        tag_filters:
-          description: The `tag_filters` of the budget entry.
-          items:
-            $ref: '#/components/schemas/TagFilter'
-          type: array
+        data:
+          $ref: '#/components/schemas/BudgetValidationRequestData'
       type: object
+    BudgetValidationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BudgetWithEntriesDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/BudgetWithEntriesDataType'
+      required:
+      - type
+      type: object
+    BudgetValidationResponse:
+      example:
+        data:
+          attributes:
+            errors: []
+            valid: true
+          id: budget_validation
+          type: budget_validation
+      properties:
+        data:
+          $ref: '#/components/schemas/BudgetValidationResponseData'
+      type: object
+    BudgetValidationResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BudgetValidationResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/BudgetValidationResponseDataType'
+      required:
+      - type
+      type: object
+    BudgetValidationResponseDataAttributes:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        valid:
+          type: boolean
+      type: object
+    BudgetValidationResponseDataType:
+      default: budget_validation
+      description: Budget validation resource type.
+      enum:
+      - budget_validation
+      example: budget_validation
+      type: string
+      x-enum-varnames:
+      - BUDGET_VALIDATION
     BudgetWithEntries:
       description: The definition of the `BudgetWithEntries` object.
       properties:
@@ -7300,8 +7368,71 @@ components:
           type: string
         type:
           description: The type of the object, must be `budget`.
+          example: ''
           type: string
       type: object
+    BudgetWithEntriesDataAttributes:
+      properties:
+        created_at:
+          format: int64
+          type: integer
+        created_by:
+          type: string
+        end_month:
+          format: int64
+          type: integer
+        entries:
+          items:
+            $ref: '#/components/schemas/BudgetWithEntriesDataAttributesEntriesItems'
+          type: array
+        metrics_query:
+          type: string
+        name:
+          type: string
+        org_id:
+          format: int64
+          type: integer
+        start_month:
+          format: int64
+          type: integer
+        total_amount:
+          format: double
+          type: number
+        updated_at:
+          format: int64
+          type: integer
+        updated_by:
+          type: string
+      type: object
+    BudgetWithEntriesDataAttributesEntriesItems:
+      properties:
+        amount:
+          format: double
+          type: number
+        month:
+          format: int64
+          type: integer
+        tag_filters:
+          items:
+            $ref: '#/components/schemas/BudgetWithEntriesDataAttributesEntriesItemsTagFiltersItems'
+          type: array
+      type: object
+    BudgetWithEntriesDataAttributesEntriesItemsTagFiltersItems:
+      properties:
+        tag_key:
+          type: string
+        tag_value:
+          type: string
+      type: object
+    BudgetWithEntriesDataType:
+      default: budget
+      description: Budget resource type.
+      enum:
+      - budget
+      example: budget
+      type: string
+      x-enum-varnames:
+      - BUDGET
     BulkDeleteAppsDatastoreItemsRequest:
       description: Request to delete items from a datastore.
       properties:
@@ -58734,18 +58865,6 @@ components:
       type: string
       x-enum-varnames:
       - ROW
-    TagFilter:
-      description: Tag filter for the budget's entries.
-      properties:
-        tag_key:
-          description: The key of the tag.
-          example: service
-          type: string
-        tag_value:
-          description: The value of the tag.
-          example: ec2
-          type: string
-      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -70773,36 +70892,73 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_write
       summary: Create or update a budget
       tags:
       - Cloud Cost Management
       x-menu-order: 34
+  /api/v2/cost/budget/csv/validate:
+    post:
+      operationId: ValidateCsvBudget
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      summary: Validate CSV budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 36
+  /api/v2/cost/budget/validate:
+    post:
+      description: Validate a budget configuration without creating or modifying it
+      operationId: ValidateBudget
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetValidationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetValidationResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Validate budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 35
   /api/v2/cost/budget/{budget_id}:
     delete:
-      description: Delete a budget.
+      description: Delete a budget
       operationId: DeleteBudget
       parameters:
       - $ref: '#/components/parameters/BudgetID'
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_write
-      summary: Delete a budget
+      summary: Delete budget
       tags:
       - Cloud Cost Management
-      x-menu-order: 35
+      x-menu-order: 38
     get:
-      description: Get a budget.
+      description: Get a budget
       operationId: GetBudget
       parameters:
       - $ref: '#/components/parameters/BudgetID'
@@ -70811,23 +70967,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BudgetWithEntries'
+                $ref: '#/components/schemas/BudgetValidationRequest'
           description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
-      summary: Get a budget
+      summary: Get budget
       tags:
       - Cloud Cost Management
-      x-menu-order: 36
+      x-menu-order: 37
   /api/v2/cost/budgets:
     get:
       description: List budgets.
@@ -70844,8 +70994,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
       summary: List budgets
       tags:
       - Cloud Cost Management
