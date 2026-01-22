@@ -73,7 +73,7 @@ To configure a repository environment:
 1. Click **Add Environment** to create a repository configuration:
    1. Select a repository from the dropdown.
    1. (Optional) Under **Pre-installed Languages**, click **Select Versions** to specify the language versions the sandbox should use.
-   1. (Optional) Define environment variables or secrets. These are available during both environment setup and Agent execution.
+   1. (Optional) Define environment variables or secrets. These are available during both environment setup and Dev Agent execution.
    1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
 1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
