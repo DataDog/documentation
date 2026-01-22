@@ -131,6 +131,8 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
+{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Example publish notice modal for degradations" style="width:100%;" >}}
+
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
 - Updates the uptime bars for impacted components.
@@ -155,12 +157,16 @@ Maintenance windows allow you to proactively communicate planned downtime or ser
 | **Components impacted** | Components affected during the maintenance window |
 | **Notify subscribers** | Toggle to send advance notification to subscribers |
 
+{{< img src="service_management/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:100%;" >}}
+
 After reviewing and scheduling, the maintenance window:
 - Appears under **Upcoming Maintenance** on the status page
 - Automatically updates component status to **Maintenance** when the window begins
 - Returns components to **Operational** when the window ends (unless manually overridden)
 
 You can post updates if plans change or reschedule the maintenance window as needed.
+
+{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
 
 ## Email subscriptions
 
