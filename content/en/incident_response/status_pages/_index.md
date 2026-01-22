@@ -131,7 +131,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Example publish notice modal for degradations" style="width:100%;" >}}
+{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
 
 After a degradation notice is reviewed and published, it:
 - Appears on the **Status Pages List** under Active Notices.
@@ -141,8 +141,8 @@ After a degradation notice is reviewed and published, it:
 You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
 
 ### Schedule a maintenance window
-<!-- Image placeholder
-{{< img src="#" alt="Status page showing a scheduled maintenance window for upcoming infrastructure work" style="width:100%;" >}}-->
+
+{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
 
 Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degradations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. This allows you to keep customers informed and reduce support volume.
 
@@ -156,7 +156,7 @@ From the status page, click **Schedule Maintenance**, or click **Publish Notice*
 | **Components impacted** | Components affected during the maintenance window |
 | **Notify subscribers** | Toggle to send advance notification to subscribers |
 
-{{< img src="service_management/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:100%;" >}}
+{{< img src="service_management/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:60%;" >}}
 
 After reviewing and scheduling, the maintenance window:
 - Appears under **Upcoming Maintenance** on the status page
@@ -164,8 +164,6 @@ After reviewing and scheduling, the maintenance window:
 - Returns components to **Operational** when the window ends (unless manually overridden)
 
 You can post updates if plans change or reschedule the maintenance window as needed.
-
-{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
 
 ## Email subscriptions
 
