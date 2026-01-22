@@ -34,7 +34,7 @@ Backpressure determines if the system should slow down the consumption or accept
 
 ## Component buffers
 
-Buffering protects against temporary overloads or outages for a given workload. All components in Observability Pipelines have a small in-memory buffer between them. The buffer is the channel that two components communicate over. It ensures that there is a small amount of space that can be used to send events even if the component on the receiving end is busy. This allows maximizing throughput when workloads are not entirely uniform.
+Buffering data protects against temporary overloads or outages for a given workload. All components in Observability Pipelines have a small in-memory buffer between them. The buffer is the channel that two components communicate over. It ensures that there is a small amount of space that can be used to send events even if the component on the receiving end is busy. This allows maximizing throughput when workloads are not entirely uniform.
 
 The buffer size is 100 events for source and processors and a default of 500 events for destinations. Buffers for Observability Pipelines destinations can be configured. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information. The default destination buffer capacity is more than that of other components because destinations are typically the primary source of backpressure in any given Observability Pipelines topology. Destinations communicate to services over the network, where latency may be introduced or outages may temporarily occur.
 
