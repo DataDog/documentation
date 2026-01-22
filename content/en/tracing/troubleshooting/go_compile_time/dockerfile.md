@@ -43,7 +43,7 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Install Orchestrion from pinned dependencies
+# Install Orchestrion
 RUN go install github.com/DataDog/orchestrion
 
 # Build with Orchestrion instrumentation
@@ -76,7 +76,7 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Install Orchestrion from pinned dependencies
+# Install Orchestrion
 RUN go install github.com/DataDog/orchestrion
 
 # Build with Orchestrion instrumentation
@@ -111,7 +111,7 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Install Orchestrion from pinned dependencies
+# Install Orchestrion
 RUN go install github.com/DataDog/orchestrion
 
 # Build with Orchestrion instrumentation
