@@ -17,21 +17,11 @@ Logs can contain information like IP addresses, user IDs, or service names that 
 
 The following are se cases for enriching logs from integrations
 
-#### ServiceNow (CMDB)
+#### Cloud object storage
 
-ServiceNow is an IT service management platform with a Configuration Management Database (CMDB) that tracks infrastructure assets, applications, and dependencies.
+Cloud object storage services (Amazon S3, Azure Blob Storage, Google Cloud Storage) are scalable storage services used to store large volumes of structured and unstructured reference data.
 
-Use the Enrichment Table processor to:
-- Enrich logs with infra ownership and dependency context (for example, which team owns the host and the business unit the team supports).
-- Add information directly from CMDB records to telemetry.
-
-#### Snowflake
-
-Snowflake is a cloud-native data warehouse/lake that centralizes structured and semi-structured data.
-
-Use the Enrichment Table processor to:
-- Add customer metadata (account tier, region, SLA) to logs.
-- Join security events with user or asset attributes stored in Snowflake.
+Use the Enrichment Table processor to enrich logs with externally maintained reference datasets, such as threat intelligence feeds, allow and deny lists, asset inventories, compliance mappings stored as CSVs or other files and updated regularly.
 
 #### Databricks
 
@@ -49,11 +39,21 @@ Use the Enrichment Table processor to:
 - Attach customer and account information like industry, ARR, owner, to operational logs for prioritizing incidents.
 - Enrich marketing or sales-focused dashboards with operational signals like latency spikes tied to customers.
 
-#### Cloud object storage
+#### ServiceNow (CMDB)
 
-Cloud object storage services (Amazon S3, Azure Blob Storage, Google Cloud Storage) are scalable storage services used to store large volumes of structured and unstructured reference data.
+ServiceNow is an IT service management platform with a Configuration Management Database (CMDB) that tracks infrastructure assets, applications, and dependencies.
 
-Use the Enrichment Table processor to enrich logs with externally maintained reference datasets, such as threat intelligence feeds, allow and deny lists, asset inventories, compliance mappings stored as CSVs or other files and updated regularly.
+Use the Enrichment Table processor to:
+- Enrich logs with infra ownership and dependency context (for example, which team owns the host and the business unit the team supports).
+- Add information directly from CMDB records to telemetry.
+
+#### Snowflake
+
+Snowflake is a cloud-native data warehouse/lake that centralizes structured and semi-structured data.
+
+Use the Enrichment Table processor to:
+- Add customer metadata (account tier, region, SLA) to logs.
+- Join security events with user or asset attributes stored in Snowflake.
 
 ## Setup
 
