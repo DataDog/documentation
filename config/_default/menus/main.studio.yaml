@@ -7,12 +7,21 @@ menu:
     - name: Essentials
       identifier: essentials_heading
       weight: 2000000
+    - name: Understand Users
+      identifier: understand_users_heading
+      weight: 3000000
+    - name: Monitor & Debug
+      identifier: monitor_and_debug_heading
+      weight: 4000000
+    - name: AI Observability
+      identifier: ai_observability_heading
+      weight: 5000000
     - name: Administration
       identifier: administration_heading
-      weight: 3000000
+      weight: 6000000
     - name: Platform
       identifier: platform_heading
-      weight: 4000000
+      weight: 7000000
 
     # Menu items that appear under labels starts below here
 
@@ -65,25 +74,25 @@ menu:
       params:
         ref_id: llm_obs
     - name: Metrics
-      parent: essentials_heading
+      parent: monitor_and_debug_heading
       params:
         ref_id: metrics
     - name: Error Tracking
-      parent: essentials_heading
+      parent: monitor_and_debug_heading
       params:
         ref_id: error_tracking
     # pull in from existing docs instead with granular control
     - name: Logs
-      parent: essentials_heading
+      parent: monitor_and_debug_heading
       params:
         ref_id: logs
         # Include everything (no filters)
     - name: Product Analytics
-      parent: essentials_heading
+      parent: understand_users_heading
       params:
         ref_id: product_analytics
     - name: Session Replay
-      parent: essentials_heading
+      parent: understand_users_heading
       params:
         ref_id: session_replay
     - name: Account Management
