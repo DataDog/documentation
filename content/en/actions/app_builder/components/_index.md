@@ -221,6 +221,18 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
+{{% collapse-content title="Divider" level="h3" %}}
+Custom chart components have the following properties.
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Custom chart" level="h3" %}}
 Custom chart components have the following properties.
 
