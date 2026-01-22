@@ -129,9 +129,9 @@ This could be caused by a couple of reasons:
 * This test has ran previously.
 * This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
 
-### A test was retried that is not new
+Finally, older tracer versions limit the number of known tests fetched to 500k. If your repository has more than 500k known tests, no tests will be identified as new. To prevent this, update to the latest tracer version.
 
-Older tracer versions limit the number of known tests fetched to 500k. If your repository has more than 500k known tests, some tests might be incorrectly identified as new. To prevent this, update to the latest tracer version.
+### A test was retried that is not new
 
 If a test hasn't been active for more than 14 days, it might be re-identified as new. 
 
