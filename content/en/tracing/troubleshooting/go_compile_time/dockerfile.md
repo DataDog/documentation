@@ -58,8 +58,6 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 
 To speed up successive builds, you can persist Go's build cache between Docker builds using a BuildKit cache mount.
 
-### Use a BuildKit cache mount
-
 Set the `GOCACHE` environment variable in the build stage and add a BuildKit cache mount to the build step:
 
 ```dockerfile
@@ -94,41 +92,18 @@ Build the image with BuildKit enabled:
 DOCKER_BUILDKIT=1 docker build -t my-apm-app .
 ```
 
-**Note**: The `RUN --mount=type=cache` directive requires Docker BuildKit. Enable it by setting `DOCKER_BUILDKIT=1` or by using `docker buildx build`.
+### Important Considerations
 
-### Traditional approach
+**BuildKit Requirement**: The `RUN --mount=type=cache` directive requires Docker BuildKit. Enable it by setting `DOCKER_BUILDKIT=1` or by using `docker buildx build`.
 
-If you cannot use BuildKit (for example, on older Docker versions or in certain CI/CD environments), use the same Dockerfile structure without the cache mount directive:
+**Cache Isolation**: By default, BuildKit cache mounts are shared across all builds that use the same target path. If you build multiple Go projects on the same machine, they will share the cache, which could lead to cache pollution or conflicts. To isolate caches per project, use a unique cache ID:
 
 ```dockerfile
-FROM golang:1 AS build
-WORKDIR /app
-
-# Copy dependency files first for better layer caching
-COPY go.mod go.sum ./
-RUN go mod download
-
-# Copy source code
-COPY . .
-
-# Install Orchestrion
-RUN go install github.com/DataDog/orchestrion
-
-# Build with Orchestrion instrumentation
-RUN orchestrion go build -o=main .
-
-FROM debian:bookworm
-COPY --from=build /app/main /usr/local/bin/
-ENTRYPOINT [ "/usr/local/bin/main" ]
+RUN --mount=type=cache,id=my-project-name,target=/go/build-cache \
+    orchestrion go build -o=main .
 ```
 
-Build the image:
-
-```sh
-docker build -t my-apm-app .
-```
-
-**Note**: This approach relies on Docker's layer caching. The `go mod download` layer is cached and reused when dependencies don't change, providing significant build speed improvements. However, Go's build cache (GOCACHE) is not persisted between builds, unlike the BuildKit approach.
+This ensures each project has its own isolated build cache while still benefiting from cache persistence across builds of the same project.
 
 ## Running Your Application
 
