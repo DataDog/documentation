@@ -90,11 +90,13 @@ Review both exclusion filters and index filters carefully. Parsed and unparsed J
 
 ## Estimated Usage Metrics
 
-If Logs do not appear to be indexed, or at a smaller or higher rate than expected, check Estimated Usage Metric volumes to verify 
+If Logs do not appear to be indexed, or at a smaller or higher rate than expected, check Estimated Usage Metric volumes in your [Log Management dashboard][20].
 
-Tag such as `datadog_index`, `datadog_is_excluded`, `service` and `status` are available, depending on the metric, for filtering your query down to specific reserved attributes such as `service` and `status`. You can then also filter metrics such as `datadog.estimated_usage.logs.ingested_events` by whether they are excluded, and the specific index that is either indexing the log, or excluding the log based on filters.
+Depending on the metric, tags such as `datadog_index`, `datadog_is_excluded`, `service,` and `status` are available for filtering. Use these tags to filter metrics such as `datadog.estimated_usage.logs.ingested_events` by exclusion status and by the index that is indexing or excluding the logs.
 
-If a datadog_index tag is presented as N/A for a metric datapoint, the log for that datapoint does not match any of the indexes in your organisation. Consider the order and filter queries of your indexes, if they may be excluding certain types of logs. Estimated Usage Metrics do not respect [Daily Quotas][13].
+If the `datadog_index` tag is set to `N/A` for a metric datapoint, the corresponding logs do not match any index in your organization. Review index order and filter queries to identify potential exclusions.
+
+**Note**: Estimated Usage Metrics do not respect [Daily Quotas][13].
 
 ## Create a support ticket
 If the above troubleshooting steps do not resolve your issues with missing logs in Datadog, create a [support ticket][15]. If possible, include the following information:
