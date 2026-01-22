@@ -26,7 +26,7 @@ This page describes how to instrument your Node.js application with the Datadog 
 Before setting up the Node.js Feature Flags SDK, ensure you have:
 
 - **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Application Configuration](/feature_flags/server#agent-configuration) for details.
-- **@openfeature/server-sdk** version **~1.20.0**
+- **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
 
