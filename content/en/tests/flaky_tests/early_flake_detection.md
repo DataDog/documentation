@@ -108,7 +108,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 {{< /tabs >}}
 
 <div class="alert alert-danger">
-  <strong>Note</strong>: Older tracer versions limit the number of known tests fetched to 500k. If you need to fetch more than 500k known tests, update to the latest tracer version.
+Older tracer versions limit the number of known tests fetched to 500k. If you need to fetch more than 500k known tests, update to the latest tracer version.
 </div>
 
 ## Explore results in the Test Optimization Explorer
@@ -131,11 +131,11 @@ This could be caused by a couple of reasons:
 
 ### A test was retried that is not new
 
+Older tracer versions limit the number of known tests fetched to 500k. If your repository has more than 500k known tests, some tests might be incorrectly identified as new. To prevent this, update to the latest tracer version.
+
+If a test hasn't been active for more than 14 days, it might be re-identified as new. 
+
 If the Datadog library can't fetch the full list of known tests, the Datadog library may retry tests that are not new. There is a mechanism to prevent this error from slowing down the CI pipeline, but if it happens, contact [Datadog Support][9].
-
-If a test hasn't been active for more than 14 days, it might be re-identified as new.
-
-Finally, older tracer versions limit the number of known tests fetched to 500k. If your repository has more than 500k known tests, some tests might be incorrectly identified as new. If so, update to the latest tracer version.
 
 ## Further Reading
 
