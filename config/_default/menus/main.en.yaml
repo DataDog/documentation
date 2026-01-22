@@ -5668,11 +5668,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_setup
       weight: 1
+    - name: Configuration
+      url: code_coverage/configuration/
+      parent: code_coverage
+      identifier: code_coverage_configuration
+      weight: 2
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 2
+      weight: 3
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -5710,11 +5715,16 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_change_failure_detection
       weight: 2
+    - name: DORA Metrics Calculation
+      url: dora_metrics/calculation/
+      parent: dora_metrics
+      identifier: dora_metrics_calculation
+      weight: 3
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 3
+      weight: 4
     - name: Feature Flags
       url: feature_flags/
       pre: ci
@@ -5751,31 +5761,36 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: .NET
+      url: feature_flags/server/dotnet
+      parent: feature_flags_server
+      identifier: feature_flags_server_dotnet
+      weight: 201
     - name: Go
       url: feature_flags/server/go
       parent: feature_flags_server
       identifier: feature_flags_server_go
-      weight: 201
+      weight: 202
     - name: Java
       url: feature_flags/server/java
       parent: feature_flags_server
       identifier: feature_flags_server_java
-      weight: 202
+      weight: 203
     - name: Node.js
       url: feature_flags/server/nodejs
       parent: feature_flags_server
       identifier: feature_flags_server_nodejs
-      weight: 203
+      weight: 204
     - name: Python
       url: feature_flags/server/python
       parent: feature_flags_server
       identifier: feature_flags_server_python
-      weight: 204
+      weight: 205
     - name: Ruby
       url: feature_flags/server/ruby
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
-      weight: 205
+      weight: 206
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -8049,51 +8064,56 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_crash
       weight: 102
+    - name: Monitoring App Launch
+      url: real_user_monitoring/application_monitoring/android/application_launch_monitoring
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_application_launch_monitoring
+      weight: 103
     - name: Monitoring App Performance
       url: real_user_monitoring/application_monitoring/android/monitoring_app_performance
       parent: rum_mobile_android
       identifier: rum_mobile_android_monitoring_app_performance
-      weight: 103
+      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/android/advanced_configuration
       parent: rum_mobile_android
       identifier: rum_mobile_android_advanced_config
-      weight: 104
+      weight: 105
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/android/data_collected
       parent: rum_mobile_android
       identifier: rum_mobile_android_data_collected
-      weight: 105
+      weight: 106
     - name: Mobile Vitals
       url: real_user_monitoring/application_monitoring/android/mobile_vitals
       parent: rum_mobile_android
       identifier: rum_mobile_android_mobile_vitals
-      weight: 106
+      weight: 107
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/android/web_view_tracking
       parent: rum_mobile_android
       identifier: rum_mobile_android_web_view_tracking
-      weight: 107
+      weight: 108
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/android/integrated_libraries
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
-      weight: 108
+      weight: 109
     - name: Jetpack Compose Instrumentation
       url: real_user_monitoring/application_monitoring/android/jetpack_compose_instrumentation
       parent: rum_mobile_android
       identifier: rum_mobile_android_jetpack_compose_instrumentation
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 110
+      weight: 111
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/android/sdk_performance_impact
       parent: rum_mobile_android
       identifier: rum_mobile_android_performance_overhead
-      weight: 111
+      weight: 112
     - name: iOS and tvOS
       url: real_user_monitoring/application_monitoring/ios
       parent: application_monitoring
@@ -8109,51 +8129,56 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_crash
       weight: 102
+    - name: Monitoring App Launch
+      url: real_user_monitoring/application_monitoring/ios/application_launch_monitoring
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_application_launch_monitoring
+      weight: 103
     - name: Mobile App Performance
       url: real_user_monitoring/application_monitoring/ios/monitoring_app_performance
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_monitoring_app_performance
-      weight: 103
+      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/ios/advanced_configuration
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_advanced_config
-      weight: 104
+      weight: 105
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/ios/data_collected
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_data_collected
-      weight: 105
+      weight: 106
     - name: Mobile Vitals
       url: real_user_monitoring/application_monitoring/ios/mobile_vitals?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
-      weight: 106
+      weight: 107
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/ios/web_view_tracking?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_web_view_tracking
-      weight: 107
+      weight: 108
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/ios/integrated_libraries
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_integrated_libraries
-      weight: 108
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/ios/troubleshooting
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_troubleshooting
-      weight: 109
+      weight: 110
     - name: Supported Versions
       url: real_user_monitoring/application_monitoring/ios/supported_versions
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
-      weight: 110
+      weight: 111
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/ios/sdk_performance_impact
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_performance_overhead
-      weight: 111
+      weight: 112
     - name: Flutter
       url: real_user_monitoring/application_monitoring/flutter
       parent: application_monitoring
