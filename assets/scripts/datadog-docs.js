@@ -19,11 +19,16 @@ gtag('js', new Date());
 gtag('config', gaTag);
 
 export const setSidenavMaxHeight = () => {
-    const headerHeight = document.querySelector('body .main-nav')?.getBoundingClientRect().height;
+    const headerEl =
+        document.querySelector('body .main-nav') ||
+        document.querySelector('body header .navbar') ||
+        document.querySelector('body .navbar');
+
+    const headerHeight = headerEl?.getBoundingClientRect().height ?? 0;
     const padding = 200;
     const sidenavNav = document.querySelector('.sidenav-nav');
 
-    if (sidenavNav && headerHeight) {
+    if (sidenavNav) {
         sidenavNav.style.maxHeight = `${document.documentElement.clientHeight - headerHeight - padding}px`;
     }
 };
@@ -353,7 +358,7 @@ function navClickEventHandler(event) {
 
 /**
  * Determines if the link should be loaded via AJAX
- * @param {object} element 
+ * @param {object} element
  * @returns boolean
  */
 function loadViaAjax(element) {
@@ -407,7 +412,7 @@ window.addEventListener('click', (event) => {
 window.onload = function () {
     getPathElement();
     setMobileNav();
-    
+
     // Handle glossary anchor scrolling from search results
     if (window.location.pathname.includes('/glossary/')) {
         const scrollTarget = sessionStorage.getItem('glossaryScrollTarget');
@@ -421,10 +426,10 @@ window.onload = function () {
                         const header = document.querySelector('.navbar');
                         const glossaryNav = document.querySelector('.glossary-nav');
                         let offset = 20;
-                        
+
                         if (header) offset += header.offsetHeight;
                         if (glossaryNav) offset += glossaryNav.offsetHeight;
-                        
+
                         const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
                         window.scrollTo({
                             top: elementTop - offset,
@@ -442,10 +447,10 @@ window.onload = function () {
                         const header = document.querySelector('.navbar');
                         const glossaryNav = document.querySelector('.glossary-nav');
                         let offset = 20;
-                        
+
                         if (header) offset += header.offsetHeight;
                         if (glossaryNav) offset += glossaryNav.offsetHeight;
-                        
+
                         const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
                         window.scrollTo({
                             top: elementTop - offset,
