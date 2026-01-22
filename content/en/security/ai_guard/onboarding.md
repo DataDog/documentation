@@ -301,12 +301,12 @@ SDK instrumentation allows you to set up and monitor AI Guard activity in real t
 
 To use the SDK, ensure the following environment variables are configured:
 
-| Variable               | Value                                                         |
-|:-----------------------|:--------------------------------------------------------------|
-| `DD_AI_GUARD_ENABLED`  | `true`                                                        |
-| `DD_API_KEY`           | `<YOUR_API_KEY>`                                              |
-| `DD_APP_KEY`           | `<YOUR_APPLICATION_KEY>`                                      |
-| `DD_TRACE_ENABLED`     | `true`                                                        |
+| Variable              | Value                    |
+| :-------------------- | :----------------------- |
+| `DD_AI_GUARD_ENABLED` | `true`                   |
+| `DD_API_KEY`          | `<YOUR_API_KEY>`         |
+| `DD_APP_KEY`          | `<YOUR_APPLICATION_KEY>` |
+| `DD_TRACE_ENABLED`    | `true`                   |
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -540,6 +540,7 @@ AI Guard security signals are created when Datadog detects a threat based on a c
 - **Threat detection**: Context about attacks based on the detection rules you've configured
 - **Action insights**: Information about blocked or allowed actions according to your rule settings
 - **Rich investigation context**: Attack categories detected, AI Guard evaluation results, and links to related AI Guard spans for comprehensive analysis
+- **Custom runbooks**: Custom remediation guidance and response procedures for specific threat scenarios
 
 ### Creating detection rules
 
@@ -560,7 +561,7 @@ For more comprehensive detection rule capabilities, see the [Detection Rules doc
 When creating detection rules, you can use the following AI Guard tags to filter and target specific threat patterns:
 
 - **@ai_guard.action**: Filter by AI Guard's evaluation result (`ALLOW` or `DENY`)
-- **@ai_guard.attack_categories**: Target specific attack types such as `instruction-override`, `indirect-prompt-injection` or `data-exfiltration`
+- **@ai_guard.attack_categories**: Target specific attack types such as `jailbreak`, `indirect-prompt-injection`, `destructive-tool-call`, `denial-of-service-tool-call`, `security-exploit`, `authority-override`, `role-play`, `instruction-override`, `obfuscation`, `system-prompt-extraction`, or `data-exfiltration`
 - **@ai_guard.blocked**: Filter based on whether an action in the trace was blocked (`true` or `false`)
 - **@ai_guard.tools**: Filter by specific tool names involved in the evaluation (for example, `get_user_profile`, `user_recent_transactions`)
 
@@ -590,5 +591,5 @@ The Security Signals Explorer allows you to filter, prioritize, and investigate 
 [14]: /security/application_security/security_signals/
 [15]: /security/detection_rules/
 [16]: https://app.datadoghq.com/security/siem/signals
-[17]: https://dd.datad0g.com/security/ai-guard/settings/detection-rules
+[17]: https://app.datadoghq.com/security/ai-guard/settings/detection-rules
 [18]: https://app.datadoghq.com/security/appsec/signals
