@@ -8,11 +8,11 @@ If you experience unexpected behavior with Datadog Logs, there are a few common 
 
 You cannot see any logs in the [Log Explorer][2] or [Live Tail][3]. This may be happening because your role is part of a restriction query.
 
-If you are unable to access your Restriction Queries in Datadog, please contact your Datadog Administrator to verify if your role is affected.
+If you are unable to access your Restriction Queries in Datadog, contact your Datadog Administrator to verify if your role is affected.
 
 See [Check Restrictions Queries][4] for more information on configuring Logs RBAC data access controls.
 
-Furthermore, Legacy Permissions can also affect the ability to see Logs, particularly in the [Log Explorer][2] . You may find yourself unable to view logs from certain indexes, or only one index at a time. See [Legacy Permissions][10] for more information on how these can be applied to your role and organisation.
+**Legacy Permissions** can also restrict access to Logs, particularly in the [Log Explorer][2]. Depending on configuration, access may be limited to specific indexes or to a single index at a time. For more information on how Legacy Permissions are applied at the role and organization level, see [Legacy Permissions][10].
 
 ## Missing logs - logs daily quota reached
 
@@ -22,7 +22,7 @@ You have not made any changes to your log configuration, but the [Log Explorer][
 
 See [Set daily quota][5] for more information on setting up, updating or removing the quota.
 
-If you are unsure whether or when a daily quota has been reached historically, you can verify this in the Event Explorer by searching through the tag datadog_index:{index_name}.
+To verify if a daily quota has been reached historically, you can search in the Event Explorer with the tag `datadog_index:{index_name}`.
 
 {{< img src="logs/troubleshooting/daily_quota_event.png" alt="An event explaining the time at which a daily quota was reached" style="width:90%" >}}
 
@@ -33,32 +33,30 @@ Fix the issue at the source by checking which `service` and `source` are impacte
 
 ## Missing logs - timestamp not aligned with timezone
 
-By default, Datadog parses all epoch timestamps in Logs with the default timezone set as UTC.
-If logs are arriving with timestamps ahead or behind this time, you may see logs shifted by the number of hours from UTC that the timezone is set to.
+By default, Datadog parses all epoch timestamps in Logs using UTC. If incoming logs use a different timezone, timestamps may appear shifted by the corresponding offset from UTC. For example, if logs are sent from New York (EST -5), they may appear 5 hours in the past, or if logs are sent from Australia (AEST +10), they may appear 10 hours ahead of the expected time frame.
 
-To adjust the timezone of the logs during processing, please refer to the footnotes in Datadog's [Parsing][11] guide in using the timezone parameter as part of the date matcher.
+To adjust the timezone of the logs during processing, see the footnotes in Datadog's [Parsing][11] guide on using the `timezone` parameter with the date matcher.
 Epoch timestamps can be adjusted using the timezone parameter in a Grok Parser processor to adjust localizations.
 
-Follow these steps to convert a timestamp localization to UTC using the steps from the example provided using Datadog's [Grok Parser]
+Epoch timestamps can be adjusted using the `timezone` parameter in a Grok Parser processor. Follow these steps to convert a localized timestamp to UTC using the example in Datadog’s [Grok Parser][19] guide.
 
 1. Navigate to the [Pipelines][9] page.
-
-2. In **Pipelines**, select the correct pipeline matching to your logs (example here?)
-
+2. In **Pipelines**, select the correct pipeline matching to your logs.
 3. Open the Grok Parser processor that is parsing your logs.
+4. Given that a local host is logging in UTC+1, adjust the date matcher to account for this difference. The resulting rule will have a comma and a new string defining the timezone to UTC+1.
+5. Verify that the [Log Date Remapper][8] is using the parsed attribute as the official timestamp for the matching logs.
 
-4. Given that a local host is logging in UTC+1, we want to adjust the date matcher to account for this difference. The result is that we are adding a comma, and a new string defining the timezone to UTC+1.
-
-5. Ensure that the [Log Date Remapper][8] is using the parsed attribute as the official timestamp for the matching logs.
-
-Go to the [Log Explorer][2] to see the logs now appearing in line with their original timestamp.
+Go to the [Log Explorer][2] and verify that the logs appear in line with their original timestamp.
 
 
 ## Unable to parse timestamp key from JSON logs
 
-By default, Datadog expects timestamp attributes to be configured to a recognised date format. The recognised formats are ISO8601, UNIX (the milliseconds EPOCH format), and RFC3164.
+Datadog requires timestamp attributes to use one of the supported date formats:
+- ISO8601
+- UNIX (the milliseconds EPOCH format)
+- RFC3164
 
-Timestamps similar to but not matching this format may still be dropped even if similar in nature, such as the nanoseconds EPOCH format.
+Timestamps that do not exactly match these formats may be dropped, even if they are similar (for example, epoch timestamps in nanoseconds).
 
 If you are unable to convert the timestamp of JSON logs to a [recognized date format][6] before they are ingested into Datadog, follow these steps to convert and map the timestamps using Datadog's [arithmetic processor][5] and [log date remapper][6]:
 
@@ -86,9 +84,9 @@ There is an additional truncation in fields that applies only to indexed logs: t
 
 ## Logs present in Live Tail, but missing from Logs Explorer
 
-[Logging Without Limits™][14] allows decoupling of log ingestion and indexation, to allow you to save what logs matter most to your organisation. However, when Exclusion Filters are applied to indexes, coverage that is too broad can cause more logs to be excluded than in the intended result.
+[Logging Without Limits™][14] decouples log ingestion from indexing, allowing you to retain the logs that matter most. When exclusion filters applied to indexes are too broad, they may exclude more logs than intended.
 
-Make sure to heavily check exclusion filters and index filters. Parsed JSON logs and unparsed logs may match unexpectedly on index filters, especially when using free text search to match on logs to exclude small strings in logs from indexation. This can cause the entire log, which may have other valuable information, to be dropped from indexing. You can read more about the difference between full text and free text search in [Search Syntax][12].
+Review both exclusion filters and index filters carefully. Parsed and unparsed JSON logs can match index filters in unexpected ways, particularly when free-text search is used to exclude short strings. This can result in entire logs being dropped from indexing, even when they contain other valuable data. For details on the differences between full-text and free-text search, see [Search Syntax][12].
 
 ## Estimated Usage Metrics
 
@@ -99,19 +97,15 @@ Tag such as `datadog_index`, `datadog_is_excluded`, `service` and `status` are a
 If a datadog_index tag is presented as N/A for a metric datapoint, the log for that datapoint does not match any of the indexes in your organisation. Consider the order and filter queries of your indexes, if they may be excluding certain types of logs. Estimated Usage Metrics do not respect [Daily Quotas][13].
 
 ## Create a support ticket
-If the above troubleshooting steps do not resolve your issues with missing logs in Datadog, create a [support ticket][15]. If possible, include the following information in your support ticket:
+If the above troubleshooting steps do not resolve your issues with missing logs in Datadog, create a [support ticket][15]. If possible, include the following information:
 
-### Raw Log
-To collect a raw log, collect the log directly from the source that is generating the log, dependent on your architecture or logger setup.
-Attach the log either as a text file, or as JSON directly to your support ticket.
+| Information | Description |
+|------------|-------------|
+| **Raw log sample** | Collect the log directly from the source generating it, based on your architecture or logger configuration. Attach the log to the support ticket as a **text file** or **raw JSON**. |
+| **Indexes configuration** | If the log appears in Live Tail but not in the Log Explorer, include the response from the [Get All Indexes][16] API call. If your organization has many indexes, review Estimated Usage Metrics to identify the relevant index, then include the response from the [Get an Index][17] API call for that index. |
+| **Agent flare** | If logs are sent using the Agent and do not appear anywhere in the Datadog UI, submit an [Agent Flare][18] with the support ticket. |
+| **Other sources** | If logs are sent using a source other than the Agent, include details on the originating source of the logs (for example, Lambda Forwarder or Kinesis Firehose). |
 
-###
-If the log appears in the Live Tail, but is not appearing in the Log Explorer, please share the result of the call to the [Get All Indexes][16] API endpoint in your support ticket.
-- If you have a large number of indexes in your organisation, please be sure to check estimated usage metrics using the steps above to verify if possible, which 
-- Then, you can use the [Get an Index][17] API call to return the result for that index, and upload that to the support ticket.
-
-### Upload a Flare
-If using the Agent to send logs, and logs are not appearing at all in the Datadog UI, send an [Agent Flare][18] to the support ticket.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/logs
@@ -128,6 +122,8 @@ If using the Agent to send logs, and logs are not appearing at all in the Datado
 [13]: /logs/log_configuration/indexes/#set-daily-quota
 [14]: /logs/guide/getting-started-lwl/
 [15]: https://help.datadoghq.com/hc/en-us/requests/new
-[16]: https://docs.datadoghq.com/api/latest/logs-indexes/#get-an-index
-[17]: https://docs.datadoghq.com/api/latest/logs-indexes/#get-an-index
-[18]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare/?tab=agent
+[16]: /api/latest/logs-indexes/#get-an-index
+[17]: /api/latest/logs-indexes/#get-an-index
+[18]: /agent/troubleshooting/send_a_flare/?tab=agent
+[19]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[20]: https://app.datadoghq.com/dashboard/lists/preset/3?q=Log%20Management%20estimated%20usage&p=1
