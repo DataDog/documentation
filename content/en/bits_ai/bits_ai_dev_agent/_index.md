@@ -99,6 +99,8 @@ Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to lar
 - Create PR batches to fix multiple vulnerabilities at once.
 - Use the Campaign tool to push PRs incrementally and manage review workload across teams.
 
+Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through the Bits AI Dev Agent. Learn more about [AI-Enhanced Static Code Analysis][15].
+
 ## Get started
 
 To enable Bits AI Dev Agent, see [Setup][6].
@@ -125,3 +127,4 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
 [14]: https://app.datadoghq.com/code/settings
+[15]: /security/code_security/static_analysis/ai_enhanced_sast/
