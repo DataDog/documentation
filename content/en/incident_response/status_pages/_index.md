@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="service_management/status_pages/shopist_status_page.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
 Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
 
@@ -115,8 +115,11 @@ If you selected:
 
 Notices are messages published to a status page to communicate system status. Status Pages support two types of notices: **degradations** for unplanned service impact and **maintenance windows** for planned downtime.
 
+{{< img src="service_management/status_pages/select_notice_type_status_page.png" alt="Status page notice type selector with degradation and scheduled maintenance options" style="width:60%;" >}}
 
 ### Publish a degradation
+
+{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
 
 Degradation notices communicate **unplanned service impact**, such as incidents or service disruptions. Use degradation notices to keep users informed as an issue is investigated, mitigated, and resolved.
 
@@ -142,7 +145,7 @@ You can publish updates over time and mark the notice as **Resolved** when the i
 
 ### Schedule a maintenance window
 
-{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
 
 Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degradations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. This allows you to keep customers informed and reduce support volume.
 
