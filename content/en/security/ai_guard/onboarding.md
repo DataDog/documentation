@@ -529,6 +529,47 @@ Follow the instructions to create a new [metric monitor][11].
 - To monitor evaluation traffic, use the metric `datadog.ai_guard.evaluations` with the tags `action:deny OR action:abort`.
 - To monitor blocked traffic, use the metric `datadog.ai_guard.evaluations` with the tag `blocking_enabled:true`.
 
+## AI Guard security signals {#security-signals}
+
+AI Guard security signals provide visibility into threats and attacks detected by AI Guard in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][14] and integrate seamlessly with Datadog's security monitoring workflows.
+
+### Understanding AI Guard signals
+
+AI Guard security signals are created when Datadog detects a threat based on a configured detection rule. When threats such as prompt injection, jailbreaking, or tool misuse are detected according to your detection rules, security signals appear in Datadog's Security Signals Explorer. These signals can provide:
+
+- **Threat detection**: Context about attacks based on the detection rules you've configured
+- **Action insights**: Information about blocked or allowed actions according to your rule settings
+- **Rich investigation context**: Attack categories detected, AI Guard evaluation results, and links to related AI Guard spans for comprehensive analysis
+
+### Creating detection rules
+
+AI Guard includes a detection rule explorer where you can create custom detection rules to generate security signals based on AI Guard evaluations. Currently, only **threshold-based rules** are supported.
+
+To create AI Guard detection rules:
+1. Navigate to the [AI Guard detection rule explorer][17]
+2. Define your threshold conditions (for example, more than 5 `DENY` actions in 10 minutes)
+3. Set severity levels and notification preferences
+4. Configure signal metadata and tags
+
+{{< img src="security/ai_guard/ai_guard_detection_rules.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
+
+For more comprehensive detection rule capabilities, see the [Detection Rules documentation][15] in the security overview.
+
+#### Available AI Guard tags for detection rules
+
+When creating detection rules, you can use the following AI Guard tags to filter and target specific threat patterns:
+
+- **@ai_guard.action**: Filter by AI Guard's evaluation result (`ALLOW` or `DENY`)
+- **@ai_guard.attack_categories**: Target specific attack types such as `instruction-override`, `indirect-prompt-injection` or `data-exfiltration`
+- **@ai_guard.blocked**: Filter based on whether an action in the trace was blocked (`true` or `false`)
+- **@ai_guard.tools**: Filter by specific tool names involved in the evaluation (for example, `get_user_profile`, `user_recent_transactions`)
+
+### Investigating signals
+
+To view and investigate AI Guard security signals, you can access signals through the [AAP Security Signals Explorer][18] or [Cloud SIEM Security Signals Explorer][16] for correlation with other security events. When using the Cloud SIEM Security Signals Explorer, make sure to check the **AAP** checkbox filter to view AI Guard signals.
+
+The Security Signals Explorer allows you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -546,3 +587,8 @@ Follow the instructions to create a new [metric monitor][11].
 [11]: /monitors/types/metric/
 [12]: https://platform.openai.com/docs/api-reference/chat/object
 [13]: /security/ai_guard/
+[14]: /security/application_security/security_signals/
+[15]: /security/detection_rules/
+[16]: https://app.datadoghq.com/security/siem/signals
+[17]: https://dd.datad0g.com/security/ai-guard/settings/detection-rules
+[18]: https://app.datadoghq.com/security/appsec/signals
