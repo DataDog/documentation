@@ -152,7 +152,7 @@ Maintenance windows allow you to proactively communicate planned downtime or ser
 
 | Field | Description |
 | ---- | ---- |
-| **Title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+| **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
 | **Maintenance window** | Scheduled start and end time for the maintenance |
 | **Messages** | Messages that are automatically published as the window progresses |
 | **Components impacted** | Components affected during the maintenance window |
