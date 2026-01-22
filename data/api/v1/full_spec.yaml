@@ -6259,6 +6259,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - name
       - filter
@@ -6346,6 +6356,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - filter
       type: object
@@ -17858,10 +17878,8 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
-      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access. This field is deprecated, use the restriction
-        policies API to manage permissions.
+        for restricting read and write access.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
