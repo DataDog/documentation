@@ -26190,6 +26190,8 @@ components:
           $ref: '#/components/schemas/WidgetLineType'
         line_width:
           $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
         palette:
           description: Color palette to apply to the widget.
           type: string
@@ -26252,6 +26254,19 @@ components:
           description: Color palette to apply to the widget.
           type: string
       type: object
+    WidgetStyleOrderBy:
+      description: 'How to order series in timeseries visualizations.
+
+        - `tags`: Order series alphabetically by tag name (default behavior)
+
+        - `values`: Order series by their current metric values (typically descending)'
+      enum:
+      - tags
+      - values
+      type: string
+      x-enum-varnames:
+      - TAGS
+      - VALUES
     WidgetSummaryType:
       description: Which summary type should be used.
       enum:
