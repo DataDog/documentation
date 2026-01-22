@@ -93,6 +93,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2345541687",
+      "description": "Create a new dashboard with a bar_chart widget with stacked type and no legend specified"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3562282606",
       "description": "Create a new dashboard with a change widget using formulas and functions slo query"
     },
@@ -175,6 +180,16 @@
       "group": "dashboards",
       "suffix": "_4026341408",
       "description": "Create a new dashboard with apm_issue_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1712853070",
+      "description": "Create a new dashboard with bar_chart widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2617251399",
+      "description": "Create a new dashboard with bar_chart widget sorted by group"
     },
     {
       "group": "dashboards",
@@ -937,6 +952,11 @@
       "group": "synthetics",
       "suffix": "_1717840259",
       "description": "Create a multi-step api test with every type of basicAuth returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_2106135939",
+      "description": "Create a multistep test with subtest returns \"OK\" response"
     },
     {
       "group": "synthetics",

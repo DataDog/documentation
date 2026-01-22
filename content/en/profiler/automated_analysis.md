@@ -15,10 +15,6 @@ further_reading:
       tag: 'Blog'
       text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/automated-analysis/" btn_hidden="false" header="Join the Preview!" >}}
-Automated Analysis is in Preview.
-{{< /callout >}}
-
 ## Overview
 Automated Analysis automatically detects performance issues in your applications using Continuous Profiler data and provides actionable insights for resolution. When an issue is detected, Automated Analysis provides:
 
