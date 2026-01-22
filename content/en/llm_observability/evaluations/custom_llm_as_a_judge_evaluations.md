@@ -234,7 +234,7 @@ Selecting a span shows JSON data available for use in an evaluation. The **Test 
 
 From the JSON, you can also use the three-dots menu to the left of each row. Select **Add variable to message** to add that data as a variable in your user message.
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the Add variable to message option." >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the Add variable to message option." style="width:40%;" >}}
 
 Refine your prompt and schema until outputs are consistent and interpretable.
 
