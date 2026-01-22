@@ -67,28 +67,6 @@ Configure monitors to trigger if the query value crosses a threshold, and custom
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
-## Common monitors
-
-You can create monitors on Network Path with the following common monitors. These provide a good starting point to be alerted if your network traffic is experiencing issues or irregular behavior.
-{{% collapse-content title="Round Trip Time (RTT)" level="h4" expanded=false %}}
-
-The RTT monitor alerts you if the average round-trip time of a network path from a source to a destination breaches a threshold. Monitoring this can help proactively address performance problems and bottlenecks within your network before they escalate to a more severe state.
-
-{{< img src="monitors/monitor_types/network_path/common_monitors_round_trip_time_rtt.png" alt="Example configuration for a round trip time (RTT) monitor" style="width:100%;" >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Packet Loss" level="h4" expanded=false %}}
-The packet loss monitor alerts you if there is an increase in the number of packets that aren't reaching their destination from a source. Monitoring packet loss helps ensure reliable connectivity and detect issues that may impact availability or application performance.
-
-{{< img src="monitors/monitor_types/network_path/common_monitors_packet_loss.png" alt="Example configuration for a packet loss monitor" style="width:100%;" >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Jitter" level="h4" expanded=false %}}
-The jitter monitor alerts you if there is a change in RTT variance for your network paths. Use this monitor to ensure network consistency and help track issues such as network congestion, bandwidth limitations, or faulty equipment.
-
-{{< img src="monitors/monitor_types/network_path/common_monitors_jitter.png" alt="Example configuration for a jitter monitor" style="width:100%;" >}}
-{{% /collapse-content %}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
