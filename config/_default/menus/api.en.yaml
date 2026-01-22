@@ -7056,9 +7056,9 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
-    - name: Get a budget
-      url: '#get-a-budget'
-      identifier: cloud-cost-management-get-a-budget
+    - name: Get budget
+      url: '#get-budget'
+      identifier: cloud-cost-management-get-budget
       parent: cloud-cost-management
       generated: true
       params:
@@ -7067,10 +7067,10 @@ menu:
         operationids:
           - GetBudget
         unstable: []
-        order: 36
-    - name: Delete a budget
-      url: '#delete-a-budget'
-      identifier: cloud-cost-management-delete-a-budget
+        order: 37
+    - name: Delete budget
+      url: '#delete-budget'
+      identifier: cloud-cost-management-delete-budget
       parent: cloud-cost-management
       generated: true
       params:
@@ -7079,7 +7079,31 @@ menu:
         operationids:
           - DeleteBudget
         unstable: []
+        order: 38
+    - name: Validate budget
+      url: '#validate-budget'
+      identifier: cloud-cost-management-validate-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateBudget
+        unstable: []
         order: 35
+    - name: Validate CSV budget
+      url: '#validate-csv-budget'
+      identifier: cloud-cost-management-validate-csv-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateCsvBudget
+        unstable: []
+        order: 36
     - name: Create or update a budget
       url: '#create-or-update-a-budget'
       identifier: cloud-cost-management-create-or-update-a-budget
