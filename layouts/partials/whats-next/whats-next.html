@@ -4,6 +4,42 @@
   <div class="list-group">
     {{- range $dot.Page.Params.further_reading -}}
       {{- if not (and .hide_in_studio (eq site.Language.Lang "studio")) -}}
+      {{- $show_link := true -}}
+      {{- $raw_link := .link -}}
+
+      {{- /* Check if link should be hidden for Studio */ -}}
+      {{- if eq site.Language.Lang "studio" -}}
+        {{- /* Only check internal links (not external http/https links) */ -}}
+        {{- if not (eq (substr $raw_link 0 4) "http") -}}
+          {{- $link_to_check := $raw_link -}}
+          {{- /* Remove leading slash for checking */ -}}
+          {{- if eq (substr $raw_link 0 1) "/" -}}
+            {{- $link_to_check = substr $raw_link 1 -}}
+          {{- end -}}
+
+          {{- /* Remove /studio/ prefix if present */ -}}
+          {{- if hasPrefix $link_to_check "studio/" -}}
+            {{- $link_to_check = strings.TrimPrefix "studio/" $link_to_check -}}
+          {{- end -}}
+
+          {{- /* Check against allowed prefixes */ -}}
+          {{- $studio_allowed_prefixes := slice "api/latest/" "account_management/" "agent/" "bits_ai/" "data_security/" "dashboards/" "error_tracking/" "integrations/" "llm_observability/" "logs/" "monitors/" "metrics/" "notebooks/" "product_analytics/" "session_replay/" -}}
+          {{- $is_studio_content := false -}}
+          {{- range $prefix := $studio_allowed_prefixes -}}
+            {{- if hasPrefix $link_to_check $prefix -}}
+              {{- $is_studio_content = true -}}
+              {{- break -}}
+            {{- end -}}
+          {{- end -}}
+
+          {{- /* Hide link if it's not Studio content */ -}}
+          {{- if not $is_studio_content -}}
+            {{- $show_link = false -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{- if $show_link -}}
       {{- if eq (substr .link 0 4) "http" -}}
           {{- $.Scratch.Set "link" .link -}}
       {{- else -}}
@@ -33,6 +69,7 @@
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-2.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") -}}
       </a>
+      {{- end -}}
       {{- end -}}
     {{- end -}}
     </div>
