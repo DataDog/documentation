@@ -146,8 +146,7 @@ You can publish updates over time and mark the notice as **Resolved** when the i
 
 Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degradations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. This allows you to keep customers informed and reduce support volume.
 
-1. From the status page, click **Schedule Maintenance**, or click **Publish Notice** and select **Scheduled Maintenance**.
-1. Provide the following details:
+From the status page, click **Schedule Maintenance**, or click **Publish Notice** and select **Scheduled Maintenance**. Then, provide the following details:
 
 | Field | Description |
 | ---- | ---- |
