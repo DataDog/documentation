@@ -967,6 +967,28 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Side Panel" level="h3" %}}
+Custom chart components have the following properties.
+
+### General 
+
+Title
+: A title for the side panel.<br>
+**Value**: string
+
+### Appearance
+
+Width
+: Determines the width of the side panel.<br>
+**Value**: string
+
+Hide Close Button
+: Determines whether side panel displays an x to close the panel.<br>
+**Provided values**: on, off
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Tab" level="h3" %}}
 
 Tab components have the following properties.
