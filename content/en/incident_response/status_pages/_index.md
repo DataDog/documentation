@@ -15,9 +15,6 @@ further_reading:
 - link: "/incident_response/incident_management/integrations/status_pages"
   tag: "Documentation"
   text: "Integrate Datadog Status Pages with Incident Management"
-- link: "https://www.datadoghq.com/blog/status-pages/"
-  tag: "Blog"
-  text: "Keep stakeholders informed with Datadog Status Pages"
 ---
 
 ## Overview
@@ -50,7 +47,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
   <tbody>
     <tr>
       <td style="white-space: nowrap;">Status Pages Settings Read<br><code style="white-space: nowrap;">status_pages_settings_read</code></td>
-      <td>View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Internal Status Pages.</td>
+      <td>View the list of Status Pages, the settings of each Status Page, their Notices, and launched Internal Status Pages.</td>
       <td>Datadog Read Only Role</td>
     </tr>
     <tr>
@@ -92,7 +89,7 @@ Components are the building blocks of your status page. Each one represents a se
 - Database Cluster
 - US Region Services
 
-You can add components to your status page either on intial setup or through the status page settings:
+You can add components to your status page either on initial setup or through the status page settings:
 
 1. From your status page, click **Settings** and select the **Components** tab.
 1. Create individual components or a group of related components. You can associate [notices](#add-a-notice) with these components to reflect impact on your status page.
@@ -129,7 +126,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | ---- | ---- |
 | **Notice title** | Short, clear description of the issue <br>*Example: Increased error rates in US region* |
 | **Status** | Current state of the issue: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
-| **Message** | Additional details for your users, such as known cause or next steps <br>*Examples: known cause, expected resolution time*|
+| **Message** | Additional details for your users <br>*Example: We are aware of the issue and are actively working on a fix.* |
 | **Components impacted** | One or more components affected by the degradation |
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
@@ -145,7 +142,7 @@ You can publish updates over time and mark the notice as **Resolved** when the i
 <!-- Image placeholder
 {{< img src="#" alt="Status page showing a scheduled maintenance window for upcoming infrastructure work" style="width:100%;" >}}-->
 
-Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degredations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. Proactively communicate scheduled downtime so you can keep your customers informed and lessen the load on the support team.
+Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degradations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. This allows you to keep customers informed and reduce support volume.
 
 1. From the status page, click **Schedule Maintenance**, or click **Publish Notice** and select **Scheduled Maintenance**.
 1. Provide the following details:
