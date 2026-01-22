@@ -808,8 +808,8 @@ Les clients reposant sur Flutter Web doivent mettre à jour leur configuration a
 ```diff
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
-+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js" crossorigin></script>
-+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js" crossorigin></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 
 **Remarque** : Datadog fournit un lot CDN par site. Consultez le fichier [README du SDK Browser](https://github.com/DataDog/browser-sdk/#cdn-bundles) pour obtenir la liste de toutes les URL de site.

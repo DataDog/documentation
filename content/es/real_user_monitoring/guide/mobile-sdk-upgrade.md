@@ -811,8 +811,8 @@ Los clientes que utilicen Flutter Web deben actualizarse para utilizar el SDK de
 ```diff
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
-+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js" crossorigin></script>
-+  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js" crossorigin></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
++  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 
 **Nota**: Datadog proporciona un paquete CDN por sitio. Consulta [README del SDK de navegador](https://github.com/DataDog/browser-sdk/#cdn-bundles) para obtener una lista de todas las URLs de los sitios.
