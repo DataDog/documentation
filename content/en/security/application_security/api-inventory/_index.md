@@ -130,7 +130,7 @@ App and API Protection Sensitive Data Detection is in Preview. To sign up, conta
 
 By default, Datadog App and API Protection scans for PII, credentials, and payment types. Sensitive Data Detection provides custom scanners to define scanner data patterns beyond the defaults and improve visibilty into the sensitive data of your API traffic. 
 
-In a custom scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key and value conditions that trigger the scanner.
+In a custom scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
 
 When sensitive data is detected, the scanner tags the API endpoint with the category and type and displays it in [API Endpoints][7].
 
@@ -139,7 +139,7 @@ To create a customer scanner and view its results, do the following:
 1. In App and API Protection **Policies**, go to [Sensitive Data Detection][14].
 2. Click **New Scanner**.
 3. In **Select your scanner tags**, define the category and type to classify the senstive data. The scanner tags API endpoints with the format `category:type`.
-4. In **Define conditions on JSON keys and values**, define the JSON key and value conditions to trigger the scanner.
+4. In **Define conditions on JSON keys and values**, define the JSON key or value conditions to trigger the scanner.
 5. Click **Save Scanner**. The scanner is enabled by default.
 6. To view the results of the scanner, go to App and API Protection [API Endpoints][7].
 7. In the **Schema Sensitive Data** facet, the category and type of your custom scanner is listed in the format `category:type`. Customer scanner `category:type` tags are also visible in the **Sensitive Data** column of the explorer.
