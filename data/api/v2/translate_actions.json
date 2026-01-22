@@ -3609,6 +3609,12 @@
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
   },
+  "UpdateFlakyTests": {
+    "description": "Update the state of multiple flaky tests in Flaky Test Management.",
+    "summary": "Update flaky test states",
+    "request_description": "",
+    "request_schema_description": "Request to update the state of multiple flaky tests."
+  },
   "SearchFlakyTests": {
     "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
     "summary": "Search flaky tests",

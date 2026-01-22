@@ -9226,10 +9226,6 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
-        status_group:
-          $ref: '#/components/schemas/CaseStatusGroup'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9296,8 +9292,6 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9466,9 +9460,7 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      deprecated: true
-      description: Deprecated way of representing the case status, which only supports
-        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
+      description: Case status
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9479,23 +9471,6 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
-    CaseStatusGroup:
-      description: Status group of the case.
-      enum:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-      example: SG_OPEN
-      type: string
-      x-enum-varnames:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-    CaseStatusName:
-      description: Status of the case. Must be one of the existing statuses for the
-        case's type.
-      example: Open
-      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9719,9 +9694,8 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-          deprecated: true
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
+      required:
+      - status
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -61668,6 +61642,136 @@ components:
       - name
       - options
       type: object
+    UpdateFlakyTestsRequest:
+      description: Request to update the state of multiple flaky tests.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestData'
+      required:
+      - data
+      type: object
+    UpdateFlakyTestsRequestAttributes:
+      description: Attributes for updating flaky test states.
+      properties:
+        tests:
+          description: List of flaky tests to update.
+          items:
+            $ref: '#/components/schemas/UpdateFlakyTestsRequestTest'
+          type: array
+      required:
+      - tests
+      type: object
+    UpdateFlakyTestsRequestData:
+      description: The JSON:API data for updating flaky test states.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestAttributes'
+        type:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    UpdateFlakyTestsRequestDataType:
+      description: The definition of `UpdateFlakyTestsRequestDataType` object.
+      enum:
+      - update_flaky_test_state_request
+      example: update_flaky_test_state_request
+      type: string
+      x-enum-varnames:
+      - UPDATE_FLAKY_TEST_STATE_REQUEST
+    UpdateFlakyTestsRequestTest:
+      description: Details of what tests to update and their new attributes.
+      properties:
+        id:
+          description: The ID of the flaky test. This is the same ID returned by the
+            Search flaky tests endpoint and corresponds to the test_fingerprint_fqn
+            field in test run events.
+          example: 4eb1887a8adb1847
+          type: string
+        new_state:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestTestNewState'
+      required:
+      - id
+      - new_state
+      type: object
+    UpdateFlakyTestsRequestTestNewState:
+      description: The new state to set for the flaky test.
+      enum:
+      - active
+      - quarantined
+      - disabled
+      - fixed
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - QUARANTINED
+      - DISABLED
+      - FIXED
+    UpdateFlakyTestsResponse:
+      description: Response object for updating flaky test states.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateFlakyTestsResponseData'
+      type: object
+    UpdateFlakyTestsResponseAttributes:
+      description: Attributes for the update flaky test state response.
+      properties:
+        has_errors:
+          description: '`True` if any errors occurred during the update operations.
+            `False` if all tests succeeded to be updated.'
+          example: true
+          type: boolean
+        results:
+          description: Results of the update operation for each test.
+          items:
+            $ref: '#/components/schemas/UpdateFlakyTestsResponseResult'
+          type: array
+      required:
+      - has_errors
+      - results
+      type: object
+    UpdateFlakyTestsResponseData:
+      description: Summary of the update operations. Tells whether a test succeeded
+        or failed to be updated.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateFlakyTestsResponseAttributes'
+        id:
+          description: The ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateFlakyTestsResponseDataType'
+      type: object
+    UpdateFlakyTestsResponseDataType:
+      description: The definition of `UpdateFlakyTestsResponseDataType` object.
+      enum:
+      - update_flaky_test_state_response
+      type: string
+      x-enum-varnames:
+      - UPDATE_FLAKY_TEST_STATE_RESPONSE
+    UpdateFlakyTestsResponseResult:
+      description: Result of updating a single flaky test state.
+      properties:
+        error:
+          description: Error message if the update failed.
+          type: string
+        id:
+          description: The ID of the flaky test from the request. This is the same
+            ID returned by the Search flaky tests endpoint and corresponds to the
+            test_fingerprint_fqn field in test run events.
+          example: 4eb1887a8adb1847
+          type: string
+        success:
+          description: '`True` if the update was successful, `False` if there were
+            any errors.'
+          example: false
+          type: boolean
+      required:
+      - id
+      - success
+      type: object
     UpdateOnCallNotificationRuleRequest:
       description: A top-level wrapper for updating a notification rule for a user
       example:
@@ -64017,6 +64121,8 @@ components:
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
             test_optimization_read: View Test Optimization.
+            test_optimization_write: Update flaky tests from Flaky Tests Management
+              of Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -96377,6 +96483,45 @@ paths:
         - incident_settings_write
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/test/flaky-test-management/tests:
+    patch:
+      description: Update the state of multiple flaky tests in Flaky Test Management.
+      operationId: UpdateFlakyTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFlakyTestsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFlakyTestsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - test_optimization_write
+      summary: Update flaky test states
+      tags:
+      - Test Optimization
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - test_optimization_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: List endpoint returning flaky tests from Flaky Test Management.
         Results are paginated.

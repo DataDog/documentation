@@ -1,4 +1,80 @@
 {
+  "UpdateFlakyTests": {
+    "responses": {
+      "200": {
+        "json": {
+          "data": {
+            "attributes": {
+              "has_errors": true,
+              "results": [
+                {
+                  "error": "string",
+                  "id": "4eb1887a8adb1847",
+                  "success": false
+                }
+              ]
+            },
+            "id": "string",
+            "type": "string"
+          }
+        },
+        "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Summary of the update operations. Tells whether a test succeeded or failed to be updated.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Attributes for the update flaky test state response.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">has_errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">boolean</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\"><code>True</code> if any errors occurred during the update operations. <code>False</code> if all tests succeeded to be updated.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> results&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Results of the update operation for each test.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"results\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">error</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Error message if the update failed.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"results\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The ID of the flaky test from the request. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"results\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">success&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">boolean</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\"><code>True</code> if the update was successful, <code>False</code> if there were any errors.</p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The ID of the response.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The definition of <code>UpdateFlakyTestsResponseDataType</code> object. \nAllowed enum values: <code>update_flaky_test_state_response</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+      },
+      "400": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "403": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      },
+      "429": {
+        "json": {
+          "errors": [
+            "Bad Request"
+          ]
+        },
+        "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">errors&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[string]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">A list of errors.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      }
+    },
+    "request": {
+      "json_curl": {
+        "data": {
+          "attributes": {
+            "tests": [
+              {
+                "id": "4eb1887a8adb1847",
+                "new_state": "active"
+              }
+            ]
+          },
+          "type": "update_flaky_test_state_request"
+        }
+      },
+      "json": {
+        "data": {
+          "attributes": {
+            "tests": [
+              {
+                "id": "4eb1887a8adb1847",
+                "new_state": "active"
+              }
+            ]
+          },
+          "type": "update_flaky_test_state_request"
+        }
+      },
+      "html": "<div class=\"\"><div class=\"row  hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div  class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> data&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The JSON:API data for updating flaky test states.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> attributes&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">object</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">Attributes for updating flaky test states.</p></div>\n            </div>\n            <div class=\"row isNested d-none hasChildData \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"attributes\" class=\"row table-row first-row js-collapse-trigger collapse-trigger \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> tests&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">[object]</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">List of flaky tests to update.</p></div>\n            </div>\n            <div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"tests\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">id&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">string</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The ID of the flaky test. This is the same ID returned by the Search flaky tests endpoint and corresponds to the test_fingerprint_fqn field in test run events.</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"tests\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">new_state&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The new state to set for the flaky test. \nAllowed enum values: <code>active,quarantined,disabled,fixed</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div>\n          </div>\n        </div><div class=\"row isNested d-none  \">\n          <div class=\"col-12 first-column\">\n            <div data-parent-field=\"data\" class=\"row table-row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key table-cell\">type&nbsp;[<em>required</em>]</p>\n    </div>\n              <div class=\"col-2 column\"><p class=\"table-cell\">enum</p></div>\n              <div class=\"col-6 column\"><p class=\"table-cell\">The definition of <code>UpdateFlakyTestsRequestDataType</code> object. \nAllowed enum values: <code>update_flaky_test_state_request</code></p></div>\n            </div>\n            \n          </div>\n        </div>\n          </div>\n        </div></div>"
+    }
+  },
   "SearchFlakyTests": {
     "responses": {
       "200": {
