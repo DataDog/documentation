@@ -154,9 +154,8 @@ Maintenance windows allow you to proactively communicate planned downtime or ser
 | ---- | ---- |
 | **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
 | **Maintenance window** | Scheduled start and end time for the maintenance |
-| **Messages** | Messages that are automatically published as the window progresses |
+| **Messages** | Messages that are automatically published as the maintenance progresses |
 | **Components impacted** | Components affected during the maintenance window |
-| **Impact** | Default component status during maintenance: <br>- Maintenance |
 | **Notify subscribers** | Toggle to send advance notification to subscribers |
 
 After reviewing and scheduling, the maintenance window:
