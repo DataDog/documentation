@@ -58,41 +58,9 @@ Once connected, try prompts like:
 
 To use the Software Delivery tools, connect to the Datadog MCP Server with the `software-delivery` toolset enabled. Add the `toolsets` query parameter to the endpoint URL for your [Datadog site][5]:
 
-{{< site-region region="us" >}}
 ```text
-https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
+https://mcp.{{< region-param key="dd_site" >}}/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
 ```
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-```text
-https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
-```
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-```text
-https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
-```
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-```text
-https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
-```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```text
-https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
-```
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-```text
-https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=core,software-delivery
-```
-{{< /site-region >}}
 
 For full setup instructions including client configuration for Cursor, Claude Code, VS Code, and other AI clients, see the [Datadog MCP Server documentation][1].
 
