@@ -1448,6 +1448,18 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
+  "AttachJiraIssue": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3042842144",
+      "description": "Attach security finding to a Jira issue returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Attach security findings to a Jira issue returns \"OK\" response"
+    }
+  ],
   "AttachCase": [
     {
       "group": "security_monitoring",
@@ -1486,6 +1498,23 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
+    }
+  ],
+  "CreateJiraIssues": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_379590688",
+      "description": "Create Jira issue for security finding returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_829823123",
+      "description": "Create Jira issue for security findings returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create Jira issues for security findings returns \"Created\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
