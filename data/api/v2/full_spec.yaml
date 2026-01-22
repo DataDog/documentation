@@ -9207,10 +9207,6 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
-        status_group:
-          $ref: '#/components/schemas/CaseStatusGroup'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9277,8 +9273,6 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9447,9 +9441,7 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      deprecated: true
-      description: Deprecated way of representing the case status, which only supports
-        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
+      description: Case status
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9460,23 +9452,6 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
-    CaseStatusGroup:
-      description: Status group of the case.
-      enum:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-      example: SG_OPEN
-      type: string
-      x-enum-varnames:
-      - SG_OPEN
-      - SG_IN_PROGRESS
-      - SG_CLOSED
-    CaseStatusName:
-      description: Status of the case. Must be one of the existing statuses for the
-        case's type.
-      example: Open
-      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9700,9 +9675,8 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-          deprecated: true
-        status_name:
-          $ref: '#/components/schemas/CaseStatusName'
+      required:
+      - status
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -38951,12 +38925,14 @@ components:
       - none
       - basic
       - bearer
+      - custom
       example: basic
       type: string
       x-enum-varnames:
       - NONE
       - BASIC
       - BEARER
+      - CUSTOM
     ObservabilityPipelineHttpClientSourceType:
       default: http_client
       description: The source type. The value should always be `http_client`.
@@ -39519,6 +39495,8 @@ components:
           description: The index to write logs to.
           example: logs-index
           type: string
+        data_stream:
+          $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestinationDataStream'
         id:
           description: The unique identifier for this component.
           example: opensearch-destination
@@ -39540,6 +39518,23 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineOpenSearchDestinationDataStream:
+      description: Configuration options for writing to OpenSearch Data Streams instead
+        of a fixed index.
+      properties:
+        dataset:
+          description: The data stream dataset for your logs. This groups logs by
+            their source or application.
+          type: string
+        dtype:
+          description: The data stream type for your logs. This determines how logs
+            are categorized within the data stream.
+          type: string
+        namespace:
+          description: The data stream namespace for your logs. This separates logs
+            into different environments or domains.
+          type: string
+      type: object
     ObservabilityPipelineOpenSearchDestinationType:
       default: opensearch
       description: The destination type. The value should always be `opensearch`.
