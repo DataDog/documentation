@@ -1,5 +1,9 @@
 ---
 description: ファセット検索でモニターのリストを絞り込み
+further_reading:
+- link: /getting_started/search/
+  tag: ドキュメント
+  text: Datadog で検索を始める
 title: モニターの検索
 ---
 
@@ -11,7 +15,7 @@ title: モニターの検索
 
 フィールド名を指定することで、検索結果の絞り込みが可能です。
 
-| 項目    | 説明                                            | 例        |
+| 項目    | 説明                                             | 例        |
 |---------|--------------------------------------------------------|----------------|
 | タイトル   | モニターのタイトルに含まれる文言を検索します。                | `title:text`   |
 | メッセージ | モニターの通知メッセージに含まれる文言を検索します。 | `message:text` |
@@ -20,7 +24,7 @@ title: モニターの検索
 
 <div class="alert alert-info">モニターグループをフィルターする方法については、<a href="/monitors/manage/status/">モニターステータスページ</a>を参照してください。</div>
 
-### クエリ
+### Query
 
 ブール演算子 (`AND`、`OR`、`NOT`) と括弧を使用して検索クエリを強化しましょう。検索構文は以下の場合を除き、[Elasticsearch][2] と似ています。
 
@@ -41,14 +45,14 @@ title: モニターの検索
 
 高度な検索を使用すると、以下のモニター属性を組み合わせて対象を絞り込むことができます。
 
-| 属性    | 説明                                                                                     |
+| 属性    | 説明                                                                                      |
 |--------------|-------------------------------------------------------------------------------------------------|
 | ステータス       | モニターのステータス: `Triggered` (`Alert`、`Warn`、`No Data`) または `OK`                            |
 | ミュート        | モニターのミュート状態: `true` または `false`                                               |
-| タイプ         | Datadog の[モニター種類][4]                                                                   |
+| 型         | Datadog の[モニター種類][4]                                                                   |
 | Creator      | モニターの作成者                                                                      |
 | サービス      | `service:<VALUE>` の形式で使用されるサービスタグ                                         |
-| タグ          | モニターに割り当てられた[タグ][5]                                               |
+| Tag          | モニターに割り当てられた[タグ][5]                                               |
 | Env          | `env:<VALUE>` の形式で使用される環境タグ                                         |
 | スコープ        | モニタークエリの `from` フィールド一覧に含まれる検索タグ                                   |
 | メトリクス/チェック | 監視対象のメトリクスまたはサービスチェック                                                     |
@@ -91,7 +95,11 @@ Views パネルのデフォルト保存ビューエントリからは、以下�
 * 現在のパラメーターでデフォルトビューを**更新**。
 * デフォルトビューを Datadog のデフォルトに**リセット**して再起動。
 
-[1]: /ja/monitors/manage/status/#properties
+## 関連情報
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/monitors/status/#properties
 [2]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#query-string-syntax
 [3]: https://www.elastic.co/guide/en/elasticsearch/reference/2.4/query-dsl-query-string-query.html#_fuzziness
 [4]: /ja/monitors/

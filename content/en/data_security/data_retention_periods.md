@@ -81,7 +81,7 @@ attributes:
   - product: CoScreen
     data_type: |
        - **Sessions**: 15 months
-  - product: Data Jobs Monitoring
+  - product: "Data Observability: Jobs Monitoring"
     data_type: |
        - **Job traces**: 90 days
   - product: Database Monitoring
@@ -154,6 +154,9 @@ attributes:
   - product: Software Composition Analysis (SCA)
     data_type: |
        - **Detected vulnerabilities**: 15 months
+  - product: Source Code Integration
+    data_type: |
+       - **Source Code**: 7 days
   - product: Synthetics
     data_type: |
        - **Test results (not displayed in UI)**: 2 months

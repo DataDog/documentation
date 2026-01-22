@@ -1,6 +1,9 @@
 ---
 description: デプロイメント実行をすべて検索します。
 further_reading:
+- link: /getting_started/search/
+  tag: ドキュメント
+  text: Datadog で検索を始める
 - link: /continuous_delivery/explorer/facets
   tag: ドキュメント
   text: ファセットについて
@@ -29,6 +32,6 @@ CD Visibility はプレビュー段階です。この機能に興味がある場
 | `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                             | authentication OR password   |
 | `-`          | **除外**: 以下の用語はイベントに含まれません (個々の生テキスト検索に適用されます)。       | authentication AND -password |
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}

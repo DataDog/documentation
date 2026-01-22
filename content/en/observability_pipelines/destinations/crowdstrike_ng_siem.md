@@ -1,7 +1,13 @@
 ---
 title: CrowdStrike Next-Gen SIEM Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' CrowdStrike Next-Gen SIEM destination to send logs to CrowdStrike Next-Gen SIEM.
 

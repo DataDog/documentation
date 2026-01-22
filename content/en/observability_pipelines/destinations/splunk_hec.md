@@ -1,7 +1,13 @@
 ---
 title: Splunk HTTP Event Collector (HEC) Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to send logs to Splunk HEC.
 

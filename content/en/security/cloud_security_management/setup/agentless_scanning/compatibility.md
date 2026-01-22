@@ -6,12 +6,16 @@ aliases:
 
 ## Availability
 
+Agentless Scanning is supported on AWS, Azure, and GCP. Oracle Cloud Infrastructure (OCI) is not yet supported.
+
+This feature is available in all commercial Datadog data centers. GovCloud is not supported.
+
 The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
 
 | Component                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             | GCP                                                                                                                                                                             |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Operating System | Linux; Windows Server 2016, 2019, 2022; Windows 10 or later | Linux; Windows Server 2016, 2019, 2022; Windows 10 or later | Linux; Windows Server 2016, 2019, 2022; Windows 10 or later |
-| Host Filesystem                                 | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                              | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                                                                      | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                                                                    |
+| Operating System | Linux; Windows Server 2016 or later; Windows 10 or later | Linux; Windows Server 2016 or later; Windows 10 or later | Linux; Windows Server 2016 or later; Windows 10 or later |
+| Host Filesystem                                 | Btrfs, Ext2, Ext3, Ext4, xfs, NTFS                                                                                                        | Btrfs, Ext2, Ext3, Ext4, xfs, NTFS                                                                                                                                                | Btrfs, Ext2, Ext3, Ext4, xfs, NTFS                                                                                                                                              |
 | Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                       |
 | Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) and Customer Managed Key (CMK)                                         | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Persistent Disk Encryption, Confidential VM </br> **Note**: Encrypted - Customer Managed Encryption Key (CMEK) and Customer-Supplied Encryption Keys (CSEK) are **not** supported |
 | Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                   |
@@ -45,7 +49,7 @@ The following Linux distributions are supported for hosts and containers scans:
 
 ## Application libraries
 
-The following application languages and libraries are supported for vulnerability scans on containers and Lambda instances:
+The following application languages and libraries are supported for vulnerability scans on container images, Lambda functions, and containers running in hosts:
 
 | Language | Supported Package Manager | Supported Files                                                      |
 |----------|---------------------------|----------------------------------------------------------------------|

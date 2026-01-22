@@ -20,13 +20,24 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-## Setup
+{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
+Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+{{< /callout >}}
 
-If your application is deployed as a container image, use the _Container Image_ method.
+## Setup
 
 **Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions. Go tracer v2 is not supported.
 
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+You can instrument your Go AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+{{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
@@ -204,7 +215,7 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Install the Datadog Lambda library
 
 ```
-go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2 
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### Update your Lambda function code

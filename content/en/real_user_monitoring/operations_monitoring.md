@@ -91,6 +91,8 @@ RUMMonitor.shared().startFeatureOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">The Operation's name cannot contain any whitespaces.</div>
+
 ### Stop an operation with success
 
 Every started operation must have a stop. Use `succeedFeatureOperation` to stop an operation with a successful outcome.
@@ -140,6 +142,8 @@ RUMMonitor.shared().succeedFeatureOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-warning">The <code>operationKey</code> must be the same in the start and end Operation event.</div>
+
 ### Stop an operation with failure
 
 Every started operation must have a stop. Use `failFeatureOperation` to stop an operation with a failure outcome.
@@ -155,7 +159,7 @@ enableExperimentalFeatures: ["feature_operation_vital"], // this flag needs to b
 
 GlobalRumMonitor.get().failFeatureOperation: (
 name: string, 
-failureReason: FailureReason, //'error' | 'abandoned' | 'timeout'| 'other'
+failureReason: FailureReason, //'error' | 'abandoned' | 'other'
 options?: {
  operationKey?: string,
  context?: Context,
@@ -171,7 +175,7 @@ options?: {
 GlobalRumMonitor.get().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-	reason: RUMFeatureOperationFailureReason,	// .error, .abandoned, timeout, .other
+	failureReason: RUMFeatureOperationFailureReason,	// .error, .abandoned, .other
 	attributes: Map<String, Any?>
 )
 ```
@@ -184,7 +188,7 @@ GlobalRumMonitor.get().failFeatureOperation(
 RUMMonitor.shared().failFeatureOperation(
 	name: String,
 	operationKey: String?,
-    reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .timeout, .other
+  reason: RUMFeatureOperationFailureReason,  // .error, .abandoned, .other
 	attributes: [AttributeKey: AttributeValue]
 )
 ```
@@ -213,7 +217,7 @@ Both metrics are retained for 15 months, and include several dimensions:
 
 - `operation.name`, which is defined on the client side
 - `operation.status`, which is either a success or failure
-- `operation.failure_reason`, which can be an error, or abandoned, or timeout, or other
+- `operation.failure_reason`, which can be an error, or abandoned, or other
 
 Those metrics are included in the price of RUM Measure and available to all RUM without Limits customers that define one or more operations.
 

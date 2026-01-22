@@ -16,8 +16,6 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
-
 ## Overview
 
 RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.

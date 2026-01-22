@@ -1,7 +1,13 @@
 ---
 title: Amazon S3 Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use the Amazon S3 destination to send logs to Amazon S3. If you want to send logs to Amazon S3 for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). If you don't want to rehydrate your logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 

@@ -5,7 +5,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-parsing-xml-logs/"
   tag: "Blog"
   text: "Simplify XML log collection and processing with Observability Pipelines"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 {{% observability_pipelines/processors/parse_xml %}}
 

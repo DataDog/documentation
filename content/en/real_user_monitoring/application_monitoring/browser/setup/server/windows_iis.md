@@ -13,8 +13,6 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
-
 ## Overview
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. This method leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance. After auto-instrumentation is set up, you can manage configurations from the UI.
@@ -52,13 +50,13 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Updating your RUM application
 
-You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
+You can update your RUM application settings at any time. From the [Application Management][3] list, select your RUM application and navigate to the **SDK Configuration** page. Click **Save Changes** after making updates.
 
-To update your RUM Application:
+### Sampling rates
 
-1. Go to your RUM application from the [Application Management][3] list.
-2. On the **SDK Configuration** page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
-3. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented.
+Adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented. 
+
+{{% rum-browser-auto-instrumentation-update-user-attributes %}}
 
 ## Manual configuration
 

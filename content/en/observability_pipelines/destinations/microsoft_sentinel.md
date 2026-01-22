@@ -1,7 +1,13 @@
 ---
 title: Microsoft Sentinel Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Microsoft Sentinel destination to send logs to Microsoft Sentinel. See [Logs Ingestion API][3] for API call limits in Microsoft Sentinel.
 

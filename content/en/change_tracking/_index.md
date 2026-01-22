@@ -119,6 +119,30 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 3. Hover over any change indicator or overlay to view a summary of the change.
 4. Click the change indicator or overlay to view detailed information and take remediation actions.
 
+### Widgets
+
+In addition to the out-of-the-box integrations, Change Tracking is available as a data source for widgets across Datadog, including Dashboards and Notebooks.
+
+{{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
+
+To configure a widget using Change Tracking data:
+
+1.	In a dashboard or notebook, add or edit a supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
+3.	From the **data source** dropdown, select `Change Tracking`.
+4.	Configure your filters (**Service** is required).
+5.	(Optional) For widgets that support grouping, use **Group by** to split results.
+
+{{< img src="/change_tracking/change-tracking-datasource-edit-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
+
+For Timeseries widgets, you can also enable Change Tracking as an **Event Overlay**, which displays changes on top of the timeseries to help correlate them with metric behavior.
+
+{{< img src="/change_tracking/change-tracking-datasource-edit-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
+
+
+#### View change details
+
+To view information about a change or set of changes, click a datapoint in the widget and select **View Changes**. This opens the Change Tracking side panel with additional details.
+
 ## Tracked changes
 Change Tracking follows these types of changes across your infrastructure:
 

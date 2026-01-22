@@ -1,7 +1,13 @@
 ---
 title: Socket Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Socket destination to send logs to a socket endpoint.
 

@@ -793,13 +793,6 @@
       "description": "Update an existing incident returns \"OK\" response"
     }
   ],
-  "UpdateIncidentAttachments": [
-    {
-      "group": "incidents",
-      "suffix": "_3881702075",
-      "description": "Create an incident attachment returns \"OK\" response"
-    }
-  ],
   "CreateIncidentIntegration": [
     {
       "group": "incidents",
@@ -1237,6 +1230,20 @@
       "description": "Create On-Call schedule returns \"Created\" response"
     }
   ],
+  "CreateUserNotificationChannel": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification channel for a user returns \"Created\" response"
+    }
+  ],
+  "CreateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create an On-Call notification rule for a user returns \"Created\" response"
+    }
+  ],
   "SetOnCallTeamRoutingRules": [
     {
       "group": "on-call",
@@ -1256,6 +1263,13 @@
       "group": "on-call",
       "suffix": "",
       "description": "Update On-Call schedule returns \"OK\" response"
+    }
+  ],
+  "UpdateUserNotificationRule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update an On-Call notification rule for a user returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -1446,6 +1460,13 @@
       "description": "Attach security findings to a case returns \"OK\" response"
     }
   ],
+  "BulkExportSecurityMonitoringRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Bulk export security monitoring rules returns \"OK\" response"
+    }
+  ],
   "EditSecurityMonitoringSignalIncidents": [
     {
       "group": "security_monitoring",
@@ -1477,6 +1498,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2323193894",
+      "description": "Create a detection rule with detection method 'anomaly_detection' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1512,6 +1538,13 @@
       "group": "security_monitoring",
       "suffix": "_868881438",
       "description": "Create a scheduled detection rule returns \"OK\" response"
+    }
+  ],
+  "CreateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a critical asset returns \"OK\" response"
     }
   ],
   "CreateCustomFramework": [
@@ -1627,6 +1660,18 @@
       "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
+  "SearchSecurityFindings": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Search security findings returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3678541639",
+      "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
   "TestSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -1644,6 +1689,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a critical asset returns \"OK\" response"
     }
   ],
   "UpdateCustomFramework": [
@@ -1679,6 +1731,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Validate a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_2609327779",
+      "description": "Validate a detection rule with detection method 'new_value' with enabled feature 'instantaneousBaseline' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",
@@ -1865,11 +1922,60 @@
       "description": "Update a span-based metric returns \"OK\" response"
     }
   ],
+  "CreateComponent": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create component returns \"Created\" response"
+    }
+  ],
+  "CreateDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create degradation returns \"Created\" response"
+    }
+  ],
+  "CreateStatusPage": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create status page returns \"Created\" response"
+    }
+  ],
+  "UpdateComponent": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update component returns \"OK\" response"
+    }
+  ],
+  "UpdateDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update degradation returns \"OK\" response"
+    }
+  ],
+  "UpdateStatusPage": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update status page returns \"OK\" response"
+    }
+  ],
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",
       "suffix": "",
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
+    }
+  ],
+  "CreateSyntheticsSuite": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Synthetics: Create a test suite returns \"OK\" response"
     }
   ],
   "AddTeamHierarchyLink": [
@@ -1898,6 +2004,13 @@
       "description": "Create a team with V2 fields returns \"CREATED\" response"
     }
   ],
+  "CreateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create team notification rule returns \"OK\" response"
+    }
+  ],
   "SyncTeams": [
     {
       "group": "teams",
@@ -1924,6 +2037,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update permission setting for team returns \"OK\" response"
+    }
+  ],
+  "UpdateTeamNotificationRule": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update team notification rule returns \"OK\" response"
     }
   ],
   "CreateUser": [

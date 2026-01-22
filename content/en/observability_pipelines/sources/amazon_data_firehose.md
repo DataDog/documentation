@@ -1,7 +1,13 @@
 ---
 title: Amazon Data Firehose Source
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Amazon Data Firehose source to receive logs from Amazon Data Firehose. Select and set up this source when you [set up a pipeline][1].
 

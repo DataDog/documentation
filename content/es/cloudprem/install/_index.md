@@ -38,9 +38,3 @@ CloudPrem admite los siguientes tipos de almacenamiento de objetos:
   {{< nextlink href="/cloudprem/install/azure_aks/" >}}Instalar en Azure AKS{{< /nextlink >}}
   {{< nextlink href="/cloudprem/install/docker/" >}}Instalar localmente con Docker para pruebas{{< /nextlink >}}
 {{< /whatsnext >}}
-
-<!-- ## Self-managed Kubernetes
-
-{{< whatsnext desc=" ">}}
-  {{< nextlink href="cloudprem/install/kubernetes_nginx/" >}}Instalar en un clúster de K8s con el Controlador de ingreso NGINX{{< /nextlink >}}
-{{< /whatsnext >}} -->

@@ -19,8 +19,9 @@ author:
 categories:
 - aws
 - 설정 및 배포
-- cog-2
-- orchestration
+- 컨테이너
+- 오케스트레이션
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md
 display_on_public_website: true
@@ -30,14 +31,13 @@ integration_id: amazon-eks-blueprints
 integration_title: Datadog Blueprints 애드온
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_eks_blueprints
 public_title: Datadog Blueprints 애드온
 short_description: Amazon EKS Blueprints는 클러스터 설정과 배포 도구를 통합합니다.
 supported_os:
-- 리눅스
-- windows
+- linux
+- 윈도우즈(Windows)
 - macos
 tile:
   changelog: CHANGELOG.md
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon EKS Blueprints는 클러스터 설정과 배포 도구를 통합합니다.
   media: []
@@ -76,7 +77,7 @@ Datadog Blueprints 애드온은 Blueprints를 사용해 Amazon EKS에 Datadog �
 npm install @datadog/datadog-eks-blueprints-addon
 ```
 
-### 사용량
+### 사용법
 
 #### 기존 쿠버네티스 기밀 사용
 
@@ -150,11 +151,11 @@ EKS를 모니터링하려면 다음 Datadog 통합 중 하나를 설정해야 �
 
 - [쿠버네티스][2]
 - [AWS][3]
-- [AWS EC2][4]
+- [Amazon EC2][4]
 
 또한, [ELB][5] 등 EKS와 함께 실행하는 기타 AWS 서비스에 대한 통합을 설치하세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 
 ## 트러블슈팅

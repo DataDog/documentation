@@ -23,6 +23,9 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 Before setting up Agentless Scanning, ensure the following prerequisites are met:
 
 - **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
+- **API and Application Keys**:
+  - An API key with Remote Configuration enabled is required for scanners to report scan results to Datadog.
+  - An Application key with either **Integrations Manage** or **Org Management** permissions is required to enable scanning features through the Datadog API.
 - **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process and are strictly limited to the minimum permissions required to perform the necessary scans, following the principle of least privilege.<br><br>
   {{< collapse-content title="AWS scanning permissions" level="h5" >}}
   <p>Scanning permissions:</p>
@@ -120,10 +123,6 @@ For existing users who want to add a new AWS account or enable Agentless Scannin
 1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
-##### Exclude resources from scans
-
-{{% csm-agentless-exclude-resources %}}
-
 ##### Update the CloudFormation stack
 
 Datadog recommends updating the CloudFormation stack regularly, so you can get access to new features and bug fixes as they get released. To do so, follow these steps:
@@ -158,7 +157,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 1. Click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 
 {{% /tab %}}
 
@@ -173,7 +172,7 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
+[2]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/blob/main/README.md
 
 {{% /tab %}}
 
@@ -206,10 +205,6 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 
 {{% /tab %}}
 {{< /tabs >}}
-
-##### Exclude resources from scans
-
-{{% csm-agentless-exclude-resources %}}
 
 ##### Update the Terraform modules version
 
@@ -269,10 +264,6 @@ If you've already [set up Cloud Security][10] and want to add a new cloud accoun
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Exclude resources from scans
-
-{{% csm-agentless-exclude-resources %}}
-
 ##### Update the CloudFormation stack
 
 Datadog recommends updating the CloudFormation stack regularly, so you can get access to new features and bug fixes as they get released. To do so, follow these steps:
@@ -281,6 +272,54 @@ Datadog recommends updating the CloudFormation stack regularly, so you can get a
 3. Click **Replace existing template**.
 4. In the following S3 URL: `https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/<VERSION>/datadog_agentless_scanning.yaml`, replace `<VERSION>` with the version found in [aws_quickstart/version.txt][14]. Paste that URL into the **Amazon S3 URL** field.
 5. Click **Next** to advance through the next several pages without modifying them, then submit the form.
+{{% /collapse-content %}}
+
+<br />
+
+### AWS CloudFormation StackSet (Multi-Account)
+
+For AWS Organizations with multiple accounts, use a CloudFormation StackSet to deploy the Agentless Scanning delegate role across all member accounts. This approach automates the onboarding process and ensures new accounts added to your Organization are automatically configured.
+
+{{% collapse-content title="AWS CloudFormation StackSet setup guide" level="h4" id="aws-cloudformation-stackset-setup" %}}
+
+This setup deploys the delegate role required for [cross-account scanning][18] across your AWS Organization or specific Organizational Units (OUs).
+
+##### Prerequisites
+
+1. Access to the AWS management account.
+2. [Trusted Access with AWS Organizations][19] must be enabled for CloudFormation StackSets.
+3. Agentless Scanning must already be configured in your central scanning account. See [AWS CloudFormation](#aws-cloudformation-setup) or [Terraform](#terraform-setup) setup.
+
+##### Deploy the StackSet
+
+1. Log in to your AWS management account and navigate to **CloudFormation > StackSets**.
+
+2. Click **Create StackSet**.
+3. Select **Service-managed permissions**.
+4. Under **Specify template**, select **Amazon S3 URL** and enter the following URL:
+
+{{< code-block lang="text" >}}
+   https://datadog-cloudformation-template-quickstart.s3.amazonaws.com/aws/v4.3.1/datadog_agentless_delegate_role_stackset.yaml
+{{< /code-block >}}
+
+5. Enter a **StackSet name** (for example, `DatadogAgentlessScanningStackSet`).
+6. Configure the required parameters:
+   - **ScannerInstanceRoleARN**: The ARN of the IAM role attached to your Agentless scanner instances.
+
+   The `ScannerInstanceRoleARN` establishes a trust relationship between the delegate role (created in target accounts) and your scanner instances (already running in the central account). This enables cross-account scanning where:
+   1. The scanner runs in Account A.
+   2. The delegate role exists in Accounts B, C, D (deployed through the StackSet).
+   3. The scanner assumes the delegate roles to scan resources in those accounts.
+7. Set **Deployment targets** to deploy across your Organization or specific OUs.
+8. Enable **Automatic deployment** to automatically configure new accounts added to your Organization.
+9. Select a **single region** for deployment (the IAM role is global and only needs to be deployed once per account).
+10. Review and submit the StackSet.
+
+After the StackSet deploys successfully, the member accounts are configured to allow cross-account scanning from your central scanner account.
+
+[18]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[19]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
+
 {{% /collapse-content %}}
 
 <br />
@@ -313,11 +352,23 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Exclude resources from scans
+{{% /collapse-content %}}
+
+## Configuration
+
+### Verify your setup
+
+After completing the setup, you can verify that Agentless Scanning is working correctly by checking for scan results in Datadog. Results typically appear after the first scan cycle completes.
+
+View scan results in the following locations:
+
+- **For host and container vulnerabilities**: [CSM Vulnerabilities Explorer][15]. To view only vulnerabilities detected by Agentless Scanning, use the filter `origin:"Agentless scanner"` in the search bar.
+- **For Lambda vulnerabilities**: [Code Security (SCA) Explorer][16]
+- **For sensitive data findings**: [Sensitive Data Scanner][17]
+
+### Exclude resources from scans
 
 {{% csm-agentless-exclude-resources %}}
-
-{{% /collapse-content %}}
 
 ## Disable Agentless scanning
 
@@ -396,3 +447,6 @@ If you did not use a dedicated resource group, you must manually delete the scan
 [12]: /security/cloud_security_management/agentless_scanning
 [13]: #azure-resource-manager-setup
 [14]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
+[15]: https://app.datadoghq.com/security/csm/vm
+[16]: https://app.datadoghq.com/security/code-security/sca
+[17]: https://app.datadoghq.com/sensitive-data-scanner/storage
