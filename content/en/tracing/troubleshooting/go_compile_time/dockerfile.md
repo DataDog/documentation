@@ -56,17 +56,11 @@ ENTRYPOINT [ "/usr/local/bin/main" ]
 
 ## Optimizing Build Performance with GOCACHE
 
-To speed up successive builds, you can persist Go's build cache between Docker builds using a Docker volume. This is particularly useful in CI/CD pipelines where you build frequently.
+To speed up successive builds, you can persist Go's build cache between Docker builds using a BuildKit cache mount.
 
-### Create and use a build cache volume
+### Use a BuildKit cache mount
 
-First, create a named Docker volume for the build cache:
-
-```sh
-docker volume create go-build-cache
-```
-
-Then build your image using the cache volume. You need to set the `GOCACHE` environment variable in the build stage and mount the volume:
+Set the `GOCACHE` environment variable in the build stage and add a BuildKit cache mount to the build step:
 
 ```dockerfile
 FROM golang:1 AS build
@@ -86,6 +80,41 @@ COPY . .
 RUN go install github.com/DataDog/orchestrion
 
 # Build with Orchestrion instrumentation
+RUN --mount=type=cache,target=/go/build-cache \
+    orchestrion go build -o=main .
+
+FROM debian:bookworm
+COPY --from=build /app/main /usr/local/bin/
+ENTRYPOINT [ "/usr/local/bin/main" ]
+```
+
+Build the image with BuildKit enabled:
+
+```sh
+DOCKER_BUILDKIT=1 docker build -t my-apm-app .
+```
+
+**Note**: The `RUN --mount=type=cache` directive requires Docker BuildKit. Enable it by setting `DOCKER_BUILDKIT=1` or by using `docker buildx build`.
+
+### Traditional approach
+
+If you cannot use BuildKit (for example, on older Docker versions or in certain CI/CD environments), use the same Dockerfile structure without the cache mount directive:
+
+```dockerfile
+FROM golang:1 AS build
+WORKDIR /app
+
+# Copy dependency files first for better layer caching
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy source code
+COPY . .
+
+# Install Orchestrion from pinned dependencies
+RUN go install github.com/DataDog/orchestrion
+
+# Build with Orchestrion instrumentation
 RUN orchestrion go build -o=main .
 
 FROM debian:bookworm
@@ -93,15 +122,13 @@ COPY --from=build /app/main /usr/local/bin/
 ENTRYPOINT [ "/usr/local/bin/main" ]
 ```
 
-Build the image with the cache mount:
+Build the image:
 
 ```sh
-docker build \
-  --mount type=volume,source=go-build-cache,target=/go/build-cache \
-  -t my-apm-app .
+docker build -t my-apm-app .
 ```
 
-**Note**: The `--mount` flag requires Docker BuildKit. Enable it by setting `DOCKER_BUILDKIT=1` or by using `docker buildx build`.
+**Note**: This approach relies on Docker's layer caching. The `go mod download` layer is cached and reused when dependencies don't change, providing significant build speed improvements. However, Go's build cache (GOCACHE) is not persisted between builds, unlike the BuildKit approach.
 
 ## Running Your Application
 
