@@ -172,13 +172,6 @@ The following are custom processor metrics tagged with `component_type=enrichmen
 
 Common buffer metrics (when enabled) are also reported for the processor buffer:
 
-- `pipelines.buffer_events`
-- `pipelines.buffer_bytes`
-- `pipelines.buffer_received_events_total`
-- `pipelines.buffer_received_bytes_total`
-- `pipelines.buffer_sent_events_total`
-- `pipelines.buffer_sent_bytes_total`
-
 {{% observability_pipelines/metrics/buffer %}}
 
 Those metrics are tagged with `component_type=enrichment_table`, `component_id=<processor_id>`, and `buffer_id=enrichment_table_buffer`.
