@@ -38,7 +38,7 @@ By default, Datadog parses all epoch timestamps in Logs using UTC. If incoming l
 To adjust the timezone of the logs during processing, see the footnotes in Datadog's [Parsing][11] guide on using the `timezone` parameter with the date matcher.
 Epoch timestamps can be adjusted using the timezone parameter in a Grok Parser processor to adjust localizations.
 
-Epoch timestamps can be adjusted using the `timezone` parameter in a Grok Parser processor. Follow these steps to convert a localized timestamp to UTC using the example in Datadog’s [Grok Parser][19] guide.
+Epoch timestamps can be adjusted using the `timezone` parameter in a Grok Parser processor. Follow these steps to convert a localized timestamp to UTC using the example in Datadog's [Grok Parser][19] guide.
 
 1. Navigate to the [Pipelines][9] page.
 2. In **Pipelines**, select the correct pipeline matching to your logs.
