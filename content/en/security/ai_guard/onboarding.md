@@ -227,6 +227,7 @@ The messages you pass to AI Guard must follow this format, which is a subset of 
 #### System prompt format {#system-prompt-format}
 
 In the first message, you can set an optional system prompt. It has two mandatory fields:
+
 - `role`: Can be `system` or `developer`.
 - `content`: A string with the content of the system prompt.
 
@@ -239,20 +240,42 @@ Example:
 #### User prompt format {#user-prompt-format}
 
 A user prompt has two mandatory fields:
-- `role`: Must be `user`.
-- `content`: A string with the content of the user prompt.
 
-Example:
+- `role`: Must be `user`.
+- `content`: A string with the content of the user prompt, or an array of content parts.
+
+**String content example**:
 
 ```json
-{"role":"user","content":"Hello World!"}
+{"role": "user", "content": "Hello World!"}
+```
+
+**Content parts example**:
+
+For multi-modal inputs, the `content` field can be an array of content parts. Supported types are `text` and `image_url`.
+
+```json
+{
+    "role": "user",
+    "content": [
+        {
+            "type": "text",
+            "text": "What is in this image?"
+        },
+        {
+            "type": "image_url",
+            "image_url": {"url": "data:image/jpeg;base64,..."}
+        }
+    ]
+}
 ```
 
 #### Assistant response format {#assistant-response-format}
 
 An assistant response with no tool calls has two mandatory fields:
+
 - `role`: Must be `assistant`.
-- `content`: A string with the content of the user prompt.
+- `content`: A string with the content of the assistant response, or an array of content parts.
 
 Example:
 
@@ -342,6 +365,31 @@ The `evaluate` method accepts the following parameters:
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
 - `reason`: natural language summary of the decision.
+
+#### Example: Evaluate a user prompt with content parts {#python-example-evaluate-user-prompt-content-parts}
+
+For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
+
+```py
+from ddtrace.appsec.ai_guard import ContentPart, ImageURL
+
+# Evaluate a user prompt with both text and image content
+result = client.evaluate(
+    messages=[
+        Message(role="system", content="You are an AI Assistant"),
+        Message(
+            role="user",
+            content=[
+                ContentPart(type="text", text="What is in this image?"),
+                ContentPart(
+                    type="image_url",
+                    image_url=ImageURL(url="data:image/jpeg;base64,...")
+                )
+            ]
+        ),
+    ]
+)
+```
 
 #### Example: Evaluate a tool call {#python-example-evaluate-tool-call}
 
