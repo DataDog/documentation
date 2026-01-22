@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Software Delivery MCP tools are in Preview. If you're interested in this feature, complete this form to request access. Learn more about the Datadog MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
+The Datadog MCP Server is in Preview. If you're interested in this feature, complete this form to request access. Learn more about the Datadog MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
 {{< /callout >}}
 
 ## Overview
