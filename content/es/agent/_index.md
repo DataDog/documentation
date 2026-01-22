@@ -54,9 +54,10 @@ El Datadog Agent es un software que se ejecuta en tus hosts. Se encarga de recop
 {{< partial name="platforms/platforms.html" links="platforms" >}}
 
 <div class="alert alert-info"><p>
-Datadog recomienda actualizar el Datadog Agent con cada versión secundaria y de parche o, como mínimo, mensualmente. </p>
+Datadog recomienda la actualización del Datadog Agent con cada versión menor de parche o, como mínimo, mensualmente. </p>
 <p>
-Actualizar a una versión principal del Datadog Agent y mantenerlo actualizado es la única forma admitida de obtener las últimas funciones y correcciones del Agent.</p>
+Actualizar a una versión mayor del Datadog Agent y mantenerla actualizada es la única forma compatible de obtener las últimas funcionalidades y correcciones del Agent.</p>
+<p> <em>Se recomienda la instalación completa del Agent</em>. Sin embargo, existe un paquete DogStatsD independiente para Amazon Linux, CentOS, Debian, Fedora, Red Hat, SUSE y Ubuntu. Este paquete se utiliza en entornos en contenedores donde DogStatsD se ejecuta como sidecar o en entornos que ejecutan un servidor DogStatsD sin la funcionalidad completa del Agent.</p>
 </div>
 
 ## Gestión del Agent

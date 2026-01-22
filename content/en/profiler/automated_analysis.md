@@ -15,10 +15,6 @@ further_reading:
       tag: 'Blog'
       text: "Diagnose runtime and code inefficiencies using Continuous Profiler's timeline view"
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/automated-analysis/" btn_hidden="false" header="Join the Preview!" >}}
-Automated Analysis is in Preview.
-{{< /callout >}}
-
 ## Overview
 Automated Analysis automatically detects performance issues in your applications using Continuous Profiler data and provides actionable insights for resolution. When an issue is detected, Automated Analysis provides:
 
@@ -124,7 +120,10 @@ Automated Analysis supports finding the following insights:
 | Name                         | Priority   | Description |
 |------------------------------|------------|-------------|
 | Sync-over-Async Blocking     | Medium     | Triggers if async functions are detected in CPU samples. |
+| High Lock Contention | Low      | Triggers if there is a high ratio of time waiting on locks to time spent on-CPU. |
+| Exception Overhead | Medium      | Triggers if an excessive amount of exceptions is thrown. |
 | Excessive String Concatenation | Low      | Triggers if there is a high ratio of CPU time spent concatenating strings. |
+| GC Overhead | Low      | Triggers if more than 20% of CPU time is related to GC activities. |
 {{% /tab %}}
 
 {{< /tabs >}}

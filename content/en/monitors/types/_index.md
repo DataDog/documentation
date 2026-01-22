@@ -24,6 +24,7 @@ further_reading:
 {{< whatsnext desc="Choose your monitor type:">}}
 {{< nextlink href="/monitors/types/host" >}}<strong>Host</strong>: Check if one or more hosts are reporting to Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/metric" >}}<strong>Metric</strong>: Compare values of a metric with a user-defined threshold.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/analysis" >}}<strong>Analysis</strong>: Query multiple data sources, chain transformations, and run complex SQL queries.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/anomaly" >}}<strong>Anomaly</strong>: Detect anomalous behavior for a metric based on historical data.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>: Monitor APM metrics or trace queries.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}

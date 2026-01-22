@@ -66,7 +66,7 @@ To triage an event:
 [11]: /security/workload_protection/security_signals
 [12]: /security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
-[14]: /service_management/events/explorer/
+[14]: /events/explorer/
 [15]: /infrastructure/process/
 [16]: /metrics/
 [17]: https://app.datadoghq.com/process

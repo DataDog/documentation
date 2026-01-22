@@ -29,14 +29,20 @@ To complete this guide, you need the following:
 - A supported Linux distribution (for example, Debian, Ubuntu, CentOS, RHEL, Fedora, SUSE).
 - `curl` must be installed to use the one-line installation script.
 
+**Network**:
+
+{{% otel-network-requirements %}}
+
 ## Install the Datadog Agent with OpenTelemetry Collector
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Installation
 
 To install the DDOT Collector on a Linux host, use the following one-line installation command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=70.0-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=75.0-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.

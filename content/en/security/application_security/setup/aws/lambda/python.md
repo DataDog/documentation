@@ -142,21 +142,12 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 1. Install the Datadog CDK constructs library:
 
     ```sh
-    # For AWS CDK v1
-    pip install datadog-cdk-constructs
-
-    # For AWS CDK v2
     pip install datadog-cdk-constructs-v2
     ```
 
 2. Instrument your Lambda functions
 
     ```python
-    # For AWS CDK v1
-    from datadog_cdk_constructs import Datadog
-    # NOT SUPPORTED IN V1
-
-    # For AWS CDK v2
     from datadog_cdk_constructs_v2 import Datadog, DatadogAppSecMode
 
     datadog = Datadog(self, "Datadog",

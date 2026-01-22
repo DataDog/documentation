@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -35,7 +36,7 @@ Set up the Azure Storage destination and its environment variables when you [set
 
 ### Set the environment variables
 
-{{% observability_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog_archives_azure_storage %}}
 
 ## How the destination works
 

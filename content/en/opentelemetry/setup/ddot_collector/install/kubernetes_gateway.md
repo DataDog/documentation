@@ -54,12 +54,16 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.156.0 or higher.
+    * Datadog Helm chart version 3.160.1 or higher.
     * [kubectl][4].
+* **Network**:
+  {{% otel-network-requirements %}}
 
 ## Installation and configuration
 
 This guide uses the Datadog Helm chart to configure the DDOT Collector gateway. Check out all the available configurations on the [Datadog Helm chart README][8].
+
+<div class="alert alert-info">This installation is required for both Datadog SDK + DDOT and OpenTelemetry SDK + DDOT configurations. While the Datadog SDK implements the OpenTelemetry API, it still requires the DDOT Collector to process and forward OTLP metrics and logs.</div>
 
 ### Deploying the gateway with a daemonset
 
@@ -563,12 +567,11 @@ To view your gateway pods:
 ## Known limitations
 
   * **Startup race condition**: When deploying the DaemonSet and gateway in the same release, DaemonSet pods might start before the gateway service is ready, causing initial connection error logs. The OTLP exporter automatically retries, so these logs can be safely ignored. Alternatively, deploy the gateway first and wait for it to become ready before deploying the DaemonSet.
-  * **Ignorable Core Agent Connection Logs**: Gateway pods might generate warning logs about failing to connect to a core Datadog Agent (for example, `grpc: addrConn.createTransport failed to connect`). This occurs because the gateway deployment does not include a core agent in the same pod. These logs are expected and can be safely ignored. This is being actively addressed.
-  
+
 ## Further reading
   
 {{< partial name="whats-next/whats-next.html" >}}
-
+  
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
 [3]: https://helm.sh

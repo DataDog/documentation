@@ -287,13 +287,27 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log message re
 
 ## Remapper
 
-The remapper processor remaps any source attribute(s) or tags to another target attribute or tag. For example, remap `user` by `firstname` to target your logs in the Log Explorer.
+The remapper processor remaps one or more source attribute(s) or tags to a different target attribute or tag. For example, you can remap the `user` attribute to `firstname` to normalize log data in the Log Explorer.
 
-Constraints on the tag/attribute name are explained in the [attributes and tags documentation][5]. Some additional constraints, applied as `:` or `,`, are not allowed in the target tag/attribute name.
+If the remapper target is an attribute, the processor can also try to cast the value to a new type (`String`, `Integer`, or `Double`). If the cast fails, the original value and type are preserved.
 
-If the target of the remapper is an attribute, the remapper can also try to cast the value to a new type (`String`, `Integer` or `Double`). If the cast is not possible, the original type is kept.
+**Note**: The decimal separator for `Double` values must be `.`.
 
-**Note**: The decimal separator for `Double` need to be `.`.
+### Naming constraints
+
+Characters `:` and `,` are not allowed in the target attribute or tag names. Additionally, tag and attribute names must follow the conventions outlined in [Attributes and Aliasing][5].
+
+### Reserved attributes
+
+The Remapper processor **cannot be used to remap Datadog reserved attributes**. 
+- The `host` attribute cannot be remapped.
+- The following attributes require dedicated remapper processors and cannot be remapped with the generic Remapper. To remap any of the attributes, use the corresponding specialized remapper or processor instead.
+   - `message`: Log message remapper
+   - `service`: Service remapper
+   - `status`: Log status remapper
+   - `date`: Log date remapper
+   - `trace_id`: Trace remapper
+   - `span_id`: Span remapper
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -424,6 +438,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following user-agent par
 {{< /tabs >}}
 
 ## Category processor
+
+<div class="alert alert-danger">To update a category, you must delete the original category and recreate it. You cannot use the Category processor to update an existing category.</div>
 
 Use the category processor to add a new attribute (without spaces or special characters in the new attribute name) to a log matching a provided search query. Then, use categories to create groups for an analytical view (for example, URL groups, machine groups, environments, and response time buckets).
 
@@ -1084,7 +1100,7 @@ For detailed setup instructions, configuration examples, and troubleshooting gui
 [2]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs
 [3]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[5]: /logs/log_collection/?tab=host#attributes-and-tags
+[5]: /logs/log_configuration/attributes_naming_convention/
 [6]: /logs/search_syntax/
 [7]: /integrations/guide/reference-tables/
 [8]: /tracing/other_telemetry/connect_logs_and_traces/
