@@ -120,7 +120,7 @@ Si utilizas CDN asíncrona, deberás realizar unos pequeños cambios en el fragm
            {`
              (function(h,o,u,n,d) {
                h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-               d=o.createElement(u);d.async=1;d.src=n
+               d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
                n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
              })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
              window.DD_RUM.onReady(function() {
@@ -177,6 +177,7 @@ Si utilizas CDN síncrona, deberás realizar unos pequeños cambios en el fragme
            <Script
              id="dd-rum-sync"
              src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+             crossOrigin=""
              type="text/javascript"
              strategy="beforeInteractive"
            />
