@@ -821,6 +821,13 @@
       "description": "Create an incident type returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentAttachment": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create incident attachment returns \"Created\" response"
+    }
+  ],
   "CreateIncidentNotificationRule": [
     {
       "group": "incidents",
@@ -854,6 +861,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident type returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentAttachment": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update incident attachment returns \"OK\" response"
     }
   ],
   "UpdateIncidentNotificationRule": [
