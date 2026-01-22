@@ -78,7 +78,7 @@ To configure a repository environment:
 1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
 
-When you launch the Dev Agent, it runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access to download dependencies, then network access is disabled during Agent execution for security.
+When you launch the Dev Agent, it runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. Once setup is complete, network access is disabled during Agent execution for security.
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
 
