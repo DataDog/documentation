@@ -118,7 +118,7 @@ Cross-Product Retention Filters are in Preview. Use this form to submit your req
 When configuring a RUM retention filter, you can enable cross-product retention filters for APM traces.
 
 The **APM traces filter** indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter that have available traces.
-  <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs (applies to RUM and APM, but not Session Replay): <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
+  <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
 
 <div class="alert alert-danger">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
 
@@ -134,7 +134,7 @@ Consider a configuration where you set up a unique RUM retention filter configur
 
 {{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:60%" >}}
 
-If you have initialized the SDK with `sessionReplaySampleRate:30` and `traceSampleRate:40`, then the outcome is the following:
+If you have initialized the SDK with `traceSampleRate:40`, then the outcome is the following:
 
 - 60% of sessions with at least one error are retained.
 - 25% x 40% = 10% of these retained sessions have the APM traces retained.
