@@ -250,6 +250,130 @@ For an example showing how to use this component, see [Custom charts][10].
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Image" level="h3" %}}
+Image components have the following properties.
+
+### General 
+
+Source
+: The image to display.<br>
+**Values**: URL, file
+
+### Appearance
+
+Fit
+: Determines the dimensions of the image within the bounds of the image component.<br>
+**Provided values**: fill, contain, cover, none
+
+Padding
+: Determines the width of space between the bounds of the image and the bounds of the image component.<br>
+**Provided values**: none, small, medium, large
+
+Vertical Alignment
+: Determines the vertical position of the image within the bounds of the image component.<br>
+**Provided values**: align top, align center, align bottom
+
+Horizontal Alignment 
+: Determines the horizontal position of the image within the bounds of the image component.<br>
+**Provided values**: align left, align center, align right
+
+Border
+: Determines whether the image component has a visual border around its edges.<br>
+**Provided values**: on, off
+
+Transparent Background
+: Determines whether the background inside the image component is transparent.<br>
+**Provided values**: on, off
+
+Is Loading
+: Determines whether a loading icon is displayed while the image is being loaded.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the image component is visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Date range picker" level="h3" %}}
+Date range picker components have the following properties.
+
+### General
+
+Default timeframe
+: The default timeframe that the date picker displays.<br>
+**Provided values**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+### Example
+
+To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="File input" level="h3" %}}
+File input components have the following properties.
+
+### General
+
+Accepted File Types
+: Determines which file types the file input component accepts.<br>
+**Values**: .csv, .json
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
 
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
