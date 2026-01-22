@@ -128,7 +128,7 @@ By default, Datadog App and API Protection scans for PII, credentials, and payme
 
 In a custom scanner, you define a scanner category and type to classify API endpoints processing sensitive data (for example, `health_info:patient_id`). Next, you define the JSON key or value conditions that trigger the scanner.
 
-When sensitive data is detected, the scanner tags the API endpoint with the category and type and displays it in [API Endpoints][7].
+When the scanner detects sensitive data, it tags the API endpoint with the category and type and displays it in [API Endpoints][7].
 
 To create a customer scanner and view its results, do the following:
 
