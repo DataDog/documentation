@@ -88553,9 +88553,6 @@ paths:
         operator: OR
         permissions:
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/sboms/{asset_type}:
     get:
       description: Get a single SBOM related to an asset by its type and name.
@@ -88629,9 +88626,6 @@ paths:
         operator: OR
         permissions:
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/scanned-assets-metadata:
     get:
       description: "Get a list of security scanned assets metadata for an organization.\n\n###
