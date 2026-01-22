@@ -2,6 +2,7 @@
 title: Kubernetes Resource Utilization
 aliases:
 - /infrastructure/containers/kubernetes_resources
+- /infrastructure/containers/kubernetes_resource_utilization
 further_reading:
 - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
   tag: "Blog"
@@ -17,7 +18,7 @@ With a constantly-updated status of how well your resource requests and limits m
 ## Prerequisites
 
 - Datadog Agent v7.45.0+
-- Enable [Orchestrator Explorer][1]
+- Enable [Kubernetes Explorer][1]
 
 ## Usage
 
@@ -76,6 +77,6 @@ The summation of resource requests and limits for a group is independent of the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator#setup
+[1]: /containers/monitoring/kubernetes_explorer
 [2]: https://app.datadoghq.com/kubernetes
 [3]: https://app.datadoghq.com/orchestration/resource/pod?groups=tag%23kube_deployment%2Ctag%23kube_namespace%2Ctag%23kube_cluster_name

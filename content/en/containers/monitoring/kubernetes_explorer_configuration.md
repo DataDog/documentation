@@ -1,7 +1,8 @@
 ---
-title: Configure Containers View
+title: Configure Kubernetes Explorer
 aliases:
   - /infrastructure/livecontainers/configuration
+  - /infrastructure/containers/configuration
 further_reading:
 - link: "/infrastructure/hostmap/"
   tag: "Documentation"
@@ -13,78 +14,7 @@ further_reading:
 
 This page lists configuration options for the [Containers][1] page in Datadog. To learn more about the Containers page and its capabilities, see [Containers View][2] documentation.
 
-## Configuration options
-
-### Include or exclude containers
-
-Include and exclude containers from real-time collection:
-
-- Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
-- Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
-
-Both arguments take an **image name** as value. Regular expressions are also supported.
-
-For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
-
-```yaml
-container_exclude: ["image:debian"]
-container_include: ["name:frontend.*"]
-```
-
-**Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
-
-### Scrubbing sensitive information from manifests
-
-To help prevent leaking sensitive data, the Agent can be configured to scrub the collected Kubernetes YAML manifests. This scrubbing feature is applied to:
-
-- Annotation values
-- Label values
-- Probe configurations (HTTP headers and commands)
-- Environment variables 
-- Container exec commands
-
-The scrubbing algorithm attempts to detect key-value pairs containing secrets based on a set of sensitive keywords, replacing corresponding values with `********`. This logic is applied to structured key-value pairs (such as environment variables) as well as values that look like JSON or YAML content, which may contain key-value pairs within the content.
-
-Scrubbing is enabled by default using the following sensitive keywords:
-
-- `password`
-- `passwd`
-- `mysql_pwd`
-- `access_token`
-- `auth_token`
-- `api_key`
-- `apikey`
-- `pwd`
-- `secret`
-- `credentials`
-- `stripetoken`
-
-You can supply additional sensitive keywords by providing a space-delimited list in the environment variable: `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to the default words and does not overwrite them. To use this environment variable, you must configure it for following Agents:
-
-- Core Agent
-- Cluster Agent
-
-```yaml
-env:
-    - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
-      value: "customword1 customword2 customword3"
-```
-
-**Note**: Any additional sensitive words must be provided as lowercase strings. The Agent converts text to lowercase before matching for sensitive words. If the sensitive word is `password`, `MY_PASSWORD=1234` is scrubbed to `MY_PASSWORD=********` because the Agent converts `MY_PASSWORD` to `my_password`, which mean the sensitive word `PASSWORD` does not match anything.
-
-For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
-
-```text
-password <MY_PASSWORD>
-password=<MY_PASSWORD>
-password: <MY_PASSWORD>
-password::::== <MY_PASSWORD>
-config={"password":"<MY_PASSWORD>"}
-```
-
-However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
-
-## Configure Orchestrator Explorer
+## Configure Kubernetes Explorer
 
 ### Resource collection compatibility matrix
 
