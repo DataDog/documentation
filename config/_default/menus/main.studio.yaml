@@ -17,7 +17,7 @@ menu:
     # Menu items that appear under labels starts below here
 
     - name: Getting Started
-      url: /studio/
+      url: /studio/getting_started/
       parent: onboarding_heading
       identifier: getting_started
       weight: 1
@@ -42,16 +42,17 @@ menu:
           - monitor_types_auditlogs
           - monitor_types_ci
           - monitor_types_cloud_cost
+          - monitor_types_cnm
           - monitor_types_database_monitoring
           - monitor_types_event
           - monitor_types_network
           - monitor_types_netflow
           - monitor_types_process
           - monitor_types_process_check
+          - monitor_types_rum
           - monitor_types_service_check
           - monitor_types_slo
           - monitor_types_syn
-          - monitor_types_watchdog
     - name: Bits AI
       parent: essentials_heading
       params:
