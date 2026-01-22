@@ -15,7 +15,7 @@ Logs can contain information like IP addresses, user IDs, or service names that 
 
 ### When to use this processor
 
-The following are se cases for enriching logs from integrations
+The following are use cases for enriching logs from integrations
 
 #### Cloud object storage
 
