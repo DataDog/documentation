@@ -90,10 +90,11 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the Amazon Bedrock tile.
 1. Follow the instructions on the tile.
-1. Be sure to configure the **Invoke models from Amazon Bedrock** role to run evaluations
-
 
 {{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="The Amazon Bedrock configuration tile in LLM Observability. Lists instructions for configuring Amazon Bedrock." style="width:100%;" >}}
+
+1. Be sure to configure the **Invoke models from Amazon Bedrock** role to run evaluations
+
 
 {{< img src="llm_observability/configuration/amazon-bedrock-tile-step-2.png" alt="The second step in configuring Amazon Bedrock requires users to add permissions to the integration account." style="width:100%;" >}}
 
