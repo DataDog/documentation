@@ -55,14 +55,7 @@ Use custom metrics from traces for:
 
 {{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="How to create a metric" >}}
 
-To access the Generate Metrics page in Datadog:
-1. In the Datadog app, hover over **APM** in the left navigation menu.
-1. Under the **Ingestion and Sampling** section, click **Generate Metrics**.
-
-Alternatively, navigate directly to [**APM** > **Generate Metrics**][14].
-
-To create a new metric:
-
+1. In Datadog, go to [**APM > Generate Metrics**][14].
 1. Click **New Metric**.
 1. Name your metric following the [metric naming convention][11]. Metric names starting with `trace.*` are not allowed.
 1. Select the metric type: **Spans** or **Traces**. Both use the same [query syntax][10] as APM Search and Analytics.
