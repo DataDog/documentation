@@ -119,7 +119,7 @@ Follow the CONTRIBUTING.md style guide:
 - Don't edit translated content directly (managed externally)
 
 ### Style Rules (from datadog-vale)
-The full Vale linter rules are in `/Users/brett.blue/go/src/github.com/DataDog/datadog-vale/`. Key substitutions:
+The full Vale linter rules are at https://github.com/DataDog/datadog-vale. Key substitutions:
 
 | Don't use | Use instead |
 |-----------|-------------|
