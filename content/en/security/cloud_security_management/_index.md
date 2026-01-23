@@ -60,6 +60,10 @@ Datadog Cloud Security delivers deep visibility, continuous configuration audits
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
