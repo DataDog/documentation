@@ -49,7 +49,7 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
 
 Threat intelligence is supported in the CSV format. It requires a table for each Indicator type (for example, IP address, domain, SHA256 hash, AWS account ID, container image name) and requires the following columns:
 
-#### CSV structure for IP address
+#### CSV structure for IP addresses
 
 | Field           | Data | Description                                                                              | Required | Example                                                                   |
 |-----------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
@@ -68,7 +68,7 @@ ip_address,additional_data,category,intention,source
 192.0.2.3,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
 
-#### CSV structure for domain
+#### CSV structure for domains
 
 | Field           | Data | Description                                                                              | Required | Example                                                                   |
 |-----------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
@@ -118,7 +118,7 @@ ssdeep,additional_data,category,intention,source
 {{< /tabs >}}
 </div>
 
-#### CSV structure for AWS account ID
+#### CSV structure for AWS account IDs
 
 | Field             | Data | Description                                                                              | Required | Example                                                                   |
 |-------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
@@ -139,7 +139,7 @@ aws_account_id,additional_data,category,intention,source
 ```
 </div>
 
-#### CSV structure for container image name
+#### CSV structure for container image names
 
 | Field                  | Data | Description                                                                              | Required | Example                                                                   |
 |------------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
@@ -161,7 +161,7 @@ suspicious-hub.com/backdoor/payload:1.0,"{""ref"":""hxxp://example.org""}",malwa
 ```
 </div>
 
-#### CSV structure for container registry account name
+#### CSV structure for container registry account names
 
 | Field                             | Data | Description                                                                                        | Required | Example                                                                   |
 |-----------------------------------|------|----------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
@@ -183,7 +183,7 @@ malicious-vendor,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name""
 ```
 </div>
 
-#### CSV structure for SSH public key
+#### CSV structure for SSH public keys
 
 | Field             | Data | Description                                                                                                        | Required | Example                                                                   |
 |-------------------|------|--------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
@@ -205,7 +205,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGZfNyAXqPdvZ0qqIWFVxH5z2k,"{""ref"":""hxx
 ```
 </div>
 
-#### CSV structure for user agent
+#### CSV structure for user agents
 
 | Field             | Data | Description                                                                              | Required | Example                                                                   |
 |-------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
