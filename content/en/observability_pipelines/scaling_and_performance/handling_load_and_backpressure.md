@@ -36,17 +36,17 @@ Backpressure determines if the system should slow down the consumption or accept
 
 Buffering data protects against temporary overloads or outages for a given workload. All components in Observability Pipelines have a small in-memory buffer between them. The buffer is the channel that two components communicate over. It ensures that there is a small amount of space that can be used to send events even if the component on the receiving end is busy. This allows maximizing throughput when workloads are not entirely uniform.
 
-The buffer size is 100 events for source and processors and a default of 500 events for destinations. Buffers for Observability Pipelines destinations can be configured. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information. The default destination buffer capacity is more than that of other components because destinations are typically the primary source of backpressure in any given Observability Pipelines topology. Destinations communicate to services over the network, where latency may be introduced or outages may temporarily occur.
+The buffer size is 100 events for source and processors and a default of 500 events for destinations. The buffer size for destinations is configurable. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information. The default destination buffer capacity is more than that of sources and processors because destinations are typically the primary source of backpressure. Destinations communicate to services over the network, where latency may be introduced or outages may temporarily occur.
 
 ### Configurable buffers for destinations
 
-The buffering model prioritizes performance when handling an excess of events, an amount that is beyond what a destination can process, by using buffers on destinations. Destination buffers are configured to block events, which means the Worker waits indefinitely to write to a buffer that is full. This ensures observability data is reliably processed in the order it was given. Additionally, as mentioned earlier, blocking induces backpressure and signals upstream components to slow down event acceptance or consumption. As a result, although the system retains all data, it accumulates at the edge.
+Observability Pipelines' buffering model prioritizes performance when handling an excess of events by using buffers on destinations. Destination buffers are configured to block events, which means the Worker waits indefinitely to write to a buffer that is full. This ensures observability data is reliably processed in the order it was given. Additionally, as mentioned earlier, blocking induces backpressure and signals upstream components to slow down event acceptance or consumption. As a result, although the system retains all data, it accumulates at the edge.
 
-Observability Pipelines destinations uses a memory buffer by default, but can be configured with disk buffers. When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. Disk buffers can be used to mitigate back pressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
+Destinations use a memory buffer by default, but can be configured with disk buffers. When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. Disk buffers can be used to mitigate backpressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
 
 #### Which buffer type to use for a destination
 
-Which buffer type you choose, memory or disk, depends on how much durability you want with your data. Memory buffers are faster, but if the Worker restarts unexpectedly, the buffered data is lost because the data is not saved to a disk. Disk buffers perform slower because it has to flush the data to a disk, but since the events are saved to the disk, the buffered data is not lost when the Worker unexpectedly restarts.
+Where you choose a memory or disk buffer depends on how much durability you want with your data. Memory buffers are faster, but if the Worker restarts unexpectedly, the buffered data is lost because the data is not saved to a disk. Disk buffers perform slower because it has to flush the data to a disk. However, the buffered data is not lost when the Worker unexpectedly restarts because the events are stored on the disk.
 
 Use case for memory buffers:
 
@@ -55,17 +55,17 @@ Use case for memory buffers:
 
 Use case for disk buffers:
 
-- Your data is mission-critical and needs durability.
+- Your data needs durability and you want to prevent data loss if there is a temporary slowdown or outage.
 
 This table compares the differences between the memory and disk buffer.
 
 | Property                                                 | Memory Buffer             | Disk Buffer                          |
 | -------------------------------------------------------- | ------------------------- | ------------------------------------ |
-| Default size                                             | 500 events                | Configurable (minimum: 256 MB)       |
+| Default size                                             | 500 events                | Configurable<br>Minimum buffer size: 256 MB<br> Maximum buffer size: 500 GB       |
 | Performance                                              | Higher                    | Lower                                |
 | Durability through an unexpected Worker restart or crash | None                      | Events synced every 500 ms           |
-| Data loss on crash                                       | All buffered data is lost | All buffered data is retained        |
-| Data loss on graceful shutdown                           | All buffered data is lost | None (all data flushed before exit)  |
+| Data loss due to an unexpected restart or crash                                       | All buffered data is lost | All buffered data is retained        |
+| Data loss on graceful shutdown                           | All buffered data is lost | None (All data is flushed before exit)  |
 
 #### Kubernetes persistent volumes
 
