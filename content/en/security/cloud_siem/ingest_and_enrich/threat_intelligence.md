@@ -141,6 +141,8 @@ aws_account_id,additional_data,category,intention,source
 
 #### CSV structure for container image names
 
+Container images feeds are useful for tracking known malicious container images.
+
 | Field                  | Data | Description                                                                              | Required | Example                                                                   |
 |------------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
 | `container_image_name` | text | The primary key for the reference table. Can include registry, repository, and tag.      | true     | `malicious-registry.com/suspicious/image:latest`                          |
@@ -148,8 +150,6 @@ aws_account_id,additional_data,category,intention,source
 | `category`             | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | `malware`                                                                 |
 | `intention`            | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | `malicious`                                                               |
 | `source`               | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
-
-**Note**: Track known malicious container images.
 
 <div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
@@ -163,6 +163,8 @@ suspicious-hub.com/backdoor/payload:1.0,"{""ref"":""hxxp://example.org""}",malwa
 
 #### CSV structure for container registry account names
 
+Container registry account names feeds are useful for identifying compromised or malicious container registry accounts.
+
 | Field                             | Data | Description                                                                                        | Required | Example                                                                   |
 |-----------------------------------|------|----------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
 | `container_registry_account_name` | text | The primary key for the reference table. The account or organization name in a container registry. | true     | `suspicious-publisher`                                                    |
@@ -170,8 +172,6 @@ suspicious-hub.com/backdoor/payload:1.0,"{""ref"":""hxxp://example.org""}",malwa
 | `category`                        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.               | true     | `malware`                                                                 |
 | `intention`                       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                 | true     | `malicious`                                                               |
 | `source`                          | json | The name of the source and the link to its site, such as your team and your team's wiki.           | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
-
-**Note**: Identify compromised or malicious container registry accounts.
 
 <div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
