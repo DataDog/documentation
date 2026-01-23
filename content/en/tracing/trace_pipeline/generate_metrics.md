@@ -55,17 +55,24 @@ Use custom metrics from traces for:
 
 {{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="How to create a metric" >}}
 
-1. Navigate to [**APM** > **Generate Metrics**][14].
-2. Click **New Metric**.
-3. Name your metric following the [metric naming convention][11]. Metric names starting with `trace.*` are not allowed.
-4. Select the metric type: **Spans** or **Traces**. Both use the same [query syntax][10] as APM Search and Analytics.
-5. Define the metric query to filter and include only the spans or traces you want to measure.
-6. Choose the value to aggregate:
+To access the Generate Metrics page in Datadog:
+1. In the Datadog app, hover over **APM** in the left navigation menu.
+1. Under the **Ingestion and Sampling** section, click **Generate Metrics**.
+
+Alternatively, navigate directly to [**APM** > **Generate Metrics**][14].
+
+To create a new metric:
+
+1. Click **New Metric**.
+1. Name your metric following the [metric naming convention][11]. Metric names starting with `trace.*` are not allowed.
+1. Select the metric type: **Spans** or **Traces**. Both use the same [query syntax][10] as APM Search and Analytics.
+1. Define the metric query to filter and include only the spans or traces you want to measure.
+1. Choose the value to aggregate:
      - Select `*` to count all matching spans or traces.
      - Enter a numeric attribute (for example, `@cassandra_row_count`) to aggregate and track the count, min, max, sum, or percentiles.
-7. Set grouping dimensions. By default, metrics have no tags unless you add them. Use any span attribute or tag to create metric tags.
-8. Preview the result to view the real-time impact of your query through the data visualization and matching spans or traces in the live preview.
-9. Click **Create Metric**.
+1. Set grouping dimensions. By default, metrics have no tags unless you add them. Use any span attribute or tag to create metric tags.
+1. Preview the result to view the real-time impact of your query through the data visualization and matching spans or traces in the live preview.
+1. Click **Create Metric**.
 
 <div class="alert alert-danger"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
