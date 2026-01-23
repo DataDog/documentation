@@ -3274,6 +3274,54 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "DeleteCustomRuleset": {
+    "description": "Delete a custom ruleset",
+    "summary": "Delete Custom Ruleset"
+  },
+  "GetCustomRuleset": {
+    "description": "Get a custom ruleset by name",
+    "summary": "Show Custom Ruleset"
+  },
+  "UpdateCustomRuleset": {
+    "description": "Update an existing custom ruleset",
+    "summary": "Update Custom Ruleset",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateCustomRule": {
+    "description": "Create a new custom rule within a ruleset",
+    "summary": "Create Custom Rule",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteCustomRule": {
+    "description": "Delete a custom rule",
+    "summary": "Delete Custom Rule"
+  },
+  "GetCustomRule": {
+    "description": "Get a custom rule by name",
+    "summary": "Show Custom Rule"
+  },
+  "ListCustomRuleRevisions": {
+    "description": "Get all revisions for a custom rule",
+    "summary": "List Custom Rule Revisions"
+  },
+  "CreateCustomRuleRevision": {
+    "description": "Create a new revision for a custom rule",
+    "summary": "Create Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "RevertCustomRuleRevision": {
+    "description": "Revert a custom rule to a previous revision",
+    "summary": "Revert Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetCustomRuleRevision": {
+    "description": "Get a specific revision of a custom rule",
+    "summary": "Show Custom Rule Revision"
+  },
   "ListMultipleRulesets": {
     "description": "Get rules for multiple rulesets in batch.",
     "summary": "Ruleset get multiple",
