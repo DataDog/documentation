@@ -29,7 +29,7 @@ Analytics monitors allow you to visualize APM data over time and set up alerts b
 
 Automatic Monitors for APM are available to new organizations and activate as soon as the Datadog Agent is installed and spans begin flowing into Datadog. This provides immediate alerting coverage on your key services with minimal configuration, and helps you to maintain coverage without gaps.
 
-Monitors are automatically created for service entry points, which are identified by operations tagged with [span.kind][6]:server or span.kind:consumer and represent where requests enter your service. 
+Monitors are automatically created for service entry points, which are identified by operations tagged with `[span.kind][6]:server` or `span.kind:consumer` and represent where requests enter your service. 
 
 Automatic monitors for APM include:
 
