@@ -168,6 +168,21 @@ IOS app features may not function properly during recording or execution due to 
 {{< tabs >}}
 {{% tab "Common" %}}
 
+### Private Location unable to fetch tests due to 403 error
+
+Private Locations display this error when it is attempting to fetch tests from Datadog:
+
+```
+Queue error - onFetchMessagesLongPolling - Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+Error: Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+    at Function.QueueError.fromHTTPError (dist/build/index.js:259354:12)
+    at DatadogQueue.receiveMessages (dist/build/index.js:258914:48)
+```
+
+**Cause**: The log shows that the Private Location was able to successfully reach the Synthetics intake to fetch tests, but the request failed with a 403 response from Datadog due to an authentication issue. Specifically, the request signature was considered expired or not yet valid. Communication between the Private Location and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][15]) which includes a timestamp in each request, ensuring both authentication and integrity). If the system clock on the server hosting the Private Location is out of sync, the timestamp can fall outside the allowed window and the signature validation will fail.
+
+**Solution**: Ensure the server hosting the Private Location has accurate time synchronization. If NTP (Network Time Protocol) services are in use, verify that it is correctly configured and functioning properly, and address any misconfigurations that could prevent the system clock from syncing with its time sources.
+
 ### Browser tests show `Page crashed` errors
 
 Page crashes typically indicate resource exhaustion on private location workers. Ensure your private location workers have [sufficient memory resources][101].
@@ -342,3 +357,4 @@ Additionally, Private Location versions `>v1.27` depend the `clone3` system call
 [12]: /synthetics/api_tests/http_tests/?tab=requestoptions#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/
 [14]: /synthetics/guide/step-duration
+[15]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
