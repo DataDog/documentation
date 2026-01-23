@@ -71,6 +71,45 @@ CRITICAL: Always use format `<name>/<description>` with forward slash. Without t
 ### PR Checklist
 - Leave the "Ready for merge" checkbox unchecked unless explicitly requested.
 
+### PR Title Format
+Use the Jira ticket key in square brackets: `[DOCS-XXXXX] Brief description`
+
+### PR Description Template
+```
+<!-- *Note: Please remember to review the Datadog Documentation [Contribution Guidelines](https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md) if you have not yet done so.* -->
+
+### What does this PR do? What is the motivation?
+
+Fixes DOCS-XXXXX
+
+[Brief description of changes]
+
+### Merge instructions
+
+Merge readiness:
+- [ ] Ready for merge
+
+### Additional notes
+
+```
+
+### Pre-commit Checklist
+Before committing changes, run Vale to check style compliance:
+```bash
+vale /path/to/changed/file.md
+```
+Fix any warnings before committing. Common issues:
+- "once you" → "after you"
+- "fine-tune" → "customize"
+- "ensure" → "helps ensure"
+- Remove filler words: easy, simple, just, please, very
+
+### Commit Messages
+- Keep messages concise and descriptive
+
+### Jira Workflow
+- When a PR is created, transition the Jira ticket to **Reviewable** status (transition ID: 101)
+
 ### Content Guidelines
 Follow the CONTRIBUTING.md style guide:
 - Use American English (en_US)
@@ -78,6 +117,31 @@ Follow the CONTRIBUTING.md style guide:
 - Provide explicit instructions with examples
 - Use imperative voice for instructions
 - Don't edit translated content directly (managed externally)
+
+### Style Rules (from datadog-vale)
+The full Vale linter rules are in `/Users/brett.blue/go/src/github.com/DataDog/datadog-vale/`. Key substitutions:
+
+| Don't use | Use instead |
+|-----------|-------------|
+| once you/once the | after you/after the |
+| fine-tune | customize, optimize, or refine |
+| ensure/ensures | helps, helps ensure |
+| leverage | use, apply, take advantage of |
+| utilize | use |
+| in order to | to |
+| easy/easily | (remove) |
+| simple/simply | (remove) |
+| just | (remove) |
+| please | (remove) |
+| via | with, through |
+| Note that | **Note**: |
+| drill down/into | examine, investigate, analyze |
+| refer to/visit | see, read, follow |
+| obvious/obviously | (remove) |
+| seamless/seamlessly | (remove) |
+| quick/quickly | (remove) |
+
+Avoid temporal words: currently, now, will, won't
 
 ## Hugo-Specific Details
 
