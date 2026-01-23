@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No rehyrating, no delays. Instantly access years of data when you need it.
+Archive Search is in Preview. Request access to search archived logs in real time. No rehydrating, no delays. Instantly access years of data when you need it.
 {{< /callout >}}
 
 ## Overview
@@ -126,6 +126,14 @@ Archive Search scans archived log files within the selected time range. **Scan v
 To improve query performance and reduce scan volume:
 - Narrow the time range.
 - Administrators with **Logs Write Archives** permission can set maximum scan size per Archive.
+
+### Default limit for Rehydration of Results
+
+Admins with the `Logs Write Archives` permission can configure default controls to ensure efficient use of Archive Search * across teams. Click **Settings** to configure:
+
+- **Default Rehydration volume limit**: Define the default number of logs (in millions) that can be rehydrated per Archive Search. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
+
+- **Rehydration retention periods**: Choose which retention periods are available when creating Archive Search. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
 ## Cloud-specific permissions
 
