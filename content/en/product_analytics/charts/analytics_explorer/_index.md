@@ -62,7 +62,7 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
    {{< img src="product_analytics/analytics/pana_analytics_breakdown_by1.png" alt="Drop down menu in Product Analytics to further breakdown events by their own attributes or by attributes pulled from third party integrations." style="width:70%;">}}
 
-1. Apply a [function][4] to modify how the results the query are returned for visualizations.
+1. Apply a [function][4] to modify how the results of the query are returned for visualizations.
 
    {{< img src="product_analytics/analytics/pana_analytics_functions.png" alt="Button in Product Analytics to add a function to modify how the results of a metric query are returned for visualizations.." style="width:70%;">}}
 
