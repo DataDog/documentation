@@ -120,13 +120,13 @@ ssdeep,additional_data,category,intention,source
 
 #### CSV structure for AWS account ID
 
-| Field           | Data | Description                                                                              | Required | Example              |
-|-----------------|------|------------------------------------------------------------------------------------------|----------|----------------------|
-| aws_account_id  | text | The primary key for the reference table in AWS account ID format (12-digit number).     | true     | 123456789012         |
-| additional_data | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}` |
-| category        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.    | true     | scanner              |
-| intention       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.      | true     | suspicious           |
-| source          | json | The name of the source and the link to its site, such as your team and your team's wiki.| true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
+| Field             | Data | Description                                                                              | Required | Example                                                                   |
+|-------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| `aws_account_id`  | text | The primary key for the reference table in AWS account ID format (12-digit number).      | true     | `123456789012`                                                            |
+| `additional_data` | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`                                            |
+| `category`        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | `scanner`                                                                 |
+| `intention`       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | `suspicious`                                                              |
+| `source`          | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 **Note**: Useful for tracking compromised or suspicious AWS accounts.
 
