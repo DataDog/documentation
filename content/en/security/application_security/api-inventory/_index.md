@@ -19,7 +19,7 @@ API security relies on visibility. The biggest failure mode in most applications
 2. **Services:** *Where do risky APIs live, who owns them, and how severe is their collective risk?*
     
     A service groups multiple endpoints into a logical or deployed component (typically aligned with a microservice, app, or backend system).
-3. **API Findings:** *Which API weaknesses, attacks or misconfigurations require investigation or remediation?*
+3. **API Findings:** *Which API weaknesses, attacks, or misconfigurations require investigation or remediation?*
     
     API Findings are security detections and policy evaluation results tied to endpoints. These represent known or inferred weaknesses or threats in API behavior or configuration.
 
