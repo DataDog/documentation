@@ -13659,7 +13659,8 @@ components:
       description: Attributes of the Jira issue to create.
       properties:
         assignee_id:
-          description: Unique identifier of the user assigned to the Jira issue.
+          description: Unique identifier of the Datadog user assigned to the Jira
+            issue.
           example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
           type: string
         description:
@@ -13680,8 +13681,9 @@ components:
           type: object
         priority:
           $ref: '#/components/schemas/CasePriority'
-          description: Priority of the Jira issue. If not provided, the priority will
-            be automatically set to "NOT_DEFINED".
+          description: Datadog case priority mapped to the Jira issue priority. If
+            not provided, the priority will be automatically set to "NOT_DEFINED".
+            To configure the mapping, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
           example: P4
         title:
           description: Title of the Jira issue. If not provided, the title will be
@@ -88979,9 +88981,6 @@ paths:
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
-      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
-
-        Please check the documentation regularly for updates.'
     post:
       description: 'Create Jira issues for security findings.
 
@@ -89026,9 +89025,6 @@ paths:
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
-      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
-
-        Please check the documentation regularly for updates.'
   /api/v2/security/findings/search:
     post:
       description: 'Get a list of security findings that match a search query. [See
