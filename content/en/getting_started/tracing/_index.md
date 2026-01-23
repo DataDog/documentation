@@ -218,7 +218,7 @@ After you set up tracing and your application is sending data to Datadog, explor
 
 ### Trace ingestion and retention
 
-Control costs and manage data volume by configuring [ingestion controls][11] and [retention filters][12]. Ingestion controls let you customize sampling rates at the Agent or tracing library level, while retention filters determine which spans are indexed for search and analytics.
+Control costs and manage data volume by configuring [ingestion controls][11] and [retention filters][12]. Ingestion controls let you customize sampling rates at the Datadog Agent or tracing library level, while retention filters determine which spans are indexed for search and analytics.
 
 ## Further reading
 
