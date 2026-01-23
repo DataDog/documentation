@@ -215,7 +215,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGZfNyAXqPdvZ0qqIWFVxH5z2k,"{""ref"":""hxx
 
 **Note**: Identify malicious bots and scanners.
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:</div>
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
 ```
 user_agent,additional_data,category,intention,source
@@ -223,6 +223,7 @@ Mozilla/5.0 (compatible; MaliciousBot/1.0),"{""ref"":""hxxp://example.org""}",sc
 BadCrawler/2.0,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 SuspiciousScanner/3.5,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+</div>
 
 ### Upload and enable your own threat intelligence
 
