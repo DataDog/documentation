@@ -16,7 +16,7 @@ Visualizations define the outcomes of the filters and aggregates displayed in th
 
 Visualize the evolution of a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) over a selected time frame.
 
-{{< img src="product_analytics/analytics/visualize/analytics-timeseries-1.png" alt="Timeseries graph in the Analytics Explorer" style="width:90%;" >}}
+{{< img src="product_analytics/analytics/visualize/analytics-timeseries-2.png" alt="Timeseries graph in the Analytics Explorer" style="width:90%;" >}}
 
 The timeseries graph depicts the evolution of the number of pageviews on an example web application over the past day for every view path.
 
@@ -29,7 +29,7 @@ You can choose additional display options such as:
 
 Visualize the top values from a facet based on your chosen measure.
 
-{{< img src="product_analytics/analytics/visualize/analytics-top-list-1.png" alt="Top list bar graph in the Analytics Explorer" style="width:90%;" >}}
+{{< img src="product_analytics/analytics/visualize/analytics-top-list-2.png" alt="Top list bar graph in the Analytics Explorer" style="width:90%;" >}}
 
 The top list includes the top browsers used to visit the Shopist website over the last day.
 
@@ -44,7 +44,7 @@ Visualize the top values from up to three facets according to your chosen measur
 
  The following Analytics table shows the **top 5 URL paths** for **two countries**, US and Japan, grouped by browser, over the last day:
 
-{{< img src="product_analytics/analytics/visualize/analytics-nested-table-1.png" alt="Nested table in the Analytics Explorer" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-nested-table-2.png" alt="Nested table in the Analytics Explorer" style="width:90%;">}}
 
 ## Distributions
 
@@ -59,20 +59,20 @@ A tree map helps you organize and show data as a percentage of a whole in a visu
 
 The following tree map shows the percentage breakdown by **View Name**.
 
-{{< img src="product_analytics/analytics/visualize/analytics-tree-maps.png" alt="Tree map in the Analytics Explorer" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-tree-maps-1.png" alt="Tree map in the Analytics Explorer" style="width:90%;">}}
 
 ## Pie charts
 A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, and countries. within your log data.
 
 The following pie chart shows the percentage breakdown by **View Path**.
 
-{{< img src="product_analytics/analytics/visualize/analytics-pie-chart.png" alt="Pie chart in the Analytics Explorer" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-pie-chart-1.png" alt="Pie chart in the Analytics Explorer" style="width:90%;">}}
 
 ## Geomaps
 
 Visualize a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) on the world map.
 
-{{< img src="product_analytics/analytics/visualize/analytics-geomaps.png" alt="Geographical map in the Analytics Explorer" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-geomaps-1.png" alt="Geographical map in the Analytics Explorer" style="width:90%;">}}
 
 The Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
