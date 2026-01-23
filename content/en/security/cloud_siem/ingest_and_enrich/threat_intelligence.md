@@ -82,13 +82,13 @@ ip_address,additional_data,category,intention,source
 
 File hash indicators require a separate reference table for each hash type: SHA1, SHA256, or ssdeep. The primary key column name varies based on the hash type.
 
-| Field           | Data | Description                                                                              | Required | Example                                  |
-|-----------------|------|------------------------------------------------------------------------------------------|----------|------------------------------------------|
-| sha1 / sha256 / ssdeep | text | The primary key for the reference table.                                          | true     | `5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8` |
-| additional_data | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`           |
-| category        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | malware                                  |
-| intention       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | malicious                                |
-| source          | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
+| Field                    | Data | Description                                                                              | Required | Example                                                                   |
+|--------------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| `sha1`/`sha256`/`ssdeep` | text | The primary key for the reference table.                                                 | true     | `5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8`        |
+| `additional_data`        | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`                                            |
+| `category`               | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | `malware`                                                                 |
+| `intention`              | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | `malicious`                                                               |
+| `source`                 | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 <div class="alert alert-info">JSON in a CSV requires double quoting. The following are example CSVs for each hash type:</div>
 
