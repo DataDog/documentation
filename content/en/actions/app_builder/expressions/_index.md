@@ -1,5 +1,5 @@
 ---
-title: New Expressions Pages
+title: Expressions
 type: multi-code-lang
 ---
 

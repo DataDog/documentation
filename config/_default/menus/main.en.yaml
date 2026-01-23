@@ -2981,7 +2981,7 @@ menu:
       parent: app_builder_components
       identifier: app_builder_reusable_modules
       weight: 704
-    - name: JavaScript Expressions
+    - name: Expressions
       url: actions/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
