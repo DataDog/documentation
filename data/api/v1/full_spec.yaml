@@ -8100,6 +8100,7 @@ components:
       - spans
       - database_queries
       - network
+      - network_path
       example: rum
       type: string
       x-enum-varnames:
@@ -8112,6 +8113,7 @@ components:
       - SPANS
       - DATABASE_QUERIES
       - NETWORK
+      - NETWORK_PATH
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -8957,6 +8959,7 @@ components:
       - network-performance alert
       - cost alert
       - data-quality alert
+      - network-path alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -8980,6 +8983,7 @@ components:
       - NETWORK_PERFORMANCE_ALERT
       - COST_ALERT
       - DATA_QUALITY_ALERT
+      - NETWORK_PATH_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -32357,10 +32361,11 @@ paths:
         alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit:
         `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring:
         `database-monitoring alert`\n- network-performance: `network-performance alert`\n-
-        cloud cost: `cost alert`\n\n**Notes**:\n- Synthetic monitors are created through
-        the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/)
-        documentation for more information.\n- Log monitors require an unscoped App
-        Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
+        cloud cost: `cost alert`\n- network-path: `network-path alert`\n\n**Notes**:\n-
+        Synthetic monitors are created through the Synthetics API. See the [Synthetics
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        more information.\n- Log monitors require an unscoped App Key.\n\n#### Query
+        Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
         [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n-
         `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor
         type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type)
@@ -32490,7 +32495,15 @@ paths:
         \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
         for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
         `forecast` supports `>`\n- `#` an integer or decimal number used to set the
-        threshold."
+        threshold.\n\n**Network Path Alert Query**\n\nExample: `network-path(query).index(index_name).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `index_name` The data type to monitor on - supports `netpath-path` and `netpath-hop`.\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold."
       operationId: CreateMonitor
       requestBody:
         content:
