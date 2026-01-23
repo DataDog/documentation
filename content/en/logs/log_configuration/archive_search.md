@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/flex-frozen-archive-search/" btn_hidden="false" >}}
-Archive Search is in Preview. Request access to search archived logs in real time. No re-indexing, no delays. Instantly access years of data when you need it.
+Archive Search is in Preview. Request access to search archived logs in real time. No rehyrating, no delays. Instantly access years of data when you need it.
 {{< /callout >}}
 
 ## Overview
@@ -116,7 +116,7 @@ To enable full analytics and platform-wide visibility, you need to rehydrate the
 
 From the [**Archive Search list view**][5], you can:
 
-- **Stop** a running search: preserves logs already retrieved.
+- **Cancel** a running search: preserves logs already retrieved.
 - **Duplicate** a search: opens the Archive Search creation form with the same parameters for efficient reruns.
 
 ## Search performance and scan volume
@@ -124,7 +124,7 @@ From the [**Archive Search list view**][5], you can:
 Archive Search scans archived log files within the selected time range. **Scan volume** is the total size of those files read during the query. Large scan volumes can increase search time and cost.
 
 To improve query performance and reduce scan volume:
-- Narrow the time range and use selective filters.
+- Narrow the time range.
 - Administrators with **Logs Write Archives** permission can set maximum scan size per Archive.
 
 ## Cloud-specific permissions
