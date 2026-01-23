@@ -56328,6 +56328,65 @@ components:
       type: string
       x-enum-varnames:
       - SERVICES_LIST
+    ServiceNowAssignmentGroupAttributes:
+      description: Attributes of a ServiceNow assignment group
+      properties:
+        assignment_group_name:
+          description: The name of the assignment group
+          example: Network Team
+          type: string
+        assignment_group_sys_id:
+          description: The system ID of the assignment group in ServiceNow
+          example: abc123def456
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - assignment_group_name
+      - assignment_group_sys_id
+      type: object
+    ServiceNowAssignmentGroupData:
+      description: Data object for a ServiceNow assignment group
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowAssignmentGroupAttributes'
+        id:
+          description: Unique identifier for the ServiceNow assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowAssignmentGroupType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowAssignmentGroupType:
+      description: Type identifier for ServiceNow assignment group resources
+      enum:
+      - assignment_groups
+      example: assignment_groups
+      type: string
+      x-enum-varnames:
+      - ASSIGNMENT_GROUPS
+    ServiceNowAssignmentGroupsData:
+      description: Array of ServiceNow assignment group data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowAssignmentGroupData'
+      type: array
+    ServiceNowAssignmentGroupsResponse:
+      description: Response containing ServiceNow assignment groups
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowAssignmentGroupsData'
+      required:
+      - data
+      type: object
     ServiceNowBasicAuth:
       description: The definition of the `ServiceNowBasicAuth` object.
       properties:
@@ -56376,6 +56435,65 @@ components:
       required:
       - type
       type: object
+    ServiceNowBusinessServiceAttributes:
+      description: Attributes of a ServiceNow business service
+      properties:
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        service_name:
+          description: The name of the business service
+          example: IT Support
+          type: string
+        service_sys_id:
+          description: The system ID of the business service in ServiceNow
+          example: abc123def456
+          type: string
+      required:
+      - instance_id
+      - service_name
+      - service_sys_id
+      type: object
+    ServiceNowBusinessServiceData:
+      description: Data object for a ServiceNow business service
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowBusinessServiceAttributes'
+        id:
+          description: Unique identifier for the ServiceNow business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowBusinessServiceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowBusinessServiceType:
+      description: Type identifier for ServiceNow business service resources
+      enum:
+      - business_services
+      example: business_services
+      type: string
+      x-enum-varnames:
+      - BUSINESS_SERVICES
+    ServiceNowBusinessServicesData:
+      description: Array of ServiceNow business service data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowBusinessServiceData'
+      type: array
+    ServiceNowBusinessServicesResponse:
+      description: Response containing ServiceNow business services
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowBusinessServicesData'
+      required:
+      - data
+      type: object
     ServiceNowCredentials:
       description: The definition of the `ServiceNowCredentials` object.
       oneOf:
@@ -56384,6 +56502,54 @@ components:
       description: The definition of the `ServiceNowCredentialsUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/ServiceNowBasicAuthUpdate'
+    ServiceNowInstanceAttributes:
+      description: Attributes of a ServiceNow instance
+      properties:
+        instance_name:
+          description: The name of the ServiceNow instance
+          example: my-servicenow-instance
+          type: string
+      required:
+      - instance_name
+      type: object
+    ServiceNowInstanceData:
+      description: Data object for a ServiceNow instance
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowInstanceAttributes'
+        id:
+          description: Unique identifier for the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowInstanceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowInstanceType:
+      description: Type identifier for ServiceNow instance resources
+      enum:
+      - instance
+      example: instance
+      type: string
+      x-enum-varnames:
+      - INSTANCE
+    ServiceNowInstancesData:
+      description: Array of ServiceNow instance data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowInstanceData'
+      type: array
+    ServiceNowInstancesResponse:
+      description: Response containing ServiceNow instances
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowInstancesData'
+      required:
+      - data
+      type: object
     ServiceNowIntegration:
       description: The definition of the `ServiceNowIntegration` object.
       properties:
@@ -56413,6 +56579,222 @@ components:
       required:
       - type
       type: object
+    ServiceNowTemplateAttributes:
+      description: Attributes of a ServiceNow template
+      properties:
+        assignment_group_id:
+          description: The ID of the assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        business_service_id:
+          description: The ID of the business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        fields_mapping:
+          additionalProperties:
+            type: string
+          description: Custom field mappings for the template
+          example:
+            category: software
+            priority: '1'
+          type: object
+        handle_name:
+          description: The handle name of the template
+          example: incident-template
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        servicenow_tablename:
+          description: The name of the destination ServiceNow table
+          example: incident
+          type: string
+        user_id:
+          description: The ID of the user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - handle_name
+      - servicenow_tablename
+      type: object
+    ServiceNowTemplateCreateRequest:
+      description: Request to create a ServiceNow template
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplateCreateRequestData'
+      required:
+      - data
+      type: object
+    ServiceNowTemplateCreateRequestAttributes:
+      description: Attributes for creating a ServiceNow template
+      properties:
+        assignment_group_id:
+          description: The ID of the assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        business_service_id:
+          description: The ID of the business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        fields_mapping:
+          additionalProperties:
+            type: string
+          description: Custom field mappings for the template
+          example:
+            category: software
+            priority: '1'
+          type: object
+        handle_name:
+          description: The handle name of the template
+          example: incident-template
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        servicenow_tablename:
+          description: The name of the destination ServiceNow table
+          example: incident
+          type: string
+        user_id:
+          description: The ID of the user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - handle_name
+      - servicenow_tablename
+      type: object
+    ServiceNowTemplateCreateRequestData:
+      description: Data object for creating a ServiceNow template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowTemplateCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ServiceNowTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    ServiceNowTemplateData:
+      description: Data object for a ServiceNow template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowTemplateAttributes'
+        id:
+          description: Unique identifier for the ServiceNow template
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowTemplateType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowTemplateResponse:
+      description: Response containing a single ServiceNow template
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplateData'
+      required:
+      - data
+      type: object
+    ServiceNowTemplateType:
+      description: Type identifier for ServiceNow template resources
+      enum:
+      - servicenow_templates
+      example: servicenow_templates
+      type: string
+      x-enum-varnames:
+      - SERVICENOW_TEMPLATES
+    ServiceNowTemplateUpdateRequest:
+      description: Request to update a ServiceNow template
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplateUpdateRequestData'
+      required:
+      - data
+      type: object
+    ServiceNowTemplateUpdateRequestAttributes:
+      description: Attributes for updating a ServiceNow template
+      properties:
+        assignment_group_id:
+          description: The ID of the assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        business_service_id:
+          description: The ID of the business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        fields_mapping:
+          additionalProperties:
+            type: string
+          description: Custom field mappings for the template
+          example:
+            category: hardware
+            priority: '2'
+          type: object
+        handle_name:
+          description: The handle name of the template
+          example: incident-template-updated
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        servicenow_tablename:
+          description: The name of the destination ServiceNow table
+          example: incident
+          type: string
+        user_id:
+          description: The ID of the user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - handle_name
+      - servicenow_tablename
+      type: object
+    ServiceNowTemplateUpdateRequestData:
+      description: Data object for updating a ServiceNow template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowTemplateUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ServiceNowTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    ServiceNowTemplatesData:
+      description: Array of ServiceNow template data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowTemplateData'
+      type: array
+    ServiceNowTemplatesResponse:
+      description: Response containing ServiceNow templates
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplatesData'
+      required:
+      - data
+      type: object
     ServiceNowTicket:
       description: ServiceNow ticket attached to case
       nullable: true
@@ -56429,6 +56811,74 @@ components:
         sys_target_link:
           description: Link to the Incident created on ServiceNow
           type: string
+      type: object
+    ServiceNowUserAttributes:
+      description: Attributes of a ServiceNow user
+      properties:
+        email:
+          description: The email address of the user
+          example: john.doe@example.com
+          type: string
+        full_name:
+          description: The full name of the user
+          example: John Doe
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        user_name:
+          description: The username of the ServiceNow user
+          example: john.doe
+          type: string
+        user_sys_id:
+          description: The system ID of the user in ServiceNow
+          example: abc123def456
+          type: string
+      required:
+      - instance_id
+      - user_name
+      - user_sys_id
+      - email
+      type: object
+    ServiceNowUserData:
+      description: Data object for a ServiceNow user
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowUserAttributes'
+        id:
+          description: Unique identifier for the ServiceNow user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowUserType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowUserType:
+      description: Type identifier for ServiceNow user resources
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    ServiceNowUsersData:
+      description: Array of ServiceNow user data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowUserData'
+      type: array
+    ServiceNowUsersResponse:
+      description: Response containing ServiceNow users
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowUsersData'
+      required:
+      - data
       type: object
     Shift:
       description: An on-call shift with its associated data and relationships.
@@ -78040,6 +78490,329 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
+  /api/v2/integration/servicenow/assignment_groups/{instance_id}:
+    get:
+      description: Get all assignment groups for a ServiceNow instance.
+      operationId: ListServiceNowAssignmentGroups
+      parameters:
+      - description: The ID of the ServiceNow instance
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: instance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowAssignmentGroupsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow assignment groups
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/business_services/{instance_id}:
+    get:
+      description: Get all business services for a ServiceNow instance.
+      operationId: ListServiceNowBusinessServices
+      parameters:
+      - description: The ID of the ServiceNow instance
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: instance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowBusinessServicesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow business services
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/handles:
+    get:
+      description: Get all ServiceNow templates for the organization.
+      operationId: ListServiceNowTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplatesResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow templates
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new ServiceNow template.
+      operationId: CreateServiceNowTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceNowTemplateCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/handles/{template_id}:
+    delete:
+      description: Delete a ServiceNow template by ID.
+      operationId: DeleteServiceNowTemplate
+      parameters:
+      - description: The ID of the ServiceNow template to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a ServiceNow template by ID.
+      operationId: GetServiceNowTemplate
+      parameters:
+      - description: The ID of the ServiceNow template to retrieve
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Update a ServiceNow template by ID.
+      operationId: UpdateServiceNowTemplate
+      parameters:
+      - description: The ID of the ServiceNow template to update
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceNowTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/instances:
+    get:
+      description: Get all ServiceNow instances for the organization.
+      operationId: ListServiceNowInstances
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowInstancesResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow instances
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/users/{instance_id}:
+    get:
+      description: Get all users for a ServiceNow instance.
+      operationId: ListServiceNowUsers
+      parameters:
+      - description: The ID of the ServiceNow instance
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: instance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowUsersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow users
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -100220,6 +100993,9 @@ tags:
     This feature is currently in BETA. If you have any feedback, contact [Datadog
     support](https://docs.datadoghq.com/help/).'
   name: Service Scorecards
+- description: Manage your ServiceNow Integration. ServiceNow is a cloud-based platform
+    that helps organizations manage digital workflows for enterprise operations.
+  name: ServiceNow Integration
 - description: API to create, update, retrieve, and delete Software Catalog entities.
   externalDocs:
     url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
