@@ -3210,8 +3210,7 @@ menu:
           - v2
         operationids:
           - CreateJiraIssues
-        unstable:
-          - v2
+        unstable: []
         order: 47
     - name: Attach security findings to a Jira issue
       url: '#attach-security-findings-to-a-jira-issue'
@@ -3223,8 +3222,7 @@ menu:
           - v2
         operationids:
           - AttachJiraIssue
-        unstable:
-          - v2
+        unstable: []
         order: 48
     - name: Attach security findings to a case
       url: '#attach-security-findings-to-a-case'
@@ -11759,6 +11757,136 @@ menu:
       url: /api/latest/static-analysis/
       identifier: static-analysis
       generated: true
+    - name: Show Custom Rule Revision
+      url: '#show-custom-rule-revision'
+      identifier: static-analysis-show-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomRuleRevision
+        unstable:
+          - v2
+        order: 2
+    - name: Revert Custom Rule Revision
+      url: '#revert-custom-rule-revision'
+      identifier: static-analysis-revert-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevertCustomRuleRevision
+        unstable:
+          - v2
+        order: 1
+    - name: Create Custom Rule Revision
+      url: '#create-custom-rule-revision'
+      identifier: static-analysis-create-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomRuleRevision
+        unstable:
+          - v2
+        order: 3
+    - name: List Custom Rule Revisions
+      url: '#list-custom-rule-revisions'
+      identifier: static-analysis-list-custom-rule-revisions
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomRuleRevisions
+        unstable:
+          - v2
+        order: 4
+    - name: Show Custom Rule
+      url: '#show-custom-rule'
+      identifier: static-analysis-show-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomRule
+        unstable:
+          - v2
+        order: 6
+    - name: Delete Custom Rule
+      url: '#delete-custom-rule'
+      identifier: static-analysis-delete-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomRule
+        unstable:
+          - v2
+        order: 5
+    - name: Create Custom Rule
+      url: '#create-custom-rule'
+      identifier: static-analysis-create-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomRule
+        unstable:
+          - v2
+        order: 7
+    - name: Update Custom Ruleset
+      url: '#update-custom-ruleset'
+      identifier: static-analysis-update-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomRuleset
+        unstable:
+          - v2
+        order: 9
+    - name: Show Custom Ruleset
+      url: '#show-custom-ruleset'
+      identifier: static-analysis-show-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomRuleset
+        unstable:
+          - v2
+        order: 10
+    - name: Delete Custom Ruleset
+      url: '#delete-custom-ruleset'
+      identifier: static-analysis-delete-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomRuleset
+        unstable:
+          - v2
+        order: 8
     - name: POST request to resolve vulnerable symbols
       url: '#post-request-to-resolve-vulnerable-symbols'
       identifier: static-analysis-post-request-to-resolve-vulnerable-symbols
