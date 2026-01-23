@@ -3210,7 +3210,8 @@ menu:
           - v2
         operationids:
           - CreateJiraIssues
-        unstable: []
+        unstable:
+          - v2
         order: 47
     - name: Attach security findings to a Jira issue
       url: '#attach-security-findings-to-a-jira-issue'
@@ -3222,7 +3223,8 @@ menu:
           - v2
         operationids:
           - AttachJiraIssue
-        unstable: []
+        unstable:
+          - v2
         order: 48
     - name: Attach security findings to a case
       url: '#attach-security-findings-to-a-case'

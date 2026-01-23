@@ -9221,6 +9221,10 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
+        status_group:
+          $ref: '#/components/schemas/CaseStatusGroup'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9287,6 +9291,8 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9455,7 +9461,9 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      description: Case status
+      deprecated: true
+      description: Deprecated way of representing the case status, which only supports
+        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9466,6 +9474,23 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
+    CaseStatusGroup:
+      description: Status group of the case.
+      enum:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+      example: SG_OPEN
+      type: string
+      x-enum-varnames:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+    CaseStatusName:
+      description: Status of the case. Must be one of the existing statuses for the
+        case's type.
+      example: Open
+      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9689,8 +9714,9 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-      required:
-      - status
+          deprecated: true
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -13659,8 +13685,7 @@ components:
       description: Attributes of the Jira issue to create.
       properties:
         assignee_id:
-          description: Unique identifier of the Datadog user assigned to the Jira
-            issue.
+          description: Unique identifier of the user assigned to the Jira issue.
           example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
           type: string
         description:
@@ -13681,9 +13706,8 @@ components:
           type: object
         priority:
           $ref: '#/components/schemas/CasePriority'
-          description: Datadog case priority mapped to the Jira issue priority. If
-            not provided, the priority will be automatically set to "NOT_DEFINED".
-            To configure the mapping, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
+          description: Priority of the Jira issue. If not provided, the priority will
+            be automatically set to "NOT_DEFINED".
           example: P4
         title:
           description: Title of the Jira issue. If not provided, the title will be
@@ -88981,6 +89005,9 @@ paths:
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
+      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
+
+        Please check the documentation regularly for updates.'
     post:
       description: 'Create Jira issues for security findings.
 
@@ -89025,6 +89052,9 @@ paths:
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
+      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
+
+        Please check the documentation regularly for updates.'
   /api/v2/security/findings/search:
     post:
       description: 'Get a list of security findings that match a search query. [See
