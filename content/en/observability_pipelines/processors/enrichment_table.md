@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Logs can contain information like IP addresses, user IDs, or service names that often need additional context. The Enrichment Table processor allows you to use lookup datasets to add context to your logs. The datasets can be stored in Datadog [Reference Tables][2], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the event. Using Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
+Logs can contain information like IP addresses, user IDs, or service names that often need additional context. The Enrichment Table processor allows you to use lookup datasets to add context to your logs. The datasets can be stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the event. Using Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
 
 ### When to use this processor
 
@@ -39,6 +39,8 @@ Use the Enrichment Table processor to:
 - Attach customer and account information, such as the industry type, ARR, and owner, to operational logs for prioritizing incidents.
 - Enrich marketing or sales-focused dashboards with operational signals like latency spikes tied to customers.
 
+See [Enable ingestion of reference tables][2] from the Datadog's Salesforce integration on how to set up Reference Tables for Salesforce.
+
 #### ServiceNow (CMDB)
 
 ServiceNow is an IT service management platform with a Configuration Management Database (CMDB) that tracks infrastructure assets, applications, and dependencies.
@@ -55,6 +57,8 @@ Use the Enrichment Table processor to:
 - Add customer metadata (account tier, region, SLA) to logs.
 - Join security events with user or asset attributes stored in Snowflake.
 
+See [Reference Tables][3] from the Datadog's Snowflake integration on how to set up Reference Tables for Snowflake.
+
 ## Setup
 
 To set up the enrichment table processor:
@@ -70,8 +74,8 @@ To set up the enrichment table processor:
   1. Click **Manage** to go to the Reference Tables configuration page.
   1. (Optional) Select specific columns with which to enrich your logs.
       - Observability Pipelines enriches logs with all columns in the table by default. If you want to cherry pick columns, you can specify certain attributes to be added. Only selected attributes are enriched.
-  1. Enter a Datadog Application key identifier. [Application keys][2] are used by Observability Pipelines to access Datadog's programmatic API when enriching data.
-      - Configure your application key in your organization settings under the [Service Accounts][5] page before you deploy the pipeline.
+  1. Enter a Datadog Application key identifier. [Application keys][1] are used by Observability Pipelines to access Datadog's programmatic API when enriching data.
+      - Configure your application key in your organization settings under the [Service Accounts][2] page before you deploy the pipeline.
       - Associate your application keys with a [Service Account][3] (not a personal Datadog user account).
       - Application keys can be viewed exactly once, when you create them. Copy and store the value in your secrets manager. If you lose or forget a service account key, revoke it and create another one.
       - Limit your application key to the [`reference_tables_read`][4] scope.
@@ -79,10 +83,10 @@ To set up the enrichment table processor:
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
 
-  [2]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
-  [3]: https://docs.datadoghq.com/account_management/org_settings/service_accounts#service-account-application-keys
-  [4]: https://docs.datadoghq.com/account_management/rbac/permissions/#reference-tables
-  [5]: https://app.datadoghq.com/organization-settings/service-accounts
+[1]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
+[2]: https://app.datadoghq.com/organization-settings/service-accounts
+[3]: https://docs.datadoghq.com/account_management/org_settings/service_accounts#service-account-application-keys
+[4]: https://docs.datadoghq.com/account_management/rbac/permissions/#reference-tables
 
   {{% /tab %}}
   {{% tab "File" %}}
@@ -95,8 +99,8 @@ To set up the enrichment table processor:
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
 
-  [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
+[1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
   {{% tab "GeoIP" %}}
 
@@ -106,8 +110,8 @@ To set up the enrichment table processor:
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
 
-  [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
+[1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
   {{< /tabs >}}
 
@@ -150,7 +154,7 @@ A circuit breaker opens if an authentication error occurs while connecting to th
 
 Errors that cause a log to be sent without enrichment can be viewed in the Worker logs and increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
 
-Datadog does not recommend using the processor on a log field with high cardinality (more than 5,000 possible values). The Reference Tables API is subject to rate limits and might deny Worke requests. Reach out to [Datadog support][3] if you continue to notice rate limit warnings in the Worker logs while running the processor.
+Datadog does not recommend using the processor on a log field with high cardinality (more than 5,000 possible values). The Reference Tables API is subject to rate limits and might deny Worke requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
 ### Metrics
 
@@ -206,7 +210,8 @@ To see metrics about the reference table used by your Enrichment Table processor
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-[1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
-[2]: /reference_tables/?tab=cloudstorage
-[3]: /help/
+[1]: /reference_tables/?tab=cloudstorage
+[2]: /integrations/salesforce/#optional-enable-ingestion-of-reference-tables
+[3]: /integrations/snowflake-web/#reference-tables
 [4]: https://docs.datadoghq.com/reference_tables/?tab=cloudstorage#reference-table-limits
+[5]: /help/
