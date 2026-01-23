@@ -93,7 +93,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 
    - {{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="The Amazon Bedrock configuration tile in LLM Observability. Lists instructions for configuring Amazon Bedrock." style="width:100%;" >}}
 
-4. Be sure to configure the **Invoke models from Amazon Bedrock** role to run evaluations.
+4. Be sure to configure the **Invoke models from Amazon Bedrock** role to run evaluations. More details about the InvokeModel permission can be found [here][20].
 
 
    - {{< img src="llm_observability/configuration/amazon-bedrock-tile-step-2.png" alt="The second step in configuring Amazon Bedrock requiring users to add permissions to the integration account." style="width:100%;" >}}
@@ -235,3 +235,4 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 [17]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-selection
 [18]: /llm_observability/evaluations/managed_evaluations/agent_evaluations#tool-argument-correctness
 [19]: /llm_observability/evaluations/evaluation_compatibility
+[20]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
