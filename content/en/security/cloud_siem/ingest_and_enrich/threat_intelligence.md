@@ -185,6 +185,8 @@ malicious-vendor,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name""
 
 #### CSV structure for SSH public keys
 
+SSH public keys feeds are useful for tracking unauthorized or compromised SSH keys.
+
 | Field             | Data | Description                                                                                                        | Required | Example                                                                   |
 |-------------------|------|--------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
 | `ssh_public_key`  | text | The primary key for the reference table. SSH public key in standard format (typically ssh-rsa, ssh-ed25519, etc.). | true     | `ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...`                              |
@@ -193,9 +195,7 @@ malicious-vendor,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name""
 | `intention`       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                                 | true     | `suspicious`                                                              |
 | `source`          | json | The name of the source and the link to its site, such as your team and your team's wiki.                           | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
-**Note**: Track unauthorized or compromised SSH keys. Remove line breaks from multi-line keys before adding to CSV.
-
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
+<div class="alert alert-info">JSON in a CSV requires double quoting. Remove line breaks from multi-line keys before adding to CSV. The following is an example CSV:
 
 ```
 ssh_public_key,additional_data,category,intention,source
