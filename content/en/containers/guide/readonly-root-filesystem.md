@@ -29,16 +29,19 @@ To configure the Datadog Agent for ROFS:
 
 Specific implementation varies by platform (Kubernetes, Docker, ECS, etc.), but the pattern remains the same.
 
-### Example
+### Examples
 
-The following is complete Docker Compose example demonstrating the read-only root filesystem configuration pattern:
+{{< tabs >}}
+{{% tab "Docker Compose" %}}
+
+The following is a complete Docker Compose example demonstrating the read-only root filesystem configuration pattern:
 
 ```yaml
 services:
   # Init container populating 'datadog-config' volume with config files.
   datadog-init:
     image: gcr.io/datadoghq/agent:latest
-    command: ["sh", "-c", "cp -r /etc/datadog-agent/* /opt/datadog-agent-config/"]
+    command: ["sh", "-c", "cp -R /etc/datadog-agent/* /opt/datadog-agent-config/"]
     volumes:
       - datadog-config:/opt/datadog-agent-config
 
@@ -77,7 +80,144 @@ volumes:
 - `datadog` service starts only after init completes successfully.
 - All required directories are mounted as writable volumes.
 
-To adapt this pattern to other container orchestrators like ECS, Kubernetes, or plain Docker:
+{{% /tab %}}
+{{% tab "ECS on EC2" %}}
+
+The following is a task definition example for ECS on EC2 demonstrating the read-only root filesystem configuration pattern:
+
+```json
+{
+  "family": "datadog-agent-rofs",
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent-init",
+      "image": "public.ecr.aws/datadog/agent:latest",
+      "essential": false,
+      "command": ["sh", "-c", "cp -R /etc/datadog-agent/* /opt/datadog-agent-config/"],
+      "mountPoints": [
+        {
+          "sourceVolume": "datadog-config",
+          "containerPath": "/opt/datadog-agent-config"
+        }
+      ]
+    },
+    {
+      "name": "datadog-agent",
+      "image": "public.ecr.aws/datadog/agent:latest",
+      "essential": true,
+      "readonlyRootFilesystem": true,
+      "dependsOn": [
+        {
+          "containerName": "datadog-agent-init",
+          "condition": "SUCCESS"
+        }
+      ],
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "datadoghq.com"
+        },
+        {
+          "name": "ECS_FARGATE",
+          "value": "false"
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "docker_sock",
+          "containerPath": "/var/run/docker.sock",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "proc",
+          "containerPath": "/host/proc",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "cgroup",
+          "containerPath": "/host/sys/fs/cgroup",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "datadog-config",
+          "containerPath": "/etc/datadog-agent"
+        },
+        {
+          "sourceVolume": "datadog-run",
+          "containerPath": "/opt/datadog-agent/run"
+        },
+        {
+          "sourceVolume": "datadog-sockets",
+          "containerPath": "/var/run/datadog"
+        },
+        {
+          "sourceVolume": "datadog-tmp",
+          "containerPath": "/tmp"
+        },
+        {
+          "sourceVolume": "datadog-logs",
+          "containerPath": "/var/log/datadog"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "name": "docker_sock",
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      }
+    },
+    {
+      "name": "proc",
+      "host": {
+        "sourcePath": "/proc/"
+      }
+    },
+    {
+      "name": "cgroup",
+      "host": {
+        "sourcePath": "/sys/fs/cgroup/"
+      }
+    },
+    {
+      "name": "datadog-config"
+    },
+    {
+      "name": "datadog-run"
+    },
+    {
+      "name": "datadog-sockets"
+    },
+    {
+      "name": "datadog-tmp"
+    },
+    {
+      "name": "datadog-logs"
+    }
+  ],
+  "networkMode": "bridge",
+  "pidMode": "host"
+}
+```
+
+Key configuration details:
+- `datadog-agent-init` container copies default configuration files to the `datadog-config` volume.
+- `datadog-agent` container starts only after init completes successfully (`dependsOn` with `SUCCESS` condition).
+- `readonlyRootFilesystem: true` enables read-only root filesystem.
+- All required directories are mounted as writable volumes using ECS volume definitions.
+- Host volumes (`docker_sock`, `proc`, `cgroup`) provide access to EC2 instance metrics.
+
+**Note**: Replace `<YOUR_DATADOG_API_KEY>` with your actual API key. For production use, store the API key in AWS Secrets Manager or Systems Manager Parameter Store and reference it using `secrets` instead of `environment`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+To adapt this pattern to other container orchestrators like Kubernetes or plain Docker:
 1. Create an init container that copies `/etc/datadog-agent/*` to a shared volume
 2. Mount that volume to `/etc/datadog-agent` in the main Datadog Agent container
 3. Mount writable volumes for other runtime directories (like `/opt/datadog-agent/run` and `/var/run/datadog`)
