@@ -22,7 +22,7 @@ Cloud SIEM supports enriching and searching logs using threat intelligence indic
 
 When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, container, SSH, and user agent attributes are evaluated against reference tables that you have enabled for Cloud SIEM. The process is as follows:
 
-1. For each log, Datadog extracts the relevant attributes.
+1. For each log, Datadog extracts the relevant attributes:
     - **IPs**: IPv4 and IPv6 addresses found anywhere in the log.
     - **Domains and hostnames**: The values in the following attributes (when present):
       - `DNS_QUESTION_NAME`
