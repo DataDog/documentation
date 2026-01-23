@@ -1116,6 +1116,36 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "DeleteGlobalIncidentHandle": {
+    "description": "Delete a global incident handle.",
+    "summary": "Delete global incident handle"
+  },
+  "ListGlobalIncidentHandles": {
+    "description": "Retrieve a list of global incident handles.",
+    "summary": "List global incident handles"
+  },
+  "CreateGlobalIncidentHandle": {
+    "description": "Create a new global incident handle.",
+    "summary": "Create global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateGlobalIncidentHandle": {
+    "description": "Update an existing global incident handle.",
+    "summary": "Update global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetGlobalIncidentSettings": {
+    "description": "Retrieve global incident settings for the organization.",
+    "summary": "Get global incident settings"
+  },
+  "UpdateGlobalIncidentSettings": {
+    "description": "Update global incident settings for the organization.",
+    "summary": "Update global incident settings",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
     "summary": "List incident notification rules"

@@ -9221,6 +9221,10 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
+        status_group:
+          $ref: '#/components/schemas/CaseStatusGroup'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9287,6 +9291,8 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9455,7 +9461,9 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      description: Case status
+      deprecated: true
+      description: Deprecated way of representing the case status, which only supports
+        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9466,6 +9474,23 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
+    CaseStatusGroup:
+      description: Status group of the case.
+      enum:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+      example: SG_OPEN
+      type: string
+      x-enum-varnames:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+    CaseStatusName:
+      description: Status of the case. Must be one of the existing statuses for the
+        case's type.
+      example: Open
+      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9689,8 +9714,9 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-      required:
-      - status
+          deprecated: true
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -26632,6 +26658,82 @@ components:
       required:
       - type
       type: object
+    GlobalIncidentSettingsAttributesRequest:
+      description: Global incident settings attributes
+      properties:
+        analytics_dashboard_id:
+          description: The analytics dashboard ID
+          example: abc-123-def
+          type: string
+      type: object
+    GlobalIncidentSettingsAttributesResponse:
+      description: Global incident settings attributes
+      properties:
+        analytics_dashboard_id:
+          description: The analytics dashboard ID
+          example: abc-123-def
+          type: string
+        created:
+          description: Timestamp when the settings were created
+          example: '2026-01-13T17:15:56.557278191Z'
+          format: date-time
+          type: string
+        modified:
+          description: Timestamp when the settings were last modified
+          example: '2026-01-13T17:15:56.557278191Z'
+          format: date-time
+          type: string
+      required:
+      - created
+      - modified
+      - analytics_dashboard_id
+      type: object
+    GlobalIncidentSettingsDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalIncidentSettingsAttributesRequest'
+        type:
+          $ref: '#/components/schemas/GlobalIncidentSettingsType'
+      required:
+      - type
+      type: object
+    GlobalIncidentSettingsDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalIncidentSettingsAttributesResponse'
+        id:
+          description: The unique identifier for the global incident settings
+          example: f8b9a915-ed85-48b4-9071-ceba567a3db5
+          type: string
+        type:
+          $ref: '#/components/schemas/GlobalIncidentSettingsType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    GlobalIncidentSettingsRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalIncidentSettingsDataRequest'
+      required:
+      - data
+      type: object
+    GlobalIncidentSettingsResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalIncidentSettingsDataResponse'
+      required:
+      - data
+      type: object
+    GlobalIncidentSettingsType:
+      description: Global incident settings resource type
+      enum:
+      - incidents_global_settings
+      example: incidents_global_settings
+      type: string
+      x-enum-varnames:
+      - INCIDENTS_GLOBAL_SETTINGS
     GlobalVariableData:
       description: Synthetics global variable data. Wrapper around the global variable
         object.
@@ -27660,6 +27762,184 @@ components:
       - TEXTARRAY
       - METRICTAG
       - AUTOCOMPLETE
+    IncidentHandleAttributesFields:
+      description: Dynamic fields associated with the handle
+      example:
+        severity:
+        - SEV-1
+      properties:
+        severity:
+          description: Severity levels associated with the handle
+          items:
+            $ref: '#/components/schemas/IncidentHandleAttributesFieldsSeverity'
+          type: array
+      type: object
+    IncidentHandleAttributesFieldsSeverity:
+      example: SEV-1
+      type: string
+    IncidentHandleAttributesRequest:
+      description: Incident handle attributes for requests
+      properties:
+        fields:
+          $ref: '#/components/schemas/IncidentHandleAttributesFields'
+        name:
+          description: The handle name
+          example: '@incident-sev-1'
+          type: string
+      required:
+      - name
+      type: object
+    IncidentHandleAttributesResponse:
+      description: Incident handle attributes for responses
+      properties:
+        created_at:
+          description: Timestamp when the handle was created
+          example: '2026-01-13T17:15:52.726905Z'
+          format: date-time
+          type: string
+        fields:
+          $ref: '#/components/schemas/IncidentHandleAttributesFields'
+        modified_at:
+          description: Timestamp when the handle was last modified
+          example: '2026-01-13T17:15:52.726905Z'
+          format: date-time
+          type: string
+        name:
+          description: The handle name
+          example: '@incident-sev-1'
+          type: string
+      required:
+      - name
+      - fields
+      - created_at
+      - modified_at
+      type: object
+    IncidentHandleDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentHandleAttributesRequest'
+        id:
+          description: The ID of the incident handle (required for PUT requests)
+          example: b2494081-cdf0-4205-b366-4e1dd4fdf0bf
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentHandleRelationshipsRequest'
+        type:
+          $ref: '#/components/schemas/IncidentHandleType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentHandleDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentHandleAttributesResponse'
+        id:
+          description: The ID of the incident handle
+          example: 12ceee6d-a7c0-4407-bc54-30e54140d7f0
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentHandleRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentHandleType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IncidentHandleIncludedItemResponse:
+      oneOf:
+      - $ref: '#/components/schemas/IncidentUserData'
+      - $ref: '#/components/schemas/IncidentTypeObject'
+    IncidentHandleIncludedResponse:
+      description: Included related resources
+      items:
+        $ref: '#/components/schemas/IncidentHandleIncludedItemResponse'
+      type: array
+    IncidentHandleRelationship:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandleRelationshipData'
+      required:
+      - data
+      type: object
+    IncidentHandleRelationshipData:
+      properties:
+        id:
+          description: The ID of the related resource
+          example: f7b538b1-ed7c-4e84-82de-fdf84a539d40
+          type: string
+        type:
+          description: The type of the related resource
+          example: incident_types
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    IncidentHandleRelationships:
+      nullable: true
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        created_by_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        incident_type:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        last_modified_by_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+      required:
+      - incident_type
+      - created_by_user
+      - last_modified_by_user
+      type: object
+    IncidentHandleRelationshipsRequest:
+      nullable: true
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        incident_type:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+      required:
+      - incident_type
+      type: object
+    IncidentHandleRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandleDataRequest'
+      required:
+      - data
+      type: object
+    IncidentHandleResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandleDataResponse'
+        included:
+          $ref: '#/components/schemas/IncidentHandleIncludedResponse'
+      required:
+      - data
+      type: object
+    IncidentHandleType:
+      description: Incident handle resource type
+      enum:
+      - incidents_handles
+      example: incidents_handles
+      type: string
+      x-enum-varnames:
+      - INCIDENTS_HANDLES
+    IncidentHandlesResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandlesResponseData'
+        included:
+          $ref: '#/components/schemas/IncidentHandleIncludedResponse'
+      required:
+      - data
+      type: object
+    IncidentHandlesResponseData:
+      items:
+        $ref: '#/components/schemas/IncidentHandleDataResponse'
+      type: array
     IncidentImpactAttributes:
       description: The incident impact's attributes.
       properties:
@@ -74846,6 +75126,196 @@ paths:
         permissions:
         - incident_write
       x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/global/incident-handles:
+    delete:
+      description: Delete a global incident handle.
+      operationId: DeleteGlobalIncidentHandle
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete global incident handle
+      tags:
+      - Incidents
+      x-menu-order: 43
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieve a list of global incident handles.
+      operationId: ListGlobalIncidentHandles
+      parameters:
+      - description: Comma-separated list of related resources to include in the response
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by_user,last_modified_by_user,commander_user,incident_type
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentHandlesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List global incident handles
+      tags:
+      - Incidents
+      x-menu-order: 40
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new global incident handle.
+      operationId: CreateGlobalIncidentHandle
+      parameters:
+      - description: Comma-separated list of related resources to include in the response
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by_user,last_modified_by_user,commander_user,incident_type
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentHandleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentHandleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create global incident handle
+      tags:
+      - Incidents
+      x-menu-order: 41
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Update an existing global incident handle.
+      operationId: UpdateGlobalIncidentHandle
+      parameters:
+      - description: Comma-separated list of related resources to include in the response
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by_user,last_modified_by_user,commander_user,incident_type
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentHandleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentHandleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update global incident handle
+      tags:
+      - Incidents
+      x-menu-order: 42
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/global/settings:
+    get:
+      description: Retrieve global incident settings for the organization.
+      operationId: GetGlobalIncidentSettings
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalIncidentSettingsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get global incident settings
+      tags:
+      - Incidents
+      x-menu-order: 38
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update global incident settings for the organization.
+      operationId: UpdateGlobalIncidentSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalIncidentSettingsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalIncidentSettingsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update global incident settings
+      tags:
+      - Incidents
+      x-menu-order: 39
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/config/notification-rules:
