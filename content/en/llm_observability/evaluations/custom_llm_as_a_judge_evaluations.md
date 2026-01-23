@@ -84,11 +84,12 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8.In the **User** field, enter your evaluation prompt and explicitly specify which parts of the span should be evaluated. In most cases, this is Span Input (`{{span_input}}`) and/or Span Output (`{{span_output}}`).
-Additional variables are available—type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces (on the right side) to add span data as a variable:
-- Choose an account and an application so that spans/traces show up on the right.
-- Select one of the spans on the right to view its JSON.
-- Use the three-dots menu and select **Add variable to message** to insert the JSON into your prompt.
+8.In the **User** field, enter your evaluation prompt and explicitly specify which parts of the span should be evaluated. In most cases, this is span input (`{{span_input}}`) and/or span output (`{{span_output}}`).
+
+   Additional variables are available: type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces** (on the right side) to add span data as a variable:
+   1. Choose an account and an application so that spans/traces show up on the right.
+   2. Select one of the spans on the right to view its JSON.
+   3. Use the three-dots menu and select **Add variable to message** to insert the JSON into your prompt.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
