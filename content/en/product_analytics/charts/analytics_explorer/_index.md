@@ -58,7 +58,7 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
    {{< img src="product_analytics/analytics/pana_analytics_filter_by.png" alt="Drop down menu in Product Analytics to filter events by their own attributes or by attributes pulled from third party integrations." style="width:70%;">}}
 
-1. Choose an event attribute to further breakdown by.
+1. Choose an event attribute to further break down results.
 
    {{< img src="product_analytics/analytics/pana_analytics_breakdown_by1.png" alt="Drop down menu in Product Analytics to further breakdown events by their own attributes or by attributes pulled from third party integrations." style="width:70%;">}}
 
