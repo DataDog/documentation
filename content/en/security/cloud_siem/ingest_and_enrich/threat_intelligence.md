@@ -193,7 +193,7 @@ malicious-vendor,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name""
 
 **Note**: Track unauthorized or compromised SSH keys. Remove line breaks from multi-line keys before adding to CSV.
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:</div>
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
 ```
 ssh_public_key,additional_data,category,intention,source
@@ -201,6 +201,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3F6tyPEFEzV0LX3X8BsXdMsQ,"{""ref"":""hxxp
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGZfNyAXqPdvZ0qqIWFVxH5z2k,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+</div>
 
 #### CSV structure for user agent
 
