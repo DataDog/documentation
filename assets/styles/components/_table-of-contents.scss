@@ -219,6 +219,28 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 }
 
+.toc-copy-btn {
+    display: none;
+    @media (min-width: 991px) {
+        display: block;
+    }
+
+    a {
+        font-size: 18px;
+        &:lang(ja) {
+            font-size: 16px;
+
+            .toc-copy-btn img {
+                width: 35px;
+            }
+        }
+    }
+
+    #page-copied-text {
+        display: none;
+    }
+}
+
 .toc-container-mobile {
     display: none;
     padding: 105px 0 0 0;

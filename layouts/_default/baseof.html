@@ -1,3 +1,4 @@
+{{ $plaintextUrl := "" }}
 <!DOCTYPE html>
 <html lang='{{ if eq .Site.Language.Lang "en" }}en-US{{ else }}{{ .Site.Language.Lang }}{{ end }}' data-base-url="{{ .Site.BaseURL }}" data-type="{{.Type}}" data-page-code-lang="{{ .Params.code_lang }}" data-current-section="{{ strings.TrimLeft "/" .CurrentSection.RelPermalink}}" data-relpermalink="{{.RelPermalink}}"
   data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
