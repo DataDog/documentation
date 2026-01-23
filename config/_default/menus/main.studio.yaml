@@ -62,8 +62,13 @@ menu:
           - monitor_types_service_check
           - monitor_types_slo
           - monitor_types_syn
+    - name: Getting Started
+      url: /studio/ai_observability/getting_started/
+      parent: ai_observability_heading
+      identifier: ai_observability_getting_started
+      weight: 1
     - name: Bits AI
-      parent: essentials_heading
+      parent: ai_observability_heading
       params:
         ref_id: bits_ai
         excludes:
@@ -73,6 +78,11 @@ menu:
       parent: essentials_heading
       params:
         ref_id: llm_obs
+    - name: Getting Started
+      url: /studio/monitor_and_debug/getting_started/
+      parent: monitor_and_debug_heading
+      identifier: monitor_and_debug_getting_started
+      weight: 1
     - name: Metrics
       parent: monitor_and_debug_heading
       params:
@@ -87,6 +97,11 @@ menu:
       params:
         ref_id: logs
         # Include everything (no filters)
+    - name: Getting Started
+      url: /studio/understand_users/getting_started/
+      parent: understand_users_heading
+      identifier: understand_users_getting_started
+      weight: 1
     - name: Product Analytics
       parent: understand_users_heading
       params:
