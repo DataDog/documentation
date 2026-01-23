@@ -71910,7 +71910,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BudgetValidationRequest'
+                $ref: '#/components/schemas/BudgetWithEntries'
           description: OK
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
