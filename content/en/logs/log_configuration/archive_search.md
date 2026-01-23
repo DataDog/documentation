@@ -103,7 +103,7 @@ After launching a search, logs stream into the **Archive Search Results** page. 
 
 ### Limitations
 
-While Archive Search  provides access to archived logs, it has limited analytical capabilities compared to indexed logs:
+While Archive Search provides access to archived logs, it has limited analytical capabilities compared to indexed logs:
 
 - **No aggregations or analytics**: You cannot run aggregations, create visualizations, or perform advanced analytics directly on Archive Search results.
 - **Results page only**: Archive Search results are only available in the dedicated results page and cannot be queried from other parts of the Datadog platform (such as Dashboards, Notebooks, or Log Explorer).
