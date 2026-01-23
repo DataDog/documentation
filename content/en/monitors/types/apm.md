@@ -44,7 +44,7 @@ Watchdog anomaly monitors automatically detect unusual patterns in latency, erro
 
 **Note**: Automatic monitor creation is only available during a trial.
 
-You can view and manage all automatically created monitors on the Monitors page, where they can be edited, cloned, or disabled.
+You can view and manage all automatically created monitors on the [Monitors page][7], where they can be edited, cloned, or disabled.
 
 
 ## Monitor creation
