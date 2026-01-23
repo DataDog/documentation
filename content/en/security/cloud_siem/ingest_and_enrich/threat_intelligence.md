@@ -207,6 +207,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGZfNyAXqPdvZ0qqIWFVxH5z2k,"{""ref"":""hxx
 
 #### CSV structure for user agents
 
+User agents feeds are useful for identifying malicious bots and scanners.
+
 | Field             | Data | Description                                                                              | Required | Example                                                                   |
 |-------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
 | `user_agent`      | text | The primary key for the reference table. HTTP User-Agent string.                         | true     | `Mozilla/5.0 (compatible; MaliciousBot/1.0)`                              |
@@ -214,8 +216,6 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGZfNyAXqPdvZ0qqIWFVxH5z2k,"{""ref"":""hxx
 | `category`        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | `scanner`                                                                 |
 | `intention`       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | `suspicious`                                                              |
 | `source`          | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
-
-**Note**: Identify malicious bots and scanners.
 
 <div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
