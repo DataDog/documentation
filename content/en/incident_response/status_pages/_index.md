@@ -119,7 +119,7 @@ Notices are messages published to a status page to communicate system status. St
 
 ### Publish a degradation
 
-{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
 
 Degradation notices communicate **unplanned service impact**, such as incidents or service disruptions. Use degradation notices to keep users informed as an issue is investigated, mitigated, and resolved.
 
@@ -145,7 +145,7 @@ You can publish updates over time and mark the notice as **Resolved** when the i
 
 ### Schedule a maintenance window
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
 
 Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degradations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. This allows you to keep customers informed and reduce support volume.
 
