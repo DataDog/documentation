@@ -108,7 +108,7 @@ While Archive Search provides access to archived logs, it has limited analytical
 - **No aggregations or analytics**: You cannot run aggregations, create visualizations, or perform advanced analytics directly on Archive Search results.
 - **Results page only**: Archive Search results are only available in the dedicated results page and cannot be queried from other parts of the Datadog platform (such as Dashboards, Notebooks, or Log Explorer).
 
-To enable full analytics and platform-wide visibility, you need to rehydarte the search results (either before launching the search or after completion within the 24-hour window). When rehydrated, your logs become available across all Datadog products with full aggregation, visualization, and analytics capabilities.
+To enable full analytics and platform-wide visibility, you need to rehydrate the search results (either before launching the search or after completion within the 24-hour window). When rehydrated, your logs become available across all Datadog products with full aggregation, visualization, and analytics capabilities.
 
 ## Manage searches
 
