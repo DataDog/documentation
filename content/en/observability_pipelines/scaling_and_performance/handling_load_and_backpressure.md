@@ -49,18 +49,14 @@ There are two types of buffers you can use for your destination:
 - **Memory buffers** prioritize throughput over durability, as they can handle significant bandwidth, but memory buffers do not persist between Worker restarts.
 - **Disk buffers** prioritize durability over throughput, where it writes to the OS' page cache first, then flushes to a disk if the data is not immediately transmitted by the destination. Disk buffers wait at most 500 ms before calling fsync and flushing a data file to a disk. A disk buffer flushes more frequently if a data file fills up to its maximum 128 MB size before the 500 ms has elapsed since the last flush.
 
-Use case for memory buffers:
-
-- You want to prevent backpressure from propagating back to your source and application when a destination is temporarily unavailable.
-- You plan on sending a high bandwidth of data through your Worker, which a disk buffer might not be able to keep up with.
-- You are okay with potential data loss.
-
-Use case for disk buffers:
-
-- You want to prevent backpressure from propagating back to your source and application when a destination is temporarily unavailable.
-- The bandwidth of data you plan on sending through your pipeline is unlikely to get bottlenecked by I/O if the buffer needs to write to a disk.
-- You need to minimize any potential data loss which might occur if the Worker unexpectedly shuts down.
-
+Both types of buffering help to prevent backpressure from propagating back to your source and application when a destination is temporarily unavailable. Specific reasons you might have for choosing:
+- **Memory buffers**
+  - You plan on sending a high bandwidth of data through your Worker, which a disk buffer might not be able to keep up with.
+  - You are okay with potential data loss.
+- **Disk buffers**
+  - The bandwidth of data you plan on sending through your pipeline is unlikely to get bottlenecked by I/O if the buffer needs to write to a disk.
+  - You need to minimize any potential data loss which might occur if the Worker unexpectedly shuts down.
+  
 This table compares the differences between the memory and disk buffer.
 
 | Property                                                 | Memory Buffer             | Disk Buffer                          |
