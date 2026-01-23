@@ -185,13 +185,13 @@ malicious-vendor,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name""
 
 #### CSV structure for SSH public key
 
-| Field           | Data | Description                                                                              | Required | Example                                      |
-|-----------------|------|------------------------------------------------------------------------------------------|----------|----------------------------------------------|
-| ssh_public_key  | text | The primary key for the reference table. SSH public key in standard format (typically ssh-rsa, ssh-ed25519, etc.). | true | ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC... |
-| additional_data | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`               |
-| category        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.    | true     | scanner                                      |
-| intention       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.      | true     | suspicious                                   |
-| source          | json | The name of the source and the link to its site, such as your team and your team's wiki.| true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
+| Field             | Data | Description                                                                                                        | Required | Example                                                                   |
+|-------------------|------|--------------------------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| `ssh_public_key`  | text | The primary key for the reference table. SSH public key in standard format (typically ssh-rsa, ssh-ed25519, etc.). | true     | `ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...`                              |
+| `additional_data` | json | Additional data to enrich the logs.                                                                                | false    | `{"ref":"hxxp://example.org"}`                                            |
+| `category`        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.                               | true     | `scanner`                                                                 |
+| `intention`       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                                 | true     | `suspicious`                                                              |
+| `source`          | json | The name of the source and the link to its site, such as your team and your team's wiki.                           | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 **Note**: Track unauthorized or compromised SSH keys. Remove line breaks from multi-line keys before adding to CSV.
 
