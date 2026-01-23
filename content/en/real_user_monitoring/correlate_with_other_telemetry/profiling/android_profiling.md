@@ -74,7 +74,7 @@ Android mobile application profiling captures detailed data about your applicati
 
 The [ProfilingManager API][4] also supports disablng rate limiting during debug builds. 
 
-## Explore Profiling
+## Explore Profiling Data
 
 ### During the time to initial display
 

@@ -67,13 +67,13 @@ iOS mobile application profiling captures detailed data about your applicationâ€
 {{% /tab %}}
 {{< /tabs >}}
 
-## Explore Profiling
+## Explore Profiling Data
 
 ### During the time to initial display
 
 iOS application launch profiling data is attached to the [time to initial display][4] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
 
-{{< img src="real_user_monitoring/ios/ios-profiling-view.png" alt="iOS profiling data in a view event to initial display vital event." style="width:90%;" >}}
+{{< img src="real_user_monitoring/ios/ios-profiling-session.png" alt="iOS profiling data in a view event to initial display vital event." style="width:90%;" >}}
 
 Use the flame graph, thread timeline, and call graph visualizations to analyze the profiling data for the time to initial display. You can also download the profiling data for external analysis.
 
