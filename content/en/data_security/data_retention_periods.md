@@ -108,7 +108,8 @@ attributes:
        - **Datasets**: 3 years
   - product: Log Management
     data_type: |
-       - **Logs**: Determined by customer plan
+       {{% not_available_in_studio %}}- **Logs**: Determined by customer plan{{% /not_available_in_studio %}}
+       {{% only_in_studio %}}- **Logs**: 30 days{{% /only_in_studio %}}
   - product: Metrics
     data_type: |
        - **Tags and values**: 15 months
