@@ -1,4 +1,4 @@
-setuptools==60.10.0
+setuptools==80.9.0
 PyGithub==1.47
 markdown
 beautifulsoup4==4.12.0
