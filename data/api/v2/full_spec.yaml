@@ -5058,6 +5058,20 @@ components:
       type: string
       x-enum-varnames:
       - ARBITRARY_RULE
+    Argument:
+      properties:
+        description:
+          description: Base64-encoded argument description
+          example: YXJndW1lbnQgZGVzY3JpcHRpb24=
+          type: string
+        name:
+          description: Base64-encoded argument name
+          example: YXJndW1lbnRfbmFtZQ==
+          type: string
+      required:
+      - name
+      - description
+      type: object
     AsanaAccessToken:
       description: The definition of the `AsanaAccessToken` object.
       properties:
@@ -9207,6 +9221,10 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
+        status_group:
+          $ref: '#/components/schemas/CaseStatusGroup'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9273,6 +9291,8 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9441,7 +9461,9 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      description: Case status
+      deprecated: true
+      description: Deprecated way of representing the case status, which only supports
+        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9452,6 +9474,23 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
+    CaseStatusGroup:
+      description: Status group of the case.
+      enum:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+      example: SG_OPEN
+      type: string
+      x-enum-varnames:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+    CaseStatusName:
+      description: Status of the case. Must be one of the existing statuses for the
+        case's type.
+      example: Open
+      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9675,8 +9714,9 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-      required:
-      - status
+          deprecated: true
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -16277,6 +16317,482 @@ components:
       - handle
       - version
       - name
+      type: object
+    CustomRule:
+      properties:
+        created_at:
+          description: Creation timestamp
+          example: '2026-01-09T13:00:57.473141Z'
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        last_revision:
+          $ref: '#/components/schemas/CustomRuleRevision'
+          description: Most recent revision
+          nullable: true
+        name:
+          description: Rule name
+          example: my-rule
+          type: string
+      required:
+      - name
+      - created_at
+      - created_by
+      - last_revision
+      type: object
+    CustomRuleDataType:
+      description: Resource type
+      enum:
+      - custom_rule
+      example: custom_rule
+      type: string
+      x-enum-varnames:
+      - CUSTOM_RULE
+    CustomRuleRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleRequestData'
+      type: object
+    CustomRuleRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRuleRequestDataAttributes'
+        id:
+          description: Rule identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleDataType'
+      type: object
+    CustomRuleRequestDataAttributes:
+      properties:
+        name:
+          description: Rule name
+          type: string
+      type: object
+    CustomRuleResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleResponseData'
+      required:
+      - data
+      type: object
+    CustomRuleResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRule'
+        id:
+          description: Rule identifier
+          example: my-rule
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CustomRuleRevision:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributes'
+        id:
+          description: Revision identifier
+          example: revision-123
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleRevisionDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CustomRuleRevisionAttributes:
+      properties:
+        arguments:
+          description: Rule arguments
+          items:
+            $ref: '#/components/schemas/Argument'
+          type: array
+        category:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
+        checksum:
+          description: Code checksum
+          example: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+          type: string
+        code:
+          description: Rule code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        created_at:
+          description: Creation timestamp
+          example: '2026-01-09T13:00:57.473141Z'
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        creation_message:
+          description: Revision creation message
+          example: Initial revision
+          type: string
+        cve:
+          description: Associated CVE
+          example: CVE-2024-1234
+          nullable: true
+          type: string
+        cwe:
+          description: Associated CWE
+          example: CWE-79
+          nullable: true
+          type: string
+        description:
+          description: Full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        documentation_url:
+          description: Documentation URL
+          example: https://docs.example.com/rules/my-rule
+          nullable: true
+          type: string
+        is_published:
+          description: Whether the revision is published
+          example: false
+          type: boolean
+        is_testing:
+          description: Whether this is a testing revision
+          example: false
+          type: boolean
+        language:
+          $ref: '#/components/schemas/Language'
+        severity:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesSeverity'
+        short_description:
+          description: Short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+        should_use_ai_fix:
+          description: Whether to use AI for fixes
+          example: false
+          type: boolean
+        tags:
+          description: Rule tags
+          example:
+          - security
+          - custom
+          items:
+            type: string
+          type: array
+        tests:
+          description: Rule tests
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionTest'
+          type: array
+        tree_sitter_query:
+          description: Tree-sitter query
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+      required:
+      - creation_message
+      - short_description
+      - description
+      - code
+      - checksum
+      - language
+      - tree_sitter_query
+      - created_at
+      - created_by
+      - severity
+      - category
+      - cve
+      - cwe
+      - arguments
+      - tests
+      - tags
+      - is_published
+      - should_use_ai_fix
+      - documentation_url
+      - is_testing
+      type: object
+    CustomRuleRevisionAttributesCategory:
+      description: Rule category
+      enum:
+      - SECURITY
+      - BEST_PRACTICES
+      - CODE_STYLE
+      - ERROR_PRONE
+      - PERFORMANCE
+      example: SECURITY
+      type: string
+      x-enum-varnames:
+      - SECURITY
+      - BEST_PRACTICES
+      - CODE_STYLE
+      - ERROR_PRONE
+      - PERFORMANCE
+    CustomRuleRevisionAttributesSeverity:
+      description: Rule severity
+      enum:
+      - ERROR
+      - WARNING
+      - NOTICE
+      example: ERROR
+      type: string
+      x-enum-varnames:
+      - ERROR
+      - WARNING
+      - NOTICE
+    CustomRuleRevisionDataType:
+      description: Resource type
+      enum:
+      - custom_rule_revision
+      example: custom_rule_revision
+      type: string
+      x-enum-varnames:
+      - CUSTOM_RULE_REVISION
+    CustomRuleRevisionInputAttributes:
+      properties:
+        arguments:
+          description: Rule arguments
+          items:
+            $ref: '#/components/schemas/Argument'
+          type: array
+        category:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
+        code:
+          description: Rule code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        creation_message:
+          description: Revision creation message
+          example: Initial revision
+          type: string
+        cve:
+          description: Associated CVE
+          example: CVE-2024-1234
+          nullable: true
+          type: string
+        cwe:
+          description: Associated CWE
+          example: CWE-79
+          nullable: true
+          type: string
+        description:
+          description: Full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        documentation_url:
+          description: Documentation URL
+          example: https://docs.example.com/rules/my-rule
+          nullable: true
+          type: string
+        is_published:
+          description: Whether the revision is published
+          example: false
+          type: boolean
+        is_testing:
+          description: Whether this is a testing revision
+          example: false
+          type: boolean
+        language:
+          $ref: '#/components/schemas/Language'
+        severity:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesSeverity'
+        short_description:
+          description: Short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+        should_use_ai_fix:
+          description: Whether to use AI for fixes
+          example: false
+          type: boolean
+        tags:
+          description: Rule tags
+          example:
+          - security
+          - custom
+          items:
+            type: string
+          type: array
+        tests:
+          description: Rule tests
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionTest'
+          type: array
+        tree_sitter_query:
+          description: Tree-sitter query
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+      required:
+      - creation_message
+      - short_description
+      - description
+      - code
+      - language
+      - tree_sitter_query
+      - severity
+      - category
+      - cve
+      - cwe
+      - arguments
+      - tests
+      - tags
+      - is_published
+      - should_use_ai_fix
+      - documentation_url
+      - is_testing
+      type: object
+    CustomRuleRevisionRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleRevisionRequestData'
+      type: object
+    CustomRuleRevisionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRuleRevisionInputAttributes'
+        id:
+          description: Revision identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleRevisionDataType'
+      type: object
+    CustomRuleRevisionResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleRevision'
+      required:
+      - data
+      type: object
+    CustomRuleRevisionTest:
+      properties:
+        annotation_count:
+          description: Expected violation count
+          example: 1
+          format: int64
+          type: integer
+        code:
+          description: Test code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        filename:
+          description: Test filename
+          example: test.yaml
+          type: string
+      required:
+      - filename
+      - code
+      - annotation_count
+      type: object
+    CustomRuleRevisionsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CustomRuleRevision'
+          type: array
+      type: object
+    CustomRuleset:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRulesetAttributes'
+        id:
+          description: Ruleset identifier
+          example: my-ruleset
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRulesetDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CustomRulesetAttributes:
+      properties:
+        created_at:
+          description: Creation timestamp
+          example: '2026-01-09T13:00:57.473141Z'
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        description:
+          description: Base64-encoded full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        name:
+          description: Ruleset name
+          example: my-ruleset
+          type: string
+        rules:
+          description: Rules in the ruleset
+          items:
+            $ref: '#/components/schemas/CustomRule'
+          nullable: true
+          type: array
+        short_description:
+          description: Base64-encoded short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+      required:
+      - name
+      - short_description
+      - description
+      - created_at
+      - created_by
+      - rules
+      type: object
+    CustomRulesetDataType:
+      description: Resource type
+      enum:
+      - custom_ruleset
+      example: custom_ruleset
+      type: string
+      x-enum-varnames:
+      - CUSTOM_RULESET
+    CustomRulesetRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRulesetRequestData'
+      type: object
+    CustomRulesetRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRulesetRequestDataAttributes'
+        id:
+          description: Ruleset identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRulesetDataType'
+      type: object
+    CustomRulesetRequestDataAttributes:
+      properties:
+        description:
+          description: Base64-encoded full description
+          type: string
+        name:
+          description: Ruleset name
+          type: string
+        rules:
+          description: Rules in the ruleset
+          items:
+            $ref: '#/components/schemas/CustomRule'
+          nullable: true
+          type: array
+        short_description:
+          description: Base64-encoded short description
+          type: string
+      type: object
+    CustomRulesetResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleset'
+      required:
+      - data
       type: object
     DORACustomTags:
       description: A list of user-defined tags. The tags must follow the `key:value`
@@ -31232,6 +31748,34 @@ components:
           format: int64
           type: integer
       type: object
+    Language:
+      description: Programming language
+      enum:
+      - PYTHON
+      - JAVASCRIPT
+      - TYPESCRIPT
+      - JAVA
+      - GO
+      - YAML
+      - RUBY
+      - CSHARP
+      - PHP
+      - KOTLIN
+      - SWIFT
+      example: PYTHON
+      type: string
+      x-enum-varnames:
+      - PYTHON
+      - JAVASCRIPT
+      - TYPESCRIPT
+      - JAVA
+      - GO
+      - YAML
+      - RUBY
+      - CSHARP
+      - PHP
+      - KOTLIN
+      - SWIFT
     LaunchDarklyAPIKey:
       description: The definition of the `LaunchDarklyAPIKey` object.
       properties:
@@ -47245,6 +47789,37 @@ components:
       required:
       - interval
       - maxRetries
+      type: object
+    RevertCustomRuleRevisionDataType:
+      description: Request type
+      enum:
+      - revert_custom_rule_revision_request
+      type: string
+      x-enum-varnames:
+      - REVERT_CUSTOM_RULE_REVISION_REQUEST
+    RevertCustomRuleRevisionRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/RevertCustomRuleRevisionRequestData'
+      type: object
+    RevertCustomRuleRevisionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RevertCustomRuleRevisionRequestDataAttributes'
+        id:
+          description: Request identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/RevertCustomRuleRevisionDataType'
+      type: object
+    RevertCustomRuleRevisionRequestDataAttributes:
+      properties:
+        currentRevision:
+          description: Current revision ID
+          type: string
+        revertToRevision:
+          description: Target revision ID to revert to
+          type: string
       type: object
     Role:
       description: Role object returned by the API.
@@ -93352,6 +93927,524 @@ paths:
       - Static Analysis
       x-menu-order: 1
       x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}:
+    delete:
+      description: Delete a custom ruleset
+      operationId: DeleteCustomRuleset
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Custom Ruleset
+      tags:
+      - Static Analysis
+      x-menu-order: 8
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a custom ruleset by name
+      operationId: GetCustomRuleset
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRulesetResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Show Custom Ruleset
+      tags:
+      - Static Analysis
+      x-menu-order: 10
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing custom ruleset
+      operationId: UpdateCustomRuleset
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomRulesetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRulesetResponse'
+          description: Successfully updated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Precondition failed - validation error or ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Custom Ruleset
+      tags:
+      - Static Analysis
+      x-menu-order: 9
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules:
+    put:
+      description: Create a new custom rule within a ruleset
+      operationId: CreateCustomRule
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleResponse'
+          description: Successfully created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Conflict - rule already exists
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Precondition failed - validation error or ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Custom Rule
+      tags:
+      - Static Analysis
+      x-menu-order: 7
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}:
+    delete:
+      description: Delete a custom rule
+      operationId: DeleteCustomRule
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Custom Rule
+      tags:
+      - Static Analysis
+      x-menu-order: 5
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a custom rule by name
+      operationId: GetCustomRule
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Show Custom Rule
+      tags:
+      - Static Analysis
+      x-menu-order: 6
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}/revisions:
+    get:
+      description: Get all revisions for a custom rule
+      operationId: ListCustomRuleRevisions
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      - description: Pagination offset
+        in: query
+        name: page[offset]
+        required: false
+        schema:
+          default: 0
+          type: integer
+      - description: Pagination limit
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleRevisionsResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: List Custom Rule Revisions
+      tags:
+      - Static Analysis
+      x-menu-order: 4
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Create a new revision for a custom rule
+      operationId: CreateCustomRuleRevision
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomRuleRevisionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Custom Rule Revision
+      tags:
+      - Static Analysis
+      x-menu-order: 3
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}/revisions/revert:
+    post:
+      description: Revert a custom rule to a previous revision
+      operationId: RevertCustomRuleRevision
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevertCustomRuleRevisionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully reverted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Revert Custom Rule Revision
+      tags:
+      - Static Analysis
+      x-menu-order: 1
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}/revisions/{id}:
+    get:
+      description: Get a specific revision of a custom rule
+      operationId: GetCustomRuleRevision
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      - description: The revision ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleRevisionResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Revision not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Show Custom Rule Revision
+      tags:
+      - Static Analysis
+      x-menu-order: 2
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/static-analysis/rulesets:
     post:
       description: Get rules for multiple rulesets in batch.
