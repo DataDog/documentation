@@ -151,7 +151,7 @@ aws_account_id,additional_data,category,intention,source
 
 **Note**: Track known malicious container images.
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:</div>
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
 ```
 container_image_name,additional_data,category,intention,source
@@ -159,6 +159,7 @@ malicious-registry.com/suspicious/image:latest,"{""ref"":""hxxp://example.org""}
 bad-repo.io/malware/cryptominer:v2,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 suspicious-hub.com/backdoor/payload:1.0,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+</div>
 
 #### CSV structure for container registry account name
 
