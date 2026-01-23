@@ -31,10 +31,10 @@ iOS mobile application profiling captures detailed data about your applicationâ€
 ## Setup
 
 1. Set up [Mobile RUM for iOS][3].
-2. Initialize the RUM SDK and configure the `profilingSessionSampleRate`, which sets the percentage of sessions that are randomly sampled for profiling. 
+2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which sets the percentage of profiler runs on application launches.
 
 <div class="alert alert-danger">
-  If no value is specified, the default <code>profilingSessionSampleRate</code> is 15 percent.
+  If no value is specified, the default <code>applicationLaunchSampleRate</code> is 15 percent.
 </div>
 
 {{< tabs >}}
@@ -84,7 +84,7 @@ Use the flame graph, thread timeline, and call graph visualizations to analyze t
 [1]: https://developer.apple.com/documentation/kernel/mach
 [2]: https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/ 
 [3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios
-[4]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift#:~:text=older%20SDK%20versions.-,Time%20to%20initial%20display%20and%20time%20to%20full%20display,-In%20iOS%20SDK 
+[4]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
 
 
 

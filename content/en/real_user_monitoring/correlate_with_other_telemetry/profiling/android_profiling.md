@@ -20,7 +20,7 @@ Android Profiling is in Preview.
 
 ## Overview
 
-Android mobile application profiling captures detailed data about your application’s performance during launch. Android profiling is built on top of the [Profiling Manager Android API][1] and samples the device's CPU to collect method call stacks from the application’s process.
+Android mobile application profiling captures detailed data about your application’s performance during launch. Android profiling is built on top of the [ProfilingManager Android API][1] and samples the device's CPU to collect method call stacks from the application’s process.
 
 <div class="alert alert-warning">Only devices running Android 15 (API level 35) will generate profiling data.</div>
 
@@ -33,10 +33,10 @@ Android mobile application profiling captures detailed data about your applicati
 ## Setup
 
 1. Set up [Mobile RUM for Android][3].
-2. Initialize the RUM SDK and configure the `profilingMaximumRate`, which sets the maximum percentage of sessions that are profiled. 
+2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which sets the percentage of profiler runs on application launches.
 
 <div class="alert alert-danger">
-  If no value is specified, the default <code>profilingMaximumRate</code> is 15 percent.
+  If no value is specified, the default <code>applicationLaunchSampleRate</code> is 15 percent.
 </div>
 
 {{< tabs >}}
@@ -52,25 +52,25 @@ Android mobile application profiling captures detailed data about your applicati
             ).build()
 
             Datadog.initialize(this, configuration, trackingConsent)
-            
-            // RUM needs to be enabled for Profiling
+
+            // RUM needs to be enabled for Profiling application launch
             val rumConfig = RumConfiguration.Builder(applicationId)
-            .build()
-             Rum.enable(rumConfig)
+                .build()
+            Rum.enable(rumConfig)
 
             // Enable Profiling
             val profilingConfig = ProfilingConfiguration.Builder()
-            .setApplicationLaunchSampleRate() // default is 15%
-            .build.()
+              .setApplicationLaunchSampleRate(15) // default is 15%
+              .build.()
 
-             Profiling.enable(profilingConfig)
+            Profiling.enable(profilingConfig)
         }
     }
-   ```
+  ```
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">The total volume of profiled Android sessions may not match the percentage configured in <code>profilingMaximumRate</code>. This variation results from <a href="https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works">rate limitations</a> within the data collector, including profiling support on older devices and the maximum profiling frequency per device.</div>
+<div class="alert alert-warning">The total volume of profiles may not match the percentage configured in <code>applicationLaunchSampleRate</code>. This variation results from <a href="https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works">rate limitations</a> within the data collector, including profiling support on older devices and the maximum profiling frequency per device.</div>
 
 The [ProfilingManager API][4] also supports disablng rate limiting during debug builds. 
 
@@ -92,5 +92,5 @@ Use the flame graph, thread timeline, and call graph visualizations to analyze t
 [2]: https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/ 
 [3]: http://localhost:1313/real_user_monitoring/application_monitoring/android
 [4]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
-[5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin#time-to-initial-display-and-time-to-full-display 
+[5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin 
 
