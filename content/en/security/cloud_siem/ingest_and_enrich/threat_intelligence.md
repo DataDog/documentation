@@ -90,30 +90,33 @@ File hash indicators require a separate reference table for each hash type: SHA1
 | `intention`              | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | `malicious`                                                               |
 | `source`                 | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following are example CSVs for each hash type:</div>
-
-**SHA256 example:**
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following are example CSVs for each hash type:
+{{< tabs >}}
+{{% tab "SHA256" %}}
 ```
 sha256,additional_data,category,intention,source
 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
-
-**SHA1 example:**
+{{% /tab %}}
+{{% tab "SHA1" %}}
 ```
 sha1,additional_data,category,intention,source
 a1b2c3d4e5f6789012345678901234567890abcd,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 5e884898da28047151d0e56f8dc6292773603d0d,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
-
-**ssdeep example:**
+{{% /tab %}}
+{{% tab "ssdeep" %}}
 ```
 ssdeep,additional_data,category,intention,source
 3:AXGBicFlgVNhBGcL6wCrFQEv:AXGHsNhxLsr2C,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 96:C7Q4LPmPWJwF7qLQd6C8vjF8ULQd6vhLQd6C8vjF:C7Q4LSjKdD8eKdhD8e,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 192:4gHHP2ZJwF0gHHrFqxXgHH8RZJwF:4gHtZy0gHMsxQH,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+{{% /tab %}}
+{{< /tabs >}}
+</div>
 
 #### CSV structure for AWS account ID
 
