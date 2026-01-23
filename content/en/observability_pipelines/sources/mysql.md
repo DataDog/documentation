@@ -1,6 +1,6 @@
 ---
-title: Database Source
-description: Learn how to use the Database source in a logs pipeline.
+title: MySQL Source
+description: Learn how to use the MySQL source in a logs pipeline.
 disable_toc: false
 products:
 - name: Logs
@@ -14,75 +14,70 @@ products:
 
 Databases are often used to store many historical, audit, or operational records. For many legacy, enterprise resource planning (ERP), and IoT-based systems, these databases serve as storage layers for important information. Teams often depend on these records for monitoring, alerting, and creating dashboards in their preferred logging or security tool.
 
-The Observability Pipelines' Database source allows you to connect to your database so you can query and process the data in Observability Pipelines, and route your log events that are stored as database records.
+The Observability Pipelines' MySQL source (includes Amazon RDS and AWS Aurora) allows you to connect to your database so you can query and process the data in Observability Pipelines, and route your log events that are stored as database records.
 
 **Note**: The Observability Pipelines Worker can only execute read-only SQL queries against supported databases.
 
 ### When to use this source
 
-Common scenarios when you might use this source:
+Common scenarios when you might use this source to:
 
-- Periodically extract transaction or access records stored in databases for audit and compliance reporting.
-- Analyze, alert, and build dashboards on event data stored in database systems. For example:
-  - Application logs that are stored in databases: Many legacy, regulated, or IoT devices write records to database tables. These events often contain session activity, device information, and custom application logs. The Database source lets you extract the data you want and ingest it as logs for downstream alerting and investigation.
-  - Operational events and business-critical records: Many organizations store operational events in a database as a system of record. These databases contain data like ERP, billing, order, inventory, ticketing, and fulfillment info. Teams often query tables for dashboards, scheduled alerts, and investigations
-  - Edge device telemetry that gets stored in databases: Some smaller devices write events, such as diagnostics, maintenance, and errors, into SQL tables. For example, a pacemaker syncs periodically and saves the records in a database, which a DevOps team then uses in their logging tool.
-- Pull user or product information stored in databases to assist in troubleshooting issues or investigating threats.
+- Periodically extract transaction or access records stored in MySQL for audit and compliance reporting.
+- Analyze, alert, and build dashboards on event data stored in MySQL. For example:
+  - Application logs: Many legacy, regulated, or IoT devices write records to MySQL tables. These events often contain session activity, device information, and custom application logs. The Database source lets you extract the data you want and ingest it as logs for downstream alerting and investigation.
+  - Operational events and business-critical records: Many organizations store operational events in MySQL as a system of record. These databases contain data like ERP, billing, order, inventory, ticketing, and fulfillment info. Teams often query tables for dashboards, scheduled alerts, and investigations
+  - Edge device telemetry: Some smaller devices write events, such as diagnostics, maintenance, and errors, into SQL tables. For example, a pacemaker syncs periodically and saves the records in MySQL, which a DevOps team then uses in their logging tool.
+- Pull user or product information stored in MySQL to assist in troubleshooting issues or investigating threats.
 
 ## Prerequisites
 
-Before you configure the Database source, complete the following prerequisites to help ensure that credentials, connectivity, and queries are validated before they are used in Observability Pipelines. These steps must be completed using [external tools](#external-tools-for-testing), such as in your database or with third-party tools.
+Before you configure the MySQL source, complete the following prerequisites to help ensure that credentials, connectivity, and queries are validated before they are used in Observability Pipelines. These steps must be completed using [tools](#external-tools-for-testing) external to Observability Pipelines, such as MySQL Workbench or third-party tools.
 
 1. Create a database role for log collection, if you don't already have one. The role must:
     - Only have read-only access, so no permissions to modify or write data.
     - Have permission to execute the target queries used for log collection.
-    - Be scoped to only the databases, schemas, and tables required for your log collection
+    - Be scoped to only the databases, schemas, and tables required for your log collection.
 1. Validate the connection string. The connection string must:
     - Be able to authenticate using the role from the previous step.
     - Be able to successfully connect to the database from the environment in which the Observability Pipelines Worker runs.
     - Use the correct host, port, database name, and authentication mechanism.
     - Be tested prior to configuring it in Observability Pipelines, to avoid runtime failures.
 1. Write, validate, and test SQL queries using either third-party or native database management tools.
-    - All SQL queries must be validated and tested with an external tool prior to configuring it in Observability Pipelines.
+    - All SQL queries must be validated and tested with a tool external to Observability Pipelines and prior to configuring it in Observability Pipelines.
     - Ensure that each query executes successfully using the read-only rule and returns the expected schema.
 
-### External tools for testing
+### External tools for validating queries
 
-Datadog recommends these tools for testing:
+Datadog recommends these tools for validating and testing queries:
 
 - Third-party tools:
   - DBeaver
   - DataGrip
   - TablePlus
   - DbVisualizer
-- Native tools:
-  - For MySQL: MySQL Workbench
-  - For Postgres: psql or pgAdmin
+- Native MySQL tool: MySQL Workbench
 
 ## Set up the source in the pipeline UI
 
-Set up the Database source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 1. Ensure you have completed the [prerequisite steps](#prerequisites).
-1. Select the type of database you want to collect data from:
-    - **MySQL**
-      - Includes AWS Aurora
-    - **Postgres**
 1. Configure the connection between the Observability Pipelines Worker and the database.
     1. Enter the connection string.
-        - **MySQL** connection string format: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
-        - **Postgres** connection string format: `postgresql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
-        - **Note**: Connection strings must be fully validated using external tools before use. See [Prerequisites](#prerequisites) for more information.
+        - Connection string example: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
+        - **Note**: The connection string must be fully validated using a tool external to Observability Pipelines. See [Prerequisites](#prerequisites) for more information.
     1. Set the following parameters for error handling when connecting the Worker to the database.
         1. Enter the connection timeout.
         1. Enter the maximum retry attempts.
 1. Set the SQL query parameters.
   1. Enter the name of your query.
   1. Enter the path to local file containing the validated SQL query.
-      - The SQL query the Worker executes needs to be stored in its own local file.
+      - The SQL query that the Worker executes must be stored in its own local file.
       - See [Incremental query syntax](#incremental-query-syntax) for details about formatting and [Queries](#queries) for additional information.
-      - **Note**: All file paths are made relative to the configuration data directory, which is /var/lib/observability-pipelines-worker/config/ by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+      - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default.
         - For example, if the SQL file path is `/DD_OP_DATA_DIR/config/db_queries/retrieve_incremental_with_start.sql`, enter the path `db_queries/retrieve_incremental_with_start.sql`.
+        - The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+        - See [Advanced Worker Configurations][2] for more information.
 5. Select your query type.
     - **Batch**: The Worker executes the same database query each time and returns all the results specified. This option does not keep track of the rows you queried previously.
       - An example use case: You want to pull the same table of monthly financial statements from a database.
@@ -110,12 +105,12 @@ Set up the Database source and its environment variables when you [set up a pipe
 For incremental querying, SQL queries must have the following to help ensure consistent results.
 
 - A `WHERE <incremental_column> <operation> <placeholder>` clause so that the source on each scheduled run can replace `placeholder` with the checkpoint value, and retrieve the latest results.
-  - `incremental_column`: A column with incremental values. This value must be the same as the column value set in the Database source configuration.
-  - `operation`: Input `>` , `<`, `>=`, or `<=`.
-  - `placeholder`: Input `?` for MySQL and `$1` for Postgres.
-- An `ORDER BY <incremental_column>` clause so that the database returns the rows in a predictable order for the source to retrieve the latest values.
-- An example that uses all the options: `SELECT * FROM orders WHERE order_id > ? ORDER BY order_id LIMIT 500;`
-  - If the last checkpoint value is `7`. This query retrieves all rows where the `order_id` column's value is greater than `7`.
+  - `incremental_column`: A column with incremental values. This value must be the same as the column value set in the MySQL source configuration.
+  - `operation`: Enter `>` , `<`, `>=`, or `<=` base on your use case.
+  - `placeholder`: Enter `?`.
+- An `ORDER BY <incremental_column>` clause so that the database returns the rows in the expected order for the source to retrieve the latest values.
+- This is an example that uses all the options: `SELECT * FROM orders WHERE order_id > ? ORDER BY order_id LIMIT 500;`
+  - If the last checkpoint value is `7`, this query retrieves all rows where the `order_id` column's value is greater than `7`.
 
 ### Incremental columns
 
@@ -126,19 +121,18 @@ Incremental columns are used to track the progress of each new query. The follow
 - `Timestamp`
 - `Datetime`
 
-Datadog recommends using an incremental ID for the incremental column . If you use an identifier that might not be unique, such as timestamps, it could result in data conflicts.
+Datadog recommends using an incremental ID for the incremental column. If you use an identifier that might not be unique, such as timestamps, it could result in data loss or duplicated data. For example:
 
-**Notes**:
 - There could be data loss if you use strict operators, such as `>` or `<`, in your query.
 - There could be duplicated data if you use inclusive operators, such as `>=`.
 
 ### Checkpoint values
 
-Checkpoint values are updated every job run. To monitor the checkpoint value, there are Worker logs that contain the message `Checkpoint updated` and the latest value that was published. If a job fails or the Worker is restarted mid-job or it crashes, the checkpoint value reverts to the start value. To recover the checkpoint value:
+Checkpoint values are updated every job run. To monitor the checkpoint value, there are Worker logs that contain the message `Checkpoint updated` and the latest value that was published. If a job fails or the Worker is restarted mid-job or it crashes, the checkpoint value reverts to the start value. To determine the checkpoint value for a job that failed:
 
 1. Navigate to [Log Explorer][3] and search for Worker logs with the message `Checkpoint updated`.
 1. Check the value found in the latest Worker log to see what the Worker tracked.
-1. Check the log in the destination to which your logs were sent and determine the last value sent.
+1. Check the log in your destination to which your logs were sent and determine the last value sent.
 1. Manually reset the checkpoint value in the Database source in the pipelines UI.
 
 ## Error handling
@@ -174,7 +168,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 
 #### Validate and storing queries
 
-- SQL queries must be tested and validated outside of Observability Pipelines' UI. Datadog recommends using a third-party tool, such as DBeaver, or native SQL manager, such as MySQL Workbench, for testing.
+- SQL queries must be tested and validated outside of Observability Pipelines' UI.See [External tools for validating queries](#external-tools-for-validating-queries).
 - To execute a specific SQL query with Observability Pipelines, you must store the query in a local file for the Worker to read.
 
 #### SQL file requirements
