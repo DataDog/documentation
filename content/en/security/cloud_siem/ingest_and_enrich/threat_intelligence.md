@@ -130,14 +130,14 @@ ssdeep,additional_data,category,intention,source
 
 **Note**: Useful for tracking compromised or suspicious AWS accounts.
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:</div>
-
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 ```
 aws_account_id,additional_data,category,intention,source
 123456789012,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 987654321098,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 555666777888,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+</div>
 
 #### CSV structure for container image name
 
