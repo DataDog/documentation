@@ -13,11 +13,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
-    Dynamic Instrumentation for Go is in limited preview and is not available to all customers.
-    Request access to join the waiting list.<br>
-    <b>Note</b>: <a href="#unsupported-features">Some limitations</a> apply to the preview.
-{{< /beta-callout-private >}}
+{{< partial name="dynamic_instrumentation/beta-callout.html" language="Go" limitations_anchor="unsupported-features" >}}
 
 Dynamic Instrumentation is a feature of Datadog tracing libraries that lets you capture application state at runtime without modifying or redeploying code. This page describes how to enable Dynamic Instrumentation for Go applications.
 
