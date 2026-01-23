@@ -28,25 +28,25 @@
     "request_schema_description": "Datadog API key."
   },
   "ListApplicationKeys": {
-    "description": "Get all application keys available for your Datadog account.",
+    "description": "Get all application keys available for your Datadog account.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Get all application keys"
   },
   "CreateApplicationKey": {
-    "description": "Create an application key with a given name.",
+    "description": "Create an application key with a given name.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Create an application key",
     "request_description": "",
     "request_schema_description": "An application key with its associated metadata."
   },
   "DeleteApplicationKey": {
-    "description": "Delete a given application key.",
+    "description": "Delete a given application key.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Delete an application key"
   },
   "GetApplicationKey": {
-    "description": "Get a given application key.",
+    "description": "Get a given application key.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Get an application key"
   },
   "UpdateApplicationKey": {
-    "description": "Edit an application key name.",
+    "description": "Edit an application key name.\nThis endpoint is disabled for organizations in [One-Time Read mode](https://docs.datadoghq.com/account_management/api-app-keys/#one-time-read-mode).",
     "summary": "Edit an application key",
     "request_description": "",
     "request_schema_description": "An application key with its associated metadata."
@@ -248,7 +248,7 @@
     "summary": "Unmute a host"
   },
   "ListHosts": {
-    "description": "This endpoint allows searching for hosts by name, alias, or tag.\nHosts live within the past 3 hours are included by default.\nRetention is 7 days.\nResults are paginated with a max of 1000 results at a time.\n**Note:** If the host is an Amazon EC2 instance, `id` is replaced with `aws_id` in the response.",
+    "description": "This endpoint allows searching for hosts by name, alias, or tag.\nHosts live within the past 3 hours are included by default.\nRetention is 7 days.\nResults are paginated with a max of 1000 results at a time.\n**Note:** If the host is an Amazon EC2 instance, `id` is replaced with `aws_id` in the response.\n**Note**: To enrich the data returned by this endpoint with security scans, see the new [api/v2/security/scanned-assets-metadata](https://docs.datadoghq.com/api/latest/security-monitoring/#list-scanned-assets-metadata) endpoint.",
     "summary": "Get all hosts for your organization"
   },
   "GetHostTotals": {
@@ -256,43 +256,43 @@
     "summary": "Get the total number of active hosts"
   },
   "DeleteAWSAccount": {
-    "description": "Delete a Datadog-AWS integration matching the specified `account_id` and `role_name parameters`.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** Delete a Datadog-AWS integration matching the specified `account_id` and `role_name parameters`.",
     "summary": "Delete an AWS integration",
     "request_description": "AWS request object",
     "request_schema_description": "List of AWS accounts to delete."
   },
   "ListAWSAccounts": {
-    "description": "List all Datadog-AWS integrations available in your Datadog organization.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** List all Datadog-AWS integrations available in your Datadog organization.",
     "summary": "List all AWS integrations"
   },
   "CreateAWSAccount": {
-    "description": "Create a Datadog-Amazon Web Services integration.\nUsing the `POST` method updates your integration configuration\nby adding your new configuration to the existing one in your Datadog organization.\nA unique AWS Account ID for role based authentication.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** Create a Datadog-Amazon Web Services integration.\nUsing the `POST` method updates your integration configuration\nby adding your new configuration to the existing one in your Datadog organization.\nA unique AWS Account ID for role based authentication.",
     "summary": "Create an AWS integration",
     "request_description": "AWS Request Object",
     "request_schema_description": "Returns the AWS account associated with this integration."
   },
   "UpdateAWSAccount": {
-    "description": "Update a Datadog-Amazon Web Services integration.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** Update a Datadog-Amazon Web Services integration.",
     "summary": "Update an AWS integration",
     "request_description": "AWS request object",
     "request_schema_description": "Returns the AWS account associated with this integration."
   },
   "ListAvailableAWSNamespaces": {
-    "description": "List all namespace rules for a given Datadog-AWS integration. This endpoint takes no arguments.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** List all namespace rules for a given Datadog-AWS integration. This endpoint takes no arguments.",
     "summary": "List namespace rules"
   },
   "DeleteAWSEventBridgeSource": {
-    "description": "Delete an Amazon EventBridge source.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** Delete an Amazon EventBridge source.",
     "summary": "Delete an Amazon EventBridge source",
     "request_description": "Delete the Amazon EventBridge source with the given name, region, and associated AWS account.",
     "request_schema_description": "An object used to delete an EventBridge source."
   },
   "ListAWSEventBridgeSources": {
-    "description": "Get all Amazon EventBridge sources.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** Get all Amazon EventBridge sources.",
     "summary": "Get all Amazon EventBridge sources"
   },
   "CreateAWSEventBridgeSource": {
-    "description": "Create an Amazon EventBridge source.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** Create an Amazon EventBridge source.",
     "summary": "Create an Amazon EventBridge source",
     "request_description": "Create an Amazon EventBridge source for an AWS account with a given name and region.",
     "request_schema_description": "An object used to create an EventBridge source."
@@ -314,7 +314,7 @@
     "request_schema_description": "The objects used to set an AWS tag filter."
   },
   "CreateNewAWSExternalID": {
-    "description": "Generate a new AWS external ID for a given AWS account ID and role name pair.",
+    "description": "**This endpoint is deprecated - use the V2 endpoints instead.** Generate a new AWS external ID for a given AWS account ID and role name pair.",
     "summary": "Generate a new external ID",
     "request_description": "Your Datadog role delegation name.\nFor more information about your AWS account Role name,\nsee the [Datadog AWS integration configuration info](https://docs.datadoghq.com/integrations/amazon_web_services/#setup).",
     "request_schema_description": "Returns the AWS account associated with this integration."
@@ -342,7 +342,7 @@
     "request_schema_description": "AWS account ID and Lambda ARN."
   },
   "ListAWSLogsServices": {
-    "description": "Get the list of current AWS services that Datadog offers automatic log collection. Use returned service IDs with the services parameter for the Enable an AWS service log collection API endpoint.",
+    "description": "**This endpoint is deprecated - use the V2 endpoint instead.** Get the list of current AWS services that Datadog offers automatic log collection. Use returned service IDs with the services parameter for the Enable an AWS service log collection API endpoint.",
     "summary": "Get list of AWS log ready services"
   },
   "EnableAWSLogServices": {
@@ -726,7 +726,7 @@
     "summary": "Query timeseries points"
   },
   "ListMetrics": {
-    "description": "Search for metrics from the last 24 hours in Datadog.",
+    "description": "**Note**: This endpoint is deprecated. Use `/api/v2/metrics` instead.\n\nSearch for metrics from the last 24 hours in Datadog.",
     "summary": "Search metrics"
   },
   "AddSecurityMonitoringSignalToIncident": {
@@ -1012,28 +1012,28 @@
     "request_schema_description": "Details of the global variable to create."
   },
   "ListHostTags": {
-    "description": "Return a mapping of tags to hosts for your whole infrastructure.",
-    "summary": "Get Tags"
+    "description": "Returns a mapping of tags to hosts. For each tag, the response returns a list of host names that contain this tag. There is a restriction of 10k total host names from the org that can be attached to tags and returned.",
+    "summary": "Get All Host Tags"
   },
   "DeleteHostTags": {
-    "description": "This endpoint allows you to remove all user-assigned tags\nfor a single host.",
+    "description": "This endpoint allows you to remove all tags\nfor a single host. If no source is specified, only deletes from the source \"User\".",
     "summary": "Remove host tags"
   },
   "GetHostTags": {
     "description": "Return the list of tags that apply to a given host.",
-    "summary": "Get host tags"
+    "summary": "Get Host Tags"
   },
   "CreateHostTags": {
-    "description": "This endpoint allows you to add new tags to a host,\noptionally specifying where these tags come from.",
+    "description": "This endpoint allows you to add new tags to a host,\noptionally specifying what source these tags come from. If tags already exist, appends new tags to the tag list. If no source is specified, defaults to \"user\".",
     "summary": "Add tags to a host",
     "request_description": "Update host tags request body.",
-    "request_schema_description": "Set of tags to associate with your host."
+    "request_schema_description": "Host name and an array of its tags"
   },
   "UpdateHostTags": {
     "description": "This endpoint allows you to update/replace all tags in\nan integration source with those supplied in the request.",
     "summary": "Update host tags",
     "request_description": "Add tags to host",
-    "request_schema_description": "Set of tags to associate with your host."
+    "request_schema_description": "Host name and an array of its tags"
   },
   "GetUsageAnalyzedLogs": {
     "description": "Get hourly usage for analyzed logs (Security Monitoring).\n**Note:** This endpoint has been deprecated. Hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
@@ -1076,7 +1076,7 @@
     "summary": "Get hourly usage for hosts and containers"
   },
   "GetHourlyUsageAttribution": {
-    "description": "Get hourly usage attribution. Multi-region data is available starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
+    "description": "Get hourly usage attribution. Multi-region data is available starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\nThe following values have been **deprecated**:\n    `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`, `llm_observability_usage`, `llm_observability_percentage`.",
     "summary": "Get hourly usage attribution"
   },
   "GetIncidentManagement": {

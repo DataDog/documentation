@@ -10,19 +10,25 @@ further_reading:
   text: "Optimize and troubleshoot AI infrastructure with Datadog GPU Monitoring"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+    GPU Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring/" >}}
 GPU Monitoring is in Preview. To join the preview, click <strong>Request Access</strong> and complete the form.
-{{< /callout >}} 
+{{< /callout >}}
 
 ## Overview
-Datadog’s [GPU Monitoring][1] provides a centralized view into GPU fleet health, cost, and performance. GPU Monitoring enables teams to make better provisioning decisions, troubleshoot failed workloads, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). You can access insights into your GPU fleet by deploying the Datadog Agent.
+Datadog's [GPU Monitoring][1] provides a centralized view into GPU fleet health, cost, and performance. GPU Monitoring enables teams to make better provisioning decisions, troubleshoot failed workloads, and eliminate idle GPU costs without having to manually set up individual vendor tools (like NVIDIA's DCGM). You can access insights into your GPU fleet by deploying the Datadog Agent.
 
 For setup instructions, see [Set up GPU Monitoring][2].
 
 ### Make data-driven GPU allocation and provisioning decisions
 With visibility into GPU utilization by host, node, or pod, you can identify hotspots or underutilization of expensive GPU infrastructure.
 
-{{< img src="gpu_monitoring/funnel.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
+{{< img src="gpu_monitoring/funnel-3.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
 
 ### Troubleshoot failed workloads due to resource contention
 Understand your current device availability and forecast how many devices are needed for certain teams or workloads to avoid failed workloads from resource contention.

@@ -41,7 +41,7 @@ All SDK products (RUM, Trace, Logs, Session Replay, and so on) remain modular an
 {{% tab "Android" %}}
 
 <div class="alert alert-danger">
-We are following Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is `23`.
+Datadog follows Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is <code>23</code>.
 </div>
 
 **Requirements**:
@@ -121,7 +121,7 @@ In Xcode, you **must** link the following frameworks:
 
 Then, you can select the modules you want to use:
   ```
-  DatadogCrashReporting.xcframework + CrashReporter.xcframework
+  DatadogCrashReporting.xcframework
   DatadogLogs.xcframework
   DatadogRUM.xcframework
   DatadogSessionReplay.xcframework
@@ -153,6 +153,16 @@ API changes:
 
 We made minor improvements to the RUM modules. They don't require significant changes to your code, but it's worth checking if you can refactor some redundant parameters.
 
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(`https://example.com/rum/upload`), not just the hostname:
+```kotlin
+Rum.enable(
+  RumConfiguration.Builder(...)
+      .useCustomEndpoint("https://example.com/rum/upload")
+      .build()
+)
+```
+
 API changes:
 
 | `2.x`                                                                               | `3.0`                                                                                |
@@ -171,7 +181,27 @@ API changes:
 
 The Logs product no longer reports fatal errors. To enable Error Tracking for crashes, Crash Reporting must be enabled in conjunction with RUM.
 
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(`https://example.com/logs/upload`), not just the hostname:
+```kotlin
+Logs.enable(
+  LogsConfiguration.Builder()
+      .useCustomEndpoint("https://example.com/logs/upload")
+      .build()
+)
+```
+
 ### Trace
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(e.g.: `https://example.com/trace/upload`), not just the hostname, i.e:
+```kotlin
+Trace.enable(
+  TraceConfiguration.Builder()
+      .useCustomEndpoint(`https://example.com/trace/upload`)
+      .build()
+)
+```
 
 The [`Open Tracing`](https://opentracing.io/) project has been marked as archived and it is no longer supported. The `Open Tracing` dependencies on has been removed from SDK v3.
 
@@ -290,6 +320,20 @@ API changes:
 | `DatadogInterceptor(String?,List<String>,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>)`                           | Use `DatadogInterceptor.Builder()` instead. |
 | `DatadogInterceptor(String?,TracedRequestListener,RumResourceAttributesProvider,Sampler<Span>) `                                       | Use `DatadogInterceptor.Builder()` instead. |
 
+
+### Session Replay
+
+The URL provided in the `useCustomEndpoint` method should be the full endpoint URL
+(e.g.: `https://example.com/session_replay/upload`), not just the hostname, i.e:
+
+```kotlin
+SessionReplay.enable(
+  SessionReplayConfiguration.Builder(...)
+      .useCustomEndpoint("https://example.com/session_replay/upload")
+      .build()
+)
+```
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -388,7 +432,7 @@ Legacy delegate types have been replaced by a unified instrumentation API:
 |`DDURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 |`DDNSURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 
-[1]: /real_user_monitoring/session_replay/mobile/privacy_options?platform=ios
+[1]: /session_replay/mobile/privacy_options?platform=ios
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -403,7 +447,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][2] on Android and iOS applications.
 
-[2]: /real_user_monitoring/session_replay/mobile/
+[2]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -414,7 +458,7 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][3] on Android and iOS applications.
 
-[3]: /real_user_monitoring/session_replay/mobile/
+[3]: /session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -943,7 +987,7 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][6].
 
-[6]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+[6]: /session_replay/mobile/setup_and_configuration/?tab=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -1138,7 +1182,7 @@ WebViewTracking.enable(webView: webView)
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][7].
 
-[7]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+[7]: /session_replay/mobile/setup_and_configuration/?tab=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}

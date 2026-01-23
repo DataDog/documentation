@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: "https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3"
+  tag: "Video"
+  text: "Datadog Tips & Tricks: Use Grok parsing to extract fields from logs"
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
   tag: "FAQ"
   text: "How to investigate a log parsing issue?"
@@ -57,7 +60,12 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 After processing, the following structured log is generated:
 
-{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1" style="width:80%;">}}
+```json
+{
+  "user": "john",
+  "date": 1575590400000
+}
+```
 
 **Note**:
 
@@ -80,7 +88,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 {{< tabs >}}
 {{% tab "Matchers" %}}
 
-`date("pattern"[, "timezoneId"[, "localeId"]])` 
+`date("pattern"[, "timezoneId"[, "localeId"]])`
 : Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
 
 `regex("pattern")`
@@ -216,21 +224,19 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 
 ## Advanced settings
 
-At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
-
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" style="width:80%;">}}
+Use the **Advanced Settings** section at the bottom of your Grok processor to parse a specific attribute instead of the default `message` attribute, or to define helper rules that reuse common patterns across multiple parsing rules.
 
 ### Parsing a specific text attribute
 
 Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
-For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could parse this log as follows:
+For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. Extract from `command.line` to parse its contents and create structured attributes from the command data.
 
-{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line" style="width:80%;">}}
+{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="Advanced Settings with Extract from command.line attribute example" style="width:80%;">}}
 
-### Using helper rules to factorize multiple parsing rules
+### Using helper rules to reuse common patterns
 
-Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules let you reuse common Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured log:
 
@@ -251,8 +257,6 @@ user %{word:user.name} id:%{integer:user.id}
 connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
-
-{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" style="width:80%;">}}
 
 ## Examples
 
@@ -292,12 +296,18 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" style="width:80%;">}}
-
 You don't need to specify the name of your parameters as they are already contained in the log.
 If you add an **extract** attribute `my_attribute` in your rule pattern you will see:
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" style="width:80%;">}}
+```json
+{
+  "my_attribute": {
+    "user": "john",
+    "id": 123,
+    "action": "click"
+  }
+}
+```
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
 
@@ -313,8 +323,6 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" style="width:80%;" >}}
-
 If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the allowlist in the parsing rule:
 
 **Log:**
@@ -328,8 +336,6 @@ url=https://app.datadoghq.com/event/stream user=john
 ```text
 rule %{data::keyvalue("=","/:")}
 ```
-
-{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="Key value allowlist" style="width:80%;" >}}
 
 Other examples:
 
@@ -396,7 +402,7 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 The supported format for timezones are:
 
 * `GMT`, `UTC`, `UT` or `Z`
-* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive.
+* `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`. The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
 * Timezone IDs pulled from the TZ database. For more information, see [TZ database names][2].
 
@@ -420,11 +426,25 @@ Note that "id" is an integer and not a string.
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Results**:
-
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4" style="width:80%;" >}}
-
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" style="width:80%;" >}}
+**Results**:<br>
+`%{integer:user.id}`
+```json
+{
+  "user": {
+    "id": 12345
+  },
+  "connect_date": 1510099200000
+}
+```
+`%{word:user.firstname}`
+```json
+{
+  "user": {
+    "firstname": "john"
+  },
+  "connect_date": 1510099200000
+}
+```
 
 ### Optional attribute
 
@@ -434,6 +454,7 @@ Some logs contain values that only appear part of the time. In this case, make a
 
 ```text
 john 1234 connected on 11/08/2017
+john connected on 11/08/2017
 ```
 
 **Rule**:
@@ -444,9 +465,28 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: A rule will not match if you include a space after the first word in the optional section.
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" style="width:80%;" >}}
+**Result**:<br>
+`(%{integer:user.id} )?`
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" style="width:80%;" >}}
+```json
+{
+  "user": {
+    "firstname": "john",
+    "id": 1234
+  },
+  "connect_date": 1510099200000
+}
+```
+
+`%{word:user.firstname} (%{integer:user.id} )?`
+```json
+{
+  "user": {
+    "firstname": "john",
+  },
+  "connect_date": 1510099200000
+}
+```
 
 ### Nested JSON
 
@@ -464,7 +504,17 @@ Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":20
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
-{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" style="width:80%;" >}}
+**Result**:
+```json
+{
+  "timestamp": 1567761218000,
+  "vm": "vagrant",
+  "app": "program",
+  "logger": {
+    "thread_id": 123
+  }
+}
+```
 
 ### Regex
 
@@ -480,7 +530,15 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
+**Result**:
+```json
+{
+  "user": {
+    "firstname": "john",
+    "id": "1a2b3c4"
+  }
+}
+```
 
 ### List to array
 
@@ -498,7 +556,17 @@ Users [John, Oliver, Marc, Tom] have been added to the database
 myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
-{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
+**Result**:
+```json
+{
+  "users": [
+    "John",
+    " Oliver",
+    " Marc",
+    " Tom"
+  ]
+}
+```
 
 **Log**:
 

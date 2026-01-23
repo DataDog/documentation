@@ -173,7 +173,7 @@ terraform destroy{{< /code-block >}}
 
    이제 두 서비스 모두에서 자동 계측을 사용할 수 있습니다.
 
-   <div class="alert alert-danger"><strong>참고</strong>: 이 샘플 명령의 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있습니다. 실제 환경에서 어떤 플래그를 사용해야 하는지 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
+   <div class="alert alert-warning">이 샘플 명령의 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있습니다. 실제 환경에서 어떤 플래그를 사용해야 하는지 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요</div>.
 
 3. 자동 계측은 편리하지만, 때로는 더 세분화된 스팬이 필요할 수 있습니다. Datadog의 Java DD Trace API를 사용하면 어노테이션이나 코드를 사용하여 코드 내에서 스팬을 지정할 수 있습니다. 코드에 어노테이션을 추가하여 샘플 메서드를 추적해 보세요.
 

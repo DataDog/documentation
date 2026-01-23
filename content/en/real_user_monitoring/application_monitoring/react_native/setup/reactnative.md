@@ -9,6 +9,7 @@ aliases:
     - /real_user_monitoring/reactnative/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
     - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
+    - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/
 further_reading:
 - link: /real_user_monitoring/application_monitoring/react_native/advanced_configuration
   tag: Documentation
@@ -39,6 +40,12 @@ The React Native SDK supports the following services:
 - [Expo][5]. For more information, see the [Expo documentation][6].
 
 ## Setup
+
+Follow these instructions to manually add and configure the RUM SDK in your React Native application.
+
+### Manual setup
+
+To send RUM data from your React Native application to Datadog, complete the following steps.
 
 To install with NPM, run:
 
@@ -423,7 +430,7 @@ const config = new DatadogProviderConfiguration(
 
 ## New architecture support
 
-The [React Native new architecture][11] is supported by the React Native SDK in version `>=1.8.0`.
+The [React Native new architecture][14] is supported by the React Native SDK in version `>=1.8.0`.
 
 The minimum supported React Native version for the new architecture is `0.71`.
 
@@ -476,3 +483,4 @@ end
 [11]: https://source.android.com/security/app-sandbox
 [12]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [13]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
+[14]: https://reactnative.dev/architecture/landing-page

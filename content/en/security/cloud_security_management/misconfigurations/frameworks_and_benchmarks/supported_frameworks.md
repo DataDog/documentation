@@ -18,12 +18,18 @@ further_reading:
   text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
+Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks.
+
+{{% cloud-sec-cloud-infra %}}
 
 | Framework                                       | Supported Versions             | Framework Tag                       | Rule Type                |
 |-------------------------------------------------|--------------------------------|-------------------------------------|--------------------------|
-| [AICPA SOC 2][7]                                |                                | `soc-2`                             | Cloud                    |
+| [AICPA SOC 2][7]                                | 2017 TSC w/ rev POF - 2022     | `soc-2`                             | Cloud                    |
+| [Australia APRA CPS 234][39]                    | 2019                           | `cps234`                            | Cloud                    |
+| [Australia ASD Essential 8][40]                 | 2024                           | `essential8`                        | Cloud                    |
 | [AWS Foundational Security Best Practices][13]  | v1.0.0                         | `aws-fsbp`                          | Cloud                    |
+| [Brazil LGPD][44]                               | 2018                           | `lgpd`                              | Cloud                    |
+| [California CCPA/CPRA][38]                      | Nov 2022                       | `ccpa`                              | Cloud                    |
 | [CIS AlmaLinux 9][16]                           | v2.0.0                         | `cis-almalinux9`                    | Infrastructure           |
 | [CIS Amazon Linux 2023][25]                     | v1.0.0                         | `cis-al2023`                        | Infrastructure           |
 | [CIS Amazon Linux 2][25]                        | v3.0.0                         | `cis-amzn2`                         | Infrastructure           |
@@ -36,15 +42,20 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [CIS Kubernetes (EKS) Benchmark**][5]           | v1.7.0, v1.4.0                 | `cis-eks`                           | Cloud and Infrastructure |
 | [CIS Kubernetes Benchmark**][5]                 | v1.9.0                         | `cis-kubernetes`                    | Infrastructure           |
 | [CIS Red Hat Linux 7][24]                       | v3.1.1                         | `cis-rhel7`                         | Infrastructure           |
-| [CIS Red Hat Linux 8][24]                       | v2.0.0                         | `cis-rhel8`                         | Infrastructure           |
-| [CIS Red Hat Linux 9][24]                       | v1.0.0                         | `cis-rhel9`                         | Infrastructure           |
+| [CIS Red Hat Linux 8][24]                       | v3.0.0                         | `cis-rhel8`                         | Infrastructure           |
+| [CIS Red Hat Linux 9][24]                       | v2.0.0                         | `cis-rhel9`                         | Infrastructure           |
 | [CIS Ubuntu 20.04][23]                          | v1.0.0                         | `cis-ubuntu2004`                    | Infrastructure           |
 | [CIS Ubuntu 22.04][23]                          | v2.0.0                         | `cis-ubuntu2204`                    | Infrastructure           |
+| [CIS Ubuntu 24.04][23]                          | v1.0.0                         | `cis-ubuntu2404`                    | Infrastructure           |
+| [CMMC][37]                                      | v2.0                           | `cmmc-level-2`                      | Cloud                    |
 | [Digital Operational Resilience Act (DORA)][35] | C(2024) 1532                   | `dora`                              | Cloud                    |
 | [Essential Cloud Security Controls][33]         | v2                             | `essential-cloud-security-controls` | Cloud                    |
+| [EU Cyber Resilience Act][43]                   | 2024                           | `cyber-resilience-act`              | Cloud                    |
 | [FedRAMP High][36] (Preview)                    | v5                             | `fedramp-high`                      | Cloud                    |
-| [GDPR][10]                                      |                                | `gdpr`                              | Cloud                    |
-| [HIPAA][9]                                      |                                | `hipaa`                             | Cloud                    |
+| [FedRAMP Moderate][36] (Preview)                | v5                             | `fedramp-moderate`                  | Cloud                    |
+| [FedRAMP Low][36] (Preview)                     | v5                             | `fedramp-low`                       | Cloud                    |
+| [GDPR][10]                                      | 2016/679                       | `gdpr`                              | Cloud                    |
+| [HIPAA][9]                                      | 800-66-r2                      | `hipaa`                             | Cloud                    |
 | [ISO/IEC 27001][8]                              | 2022, 2013                     | `iso-27001`                         | Cloud                    |
 | [NIS2 Directive (EU)][14]                       | 2022/2555                      | `nis2`                              | Cloud                    |
 | [NIST 800-171][31]                              | v2                             | `nist-800-171`                      | Cloud                    |
@@ -52,6 +63,8 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [NIST AI Risk Management Framework][15]         | v1.0                           | `nist-ai-rmf`                       | Cloud                    |
 | [NIST Cybersecurity Framework][32]              | v2.0, v1.1                     | `nist-csf`                          | Cloud                    |
 | [PCI DSS][6]                                    | v4.0                           | `pci-dss`                           | Cloud                    |
+| [UK Cyber Essentials][42]                       | 2024                           | `cyber-essentials`                  | Cloud                    |
+| [Singapore MAS TRM][41]                         | 2021                           | `mas-trm`                           | Cloud                    |
 
 *To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [CloudTrail logs to Datadog][12].
 
@@ -94,3 +107,11 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 [34]: https://www.cisecurity.org/benchmark/kubernetes
 [35]: https://www.eiopa.europa.eu/digital-operational-resilience-act-dora_en
 [36]: https://www.fedramp.gov/
+[37]: https://dowcio.war.gov/CMMC/About/
+[38]: https://oag.ca.gov/privacy/ccpa
+[39]: https://www.apra.gov.au/sites/default/files/cps_234_july_2019_for_public_release.pdf
+[40]: https://www.cyber.gov.au/business-government/asds-cyber-security-frameworks/essential-eight
+[41]: https://www.mas.gov.sg/regulation/guidelines/technology-risk-management-guidelines
+[42]: https://www.ncsc.gov.uk/cyberessentials/overview
+[43]: https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act
+[44]: https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/lgpd-en-lei-no-13-709-capa.pdf

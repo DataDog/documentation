@@ -64,7 +64,8 @@ See also [DD_APM_TRACING_ENABLED][21].
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
 **Default**: `null`<br>
-Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`
+Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`<br>
+**Note**: Don't rely on `dd.trace.config` as the only mechanism to enable or disable SDK-dependent products (for example, Profiler and Dynamic Instrumentation). Instead, use the corresponding system properties or environment variables (or `application_monitoring.yaml` for Single Step Instrumentation). 
 
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
@@ -210,7 +211,8 @@ When `true`, debug mode for the Datadog Java Tracer is enabled.
 `datadog.slf4j.simpleLogger.jsonEnabled`
 : **Environment Variable**: Not available<br>
 **Default**: `false`<br>
-When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.
+When `true`, Datadog Java tracer logs are written in JSON. Available for versions 1.48.0+.<br>
+**Note**: This setting is specific to the embedded SLF4J simple logger and does not support environment variables. `dd.log.format.json` is the preferred configuration option.
 
 `dd.trace.servlet.principal.enabled`
 : **Environment Variable**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
@@ -342,15 +344,15 @@ For more information, see [Enabling AAP for Java][19].
 **Default**: `true`<br>
 By default, query string parameters and fragments are added to the `http.url` tag on web client spans. Set to `false` to prevent the collection of this data. 
 
-`dd.http.client.error.statuses`
-: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
+`dd.trace.http.client.error.statuses`
+: **Environment Variable**: `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`<br>
 **Default**: `400-499`<br>
-A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
+A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.trace.http.client.error.statuses=400-403,405,410-499`
 
-`dd.http.server.error.statuses`
-: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
+`dd.trace.http.server.error.statuses`
+: **Environment Variable**: `DD_TRACE_HTTP_SERVER_ERROR_STATUSES`<br>
 **Default**: `500-599`<br>
-A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
+A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.trace.http.server.error.statuses=500,502-599`
 
 `dd.grpc.client.error.statuses`
 : **Environment Variable**: `DD_GRPC_CLIENT_ERROR_STATUSES`<br>
@@ -363,6 +365,18 @@ A range of errors can be accepted. By default, gRPC status codes 1 to 16 are rep
 A range of errors can be accepted. By default, gRPC status codes 2 to 16 are reported as errors for gRPC servers. This configuration overrides that. Ex. `dd.grpc.server.error.statuses=2-4,7-10`
 
 ### Logs
+
+`dd.log.level`
+: **Environment Variable**: `DD_LOG_LEVEL`<br>
+**Default**: `INFO`<br>
+Sets the internal log level for the Datadog Java Tracer. Valid values: `DEBUG`, `INFO`, `WARN`, `ERROR`.<br>
+Available since version 1.36.0
+
+`dd.log.format.json`
+: **Environment Variable**: `DD_LOG_FORMAT_JSON`<br>
+**Default**: `false`<br>
+When `true`, outputs Datadog Java Tracer logs in a JSON format compatible with the Datadog Logs UI.<br>
+Available since version 1.58.0
 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>

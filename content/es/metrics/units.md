@@ -25,9 +25,13 @@ Por ejemplo, si tienes un punto de datos que es 3.000.000.000:
 * Si no has especificado una unidad para este punto de datos, aparecerá "3G".
 * Si has especificado que este punto de datos está en bytes, aparecerá "3GB".
 
-Las unidades también se muestran en la parte inferior de las gráficas de timeboard, y las descripciones de métricas están disponibles al seleccionar **Metrics Info** del menú desplegable:
+Haz clic en el botón de pantalla completa situado en la esquina superior derecha del gráfico para ver las unidades que aparecen en la parte inferior:
 
-{{< img src="metrics/units/annotated_ops.png" alt="Operaciones anotadas" style="width:100%;">}}
+{{< img src="metrics/units/metrics_units.png" alt="Las unidades de un gráfico de métricas en el modo pantalla completa" style="width:100%;">}}
+
+En el gráfico de una métrica, haz clic en el menú contextual (tres puntos verticales) para encontrar la opción **Metrics info** (Información de la métrica). Esto abre un panel con una descripción de la métrica. Al hacer clic en el nombre de la métrica en este panel, se abre la métrica en la página del resumen de métricas para su posterior análisis o edición.
+
+{{< img src="metrics/units/metrics_info.png" alt="La opción Información de métricas en el menú de contexto ampliado (tres puntos verticales)" style="width:100%;">}}
 
 Para cambiar una unidad de métrica, ve a la página de [resumen de métricas][1] y selecciona una métrica. Haz clic en **Edit** en **Metadata** y selecciona una unidad, como `bit` o `byte` del menú desplegable.
 

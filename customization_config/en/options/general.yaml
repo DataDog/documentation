@@ -256,6 +256,9 @@ options:
 - label: Maven
   id: maven
 
+- label: Metrics
+  id: metrics
+
 - label: MongoDB
   id: mongo_db
 
@@ -343,6 +346,9 @@ options:
 - label: Ruby
   id: ruby
 
+- label: Rust
+  id: rust
+
 - label: Sensitive Data Scanner
   id: sensitive_data_scanner
 
@@ -390,6 +396,9 @@ options:
 
 - label: TOML
   id: toml
+
+- label: Traces
+  id: traces
 
 - label: Wget
   id: wget

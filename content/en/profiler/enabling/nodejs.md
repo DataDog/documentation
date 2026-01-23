@@ -27,6 +27,8 @@ The Datadog Profiler requires at least Node.js 18.
 
 Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][8].
 
+Continuous Profiler support is in Preview for Google Cloud Run.
+
 ## Installation
 
 To begin profiling applications:
@@ -74,9 +76,9 @@ const tracer = require('dd-trace/init')
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Optional: Set up [Source Code Integration][4].
+4. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-5. A minute or two after starting your Node.js application, your profiles will appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
+5. A couple of minutes after you start your application, your profiles appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
 
 ## Not sure what to do next?
 

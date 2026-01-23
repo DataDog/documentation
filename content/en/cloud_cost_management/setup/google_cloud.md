@@ -28,6 +28,8 @@ To use Google Cloud Cost Management in Datadog, follow these steps:
 
 ## Setup
 
+You can setup using the [API][18], [Terraform][19], or directly in Datadog by following the instructions below.
+
 ### Configure the Google Cloud Platform integration
 Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
@@ -135,6 +137,12 @@ Continue to follow the steps indicated in [Setup & Configuration][3].
 
 **Note**: Data can take 48 to 72 hours after setup to stabilize in Datadog.
 
+### Getting historical data
+
+Newly created BigQuery billing export datasets only contain the most recent 2 months of data. It can take a day or two for this data to backfill in BigQuery. Datadog automatically ingests up to 15 months of available historical cost data once it appears in the BigQuery table.
+
+Google Cloud does not provide a process for backfilling additional historical data beyond the 2 months automatically included when the BigQuery export is first created.
+
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
@@ -209,3 +217,5 @@ The following out-of-the-box tags are available:
 [15]: /cloud_cost_management/setup/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage
 [17]: /cloud_cost_management/tags
+[18]: /api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
+[19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config

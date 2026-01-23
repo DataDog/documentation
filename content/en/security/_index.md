@@ -78,6 +78,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
     tag: "Blog"
     text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
+  - link: "https://www.datadoghq.com/blog/cloud-security-roundup-2025"
+    tag: "Blog"
+    text: "2025 cloud security roundup: How attackers abused identities, supply chains, and AI"
 cascade:
     algolia:
         rank: 70
@@ -101,7 +104,7 @@ To learn more, check out the [30-second Product Guided Tour][14].
 
 [Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-siem/) to see more.
 
-{{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
+{{< img src="security/security_monitoring/cloud_siem_overview_2025.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
 ## Code Security
 
@@ -148,9 +151,9 @@ Datadog [App and API Protection (AAP)][1] provides observability into applicatio
 
 [Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also scan for sensitive information within your cloud storage resources. 
 
-After you [set up Sensitive Data Scanner][25], use the Summary page to see details of sensitive data issues that have been identified, so that you can triage, investigate, and remediate the issues.
+After you [set up Sensitive Data Scanner][25], use the Findings page to see details of sensitive data findings that have been identified, so that you can triage, investigate, and remediate the findings.
 
-{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
 
 ## Further Reading
 

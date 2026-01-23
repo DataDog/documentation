@@ -20,13 +20,85 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-## Setup
+{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
+Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+{{< /callout >}}
 
-If your application is deployed as a container image, use the _Container Image_ method.
+## Setup
 
 **Note**: Datadog recommends that you use Go tracer v1.73.1 for instrumenting AWS Lambda functions. Go tracer v2 is not supported.
 
 {{< tabs >}}
+{{% tab "Datadog UI" %}}
+You can instrument your Go AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+
+For more information, see [Remote instrumentation for AWS Lambda][1].
+
+[1]: /serverless/aws_lambda/remote_instrumentation
+[2]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+{{% /tab %}}
+{{% tab "Datadog CLI" %}}
+
+The Datadog CLI modifies existing Lambda functions' configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
+
+1. Install the Datadog CLI client
+
+    ```sh
+    npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
+    ```
+
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines _after_ your normal deployment.
+
+    ```sh
+    datadog-ci lambda instrument -i
+    ```
+
+3. Configure the AWS credentials
+
+    The Datadog CLI requires access to the AWS Lambda service and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
+
+4. Configure the Datadog site
+
+    ```sh
+    export DATADOG_SITE="<DATADOG_SITE>"
+    ```
+
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+
+5. Configure the Datadog API key
+
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security and easy rotation. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
+
+    ```sh
+    export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
+    ```
+
+    For quick testing purposes, you can also set the Datadog API key in plaintext:
+
+    ```sh
+    export DATADOG_API_KEY="<DATADOG_API_KEY>"
+    ```
+
+6. Instrument your Lambda functions
+
+    **Note**: Instrument your Lambda functions in a dev or staging environment first! Should the instrumentation result be unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+
+    To instrument your Lambda functions, run the following command.
+
+    ```sh
+    datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    To fill in the placeholders:
+    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
+    - Replace `<aws_region>` with the AWS region name.
+
+    Additional parameters can be found in the [CLI documentation][2].
+
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+{{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
 The [Datadog Serverless Plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
@@ -59,6 +131,55 @@ For more information and additional settings, see the [plugin documentation][1].
 [3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+
+1. Install the Datadog CloudFormation macro
+
+    Run the following command with your [AWS credentials][3] to deploy a CloudFormation stack that installs the macro AWS resource. You only need to install the macro **once** for a given region in your account. Replace `create-stack` with `update-stack` to update the macro to the latest version.
+
+    ```sh
+    aws cloudformation create-stack \
+      --stack-name datadog-serverless-macro \
+      --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+      --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+    ```
+
+    The macro is now deployed and ready to use.
+
+2. Instrument your Lambda functions
+
+    Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your `template.yml` file for SAM.
+
+    ```yaml
+    Transform:
+      - AWS::Serverless-2016-10-31
+      - Name: DatadogServerless
+        Parameters:
+          stackName: !Ref "AWS::StackName"
+          extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
+          site: "<DATADOG_SITE>"
+          apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
+    ```
+
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+
+    More information and additional parameters can be found in the [macro documentation][1].
+
+
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
+[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="go" >}}
+{{% /tab %}}
+
 {{% tab "Container Image" %}}
 
 1. Install the Datadog Lambda Extension
@@ -199,7 +320,7 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Install the Datadog Lambda library
 
 ```
-go get github.com/DataDog/datadog-lambda-go
+go get github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2
 ```
 
 ### Update your Lambda function code
@@ -212,11 +333,11 @@ import (
 	"net/http"
 	"time"
 
-  ddlambda "github.com/DataDog/datadog-lambda-go"
+  ddlambda "github.com/DataDog/dd-trace-go/contrib/aws/datadog-lambda-go/v2"
   "github.com/aws/aws-lambda-go/events"
   "github.com/aws/aws-lambda-go/lambda"
-  httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  httptrace "github.com/DataDog/dd-trace-go/contrib/net/http/v2"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -228,7 +349,7 @@ func myHandler(ctx context.Context, _ events.APIGatewayProxyRequest) (string, er
 	// Trace an HTTP request
 	req, _ := http.NewRequestWithContext(ctx, "GET", "https://www.datadoghq.com", nil)
 	client := http.Client{}
-	client = *httptrace.WrapClient(&client)
+	client = httptrace.WrapClient(&client)
 	client.Do(req)
 
 	// Submit a custom metric

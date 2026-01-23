@@ -44,8 +44,7 @@ Replays collected through the [force collection][1] mechanism are kept by the de
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-session-filter.png" alt="When force collection is enabled, it is positioned first in the list of retention filters." style="width:90%" >}}
 
-**Note**: Though our mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by our browser SDK are kept by default.
-
+**Note**: Though Datadog's mobile SDKs also provide APIs to conditionally start and stop the recording (instead of relying on a flat sample rate), only the replays that are force-recorded by the Browser SDK are retained by default.
 
 ## Creating a retention filter
 
@@ -96,6 +95,62 @@ Use the toggle to the right of the filter to disable or enable it.
 
 Drag and drop filters to reorder filters to their new position.
 
+## Excluding sessions using retention filters
+
+RUM without Limits uses retention filters to specify which sessions to keep, rather than which to exclude. You cannot set a retention percentage to 0% (the default is 1%). Additionally, setting low retention percentages is not an effective exclusion strategy because sessions may still be retained by other filters in your configuration.
+
+To ensure sessions from a particular environment, application version, device type, or other criteria are not retained, explicitly add exclusions **inside the query of ALL OF YOUR FILTERS**. For example:
+
+- Adding `-version:(1* OR 2*)` to all retention filters ensures you never keep events from older versions 1 and 2 of your application.
+- Adding `-@device.type:Bot` to all retention filters excludes search engine crawlers and other self-declared bots.
+- Adding `-@geo.country:"South Korea"` to all retention filters excludes all sessions from South Korea.
+
+For example, to exclude sessions from South Korea while retaining all other sessions, create a filter with the query `-@geo.country:"South Korea"` and set the retention rate to 100%.
+
+**Note**: There is no way to prevent a specific event from being retained. You can use negative queries (for instance, adding `-@error.message:"Script error."` to a retention filter targeting RUM Errors) to minimize the volume of undesired events, but other retention filters may still make a positive retention decision about a session that contains the event you tried to filter out.
+
+## Cross-product retention filters
+
+{{< callout url="https://www.datadoghq.com/product-preview/cross-product-retention-filters/" btn_hidden="false" header="Join the Preview!">}}
+Cross-Product Retention Filters are in Preview. Use this form to submit your request today.
+{{< /callout >}}
+
+When configuring a RUM retention filter, you can enable cross-product retention filters for APM traces.
+
+The **APM traces filter** indexes APM traces for the specified percentage of sessions retained by the parent RUM retention filter that have available traces.
+  <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br></div>
+
+<div class="alert alert-danger">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
+
+**Note**: The availability of APM traces depends on the initialization parameter `traceSampleRate` of the SDK.
+
+The cross-product retention filters allow you to optimize the correlation between different products to retain richer telemetry.
+
+To **find sessions with indexed APM traces** in the RUM Explorer, query `@session.has_indexed_apm_traces:true`.
+
+### Example
+
+Consider a configuration where you set up a unique RUM retention filter configured as follows:
+
+{{< img src="real_user_monitoring/rum_without_limits/cross-product-retention-filters-apm-only.png" alt="A RUM retention filter targeting errors at 60% retention, with a cross-product filter set to 25% for APM Traces." style="width:60%" >}}
+
+If you have initialized the SDK with `traceSampleRate:40`, then the outcome is the following:
+
+- 60% of sessions with at least one error are retained.
+- 25% x 40% = 10% of these retained sessions have the APM traces retained.
+
+<div class="alert alert-info">Cross-product retention filters only apply to sessions retained by the corresponding RUM retention filter. This means filters order matters for both RUM retention and cross-product filters.<br><br>
+
+For more information, see <a href="/real_user_monitoring/rum_without_limits/retention_filters/#how-it-works">How it works</a>.</div>
+
+### 1% flat sampling
+
+For compatible SDKs (see above), Datadog provides a default RUM retention filter and cross-product retention filter on APM traces that retains 1% of the sessions with available traces and their traces, at no additional cost.
+
+This default filter helps ensure that you always have a baseline of correlated APM data available for your RUM sessions, even before custom cross-product retention filters.
+
+To **find sessions retained by this filter** in the RUM Explorer, query `@session.retention_reason:apm_rum_flat_sampling`.
+
 ## Best practices
 
 See [Retention Filter Best Practices][4].
@@ -112,7 +167,7 @@ Analyze performance with [metrics][7].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/browser/#force-session-replay
+[1]: /session_replay/browser/#force-session-replay
 [2]: https://app.datadoghq.com/rum/list
 [3]: /real_user_monitoring/explorer/
 [4]: /real_user_monitoring/guide/retention_filter_best_practices

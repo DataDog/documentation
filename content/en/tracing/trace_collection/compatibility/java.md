@@ -294,6 +294,44 @@ Integrations can be enabled or disabled individually (overriding the default abo
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
 - When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][13] and [JEP 498][14] for more information.
 
+## Ahead-of-time (AOT) class loading & linking support
+
+To improve startup time, Ahead-of-time (AOT) class loading & linking makes application classes instantly available in a loaded and linked state when the JVM starts. See [JEP 483][15] and [JEP 514][16] for more information.
+
+### Requirements
+
+Use:
+
+- Java 25 or later
+- [Datadog Java tracer][1] 1.57.0 or later
+
+### Setup
+
+To set up AOT class loading & linking for APM, add the Datadog Java tracer during the training run:
+```shell
+java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCacheOutput=app.aot -jar App.jar
+```
+
+#### Usage
+
+During production, add the same Datadog Java tracer along with the previously cached training data:
+```shell
+java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
+```
+
+You can view traces using the [Trace Explorer][9].
+
+{{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Not attaching the Datadog Java tracer during the training run
+
+If you see this warning in production, it means the Datadog Java tracer wasn't attached during training:
+```
+Mismatched values for property jdk.module.addmods: java.instrument specified during runtime but not during dump time
+```
+The JVM cannot then use the AOT cache to improve startup time. The solution is to attach the tracer during training.
+
+{{% /collapse-content %}}
+
 ## GraalVM Native Image support
 
 GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java tracer supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
@@ -421,6 +459,41 @@ paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 
 The solution to this issue is to upgrade to version 4.6.0 or later.
 
+##### Spring Native build crashes with exec.d/toggle error
+
+You may encounter a similar error as the one above, even on buildpack versions newer than 4.6.0, when building a Spring Boot native image:
+
+```text
+disabling Datadog at launch time is unsupported for Node
+ERROR: failed to launch: exec.d: failed to execute exec.d file at path '/layers
+paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
+```
+
+This typically happens because the Datadog buildpack runs before the native image buildpack, so it doesn't know a native image build is intended. It incorrectly adds a toggle script meant for JVM builds, which is incompatible with the final native executable.
+
+The solution is to explicitly set the `BP_NATIVE_IMAGE` environment variable to `true` in the `spring-boot-maven-plugin` configuration. This ensures all buildpacks are aware it's a native image build from the start.
+
+```yaml
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+      <configuration>
+        <image>
+          ...
+          <env>
+            ...
+            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+            ...
+          </env>
+        </image>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+```
+
 ##### Problem activating Datadog tracer
 
 You might encounter initialization errors if your tracer configuration relies on Unix Domain Sockets (UDS), which are not supported in native images:
@@ -452,3 +525,5 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [12]: /tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472
 [14]: https://openjdk.org/jeps/498
+[15]: https://openjdk.org/jeps/483
+[16]: https://openjdk.org/jeps/514

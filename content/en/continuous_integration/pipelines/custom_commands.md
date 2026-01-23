@@ -32,6 +32,8 @@ Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
+<div class="alert alert-info">See <a href="https://github.com/DataDog/datadog-ci?tab=readme-ov-file#more-ways-to-install-the-cli">More ways to install the CLI</a> in the datadog-ci repo for alternative installation options.</div>
+
 ## Trace a command line
 
 To trace a command line, run:
@@ -181,8 +183,14 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ## Known issue with GitHub Actions
 
-If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]),
-the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
+Starting with `datadog-ci` version `4.1.1`, no additional action is required, even when using custom names or matrix strategies.
+
+<details>
+<summary><strong>For datadog-ci versions prior to 4.1.1</strong></summary>
+
+If you are using `datadog-ci` version `2.29.0` to `4.1.0` and the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]), the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
+
 1. If the job name is changed using the [name property][4]:
     ```yaml
     jobs:
@@ -207,6 +215,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci trace ...
     ```
+</details>
 
 ## Troubleshooting
 

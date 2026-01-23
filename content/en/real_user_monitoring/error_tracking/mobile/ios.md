@@ -54,7 +54,7 @@ pod 'DatadogCrashReporting'
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
-.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
+.package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "3.0.0"))
 ```
 
 In your project, link the following libraries:
@@ -73,7 +73,6 @@ github "DataDog/dd-sdk-ios"
 In Xcode, link the following frameworks:
 ```
 DatadogCrashReporting.xcframework
-CrashReporter.xcframework
 ```
 
 [1]: https://github.com/Carthage/Carthage
@@ -111,11 +110,11 @@ When enabled, any main thread pause that is longer than the specified `appHangTh
 
 - **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang.png" alt="A fatal app hang in the RUM Error side panel." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-fatal-app-hang-1.png" alt="A fatal app hang in the RUM Error side panel." style="width:90%;" >}}
 
 - **Non-fatal app hang**: How a hang gets reported if the app recovers from a relatively short hang and continues running. Non-fatal app hangs do not have a "Crash" mark on them in Error Tracking and the RUM explorer.
 
-  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang.png" alt="A non-fatal app hang in the RUM Error side panel." style="width:60%;" >}}
+  {{< img src="real_user_monitoring/error_tracking/ios-non-fatal-app-hang-1.png" alt="A non-fatal app hang in the RUM Error side panel." style="width:90%;" >}}
 
 #### Enable app hang monitoring
 
@@ -316,7 +315,7 @@ When enabled, a watchdog termination is reported and attached to the previous RU
 
 - And the device did not reboot (which includes upgrades of the operating system).
 
-{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination.png" alt="A watchdog termination in the RUM Error side panel." style="width:60%;" >}}
+{{< img src="real_user_monitoring/error_tracking/ios-watchdog-termination-1.png" alt="A watchdog termination in the RUM Error side panel." style="width:90%;" >}}
 
 #### Enable watchdog terminations reporting
 

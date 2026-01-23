@@ -1,4 +1,7 @@
 ---
+description: Utiliza la interfaz gráfica de usuario del Datadog Agent Manager basada
+  en el navegador para configurar y gestionar el Windows Agent con navegadores y autenticación
+  compatibles.
 further_reading:
 - link: /agent/basic_agent_usage/windows/
   tag: Documentación
@@ -12,7 +15,7 @@ La GUI del Datadog Agent Manager está basada en un navegador. Es posible config
 
 ### Requisitos
 
-1. Es necesario habilitar las cookies en tu navegador. La GUI genera y guarda un token en tu navegador para autenticar todas las comunicaciones que se establezcan con el servidor de la GUI.
+1. Es necesario habilitar las cookies en tu navegador. La GUI genera en tu navegador, donde también guarda un token que se utiliza para autenticar todas las comunicaciones con el servidor de la GUI.
 
 2. La GUI solo se inicia si el usuario que la ejecuta tiene los permisos correspondientes. Si puedes abrir `datadog.yaml`, puedes utilizar la GUI.
 
@@ -62,7 +65,7 @@ La página de estado general se muestra por defecto al iniciar el Datadog Agent 
 | Agent Info (Información del Agent)  | Proporciona información sobre el Agent, como la versión, el nivel de log y las rutas de archivo. |
 | System Info (Información del sistema) | Incluye información sobre la hora del sistema, diferencia horaria con NTP, Go y las versiones de Python.       |
 | Host Info (Información sobre el host)   | Proporciona información sobre el host, como el sistema operativo, la plataforma, los procesos y el tiempo de actividad.     |
-| Hostnames (Nombres de host)   | Muestra los nombres de host y las etiquetas (tags) de host detectados por el Agent.                        |
+| Nombres de host   | Muestra los nombres de host y las etiquetas (tags) de host detectados por el Agent.                        |
 | JMX Status (Estado de JMX)  | Una lista de checks de JMX con su estado.                                         |
 | Forwarder   | Información sobre el Forwarder del Agent, como el estado de su clave de API.      |
 | Endpoints   | Endpoints utilizados por el Agent.                                                  |
@@ -110,7 +113,7 @@ La página de logs muestra los logs del Agent que se envían a `agent.log`. Los 
 2019-07-10 17:48:02 EDT | INFO | (transaction.go:114 in Process) | Successfully posted payload to "https://6-2-1-app.agent.datadoghq.com/api/v1/check_run?api_key=*************************12345"
 ```
 
-### Parámetros
+### Configuración
 
 La página de parámetros muestra el contenido del archivo de configuración principal del Agent: `datadog.yaml`. Puedes editar este archivo directamente desde el Datadog Agent Manager. Después de realizar cualquier cambio, haz clic en **Save** (Guardar), en la parte superior derecha, y luego [reinicia el Agent](#restart-agent).
 
@@ -136,7 +139,7 @@ Si tienes algún problema con el Agent, la página de flares te ayuda a solucion
 
 Al hacer clic en **Restart Agent** (Reiniciar el Agent) en la barra de navegación de la izquierda, este se reinicia de forma automática. No aparecerá ninguna página ni mensaje de confirmación. Después de reiniciar el Agent, se abrirá la página de [estado general](#general).
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

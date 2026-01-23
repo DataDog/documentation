@@ -22,8 +22,8 @@ further_reading:
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7].
-<br><br>
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as a template, see [Reusable Modules][12].
+<br><br> 
 
 {{% collapse-content title="Button" level="h3" %}}
 Button components have the following properties.
@@ -81,7 +81,7 @@ Displays property and value pairs in JSON format.
 ### Example
 
 To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="Callout value" level="h3" %}}
@@ -657,6 +657,54 @@ Displays property and value pairs in JSON format.
 
 
 
+{{% collapse-content title="React renderer" level="h3" %}}
+React renderer components have the following properties.
+
+### General
+
+React Component Definition
+: The code that is executed to create a React component.<br>
+
+Component Input Props
+: The props that are passed to the React component and can be accessed in the props object of the component.
+
+Initial Component State
+: Sets the initial state values for your component. This state is used when the component first renders or if no state has been set yet. The component can access this data through <code>props.state</code>.<br>
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+Event
+: **Values**: set component state, callback function
+
+Function Name
+: **Value**: <code>props.customFunctionName</code>
+
+Reaction
+: **Values**: close modal, custom, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+### Relationships
+
+Displays data dependencies between React renderer and components in the app.
+
+### Example
+
+For an example showing how to use this component, see [React renderer][11].
+
+{{% /collapse-content %}}
+
+
+
 {{% collapse-content title="Search" level="h3" %}}
 Search components have the following properties.
 
@@ -906,7 +954,7 @@ Type
 
 ### Sorting
 
-Select the column and direction for default table sorting. 
+Select the column and direction for default table sorting.
 Column
 : The column to sort by.<br>
 **Value**: column name
@@ -1168,9 +1216,11 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [2]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=datadog_metrics_and_monitors&viewMode=preview
 [3]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ec2_instance_manager&viewMode=preview
 [4]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=ecs_task_manager&viewMode=preview
-[5]: https://datadoghq.slack.com/
+[5]: https://chat.datadoghq.com/
 [6]: /service_management/app_builder/components/tables/
 [7]: /service_management/app_builder/expressions
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /service_management/app_builder/events/#state-functions
 [10]: /service_management/app_builder/components/custom_charts/
+[11]: /actions/app_builder/components/react_renderer/
+[12]: /actions/app_builder/components/reusable_modules/

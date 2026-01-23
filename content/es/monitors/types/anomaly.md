@@ -169,8 +169,6 @@ Para obtener instrucciones detalladas sobre la sección **Configurar notificacio
 
 Los clientes con un plan de empresa pueden crear monitores de detección de anomalías utilizando el [endpoint de la API create-monitor][11]. Datadog **recomienda encarecidamente** [exportar el JSON del monitor][12] para crear la consulta para la API. Al utilizar la [página de creación de monitores][1] en Datadog, los clientes se benefician del gráfico de vista previa y del ajuste automático de parámetros que ayudan a evitar una incorrecta configuración de los monitores.
 
-**Nota**: Los monitores de detección de anomalías sólo están disponibles para clientes con un plan de empresa. Los clientes con un plan profesional, que estén interesados en los monitores de detección de anomalías, deben ponerse en contacto con sus representantes de atención al cliente o enviar un correo electrónico al equipo de [facturación de Datadog][13].
-
 Los monitores de anomalías se gestionan utilizando la [misma API][14] que otros monitores. Estos campos son exclusivos para monitores de anomalías:
 
 ### `query`

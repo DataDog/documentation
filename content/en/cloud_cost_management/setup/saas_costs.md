@@ -41,11 +41,11 @@ SaaS Cost Integrations allow you to send cost data **directly from your provider
 
 </br>
 
-If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
+If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services. Only SaaS costs in USD are supported at this time.
 
 ## Setup
 
-To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, or Google Cloud.
+To use SaaS Cost Integrations, you must configure [Cloud Cost Management][2] for AWS, Azure, Google Cloud, or Oracle Cloud.
 
 See the respective documentation for your cloud provider:
 
@@ -141,9 +141,14 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 
 {{% tab "OpenAI" %}}
 
-1. Create a [project API key][101] or [admin API key][103] in your account settings in OpenAI. Make sure the key has read access to the Usage and Management API scopes.
+<div class="alert alert-danger">An <strong>admin-scoped API key is required</strong> to collect OpenAI cost data for Cloud Cost Management. Project-scoped API keys cannot collect cost data.</div>
+
+1. Create an [admin API key][103] in your OpenAI account settings:
+   - Log in to your [OpenAI Account][104].
+   - Navigate to the [Admin Keys page][105] or go to **API keys** under **Organization settings** and select the **Admin keys** tab.
+   - Click **Create a new secret key** and copy the created admin API key.
 2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
-3. Enter your OpenAI account name, input your API key, and optionally, specify tags.
+3. Enter your OpenAI account name, input your admin API key, and optionally, specify tags.
 4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
 5. Click **Save**.
 
@@ -151,9 +156,10 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
 
-[101]: https://platform.openai.com/docs/api-reference/project-api-keys
 [102]: https://app.datadoghq.com/integrations/openai
 [103]: https://platform.openai.com/docs/api-reference/admin-api-keys
+[104]: https://platform.openai.com/
+[105]: https://platform.openai.com/settings/organization/admin-keys
 
 {{% /tab %}}
 

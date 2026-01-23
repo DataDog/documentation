@@ -2,6 +2,9 @@
 title: Bring Your Own Threat Intelligence
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
@@ -21,7 +24,7 @@ Threat intelligence is supported in the CSV format and requires the following co
 | additional_data  | json      | Additional data to enrich the trace. | false | `{"ref":"hxxp://example.org"}`
 | category         | text  | The threat intel [category][7]. This is used by some out of the box detection rules. | true | `residential_proxy` |
 | intention        | text | The threat intel [intent][8]. This is used by some out of the box detection rules.| true | malicious | |
-| source           | text  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
+| source           | json  | Fields representing where the threat intelligence originates, such as your team and your team's wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
 
 
 

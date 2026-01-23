@@ -1,6 +1,6 @@
 ---
 title: iOS and tvOS Libraries for RUM
-description: "Integrate popular iOS libraries like URLSession, Alamofire, and image loaders with RUM for automatic monitoring and tracking."
+description: "Integrate popular iOS libraries like URLSession, Alamofire, Apollo GraphQL and image loaders with RUM for automatic monitoring and tracking."
 aliases:
 - /real_user_monitoring/ios/integrated_libraries/
 - /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries/ios/
@@ -41,7 +41,10 @@ import DatadogRUM
 
 URLSessionInstrumentation.enable(with: .init(delegateClass: Apollo.URLSessionClient.self))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to [Advanced Configuration > Automatically track network requests][4].
+
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
+
+For more advanced Apollo integration using the Datadog Apollo interceptor, see the [Datadog Apollo interceptor package][7] and [Apollo instrumentation][8].
 
 ## SDWebImage
 
@@ -103,3 +106,5 @@ For additional information on sampling rate, distributed tracing, and adding cus
 [4]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-network-requests
 [5]: https://github.com/SDWebImage/SDWebImage
 [6]: https://github.com/OpenAPITools/openapi-generator
+[7]: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
+[8]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#apollo-instrumentation

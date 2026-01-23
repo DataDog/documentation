@@ -30,80 +30,69 @@ The .NET Tracer supports automatic instrumentation on the following .NET and .NE
 
 | .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
-| .NET 9               | _11/10/2026_          | [GA](#support-ga)    | latest (>= 3.6.0)    |
-| .NET 8               | _11/10/2026_          | [GA](#support-ga)    | latest (>= 2.42.0)   |
-| .NET 7               | 05/14/2024            | [GA](#support-ga)    | latest (>= 2.20.0)   |
-| .NET 6               | 11/12/2024            | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
-| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended      |
-| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended      |
-| .NET Core 2.1        | 08/21/2021            | [EOL](#support-eol)  | Not recommended      |
-| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended      |
+| .NET 10              | _November 14, 2028_   | [GA](#support-ga)    | latest (>= 3.31.0)   |
+| .NET 9               | _November 10, 2026_   | [GA](#support-ga)    | latest (>= 3.6.0)    |
+| .NET 8               | _November 10, 2026_   | [GA](#support-ga)    | latest (>= 2.42.0)   |
+| .NET 7               | May 14, 2024          | [GA](#support-ga)    | latest (>= 2.20.0)   |
+| .NET 6               | November 12, 2024     | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET 5               | May 10, 2022          | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET Core 3.1        | December 13, 2022     | [GA](#support-ga)    | latest               |
+| .NET Core 3.0        | March 3, 2020         | [EOL](#support-eol)  | Not recommended      |
+| .NET Core 2.2        | December 23, 2019     | [EOL](#support-eol)  | Not recommended      |
+| .NET Core 2.1        | August 21, 2021       | [EOL](#support-eol)  | Not recommended      |
+| .NET Core 2.0        | October 1, 2018       | [EOL](#support-eol)  | Not recommended      |
 
 Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
-## Supported processor architectures
-
-The .NET Tracer supports automatic instrumentation on the following architectures:
-
-| Processor architecture                    | Support level         | Package version                        |
-| ------------------------------------------|-----------------------|----------------------------------------|
-| Windows x64 (`win-x64`)                   | [GA](#support-ga)     | latest                                 |
-| Windows x86 (`win-x86`)                   | [GA](#support-ga)     | < 3.0.0 (e.g. 2.56.0)                  |
-| Linux x64 (`linux-x64`)                   | [GA](#support-ga)     | latest                                 |
-| Alpine Linux x64 (`linux-musl-x64`)       | [GA](#support-ga)     | latest                                 |
-| Linux ARM64 (`linux-arm64`)               | [GA](#support-ga)     | .NET 5+ only, added in version 1.27.0  |
-| Alpine Linux arm64 (`linux-musl-arm64`)   | [GA](#support-ga)     | .NET 6+ only, added in version 3.2.0   |
-
-**Note:** instrumenting `x86` Windows applications is supported on `x64` versions of Windows.
-
 ## Supported operating systems
 
-The .NET Tracer supports automatic instrumentation on Windows and Linux operating systems. It supports macOS for CI Test Optimization only.
+The .NET Tracer supports automatic instrumentation of .NET and .NET Core applications on Windows and Linux operating systems. It supports macOS for CI Test Optimization only. Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
 
 ### Windows
 
-| Operating System             | Version     | Support level         | Package version                        |
-| -----------------------------|-------------|-----------------------|----------------------------------------|
-| Windows Server (x64)         | 2012+       | [GA](#support-ga)     | latest                                 |
-| Windows Client (x64)         | 8.1+        | [GA](#support-ga)     | latest                                 |
-| Nano Server (x64)            | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x64)         | < 2012      | [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
-| Windows Server (x86)         | All versions| [EOL](#support-eol)   | < 3.0.0 (e.g. 2.48.0)                  |
+| Operating System             | Version      | Support level       | Package version       |
+| -----------------------------|--------------|---------------------|-----------------------|
+| Windows Server               | 2012+        | [GA](#support-ga)   | latest                |
+| Windows Client               | 8.1+         | [GA](#support-ga)   | latest                |
+| Windows Server (x86)         | All versions | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
+| Windows Server               | < 2012       | [EOL](#support-eol) | < 3.0.0 (e.g. 2.48.0) |
 
-Additional information on the operating systems supported by .NET and .NET Core can be found in the [.NET release notes][19]
+**Note:** "Windows Server" includes all editions and installation options:
+- **Editions:** Datacenter, Standard, Essentials, etc.
+- **Installation options:** Server Core, Server with Desktop Experience, Nano Server (container image only)
+
+Instrumenting 32-bit (x86) applications is supported on 64-bit (x64) Windows. Windows on ARM64 is not supported.
 
 ### Linux
 
 The .NET Tracer supports Linux distributions as best-effort, based on minimum libc version compatibility:
 
 - x64: [glibc][20] 2.17 (from CentOS 7)
-- Arm64: [glibc][20] 2.23 (from Debian 10)
+- arm64: [glibc][20] 2.23 (from Debian 10)
 - Alpine x64: [musl][21] 1.2.2 (from Alpine 3.14)
 - Alpine arm64: [musl][21] 1.2.4 (from Alpine 3.18)
 
-| Operating System         | Version | Architectures | Support level         | Package version              |
-| -------------------------|---------|---------------|-----------------------|------------------------------|
-| Alpine Linux (x64)       | 3.14+   |  x64,         | [GA](#support-ga)     | latest (.NET 5+ only, v1.27.0+) |
-| Alpine Linux (arm64)     | 3.18+   |  Arm64        | [GA](#support-ga)     | latest (.NET 6+ only, v3.2.0+) |
-| CentOS Linux             | 7+      |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
-| CentOS Stream Linux      | 8       |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)  |
-| Debian                   | 10+     |  x64, Arm64   | [GA](#support-ga)     | latest                       |
-| Fedora                   | 29+     |  x64          | [GA](#support-ga)     | latest                       |
-| openSUSE                 | 15+     |  x64          | [GA](#support-ga)     | latest                       |
-| Red Hat Enterprise Linux | 7+      |  x64          | [GA](#support-ga)     | latest                       |
-| Ubuntu                   | 18.04+  |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+| Operating System         | Version | Architectures | Support level                         | Package version                 |
+| -------------------------|---------|---------------|---------------------------------------|---------------------------------|
+| Alpine Linux (x64)       | 3.14+   |  x64          | [GA](#support-ga)                     | latest (.NET 5+ only, v1.27.0+) |
+| Alpine Linux (arm64)     | 3.18+   |  arm64        | [GA](#support-ga)                     | latest (.NET 6+ only, v3.2.0+)  |
+| CentOS Linux             | 7+      |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)          |
+| CentOS Stream Linux      | 8       |  x64          | [Maintenance](#support-maintenance)   | latest (EOL in v4.0.0)          |
+| Debian                   | 10+     |  x64, arm64   | [GA](#support-ga)                     | latest                          |
+| Fedora                   | 29+     |  x64          | [GA](#support-ga)                     | latest                          |
+| openSUSE                 | 15+     |  x64          | [GA](#support-ga)                     | latest                          |
+| Red Hat Enterprise Linux | 7+      |  x64          | [GA](#support-ga)                     | latest                          |
+| Ubuntu                   | 18.04+  |  x64, arm64   | [GA](#support-ga)                     | latest                          |
 
 ### macOS
 
-The .NET Tracer supports macOS for CI Test Optimization only
+The .NET Tracer supports macOS for CI Test Optimization only.
 
-| Operating System         | Version | Architectures | Support level         | Package version              |
-| -------------------------|---------|---------------|-----------------------|------------------------------|
-| macOS                    | 12.0+   |  x64, Arm64   | [GA](#support-ga)     | latest                       |
+| Operating System         | Version | Architectures | Support level           | Package version            |
+| -------------------------|---------|---------------|-------------------------|----------------------------|
+| macOS                    | 14.0+   |  x64, arm64   | [GA](#support-ga)       | latest                     |
 | macOS                    | 11.0    |  x64          | [EOL](#support-eol)     | < 3.0.0                    |
-| macOS                    | 11.0    |  Arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
+| macOS                    | 11.0    |  arm64        | [EOL](#support-eol)     | < 3.0.0 (Added in 2.20.0)  |
 
 ## Integrations
 
@@ -120,6 +109,8 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
 | Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
 | Azure Cosmos DB                 | `Microsoft.Azure.Cosmos` 3.6.0+                                                                      | `CosmosDb`           |
+| Azure Event Hubs                | `Azure.Messaging.EventHubs` 5.9.2+                                                                   | `AzureEventHubs`     |
+| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14+                                                                   | `AzureServiceBus`    |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
@@ -132,7 +123,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                                        | `Npgsql`             |
-| Process                         | `"System.Diagnostics.Process"` 4.0+                                                                  | `Process`            |
+| Process                         | `System.Diagnostics.Process` 4.0+                                                                    | `Process`            |
 | RabbitMQ                        | `RabbitMQ.Client` 3.6.9+ .                                                                           | `RabbitMQ`           |
 | Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                                         | `ServiceStackRedis`  |
 | Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                                       | `StackExchangeRedis` |
@@ -147,23 +138,23 @@ Don't see the library you're looking for? First, check if the library produces o
 
 The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
-| Issue                                         | Affected .NET Versions                    | Solution                                                               | More information                        |
-|-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
-| JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
-| Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
-| JIT Compiler bug causing crash on shutdown    | 2.0.0-2.2.x                               | Upgrade .NET Core to 3.1.0 or above | [dotnet/runtime/pull/11885][15]   |
-| JIT Compiler bug                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Upgrade .NET to 8.0.6 or above    | [dotnet/runtime/pull/73760][16]   |
-| JIT Compiler bug                              | All versions of .NET                      | No current workaround    | [dotnet/runtime/issues/85777][17]   |
-| .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10            | Upgrade .NET 6.0.11 or above, or disable runtime metrics    | [dotnet/runtime/pull/76431][18]   |
-| JIT Compiler bug causing crashes              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x              | Upgrade .NET to 9.0.0 or above    | [dotnet/runtime/pull/95653][22]   |
+| Issue                                                                          | Affected .NET Versions                                   | Solution                                                                           | More information                        |
+|--------------------------------------------------------------------------------|----------------------------------------------------------|------------------------------------------------------------------------------------|-----------------------------------------|
+| JIT Compiler bug on Linux/x64                                                  | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5                 | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
+| Resource lookup bug with a non `en-US` locale                                  | 2.0.0                                                    | Upgrade .NET Core to 2.0.3 or above                                                | [dotnet/runtime/issues/23938][7]        |
+| JIT Compiler bug causing crash on shutdown                                     | 2.0.0-2.2.x                                              | Upgrade .NET Core to 3.1.0 or above                                                | [dotnet/runtime/pull/11885][15]         |
+| JIT Compiler bug                                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5                     | Upgrade .NET to 8.0.6 or above                                                     | [dotnet/runtime/pull/73760][16]         |
+| JIT Compiler bug                                                               | All versions of .NET                                     | No current workaround                                                              | [dotnet/runtime/issues/85777][17]       |
+| .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10 | Upgrade .NET 6.0.11 or above, or disable runtime metrics | [dotnet/runtime/pull/76431][18]                                                    |                                         |
+| JIT Compiler bug causing crashes                                               | 2.x, 3.x, 5.x, 6.x, 7.x, 8.x                             | Upgrade .NET to 9.0.0 or above                                                     | [dotnet/runtime/pull/95653][22]         |
 
 ## Supported Datadog Agent versions
 
-| **Datadog Agent version**   | **Package version** |
-|-----------------------------|---------------------|
-| [7.x][8]                    | Latest              |
-| [6.x][8]                    | Latest              |
-| [5.x][9]                    | Latest              |
+| Datadog Agent version | Package version |
+|-----------------------|-----------------|
+| [7.x][8]              | Latest          |
+| [6.x][8]              | Latest          |
+| [5.x][9]              | Latest          |
 
 ## .NET runtime support policy
 
@@ -171,13 +162,13 @@ The .NET Tracer depends on the host operating system, .NET runtime, certain .NET
 
 ### Levels of support
 
-| **Level**                                              | **Support provided**                                                                                                                                                          |
-|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][10]                                                             |
-| <span id="support-beta">Preview</span>                 |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
-| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
-| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+| **Level**                                              | **Support provided**                                                                                                                       |
+|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][10]                                                                   |
+| <span id="support-beta">Preview</span>                 |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis. |
+| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                 |
+| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                           |
+| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                               |
 
 ### Package versioning
 

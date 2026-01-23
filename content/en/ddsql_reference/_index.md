@@ -110,6 +110,13 @@ WHERE delivery_date IS NULL {{< /code-block >}}
 FROM customers
 LIMIT 10 {{< /code-block >}}
 
+`OFFSET`
+: Skips a specified number of records before starting to return records from the query.
+
+    {{< code-block lang="sql" >}}SELECT *
+FROM employees
+OFFSET 20 {{< /code-block >}}
+
 `ORDER BY`
 : Sorts the result set of a query by one or more columns. Includes ASC, DESC for sorting order.
 
@@ -164,7 +171,7 @@ DDSQL supports the following data types:
 |-----------|-------------|
 | `BIGINT` | 64-bit signed integers. |
 | `BOOLEAN` | `true` or `false` values. |
-| `DOUBLE` | Double-precision floating-point numbers. |
+| `DECIMAL` | Floating-point numbers. |
 | `INTERVAL` | Time duration values. |
 | `JSON` | JSON data. |
 | `TIMESTAMP` | Date and time values. |
@@ -180,9 +187,9 @@ DDSQL supports explicit type literals using the syntax `[TYPE] [value]`.
 
 | Type | Syntax | Example |
 |------|--------|---------|
-| `BIGINT` | `BIGINT value` | `BIGINT 1234567` |
-| `BOOLEAN` | `BOOLEAN value` | `BOOLEAN true` |
-| `DOUBLE` | `DOUBLE value` | `DOUBLE 3.14159` |
+| `BIGINT` | `BIGINT 'value'` | `BIGINT '1234567'` |
+| `BOOLEAN` | `BOOLEAN 'value'` | `BOOLEAN 'true'` |
+| `DECIMAL` | `DECIMAL 'value'` | `DECIMAL '3.14159'` |
 | `INTERVAL` | `INTERVAL 'value unit'` | `INTERVAL '30 minutes'` |
 | `JSON` | `JSON 'value'` | `JSON '{"key": "value", "count": 42}'` |
 | `TIMESTAMP` | `TIMESTAMP 'value'` | `TIMESTAMP '2023-12-25 10:30:00'` |
@@ -198,7 +205,7 @@ Array literals use the syntax `ARRAY[value1, value2, ...]`. The array type is au
 SELECT ARRAY['apple', 'banana', 'cherry'] AS fruits; -- Inferred as VARCHAR array
 SELECT ARRAY[1, 2, 3] AS numbers;                    -- Inferred as BIGINT array
 SELECT ARRAY[true, false, true] AS flags;            -- Inferred as BOOLEAN array
-SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
+SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DECIMAL array
 {{< /code-block >}}
 
 ### Example
@@ -207,7 +214,7 @@ SELECT ARRAY[1.1, 2.2, 3.3] AS decimals;             -- Inferred as DOUBLE array
 -- Using type literals in queries
 SELECT
     VARCHAR 'Product Name: ' || name AS labeled_name,
-    price * DOUBLE 1.08 AS price_with_tax,
+    price * DECIMAL '1.08' AS price_with_tax,
     created_at + INTERVAL '7 days' AS expiry_date
 FROM products
 WHERE created_at > TIMESTAMP '2025-01-01';
@@ -226,9 +233,10 @@ The following SQL functions are supported. For Window function, see the separate
 | `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.                                                                                                                              |
 | `BOOL_AND(boolean b)`                            | boolean                               | Returns whether all non-null input values are true.                                                                                                                                               |
 | `BOOL_OR(boolean b)`                             | boolean                               | Returns whether any non-null input value is true.                                                                                                                                                 |
-| `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                                                                                                                                              |
+| `CEIL(numeric n)` / `CEILING(numeric n)`         | numeric                               | Returns the value rounded up to the nearest integer. Both `CEIL` and `CEILING` are supported as aliases.                                                                                         |
 | `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                                                                                                                                            |
 | `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                                                                                                                                                 |
+| `POWER(numeric base, numeric exponent)`          | numeric                               | Returns the value of base raised to the power of exponent.                                                                                                                                        |
 | `LOWER(string s)`                                | string                                | Returns the string as lowercase.                                                                                                                                                                  |
 | `UPPER(string s)`                                | string                                | Returns the string as uppercase.                                                                                                                                                                  |
 | `ABS(numeric n)`                                 | numeric                               | Returns the absolute value.                                                                                                                                                                       |
@@ -238,10 +246,12 @@ The following SQL functions are supported. For Window function, see the separate
 | `TRIM(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                                                                                                                                          |
 | `REPLACE(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring.                                                                                                                       |
 | `SUBSTRING(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length.                                                                                                      |
+| `REVERSE(string s)`                              | string                                | Returns the string with characters in reverse order.                                                                                                                                               |
 | `STRPOS(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match.                                                                                                   |
 | `SPLIT_PART(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one.                                                                                          |
 | `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval.                                                                                                     |
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.                                                                                                                                   |
+| `TO_TIMESTAMP(numeric epoch)`                    | timestamp                             | Converts a UNIX epoch timestamp (in seconds) to a timestamp.                                                                                                                                      |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.                                                                                                                                   |
 | `DATE_BIN(interval stride, timestamp source, timestamp origin)` | timestamp                             | Aligns a timestamp (source) to buckets of even length (stride). Returns the start of the bucket containing the source, calculated as the largest timestamp that is less than or equal to source and is a multiple of stride lengths from origin. |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.                                                                                                                        |
@@ -250,7 +260,9 @@ The following SQL functions are supported. For Window function, see the separate
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                                                                                                                                      |
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found.                                                                                         |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter.                                                                                                                       |
+| `ARRAY_TO_STRING(array a, string delimiter)`     | string                                | Converts an array to a string by concatenating elements with the given delimiter.                                                                                                                 |
 | `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                                                                                                                                              |
+| `APPROX_PERCENTILE(double percentile) WITHIN GROUP (ORDER BY expression e)` | typeof expression        | Computes an approximate percentile value. The percentile must be between 0.0 and 1.0 (inclusive). Requires the `WITHIN GROUP (ORDER BY ...)` syntax.                                              |
 | `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause.                                                                                                                    |
 
 {{% collapse-content title="Examples" level="h3" %}}
@@ -314,6 +326,12 @@ FROM products
 {{< code-block lang="sql" >}}
 SELECT ROUND(price) AS rounded_price
 FROM products
+{{< /code-block >}}
+
+### `POWER`
+{{< code-block lang="sql" >}}
+SELECT POWER(response_time, 2) AS squared_response_time
+FROM logs
 {{< /code-block >}}
 
 ### `LOWER`
@@ -396,6 +414,15 @@ FROM
   books
 {{< /code-block >}}
 
+### `REVERSE`
+{{< code-block lang="sql" >}}
+SELECT
+  REVERSE(username) AS reversed_username
+FROM
+  users
+LIMIT 5
+{{< /code-block >}}
+
 ### `STRPOS`
 {{< code-block lang="sql" >}}
 SELECT
@@ -435,6 +462,10 @@ FROM
 
 ### `TO_TIMESTAMP`
 
+`TO_TIMESTAMP` has two forms:
+
+**Form 1: Convert string to timestamp with format**
+
 Supported patterns for date/time formatting:
 | Pattern     | Description                          |
 | ----------- | ------------------------------------ |
@@ -456,6 +487,13 @@ Supported patterns for date/time formatting:
 {{< code-block lang="sql" >}}
 SELECT
   TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
+{{< /code-block >}}
+
+**Form 2: Convert UNIX epoch timestamp to timestamp**
+
+{{< code-block lang="sql" >}}
+SELECT
+  TO_TIMESTAMP(1735142580) AS ts_from_epoch
 {{< /code-block >}}
 
 ### `TO_CHAR`
@@ -567,6 +605,12 @@ SELECT
   STRING_TO_ARRAY('a,b,c,d,e,f', ',')
 {{< /code-block >}}
 
+### `ARRAY_TO_STRING`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_TO_STRING(ARRAY['a', 'b', 'c'], ',') AS joined_string
+{{< /code-block >}}
+
 ### `ARRAY_AGG`
 {{< code-block lang="sql" >}}
 SELECT
@@ -578,6 +622,25 @@ FROM
   emails
 GROUP BY
   sender
+{{< /code-block >}}
+
+### `APPROX_PERCENTILE`
+{{< code-block lang="sql" >}}
+-- Calculate the median (50th percentile) response time
+SELECT
+  APPROX_PERCENTILE(0.5) WITHIN GROUP (ORDER BY response_time) AS median_response_time
+FROM
+  logs
+
+-- Calculate 95th and 99th response time percentiles by service
+SELECT
+  service_name,
+  APPROX_PERCENTILE(0.95) WITHIN GROUP (ORDER BY response_time) AS p95_response_time,
+  APPROX_PERCENTILE(0.99) WITHIN GROUP (ORDER BY response_time) AS p99_response_time
+FROM
+  logs
+GROUP BY
+  service_name
 {{< /code-block >}}
 
 ### `UNNEST`
@@ -772,7 +835,7 @@ FROM dd.logs(
     <tr>
       <td>
         <pre>
-dd.metric_scalar(
+dd.metrics_scalar(
     query varchar,
     reducer varchar [, from_timestamp timestamp, to_timestamp timestamp]
 )</pre>
@@ -781,7 +844,7 @@ dd.metric_scalar(
       <td>
         {{< code-block lang="sql" >}}
 SELECT *
-FROM dd.metric_scalar(
+FROM dd.metrics_scalar(
     'avg:system.cpu.user{*} by {service}',
     'avg',
     TIMESTAMP '2025-07-10 00:00:00.000-04:00',
@@ -790,11 +853,27 @@ FROM dd.metric_scalar(
 ORDER BY value DESC;{{< /code-block >}}
       </td>
     </tr>
+    <tr>
+      <td>
+        <pre>
+dd.metrics_timeseries(
+    query varchar [, from_timestamp timestamp, to_timestamp timestamp]
+)</pre>
+      </td>
+      <td>Returns metric data as a timeseries. The function accepts a metrics query (with optional grouping) and optional timestamp parameters (default 1 hour) to define the time range. Returns data points over time rather than a single aggregated value.</td>
+      <td>
+        {{< code-block lang="sql" >}}
+SELECT *
+FROM dd.metrics_timeseries(
+    'avg:system.cpu.user{*} by {service}',
+    TIMESTAMP '2025-07-10 00:00:00.000-04:00',
+    TIMESTAMP '2025-07-17 00:00:00.000-04:00'
+)
+ORDER BY timestamp, service;{{< /code-block >}}
+      </td>
+    </tr>
   </tbody>
 </table>
-
-
-
 
 
 ## Tags
@@ -825,6 +904,21 @@ SELECT *
 FROM k8s.daemonsets da INNER JOIN k8s.deployments de
 ON da.tags = de.tags -- for a specific tag: da.tags->'app' = de.tags->'app'
 ```
+
+Additionally, you can extract tag keys and values into individual arrays of text:
+
+```sql
+SELECT akeys(tags), avals(tags)
+FROM aws.ec2_instance
+```
+
+### HSTORE functions and operators
+
+| Name                                          | Return type   | Description                                                                                      |
+|-----------------------------------------------|---------------|---------------------------------------------------------------------------------------------------
+| tags -> 'text'                                  | Text          | Gets the value for a given key. Returns `null` if key is not present.                             |
+| akeys(hstore tags)                            | Array of text | Gets the keys of an HSTORE as an array                                                            |
+| avals(hstore tags)                            | Array of text | Gets the values of an HSTORE as an array                                                          |
 
 ## Further reading
 

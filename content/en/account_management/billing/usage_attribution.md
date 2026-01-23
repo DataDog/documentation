@@ -2,20 +2,19 @@
 title: Usage Attribution
 aliases:
     - /account_management/billing/advanced_usage_reporting/
-    - /account_management/billing/custom_usage_reporitng/
+    - /account_management/billing/custom_usage_reporting/
 further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"
   text: "Plan and Usage Settings"
+- link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#identifying-areas-for-cost-optimization"
+  tag: "Blog"
+  text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 algolia:
   tags: ['usage attribution', 'cost attribution']
 ---
 
 ## Overview
-
-<div class="alert alert-danger">
-Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
-</div>
 
 Administrators or users with the Usage Read permission can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 

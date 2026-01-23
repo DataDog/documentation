@@ -5,6 +5,9 @@ aliases:
 - /continuous_integration/dora_metrics
 is_beta: true
 further_reading:
+- link: "/dora_metrics/calculation/"
+  tag: "Documentation"
+  text: "Learn how Datadog calculates DORA metrics"
 - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
   tag: "Release Notes"
   text: "Check out the latest Software Delivery releases! (App login required)"
@@ -17,7 +20,7 @@ further_reading:
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
-- link: "/service_management/events"
+- link: "/events"
   tag: "Documentation"
   text: "Learn about Event Management"
 - link: "/monitors/types/metric"

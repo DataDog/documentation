@@ -42,6 +42,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/detect-bedrock-misconfigurations-cloud-security"
     tag: "Blog"
     text: "Detect Amazon Bedrock misconfigurations with Datadog Cloud Security"
+  - link: https://www.datadoghq.com/blog/security-graph-attack-paths
+    tag: Blog
+    text: Trace exposure routes between resources with Datadog Cloud Security
 algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
@@ -56,6 +59,10 @@ cascade:
 Datadog Cloud Security delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 

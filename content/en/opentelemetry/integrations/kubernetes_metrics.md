@@ -12,8 +12,6 @@ further_reading:
   text: "Example Collector Configurations"
 ---
 
-<div class="alert alert-info">The OpenTelemetry Kubernetes integration is in Preview. To request access, contact your Datadog account team.</div>
-
 ## Overview
 
 Collect Kubernetes metrics using the OpenTelemetry Collector to gain comprehensive insights into your cluster's health and performance. This integration uses a combination of OpenTelemetry receivers to gather data, which populates the [Kubernetes - Overview][1] dashboard.
@@ -73,7 +71,7 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```bash
    # Set your cluster name
    export K8S_CLUSTER_NAME="<YOUR_CLUSTER_NAME>"
-   
+
    # Install the Node Collector (DaemonSet)
    helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
      -f daemonset-collector.yaml \
@@ -81,7 +79,7 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
      --set image.tag=0.130.0 \
      --set-string "config.processors.resource.attributes[0].key=k8s.cluster.name" \
      --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
-   
+
    # Install the Cluster Collector (Deployment)
    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
      -f cluster-collector.yaml \
@@ -91,28 +89,6 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
      --set-string "config.processors.resource.attributes[0].value=${K8S_CLUSTER_NAME}"
    ```
 
-## Metric metadata configuration
-
-Some metrics require manual metadata updates in Datadog to ensure they are interpreted and displayed correctly.
-
-To edit a metric's metadata:
-1. Go to **[Metrics > Summary][6]**.
-1. Select the metric you want to edit.
-1. Click **Edit** in the side panel.
-1. Edit the metadata as needed.
-1. Click **Save**.
-
-Repeat this process for each of the metrics listed in the following table:
-
-| Metric Name              | Metric Type | Unit                          | Denominator           |
-|--------------------------|-------------|-------------------------------|-----------------------|
-| `k8s.pod.cpu.usage`      | `Gauge`     | `Cpu` > `core`                |                       |
-| `k8s.pod.memory.usage`   | `Gauge`     | `Bytes (binary)` > `byte (B)` |                       |
-| `k8s.pod.network.io`     | `Gauge`     | `Bytes (binary)` > `byte (B)` | `Time` > `second (s)` |
-| `k8s.pod.network.errors` | `Gauge`     | `Bytes (binary)` > `byte (B)` | `Time` > `second (s)` |
-
-**Note**: Click the plus (**+**) icon beside the **Unit** to add the **Denominator**.
-  
 ## Correlating traces with infrastructure metrics
 
 To correlate your APM traces with Kubernetes infrastructure metrics, Datadog uses [unified service tagging][7]. This requires setting three standard resource attributes on telemetry from both your application and your infrastructure. Datadog automatically maps these OpenTelemetry attributes to the standard Datadog tags (`env`, `service`, and `version`) used for correlation.
