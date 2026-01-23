@@ -48,19 +48,29 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 
 1. Select a [view event type][2].
 
-   {{< img src="product_analytics/analytics/view_type_selection.png" alt="View type selection." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/view_type_selection1.png" alt="View type selection." style="width:50%;">}}
 
-2. Choose a measure to graph the unique count.
+1. Choose a measure to graph the unique count.
 
-   {{< img src="product_analytics/analytics/measure_selection.png" alt="Choose a measure to graph the unique count." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/measure_selection1.png" alt="Choose a measure to graph the unique count." style="width:50%;">}}
 
-3. Choose a field to [group][3] the measure by.
+1. Filter by event attributes or attributes from [third party integrations][6].
 
-   {{< img src="product_analytics/analytics/pana_analytics_group_by.png" alt="Group the measure by specific fields." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/pana_analytics_filter_by.png" alt="Filter events by their own attributes or by attributes pulled from third party integrations." style="width:50%;">}}
 
-4. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
+1. Choose an event attribute to further breakdown by.
 
-   {{< img src="product_analytics/analytics/pana_analytics_time_imterval.png" alt="Choose a time interval for your graph." style="width:50%;">}}
+   {{< img src="product_analytics/analytics/pana_analytics_breakdown_by1.png" alt="Further breakdown events by their own attributes or by attributes pulled from third party integrations." style="width:50%;">}}
+
+1. Apply a [function][4] to modify how the results the query are returned for visualizations.
+
+   {{< img src="product_analytics/analytics/pana_analytics_functions.png" alt="Add a function to modify how the results of a metric query are returned for visualizations.." style="width:50%;">}}
+
+1. Choose the [graph type][5] and time interval for your graph. Changing the global timeframe changes the list of available timestep values.
+
+   {{< img src="product_analytics/analytics/pana_analytics_time_interval2.png" alt="Choose a graph type and time interval for your graph." style="width:50%;">}}
+
+
 
 ## Further Reading
 
@@ -69,3 +79,6 @@ In [Analytics][1], customize your display by adding facets and measures to your 
 [1]: https://app.datadoghq.com/product-analytics/explorer
 [2]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/
 [3]: /product_analytics/charts/analytics_explorer/group
+[4]: /dashboards/functions/#overview
+[5]: /product_analytics/charts/analytics_explorer/visualize/
+[6]: https://app.datadoghq.com/product-analytics/integrations/custom-attributes
