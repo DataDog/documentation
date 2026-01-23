@@ -4187,26 +4187,31 @@ menu:
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_cpp
       weight: 2027
+    - name: Rust
+      url: tracing/trace_collection/dd_libraries/rust
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_rust
+      weight: 2028  
     - name: .NET Core
       url: tracing/trace_collection/dd_libraries/dotnet-core
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_dotnet_core
-      weight: 2028
+      weight: 2029
     - name: .NET Framework
       url: tracing/trace_collection/dd_libraries/dotnet-framework
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_dotnet_framework  
-      weight: 2029
+      weight: 2030
     - name: Android
       url: tracing/trace_collection/dd_libraries/android
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_android
-      weight: 2030
+      weight: 2031
     - name: iOS
       url: tracing/trace_collection/dd_libraries/ios
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_ios
-      weight: 2031
+      weight: 2032
     - name: Code-based Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection

@@ -5,7 +5,7 @@ aliases:
 - /tracing/trace_collection/dd_libraries/rust
 code_lang: rust
 type: multi-code-lang
-code_lang_weight: 90
+code_lang_weight: 55
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-rs"
   tag: "Source Code"
