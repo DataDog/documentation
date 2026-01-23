@@ -6259,6 +6259,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - name
       - filter
@@ -6346,6 +6356,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - filter
       type: object
@@ -17858,8 +17878,10 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
+      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access.
+        for restricting read and write access. This field is deprecated. Use the restriction
+        policies API to manage permissions.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
@@ -26170,6 +26192,8 @@ components:
           $ref: '#/components/schemas/WidgetLineType'
         line_width:
           $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
         palette:
           description: Color palette to apply to the widget.
           type: string
@@ -26232,6 +26256,19 @@ components:
           description: Color palette to apply to the widget.
           type: string
       type: object
+    WidgetStyleOrderBy:
+      description: 'How to order series in timeseries visualizations.
+
+        - `tags`: Order series alphabetically by tag name (default behavior)
+
+        - `values`: Order series by their current metric values (typically descending)'
+      enum:
+      - tags
+      - values
+      type: string
+      x-enum-varnames:
+      - TAGS
+      - VALUES
     WidgetSummaryType:
       description: Which summary type should be used.
       enum:
