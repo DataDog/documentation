@@ -28,7 +28,7 @@ For setup instructions, see [Set up GPU Monitoring][2].
 ### Make data-driven GPU allocation and provisioning decisions
 With visibility into GPU utilization by host, node, or pod, you can identify hotspots or underutilization of expensive GPU infrastructure.
 
-{{< img src="gpu_monitoring/funnel-2.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
+{{< img src="gpu_monitoring/funnel-3.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:100%;" >}}
 
 ### Troubleshoot failed workloads due to resource contention
 Understand your current device availability and forecast how many devices are needed for certain teams or workloads to avoid failed workloads from resource contention.
