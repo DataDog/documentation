@@ -68,7 +68,7 @@ Define an evaluation context that identifies the user or entity for flag targeti
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
-  targetingKey: 'user-123',  # Targeting key (typically user ID)
+  targeting_key: 'user-123',  # Targeting key (typically user ID)
   email: 'user@example.com',
   country: 'US',
   tier: 'premium',
