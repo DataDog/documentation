@@ -87,6 +87,8 @@ In Datadog, go to the [Cloud SIEM settings][2] page. The page shows either a **C
   </tbody>
 </table>
 
+Need additional assistance? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/billing/usage
 [2]: https://app.datadoghq.com/security/configuration/siem/setup
+[3]: /help/
