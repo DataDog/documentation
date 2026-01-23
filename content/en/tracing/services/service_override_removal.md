@@ -2,6 +2,7 @@
 title: Service Override Removal
 description: Learn how to remove integration service overrides from Datadog.
 disable_toc: false
+site_support_id: service_override_removal
 further_reading:
 - link: "/tracing/guide/service_overrides"
   tag: "Documentation"

@@ -267,7 +267,8 @@ unsupported_sites:
   actions: [gov]
   adaptive_sampling: [gov]
   agent_flare: [gov]
-  agentless_scanning: [gov]
+  agentless_scanning: [gov] # docs page
+  agentless-scanning: [gov] # api page
   amazon_event_bridge: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
@@ -330,8 +331,10 @@ unsupported_sites:
   scorecards: [gov]
   self_service_actions: [gov]
   service_remapping_rules: [gov]
+  service_override_removal: [gov]
   snmp_profile_manager: [gov]
   status_pages: [gov]
+  supported_deployment_types: [gov]
   synthetics_email_validation: [gov]
   synthetics_safari: [gov]
   test_optimization: [gov]

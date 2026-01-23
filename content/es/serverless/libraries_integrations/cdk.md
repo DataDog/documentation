@@ -3,14 +3,13 @@ dependencies:
 - https://github.com/DataDog/datadog-cdk-constructs/blob/main/README.md
 title: Construcción de Datadog CDK
 ---
-[![NPM](https://img.shields.io/npm/v/datadog-cdk-constructs?color=blue&label=npm+cdk+v1)](https://www.npmjs.com/package/datadog-cdk-constructs)
-[![NPM](https://img.shields.io/npm/v/datadog-cdk-constructs-v2?color=39a356&label=npm+cdk+v2)](https://www.npmjs.com/package/datadog-cdk-constructs-v2)
-[![PyPI](https://img.shields.io/pypi/v/datadog-cdk-constructs?color=blue&label=pypi+cdk+v1)](https://pypi.org/project/datadog-cdk-constructs/)
-[![PyPI](https://img.shields.io/pypi/v/datadog-cdk-constructs-v2?color=39a356&label=pypi+cdk+v2)](https://pypi.org/project/datadog-cdk-constructs-v2/)
-[![Go](https://img.shields.io/github/v/tag/datadog/datadog-cdk-constructs-go?color=39a356&label=go+cdk+v2)](https://pkg.go.dev/github.com/DataDog/datadog-cdk-constructs-go/ddcdkconstruct)
+[![NPM](https://img.shields.io/npm/v/datadog-cdk-constructs-v2?color=39a356&label=npm)](https://www.npmjs.com/package/datadog-cdk-constructs-v2)
+[![PyPI](https://img.shields.io/pypi/v/datadog-cdk-constructs-v2?color=39a356&label=pypi)](https://pypi.org/project/datadog-cdk-constructs-v2/)
+[![Go](https://img.shields.io/github/v/tag/datadog/datadog-cdk-constructs-go?color=39a356&label=go)](https://pkg.go.dev/github.com/DataDog/datadog-cdk-constructs-go/ddcdkconstruct)
+[![Maven](https://img.shields.io/badge/maven-v3.3.0-39a356?label=maven)](https://search.maven.org/artifact/com.datadoghq/datadog-cdk-constructs)
 [![Licencia](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-cdk-constructs/blob/main/LICENSE)
 
-Utiliza esta biblioteca de construcciones de Datadog CDK para desplegar aplicaciones serverless utilizando AWS CDK .
+Utiliza esta biblioteca de construcciones CDK de Datadog para desplegar aplicaciones serverless mediante AWS CDK.
 
 Para más información sobre el constructo **DatadogECSFargate**, consulta [aquí][23].
 
@@ -20,23 +19,11 @@ Esta biblioteca CDK configura automáticamente la ingesta de métricas, trazas (
 - Activación de la recopilación de trazas y métricas personalizadas de tus funciones Lambda.
 - Administración de suscripciones de Datadog Forwarder a tus grupos de logs Lambda y no Lambda.
 
-## AWS CDK v1 frente a AWS CDK v2
-
-**ADVERTENCIA**: `AWS CDK v1` ha llegado al final de su compatibilidad y `datadog-cdk-constructs` ya no recibirá actualizaciones. Se recomienda encarecidamente actualizar a `AWS CDK v2` ([guía oficial de migración](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html)) y cambiar para utilizar `datadog-cdk-constructs-v2`.
-
-Existen dos versiones distintas de Datadog CDK Constructs; `datadog-cdk-constructs` y `datadog-cdk-constructs-v2`. Están diseñadas para funcionar con `AWS CDK v1` y `AWS CDK v2`, respectivamente.
-
-- `datadog-cdk-constructs-v2` requiere Node >= 14, mientras que `datadog-cdk-constructs` es compatible con Node >= 12.
-- `datadog-cdk-constructs-v2` contiene más funciones.
-- Por lo demás, el uso de los dos paquetes es idéntico.
-
 ## Lambda
 
 ### Instalación del paquete
 
 #### npm
-
-Para uso con AWS CDK v2:
 
 ```
 yarn add --dev datadog-cdk-constructs-v2
@@ -44,26 +31,10 @@ yarn add --dev datadog-cdk-constructs-v2
 npm install datadog-cdk-constructs-v2 --save-dev
 ```
 
-Para uso con AWS CDK v1:
-
-```
-yarn add --dev datadog-cdk-constructs
-# or
-npm install datadog-cdk-constructs --save-dev
-```
-
 #### PyPI
-
-Para uso con AWS CDK v2:
 
 ```
 pip install datadog-cdk-constructs-v2
-```
-
-Para uso con AWS CDK v1:
-
-```
-pip install datadog-cdk-constructs
 ```
 
 ##### Nota:
@@ -72,19 +43,25 @@ Presta atención a la salida de tu administrador de paquete, ya que `Datadog CDK
 
 #### Go
 
-Para uso con AWS CDK v2:
-
 ```
 go get github.com/DataDog/datadog-cdk-constructs-go/ddcdkconstruct/v3
 ```
 
-AWS CDK v1 no es compatible.
+#### Maven (Java)
+
+Añádelo a tu `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>com.datadoghq</groupId>
+    <artifactId>datadog-cdk-constructs</artifactId>
+    <version>3.3.0</version>
+</dependency>
+```
 
 ### Utilización
 
 #### AWS CDK
-
-_Los siguientes ejemplos suponen el uso de AWS CDK v2. Si utilizas CDK v1, importa `datadog-cdk-constructs` en lugar de `datadog-cdk-constructs-v2`._
 
 Añade esto a tu stack de CDK:
 
@@ -168,14 +145,38 @@ datadogLambda.AddLambdaFunctions(&[]interface{}{myFunction}, nil)
 datadogLambda.AddForwarderToNonLambdaLogGroups()
 ```
 
+#### Java
+
+```java
+import com.datadoghq.cdkconstructs.DatadogLambda;
+import com.datadoghq.cdkconstructs.DatadogLambdaProps;
+
+DatadogLambda datadogLambda = new DatadogLambda(this, "Datadog",
+    DatadogLambdaProps.builder()
+        .nodeLayerVersion(<LAYER_VERSION>)
+        .pythonLayerVersion(<LAYER_VERSION>)
+        .javaLayerVersion(<LAYER_VERSION>)
+        .dotnetLayerVersion(<LAYER_VERSION>)
+        .rubyLayerVersion(<LAYER_VERSION>)
+        .addLayers(<BOOLEAN>)
+        .extensionLayerVersion(<EXTENSION_VERSION>)
+        .flushMetricsToLogs(<BOOLEAN>)
+        .site("<SITE>")
+        .apiKey(System.getenv("DD_API_KEY"))
+        .enableDatadogTracing(<BOOLEAN>)
+        .enableDatadogLogs(<BOOLEAN>)
+        .build()
+);
+datadogLambda.addLambdaFunctions(new Object[]{myFunction});
+datadogLambda.addForwarderToNonLambdaLogGroups(new Object[]{myLogGroup});
+```
+
 ### Integración del código fuente
 
 [Integración del código fuente](https://docs.datadoghq.com/integrations/guide/source-code-integration/) se activa por defecto mediante el etiquetado lambda automático y funcionará si:
 
 - La integración de Datadog Github está instalada.
-- Tu dependencia de datadog-cdk satisface cualquiera de las versiones siguientes:
-  - `datadog-cdk-constructs-v2` >= 1.4.0
-  - `datadog-cdk-constructs` >= 0.8.5
+- Tu versión de `datadog-cdk-constructs-v2` es >= 1.4.0
 
 #### Métodos alternativos para activar la integración del código fuente
 
