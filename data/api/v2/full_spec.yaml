@@ -346,6 +346,16 @@ components:
       required: true
       schema:
         type: string
+    DisableCorrections:
+      description: Whether to exclude correction windows from the SLO status calculation.
+        Defaults to false.
+      in: query
+      name: disable_corrections
+      required: false
+      schema:
+        default: false
+        example: false
+        type: boolean
     EntityID:
       description: UUID or Entity Ref.
       in: path
@@ -457,6 +467,15 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
+    FromTimestamp:
+      description: The starting timestamp for the SLO status query in epoch seconds.
+      in: query
+      name: from_ts
+      required: true
+      schema:
+        example: 1690901870
+        format: int64
+        type: integer
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -1082,6 +1101,14 @@ components:
       required: false
       schema:
         type: boolean
+    SloID:
+      description: The ID of the SLO.
+      in: path
+      name: slo_id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000000
+        type: string
     SpansMetricIDParameter:
       description: The name of the span-based metric.
       in: path
@@ -1103,6 +1130,15 @@ components:
       required: true
       schema:
         type: string
+    ToTimestamp:
+      description: The ending timestamp for the SLO status query in epoch seconds.
+      in: query
+      name: to_ts
+      required: true
+      schema:
+        example: 1706803070
+        format: int64
+        type: integer
     UserID:
       description: The ID of the user.
       in: path
@@ -9221,6 +9257,10 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
+        status_group:
+          $ref: '#/components/schemas/CaseStatusGroup'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9287,6 +9327,8 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9455,7 +9497,9 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      description: Case status
+      deprecated: true
+      description: Deprecated way of representing the case status, which only supports
+        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9466,6 +9510,23 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
+    CaseStatusGroup:
+      description: Status group of the case.
+      enum:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+      example: SG_OPEN
+      type: string
+      x-enum-varnames:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+    CaseStatusName:
+      description: Status of the case. Must be one of the existing statuses for the
+        case's type.
+      example: Open
+      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9689,8 +9750,9 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-      required:
-      - status
+          deprecated: true
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -46073,6 +46135,22 @@ components:
             from the other indexes
           type: string
       type: object
+    RawErrorBudgetRemaining:
+      description: The raw error budget remaining for the SLO.
+      properties:
+        unit:
+          description: The unit of the error budget (for example, `seconds`, `requests`).
+          example: seconds
+          type: string
+        value:
+          description: The numeric value of the remaining error budget.
+          example: 86400.5
+          format: double
+          type: number
+      required:
+      - value
+      - unit
+      type: object
     ReadinessGate:
       description: Used to merge multiple branches into a single branch.
       properties:
@@ -56596,6 +56674,70 @@ components:
       required:
       - attributes
       type: object
+    SloStatusData:
+      description: The data portion of the SLO status response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SloStatusDataAttributes'
+        id:
+          description: The ID of the SLO.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/SloStatusType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SloStatusDataAttributes:
+      description: The attributes of the SLO status.
+      properties:
+        error_budget_remaining:
+          description: The percentage of error budget remaining.
+          example: 99.5
+          format: double
+          type: number
+        raw_error_budget_remaining:
+          $ref: '#/components/schemas/RawErrorBudgetRemaining'
+        sli:
+          description: The current Service Level Indicator (SLI) value as a percentage.
+          example: 99.95
+          format: double
+          type: number
+        span_precision:
+          description: The precision of the time span in seconds.
+          example: 2
+          format: int64
+          type: integer
+        state:
+          description: The current state of the SLO (for example, `breached`, `warning`,
+            `ok`).
+          example: ok
+          type: string
+      required:
+      - sli
+      - error_budget_remaining
+      - raw_error_budget_remaining
+      - state
+      - span_precision
+      type: object
+    SloStatusResponse:
+      description: The SLO status response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SloStatusData'
+      required:
+      - data
+      type: object
+    SloStatusType:
+      description: The type of the SLO status resource.
+      enum:
+      - slo_status
+      example: slo_status
+      type: string
+      x-enum-varnames:
+      - SLO_STATUS
     SoftwareCatalogTriggerWrapper:
       description: Schema for a Software Catalog-based trigger.
       properties:
@@ -93526,6 +93668,64 @@ paths:
       x-unstable: '**Note**: This feature is in private beta. To request access, use
         the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
         docs.'
+  /api/v2/slo/{slo_id}/status:
+    get:
+      description: 'Get the status of a Service Level Objective (SLO) for a given
+        time period.
+
+
+        This endpoint returns the current SLI value, error budget remaining, and other
+        status information for the specified SLO.'
+      operationId: GetSloStatus
+      parameters:
+      - $ref: '#/components/parameters/SloID'
+      - $ref: '#/components/parameters/FromTimestamp'
+      - $ref: '#/components/parameters/ToTimestamp'
+      - $ref: '#/components/parameters/DisableCorrections'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SloStatusResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Get SLO status
+      tags:
+      - Service Level Objectives
+      x-menu-order: 105
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/spa/recommendations/{service}:
     get:
       description: This endpoint is currently experimental and restricted to Datadog

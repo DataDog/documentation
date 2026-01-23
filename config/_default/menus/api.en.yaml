@@ -3535,6 +3535,19 @@ menu:
       url: /api/latest/service-level-objectives/
       identifier: service-level-objectives
       generated: true
+    - name: Get SLO status
+      url: '#get-slo-status'
+      identifier: service-level-objectives-get-slo-status
+      parent: service-level-objectives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSloStatus
+        unstable:
+          - v2
+        order: 105
     - name: Get SLO report status
       url: '#get-slo-report-status'
       identifier: service-level-objectives-get-slo-report-status
