@@ -1,8 +1,5 @@
 ---
 title: Building your Go application with Orchestrion
-code_lang: docker
-type: multi-code-lang
-code_lang_weight: 10
 further_reading:
 - link: "/tracing/trace_collection/library_config/go/"
   tag: "Documentation"
@@ -14,8 +11,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting Go Compile-Time Instrumentation"
 ---
-
-# Introduction
 
 This guide provides a step-by-step approach to building a Dockerfile for Go applications instrumented with Application Performance Monitoring (APM) using [Orchestrion][1]. The goal is to create a production-ready container image that includes compile-time instrumentation for distributed tracing.
 
