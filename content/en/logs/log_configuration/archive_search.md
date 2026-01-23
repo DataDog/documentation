@@ -88,7 +88,7 @@ Use this preview to verify query syntax, inspect log structure, and adjust filte
 
 ## View and retain results
 
-By default, you are charged only for the scan. The first 100,000 logs are stored temporarily (24 hours) at no cost and accessible directly in Archive Search results page, where you can click on any log to see its full details and context. After 24 hours, results expire automatically.
+By default, you are charged only for the scan. The first 100,000 logs are stored temporarily (24 hours) at no cost and accessible directly from the Archive Search results page, where you can click on any log to see its full details and context. After 24 hours, results expire automatically.
 
 To retain more data or access logs in other Datadog products, choose one of the following:
 
