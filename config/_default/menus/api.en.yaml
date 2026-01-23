@@ -8951,6 +8951,84 @@ menu:
         unstable:
           - v2
         order: 29
+    - name: Update global incident settings
+      url: '#update-global-incident-settings'
+      identifier: incidents-update-global-incident-settings
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGlobalIncidentSettings
+        unstable:
+          - v2
+        order: 39
+    - name: Get global incident settings
+      url: '#get-global-incident-settings'
+      identifier: incidents-get-global-incident-settings
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGlobalIncidentSettings
+        unstable:
+          - v2
+        order: 38
+    - name: Update global incident handle
+      url: '#update-global-incident-handle'
+      identifier: incidents-update-global-incident-handle
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGlobalIncidentHandle
+        unstable:
+          - v2
+        order: 42
+    - name: Create global incident handle
+      url: '#create-global-incident-handle'
+      identifier: incidents-create-global-incident-handle
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGlobalIncidentHandle
+        unstable:
+          - v2
+        order: 41
+    - name: List global incident handles
+      url: '#list-global-incident-handles'
+      identifier: incidents-list-global-incident-handles
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGlobalIncidentHandles
+        unstable:
+          - v2
+        order: 40
+    - name: Delete global incident handle
+      url: '#delete-global-incident-handle'
+      identifier: incidents-delete-global-incident-handle
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGlobalIncidentHandle
+        unstable:
+          - v2
+        order: 43
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
