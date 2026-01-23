@@ -163,13 +163,13 @@ suspicious-hub.com/backdoor/payload:1.0,"{""ref"":""hxxp://example.org""}",malwa
 
 #### CSV structure for container registry account name
 
-| Field                           | Data | Description                                                                              | Required | Example                 |
-|---------------------------------|------|------------------------------------------------------------------------------------------|----------|-------------------------|
-| container_registry_account_name | text | The primary key for the reference table. The account or organization name in a container registry. | true | suspicious-publisher    |
-| additional_data                 | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}` |
-| category                        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.    | true     | malware                 |
-| intention                       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.      | true     | malicious               |
-| source                          | json | The name of the source and the link to its site, such as your team and your team's wiki.| true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
+| Field                             | Data | Description                                                                                        | Required | Example                                                                   |
+|-----------------------------------|------|----------------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| `container_registry_account_name` | text | The primary key for the reference table. The account or organization name in a container registry. | true     | `suspicious-publisher`                                                    |
+| `additional_data`                 | json | Additional data to enrich the logs.                                                                | false    | `{"ref":"hxxp://example.org"}`                                            |
+| `category`                        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.               | true     | `malware`                                                                 |
+| `intention`                       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                 | true     | `malicious`                                                               |
+| `source`                          | json | The name of the source and the link to its site, such as your team and your team's wiki.           | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 **Note**: Identify compromised or malicious container registry accounts.
 
