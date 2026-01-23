@@ -72,7 +72,9 @@ For more information on access controls and log security, see [How to Set Up RBA
 2. Select an Archive and time range.
 3. Enter a query, such as `user_id:abc123`.
 4. (Optional) Rename the search.
-5. (Optional) Enable **Rehydrate of results** before launching the search.
+5. Under **Mode**, choose the kind of search you want to perform.
+   - Choose **Search** to limit your search to the last 100,000 logs from the last 24 hours.
+   - Choose **Search & Rehydration** to specify your own volume and time limit for your search.
 6. Click **Search**.
 
 Logs stream into the results page in real time. A progress bar shows scan status, and you can cancel the search at any time.
