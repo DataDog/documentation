@@ -1,0 +1,91 @@
+---
+title: iOS Profiling
+description: "Use iOS profiling with RUM to understand iOS mobile application performance issues affecting user experience."
+further_reading:
+  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
+    tag: "Blog"
+    text: "Real User Monitoring"
+  - link: "https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios"
+    tag: "Documentation"
+    text: "Start monitoring iOS applications"
+  - link: "/tracing/"
+    tag: "Documentation"
+    text: "APM and Distributed Tracing"
+---
+
+{{< callout url="https://www.datadoghq.com/product-preview/ios-profiler/" btn_hidden="false" header="Join the Preview!" >}}
+iOS Profiling is in Preview.
+{{< /callout >}}
+
+{{< img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" >}}
+
+## Overview
+
+iOS mobile application profiling captures detailed data about your application’s performance during launch. iOS profiling is built on top of the [mach Kernel API][1] and samples all application threads to collect call stacks for all application processes. 
+
+## Prerequisites
+
+- Your iOS application must use the Datadog iOS SDK version 3.6.0+.
+- [RUM without Limits][2] must be enabled in your organization.
+
+## Setup
+
+1. Set up [Mobile RUM for iOS][3].
+2. Initialize the RUM SDK and configure the `profilingSessionSampleRate`, which sets the percentage of sessions that are randomly sampled for profiling. 
+
+<div class="alert alert-danger">
+  If no value is specified, the default <code>profilingSessionSampleRate</code> is 15 percent.
+</div>
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+      import DatadogCore
+      import DatadogRUM
+      import DatadogProfiling
+
+      // Initialize Datadog SDK with your configuration
+      Datadog.initialize(
+        with: Datadog.Configuration(
+          clientToken: "<client token>",  // From Datadog UI
+          env: "<environment>",           // for example, "production", "staging"
+          service: "<service name>"       // Your app's service name
+        ),
+        trackingConsent: trackingConsent  // GDPR compliance setting
+      )
+
+      // Enable RUM feature
+      RUM.enable(
+        with: RUM.Configuration(
+          applicationID: "<rum application id>"
+        )
+      )
+
+      // Enable Profiling feature
+      Profiling.enable(with: .init()) // default is 5%
+  ```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Explore Profiling
+
+### During the time to initial display
+
+iOS application launch profiling data is attached to the [time to initial display][4] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
+
+{{< img src="real_user_monitoring/ios/ios-profiling-view.png" alt="iOS profiling data in a view event to initial display vital event." style="width:90%;" >}}
+
+Use the flame graph, thread timeline, and call graph visualizations to analyze the profiling data for the time to initial display. You can also download the profiling data for external analysis.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://developer.apple.com/documentation/kernel/mach
+[2]: https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/ 
+[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios
+[4]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift#:~:text=older%20SDK%20versions.-,Time%20to%20initial%20display%20and%20time%20to%20full%20display,-In%20iOS%20SDK 
+
+
+
+
