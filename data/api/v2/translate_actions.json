@@ -1524,6 +1524,46 @@
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
   },
+  "ListServiceNowAssignmentGroups": {
+    "description": "Get all assignment groups for a ServiceNow instance.",
+    "summary": "List ServiceNow assignment groups"
+  },
+  "ListServiceNowBusinessServices": {
+    "description": "Get all business services for a ServiceNow instance.",
+    "summary": "List ServiceNow business services"
+  },
+  "ListServiceNowTemplates": {
+    "description": "Get all ServiceNow templates for the organization.",
+    "summary": "List ServiceNow templates"
+  },
+  "CreateServiceNowTemplate": {
+    "description": "Create a new ServiceNow template.",
+    "summary": "Create ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to create a ServiceNow template"
+  },
+  "DeleteServiceNowTemplate": {
+    "description": "Delete a ServiceNow template by ID.",
+    "summary": "Delete ServiceNow template"
+  },
+  "GetServiceNowTemplate": {
+    "description": "Get a ServiceNow template by ID.",
+    "summary": "Get ServiceNow template"
+  },
+  "UpdateServiceNowTemplate": {
+    "description": "Update a ServiceNow template by ID.",
+    "summary": "Update ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to update a ServiceNow template"
+  },
+  "ListServiceNowInstances": {
+    "description": "Get all ServiceNow instances for the organization.",
+    "summary": "List ServiceNow instances"
+  },
+  "ListServiceNowUsers": {
+    "description": "Get all users for a ServiceNow instance.",
+    "summary": "List ServiceNow users"
+  },
   "ListCloudflareAccounts": {
     "description": "List Cloudflare accounts.",
     "summary": "List Cloudflare accounts"
