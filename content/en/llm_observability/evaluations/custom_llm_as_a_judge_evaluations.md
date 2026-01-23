@@ -86,7 +86,7 @@ Span Input: {{span_input}}
 
 8.In the **User** field, enter your evaluation prompt and explicitly specify which parts of the span should be evaluated. In most cases, this will be the Span Input (`{{span_input}}`) and/or Span Output (`{{span_output}}`).
 Additional variables are available—type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces (on the right side) to add span data as a variable:
-- Open the Preview panel and search for a sample span.
+- Choose an account and an application to ensure spans/traces show up on the right.
 - View the raw span JSON.
 - Use the three-dots menu and select **Add variable to message** to insert the JSON into your prompt.
 
