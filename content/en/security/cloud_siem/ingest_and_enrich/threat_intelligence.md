@@ -31,11 +31,11 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
       - `HTTP_URL_DETAILS_DOMAIN`
       - `HOSTNAME`
     - **File hashes**: SHA1, SHA256, and ssdeep hashes found in file- and process-related log attributes.
-    - **AWS account ID**: Values from AWS-related log attributes (for example, `userIdentity.accountId`).
-    - **Container image name**: Values from container runtime logs.
-    - **Container registry account name**: Values from container registry logs.
-    - **SSH public key**: Values from SSH authentication logs.
-    - **User agent**: Values from HTTP request header attributes.
+    - **AWS account IDs**: Values from AWS-related log attributes (for example, `userIdentity.accountId`).
+    - **Container image names**: Values from container runtime logs.
+    - **Container registry account names**: Values from container registry logs.
+    - **SSH public keys**: Values from SSH authentication logs.
+    - **User agents**: Values from HTTP request header attributes.
 2. Evaluate extracted values against reference tables.
     - Extracted values are compared to the primary key in the corresponding reference tables. Each indicator type has its own reference table with a specific primary key (for example, `ip_address` for IPs, `sha256` for SHA256 hashes).
 3. Enrich on match.
