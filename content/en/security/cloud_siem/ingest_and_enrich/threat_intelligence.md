@@ -141,13 +141,13 @@ aws_account_id,additional_data,category,intention,source
 
 #### CSV structure for container image name
 
-| Field                | Data | Description                                                                              | Required | Example                                      |
-|----------------------|------|------------------------------------------------------------------------------------------|----------|----------------------------------------------|
-| container_image_name | text | The primary key for the reference table. Can include registry, repository, and tag.     | true     | malicious-registry.com/suspicious/image:latest |
-| additional_data      | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`               |
-| category             | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.    | true     | malware                                      |
-| intention            | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.      | true     | malicious                                    |
-| source               | json | The name of the source and the link to its site, such as your team and your team's wiki.| true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
+| Field                  | Data | Description                                                                              | Required | Example                                                                   |
+|------------------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
+| `container_image_name` | text | The primary key for the reference table. Can include registry, repository, and tag.      | true     | `malicious-registry.com/suspicious/image:latest`                          |
+| `additional_data`      | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`                                            |
+| `category`             | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | `malware`                                                                 |
+| `intention`            | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | `malicious`                                                               |
+| `source`               | json | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 **Note**: Track known malicious container images.
 
