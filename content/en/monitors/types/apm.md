@@ -155,4 +155,4 @@ For detailed instructions on the **Configure notifications and automations** sec
 [4]: https://app.datadoghq.com/services
 [5]: https://app.datadoghq.com/apm/map
 [6]: /standard-attributes/?search=span.kind&product=apm
-
+[7]: https://app.datadoghq.com/monitors/
