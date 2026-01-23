@@ -84,7 +84,14 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate. Usually this is the Span Input (`{{span_input}}`) and/or Span Output (`{{span_output}}`). There are other variables available, which you can see when you type `{{`.
+8.In the **User** field, enter your evaluation prompt and explicitly specify which parts of the span should be evaluated. In most cases, this is span input (`{{span_input}}`) and/or span output (`{{span_output}}`).
+
+   Additional variables are available: type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces** (on the right side) to add span data as a variable:
+   1. Choose an account and an application so that spans/traces show up on the right.
+   2. Select one of the spans on the right to view its JSON.
+   3. Use the three-dots menu and select **Add variable to message** to insert the JSON into your prompt.
+
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
 ### Define the evaluation output
 
@@ -231,12 +238,6 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
 The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
 
 Select a span to show JSON data available for use in an evaluation. Then, click **Test Evaluation** to pre-fill inputs to your evaluation with data from the span, and click **Run** to test.
-
-To add JSON data as a variable in your user message, use the three-dots menu to the left of a row and select **Add variable to message**.
-
-{{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
-
-Refine your prompt and schema until outputs are consistent and interpretable.
 
 ## Viewing and using results
 
