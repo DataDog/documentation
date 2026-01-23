@@ -47,7 +47,7 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
 
 ### Store indicators of compromise in reference tables
 
-Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address, domain, SHA256 hash, AWS account ID, container image name) and requires the following columns:
+Threat intelligence is supported in the CSV format. It requires a table for each Indicator type (for example, IP address, domain, SHA256 hash, AWS account ID, container image name) and requires the following columns:
 
 #### CSV structure for IP address
 
