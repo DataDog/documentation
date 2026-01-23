@@ -34,30 +34,32 @@ Backpressure determines if the system should slow down the consumption or accept
 
 ## Component buffers
 
-All components in Observability Pipelines have a small in-memory buffer between them to ensure smooth handoff of events as they traverse your pipeline. These buffers ensure that variations in the amount of time for an event to be processed through each component do not cause excessive blocking/waiting. These buffers are not intended for large scale buffering, and only have a capacity for 100 events.
+All components in Observability Pipelines have a small in-memory buffer between them to ensure smooth handoff of events as they traverse your pipeline. These buffers ensure that variations in the amount of time for an event to be processed through each component do not cause excessive blocking/waiting. These buffers are not intended for large scale buffering, and only have a capacity of 100 events.
 
-By default, destinations have an in-memory buffer which can store 500 events. Destinations in particular are susceptible to intermittent latency and outages, as they generally involve sending events over a network to an external service. For this reason, buffers on your destinations are configurable to be increased in size to accomodate greater throughputs, and ensure your pipeline continues to process events from your source. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information.
+By default, destinations have an in-memory buffer which can store 500 events. Destinations in particular are susceptible to intermittent latency and outages, as they generally involve sending events over a network to an external service. For this reason, buffers on your destinations are configurable to be increased in size to accommodate greater throughput, and help ensure your pipeline continues to process events from your source. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information.
 
 ### Configurable buffers for destinations
 
-In the event of a destination becoming unavailable, events will start to fill the destination buffer. Meanwhile, the destination will indefinitely retry so that events can flow again as soon as the destination becomes available. In the event that the buffer fills up in this time, it will block new events from being processed upstream in your pipeline. This results in backpressure propogation, which will eventually reach your source. This ensures no events are dropped within your pipeline while waiting for the destination to become available again.
-
-Destinations use a memory buffer by default, but can be configured with disk buffers. When disk buffering is enabled for a destination, every event is first sent through the buffer and written to the data files, before the data is sent to the downstream integration. Disk buffers can be used to mitigate backpressure when a destination is unavailable or can't keep up with the volume of data that the Worker is sending. By default, data is not synchronized for every write, but instead synchronized on an interval (500 milliseconds), which allows for high throughput with a reduced risk of data loss.
+If a destination becoming unavailable, events start to fill the destination buffer. Meanwhile, the destination retries indefinitely so that events can be sent downstream again as soon as the destination becomes available. If the buffer fills up during this time, it blocks new events in your pipeline from being processed upstream. This results in backpressure propagation, which eventually reaches your source. This happens to ensure no events are dropped within your pipeline while waiting for the destination to become available again.
 
 #### Which buffer type to use for a destination
 
-There are two types of buffers you can use on your destination: memory, and disk buffer**s. Memory buffers** prioritize throughput over durability, as they can handle significant bandwidth, but the memory buffer does not persist between worker restarts. **Disk buffers** prioritize durability over throughput, as write to the OS's page cache first, then flushes to disk if not immediately transmitted by the destination. Disk buffers wait at most 500ms before calling fsync and flushing a data file to disk. A disk buffer will flush more frequently if a data file fills up to its maximum 128 MB size before 500 ms has elapsed since the last flush.
+There are two types of buffers you can use for your destination:
+
+- **Memory buffers** prioritize throughput over durability, as they can handle significant bandwidth, but memory buffers do not persist between Worker restarts.
+- **Disk buffers** prioritize durability over throughput, where it writes to the OS' page cache first, then flushes to a disk if the data is not immediately transmitted by the destination. Disk buffers wait at most 500 ms before calling fsync and flushing a data file to disk. A disk buffer flushes more frequently if a data file fills up to its maximum 128 MB size before the 500 ms has elapsed since the last flush.
 
 Use case for memory buffers:
 
 - You want to prevent backpressure from propagating back to your source and application when a destination is temporarily unavailable.
-- You plan on sending a high bandwidth of data through your worker, which a disk buffer might not be able to keep up with.
+- You plan on sending a high bandwidth of data through your Worker, which a disk buffer might not be able to keep up with.
 - You are okay with potential data loss.
 
 Use case for disk buffers:
 
-- The bandwidth you plan on sending through your pipeline is unlikely to get bottlenecked by I/O if the buffer needs to write to disk.
-- You need to minimize any potential data loss which might occur if the worker unexpectedly shuts down.
+- You want to prevent backpressure from propagating back to your source and application when a destination is temporarily unavailable.
+- The bandwidth of data you plan on sending through your pipeline is unlikely to get bottlenecked by I/O if the buffer needs to write to a disk.
+- You need to minimize any potential data loss which might occur if the Worker unexpectedly shuts down.
 
 This table compares the differences between the memory and disk buffer.
 
