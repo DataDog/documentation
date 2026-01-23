@@ -173,7 +173,7 @@ suspicious-hub.com/backdoor/payload:1.0,"{""ref"":""hxxp://example.org""}",malwa
 
 **Note**: Identify compromised or malicious container registry accounts.
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:</div>
+<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV:
 
 ```
 container_registry_account_name,additional_data,category,intention,source
@@ -181,6 +181,7 @@ suspicious-publisher,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""na
 compromised-org,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 malicious-vendor,"{""ref"":""hxxp://example.org""}",malware,malicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
+</div>
 
 #### CSV structure for SSH public key
 
