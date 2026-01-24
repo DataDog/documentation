@@ -1,174 +1,52 @@
 ---
-title: Enable AWS X-Ray Tracing
-description: 'Trace your Lambda functions with AWS X-Ray'
+title: Decide When to Use Datadog APM and AWS X-Ray
+description: 'Compare Datadog APM and AWS X-Ray for serverless tracing to make the right choice for your use case'
 aliases:
     - /tracing/serverless_functions/enable_aws_xray/
 ---
-## Enable AWS X-Ray
 
-**Prerequisite:** [Install the AWS integration][1].
+## Which one should you use?
 
-1. Ensure the following permissions are present in the policy document for your AWS/Datadog Role:
+### Overview
 
-```text
-xray:BatchGetTraces,
-xray:GetTraceSummaries
-```
+X-Ray is natively integrated and can be enabled in just a few steps, making it convenient for basic observability needs. It's a good fit for teams troubleshooting simple workflows or visualizing service dependencies in low-complexity environments. However, it doesn't capture Lambda payloads and trace data is restricted to what AWS surfaces.
 
-The `BatchGetTraces` permission is used to return the full traces. The `GetTraceSummaries` permission is used to get a list of summaries of recent traces.
+Datadog APM offers deeper visibility than X-Ray. You can enrich traces with business or user context, follow async workflows across services, and capture payloads at every step. It supports custom sampling and retention, letting you dial down ingestion on noisy paths while retaining critical traces longer. This level of control is especially useful for scaling systems and debugging edge cases that are hard to reproduce.
 
-2. [Enable the X-Ray integration within Datadog][2].
+### Feature Comparison
 
-3. If you are using a Customer Master Key to encrypt traces, add the `kms:Decrypt` method to your policy where the Resource is the Customer Master Key used for X-Ray.
+| Capability | AWS X-Ray | Datadog APM Lambda | Datadog APM Step Functions |
+|------------|-----------|---------------------|---------------------------|
+| Enhanced Metrics | Limited CloudWatch metrics | [Numerous real-time metrics][2] | [Detailed metrics for each step execution][9] |
+| Trace → Log Correlation | None | [Automatic support][3] | Automatic support |
+| Sampling & Retention | AWS-managed | [User-defined][4] | [User-defined][13] |
+| Distributed Tracing | Primitive subsegments, limited cross-service visibility | [Support through hybrid environments][6] | [Full support across Step Functions and Lambda][7], including other Step Functions |
+| Payload Visibility | None | Collect, visualize, and query the [JSON request and response payloads][1] | Capture and visualize input and output data at each step |
+| Integrations | Limited to core AWS services | [Comprehensive support][5] for AWS & 3rd party services | Support for all Task types with relevant tags |
+| Distributed Maps | None | N/A | [Full support for distributed maps][10] |
 
-**Note:** Enabling the AWS X-Ray integration increases the amount of consumed Indexed Spans which can increase your bill.
+## Get Started
 
-### Enabling AWS X-Ray for your functions
+### Enable Datadog Monitoring
 
-To get the most out of the AWS X-Ray integration:
+If you need the enhanced capabilities that Datadog APM provides, follow these setup guides:
+- [Serverless monitoring for AWS Lambda][11] 
+- [Serverless monitoring for AWS Step Functions][12]
 
-- Enable it on your Lambda functions and API Gateways, either using the Serverless Framework plugin or manually; and
-- Install the tracing libraries in your Lambda functions.
+### Enable AWS X-Ray Integration
 
-#### [Recommended] Datadog Serverless Framework plugin
+If AWS X-Ray meets your current requirements, see the [AWS X-Ray Integration documentation][8] for detailed setup instructions.
 
-The [Datadog Serverless Framework plugin][3] automatically enables X-Ray for your Lambda functions and API Gateway instances. The plugin also automatically adds the [Datadog Lambda Layer][4] to all of your Node.js and Python functions.
-
-[Get started with the Serverless Framework plugin][5] and [read the docs][3].
-
-Lastly, [install and import the X-Ray client library in your Lambda function](#installing-the-x-ray-client-libraries).
-
-#### Manual setup
-
-If you do not use the Serverless Framework to deploy your serverless application, follow these instructions for manual setup:
-
-1. Navigate to the Lambda function in the AWS console you want to instrument. In the "Debugging and error handling" section, check the box to **Enable active tracing**. This turns on X-Ray for that function.
-2. Navigate to the [API Gateway console][6]. Select your API and then the stage.
-3. On the **Logs/Tracing** tab, select **Enable X-Ray Tracing**.
-4. To make these changes take effect, go to **Resources** in the left navigation panel and select **Actions** and click **Deploy API**.
-
-**Note:** The Datadog Lambda Layer and client libraries include the X-Ray SDK as a dependency, so you don't need to explicitly install it in your projects.
-
-Lastly, [install and import the X-Ray client library in your Lambda function](#installing-the-x-ray-client-libraries).
-
-#### Installing the X-Ray client libraries
-
-The X-Ray client library offers insights into your HTTP requests to APIs and into calls to DynamoDB, S3, MySQL and PostgreSQL (self-hosted, Amazon RDS, and Amazon Aurora), SQS, and SNS.
-
-Install the library, import it into your Lambda projects, and patch the services you wish to instrument.
-
-{{< programming-lang-wrapper langs="nodejs,python,go,ruby,java,.NET" >}}
-
-{{< programming-lang lang="nodejs" >}}
-
-Install the X-Ray tracing library:
-
-```bash
-
-npm install aws-xray-sdk
-
-# for Yarn users
-yarn add aws-xray-sdk
-```
-
-To instrument the AWS SDK:
-
-```js
-var AWSXRay = require('aws-xray-sdk-core');
-var AWS = AWSXRay.captureAWS(require('aws-sdk'));
-```
-
-To instrument all downstream HTTP calls:
-
-```js
-var AWSXRay = require('aws-xray-sdk');
-AWSXRay.captureHTTPsGlobal(require('http'));
-var http = require('http');
-```
-
-To instrument PostgreSQL queries:
-
-```js
-var AWSXRay = require('aws-xray-sdk');
-var pg = AWSXRay.capturePostgres(require('pg'));
-var client = new pg.Client();
-```
-
-To instrument MySQL queries:
-
-```js
-var AWSXRay = require('aws-xray-sdk');
-var mysql = AWSXRay.captureMySQL(require('mysql'));
-//...
-var connection = mysql.createConnection(config);
-```
-
-For further configuration, creating subsegments, and recording annotations, see the [X-Ray Node.js docs][1].
-
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-nodejs.html
-{{< /programming-lang >}}
-
-{{< programming-lang lang="python" >}}
-
-Install the X-Ray tracing library:
-
-```bash
-pip install aws-xray-sdk
-```
-
-To patch [all libraries][1] by default, add the following to the file containing your Lambda handlers:
-
-```python
-from aws_xray_sdk.core import xray_recorder
-from aws_xray_sdk.core import patch_all
-patch_all()
-```
-
-Note that tracing `aiohttp` requires [specific instrumentation][2].
-
-For further configuration, creating subsegments, and recording annotations, see the [X-Ray Python docs][3].
-
-
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-patching.html
-[2]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python-httpclients.html
-[3]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-python.html
-{{< /programming-lang >}}
-
-{{< programming-lang lang="go" >}}
-See:
-- [X-Ray SDK for Go docs][1].
-
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-go.html
-{{< /programming-lang >}}
-
-{{< programming-lang lang="ruby" >}}
-See:
-- [X-Ray SDK for Ruby docs][1].
-
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-ruby.html
-{{< /programming-lang >}}
-
-{{< programming-lang lang="java" >}}
-
-See:
-- [X-Ray SDK for Java docs][1].
-
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-java.html
-{{< /programming-lang >}}
-
-{{< programming-lang lang=".NET" >}}
-
-See:
-- [X-Ray SDK for .Net docs][1].
-
-[1]: https://docs.aws.amazon.com/en_pv/xray/latest/devguide/xray-sdk-dotnet.html
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
-
-[1]: /integrations/amazon_web_services/#setup
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_xray
-[3]: https://github.com/DataDog/serverless-plugin-datadog
-[4]: https://docs.datadoghq.com/integrations/amazon_lambda/?tab=python#installing-and-using-the-datadog-layer
-[5]: https://www.datadoghq.com/blog/serverless-framework-plugin
-[6]: https://console.aws.amazon.com/apigateway/
+[1]: https://docs.datadoghq.com/serverless/aws_lambda/configuration?tab=others#collect-the-request-and-response-payloads
+[2]: https://docs.datadoghq.com/serverless/aws_lambda/metrics?tab=python#enhanced-lambda-metrics
+[3]: https://docs.datadoghq.com/serverless/aws_lambda/logs?tab=serverlessframework#connect-logs-and-traces
+[4]: https://docs.datadoghq.com/serverless/aws_lambda/configuration?tab=datadogcli#select-sampling-rates-for-ingesting-apm-spans
+[5]: https://docs.datadoghq.com/serverless/aws_lambda/configuration?tab=others#collect-traces-from-non-lambda-resources
+[6]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing
+[7]: https://docs.datadoghq.com/serverless/step_functions/merge-step-functions-lambda?tab=serverlessframework
+[8]: https://docs.datadoghq.com/integrations/amazon_xray/
+[9]: https://docs.datadoghq.com/serverless/step_functions/enhanced-metrics
+[10]: https://docs.datadoghq.com/serverless/step_functions/distributed-maps
+[11]: https://docs.datadoghq.com/serverless/aws_lambda/
+[12]: https://docs.datadoghq.com/serverless/step_functions
+[13]: https://docs.datadoghq.com/serverless/step_functions/installation?tab=custom#sample-traces
