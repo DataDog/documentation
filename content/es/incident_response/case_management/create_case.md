@@ -1,9 +1,11 @@
 ---
+aliases:
+- /es/service_management/case_management/create_case/
 further_reading:
-- link: service_management/case_management/view_and_manage
+- link: /incident_response/case_management/view_and_manage
   tag: Documentación
   text: Ver y gestionar casos
-- link: service_management/case_management/customization
+- link: /incident_response/case_management/customization
   tag: Documentación
   text: Personalización de incidencias
 title: Crear un caso
@@ -78,4 +80,4 @@ Crea una incidencia a través del [endpoint de API][5].
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /es/api/latest/case-management/#create-a-case
 [6]: /es/service_management/workflows/trigger/
-[7]: /es/service_management/case_management/customization
+[7]: /es/incident_response/case_management/customization
