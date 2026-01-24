@@ -513,8 +513,8 @@ Push events (spans and metrics) for an experiment.
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
-| `trace_id` | string | Trace ID. |
-| `span_id` | string | Span ID. |
+| `trace_id` | string | Trace ID. Must be different from the `span_id` value. |
+| `span_id` | string | Span ID. Must be different from the `trace_id` value. |
 | `project_id` | string | Project ID. |
 | `dataset_id` | string | Dataset ID. |
 | `name` | string | Span name (for example, task name). |
