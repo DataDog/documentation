@@ -6,6 +6,9 @@ aliases:
   - /security_platform/cloud_siem/
   - /security/cloud_siem/security_home/
 further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
   tag: "Blog"
   text: "Datadog Cloud SIEM: Driving innovation in security operations"
