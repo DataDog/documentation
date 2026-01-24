@@ -46,6 +46,7 @@ The following Linux distributions are supported for hosts and containers scans:
 | Photon OS                | 1.0, 2.0, 3.0, 4.0                                  | tdnf/yum/rpm     | [https://packages.vmware.com/photon/photon_cve_metadata/][12]                                             |
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg         | [https://security-tracker.debian.org/tracker/][13] and [https://www.debian.org/security/oval/][14]        |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg         | [https://ubuntu.com/security/cve][15]                                                                     |
+| Bottlerocket             | 1.7.0 and upper                                     | N/A              | [https://github.com/bottlerocket-os/bottlerocket/security/advisories][16]                                 |
 
 ## Application libraries
 
@@ -96,4 +97,5 @@ The following container runtimes are supported:
 [13]: https://security-tracker.debian.org/tracker/
 [14]: https://www.debian.org/security/oval/
 [15]: https://ubuntu.com/security/cve
-[16]: /help
+[16]: https://github.com/bottlerocket-os/bottlerocket/security/advisories
+[17]: /help
