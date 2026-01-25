@@ -328,7 +328,7 @@ You can configure the propagation of context for distributed traces by injecting
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][9] page or in [Ignoring Unwanted Resources][10].
 
-[otel_link]: /tracing/trace_collection/custom_instrumentation/java/otel/
+[otel_link]: /tracing/trace_collection/custom_instrumentation/server-side/?api_type=otel_api&prog_lang=java
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
 [3]: /tracing/glossary/#trace
