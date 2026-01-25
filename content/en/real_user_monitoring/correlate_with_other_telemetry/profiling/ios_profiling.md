@@ -82,9 +82,9 @@ Use the flame graph, thread timeline, and call graph visualizations to analyze t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.apple.com/documentation/kernel/mach
-[2]: https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/ 
-[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios
-[4]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
+[2]: /real_user_monitoring/rum_without_limits/ 
+[3]: /real_user_monitoring/application_monitoring/ios
+[4]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
 
 
 

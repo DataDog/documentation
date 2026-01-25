@@ -14,14 +14,14 @@ further_reading:
 ---
 ## Overview
 
-Datadog RUM supports profiling for browser, iOS, and Android applications. Profiling data is used to analyze application performance at a system and code level.
+Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
-## Start profiling RUM application
+## Start profiling your RUM application
 
-To get started, install an application and configure the corresponding platform SDK.
+To get started, configure the SDK for your application's platform.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling">}}<u>Android Profiling</u>: Set up profiling on Android applications.{{< /nextlink >}}
- {{< nextlink href="/real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling">}}<u>Browser Profiling</u>: Set up profiling on Browser applications.{{< /nextlink >}}
- {{< nextlink href="/real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling">}}<u>iOS Profiling</u>: Set up profiling on iOS applications.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling">}}<u>Android Profiling</u>: Set up profiling for Android applications.{{< /nextlink >}}
+ {{< nextlink href="/real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling">}}<u>Browser Profiling</u>: Set up profiling for Browser applications.{{< /nextlink >}}
+ {{< nextlink href="/real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling">}}<u>iOS Profiling</u>: Set up profiling for iOS applications.{{< /nextlink >}}
 {{< /whatsnext >}}

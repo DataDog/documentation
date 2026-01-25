@@ -21,13 +21,13 @@ Browser Profiling is in Preview.
 
 ## Overview
 
-Browser profiling provides visibility into how your application behaves in your users' browsers, helping you to understand root causes behind unresponsive applications (whether unresponsiveness happens at page load, or further down the page's lifecycle). Using profiling data alongside RUM insights enables you to see what code is executed during a [Long Animation Frame (LoAF)][1], understanding how JavaScript execution and rendering tasks affect user-perceived performance.
+Browser profiling provides visibility into how your application behaves in your users' browsers, helping you understand root causes behind unresponsive applications at page load or during the page life cycle. Use profiling data alongside RUM insights to identify which code executes during a [Long Animation Frame (LoAF)][1] and how JavaScript execution and rendering tasks impact user-perceived performance.
 
-To get started, ensure browser profiling is enabled in your RUM SDK configuration. When browser profiling is enabled, you can click on a profiled event sample to see a profile section.
+To get started, enable browser profiling in your RUM SDK configuration. After enabling it, click on a profiled event sample to see detailed profiling data.
 
 ## Usage
 
-### Setup RUM
+### Set up RUM
 
 <div class="alert alert-info">Browser SDK version 6.12 or later is required.</div>
 

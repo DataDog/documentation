@@ -20,9 +20,9 @@ Android Profiling is in Preview.
 
 ## Overview
 
-Android mobile application profiling captures detailed data about your application’s performance during launch. Android profiling is built on top of the [ProfilingManager Android API][1] and samples the device's CPU to collect method call stacks from the application’s process.
+Android profiling captures detailed data about your application's performance during launch, helping you identify slow methods and optimize startup time. Android profiling is built on top of the [ProfilingManager Android API][1] and samples the device's CPU to collect method call stacks from the application's process.
 
-<div class="alert alert-warning">Only devices running Android 15 (API level 35) will generate profiling data.</div>
+<div class="alert alert-warning">Only devices running Android 15 (API level 35) or higher generate profiling data.</div>
 
 
 ## Prerequisites
@@ -33,7 +33,7 @@ Android mobile application profiling captures detailed data about your applicati
 ## Setup
 
 1. Set up [Mobile RUM for Android][3].
-2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which sets the percentage of profiler runs on application launches.
+2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 15% means profiling runs on 15 out of 100 launches).
 
 <div class="alert alert-danger">
   If no value is specified, the default <code>applicationLaunchSampleRate</code> is 15 percent.
@@ -53,7 +53,7 @@ Android mobile application profiling captures detailed data about your applicati
 
             Datadog.initialize(this, configuration, trackingConsent)
 
-            // RUM needs to be enabled for Profiling application launch
+            // Enable RUM (required for Profiling)
             val rumConfig = RumConfiguration.Builder(applicationId)
                 .build()
             Rum.enable(rumConfig)
@@ -61,7 +61,7 @@ Android mobile application profiling captures detailed data about your applicati
             // Enable Profiling
             val profilingConfig = ProfilingConfiguration.Builder()
               .setApplicationLaunchSampleRate(15) // default is 15%
-              .build.()
+              .build()
 
             Profiling.enable(profilingConfig)
         }
@@ -74,7 +74,7 @@ Android mobile application profiling captures detailed data about your applicati
 
 The [ProfilingManager API][4] also supports disablng rate limiting during debug builds. 
 
-## Explore Profiling Data
+## Explore profiling data
 
 ### During the time to initial display
 
@@ -82,15 +82,15 @@ Android application launch profiling data is attached to the [time to initial di
 
 {{< img src="real_user_monitoring/android/android-profiling-session.png" alt="Android profiling data in RUM session." style="width:90%;" >}}
 
-Use the flame graph, thread timeline, and call graph visualizations to analyze the profiling data for the time to initial display. You can also download the profiling data for external analysis.
+Use the **flame graph** to identify which methods consume the most CPU time during launch, the **thread timeline** to see parallel execution patterns, and the **call graph** to trace method dependencies. You can also download the profiling data for external analysis or deeper investigation.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.android.com/topic/performance/tracing/profiling-manager/overview
-[2]: https://docs.datadoghq.com/real_user_monitoring/rum_without_limits/ 
-[3]: http://localhost:1313/real_user_monitoring/application_monitoring/android
+[2]: /real_user_monitoring/rum_without_limits/ 
+[3]: /real_user_monitoring/application_monitoring/android
 [4]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
-[5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin 
+[5]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin 
 
