@@ -1,8 +1,9 @@
 ---
 title: Install the DDOT Collector as a Gateway on Kubernetes
-code_lang: kubernetes_gateway
-type: multi-code-lang
-code_lang_weight: 2
+private: true
+# code_lang: kubernetes_gateway
+# type: multi-code-lang
+# code_lang_weight: 2
 further_reading:
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog
