@@ -240,10 +240,13 @@ The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoi
 
 {{< tabs >}}
 {{% tab "JFR" %}}
-The JFR based allocation profiling engine is enabled by default since JDK 16.
-The reason it's not enabled by default for JDK 8 and 11, is that an allocation intensive
-application can lead to high overhead and large recording sizes.
-To enable it for JDK 8 and 11, add the following:
+The JFR based allocation profiling engine is enabled by default since JDK 16. For older JDKs, manual activation and performance considerations should be taken into account.
+
+This is not supported for Oracle JDK 8 and IBM J9 JDK 8. A paid license version of Oracle JDK 8 enables the usage of JFR events on which this feature relies.
+
+It is not enabled by default for OpenJDK 8 and JDK 11 because an allocation intensive application can lead to high overhead and large recording sizes.
+
+To enable it for OpenJDK 8 and JDK 11, add the following:
 
 ```
 export DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
@@ -254,6 +257,7 @@ or:
 ```
 -Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
 ```
+
 {{% /tab %}}
 
 {{% tab "Datadog Profiler" %}}
