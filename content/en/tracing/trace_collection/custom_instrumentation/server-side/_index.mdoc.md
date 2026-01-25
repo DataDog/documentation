@@ -1,5 +1,5 @@
 ---
-title: Server-Side Languages
+title: Server-Side Custom Instrumentation
 description: Add custom spans, tags, and instrumentation to capture application-specific observability data using Datadog APIs and OpenTelemetry.
 aliases:
   # Java aliases
