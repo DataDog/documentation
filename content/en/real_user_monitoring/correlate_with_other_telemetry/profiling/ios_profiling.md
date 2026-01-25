@@ -21,7 +21,7 @@ iOS Profiling is in Preview.
 
 ## Overview
 
-iOS mobile application profiling captures detailed data about your applicationâ€™s performance during launch. iOS profiling is built on top of the [mach Kernel API][1] and samples all application threads to collect call stacks for all application processes. 
+iOS profiling captures detailed data about your application's performance during launch, helping you identify slow functions and optimize startup time. iOS profiling is built on top of the [mach Kernel API][1] and samples all application threads to collect call stacks for all application processes. 
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ iOS mobile application profiling captures detailed data about your applicationâ€
 ## Setup
 
 1. Set up [Mobile RUM for iOS][3].
-2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which sets the percentage of profiler runs on application launches.
+2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 15% means profiling runs on 15 out of 100 launches).
 
 <div class="alert alert-danger">
   If no value is specified, the default <code>applicationLaunchSampleRate</code> is 15 percent.
@@ -67,7 +67,7 @@ iOS mobile application profiling captures detailed data about your applicationâ€
 {{% /tab %}}
 {{< /tabs >}}
 
-## Explore Profiling Data
+## Explore profiling data
 
 ### During the time to initial display
 

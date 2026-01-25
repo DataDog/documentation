@@ -33,7 +33,7 @@ To get started, enable browser profiling in your RUM SDK configuration. After en
 
 1. Set up [RUM Browser Monitoring][2].
 
-2. Initialize the RUM SDK and configure `profilingSampleRate`, which sets the percentage of sessions that are profiled.
+2. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 sessions).
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -61,12 +61,12 @@ To get started, enable browser profiling in your RUM SDK configuration. After en
 
 4. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
-    This step is required only if your JavaScript files are served from a different origin. For example, an HTML document is served from `cdn.com`, and JavaScript files are served from `static.cdn.com`. In this case, you must enable CORS; if you do not, your JavaScript files are invisible for the profiler. By default, your browser loads JavaScript in `no-cors` mode. For more information, see the [Browser profiling and CORS](#cors) section.
+      This step is required only if your JavaScript files are served from a different origin than your HTML. For example, if your HTML is served from `cdn.com` and JavaScript files from `static.cdn.com`, you must enable CORS to make JavaScript files visible to the profiler. For more information, see the [Browser profiling and CORS](#cors) section.
     
     To enable CORS:
 
     - Add a `crossorigin="anonymous"` attribute to `<script/>` tags
-    - Ensure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
+    - Make sure that JavaScript response includes the `Access-Control-Allow-Origin: *` HTTP header (or the proper origin value)
     
        ```javascript
        app.get("/", (request, response) => {
@@ -78,7 +78,7 @@ To get started, enable browser profiling in your RUM SDK configuration. After en
        ```
 
 {{% collapse-content title="Browser profiling and CORS" level="h4" expanded=false id="cors" %}}
-#### Why would I need to set CORS?
+#### Requirements for Cross-Origin Scripts (CORS)
 
 If a script's execution or attribution information is to be surfaced in performance entries (and thus captured in browser profiling), the resource (for example, a JavaScript file) needs to be fetched with CORS headers that explicitly allow it to be shared with the origin making the measurement (your application).
 
@@ -87,7 +87,7 @@ To summarize:
 - If a script is loaded from a same-origin source, then attribution is allowed, and you can see profiling data attributed to this script.
 - If a script is loaded cross-origin _without_ a permissive CORS policy (like `Access-Control-Allow-Origin` allowing the page origin), then attribution is blocked, and you do not see profiling data attributed to this script.
 
-This CORS policy ensures that only scripts explicitly intended to be profiled by other origins can be profiled.
+This CORS policy restricts profiling to only scripts that are explicitly intended to be profiled by other origins.
 
 #### How does CORS relate to browser profiling?
 
@@ -110,23 +110,23 @@ To protect cross-origin script privacy, _both_ sides must agree to share informa
 - The page must explicitly request a CORS-enabled fetch, with `crossorigin="anonymous"`.
 - The server must permit this, with an `Access-Control-Allow-Origin` header in the response.
 
-A script is eligible for attribution in the JS Self-Profiling API only when both of the above conditions are true.
+A script is eligible for attribution in the JS Self-Profiling API only when both of these conditions are met.
 
 {{% /collapse-content %}}
 
-## Explore Profiling
+## Explore profiling
 
 ### Within the Optimization page
 The **Optimization page** surfaces profiling data in several contexts:
-- In the **Troubleshoot section**, Datadog samples long tasks across multiple views to help you identify your top contributing functions. This overview highlights where your JavaScript execution time is being spent and which functions are most responsible for blocking the main thread.
+- In the **Troubleshoot section**, Datadog samples long tasks across multiple views to identify your top contributing functions. Use this overview to find where JavaScript execution time is spent and which functions block the main thread, then optimize those functions to improve responsiveness.
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_troubleshoot_section.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" >}}
 
-- Within the **Event Waterfall**, any long task that includes profiling data is marked with a yellow profiling icon. Clicking one of these long task events opens a Long Task view panel, which displays detailed profiling data captured during that execution window. You can use this panel to examine and identify blocking functions and understand how script execution contributes to poor responsiveness.
+- Within the **Event Waterfall**, any long task that includes profiling data is marked with a yellow profiling icon. Click one of these long task events to open a Long Task view panel with detailed profiling data. Use this panel to identify blocking functions, trace their call stacks, and understand how script execution contributes to poor responsiveness.
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" >}}
 
 
 ### Within the Sessions Explorer 
-You can also find profiling data when reviewing an individual events within the **Sessions Explorer**. This opens the same Long Task view panel with profiling data, allowing you to inspect what code was executing during that task and how it affected the user’s experience.
+You can also find profiling data when reviewing individual events within the **Sessions Explorer**. This opens the same Long Task view panel with profiling data, allowing you to inspect what code was executing during that task and how it affected the user's experience.
 {{< img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" >}}
 
 ## Further Reading
