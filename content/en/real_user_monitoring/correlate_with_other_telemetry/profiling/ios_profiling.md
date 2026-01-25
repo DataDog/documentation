@@ -31,14 +31,12 @@ iOS profiling captures detailed data about your application's performance during
 ## Setup
 
 1. Set up [Mobile RUM for iOS][3].
-2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 15% means profiling runs on 15 out of 100 launches).
+2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 5% means profiling runs on 5 out of 100 launches).
 
 <div class="alert alert-danger">
-  If no value is specified, the default <code>applicationLaunchSampleRate</code> is 15 percent.
+  If no value is specified, the default <code>applicationLaunchSampleRate</code> is 5 percent.
 </div>
 
-{{< tabs >}}
-{{% tab "Swift" %}}
 ```swift
       import DatadogCore
       import DatadogRUM
@@ -64,8 +62,6 @@ iOS profiling captures detailed data about your application's performance during
       // Enable Profiling feature
       Profiling.enable(with: .init()) // default is 5%
   ```
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Explore profiling data
 

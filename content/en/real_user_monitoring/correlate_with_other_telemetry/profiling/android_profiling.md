@@ -39,8 +39,6 @@ Android profiling captures detailed data about your application's performance du
   If no value is specified, the default <code>applicationLaunchSampleRate</code> is 15 percent.
 </div>
 
-{{< tabs >}}
-{{% tab "Kotlin" %}}
 ```kotlin
     class SampleApplication : Application() {
         override fun onCreate() {
@@ -67,8 +65,6 @@ Android profiling captures detailed data about your application's performance du
         }
     }
   ```
-{{% /tab %}}
-{{< /tabs >}}
 
 <div class="alert alert-warning">The total volume of profiles may not match the percentage configured in <code>applicationLaunchSampleRate</code>. This variation results from <a href="https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works">rate limitations</a> within the data collector, including profiling support on older devices and the maximum profiling frequency per device.</div>
 
