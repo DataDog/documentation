@@ -18,8 +18,6 @@ further_reading:
   text: "Destinations"
 ---
 
-<div class="alert alert-info">In-memory and disk buffering options for destinations are in Preview. Contact your account manager to request access.</a></div>
-
 ## Overview
 
 Sometimes problems can occur even when you try to ensure your Observability Pipelines deployments are sized for the expected load. For example, an application might start generating more data than usual, or the downstream service you are sending data to starts responding slower than expected. To address these issues:
@@ -36,7 +34,7 @@ Backpressure determines if the system should slow down the consumption or accept
 
 All components in Observability Pipelines have a small in-memory buffer between them to ensure smooth handoff of events as they traverse your pipeline. These buffers are not intended for large scale buffering. Sources and processors have a buffer capacity of 100 events.
 
-By default, destinations have an in-memory buffer which can store 500 events. Destinations in particular are susceptible to intermittent latency and outages, because destinations involve sending events over a network to an external service. The size of destination buffers is configurable, allowing you to set it based on your pipeline's throughput. As long as there is still space in the buffer, your source keeps ingesting events and does not propagate backpressure. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information.
+By default, destinations have an in-memory buffer which can store 500 events. Destinations in particular are susceptible to intermittent latency and outages, because destinations involve sending events over a network to an external service. The size of destination buffers is configurable, allowing you to set it based on your pipeline's throughput. As long as there is still space in the buffer, your source keeps ingesting events and does not propagate backpressure.
 
 ### Destination buffer behavior
 
@@ -56,7 +54,7 @@ Both types of buffering help to prevent backpressure from propagating back to yo
 - **Disk buffers**
   - The bandwidth of data you plan on sending through your pipeline is unlikely to get bottlenecked by I/O as the buffer flushes to disk.
   - You need to minimize any potential data loss which might occur if the Worker unexpectedly shuts down.
-  
+
 This table compares the differences between the memory and disk buffer.
 
 | Property                                                 | Memory Buffer             | Disk Buffer                          |
