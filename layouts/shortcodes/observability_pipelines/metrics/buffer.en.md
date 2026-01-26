@@ -22,7 +22,7 @@ Track buffer behavior with these additional metrics:
 : Cumulative number of events dropped by a buffer (for example, due to overflow).
 
 `pipelines.source_buffer_utilization`
-: The percentage of a source's buffer that is used.
+: Histogram of event count in a source's buffer downstream of a source. The buffer is downstream of a source, which means the source receives the event and then puts it in the buffer.
 
 `pipelines.source_buffer_utilization_level`
 : Current event count in a source's buffer. The buffer is downstream of a source, which means the source receives the event and then puts it in the buffer.
@@ -31,7 +31,7 @@ Track buffer behavior with these additional metrics:
 : A source's maximum buffer size, defined as the number of events.
 
 `pipelines.transform_buffer_utilization`
-: The percentage of a transform's (processor's) buffer that is used.
+: Histogram of event count in a processor's buffer. The buffer is upstream of the processor, which means the event is put into the buffer before it gets processed.
 
 `pipelines.transform_buffer_utilization_level`
 : Current event count in a processor's buffer. The buffer is upstream of the processor, which means the event is put into the buffer before it gets processed.
