@@ -4,6 +4,7 @@ description: Create and manage incidents
 aliases:
 - /monitors/incident_management/datadog_clipboard
 - /service_management/incident_management/datadog_clipboard/
+- /incident_response/incident_management/datadog_clipboard/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
   tag: "Blog"

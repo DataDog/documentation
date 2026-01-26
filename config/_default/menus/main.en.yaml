@@ -2580,11 +2580,6 @@ menu:
       parent: incident_response_heading
       identifier: oncall
       weight: 30000
-    - name: Datadog Clipboard
-      url: incident_response/incident_management/datadog_clipboard
-      parent: incidents
-      identifier: incidents_clipboard
-      weight: 10
     - name: Onboard a Team
       url: incident_response/on-call/teams/
       parent: oncall
