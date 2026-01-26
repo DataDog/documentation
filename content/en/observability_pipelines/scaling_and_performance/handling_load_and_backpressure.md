@@ -34,7 +34,7 @@ Backpressure determines if the system should slow down the consumption or accept
 
 ## Component buffers
 
-All components in Observability Pipelines have a small in-memory buffer between them to ensure smooth handoff of events as they traverse your pipeline. These buffers ensure that variations in the amount of time for an event to be processed through each component do not cause excessive blocking/waiting. These buffers are not intended for large scale buffering, and only have a capacity of 100 events.
+All components in Observability Pipelines have a small in-memory buffer between them to ensure smooth handoff of events as they traverse your pipeline. These buffers are not intended for large scale buffering. Sources and processors have a buffer capacity of 100 events.
 
 By default, destinations have an in-memory buffer which can store 500 events. Destinations in particular are susceptible to intermittent latency and outages, because destinations involve sending events over a network to an external service. The size of destination buffers is configurable, allowing you to set it based on your pipeline's throughput. As long as there is still space in the buffer, your source keeps ingesting events and does not propagate backpressure. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information.
 
