@@ -7933,12 +7933,23 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_troubleshooting
       weight: 7
+    - name: Client SDKs
+      url: client_sdks/
+      pre: wrench
+      identifier: sdk
+      parent: digital_experience_heading
+      weight: 20000
+    - name: Setup
+      url: client_sdks/setup/
+      parent: sdk
+      identifier: sdk_setup
+      weight: 1
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
       identifier: rum
       parent: digital_experience_heading
-      weight: 20000
+      weight: 30000
     - name: Application Monitoring
       url: real_user_monitoring/application_monitoring/
       parent: rum
@@ -8559,7 +8570,7 @@ menu:
       pre: product-analytics
       identifier: product_analytics
       parent: digital_experience_heading
-      weight: 50000
+      weight: 40000
     - name: Vizualizing with Charts
       url: product_analytics/charts
       parent: product_analytics
@@ -8640,7 +8651,7 @@ menu:
       pre: play-circle
       identifier: session_replay
       parent: digital_experience_heading
-      weight: 60000
+      weight: 50000
     - name: Browser
       url: /session_replay/browser
       parent: session_replay

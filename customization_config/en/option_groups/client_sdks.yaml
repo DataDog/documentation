@@ -1,0 +1,10 @@
+sdk_platform_options:
+  - id: browser
+    default: true
+  - id: android
+  - id: ios
+  - id: react_native
+  - id: flutter
+  - id: kotlin_multiplatform
+  - id: roku
+  - id: unity

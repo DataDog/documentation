@@ -331,6 +331,9 @@ options:
 - label: RedHat
   id: redhat
 
+- label: Roku
+  id: roku
+
 - label: CentOS
   id: centos
 
@@ -399,6 +402,9 @@ options:
 
 - label: Traces
   id: traces
+
+- label: Unity
+  id: unity 
 
 - label: Wget
   id: wget
