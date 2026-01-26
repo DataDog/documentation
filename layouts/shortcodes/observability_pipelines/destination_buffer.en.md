@@ -6,4 +6,4 @@ Toggle the switch to enable **Buffering Options**. Enable a configurable buffer 
         1. Maximum memory buffer size is 128 GB.
         1. Maximum disk buffer size is 500 GB.
 
-[100]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/?tab=logs#configurable-buffers-for-destinations
+[100]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
