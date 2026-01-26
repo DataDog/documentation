@@ -708,7 +708,7 @@ $conv-search-assistant-bg: #f4f4f5;
 }
 
 .ask-ai-sidebar-btn {
-    display: inline-flex;
+    display: none; // Hidden by default - shown via JS when feature flag is enabled
     align-items: center;
     gap: 5px;
     padding: 3px 8px;
@@ -723,6 +723,10 @@ $conv-search-assistant-bg: #f4f4f5;
     white-space: nowrap;
     position: relative;
     top: -1px;
+    
+    .conv-search-enabled & {
+        display: inline-flex;
+    }
     
     svg {
         flex-shrink: 0;
@@ -755,21 +759,31 @@ $conv-search-assistant-bg: #f4f4f5;
         width: 100%;
         max-width: 560px;
     }
+    
+    // Remove margin-bottom from searchbox to align with AI button
+    .searchbox-container {
+        margin-bottom: 0;
+    }
 }
 
 .home-ai-divider {
+    display: none; // Hidden by default - shown via JS when feature flag is enabled
     color: rgba(255, 255, 255, 0.6);
     font-size: 13px;
     font-weight: 400;
+    
+    .conv-search-enabled & {
+        display: inline;
+    }
 }
 
 .home-ai-btn {
-    display: inline-flex;
+    display: none; // Hidden by default - shown via JS when feature flag is enabled
     align-items: center;
     justify-content: center;
     gap: 6px;
     padding: 0 14px;
-    height: 40px;
+    height: 38px; // Match search bar height for alignment
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     background: rgba(255, 255, 255, 0.1);
@@ -780,6 +794,10 @@ $conv-search-assistant-bg: #f4f4f5;
     transition: all 0.15s ease;
     flex-shrink: 0;
     white-space: nowrap;
+    
+    .conv-search-enabled & {
+        display: inline-flex;
+    }
     
     svg {
         flex-shrink: 0;

@@ -1,15 +1,25 @@
 import { getConfig } from '../helpers/getConfig';
-import { getBooleanFlag } from '../helpers/feature-flags';
 import Typesense from 'typesense';
 import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
+import { initializeFeatureFlags, getBooleanFlag } from 'scripts/helpers/feature-flags';
 
 const { env } = document.documentElement.dataset;
 const typesenseConfig = getConfig(env).typesense;
 
+let IS_CONVERSATIONAL_SEARCH_ENABLED = false;
 const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
-const IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(CONVERSATIONAL_SEARCH_FLAG_KEY);
+
+initializeFeatureFlags().then((client) => {
+    IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY);
+    console.log("FLAG INITIALIZED: IS_CONVERSATIONAL_SEARCH_ENABLED", IS_CONVERSATIONAL_SEARCH_ENABLED);
+    if (IS_CONVERSATIONAL_SEARCH_ENABLED) {
+        document.body.classList.add('conv-search-enabled');
+        // Initialize conversational search after feature flag is confirmed enabled
+        initConversationalSearch();
+    }
+});
 
 // Configure marked with highlight.js
 marked.use(
@@ -632,8 +642,9 @@ class ConversationalSearch {
 let conversationalSearchInstance = null;
 
 // Initialize when DOM is ready
-async function initConversationalSearch() {
-    if (!IS_CONVERSATIONAL_SEARCH_ENABLED) {
+function initConversationalSearch() {
+    // Guard against double initialization
+    if (!IS_CONVERSATIONAL_SEARCH_ENABLED || conversationalSearchInstance) {
         return;
     }
 
@@ -663,4 +674,4 @@ if (document.readyState === 'loading') {
     initConversationalSearch();
 }
 
-export { ConversationalSearch, typesenseClient, askDocsAI, IS_CONVERSATIONAL_SEARCH_ENABLED };
+export { ConversationalSearch, typesenseClient, askDocsAI, CONVERSATIONAL_SEARCH_FLAG_KEY };
