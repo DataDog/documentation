@@ -130,7 +130,15 @@ DD_TRACE_RESOURCE_RENAMING_ENABLED="true"
 
 **Version requirements:**
 
-_Minimum tracer and agent versions are currently being finalized. This section will be updated with specific version requirements for each supported language and technology._
+Endpoint renaming requires Datadog Agent v7.71.0 or later and the following minimum tracer versions:
+
+|Technology|Minimum tracer version|
+|----------|----------|
+|Node.js   | v6.0.0   |
+|PHP       | v1.17.0  |
+|Python    | v4.3.0   |
+|Golang    | v2.7.0   |
+|Ruby      | v2.28.0  |
 
 #### How to enable renaming
 
