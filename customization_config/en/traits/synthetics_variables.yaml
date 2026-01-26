@@ -1,0 +1,5 @@
+- id: synthetics_variables
+  label: "Synthetics Variables"
+  type: text
+  internal_notes: The variables available for use in in Synthetic Monitoring test notifications.
+

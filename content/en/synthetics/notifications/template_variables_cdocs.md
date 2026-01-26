@@ -184,21 +184,21 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable"
     data-description="Test Type is Browser"
-    data-if="12810"
+    data-if="13266"
   >
     <p>Browser-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Test Type is Mobile"
-    data-if="12811"
+    data-if="13267"
   >
     <p>Mobile-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Test Type is Multistep API"
-    data-if="12812"
+    data-if="13268"
   >
     <p>Multistep API-specific content goes here.</p>
   </div>
@@ -246,42 +246,42 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution"
-    data-if="12813"
+    data-if="13269"
   >
     <p>Test execution variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Result"
-    data-if="12814"
+    data-if="13270"
   >
     <p>Result variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Local"
-    data-if="12815"
+    data-if="13271"
   >
     <p>Local variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Global"
-    data-if="12816"
+    data-if="13272"
   >
     <p>Global variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Extracted"
-    data-if="12817"
+    data-if="13273"
   >
     <p>Extracted variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Step"
-    data-if="12818"
+    data-if="13274"
   >
     <p>Step variables-specific content goes here.</p>
   </div>
@@ -344,4 +344,4 @@ title: Synthetic Monitoring Template Variables
   </table>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"12810":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"12810"},"12811":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"12811"},"12812":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"12812"},"12813":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"12813"},"12814":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"12814"},"12815":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"12815"},"12816":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"12816"},"12817":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"12817"},"12818":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"12818"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"13266":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"13266"},"13267":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"13267"},"13268":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"13268"},"13269":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"13269"},"13270":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"13270"},"13271":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"13271"},"13272":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"13272"},"13273":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"13273"},"13274":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"13274"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
