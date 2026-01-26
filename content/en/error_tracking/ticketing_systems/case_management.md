@@ -72,7 +72,7 @@ The relationship between cases and issues is a 1:N relationship. A single case c
 
 ## State dual-way sync between issues and cases
 
-### Single Error Tracking issue linked to a Case Management case
+### Single Error Tracking issue linked to single Case Management case
 
 When a single Error Tracking issue is linked to a Case Management case, their states are two-way synced. The issue state is mapped to
 the default status of the corresponding case status group:
@@ -85,7 +85,7 @@ the default status of the corresponding case status group:
 | IGNORED                    | Closed                       |
 | EXCLUDED                   | Closed                       |
 
-### Multiple Error Tracking issues linked to the same Case Management case
+### Multiple Error Tracking issues linked to single Case Management case
 
 When multiple Error Tracking issues are linked to the same Case Management case, there is also a sync between their states, depending on the situation:
 - If you update the status of the case, all linked issues are updated following the state mapping described in the previous paragraph.

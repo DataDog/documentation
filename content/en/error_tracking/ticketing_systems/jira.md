@@ -23,7 +23,7 @@ Integrate Jira with Error Tracking to create and link Jira tickets to Error Trac
 - Automatically route issues to specific Jira boards using automation rules
 - Automatically create Jira tickets for Error Tracking issues matching specific criteria.
 
-## Setup
+## Prerequisites
 
 Follow [these steps][7] to set up the Jira integration for Datadog.
 
@@ -75,13 +75,13 @@ The relationship between tickets and issues is a 1:N relationship. A single tick
 
 If two-way sync is enabled and configured between Datadog and Jira projects, the states of Error Tracking issues and Jira tickets are mirrored. If you encounter any unexpected behavior on this states sync, see the [Troubleshooting](#troubleshooting) section for how to fix your configuration.
 
-### Single Error Tracking issue linked to a Jira ticket
+### Single Error Tracking issue linked to single Jira ticket
 
 When a single Error Tracking issue is linked to a Jira ticket, their states are two-way synced. The mapping between these states can be configured in the Data Sync settings of the ticket creation or automation rule forms:
 
 {{< img src="error_tracking/jira-status-mapping.png" alt="Map Error Tracking issue states to Jira ticket statuses" style="width:100%;" >}}
 
-### Multiple Error Tracking issues linked to the same Jira ticket
+### Multiple Error Tracking issues linked to single Jira ticket
 
 When multiple Error Tracking issues are linked to the same Jira ticket, there is also a sync between their states, depending on the situation. If you update the status of the ticket, all linked issues are updated to mirror this state according to your mapping.
 
@@ -151,7 +151,7 @@ When a new Error Tracking issue is created, rules are evaluated and the first ru
 
 ## Troubleshooting
 
-If you experience unexpected behavior with Error Tracking ticketing integrations, the troubleshooting steps below can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][5].
+If you experience unexpected behaviors using ticketing systems with Error Tracking, the following troubleshooting steps can help you resolve the issue quickly. If you continue to have trouble, reach out to [Datadog support][5].
 
 ### Sync is broken between Jira and Error Tracking
 
