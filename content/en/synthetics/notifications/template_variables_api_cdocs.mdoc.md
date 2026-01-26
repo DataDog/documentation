@@ -1,5 +1,5 @@
 ---
-title: Synthetic Monitoring API Test Template Variables
+title: Synthetic Monitoring API Template Variables
 content_filters:
 - trait_id: protocol
   option_group_id: synthetics_protocol_options
