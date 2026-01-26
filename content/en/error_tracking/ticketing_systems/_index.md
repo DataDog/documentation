@@ -1,5 +1,5 @@
 ---
-title: Ticketing Systems
+title: Error Tracking Ticketing System Integrations
 is_beta: false
 private: false
 further_reading:
@@ -16,8 +16,7 @@ further_reading:
 
 ## Overview
 
-Datadog Error Tracking integrates with your existing ticketing workflows to streamline issue resolution.
-Link Error Tracking issues to Jira tickets or Case Management cases to track and resolve errors within your established processes.
+Datadog Error Tracking integrates with your existing ticketing workflows to streamline issue resolution. Link Error Tracking issues to Jira tickets or Case Management cases to track and resolve errors within your established processes.
 
 With ticketing system integrations, you can:
 
