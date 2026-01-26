@@ -184,21 +184,21 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable"
     data-description="Test Type is Browser"
-    data-if="10401"
+    data-if="10530"
   >
     <p>Browser-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Test Type is Mobile"
-    data-if="10402"
+    data-if="10531"
   >
     <p>Mobile-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Test Type is Multistep API"
-    data-if="10403"
+    data-if="10532"
   >
     <p>Multistep API-specific content goes here.</p>
   </div>
@@ -246,42 +246,42 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution"
-    data-if="10404"
+    data-if="10533"
   >
     <p>Test execution variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Result"
-    data-if="10405"
+    data-if="10534"
   >
     <p>Result variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Local"
-    data-if="10406"
+    data-if="10535"
   >
     <p>Local variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Global"
-    data-if="10407"
+    data-if="10536"
   >
     <p>Global variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Extracted"
-    data-if="10408"
+    data-if="10537"
   >
     <p>Extracted variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Step"
-    data-if="10409"
+    data-if="10538"
   >
     <p>Step variables-specific content goes here.</p>
   </div>
@@ -342,35 +342,6 @@ title: Synthetic Monitoring Template Variables
       </tr>
     </tbody>
   </table>
-  <h2 id="guidelines-and-resources">Guidelines and resources</h2>
-  <ul>
-    <li>
-      When possible, keep headers at the top level (outside of any
-      <code>if</code> tags), giving each section its own <code>if</code> tags.
-    </li>
-    <li>
-      If you can't keep headers at the top level, follow the
-      <a
-        href="https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#Avoid-duplicate-headers"
-        >best practices for avoiding duplicate headers</a
-      >
-      to make sure your page's right nav works properly.
-    </li>
-    <li>
-      Need to add an alert or other element? See the
-      <a
-        href="https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference"
-        >Tags Reference for Markdoc</a
-      >.
-    </li>
-    <li>
-      If you need to link to this page, follow the
-      <a
-        href="https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#When-you-link-to-a-top-level-header,-do-not-include-the-filter-params-in-the-URL"
-        >best practices for linking to a customizable doc</a
-      >.
-    </li>
-  </ul>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"10401":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10401"},"10402":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10402"},"10403":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10403"},"10404":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"10404"},"10405":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"10405"},"10406":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"10406"},"10407":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"10407"},"10408":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"10408"},"10409":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"10409"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"10530":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10530"},"10531":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10531"},"10532":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10532"},"10533":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"10533"},"10534":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"10534"},"10535":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"10535"},"10536":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"10536"},"10537":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"10537"},"10538":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"10538"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
