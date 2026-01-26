@@ -60,34 +60,25 @@ You can define additional attributes, such as the <code> device type</code>, to 
 
 Upload a CVS file to create a segment with a redefined list of users. The file must include a column that matches either `usr.id` or `usr.email`. 
 
-<!-- 
-To create a segment using external or third-party data:
-
-1. See the [Reference Tables][2] documentation for how to upload and create a Reference Table.
-2. Make sure to properly connect the data type (for example, `usr.id`, `usr.name`, or `usr.email`) to the column name.
-3. For accuracy, ensure there is data in Product Analytics for users in the segment. -->
 
 ## Use segments across Product Analytics
 
 ### In pathways
 
-In the Pathway page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Pathway diagram only for users in the "Premium Shopist Customers" segment.
+In the Pathway page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The following example shows a Pathway diagram only for users in the "Premium Shopist Customers" segment.
 
 {{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathway visualization to reflect a selected segment of users.">}}
 
 ### In analytics explorer
 
-You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
+You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
 
-{{< img src="product_analytics/segmentation/analytics-explorer-1.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
+{{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
-<!-- ### In funnel 
+### In funnel 
+In the funnel page, you can filter the data to track the journey of a set of users. In the following example, you can track the dropoff of thye "Premium Shopist Customers" segment between the main page and the `department/lighting` page.
 
-Content goes here.
-- decide on the events 
-- link to the view: https://demo.datadoghq.com/product-analytics/user-journey/funnel?query=%40application.id%3A75d50c62-8b66-403c-a453-aaa1c44d64bd&fromUser=false&user_journey_tile_def=%7B%22viz%22%3A%22funnel%22%2C%22requests%22%3A%5B%7B%22request_type%22%3A%22user_journey_funnel%22%2C%22query%22%3A%7B%22data_source%22%3A%22product_analytics_journey%22%2C%22search%22%3A%7B%22node_objects%22%3A%7B%22query_1%22%3A%7B%22data_source%22%3A%22product_analytics%22%2C%22search%22%3A%7B%22query%22%3A%22%40type%3Aview%20%40view.name%3A%2F%22%7D%7D%2C%22query_2%22%3A%7B%22data_source%22%3A%22product_analytics%22%2C%22search%22%3A%7B%22query%22%3A%22%40type%3Aview%22%7D%7D%7D%2C%22expression%22%3A%22query_1%20-%3E%20query_2%22%2C%22filters%22%3A%7B%22string_filter%22%3A%22%40application.id%3A75d50c62-8b66-403c-a453-aaa1c44d64bd%22%2C%22audience_filters%22%3A%7B%22segments%22%3A%5B%7B%22segment_id%22%3A%22afefd3da-bd6f-4d77-8dbb-614ce5503672%22%2C%22name%22%3A%22segment_1%22%7D%5D%7D%7D%7D%2C%22compute%22%3A%7B%22metric%22%3A%22__dd.conversion%22%2C%22aggregation%22%3A%22cardinality%22%7D%7D%7D%5D%7D&from_ts=1768602636256&to_ts=1769207436256&live=true 
-
--->
+{{< img src="product_analytics/segmentation/segment-funnel.png" alt="ADD">}}
 
 ## Further reading
 
