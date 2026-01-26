@@ -1,5 +1,5 @@
 ---
-title: Analyze your Experiments results
+title: Analyze Your Experiments Results
 description: How to analyze LLM Observability Experiments results.
 ---
 
