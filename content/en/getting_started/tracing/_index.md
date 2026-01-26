@@ -212,9 +212,9 @@ To add custom instrumentation:
 
 After you set up tracing and your application is sending data to Datadog, explore additional APM features:
 
-### Service Catalog
+### Software Catalog
 
-[Service Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
+[Software Catalog][9] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, and cost allocation in one place. Configure [service metadata][10] using tags, annotations, or a `service.datadog.yaml` file to enrich your services with ownership information, runbooks, and documentation links.
 
 ### Trace ingestion and retention
 
@@ -232,7 +232,7 @@ Control costs and manage data volume by configuring [ingestion controls][11] and
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /service_catalog/
-[10]: /service_catalog/adding_metadata/
+[9]: /internal_developer_portal/software_catalog/
+[10]: /internal_developer_portal/software_catalog/entity_model/
 [11]: /tracing/trace_pipeline/ingestion_controls/
 [12]: /tracing/trace_pipeline/trace_retention/
