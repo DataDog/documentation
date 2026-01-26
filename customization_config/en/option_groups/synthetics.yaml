@@ -3,3 +3,14 @@ synthetics_test_type_options:
     default: true
   - id: mobile
   - id: multistep
+
+synthetics_protocol_options:
+  - id: http
+    default: true
+  - id: dns
+  - id: ssl
+  - id: websocket
+  - id: udp
+  - id: tcp
+  - id: icmp
+  - id: grpc

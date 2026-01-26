@@ -1,9 +1,9 @@
 ---
-title: Synthetic Monitoring Template Variables
+title: Synthetic Monitoring API Test Template Variables
 content_filters:
-- trait_id: platform
-  option_group_id: synthetics_test_type_options
-  label: "Test Type"
+- trait_id: protocol
+  option_group_id: synthetics_protocol_options
+  label: "Protocol"
 - trait_id: synthetics_variables
   option_group_id: synthetics_variables_options
   label: "Variables"
@@ -11,44 +11,86 @@ content_filters:
 
 ## Overview
 
-Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages.
+This page provides template variables available for API tests, organized by protocol type.
 
-<!-- Browser -->
-{% if equals($platform, "browser") %}
-Browser-specific content goes here.
+<!-- HTTP -->
+{% if equals($protocol, "http") %}
+HTTP-specific template variables content goes here.
 {% /if %}
 
-<!-- Mobile -->
-{% if equals($platform, "mobile") %}
-Mobile-specific content goes here.
+<!-- DNS -->
+{% if equals($protocol, "dns") %}
+DNS-specific template variables content goes here.
 {% /if %}
 
-<!-- Multistep API -->
-{% if equals($platform, "multistep") %}
-Multistep API-specific content goes here.
+<!-- SSL -->
+{% if equals($protocol, "ssl") %}
+SSL-specific template variables content goes here.
 {% /if %}
+
+<!-- WebSocket -->
+{% if equals($protocol, "websocket") %}
+WebSocket-specific template variables content goes here.
+{% /if %}
+
+<!-- UDP -->
+{% if equals($protocol, "udp") %}
+UDP-specific template variables content goes here.
+{% /if %}
+
+<!-- TCP -->
+{% if equals($protocol, "tcp") %}
+TCP-specific template variables content goes here.
+{% /if %}
+
+<!-- ICMP -->
+{% if equals($protocol, "icmp") %}
+ICMP-specific template variables content goes here.
+{% /if %}
+
+<!-- gRPC -->
+{% if equals($protocol, "grpc") %}
+gRPC-specific template variables content goes here.
+{% /if %}
+
 
 ## Valid traits and their values (option IDs)
   
 For reference, here's a list of all the traits available on this page, and the valid values for each trait.
 
-You can use this table to populate the `equals` function in your `if` tags: `equals(<TRAIT>, <VALUE>)`. Example: `equals($platform, "browser")`. For details on using `if` tags, see the [relevant section of the Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference#If-and-if/else-(conditional-display-tag)).
+You can use this table to populate the `equals` function in your `if` tags: `equals(<TRAIT>, <VALUE>)`. Example: `equals($protocol, "http")`. For details on using `if` tags, see the [relevant section of the Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference#If-and-if/else-(conditional-display-tag)).
   
 {% table %}
 * Trait
 * Valid values
 * Equals function to use in `if` tag
 ---
-* `platform` {% rowspan=3 %}
-* `browser`
-* `equals($platform, "browser")`
+* `protocol` {% rowspan=8 %}
+* `http`
+* `equals($protocol, "http")`
 ---
-* `mobile`
-* `equals($platform, "mobile")`
+* `dns`
+* `equals($protocol, "dns")`
 ---
-* `multistep`
-* `equals($platform, "multistep")`
+* `ssl`
+* `equals($protocol, "ssl")`
+---
+* `websocket`
+* `equals($protocol, "websocket")`
+---
+* `udp`
+* `equals($protocol, "udp")`
+---
+* `tcp`
+* `equals($protocol, "tcp")`
+---
+* `icmp`
+* `equals($protocol, "icmp")`
+---
+* `grpc`
+* `equals($protocol, "grpc")`
 {% /table %}
+
 
 <!-- Test execution variables -->
 {% if equals($synthetics_variables, "execution") %}
@@ -79,7 +121,6 @@ Extracted variables-specific content goes here.
 {% if equals($synthetics_variables, "step") %}
 Step variables-specific content goes here.
 {% /if %}
-
 
 ## Valid traits and their values (option IDs)
   
@@ -112,10 +153,10 @@ You can use this table to populate the `equals` function in your `if` tags: `equ
 * `equals($synthetics_variables, "step")`
 {% /table %}
 
-  
 ## Guidelines and resources
   
 - When possible, keep headers at the top level (outside of any `if` tags), giving each section its own `if` tags.
 - If you can't keep headers at the top level, follow the [best practices for avoiding duplicate headers](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#Avoid-duplicate-headers) to make sure your page's right nav works properly.
 - Need to add an alert or other element? See the [Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference).
 - If you need to link to this page, follow the [best practices for linking to a customizable doc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#When-you-link-to-a-top-level-header,-do-not-include-the-filter-params-in-the-URL).
+

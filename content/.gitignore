@@ -10,7 +10,8 @@
 /en/real_user_monitoring/guide/proxy-rum-data.md
 /en/session_replay/mobile/privacy_options.md
 /en/session_replay/mobile/setup_and_configuration.md
-/en/synthetics/synthetics.md
+/en/synthetics/notifications/template_variables_api_cdocs.md
+/en/synthetics/notifications/template_variables_cdocs.md
 /en/tracing/trace_collection/custom_instrumentation/dotnet/otel.md
 /en/tracing/trace_collection/custom_instrumentation/go/otel.md
 /en/tracing/trace_collection/custom_instrumentation/java/otel.md

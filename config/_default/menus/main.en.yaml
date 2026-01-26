@@ -7822,6 +7822,11 @@ menu:
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables_cdocs
       weight: 1002
+    - name: API Template Variables (Customizable)
+      url: synthetics/notifications/template_variables_api_cdocs
+      parent: synthetics_notifications_template_variables_cdocs
+      identifier: synthetics_notifications_template_variables_api_cdocs
+      weight: 100200
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications

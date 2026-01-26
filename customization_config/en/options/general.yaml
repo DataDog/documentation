@@ -456,3 +456,21 @@ options:
 
 - label: Step variables
   id: step
+
+- label: DNS
+  id: dns
+
+- label: SSL
+  id: ssl
+
+- label: WebSocket
+  id: websocket
+
+- label: UDP
+  id: udp
+
+- label: ICMP
+  id: icmp
+
+- label: gRPC
+  id: grpc

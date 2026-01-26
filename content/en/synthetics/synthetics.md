@@ -177,28 +177,24 @@ title: Synthetic Monitoring Template Variables
       tabIndex="0"
     >Step variables</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
   <h2 id="overview">Overview</h2>
-  <p>
-    Template variables allow you to insert dynamic values from your test results
-    and configuration into Synthetic Monitoring notification messages.
-  </p>
   <div
     class="cdoc__toggleable"
     data-description="Test Type is Browser"
-    data-if="10173"
+    data-if="2527"
   >
     <p>Browser-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Test Type is Mobile"
-    data-if="10174"
+    data-if="2528"
   >
     <p>Mobile-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Test Type is Multistep API"
-    data-if="10175"
+    data-if="2529"
   >
     <p>Multistep API-specific content goes here.</p>
   </div>
@@ -243,45 +239,74 @@ title: Synthetic Monitoring Template Variables
       </tr>
     </tbody>
   </table>
+  <h2 id="guidelines-and-resources">Guidelines and resources</h2>
+  <ul>
+    <li>
+      When possible, keep headers at the top level (outside of any
+      <code>if</code> tags), giving each section its own <code>if</code> tags.
+    </li>
+    <li>
+      If you can't keep headers at the top level, follow the
+      <a
+        href="https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#Avoid-duplicate-headers"
+        >best practices for avoiding duplicate headers</a
+      >
+      to make sure your page's right nav works properly.
+    </li>
+    <li>
+      Need to add an alert or other element? See the
+      <a
+        href="https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference"
+        >Tags Reference for Markdoc</a
+      >.
+    </li>
+    <li>
+      If you need to link to this page, follow the
+      <a
+        href="https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#When-you-link-to-a-top-level-header,-do-not-include-the-filter-params-in-the-URL"
+        >best practices for linking to a customizable doc</a
+      >.
+    </li>
+  </ul>
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution variables"
-    data-if="10176"
+    data-if="2530"
   >
     <p>Test execution variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Result variables"
-    data-if="10177"
+    data-if="2531"
   >
     <p>Result variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Local variables"
-    data-if="10178"
+    data-if="2532"
   >
     <p>Local variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Global variables"
-    data-if="10179"
+    data-if="2533"
   >
     <p>Global variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Extracted variables"
-    data-if="10180"
+    data-if="2534"
   >
     <p>Extracted variables-specific content goes here.</p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Step variables"
-    data-if="10181"
+    data-if="2535"
   >
     <p>Step variables-specific content goes here.</p>
   </div>
@@ -373,4 +398,4 @@ title: Synthetic Monitoring Template Variables
   </ul>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"10173":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10173"},"10174":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10174"},"10175":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10175"},"10176":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"10176"},"10177":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"10177"},"10178":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"10178"},"10179":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"10179"},"10180":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"10180"},"10181":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"10181"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution variables"},{"id":"result","label":"Result variables"},{"id":"local","label":"Local variables"},{"id":"global","label":"Global variables"},{"id":"extracted","label":"Extracted variables"},{"id":"step","label":"Step variables"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"2527":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"2527"},"2528":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"2528"},"2529":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"2529"},"2530":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"2530"},"2531":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"2531"},"2532":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"2532"},"2533":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"2533"},"2534":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"2534"},"2535":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"2535"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution variables"},{"id":"result","label":"Result variables"},{"id":"local","label":"Local variables"},{"id":"global","label":"Global variables"},{"id":"extracted","label":"Extracted variables"},{"id":"step","label":"Step variables"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
