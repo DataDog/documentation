@@ -28,6 +28,8 @@ Set up CI Visibility for Azure Pipelines to gain real time insights into your CI
 
 | Pipeline Visibility                             | Platform                            | Definition                                                |
 |-------------------------------------------------|-------------------------------------|-----------------------------------------------------------|
+| [CI jobs failure analysis][21] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation                                | Logs correlation                    | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime.       |
 | [Custom spans][15]                              | Custom spans                        | Configure custom spans for your pipelines.                |
 | [Filter CI Jobs on the critical path][19]       | Filter CI Jobs on the critical path | Filter by jobs on the critical path.                      |
@@ -156,19 +158,15 @@ You can set custom tags for all pipeline and job spans from your Azure projects 
 
 ### Collect job logs
 
-<div class="alert alert-info">Azure Log Collection is in Preview. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
-
 Datadog supports log collection for your Azure DevOps pipelines.
 
-To enable job log collection:
+Azure log pulling will only be enabled if you have set up the Datadog integration, which is the preferred way. To enable job log collection:
 
-1. Install a Datadog app registration on your Azure console. Follow the steps in the [Azure integration tile][14].
+1. Set up the Datadog integration for Azure DevOps. Follow the steps in the [Azure integration tile][14].
 
-2. Add the Datadog app registration to your Azure DevOps organization:
-  <br>a. Navigate to **Organization settings** in your DevOps console.
-  <br>b. Click **Users** from the left side panel, then click **Add Users**.<br>**Note**: If you don't see the **Add Users** button, you may not have the necessary permissions.
-
-To enable log collection, add your app registration as a user with Basic Access Level to each project. Alternatively, you can click  **Add to all projects** to configure all projects in bulk.
+2. Enable log pulling in the Datadog UI:
+  <br>a. Navigate to [CI Visibility Settings][23] in your Datadog account.
+  <br>b. Enable log pulling for Azure DevOps.
 
 Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][18]. Logs for Azure jobs can be identified by the `datadog.product:cipipeline` and `source:azurepipelines` tags.
 
@@ -205,3 +203,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [20]: /glossary/#pipeline-execution-time
 [21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
+[23]: https://app.datadoghq.com/ci/settings/visibility/azure-devops
