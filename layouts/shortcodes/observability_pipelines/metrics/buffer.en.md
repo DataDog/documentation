@@ -31,10 +31,10 @@ Track buffer behavior with these additional metrics:
 : A source's maximum buffer size, defined as the number of events.
 
 `pipelines.transform_buffer_utilization`
-: Histogram of event count in a processor's buffer. The buffer is upstream of the processor, which means the event is put into the buffer before it gets processed.
+: Histogram of event count in a processor's buffer. Processors pull from this buffer, transform the event, and then send it downstream.
 
 `pipelines.transform_buffer_utilization_level`
-: Current event count in a processor's buffer. The buffer is upstream of the processor, which means the event is put into the buffer before it gets processed.
+: Current event count in a processor's buffer. Processors pull from this buffer, transform the event, and then send it downstream.
 
 `pipelines.transform_buffer_max_size_events`
 : A processor's maximum buffer size, defined as the number of events.
