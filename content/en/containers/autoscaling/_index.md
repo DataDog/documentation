@@ -26,7 +26,7 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-info">
-  This feature is not available for the Datadog for Government (US1-FED) site.  
+  This feature is not available for the Datadog for Government (US1-FED) site.
 </div>
 {{< /site-region >}}
 
@@ -52,11 +52,17 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 - [Remote Configuration][1] must be enabled both at the organization level and on the Agents in your target cluster. See [Enabling Remote Configuration][2] for setup instructions.
 - [Helm][3], for updating your Datadog Agent.
 - (For Datadog Operator users) [`kubectl` CLI][4], for updating the Datadog Agent.
-- Scaling recommendations are available for workloads monitored with Datadog Agent v7.50+, with the [Kubernetes State Core][9] integration enabled. Datadog recommends upgrading to the latest Datadog Agent version to deploy live Kubernetes Autoscaling.
+- When you are using live autoscaling, Datadog recommends using the latest Datadog Agent version. This helps ensure access to the latest improvements and optimizations. Scaling recommendations require the [Kubernetes State Core][9] integration to be enabled. <br/><br/>
+
+   | Feature | Minimum Agent Version |
+   |---------|----------------------|
+   | In-app workload scaling recommendations | 7.50+ |
+   | Argo Rollout recommendations and autoscaling | 7.71+ |
+   | Cluster autoscaling ([preview sign-up][10]) | 7.72+ |
+
 - The following user permissions:
    - Org Management (required for Remote Configuration)
    - API Keys Write (required for Remote Configuration)
-   - Workload Scaling Read
    - Workload Scaling Write
    - Autoscaling Manage
 - (Recommended) Linux kernel v5.19+ and cgroup v2
@@ -69,7 +75,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
 1. Ensure you are using Datadog Operator v1.16.0+. To upgrade your Datadog Operator:
 
 ```shell
-helm upgrade datadog-operator datadog/datadog-operator 
+helm upgrade datadog-operator datadog/datadog-operator
 ```
 
 2. Add the following to your `datadog-agent.yaml` configuration file:
@@ -206,13 +212,13 @@ After you identify a workload to optimize, Datadog recommends inspecting its **S
 
 When you are ready to proceed with enabling Autoscaling for a workload, you have two options for deployment:
 
-- Click **Enable Autoscaling**. (Requires Workload Scaling Write permission.) 
+- Click **Enable Autoscaling**. (Requires Workload Scaling Write permission.)
 
    Datadog automatically installs and configures autoscaling for this workload on your behalf.
 
-- Deploy a `DatadogPodAutoscaler` custom resource. 
-   
-   Use your existing deploy process to target and configure Autoscaling for your workload. 
+- Deploy a `DatadogPodAutoscaler` custom resource.
+
+   Use your existing deploy process to target and configure Autoscaling for your workload.
 
    {{% collapse-content title="Example DatadogPodAutoscaler CRD" level="h4" expanded=false id="id-for-anchoring" %}}
    ```yaml
@@ -259,3 +265,4 @@ As an alternative to Autoscaling, you can also deploy Datadog's scaling recommen
 [7]: https://app.datadoghq.com/orchestration/scaling/cluster
 [8]: https://app.datadoghq.com/orchestration/scaling/workload
 [9]: /integrations/kubernetes_state_core/
+[10]: https://www.datadoghq.com/product-preview/kubernetes-cluster-autoscaling/

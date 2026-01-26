@@ -1116,6 +1116,36 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "DeleteGlobalIncidentHandle": {
+    "description": "Delete a global incident handle.",
+    "summary": "Delete global incident handle"
+  },
+  "ListGlobalIncidentHandles": {
+    "description": "Retrieve a list of global incident handles.",
+    "summary": "List global incident handles"
+  },
+  "CreateGlobalIncidentHandle": {
+    "description": "Create a new global incident handle.",
+    "summary": "Create global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateGlobalIncidentHandle": {
+    "description": "Update an existing global incident handle.",
+    "summary": "Update global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetGlobalIncidentSettings": {
+    "description": "Retrieve global incident settings for the organization.",
+    "summary": "Get global incident settings"
+  },
+  "UpdateGlobalIncidentSettings": {
+    "description": "Update global incident settings for the organization.",
+    "summary": "Update global incident settings",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
     "summary": "List incident notification rules"
@@ -1493,6 +1523,46 @@
     "summary": "Update a single service object",
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
+  },
+  "ListServiceNowAssignmentGroups": {
+    "description": "Get all assignment groups for a ServiceNow instance.",
+    "summary": "List ServiceNow assignment groups"
+  },
+  "ListServiceNowBusinessServices": {
+    "description": "Get all business services for a ServiceNow instance.",
+    "summary": "List ServiceNow business services"
+  },
+  "ListServiceNowTemplates": {
+    "description": "Get all ServiceNow templates for the organization.",
+    "summary": "List ServiceNow templates"
+  },
+  "CreateServiceNowTemplate": {
+    "description": "Create a new ServiceNow template.",
+    "summary": "Create ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to create a ServiceNow template"
+  },
+  "DeleteServiceNowTemplate": {
+    "description": "Delete a ServiceNow template by ID.",
+    "summary": "Delete ServiceNow template"
+  },
+  "GetServiceNowTemplate": {
+    "description": "Get a ServiceNow template by ID.",
+    "summary": "Get ServiceNow template"
+  },
+  "UpdateServiceNowTemplate": {
+    "description": "Update a ServiceNow template by ID.",
+    "summary": "Update ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to update a ServiceNow template"
+  },
+  "ListServiceNowInstances": {
+    "description": "Get all ServiceNow instances for the organization.",
+    "summary": "List ServiceNow instances"
+  },
+  "ListServiceNowUsers": {
+    "description": "Get all users for a ServiceNow instance.",
+    "summary": "List ServiceNow users"
   },
   "ListCloudflareAccounts": {
     "description": "List Cloudflare accounts.",
@@ -3273,6 +3343,54 @@
     "summary": "POST request to resolve vulnerable symbols",
     "request_description": "",
     "request_schema_description": ""
+  },
+  "DeleteCustomRuleset": {
+    "description": "Delete a custom ruleset",
+    "summary": "Delete Custom Ruleset"
+  },
+  "GetCustomRuleset": {
+    "description": "Get a custom ruleset by name",
+    "summary": "Show Custom Ruleset"
+  },
+  "UpdateCustomRuleset": {
+    "description": "Update an existing custom ruleset",
+    "summary": "Update Custom Ruleset",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateCustomRule": {
+    "description": "Create a new custom rule within a ruleset",
+    "summary": "Create Custom Rule",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteCustomRule": {
+    "description": "Delete a custom rule",
+    "summary": "Delete Custom Rule"
+  },
+  "GetCustomRule": {
+    "description": "Get a custom rule by name",
+    "summary": "Show Custom Rule"
+  },
+  "ListCustomRuleRevisions": {
+    "description": "Get all revisions for a custom rule",
+    "summary": "List Custom Rule Revisions"
+  },
+  "CreateCustomRuleRevision": {
+    "description": "Create a new revision for a custom rule",
+    "summary": "Create Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "RevertCustomRuleRevision": {
+    "description": "Revert a custom rule to a previous revision",
+    "summary": "Revert Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetCustomRuleRevision": {
+    "description": "Get a specific revision of a custom rule",
+    "summary": "Show Custom Rule Revision"
   },
   "ListMultipleRulesets": {
     "description": "Get rules for multiple rulesets in batch.",

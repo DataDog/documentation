@@ -8100,6 +8100,7 @@ components:
       - spans
       - database_queries
       - network
+      - network_path
       example: rum
       type: string
       x-enum-varnames:
@@ -8112,6 +8113,7 @@ components:
       - SPANS
       - DATABASE_QUERIES
       - NETWORK
+      - NETWORK_PATH
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -8496,12 +8498,18 @@ components:
       - hide_query
       - hide_handles
       - hide_all
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
       - HIDE_ALL
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
@@ -8957,6 +8965,7 @@ components:
       - network-performance alert
       - cost alert
       - data-quality alert
+      - network-path alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -8980,6 +8989,7 @@ components:
       - NETWORK_PERFORMANCE_ALERT
       - COST_ALERT
       - DATA_QUALITY_ALERT
+      - NETWORK_PATH_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -17878,8 +17888,10 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
+      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access.
+        for restricting read and write access. This field is deprecated. Use the restriction
+        policies API to manage permissions.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
@@ -18513,12 +18525,18 @@ components:
       - hide_all
       - hide_query
       - hide_handles
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
@@ -26190,6 +26208,8 @@ components:
           $ref: '#/components/schemas/WidgetLineType'
         line_width:
           $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
         palette:
           description: Color palette to apply to the widget.
           type: string
@@ -26252,6 +26272,19 @@ components:
           description: Color palette to apply to the widget.
           type: string
       type: object
+    WidgetStyleOrderBy:
+      description: 'How to order series in timeseries visualizations.
+
+        - `tags`: Order series alphabetically by tag name (default behavior)
+
+        - `values`: Order series by their current metric values (typically descending)'
+      enum:
+      - tags
+      - values
+      type: string
+      x-enum-varnames:
+      - TAGS
+      - VALUES
     WidgetSummaryType:
       description: Which summary type should be used.
       enum:
@@ -32340,10 +32373,11 @@ paths:
         alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit:
         `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring:
         `database-monitoring alert`\n- network-performance: `network-performance alert`\n-
-        cloud cost: `cost alert`\n\n**Notes**:\n- Synthetic monitors are created through
-        the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/)
-        documentation for more information.\n- Log monitors require an unscoped App
-        Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
+        cloud cost: `cost alert`\n- network-path: `network-path alert`\n\n**Notes**:\n-
+        Synthetic monitors are created through the Synthetics API. See the [Synthetics
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        more information.\n- Log monitors require an unscoped App Key.\n\n#### Query
+        Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
         [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n-
         `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor
         type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type)
@@ -32473,7 +32507,15 @@ paths:
         \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
         for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
         `forecast` supports `>`\n- `#` an integer or decimal number used to set the
-        threshold."
+        threshold.\n\n**Network Path Alert Query**\n\nExample: `network-path(query).index(index_name).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `index_name` The data type to monitor on - supports `netpath-path` and `netpath-hop`.\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold."
       operationId: CreateMonitor
       requestBody:
         content:
