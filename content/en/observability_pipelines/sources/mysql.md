@@ -66,9 +66,6 @@ Set up the MySQL source and its environment variables when you [set up a pipelin
     1. Enter the connection string.
         - Connection string example: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
         - **Note**: The connection string must be fully validated using a tool external to Observability Pipelines. See [Prerequisites](#prerequisites) for more information.
-    1. Set the following parameters for error handling when connecting the Worker to the database.
-        1. Enter the connection timeout.
-        1. Enter the maximum retry attempts.
 1. Set the SQL query parameters.
   1. Enter the name of your query.
   1. Enter the path to local file containing the validated SQL query.
@@ -135,15 +132,6 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 1. Check the log in your destination to which your logs were sent and determine the last value sent.
 1. Manually reset the checkpoint value in the Database source in the pipelines UI.
 
-## Error handling
-
-- Connection timeouts
-  - The time in milliseconds to wait for a connection attempt before timing out. This is used to prevent the source from retrying indefinitely.
-- Maximum retry attempts
-  - The number of retry attempts the source makes to the database before failing. This is used to prevent infinite retry attempts when the connection is failing.
-- Query timeout
-  - The time limit for a query before failing. This is used to prevent a long running query from continuing to execute indefinitely.
-
 ## Limits and requirements
 
 ### Worker and pipelines
@@ -180,13 +168,6 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 
 - Database users, roles, and permission must be created and managed outside of Datadog.
 - Connection strings should reference environment variables for secrets.
-
-## Recommended monitors
-
-Datadog recommends creating these monitors:
-
-- Connection timeout monitor to alert you when the Worker cannot connect to the database.
-- Query failure monitor to alert you when the query is times out and fails.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
