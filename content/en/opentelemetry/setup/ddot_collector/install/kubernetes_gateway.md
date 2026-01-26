@@ -864,7 +864,7 @@ To use a custom-built Collector image for your gateway, specify the image reposi
   <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:7.74.0</code>)</li>
   <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:7.74.0</code>)</li>
 </ul>
-The <code>registry/name</code> format (without tag in the name field) is <strong>not supported</strong> when using a separate <code>tag</code> field. Either include the full image reference with tag in the <code>name</code> field, or use just the image name with a separate <code>tag</code> field.
+The <code>registry/name</code> format (without tag in the name field) is <strong>not supported</strong> when using a separate <code>tag</code> field. Either include the full image reference with tag in the <code>name</code> field, or use the image name with a separate <code>tag</code> field.
 </div>
 
 {{< tabs >}}
