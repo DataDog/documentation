@@ -42,7 +42,7 @@ The migration from v2 to v3 focuses on aligning configuration with the v3 modula
 Please read [the MIGRATION.md guide][1] in the official React Native repository for the full list of changes.
 
 <div class="alert alert-warning">
-<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 will <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
+<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 does <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
 </div>
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
@@ -148,10 +148,10 @@ Then, you can select the modules you want to use:
 
 {{% tab "React Native" %}}
 
-Refer to [the MIGRATION.md guide][1] in the official React Native repository for the recommended upgrade steps and any required dependency updates.
+See [the MIGRATION.md guide][1] in the official React Native repository for the recommended upgrade steps and any required dependency updates.
 
 <div class="alert alert-warning">
-<strong>Important:</strong> In v3, feature modules are only enabled if you pass their configuration during initialization (for example, RUM / Logs / Trace). If you omit a feature configuration, that feature will not be initialized or enabled.
+<strong>Important:</strong> In v3, feature modules are only enabled if you pass their configuration during initialization (for example, RUM / Logs / Trace). If you omit a feature configuration, that feature is not initialized or enabled.
 </div>
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
@@ -468,7 +468,7 @@ Legacy delegate types have been replaced by a unified instrumentation API:
 Please read [the MIGRATION.md guide][1] in the official React Native repository.
 
 <div class="alert alert-warning">
-<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 will <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
+<strong>Important:</strong> Unlike v2.x (which would always enable all feature modules when initializing the SDK), v3 does <strong>not</strong> initialize or enable a feature module unless you explicitly pass configuration for it.
 </div>
 
 ### Configuration changes
@@ -519,7 +519,7 @@ Certain configuration properties have been moved, renamed, removed, or split:
 
 ### API updates
 
-In addition to configuration ownership changes (Core vs feature configs), several public types and APIs were renamed or relocated to match the v3 modular design. Refer to [the MIGRATION.md guide][1] for the authoritative list and code examples.
+In addition to configuration ownership changes (Core vs feature configs), several public types and APIs were renamed or relocated to match the v3 modular design. See [the MIGRATION.md guide][1] for the authoritative list and code examples.
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/MIGRATION.md
 

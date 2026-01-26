@@ -80,7 +80,7 @@ The Datadog Logs configuration. Logs is **disabled by default**: use an empty co
 
 `traceConfiguration`
 : Optional<br/>
-**Type**: `TraceConfiguration`<br>
+**Type**: `TraceConfiguration`<br/>
 The Datadog Trace configuration. Trace is **disabled by default**: use an empty configuration `{}` to enable. See [Trace Configuration][22].
 
 `site`
@@ -253,7 +253,7 @@ Enables tracking of memory warnings as RUM events on iOS. When enabled, the SDK 
 **Type**: Number<br/>
 **Default**: `undefined`
 The app hang threshold in seconds for non-fatal app hangs on iOS. App hangs are an iOS-specific type of error that happens when the application is unresponsive for too long. By default, app hangs reporting is disabled, but you can enable it and set your own threshold to monitor app hangs that last more than a specified
-duration by using the this parameter. Set the `appHangThreshold` parameter to the minimal duration you want
+duration by using this parameter. Set the `appHangThreshold` parameter to the minimal duration you want
 app hangs to be reported. For example, enter 0.25 to report hangs lasting at least 250 ms.
 See [Configure the app hang threshold][19] for more guidance on what to set this value to.
 
@@ -261,7 +261,7 @@ See [Configure the app hang threshold][19] for more guidance on what to set this
 : Optional<br/>
 **Type**: Number<br/>
 **Default**: `0.1` (seconds)
-The amount of time after a view starts where a Resource should be considered when calculating Time to Network-Settled (TNS). TNS will be calculated using all resources that start withing the specified threshold, in seconds.
+The amount of time after a view starts where a Resource should be considered when calculating Time to Network-Settled (TNS). TNS is calculated using all resources that start within the specified threshold, in seconds.
 
 `errorEventMapper`
 : Optional<br/>
@@ -284,7 +284,7 @@ Custom function to modify the attributes of a RUM Resource event before it is se
 `customEndpoint`
 : Optional<br/>
 **Type**: String<br/>
-**Default**: `undefined`
+**Default**: `undefined`<br/>
 Sets a target custom server for RUM.
 
 ### Logs Configuration
@@ -299,7 +299,7 @@ Enables RUM correlation with logs (default is true).
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `true`<br/>
-Enables trace correlation with logs (default is true).
+Enables trace correlation with logs.
 
 `logEventMapper`
 : Optional<br/>
@@ -310,7 +310,7 @@ Custom function to modify the attributes of a Log event before it is sent to Dat
 `customEndpoint`
 : Optional<br/>
 **Type**: String<br/>
-**Default**: `undefined`
+**Default**: `undefined`<br/>
 Sets a target custom server for Logs.
 
 ### Trace Configuration
@@ -318,7 +318,7 @@ Sets a target custom server for Logs.
 `customEndpoint`
 : Optional<br/>
 **Type**: String<br/>
-**Default**: `undefined`
+**Default**: `undefined`<br/>
 Sets a target custom server for Traces.
 
 

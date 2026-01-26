@@ -39,7 +39,7 @@ The following table shows additional example features and their associated featu
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
   - [Kotlin Multiplatform (1.4.0)][4]
-  - [React Native (3.0.0)][TODO]
+  - [React Native (3.0.0)][5]
 
 ## Setup
 
@@ -282,4 +282,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [2]: https://github.com/DataDog/dd-sdk-android/releases/tag/3.1.0
 [3]: https://github.com/DataDog/dd-sdk-ios/releases/tag/3.1.0
 [4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/releases/tag/1.4.0
-[5]: /real_user_monitoring/rum_without_limits/
+[5]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/3.0.0
