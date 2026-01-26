@@ -28,7 +28,7 @@ The Datadog MCP Server is in Preview. There is no charge for using the Datadog M
 
 - The Datadog MCP Server is not supported for production use during the Preview.
 - Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.
-- The Datadog MCP Server is not available for organizations that require HIPAA compliance.
+- If you are subject to HIPAA, you are responsible for ensuring that any external applications or agents you connect to Datadog's MCP server meet all requirements for HIPAA compliance as necessary.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
 ## Overview
