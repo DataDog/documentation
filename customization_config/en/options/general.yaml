@@ -439,22 +439,22 @@ options:
 - label: Multistep API
   id: multistep
 
-- label: Test execution variables
+- label: Test execution
   id: execution
 
-- label: Result variables
+- label: Result
   id: result
 
-- label: Local variables
+- label: Local
   id: local
 
-- label: Global variables
+- label: Global
   id: global
 
-- label: Extracted variables
+- label: Extracted
   id: extracted
 
-- label: Step variables
+- label: Step
   id: step
 
 - label: DNS
