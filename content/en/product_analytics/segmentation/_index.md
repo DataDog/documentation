@@ -18,9 +18,9 @@ For example, you can segment users by purchase amount, by activity within a spec
 To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** from the navigation. You have two sources you can choose from when building a new segment:
 
 - Product Analytics data
-- External data (upload a Reference Table)
+- CSV file 
 
-{{< img src="product_analytics/segmentation/user_profile_example_2.png" alt="Create a user segment based on Product Analytics or external data." style="width:55%;">}}
+{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segment page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
 
 ### Using Product Analytics data
@@ -56,27 +56,29 @@ You can define additional attributes, such as the <code> device type</code>, to 
 </div>
 <br>
 
-### Using external or third-party data
+### Importing CSV files
 
-To create a segment using external or third-party data:
+Upload a CVS file to create a segment with a redefined list of users. The file must include a column that matches either `usr.id` or `usr.email`. 
 
-1. See the [Reference Tables][2] documentation for how to upload and create a Reference Table.
-2. Make sure to properly connect the data type (for example, `usr.id`, `usr.name`, or `usr.email`) to the column name.
-3. For accuracy, ensure there is data in Product Analytics for users in the segment.
 
-## Leverage segments across Product Analytics
+## Use segments across Product Analytics
 
 ### In pathways
 
-In the Pathway page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The below example shows a Pathway diagram only for users in the "Premium Shopist Customers" segment.
+In the Pathway page, you can filter the data in the visualization to reflect a selected segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The following example shows a Pathway diagram only for users in the "Premium Shopist Customers" segment.
 
-{{< img src="product_analytics/segmentation/segmentation-pathways.png" alt="Filter down the Pathway visualization to reflect a selected segment of users.">}}
+{{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathway visualization to reflect a selected segment of users.">}}
 
 ### In analytics explorer
 
-You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The example below shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
+You can filter the data in the Analytics Explorer to reflect a selected set of users that are in a given segment. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
 
-{{< img src="product_analytics/segmentation/analytics-explorer.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
+{{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
+
+### In funnel 
+In the funnel page, you can filter the data to track the journey of a set of users. In the following example, you can track the dropoff of thye "Premium Shopist Customers" segment between the main page and the `department/lighting` page.
+
+{{< img src="product_analytics/segmentation/segment-funnel.png" alt="ADD">}}
 
 ## Further reading
 
