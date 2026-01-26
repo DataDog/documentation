@@ -8498,12 +8498,18 @@ components:
       - hide_query
       - hide_handles
       - hide_all
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
       - HIDE_ALL
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
@@ -18519,12 +18525,18 @@ components:
       - hide_all
       - hide_query
       - hide_handles
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
