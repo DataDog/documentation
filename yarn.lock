@@ -2891,6 +2891,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@datadog/browser-core@npm:^6.19.0":
+  version: 6.25.4
+  resolution: "@datadog/browser-core@npm:6.25.4"
+  checksum: 10/702e5b9acf9e4826f651367472c6b7e6ee3997f1b91dfef795d01cc8997cbfaae706179dbc245c533ebe20e660ee6765d9f4a6305576307b3bbb59050da8872b
+  languageName: node
+  linkType: hard
+
 "@datadog/browser-logs@npm:^5.27.0":
   version: 5.27.0
   resolution: "@datadog/browser-logs@npm:5.27.0"
@@ -2982,6 +2989,31 @@ __metadata:
   bin:
     datadog-ci: dist/cli.js
   checksum: 10/2d52edee30f861b408c0cad8036a16fd287870a3ed0b8d78d0fbc44350b03d8d11404f5a2b79682a4b6e665fb4cd4233afc538fe42fd128d67b2f525297ad7df
+  languageName: node
+  linkType: hard
+
+"@datadog/flagging-core@npm:0.3.1":
+  version: 0.3.1
+  resolution: "@datadog/flagging-core@npm:0.3.1"
+  dependencies:
+    spark-md5: "npm:^3.0.2"
+  peerDependencies:
+    "@openfeature/core": ^1.8.1
+  checksum: 10/19f005485043e9201c072531fc660fd9992278ff4966a6664db900505cd7948cad8773a5894be68b71bb4c04777ba62451580f58cacb55a8997aa73b7267bd51
+  languageName: node
+  linkType: hard
+
+"@datadog/openfeature-browser@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@datadog/openfeature-browser@npm:0.3.1"
+  dependencies:
+    "@datadog/browser-core": "npm:^6.19.0"
+    "@datadog/flagging-core": "npm:0.3.1"
+    "@types/chrome": "npm:^0.1.18"
+  peerDependencies:
+    "@openfeature/core": ^1.8.0
+    "@openfeature/web-sdk": ^1.5.0
+  checksum: 10/b981075e2c0e625361a78360737e1e00cda1bb28937deaf91aac0640c64b77f82f1c856684a0b0492b02549ca9d7a9fe2ed815a8469a87897fac8adea44a2caa
   languageName: node
   linkType: hard
 
@@ -3671,6 +3703,22 @@ __metadata:
     mkdirp: "npm:^1.0.4"
     rimraf: "npm:^3.0.2"
   checksum: 10/1388777b507b0c592d53f41b9d182e1a8de7763bc625fc07999b8edbc22325f074e5b3ec90af79c89d6987fdb2325bc66d59f483258543c14a43661621f841b0
+  languageName: node
+  linkType: hard
+
+"@openfeature/core@npm:^1.9.1":
+  version: 1.9.1
+  resolution: "@openfeature/core@npm:1.9.1"
+  checksum: 10/6099e16b1b4cd6e3c45c05ab4acd44c9cb4ab501b676ab6f3e77f0be1b56abc7506c5629187381333a02975d315d831e0905582435b356d9676255e72a465899
+  languageName: node
+  linkType: hard
+
+"@openfeature/web-sdk@npm:^1.7.2":
+  version: 1.7.2
+  resolution: "@openfeature/web-sdk@npm:1.7.2"
+  peerDependencies:
+    "@openfeature/core": ^1.9.0
+  checksum: 10/3fc966d0523ca1941b44350d4c8a42c1b74cb035265d3574a2a6b16e87fa9edfb7211ec945b937399badad5de1e771c55ba7ce04d6eb02f265fc5a37e3af9395
   languageName: node
   linkType: hard
 
@@ -4779,6 +4827,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/chrome@npm:^0.1.18":
+  version: 0.1.35
+  resolution: "@types/chrome@npm:0.1.35"
+  dependencies:
+    "@types/filesystem": "npm:*"
+    "@types/har-format": "npm:*"
+  checksum: 10/8711f9489ffa49a44559c9caba8a93487308b67467c42214590f6f8bcd4ac90cb52cf866c27f24e37ad0f9d02212a751c30a9954873c2003e0961ae6af9ff67a
+  languageName: node
+  linkType: hard
+
 "@types/datadog-metrics@npm:0.6.1":
   version: 0.6.1
   resolution: "@types/datadog-metrics@npm:0.6.1"
@@ -4797,6 +4855,22 @@ __metadata:
   version: 1.0.6
   resolution: "@types/estree@npm:1.0.6"
   checksum: 10/9d35d475095199c23e05b431bcdd1f6fec7380612aed068b14b2a08aa70494de8a9026765a5a91b1073f636fb0368f6d8973f518a31391d519e20c59388ed88d
+  languageName: node
+  linkType: hard
+
+"@types/filesystem@npm:*":
+  version: 0.0.36
+  resolution: "@types/filesystem@npm:0.0.36"
+  dependencies:
+    "@types/filewriter": "npm:*"
+  checksum: 10/ec831040fe3aff066ffb7b7541e21a5dd59aa06e7175c61e592736e38b018b1d513551438254631e2a3fbc81ff671bf618401000f4c8ea79156934cbc7dcaeaa
+  languageName: node
+  linkType: hard
+
+"@types/filewriter@npm:*":
+  version: 0.0.33
+  resolution: "@types/filewriter@npm:0.0.33"
+  checksum: 10/495a4bb424c27eda967fe9ac3b8f7b781e6b3f9ce59403a991590cb1073022f9c5383d3c7d808ef6956b785550c36664c4fcd502dc0baf69e340bd481171e0ca
   languageName: node
   linkType: hard
 
@@ -4823,6 +4897,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10/d13028412fdc7dd16bcb566da730a15e49bdc71d2681adc67b01a9df6c5ab775d1d547298adf0cbe36f227781c1400d0b0f1da3cb1c2d4b3f9bea02e8aac75ec
+  languageName: node
+  linkType: hard
+
+"@types/har-format@npm:*":
+  version: 1.2.16
+  resolution: "@types/har-format@npm:1.2.16"
+  checksum: 10/b7ecef1ca27b902f9eb0bff9cebe650370f594e20813a728853673b22400afa08966eb5fd725553c19811bc166947e1c845e92ce4df86cee79d4fd9bda4d251b
   languageName: node
   linkType: hard
 
@@ -7636,6 +7717,9 @@ __metadata:
     "@datadog/browser-logs": "npm:^5.27.0"
     "@datadog/browser-rum": "npm:^5.27.0"
     "@datadog/datadog-ci": "npm:^2.36.0"
+    "@datadog/openfeature-browser": "npm:^0.3.1"
+    "@openfeature/core": "npm:^1.9.1"
+    "@openfeature/web-sdk": "npm:^1.7.2"
     "@popperjs/core": "npm:^2.11.8"
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
@@ -15794,6 +15878,13 @@ __metadata:
   version: 0.7.3
   resolution: "source-map@npm:0.7.3"
   checksum: 10/89c388902a1d94c897c3343b70d161a7f3cd86997512ad563274b8e25c8fd9d8633d9ed320ee89a435cdd77066fe460241b5aa45417b25d1baeb8205cefd4fa2
+  languageName: node
+  linkType: hard
+
+"spark-md5@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "spark-md5@npm:3.0.2"
+  checksum: 10/60981e181a296b2d16064ef86607f78d7eb1e08a5f39366239bb9cdd6bc3838fb2f667f2506e81c8d5c71965cdd6f18a17fb1c9a8368eeb407b9dd8188e95473
   languageName: node
   linkType: hard
 

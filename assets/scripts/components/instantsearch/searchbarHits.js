@@ -1,10 +1,11 @@
 import { getHitData, getSnippetForDisplay } from './getHitData';
 import { bodyClassContains } from '../../helpers/helpers';
+import { IS_CONVERSATIONAL_SEARCH_ENABLED } from '../../components/conversational-search';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
 // Generate the "Ask Docs AI" suggestion HTML
 const generateAskAISuggestion = (query) => {
-    if (!query || !query.trim()) return null;
+    if (!query?.trim()) return null;
     
     return `
         <li class="ais-Hits-item ais-Hits-ai-suggestion" data-query="${query.replace(/"/g, '&quot;')}">
@@ -23,6 +24,21 @@ const generateAskAISuggestion = (query) => {
             </a>
         </li>
     `;
+};
+
+const updateNoHitsState = (container, numHits) => {
+    const hasAISuggestion = !!container.querySelector('.ais-Hits-ai-suggestion');
+    (numHits === 0 && !hasAISuggestion) ? container.classList.add('no-hits') : container.classList.remove('no-hits');
+};
+
+// Kick off flag init once, update UI when ready
+const ensureConvSearchFlag = (state) => {
+    if (!IS_CONVERSATIONAL_SEARCH_ENABLED || !state?.isDocsContainer) return;
+    const aiList = state.container.querySelector('#ais-Hits-ai-list');
+    if (aiList) {
+        aiList.innerHTML = generateAskAISuggestion(state.query) || '';
+    }
+    updateNoHitsState(state.container, state.numHits);
 };
 
 const renderHits = (renderOptions, isFirstRender) => {
@@ -140,16 +156,14 @@ const renderHits = (renderOptions, isFirstRender) => {
                 }
             });
 
-            // Only add no-hits to container if there are no hits AND no AI suggestion (no query)
-            const hasAISuggestion = !!container.querySelector('.ais-Hits-ai-suggestion');
-            (numHits === 0 && !hasAISuggestion) ? container.classList.add('no-hits') : container.classList.remove('no-hits');
+            updateNoHitsState(container, numHits);
         };
 
         addHitsToEmptyElements(containerDiv);
         hideOrShowElements(containerDiv);
         
         // Auto-select AI suggestion as default (for keyboard navigation)
-        if (isDocsContainer) {
+        if (isDocsContainer && IS_CONVERSATIONAL_SEARCH_ENABLED) {
             // First, clear any existing selection
             containerDiv.querySelectorAll('.selected-item').forEach(item => {
                 item.classList.remove('selected-item');
@@ -219,9 +233,12 @@ const renderHits = (renderOptions, isFirstRender) => {
     const guidesHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'guide');
     const apiHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'api');
     
-    // Always show AI suggestion when there's a query
     const currentQuery = results?.query || '';
-    const aiSuggestionHTML = generateAskAISuggestion(currentQuery);
+    const aiSuggestionHTML =
+        isDocsContainer && IS_CONVERSATIONAL_SEARCH_ENABLED
+            ? generateAskAISuggestion(currentQuery)
+            : null;
+    ensureConvSearchFlag({ container, query: currentQuery, numHits: hits.length, isDocsContainer });
 
     // Remove null from array
     const allJoinedListItemsHTML = [
