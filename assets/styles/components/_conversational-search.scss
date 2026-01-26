@@ -764,6 +764,17 @@ $conv-search-assistant-bg: #f4f4f5;
     .searchbox-container {
         margin-bottom: 0;
     }
+    
+    // Wrap to second line on tablet/mobile (same breakpoint as burger menu)
+    @media (max-width: 991px) {
+        flex-wrap: wrap;
+        gap: 16px;
+        
+        .nav-search-wrapper {
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+    }
 }
 
 .home-ai-divider {
@@ -774,6 +785,11 @@ $conv-search-assistant-bg: #f4f4f5;
     
     .conv-search-enabled & {
         display: inline;
+        
+        // Hide on mobile/tablet when stacked
+        @media (max-width: 991px) {
+            display: none;
+        }
     }
 }
 
@@ -781,19 +797,21 @@ $conv-search-assistant-bg: #f4f4f5;
     display: none; // Hidden by default - shown via JS when feature flag is enabled
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    padding: 0 14px;
+    gap: 8px;
+    padding: 0 16px;
     height: 38px; // Match search bar height for alignment
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: none;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 13px;
-    font-weight: 500;
+    background: white;
+    color: $conv-search-purple;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
     cursor: pointer;
     transition: all 0.15s ease;
     flex-shrink: 0;
     white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     
     .conv-search-enabled & {
         display: inline-flex;
@@ -801,18 +819,17 @@ $conv-search-assistant-bg: #f4f4f5;
     
     svg {
         flex-shrink: 0;
-        opacity: 0.9;
-        width: 14px;
-        height: 14px;
+        width: 16px;
+        height: 16px;
     }
     
     &:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.5);
+        background: #f8f8f8;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     
     &:active {
-        background: rgba(255, 255, 255, 0.25);
+        background: #f0f0f0;
     }
 }
 
