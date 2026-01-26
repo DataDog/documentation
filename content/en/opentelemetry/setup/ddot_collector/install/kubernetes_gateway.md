@@ -860,7 +860,7 @@ To use a custom-built Collector image for your gateway, specify the image reposi
 <div class="alert alert-info">
 <strong>Note:</strong> The Datadog Operator supports the following image name formats:
 <ul>
-  <li><code>name</code> - Just the image name (for example, <code>ddot-collector</code>)</li>
+  <li><code>name</code> - The image name (for example, <code>ddot-collector</code>)</li>
   <li><code>name:tag</code> - Image name with tag (for example, <code>ddot-collector:7.74.0</code>)</li>
   <li><code>registry/name:tag</code> - Full image reference (for example, <code>gcr.io/datadoghq/ddot-collector:7.74.0</code>)</li>
 </ul>
