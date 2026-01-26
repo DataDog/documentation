@@ -42713,6 +42713,24 @@ components:
       - type
       - method
       type: object
+    OnCallTrigger:
+      description: Trigger a workflow from an On-Call Page or On-Call Handover. For
+        automatic triggering a handle must be configured and the workflow must be
+        published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    OnCallTriggerWrapper:
+      description: Schema for an On-Call-based trigger.
+      properties:
+        onCallTrigger:
+          $ref: '#/components/schemas/OnCallTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - onCallTrigger
+      type: object
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -62309,6 +62327,7 @@ components:
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
       - $ref: '#/components/schemas/NotebookTriggerWrapper'
+      - $ref: '#/components/schemas/OnCallTriggerWrapper'
       - $ref: '#/components/schemas/ScheduleTriggerWrapper'
       - $ref: '#/components/schemas/SecurityTriggerWrapper'
       - $ref: '#/components/schemas/SelfServiceTriggerWrapper'
