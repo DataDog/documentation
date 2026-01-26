@@ -1,0 +1,5 @@
+synthetics_test_type_options:
+  - id: browser
+    default: true
+  - id: mobile
+  - id: multistep

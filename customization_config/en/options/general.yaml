@@ -432,3 +432,27 @@ options:
   
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
+
+- label: Mobile
+  id: mobile
+
+- label: Multistep API
+  id: multistep
+
+- label: Test execution variables
+  id: execution
+
+- label: Result variables
+  id: result
+
+- label: Local variables
+  id: local
+
+- label: Global variables
+  id: global
+
+- label: Extracted variables
+  id: extracted
+
+- label: Step variables
+  id: step

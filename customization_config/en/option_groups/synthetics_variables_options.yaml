@@ -1,0 +1,8 @@
+synthetics_variables_options:
+  - id: execution
+    default: true
+  - id: result
+  - id: local
+  - id: global
+  - id: extracted
+  - id: step
