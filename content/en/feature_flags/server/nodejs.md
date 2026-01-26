@@ -21,6 +21,13 @@ Feature Flags are in Preview. Complete the form to request access.
 
 This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK.
 
+## Prerequisites
+
+Before setting up the Node.js Feature Flags SDK, ensure you have:
+
+- **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
+- **@openfeature/server-sdk** version ~1.20.0
+
 ## Installing and initializing
 
 Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable Remote Configuration with the `flaggingProvider` option as shown below. See [Tracing Node.js Applications][1] for detailed APM installation instructions.

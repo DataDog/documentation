@@ -55,7 +55,7 @@ On the [Real User Monitoring landing page][2], select your application from the 
 {{% /tab %}}
 {{% tab "Product Analytics" %}}
 
-Navigate to [**Digital Experience > Product Analytics > Session Replay > Heatmaps**][1]. Select your application and view.
+Navigate to [**Digital Experience > Product Analytics > Heatmaps**][1]. Select your application and view.
 
 From this page, you can select the type of heatmap (Top elements, Click map, Scroll map) you would like to see for a particular view.
 

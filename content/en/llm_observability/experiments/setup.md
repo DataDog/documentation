@@ -12,7 +12,7 @@ If you have not already set up LLM Observability:
 1. Install Datadog's LLM Observability Python SDK:
 
    ```shell
-   pip install ddtrace>=4.1.0
+   pip install ddtrace>=4.3.0
    ```
 
 2. Enable LLM Observability:
@@ -84,6 +84,9 @@ An _experiment_ lets you systematically test your LLM application by running you
    - **score**: returns a numeric value (float)
    - **categorical**: returns a labeled category (string)
 
+   Additionally, you can also return an `EvaluatorResult` to capture more aspects of the evaluation, such as `reasoning` (`str`), `assessment` (`"pass"` or `"fail"`)
+   and `tags` (`Dict[str, str]`). The `value` field of the EvaluatorResult captures the final evaluation result, and works the same way as the previous use case.
+
 - **summary evaluators**: Optional functions executed against all the data of the Experiment (input, output, expected, evaluators' results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset. 
 
    Datadog supports the following Summary Evaluator types:
@@ -133,9 +136,14 @@ To create an experiment:
 
        return intersection / union
 
-   def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> str:
+   def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
        fake_llm_call = "excellent"
-       return fake_llm_call
+       return EvaluatorResult(
+           value=fake_llm_call,
+           reasoning="the model explains itself",
+           assessment="pass", # or fail
+           tags={"task": "judge_llm_call"},
+       )
    ```
    Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
    Evaluators can only return a string, a number, or a Boolean.
@@ -210,6 +218,7 @@ This section assumes you have completed the [setup](#setup), [projects](#create-
 
 ```python
 from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs._experiment import EvaluatorResult
 from typing import Dict, Any, Optional, List
 
 LLMObs.enable(
@@ -266,11 +275,14 @@ def overlap(
     return intersection / union
 
 
-def fake_llm_as_a_judge(
-    input_data: Dict[str, Any], output_data: str, expected_output: str
-) -> str:
+def fake_llm_as_a_judge(input_data: Dict[str, Any], output_data: str, expected_output: str) -> EvaluatorResult:
     fake_llm_call = "excellent"
-    return fake_llm_call
+    return EvaluatorResult(
+        value=fake_llm_call,
+        reasoning="the model explains itself",
+        assessment="pass", # or fail
+        tags={"task": "judge_llm_call"},
+    )
 
 
 def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):

@@ -104,7 +104,7 @@ Network Configuration Management is accessible from the device side panel in Net
 
 ### Time picker and retention
 
-The time controls at the top of the page allow you to select which configuration history to view. By default, the view shows the last 2 days of configuration changes. You can extend this range to view older versions, up to the retention limit (1 year).
+The time controls at the top of the page allow you to select which configuration history to view. You can extend this range to view older versions, up to the retention limit (1 year).
 
 The timeline and configuration version list automatically update based on your selected time range.
 

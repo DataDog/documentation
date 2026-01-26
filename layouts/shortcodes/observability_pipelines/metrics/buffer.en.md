@@ -19,4 +19,16 @@ Track buffer behavior with these additional metrics:
 : Total bytes successfully flushed from the buffer.
 
 `pipelines.buffer_discarded_events_total`
-: Events discarded from the buffer (for example, due to overflow).
+: Total number of events discarded from the buffer (for example, due to overflow).
+
+`pipelines.source_buffer_utilization`
+: The percentage of a source's buffer that is used.
+
+`pipelines.source_buffer_utilization_level`
+: The number of events in a source's buffer.
+
+`pipelines.transform_buffer_utilization`
+: The percentage of a transform's buffer that is used.
+
+`pipelines.transform_buffer_utilization_level`
+: The number of events in a transform's buffer.
