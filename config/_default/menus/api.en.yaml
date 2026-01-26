@@ -8821,6 +8821,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update incident rule
+      url: '#update-incident-rule'
+      identifier: incidents-update-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentConfigRule
+        unstable:
+          - v2
+        order: 48
+    - name: Get incident rule
+      url: '#get-incident-rule'
+      identifier: incidents-get-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentConfigRule
+        unstable:
+          - v2
+        order: 47
+    - name: Delete incident rule
+      url: '#delete-incident-rule'
+      identifier: incidents-delete-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentConfigRule
+        unstable:
+          - v2
+        order: 49
+    - name: Create incident rule
+      url: '#create-incident-rule'
+      identifier: incidents-create-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentConfigRule
+        unstable:
+          - v2
+        order: 46
+    - name: List incident rules
+      url: '#list-incident-rules'
+      identifier: incidents-list-incident-rules
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentConfigRules
+        unstable:
+          - v2
+        order: 45
     - name: Update incident notification template
       url: '#update-incident-notification-template'
       identifier: incidents-update-incident-notification-template
