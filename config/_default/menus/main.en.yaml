@@ -21,24 +21,27 @@ menu:
     - name: Application Performance
       identifier: apm_heading
       weight: 7000000
+    - name: Data Observability
+      identifier: data_observability_heading
+      weight: 8000000
     - name: Digital Experience
       identifier: digital_experience_heading
-      weight: 8000000
+      weight: 9000000
     - name: Software Delivery
       identifier: software_delivery_heading
-      weight: 9000000
+      weight: 10000000
     - name: Security
       identifier: security_platform_heading
-      weight: 10000000
+      weight: 11000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 11000000
+      weight: 12000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 12000000
+      weight: 13000000
     - name: Administration
       identifier: administration_heading
-      weight: 13000000
+      weight: 14000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -601,66 +604,31 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: OTel SDKs
+    - name: Using OTel SDK
       url: opentelemetry/instrument/otel_sdks/
       identifier: otel_sdks
       parent: otel-instrumentation
       weight: 301
-    - name: OTel APIs with Datadog SDKs
-      url: /opentelemetry/instrument/api_support
-      identifier: otel-api-dd-sdk
+    - name: Using Datadog SDK
+      url: /opentelemetry/instrument/dd_sdks
+      identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 302
-    - name: Java
-      url: /opentelemetry/instrument/api_support/java
-      parent: otel-api-dd-sdk
-      weight: 3021
-      identifier: otel_api_java
-    - name: Python
-      url: /opentelemetry/instrument/api_support/python/traces
-      parent: otel-api-dd-sdk
-      weight: 3022
-      identifier: otel_api_python
-    - name: Ruby
-      url: /opentelemetry/instrument/api_support/ruby
-      parent: otel-api-dd-sdk
-      weight: 3023
-      identifier: otel_api_ruby
-    - name: Go
-      url: /opentelemetry/instrument/api_support/go
-      parent: otel-api-dd-sdk
-      weight: 3024
-      identifier: otel_api_go
-    - name: Node.js
-      url: /opentelemetry/instrument/api_support/nodejs/traces
-      parent: otel-api-dd-sdk
-      weight: 3025
-      identifier: otel_api_nodejs
-    - name: PHP
-      url: /opentelemetry/instrument/api_support/php
-      parent: otel-api-dd-sdk
-      weight: 3026
-      identifier: otel_api_php
-    - name: .NET
-      url: /opentelemetry/instrument/api_support/dotnet/traces
-      parent: otel-api-dd-sdk
-      weight: 3027
-      identifier: otel_api_dotnet
-    - name: Rust
-      url: /opentelemetry/instrument/api_support/rust
-      parent: otel-api-dd-sdk
-      weight: 3028
-      identifier: otel_api_rust
-    - name: OTel Instrumentation Libraries
-      url: /opentelemetry/instrument/instrumentation_libraries/
-      identifier: otel_instrumentation_libraries
-      parent: otel-instrumentation
-      weight: 303
     - name: Configuration
       url: opentelemetry/config/environment_variable_support/
       identifier: otel_env_var
-      parent: otel-instrumentation
-      weight: 304
+      parent: otel-dd-sdk-parent
+      weight: 3021
+    - name: APIs
+      url: /opentelemetry/instrument/dd_sdks/api_support
+      identifier: otel-api-dd-sdk
+      parent: otel-dd-sdk-parent
+      weight: 3022
+    - name: Instrumentation Libraries
+      url: /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
+      identifier: otel_instrumentation_libraries
+      parent: otel-dd-sdk-parent
+      weight: 3023
     - name: Send Data to Datadog
       identifier: otel_collect
       url: /opentelemetry/setup/
@@ -1723,141 +1691,6 @@ menu:
       parent: alerting
       identifier: monitor_types
       weight: 4
-    - name: Host
-      url: monitors/types/host/
-      parent: monitor_types
-      identifier: monitor_types_host
-      weight: 401
-    - name: Metric
-      url: monitors/types/metric/
-      parent: monitor_types
-      identifier: monitor_types_metrics
-      weight: 402
-    - name: Analysis
-      url: monitors/types/analysis/
-      parent: monitor_types
-      identifier: monitor_types_analysis
-      weight: 403
-    - name: Anomaly
-      url: monitors/types/anomaly/
-      parent: monitor_types
-      identifier: monitor_types_anomaly
-      weight: 404
-    - name: APM
-      url: monitors/types/apm/
-      parent: monitor_types
-      identifier: monitor_types_apm
-      weight: 405
-    - name: Audit Trail
-      url: monitors/types/audit_trail/
-      parent: monitor_types
-      identifier: monitor_types_auditlogs
-      weight: 406
-    - name: Change
-      url: monitors/types/change-alert/
-      parent: monitor_types
-      identifier: monitor_types_change
-      weight: 406
-    - name: CI/CD & Test
-      url: monitors/types/ci/
-      parent: monitor_types
-      identifier: monitor_types_ci
-      weight: 407
-    - name: Cloud Cost
-      url: monitors/types/cloud_cost/
-      parent: monitor_types
-      identifier: monitor_types_cloud_cost
-      weight: 408
-    - name: Composite
-      url: monitors/types/composite/
-      parent: monitor_types
-      identifier: monitor_types_composite
-      weight: 409
-    - name: Database Monitoring
-      url: monitors/types/database_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_database_monitoring
-      weight: 410
-    - name: Error Tracking
-      url: monitors/types/error_tracking/
-      parent: monitor_types
-      identifier: monitor_types_error_tracking
-      weight: 412
-    - name: Event
-      url: monitors/types/event/
-      parent: monitor_types
-      identifier: monitor_types_event
-      weight: 413
-    - name: Forecast
-      url: monitors/types/forecasts/
-      parent: monitor_types
-      identifier: monitor_types_forecasts
-      weight: 414
-    - name: Integration
-      url: monitors/types/integration/
-      parent: monitor_types
-      identifier: monitor_types_integration
-      weight: 415
-    - name: Live Process
-      url: monitors/types/process/
-      parent: monitor_types
-      identifier: monitor_types_process
-      weight: 416
-    - name: Logs
-      url: monitors/types/log/
-      parent: monitor_types
-      identifier: monitor_types_log
-      weight: 417
-    - name: Network
-      url: monitors/types/network/
-      parent: monitor_types
-      identifier: monitor_types_network
-      weight: 418
-    - name: Cloud Network Monitoring
-      url: monitors/types/cloud_network_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_cnm
-      weight: 419
-    - name: NetFlow
-      url: monitors/types/netflow/
-      parent: monitor_types
-      identifier: monitor_types_netflow
-      weight: 420
-    - name: Outlier
-      url: monitors/types/outlier/
-      parent: monitor_types
-      identifier: monitor_types_outlier
-      weight: 421
-    - name: Process Check
-      url: monitors/types/process_check/
-      parent: monitor_types
-      identifier: monitor_types_process_check
-      weight: 422
-    - name: Real User Monitoring
-      url: monitors/types/real_user_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_rum
-      weight: 423
-    - name: Service Check
-      url: monitors/types/service_check/
-      parent: monitor_types
-      identifier: monitor_types_service_check
-      weight: 424
-    - name: SLO Alerts
-      url: monitors/types/slo/
-      parent: monitor_types
-      identifier: monitor_types_slo
-      weight: 425
-    - name: Synthetic Monitoring
-      url: monitors/types/synthetic_monitoring/
-      parent: monitor_types
-      identifier: monitor_types_syn
-      weight: 426
-    - name: Watchdog
-      url: monitors/types/watchdog/
-      parent: monitor_types
-      identifier: monitor_types_watchdog
-      weight: 427
     - name: Notifications
       url: monitors/notify/
       parent: alerting
@@ -2616,239 +2449,244 @@ menu:
       parent: events
       weight: 10
     - name: Incident Management
-      url: service_management/incident_management/
+      url: incident_response/incident_management/
       pre: incidents
       parent: incident_response_heading
       identifier: incidents
       weight: 20000
     - name: Declare an Incident
-      url: service_management/incident_management/declare
+      url: incident_response/incident_management/declare
       parent: incidents
       identifier: incident_declare
       weight: 1
     - name: Describe an Incident
-      url: service_management/incident_management/describe
+      url: incident_response/incident_management/describe
       parent: incidents
       identifier: incident_describe
       weight: 2
     - name: Response Team
-      url: service_management/incident_management/response_team
+      url: incident_response/incident_management/response_team
       parent: incidents
       identifier: response_team
       weight: 3
     - name: Notification
-      url: service_management/incident_management/notification
+      url: incident_response/incident_management/notification
       parent: incidents
       identifier: incident_notification
       weight: 4
     - name: Investigate an Incident
-      url: service_management/incident_management/investigate
+      url: incident_response/incident_management/investigate
       parent: incidents
       identifier: incident_investigate
       weight: 5
     - name: Timeline
-      url: service_management/incident_management/investigate/timeline
+      url: incident_response/incident_management/investigate/timeline
       parent: incident_investigate
       identifier: incident_investigate_timeline
       weight: 501
     - name: Follow-ups
-      url: service_management/incident_management/follow-ups
+      url: incident_response/incident_management/follow-ups
       parent: incident_investigate
       identifier: incident_investigate_follow_ups
       weight: 502
     - name: Incident AI
-      url: service_management/incident_management/incident_ai
+      url: incident_response/incident_management/incident_ai
       identifier: incident_ai
       parent: incidents
       weight: 6
     - name: Incident Settings
-      url: service_management/incident_management/incident_settings
+      url: incident_response/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
       weight: 7
     - name: Information
-      url: service_management/incident_management/incident_settings/information
+      url: incident_response/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
       weight: 701
     - name: Property Fields
-      url: service_management/incident_management/incident_settings/property_fields
+      url: incident_response/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
       weight: 702
     - name: Responder Types
-      url: service_management/incident_management/incident_settings/responder_types
+      url: incident_response/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
       weight: 703
     - name: Integrations
-      url: service_management/incident_management/incident_settings/integrations
+      url: incident_response/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
       weight: 704
+    - name: Automations
+      url: incident_response/incident_management/incident_settings/automations
+      parent: incidents_settings
+      identifier: incidents_settings_automations
+      weight: 705
     - name: Notification Rules
-      url: service_management/incident_management/incident_settings/notification_rules
+      url: incident_response/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 705
+      weight: 706
     - name: Templates
-      url: service_management/incident_management/incident_settings/templates
+      url: incident_response/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 706
+      weight: 707
     - name: Incident Analytics
-      url: service_management/incident_management/analytics
+      url: incident_response/incident_management/analytics
       parent: incidents
       identifier: analytics
       weight: 8
     - name: Integrations
-      url: service_management/incident_management/integrations
+      url: incident_response/incident_management/integrations
       parent: incidents
       identifier: incidents_integrations
       weight: 9
     - name: Slack
-      url: service_management/incident_management/integrations/slack
+      url: incident_response/incident_management/integrations/slack
       parent: incidents_integrations
       identifier: incidents_integrations_slack
       weight: 901
     - name: Microsoft Teams
-      url: service_management/incident_management/integrations/microsoft_teams
+      url: incident_response/incident_management/integrations/microsoft_teams
       parent: incidents_integrations
       identifier: incidents_microsoft_teams
       weight: 902
     - name: Jira
-      url: service_management/incident_management/integrations/jira
+      url: incident_response/incident_management/integrations/jira
       parent: incidents_integrations
       identifier: incidents_integrations_jira
       weight: 903
     - name: ServiceNow
-      url: service_management/incident_management/integrations/servicenow
+      url: incident_response/incident_management/integrations/servicenow
       parent: incidents_integrations
       identifier: incidents_integrations_servicenow
       weight: 904
     - name: Status Pages
-      url: service_management/incident_management/integrations/status_pages
+      url: incident_response/incident_management/integrations/status_pages
       parent: incidents_integrations
       identifier: incidents_integrations_status_pages
       weight: 905
     - name: Atlassian Statuspage
-      url: service_management/incident_management/integrations/statuspage
+      url: incident_response/incident_management/integrations/statuspage
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 906
     - name: On-Call
-      url: service_management/on-call/
+      url: incident_response/on-call/
       pre: on-call
       parent: incident_response_heading
       identifier: oncall
       weight: 30000
     - name: Datadog Clipboard
-      url: service_management/incident_management/datadog_clipboard
+      url: incident_response/incident_management/datadog_clipboard
       parent: incidents
       identifier: incidents_clipboard
       weight: 10
     - name: Onboard a Team
-      url: service_management/on-call/teams/
+      url: incident_response/on-call/teams/
       parent: oncall
       identifier: oncall_teams
       weight: 1
     - name: Trigger a Page
-      url: service_management/on-call/triggering_pages/
+      url: incident_response/on-call/triggering_pages/
       parent: oncall
       identifier: oncall_triggering_pages
       weight: 2
     - name: Live Call Routing
-      url: service_management/on-call/triggering_pages/live_call_routing
+      url: incident_response/on-call/triggering_pages/live_call_routing
       identifier: oncall_live_call_routing
       parent: oncall_triggering_pages
       weight: 201
+    - name: Cross-org Paging
+      url: incident_response/on-call/cross_org_paging
+      identifier: oncall_cross_org_paging
+      parent: oncall_triggering_pages
+      weight: 202
     - name: Routing Rules
-      url: service_management/on-call/routing_rules/
+      url: incident_response/on-call/routing_rules/
       parent: oncall
       identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
-      url: service_management/on-call/escalation_policies/
+      url: incident_response/on-call/escalation_policies/
       parent: oncall
       identifier: oncall_escalation_policies
       weight: 4
     - name: Schedules
-      url: service_management/on-call/schedules/
+      url: incident_response/on-call/schedules/
       parent: oncall
       identifier: oncall_schedules
       weight: 5
     - name: Automations
-      url: service_management/on-call/automations
+      url: incident_response/on-call/automations
       parent: oncall
       identifier: oncall_automations
       weight: 6
     - name: Profile Settings
-      url: service_management/on-call/profile_settings/
+      url: incident_response/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
       weight: 7
     - name: Guides
-      url: service_management/on-call/guides/
+      url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
       weight: 8
     - name: Status Pages
-      url: service_management/status_pages/
+      url: incident_response/status_pages/
       pre: status-page-wui
       parent: incident_response_heading
       identifier: status_pages
       weight: 40000
     - name: Case Management
-      url: service_management/case_management/
+      url: incident_response/case_management/
       pre: case-management
       parent: incident_response_heading
       identifier: case_management
       weight: 60000
     - name: Projects
-      url: service_management/case_management/projects
+      url: incident_response/case_management/projects
       parent: case_management
       identifier: case_management_projects
       weight: 1
     - name: Settings
-      url: service_management/case_management/settings
+      url: incident_response/case_management/settings
       parent: case_management_projects
       identifier: case_management_settings
       weight: 102
     - name: Create a Case
-      url: service_management/case_management/create_case
+      url: incident_response/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
       weight: 2
     - name: Customization
-      url: service_management/case_management/customization
+      url: incident_response/case_management/customization
       parent: case_management
       identifier: case_management_customization
       weight: 3
     - name: View and Manage Cases
-      url: service_management/case_management/view_and_manage
+      url: incident_response/case_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
       weight: 4
     - name: Notifications and Integrations
-      url: service_management/case_management/notifications_integrations
+      url: incident_response/case_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
       weight: 5
     - name: Case Automation Rules
-      url: service_management/case_management/automation_rules
+      url: incident_response/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
     - name: Troubleshooting
-      url: service_management/case_management/troubleshooting
+      url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
       weight: 10000
     - name: Agents
       url: actions/agents/
@@ -2993,11 +2831,6 @@ menu:
       parent: app_builder
       identifier: app_builder_saved_actions
       weight: 10
-    - name: Action Interface
-      url: actions/action_interface/
-      pre: bits-ai
-      parent: actions_heading
-      identifier: action_interface
       weight: 30000
     - name: Datastores
       url: actions/datastores/
@@ -3273,46 +3106,56 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
       weight: 404
+    - name: App and API Protection
+      url: containers/kubernetes/appsec/
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_appsec
+      weight: 405
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 405
+      weight: 406
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 406
+      weight: 407
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 407
+      weight: 408
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 408
+      weight: 409
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 409
+      weight: 410
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 410
+      weight: 411
+    - name: kubectl Plugin
+      url: containers/kubernetes/kubectl_plugin
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_kubectlplugin
+      weight: 412
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 411
+      weight: 413
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 412
+      weight: 414
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -3403,11 +3246,6 @@ menu:
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
       weight: 804
-    - name: kubectl Plugin
-      url: containers/datadog_operator/kubectl_plugin
-      identifier: containers_datadog_operator_kubectlplugin
-      parent: containers_datadog_operator
-      weight: 805
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
@@ -4179,26 +4017,31 @@ menu:
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_cpp
       weight: 2027
+    - name: Rust
+      url: tracing/trace_collection/dd_libraries/rust
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_rust
+      weight: 2028  
     - name: .NET Core
       url: tracing/trace_collection/dd_libraries/dotnet-core
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_dotnet_core
-      weight: 2028
+      weight: 2029
     - name: .NET Framework
       url: tracing/trace_collection/dd_libraries/dotnet-framework
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_dotnet_framework  
-      weight: 2029
+      weight: 2030
     - name: Android
       url: tracing/trace_collection/dd_libraries/android
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_android
-      weight: 2030
+      weight: 2031
     - name: iOS
       url: tracing/trace_collection/dd_libraries/ios
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_ios
-      weight: 2031
+      weight: 2032
     - name: Code-based Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection
@@ -4274,21 +4117,26 @@ menu:
       identifier: dyninst
       parent: tracing_trace_collection
       weight: 204
+    - name: Enabling
+      url: tracing/trace_collection/dynamic_instrumentation/enabling/
+      identifier: dyninst_enable
+      parent: dyninst
+      weight: 2041
     - name: Autocomplete and Search
       url: tracing/trace_collection/dynamic_instrumentation/symdb
       identifier: dyninst_symdb
       parent: dyninst
-      weight: 2041
+      weight: 2042
     - name: Expression Language
       url: tracing/trace_collection/dynamic_instrumentation/expression-language
       identifier: dyninst_explang
       parent: dyninst
-      weight: 2042
+      weight: 2043
     - name: Sensitive Data Scrubbing
       url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
       identifier: dyninst_sensitive_data_scrubbing
       parent: dyninst
-      weight: 2043
+      weight: 2044
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -4534,11 +4382,16 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Service Override Removal
+      url: tracing/services/service_override_removal
+      parent: tracing_services
+      identifier: tracing_service_override_removal
+      weight: 909
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 909
+      weight: 910
     - name: Endpoint Observability
       url: internal_developer_portal/software_catalog/endpoints/
       identifier: endpoint_observability
@@ -5087,23 +4940,109 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Data Jobs Monitoring
-      url: data_jobs/
+    - name: Data Observability Overview
+      url: data_observability/
+      pre: data-observability-wui
+      identifier: data_observability
+      parent: data_observability_heading
+      weight: 60000
+    - name: Quality Monitoring
+      url: data_observability/quality_monitoring/
+      pre: data-observability-wui
+      identifier: quality_monitoring
+      parent: data_observability_heading
+      weight: 70000
+    - name: Data Warehouses
+      url: data_observability/quality_monitoring/data_warehouses
+      identifier: data_warehouses
+      parent: quality_monitoring
+      weight: 200000
+    - name: Snowflake
+      url: data_observability/quality_monitoring/data_warehouses/snowflake
+      identifier: snowflake
+      parent: data_warehouses
+      weight: 1000000
+    - name: Databricks
+      url: data_observability/quality_monitoring/data_warehouses/databricks
+      identifier: databricks
+      parent: data_warehouses
+      weight: 2000000
+    - name: BigQuery
+      url: data_observability/quality_monitoring/data_warehouses/bigquery
+      identifier: bigquery
+      parent: data_warehouses
+      weight: 3000000
+    - name: Business Intelligence Integrations
+      url: data_observability/quality_monitoring/business_intelligence
+      identifier: business_intelligence_integrations
+      parent: quality_monitoring
+      weight: 300000
+    - name: Tableau
+      url: data_observability/quality_monitoring/business_intelligence/tableau
+      identifier: business_intelligence_integrations_tableau
+      parent: business_intelligence_integrations
+      weight: 1000000
+    - name: Sigma
+      url: data_observability/quality_monitoring/business_intelligence/sigma
+      identifier: business_intelligence_integrations_sigma
+      parent: business_intelligence_integrations
+      weight: 2000000
+    - name: Metabase
+      url: data_observability/quality_monitoring/business_intelligence/metabase
+      identifier: business_intelligence_integrations_metabase
+      parent: business_intelligence_integrations
+      weight: 3000000
+    - name: Power BI
+      url: data_observability/quality_monitoring/business_intelligence/powerbi
+      identifier: business_intelligence_integrations_powerbi
+      parent: business_intelligence_integrations
+      weight: 4000000
+    - name: Jobs Monitoring
+      url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
       identifier: data_jobs
-      parent: apm_heading
-      weight: 60000
-    - name: Data Observability
-      url: data_observability/
-      pre: inventories
-      identifier: data_observability
-      parent: apm_heading
-      weight: 70000
-    - name: Datasets
-      url: data_observability/datasets
-      identifier: datasets
-      parent: data_observability
+      parent: data_observability_heading
+      weight: 80000
+    - name: Databricks
+      url: data_observability/jobs_monitoring/databricks
+      identifier: jobs_monitoring_databricks
+      parent: data_jobs
       weight: 100000
+    - name: Airflow
+      url: data_observability/jobs_monitoring/airflow
+      identifier: jobs_monitoring_airflow
+      parent: data_jobs
+      weight: 200000
+    - name: dbt
+      url: data_observability/jobs_monitoring/dbt
+      identifier: jobs_monitoring_dbt
+      parent: data_jobs
+      weight: 300000
+    - name: Spark on Kubernetes
+      url: data_observability/jobs_monitoring/kubernetes
+      identifier: jobs_monitoring_kubernetes
+      parent: data_jobs
+      weight: 400000
+    - name: Spark on Amazon EMR
+      url: data_observability/jobs_monitoring/emr
+      identifier: jobs_monitoring_emr
+      parent: data_jobs
+      weight: 500000
+    - name: Spark on Google Dataproc
+      url: data_observability/jobs_monitoring/dataproc
+      identifier: jobs_monitoring_dataproc
+      parent: data_jobs
+      weight: 600000
+    - name: Custom Jobs (OpenLineage)
+      url: data_observability/jobs_monitoring/openlineage
+      identifier: openlineage_integrations
+      parent: data_jobs
+      weight: 700000
+    - name: Datadog Agent for OpenLineage Proxy
+      url: data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage
+      identifier: openlineage_datadog_agent_for_openlineage
+      parent: openlineage_integrations
+      weight: 1000000
     - name: LLM Observability
       url: llm_observability/
       pre: llm-observability
@@ -5140,6 +5079,11 @@ menu:
       parent: llm_obs_instrumentation
       identifier: llm_obs_instrumentation_otel
       weight: 204
+    - name: Tracing Proxy Services
+      url: llm_observability/trace_proxy_services
+      parent: llm_obs_instrumentation
+      identifier: llm_obs_instrumentation_trace_proxy_services
+      weight: 205
     - name: Monitoring
       url: llm_observability/monitoring
       parent: llm_obs
@@ -5189,7 +5133,7 @@ menu:
       parent: llm_obs
       identifier: llm_obs_evaluations
       weight: 4
-    - name: Managed
+    - name: Managed Evaluations
       url: llm_observability/evaluations/managed_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_managed_evaluations
@@ -5199,16 +5143,31 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 401
-    - name: External
+    - name: External Evaluations
       url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
+    - name: Quality Evaluations
+      url: llm_observability/evaluations/managed_evaluations/quality_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_quality
+      weight: 40101
+    - name: Security and Safety Evaluations
+      url: llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_security
+      weight: 40102
+    - name: Session Level Evaluations
+      url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
+      parent: llm_obs_managed_evaluations
+      identifier: llm_obs_managed_evaluations_session
+      weight: 40103
     - name: Agent Evaluations
       url: llm_observability/evaluations/managed_evaluations/agent_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_agent
-      weight: 40101
+      weight: 40104
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_external_evaluations
@@ -5234,6 +5193,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_experiments
       weight: 5
+    - name: Setup and Usage
+      url: llm_observability/experiments/setup
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_setup
+      weight: 501
+    - name: Datasets
+      url: llm_observability/experiments/datasets
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_datasets
+      weight: 502
+    - name: Experiments API
+      url: llm_observability/experiments/api
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_api
+      weight: 503
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
@@ -5664,11 +5638,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_setup
       weight: 1
+    - name: Configuration
+      url: code_coverage/configuration/
+      parent: code_coverage
+      identifier: code_coverage_configuration
+      weight: 2
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 2
+      weight: 3
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -5701,11 +5680,21 @@ menu:
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_failures
       weight: 102
+    - name: Change Failure Detection
+      url: dora_metrics/change_failure_detection/
+      parent: dora_metrics
+      identifier: dora_metrics_change_failure_detection
+      weight: 2
+    - name: DORA Metrics Calculation
+      url: dora_metrics/calculation/
+      parent: dora_metrics
+      identifier: dora_metrics_calculation
+      weight: 3
     - name: Data Collected
       url: dora_metrics/data_collected/
       parent: dora_metrics
       identifier: dora_metrics_data_collected
-      weight: 2
+      weight: 4
     - name: Feature Flags
       url: feature_flags/
       pre: ci
@@ -5727,36 +5716,51 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_ios
       weight: 102
+    - name: JavaScript
+      url: feature_flags/client/javascript
+      parent: feature_flags_client
+      identifier: feature_flags_client_javascript
+      weight: 103
+    - name: React
+      url: feature_flags/client/react
+      parent: feature_flags_client
+      identifier: feature_flags_client_react
+      weight: 104
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: .NET
+      url: feature_flags/server/dotnet
+      parent: feature_flags_server
+      identifier: feature_flags_server_dotnet
+      weight: 201
     - name: Go
       url: feature_flags/server/go
       parent: feature_flags_server
       identifier: feature_flags_server_go
-      weight: 201
+      weight: 202
     - name: Java
       url: feature_flags/server/java
       parent: feature_flags_server
       identifier: feature_flags_server_java
-      weight: 202
+      weight: 203
     - name: Node.js
       url: feature_flags/server/nodejs
       parent: feature_flags_server
       identifier: feature_flags_server_nodejs
-      weight: 203
+      weight: 204
     - name: Python
       url: feature_flags/server/python
       parent: feature_flags_server
       identifier: feature_flags_server_python
-      weight: 204
+      weight: 205
     - name: Ruby
       url: feature_flags/server/ruby
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
-      weight: 205
+      weight: 206
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -6073,20 +6077,20 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
       weight: 409
-    - name: Google Chronicle
-      url: observability_pipelines/destinations/google_chronicle
-      parent: observability_pipelines_destinations
-      identifier: observability_pipelines_google_chronicle
-      weight: 410
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 411
+      weight: 410
     - name: Google Pub/Sub
       identifier: observability_pipelines_google_pubsub
       url: /observability_pipelines/destinations/google_pubsub/
       parent: observability_pipelines_destinations
+      weight: 411
+    - name: Google SecOps
+      url: observability_pipelines/destinations/google_secops/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_google_secops
       weight: 412
     - name: HTTP Client
       url: observability_pipelines/destinations/http_client/
@@ -6630,101 +6634,116 @@ menu:
       parent: log_management_heading
       identifier: cloudprem
       weight: 30000
-    - name: Architecture
-      url: /cloudprem/architecture
+    - name: Introduction
+      url: /cloudprem/introduction/
       parent: cloudprem
-      identifier: cloudprem_architecture
+      identifier: cloudprem_introduction
       weight: 1
-    - name: Installation
-      url: /cloudprem/install
+    - name: Architecture
+      url: /cloudprem/introduction/architecture
+      parent: cloudprem_introduction
+      identifier: cloudprem_architecture
+      weight: 101
+    - name: Network
+      url: /cloudprem/introduction/network
+      parent: cloudprem_introduction
+      identifier: cloudprem_network
+      weight: 102
+    - name: Supported Features
+      url: /cloudprem/introduction/features
+      parent: cloudprem_introduction
+      identifier: cloudprem_features
+      weight: 104
+    - name: Quickstart
+      url: /cloudprem/quickstart
       parent: cloudprem
-      identifier: cloudprem_installation
+      identifier: cloudprem_quickstart
       weight: 2
+    - name: Install
+      url: /cloudprem/install/
+      parent: cloudprem
+      identifier: cloudprem_install
+      weight: 3
     - name: AWS EKS
       url: /cloudprem/install/aws_eks
-      parent: cloudprem_installation
+      parent: cloudprem_install
       identifier: cloudprem_aws_eks
-      weight: 201
+      weight: 301
     - name: Azure AKS
       url: /cloudprem/install/azure_aks
-      parent: cloudprem_installation
+      parent: cloudprem_install
       identifier: cloudprem_azure_aks
-      weight: 202
-    - name: Log Ingestion
-      url: /cloudprem/ingest_logs/
-      parent: cloudprem
-      identifier: cloudprem_log_ingestion
-      weight: 3
-    - name: Datadog Agent
-      url: /cloudprem/ingest_logs/datadog_agent
-      parent: cloudprem_log_ingestion
-      identifier: cloudprem_ingest_datadog_agent
-      weight: 301
-    - name: Observability Pipelines
-      url: /cloudprem/ingest_logs/observability_pipelines
-      parent: cloudprem_log_ingestion
-      identifier: cloudprem_ingest_observability_pipelines
       weight: 302
+    - name: Docker (Local)
+      url: /cloudprem/install/docker
+      parent: cloudprem_install
+      identifier: cloudprem_docker
+      weight: 303
+    - name: Ingest
+      url: /cloudprem/ingest/
+      parent: cloudprem
+      identifier: cloudprem_ingest
+      weight: 4
+    - name: Datadog Agent
+      url: /cloudprem/ingest/agent
+      parent: cloudprem_ingest
+      identifier: cloudprem_ingest_agent
+      weight: 401
+    - name: Observability Pipelines
+      url: /cloudprem/ingest/observability_pipelines
+      parent: cloudprem_ingest
+      identifier: cloudprem_ingest_op
+      weight: 402
     - name: REST API
-      url: /cloudprem/ingest_logs/rest_api/
-      parent: cloudprem_log_ingestion
+      url: /cloudprem/ingest/api
+      parent: cloudprem_ingest
       identifier: cloudprem_ingest_api
-      weight: 304
-    - name: Configuration
+      weight: 403
+    - name: Configure
       url: /cloudprem/configure/
       parent: cloudprem
-      identifier: cloudprem_advanced_configuration
-      weight: 4
-    - name: Datadog Account
-      url: /cloudprem/configure/datadog_account
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_datadog_account
-      weight: 401
-    - name: AWS Configuration
-      url: /cloudprem/configure/aws_config
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_aws_configuration
-      weight: 402
-    - name: Azure Configuration
-      url: /cloudprem/configure/azure_config
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_azure_configuration
-      weight: 403
-    - name: Cluster Sizing
-      url: /cloudprem/configure/cluster_sizing
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_cluster_sizing
-      weight: 404
+      identifier: cloudprem_configure
+      weight: 5
+    - name: Retention Policy
+      url: /cloudprem/configure/retention
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_retention_policy
+      weight: 501
+    - name: Pipelines
+      url: /cloudprem/configure/pipelines
+      parent: cloudprem_configure
+      identifier: cloudprem_configure_pipelines
+      weight: 502
     - name: Ingress
       url: /cloudprem/configure/ingress
-      parent: cloudprem_advanced_configuration
+      parent: cloudprem_configure
       identifier: cloudprem_ingress
-      weight: 405
-    - name: Processing
-      url: /cloudprem/configure/processing
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_processing
-      weight: 406
-    - name: Reverse Connection
-      url: /cloudprem/configure/reverse_connection
-      parent: cloudprem_advanced_configuration
-      identifier: cloudprem_reverse_connection
-      weight: 407
-    - name: Management
-      url: /cloudprem/manage/
+      weight: 503
+    - name: Operate
+      url: /cloudprem/operate/
       parent: cloudprem
-      identifier: cloudprem_manage
-      weight: 5
-    - name: Supported Features
-      url: /cloudprem/supported_features/
-      parent: cloudprem
-      identifier: cloudprem_supported_features
+      identifier: cloudprem_operate
       weight: 6
+    - name: Sizing
+      url: /cloudprem/operate/sizing
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_sizing
+      weight: 600
+    - name: Monitoring
+      url: /cloudprem/operate/monitoring
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_monitoring
+      weight: 601
     - name: Troubleshooting
-      url: /cloudprem/troubleshooting/
-      parent: cloudprem
-      identifier: cloudprem_troubleshooting
-      weight: 7
+      url: /cloudprem/operate/troubleshooting
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_troubleshooting
+      weight: 602
+    - name: Search Logs
+      url: /cloudprem/operate/search_logs
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_search
+      weight: 603
     - name: Security Overview
       url: security/
       pre: security-platform
@@ -7598,6 +7617,11 @@ menu:
       url: synthetics/api_tests/grpc_tests
       parent: api_tests
       weight: 108
+    - name: Error codes
+      identifier: synthetics_api_tests_errors
+      url: synthetics/api_tests/errors
+      parent: api_tests
+      weight: 109
     - name: Multistep API Testing
       url: synthetics/multistep
       parent: synthetics
@@ -7633,6 +7657,11 @@ menu:
       parent: synthetics
       identifier: synthetics_network_path_tests
       weight: 4
+    - name: Terms and Concepts
+      url: synthetics/network_path_tests/glossary
+      parent: synthetics_network_path_tests
+      identifier: synthetics_network_path_tests_glossary
+      weight: 401
     - name: Mobile Application Testing
       url: synthetics/mobile_app_testing/
       parent: synthetics
@@ -8005,51 +8034,56 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_crash
       weight: 102
+    - name: Monitoring App Launch
+      url: real_user_monitoring/application_monitoring/android/application_launch_monitoring
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_application_launch_monitoring
+      weight: 103
     - name: Monitoring App Performance
       url: real_user_monitoring/application_monitoring/android/monitoring_app_performance
       parent: rum_mobile_android
       identifier: rum_mobile_android_monitoring_app_performance
-      weight: 103
+      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/android/advanced_configuration
       parent: rum_mobile_android
       identifier: rum_mobile_android_advanced_config
-      weight: 104
+      weight: 105
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/android/data_collected
       parent: rum_mobile_android
       identifier: rum_mobile_android_data_collected
-      weight: 105
+      weight: 106
     - name: Mobile Vitals
       url: real_user_monitoring/application_monitoring/android/mobile_vitals
       parent: rum_mobile_android
       identifier: rum_mobile_android_mobile_vitals
-      weight: 106
+      weight: 107
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/android/web_view_tracking
       parent: rum_mobile_android
       identifier: rum_mobile_android_web_view_tracking
-      weight: 107
+      weight: 108
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/android/integrated_libraries
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
-      weight: 108
+      weight: 109
     - name: Jetpack Compose Instrumentation
       url: real_user_monitoring/application_monitoring/android/jetpack_compose_instrumentation
       parent: rum_mobile_android
       identifier: rum_mobile_android_jetpack_compose_instrumentation
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 110
+      weight: 111
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/android/sdk_performance_impact
       parent: rum_mobile_android
       identifier: rum_mobile_android_performance_overhead
-      weight: 111
+      weight: 112
     - name: iOS and tvOS
       url: real_user_monitoring/application_monitoring/ios
       parent: application_monitoring
@@ -8065,51 +8099,56 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_crash
       weight: 102
+    - name: Monitoring App Launch
+      url: real_user_monitoring/application_monitoring/ios/application_launch_monitoring
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_application_launch_monitoring
+      weight: 103
     - name: Mobile App Performance
       url: real_user_monitoring/application_monitoring/ios/monitoring_app_performance
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_monitoring_app_performance
-      weight: 103
+      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/ios/advanced_configuration
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_advanced_config
-      weight: 104
+      weight: 105
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/ios/data_collected
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_data_collected
-      weight: 105
+      weight: 106
     - name: Mobile Vitals
       url: real_user_monitoring/application_monitoring/ios/mobile_vitals?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
-      weight: 106
+      weight: 107
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/ios/web_view_tracking?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_web_view_tracking
-      weight: 107
+      weight: 108
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/ios/integrated_libraries
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_integrated_libraries
-      weight: 108
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/ios/troubleshooting
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_troubleshooting
-      weight: 109
+      weight: 110
     - name: Supported Versions
       url: real_user_monitoring/application_monitoring/ios/supported_versions
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
-      weight: 110
+      weight: 111
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/ios/sdk_performance_impact
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_performance_overhead
-      weight: 111
+      weight: 112
     - name: Flutter
       url: real_user_monitoring/application_monitoring/flutter
       parent: application_monitoring
@@ -8350,181 +8389,116 @@ menu:
       parent: real_user_monitoring_platform
       identifier: rum_generate_metrics
       weight: 403
-    - name: Session Replay
-      url: real_user_monitoring/session_replay/
-      parent: rum
-      identifier: rum_session_replay
-      weight: 5
-    - name: Mobile
-      url: real_user_monitoring/session_replay/mobile
-      parent: rum_session_replay
-      identifier: rum_session_replay_mobile
-      weight: 501
-    - name: Setup
-      url: real_user_monitoring/session_replay/mobile/setup_and_configuration
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_setup
-      weight: 101
-    - name: Privacy Options
-      url: real_user_monitoring/session_replay/mobile/privacy_options
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_privacy
-      weight: 102
-    - name: Impact on App Performance
-      url: real_user_monitoring/session_replay/mobile/app_performance
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_app_performance
-      weight: 103
-    - name: Troubleshooting
-      url: real_user_monitoring/session_replay/mobile/troubleshooting
-      parent: rum_session_replay_mobile
-      identifier: rum_session_replay_mobile_troubleshooting
-      weight: 104
-    - name: Browser
-      url: real_user_monitoring/session_replay/browser
-      parent: rum_session_replay
-      identifier: rum_session_replay_browser
-      weight: 502
-    - name: Setup
-      url: real_user_monitoring/session_replay/browser/setup_and_configuration
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_browser_setup
-      weight: 101
-    - name: Privacy Options
-      url: real_user_monitoring/session_replay/browser/privacy_options
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_privacy_options
-      weight: 102
-    - name: Developer Tools
-      url: real_user_monitoring/session_replay/developer_tools
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_developer_tools
-      weight: 103
-    - name: Troubleshooting
-      url: real_user_monitoring/session_replay/troubleshooting
-      parent: rum_session_replay_browser
-      identifier: rum_session_replay_troubleshooting
-      weight: 104
-    - name: Playlists
-      url: real_user_monitoring/session_replay/playlists
-      parent: rum_session_replay
-      identifier: rum_session_replay_playlists
-      weight: 503
-    - name: Heatmaps
-      url: real_user_monitoring/session_replay/heatmaps
-      parent: rum_session_replay
-      identifier: rum_session_replay_heatmaps
-      weight: 504
     - name: Exploring RUM Data
       url: real_user_monitoring/explorer/
       parent: rum
       identifier: rum_explorer
-      weight: 6
+      weight: 5
     - name: Search RUM Events
       url: real_user_monitoring/explorer/search/
       parent: rum_explorer
       identifier: rum_explorer_search
-      weight: 601
+      weight: 501
     - name: Search Syntax
       url: real_user_monitoring/explorer/search_syntax/
       parent: rum_explorer
       identifier: rum_explorer_search_syntax
-      weight: 602
+      weight: 502
     - name: Group
       url: real_user_monitoring/explorer/group/
       parent: rum_explorer
       identifier: rum_explorer_group
-      weight: 603
+      weight: 503
     - name: Visualize
       url: real_user_monitoring/explorer/visualize/
       parent: rum_explorer
       identifier: rum_explorer_visualize
-      weight: 604
+      weight: 504
     - name: Events
       url: real_user_monitoring/explorer/events/
       parent: rum_explorer
       identifier: rum_explorer_events
-      weight: 605
+      weight: 505
     - name: Export
       url: real_user_monitoring/explorer/export/
       parent: rum_explorer
       identifier: rum_explorer_export
-      weight: 606
+      weight: 506
     - name: Saved Views
       url: real_user_monitoring/explorer/saved_views/
       parent: rum_explorer
       identifier: rum_explorer_saved_views
-      weight: 607
+      weight: 507
     - name: Watchdog Insights for RUM
       url: real_user_monitoring/explorer/watchdog_insights/
       parent: rum_explorer
       identifier: rum_explorer_watchdog_insights
-      weight: 608
+      weight: 508
     - name: Correlate RUM with Other Telemetry
       url: /real_user_monitoring/correlate_with_other_telemetry/
       parent: rum
       identifier: rum_correlate_with_other_telemetry
-      weight: 7
+      weight: 6
     - name: Correlate LLM with RUM
       url: /real_user_monitoring/correlate_with_other_telemetry/llm_observability
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_llm
-      weight: 701
+      weight: 601
     - name: Correlate Logs with RUM
       url: /real_user_monitoring/correlate_with_other_telemetry/logs
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_logs
-      weight: 702
+      weight: 602
     - name: Correlate Profiling with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/profiling/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_profiling
-      weight: 703
+      weight: 603
     - name: Correlate Synthetics with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
-      weight: 704
+      weight: 604
     - name: Correlate Traces with RUM
       url: /real_user_monitoring/correlate_with_other_telemetry/apm
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_apm
-      weight: 705
+      weight: 605
     - name: Feature Flag Tracking
       url: real_user_monitoring/feature_flag_tracking
       parent: rum
       identifier: rum_feature_flag_tracking
-      weight: 8
+      weight: 7
     - name: Setup
       url: real_user_monitoring/feature_flag_tracking/setup
       parent: rum_feature_flag_tracking
       identifier: rum_feature_flag_tracking_setup
-      weight: 801
+      weight: 701
     - name: Using Feature Flags
       url: real_user_monitoring/feature_flag_tracking/using_feature_flags
       parent: rum_feature_flag_tracking
       identifier: rum_feature_flag_tracking_use
-      weight: 802
+      weight: 702
     - name: Error Tracking
       url: real_user_monitoring/error_tracking/
       parent: rum
       identifier: rum_error_tracking
-      weight: 9
+      weight: 8
     - name: Explorer
       url: real_user_monitoring/error_tracking/explorer/
       parent: rum_error_tracking
       identifier: rum_error_tracking_explorer
-      weight: 901
+      weight: 801
     - name: Issue States
       url: real_user_monitoring/error_tracking/issue_states
       parent: rum_error_tracking
       identifier: rum_error_tracking_states
-      weight: 902
+      weight: 802
     - name: Track Browser Errors
       url: real_user_monitoring/error_tracking/browser/
       parent: rum_error_tracking
       identifier: rum_error_tracking_browser
-      weight: 903
+      weight: 803
     - name: Track Mobile Errors
       url: real_user_monitoring/error_tracking/mobile/
       parent: rum_error_tracking
@@ -8539,52 +8513,52 @@ menu:
       url: real_user_monitoring/error_tracking/monitors
       parent: rum_error_tracking
       identifier: rum_error_tracking_monitors
-      weight: 907
+      weight: 807
     - name: Identify Suspect Commits
       url: real_user_monitoring/error_tracking/suspect_commits
       parent: rum_error_tracking
       identifier: rum_error_tracking_suspect_commits
-      weight: 908
+      weight: 808
     - name: Troubleshooting
       url: real_user_monitoring/error_tracking/troubleshooting
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
-      weight: 909
+      weight: 809
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
       parent: rum
       identifier: rum_without_limits
-      weight: 10
+      weight: 9
     - name: Metrics
       url: real_user_monitoring/rum_without_limits/metrics
       parent: rum_without_limits
       identifier: rum_without_limits_metrics
-      weight: 1001
+      weight: 901
     - name: Retention Filters
       url: real_user_monitoring/rum_without_limits/retention_filters
       parent: rum_without_limits
       identifier: rum_without_limits_retention
-      weight: 1002
+      weight: 902
     - name: Operations Monitoring
       url: real_user_monitoring/operations_monitoring/
       parent: rum
       identifier: rum_operations_monitoring
-      weight: 11
+      weight: 10
     - name: Ownership of Views
       url: real_user_monitoring/ownership_of_views/
       parent: rum
       identifier: rum_ownership_of_views
-      weight: 12
+      weight: 11
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 13
+      weight: 12
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 14
+      weight: 13
     - name: Product Analytics
       url: product_analytics
       pre: product-analytics
@@ -8626,111 +8600,117 @@ menu:
       parent: product_analytics
       identifier: pa_dashboard
       weight: 2
-    - name: Replaying User Activity
-      url: product_analytics/session_replay/
-      parent: product_analytics
-      identifier: pa_session_replay
-      weight: 3
-    - name: Heatmaps
-      url: product_analytics/session_replay/heatmaps
-      parent: pa_session_replay
-      identifier: pa_heatmaps
-      weight: 301
-    - name: Playlists
-      url: product_analytics/session_replay/playlists
-      parent: pa_session_replay
-      identifier: pa_playlists
-      weight: 302
-    - name: Mobile
-      url: product_analytics/session_replay/mobile
-      parent: pa_session_replay
-      identifier: pa_session_replay_mobile
-      weight: 302
-    - name: Setup
-      url: product_analytics/session_replay/mobile/setup_and_configuration
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_setup
-      weight: 101
-    - name: Privacy Options
-      url: product_analytics/session_replay/mobile/privacy_options
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_privacy
-      weight: 102
-    - name: Impact on App Performance
-      url: product_analytics/session_replay/mobile/app_performance
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_app_performance
-      weight: 103
-    - name: Troubleshooting
-      url: product_analytics/session_replay/mobile/troubleshooting
-      parent: pa_session_replay_mobile
-      identifier: pa_session_replay_mobile_troubleshooting
-      weight: 104
-    - name: Browser
-      url: product_analytics/session_replay/browser
-      parent: pa_session_replay
-      identifier: pa_session_replay_browser
-      weight: 303
-    - name: Setup
-      url: product_analytics/session_replay/browser/setup_and_configuration
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_setup
-      weight: 101
-    - name: Privacy Options
-      url: product_analytics/session_replay/browser/privacy_options
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_privacy_options
-      weight: 102
-    - name: Developer Tools
-      url: product_analytics/session_replay/browser/developer_tools
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_developer_tools
-      weight: 103
-    - name: Troubleshooting
-      url: product_analytics/session_replay/browser/troubleshooting
-      parent: pa_session_replay_browser
-      identifier: pa_session_replay_browser_troubleshooting
-      weight: 104
     - name: Segments
       url: product_analytics/segmentation/
       parent: product_analytics
       identifier: pa_segmentation
-      weight: 6
+      weight: 3
     - name: Managing Profiles
       url: product_analytics/profiles
       parent: product_analytics
       identifier: pa_profiles
-      weight: 7
+      weight: 4
     - name: Experiments
       url: product_analytics/experimentation/
       parent: product_analytics
       identifier: pa_experiments
-      weight: 8
+      weight: 5
     - name: Define Metrics
       url: product_analytics/experimentation/defining_metrics
       parent: pa_experiments
       identifier: pa_experiments_metrics
-      weight: 801
+      weight: 501
     - name: Reading Experiment Results
       url: product_analytics/experimentation/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 802
+      weight: 502
     - name: Minimum Detectable Effects
       url: product_analytics/experimentation/minimum_detectable_effect
       parent: pa_experiments
       identifier: pa_experiments_mde
-      weight: 803
+      weight: 503
     - name: Guides
       url: product_analytics/guide/
       parent: product_analytics
       identifier: pa_guides
-      weight: 9
+      weight: 6
     - name: Troubleshooting
       url: product_analytics/troubleshooting/
       parent: product_analytics
       identifier: pa_troubleshooting
-      weight: 10
+      weight: 7
+    - name: Session Replay
+      url: session_replay/
+      pre: play-circle
+      identifier: session_replay
+      parent: digital_experience_heading
+      weight: 60000
+    - name: Browser
+      url: /session_replay/browser
+      parent: session_replay
+      identifier: session_replay_browser
+      weight: 1
+    - name: Setup
+      url: /session_replay/browser/setup_and_configuration
+      parent: session_replay_browser
+      identifier: session_replay_browser_setup
+      weight: 101
+    - name: Privacy Options
+      url: /session_replay/browser/privacy_options
+      parent: session_replay_browser
+      identifier: session_replay_browser_privacy_options
+      weight: 102
+    - name: Developer Tools
+      url: /session_replay/browser/dev_tools
+      parent: session_replay_browser
+      identifier: session_replay_browser_developer_tools
+      weight: 103
+    - name: Troubleshooting
+      url: /session_replay/browser/troubleshooting
+      parent: session_replay_browser
+      identifier: session_replay_browser_troubleshooting
+      weight: 104
+    - name: Mobile
+      url: /session_replay/mobile
+      parent: session_replay
+      identifier: session_replay_mobile
+      weight: 2
+    - name: Setup and Configuration
+      url: /session_replay/mobile/setup_and_configuration
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_setup_and_configuration
+      weight: 101
+    - name: Privacy Options
+      url: /session_replay/mobile/privacy_options
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_privacy_options
+      weight: 102
+    - name: Developer Tools
+      url: /session_replay/mobile/dev_tools
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_developer_tools
+      weight: 103
+    - name: Impact on App Performance
+      url: /session_replay/mobile/app_performance
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_app_performance
+      weight: 104
+    - name: Troubleshooting
+      url: /session_replay/mobile/troubleshooting
+      parent: session_replay_mobile
+      identifier: session_replay_mobile_troubleshooting
+      weight: 105
+    - name: Playlists
+      url: /session_replay/playlists
+      parent: session_replay
+      identifier: session_replay_playlists
+      weight: 3
+    - name: Heatmaps
+      url: /session_replay/heatmaps
+      parent: session_replay
+      identifier: session_replay_heatmaps
+      weight: 4
     - name: Account Management
       url: account_management/
       pre: cog-2
@@ -9032,21 +9012,26 @@ menu:
       url: account_management/billing/google_cloud/
       parent: account_management_billing
       weight: 1316
+    - name: OCI Integration
+      identifier: account_management_billing_oci
+      url: account_management/billing/oci/
+      parent: account_management_billing
+      weight: 1317
     - name: Alibaba Integration
       identifier: account_management_billing_alibaba
       url: account_management/billing/alibaba/
       parent: account_management_billing
-      weight: 1317
+      weight: 1318
     - name: vSphere Integration
       identifier: account_management_billing_vsphere
       url: account_management/billing/vsphere/
       parent: account_management_billing
-      weight: 1318
+      weight: 1319
     - name: Workflow Automation
       identifier: account_management_billing_workflow_automation
       url: account_management/billing/workflow_automation/
       parent: account_management_billing
-      weight: 1319
+      weight: 1320
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

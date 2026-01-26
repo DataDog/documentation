@@ -1,8 +1,9 @@
 ---
 title: Install the DDOT Collector as a Gateway on Kubernetes
-code_lang: kubernetes_gateway
-type: multi-code-lang
-code_lang_weight: 2
+private: true
+# code_lang: kubernetes_gateway
+# type: multi-code-lang
+# code_lang_weight: 2
 further_reading:
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog
@@ -54,7 +55,7 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.156.0 or higher.
+    * Datadog Helm chart version 3.160.1 or higher.
     * [kubectl][4].
 * **Network**:
   {{% otel-network-requirements %}}
@@ -567,7 +568,6 @@ To view your gateway pods:
 ## Known limitations
 
   * **Startup race condition**: When deploying the DaemonSet and gateway in the same release, DaemonSet pods might start before the gateway service is ready, causing initial connection error logs. The OTLP exporter automatically retries, so these logs can be safely ignored. Alternatively, deploy the gateway first and wait for it to become ready before deploying the DaemonSet.
-  * **Ignorable Core Agent Connection Logs**: Gateway pods might generate warning logs about failing to connect to a core Datadog Agent (for example, `grpc: addrConn.createTransport failed to connect`). This occurs because the gateway deployment does not include a core agent in the same pod. These logs are expected and can be safely ignored. This is being actively addressed.
 
 ## Further reading
   

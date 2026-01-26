@@ -15,13 +15,52 @@ further_reading:
 
 Template variables allow you to insert dynamic values from your test results and configuration into Synthetic Monitoring notification messages. These variables are accessed using the `synthetics.attributes` prefix. 
 
-**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab of a test run in the [Results Explorer][1], then reference the path directly within your monitor configuration. 
+**Note:** Not all variables are available for every test type. You may need to test different outputs to verify the data returned. You can export the result as a JSON file from the **Actions** tab of a test run in the [Results Explorer][1], then reference the path directly within your monitor configuration. Additionally, when running synthetic tests on a private location, ensure the private location is on version 1.59.0 or later, as earlier versions may not fully support all of the variables.
 
 {{< img src="synthetics/notifications/action_tab.png" alt="Actions tab from the Synthetics Result Explorer with Export Result JSON highlighted" style="width:90%;" >}}
+
+The following table provides a reference to the available variable categories and their base paths:
+
+| Section | Path |
+|---------|------|
+| [Test execution variables](#test-execution-variables) | `synthetics` (various shortcuts) |
+| [Result attributes](#result-attributes) | `synthetics.attributes` |
+| [Local and global variables](#local-and-global-variables) | `synthetics.attributes.result.variables` |
+| [Extracted variable values](#extracted-variable-values) | `synthetics.attributes.result.steps.<step-index>.extractedValue` (Browser/Mobile) |
+| [Step execution details](#step-execution-details) | `synthetics.attributes.variables.extracted` |
+| [Step summary](#step-summary) | `synthetics.attributes.result.steps` |
 
 ## Available variables
 
 ### Test execution variables
+
+Path: `synthetics` (various shortcuts)
+
+Use these variables to access common test execution data such as failure messages, step counts, duration, and tags.
+
+`{{synthetics.failed_step.failure.message}}`
+: The error message (for example, `Element's content should match the given regex`).
+
+`{{synthetics.failed_step.url}}`
+: The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
+
+`{{synthetics.attributes.result.response.statusCode}}`
+: The HTTP status code (for example, `403`). </br>
+<strong>Tip:</strong> Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code">conditional alerting</a> page for an example of how to use this variable in a notification.
+
+`{{synthetics.result.step_count}}`
+: Number of steps (for example, `4`).
+
+`{{synthetics.result.duration}}`
+: Duration of the test run (in milliseconds) (for example, `9096`).
+
+`{{tags}}`
+: Lists all the tags added to the synthetics test.
+: To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
+
+### Result attributes
+
+Path: `synthetics.attributes`
 
 Use these variables to include details about the test, execution location, device, counts, and result status in your notification messages.
 
@@ -61,7 +100,7 @@ Use these variables to include details about the test, execution location, devic
 {{% /tab %}}
 {{% tab "Device" %}}
 
-Applies to browser and mobile tests.
+Applies to Browser and Mobile tests.
 
 `{{synthetics.attributes.device}}`
 : The `device` object contains information about the device on which the test is run on
@@ -111,6 +150,8 @@ Applies to browser and mobile tests.
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
 
+<p>For a complete list of API test error codes, see <a href="/synthetics/api_tests/errors/">API Testing Errors</a>. Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.failure</code> variable in a notification.</p>
+
 {{% /tab %}}
 {{% tab "Count" %}}
 
@@ -132,11 +173,45 @@ Applies to Multistep, Browser, and Mobile tests.
 : The number of traceroute hops for TCP and ICMP tests
 
 {{% /tab %}}
+{{% tab "Failed Step" %}}
+
+Applies to Multistep, Browser, and Mobile tests.
+
+`{{synthetics.failed_step}}`
+: The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly. </br>
+
+<table>
+<thead>
+<tr>
+<th style="min-width: 240px;">Shortcut</th>
+<th>Test Type</th>
+<th>Maps To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{{synthetics.failed_step.name}}</code></td>
+<td>Multistep API</td>
+<td><code>{{synthetics.attributes.result.steps.&lt;step-index&gt;.name}}</code></td>
+</tr>
+<tr>
+<td><code>{{synthetics.failed_step.description}}</code></td>
+<td>Browser, Mobile</td>
+<td><code>{{synthetics.attributes.result.steps.&lt;step-index&gt;.description}}</code></td>
+</tr>
+</tbody>
+</table>
+
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut">conditional alerting</a> page for an example of how to use the <code>synthetics.failed_step.description</code> shortcut variable in a Browser Test notification.</div>
+
+{{% /tab %}}
 {{< /tabs >}}
 
-### Result variables
+### Local and global variables
 
-These variables provide access to local and global variable values used during test execution. Use them to include variable names, types, and values in your notifications. These variables are accessed with the `{{synthetics.attributes.result}}` prefix.
+Path: `synthetics.attributes.result.variables`
+
+These variables provide access to local and global variable values used during test execution. Use them to include variable names, types, and values in your notifications.
 
 {{< tabs >}}
 {{% tab "Local config variables" %}}
@@ -156,6 +231,8 @@ Located at `{{synthetics.attributes.result.variables.config}}`:
 
 `{{synthetics.attributes.result.variables.config.value}}`
 : Variable value (non-obfuscated only)
+
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification">advanced notifications</a> page for an example of how to use local variables in a notification.</div>
 
 {{% /tab %}}
 {{% tab "Global variables" %}}
@@ -179,9 +256,19 @@ Located at `{{synthetics.attributes.result.variables.extracted}}`:
 : Variable value (note: uses `.val`, not `.value`)
 
 {{% /tab %}}
-{{% tab "Step extracted variables" %}}
+{{< /tabs >}}
 
-For tests with steps, step data is contained in `{{synthetics.attributes.result.steps.<step-index>.extractedValue}}`. For information on how to access the `<step-index>` see the [step summary](#step-summary) section below.
+### Extracted variable values
+
+Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
+
+**Applies to:** Browser and Mobile tests.
+
+These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
+
+For information on how to access the `<step-index>`, see the [step summary](#step-summary) section below.
+
+**Note:** For Multistep API tests, use [API tests][2] instead.
 
 `synthetics.attributes.result.steps.<step-index>.extractedValue.name`
 : Variable name
@@ -192,12 +279,11 @@ For tests with steps, step data is contained in `{{synthetics.attributes.result.
 `synthetics.attributes.result.steps.<step-index>.extractedValue.value`
 : Variable value (if step was successful)
 
-{{% /tab %}}
-{{< /tabs >}}
+### Step execution details
 
-### Variables extracted by steps
+Path: `synthetics.attributes.variables.extracted`
 
-For multistep API, browser, and mobile tests, extracted variables are available at the step level within the `synthetics.attributes.variables.extracted` property. These values are only available when the step completes successfully.
+These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
 
 {{< tabs >}}
 {{% tab "General steps" %}}
@@ -533,7 +619,9 @@ For multistep API, browser, and mobile tests, extracted variables are available 
 
 ### Step summary
 
-Access step data by index, name, or ID to reference specific steps in your notification messages. This section also includes summary counts for total steps, completed steps, and errors.
+Path: `synthetics.attributes.result.steps`
+
+Access step data by index, name, or ID to reference specific steps in your notification messages.
 
 Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, and `.url`.
 
@@ -562,6 +650,8 @@ Use the step's unique identifier:
 
 `.steps.abc-def-ghi`
 
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.step</code> variable in a Slack notification based on a failed step.</div>
+
 #### Accessing step properties
 
 Combine any reference method with a property:
@@ -575,3 +665,9 @@ Combine any reference method with a property:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/explore/results_explorer
+[2]: /synthetics/notifications/template_variables/?tab=apitests#step-execution-details
+[3]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code
+[4]: /synthetics/api_tests/errors/
+[5]: /synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code
+[6]: /synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step
+

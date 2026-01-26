@@ -33,9 +33,19 @@ container_include: ["name:frontend.*"]
 
 **Note**: For Agent 5, instead of including the above in the `datadog.conf` main configuration file, explicitly add a `datadog.yaml` file to `/etc/datadog-agent/`, as the Process Agent requires all configuration options here. This configuration only excludes containers from real-time collection, **not** from Autodiscovery.
 
-### Scrubbing sensitive information
+### Scrubbing sensitive information from manifests
 
-To prevent the leaking of sensitive data, you can scrub sensitive words in container YAML files. Container scrubbing is enabled by default for Helm charts, and some default sensitive words are provided:
+To help prevent leaking sensitive data, the Agent can be configured to scrub the collected Kubernetes YAML manifests. This scrubbing feature is applied to:
+
+- Annotation values
+- Label values
+- Probe configurations (HTTP headers and commands)
+- Environment variables 
+- Container exec commands
+
+The scrubbing algorithm attempts to detect key-value pairs containing secrets based on a set of sensitive keywords, replacing corresponding values with `********`. This logic is applied to structured key-value pairs (such as environment variables) as well as values that look like JSON or YAML content, which may contain key-value pairs within the content.
+
+Scrubbing is enabled by default using the following sensitive keywords:
 
 - `password`
 - `passwd`
@@ -49,20 +59,18 @@ To prevent the leaking of sensitive data, you can scrub sensitive words in conta
 - `credentials`
 - `stripetoken`
 
-You can set additional sensitive words by providing a list of words to the environment variable `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to, and does not overwrite, the default words.
+You can supply additional sensitive keywords by providing a space-delimited list in the environment variable: `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to the default words and does not overwrite them. To use this environment variable, you must configure it for following Agents:
 
-**Note**: The additional sensitive words must be in lowercase, as the Agent compares the text with the pattern in lowercase. This means `password` scrubs `MY_PASSWORD` to `MY_*******`, while `PASSWORD` does not.
-
-You need to setup this environment variable for the following agents:
-
-- process-agent
-- cluster-agent
+- Core Agent
+- Cluster Agent
 
 ```yaml
 env:
     - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
       value: "customword1 customword2 customword3"
 ```
+
+**Note**: Any additional sensitive words must be provided as lowercase strings. The Agent converts text to lowercase before matching for sensitive words. If the sensitive word is `password`, `MY_PASSWORD=1234` is scrubbed to `MY_PASSWORD=********` because the Agent converts `MY_PASSWORD` to `my_password`, which mean the sensitive word `PASSWORD` does not match anything.
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
@@ -71,6 +79,7 @@ password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>
 password::::== <MY_PASSWORD>
+config={"password":"<MY_PASSWORD>"}
 ```
 
 However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
@@ -417,8 +426,7 @@ field#status.conditions.HorizontalAbleToScale.status:"False"
 
 You can use the `kubernetes_state_core` check to collect custom resource metrics when running the Datadog Cluster Agent.
 
-1. Write defintions for your custom resources and the fields to turn into metrics according to the following format:
-
+1. Write definitions for your custom resources and the fields to turn into metrics according to the following format:
    ```yaml
    #=(...)
    collectCrMetrics:
@@ -456,13 +464,11 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
                path: [metadata, generation]
    ```
 
- By default, RBAC and API resource names are derived from the kind in groupVersionKind by converting it to lowercase, and adding an "s" suffix (for example, Kind: ENIConfig → eniconfigs). If the Custom Resource Definition (CRD) uses a different plural form, you can override this behavior by specifying the resource field. In the example above, CNINode overrides the default by setting resource: "cninode-pluralized".
+   By default, RBAC and API resource names are derived from the kind in groupVersionKind by converting it to lowercase, and adding an "s" suffix (for example, Kind: ENIConfig → eniconfigs). If the Custom Resource Definition (CRD) uses a different plural form, you can override this behavior by specifying the resource field. In the example above, CNINode overrides the default by setting resource: "cninode-pluralized".
 
    Metric names are produced using the following rules:
-
-   a. No prefix precified: `kubernetes_state_customresource.<metrics.name>`
-
-   b. Prefix precified: `kubernetes_state_customresource.<metricNamePrefix>_<metric.name>`
+   - No prefix: `kubernetes_state_customresource.<metrics.name>`
+   - Prefix: `kubernetes_state_customresource.<metricNamePrefix>_<metric.name>`
 
    For more details, see [Custom Resource State Metrics][5].
 
@@ -492,9 +498,9 @@ You can use the `kubernetes_state_core` check to collect custom resource metrics
    {{% /tab %}}
    {{% tab "Datadog Operator" %}}
 
-    <div class="alert alert-info">
+   <div class="alert alert-info">
       This functionality requires Agent Operator v1.20+.
-    </div>
+   </div>
 
    1. Install the Datadog Operator with an option that grants the Datadog Agent permission to collect custom resources:
 
