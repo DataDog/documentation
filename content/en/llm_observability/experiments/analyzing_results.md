@@ -81,8 +81,11 @@ To query a specific key in input, output, expected output, or metadata, you need
 | metadata | `@meta.metadata.<key1>.<subkey1>:<value>` | `@meta.metadata.source:generated` |
 
 
-### Note about arrays 
-Simple arrays are flattened as “strings” so you can query them. Let's say your output looked like this below:
+##### Querying JSON arrays 
+Simple arrays are flattened as strings, and you can query them. 
+
+**Example 1**: Queryable JSON array
+
 ```
 "output": {
   "action_matches": [
@@ -92,9 +95,11 @@ Simple arrays are flattened as “strings” so you can query them. Let's say yo
     ],
 }
 ```
-You can query the values like this: `@meta.output.action_matches:"^/cases/settings$"`.
 
-But nested arrays like below are not queryable. 
+You can query this example array by searching: `@meta.output.action_matches:"^/cases/settings$"`.
+
+**Example 2**: Non-queryable JSON array 
+
 ```
 "output": {
   "expected_actions": [
@@ -110,30 +115,29 @@ But nested arrays like below are not queryable.
 }
 ```
 
-# Using Widgets with LLM Experiments data
+In this example, the array is nested and cannot be queried.
+
+## Using widgets with LLM Experiments data
 
 You can build widgets in Dashboards and Notebooks using LLM Experiments data. 
-To make the most of the widget capabilities to help you slice/dice your data the way you want, we suggest you:
-- populate the metadata of your dataset records with all extra information that might help you slice your data (e.g: difficulty, language, …) 
-- ensure that your tasks outputs a JSON object
-- you have updated ddtrace-py >= 4.1.0
+Datadog suggests that you:
+- Populate the metadata of your dataset records with all extra information that might help you slice your data (for example: difficulty, language, etc.) 
+- Ensure that your tasks outputs a JSON object
+- Update `ddtrace-py` version >= 4.1.0
 
 
-To build a widget using LLM Experiments data, use `LLM Observability > Experiments` as data source, then use the EvP search syntax described above to narrow down on the events to plot. 
+To build a widget using LLM Experiments data, use `LLM Observability > Experiments` as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
 
-For record level data aggregation, use `Traces`, otherwise use `All Spans`.
-
-The easiest way to know which dimensions are available is to open a trace and look at available tags..
-{{< img src="llm_observability/experiments/side-panel-tag.png" alt="LLM Observability, Experiment trace side-panel. Highlighting where to find trace tags." style="width:100%;" >}}
+For record level data aggregation, use `Traces`; otherwise, use `All Spans`.
 
 
-## Widget Examples
-### Plotting performance over time broken down by a metadata field
+### Widget examples
+#### Plotting performance over time broken down by a metadata field
 {{< img src="llm_observability/experiments/widget-metadata.png" alt="Widget using LLM Experiments data. Graph showing the performance over time broken down by a metadata field." style="width:100%;" >}}
 
-**Note:** If you are trying to compute an average of a boolean evaluation, you will have to manually compute the % of True over all traces.
+<div class="alert alert-info">If you are trying to compute an average of a Boolean evaluation, you must manually compute the percentage of <code>True</code> over all traces.</div>
 
-### Displaying tool usage stats
-In a situation where your agent is supposed to call a certain tool and you need to understand how often the tool is called and get some stats about it:
+#### Displaying tool usage stats
+In a situation where your agent is supposed to call a certain tool, and you need to understand how often the tool is called and get some stats about it:
 
 {{< img src="llm_observability/experiments/widget-tool.png" alt="Widget using LLM Experiments data. Graph showing some usage statistics of a tool in multiple experiments." style="width:100%;" >}}
