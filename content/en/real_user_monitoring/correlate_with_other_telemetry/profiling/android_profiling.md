@@ -80,6 +80,8 @@ Android application launch profiling data is attached to the [time to initial di
 
 Use the **flame graph** to identify which methods consume the most CPU time during launch, the **thread timeline** to see parallel execution patterns, and the **call graph** to trace method dependencies. You can also download the profiling data for external analysis or deeper investigation.
 
+{{< img src="real_user_monitoring/android/android-profiling-thread-timeline.png" alt="Android profiling data for the time to initial display in a thread timeline." style="width:90%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

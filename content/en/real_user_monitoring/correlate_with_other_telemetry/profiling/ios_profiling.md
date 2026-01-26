@@ -71,7 +71,10 @@ iOS application launch profiling data is attached to the [time to initial displa
 
 {{< img src="real_user_monitoring/ios/ios-profiling-session.png" alt="iOS profiling data in a view event to initial display vital event." style="width:90%;" >}}
 
-Use the **flame graph** to identify which functions consume the most Wall time during launch, the **thread timelin**e** to see parallel execution patterns, and the **call graph** to trace function dependencies. You can also download the profiling data for external analysis or deeper investigation.
+Use the **flame graph** to identify which functions consume the most Wall time during launch, the **thread timeline** to see parallel execution patterns, and the **call graph** to trace function dependencies. You can also download the profiling data for external analysis or deeper investigation.
+
+{{< img src="real_user_monitoring/ios/ios-profiling-thread-timeline.png" alt="iOS profiling data for the time to initial display in a thread timeline." style="width:90%;" >}}
+
 
 ## Further Reading
 
