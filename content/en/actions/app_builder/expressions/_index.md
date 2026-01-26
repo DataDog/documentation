@@ -4,7 +4,6 @@ description: Use expressions in App Builder to connect components, queries, and 
 type: multi-code-lang
 aliases:
     - /service_management/app_builder/expressions
-    - /
 further_reading:
 - link: "/service_management/app_builder/build/"
   tag: "Documentation"
