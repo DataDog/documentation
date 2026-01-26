@@ -3,7 +3,7 @@ This partial contains Go custom instrumentation content for the Datadog API.
 -->
 
 {% alert level="info" %}
-If you have not yet read the instructions for auto-instrumentation and setup, start with the [Go Setup Instructions](https://docs.datadoghq.com/tracing/setup/go/).
+If you have not yet read the instructions for auto-instrumentation and setup, start with the [Go Setup Instructions][16].
 {% /alert %}
 
 {% alert level="info" %}
@@ -103,7 +103,7 @@ span.Finish(tracer.WithError(err))
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to manually instrument your code.
 
 {% alert level="info" %}
-Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach helps ensure accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation](https://pkg.go.dev/context) or documentation for any third-party libraries integrated with your application.
+Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach helps ensure accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][17] or documentation for any third-party libraries integrated with your application.
 {% /alert %}
 
 ### Manually creating a span
@@ -218,3 +218,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [13]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpan
 [14]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartSpanFromContext
 [15]: /tracing/trace_collection/custom_instrumentation/go/migration
+[16]: /tracing/setup/go/
+[17]: https://pkg.go.dev/context

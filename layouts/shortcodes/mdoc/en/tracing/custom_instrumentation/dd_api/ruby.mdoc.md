@@ -3,7 +3,7 @@ This partial contains Ruby custom instrumentation content for the Datadog API.
 -->
 
 {% alert level="info" %}
-If you have not yet read the instructions for auto-instrumentation and setup, read the [Ruby Setup Instructions](https://docs.datadoghq.com/tracing/setup/ruby/).
+If you have not yet read the instructions for auto-instrumentation and setup, read the [Ruby Setup Instructions][10].
 {% /alert %}
 
 This page details describes use cases for adding and customizing observability with Datadog APM.
@@ -311,3 +311,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [7]: /tracing/trace_collection/trace_context_propagation/#baggage
 [8]: https://github.com/DataDog/dd-trace-rb/releases
 [9]: /tracing/security
+[10]: /tracing/setup/ruby/

@@ -3,7 +3,7 @@ This partial contains PHP custom instrumentation content for the Datadog API.
 -->
 
 {% alert level="info" %}
-If you have not yet read the instructions for auto-instrumentation and setup, start with the [PHP Setup Instructions](/tracing/setup/php/). Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation](/tracing/setup/php/#automatic-instrumentation) for more details.
+If you have not yet read the instructions for auto-instrumentation and setup, start with the [PHP Setup Instructions][11]. Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][12] for more details.
 {% /alert %}
 
 ## Annotations
@@ -44,7 +44,7 @@ To write custom instrumentation, you do not need any additional composer package
 {% /alert %}
 
 {% alert level="info" %}
-The Datadog APM PHP Api is fully documented [in stubs](https://github.com/DataDog/dd-trace-php/blob/master/ext/ddtrace.stub.php). This allows you to have automated documentation in PHPStorm.
+The Datadog APM PHP Api is fully documented [in stubs][13]. This allows you to have automated documentation in PHPStorm.
 {% /alert %}
 
 ### A sample application to be instrumented
@@ -368,7 +368,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 ## API reference
 
 {% alert level="info" %}
-The Datadog APM PHP Api is fully documented [in stubs](https://github.com/DataDog/dd-trace-php/blob/master/ext/ddtrace.stub.php). This allows you to have automated documentation in PHPStorm.
+The Datadog APM PHP Api is fully documented [in stubs][13]. This allows you to have automated documentation in PHPStorm.
 {% /alert %}
 
 ### Parameters of the tracing closure
@@ -474,3 +474,6 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [8]: /tracing/trace_collection/opentracing/php#opentracing
 [9]: /tracing/trace_collection/trace_context_propagation/
 [10]: /tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information
+[11]: /tracing/setup/php/
+[12]: /tracing/setup/php/#automatic-instrumentation
+[13]: https://github.com/DataDog/dd-trace-php/blob/master/ext/ddtrace.stub.php

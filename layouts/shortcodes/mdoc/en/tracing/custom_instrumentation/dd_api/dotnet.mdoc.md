@@ -3,7 +3,7 @@ This partial contains .NET custom instrumentation content for the Datadog API.
 -->
 
 {% alert level="info" %}
-If you have not yet read the instructions for automatic instrumentation and setup, start with the [.NET/.NET Core](https://docs.datadoghq.com/tracing/setup/dotnet-core/) or [.NET Framework](https://docs.datadoghq.com/tracing/setup/dotnet-framework/) Setup Instructions.
+If you have not yet read the instructions for automatic instrumentation and setup, start with the [.NET/.NET Core][13] or [.NET Framework][14] Setup Instructions.
 {% /alert %}
 
 This page details common use cases for adding and customizing observability with Datadog APM. For a list of supported runtimes, see the [.NET Framework Compatibility Requirements][1] or the [.NET Core Compatibility Requirements][2].
@@ -53,7 +53,7 @@ namespace Store.Managers
 ## Custom instrumentation with code
 
 {% alert level="info" %}
-This feature requires adding the [`Datadog.Trace` NuGet package](https://www.nuget.org/packages/Datadog.Trace) to your application. It provides an API to directly access the Tracer and the active span.
+This feature requires adding the [`Datadog.Trace` NuGet package][15] to your application. It provides an API to directly access the Tracer and the active span.
 {% /alert %}
 
 {% alert level="danger" %}
@@ -249,3 +249,6 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 [10]: /tracing/security
 [11]: /tracing/trace_collection/library_config/dotnet-core/
 [12]: /tracing/trace_collection/trace_context_propagation/
+[13]: /tracing/setup/dotnet-core/
+[14]: /tracing/setup/dotnet-framework/
+[15]: https://www.nuget.org/packages/Datadog.Trace
