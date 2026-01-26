@@ -27,6 +27,9 @@ Track buffer behavior with these additional metrics:
 `pipelines.source_buffer_utilization_level`
 : Current event count in a source's buffer. Sources ingest events, then write them to this buffer.
 
+`pipelines.source_buffer_utilization_mean`
+: The exponentially weighted moving average (EWMA) of the number of events in the source's buffer.
+
 `pipelines.source_buffer_max_size_events`
 : A source's maximum buffer size, defined as the number of events.
 
@@ -35,6 +38,9 @@ Track buffer behavior with these additional metrics:
 
 `pipelines.transform_buffer_utilization_level`
 : Current event count in a processor's buffer. Processors pull from this buffer, transform the event, and then send it downstream.
+
+`pipelines.transform_buffer_utilization_mean`
+: The exponentially weighted moving average (EWMA) of the number of events in the processor's buffer.
 
 `pipelines.transform_buffer_max_size_events`
 : A processor's maximum buffer size, defined as the number of events.
