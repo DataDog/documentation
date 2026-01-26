@@ -67,7 +67,7 @@ After the Azure App is created and installed, enable CI Visibility for the organ
 
 Pipelines appear in Datadog immediately after CI Visibility is enabled for an organization or project.
 
-<div class="alert alert-warning">If you previously configured Azure Pipelines using Service Hook Subscriptions (the legacy setup), disable that integration before enabling CI Visibility for the same projects. Otherwise, pipeline events will be duplicated. If you've already done it, ignore this message.</div>
+<div class="alert alert-caution">If you previously configured Azure Pipelines using Service Hook Subscriptions (the legacy setup), disable that integration before enabling CI Visibility for the same projects. Otherwise, pipeline events will be duplicated. If you've already done it, ignore this message.</div>
 
 [1]: /integrations/azure-devops-source-code/#setup
 [2]: https://app.datadoghq.com/ci/setup/pipeline?provider=azurepipelines
