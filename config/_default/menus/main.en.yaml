@@ -2910,7 +2910,7 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
-    - name: JavaScript Expressions
+    - name: Expressions
       url: actions/workflows/expressions/
       parent: workflows
       identifier: workflows_expressions
@@ -2981,7 +2981,7 @@ menu:
       parent: app_builder_components
       identifier: app_builder_reusable_modules
       weight: 704
-    - name: Expressions
+    - name: JavaScript Expressions
       url: actions/app_builder/expressions/
       parent: app_builder
       identifier: app_builder_expressions
