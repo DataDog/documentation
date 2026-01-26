@@ -22,7 +22,7 @@ Track buffer behavior with these additional metrics:
 : Cumulative number of events dropped by a buffer.
 
 `pipelines.source_buffer_utilization`
-: Histogram of event count in a source's buffer downstream of a source. The buffer is downstream of a source, which means the source receives the event and then puts it in the buffer.
+: Histogram of event count in a source's buffer. Sources ingest events, then write them to this buffer.
 
 `pipelines.source_buffer_utilization_level`
 : Current event count in a source's buffer. Sources ingest events, then write them to this buffer.
