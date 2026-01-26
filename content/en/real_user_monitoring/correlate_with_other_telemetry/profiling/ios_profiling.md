@@ -21,7 +21,7 @@ iOS Profiling is in Preview.
 
 ## Overview
 
-iOS profiling captures detailed data about your application's performance during launch, helping you identify slow functions and optimize startup time. iOS profiling is built on top of the [mach Kernel API][1] and samples all application threads to collect call stacks for all application processes. 
+iOS profiling captures detailed data about your application's performance during launch, helping you identify slow functions and optimize startup time. iOS profiling is built on top of the [mach Kernel API][1] and periodically samples all application threads to collect call stacks. 
 
 ## Prerequisites
 
@@ -38,30 +38,30 @@ iOS profiling captures detailed data about your application's performance during
 </div>
 
 ```swift
-      import DatadogCore
-      import DatadogRUM
-      import DatadogProfiling
+    import DatadogCore
+    import DatadogRUM
+    import DatadogProfiling
 
-      // Initialize Datadog SDK with your configuration
-      Datadog.initialize(
-        with: Datadog.Configuration(
-          clientToken: "<client token>",  // From Datadog UI
-          env: "<environment>",           // for example, "production", "staging"
-          service: "<service name>"       // Your app's service name
-        ),
-        trackingConsent: trackingConsent  // GDPR compliance setting
+    // Initialize Datadog SDK with your configuration
+    Datadog.initialize(
+      with: Datadog.Configuration(
+        clientToken: "<client token>",  // From Datadog UI
+        env: "<environment>",           // for example, "production", "staging"
+        service: "<service name>"       // Your app's service name
+      ),
+      trackingConsent: trackingConsent  // GDPR compliance setting
+    )
+
+    // Enable RUM feature
+    RUM.enable(
+      with: RUM.Configuration(
+        applicationID: "<rum application id>"
       )
+    )
 
-      // Enable RUM feature
-      RUM.enable(
-        with: RUM.Configuration(
-          applicationID: "<rum application id>"
-        )
-      )
-
-      // Enable Profiling feature
-      Profiling.enable(with: .init()) // default is 5%
-  ```
+    // Enable Profiling feature
+    Profiling.enable() // default is 5%
+```
 
 ## Explore profiling data
 
@@ -71,7 +71,7 @@ iOS application launch profiling data is attached to the [time to initial displa
 
 {{< img src="real_user_monitoring/ios/ios-profiling-session.png" alt="iOS profiling data in a view event to initial display vital event." style="width:90%;" >}}
 
-Use the flame graph, thread timeline, and call graph visualizations to analyze the profiling data for the time to initial display. You can also download the profiling data for external analysis.
+Use the **flame graph** to identify which functions consume the most Wall time during launch, the **thread timelin**e** to see parallel execution patterns, and the **call graph** to trace function dependencies. You can also download the profiling data for external analysis or deeper investigation.
 
 ## Further Reading
 

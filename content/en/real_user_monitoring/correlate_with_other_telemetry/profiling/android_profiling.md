@@ -40,35 +40,35 @@ Android profiling captures detailed data about your application's performance du
 </div>
 
 ```kotlin
-    class SampleApplication : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            val configuration = Configuration.Builder(
-                clientToken = "<CLIENT_TOKEN>",
-                env = "<ENV_NAME>",
-                variant = "<APP_VARIANT_NAME>"
-            ).build()
+  class SampleApplication : Application() {
+      override fun onCreate() {
+          super.onCreate()
+          val configuration = Configuration.Builder(
+              clientToken = "<CLIENT_TOKEN>",
+              env = "<ENV_NAME>",
+              variant = "<APP_VARIANT_NAME>"
+          ).build()
 
-            Datadog.initialize(this, configuration, trackingConsent)
+          Datadog.initialize(this, configuration, trackingConsent)
 
-            // Enable RUM (required for Profiling)
-            val rumConfig = RumConfiguration.Builder(applicationId)
-                .build()
-            Rum.enable(rumConfig)
-
-            // Enable Profiling
-            val profilingConfig = ProfilingConfiguration.Builder()
-              .setApplicationLaunchSampleRate(15) // default is 15%
+          // Enable RUM (required for Profiling)
+          val rumConfig = RumConfiguration.Builder(applicationId)
               .build()
+          Rum.enable(rumConfig)
 
-            Profiling.enable(profilingConfig)
-        }
-    }
-  ```
+          // Enable Profiling
+          val profilingConfig = ProfilingConfiguration.Builder()
+            .setApplicationLaunchSampleRate(15) // default is 15%
+            .build()
+
+          Profiling.enable(profilingConfig)
+      }
+  }
+```
 
 <div class="alert alert-warning">The total volume of profiles may not match the percentage configured in <code>applicationLaunchSampleRate</code>. This variation results from <a href="https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works">rate limitations</a> within the data collector, including profiling support on older devices and the maximum profiling frequency per device.</div>
 
-The [ProfilingManager API][4] also supports disablng rate limiting during debug builds. 
+The [ProfilingManager API][4] also supports disabling rate limiting during debug builds. 
 
 ## Explore profiling data
 
