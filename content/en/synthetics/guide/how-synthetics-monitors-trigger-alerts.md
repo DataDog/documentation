@@ -95,7 +95,7 @@ With the above settings, the alert triggers 13 minutes after the scheduled test 
 | t15 | Scheduled test runs | Fail | OK (Minimum duration timer starts)|
 | t28 | N/A |Fail | ALERT (13 minutes elapsed)|
 
-If you want alerts after one test execution, this is a recommended configuration. 
+**Note**: This configuration is not recommended because it lacks fast retries and alerts on a single failure, which can lead to false positives from transient issues. Instead, consider shortening the test frequency to 5 minutes and/or enabling fast retries. This approach allows additional test executions to run during transient issues, reducing false positives while still ensuring timely alerts for real, persistent problems. 
 
 ### Example: Fast retries
 
