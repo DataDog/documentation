@@ -1,3 +1,5 @@
+traits:
+
 - id: synthetics_variables
   label: "Synthetics Variables"
   type: text
