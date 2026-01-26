@@ -36,25 +36,25 @@ Backpressure determines if the system should slow down the consumption or accept
 
 All components in Observability Pipelines have a small in-memory buffer between them to ensure smooth handoff of events as they traverse your pipeline. These buffers ensure that variations in the amount of time for an event to be processed through each component do not cause excessive blocking/waiting. These buffers are not intended for large scale buffering, and only have a capacity of 100 events.
 
-By default, destinations have an in-memory buffer which can store 500 events. Destinations in particular are susceptible to intermittent latency and outages, because destinations involve sending events over a network to an external service. For this reason, buffers on your destinations are configurable to be increased in size to accommodate greater throughput, and help ensure your pipeline continues to process events from your source. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information.
+By default, destinations have an in-memory buffer which can store 500 events. Destinations in particular are susceptible to intermittent latency and outages, because destinations involve sending events over a network to an external service. The size of destination buffers is configurable, allowing you to set it based on your pipeline's throughput. As long as there is still space in the buffer, your source keeps ingesting events and does not propagate backpressure. See [Configurable buffers for destinations](#configurable-buffers-for-destinations) for more information.
 
 ### Destination buffer behavior
 
-If a destination becoming unavailable, events start to fill the destination buffer. Meanwhile, the destination retries indefinitely so that events can be sent downstream again as soon as the destination becomes available. If the buffer fills up during this time, it blocks new events in your pipeline from being processed upstream. This results in backpressure propagation, which eventually reaches your source. This happens to ensure no events are dropped within your pipeline while waiting for the destination to become available again.
+If a destination becomes unavailable, events start to fill the destination buffer. The destination retries indefinitely to ensure the pipeline flows again as soon as the destination becomes available. If the buffer fills up during this time, it blocks new events from being processed upstream. This eventually results in backpressure propagation, which stops any new events from being ingested from your source. 
 
 #### Which buffer type to use for a destination
 
 There are two types of buffers you can use for your destination:
 
-- **Memory buffers** prioritize throughput over durability, as they can handle significant bandwidth, but memory buffers do not persist between Worker restarts.
-- **Disk buffers** prioritize durability over throughput, where it writes to the OS' page cache first, then flushes to a disk if the data is not immediately transmitted by the destination. Disk buffers wait at most 500 ms before calling fsync and flushing a data file to a disk. A disk buffer flushes more frequently if a data file fills up to its maximum 128 MB size before the 500 ms has elapsed since the last flush.
+- **Memory buffers** prioritize throughput over durability; they can handle significant bandwidth, but memory buffers do not persist between Worker restarts.
+- **Disk buffers** prioritize durability over throughput. Disk buffers write to the page cache first, then flush to disk if the data is not immediately transmitted by the destination. Disk buffers wait at most 500 ms before calling fsync and flushing a data file to disk. A disk buffer flushes more frequently if a data file fills up to its maximum 128 MB size before the 500 ms has elapsed since the last flush.
 
 Both types of buffering help to prevent backpressure from propagating back to your source and application when a destination is temporarily unavailable. Specific reasons you might have for choosing:
 - **Memory buffers**
   - You plan on sending a high bandwidth of data through your Worker, which a disk buffer might not be able to keep up with.
   - You are okay with potential data loss.
 - **Disk buffers**
-  - The bandwidth of data you plan on sending through your pipeline is unlikely to get bottlenecked by I/O if the buffer needs to write to a disk.
+  - The bandwidth of data you plan on sending through your pipeline is unlikely to get bottlenecked by I/O as the buffer flushes to disk.
   - You need to minimize any potential data loss which might occur if the Worker unexpectedly shuts down.
   
 This table compares the differences between the memory and disk buffer.
