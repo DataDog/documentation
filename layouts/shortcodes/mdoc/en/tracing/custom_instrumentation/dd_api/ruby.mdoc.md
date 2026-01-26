@@ -232,6 +232,36 @@ Datadog::Tracing.before_flush do |trace|
 end
 ```
 
+The following example implements a processor to achieve complex post-processing logic:
+
+```ruby
+Datadog::Tracing.before_flush do |trace|
+  trace.spans.each do |span|
+    originalPrice = span.get_tag('order.price'))
+    discount = span.get_tag('order.discount'))
+
+    # Set a tag from a calculation from other tags
+    if (originalPrice != nil && discount != nil)
+      span.set_tag('order.value', originalPrice - discount)
+    end
+  end
+  trace
+end
+```
+
+For a custom processor class:
+
+```ruby
+class MyCustomProcessor
+  def call(trace)
+    # Processing logic...
+    trace
+  end
+end
+
+Datadog::Tracing.before_flush(MyCustomProcessor.new)
+```
+
 In both cases, the processor method *must* return the `trace` object; this return value will be passed to the next processor in the pipeline.
 
 ## Trace client and Agent configuration
@@ -270,7 +300,7 @@ puts(Datadog::Tracing.baggage) # {}
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][security] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][9] page.
 
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
@@ -280,4 +310,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [6]: /tracing/trace_collection/trace_context_propagation/
 [7]: /tracing/trace_collection/trace_context_propagation/#baggage
 [8]: https://github.com/DataDog/dd-trace-rb/releases
-[security]: /tracing/security
+[9]: /tracing/security

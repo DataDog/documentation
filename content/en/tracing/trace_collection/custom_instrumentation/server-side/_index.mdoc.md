@@ -90,6 +90,13 @@ aliases:
   - /tracing/trace_collection/custom_instrumentation/rust
   # Elixir aliases
   - /tracing/trace_collection/custom_instrumentation/elixir
+  # Swift alias
+  - /tracing/trace_collection/custom_instrumentation/swift
+  # Go migration alias
+  - /tracing/trace_collection/custom_instrumentation/go/migration
+  # Index aliases for old URL structures
+  - /tracing/trace_collection/custom_instrumentation/dd_libraries/
+  - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 content_filters:
   - trait_id: prog_lang
     option_group_id: custom_instrumentation_language_options

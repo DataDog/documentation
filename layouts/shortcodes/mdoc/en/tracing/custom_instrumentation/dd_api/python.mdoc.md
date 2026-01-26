@@ -40,11 +40,11 @@ def assemble_sandwich(ingredients):
     return
 ```
 
-To learn more, read [API details for the decorator for `ddtrace.Tracer.wrap()`][decorator_api].
+To learn more, read [API details for the decorator for `ddtrace.Tracer.wrap()`][10].
 
 ### Using context managers
 
-To trace an arbitrary block of code, use the `ddtrace.Span` context manager as below, or view the [advanced usage documentation][context_api].
+To trace an arbitrary block of code, use the `ddtrace.Span` context manager as below, or view the [advanced usage documentation][11].
 
 ```python
 from ddtrace import tracer
@@ -66,11 +66,11 @@ def make_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-To learn more, read the full [API details for `ddtrace.Tracer()`][tracer_api].
+To learn more, read the full [API details for `ddtrace.Tracer()`][12].
 
 ### Manual span creation
 
-If the decorator and context manager methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish [spans][spans] however you may require:
+If the decorator and context manager methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish [spans][13] however you may require:
 
 ```python
 def make_sandwich_request(request):
@@ -80,7 +80,7 @@ def make_sandwich_request(request):
     span.finish()  # remember to finish the span
 ```
 
-For more API details of the decorator, read the [`ddtrace.Tracer.trace` documentation][trace_api] or the [`ddtrace.Span.finish` documentation][finish_api].
+For more API details of the decorator, read the [`ddtrace.Tracer.trace` documentation][14] or the [`ddtrace.Span.finish` documentation][15].
 
 ## Accessing active spans
 
@@ -268,9 +268,9 @@ See that package's [API definition][9] for the full list of supported API calls.
 [7]: https://github.com/DataDog/trace-examples/tree/master/python/flask-baggage
 [8]: https://pypi.org/project/ddtrace-api/
 [9]: https://datadoghq.dev/dd-trace-api-py/pdocs/ddtrace_api.html
-[spans]: /tracing/glossary/#spans
-[decorator_api]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
-[context_api]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
-[tracer_api]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
-[trace_api]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
-[finish_api]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
+[10]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
+[11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
+[12]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
+[13]: /tracing/glossary/#spans
+[14]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
+[15]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish

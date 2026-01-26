@@ -22,7 +22,7 @@ You can access the active span in order to include meaningful data by adding tag
 const span = tracer.scope().active()
 ```
 
-To learn more, read [API details for `Scope`][scope_api].
+To learn more, read [API details for `Scope`][7].
 
 You can add tags to a span using the `setTag` or `addTags` method on a span. Supported value types are string, number, and object.
 
@@ -45,7 +45,7 @@ span.addTags({
 
 ### Adding tags globally
 
-You can add tags to every span by configuring them directly on the tracer, either with with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
+You can add tags to every span by configuring them directly on the tracer, either with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
 
 ```javascript
 // equivalent to DD_TAGS=foo:bar,baz:qux
@@ -59,7 +59,7 @@ tracer.init({
 // All spans will now have these tags
 ```
 
-### Adding tags via component hooks
+### Adding tags through component hooks
 
 Some Datadog integrations support span hooks that can be used to update the span right before it's finished. This is useful to modify or add tags to a span that is otherwise inaccessible from your code.
 
@@ -75,7 +75,7 @@ tracer.use('express', {
 })
 ```
 
-To learn more, read [API details for individual plugins][plugins_api].
+To learn more, read [API details for individual plugins][8].
 
 ### Setting errors on a span
 
@@ -118,13 +118,19 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-To learn more, read [API details for `tracer.trace()`][trace_api].
+To learn more, read [API details for `tracer.trace()`][9].
 
 ### Promises
 
 Promises can be traced with `tracer.trace()` which automatically finishes the span when the returned promise resolves, and captures any rejection error automatically.
 
 ```javascript
+const getIngredients = () => {
+    return new Promise((resolve, reject) => {
+        resolve('Salami');
+    });
+};
+
 app.get('/make-sandwich', (req, res) => {
   return tracer.trace('sandwich.make', { resource: 'resource_name' }, () => {
     return tracer.trace('get_ingredients', { resource: 'resource_name' }, () => getIngredients())
@@ -180,7 +186,7 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-To learn more, read [API details for `tracer.wrap()`][wrap_api].
+To learn more, read [API details for `tracer.wrap()`][10].
 
 ## Request filtering
 
@@ -262,7 +268,7 @@ See that package's [API definition][6] for the full list of supported API calls.
 [4]: /tracing/guide/ignoring_apm_resources/
 [5]: https://npm.im/dd-trace-api
 [6]: https://github.com/DataDog/dd-trace-api-js/blob/master/index.d.ts
-[scope_api]: https://datadoghq.dev/dd-trace-js/interfaces/Scope.html
-[plugins_api]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
-[trace_api]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#trace
-[wrap_api]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#wrap
+[7]: https://datadoghq.dev/dd-trace-js/interfaces/Scope.html
+[8]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
+[9]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#trace
+[10]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#wrap
