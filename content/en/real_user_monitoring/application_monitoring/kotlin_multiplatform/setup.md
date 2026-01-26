@@ -20,7 +20,7 @@ further_reading:
 ---
 ## Overview
 
-This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
+This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Kotlin Multiplatform SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][15] for specific steps.
 
 The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21) and iOS v12+.
 
@@ -104,28 +104,9 @@ If you are integrating Kotlin Multiplatform library as a framework with an `embe
 
 ### Specify application details in the UI
 
-{{< tabs >}}
-{{% tab "RUM" %}}
-
 1. Navigate to [**Digital Experience** > **Add an Application**][1].
 2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/kotlin_multiplatform/data_collected/
-
-{{% /tab %}}
-{{% tab "Error Tracking" %}}
-
-1. Navigate to [**Digital Experience** > **Add an Application**][1].
-2. Select `Kotlin Multiplatform` as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Kotlin Multiplatform Data Collected][2].
-
-[1]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[2]: /real_user_monitoring/kotlin_multiplatform/data_collected/
-
-{{% /tab %}}
-{{< /tabs >}}
 
 To ensure the safety of your data, you must use a client token. If you use only [Datadog API keys][4] to configure the Datadog SDK, they are exposed client-side in the Android application's APK byte code.
 
@@ -290,3 +271,6 @@ This means that even if users open your application while offline, no data is lo
 [12]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
 [13]: /real_user_monitoring/explorer/
 [14]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
+[15]: /error_tracking/frontend/mobile/kotlin-multiplatform.md
+[101]: https://app.datadoghq.com/rum/application/create
+[102]: /real_user_monitoring/kotlin_multiplatform/data_collected/
