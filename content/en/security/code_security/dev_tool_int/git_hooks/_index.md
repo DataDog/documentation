@@ -54,7 +54,7 @@ The program accepts the following parameters:
  - `--confirmation`: Ask the user for confirmation to override the Git hook check
  - `--default-branch`: Specify the name of the default branch.
  - `--static-analysis`: Enable Static Code Analysis.
- - `--secrets`: Enable secrets detection (in preview - please reach out to [Datadog Support][1]).
+ - `--secrets`: Enable [Secret Scanning][1].
  - `--output <file>`: Export the findings found in the commit into a SARIF file.
 
-[1]: https://www.datadoghq.com/support/
+[1]: https://docs.datadoghq.com/security/code_security/secret_scanning/
