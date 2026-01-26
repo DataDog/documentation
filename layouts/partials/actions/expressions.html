@@ -1,0 +1,25 @@
+{{ $dot := . }}
+<div class="apm-languages">
+  <div class="container cards-dd">
+    <div class="row row-cols-2 row-cols-sm-3 g-3 justify-content-center">
+      <div class="col">
+        <a class="card h-100" href="javascript">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/javascript.png" "class" "img-fluid" "alt" "JavaScript" "width" "400") }}
+          </div>
+        </a>
+      </div>
+      <div class="col">
+        <a class="card h-100" href="python">
+          <div class="card-body text-center py-2 px-1">
+            {{ partial "img.html" (dict "root" . "src" "integrations_logos/python.png" "class" "img-fluid" "alt" "Python" "width" "400") }}
+          </div>
+        </a>
+      </div>
+      <!-- Conditional Android and iOS cards (no compatibility or library_config pages for these as of 12/22/23) -->
+      {{ $currentURL := .Page.Permalink }}
+      {{ if and (not (in $currentURL "/compatibility/")) (not (in $currentURL "/library_config/")) }}
+      {{ end }}
+    </div>
+  </div>
+</div>
