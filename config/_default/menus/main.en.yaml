@@ -5838,7 +5838,7 @@ menu:
       identifier: observability_pipelines_sources_amazon_data_firehose
       weight: 202
     - name: Amazon S3
-      url: observability_pipelines/sources/amazon_s3/
+      url: observability_pipelines/sources/amazon_s3/logs/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_amazon_s3
       weight: 203
@@ -5847,86 +5847,91 @@ menu:
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_azure_event_hubs
       weight: 204
+    - name: Azure Storage
+      url: observability_pipelines/sources/azure_storage/
+      parent: observability_pipelines_sources
+      identifier: observability_pipelines_sources_azure_storage
+      weight: 205
     - name: Datadog Agent
       url: observability_pipelines/sources/datadog_agent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_datadog_agent
-      weight: 205
+      weight: 207
     - name: Datadog Lambda Extension
       url: observability_pipelines/sources/lambda_extension/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_extension
-      weight: 206
+      weight: 208
     - name: Datadog Lambda Forwarder
       url: observability_pipelines/sources/lambda_forwarder/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_lambda_forwarder
-      weight: 207
+      weight: 209
     - name: Filebeat
       url: observability_pipelines/sources/filebeat/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_filebeat
-      weight: 208
+      weight: 210
     - name: Fluent
       url: observability_pipelines/sources/fluent/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_fluent
-      weight: 209
+      weight: 211
     - name: Google Pub/Sub
       url: observability_pipelines/sources/google_pubsub/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_google_pubsub
-      weight: 210
+      weight: 212
     - name: HTTP Client
       url: observability_pipelines/sources/http_client/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_client
-      weight: 211
+      weight: 213
     - name: HTTP Server
       url: observability_pipelines/sources/http_server/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_http_server
-      weight: 212
+      weight: 214
     - name: OpenTelemetry
       url: observability_pipelines/sources/opentelemetry/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_opentelemetry
-      weight: 213
+      weight: 215
     - name: Kafka
       url: observability_pipelines/sources/kafka/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_kafka
-      weight: 214
+      weight: 216
     - name: Logstash
       url: observability_pipelines/sources/logstash/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_logstash
-      weight: 215
+      weight: 217
     - name: Socket
       url: observability_pipelines/sources/socket/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_socket
-      weight: 216
+      weight: 218
     - name: Splunk HEC
       url: observability_pipelines/sources/splunk_hec/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_hec
-      weight: 217
+      weight: 219
     - name: Splunk TCP
       url: observability_pipelines/sources/splunk_tcp/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_splunk_tcp
-      weight: 218
+      weight: 220
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/sources/sumo_logic/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_sumo_logic
-      weight: 219
+      weight: 221
     - name: Syslog
       url: observability_pipelines/sources/syslog/
       parent: observability_pipelines_sources
       identifier: observability_pipelines_sources_syslog
-      weight: 220
+      weight: 222
     - name: Processors
       url: observability_pipelines/processors/
       parent: observability_pipelines
@@ -6247,61 +6252,66 @@ menu:
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_web_logs
       weight: 520
+    - name: Rehydration
+      url: observability_pipelines/rehydration/
+      parent: observability_pipelines
+      identifier: observability_pipelines_packs_rehydration
+      weight: 6
     - name: Search Syntax
       url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
       identifier: observability_pipelines_logs_search_syntax
-      weight: 6
+      weight: 7
     - name: Scaling and Performance
       url: observability_pipelines/scaling_and_performance/
       parent: observability_pipelines
       identifier: observability_pipelines_scaling_and_performance
-      weight: 7
+      weight: 8
     - name: Handling Load and Backpressure
       url: observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_handling_load_and_backpressure
-      weight: 701
+      weight: 801
     - name: Scaling Best Practices
       url: observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines_scaling_and_performance
       identifier: observability_pipelines_best_practices_for_scaling_observability_pipelines
-      weight: 702
+      weight: 802
     - name: Monitoring and Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/
       parent: observability_pipelines
       identifier: observability_pipelines_monitoring_and_troubleshooting
-      weight: 8
+      weight: 9
     - name: Worker CLI Commands
       url: observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_worker_cli_commands
-      weight: 801
+      weight: 901
     - name: Monitoring Pipelines
       url: observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_monitoring_pipelines
-      weight: 802
+      weight: 902
     - name: Pipeline Usage Metrics
       url: observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
       parent: observability_pipelines_monitoring_and_troubleshooting
       identifier: observability_pipelines_pipeline_usage_metrics
-      weight: 803
+      weight: 903
     - name: Troubleshooting
       url: observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
       identifier: observability_pipelines_troubleshooting
       parent: observability_pipelines_monitoring_and_troubleshooting
-      weight: 804
+      weight: 904
     - name: Guides and Resources
       url: observability_pipelines/guide/
       parent: observability_pipelines
       identifier: observability_pipelines_guide
-      weight: 9
+      weight: 10
     - name: Upgrade Worker Guide
       url: observability_pipelines/guide/upgrade_worker/
       parent: observability_pipelines_guide
       identifier: observability_pipelines_guide_upgrade_worker
-      weight: 901
+      weight: 1001
     - name: Log Management
       url: logs/
       pre: log

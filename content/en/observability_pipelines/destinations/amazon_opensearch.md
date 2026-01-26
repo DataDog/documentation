@@ -5,6 +5,9 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+- name: Rehydration
+  icon: archive-wui
+  url: /observability_pipelines/configuration/?tab=rehydration#pipeline-types
 ---
 
 {{< product-availability >}}
