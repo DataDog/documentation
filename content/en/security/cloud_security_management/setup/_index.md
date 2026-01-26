@@ -33,6 +33,7 @@ To get started with Cloud Security, review the following:
 - [Enable Agentless Scanning](#enable-agentless-scanning)
 - [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
 - [Enable additional features](#enable-additional-features)
+  - [Container Image Scanning in CI/CD](#container-image-scanning-in-cicd)
   - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
   - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
 - [Disable Cloud Security](#disable-cloud-security)
@@ -107,6 +108,10 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
 
 ## Enable additional features
 
+### Container Image Scanning in CI/CD
+
+Scan container images for vulnerabilities during your CI/CD pipelines, before images are deployed to production. The Datadog Security CLI runs directly in your CI jobs, giving teams control over when and how scans are executed. For more information, see [Container Image Scanning in CI/CD][11].
+
 ### AWS CloudTrail Logs
 
 Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security][4].
@@ -134,3 +139,4 @@ For information on disabling Cloud Security, see the following:
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [9]: /security/workload_protection/troubleshooting/threats/#disable-csm-threats
 [10]: /security/cloud_security_management/setup/iac_scanning
+[11]: /security/cloud_security_management/setup/ci_cd
