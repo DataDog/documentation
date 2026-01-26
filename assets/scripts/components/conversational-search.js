@@ -1,4 +1,5 @@
 import { getConfig } from '../helpers/getConfig';
+import { getBooleanFlag } from '../helpers/feature-flags';
 import Typesense from 'typesense';
 import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
@@ -6,6 +7,9 @@ import hljs from 'highlight.js';
 
 const { env } = document.documentElement.dataset;
 const typesenseConfig = getConfig(env).typesense;
+
+const CONVERSATIONAL_SEARCH_FLAG_KEY = 'docs_conversational_search';
+const IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(CONVERSATIONAL_SEARCH_FLAG_KEY);
 
 // Configure marked with highlight.js
 marked.use(
@@ -628,13 +632,17 @@ class ConversationalSearch {
 let conversationalSearchInstance = null;
 
 // Initialize when DOM is ready
-function initConversationalSearch() {
+async function initConversationalSearch() {
+    if (!IS_CONVERSATIONAL_SEARCH_ENABLED) {
+        return;
+    }
+
     conversationalSearchInstance = new ConversationalSearch();
 }
 
 // Open the modal and send a query (for external use)
 function askDocsAI(query) {
-    if (conversationalSearchInstance) {
+    if (IS_CONVERSATIONAL_SEARCH_ENABLED && conversationalSearchInstance) {
         conversationalSearchInstance.open();
         if (query && query.trim()) {
             conversationalSearchInstance.input.value = query;
@@ -655,4 +663,4 @@ if (document.readyState === 'loading') {
     initConversationalSearch();
 }
 
-export { ConversationalSearch, typesenseClient, askDocsAI };
+export { ConversationalSearch, typesenseClient, askDocsAI, IS_CONVERSATIONAL_SEARCH_ENABLED };
