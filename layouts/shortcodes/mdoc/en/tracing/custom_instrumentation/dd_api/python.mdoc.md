@@ -8,7 +8,7 @@ If you aren't using supported library instrumentation (see [library compatibilit
 
 You may also want to extend the functionality of the `ddtrace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
-## Creating spans
+## Creating spans {% #creating-spans-python %}
 
 The `ddtrace` library creates spans automatically with `ddtrace-run` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved by using spans.
 
@@ -20,7 +20,7 @@ def make_sandwich_request(request):
     sandwich = assemble_sandwich(ingredients)
 ```
 
-### Using decorators
+### Using decorators {% #using-decorators-python %}
 
 `ddtrace` provides a decorator `tracer.wrap()` that can be used to decorate the functions of interest. This is useful if you would like to trace the function regardless of where it is being called from.
 
@@ -42,7 +42,7 @@ def assemble_sandwich(ingredients):
 
 To learn more, read [API details for the decorator for `ddtrace.Tracer.wrap()`][10].
 
-### Using context managers
+### Using context managers {% #using-context-managers-python %}
 
 To trace an arbitrary block of code, use the `ddtrace.Span` context manager as below, or view the [advanced usage documentation][11].
 
@@ -68,7 +68,7 @@ def make_sandwich_request(request):
 
 To learn more, read the full [API details for `ddtrace.Tracer()`][12].
 
-### Manual span creation
+### Manual span creation {% #manual-span-creation-python %}
 
 If the decorator and context manager methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish [spans][13] however you may require:
 
@@ -82,7 +82,7 @@ def make_sandwich_request(request):
 
 For more API details of the decorator, read the [`ddtrace.Tracer.trace` documentation][14] or the [`ddtrace.Span.finish` documentation][15].
 
-## Accessing active spans
+## Accessing active spans {% #accessing-active-spans-python %}
 
 The built-in instrumentation and your own custom instrumentation create spans around meaningful operations. You can access the active span in order to include meaningful data.
 
@@ -96,7 +96,7 @@ def make_sandwich_request(request):
         sandwich = assemble_sandwich(ingredients)
 ```
 
-### Current span
+### Current span {% #current-span-python %}
 
 ```python
 def get_ingredients():
@@ -105,7 +105,7 @@ def get_ingredients():
     # this span is my_span from make_sandwich_request above
 ```
 
-### Root span
+### Root span {% #root-span-python %}
 
 ```python
 def assemble_sandwich(ingredients):
@@ -115,9 +115,9 @@ def assemble_sandwich(ingredients):
         # this span is my_span from make_sandwich_request above
 ```
 
-## Adding tags
+## Adding tags {% #adding-tags-python %}
 
-### Adding tags locally
+### Adding tags locally {% #adding-tags-locally-python %}
 
 Tags can be added to a span using the `set_tag` method on a span:
 
@@ -130,7 +130,7 @@ def make_sandwich_request(request):
         span.set_tag("num_ingredients", len(ingredients))
 ```
 
-### Adding tags globally
+### Adding tags globally {% #adding-tags-globally-python %}
 
 Tags can be globally set on the tracer. These tags are be applied to every span that is created.
 
@@ -142,7 +142,7 @@ from myapp import __version__
 tracer.set_tags({"version": __version__, "<TAG_KEY_2>": "<TAG_VALUE_2>"})
 ```
 
-### Setting errors on a span
+### Setting errors on a span {% #setting-errors-on-a-span-python %}
 
 Exception information is captured and attached to a span if there is one active when the exception is raised.
 
@@ -181,11 +181,11 @@ except TypeError as e:
     root_span.set_exc_info(exc_type, exc_val, exc_tb)
 ```
 
-## Propagating context with headers extraction and injection
+## Propagating context with headers extraction and injection {% #propagating-context-python %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][2] for information.
 
-### Baggage
+### Baggage {% #baggage-python %}
 
 Manipulating [Baggage][3] on a span:
 
@@ -217,7 +217,7 @@ with tracer.trace("example") as span:
 
 To see an example in action, see [flask-baggage on trace-examples][7].
 
-## ddtrace-api
+## ddtrace-api {% #ddtrace-api-python %}
 
 {% alert level="info" %}
 The `ddtrace-api` Python package is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.

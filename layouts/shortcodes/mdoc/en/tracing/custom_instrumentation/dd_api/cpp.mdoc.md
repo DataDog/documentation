@@ -6,7 +6,7 @@ This partial contains C++ custom instrumentation content for the Datadog API.
 If you have not yet read the setup instructions, start with the [C++ Setup Instructions](/tracing/setup/cpp/).
 {% /alert %}
 
-## Creating spans
+## Creating spans {% #creating-spans-cpp %}
 
 To manually instrument a method:
 
@@ -28,13 +28,13 @@ To manually instrument a method:
   // For example, root_span finishes here.
 ```
 
-## Adding tags
+## Adding tags {% #adding-tags-cpp %}
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. Span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 Note that some Datadog tags are necessary for [unified service tagging][3].
 
-### Adding tags locally
+### Adding tags locally {% #adding-tags-locally-cpp %}
 
 Add tags directly to a span object by calling `Span::set_tag`. For example:
 
@@ -49,9 +49,9 @@ opts.tags.emplace("team", "apm-proxy");
 auto span2 = tracer.create_span(opts);
 ```
 
-### Adding tags globally
+### Adding tags globally {% #adding-tags-globally-cpp %}
 
-#### Environment variable
+#### Environment variable {% #environment-variable-cpp %}
 
 To set tags across all your spans, set the `DD_TAGS` environment variable as a list of `key:value` pairs separated by commas.
 
@@ -59,7 +59,7 @@ To set tags across all your spans, set the `DD_TAGS` environment variable as a l
 export DD_TAGS=team:apm-proxy,key:value
 ```
 
-#### In code
+#### In code {% #in-code-cpp %}
 
 ```cpp
 datadog::tracing::TracerConfig tracer_config;
@@ -75,7 +75,7 @@ auto tracer = datadog::tracing::Tracer(*validated_config);
 auto span = tracer.create_span();
 ```
 
-### Set errors on a span
+### Set errors on a span {% #set-errors-on-a-span-cpp %}
 
 To associate a span with an error, set one or more error-related tags on the span. For example:
 
@@ -106,11 +106,11 @@ To unset an error on a span, set `Span::set_error` to `false`, which removes any
 span.set_error(false);
 ```
 
-## Propagating context with headers extraction and injection
+## Propagating context with headers extraction and injection {% #propagating-context-cpp %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][5] for information.
 
-## Resource filtering
+## Resource filtering {% #resource-filtering-cpp %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from sending traces and influencing trace metrics. Find information about this and other security and fine-tuning configuration on the [Security][6] page.
 

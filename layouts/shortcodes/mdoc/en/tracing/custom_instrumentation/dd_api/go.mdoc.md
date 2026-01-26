@@ -12,11 +12,11 @@ This documentation uses v2 of the Go tracer, which Datadog recommends for all us
 
 This page details common use cases for adding and customizing observability with Datadog APM.
 
-## Adding tags
+## Adding tags {% #adding-tags-go %}
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-### Add custom span tags
+### Add custom span tags {% #add-custom-span-tags-go %}
 
 Add [tags][1] directly to a `Span` interface by calling `SetTag`:
 
@@ -69,7 +69,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-### Adding tags globally to all spans
+### Adding tags globally to all spans {% #adding-tags-globally-go %}
 
 Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTag` option:
 
@@ -89,7 +89,7 @@ func main() {
 }
 ```
 
-### Set errors on a span
+### Set errors on a span {% #set-errors-on-a-span-go %}
 
 To set an error on one of your spans, use `tracer.WithError` as below:
 
@@ -98,7 +98,7 @@ err := someOperation()
 span.Finish(tracer.WithError(err))
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-go %}
 
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to manually instrument your code.
 
@@ -106,7 +106,7 @@ If you aren't using supported library instrumentation (see [Library compatibilit
 Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach helps ensure accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][17] or documentation for any third-party libraries integrated with your application.
 {% /alert %}
 
-### Manually creating a span
+### Manually creating a span {% #manually-creating-a-span-go %}
 
 To manually create spans, use the `tracer` package (see the [v2 API on Datadog's godoc][12]; for v1, see the [v1 godoc][4]).
 
@@ -126,7 +126,7 @@ span := tracer.StartSpan("mainOp", tracer.ResourceName("/user"), tracer.ChildOf(
 span, ctx := tracer.StartSpanFromContext(ctx, "mainOp", tracer.ResourceName("/user"))
 ```
 
-### Asynchronous traces
+### Asynchronous traces {% #asynchronous-traces-go %}
 
 ```go
 func main() {
@@ -141,7 +141,7 @@ func main() {
 }
 ```
 
-### Distributed tracing
+### Distributed tracing {% #distributed-tracing-go %}
 
 Create a distributed [trace][7] by manually propagating the tracing context:
 
@@ -192,16 +192,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-## Trace client and Agent configuration
+## Trace client and Agent configuration {% #trace-client-agent-config-go %}
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as excluding specific resources from sending traces to Datadog in the event these traces are not wanted in metrics calculated, such as Health Checks.
 
 
-### Propagating context with headers extraction and injection
+### Propagating context with headers extraction and injection {% #propagating-context-go %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][11] for information.
 
-### Resource filtering
+### Resource filtering {% #resource-filtering-go %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][9] page.
 

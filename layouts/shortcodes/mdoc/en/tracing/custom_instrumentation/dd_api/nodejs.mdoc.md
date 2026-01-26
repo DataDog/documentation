@@ -10,11 +10,11 @@ If you aren't using supported library instrumentation (see [library compatibilit
 
 You may also want to extend the functionality of the `dd-trace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
-## Adding tags
+## Adding tags {% #adding-tags-nodejs %}
 
 The built-in instrumentation and your own custom instrumentation create spans around meaningful operations.
 
-### Adding tags locally
+### Adding tags locally {% #adding-tags-locally-nodejs %}
 
 You can access the active span in order to include meaningful data by adding tags.
 
@@ -43,7 +43,7 @@ span.addTags({
 })
 ```
 
-### Adding tags globally
+### Adding tags globally {% #adding-tags-globally-nodejs %}
 
 You can add tags to every span by configuring them directly on the tracer, either with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
 
@@ -59,7 +59,7 @@ tracer.init({
 // All spans will now have these tags
 ```
 
-### Adding tags through component hooks
+### Adding tags through component hooks {% #adding-tags-through-component-hooks-nodejs %}
 
 Some Datadog integrations support span hooks that can be used to update the span right before it's finished. This is useful to modify or add tags to a span that is otherwise inaccessible from your code.
 
@@ -77,7 +77,7 @@ tracer.use('express', {
 
 To learn more, read [API details for individual plugins][8].
 
-### Setting errors on a span
+### Setting errors on a span {% #setting-errors-on-a-span-nodejs %}
 
 Errors can be added to a span with the special `error` tag that supports error objects. This splits the error into three tags: `error.type`, `error.message`, and `error.stack`.
 
@@ -92,13 +92,13 @@ try {
 
 When using `tracer.trace()` or `tracer.wrap()` this is done automatically when an error is thrown.
 
-## Creating spans
+## Creating spans {% #creating-spans-nodejs %}
 
 The `dd-trace` library creates [spans][2] automatically with `tracer.init()` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved using spans.
 
 Within your web request (for example, `/make-sandwich`), you may perform several operations, like `getIngredients()` and `assembleSandwich()`, which are useful to measure.
 
-### Synchronous code
+### Synchronous code {% #synchronous-code-nodejs %}
 
 Synchronous code can be traced with `tracer.trace()` which automatically finishes the span when its callback returns and captures any thrown error automatically.
 
@@ -120,7 +120,7 @@ app.get('/make-sandwich', (req, res) => {
 
 To learn more, read [API details for `tracer.trace()`][9].
 
-### Promises
+### Promises {% #promises-nodejs %}
 
 Promises can be traced with `tracer.trace()` which automatically finishes the span when the returned promise resolves, and captures any rejection error automatically.
 
@@ -143,7 +143,7 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-### Async/await
+### Async/await {% #async-await-nodejs %}
 
 Async/await can be traced with `tracer.trace()` which automatically finishes the span when the returned promise resolves, and captures any rejection error automatically.
 
@@ -163,7 +163,7 @@ app.get('/make-sandwich', async (req, res) => {
 })
 ```
 
-### Wrapper
+### Wrapper {% #wrapper-nodejs %}
 
 You can wrap an existing function without changing its code. This is useful to trace functions for which you don't control the code. This can be done with `tracer.wrap()` which takes the same arguments as `tracer.trace()` except its last argument which is the function to wrap instead of a callback.
 
@@ -188,7 +188,7 @@ app.get('/make-sandwich', (req, res) => {
 
 To learn more, read [API details for `tracer.wrap()`][10].
 
-## Request filtering
+## Request filtering {% #request-filtering-nodejs %}
 
 You may not want some requests of an application to be instrumented. A common case would be health checks or other synthetic traffic. These can be ignored by using the `blocklist` or `allowlist` option on the `http` plugin.
 
@@ -211,7 +211,7 @@ tracer.use('http', {
 
 Additionally, traces can be excluded based on their resource name, so that the Agent doesn't send them to Datadog. This and other security and fine-tuning Agent configurations can be found on the [Security][3] page or in [Ignoring Unwanted Resources][4].
 
-## dd-trace-api
+## dd-trace-api {% #dd-trace-api-nodejs %}
 
 {% alert level="info" %}
 The `dd-trace-api` packages is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.

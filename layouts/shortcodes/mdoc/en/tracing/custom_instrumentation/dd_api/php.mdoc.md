@@ -6,7 +6,7 @@ This partial contains PHP custom instrumentation content for the Datadog API.
 If you have not yet read the instructions for auto-instrumentation and setup, start with the [PHP Setup Instructions][11]. Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See [automatic instrumentation][12] for more details.
 {% /alert %}
 
-## Annotations
+## Annotations {% #annotations-php %}
 
 If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to your code to instrument it. It is a lighter alternative to custom instrumentation written in code. For example, add the `#[DDTrace\Trace]` attribute to methods for Datadog to trace them.
 
@@ -37,7 +37,7 @@ You can provide the following arguments:
 If a namespace is present, you **must** use the fully qualified name of the attribute `#[\DDTrace\Trace]`. Alternatively, you can import the namespace with `use DDTrace\Trace;` and use `#[Trace]`.
 {% /alert %}
 
-## Writing custom instrumentation
+## Writing custom instrumentation {% #writing-custom-instrumentation-php %}
 
 {% alert level="info" %}
 To write custom instrumentation, you do not need any additional composer package.
@@ -47,7 +47,7 @@ To write custom instrumentation, you do not need any additional composer package
 The Datadog APM PHP Api is fully documented [in stubs][13]. This allows you to have automated documentation in PHPStorm.
 {% /alert %}
 
-### A sample application to be instrumented
+### A sample application to be instrumented {% #sample-application-php %}
 
 Assume the following directory structure:
 
@@ -118,7 +118,7 @@ class SampleRegistry
 }
 ```
 
-### Steps to instrument the sample application
+### Steps to instrument the sample application {% #steps-to-instrument-php %}
 
 To avoid mixing application or service business logic with instrumentation code, write the required code in a separate file:
 
@@ -204,7 +204,7 @@ To avoid mixing application or service business logic with instrumentation code,
    }
    ```
 
-## Details about `trace_function` and `trace_method`
+## Details about `trace_function` and `trace_method` {% #details-trace-function-method-php %}
 
 The `DDTrace\trace_function` and `DDTrace\trace_method` functions instrument (trace) specific function and method calls. These functions automatically handle the following tasks:
 
@@ -236,11 +236,11 @@ For example, the following snippet traces the `CustomDriver::doWork` method and 
 ?>
 ```
 
-## Accessing active spans
+## Accessing active spans {% #accessing-active-spans-php %}
 
 The built-in instrumentation and your own custom instrumentation creates spans around meaningful operations. You can access the active span in order to include meaningful data.
 
-### Current span
+### Current span {% #current-span-php %}
 
 The following method returns a `DDTrace\SpanData` object. When tracing is disabled, `null` is returned.
 
@@ -253,7 +253,7 @@ if ($span) {
 ?>
 ```
 
-### Root span
+### Root span {% #root-span-php %}
 
 The following method returns a `DDTrace\SpanData` object. When tracing is disabled, `null` is returned. This is useful in contexts where the metadata to be added to the root span does not exist in early script execution.
 
@@ -266,13 +266,13 @@ if ($span) {
 ?>
 ```
 
-## Adding tags
+## Adding tags {% #adding-tags-php %}
 
 {% alert level="danger" %}
 When you set tags, to avoid overwriting existing tags automatically added by the Datadog core instrumentation, **do write `$span->meta['mytag'] = 'value'`**. Do not write `$span->meta = ['mytag' => 'value']`.
 {% /alert %}
 
-### Adding tags locally
+### Adding tags locally {% #adding-tags-locally-php %}
 
 Add tags to a span by using the `DDTrace\SpanData::$meta` array.
 
@@ -289,7 +289,7 @@ Add tags to a span by using the `DDTrace\SpanData::$meta` array.
 );
 ```
 
-### Adding tags globally
+### Adding tags globally {% #adding-tags-globally-php %}
 
 Set the `DD_TAGS` environment variable (version 0.47.0+) to automatically apply tags to every span that is created.
 
@@ -297,7 +297,7 @@ Set the `DD_TAGS` environment variable (version 0.47.0+) to automatically apply 
 DD_TAGS=key1:value1,<TAG_KEY>:<TAG_VALUE>
 ```
 
-### Setting errors on a span
+### Setting errors on a span {% #setting-errors-on-a-span-php %}
 
 Thrown exceptions are automatically attached to the active span, unless the exception is thrown at a deeper level in the call stack and it is caught before it reaches any function that is traced.
 
@@ -339,7 +339,7 @@ function doRiskyThing() {
 );
 ```
 
-## Adding span links
+## Adding span links {% #adding-span-links-php %}
 
 Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 
@@ -357,21 +357,21 @@ $spanB->links[] = $spanA->getLink();
 \DDTrace\close_span();
 ```
 
-## Context propagation for distributed traces
+## Context propagation for distributed traces {% #context-propagation-php %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.
 
-## Resource filtering
+## Resource filtering {% #resource-filtering-php %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][3] page.
 
-## API reference
+## API reference {% #api-reference-php %}
 
 {% alert level="info" %}
 The Datadog APM PHP Api is fully documented [in stubs][13]. This allows you to have automated documentation in PHPStorm.
 {% /alert %}
 
-### Parameters of the tracing closure
+### Parameters of the tracing closure {% #parameters-tracing-closure-php %}
 
 The tracing closure provided to `DDTrace\trace_method()` and `DDTrace\trace_function()` has four parameters:
 
@@ -389,15 +389,15 @@ function(
 3. **$retval**: The return value of the instrumented call
 4. **$exception**: An instance of the exception that was thrown in the instrumented call or `null` if no exception was thrown
 
-## Advanced configurations
+## Advanced configurations {% #advanced-configurations-php %}
 
-### Tracing internal functions and methods
+### Tracing internal functions and methods {% #tracing-internal-functions-php %}
 
 As of version 0.76.0, all internal functions can unconditionally be traced.
 
 On older versions, tracing internal functions and methods requires setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable, which takes a CSV of functions or methods that is to be instrumented. For example, `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively. The `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable is obsolete as of version 0.76.0.
 
-### Running the tracing closure before the instrumented call
+### Running the tracing closure before the instrumented call {% #tracing-closure-before-php %}
 
 By default, tracing closures are treated as `posthook` closures meaning they are executed _after_ the instrumented call. Some cases require running the tracing closure _before_ the instrumented call. In that case, tracing closures are marked as `prehook` using an associative configuration array.
 
@@ -409,7 +409,7 @@ By default, tracing closures are treated as `posthook` closures meaning they are
 ]);
 ```
 
-### Debugging sandboxed errors
+### Debugging sandboxed errors {% #debugging-sandboxed-errors-php %}
 
 Tracing closures are "sandboxed" in that exceptions thrown and errors raised inside of them do no impact the instrumented call.
 
@@ -446,7 +446,7 @@ Done.
 */
 ```
 
-### Zend framework 1 manual instrumentation
+### Zend framework 1 manual instrumentation {% #zend-framework-1-php %}
 
 Zend framework 1 is automatically instrumented by default, so you are not required to modify your ZF1 project. However, if automatic instrumentation is disabled, enable the tracer manually.
 
@@ -458,7 +458,7 @@ pluginPaths.DDTrace = APPLICATION_PATH "/../library/DDTrace/Integrations/ZendFra
 resources.ddtrace = true
 ```
 
-### PHP code optimization
+### PHP code optimization {% #php-code-optimization-php %}
 
 Prior to PHP 7, some frameworks provided ways to compile PHP classes (for example, through the Laravel's `php artisan optimize` command).
 

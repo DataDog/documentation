@@ -16,7 +16,7 @@ There are several ways to get more than the [default automatic instrumentation][
 
 You can combine these solutions with each other to achieve the instrumentation detail you want. However, automatic instrumentation must be setup first.
 
-## Instrument methods through configuration
+## Instrument methods through configuration {% #instrument-methods-through-configuration-dotnet %}
 
 Using the `DD_TRACE_METHODS` environment variable, you can get visibility into unsupported frameworks without changing application code. For full details on the input format for `DD_TRACE_METHODS`, see the [.NET Framework configuration instructions][8] or the [.NET Core configuration instructions][9]. For example, to instrument a method called `SaveSession` defined on the `Store.Managers.SessionManager` type, set:
 
@@ -28,7 +28,7 @@ The resulting span has an `operationName` attribute with the value `trace.annota
 
 If you want to customize the span's attributes and you have the ability to modify the source code, you can [instrument methods through attributes](#instrument-methods-through-attributes) instead.
 
-## Instrument methods through attributes
+## Instrument methods through attributes {% #instrument-methods-through-attributes-dotnet %}
 
 Add `[Trace]` to methods for Datadog to trace them when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
@@ -50,7 +50,7 @@ namespace Store.Managers
 }
 ```
 
-## Custom instrumentation with code
+## Custom instrumentation with code {% #custom-instrumentation-with-code-dotnet %}
 
 {% alert level="info" %}
 This feature requires adding the [`Datadog.Trace` NuGet package][15] to your application. It provides an API to directly access the Tracer and the active span.
@@ -60,7 +60,7 @@ This feature requires adding the [`Datadog.Trace` NuGet package][15] to your app
 Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 {% /alert %}
 
-### Configuring Datadog in code
+### Configuring Datadog in code {% #configuring-datadog-in-code-dotnet %}
 
 There are multiple ways to configure your application: using environment variables, a `web.config` file, or a `datadog.json` file, [as described in our documentation][11]. The `Datadog.Trace` NuGet package also allows you to configure settings in code.
 
@@ -86,7 +86,7 @@ Calling `Tracer.Configure()` replaces the settings for all subsequent traces, bo
 Replacing the configuration should be done **once, as early as possible** in your application.
 {% /alert %}
 
-### Create custom traces/spans
+### Create custom traces/spans {% #create-custom-traces-spans-dotnet %}
 
 In addition to automatic instrumentation, the `[Trace]` attribute, and `DD_TRACE_METHODS` configurations, you can customize your observability by programmatically creating spans around any block of code.
 
@@ -108,7 +108,7 @@ using (var scope = Tracer.Instance.StartActive("custom-operation"))
 
 Add custom [span tags][5] to your [spans][6] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-### Manually creating a new span
+### Manually creating a new span {% #manually-creating-a-new-span-dotnet %}
 
 Manually created spans automatically integrate with spans from other tracing mechanisms. In other words, if a trace has already started, the manual span has its caller as its parent span. Similarly, any traced methods called from the wrapped block of code have the manual span as its parent.
 
@@ -127,7 +127,7 @@ using (var parentScope =
 }
 ```
 
-### Add custom span tags
+### Add custom span tags {% #add-custom-span-tags-dotnet %}
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
@@ -158,7 +158,7 @@ public class ShoppingCartController : Controller
 }
 ```
 
-### Usage with ASP.NET `IHttpModule`
+### Usage with ASP.NET `IHttpModule` {% #usage-with-aspnet-ihttpmodule-dotnet %}
 
 To access the current request span from a custom ASP.NET `IHttpModule`, it is best to read `Tracer.Instance.ActiveScope` in the `PreRequestHandlerExecute` event (or `AcquireRequestState` if you require session state).
 
@@ -202,7 +202,7 @@ public class MyCustomModule : IHttpModule
 }
 ```
 
-### Set errors on a span
+### Set errors on a span {% #set-errors-on-a-span-dotnet %}
 
 To mark errors that occur in your code, use the `Span.SetException(Exception)` method. The method marks the span as an error and adds [related span metadata][5] to provide insight into the exception.
 
@@ -222,11 +222,11 @@ This sets the following tags on the span:
 - `"error.stack":exception.ToString()`
 - `"error.type":exception.GetType().ToString()`
 
-## Propagating context with headers extraction and injection
+## Propagating context with headers extraction and injection {% #propagating-context-dotnet %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][12] for information.
 
-## Adding tags globally to all spans
+## Adding tags globally to all spans {% #adding-tags-globally-dotnet %}
 
 Use the `DD_TAGS` environment variable to set tags across all generated spans for an application. This can be useful for grouping stats for your applications, data centers, or regions within the Datadog UI. For example:
 
@@ -234,7 +234,7 @@ Use the `DD_TAGS` environment variable to set tags across all generated spans fo
 DD_TAGS=datacenter:njc,key2:value2
 ```
 
-## Resource filtering
+## Resource filtering {% #resource-filtering-dotnet %}
 
 You can exclude traces based on the resource name to remove Synthetics traffic such as health checks. For more information about security and additional configurations, see [Configure the Datadog Agent or Tracer for Data Security][10].
 

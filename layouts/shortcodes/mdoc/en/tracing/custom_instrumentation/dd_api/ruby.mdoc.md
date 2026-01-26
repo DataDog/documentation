@@ -8,7 +8,7 @@ If you have not yet read the instructions for auto-instrumentation and setup, re
 
 This page details describes use cases for adding and customizing observability with Datadog APM.
 
-## Requirements
+## Requirements {% #requirements-ruby %}
 
 Make sure you require the appropriate gem for your [Ruby tracer version][8]:
 
@@ -22,15 +22,15 @@ Make sure you require the appropriate gem for your [Ruby tracer version][8]:
   require 'ddtrace'
   ```
 
-## Adding tags
+## Adding tags {% #adding-tags-ruby %}
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-### Add custom span tags
+### Add custom span tags {% #add-custom-span-tags-ruby %}
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
-#### Active spans
+#### Active spans {% #active-spans-ruby %}
 
 Access the current active [span][1] from any method within your code.
 
@@ -54,7 +54,7 @@ class ShoppingCartController < ApplicationController
 end
 ```
 
-#### Manually instrumented spans
+#### Manually instrumented spans {% #manually-instrumented-spans-ruby %}
 
 Add [tags][1] directly to `Datadog::Span` objects by calling `#set_tag`:
 
@@ -69,7 +69,7 @@ get '/posts' do
 end
 ```
 
-### Adding tags globally to all spans
+### Adding tags globally to all spans {% #adding-tags-globally-ruby %}
 
 Add [tags][1] to all [spans][2] by configuring the tracer with the `tags` option:
 
@@ -81,7 +81,7 @@ end
 
 You can also use the `DD_TAGS` environment variable to set tags on all spans for an application. For more information on Ruby environment variables, read the [setup documentation][3].
 
-### Setting errors on a span
+### Setting errors on a span {% #setting-errors-on-a-span-ruby %}
 
 There are two ways to set an error on a span:
 
@@ -144,7 +144,7 @@ Datadog::Tracing.trace('example.trace', on_error: custom_error_handler) do |span
 end
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-ruby %}
 
 If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog::Tracing.trace` method, which you can wrap around any Ruby code.
 
@@ -164,7 +164,7 @@ Where `name` is a `String` that describes the generic kind of operation being do
 
 For all the available `**options`, see the [reference guide][5].
 
-### Manually creating a new span
+### Manually creating a new span {% #manually-creating-a-new-span-ruby %}
 
 Programmatically create spans around any block of code. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
 
@@ -191,11 +191,11 @@ get '/posts' do
 end
 ```
 
-### Post-processing traces
+### Post-processing traces {% #post-processing-traces-ruby %}
 
 Some applications might require that traces be altered or filtered out before they are sent to Datadog. The processing pipeline allows you to create *processors* to define such behavior.
 
-#### Filtering
+#### Filtering {% #filtering-ruby %}
 
 You can use the `Datadog::Tracing::Pipeline::SpanFilter` processor to remove spans, when the block evaluates as truthy:
 
@@ -208,7 +208,7 @@ Datadog::Tracing.before_flush(
 )
 ```
 
-#### Processing
+#### Processing {% #processing-ruby %}
 
 You can use the `Datadog::Tracing::Pipeline::SpanProcessor` processor to modify spans:
 
@@ -219,7 +219,7 @@ Datadog::Tracing.before_flush(
 )
 ```
 
-#### Custom processor
+#### Custom processor {% #custom-processor-ruby %}
 
 Processors can be any object that responds to `#call` accepting `trace` as an argument (which is an `Array` of `Datadog::Span`.)
 
@@ -264,15 +264,15 @@ Datadog::Tracing.before_flush(MyCustomProcessor.new)
 
 In both cases, the processor method *must* return the `trace` object; this return value will be passed to the next processor in the pipeline.
 
-## Trace client and Agent configuration
+## Trace client and Agent configuration {% #trace-client-agent-config-ruby %}
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-### Propagating context with headers extraction and injection
+### Propagating context with headers extraction and injection {% #propagating-context-ruby %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][6] for information.
 
-#### Baggage
+#### Baggage {% #baggage-ruby %}
 
 Baggage is a hash that can be accessed through the API and is propagated by default. See the following example to manipulate [Baggage][7]:
 
@@ -298,7 +298,7 @@ Datadog::Tracing.baggage.clear
 puts(Datadog::Tracing.baggage) # {}
 ```
 
-### Resource filtering
+### Resource filtering {% #resource-filtering-ruby %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][9] page.
 
