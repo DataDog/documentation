@@ -4,11 +4,20 @@ import { getConfig } from './getConfig';
 
 
 
-const env = document.documentElement.dataset?.env || 'development';
+let env = document.documentElement.dataset?.env || 'preview';
+
+// Temporarily set env to preview for development
+// TODO: Remove this once development is complete
+if (env === 'development') {
+    env = 'preview';
+}
 const config = getConfig(env);
 
-if (!config?.ddClientToken || !config?.ddApplicationId) return null;
+if (!config?.ddClientToken || !config?.ddApplicationId) {
+    console.error('Datadog client token or application ID is not set');  
+}
 
+export const initializeFeatureFlags = async () => {
 const rumUser = window.DD_RUM?.getUser?.();
 const targetingKey = rumUser?.id || rumUser?.device_id
 
@@ -18,13 +27,14 @@ await OpenFeature.setProviderAndWait(
         clientToken: config.ddClientToken,
         env
     }),
-    targetingKey ? { targetingKey } : undefined
-);
+            targetingKey ? { targetingKey } : undefined
+    );
 
-const client = OpenFeature.getClient();
+    const client = OpenFeature.getClient();
 
-
+    return client;
+}
 
 // Flag Evaluation is local and instantaneous - the SDK uses locally cached data, 
 // so no network requests occur when evaluating flags.
-export const getBooleanFlag = (key, defaultValue = false) => client?.getBooleanValue(key, defaultValue) ?? defaultValue;
+export const getBooleanFlag = (client, key, defaultValue = false) => client?.getBooleanValue(key, defaultValue) ?? defaultValue;
