@@ -2986,16 +2986,6 @@ menu:
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
-    - name: JavaScript
-      url: actions/app_builder/expressions/javascript/
-      parent: app_builder_expressions
-      identifier: app_builder_expressions_javascript
-      weight: 80001
-    - name: Python
-      url: actions/app_builder/expressions/python/
-      parent: app_builder_expressions
-      identifier: app_builder_expressions_python
-      weight: 80002
     - name: Embedded Apps
       url: actions/app_builder/embedded_apps/
       parent: app_builder
