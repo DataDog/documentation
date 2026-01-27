@@ -895,6 +895,174 @@ components:
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
+    BarChartWidgetDefinition:
+      description: The bar chart visualization displays categorical data using vertical
+        bars, allowing you to compare values across different groups.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        requests:
+          description: List of bar chart widget requests.
+          example:
+          - q: system.load.1
+          items:
+            $ref: '#/components/schemas/BarChartWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        style:
+          $ref: '#/components/schemas/BarChartWidgetStyle'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/BarChartWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    BarChartWidgetDefinitionType:
+      default: bar_chart
+      description: Type of the bar chart widget.
+      enum:
+      - bar_chart
+      example: bar_chart
+      type: string
+      x-enum-varnames:
+      - BAR_CHART
+    BarChartWidgetDisplay:
+      description: Bar chart widget display options.
+      oneOf:
+      - $ref: '#/components/schemas/BarChartWidgetStacked'
+      - $ref: '#/components/schemas/BarChartWidgetFlat'
+    BarChartWidgetFlat:
+      description: Bar chart widget flat display.
+      properties:
+        type:
+          $ref: '#/components/schemas/BarChartWidgetFlatType'
+      required:
+      - type
+      type: object
+    BarChartWidgetFlatType:
+      default: flat
+      description: Bar chart widget flat display type.
+      enum:
+      - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+      - FLAT
+    BarChartWidgetLegend:
+      description: Bar chart widget stacked legend behavior.
+      enum:
+      - automatic
+      - inline
+      - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - AUTOMATIC
+      - INLINE
+      - NONE
+    BarChartWidgetRequest:
+      description: Updated bar chart widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        conditional_formats:
+          description: List of conditional formats.
+          example:
+          - comparator: '>='
+            palette: blue
+            value: 1.0
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
+          type: array
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
+        style:
+          $ref: '#/components/schemas/WidgetRequestStyle'
+      type: object
+    BarChartWidgetScaling:
+      description: Bar chart widget scaling definition.
+      enum:
+      - absolute
+      - relative
+      type: string
+      x-enum-varnames:
+      - ABSOLUTE
+      - RELATIVE
+    BarChartWidgetStacked:
+      description: Bar chart widget stacked display options.
+      properties:
+        legend:
+          $ref: '#/components/schemas/BarChartWidgetLegend'
+        type:
+          $ref: '#/components/schemas/BarChartWidgetStackedType'
+      required:
+      - type
+      type: object
+    BarChartWidgetStackedType:
+      default: stacked
+      description: Bar chart widget stacked display type.
+      enum:
+      - stacked
+      example: stacked
+      type: string
+      x-enum-varnames:
+      - STACKED
+    BarChartWidgetStyle:
+      description: Style customization for a bar chart widget.
+      properties:
+        display:
+          $ref: '#/components/schemas/BarChartWidgetDisplay'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+        scaling:
+          $ref: '#/components/schemas/BarChartWidgetScaling'
+      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -4453,6 +4621,7 @@ components:
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
+      - flex_logs_starter
       - flex_stored_logs
       - functions_usage
       - incident_management_monthly_active_users_usage
@@ -4537,6 +4706,7 @@ components:
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
+      - FLEX_LOGS_STARTER
       - FLEX_STORED_LOGS
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -6091,6 +6261,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - name
       - filter
@@ -6178,6 +6358,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - filter
       type: object
@@ -7912,6 +8102,7 @@ components:
       - spans
       - database_queries
       - network
+      - network_path
       example: rum
       type: string
       x-enum-varnames:
@@ -7924,6 +8115,7 @@ components:
       - SPANS
       - DATABASE_QUERIES
       - NETWORK
+      - NETWORK_PATH
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
@@ -8308,12 +8500,18 @@ components:
       - hide_query
       - hide_handles
       - hide_all
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
       - HIDE_ALL
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
@@ -8769,6 +8967,7 @@ components:
       - network-performance alert
       - cost alert
       - data-quality alert
+      - network-path alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -8792,6 +8991,7 @@ components:
       - NETWORK_PERFORMANCE_ALERT
       - COST_ALERT
       - DATA_QUALITY_ALERT
+      - NETWORK_PATH_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -8995,6 +9195,8 @@ components:
       - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
+      - flex_logs_starter_usage
+      - flex_logs_starter_percentage
       - flex_stored_logs_usage
       - flex_stored_logs_percentage
       - functions_usage
@@ -9158,6 +9360,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
+      - FLEX_LOGS_STARTER_USAGE
+      - FLEX_LOGS_STARTER_PERCENTAGE
       - FLEX_STORED_LOGS_USAGE
       - FLEX_STORED_LOGS_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -9527,6 +9731,14 @@ components:
           type: number
         fargate_usage:
           description: The Fargate usage by tags.
+          format: double
+          type: number
+        flex_logs_starter_percentage:
+          description: The percentage of Flex Logs Starter usage by tags.
+          format: double
+          type: number
+        flex_logs_starter_usage:
+          description: The Flex Logs Starter usage by tags.
           format: double
           type: number
         flex_stored_logs_percentage:
@@ -14756,6 +14968,7 @@ components:
     SplitGraphSourceWidgetDefinition:
       description: The original widget we are splitting on.
       oneOf:
+      - $ref: '#/components/schemas/BarChartWidgetDefinition'
       - $ref: '#/components/schemas/ChangeWidgetDefinition'
       - $ref: '#/components/schemas/GeomapWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
@@ -17689,8 +17902,10 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
+      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access.
+        for restricting read and write access. This field is deprecated. Use the restriction
+        policies API to manage permissions.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
@@ -18324,12 +18539,18 @@ components:
       - hide_all
       - hide_query
       - hide_handles
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
@@ -25348,6 +25569,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/AlertGraphWidgetDefinition'
       - $ref: '#/components/schemas/AlertValueWidgetDefinition'
+      - $ref: '#/components/schemas/BarChartWidgetDefinition'
       - $ref: '#/components/schemas/ChangeWidgetDefinition'
       - $ref: '#/components/schemas/CheckStatusWidgetDefinition'
       - $ref: '#/components/schemas/DistributionWidgetDefinition'
@@ -26000,6 +26222,8 @@ components:
           $ref: '#/components/schemas/WidgetLineType'
         line_width:
           $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
         palette:
           description: Color palette to apply to the widget.
           type: string
@@ -26062,6 +26286,19 @@ components:
           description: Color palette to apply to the widget.
           type: string
       type: object
+    WidgetStyleOrderBy:
+      description: 'How to order series in timeseries visualizations.
+
+        - `tags`: Order series alphabetically by tag name (default behavior)
+
+        - `values`: Order series by their current metric values (typically descending)'
+      enum:
+      - tags
+      - values
+      type: string
+      x-enum-varnames:
+      - TAGS
+      - VALUES
     WidgetSummaryType:
       description: Which summary type should be used.
       enum:
@@ -32150,10 +32387,11 @@ paths:
         alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit:
         `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring:
         `database-monitoring alert`\n- network-performance: `network-performance alert`\n-
-        cloud cost: `cost alert`\n\n**Notes**:\n- Synthetic monitors are created through
-        the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/)
-        documentation for more information.\n- Log monitors require an unscoped App
-        Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
+        cloud cost: `cost alert`\n- network-path: `network-path alert`\n\n**Notes**:\n-
+        Synthetic monitors are created through the Synthetics API. See the [Synthetics
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        more information.\n- Log monitors require an unscoped App Key.\n\n#### Query
+        Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
         [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n-
         `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor
         type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type)
@@ -32283,7 +32521,15 @@ paths:
         \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
         for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
         `forecast` supports `>`\n- `#` an integer or decimal number used to set the
-        threshold."
+        threshold.\n\n**Network Path Alert Query**\n\nExample: `network-path(query).index(index_name).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `index_name` The data type to monitor on - supports `netpath-path` and `netpath-hop`.\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold."
       operationId: CreateMonitor
       requestBody:
         content:

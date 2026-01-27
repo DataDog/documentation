@@ -26,7 +26,7 @@ Test Impact Analysis is only supported in the following versions and testing fra
   * Requires `coverage>=5.5`.
   * Incompatible with `pytest-cov` (see [known limitations](#known-limitations))
 * `unittest`
-  * From `ddtrace>=2.2.0`.
+  * From `ddtrace>=2.1.0`.
   * From `Python>=3.7`.
 * `coverage`
   * Incompatible for coverage collection (see [known limitations](#known-limitations))
