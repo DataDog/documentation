@@ -1,6 +1,7 @@
 ---
 title: Prompt Optimization
 description: Automatically improve LLM prompts through iterative refinement and AI-powered evaluation.
+private: true
 further_reading:
   - link: /llm_observability/experiments/setup
     tag: "Documentation"
