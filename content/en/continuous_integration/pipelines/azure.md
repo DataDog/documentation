@@ -51,7 +51,7 @@ This table shows the mapping of concepts between Datadog CI Visibility and Azure
 
 ### Enable CI Visibility in Datadog
 
-After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor. 
+After the Azure App is created and installed, enable CI Visibility for the organizations and projects you want Datadog to monitor.
 
 1. Verify that your Azure DevOps organization is linked to a **Microsoft Entra tenant**. See the [Azure source code setup instructions][1] for guidance on connecting Azure DevOps projects to Datadog.
 
@@ -67,7 +67,7 @@ After the Azure App is created and installed, enable CI Visibility for the organ
 
 Pipelines appear in Datadog immediately after CI Visibility is enabled for an organization or project.
 
-<div class="alert alert-caution">If you previously configured Azure Pipelines using Service Hook Subscriptions (the legacy setup), disable that integration before enabling CI Visibility for the same projects. Otherwise, pipeline events will be duplicated. If you've already done it, ignore this message.</div>
+<div class="alert alert-danger">If you previously configured Azure Pipelines using Service Hook Subscriptions, disable that integration before enabling CI Visibility for the same projects to avoid duplicate pipeline events. Running both integrations simultaneously does not incur additional costs, but creates duplicate data.</div>
 
 [1]: /integrations/azure-devops-source-code/#setup
 [2]: https://app.datadoghq.com/ci/setup/pipeline?provider=azurepipelines
