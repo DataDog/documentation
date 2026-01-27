@@ -59,7 +59,7 @@ After setting up your pipeline using the API or Terraform, follow the instructio
         ```
 
     You must replace the placeholders with the following values, if applicable:
-    - `<DATADOG_API_KEY>`: Your Datadog API.
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][1].
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<DATADOG_SITE>`: The [Datadog site][2].
