@@ -384,7 +384,7 @@ To instrument your web views:
    ```
 2. Enable webview tracking for a given WebView instance by providing a list of hosts to track:
 
-   ```groovy
+   ```kotlin
    WebViewTracking.enable(webView, hosts)
    ```
 
@@ -408,7 +408,7 @@ To enable NDK crash reporting, use the Datadog NDK plugin:
    ```
 2. Enable NDK crash collection after initializing the SDK:
 
-    ``` kotlin
+    ```kotlin
     NdkCrashReports.enable()
     ```
 
