@@ -47,7 +47,7 @@ Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM O
 
 {{< img src="llm_observability/configuration/openai-tile.png" alt="The OpenAI configuration tile in LLM Observability. Lists instructions for configuring OpenAI and providing your OpenAI API key." style="width:100%;" >}}
 
-LLM Observability currently does not support [data residency][2] for OpenAI.
+LLM Observability does not support [data residency][2] for OpenAI.
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/guides/your-data#which-models-and-features-are-eligible-for-data-residency
