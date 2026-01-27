@@ -280,12 +280,12 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 
 ### Collecting plans with `auto_explain` (optional)
 
-By default, the agent only gathers `EXPLAIN` plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
+By default, the agent only gathers [`EXPLAIN`][17] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
 
-To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use `auto_explain`, a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][18], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
 
 <div class="alert alert-danger">
-  <strong>Important:</strong> <code>auto_explain</code> produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the FIXME permission to control who can see the resulting plans, but the log lines themselves <i>are</i> visible to all users within your Datadog org. Using <a href="//logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
+  <strong>Important:</strong> <code>auto_explain</code> produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the FIXME permission to control who can see the resulting plans, but the log lines themselves <i>are</i> visible to all users within your Datadog org. Using <a href="/logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
 </div>
 
 After you enable logging collection:
@@ -344,3 +344,5 @@ If you have installed and configured the integrations and Agent as described and
 [14]: https://app.datadoghq.com/databases
 [15]: /database_monitoring/troubleshooting/?tab=postgres
 [16]: /agent/configuration/agent-commands/#restart-the-agent
+[17]: https://www.postgresql.org/docs/current/sql-explain.html
+[18]: https://www.postgresql.org/docs/current/auto-explain.html
