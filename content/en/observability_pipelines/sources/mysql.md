@@ -12,6 +12,8 @@ products:
 
 ## Overview
 
+<div class="alert alert-info">MySQL source is in Preview. Contact your account manager to request access.</div>
+
 Databases often contain large numbers of historical, audit, or operational records. For many legacy, enterprise resource planning (ERP), and IoT-based systems, these databases serve as storage layers for important information. Teams often depend on these records for monitoring, alerting, and creating dashboards in their preferred logging or security tool.
 
 The Observability Pipelines' MySQL source (includes Amazon RDS and AWS Aurora) allows you to connect to your database so you can query and process record data in Observability Pipelines, and route your log events that are stored as database records.
@@ -31,9 +33,9 @@ You can use this source to:
 
 ## Prerequisites
 
-Before you configure the MySQL source, complete the following prerequisites to ensure that Datadog can validate credentials, connectivity, and queries before using them in Observability Pipelines. Use a [tool](#external-tools-for-testing) external to Observability Pipelines, such as MySQL Workbench or third-party tools, to complete these steps.
+Before you configure the MySQL source, complete the following prerequisites to ensure that Observability Pipelines can validate credentials, connectivity, and queries before using them in Observability Pipelines. Use a [tool](#external-tools-for-testing) external to Observability Pipelines, such as MySQL Workbench or third-party tools, to complete these steps.
 
-1. Create a database role for log collection, if you don't already have one. The role must:
+1. Create a database [role][4] for log collection, if you don't already have one. The role must:
     - Have read-only access, with no permissions to modify or write data.
     - Have permission to execute the target queries used for log collection.
     - Be scoped to only the databases, schemas, and tables required for your log collection.
@@ -42,9 +44,15 @@ Before you configure the MySQL source, complete the following prerequisites to e
     - Be able to successfully connect to the database from the environment in which the Observability Pipelines Worker runs.
     - Use the correct host, port, database name, and authentication mechanism.
     - Be tested prior to configuring it in Observability Pipelines, to avoid runtime failures.
+    - Be in this format: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`.
 1. Write, validate, and test SQL queries using either third-party or native database management tools.
     - Validate all SQL queries with a tool external to Observability Pipelines and prior to configuring it in Observability Pipelines.
     - Ensure that each query executes successfully using the read-only role and returns the expected schema.
+1. The SQL query that the Worker executes must be stored in its own local file.
+    - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default.
+        - For example, if the SQL file path is `/DD_OP_DATA_DIR/config/db_queries/retrieve_incremental_with_start.sql`, enter the path `db_queries/retrieve_incremental_with_start.sql`.
+        - The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+        - See [Advanced Worker Configurations][2] for more information.
 
 ### External tools for validating queries
 
@@ -59,22 +67,12 @@ Datadog recommends these tools for validating and testing queries:
 
 ## Set up the source while setting up a pipeline
 
-Set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
-1. Ensure you have completed the [prerequisite steps](#prerequisites).
-1. Configure the connection between the Observability Pipelines Worker and the database.
-    1. Enter the connection string.
-        - Connection string example: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`
-        - **Note**: The connection string must be fully validated using a tool external to Observability Pipelines. See [Prerequisites](#prerequisites) for more information.
+1. Enter the connection string.
 1. Set the SQL query parameters.
   1. Enter the name of your query.
   1. Enter the path to the local file containing the validated SQL query.
-      - The SQL query that the Worker executes must be stored in its own local file.
-      - See [Incremental query syntax](#incremental-query-syntax) for details about formatting and [Queries](#queries) for additional information.
-      - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default.
-        - For example, if the SQL file path is `/DD_OP_DATA_DIR/config/db_queries/retrieve_incremental_with_start.sql`, enter the path `db_queries/retrieve_incremental_with_start.sql`.
-        - The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-        - See [Advanced Worker Configurations][2] for more information.
 5. Select your query type.
     - **Batch**: The Worker executes the same database query each time and returns all the results specified. This option does not keep track of the rows you queried previously.
       - An example use case: You want to pull the same table of monthly financial statements from a database.
@@ -173,3 +171,4 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [3]: https://app.datadoghq.com/logs
+[4]: https://dev.mysql.com/doc/refman/9.2/en/create-role.html
