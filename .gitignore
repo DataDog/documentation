@@ -9,6 +9,7 @@ _vendor/
 
 # htmltest tmp files
 bin/htmltest
+htmltest_report.txt
 tmp
 
 # Ignore generated examples

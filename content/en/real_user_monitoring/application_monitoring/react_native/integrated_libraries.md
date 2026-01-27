@@ -152,30 +152,32 @@ For more information on Apollo Client Links, see the [official documentation][3]
 
 ### Removing GraphQL information
 
-Use a `resourceEventMapper` in your Datadog configuration to remove sensitive data from GraphQL variables:
+Use a `resourceEventMapper` in your Datadog RUM Configuration to remove sensitive data from GraphQL variables:
 
 ```javascript
 const datadogConfiguration = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true,
-    true,
-    true
-);
+    {
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            resourceEventMapper: (event) => {
+              // Variables are stored in event.context['_dd.graphql.variables'] as a JSON string when present
+              if (event.context['_dd.graphql.variables']) {
+                  const variables = JSON.parse(event.context['_dd.graphql.variables']);
+                  if (variables.password) {
+                      variables.password = '***';
+                  }
+                  event.context['_dd.graphql.variables'] = JSON.stringify(variables);
+              }
 
-datadogConfiguration.resourceEventMapper = event => {
-    // Variables are stored in event.context['_dd.graphql.variables'] as a JSON string when present
-    if (event.context['_dd.graphql.variables']) {
-        const variables = JSON.parse(event.context['_dd.graphql.variables']);
-        if (variables.password) {
-            variables.password = '***';
-        }
-        event.context['_dd.graphql.variables'] = JSON.stringify(variables);
+              return event;
+          }
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
     }
-
-    return event;
-};
+);
 ```
 
 ## Further Reading

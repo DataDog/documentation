@@ -15,21 +15,19 @@ further_reading:
 - link: "/incident_response/incident_management/integrations/status_pages"
   tag: "Documentation"
   text: "Integrate Datadog Status Pages with Incident Management"
-- link: "https://www.datadoghq.com/blog/status-pages/"
-  tag: "Blog"
-  text: "Keep stakeholders informed with Datadog Status Pages"
 ---
 
 ## Overview
 
-{{< img src="service_management/status_pages/shopist_status_page.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
+{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Example status page showing service components with their current status and recent incident updates" style="width:100%;" >}}
 
-Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability** and **incidents** with customers or internal stakeholders through a shareable web page.
+Status Pages is part of Datadog's Incident Response suite, alongside On-Call and Incident Management. It lets your team proactively communicate **service availability**, **incidents**, and **planned maintenance** with customers or internal stakeholders through a shareable web page.
 
 Use Status Pages to:
 
 * Share the availability of critical systems and features
 * Communicate service disruptions clearly during incidents
+* Announce scheduled maintenance and planned downtime in advance
 * Reduce inbound support volume with proactive email notifications
 
 ## Configure permissions
@@ -49,7 +47,7 @@ To create, update, or publish Status Pages, you must have `status_pages_settings
   <tbody>
     <tr>
       <td style="white-space: nowrap;">Status Pages Settings Read<br><code style="white-space: nowrap;">status_pages_settings_read</code></td>
-      <td>View the list of Status Pages, the settings of each Status Pages, their Incidents, and launched Internal Status Pages.</td>
+      <td>View the list of Status Pages, the settings of each Status Page, their Notices, and launched Internal Status Pages.</td>
       <td>Datadog Read Only Role</td>
     </tr>
     <tr>
@@ -91,7 +89,7 @@ Components are the building blocks of your status page. Each one represents a se
 - Database Cluster
 - US Region Services
 
-You can add components to your status page either on intial setup or through the status page settings:
+You can add components to your status page either on initial setup or through the status page settings:
 
 1. From your status page, click **Settings** and select the **Components** tab.
 1. Create individual components or a group of related components. You can associate [notices](#add-a-notice) with these components to reflect impact on your status page.
@@ -99,6 +97,11 @@ You can add components to your status page either on intial setup or through the
    1. Bars and Uptime Percentage
    1. Bars Only
    1. Component Name Only
+
+### Component hierarchy
+
+If multiple notices affect the same component, the notice with the greatest impact takes precedence:
+Major Outage > Partial Outage > Degraded Performance > Maintenance > Operational
 
 ## Publish your status page
 
@@ -110,27 +113,60 @@ If you selected:
 
 ## Add a notice
 
-Notices on Status Pages are carefully crafted messages posted to a public website to communicate system status. When an issue arises, you can communicate it clearly through your status page.
+Notices are messages published to a status page to communicate system status. Status Pages support two types of notices: **degradations** for unplanned service impact and **maintenance windows** for planned downtime.
 
-1. From a status page, click **Publish Notice** to open a "Publish Status Page Notice" modal and provide:
-   | Field | Description |
-   | ---- | ---- |
-   | **Title** | Short, clear description of the incident <br>*Example: Increased error rates on US region* |
-   | **Status** | Current state of the incident: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
-   | **Message** *(optional)* | Additional details for your users <br>*Examples: known cause, expected resolution time* |
-   | **Components impacted** | One or more components impacted by the incident |
-   | **Impact** | Level of impact per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
-   | **Notify Subscribers** | Toggle to send the notice to subscribers |
-1. Click **Publish Notice**.
+{{< img src="service_management/status_pages/select_notice_type_status_page.png" alt="Status page notice type selector with degradation and scheduled maintenance options" style="width:60%;" >}}
 
-{{< img src="/service_management/status_pages/publish_status_page_incident_1.png" alt="Screenshot of the Status Page Notice creation modal with fields filled out" style="width:70%;" >}}
+### Publish a degradation
 
-After a notice is published, the notice:
-- Appears on the Status Pages List under **Active Notices**.
+{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Example status page showing service components experience degradation" style="width:100%;" >}}
+
+Degradation notices communicate **unplanned service impact**, such as incidents or service disruptions. Use degradation notices to keep users informed as an issue is investigated, mitigated, and resolved.
+
+From a status page, click **Publish Notice** and select **Degradation**, then provide:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Short, clear description of the issue <br>*Example: Increased error rates in US region* |
+| **Status** | Current state of the issue: <br>- Investigating <br>- Identified <br>- Monitoring <br>- Resolved |
+| **Message** | Additional details for your users <br>*Example: We are aware of the issue and are actively working on a fix.* |
+| **Components impacted** | One or more components affected by the degradation |
+| **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
+| **Notify subscribers** | Toggle to send updates to subscribed users |
+
+{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
+
+After a degradation notice is reviewed and published, it:
+- Appears on the **Status Pages List** under Active Notices.
 - Updates the uptime bars for impacted components.
 - Is visible in the notice history timeline.
 
-You can post **updates** over time to keep users informed, and then mark the notice as **Resolved**.
+You can publish updates over time and mark the notice as **Resolved** when the issue is fully mitigated.
+
+### Schedule a maintenance window
+
+{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Example status page showing service components undergoing maintenance" style="width:100%;" >}}
+
+Maintenance windows allow you to proactively communicate planned downtime or service impact before it happens. Unlike degradations which are used for unplanned incidents, maintenance windows are scheduled in advance for infrastructure upgrades, system maintenance, database migrations, and other planned work. This allows you to keep customers informed and reduce support volume.
+
+From the status page, click **Schedule Maintenance**, or click **Publish Notice** and select **Scheduled Maintenance**. Then, provide the following details:
+
+| Field | Description |
+| ---- | ---- |
+| **Notice title** | Clear description of the maintenance activity <br>*Example: Database infrastructure upgrade* |
+| **Maintenance window** | Scheduled start and end time for the maintenance |
+| **Messages** | Messages that are automatically published as the maintenance progresses |
+| **Components impacted** | Components affected during the maintenance window |
+| **Notify subscribers** | Toggle to send advance notification to subscribers |
+
+{{< img src="service_management/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:60%;" >}}
+
+After reviewing and scheduling, the maintenance window:
+- Appears under **Upcoming Maintenance** on the status page
+- Automatically updates component status to **Maintenance** when the window begins
+- Returns components to **Operational** when the window ends (unless manually overridden)
+
+You can post updates if plans change or reschedule the maintenance window as needed.
 
 ## Email subscriptions
 

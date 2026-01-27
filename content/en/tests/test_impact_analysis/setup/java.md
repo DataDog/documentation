@@ -18,14 +18,14 @@ further_reading:
 
 ## Compatibility
 
-Test Impact Analysis is supported in `dd-java-agent >= 1.27.0`.
+Test Impact Analysis is supported in `dd-java-agent >= 1.26.0`.
 
 The following test frameworks are supported:
 - JUnit >= 4.10 and >= 5.3
 - TestNG >= 6.4
 - Spock >= 2.0
 - Cucumber >= 5.4.0
-- Karate >= 1.0.0
+- Karate >= 1.2.0
 - Scalatest >= 3.0.8
 
 ## Setup

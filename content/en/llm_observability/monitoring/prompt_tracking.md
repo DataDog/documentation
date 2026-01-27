@@ -28,6 +28,9 @@ To use Prompt Tracking, you can submit structured prompt metadata (ID, optional 
 #### LLM Observability Python SDK
 If you are using the LLM Observability Python SDK (`dd-trace` v3.16.0+), attach prompt metadata to the LLM span using the `prompt` argument or helper. See the [LLM Observability Python SDK documentation][3].
 
+#### LLM Observability Node.js SDK
+If you are using the LLM Observability Node.js SDK (`dd-trace` v5.83.0+), attach prompt metadata to the LLM span using the `prompt` option. See the [LLM Observability Node.js SDK documentation][6].
+
 #### LLM Observability API
 If you are using the LLM Observability API intake, submit prompt metadata to the Spans API endpoint. See the [LLM Observability HTTP API reference documentation][4].
 
@@ -62,3 +65,4 @@ You can use the LLM Observability Trace Explorer to locate requests by prompt us
 [3]: /llm_observability/instrumentation/sdk/?tab=python#prompt-tracking
 [4]: /llm_observability/instrumentation/api/?tab=model#prompt
 [5]: /llm_observability/instrumentation/auto_instrumentation?tab=python#langchain
+[6]: /llm_observability/instrumentation/sdk/?tab=nodejs#prompt-tracking
