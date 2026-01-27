@@ -92,7 +92,18 @@ More information about OpenFeature SDK configuration options can be found in its
 
 ### Step 2: Create a feature flag
 
-Use the [feature flags creation UI][2] to bootstrap your first feature flag. By default, the flag is disabled in all environments.
+Use the [feature flags creation UI][2] to bootstrap your first feature flag. During creation, you'll configure:
+
+* **Name and Key**: The flag's display name and the key you'll reference in your code
+* **Variant Type**: The data type for your flag variants (Boolean, String, Integer, Number, or JSON)
+* **Variant Values**: The possible values your flag can return—these can be configured during creation or added later!
+* **Distribution Channels**: Controls which SDKs receive this flag's configuration—client-side, server-side, or both
+
+<div class="alert alert-info">
+  The <b>flag key</b> and <b>value type</b> cannot be modified after creation
+</div>
+
+{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}} 
 
 ### Step 3: Evaluate the flag and write feature code
 
