@@ -16,15 +16,15 @@ title: ProxySQL
 ---
 ## 개요
 
-이 점검은 Datadog Agent를 통해 [ProxySQL](https://proxysql.com/)을 모니터링합니다.
+이 점검은 Datadog Agent를 통해 [ProxySQL][1]을 모니터링합니다.
 
 ## 설정
 
-아래 지침에 따라 호스트에서 실행 중인 Agent에 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 [Autodiscovery 통합 템플릿](https://docs.datadoghq.com/agent/kubernetes/integrations/)에서 해당 지침을 적용하는 방법에 관한 가이드를 참고하세요.
+아래 지침에 따라 호스트에서 실행 중인 Agent에 이 점검을 설치하고 설정하세요. 컨테이너화된 환경의 경우 [Autodiscovery 통합 템플릿][2]에서 해당 지침을 적용하는 방법에 관한 가이드를 참고하세요.
 
 ### 설치
 
-ProxySQL 점검은 [Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest) 패키지에 포함되어 있으므로 서버에 별도로 설치할 필요가 없습니다.
+ProxySQL 점검은 [Datadog Agent][3] 패키지에 포함되어 있으므로 서버에 별도로 설치할 필요가 없습니다.
 
 ### 설정
 
@@ -45,9 +45,9 @@ ProxySQL 점검은 [Datadog Agent](https://app.datadoghq.com/account/settings/ag
 
 호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
-1. ProxySQL 성능 데이터를 수집하려면 [Agent 구성 디렉터리](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory) 루트에 있는 `conf.d/` 폴더에서 `proxysql.d/conf.yaml` 파일을 편집하세요. 사용 가능한 모든 구성 옵션은 [샘플 proxysql.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example)을 참고하세요.
+1. ProxySQL 성능 데이터를 수집하려면 [Agent 구성 디렉터리][4] 루트에 있는 `conf.d/` 폴더에서 `proxysql.d/conf.yaml` 파일을 편집하세요. 사용 가능한 모든 구성 옵션은 [샘플 proxysql.d/conf.yaml][5]을 참고하세요.
 
-1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
+1. [Agent를 다시 시작합니다][6].
 
 ##### 로그 수집
 
@@ -80,9 +80,9 @@ ProxySQL 점검은 [Datadog Agent](https://app.datadoghq.com/account/settings/ag
          service: "<SERVICE_NAME>"
    ```
 
-   `path` 및 `service` 파라미터 값을 변경하고 사용자 환경에 맞게 구성합니다. 사용 가능한 모든 구성 옵션은 [샘플 proxysql.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example)을 참고하세요.
+   `path` 및 `service` 파라미터 값을 변경하고 사용자 환경에 맞게 구성합니다. 사용 가능한 모든 구성 옵션은 [샘플 proxysql.d/conf.yaml][5]을 참고하세요.
 
-1. [Agent를 다시 시작합니다](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
+1. [Agent를 다시 시작합니다][6].
 
 {{% /tab %}}
 
@@ -90,7 +90,7 @@ ProxySQL 점검은 [Datadog Agent](https://app.datadoghq.com/account/settings/ag
 
 #### 컨테이너화된 환경
 
-컨테이너화된 환경의 경우 [Autodiscovery 통합 템플릿](https://docs.datadoghq.com/agent/kubernetes/integrations/)에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
+컨테이너화된 환경의 경우 [Autodiscovery 통합 템플릿][2]에 아래 파라미터를 적용하는 방법이 안내되어 있습니다.
 
 #### 메트릭 수집
 
@@ -102,7 +102,7 @@ ProxySQL 점검은 [Datadog Agent](https://app.datadoghq.com/account/settings/ag
 
 ##### 로그 수집
 
-Datadog Agent에서는 로그 수집 기능이 기본적으로 비활성화되어 있습니다. 활성화하려면 [Kubernetes 로그 수집](https://docs.datadoghq.com/agent/kubernetes/log/)을 참고하세요.
+Datadog Agent에서는 로그 수집 기능이 기본적으로 비활성화되어 있습니다. 활성화하려면 [Kubernetes 로그 수집][7]을 참고하세요.
 
 | 파라미터      | 값                                     |
 |----------------|-------------------------------------------|
@@ -114,7 +114,7 @@ Datadog Agent에서는 로그 수집 기능이 기본적으로 비활성화되�
 
 ### 검증
 
-[Agent 상태 하위 명령](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information)을 실행하고 Checks 섹션에서 `proxysql`을 찾습니다.
+[Agent 상태 하위 명령][8]을 실행하고 Checks 섹션에서 `proxysql`을 찾습니다.
 
 ## 수집한 데이터
 
@@ -218,4 +218,14 @@ _Statuses: ok, warning, critical_
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀](https://docs.datadoghq.com/help)에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][9]에 문의하세요.
+
+[1]: https://proxysql.com/
+[2]: /agent/kubernetes/integrations/
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example
+[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/kubernetes/log/
+[8]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: /help

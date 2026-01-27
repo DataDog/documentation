@@ -366,7 +366,7 @@ Datadog の Google Cloud インテグレーションをセットアップして�
 {{% /collapse-content %}} 
 
 [301]: https://cloud.google.com/iam/docs/service-account-impersonation
-[302]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
+[302]: /ja/integrations/google_cloud_platform/
 {{< /site-region >}}
 
 
@@ -554,14 +554,14 @@ Datadog の [Google Cloud Dataflow インテグレーション][28]を使用し�
 [1]: https://cloud.google.com/dataflow
 [2]: https://cloud.google.com/dataflow/docs/guides/templates/provided/pubsub-to-datadog
 [3]: https://github.com/GoogleCloudPlatform/terraform-gcp-datadog-integration
-[4]: https://docs.datadoghq.com/ja/integrations/google_cloud_pubsub/
+[4]: /ja/integrations/google_cloud_pubsub/
 [5]: https://cloud.google.com/pubsub/docs/create-subscription
 [6]: https://www.datadoghq.com/blog/datadog-recommended-monitors/
 [7]: https://cloud.google.com/logging/docs/export/configure_export_v2#creating_sink
 [8]: https://cloud.google.com/logging/docs/view/logging-query-language
 [9]: https://cloud.google.com/architecture/partners/stream-cloud-logs-to-datadog
 [10]: https://cloud.google.com/apis/docs/getting-started#enabling_apis
-[11]: https://docs.datadoghq.com/ja/agent/
+[11]: /ja/agent/
 [12]: https://console.cloud.google.com/cloudpubsub/topicList
 [13]: https://console.cloud.google.com/cloudpubsub/subscription/
 [14]: https://cloud.google.com/pubsub/docs/access-control#pubsub.viewer
@@ -577,14 +577,14 @@ Datadog の [Google Cloud Dataflow インテグレーション][28]を使用し�
 [24]: https://app.datadoghq.com/logs
 [25]: https://cloud.google.com/pubsub/docs/access-control#pubsub.subscriber
 [26]: https://cloud.google.com/products/calculator
-[27]: https://docs.datadoghq.com/ja/monitors/types/metric/
+[27]: /ja/monitors/types/metric/
 [28]: https://cloud.google.com/pubsub/docs/access-control#pubsub.publisher
 [29]: https://cloud.google.com/secret-manager/docs/access-control#secretmanager.secretAccessor
 [30]: https://cloud.google.com/storage/docs/access-control/iam-roles/
 {{% /tab %}}
 {{% tab "Pub/Sub Push を使う方法 (レガシー)" %}}
 
-<a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push サブスクリプションによる Google Cloud ログの収集</a>は**非推奨化が進行中**です。
+<a href="/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Pub/Sub Push サブスクリプションによる Google Cloud ログの収集</a>は**非推奨化が進行中**です。
 
 **Push** サブスクリプションに関する上記のドキュメントは、トラブルシューティングやレガシー セットアップの変更のためにのみ維持されています。
 
@@ -1039,56 +1039,56 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 - [Google Cloud から Datadog にログをストリーミングする][82]
 
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_app_engine/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_bigquery/
-[3]: https://docs.datadoghq.com/ja/integrations/google_cloud_bigtable/
-[4]: https://docs.datadoghq.com/ja/integrations/google_cloudsql/
-[5]: https://docs.datadoghq.com/ja/integrations/google_cloud_apis/
-[6]: https://docs.datadoghq.com/ja/integrations/google_cloud_armor/
-[7]: https://docs.datadoghq.com/ja/integrations/google_cloud_composer/
-[8]: https://docs.datadoghq.com/ja/integrations/google_cloud_dataproc/
-[9]: https://docs.datadoghq.com/ja/integrations/google_cloud_dataflow/
-[10]: https://docs.datadoghq.com/ja/integrations/google_cloud_filestore/
-[11]: https://docs.datadoghq.com/ja/integrations/google_cloud_firestore/
-[12]: https://docs.datadoghq.com/ja/integrations/google_cloud_interconnect/
-[13]: https://docs.datadoghq.com/ja/integrations/google_cloud_iot/
-[14]: https://docs.datadoghq.com/ja/integrations/google_cloud_loadbalancing/
-[15]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/
-[16]: https://docs.datadoghq.com/ja/integrations/google_cloud_redis/
-[17]: https://docs.datadoghq.com/ja/integrations/google_cloud_router/
-[18]: https://docs.datadoghq.com/ja/integrations/google_cloud_run/
-[19]: https://docs.datadoghq.com/ja/integrations/google_cloud_security_command_center/
-[20]: https://docs.datadoghq.com/ja/integrations/google_cloud_tasks/
-[21]: https://docs.datadoghq.com/ja/integrations/google_cloud_tpu/
-[22]: https://docs.datadoghq.com/ja/integrations/google_compute_engine/
-[23]: https://docs.datadoghq.com/ja/integrations/google_container_engine/
-[24]: https://docs.datadoghq.com/ja/integrations/google_cloud_datastore/
-[25]: https://docs.datadoghq.com/ja/integrations/google_cloud_firebase/
-[26]: https://docs.datadoghq.com/ja/integrations/google_cloud_functions/
-[27]: https://docs.datadoghq.com/ja/integrations/google_kubernetes_engine/
-[28]: https://docs.datadoghq.com/ja/integrations/google_cloud_ml/
-[29]: https://docs.datadoghq.com/ja/integrations/google_cloud_private_service_connect/
-[30]: https://docs.datadoghq.com/ja/integrations/google_cloud_pubsub/
-[31]: https://docs.datadoghq.com/ja/integrations/google_cloud_spanner/
-[32]: https://docs.datadoghq.com/ja/integrations/google_cloud_storage/
-[33]: https://docs.datadoghq.com/ja/integrations/google_cloud_vertex_ai/
-[34]: https://docs.datadoghq.com/ja/integrations/google_cloud_vpn/
+[1]: /ja/integrations/google_app_engine/
+[2]: /ja/integrations/google_cloud_bigquery/
+[3]: /ja/integrations/google_cloud_bigtable/
+[4]: /ja/integrations/google_cloudsql/
+[5]: /ja/integrations/google_cloud_apis/
+[6]: /ja/integrations/google_cloud_armor/
+[7]: /ja/integrations/google_cloud_composer/
+[8]: /ja/integrations/google_cloud_dataproc/
+[9]: /ja/integrations/google_cloud_dataflow/
+[10]: /ja/integrations/google_cloud_filestore/
+[11]: /ja/integrations/google_cloud_firestore/
+[12]: /ja/integrations/google_cloud_interconnect/
+[13]: /ja/integrations/google_cloud_iot/
+[14]: /ja/integrations/google_cloud_loadbalancing/
+[15]: /ja/integrations/google_stackdriver_logging/
+[16]: /ja/integrations/google_cloud_redis/
+[17]: /ja/integrations/google_cloud_router/
+[18]: /ja/integrations/google_cloud_run/
+[19]: /ja/integrations/google_cloud_security_command_center/
+[20]: /ja/integrations/google_cloud_tasks/
+[21]: /ja/integrations/google_cloud_tpu/
+[22]: /ja/integrations/google_compute_engine/
+[23]: /ja/integrations/google_container_engine/
+[24]: /ja/integrations/google_cloud_datastore/
+[25]: /ja/integrations/google_cloud_firebase/
+[26]: /ja/integrations/google_cloud_functions/
+[27]: /ja/integrations/google_kubernetes_engine/
+[28]: /ja/integrations/google_cloud_ml/
+[29]: /ja/integrations/google_cloud_private_service_connect/
+[30]: /ja/integrations/google_cloud_pubsub/
+[31]: /ja/integrations/google_cloud_spanner/
+[32]: /ja/integrations/google_cloud_storage/
+[33]: /ja/integrations/google_cloud_vertex_ai/
+[34]: /ja/integrations/google_cloud_vpn/
 [35]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
 [36]: https://console.cloud.google.com/apis/library/compute.googleapis.com
 [37]: https://console.cloud.google.com/apis/library/cloudasset.googleapis.com
 [38]: https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com
 [39]: https://console.cloud.google.com/apis/library/iam.googleapis.com
 [40]: https://console.cloud.google.com/apis/library/cloudbilling.googleapis.com
-[41]: https://docs.datadoghq.com/ja/cloud_cost_management/setup/google_cloud/
+[41]: /ja/cloud_cost_management/setup/google_cloud/
 [42]: https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.
 [43]: https://app.datadoghq.com/integrations/google-cloud-platform
 [44]: https://cloud.google.com/compute/docs/labeling-resources
-[45]: https://docs.datadoghq.com/ja/agent/
-[46]: https://docs.datadoghq.com/ja/data_security/data_retention_periods/
-[47]: https://docs.datadoghq.com/ja/integrations/gke/
-[48]: https://docs.datadoghq.com/ja/tracing/
-[49]: https://docs.datadoghq.com/ja/logs/
-[50]: https://docs.datadoghq.com/ja/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
+[45]: /ja/agent/
+[46]: /ja/data_security/data_retention_periods/
+[47]: /ja/integrations/gke/
+[48]: /ja/tracing/
+[49]: /ja/logs/
+[50]: /ja/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
 [51]: https://cloud.google.com/bigquery/docs/access-control#bigquery.resourceViewer
 [52]: https://console.cloud.google.com/iam-admin/
 [53]: https://app.datadoghq.com/datasets/tables/explore
@@ -1111,9 +1111,9 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 [70]: https://www.datadoghq.com/blog/google-cloud-private-service-connect/
 [71]: https://cloud.google.com/monitoring/api/v3/kinds-and-types
 [72]: https://app.datadoghq.com/event/stream
-[73]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/#metrics
+[73]: /ja/integrations/google_stackdriver_logging/#metrics
 [74]: https://app.datadoghq.com/metric/summary
-[75]: https://docs.datadoghq.com/ja/help/
+[75]: /ja/help/
 [76]: https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/
 [77]: https://www.datadoghq.com/blog/google-cloud-vertex-ai-monitoring-datadog/
 [78]: https://www.datadoghq.com/blog/monitor-dataflow-pipelines-with-datadog/
