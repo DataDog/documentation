@@ -8,13 +8,6 @@ code_lang_weight: 20
 
 The Python function action allows you to write custom Python scripts for data transformations, parsing, and payload enrichment within your workflows. Python provides additional capabilities beyond JavaScript for certain use cases.
 
-
-## Add a Python Function Action
-
-To add a Python function action:
-- In a new workflow, click Add step and search for "python". Select the Python action to add it to your workflow.
-- In an existing workflow, click + and search for "python". Select the Python action to add it to your workflow.
-
 ## Python Environment
 The Python function action runs in a restricted execution environment with the following characteristics:
 • Python version: 3.12.8
@@ -36,6 +29,12 @@ def main(*, ctx: Context):
 ```
 
 The ctx object provides access to all workflow context variables, similar to the `$` variable in JavaScript expressions. Use dictionary-style access (for example, `ctx["Steps"]["Step_name"]["variable"]`) to reference values from previous steps.
+
+## Add a Python Function Action
+
+To add a Python function action:
+- In a new workflow, click Add step and search for "python". Select the Python action to add it to your workflow.
+- In an existing workflow, click + and search for "python". Select the Python action to add it to your workflow.
 
 ## Writing Python Scripts with AI
 You can use Bits AI to help you write Python scripts directly within the workflow editor.
