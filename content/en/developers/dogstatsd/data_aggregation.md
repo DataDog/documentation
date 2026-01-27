@@ -53,3 +53,4 @@ Among all values received during the same flush interval, the aggregated value s
 [5]: /metrics/types/?tab=gauge#metric-types
 [6]: /metrics/types/?tab=histogram#metric-types
 [7]: /metrics/types/?tab=distribution#metric-types
+[8]: /getting_started/tagging/
