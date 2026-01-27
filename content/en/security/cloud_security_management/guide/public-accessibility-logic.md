@@ -317,20 +317,22 @@ Explore more information about making storage buckets public [here][57].
 
 ### Google Cloud Kubernetes Engine clusters
 
-A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publicly accessible if **all** of the following base criteria are met:
+A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publicly accessible if it meets **all** of the following **base criteria** AND **at least one** of the additional conditions listed below:
+
+**Base criteria (all required):**
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-| Private endpoint is disabled | The cluster's [private endpoint](https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#private_cp) is not enabled (`enable_private_endpoint` is false), meaning the control plane has a public IP address. |
+| Private endpoint is disabled | The cluster's [private endpoint][62] is not enabled (`enable_private_endpoint` is false), meaning the control plane has a public IP address. |
 | Public endpoint is enabled | The cluster has a public endpoint configured (`public_endpoint` is true). |
 
-**AND one of the following:**
+**AND at least one of the following conditions:**
 
 * _Authorized networks is disabled:_
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-| [Authorized networks](https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#overview) is not enabled. | There are no IP allowlist restrictions on who can access the cluster's control plane, allowing access from any IP address. |
+| [Authorized networks][63] is not enabled. | There are no IP allowlist restrictions on who can access the cluster's control plane, allowing access from any IP address. |
 
 ***OR***
 
@@ -423,3 +425,6 @@ A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publ
 [59]: https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html
 [60]: https://learn.microsoft.com/en-us/azure/aks/intro-kubernetes
 [61]: https://learn.microsoft.com/en-us/azure/aks/best-practices
+[62]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#private_cp
+[63]: https://cloud.google.com/kubernetes-engine/docs/how-to/latest/network-isolation#overview
+
