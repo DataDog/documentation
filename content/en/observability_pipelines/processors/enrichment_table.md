@@ -46,7 +46,7 @@ See [Enable ingestion of reference tables][2] from Datadog's Salesforce integrat
 ServiceNow is an IT service management platform with a Configuration Management Database (CMDB) that tracks infrastructure assets, applications, and dependencies.
 
 Use the Enrichment Table processor to:
-- Enrich logs with infrastructure ownership and dependency context, such as which team owns the host and the business unit that team supports.
+- Enrich logs with infrastructure ownership and dependency context, such as which team owns the host and which business unit that team supports.
 - Add information directly from CMDB records to telemetry.
 
 #### Snowflake
