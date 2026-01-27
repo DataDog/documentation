@@ -193,7 +193,7 @@ The following example demonstrates how a 95.83% global uptime is calculated.
 ## Monitor status reference
 
 OK
-: The monitor is healthy. Either all test runs are passing, or failures have not met the alerting conditions minimum duration and location requirements.
+: The monitor is healthy. Either all test runs are passing, or failures have not met the alerting conditions (minimum duration and location requirements).
 
 ALERT
 : The alerting conditions have been met. The test has been failing continuously for the configured minimum duration across the required number of locations.
