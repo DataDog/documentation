@@ -8,7 +8,7 @@ code_lang_weight: 20
 
 The Python function action allows you to write custom Python scripts for data transformations, parsing, and payload enrichment within your workflows. Python provides additional capabilities beyond JavaScript for certain use cases.
 
-## Python Environment
+## Python environment
 The Python function action runs in a restricted execution environment with the following characteristics:
 • Python version: 3.12.8
 • Available libraries: In addition to the Python standard library, the following packages are available:
@@ -16,7 +16,7 @@ The Python function action runs in a restricted execution environment with the f
   – python-dateutil (version 2.8.2)
 • Network access: Restricted
 
-## Script Structure
+## Script structure
 All Python scripts must define a main function that accepts a ctx parameter of type Context.
 Example structure:
 
@@ -30,14 +30,14 @@ def main(*, ctx: Context):
 
 The ctx object provides access to all workflow context variables, similar to the `$` variable in JavaScript expressions. Use dictionary-style access (for example, `ctx["Steps"]["Step_name"]["variable"]`) to reference values from previous steps.
 
-## Add a Python Function Action
+## Add a Python function action
 
 In the workflow canvas: 
 1. Click **+** to add a workflow step. 
 1. Search for `Python`. 
 1. Select the Python action to add it to your workflow.
 
-## Writing Python Scripts with AI
+## Write Python scripts with AI
 
 You can use Bits AI to help write Python scripts inside a workflow step.
 
@@ -54,7 +54,7 @@ To write a script with Bits AI:
 
 ## Examples
 
-### Parse and Transform JSON Data
+### Parse and transform JSON data
 
 This example parses a JSON string from a previous step and extracts specific fields.
 
@@ -74,7 +74,7 @@ def main(*, ctx: Context):
     }
 ```
 
-### Work with Dates and Timestamps
+### Work with dates and timestamps
 
 This example uses the python-dateutil library to perform date calculations.
 
@@ -97,7 +97,8 @@ def main(*, ctx: Context):
     }
 ```
 
-### Cryptographic Operations
+### Cryptographic operations
+
 This example uses the rsa library to encrypt a message.
 
 ```python
