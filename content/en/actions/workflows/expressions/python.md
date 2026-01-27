@@ -11,11 +11,12 @@ The Python function action allows you to write custom Python scripts for data tr
 ## Python environment
 
 The Python function action runs in a restricted execution environment with the following characteristics:
-• Python version: 3.12.8
-• Available libraries: In addition to the Python standard library, the following packages are available:
-  – rsa (version 4.9)
-  – python-dateutil (version 2.8.2)
-• Network access: Restricted
+
+- Python version: 3.12.8
+- Available libraries: In addition to the Python standard library, the following packages are available:
+  - `rsa` (version 4.9)
+  - `python-dateutil` (version 2.8.2)
+- Network access: Restricted
 
 ## Script structure
 All Python scripts must define a main function that accepts a ctx parameter of type Context.
