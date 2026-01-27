@@ -55,11 +55,7 @@ After you have set up your Datadog library for Test Optimization, you can config
 {{< tabs >}}
 {{% tab "JavaScript/TypeScript" %}}
 
-The required test framework and dd-trace versions are:
-
-`dd-trace-js`:
-* `>=5.23.0` for the 5.x release.
-* `>=4.47.0` for the 4.x release.
+`dd-trace-js>=5.74.0`
 
 The test framework compatibility is the same as [Test Optimization Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
@@ -68,7 +64,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Java" %}}
 
-`dd-trace-java>=1.34.0`
+`dd-trace-java>=1.31.0`
 
 The test framework compatibility is the same as [Test Optimization Compatibility][2], with the exception of `Scala Weaver`.
 
@@ -95,7 +91,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Go" %}}
 
-`orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
+`orchestrion >= 0.9.4 + dd-trace-go >= 1.70.0`
 
 {{% /tab %}}
 
@@ -133,7 +129,7 @@ Finally, older tracer versions limit the number of known tests fetched to 500k. 
 
 ### A test was retried that is not new
 
-If a test hasn't been active for more than 14 days, it might be re-identified as new. 
+If a test hasn't been active for more than 14 days, it might be re-identified as new.
 
 If the Datadog library can't fetch the full list of known tests, the Datadog library may retry tests that are not new. There is a mechanism to prevent this error from slowing down the CI pipeline, but if it happens, contact [Datadog Support][9].
 
