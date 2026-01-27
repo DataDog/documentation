@@ -280,24 +280,24 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 
 ### Collecting plans with `auto_explain` (optional)
 
-By default, the agent will only gather `EXPLAIN` plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
+By default, the agent only gathers `EXPLAIN` plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
 
-To collect full `EXPLAIN ANALYZE` plans taken from all queries, you will need to use `auto_explain`, a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use `auto_explain`, a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
 
 <div class="alert alert-danger">
   <strong>Important:</strong> <code>auto_explain</code> produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the FIXME permission to control who can see the resulting plans, but the log lines themselves <i>will</i> be visible to all users within your Datadog org. Using <a href="//logs/guide/logs-rbac">RBAC for Logs</a> is one way to ensure these logs are only visible to the right users.
 </div>
 
-After logging-collection is enabled…
+After you enable logging collection:
 
-1. Add `auto_explain` to your list of `shared_preload_libraries` in `postgresql.conf`. For instance, if `shared_preload_libraries` had been set to `pg_stat_statements`, change it to `pg_stat_statements,auto_explain`
+1. Add `auto_explain` to your list of `shared_preload_libraries` in `postgresql.conf`. For instance, if `shared_preload_libraries` is set to `pg_stat_statements`, change it to `pg_stat_statements,auto_explain`
 
 2. Change the `log_line_prefix` to enable richer event correlation
    ```conf
      log_line_prefix = '%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a:' # this pattern is required to ingest auto_explain plans
    ```
 
-3. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example will log an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
+3. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
 
    ```conf
     auto_explain.log_format: "json"
