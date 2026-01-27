@@ -26,7 +26,7 @@ The system runs your LLM application on a dataset with the current prompt, measu
 - Parallel experiment execution for rapid iteration
 - Full integration with LLM Observability for tracking and debugging
 
-**Current support:** Prompt Optimization has been validated on boolean detection tasks and classification use cases, though the architecture supports any output type including structured data extraction, free-form text generation, and numerical predictions.
+**Current support:** Prompt Optimization has been validated on Boolean detection tasks and classification use cases, though the architecture supports any output type including structured data extraction, free-form text generation, and numerical predictions.
 
 ## How it works
 
@@ -85,7 +85,7 @@ dataset = LLMObs.create_dataset(
 )
 ```
 
-**Best practice:** Include diverse examples covering typical cases and edge cases to ensure robust optimization.
+**Best practice:** Include diverse examples covering typical cases and edge cases to help ensure robust optimization.
 
 ### 2. Define your task function
 
@@ -179,7 +179,7 @@ def precision_recall_evaluator(inputs, outputs, expected_outputs, evaluations):
     }
 ```
 
-**Scoring function** can simply be one of your metrics or can combine metrics into a single optimization target:
+**Scoring function** can be one of your metrics or can combine metrics into a single optimization target:
 
 ```python
 def compute_score(summary_evaluators):
@@ -212,7 +212,7 @@ def labelization_function(individual_result):
         return "INCORRECT PREDICTION"
 ```
 
-The labelization function plays a crucial role in optimization: for each unique label, the optimizer receives one randomly selected example from that category (here `CORRECT PREDICTION` and `INCORRECT PREDICTION`). This means the number of labels directly determines the diversity of examples shown to the reasoning model. **Importantly, the label names themselves should be meaningful and descriptive**, as they are shown directly to the reasoning model—use clear, human-readable labels like "HIGH CONFIDENCE ERROR" or "EDGE CASE FAILURE" rather than codes like "TYPE_A" or "CAT_3". Design your labels to represent the key patterns or hints you want the optimizer to learn from, and keep the cardinality low (fewer than 10 distinct labels) to ensure focused, actionable feedback.
+The labelization function plays a crucial role in optimization: for each unique label, the optimizer receives one randomly selected example from that category (here `CORRECT PREDICTION` and `INCORRECT PREDICTION`). This means the number of labels directly determines the diversity of examples shown to the reasoning model. **Importantly, the label names themselves should be meaningful and descriptive**, as they are shown directly to the reasoning model—use clear, human-readable labels like "HIGH CONFIDENCE ERROR" or "EDGE CASE FAILURE" rather than codes like "TYPE_A" or "CAT_3". Design your labels to represent the key patterns or hints you want the optimizer to learn from, and keep the cardinality low (fewer than 10 distinct labels) to help ensure focused, actionable feedback.
 
 ### 4. Define optimization task
 
@@ -244,7 +244,7 @@ def optimization_task(system_prompt, user_prompt, config):
     return response.choices[0].message.parsed.prompt  # Must return string
 ```
 
-<div class="alert alert-info">The optimization task receives a system prompt with instructions for improving prompts and a user prompt with current performance data and examples. The system automatically constructs these prompts based on your evaluation results.  The function must return the improved prompt as a string.</div>
+<div class="alert alert-info">The optimization task receives a system prompt with instructions for improving prompts and a user prompt with current performance data and examples. The system automatically constructs these prompts based on your evaluation results. The function must return the improved prompt as a string.</div>
 
 ### 5. Run optimization
 
@@ -289,14 +289,14 @@ print(result.summary())
 
 ## Configuration options
 
-### max_iterations
+### Max iterations
 
 Controls the maximum number of optimization cycles. Each iteration tests a new prompt on the full dataset.
 
 - **Default:** 5
 - **Recommended:** 10-20 for initial exploration, 5-10 for production
 
-### stopping_condition
+### Stopping condition
 
 Optional function that determines when to terminate optimization early. Receives summary evaluations and returns `True` to stop.
 
@@ -306,9 +306,9 @@ stopping_condition=lambda evals: (
 )
 ```
 
-Use `AND` conditions to ensure multiple metrics meet targets before stopping.
+Use `AND` conditions to help ensure multiple metrics meet targets before stopping.
 
-### jobs
+### Jobs
 
 Number of parallel workers for experiment execution. Higher values reduce total runtime but may hit API rate limits.
 
@@ -319,12 +319,12 @@ Number of parallel workers for experiment execution. Higher values reduce total 
 - Serial (`jobs=1`): ~50 minutes (assuming 5s per call)
 - Parallel (`jobs=20`): ~5 minutes
 
-### config
+### Configuration
 
 Configuration dictionary passed to your task function. Must contain a `"prompt"` key with the initial prompt.
 
 Optional fields include:
-- **`model_name`**: Specifies the target model for your task. When provided, the optimizer includes model-specific guidance in its suggestions, tailoring improvements to that model's capabilities and limitations (for example, GPT-4 vs Claude vs Llama).
+- **`model_name`**: Specifies the target model for your task. When provided, the optimizer includes model-specific guidance in its suggestions, tailoring improvements to that model's capabilities and limitations (e.g., GPT-4 vs Claude vs Llama).
 - **`evaluation_output_format`**: Provides the JSON schema for your expected output structure. The optimizer uses this to ensure the improved prompt explicitly instructs the model to produce correctly formatted output. This is particularly valuable for structured outputs, where format compliance is critical.
 - **`runs`**: Controls how many times each dataset record is evaluated. Setting `runs` > 1 helps reduce variance in metrics for tasks with non-deterministic outputs, providing more stable optimization signals at the cost of longer execution time.
 - Any custom parameters your task function needs
@@ -386,7 +386,7 @@ plt.show()
 ### Labelization
 
 - Create 2-5 distinct, descriptive labels (e.g., "CORRECT HIGH CONFIDENCE", "INCORRECT EDGE CASE")
-- Ensure balanced label distribution (avoid 95% in one category)
+- Helps ensure balanced label distribution (avoid 95% in one category)
 - Labels help the optimizer understand different types of successes and failures
 
 ### Optimization model selection
