@@ -48,9 +48,9 @@ If it is not possible to add Open Telemetry to your project, you can use the int
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-              clientToken = "<CLIENT_TOKEN>",
-              env = "<ENV_NAME>",
-              variant = "<APP_VARIANT_NAME>"
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
           ).build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -83,10 +83,11 @@ If it is not possible to add Open Telemetry to your project, you can use the int
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.EU1)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.EU1)
             .build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -120,10 +121,11 @@ If it is not possible to add Open Telemetry to your project, you can use the int
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.US3)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US3)
             .build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -157,10 +159,11 @@ If it is not possible to add Open Telemetry to your project, you can use the int
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.US5)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US5)
             .build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -194,10 +197,11 @@ If it is not possible to add Open Telemetry to your project, you can use the int
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.US1_FED)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US1_FED)
             .build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -230,13 +234,14 @@ If it is not possible to add Open Telemetry to your project, you can use the int
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.AP1)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.AP1)
             .build()
 
-        Datadog.initialize(this, configuration, trackingConsent)
+          Datadog.initialize(this, configuration, trackingConsent)
       }
    }
    ```
@@ -267,10 +272,11 @@ If it is not possible to add Open Telemetry to your project, you can use the int
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.AP2)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.AP2)
             .build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -414,13 +420,13 @@ If it is not possible to add Open Telemetry to your project, you can use the int
                tracer.activateSpan(childSpan).use {
                    // Do something ...
                }
-           } catch(e: Error) {
+           } catch (e: Error) {
                childSpan.error(e)
            } finally {
                childSpan.finish()
            }
        }
-   } catch(e: Throwable) {
+   } catch (e: Throwable) {
        AndroidTracer.logThrowable(span, e)
    } finally {
        span.finish()
@@ -444,16 +450,15 @@ If it is not possible to add Open Telemetry to your project, you can use the int
                } finally {
                    innerScope.close();
                }
-           } catch(Throwable e) {
+           } catch (Throwable e) {
                AndroidTracer.logThrowable(childSpan, e);
            } finally {
                childSpan.finish();
            }
-       }
-       finally {
+       } finally {
            scope.close();
        }
-   } catch(Error e) {
+   } catch (Throwable e) {
        AndroidTracer.logThrowable(span, e);
    } finally {
        span.finish();
@@ -479,7 +484,7 @@ If it is not possible to add Open Telemetry to your project, you can use the int
                }
            }
        }
-   } catch(e: Throwable) {
+   } catch (e: Throwable) {
        AndroidTracer.logThrowable(span, e)
    } finally {
        span.finish()
@@ -522,9 +527,10 @@ If it is not possible to add Open Telemetry to your project, you can use the int
    val span = tracer.buildSpan("<SPAN_NAME>").start()
    val tracedRequestBuilder = Request.Builder()
    tracer.inject(span.context(), Format.Builtin.TEXT_MAP_INJECT,
-              tMapInject { key, value ->
-                  cedRequestBuilder.addHeader(key, value)
-                 )
+              TextMapInject { key, value ->
+                  tracedRequestBuilder.addHeader(key, value)
+              }
+   )
    val request = tracedRequestBuilder.build()
    // Dispatch the request and finish the span after.
    ```
@@ -535,12 +541,15 @@ If it is not possible to add Open Telemetry to your project, you can use the int
    Span span = tracer.buildSpan("<SPAN_NAME>").start();
    Request.Builder tracedRequestBuilder = new Request.Builder();
    tracer.inject(
-              n.context(),
-              mat.Builtin.TEXT_MAP_INJECT,
-               TextMapInject() {
-                  erride
-                  lic void put(String key, String value) {
-                      cedRequestBuilder.addHeader(key, value);
+              span.context(),
+              Format.Builtin.TEXT_MAP_INJECT,
+              TextMapInject() {
+                 @Override
+                 public void put(String key, String value) {
+                     tracedRequestBuilder.addHeader(key, value);
+                 }
+             }
+   );
                                
    Request request = tracedRequestBuilder.build();
    // Dispatch the request and finish the span after
@@ -794,7 +803,7 @@ val request = Request.Builder()
 {{% tab "Java" %}}
 ```java
 Request.Builder requestBuilder = new Request.Builder()
-        .url(requestUrl)
+        .url(requestUrl);
 Request request = OkHttpRequestExtKt
         .parentSpan(requestBuilder, parentSpan)
         .build();
@@ -812,7 +821,7 @@ To provide a continuous trace inside a RxJava stream you need to follow the step
 1. Add the [OpenTracing for RxJava][8] dependency into your project and follow the **Readme** file
    for instructions. For example, for a continuous trace, you have to add:
    ```kotlin
-      TracingRxJava3Utils.enableTracing(GlobalTracer.get())
+   TracingRxJava3Utils.enableTracing(GlobalTracer.get())
    ```
 2. Then, in your project, open a scope when the Observable is subscribed and close it when it completes. Any span
    created inside the stream operators will be displayed inside this scope (parent Span):
@@ -895,7 +904,7 @@ For a continuous trace inside a RxJava stream that uses Retrofit for the network
        .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
        .client(okHttpClient)
        .build();
-    ```
+   ```
    {{% /tab %}}
    {{< /tabs >}}
 3. Open a scope around your Rx stream as follows:
@@ -949,7 +958,7 @@ For a continuous trace inside a RxJava stream that uses Retrofit for the network
                scopeStorage.remove();
            }
        });
-    ```
+   ```
    {{% /tab %}}
    {{< /tabs >}}
 
