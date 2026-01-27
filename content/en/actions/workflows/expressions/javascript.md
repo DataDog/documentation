@@ -6,11 +6,11 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-JavaScript is available in Workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
+JavaScript (JS) is available in Workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
 
 ## Inline JavaScript expressions
 
-You can use JavaScript (JS) expressions directly in workflow steps to perform a wide range of data transformations without needing to include dedicated JS steps.
+You can use JS expressions directly in workflow steps to perform a wide range of data transformations without needing to include dedicated JS steps.
 
 To use an inline expression in your workflow, enclose the expression in `${}`. For example, to convert a string ID (`Trigger.stringId`) to an integer, use `${ parseInt(Trigger.stringId) }`.
 
