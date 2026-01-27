@@ -9,6 +9,7 @@ code_lang_weight: 20
 The Python function action allows you to write custom Python scripts for data transformations, parsing, and payload enrichment within your workflows. Python provides additional capabilities beyond JavaScript for certain use cases.
 
 ## Python environment
+
 The Python function action runs in a restricted execution environment with the following characteristics:
 • Python version: 3.12.8
 • Available libraries: In addition to the Python standard library, the following packages are available:
@@ -52,7 +53,7 @@ To write a script with Bits AI:
 1. Enter a **Description**. 
 1. Click **Save**.
 
-## Examples
+## Script examples
 
 ### Parse and transform JSON data
 
