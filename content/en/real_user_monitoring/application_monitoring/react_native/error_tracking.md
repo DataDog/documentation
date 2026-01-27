@@ -484,9 +484,9 @@ Find the loop on `applicationVariants` in the `android/app/build.gradle` file. I
 Inside the loop, add the following snippet:
 
 ```groovy
-        if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
-            tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
-        }
+if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
+    tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
+}
 ```
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
