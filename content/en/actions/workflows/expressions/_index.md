@@ -1,7 +1,8 @@
 ---
 title: Expressions
+type: multi-code-lang
 description: Use inline expressions and dedicated function/expression actions for custom data transformations in workflows.
-disable_toc: false
+disable_toc: true
 aliases:
 - /service_management/workflows/actions/data_transformation/
 - /service_management/workflows/expressions
@@ -21,9 +22,6 @@ To learn about language-specific expressions, choose one of the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][1].
 
-[1]: https://lodash.com/
-[2]: https://chat.datadoghq.com/
-[3]: /service_management/workflows/test_and_debug/#test-a-step
-[4]: /service_management/workflows/actions/set_variables
+[1]: https://chat.datadoghq.com/
