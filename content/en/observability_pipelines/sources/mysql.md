@@ -14,7 +14,7 @@ products:
 
 Databases often contain large numbers of historical, audit, or operational records. For many legacy, enterprise resource planning (ERP), and IoT-based systems, these databases serve as storage layers for important information. Teams often depend on these records for monitoring, alerting, and creating dashboards in their preferred logging or security tool.
 
-The Observability Pipelines' MySQL source (includes Amazon RDS and AWS Aurora) allows you to connect to your database so you can query and process the data in Observability Pipelines, and route your log events that are stored as database records.
+The Observability Pipelines' MySQL source (includes Amazon RDS and AWS Aurora) allows you to connect to your database so you can query and process record data in Observability Pipelines, and route your log events that are stored as database records.
 
 **Note**: The Observability Pipelines Worker can only execute read-only SQL queries against supported databases.
 
