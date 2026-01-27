@@ -143,7 +143,7 @@ Add the workflow to your notification rule:
 
 Each time the notification rule fires, it triggers a workflow run.
 
-### Manual trigger
+### Manual triggers
 
 You can manually start a workflow from a Cloud SIEM Security Signal panel, a Misconfiguration panel or an Identity Risk panel.
 
