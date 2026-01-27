@@ -24,13 +24,14 @@ Example structure:
 
 ```python
 from execution_context import Context
+
 def main(*, ctx: Context):
   # Use ctx to access Trigger or Steps data
   workflow_name = ctx["WorkflowName"]
   return f"Running workflow {workflow_name!r}"
 ```
 
-The ctx object provides access to all workflow context variables, similar to the `$` variable in JavaScript expressions. Use dictionary-style access (for example, `ctx["Steps"]["Step_name"]["variable"]`) to reference values from previous steps.
+The `ctx` object provides access to all workflow context variables, similar to the `$` variable in JavaScript expressions. Use dictionary-style access (for example, `ctx["Steps"]["Step_name"]["variable"]`) to reference values from previous steps.
 
 ## Add a Python function action
 
