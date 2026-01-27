@@ -11,11 +11,12 @@ The Python function action allows you to write custom Python scripts for data tr
 ## Python environment
 
 The Python function action runs in a restricted execution environment with the following characteristics:
-• Python version: 3.12.8
-• Available libraries: In addition to the Python standard library, the following packages are available:
-  – rsa (version 4.9)
-  – python-dateutil (version 2.8.2)
-• Network access: Restricted
+
+- Python version: 3.12.8
+- Available libraries: In addition to the Python standard library, the following packages are available:
+  - `rsa` (version 4.9)
+  - `python-dateutil` (version 2.8.2)
+- Network access: Restricted
 
 ## Script structure
 All Python scripts must define a main function that accepts a ctx parameter of type Context.
@@ -23,13 +24,14 @@ Example structure:
 
 ```python
 from execution_context import Context
+
 def main(*, ctx: Context):
   # Use ctx to access Trigger or Steps data
   workflow_name = ctx["WorkflowName"]
   return f"Running workflow {workflow_name!r}"
 ```
 
-The ctx object provides access to all workflow context variables, similar to the `$` variable in JavaScript expressions. Use dictionary-style access (for example, `ctx["Steps"]["Step_name"]["variable"]`) to reference values from previous steps.
+The `ctx` object provides access to all workflow context variables, similar to the `$` variable in JavaScript expressions. Use dictionary-style access (for example, `ctx["Steps"]["Step_name"]["variable"]`) to reference values from previous steps.
 
 ## Add a Python function action
 
