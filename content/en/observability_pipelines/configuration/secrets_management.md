@@ -169,7 +169,7 @@ secret:
 
 #### Create a JSON secrets file
 
-Create the file `/path/to/yaml/file.json` to store the identifiers and their secret values:
+Create the file `/path/to/json/file.json` to store the identifiers and their secret values:
 
 ```
 {
@@ -215,6 +215,6 @@ secret_identifier1: "<secret1>"
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[3]: https://docs.datadoghq.com/observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[3]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
 [4]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
 [5]: https://developer.hashicorp.com/

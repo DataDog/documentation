@@ -172,7 +172,7 @@ Follow the steps below if you want to use the one-line installation script to in
     DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
     ```
     You must replace the placeholders with the following values, if applicable:
-    - `<DATADOG_API_KEY>`: Your Datadog API.
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][1].
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<DATADOG_SITE>`: The [Datadog site][2].
@@ -457,7 +457,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
     sudo yum install observability-pipelines-worker
     ```
 1. If you are using:
-    - **Secrets Manager**: Add your API key, site (for example, `datadoghq.com` for US1), and pipelines ID to the Worker's environment file:
+    - **Secrets Manager**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
         ```shell
         sudo cat <<-EOF > /etc/default/observability-pipelines-worker
         DD_API_KEY=<API_KEY>
