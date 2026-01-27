@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Logs can contain information like IP addresses, user IDs, or service names that often need additional context. The Enrichment Table processor allows you to use lookup datasets to add context to your logs. The datasets can be stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the event. Using Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
+Logs can contain information like IP addresses, user IDs, or service names that often need additional context. With the Enrichment Table processor, you can add context to your logs, using lookup datasets stored in Datadog [Reference Tables][1], local files, or MaxMind GeoIP tables. The processor matches logs based on a specified key and appends information from your lookup file to the log. If you use Reference Tables, you can connect to and enrich logs with SaaS-based datasets directly stored in ServiceNow, Snowflake, S3, and more.
 
 ### When to use this processor
 
@@ -19,9 +19,9 @@ The following are use cases for enriching logs from integrations.
 
 #### Cloud object storage
 
-Cloud object storage services (Amazon S3, Azure Blob Storage, Google Cloud Storage) are scalable storage services used to store large volumes of structured and unstructured reference data.
+Cloud object storage services (Amazon S3, Azure Blob Storage, Google Cloud Storage) are scalable storage services for large volumes of structured and unstructured reference data.
 
-Use the Enrichment Table processor to enrich logs with externally maintained reference datasets, such as threat intelligence feeds, allow and deny lists, asset inventories, compliance mappings stored as CSVs, or other types of files that are updated regularly.
+Use the Enrichment Table processor to enrich logs with externally maintained reference datasets, such as threat intelligence feeds, allow- and denylists, asset inventories, compliance mappings stored as CSVs, or other types of files that are updated regularly.
 
 #### Databricks
 
@@ -33,20 +33,20 @@ Use the Enrichment Table processor to:
 
 #### Salesforce
 
-Salesforce is a customer Relationship Management (CRM) tool used to track and store sales opportunities, accounts, contacts, deals, and contracts.
+Salesforce is a Customer Relationship Management (CRM) tool used to track and store sales opportunities, accounts, contacts, deals, and contracts.
 
 Use the Enrichment Table processor to:
 - Attach customer and account information, such as the industry type, ARR, and owner, to operational logs for prioritizing incidents.
-- Enrich marketing or sales-focused dashboards with operational signals like latency spikes tied to customers.
+- Enrich marketing- or sales-focused dashboards with operational signals like latency spikes tied to customers.
 
-See [Enable ingestion of reference tables][2] from the Datadog's Salesforce integration on how to set up Reference Tables for Salesforce.
+See [Enable ingestion of reference tables][2] from Datadog's Salesforce integration for information on how to set up Reference Tables for Salesforce.
 
 #### ServiceNow (CMDB)
 
 ServiceNow is an IT service management platform with a Configuration Management Database (CMDB) that tracks infrastructure assets, applications, and dependencies.
 
 Use the Enrichment Table processor to:
-- Enrich logs with infrastructure ownership and dependency context such as, which team owns the host and the business unit the team supports.
+- Enrich logs with infrastructure ownership and dependency context, such as which team owns the host and the business unit that team supports.
 - Add information directly from CMDB records to telemetry.
 
 #### Snowflake
@@ -57,11 +57,11 @@ Use the Enrichment Table processor to:
 - Add customer metadata (account tier, region, SLA) to logs.
 - Join security events with user or asset attributes stored in Snowflake.
 
-See [Reference Tables][3] from the Datadog's Snowflake integration on how to set up Reference Tables for Snowflake.
+See [Reference Tables][3] from Datadog's Snowflake integration for information on how to set up Reference Tables for Snowflake.
 
 ## Setup
 
-To set up the enrichment table processor:
+To set up the Enrichment Table processor:
 
 1. Click **Add enrichment**.
 1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
@@ -95,7 +95,7 @@ To set up the enrichment table processor:
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value.
       - See the [Enrichment file example](#enrichment-file-example).
-  1. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the reference table.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
 
@@ -150,11 +150,11 @@ merchant_info {
 
 When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the reference table. The buffer has a maximum capacity of 100,000 logs. If that limit is reached, the buffer begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
-A circuit breaker opens if an authentication error occurs while connecting to the reference table or after a series of failed requests. This automatically flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely and causing the buffer to stop accepting new logs. The processor periodically retries requests and automatically closes the circuit to resume normal operations when a request succeeds.
+If an authentication error occurs while connecting to the reference table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely and causing the buffer to stop accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
 
-Errors that cause a log to be sent without enrichment can be viewed in the Worker logs and increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
+If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
 
-Datadog does not recommend using the processor on a log field with high cardinality (more than 5,000 possible values). The Reference Tables API is subject to rate limits and might deny Worke requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
+Datadog does not recommend using the processor on a log field with high cardinality (more than 5,000 possible values). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
 ### Metrics
 
@@ -166,11 +166,11 @@ To see metrics about your Enrichment Table processor, add these tags to the Cust
 - `component_id=<processor_id>`
 
 `pipelines.enrichment_rows_not_found_total`
-: This counter is incremented for each processed log that does not have a corresponding row in the table.
+: Number of processed logs that do not have corresponding rows in the table.
 
 `pipelines.component_errors_total`
-: This common metric is incremented by the processor for each log that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
-: The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was iether not found in the log, not a string, or the circuit breaker was opened.
+: Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
+: The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was either not found in the log, not a string, or an authentication error occurred.
 
 #### Buffer metrics (when buffering is enabled)
 
@@ -182,9 +182,9 @@ To see metrics for your Enrichment Table processor, add these tag to the buffer 
 
 {{% observability_pipelines/metrics/buffer %}}
 
-#### Reference table metrics
+#### Reference Table metrics
 
-To see metrics about the reference table used by your Enrichment Table processor, add these tags to the metrics below:
+To see metrics about the Reference Table used by your Enrichment Table processor, add these tags to the metrics below:
 
 - `component_type:enrichment_table`
 - `component_id:reference_table_<table-id>`
