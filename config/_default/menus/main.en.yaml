@@ -5807,21 +5807,26 @@ menu:
       url: /observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/
       parent: observability_pipelines_install_the_worker
       weight: 10302
+    - name: Secrets Management
+      url: observability_pipelines/configuration/secrets_management
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_secrets_management
+      weight: 104
     - name: Live Capture
       identifier: observability_pipelines/configuration/live_capture/
       url: /observability_pipelines/configuration/live_capture/
       parent: observability_pipelines_configuration
-      weight: 104
+      weight: 105
     - name: Update Existing Pipelines
       url: observability_pipelines/configuration/update_existing_pipelines
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
-      weight: 105
+      weight: 106
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 106
+      weight: 107
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
