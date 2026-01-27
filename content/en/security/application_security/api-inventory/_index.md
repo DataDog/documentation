@@ -134,11 +134,11 @@ Endpoint renaming requires Datadog Agent v7.71.0 or later and the following mini
 
 |Technology|Minimum tracer version|
 |----------|----------|
-|Node.js   | v6.0.0   |
-|PHP       | v1.17.0  |
-|Python    | v4.3.0   |
-|Golang    | v2.7.0   |
-|Ruby      | v2.28.0  |
+|Golang    | v2.4.0   |
+|Node.js   | v5.81.0  |
+|PHP       | v1.14.0  |
+|Python    | v3.17.0  |
+|Ruby      | v2.23.0  |
 
 #### How to enable renaming
 
