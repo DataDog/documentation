@@ -147,11 +147,12 @@ exporters:
     api:
       key: <DATADOG_API_KEY>
       site: <DATADOG_SITE>
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 processors:
   infraattributes:
     cardinality: 2
-  batch:
-    timeout: 10s
 connectors:
   datadog/connector:
     traces:
@@ -162,15 +163,15 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog]
     logs:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [datadog]
 {{< /code-block >}}
 {{% /collapse-content %}}
@@ -179,7 +180,7 @@ service:
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
 
-{{< img src="/opentelemetry/embedded_collector/components-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/components-3.jpg" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 
 ##### Datadog connector
 
@@ -201,6 +202,9 @@ exporters:
     api:
       key: <DATADOG_API_KEY>
       site: <DATADOG_SITE>
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 {{< /code-block >}}
 
 **Note**: If `key` is not specified or set to a secret, or if `site` is not specified, the system uses values from the core Agent configuration. By default, the core Agent sets site to `datadoghq.com` (US1).
