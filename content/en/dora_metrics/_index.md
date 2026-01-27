@@ -63,7 +63,7 @@ Click **View Deployments** to open a new tab with the list of deployment events.
 
 {{< img src="dora_metrics/deployments_list.png" alt="The Deployments Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
-Click **View Change Failures** to open a side panel with the list of deployments events marked as change failures.
+Click **View Change Failures** to open a side panel with the list of deployment events marked as change failures.
 
 {{< img src="dora_metrics/change_failures_list.png" alt="The Failures Breakdown displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 

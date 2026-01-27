@@ -38,7 +38,7 @@ DORA Metrics tracks and measures your software delivery performance using deploy
 
 To start using DORA Metrics, follow these steps:
 
-1. **[Configure a deployment data source](#configure-a-deployment-data-source)**: Choose how you want to send deployment events to Datadog. Either through APM Deployment Tracking or the DORA Metrics API/CLI.
+1. **[Configure a deployment data source](#configure-a-deployment-data-source)**: Choose how you want to send deployment events to Datadog: through APM Deployment Tracking or the DORA Metrics API/CLI.
 
 2. **[Enrich deployments with commit information](#enrich-deployments-with-commit-information)**: Add Git metadata (repository URL and commit SHA) to your deployment events and synchronize your repository to Datadog to enable change lead time calculations.
 
@@ -46,7 +46,7 @@ To start using DORA Metrics, follow these steps:
 
 4. **[(Optional) Set up incidents tracking](#optional-incidents-tracking)**: Integrate incident data to correlate detected change failures with production incidents, providing a complete view of how your deployments affect service health.
 
-Once configured, deployment events automatically populate your [DORA Metrics dashboard][1] with performance data filtered by team, service, environment, and [custom tags](#custom-tags).
+When configured, deployment events automatically populate your [DORA Metrics dashboard][1] with performance data filtered by team, service, environment, and [custom tags](#custom-tags).
 
 ### Limitations
 
@@ -71,7 +71,7 @@ DORA Metrics supports the following data sources for deployment events:
 - Your service has [metadata][16] defined in the Software Catalog.
 - Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
 
-For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Enrich deployments with Git information](#enrich-deployments-with-git-information).
+For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Enrich deployments with commit information](#enrich-deployments-with-commit-information).
 
 [15]: /tracing/services/deployment_tracking
 [16]: /software_catalog/adding_metadata
@@ -192,7 +192,7 @@ For deployments identified through APM Deployment Tracking, ensure your applicat
 
 - Enable Git tagging [in APM][101] or see the [Source Code Integration documentation][102]
 
-**Note**: For APM-tracked deployments, change lead time is computed from commit creation to when the commit is first seen in a new version. The `Deploy Time` metric is not available.
+**Note**: For APM-tracked deployments, change lead time is calculated from commit creation to when the commit is first observed in a new version. The `Deploy Time` metric is not available.
 
 [101]: https://app.datadoghq.com/source-code/setup/apm
 [102]: /integrations/guide/source-code-integration/?tab=go#tag-your-telemetry-with-git-information
