@@ -1,32 +1,14 @@
----
-title: Python Custom Instrumentation using the Datadog API
-aliases:
-    - /tracing/opentracing/python
-    - /tracing/manual_instrumentation/python
-    - /tracing/custom_instrumentation/python
-    - /tracing/setup_overview/custom_instrumentation/python
-    - /tracing/trace_collection/custom_instrumentation/python
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/python
-description: 'Manually instrument your Python application to send custom traces to Datadog.'
-code_lang: dd-api
-type: multi-code-lang
-code_lang_weight: 2
-further_reading:
-    - link: 'tracing/other_telemetry/connect_logs_and_traces'
-      tag: 'Documentation'
-      text: 'Connect your Logs and Traces together'
-    - link: 'tracing/glossary/'
-      tag: 'Documentation'
-      text: 'Explore your services, resources, and traces'
----
+<!--
+This partial contains Python custom instrumentation content for the Datadog API.
+-->
 
-If you have not read the setup instructions for automatic instrumentation, start with the [Python Setup Instructions][6]
+If you have not read the setup instructions for automatic instrumentation, start with the [Python Setup Instructions][6].
 
 If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
 
 You may also want to extend the functionality of the `ddtrace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
-## Creating spans
+## Creating spans {% #creating-spans-python %}
 
 The `ddtrace` library creates spans automatically with `ddtrace-run` for [many libraries and frameworks][1]. However, you may want to gain visibility into your own code and this is achieved by using spans.
 
@@ -38,36 +20,31 @@ def make_sandwich_request(request):
     sandwich = assemble_sandwich(ingredients)
 ```
 
-{{< tabs >}}
-{{% tab "Decorator" %}}
+### Using decorators {% #using-decorators-python %}
 
 `ddtrace` provides a decorator `tracer.wrap()` that can be used to decorate the functions of interest. This is useful if you would like to trace the function regardless of where it is being called from.
 
-
 ```python
-  from ddtrace import tracer
+from ddtrace import tracer
 
-  @tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
-  def get_ingredients():
-      # go to the pantry
-      # go to the fridge
-      # maybe go to the store
-      return
+@tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
+def get_ingredients():
+    # go to the pantry
+    # go to the fridge
+    # maybe go to the store
+    return
 
-  # You can provide more information to customize the span
-  @tracer.wrap("assemble_sandwich", service="my-sandwich-making-svc", resource="resource_name")
-  def assemble_sandwich(ingredients):
-      return
+# You can provide more information to customize the span
+@tracer.wrap("assemble_sandwich", service="my-sandwich-making-svc", resource="resource_name")
+def assemble_sandwich(ingredients):
+    return
 ```
 
-To learn more, read [API details for the decorator for `ddtrace.Tracer.wrap()`][1].
+To learn more, read [API details for the decorator for `ddtrace.Tracer.wrap()`][10].
 
+### Using context managers {% #using-context-managers-python %}
 
-[1]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
-{{% /tab %}}
-{{% tab "Context Manager" %}}
-
-To trace an arbitrary block of code, use the `ddtrace.Span` context manager as below, or view the [advanced usage documentation][1].
+To trace an arbitrary block of code, use the `ddtrace.Span` context manager as below, or view the [advanced usage documentation][11].
 
 ```python
 from ddtrace import tracer
@@ -89,17 +66,13 @@ def make_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-To learn more, read the full [API details for `ddtrace.Tracer()`][2]
+To learn more, read the full [API details for `ddtrace.Tracer()`][12].
 
-[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
-[2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
-{{% /tab %}}
-{{% tab "Manual" %}}
+### Manual span creation {% #manual-span-creation-python %}
 
-If the decorator and context manager methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish [spans][1] however you may require:
+If the decorator and context manager methods are still not enough to satisfy your tracing needs, a manual API is provided which allows you to start and finish [spans][13] however you may require:
 
 ```python
-
 def make_sandwich_request(request):
     span = tracer.trace("sandwich.create", resource="resource_name")
     ingredients = get_ingredients()
@@ -107,18 +80,9 @@ def make_sandwich_request(request):
     span.finish()  # remember to finish the span
 ```
 
-For more API details of the decorator, read the [`ddtrace.Tracer.trace` documentation][2] or the [`ddtrace.Span.finish` documentation][3].
+For more API details of the decorator, read the [`ddtrace.Tracer.trace` documentation][14] or the [`ddtrace.Span.finish` documentation][15].
 
-
-
-[1]: /tracing/glossary/#spans
-[2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
-[3]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
-{{% /tab %}}
-{{< /tabs >}}
-
-
-## Accessing active spans
+## Accessing active spans {% #accessing-active-spans-python %}
 
 The built-in instrumentation and your own custom instrumentation create spans around meaningful operations. You can access the active span in order to include meaningful data.
 
@@ -132,8 +96,7 @@ def make_sandwich_request(request):
         sandwich = assemble_sandwich(ingredients)
 ```
 
-{{< tabs >}}
-{{% tab "Current span" %}}
+### Current span {% #current-span-python %}
 
 ```python
 def get_ingredients():
@@ -142,9 +105,7 @@ def get_ingredients():
     # this span is my_span from make_sandwich_request above
 ```
 
-{{% /tab %}}
-
-{{% tab "Root span" %}}
+### Root span {% #root-span-python %}
 
 ```python
 def assemble_sandwich(ingredients):
@@ -153,14 +114,10 @@ def assemble_sandwich(ingredients):
         span = tracer.current_root_span()
         # this span is my_span from make_sandwich_request above
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
+## Adding tags {% #adding-tags-python %}
 
-## Adding tags
-
-{{< tabs >}}
-{{% tab "Locally" %}}
+### Adding tags locally {% #adding-tags-locally-python %}
 
 Tags can be added to a span using the `set_tag` method on a span:
 
@@ -172,8 +129,8 @@ def make_sandwich_request(request):
         ingredients = get_ingredients()
         span.set_tag("num_ingredients", len(ingredients))
 ```
-{{% /tab %}}
-{{% tab "Globally" %}}
+
+### Adding tags globally {% #adding-tags-globally-python %}
 
 Tags can be globally set on the tracer. These tags are be applied to every span that is created.
 
@@ -184,8 +141,8 @@ from myapp import __version__
 # This will be applied to every span
 tracer.set_tags({"version": __version__, "<TAG_KEY_2>": "<TAG_VALUE_2>"})
 ```
-{{% /tab %}}
-{{% tab "Errors" %}}
+
+### Setting errors on a span {% #setting-errors-on-a-span-python %}
 
 Exception information is captured and attached to a span if there is one active when the exception is raised.
 
@@ -223,15 +180,12 @@ except TypeError as e:
     # this sets the error type, marks the span as an error, and adds the traceback
     root_span.set_exc_info(exc_type, exc_val, exc_tb)
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
-
-## Propagating context with headers extraction and injection
+## Propagating context with headers extraction and injection {% #propagating-context-python %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][2] for information.
 
-### Baggage
+### Baggage {% #baggage-python %}
 
 Manipulating [Baggage][3] on a span:
 
@@ -261,13 +215,13 @@ with tracer.trace("example") as span:
     print(span.context.get_all_baggage_items()) # {}
 ```
 
-To see an example in action, see [flask-baggage on trace-examples][7]
+To see an example in action, see [flask-baggage on trace-examples][7].
 
-## ddtrace-api
+## ddtrace-api {% #ddtrace-api-python %}
 
-{{< callout btn_hidden="true" header="ddtrace-api is in Preview!">}}
-The <code>ddtrace-api</code> Python package is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
-<br><br>The following steps are only necessary if you want to experiment with the in Preview <code>ddtrace-api</code> package.{{< /callout >}}
+{% alert level="info" %}
+The `ddtrace-api` Python package is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
+{% /alert %}
 
 The [ddtrace-api package][8] provides a stable public API for Datadog APM's custom Python instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog.
 
@@ -305,10 +259,6 @@ To use `ddtrace-api`:
 
 See that package's [API definition][9] for the full list of supported API calls.
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /tracing/compatibility_requirements/python
 [2]: /tracing/trace_collection/trace_context_propagation/
 [3]: /tracing/trace_collection/trace_context_propagation/#baggage
@@ -318,3 +268,9 @@ See that package's [API definition][9] for the full list of supported API calls.
 [7]: https://github.com/DataDog/trace-examples/tree/master/python/flask-baggage
 [8]: https://pypi.org/project/ddtrace-api/
 [9]: https://datadoghq.dev/dd-trace-api-py/pdocs/ddtrace_api.html
+[10]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
+[11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
+[12]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
+[13]: /tracing/glossary/#spans
+[14]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
+[15]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish

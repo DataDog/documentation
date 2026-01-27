@@ -432,3 +432,15 @@ options:
   
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
+
+- label: OpenTelemetry
+  id: otel_api
+
+- label: Datadog
+  id: dd_api
+
+- label: C++
+  id: cpp
+
+- label: Elixir
+  id: elixir

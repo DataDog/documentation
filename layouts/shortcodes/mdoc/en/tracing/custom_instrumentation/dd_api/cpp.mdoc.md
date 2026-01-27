@@ -1,26 +1,12 @@
----
-title: C++ Custom Instrumentation using the Datadog API
-aliases:
-    - /tracing/manual_instrumentation/cpp
-    - /tracing/custom_instrumentation/cpp
-    - /tracing/setup_overview/custom_instrumentation/cpp
-    - /tracing/trace_collection/custom_instrumentation/cpp
-    - /tracing/trace_collection/custom_instrumentation/dd_libraries/cpp
-description: 'Manually instrument your C++ application to send custom traces to Datadog.'
-further_reading:
-    - link: 'tracing/connect_logs_and_traces'
-      tag: 'Documentation'
-      text: 'Connect your Logs and Traces together'
-    - link: 'tracing/visualization/'
-      tag: 'Documentation'
-      text: 'Explore your services, resources, and traces'
----
+<!--
+This partial contains C++ custom instrumentation content for the Datadog API.
+-->
 
-<div class="alert alert-info">
-If you have not yet read the setup instructions, start with the <a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ Setup Instructions</a>.
-</div>
+{% alert level="info" %}
+If you have not yet read the setup instructions, start with the [C++ Setup Instructions](/tracing/setup/cpp/).
+{% /alert %}
 
-## Creating spans
+## Creating spans {% #creating-spans-cpp %}
 
 To manually instrument a method:
 
@@ -42,17 +28,13 @@ To manually instrument a method:
   // For example, root_span finishes here.
 ```
 
-## Adding tags
+## Adding tags {% #adding-tags-cpp %}
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. Span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 Note that some Datadog tags are necessary for [unified service tagging][3].
 
-{{< tabs >}}
-
-{{% tab "Locally" %}}
-
-### Manually
+### Adding tags locally {% #adding-tags-locally-cpp %}
 
 Add tags directly to a span object by calling `Span::set_tag`. For example:
 
@@ -67,11 +49,9 @@ opts.tags.emplace("team", "apm-proxy");
 auto span2 = tracer.create_span(opts);
 ```
 
-{{% /tab %}}
+### Adding tags globally {% #adding-tags-globally-cpp %}
 
-{{% tab "Globally" %}}
-
-### Environment variable
+#### Environment variable {% #environment-variable-cpp %}
 
 To set tags across all your spans, set the `DD_TAGS` environment variable as a list of `key:value` pairs separated by commas.
 
@@ -79,7 +59,7 @@ To set tags across all your spans, set the `DD_TAGS` environment variable as a l
 export DD_TAGS=team:apm-proxy,key:value
 ```
 
-### Manually
+#### In code {% #in-code-cpp %}
 
 ```cpp
 datadog::tracing::TracerConfig tracer_config;
@@ -95,14 +75,9 @@ auto tracer = datadog::tracing::Tracer(*validated_config);
 auto span = tracer.create_span();
 ```
 
-{{% /tab %}}
+### Set errors on a span {% #set-errors-on-a-span-cpp %}
 
-{{< /tabs >}}
-
-### Set errors on a span
-
-To associate a span with an error, set one or more error-related tags on the
-span. For example:
+To associate a span with an error, set one or more error-related tags on the span. For example:
 
 ```cpp
 span.set_error(true);
@@ -120,28 +95,24 @@ span.set_error_stack("[EBADF] invalid file");
 span.set_error_type("errno");
 ```
 
-<div class="alert alert-info">
+{% alert level="info" %}
 Using any of the `Span::set_error_*` result in an underlying call to `Span::set_error(true)`.
-</div>
+{% /alert %}
 
-To unset an error on a span, set `Span::set_error` to `false`, which removes any  combination of `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message`.
+To unset an error on a span, set `Span::set_error` to `false`, which removes any combination of `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message`.
 
 ```cpp
 // Clear any error information associated with this span.
 span.set_error(false);
 ```
 
-## Propagating context with headers extraction and injection
+## Propagating context with headers extraction and injection {% #propagating-context-cpp %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][5] for information.
 
-## Resource filtering
+## Resource filtering {% #resource-filtering-cpp %}
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from sending traces and influencing trace metrics. Find information about this and other security and fine-tuning configuration on the [Security][6] page.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
