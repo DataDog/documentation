@@ -178,6 +178,14 @@ components:
       required: true
       schema:
         type: string
+    AttachmentIDPathParameter:
+      description: The ID of the attachment.
+      in: path
+      name: attachment_id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000001
+        type: string
     AttachmentIncludeQueryParameter:
       description: 'Resource to include in the response. Supported value: `last_modified_by_user`.'
       explode: false
@@ -5050,6 +5058,20 @@ components:
       type: string
       x-enum-varnames:
       - ARBITRARY_RULE
+    Argument:
+      properties:
+        description:
+          description: Base64-encoded argument description
+          example: YXJndW1lbnQgZGVzY3JpcHRpb24=
+          type: string
+        name:
+          description: Base64-encoded argument name
+          example: YXJndW1lbnRfbmFtZQ==
+          type: string
+      required:
+      - name
+      - description
+      type: object
     AsanaAccessToken:
       description: The definition of the `AsanaAccessToken` object.
       properties:
@@ -5326,6 +5348,8 @@ components:
       - project
       type: object
     Attachment:
+      description: An attachment response containing the attachment data and related
+        objects.
       properties:
         data:
           $ref: '#/components/schemas/AttachmentData'
@@ -5335,22 +5359,9 @@ components:
           type: array
       type: object
     AttachmentArray:
+      description: A list of incident attachments.
       properties:
         data:
-          example:
-          - attributes:
-              attachment:
-                documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
-                title: Postmortem IR-123
-              attachment_type: postmortem
-              modified: '2025-01-01T01:01:01.000000001Z'
-            id: 00000000-abcd-0002-0000-000000000000
-            relationships:
-              last_modified_by_user:
-                data:
-                  id: 00000000-0000-0000-cccc-000000000000
-                  type: users
-            type: incident_attachments
           items:
             $ref: '#/components/schemas/AttachmentData'
           type: array
@@ -5362,24 +5373,12 @@ components:
       - data
       type: object
     AttachmentData:
-      example:
-        attributes:
-          attachment:
-            documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
-            title: Postmortem IR-123
-          attachment_type: postmortem
-          modified: '2025-01-01T01:01:01.000000001Z'
-        id: 00000000-abcd-0002-0000-000000000000
-        relationships:
-          last_modified_by_user:
-            data:
-              id: 00000000-0000-0000-cccc-000000000000
-              type: users
-        type: incident_attachments
+      description: Attachment data from a response.
       properties:
         attributes:
           $ref: '#/components/schemas/AttachmentDataAttributes'
         id:
+          description: The unique identifier of the attachment.
           example: 00000000-abcd-0002-0000-000000000000
           type: string
         relationships:
@@ -5393,56 +5392,52 @@ components:
       - id
       type: object
     AttachmentDataAttributes:
+      description: The attachment's attributes.
       properties:
         attachment:
           $ref: '#/components/schemas/AttachmentDataAttributesAttachment'
         attachment_type:
           $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
         modified:
+          description: Timestamp when the attachment was last modified.
+          example: '2025-01-01T01:01:01.000000001Z'
           format: date-time
           type: string
       type: object
     AttachmentDataAttributesAttachment:
+      description: The attachment object.
       properties:
         documentUrl:
+          description: The URL of the attachment.
+          example: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
           type: string
         title:
+          description: The title of the attachment.
+          example: Postmortem IR-123
           type: string
       type: object
     AttachmentDataAttributesAttachmentType:
+      description: The type of the attachment.
       enum:
       - postmortem
       - link
+      example: postmortem
       type: string
       x-enum-varnames:
       - POSTMORTEM
       - LINK
     AttachmentDataRelationships:
+      description: The attachment's resource relationships.
       properties:
+        incident:
+          $ref: '#/components/schemas/RelationshipToIncident'
         last_modified_by_user:
-          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUser'
-      type: object
-    AttachmentDataRelationshipsLastModifiedByUser:
-      properties:
-        data:
-          $ref: '#/components/schemas/AttachmentDataRelationshipsLastModifiedByUserData'
-      required:
-      - data
-      type: object
-    AttachmentDataRelationshipsLastModifiedByUserData:
-      properties:
-        id:
-          example: ''
-          type: string
-        type:
-          $ref: '#/components/schemas/UserType'
-      required:
-      - type
-      - id
+          $ref: '#/components/schemas/RelationshipToUser'
       type: object
     AttachmentIncluded:
+      description: Objects related to an attachment.
       oneOf:
-      - $ref: '#/components/schemas/User140420082644000'
+      - $ref: '#/components/schemas/IncidentUserData'
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -7183,7 +7178,10 @@ components:
           type: string
         type:
           description: The type of the object, must be `budget`.
+          example: ''
           type: string
+      required:
+      - type
       type: object
     BudgetArray:
       description: An array of budgets.
@@ -7208,6 +7206,8 @@ components:
           items:
             $ref: '#/components/schemas/Budget'
           type: array
+      required:
+      - data
       type: object
     BudgetAttributes:
       description: The attributes of a budget.
@@ -7227,9 +7227,8 @@ components:
           format: int64
           type: integer
         entries:
-          description: The entries of the budget.
           items:
-            $ref: '#/components/schemas/BudgetEntry'
+            $ref: '#/components/schemas/BudgetWithEntriesDataAttributesEntriesItems'
           type: array
         metrics_query:
           description: The cost query used to track against the budget.
@@ -7264,25 +7263,89 @@ components:
           example: 00000000-0a0a-0a0a-aaa0-00000000000a
           type: string
       type: object
-    BudgetEntry:
-      description: The entry of a budget.
+    BudgetValidationRequest:
+      example:
+        data:
+          attributes:
+            created_at: 1738258683590
+            created_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+            end_month: 202502
+            entries:
+            - amount: 500
+              month: 202501
+              tag_filters:
+              - tag_key: service
+                tag_value: ec2
+            - amount: 500
+              month: 202502
+              tag_filters:
+              - tag_key: service
+                tag_value: ec2
+            metrics_query: aws.cost.amortized{service:ec2} by {service}
+            name: my budget
+            org_id: 123
+            start_month: 202501
+            total_amount: 1000
+            updated_at: 1738258683590
+            updated_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+          id: '1'
+          type: budget
       properties:
-        amount:
-          description: The `amount` of the budget entry.
-          example: 500
-          format: double
-          type: number
-        month:
-          description: The `month` of the budget entry.
-          example: 202501
-          format: int64
-          type: integer
-        tag_filters:
-          description: The `tag_filters` of the budget entry.
-          items:
-            $ref: '#/components/schemas/TagFilter'
-          type: array
+        data:
+          $ref: '#/components/schemas/BudgetValidationRequestData'
       type: object
+    BudgetValidationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BudgetWithEntriesDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/BudgetWithEntriesDataType'
+      required:
+      - type
+      type: object
+    BudgetValidationResponse:
+      example:
+        data:
+          attributes:
+            errors: []
+            valid: true
+          id: budget_validation
+          type: budget_validation
+      properties:
+        data:
+          $ref: '#/components/schemas/BudgetValidationResponseData'
+      type: object
+    BudgetValidationResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BudgetValidationResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/BudgetValidationResponseDataType'
+      required:
+      - type
+      type: object
+    BudgetValidationResponseDataAttributes:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        valid:
+          type: boolean
+      type: object
+    BudgetValidationResponseDataType:
+      default: budget_validation
+      description: Budget validation resource type.
+      enum:
+      - budget_validation
+      example: budget_validation
+      type: string
+      x-enum-varnames:
+      - BUDGET_VALIDATION
     BudgetWithEntries:
       description: The definition of the `BudgetWithEntries` object.
       properties:
@@ -7300,8 +7363,71 @@ components:
           type: string
         type:
           description: The type of the object, must be `budget`.
+          example: ''
           type: string
       type: object
+    BudgetWithEntriesDataAttributes:
+      properties:
+        created_at:
+          format: int64
+          type: integer
+        created_by:
+          type: string
+        end_month:
+          format: int64
+          type: integer
+        entries:
+          items:
+            $ref: '#/components/schemas/BudgetWithEntriesDataAttributesEntriesItems'
+          type: array
+        metrics_query:
+          type: string
+        name:
+          type: string
+        org_id:
+          format: int64
+          type: integer
+        start_month:
+          format: int64
+          type: integer
+        total_amount:
+          format: double
+          type: number
+        updated_at:
+          format: int64
+          type: integer
+        updated_by:
+          type: string
+      type: object
+    BudgetWithEntriesDataAttributesEntriesItems:
+      properties:
+        amount:
+          format: double
+          type: number
+        month:
+          format: int64
+          type: integer
+        tag_filters:
+          items:
+            $ref: '#/components/schemas/BudgetWithEntriesDataAttributesEntriesItemsTagFiltersItems'
+          type: array
+      type: object
+    BudgetWithEntriesDataAttributesEntriesItemsTagFiltersItems:
+      properties:
+        tag_key:
+          type: string
+        tag_value:
+          type: string
+      type: object
+    BudgetWithEntriesDataType:
+      default: budget
+      description: Budget resource type.
+      enum:
+      - budget
+      example: budget
+      type: string
+      x-enum-varnames:
+      - BUDGET
     BulkDeleteAppsDatastoreItemsRequest:
       description: Request to delete items from a datastore.
       properties:
@@ -12990,20 +13116,13 @@ components:
       - type
       type: object
     CreateAttachmentRequest:
-      example:
-        data:
-          attributes:
-            attachment:
-              documentUrl: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
-              title: Postmortem-IR-123
-            attachment_type: postmortem
-          id: 00000000-0000-0000-0000-000000000000
-          type: incident_attachments
+      description: Create request for an attachment.
       properties:
         data:
           $ref: '#/components/schemas/CreateAttachmentRequestData'
       type: object
     CreateAttachmentRequestData:
+      description: Attachment data for a create request.
       properties:
         attributes:
           $ref: '#/components/schemas/CreateAttachmentRequestDataAttributes'
@@ -13015,6 +13134,7 @@ components:
       - type
       type: object
     CreateAttachmentRequestDataAttributes:
+      description: The attributes for creating an attachment.
       properties:
         attachment:
           $ref: '#/components/schemas/CreateAttachmentRequestDataAttributesAttachment'
@@ -13022,10 +13142,15 @@ components:
           $ref: '#/components/schemas/AttachmentDataAttributesAttachmentType'
       type: object
     CreateAttachmentRequestDataAttributesAttachment:
+      description: The attachment object for creating an attachment.
       properties:
         documentUrl:
+          description: The URL of the attachment.
+          example: https://app.datadoghq.com/notebook/123/Postmortem-IR-123
           type: string
         title:
+          description: The title of the attachment.
+          example: Postmortem-IR-123
           type: string
       type: object
     CreateCaseRequestArray:
@@ -13085,6 +13210,123 @@ components:
       required:
       - findings
       - project
+      type: object
+    CreateComponentRequest:
+      example:
+        data:
+          attributes:
+            name: Metrics Intake
+            position: 0
+            type: component
+          relationships:
+            group:
+              data: null
+          type: components
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateComponentRequestData'
+      type: object
+    CreateComponentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    CreateComponentRequestDataAttributes:
+      description: The supported attributes for creating a component.
+      properties:
+        components:
+          description: If creating a component of type `group`, the components to
+            create within the group.
+          example:
+          - name: Login
+            position: 0
+            type: component
+          - name: Settings
+            position: 1
+            type: component
+          items:
+            $ref: '#/components/schemas/CreateComponentRequestDataAttributesComponentsItems'
+          type: array
+        name:
+          description: The name of the component.
+          example: Web App
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          example: 0
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+          description: The type of the component.
+          example: group
+      required:
+      - name
+      - position
+      - type
+      type: object
+    CreateComponentRequestDataAttributesComponentsItems:
+      properties:
+        name:
+          description: The name of the grouped component.
+          example: ''
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component relative
+            to the other components in the group.
+          example: 0
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      required:
+      - name
+      - position
+      - type
+      type: object
+    CreateComponentRequestDataAttributesType:
+      description: The type of the component.
+      enum:
+      - component
+      - group
+      example: component
+      type: string
+      x-enum-varnames:
+      - COMPONENT
+      - GROUP
+    CreateComponentRequestDataRelationships:
+      description: The supported relationships for creating a component.
+      properties:
+        group:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationshipsGroup'
+          description: The group to create the component within.
+      type: object
+    CreateComponentRequestDataRelationshipsGroup:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateComponentRequestDataRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    CreateComponentRequestDataRelationshipsGroupData:
+      nullable: true
+      properties:
+        id:
+          description: The ID of the group.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
       type: object
     CreateConnectionRequest:
       example:
@@ -13185,6 +13427,90 @@ components:
       required:
       - data
       type: object
+    CreateDegradationRequest:
+      example:
+        data:
+          attributes:
+            components_affected:
+            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+              status: degraded
+            description: Our API is experiencing elevated latency. We are investigating
+              the issue.
+            status: investigating
+            title: Elevated API Latency
+          type: degradations
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateDegradationRequestData'
+      type: object
+    CreateDegradationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    CreateDegradationRequestDataAttributes:
+      description: The supported attributes for creating a degradation.
+      properties:
+        components_affected:
+          description: The components affected by the degradation.
+          example:
+          - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+            status: degraded
+          items:
+            $ref: '#/components/schemas/CreateDegradationRequestDataAttributesComponentsAffectedItems'
+          type: array
+        description:
+          description: The description of the degradation.
+          example: Our API is experiencing elevated latency. We are investigating
+            the issue.
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+          description: The status of the degradation.
+          example: investigating
+        title:
+          description: The title of the degradation.
+          example: Elevated API Latency
+          type: string
+      required:
+      - components_affected
+      - status
+      - title
+      type: object
+    CreateDegradationRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    CreateDegradationRequestDataAttributesStatus:
+      description: The status of the degradation.
+      enum:
+      - investigating
+      - identified
+      - monitoring
+      - resolved
+      example: investigating
+      type: string
+      x-enum-varnames:
+      - INVESTIGATING
+      - IDENTIFIED
+      - MONITORING
+      - RESOLVED
     CreateDeploymentGateParams:
       description: Parameters for creating a deployment gate.
       properties:
@@ -13333,7 +13659,8 @@ components:
       description: Attributes of the Jira issue to create.
       properties:
         assignee_id:
-          description: Unique identifier of the user assigned to the Jira issue.
+          description: Unique identifier of the Datadog user assigned to the Jira
+            issue.
           example: f315bdaf-9ee7-4808-a9c1-99c15bf0f4d0
           type: string
         description:
@@ -13354,8 +13681,9 @@ components:
           type: object
         priority:
           $ref: '#/components/schemas/CasePriority'
-          description: Priority of the Jira issue. If not provided, the priority will
-            be automatically set to "NOT_DEFINED".
+          description: Datadog case priority mapped to the Jira issue priority. If
+            not provided, the priority will be automatically set to "NOT_DEFINED".
+            To configure the mapping, see [Bidirectional ticket syncing with Jira](https://docs.datadoghq.com/security/ticketing_integrations/#bidirectional-ticket-syncing-with-jira).
           example: P4
         title:
           description: Title of the Jira issue. If not provided, the title will be
@@ -13838,6 +14166,186 @@ components:
       type: string
       x-enum-varnames:
       - CREATE_RULESET
+    CreateStatusPageRequest:
+      example:
+        data:
+          attributes:
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            components:
+            - name: API
+              position: 0
+              type: component
+            - components:
+              - name: Login
+                position: 0
+                type: component
+              - name: Settings
+                position: 1
+                type: component
+              name: Web App
+              position: 1
+              type: group
+            - name: Webhooks
+              position: 2
+              type: component
+            domain_prefix: status-page-us1
+            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+            enabled: true
+            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            name: Status Page US1
+            subscriptions_enabled: true
+            type: public
+            visualization_type: bars_and_uptime_percentage
+          type: status_pages
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateStatusPageRequestData'
+      type: object
+    CreateStatusPageRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    CreateStatusPageRequestDataAttributes:
+      description: The supported attributes for creating a status page.
+      properties:
+        company_logo:
+          description: The base64-encoded image data displayed on the status page.
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          type: string
+        components:
+          description: The components displayed on the status page.
+          example:
+          - components:
+            - name: Login
+              position: 0
+              type: component
+            - name: Settings
+              position: 1
+              type: component
+            name: Web App
+            position: 0
+            type: group
+          - name: API
+            position: 1
+            type: component
+          - name: Webhooks
+            position: 2
+            type: component
+          items:
+            $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItems'
+          type: array
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          example: status-page-us1
+          type: string
+        email_header_image:
+          description: Base64-encoded image data included in email notifications sent
+            to status page subscribers.
+          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          example: true
+          type: boolean
+        favicon:
+          description: Base64-encoded image data displayed in the browser tab.
+          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          type: string
+        name:
+          description: The name of the status page.
+          example: Status Page US1
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          example: true
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+          example: public
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+          example: bars_and_uptime_percentage
+      required:
+      - domain_prefix
+      - enabled
+      - name
+      - type
+      - visualization_type
+      type: object
+    CreateStatusPageRequestDataAttributesComponentsItems:
+      properties:
+        components:
+          description: If creating a component of type `group`, the components to
+            create within the group.
+          items:
+            $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          description: The ID of the component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    CreateStatusPageRequestDataAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          description: The ID of the grouped component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the grouped component.
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component. Relative
+            to the other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    CreateStatusPageRequestDataAttributesType:
+      description: The type of the status page controlling how the status page is
+        accessed.
+      enum:
+      - public
+      - internal
+      example: public
+      type: string
+      x-enum-varnames:
+      - PUBLIC
+      - INTERNAL
+    CreateStatusPageRequestDataAttributesVisualizationType:
+      description: The visualization type of the status page.
+      enum:
+      - bars_and_uptime_percentage
+      - bars_only
+      - component_name_only
+      example: bars_and_uptime_percentage
+      type: string
+      x-enum-varnames:
+      - BARS_AND_UPTIME_PERCENTAGE
+      - BARS_ONLY
+      - COMPONENT_NAME_ONLY
     CreateTableRequest:
       description: Request body for creating a new reference table from a local file
         or cloud storage.
@@ -15786,6 +16294,482 @@ components:
       - version
       - name
       type: object
+    CustomRule:
+      properties:
+        created_at:
+          description: Creation timestamp
+          example: '2026-01-09T13:00:57.473141Z'
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        last_revision:
+          $ref: '#/components/schemas/CustomRuleRevision'
+          description: Most recent revision
+          nullable: true
+        name:
+          description: Rule name
+          example: my-rule
+          type: string
+      required:
+      - name
+      - created_at
+      - created_by
+      - last_revision
+      type: object
+    CustomRuleDataType:
+      description: Resource type
+      enum:
+      - custom_rule
+      example: custom_rule
+      type: string
+      x-enum-varnames:
+      - CUSTOM_RULE
+    CustomRuleRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleRequestData'
+      type: object
+    CustomRuleRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRuleRequestDataAttributes'
+        id:
+          description: Rule identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleDataType'
+      type: object
+    CustomRuleRequestDataAttributes:
+      properties:
+        name:
+          description: Rule name
+          type: string
+      type: object
+    CustomRuleResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleResponseData'
+      required:
+      - data
+      type: object
+    CustomRuleResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRule'
+        id:
+          description: Rule identifier
+          example: my-rule
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CustomRuleRevision:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributes'
+        id:
+          description: Revision identifier
+          example: revision-123
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleRevisionDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CustomRuleRevisionAttributes:
+      properties:
+        arguments:
+          description: Rule arguments
+          items:
+            $ref: '#/components/schemas/Argument'
+          type: array
+        category:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
+        checksum:
+          description: Code checksum
+          example: 8a66c4e4e631099ad71be3c1ea3ea8fc2d57193e56db2c296e2dd8a508b26b99
+          type: string
+        code:
+          description: Rule code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        created_at:
+          description: Creation timestamp
+          example: '2026-01-09T13:00:57.473141Z'
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        creation_message:
+          description: Revision creation message
+          example: Initial revision
+          type: string
+        cve:
+          description: Associated CVE
+          example: CVE-2024-1234
+          nullable: true
+          type: string
+        cwe:
+          description: Associated CWE
+          example: CWE-79
+          nullable: true
+          type: string
+        description:
+          description: Full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        documentation_url:
+          description: Documentation URL
+          example: https://docs.example.com/rules/my-rule
+          nullable: true
+          type: string
+        is_published:
+          description: Whether the revision is published
+          example: false
+          type: boolean
+        is_testing:
+          description: Whether this is a testing revision
+          example: false
+          type: boolean
+        language:
+          $ref: '#/components/schemas/Language'
+        severity:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesSeverity'
+        short_description:
+          description: Short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+        should_use_ai_fix:
+          description: Whether to use AI for fixes
+          example: false
+          type: boolean
+        tags:
+          description: Rule tags
+          example:
+          - security
+          - custom
+          items:
+            type: string
+          type: array
+        tests:
+          description: Rule tests
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionTest'
+          type: array
+        tree_sitter_query:
+          description: Tree-sitter query
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+      required:
+      - creation_message
+      - short_description
+      - description
+      - code
+      - checksum
+      - language
+      - tree_sitter_query
+      - created_at
+      - created_by
+      - severity
+      - category
+      - cve
+      - cwe
+      - arguments
+      - tests
+      - tags
+      - is_published
+      - should_use_ai_fix
+      - documentation_url
+      - is_testing
+      type: object
+    CustomRuleRevisionAttributesCategory:
+      description: Rule category
+      enum:
+      - SECURITY
+      - BEST_PRACTICES
+      - CODE_STYLE
+      - ERROR_PRONE
+      - PERFORMANCE
+      example: SECURITY
+      type: string
+      x-enum-varnames:
+      - SECURITY
+      - BEST_PRACTICES
+      - CODE_STYLE
+      - ERROR_PRONE
+      - PERFORMANCE
+    CustomRuleRevisionAttributesSeverity:
+      description: Rule severity
+      enum:
+      - ERROR
+      - WARNING
+      - NOTICE
+      example: ERROR
+      type: string
+      x-enum-varnames:
+      - ERROR
+      - WARNING
+      - NOTICE
+    CustomRuleRevisionDataType:
+      description: Resource type
+      enum:
+      - custom_rule_revision
+      example: custom_rule_revision
+      type: string
+      x-enum-varnames:
+      - CUSTOM_RULE_REVISION
+    CustomRuleRevisionInputAttributes:
+      properties:
+        arguments:
+          description: Rule arguments
+          items:
+            $ref: '#/components/schemas/Argument'
+          type: array
+        category:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesCategory'
+        code:
+          description: Rule code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        creation_message:
+          description: Revision creation message
+          example: Initial revision
+          type: string
+        cve:
+          description: Associated CVE
+          example: CVE-2024-1234
+          nullable: true
+          type: string
+        cwe:
+          description: Associated CWE
+          example: CWE-79
+          nullable: true
+          type: string
+        description:
+          description: Full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        documentation_url:
+          description: Documentation URL
+          example: https://docs.example.com/rules/my-rule
+          nullable: true
+          type: string
+        is_published:
+          description: Whether the revision is published
+          example: false
+          type: boolean
+        is_testing:
+          description: Whether this is a testing revision
+          example: false
+          type: boolean
+        language:
+          $ref: '#/components/schemas/Language'
+        severity:
+          $ref: '#/components/schemas/CustomRuleRevisionAttributesSeverity'
+        short_description:
+          description: Short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+        should_use_ai_fix:
+          description: Whether to use AI for fixes
+          example: false
+          type: boolean
+        tags:
+          description: Rule tags
+          example:
+          - security
+          - custom
+          items:
+            type: string
+          type: array
+        tests:
+          description: Rule tests
+          items:
+            $ref: '#/components/schemas/CustomRuleRevisionTest'
+          type: array
+        tree_sitter_query:
+          description: Tree-sitter query
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+      required:
+      - creation_message
+      - short_description
+      - description
+      - code
+      - language
+      - tree_sitter_query
+      - severity
+      - category
+      - cve
+      - cwe
+      - arguments
+      - tests
+      - tags
+      - is_published
+      - should_use_ai_fix
+      - documentation_url
+      - is_testing
+      type: object
+    CustomRuleRevisionRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleRevisionRequestData'
+      type: object
+    CustomRuleRevisionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRuleRevisionInputAttributes'
+        id:
+          description: Revision identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRuleRevisionDataType'
+      type: object
+    CustomRuleRevisionResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleRevision'
+      required:
+      - data
+      type: object
+    CustomRuleRevisionTest:
+      properties:
+        annotation_count:
+          description: Expected violation count
+          example: 1
+          format: int64
+          type: integer
+        code:
+          description: Test code
+          example: Y29uZHVjdG9yOgogICAgLSBkZXBsb3lfb25seTogdHJ1ZQ==
+          type: string
+        filename:
+          description: Test filename
+          example: test.yaml
+          type: string
+      required:
+      - filename
+      - code
+      - annotation_count
+      type: object
+    CustomRuleRevisionsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CustomRuleRevision'
+          type: array
+      type: object
+    CustomRuleset:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRulesetAttributes'
+        id:
+          description: Ruleset identifier
+          example: my-ruleset
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRulesetDataType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CustomRulesetAttributes:
+      properties:
+        created_at:
+          description: Creation timestamp
+          example: '2026-01-09T13:00:57.473141Z'
+          format: date-time
+          type: string
+        created_by:
+          description: Creator identifier
+          example: foobarbaz
+          type: string
+        description:
+          description: Base64-encoded full description
+          example: bG9uZyBkZXNjcmlwdGlvbg==
+          type: string
+        name:
+          description: Ruleset name
+          example: my-ruleset
+          type: string
+        rules:
+          description: Rules in the ruleset
+          items:
+            $ref: '#/components/schemas/CustomRule'
+          nullable: true
+          type: array
+        short_description:
+          description: Base64-encoded short description
+          example: c2hvcnQgZGVzY3JpcHRpb24=
+          type: string
+      required:
+      - name
+      - short_description
+      - description
+      - created_at
+      - created_by
+      - rules
+      type: object
+    CustomRulesetDataType:
+      description: Resource type
+      enum:
+      - custom_ruleset
+      example: custom_ruleset
+      type: string
+      x-enum-varnames:
+      - CUSTOM_RULESET
+    CustomRulesetRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRulesetRequestData'
+      type: object
+    CustomRulesetRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CustomRulesetRequestDataAttributes'
+        id:
+          description: Ruleset identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/CustomRulesetDataType'
+      type: object
+    CustomRulesetRequestDataAttributes:
+      properties:
+        description:
+          description: Base64-encoded full description
+          type: string
+        name:
+          description: Ruleset name
+          type: string
+        rules:
+          description: Rules in the ruleset
+          items:
+            $ref: '#/components/schemas/CustomRule'
+          nullable: true
+          type: array
+        short_description:
+          description: Base64-encoded short description
+          type: string
+      type: object
+    CustomRulesetResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomRuleset'
+      required:
+      - data
+      type: object
     DORACustomTags:
       description: A list of user-defined tags. The tags must follow the `key:value`
         pattern. Up to 100 may be added per event.
@@ -17071,6 +18055,217 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    Degradation:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationData'
+        included:
+          description: The included related resources of a degradation. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/DegradationArrayIncluded'
+          type: array
+      type: object
+    DegradationArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DegradationData'
+          type: array
+        included:
+          description: The included related resources of a degradation. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/DegradationArrayIncluded'
+          type: array
+        meta:
+          $ref: '#/components/schemas/StatusPagesResponseMeta'
+      required:
+      - data
+      type: object
+    DegradationArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+      - $ref: '#/components/schemas/StatusPageAsIncluded'
+    DegradationData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DegradationDataAttributes'
+        id:
+          description: The ID of the degradation.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/DegradationDataRelationships'
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    DegradationDataAttributes:
+      description: The attributes of a degradation.
+      properties:
+        components_affected:
+          description: Components affected by the degradation.
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesComponentsAffectedItems'
+          type: array
+        created_at:
+          description: Timestamp of when the degradation was created.
+          format: date-time
+          type: string
+        description:
+          description: Description of the degradation.
+          type: string
+        modified_at:
+          description: Timestamp of when the degradation was last modified.
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+        title:
+          description: Title of the degradation.
+          type: string
+        updates:
+          description: Past updates made to the degradation.
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesUpdatesItems'
+          type: array
+      type: object
+    DegradationDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    DegradationDataAttributesUpdatesItems:
+      properties:
+        components_affected:
+          description: The components affected at the time of the update.
+          items:
+            $ref: '#/components/schemas/DegradationDataAttributesUpdatesItemsComponentsAffectedItems'
+          type: array
+        created_at:
+          description: Timestamp of when the update was created.
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description of the update.
+          type: string
+        id:
+          description: Identifier of the update.
+          format: uuid
+          readOnly: true
+          type: string
+        modified_at:
+          description: Timestamp of when the update was last modified.
+          format: date-time
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/CreateDegradationRequestDataAttributesStatus'
+      type: object
+    DegradationDataAttributesUpdatesItemsComponentsAffectedItems:
+      properties:
+        id:
+          description: Identifier of the component affected at the time of the update.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          description: The name of the component affected at the time of the update.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+          description: The status of the component affected at the time of the update.
+      required:
+      - id
+      - status
+      type: object
+    DegradationDataRelationships:
+      description: The relationships of a degradation.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/DegradationDataRelationshipsCreatedByUser'
+          description: The Datadog user who created the degradation.
+        last_modified_by_user:
+          $ref: '#/components/schemas/DegradationDataRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the degradation.
+        status_page:
+          $ref: '#/components/schemas/DegradationDataRelationshipsStatusPage'
+          description: The status page the degradation belongs to.
+      type: object
+    DegradationDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the degradation.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    DegradationDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the degradation.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    DegradationDataRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/DegradationDataRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    DegradationDataRelationshipsStatusPageData:
+      properties:
+        id:
+          description: The ID of the status page.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
     DeleteAppResponse:
       description: The response object after an app is successfully deleted.
       properties:
@@ -25437,6 +26632,82 @@ components:
       required:
       - type
       type: object
+    GlobalIncidentSettingsAttributesRequest:
+      description: Global incident settings attributes
+      properties:
+        analytics_dashboard_id:
+          description: The analytics dashboard ID
+          example: abc-123-def
+          type: string
+      type: object
+    GlobalIncidentSettingsAttributesResponse:
+      description: Global incident settings attributes
+      properties:
+        analytics_dashboard_id:
+          description: The analytics dashboard ID
+          example: abc-123-def
+          type: string
+        created:
+          description: Timestamp when the settings were created
+          example: '2026-01-13T17:15:56.557278191Z'
+          format: date-time
+          type: string
+        modified:
+          description: Timestamp when the settings were last modified
+          example: '2026-01-13T17:15:56.557278191Z'
+          format: date-time
+          type: string
+      required:
+      - created
+      - modified
+      - analytics_dashboard_id
+      type: object
+    GlobalIncidentSettingsDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalIncidentSettingsAttributesRequest'
+        type:
+          $ref: '#/components/schemas/GlobalIncidentSettingsType'
+      required:
+      - type
+      type: object
+    GlobalIncidentSettingsDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/GlobalIncidentSettingsAttributesResponse'
+        id:
+          description: The unique identifier for the global incident settings
+          example: f8b9a915-ed85-48b4-9071-ceba567a3db5
+          type: string
+        type:
+          $ref: '#/components/schemas/GlobalIncidentSettingsType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    GlobalIncidentSettingsRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalIncidentSettingsDataRequest'
+      required:
+      - data
+      type: object
+    GlobalIncidentSettingsResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/GlobalIncidentSettingsDataResponse'
+      required:
+      - data
+      type: object
+    GlobalIncidentSettingsType:
+      description: Global incident settings resource type
+      enum:
+      - incidents_global_settings
+      example: incidents_global_settings
+      type: string
+      x-enum-varnames:
+      - INCIDENTS_GLOBAL_SETTINGS
     GlobalVariableData:
       description: Synthetics global variable data. Wrapper around the global variable
         object.
@@ -26465,6 +27736,184 @@ components:
       - TEXTARRAY
       - METRICTAG
       - AUTOCOMPLETE
+    IncidentHandleAttributesFields:
+      description: Dynamic fields associated with the handle
+      example:
+        severity:
+        - SEV-1
+      properties:
+        severity:
+          description: Severity levels associated with the handle
+          items:
+            $ref: '#/components/schemas/IncidentHandleAttributesFieldsSeverity'
+          type: array
+      type: object
+    IncidentHandleAttributesFieldsSeverity:
+      example: SEV-1
+      type: string
+    IncidentHandleAttributesRequest:
+      description: Incident handle attributes for requests
+      properties:
+        fields:
+          $ref: '#/components/schemas/IncidentHandleAttributesFields'
+        name:
+          description: The handle name
+          example: '@incident-sev-1'
+          type: string
+      required:
+      - name
+      type: object
+    IncidentHandleAttributesResponse:
+      description: Incident handle attributes for responses
+      properties:
+        created_at:
+          description: Timestamp when the handle was created
+          example: '2026-01-13T17:15:52.726905Z'
+          format: date-time
+          type: string
+        fields:
+          $ref: '#/components/schemas/IncidentHandleAttributesFields'
+        modified_at:
+          description: Timestamp when the handle was last modified
+          example: '2026-01-13T17:15:52.726905Z'
+          format: date-time
+          type: string
+        name:
+          description: The handle name
+          example: '@incident-sev-1'
+          type: string
+      required:
+      - name
+      - fields
+      - created_at
+      - modified_at
+      type: object
+    IncidentHandleDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentHandleAttributesRequest'
+        id:
+          description: The ID of the incident handle (required for PUT requests)
+          example: b2494081-cdf0-4205-b366-4e1dd4fdf0bf
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentHandleRelationshipsRequest'
+        type:
+          $ref: '#/components/schemas/IncidentHandleType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentHandleDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentHandleAttributesResponse'
+        id:
+          description: The ID of the incident handle
+          example: 12ceee6d-a7c0-4407-bc54-30e54140d7f0
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentHandleRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentHandleType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IncidentHandleIncludedItemResponse:
+      oneOf:
+      - $ref: '#/components/schemas/IncidentUserData'
+      - $ref: '#/components/schemas/IncidentTypeObject'
+    IncidentHandleIncludedResponse:
+      description: Included related resources
+      items:
+        $ref: '#/components/schemas/IncidentHandleIncludedItemResponse'
+      type: array
+    IncidentHandleRelationship:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandleRelationshipData'
+      required:
+      - data
+      type: object
+    IncidentHandleRelationshipData:
+      properties:
+        id:
+          description: The ID of the related resource
+          example: f7b538b1-ed7c-4e84-82de-fdf84a539d40
+          type: string
+        type:
+          description: The type of the related resource
+          example: incident_types
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    IncidentHandleRelationships:
+      nullable: true
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        created_by_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        incident_type:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        last_modified_by_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+      required:
+      - incident_type
+      - created_by_user
+      - last_modified_by_user
+      type: object
+    IncidentHandleRelationshipsRequest:
+      nullable: true
+      properties:
+        commander_user:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+        incident_type:
+          $ref: '#/components/schemas/IncidentHandleRelationship'
+      required:
+      - incident_type
+      type: object
+    IncidentHandleRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandleDataRequest'
+      required:
+      - data
+      type: object
+    IncidentHandleResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandleDataResponse'
+        included:
+          $ref: '#/components/schemas/IncidentHandleIncludedResponse'
+      required:
+      - data
+      type: object
+    IncidentHandleType:
+      description: Incident handle resource type
+      enum:
+      - incidents_handles
+      example: incidents_handles
+      type: string
+      x-enum-varnames:
+      - INCIDENTS_HANDLES
+    IncidentHandlesResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentHandlesResponseData'
+        included:
+          $ref: '#/components/schemas/IncidentHandleIncludedResponse'
+      required:
+      - data
+      type: object
+    IncidentHandlesResponseData:
+      items:
+        $ref: '#/components/schemas/IncidentHandleDataResponse'
+      type: array
     IncidentImpactAttributes:
       description: The incident impact's attributes.
       properties:
@@ -30529,6 +31978,34 @@ components:
           format: int64
           type: integer
       type: object
+    Language:
+      description: Programming language
+      enum:
+      - PYTHON
+      - JAVASCRIPT
+      - TYPESCRIPT
+      - JAVA
+      - GO
+      - YAML
+      - RUBY
+      - CSHARP
+      - PHP
+      - KOTLIN
+      - SWIFT
+      example: PYTHON
+      type: string
+      x-enum-varnames:
+      - PYTHON
+      - JAVASCRIPT
+      - TYPESCRIPT
+      - JAVA
+      - GO
+      - YAML
+      - RUBY
+      - CSHARP
+      - PHP
+      - KOTLIN
+      - SWIFT
     LaunchDarklyAPIKey:
       description: The definition of the `LaunchDarklyAPIKey` object.
       properties:
@@ -38222,12 +39699,14 @@ components:
       - none
       - basic
       - bearer
+      - custom
       example: basic
       type: string
       x-enum-varnames:
       - NONE
       - BASIC
       - BEARER
+      - CUSTOM
     ObservabilityPipelineHttpClientSourceType:
       default: http_client
       description: The source type. The value should always be `http_client`.
@@ -38790,6 +40269,8 @@ components:
           description: The index to write logs to.
           example: logs-index
           type: string
+        data_stream:
+          $ref: '#/components/schemas/ObservabilityPipelineOpenSearchDestinationDataStream'
         id:
           description: The unique identifier for this component.
           example: opensearch-destination
@@ -38811,6 +40292,23 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineOpenSearchDestinationDataStream:
+      description: Configuration options for writing to OpenSearch Data Streams instead
+        of a fixed index.
+      properties:
+        dataset:
+          description: The data stream dataset for your logs. This groups logs by
+            their source or application.
+          type: string
+        dtype:
+          description: The data stream type for your logs. This determines how logs
+            are categorized within the data stream.
+          type: string
+        namespace:
+          description: The data stream namespace for your logs. This separates logs
+            into different environments or domains.
+          type: string
+      type: object
     ObservabilityPipelineOpenSearchDestinationType:
       default: opensearch
       description: The destination type. The value should always be `opensearch`.
@@ -41189,6 +42687,24 @@ components:
       - type
       - method
       type: object
+    OnCallTrigger:
+      description: Trigger a workflow from an On-Call Page or On-Call Handover. For
+        automatic triggering a handle must be configured and the workflow must be
+        published.
+      properties:
+        rateLimit:
+          $ref: '#/components/schemas/TriggerRateLimit'
+      type: object
+    OnCallTriggerWrapper:
+      description: Schema for an On-Call-based trigger.
+      properties:
+        onCallTrigger:
+          $ref: '#/components/schemas/OnCallTrigger'
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - onCallTrigger
+      type: object
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -42286,22 +43802,19 @@ components:
           type: array
       type: object
     PatchAttachmentRequest:
-      example:
-        data:
-          attributes:
-            attachment:
-              documentUrl: https://app.datadoghq.com/notebook/124/Postmortem-IR-124
-              title: Postmortem-IR-124
-          type: incident_attachments
+      description: Request to update an attachment.
       properties:
         data:
           $ref: '#/components/schemas/PatchAttachmentRequestData'
       type: object
     PatchAttachmentRequestData:
+      description: Attachment data for an update request.
       properties:
         attributes:
           $ref: '#/components/schemas/PatchAttachmentRequestDataAttributes'
         id:
+          description: The unique identifier of the attachment.
+          example: 00000000-abcd-0002-0000-000000000000
           type: string
         type:
           $ref: '#/components/schemas/IncidentAttachmentType'
@@ -42309,17 +43822,153 @@ components:
       - type
       type: object
     PatchAttachmentRequestDataAttributes:
+      description: The attributes for updating an attachment.
       properties:
         attachment:
           $ref: '#/components/schemas/PatchAttachmentRequestDataAttributesAttachment'
       type: object
     PatchAttachmentRequestDataAttributesAttachment:
+      description: The updated attachment object.
       properties:
         documentUrl:
+          description: The updated URL for the attachment.
+          example: https://app.datadoghq.com/notebook/124/Postmortem-IR-124
           type: string
         title:
+          description: The updated title for the attachment.
+          example: Postmortem-IR-124
           type: string
       type: object
+    PatchComponentRequest:
+      example:
+        data:
+          attributes:
+            name: Metrics Intake Service
+            position: 4
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: components
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchComponentRequestData'
+      type: object
+    PatchComponentRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchComponentRequestDataAttributes'
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    PatchComponentRequestDataAttributes:
+      description: The supported attributes for updating a component.
+      properties:
+        name:
+          description: The name of the component.
+          example: Web App
+          type: string
+        position:
+          description: The position of the component. If the component belongs to
+            a group, the position is relative to the other components in the group.
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    PatchDegradationRequest:
+      example:
+        data:
+          attributes:
+            components_affected:
+            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+              status: operational
+            description: We've deployed a fix and latency has returned to normal.
+              This issue has been resolved.
+            status: resolved
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: degradations
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchDegradationRequestData'
+      type: object
+    PatchDegradationRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchDegradationRequestDataAttributes'
+        id:
+          description: The ID of the degradation.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/PatchDegradationRequestDataType'
+      required:
+      - type
+      type: object
+    PatchDegradationRequestDataAttributes:
+      description: The supported attributes for updating a degradation.
+      properties:
+        components_affected:
+          description: The components affected by the degradation.
+          example:
+          - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+            status: operational
+          items:
+            $ref: '#/components/schemas/PatchDegradationRequestDataAttributesComponentsAffectedItems'
+          type: array
+        description:
+          description: The description of the degradation.
+          example: We've deployed a fix and latency has returned to normal. This issue
+            has been resolved.
+          type: string
+        status:
+          $ref: '#/components/schemas/PatchDegradationRequestDataAttributesStatus'
+          example: resolved
+        title:
+          description: The title of the degradation.
+          example: Elevated API Latency
+          type: string
+      type: object
+    PatchDegradationRequestDataAttributesComponentsAffectedItems:
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: ''
+          format: uuid
+          type: string
+        name:
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+      required:
+      - id
+      - status
+      type: object
+    PatchDegradationRequestDataAttributesStatus:
+      description: The status of the degradation.
+      enum:
+      - investigating
+      - identified
+      - monitoring
+      - resolved
+      type: string
+      x-enum-varnames:
+      - INVESTIGATING
+      - IDENTIFIED
+      - MONITORING
+      - RESOLVED
+    PatchDegradationRequestDataType:
+      default: degradations
+      description: Degradations resource type.
+      enum:
+      - degradations
+      example: degradations
+      type: string
+      x-enum-varnames:
+      - DEGRADATIONS
     PatchIncidentNotificationTemplateRequest:
       description: Update request for a notification template.
       properties:
@@ -42365,6 +44014,78 @@ components:
           $ref: '#/components/schemas/TimeAggregation'
         version:
           $ref: '#/components/schemas/Version'
+      type: object
+    PatchStatusPageRequest:
+      example:
+        data:
+          attributes:
+            company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+            domain_prefix: status-page-us1-east
+            email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+            enabled: false
+            favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+            name: Status Page US1 East
+            subscriptions_enabled: false
+            type: internal
+            visualization_type: bars_only
+          id: 1234abcd-12ab-34cd-56ef-123456abcdef
+          type: status_pages
+      properties:
+        data:
+          $ref: '#/components/schemas/PatchStatusPageRequestData'
+      type: object
+    PatchStatusPageRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PatchStatusPageRequestDataAttributes'
+        id:
+          description: The ID of the status page.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    PatchStatusPageRequestDataAttributes:
+      description: The supported attributes for updating a status page.
+      properties:
+        company_logo:
+          description: The base64-encoded image data displayed on the status page.
+          example: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
+          type: string
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          example: status-page-us1
+          type: string
+        email_header_image:
+          description: The base64-encoded image data displayed in email notifications
+            sent to status page subscribers.
+          example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          example: true
+          type: boolean
+        favicon:
+          description: The base64-encoded image data displayed in the browser tab.
+          example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
+          type: string
+        name:
+          description: The name of the status page.
+          example: Status Page US1
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          example: true
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+          example: public
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+          example: bars_and_uptime_percentage
       type: object
     PatchTableRequest:
       description: Request body for updating an existing reference table.
@@ -46316,6 +48037,37 @@ components:
       required:
       - interval
       - maxRetries
+      type: object
+    RevertCustomRuleRevisionDataType:
+      description: Request type
+      enum:
+      - revert_custom_rule_revision_request
+      type: string
+      x-enum-varnames:
+      - REVERT_CUSTOM_RULE_REVISION_REQUEST
+    RevertCustomRuleRevisionRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/RevertCustomRuleRevisionRequestData'
+      type: object
+    RevertCustomRuleRevisionRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RevertCustomRuleRevisionRequestDataAttributes'
+        id:
+          description: Request identifier
+          type: string
+        type:
+          $ref: '#/components/schemas/RevertCustomRuleRevisionDataType'
+      type: object
+    RevertCustomRuleRevisionRequestDataAttributes:
+      properties:
+        currentRevision:
+          description: Current revision ID
+          type: string
+        revertToRevision:
+          description: Target revision ID to revert to
+          type: string
       type: object
     Role:
       description: Role object returned by the API.
@@ -54568,6 +56320,65 @@ components:
       type: string
       x-enum-varnames:
       - SERVICES_LIST
+    ServiceNowAssignmentGroupAttributes:
+      description: Attributes of a ServiceNow assignment group
+      properties:
+        assignment_group_name:
+          description: The name of the assignment group
+          example: Network Team
+          type: string
+        assignment_group_sys_id:
+          description: The system ID of the assignment group in ServiceNow
+          example: abc123def456
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - assignment_group_name
+      - assignment_group_sys_id
+      type: object
+    ServiceNowAssignmentGroupData:
+      description: Data object for a ServiceNow assignment group
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowAssignmentGroupAttributes'
+        id:
+          description: Unique identifier for the ServiceNow assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowAssignmentGroupType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowAssignmentGroupType:
+      description: Type identifier for ServiceNow assignment group resources
+      enum:
+      - assignment_groups
+      example: assignment_groups
+      type: string
+      x-enum-varnames:
+      - ASSIGNMENT_GROUPS
+    ServiceNowAssignmentGroupsData:
+      description: Array of ServiceNow assignment group data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowAssignmentGroupData'
+      type: array
+    ServiceNowAssignmentGroupsResponse:
+      description: Response containing ServiceNow assignment groups
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowAssignmentGroupsData'
+      required:
+      - data
+      type: object
     ServiceNowBasicAuth:
       description: The definition of the `ServiceNowBasicAuth` object.
       properties:
@@ -54616,6 +56427,65 @@ components:
       required:
       - type
       type: object
+    ServiceNowBusinessServiceAttributes:
+      description: Attributes of a ServiceNow business service
+      properties:
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        service_name:
+          description: The name of the business service
+          example: IT Support
+          type: string
+        service_sys_id:
+          description: The system ID of the business service in ServiceNow
+          example: abc123def456
+          type: string
+      required:
+      - instance_id
+      - service_name
+      - service_sys_id
+      type: object
+    ServiceNowBusinessServiceData:
+      description: Data object for a ServiceNow business service
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowBusinessServiceAttributes'
+        id:
+          description: Unique identifier for the ServiceNow business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowBusinessServiceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowBusinessServiceType:
+      description: Type identifier for ServiceNow business service resources
+      enum:
+      - business_services
+      example: business_services
+      type: string
+      x-enum-varnames:
+      - BUSINESS_SERVICES
+    ServiceNowBusinessServicesData:
+      description: Array of ServiceNow business service data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowBusinessServiceData'
+      type: array
+    ServiceNowBusinessServicesResponse:
+      description: Response containing ServiceNow business services
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowBusinessServicesData'
+      required:
+      - data
+      type: object
     ServiceNowCredentials:
       description: The definition of the `ServiceNowCredentials` object.
       oneOf:
@@ -54624,6 +56494,54 @@ components:
       description: The definition of the `ServiceNowCredentialsUpdate` object.
       oneOf:
       - $ref: '#/components/schemas/ServiceNowBasicAuthUpdate'
+    ServiceNowInstanceAttributes:
+      description: Attributes of a ServiceNow instance
+      properties:
+        instance_name:
+          description: The name of the ServiceNow instance
+          example: my-servicenow-instance
+          type: string
+      required:
+      - instance_name
+      type: object
+    ServiceNowInstanceData:
+      description: Data object for a ServiceNow instance
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowInstanceAttributes'
+        id:
+          description: Unique identifier for the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowInstanceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowInstanceType:
+      description: Type identifier for ServiceNow instance resources
+      enum:
+      - instance
+      example: instance
+      type: string
+      x-enum-varnames:
+      - INSTANCE
+    ServiceNowInstancesData:
+      description: Array of ServiceNow instance data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowInstanceData'
+      type: array
+    ServiceNowInstancesResponse:
+      description: Response containing ServiceNow instances
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowInstancesData'
+      required:
+      - data
+      type: object
     ServiceNowIntegration:
       description: The definition of the `ServiceNowIntegration` object.
       properties:
@@ -54653,6 +56571,222 @@ components:
       required:
       - type
       type: object
+    ServiceNowTemplateAttributes:
+      description: Attributes of a ServiceNow template
+      properties:
+        assignment_group_id:
+          description: The ID of the assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        business_service_id:
+          description: The ID of the business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        fields_mapping:
+          additionalProperties:
+            type: string
+          description: Custom field mappings for the template
+          example:
+            category: software
+            priority: '1'
+          type: object
+        handle_name:
+          description: The handle name of the template
+          example: incident-template
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        servicenow_tablename:
+          description: The name of the destination ServiceNow table
+          example: incident
+          type: string
+        user_id:
+          description: The ID of the user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - handle_name
+      - servicenow_tablename
+      type: object
+    ServiceNowTemplateCreateRequest:
+      description: Request to create a ServiceNow template
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplateCreateRequestData'
+      required:
+      - data
+      type: object
+    ServiceNowTemplateCreateRequestAttributes:
+      description: Attributes for creating a ServiceNow template
+      properties:
+        assignment_group_id:
+          description: The ID of the assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        business_service_id:
+          description: The ID of the business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        fields_mapping:
+          additionalProperties:
+            type: string
+          description: Custom field mappings for the template
+          example:
+            category: software
+            priority: '1'
+          type: object
+        handle_name:
+          description: The handle name of the template
+          example: incident-template
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        servicenow_tablename:
+          description: The name of the destination ServiceNow table
+          example: incident
+          type: string
+        user_id:
+          description: The ID of the user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - handle_name
+      - servicenow_tablename
+      type: object
+    ServiceNowTemplateCreateRequestData:
+      description: Data object for creating a ServiceNow template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowTemplateCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ServiceNowTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    ServiceNowTemplateData:
+      description: Data object for a ServiceNow template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowTemplateAttributes'
+        id:
+          description: Unique identifier for the ServiceNow template
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowTemplateType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowTemplateResponse:
+      description: Response containing a single ServiceNow template
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplateData'
+      required:
+      - data
+      type: object
+    ServiceNowTemplateType:
+      description: Type identifier for ServiceNow template resources
+      enum:
+      - servicenow_templates
+      example: servicenow_templates
+      type: string
+      x-enum-varnames:
+      - SERVICENOW_TEMPLATES
+    ServiceNowTemplateUpdateRequest:
+      description: Request to update a ServiceNow template
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplateUpdateRequestData'
+      required:
+      - data
+      type: object
+    ServiceNowTemplateUpdateRequestAttributes:
+      description: Attributes for updating a ServiceNow template
+      properties:
+        assignment_group_id:
+          description: The ID of the assignment group
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        business_service_id:
+          description: The ID of the business service
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        fields_mapping:
+          additionalProperties:
+            type: string
+          description: Custom field mappings for the template
+          example:
+            category: hardware
+            priority: '2'
+          type: object
+        handle_name:
+          description: The handle name of the template
+          example: incident-template-updated
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        servicenow_tablename:
+          description: The name of the destination ServiceNow table
+          example: incident
+          type: string
+        user_id:
+          description: The ID of the user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+      required:
+      - instance_id
+      - handle_name
+      - servicenow_tablename
+      type: object
+    ServiceNowTemplateUpdateRequestData:
+      description: Data object for updating a ServiceNow template
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowTemplateUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/ServiceNowTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    ServiceNowTemplatesData:
+      description: Array of ServiceNow template data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowTemplateData'
+      type: array
+    ServiceNowTemplatesResponse:
+      description: Response containing ServiceNow templates
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowTemplatesData'
+      required:
+      - data
+      type: object
     ServiceNowTicket:
       description: ServiceNow ticket attached to case
       nullable: true
@@ -54669,6 +56803,74 @@ components:
         sys_target_link:
           description: Link to the Incident created on ServiceNow
           type: string
+      type: object
+    ServiceNowUserAttributes:
+      description: Attributes of a ServiceNow user
+      properties:
+        email:
+          description: The email address of the user
+          example: john.doe@example.com
+          type: string
+        full_name:
+          description: The full name of the user
+          example: John Doe
+          type: string
+        instance_id:
+          description: The ID of the ServiceNow instance
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        user_name:
+          description: The username of the ServiceNow user
+          example: john.doe
+          type: string
+        user_sys_id:
+          description: The system ID of the user in ServiceNow
+          example: abc123def456
+          type: string
+      required:
+      - instance_id
+      - user_name
+      - user_sys_id
+      - email
+      type: object
+    ServiceNowUserData:
+      description: Data object for a ServiceNow user
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ServiceNowUserAttributes'
+        id:
+          description: Unique identifier for the ServiceNow user
+          example: 65b3341b-0680-47f9-a6d4-134db45c603e
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceNowUserType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ServiceNowUserType:
+      description: Type identifier for ServiceNow user resources
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    ServiceNowUsersData:
+      description: Array of ServiceNow user data objects
+      items:
+        $ref: '#/components/schemas/ServiceNowUserData'
+      type: array
+    ServiceNowUsersResponse:
+      description: Response containing ServiceNow users
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceNowUsersData'
+      required:
+      - data
       type: object
     Shift:
       description: An on-call shift with its associated data and relationships.
@@ -56253,6 +58455,871 @@ components:
       required:
       - type
       type: object
+    StatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageData'
+        included:
+          description: The included related resources of a status page. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPageArrayIncluded'
+          type: array
+      type: object
+    StatusPageArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StatusPageData'
+          type: array
+        included:
+          description: The included related resources of a status page. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPageArrayIncluded'
+          type: array
+        meta:
+          $ref: '#/components/schemas/StatusPagesResponseMeta'
+      required:
+      - data
+      type: object
+    StatusPageArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+    StatusPageAsIncluded:
+      description: The included status page resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPageAsIncludedAttributes'
+        id:
+          description: The ID of the status page.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    StatusPageAsIncludedAttributes:
+      description: The attributes of a status page.
+      properties:
+        company_logo:
+          description: The base64-encoded image data displayed in the company logo.
+          type: string
+        components:
+          description: Components displayed on the status page.
+          items:
+            $ref: '#/components/schemas/StatusPageAsIncludedAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the status page was created.
+          format: date-time
+          type: string
+        custom_domain:
+          description: If configured, the url that the status page is accessible at.
+          type: string
+        custom_domain_enabled:
+          description: Whether the custom domain is configured.
+          type: boolean
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          type: string
+        email_header_image:
+          description: Base64-encoded image data included in email notifications sent
+            to status page subscribers.
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          type: boolean
+        favicon:
+          description: Base64-encoded image data displayed in the browser tab.
+          type: string
+        modified_at:
+          description: Timestamp of when the status page was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the status page.
+          type: string
+        page_url:
+          description: The url that the status page is accessible at.
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      type: object
+    StatusPageAsIncludedAttributesComponentsItems:
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/StatusPageAsIncludedAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          description: The ID of the component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    StatusPageAsIncludedAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          description: The ID of the grouped component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the grouped component.
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component. Relative
+            to the other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPageAsIncludedRelationships:
+      description: The relationships of a status page.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsCreatedByUser'
+          description: The Datadog user who created the status page.
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the status page.
+      type: object
+    StatusPageAsIncludedRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageAsIncludedRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageAsIncludedRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageAsIncludedRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageAsIncludedRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPageDataAttributes'
+        id:
+          description: The ID of the status page.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPageDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      type: object
+    StatusPageDataAttributes:
+      description: The attributes of a status page.
+      properties:
+        company_logo:
+          description: Base64-encoded image data displayed on the status page.
+          nullable: true
+          type: string
+        components:
+          description: Components displayed on the status page.
+          items:
+            $ref: '#/components/schemas/StatusPageDataAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the status page was created.
+          format: date-time
+          type: string
+        custom_domain:
+          description: If configured, the url that the status page is accessible at.
+          nullable: true
+          type: string
+        custom_domain_enabled:
+          description: Whether the custom domain is configured.
+          type: boolean
+        domain_prefix:
+          description: The subdomain of the status page's url taking the form `https://{domain_prefix}.statuspage.datadoghq.com`.
+            Globally unique across Datadog Status Pages.
+          type: string
+        email_header_image:
+          description: Base64-encoded image data included in email notifications sent
+            to status page subscribers.
+          nullable: true
+          type: string
+        enabled:
+          description: Whether the status page is enabled.
+          type: boolean
+        favicon:
+          description: Base64-encoded image data displayed in the browser tab.
+          nullable: true
+          type: string
+        modified_at:
+          description: Timestamp of when the status page was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the status page.
+          type: string
+        page_url:
+          description: The url that the status page is accessible at.
+          type: string
+        subscriptions_enabled:
+          description: Whether users can subscribe to the status page.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesType'
+        visualization_type:
+          $ref: '#/components/schemas/CreateStatusPageRequestDataAttributesVisualizationType'
+      type: object
+    StatusPageDataAttributesComponentsItems:
+      properties:
+        components:
+          description: If the component is of type `group`, the components within
+            the group.
+          items:
+            $ref: '#/components/schemas/StatusPageDataAttributesComponentsItemsComponentsItems'
+          type: array
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      type: object
+    StatusPageDataAttributesComponentsItemsComponentsItems:
+      properties:
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component. Relative to the
+            other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPageDataRelationships:
+      description: The relationships of a status page.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsCreatedByUser'
+          description: The Datadog user who created the status page.
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the status page.
+      type: object
+    StatusPageDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPageDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPageDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the status page.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPageDataType:
+      default: status_pages
+      description: Status pages resource type.
+      enum:
+      - status_pages
+      example: status_pages
+      type: string
+      x-enum-varnames:
+      - STATUS_PAGES
+    StatusPagesComponent:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentData'
+        included:
+          description: The included related resources of a component. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentArrayIncluded'
+          type: array
+      type: object
+    StatusPagesComponentArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentData'
+          type: array
+        included:
+          description: The included related resources of a component. Client must
+            explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentArrayIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    StatusPagesComponentArrayIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/StatusPagesUser'
+      - $ref: '#/components/schemas/StatusPageAsIncluded'
+      - $ref: '#/components/schemas/StatusPagesComponentGroup'
+    StatusPagesComponentData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributes'
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentDataAttributes:
+      description: The attributes of a component.
+      properties:
+        components:
+          description: If the component is of type `group`, the components within
+            the group.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentDataAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the component was created.
+          format: date-time
+          type: string
+        modified_at:
+          description: Timestamp of when the component was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentDataAttributesComponentsItems:
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          type: string
+        position:
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPagesComponentDataAttributesStatus:
+      description: The status of the component.
+      enum:
+      - operational
+      - degraded
+      - partial_outage
+      - major_outage
+      example: operational
+      type: string
+      x-enum-varnames:
+      - OPERATIONAL
+      - DEGRADED
+      - PARTIAL_OUTAGE
+      - MAJOR_OUTAGE
+    StatusPagesComponentDataRelationships:
+      description: The relationships of a component.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsCreatedByUser'
+          description: The Datadog user who created the component.
+        group:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsGroup'
+          description: The group the component belongs to.
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsLastModifiedByUser'
+          description: The Datadog user who last modified the component.
+        status_page:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsStatusPage'
+          description: The status page the component belongs to.
+      type: object
+    StatusPagesComponentDataRelationshipsCreatedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the component.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsGroup:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsGroupData:
+      nullable: true
+      properties:
+        id:
+          description: The ID of the group the component belongs to.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsLastModifiedByUser:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the component.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentDataRelationshipsStatusPage:
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentDataRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentDataRelationshipsStatusPageData:
+      properties:
+        id:
+          description: The ID of the status page the component belongs to.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroup:
+      description: The included component group resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributes'
+        id:
+          description: The ID of the component.
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationships'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentGroupAttributes:
+      description: The attributes of a component group.
+      properties:
+        components:
+          description: If the component is of type `group`, the components within
+            the group.
+          items:
+            $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItems'
+          type: array
+        created_at:
+          description: Timestamp of when the component was created.
+          format: date-time
+          type: string
+        modified_at:
+          description: Timestamp of when the component was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the component.
+          type: string
+        position:
+          description: The zero-indexed position of the component.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentDataAttributesStatus'
+        type:
+          $ref: '#/components/schemas/CreateComponentRequestDataAttributesType'
+      required:
+      - type
+      type: object
+    StatusPagesComponentGroupAttributesComponentsItems:
+      properties:
+        id:
+          description: The ID of the grouped component.
+          format: uuid
+          readOnly: true
+          type: string
+        name:
+          description: The name of the grouped component.
+          type: string
+        position:
+          description: The zero-indexed position of the grouped component. Relative
+            to the other components in the group.
+          format: int64
+          type: integer
+        status:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsStatus'
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupAttributesComponentsItemsType'
+      type: object
+    StatusPagesComponentGroupAttributesComponentsItemsStatus:
+      description: The status of the component.
+      enum:
+      - operational
+      - degraded
+      - partial_outage
+      - major_outage
+      readOnly: true
+      type: string
+      x-enum-varnames:
+      - OPERATIONAL
+      - DEGRADED
+      - PARTIAL_OUTAGE
+      - MAJOR_OUTAGE
+    StatusPagesComponentGroupAttributesComponentsItemsType:
+      description: The type of the component.
+      enum:
+      - component
+      example: component
+      type: string
+      x-enum-varnames:
+      - COMPONENT
+    StatusPagesComponentGroupRelationships:
+      description: The relationships of a component group.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsCreatedByUser'
+        group:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsGroup'
+        last_modified_by_user:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsLastModifiedByUser'
+        status_page:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsStatusPage'
+      type: object
+    StatusPagesComponentGroupRelationshipsCreatedByUser:
+      description: The Datadog user who created the component group.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsCreatedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsCreatedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who created the component group.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsGroup:
+      description: The group the component group belongs to.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsGroupData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsGroupData:
+      nullable: true
+      properties:
+        id:
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesComponentGroupType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsLastModifiedByUser:
+      description: The Datadog user who last modified the component group.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsLastModifiedByUserData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsLastModifiedByUserData:
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the component
+            group.
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupRelationshipsStatusPage:
+      description: The status page the component group belongs to.
+      properties:
+        data:
+          $ref: '#/components/schemas/StatusPagesComponentGroupRelationshipsStatusPageData'
+      required:
+      - data
+      type: object
+    StatusPagesComponentGroupRelationshipsStatusPageData:
+      properties:
+        id:
+          description: The ID of the status page.
+          example: ''
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPageDataType'
+      required:
+      - type
+      - id
+      type: object
+    StatusPagesComponentGroupType:
+      default: components
+      description: Components resource type.
+      enum:
+      - components
+      example: components
+      type: string
+      x-enum-varnames:
+      - COMPONENTS
+    StatusPagesPagination:
+      description: Offset-based pagination schema.
+      properties:
+        first_offset:
+          description: Integer representing the offset to fetch the first page of
+            results.
+          example: 0
+          format: int64
+          type: integer
+        last_offset:
+          description: Integer representing the offset to fetch the last page of results.
+          example: 900
+          format: int64
+          nullable: true
+          type: integer
+        limit:
+          description: Integer representing the number of elements to returned in
+            the results.
+          example: 100
+          format: int64
+          type: integer
+        next_offset:
+          description: Integer representing the index of the first element in the
+            next page of results. Equal to page size added to the current offset.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+        offset:
+          description: Integer representing the index of the first element in the
+            results.
+          example: 0
+          format: int64
+          type: integer
+        prev_offset:
+          description: Integer representing the index of the first element in the
+            previous page of results.
+          example: 100
+          format: int64
+          nullable: true
+          type: integer
+        total:
+          description: Integer representing the total number of elements available.
+          example: 1000
+          format: int64
+          nullable: true
+          type: integer
+        type:
+          $ref: '#/components/schemas/StatusPagesPaginationType'
+      type: object
+    StatusPagesPaginationType:
+      default: offset_limit
+      enum:
+      - offset_limit
+      example: offset_limit
+      type: string
+      x-enum-varnames:
+      - OFFSET_LIMIT
+    StatusPagesResponseMeta:
+      description: Response metadata.
+      properties:
+        page:
+          $ref: '#/components/schemas/StatusPagesPagination'
+      readOnly: true
+      type: object
+    StatusPagesUser:
+      description: The included Datadog user resource.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/StatusPagesUserAttributes'
+        id:
+          description: The ID of the Datadog user.
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/StatusPagesUserType'
+      required:
+      - type
+      type: object
+    StatusPagesUserAttributes:
+      description: Attributes of the Datadog user.
+      properties:
+        email:
+          description: The email of the Datadog user.
+          type: string
+        handle:
+          description: The handle of the Datadog user.
+          type: string
+        icon:
+          description: The icon of the Datadog user.
+          type: string
+        name:
+          description: The name of the Datadog user.
+          type: string
+        uuid:
+          description: The UUID of the Datadog user.
+          type: string
+      type: object
+    StatusPagesUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     Step:
       description: A Step is a sub-component of a workflow. Each Step performs an
         action.
@@ -56510,8 +59577,10 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
+      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access.
+        for restricting read and write access. This field is deprecated. Use the restriction
+        policies API to manage permissions.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
@@ -57075,18 +60144,6 @@ components:
       type: string
       x-enum-varnames:
       - ROW
-    TagFilter:
-      description: Tag filter for the budget's entries.
-      properties:
-        tag_key:
-          description: The key of the tag.
-          example: service
-          type: string
-        tag_value:
-          description: The value of the tag.
-          example: ec2
-          type: string
-      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -59244,6 +62301,7 @@ components:
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
       - $ref: '#/components/schemas/NotebookTriggerWrapper'
+      - $ref: '#/components/schemas/OnCallTriggerWrapper'
       - $ref: '#/components/schemas/ScheduleTriggerWrapper'
       - $ref: '#/components/schemas/SecurityTriggerWrapper'
       - $ref: '#/components/schemas/SelfServiceTriggerWrapper'
@@ -59863,6 +62921,136 @@ components:
       - dry_run
       - name
       - options
+      type: object
+    UpdateFlakyTestsRequest:
+      description: Request to update the state of multiple flaky tests.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestData'
+      required:
+      - data
+      type: object
+    UpdateFlakyTestsRequestAttributes:
+      description: Attributes for updating flaky test states.
+      properties:
+        tests:
+          description: List of flaky tests to update.
+          items:
+            $ref: '#/components/schemas/UpdateFlakyTestsRequestTest'
+          type: array
+      required:
+      - tests
+      type: object
+    UpdateFlakyTestsRequestData:
+      description: The JSON:API data for updating flaky test states.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestAttributes'
+        type:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    UpdateFlakyTestsRequestDataType:
+      description: The definition of `UpdateFlakyTestsRequestDataType` object.
+      enum:
+      - update_flaky_test_state_request
+      example: update_flaky_test_state_request
+      type: string
+      x-enum-varnames:
+      - UPDATE_FLAKY_TEST_STATE_REQUEST
+    UpdateFlakyTestsRequestTest:
+      description: Details of what tests to update and their new attributes.
+      properties:
+        id:
+          description: The ID of the flaky test. This is the same ID returned by the
+            Search flaky tests endpoint and corresponds to the test_fingerprint_fqn
+            field in test run events.
+          example: 4eb1887a8adb1847
+          type: string
+        new_state:
+          $ref: '#/components/schemas/UpdateFlakyTestsRequestTestNewState'
+      required:
+      - id
+      - new_state
+      type: object
+    UpdateFlakyTestsRequestTestNewState:
+      description: The new state to set for the flaky test.
+      enum:
+      - active
+      - quarantined
+      - disabled
+      - fixed
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - QUARANTINED
+      - DISABLED
+      - FIXED
+    UpdateFlakyTestsResponse:
+      description: Response object for updating flaky test states.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateFlakyTestsResponseData'
+      type: object
+    UpdateFlakyTestsResponseAttributes:
+      description: Attributes for the update flaky test state response.
+      properties:
+        has_errors:
+          description: '`True` if any errors occurred during the update operations.
+            `False` if all tests succeeded to be updated.'
+          example: true
+          type: boolean
+        results:
+          description: Results of the update operation for each test.
+          items:
+            $ref: '#/components/schemas/UpdateFlakyTestsResponseResult'
+          type: array
+      required:
+      - has_errors
+      - results
+      type: object
+    UpdateFlakyTestsResponseData:
+      description: Summary of the update operations. Tells whether a test succeeded
+        or failed to be updated.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateFlakyTestsResponseAttributes'
+        id:
+          description: The ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateFlakyTestsResponseDataType'
+      type: object
+    UpdateFlakyTestsResponseDataType:
+      description: The definition of `UpdateFlakyTestsResponseDataType` object.
+      enum:
+      - update_flaky_test_state_response
+      type: string
+      x-enum-varnames:
+      - UPDATE_FLAKY_TEST_STATE_RESPONSE
+    UpdateFlakyTestsResponseResult:
+      description: Result of updating a single flaky test state.
+      properties:
+        error:
+          description: Error message if the update failed.
+          type: string
+        id:
+          description: The ID of the flaky test from the request. This is the same
+            ID returned by the Search flaky tests endpoint and corresponds to the
+            test_fingerprint_fqn field in test run events.
+          example: 4eb1887a8adb1847
+          type: string
+        success:
+          description: '`True` if the update was successful, `False` if there were
+            any errors.'
+          example: false
+          type: boolean
+      required:
+      - id
+      - success
       type: object
     UpdateOnCallNotificationRuleRequest:
       description: A top-level wrapper for updating a notification rule for a user
@@ -60555,17 +63743,6 @@ components:
         type:
           $ref: '#/components/schemas/UsersType'
       type: object
-    User140420082644000:
-      properties:
-        attributes:
-          $ref: '#/components/schemas/UserAttributes'
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/UserType'
-      required:
-      - type
-      type: object
     UserAttributes:
       description: Attributes of user object returned by the API.
       properties:
@@ -61016,15 +64193,6 @@ components:
         meta:
           $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
-    UserType:
-      default: users
-      description: Users resource type.
-      enum:
-      - users
-      example: users
-      type: string
-      x-enum-varnames:
-      - USERS
     UserUpdateAttributes:
       description: Attributes of the edited user.
       properties:
@@ -62213,6 +65381,8 @@ components:
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
             test_optimization_read: View Test Optimization.
+            test_optimization_write: Update flaky tests from Flaky Tests Management
+              of Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -65290,7 +68460,6 @@ paths:
         operator: OR
         permissions:
         - apm_retention_filter_read
-        - apm_pipelines_read
     post:
       description: 'Create a retention filter to index spans in your organization.
 
@@ -65331,7 +68500,6 @@ paths:
         operator: OR
         permissions:
         - apm_retention_filter_write
-        - apm_pipelines_write
   /api/v2/apm/config/retention-filters-execution-order:
     put:
       description: Re-order the execution order of retention filters.
@@ -65361,7 +68529,6 @@ paths:
         operator: OR
         permissions:
         - apm_retention_filter_write
-        - apm_pipelines_write
   /api/v2/apm/config/retention-filters/{filter_id}:
     delete:
       description: 'Delete a specific retention filter from your organization.
@@ -65389,7 +68556,6 @@ paths:
         operator: OR
         permissions:
         - apm_retention_filter_write
-        - apm_pipelines_write
     get:
       description: Get an APM retention filter.
       operationId: GetApmRetentionFilter
@@ -65416,7 +68582,6 @@ paths:
         operator: OR
         permissions:
         - apm_retention_filter_read
-        - apm_pipelines_read
     put:
       description: 'Update a retention filter from your organization.
 
@@ -65457,7 +68622,6 @@ paths:
         operator: OR
         permissions:
         - apm_retention_filter_write
-        - apm_pipelines_write
   /api/v2/apm/services:
     get:
       operationId: GetServiceList
@@ -69114,36 +72278,73 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_write
       summary: Create or update a budget
       tags:
       - Cloud Cost Management
       x-menu-order: 34
+  /api/v2/cost/budget/csv/validate:
+    post:
+      operationId: ValidateCsvBudget
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security: []
+      summary: Validate CSV budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 36
+  /api/v2/cost/budget/validate:
+    post:
+      description: Validate a budget configuration without creating or modifying it
+      operationId: ValidateBudget
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetValidationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetValidationResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Validate budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 35
   /api/v2/cost/budget/{budget_id}:
     delete:
-      description: Delete a budget.
+      description: Delete a budget
       operationId: DeleteBudget
       parameters:
       - $ref: '#/components/parameters/BudgetID'
       responses:
         '204':
           description: No Content
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_write
-      summary: Delete a budget
+      summary: Delete budget
       tags:
       - Cloud Cost Management
-      x-menu-order: 35
+      x-menu-order: 38
     get:
-      description: Get a budget.
+      description: Get a budget
       operationId: GetBudget
       parameters:
       - $ref: '#/components/parameters/BudgetID'
@@ -69154,21 +72355,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/BudgetWithEntries'
           description: OK
-        '400':
-          $ref: '#/components/responses/BadRequestResponse'
-        '404':
-          $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
-      summary: Get a budget
+      summary: Get budget
       tags:
       - Cloud Cost Management
-      x-menu-order: 36
+      x-menu-order: 37
   /api/v2/cost/budgets:
     get:
       description: List budgets.
@@ -69185,8 +72380,6 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ:
-        - cloud_cost_management_read
       summary: List budgets
       tags:
       - Cloud Cost Management
@@ -72372,6 +75565,196 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/global/incident-handles:
+    delete:
+      description: Delete a global incident handle.
+      operationId: DeleteGlobalIncidentHandle
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete global incident handle
+      tags:
+      - Incidents
+      x-menu-order: 43
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieve a list of global incident handles.
+      operationId: ListGlobalIncidentHandles
+      parameters:
+      - description: Comma-separated list of related resources to include in the response
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by_user,last_modified_by_user,commander_user,incident_type
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentHandlesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List global incident handles
+      tags:
+      - Incidents
+      x-menu-order: 40
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new global incident handle.
+      operationId: CreateGlobalIncidentHandle
+      parameters:
+      - description: Comma-separated list of related resources to include in the response
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by_user,last_modified_by_user,commander_user,incident_type
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentHandleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentHandleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create global incident handle
+      tags:
+      - Incidents
+      x-menu-order: 41
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Update an existing global incident handle.
+      operationId: UpdateGlobalIncidentHandle
+      parameters:
+      - description: Comma-separated list of related resources to include in the response
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by_user,last_modified_by_user,commander_user,incident_type
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentHandleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentHandleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update global incident handle
+      tags:
+      - Incidents
+      x-menu-order: 42
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/global/settings:
+    get:
+      description: Retrieve global incident settings for the organization.
+      operationId: GetGlobalIncidentSettings
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalIncidentSettingsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get global incident settings
+      tags:
+      - Incidents
+      x-menu-order: 38
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update global incident settings for the organization.
+      operationId: UpdateGlobalIncidentSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalIncidentSettingsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlobalIncidentSettingsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update global incident settings
+      tags:
+      - Incidents
+      x-menu-order: 39
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/config/notification-rules:
     get:
       description: Lists all notification rules for the organization. Optionally filter
@@ -73279,12 +76662,7 @@ paths:
       operationId: DeleteIncidentAttachment
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - description: The ID of the attachment.
-        in: path
-        name: attachment_id
-        required: true
-        schema:
-          example: 00000000-0000-0000-0000-000000000002
+      - $ref: '#/components/parameters/AttachmentIDPathParameter'
       responses:
         '204':
           description: No Content
@@ -73316,12 +76694,7 @@ paths:
       operationId: UpdateIncidentAttachment
       parameters:
       - $ref: '#/components/parameters/IncidentIDPathParameter'
-      - description: The ID of the attachment.
-        in: path
-        name: attachment_id
-        required: true
-        schema:
-          example: 00000000-0000-0000-0000-000000000002
+      - $ref: '#/components/parameters/AttachmentIDPathParameter'
       - $ref: '#/components/parameters/AttachmentIncludeQueryParameter'
       requestBody:
         content:
@@ -75110,6 +78483,329 @@ paths:
         operator: OR
         permissions:
         - manage_integrations
+  /api/v2/integration/servicenow/assignment_groups/{instance_id}:
+    get:
+      description: Get all assignment groups for a ServiceNow instance.
+      operationId: ListServiceNowAssignmentGroups
+      parameters:
+      - description: The ID of the ServiceNow instance
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: instance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowAssignmentGroupsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow assignment groups
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/business_services/{instance_id}:
+    get:
+      description: Get all business services for a ServiceNow instance.
+      operationId: ListServiceNowBusinessServices
+      parameters:
+      - description: The ID of the ServiceNow instance
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: instance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowBusinessServicesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow business services
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/handles:
+    get:
+      description: Get all ServiceNow templates for the organization.
+      operationId: ListServiceNowTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplatesResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow templates
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new ServiceNow template.
+      operationId: CreateServiceNowTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceNowTemplateCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/handles/{template_id}:
+    delete:
+      description: Delete a ServiceNow template by ID.
+      operationId: DeleteServiceNowTemplate
+      parameters:
+      - description: The ID of the ServiceNow template to delete
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a ServiceNow template by ID.
+      operationId: GetServiceNowTemplate
+      parameters:
+      - description: The ID of the ServiceNow template to retrieve
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Update a ServiceNow template by ID.
+      operationId: UpdateServiceNowTemplate
+      parameters:
+      - description: The ID of the ServiceNow template to update
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: template_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceNowTemplateUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update ServiceNow template
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/instances:
+    get:
+      description: Get all ServiceNow instances for the organization.
+      operationId: ListServiceNowInstances
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowInstancesResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow instances
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/servicenow/users/{instance_id}:
+    get:
+      description: Get all users for a ServiceNow instance.
+      operationId: ListServiceNowUsers
+      parameters:
+      - description: The ID of the ServiceNow instance
+        example: 65b3341b-0680-47f9-a6d4-134db45c603e
+        in: path
+        name: instance_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceNowUsersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List ServiceNow users
+      tags:
+      - ServiceNow Integration
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integrations/cloudflare/accounts:
     get:
       description: List Cloudflare accounts.
@@ -86515,9 +90211,6 @@ paths:
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
-      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
-
-        Please check the documentation regularly for updates.'
     post:
       description: 'Create Jira issues for security findings.
 
@@ -86562,9 +90255,6 @@ paths:
         permissions:
         - security_monitoring_findings_write
         - appsec_vm_write
-      x-unstable: '**Note**: This endpoint is in beta and is subject to change.
-
-        Please check the documentation regularly for updates.'
   /api/v2/security/findings/search:
     post:
       description: 'Get a list of security findings that match a search query. [See
@@ -86746,9 +90436,6 @@ paths:
         operator: OR
         permissions:
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/sboms/{asset_type}:
     get:
       description: Get a single SBOM related to an asset by its type and name.
@@ -86822,9 +90509,6 @@ paths:
         operator: OR
         permissions:
         - appsec_vm_read
-      x-unstable: '**Note**: This endpoint is a private preview.
-
-        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/scanned-assets-metadata:
     get:
       description: "Get a list of security scanned assets metadata for an organization.\n\n###
@@ -91443,6 +95127,524 @@ paths:
       - Static Analysis
       x-menu-order: 1
       x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}:
+    delete:
+      description: Delete a custom ruleset
+      operationId: DeleteCustomRuleset
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Custom Ruleset
+      tags:
+      - Static Analysis
+      x-menu-order: 8
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a custom ruleset by name
+      operationId: GetCustomRuleset
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRulesetResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Show Custom Ruleset
+      tags:
+      - Static Analysis
+      x-menu-order: 10
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing custom ruleset
+      operationId: UpdateCustomRuleset
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomRulesetRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRulesetResponse'
+          description: Successfully updated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Precondition failed - validation error or ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Custom Ruleset
+      tags:
+      - Static Analysis
+      x-menu-order: 9
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules:
+    put:
+      description: Create a new custom rule within a ruleset
+      operationId: CreateCustomRule
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleResponse'
+          description: Successfully created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Conflict - rule already exists
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Precondition failed - validation error or ruleset not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Custom Rule
+      tags:
+      - Static Analysis
+      x-menu-order: 7
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}:
+    delete:
+      description: Delete a custom rule
+      operationId: DeleteCustomRule
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Custom Rule
+      tags:
+      - Static Analysis
+      x-menu-order: 5
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a custom rule by name
+      operationId: GetCustomRule
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Show Custom Rule
+      tags:
+      - Static Analysis
+      x-menu-order: 6
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}/revisions:
+    get:
+      description: Get all revisions for a custom rule
+      operationId: ListCustomRuleRevisions
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      - description: Pagination offset
+        in: query
+        name: page[offset]
+        required: false
+        schema:
+          default: 0
+          type: integer
+      - description: Pagination limit
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleRevisionsResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Too many requests
+      summary: List Custom Rule Revisions
+      tags:
+      - Static Analysis
+      x-menu-order: 4
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: Create a new revision for a custom rule
+      operationId: CreateCustomRuleRevision
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomRuleRevisionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Rule not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create Custom Rule Revision
+      tags:
+      - Static Analysis
+      x-menu-order: 3
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}/revisions/revert:
+    post:
+      description: Revert a custom rule to a previous revision
+      operationId: RevertCustomRuleRevision
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevertCustomRuleRevisionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully reverted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Revert Custom Rule Revision
+      tags:
+      - Static Analysis
+      x-menu-order: 1
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/static-analysis/custom/rulesets/{ruleset_name}/rules/{rule_name}/revisions/{id}:
+    get:
+      description: Get a specific revision of a custom rule
+      operationId: GetCustomRuleRevision
+      parameters:
+      - description: The ruleset name
+        in: path
+        name: ruleset_name
+        required: true
+        schema:
+          type: string
+      - description: The rule name
+        in: path
+        name: rule_name
+        required: true
+        schema:
+          type: string
+      - description: The revision ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomRuleRevisionResponse'
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized - custom rules not enabled
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Revision not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Show Custom Rule Revision
+      tags:
+      - Static Analysis
+      x-menu-order: 2
+      x-unstable: 'This endpoint is in Preview and may introduce breaking changes.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/static-analysis/rulesets:
     post:
       description: Get rules for multiple rulesets in batch.
@@ -91496,6 +95698,683 @@ paths:
       - Security Monitoring
       x-menu-order: 28
       x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/statuspages:
+    get:
+      description: Lists all status pages for the organization.
+      operationId: ListStatusPages
+      parameters:
+      - description: Offset to use as the start of the page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          type: integer
+      - description: The number of status pages to return per page.
+        in: query
+        name: page[limit]
+        schema:
+          default: 50
+          type: integer
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPageArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List status pages
+      tags:
+      - Status Pages
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    post:
+      description: Creates a new status page.
+      operationId: CreateStatusPage
+      parameters:
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStatusPageRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create status page
+      tags:
+      - Status Pages
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/degradations:
+    get:
+      description: Lists all degradations for the organization. Optionally filter
+        by status and page.
+      operationId: ListDegradations
+      parameters:
+      - description: Optional page id filter.
+        in: query
+        name: filter[page_id]
+        schema:
+          type: string
+      - description: Offset to use as the start of the page.
+        in: query
+        name: page[offset]
+        schema:
+          default: 0
+          type: integer
+      - description: The number of degradations to return per page.
+        in: query
+        name: page[limit]
+        schema:
+          default: 50
+          type: integer
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: 'Optional degradation status filter. Supported values: investigating,
+          identified, monitoring, resolved.'
+        in: query
+        name: filter[status]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DegradationArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List degradations
+      tags:
+      - Status Pages
+      x-menu-order: 13
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+  /api/v2/statuspages/{page_id}:
+    delete:
+      description: Deletes a status page by its ID.
+      operationId: DeleteStatusPage
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete status page
+      tags:
+      - Status Pages
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+    get:
+      description: Retrieves a specific status page by its ID.
+      operationId: GetStatusPage
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get status page
+      tags:
+      - Status Pages
+      x-menu-order: 4
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing status page's attributes.
+      operationId: UpdateStatusPage
+      parameters:
+      - description: Whether to delete existing subscribers when updating a status
+          page's type.
+        in: query
+        name: delete_subscribers
+        schema:
+          default: false
+          type: boolean
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchStatusPageRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPage'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update status page
+      tags:
+      - Status Pages
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/components:
+    get:
+      description: Lists all components for a status page.
+      operationId: ListComponents
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponentArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List components
+      tags:
+      - Status Pages
+      x-menu-order: 8
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    post:
+      description: Creates a new component.
+      operationId: CreateComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateComponentRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create component
+      tags:
+      - Status Pages
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/components/{component_id}:
+    delete:
+      description: Deletes a component by its ID.
+      operationId: DeleteComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete component
+      tags:
+      - Status Pages
+      x-menu-order: 10
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+    get:
+      description: Retrieves a specific component by its ID.
+      operationId: GetComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get component
+      tags:
+      - Status Pages
+      x-menu-order: 9
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing component's attributes.
+      operationId: UpdateComponent
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the component.
+        in: path
+        name: component_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page, group.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchComponentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusPagesComponent'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update component
+      tags:
+      - Status Pages
+      x-menu-order: 7
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/degradations:
+    post:
+      description: Creates a new degradation.
+      operationId: CreateDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the degradation.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDegradationRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create degradation
+      tags:
+      - Status Pages
+      x-menu-order: 11
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/degradations/{degradation_id}:
+    delete:
+      description: Deletes a degradation by its ID.
+      operationId: DeleteDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete degradation
+      tags:
+      - Status Pages
+      x-menu-order: 15
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
+    get:
+      description: Retrieves a specific degradation by its ID.
+      operationId: GetDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get degradation
+      tags:
+      - Status Pages
+      x-menu-order: 14
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_settings_read
+    patch:
+      description: Updates an existing degradation's attributes.
+      operationId: UpdateDegradation
+      parameters:
+      - description: The ID of the status page.
+        in: path
+        name: page_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: Whether to notify page subscribers of the degradation.
+        in: query
+        name: notify_subscribers
+        schema:
+          default: true
+          type: boolean
+      - description: The ID of the degradation.
+        in: path
+        name: degradation_id
+        required: true
+        schema:
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
+          format: uuid
+          type: string
+      - description: 'Comma-separated list of resources to include. Supported values:
+          created_by_user, last_modified_by_user, status_page.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchDegradationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Degradation'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update degradation
+      tags:
+      - Status Pages
+      x-menu-order: 12
+      x-permission:
+        operator: AND
+        permissions:
+        - status_pages_incident_write
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -93873,6 +98752,45 @@ paths:
         - incident_settings_write
       x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/test/flaky-test-management/tests:
+    patch:
+      description: Update the state of multiple flaky tests in Flaky Test Management.
+      operationId: UpdateFlakyTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateFlakyTestsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateFlakyTestsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - test_optimization_write
+      summary: Update flaky test states
+      tags:
+      - Test Optimization
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - test_optimization_write
+      x-unstable: '**Note**: This endpoint is in preview and may be subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
       description: List endpoint returning flaky tests from Flaky Test Management.
         Results are paginated.
@@ -96068,6 +100986,9 @@ tags:
     This feature is currently in BETA. If you have any feedback, contact [Datadog
     support](https://docs.datadoghq.com/help/).'
   name: Service Scorecards
+- description: Manage your ServiceNow Integration. ServiceNow is a cloud-based platform
+    that helps organizations manage digital workflows for enterprise operations.
+  name: ServiceNow Integration
 - description: API to create, update, retrieve, and delete Software Catalog entities.
   externalDocs:
     url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
@@ -96086,6 +101007,10 @@ tags:
   name: Spans Metrics
 - description: API for static analysis
   name: Static Analysis
+- description: Manage your status pages and communicate service disruptions to stakeholders
+    via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/)
+    for more information.
+  name: Status Pages
 - description: "Datadog Synthetics uses simulated user requests and browser rendering
     to help you ensure uptime,\nidentify regional issues, and track your application
     performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand

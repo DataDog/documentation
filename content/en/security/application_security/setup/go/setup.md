@@ -73,7 +73,7 @@ Add the following environment variable value to your Docker command line:
 $ docker run -e DD_APPSEC_ENABLED=true [...]
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
@@ -84,7 +84,7 @@ Add the following environment variable value to your application container's Doc
 ENV DD_APPSEC_ENABLED=true
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App & API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App & API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -103,7 +103,7 @@ spec:
               value: "true"
 ```
 
-For more information on how to create a fitting  docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
@@ -120,7 +120,7 @@ Update your application's ECS task definition JSON file using this environment s
 ]
 ```
 
-For more information on how to create a fitting docker image, See [Creating a Dockerfile for App and API Protection for Go][3].
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 

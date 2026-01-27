@@ -604,66 +604,31 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: OTel SDKs
+    - name: Using OTel SDK
       url: opentelemetry/instrument/otel_sdks/
       identifier: otel_sdks
       parent: otel-instrumentation
       weight: 301
-    - name: OTel APIs with Datadog SDKs
-      url: /opentelemetry/instrument/api_support
-      identifier: otel-api-dd-sdk
+    - name: Using Datadog SDK
+      url: /opentelemetry/instrument/dd_sdks
+      identifier: otel-dd-sdk-parent
       parent: otel-instrumentation
       weight: 302
-    - name: Java
-      url: /opentelemetry/instrument/api_support/java
-      parent: otel-api-dd-sdk
-      weight: 3021
-      identifier: otel_api_java
-    - name: Python
-      url: /opentelemetry/instrument/api_support/python/traces
-      parent: otel-api-dd-sdk
-      weight: 3022
-      identifier: otel_api_python
-    - name: Ruby
-      url: /opentelemetry/instrument/api_support/ruby
-      parent: otel-api-dd-sdk
-      weight: 3023
-      identifier: otel_api_ruby
-    - name: Go
-      url: /opentelemetry/instrument/api_support/go
-      parent: otel-api-dd-sdk
-      weight: 3024
-      identifier: otel_api_go
-    - name: Node.js
-      url: /opentelemetry/instrument/api_support/nodejs/traces
-      parent: otel-api-dd-sdk
-      weight: 3025
-      identifier: otel_api_nodejs
-    - name: PHP
-      url: /opentelemetry/instrument/api_support/php
-      parent: otel-api-dd-sdk
-      weight: 3026
-      identifier: otel_api_php
-    - name: .NET
-      url: /opentelemetry/instrument/api_support/dotnet/traces
-      parent: otel-api-dd-sdk
-      weight: 3027
-      identifier: otel_api_dotnet
-    - name: Rust
-      url: /opentelemetry/instrument/api_support/rust
-      parent: otel-api-dd-sdk
-      weight: 3028
-      identifier: otel_api_rust
-    - name: OTel Instrumentation Libraries
-      url: /opentelemetry/instrument/instrumentation_libraries/
-      identifier: otel_instrumentation_libraries
-      parent: otel-instrumentation
-      weight: 303
     - name: Configuration
       url: opentelemetry/config/environment_variable_support/
       identifier: otel_env_var
-      parent: otel-instrumentation
-      weight: 304
+      parent: otel-dd-sdk-parent
+      weight: 3021
+    - name: APIs
+      url: /opentelemetry/instrument/dd_sdks/api_support
+      identifier: otel-api-dd-sdk
+      parent: otel-dd-sdk-parent
+      weight: 3022
+    - name: Instrumentation Libraries
+      url: /opentelemetry/instrument/dd_sdks/instrumentation_libraries/
+      identifier: otel_instrumentation_libraries
+      parent: otel-dd-sdk-parent
+      weight: 3023
     - name: Send Data to Datadog
       identifier: otel_collect
       url: /opentelemetry/setup/
@@ -1109,7 +1074,7 @@ menu:
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
-      weight: 7011  
+      weight: 7011
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
@@ -2615,11 +2580,6 @@ menu:
       parent: incident_response_heading
       identifier: oncall
       weight: 30000
-    - name: Datadog Clipboard
-      url: incident_response/incident_management/datadog_clipboard
-      parent: incidents
-      identifier: incidents_clipboard
-      weight: 10
     - name: Onboard a Team
       url: incident_response/on-call/teams/
       parent: oncall
@@ -3023,7 +2983,7 @@ menu:
       url: infrastructure/end_user_device_monitoring/setup/
       identifier: end_user_device_monitoring_setup
       parent: end_user_device_monitoring
-      weight: 1      
+      weight: 1
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -3258,7 +3218,7 @@ menu:
       weight: 604
     - name: Managed Instances
       url: containers/amazon_ecs/managed_instances/
-      parent: containers_amazon_ecs 
+      parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_managed_instances
       weight: 605
     - name: AWS Fargate with ECS
@@ -3378,7 +3338,7 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101
-    - name: Managed Instances 
+    - name: Managed Instances
       url: serverless/aws_lambda/managed_instances
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_managed_instances
@@ -3578,7 +3538,7 @@ menu:
       url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
       identifier: cnm_network_health
-      weight: 102 
+      weight: 102
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
@@ -3618,7 +3578,7 @@ menu:
       url: network_monitoring/devices
       parent: nm_parent
       identifier: ndm
-      weight: 3      
+      weight: 3
     - name: Setup
       url: network_monitoring/devices/setup
       parent: ndm
@@ -3628,7 +3588,7 @@ menu:
       url: network_monitoring/devices/supported_devices
       parent: ndm_setup
       identifier: ndm_supported_devices
-      weight: 30101 
+      weight: 30101
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm_setup
@@ -3668,7 +3628,7 @@ menu:
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 304   
+      weight: 304
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
@@ -3733,7 +3693,7 @@ menu:
       url: network_monitoring/network_path/glossary
       parent: network_path
       identifier: network_path_glossary
-      weight: 506 
+      weight: 506
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -4062,26 +4022,31 @@ menu:
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_cpp
       weight: 2027
+    - name: Rust
+      url: tracing/trace_collection/dd_libraries/rust
+      parent: auto_dd_libraries
+      identifier: auto_dd_libraries_rust
+      weight: 2028  
     - name: .NET Core
       url: tracing/trace_collection/dd_libraries/dotnet-core
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_dotnet_core
-      weight: 2028
+      weight: 2029
     - name: .NET Framework
       url: tracing/trace_collection/dd_libraries/dotnet-framework
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_dotnet_framework  
-      weight: 2029
+      weight: 2030
     - name: Android
       url: tracing/trace_collection/dd_libraries/android
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_android
-      weight: 2030
+      weight: 2031
     - name: iOS
       url: tracing/trace_collection/dd_libraries/ios
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_ios
-      weight: 2031
+      weight: 2032
     - name: Code-based Custom Instrumentation
       url: tracing/trace_collection/custom_instrumentation/
       parent: tracing_trace_collection
@@ -5149,7 +5114,7 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
-    - name: Cost 
+    - name: Cost
       url: llm_observability/monitoring/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
@@ -5223,9 +5188,9 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
       weight: 403
-    - name: Export API 
+    - name: Export API
       url: llm_observability/evaluations/export_api
-      parent: llm_obs_evaluations 
+      parent: llm_obs_evaluations
       identifier: llm_obs_evaluations_export_api
       weight: 404
     - name: Experiments
@@ -5243,11 +5208,16 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_datasets
       weight: 502
+    - name: Analyzing Results
+      url: llm_observability/experiments/analyzing_results
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_analyzing_results
+      weight: 503
     - name: Experiments API
       url: llm_observability/experiments/api
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
-      weight: 503
+      weight: 504
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
@@ -5710,16 +5680,6 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_setup
       weight: 1
-    - name: Deployment Data Sources
-      url: dora_metrics/setup/deployments
-      parent: dora_metrics_setup
-      identifier: dora_metrics_setup_deployments
-      weight: 101
-    - name: Failure Data Sources
-      url: dora_metrics/setup/failures/
-      parent: dora_metrics_setup
-      identifier: dora_metrics_setup_failures
-      weight: 102
     - name: Change Failure Detection
       url: dora_metrics/change_failure_detection/
       parent: dora_metrics
@@ -5771,31 +5731,36 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: .NET
+      url: feature_flags/server/dotnet
+      parent: feature_flags_server
+      identifier: feature_flags_server_dotnet
+      weight: 201
     - name: Go
       url: feature_flags/server/go
       parent: feature_flags_server
       identifier: feature_flags_server_go
-      weight: 201
+      weight: 202
     - name: Java
       url: feature_flags/server/java
       parent: feature_flags_server
       identifier: feature_flags_server_java
-      weight: 202
+      weight: 203
     - name: Node.js
       url: feature_flags/server/nodejs
       parent: feature_flags_server
       identifier: feature_flags_server_nodejs
-      weight: 203
+      weight: 204
     - name: Python
       url: feature_flags/server/python
       parent: feature_flags_server
       identifier: feature_flags_server_python
-      weight: 204
+      weight: 205
     - name: Ruby
       url: feature_flags/server/ruby
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
-      weight: 205
+      weight: 206
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -7465,7 +7430,7 @@ menu:
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
       parent: sec_static_analysis
-      weight: 5     
+      weight: 5
     - name: SAST Custom Rule Creation Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
@@ -7851,7 +7816,7 @@ menu:
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 10  
+      weight: 10
     - name: Template Variables
       url: synthetics/notifications/template_variables
       parent: synthetics_notifications
@@ -8069,51 +8034,56 @@ menu:
       parent: rum_mobile_android
       identifier: rum_mobile_android_crash
       weight: 102
+    - name: Monitoring App Launch
+      url: real_user_monitoring/application_monitoring/android/application_launch_monitoring
+      parent: rum_mobile_android
+      identifier: rum_mobile_android_application_launch_monitoring
+      weight: 103
     - name: Monitoring App Performance
       url: real_user_monitoring/application_monitoring/android/monitoring_app_performance
       parent: rum_mobile_android
       identifier: rum_mobile_android_monitoring_app_performance
-      weight: 103
+      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/android/advanced_configuration
       parent: rum_mobile_android
       identifier: rum_mobile_android_advanced_config
-      weight: 104
+      weight: 105
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/android/data_collected
       parent: rum_mobile_android
       identifier: rum_mobile_android_data_collected
-      weight: 105
+      weight: 106
     - name: Mobile Vitals
       url: real_user_monitoring/application_monitoring/android/mobile_vitals
       parent: rum_mobile_android
       identifier: rum_mobile_android_mobile_vitals
-      weight: 106
+      weight: 107
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/android/web_view_tracking
       parent: rum_mobile_android
       identifier: rum_mobile_android_web_view_tracking
-      weight: 107
+      weight: 108
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/android/integrated_libraries
       parent: rum_mobile_android
       identifier: rum_mobile_android_integrated_libraries
-      weight: 108
+      weight: 109
     - name: Jetpack Compose Instrumentation
       url: real_user_monitoring/application_monitoring/android/jetpack_compose_instrumentation
       parent: rum_mobile_android
       identifier: rum_mobile_android_jetpack_compose_instrumentation
-      weight: 109
+      weight: 110
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/android/troubleshooting
       parent: rum_mobile_android
       identifier: rum_mobile_android_troubleshooting
-      weight: 110
+      weight: 111
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/android/sdk_performance_impact
       parent: rum_mobile_android
       identifier: rum_mobile_android_performance_overhead
-      weight: 111
+      weight: 112
     - name: iOS and tvOS
       url: real_user_monitoring/application_monitoring/ios
       parent: application_monitoring
@@ -8129,51 +8099,56 @@ menu:
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_crash
       weight: 102
+    - name: Monitoring App Launch
+      url: real_user_monitoring/application_monitoring/ios/application_launch_monitoring
+      parent: rum_mobile_ios
+      identifier: rum_mobile_ios_application_launch_monitoring
+      weight: 103
     - name: Mobile App Performance
       url: real_user_monitoring/application_monitoring/ios/monitoring_app_performance
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_monitoring_app_performance
-      weight: 103
+      weight: 104
     - name: Advanced Configuration
       url: real_user_monitoring/application_monitoring/ios/advanced_configuration
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_advanced_config
-      weight: 104
+      weight: 105
     - name: Data Collected
       url: real_user_monitoring/application_monitoring/ios/data_collected
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_data_collected
-      weight: 105
+      weight: 106
     - name: Mobile Vitals
       url: real_user_monitoring/application_monitoring/ios/mobile_vitals?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_mobile_vitals
-      weight: 106
+      weight: 107
     - name: Web View Tracking
       url: real_user_monitoring/application_monitoring/ios/web_view_tracking?tab=ios
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_web_view_tracking
-      weight: 107
+      weight: 108
     - name: Integrated Libraries
       url: real_user_monitoring/application_monitoring/ios/integrated_libraries
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_integrated_libraries
-      weight: 108
+      weight: 109
     - name: Troubleshooting
       url: real_user_monitoring/application_monitoring/ios/troubleshooting
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_troubleshooting
-      weight: 109
+      weight: 110
     - name: Supported Versions
       url: real_user_monitoring/application_monitoring/ios/supported_versions
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_supported_versions
-      weight: 110
+      weight: 111
     - name: SDK Performance Impact
       url: real_user_monitoring/application_monitoring/ios/sdk_performance_impact
       parent: rum_mobile_ios
       identifier: rum_mobile_ios_performance_overhead
-      weight: 111
+      weight: 112
     - name: Flutter
       url: real_user_monitoring/application_monitoring/flutter
       parent: application_monitoring

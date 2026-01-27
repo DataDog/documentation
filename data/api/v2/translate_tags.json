@@ -311,6 +311,10 @@
     "name": "Service Scorecards",
     "description": "API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
+  "servicenow-integration": {
+    "name": "ServiceNow Integration",
+    "description": "Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations."
+  },
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
@@ -330,6 +334,10 @@
   "static-analysis": {
     "name": "Static Analysis",
     "description": "API for static analysis"
+  },
+  "status-pages": {
+    "name": "Status Pages",
+    "description": "Manage your status pages and communicate service disruptions to stakeholders via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/) for more information."
   },
   "synthetics": {
     "name": "Synthetics",
