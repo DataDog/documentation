@@ -27,7 +27,7 @@ further_reading:
 
 In Datadog, the [Containers Explorer][1] page (formerly known as Live Containers) provides real-time visibility into all containers across your environment.
 
-Inspired by *htop*, *ctop*, and *kubectl*, Containers Explorer gives you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
+Inspired by *htop*, *ctop*, and *kubectl*, Containers Explorer gives you complete coverage of your container infrastructure. View data in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
 
 ## Configuration
 
@@ -84,7 +84,7 @@ datadog:
 ```
 
 #### Troubleshooting: No cluster name set
-If you see the error `Orchestrator explorer enabled but no cluster name set: disabling.`, then Datadog is failing to detect your Kubernetes cluster name. To fix this error, set `datadog.clusterName` to your cluster name in `datadog-values.yaml`.
+If you see the error `Orchestrator explorer enabled but no cluster name set: disabling.` error, Datadog is failing to detect your Kubernetes cluster name. To fix, set `datadog.clusterName` to your cluster name in the `datadog-values.yaml` file.
 
 ```yaml
 datadog:

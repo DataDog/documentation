@@ -24,7 +24,7 @@ Log into Datadog and use the [Install Agents][2] page to install the Datadog Age
   {{< nextlink href="/containers/monitoring/containers_explorer">}}<u>Containers Explorer</u>: Use and configure Containers Explorer for real-time visibility into your containers. {{< /nextlink >}}
   {{< nextlink href="/containers/monitoring/container_images">}}<u>Container Images Explorer</u>: Use and configure Containers Images Explorer to monitor the container {{< /nextlink >}}
   {{< nextlink href="/containers/monitoring/kubernetes_explorer">}}<u>Kubernetes Explorer</u>: Use the Kubernetes Explorer page to monitor your Kubernetes resources. {{< /nextlink >}}
-  {{< nextlink href="/containers/monitoring/kubernetes_explorer_configuration">}}<u>ConfigureKubernetes Explorer</u>: Configure the Kubernetes Explorer page. {{< /nextlink >}}
+  {{< nextlink href="/containers/monitoring/kubernetes_explorer_configuration">}}<u>Configure Kubernetes Explorer</u>: Configure the Kubernetes Explorer page. {{< /nextlink >}}
   {{< nextlink href="/containers/monitoring/kubernetes_resource_utilization">}}<u>Kubernetes Resource Utilization</u>: Using and configuring the Kubernetes Resource Utilization page {{< /nextlink >}}
   {{< nextlink href="/containers/autoscaling">}}<u>Kubernetes Autoscaling</u>: Using and configuring Kubernetes Autoscaling {{< /nextlink >}}
   {{< nextlink href="/containers/bits_ai_kubernetes_remediation">}}<u>Kubernetes Remediation</u>: Using and configuring the Kubernetes Remediation page {{< /nextlink >}}
@@ -33,7 +33,7 @@ Log into Datadog and use the [Install Agents][2] page to install the Datadog Age
 
 ## Docker-based environments
 
-{{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent in a Docker-based environment (Docker, containerd, Podman):">}}
+{{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent in a Docker-based environment (Docker, containerd, and Podman):">}}
   {{< nextlink href="/containers/docker">}}<u>Datadog Docker Agent</u>: Install and configure the Datadog Docker Agent for Docker, containerd, and Podman runtimes {{< /nextlink >}}
   {{< nextlink href="/containers/docker/apm">}}<u>APM</u>: Configure APM trace collection for applications running in Docker containers using the Datadog Agent {{< /nextlink >}}
   {{< nextlink href="/containers/docker/log">}}<u>Log collection</u>: Configure log collection for applications running in Docker containers using the Datadog Agent {{< /nextlink >}}
@@ -73,7 +73,7 @@ Log into Datadog and use the [Install Agents][2] page to install the Datadog Age
 {{< whatsnext desc="These pages discuss installing and configuring the Datadog Agent on Amazon ECS:">}}
   {{< nextlink href="/containers/amazon_ecs">}}<u>Amazon ECS</u>: Install and configure the Datadog Agent on Amazon Elastic Container Service {{< /nextlink >}}
   {{< nextlink href="/containers/amazon_ecs/apm">}}<u>Tracing ECS Applications</u>: Configure APM trace collection for containerized applications running on Amazon ECS {{< /nextlink >}}
-  {{< nextlink href="/containers/amazon_ecs/log">}}<u>Log collection</u>: Configure log collection from containerized applications running on Amazon ECS using the Datadog Agent {{< /nextlink >}}
+  {{< nextlink href="/containers/amazon_ecs/logs">}}<u>Log collection</u>: Configure log collection from containerized applications running on Amazon ECS using the Datadog Agent {{< /nextlink >}}
   {{< nextlink href="/containers/amazon_ecs/tags">}}<u>Tag extraction</u>: Configure automatic tag extraction from container labels and environment variables in Amazon ECS {{< /nextlink >}}
   {{< nextlink href="/containers/amazon_ecs/data_collected">}}<u>Data collection</u>: Reference guide for metrics, logs, and events collected by the Datadog Agent on Amazon ECS {{< /nextlink >}}
   {{< nextlink href="/containers/amazon_ecs/managed_instances">}}<u>Managed Instances</u>: Install and configure the Datadog Agent on Amazon ECS Managed Instances {{< /nextlink >}}
@@ -84,7 +84,7 @@ Log into Datadog and use the [Install Agents][2] page to install the Datadog Age
 
 {{< whatsnext desc="">}}
   {{< nextlink href="/containers/troubleshooting">}}<u>Container Troubleshooting</u>: Troubleshooting containers-related issues {{< /nextlink >}}
-  {{< nextlink href="/containers/guides">}}<u>Container Guides</u>: List of guides for container monitoring setup and configuration {{< /nextlink >}}
+  {{< nextlink href="/containers/guide">}}<u>Container Guides</u>: List of guides for container monitoring setup and configuration {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
