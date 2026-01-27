@@ -5203,11 +5203,6 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 503
-    - name: Prompt Optimization
-      url: llm_observability/experiments/prompt_optimization
-      parent: llm_obs_experiments
-      identifier: llm_obs_prompt_optimization
-      weight: 504
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
