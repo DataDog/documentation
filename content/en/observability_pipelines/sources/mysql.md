@@ -146,7 +146,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 #### Single-node execution requirements
 
 - Observability Pipelines Workers are deployed in a share-nothing architecture.
-- Datadog recommends deploying database pipelines using the Database source on one Worker node only. Otherwise, you run the risk of pulling duplicate data across multiple workers.
+- Datadog recommends deploying database pipelines using the MySQL source on one Worker node only. Otherwise, you run the risk of pulling duplicate data across multiple Workers.
 
 ### Queries
 
