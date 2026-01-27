@@ -52,7 +52,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Compatibility
 
-`dd-trace-js >= v5.74.0` and `dd-trace-js >= v4.43.0`
+`dd-trace-js >= v5.74.0`
 
 ### Configuration
 
