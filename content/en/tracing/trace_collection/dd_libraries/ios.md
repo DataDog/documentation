@@ -438,7 +438,37 @@ span.log(
 {{% /tab %}}
 {{< /tabs >}}
 
-8. (Optional) To distribute traces between your environments, for example frontend - backend, you can either do it manually or leverage our auto instrumentation. In both cases, you can opt to inject the trace context into all requests or only into the sampled ones. A sampling of 100% is applied by default.
+8. (Optional) Override a sampling decision by forcing a trace to be kept or dropped. For example, always keep a trace of a critical transaction, or always drop unnecessary, repetitive traces.
+
+Manually keep a trace:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+span.keepTrace()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+[span keepTrace];
+{{% /tab %}}
+{{< /tabs >}}
+
+Manually drop a trace:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+span.dropTrace()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+[span dropTrace];
+{{% /tab %}}
+{{< /tabs >}}
+
+Always call `keepTrace()` or `dropTrace()` on a root span before child spans are created, and before any context propagation. Otherwise, the system can't ensure consistency, resulting in partial traces being ingested.
+
+9. (Optional) To distribute traces between your environments, for example frontend - backend, you can either do it manually or leverage our auto instrumentation. In both cases, you can opt to inject the trace context into all requests or only into the sampled ones. A sampling of 100% is applied by default.
 
 * To manually propagate the trace, inject the span context into `URLRequest` headers:
 
