@@ -765,13 +765,22 @@
     "request_description": "",
     "request_schema_description": "The definition of the `BudgetWithEntries` object."
   },
+  "ValidateCsvBudget": {
+    "summary": "Validate CSV budget"
+  },
+  "ValidateBudget": {
+    "description": "Validate a budget configuration without creating or modifying it",
+    "summary": "Validate budget",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteBudget": {
-    "description": "Delete a budget.",
-    "summary": "Delete a budget"
+    "description": "Delete a budget",
+    "summary": "Delete budget"
   },
   "GetBudget": {
-    "description": "Get a budget.",
-    "summary": "Get a budget"
+    "description": "Get a budget",
+    "summary": "Get budget"
   },
   "ListBudgets": {
     "description": "List budgets.",
@@ -1087,6 +1096,16 @@
     "description": "Get the details of an event by `event_id`.",
     "summary": "Get an event"
   },
+  "GetHamrOrgConnection": {
+    "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
+    "summary": "Get HAMR organization connection"
+  },
+  "CreateHamrOrgConnection": {
+    "description": "Create or update the High Availability Multi-Region (HAMR) organization connection.\nThis endpoint allows you to configure the HAMR connection between the authenticated organization\nand a target organization, including setting the connection status (ONBOARDING, PASSIVE, FAILOVER, ACTIVE, RECOVERY)",
+    "summary": "Create or update HAMR organization connection",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidents": {
     "description": "Get all incidents for the user's organization.",
     "summary": "Get a list of incidents"
@@ -1096,6 +1115,36 @@
     "summary": "Create an incident",
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
+  },
+  "DeleteGlobalIncidentHandle": {
+    "description": "Delete a global incident handle.",
+    "summary": "Delete global incident handle"
+  },
+  "ListGlobalIncidentHandles": {
+    "description": "Retrieve a list of global incident handles.",
+    "summary": "List global incident handles"
+  },
+  "CreateGlobalIncidentHandle": {
+    "description": "Create a new global incident handle.",
+    "summary": "Create global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateGlobalIncidentHandle": {
+    "description": "Update an existing global incident handle.",
+    "summary": "Update global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetGlobalIncidentSettings": {
+    "description": "Retrieve global incident settings for the organization.",
+    "summary": "Get global incident settings"
+  },
+  "UpdateGlobalIncidentSettings": {
+    "description": "Update global incident settings for the organization.",
+    "summary": "Update global incident settings",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
@@ -1195,7 +1244,7 @@
     "description": "Create an incident attachment.",
     "summary": "Create incident attachment",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Create request for an attachment."
   },
   "CreateIncidentPostmortemAttachment": {
     "description": "Create a postmortem attachment for an incident.",
@@ -1209,7 +1258,7 @@
   "UpdateIncidentAttachment": {
     "summary": "Update incident attachment",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request to update an attachment."
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
@@ -1474,6 +1523,46 @@
     "summary": "Update a single service object",
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
+  },
+  "ListServiceNowAssignmentGroups": {
+    "description": "Get all assignment groups for a ServiceNow instance.",
+    "summary": "List ServiceNow assignment groups"
+  },
+  "ListServiceNowBusinessServices": {
+    "description": "Get all business services for a ServiceNow instance.",
+    "summary": "List ServiceNow business services"
+  },
+  "ListServiceNowTemplates": {
+    "description": "Get all ServiceNow templates for the organization.",
+    "summary": "List ServiceNow templates"
+  },
+  "CreateServiceNowTemplate": {
+    "description": "Create a new ServiceNow template.",
+    "summary": "Create ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to create a ServiceNow template"
+  },
+  "DeleteServiceNowTemplate": {
+    "description": "Delete a ServiceNow template by ID.",
+    "summary": "Delete ServiceNow template"
+  },
+  "GetServiceNowTemplate": {
+    "description": "Get a ServiceNow template by ID.",
+    "summary": "Get ServiceNow template"
+  },
+  "UpdateServiceNowTemplate": {
+    "description": "Update a ServiceNow template by ID.",
+    "summary": "Update ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to update a ServiceNow template"
+  },
+  "ListServiceNowInstances": {
+    "description": "Get all ServiceNow instances for the organization.",
+    "summary": "List ServiceNow instances"
+  },
+  "ListServiceNowUsers": {
+    "description": "Get all users for a ServiceNow instance.",
+    "summary": "List ServiceNow users"
   },
   "ListCloudflareAccounts": {
     "description": "List Cloudflare accounts.",
@@ -2949,6 +3038,12 @@
     "request_description": "",
     "request_schema_description": "Create a new rule."
   },
+  "BulkExportSecurityMonitoringRules": {
+    "description": "Export a list of security monitoring rules as a ZIP file containing JSON rule definitions.\nThe endpoint accepts a list of rule IDs and returns a ZIP archive where each rule is\nsaved as a separate JSON file named after the rule.",
+    "summary": "Bulk export security monitoring rules",
+    "request_description": "",
+    "request_schema_description": "Payload for bulk exporting security monitoring rules."
+  },
   "ConvertSecurityMonitoringRuleFromJSONToTerraform": {
     "description": "Convert a rule that doesn't (yet) exist from JSON to Terraform for Datadog provider\nresource `datadog_security_monitoring_rule`. You can do so for the following rule types:\n- App and API Protection\n- Cloud SIEM (log detection and signal correlation)\n- Workload Protection\n\nYou can convert Cloud Security configuration rules using Terraform's [Datadog Cloud Configuration Rule resource](https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/cloud_configuration_rule).",
     "summary": "Convert a rule from JSON to Terraform",
@@ -3249,6 +3344,54 @@
     "request_description": "",
     "request_schema_description": ""
   },
+  "DeleteCustomRuleset": {
+    "description": "Delete a custom ruleset",
+    "summary": "Delete Custom Ruleset"
+  },
+  "GetCustomRuleset": {
+    "description": "Get a custom ruleset by name",
+    "summary": "Show Custom Ruleset"
+  },
+  "UpdateCustomRuleset": {
+    "description": "Update an existing custom ruleset",
+    "summary": "Update Custom Ruleset",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateCustomRule": {
+    "description": "Create a new custom rule within a ruleset",
+    "summary": "Create Custom Rule",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteCustomRule": {
+    "description": "Delete a custom rule",
+    "summary": "Delete Custom Rule"
+  },
+  "GetCustomRule": {
+    "description": "Get a custom rule by name",
+    "summary": "Show Custom Rule"
+  },
+  "ListCustomRuleRevisions": {
+    "description": "Get all revisions for a custom rule",
+    "summary": "List Custom Rule Revisions"
+  },
+  "CreateCustomRuleRevision": {
+    "description": "Create a new revision for a custom rule",
+    "summary": "Create Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "RevertCustomRuleRevision": {
+    "description": "Revert a custom rule to a previous revision",
+    "summary": "Revert Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetCustomRuleRevision": {
+    "description": "Get a specific revision of a custom rule",
+    "summary": "Show Custom Rule Revision"
+  },
   "ListMultipleRulesets": {
     "description": "Get rules for multiple rulesets in batch.",
     "summary": "Ruleset get multiple",
@@ -3258,6 +3401,78 @@
   "GetSecretsRules": {
     "description": "Returns a list of Secrets rules with ID, Pattern, Description, Priority, and SDS ID.",
     "summary": "Returns a list of Secrets rules"
+  },
+  "ListStatusPages": {
+    "description": "Lists all status pages for the organization.",
+    "summary": "List status pages"
+  },
+  "CreateStatusPage": {
+    "description": "Creates a new status page.",
+    "summary": "Create status page",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListDegradations": {
+    "description": "Lists all degradations for the organization. Optionally filter by status and page.",
+    "summary": "List degradations"
+  },
+  "DeleteStatusPage": {
+    "description": "Deletes a status page by its ID.",
+    "summary": "Delete status page"
+  },
+  "GetStatusPage": {
+    "description": "Retrieves a specific status page by its ID.",
+    "summary": "Get status page"
+  },
+  "UpdateStatusPage": {
+    "description": "Updates an existing status page's attributes.",
+    "summary": "Update status page",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListComponents": {
+    "description": "Lists all components for a status page.",
+    "summary": "List components"
+  },
+  "CreateComponent": {
+    "description": "Creates a new component.",
+    "summary": "Create component",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteComponent": {
+    "description": "Deletes a component by its ID.",
+    "summary": "Delete component"
+  },
+  "GetComponent": {
+    "description": "Retrieves a specific component by its ID.",
+    "summary": "Get component"
+  },
+  "UpdateComponent": {
+    "description": "Updates an existing component's attributes.",
+    "summary": "Update component",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateDegradation": {
+    "description": "Creates a new degradation.",
+    "summary": "Create degradation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteDegradation": {
+    "description": "Deletes a degradation by its ID.",
+    "summary": "Delete degradation"
+  },
+  "GetDegradation": {
+    "description": "Retrieves a specific degradation by its ID.",
+    "summary": "Get degradation"
+  },
+  "UpdateDegradation": {
+    "description": "Updates an existing degradation's attributes.",
+    "summary": "Update degradation",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",
@@ -3511,6 +3726,12 @@
     "summary": "Update an existing incident team",
     "request_description": "Incident Team Payload.",
     "request_schema_description": "Update request with an incident team payload."
+  },
+  "UpdateFlakyTests": {
+    "description": "Update the state of multiple flaky tests in Flaky Test Management.",
+    "summary": "Update flaky test states",
+    "request_description": "",
+    "request_schema_description": "Request to update the state of multiple flaky tests."
   },
   "SearchFlakyTests": {
     "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",

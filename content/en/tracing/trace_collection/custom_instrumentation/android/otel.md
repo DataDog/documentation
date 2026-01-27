@@ -41,7 +41,6 @@ dependencies {
 
 ```groovy
 android {
-
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         // ...
@@ -65,9 +64,9 @@ android {
         override fun onCreate() {
             super.onCreate()
             val configuration = Configuration.Builder(
-                clientToken = <CLIENT_TOKEN>,
-                env = <ENV_NAME>,
-                variant = <APP_VARIANT_NAME>
+                 clientToken = <CLIENT_TOKEN>,
+                 env = <ENV_NAME>,
+                 variant = <APP_VARIANT_NAME>
             ).build()
             Datadog.initialize(this, configuration, trackingConsent)
         }
@@ -99,9 +98,9 @@ android {
         override fun onCreate() {
             super.onCreate()
             val configuration = Configuration.Builder(
-                    clientToken = <CLIENT_TOKEN>,
-                    env = <ENV_NAME>,
-                    variant = <APP_VARIANT_NAME>
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
                 )
                 .useSite(DatadogSite.EU1)
                 .build()
@@ -136,9 +135,9 @@ android {
         override fun onCreate() {
             super.onCreate()
             val configuration = Configuration.Builder(
-                    clientToken = <CLIENT_TOKEN>,
-                    env = <ENV_NAME>,
-                    variant = <APP_VARIANT_NAME>
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
                 )
                 .useSite(DatadogSite.US3)
                 .build()
@@ -173,9 +172,9 @@ android {
         override fun onCreate() {
             super.onCreate()
             val configuration = Configuration.Builder(
-                    clientToken = <CLIENT_TOKEN>,
-                    env = <ENV_NAME>,
-                    variant = <APP_VARIANT_NAME>
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
                 )
                 .useSite(DatadogSite.US5)
                 .build()
@@ -210,9 +209,9 @@ android {
         override fun onCreate() {
             super.onCreate()
             val configuration = Configuration.Builder(
-                    clientToken = <CLIENT_TOKEN>,
-                    env = <ENV_NAME>,
-                    variant = <APP_VARIANT_NAME>
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
                 )
                 .useSite(DatadogSite.US1_FED)
                 .build()
@@ -247,9 +246,9 @@ android {
         override fun onCreate() {
             super.onCreate()
             val configuration = Configuration.Builder(
-                    clientToken = <CLIENT_TOKEN>,
-                    env = <ENV_NAME>,
-                    variant = <APP_VARIANT_NAME>
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
                 )
                 .useSite(DatadogSite.AP1)
                 .build()
@@ -284,9 +283,9 @@ android {
         override fun onCreate() {
             super.onCreate()
             val configuration = Configuration.Builder(
-                    clientToken = <CLIENT_TOKEN>,
-                    env = <ENV_NAME>,
-                    variant = <APP_VARIANT_NAME>
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
                 )
                 .useSite(DatadogSite.AP2)
                 .build()
@@ -329,9 +328,9 @@ android {
    Use the utility method `isInitialized` to check if the SDK is properly initialized:
 
    ```kotlin
-    if (Datadog.isInitialized()) {
-        // your code here
-    }
+   if (Datadog.isInitialized()) {
+       // your code here
+   }
    ```
    When writing your application, you can enable development logs by calling the `setVerbosity` method. All internal messages in the library with a priority equal to or higher than the provided level are then logged to Android's Logcat:
    ```kotlin
@@ -431,7 +430,7 @@ span.end();
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-let childSpan = tracer.spanBuilder(spanName = "response decoding")
+val childSpan = tracer.spanBuilder(spanName = "response decoding")
     .setParent(Context.current().with(parentSpan)) // make it child of parent span
     .startSpan()
 
@@ -480,7 +479,7 @@ span.recordException(exception)
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-span.setStatus(StatusCode.ERROR, "<error_description>")
+span.setStatus(StatusCode.ERROR, "<error_description>");
 
 // or if you want to set an exception
 
@@ -547,8 +546,8 @@ val request = Request.Builder()
 {{% tab "Java" %}}
 ```Java
 final Span parentSpan = tracer.spanBuilder("parent span").startSpan();
-parentSpan.end()
-final Request:request = new Request.Builder()
+parentSpan.end();
+final Request request = new Request.Builder()
     .url("<URL>")
     .addParentSpan(parentSpan)
     .build();
@@ -650,7 +649,7 @@ new Retrofit.Builder()
     .addCallAdapterFactory(RxJava3CallAdapterFactory.createSynchronous())
     .client(okHttpClient)
     .build();
- ```
+```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -710,7 +709,7 @@ remoteDataSource.getData(query)
             scopeStorage.remove();
         }
     });
- ```
+```
 {{% /tab %}}
 {{< /tabs >}}
 
