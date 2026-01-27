@@ -345,23 +345,23 @@ To enable the Android SDK to start sending data:
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build()
-    Rum.enable(rumConfig)
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build()
+Rum.enable(rumConfig)
 ```
 {{% /tab %}}
 
 {{% tab "Java" %}}
 ```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build();
-    Rum.enable(rumConfig);
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .trackInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build();
+Rum.enable(rumConfig);
 ```
 
 {{% /tab %}}
