@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -41,7 +42,6 @@ Set up the Amazon Security Lake destination and its environment variables when y
 ##### Enable TLS
 
 Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.
-
 **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][4] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - Enter the identifier for your Amazon Security Lake key pass. If you leave it blank, the [default](#set-secrets) is used.
     - **Note**: Only enter the identifier for the key pass. Do **not** enter the actual key pass.
@@ -51,11 +51,7 @@ Toggle the switch to **Enable TLS**. If you enable TLS, the following certificat
 
 ##### Buffering options
 
-Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-- If left disabled, the maximum size for buffering is 500 events.
-- If enabled:
-    1. Select the buffer type you want to set (**Memory** or **Disk**).
-    1. Enter the buffer size and select the unit.
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 

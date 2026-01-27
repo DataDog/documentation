@@ -58,6 +58,8 @@ Blueprints are helpful app templates that cover common use cases and showcase be
 1. Click **Open in Editor**.
 1. [Customize your app][15].
 
+<div class="alert alert-tip">You can also access blueprints from the <a href="https://app.datadoghq.com/integrations">integrations page</a>. Click an integration, then click <b>Monitoring Resources</b> to see the available blueprints.</div>
+
 ### Build an app from a layout
 
 Choosing a layout is the fastest way to create a minimal, ready-to-edit app. 

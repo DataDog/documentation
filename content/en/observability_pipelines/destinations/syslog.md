@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -31,9 +32,9 @@ The rsyslog and syslog-ng destinations match these log fields to the following S
 | log["host"]     | HOSTNAME     | `NIL`                      |
 | log["timestamp"]| TIMESTAMP    | Current UTC time.          |
 
-To set up the syslog destination in the UI:
-
 <div class="alert alert-danger">Only enter the identifiers for the syslog endpoint URL and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
+
+To set up the syslog destination in the UI:
 
 - Enter the identifier for your endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 
@@ -53,11 +54,7 @@ Enter the number of seconds to wait before sending TCP keepalive probes on an id
 
 ##### Buffering options
 
-Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-- If left disabled, the maximum size for buffering is 500 events.
-- If enabled:
-	1. Select the buffer type you want to set (**Memory** or **Disk**).
-	1. Enter the buffer size and select the unit.
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set secrets
 

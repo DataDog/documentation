@@ -345,7 +345,7 @@ let tracer = Tracer.shared()
 DDTraceConfiguration *configuration = [[DDTraceConfiguration alloc] init];
 configuration.networkInfoEnabled = YES;
 
-[DDTrace enableWithConfiguration:configuration];
+[DDTrace enableWith:configuration];
 
 DDTracer *tracer = [Tracer shared];
 ```
@@ -519,7 +519,7 @@ DDTraceURLSessionTracking *urlSessionTracking = [DDTraceURLSessionTracking alloc
 DDTraceConfiguration *configuration = [[DDTraceConfiguration] alloc] init];
 [configuration setURLSessionTracking:urlSessionTracking];
 
-[DDTrace enableWithConfiguration:configuration];
+[DDTrace enableWith:configuration];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                         delegate:[[DDNSURLSessionDelegate alloc] init]

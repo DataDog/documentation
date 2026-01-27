@@ -80,7 +80,7 @@ Incident AI can dynamically populate key details in stakeholder notifications, d
 
 ## Proactive incident summaries
 
-When you join an incident channel in Slack (connected to Datadog Incident Management), Incident AI automatically posts a summary containing key information about the incident such as the contributing factors, impact, issue, and remediation. This summary is only visible to you.
+When you join an incident channel in Slack (connected to Datadog Incident Management), Incident AI automatically posts a summary containing key information about the incident such as the contributing factors, impact, issue, and remediation. This can also be requested ad-hoc using `/dd incident summary`. This summary is only visible to you.
 
 When an incident is changed to resolved, Incident AI posts a final summary. This is visible to everyone in the channel.
 

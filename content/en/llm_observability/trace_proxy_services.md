@@ -1,5 +1,5 @@
 ---
-title: Trace Proxy Services
+title: Tracing Proxy Services
 ---
 
 ## Overview

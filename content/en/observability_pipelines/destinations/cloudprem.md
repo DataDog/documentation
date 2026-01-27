@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -21,14 +22,9 @@ Set up the CloudPrem destination and its environment variables when you [set up 
 
 ### Set up the destination
 
-Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access.
-- If disabled (default): Up to 500 events are buffered before flush.
-- If enabled:
-	1. Select the buffer type you want to set.
-		- **Memory**: Fast, limited by RAM
-		- **Buffer size**: Durable, survives restarts
-	1. Enter the buffer size and select the unit.
-		- Maximum capacity in MB or GB.
+#### Optional settings
+
+{{% observability_pipelines/destination_buffer %}}
 
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The CloudPrem destination settings" style="width:35%;" >}}
 

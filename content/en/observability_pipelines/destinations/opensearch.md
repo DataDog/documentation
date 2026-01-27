@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -21,12 +22,8 @@ Set up the OpenSearch destination and its environment variables when you [set up
 1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
-1. (Optional) Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
-1. (Optional) Toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+1. Optionally, Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+{{% observability_pipelines/destination_buffer_numbered %}}
 
 ### Set secrets
 

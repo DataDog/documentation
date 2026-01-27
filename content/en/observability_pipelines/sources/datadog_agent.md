@@ -4,8 +4,10 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 - name: Metrics
   icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 further_reading:
   - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
     tag: Blog
