@@ -5198,11 +5198,16 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_datasets
       weight: 502
+    - name: Analyzing Results
+      url: llm_observability/experiments/analyzing_results
+      parent: llm_obs_experiments
+      identifier: llm_obs_experiments_analyzing_results
+      weight: 503
     - name: Experiments API
       url: llm_observability/experiments/api
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
-      weight: 503
+      weight: 504
     - name: Data Security and RBAC
       url: llm_observability/data_security_and_rbac
       parent: llm_obs
