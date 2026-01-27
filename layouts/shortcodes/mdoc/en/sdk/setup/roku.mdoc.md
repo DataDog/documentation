@@ -44,8 +44,6 @@ For more information about setting up a client token, see the [Client Token docu
 
 In the initialization snippet, set an environment name. For more information, see [Using Tags][10].
 
-{% region-code-block title="US1" region="us" %}
-
 ```vb.net
 sub RunUserInterface(args as dynamic)
     screen = CreateObject("roSGScreen")
@@ -55,7 +53,7 @@ sub RunUserInterface(args as dynamic)
     datadogroku_initialize({
         clientToken: "<CLIENT_TOKEN>",
         applicationId: "<APPLICATION_ID>"
-        site: "us1",
+        site: "{{< region-param key=roku_site >}}",
         env: "<ENV_NAME>",
         sessionSampleRate: 100, ' the percentage (integer) of sessions to track
         launchArgs: args
@@ -64,140 +62,6 @@ sub RunUserInterface(args as dynamic)
     ' complete your channel setup here
 end sub
 ```
-
-{% /region-code-block %}
-{% region-code-block title="EU1" region="eu" %}
-
-```vb.net
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "eu1",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-
-{% /region-code-block %}
-{% region-code-block title="US3" region="us3" %}
-
-```vb.net
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "us3",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-
-{% /region-code-block %}
-{% region-code-block title="US5" region="us5" %}
-
-```vb.net
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "us5",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-
-{% /region-code-block %}
-{% region-code-block title="US1-FED" region="gov" %}
-
-```vb.net
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "us1_fed",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-
-{% /region-code-block %}
-{% region-code-block title="AP1" region="ap1" %}
-
-```vb.net
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "ap1",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-
-{% /region-code-block %}
-{% region-code-block title="AP2" region="ap2" %}
-
-```vb.net
-sub RunUserInterface(args as dynamic)
-    screen = CreateObject("roSGScreen")
-    scene = screen.CreateScene("MyScene")
-    screen.show()
-
-    datadogroku_initialize({
-        clientToken: "<CLIENT_TOKEN>",
-        applicationId: "<APPLICATION_ID>"
-        site: "ap2",
-        env: "<ENV_NAME>",
-        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
-        launchArgs: args
-    })
-
-    ' complete your channel setup here
-end sub
-```
-
-{% /region-code-block %}
 
 #### Sample session rates
 

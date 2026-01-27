@@ -100,8 +100,6 @@ In the initialization snippet, set an environment name. For Android, set a varia
 
 See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][10] to initialize the library.
 
-{% region-code-block title="US1" region="us" %}
-
 ```kotlin
 // in common source set
 fun initializeDatadog(context: Any? = null) {
@@ -114,152 +112,12 @@ fun initializeDatadog(context: Any? = null) {
             clientToken = appClientToken,
             env = appEnvironment,
             variant = appVariantName
-    )
+    ){{< region-param key=kotlin_multiplatform_site_config >}}
         .build()
 
     Datadog.initialize(context, configuration, trackingConsent)
 }
 ```
-
-{% /region-code-block %}
-{% region-code-block title="EU1" region="eu" %}
-
-```kotlin
-// in common source set
-fun initializeDatadog(context: Any? = null) {
-    // context should be application context on Android and can be null on iOS
-    val appClientToken = <CLIENT_TOKEN>
-    val appEnvironment = <ENV_NAME>
-    val appVariantName = <APP_VARIANT_NAME>
-
-    val configuration = Configuration.Builder(
-            clientToken = appClientToken,
-            env = appEnvironment,
-            variant = appVariantName
-    )
-        .useSite(DatadogSite.EU1)
-        .build()
-
-    Datadog.initialize(context, configuration, trackingConsent)
-}
-```
-
-{% /region-code-block %}
-{% region-code-block title="US3" region="us3" %}
-
-```kotlin
-// in common source set
-fun initializeDatadog(context: Any? = null) {
-    // context should be application context on Android and can be null on iOS
-    val appClientToken = <CLIENT_TOKEN>
-    val appEnvironment = <ENV_NAME>
-    val appVariantName = <APP_VARIANT_NAME>
-
-    val configuration = Configuration.Builder(
-            clientToken = appClientToken,
-            env = appEnvironment,
-            variant = appVariantName
-    )
-        .useSite(DatadogSite.US3)
-        .build()
-
-    Datadog.initialize(context, configuration, trackingConsent)
-}
-```
-
-{% /region-code-block %}
-{% region-code-block title="US5" region="us5" %}
-
-```kotlin
-// in common source set
-fun initializeDatadog(context: Any? = null) {
-    // context should be application context on Android and can be null on iOS
-    val appClientToken = <CLIENT_TOKEN>
-    val appEnvironment = <ENV_NAME>
-    val appVariantName = <APP_VARIANT_NAME>
-
-    val configuration = Configuration.Builder(
-            clientToken = appClientToken,
-            env = appEnvironment,
-            variant = appVariantName
-    )
-        .useSite(DatadogSite.US5)
-        .build()
-
-    Datadog.initialize(context, configuration, trackingConsent)
-}
-```
-
-{% /region-code-block %}
-{% region-code-block title="US1-FED" region="gov" %}
-
-```kotlin
-// in common source set
-fun initializeDatadog(context: Any? = null) {
-    // context should be application context on Android and can be null on iOS
-    val appClientToken = <CLIENT_TOKEN>
-    val appEnvironment = <ENV_NAME>
-    val appVariantName = <APP_VARIANT_NAME>
-
-    val configuration = Configuration.Builder(
-            clientToken = appClientToken,
-            env = appEnvironment,
-            variant = appVariantName
-    )
-        .useSite(DatadogSite.US1_FED)
-        .build()
-
-    Datadog.initialize(context, configuration, trackingConsent)
-}
-```
-
-{% /region-code-block %}
-{% region-code-block title="AP1" region="ap1" %}
-
-```kotlin
-// in common source set
-fun initializeDatadog(context: Any? = null) {
-    // context should be application context on Android and can be null on iOS
-    val appClientToken = <CLIENT_TOKEN>
-    val appEnvironment = <ENV_NAME>
-    val appVariantName = <APP_VARIANT_NAME>
-
-    val configuration = Configuration.Builder(
-            clientToken = appClientToken,
-            env = appEnvironment,
-            variant = appVariantName
-    )
-        .useSite(DatadogSite.AP1)
-        .build()
-
-    Datadog.initialize(context, configuration, trackingConsent)
-}
-```
-
-{% /region-code-block %}
-{% region-code-block title="AP2" region="ap2" %}
-
-```kotlin
-// in common source set
-fun initializeDatadog(context: Any? = null) {
-    // context should be application context on Android and can be null on iOS
-    val appClientToken = <CLIENT_TOKEN>
-    val appEnvironment = <ENV_NAME>
-    val appVariantName = <APP_VARIANT_NAME>
-
-    val configuration = Configuration.Builder(
-            clientToken = appClientToken,
-            env = appEnvironment,
-            variant = appVariantName
-    )
-        .useSite(DatadogSite.AP2)
-        .build()
-
-    Datadog.initialize(context, configuration, trackingConsent)
-}
-```
-
-{% /region-code-block %}
 
 ### Step 5 - Sample RUM sessions
 
