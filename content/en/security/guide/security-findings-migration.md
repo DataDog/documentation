@@ -36,7 +36,7 @@ This change comes with a set of [new features](#new-features) that use the new s
   - For [`datadog_security_notification_rule`][17] Terraform resources with `trigger_source: "security_findings"`, update `query` values to use the new search syntax:
     - Starting January 28, 2026, you can migrate your notification rules if they only include finding types that support the new data model (those listed as ***Supported*** in the [Security Findings](#security-findings) table).
     - Otherwise if your Terraform notification rules include a finding type that does not yet support the new data model (those listed with ***Support coming later*** in the [Security Findings](#security-findings) table), you should wait until full support is available.
-    - If you do not migrate at this time, existing Terraform notification rules will continue to work until full support for all finding types is available, and we will provide further communication ahead of any required changes.
+    - If you do not migrate at this time, existing Terraform notification rules continue to operate until full support for all finding types is available. Clear communication is provided in advance of any required changes.
 - If you do not use public APIs or the security findings notification rules terraform resource, **no changes are required**. The following queries are updated automatically in the UI:
   - Explorers
   - Dashboards
