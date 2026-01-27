@@ -1074,7 +1074,7 @@ menu:
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
-      weight: 7011  
+      weight: 7011
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
@@ -2983,7 +2983,7 @@ menu:
       url: infrastructure/end_user_device_monitoring/setup/
       identifier: end_user_device_monitoring_setup
       parent: end_user_device_monitoring
-      weight: 1      
+      weight: 1
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -3208,7 +3208,7 @@ menu:
       weight: 604
     - name: Managed Instances
       url: containers/amazon_ecs/managed_instances/
-      parent: containers_amazon_ecs 
+      parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_managed_instances
       weight: 605
     - name: AWS Fargate with ECS
@@ -3328,7 +3328,7 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101
-    - name: Managed Instances 
+    - name: Managed Instances
       url: serverless/aws_lambda/managed_instances
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_managed_instances
@@ -3528,7 +3528,7 @@ menu:
       url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
       identifier: cnm_network_health
-      weight: 102 
+      weight: 102
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
@@ -3568,7 +3568,7 @@ menu:
       url: network_monitoring/devices
       parent: nm_parent
       identifier: ndm
-      weight: 3      
+      weight: 3
     - name: Setup
       url: network_monitoring/devices/setup
       parent: ndm
@@ -3578,7 +3578,7 @@ menu:
       url: network_monitoring/devices/supported_devices
       parent: ndm_setup
       identifier: ndm_supported_devices
-      weight: 30101 
+      weight: 30101
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm_setup
@@ -3618,7 +3618,7 @@ menu:
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 304   
+      weight: 304
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
@@ -3683,7 +3683,7 @@ menu:
       url: network_monitoring/network_path/glossary
       parent: network_path
       identifier: network_path_glossary
-      weight: 506 
+      weight: 506
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -5104,7 +5104,7 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
-    - name: Cost 
+    - name: Cost
       url: llm_observability/monitoring/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
@@ -5178,9 +5178,9 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
       weight: 403
-    - name: Export API 
+    - name: Export API
       url: llm_observability/evaluations/export_api
-      parent: llm_obs_evaluations 
+      parent: llm_obs_evaluations
       identifier: llm_obs_evaluations_export_api
       weight: 404
     - name: Experiments
@@ -5670,16 +5670,6 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_setup
       weight: 1
-    - name: Deployment Data Sources
-      url: dora_metrics/setup/deployments
-      parent: dora_metrics_setup
-      identifier: dora_metrics_setup_deployments
-      weight: 101
-    - name: Failure Data Sources
-      url: dora_metrics/setup/failures/
-      parent: dora_metrics_setup
-      identifier: dora_metrics_setup_failures
-      weight: 102
     - name: Change Failure Detection
       url: dora_metrics/change_failure_detection/
       parent: dora_metrics
@@ -7430,7 +7420,7 @@ menu:
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
       parent: sec_static_analysis
-      weight: 5     
+      weight: 5
     - name: SAST Custom Rule Creation Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
@@ -7816,7 +7806,7 @@ menu:
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 10  
+      weight: 10
     - name: Template Variables
       url: synthetics/notifications/template_variables
       parent: synthetics_notifications
