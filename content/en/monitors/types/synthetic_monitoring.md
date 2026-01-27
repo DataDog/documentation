@@ -47,7 +47,7 @@ Depending on your incident management strategy, you may want to involve multiple
 
 To enable renotification, toggle **Enable renotification** and select a time interval from the dropdown menu.
 
-**Note**: To learn how Synthetic Monitoring notifications evaluate test results and trigger alerts, review the [Understanding Synthetic Monitor Alerting][7] guide.
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see [Understanding Synthetic Monitor Alerting][7].
 
 ## Enhanced notifications
 

@@ -27,7 +27,7 @@ You can customize notifications using:
 - **[Custom notification display](#display-custom-notifications-message)**: Show only your custom message without default enriched content.
 - **[Simulate notifications](#simulate-notifications)**: Test your notification messages by sending simulated notifications.
 
-**Note**: To learn how Synthetic Monitoring notifications evaluate test results and trigger alerts, review the [Understanding Synthetic Monitor Alerting][6] guide.
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see [Understanding Synthetic Monitor Alerting][6].
 
 ## Pre-filled monitor messages
 

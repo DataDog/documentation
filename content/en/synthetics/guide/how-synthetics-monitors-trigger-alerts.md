@@ -14,7 +14,7 @@ further_reading:
       text: 'Monitor website uptime with SLOs'
 ---
 
-Synthetic Monitoring monitors evaluate test results **over time**, not individual test executions.  
+Synthetic Monitoring evaluates test results **over time**, not individual test executions.  
 This page explains how Datadog determines when a Synthetic Monitoring notification triggers an alert or recovers, and why alerts may behave differently than expected.
 
 Use this page to understand:
@@ -25,7 +25,7 @@ Use this page to understand:
 
 ## How alert evaluation works
 
-Synthetic Monitoring does not trigger alerts based on a single failed run. Instead, it continuously evaluates test results through the following steps:
+Synthetic Monitoring does not trigger alerts based on a single failed run. Instead, it continuously evaluates test results in the following order:
 
 1. The test runs based on its configured schedule.
 2. [Fast retries](#fast-retries) are applied, if configured.
@@ -58,7 +58,7 @@ Fast retries automatically re-run failed test executions.
 
 ## Alerting rules
 
-Alerting rules define when a monitor is allowed to change state based on test failures over time. When fast retries are enabled, a test run is not considered failed, and alerting evaluation does not begin, until all retries have been exhausted. An alert triggers only when all alerting conditions are met continuously for the configured duration.
+Alerting rules define when a monitor is allowed to change state based on test failures over time. When fast retries are enabled, the monitor waits until all retry attempts are finished before it marks a test run as failed or triggers alert evaluations. An alert triggers only when all alerting conditions are met continuously for the configured duration.
 
 Alerting rules typically include:
 
