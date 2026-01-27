@@ -99,6 +99,17 @@ class DetectionResult(BaseModel):
     value: bool
     reasoning: str
 
+    @classmethod
+    def output_format(cls) -> str:
+        """Return JSON schema for output format."""
+        return json.dumps(
+            {
+                "value": "boolean: true or false evaluation result",
+                "reasoning": "string: detailed explanation for the evaluation decision"
+            },
+            indent=3
+        )
+
 def detection_task(input_data, config):
     """Execute your LLM application with the current prompt."""
     client = OpenAI()
@@ -127,7 +138,7 @@ Create functions that measure how well your task performs. You need four types o
 ```python
 def accuracy_evaluator(input_data, output_data, expected_output):
     """Evaluate a single prediction."""
-    prediction = output_data.value if hasattr(output_data, 'value') else output_data
+    prediction = output_data.value
 
     if prediction and expected_output:
         return "true_positive"
@@ -168,7 +179,17 @@ def precision_recall_evaluator(inputs, outputs, expected_outputs, evaluations):
     }
 ```
 
-**Scoring function** combines metrics into a single optimization target:
+**Scoring function** can simply be one of your metrics or can combine metrics into a single optimization target:
+
+```python
+def compute_score(summary_evaluators):
+    """Higher is better. Combine metrics according to business priorities."""
+    metrics = summary_evaluators['precision_recall_evaluator']['value']
+    # Optimize for both precision and accuracy
+    return metrics['precision']
+```
+
+or
 
 ```python
 def compute_score(summary_evaluators):
@@ -191,6 +212,8 @@ def labelization_function(individual_result):
         return "INCORRECT PREDICTION"
 ```
 
+The labelization function plays a crucial role in optimization: for each unique label, the optimizer receives one randomly selected example from that category (here `CORRECT PREDICTION` and `INCORRECT PREDICTION`). This means the number of labels directly determines the diversity of examples shown to the reasoning model. **Importantly, the label names themselves should be meaningful and descriptive**, as they are shown directly to the reasoning model—use clear, human-readable labels like "HIGH CONFIDENCE ERROR" or "EDGE CASE FAILURE" rather than codes like "TYPE_A" or "CAT_3". Design your labels to represent the key patterns or hints you want the optimizer to learn from, and keep the cardinality low (fewer than 10 distinct labels) to ensure focused, actionable feedback.
+
 ### 4. Define optimization task
 
 Create a function that calls a reasoning model to suggest prompt improvements:
@@ -202,7 +225,11 @@ class OptimizationResult(BaseModel):
     prompt: str
 
 def optimization_task(system_prompt, user_prompt, config):
-    """Use reasoning model to improve the prompt."""
+    """Use reasoning model to improve the prompt.
+
+    Returns:
+        str: The improved prompt text
+    """
     client = OpenAI()
 
     response = client.chat.completions.parse(
@@ -214,10 +241,10 @@ def optimization_task(system_prompt, user_prompt, config):
         response_format=OptimizationResult
     )
 
-    return response.choices[0].message.parsed.prompt
+    return response.choices[0].message.parsed.prompt  # Must return string
 ```
 
-<div class="alert alert-info">The optimization task receives a system prompt with instructions for improving prompts and a user prompt with current performance data and examples. The system automatically constructs these prompts based on your evaluation results.</div>
+<div class="alert alert-info">The optimization task receives a system prompt with instructions for improving prompts and a user prompt with current performance data and examples. The system automatically constructs these prompts based on your evaluation results.  The function must return the improved prompt as a string.</div>
 
 ### 5. Run optimization
 
@@ -234,8 +261,11 @@ prompt_optimization = LLMObs._prompt_optimization(
     labelization_function=labelization_function,
     compute_score=compute_score,
     config={
-        "prompt": "Detect if the AI response contains hallucinated information.",  # Initial prompt
-        "model_name": "gpt-4o-mini"
+        "prompt": "Detect if the AI response contains hallucinated information.",  # Initial prompt (required)
+        # Optionals
+        "model_name": "gpt-4o-mini",  # Target model - helps optimizer tailor suggestions to model capabilities
+        "evaluation_output_format": DetectionResult.output_format(),  # Expected output schema - prompts optimizer to ensure format compliance
+        "runs": 1,  # Number of times to evaluate each record - higher values reduce variance in metrics
     },
     max_iterations=10,
     stopping_condition=lambda evals: (
@@ -254,11 +284,8 @@ print(f"Achieved in {result.total_iterations} iterations")
 print(f"View in Datadog: {result.best_experiment_url}")
 
 # Get score progression
-print("Score history:", result.get_score_history())
-# Example output: [1.04, 0.48, 1.70, 1.77]
+print(result.summary())
 ```
-
-To increase execution speed, adjust the `jobs` parameter to process multiple dataset records in parallel.
 
 ## Configuration options
 
@@ -297,9 +324,9 @@ Number of parallel workers for experiment execution. Higher values reduce total 
 Configuration dictionary passed to your task function. Must contain a `"prompt"` key with the initial prompt.
 
 Optional fields include:
-- `model_name`: Target model for the task
-- `evaluation_output_format`: JSON schema for structured outputs
-- `runs`: Number of times to run the task per dataset record
+- **`model_name`**: Specifies the target model for your task. When provided, the optimizer includes model-specific guidance in its suggestions, tailoring improvements to that model's capabilities and limitations (for example, GPT-4 vs Claude vs Llama).
+- **`evaluation_output_format`**: Provides the JSON schema for your expected output structure. The optimizer uses this to ensure the improved prompt explicitly instructs the model to produce correctly formatted output. This is particularly valuable for structured outputs, where format compliance is critical.
+- **`runs`**: Controls how many times each dataset record is evaluated. Setting `runs` > 1 helps reduce variance in metrics for tasks with non-deterministic outputs, providing more stable optimization signals at the cost of longer execution time.
 - Any custom parameters your task function needs
 
 ## Understanding results
@@ -366,45 +393,9 @@ plt.show()
 
 Use advanced reasoning models for the `optimization_task`:
 - **Recommended:** OpenAI o3-mini, o1-preview, or Claude 3.5 Sonnet
-- Set `temperature=0` for deterministic behavior
 - Use structured outputs (Pydantic models) for reliable parsing
 
 Avoid using cheaper models (GPT-3.5-turbo, Claude Haiku) as they lack the reasoning depth needed for effective optimization.
-
-### Production deployment
-
-Before deploying an optimized prompt:
-1. Human review the prompt for quality and appropriateness
-2. A/B test on a small percentage of production traffic
-3. Monitor both automated metrics and user feedback
-4. Establish rollback procedures
-5. Version control prompts alongside code
-6. Re-optimize periodically as data distributions shift
-
-## Troubleshooting
-
-### Optimization doesn't improve performance
-
-- **Check baseline score**: Is the initial prompt already near-optimal?
-- **Review labelization**: Are categories meaningful and balanced?
-- **Inspect suggestions**: Review prompts in iteration history to verify they're reasonable
-- **Validate scoring**: Manually verify `compute_score` returns expected values
-- **Check data quality**: Ensure correct labels and well-formed inputs
-
-### Optimization crashes or produces errors
-
-- Test all functions independently with sample data
-- Verify function signatures match requirements
-- Check API rate limits and error logs in Datadog
-- Reduce `jobs` parameter if encountering rate limits
-- Ensure evaluators handle edge cases (missing data, malformed output)
-
-### Scores are unstable or chaotic
-
-- Verify scoring function is monotonic (improving metrics increases score)
-- Check that evaluators return consistent results for the same inputs
-- Ensure sufficient dataset size (small datasets can cause instability)
-- Try a different optimization model
 
 ## Further reading
 
