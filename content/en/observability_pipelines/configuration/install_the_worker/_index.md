@@ -303,7 +303,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
 
-**Note**: If you enable [disk buffering][5] for destinations, you must enable Kubernetes [persistent volumes][6] in the Observability Pipelines helm chart .
+**Note**: If you enable [disk buffering][5] for destinations, you must enable Kubernetes [persistent volumes][6] in the Observability Pipelines helm chart.
 
 #### Self-hosted and self-managed Kubernetes clusters
 
