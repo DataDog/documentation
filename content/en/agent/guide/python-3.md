@@ -16,7 +16,7 @@ Only Agent v7+ supports running Python 3 custom checks by default. <a href="/age
 
 ## Overview
 
-This guide provides information and best practices on migrating checks between Python 2 and 3. To find out if a custom check is compatible on your Agent, filter for `custom_check` from the [Fleet Automation][1] page.
+This guide provides information and best practices on migrating checks between Python 2 and 3. To find out if a custom check is compatible with your Agent, filter for `custom_check` from the [Fleet Automation][1] page.
 
 To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
 
