@@ -143,7 +143,11 @@ title: Client SDK Setup
     Follow the instructions below to install and configure the Datadog SDK for
     your platform.
   </p>
-  <div class="cdoc__toggleable" data-description="SDK is Browser" data-if="0">
+  <div
+    class="cdoc__toggleable"
+    data-description="SDK is Browser"
+    data-if="45117"
+  >
     <p>
       This page describes how to instrument your web applications with the
       Datadog Browser SDK. The Browser SDK supports
@@ -755,7 +759,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="1"
+    data-if="45118"
   >
     <p>
       This page describes how to instrument your applications for
@@ -2024,7 +2028,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2"
+    data-if="45119"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -3148,7 +3152,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="3"
+    data-if="45120"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3303,8 +3307,104 @@ title: Client SDK Setup
           <pre
             tabindex="0"
             class="chroma"
-          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/{{&lt; region-param key=flutter_web_logs_cdn_path &gt;}}&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/{{&lt; region-param key=flutter_web_rum_cdn_path &gt;}}&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-html">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-html">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-html">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-html">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/datadog-logs-v5.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/datadog-rum-v5.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-html">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-html">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/ap2/v5/datadog-logs.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text/javascript&#34;</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;https://www.datadoghq-browser-agent.com/ap2/v5/datadog-rum.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </span></span></code></pre>
         </div>
       </div>
@@ -3775,7 +3875,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="4"
+    data-if="45121"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5100,7 +5200,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="5"
+    data-if="45122"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5334,7 +5434,193 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">){{&lt;</span> <span class="n">region</span><span class="p">-</span><span class="k">param</span> <span class="n">key</span><span class="p">=</span><span class="n">kotlin_multiplatform_site_config</span> <span class="p">&gt;}}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// in common source set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fun</span> <span class="nf">initializeDatadog</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// context should be application context on Android and can be null on iOS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">appClientToken</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">CLIENT_TOKEN</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appEnvironment</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">ENV_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appVariantName</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">APP_VARIANT_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">useSite</span><span class="p">(</span><span class="nc">DatadogSite</span><span class="p">.</span><span class="n">EU1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// in common source set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fun</span> <span class="nf">initializeDatadog</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// context should be application context on Android and can be null on iOS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">appClientToken</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">CLIENT_TOKEN</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appEnvironment</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">ENV_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appVariantName</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">APP_VARIANT_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">useSite</span><span class="p">(</span><span class="nc">DatadogSite</span><span class="p">.</span><span class="n">US3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// in common source set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fun</span> <span class="nf">initializeDatadog</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// context should be application context on Android and can be null on iOS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">appClientToken</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">CLIENT_TOKEN</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appEnvironment</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">ENV_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appVariantName</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">APP_VARIANT_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">useSite</span><span class="p">(</span><span class="nc">DatadogSite</span><span class="p">.</span><span class="n">US5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// in common source set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fun</span> <span class="nf">initializeDatadog</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// context should be application context on Android and can be null on iOS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">appClientToken</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">CLIENT_TOKEN</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appEnvironment</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">ENV_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appVariantName</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">APP_VARIANT_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">useSite</span><span class="p">(</span><span class="nc">DatadogSite</span><span class="p">.</span><span class="n">US1_FED</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// in common source set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fun</span> <span class="nf">initializeDatadog</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// context should be application context on Android and can be null on iOS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">appClientToken</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">CLIENT_TOKEN</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appEnvironment</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">ENV_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appVariantName</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">APP_VARIANT_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">useSite</span><span class="p">(</span><span class="nc">DatadogSite</span><span class="p">.</span><span class="n">AP1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-kotlin">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="c1">// in common source set
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fun</span> <span class="nf">initializeDatadog</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Any</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// context should be application context on Android and can be null on iOS
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">val</span> <span class="py">appClientToken</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">CLIENT_TOKEN</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appEnvironment</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">ENV_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">appVariantName</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">APP_VARIANT_NAME</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">useSite</span><span class="p">(</span><span class="nc">DatadogSite</span><span class="p">.</span><span class="n">AP2</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5586,7 +5872,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="6"
+    data-if="45123"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5716,7 +6002,187 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="n">datadogroku_initialize</span><span class="p">({</span>
 </span></span><span class="line"><span class="cl">        <span class="n">clientToken</span><span class="p">:</span> <span class="s">&#34;&lt;CLIENT_TOKEN&gt;&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">applicationId</span><span class="p">:</span> <span class="s">&#34;&lt;APPLICATION_ID&gt;&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;{{&lt; region-param key=roku_site &gt;}}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;us1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">:</span> <span class="s">&#34;&lt;ENV_NAME&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sessionSampleRate</span><span class="p">:</span> <span class="n">100</span><span class="p">,</span> <span class="c">&#39; the percentage (integer) of sessions to track
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>        <span class="n">launchArgs</span><span class="p">:</span> <span class="n">args</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&#39; complete your channel setup here
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="k">end</span> <span class="k">sub</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-vb.net">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">sub</span> <span class="nf">RunUserInterface</span><span class="p">(</span><span class="n">args</span> <span class="ow">as</span> <span class="n">dynamic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;roSGScreen&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scene</span> <span class="o">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">CreateScene</span><span class="p">(</span><span class="s">&#34;MyScene&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">datadogroku_initialize</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clientToken</span><span class="p">:</span> <span class="s">&#34;&lt;CLIENT_TOKEN&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span><span class="p">:</span> <span class="s">&#34;&lt;APPLICATION_ID&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;eu1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">:</span> <span class="s">&#34;&lt;ENV_NAME&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sessionSampleRate</span><span class="p">:</span> <span class="n">100</span><span class="p">,</span> <span class="c">&#39; the percentage (integer) of sessions to track
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>        <span class="n">launchArgs</span><span class="p">:</span> <span class="n">args</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&#39; complete your channel setup here
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="k">end</span> <span class="k">sub</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-vb.net">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">sub</span> <span class="nf">RunUserInterface</span><span class="p">(</span><span class="n">args</span> <span class="ow">as</span> <span class="n">dynamic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;roSGScreen&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scene</span> <span class="o">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">CreateScene</span><span class="p">(</span><span class="s">&#34;MyScene&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">datadogroku_initialize</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clientToken</span><span class="p">:</span> <span class="s">&#34;&lt;CLIENT_TOKEN&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span><span class="p">:</span> <span class="s">&#34;&lt;APPLICATION_ID&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;us3&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">:</span> <span class="s">&#34;&lt;ENV_NAME&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sessionSampleRate</span><span class="p">:</span> <span class="n">100</span><span class="p">,</span> <span class="c">&#39; the percentage (integer) of sessions to track
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>        <span class="n">launchArgs</span><span class="p">:</span> <span class="n">args</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&#39; complete your channel setup here
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="k">end</span> <span class="k">sub</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-vb.net">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">sub</span> <span class="nf">RunUserInterface</span><span class="p">(</span><span class="n">args</span> <span class="ow">as</span> <span class="n">dynamic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;roSGScreen&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scene</span> <span class="o">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">CreateScene</span><span class="p">(</span><span class="s">&#34;MyScene&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">datadogroku_initialize</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clientToken</span><span class="p">:</span> <span class="s">&#34;&lt;CLIENT_TOKEN&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span><span class="p">:</span> <span class="s">&#34;&lt;APPLICATION_ID&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;us5&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">:</span> <span class="s">&#34;&lt;ENV_NAME&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sessionSampleRate</span><span class="p">:</span> <span class="n">100</span><span class="p">,</span> <span class="c">&#39; the percentage (integer) of sessions to track
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>        <span class="n">launchArgs</span><span class="p">:</span> <span class="n">args</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&#39; complete your channel setup here
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="k">end</span> <span class="k">sub</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-vb.net">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">sub</span> <span class="nf">RunUserInterface</span><span class="p">(</span><span class="n">args</span> <span class="ow">as</span> <span class="n">dynamic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;roSGScreen&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scene</span> <span class="o">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">CreateScene</span><span class="p">(</span><span class="s">&#34;MyScene&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">datadogroku_initialize</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clientToken</span><span class="p">:</span> <span class="s">&#34;&lt;CLIENT_TOKEN&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span><span class="p">:</span> <span class="s">&#34;&lt;APPLICATION_ID&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;us1_fed&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">:</span> <span class="s">&#34;&lt;ENV_NAME&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sessionSampleRate</span><span class="p">:</span> <span class="n">100</span><span class="p">,</span> <span class="c">&#39; the percentage (integer) of sessions to track
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>        <span class="n">launchArgs</span><span class="p">:</span> <span class="n">args</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&#39; complete your channel setup here
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="k">end</span> <span class="k">sub</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-vb.net">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">sub</span> <span class="nf">RunUserInterface</span><span class="p">(</span><span class="n">args</span> <span class="ow">as</span> <span class="n">dynamic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;roSGScreen&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scene</span> <span class="o">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">CreateScene</span><span class="p">(</span><span class="s">&#34;MyScene&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">datadogroku_initialize</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clientToken</span><span class="p">:</span> <span class="s">&#34;&lt;CLIENT_TOKEN&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span><span class="p">:</span> <span class="s">&#34;&lt;APPLICATION_ID&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;ap1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">:</span> <span class="s">&#34;&lt;ENV_NAME&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sessionSampleRate</span><span class="p">:</span> <span class="n">100</span><span class="p">,</span> <span class="c">&#39; the percentage (integer) of sessions to track
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>        <span class="n">launchArgs</span><span class="p">:</span> <span class="n">args</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&#39; complete your channel setup here
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="k">end</span> <span class="k">sub</span>
+</span></span></code></pre>
+        </div>
+      </div>
+    </div>
+    <div class="code-snippet-wrapper">
+      <div class="code-filename-wrapper d-flex justify-content-end"></div>
+      <div class="code-snippet">
+        <div class="code-button-wrapper position-absolute">
+          <button class="btn text-primary js-copy-button">Copy</button>
+        </div>
+        <div class="cdoc-code-snippet cdoc-language-vb.net">
+          <pre
+            tabindex="0"
+            class="chroma"
+          ><code><span class="line"><span class="cl"><span class="k">sub</span> <span class="nf">RunUserInterface</span><span class="p">(</span><span class="n">args</span> <span class="ow">as</span> <span class="n">dynamic</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span> <span class="o">=</span> <span class="n">CreateObject</span><span class="p">(</span><span class="s">&#34;roSGScreen&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">scene</span> <span class="o">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">CreateScene</span><span class="p">(</span><span class="s">&#34;MyScene&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">datadogroku_initialize</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">clientToken</span><span class="p">:</span> <span class="s">&#34;&lt;CLIENT_TOKEN&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">applicationId</span><span class="p">:</span> <span class="s">&#34;&lt;APPLICATION_ID&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">site</span><span class="p">:</span> <span class="s">&#34;ap2&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">env</span><span class="p">:</span> <span class="s">&#34;&lt;ENV_NAME&gt;&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">        <span class="n">sessionSampleRate</span><span class="p">:</span> <span class="n">100</span><span class="p">,</span> <span class="c">&#39; the percentage (integer) of sessions to track
 </span></span></span><span class="line"><span class="cl"><span class="c"></span>        <span class="n">launchArgs</span><span class="p">:</span> <span class="n">args</span>
@@ -5843,7 +6309,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="7"
+    data-if="45124"
   >
     <p>
       This page describes how to instrument your applications for
@@ -6412,7 +6878,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"2"},"3":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"3"},"4":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"4"},"5":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"5"},"6":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"6"},"7":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"7"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"45117":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"45117"},"45118":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"45118"},"45119":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"45119"},"45120":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"45120"},"45121":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"45121"},"45122":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"45122"},"45123":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"45123"},"45124":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"45124"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 
