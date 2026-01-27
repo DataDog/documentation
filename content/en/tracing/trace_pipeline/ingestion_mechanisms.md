@@ -211,12 +211,10 @@ You can also set by-service sampling rates. For instance, to send 50% of the tra
 ```javascript
 tracer.init({
     ingestion: {
-        sampler: {
-            sampleRate: 0.1,
-            rules: [
-                { sampleRate: 0.5, service: 'my-service' }
-            ]
-        }
+        sampleRate: 0.1,
+        rules: [
+            { sampleRate: 0.5, service: 'my-service' }
+        ]
     }
 });
 ```
