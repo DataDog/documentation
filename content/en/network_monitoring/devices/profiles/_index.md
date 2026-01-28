@@ -19,7 +19,7 @@ Network Device Monitoring uses profiles to tell the Datadog Agent the metrics an
 
 You can enable device profiles in Datadog using either the recommended GUI-based (SNMP Profile Manager) workflow, or through an advanced configuration-based setup:
 
-**[SNMP Profile Manager][9] (recommended)**  
+**[SNMP Profile Manager][7] (recommended)**  
 - Guided UI to customize metrics collected from network devices directly from the [Network Device Monitoring Configuration][8] page.
 - Removes the need to source OIDs from vendor documentation by automatically recommending a list of relevant, human-readable metrics.
 - Requires no manual configuration with `.yaml` files.
@@ -109,7 +109,6 @@ See the [Profile Format Reference][5] for more information about profiles format
 [6]: https://app.datadoghq.com/devices/
 [7]: /network_monitoring/devices/profiles/device_profiles/
 [8]: https://app.datadoghq.com/devices/profiles
-[9]: /network_monitoring/devices/profiles/device_profiles/
 [10]: /network_monitoring/devices/profiles/build-ndm-profile/
 [11]: /agent/remote_config/
 
