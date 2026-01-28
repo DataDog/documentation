@@ -121,7 +121,7 @@ Before you can add a workflow to a Security Signal or Finding, the workflow must
 
 ### Security Notification Rule triggers
 
-You can set up a workflow to trigger every time a Security Notification Rule fires, for both Security Signals and Security Findings.
+You can set up a workflow to trigger whenever a Security Notification Rule sends a notification for either a Security Signal or a Security Finding.
 
 To trigger a workflow from a notification rule, you must first add a security trigger to your workflow:
 1. Add a security trigger to your workflow:

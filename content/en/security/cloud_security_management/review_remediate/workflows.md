@@ -32,7 +32,7 @@ Use Workflow Automation with [Cloud Security][2] to automate your security-relat
 
 Workflow Automation allows you to trigger a workflow manually or automatically. In the following examples, the workflows are triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
 
-When you trigger a workflow, the [source object variables][7] specified in the trigger are passed into the workflow and can be used in its following steps. In the examples in this article, the trigger events are a new security finding. 
+When you trigger a workflow, the [source object variables][7] specified in the trigger are passed into the workflow and can be used in subsequent steps. In the following examples, the trigger event is a new security finding.
 
 ## Build a workflow
 
@@ -165,5 +165,5 @@ After running the workflow, additional information is shown on the side panel. Y
 [4]: https://app.datadoghq.com/workflow
 [5]: /integrations/slack/
 [6]: /integrations/jira/
-[7]: /service_management/workflows/build/#context-variables
+[7]: /actions/workflows/variables/#context-variables
 [8]: /api/latest/security-monitoring/#get-a-finding
