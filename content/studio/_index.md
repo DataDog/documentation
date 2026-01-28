@@ -6,6 +6,12 @@ type: studio
 
 Start monitoring real users, fixing issues, and understanding how they use your product.
 
+## Start here
+
+{{< whatsnext desc="Set up Studio and start monitoring your app in minutes:" >}}
+   {{< nextlink href="/getting_started" >}}Getting Started{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Understand your users and what they do in your app
 
 {{< whatsnext desc="Track user sessions, replay interactions, and see exactly how people navigate your app:" >}}
