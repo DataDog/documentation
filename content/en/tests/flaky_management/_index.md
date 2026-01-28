@@ -210,7 +210,7 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 | [.NET][6]       | 3.13.0+                       | 3.23.0+                      |
 | [Go][7]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
 | [Java][8]       | 1.47.0+                       | 1.52.0+                      |
-| [JavaScript][9] | 5.80.0+                       | 5.74.0+                      |
+| [JavaScript][9] | 5.44.0+                       | 5.59.0+                      |
 | [Python][10]    | 3.3.0+                        | 3.8.0+                       |
 | [Ruby][11]      | 1.13.0+                       | 1.17.0+                      |
 | [Swift][12]     | 2.6.1+                        | 2.6.1+                       |

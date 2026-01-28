@@ -15,7 +15,7 @@ further_reading:
 ## Overview
 Action Management is a no-code way to label autocaptured actions from your website. Action Management helps to improve trust in your Product Analytics dataset and enhance efficiency in your analysis. This page describes how to get started with Action Management.
 
-Your feedback is invaluable to Datadog during this preview stage. Share all of your feedback with the Product Analytics Product Manager, Milene Darnis, using [Datadog Public Slack](https://chat.datadoghq.com/).
+Your feedback is invaluable to Datadog during this preview stage. Please share your feedback using [Datadog Public Slack](https://chat.datadoghq.com/).
 
 
 ## Setup 
