@@ -89,7 +89,7 @@ After you declare an incident from Slack, it generates an incident channel.
 
 ## From Google Chat
 
-If you have the [Datadog integration set up for Google Chat][14], you can declare a new incident with the slash command `/dd_incident` from any Google Chat space.
+If you have set up the [Datadog integration for Google Chat][14], you can declare an incident with the slash command `/dd_incident` from any Google Chat space.
 
 ## From Handoff Notifications
 
