@@ -311,6 +311,56 @@ When using IMDSv2, the equivalent `entryPoint` configuration looks like the foll
 ]
 ```
 
+### Windows containers
+
+Windows containers running on ECS do not have direct access to the EC2 instance metadata endpoint by default. To retrieve the EC2 private IP address for `DD_AGENT_HOST`, you need to configure network routes within the container to access the metadata endpoint.
+
+#### Configure network routes for metadata access
+
+Add a PowerShell bootstrap script to your application container's task definition to create the required network routes. This script enables access to both the EC2 metadata endpoint (`169.254.169.254`) and the ECS credentials endpoint (`169.254.170.2`):
+
+```powershell
+$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop
+$ifIndex = (Get-NetAdapter -InterfaceDescription "Hyper-V Virtual Ethernet*" | Sort-Object | Select ifIndex).ifIndex
+New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore
+New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore
+```
+
+The script performs the following steps:
+1. `Get-NetRoute` retrieves the gateway IP address from the container's routing table.
+2. `Get-NetAdapter` gets the network interface index for the Hyper-V virtual adapter.
+3. `New-NetRoute` creates routes to the metadata and credentials endpoints through the gateway.
+
+#### Set DD_AGENT_HOST for Windows containers
+
+After configuring the network routes, retrieve the EC2 private IP address and set `DD_AGENT_HOST`. The following example shows a complete task definition `entryPoint` configuration that sets up routes and configures `DD_AGENT_HOST`. Substitute `<Windows Startup Command>` with your application's startup command:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop; $ifIndex = (Get-NetAdapter -InterfaceDescription 'Hyper-V Virtual Ethernet*' | Sort-Object | Select ifIndex).ifIndex; New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore; New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore; $private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content; [System.Environment]::SetEnvironmentVariable('DD_AGENT_HOST', $private_ip, 'Process'); <Windows Startup Command>"
+]
+```
+
+#### IIS applications
+
+For IIS applications using the .NET tracer, write the `DD_AGENT_HOST` value to a [`datadog.json` configuration file][7] and restart IIS to apply the configuration:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop; $ifIndex = (Get-NetAdapter -InterfaceDescription 'Hyper-V Virtual Ethernet*' | Sort-Object | Select ifIndex).ifIndex; New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore; New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore; $private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content; Set-Content -Path 'C:\\inetpub\\wwwroot\\datadog.json' -Value \"{ `\"DD_AGENT_HOST`\": `\"$private_ip`\" }\"; net stop /y was; net start w3svc; C:\\ServiceMonitor.exe w3svc"
+]
+```
+
+Alternatively, create a PowerShell startup script (`.ps1`) containing the bootstrap commands and reference it in your Dockerfile's `ENTRYPOINT`:
+
+```dockerfile
+ENTRYPOINT ["powershell.exe", "C:\\app\\startup.ps1"]
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -321,3 +371,4 @@ When using IMDSv2, the equivalent `entryPoint` configuration looks like the foll
 [4]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
 [5]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
 [6]: /containers/amazon_ecs/?tab=awscli#setup
+[7]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
