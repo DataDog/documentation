@@ -371,7 +371,7 @@ plt.show()
 ### Labelization
 
 - Create 2-5 distinct, descriptive labels (for example: `CORRECT HIGH CONFIDENCE`, `INCORRECT EDGE CASE`)
-- Helps ensure balanced label distribution (avoid 95% in one category)
+- Ensure balanced label distribution (for example, avoid 95% in one category)
 - Use labels to help the optimizer understand different types of successes and failures
 
 ### Optimization model selection
