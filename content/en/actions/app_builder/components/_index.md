@@ -249,6 +249,54 @@ For an example showing how to use this component, see [Custom charts][10].
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Date picker" level="h3" %}}
+Date range picker components have the following properties.
+
+### General
+
+Label
+: The label displayed at the top of the date picker.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Default Value
+: The default date that the date picker displays.<br>
+**Value**: integer
+
+Allow Future Dates
+: Determines whether the date can be set after the current day's date.<br>
+**Provided values**: on, off
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: change
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+
+State Function
+: fetch<br>
+**Example**: See [events][9].
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
