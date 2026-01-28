@@ -31,9 +31,9 @@ Prompt Optimization supports any use case where the expected output is known and
 
 ## Prerequisites
 
-- Python SDK version `>=4.3.0`
-- LLM Observability enabled with API and App keys
-- A dataset with representative examples (recommended: 50-100 records)
+- [`ddtrace`][1] version 4.3.0+
+- LLM Observability enabled with Datadog [API and application keys][2]
+- A [dataset][3] with representative examples (recommended: 50-100 records)
 - Access to an advanced reasoning model (o3-mini, Claude 3.5 Sonnet, or similar)
 
 ## Set up prompt optimization
@@ -68,11 +68,11 @@ dataset = LLMObs.create_dataset(
 )
 ```
 
-To help ensure robust optimization, Datadog recommends that you include diverse examples that cover typical cases and edge cases
+To help ensure robust optimization, Datadog recommends that you include diverse examples that cover typical cases and edge cases.
 
 ### 2. Define your task function
 
-Implement the function that represents your LLM application. This function receives input data and configuration (including the prompt being optimized):
+Implement the function that represents your LLM application. This function receives input data and the configuration (including the prompt being optimized):
 
 ```python
 from openai import OpenAI
@@ -116,88 +116,88 @@ def detection_task(input_data, config):
 
 Create functions that measure how well your task performs. You need four types of functions:
 
-**Individual evaluators** measure each output:
+- **Individual evaluators** measure each output:
 
-```python
-def accuracy_evaluator(input_data, output_data, expected_output):
-    """Evaluate a single prediction."""
-    prediction = output_data.value
+   ```python
+   def accuracy_evaluator(input_data, output_data, expected_output):
+       """Evaluate a single prediction."""
+       prediction = output_data.value
 
-    if prediction and expected_output:
-        return "true_positive"
-    elif prediction and not expected_output:
-        return "false_positive"
-    elif not prediction and expected_output:
-        return "false_negative"
-    else:
-        return "true_negative"
-```
+       if prediction and expected_output:
+           return "true_positive"
+       elif prediction and not expected_output:
+           return "false_positive"
+       elif not prediction and expected_output:
+           return "false_negative"
+       else:
+           return "true_negative"
+   ```
 
-**Summary evaluators** compute aggregate metrics:
+- **Summary evaluators** compute aggregate metrics:
 
-```python
-def precision_recall_evaluator(inputs, outputs, expected_outputs, evaluations):
-    """Calculate precision and recall across all predictions."""
-    tp = fp = tn = fn = 0
+   ```python
+   def precision_recall_evaluator(inputs, outputs, expected_outputs, evaluations):
+       """Calculate precision and recall across all predictions."""
+       tp = fp = tn = fn = 0
 
-    for output, expected in zip(outputs, expected_outputs):
-        pred = output.value if hasattr(output, 'value') else output
-        if pred and expected:
-            tp += 1
-        elif pred and not expected:
-            fp += 1
-        elif not pred and expected:
-            fn += 1
-        else:
-            tn += 1
+       for output, expected in zip(outputs, expected_outputs):
+           pred = output.value if hasattr(output, 'value') else output
+           if pred and expected:
+               tp += 1
+           elif pred and not expected:
+               fp += 1
+           elif not pred and expected:
+               fn += 1
+           else:
+               tn += 1
 
-    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
-    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
-    accuracy = (tp + tn) / (tp + tn + fp + fn)
+       precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+       recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+       accuracy = (tp + tn) / (tp + tn + fp + fn)
 
-    return {
-        "precision": precision,
-        "recall": recall,
-        "accuracy": accuracy
-    }
-```
+       return {
+           "precision": precision,
+           "recall": recall,
+           "accuracy": accuracy
+       }
+   ```
 
-**Scoring function** can return one of the values returned by one of the summary evaluators (for example, precision) or a combination of multiple metrics:
+- **Scoring function** can return one of the values returned by one of the summary evaluators (for example, precision) or a combination of multiple metrics:
 
-```python
-def compute_score(summary_evaluators):
-    """Higher is better. Combine metrics according to business priorities."""
-    metrics = summary_evaluators['precision_recall_evaluator']['value']
-    # Optimize for both precision and accuracy
-    return metrics['precision']
-```
+   ```python
+   def compute_score(summary_evaluators):
+       """Higher is better. Combine metrics according to business priorities."""
+       metrics = summary_evaluators['precision_recall_evaluator']['value']
+       # Optimize for precision
+       return metrics['precision']
+   ```
 
-or
+   or
 
-```python
-def compute_score(summary_evaluators):
-    """Higher is better. Combine metrics according to business priorities."""
-    metrics = summary_evaluators['precision_recall_evaluator']['value']
-    # Optimize for both precision and accuracy
-    return metrics['precision'] + metrics['accuracy']
-```
+   ```python
+   def compute_score(summary_evaluators):
+       """Higher is better. Combine metrics according to business priorities."""
+       metrics = summary_evaluators['precision_recall_evaluator']['value']
+       # Optimize for both precision and accuracy
+       return metrics['precision'] + metrics['accuracy']
+   ```
 
-**Labelization functions** categorize results for showing diverse examples to the optimizer:
+- **Labelization functions** categorize results for showing diverse examples to the optimizer:
 
-```python
-def labelization_function(individual_result):
-    """Categorize results into meaningful groups."""
-    eval_value = individual_result["evaluations"]["accuracy_evaluator"]["value"]
+   ```python
+   def labelization_function(individual_result):
+       """Categorize results into meaningful groups."""
+       eval_value = individual_result["evaluations"]["accuracy_evaluator"]["value"]
 
-    if eval_value in ("true_positive", "true_negative"):
-        return "CORRECT PREDICTION"
-    else:
-        return "INCORRECT PREDICTION"
-```
+       if eval_value in ("true_positive", "true_negative"):
+           return "CORRECT PREDICTION"
+       else:
+           return "INCORRECT PREDICTION"
+   ```
 
-The labelization function plays an important role in optimization: for each unique label, the optimizer receives one randomly selected example from that category (in the example above, the labels are `CORRECT PREDICTION` and `INCORRECT PREDICTION`). This means the number of labels directly determines the diversity of examples shown to the reasoning model. 
+   The labelization function plays an important role in optimization: for each unique label, the optimizer receives one randomly selected example from that category (in the example above, the labels are `CORRECT PREDICTION` and `INCORRECT PREDICTION`). This means the number of labels directly determines the diversity of examples shown to the reasoning model. 
 
-**Label names should be meaningful and descriptive**, as they are shown directly to the reasoning model. Use clear, human-readable labels like `HIGH CONFIDENCE ERROR` or `EDGE CASE FAILURE` rather than codes like `TYPE_A` or `CAT_3`. Design your labels to represent the key patterns or hints you want the optimizer to learn from, and keep the cardinality low (fewer than 10 distinct labels) to help ensure focused, actionable feedback.
+   **Label names should be meaningful and descriptive**, as they are shown directly to the reasoning model. Use clear, human-readable labels like `HIGH CONFIDENCE ERROR` or `EDGE CASE FAILURE` rather than codes like `TYPE_A` or `CAT_3`. Design your labels to represent the key patterns or hints you want the optimizer to learn from, and keep the cardinality low (fewer than 10 distinct labels) to help ensure focused, actionable feedback.
 
 ### 4. Define optimization task
 
@@ -272,47 +272,60 @@ print(f"View in Datadog: {result.best_experiment_url}")
 print(result.summary())
 ```
 
-## Configuration options
+#### Configuration options
 
-### Max iterations
+`config`
+: A configuration dictionary passed to your task function. Contains the following keys, as well as any custom parameters your task function needs:
 
-Controls the maximum number of optimization cycles. Each iteration tests a new prompt on the full dataset.
+  `"prompt"` 
+  : **required**<br/>
+  The initial prompt
 
-- **Default:** 5
-- **Recommended:** 10-20 for initial exploration, 5-10 for production
+  `"model_name"`
+  : _optional_<br/>
+  Specifies the target model for your task. When provided, the optimizer includes model-specific guidance in its suggestions, tailoring improvements to that model's capabilities and limitations (for example, GPT-4 versus Claude versus Llama).
 
-### Stopping condition
+  `evaluation_output_format`
+  : _optional_<br/>
+  Provides the JSON schema for your expected output structure. The optimizer uses this to ensure the improved prompt explicitly instructs the model to produce correctly formatted output. This is particularly valuable for structured outputs, where format compliance is critical.
 
-Optional function that determines when to terminate optimization early. Receives summary evaluations and returns `True` to stop.
+  `runs`
+  : _optional_<br/>
+  Controls how many times each dataset record is evaluated. Setting `runs` > 1 helps reduce variance in metrics for tasks with non-deterministic outputs, providing more stable optimization signals at the cost of longer execution time.
+
+`max_iterations`
+: Controls the maximum number of optimization cycles. Each iteration tests a new prompt on the full dataset.<br/>
+  **Default**: 5<br/>
+  **Recommended**: 10-20 for initial exploration, 5-10 for production
+
+`stopping_condition`
+: Optional function that determines when to terminate optimization early. Receives summary evaluations and returns `True` to stop.
+
+  ```python
+  stopping_condition=lambda evals: (
+      evals['my_evaluator']['value']['metric'] >= 0.95
+  )
+  ```
+
+  Use `AND` conditions to help ensure multiple metrics meet targets before stopping.
+
+#### Configure parallel workers
+
+When you execute optimization, you can configure your number of parallel workers by passing the `jobs` parameter to the `run()` function:
 
 ```python
-stopping_condition=lambda evals: (
-    evals['my_evaluator']['value']['metric'] >= 0.95
-)
+result = prompt_optimization.run(jobs=20)
 ```
 
-Use `AND` conditions to help ensure multiple metrics meet targets before stopping.
+Higher values reduce total runtime, but may hit API rate limits.
 
-### Jobs
+`jobs`
+: **Default**: 1</br>
+**Recommended**: 10-20, for most use cases
 
-Number of parallel workers for experiment execution. Higher values reduce total runtime but may hit API rate limits.
-
-- **Default:** 1
-- **Recommended:** 10-20 for most use cases
-
-**Runtime example:** For a dataset of 100 records with 10 iterations:
-- Serial (`jobs=1`): ~50 minutes (assuming 5s per call)
-- Parallel (`jobs=20`): ~5 minutes
-
-### Configuration
-
-Configuration dictionary passed to your task function. Must contain a `"prompt"` key with the initial prompt.
-
-Optional fields include:
-- **`model_name`**: Specifies the target model for your task. When provided, the optimizer includes model-specific guidance in its suggestions, tailoring improvements to that model's capabilities and limitations (e.g., GPT-4 vs Claude vs Llama).
-- **`evaluation_output_format`**: Provides the JSON schema for your expected output structure. The optimizer uses this to ensure the improved prompt explicitly instructs the model to produce correctly formatted output. This is particularly valuable for structured outputs, where format compliance is critical.
-- **`runs`**: Controls how many times each dataset record is evaluated. Setting `runs` > 1 helps reduce variance in metrics for tasks with non-deterministic outputs, providing more stable optimization signals at the cost of longer execution time.
-- Any custom parameters your task function needs
+**Example** for a dataset of 100 records with 10 iterations:
+- `jobs=1` (serial): ~50 minutes (assuming 5s per call)
+- `jobs=20` (parallel): ~5 minutes
 
 ## Understanding results
 
@@ -386,4 +399,6 @@ Avoid using cheaper models (GPT-3.5-turbo, Claude Haiku) as they lack the reason
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/llm/testing/experiments
+[1]: https://github.com/DataDog/dd-trace-py
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /llm_observability/experiments/datasets?tab=csv
