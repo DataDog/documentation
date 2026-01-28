@@ -88,12 +88,12 @@ Use filters to include only the specific costs you want to allocate, such as by 
   - **Summary**: A consolidated, overall picture of your costs.
   - **Day over day**, **week over week** or **month over month**: Analyze how your costs change on a day to day, week to week, or month to month basis and identify trends or unusual fluctuations.
 - Update the **time frame** and **comparison timeframe**:
-  - Set your reference timeframe to monitor trends about your cloud spend.
-  - Configure a comparison timeframe to compare costs across different periods:
-    - By default, the comparison timeframe matches the duration of your reference timeframe (for example, if your reference is the past 1 week, the comparison is automatically set to the week prior).
+  - Set your reference time frame to monitor trends about your cloud spend.
+  - Configure a comparison time frame to compare costs across different periods:
+    - By default, the comparison time frame matches the duration of your reference time frame (for example, if your reference is the past 1 week, the comparison is automatically set to the week prior).
     - Use the flexible comparison option to compare against any arbitrary period—such as the same week from a month ago, a year ago, or any custom date range.
     
-    <div class="alert alert-info">The comparison timeframe must have the same duration as the reference timeframe for accurate comparisons.</div>
+    <div class="alert alert-info">The comparison time frame must have the same duration as the reference time frame for accurate comparisons.</div>
 
 ### Advanced options (optional)
 
