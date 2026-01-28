@@ -27,25 +27,7 @@ The system runs your LLM application on a dataset with the current prompt, measu
 - Parallel experiment execution for rapid iteration
 - Full integration with LLM Observability for tracking and debugging
 
-**Current support:** Prompt Optimization has been validated on Boolean detection tasks and classification use cases, though the architecture supports any output type including structured data extraction, free-form text generation, and numerical predictions.
-
-## How it works
-
-The Prompt Optimizer automates the iterative refinement process through three core components:
-
-1. **Evaluation System**: Runs your LLM application on a dataset and measures performance using custom metrics you define
-2. **Analysis Engine**: Categorizes results into meaningful groups, presents performance data and examples to an AI reasoning model
-3. **Improvement Loop**: AI generates an improved prompt, the system tests it on the full dataset, compares performance, and repeats
-
-Each optimization iteration:
-1. Tests the current prompt on your entire dataset
-2. Analyzes which examples succeed and fail
-3. Shows diverse labeled examples (good/bad/edge cases) to the reasoning model
-4. Generates an improved prompt based on the analysis
-5. Tests the new prompt and compares performance
-6. Keeps the best prompt and continues or stops based on your conditions
-
-The system always optimizes from the current best prompt, ensuring that temporary setbacks don't derail progress.
+Prompt Optimization supports any use case where the expected output is known and there is a defined way to score the model’s predictions. Prompt Optimization's architecture supports any output type, including structured data extraction, free-form text generation, and numerical predictions.
 
 ## Prerequisites
 
