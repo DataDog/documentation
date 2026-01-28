@@ -22,7 +22,7 @@ The following tracer versions support WebSocket observability out of the box:
 | Tracer   | Version    |
 |----------|------------|
 | Node.js  | `>=5.82.0` |
-| Python   | `>=4.1.5`  |
+| Python   | `>=4.3.0`  |
 | Java     | `>=1.50.0` |
 | PHP      | `>=1.8.0`  |
 
