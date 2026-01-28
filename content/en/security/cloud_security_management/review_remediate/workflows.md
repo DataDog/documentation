@@ -30,7 +30,7 @@ Use Workflow Automation with [Cloud Security][2] to automate your security-relat
 
 ## Understanding how triggers and sources work
 
-Workflow Automation allows you to trigger a workflow manually or automatically. In the example workflows in this article, the workflows are triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
+Workflow Automation allows you to trigger a workflow manually or automatically. In the following examples, the workflows are triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
 
 When you trigger a workflow, the [source object variables][7] specified in the trigger are passed into the workflow and can be used in its following steps. In the examples in this article, the trigger events are a new security finding. 
 
@@ -47,7 +47,11 @@ This example creates a remediation workflow that sends an interactive Slack mess
 #### Initialize the workflow
 
 1. On the [Workflow Automation page][4], click **New Workflow**.
-1. Click **Add Trigger** > **Security**. A workflow must have the security trigger before you can run it. The [source object variables][7] of the trigger will allow you to access the security misconfiguration content, like its title using `{{ Source.securityFinding.attributes.title }}`.
+1. Click **Add Trigger** > **Security**. 
+
+   **Note**: A workflow must include a security trigger before you can run it. 
+
+   The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title `{{ Source.securityFinding.attributes.title }}`.
 1. Enter a name for the workflow and click **Save**.
 
 #### Add JS function
@@ -122,7 +126,11 @@ This example creates an automated ticket routing workflow that creates and assig
 #### Initialize the workflow
 
 1. On the [Workflow Automation page][4], click **New Workflow**.
-1. Click **Add Trigger** > **Security**. A workflow must have the security trigger before you can run it. The [source object variables][7] of the trigger will allow you to access the security misconfiguration content, like its title using `{{ Source.securityFinding.attributes.title }}`.
+1. Click **Add Trigger** > **Security**. 
+
+   **Note**: A workflow must include a security trigger before you can run it. 
+   
+   The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title `{{ Source.securityFinding.attributes.title }}`.
 1. Enter a name for the workflow and click **Save**.
 
 #### Add Jira action
