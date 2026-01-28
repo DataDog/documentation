@@ -130,7 +130,7 @@ If either requirement is not met, SSI falls back gracefully and your application
 
 For a complete list of supported Java versions, see the [Java SDK compatibility documentation][1].
 
-<div class="alert alert-info">SSI uses the <code>--enable-native-access=ALL-UNNAMED</code> flag on Java 24+ to enable native access for all code on the class path. This is necessary for products such as Profiling that require native access. See <a href="https://openjdk.org/jeps/472">JEP 472</a> for more information.</div>
+<div class="alert alert-info">SSI uses the <code>--enable-native-access=ALL-UNNAMED</code> flag on Java 24+ to enable native access for all code on the class path. This is necessary for products such as Profiling, which requires native access. See <a href="https://openjdk.org/jeps/472">JEP 472</a> for more information.</div>
 
 ### Limitations
 
