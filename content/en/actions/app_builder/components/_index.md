@@ -477,7 +477,7 @@ Image components have the following properties.
 
 Source
 : The image to display.<br>
-**Values**: URL, file
+**Values**: URL or file
 
 ### Appearance
 
@@ -949,18 +949,35 @@ Custom chart components have the following properties.
 ### General 
 
 Title
-: A title for the side panel.<br>
+: The title for the side panel.<br>
 **Value**: string
 
 ### Appearance
 
 Width
 : Determines the width of the side panel.<br>
-**Value**: string
+**Value**: integer
 
 Hide Close Button
-: Determines whether side panel displays an x to close the panel.<br>
+: Determines whether side panel displays an X to close the panel.<br>
 **Provided values**: on, off
+
+### Events
+
+Event
+: **Values**: toggleOpen, close, open
+
+Reaction
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+Actions
+: **Values**: getIssuesByUser, makeRequest0<br>
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
 
 {{% /collapse-content %}}
 
