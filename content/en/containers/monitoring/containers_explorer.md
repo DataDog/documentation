@@ -1,22 +1,14 @@
 ---
-title: Containers View
+title: Containers Explorer
 aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/
   - /infrastructure/livecontainers
+  - /infrastructure/containers
 further_reading:
 - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
   tag: Blog
   text: Monitor your Kubernetes operators to keep applications running smoothly
-- link: "/infrastructure/livecontainers/configuration"
-  tag: "Documentation"
-  text: "Configure Containers View"
-- link: "/infrastructure/hostmap/"
-  tag: "Documentation"
-  text: "See all of your hosts together on one screen with the hostmap"
-- link: "/infrastructure/process/"
-  tag: "Documentation"
-  text: "Understand what is going on at any level of your system"
 - link: "https://www.datadoghq.com/blog/kubernetes-cpu-requests-limits/"
   tag: "Blog"
   text: "A deep dive into CPU requests and limits in Kubernetes"
@@ -31,24 +23,23 @@ further_reading:
   text: "Accelerate Kubernetes issue resolution with AI-powered guided remediation"
 ---
 
-In Datadog, the [Containers][1] page provides real-time visibility into all containers across your environment.
-
-Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, the Containers page gives you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
-
-Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the Containers page provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real-time:
-
 {{< img src="infrastructure/livecontainers/live-containers-overview_2.png" alt="Live containers with summaries" >}}
 
-## Setup
+In Datadog, the [Containers Explorer][1] page (formerly known as Live Containers) provides real-time visibility into all containers across your environment.
 
-To display data on the Containers view, enable container collection.
+Inspired by *htop*, *ctop*, and *kubectl*, Containers Explorer gives you complete coverage of your container infrastructure. View data in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
+
+## Configuration
+
+### Set up container collection
+
+Collecting container telemetry for Containers Explorer is **enabled by default** for most Datadog Agent installations.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
+When you install the Datadog Agent in a Docker-based environment, container collection is enabled by default.
 
-The Datadog Agent enables container collection in Docker environments by default.
-
-For verification, ensure that `DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED` is set to `true`.
+To verify that container collection is enabled, ensure that `DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED` is set to `true`.
 
 For example:
 
@@ -59,9 +50,9 @@ For example:
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator enables container collection by default.
+When you install the Datadog Agent by using the Datadog Operator, container collection is enabled by default.
 
-For verification, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
+To verify that container collection is enabled, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -81,9 +72,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-If you are using the [official Helm chart][1], container collection is enabled by default.
+When you install the Datadog Agent by using the [official Helm chart][1], container collection is enabled by default.
 
-For verification, ensure that the `processAgent.containerCollection` parameter is set to `true` in your [`values.yaml`][2] file:
+To verify that container collection is enabled, ensure that the `processAgent.containerCollection` parameter is set to `true` in your `datadog-values.yaml` file:
 
 ```yaml
 datadog:
@@ -92,9 +83,8 @@ datadog:
     containerCollection: true
 ```
 
-Then, upgrade your Helm chart.
-
-In some setups, the Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
+#### Troubleshooting: No cluster name set
+If you see the error `Orchestrator explorer enabled but no cluster name set: disabling.` error, Datadog is failing to detect your Kubernetes cluster name. To fix, set `datadog.clusterName` to your cluster name in the `datadog-values.yaml` file.
 
 ```yaml
 datadog:
@@ -106,7 +96,7 @@ datadog:
 ```
 
 [1]: https://github.com/DataDog/helm-charts
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
@@ -122,14 +112,134 @@ Update your task definitions with the following environment variable:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration
-For configuration options, like filtering containers and scrubbing sensitive information, see [Configure Containers View][16]. To set up this page for older Agent versions (Datadog Agent v7.21.1 - v7.27.0 and Cluster Agent v1.9.0 - 1.11.0), see [Live Containers legacy configuration][17].
+<div class="alert alert-info">To set up Containers Explorer for Datadog Agent v7.21.1 - v7.27.0 and Cluster Agent v1.9.0 - 1.11.0, see <a href="/infrastructure/faq/live-containers-legacy-configuration">Live Containers legacy configuration</a>.</div>
 
-## Kubernetes Orchestrator Explorer
+### Include or exclude containers
 
-In the **Select Resources** box at the top left of the Containers page, you can expand the **Kubernetes** heading to look at pods, clusters, namespaces, and other resources in the Kubernetes [Orchestrator Explorer][18]. For more information, see the [Orchestrator Explorer documentation][19].
+By default, Datadog automatically discovers all containers.
 
-You can also use the [Kubernetes page][20] to see an overview of your Kubernetes resources.
+You can include or exclude containers from collection by using these environment variables:
+
+- `DD_CONTAINER_EXCLUDE`: Blocklist of containers to exclude
+- `DD_CONTAINER_INCLUDE`: Allowlist of containers to include
+
+Regular expressions are supported.
+
+#### Example: Including and excluding containers
+To exclude all Debian containers (`image:debian`) except containers with a name starting with `frontend` (`name:frontend.*`):
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+```shell
+docker run -d --name datadog-agent \
+           (...) \
+           -e DD_CONTAINER_EXCLUDE="image:debian" \
+           -e DD_CONTAINER_INCLUDE="name:frontend.*"
+```
+
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  override:
+    nodeAgent:
+      env:
+        - name: DD_CONTAINER_EXCLUDE
+          value: "image:debian"
+        - name: DD_CONTAINER_INCLUDE
+          value: "name:frontend.*"
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```yaml
+datadog:
+  containerExclude: "image:debian"
+  containerInclude: "name:frontend.*"
+```
+
+{{% /tab %}}
+{{% tab "Amazon ECS" %}}
+
+Update your task definition:
+
+```json
+"environment": [
+  {
+    "name": "DD_CONTAINER_EXCLUDE",
+    "value": "image:debian"
+  },
+  {
+    "name": "DD_CONTAINER_INCLUDE",
+    "value": "name:frontend.*"
+  },
+  ...
+]
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+For more granular configuration options, see [Container Discovery Management][21]
+
+
+### Scrub sensitive information from manifests
+
+To help prevent leaking sensitive data, the Agent can be configured to scrub the collected Kubernetes YAML manifests. This scrubbing feature is applied to:
+
+- Annotation values
+- Label values
+- Probe configurations (HTTP headers and commands)
+- Environment variables 
+- Container exec commands
+
+The scrubbing algorithm attempts to detect key-value pairs containing secrets based on a set of sensitive keywords, replacing corresponding values with `********`. This logic is applied to structured key-value pairs (such as environment variables) as well as values that look like JSON or YAML content, which may contain key-value pairs within the content.
+
+Scrubbing is enabled by default using the following sensitive keywords:
+
+- `password`
+- `passwd`
+- `mysql_pwd`
+- `access_token`
+- `auth_token`
+- `api_key`
+- `apikey`
+- `pwd`
+- `secret`
+- `credentials`
+- `stripetoken`
+
+You can supply additional sensitive keywords by providing a space-delimited list in the environment variable: `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`. This adds to the default words and does not overwrite them. To use this environment variable, you must configure it for following Agents:
+
+```yaml
+env:
+    - name: DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS
+      value: "customword1 customword2 customword3"
+```
+
+**Note**: Any additional sensitive words must be provided as lowercase strings. The Agent converts text to lowercase before matching for sensitive words. If the sensitive word is `password`, `MY_PASSWORD=1234` is scrubbed to `MY_PASSWORD=********` because the Agent converts `MY_PASSWORD` to `my_password`, which mean the sensitive word `PASSWORD` does not match anything.
+
+For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
+
+```text
+password <MY_PASSWORD>
+password=<MY_PASSWORD>
+password: <MY_PASSWORD>
+password::::== <MY_PASSWORD>
+config={"password":"<MY_PASSWORD>"}
+```
+
+However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
 
 ## Searching, filtering, and pivoting
 
@@ -265,3 +375,4 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 [18]: https://app.datadoghq.com/orchestration/overview
 [19]: /infrastructure/containers/orchestrator_explorer/
 [20]: /infrastructure/containers/kubernetes_resources
+[21]: /containers/guide/container-discovery-management
