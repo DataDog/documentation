@@ -460,6 +460,32 @@
     "description": "Get the details of a project by `project_id`.",
     "summary": "Get the details of a project"
   },
+  "UpdateProject": {
+    "description": "Update a project.",
+    "summary": "Update a project",
+    "request_description": "Project payload",
+    "request_schema_description": "Project update request"
+  },
+  "GetProjectNotificationRules": {
+    "description": "Get all notification rules for a project.",
+    "summary": "Get notification rules"
+  },
+  "CreateProjectNotificationRule": {
+    "description": "Create a notification rule for a project.",
+    "summary": "Create a notification rule",
+    "request_description": "Notification rule payload",
+    "request_schema_description": "Notification rule create request"
+  },
+  "DeleteProjectNotificationRule": {
+    "description": "Delete a notification rule using the notification rule's `id`.",
+    "summary": "Delete a notification rule"
+  },
+  "UpdateProjectNotificationRule": {
+    "description": "Update a notification rule.",
+    "summary": "Update a notification rule",
+    "request_description": "Notification rule payload",
+    "request_schema_description": "Notification rule update request"
+  },
   "GetAllCaseTypes": {
     "description": "Get all case types",
     "summary": "Get all case types"
