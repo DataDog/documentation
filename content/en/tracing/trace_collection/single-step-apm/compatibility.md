@@ -130,9 +130,11 @@ If either requirement is not met, SSI falls back gracefully and your application
 
 For a complete list of supported Java versions, see the [Java SDK compatibility documentation][1].
 
+<div class="alert alert-info">SSI uses the <code>--enable-native-access=ALL-UNNAMED</code> flag on Java 24+ to enable native access for all code on the class path. This is necessary for products such as Profiling that require native access. See [JEP 472][2] for more information.</div>
+
 ### Limitations
 
-By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or non-actionable traces. These exclusions are defined in the [Java SDK denylist][2]. If your workload is included, SSI skips loading the Java SDK.
+By default, SSI does not instrument some Java applications and libraries to avoid performance overhead or non-actionable traces. These exclusions are defined in the [Java SDK denylist][3]. If your workload is included, SSI skips loading the Java SDK.
 
 ### Known issues
 
@@ -141,11 +143,9 @@ By default, SSI does not instrument some Java applications and libraries to avoi
 - Consider moving some configurations to a `.properties` file
 - Check application logs for specific initialization errors
 
-**Java 24+ Use of JNI**: SSI uses the `--enable-native-access=ALL-UNNAMED` flag on Java 24+ to enable native access for all code on the class path. This is necessary for products such as Profiling that require native access. See [JEP 472][3] for more information.
-
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
-[3]: https://openjdk.org/jeps/472
+[2]: https://openjdk.org/jeps/472
+[3]: https://github.com/DataDog/dd-trace-java/blob/master/metadata/requirements.json
 
 {{< /programming-lang >}}
 
