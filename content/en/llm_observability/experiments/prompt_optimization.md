@@ -18,7 +18,7 @@ further_reading:
 
 Prompt Optimization automates the process of improving LLM prompts through systematic evaluation and AI-powered refinement. Instead of manually testing and tweaking prompts, you can use Prompt Optimization to analyze performance data, identify failure patterns, and suggest targeted improvements.
 
-The system runs your LLM application on a dataset with the current prompt, measures performance using your custom metrics, and then uses a reasoning model (such as OpenAI's o3-mini or Claude 3.5 Sonnet) to analyze the results and generate an improved prompt. This cycle repeats until your target metrics are achieved or the maximum number of iterations is reached.
+Prompt Optimization runs your LLM application on a dataset with the current prompt, measures performance using your custom metrics, and then uses a reasoning model to analyze the results and generate an improved prompt. This cycle repeats until your target metrics are achieved or the maximum number of iterations is reached.
 
 ### Prompt Optimization capabilities
 - Automated prompt improvement through AI-powered analysis
@@ -27,7 +27,7 @@ The system runs your LLM application on a dataset with the current prompt, measu
 - Parallel experiment execution for rapid iteration
 - Full integration with LLM Observability for tracking and debugging
 
-Prompt Optimization supports any use case where the expected output is known and there is a defined way to score the model’s predictions. Prompt Optimization's architecture supports any output type, including structured data extraction, free-form text generation, and numerical predictions.
+Prompt Optimization supports any use case where the expected output is known and there is a defined way to score the model's predictions. Prompt Optimization's architecture supports any output type, including structured data extraction, free-form text generation, and numerical predictions.
 
 ## Prerequisites
 
@@ -162,7 +162,7 @@ def precision_recall_evaluator(inputs, outputs, expected_outputs, evaluations):
     }
 ```
 
-**Scoring function** can be one of your metrics or can combine metrics into a single optimization target:
+**Scoring function** can return one of the values returned by one of the summary evaluators (for example, precision) or a combination of multiple metrics:
 
 ```python
 def compute_score(summary_evaluators):
@@ -229,7 +229,7 @@ def optimization_task(system_prompt, user_prompt, config):
     return response.choices[0].message.parsed.prompt  # Must return string
 ```
 
-<div class="alert alert-info">The optimization task receives a system prompt with instructions for improving prompts and a user prompt with current performance data and examples. The system automatically constructs these prompts based on your evaluation results. The function must return the improved prompt as a string.</div>
+<div class="alert alert-info">The optimization task receives a system prompt with instructions for improving prompts and a user prompt with current performance data and examples. Prompt Optimization automatically constructs these prompts based on your evaluation results. The function must return the improved prompt as a string.</div>
 
 ### 5. Run optimization
 
