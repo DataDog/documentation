@@ -220,23 +220,6 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-
-{{% collapse-content title="Divider" level="h3" %}}
-Divider components have the following properties.
-
-### Appearance
-
-Is Visible
-: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off
-
-### Inspect data
-
-Displays property and value pairs in JSON format.
-
-{{% /collapse-content %}}
-
-
 {{% collapse-content title="Custom chart" level="h3" %}}
 Custom chart components have the following properties.
 
@@ -266,56 +249,6 @@ For an example showing how to use this component, see [Custom charts][10].
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Image" level="h3" %}}
-Image components have the following properties.
-
-### General 
-
-Source
-: The image to display.<br>
-**Values**: URL, file
-
-### Appearance
-
-Fit
-: Determines the dimensions of the image within the bounds of the image component.<br>
-**Provided values**: fill, contain, cover, none
-
-Padding
-: Determines the width of space between the bounds of the image and the bounds of the image component.<br>
-**Provided values**: none, small, medium, large
-
-Vertical Alignment
-: Determines the vertical position of the image within the bounds of the image component.<br>
-**Provided values**: align top, align center, align bottom
-
-Horizontal Alignment 
-: Determines the horizontal position of the image within the bounds of the image component.<br>
-**Provided values**: align left, align center, align right
-
-Border
-: Determines whether the image component has a visual border around its edges.<br>
-**Provided values**: on, off
-
-Transparent Background
-: Determines whether the background inside the image component is transparent.<br>
-**Provided values**: on, off
-
-Is Loading
-: Determines whether a loading icon is displayed while the image is being loaded.<br>
-**Provided values**: on, off
-
-Is Visible
-: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off
-
-### Inspect data
-
-Displays property and value pairs in JSON format.
-
-{{% /collapse-content %}}
-
-
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
@@ -355,14 +288,8 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="File input" level="h3" %}}
-File input components have the following properties.
-
-### General
-
-Accepted File Types
-: Determines which file types the file input component accepts.<br>
-**Values**: .csv, .json
+{{% collapse-content title="Divider" level="h3" %}}
+Divider components have the following properties.
 
 ### Appearance
 
@@ -370,63 +297,10 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
-### Events
-
-Event
-: **Value**: change
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
-
 ### Inspect data
 
 Displays property and value pairs in JSON format.
 
-{{% /collapse-content %}}
-
-
-{{% collapse-content title="Date range picker" level="h3" %}}
-Date range picker components have the following properties.
-
-### General
-
-Default timeframe
-: The default timeframe that the date picker displays.<br>
-**Provided values**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
-
-### Appearance
-
-Is Visible
-: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off
-
-### Events
-
-Event
-: **Value**: change
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
-
-For more information on events, see [Events][1].
-
-### Inspect data
-
-Displays property and value pairs in JSON format.
-
-### Example
-
-To view this component in context, see the [Metrics Explorer & Monitors Builder][2] app blueprint.
 {{% /collapse-content %}}
 
 
@@ -458,41 +332,6 @@ State Function
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
-
-### Inspect data
-
-Displays property and value pairs in JSON format.
-
-{{% /collapse-content %}}
-
-
-{{% collapse-content title="Integration logo" level="h3" %}}
-Integration logo components have the following properties.
-
-### General
-
-Integration Id
-: Specifies which integration logo icon to display.<br>
-**Value**: string or expression<br>
-**Examples**: datadog, amazon-s3, postgres, okta
-
-### Appearance
-
-Horizontal Alignment
-: Controls the horizontal positioning of the logo within the component.<br>
-**Provided values**: align left, align center, align right
-
-Vertical Alignment
-: Controls the vertical positioning of the logo within the component.<br>
-**Provided values**: align top, align center, align bottom
-
-Is Visible
-: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
-**Provided values**: on, off
-
-Is Loading
-: Shows a loading indicator.<br>
-**Provided values**: on, off
 
 ### Inspect data
 
@@ -575,6 +414,91 @@ State Function
 **Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
 
 For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Image" level="h3" %}}
+Image components have the following properties.
+
+### General 
+
+Source
+: The image to display.<br>
+**Values**: URL, file
+
+### Appearance
+
+Fit
+: Determines the dimensions of the image within the bounds of the image component.<br>
+**Provided values**: fill, contain, cover, none
+
+Padding
+: Determines the width of space between the bounds of the image and the bounds of the image component.<br>
+**Provided values**: none, small, medium, large
+
+Vertical Alignment
+: Determines the vertical position of the image within the bounds of the image component.<br>
+**Provided values**: align top, align center, align bottom
+
+Horizontal Alignment 
+: Determines the horizontal position of the image within the bounds of the image component.<br>
+**Provided values**: align left, align center, align right
+
+Border
+: Determines whether the image component has a visual border around its edges.<br>
+**Provided values**: on, off
+
+Transparent Background
+: Determines whether the background inside the image component is transparent.<br>
+**Provided values**: on, off
+
+Is Loading
+: Determines whether a loading icon is displayed while the image is being loaded.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Integration logo" level="h3" %}}
+Integration logo components have the following properties.
+
+### General
+
+Integration Id
+: Specifies which integration logo icon to display.<br>
+**Value**: string or expression<br>
+**Examples**: datadog, amazon-s3, postgres, okta
+
+### Appearance
+
+Horizontal Alignment
+: Controls the horizontal positioning of the logo within the component.<br>
+**Provided values**: align left, align center, align right
+
+Vertical Alignment
+: Controls the vertical positioning of the logo within the component.<br>
+**Provided values**: align top, align center, align bottom
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+Is Loading
+: Shows a loading indicator.<br>
+**Provided values**: on, off
 
 ### Inspect data
 
