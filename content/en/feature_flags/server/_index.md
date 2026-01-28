@@ -67,6 +67,35 @@ DD_REMOTE_CONFIG_ENABLED=true
 
 <div class="alert alert-info">Some SDKs require additional experimental flags to enable feature flagging. See the SDK-specific documentation for details.</div>
 
+## Context attribute requirements
+
+<div class="alert alert-warning">
+Evaluation context attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are <strong>not supported</strong> and will cause exposure events to be silently dropped.
+</div>
+
+Use flat attributes in your evaluation context:
+
+{{< code-block lang="javascript" >}}
+const evaluationContext = {
+  targetingKey: req.session?.userID,
+  companyId: req.session?.companyID,
+  tier: 'enterprise'
+};
+
+const value = client.getBooleanValue('my-flag', false, evaluationContext);
+{{< /code-block >}}
+
+Avoid nested objects and arrays:
+
+{{< code-block lang="javascript" >}}
+// These attributes will cause exposure events to be dropped
+const evaluationContext = {
+  targetingKey: req.session?.userID,
+  company: { id: req.session?.companyID },  // nested object - NOT SUPPORTED
+  roles: ['admin', 'user']                   // array - NOT SUPPORTED
+};
+{{< /code-block >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
