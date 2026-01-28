@@ -284,9 +284,8 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
-State Function
-: fetch<br>
-**Example**: See [events][9].
+Action
+: **Values**: getIssuesByUser, makeRequest0
 
 For more information on events, see [Events][1].
 
