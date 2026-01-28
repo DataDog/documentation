@@ -71,7 +71,7 @@ If additional investigation is required, the ticket is routed to experts in the 
 
 ## Language support
 
-Japanese language support is available Monday to Friday from 9am to 5pm Japan Standard Time, excluding local public holidays and December 29 to January 3. Chat support in Japanese is available from 10am to 4pm on business days.
+Japanese language support is available Monday to Friday from 9am to 5pm Japan Standard Time (JST), excluding local public holidays and December 29 to January 3. Chat support in Japanese is available from 10am to 4pm JST on business days.
 
 Korean language support is available Monday to Friday from 9am to 5pm Korea Standard Time, excluding local public holidays. Chat support in Korean is not available.
 
