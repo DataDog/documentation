@@ -92,9 +92,8 @@ Use filters to include only the specific costs you want to allocate, such as by 
     - Choose your time frame to set the reporting period you want to analyze.
     - Add a comparison period to spot cost changes:
       - **Default comparison**: Automatically compares to the immediately preceding period (for example, this week vs. last week).
-      - **Flexible comparison**: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns.
+      - **Flexible comparison**: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns. Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.
       
-        <div class="alert alert-info">Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.</div>
 
 ### Advanced options (optional)
 
