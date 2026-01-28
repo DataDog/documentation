@@ -305,6 +305,8 @@ For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`.
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
+Note: Live-heap profiling ddprof feature, not JFR-based, so it isn’t available on Windows.
+
 ### Collecting native stack traces
 
 If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
