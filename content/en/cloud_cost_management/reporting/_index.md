@@ -88,12 +88,13 @@ Use filters to include only the specific costs you want to allocate, such as by 
   - **Summary**: A consolidated, overall picture of your costs.
   - **Day over day**, **week over week** or **month over month**: Analyze how your costs change on a day to day, week to week, or month to month basis and identify trends or unusual fluctuations.
 - Update the **time frame** and **comparison time frame**:
-  - Set your target time frame to monitor trends about your cloud spend.
-  - Configure a comparison time frame to compare costs across different periods:
-    - By default, the comparison period is the period immediately before your reference time frame (for example, if your reference is the past 1 week, the comparison is the week prior; past 1 month compares to the month before). For relative periods like "month to date," the comparison uses the same days in the previous period (for example, if today is January 2 and your reference is month to date—January 1-2—the comparison is December 1-2, not December 30-31).
-    - Use the flexible comparison option to compare against any arbitrary period—such as the same week from a month ago, a year ago, or any custom date range. This flexibility allows you to analyze seasonal trends, compare non-adjacent time frames, and uncover patterns that may not be visible in sequential period comparisons.
-    
-    <div class="alert alert-info">The comparison time frame must have the same duration as the reference time frame for accurate comparisons. **Note**: When comparing months of different lengths, the durations may vary slightly.</div>
+  - **Select your time frame** and **comparison period**:
+    - Choose your time frame to set the reporting period you want to analyze.
+    - Add a comparison period to spot cost changes:
+      - **Default comparison**: Automatically compares to the immediately preceding period (for example, this week vs. last week).
+      - **Flexible comparison**: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns.
+      
+        <div class="alert alert-info">Both periods must be the same type (for example, week to week, month to month).</div>
 
 ### Advanced options (optional)
 
