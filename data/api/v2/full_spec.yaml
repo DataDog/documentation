@@ -45061,6 +45061,57 @@ components:
       required:
       - data
       type: object
+    ProjectFavorite:
+      description: Project favorite
+      properties:
+        id:
+          description: The project's identifier
+          example: d4bbe1af-f36e-42f1-87c1-493ca35c320e
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ProjectFavoriteRelationships'
+        type:
+          $ref: '#/components/schemas/ProjectFavoriteResourceType'
+      required:
+      - id
+      - type
+      - relationships
+      type: object
+    ProjectFavoriteRelationships:
+      description: Project favorite relationships
+      properties:
+        user:
+          $ref: '#/components/schemas/ProjectFavoriteUserRelationship'
+      required:
+      - user
+      type: object
+    ProjectFavoriteResourceType:
+      description: Project favorite resource type
+      enum:
+      - project_favorite
+      example: project_favorite
+      type: string
+      x-enum-varnames:
+      - PROJECT_FAVORITE
+    ProjectFavoriteUserRelationship:
+      description: Relationship to user
+      properties:
+        data:
+          $ref: '#/components/schemas/UserRelationshipData'
+      required:
+      - data
+      type: object
+    ProjectFavoritesResponse:
+      description: Response with project favorites
+      properties:
+        data:
+          description: Array of project favorites
+          items:
+            $ref: '#/components/schemas/ProjectFavorite'
+          type: array
+      required:
+      - data
+      type: object
     ProjectRelationship:
       description: Relationship to project
       properties:
@@ -86306,6 +86357,142 @@ paths:
       - Rum Audience Management
       x-menu-order: 7
       x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/projects/favorites:
+    get:
+      description: Get all projects marked as favorite by the current user
+      operationId: ListUserProjectFavorites
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectFavoritesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
+      summary: Get user's project favorites
+      tags:
+      - Case Management
+      x-menu-order: 15
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/projects/{project_id}/favorites:
+    delete:
+      description: Remove a project from the current user's favorites
+      operationId: UnfavoriteProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Remove project from favorites
+      tags:
+      - Case Management
+      x-menu-order: 17
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Add a project to the current user's favorites
+      operationId: FavoriteProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Add project to favorites
+      tags:
+      - Case Management
+      x-menu-order: 16
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/query/scalar:
     post:
       description: 'Query scalar values (as seen on Query Value, Table, and Toplist
