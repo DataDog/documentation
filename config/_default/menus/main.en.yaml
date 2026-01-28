@@ -2589,6 +2589,11 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 906
+    - name: Google Chat
+      url: incident_response/incident_management/integrations/google_chat
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_chat
+      weight: 907      
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
