@@ -6512,6 +6512,45 @@ menu:
       url: /api/latest/case-management/
       identifier: case-management
       generated: true
+    - name: Add project to favorites
+      url: '#add-project-to-favorites'
+      identifier: case-management-add-project-to-favorites
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - FavoriteProject
+        unstable:
+          - v2
+        order: 16
+    - name: Remove project from favorites
+      url: '#remove-project-from-favorites'
+      identifier: case-management-remove-project-from-favorites
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnfavoriteProject
+        unstable:
+          - v2
+        order: 17
+    - name: Get user's project favorites
+      url: '#get-users-project-favorites'
+      identifier: case-management-get-users-project-favorites
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserProjectFavorites
+        unstable:
+          - v2
+        order: 15
     - name: Unassign case
       url: '#unassign-case'
       identifier: case-management-unassign-case

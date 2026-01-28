@@ -2358,6 +2358,18 @@
     "description": "List all data connections for an entity",
     "summary": "List connections"
   },
+  "ListUserProjectFavorites": {
+    "description": "Get all projects marked as favorite by the current user",
+    "summary": "Get user's project favorites"
+  },
+  "UnfavoriteProject": {
+    "description": "Remove a project from the current user's favorites",
+    "summary": "Remove project from favorites"
+  },
+  "FavoriteProject": {
+    "description": "Add a project to the current user's favorites",
+    "summary": "Add project to favorites"
+  },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",
