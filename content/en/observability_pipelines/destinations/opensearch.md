@@ -17,12 +17,36 @@ Set up the OpenSearch destination and its environment variables when you [set up
 
 ### Set up the destination
 
-1. Optionally, enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+<div class="alert alert-danger">Only enter the identifiers for the OpenSearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
+1. Optionally, Enter the name of the OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 {{% observability_pipelines/destination_buffer_numbered %}}
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- OpenSearch endpoint URL identifier:
+	- The default identifier is `DESTINATION_OPENSEARCH_ENDPOINT_URL`.
+- OpenSearch authentication username identifier:
+	- The default identifier is `DESTINATION_OPENSEARCH_USERNAME`.
+- OpenSearch authentication password identifier:
+	- The default identifier is `DESTINATION_OPENSEARCH_PASSWORD`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

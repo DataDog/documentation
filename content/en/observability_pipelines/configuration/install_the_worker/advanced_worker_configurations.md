@@ -77,6 +77,11 @@ The following is a list of bootstrap options, their related pipeline environment
 : <li style="list-style-type: '- '">The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.</li>
 : <li style="list-style-type: '- '">The <code>DD_PROXY_HTTP(S)</code> and <code>HTTP(S)_PROXY</code> environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.</li>
 
+`secret`
+: **Pipeline environment variable**: None
+: **Priority**: N/A
+: **Description**: Connects the Worker to your secrets manager. See [Secrets Management][12] for configuration information.
+
 `site`
 : **Pipeline environment variable**: `DD_SITE`
 : **Priority**: `DD_SITE`
@@ -122,3 +127,4 @@ api:
 [9]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L33-L40
 [10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329
 [11]: /remote_configuration/#security-considerations
+[12]: /observability_pipelines/configuration/secrets_management/
