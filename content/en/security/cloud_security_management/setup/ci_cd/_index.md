@@ -26,9 +26,9 @@ To support CI/CD-based container image scanning, Datadog provides the **Datadog 
 To get started with container image scanning in CI/CD:
 
 1. [Configure Datadog credentials](#authentication)
-2. [Install the Datadog Security CLI](#installation-and-scan-script) in your CI/CD pipeline
+2. [Install the Datadog Security CLI](#installation-and-scans) in your CI/CD pipeline
 3. View scan results in the [Cloud Security Vulnerabilities][3] page
-4. Optionally, [set up local development](#local-development-and-testing) for faster iteration
+4. Optionally, [set up local development](#run-local-scans-during-development) for faster iteration
 
 ## Authentication
 
@@ -56,7 +56,7 @@ Container image scanning works with all major CI/CD platforms including:
 
 The customizable script approach gives you full control over when and how scans are executed in your pipelines.
 
-## Installation and scan script
+## Installation and scans
 
 <div class="alert alert-info">The Datadog Security CLI is in Preview and available to install from Datadog package repositories.</div>
 
@@ -126,7 +126,17 @@ export DD_SITE={{< region-param key="dd_site" >}}
 datadog-security-cli image myimage:tag
 ```
 
-## Local development and testing
+The CLI outputs scan results directly to your terminal, showing:
+- Image information (name, digest, operating system)
+- Total number of vulnerabilities found
+- Severity breakdown (Critical, High, Medium, Low)
+- Detailed table of vulnerabilities with CVE IDs, affected packages, and available fixes
+
+{{< img src="security/vulnerabilities/csm-vm-cli-output.png" alt="Datadog Security CLI output showing vulnerability scan results for a container image" style="width:100%;" >}}
+
+You can also view your scan results in Datadog's [Cloud Security Vulnerabilities][3] explorer.
+
+## Run local scans during development
 
 For faster iteration before committing to CI, install the Datadog Security CLI locally using the same installation methods described in the [installation section](#install-the-datadog-security-cli) above.
 
@@ -156,7 +166,6 @@ datadog-security-cli image myapp:latest --fail-on critical
 
 # Fail on high or critical vulnerabilities
 datadog-security-cli image myapp:latest --fail-on high
-
 ```
 
 ### Output formats
