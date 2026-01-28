@@ -26,11 +26,10 @@ After you connect a Google Chat workspace to a Datadog organization, users can m
 
 Only Google Chat users who are connected to a Datadog organization can declare incidents. After an administrator sets up the Google Chat integration, users connect their Google Chat account to Datadog by running `/dd_account`.
 
-To declare an incident, run:
+To declare an incident, run the following in any Google Chat space:
 ```
 /dd_incident
 ```
-in any Google Chat space.
 ## Incident Spaces
 
 You can configure Incident Management to automatically create a dedicated Google space for each incident that meets the criteria you define. Your responders can then manage the incident directly in Google Chat from the incident space.
