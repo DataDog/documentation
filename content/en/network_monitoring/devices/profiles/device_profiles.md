@@ -1,9 +1,9 @@
 ---
 title: Getting Started with Device Profiles
-
-is_beta: true
+aliases:
+    - /network_monitoring/devices/guide/device_profiles/
 further_reading:
-- link: "/network_monitoring/devices/guide/build-ndm-profile/"
+- link: "/network_monitoring/devices/profiles/build-ndm-profile/"
   tag: "Documentation"
   text: "Build an NDM Profile (Advanced)"
 - link: "/network_monitoring/devices/profiles"
@@ -21,7 +21,7 @@ site_support_id: snmp_profile_manager
 Device profiles define which metrics to collect and how to transform them into Datadog metrics. Each [profile][2] is expected to monitor a class of similar devices from the same vendor. 
 
 The SNMP Profile Manager template provides a guided, GUI-based experience to:
-- Seamlessly create and manage device profiles.
+- Efficiently create and manage device profiles.
 - Specify tags and metrics to be collected from your network devices. 
 - Verify the matching devices to each profile.
 - Review a snapshot of the device profiles you created on the [Inventory page](#inventory-page).
@@ -35,7 +35,7 @@ For more information on advanced profile details, review the [Profile Format Ref
 - Permissions required:
   - [NDM Device Profiles View][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
   - [NDM Device Profiles Edit][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
-- To [automatically apply created device profiles](#apply-a-profile-to-created-devices) using Remote Configuration, ensure the following setting is enabled in your `datadog-agent/conf.d/snmp.d/conf.yaml` file:
+- To [automatically apply created device profiles](#apply-a-profile-to-created-devices) using Remote Configuration, enable the following setting in your `datadog-agent/conf.d/snmp.d/conf.yaml` file:
 
   {{< highlight yaml "hl_lines=5" >}}
     init_config:

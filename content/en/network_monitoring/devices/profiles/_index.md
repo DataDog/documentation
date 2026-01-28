@@ -19,7 +19,7 @@ Network Device Monitoring uses profiles to tell the Datadog Agent the metrics an
 
 You can enable device profiles in Datadog using either the recommended GUI-based (SNMP Profile Manager) workflow, or through an advanced configuration-based setup:
 
-**[SNMP Profile Manager][9] (recommended)**  
+**[SNMP Profile Manager][7] (recommended)**  
 - Guided UI to customize metrics collected from network devices directly from the [Network Device Monitoring Configuration][8] page.
 - Removes the need to source OIDs from vendor documentation by automatically recommending a list of relevant, human-readable metrics.
 - Requires no manual configuration with `.yaml` files.
@@ -39,7 +39,7 @@ By default, all profiles in the Agent configuration directory are loaded. To cus
 
 Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define which metrics to collect and how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor. They are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the ones defined in the profile file.
 
-The Datadog Agent provides out-of-the-box profiles in the `conf.d/snmp.d/default_profiles` directory. This directory is cleaned and reset upon Agent upgrades so do not save anything there. You can write your own custom profiles and extend existing ones by putting files in the `conf.d/snmp.d/profiles` directory.
+The Datadog Agent provides out-of-the-box profiles in the `conf.d/snmp.d/default_profiles` directory. This directory is cleaned and reset upon Agent upgrades so do not save anything there. You can write your own custom profiles and extend existing ones by putting files in the `conf.d/snmp.d/profiles` directory. Custom profiles in the `profiles` directory take precedence over default profiles with the same name.
 
 The following example profile is used on any network device whose `sysobjectid` either _is_ `1.3.6.1.4.1.232.9.4.10` or _starts with_ `1.3.6.1.4.1.232.9.4.2.`:
 
@@ -107,10 +107,9 @@ See the [Profile Format Reference][5] for more information about profiles format
 [4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go#L51-L76
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [6]: https://app.datadoghq.com/devices/
-[7]: /network_monitoring/devices/guide/device_profiles/
+[7]: /network_monitoring/devices/profiles/device_profiles/
 [8]: https://app.datadoghq.com/devices/profiles
-[9]: /network_monitoring/devices/guide/device_profiles/
-[10]: /network_monitoring/devices/guide/build-ndm-profile/
+[10]: /network_monitoring/devices/profiles/build-ndm-profile/
 [11]: /agent/remote_config/
 
 

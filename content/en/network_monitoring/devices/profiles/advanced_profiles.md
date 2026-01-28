@@ -1,7 +1,8 @@
 ---
-title: Build an NDM Profile (Advanced)
+title: Advanced Profiles
 aliases:
     - /network_performance_monitoring/devices/guide/build-ndm-profile
+    - /network_monitoring/devices/guide/build-ndm-profile/
 further_reading:
 - link: "https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/"
   tag: "Documentation"
