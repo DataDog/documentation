@@ -33,7 +33,7 @@ The Browser SDK supports all modern desktop and mobile browsers and provides aut
 
 ## Setup
 
-To start collecting RUM data, [set up the Datadog Browser SDK](/client_sdks/setup/?sdk=browser).
+To start collecting RUM data, [set up the Datadog Browser SDK][1].
 
 ## Sample RUM sessions
 
@@ -50,21 +50,27 @@ datadogRum.init({
 });
 ```
 
-For more information, see [Browser RUM & Session Replay Sampling][4].
+For more information, see [Browser RUM & Session Replay Sampling][2].
 
 ## Visualize your data
 
 After you've completed the basic setup for RUM, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
 
-Visualize the [data collected][8] in [dashboards][9] or create a search query in the [RUM Explorer][10].
+Visualize the [data collected][3] in [dashboards][4] or create a search query in the [RUM Explorer][5].
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+## Next steps
+
+See [Advanced Configuration][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[4]: /real_user_monitoring/guide/sampling-browser-plans/
-[8]: /real_user_monitoring/application_monitoring/browser/data_collected/
-[9]: /real_user_monitoring/platform/dashboards/
-[10]: https://app.datadoghq.com/rum/sessions
+[1]: /client_sdks/setup/?sdk=browser
+[2]: /real_user_monitoring/guide/sampling-browser-plans/
+[3]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[4]: /real_user_monitoring/platform/dashboards/
+[5]: https://app.datadoghq.com/rum/explorer
+[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/

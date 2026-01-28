@@ -53,7 +53,7 @@ sub RunUserInterface(args as dynamic)
     datadogroku_initialize({
         clientToken: "<CLIENT_TOKEN>",
         applicationId: "<APPLICATION_ID>"
-        site: "{{< region-param key=roku_site >}}",
+        site: "{% region-param key="roku_site" /%}",
         env: "<ENV_NAME>",
         sessionSampleRate: 100, ' the percentage (integer) of sessions to track
         launchArgs: args

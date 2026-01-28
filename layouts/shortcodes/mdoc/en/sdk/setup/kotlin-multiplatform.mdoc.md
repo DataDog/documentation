@@ -112,7 +112,7 @@ fun initializeDatadog(context: Any? = null) {
             clientToken = appClientToken,
             env = appEnvironment,
             variant = appVariantName
-    ){{< region-param key=kotlin_multiplatform_site_config >}}
+    ){% region-param key="kotlin_multiplatform_site_config" /%}
         .build()
 
     Datadog.initialize(context, configuration, trackingConsent)
