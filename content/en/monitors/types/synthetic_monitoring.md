@@ -47,6 +47,8 @@ Depending on your incident management strategy, you may want to involve multiple
 
 To enable renotification, toggle **Enable renotification** and select a time interval from the dropdown menu.
 
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see [Understanding Synthetic Monitor Alerting][7].
+
 ## Enhanced notifications
 
 Use and enrich Synthetic monitors to send more detailed notifications when a Synthetic Monitoring test is failing. The following features are available:
@@ -81,3 +83,4 @@ For more information, see [Synthetic Monitoring notifications][6].
 [4]: /monitors/notify/#notification-recipients
 [5]: /monitors/notify/#renotify
 [6]: /synthetics/notifications
+[7]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/

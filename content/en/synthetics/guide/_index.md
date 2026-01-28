@@ -25,6 +25,7 @@ cascade:
     {{< nextlink href="monitors/types/synthetic_monitoring/" >}}Use Synthetic Test Monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-retries-monitor-status/" >}}Understand how Synthetic test retries determine monitor status{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/uptime-percentage-widget" >}}Monitor website uptime with SLOs{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/how-synthetics-monitors-trigger-alerts" >}}Understand how Synthetic monitors trigger an alert{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
