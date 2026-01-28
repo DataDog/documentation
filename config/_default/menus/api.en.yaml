@@ -12841,3 +12841,55 @@ menu:
           - CreateWorkflow
         unstable: []
         order: 2
+    - name: Update Saved Action
+      url: '#update-saved-action'
+      identifier: workflow-automation-update-saved-action
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSavedAction
+        unstable:
+          - v2
+        order: 0
+    - name: Delete Saved Action
+      url: '#delete-saved-action'
+      identifier: workflow-automation-delete-saved-action
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSavedAction
+        unstable:
+          - v2
+        order: 0
+    - name: Create Saved Action
+      url: '#create-saved-action'
+      identifier: workflow-automation-create-saved-action
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSavedAction
+        unstable:
+          - v2
+        order: 0
+    - name: List Saved Actions
+      url: '#list-saved-actions'
+      identifier: workflow-automation-list-saved-actions
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSavedAction
+        unstable:
+          - v2
+        order: 0
