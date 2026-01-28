@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-Prompt Optimization automates the process of improving LLM prompts through systematic evaluation and AI-powered refinement. Instead of manually testing and tweaking prompts, the Prompt Optimizer uses advanced reasoning models to analyze performance data, identify failure patterns, and suggest targeted improvements.
+Prompt Optimization automates the process of improving LLM prompts through systematic evaluation and AI-powered refinement. Instead of manually testing and tweaking prompts, you can use Prompt Optimization to analyze performance data, identify failure patterns, and suggest targeted improvements.
 
 The system runs your LLM application on a dataset with the current prompt, measures performance using your custom metrics, and then uses a reasoning model (such as OpenAI's o3-mini or Claude 3.5 Sonnet) to analyze the results and generate an improved prompt. This cycle repeats until your target metrics are achieved or the maximum number of iterations is reached.
 
-**Key capabilities:**
+### Prompt Optimization capabilities
 - Automated prompt improvement through AI-powered analysis
 - Customizable evaluation metrics for domain-specific tasks
 - Built-in stopping conditions to prevent over-optimization
@@ -86,7 +86,7 @@ dataset = LLMObs.create_dataset(
 )
 ```
 
-**Best practice:** Include diverse examples covering typical cases and edge cases to help ensure robust optimization.
+To help ensure robust optimization, Datadog recommends that you include diverse examples that cover typical cases and edge cases
 
 ### 2. Define your task function
 
@@ -200,7 +200,7 @@ def compute_score(summary_evaluators):
     return metrics['precision'] + metrics['accuracy']
 ```
 
-**Labelization function** categorizes results for showing diverse examples to the optimizer:
+**Labelization functions** categorize results for showing diverse examples to the optimizer:
 
 ```python
 def labelization_function(individual_result):
@@ -213,7 +213,9 @@ def labelization_function(individual_result):
         return "INCORRECT PREDICTION"
 ```
 
-The labelization function plays a crucial role in optimization: for each unique label, the optimizer receives one randomly selected example from that category (here `CORRECT PREDICTION` and `INCORRECT PREDICTION`). This means the number of labels directly determines the diversity of examples shown to the reasoning model. **Importantly, the label names themselves should be meaningful and descriptive**, as they are shown directly to the reasoning model—use clear, human-readable labels like "HIGH CONFIDENCE ERROR" or "EDGE CASE FAILURE" rather than codes like "TYPE_A" or "CAT_3". Design your labels to represent the key patterns or hints you want the optimizer to learn from, and keep the cardinality low (fewer than 10 distinct labels) to help ensure focused, actionable feedback.
+The labelization function plays an important role in optimization: for each unique label, the optimizer receives one randomly selected example from that category (in the example above, the labels are `CORRECT PREDICTION` and `INCORRECT PREDICTION`). This means the number of labels directly determines the diversity of examples shown to the reasoning model. 
+
+**Label names should be meaningful and descriptive**, as they are shown directly to the reasoning model. Use clear, human-readable labels like `HIGH CONFIDENCE ERROR` or `EDGE CASE FAILURE` rather than codes like `TYPE_A` or `CAT_3`. Design your labels to represent the key patterns or hints you want the optimizer to learn from, and keep the cardinality low (fewer than 10 distinct labels) to help ensure focused, actionable feedback.
 
 ### 4. Define optimization task
 
@@ -386,9 +388,9 @@ plt.show()
 
 ### Labelization
 
-- Create 2-5 distinct, descriptive labels (e.g., "CORRECT HIGH CONFIDENCE", "INCORRECT EDGE CASE")
+- Create 2-5 distinct, descriptive labels (for example: `CORRECT HIGH CONFIDENCE`, `INCORRECT EDGE CASE`)
 - Helps ensure balanced label distribution (avoid 95% in one category)
-- Labels help the optimizer understand different types of successes and failures
+- Use labels to help the optimizer understand different types of successes and failures
 
 ### Optimization model selection
 
