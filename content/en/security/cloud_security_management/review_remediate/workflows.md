@@ -51,7 +51,7 @@ This example creates a remediation workflow that sends an interactive Slack mess
 
    **Note**: A workflow must include a security trigger before you can run it. 
 
-   The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title `{{ Source.securityFinding.attributes.title }}`.
+   The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title (`{{ Source.securityFinding.attributes.title }}`).
 1. Enter a name for the workflow and click **Save**.
 
 #### Add JS function

@@ -115,9 +115,9 @@ Add the workflow to your incident notification rule:
 
 ## Security triggers
 
-You can trigger a workflow automatically for any Security Signal or Security Finding.
-You can also trigger a workflow manually from a Cloud SIEM Security Signal panel, Misconfiguration panel, or Identity Risk panel.
-Before you can add a workflow to a Security Signal or Finding, the workflow must have a security trigger.
+You can trigger a workflow automatically for any Security Signal or Security Finding. You can also trigger a workflow manually from a Cloud SIEM Security Signal panel, Misconfiguration panel, or Identity Risk panel.
+
+**Note**: Before adding a workflow to a Security Signal or Finding, the workflow must have a security trigger.
 
 ### Security Notification Rule triggers
 
@@ -145,7 +145,7 @@ Each time the notification rule fires, it triggers a workflow run.
 
 ### Manual triggers
 
-You can manually start a workflow from a Cloud SIEM Security Signal panel, a Misconfiguration panel, or an Identity Risk panel.
+You can manually start a workflow from a Cloud SIEM Security Signal panel, a Misconfiguration panel, or an Identity Risk panel:
 
 1. Click **Run Workflow** in the **Next Steps** box at the top of the side panel.
 1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with security triggers appear in the list.
