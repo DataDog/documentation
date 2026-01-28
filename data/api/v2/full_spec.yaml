@@ -13261,6 +13261,7 @@ components:
         type:
           $ref: '#/components/schemas/StatusPagesComponentGroupType'
       required:
+      - attributes
       - type
       type: object
     CreateComponentRequestDataAttributes:
@@ -13345,7 +13346,7 @@ components:
       properties:
         id:
           description: The ID of the group.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -13476,6 +13477,7 @@ components:
         type:
           $ref: '#/components/schemas/PatchDegradationRequestDataType'
       required:
+      - attributes
       - type
       type: object
     CreateDegradationRequestDataAttributes:
@@ -13511,7 +13513,7 @@ components:
       properties:
         id:
           description: The ID of the component. Must be a component of type `component`.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -14234,6 +14236,7 @@ components:
         type:
           $ref: '#/components/schemas/StatusPageDataType'
       required:
+      - attributes
       - type
       type: object
     CreateStatusPageRequestDataAttributes:
@@ -18162,7 +18165,7 @@ components:
       properties:
         id:
           description: The ID of the component.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -18207,7 +18210,7 @@ components:
       properties:
         id:
           description: Identifier of the component affected at the time of the update.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -18283,7 +18286,7 @@ components:
       properties:
         id:
           description: The ID of the status page.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -43895,11 +43898,14 @@ components:
           $ref: '#/components/schemas/PatchComponentRequestDataAttributes'
         id:
           description: The ID of the component.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/StatusPagesComponentGroupType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchComponentRequestDataAttributes:
@@ -43938,11 +43944,14 @@ components:
           $ref: '#/components/schemas/PatchDegradationRequestDataAttributes'
         id:
           description: The ID of the degradation.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/PatchDegradationRequestDataType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchDegradationRequestDataAttributes:
@@ -43973,7 +43982,7 @@ components:
       properties:
         id:
           description: The ID of the component. Must be a component of type `component`.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -44078,11 +44087,14 @@ components:
           $ref: '#/components/schemas/PatchStatusPageRequestDataAttributes'
         id:
           description: The ID of the status page.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/StatusPageDataType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchStatusPageRequestDataAttributes:
@@ -59010,7 +59022,7 @@ components:
       properties:
         id:
           description: The ID of the group the component belongs to.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59049,7 +59061,7 @@ components:
       properties:
         id:
           description: The ID of the status page the component belongs to.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59191,7 +59203,7 @@ components:
       nullable: true
       properties:
         id:
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59233,7 +59245,7 @@ components:
       properties:
         id:
           description: The ID of the status page.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
