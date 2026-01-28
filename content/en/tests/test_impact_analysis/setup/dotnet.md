@@ -18,7 +18,7 @@ further_reading:
 
 ## Compatibility
 
-Test Impact Analysis is only supported on `dd-trace>= 2.22.0` (execute `dd-trace --version` to get the version of the tool).
+Test Impact Analysis is only supported on `dd-trace>= 2.50.0` (execute `dd-trace --version` to get the version of the tool).
 
 ## Setup
 

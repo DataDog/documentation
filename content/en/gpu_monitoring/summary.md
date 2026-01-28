@@ -19,11 +19,11 @@ The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire 
 - How can I get more value from my existing GPU spend?
 
 Click on the section titles below to access the corresponding section:
-- [Fleet Cost and Usage](#fleet-cost-and-usage)
+- [Usage Across Fleet](#usage-across-fleet)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
 
-## Fleet Cost and Usage
+## Usage across Fleet
 
 Operational efficiency is a key driver of overall cost. Understanding your GPU fleet utilization can help avoid overprovisioning and reduce idle GPU spend.
 
@@ -33,19 +33,18 @@ This visualization provides a breakdown of your entire GPU fleet across multiple
 
 The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
 
-{{< img src="gpu_monitoring/funnel-2.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-3-k8s.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
 - **Total**: Any GPU device that is sending data during the selected time frame
-- **Allocated**: How many of your GPUs have been allocated to a requesting workload
-- **Active**: How many of your allocated GPUs are actively used for a workload
+- **Active**: How many of your GPU devices are actively used for a workload
 - **Effective**: How many GPU devices are used and working more than 50% of their lifespan
+
+If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are **Allocated** to Kubernetes workloads.
 
 ### Understand your GPU spend
 
 See your total spend on GPU infrastructure, and identify the subset of those costs that are wasted on idle GPU devices.
-
-{{< img src="gpu_monitoring/cost_tiles.png" alt="Tiles that represent the total GPU spend over any time frame and the subset of that total cost attributed to GPUs being idle." style="width:90%;" >}}
 
 **Note**: Total cloud costs from AWS and Google Cloud are calculated over the selected time frame. As this data is only available at a delay, the selected time frame must be greater than or equal to two days. Idle costs are the subset of the total cost attributed to idle GPUs.
 
@@ -77,11 +76,13 @@ To understand if any device type pools need additional provisioning, check this 
 
 {{< img src="gpu_monitoring/device_type.png" alt="Availability by GPU device type" style="width:90%;" >}}
 
-### Pinpoint areas with insufficient GPU resources to guide provisioning decisions
+### Pinpoint areas with insufficient GPU resources to guide provisioning decisions (Kubernetes required) 
+
+**Note**: This section is only available for Kubernetes users. 
 
 Use this section to identify the number of unmet GPU requests for your Kubernetes clusters.
 
-{{< img src="gpu_monitoring/unmet_requests.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:90%;" >}}
+{{< img src="gpu_monitoring/unmet_requests-2.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:90%;" >}}
 
 If you have Kubernetes clusters with a large number of unmet GPU requests, you can also look at their **Device Type Breakdown** widget to understand which device type the particular service relies on, and the **Device Allocation over time** widget to track historical demands. This helps you to confirm if these clusters and device types are consistently underprovisioned.
 
@@ -91,7 +92,7 @@ If you have Kubernetes clusters with a large number of unmet GPU requests, you c
 
 Cost optimization of your GPU workloads is crucial, as GPUs are often the most costly items in a team's infrastructure budget. This section uncovers workloads with inefficient GPU utilization, linking wasted costs to specific workloads and their resource usage.
 
-### Most expensive clusters
+### Most expensive clusters (Kubernetes required)
 
 **Note**: This section is only available for Kubernetes users.
 
@@ -105,9 +106,9 @@ For example, if you see a related pod with low core utilization, that pod is ine
 
 {{< img src="gpu_monitoring/cluster_entities.png" alt="A details side panel for a particular cluster that displays the connected entities of that cluster such as pods and processes." style="width:90%;" >}}
 
-### Ineffective pods
+### Ineffective pods (Kubernetes required)
 
-**Note**: This section is only available for Kubernetes users.
+**Note**: This section is only available for Kubernetes users. 
 
 To maximize the value of your GPU infrastructure spend, it's important to keep your GPU devices consistently busy. This widget reveals which pods are ineffectively using their associated GPU devices. The table is sorted by **SM activity** by default.
 
@@ -119,7 +120,9 @@ For example, you may notice that the SM activity timeseries graph dips lower tha
 
 This widget also helps you to identify "noisy neighbors" (where one or more pods consume a disproportionately large amount of shared resources on a host). For example, another pod can be using all of a given host's CPU, depriving other pods on the host.
 
-### Zombie processes
+### Zombie processes (Processes required)
+
+**Note**: This section is only available for customers who have installed [Live Processes][2]. 
 
 Zombie processes are often the primary source of wasted GPU spend, as they inappropriately reserve GPU capacity. This widget lists any zombie processes that should be terminated to free up this GPU capacity for other workloads.
 
@@ -131,3 +134,4 @@ Zombie processes are often the primary source of wasted GPU spend, as they inapp
 
 [0]: https://app.datadoghq.com/gpu-monitoring
 [1]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=fleet
+[2]: /infrastructure/process/?tab=linuxwindows

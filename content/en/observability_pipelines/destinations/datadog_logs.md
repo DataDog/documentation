@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -16,11 +17,9 @@ Set up the Datadog Logs destination and its environment variables when you [set 
 
 ### Set up the destination
 
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+#### Optional settings
+
+{{% observability_pipelines/destination_buffer %}}
 
 ### Set the environment variables
 

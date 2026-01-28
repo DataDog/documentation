@@ -6,7 +6,7 @@
 
 <!-- Python Layer -->
 {{- if eq (.Get "layer") "python" -}}
-    120
+    121
 {{- end -}}
 
 <!-- Node Layer -->
@@ -21,7 +21,7 @@
 
 <!-- Lambda Extension -->
 {{- if eq (.Get "layer") "extension" -}}
-    91
+    92
 {{- end -}}
 
 <!-- dd-trace-java Layer -->
@@ -45,7 +45,7 @@
 
 <!-- Node Versions -->
 {{- if eq (.Get "layer") "node-versions" -}}
-    `Node20-x`, `Node22-x`, `Node24-x`
+    `Node18-x`, `Node20-x`, `Node22-x`, `Node24-x`
 {{- end -}}
 
 {{- if eq (.Get "layer") "node-example-version" -}}

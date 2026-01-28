@@ -575,7 +575,8 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Embeddings][6]:
   - `openai.embeddings.create()` and `azureopenai.embeddings.create()`
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][7] (as of `dd-trace@5.42.0`)
-- [Responses][8] (as of `dd-trace@5.76.0`)
+- [Responses][8]
+  - `openai.responses.create()` (as of `dd-trace@5.76.0`)
 
 [1]: /integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -584,7 +585,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 [5]: https://platform.openai.com/docs/api-reference/chat
 [6]: https://platform.openai.com/docs/api-reference/embeddings
 [7]: https://api-docs.deepseek.com/
-[8]: https://platform.openai.com/docs/api-reference/responses/create
+[8]: https://platform.openai.com/docs/api-reference/responses
 
 {{% /tab %}}
 {{< /tabs >}}
