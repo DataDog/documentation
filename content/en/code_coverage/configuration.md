@@ -16,15 +16,144 @@ Code Coverage is in Preview. This product replaces Test Optimization's <a href="
 
 ## Overview
 
-You can configure code coverage behavior by creating a configuration file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository.
+You can configure Code Coverage behavior by creating a configuration file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository.
 
 Example configuration file:
 
 ```yaml
+schema-version: v1
+services:
+  - id: frontend
+    paths:
+      - frontend/
+      - shared/ui/**
+  - id: backend-api
+    paths:
+      - backend/api/**
+      - backend/.*\.go
 ignore:
   - "test/**/*"
   - "**/*.pb.go"
 ```
+
+## Services configuration
+
+<div class="alert alert-info">Using <a href="/code_coverage/monorepo_support#software-catalog-integration">Software Catalog integration</a> is the recommended approach for defining services, as code locations configured in Software Catalog can be utilized by multiple Datadog products. Use manual configuration only when Software Catalog integration is not available.</div>
+
+You can define services in your configuration file to split coverage data by service in monorepos. This is useful when multiple projects or teams share a single repository and you want to view coverage metrics for each service independently.
+
+```yaml
+schema-version: v1
+services:
+  - id: frontend
+    paths:
+      - frontend/**
+      - shared/ui/**
+  - id: backend-api
+    paths:
+      - backend/api/**
+```
+
+- `schema-version` (required): Must be `v1`
+- `services`: List of service definitions
+  - `id` (required): Unique identifier for the service
+  - `paths` (required): List of path patterns that belong to this service (see [Pattern syntax](#pattern-syntax))
+
+For complete details on monorepo support, including Software Catalog integration and codeowner-based splitting, see [Monorepo support][1].
+
+### Examples
+
+{{% collapse-content title="JavaScript/TypeScript monorepo" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+services:
+  - id: web-app
+    paths:
+      - packages/web/**
+      - packages/shared/ui/**
+  - id: mobile-app
+    paths:
+      - packages/mobile/**
+      - packages/shared/core/**
+  - id: admin-dashboard
+    paths:
+      - packages/admin/**
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Multi-language monorepo" level="h4" %}}
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+services:
+  - id: backend-service
+    paths:
+      - services/backend/**
+      - services/backend/.*\.go
+  - id: frontend-web
+    paths:
+      - services/frontend/**
+      - services/frontend/.*\.(ts|tsx)
+  - id: data-processing
+    paths:
+      - services/data/**
+      - scripts/.*\.py
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+## Ignoring paths
+
+You can exclude specific files or directories from code coverage reporting using the `ignore` field. This is useful for excluding test files, generated code, vendor dependencies, and other files that should not be included in coverage metrics. Path patterns support glob, regex, and prefix matching (see [Pattern syntax](#pattern-syntax)).
+
+```yaml
+ignore:
+  - "test/**/*"           # Exclude all files in test directory
+  - "*.pb.go"             # Exclude all protobuf generated files
+  - "vendor/"             # Exclude vendor directory
+```
+
+### Exceptions
+
+Add `!` before a pattern to create an exception to your ignore rules. This lets you include specific files or folders that would otherwise be excluded.
+
+```yaml
+ignore:
+  - "generated/"          # Ignore all generated code
+  - "!generated/core/"    # Except core generated files
+```
+
+**Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path will _not_ be ignored.
+
+### Examples
+
+{{% collapse-content title="Exclude test files and generated code" level="h4" %}}
+```yaml
+ignore:
+  - "**/*_test.go"        # Exclude Go test files
+  - "**/*.pb.go"          # Exclude protobuf files
+  - "vendor/"             # Exclude vendor directory
+  - "mocks/"              # Exclude mock files
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Exclude with exceptions" level="h4" %}}
+```yaml
+ignore:
+  - "generated/"          # Ignore all generated code
+  - "!generated/core/"    # Except core generated files
+  - "test/"               # Ignore test directory
+  - "!test/integration/"  # Except integration tests
+```
+{{% /collapse-content %}}
+
+{{% collapse-content title="Mixed pattern types" level="h4" %}}
+```yaml
+ignore:
+  - "^vendor/.*"          # Regex: exclude vendor (anchored)
+  - "**/*.min.js"         # Glob: exclude minified JS files
+  - "dist/"               # Prefix: exclude dist directory
+  - ".*\\.pb\\.go$"       # Regex: exclude protobuf files
+```
+{{% /collapse-content %}}
 
 ## Pattern syntax
 
@@ -64,61 +193,8 @@ Simple path prefixes without special characters are treated as prefix matches:
 - `"third_party/"` - Matches third-party code
 - `"generated/"` - Matches generated code
 
-## Ignoring paths
-
-You can exclude specific files or directories from code coverage reporting using the `ignore` field. This is useful for excluding test files, generated code, vendor dependencies, and other files that should not be included in coverage metrics.
-
-```yaml
-ignore:
-  - "test/**/*"           # Exclude all files in test directory
-  - "*.pb.go"             # Exclude all protobuf generated files
-  - "vendor/"             # Exclude vendor directory
-```
-
-### Exceptions
-
-Add `!` before a pattern to create an exception to your ignore rules. This lets you include specific files or folders that would otherwise be excluded.
-
-```yaml
-ignore:
-  - "generated/"          # Ignore all generated code
-  - "!generated/core/"    # Except core generated files
-```
-
-**Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path will _not_ be ignored.
-
-### Examples
-
-#### Exclude test files and generated code
-
-```yaml
-ignore:
-  - "**/*_test.go"        # Exclude Go test files
-  - "**/*.pb.go"          # Exclude protobuf files
-  - "vendor/"             # Exclude vendor directory
-  - "mocks/"              # Exclude mock files
-```
-
-#### Exclude with exceptions
-
-```yaml
-ignore:
-  - "generated/"          # Ignore all generated code
-  - "!generated/core/"    # Except core generated files
-  - "test/"               # Ignore test directory
-  - "!test/integration/"  # Except integration tests
-```
-
-#### Mixed pattern types
-
-```yaml
-ignore:
-  - "^vendor/.*"          # Regex: exclude vendor (anchored)
-  - "**/*.min.js"         # Glob: exclude minified JS files
-  - "dist/"               # Prefix: exclude dist directory
-  - ".*\\.pb\\.go$"       # Regex: exclude protobuf files
-```
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /code_coverage/monorepo_support
