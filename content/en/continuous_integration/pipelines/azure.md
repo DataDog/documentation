@@ -164,7 +164,6 @@ Datadog supports log collection for Azure DevOps pipelines. Log collection is en
 
 To enable job log collection:
 
-Azure log pulling will only be enabled if you have set up the Datadog integration, which is the preferred way. To enable job log collection:
 
 1. Set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14].
 
