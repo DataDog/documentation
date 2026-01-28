@@ -3624,6 +3624,16 @@ menu:
       parent: ndm
       identifier: ndm_profiles
       weight: 303
+    - name: Getting Started
+      url: network_monitoring/devices/profiles/device_profiles
+      parent: ndm_profiles
+      identifier: ndm_profiles_getting_started
+      weight: 30301
+    - name: Advanced
+      url: network_monitoring/devices/profiles/advanced_profiles
+      parent: ndm_profiles
+      identifier: ndm_profiles_advanced
+      weight: 30302
     - name: Configuration Management
       url: network_monitoring/devices/config_management
       parent: ndm
