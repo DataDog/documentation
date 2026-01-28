@@ -337,7 +337,10 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     };
 
     const getVisibleSearchResultItems = () => {
-        return Array.from(document.querySelectorAll('#hits:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category), #hits-partners:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category)'));
+        // Include AI suggestion items first, then regular search results
+        const aiSuggestions = Array.from(document.querySelectorAll('.ais-Hits-ai-suggestion'));
+        const regularItems = Array.from(document.querySelectorAll('#hits:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category):not(.ais-Hits-ai-suggestion), #hits-partners:not(.no-hits) .ais-Hits-item:not(.ais-Hits-category)'));
+        return [...aiSuggestions, ...regularItems];
     }
     
     const handleSearchbarKeydown = (e) => {
@@ -349,7 +352,21 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         const currentSelectedIndex = Array.from(searchResultItems).findIndex((item) => item.classList.contains('selected-item'));
 
         if (e.code === 'Enter') {
-            const link = searchResultItems[currentSelectedIndex]?.querySelector('a[href]');
+            const selectedItem = searchResultItems[currentSelectedIndex];
+            
+            // Check if it's an AI suggestion
+            if (selectedItem?.classList.contains('ais-Hits-ai-suggestion')) {
+                const query = selectedItem.dataset.query || aisSearchBoxInput.value;
+                if (window.askDocsAI) {
+                    window.askDocsAI(query);
+                    // Hide the search dropdown
+                    hitsContainerContainer.classList.add('d-none');
+                    searchBoxContainerContainer.classList.remove('active-search');
+                }
+                return;
+            }
+            
+            const link = selectedItem?.querySelector('a[href]');
             if (link?.href) {
                 return navigateToUrl(link.href);
             }

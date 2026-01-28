@@ -2,7 +2,7 @@
 const lodash = require('lodash');
 const yaml = require('js-yaml');
 const fs = require('fs');
-const marked = require('marked');
+const { marked } = require('marked/lib/marked.umd.js');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const safeJsonStringify = require('safe-json-stringify');
@@ -12,7 +12,8 @@ const supportedLangs = ['en'];
 
 // Create a renderer once so we don't recreate it on every call set paragraph tag to table-cell
 const renderer = new marked.Renderer();
-renderer.paragraph = (text) => `<p class="table-cell">${text}</p>`;
+renderer.paragraph = (token) => `<p class="table-cell">${token.text}</p>`;
+renderer.heading = (token) => `<h${token.depth} id="${token.text}">${token.text}</h${token.depth}>`;
 
 /**
  * Update the menu yaml file with api
