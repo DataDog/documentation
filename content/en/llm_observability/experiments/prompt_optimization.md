@@ -116,11 +116,12 @@ def detection_task(input_data, config):
 
 To optimize your prompt, you need multiple layers of metric computation:
 
-- At record level, label the results following the confusion matrix labels (TP, FP, TN, FN)
+- At the record level, label the results with confusion matrix conditions: true positive (TP), false positive (FP), true negative (TN), false negative (FN)
 - Aggregate these labels across all records to compute intermediate metrics (for example, count the total TPs, FPs, TNs, and FNs, then calculate precision, recall, and accuracy)
 - Compute the final score you want to optimize the prompt for by combining or selecting from the aggregated metrics (for example, return precision alone, or combine precision + accuracy)
 - Label the misclassification examples to provide to the prompt optimizer
 
+Here are implementation examples:
 
 - **Individual evaluators** measure each output:
 
@@ -182,10 +183,10 @@ To optimize your prompt, you need multiple layers of metric computation:
 
    ```python
    def compute_score(summary_evaluators):
-       """Higher is better. Combine metrics according to business priorities."""
-       metrics = summary_evaluators['precision_recall_evaluator']['value']
-       # Optimize for both precision and accuracy
-       return metrics['precision'] + metrics['accuracy']
+       """Computes F1 Score."""
+       precision = summary_evaluators['precision_recall_evaluator']['value']['precision']
+       recall = summary_evaluators['precision_recall_evaluator']['value']['recall']
+       return 2 * (precision * recall) / (precision + recall)
    ```
 
 - **Labelization functions** categorize results for showing diverse examples to the optimizer:
