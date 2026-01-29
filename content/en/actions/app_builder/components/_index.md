@@ -288,7 +288,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format. Values are displayed both as a Unix timestamp in milliseconds and ISO (year, month, day, hour, minutes, seconds, and milliseconds).
 
 {{% /collapse-content %}}
 
@@ -375,7 +375,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
@@ -507,7 +507,7 @@ Is Visible
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
@@ -966,7 +966,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 {{% /collapse-content %}}
 
