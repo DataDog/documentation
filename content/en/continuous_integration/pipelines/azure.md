@@ -29,7 +29,7 @@ Set up CI Visibility for Azure Pipelines to gain real time insights into your CI
 | Pipeline Visibility                             | Platform                            | Definition                                                |
 |-------------------------------------------------|-------------------------------------|-----------------------------------------------------------|
 | [CI jobs failure analysis][21] | CI jobs failure analysis | Use LLM models on relevant logs to analyze the root cause of failed CI jobs. |
-| Logs correlation                                | Logs correlation                    | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
+| Logs correlation                                | Logs correlation                    | Correlate pipeline and job spans to logs. Requires [job log collection](#collect-job-logs). |
 | [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime.       |
 | [Custom spans][15]                              | Custom spans                        | Configure custom spans for your pipelines.                |
 | [Filter CI Jobs on the critical path][19]       | Filter CI Jobs on the critical path | Filter by jobs on the critical path.                      |
@@ -160,9 +160,7 @@ You can set custom tags for all pipeline and job spans from your Azure projects 
 
 ### Collect job logs
 
-Datadog supports log collection for Azure DevOps pipelines. Log collection is enabled only after you set up the Datadog Azure DevOps integration.
-
-To enable job log collection:
+To enable log collection for Azure DevOps pipelines:
 
 
 1. Set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14].
