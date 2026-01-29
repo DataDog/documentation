@@ -327,7 +327,7 @@ You can use the `agentConfiguration` parameter to apply custom configurations to
     -  `datadog.yaml`
     -  `conf.d` folder containing your integration configurations
 3. Save the sanitized `%ProgramData%\Datadog` folder as a zip file.
-4. Generate a hash of the zipped folder using the PowerShell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+4. Generate a hash of the zipped folder using the PowerShell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`.
 5. Upload the file to blob storage.
 6. Reference the blob storage URL with the `agentConfiguration` parameter to create the VM extension.
 
@@ -337,7 +337,7 @@ You can use the `agentConfiguration` parameter to apply custom configurations to
 {{% collapse-content title="Linux" level="h5" id="extension-custom-configuration-linux" %}}
 1. After installing the Agent, apply any desired [Agent configurations][400].
 2. Save the `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
-3. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`. Reference this hash in the Terraform block with the `agentConfigurationChecksum` parameter.
+3. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`.
 4. Upload the file to blob storage.
 5. Reference the blob storage URL with the `agentConfiguration` parameter to create the VM extension.
 
