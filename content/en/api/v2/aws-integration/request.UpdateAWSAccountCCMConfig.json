@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "ccm_config": {
+        "data_export_configs": [
+          {
+            "bucket_name": "billing-updated",
+            "bucket_region": "us-west-2",
+            "report_name": "cost-report-updated",
+            "report_prefix": "reports-updated",
+            "report_type": "CUR2.0"
+          }
+        ]
+      }
+    },
+    "type": "ccm_config"
+  }
+}
