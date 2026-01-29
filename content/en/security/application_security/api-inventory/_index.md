@@ -112,17 +112,17 @@ What actions you take depend on each of the attack surfaces:
 - **Processing sensitive data:** Confirm data handling complies with policy, sanitize or encrypt PII, and limit access to necessary services.
 - **Unauthenticated endpoint:** If the endpoint is not intentionally public, enforce authentication and update service configurations.
 
-### Endpoint renaming
+### Endpoint remapping
 
-Endpoint renaming discovers improved endpoint names from proxy and load balancer traffic, allowing you to override less descriptive endpoint names with more accurate ones based on actual traffic patterns.
+Endpoint remapping discovers improved endpoint names from proxy and load balancer traffic, allowing you to override less descriptive endpoint names with more accurate ones based on actual traffic patterns.
 
 This feature helps consolidate endpoints that represent the same resource but appear with different names in your API inventory.
 
 #### Configuration
 
-Endpoint renaming is enabled by default for App and API Protection customers.
+Endpoint remapping is enabled by default for App and API Protection customers.
 
-For APM customers, enable endpoint renaming by setting the following environment variable:
+For APM customers, enable endpoint remapping by setting the following environment variable:
 
 ```
 DD_TRACE_RESOURCE_RENAMING_ENABLED="true"
@@ -130,7 +130,7 @@ DD_TRACE_RESOURCE_RENAMING_ENABLED="true"
 
 **Version requirements:**
 
-Endpoint renaming requires Datadog Agent v7.71.0 or later and the following minimum tracer versions:
+Endpoint remapping requires Datadog Agent v7.71.0 or later and the following minimum tracer versions:
 
 |Technology|Minimum tracer version|
 |----------|----------|
@@ -140,22 +140,22 @@ Endpoint renaming requires Datadog Agent v7.71.0 or later and the following mini
 |Python    | v3.17.0  |
 |Ruby      | v2.23.0  |
 
-#### How to enable renaming
+#### How to enable remapping
 
 1. In [API Endpoints][7], find endpoints flagged as **discovered**. These endpoints have been identified from proxy or load balancer traffic.
 
 {{< img src="security/application_security/api/discovered_endpoint.png" alt="Discovered endpoint flag in API Inventory" style="width:100%;" >}}
 
 2. Click the discovered endpoint to open the details panel.
-3. Click **Enable Renaming** to open the renaming side panel.
+3. Click **Enable Remapping** to open the remapping side panel.
 4. Review the discovered endpoint name and the endpoints that match this pattern.
-5. Click **Create Rule** to enable renaming for all matching endpoints.
+5. Click **Create Rule** to enable remapping for all matching endpoints.
 
-{{< img src="security/application_security/api/endpoint_renaming_side_panel.png" alt="Endpoint renaming side panel" style="width:100%;" >}}
+{{< img src="security/application_security/api/endpoint_renaming_side_panel.png" alt="Endpoint remapping side panel" style="width:100%;" >}}
 
 #### How it works
 
-After creating a renaming rule:
+After creating a remapping rule:
 
 - The rule propagates through the system. This takes up to 30 minutes.
 - Traffic gradually shifts from the previous endpoint names to the new discovered endpoint names.
@@ -163,14 +163,14 @@ After creating a renaming rule:
 
 <div class="alert alert-info">The new endpoint names are determined by observed traffic patterns from your proxy or load balancer. You cannot manually specify custom endpoint names.</div>
 
-#### Managing renaming rules
+#### Managing remapping rules
 
-To view or delete renaming rules:
+To view or delete remapping rules:
 
-1. Go to [Resource Renaming Configuration][15].
-2. View all active renaming rules and the endpoints they affect.
+1. Go to [Resource Remapping Configuration][15].
+2. View all active remapping rules and the endpoints they affect.
 
-{{< img src="security/application_security/api/endpoint_renaming_rules.png" alt="Resource Renaming Configuration page" style="width:100%;" >}}
+{{< img src="security/application_security/api/endpoint_renaming_rules.png" alt="Resource Remapping Configuration page" style="width:100%;" >}}
 
 3. To remove a rule, click **Delete** next to the rule. Traffic reverts to the original endpoint names after deletion.
 
