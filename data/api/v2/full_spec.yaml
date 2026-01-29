@@ -16882,6 +16882,89 @@ components:
       - started_at
       - finished_at
       type: object
+    DORADeploymentPatchRemediation:
+      description: Remediation details for the deployment.
+      properties:
+        id:
+          description: The ID of the remediation action.
+          example: eG42zNIkVjM
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentPatchRemediationType'
+      required:
+      - id
+      - type
+      type: object
+    DORADeploymentPatchRemediationType:
+      description: The type of remediation action taken.
+      enum:
+      - rollback
+      - rollforward
+      example: rollback
+      type: string
+      x-enum-varnames:
+      - ROLLBACK
+      - ROLLFORWARD
+    DORADeploymentPatchRequest:
+      description: Request to patch a DORA deployment event.
+      example:
+        data:
+          attributes:
+            change_failure: true
+            remediation:
+              id: eG42zNIkVjM
+              type: rollback
+          id: z_RwVLi7v4Y
+          type: dora_deployment_patch_request
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestData'
+      required:
+      - data
+      type: object
+    DORADeploymentPatchRequestAttributes:
+      description: Attributes for patching a DORA deployment event.
+      properties:
+        change_failure:
+          description: Indicates whether the deployment resulted in a change failure.
+          example: true
+          type: boolean
+        remediation:
+          $ref: '#/components/schemas/DORADeploymentPatchRemediation'
+      type: object
+    DORADeploymentPatchRequestData:
+      description: The JSON:API data for patching a deployment.
+      example:
+        attributes:
+          change_failure: true
+          remediation:
+            id: eG42zNIkVjM
+            type: rollback
+        id: z_RwVLi7v4Y
+        type: dora_deployment_patch_request
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestAttributes'
+        id:
+          description: The ID of the deployment to patch.
+          example: z_RwVLi7v4Y
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestDataType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    DORADeploymentPatchRequestDataType:
+      default: dora_deployment_patch_request
+      description: JSON:API type for DORA deployment patch request.
+      enum:
+      - dora_deployment_patch_request
+      example: dora_deployment_patch_request
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENT_PATCH_REQUEST
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -74424,6 +74507,47 @@ paths:
         operator: OR
         permissions:
         - dora_metrics_read
+    patch:
+      description: Use this API endpoint to patch a deployment event.
+      operationId: PatchDORADeployment
+      parameters:
+      - description: The ID of the deployment event.
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORADeploymentPatchRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Patch a deployment event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
   /api/v2/dora/failure:
     post:
       description: 'Use this API endpoint to provide failure data.
