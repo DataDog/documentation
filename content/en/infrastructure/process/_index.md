@@ -234,155 +234,45 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
 
 ### Optimized process collection footprint
 
-<div class="alert alert-info">
-Requires Datadog Agent v7.53.0+ and Linux.<br/>
-Enabled by default in Datadog Agent v7.65.0+. <br/>
-</div>
+On Linux,the Datadog Agent's overall footprint is reduced by running container and process collection in the core Datadog Agent (instead of the separate Process Agent). In Datadog Agent v7.65.0+, this is enabled by default. Do note: the Process Agent is still necessary for [Cloud Network Monitoring][14].
 
-On Linux, you can reduce the Datadog Agent's overall footprint by running container and process collection in the core Datadog Agent (instead of the separate Process Agent).
+The agent status for this feature is now listed under the `Process Component` section, for example:
+```text
+=================
+Process Component
+=================
 
-#### Enable optimized process collection
 
-In Datadog Agent v7.65.0+, optimized process collection is enabled by default. If you are using an earlier version of the Datadog Agent (starting with v7.53.0, but lower than v7.65.0), follow these steps to enable optimized process collection:
+  Enabled Checks: [process rtprocess]
+  System Probe Process Module Status: Not running
+  Process Language Detection Enabled: False
 
-1. Edit your configuration.
-   {{< tabs >}}
-   {{% tab "Helm" %}}
+  =================
+  Process Endpoints
+  =================
+    https://process.datadoghq.com. - API Key ending with:
+        - *****
 
-   <div class="alert alert-info">If you are using the Datadog Helm chart v3.84.0+, optimized process collection is enabled by default.</div>
-
-   Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
-   ```
-   datadog:
-     processAgent:
-       enabled: true
-       runInCoreAgent: true
-   ```
-   {{% /tab %}}
-
-   {{% tab "Operator" %}}
-   Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
-
-   ```
-   apiVersion: datadoghq.com/v2alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     override:
-       nodeAgent:
-         env:
-           - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
-             value: "true"
-   ```
-   {{% /tab %}}
-
-   {{% tab "Linux hosted" %}}
-   If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
-
-   ```yaml
-   process_config:
-     process_collection:
-       enabled: true
-     run_in_core_agent:
-       enabled: true
-   ```
-
-   In `system-probe.yaml`:
-   ```yaml
-   network_config:
-     enabled: false
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
-1. Start the Datadog Agent.
-   ```
-   sudo service datadog-agent start
-   ```
-
-##### Verification
-- View your Process Agent logs (`/var/log/datadog/process-agent.log`) and verify that the Process Agent (`process-agent`) does not start.
-   For example:
-   ```
-   2024-02-14 10:45:23 PST | PROCESS | INFO | (comp/process/agent/agentimpl/agent_linux.go:44 in agentEnabled) | The process checks will run in the core agent
-   2024-02-14 10:45:23 PST | PROCESS | INFO | (command/main_common.go:193 in runApp) | process-agent is not enabled, exiting...
-   ```
-- View your core Datadog Agent logs (`/var/log/datadog/agent.log`) and verify that the Process Agent (`process-agent`) starts.
-   For example:
-   ```
-   2024-02-14 10:33:29 PST | CORE | INFO | (pkg/process/runner/runner.go:276 in Run) | Starting process-agent with enabled checks=[process rtprocess]
-   ...
-   2024-02-14 10:33:29 PST | CORE | INFO | (pkg/process/runner/runner.go:233 in logCheckDuration) | Finished process check #1 in 9.37683ms
-   ```
-- View [Process Explorer][5] in Datadog:
-   - Verify that your process and container data are visible.
-   - Verify that the `agent` process is running.
-   - Verify that the `process-agent` process is not running.
-
-#### Disable optimized process collection
-If you are using Datadog Agent v7.65.0+, or if you enabled optimized process collection in an earlier version of the Datadog Agent, follow these steps to disable optimized process collection:
-
-1. Edit your configuration.
-   {{< tabs >}}
-   {{% tab "Helm" %}}
-   Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
-   ```
-   datadog:
-     processAgent:
-       enabled: true
-       runInCoreAgent: false
-   ```
-   {{% /tab %}}
-
-   {{% tab "Operator" %}}
-   Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
-
-   ```
-   apiVersion: datadoghq.com/v2alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     override:
-       nodeAgent:
-         env:
-           - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
-             value: "false"
-   ```
-   {{% /tab %}}
-
-   {{% tab "Linux hosted" %}}
-   If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
-
-   ```
-   process_config:
-     run_in_core_agent:
-       enabled: false
-   ```
-   In `system-probe.yaml`:
-   ```yaml
-   network_config:
-     enabled: false
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
-1. Start the Datadog Agent.
-   ```
-   sudo service datadog-agent start
-   ```
-##### Verification
-- View your Process Agent logs (`/var/log/datadog/process-agent.log`) and verify that the Process Agent (`process-agent`) starts.
-   For example:
-   ```
-   2024-02-14 12:37:42 PST | PROCESS | INFO | (pkg/process/runner/runner.go:276 in Run) | Starting process-agent with enabled checks=[process rtprocess]
-   2024-02-14 12:37:42 PST | PROCESS | INFO | (pkg/process/runner/runner.go:233 in logCheckDuration) | Finished process check #1 in 9.249009ms
-   ```
-- View your core Datadog Agent logs (`/var/log/datadog/agent.log`) and verify that the Process Agent (`process-agent`) does not start.
-- View [Process Explorer][5] in Datadog:
-   - Verify that your process and container data are visible.
-   - Verify that the `process-agent` process is running.
-<div class="alert alert-info">In non-Linux environments, container and process collection <strong>always</strong> run in the separate Process Agent.</div>
-
+  =========
+  Collector
+  =========
+    Last collection time: 2026-01-14 10:04:49
+    Docker socket: /var/run/docker.sock
+    Number of processes: 48
+    Number of containers: 0
+    Process Queue length: 0
+    RTProcess Queue length: 0
+    Connections Queue length: 0
+    Event Queue length: 0
+    Pod Queue length: 0
+    Process Bytes enqueued: 0
+    RTProcess Bytes enqueued: 0
+    Connections Bytes enqueued: 0
+    Event Bytes enqueued: 0
+    Pod Bytes enqueued: 0
+    Drop Check Payloads: []
+    Number of submission errors: 0
+```
 
 ### Process arguments scrubbing
 
@@ -638,4 +528,4 @@ Processes are normally collected at 10s resolution. While actively working with 
 [11]: /network_monitoring/cloud_network_monitoring/network_analytics
 [12]: /agent/configuration/agent-commands/#restart-the-agent
 [13]: /metrics/custom_metrics/
-
+[14]: /network_monitoring/cloud_network_monitoring/
