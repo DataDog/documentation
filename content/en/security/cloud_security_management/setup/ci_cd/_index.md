@@ -70,6 +70,10 @@ The Datadog Security CLI can be installed on Debian/Ubuntu, Red Hat/CentOS, and 
 ### Install from package repository
 
 ```bash
+# Import Datadog APT signing key
+DD_APT_KEY_URL="https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public"
+curl -fsSL "$DD_APT_KEY_URL" | sudo gpg --dearmor -o /usr/share/keyrings/datadog-archive-keyring.gpg
+
 # Add Datadog repository
 echo "deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable datadog-security-cli" \
 | sudo tee /etc/apt/sources.list.d/datadog-security-cli.list
@@ -85,14 +89,18 @@ sudo apt install datadog-security-cli
 ### Install from package repository
 
 ```bash
+# Import Datadog RPM signing key
+sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+
 # Add Datadog repository
-cat <<EOF | sudo tee /etc/yum.repos.d/datadog-security-cli.repo
+sudo tee /etc/yum.repos.d/datadog-security-cli.repo > /dev/null <<'EOF'
 [datadog-security-cli]
 name=Datadog Security CLI
 baseurl=https://yum.datadoghq.com/stable/datadog-security-cli/\$basearch/
 enabled=1
 gpgcheck=1
 gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+repo_gpgcheck=1
 EOF
 
 # Install the CLI
