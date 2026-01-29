@@ -48,7 +48,7 @@ Dashboards provide real-time insights into the performance and health of systems
     {{< nextlink href="/dashboards/configure" >}}Configure: Overview of the configuration options for dashboards{{< /nextlink >}}
     {{< nextlink href="/dashboards/list" >}}Dashboard List: Search, view, or create dashboards and lists{{< /nextlink >}}
     {{< nextlink href="/dashboards/template_variables" >}}Template Variable: Dynamically filter widgets in a dashboard{{< /nextlink >}}
-    {{< nextlink href="/incident_response/incident_management/datadog_clipboard/" >}}Datadog Clipboard{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/datadog_clipboard/" >}}Datadog Clipboard{{< /nextlink >}}
     {{< nextlink href="/api/latest/dashboards" >}}API: Manage dashboards programmatically{{< /nextlink >}}
 {{< /whatsnext >}}
 

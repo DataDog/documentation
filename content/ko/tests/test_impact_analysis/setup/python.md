@@ -26,7 +26,7 @@ Test Impact Analysis는 다음 버전 및 테스트 프레임워크에서만 지
   * `coverage>=5.5` 필수.
   * `pytest-cov`와 호환되지 않음([알려진 제한 사항](#known-limitations) 참고)
 * `unittest`
-  * `ddtrace>=2.2.0`부터.
+  * `ddtrace>=2.1.0`부터.
   * `Python>=3.7`부터.
 * `coverage`
   * 커버리지 수집과 호환되지 않음([알려진 제한 사항](#known-limitations) 참고)

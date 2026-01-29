@@ -249,6 +249,11 @@ Request path | Resource path
 `/admin/user/12345/delete` | `/admin/user`
 `/user/12345` | `/user/?`
 
+`dd.trace.http.client.path-resource-name-mapping`<br>
+: **Environment Variable**: `DD_TRACE_HTTP_CLIENT_PATH_RESOURCE_NAME_MAPPING`<br>
+**Default**: `{}` (empty) <br>
+Maps HTTP client request paths to custom resource names. Uses the same format as `dd.trace.http.server.path-resource-name-mapping`, but applies to HTTP client spans instead of server spans.
+
 `dd.trace.status404rule.enabled`
 : **Environment Variable**: `DD_TRACE_STATUS404RULE_ENABLED`<br>
 **Default**: `true`<br>

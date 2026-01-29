@@ -12,10 +12,6 @@ further_reading:
 
 {{< jqmath-vanilla >}}
 
-{{< callout url="" btn_hidden="true" header="Join the Preview!" >}}
-Change Failure Detection is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Datadog Change Failure Detection automatically identifies deployments that remediate previously failed deployments. By connecting deployment data with failure events, it provides a complete view of delivery performance, helping teams balance release velocity with operational stability.
