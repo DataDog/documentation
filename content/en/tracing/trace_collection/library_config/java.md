@@ -64,7 +64,8 @@ See also [DD_APM_TRACING_ENABLED][21].
 `dd.trace.config`
 : **Environment Variable**: `DD_TRACE_CONFIG`<br>
 **Default**: `null`<br>
-Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`
+Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`<br>
+**Note**: Don't rely on `dd.trace.config` as the only mechanism to enable or disable SDK-dependent products (for example, Profiler and Dynamic Instrumentation). Instead, use the corresponding system properties or environment variables (or `application_monitoring.yaml` for Single Step Instrumentation). 
 
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
@@ -247,6 +248,11 @@ Request path | Resource path
 `/admin/index.jsp` | `/admin-page`
 `/admin/user/12345/delete` | `/admin/user`
 `/user/12345` | `/user/?`
+
+`dd.trace.http.client.path-resource-name-mapping`<br>
+: **Environment Variable**: `DD_TRACE_HTTP_CLIENT_PATH_RESOURCE_NAME_MAPPING`<br>
+**Default**: `{}` (empty) <br>
+Maps HTTP client request paths to custom resource names. Uses the same format as `dd.trace.http.server.path-resource-name-mapping`, but applies to HTTP client spans instead of server spans.
 
 `dd.trace.status404rule.enabled`
 : **Environment Variable**: `DD_TRACE_STATUS404RULE_ENABLED`<br>

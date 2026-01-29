@@ -18,7 +18,7 @@ type: lenguaje de código múltiple
 
 ## Compatibilidad
 
-Test Impact Analysis sólo es compatible con las siguientes versiones y marcos de test:
+Test Impact Analysis sólo es compatible con las siguientes versiones y frameworks de test:
 
 * `pytest>=7.2.0`
   * De `ddtrace>=2.1.0`.
@@ -26,7 +26,7 @@ Test Impact Analysis sólo es compatible con las siguientes versiones y marcos d
   * Requiere `coverage>=5.5`.
   * Incompatible con `pytest-cov` (consulta [limitaciones conocidas](#known-limitations))
 * `unittest`
-  * De `ddtrace>=2.2.0`.
+  * De `ddtrace>=2.1.0`.
   * De `Python>=3.7`.
 * `coverage`
   * Incompatible para la recopilación de cobertura (consulta [limitaciones conocidas](#known-limitations))

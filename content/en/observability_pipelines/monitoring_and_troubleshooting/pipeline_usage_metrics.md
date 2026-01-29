@@ -77,6 +77,16 @@ Data dropped intentionally or unintentionally
 : **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
 : **Available for**: Sources, processors, and destinations.
 
+Timed out events
+: **Metric**: `pipelines.component_timed_out_events_total`
+: **Description**: The number of events that waited more than 5 seconds to be sent to the first processor and resulted in a HTTP 503 error. This could happen when delivery of events are blocked.
+: **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
+
+Timed out requests
+: **Metric**: `pipelines.component_timed_out_requests_total`
+: **Description**: The number of requests that timed out for sources that send events to the Worker in batches using HTTP requests.
+: **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
+
 Utilization
 : **Metric**: `pipelines.utilization`
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value of `1` indicates a component that is never idle, which means that the component is likely a bottleneck in the processing topology that is creating backpressure, which might cause events to be dropped.
@@ -84,28 +94,8 @@ Utilization
 
 ## Buffer metrics (when buffering is enabled)
 
-Track buffer behavior with these metrics:
 
-`pipelines.buffer_events`
-: **Description**: Number of events currently in the buffer.
-
-`pipelines.buffer_byte_size`
-: **Description**: Current buffer size in bytes.
-
-`pipelines.buffer_received_events_total`
-: **Description**: Total events added to the buffer.
-
-`pipelines.buffer_received_event_bytes_total`
-: **Description**: Total bytes added to the buffer.
-
-`pipelines.buffer_sent_events_total`
-: **Description**: Total events successfully flushed from the buffer.
-
-`pipelines.buffer_sent_event_bytes_total`
-: **Description**: Total bytes successfully flushed from the buffer.
-
-`pipelines.buffer_discarded_events_total`
-: **Description**: Events discarded from the buffer (for example, due to overflow).
+{{% observability_pipelines/metrics/buffer %}}
 
 ## Further reading
 
