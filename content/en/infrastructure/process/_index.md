@@ -234,7 +234,7 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
 
 ### Optimized process collection footprint
 
-On Linux,the Datadog Agent's overall footprint is reduced by running container and process collection in the core Datadog Agent (instead of the separate Process Agent). In Datadog Agent v7.65.0+, this is enabled by default. Do note: the Process Agent is still necessary for [Cloud Network Monitoring][14].
+On Linux, the Datadog Agent's overall footprint is reduced by running container and process collection in the core Datadog Agent (instead of the separate Process Agent). In Datadog Agent v7.65.0+, this is enabled by default. Do note: the Process Agent is still necessary for [Cloud Network Monitoring][14].
 
 The agent status for this feature is now listed under the `Process Component` section, for example:
 ```text
