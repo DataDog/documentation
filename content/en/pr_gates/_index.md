@@ -42,13 +42,9 @@ PR Gates allow you to control software security and quality by configuring rules
 
 {{< img src="pr_gates/setup/sca_3.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
-Use PR Gates to:
+PR Gates, similar to [Datadog Monitors][9], consume data and findings outputted by compatible Datadog products and apply conditions to these findings to determine if a PR is meeting your organizational standards. To prevent unnecessary impact to your developers' velocity, PR Gates only block on violations introduced by the code changes of the PR in question, not on findings that already existed in your repository before the PR and its branch were created. For example, if you configure PR Gates to block on Critical severity code vulnerabilities, PR Gates will only fail and block the PR if a developer introduces a new Critical code vulnerability as part of that PR. 
 
-* Create rules that block pull requests using data in Datadog, ensuring that only code that meets your standards end up being merged.
-* Give your organization the ability to prevent substandard code changes from ever reaching production.
-* Continually improve code security and quality with precise enforcement and customizable rules.
-
-You can configure PR Gates rules for the following categories: 
+You can configure PR Gates rules for the following categories. Please note that the compatible product must be running on your desired repositories before PR Gates can begin taking action on the relevant PRs: 
 
 | Source type     | Condition types |
 | --- | ----------- |
@@ -119,3 +115,4 @@ You can see all of the rules defined by the organization.
 [6]: /integrations/azure_devops_source_code/
 [7]: /pr_gates/setup/
 [8]: https://app.datadoghq.com/ci/pr-gates
+[9]: /monitors/
