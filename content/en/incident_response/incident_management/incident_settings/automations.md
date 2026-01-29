@@ -1,6 +1,5 @@
 ---
 title: Automations
-site_support_id: actions
 further_reading:
 - link: "/actions/workflows/"
   tag: "Documentation"
