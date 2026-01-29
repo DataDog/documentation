@@ -105,7 +105,7 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 [7]: /api/latest/dora-metrics/
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/metrics/
-[10]: /dora_metrics/setup/deployments/
+[10]: /dora_metrics/setup/
 [11]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights%20&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&from_ts=1714391730343&to_ts=1714392630343&live=true
 [12]: /dora_metrics/deployments/#limitations
 [13]: https://www.datadoghq.com/blog/service-catalog-setup/

@@ -1074,7 +1074,7 @@ menu:
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
-      weight: 7011  
+      weight: 7011
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
@@ -2286,16 +2286,31 @@ menu:
       parent: error_tracking
       identifier: error_tracking_manage_data
       weight: 13
+    - name: Ticketing Systems
+      url: error_tracking/ticketing_systems
+      parent: error_tracking
+      identifier: error_tracking_ticketing_systems
+      weight: 14
+    - name: Jira
+      url: error_tracking/ticketing_systems/jira
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_jira
+      weight: 100
+    - name: Case Management
+      url: error_tracking/ticketing_systems/case_management
+      parent: error_tracking_ticketing_systems
+      identifier: error_tracking_case_management
+      weight: 101
     - name: Troubleshooting
       url: error_tracking/troubleshooting
       parent: error_tracking
       identifier: error_tracking_troubleshooting
-      weight: 14
+      weight: 15
     - name: Guides
       url: error_tracking/guides
       parent: error_tracking
       identifier: error_tracking_guides
-      weight: 15
+      weight: 16
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
@@ -2983,7 +2998,7 @@ menu:
       url: infrastructure/end_user_device_monitoring/setup/
       identifier: end_user_device_monitoring_setup
       parent: end_user_device_monitoring
-      weight: 1      
+      weight: 1
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -3001,47 +3016,57 @@ menu:
       parent: infrastructure_heading
       weight: 60000
       pre: container
-    - name: Monitoring Containers
-      url: infrastructure/containers/
+    - name: Container Monitoring
+      url: containers/monitoring
       parent: containers
       identifier: infrastructure_livecontainers
       weight: 1
-    - name: Configuration
-      url: infrastructure/containers/configuration
+    - name: Containers Explorer
+      url: containers/monitoring/containers_explorer
       parent: infrastructure_livecontainers
-      identifier: infrastructure_livecontainers_configuration
+      identifier: infrastructure_livecontainers_container_explorer
       weight: 101
-    - name: Container Images View
-      url: infrastructure/containers/container_images
+    - name: Container Images Explorer
+      url: containers/monitoring/container_images
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_container_images
       weight: 102
-    - name: Orchestrator Explorer
-      url: infrastructure/containers/orchestrator_explorer
+    - name: Kubernetes Explorer
+      url: containers/monitoring/kubernetes_explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_explorer
       weight: 103
-    - name: Kubernetes Resource Utilization
-      url: infrastructure/containers/kubernetes_resource_utilization
-      parent: infrastructure_livecontainers
+    - name: Configuration
+      url: containers/monitoring/kubernetes_explorer_configuration
+      parent: infrastructure_livecontainers_explorer
+      identifier: infrastructure_livecontainers_explorer_configuration
+      weight: 10301
+    - name: Resource Utilization
+      url: /containers/monitoring/kubernetes_resource_utilization
+      parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_resource_utilization
-      weight: 104
+      weight: 10302
     - name: Kubernetes Autoscaling
-      url: containers/monitoring/autoscaling
-      parent: infrastructure_livecontainers
+      url: containers/autoscaling
+      parent: infrastructure_livecontainers_explorer
       identifier: infrastructure_livecontainers_autoscaling
-      weight: 105
-    - name: Amazon Elastic Container Explorer
-      url: infrastructure/containers/amazon_elastic_container_explorer
+      weight: 10303
+    - name: Remediation
+      url: containers/bits_ai_kubernetes_remediation
+      parent: infrastructure_livecontainers_explorer
+      identifier: infrastructure_livecontainers_remediation
+      weight: 10304
+    - name: Amazon ECS Explorer
+      url: containers/monitoring/amazon_elastic_container_explorer
       parent: infrastructure_livecontainers
       identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
-      weight: 106
+      weight: 104
     - name: Autoscaling
       url: containers/autoscaling
       parent: containers
       identifier: containers_autoscaling
       weight: 2
-    - name: Docker and other runtimes
+    - name: Docker-based
       url: containers/docker/
       parent: containers
       identifier: containers_docker
@@ -3208,7 +3233,7 @@ menu:
       weight: 604
     - name: Managed Instances
       url: containers/amazon_ecs/managed_instances/
-      parent: containers_amazon_ecs 
+      parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_managed_instances
       weight: 605
     - name: AWS Fargate with ECS
@@ -3328,7 +3353,7 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_installation
       weight: 101
-    - name: Managed Instances 
+    - name: Managed Instances
       url: serverless/aws_lambda/managed_instances
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_managed_instances
@@ -3528,7 +3553,7 @@ menu:
       url: network_monitoring/cloud_network_monitoring/network_health/
       parent: cnm
       identifier: cnm_network_health
-      weight: 102 
+      weight: 102
     - name: Network Analytics
       url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: cnm
@@ -3568,7 +3593,7 @@ menu:
       url: network_monitoring/devices
       parent: nm_parent
       identifier: ndm
-      weight: 3      
+      weight: 3
     - name: Setup
       url: network_monitoring/devices/setup
       parent: ndm
@@ -3578,7 +3603,7 @@ menu:
       url: network_monitoring/devices/supported_devices
       parent: ndm_setup
       identifier: ndm_supported_devices
-      weight: 30101 
+      weight: 30101
     - name: SNMP Metrics
       url: network_monitoring/devices/snmp_metrics
       parent: ndm_setup
@@ -3614,11 +3639,21 @@ menu:
       parent: ndm
       identifier: ndm_profiles
       weight: 303
+    - name: Getting Started
+      url: network_monitoring/devices/profiles/device_profiles
+      parent: ndm_profiles
+      identifier: ndm_profiles_getting_started
+      weight: 30301
+    - name: Advanced
+      url: network_monitoring/devices/profiles/advanced_profiles
+      parent: ndm_profiles
+      identifier: ndm_profiles_advanced
+      weight: 30302
     - name: Configuration Management
       url: network_monitoring/devices/config_management
       parent: ndm
       identifier: ndm_config_management
-      weight: 304   
+      weight: 304
     - name: Maps
       url: network_monitoring/devices/topology
       parent: ndm
@@ -3674,16 +3709,21 @@ menu:
       parent: network_path
       identifier: network_path_path_view
       weight: 504
+    - name: Monitors
+      url: monitors/types/network_path/
+      parent: network_path
+      identifier: network_path_monitor
+      weight: 505
     - name: Guides
       url: network_monitoring/network_path/guide
       parent: network_path
       identifier: network_path_guides
-      weight: 505
+      weight: 506
     - name: Terms and Concepts
       url: network_monitoring/network_path/glossary
       parent: network_path
       identifier: network_path_glossary
-      weight: 506 
+      weight: 507
     - name: Storage Management
       url: /infrastructure/storage_management/
       pre: file-wui
@@ -4016,7 +4056,7 @@ menu:
       url: tracing/trace_collection/dd_libraries/rust
       parent: auto_dd_libraries
       identifier: auto_dd_libraries_rust
-      weight: 2028  
+      weight: 2028
     - name: .NET Core
       url: tracing/trace_collection/dd_libraries/dotnet-core
       parent: auto_dd_libraries
@@ -4025,7 +4065,7 @@ menu:
     - name: .NET Framework
       url: tracing/trace_collection/dd_libraries/dotnet-framework
       parent: auto_dd_libraries
-      identifier: auto_dd_libraries_dotnet_framework  
+      identifier: auto_dd_libraries_dotnet_framework
       weight: 2030
     - name: Android
       url: tracing/trace_collection/dd_libraries/android
@@ -5104,7 +5144,7 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_agent_monitoring
       weight: 304
-    - name: Cost 
+    - name: Cost
       url: llm_observability/monitoring/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
@@ -5178,9 +5218,9 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
       weight: 403
-    - name: Export API 
+    - name: Export API
       url: llm_observability/evaluations/export_api
-      parent: llm_obs_evaluations 
+      parent: llm_obs_evaluations
       identifier: llm_obs_evaluations_export_api
       weight: 404
     - name: Experiments
@@ -5670,16 +5710,6 @@ menu:
       parent: dora_metrics
       identifier: dora_metrics_setup
       weight: 1
-    - name: Deployment Data Sources
-      url: dora_metrics/setup/deployments
-      parent: dora_metrics_setup
-      identifier: dora_metrics_setup_deployments
-      weight: 101
-    - name: Failure Data Sources
-      url: dora_metrics/setup/failures/
-      parent: dora_metrics_setup
-      identifier: dora_metrics_setup_failures
-      weight: 102
     - name: Change Failure Detection
       url: dora_metrics/change_failure_detection/
       parent: dora_metrics
@@ -7430,7 +7460,7 @@ menu:
       identifier: sec_static_analysis_ai
       url: /security/code_security/static_analysis/ai_enhanced_sast/
       parent: sec_static_analysis
-      weight: 5     
+      weight: 5
     - name: SAST Custom Rule Creation Tutorial
       identifier: sec_static_analysis_custom_rules_tutorial
       url: /security/code_security/static_analysis/custom_rules/tutorial/
@@ -7816,7 +7846,7 @@ menu:
       url: synthetics/notifications/
       parent: synthetics
       identifier: synthetics_notifications
-      weight: 10  
+      weight: 10
     - name: Template Variables
       url: synthetics/notifications/template_variables
       parent: synthetics_notifications
@@ -8465,16 +8495,31 @@ menu:
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_profiling
       weight: 603
+    - name: Browser Profiling
+      url: real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling/
+      parent: rum_correlate_with_other_telemetry_profiling
+      identifier: rum_profiling_browser
+      weight: 604
+    - name: Android Profiling
+      url: real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling/
+      parent: rum_correlate_with_other_telemetry_profiling
+      identifier: rum_profiling_android
+      weight: 605
+    - name: iOS Profiling
+      url: real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling/
+      parent: rum_correlate_with_other_telemetry_profiling
+      identifier: rum_profiling_ios
+      weight: 606
     - name: Correlate Synthetics with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
-      weight: 604
+      weight: 607
     - name: Correlate Traces with RUM
       url: /real_user_monitoring/correlate_with_other_telemetry/apm
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_apm
-      weight: 605
+      weight: 608
     - name: Feature Flag Tracking
       url: real_user_monitoring/feature_flag_tracking
       parent: rum

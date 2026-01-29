@@ -9221,6 +9221,10 @@ components:
           $ref: '#/components/schemas/ServiceNowTicket'
         status:
           $ref: '#/components/schemas/CaseStatus'
+        status_group:
+          $ref: '#/components/schemas/CaseStatusGroup'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Memory leak investigation on API
@@ -9287,6 +9291,8 @@ components:
           type: string
         priority:
           $ref: '#/components/schemas/CasePriority'
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
         title:
           description: Title
           example: Security breach investigation
@@ -9455,7 +9461,9 @@ components:
       - PRIORITY
       - STATUS
     CaseStatus:
-      description: Case status
+      deprecated: true
+      description: Deprecated way of representing the case status, which only supports
+        OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
       enum:
       - OPEN
       - IN_PROGRESS
@@ -9466,6 +9474,23 @@ components:
       - OPEN
       - IN_PROGRESS
       - CLOSED
+    CaseStatusGroup:
+      description: Status group of the case.
+      enum:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+      example: SG_OPEN
+      type: string
+      x-enum-varnames:
+      - SG_OPEN
+      - SG_IN_PROGRESS
+      - SG_CLOSED
+    CaseStatusName:
+      description: Status of the case. Must be one of the existing statuses for the
+        case's type.
+      example: Open
+      type: string
     CaseTrigger:
       description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
@@ -9689,8 +9714,9 @@ components:
       properties:
         status:
           $ref: '#/components/schemas/CaseStatus'
-      required:
-      - status
+          deprecated: true
+        status_name:
+          $ref: '#/components/schemas/CaseStatusName'
       type: object
     CaseUpdateStatusRequest:
       description: Case update status request
@@ -13235,6 +13261,7 @@ components:
         type:
           $ref: '#/components/schemas/StatusPagesComponentGroupType'
       required:
+      - attributes
       - type
       type: object
     CreateComponentRequestDataAttributes:
@@ -13319,7 +13346,7 @@ components:
       properties:
         id:
           description: The ID of the group.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -13450,6 +13477,7 @@ components:
         type:
           $ref: '#/components/schemas/PatchDegradationRequestDataType'
       required:
+      - attributes
       - type
       type: object
     CreateDegradationRequestDataAttributes:
@@ -13485,7 +13513,7 @@ components:
       properties:
         id:
           description: The ID of the component. Must be a component of type `component`.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -14208,6 +14236,7 @@ components:
         type:
           $ref: '#/components/schemas/StatusPageDataType'
       required:
+      - attributes
       - type
       type: object
     CreateStatusPageRequestDataAttributes:
@@ -18136,7 +18165,7 @@ components:
       properties:
         id:
           description: The ID of the component.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -18181,7 +18210,7 @@ components:
       properties:
         id:
           description: Identifier of the component affected at the time of the update.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -18257,7 +18286,7 @@ components:
       properties:
         id:
           description: The ID of the status page.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -38124,6 +38153,18 @@ components:
           items:
             $ref: '#/components/schemas/ObservabilityPipelineConfigSourceItem'
           type: array
+        use_legacy_search_syntax:
+          description: 'Set to `true` to continue using the legacy search syntax while
+            migrating filter queries. After migrating all queries to the new syntax,
+            set to `false`.
+
+            The legacy syntax is deprecated and will eventually be removed.
+
+            Requires Observability Pipelines Worker 2.11 or later.
+
+            See [Upgrade Your Filter Queries to the New Search Syntax](https://docs.datadoghq.com/observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax/)
+            for more information.'
+          type: boolean
       required:
       - sources
       - destinations
@@ -43857,11 +43898,14 @@ components:
           $ref: '#/components/schemas/PatchComponentRequestDataAttributes'
         id:
           description: The ID of the component.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/StatusPagesComponentGroupType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchComponentRequestDataAttributes:
@@ -43900,11 +43944,14 @@ components:
           $ref: '#/components/schemas/PatchDegradationRequestDataAttributes'
         id:
           description: The ID of the degradation.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/PatchDegradationRequestDataType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchDegradationRequestDataAttributes:
@@ -43935,7 +43982,7 @@ components:
       properties:
         id:
           description: The ID of the component. Must be a component of type `component`.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -44040,11 +44087,14 @@ components:
           $ref: '#/components/schemas/PatchStatusPageRequestDataAttributes'
         id:
           description: The ID of the status page.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/StatusPageDataType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchStatusPageRequestDataAttributes:
@@ -58972,7 +59022,7 @@ components:
       properties:
         id:
           description: The ID of the group the component belongs to.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59011,7 +59061,7 @@ components:
       properties:
         id:
           description: The ID of the status page the component belongs to.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59153,7 +59203,7 @@ components:
       nullable: true
       properties:
         id:
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59195,7 +59245,7 @@ components:
       properties:
         id:
           description: The ID of the status page.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
