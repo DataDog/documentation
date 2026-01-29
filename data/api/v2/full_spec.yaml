@@ -52046,6 +52046,375 @@ components:
             $ref: '#/components/schemas/SecurityMonitoringCriticalAsset'
           type: array
       type: object
+    SecurityMonitoringDatasetAttributesResponse:
+      description: Attributes of a security monitoring dataset.
+      properties:
+        createdAt:
+          description: The creation timestamp of the dataset.
+          example: 2025-03-20 10:00:00+00:00
+          format: date-time
+          type: string
+        createdByHandle:
+          description: The handle of the user who created the dataset.
+          example: bruce.lee
+          type: string
+        createdByName:
+          description: The name of the user who created the dataset.
+          example: Bruce Lee
+          type: string
+        definition:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDefinition'
+        description:
+          description: A description of the dataset.
+          example: A dataset for monitoring authentication events
+          type: string
+        modifiedAt:
+          description: The last modification timestamp of the dataset.
+          example: 2025-03-20 12:00:00+00:00
+          format: date-time
+          type: string
+        name:
+          description: The name of the dataset.
+          example: authentication_dataset
+          type: string
+        orgId:
+          description: The organization ID.
+          example: 123456
+          format: int64
+          type: integer
+        updatedByHandle:
+          description: The handle of the user who last updated the dataset.
+          example: chuck.norris
+          type: string
+        updatedByName:
+          description: The name of the user who last updated the dataset.
+          example: Chuck Norris
+          type: string
+        version:
+          description: The version of the dataset.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - description
+      - name
+      - version
+      - orgId
+      - definition
+      - createdAt
+      type: object
+    SecurityMonitoringDatasetCreateAttributesRequest:
+      description: Attributes for creating a security monitoring dataset.
+      properties:
+        definition:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDefinition'
+        description:
+          description: A description of the dataset (maximum 255 characters).
+          example: A dataset for monitoring authentication events
+          type: string
+      required:
+      - description
+      - definition
+      type: object
+    SecurityMonitoringDatasetCreateDataRequest:
+      description: Data for creating a security monitoring dataset.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetCreateAttributesRequest'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringDatasetCreateDataResponse:
+      description: Data returned after creating a security monitoring dataset.
+      properties:
+        id:
+          description: The unique identifier of the created dataset.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetType'
+      required:
+      - id
+      - type
+      type: object
+    SecurityMonitoringDatasetCreateRequest:
+      description: Request to create a security monitoring dataset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetCreateDataRequest'
+      required:
+      - data
+      type: object
+    SecurityMonitoringDatasetCreateResponse:
+      description: Response after creating a security monitoring dataset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetCreateDataResponse'
+      required:
+      - data
+      type: object
+    SecurityMonitoringDatasetDataResponse:
+      description: A security monitoring dataset.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetAttributesResponse'
+        id:
+          description: The unique identifier of the dataset.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringDatasetDefinition:
+      description: The definition of a dataset, including its data source, name, indexes,
+        and columns.
+      properties:
+        columns:
+          description: The columns in the dataset.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringDatasetDefinitionColumn'
+          type: array
+        data_source:
+          description: The data source for the dataset.
+          example: logs
+          type: string
+        indexes:
+          description: The indexes to use for the dataset.
+          items:
+            example: k9
+            type: string
+          type: array
+        name:
+          description: The name of the dataset. Must start with a letter, contain
+            only lowercase letters, numbers, and underscores, and be at most 255 characters
+            long.
+          example: my_dataset
+          type: string
+      required:
+      - data_source
+      - name
+      - columns
+      type: object
+    SecurityMonitoringDatasetDefinitionColumn:
+      description: A column in a dataset definition.
+      properties:
+        column:
+          description: The name of the column.
+          example: message
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDefinitionColumnType'
+      required:
+      - column
+      - type
+      type: object
+    SecurityMonitoringDatasetDefinitionColumnType:
+      description: The type of the column in a dataset definition.
+      enum:
+      - string
+      - integer
+      - double
+      - boolean
+      example: string
+      type: string
+      x-enum-varnames:
+      - STRING
+      - INTEGER
+      - DOUBLE
+      - BOOLEAN
+    SecurityMonitoringDatasetDependenciesAttributesRequest:
+      description: Attributes for dataset dependencies request.
+      properties:
+        datasetIds:
+          description: Array of dataset IDs to check dependencies for (minimum 1,
+            maximum 100).
+          example:
+          - dataset-1
+          items:
+            example: dataset-1
+            type: string
+          maxItems: 100
+          minItems: 1
+          type: array
+      required:
+      - datasetIds
+      type: object
+    SecurityMonitoringDatasetDependenciesDataRequest:
+      description: Data for dataset dependencies request.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDependenciesAttributesRequest'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDependenciesType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringDatasetDependenciesRequest:
+      description: Request to get dataset dependencies.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDependenciesDataRequest'
+      required:
+      - data
+      type: object
+    SecurityMonitoringDatasetDependenciesResponse:
+      description: Response containing dataset dependencies.
+      properties:
+        data:
+          description: Array of dataset dependencies.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringDatasetDependencyDataResponse'
+          type: array
+      required:
+      - data
+      type: object
+    SecurityMonitoringDatasetDependenciesType:
+      description: The type of the response.
+      enum:
+      - security_monitoring_dataset_dependencies
+      example: security_monitoring_dataset_dependencies
+      type: string
+      x-enum-varnames:
+      - SECURITY_MONITORING_DATASET_DEPENDENCIES
+    SecurityMonitoringDatasetDependencyAttributesResponse:
+      description: Attributes for dataset dependency.
+      properties:
+        count:
+          description: The count of resources that depend on the dataset.
+          example: 2
+          format: int64
+          type: integer
+        ids:
+          description: Array of IDs of resources that depend on the dataset.
+          example:
+          - rule-1
+          items:
+            example: rule-1
+            type: string
+          type: array
+        resource_type:
+          description: The type of resource that depends on the dataset.
+          example: security_detection_rule
+          type: string
+      required:
+      - resource_type
+      - ids
+      - count
+      type: object
+    SecurityMonitoringDatasetDependencyDataResponse:
+      description: Dependencies for a dataset.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDependencyAttributesResponse'
+        id:
+          description: The dataset ID.
+          example: dataset-1
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDependenciesType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringDatasetListMeta:
+      description: Metadata for dataset list responses.
+      properties:
+        totalCount:
+          description: The total count of datasets.
+          example: 42
+          format: int64
+          type: integer
+      required:
+      - totalCount
+      type: object
+    SecurityMonitoringDatasetResponse:
+      description: Response containing a security monitoring dataset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDataResponse'
+      required:
+      - data
+      type: object
+    SecurityMonitoringDatasetType:
+      description: Type for security monitoring dataset objects.
+      enum:
+      - security_monitoring_dataset
+      example: security_monitoring_dataset
+      type: string
+      x-enum-varnames:
+      - SECURITY_MONITORING_DATASET
+    SecurityMonitoringDatasetUpdateAttributesRequest:
+      description: Attributes for updating a security monitoring dataset.
+      properties:
+        definition:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetDefinition'
+        description:
+          description: A description of the dataset (maximum 255 characters).
+          example: Updated dataset description
+          type: string
+        version:
+          description: The expected version of the dataset for concurrent modification
+            detection.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - description
+      - definition
+      type: object
+    SecurityMonitoringDatasetUpdateDataRequest:
+      description: Data for updating a security monitoring dataset.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetUpdateAttributesRequest'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringDatasetUpdateRequest:
+      description: Request to update a security monitoring dataset.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetUpdateDataRequest'
+      required:
+      - data
+      type: object
+    SecurityMonitoringDatasetsHistoryResponse:
+      description: Response containing the history of a security monitoring dataset.
+      properties:
+        data:
+          description: Array of dataset versions ordered by version descending.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringDatasetDataResponse'
+          type: array
+      required:
+      - data
+      type: object
+    SecurityMonitoringDatasetsListResponse:
+      description: Response containing a list of security monitoring datasets.
+      properties:
+        data:
+          description: Array of datasets.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringDatasetDataResponse'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SecurityMonitoringDatasetListMeta'
+      required:
+      - data
+      - meta
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -92457,6 +92826,398 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 0
+  /api/v2/security_monitoring/datasets:
+    get:
+      description: List all datasets for the organization with optional pagination,
+        filtering, and sorting.
+      operationId: ListSecurityMonitoringDatasets
+      parameters:
+      - description: Size for a given page. The maximum allowed value is 100.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 10
+          example: 10
+          format: int64
+          type: integer
+      - description: Specific page number to return.
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          default: 0
+          example: 0
+          format: int64
+          type: integer
+      - description: Sort datasets by name, created at, or modified at. Prefix with
+          '-' for descending order.
+        in: query
+        name: sort
+        required: false
+        schema:
+          example: -createdAt
+          type: string
+      - description: Filter datasets by name or description.
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          example: my_dataset
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringDatasetsListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all datasets
+      tags:
+      - Security Monitoring
+      x-menu-order: 49
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new dataset for security monitoring.
+      operationId: CreateSecurityMonitoringDataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringDatasetCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringDatasetCreateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a dataset
+      tags:
+      - Security Monitoring
+      x-menu-order: 50
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/datasets/dependencies:
+    post:
+      description: Batch retrieves which security rules depend on specified datasets.
+      operationId: BatchGetSecurityMonitoringDatasetDependencies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringDatasetDependenciesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringDatasetDependenciesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get dataset dependencies
+      tags:
+      - Security Monitoring
+      x-menu-order: 56
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/datasets/{dataset_id}:
+    delete:
+      description: Delete a dataset by its ID.
+      operationId: DeleteSecurityMonitoringDataset
+      parameters:
+      - description: The ID of the dataset.
+        in: path
+        name: dataset_id
+        required: true
+        schema:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a dataset
+      tags:
+      - Security Monitoring
+      x-menu-order: 53
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a specific dataset by its ID.
+      operationId: GetSecurityMonitoringDataset
+      parameters:
+      - description: The ID of the dataset.
+        in: path
+        name: dataset_id
+        required: true
+        schema:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringDatasetResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a dataset
+      tags:
+      - Security Monitoring
+      x-menu-order: 51
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing dataset.
+      operationId: UpdateSecurityMonitoringDataset
+      parameters:
+      - description: The ID of the dataset.
+        in: path
+        name: dataset_id
+        required: true
+        schema:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringDatasetUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a dataset
+      tags:
+      - Security Monitoring
+      x-menu-order: 52
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/datasets/{dataset_id}/history:
+    get:
+      description: Get all historical versions of a dataset.
+      operationId: GetSecurityMonitoringDatasetHistory
+      parameters:
+      - description: The ID of the dataset.
+        in: path
+        name: dataset_id
+        required: true
+        schema:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringDatasetsHistoryResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get dataset history
+      tags:
+      - Security Monitoring
+      x-menu-order: 55
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/datasets/{dataset_id}/version/{version}:
+    get:
+      description: Get a specific version of a dataset.
+      operationId: GetSecurityMonitoringDatasetByVersion
+      parameters:
+      - description: The ID of the dataset.
+        in: path
+        name: dataset_id
+        required: true
+        schema:
+          example: 123e4567-e89b-12d3-a456-426614174000
+          format: uuid
+          type: string
+      - description: The version of the dataset.
+        in: path
+        name: version
+        required: true
+        schema:
+          example: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringDatasetResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a dataset by version
+      tags:
+      - Security Monitoring
+      x-menu-order: 54
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security_monitoring/rules:
     get:
       description: List rules.
