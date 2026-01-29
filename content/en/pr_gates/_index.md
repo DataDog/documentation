@@ -42,13 +42,13 @@ PR Gates allow you to control software security and quality by configuring rules
 
 {{< img src="pr_gates/setup/sca_3.png" alt="An SCA rule that triggers a failure if any library vulnerabilities with critical or high severity are detected in the repository." style="width:100%" >}}
 
-PR Gates, similar to [Datadog Monitors][9], consume data and findings outputted by compatible Datadog products and apply conditions to these findings to determine if a PR is meeting your organizational standards. To prevent unnecessary impact to your developers' velocity, PR Gates only block on violations introduced by the code changes of the PR in question, not on findings that already existed in your repository before the PR and its branch were created. For example, if you configure PR Gates to block on Critical severity code vulnerabilities, PR Gates will only fail and block the PR if a developer introduces a new Critical code vulnerability as part of that PR. 
+PR Gates, similar to [Datadog Monitors][9], consume data and findings outputted by compatible Datadog products and apply conditions to these findings to determine if a PR is meeting your organizational standards. To prevent unnecessary impact to your developers' velocity, PR Gates only block on violations introduced by the code changes of the PR in question, not on findings that already existed in your repository before the PR and its branch were created. For example, if you configure PR Gates to block on Critical-severity code vulnerabilities, PR Gates will only fail and block the PR if a developer introduces a new Critical code vulnerability as part of that PR. 
 
 You can configure PR Gates rules for the following categories. Please note that the compatible product must be running on your desired repositories before PR Gates can begin taking action on the relevant PRs: 
 
 | Source type     | Condition types |
 | --- | ----------- |
-| [**Static Code Analysis**][1] | - Code vulnerabilities<br/> - Code quality violations |
+| [**Static Code Analysis (SAST)**][1] | - Code vulnerabilities<br/> - Code quality violations |
 | [**Software Composition Analysis**][2] | - Library vulnerabilities<br/> - Library license violations |
 | [**Code Coverage**][3] | - Total code coverage<br/> - Patch code coverage |
 | [**Infrastructure as Code Scanning**][4] | - IaC vulnerabilities |
@@ -66,27 +66,27 @@ PR Gates offers the following rule types:
 {{< tabs >}}
 {{% tab "Static Code Analysis (SAST)" %}}
 
-You can create rules to block code from being merged when a pull request introduces at least one code vulnerability or code quality violation of a certain severity.
+You can create rules to block code changes from being merged when a pull request's modified lines introduce at least one new code vulnerability or code quality violation of a certain severity.
 
 {{< img src="pr_gates/setup/static_analysis_3.png" alt="A PR Gate rule that fails when one or more new code quality violations of error-level severity are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Software Composition Analysis (SCA)" %}}
 
-You can create rules to block code from being merged when a pull request introduces at least one library vulnerability of a certain severity or at least one library with a forbidden license.
+You can create rules to block code changes from being merged when a pull request's modified lines introduce at least one new library vulnerability of a certain severity or at least one new library with a forbidden license.
 
 {{< img src="pr_gates/setup/sca_3.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Code Coverage" %}}
-You can create rules to block code from being merged when a pull request causes the repository's overall code coverage to fall below a certain percentage or if the patch coverage is below a certain threshold.
+You can create rules to block code changes from being merged when a pull request's modified lines cause the repository's overall code coverage to fall below a certain percentage or if the patch coverage of those lines is below a certain threshold.
 
 {{< img src="pr_gates/setup/code_coverage.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
 {{% /tab %}}
 
 {{% tab "Infrastructure as Code Scanning" %}}
-You can create rules to block code from being merged when a pull request introduces at least one infrastructure as code (IaC) vulnerability of a certain severity.
+You can create rules to block code changes from being merged when a pull request's modified lines introduce at least one new infrastructure as code (IaC) vulnerability of a certain severity.
 
 {{< img src="pr_gates/setup/iac.png" alt="A PR Gate rule that fails when one or more critical or high severity library vulnerabilities are contained in the repository" style="width:80%" >}}
 
