@@ -114,12 +114,18 @@ def detection_task(input_data, config):
 
 ### 3. Define evaluation functions
 
-Create functions that measure how well your task performs. You need four types of functions:
+To optimize your prompt, you need multiple layers of metric computation:
+
+- At record level, label the results following the confusion matrix labels (TP, FP, TN, FN)
+- Aggregate these labels across all records to compute intermediate metrics (for example, count the total TPs, FPs, TNs, and FNs, then calculate precision, recall, and accuracy)
+- Compute the final score you want to optimize the prompt for by combining or selecting from the aggregated metrics (for example, return precision alone, or combine precision + accuracy)
+- Label the misclassification examples to provide to the prompt optimizer
+
 
 **Individual evaluators** measure each output:
 
 ```python
-def accuracy_evaluator(input_data, output_data, expected_output):
+def confusion_matrix_evaluator(input_data, output_data, expected_output):
     """Evaluate a single prediction."""
     prediction = output_data.value
 
@@ -187,7 +193,7 @@ def compute_score(summary_evaluators):
 ```python
 def labelization_function(individual_result):
     """Categorize results into meaningful groups."""
-    eval_value = individual_result["evaluations"]["accuracy_evaluator"]["value"]
+    eval_value = individual_result["evaluations"]["confusion_matrix_evaluator"]["value"]
 
     if eval_value in ("true_positive", "true_negative"):
         return "CORRECT PREDICTION"
@@ -241,7 +247,7 @@ prompt_optimization = LLMObs._prompt_optimization(
     dataset=dataset,
     task=detection_task,
     optimization_task=optimization_task,
-    evaluators=[accuracy_evaluator],
+    evaluators=[confusion_matrix_evaluator],
     summary_evaluators=[precision_recall_evaluator],
     labelization_function=labelization_function,
     compute_score=compute_score,
