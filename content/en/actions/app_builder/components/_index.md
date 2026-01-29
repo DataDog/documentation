@@ -250,7 +250,7 @@ For an example showing how to use this component, see [Custom charts][10].
 
 
 {{% collapse-content title="Date picker" level="h3" %}}
-Date range picker components have the following properties.
+Date picker components have the following properties.
 
 ### General
 
@@ -283,9 +283,6 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
-
-State Function
-: fetch<br>
 
 For more information on events, see [Events][1].
 
@@ -373,10 +370,6 @@ Event
 
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
-State Function
-: fetch<br>
-**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
