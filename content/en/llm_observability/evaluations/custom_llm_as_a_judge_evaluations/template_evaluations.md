@@ -16,10 +16,11 @@ aliases:
 We provide LLM-as-a-judge templates for the following evaluations: Failure to Answer, Prompt Injection, Sentiment, Topic Relevancy, and Toxicity.
 
 To select a template:
-1. Click on the Evaluations page
-1. Click on ``Create an evaluation``
+1. Click on the [Evaluations][11] page
+1. Click on ``Create Evaluation`` button
 1. Select the template of your choice
-1. Select the integration provider and model you want to use
+1. Select the integration provider, account, and model you want to use. Note: Some integration providers require additional steps (like selecting Region for Amazon Bedrock or Project and Location for VertexAI.)
+1. (Optional) Select the ml application you would like the eval to run for.
 
 #### Topic relevancy
 
@@ -129,4 +130,4 @@ You can configure the prompt injection evaluation to use specific categories of 
 [8]: https://arxiv.org/pdf/2404.05993
 [9]: https://arxiv.org/pdf/2309.11998
 [10]: /security/sensitive_data_scanner/
-[11]: https://app.datadoghq.com/llm/applications
+[11]: https://app.datadoghq.com/llm/evaluations
