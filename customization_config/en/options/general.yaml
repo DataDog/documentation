@@ -334,6 +334,12 @@ options:
 - label: Roku
   id: roku
 
+- id: rum
+  label: RUM
+
+- id: error_tracking
+  label: Error Tracking
+
 - label: CentOS
   id: centos
 

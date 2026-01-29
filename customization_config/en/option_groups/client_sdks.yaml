@@ -8,3 +8,8 @@ sdk_platform_options:
   - id: kotlin_multiplatform
   - id: roku
   - id: unity
+
+sdk_product_options:
+  - id: rum
+    default: true
+  - id: error_tracking

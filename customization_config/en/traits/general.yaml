@@ -47,3 +47,8 @@ traits:
   type: text
   label: SDK
   internal_notes: The SDK that the customer is trying to use to instrument their application with, such as Browser, Android, iOS, etc.
+
+- id: sdk_product
+  type: text
+  label: Product
+  internal_notes: The product that the customer is trying to use to instrument their application with, such as RUM, Error Tracking, etc.
