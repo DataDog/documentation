@@ -206,8 +206,8 @@ class ConversationalSearch {
             }
         });
 
-        // Suggestion chips click handler
         this.messagesContainer.addEventListener('click', (e) => {
+            // Suggestion chips click handler
             const suggestionBtn = e.target.closest('.conv-search-suggestion');
             if (suggestionBtn) {
                 const query = suggestionBtn.dataset.query;
@@ -215,6 +215,19 @@ class ConversationalSearch {
                     this.input.value = query;
                     this.sendMessage();
                 }
+            }
+            
+            // Link click handler
+            const link = e.target.closest('a');
+            if (link && this.messagesContainer.contains(link)) {
+                this.logAction('Conversational Search Link Click', {
+                    conversational_search: {
+                        action: 'link_clicked',
+                        link_url: link.href,
+                        link_text: link.textContent,
+                        conversation_id: this.conversationId
+                    }
+                });
             }
         });
     }
@@ -376,6 +389,7 @@ class ConversationalSearch {
     async streamConversation(query, responseContainer) {
         // Create abort controller for cancellation
         this.abortController = new AbortController();
+        const startTime = Date.now();
 
         // Build the search body - only collection-specific params go here
         const searchBody = {
@@ -493,6 +507,19 @@ class ConversationalSearch {
                 responseContainer.innerHTML = marked.parse(accumulatedMessage);
                 this.addMessageActions(responseContainer.parentElement, query, accumulatedMessage);
                 this.scrollToBottom();
+                
+                // Log successful response with latency and full content
+                const latency = Date.now() - startTime;
+                this.logAction('Conversational Search Response', {
+                    conversational_search: {
+                        action: 'response_received',
+                        query,
+                        response: accumulatedMessage, // Full AI response
+                        response_length: accumulatedMessage.length,
+                        conversation_id: this.conversationId,
+                        latency_ms: latency
+                    }
+                });
             } else {
                 responseContainer.textContent = 'No response received. Please try again.';
             }
@@ -521,6 +548,19 @@ class ConversationalSearch {
             if (fullAnswer) {
                 responseContainer.innerHTML = marked.parse(fullAnswer);
                 this.addMessageActions(responseContainer.parentElement, query, fullAnswer);
+                
+                // Log successful response with latency and full content (fallback mode)
+                const latency = Date.now() - startTime;
+                this.logAction('Conversational Search Response', {
+                    conversational_search: {
+                        action: 'response_received',
+                        query,
+                        response: fullAnswer, // Full AI response
+                        response_length: fullAnswer.length,
+                        conversation_id: this.conversationId,
+                        latency_ms: latency
+                    }
+                });
             } else {
                 responseContainer.textContent = 'No response received.';
             }
@@ -631,9 +671,14 @@ class ConversationalSearch {
     logAction(message, data) {
         if (window.DD_LOGS?.logger) {
             window.DD_LOGS.logger.log(message, data, 'info');
+        } else {
+            console.warn('DD_LOGS.logger not found, could not log message:', message, data);
         }
+        
         if (window.DD_RUM) {
             window.DD_RUM.addAction('conversational_search_action', data.conversational_search);
+        } else {
+            console.warn('DD_RUM not found, could not send RUM action:', data.conversational_search);
         }
     }
 }
