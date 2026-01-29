@@ -100,7 +100,7 @@ Go to [**Create Feature Flag**][2] in Datadog and configure the following:
 
   **Note**: Users may be able to see variant values sent to client SDKs.
 
-* **Distribution channels**: Which types of SDKs receive this flag’s configuration (client-side, server-side, or both)
+* **Distribution channels**: Which types of SDKs receive this flag's configuration (client-side, server-side, or both)
 
  <div class="alert alert-warning">
  The <b>flag key</b> and <b>variant type</b> cannot be modified after creation.
