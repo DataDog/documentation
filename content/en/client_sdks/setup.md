@@ -143,7 +143,11 @@ title: Client SDK Setup
     Follow the instructions below to install and configure the Datadog SDK for
     your platform.
   </p>
-  <div class="cdoc__toggleable" data-description="SDK is Browser" data-if="0">
+  <div
+    class="cdoc__toggleable"
+    data-description="SDK is Browser"
+    data-if="7234"
+  >
     <p>
       This page describes how to instrument your web applications with the
       Datadog Browser SDK. The Browser SDK supports
@@ -755,7 +759,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="1"
+    data-if="7235"
   >
     <p>
       This page describes how to instrument your applications for
@@ -2024,7 +2028,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="2"
+    data-if="7236"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -3148,7 +3152,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="3"
+    data-if="7237"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3775,7 +3779,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="4"
+    data-if="7238"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5100,7 +5104,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="5"
+    data-if="7239"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5334,7 +5338,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="n">d7ea8ce4</span><span class="p">-</span><span class="m">72</span><span class="n">eb</span><span class="p">-</span><span class="m">4729</span><span class="p">-</span><span class="n">b518</span><span class="p">-</span><span class="n">e9e68dc1c26f</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">63126</span><span class="n">b1f</span><span class="p">-</span><span class="m">41f2</span><span class="p">-</span><span class="m">4</span><span class="n">eee</span><span class="p">-</span><span class="n">bd06</span><span class="p">-</span><span class="m">3</span><span class="n">a74ed788945</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5586,7 +5590,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="6"
+    data-if="7240"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5843,7 +5847,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="7"
+    data-if="7241"
   >
     <p>
       This page describes how to instrument your applications for
@@ -6412,7 +6416,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"2"},"3":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"3"},"4":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"4"},"5":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"5"},"6":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"6"},"7":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"7"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"7234":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"7234"},"7235":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"7235"},"7236":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"7236"},"7237":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"7237"},"7238":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"7238"},"7239":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"7239"},"7240":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"7240"},"7241":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"7241"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 
