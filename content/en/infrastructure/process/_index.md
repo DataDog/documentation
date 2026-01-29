@@ -529,7 +529,7 @@ Having these tags available lets you tie together APM, logs, metrics, and proces
 
 #### Rules to create custom tags
 <div class="alert alert-info">
-Requires the `Process Tags Read` and `Process Tag Write` Datadog role permissions<br/>
+Requires the <code>Process Tags Read</code> and <code>Process Tag Write</code>  Datadog role permissions<br/>
 </div>
 
 You can create rule definitions to add manual tags to processes based on the command line.
