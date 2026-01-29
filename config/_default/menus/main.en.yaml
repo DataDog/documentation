@@ -6192,91 +6192,111 @@ menu:
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_amazon_vpc_flow_logs
       weight: 503
+    - name: AWS Application Load Balancer Logs
+      url: observability_pipelines/packs/aws_alb/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_alb
+      weight: 504
     - name: AWS CloudTrail
       url: observability_pipelines/packs/aws_cloudtrail/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_aws_cloudtrail
-      weight: 504
+      weight: 505
+    - name: AWS Elastic Load Balancer Logs
+      url: observability_pipelines/packs/aws_elb/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_elb
+      weight: 506
+    - name: AWS Network Load Balancer Logs
+      url: observability_pipelines/packs/aws_nlb/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_aws_nlb
+      weight: 507
     - name: Cisco ASA
       url: observability_pipelines/packs/cisco_asa/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_cisco_asa
-      weight: 505
+      weight: 508
     - name: Cloudflare
       url: observability_pipelines/packs/cloudflare/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_cloudflare
-      weight: 506
+      weight: 509
     - name: F5
       url: observability_pipelines/packs/f5/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_f5
-      weight: 507
+      weight: 510
     - name: Fastly
       url: observability_pipelines/packs/fastly/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_fastly
-      weight: 508
+      weight: 511
     - name: Fortinet Firewall
       url: observability_pipelines/packs/fortinet_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_fortinet_firewall
-      weight: 509
+      weight: 512
     - name: HAProxy Ingress
       url: observability_pipelines/packs/haproxy_ingress/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_haproxy_ingress
-      weight: 510
+      weight: 513
     - name: Istio Proxy
       url: observability_pipelines/packs/istio_proxy/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_istio_proxy
-      weight: 511
+      weight: 514
+    - name: Juniper SRX Firewall Traffic Logs
+      url: observability_pipelines/packs/juniper_srx_traffic/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_juniper_srx_traffic
+      weight: 515
     - name: Netskope
       url: observability_pipelines/packs/netskope/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_netskope
-      weight: 512
+      weight: 516
     - name: NGINX
       url: observability_pipelines/packs/nginx/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_nginx
-      weight: 513
+      weight: 517
     - name: Okta
       url: observability_pipelines/packs/okta/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_okta
-      weight: 514
+      weight: 518
     - name: Palo Alto Firewall
       url: observability_pipelines/packs/palo_alto_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_palo_alto_firewall
-      weight: 515
+      weight: 519
     - name: Windows XML
       url: observability_pipelines/packs/windows_xml/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_windows_xml
-      weight: 516
+      weight: 520
     - name: ZScaler ZIA DNS
       url: observability_pipelines/packs/zscaler_zia_dns/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_dns
-      weight: 517
+      weight: 521
     - name: Zscaler ZIA Firewall
       url: observability_pipelines/packs/zscaler_zia_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_firewall
-      weight: 518
+      weight: 522
     - name: Zscaler ZIA Tunnel
       url: observability_pipelines/packs/zscaler_zia_tunnel/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_tunnel
-      weight: 519
+      weight: 523
     - name: Zscaler ZIA Web Logs
       url: observability_pipelines/packs/zscaler_zia_web_logs/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_web_logs
-      weight: 520
+      weight: 524
     - name: Search Syntax
       url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
