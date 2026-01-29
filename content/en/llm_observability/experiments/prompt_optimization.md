@@ -121,7 +121,7 @@ To optimize your prompt, you need multiple layers of metric computation:
 - Compute the final score you want to optimize the prompt for by combining or selecting from the aggregated metrics (for example, return precision alone, or combine precision + accuracy)
 - Label the misclassification examples to provide to the prompt optimizer
 
-Here are implementation examples:
+The following examples illustrate how to implement each steps.
 
 - **Individual evaluators** measure each output:
 
