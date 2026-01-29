@@ -26,7 +26,7 @@ Test Impact Analysis は、以下のバージョンとテストフレームワ�
   * `coverage>=5.5` が必要です。
   * `pytest-cov` とは非互換 ([既知の制限事項](#known-limitations)を参照)
 * `unittest`
-  * `ddtrace>=2.2.0` 以降。
+  * `ddtrace>=2.1.0` 以降。
   * `Python>=3.7` 以降。
 * `coverage`
   * カバレッジ収集には非対応 ([既知の制限事項](#known-limitations)を参照)
