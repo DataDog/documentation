@@ -1,5 +1,8 @@
 ---
 title: Reference Table Joins with Metrics
+description: 'Use reference table joins with metrics to enhance your monitoring and analysis capabilities'
+aliases:
+- /metrics/composite_metrics_queries/
 further_reading:
 - link: "/reference_tables/"
   tag: "Documentation"

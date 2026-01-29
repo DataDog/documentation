@@ -1898,10 +1898,10 @@ menu:
       parent: metrics_top_level
       identifier: metrics_nested_queries
       weight: 10
-    - name: Composite Metrics Queries
-      url: metrics/composite_metrics_queries
+    - name: Reference Table Joins with Metrics
+      url: metrics/reference_table_joins_with_metrics
       parent: metrics_top_level
-      identifier: composite_metrics_queries
+      identifier: metrics_reference_table_joins_with_metrics
       weight: 11
     - name: Derived Metrics
       url: metrics/derived-metrics
