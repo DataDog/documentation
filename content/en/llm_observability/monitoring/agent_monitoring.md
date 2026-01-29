@@ -24,11 +24,6 @@ For your agentic applications, LLM Observability allows you to:
 - Visualize agent decisions, such as tools used or agent a task was handed off to
 - Trace and troubleshoot end-to-end requests of agent executions 
 
-
-{{< callout url="http://www.datadoghq.com/product-preview/llm-observability" btn_hidden="false" header="Join the Preview!">}}
-LLM Observability's Graph-based Visualization for Agentic Systems is in Preview.
-{{< /callout >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
