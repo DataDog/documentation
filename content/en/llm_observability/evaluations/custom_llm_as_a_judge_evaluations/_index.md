@@ -103,7 +103,7 @@ For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keywo
 
 For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, AI Gateway)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
