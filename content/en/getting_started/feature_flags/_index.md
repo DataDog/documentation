@@ -94,7 +94,7 @@ More information about OpenFeature SDK configuration options can be found in its
 
 Go to [**Create Feature Flag**][2] in Datadog and configure the following:
 
-* **Name and key**: The flag’s display name and the key referenced in code
+* **Name and key**: The flag's display name and the key referenced in code
 * **Variant type**: The data type for the flag variants (Boolean, string, integer, number, or JSON)
 * **Variant values**: The possible values the flag can return (you can add these later)
 
