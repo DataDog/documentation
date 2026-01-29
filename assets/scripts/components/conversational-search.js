@@ -669,6 +669,9 @@ class ConversationalSearch {
     }
 
     logAction(message, data) {
+        // Always log to console for debugging in dev/preview
+        console.log('[Conversational Search] Action:', message, data);
+
         if (window.DD_LOGS?.logger) {
             window.DD_LOGS.logger.log(message, data, 'info');
         } else {
