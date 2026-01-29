@@ -26,7 +26,7 @@ Test Impact Analysis sólo es compatible con las siguientes versiones y framewor
   * Requiere `coverage>=5.5`.
   * Incompatible con `pytest-cov` (consulta [limitaciones conocidas](#known-limitations))
 * `unittest`
-  * De `ddtrace>=2.1.0`.
+  * De `ddtrace>=2.2.0`.
   * De `Python>=3.7`.
 * `coverage`
   * Incompatible para la recopilación de cobertura (consulta [limitaciones conocidas](#known-limitations))
