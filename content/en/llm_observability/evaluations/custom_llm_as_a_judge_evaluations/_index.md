@@ -23,6 +23,8 @@ further_reading:
 - link: "https://huggingface.co/learn/cookbook/llm_judge"
   tag: "Hugging Face"
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
+aliases:
+  - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 ---
 
 Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. You can define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run these evaluations at scale across your traces and spans.
