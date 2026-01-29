@@ -1,6 +1,6 @@
 ---
 title: Cost Summary Widget
-widget_type: cost_summary
+widget_type: "cloud_cost_summary"
 description: "Visualize your cloud spending with a compact overview of total costs, time-based comparisons, and spend context."
 aliases:
     - /graphing/widgets/cost_summary/

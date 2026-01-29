@@ -1,6 +1,6 @@
 ---
 title: Budget Summary Widget
-widget_type: budget_summary
+widget_type: "cloud_cost_summary"
 description: "Visualize your Cloud Cost Management budgets and spending in dashboards."
 aliases:
     - /graphing/widgets/budget_summary/

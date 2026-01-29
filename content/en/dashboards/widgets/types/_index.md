@@ -54,9 +54,9 @@ further_reading:
 ## Cloud Cost Management
 {{< whatsnext desc="Visualize Cloud Cost Management data:" >}}
     {{< nextlink href="/dashboards/widgets/budget_summary"
-        img="dashboards/widgets/icons/sankey_light_large.svg">}} Budget Summary{{< /nextlink >}}
+        img="dashboards/widgets/icons/cloud-cost-summary_light_large.svg">}} Budget Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/cost_summary"
-        img="dashboards/widgets/icons/sankey_light_large.svg">}} Cost Summary{{< /nextlink >}}
+        img="dashboards/widgets/icons/cloud-cost-summary_light_large.svg">}} Cost Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Product Analytics
