@@ -1,6 +1,6 @@
 ---
-title: Quality Evaluations
-description: Learn how to configure managed evaluations for your LLM applications.
+title: LLM-as-a-Judge Evaluation Templates
+description: Learn how to create LLM-as-a-Judge evaluations from templates for your LLM applications.
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
@@ -9,45 +9,46 @@ further_reading:
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
 aliases:
-    - /llm_observability/evaluations/quality_evaluations
+    - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
 ---
 
-Quality evaluations help ensure your LLM-powered applications generate accurate, relevant, and safe responses. Managed evaluations automatically score model outputs on key quality dimensions and attach results to traces, helping you detect issues, monitor trends, and improve response quality over time.
+<!-- Quality evaluations help ensure your LLM-powered applications generate accurate, relevant, and safe responses. Managed evaluations automatically score model outputs on key quality dimensions and attach results to traces, helping you detect issues, monitor trends, and improve response quality over time. -->
+We provide LLM-as-a-judge templates for the following evaluations: Failure to Answer, Prompt Injection, Sentiment, Topic Relevancy, and Toxicity.
+
+To select a template:
+1. Click on the Evaluations page
+1. Click on ``Create an evaluation``
+1. Select the template of your choice
+1. Select the integration provider and model you want to use
 
 #### Topic relevancy
 
-This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
+This evaluation identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
 
-{{< img src="llm_observability/evaluations/topic_relevancy_3.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+<!-- {{< img src="llm_observability/evaluations/topic_relevancy_3.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition |
+| Evaluation Stage | Evaluation Definition |
 |---|---|---|
-| Evaluated on Input | Evaluated using LLM | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
+| Evaluated on Input | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
 
-You can provide topics for this evaluation.
-
-1. Go to [**LLM Observability > Applications**][11].
-1. Select the application you want to add topics for.
-1. At the right corner of the top panel, select **Settings**.
-1. Beside **Topic Relevancy**, click **Configure Evaluation**.
-1. Click the **Edit Evaluations** icon for Topic Relevancy.
-1. Add topics on the configuration page.
+You can provide topics for this evaluation by filling out the template and replacing <<PLEASE WRITE YOUR TOPICS HERE>>
 
 Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
 
 #### Failure to Answer
 
-This check identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
+This evaluation identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
-{{< img src="llm_observability/evaluations/failure_to_answer_5.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+<!-- {{< img src="llm_observability/evaluations/failure_to_answer_5.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition |
+| Evaluation Stage | Evaluation Definition |
 |---|---|---|
-| Evaluated on Output | Evaluated using LLM | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
+| Evaluated on Output | Failure To Answer flags whether each prompt-response pair demonstrates that the LLM application has provided a relevant and satisfactory answer to the user's question.  |
 
 ##### Failure to Answer Configuration
-<div class="alert alert-info">Configuring failure to answer evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
-You can configure the Failure to Answer evaluation to use specific categories of failure to answer, listed in the following table.
+<div class="alert alert-info">Configuring failure to answer evaluation categories is supported for providers and models that support Structured Output.</div>
+We provide the following categories of failure to answer, listed in the followig table. The template defaults to having `Empty Response` and `Refusal Response` marked as failing, but this can be configured to your specific use case.
+<!-- You can configure the Failure to Answer evaluation to use specific categories of failure to answer, listed in the following table. -->
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
@@ -59,27 +60,27 @@ You can configure the Failure to Answer evaluation to use specific categories of
 
 #### Sentiment
 
-This check helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
+This evaluation helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
-{{< img src="llm_observability/evaluations/sentiment_5.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+<!-- {{< img src="llm_observability/evaluations/sentiment_5.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition |
+| Evaluation Stage | Evaluation Definition |
 |---|---|---|
-| Evaluated on Input and Output | Evaluated using LLM | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
+| Evaluated on Input and Output | Sentiment flags the emotional tone or attitude expressed in the text, categorizing it as positive, negative, or neutral.   |
 
 #### Toxicity
 
-This check evaluates each input prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
+This evaluation evaluates each input and output prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
-{{< img src="llm_observability/evaluations/toxicity_4.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+<!-- {{< img src="llm_observability/evaluations/toxicity_4.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition |
+| Evaluation Stage | Evaluation Definition |
 |---|---|---|
-| Evaluated on Input and Output | Evaluated using LLM | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
+| Evaluated on Input and Output | Toxicity flags any language or behavior that is harmful, offensive, or inappropriate, including but not limited to hate speech, harassment, threats, and other forms of harmful communication. |
 
 ##### Toxicity configuration
 
-<div class="alert alert-info">Configuring toxicity evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
+<div class="alert alert-info">Configuring toxicity evaluation categories is supported for providers and models that support Structured Output.</div>
 You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table.
 
 | Category | Description |
@@ -98,13 +99,13 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][6],
 
 #### Prompt Injection
 
-This check identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
+This evaluation identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection_4.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+<!-- {{< img src="llm_observability/evaluations/prompt_injection_4.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
 
-| Evaluation Stage | Evaluation Method | Evaluation Definition |
+| Evaluation Stage | Evaluation Definition |
 |---|---|---|
-| Evaluated on Input | Evaluated using LLM | [Prompt Injection][5] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
+| Evaluated on Input | [Prompt Injection][5] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
 ##### Prompt injection configuration
 <div class="alert alert-info">Configuring prompt injection evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>

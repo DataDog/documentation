@@ -5138,6 +5138,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_custom_llm_as_a_judge_evaluations
       weight: 401
+    - name: LLM-as-a-Judge Template Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
+      weight: 40101
     - name: External Evaluations
       url: llm_observability/evaluations/external_evaluations
       parent: llm_obs_evaluations
