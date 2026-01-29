@@ -62,6 +62,35 @@ Configure the following [parameters][4] in the [DB parameter group][5] and then 
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
+### Enable `auto_explain` (optional)
+
+By default, the agent only gathers [`EXPLAIN`][15] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
+
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][16], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
+
+<div class="alert alert-danger">
+  <strong>Important:</strong> <code>auto_explain</code> produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> permission to control who can see the resulting plans, but the log lines themselves <i>are</i> visible to all users within your Datadog org. Using <a href="/logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
+</div>
+
+1. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
+
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `shared_preload_libraries`      | `pg_stat_statements,auto_explain` | Enables automatic `EXPLAIN ANALYZE` |
+| `auto_explain.log_format`       | `json` | Generates machine-readable plans |
+| `auto_explain.log_min_duration` | `1000` | Logs plans when queries exceed one second |
+| `auto_explain.log_analyze`      | `on` | Use the `ANALYZE` form of `EXPLAIN` |
+| `auto_explain.log_buffers`      | `on` | Include buffer use in plans |
+| `auto_explain.log_timing`       | `off` | Do not include timing (high overhead) |
+| `auto_explain.log_triggers`     | `on` | Include plans for trigger statement |
+| `auto_explain.log_verbose`      | `on` | Use verbose plan type |
+| `auto_explain.log_nested_statements` | `on` | Include nested statements |
+| `auto_explain.sample_rate`      | `1` | Explain all queries over duration |
+
+2. Following the [documentation for RDS DB parameter groups][17], change the `log_line_prefix` to enable richer event correlation. `auto_explain` ingestion requires this be set to `%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a`.
+
+3. Follow [these instructions][18] to ensure your RDS instances are forwarding logs to CloudWatch and Datadog.
+
 
 ## Grant the Agent access
 
@@ -610,3 +639,7 @@ If you have installed and configured the integrations and Agent as described and
 [12]: https://app.datadoghq.com/databases
 [13]: /integrations/amazon_rds
 [14]: /database_monitoring/troubleshooting/?tab=postgres
+[15]: https://www.postgresql.org/docs/current/sql-explain.html
+[16]: https://www.postgresql.org/docs/current/auto-explain.html
+[17]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups.html
+[18]: /integrations/amazon-rds/?tab=standard#log-collection
