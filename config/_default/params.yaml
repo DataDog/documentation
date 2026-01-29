@@ -263,6 +263,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  actions: []
   adaptive_sampling: [gov]
   agent_flare: [gov]
   agentless_scanning: [gov] # docs page
