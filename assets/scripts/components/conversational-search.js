@@ -673,6 +673,7 @@ class ConversationalSearch {
         console.log('[Conversational Search] Action:', message, data);
 
         if (window.DD_LOGS?.logger) {
+            console.log('DD_LOGS.logger found, logging message:', message, data);
             window.DD_LOGS.logger.log(message, data, 'info');
         } else {
             console.warn('DD_LOGS.logger not found, could not log message:', message, data);
