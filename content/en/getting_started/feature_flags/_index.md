@@ -96,12 +96,13 @@ To create your first feature flag, go to [**Create Feature Flag**][2] in Datadog
 
 * **Name and key**: The flag’s display name and the key referenced in code
 * **Variant type**: The data type for the flag variants (Boolean, string, integer, number, or JSON)
-* **Variant values**: The possible values the flag can return (you can add or update these later)
-* **Distribution channels**: Which SDKs receive this flag's configuration (client-side, server-side, or both)
+* **Variant values**: The possible values the flag can return (you can add these later)
+* **Distribution channels**: Which types of SDKs receive this flag’s configuration (client-side, server-side, or both)
 
-<div class="alert alert-info">
-  The <b>flag key</b> and <b>variant type</b> cannot be modified after creation.
-</div>
+ <div class="alert alert-warning">
+  <b>Important considerations</b>: Users may be able to see variant values sent to <b>client</b> SDKs.
+   Additionally, the <b>flag key</b> and <b>variant type</b> cannot be modified after creation.
+  </div>
 
 {{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}} 
 
