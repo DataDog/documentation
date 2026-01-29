@@ -6774,6 +6774,16 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
       weight: 603
+    - name: Guides
+      url: /cloudprem/guides/
+      parent: cloudprem
+      identifier: cloudprem_guides
+      weight: 7
+    - name: Query Logs with MCP Server
+      url: /cloudprem/guides/mcp
+      parent: cloudprem_guides
+      identifier: cloudprem_guides_mcp
+      weight: 701
     - name: Security Overview
       url: security/
       pre: security-platform
