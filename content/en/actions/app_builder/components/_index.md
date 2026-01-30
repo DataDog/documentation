@@ -266,8 +266,23 @@ Custom chart components have the following properties.
 
 ### General
 
+Data Sources 
+: A string representing chart data. 
+
 Vega Specification
 : A string representing a valid Vega-Lite or Vega JSON specification.
+
+Title
+: The title of the chart.<br>
+**Value**: string or expression
+
+Error Message 
+: The message displayed if the chart's code encounters an error.
+**Value**: string or expression
+
+Error Description
+: The description of the error message. 
+**Value**: string or expression
 
 ### Appearance
 
@@ -277,6 +292,10 @@ Is Loading
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+Show Borders 
+: Determines whether the chart displays borders on its edges. 
 **Provided values**: on, off
 
 ### Inspect data
