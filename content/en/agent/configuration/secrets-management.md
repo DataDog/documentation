@@ -726,7 +726,7 @@ spec:
         value: "ENC[secrets-ns/dd-api-key;api_key]"
 ```
 
-**Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. Auto-RBAC via the Operator's `roles:` field is not currently supported for type-based backends.
+**Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. Auto-RBAC through the Operator's `roles:` field is not currently supported for type-based backends.
 
 <div class="alert alert-info"> The Operator does not currently have native <code>secretBackend.type</code> configuration. Use environment variables in <code>override.nodeAgent.env</code> as shown above. </div>
 
@@ -772,7 +772,7 @@ override:
 
 ##### Custom api server configuration
 
-If your setup does not expose the default KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT environment variables, then a `api_server` url can be supplied to interact with the k8s REST API.
+If your setup does not expose the default KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT environment variables, then a `api_server` url can be supplied to interact with the Kubernetes REST API.
 
 {{< tabs >}}
 {{% tab "Agent YAML" %}}
