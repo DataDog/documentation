@@ -167,7 +167,7 @@ IOS app features may not function properly during recording or execution due to 
 
 ### Datadog Agent not listed as an option in Locations & Agents
 
-For the Datadog Agent to appear as a selectable option during test creation, ensure all prerequisites are met and that the setup steps have been followed. See [Agent configuration][16] for more information.
+If you do not see the Datadog Agent listed as a selectable option during test creation, verify that you meet all prerequisites and completed the setup steps. See [Agent configuration][16] for more information.
 
 ### Scheduled tests from the Datadog Agent is not running at the expected schedule
 
