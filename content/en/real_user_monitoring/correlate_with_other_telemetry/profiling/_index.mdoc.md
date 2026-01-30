@@ -4,7 +4,7 @@ description: "Use profiling with RUM to understand application performance issue
 content_filters:
   - trait_id: platform
     option_group_id: rum_sdk_platform_options_v3
-    label: "Browser"
+    label: "Platform"
 aliases:
   - /real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling
   - /real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling
