@@ -701,7 +701,7 @@ datadog:
 
 **Note:** A placeholder `apiKey` is required for Helm chart validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
-<div class="alert alert-info"> Helm does not currently have native <code>secretBackend.type</code> configuration. Use environment variables as shown above. </div>
+<div class="alert alert-info"> Helm does not have native <code>secretBackend.type</code> configuration. Use environment variables. </div>
 
 {{% /tab %}}
 
