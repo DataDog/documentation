@@ -7812,26 +7812,21 @@ menu:
       parent: synthetics
       identifier: synthetics_notifications
       weight: 10  
-    - name: Template Variables
-      url: synthetics/notifications/template_variables
-      parent: synthetics_notifications
-      identifier: synthetics_notifications_template_variables
-      weight: 1001
-    - name: Template Variables (Customizable)
+    - name: Template Variables Cdoc
       url: synthetics/notifications/template_variables_cdocs
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables_cdocs
-      weight: 1002
-    - name: API Template Variables (Customizable)
+      weight: 1001
+    - name: API Template Variables Cdoc
       url: synthetics/notifications/template_variables_api_cdocs
       parent: synthetics_notifications_template_variables_cdocs
       identifier: synthetics_notifications_template_variables_api_cdocs
-      weight: 100200
+      weight: 100100
     - name: Conditional Alerting
       url: synthetics/notifications/conditional_alerting
       parent: synthetics_notifications
       identifier: synthetics_notifications_conditional_alerting
-      weight: 1003
+      weight: 1004
     - name: Advanced Notifications
       url: synthetics/notifications/advanced_notifications
       parent: synthetics_notifications
