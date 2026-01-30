@@ -11,6 +11,12 @@ rum_sdk_platform_options_v2:
   - id: react_native
   - id: flutter
 
+rum_sdk_platform_options_v3:
+  - id: browser
+    default: true
+  - id: android
+  - id: ios
+
 rum_session_replay_sdk_options:
   - id: android
     default: true
