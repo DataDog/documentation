@@ -60,13 +60,21 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
+Left Icon
+: Determines the icon displayed to the left of the button's label.<br>
+**Provided values**: angleDown, angleLeft, angleRight, angleUp, arrowDown, arrowLeft, arrowRight, arrowUp, attentionCircled, ban, bell, bellSlashed, bidirectionalHorizontal, bidirectionalVertical, calendar, cancelCircled, cancelLight, check, checkCircled, cloud, code, cog, comment, copy, cursor, desktop, download, email, export, externalLink, eye, eyeSlashed, file, filter, flagEmpty, folder, globe, hashtag, heartEmpty, home, lightningEmpty, link, lock, lockOpen, magicWand, mention, minus, mobile, pencil, percent, phone, picture, play, plus, pushpin, pushpinSlashed, redo, refresh, search, starEmpty, starFilled, trash, undo, user, userMinus, userPlus, users; integration icons 
+
+Right Icon
+: Determines the icon displayed to the right of the button's label<br>
+**Provided values**: angleDown, angleLeft, angleRight, angleUp, arrowDown, arrowLeft, arrowRight, arrowUp, attentionCircled, ban, bell, bellSlashed, bidirectionalHorizontal, bidirectionalVertical, calendar, cancelCircled, cancelLight, check, checkCircled, cloud, code, cog, comment, copy, cursor, desktop, download, email, export, externalLink, eye, eyeSlashed, file, filter, flagEmpty, folder, globe, hashtag, heartEmpty, home, lightningEmpty, link, lock, lockOpen, magicWand, mention, minus, mobile, pencil, percent, phone, picture, play, plus, pushpin, pushpinSlashed, redo, refresh, search, starEmpty, starFilled, trash, undo, user, userMinus, userPlus, users; integration icons 
+
 ### Events
 
 Event
 : **Value**: click
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
 
 State Function
 : fetch<br>
