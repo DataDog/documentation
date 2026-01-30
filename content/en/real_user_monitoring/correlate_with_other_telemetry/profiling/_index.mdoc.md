@@ -30,8 +30,6 @@ further_reading:
 
 Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
-## Setup
-
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 
@@ -47,17 +45,19 @@ Browser profiling provides visibility into how your application behaves in your 
 
 To get started, enable browser profiling in your RUM SDK configuration. After enabling it, click on a profiled event sample to see detailed profiling data.
 
-## Usage
+## Setup
 
-### Set up RUM
+### Step 1 - Set up RUM
 
 {% alert %}
 Browser SDK version 6.12 or later is required.
 {% /alert %}
 
-1. Set up [RUM Browser Monitoring][2].
+To start collecting data, set up [RUM Browser Monitoring][2].
 
-2. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 sessions).
+### Step 2 - Configure the profiling sampling rate
+
+1. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 sessions).
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -74,7 +74,7 @@ Browser SDK version 6.12 or later is required.
     })
     ```
 
-3. Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
+2. Configure your web servers to serve HTML pages with the HTTP response header `Document-Policy: js-profiling`:
     ```javascript
         app.get("/", (request, response) => {
             … 
@@ -83,7 +83,7 @@ Browser SDK version 6.12 or later is required.
         });
     ```
 
-4. Set up Cross-Origin Resource Sharing (CORS) if needed.
+3. Set up Cross-Origin Resource Sharing (CORS) if needed.
 
       This step is required only if your JavaScript files are served from a different origin than your HTML. For example, if your HTML is served from `cdn.com` and JavaScript files from `static.cdn.com`, you must enable CORS to make JavaScript files visible to the profiler. For more information, see the [Browser profiling and CORS](#cors) section.
     
@@ -102,6 +102,7 @@ Browser SDK version 6.12 or later is required.
        ```
 
 {% collapse-content title="Browser profiling and CORS" %}
+
 #### Requirements for Cross-Origin Scripts (CORS)
 
 If a script's execution or attribution information is to be surfaced in performance entries (and thus captured in browser profiling), the resource (for example, a JavaScript file) needs to be fetched with CORS headers that explicitly allow it to be shared with the origin making the measurement (your application).
@@ -141,7 +142,9 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 ## Explore profiling
 
 ### Within the Optimization page
+
 The **Optimization page** surfaces profiling data in several contexts:
+
 - In the **Troubleshoot section**, Datadog samples long tasks across multiple views to identify your top contributing functions. Use this overview to find where JavaScript execution time is spent and which functions block the main thread, then optimize those functions to improve responsiveness.
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_troubleshoot_section.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
@@ -178,7 +181,6 @@ Android profiling captures detailed data about your application's performance du
 Only devices running Android 15 (API level 35) or higher generate profiling data.
 {% /alert %}
 
-
 ## Prerequisites
 
 - Your Android application must use the Datadog Android SDK version 3.6.0+.
@@ -186,43 +188,48 @@ Only devices running Android 15 (API level 35) or higher generate profiling data
 
 ## Setup
 
-1. Set up [Mobile RUM for Android][3].
-2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 15% means profiling runs on 15 out of 100 launches).
+### Step 1 - Set up RUM
 
-{% alert level="danger" %}
-If no value is specified, the default `applicationLaunchSampleRate` is 15 percent.
-{% /alert %}
+To start collecting data, set up [Mobile RUM for Android][3].
 
-```kotlin
-  class SampleApplication : Application() {
-      override fun onCreate() {
-          super.onCreate()
-          val configuration = Configuration.Builder(
-              clientToken = "<CLIENT_TOKEN>",
-              env = "<ENV_NAME>",
-              variant = "<APP_VARIANT_NAME>"
-          ).build()
+### Step 2 - Configure the profiling sampling rate
 
-          Datadog.initialize(this, configuration, trackingConsent)
+1. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 15% means profiling runs on 15 out of 100 launches).
 
-          // Enable RUM (required for Profiling)
-          val rumConfig = RumConfiguration.Builder(applicationId)
-              .build()
-          Rum.enable(rumConfig)
+    {% alert level="danger" %}
+    If no value is specified, the default `applicationLaunchSampleRate` is 15 percent.
+    {% /alert %}
 
-          // Enable Profiling
-          val profilingConfig = ProfilingConfiguration.Builder()
-            .setApplicationLaunchSampleRate(15) // default is 15%
-            .build()
+    ```kotlin
+      class SampleApplication : Application() {
+          override fun onCreate() {
+              super.onCreate()
+              val configuration = Configuration.Builder(
+                  clientToken = "<CLIENT_TOKEN>",
+                  env = "<ENV_NAME>",
+                  variant = "<APP_VARIANT_NAME>"
+              ).build()
 
-          Profiling.enable(profilingConfig)
+              Datadog.initialize(this, configuration, trackingConsent)
+
+              // Enable RUM (required for Profiling)
+              val rumConfig = RumConfiguration.Builder(applicationId)
+                  .build()
+              Rum.enable(rumConfig)
+
+              // Enable Profiling
+              val profilingConfig = ProfilingConfiguration.Builder()
+                .setApplicationLaunchSampleRate(15) // default is 15%
+                .build()
+
+              Profiling.enable(profilingConfig)
+          }
       }
-  }
-```
+    ```
 
-{% alert level="warning" %}
-The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate`. This variation results from [rate limitations](https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works) within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
-{% /alert %}
+    {% alert level="warning" %}
+    The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate`. This variation results from [rate limitations](https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works) within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
+    {% /alert %}
 
 The [ProfilingManager API][4] also supports disabling rate limiting during debug builds. 
 
@@ -265,8 +272,12 @@ iOS profiling captures detailed data about your application's performance during
 
 ## Setup
 
-1. Set up [Mobile RUM for iOS][3].
-2. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 5% means profiling runs on 5 out of 100 launches).
+### Step 1 - Set up RUM
+To start collecting data, set up [Mobile RUM for iOS][3].
+
+### Step 2 - Configure the profiling sampling rate
+
+Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 5% means profiling runs on 5 out of 100 launches).
 
 {% alert level="danger" %}
 If no value is specified, the default `applicationLaunchSampleRate` is 5 percent.
