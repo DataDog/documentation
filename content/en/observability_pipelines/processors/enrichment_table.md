@@ -79,19 +79,16 @@ To set up the Enrichment Table processor:
   1. Click **Manage** to go to the Reference Tables configuration page.
   1. (Optional) Select specific columns with which to enrich your logs.
       - Observability Pipelines enriches logs with all columns in the table by default. If you want to cherry pick columns, you can specify certain attributes to be added. Only selected attributes are enriched.
-  1. Enter a Datadog application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data.
-      - Configure your application key in your organization settings under the [Service Accounts][2] page before you deploy the pipeline.
-      - Associate your application key with a [Service Account][3] (not a personal Datadog user account).
-      - Application keys can be viewed exactly once, when you create them. Copy and store the value in your secrets manager. If you lose or forget a service account key, revoke it and create another one.
-      - Limit your application key to the [`reference_tables_read`][4] scope.
-  1. Enter the source attribute of the log. The source attribute's value is what you want to find in the reference table.
+  1. Enter a Datadog Application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data. Ensure you application key is:
+      - Associated with a [Service Account][2] (not a personal Datadog user account).
+      - Limited to the [`reference_tables_read`][3] scope.
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the reference table.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
 
-[1]: https://docs.datadoghq.com/account_management/api-app-keys/#application-keys
-[2]: https://app.datadoghq.com/organization-settings/service-accounts
-[3]: https://docs.datadoghq.com/account_management/org_settings/service_accounts#service-account-application-keys
-[4]: https://docs.datadoghq.com/account_management/rbac/permissions/#reference-tables
+[1]: /account_management/api-app-keys/#application-keys
+[2]: /account_management/org_settings/service_accounts#service-account-application-keys
+[3]: /account_management/rbac/permissions/#reference-tables
 
   {{% /tab %}}
   {{% tab "File" %}}
@@ -104,7 +101,6 @@ To set up the Enrichment Table processor:
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
 
-
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
   {{% tab "GeoIP" %}}
@@ -114,7 +110,6 @@ To set up the Enrichment Table processor:
   1. Enter the source attribute of the log. The source attribute's value is what you want Observabiity Pipelines to find in the reference table.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
   1. Click **Save**.
-
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
@@ -165,10 +160,7 @@ Datadog does not recommend using the processor on a log field with high cardinal
 
 #### Processor metrics
 
-To see metrics about your Enrichment Table processor, add these tags to the Custom Processor metrics below:
-
-- `component_type=enrichment_table`
-- `component_id=<processor_id>`
+To see metrics about your Enrichment Table processor, add the tags `component_type=enrichment_table` and  `component_id=<processor_id>` to processor metrics:
 
 `pipelines.enrichment_rows_not_found_total`
 : Number of processed logs that do not have corresponding rows in the table.
@@ -179,7 +171,7 @@ To see metrics about your Enrichment Table processor, add these tags to the Cust
 
 #### Buffer metrics (when buffering is enabled)
 
-To see metrics for your Enrichment Table processor, add these tags to the buffer metrics below:
+To see buffer metrics for your Enrichment Table processor, add these tags to buffer metrics:
 
 - `component_type=enrichment_table`
 - `component_id=<processor_id>`
@@ -189,10 +181,7 @@ To see metrics for your Enrichment Table processor, add these tags to the buffer
 
 #### Reference Table metrics
 
-To see metrics about the Reference Table used by your Enrichment Table processor, add these tags to the metrics below:
-
-- `component_type:enrichment_table`
-- `component_id:reference_table_<table-id>`
+To see metrics about the Reference Table used by your Enrichment Table processor, add the tags `component_type:enrichment_table` and `component_id:reference_table_<table-id>` to Reference Table metrics:
 
 `pipelines.enrichment_rows_not_found_total`
 : This counter is incremented for each processed log that does not have a corresponding row in the table.
@@ -205,13 +194,6 @@ To see metrics about the Reference Table used by your Enrichment Table processor
 
 `pipelines.reference_table_fetched_keys_total`
 : For each request sent to the Reference Tables API, this counter is incremented with the number of rows fetched in that request.
-
-**Note**: Common HTTP client metrics are also reported:
-
-- `pipelines.http_client_requests_sent_total`
-- `pipelines.http_client_responses_total`
-- `pipelines.http_client_errors_total`
-- `pipelines.http_client_rtt_seconds`
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
