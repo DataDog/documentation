@@ -1,0 +1,12 @@
+apm_tracing_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: node_js
+  - id: go
+  - id: php
+  - id: dot_net
+  - id: cpp
+  - id: android
+  - id: ios
+

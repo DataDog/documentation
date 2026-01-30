@@ -106,6 +106,9 @@ options:
 - label: ConfigMap
   id: configmap
 
+- label: C++
+  id: cpp
+
 - label: Container Image
   id: container_image
 
