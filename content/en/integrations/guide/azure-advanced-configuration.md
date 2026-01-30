@@ -130,6 +130,11 @@ The Datadog Windows Agent Azure Extension checks that the `agentConfiguration` U
 The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
 See the [sample `config_template.yaml` file][102] for all available configuration options.
 
+**Note**: You can use an existing Agent's configuration by navigating to that Agent's `%ProgramData%\Datadog` file and removing any extra installation artifacts or files that may be present. Ensure that the folder contains only:
+    -  `datadog.yaml`
+    -  `conf.d` folder containing your integration configurations
+Then, save the sanitized `%ProgramData%\Datadog` folder as a zip file.
+
 #### Generate a SHA256 checksum from the Agent configuration file
 
 {{< code-block lang="powershell" >}}
@@ -143,17 +148,6 @@ Reference the blob storage URL with the `agentConfiguration` parameter and the c
 {{< code-block lang="powershell" >}}
 Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
-
-#### Use a configuration from an existing Agent
-
-1. After installing the Agent, apply any desired [Agent configurations][101].
-2. Navigate to `%ProgramData%\Datadog`. Remove any extra installation artifacts or files that may be present. Ensure that the folder contains only:
-    -  `datadog.yaml`
-    -  `conf.d` folder containing your integration configurations
-3. Save the sanitized `%ProgramData%\Datadog` folder as a zip file.
-4. [Generate a SHA256 checksum from the Agent configuration file](#generate-a-sha256-checksum-from-the-agent-configuration-file).
-5. Upload the file to blob storage.
-6. Reference the blob storage URL with the `agentConfiguration` parameter, and the checksum with the `agentConfigurationChecksum` parameter to create the VM extension.
 
 **Note**: After the Datadog Agent is installed, the configuration can only be changed when upgrading to a newer version.
 
@@ -206,6 +200,8 @@ This example shows how to specify a configuration for the Datadog Agent to use.
 - The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
 - See the [sample `config_template.yaml` file][201] for all available configuration options.
 
+**Note**: You can use an existing Agent's configuration. Save the configured Agent's `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
+
 #### Generate a SHA256 checksum from the Agent configuration file
 
 {{< code-block lang="shell" >}}
@@ -219,14 +215,6 @@ Reference the blob storage URL with the `agentConfiguration` parameter and the c
 {{< code-block lang="shell" >}}
 az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --version 7.0 --settings '{"site":"datadoghq.com", "agentVersion":"latest", "agentConfiguration":"https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip", "agentConfigurationChecksum":"<SHA256_CHECKSUM>"}' --protected-settings '{"api_key":"<DATADOG_API_KEY>"}' --no-auto-upgrade-minor-version
 {{< /code-block >}}
-
-#### Use a configuration from an existing Agent
-
-1. After installing the Agent, apply any desired [Agent configurations][202].
-2. Save the `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
-3. [Generate a SHA256 checksum from the Agent configuration file](#generate-a-sha256-checksum-from-the-agent-configuration-file-1).
-4. Upload the file to blob storage.
-5. Reference the blob storage URL with the `agentConfiguration` parameter and the checksum with the `agentConfigurationChecksum` parameter to create the VM extension.
 
 
 [200]: https://learn.microsoft.com/cli/azure/vm/extension
