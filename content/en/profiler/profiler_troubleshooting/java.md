@@ -73,9 +73,9 @@ jdk.OldObjectSample#enabled=true
 ## Enabling the heap class histogram collection
 <div class="alert alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
 
-To enable the heap class histogram collection, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable. This powers the Heap Occupancy metrics as well as improves the Memory Leaks workflow.
+To enable the heap class histogram collection, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable. This powers the Heap Occupancy metrics and improves the Memory Leaks workflow.
 
-This data is collected when the JVM performs a Full Garbage Collection cycle and so may only appear intermittently or not at all if your service does not have significant memory pressure.
+This data is collected when the JVM performs a Full Garbage Collection cycle and may only appear intermittently or not at all if your service does not have significant memory pressure.
 
 ## Removing sensitive information from profiles
 
