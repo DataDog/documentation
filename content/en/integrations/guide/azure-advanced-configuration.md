@@ -111,8 +111,8 @@ The normal settings include:
 |----------|------|--------------|
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
-| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
-| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
+| `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a ZIP file. |
+| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration ZIP file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
 
@@ -127,13 +127,14 @@ The protected settings include:
 This example shows how to specify a configuration for the Datadog Agent to use.
 The Datadog Agent configuration URI must be an Azure blob storage URI.
 The Datadog Windows Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
-See the [sample `config_template.yaml` file][102] for all available configuration options.
+The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder (see the [sample `config_template.yaml` file][102] for all available configuration options).
 
-**Note**: You can use an existing Agent's configuration by navigating to that Agent's `%ProgramData%\Datadog` file and removing any extra installation artifacts or files that may be present. Ensure that the folder contains only:
-    -  `datadog.yaml`
-    -  `conf.d` folder containing your integration configurations
-Then, save the sanitized `%ProgramData%\Datadog` folder as a zip file.
+<div class="alert alert-info">
+You can reuse the configuration of an existing Agent:
+
+   1. Remove any extra installation artifacts or files from the existing Agent's <code>%ProgramData%\Datadog</code> folder so that it only contains the <code>datadog.yaml</code> file and <code>conf.d</code> folder with your integration configurations.
+   1. Save the sanitized <code>%ProgramData%\Datadog</code> folder as a ZIP file.
+</div>
 
 #### Generate a SHA256 checksum from the Agent configuration file
 
@@ -182,7 +183,7 @@ The normal settings include:
 | `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
 | `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
 | `agentConfiguration` | URI | (optional) URI to the Azure blob containing the Agent configuration as a zip file. |
-| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
+| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration ZIP file, mandatory if `agentConfiguration` is specified. |
 
 The protected settings include:
 
@@ -197,10 +198,13 @@ The protected settings include:
 This example shows how to specify a configuration for the Datadog Agent to use.
 - The Datadog Agent configuration URI must be an Azure blob storage URI.
 - The Datadog Linux Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-- The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
-- See the [sample `config_template.yaml` file][201] for all available configuration options.
+- The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder (see the [sample `config_template.yaml` file][201] for all available configuration options).
 
-**Note**: You can use an existing Agent's configuration. Save the configured Agent's `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
+<div class="alert alert-info">
+You can reuse the configuration of an existing Agent by saving its <code>/etc/datadog-agent</code> folder as a ZIP file:
+
+<code>zip -r datadog_config.zip /etc/datadog-agent</code>.
+</div>
 
 #### Generate a SHA256 checksum from the Agent configuration file
 
