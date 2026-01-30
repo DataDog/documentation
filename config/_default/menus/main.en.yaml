@@ -8947,6 +8947,11 @@ menu:
       url: account_management/governance_console/
       parent: account_management
       weight: 8
+    - name: Controls
+      identifier: account_management_governance_console_controls
+      url: account_management/governance_console/controls 
+      parent: account_management_governance_console
+      weight: 801
     - name: Multi-Factor Authentication
       identifier: account_management_mfa
       url: account_management/multi-factor_authentication/
