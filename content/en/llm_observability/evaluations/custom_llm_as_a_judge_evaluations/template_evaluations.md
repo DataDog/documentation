@@ -64,7 +64,7 @@ We provide the following categories of failure to answer, listed in the followig
 
 This evaluation helps understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This check accurately classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
-<!-- {{< img src="llm_observability/evaluations/sentiment_5.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
+{{< img src="llm_observability/evaluations/sentiment_6.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|---|
@@ -74,7 +74,7 @@ This evaluation helps understand the overall mood of the conversation, gauge use
 
 This evaluation evaluates each input and output prompt from the user and the response from the LLM application for toxic content. This check identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
-<!-- {{< img src="llm_observability/evaluations/toxicity_4.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
+{{< img src="llm_observability/evaluations/toxicity_5.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|---|
@@ -103,7 +103,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][6],
 
 This evaluation identifies attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
-<!-- {{< img src="llm_observability/evaluations/prompt_injection_4.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
+{{< img src="llm_observability/evaluations/prompt_injection_5.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|---|
