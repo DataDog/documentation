@@ -772,7 +772,7 @@ override:
 {{% /tab %}}
 {{< /tabs >}}
 
-##### Custom api server configuration
+##### Custom API server configuration
 
 If your setup does not expose the default `KUBERNETES_SERVICE_HOST` & `KUBERNETES_SERVICE_PORT` environment variables, then a `api_server` url can be supplied to interact with the Kubernetes REST API.
 
