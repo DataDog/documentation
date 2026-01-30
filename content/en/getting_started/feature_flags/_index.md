@@ -96,10 +96,9 @@ Go to [**Create Feature Flag**][2] in Datadog and configure the following:
 
 * **Name and key**: The flag's display name and the key referenced in code
 * **Variant type**: The data type for the flag variants (Boolean, string, integer, number, or JSON)
-* **Variant values**: The possible values the flag can return (you can add these later)
 
   **Note**: The <b>flag key</b> and <b>variant type</b> cannot be modified after creation.
-
+* **Variant values**: The possible values the flag can return (you can add these later)
 * **Distribution channels**: Which types of SDKs receive this flag's configuration (client-side, server-side, or both)
 
 <div class="alert alert-warning">
