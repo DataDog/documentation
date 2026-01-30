@@ -35,24 +35,29 @@ You can use this source to:
 
 Before you configure the MySQL source, complete the following prerequisites to ensure that Observability Pipelines can validate credentials, connectivity, and queries before they are used in Observability Pipelines. Use a [tool](#external-tools-for-validating-queries) external to Observability Pipelines, such as MySQL Workbench or third-party tools, to complete these steps.
 
-### Create a database role
+1. [Create a database role](#1-create-a-database-role).
+1. [Validate the connection string](#2-validate-the-connection-string).
+1. [Write, validate, and test SQL queries](#3-write-validate-and-test-sql-queries).
+1. [Store the SQL query in a local file](#4-store-the-sql-query-in-a-local-file).
+
+### 1. Create a database role
 
 Create a database [role][4] for log collection, if you don't already have one. The role must:
 - Have read-only access, with no permissions to modify or write data.
 - Have permission to execute the target queries used for log collection.
 - Be scoped to only the databases, schemas, and tables required for your log collection.
 
-### Validate the connection string
+### 2. Validate the connection string
 
 The connection string must:
 
 - Be able to authenticate using the role from the previous step.
 - Be able to successfully connect to the database from the environment in which the Observability Pipelines Worker runs.
+- Be in this format: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`.
 - Use the correct host, port, database name, and authentication mechanism.
 - Be tested prior to configuring it in Observability Pipelines, to avoid runtime failures.
-- Be in this format: `mysql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`.
 
-### Write, validate, and test SQL queries
+### 3. Write, validate, and test SQL queries
 
 Write and test your SQL queries. Validate all SQL queries with a [tool](#external-tools-for-validating-queries) external to Observability Pipelines and prior to configuring it in Observability Pipelines. [Store the SQL query in a local file](#store-the-sql-query-in-a-local-file) for the Worker to execute.
 
@@ -104,17 +109,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 1. Check the log in your destination to which your logs were sent and determine the last value sent.
 1. Manually reset the checkpoint value in the MySQL source in the pipelines UI.
 
-### Store the SQL query in a local file
-
-Store the SQL query that the Worker executes in a local file.
-
-**Notes**:
-
-- The SQL query file must contain only one query.
-- The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- The file must be in the default data directory: `var/lib/observability-pipelines-worker`. See [Advanced Worker Configurations][2] for more information.
-
-### External tools for validating queries
+#### External tools for validating queries
 
 Datadog recommends these tools for validating and testing queries:
 
@@ -124,6 +119,16 @@ Datadog recommends these tools for validating and testing queries:
   - TablePlus
   - DbVisualizer
 - Native MySQL tool: MySQL Workbench
+
+### 4. Store the SQL query in a local file
+
+Store the SQL query that the Worker executes in a local file.
+
+**Notes**:
+
+- The SQL query file must contain only one query.
+- The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+- The file must be in the default data directory: `var/lib/observability-pipelines-worker`. See [Advanced Worker Configurations][2] for more information.
 
 ## Set up the source while setting up a pipeline
 
@@ -158,8 +163,7 @@ Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, 
 
 #### One database per pipeline
 
-- You can have only one MySQL source per pipeline.
-- Multiple instances of the MySQL source requires separate pipelines.
+- You can have only one MySQL source per pipeline. Multiple instances of the MySQL source requires separate pipelines.
 - One pipeline can run only one SQL query.
 
 #### Single-node execution requirements
