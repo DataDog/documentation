@@ -9835,8 +9835,7 @@ menu:
           - v2
         operationids:
           - UpdatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Get a specific pipeline
       url: '#get-a-specific-pipeline'
@@ -9848,8 +9847,7 @@ menu:
           - v2
         operationids:
           - GetPipeline
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Delete a pipeline
       url: '#delete-a-pipeline'
@@ -9861,8 +9859,7 @@ menu:
           - v2
         operationids:
           - DeletePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Validate an observability pipeline
       url: '#validate-an-observability-pipeline'
@@ -9874,8 +9871,7 @@ menu:
           - v2
         operationids:
           - ValidatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
@@ -9887,8 +9883,7 @@ menu:
           - v2
         operationids:
           - CreatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: List pipelines
       url: '#list-pipelines'
@@ -9900,8 +9895,7 @@ menu:
           - v2
         operationids:
           - ListPipelines
-        unstable:
-          - v2
+        unstable: []
         order: 0
     - name: Okta Integration
       url: /api/latest/okta-integration/
