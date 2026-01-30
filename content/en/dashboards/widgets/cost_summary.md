@@ -46,7 +46,7 @@ This feature automatically excludes days with incomplete cost data. This helps y
 #### Cost type 
 Cost types determine how charges are calculated and presented in your widget. Learn more about the [different cost types][3] available. 
 
-**Note**: This option is available depending on the provider you choose. Cost Types are not applicable to all CCM integrations.
+**Note**: This option is available depending on the provider you choose. Cost Types are not applicable to all CCM providers.
 
 #### Enable container allocation
 This feature breaks down the costs of your cloud clusters to individual services and workloads running in those clusters so that shared infrastructure costs can be attributed to specific services and workloads. Learn more about [Container Cost Allocation][4].
