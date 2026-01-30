@@ -20,6 +20,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [GCP Secret Manager](#id-for-gcp)
 - [HashiCorp Vault](#id-for-hashicorp)
 - [Kubernetes Secrets](#id-for-kubernetes)
+- [Docker Secrets](#id-for-docker)
 - [File JSON](#id-for-json-yaml)
 - [File YAML](#id-for-json-yaml)
 
@@ -810,6 +811,108 @@ override:
 {{< /tabs >}}
 
 [5000]: https://kubernetes.io/docs/concepts/configuration/secret/
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
+
+**Available in Agent version 7.75+**
+
+The following Docker services are supported:
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `docker.secrets` | [Docker Secrets][5001] |
+
+##### Prerequisites
+
+The Docker secrets backend supports both [Docker Swarm secrets][5002] and [Docker Compose secrets][5003]. Both automatically mount secrets by default as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows). The Agent user must be able to read files at that location.
+
+##### Docker secret types
+
+Both secret types result in the same mounted file structure at `/run/secrets` that the `docker.secrets` backend reads from:
+
+**Swarm Secrets**
+- Stored in encrypted Raft log
+- Mounted at `/run/secrets/<secret_name>`
+
+**Compose Secrets**
+- **File-based**: Points to files on host, mounted at `/run/secrets/<secret_name>`
+- **External**: References Swarm secrets (requires Swarm mode)
+
+##### Configuration example
+
+Configure the Datadog Agent to use Docker Secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: docker.secrets
+
+# Reference secrets using the secret name (filename in /run/secrets)
+api_key: "ENC[dd_api_key]"
+```
+
+The ENC notation format is simply the secret name, which corresponds to the filename in `/run/secrets/`:
+- `ENC[api_key]` reads from `/run/secrets/api_key` (Linux) or `C:\ProgramData\Docker\secrets\api_key` (Windows)
+
+**Custom secrets path:**
+If your secrets are mounted at a different location, specify the path:
+
+```yaml
+secret_backend_type: docker.secrets
+secret_backend_config:
+  secrets_path: /custom/secrets/path
+```
+
+##### Docker Swarm example
+
+Create and use a Docker Swarm secret:
+
+```bash
+# Create the secret
+echo "<api_key_value>" | docker secret create dd_api_key -
+
+# Deploy Agent with secret mounted
+docker service create \
+  --name datadog-agent \
+  --secret dd_api_key \
+  --env DD_API_KEY="ENC[dd_api_key]" \
+  --env DD_SECRET_BACKEND_TYPE="docker.secrets" \
+  --env DD_SITE="datadoghq.com" \
+  --env DD_HOSTNAME="dd-agent" \
+  datadog/agent:latest
+```
+
+The secret `dd_api_key` is automatically mounted at `/run/secrets/dd_api_key`, and the Agent reads it using the `docker.secrets` backend.
+
+##### Docker Compose example
+
+Create a `docker-compose.yml` with file-based secrets:
+
+```yaml
+version: '3.8'
+
+services:
+  datadog:
+    image: datadog/agent:latest
+    environment:
+      - DD_API_KEY=ENC[dd_api_key]
+      - DD_SECRET_BACKEND_TYPE=docker.secrets
+      - DD_SITE=datadoghq.com
+      - DD_HOSTNAME=dd-agent
+    secrets:
+      - dd_api_key
+
+secrets:
+  dd_api_key:
+    file: ./secrets/api_key.txt
+```
+
+The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` in the container.
+
+[5001]: https://docs.docker.com/engine/swarm/secrets/
+[5002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
+[5003]: https://docs.docker.com/compose/how-tos/use-secrets/
 
 {{% /collapse-content %}}
 
