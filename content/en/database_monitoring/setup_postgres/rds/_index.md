@@ -69,7 +69,7 @@ By default, the agent only gathers [`EXPLAIN`][15] plans for a sampling of in-fl
 To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][16], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
 
 <div class="alert alert-danger">
-  <strong>Important:</strong> <code>auto_explain</code> produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> permission to control who can see the resulting plans, but the log lines themselves <i>are</i> visible to all users within your Datadog org. Using <a href="/logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
+<strong>Important:</strong> <code>auto_explain</code> produces log lines that may contain sensitive application data, similar to raw values in non-obfuscated SQL. Use the <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> permission to control access to the resulting plans. To restrict visibility of the log lines themselves—which are visible to all users in your Datadog organization by default—also configure <a href="/logs/guide/logs-rbac">RBAC for Logs</a>. Datadog recommends using both permissions to protect sensitive information effectively.
 </div>
 
 1. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
@@ -87,9 +87,9 @@ To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use 
 | `auto_explain.log_nested_statements` | `on` | Include nested statements |
 | `auto_explain.sample_rate`      | `1` | Explain all queries over duration |
 
-2. Following the [documentation for RDS DB parameter groups][17], change the `log_line_prefix` to enable richer event correlation. `auto_explain` ingestion requires this be set to `%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a`.
+2. Change the `log_line_prefix` to enable richer event correlation. For more information, see the [RDS DB parameter groups][17] documentation. `auto_explain` ingestion requires this be set to `%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a`.
 
-3. Follow [these instructions][18] to help ensure your RDS instances are forwarding logs to CloudWatch and Datadog.
+3. To ensure your RDS instances are forwarding logs to CloudWatch and Datadog, follow the instructions for [Amazon RDS Log Collection][18].
 
 
 ## Grant the Agent access
