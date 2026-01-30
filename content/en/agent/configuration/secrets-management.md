@@ -593,7 +593,7 @@ The following Kubernetes services are supported:
 
 | secret_backend_type value | Service |
 |---------------------------|---------|
-| `k8s.secrets` | [Kubernetes Secrets][5000] |
+| `k8s.secrets` | [Kubernetes Secrets][7000] |
 
 ##### Prerequisites
 
@@ -810,7 +810,7 @@ override:
 {{% /tab %}}
 {{< /tabs >}}
 
-[5000]: https://kubernetes.io/docs/concepts/configuration/secret/
+[7000]: https://kubernetes.io/docs/concepts/configuration/secret/
 
 {{% /collapse-content %}}
 
