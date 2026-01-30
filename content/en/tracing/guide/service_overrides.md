@@ -29,7 +29,7 @@ Integration overrides and service overrides are represented similarly in APM.
 
 #### In service and resource pages
 
-Services that are overrides are flagged as such in the service page header. On hover, find the list of base services where the service name is overridden.
+Services that are overrides are flagged in the service page header. Hover over the flag to see the list of base services where the service name is overridden.
 
 {{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
 
