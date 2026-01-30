@@ -111,7 +111,7 @@ Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. 
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
-Starting with Agent v7.77+, tag annotations support [Autodiscovery template variables][5] for dynamic tagging based on runtime metadata. All template variables are supported with the exception of `%%env_<VAR>%%`.
+Starting with Agent v7.77+, tag annotations support [Autodiscovery template variables][5] for dynamic tagging based on runtime metadata. With the exception of `%%env_<VAR>%%`, all template variables are supported.
 
 ```yaml
 annotations:
