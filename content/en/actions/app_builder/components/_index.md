@@ -411,7 +411,7 @@ Is Visible
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 {{% /collapse-content %}}
 
