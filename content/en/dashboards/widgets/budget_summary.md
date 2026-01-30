@@ -27,12 +27,6 @@ Use the Budget Summary widget to track your Cloud Cost budgets and spending dire
 3. (Optional) Modify the values for each tag to filter the budget view. This does not affect the Budget configuration itself.
 4. (Optional) Change the time frame to show your budget and spend across the selected months. The time frame is restricted to what is configured in the Budget.
 
-## API
-
-This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][3]:
-
-{{< dashboards-widgets-api >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -54,12 +54,6 @@ This feature breaks down the costs of your cloud clusters to individual services
 #### Show usage charges only
 This feature excludes fees, taxes, refunds, and credits from your cloud costs.
 
-## API
-
-This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
-
-{{< dashboards-widgets-api >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
