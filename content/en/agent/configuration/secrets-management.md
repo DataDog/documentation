@@ -852,7 +852,7 @@ secret_backend_type: docker.secrets
 api_key: "ENC[dd_api_key]"
 ```
 
-The ENC notation format is simply the secret name, which corresponds to the filename in `/run/secrets/`:
+The ENC notation format is the secret name, which corresponds to the filename in `/run/secrets/`:
 - `ENC[api_key]` reads from `/run/secrets/api_key` (Linux) or `C:\ProgramData\Docker\secrets\api_key` (Windows)
 
 **Custom secrets path:**
