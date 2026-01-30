@@ -305,10 +305,10 @@ This setup deploys the delegate role required for [cross-account scanning][18] a
 5. Enter a **StackSet name** (for example, `DatadogAgentlessScanningStackSet`).
 6. Configure the required parameters:
    - **ScannerInstanceRoleARN**: The ARN of the IAM role attached to your Agentless scanner instances.
-
-   The `ScannerInstanceRoleARN` establishes a trust relationship between the delegate role (created in target accounts) and your scanner instances (already running in the central account). This enables cross-account scanning where:
-
-   **Note**: The `ScannerInstanceRoleARN` must be the exact ARN of the scanner instance role (for example, `arn:aws:iam::123456789012:role/DatadogAgentlessScannerRole`). Using a root ARN such as `arn:aws:iam::123456789012:root` does not work.
+  
+  <div class="alert alert-danger">The <code>ScannerInstanceRoleARN</code> must be the exact ARN of the scanner instance role (for example, <code>arn:aws:iam::123456789012:role/DatadogAgentlessScannerRole</code>). Using a root ARN such as <code>arn:aws:iam::123456789012:root</code> does not work.</div>
+  
+  The `ScannerInstanceRoleARN` establishes a trust relationship between the delegate role (created in target accounts) and your scanner instances (already running in the central account). This enables cross-account scanning where:
    1. The scanner runs in Account A.
    2. The delegate role exists in Accounts B, C, D (deployed through the StackSet).
    3. The scanner assumes the delegate roles to scan resources in those accounts.
