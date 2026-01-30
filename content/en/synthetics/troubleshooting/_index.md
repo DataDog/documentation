@@ -163,6 +163,16 @@ IOS app features may not function properly during recording or execution due to 
 
 **Solution**: Use Ad Hoc or Development provisioning profiles when distributing your iOS app to minimize entitlement-related issues and improve compatibility.
 
+## Network Path tests
+
+### Datadog Agent not listed as an option in Locations & Agents
+
+For the Datadog Agent to appear as a selectable option during test creation, ensure all prerequisites are met and that the setup steps have been followed. See [Agent configuration][16] for more information.
+
+### Scheduled tests from the Datadog Agent is not running at the expected schedule
+
+In large or high-volume environments, scheduled tests may not run at the expected intervals if the Datadog Agent does not have enough workers to handle concurrent executions. To optimize performance and maintain consistent scheduling, ensure the number of configured workers meets or exceeds the total number of tests assigned to the agent by [increasing the number of workers][17]
+
 ## Private locations
 
 {{< tabs >}}
@@ -358,3 +368,5 @@ Additionally, Private Location versions `>v1.27` depend the `clone3` system call
 [13]: https://docs.docker.com/engine/security/seccomp/
 [14]: /synthetics/guide/step-duration
 [15]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+[16]: /synthetics/network_path_tests/#agent-configuration
+[17]: /network_monitoring/network_path/setup/?tab=linux#increase-the-number-of-workers
