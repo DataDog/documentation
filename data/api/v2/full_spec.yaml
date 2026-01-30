@@ -88386,6 +88386,8 @@ paths:
 
         - Logs Pipelines: `logs-pipeline`
 
+        - Case Management Projects: `case-management-project`
+
 
         #### Supported relations for resources
 
@@ -88437,7 +88439,9 @@ paths:
 
         On-Call Team Routing Rules  | `viewer`, `editor`
 
-        Logs Pipelines              | `viewer`, `processors_editor`, `editor`'
+        Logs Pipelines              | `viewer`, `processors_editor`, `editor`
+
+        Case Management Projects    | `viewer`, `contributor`, `manager`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
