@@ -70,10 +70,10 @@ Right Icon
 
 ### Events
 
-Event
+Event<br>
 : **Value**: click
 
-Reaction
+Reaction<br>
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
 
 State Function
@@ -110,7 +110,7 @@ Unit
 **Value**: string or expression
 
 Additional Text
-: The text that displays beneath the Value and Unit in the callout.
+: The text that displays beneath the Value and Unit in the callout.<br>
 **Value**: string or expression
 
 ### Style
@@ -124,20 +124,20 @@ Size
 **Provided values**: sm, md, lg, xl
 
 Centered 
-: Determines whether the text displays in the center of the callout. 
+: Determines whether the text displays in the center of the callout.<br>
 **Provided values**: on, off
 
 Borderless
-: Determines whether the callout has a border.
+: Determines whether the callout has a border.<br>
 **Provided values**: on, off
 
 ### Appearance
 
-Left Icon
+Left Icon<br>
 : Determines the icon displayed to the left of the callout's Value and Unit.
 **Provided values**: angleDown, angleLeft, angleRight, angleUp, arrowDown, arrowLeft, arrowRight, arrowUp, attentionCircled, ban, bell, bellSlashed, bidirectionalHorizontal, bidirectionalVertical, calendar, cancelCircled, cancelLight, check, checkCircled, cloud, code, cog, comment, copy, cursor, desktop, download, email, export, externalLink, eye, eyeSlashed, file, filter, flagEmpty, folder, globe, hashtag, heartEmpty, home, lightningEmpty, link, lock, lockOpen, magicWand, mention, minus, mobile, pencil, percent, phone, picture, play, plus, pushpin, pushpinSlashed, redo, refresh, search, starEmpty, starFilled, trash, undo, user, userMinus, userPlus, users; integration icons 
 
-Direction
+Direction<br>
 : Determines the direction of the arrow displayed to the right of the callout's Value and Unit.
 **Provided values**: up, down, none
 
@@ -173,6 +173,10 @@ Label
 : The text that displays at the top of the component.<br>
 **Value**: string or expression
 
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
 Options
 : The list of checkboxes that a user can select from. The format is an array of objects where each object consists of a `label` and `value` key-value pair. The minimum number of options is 1.<br>
 **Value**: expression<br>
@@ -189,6 +193,10 @@ Options
         }
       ]}
       ```
+
+Default Is Checked
+: The default state of the checkbox. If not provided, the checkbox will be unchecked by default.<br>
+**Value**: expression
 
 ### Appearance
 
@@ -210,7 +218,8 @@ Event
 : **Value**: change<br>
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action<br>
+
 
 State Function
 : fetch<br>
