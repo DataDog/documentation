@@ -127,7 +127,7 @@ The protected settings include:
 This example shows how to specify a configuration for the Datadog Agent to use.
 The Datadog Agent configuration URI must be an Azure blob storage URI.
 The Datadog Windows Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder (see the [sample `config_template.yaml` file][102] for all available configuration options).
+The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder (see the [sample `config_template.yaml` file][101] for all available configuration options).
 
 <div class="alert alert-info">
 You can reuse the configuration of an existing Agent:
@@ -163,8 +163,7 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 {{< /code-block >}}
 
 [100]: https://learn.microsoft.com/powershell/module/az.compute/set-azvmextension
-[101]: /agent/guide/agent-configuration-files/?tab=agentv6v7
-[102]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[101]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 {{% /tab %}}
 {{% tab "Linux" %}}
 
@@ -223,7 +222,6 @@ az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --ver
 
 [200]: https://learn.microsoft.com/cli/azure/vm/extension
 [201]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[202]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 {{% /tab %}}
 {{< /tabs >}}
 
