@@ -109,17 +109,37 @@ Unit
 : The unit associated with the value.<br>
 **Value**: string or expression
 
+Additional Text
+: The text that displays beneath the Value and Unit in the callout.
+**Value**: string or expression
+
 ### Style
 
 Style
 : The visual style of the component.<br>
-**Provided values**: default, success, warning, danger, blue, purple, pink, orange, yellow, red, green, gray, vivid blue, vivid purple, vivid pink, vivid orange, vivid yellow, vivid red, vivid green
+**Provided values**: default, primary, success, warning, danger, blue, purple, pink, orange, yellow, red, green, gray, sequential blue 1-3, sequential red 1-3, sequential orange 1-3, sequential green 1-3, sequential gray 1-4, vivid blue, vivid purple, vivid pink, vivid orange, vivid yellow, vivid red, vivid green, vivid gray
 
 Size
 : Responsively sizes the metric so that it is proportional to the sizing of the value.<br>
 **Provided values**: sm, md, lg, xl
 
+Centered 
+: Determines whether the text displays in the center of the callout. 
+**Provided values**: on, off
+
+Borderless
+: Determines whether the callout has a border.
+**Provided values**: on, off
+
 ### Appearance
+
+Left Icon
+: Determines the icon displayed to the left of the callout's Value and Unit.
+**Provided values**: angleDown, angleLeft, angleRight, angleUp, arrowDown, arrowLeft, arrowRight, arrowUp, attentionCircled, ban, bell, bellSlashed, bidirectionalHorizontal, bidirectionalVertical, calendar, cancelCircled, cancelLight, check, checkCircled, cloud, code, cog, comment, copy, cursor, desktop, download, email, export, externalLink, eye, eyeSlashed, file, filter, flagEmpty, folder, globe, hashtag, heartEmpty, home, lightningEmpty, link, lock, lockOpen, magicWand, mention, minus, mobile, pencil, percent, phone, picture, play, plus, pushpin, pushpinSlashed, redo, refresh, search, starEmpty, starFilled, trash, undo, user, userMinus, userPlus, users; integration icons 
+
+Direction
+: Determines the direction of the arrow displayed to the right of the callout's Value and Unit.
+**Provided values**: up, down, none
 
 Is Loading
 : Shows a loading indicator.<br>
