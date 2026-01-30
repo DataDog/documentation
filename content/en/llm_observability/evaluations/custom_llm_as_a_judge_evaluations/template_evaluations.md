@@ -19,7 +19,8 @@ To select a template:
 1. Click on the [Evaluations][11] page
 1. Click on ``Create Evaluation`` button
 1. Select the template of your choice
-1. Select the integration provider, account, and model you want to use. Note: Some integration providers require additional steps (like selecting Region for Amazon Bedrock or Project and Location for VertexAI.)
+1. Select the integration provider, account, and model you want to use. 
+- Note: Some integration providers require additional steps (like selecting Region for Amazon Bedrock or Project and Location for VertexAI.)
 1. (Optional) Select the ml application you would like the eval to run for.
 
 #### Topic relevancy
