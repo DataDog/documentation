@@ -358,6 +358,14 @@ Date range picker components have the following properties.
 
 ### General
 
+Label
+: The label that displays above the date range picker.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
 Default timeframe
 : The default timeframe that the date picker displays.<br>
 **Provided values**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
