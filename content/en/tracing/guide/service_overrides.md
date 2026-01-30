@@ -19,7 +19,7 @@ This page explains [**integration overrides**](#integration-override) and [**ser
 Both integration overrides and service overrides change the service name of spans. The initial service name is referred to as the [**base service**](#base-service).
 
 ### Integration overrides
-Datadog tracing libraries automatically set different service names on client spans to represent databases, queues, or third-party dependencies in integrations. These types of overrides are referred to as **integration overrides**. With inferred entities, integration overrides are no longer necessary to represent dependencies, and may pollute service lists and maps. For step-by-step instructions on how to remove integration overrides, see [Integration Override Removal][2]
+Datadog tracing libraries automatically set different service names on client spans to represent databases, queues, or third-party dependencies in integrations. These types of overrides are referred to as **integration overrides**. With inferred entities, integration overrides are not necessary to represent dependencies, and may pollute service lists and maps. For instructions on how to remove integration overrides, see [Integration Override Removal][2].
 
 ### Service overrides
 You can manually set the service name on spans. This gives you visibility into specific components of the service, such as shared libraries and middleware layers. These types of overrides are referred to as **service overrides**.
