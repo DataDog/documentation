@@ -50,7 +50,7 @@ To investigate a memory leak using the guided walkthrough:
 [3]: /profiler/enabling
 [4]: https://app.datadoghq.com/services
 [5]: /tracing/services/service_page/#memory-leaks
-[6]: /profiler/profiler_troubleshooting/java/?tab=jfr#enabling-the-heap-histogram-metrics
+[6]: /profiler/profiler_troubleshooting/java/?tab=jfr#enabling-the-heap-class-histogram-collection
 [7]: /profiler/enabling/dotnet/#configuration
 
 ## Further reading
