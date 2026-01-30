@@ -39,10 +39,10 @@ In `datadog.yaml`:
 
 ```yaml
 additional_endpoints:
-  "https://app.datadoghq.com":
+  "https://{{< region-param key="dd_site">}}":
   - apikey2
   - apikey3
-  "https://app.datadoghq.eu":
+  "<DD_SITE>" # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
   - apikey4
 ```
 
@@ -51,7 +51,7 @@ additional_endpoints:
 Requires Agent version >= 6.18 or 7.18.
 
 ```bash
-DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
+DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"<DD_SITE>\": [\"apikey4\"]}'
 ```
 
 ## APM
@@ -65,10 +65,10 @@ In `datadog.yaml`:
 apm_config:
   [...]
   additional_endpoints:
-    "https://trace.agent.datadoghq.com":
+    "https://trace.agent.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://trace.agent.datadoghq.eu":
+    "https://trace.agent.<DD_SITE>" # Replace "<DD_SITE>" with its value. For example, "https://trace.agent.datadoghq.eu" for the EU site.
     - apikey4
 ```
 
@@ -77,7 +77,7 @@ apm_config:
 Requires Agent version >= 6.19 or 7.19.
 
 ```bash
-DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
+DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.<DD_SITE>\": [\"apikey4\"]}'
 ```
 
 ## Continuous Profiler
@@ -92,11 +92,11 @@ In `datadog.yaml`:
 apm_config:
   [...]
   profiling_additional_endpoints:
-    "https://intake.profile.datadoghq.com/api/v2/profile":
+    "https://intake.profile.{{< region-param key="dd_site">}}/api/v2/profile":
     - apikey2
     - apikey3
-    "https://intake.profile.datadoghq.eu/api/v2/profile":
-    - apikey4
+    "https://intake.profile.<DD_SITE>/api/v2/profile": # Replace "<DD_SITE>" with its value. For example, "https://intake.profile.datadoghq.eu/api/v2/profile" for the EU site.
+    - apikey
 ```
 
 ### Environment variable configuration
@@ -104,7 +104,7 @@ apm_config:
 Requires Agent version >= 6.19 or 7.19.
 
 ```bash
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.{{< region-param key="dd_site">}}/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.<DD_SITE>/api/v2/profile\": [\"apikey4\"]}'
 ```
 
 **Note:** Uploads to additional endpoints for the Continuous Profiler product are done through best-effort delivery.
@@ -122,10 +122,10 @@ In `datadog.yaml`:
 process_config:
   [...]
   additional_endpoints:
-    "https://process.datadoghq.com":
+    "https://process.{{< region-param key="dd_site">}}/api/v2/profile":
     - apikey2
     - apikey3
-    "https://process.datadoghq.eu":
+    "https://process.<DD_SITE>": # Replace "<DD_SITE>" with its value. For example, "https://process.datadoghq.eu" for the EU site.
     - apikey4
 ```
 
@@ -134,7 +134,7 @@ process_config:
 Requires Agent version >= 6.20 or 7.20.
 
 ```bash
-DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
+DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://process.DD_SITE\": [\"apikey4\"]}'
 ```
 
 ## Cluster Agent metrics
@@ -147,7 +147,7 @@ In Datadog `values.yaml`:
 clusterAgent:
   env:
     - name: DD_ADDITIONAL_ENDPOINTS
-      value: '{"https://app.datadoghq.com": ["apikey2"]}'
+      value: '{"https://app.{{< region-param key="dd_site">}}": ["apikey2"]}'
 ```
 ### Cluster Agent metrics provider
 
@@ -158,26 +158,26 @@ external_metrics_provider:
   endpoints:
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: https://app.datadoghq.eu
+    url: https://app.<DD_SITE> 
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: https://app.datadoghq.com
+    url: https://app.{{< region-param key="dd_site">}}
 {{< /code-block >}}
 
 ## Orchestrator
 
-### HELM configuration
+### HELM configuration    <!-- CONFIRM THIS SECTION APIs-->
 In Datadog `values.yaml`:
 ```yaml
 agents:
   customAgentConfig:
     process_config:
       additional_endpoints:
-        "https://process.datadoghq.com":
+        "https://process.{{< region-param key="dd_site">}}":
         - apikey2
     orchestrator_explorer:
       orchestrator_additional_endpoints:
-        "https://orchestrator.datadoghq.com":
+        "https://orchestrator.{{< region-param key="dd_site">}}":
         - apikey2
 
 clusterAgent:
@@ -193,7 +193,7 @@ clusterAgent:
 ### Environment variable configuration
 
 ```bash
-DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://orchestrator.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://orchestrator.datadoghq.eu\": [\"apikey4\"]}'
+DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://orchestrator.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://orchestrator.<DD_SITE>\": [\"apikey4\"]}'
 ```
 
 ## CI Visibility
@@ -207,17 +207,17 @@ In `datadog.yaml`:
 evp_proxy_config:
   [...]
   additional_endpoints:
-    "https://<VERSION>-app.agent.datadoghq.com":
+    "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://<VERSION>-app.agent.datadoghq.eu":
+    "https://<VERSION>-app.agent.<DD_SITE>":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://<VERSION>-app.agent.datadoghq.eu\": [\"apikey4\"]}'
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://<VERSION>-app.agent.<DD_SITE>\": [\"apikey4\"]}'
 ```
 
 ## Logs
@@ -234,7 +234,7 @@ logs_config:
   force_use_http: true
   additional_endpoints:
   - api_key: "apiKey2"
-    Host: "agent-http-intake.logs.datadoghq.com"
+    Host: "agent-http-intake.logs.{{< region-param key="dd_site">}}"
     Port: 443
     is_reliable: true
 ```
@@ -245,7 +245,7 @@ Requires Agent >= 6.18 or 7.18.
 
 ```bash
 DD_LOGS_CONFIG_FORCE_USE_HTTP=true
-DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -263,21 +263,21 @@ database_monitoring:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "dbm-metrics-intake.datadoghq.com"
+      Host: "dbm-metrics-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
   activity:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "dbquery-intake.datadoghq.com"
+      Host: "dbquery-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
   metrics:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "dbm-metrics-intake.datadoghq.com"
+      Host: "dbm-metrics-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
 ```
@@ -286,11 +286,11 @@ database_monitoring:
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
-DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.{{< region-param key="dd_site">}}"\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
-DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.{{< region-param key="dd_site">}}", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
-DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -308,7 +308,7 @@ network_devices:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "ndm-intake.datadoghq.com"
+      Host: "ndm-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
   snmp_traps:
@@ -316,7 +316,7 @@ network_devices:
       force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "ndm-intake.datadoghq.com"
+        Host: "ndm-intake.{{< region-param key="dd_site">}}"
         Port: 443
         is_reliable: true
   netflow:
@@ -324,7 +324,7 @@ network_devices:
       force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "ndm-intake.datadoghq.com"
+        Host: "ndm-intake.{{< region-param key="dd_site">}}"
         Port: 443
         is_reliable: true
 ```
@@ -333,7 +333,7 @@ network_devices:
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
-DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.{{< region-param key="dd_site">}}"\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -351,7 +351,7 @@ network_path:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "netpath-intake.datadoghq.com"
+      Host: "netpath-intake.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
 ```
@@ -360,7 +360,7 @@ network_path:
 
 ```bash
 DD_NETWORK_PATH_FORWARDER_USE_HTTP=true
-DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"netpath-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"netpath-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -376,7 +376,7 @@ compliance_config:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://<VERSION>-app.agent.datadoghq.eu"
+      Host: "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
 ```
@@ -385,7 +385,7 @@ compliance_config:
 
 ```bash
 DD_COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
+DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -400,7 +400,7 @@ runtime_security_config:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://<VERSION>-app.agent.datadoghq.eu"
+      Host: "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}"
       Port: 443
       is_reliable: true
 ```
@@ -409,7 +409,7 @@ runtime_security_config:
 
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
+DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -431,7 +431,7 @@ and add the relevant settings to `customAgentConfig`.
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
     additional_endpoints:
-      "https://app.datadoghq.com":
+      "https://app.{{< region-param key=\"dd_site\">}}":
       - apikey2
       - apikey3
       "https://app.datadoghq.eu":
