@@ -171,7 +171,7 @@ If you do not see the Datadog Agent listed as a selectable option during test cr
 
 ### Scheduled tests from the Datadog Agent is not running at the expected schedule
 
-In large or high-volume environments, scheduled tests may not run at the expected intervals if the Datadog Agent does not have enough workers to handle concurrent executions. To optimize performance and maintain consistent scheduling, ensure the number of configured workers meets or exceeds the total number of tests assigned to the agent by [increasing the number of workers][17]
+In large or high-volume environments, scheduled tests may not run at the expected intervals if the Datadog Agent does not have enough workers to handle concurrent executions. To optimize performance and maintain consistent scheduling, [increase the number of workers][17] to meet or exceed the total number of tests assigned to the Agent.
 
 ## Private locations
 
