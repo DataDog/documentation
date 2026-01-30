@@ -98,7 +98,7 @@ An _experiment_ lets you systematically test your LLM application by running you
 To create an experiment:
 
 
-1. Load a dataset
+### 1. Load a dataset
    ```python
    from ddtrace.llmobs import LLMObs
    from typing import Dict, Any, Optional, List
@@ -106,7 +106,7 @@ To create an experiment:
    dataset = LLMObs.pull_dataset("capitals-of-the-world")
    ```
 
-2. Define a task function that processes a single dataset record
+### 2. Define a task function that processes a single dataset record
 
    ```python
    def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
@@ -121,7 +121,7 @@ To create an experiment:
    If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 
-4. Define evaluator functions.
+### 3. Define evaluator functions.
 
    ```python
    def exact_match(input_data: Dict[str, Any], output_data: str, expected_output: str) -> bool:
@@ -148,7 +148,7 @@ To create an experiment:
    Evaluator functions can take any non-null type as `input_data` (string, number, Boolean, object, array); `output_data` and `expected_output` can be any type.
    Evaluators can only return a string, a number, or a Boolean.
 
-5. (Optional) Define summary evaluator function(s).
+### 4. (Optional) Define summary evaluator function(s).
 
    ```python
     def num_exact_matches(inputs, outputs, expected_outputs, evaluators_results):
@@ -158,7 +158,7 @@ To create an experiment:
    If defined and provided to the experiment, summary evaluator functions are executed after evaluators have finished running. Summary evaluator functions can take a list of any non-null type as `inputs` (string, number, Boolean, object, array); `outputs` and `expected_outputs` can be lists of any type. `evaluators_results` is a dictionary of list of results from evaluators, keyed by the name of the evaluator function. For example, in the above code snippet the summary evaluator `num_exact_matches` uses the results (a list of Booleans) from the `exact_match` evaluator to provide a count of number of exact matches.
    Summary evaluators can only return a string, a number, or a Boolean.
 
-6. Create and run the experiment.
+### 5. Create and run the experiment.
    ```python
    experiment = LLMObs.experiment(
        name="capital-cities-test",
@@ -201,14 +201,14 @@ To create an experiment:
    results = experiment.run(raise_errors=True)
    ```
 
-7. View your experiment results in Datadog.
+### 6. Review your experiment results in Datadog.
    ```
    print(f"View experiment: {experiment.url}")
    ```
 
 Note: LLM Experiments traces are retained for 90 days.
 
-### Setting up an automated experiment in CI/CD
+### Setting up your experiment in CI/CD
 You can run an `experiment` manually or configure it to run automatically in your CI/CD pipelines. For example, run it against your dataset on every change to compare results with your baseline and catch potential regressions.
 
 #### GitHub Actions

@@ -764,6 +764,14 @@ components:
       required: false
       schema:
         type: string
+    NotificationRuleIDPathParameter:
+      description: Notification Rule UUID
+      example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+      in: path
+      name: notification_rule_id
+      required: true
+      schema:
+        type: string
     OnDemandTaskId:
       description: The UUID of the task.
       example: 6d09294c-9ad9-42fd-a759-a0c1599b4828
@@ -3184,6 +3192,36 @@ components:
       required:
       - type
       type: object
+    AnyValue:
+      description: Represents any valid JSON value.
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/AnyValueString'
+      - $ref: '#/components/schemas/AnyValueNumber'
+      - $ref: '#/components/schemas/AnyValueObject'
+      - $ref: '#/components/schemas/AnyValueArray'
+      - $ref: '#/components/schemas/AnyValueBoolean'
+      type: object
+    AnyValueArray:
+      items:
+        $ref: '#/components/schemas/AnyValueItem'
+      type: array
+    AnyValueBoolean:
+      type: boolean
+    AnyValueItem:
+      oneOf:
+      - $ref: '#/components/schemas/AnyValueString'
+      - $ref: '#/components/schemas/AnyValueNumber'
+      - $ref: '#/components/schemas/AnyValueObject'
+      - $ref: '#/components/schemas/AnyValueBoolean'
+    AnyValueNumber:
+      format: double
+      type: number
+    AnyValueObject:
+      additionalProperties: {}
+      type: object
+    AnyValueString:
+      type: string
     ApiID:
       description: API identifier.
       example: 90646597-5fdb-4a17-a240-647003f8c028
@@ -5946,6 +5984,24 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    AutoCloseInactiveCases:
+      description: Auto-close inactive cases settings
+      properties:
+        enabled:
+          description: Whether auto-close is enabled
+          type: boolean
+        max_inactive_time_in_secs:
+          description: Maximum inactive time in seconds before auto-closing
+          format: int64
+          type: integer
+      type: object
+    AutoTransitionAssignedCases:
+      description: Auto-transition assigned cases settings
+      properties:
+        auto_transition_assigned_cases_on_self_assigned:
+          description: Whether to auto-transition cases when self-assigned
+          type: boolean
+      type: object
     AwsAccountId:
       description: The ID of the AWS account.
       example: '123456789012'
@@ -9395,6 +9451,214 @@ components:
       type: string
       x-enum-varnames:
       - PROJECTS
+    CaseNotificationRule:
+      description: A notification rule for case management
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseNotificationRuleAttributes'
+        id:
+          description: The notification rule's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseNotificationRuleResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CaseNotificationRuleAttributes:
+      description: Notification rule attributes
+      properties:
+        is_enabled:
+          description: Whether the notification rule is enabled
+          type: boolean
+        query:
+          description: Query to filter cases for this notification rule
+          type: string
+        recipients:
+          description: List of notification recipients
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleRecipient'
+          type: array
+        triggers:
+          description: List of triggers for this notification rule
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleTrigger'
+          type: array
+      type: object
+    CaseNotificationRuleCreate:
+      description: Notification rule create
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseNotificationRuleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/CaseNotificationRuleResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseNotificationRuleCreateAttributes:
+      description: Notification rule creation attributes
+      properties:
+        is_enabled:
+          default: true
+          description: Whether the notification rule is enabled
+          type: boolean
+        query:
+          description: Query to filter cases for this notification rule
+          type: string
+        recipients:
+          description: List of notification recipients
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleRecipient'
+          type: array
+        triggers:
+          description: List of triggers for this notification rule
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleTrigger'
+          type: array
+      required:
+      - recipients
+      - triggers
+      type: object
+    CaseNotificationRuleCreateRequest:
+      description: Notification rule create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleCreate'
+      required:
+      - data
+      type: object
+    CaseNotificationRuleRecipient:
+      description: Notification rule recipient
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleRecipientData'
+        type:
+          description: Type of recipient (SLACK_CHANNEL, EMAIL, HTTP, PAGERDUTY_SERVICE,
+            MS_TEAMS_CHANNEL)
+          example: EMAIL
+          type: string
+      type: object
+    CaseNotificationRuleRecipientData:
+      description: Recipient data
+      properties:
+        channel:
+          description: Slack channel name
+          type: string
+        channel_id:
+          description: Slack channel ID
+          type: string
+        channel_name:
+          description: Microsoft Teams channel name
+          type: string
+        connector_name:
+          description: Microsoft Teams connector name
+          type: string
+        email:
+          description: Email address
+          type: string
+        name:
+          description: HTTP webhook name
+          type: string
+        service_name:
+          description: PagerDuty service name
+          type: string
+        team_id:
+          description: Microsoft Teams team ID
+          type: string
+        team_name:
+          description: Microsoft Teams team name
+          type: string
+        tenant_id:
+          description: Microsoft Teams tenant ID
+          type: string
+        tenant_name:
+          description: Microsoft Teams tenant name
+          type: string
+        workspace:
+          description: Slack workspace name
+          type: string
+        workspace_id:
+          description: Slack workspace ID
+          type: string
+      type: object
+    CaseNotificationRuleResourceType:
+      default: notification_rule
+      description: Notification rule resource type
+      enum:
+      - notification_rule
+      example: notification_rule
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_RULE
+    CaseNotificationRuleResponse:
+      description: Notification rule response
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRule'
+      type: object
+    CaseNotificationRuleTrigger:
+      description: Notification rule trigger
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleTriggerData'
+        type:
+          description: Type of trigger (CASE_CREATED, STATUS_TRANSITIONED, ATTRIBUTE_VALUE_CHANGED,
+            EVENT_CORRELATION_SIGNAL_CORRELATED)
+          example: CASE_CREATED
+          type: string
+      type: object
+    CaseNotificationRuleTriggerData:
+      description: Trigger data
+      properties:
+        change_type:
+          description: Change type (added, removed, changed)
+          type: string
+        field:
+          description: Field name for attribute value changed trigger
+          type: string
+        from_status:
+          description: Status ID to transition from
+          type: string
+        from_status_name:
+          description: Status name to transition from
+          type: string
+        to_status:
+          description: Status ID to transition to
+          type: string
+        to_status_name:
+          description: Status name to transition to
+          type: string
+      type: object
+    CaseNotificationRuleUpdate:
+      description: Notification rule update
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseNotificationRuleAttributes'
+        type:
+          $ref: '#/components/schemas/CaseNotificationRuleResourceType'
+      required:
+      - type
+      type: object
+    CaseNotificationRuleUpdateRequest:
+      description: Notification rule update request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleUpdate'
+      required:
+      - data
+      type: object
+    CaseNotificationRulesResponse:
+      description: Response with notification rules
+      properties:
+        data:
+          description: Notification rules data
+          items:
+            $ref: '#/components/schemas/CaseNotificationRule'
+          type: array
+      type: object
     CaseObjectAttributes:
       additionalProperties:
         items:
@@ -13261,6 +13525,7 @@ components:
         type:
           $ref: '#/components/schemas/StatusPagesComponentGroupType'
       required:
+      - attributes
       - type
       type: object
     CreateComponentRequestDataAttributes:
@@ -13345,7 +13610,7 @@ components:
       properties:
         id:
           description: The ID of the group.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -13476,6 +13741,7 @@ components:
         type:
           $ref: '#/components/schemas/PatchDegradationRequestDataType'
       required:
+      - attributes
       - type
       type: object
     CreateDegradationRequestDataAttributes:
@@ -13511,7 +13777,7 @@ components:
       properties:
         id:
           description: The ID of the component. Must be a component of type `component`.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -14234,6 +14500,7 @@ components:
         type:
           $ref: '#/components/schemas/StatusPageDataType'
       required:
+      - attributes
       - type
       type: object
     CreateStatusPageRequestDataAttributes:
@@ -18162,7 +18429,7 @@ components:
       properties:
         id:
           description: The ID of the component.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -18207,7 +18474,7 @@ components:
       properties:
         id:
           description: Identifier of the component affected at the time of the update.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -18283,7 +18550,7 @@ components:
       properties:
         id:
           description: The ID of the status page.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -30447,6 +30714,212 @@ components:
             type: string
           type: array
       type: object
+    IntegrationIncident:
+      description: Incident integration settings
+      properties:
+        auto_escalation_query:
+          description: Query for auto-escalation
+          type: string
+        default_incident_commander:
+          description: Default incident commander
+          type: string
+        enabled:
+          description: Whether incident integration is enabled
+          type: boolean
+        field_mappings:
+          items:
+            $ref: '#/components/schemas/IntegrationIncidentFieldMappingsItems'
+          type: array
+        incident_type:
+          description: Incident type
+          type: string
+        severity_config:
+          $ref: '#/components/schemas/IntegrationIncidentSeverityConfig'
+      type: object
+    IntegrationIncidentFieldMappingsItems:
+      properties:
+        case_field:
+          type: string
+        incident_user_defined_field_id:
+          type: string
+      type: object
+    IntegrationIncidentSeverityConfig:
+      properties:
+        priority_mapping:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    IntegrationJira:
+      description: Jira integration settings
+      properties:
+        auto_creation:
+          $ref: '#/components/schemas/IntegrationJiraAutoCreation'
+        enabled:
+          description: Whether Jira integration is enabled
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/IntegrationJiraMetadata'
+        sync:
+          $ref: '#/components/schemas/IntegrationJiraSync'
+      type: object
+    IntegrationJiraAutoCreation:
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    IntegrationJiraMetadata:
+      properties:
+        account_id:
+          type: string
+        issue_type_id:
+          type: string
+        project_id:
+          type: string
+      type: object
+    IntegrationJiraSync:
+      properties:
+        enabled:
+          type: boolean
+        properties:
+          $ref: '#/components/schemas/IntegrationJiraSyncProperties'
+      type: object
+    IntegrationJiraSyncDueDate:
+      properties:
+        jira_field_id:
+          type: string
+        sync_type:
+          type: string
+      type: object
+    IntegrationJiraSyncProperties:
+      properties:
+        assignee:
+          $ref: '#/components/schemas/SyncProperty'
+        comments:
+          $ref: '#/components/schemas/SyncProperty'
+        custom_fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationJiraSyncPropertiesCustomFieldsAdditionalProperties'
+          type: object
+        description:
+          $ref: '#/components/schemas/SyncProperty'
+        due_date:
+          $ref: '#/components/schemas/IntegrationJiraSyncDueDate'
+        priority:
+          $ref: '#/components/schemas/SyncPropertyWithMapping'
+        status:
+          $ref: '#/components/schemas/SyncPropertyWithMapping'
+        title:
+          $ref: '#/components/schemas/SyncProperty'
+      type: object
+    IntegrationJiraSyncPropertiesCustomFieldsAdditionalProperties:
+      properties:
+        sync_type:
+          type: string
+        value:
+          $ref: '#/components/schemas/AnyValue'
+      type: object
+    IntegrationMonitor:
+      description: Monitor integration settings
+      properties:
+        auto_resolve_enabled:
+          description: Whether auto-resolve is enabled
+          type: boolean
+        case_type_id:
+          description: Case type ID for monitor integration
+          type: string
+        enabled:
+          description: Whether monitor integration is enabled
+          type: boolean
+        handle:
+          description: Monitor handle
+          type: string
+      type: object
+    IntegrationOnCall:
+      description: On-Call integration settings
+      properties:
+        auto_assign_on_call:
+          description: Whether to auto-assign on-call
+          type: boolean
+        enabled:
+          description: Whether On-Call integration is enabled
+          type: boolean
+        escalation_queries:
+          items:
+            $ref: '#/components/schemas/IntegrationOnCallEscalationQueriesItems'
+          type: array
+      type: object
+    IntegrationOnCallEscalationQueriesItems:
+      properties:
+        enabled:
+          type: boolean
+        id:
+          type: string
+        query:
+          type: string
+        target:
+          $ref: '#/components/schemas/IntegrationOnCallEscalationQueriesItemsTarget'
+      type: object
+    IntegrationOnCallEscalationQueriesItemsTarget:
+      properties:
+        dynamic_team_paging:
+          type: boolean
+        team_id:
+          type: string
+        user_id:
+          type: string
+      type: object
+    IntegrationServiceNow:
+      description: ServiceNow integration settings
+      properties:
+        assignment_group:
+          description: Assignment group
+          type: string
+        auto_creation:
+          $ref: '#/components/schemas/IntegrationServiceNowAutoCreation'
+        enabled:
+          description: Whether ServiceNow integration is enabled
+          type: boolean
+        instance_name:
+          description: ServiceNow instance name
+          type: string
+        sync_config:
+          $ref: '#/components/schemas/IntegrationServiceNowSyncConfig'
+      type: object
+    IntegrationServiceNowAutoCreation:
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    IntegrationServiceNowSyncConfig:
+      properties:
+        enabled:
+          type: boolean
+        properties:
+          $ref: '#/components/schemas/IntegrationServiceNowSyncConfig139772721534496'
+      type: object
+    IntegrationServiceNowSyncConfig139772721534496:
+      properties:
+        comments:
+          $ref: '#/components/schemas/SyncProperty'
+        priority:
+          $ref: '#/components/schemas/IntegrationServiceNowSyncConfigPriority'
+        status:
+          $ref: '#/components/schemas/SyncPropertyWithMapping'
+      type: object
+    IntegrationServiceNowSyncConfigPriority:
+      properties:
+        impact_mapping:
+          additionalProperties:
+            type: string
+          type: object
+        sync_type:
+          type: string
+        urgency_mapping:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     InterfaceAttributes:
       description: The interface attributes
       properties:
@@ -36572,7 +37045,10 @@ components:
       - name
       type: object
     MonitorNotificationRuleCondition:
-      description: Conditions for `conditional_recipients`.
+      description: 'A conditional recipient rule composed of a `scope` (the matching
+        condition) and
+
+        `recipients` (who to notify when it matches).'
       properties:
         recipients:
           $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
@@ -36585,8 +37061,13 @@ components:
       - recipients
       type: object
     MonitorNotificationRuleConditionScope:
-      description: The scope to which the monitor applied.
-      example: transition_type:alert
+      description: 'Defines the condition under which the recipients are notified.
+        Supported formats:
+
+        - Monitor status condition using `transition_type:<status>`, for example `transition_type:is_alert`.
+
+        - A single tag key:value pair, for example `env:prod`.'
+      example: transition_type:is_alert
       maxLength: 3000
       minLength: 1
       type: string
@@ -36639,18 +37120,18 @@ components:
           $ref: '#/components/schemas/MonitorNotificationRuleResourceType'
       type: object
     MonitorNotificationRuleFilter:
-      description: Filter used to associate the notification rule with monitors.
+      description: Specifies the matching criteria for monitor notifications.
       oneOf:
       - $ref: '#/components/schemas/MonitorNotificationRuleFilterTags'
       - $ref: '#/components/schemas/MonitorNotificationRuleFilterScope'
     MonitorNotificationRuleFilterScope:
       additionalProperties: false
-      description: Filter monitor notifications. A monitor notification must match
-        the scope.
+      description: Filters monitor notifications using a scope expression over key:value
+        pairs with boolean logic (AND, OR, NOT).
       properties:
         scope:
-          description: A scope composed of one or several key:value pairs, which can
-            be used to filter monitor notifications on monitor and group tags.
+          description: A scope expression composed by key:value pairs (e.g. `service:foo`)
+            with boolean operators (AND, OR, NOT) and parentheses for grouping.
           example: service:(foo OR bar) AND team:test NOT environment:staging
           maxLength: 3000
           minLength: 1
@@ -36660,12 +37141,11 @@ components:
       type: object
     MonitorNotificationRuleFilterTags:
       additionalProperties: false
-      description: Filter monitor notifications by tags. A monitor notification must
-        match all tags.
+      description: Filters monitor notifications by a list of tag key:value pairs.
       properties:
         tags:
-          description: A list of tags (key:value pairs), which can be used to filter
-            monitor notifications on monitor and group tags.
+          description: A list of tag key:value pairs (e.g. `team:product`). All tags
+            must match (AND semantics).
           example:
           - team:product
           - host:abc
@@ -43895,11 +44375,14 @@ components:
           $ref: '#/components/schemas/PatchComponentRequestDataAttributes'
         id:
           description: The ID of the component.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/StatusPagesComponentGroupType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchComponentRequestDataAttributes:
@@ -43938,11 +44421,14 @@ components:
           $ref: '#/components/schemas/PatchDegradationRequestDataAttributes'
         id:
           description: The ID of the degradation.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/PatchDegradationRequestDataType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchDegradationRequestDataAttributes:
@@ -43973,7 +44459,7 @@ components:
       properties:
         id:
           description: The ID of the component. Must be a component of type `component`.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         name:
@@ -44078,11 +44564,14 @@ components:
           $ref: '#/components/schemas/PatchStatusPageRequestDataAttributes'
         id:
           description: The ID of the status page.
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
           $ref: '#/components/schemas/StatusPageDataType'
       required:
+      - attributes
+      - id
       - type
       type: object
     PatchStatusPageRequestDataAttributes:
@@ -45019,13 +45508,51 @@ components:
     ProjectAttributes:
       description: Project attributes
       properties:
+        columns_config:
+          $ref: '#/components/schemas/ProjectColumnsConfig'
+        enabled_custom_case_types:
+          description: List of enabled custom case type IDs
+          items:
+            type: string
+          type: array
         key:
           description: The project's key
           example: CASEM
           type: string
         name:
           description: Project's name
+          example: Security Investigation
           type: string
+        restricted:
+          description: Whether the project is restricted
+          type: boolean
+        settings:
+          $ref: '#/components/schemas/ProjectSettings'
+      type: object
+    ProjectColumnsConfig:
+      description: Project columns configuration
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/ProjectColumnsConfigColumnsItems'
+          type: array
+      type: object
+    ProjectColumnsConfigColumnsItems:
+      properties:
+        sort:
+          $ref: '#/components/schemas/ProjectColumnsConfigColumnsItemsSort'
+        sort_field:
+          type: string
+        type:
+          type: string
+      type: object
+    ProjectColumnsConfigColumnsItemsSort:
+      properties:
+        ascending:
+          type: boolean
+        priority:
+          format: int64
+          type: integer
       type: object
     ProjectCreate:
       description: Project create
@@ -45041,13 +45568,21 @@ components:
     ProjectCreateAttributes:
       description: Project creation attributes
       properties:
+        enabled_custom_case_types:
+          description: List of enabled custom case type IDs
+          items:
+            type: string
+          type: array
         key:
           description: Project's key. Cannot be "CASE"
           example: SEC
           type: string
         name:
-          description: name
+          description: Project name
           example: Security Investigation
+          type: string
+        team_uuid:
+          description: Team UUID to associate with the project
           type: string
       required:
       - name
@@ -45060,6 +45595,32 @@ components:
           $ref: '#/components/schemas/ProjectCreate'
       required:
       - data
+      type: object
+    ProjectNotificationSettings:
+      description: Project notification settings
+      properties:
+        destinations:
+          description: Notification destinations (1=email, 2=slack, 3=in-app)
+          items:
+            type: integer
+          type: array
+        enabled:
+          description: Whether notifications are enabled
+          type: boolean
+        notify_on_case_assignment:
+          type: boolean
+        notify_on_case_closed:
+          type: boolean
+        notify_on_case_comment:
+          type: boolean
+        notify_on_case_comment_mention:
+          type: boolean
+        notify_on_case_priority_change:
+          type: boolean
+        notify_on_case_status_change:
+          type: boolean
+        notify_on_case_unassignment:
+          type: boolean
       type: object
     ProjectRelationship:
       description: Relationship to project
@@ -45104,6 +45665,63 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Project'
+      type: object
+    ProjectSettings:
+      description: Project settings
+      properties:
+        auto_close_inactive_cases:
+          $ref: '#/components/schemas/AutoCloseInactiveCases'
+        auto_transition_assigned_cases:
+          $ref: '#/components/schemas/AutoTransitionAssignedCases'
+        integration_incident:
+          $ref: '#/components/schemas/IntegrationIncident'
+        integration_jira:
+          $ref: '#/components/schemas/IntegrationJira'
+        integration_monitor:
+          $ref: '#/components/schemas/IntegrationMonitor'
+        integration_on_call:
+          $ref: '#/components/schemas/IntegrationOnCall'
+        integration_service_now:
+          $ref: '#/components/schemas/IntegrationServiceNow'
+        notification:
+          $ref: '#/components/schemas/ProjectNotificationSettings'
+      type: object
+    ProjectUpdate:
+      description: Project update
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProjectUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/ProjectResourceType'
+      required:
+      - type
+      type: object
+    ProjectUpdateAttributes:
+      description: Project update attributes
+      properties:
+        columns_config:
+          $ref: '#/components/schemas/ProjectColumnsConfig'
+        enabled_custom_case_types:
+          description: List of enabled custom case type IDs
+          items:
+            type: string
+          type: array
+        name:
+          description: Project name
+          type: string
+        settings:
+          $ref: '#/components/schemas/ProjectSettings'
+        team_uuid:
+          description: Team UUID to associate with the project
+          type: string
+      type: object
+    ProjectUpdateRequest:
+      description: Project update request
+      properties:
+        data:
+          $ref: '#/components/schemas/ProjectUpdate'
+      required:
+      - data
       type: object
     ProjectedCost:
       description: Projected Cost data.
@@ -59010,7 +59628,7 @@ components:
       properties:
         id:
           description: The ID of the group the component belongs to.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59049,7 +59667,7 @@ components:
       properties:
         id:
           description: The ID of the status page the component belongs to.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59191,7 +59809,7 @@ components:
       nullable: true
       properties:
         id:
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59233,7 +59851,7 @@ components:
       properties:
         id:
           description: The ID of the status page.
-          example: ''
+          example: 1234abcd-12ab-34cd-56ef-123456abcdef
           format: uuid
           type: string
         type:
@@ -59466,6 +60084,26 @@ components:
           type: array
         suppression:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
+      type: object
+    SyncProperty:
+      description: Sync property configuration
+      properties:
+        sync_type:
+          type: string
+      type: object
+    SyncPropertyWithMapping:
+      description: Sync property with mapping configuration
+      properties:
+        mapping:
+          additionalProperties:
+            type: string
+          type: object
+        name_mapping:
+          additionalProperties:
+            type: string
+          type: object
+        sync_type:
+          type: string
       type: object
     SyntheticsGlobalVariable:
       description: Synthetic global variable.
@@ -69882,6 +70520,202 @@ paths:
       - AuthZ:
         - cases_read
       summary: Get the details of a project
+      tags:
+      - Case Management
+      x-menu-order: 3
+    patch:
+      description: Update a project.
+      operationId: UpdateProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdateRequest'
+        description: Project payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update a project
+      tags:
+      - Case Management
+      x-menu-order: 5
+  /api/v2/cases/projects/{project_id}/notification_rules:
+    get:
+      description: Get all notification rules for a project.
+      operationId: GetProjectNotificationRules
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseNotificationRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
+      summary: Get notification rules
+      tags:
+      - Case Management
+      x-menu-order: 1
+    post:
+      description: Create a notification rule for a project.
+      operationId: CreateProjectNotificationRule
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseNotificationRuleCreateRequest'
+        description: Notification rule payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseNotificationRuleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Create a notification rule
+      tags:
+      - Case Management
+      x-menu-order: 2
+  /api/v2/cases/projects/{project_id}/notification_rules/{notification_rule_id}:
+    delete:
+      description: Delete a notification rule using the notification rule's `id`.
+      operationId: DeleteProjectNotificationRule
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/NotificationRuleIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Delete a notification rule
+      tags:
+      - Case Management
+      x-menu-order: 4
+    put:
+      description: Update a notification rule.
+      operationId: UpdateProjectNotificationRule
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/NotificationRuleIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseNotificationRuleUpdateRequest'
+        description: Notification rule payload
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update a notification rule
       tags:
       - Case Management
       x-menu-order: 3
