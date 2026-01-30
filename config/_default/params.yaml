@@ -72,6 +72,7 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
+    browser: Browser
     android: Android
     ios: iOS
     expo: Expo
