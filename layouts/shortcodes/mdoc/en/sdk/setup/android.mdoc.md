@@ -571,7 +571,7 @@ Tracking background events may lead to additional sessions, which can impact bil
 
 ## Sending data when device is offline
 
-The Android SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches.
+The Android SDK helps ensure availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches.
 
 Each batch follows the intake specification. Batches are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
@@ -604,6 +604,16 @@ Usage of the local resources can be tracked by using `getRawResAsRumResource` ex
 val inputStream = context.getRawResAsRumResource(id)
 ```
 
+## Start monitoring
+
+Visualize the [data collected][8] in [dashboards][20] or create a search query in the [RUM Explorer][6].
+
+Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+## Next steps
+
+See [Advanced Configuration][11].
+
 [1]:/real_user_monitoring/
 [3]: /error_tracking/frontend/mobile/android
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
@@ -622,4 +632,5 @@ val inputStream = context.getRawResAsRumResource(id)
 [17]: https://square.github.io/okhttp/features/interceptors/
 [18]: https://docs.datadoghq.com/help/
 [19]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
+[20]: /real_user_monitoring/platform/dashboards/
 

@@ -37,7 +37,7 @@ The Browser SDK supports all modern desktop and mobile browsers and provides aut
 
 {% partial file="sdk/setup/browser.mdoc.md" /%}
 
-## Sample RUM sessions
+#### Set session sampling rates
 
 To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while initializing the Browser SDK. For example, to sample 80% of sessions, set `sessionSampleRate` to 80:
 
@@ -54,9 +54,9 @@ datadogRum.init({
 
 For more information, see [Browser RUM & Session Replay Sampling][1].
 
-## Visualize your data
+## Start monitoring your application
 
-After you've completed the basic setup for RUM, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
+Now that you've completed the basic setup for RUM, your application is collecting browser errors and you can start monitoring and debugging issues in real-time.
 
 Visualize the [data collected][2] in [dashboards][3] or create a search query in the [RUM Explorer][4].
 

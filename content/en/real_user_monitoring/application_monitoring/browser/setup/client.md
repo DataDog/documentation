@@ -759,37 +759,7 @@ further_reading:
     >
     for additional setup steps.
   </p>
-  <h2 id="next-steps">Next steps</h2>
-  <p>
-    After installing and initializing the Browser SDK, complete the setup for
-    your specific product:
-  </p>
-  <ul>
-    <li>
-      <strong
-        ><a
-          href="/real_user_monitoring/application_monitoring/browser/setup/client"
-          >Real User Monitoring (RUM)</a
-        ></strong
-      >: Configure session sampling, visualize your data, and explore advanced
-      RUM features.
-    </li>
-    <li>
-      <strong
-        ><a href="/error_tracking/frontend/browser">Error Tracking</a></strong
-      >: Set up error tracking configuration and explore error monitoring
-      features.
-    </li>
-    <li>
-      <strong><a href="/session_replay/browser/">Session Replay</a></strong
-      >: Enable Session Replay to see user interactions and troubleshoot issues.
-    </li>
-    <li>
-      <strong><a href="/product_analytics/">Product Analytics</a></strong
-      >: Configure product analytics to track user behavior and product metrics.
-    </li>
-  </ul>
-  <h2 id="sample-rum-sessions">Sample RUM sessions</h2>
+  <h4 id="set-session-sampling-rates">Set session sampling rates</h4>
   <p>
     To control the data your application sends to Datadog RUM, you can specify a
     sampling rate for RUM sessions while initializing the Browser SDK. For
@@ -824,9 +794,11 @@ further_reading:
       >Browser RUM &amp; Session Replay Sampling</a
     >.
   </p>
-  <h2 id="visualize-your-data">Visualize your data</h2>
+  <h2 id="start-monitoring-your-application">
+    Start monitoring your application
+  </h2>
   <p>
-    After you've completed the basic setup for RUM, your application is
+    Now that you've completed the basic setup for RUM, your application is
     collecting browser errors and you can start monitoring and debugging issues
     in real-time.
   </p>

@@ -146,7 +146,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable"
     data-description="SDK is Browser"
-    data-if="13830"
+    data-if="1704"
   >
     <p>
       This page describes how to instrument your web applications with the
@@ -723,43 +723,11 @@ title: Client SDK Setup
       >
       for additional setup steps.
     </p>
-    <h2 id="next-steps">Next steps</h2>
-    <p>
-      After installing and initializing the Browser SDK, complete the setup for
-      your specific product:
-    </p>
-    <ul>
-      <li>
-        <strong
-          ><a
-            href="/real_user_monitoring/application_monitoring/browser/setup/client"
-            >Real User Monitoring (RUM)</a
-          ></strong
-        >: Configure session sampling, visualize your data, and explore advanced
-        RUM features.
-      </li>
-      <li>
-        <strong
-          ><a href="/error_tracking/frontend/browser">Error Tracking</a></strong
-        >: Set up error tracking configuration and explore error monitoring
-        features.
-      </li>
-      <li>
-        <strong><a href="/session_replay/browser/">Session Replay</a></strong
-        >: Enable Session Replay to see user interactions and troubleshoot
-        issues.
-      </li>
-      <li>
-        <strong><a href="/product_analytics/">Product Analytics</a></strong
-        >: Configure product analytics to track user behavior and product
-        metrics.
-      </li>
-    </ul>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="13831"
+    data-if="1705"
   >
     <p>
       This page describes how to instrument your applications for
@@ -1942,7 +1910,7 @@ title: Client SDK Setup
       Sending data when device is offline
     </h2>
     <p>
-      The Android SDK ensures availability of data when your user device is
+      The Android SDK helps ensure availability of data when your user device is
       offline. In case of low-network areas, or when the device battery is too
       low, all events are first stored on the local device in batches.
     </p>
@@ -2024,11 +1992,31 @@ title: Client SDK Setup
         </div>
       </div>
     </div>
+    <h2 id="start-monitoring">Start monitoring</h2>
+    <p>
+      Visualize the
+      <a href="/real_user_monitoring/android/data_collected/">data collected</a>
+      in <a href="/real_user_monitoring/platform/dashboards/">dashboards</a> or
+      create a search query in the
+      <a href="https://app.datadoghq.com/rum/list">RUM Explorer</a>.
+    </p>
+    <p>
+      Your application appears as pending on the Applications page until Datadog
+      starts receiving data.
+    </p>
+    <h2 id="next-steps">Next steps</h2>
+    <p>
+      See
+      <a
+        href="/real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters"
+        >Advanced Configuration</a
+      >.
+    </p>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="13832"
+    data-if="1706"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -3152,7 +3140,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="13833"
+    data-if="1707"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3779,7 +3767,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="13834"
+    data-if="1708"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5104,7 +5092,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="13835"
+    data-if="1709"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5338,7 +5326,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">3f0279</span><span class="n">e3</span><span class="p">-</span><span class="n">eff1</span><span class="p">-</span><span class="m">425</span><span class="n">d</span><span class="p">-</span><span class="n">aa6a</span><span class="p">-</span><span class="m">7935700</span><span class="n">a6345</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">80</span><span class="n">cdc6ce</span><span class="p">-</span><span class="m">0105</span><span class="p">-</span><span class="m">485f</span><span class="p">-</span><span class="n">ac6d</span><span class="p">-</span><span class="m">24</span><span class="n">d047697d0d</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5590,7 +5578,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="13836"
+    data-if="1710"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5847,7 +5835,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="13837"
+    data-if="1711"
   >
     <p>
       This page describes how to instrument your applications for
@@ -6416,7 +6404,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"13830":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"13830"},"13831":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"13831"},"13832":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"13832"},"13833":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"13833"},"13834":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"13834"},"13835":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"13835"},"13836":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"13836"},"13837":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"13837"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"1704":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"1704"},"1705":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"1705"},"1706":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"1706"},"1707":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"1707"},"1708":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"1708"},"1709":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"1709"},"1710":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"1710"},"1711":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"1711"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 

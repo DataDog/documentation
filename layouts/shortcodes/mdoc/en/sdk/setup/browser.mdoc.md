@@ -304,15 +304,6 @@ To be compliant with GDPR, CCPA, and similar regulations, the Browser SDK lets y
 
 If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][6] for additional setup steps.
 
-## Next steps
-
-After installing and initializing the Browser SDK, complete the setup for your specific product:
-
-- **[Real User Monitoring (RUM)][7]**: Configure session sampling, visualize your data, and explore advanced RUM features.
-- **[Error Tracking][11]**: Set up error tracking configuration and explore error monitoring features.
-- **[Session Replay][14]**: Enable Session Replay to see user interactions and troubleshoot issues.
-- **[Product Analytics][15]**: Configure product analytics to track user behavior and product metrics.
-
 [1]: https://app.datadoghq.com/rum/list
 [2]: https://www.npmjs.com/package/@datadog/browser-rum
 [3]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
