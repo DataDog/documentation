@@ -1,7 +1,13 @@
 ---
 title: HTTP Client Source
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' HTTP/S Client source to pull logs from the upstream HTTP/S server. Select and set up this source when you [set up a pipeline][1].
 

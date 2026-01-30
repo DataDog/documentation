@@ -2,6 +2,9 @@
 title: Observability Pipelines
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
   tag: Blog
   text: Manage metric volume and tags in your environment with Observability Pipelines
@@ -125,11 +128,11 @@ Observability Pipelines includes prebuilt templates for common data routing and 
 {{% tab "Metrics" %}}
 
 <div class="alert alert-info">
-Metrics Volume and Cardinality Control is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
+Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 | Template | Description |
 |----------|-------------|
-| Metrics Volume and Cardinality Control | Manage the quality and volume of your metrics by keeping only the metrics you need, standardizing metrics tagging, and removing unwanted tags to prevent high cardinality. |
+| Metric Tag Governance | Manage the quality and volume of your metrics by keeping only the metrics you need, standardizing metrics tagging, and removing unwanted tags to prevent high cardinality. |
 
 {{% /tab %}}
 {{< /tabs >}}

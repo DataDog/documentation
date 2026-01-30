@@ -1,6 +1,6 @@
 ---
 title: Network Path Testing
-description: Analyze global Network Paths with managed locations.
+description: Analyze global Network Paths with managed locations and private environments.
 aliases:
 further_reading:
 - link: "/network_monitoring/network_path/"
@@ -12,6 +12,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
+- link: "/synthetics/network_path_tests/glossary/"
+  tag: "Doc"
+  text: "Network Path terms and concepts"
 ---
 
 ## Overview
@@ -23,6 +26,8 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 <div class="alert alert-info">For information on billing for Network Path Testing in Synthetic Monitoring, see the <a href="https://www.datadoghq.com/pricing/?product=network-monitoring#products">pricing page</a>.</div>
 
 ## Test creation
+
+**Note**: This page covers running Network Path tests in Synthetic Monitoring, including [Agent-based configuration](#agent-configuration). For scheduled and dynamic tests in Network Monitoring, see the [Network Path Setup][7] documentation. See [understanding Network Path tests](#understanding-network-path-tests) for more information.
 
 1. In Datadog, hover over **Digital Experience** in the left-hand menu and select Tests (under Synthetic Monitoring & Testing).
 2. Click **New Test > Network Path Test**.
@@ -66,6 +71,10 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 {{% synthetics-alerting-monitoring-network-path %}}
 
 ## Agent configuration
+
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">Network Path testing with the Datadog Agent is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
 
 ### Prerequisites
 
@@ -131,6 +140,16 @@ Click on a test run in the table at the bottom of the page to view details for t
 
 <div class="alert alert-info">Network Path Testing data is retained for 30 days.</div>
 
+## Understanding Network Path tests
+
+Network Path tests use the same underlying functionality in both [Network Path][7] and Synthetic Monitoring, so tests created in one UI are visible in the other.
+
+**Capabilities**:
+
+- **Unified test creation**: You can create Network Path tests from either the Network Path UI or the Synthetic Monitoring UI. Both entry points use the same underlying functionality.
+- **UI-based test creation**: You can create Network Path tests directly from the Synthetic Monitoring UI with additional assertions on network data such as packet loss, latency, jitter, and number of hops.
+- **Proactive monitoring**: Group browser, API, and Network Path tests in [test suites][9] to monitor how network performance impacts application performance.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -141,6 +160,6 @@ Click on a test run in the table at the bottom of the page to view details for t
 [4]: /synthetics/network_path_tests/#define-alert-conditions
 [5]: /synthetics/network_path_tests/#configure-the-test-monitor
 [6]: /remote_configuration/#enable-remote-configuration
-[7]: /agent/
+[7]: /network_monitoring/network_path/setup/
 [8]: /agent/configuration/agent-commands/#restart-the-agent
 [9]: /synthetics/test_suites

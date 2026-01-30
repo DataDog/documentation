@@ -2,6 +2,8 @@
 aliases:
 - /es/dashboards/reporting/
 - /es/dashboards/scheduled_reports/
+description: Envía periódicamente archivos PDF de los dashboards a direcciones de
+  correo electrónico y canales de Slack con calendarios y plazos personalizables.
 disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/dashboard-sharing/

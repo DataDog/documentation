@@ -1,37 +1,37 @@
 <!--
     Output the latest version of a specific Lambda layer.
-    These version numbers are updated by the Serverless team.
+    These version numbers are updated by Automation from the Serverless Onboarding team.
 -->
 {{- if  not (.Get "layer") -}}{{ errorf "latest-lambda-layer-version shortcode error: Missing value for param 'layer': %s" .Position }}{{- end -}}
 
 <!-- Python Layer -->
 {{- if eq (.Get "layer") "python" -}}
-    119
+    121
 {{- end -}}
 
 <!-- Node Layer -->
 {{- if eq (.Get "layer") "node" -}}
-    131
+    133
 {{- end -}}
 
 <!-- Ruby Layer -->
 {{- if eq (.Get "layer") "ruby" -}}
-    26
+    27
 {{- end -}}
 
 <!-- Lambda Extension -->
 {{- if eq (.Get "layer") "extension" -}}
-    86
+    92
 {{- end -}}
 
 <!-- dd-trace-java Layer -->
 {{- if eq (.Get "layer") "dd-trace-java" -}}
-    24
+    25
 {{- end -}}
 
 <!-- dd-trace-dotnet Layer -->
 {{- if eq (.Get "layer") "dd-trace-dotnet" -}}
-    20
+    23
 {{- end -}}
 
 <!-- Python Versions -->
@@ -40,7 +40,7 @@
 {{- end -}}
 
 {{- if eq (.Get "layer") "python-example-version" -}}
-    Python313
+    Python314
 {{- end -}}
 
 <!-- Node Versions -->
@@ -50,4 +50,9 @@
 
 {{- if eq (.Get "layer") "node-example-version" -}}
     Node24-x
+{{- end -}}
+
+<!-- Ruby Versions -->
+{{- if eq (.Get "layer") "ruby-versions" -}}
+    `Ruby3-2`, `Ruby3-3`, `Ruby3-4`
 {{- end -}}

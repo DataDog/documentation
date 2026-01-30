@@ -107,7 +107,7 @@ end
 
 6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
+7. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][26] guide.
 
 ## Configuration
 
@@ -120,8 +120,8 @@ You can configure the profiler using the following environment variables:
 | `DD_PROFILING_ENABLED`                        | Boolean | If set to `true`, enables the profiler. Defaults to `false`.                                                                            |
 | `DD_PROFILING_ALLOCATION_ENABLED`             | Boolean | Set to `true` to enable allocation profiling. It requires the profiler to be enabled already. Defaults to `false`.                      |
 | `DD_PROFILING_MAX_FRAMES`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
-| `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
-| `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`. |
+| `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`. Not yet compatible with Ruby 4. |
+| `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`. Not yet compatible with Ruby 4. |
 | `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
 | `DD_PROFILING_PREVIEW_OTEL_CONTEXT_ENABLED`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `DD_ENV`                                      | String  | The [environment][10] name, for example: `production`.                                                                                  |
@@ -136,8 +136,8 @@ Alternatively, you can set profiler parameters in code with these functions, ins
 | `c.profiling.enabled`                                 | Boolean | If set to `true`, enables the profiler. Defaults to `false`.                                                                            |
 | `c.profiling.allocation_enabled`                      | Boolean | Set to `true` to enable allocation profiling. It requires the profiler to be enabled already. Defaults to `false`.                      |
 | `c.profiling.advanced.max_frames`                     | Integer | Maximum backtrace (stack) depth gathered by the profiler. Stacks deeper than this value get truncated. Defaults to `400`.               |
-| `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
-| `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `experimental_heap_size_enabled`. |
+| `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`. Not yet compatible with Ruby 4. |
+| `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to the same value as `experimental_heap_size_enabled`. Not yet compatible with Ruby 4. |
 | `c.profiling.advanced.no_signals_workaround_enabled`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
 | `c.profiling.advanced.preview_otel_context_enabled`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `c.env`                                               | String  | The [environment][10] name, for example: `production`.                                                                                  |
@@ -174,3 +174,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
 [24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
 [25]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[26]: /profiler/profiler_troubleshooting/ruby/

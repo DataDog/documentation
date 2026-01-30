@@ -62,7 +62,7 @@ To see who enabled Audit Trail:
 
 
 ### Permissions
-Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer.
 
 ### Archiving
 
@@ -174,7 +174,7 @@ Log management users can audit API key usage with Audit Trail. For API key audit
 
 ## Create a monitor
 
-To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][7]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
+To create a monitor on a type of audit trail event or by specific Audit Trail attributes, see the [Audit Trail Monitor documentation][7]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
 ## Create a dashboard or a graph
 
@@ -240,3 +240,4 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
 [17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
+

@@ -1,7 +1,13 @@
 ---
 title: Google Pub/Sub Source
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Google Pub/Sub source to pull logs from the Google Cloud Pub/Sub messaging system. Select and set up this source when you [set up a pipeline][1].
 

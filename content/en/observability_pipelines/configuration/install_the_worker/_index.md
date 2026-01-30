@@ -126,15 +126,19 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
 
 See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
+**Note**: If you enable [disk buffering][6] for destinations, you must enable Kubernetes [persistent volumes][7] in the Observability Pipelines helm chart.
+
 #### Self-hosted and self-managed Kubernetes clusters
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
-[2]: /observability_pipelines/update_existing_pipelines
+[2]: /observability_pipelines/configuration/update_existing_pipelines
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [4]: /observability_pipelines/environment_variables/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
+[6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -169,7 +173,7 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
 [3]: /observability_pipelines/environment_variables/
-[4]: /observability_pipelines/update_existing_pipelines
+[4]: /observability_pipelines/configuration/update_existing_pipelines
 
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
@@ -185,14 +189,14 @@ See [Update Existing Pipelines][4] if you want to make changes to your pipeline'
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 1. Select the AWS region you want to use to install the Worker.
 1. Click **Select API key** to choose the Datadog API key you want to use.
-    - **Note**: The API key must be [enabled for Remote Configuration][7002].
+    - **Note**: The API key must be [enabled for Remote Configuration][1].
 1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
 1. Select the VPC and subnet you want to use to install the Worker.
 1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
-[1]: /observability_pipelines/update_existing_pipelines
+[1]: /observability_pipelines/configuration/update_existing_pipelines/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -210,12 +214,83 @@ After you set up your source, destinations, and processors on the Build page of 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-{{% observability_pipelines/install_worker/docker %}}
+1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][1].
+1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
+    ```shell
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -e <SOURCE_ENV_VARIABLE> \
+        -e <DESTINATION_ENV_VARIABLE> \
+        -p 8088:8088 \
+        datadog/observability-pipelines-worker run
+    ```   
+    **Note**: By default, the `docker run` command exposes the same port the Worker is listening on. If you want to map the Worker's container port to a different port on the Docker host, use the `-p | --publish` option in the command:
+    ```
+    -p 8282:8088 datadog/observability-pipelines-worker run
+    ```
+1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
+
+[1]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[2]: /observability_pipelines/configuration/update_existing_pipelines/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-{{% observability_pipelines/install_worker/kubernetes %}}
+The Observability Pipelines Worker supports all major Kubernetes distributions, such as:
+
+- Amazon Elastic Kubernetes Service (EKS)
+- Azure Kubernetes Service (AKS)
+- Google Kubernetes Engine (GKE)
+- Red Hat Openshift
+- Rancher
+
+1. Download the [Helm chart values file][1]. See the [full list of configuration options][3] available.
+    - If you are not using a managed service, see [Self-hosted and self-managed Kubernetes clusters](#self-hosted-and-self-managed-kubernetes-clusters) before continuing to the next step.
+1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][4].
+1. Add the Datadog chart repository to Helm:
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    If you already have the Datadog chart repository, run the following command to make sure it is up to date:
+    ```shell
+    helm repo update
+    ```
+ 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
+    ```shell
+    helm upgrade --install opw \
+	-f values.yaml \
+	--set datadog.apiKey=<DATADOG_API_KEY> \
+	--set datadog.pipelineId=<PIPELINE_ID> \
+	--set <SOURCE_ENV_VARIABLES> \
+	--set <DESTINATION_ENV_VARIABLES> \
+	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
+	datadog/observability-pipelines-worker
+    ```
+    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
+    ```
+    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
+    ```
+1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
+
+**Note**: If you enable [disk buffering][5] for destinations, you must enable Kubernetes [persistent volumes][6] in the Observability Pipelines helm chart .
+
+#### Self-hosted and self-managed Kubernetes clusters
+
+If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
+
+[1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
+[2]: /observability_pipelines/configuration/update_existing_pipelines/
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
+[4]: https://app.datadoghq.com/organization-settings/remote-config/setup
+[5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -246,7 +321,27 @@ See [Set Up the Worker in ECS Fargate][1] for instructions.
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-{{% observability_pipelines/install_worker/cloudformation %}}
+1. Select one of the options in the dropdown to provide the expected log or metrics (in Preview) volume for the pipeline:
+|   Option   | Description |
+| ---------- | ----------- |
+| Unsure | Use this option if you are not able to project the data volume or you want to test the Worker. This option provisions the EC2 Auto Scaling group with a maximum of 2 general purpose `t4g.large` instances. |
+| 1-5 TB/day | This option provisions the EC2 Auto Scaling group with a maximum of 2 compute optimized instances `c6g.large`. |
+| 5-10 TB/day | This option provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 5 compute optimized `c6g.large` instances. |
+| >10 TB/day | Datadog recommends this option for large-scale production deployments. It provisions the EC2 Auto Scaling group with a minimum of 2 and a maximum of 10 compute optimized `c6g.xlarge` instances. |
+
+    **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
+1. Select the AWS region you want to use to install the Worker.
+1. Click **Select API key** to choose the Datadog API key you want to use.
+    - **Note**: The API key must be [enabled for Remote Configuration][2].
+1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
+1. Select the VPC and subnet you want to use to install the Worker.
+1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
+1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+
+See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
+
+[1]: /observability_pipelines/configuration/update_existing_pipelines/
+[2]: https://app.datadoghq.com/organization-settings/remote-config/setup
 
 {{% /tab %}}
 {{< /tabs >}}

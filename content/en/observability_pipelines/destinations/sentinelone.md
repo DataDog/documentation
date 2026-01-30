@@ -5,7 +5,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sentinelone/"
   tag: "blog"
   text: "Optimize EDR logs and route them to SentinelOne with Observability Pipelines"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne.
 
@@ -16,11 +22,7 @@ Set up the SentinelOne destination and its environment variables when you [set u
 ### Set up the destination
 
 1. Select your SentinelOne logs environment in the dropdown menu.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+{{% observability_pipelines/destination_buffer_numbered %}}
 
 ### Set the environment variables
 
