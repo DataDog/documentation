@@ -736,7 +736,7 @@ spec:
 {{< /tabs >}}
 
 ##### Custom path configuration
-If your setup does not follow the default locations for ServiceAccount based authentication, then a `token_path` and `ca_path` can be specified
+If your setup does not follow the default locations for ServiceAccount based authentication, you can specify `token_path` and `ca_path` instead.
 
 {{< tabs >}}
 {{% tab "Agent YAML" %}}
