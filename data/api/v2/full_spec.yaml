@@ -17146,6 +17146,89 @@ components:
       - started_at
       - finished_at
       type: object
+    DORADeploymentPatchRemediation:
+      description: Remediation details for the deployment.
+      properties:
+        id:
+          description: The ID of the remediation action.
+          example: eG42zNIkVjM
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentPatchRemediationType'
+      required:
+      - id
+      - type
+      type: object
+    DORADeploymentPatchRemediationType:
+      description: The type of remediation action taken.
+      enum:
+      - rollback
+      - rollforward
+      example: rollback
+      type: string
+      x-enum-varnames:
+      - ROLLBACK
+      - ROLLFORWARD
+    DORADeploymentPatchRequest:
+      description: Request to patch a DORA deployment event.
+      example:
+        data:
+          attributes:
+            change_failure: true
+            remediation:
+              id: eG42zNIkVjM
+              type: rollback
+          id: z_RwVLi7v4Y
+          type: dora_deployment_patch_request
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestData'
+      required:
+      - data
+      type: object
+    DORADeploymentPatchRequestAttributes:
+      description: Attributes for patching a DORA deployment event.
+      properties:
+        change_failure:
+          description: Indicates whether the deployment resulted in a change failure.
+          example: true
+          type: boolean
+        remediation:
+          $ref: '#/components/schemas/DORADeploymentPatchRemediation'
+      type: object
+    DORADeploymentPatchRequestData:
+      description: The JSON:API data for patching a deployment.
+      example:
+        attributes:
+          change_failure: true
+          remediation:
+            id: eG42zNIkVjM
+            type: rollback
+        id: z_RwVLi7v4Y
+        type: dora_deployment_patch_request
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestAttributes'
+        id:
+          description: The ID of the deployment to patch.
+          example: z_RwVLi7v4Y
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestDataType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    DORADeploymentPatchRequestDataType:
+      default: dora_deployment_patch_request
+      description: JSON:API type for DORA deployment patch request.
+      enum:
+      - dora_deployment_patch_request
+      example: dora_deployment_patch_request
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENT_PATCH_REQUEST
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -37045,7 +37128,10 @@ components:
       - name
       type: object
     MonitorNotificationRuleCondition:
-      description: Conditions for `conditional_recipients`.
+      description: 'A conditional recipient rule composed of a `scope` (the matching
+        condition) and
+
+        `recipients` (who to notify when it matches).'
       properties:
         recipients:
           $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
@@ -37058,8 +37144,13 @@ components:
       - recipients
       type: object
     MonitorNotificationRuleConditionScope:
-      description: The scope to which the monitor applied.
-      example: transition_type:alert
+      description: 'Defines the condition under which the recipients are notified.
+        Supported formats:
+
+        - Monitor status condition using `transition_type:<status>`, for example `transition_type:is_alert`.
+
+        - A single tag key:value pair, for example `env:prod`.'
+      example: transition_type:is_alert
       maxLength: 3000
       minLength: 1
       type: string
@@ -37112,18 +37203,18 @@ components:
           $ref: '#/components/schemas/MonitorNotificationRuleResourceType'
       type: object
     MonitorNotificationRuleFilter:
-      description: Filter used to associate the notification rule with monitors.
+      description: Specifies the matching criteria for monitor notifications.
       oneOf:
       - $ref: '#/components/schemas/MonitorNotificationRuleFilterTags'
       - $ref: '#/components/schemas/MonitorNotificationRuleFilterScope'
     MonitorNotificationRuleFilterScope:
       additionalProperties: false
-      description: Filter monitor notifications. A monitor notification must match
-        the scope.
+      description: Filters monitor notifications using a scope expression over key:value
+        pairs with boolean logic (AND, OR, NOT).
       properties:
         scope:
-          description: A scope composed of one or several key:value pairs, which can
-            be used to filter monitor notifications on monitor and group tags.
+          description: A scope expression composed by key:value pairs (e.g. `service:foo`)
+            with boolean operators (AND, OR, NOT) and parentheses for grouping.
           example: service:(foo OR bar) AND team:test NOT environment:staging
           maxLength: 3000
           minLength: 1
@@ -37133,12 +37224,11 @@ components:
       type: object
     MonitorNotificationRuleFilterTags:
       additionalProperties: false
-      description: Filter monitor notifications by tags. A monitor notification must
-        match all tags.
+      description: Filters monitor notifications by a list of tag key:value pairs.
       properties:
         tags:
-          description: A list of tags (key:value pairs), which can be used to filter
-            monitor notifications on monitor and group tags.
+          description: A list of tag key:value pairs (e.g. `team:product`). All tags
+            must match (AND semantics).
           example:
           - team:product
           - host:abc
@@ -53413,12 +53503,14 @@ components:
       - api_security
       - application_security
       - log_detection
+      - workload_activity
       - workload_security
       type: string
       x-enum-varnames:
       - API_SECURITY
       - APPLICATION_SECURITY
       - LOG_DETECTION
+      - WORKLOAD_ACTIVITY
       - WORKLOAD_SECURITY
     SecurityMonitoringRuleTypeRead:
       description: The rule type.
@@ -53429,6 +53521,7 @@ components:
       - cloud_configuration
       - application_security
       - api_security
+      - workload_activity
       type: string
       x-enum-varnames:
       - LOG_DETECTION
@@ -53437,6 +53530,7 @@ components:
       - CLOUD_CONFIGURATION
       - APPLICATION_SECURITY
       - API_SECURITY
+      - WORKLOAD_ACTIVITY
     SecurityMonitoringRuleTypeTest:
       description: The rule type.
       enum:
@@ -75239,6 +75333,47 @@ paths:
         operator: OR
         permissions:
         - dora_metrics_read
+    patch:
+      description: Use this API endpoint to patch a deployment event.
+      operationId: PatchDORADeployment
+      parameters:
+      - description: The ID of the deployment event.
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORADeploymentPatchRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Patch a deployment event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
   /api/v2/dora/failure:
     post:
       description: 'Use this API endpoint to provide failure data.
