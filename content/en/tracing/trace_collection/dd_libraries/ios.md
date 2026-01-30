@@ -282,8 +282,10 @@ The `trackingConsent` can be one of the following values:
     - `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
     - `.granted`: The SDK starts collecting the data and sends it to Datadog.
     - `.notGranted`: The SDK does not collect any data: logs, traces, and RUM events are not sent to Datadog.
-To change the tracking consent value after the SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
-The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
+
+    To change the tracking consent value after the SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
+    
+    The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
     - If changed to `.granted`, the SDK send all current and future data to Datadog;
     - If changed to `.notGranted`, the SDK wipe all current data and stop collecting any future data.
 
