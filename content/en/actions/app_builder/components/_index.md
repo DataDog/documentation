@@ -463,7 +463,7 @@ Default value
 
 ### Fields
 
-Each item represents a field in the form. Fields each have one of the following types: `textInput`, `select`, `textArea`, or `text`.
+Each item represents a field in the form. Fields each have one of the following types: `textInput`, `select`, `textArea`, `text`, or `checkbox`.
 
 Fields have some or all of the following properties depending on their field type:
 
@@ -474,6 +474,14 @@ Field name
 Label
 : The label that displays above the field.<br>
 **Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the field. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
+Validations
+: The rules to ensure users enter valid input. All rules must pass for validation to succeed.
+**Provided values**: pattern, minimum length, maximum length, custom rule
 
 Content
 : The content that displays in a `text` field.<br>
