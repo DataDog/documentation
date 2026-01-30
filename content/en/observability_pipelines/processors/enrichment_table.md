@@ -79,7 +79,7 @@ To set up the Enrichment Table processor:
   1. Click **Manage** to go to the Reference Tables configuration page.
   1. (Optional) Select specific columns with which to enrich your logs.
       - Observability Pipelines enriches logs with all columns in the table by default. If you want to cherry pick columns, you can specify certain attributes to be added. Only selected attributes are enriched.
-  1. Enter a Datadog Application key identifier. [Application keys][1] are used by Observability Pipelines to access Datadog's programmatic API when enriching data.
+  1. Enter a Datadog application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data.
       - Configure your application key in your organization settings under the [Service Accounts][2] page before you deploy the pipeline.
       - Associate your application keys with a [Service Account][3] (not a personal Datadog user account).
       - Application keys can be viewed exactly once, when you create them. Copy and store the value in your secrets manager. If you lose or forget a service account key, revoke it and create another one.
