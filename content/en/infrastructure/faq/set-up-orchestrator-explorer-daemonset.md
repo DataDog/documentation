@@ -1,5 +1,5 @@
 ---
-title: Set up Orchestrator Explorer with DaemonSet
+title: Set up Kubernetes Explorer with DaemonSet
 
 further_reading:
 - link: "/infrastructure/containers"
@@ -7,7 +7,7 @@ further_reading:
   text: "Containers View"
 ---
 
-This page contains instructions for setting up the Orchestrator Explorer using a DaemonSet.
+This page contains instructions for setting up the Kubernetes Explorer using a DaemonSet.
 
 [Cluster Agent][1] version >= 1.11.0 is required before configuring the DaemonSet. The Cluster Agent must be running, and the Agent must be able to communicate with it. See the [Cluster Agent Setup][2] for configuration.
 
