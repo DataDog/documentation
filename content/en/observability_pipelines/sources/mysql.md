@@ -26,14 +26,14 @@ You can use this source to:
 
 - Periodically extract transaction or access records stored in MySQL for audit and compliance reporting.
 - Analyze, alert, and build dashboards on event data stored in MySQL. For example:
-  - Application logs: Many legacy, regulated, or IoT devices write records to MySQL tables. These events often contain session activity, device information, and custom application logs. The Database source lets you extract the data you want and ingest it as logs for downstream alerting and investigation.
+  - Application logs: Many legacy, regulated, or IoT devices write records to MySQL tables. These events often contain session activity, device information, and custom application logs. The MySQL source lets you extract the data you want and ingest it as logs for downstream alerting and investigation.
   - Operational events and business-critical records: Many organizations store operational events in MySQL as a system of record. These databases contain data like ERP, billing, order, inventory, ticketing, and fulfillment info. Teams often query tables for dashboards, scheduled alerts, and investigations.
   - Edge device telemetry: Some smaller devices write events, such as diagnostics, maintenance, and errors, into SQL tables. For example, a pacemaker syncs periodically and saves the records in MySQL, which a DevOps team then uses in their logging tool.
 - Pull user or product information stored in MySQL to assist in troubleshooting issues or investigating threats.
 
 ## Prerequisites
 
-Before you configure the MySQL source, complete the following prerequisites to ensure that Observability Pipelines can validate credentials, connectivity, and queries before using them in Observability Pipelines. Use a [tool](#external-tools-for-testing) external to Observability Pipelines, such as MySQL Workbench or third-party tools, to complete these steps.
+Before you configure the MySQL source, complete the following prerequisites to ensure that Observability Pipelines can validate credentials, connectivity, and queries before they are used in Observability Pipelines. Use a [tool](#external-tools-for-validating-queries) external to Observability Pipelines, such as MySQL Workbench or third-party tools, to complete these steps.
 
 ### Create a database role
 
@@ -44,7 +44,7 @@ Create a database [role][4] for log collection, if you don't already have one. T
 
 ### Validate the connection string
 
-Validate the connection string, which must:
+The connection string must:
 
 - Be able to authenticate using the role from the previous step.
 - Be able to successfully connect to the database from the environment in which the Observability Pipelines Worker runs.
@@ -54,11 +54,12 @@ Validate the connection string, which must:
 
 ### Write, validate, and test SQL queries
 
-Write and test SQL queries. Validate all SQL queries with a [tool](#external-tools-for-validating-queries) external to Observability Pipelines and prior to configuring it in Observability Pipelines.
+Write and test your SQL queries. Validate all SQL queries with a [tool](#external-tools-for-validating-queries) external to Observability Pipelines and prior to configuring it in Observability Pipelines. [Store the SQL query in a local file](#store-the-sql-query-in-a-local-file) for the Worker to execute.
 
 **Notes**:
 
 - Only read-only queries are executed. This mean only `SELECT` and `SELECT DISTINCT` statements are supported. Queries that modify data (`INSERT`, `UPDATE`, `DELETE`, `DDL`) are all rejected.
+- Parameterized queries are supported for incremental execution. See [Incremental queries](#incremental-queries) for more information.
 - Ensure that each query executes successfully using the read-only role and returns the expected schema.
 
 #### Query types
@@ -66,47 +67,50 @@ Write and test SQL queries. Validate all SQL queries with a [tool](#external-too
 The Worker can run two kinds of queries:
 
 - **Batch queries**: The Worker executes the same database query each time and returns all the results specified. This option does not keep track of the rows you queried previously. An example use case is if you wanted to pull the same table of monthly financial statements from a database.
-- **Incremental queries**: The Worker tracks which rows are new from one execution to another. The Worker relies on using an [incremental column](#incremental-columns) to determine the latest set of data to pull.
+- **Incremental queries**: The Worker tracks which rows of data have already been pulled. The Worker uses an [incremental column](#incremental-columns) and the [checkpoint value](#checkpoint-values) to determine the latest set of data to pull.
 
 ##### Incremental queries
 
 For incremental querying, SQL queries must have the following to help ensure consistent results.
 
-- A `WHERE <incremental_column> <operation> <placeholder>` clause so that the source on each scheduled run can replace `placeholder` with the checkpoint value, and retrieve the latest results.
+- A `WHERE <incremental_column> <operation> <placeholder>` clause so that the MySQL source can replace `placeholder` with the [checkpoint value](#checkpoint-values) during each scheduled run, and retrieve the latest results.
   - `incremental_column`: A column with incremental values. This value must be the same as the column value set in the MySQL source configuration.
   - `operation`: Enter `>` , `<`, `>=`, or `<=` based on your use case.
   - `placeholder`: Enter `?`.
-- An `ORDER BY <incremental_column>` clause so that the database returns the rows in the expected order for the source to retrieve the latest values:
-
-This is an example that uses all the options: `SELECT * FROM orders WHERE order_id > ? ORDER BY order_id LIMIT 500;`
-  - If the last checkpoint value is `7`, this query retrieves all rows where the `order_id` column's value is greater than `7`.
+- An `ORDER BY <incremental_column>` clause so that the database returns the rows in the expected order for the MySQL source to retrieve the latest values.
+- This is an example that uses all the options: `SELECT * FROM orders WHERE order_id > ? ORDER BY order_id LIMIT 500;`
+    - If the last checkpoint value is `7`, this query retrieves all rows where the `order_id` column's value is greater than `7`.
 
 ##### Incremental columns
 
-Incremental columns are used to track the progress of each new query. The following column types for incremental querying are supported:
+Incremental columns are used to track the progress of each new query. The following column types are supported for incremental querying:
 
 - `Varchar`
 - `Int`, `float`, `real`, `bigint`, `number`
 - `Timestamp`
 - `Datetime`
 
-Datadog recommends using an unique incremental identifier for the incremental column. If you use an identifier that might not be unique, such as `timestamp`, there could be:
+Datadog recommends using a unique incremental identifier for the incremental column. If you use an identifier that is not unique, such as `timestamp`, there could be:
 
 - Data loss if you use strict operators, such as `>` or `<`, in your query.
 - Duplicated data if you use inclusive operators, such as `>=`.
 
 ##### Checkpoint values
 
-Checkpoint values are updated every job run. To monitor the checkpoint value, there are Worker logs that contain the message `Checkpoint updated` and the latest value that was published. If a job fails or the Worker is restarted mid-job or it crashes, the checkpoint value reverts to the start value. To determine the checkpoint value for a job that failed:
+Checkpoint values are updated every job run. To monitor the checkpoint value, there are Worker logs that contain the message `Checkpoint updated` and the latest value that was published. If a job fails or the Worker unexpectedly restarts or shuts down, the checkpoint value reverts to the start value. To determine the checkpoint value for a job that failed:
 
 1. Navigate to [Log Explorer][3] and search for Worker logs with the message `Checkpoint updated`.
 1. Check the value found in the latest Worker log to see what the Worker tracked.
 1. Check the log in your destination to which your logs were sent and determine the last value sent.
-1. Manually reset the checkpoint value in the Database source in the pipelines UI.
+1. Manually reset the checkpoint value in the MySQL source in the pipelines UI.
 
 ### Store the SQL query in a local file
 
-Store the SQL query that the Worker executes in its own local file.
+Store the SQL query that the Worker executes in a local file.
+
+**Notes**:
+
+- The SQL query file must contain only one query.
 - The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
 - The file must be in the default data directory: `var/lib/observability-pipelines-worker`. See [Advanced Worker Configurations][2] for more information.
 
@@ -154,18 +158,18 @@ Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, 
 
 #### One database per pipeline
 
-- You can have only one database source per pipeline.
-- Multiple instances of the same database type require separate pipelines.
+- You can have only one MySQL source per pipeline.
+- Multiple instances of the MySQL source requires separate pipelines.
 - One pipeline can run only one SQL query.
 
 #### Single-node execution requirements
 
 - Observability Pipelines Workers are deployed in a share-nothing architecture.
-- Datadog recommends deploying database pipelines using the MySQL source on one Worker node only. Otherwise, you run the risk of pulling duplicate data across multiple Workers.
+- Datadog recommends deploying pipelines using the MySQL source on one Worker node only. Otherwise, you run the risk of pulling duplicate data across multiple Workers.
 
 ### Manage credentials and IAM externally
 
-- Database users, roles, and permission must be created and managed outside of Datadog.
+- Database users, roles, and permissions must be created and managed outside of Datadog.
 - Connection strings should reference environment variables for secrets.
 
 [1]: https://app.datadoghq.com/observability-pipelines
