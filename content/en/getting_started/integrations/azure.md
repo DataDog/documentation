@@ -131,17 +131,16 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
    - App Service Plans
    - Container Apps
 
-You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
-
+   You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
 4. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
 5. Configure log collection:
-   a. If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
-   b. If you're creating a new log forwarder:
-      a. Enter a resource group name to store the log forwarder control plane.
-      b. Select a control plane subscription for the log-forwarding orchestration (LFO).
-      c. Select a region for the control plane.
-   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
+   - If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
+   - If you're creating a new log forwarder:
+     1. Enter a resource group name to store the log forwarder control plane.
+     1. Select a control plane subscription for the log-forwarding orchestration (LFO).
+     1. Select a region for the control plane.
 
+   See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
 6. Copy and run the command under **Initialize and apply the Terraform**.
 
 [100]: https://app.datadoghq.com/integrations/azure/
@@ -316,34 +315,6 @@ Use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 V
 To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][3].
 
 **Note**: Domain controllers are not supported when installing the Datadog Agent with the Azure extension.
-
-#### Apply a custom configuration with the agentConfiguration parameter
-
-You can use the `agentConfiguration` parameter to apply custom configurations to your Agents. Expand the section corresponding with your operating system below for instructions.
-
-{{% collapse-content title="Windows" level="h5" id="extension-custom-configuration-windows" %}}
-1. After installing the Agent, apply any desired [Agent configurations][300].
-2. Navigate to `%ProgramData%\Datadog`. Remove any extra installation artifacts or files that may be present. Ensure that the folder contains only:
-    -  `datadog.yaml`
-    -  `conf.d` folder containing your integration configurations
-3. Save the sanitized `%ProgramData%\Datadog` folder as a zip file.
-4. Generate a hash of the zipped folder using the PowerShell command `Get-FileHash %ProgramData%\Datadog.zip -Algorithm SHA256`.
-5. Upload the file to blob storage.
-6. Reference the blob storage URL with the `agentConfiguration` parameter to create the VM extension.
-
-[300]: /agent/guide/agent-configuration-files/?tab=agentv6v7
-{{% /collapse-content %}} 
-
-{{% collapse-content title="Linux" level="h5" id="extension-custom-configuration-linux" %}}
-1. After installing the Agent, apply any desired [Agent configurations][400].
-2. Save the `/etc/datadog-agent` folder as a zip file, using the command `zip -r datadog_config.zip /etc/datadog-agent`.
-3. Generate a hash of the zipped folder using the command `sha256sum datadog_config.zip`.
-4. Upload the file to blob storage.
-5. Reference the blob storage URL with the `agentConfiguration` parameter to create the VM extension.
-
-[400]: /agent/guide/agent-configuration-files/?tab=agentv6v7
-{{% /collapse-content %}} 
-
 
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
