@@ -305,7 +305,7 @@ For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`.
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-Note: Live-heap profiler is based on Datadog Profiler library, not JFR-based, so live heap profile type is not available on Windows.
+**Note**: Live-heap profiler is based on the Datadog Profiler library and not JFR. Live-heap profile type is not available on Windows.
 
 ### Collecting native stack traces
 
