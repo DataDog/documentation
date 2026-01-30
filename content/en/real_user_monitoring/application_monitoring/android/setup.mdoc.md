@@ -2,13 +2,13 @@
 title: Android and Android TV Monitoring Setup
 description: Collect RUM and Error Tracking data from your Android projects.
 content_filters:
-  - trait_id: sdk
-    option_group_id: sdk_platform_options
-    label: "SDK"
+- trait_id: sdk
+  option_group_id: sdk_platform_options
+  label: "SDK"
 aliases:
-    - /real_user_monitoring/android/
-    - /real_user_monitoring/setup/android
-    - /real_user_monitoring/mobile_and_tv_monitoring/android/setup
+- /real_user_monitoring/android/
+- /real_user_monitoring/setup/android
+- /real_user_monitoring/mobile_and_tv_monitoring/android/setup
 further_reading:
 - link: /real_user_monitoring/application_monitoring/android/advanced_configuration
   tag: Documentation

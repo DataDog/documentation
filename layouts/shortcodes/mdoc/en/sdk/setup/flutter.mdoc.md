@@ -12,11 +12,6 @@ This page describes how to instrument your applications for [Real User Monitorin
 1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][3].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Flutter Data Collected][4].
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][5] instead.
-{% /alert %}
 
 To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][6].
 
@@ -166,6 +161,16 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 * You change it to `TrackingConsent.granted`, the SDK sends all current and future data to Datadog;
 * You change it to `TrackingConsent.notGranted`, the SDK wipes all current data and does not collect any future data.
+
+#### Manage user data collection
+
+To manage user data collection settings for client IP or geolocation data:
+
+1. Go to **Manage Applications**.
+2. Select your application.
+3. Click **User Data Collection**, then toggle the settings to enable/disable **Collect geolocation data** and **Collect client IP data**.
+
+For more information about the data collected, see [Flutter Data Collected][4].
 
 ## Automatically track views
 

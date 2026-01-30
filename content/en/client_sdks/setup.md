@@ -146,7 +146,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable"
     data-description="SDK is Browser"
-    data-if="4449"
+    data-if="6366"
   >
     <p>
       This page describes how to instrument your web applications with the
@@ -783,7 +783,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="4450"
+    data-if="6367"
   >
     <p>
       This page describes how to instrument your applications for
@@ -2114,7 +2114,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="4451"
+    data-if="6368"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -2124,11 +2124,35 @@ title: Client SDK Setup
       <a href="/error_tracking/">Error Tracking setup guide</a> for specific
       steps.
     </p>
-    <p>
-      The Datadog iOS SDK requires Xcode 12.0 or later and supports iOS 11.0+
-      and tvOS 11.0+.
-    </p>
+    <h2 id="prerequisites">Prerequisites</h2>
+    <p>Before you begin, ensure you have:</p>
+    <ul>
+      <li>Xcode 12.0 or later</li>
+      <li>iOS 11.0+ or tvOS 11.0+ deployment target</li>
+      <li>A Datadog account with RUM or Error Tracking enabled</li>
+    </ul>
     <h2 id="setup">Setup</h2>
+    <p><strong>Choose your setup method:</strong></p>
+    <ul>
+      <li>
+        <strong
+          ><a href="/error_tracking/"
+            >Agentic Onboarding (in Preview)</a
+          ></strong
+        >: Use AI coding agents (Cursor, Claude Code) to automatically
+        instrument your iOS application with one prompt. The agent detects your
+        project structure and configures the RUM SDK for you.
+      </li>
+      <li>
+        <strong>Manual setup</strong> (below): Follow the instructions to
+        manually add and configure the RUM SDK in your iOS application.
+      </li>
+    </ul>
+    <h3 id="manual-setup">Manual setup</h3>
+    <p>
+      To send RUM data from your iOS or tvOS application to Datadog, complete
+      the following steps.
+    </p>
     <h3 id="step-1--add-the-ios-sdk-as-a-dependency">
       Step 1 - Add the iOS SDK as a dependency
     </h3>
@@ -3280,7 +3304,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="4452"
+    data-if="6369"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3307,28 +3331,7 @@ title: Client SDK Setup
         Provide an application name to generate a unique Datadog application ID
         and client token.
       </li>
-      <li>
-        To disable automatic user data collection for client IP or geolocation
-        data, uncheck the boxes for those settings. For more information, see
-        <a
-          href="/real_user_monitoring/application_monitoring/flutter/data_collected/"
-          >Flutter Data Collected</a
-        >.
-      </li>
     </ol>
-    <div class="alert alert-info">
-      <p>
-        If you've purchased Error Tracking as a standalone product (without
-        RUM), navigate to
-        <a
-          href="https://app.datadoghq.com/error-tracking/settings/setup/client/"
-          ><strong>Error Tracking</strong> &gt; <strong>Settings</strong> &gt;
-          <strong>Browser and Mobile</strong> &gt;
-          <strong>Add an Application</strong></a
-        >
-        instead.
-      </p>
-    </div>
     <p>
       To ensure the safety of your data, you must use a client token. For more
       information about setting up a client token, see the
@@ -3665,6 +3668,26 @@ title: Client SDK Setup
         all current data and does not collect any future data.
       </li>
     </ul>
+    <h4 id="manage-user-data-collection">Manage user data collection</h4>
+    <p>
+      To manage user data collection settings for client IP or geolocation data:
+    </p>
+    <ol>
+      <li>Go to <strong>Manage Applications</strong>.</li>
+      <li>Select your application.</li>
+      <li>
+        Click <strong>User Data Collection</strong>, then toggle the settings to
+        enable/disable <strong>Collect geolocation data</strong> and
+        <strong>Collect client IP data</strong>.
+      </li>
+    </ol>
+    <p>
+      For more information about the data collected, see
+      <a
+        href="/real_user_monitoring/application_monitoring/flutter/data_collected/"
+        >Flutter Data Collected</a
+      >.
+    </p>
     <h2 id="automatically-track-views">Automatically track views</h2>
     <p>
       If you are using Flutter Navigator v2.0, your setup for automatic view
@@ -3907,7 +3930,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="4453"
+    data-if="6370"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5248,7 +5271,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="4454"
+    data-if="6371"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5482,7 +5505,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">34200</span><span class="n">b93</span><span class="p">-</span><span class="n">e22e</span><span class="p">-</span><span class="m">483f</span><span class="p">-</span><span class="n">a04b</span><span class="p">-</span><span class="n">f57659631238</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="n">ea041275</span><span class="p">-</span><span class="n">e314</span><span class="p">-</span><span class="m">4</span><span class="n">ce3</span><span class="p">-</span><span class="n">b6d5</span><span class="p">-</span><span class="m">6576187</span><span class="n">de141</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5734,7 +5757,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="4455"
+    data-if="6372"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5991,7 +6014,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="4456"
+    data-if="6373"
   >
     <p>
       This page describes how to instrument your applications for
@@ -6560,7 +6583,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"4449":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"4449"},"4450":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"4450"},"4451":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"4451"},"4452":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"4452"},"4453":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"4453"},"4454":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"4454"},"4455":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"4455"},"4456":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"4456"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"6366":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"6366"},"6367":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"6367"},"6368":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"6368"},"6369":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"6369"},"6370":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"6370"},"6371":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"6371"},"6372":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"6372"},"6373":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"6373"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 

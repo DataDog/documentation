@@ -5,9 +5,23 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 This page describes how to instrument your iOS and tvOS applications for [Real User Monitoring (RUM)][1] with the iOS SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking setup guide][14] for specific steps.
 
-The Datadog iOS SDK requires Xcode 12.0 or later and supports iOS 11.0+ and tvOS 11.0+.
+## Prerequisites
+
+Before you begin, ensure you have:
+- Xcode 12.0 or later
+- iOS 11.0+ or tvOS 11.0+ deployment target
+- A Datadog account with RUM or Error Tracking enabled
 
 ## Setup
+
+**Choose your setup method:**
+
+- **[Agentic Onboarding (in Preview)][14]**: Use AI coding agents (Cursor, Claude Code) to automatically instrument your iOS application with one prompt. The agent detects your project structure and configures the RUM SDK for you.
+- **Manual setup** (below): Follow the instructions to manually add and configure the RUM SDK in your iOS application.
+
+### Manual setup
+
+To send RUM data from your iOS or tvOS application to Datadog, complete the following steps.
 
 ### Step 1 - Add the iOS SDK as a dependency
 
