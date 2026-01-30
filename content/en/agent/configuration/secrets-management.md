@@ -822,11 +822,11 @@ The following Docker services are supported:
 
 | secret_backend_type value | Service |
 |---------------------------|---------|
-| `docker.secrets` | [Docker Secrets][5001] |
+| `docker.secrets` | [Docker Secrets][6001] |
 
 ##### Prerequisites
 
-The Docker secrets backend supports both [Docker Swarm secrets][5002] and [Docker Compose secrets][5003]. Both automatically mount secrets by default as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows). The Agent user must be able to read files at that location.
+The Docker secrets backend supports both [Docker Swarm secrets][6002] and [Docker Compose secrets][6003]. Both automatically mount secrets by default as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows). The Agent user must be able to read files at that location.
 
 ##### Docker secret types
 
@@ -910,9 +910,9 @@ secrets:
 
 The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` in the container.
 
-[5001]: https://docs.docker.com/engine/swarm/secrets/
-[5002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
-[5003]: https://docs.docker.com/compose/how-tos/use-secrets/
+[6001]: https://docs.docker.com/engine/swarm/secrets/
+[6002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
+[6003]: https://docs.docker.com/compose/how-tos/use-secrets/
 
 {{% /collapse-content %}}
 
