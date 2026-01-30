@@ -89,7 +89,7 @@ To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use 
 
 2. Following the [documentation for RDS DB parameter groups][17], change the `log_line_prefix` to enable richer event correlation. `auto_explain` ingestion requires this be set to `%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a`.
 
-3. Follow [these instructions][18] to ensure your RDS instances are forwarding logs to CloudWatch and Datadog.
+3. Follow [these instructions][18] to help ensure your RDS instances are forwarding logs to CloudWatch and Datadog.
 
 
 ## Grant the Agent access
