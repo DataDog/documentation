@@ -83,8 +83,8 @@ For incremental querying, SQL queries must have the following to help ensure con
   - `operation`: Enter `>` , `<`, `>=`, or `<=` based on your use case.
   - `placeholder`: Enter `?`.
 - An `ORDER BY <incremental_column>` clause so that the database returns the rows in the expected order for the MySQL source to retrieve the latest values.
-- This is an example that uses all the options: `SELECT * FROM orders WHERE order_id > ? ORDER BY order_id LIMIT 500;`
-    - If the last checkpoint value is `7`, this query retrieves all rows where the `order_id` column's value is greater than `7`.
+
+This is an example that uses all the options: `SELECT * FROM orders WHERE order_id > ? ORDER BY order_id LIMIT 500;`. If the last checkpoint value is `7`, this query retrieves all rows where the `order_id` column's value is greater than `7`.
 
 ##### Incremental columns
 
