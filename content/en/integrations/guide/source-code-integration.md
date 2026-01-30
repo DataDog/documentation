@@ -150,15 +150,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 ##### Option 1: Docker
 
-You can embed git information in your Docker image using either build arguments with environment variables, or image labels.
-
-###### Using build arguments and environment variables
-
 {{% sci-docker %}}
-
-###### Using image labels
-
-{{% sci-docker-labels %}}
 
 ##### Option 2: Datadog Tracing Library
 
@@ -213,15 +205,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 ##### Option 1: Docker
 
-You can embed git information in your Docker image using either build arguments with environment variables, or image labels.
-
-###### Using build arguments and environment variables
-
 {{% sci-docker %}}
-
-###### Using image labels
-
-{{% sci-docker-labels %}}
 
 ##### Option 2: Setuptools or Unified Python Project Settings File
 
@@ -276,15 +260,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 ##### Option 1: Docker
 
-You can embed git information in your Docker image using either build arguments with environment variables, or image labels.
-
-###### Using build arguments and environment variables
-
 {{% sci-docker %}}
-
-###### Using image labels
-
-{{% sci-docker-labels %}}
 
 ##### Option 2: Microsoft SourceLink
 
@@ -342,15 +318,7 @@ If you are using Docker containers, you have three options: using a bundler plug
 
 ##### Option 2: Docker
 
-You can embed git information in your Docker image using either build arguments with environment variables, or image labels.
-
-###### Using build arguments and environment variables
-
 {{% sci-docker %}}
-
-###### Using image labels
-
-{{% sci-docker-labels %}}
 
 ##### Option 3: `DD_GIT_*` Environment Variables
 
@@ -395,15 +363,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 ##### Option 1: Docker
 
-You can embed git information in your Docker image using either build arguments with environment variables, or image labels.
-
-###### Using build arguments and environment variables
-
 {{% sci-docker-ddtags %}}
-
-###### Using image labels
-
-{{% sci-docker-labels %}}
 
 ##### Option 2: `DD_TAGS` Environment Variable
 
@@ -438,15 +398,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 ##### Option 1: Docker
 
-You can embed git information in your Docker image using either build arguments with environment variables, or image labels.
-
-###### Using build arguments and environment variables
-
 {{% sci-docker %}}
-
-###### Using image labels
-
-{{% sci-docker-labels %}}
 
 ##### Option 2: `DD_GIT_*` Environment Variables
 
@@ -481,15 +433,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 ##### Option 1: Docker
 
-You can embed git information in your Docker image using either build arguments with environment variables, or image labels.
-
-###### Using build arguments and environment variables
-
 {{% sci-docker %}}
-
-###### Using image labels
-
-{{% sci-docker-labels %}}
 
 ##### Option 2: `DD_GIT_*` Environment Variables
 
