@@ -247,6 +247,10 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
+Has Background
+: Determines whether the container has a background.<br>
+**Provided values**: on, off
+
 ### Inspect data
 
 Displays property and value pairs in JSON format.
