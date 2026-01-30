@@ -21,7 +21,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/datadog-mcp-server/" >}}
-The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview. If you're interested in this feature and need access, complete this form. Learn more about the MCP Server on the <a href="https://www.datadoghq.com/blog/datadog-remote-mcp-server/">Datadog blog</a>.
+The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in this feature and need access, complete this form.
 {{< /callout >}}
 
 ## Disclaimers
@@ -224,6 +224,8 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `core`: The default toolset
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][21]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][22] and [Test Optimization][25])
+- `error-tracking`: Tools for interacting with Datadog [Error Tracking][26]
+- `dbm`: Tools for interacting with [Database Monitoring][27]
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
@@ -451,6 +453,38 @@ Aggregates Datadog Test Optimization events to quantify reliability and performa
 - Show me the 95th-percentile duration for each test suite to identify the slowest ones.
 - Count all passing and failing tests, grouped by code owners.
 
+### `search_datadog_error_tracking_issues`
+*Toolset: **error-tracking***\
+Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
+
+- Show me all Error Tracking Issues in the checkout service from the last 24 hours.
+- What are the most common errors in my application over the past week?
+- Find Error Tracking Issues in the production environment with `service:api`.
+
+### `get_datadog_error_tracking_issue`
+*Toolset: **error-tracking***\
+Retrieves detailed information about a specific Error Tracking Issue from Datadog.
+
+- Help me solve Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
+- What is the impact of Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f`?
+- Create a test case to reproduce Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
+### `search_datadog_dbm_plans`
+*Toolset: **dbm***\
+Searches [Database Monitoring][27] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
+
+- Show me execution plans for slow queries on `host:db-prod-1` from the last hour.
+- Find query plans with `@db.plan.type:explain_analyze` for the production database.
+- Get execution plans for queries by `@db.user:app_user` with duration greater than 1 second.
+
+### `search_datadog_dbm_samples`
+*Toolset: **dbm***\
+Searches [Database Monitoring][27] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
+
+- Show me query samples with `@duration:>1000000000` (duration greater than 1 second) from `db:mydb`.
+- Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
+- Get recent query samples for `@db.query_signature:abc123def` and analyze performance patterns.
+
 ## Context efficiency
 
 The Datadog MCP Server is optimized to provide responses in a way that AI agents get relevant context without being overloaded with unnecessary information. For example:
@@ -495,3 +529,5 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [23]: https://kiro.dev/
 [24]: /account_management/org_settings/service_accounts/
 [25]: /tests/
+[26]: /error_tracking/
+[27]: /database_monitoring/

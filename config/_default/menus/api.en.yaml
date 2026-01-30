@@ -2729,6 +2729,18 @@ menu:
           - ConvertSecurityMonitoringRuleFromJSONToTerraform
         unstable: []
         order: 12
+    - name: Bulk export security monitoring rules
+      url: '#bulk-export-security-monitoring-rules'
+      identifier: security-monitoring-bulk-export-security-monitoring-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkExportSecurityMonitoringRules
+        unstable: []
+        order: 13
     - name: Create a detection rule
       url: '#create-a-detection-rule'
       identifier: security-monitoring-create-a-detection-rule
@@ -2921,6 +2933,78 @@ menu:
           - ListSecurityFilters
         unstable: []
         order: 18
+    - name: Update a critical asset
+      url: '#update-a-critical-asset'
+      identifier: security-monitoring-update-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Get a critical asset
+      url: '#get-a-critical-asset'
+      identifier: security-monitoring-get-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Delete a critical asset
+      url: '#delete-a-critical-asset'
+      identifier: security-monitoring-delete-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Get critical assets affecting a specific rule
+      url: '#get-critical-assets-affecting-a-specific-rule'
+      identifier: security-monitoring-get-critical-assets-affecting-a-specific-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCriticalAssetsAffectingRule
+        unstable: []
+        order: 0
+    - name: Create a critical asset
+      url: '#create-a-critical-asset'
+      identifier: security-monitoring-create-a-critical-asset
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityMonitoringCriticalAsset
+        unstable: []
+        order: 0
+    - name: Get all critical assets
+      url: '#get-all-critical-assets'
+      identifier: security-monitoring-get-all-critical-assets
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityMonitoringCriticalAssets
+        unstable: []
+        order: 0
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
       identifier: security-monitoring-list-vulnerable-assets
@@ -3090,8 +3174,7 @@ menu:
           - v2
         operationids:
           - GetSBOM
-        unstable:
-          - v2
+        unstable: []
         order: 27
     - name: List assets SBOMs
       url: '#list-assets-sboms'
@@ -3103,9 +3186,20 @@ menu:
           - v2
         operationids:
           - ListAssetsSBOMs
-        unstable:
-          - v2
+        unstable: []
         order: 28
+    - name: Search security findings
+      url: '#search-security-findings'
+      identifier: security-monitoring-search-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSecurityFindings
+        unstable: []
+        order: 2
     - name: Create Jira issues for security findings
       url: '#create-jira-issues-for-security-findings'
       identifier: security-monitoring-create-jira-issues-for-security-findings
@@ -3116,8 +3210,7 @@ menu:
           - v2
         operationids:
           - CreateJiraIssues
-        unstable:
-          - v2
+        unstable: []
         order: 47
     - name: Attach security findings to a Jira issue
       url: '#attach-security-findings-to-a-jira-issue'
@@ -3129,8 +3222,7 @@ menu:
           - v2
         operationids:
           - AttachJiraIssue
-        unstable:
-          - v2
+        unstable: []
         order: 48
     - name: Attach security findings to a case
       url: '#attach-security-findings-to-a-case'
@@ -3168,6 +3260,18 @@ menu:
           - DetachCase
         unstable: []
         order: 46
+    - name: List security findings
+      url: '#list-security-findings'
+      identifier: security-monitoring-list-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindings
+        unstable: []
+        order: 1
     - name: Get a finding
       url: '#get-a-finding'
       identifier: security-monitoring-get-a-finding
@@ -3722,6 +3826,78 @@ menu:
       url: /api/latest/synthetics/
       identifier: synthetics
       generated: true
+    - name: Patch a global variable
+      url: '#patch-a-global-variable'
+      identifier: synthetics-patch-a-global-variable
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchGlobalVariable
+        unstable: []
+        order: 20
+    - name: 'Synthetics: Edit a test suite'
+      url: '#synthetics-edit-a-test-suite'
+      identifier: synthetics-synthetics-edit-a-test-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EditSyntheticsSuite
+        unstable: []
+        order: 35
+    - name: 'Synthetics: Get a suite'
+      url: '#synthetics-get-a-suite'
+      identifier: synthetics-synthetics-get-a-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsSuite
+        unstable: []
+        order: 25
+    - name: Search Synthetics suites
+      url: '#search-synthetics-suites'
+      identifier: synthetics-search-synthetics-suites
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchSuites
+        unstable: []
+        order: 20
+    - name: 'Synthetics: Bulk delete suites'
+      url: '#synthetics-bulk-delete-suites'
+      identifier: synthetics-synthetics-bulk-delete-suites
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyntheticsSuites
+        unstable: []
+        order: 40
+    - name: 'Synthetics: Create a test suite'
+      url: '#synthetics-create-a-test-suite'
+      identifier: synthetics-synthetics-create-a-test-suite
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSyntheticsSuite
+        unstable: []
+        order: 30
     - name: Save new value for on-demand concurrency cap
       url: '#save-new-value-for-on-demand-concurrency-cap'
       identifier: synthetics-save-new-value-for-on-demand-concurrency-cap
@@ -4206,7 +4382,7 @@ menu:
           - CreateHostTags
         unstable: []
         order: 3
-    - name: Get host tags
+    - name: Get Host Tags
       url: '#get-host-tags'
       identifier: tags-get-host-tags
       parent: tags
@@ -4230,9 +4406,9 @@ menu:
           - DeleteHostTags
         unstable: []
         order: 5
-    - name: Get Tags
-      url: '#get-tags'
-      identifier: tags-get-tags
+    - name: Get All Host Tags
+      url: '#get-all-host-tags'
+      identifier: tags-get-all-host-tags
       parent: tags
       generated: true
       params:
@@ -6504,6 +6680,66 @@ menu:
           - GetCase
         unstable: []
         order: 3
+    - name: Update a notification rule
+      url: '#update-a-notification-rule'
+      identifier: case-management-update-a-notification-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProjectNotificationRule
+        unstable: []
+        order: 3
+    - name: Delete a notification rule
+      url: '#delete-a-notification-rule'
+      identifier: case-management-delete-a-notification-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteProjectNotificationRule
+        unstable: []
+        order: 4
+    - name: Create a notification rule
+      url: '#create-a-notification-rule'
+      identifier: case-management-create-a-notification-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateProjectNotificationRule
+        unstable: []
+        order: 2
+    - name: Get notification rules
+      url: '#get-notification-rules'
+      identifier: case-management-get-notification-rules
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetProjectNotificationRules
+        unstable: []
+        order: 1
+    - name: Update a project
+      url: '#update-a-project'
+      identifier: case-management-update-a-project
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProject
+        unstable: []
+        order: 5
     - name: Get the details of a project
       url: '#get-the-details-of-a-project'
       identifier: case-management-get-the-details-of-a-project
@@ -6876,9 +7112,9 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
-    - name: Get a budget
-      url: '#get-a-budget'
-      identifier: cloud-cost-management-get-a-budget
+    - name: Get budget
+      url: '#get-budget'
+      identifier: cloud-cost-management-get-budget
       parent: cloud-cost-management
       generated: true
       params:
@@ -6887,10 +7123,10 @@ menu:
         operationids:
           - GetBudget
         unstable: []
-        order: 36
-    - name: Delete a budget
-      url: '#delete-a-budget'
-      identifier: cloud-cost-management-delete-a-budget
+        order: 37
+    - name: Delete budget
+      url: '#delete-budget'
+      identifier: cloud-cost-management-delete-budget
       parent: cloud-cost-management
       generated: true
       params:
@@ -6899,7 +7135,31 @@ menu:
         operationids:
           - DeleteBudget
         unstable: []
+        order: 38
+    - name: Validate budget
+      url: '#validate-budget'
+      identifier: cloud-cost-management-validate-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateBudget
+        unstable: []
         order: 35
+    - name: Validate CSV budget
+      url: '#validate-csv-budget'
+      identifier: cloud-cost-management-validate-csv-budget
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateCsvBudget
+        unstable: []
+        order: 36
     - name: Create or update a budget
       url: '#create-or-update-a-budget'
       identifier: cloud-cost-management-create-or-update-a-budget
@@ -7416,6 +7676,18 @@ menu:
           - CreateDORAFailure
         unstable: []
         order: 2
+    - name: Patch a deployment event
+      url: '#patch-a-deployment-event'
+      identifier: dora-metrics-patch-a-deployment-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDORADeployment
+        unstable: []
+        order: 9
     - name: Get a deployment event
       url: '#get-a-deployment-event'
       identifier: dora-metrics-get-a-deployment-event
@@ -7681,6 +7953,23 @@ menu:
         operationids:
           - GetDomainAllowlist
         unstable: []
+        order: 1
+    - name: Entity Risk Scores
+      url: /api/latest/entity-risk-scores/
+      identifier: entity-risk-scores
+      generated: true
+    - name: List Entity Risk Scores
+      url: '#list-entity-risk-scores'
+      identifier: entity-risk-scores-list-entity-risk-scores
+      parent: entity-risk-scores
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListEntityRiskScores
+        unstable:
+          - v2
         order: 1
     - name: Error Tracking
       url: /api/latest/error-tracking/
@@ -8056,6 +8345,36 @@ menu:
         unstable:
           - v2
         order: 0
+    - name: High Availability MultiRegion
+      url: /api/latest/high-availability-multiregion/
+      identifier: high-availability-multiregion
+      generated: true
+    - name: Create or update HAMR organization connection
+      url: '#create-or-update-hamr-organization-connection'
+      identifier: high-availability-multiregion-create-or-update-hamr-organization-connection
+      parent: high-availability-multiregion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateHamrOrgConnection
+        unstable:
+          - v2
+        order: 1
+    - name: Get HAMR organization connection
+      url: '#get-hamr-organization-connection'
+      identifier: high-availability-multiregion-get-hamr-organization-connection
+      parent: high-availability-multiregion
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHamrOrgConnection
+        unstable:
+          - v2
+        order: 2
     - name: IP Allowlist
       url: /api/latest/ip-allowlist/
       identifier: ip-allowlist
@@ -8418,6 +8737,19 @@ menu:
         unstable:
           - v2
         order: 36
+    - name: Create postmortem attachment
+      url: '#create-postmortem-attachment'
+      identifier: incidents-create-postmortem-attachment
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentPostmortemAttachment
+        unstable:
+          - v2
+        order: 5
     - name: Create incident attachment
       url: '#create-incident-attachment'
       identifier: incidents-create-incident-attachment
@@ -8691,6 +9023,84 @@ menu:
         unstable:
           - v2
         order: 29
+    - name: Update global incident settings
+      url: '#update-global-incident-settings'
+      identifier: incidents-update-global-incident-settings
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGlobalIncidentSettings
+        unstable:
+          - v2
+        order: 39
+    - name: Get global incident settings
+      url: '#get-global-incident-settings'
+      identifier: incidents-get-global-incident-settings
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGlobalIncidentSettings
+        unstable:
+          - v2
+        order: 38
+    - name: Update global incident handle
+      url: '#update-global-incident-handle'
+      identifier: incidents-update-global-incident-handle
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGlobalIncidentHandle
+        unstable:
+          - v2
+        order: 42
+    - name: Create global incident handle
+      url: '#create-global-incident-handle'
+      identifier: incidents-create-global-incident-handle
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGlobalIncidentHandle
+        unstable:
+          - v2
+        order: 41
+    - name: List global incident handles
+      url: '#list-global-incident-handles'
+      identifier: incidents-list-global-incident-handles
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGlobalIncidentHandles
+        unstable:
+          - v2
+        order: 40
+    - name: Delete global incident handle
+      url: '#delete-global-incident-handle'
+      identifier: incidents-delete-global-incident-handle
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGlobalIncidentHandle
+        unstable:
+          - v2
+        order: 43
     - name: Create an incident
       url: '#create-an-incident'
       identifier: incidents-create-an-incident
@@ -8717,6 +9127,101 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Jira Integration
+      url: /api/latest/jira-integration/
+      identifier: jira-integration
+      generated: true
+    - name: Update Jira issue template
+      url: '#update-jira-issue-template'
+      identifier: jira-integration-update-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateJiraIssueTemplate
+        unstable:
+          - v2
+        order: 2
+    - name: Get Jira issue template
+      url: '#get-jira-issue-template'
+      identifier: jira-integration-get-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetJiraIssueTemplate
+        unstable:
+          - v2
+        order: 3
+    - name: Delete Jira issue template
+      url: '#delete-jira-issue-template'
+      identifier: jira-integration-delete-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJiraIssueTemplate
+        unstable:
+          - v2
+        order: 1
+    - name: Create Jira issue template
+      url: '#create-jira-issue-template'
+      identifier: jira-integration-create-jira-issue-template
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJiraIssueTemplate
+        unstable:
+          - v2
+        order: 4
+    - name: List Jira issue templates
+      url: '#list-jira-issue-templates'
+      identifier: jira-integration-list-jira-issue-templates
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListJiraIssueTemplates
+        unstable:
+          - v2
+        order: 5
+    - name: Delete Jira account
+      url: '#delete-jira-account'
+      identifier: jira-integration-delete-jira-account
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJiraAccount
+        unstable:
+          - v2
+        order: 6
+    - name: List Jira accounts
+      url: '#list-jira-accounts'
+      identifier: jira-integration-list-jira-accounts
+      parent: jira-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListJiraAccounts
+        unstable:
+          - v2
+        order: 7
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -9966,6 +10471,22 @@ menu:
           - ListProcesses
         unstable: []
         order: 1
+    - name: Product Analytics
+      url: /api/latest/product-analytics/
+      identifier: product-analytics
+      generated: true
+    - name: Send server-side events
+      url: '#send-server-side-events'
+      identifier: product-analytics-send-server-side-events
+      parent: product-analytics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SubmitProductAnalyticsEvent
+        unstable: []
+        order: 1
     - name: RUM
       url: /api/latest/rum/
       identifier: rum
@@ -11148,6 +11669,127 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: ServiceNow Integration
+      url: /api/latest/servicenow-integration/
+      identifier: servicenow-integration
+      generated: true
+    - name: List ServiceNow users
+      url: '#list-servicenow-users'
+      identifier: servicenow-integration-list-servicenow-users
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowUsers
+        unstable:
+          - v2
+        order: 8
+    - name: List ServiceNow instances
+      url: '#list-servicenow-instances'
+      identifier: servicenow-integration-list-servicenow-instances
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowInstances
+        unstable:
+          - v2
+        order: 9
+    - name: Update ServiceNow template
+      url: '#update-servicenow-template'
+      identifier: servicenow-integration-update-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateServiceNowTemplate
+        unstable:
+          - v2
+        order: 2
+    - name: Get ServiceNow template
+      url: '#get-servicenow-template'
+      identifier: servicenow-integration-get-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetServiceNowTemplate
+        unstable:
+          - v2
+        order: 3
+    - name: Delete ServiceNow template
+      url: '#delete-servicenow-template'
+      identifier: servicenow-integration-delete-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteServiceNowTemplate
+        unstable:
+          - v2
+        order: 1
+    - name: Create ServiceNow template
+      url: '#create-servicenow-template'
+      identifier: servicenow-integration-create-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateServiceNowTemplate
+        unstable:
+          - v2
+        order: 4
+    - name: List ServiceNow templates
+      url: '#list-servicenow-templates'
+      identifier: servicenow-integration-list-servicenow-templates
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowTemplates
+        unstable:
+          - v2
+        order: 5
+    - name: List ServiceNow business services
+      url: '#list-servicenow-business-services'
+      identifier: servicenow-integration-list-servicenow-business-services
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowBusinessServices
+        unstable:
+          - v2
+        order: 7
+    - name: List ServiceNow assignment groups
+      url: '#list-servicenow-assignment-groups'
+      identifier: servicenow-integration-list-servicenow-assignment-groups
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowAssignmentGroups
+        unstable:
+          - v2
+        order: 6
     - name: Software Catalog
       url: /api/latest/software-catalog/
       identifier: software-catalog
@@ -11252,6 +11894,19 @@ menu:
       url: /api/latest/spa/
       identifier: spa
       generated: true
+    - name: Get SPA Recommendations with a shard parameter
+      url: '#get-spa-recommendations-with-a-shard-parameter'
+      identifier: spa-get-spa-recommendations-with-a-shard-parameter
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendationsWithShard
+        unstable:
+          - v2
+        order: 1
     - name: Get SPA Recommendations
       url: '#get-spa-recommendations'
       identifier: spa-get-spa-recommendations
@@ -11264,7 +11919,7 @@ menu:
           - GetSPARecommendations
         unstable:
           - v2
-        order: 1
+        order: 2
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
@@ -11373,6 +12028,136 @@ menu:
       url: /api/latest/static-analysis/
       identifier: static-analysis
       generated: true
+    - name: Show Custom Rule Revision
+      url: '#show-custom-rule-revision'
+      identifier: static-analysis-show-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomRuleRevision
+        unstable:
+          - v2
+        order: 2
+    - name: Revert Custom Rule Revision
+      url: '#revert-custom-rule-revision'
+      identifier: static-analysis-revert-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevertCustomRuleRevision
+        unstable:
+          - v2
+        order: 1
+    - name: Create Custom Rule Revision
+      url: '#create-custom-rule-revision'
+      identifier: static-analysis-create-custom-rule-revision
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomRuleRevision
+        unstable:
+          - v2
+        order: 3
+    - name: List Custom Rule Revisions
+      url: '#list-custom-rule-revisions'
+      identifier: static-analysis-list-custom-rule-revisions
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCustomRuleRevisions
+        unstable:
+          - v2
+        order: 4
+    - name: Show Custom Rule
+      url: '#show-custom-rule'
+      identifier: static-analysis-show-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomRule
+        unstable:
+          - v2
+        order: 6
+    - name: Delete Custom Rule
+      url: '#delete-custom-rule'
+      identifier: static-analysis-delete-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomRule
+        unstable:
+          - v2
+        order: 5
+    - name: Create Custom Rule
+      url: '#create-custom-rule'
+      identifier: static-analysis-create-custom-rule
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomRule
+        unstable:
+          - v2
+        order: 7
+    - name: Update Custom Ruleset
+      url: '#update-custom-ruleset'
+      identifier: static-analysis-update-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCustomRuleset
+        unstable:
+          - v2
+        order: 9
+    - name: Show Custom Ruleset
+      url: '#show-custom-ruleset'
+      identifier: static-analysis-show-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomRuleset
+        unstable:
+          - v2
+        order: 10
+    - name: Delete Custom Ruleset
+      url: '#delete-custom-ruleset'
+      identifier: static-analysis-delete-custom-ruleset
+      parent: static-analysis
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteCustomRuleset
+        unstable:
+          - v2
+        order: 8
     - name: POST request to resolve vulnerable symbols
       url: '#post-request-to-resolve-vulnerable-symbols'
       identifier: static-analysis-post-request-to-resolve-vulnerable-symbols
@@ -11399,6 +12184,190 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Status Pages
+      url: /api/latest/status-pages/
+      identifier: status-pages
+      generated: true
+    - name: Update degradation
+      url: '#update-degradation'
+      identifier: status-pages-update-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDegradation
+        unstable: []
+        order: 12
+    - name: Get degradation
+      url: '#get-degradation'
+      identifier: status-pages-get-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDegradation
+        unstable: []
+        order: 14
+    - name: Delete degradation
+      url: '#delete-degradation'
+      identifier: status-pages-delete-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDegradation
+        unstable: []
+        order: 15
+    - name: Create degradation
+      url: '#create-degradation'
+      identifier: status-pages-create-degradation
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDegradation
+        unstable: []
+        order: 11
+    - name: Update component
+      url: '#update-component'
+      identifier: status-pages-update-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateComponent
+        unstable: []
+        order: 7
+    - name: Get component
+      url: '#get-component'
+      identifier: status-pages-get-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetComponent
+        unstable: []
+        order: 9
+    - name: Delete component
+      url: '#delete-component'
+      identifier: status-pages-delete-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteComponent
+        unstable: []
+        order: 10
+    - name: Create component
+      url: '#create-component'
+      identifier: status-pages-create-component
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateComponent
+        unstable: []
+        order: 6
+    - name: List components
+      url: '#list-components'
+      identifier: status-pages-list-components
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListComponents
+        unstable: []
+        order: 8
+    - name: Update status page
+      url: '#update-status-page'
+      identifier: status-pages-update-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateStatusPage
+        unstable: []
+        order: 2
+    - name: Get status page
+      url: '#get-status-page'
+      identifier: status-pages-get-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetStatusPage
+        unstable: []
+        order: 4
+    - name: Delete status page
+      url: '#delete-status-page'
+      identifier: status-pages-delete-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteStatusPage
+        unstable: []
+        order: 5
+    - name: List degradations
+      url: '#list-degradations'
+      identifier: status-pages-list-degradations
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDegradations
+        unstable: []
+        order: 13
+    - name: Create status page
+      url: '#create-status-page'
+      identifier: status-pages-create-status-page
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateStatusPage
+        unstable: []
+        order: 1
+    - name: List status pages
+      url: '#list-status-pages'
+      identifier: status-pages-list-status-pages
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListStatusPages
+        unstable: []
+        order: 3
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
@@ -11439,6 +12408,66 @@ menu:
           - GetTeamPermissionSettings
         unstable: []
         order: 17
+    - name: Update team notification rule
+      url: '#update-team-notification-rule'
+      identifier: teams-update-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTeamNotificationRule
+        unstable: []
+        order: 30
+    - name: Get team notification rule
+      url: '#get-team-notification-rule'
+      identifier: teams-get-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRule
+        unstable: []
+        order: 29
+    - name: Delete team notification rule
+      url: '#delete-team-notification-rule'
+      identifier: teams-delete-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTeamNotificationRule
+        unstable: []
+        order: 31
+    - name: Create team notification rule
+      url: '#create-team-notification-rule'
+      identifier: teams-create-team-notification-rule
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTeamNotificationRule
+        unstable: []
+        order: 28
+    - name: Get team notification rules
+      url: '#get-team-notification-rules'
+      identifier: teams-get-team-notification-rules
+      parent: teams
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTeamNotificationRules
+        unstable: []
+        order: 27
     - name: Update a user's membership attributes on a team
       url: '#update-a-users-membership-attributes-on-a-team'
       identifier: teams-update-a-users-membership-attributes-on-a-team
@@ -11657,7 +12686,7 @@ menu:
         operationids:
           - CreateTeamConnections
         unstable: []
-        order: 2
+        order: 25
     - name: List team connections
       url: '#list-team-connections'
       identifier: teams-list-team-connections
@@ -11669,7 +12698,7 @@ menu:
         operationids:
           - ListTeamConnections
         unstable: []
-        order: 1
+        order: 24
     - name: Delete team connections
       url: '#delete-team-connections'
       identifier: teams-delete-team-connections
@@ -11681,7 +12710,7 @@ menu:
         operationids:
           - DeleteTeamConnections
         unstable: []
-        order: 3
+        order: 26
     - name: Get a team hierarchy link
       url: '#get-a-team-hierarchy-link'
       identifier: teams-get-a-team-hierarchy-link
@@ -11771,6 +12800,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Update flaky test states
+      url: '#update-flaky-test-states'
+      identifier: test-optimization-update-flaky-test-states
+      parent: test-optimization
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateFlakyTests
+        unstable:
+          - v2
+        order: 2
     - name: Workflow Automation
       url: /api/latest/workflow-automation/
       identifier: workflow-automation

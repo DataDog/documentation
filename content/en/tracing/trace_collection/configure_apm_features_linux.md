@@ -49,7 +49,7 @@ The following table lists the products and their respective configuration keys:
 | [Data Streams Monitoring][4]          | `DD_DATA_STREAMS_ENABLED`     |
 | [App and API Protection (AAP)][5]     | `DD_APPSEC_ENABLED`           |
 | [Code Security (IAST)][6]             | `DD_IAST_ENABLED`             |
-| [Data Jobs Monitoring][7]             | `DD_DATA_JOBS_ENABLED`        |
+| [Data Observability: Jobs Monitoring][7]             | `DD_DATA_JOBS_ENABLED`        |
 | [Software Composition Analysis][8]    | `DD_APPSEC_SCA_ENABLED`       |
 
 

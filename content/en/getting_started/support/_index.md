@@ -57,7 +57,7 @@ When a new chat is opened, you are asked if you have a **technical** or **sales*
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.
    - For sales questions, you are routed to the first available member of the Datadog sales team, who can answer questions about billing and account management.
 
-**Note**: For urgent issues, it's best to reach out through a Support Ticket, and indicate why your request is urgent. This ensures that Support leadership can route your case to an appropriate expert immediately.
+**Note**: For urgent issues, it's best to reach out through a Support Ticket, and indicate why your request is urgent. This helps ensure that Support leadership can route your case to an appropriate expert immediately.
 
 ### Best practices for technical questions
 
@@ -68,6 +68,14 @@ Ensure that you have as many of the relevant [prerequisites](#prerequisites) ava
 When the chat closes, a support ticket is automatically created. If the issue was resolved on chat, the ticket can be closed.
 
 If additional investigation is required, the ticket is routed to experts in the appropriate areas, with a full transfer of the details and context provided during the chat. Use the ticket for further communication with the Datadog Support team.
+
+## Language support
+
+Japanese language support is available Monday to Friday from 9am to 5pm Japan Standard Time (JST), excluding local public holidays and December 29 to January 3. Chat support in Japanese is available from 10am to 4pm JST on business days.
+
+Korean language support is available Monday to Friday from 9am to 5pm Korea Standard Time, excluding local public holidays. Chat support in Korean is not available.
+
+When support in your preferred language is not available, you can continue working with Datadog Support in English.
 
 ## Further reading
 

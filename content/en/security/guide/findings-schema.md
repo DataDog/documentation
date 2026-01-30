@@ -20,6 +20,10 @@ Security findings in Datadog represent vulnerabilities, misconfigurations, and s
 
 All findings share a common schema that enables unified querying and analysis across different security products.
 
+{{< learning-center-callout header="" btn_title="Learn more" btn_url="/security/guide/security-findings-migration/" hide_image="true" >}}
+  Learn about migrating to this new schema so you can avoid any interruptions to your workflows.
+{{< /learning-center-callout >}}
+
 ## Examples
 
 There are eleven different categories for security findings. Click on a category to view a sample security finding belonging to that category.
@@ -1309,7 +1313,7 @@ The following sections describe all available attributes in the Security Finding
 
 
 
-{{% collapse-content title="Core Attributes" level="h3" %}}
+{{% collapse-content title="Core Attributes" level="h3" id="core-attributes" %}}
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
 
@@ -1412,7 +1416,7 @@ These attributes are present on all security findings and describe the fundament
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Workflow" level="h3" %}}
+{{% collapse-content title="Workflow" level="h3" id="workflow" %}}
 
 All mutable information related to the management of a finding after it was detected. Includes fields that can be updated manually through the UI or automatically through pipelines.
 
@@ -1702,7 +1706,7 @@ Integrations like Jira, Case Management, or ServiceNow used to triage and remedi
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Risk" level="h3" %}}
+{{% collapse-content title="Risk" level="h3" id="risk" %}}
 
 Risk-related attributes for the finding. Each key must have a matching key in the `risk_details` namespace.
 
@@ -1780,7 +1784,7 @@ Risk-related attributes for the finding. Each key must have a matching key in th
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Risk Details" level="h3" %}}
+{{% collapse-content title="Risk Details" level="h3" id="risk-details" %}}
 
 Contextual risk factors that help assess the potential impact of a finding. These fields describe characteristics like exposure, sensitivity, and signs of active exploitation.
 
@@ -2443,7 +2447,7 @@ Groups information about whether SHA1 is used in a weak hash.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Rule" level="h3" %}}
+{{% collapse-content title="Rule" level="h3" id="rule" %}}
 
 Describes how to discover a vulnerability. Vulnerability findings with rules mean the vulnerability was detected in source code or running code. Rules are also used for non-vulnerability findings such as misconfigurations or API security.
 
@@ -2486,7 +2490,7 @@ Describes how to discover a vulnerability. Vulnerability findings with rules mea
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Advisory" level="h3" %}}
+{{% collapse-content title="Advisory" level="h3" id="advisory" %}}
 
 Ties a vulnerability to a set of specific software versions. Vulnerability findings with advisories mean a vulnerable version of the software was detected (typically through SBOMs).
 
@@ -2539,7 +2543,7 @@ Ties a vulnerability to a set of specific software versions. Vulnerability findi
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Vulnerability" level="h3" %}}
+{{% collapse-content title="Vulnerability" level="h3" id="vulnerability" %}}
 
 Contains information specific to vulnerabilities.
 
@@ -2628,7 +2632,7 @@ Specifies the technological stack where the vulnerability was found.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Remediation" level="h3" %}}
+{{% collapse-content title="Remediation" level="h3" id="remediation" %}}
 
 Groups information about the finding's remediation.
 
@@ -2969,7 +2973,7 @@ Specifies the closest patch available to address the current advisory.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Compliance" level="h3" %}}
+{{% collapse-content title="Compliance" level="h3" id="compliance" %}}
 
 Contains information specific to compliance findings, such as compliance rule or evaluation (pass/fail).
 
@@ -3007,7 +3011,7 @@ Contains information specific to compliance findings, such as compliance rule or
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Cloud Resource" level="h3" %}}
+{{% collapse-content title="Cloud Resource" level="h3" id="cloud-resource" %}}
 
 Groups attributes identifying the cloud resource affected by the finding.
 
@@ -3085,7 +3089,7 @@ Groups attributes identifying the cloud resource affected by the finding.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Iac Resource" level="h3" %}}
+{{% collapse-content title="Iac Resource" level="h3" id="iac-resource" %}}
 
 Groups attributes identifying the Infrastructure as Code (IaC) resource related to the finding.
 
@@ -3113,7 +3117,7 @@ Groups attributes identifying the Infrastructure as Code (IaC) resource related 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="K8S" level="h3" %}}
+{{% collapse-content title="K8S" level="h3" id="k8s" %}}
 
 Contains Kubernetes fields for findings generated against Kubernetes resources.
 
@@ -3136,7 +3140,7 @@ Contains Kubernetes fields for findings generated against Kubernetes resources.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Host" level="h3" %}}
+{{% collapse-content title="Host" level="h3" id="host" %}}
 
 Contains host information.
 
@@ -3205,7 +3209,7 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Service" level="h3" %}}
+{{% collapse-content title="Service" level="h3" id="service" %}}
 
 <table>
   <thead>
@@ -3236,7 +3240,7 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Container Image" level="h3" %}}
+{{% collapse-content title="Container Image" level="h3" id="container-image" %}}
 
 <table>
   <thead>
@@ -3302,7 +3306,7 @@ Groups attributes of the operating system running on the host.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Git" level="h3" %}}
+{{% collapse-content title="Git" level="h3" id="git" %}}
 
 Contains Git metadata linking a finding to source code context. Includes information about the repository, branch, commit, author, and committer.
 
@@ -3432,7 +3436,7 @@ Contains details about the committer.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Code Location" level="h3" %}}
+{{% collapse-content title="Code Location" level="h3" id="code-location" %}}
 
 Groups attributes pinpointing the specific file and line numbers where the finding is located.
 
@@ -3490,7 +3494,7 @@ Groups attributes pinpointing the specific file and line numbers where the findi
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Package" level="h3" %}}
+{{% collapse-content title="Package" level="h3" id="package" %}}
 
 Contains package manager information. A package manager automates the installation, upgrading, configuration, and removal of software packages.
 
@@ -3762,7 +3766,7 @@ Version declared for the root parent.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Secret" level="h3" %}}
+{{% collapse-content title="Secret" level="h3" id="secret" %}}
 
 <table>
   <thead>
@@ -3783,7 +3787,7 @@ Version declared for the root parent.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Api Endpoint" level="h3" %}}
+{{% collapse-content title="Api Endpoint" level="h3" id="api-endpoint" %}}
 
 Contains the HTTP endpoint representation.
 

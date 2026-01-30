@@ -1,4 +1,7 @@
 ---
+description: Aprende a migrar de los endpoints de uso horario de la V1 a la API consolidada
+  de la V2 con familias de productos, formato JSON:API, paginación y compatibilidad
+  con varias organizaciones.
 further_reading:
 - link: /account_management/plan_and_usage/
   tag: Documentación
