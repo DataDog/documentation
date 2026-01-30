@@ -15,5 +15,6 @@ This section provides practical guides for using CloudPrem with various tools an
 
 {{< whatsnext desc="Explore the following guides:">}}
    {{< nextlink href="/cloudprem/guides/mcp/" >}}Query CloudPrem Logs with Datadog MCP Server{{< /nextlink >}}
+   {{< nextlink href="/cloudprem/guides/otel-op-cloudprem/" >}}Send OpenTelemetry Logs to CloudPrem via Observability Pipelines{{< /nextlink >}}
 {{< /whatsnext >}}
 
