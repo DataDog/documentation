@@ -53,45 +53,6 @@ ICMP-specific template variables content goes here.
 gRPC-specific template variables content goes here.
 {% /if %}
 
-
-## Valid traits and their values (option IDs)
-  
-For reference, here's a list of all the traits available on this page, and the valid values for each trait.
-
-You can use this table to populate the `equals` function in your `if` tags: `equals(<TRAIT>, <VALUE>)`. Example: `equals($protocol, "http")`. For details on using `if` tags, see the [relevant section of the Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference#If-and-if/else-(conditional-display-tag)).
-  
-{% table %}
-* Trait
-* Valid values
-* Equals function to use in `if` tag
----
-* `protocol` {% rowspan=8 %}
-* `http`
-* `equals($protocol, "http")`
----
-* `dns`
-* `equals($protocol, "dns")`
----
-* `ssl`
-* `equals($protocol, "ssl")`
----
-* `websocket`
-* `equals($protocol, "websocket")`
----
-* `udp`
-* `equals($protocol, "udp")`
----
-* `tcp`
-* `equals($protocol, "tcp")`
----
-* `icmp`
-* `equals($protocol, "icmp")`
----
-* `grpc`
-* `equals($protocol, "grpc")`
-{% /table %}
-
-
 <!-- Test execution variables -->
 {% if equals($synthetics_variables, "execution") %}
 Test execution variables-specific content goes here.

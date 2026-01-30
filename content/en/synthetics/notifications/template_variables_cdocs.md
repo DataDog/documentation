@@ -202,47 +202,6 @@ title: Synthetic Monitoring Template Variables
   >
     <p>Multistep API-specific content goes here.</p>
   </div>
-  <h2 id="valid-traits-and-their-values--option-ids">
-    Valid traits and their values (option IDs)
-  </h2>
-  <p>
-    For reference, here's a list of all the traits available on this page, and
-    the valid values for each trait.
-  </p>
-  <p>
-    You can use this table to populate the <code>equals</code> function in your
-    <code>if</code> tags: <code>equals(&lt;TRAIT&gt;, &lt;VALUE&gt;)</code>.
-    Example: <code>equals($platform, &quot;browser&quot;)</code>. For details on
-    using <code>if</code> tags, see the
-    <a
-      href="https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference#If-and-if/else-(conditional-display-tag)"
-      >relevant section of the Tags Reference for Markdoc</a
-    >.
-  </p>
-  <table>
-    <thead>
-      <tr>
-        <th>Trait</th>
-        <th>Valid values</th>
-        <th>Equals function to use in <code>if</code> tag</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td rowspan="3"><code>platform</code></td>
-        <td><code>browser</code></td>
-        <td><code>equals($platform, &quot;browser&quot;)</code></td>
-      </tr>
-      <tr>
-        <td><code>mobile</code></td>
-        <td><code>equals($platform, &quot;mobile&quot;)</code></td>
-      </tr>
-      <tr>
-        <td><code>multistep</code></td>
-        <td><code>equals($platform, &quot;multistep&quot;)</code></td>
-      </tr>
-    </tbody>
-  </table>
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution"
