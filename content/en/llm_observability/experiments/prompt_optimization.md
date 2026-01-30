@@ -372,6 +372,8 @@ plt.title('Prompt Optimization Progress')
 plt.show()
 ```
 
+You can also view the prompt used for each iteration in the Config tab of the Experiment page.
+
 ## Best practices
 
 ### Dataset design
