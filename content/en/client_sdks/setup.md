@@ -146,7 +146,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable"
     data-description="SDK is Browser"
-    data-if="5964"
+    data-if="4449"
   >
     <p>
       This page describes how to instrument your web applications with the
@@ -262,17 +262,20 @@ title: Client SDK Setup
             Add the generated code snippet to the head tag of every HTML page
             you want to monitor in your application.
           </p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <div class="d-none site-region-container" data-region="us">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -280,20 +283,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <div class="d-none site-region-container" data-region="eu">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -301,20 +308,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <div class="d-none site-region-container" data-region="ap1">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -322,20 +333,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <div class="d-none site-region-container" data-region="ap2">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -343,20 +358,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <div class="d-none site-region-container" data-region="us3">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -364,20 +383,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <div class="d-none site-region-container" data-region="us5">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -385,20 +408,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+          <div class="d-none site-region-container" data-region="gov">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -406,6 +433,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/datadog-rum-v6.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
@@ -429,129 +457,157 @@ title: Client SDK Setup
             synchronously ensures Datadog RUM can collect all performance data
             and errors.
           </p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+          <div class="d-none site-region-container" data-region="us">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+          <div class="d-none site-region-container" data-region="eu">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+          <div class="d-none site-region-container" data-region="ap1">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+          <div class="d-none site-region-container" data-region="ap2">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+          <div class="d-none site-region-container" data-region="us3">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+          <div class="d-none site-region-container" data-region="us5">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+          <div class="d-none site-region-container" data-region="gov">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/datadog-rum-v6.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
@@ -727,7 +783,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="5965"
+    data-if="4450"
   >
     <p>
       This page describes how to instrument your applications for
@@ -889,26 +945,29 @@ title: Client SDK Setup
       >
       to initialize the library.
     </p>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="kotlin"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Kotlin"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-kotlin">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+    <div class="d-none site-region-container" data-region="us">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="kotlin"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Kotlin"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-kotlin">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -921,27 +980,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="java"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Java"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-java">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+          <div
+            data-lang="java"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Java"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-java">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -953,32 +1014,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="kotlin"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Kotlin"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-kotlin">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+    <div class="d-none site-region-container" data-region="eu">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="kotlin"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Kotlin"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-kotlin">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -993,27 +1058,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="java"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Java"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-java">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+          <div
+            data-lang="java"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Java"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-java">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -1026,32 +1093,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="kotlin"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Kotlin"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-kotlin">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+    <div class="d-none site-region-container" data-region="us3">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="kotlin"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Kotlin"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-kotlin">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -1066,27 +1137,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="java"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Java"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-java">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+          <div
+            data-lang="java"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Java"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-java">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -1099,32 +1172,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="kotlin"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Kotlin"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-kotlin">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+    <div class="d-none site-region-container" data-region="us5">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="kotlin"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Kotlin"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-kotlin">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -1139,27 +1216,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="java"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Java"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-java">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+          <div
+            data-lang="java"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Java"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-java">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -1172,32 +1251,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="kotlin"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Kotlin"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-kotlin">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+    <div class="d-none site-region-container" data-region="gov">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="kotlin"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Kotlin"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-kotlin">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -1212,27 +1295,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="java"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Java"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-java">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+          <div
+            data-lang="java"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Java"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-java">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -1245,32 +1330,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="kotlin"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Kotlin"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-kotlin">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+    <div class="d-none site-region-container" data-region="ap1">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="kotlin"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Kotlin"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-kotlin">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -1285,27 +1374,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="java"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Java"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-java">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+          <div
+            data-lang="java"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Java"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-java">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -1318,32 +1409,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="kotlin"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Kotlin"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-kotlin">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+    <div class="d-none site-region-container" data-region="ap2">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="kotlin"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Kotlin"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-kotlin">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -1358,27 +1453,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="java"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Java"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-java">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+          <div
+            data-lang="java"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Java"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-java">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -1391,6 +1488,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
@@ -2016,7 +2114,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="5966"
+    data-if="4451"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -2239,26 +2337,29 @@ title: Client SDK Setup
         >Using Tags</a
       >.
     </p>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="swift"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Swift"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-swift">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
+    <div class="d-none site-region-container" data-region="us">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="swift"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Swift"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-swift">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Initialize Datadog SDK with your configuration</span>
 </span></span><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span>
@@ -2270,27 +2371,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="n">trackingConsent</span><span class="p">:</span> <span class="n">trackingConsent</span>  <span class="c1">// GDPR compliance setting</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="objective-c"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Objective-C"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-objective-c">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
+          <div
+            data-lang="objective-c"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Objective-C"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-objective-c">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Initialize Datadog SDK with your configuration
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">DDConfiguration</span> <span class="o">*</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DDConfiguration</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithClientToken</span><span class="p">:</span><span class="s">@&#34;&lt;client token&gt;&#34;</span> <span class="nl">env</span><span class="p">:</span><span class="s">@&#34;&lt;environment&gt;&#34;</span><span class="p">];</span>
@@ -2299,32 +2402,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">DDDatadog</span> <span class="nl">initializeWithConfiguration</span><span class="p">:</span><span class="n">configuration</span>
 </span></span><span class="line"><span class="cl">                       <span class="nl">trackingConsent</span><span class="p">:</span><span class="n">trackingConsent</span><span class="p">];</span>  <span class="c1">// GDPR compliance setting
 </span></span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="swift"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Swift"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-swift">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
+    <div class="d-none site-region-container" data-region="eu">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="swift"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Swift"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-swift">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="n">with</span><span class="p">:</span> <span class="n">Datadog</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
@@ -2336,27 +2443,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="n">trackingConsent</span><span class="p">:</span> <span class="n">trackingConsent</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="objective-c"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Objective-C"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-objective-c">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
+          <div
+            data-lang="objective-c"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Objective-C"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-objective-c">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">DDConfiguration</span> <span class="o">*</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DDConfiguration</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithClientToken</span><span class="p">:</span><span class="s">@&#34;&lt;client token&gt;&#34;</span> <span class="nl">env</span><span class="p">:</span><span class="s">@&#34;&lt;environment&gt;&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">configuration</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="s">@&#34;&lt;service name&gt;&#34;</span><span class="p">;</span>
@@ -2365,32 +2474,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">DDDatadog</span> <span class="nl">initializeWithConfiguration</span><span class="p">:</span><span class="n">configuration</span>
 </span></span><span class="line"><span class="cl">                       <span class="nl">trackingConsent</span><span class="p">:</span><span class="n">trackingConsent</span><span class="p">];</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="swift"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Swift"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-swift">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
+    <div class="d-none site-region-container" data-region="us3">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="swift"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Swift"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-swift">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="n">with</span><span class="p">:</span> <span class="n">Datadog</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
@@ -2402,27 +2515,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="n">trackingConsent</span><span class="p">:</span> <span class="n">trackingConsent</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="objective-c"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Objective-C"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-objective-c">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
+          <div
+            data-lang="objective-c"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Objective-C"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-objective-c">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">DDConfiguration</span> <span class="o">*</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DDConfiguration</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithClientToken</span><span class="p">:</span><span class="s">@&#34;&lt;client token&gt;&#34;</span> <span class="nl">env</span><span class="p">:</span><span class="s">@&#34;&lt;environment&gt;&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">configuration</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="s">@&#34;&lt;service name&gt;&#34;</span><span class="p">;</span>
@@ -2431,32 +2546,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">DDDatadog</span> <span class="nl">initializeWithConfiguration</span><span class="p">:</span><span class="n">configuration</span>
 </span></span><span class="line"><span class="cl">                       <span class="nl">trackingConsent</span><span class="p">:</span><span class="n">trackingConsent</span><span class="p">];</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="swift"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Swift"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-swift">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
+    <div class="d-none site-region-container" data-region="us5">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="swift"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Swift"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-swift">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="n">with</span><span class="p">:</span> <span class="n">Datadog</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
@@ -2468,27 +2587,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="n">trackingConsent</span><span class="p">:</span> <span class="n">trackingConsent</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="objective-c"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Objective-C"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-objective-c">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
+          <div
+            data-lang="objective-c"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Objective-C"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-objective-c">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">DDConfiguration</span> <span class="o">*</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DDConfiguration</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithClientToken</span><span class="p">:</span><span class="s">@&#34;&lt;client token&gt;&#34;</span> <span class="nl">env</span><span class="p">:</span><span class="s">@&#34;&lt;environment&gt;&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">configuration</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="s">@&#34;&lt;service name&gt;&#34;</span><span class="p">;</span>
@@ -2497,32 +2618,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">DDDatadog</span> <span class="nl">initializeWithConfiguration</span><span class="p">:</span><span class="n">configuration</span>
 </span></span><span class="line"><span class="cl">                       <span class="nl">trackingConsent</span><span class="p">:</span><span class="n">trackingConsent</span><span class="p">];</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="swift"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Swift"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-swift">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
+    <div class="d-none site-region-container" data-region="gov">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="swift"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Swift"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-swift">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="n">with</span><span class="p">:</span> <span class="n">Datadog</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
@@ -2534,27 +2659,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="n">trackingConsent</span><span class="p">:</span> <span class="n">trackingConsent</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="objective-c"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Objective-C"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-objective-c">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
+          <div
+            data-lang="objective-c"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Objective-C"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-objective-c">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">DDConfiguration</span> <span class="o">*</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DDConfiguration</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithClientToken</span><span class="p">:</span><span class="s">@&#34;&lt;client token&gt;&#34;</span> <span class="nl">env</span><span class="p">:</span><span class="s">@&#34;&lt;environment&gt;&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">configuration</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="s">@&#34;&lt;service name&gt;&#34;</span><span class="p">;</span>
@@ -2563,32 +2690,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">DDDatadog</span> <span class="nl">initializeWithConfiguration</span><span class="p">:</span><span class="n">configuration</span>
 </span></span><span class="line"><span class="cl">                       <span class="nl">trackingConsent</span><span class="p">:</span><span class="n">trackingConsent</span><span class="p">];</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="swift"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Swift"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-swift">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
+    <div class="d-none site-region-container" data-region="ap1">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="swift"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Swift"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-swift">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="n">with</span><span class="p">:</span> <span class="n">Datadog</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
@@ -2600,27 +2731,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="n">trackingConsent</span><span class="p">:</span> <span class="n">trackingConsent</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="objective-c"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Objective-C"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-objective-c">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
+          <div
+            data-lang="objective-c"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Objective-C"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-objective-c">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">DDConfiguration</span> <span class="o">*</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DDConfiguration</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithClientToken</span><span class="p">:</span><span class="s">@&#34;&lt;client token&gt;&#34;</span> <span class="nl">env</span><span class="p">:</span><span class="s">@&#34;&lt;environment&gt;&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">configuration</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="s">@&#34;&lt;service name&gt;&#34;</span><span class="p">;</span>
@@ -2629,32 +2762,36 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">DDDatadog</span> <span class="nl">initializeWithConfiguration</span><span class="p">:</span><span class="n">configuration</span>
 </span></span><span class="line"><span class="cl">                       <span class="nl">trackingConsent</span><span class="p">:</span><span class="n">trackingConsent</span><span class="p">];</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="code-tabs">
-      <ul class="nav nav-tabs d-flex"></ul>
-      <div class="tab-content">
-        <div
-          data-lang="swift"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Swift"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-swift">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
+    <div class="d-none site-region-container" data-region="ap2">
+      <div class="code-tabs">
+        <ul class="nav nav-tabs d-flex"></ul>
+        <div class="tab-content">
+          <div
+            data-lang="swift"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Swift"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-swift">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kd">import</span> <span class="nc">DatadogCore</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="n">with</span><span class="p">:</span> <span class="n">Datadog</span><span class="p">.</span><span class="n">Configuration</span><span class="p">(</span>
@@ -2666,27 +2803,29 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">  <span class="n">trackingConsent</span><span class="p">:</span> <span class="n">trackingConsent</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div
-          data-lang="objective-c"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="Objective-C"
-        >
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-objective-c">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
+          <div
+            data-lang="objective-c"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Objective-C"
+          >
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-objective-c">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="p">@</span><span class="n">import</span> <span class="n">DatadogCore</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">DDConfiguration</span> <span class="o">*</span><span class="n">configuration</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DDConfiguration</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithClientToken</span><span class="p">:</span><span class="s">@&#34;&lt;client token&gt;&#34;</span> <span class="nl">env</span><span class="p">:</span><span class="s">@&#34;&lt;environment&gt;&#34;</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">configuration</span><span class="p">.</span><span class="n">service</span> <span class="o">=</span> <span class="s">@&#34;&lt;service name&gt;&#34;</span><span class="p">;</span>
@@ -2695,6 +2834,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">DDDatadog</span> <span class="nl">initializeWithConfiguration</span><span class="p">:</span><span class="n">configuration</span>
 </span></span><span class="line"><span class="cl">                       <span class="nl">trackingConsent</span><span class="p">:</span><span class="n">trackingConsent</span><span class="p">];</span>
 </span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
@@ -3140,7 +3280,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="5967"
+    data-if="4452"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3767,7 +3907,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="5968"
+    data-if="4453"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3943,17 +4083,20 @@ title: Client SDK Setup
           <h3 id="step-3--initialize-the-library-with-application-context">
             Step 3 - Initialize the library with application context
           </h3>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+          <div class="d-none site-region-container" data-region="us">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">SdkVerbosity</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProvider</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProviderConfiguration</span><span class="p">,</span>
@@ -4016,20 +4159,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 </span></span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+          <div class="d-none site-region-container" data-region="us3">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">SdkVerbosity</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProvider</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProviderConfiguration</span><span class="p">,</span>
@@ -4092,20 +4239,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 </span></span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+          <div class="d-none site-region-container" data-region="eu">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">SdkVerbosity</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProvider</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProviderConfiguration</span><span class="p">,</span>
@@ -4168,20 +4319,24 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 </span></span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
+          <div class="d-none site-region-container" data-region="gov">
+            <div class="code-snippet-wrapper">
+              <div
+                class="code-filename-wrapper d-flex justify-content-end"
+              ></div>
+              <div class="code-snippet">
+                <div class="code-button-wrapper position-absolute">
+                  <button class="btn text-primary js-copy-button">Copy</button>
+                </div>
+                <div class="cdoc-code-snippet cdoc-language-javascript">
+                  <pre
+                    tabindex="0"
+                    class="chroma"
+                  ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">SdkVerbosity</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProvider</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">DatadogProviderConfiguration</span><span class="p">,</span>
@@ -4244,6 +4399,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 </span></span></span></code></pre>
+                </div>
               </div>
             </div>
           </div>
@@ -5092,7 +5248,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="5969"
+    data-if="4454"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5326,7 +5482,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">78</span><span class="n">d98c67</span><span class="p">-</span><span class="m">7354</span><span class="p">-</span><span class="m">4270</span><span class="p">-</span><span class="n">ac78</span><span class="p">-</span><span class="m">96</span><span class="n">c73d4db73a</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">34200</span><span class="n">b93</span><span class="p">-</span><span class="n">e22e</span><span class="p">-</span><span class="m">483f</span><span class="p">-</span><span class="n">a04b</span><span class="p">-</span><span class="n">f57659631238</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5578,7 +5734,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="5970"
+    data-if="4455"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5835,7 +5991,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="5971"
+    data-if="4456"
   >
     <p>
       This page describes how to instrument your applications for
@@ -6404,7 +6560,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"5964":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"5964"},"5965":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"5965"},"5966":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"5966"},"5967":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"5967"},"5968":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"5968"},"5969":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"5969"},"5970":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"5970"},"5971":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"5971"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"4449":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"4449"},"4450":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"4450"},"4451":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"4451"},"4452":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"4452"},"4453":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"4453"},"4454":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"4454"},"4455":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"4455"},"4456":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"4456"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 

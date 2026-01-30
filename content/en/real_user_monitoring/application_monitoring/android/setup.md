@@ -317,26 +317,27 @@ further_reading:
     >
     to initialize the library.
   </p>
-  <div class="code-tabs">
-    <ul class="nav nav-tabs d-flex"></ul>
-    <div class="tab-content">
-      <div
-        data-lang="kotlin"
-        class="tab-pane fade"
-        role="tabpanel"
-        title="Kotlin"
-      >
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-kotlin">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+  <div class="d-none site-region-container" data-region="us">
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="kotlin"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Kotlin"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-kotlin">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -349,22 +350,27 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-lang="java" class="tab-pane fade" role="tabpanel" title="Java">
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-java">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+        <div
+          data-lang="java"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Java"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-java">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -376,32 +382,34 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="code-tabs">
-    <ul class="nav nav-tabs d-flex"></ul>
-    <div class="tab-content">
-      <div
-        data-lang="kotlin"
-        class="tab-pane fade"
-        role="tabpanel"
-        title="Kotlin"
-      >
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-kotlin">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+  <div class="d-none site-region-container" data-region="eu">
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="kotlin"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Kotlin"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-kotlin">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -416,22 +424,27 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-lang="java" class="tab-pane fade" role="tabpanel" title="Java">
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-java">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+        <div
+          data-lang="java"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Java"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-java">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -444,32 +457,34 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="code-tabs">
-    <ul class="nav nav-tabs d-flex"></ul>
-    <div class="tab-content">
-      <div
-        data-lang="kotlin"
-        class="tab-pane fade"
-        role="tabpanel"
-        title="Kotlin"
-      >
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-kotlin">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+  <div class="d-none site-region-container" data-region="us3">
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="kotlin"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Kotlin"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-kotlin">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -484,22 +499,27 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-lang="java" class="tab-pane fade" role="tabpanel" title="Java">
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-java">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+        <div
+          data-lang="java"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Java"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-java">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -512,32 +532,34 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="code-tabs">
-    <ul class="nav nav-tabs d-flex"></ul>
-    <div class="tab-content">
-      <div
-        data-lang="kotlin"
-        class="tab-pane fade"
-        role="tabpanel"
-        title="Kotlin"
-      >
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-kotlin">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+  <div class="d-none site-region-container" data-region="us5">
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="kotlin"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Kotlin"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-kotlin">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -552,22 +574,27 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-lang="java" class="tab-pane fade" role="tabpanel" title="Java">
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-java">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+        <div
+          data-lang="java"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Java"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-java">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -580,32 +607,34 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="code-tabs">
-    <ul class="nav nav-tabs d-flex"></ul>
-    <div class="tab-content">
-      <div
-        data-lang="kotlin"
-        class="tab-pane fade"
-        role="tabpanel"
-        title="Kotlin"
-      >
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-kotlin">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+  <div class="d-none site-region-container" data-region="gov">
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="kotlin"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Kotlin"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-kotlin">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -620,22 +649,27 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-lang="java" class="tab-pane fade" role="tabpanel" title="Java">
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-java">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+        <div
+          data-lang="java"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Java"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-java">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -648,32 +682,34 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="code-tabs">
-    <ul class="nav nav-tabs d-flex"></ul>
-    <div class="tab-content">
-      <div
-        data-lang="kotlin"
-        class="tab-pane fade"
-        role="tabpanel"
-        title="Kotlin"
-      >
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-kotlin">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+  <div class="d-none site-region-container" data-region="ap1">
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="kotlin"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Kotlin"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-kotlin">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -688,22 +724,27 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-lang="java" class="tab-pane fade" role="tabpanel" title="Java">
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-java">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+        <div
+          data-lang="java"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Java"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-java">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -716,32 +757,34 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="code-tabs">
-    <ul class="nav nav-tabs d-flex"></ul>
-    <div class="tab-content">
-      <div
-        data-lang="kotlin"
-        class="tab-pane fade"
-        role="tabpanel"
-        title="Kotlin"
-      >
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-kotlin">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
+  <div class="d-none site-region-container" data-region="ap2">
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="kotlin"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Kotlin"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-kotlin">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SampleApplication</span> <span class="p">:</span> <span class="n">Application</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">()</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">        <span class="k">val</span> <span class="py">configuration</span> <span class="p">=</span> <span class="nc">Configuration</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span>
@@ -756,22 +799,27 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-lang="java" class="tab-pane fade" role="tabpanel" title="Java">
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-java">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
+        <div
+          data-lang="java"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Java"
+        >
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-java">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SampleApplication</span> <span class="kd">extends</span> <span class="n">Application</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nd">@Override</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kd">super</span><span class="o">.</span><span class="na">onCreate</span><span class="o">();</span>
@@ -784,6 +832,7 @@ further_reading:
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>

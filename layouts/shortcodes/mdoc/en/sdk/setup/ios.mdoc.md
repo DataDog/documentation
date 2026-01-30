@@ -93,7 +93,7 @@ Initializing the SDK elsewhere (for example later during view loading) may resul
 
 For more information, see [Using Tags][4].
 
-{% region-code-block title="US1" region="us" %}
+{% site-region region="us" %}
 {% tabs %}
 {% tab label="Swift" %}
 
@@ -127,9 +127,9 @@ configuration.service = @"<service name>";  // Your app's service name
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="EU" region="eu" %}
+{% site-region region="eu" %}
 {% tabs %}
 {% tab label="Swift" %}
 
@@ -163,9 +163,9 @@ configuration.site = [DDSite eu1];
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="US3" region="us3" %}
+{% site-region region="us3" %}
 {% tabs %}
 {% tab label="Swift" %}
 
@@ -199,9 +199,9 @@ configuration.site = [DDSite us3];
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="US5" region="us5" %}
+{% site-region region="us5" %}
 {% tabs %}
 {% tab label="Swift" %}
 
@@ -235,9 +235,9 @@ configuration.site = [DDSite us5];
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="GOV" region="gov" %}
+{% site-region region="gov" %}
 {% tabs %}
 {% tab label="Swift" %}
 
@@ -271,9 +271,9 @@ configuration.site = [DDSite us1_fed];
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="AP1" region="ap1" %}
+{% site-region region="ap1" %}
 {% tabs %}
 {% tab label="Swift" %}
 
@@ -307,9 +307,9 @@ configuration.site = [DDSite ap1];
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="AP2" region="ap2" %}
+{% site-region region="ap2" %}
 {% tabs %}
 {% tab label="Swift" %}
 
@@ -343,7 +343,7 @@ configuration.site = [DDSite ap2];
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
 The iOS SDK automatically tracks user sessions based on the options you provide during SDK initialization. To add GDPR compliance for your EU users (required for apps targeting European users) and configure other [initialization parameters][5], see the [Set tracking consent documentation](#set-tracking-consent-gdpr-compliance).
 

@@ -44,7 +44,7 @@ Installing through CDN async is recommended for web applications with performanc
 
 Add the generated code snippet to the head tag of every HTML page you want to monitor in your application.
 
-{% region-code-block title="US1" region="us" %}
+{% site-region region="us" %}
 
 ```javascript
 <script>
@@ -56,8 +56,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="EU" region="eu" %}
+{% /site-region %}
+{% site-region region="eu" %}
 
 ```javascript
 <script>
@@ -69,8 +69,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="AP1" region="ap1" %}
+{% /site-region %}
+{% site-region region="ap1" %}
 
 ```javascript
 <script>
@@ -82,8 +82,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="AP2" region="ap2" %}
+{% /site-region %}
+{% site-region region="ap2" %}
 
 ```javascript
 <script>
@@ -95,8 +95,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="US3" region="us3" %}
+{% /site-region %}
+{% site-region region="us3" %}
 
 ```javascript
 <script>
@@ -108,8 +108,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="US5" region="us5" %}
+{% /site-region %}
+{% site-region region="us5" %}
 
 ```javascript
 <script>
@@ -121,8 +121,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="GOV" region="gov" %}
+{% /site-region %}
+{% site-region region="gov" %}
 
 ```javascript
 <script>
@@ -134,7 +134,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 </script>
 ```
 
-{% /region-code-block %}
+{% /site-region %}
 
 {% /tab %}
 {% tab label="CDN sync" %}
@@ -143,7 +143,7 @@ Installing through CDN sync is recommended for collecting all events. The Browse
 
 Add the generated code snippet to the head tag (in front of any other script tags) of every HTML page you want to monitor in your application. Placing the script tag higher and loading it synchronously ensures Datadog RUM can collect all performance data and errors.
 
-{% region-code-block title="US1" region="us" %}
+{% site-region region="us" %}
 
 ```javascript
 <script
@@ -152,8 +152,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="EU" region="eu" %}
+{% /site-region %}
+{% site-region region="eu" %}
 
 ```javascript
 <script
@@ -162,8 +162,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="AP1" region="ap1" %}
+{% /site-region %}
+{% site-region region="ap1" %}
 
 ```javascript
 <script
@@ -172,8 +172,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="AP2" region="ap2" %}
+{% /site-region %}
+{% site-region region="ap2" %}
 
 ```javascript
 <script
@@ -182,8 +182,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="US3" region="us3" %}
+{% /site-region %}
+{% site-region region="us3" %}
 
 ```javascript
 <script
@@ -192,8 +192,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="US5" region="us5" %}
+{% /site-region %}
+{% site-region region="us5" %}
 
 ```javascript
 <script
@@ -202,8 +202,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 
-{% /region-code-block %}
-{% region-code-block title="GOV" region="gov" %}
+{% /site-region %}
+{% site-region region="gov" %}
 
 ```javascript
 <script
@@ -212,7 +212,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 </script>
 ```
 
-{% /region-code-block %}
+{% /site-region %}
 
 {% /tab %}
 {% /tabs %}

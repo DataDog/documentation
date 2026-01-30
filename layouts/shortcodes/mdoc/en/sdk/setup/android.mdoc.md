@@ -57,7 +57,7 @@ In the initialization snippet, set an environment name, service name, and versio
 
 During initialization, you can also set the sample rate (RUM sessions) and set the tracking consent for GDPR compliance, as described below. See [other configuration options][11] to initialize the library.
 
-{% region-code-block title="US1" region="us" %}
+{% site-region region="us" %}
 {% tabs %}
 {% tab label="Kotlin" %}
 
@@ -95,9 +95,9 @@ public class SampleApplication extends Application {
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="EU" region="eu" %}
+{% site-region region="eu" %}
 {% tabs %}
 {% tab label="Kotlin" %}
 
@@ -138,9 +138,9 @@ public class SampleApplication extends Application {
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="US3" region="us3" %}
+{% site-region region="us3" %}
 {% tabs %}
 {% tab label="Kotlin" %}
 
@@ -181,9 +181,9 @@ public class SampleApplication extends Application {
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="US5" region="us5" %}
+{% site-region region="us5" %}
 {% tabs %}
 {% tab label="Kotlin" %}
 
@@ -224,9 +224,9 @@ public class SampleApplication extends Application {
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="GOV" region="gov" %}
+{% site-region region="gov" %}
 {% tabs %}
 {% tab label="Kotlin" %}
 
@@ -267,9 +267,9 @@ public class SampleApplication extends Application {
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="AP1" region="ap1" %}
+{% site-region region="ap1" %}
 {% tabs %}
 {% tab label="Kotlin" %}
 
@@ -310,9 +310,9 @@ public class SampleApplication extends Application {
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="AP2" region="ap2" %}
+{% site-region region="ap2" %}
 {% tabs %}
 {% tab label="Kotlin" %}
 
@@ -353,7 +353,7 @@ public class SampleApplication extends Application {
 
 {% /tab %}
 {% /tabs %}
-{% /region-code-block %}
+{% /site-region %}
 
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 

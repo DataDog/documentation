@@ -298,17 +298,18 @@ further_reading:
           Add the generated code snippet to the head tag of every HTML page you
           want to monitor in your application.
         </p>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <div class="d-none site-region-container" data-region="us">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -316,20 +317,22 @@ further_reading:
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <div class="d-none site-region-container" data-region="eu">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -337,20 +340,22 @@ further_reading:
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <div class="d-none site-region-container" data-region="ap1">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -358,20 +363,22 @@ further_reading:
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <div class="d-none site-region-container" data-region="ap2">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -379,20 +386,22 @@ further_reading:
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <div class="d-none site-region-container" data-region="us3">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -400,20 +409,22 @@ further_reading:
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <div class="d-none site-region-container" data-region="us5">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -421,20 +432,22 @@ further_reading:
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+        <div class="d-none site-region-container" data-region="gov">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">u</span><span class="p">,</span><span class="nx">n</span><span class="p">,</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">h</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">=</span><span class="nx">h</span><span class="p">[</span><span class="nx">d</span><span class="p">]</span><span class="o">||</span><span class="p">{</span><span class="nx">q</span><span class="o">:</span><span class="p">[],</span><span class="nx">onReady</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span><span class="nx">h</span><span class="p">.</span><span class="nx">q</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">c</span><span class="p">)}}</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">d</span><span class="o">=</span><span class="nx">o</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span><span class="nx">d</span><span class="p">.</span><span class="kr">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">d</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">n</span>
@@ -442,6 +455,7 @@ further_reading:
 </span></span><span class="line"><span class="cl">  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;https://www.datadoghq-browser-agent.com/datadog-rum-v6.js&#39;</span><span class="p">,</span><span class="s1">&#39;DD_RUM&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
@@ -465,129 +479,143 @@ further_reading:
           synchronously ensures Datadog RUM can collect all performance data and
           errors.
         </p>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+        <div class="d-none site-region-container" data-region="us">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+        <div class="d-none site-region-container" data-region="eu">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/eu/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+        <div class="d-none site-region-container" data-region="ap1">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/ap1/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+        <div class="d-none site-region-container" data-region="ap2">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/ap2/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+        <div class="d-none site-region-container" data-region="us3">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/us3/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+        <div class="d-none site-region-container" data-region="us5">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/us5/v6/datadog-rum.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>
-        <div class="code-snippet-wrapper">
-          <div class="code-filename-wrapper d-flex justify-content-end"></div>
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">Copy</button>
-            </div>
-            <div class="cdoc-code-snippet cdoc-language-javascript">
-              <pre
-                tabindex="0"
-                class="chroma"
-              ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
+        <div class="d-none site-region-container" data-region="gov">
+          <div class="code-snippet-wrapper">
+            <div class="code-filename-wrapper d-flex justify-content-end"></div>
+            <div class="code-snippet">
+              <div class="code-button-wrapper position-absolute">
+                <button class="btn text-primary js-copy-button">Copy</button>
+              </div>
+              <div class="cdoc-code-snippet cdoc-language-javascript">
+                <pre
+                  tabindex="0"
+                  class="chroma"
+                ><code><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">src</span><span class="o">=</span><span class="s2">&#34;https://www.datadoghq-browser-agent.com/datadog-rum-v6.js&#34;</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
 </span></span></code></pre>
+              </div>
             </div>
           </div>
         </div>

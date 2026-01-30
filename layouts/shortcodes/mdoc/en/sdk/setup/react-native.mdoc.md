@@ -72,7 +72,7 @@ For more information about setting up a client token, see the [Client Token docu
 
 ### Step 3 - Initialize the library with application context
 
-{% region-code-block title="US1" region="us" %}
+{% site-region region="us" %}
 
 ```javascript
 import {
@@ -139,9 +139,9 @@ export default function App() {
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="US3" region="us3" %}
+{% site-region region="us3" %}
 
 ```javascript
 import {
@@ -208,9 +208,9 @@ export default function App() {
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="EU" region="eu" %}
+{% site-region region="eu" %}
 
 ```javascript
 import {
@@ -277,9 +277,9 @@ export default function App() {
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
-{% /region-code-block %}
+{% /site-region %}
 
-{% region-code-block title="GOV" region="gov" %}
+{% site-region region="gov" %}
 
 ```javascript
 import {
@@ -346,7 +346,7 @@ export default function App() {
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
-{% /region-code-block %}
+{% /site-region %}
 
 #### Sample session rates
 
