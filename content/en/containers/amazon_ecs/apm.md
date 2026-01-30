@@ -345,7 +345,7 @@ After configuring the network routes, retrieve the EC2 private IP address and se
 
 #### IIS applications
 
-For IIS applications using the .NET tracer, write the `DD_AGENT_HOST` value to a [`datadog.json` configuration file][7] and restart IIS to apply the configuration:
+For IIS applications using the .NET Framework tracer, write the `DD_AGENT_HOST` value to a [`datadog.json` configuration file][7] and restart IIS to apply the configuration. Adjust the path `C:\\inetpub\\wwwroot\\datadog.json` to match your application's root directory:
 
 ```json
 "entryPoint": [
@@ -361,6 +361,8 @@ Alternatively, create a PowerShell startup script (`.ps1`) containing the bootst
 ENTRYPOINT ["powershell.exe", "C:\\app\\startup.ps1"]
 ```
 
+**Note**: These instructions use IMDSv1. If your EC2 instances require IMDSv2, modify the `Invoke-WebRequest` call to first obtain a session token.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -371,4 +373,4 @@ ENTRYPOINT ["powershell.exe", "C:\\app\\startup.ps1"]
 [4]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
 [5]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
 [6]: /containers/amazon_ecs/?tab=awscli#setup
-[7]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
+[7]: /tracing/trace_collection/library_config/dotnet-framework/#optional-configuration
