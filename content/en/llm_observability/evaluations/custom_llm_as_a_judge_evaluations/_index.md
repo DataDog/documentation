@@ -235,6 +235,8 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
    - **Tags**: (Optional) Limit evaluation to spans with certain tags.
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
+{{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
+
 ### Test and preview
 
 The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.

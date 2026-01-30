@@ -17,23 +17,23 @@ We provide LLM-as-a-judge templates for the following evaluations: Failure to An
 
 To select a template:
 1. Click on the [Evaluations][11] page
-1. Click on ``Create Evaluation`` button
+1. Click on the ``Create Evaluation`` button
 1. Select the template of your choice
 1. Select the integration provider, account, and model you want to use. 
-- Note: Some integration providers require additional steps (like selecting Region for Amazon Bedrock or Project and Location for VertexAI.)
-1. (Optional) Select the ml application you would like the eval to run for.
+    * Note: Some integration providers require additional steps (like selecting a region for Amazon Bedrock or a project and location for VertexAI.)
+1. (Optional) Select the application you would like the evaluation to run for and set any desired span filters.
 
 #### Topic relevancy
 
 This evaluation identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
 
-<!-- {{< img src="llm_observability/evaluations/topic_relevancy_3.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
+{{< img src="llm_observability/evaluations/topic_relevancy_t.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|---|
 | Evaluated on Input | Topic relevancy assesses whether each prompt-response pair remains aligned with the intended subject matter of the Large Language Model (LLM) application. For instance, an e-commerce chatbot receiving a question about a pizza recipe would be flagged as irrelevant.  |
 
-You can provide topics for this evaluation by filling out the template and replacing <<PLEASE WRITE YOUR TOPICS HERE>>
+You can provide topics for this evaluation by filling out the template and replacing ``<<PLEASE WRITE YOUR TOPICS HERE>>`` with your desired topics.
 
 Topics can contain multiple words and should be as specific and descriptive as possible. For example, for an LLM application that was designed for incident management, add "observability", "software engineering", or "incident resolution". If your application handles customer inquiries for an e-commerce store, you can use "Customer questions about purchasing furniture on an e-commerce store".
 
@@ -41,7 +41,7 @@ Topics can contain multiple words and should be as specific and descriptive as p
 
 This evaluation identifies instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
-<!-- {{< img src="llm_observability/evaluations/failure_to_answer_5.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}} -->
+{{< img src="llm_observability/evaluations/failure_to_answer_6.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|---|
