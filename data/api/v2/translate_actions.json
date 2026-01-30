@@ -1026,6 +1026,12 @@
     "description": "Use this API endpoint to get a deployment event.",
     "summary": "Get a deployment event"
   },
+  "PatchDORADeployment": {
+    "description": "Use this API endpoint to patch a deployment event.",
+    "summary": "Patch a deployment event",
+    "request_description": "",
+    "request_schema_description": "Request to patch a DORA deployment event."
+  },
   "CreateDORAFailure": {
     "description": "Use this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
     "summary": "Send a failure event",

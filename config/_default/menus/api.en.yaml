@@ -7676,6 +7676,18 @@ menu:
           - CreateDORAFailure
         unstable: []
         order: 2
+    - name: Patch a deployment event
+      url: '#patch-a-deployment-event'
+      identifier: dora-metrics-patch-a-deployment-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDORADeployment
+        unstable: []
+        order: 9
     - name: Get a deployment event
       url: '#get-a-deployment-event'
       identifier: dora-metrics-get-a-deployment-event
