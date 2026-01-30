@@ -30,7 +30,7 @@ process_config:
           if has_arg("scale") and flags.context == nil then
             return string.format("No kubectl context specified (effective context: '%s'). It is recommended to always explicitly specify the context when running `kubectl scale`.", k8s_context)
           end
-{{< / highlight >}}
+{{< /highlight >}}
 
 Chaque élément sous `lints` est un snippet Lua qui peut renvoyer une chaîne de caractères. Les lints sont évalués dans l'ordre. Si un lint renvoie une chaîne de caractères, cette chaîne est affichée à l'utilisateur sous forme d'invite d'avertissement :
 

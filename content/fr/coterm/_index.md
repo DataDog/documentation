@@ -26,7 +26,7 @@ Pour votre sécurité, CoTerm utilise [Sensitive Data Scanner][2] pour détecter
 
 ## Prise en main
 
-{{< whatsnext desc=Cette section contient les pages suivantes :">}}
+{{< whatsnext desc="Cette section contient les pages suivantes :">}}
   {{< nextlink href="/coterm/install">}}<u>Installation</u>: installer CoTerm et l'autoriser à accéder à votre compte Datadog.{{< /nextlink >}}
   {{< nextlink href="/coterm/usage">}}<u>Usage</u>: utiliser la CLI CoTerm, configurer l'enregistrement automatique et se protéger contre les commandes dangereuses. {{< /nextlink >}}
   {{< nextlink href="/coterm/rules">}}<u>Règles de configuration</u>: définir des règles hautement configurables pour la manière dont CoTerm gère des commandes spécifiques.{{< /nextlink >}}
