@@ -586,7 +586,9 @@ secret_backend_config:
 
 {{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
 
-**Note:** Available in Agent version 7.75+
+**Available in Agent version 7.75+**
+
+The following Kubernetes services are supported:
 
 | secret_backend_type value | Service |
 |---------------------------|---------|
@@ -772,7 +774,7 @@ override:
 
 ##### Custom api server configuration
 
-If your setup does not expose the default KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT environment variables, then a `api_server` url can be supplied to interact with the Kubernetes REST API.
+If your setup does not expose the default `KUBERNETES_SERVICE_HOST` & `KUBERNETES_SERVICE_PORT` environment variables, then a `api_server` url can be supplied to interact with the Kubernetes REST API.
 
 {{< tabs >}}
 {{% tab "Agent YAML" %}}
