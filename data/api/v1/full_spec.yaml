@@ -4621,6 +4621,7 @@ components:
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
+      - flex_logs_starter
       - flex_stored_logs
       - functions_usage
       - incident_management_monthly_active_users_usage
@@ -4705,6 +4706,7 @@ components:
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
+      - FLEX_LOGS_STARTER
       - FLEX_STORED_LOGS
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -9193,6 +9195,8 @@ components:
       - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
+      - flex_logs_starter_usage
+      - flex_logs_starter_percentage
       - flex_stored_logs_usage
       - flex_stored_logs_percentage
       - functions_usage
@@ -9356,6 +9360,8 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
+      - FLEX_LOGS_STARTER_USAGE
+      - FLEX_LOGS_STARTER_PERCENTAGE
       - FLEX_STORED_LOGS_USAGE
       - FLEX_STORED_LOGS_PERCENTAGE
       - FUNCTIONS_USAGE
@@ -9725,6 +9731,14 @@ components:
           type: number
         fargate_usage:
           description: The Fargate usage by tags.
+          format: double
+          type: number
+        flex_logs_starter_percentage:
+          description: The percentage of Flex Logs Starter usage by tags.
+          format: double
+          type: number
+        flex_logs_starter_usage:
+          description: The Flex Logs Starter usage by tags.
           format: double
           type: number
         flex_stored_logs_percentage:
@@ -21619,6 +21633,16 @@ components:
             current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ci_pipeline_indexed_spans_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
             in the current month for all organizations.
@@ -22749,6 +22773,16 @@ components:
           deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
             current date for the given org (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -23893,6 +23927,16 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the
             current month for all organizations (To be deprecated on October 1st,
             2024).
+          format: int64
+          type: integer
+        ccm_spend_monitored_ent_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Enterprise in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Pro in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
