@@ -133,13 +133,28 @@ You can configure [PR Gates][7] to enforce coverage thresholds for specific serv
 
 **Enforce high coverage for backend services:**
 
+- Condition type: `Overall Code Coverage`
+- Threshold: `80%`
+- Scope: `Per service`
+- Services: `backend-*`
+
 {{< img src="/code_coverage/pr_gate_backend_services.png" text="Code Coverage PR gate configured for backend services" style="width:100%" >}}
 
 **Require all new code in frontend to be tested:**
 
+- Condition type: `Patch Code Coverage`
+- Threshold: `100%`
+- Scope: `Per service`
+- Services: `admin-dashboard`, `frontend-*`
+
 {{< img src="/code_coverage/pr_gate_frontend.png" text="Code Coverage PR gate configured for frontend services" style="width:100%" >}}
 
 **Enforce coverage for specific team's code:**
+
+- Condition type: `Patch Code Coverage`
+- Threshold: `90%`
+- Scope: `Per code owner`
+- Code owners: `@team/platform`
 
 {{< img src="/code_coverage/pr_gate_codeowners_team.png" text="Code Coverage PR gate configured for a specific team" style="width:100%" >}}
 
