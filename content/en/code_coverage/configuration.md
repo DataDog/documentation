@@ -38,7 +38,7 @@ ignore:
 
 ## Services configuration
 
-<div class="alert alert-info">Using <a href="/code_coverage/monorepo_support#software-catalog-integration">Software Catalog integration</a> is the recommended approach for defining services, as code locations configured in Software Catalog can be utilized by multiple Datadog products. Use manual configuration only when Software Catalog integration is not available.</div>
+<div class="alert alert-info">Using <a href="/code_coverage/monorepo_support#software-catalog-integration">Software Catalog integration</a> is the recommended approach for defining services, as code locations configured in Software Catalog can be used by multiple Datadog products. Use manual configuration only when Software Catalog integration is not available.</div>
 
 You can define services in your configuration file to split coverage data by service in monorepos. This is useful when multiple projects or teams share a single repository and you want to view coverage metrics for each service independently.
 
@@ -59,7 +59,7 @@ services:
   - `id` (required): Unique identifier for the service
   - `paths` (required): List of path patterns that belong to this service (see [Pattern syntax](#pattern-syntax))
 
-For complete details on monorepo support, including Software Catalog integration and codeowner-based splitting, see [Monorepo support][1].
+For complete details on monorepo support, including Software Catalog integration and code owner-based splitting, see [Monorepo Support][1].
 
 ### Examples
 
@@ -121,7 +121,7 @@ ignore:
   - "!generated/core/"    # Except core generated files
 ```
 
-**Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path will _not_ be ignored.
+**Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path is _not_ ignored.
 
 ### Examples
 
