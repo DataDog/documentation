@@ -1,0 +1,11 @@
+baseURL: '/'
+canonifyURLs: false
+timeout: 100000
+enableGitInfo: true
+
+# default to just building english for faster build
+disableLanguages:
+  - fr
+  - ja
+  - ko
+  - es

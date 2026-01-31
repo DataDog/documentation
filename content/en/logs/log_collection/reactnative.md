@@ -25,7 +25,7 @@ Send logs to Datadog from your React Native Mobile applications with [Datadog's 
 To install with NPM, run:
 
 ```sh
-   npm install @datadog/mobile-react-native
+npm install @datadog/mobile-react-native
 ```
 
 To install with Yarn, run:
@@ -44,22 +44,160 @@ Then install the added pod:
 
 2. Initialize the library with your application context, tracking consent, and the [Datadog client token][2] and Application ID generated when you create a RUM application in the Datadog UI (see [Getting Started with React Native RUM Collection][6] for more information). For security reasons, you must use a client token; you cannot use [Datadog API keys][3] to configure the `dd-sdk-reactnative` library, as they would be exposed client-side in the mobile application. For more information about setting up a client token, see the [client token documentation][2]. 
 
+{{< site-region region="us" >}}
 ```js
-import {
-    DdSdkReactNative,
-    DatadogProviderConfiguration
-} from '@datadog/mobile-react-native';
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons).
-    true, // track XHR Resources
-    true // track Errors
+    trackingConsent,
+    {
+        site: 'US1',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
 );
-config.site = '{{< region-param key=jenkins_site_name >}}';{{< region-param key=reactnative_sdk_init >}}
 ```
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'US3',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'US5',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'EU1',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'US1_FED',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'AP1',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
+{{< site-region region="ap2" >}}
+```js
+import { DatadogProviderConfiguration } from '@datadog/mobile-react-native';
+
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    trackingConsent,
+    {
+        site: 'AP2',
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+);
+```
+{{< /site-region >}}
 
    
 3. Import the React Native logger:

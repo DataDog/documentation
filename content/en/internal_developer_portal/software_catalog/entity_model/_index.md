@@ -599,5 +599,5 @@ The [JSON schema for Datadog definitions][20] is registered with the open source
 [18]: http://json-schema.org/
 [19]: https://www.schemastore.org
 [20]: https://raw.githubusercontent.com/DataDog/schema/refs/heads/main/service-catalog/service.schema.json
-[21]: /dora_metrics/setup/deployments?tab=apmdeploymenttracking#handling-multiple-services-in-the-same-repository
+[21]: /dora_metrics/setup/#handling-multiple-services-in-the-same-repository
 [22]: /continuous_delivery/features/code_changes_detection?tab=github#specify-service-file-path-patterns

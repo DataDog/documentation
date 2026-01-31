@@ -98,7 +98,7 @@ See [Profile Types][6] for descriptions of the kinds of profile data collected f
 
 [Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
 
-{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles4.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 
