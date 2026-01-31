@@ -1,35 +1,88 @@
 ---
+aliases:
+- /ja/observability_pipelines/archive_logs/splunk_tcp/
 disable_toc: false
-title: Socket Source (TCP または UDP) 向け Dual Ship Logs
+title: Splunk の Heavy Forwarder または Universal Forwarder (TCP) 用にログをアーカイブする
 ---
 
 ## 概要
 
-Socket 接続経由でログを Observability Pipelines Worker に送信し、集約・処理したうえで、複数の宛先にルーティングします。
+Splunk の Heavy Forwarder と Universal Forwarder を構成し、Observability Pipelines Worker が収集されたログを Datadog Log Archives にルーティングする前に、Datadog でリハイドレートできる形式へ整形できるようにします。
 
-{{% observability_pipelines/use_case_images/dual_ship_logs %}}
+{{% observability_pipelines/use_case_images/archive_logs %}}
 
-このガイドでは、以下の内容を説明しています。
-1. Observability Pipelines のセットアップの[前提条件](#prerequisites)
-1. [Observability Pipelines のセットアップ方法](#set-up-observability-pipelines)
+このドキュメントでは、以下について説明します。
+1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
+1. [Configuring a Log Archive](#configure-a-log-archive)
+1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
+1. [Splunk Forwarder を Observability Pipelines Worker に接続する](#connect-splunk-forwarder-to-the-observability-pipelines-worker)
 
 ## 前提条件
 
-{{% observability_pipelines/prerequisites/socket %}}
+{{% observability_pipelines/prerequisites/splunk_tcp %}}
+
+## Configure Log Archives
+
+If you already have a Datadog Log Archive configured for Observability Pipelines, skip to [Set up Observability Pipelines](#set-up-observability-pipelines).
+
+Datadog Log Archive をセットアップするには、使用しているクラウド プロバイダー向けの Datadog インテグレーションをインストールしておく必要があります。詳しくは、[AWS インテグレーション][1]、[Google Cloud Platform][2]、[Azure インテグレーション][3]のドキュメントを参照してください。
+
+Select the cloud provider you are using to archive your logs.
+
+{{% collapse-content title="Amazon S3" level="h4" %}}
+{{% observability_pipelines/configure_log_archive/amazon_s3/instructions %}}
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/docker %}}
+
+{{% /tab %}}
+{{% tab "Amazon EKS" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/amazon_eks %}}
+
+{{% /tab %}}
+{{% tab "Linux (APT)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_apt %}}
+
+{{% /tab %}}
+{{% tab "Linux (RPM)" %}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/linux_rpm %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Google Cloud Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/google_cloud_storage/instructions %}}
+
+{{% /collapse-content %}}
+{{% collapse-content title="Azure Storage" level="h4" %}}
+
+{{% observability_pipelines/configure_log_archive/azure_storage/instructions %}}
+
+{{% /collapse-content %}}
 
 ## 観測可能性パイプラインを設定する
 
-1. [Observability Pipelines][1] に移動します。
-1. 新しいパイプラインを作成するには、 **Dual Ship Logs** テンプレートを選択します。
-1. **Socket** ソースを選択します。
+1. [Observability Pipelines][4] に移動します。
+1. Select the **Archive Logs** template to create a new pipeline.
+1. ソースとして **Splunk TCP** を選択します。
 
-### ソースの設定
+### Set up the source
 
-{{% observability_pipelines/source_settings/socket %}}
+{{% observability_pipelines/source_settings/splunk_tcp %}}
 
-### 宛先の設定
+### Set up the destinations
 
-選択したログの送信先に応じて、以下の情報を入力します。
+Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -37,6 +90,17 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+##### 前提条件
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
+##### Set up the destination
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}} 
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -56,7 +120,7 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
+Follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -122,7 +186,7 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 送信先を追加する
+#### Add additional destinations
 
 {{% observability_pipelines/multiple_destinations %}}
 
@@ -135,12 +199,12 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "環境変数を追加" %}}
+{{% tab "Add env vars" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
-{{% tab "ホスト名を追加" %}}
+{{% tab "Add hostname" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
 
@@ -204,17 +268,19 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
-{{% collapse-content title="ライブラリ マッピング" level="h5" expanded=false id="library_mapping" %}}
+{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタム マッピング" level="h5" expanded=false id="custom_mapping" %}}
+{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
 
 {{% /collapse-content %}}
+
+{{% observability_pipelines/processors/filter_syntax %}}
 
 {{% /tab %}}
 {{% tab "Sample" %}}
@@ -226,12 +292,12 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="ライブラリからルールを追加" level="h5" %}}
+{{% collapse-content title="Add rules from the library" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="カスタム ルールを追加" level="h5" %}}
+{{% collapse-content title="Add a custom rule" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
@@ -255,19 +321,23 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 別のプロセッサーと送信先のセットを追加する
+#### Add another set of processors and destinations
 
 {{% observability_pipelines/multiple_processors %}}
 
 ### 観測可能性パイプラインワーカーのインストール
 1. **Choose your installation platform** ドロップダウンメニューで使用するプラットフォームを選択します。
-1. `0.0.0.0:9000` のように、ソケット アドレスとポートを入力します。これは、受信ログを待ち受ける Observability Pipelines Worker のアドレスとポートです。ソケット アドレスには必ずポート番号を含めてください。
-1. TLS を有効化している場合は、TLS パスフレーズを入力します。
-1. 選択した各送信先の環境変数を指定します。詳しくは、[前提条件](#prerequisites) を参照してください。
+1. Splunk TCP アドレスを入力します。これはアプリケーションがログ データを送信する先のアドレスとポートです。Observability Pipelines Worker はこのアドレスで受信ログを待ち受けます。
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}
@@ -287,7 +357,7 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
-Datadog Archives の送信先については、ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -381,4 +451,9 @@ Datadog Archives の送信先については、ログをアーカイブする際
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: https://app.datadoghq.com/observability-pipelines
+{{% observability_pipelines/log_source_configuration/splunk_tcp %}}
+
+[1]: /ja/integrations/amazon_web_services/#setup
+[2]: /ja/integrations/google_cloud_platform/#setup
+[3]: /ja/integrations/azure/#setup
+[4]: https://app.datadoghq.com/observability-pipelines
