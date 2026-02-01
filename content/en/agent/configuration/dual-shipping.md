@@ -51,7 +51,7 @@ additional_endpoints:
 Requires Agent version >= 6.18 or 7.18.
 
 ```bash
-DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"<DD_SITE>\": [\"apikey4\"]}'
+DD_ADDITIONAL_ENDPOINTS='{\"https://app.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"<DD_SITE>\": [\"apikey4\"]}'
 ```
 
 ## APM
@@ -185,7 +185,7 @@ clusterAgent:
   datadog_cluster_yaml:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
-        "https://orchestrator.ddog-gov.com":
+        "https://orchestrator.<DD_SITE>":
         - apikey2
 ```
 
@@ -431,17 +431,17 @@ and add the relevant settings to `customAgentConfig`.
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
     additional_endpoints:
-      "https://app.{{< region-param key=\"dd_site\">}}":
+      "<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.com" for the US1 site.
       - apikey2
       - apikey3
-      "https://app.datadoghq.eu":
+      "<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
       - apikey4
 
     logs_config:
       force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "agent-http-intake.logs.datadoghq.com"
+        Host: "agent-http-intake.logs.<DD_SITE>"
         Port: 443
         is_reliable: true
 ```
@@ -450,7 +450,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 1. Create a Kubernetes secret with your environment variable configuration value from this guide:
     ```bash
-    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"<DD_SITE>": ["apikey4"]}'
     ```
 2. Use the [Helm chart parameters][2] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
     ```yaml
@@ -483,18 +483,19 @@ spec:
     nodeAgent:
       customConfigurations:
         datadog.yaml:
+          # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.com" for the US1 site using `apikey2` and `apikey3` and  "https://app.datadoghq.eu" for the EU site using `apikey4`.
           configData: |-
             additional_endpoints:
-              "https://app.datadoghq.com":
+              "<DD_SITE>":  
               - apikey2
               - apikey3
-              "https://app.datadoghq.eu":
+              "<DD_SITE>":  
               - apikey4
             logs_config:
               force_use_http: true
               additional_endpoints:
               - api_key: "apiKey2"
-                Host: "agent-http-intake.logs.datadoghq.com"
+                Host: "agent-http-intake.logs.<DD_SITE>"
                 Port: 443
                 is_reliable: true
 ```
@@ -503,7 +504,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 1. Create a Kubernetes secret with your environment variable configuration value from this guide:
     ```bash
-    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.datadoghq.eu": ["apikey4"]}'
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"<DD_SITE>": ["apikey4"]}'
     ```
 2. Use the `[key].env` parameter to reference this secret in your configuration:
     ```yaml
