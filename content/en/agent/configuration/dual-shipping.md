@@ -134,7 +134,7 @@ process_config:
 Requires Agent version >= 6.20 or 7.20.
 
 ```bash
-DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://process.DD_SITE\": [\"apikey4\"]}'
+DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://process.<DD_SITE>\": [\"apikey4\"]}'
 ```
 
 ## Cluster Agent metrics
@@ -158,7 +158,7 @@ external_metrics_provider:
   endpoints:
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: https://app.<DD_SITE> 
+    url: <DD_SITE> 
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
     url: https://app.{{< region-param key="dd_site">}}
