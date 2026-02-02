@@ -70,7 +70,7 @@ OpenTelemetry API support for logs is not available for this language. Use [Data
 {% /if %}
 
 <!-- Go, PHP, Rust have traces and metrics only -->
-{% if or(or(equals($prog_lang, "go"), equals($prog_lang, "php")), equals($prog_lang, "rust")) %}
+{% if or(equals($prog_lang, "go"), equals($prog_lang, "php"), equals($prog_lang, "rust")) %}
 {% if equals($platform, "logs") %}
 {% alert level="danger" %}
 OpenTelemetry API support for logs is not available for this language. Use [Datadog Log Collection][210] instead.
@@ -139,14 +139,14 @@ Use OpenTelemetry tracing APIs with Datadog SDKs to create custom spans, add tag
 {% if equals($platform, "metrics") %}
 
 <!-- Show content only for languages that support metrics -->
-{% if or(or(or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")), or(equals($prog_lang, "python"), equals($prog_lang, "ruby"))), or(or(equals($prog_lang, "go"), equals($prog_lang, "php")), equals($prog_lang, "rust"))) %}
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python"), equals($prog_lang, "ruby"), equals($prog_lang, "go"), equals($prog_lang, "php"), equals($prog_lang, "rust")) %}
 
 ## Overview
 
 Use the OpenTelemetry Metrics API with Datadog SDKs to send custom application metrics. This is an alternative to [DogStatsD][200].
 
 <!-- Native implementation (.NET, Node.js, Go, Rust) -->
-{% if or(or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")), or(equals($prog_lang, "go"), equals($prog_lang, "rust"))) %}
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "go"), equals($prog_lang, "rust")) %}
 
 The Datadog SDK provides a native implementation of the OpenTelemetry API. This means you can write code against the standard OTel interfaces without needing the official OpenTelemetry SDK.
 
@@ -156,7 +156,7 @@ You should not install the official OpenTelemetry SDK or any OTLP Exporter packa
 {% /if %}
 
 <!-- Exporter-based implementation (Python, Ruby, PHP) -->
-{% if or(or(equals($prog_lang, "python"), equals($prog_lang, "ruby")), equals($prog_lang, "php")) %}
+{% if or(equals($prog_lang, "python"), equals($prog_lang, "ruby"), equals($prog_lang, "php")) %}
 
 This approach works with the existing OpenTelemetry SDK. When you enable this feature, the Datadog SDK detects the OTel SDK and configures its OTLP exporter to send metrics to the Datadog Agent.
 {% /if %}
@@ -193,7 +193,7 @@ The OpenTelemetry Metrics SDK for Ruby is currently in [alpha implementation](ht
 - **Rust**: MSRV 1.84 or later.
 {% /if %}
 - **An OTLP-compatible destination**: You must have a destination (Agent or Collector) listening on ports 4317 (gRPC) or 4318 (HTTP) to receive OTel metrics.
-{% if or(or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js")), or(or(equals($prog_lang, "python"), equals($prog_lang, "ruby")), equals($prog_lang, "go"))) %}
+{% if or(equals($prog_lang, "dot_net"), equals($prog_lang, "node_js"), equals($prog_lang, "python"), equals($prog_lang, "ruby"), equals($prog_lang, "go")) %}
 - **DogStatsD (Runtime Metrics)**: If you also use Datadog [Runtime Metrics][201], ensure the Datadog Agent is listening for DogStatsD traffic on port 8125 (UDP). OTel configuration does not route Runtime Metrics through OTLP.
 {% /if %}
 
