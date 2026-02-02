@@ -918,7 +918,11 @@ Placeholder text
 
 Size
 : The scale of the search component.<br>
-**Provided values**: sm, md, lg
+**Provided values**: md, lg
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
 
 Is Loading
 : Shows a loading indicator.<br>
@@ -934,7 +938,7 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : fetch<br>
@@ -946,7 +950,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
