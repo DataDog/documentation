@@ -224,7 +224,7 @@ Snapshots are static images of graphs with a fixed time range (for example, `Aug
 
 You can preview snapshot status for a notebook by hovering over the graph snapshot indicator under the notebook title. The preview shows the time of the most recent snapshot and the number of snapshots created.
 
-{{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator to determine how many snapshots have been generated" style="width:100%;">}}
+{{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator showing how many snapshots have been generated" style="width:100%;">}}
 
 When a notebook contains a graph with data that is past its data retention limits, the notebook displays an inline snapshot of the graph. The snapshot is a static image, but it is replaced if you edit the underlying graph.
 
