@@ -1429,6 +1429,10 @@ Label
 : The text that displays at the top of the component.<br>
 **Value**: string or expression
 
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
 Default value
 : The value that is selected when the text input loads.<br>
 **Value**: string or expression
@@ -1453,7 +1457,7 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : fetch<br>
@@ -1465,7 +1469,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
