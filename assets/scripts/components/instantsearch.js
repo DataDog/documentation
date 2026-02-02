@@ -258,8 +258,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     search.addWidgets([
         configure({
             hitsPerPage: numHits,
-            filters: filtersDocs,
-            distinct: 1
+            filters: filtersDocs
         }),
 
         searchBox({
@@ -294,8 +293,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             indexName: partnersIndex
         }).addWidgets([
             configure({
-                hitsPerPage: numHits,
-                distinct: 1
+                hitsPerPage: numHits
             }),
 
             hitComponent({
