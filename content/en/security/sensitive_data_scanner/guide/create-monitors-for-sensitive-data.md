@@ -44,7 +44,7 @@ To create a log monitor for sensitive data matches:
 
 1. Navigate to [**Monitors > New Monitor > Logs**][2].
 2. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to all logs that contain sensitive data matches.
-  - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:credit_card` for financial data or `sensitive_data_category:personal_identifiable_information` for PII.
+  - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:credit_card` for financial data or `sensitive_data_category:pii` for PII.
 3. Configure the alert conditions based on your needs:
   - **Threshold**: Set a threshold for the number of matches over a time period (for example, alert when more than 10 sensitive data matches occur in 5 minutes).
   - **Group by**: Group by `service`, `env`, or `team` to identify which services are logging sensitive data.
@@ -125,7 +125,7 @@ sensitive_data:email_address application.name:checkout-app
 To avoid alert fatigue from false positives, scope your monitors to specific domains relevant to your organization:
 
 - **Financial services**: Use `sensitive_data_category:credit_card` to monitor payment card data.
-- **PII**: Use `sensitive_data_category:personal_identifiable_information` to monitor for personally identifiable data.
+- **PII**: Use `sensitive_data_category:pii` to monitor for personally identifiable data.
 - **SaaS applications**: Use `sensitive_data_category:credentials` to monitor API keys and tokens.
 
 ### Combine with service tags
