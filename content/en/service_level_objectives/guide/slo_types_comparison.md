@@ -56,14 +56,14 @@ When creating SLOs, you can choose from the following types:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/service_management/service_level_objectives/error_budget/
-[2]: https://docs.datadoghq.com/service_management/service_level_objectives/burn_rate/
-[]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-status-corrections
-[4]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-widgets
-[5]: https://docs.datadoghq.com/dashboards/guide/slo_data_source/
-[6]: https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data
+[1]: /service_level_objectives/error_budget/
+[2]: /service_level_objectives/burn_rate/
+[3]: /service_level_objectives/#slo-status-corrections
+[4]: /service_level_objectives/#slo-widgets
+[5]: /dashboards/guide/slo_data_source/
+[6]: /service_level_objectives/monitor/#missing-data
 [7]: /service_level_objectives/time_slice/#uptime-calculations
-[8]: https://docs.datadoghq.com/api/latest/service-level-objectives/
-[9]: https://docs.datadoghq.com/dashboards/widgets/slo/
-[10]: https://docs.datadoghq.com/dashboards/widgets/slo_list/
-[11]: https://docs.datadoghq.com/service_management/service_level_objectives/#slo-calendar-view
+[8]: /api/latest/service-level-objectives/
+[9]: /dashboards/widgets/slo/
+[10]: /dashboards/widgets/slo_list/
+[11]: /service_level_objectives/#slo-calendar-view
