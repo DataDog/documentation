@@ -966,6 +966,10 @@ Label
 : The text that displays at the top of the component.<br>
 **Value**: string or expression
 
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
 Placeholder text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
@@ -995,6 +999,10 @@ Is Multiselect
 : Determines whether the user can select more than one option at a time.<br>
 **Provided values**: on, off
 
+Is Clearable
+: Determines whether a user can clear selected value(s).
+**Provided values**: on, off
+
 ### Appearance
 
 Is Disabled
@@ -1011,7 +1019,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : fetch<br>
