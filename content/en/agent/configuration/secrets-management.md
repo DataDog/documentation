@@ -597,7 +597,7 @@ The following Kubernetes services are supported:
 ##### Prerequisites
 
 The Kubernetes secrets backend requires:
-- **ServiceAccount credentials**: By default, uses automatically mounted ServiceAccount tokens (`automountServiceAccountToken: true`). Custom paths can be configured if needed.
+- **ServiceAccount credentials**: By default, uses automatically mounted ServiceAccount tokens (`automountServiceAccountToken: true`, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting)). Custom paths can be configured if needed.
 - **RBAC permissions**: The Agent's ServiceAccount must have permissions to read secrets from target namespaces
 - **Network access**: The Agent pod must be able to reach the Kubernetes API server
 
