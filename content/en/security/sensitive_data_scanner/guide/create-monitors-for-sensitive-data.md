@@ -74,8 +74,6 @@ To reduce false positives, scope your query to multiple specific rule types with
 (sensitive_data:us_social_security_number OR sensitive_data:us_passport) env:prod
 ```
 
-{{< img src="monitors/monitor_types/log/log_monitor_sensitive_data.png" alt="A log monitor configured to alert on credit card data in production logs" style="width:100%;" >}}
-
 ### APM
 
 To create an APM monitor for sensitive data in traces:
