@@ -278,7 +278,7 @@ del(.my_tag)
 ```
 ## Add a tag to the log event
 
-Tags are used to correlate logs with other telemetry and services. Tags are stored in arrays and for Datadog specifically, are nested within the Datadog tags (`ddtags`) array. Use the following scripts below to either convert a tag from an existing attribute, or add a new tag. Tags are stored as key:value pairs wrapped in quotes (e.g. "service:payments-app").
+Tags are used to correlate logs with other telemetry and services. They are stored in arrays as key:value pairs wrapped in quotes (for example, `"service:payments-app"`). For Datadog logs specifically, tags are nested within the Datadog tags (`ddtags`) array. Use the following scripts below to either convert a tag from an existing attribute, or add a new tag.
 
 ### Example to convert an attribute to a tag
 
