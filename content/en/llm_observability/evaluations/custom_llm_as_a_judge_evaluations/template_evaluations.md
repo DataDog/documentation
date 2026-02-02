@@ -55,7 +55,7 @@ This evaluation identifies attempts by unauthorized or malicious authors to mani
 |---|---|---|
 | Evaluated on Input | [Prompt Injection][5] flags any unauthorized or malicious insertion of prompts or cues into the conversation by an external party or user. |
 
-##### Prompt injection configuration
+##### Prompt Injection configuration
 <div class="alert alert-info">Configuring prompt injection evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
 You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table. The template defaults to have every category flagged as a prompt injection attempt.
 
