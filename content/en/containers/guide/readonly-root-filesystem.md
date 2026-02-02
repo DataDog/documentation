@@ -37,13 +37,13 @@ The following is complete Docker Compose example demonstrating the read-only roo
 services:
   # Init container populating 'datadog-config' volume with config files.
   datadog-init:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     command: ["sh", "-c", "cp -r /etc/datadog-agent/* /opt/datadog-agent-config/"]
     volumes:
       - datadog-config:/opt/datadog-agent-config
 
   datadog:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     read_only: true
     pid: host
     depends_on:

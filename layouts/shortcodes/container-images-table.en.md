@@ -1,7 +1,7 @@
-| datadoghq.azurecr.io                                    | dockerhub.io                               | gcr.io                                              | public.ecr.aws                                            |
-| ------------------------------------------------------- | ------------------------------------------ | --------------------------------------------------- | --------------------------------------------------------- |
-| datadoghq.azurecr.io/agent                              | datadog/agent                              | gcr.io/datadoghq/agent                              | public.ecr.aws/datadog/agent                              |
-| datadoghq.azurecr.io/cluster-agent                      | datadog/cluster-agent                      | gcr.io/datadoghq/cluster-agent                      | public.ecr.aws/datadog/cluster-agent                      |
-| datadoghq.azurecr.io/operator                           | datadog/operator                           | gcr.io/datadoghq/operator                           | public.ecr.aws/datadog/operator                           |
-| datadoghq.azurecr.io/dogstatsd                          | datadog/dogstatsd                          | gcr.io/datadoghq/dogstatsd                          | public.ecr.aws/datadog/dogstatsd                          |
-| datadoghq.azurecr.io/synthetics-private-location-worker | datadog/synthetics-private-location-worker | gcr.io/datadoghq/synthetics-private-location-worker | public.ecr.aws/datadog/synthetics-private-location-worker |
+| Registry                   | Path                       |
+| -------------------------- | -------------------------- |
+| Datadog Container Registry | `registry.datadoghq.com`   |
+| Google Artifact Registry   | `gcr.io/datadoghq`         |
+| Amazon ECR                 | `public.ecr.aws/datadog`   |
+| Azure ACR                  | `datadoghq.azurecr.io`     |
+| Docker Hub                 | `docker.io/datadog`        |

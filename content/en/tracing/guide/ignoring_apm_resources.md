@@ -304,7 +304,7 @@ docker run -d --name datadog-agent \
               -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 {{< /code-block >}}
 
 For multiple values:
@@ -320,7 +320,7 @@ In the dedicated trace-agent container, add the environment variable `DD_APM_IGN
 
 {{< code-block lang="yaml" >}}
     - name: trace-agent
-        image: "gcr.io/datadoghq/agent:latest"
+        image: "registry.datadoghq.com/agent:latest"
         imagePullPolicy: IfNotPresent
         command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
         resources: {}
