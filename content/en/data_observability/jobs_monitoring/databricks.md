@@ -407,9 +407,9 @@ If you need more granular control, grant these minimal permissions to the follow
 | Query                            | [CAN VIEW][23]
 | SQL warehouse                    | [CAN MONITOR][24]
 
-Additionally, for Datadog to access your Databricks cost data in Data Observability: Jobs Monitoring or [Cloud Cost Management][18], the user or service principal used to query [system tables][20] must have the following permissions:
+Additionally, for Datadog to access your Databricks cost data in Data Observability: Jobs Monitoring or [Cloud Cost Management][26], the user or service principal used to query [system tables][27] must have the following permissions:
    - `CAN USE` permission on the SQL Warehouse.
-   - Read access to the [system tables][20] within Unity Catalog. This can be granted with:
+   - Read access to the [system tables][27] within Unity Catalog. This can be granted with:
    ```sql
    GRANT USE CATALOG ON CATALOG system TO <service_principal>;
    GRANT SELECT ON CATALOG system TO <service_principal>;
@@ -417,8 +417,6 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
 
-[18]: https://docs.datadoghq.com/cloud_cost_management
-[20]: https://docs.databricks.com/aws/en/admin/system-tables/
 
 ### Tag spans at runtime
 
@@ -487,3 +485,5 @@ If you are controlling Databricks API access with [IP access lists][13], allow-l
 [23]: https://docs.databricks.com/aws/en/security/auth/access-control#query-acls
 [24]: https://docs.databricks.com/aws/en/security/auth/access-control#sql-warehouse-acls
 [25]: https://docs.datadoghq.com/api/latest/authentication/?code-lang=curl#validate-api-key
+[26]: https://docs.datadoghq.com/cloud_cost_management
+[27]: https://docs.databricks.com/aws/en/admin/system-tables/

@@ -345,23 +345,23 @@ To enable the Android SDK to start sending data:
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-    val rumConfig = RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build()
-    Rum.enable(rumConfig)
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build()
+Rum.enable(rumConfig)
 ```
 {{% /tab %}}
 
 {{% tab "Java" %}}
 ```java
-    RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-      .trackInteractions()
-      .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-      .useViewTrackingStrategy(strategy)
-      .build();
-    Rum.enable(rumConfig);
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
+    .useViewTrackingStrategy(strategy)
+    .build();
+Rum.enable(rumConfig);
 ```
 
 {{% /tab %}}
@@ -384,7 +384,7 @@ To instrument your web views:
    ```
 2. Enable webview tracking for a given WebView instance by providing a list of hosts to track:
 
-   ```groovy
+   ```kotlin
    WebViewTracking.enable(webView, hosts)
    ```
 
@@ -408,7 +408,7 @@ To enable NDK crash reporting, use the Datadog NDK plugin:
    ```
 2. Enable NDK crash collection after initializing the SDK:
 
-    ``` kotlin
+    ```kotlin
     NdkCrashReports.enable()
     ```
 
@@ -422,7 +422,7 @@ To enable ANR reporting, add the following to your RUM configuration:
 {{% tab "Kotlin" %}}
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold)
     .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
     .useViewTrackingStrategy(strategy)
@@ -433,7 +433,7 @@ Rum.enable(rumConfig)
 {{% tab "Java" %}}
 ```java
 RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-    .trackInteractions()
+    .trackUserInteractions()
     .trackLongTasks(durationThreshold)
     .trackNonFatalAnrs(true) // Enable non-fatal ANR reporting
     .useViewTrackingStrategy(strategy)

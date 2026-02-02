@@ -4,7 +4,7 @@ description: "Connect your data warehouse to Datadog to monitor data quality, tr
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Data Observability'
+    text: 'Data Observability Overview'
 ---
 ## Overview
 
