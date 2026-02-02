@@ -30,9 +30,8 @@ To create a new segment using Product Analytics data:
 1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** tab on the Users & Segments page
 
 2. Click **Create Segment**, then select **Product Analytics**.
-3. Under the **Select a data source** section, choose **Product Analytics**.
-4. Select a condition for the users: whether they **performed an action**, share similar **attributes**, or **both**.
-5. **Filter** by user characteristics to narrow the segment to the users you care about, like those in a particular country or who signed up in the last 30 days.
+3. Select a condition for the users: whether they **performed an action**, share similar **attributes**, or **both**.
+4. **Filter** by user characteristics to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
    In the following image, the segment is filtered to all users who were on the `/cart` page and then clicked the checkout button (and did so from Brazil) within the same session in the past week:
 
@@ -47,7 +46,7 @@ Or, directly click the <strong>Create Segment</strong> button to select your dat
 
 {{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segment page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
-On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new Segments</a> page, add the properties specifying the users: <br>
+On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new Segment</a> page, add the properties specifying the users: <br>
 – who **viewed** the <code>/cart</code> page <br>
 – **then** <code> did not</code> ...  <br>
 – perform the **action** of <code> click on CHECKOUT</code> <br>
@@ -61,23 +60,22 @@ You can define additional attributes, such as the <code> device type</code>, to 
 
 {{% collapse-content title="Importing CSV files" level="h4" expanded=false id="segment-csv" %}}
 
-If you already have a list of users, for example, from a survey, experiment, or CRM, you can upload it as a CSV and turn it into a segment. Click **CSV File** to upload a list of users from your own file. The file needs a column with either `usr.id` or `usr.email` so it can be mapped with Product Analytics data. The following example maps the `@user.id` attribute to the column named `id` in bthe csv file.
+If you already have a list of users, for example, from a survey, experiment, or CRM, you can upload it as a CSV and turn it into a segment. Click **CSV File** to upload a list of users from your own file. The file needs a column with either `usr.id` or `usr.email` so it can be mapped with Product Analytics data. The following example maps the `@user.id` attribute to the column named `id` in the CSV file.
 
-{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product nalytics attribute." style="width:80%">}}
+{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attribute." style="width:80%">}}
 
 {{% /collapse-content %}}
 
 ## Use segments across Product Analytics
 
 ### In pathways
-
-On the Pathway page, filter the visualization to show a specific segment of users. This allows you to look at the experience and traffic patterns of a particular set of users in a given segment. The following example shows a Pathway diagram only for users in the "Premium Shopist Customers" segment.
+Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the pathway for "Premium Shopist Customers."
 
 {{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathway visualization to reflect a selected segment of users.">}}
 
 ### In analytics explorer
 
-You can filter the data in the Analytics Explorer to reflect a selected set of users in a given segment. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
+Filter the Analytics Explorer visualization to see how a segment of users use your product. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
 
 {{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
