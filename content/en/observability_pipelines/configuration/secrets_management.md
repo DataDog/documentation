@@ -36,7 +36,7 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 {{% tab "Docker or Linux" %}}
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Secrets Manager:
 
-```
+```yaml
 backend_type: aws.secrets
 backend_config:
   aws_session:
@@ -94,7 +94,7 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 {{% tab "Docker or Linux" %}}
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Systems Manager:
 
-```
+```yaml
 secret:
   backend_type: aws_parameter_store
   backend_config:
@@ -142,10 +142,10 @@ To access your Key Vault, create a Managed Identity and assign it to your VM. Th
 {{% tab "Docker or Linux" %}}
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using Azure Key Vault:
 
-```
+```yaml
 backend_type: azure.keyvault
 backend_config:
-  keyvaulturl: {keyVaultURL}
+  keyvaulturl: <key_vault_url>
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
@@ -161,7 +161,7 @@ bootstrap:
     secret:
       backend_type: azure.keyvault
       backend_config:
-        keyvaulturl: {keyVaultURL}
+        keyvaulturl: <key_vault_url>
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
@@ -213,7 +213,7 @@ Datadog recommends that you authenticate using the [instance profile method][1] 
 {{% tab "Docker or Linux" %}}
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with HashiCorp Vault:
 
-```
+```yaml
 secret:
   backend_type: vault
   backend_config:
@@ -265,7 +265,7 @@ The file backend only requires **read** permissions for the configured JSON file
 {{% tab "Docker or Linux" %}}
 After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with a JSON file:
 
-```
+```yaml
 secret:
   backend_type: json
   backend_config:
@@ -276,7 +276,7 @@ secret:
 
 Create the file `/path/to/json/file.json` to store the identifiers and their secret values:
 
-```
+```json
 {
   "us1_api": "<api_key>",
   "secret_identifier1": "<secret1>"
@@ -294,10 +294,8 @@ Before you [install the Worker][1], add your identifier and secrets mapping to t
 ```yaml
 bootstrap:
   secretFileContents:
-    {
-      "us1_api": "<api_key>",
-      "secret_identifier1": "<secret1>"
-    }
+    us1_api: "<api_key>"
+    secret_identifier1: "<secret1>"
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
