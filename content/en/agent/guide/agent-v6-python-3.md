@@ -59,7 +59,7 @@ To keep the Datadog Agent updated, edit your `datadog-values.yaml` to remove any
 
 To use a specific container registry, set it with `agent.image.repository` and `clusterChecksRunner.image.repository`. Ensure that `agents.image.tag` and  `clusterChecksRunner.image.tag` are undefined.
 
-The default registry is `gcr.io/datadoghq/agent`.
+The default registry is `registry.datadoghq.com/agent`.
 
 ```yaml
 agent:
@@ -143,7 +143,7 @@ spec:
         name: gcr.io/datadoghq/agent:6.33.0
 ```
 
-Use the `spec.global.registry` if you need to change the default registry. The default is `gcr.io/datadoghq/agent`.
+Use the `spec.global.registry` if you need to change the default registry. The default is `registry.datadoghq.com`.
 
 Then, pin the Agent 7 image tag in `spec.override.nodeAgent.image.tag`.
 
@@ -199,7 +199,7 @@ In your DaemonSet manifest, update the image tag in each container definition:
 * Each `spec.template.spec.containers[*].image` value
 * Each `spec.template.spec.initContainers[*].image` value
 
-For example, if your previous image value was `gcr.io/datadoghq/agent:6.33.0`, update it to `gcr.io/datadoghq/agent:7.33.0`.
+For example, if your previous image value was `gcr.io/datadoghq/agent:6.33.0`, update it to `registry.datadoghq.com/agent:7.33.0`.
 
 **Before**:
 
@@ -224,7 +224,7 @@ spec:
     spec:
       containers:
       - name: agent
-        image: gcr.io/datadoghq/agent:7.33.0
+        image: registry.datadoghq.com/agent:7.33.0
         # ...
 ```
 

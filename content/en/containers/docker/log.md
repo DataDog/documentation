@@ -68,7 +68,7 @@ docker run -d --name datadog-agent \
            -v /proc/:/host/proc/:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-           gcr.io/datadoghq/agent:latest
+           registry.datadoghq.com/agent:latest
 ```
 
 ### Windows
@@ -84,7 +84,7 @@ docker run -d --name datadog-agent \
            -e DD_SITE=<DD_SITE> \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
-           gcr.io/datadoghq/agent:latest
+           registry.datadoghq.com/agent:latest
 ```
 
 ### macOS
@@ -104,7 +104,7 @@ docker run -d --name datadog-agent \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
-           gcr.io/datadoghq/agent:latest
+           registry.datadoghq.com/agent:latest
 ```
 
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on GCR.

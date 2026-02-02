@@ -32,15 +32,11 @@ Using the Datadog Cluster Agent allows you to:
 
 If you installed the Datadog Agent using Helm chart v2.7.0 or Datadog Operator v1.0.0+, the **Datadog Cluster Agent is enabled by default**.
 
-Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
+Datadog publishes container images to the Datadog Container Registry, Google Artifact Registry (GAR), Amazon ECR, Azure ACR, and Docker Hub:
 
-| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
-| ------------------------ | ---------------------- | -------------------- | ----------------- |
-| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
+{{% container-images-table %}}
 
-By default, the Cluster Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, use another registry.
-
-<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+{{% container-registry-info %}}
 
 ### Minimum Agent and Cluster Agent versions
 

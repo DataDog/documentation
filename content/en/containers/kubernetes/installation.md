@@ -222,17 +222,11 @@ helm install datadog-agent -f datadog-values.yaml datadog/datadog
 
 ### Container registries
 
-Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
+Datadog publishes container images to the Datadog Container Registry, Google Artifact Registry (GAR), Amazon ECR, Azure ACR, and Docker Hub:
 
-| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
-| ------------------------ | ---------------------- | -------------------- | ----------------- |
-| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
+{{% container-images-table %}}
 
-By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, use another registry.
-
-If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
-
-<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+{{% container-registry-info %}}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}

@@ -350,7 +350,7 @@ If you already have the [Agent running with a manifest][3]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                       # (...)
                   volumeMounts:
                       - name: procdir
@@ -376,10 +376,10 @@ If you already have the [Agent running with a manifest][3]:
                 serviceAccountName: datadog-agent
                 containers:
                     - name: datadog-agent
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                     # (...)
                     - name: system-probe
-                      image: 'gcr.io/datadoghq/agent:latest'
+                      image: 'registry.datadoghq.com/agent:latest'
                       imagePullPolicy: Always
                       securityContext:
                           capabilities:
@@ -484,7 +484,7 @@ docker run --cgroupns host \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
 --cap-add=CHOWN \
-gcr.io/datadoghq/agent:latest
+registry.datadoghq.com/agent:latest
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
@@ -495,7 +495,7 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 version: '3'
 services:
   datadog:
-    image: "gcr.io/datadoghq/agent:latest"
+    image: "registry.datadoghq.com/agent:latest"
     environment:
       - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
       - DD_PROCESS_AGENT_ENABLED=true

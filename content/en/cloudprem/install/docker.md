@@ -81,7 +81,7 @@ docker run \
   -v /proc/:/host/proc/:ro \
   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
   -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
-  gcr.io/datadoghq/agent:latest
+  registry.datadoghq.com/agent:latest
 ```
 {{% /tab %}}
 
@@ -108,7 +108,7 @@ services:
     restart: unless-stopped
 
   datadog-agent:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     environment:
       - DD_API_KEY=${DD_API_KEY}
       - DD_SITE=${DD_SITE:-datadoghq.com}

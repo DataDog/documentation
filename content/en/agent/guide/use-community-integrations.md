@@ -48,7 +48,7 @@ Building a custom image ensures the integration persists across deployments each
 Use the following Dockerfile to build a custom version of the Agent that includes the `<INTEGRATION_NAME>` from [integrations-extras][2]. If you are installing a Marketplace integration, the `<INTEGRATION_NAME>` is available in the configuration instructions.
 
 ```dockerfile
-FROM gcr.io/datadoghq/agent:latest
+FROM registry.datadoghq.com/agent:latest
 RUN agent integration install -r -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 Build and push the image:

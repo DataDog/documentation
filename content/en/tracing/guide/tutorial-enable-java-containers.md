@@ -141,7 +141,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
    ```yaml
      datadog-agent:
        container_name: datadog-agent
-       image: "gcr.io/datadoghq/agent:latest"
+       image: "registry.datadoghq.com/agent:latest"
        pid: host
        environment:
          - DD_API_KEY=<DD_API_KEY_HERE>

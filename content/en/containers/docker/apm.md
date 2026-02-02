@@ -27,7 +27,7 @@ further_reading:
       text: "Assign tags to all data emitted by a container"
 ---
 
-As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `registry.datadoghq.com/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
@@ -54,7 +54,7 @@ docker run -d --cgroupns host \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
@@ -66,7 +66,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
@@ -187,7 +187,7 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \
@@ -210,7 +210,7 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 # Application
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
@@ -372,7 +372,7 @@ docker run -d --name datadog-agent \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \

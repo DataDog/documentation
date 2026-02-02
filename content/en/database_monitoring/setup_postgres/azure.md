@@ -298,7 +298,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<AZURE_INSTANCE_ENDPOINT>"
     }
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:

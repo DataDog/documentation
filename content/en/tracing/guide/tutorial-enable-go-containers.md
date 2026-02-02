@@ -65,10 +65,10 @@ This tutorial uses the `all-docker-compose.yaml` file, which builds containers f
 
 1. Verify that the containers are running with the `docker ps` command. You should see something like this:
    {{< code-block lang="shell" disable_copy="true" >}}
-   CONTAINER ID   IMAGE                           COMMAND                  CREATED              STATUS                          PORTS                    NAMES
-   0a4704ebed09   docker-notes                    "./cmd/notes/notes"      About a minute ago   Up About a minute               0.0.0.0:8080->8080/tcp   notes
-   9c428d7f7ad1   docker-calendar                 "./cmd/calendar/cale…"   About a minute ago   Up About a minute               0.0.0.0:9090->9090/tcp   calendar
-   b2c2bafa6b36   gcr.io/datadoghq/agent:latest   "/bin/entrypoint.sh"     About a minute ago   Up About a minute (unhealthy)   8125/udp, 8126/tcp       datadog-ag
+   CONTAINER ID   IMAGE                                  COMMAND                  CREATED              STATUS                          PORTS                    NAMES
+   0a4704ebed09   docker-notes                           "./cmd/notes/notes"      About a minute ago   Up About a minute               0.0.0.0:8080->8080/tcp   notes
+   9c428d7f7ad1   docker-calendar                        "./cmd/calendar/cale…"   About a minute ago   Up About a minute               0.0.0.0:9090->9090/tcp   calendar
+   b2c2bafa6b36   registry.datadoghq.com/agent:latest    "/bin/entrypoint.sh"     About a minute ago   Up About a minute (unhealthy)   8125/udp, 8126/tcp       datadog-ag
    {{< /code-block >}}
 
 1. The sample `notes` application is a basic REST API that stores data in an in-memory database. Use `curl` to send a few API requests:
@@ -143,7 +143,7 @@ Add the Datadog Agent in the services section of your `all-docker-compose.yaml` 
    {{< code-block lang="yaml" filename="docker/all-docker-compose.yaml">}}
      datadog-agent:
      container_name: datadog-agent
-     image: "gcr.io/datadoghq/agent:latest"
+     image: "registry.datadoghq.com/agent:latest"
      pid: host
      environment:
        - DD_API_KEY=<DD_API_KEY_HERE>

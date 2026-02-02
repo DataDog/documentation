@@ -604,7 +604,7 @@ Use the following configuration fields to configure the Datadog Agent.
 | `global.credentials.appSecret.secretName` | Instead of `global.credentials.apiKey`, supply the name of a Kubernetes `Secret` containing your Datadog app key.|
 | `global.credentials.appSecret.keyName` | Instead of `global.credentials.apiKey`, supply the key of the Kubernetes `Secret` named in `global.credentials.appSecret.secretName`.|
 | `global.logLevel` | Sets logging verbosity. This can be overridden by the container. Valid log levels are: `trace`, `debug`, `info`, `warn`, `error`, `critical`, and `off`. Default: `info`. |
-| `global.registry` | Image registry to use for all Agent images. Default: `gcr.io/datadoghq`. |
+| `global.registry` | Image registry to use for all Agent images. Default: `registry.datadoghq.com`. |
 | `global.site` | Sets the Datadog [intake site][1] to which Agent data is sent. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right). |
 | `global.tags` | A list of tags to attach to every metric, event, and service check collected. |
 
@@ -622,7 +622,7 @@ For a complete list of configuration fields for the Datadog Operator, see the [O
 |  `datadog.appKey` | Configures your Datadog application key. If you are using the external metrics server, you must set a Datadog application key for read access to your metrics. |
 | `datadog.appKeyExistingSecret` | Instead of `datadog.appKey`, supply the name of an existing Kubernetes `Secret` containing your Datadog app key, set with the key name `app-key`. |
 | `datadog.logLevel` | Sets logging verbosity. This can be overridden by the container. Valid log levels are: `trace`, `debug`, `info`, `warn`, `error`, `critical`, and `off`. Default: `info`. |
-| `registry` | Image registry to use for all Agent images. Default: `gcr.io/datadoghq`. |
+| `registry` | Image registry to use for all Agent images. Default: `registry.datadoghq.com`. |
 | `datadog.site` | Sets the Datadog [intake site][1] to which Agent data is sent. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right). |
 | `datadog.tags` | A list of tags to attach to every metric, event, and service check collected. |
 

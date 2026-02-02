@@ -38,13 +38,13 @@ Complete example:
 ```yaml
 services:
   datadog-init:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     command: ["sh", "-c", "cp -R /etc/datadog-agent/* /opt/datadog-agent-config/"]
     volumes:
       - datadog-config:/opt/datadog-agent-config
 
   datadog:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     read_only: true
     pid: host
     depends_on:
