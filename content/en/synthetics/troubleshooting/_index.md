@@ -173,6 +173,19 @@ If you do not see the Datadog Agent listed as a selectable option during test cr
 
 In large or high-volume environments, scheduled tests may not run at the expected intervals if the Datadog Agent does not have enough workers to handle concurrent executions. To optimize performance and maintain consistent scheduling, [increase the number of workers][17] to meet or exceed the total number of tests assigned to the Agent.
 
+### Missing test results from tests executed from the Datadog Agent
+
+If you do not see test results in the Datadog UI, this means that the Datadog Agent is not sending test results to the Synthetics intake (https://http-synthetics.datadoghq.com) that processes test results. Verify that outbound network traffic from the Datadog Agent to this intake is allowed.
+
+If the Datadog Agent is running behind a proxy, make sure the Synthetics collector is configured to send traffic through the proxy, for example:
+```
+synthetics: 
+  collector: 
+    enabled: true
+    synthetics.forwarder.dd_url: "http://my-proxy.com:<proxy-port>"
+```
+Additionaly, ensure that the proxy itself is configured to allow outboud network traffic to the Synthetics intake.
+
 ## Private locations
 
 {{< tabs >}}
