@@ -1,5 +1,5 @@
 ---
-title: Overrides in APM
+title: Base Service, Integration Overrides, and Service Overrides
 description: Understand service overrides, integration overrides, and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
 further_reading:
@@ -24,7 +24,7 @@ Datadog tracing libraries automatically set different service names on client sp
 ### Service overrides
 You can manually set the service name on spans. This gives you visibility into specific components of the service, such as shared libraries and middleware layers. These types of overrides are referred to as **service overrides**.
 
-## How overrides are represented
+## Visualizations
 Integration overrides and service overrides are represented similarly in APM.
 
 #### In service and resource pages
