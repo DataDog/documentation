@@ -25,7 +25,7 @@ Agent-side filtering for custom metrics is in Preview.
 
 ## Overview
 
-Agent-side filtering enables you to filter out unused or unwanted custom metrics (both from DogStatsD and Agent checks) directly at the Datadog Agent, before sending them to Datadog. This can significantly reduce both indexed and ingested custom metric volume.
+Agent-side filtering enables you to filter out unused or unwanted custom metrics (both from DogStatsD and Agent integrations) directly at the Datadog Agent, before sending them to Datadog. This can significantly reduce both indexed and ingested custom metric volume.
 
 Filtering is performed at the Agent level but centrally managed through the Datadog UI, giving teams full visibility and control. You can create, update, and manage filtering policies in Datadog, streamlining metric governance while maintaining transparency.
 
@@ -33,7 +33,7 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 ## Prerequisites
 
-- Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended).
+- Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended) to filter DogStastD metrics. Datadog Agent v7.74.0 or higher is required for Agent Integration metrics.
 - With [`org_management`][2] permissions, enable [Remote Configuration][3] for your organization.
 - With [`api_keys_write`][4] permissions, enable the [Remote Configuration capability on the API keys][5] used by your Agents. After enabling Remote Configuration on an API key, restart your Agents for the change to take effect.
 
@@ -43,7 +43,7 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 You can create a metric filtering policy from the [Metrics Settings page][7] or the [Metrics Summary page][6].
 
-Metric filtering policies are applied to all Agents v7.67.0+ with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
+Metric filtering policies are applied to all Agents v7.67.0+ (v7.74.0+ for Agent Integration metrics) with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
 
 Policy updates are deployed to Agents in 1-2 minutes.
 
@@ -381,7 +381,7 @@ This initial preview release includes the following limitations:
 
 - A maximum of 10,000 metric names can be filtered out.
 - Resource usage impact on the Agent is limited to up to 10MB of memory (RSS), and no increase to CPU usage.
-- Only custom metrics received from either DogStatsD or Agent checks are supported.
+- Only custom metrics received from either DogStatsD or Agent integrations are supported.
 
 ## Further reading
 
