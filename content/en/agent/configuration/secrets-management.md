@@ -20,6 +20,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [GCP Secret Manager](#id-for-gcp)
 - [HashiCorp Vault](#id-for-hashicorp)
 - [Kubernetes Secrets](#id-for-kubernetes)
+- [Docker Secrets](#id-for-docker)
 - [File JSON](#id-for-json-yaml)
 - [File YAML](#id-for-json-yaml)
 
@@ -112,17 +113,6 @@ secret_backend_config:
   aws_session:
     aws_region: us-east-1
 ```
-
-<!-- SECRET MANAGER LINKS -->
-[101]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
-[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
-[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 
 {{% /tab %}}
 
@@ -364,16 +354,6 @@ property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 ```
 
-[200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[201]: https://docs.aws.amazon.com/systems-manager/
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
-[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
-[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-
 {{% /collapse-content %}}
 
 
@@ -412,8 +392,6 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 
 api_key: "ENC[secretKeyNameInKeyVault]"
 ```
-
-[2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
 
 {{% /collapse-content %}}
 
@@ -506,11 +484,6 @@ The Datadog Agent supports extracting specific keys from JSON-formatted secrets 
 - `datadog;api_key` - Extracts the `api_key` field from the `datadog` secret with an implicit `latest` version
 - `datadog;api_key;1`  - Extracts the `api_key` field from the `datadog` secret from version `1`
 
-[5000]: https://cloud.google.com/security/products/secret-manager
-[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
-[5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
-[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
-
 {{% /collapse-content %}}
 
 
@@ -576,12 +549,7 @@ secret_backend_config:
     vault_aws_role: Name-of-IAM-role-attached-to-machine
     aws_region: us-east-1 // this field is optional, and will default to us-east-1 if not set
 ```
-<!-- HASHICORP LINKS -->
-[3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
-[3001]: https://developer.hashicorp.com/
-[3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
-[3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-[3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
@@ -809,7 +777,103 @@ override:
 {{% /tab %}}
 {{< /tabs >}}
 
-[7000]: https://kubernetes.io/docs/concepts/configuration/secret/
+{{% /collapse-content %}}
+
+{{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
+
+**Available in Agent version 7.75+**
+
+The following Docker services are supported:
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `docker.secrets` | [Docker Secrets][6001] |
+
+##### Prerequisites
+
+The Docker secrets backend supports both [Docker Swarm secrets][6002] and [Docker Compose secrets][6003]. Both automatically mount secrets by default as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows). The Agent user must be able to read files at that location.
+
+##### Docker secret types
+
+Both secret types result in the same mounted file structure at `/run/secrets` that the `docker.secrets` backend reads from:
+
+**Swarm Secrets**
+- Stored in encrypted Raft log
+- Mounted at `/run/secrets/<secret_name>`
+
+**Compose Secrets**
+- **File-based**: Points to files on host, mounted at `/run/secrets/<secret_name>`
+- **External**: References Swarm secrets (requires Swarm mode)
+
+##### Configuration example
+
+Configure the Datadog Agent to use Docker Secrets with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: docker.secrets
+
+# Reference secrets using the secret name (filename in /run/secrets)
+api_key: "ENC[dd_api_key]"
+```
+
+The ENC notation format is the secret name, which corresponds to the filename in `/run/secrets/`:
+- `ENC[api_key]` reads from `/run/secrets/api_key` (Linux) or `C:\ProgramData\Docker\secrets\api_key` (Windows)
+
+**Custom secrets path:**
+If your secrets are mounted at a different location, specify the path:
+
+```yaml
+secret_backend_type: docker.secrets
+secret_backend_config:
+  secrets_path: /custom/secrets/path
+```
+
+##### Docker Swarm example
+
+Create and use a Docker Swarm secret:
+
+```bash
+# Create the secret
+echo "<api_key_value>" | docker secret create dd_api_key -
+
+# Deploy Agent with secret mounted
+docker service create \
+  --name datadog-agent \
+  --secret dd_api_key \
+  --env DD_API_KEY="ENC[dd_api_key]" \
+  --env DD_SECRET_BACKEND_TYPE="docker.secrets" \
+  --env DD_SITE="datadoghq.com" \
+  --env DD_HOSTNAME="dd-agent" \
+  datadog/agent:latest
+```
+
+The secret `dd_api_key` is automatically mounted at `/run/secrets/dd_api_key`, and the Agent reads it using the `docker.secrets` backend.
+
+##### Docker Compose example
+
+Create a `docker-compose.yml` with file-based secrets:
+
+```yaml
+version: '3.8'
+
+services:
+  datadog:
+    image: datadog/agent:latest
+    environment:
+      - DD_API_KEY=ENC[dd_api_key]
+      - DD_SECRET_BACKEND_TYPE=docker.secrets
+      - DD_SITE=datadoghq.com
+      - DD_HOSTNAME=dd-agent
+    secrets:
+      - dd_api_key
+
+secrets:
+  dd_api_key:
+    file: ./secrets/api_key.txt
+```
+
+The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` in the container.
 
 {{% /collapse-content %}}
 
@@ -879,9 +943,6 @@ secret_backend_config:
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
-[4001]: https://en.wikipedia.org/wiki/JSON
-[4002]: https://en.wikipedia.org/wiki/YAML
 
 {{% /collapse-content %}}
 
@@ -1379,7 +1440,7 @@ The following errors indicate that something is missing in your setup.
    error while running 'C:\decrypt.py': fork/exec C:\decrypt.py: %1 is not a valid Win32 application.
    ```
 
-Datadog has a [Powershell script][1] to help you set the correct permission on your executable. Example on how to use it:
+Datadog has a [Powershell script][9] to help you set the correct permission on your executable. Example on how to use it:
 
 ```powershell
 .\Set-SecretPermissions.ps1 -SecretBinaryPath C:\secrets\decrypt_secrets.exe
@@ -1429,7 +1490,7 @@ To do so, follow those steps:
     sc.exe config DatadogAgent password= "a_new_password"
     ```
 
-You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][2] to help you test your
+You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][10] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
@@ -1447,8 +1508,8 @@ exit code:
 0
 ```
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
+[9]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
+[10]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1499,8 +1560,38 @@ instances:
 [1]: /agent/kubernetes/integrations/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [3]: https://docs.docker.com/engine/swarm/secrets/
-[4]: https://github.com/DataDog/datadog-secret-backend
-[5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /opentelemetry/setup/ddot_collector/
 [7]: /agent/configuration/agent-commands/#restart-the-agent
 [8]: /agent/configuration/agent-configuration-files/
+<!-- Links in tabs are scoped inside shortcodes, collapse-content links are not scoped -->
+<!-- AWS Secrets Manager and SSM Links -->
+[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
+[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+
+<!-- Azure KeyVault Links -->
+[2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+
+<!-- HashiCorp Vault Links -->
+[3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
+[3001]: https://developer.hashicorp.com/
+[3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+
+<!-- File Backend Links (JSON/YAML) -->
+[4001]: https://en.wikipedia.org/wiki/JSON
+[4002]: https://en.wikipedia.org/wiki/YAML
+
+<!-- GCP Secret Manager Links -->
+[5000]: https://cloud.google.com/security/products/secret-manager
+[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
+[5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
+[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
+
+<!-- Docker Secrets Links -->
+[6001]: https://docs.docker.com/engine/swarm/secrets/
+[6002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
+[6003]: https://docs.docker.com/compose/how-tos/use-secrets/
+
+<!-- Kubernetes Secrets Links -->
+[7000]: https://kubernetes.io/docs/concepts/configuration/secret/
