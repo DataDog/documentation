@@ -3535,6 +3535,19 @@ menu:
       url: /api/latest/service-level-objectives/
       identifier: service-level-objectives
       generated: true
+    - name: Get SLO status
+      url: '#get-slo-status'
+      identifier: service-level-objectives-get-slo-status
+      parent: service-level-objectives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSloStatus
+        unstable:
+          - v2
+        order: 105
     - name: Get SLO report status
       url: '#get-slo-report-status'
       identifier: service-level-objectives-get-slo-report-status
@@ -6680,6 +6693,66 @@ menu:
           - GetCase
         unstable: []
         order: 3
+    - name: Update a notification rule
+      url: '#update-a-notification-rule'
+      identifier: case-management-update-a-notification-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProjectNotificationRule
+        unstable: []
+        order: 3
+    - name: Delete a notification rule
+      url: '#delete-a-notification-rule'
+      identifier: case-management-delete-a-notification-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteProjectNotificationRule
+        unstable: []
+        order: 4
+    - name: Create a notification rule
+      url: '#create-a-notification-rule'
+      identifier: case-management-create-a-notification-rule
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateProjectNotificationRule
+        unstable: []
+        order: 2
+    - name: Get notification rules
+      url: '#get-notification-rules'
+      identifier: case-management-get-notification-rules
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetProjectNotificationRules
+        unstable: []
+        order: 1
+    - name: Update a project
+      url: '#update-a-project'
+      identifier: case-management-update-a-project
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateProject
+        unstable: []
+        order: 5
     - name: Get the details of a project
       url: '#get-the-details-of-a-project'
       identifier: case-management-get-the-details-of-a-project
@@ -7616,6 +7689,18 @@ menu:
           - CreateDORAFailure
         unstable: []
         order: 2
+    - name: Patch a deployment event
+      url: '#patch-a-deployment-event'
+      identifier: dora-metrics-patch-a-deployment-event
+      parent: dora-metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchDORADeployment
+        unstable: []
+        order: 9
     - name: Get a deployment event
       url: '#get-a-deployment-event'
       identifier: dora-metrics-get-a-deployment-event
@@ -9763,8 +9848,7 @@ menu:
           - v2
         operationids:
           - UpdatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Get a specific pipeline
       url: '#get-a-specific-pipeline'
@@ -9776,8 +9860,7 @@ menu:
           - v2
         operationids:
           - GetPipeline
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Delete a pipeline
       url: '#delete-a-pipeline'
@@ -9789,8 +9872,7 @@ menu:
           - v2
         operationids:
           - DeletePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Validate an observability pipeline
       url: '#validate-an-observability-pipeline'
@@ -9802,8 +9884,7 @@ menu:
           - v2
         operationids:
           - ValidatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
@@ -9815,8 +9896,7 @@ menu:
           - v2
         operationids:
           - CreatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: List pipelines
       url: '#list-pipelines'
@@ -9828,8 +9908,7 @@ menu:
           - v2
         operationids:
           - ListPipelines
-        unstable:
-          - v2
+        unstable: []
         order: 0
     - name: Okta Integration
       url: /api/latest/okta-integration/
@@ -11597,6 +11676,127 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: ServiceNow Integration
+      url: /api/latest/servicenow-integration/
+      identifier: servicenow-integration
+      generated: true
+    - name: List ServiceNow users
+      url: '#list-servicenow-users'
+      identifier: servicenow-integration-list-servicenow-users
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowUsers
+        unstable:
+          - v2
+        order: 8
+    - name: List ServiceNow instances
+      url: '#list-servicenow-instances'
+      identifier: servicenow-integration-list-servicenow-instances
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowInstances
+        unstable:
+          - v2
+        order: 9
+    - name: Update ServiceNow template
+      url: '#update-servicenow-template'
+      identifier: servicenow-integration-update-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateServiceNowTemplate
+        unstable:
+          - v2
+        order: 2
+    - name: Get ServiceNow template
+      url: '#get-servicenow-template'
+      identifier: servicenow-integration-get-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetServiceNowTemplate
+        unstable:
+          - v2
+        order: 3
+    - name: Delete ServiceNow template
+      url: '#delete-servicenow-template'
+      identifier: servicenow-integration-delete-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteServiceNowTemplate
+        unstable:
+          - v2
+        order: 1
+    - name: Create ServiceNow template
+      url: '#create-servicenow-template'
+      identifier: servicenow-integration-create-servicenow-template
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateServiceNowTemplate
+        unstable:
+          - v2
+        order: 4
+    - name: List ServiceNow templates
+      url: '#list-servicenow-templates'
+      identifier: servicenow-integration-list-servicenow-templates
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowTemplates
+        unstable:
+          - v2
+        order: 5
+    - name: List ServiceNow business services
+      url: '#list-servicenow-business-services'
+      identifier: servicenow-integration-list-servicenow-business-services
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowBusinessServices
+        unstable:
+          - v2
+        order: 7
+    - name: List ServiceNow assignment groups
+      url: '#list-servicenow-assignment-groups'
+      identifier: servicenow-integration-list-servicenow-assignment-groups
+      parent: servicenow-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListServiceNowAssignmentGroups
+        unstable:
+          - v2
+        order: 6
     - name: Software Catalog
       url: /api/latest/software-catalog/
       identifier: software-catalog

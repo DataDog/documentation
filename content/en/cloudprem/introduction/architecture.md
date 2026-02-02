@@ -49,5 +49,5 @@ There are two ways to connect the Datadog UI to CloudPrem:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /cloudprem/introduction/connectivity/
+[1]: /cloudprem/introduction/network/
 [2]: /cloudprem/configure/ingress/

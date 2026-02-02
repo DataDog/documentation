@@ -1,8 +1,6 @@
 ---
 title: Observability Pipelines Guides
 disable_toc: false
-aliases:
-    - /observability_pipelines/environment_variables/
 ---
 
 {{< whatsnext desc="General guides:" >}}

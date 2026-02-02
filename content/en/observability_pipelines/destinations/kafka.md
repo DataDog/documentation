@@ -56,16 +56,9 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 1. In the **Compression Algorithm** dropdown menu, select a compression algorithm (**gzip**, **zstd**, **lz4**, or **snappy**).
 1. (Optional) Select a **Compression Level** in the dropdown menu. If the level is not specified, the algorithm's default level is used.
 
-##### Buffering options (Preview)
+##### Buffering options
 
-Toggle the switch to enable **Buffering Options** ({{< tooltip glossary="preview" case="title" >}}).<br>**Note**: Contact your account manager to request access to the Preview.
-- If disabled (default): Up to 500 events are buffered before flush.
-- If enabled:
-	1. Select the buffer type you want to set.
-        - **Memory**: Fast, limited by RAM
-        - **Buffer size**: Durable, survives restarts
-	1. Enter the buffer size and select the unit.
-	    - Maximum capacity in MB or GB.
+{{% observability_pipelines/destination_buffer %}}
 
 ##### Advanced options
 
