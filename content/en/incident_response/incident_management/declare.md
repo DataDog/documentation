@@ -87,6 +87,10 @@ If the user declaring the incident connected their Slack to their Datadog accoun
 
 After you declare an incident from Slack, it generates an incident channel.
 
+## From Google Chat
+
+If you have set up the [Datadog integration for Google Chat][14], you can declare an incident with the slash command `/dd_incident` from any Google Chat space.
+
 ## From Handoff Notifications
 
 The Handoff Notification displays callout cards when you are paged or added to active incidents. These cards allow you to:
@@ -98,7 +102,7 @@ The Handoff Notification displays callout cards when you are paged or added to a
 
 {{< img src="/service_management/incidents/declare/handoff_notification_card.png" alt="Handoff notification card showing incident details with options to view, acknowledge, and take actions" style="width:100%;" >}}
 
-Handoff Notificiation cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
+Handoff Notification cards remain visible until dismissed or until the incident status changes. You can expand, collapse, or dismiss the entire handoff container rather than individual cards.
 
 You can declare an incident from individual Handoff Notification cards.
 
@@ -121,3 +125,4 @@ You can declare an incident from individual Handoff Notification cards.
 [11]: /incident_response/incident_management/incident_settings/notification_rules
 [12]: /incident_response/on-call/
 [13]: https://app.datadoghq.com/on-call/pages
+[14]: /integrations/google-hangouts-chat/
