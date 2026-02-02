@@ -2,8 +2,8 @@
 title: Correlate RUM and Profiling
 description: "Use profiling with RUM to understand application performance issues affecting user experience."
 content_filters:
-  - trait_id: platform
-    option_group_id: rum_sdk_platform_options_v3
+  - trait_id: sdk_profiling
+    option_group_id: rum_sdk_profiling_options
     label: "SDK"
 aliases:
   - /real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling
@@ -31,10 +31,10 @@ further_reading:
 Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
 <!-- Browser -->
-{% if equals($platform, "browser") %}
+{% if equals($sdk_profiling, "browser") %}
 
-{% callout src="https://www.datadoghq.com/product-preview/browser-profiler/" header="Join the Preview!" %}
-Browser Profiling is in Preview. To request access, fill out this form.
+{% callout header="Join the Preview!" btn_hidden="true" %}
+Browser Profiling is in Preview. To request access, fill out [this form](https://www.datadoghq.com/product-preview/browser-profiler/).
 {% /callout %}
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler.png" 
@@ -45,9 +45,9 @@ Browser profiling provides visibility into how your application behaves in your 
 
 To get started, enable browser profiling in your RUM SDK configuration. After enabling it, click on a profiled event sample to see detailed profiling data.
 
-## Setup
+## Setup {% #setup-browser %}
 
-### Step 1 - Set up RUM
+### Step 1 - Set up RUM {% #step-1-set-up-rum-browser %}
 
 {% alert %}
 Browser SDK version 6.12 or later is required.
@@ -55,7 +55,7 @@ Browser SDK version 6.12 or later is required.
 
 To start collecting data, set up [RUM Browser Monitoring][2].
 
-### Step 2 - Configure the profiling sampling rate
+### Step 2 - Configure the profiling sampling rate {% #step-2-configure-the-profiling-sampling-rate-browser %}
 
 1. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 sessions).
     ```javascript
@@ -139,9 +139,9 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 {% /collapse-content %}
 
-## Explore profiling
+## Explore profiling {% #explore-profiling-browser %}
 
-### Within the Optimization page
+### Within the Optimization page {% #within-the-optimization-page-browser %}
 
 The **Optimization page** surfaces profiling data in several contexts:
 
@@ -154,45 +154,41 @@ The **Optimization page** surfaces profiling data in several contexts:
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
 
 
-### Within the Sessions Explorer 
+### Within the Sessions Explorer {% #within-the-sessions-explorer-browser %}
 You can also find profiling data when reviewing individual events within the **Sessions Explorer**. This opens the same Long Task view panel with profiling data, allowing you to inspect what code was executing during that task and how it affected the user's experience.
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
-
-[1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
-[2]: /real_user_monitoring/application_monitoring/browser/setup/
-[3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
 
 {% /if %}
 <!-- end Browser -->
 
 <!-- Android -->
-{% if equals($platform, "android") %}
+{% if equals($sdk_profiling, "android") %}
 
-{% callout src="https://www.datadoghq.com/product-preview/android-profiler/" header="Join the Preview!" %}
-Android Profiling is in Preview. To request access, fill out this form.
+{% callout header="Join the Preview!" btn_hidden="true" %}
+Android Profiling is in Preview. To request access, fill out [this form](https://www.datadoghq.com/product-preview/android-profiler/).
 {% /callout %}
 
 {% img src="real_user_monitoring/android/android-profiling-ttid.png" alt="Android profiling data in a time to initial display vital event." style="width:90%;" /%}
 
-Android profiling captures detailed data about your application's performance during launch, helping you identify slow methods and optimize startup time. Android profiling is built on top of the [ProfilingManager Android API][1] and samples the device's CPU to collect method call stacks from the application's process.
+Android profiling captures detailed data about your application's performance during launch, helping you identify slow methods and optimize startup time. Android profiling is built on top of the [ProfilingManager Android API][4] and samples the device's CPU to collect method call stacks from the application's process.
 
 {% alert level="warning" %}
 Only devices running Android 15 (API level 35) or higher generate profiling data.
 {% /alert %}
 
-## Prerequisites
+## Prerequisites {% #prerequisites-android %}
 
 - Your Android application must use the Datadog Android SDK version 3.6.0+.
-- [RUM without Limits][2] must be enabled in your organization.
+- [RUM without Limits][5] must be enabled in your organization.
 
-## Setup
+## Setup {% #setup-android %}
 
-### Step 1 - Set up RUM
+### Step 1 - Set up RUM {% #step-1-set-up-rum-android %}
 
-To start collecting data, set up [Mobile RUM for Android][3].
+To start collecting data, set up [Mobile RUM for Android][6].
 
-### Step 2 - Configure the profiling sampling rate
+### Step 2 - Configure the profiling sampling rate {% #step-2-configure-the-profiling-sampling-rate-android %}
 
 1. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 15% means profiling runs on 15 out of 100 launches).
 
@@ -231,13 +227,13 @@ To start collecting data, set up [Mobile RUM for Android][3].
     The total volume of profiles may not match the percentage configured in `applicationLaunchSampleRate`. This variation results from [rate limitations](https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works) within the data collector, including profiling support on older devices and the maximum profiling frequency per device.
     {% /alert %}
 
-The [ProfilingManager API][4] also supports disabling rate limiting during debug builds. 
+The [ProfilingManager API][7] also supports disabling rate limiting during debug builds. 
 
-## Explore profiling data
+## Explore profiling data {% #explore-profiling-data-android %}
 
-### During the time to initial display
+### During the time to initial display {% #during-the-time-to-initial-display-android %}
 
-Android application launch profiling data is attached to the [time to initial display][5] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
+Android application launch profiling data is attached to the [time to initial display][8] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
 
 {% img src="real_user_monitoring/android/android-profiling-session.png" alt="Android profiling data in RUM session." style="width:90%;" /%}
 
@@ -245,37 +241,31 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 
 {% img src="real_user_monitoring/android/android-profiling-thread-timeline.png" alt="Android profiling data for the time to initial display in a thread timeline." style="width:90%;" /%}
 
-[1]: https://developer.android.com/topic/performance/tracing/profiling-manager/overview
-[2]: /real_user_monitoring/rum_without_limits/ 
-[3]: /real_user_monitoring/application_monitoring/android
-[4]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
-[5]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin
-
 {% /if %}
 <!-- end Android -->
 
 <!-- iOS -->
-{% if equals($platform, "ios") %}
+{% if equals($sdk_profiling, "ios") %}
 
-{% callout src="https://www.datadoghq.com/product-preview/ios-profiler/" header="Join the Preview!" %}
-iOS Profiling is in Preview. To request access, fill out this form.
+{% callout header="Join the Preview!" btn_hidden="true" %}
+iOS Profiling is in Preview. To request access, fill out [this form](https://www.datadoghq.com/product-preview/ios-profiler/).
 {% /callout %}
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
 
-iOS profiling captures detailed data about your application's performance during launch, helping you identify slow functions and optimize startup time. iOS profiling is built on top of the [mach Kernel API][1] and periodically samples all application threads to collect call stacks. 
+iOS profiling captures detailed data about your application's performance during launch, helping you identify slow functions and optimize startup time. iOS profiling is built on top of the [mach Kernel API][9] and periodically samples all application threads to collect call stacks. 
 
-## Prerequisites
+## Prerequisites {% #prerequisites-ios %}
 
 - Your iOS application must use the Datadog iOS SDK version 3.6.0+.
-- [RUM without Limits][2] must be enabled in your organization.
+- [RUM without Limits][10] must be enabled in your organization.
 
-## Setup
+## Setup {% #setup-ios %}
 
-### Step 1 - Set up RUM
-To start collecting data, set up [Mobile RUM for iOS][3].
+### Step 1 - Set up RUM {% #step-1-set-up-rum-ios %}
+To start collecting data, set up [Mobile RUM for iOS][11].
 
-### Step 2 - Configure the profiling sampling rate
+### Step 2 - Configure the profiling sampling rate {% #step-2-configure-the-profiling-sampling-rate-ios %}
 
 Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 5% means profiling runs on 5 out of 100 launches).
 
@@ -309,11 +299,11 @@ If no value is specified, the default `applicationLaunchSampleRate` is 5 percent
     Profiling.enable() // default is 5%
 ```
 
-## Explore profiling data
+## Explore profiling data {% #explore-profiling-data-ios %}
 
-### During the time to initial display
+### During the time to initial display {% #during-the-time-to-initial-display-ios %}
 
-iOS application launch profiling data is attached to the [time to initial display][4] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
+iOS application launch profiling data is attached to the [time to initial display][12] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
 
 {% img src="real_user_monitoring/ios/ios-profiling-session.png" alt="iOS profiling data in a view event to initial display vital event." style="width:90%;" /%}
 
@@ -321,10 +311,18 @@ Use the **flame graph** to identify which functions consume the most Wall time d
 
 {% img src="real_user_monitoring/ios/ios-profiling-thread-timeline.png" alt="iOS profiling data for the time to initial display in a thread timeline." style="width:90%;" /%}
 
-[1]: https://developer.apple.com/documentation/kernel/mach
-[2]: /real_user_monitoring/rum_without_limits/ 
-[3]: /real_user_monitoring/application_monitoring/ios
-[4]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
-
 {% /if %}
 <!-- end iOS -->
+
+[1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
+[2]: /real_user_monitoring/application_monitoring/browser/setup/
+[3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
+[4]: https://developer.android.com/topic/performance/tracing/profiling-manager/overview
+[5]: /real_user_monitoring/rum_without_limits/ 
+[6]: /real_user_monitoring/application_monitoring/android
+[7]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
+[8]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin
+[9]: https://developer.apple.com/documentation/kernel/mach
+[10]: /real_user_monitoring/rum_without_limits/ 
+[11]: /real_user_monitoring/application_monitoring/ios
+[12]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
