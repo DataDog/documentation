@@ -84,7 +84,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -155,7 +155,7 @@ Is Visible
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -229,7 +229,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -253,7 +253,7 @@ Has Background
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 ### Example
 
@@ -300,7 +300,7 @@ Show Borders
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -366,7 +366,7 @@ Tooltip
 : The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
-Default timeframe
+Default Timeframe
 : The default timeframe that the date picker displays.<br>
 **Provided values**: past 5 minutes, past 30 minutes, past 1 hour, past 4 hours, past 1 day
 
@@ -392,7 +392,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format. Values are displayed both as a Unix timestamp in milliseconds and ISO (year, month, day, hour, minutes, seconds, and milliseconds).
 
 ### Example
 
@@ -457,7 +457,7 @@ Title
 : The title of the form.<br>
 **Value**: string or expression
 
-Default value
+Default Value
 : The default value that the app populates in the form. To populate a specific field, you can use JSON notation, such as `{"org":"frontend"}` to populate the `org` field with the value `frontend`.<br>
 **Value**: string or expression
 
@@ -467,7 +467,7 @@ Each item represents a field in the form. Fields each have one of the following 
 
 Fields have some or all of the following properties depending on their field type:
 
-Field name
+Field Name
 : The unique identifier for a field. You can use this identifier to reference the field in an expression.<br>
 **Value**: string or expression
 
@@ -491,7 +491,7 @@ Options
 : The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>**Value**: Each object's `label` and `value` can be a string or expression.<br>
 You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.
 
-Placeholder text
+Placeholder Text
 : The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
 **Value**: string or expression
 
@@ -533,7 +533,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 {{% /collapse-content %}}
 
@@ -635,7 +635,7 @@ Tooltip
 : The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
-Default value
+Default Value
 : The default JSON value that the component displays.
 
 ### Appearance
@@ -668,7 +668,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 {{% /collapse-content %}}
 
 
@@ -730,11 +730,11 @@ Tooltip
 : The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
-Default value
+Default Value
 : The default value that the app populates in the input box.<br>
 **Value**: number or expression that evaluates to a number
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
@@ -816,7 +816,7 @@ Options
      ]}
      ```
 
-Default value
+Default Value
 : The value that is selected when the radio loads.<br>
 **Value**: string or expression
 
@@ -887,7 +887,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Relationships
 
@@ -906,11 +906,11 @@ Search components have the following properties.
 
 ### General
 
-Default value
+Default Value
 : The default value that the app populates in the search box.<br>
 **Value**: string or expression
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
@@ -991,7 +991,7 @@ Options
       ]}
       ```
 
-Default value
+Default Value
 : The value that is selected when the select loads.<br>
 **Value**: string or expression
 
@@ -1031,7 +1031,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
@@ -1039,7 +1039,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Side Panel" level="h3" %}}
+{{% collapse-content title="Side panel" level="h3" %}}
 Custom chart components have the following properties.
 
 ### General 
@@ -1075,7 +1075,7 @@ Displays properties and values in JSON format.
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Tab" level="h3" %}}
+{{% collapse-content title="Tabs" level="h3" %}}
 
 Tab components have the following properties.
 
@@ -1157,7 +1157,7 @@ Title Alignment
 : Determines the horizontal alignment of the title within the table.<br>
 **Provided values**: align left, align center, align right
 
-Data source
+Data Source
 : The array of objects to display in a table.<br>
 **Values**: action, query, demo data, components, data transformation
 
@@ -1196,11 +1196,11 @@ Some columns have additional properties based on their **Formatting** property.
 
 ### Pagination
 
-Has summary
+Has Summary
 : Determines whether to display a pagination summary directly above the table.<br>
 **Provided values**: on, off
 
-Page size
+Page Size
 : Number of rows per page to display.<br>
 **Value**: number or expression that evaluates to a number
 
@@ -1270,27 +1270,27 @@ Is Loading
 : Shows a loading indicator.<br>
 **Provided values**: on, off
 
-Has text wrapping
+Has Text Wrapping
 : Determines whether cell text wraps.<br>
 **Provided values**: on, off
 
-Has subrows
+Has Subrows
 : Enables subrows for each row. Include the `subRows` property in the data source.<br>
 **Provided values**: on, off
 
-Is searchable
+Is Searchable
 : Determines whether to add a search bar to the table. <br>
 **Provided values**: on, off
 
-Show sort options
+Show Sort Options
 : Adds a **Sort** button to the table that gives users sorting options.<br>
 **Provided values**: on, off
 
-Show column options
+Show Column Options
 : Adds a **Columns** button to the table for displaying, hiding, or reorganizing table columns.<br>
 **Provided values**: on, off
 
-Has date range filter
+Has Date Range Filter
 : Adds a date range filter to the table.<br>
 **Provided values**: on, off
 
@@ -1345,11 +1345,11 @@ Title
 
 ### Appearance
 
-Text alignment
+Text Alignment
 : Determines the horizontal alignment of the text within the component.<br>
 **Provided values**: align left, align center, align right
 
-Vertical alignment
+Vertical Alignment
 : Determines the vertical alignment of the text within the component.<br>
 **Provided values**: align top, align center, align bottom
 
@@ -1382,11 +1382,11 @@ Tooltip
 : The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
-Default value
+Default Value
 : The value that is selected when the text area loads.<br>
 **Value**: string or expression
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
@@ -1433,11 +1433,11 @@ Tooltip
 : The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
-Default value
+Default Value
 : The value that is selected when the text input loads.<br>
 **Value**: string or expression
 
-Placeholder text
+Placeholder Text
 : The text that displays when no value is entered.<br>
 **Value**: string or expression
 
