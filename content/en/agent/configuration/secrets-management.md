@@ -396,6 +396,8 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 
 {{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
 
+**Available in Agent version 7.74+**
+
 The following GCP services are supported:
 
 | secret_backend_type value                               | GCP Service                    |
