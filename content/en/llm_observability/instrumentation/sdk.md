@@ -1982,6 +1982,8 @@ def llm_call(prompt):
 
 The LLM Observability SDK provides methods to export and submit your evaluations to Datadog.
 
+<div class="alert alert-info">For building reusable, class-based evaluators (<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>) with rich result metadata, see the <a href="/llm_observability/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>.</div>
+
 Evaluations must be joined to a single span. You can identify the target span using either of these two methods:
 - _Tag-based joining_ - Join an evaluation using a unique key-value tag pair that is set on a single span. The evaluation will fail to join if the tag key-value pair matches multiple spans or no spans.
 - _Direct span reference_ - Join an evaluation using the span's unique trace ID and span ID combination.

@@ -28,6 +28,14 @@ Datadog builds and supports [managed evaluations][2] to support common use cases
 
 You can also submit [external evaluations][3] using Datadog's API. This mechanism is great if you have your own evaluation system, but would like to centralize that information within Datadog.
 
+### Evaluation developer guide
+
+For developers building custom evaluations, the [Evaluation Developer Guide][10] provides comprehensive documentation on:
+- Evaluation data models (`EvaluatorContext`, `EvaluatorResult`)
+- Class-based evaluators (`BaseEvaluator`, `BaseSummaryEvaluator`)
+- SDK methods (`submit_evaluation`, `export_span`)
+- HTTP API reference
+
 ### Evaluation integrations
 
 Datadog also supports integrations with some 3rd party evaluation frameworks, such as [Ragas][4] and [NeMo][5].
@@ -63,3 +71,4 @@ LLM Observability offers an [Export API][9] that you can use to retrieve spans f
 [7]: /account_management/rbac/permissions/#llm-observability
 [8]: https://app.datadoghq.com/llm/evaluations
 [9]: /llm_observability/evaluations/export_api
+[10]: /llm_observability/evaluations/evaluation_developer_guide
