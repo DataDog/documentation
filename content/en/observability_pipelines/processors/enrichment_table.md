@@ -181,7 +181,7 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 
 #### Reference Table metrics
 
-To see metrics about the Reference Table used by your Enrichment Table processor, add the tags `component_type:enrichment_table` and `component_id:reference_table_<table-id>` to Reference Table metrics:
+To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id:reference_table_<table-id>` to the metrics:
 
 `pipelines.enrichment_rows_not_found_total`
 : This counter is incremented for each processed log that does not have a corresponding row in the table.
