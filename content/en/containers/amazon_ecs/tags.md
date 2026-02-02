@@ -33,6 +33,8 @@ The Agent can autodiscover and attach tags to all data emitted by the entire tas
   | `image_name`                  | Low          | Docker               |
   | `short_image`                 | Low          | Docker               |
   | `image_tag`                   | Low          | Docker               |
+  | `availability-zone`           | Low          | ECS API              |
+  | `availability_zone` (deprecated) | Low       | ECS API              |
   | `aws_account`                 | Low          | ECS API              |
   | `cluster_arn`                 | Low          | ECS API              |
   | `service_arn`                 | Low          | ECS API              |
@@ -47,6 +49,8 @@ The Agent can autodiscover and attach tags to all data emitted by the entire tas
   | `task_version`                | Low          | ECS API              |
 
 </div>
+
+**Note**: The `availability_zone` tag is deprecated in favor of `availability-zone`. Both tags are currently sent by the Agent, but `availability_zone` may be removed in a future release.
 
 ## Unified service tagging
 
