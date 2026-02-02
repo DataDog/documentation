@@ -867,9 +867,6 @@ secrets:
 
 The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` in the container.
 
-[6001]: https://docs.docker.com/engine/swarm/secrets/
-[6002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
-[6003]: https://docs.docker.com/compose/how-tos/use-secrets/
 
 {{% /collapse-content %}}
 
@@ -1583,6 +1580,11 @@ instances:
 [5001]: https://cloud.google.com/docs/authentication/application-default-credentials
 [5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
 [5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
+
+<!-- Docker Secrets Links -->
+[6001]: https://docs.docker.com/engine/swarm/secrets/
+[6002]: https://docs.docker.com/engine/swarm/secrets/#how-docker-manages-secrets
+[6003]: https://docs.docker.com/compose/how-tos/use-secrets/
 
 <!-- Kubernetes Secrets Links -->
 [7000]: https://kubernetes.io/docs/concepts/configuration/secret/
