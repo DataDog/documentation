@@ -710,7 +710,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties in JSON format.
 
 ### Example
 
@@ -724,6 +724,10 @@ Number input components have the following properties.
 
 Label
 : The text that displays at the top of the component.<br>
+**Value**: string or expression
+
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
 **Value**: string or expression
 
 Default value
@@ -772,7 +776,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
