@@ -200,6 +200,10 @@ When a test fails, fast retry allows you to retry the test X times after Y ms be
 
 Since location uptime is computed based on the final test result after retries complete, fast retry intervals directly impact what appears in your total uptime graph. The total uptime is computed based on the configured alert conditions, and notifications are sent based on the total uptime.
 
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
+
 ### Configure the test monitor
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
@@ -374,3 +378,4 @@ Use [granular access control][17] to limit who has access to your test based on 
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
 [18]: https://www.microsoft.com/edge
+[19]: /synthetics/notifications/understanding_synthetic_monitor_alerting/
