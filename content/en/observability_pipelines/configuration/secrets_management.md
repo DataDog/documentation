@@ -40,7 +40,7 @@ After you [install the Worker][1], configure the Worker's [bootstrap file][2] to
 backend_type: aws.secrets
 backend_config:
   aws_session:
-    aws_region: {regionName}
+    aws_region: <region_name>
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
@@ -57,7 +57,7 @@ bootstrap:
       backend_type: aws.secrets
       backend_config:
         aws_session:
-          aws_region: {regionName}
+          aws_region: <region_name>
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
@@ -99,7 +99,7 @@ secret:
   backend_type: aws_parameter_store
   backend_config:
     aws_session:
-      aws_region: {regionName}
+      aws_region: <region_name>
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
@@ -116,7 +116,7 @@ bootstrap:
       backend_type: aws_parameter_store
       backend_config:
         aws_session:
-          aws_region: {regionName}
+          aws_region: <region_name>
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
