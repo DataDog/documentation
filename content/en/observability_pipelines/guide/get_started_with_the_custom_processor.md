@@ -342,7 +342,7 @@ if exists(.service) {
 
 #### Input
 
-Sample log containing the `ddtags` array with Datadog tags. In this example, we are creating a new tag called `"system:service-mesh"` and appending it to the array.
+. In this example, the sample log contains the `ddtags` array and you want to create a tag called `"system:service-mesh"` and append it to the array.
 
 ```json
 {
