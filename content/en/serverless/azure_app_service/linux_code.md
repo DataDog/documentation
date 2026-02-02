@@ -382,6 +382,10 @@ See [Unified Service Tagging][303] for more information on the `env` tag.<br>
 There is no default value for this field.<br>
 See [Unified Service Tagging][303] for more information on the `version` tag.<br>
 
+`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
+: **Value**: `true`<br>
+Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
+
 `DD_SERVERLESS_LOG_PATH`
 : **Value**: The log path the sidecar uses to collect logs.<br>
 Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`.<br>
@@ -396,9 +400,6 @@ Recommended for scenarios with frequent log rotation. For example, setting `_def
 
 <div class="alert alert-info">If your application has multiple instances, make sure your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicate logs from multiple instances that are reading the same file. Enabling this feature variable also prevents <code>DD_SERVERLESS_LOG_PATH</code> from being set. This is to prevent ingesting duplicate logs.</div>
 
-`WEBSITES_ENABLE_APP_SERVICE_STORAGE`
-: **Value**: `true`<br>
-Setting this environment variable to `true` allows the `/home/` mount to persist and be shared with the sidecar.<br>
 
 
 
