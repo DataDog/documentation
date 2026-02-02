@@ -25,7 +25,7 @@ To set up the Deduplicate processor:
     - Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example) below.
 1. Click **Add field** to add additional fields you want to filter on.
 
-##### Path notation example
+### Path notation example
 
 For the following message structure:
 
