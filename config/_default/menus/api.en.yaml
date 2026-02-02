@@ -10398,6 +10398,23 @@ menu:
           - ListOrgConnections
         unstable: []
         order: 100
+    - name: Policy Management
+      url: /api/latest/policy-management/
+      identifier: policy-management
+      generated: true
+    - name: Evaluate policy result
+      url: '#evaluate-policy-result'
+      identifier: policy-management-evaluate-policy-result
+      parent: policy-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EvaluatePolicyResult
+        unstable:
+          - v2
+        order: 1
     - name: Powerpack
       url: /api/latest/powerpack/
       identifier: powerpack
@@ -12375,6 +12392,88 @@ menu:
           - ListStatusPages
         unstable: []
         order: 3
+    - name: Tag Policies
+      url: /api/latest/tag-policies/
+      identifier: tag-policies
+      generated: true
+    - name: Get tag policy score
+      url: '#get-tag-policy-score'
+      identifier: tag-policies-get-tag-policy-score
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicyScore
+        unstable:
+          - v2
+        order: 2
+    - name: Update a tag policy
+      url: '#update-a-tag-policy'
+      identifier: tag-policies-update-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTagPolicy
+        unstable:
+          - v2
+        order: 4
+    - name: Get a tag policy
+      url: '#get-a-tag-policy'
+      identifier: tag-policies-get-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTagPolicy
+        unstable:
+          - v2
+        order: 5
+    - name: Delete a tag policy
+      url: '#delete-a-tag-policy'
+      identifier: tag-policies-delete-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTagPolicy
+        unstable:
+          - v2
+        order: 3
+    - name: Create a tag policy
+      url: '#create-a-tag-policy'
+      identifier: tag-policies-create-a-tag-policy
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTagPolicy
+        unstable:
+          - v2
+        order: 6
+    - name: List tag policies
+      url: '#list-tag-policies'
+      identifier: tag-policies-list-tag-policies
+      parent: tag-policies
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTagPolicies
+        unstable:
+          - v2
+        order: 7
     - name: Teams
       url: /api/latest/teams/
       identifier: teams
