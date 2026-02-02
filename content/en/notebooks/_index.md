@@ -226,7 +226,7 @@ You can preview snapshot status for a notebook by hovering over the graph snapsh
 
 {{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator to determine how many snapshots have been generated" style="width:100%;">}}
 
-Once a notebook contains a graph with data that is past its data retention limits, the notebook will display a snapshot of the graph in-line. The snapshot itself is a static image – if you edit the underlying graph, the image will be updated and replaced.
+When a notebook contains a graph with data that is past its data retention limits, the notebook displays an inline snapshot of the graph. The snapshot is a static image, but it is replaced if you edit the underlying graph.
 
 ### Permissions
 
