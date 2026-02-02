@@ -71,7 +71,7 @@ If you already have a list of users, for example, from a survey, experiment, or 
 ### In pathways
 Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the path taken by the "Premium Shopist Customers" segment navigating your product.
 
-{{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the "Premium Shopist Customers" segment.">}}
+{{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the Premium Shopist Customers segment.">}}
 
 ### In analytics explorer
 
