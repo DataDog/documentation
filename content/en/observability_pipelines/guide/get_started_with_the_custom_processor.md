@@ -338,7 +338,7 @@ if exists(.service) {
     ]
 }
 ```
-### Example to create a new tag and add it
+### Example to create and add a tag
 
 #### Input
 
