@@ -289,7 +289,7 @@ Create the file `/path/to/json/file.json` to store the identifiers and their sec
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add your identifier and secrets mapping to the [`datadog.bootstrap.secretFileContents`][2] section of the Helm chart `values.yaml` file:
+You can't pass in a file to configure `secretFileContents`, but you can add your secrets and identifier mapping to the [`datadog.bootstrap.secretFileContents`][1] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:
@@ -298,8 +298,7 @@ bootstrap:
     secret_identifier1: "<secret1>"
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
-[2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -340,7 +339,8 @@ secret_identifier1: "<secret1>"
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add your identifier and secrets mapping to the [`datadog.bootstrap.secretFileContents`][2] section of the Helm chart `values.yaml` file:
+
+You can't pass in a file to configure `secretFileContents`, but you can add your secrets and identifier mapping to the [`datadog.bootstrap.secretFileContents`][1] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:
@@ -349,8 +349,7 @@ bootstrap:
     secret_identifier1: "<secret1>"
 ```
 
-[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
-[2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
 
 {{% /tab %}}
 {{< /tabs >}}
