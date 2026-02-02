@@ -596,6 +596,18 @@
     "request_description": "Unassign case payload",
     "request_schema_description": "Case empty request"
   },
+  "ListCaseWatchers": {
+    "description": "Get all users watching a case",
+    "summary": "Get case watchers"
+  },
+  "UnwatchCase": {
+    "description": "Remove a user from the watchers list for a case",
+    "summary": "Remove user as watcher"
+  },
+  "WatchCase": {
+    "description": "Add a user as a watcher for a case",
+    "summary": "Add user as watcher"
+  },
   "ListCatalogEntity": {
     "description": "Get a list of entities from Software Catalog.",
     "summary": "Get a list of entities"

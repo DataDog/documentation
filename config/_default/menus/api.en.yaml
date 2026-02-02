@@ -6525,6 +6525,45 @@ menu:
       url: /api/latest/case-management/
       identifier: case-management
       generated: true
+    - name: Add user as watcher
+      url: '#add-user-as-watcher'
+      identifier: case-management-add-user-as-watcher
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - WatchCase
+        unstable:
+          - v2
+        order: 2
+    - name: Remove user as watcher
+      url: '#remove-user-as-watcher'
+      identifier: case-management-remove-user-as-watcher
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnwatchCase
+        unstable:
+          - v2
+        order: 1
+    - name: Get case watchers
+      url: '#get-case-watchers'
+      identifier: case-management-get-case-watchers
+      parent: case-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCaseWatchers
+        unstable:
+          - v2
+        order: 3
     - name: Unassign case
       url: '#unassign-case'
       identifier: case-management-unassign-case
