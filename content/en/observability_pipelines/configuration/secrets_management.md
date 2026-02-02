@@ -48,7 +48,7 @@ backend_config:
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file. For example:
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:
@@ -107,7 +107,7 @@ secret:
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file. For example:
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:
@@ -153,7 +153,7 @@ backend_config:
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file. For example:
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:
@@ -230,7 +230,7 @@ secret:
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file. For example:
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:
@@ -289,7 +289,7 @@ Create the file `/path/to/json/file.json` to store the identifiers and their sec
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add your identifier and secrets mapping to the [`datadog.bootstrap.secretFileContents`][2] section of the Helm chart `values.yaml` file. For example:
+Before you [install the Worker][1], add your identifier and secrets mapping to the [`datadog.bootstrap.secretFileContents`][2] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:
@@ -342,7 +342,7 @@ secret_identifier1: "<secret1>"
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-Before you [install the Worker][1], add your identifier and secrets mapping to the [`datadog.bootstrap.secretFileContents`][2] section of the Helm chart `values.yaml` file. For example:
+Before you [install the Worker][1], add your identifier and secrets mapping to the [`datadog.bootstrap.secretFileContents`][2] section of the Helm chart `values.yaml` file:
 
 ```yaml
 bootstrap:

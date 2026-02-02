@@ -113,28 +113,29 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
-1. If you are using **Secrets Management**, see [Secrets Management][8] on how to configure your `values.yaml` file for your secrets manager.
 1. If you are using:
-    - **Secrets Management**: Run this command to install the Worker:
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	datadog/observability-pipelines-worker
-    ```
+    - **Secrets Management**:
+    1. See [Secrets Management][8] on how to configure your `values.yaml` file for your secrets manager.
+    1. Run this command to install the Worker:
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        datadog/observability-pipelines-worker
+        ```
     - **Environment variables**: Run this command to install the Worker:
 
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	--set <SOURCE_ENV_VARIABLES> \
-	--set <DESTINATION_ENV_VARIABLES> \
-	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
-	datadog/observability-pipelines-worker
-    ```
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        --set <SOURCE_ENV_VARIABLES> \
+        --set <DESTINATION_ENV_VARIABLES> \
+        --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
+        datadog/observability-pipelines-worker
+        ```
 
     You must replace the placeholders with the following values:
 
@@ -316,28 +317,29 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
-1. If you are using **Secrets Management**, see [Secrets Management][7] on how to configure your `values.yaml` file for your secrets manager.
+1. If you are using **Secrets Management**, 
 1. If you are using:
-    - **Secrets Management**: Run this command to install the Worker:
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	datadog/observability-pipelines-worker
-    ```
+    - **Secrets Management**:
+    1. See [Secrets Management][7] on how to configure your `values.yaml` file for your secrets manager.
+    1. Run this command to install the Worker:
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        datadog/observability-pipelines-worker
+        ```
     - **Environment variables**: Run this command to install the Worker:
-
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	--set <SOURCE_ENV_VARIABLES> \
-	--set <DESTINATION_ENV_VARIABLES> \
-	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
-	datadog/observability-pipelines-worker
-    ```
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        --set <SOURCE_ENV_VARIABLES> \
+        --set <DESTINATION_ENV_VARIABLES> \
+        --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
+        datadog/observability-pipelines-worker
+        ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
