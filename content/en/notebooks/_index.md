@@ -216,7 +216,7 @@ From a notebook, click the cog icon and click **Version history** to open the Ve
 
 ### Graph snapshots
 
-Notebooks automatically take snapshots of graphs with fixed time ranges that might expire to preserve the view of your notebook before data retention limits are hit. You do not need to do anything to enable this. Use the kebab menu next to a graph to view or download a snapshot.
+Notebooks automatically snapshot graphs with fixed time ranges to preserve the view before data retention limits apply. No setup is required. Use the kebab menu next to a graph to view or download a snapshot.
 
 {{< img src="notebooks/kebab_snapshots.png" alt="Kebab menu option to view or download a snapshot" style="width:100%;">}}
 
