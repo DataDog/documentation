@@ -826,7 +826,7 @@ The following Docker services are supported:
 
 ##### Prerequisites
 
-The Docker secrets backend supports both [Docker Swarm secrets][6002] and [Docker Compose secrets][6003]. Both automatically mount secrets by default as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows). The Agent user must be able to read files at that location.
+The Docker secrets backend supports both [Docker Swarm secrets][6002] and [Docker Compose secrets][6003]. By defaultm both Swarm and Compose automatically mount secrets within the container as files at `/run/secrets` (Linux) or `C:\ProgramData\Docker\secrets` (Windows). The Agent user must be able to read files at that location.
 
 ##### Docker secret types
 
