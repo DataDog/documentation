@@ -378,4 +378,4 @@ Use [granular access control][17] to limit who has access to your test based on 
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
 [18]: https://www.microsoft.com/edge
-[19]: /synthetics/notifications/understanding_synthetic_monitor_alerting/
+[19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
