@@ -19,6 +19,7 @@ To select a template:
 1. Click on the [Evaluations][11] page
 1. Click on the ``Create Evaluation`` button
 1. Select the template of your choice
+    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 1. Select the integration provider, account, and model you want to use. 
     * Note: Some integration providers require additional steps (like selecting a region for Amazon Bedrock or a project and location for VertexAI.)
 1. (Optional) Select the application you would like the evaluation to run for and set any desired span filters.
@@ -83,7 +84,7 @@ This evaluation evaluates each input and output prompt from the user and the res
 ##### Toxicity configuration
 
 <div class="alert alert-info">Configuring toxicity evaluation categories is supported for providers and models that support Structured Output.</div>
-You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table.
+You can configure toxicity evaluations to use specific categories of toxicity, listed in the following table. The template defaults to have every category except profanity and user dissatisfaction selected to be flagged as toxic.
 
 | Category | Description |
 |---|---|
@@ -111,7 +112,7 @@ This evaluation identifies attempts by unauthorized or malicious authors to mani
 
 ##### Prompt injection configuration
 <div class="alert alert-info">Configuring prompt injection evaluation categories is supported if OpenAI or Azure OpenAI is selected as your LLM provider.</div>
-You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table.
+You can configure the prompt injection evaluation to use specific categories of prompt injection, listed in the following table. The template defaults to have every category flagged as a prompt injection attempt.
 
 | Configuration Option | Description | Example(s) |
 |---|---|---|
