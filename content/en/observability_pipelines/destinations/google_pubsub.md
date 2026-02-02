@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -98,18 +99,16 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 #### Optional settings
 
-- Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
-	- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-	- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-	- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-- Toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access to the Preview.
-	- If disabled (default): Up to 500 events are buffered before flush.
-	- If enabled:
-		1. Select the buffer type you want to set.
-			- **Memory**: Fast, limited by RAM
-			- **Buffer size**: Durable, survives restarts
-		1. Enter the buffer size and select the unit.
-			- Maximum capacity in MB or GB.
+##### Enable TLS
+
+Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 {{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 

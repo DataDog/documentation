@@ -2,9 +2,15 @@
 title: Custom LLM-as-a-Judge Evaluations
 description: How to create custom LLM-as-a-judge evaluations, and how to use these evaluation results across LLM Observability.
 further_reading:
+- link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
+  tag: "Blog"
+  text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
   text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
+  tag: "Blog"
+  text: "Building an LLM evaluation framework: best practices"
 - link: "/llm_observability/terms/"
   tag: "Documentation"
   text: "Learn about LLM Observability terms and concepts"
@@ -14,15 +20,12 @@ further_reading:
 - link: "/llm_observability/evaluations/managed_evaluations"
   tag: "Documentation"
   text: "Learn about managed evaluations"
-- link: "https://www.datadoghq.com/blog/llm-evaluation-framework-best-practices/"
-  tag: "Blog"
-  text: "Building an LLM evaluation framework: best practices"
 - link: "https://huggingface.co/learn/cookbook/llm_judge"
   tag: "Hugging Face"
   text: "Using LLM-as-a-judge for an automated and versatile evaluation"
 ---
 
-Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. You can define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run these evaluations at scale across your traces and spans. 
+Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another LLM. You can define evaluation logic with natural language prompts, capture subjective or objective criteria (like tone, helpfulness, or factuality), and run these evaluations at scale across your traces and spans.
 
 ## Create a custom LLM-as-a-judge evaluation
 
@@ -39,12 +42,13 @@ Learn more about the [compatibility requirements][6].
     - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
     - If you select a **Vertex** account, choose a project and location.
 1. Use the **Model** drop-down menu to select a model to use for your LLM judge.
+1. Under **Evaluation Scope**, select the application you want to evaluate.
 1. Under **Evaluation Prompt** section, use the **Prompt Template** drop-down menu:
    - **Create from scratch**: Use your own custom prompt (defined in the next step).
    - **Failure to Answer**, **Prompt Injection**, **Sentiment**, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
 1. In the **System Prompt** field, enter your custom prompt or modify a prompt template.
-   For custom prompts, provide clear instructions describing what the evaluator should assess. 
-   - Focus on a single evaluation goal 
+   For custom prompts, provide clear instructions describing what the evaluator should assess.
+   - Focus on a single evaluation goal
    - Include 2–3 few-shot examples showing input/output pairs, expected results, and reasoning.
 
 {{% collapse-content title="Example custom prompt" level="h4" expanded=false id="custom-prompt-example" %}}
@@ -80,7 +84,14 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-7. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate: Span Input (`{{span_input}}`), Output (`{{span_output}}`), or both.
+8.In the **User** field, enter your evaluation prompt and explicitly specify which parts of the span should be evaluated. In most cases, this is span input (`{{span_input}}`) and/or span output (`{{span_output}}`).
+
+   Additional variables are available: type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces** (on the right side) to add span data as a variable:
+   1. Choose an account and an application so that spans/traces show up on the right.
+   2. Select one of the spans on the right to view its JSON.
+   3. Use the three-dots menu and select **Add variable to message** to insert the JSON into your prompt.
+
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
 ### Define the evaluation output
 
@@ -98,7 +109,7 @@ For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search
    - **Categorical**: Discrete labels (for example, "Good", "Bad", "Neutral")
 
 2. Optionally, select **Enable Reasoning**. This configures the LLM judge to provide a short justification for its decision (for example, why a score of 8 was given). Reasoning helps you understand how and why evaluations are made, and is particularly useful for auditing subjective metrics like tone, empathy, or helpfulness. Adding reasoning can also [make the LLM judge more accurate](https://arxiv.org/abs/2504.00050).
-   
+
 3. Edit a JSON schema that defines your evaluations output type:
 
 {{< tabs >}}
@@ -191,9 +202,9 @@ Select the categories that should map to a passing state. For example, if you ha
 1. Select the **Boolean** output type.
    <div class="alert alert-info">For Anthropic and Amazon Bedrock models, only the <strong>Boolean</strong> output type is available.</div>
 
-2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively. 
+2. Provide **True keywords** and **False keywords** that define when the evaluation result is true or false, respectively.
 
-   Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords. 
+   Datadog searches the LLM-as-a-judge's response text for your defined keywords and provides the appropriate results for the evaluation. For this reason, you should instruct the LLM to respond with your chosen keywords.
 
    For example, if you set:
 
@@ -224,14 +235,9 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
 
 ### Test and preview
 
-Use the **Test Evaluation** panel on the right to preview results.
-You can enter sample `{{span_input}}` and `{{span_output}}` values and click **Run Evaluation** to see both the result, the reasoning explanation, and whether it passed or failed returned by your LLM judge.
+The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
 
-Refine your prompt and schema until outputs are consistent and interpretable.
-
-
-{{< img src="llm_observability/evaluations/custom_llm_judge_2-3.png" alt="Creation flow for a custom LLM-as-a-judge evaluation. On the right, under Test Evaluation, sample span_input and span_output have been provided. An Evaluation Result textbox below displays a sample result." style="width:100%;" >}}
-
+Select a span to show JSON data available for use in an evaluation. Then, click **Test Evaluation** to pre-fill inputs to your evaluation with data from the span, and click **Run** to test.
 
 ## Viewing and using results
 
@@ -279,7 +285,7 @@ You can:
 
 [1]: https://app.datadoghq.com/llm/evaluations
 [2]: /llm_observability/evaluations/managed_evaluations#connect-your-llm-provider-account
-[3]: /service_management/events/explorer/facets/
+[3]: /events/explorer/facets/
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility

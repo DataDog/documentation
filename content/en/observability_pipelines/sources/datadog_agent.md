@@ -4,8 +4,10 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 - name: Metrics
   icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 further_reading:
   - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
     tag: Blog
@@ -50,7 +52,7 @@ Use the Agent configuration file or the Agent Helm chart values file to connect 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Agent Helm value file" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Agent Helm values file" level="h4" expanded=false id="id-for-anchoring" %}}
 
 {{% observability_pipelines/log_source_configuration/datadog_agent_kubernetes %}}
 
@@ -85,9 +87,10 @@ observability_pipelines_worker:
 
 **Note**: If the Worker is listening for logs on port 8282, you must use another port for metrics, such as 8383.
 
-After you restart the Agent, your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
+After you [restart the Agent][2], your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
 
 [1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 
 {{% /collapse-content %}}
 

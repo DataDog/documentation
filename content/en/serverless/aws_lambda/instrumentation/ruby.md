@@ -23,33 +23,15 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-## Setup
+{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
+Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
+{{< /callout >}}
 
-If your application is deployed as a container image, use the _Container Image_ method.
+## Setup
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Ruby AWS Lambda application directly within Datadog.
-
-1. Configure your Lambda functions
-
-    Enable Datadog APM and wrap your Lambda handler function using the wrapper provided by the Datadog Lambda library.
-
-    ```ruby
-    require 'datadog/lambda'
-
-    Datadog::Lambda.configure_apm do |c|
-    # Enable the instrumentation
-    end
-
-    def handler(event:, context:)
-        Datadog::Lambda.wrap(event, context) do
-            return { statusCode: 200, body: 'Hello World' }
-        end
-    end
-    ```
-
-2. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Ruby AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
@@ -187,10 +169,6 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
-{{% tab "AWS CDK" %}}
-{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
-{{% /tab %}}
-
 {{% tab "AWS SAM" %}}
 
 The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
@@ -253,6 +231,10 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
 [4]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+
+{{% tab "AWS CDK" %}}
+{{< lambda-install-cdk language="ruby" layer="ruby" layerParamTypescript="rubyLayerVersion" layerParamPython="ruby_layer_version">}}
 {{% /tab %}}
 
 {{% tab "Container Image" %}}
