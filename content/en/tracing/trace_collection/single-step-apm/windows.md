@@ -54,7 +54,8 @@ Host-wide instrumentation for Windows is in Preview. <a href="https://www.datado
 </div>
 
 <div class="alert alert-info">
-Host-wide instrumentation on Windows is limited to Preview participants. The installation and configuration options described in this tab appear in the Datadog UI only after you're enrolled.
+<strong>Join the Preview!</strong><br>
+Host-wide instrumentation for Windows is in Preview and limited to Preview participants. The installation and configuration options described in this tab appear in the Datadog UI only after you're enrolled. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request Access</a>
 </div>
 
 To instrument Java and .NET applications across your entire Windows host:
