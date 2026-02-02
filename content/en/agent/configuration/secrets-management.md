@@ -856,7 +856,7 @@ The ENC notation format is the secret name, which corresponds to the filename in
 - `ENC[api_key]` reads from `/run/secrets/api_key` (Linux) or `C:\ProgramData\Docker\secrets\api_key` (Windows)
 
 **Custom secrets path:**
-If your secrets are mounted at a different location, specify the path:
+If your have configured Docker Swarm or Compose to mount secrets at a different location, you can specify it like this:
 
 ```yaml
 secret_backend_type: docker.secrets
