@@ -220,7 +220,7 @@ Notebooks automatically snapshot graphs with fixed time ranges to preserve the v
 
 {{< img src="notebooks/kebab_snapshots.png" alt="Kebab menu option to view or download a snapshot" style="width:100%;">}}
 
-Snapshots are a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
+Snapshots are static images of graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). A snapshot updates when the graph is updated, as long as the graph continues to use a fixed time range. Switching the graph to a global time range (for example, `Past 1 hour`) removes the snapshot.
 
 You can preview snapshot status for a notebook by hovering over the graph snapshot indicator under the notebook title. The preview shows the time of the most recent snapshot and the number of snapshots created.
 
