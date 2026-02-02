@@ -13,8 +13,10 @@ Segmenting helps you focus on specific user groups based on characteristics or b
 
 For example, you can segment users by purchase amount, by activity within a specific country, by trial status, or by users who started a trial and later converted to paying customers.
 
+After a segment is created, it can be reused across charts and dashboards to compare how different groups of users behave.
+
 ## Build a segment
-To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]**. You have two sources you can choose from when building a new segment:
+To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** and select one of the two sources of data:
 
 - [Product Analytics data](#segment-pana)
 - [CSV file](#segment-csv)
@@ -27,10 +29,12 @@ To create a new segment using Product Analytics data:
 
 1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** tab on the Users & Segments page
 
-2. Click the **Create Segment** button. to start building your segment
-3. Under the **Select a data source** section, choose **Product Analytics** to see how users engage with your product, like completing key actions or following specific paths. You can then filter the audience by user characteristics to forcus on particualr groups and identify trends.
+2. Click **Create Segment**, then select **Product Analytics**.
+3. Under the **Select a data source** section, choose **Product Analytics**.
+4. Select a condition for the users: whether they **performed an action**, share similar **attributes**, or **both**.
+5. **Filter** by user characteristics to narrow the segment to the users you care about, like those in a particular country or who signed up in the last 30 days.
 
-   In the below image, the segment is filtered to all users who were on the `/cart` page and then clicked on the checkout button (and did so from Brazil) within the same session in the past week:
+   In the following image, the segment is filtered to all users who were on the `/cart` page and then clicked the checkout button (and did so from Brazil) within the same session in the past week:
 
    {{< img src="product_analytics/segmentation/pana_example_users_brazil_3.png" alt="Segment page filtered to all users from Brazil who were on the `/cart` page and clicked on the checkout button." style="width:100%;">}}
 
@@ -52,12 +56,14 @@ On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Cre
 
 You can define additional attributes, such as the <code> device type</code>, to further specify your users.
 </div>
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Importing CSV files" level="h4" expanded=false id="segment-csv" %}}
 
-Click **CSV File** to upload a list of users from your own file. The file needs a column with either `usr.id` or `usr.email`.
+If you already have a list of users, for example, from a survey, experiment, or CRM, you can upload it as a CSV and turn it into a segment. Click **CSV File** to upload a list of users from your own file. The file needs a column with either `usr.id` or `usr.email` so it can be mapped with Product Analytics data. The following example maps the `@user.id` attribute to the column named `id` in bthe csv file.
 
+{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product nalytics attribute." style="width:80%">}}
 
 {{% /collapse-content %}}
 
