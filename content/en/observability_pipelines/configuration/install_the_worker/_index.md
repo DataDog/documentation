@@ -317,7 +317,6 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
-1. If you are using **Secrets Management**, 
 1. If you are using:
     - **Secrets Management**:
     1. See [Secrets Management][7] on how to configure your `values.yaml` file for your secrets manager.
