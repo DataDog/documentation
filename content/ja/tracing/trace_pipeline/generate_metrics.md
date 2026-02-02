@@ -1,90 +1,112 @@
 ---
+title: スパンとトレースからのカスタムメトリクスの生成
+description: '取り込まれたスパンと完全なトレースからカスタムメトリクスを生成します。'
 aliases:
-- /ja/tracing/span_to_metrics/
-- /ja/tracing/generate_metrics/
-description: 取り込んだスパンからカスタムメトリクスを生成します。
+- /tracing/span_to_metrics/
+- /tracing/generate_metrics/
 further_reading:
-- link: tracing/trace_pipeline
-  tag: ドキュメント
-  text: トレースの取り込みをカスタマイズし、重要なトレースを保持します。
-- link: tracing/trace_search_and_analytics/query_syntax
-  tag: ドキュメント
-  text: 保持されたトレースに基づいて分析クエリとモニターを使用します。
-- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric
-  tag: 外部サイト
-  text: Terraform によるスパンベースのメトリクスの作成と管理
-title: スパンからメトリクスを生成する
+    - link: 'tracing/trace_pipeline'
+      tag: "Documentation"
+      text: 'トレースの取り込みをカスタマイズし、重要なトレースを保持する'
+    - link: 'tracing/trace_search_and_analytics/query_syntax'
+      tag: "Documentation"
+      text: '保持されたトレースに基づいて Analytics クエリとモニターを使用する'
+    - link: 'tracing/trace_explorer/trace_queries'
+      tag: "Documentation"
+      text: '特定のトレースからメトリクスを作成するために高度なトレースクエリを使用する'
+    - link: 'tracing/metrics/metrics_namespace'
+      tag: "Documentation"
+      text: 'トレースメトリクスを使用してすべてのアプリケーショントラフィックを監視する'
+    - link: 'https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric'
+      tag: "External Site"
+      text: 'Terraform でスパンベースのメトリクスを作成して管理する'
 ---
 
-{{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="スパンベースメトリクス" >}}
+{{< img src="tracing/apm\_lifecycle/span\_based\_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="スパンベースメトリクス" >}}
 
-スパンが[保持フィルター][1]でインデックス化されているかどうかに関係なく、取り込んだスパンの 100% からメトリクスを生成します。
+トレンドの追跡、ダッシュボードの強化、モニターのトリガーのために、取り込まれたスパンからカスタムメトリクスを生成します。完全なトレース分析のために保持されていないスパンやトレースにも対応します。
 
-特定の固定クエリや比較にカスタムメトリクスを使用する一方、保持フィルターを作成することで、保持されたトレースとそのフレームグラフの任意のクエリと調査が可能になります。
+カスタムメトリクスは、スパンが[保持フィルター][1]によるインデックス化の対象であるかどうかに関係なく、Datadog APM によって取り込まれたスパンから作成されます。スパン (カウント、期間、カスタムタグなど) またはトレース (エンドツーエンドのトレース期間) から数値を抽出し、保持期間 15 か月の長期的な[カスタムメトリクス][3]として保存します。
 
-**請求について:** 取り込まれたスパンから生成されたメトリクスは、[カスタムメトリクス][2] として請求されます。
-
-たとえば、カスタムメトリクスを異常検知の視覚化やダッシュボードおよびモニターの作成に使用して、ビジネスコンテキストにとって重要なさまざまなパラメーターの傾向を把握することができます。生成されたすべてのメトリクスは、Datadog [カスタムメトリクス][3]として 15 か月間利用可能です。
-
-| 理由                        | スパンから生成されたカスタムメトリクス                   | Retention Filters                           |
-| -------------------------------------- | -------------------------------------- | --------------------------------- |
-| 保持期間                     | 15 か月                    | 30 日             |
-| 異常検知                           | 生成されたメトリクスに基づき[異常検知モニター][4]を作成します。                            | 分析を使用して過去 15 日間の動作を比較し、完全なトレースを表示して根本原因を調査します。                         |
-| 完全なコンテキストで一致するトレースの調査                          | N/A - カスタムメトリクスは、関連するトレースを保持しません。                            | [保持フィルター][1]を使用して、ビジネスコンテキストに関連するトレースを正確に保持します。                            |
-| 動作の粒度                           | 重要なエンドポイントまたはその他のカーディナリティの低いグループのカスタムメトリクスを作成します。                        | 特定のエンドポイントに[トレースエクスプローラー][5]を使用するか、[分析][6]で 'Group By' オプションを使用します。                    |
-| 予測または複雑な数学                          | 生成されたメトリクスに基づき、[予測値モニター][7]を作成します。                          |   N/A                            |
-
-スパンからメトリクスを生成するには、[APM のセットアップとコンフィギュレーション][8] ページで [Generate Metrics][9] タブを選択し、**New Metric** ボタンをクリックします。
-
-<br>
-
-{{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="取り込んだスパンからメトリクスを生成する" >}}
+**注:**
+\- Datadogは、アプリケーショントラフィックの 100% に対してリクエストカウント、エラーレート、レイテンシ分布を収集する[トレースメトリクス][13]を自動的に生成します。
+\- カスタムメトリクスの生成に利用できるスパンは、[APM の取り込み制御設定][12]に依存します。サンプリングやフィルタリングで破棄されたスパンからはメトリクスを生成できません。
 
 
-## スパンベースのメトリクスの作成
+スパンから生成したカスタムメトリクスは、次のような用途で使用します。
+\- スパンレベルのレイテンシ、エラーレート、タグレベルのパフォーマンスを詳細に可視化する。
+\- 低レイテンシ、高解像度のメトリクスを使用して[異常][4]または[予測][7]モニターを強化する。
+\- スパン全体を保持せずに、トレンド把握やアラートのための重要な信号を抽出する。
 
-{{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="メトリクスの作成方法" >}}
+#### トレースから生成したカスタムメトリクスを使用する場合
 
-1. **メトリクスクエリを定義する:** 必要なデータセットにフィルタリング用のクエリを追加することから始めます。[クエリ構文][10]は、APM 検索と分析と同じです。
+Datadog では、[トレースクエリ][15]からメトリクスを生成できます。
 
-1. **追跡するフィールドを定義する:** `*` を選択してクエリに一致するすべてのスパンのカウントを生成するか、属性 (たとえば、`@cassandra_row_count`) を入力して数値を集計し、対応するカウント、最小、最大、合計、および平均の集計メトリクスを作成します。属性タイプがメジャーの場合、メトリクスの値はスパン属性の値です。
+{{< callout url="https://help.datadoghq.com/hc/en-us/requests/new" header="プレビューに参加ませんか?" >}}
+トレースからのカスタムメトリクスはプレビューの段階です。アクセスをリクエストするには、APM サポートチームにチケットを提出し、用途の簡単な説明を提供してください。
+{{< /callout >}}
 
-   **注**: 数値でないスパン属性は集計に使用できません。スパン属性の異なる値をカウントするメトリクスを生成するには (例えば、特定のエンドポイントを訪問するユーザー ID の数をカウントする)、このディメンションを `group by` セレクタに追加し、`count_nonzero` 関数を使用してタグ値の数をカウントします。
+トレースから生成したカスタムメトリクスは、次のような用途で使用します。
+\- 完全なトレースコンテキストから抽出したメトリクス (例: トレースの合計時間、トレースごとの操作数) を作成する。
+\- トレース全体の情報が必要な条件 (N+1 クエリ検出やファンアウトパターンなど) で、アラートを出す。
+\- トレース全体を保持せずに、トレンド把握やアラートのための重要なシグナルを抽出する。
 
-1. **グループ化ディメンションを指定する:** デフォルトでは、スパンから生成されたメトリクスには、明示的に追加されない限りタグがありません。スパンに存在する属性またはタグを使用して、メトリクスタグを作成できます。
+## スパンまたはトレースからのメトリクスの作成
 
-1. **ライブ分析と検索クエリのプレビューを確認する:** クエリがデータの視覚化に与える影響と、クエリで考慮される一致するスパンをライブプレビューでリアルタイムに表示できます。
+{{< img src="tracing/span\_to\_metrics/createspantometrics.png" style="width:100%;" alt="メトリクスの作成方法" >}}
 
-1. **メトリクスに名前を付ける:** メトリクス名は、[メトリクス命名規則][11]に従う必要があります。`trace.*` で始まるメトリクス名は許可されておらず、保存されません。
+1. [**APM** > **Generate Metrics**][14] に移動します。
+2. **New Metric** をクリックします。
+3. [メトリクス命名規則][11]に従ってメトリクスに名前を付けます。`trace.*` で始まるメトリクス名は使用できません。
+4. メトリクスの種類として、**Spans** または **Traces** を選択します。どちらも APM の検索および分析と同じ[クエリ構文][10]を使用します。
+5. メトリクスクエリを定義して、測定するスパンまたはトレースだけに絞り込みます。
+6. 集計する値を選択します。
+     - 一致するスパンまたはトレースをすべてカウントするには、`*` を選択します。
+     - 集計してカウント、最小、最大、合計、またはパーセンタイルを追跡するには、数値属性 (たとえば、`@cassandra_row_count`) を入力します。
+7. グループ化のディメンションを設定します。デフォルトでは、タグを追加しない限り、メトリクスにタグは付きません。メトリクスタグを作成するには、任意のスパン属性またはタグを使用します。
+8. 結果をプレビューして、データの可視化とライブプレビューで一致するスパンまたはトレースを確認しながら、クエリのリアルタイムの影響を把握します。
+9. **Create Metric** をクリックします。
 
-<div class="alert alert-danger">スパンベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>と見なされ、それに応じて請求されます。請求への影響を避けるために、タイムスタンプ、ユーザー ID、リクエスト ID、セッション ID などの無制限または非常に高いカーディナリティ属性によるグループ化は避けてください。</div>
+<div class="alert alert-danger"> スパンベースのメトリクスは<a href="/metrics/custom_metrics/">カスタムメトリクス</a>として請求されます。請求額を抑えるには、タイムスタンプ、ユーザー ID、リクエスト ID、セッション IDなど、値の数に制限がない、または値の数が非常に多い属性でグループ化することは避けてください。</div>
 
-## 既存のスパンベースのメトリクスの更新
 
-{{< img src="tracing/span_to_metrics/editspantometrics.png" style="width:100%;" alt="既存のメトリクスを編集する" >}}
+## 既存のメトリクスの更新
 
-メトリクスの作成後、2 つのフィールドのみを更新できます。
+{{< img src="tracing/span\_to\_metrics/editspantometrics.png" style="width:100%;" alt="既存のメトリクスを編集する" >}}
 
-| フィールド                                 | 理由                                                                                                             |
+メトリクスの作成後、更新できるのは 2 つのフィールドのみです。
+
+| フィールド                                | 理由                                                                                                                  |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| Stream filter query                  | 一致するスパンのセットを変更して、メトリクスに集計します。            |
-| 集計グループ             | タグを更新して、生成されたメトリクスのカーディナリティを管理します。                                                     |
+| ストリームフィルタークエリ                | メトリクスに集約される、一致するスパンの組み合わせを変更します。                                                         |
+| 集約グループ                             | 生成されたメトリクスのカーディナリティを管理するためにタグを更新します。                                                         |
 
-**注**: メトリクスのタイプまたは名前を変更するには、新しいメトリクスを作成し、古いメトリクスを削除します。
+**注**:メトリクスのタイプまたは名前を変更するには、新しいメトリクスを作成し、古いメトリクスを削除します。
 
-## その他の参考資料
+
+## データの可用性
+
+トレースから生成されたメトリクスは、トレースが完了した後に出力されます。長時間実行されるトレースの場合、それに応じて遅延も増加します (たとえば、45 分のトレースのメトリクスはトレースが完了するまで出力されません)。
+
+モニターでトレースからのカスタムメトリクスを使用する場合、この遅延を考慮して誤検知を避けてください。
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/trace_pipeline/trace_retention
-[2]: /ja/account_management/billing/custom_metrics/
-[3]: https://docs.datadoghq.com/ja/metrics/#overview
-[4]: /ja/monitors/types/anomaly/#overview
-[5]: /ja/tracing/trace_explorer/
-[6]: /ja/tracing/trace_explorer/query_syntax/#analytics-query
-[7]: /ja/monitors/types/forecasts/
+[1]: /tracing/trace_pipeline/trace_retention
+[2]: /account_management/billing/custom_metrics/
+[3]: https://docs.datadoghq.com/metrics/#overview
+[4]: /monitors/types/anomaly/#overview
+[5]: /tracing/trace_explorer/
+[6]: /tracing/trace_explorer/query_syntax/#analytics-query
+[7]: /monitors/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
-[10]: /ja/tracing/trace_explorer/query_syntax/
-[11]: /ja/metrics/#naming-metrics
+[10]: /tracing/trace_explorer/query_syntax/
+[11]: /metrics/#naming-metrics
+[12]: /tracing/trace_pipeline/ingestion_controls
+[13]: /tracing/metrics/metrics_namespace/ 
+[14]: https://app.datadoghq.com/apm/traces/generate-metrics
+[15]: /tracing/trace_explorer/trace_queries
