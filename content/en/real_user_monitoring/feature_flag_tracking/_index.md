@@ -14,6 +14,10 @@ further_reading:
   text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
+{{< callout header="Looking to create feature flags in Datadog?" hide_image="true" btn_title="Try Datadog feature flags" btn_url="https://www.datadoghq.com/product/feature-flags/">}}
+  Datadog Feature Flags natively integrate feature flag creation with best-in-class observability data. This makes every feature flag workflow faster and more automated, such as detecting issues directly from new features or configuration, orchestrating canary releases that automatically roll forward or back based on monitors, and supporting experimentation without sacrificing reliability.
+{{< /callout >}}
+
 ## Overview
 
 Feature flag data provides greater visibility into user experience and performance monitoring. It allows you to determine which users are being shown a specific feature and assess if any changes introduced are impacting user experience or negatively affecting performance. You can use this information to determine whether or not to roll back the feature.
