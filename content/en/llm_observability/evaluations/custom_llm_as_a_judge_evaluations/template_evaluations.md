@@ -27,7 +27,7 @@ To select a template:
 
 This evaluation identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
 
-{{< img src="llm_observability/evaluations/topic_relevancy_t.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/topic_relevancy_4.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|---|
