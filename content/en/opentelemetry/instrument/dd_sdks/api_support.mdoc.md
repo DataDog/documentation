@@ -755,10 +755,10 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 {% /if %}
 {% if equals($prog_lang, "python") %}
 - Verify `opentelemetry-sdk` is installed. The Python SDK requires `opentelemetry-sdk` and `opentelemetry-exporter-otlp` to be installed in your Python environment.
-- Verify `ddtrace-run` is active. Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
+- Verify that you are running your application with `ddtrace-run` (or have imported and initialized `ddtrace` manually).
 {% /if %}
 {% if equals($prog_lang, "ruby") %}
-- Verify required gems are installed. Verify `opentelemetry-metrics-sdk` and `opentelemetry-exporter-otlp-metrics` are installed in your Ruby environment.
+- Verify required gems (`opentelemetry-metrics-sdk` and `opentelemetry-exporter-otlp-metrics`) are installed in your Ruby environment.
 - Verify `Datadog.configure` is called before `OpenTelemetry::SDK.configure`. The Datadog SDK must be configured first to properly set up the meter provider.
 {% /if %}
 {% if equals($prog_lang, "go") %}
@@ -772,7 +772,7 @@ If you are currently using the Datadog DogStatsD client and want to migrate to t
 - Enable debug logging with `DD_TRACE_DEBUG=true` to see detailed logs.
 {% /if %}
 {% if equals($prog_lang, "rust") %}
-- Verify transport features are enabled. Verify `metrics-grpc` or `metrics-http` feature is enabled in your Cargo.toml depending on your protocol choice.
+- Verify that a transport feature (`metrics-grpc` or `metrics-http`) is enabled in your Cargo.toml file, depending on your protocol choice.
 - Check protocol configuration. Only `grpc` and `http/protobuf` protocols are supported. HTTP/JSON is not supported.
 - Verify `DD_METRICS_OTEL_ENABLED=true` is set before initializing the meter provider.
 {% /if %}
