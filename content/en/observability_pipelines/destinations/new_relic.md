@@ -1,7 +1,13 @@
 ---
 title: New Relic Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' New Relic destination to send logs to New Relic.
 
@@ -11,7 +17,8 @@ Set up the New Relic destination and its environment variables when you [set up 
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/new_relic %}}
+1. Select the data center region (**US** or **EU**) of your New Relic account.
+{{% observability_pipelines/destination_buffer_numbered %}}
 
 ### Set the environment variables
 

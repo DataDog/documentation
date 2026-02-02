@@ -1,7 +1,6 @@
 
 ---
 title: Agent-Side Filtering for DogStatsD Custom Metrics 
-private: true
 further_reading:
 - link: "/metrics/custom_metrics/"
   tag: "Documentation"
@@ -42,7 +41,7 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 ## Create a metric filtering policy
 
-You can create a metric filtering policy from the [Metrics Settings page][6] or the [Metrics Summary page][7].
+You can create a metric filtering policy from the [Metrics Settings page][7] or the [Metrics Summary page][6].
 
 Metric filtering policies are applied to all Agents v7.67.0+ with Remote Configuration enabled. Older Agent versions, or Agents with Remote Configuration disabled, do not apply filtering policies.
 

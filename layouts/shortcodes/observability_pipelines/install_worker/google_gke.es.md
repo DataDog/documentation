@@ -1,5 +1,5 @@
 1. Descarga el [archivo de valores del Helm chart][801] para Google GKE.
-1. Haz clic en **Select API key** (Seleccionar clave de API) para elegir la clave de API de Datadog que deseas utilizar.
+1. Haz clic en **Select API key** (Seleccionar clave de API) para elegir la clave de API Datadog que quieres utilizar.
 1. Añade el repositorio de gráficos de Datadog a Helm:
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -8,7 +8,7 @@
     ```shell
     helm repo update
     ```
- 1. Ejecuta el comando proporcionado en la interfaz de usuario para instalar el worker. El comando se rellena automáticamente con las variables de entorno que introdujiste anteriormente.
+ 1. Ejecuta el comando proporcionado en la interfaz de usuario para instalar el Worker. El comando se rellena automáticamente con las variables de entorno que introdujiste anteriormente.
     ```shell
     helm upgrade --install opw \
     -f google_gke.yaml \
@@ -28,4 +28,4 @@
 Si quieres realizar cambios en la configuración de tu pipeline, consulta [Actualizar pipelines existentes][802].
 
 [801]: /resources/yaml/observability_pipelines/v2/setup/google_gke.yaml
-[802]: /es/observability_pipelines/update_existing_pipelines
+[802]: /es/observability_pipelines/configuration/update_existing_pipelines

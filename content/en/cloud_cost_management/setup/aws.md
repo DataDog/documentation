@@ -28,11 +28,13 @@ To set up Cloud Cost Management in Datadog, you need:
 
 ## Setup
 
+You can setup using the [API][21], [Terraform][22], or directly in Datadog by following the instructions below.
+
 ### Configure the AWS integration
 
 Navigate to [Setup & Configuration][7] and select an AWS account from the dropdown menu to pull costs from.
 
-**Note**: Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. 
+**Note**: Datadog recommends configuring a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**.
 
 If you send a Cost and Usage Report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 - **Linked Account Access**
@@ -66,9 +68,10 @@ Enter the following details for your Cost and Usage Report:
 
 **Note**:
 - These values either locate your existing Cost and Usage Report, or define the settings for newly created resources.
-- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][18].
+- It may take between 48 and 72 hours for all available data to populate in your Datadog organization after a complete Cost and Usage Report is generated. If 72 hours have passed and the data has still not yet populated, contact [Datadog Support][101].
 
 [100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
+[101]: /help/
 
 {{% /tab %}}
 
@@ -437,7 +440,7 @@ Finally, all of your [tag pipeline][15] rulesets are applied, providing complete
 Billing Conductor enables customers to create a second, pro forma version of their costs to share with their customers or account owners.
 Billing rates, credits and fees, and overhead costs can be customized at your discretion. You can also select which accounts to include in the CUR.
 
-**Important limitations**: 
+**Important limitations**:
 - Pro forma Cost and Usage Reports do not include discounts and taxes, which makes it difficult to compare costs in Datadog to AWS Cost Explorer.
 - Adding accounts to a billing group impacts how Reservations and Savings Plans are shared across AWS accounts.
 
@@ -461,9 +464,11 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 [13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
 [14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
-[15]: /cloud_cost_management/tags/tag_pipelines
+[15]: /cloud_cost_management/allocation/tag_pipelines
 [16]: https://docs.aws.amazon.com/billingconductor/latest/userguide/what-is-billingconductor.html
 [17]: https://app.datadoghq.com/cost/settings/accounts
 [18]: /help/
 [19]: /cloud_cost_management/tags
 [20]: https://docs.aws.amazon.com/cur/latest/userguide/troubleshooting.html#backfill-data
+[21]: /api/latest/cloud-cost-management/#create-cloud-cost-management-aws-cur-config
+[22]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/aws_cur_config

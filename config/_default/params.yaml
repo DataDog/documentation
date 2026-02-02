@@ -141,6 +141,8 @@ code_language_ids:
     traces: "Traces"
     metrics: "Metrics"
     logs: "Logs"    
+    topology: "Topology Map"
+    geomap: "Geomap" 
 branch: ""
 
 signupclass: sign-up-trigger
@@ -262,9 +264,10 @@ core_product:
 # Unsupported sites for each product
 unsupported_sites:
   actions: [gov]
-  adobe_experience_manager: [us3,ap1,ap2]
+  adaptive_sampling: [gov]
   agent_flare: [gov]
-  agentless_scanning: [gov]
+  agentless_scanning: [gov] # docs page
+  agentless-scanning: [gov] # api page
   amazon_event_bridge: [gov]
   apm_recommendations: [gov]
   app_builder: [gov]
@@ -278,18 +281,21 @@ unsupported_sites:
   ci_visibility: [gov]
   code_coverage: [gov]
   code_security: [gov]
+  configuration_at_runtime: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
   cloudprem: [gov]
   data_jobs: [gov]
   datadog_cloudcraft: [gov]
+  datadog_disaster_recovery: [gov]
   ddot_collector: [gov]
   dora_metrics: [gov]
   dynamic_instrumentation: [gov]
   dynamic_quotas: [gov]
   eng_reports: [gov]
   events_from_sns_emails: [gov]
+  exception_replay: [gov]
   feature_flags: [gov]
   forwarding_audit_events: [gov]
   getting_started_feature_flags: [gov]
@@ -302,7 +308,9 @@ unsupported_sites:
   high_availability_datadog_agent: [gov]
   iac_security: [gov]
   incident_ai: [gov]
+  inferred_entity_remapping_rules: [gov]
   internal_developer_portal: [gov]
+  linear: [gov]
   live_debugger: [gov]
   llm_observability: [gov]
   mobile_app_testing: [gov]
@@ -311,7 +319,9 @@ unsupported_sites:
   otlp_agentless: [gov]
   overview_pages: [gov]
   pr_gates: [gov]
+  resource_based_sampling: [gov]
   remote_config: [gov]
+  remote_config_for_fa: [gov] #For the Guides page
   remote_configuration: [gov]
   roku_error_tracking: [gov]
   roku_log_collection: [gov]
@@ -319,8 +329,11 @@ unsupported_sites:
   safety_center: [gov]
   scorecards: [gov]
   self_service_actions: [gov]
+  service_remapping_rules: [gov]
+  service_override_removal: [gov]
   snmp_profile_manager: [gov]
   status_pages: [gov]
+  supported_deployment_types: [gov]
   synthetics_email_validation: [gov]
   synthetics_safari: [gov]
   test_optimization: [gov]
@@ -329,3 +342,4 @@ unsupported_sites:
   wiz: [gov]
   workflow-automation: [gov]
   workflows: [gov]
+  workload_security_active_protection: [gov]

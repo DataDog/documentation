@@ -8,7 +8,7 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentación
   text: Dashboards RUM
-- link: /real_user_monitoring/browser/data_collected
+- link: /real_user_monitoring/application_monitoring/browser/data_collected
   tag: Documentación
   text: Datos del navegador RUM recopilados
 - link: /real_user_monitoring/android/data_collected
@@ -157,6 +157,6 @@ Para calcular indicadores de rendimiento adicionales para tus aplicaciones, dete
 
 [1]: /es/dashboards/guide/quick-graphs/
 [2]: /es/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm
-[3]: /es/real_user_monitoring/browser/
+[3]: /es/real_user_monitoring/application_monitoring/browser/
 [4]: /es/real_user_monitoring/android/
 [5]: /es/real_user_monitoring/ios/

@@ -5,7 +5,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sentinelone/"
   tag: "blog"
   text: "Optimize EDR logs and route them to SentinelOne with Observability Pipelines"
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne.
 
@@ -15,7 +21,8 @@ Set up the SentinelOne destination and its environment variables when you [set u
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/sentinelone %}}
+1. Select your SentinelOne logs environment in the dropdown menu.
+{{% observability_pipelines/destination_buffer_numbered %}}
 
 ### Set the environment variables
 

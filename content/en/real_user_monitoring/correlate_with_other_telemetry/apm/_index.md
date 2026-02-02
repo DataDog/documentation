@@ -180,13 +180,13 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 3.  _(Optional)_ Configure the `traceSampler` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog. To keep 100% of backend traces:
 
     ```kotlin
-        val tracedHosts = listOf("example.com")
+    val tracedHosts = listOf("example.com")
 
-        val okHttpClient = OkHttpClient.Builder()
+    val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(
-            DatadogInterceptor.Builder(tracedHosts)
-                .setTraceSampler(RateBasedSampler(100f))
-                .build()
+          DatadogInterceptor.Builder(tracedHosts)
+              .setTraceSampler(RateBasedSampler(100f))
+              .build()
         )
         .build()
     ```
@@ -458,7 +458,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 
 To view traces from the RUM Explorer:
 
-1. Navigate to your [list of sessions][21] and click on a session that has traces available. You can also query for sessions with traces by using`@_dd.trace_id:*`.
+1. Navigate to your [list of sessions][22] and click on a session that has traces available. You can also query for resources with traces by using`@_dd.trace_id:*`.
 
 When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a **View Trace in APM** link.
 
@@ -711,15 +711,19 @@ Example for b3 multiple headers:
 
 These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
 
-## Effect on APM quotas
-
-Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to keep a share of the backend traces starting from browser and mobile requests.
-
 ## Trace retention
 
-These traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, create [retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
+Ingested traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, [create APM retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
-## Further Reading
+If using RUM Without Limits, you can also use [cross-product retention filters][21] to retain APM traces associated to specific RUM sessions, optimizing the correlation between your frontend and your backend. By default 1% of RUM [sessions and their traces are automatically retained][23] at no additional cost.
+
+## Effect on APM quotas
+
+Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to control a share of the backend traces starting from browser and mobile requests to ingest.
+
+Configuring cross-product retention filters may also increase the APM-indexed volumes. Use the retention rate of the cross-product retention filters to control the share of the backend traces to index.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -743,4 +747,6 @@ These traces are available for 15 minutes in the [Live Search][19] explorer. To 
 [18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
 [19]: /tracing/trace_explorer/#live-search-for-15-minutes
 [20]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[21]: https://app.datadoghq.com/rum/explorer
+[21]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
+[22]: https://app.datadoghq.com/rum/explorer
+[23]: /tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling

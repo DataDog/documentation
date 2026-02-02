@@ -754,20 +754,43 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 {{< /tabs >}}
 
 #### Apollo instrumentation
+Instrumenting Apollo in your iOS application gives RUM visibility into GraphQL errors and performance. Because GraphQL requests all go to a single endpoint and often return 200 OK even on errors, default HTTP instrumentation lacks context. It lets RUM capture the operation name, operation type, and variables (and optionally the payload). This provides more detailed context for each network request.
 
-1. Set up [RUM monitoring with Datadog iOS RUM][2].
+This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the instructions for the Apollo iOS version you have below.
 
-2. Set up [URLSession instrumentation with the Datadog RUM SDK](#basic-network-instrumentation).
+1. [Set up][2] RUM monitoring with Datadog iOS RUM.
 
-3. Add the following to your `Package.swift` file:
+2. Add the following to your application's `Package.swift` file:
 
    ```swift
    dependencies: [
+       // For Apollo iOS 1.0+
        .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "1.0.0"))
+    
+       // For Apollo iOS 2.0+
+       .package(url: "https://github.com/DataDog/dd-sdk-ios-apollo-interceptor", .upToNextMajor(from: "2.0.0"))
    ]
    ```
 
-4. Add the Datadog interceptor to your Apollo Client setup:
+   Alternatively, you can add it using Xcode:
+   1. Go to **File** → **Add Package Dependencies**.
+   2. Enter the repository URL: `https://github.com/DataDog/dd-sdk-ios-apollo-interceptor`.
+   3. Select the package version that matches your Apollo major version (choose `1.x.x` for Apollo iOS 1.0+ or `2.x.x` for Apollo iOS 2.0+).
+
+3. Set up network instrumentation based on your Apollo iOS version:
+
+   {{< tabs >}}
+   {{% tab "Apollo iOS 1.0+" %}}
+
+   Set up network instrumentation for Apollo's built-in URLSessionClient:
+
+   ```swift
+   import Apollo
+
+   URLSessionInstrumentation.enable(with: .init(delegateClass: URLSessionClient.self))
+   ```
+
+   Add the Datadog interceptor to your Apollo Client setup:
 
    ```swift
    import Apollo
@@ -776,25 +799,74 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
    class CustomInterceptorProvider: DefaultInterceptorProvider {
        override func interceptors<Operation: GraphQLOperation>(for operation: Operation) -> [ApolloInterceptor] {
            var interceptors = super.interceptors(for: operation)
-           interceptors.insert(DatadogApollo.createInterceptor(), at: 0)
+           interceptors.insert(DatadogApolloInterceptor(), at: 0)
            return interceptors
        }
    }
    ```
 
-This automatically adds Datadog headers to your GraphQL requests, allowing them to be tracked by Datadog.
+   {{% /tab %}}
+   {{% tab "Apollo iOS 2.0+" %}}
 
-<div class="alert alert-info">
-  <ul>
-    <li>The integration supports Apollo iOS version <code>1.0</code> and later.</li>
-    <li>The <code>query</code> and <code>mutation</code> type operations are tracked, <code>subscription</code> operations are not.</li>
-    <li>GraphQL payload sending is disabled by default. To enable it, set the <code>sendGraphQLPayloads</code> flag in the <code>DatadogApollo</code> interceptor constructor as follows:</li>
-  </ul>
+   Configure network instrumentation using the provided `DatadogApolloDelegate` and `DatadogApolloURLSession`:
 
-  <pre><code class="language-swift">
-let datadogInterceptor = DatadogApollo.createInterceptor(sendGraphQLPayloads: true)
-  </code></pre>
-</div>
+   ```swift
+   import Apollo
+   import DatadogApollo
+   import DatadogCore
+
+   // Create the Datadog delegate
+   let delegate = DatadogApolloDelegate()
+
+   // Create the custom URLSession wrapper
+   let customSession = DatadogApolloURLSession(
+       configuration: .default,
+       delegate: delegate
+   )
+
+   // Enable Datadog instrumentation for the delegate
+   URLSessionInstrumentation.enable(
+       with: .init(delegateClass: DatadogApolloDelegate.self)
+   )
+
+   // Configure Apollo Client with the custom session
+   let networkTransport = RequestChainNetworkTransport(
+       urlSession: customSession,
+       interceptorProvider: NetworkInterceptorProvider(),
+       store: store,
+       endpointURL: url
+   )
+   ```
+
+   Create an interceptor provider with the Datadog interceptor:
+
+   ```swift
+   import Apollo
+   import DatadogApollo
+
+   struct NetworkInterceptorProvider: InterceptorProvider {
+       func graphQLInterceptors<Operation>(for operation: Operation) -> [any GraphQLInterceptor] where Operation : GraphQLOperation {
+           return [DatadogApolloInterceptor()] + DefaultInterceptorProvider.shared.graphQLInterceptors(for: operation)
+       }
+   }
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+   This lets Datadog RUM extract Operation type, name, variables and Payloads (optional) automatically from the requests to enrich GraphQL Requests RUM Resources.
+
+   <div class="alert alert-info">
+     <ul>
+       <li>The integration supports Apollo iOS versions <code>1.0+</code> and <code>2.0+</code>.</li>
+       <li>The <code>query</code> and <code>mutation</code> type operations are tracked, <code>subscription</code> operations are not.</li>
+       <li>GraphQL payload sending is disabled by default. To enable it, set the <code>sendGraphQLPayloads</code> flag in the <code>DatadogApolloInterceptor</code> constructor as follows:</li>
+     </ul>
+
+     <pre><code class="language-swift">
+   let datadogInterceptor = DatadogApolloInterceptor(sendGraphQLPayloads: true)
+     </code></pre>
+   </div>
 
 ### Automatically track errors
 
