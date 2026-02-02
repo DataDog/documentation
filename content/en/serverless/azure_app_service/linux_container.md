@@ -343,6 +343,7 @@ var datadogAppSettings = [
   { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
   { name: 'DD_ENV', value: 'prod' }            // Replace with your environment (e.g. prod, staging)
   { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+  { name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE', value: 'true' }
   // Uncomment for .NET applications
   // { name: 'DD_DOTNET_TRACER_HOME', value: '/datadog/tracer' }
   // { name: 'CORECLR_ENABLE_PROFILING', value: '1' }
@@ -399,6 +400,7 @@ Update your existing Web App to include the necessary Datadog App Settings and s
       { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
       { "name": "DD_ENV", "value": "prod" },           // Replace with your environment (e.g. prod, staging)
       { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+      { "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE", "value": "true" },
       // Uncomment for .NET applications
       // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
       // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
