@@ -6778,17 +6778,7 @@ menu:
       url: /cloudprem/guides/
       parent: cloudprem
       identifier: cloudprem_guides
-      weight: 7
-    - name: Query Logs with MCP Server
-      url: /cloudprem/guides/mcp
-      parent: cloudprem_guides
-      identifier: cloudprem_guides_mcp
-      weight: 701
-    - name: Send OTEL Logs to CloudPrem via Observability Pipelines
-      url: /cloudprem/guides/otel-op-cloudprem
-      parent: cloudprem_guides
-      identifier: cloudprem_guides_otel_op
-      weight: 702
+      weight: 10
     - name: Security Overview
       url: security/
       pre: security-platform

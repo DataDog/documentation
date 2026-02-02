@@ -20,16 +20,16 @@ The Datadog MCP (Model Context Protocol) server allows you to query your Datadog
 
 ## Prerequisites
 
-- A running CloudPrem deployment with logs ingested
-- Access to the Datadog MCP server
-- Your CloudPrem index name (visible in the [Datadog Log Explorer][1] under **CLOUDPREM INDEXES**)
+- A running CloudPrem deployment with logs ingested.
+- Access to the Datadog MCP server.
+- Your CloudPrem index name (visible in the [Datadog Log Explorer][1] under **CLOUDPREM INDEXES**).
 
 ## Querying CloudPrem logs
 
 To query logs stored in CloudPrem indexes, you need to specify two critical parameters in addition to your standard log query:
 
-1. **`indexes`**: The name(s) of your CloudPrem index(es)
-2. **`storage_tier`**: Set to `"cloudprem"` to query CloudPrem storage
+1. **`indexes`**: The name(s) of your CloudPrem index(es).
+2. **`storage_tier`**: Set to `"cloudprem"` to query CloudPrem storage.
 
 ### Example query
 
@@ -61,9 +61,9 @@ Here's an example query that searches all logs in a CloudPrem index from the pas
 
 To find your CloudPrem index name:
 
-1. Navigate to the [Datadog Log Explorer][1]
-2. Look for the **CLOUDPREM INDEXES** section in the left facet panel
-3. Your CloudPrem indexes are listed there, typically in the format `cloudprem-<cluster_id>`
+1. Navigate to the [Datadog Log Explorer][1].
+2. Look for the **CLOUDPREM INDEXES** section in the left facet panel.
+3. Your CloudPrem indexes are listed there, typically in the format `cloudprem-<cluster_id>`.
 
 You can also find your index name in the [CloudPrem console][2], where your cluster ID is displayed.
 
@@ -84,10 +84,10 @@ You can also find your index name in the [CloudPrem console][2], where your clus
 
 ## Important notes
 
-- Always include `"storage_tier": "cloudprem"` when querying CloudPrem logs
-- The `indexes` parameter must contain valid CloudPrem index names
-- CloudPrem logs are queryable in real-time as soon as they are indexed
-- Query syntax follows standard [Datadog log search syntax][3]
+- Always include `"storage_tier": "cloudprem"` when querying CloudPrem logs.
+- The `indexes` parameter must contain valid CloudPrem index names.
+- CloudPrem logs are queryable in real-time as soon as they are indexed.
+- Query syntax follows standard [Datadog log search syntax][3].
 
 ## Further reading
 
