@@ -8,6 +8,9 @@ further_reading:
 - link: "/database_monitoring/guide/parameterized_queries/"
   tag: "Documentation"
   text: "Capturing SQL Query Parameter Values"
+- link: "https://www.datadoghq.com/blog/database-monitoring-explain-analyze"
+  tag: "Blog"
+  text: "Debug PostgreSQL query latency faster with EXPLAIN ANALYZE in Datadog Database Monitoring"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
