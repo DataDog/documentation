@@ -48,11 +48,6 @@ After installation, the Agent automatically loads the Datadog .NET SDK into supp
 
 {{% tab "Host-wide (Preview)" %}}
 
-<div class="alert alert-warning">
-<strong>Join the Preview!</strong><br>
-Host-wide instrumentation for Windows is in Preview. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request Access</a>
-</div>
-
 <div class="alert alert-info">
 <strong>Join the Preview!</strong><br>
 Host-wide instrumentation for Windows is in Preview and limited to Preview participants. The installation and configuration options described in this tab appear in the Datadog UI only after you're enrolled. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request Access</a>
