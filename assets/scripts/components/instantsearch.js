@@ -107,43 +107,85 @@ const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter(adapterO
 const baseSearchClient = typesenseInstantSearchAdapter.searchClient;
 
 // Wrap the search client to fix nbHits when using group_by
-// When group_by is used, Typesense returns `found` (number of unique groups) but the adapter
-// flattens grouped_hits into a hits array. We need to recalculate nbHits based on actual hits.
+// When group_by is used, Typesense returns `found` (number of unique groups) which is incorrect.
+// This wrapper probes subsequent pages on initial load to determine the actual total hit count.
 const searchClient = {
     ...baseSearchClient,
-    search(requests) {
-        return baseSearchClient.search(requests).then((results) => {
-            return {
-                ...results,
-                results: results.results.map((result) => {
-                    // The adapter flattens grouped_hits into hits array
-                    // but nbHits still contains the group count instead of total flattened hits
-                    const actualHitsOnPage = result.hits?.length || 0;
-                    const hitsPerPage = result.hitsPerPage || 10;
-                    const currentPage = result.page || 0;
+    async search(requests) {
+        const results = await baseSearchClient.search(requests);
 
-                    // Calculate the correct total based on pagination behavior:
-                    // - If we got a full page, assume at least one more result exists
-                    // - If we got a partial page, this is the last page
-                    let correctedNbHits;
-                    if (actualHitsOnPage === hitsPerPage) {
-                        // Full page - estimate there's at least one more result
-                        correctedNbHits = (currentPage + 1) * hitsPerPage + 1;
-                    } else if (actualHitsOnPage > 0) {
-                        // Partial page - this is the last page
-                        correctedNbHits = currentPage * hitsPerPage + actualHitsOnPage;
-                    } else {
-                        // No hits on this page - we've gone past the end
-                        correctedNbHits = currentPage * hitsPerPage;
+        // Process results and probe for actual totals when needed
+        const processedResults = await Promise.all(
+            results.results.map(async (result, index) => {
+                const request = requests[index];
+                const actualHitsOnPage = result.hits?.length || 0;
+                const hitsPerPage = result.hitsPerPage || 10;
+                const currentPage = result.page || 0;
+
+                // If we're on page 0 and got a full page, probe ahead to find the real total
+                if (currentPage === 0 && actualHitsOnPage === hitsPerPage && result.nbHits > hitsPerPage) {
+                    let probePage = 1;
+                    let totalFound = actualHitsOnPage;
+
+                    // Probe up to 10 pages ahead to find where results end
+                    while (probePage < 10) {
+                        const probeRequest = {
+                            ...request,
+                            params: {
+                                ...request.params,
+                                page: probePage
+                            }
+                        };
+
+                        try {
+                            const probeResults = await baseSearchClient.search([probeRequest]);
+                            const probeHits = probeResults.results[0].hits?.length || 0;
+
+                            if (probeHits === 0) {
+                                // Found the end
+                                break;
+                            }
+
+                            totalFound += probeHits;
+
+                            if (probeHits < hitsPerPage) {
+                                // Partial page, this is the last
+                                break;
+                            }
+
+                            probePage++;
+                        } catch (e) {
+                            // If probing fails, fall back to current page calculation
+                            break;
+                        }
                     }
+
+                    const correctedNbHits = totalFound;
+                    const correctedNbPages = Math.ceil(correctedNbHits / hitsPerPage);
 
                     return {
                         ...result,
-                        nbHits: correctedNbHits
+                        nbHits: correctedNbHits,
+                        nbPages: correctedNbPages
                     };
-                })
-            };
-        });
+                }
+
+                // For other pages or when no probing needed, calculate based on current page
+                const correctedNbHits = currentPage * hitsPerPage + actualHitsOnPage;
+                const correctedNbPages = Math.ceil(correctedNbHits / hitsPerPage);
+
+                return {
+                    ...result,
+                    nbHits: correctedNbHits,
+                    nbPages: correctedNbPages
+                };
+            })
+        );
+
+        return {
+            ...results,
+            results: processedResults
+        };
     }
 };
 
