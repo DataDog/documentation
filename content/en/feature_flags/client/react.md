@@ -57,6 +57,7 @@ import { DatadogProvider } from '@datadog/openfeature-browser';
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
 {{< /code-block >}}
@@ -246,6 +247,7 @@ import { OpenFeatureProvider, OpenFeature, useBooleanFlagValue } from '@openfeat
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
 

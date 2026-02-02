@@ -89,6 +89,7 @@ Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
+        site: .{{< region-param key="dd_datacenter_lowercase" code="true" >}},
         service: "<service name>"
     ),
     trackingConsent: .granted

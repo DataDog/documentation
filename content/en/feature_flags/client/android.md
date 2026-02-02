@@ -44,7 +44,9 @@ val configuration = Configuration.Builder(
     clientToken = "<CLIENT_TOKEN>",
     env = "<ENV_NAME>",
     variant = "<APP_VARIANT_NAME>"
-).build()
+)
+    .useSite(DatadogSite.{{< region-param key="jenkins_site_name" code="true" >}})
+    .build()
 
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 {{< /code-block >}}
