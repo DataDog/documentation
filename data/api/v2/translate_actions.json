@@ -3060,6 +3060,44 @@
     "description": "Get a suppression's version history.",
     "summary": "Get a suppression's version history"
   },
+  "ListSecurityMonitoringDatasets": {
+    "description": "List all datasets for the organization with optional pagination, filtering, and sorting.",
+    "summary": "List all datasets"
+  },
+  "CreateSecurityMonitoringDataset": {
+    "description": "Create a new dataset for security monitoring.",
+    "summary": "Create a dataset",
+    "request_description": "",
+    "request_schema_description": "Request to create a security monitoring dataset."
+  },
+  "BatchGetSecurityMonitoringDatasetDependencies": {
+    "description": "Batch retrieves which security rules depend on specified datasets.",
+    "summary": "Get dataset dependencies",
+    "request_description": "",
+    "request_schema_description": "Request to get dataset dependencies."
+  },
+  "DeleteSecurityMonitoringDataset": {
+    "description": "Delete a dataset by its ID.",
+    "summary": "Delete a dataset"
+  },
+  "GetSecurityMonitoringDataset": {
+    "description": "Get a specific dataset by its ID.",
+    "summary": "Get a dataset"
+  },
+  "UpdateSecurityMonitoringDataset": {
+    "description": "Update an existing dataset.",
+    "summary": "Update a dataset",
+    "request_description": "",
+    "request_schema_description": "Request to update a security monitoring dataset."
+  },
+  "GetSecurityMonitoringDatasetHistory": {
+    "description": "Get all historical versions of a dataset.",
+    "summary": "Get dataset history"
+  },
+  "GetSecurityMonitoringDatasetByVersion": {
+    "description": "Get a specific version of a dataset.",
+    "summary": "Get a dataset by version"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
