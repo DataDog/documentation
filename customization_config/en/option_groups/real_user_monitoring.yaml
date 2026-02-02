@@ -11,7 +11,7 @@ rum_sdk_platform_options_v2:
   - id: react_native
   - id: flutter
 
-rum_sdk_platform_options_v3:
+rum_sdk_profiling_options:
   - id: browser
     default: true
   - id: android
