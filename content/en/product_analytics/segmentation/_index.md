@@ -1,6 +1,6 @@
 ---
 title: Segments
-description: Analyze and understand individual users and segments of your user base.
+description: Analyze and understand segments of your user base.
 further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
@@ -69,9 +69,9 @@ If you already have a list of users, for example, from a survey, experiment, or 
 ## Use segments across Product Analytics
 
 ### In pathways
-Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the pathway for "Premium Shopist Customers."
+Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the path taken by the "Premium Shopist Customers" segment navigating your product.
 
-{{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathway visualization to reflect a selected segment of users.">}}
+{{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the "Premium Shopist Customers" segment.">}}
 
 ### In analytics explorer
 
