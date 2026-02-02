@@ -1,35 +1,34 @@
 ---
+aliases:
+- /ja/observability_pipelines/log_volume_control/sumo_logic_hosted_collector/
 disable_toc: false
-title: Socket Source (TCP または UDP) 向け Dual Ship Logs
+title: Sumo Logic Hosted Collector HTTP ログ ソースのログ ボリューム コントロール
 ---
 
 ## 概要
 
-Socket 接続経由でログを Observability Pipelines Worker に送信し、集約・処理したうえで、複数の宛先にルーティングします。
+このドキュメントでは、Sumo Logic Hosted Collector HTTP ログ ソースを使用して Observability Pipelines Worker を設定し、有用なログだけを宛先にルーティングするための以下の手順について説明します。
 
-{{% observability_pipelines/use_case_images/dual_ship_logs %}}
+{{% observability_pipelines/use_case_images/log_volume_control %}}
 
-このガイドでは、以下の内容を説明しています。
-1. Observability Pipelines のセットアップの[前提条件](#prerequisites)
-1. [Observability Pipelines のセットアップ方法](#set-up-observability-pipelines)
+このドキュメントでは、以下について説明します。
+1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
+1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
+1. [Sumo Logic HTTP ソース経由で Observability Pipelines Worker にログを送信する](#send-logs-to-the-observability-pipelines-worker-over-sumo-logic-http-source)
 
 ## 前提条件
 
-{{% observability_pipelines/prerequisites/socket %}}
+{{% observability_pipelines/prerequisites/sumo_logic %}}
 
 ## 観測可能性パイプラインを設定する
 
 1. [Observability Pipelines][1] に移動します。
-1. 新しいパイプラインを作成するには、 **Dual Ship Logs** テンプレートを選択します。
-1. **Socket** ソースを選択します。
+1. Select the **Log Volume Control** template to create a new pipeline.
+1. ソースとして **Sumo Logic** を選択します。
 
-### ソースの設定
+### Set up the destination
 
-{{% observability_pipelines/source_settings/socket %}}
-
-### 宛先の設定
-
-選択したログの送信先に応じて、以下の情報を入力します。
+Enter the following information based on your selected logs destinations.
 
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -37,6 +36,17 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+##### 前提条件
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
+##### Set up the destination
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}} 
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -56,7 +66,9 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
+{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
+
+To set up the destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -122,7 +134,7 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 送信先を追加する
+#### Add additional destinations
 
 {{% observability_pipelines/multiple_destinations %}}
 
@@ -135,12 +147,12 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% observability_pipelines/processors/add_processors %}}
 
 {{< tabs >}}
-{{% tab "環境変数を追加" %}}
+{{% tab "Add env vars" %}}
 
 {{% observability_pipelines/processors/add_env_vars %}}
 
 {{% /tab %}}
-{{% tab "ホスト名を追加" %}}
+{{% tab "Add hostname" %}}
 
 {{% observability_pipelines/processors/add_hostname %}}
 
@@ -204,17 +216,19 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 
 {{% observability_pipelines/processors/remap_ocsf %}}
 
-{{% collapse-content title="ライブラリ マッピング" level="h5" expanded=false id="library_mapping" %}}
+{{% collapse-content title="Library mapping" level="h5" expanded=false id="library_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_library_mapping %}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="カスタム マッピング" level="h5" expanded=false id="custom_mapping" %}}
+{{% collapse-content title="Custom mapping" level="h5" expanded=false id="custom_mapping" %}}
 
 {{% observability_pipelines/processors/remap_ocsf_custom_mapping %}}
 
 {{% /collapse-content %}}
+
+{{% observability_pipelines/processors/filter_syntax %}}
 
 {{% /tab %}}
 {{% tab "Sample" %}}
@@ -226,12 +240,12 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-{{% collapse-content title="ライブラリからルールを追加" level="h5" %}}
+{{% collapse-content title="Add rules from the library" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
 {{% /collapse-content %}}
-{{% collapse-content title="カスタム ルールを追加" level="h5" %}}
+{{% collapse-content title="Add a custom rule" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
@@ -255,19 +269,23 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 別のプロセッサーと送信先のセットを追加する
+#### Add another set of processors and destinations
 
 {{% observability_pipelines/multiple_processors %}}
 
 ### 観測可能性パイプラインワーカーのインストール
 1. **Choose your installation platform** ドロップダウンメニューで使用するプラットフォームを選択します。
-1. `0.0.0.0:9000` のように、ソケット アドレスとポートを入力します。これは、受信ログを待ち受ける Observability Pipelines Worker のアドレスとポートです。ソケット アドレスには必ずポート番号を含めてください。
-1. TLS を有効化している場合は、TLS パスフレーズを入力します。
-1. 選択した各送信先の環境変数を指定します。詳しくは、[前提条件](#prerequisites) を参照してください。
+1. Sumo Logic アドレスを入力します。これはアプリケーションがログデータを送信する先のアドレスとポートです。Observability Pipelines Worker はこのアドレスで受信ログを待ち受けます。
+1. Provide the environment variables for each of your selected destinations. See [Prerequisites](#prerequisites) for more information.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}
@@ -287,7 +305,7 @@ Socket 接続経由でログを Observability Pipelines Worker に送信し、�
 {{% /tab %}}
 {{% tab "Datadog Archives" %}}
 
-Datadog Archives の送信先については、ログをアーカイブする際に使用しているクラウド プロバイダーに応じて、手順に従ってください。
+For the Datadog Archives destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 
@@ -380,5 +398,7 @@ Datadog Archives の送信先については、ログをアーカイブする際
 
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% observability_pipelines/log_source_configuration/sumo_logic %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
