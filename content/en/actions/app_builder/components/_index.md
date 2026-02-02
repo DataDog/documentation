@@ -698,7 +698,7 @@ Event
 : **Values**: toggleOpen, close, open
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : fetch<br>
