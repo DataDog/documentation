@@ -1150,7 +1150,7 @@ Table components have the following properties.
 ### General
 
 Title
-: A title for the table. Select **Markdown** for custom formatting.<br>
+: A title for the table. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Value**: string
 
 Title Alignment
@@ -1339,13 +1339,9 @@ Text components have the following properties.
 
 ### General
 
-Content
-: The content that the component displays.<br>
+Title
+: The text that the component displays. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
 **Value**: string or expression
-
-Content type
-: Determines how to render the text. When **Markdown** is selected, the text component supports [basic Markdown syntax][8], including images that you host elsewhere.<br>
-**Provided values**: plain text, Markdown
 
 ### Appearance
 
@@ -1363,7 +1359,7 @@ Is Visible
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Relationships
 
