@@ -49,14 +49,14 @@ To install the Datadog tracing library (version 4.x of `dd-trace`) for end-of-li
 For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
 If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x, 3.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
-In Serverless environments or when using Single-Step Instrumentation, the library is already pre-installed and shouldn't be added as a dependency. Instead it should be added as a dev dependency to get tracing locally.
+**Note**: In Serverless environments or when using Single-Step Instrumentation, the library is already pre-installed and shouldn't be added as a dependency. Instead it should be added as a dev dependency to get tracing locally.
   ```shell
   npm install dd-trace -D # instead of `npm install dd-trace`
   ```
 
 ### Install the Datadog public API (optional)
 
-This step is only required when doing custom instrumentation in Serverless or with Single-Step Instrumentation. For other use cases it's optional, but even in those cases there are still benefits as described in [Custom Instrumentation using the Datadog API][14].
+This step is only required when doing custom instrumentation in Serverless or with Single-Step Instrumentation. For other custom instrumentation use cases it's optional, but even in those cases there are still benefits as described in [Custom Instrumentation using the Datadog API][14].
 
   ```shell
   npm install dd-trace-api
