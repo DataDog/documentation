@@ -34,7 +34,7 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 
 {{< tabs >}}
 {{% tab "Docker or Linux" %}}
-After you [install the Worker][1], configure the Worker's bootstrap file to resolve secrets using AWS Secrets Manager:
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Secrets Manager:
 
 ```
 backend_type: aws.secrets
@@ -44,6 +44,7 @@ backend_config:
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -91,7 +92,7 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 
 {{< tabs >}}
 {{% tab "Docker or Linux" %}}
-After you [install the Worker][1], configure the Worker's bootstrap file to resolve secrets using AWS Systems Manager:
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Systems Manager:
 
 ```
 secret:
@@ -102,6 +103,7 @@ secret:
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -138,7 +140,7 @@ To access your Key Vault, create a Managed Identity and assign it to your VM. Th
 
 {{< tabs >}}
 {{% tab "Docker or Linux" %}}
-After you [install the Worker][1], configure the Worker's bootstrap file to resolve secrets using Azure Key Vault:
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using Azure Key Vault:
 
 ```
 backend_type: azure.keyvault
@@ -147,6 +149,7 @@ backend_config:
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -208,7 +211,7 @@ Datadog recommends that you authenticate using the [instance profile method][1] 
 
 {{< tabs >}}
 {{% tab "Docker or Linux" %}}
-After you [install the Worker][1], configure the Worker's bootstrap file to resolve secrets with HashiCorp Vault:
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with HashiCorp Vault:
 
 ```
 secret:
@@ -223,6 +226,7 @@ secret:
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -259,7 +263,7 @@ The file backend only requires **read** permissions for the configured JSON file
 
 {{< tabs >}}
 {{% tab "Docker or Linux" %}}
-After you [install the Worker][1], configure the Worker's bootstrap file to resolve secrets with a JSON file:
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with a JSON file:
 
 ```
 secret:
@@ -280,6 +284,7 @@ Create the file `/path/to/json/file.json` to store the identifiers and their sec
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 
 {{% /tab %}}
@@ -312,7 +317,7 @@ The file backend only requires **read** permissions for the configured YAML file
 
 {{< tabs >}}
 {{% tab "Docker or Linux" %}}
-After you [install the Worker][1], configure the Worker's bootstrap file to resolve secrets with a YAML file:
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with a YAML file:
 
 ```
 secret:
@@ -333,6 +338,7 @@ secret_identifier1: "<secret1>"
 ```
 
 [1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
