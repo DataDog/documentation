@@ -5683,11 +5683,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_configuration
       weight: 2
+    - name: Monorepo Support
+      url: code_coverage/monorepo_support/
+      parent: code_coverage
+      identifier: code_coverage_monorepo_support
+      weight: 3
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 3
+      weight: 4
     - name: PR Gates
       url: pr_gates/
       pre: ci

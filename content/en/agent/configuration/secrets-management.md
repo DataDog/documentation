@@ -114,17 +114,6 @@ secret_backend_config:
     aws_region: us-east-1
 ```
 
-<!-- SECRET MANAGER LINKS -->
-[101]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
-[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
-[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-
 {{% /tab %}}
 
 {{% tab "Helm" %}}
@@ -365,16 +354,6 @@ property1: "ENC[/DatadogAgent/Production/ParameterKey1]"
 property2: "ENC[/DatadogAgent/Production/ParameterKey2]"
 ```
 
-[200]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[201]: https://docs.aws.amazon.com/systems-manager/
-[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
-[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
-[1002]: https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html
-[1003]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
-[1004]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html
-[1005]: https://docs.aws.amazon.com/managedservices/latest/userguide/defaults-instance-profile.html
-[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-
 {{% /collapse-content %}}
 
 
@@ -414,11 +393,11 @@ The backend secret is referenced in your Datadog Agent configuration file with `
 api_key: "ENC[secretKeyNameInKeyVault]"
 ```
 
-[2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+
+**Available in Agent version 7.74+**
 
 The following GCP services are supported:
 
@@ -507,11 +486,6 @@ The Datadog Agent supports extracting specific keys from JSON-formatted secrets 
 - `datadog;api_key` - Extracts the `api_key` field from the `datadog` secret with an implicit `latest` version
 - `datadog;api_key;1`  - Extracts the `api_key` field from the `datadog` secret from version `1`
 
-[5000]: https://cloud.google.com/security/products/secret-manager
-[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
-[5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
-[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
-
 {{% /collapse-content %}}
 
 
@@ -577,12 +551,7 @@ secret_backend_config:
     vault_aws_role: Name-of-IAM-role-attached-to-machine
     aws_region: us-east-1 // this field is optional, and will default to us-east-1 if not set
 ```
-<!-- HASHICORP LINKS -->
-[3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
-[3001]: https://developer.hashicorp.com/
-[3002]: https://developer.hashicorp.com/vault/docs/auth/aws#aws-auth-method
-[3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
-[3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+
 {{% /collapse-content %}}
 
 {{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
@@ -598,7 +567,7 @@ The following Kubernetes services are supported:
 ##### Prerequisites
 
 The Kubernetes secrets backend requires:
-- **ServiceAccount credentials**: By default, uses automatically mounted ServiceAccount tokens (`automountServiceAccountToken: true`). Custom paths can be configured if needed.
+- **ServiceAccount credentials**: By default, uses automatically mounted ServiceAccount tokens (`automountServiceAccountToken: true`, see [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#opt-out-of-api-credential-automounting)). Custom paths can be configured if needed.
 - **RBAC permissions**: The Agent's ServiceAccount must have permissions to read secrets from target namespaces
 - **Network access**: The Agent pod must be able to reach the Kubernetes API server
 
@@ -810,8 +779,6 @@ override:
 {{% /tab %}}
 {{< /tabs >}}
 
-[7000]: https://kubernetes.io/docs/concepts/configuration/secret/
-
 {{% /collapse-content %}}
 
 {{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
@@ -972,9 +939,6 @@ secret_backend_config:
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
-[4001]: https://en.wikipedia.org/wiki/JSON
-[4002]: https://en.wikipedia.org/wiki/YAML
 
 {{% /collapse-content %}}
 
@@ -1472,7 +1436,7 @@ The following errors indicate that something is missing in your setup.
    error while running 'C:\decrypt.py': fork/exec C:\decrypt.py: %1 is not a valid Win32 application.
    ```
 
-Datadog has a [Powershell script][1] to help you set the correct permission on your executable. Example on how to use it:
+Datadog has a [Powershell script][9] to help you set the correct permission on your executable. Example on how to use it:
 
 ```powershell
 .\Set-SecretPermissions.ps1 -SecretBinaryPath C:\secrets\decrypt_secrets.exe
@@ -1522,7 +1486,7 @@ To do so, follow those steps:
     sc.exe config DatadogAgent password= "a_new_password"
     ```
 
-You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][2] to help you test your
+You can now login as `ddagentuser` to test your executable. Datadog has a [Powershell script][10] to help you test your
 executable as another user. It switches user contexts and mimics how the Agent runs your executable.
 
 Example on how to use it:
@@ -1540,8 +1504,8 @@ exit code:
 0
 ```
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
-[2]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
+[9]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/Set-SecretPermissions.ps1
+[10]: https://github.com/DataDog/datadog-agent/blob/master/docs/public/secrets/secrets_tester.ps1
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -1592,8 +1556,33 @@ instances:
 [1]: /agent/kubernetes/integrations/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#create-a-pod-that-has-access-to-the-secret-data-through-a-volume
 [3]: https://docs.docker.com/engine/swarm/secrets/
-[4]: https://github.com/DataDog/datadog-secret-backend
-[5]: https://github.com/DataDog/datadog-secret-backend/blob/main/docs/aws/secrets.md
 [6]: /opentelemetry/setup/ddot_collector/
 [7]: /agent/configuration/agent-commands/#restart-the-agent
 [8]: /agent/configuration/agent-configuration-files/
+<!-- Links in tabs are scoped inside shortcodes, collapse-content links are not scoped -->
+<!-- AWS Secrets Manager and SSM Links -->
+[1000]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+[1001]: https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html
+[1006]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+
+<!-- Azure KeyVault Links -->
+[2000]: https://docs.microsoft.com/en-us/Azure/key-vault/secrets/quick-create-portal
+
+<!-- HashiCorp Vault Links -->
+[3000]: https://learn.hashicorp.com/tutorials/vault/static-secrets
+[3001]: https://developer.hashicorp.com/
+[3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+[3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+
+<!-- File Backend Links (JSON/YAML) -->
+[4001]: https://en.wikipedia.org/wiki/JSON
+[4002]: https://en.wikipedia.org/wiki/YAML
+
+<!-- GCP Secret Manager Links -->
+[5000]: https://cloud.google.com/security/products/secret-manager
+[5001]: https://cloud.google.com/docs/authentication/application-default-credentials
+[5002]: https://docs.cloud.google.com/secret-manager/docs/access-control
+[5003]: https://docs.cloud.google.com/secret-manager/docs/accessing-the-api
+
+<!-- Kubernetes Secrets Links -->
+[7000]: https://kubernetes.io/docs/concepts/configuration/secret/
