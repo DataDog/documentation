@@ -97,7 +97,7 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-For OpenAI or Azure OpenAI models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, or Anthropic models, configure [Structured Output](#structured-output).
 
 For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
 
