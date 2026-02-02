@@ -222,7 +222,7 @@ Notebooks automatically snapshot graphs with fixed time ranges to preserve the v
 
 Snapshots are a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
-You can preview how many snapshots have been successfully created on a notebook by hovering over the graph snapshot indicator under the notebook title. You can see the time the last snapshot was updated and how many snapshots have been successfully created.
+You can preview snapshot status for a notebook by hovering over the graph snapshot indicator under the notebook title. The preview shows the time of the most recent snapshot and the number of snapshots created.
 
 {{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator to determine how many snapshots have been generated" style="width:100%;">}}
 
