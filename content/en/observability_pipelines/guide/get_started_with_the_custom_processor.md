@@ -284,7 +284,7 @@ Tags are used to correlate logs with other telemetry and services. They are stor
 
 #### Input
 
-Sample log containing the `ddtags` array with Datadog tags. In this example, we are trying to add the `service` field as a tag.
+In this example, the sample log contains a `ddtags` array and you want to add the `service` field as a tag. 
 
 ```json
 {
