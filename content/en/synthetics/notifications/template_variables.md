@@ -9,6 +9,9 @@ further_reading:
 - link: "/monitors/templates/"
   tag: "Documentation"
   text: "Learn more about monitor templates"
+- link: "/synthetics/guide/how-synthetics-monitors-trigger-alerts/"
+  tag: "Guide"
+  text: "Understanding Synthetic Monitor Alerting"
 ---
 
 ## Overview
