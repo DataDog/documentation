@@ -631,6 +631,10 @@ JSON input components have the following properties.
 Label
 : The text that displays at the top of the component.
 
+Tooltip
+: The tooltip to display when hovering over the input label. The tooltip can contain markdown.<br>
+**Value**: string or expression
+
 Default value
 : The default JSON value that the component displays.
 
@@ -639,6 +643,10 @@ Default value
 Is Read Only
 : Determines whether the component is read only.<br>
 **Provided values**: on, off
+
+Default View Mode
+: Determines whether the JSON data is displayed as raw text or as a graphical interface.
+**Provided values**: raw, GUI 
 
 Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
