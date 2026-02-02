@@ -177,12 +177,12 @@ In large or high-volume environments, scheduled tests may not run at the expecte
 
 If you do not see test results in the Datadog UI, the Datadog Agent is not sending test results to the Synthetics intake (https://http-synthetics.datadoghq.com) that processes test results. Verify that outbound network traffic from the Datadog Agent to this intake is allowed.
 
-If the Datadog Agent is running behind a proxy, make sure the Synthetics collector is configured to send traffic through the proxy, for example:
+If the Datadog Agent is running behind a proxy, make sure the Synthetics forwarder is configured to send traffic through the proxy, for example:
 ```
 synthetics: 
   collector: 
     enabled: true
-    synthetics.forwarder.dd_url: "http://my-proxy.com:<proxy-port>"
+synthetics.forwarder.dd_url: http://my-proxy.com:<proxy-port>
 ```
 Additionaly, ensure that the proxy itself is configured to allow outboud network traffic to the Synthetics intake.
 
