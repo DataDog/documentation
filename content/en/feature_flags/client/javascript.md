@@ -58,6 +58,7 @@ import { OpenFeature } from '@openfeature/web-sdk';
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
 {{< /code-block >}}
@@ -167,6 +168,7 @@ import { OpenFeature } from '@openfeature/web-sdk';
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
 
