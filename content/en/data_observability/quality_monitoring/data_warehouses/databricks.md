@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Data Observability'
+    text: 'Data Observability Overview'
 
 ---
 
@@ -16,7 +16,7 @@ further_reading:
 
 The Databricks integration connects Datadog to your Databricks workspace to sync metadata and table-level metrics. Use it to monitor data freshness, detect anomalies, and trace lineage across your data stack.
 
-**Note**: The instructions below are for Quality Monitoring. For Jobs Monitoring, see [Enable Data Jobs Monitoring for Databricks][1].
+**Note**: The instructions below are for Quality Monitoring. For Jobs Monitoring, see [Enable Data Observability: Jobs Monitoring for Databricks][1].
 
 ## Set up your account in Databricks
 

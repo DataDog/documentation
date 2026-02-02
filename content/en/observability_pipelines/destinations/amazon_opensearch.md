@@ -32,11 +32,8 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
 1. Select an authentication strategy, **Basic** or **AWS**. For **AWS**, enter the AWS region.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+{{% observability_pipelines/destination_buffer_numbered %}}
+
 
 ### Set the environment variables
 

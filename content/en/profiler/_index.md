@@ -92,13 +92,13 @@ By default, profiles are retained for seven days, and metrics generated from pro
 
 See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language.
 
-{{< img src="profiler/profile-types.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
+{{< img src="profiler/profile-types2.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
 
 ### Search profiles by tags
 
 [Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
 
-{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles4.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 

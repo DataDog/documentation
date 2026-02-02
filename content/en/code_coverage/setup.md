@@ -5,9 +5,15 @@ further_reading:
   - link: "/code_coverage"
     tag: "Documentation"
     text: "Code Coverage"
+  - link: "/code_coverage/configuration"
+    tag: "Documentation"
+    text: "Configure Code Coverage"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
+  - link: "/code_coverage/monorepo_support"
+    tag: "Documentation"
+    text: "Learn how Code Coverage supports large monorepos"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
