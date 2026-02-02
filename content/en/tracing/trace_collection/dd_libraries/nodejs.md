@@ -62,7 +62,7 @@ This step is only required when doing custom instrumentation in Serverless or wi
   npm install dd-trace-api
   ```
 
-You can then import `dd-trace-api` instead of `dd-trace` in your code doing custom instrumentation.
+You can then import `dd-trace-api` instead of `dd-trace` in any code doing custom instrumentation.
 
 ### Import and initialize the tracer
 
