@@ -833,7 +833,6 @@ The Docker secrets backend supports both [Docker Swarm secrets][6002] and [Docke
 Both secret types result in the same mounted file structure at `/run/secrets` that the `docker.secrets` backend reads from:
 
 **Swarm Secrets**
-- Stored in encrypted Raft log
 - Mounted at `/run/secrets/<secret_name>`
 
 **Compose Secrets**
