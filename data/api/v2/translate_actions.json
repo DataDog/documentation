@@ -3342,6 +3342,10 @@
     "description": "Get the status of the SLO report job.",
     "summary": "Get SLO report status"
   },
+  "GetSloStatus": {
+    "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
+    "summary": "Get SLO status"
+  },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
     "summary": "Get SPA Recommendations"
