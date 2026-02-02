@@ -28,7 +28,7 @@ Use a regex pattern to extract specific values when your source contains extra c
 - Regex pattern: `user_id=(\d+)`
 - Extracted value: `12345`
 
-The SDK uses the first capture group if present, otherwise the full match.
+If your regex pattern includes a capture group (parentheses), the SDK extracts that value. Otherwise, it extracts the entire matched string.
 
 ### Allowed tracing URLs
 
