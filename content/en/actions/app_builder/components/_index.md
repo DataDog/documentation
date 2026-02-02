@@ -62,11 +62,11 @@ Is Visible
 
 Left Icon
 : Determines the icon displayed to the left of the button's label.<br>
-**Provided values**: angleDown, angleLeft, angleRight, angleUp, arrowDown, arrowLeft, arrowRight, arrowUp, attentionCircled, ban, bell, bellSlashed, bidirectionalHorizontal, bidirectionalVertical, calendar, cancelCircled, cancelLight, check, checkCircled, cloud, code, cog, comment, copy, cursor, desktop, download, email, export, externalLink, eye, eyeSlashed, file, filter, flagEmpty, folder, globe, hashtag, heartEmpty, home, lightningEmpty, link, lock, lockOpen, magicWand, mention, minus, mobile, pencil, percent, phone, picture, play, plus, pushpin, pushpinSlashed, redo, refresh, search, starEmpty, starFilled, trash, undo, user, userMinus, userPlus, users; integration icons 
+**Provided values**: bell, download, folder 
 
 Right Icon
 : Determines the icon displayed to the right of the button's label<br>
-**Provided values**: angleDown, angleLeft, angleRight, angleUp, arrowDown, arrowLeft, arrowRight, arrowUp, attentionCircled, ban, bell, bellSlashed, bidirectionalHorizontal, bidirectionalVertical, calendar, cancelCircled, cancelLight, check, checkCircled, cloud, code, cog, comment, copy, cursor, desktop, download, email, export, externalLink, eye, eyeSlashed, file, filter, flagEmpty, folder, globe, hashtag, heartEmpty, home, lightningEmpty, link, lock, lockOpen, magicWand, mention, minus, mobile, pencil, percent, phone, picture, play, plus, pushpin, pushpinSlashed, redo, refresh, search, starEmpty, starFilled, trash, undo, user, userMinus, userPlus, users; integration icons 
+**Provided values**: bell, download, folder 
 
 ### Events
 
@@ -117,7 +117,7 @@ Additional Text
 
 Style
 : The visual style of the component.<br>
-**Provided values**: default, primary, success, warning, danger, blue, purple, pink, orange, yellow, red, green, gray, sequential blue 1-3, sequential red 1-3, sequential orange 1-3, sequential green 1-3, sequential gray 1-4, vivid blue, vivid purple, vivid pink, vivid orange, vivid yellow, vivid red, vivid green, vivid gray
+**Provided values**: default, primary, success, warning
 
 Size
 : Responsively sizes the metric so that it is proportional to the sizing of the value.<br>
@@ -135,7 +135,7 @@ Borderless
 
 Left Icon<br>
 : Determines the icon displayed to the left of the callout's Value and Unit.
-**Provided values**: angleDown, angleLeft, angleRight, angleUp, arrowDown, arrowLeft, arrowRight, arrowUp, attentionCircled, ban, bell, bellSlashed, bidirectionalHorizontal, bidirectionalVertical, calendar, cancelCircled, cancelLight, check, checkCircled, cloud, code, cog, comment, copy, cursor, desktop, download, email, export, externalLink, eye, eyeSlashed, file, filter, flagEmpty, folder, globe, hashtag, heartEmpty, home, lightningEmpty, link, lock, lockOpen, magicWand, mention, minus, mobile, pencil, percent, phone, picture, play, plus, pushpin, pushpinSlashed, redo, refresh, search, starEmpty, starFilled, trash, undo, user, userMinus, userPlus, users; integration icons 
+**Provided values**: bell, download, folder
 
 Direction<br>
 : Determines the direction of the arrow displayed to the right of the callout's Value and Unit.
