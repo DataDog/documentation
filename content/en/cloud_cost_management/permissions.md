@@ -47,7 +47,7 @@ The table below shows which permissions are required for each CCM page and relat
 
 ## Data access control
 
-For more granular tag-level restrictions, [Data Access Control][2] allows you to limit which cost data users can see based on specific tags. To request preview access, fill out [this form][3].
+Use [Data Access Control][2] to restrict access to cost data by specific tags. With this feature, you can limit teams to see only costs relevant to their resources—for example, restricting a team to view only costs tagged with `team:payments` or `env:production`.
 
 ## Further reading
 
@@ -55,5 +55,4 @@ For more granular tag-level restrictions, [Data Access Control][2] allows you to
 
 [1]: /account_management/rbac/
 [2]: /account_management/rbac/data_access/
-[3]: https://www.datadoghq.com/product-preview/data-access-control/
 
