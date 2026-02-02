@@ -866,7 +866,7 @@ secret_backend_config:
 
 ##### Docker Swarm example
 
-Create and use a Docker Swarm secret:
+[Create][6002] and use a Docker Swarm secret:
 
 ```bash
 # Create the secret
