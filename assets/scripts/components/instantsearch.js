@@ -104,7 +104,48 @@ const adapterOptions = {
 
 const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter(adapterOptions);
 
-const searchClient = typesenseInstantSearchAdapter.searchClient;
+const baseSearchClient = typesenseInstantSearchAdapter.searchClient;
+
+// Wrap the search client to fix nbHits when using group_by
+// When group_by is used, Typesense returns `found` (number of unique groups) but the adapter
+// flattens grouped_hits into a hits array. We need to recalculate nbHits based on actual hits.
+const searchClient = {
+    ...baseSearchClient,
+    search(requests) {
+        return baseSearchClient.search(requests).then((results) => {
+            return {
+                ...results,
+                results: results.results.map((result) => {
+                    // The adapter flattens grouped_hits into hits array
+                    // but nbHits still contains the group count instead of total flattened hits
+                    const actualHitsOnPage = result.hits?.length || 0;
+                    const hitsPerPage = result.hitsPerPage || 10;
+                    const currentPage = result.page || 0;
+
+                    // Calculate the correct total based on pagination behavior:
+                    // - If we got a full page, assume at least one more result exists
+                    // - If we got a partial page, this is the last page
+                    let correctedNbHits;
+                    if (actualHitsOnPage === hitsPerPage) {
+                        // Full page - estimate there's at least one more result
+                        correctedNbHits = (currentPage + 1) * hitsPerPage + 1;
+                    } else if (actualHitsOnPage > 0) {
+                        // Partial page - this is the last page
+                        correctedNbHits = currentPage * hitsPerPage + actualHitsOnPage;
+                    } else {
+                        // No hits on this page - we've gone past the end
+                        correctedNbHits = currentPage * hitsPerPage;
+                    }
+
+                    return {
+                        ...result,
+                        nbHits: correctedNbHits
+                    };
+                })
+            };
+        });
+    }
+};
 
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
