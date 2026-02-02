@@ -44,19 +44,19 @@ Alternatively, you can [manually](#alternative-installation-method) install and 
 
 ## Updating your RUM application
 
-You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
+You can update your RUM application settings at any time. From the [Application Management][4] list, select your RUM application and navigate to the **SDK Configuration** page. Click **Save Changes** after making updates.
 
-To update your RUM Application:
+### Sampling rates
 
-1. Go to your RUM application from the [Application Management][4] list.
-2. On the **SDK Configuration** page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
-3. Copy and paste the configuration snippet to your `nginx.conf` file.
+Adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling. Copy and paste the configuration snippet to your `nginx.conf` file.
+
+{{% rum-browser-auto-instrumentation-update-user-attributes %}}
 
 ## Troubleshooting
 
 ### NGINX stops responding
 
-Since the module is in Preview, it's possible NGINX may stop serving requests, particularly after installation. If you experience this issue, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
+If NGINX stops serving requests, specifically after installation, contact [Datadog support][6] with the following information to help us investigate and resolve the issue:
 
 - Your NGINX configuration file
 - Any relevant error logs

@@ -3,6 +3,10 @@
     "name": "Gestión de API",
     "description": "Configura tus endpoints de API a través de la API Datadog."
   },
+  "apm": {
+    "name": "APM",
+    "description": "Observar, solucionar problemas y mejorar las aplicaciones a escala de la nube con toda la telemetría en contexto"
+  },
   "apm-retention-filters": {
     "name": "Filtros de retención APM",
     "description": "Gestiona la configuración de [filtros de retención APM](https://app.datadoghq.com/apm/traces/retention-filters) para tu organización. Para interactuar con este endpoint, necesitas una clave de API y de aplicación con derechos de administrador. Para obtener más información, consulta los [filtros de retención](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) en la página de retención de trazas (traces)."
@@ -111,6 +115,10 @@
     "name": "Conjuntos de datos",
     "description": "Data Access Controls en Datadog es una función que permite a los administradores y gestores de acceso regular\nel acceso a datos confidenciales. Mediante la definición de conjuntos de datos restringidos, puedes asegurarte de que sólo determinados roles o equipos puedan\nver determinados tipos de telemetría (por ejemplo, logs, trazas, métricas y datos RUM)."
   },
+  "deployment-gates": {
+    "name": "Puertas de despliegue",
+    "description": "Gestiona las puertas de despliegue mediante esta API para reducir la probabilidad y el impacto de los incidentes causados por los despliegues. Consulta la [Documentación sobre puertas de despliegue](https://docs.datadoghq.com/deployment_gates/) para obtener más información."
+  },
   "domain-allowlist": {
     "name": "Lista de dominios permitidos",
     "description": "Configura tu Lista de dominios permitidos de correo electrónico de Datadog directamente a través de la API de Datadog.\nLa lista de dominios de correo electrónico permitidos controla los dominios a los que se pueden enviar determinados correos electrónicos de Datadog.\nPara obtener más información, consulta la [página de la documentación Lista de dominios permitidos] (https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)"
@@ -130,6 +138,10 @@
   "fastly-integration": {
     "name": "Integración Fastly",
     "description": "Gestiona tus cuentas y servicios de la integración Fastly en Datadog directamente a través de la API Datadog. Para obtener más información, consulta la [página de la integración Fastly](https://docs.datadoghq.com/integrations/fastly/)."
+  },
+  "fleet-automation": {
+    "name": "Automatización de flotas",
+    "description": "Gestiona despliegues automatizados en toda tu flota de hosts.\n\nFleet Automation proporciona dos tipos de despliegues:\n\nDespliegues de configuración (`/configure`):\n- Aplica cambios en los archivos de configuración a los hosts de destino.\n- Admite operaciones merge-patch para actualizar campos de configuración específicos\n- Admite operaciones de borrado para eliminar archivos de configuración\n- Útil para actualizar la configuración del Datadog Agent, configuraciones de integración, etc.\n\nDespliegues de actualización de paquetes (`/upgrade`):\n- Actualiza el Datadog Agent a versiones específicas."
   },
   "gcp-integration": {
     "name": "Integración GCP",
@@ -227,13 +239,17 @@
     "name": "Procesos",
     "description": "La API de procesos te permite consultar datos de los procesos de tu organización. Para obtener más información, consulta la [página de procesos en directo](https://docs.datadoghq.com/infrastructure/process/)."
   },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "Envia eventos del lado del servidor a Product Analytics. La ingesta de eventos del lado del servidor permite recopilar eventos personalizados\nde cualquier servidor fuente, y los conserva durante 15 meses. Los eventos del lado del servidor son útiles para comprender\nlas causas de los cuellos de botella que son externas al lado del cliente (por ejemplo, un error en el procesamiento del pago).\nConsulta la [página de Product Analytics](https://docs.datadoghq.com/product_analytics/) para obtener más información."
+  },
   "rum": {
     "name": "RUM",
     "description": "Gestiona tus aplicaciones Real User Monitoring (RUM) y busca o agrega tus eventos RUM a través de HTTP. Para obtener más información, consulta la [página de RUM y Session Replay](https://docs.datadoghq.com/real_user_monitoring/)."
   },
   "reference-tables": {
     "name": "Tablas de referencia",
-    "description": "Tablas de referencia de etiquetas generadas automáticamente"
+    "description": "Ve y gestiona las Tablas de Referencia de tu organización."
   },
   "restriction-policies": {
     "name": "Políticas de restricción",
@@ -242,6 +258,10 @@
   "roles": {
     "name": "Roles",
     "description": "La API de roles se utiliza para crear y gestionar roles de Datadog, qué\n[permisos globales](https://docs.datadoghq.com/account_management/rbac/)\nconceden y qué usuarios pertenecen a ellos.\n\nLos permisos relacionados con recursos específicos de una cuenta pueden concederse a roles\nen la aplicación Datadog sin utilizar esta API. Por ejemplo, la concesión\na un rol del acceso de lectura en un índice específico de un log puede hacerse en Datadog desde la\n[página Pipelines](https://app.datadoghq.com/logs/pipelines)."
+  },
+  "rum-audience-management": {
+    "name": "Gestión de la audiencia de RUM",
+    "description": "Etiqueta autogenerada de la Gestión de la audiencia de RUM"
   },
   "rum-metrics": {
     "name": "Métricas de rum",
@@ -273,7 +293,7 @@
   },
   "service-level-objectives": {
     "name": "Objetivos de nivel de servicio (SLOs)",
-    "description": "[Objetivos de nivel de servicio (SLOs)](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\nLos (SLOs) son una parte fundamental del conjunto de herramientas de ingeniería de fiabilidad de los sitios web.\nLos SLOs proporcionan un marco para definir objetivos claros en torno al rendimiento de las aplicaciones,\nlo que, en última instancia, ayuda a los equipos a ofrecer una experiencia coherente al cliente,\na equilibrar el desarrollo de funciones con la estabilidad de la plataforma\ny a mejorar la comunicación con los usuarios internos y externos."
+    "description": "[Objetivos de nivel de servicio (SLOs)](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\nLos (SLOs) son una parte fundamental del conjunto de herramientas de ingeniería de fiabilidad de los sitios web.\nLos SLOs proporcionan un framework para definir objetivos claros en torno al rendimiento de las aplicaciones,\nlo que, en última instancia, ayuda a los equipos a ofrecer una experiencia coherente al cliente,\na equilibrar el desarrollo de funciones con la estabilidad de la plataforma\ny a mejorar la comunicación con los usuarios internos y externos."
   },
   "service-scorecards": {
     "name": "Cuadros de mando de servicio",
@@ -294,6 +314,10 @@
   "spans-metrics": {
     "name": "Google",
     "description": "Gestiona la configuración de [métricas basadas en tramos](https://app.datadoghq.com/apm/traces/generate-metrics) de tu organización. Para obtener más información, consulta [Generar métricas a partir de tramos](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)."
+  },
+  "static-analysis": {
+    "name": "Análisis estático",
+    "description": "API para el análisis estático"
   },
   "synthetics": {
     "name": "Synthetics",

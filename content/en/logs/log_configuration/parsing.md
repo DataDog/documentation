@@ -11,6 +11,9 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Learn how to process your logs"
+- link: "https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3"
+  tag: "Video"
+  text: "Datadog Tips & Tricks: Use Grok parsing to extract fields from logs"
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
   tag: "FAQ"
   text: "How to investigate a log parsing issue?"
@@ -59,7 +62,7 @@ After processing, the following structured log is generated:
 
 ```json
 {
-  "users": "john",
+  "user": "john",
   "date": 1575590400000
 }
 ```

@@ -5,9 +5,17 @@
 
 # This file lists compiled Cdocs files to keep them out of version control. For more information, see the internal Cdocs documentation: https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4898063037/Cdocs+Build
 
-/en/product_analytics/session_replay/mobile/privacy_options.md
-/en/product_analytics/session_replay/mobile/setup_and_configuration.md
+/en/opentelemetry/instrument/dd_sdks/api_support.md
 /en/real_user_monitoring/guide/proxy-mobile-rum-data.md
 /en/real_user_monitoring/guide/proxy-rum-data.md
 /en/real_user_monitoring/session_replay/mobile/privacy_options.md
 /en/real_user_monitoring/session_replay/mobile/setup_and_configuration.md
+/en/session_replay/mobile/privacy_options.md
+/en/session_replay/mobile/setup_and_configuration.md
+/en/tracing/trace_collection/custom_instrumentation/dotnet/otel.md
+/en/tracing/trace_collection/custom_instrumentation/go/otel.md
+/en/tracing/trace_collection/custom_instrumentation/java/otel.md
+/en/tracing/trace_collection/custom_instrumentation/nodejs/otel.md
+/en/tracing/trace_collection/custom_instrumentation/php/otel.md
+/en/tracing/trace_collection/custom_instrumentation/python/otel.md
+/en/tracing/trace_collection/custom_instrumentation/ruby/otel.md

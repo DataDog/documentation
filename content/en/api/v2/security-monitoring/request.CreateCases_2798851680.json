@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "attributes": {
+        "title": "A title",
+        "description": "A description"
+      },
+      "relationships": {
+        "findings": {
+          "data": [
+            {
+              "id": "ZTd5LWNuYi1seWV-aS0wMjI2NGZjZjRmZWQ5ODMyMg==",
+              "type": "findings"
+            },
+            {
+              "id": "c2FuLXhyaS1kZnN-aS0wODM3MjVhMTM2MDExNzNkOQ==",
+              "type": "findings"
+            }
+          ]
+        },
+        "project": {
+          "data": {
+            "id": "959a6f71-bac8-4027-b1d3-2264f569296f",
+            "type": "projects"
+          }
+        }
+      },
+      "type": "cases"
+    }
+  ]
+}

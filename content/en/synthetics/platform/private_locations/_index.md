@@ -93,12 +93,6 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
-{{< site-region region="gov" >}}
-
-<div class="alert alert-warning">FIPS compliance is not supported for Windows private locations that report to <code>ddog-gov.com</code>. To disable this behavior, use the <a href="https://docs.datadoghq.com/synthetics/private_locations/configuration/?tab=docker#all-configuration-options"><code>--disableFipsCompliance</code> option</a>.</div>
-
-{{< /site-region >}}
-
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
 
@@ -109,75 +103,15 @@ You must install .NET version 4.7.2 or later on your computer before using the M
 
 To pull test configurations and push test results, the private location worker needs access to the following Datadog API endpoints.
 
-{{< site-region region="us" >}}
-
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.com`      | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions 1.32.0 and later, these requests are Federal Information Processing Standards (FIPS) compliant.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
 
 {{< site-region region="eu" >}}
 
-| Port | Endpoint                           | Description                                                    |
-| ---- | ---------------------------------- | -------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.eu`   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
 **Note**: These domains are pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.eu.
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-| Port | Endpoint                                | Description                                                                        |
-| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.us3.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-| Port | Endpoint                                | Description                                                                        |
-| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.ap1.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-
-| Port | Endpoint                                | Description                                                                        |
-| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.ap2.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-| Port | Endpoint                              | Description                                                    |
-| ---- | ------------------------------------- | -------------------------------------------------------------- |
-| 443  | `intake.synthetics.us5.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-| Port | Endpoint                         | Description                                                                                                                                                                                                                                                                       |
-|------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 443  | `intake.synthetics.ddog-gov.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. For versions 1.32.0 and later, these requests are Federal Information Processing Standards (FIPS) compliant. |
-
-[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
 {{< /site-region >}}
 
@@ -1020,7 +954,8 @@ Use [granular access control][24] to limit who has access to your test based on 
 6. Select the level of access you want to associate with each of them.
 7. Click **Done**.
 
-<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location.</div>
+<div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location. <br><br>
+Restricting a Private Location may limit other users from adding it to a test or editing it, but they are still able to see the location's name if it was added to a test by an authorized user.</div>
 
 | Access level | View PL instructions | View PL metrics | Use PL in test | Edit PL configuration  |
 | ------------ | ---------------------| --------------- | -------------- | ---------------------- |

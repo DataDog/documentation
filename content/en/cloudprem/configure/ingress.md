@@ -2,12 +2,12 @@
 title: CloudPrem Ingress Configuration
 description: Learn how to configure and manage ingress controllers for your CloudPrem deployment
 further_reading:
-- link: "/cloudprem/ingest_logs/"
+- link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Set up Log Ingestion"
-- link: "/cloudprem/manage/"
+- link: "/cloudprem/operate/monitoring/"
   tag: "Documentation"
-  text: "Manage and Monitor"
+  text: "Monitor CloudPrem"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
@@ -32,7 +32,7 @@ The public ingress is essential for enabling Datadog's control plane and query s
 
 This setup ensures that only authenticated Datadog services can access the CloudPrem cluster while maintaining secure encrypted communication end-to-end.
 
-{{< img src="/cloudprem/ingress/public_ingress.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
+{{< img src="/cloudprem/ingress/cloudprem_public_ingress1.png" alt="Diagram showing CloudPrem public ingress architecture with Datadog services connecting through an internet-facing AWS ALB using mTLS authentication to access the CloudPrem gRPC API" style="width:100%;" >}}
 
 ### IP Allowlisting
 

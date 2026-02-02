@@ -40,11 +40,11 @@ Datadog's Source Code Integration allows you to connect your Git repositories to
 
 ## Connect your Git repositories to Datadog
 
-To use most source code-related features, you must connect your Git repositories to Datadog. By default, when synchronizing your repositories, Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
+To use most source code-related features, you must connect your Git repositories to Datadog through Datadog's first-party source code management (SCM) provider integrations. After connecting your repositories, Datadog may store the contents of your repositories for up to 7 days to reduce repeated requests to the repository and support feature performance.
 
 ### Source code management providers
 
-Datadog supports the following features for the following source code management (SCM) providers. See [Usage](#usage) for more details about each feature:
+Datadog supports the following features for the SCM providers listed below. See [Usage](#usage) for more details about each feature:
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
@@ -69,26 +69,25 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 {{% /tab %}}
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
-<div class="alert alert-danger">
-Repositories from GitLab instances are supported in closed Preview. Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the Preview</a>.
+<div class="alert alert-info">
+Repositories from GitLab instances are supported for both GitLab.com (SaaS) and GitLab Self-Managed/Dedicated (On-Prem). For GitLab Self-Managed, your instance must be accessible from the internet. If needed, you can allowlist <a href="https://docs.datadoghq.com/api/latest/ip-ranges/">Datadog's <code>webhooks</code> IP addresses</a> to allow Datadog to connect to your instance.
 </div>
 
 Install Datadog's [GitLab Source Code integration][101] using the [integration tile][102] or while onboarding other Datadog products to connect to your GitLab repositories.
 
-[101]: https://www.datadoghq.com/product-preview/gitlab-source-code-integration/
+[101]: https://docs.datadoghq.com/integrations/gitlab-source-code/
 [102]: https://app.datadoghq.com/integrations/gitlab-source-code/
 
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
-<div class="alert alert-danger">
-Repositories from Azure DevOps are supported in closed Preview. <a href="https://www.datadoghq.com/product-preview/azure-devops-integration-code-security/">Join the Preview</a>.
+<div class="alert alert-warning">
+Repositories from Azure DevOps instances are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not</strong> supported.
 </div>
 
-Install Datadog's Azure DevOps Source Code integration using the [integration tile][102] or while onboarding to [Datadog Code Security][101].
+Install Datadog's Azure DevOps Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Azure DevOps repositories.
 
-[101]: https://app.datadoghq.com/security/configuration/code-security/setup?provider=azure-devops&steps=static
-[102]: https://app.datadoghq.com/integrations/azure-devops-source-code/
+[101]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
@@ -471,6 +470,157 @@ If your build process is executed in CI within a Docker container, perform the f
 
 For unsupported languages, use the `git.commit.sha` and `git.repository_url` tags to link data to a specific commit. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example/repo`, the value for the `git.repository_url` tag should be `github.com/example/repo`.
 
+## Kubernetes source code and resource mapping
+
+Datadog's Source Code and resource mapping allow you to connect cluster resources to the source code
+that was used to deploy them, using Kubernetes annotations.
+
+`origin.datadoghq.com/location` contains different content depending on how the resources were deployed.
+
+{{< tabs >}}
+{{% tab "Raw Kubernetes YAML" %}}
+If you deployed resources using `kubectl`, use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+	"repo": {
+		"url": "<repo URL>",
+		"targetRevision": "<SHA for commit being deployed>",
+		"path": "<file path of the resource>"
+	}
+}
+```
+
+{{% /tab %}}
+{{% tab "Helm chart" %}}
+If you deployed resources using `helm`, the annotation format you need to use depends on how `helm install` was invoked.
+There are six possible ways to do it:
+
+{{% collapse-content title="Chart reference" level="h4" expanded=false id="chart-reference" %}}
+
+Use this option when the chart is stored in the git repo in unpacked form.
+
+Use the installation command `helm install <release> <chart/path>`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "repoURL": "<repo where the chart and values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"],
+    "chartPath": "<chart/path> relative to <repoURL>"
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Path to a packaged chart" level="h4" expanded=false id="path-to-chart" %}}
+
+Use this option when the chart is stored in the git repo in the form of an archive.
+
+Use the installation command `helm install <release> <chart/path/arch-x.y.z.tgz>`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "repoURL": "<repo where the chart and values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"],
+    "chartPath": "<chart/path/arch-x.y.z.tgz relative to repoURL>"
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Path to an unpacked chart directory" level="h4" expanded=false id="path-to-unpacked-chart" %}}
+
+Use this option when the chart is stored somewhere in the current git repo and unpacked during the installation.
+
+Use the installation command `helm install <release> <unpacked/path/dir>`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL of the chart>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"],
+    "chartPath": "<unpacked/path/dir relative to repoURL>"
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Absolute URL" level="h4" expanded=false id="absolute-url" %}}
+
+Use the installation command `helm install mynginx https://example.com/charts/nginx-1.2.3.tgz`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL in the format https://example.com/charts/nginx-1.2.3.tgz>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"]
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="Chart reference and repo URL" level="h4" expanded=false id="chart-reference-and-repo" %}}
+
+Use the installation command `helm install --repo https://example.com/charts/ mynginx nginx`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL in the format https://example.com/charts/nginx>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of values.yaml files relative to <repoURL>"]
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% collapse-content title="OCI registries" level="h4" expanded=false id="oci-registries" %}}
+
+Use the installation command `helm install mynginx --version 1.2.3 oci://example.com/charts/nginx`.
+
+Use the following annotation format:
+
+```json
+origin.datadoghq.com/location:
+{
+  "helm": {
+    "chartURL": "<URL in the format oci://example.com/charts/nginx>",
+    "repoURL": "<repo where the values.yaml files are stored>",
+    "targetRevision": "<commit SHA of repoURL>",
+    "valuesPath": ["location of `values.yaml` files relative to <repoURL>"]
+  }
+}
+```
+
+{{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Usage
 
 ### Links to Git providers & code snippets
@@ -487,6 +637,32 @@ You can see links from stack frames to their source repository in [Error Trackin
 
 [1]: /tracing/error_tracking/
 [2]: https://app.datadoghq.com/apm/error-tracking
+
+{{% /tab %}}
+{{% tab "RUM" %}}
+
+You can see links from stack frames to their source repository in [Error Tracking for RUM][1].
+
+Source code integration is supported for the following RUM platforms when sourcemaps or debug symbols are uploaded with Git metadata:
+
+- **Browser**: Requires [JavaScript source maps][3] to be uploaded with Git information using the [`datadog-ci sourcemaps upload`][4] command
+- **React Native**: Requires [source maps and debug symbols][5] to be uploaded with Git information
+- **Android**: Requires [Proguard mapping files][6] to be uploaded with Git information
+
+**Note**: Source code integration is not supported for iOS RUM errors.
+
+1. Navigate to [**Digital Experience** > **Error Tracking**][2].
+2. Click on an issue. The **Issue Details** panel appears on the right.
+3. Under **Latest Available Errors** or error samples, if you're using the GitHub or GitLab integrations, click **Connect to preview** on stack frames. You can see inline code snippets directly in the stack trace. Otherwise, you can click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+
+{{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
+
+[1]: /real_user_monitoring/error_tracking/
+[2]: https://app.datadoghq.com/rum/error-tracking
+[3]: /real_user_monitoring/guide/upload-javascript-source-maps/
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
+[6]: /real_user_monitoring/application_monitoring/android/error_tracking/
 
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}

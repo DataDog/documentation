@@ -1,5 +1,7 @@
 ---
 title: Configuring Query Completion and Query Error Capture on SQL Server
+aliases:
+- /database_monitoring/sql_extended_events
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -106,6 +108,9 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
@@ -153,6 +158,9 @@ ADD EVENT sqlserver.attention(
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,
@@ -252,6 +260,9 @@ ADD EVENT sqlserver.module_end( -- capture stored procedure completions
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not exceed 1024, values above 1 MB may result in data loss due to SQLServer internals
     TRACK_CAUSALITY = ON, -- allows datadog to correlate related events across activity ID
@@ -299,6 +310,9 @@ ADD EVENT sqlserver.attention(
     )
 )
 ADD TARGET package0.ring_buffer -- do not change, datadog is only configured to read from ring buffer at this time
+(
+  SET MAX_MEMORY = 1024
+)
 WITH (
     MAX_MEMORY = 1024 KB, -- do not change, setting this larger than 1 MB may result in data loss due to SQLServer internals
     EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS,

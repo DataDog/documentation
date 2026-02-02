@@ -1,7 +1,13 @@
 ---
 title: Sumo Logic Hosted Collector
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs sent to your Sumo Logic Hosted Collector. Select and set up this source when you [set up a pipeline][1].
 
@@ -13,7 +19,7 @@ Use Observability Pipelines' Sumo Logic Hosted Collector source to receive logs 
 
 Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
 
-{{% observability_pipelines/source_settings/sumo_logic %}}
+Optionally, in the **Decoding** dropdown menu, select whether your input format is raw **Bytes**, **JSON**, Graylog Extended Log Format (**Gelf**), or **Syslog**. If no decoding is selected, the decoding defaults to JSON.
 
 ## Set the environment variables
 

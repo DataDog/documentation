@@ -1,7 +1,13 @@
 ---
 title: Sumo Logic Hosted Collector Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Logic Hosted Collector.
 
@@ -11,7 +17,14 @@ Set up the Sumo Logic destination and its environment variables when you [set up
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/sumo_logic %}}
+The following fields are optional:
+
+1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
+1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.
+1. Enter a **host name** to override the default `host` value configured for your Sumo Logic collector's source.
+1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
+1. Click **Add Header** to add any custom header fields and values.
+{{% observability_pipelines/destination_buffer_numbered %}}
 
 ### Set the environment variables
 

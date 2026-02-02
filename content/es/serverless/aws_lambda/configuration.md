@@ -44,7 +44,8 @@ Primero, [instala][1] Datadog Serverless Monitoring para comenzar a recopilar m�
 - [Uso de Datadog Lambda Extension v67+](#using-datadog-lambda-extension-v67)
 - [Configuración del enlace automático para PutItem de DynamoDB](#configure-auto-linking-for-dynamodb-putitem)
 - [Visualización y modelado correcto de los servicios de AWS](#visualize-and-model-aws-services-by-resource-name)
-- [Envío de logs a Observability Pipelines](#sending-data-to-observability-pipelines)
+- [Enviar logs a Observability Pipelines](#send-logs-to-observability-pipelines)
+- [Recargar periódicamente el secreto de la clave de API](#reload-api-key-secret-periodically)
 - [Solucionar problemas](#troubleshoot)
 - [Referencias adicionales](#further-reading)
 
@@ -351,7 +352,7 @@ Para cambiar el nombre de los servicios posteriores, consulta `DD_SERVICE_MAPPIN
 
 ## Configurar el rastreador de Datadog
 
-Para ver qué bibliotecas y marcos instrumenta de forma automática el cliente de Datadog APM, consulta los [Requisitos de compatibilidad para APM][15]. Para instrumentar las aplicaciones personalizadas, consulta la guía de Datadog APM en la sección sobre [instrumentación personalizada][16].
+Para ver qué bibliotecas y frameworks instrumenta de forma automática el cliente de Datadog APM, consulta los [Requisitos de compatibilidad para APM][15]. Para instrumentar las aplicaciones personalizadas, consulta la guía de Datadog APM en la sección sobre [instrumentación personalizada][16].
 
 ## Seleccionar las frecuencias de muestreo para la ingesta de tramos de APM
 
@@ -633,17 +634,9 @@ Si tus funciones de Lambda están configuradas para utilizar una firma de códig
 
 ARN del perfil de firma de Datadog:
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-```
-arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
-```
-{{< /site-region >}}
 
 
 ## Migrar a la Datadog Lambda Extension
@@ -787,16 +780,21 @@ Los nombres de los servicios reflejan el nombre real del recurso de AWS y no sol
 
 Es posible que prefieras el modelo de representación de servicios anterior si tus dashboards y monitores dependen de la convención de nomenclatura heredada. Para restaurar el comportamiento anterior, establece la variable de entorno: `DD_TRACE_AWS_SERVICE_REPRESENTATION_ENABLED=false`
 
-Se recomienda la configuración actualizada del modelado de servicios. 
+Se recomienda la configuración actualizada del modelado de servicios.
 
 ## Envío de logs a Observability Pipelines
-La versión 87+ de la Datadog Lambda Extension permite a los usuarios enviar logs a [Observability Pipelines][58].
 
-Para activar esta función, establece estas variables de entorno:
-- `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_ENABLED`: `true`
-- `DD_OBSERVABILITY_PIPELINES_WORKER_LOGS_URL`: `<YOUR_OBSERVABILITY_PIPELINE_URL>`
+{{% observability_pipelines/lambda_extension_source %}}
 
-**Nota**: Tu Observability pipeline debe utilizar `Http Server` como fuente para procesar logs de Lambda Extension. No utilices `Datadog Agent` como fuente.
+Para obtener más información, consulta [Enviar logs del reenviador de la extensión Lambda de Datadog a Observability Pipelines][58].
+
+## Recargar periódicamente el secreto de la clave de API
+
+Si especificas la clave de API de Datadog utilizando `DD_API_KEY_SECRET_ARN`, también puedes configurar `DD_API_KEY_SECRET_RELOAD_INTERVAL` para que recargue periódicamente el secreto. Por ejemplo, si configuras `DD_API_KEY_SECRET_RELOAD_INTERVAL` en `43200`, el secreto se recarga cuando se necesita la clave de API para enviar datos y han pasado más de 43200 segundos desde la última carga.
+
+Ejemplo de caso de uso: por seguridad, cada día (86400 segundos), la clave de API se rota y el secreto se actualiza a la nueva clave, y la clave de API antigua se mantiene válida durante otro día como periodo de gracia. En este caso, se puede establecer `DD_API_KEY_SECRET_RELOAD_INTERVAL` en `43200`, por lo que la clave de API se recarga durante el periodo de gracia de la clave antigua.
+
+Está disponible para la versión 88+ de la extensión de Datadog Lambda.
 
 ## Solucionar problemas
 
@@ -864,4 +862,4 @@ Si tienes problemas para configurar tus instalaciones, define la variable de ent
 [55]: /es/serverless/aws_lambda/distributed_tracing/#span-auto-linking
 [56]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
 [57]: /es/tracing/guide/aws_payload_tagging/?code-lang=python&tab=nodejs
-[58]: https://www.datadoghq.com/product/observability-pipelines/
+[58]: /es/observability_pipelines/sources/lambda_extension/

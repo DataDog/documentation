@@ -5,9 +5,15 @@ further_reading:
   - link: "/code_coverage"
     tag: "Documentation"
     text: "Code Coverage"
+  - link: "/code_coverage/configuration"
+    tag: "Documentation"
+    text: "Configure Code Coverage"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
+  - link: "/code_coverage/monorepo_support"
+    tag: "Documentation"
+    text: "Learn how Code Coverage supports large monorepos"
 ---
 
 {{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
@@ -119,6 +125,25 @@ BRDA:4,0,1,0
 BRF:2
 BRH:1
 end_of_record
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Go Coverprofile" level="h4" expanded=false id="go-coverprofile" %}}
+{{< code-block lang="text" >}}
+mode: atomic
+example/calculator.go:51.148,53.2 1 0
+example/calculator.go:55.190,61.15 3 0
+example/calculator.go:61.15,64.3 2 0
+example/calculator.go:66.2,67.16 2 0
+example/calculator.go:67.16,69.3 1 0
+example/clients/api_client.go:27.87,31.2 3 2
+example/clients/api_client.go:34.85,36.2 1 3
+example/clients/api_client.go:39.126,44.2 4 3
+example/clients/api_client.go:47.106,50.2 2 3
+example/notifications/notifier.go:49.79,51.2 1 3
+example/notifications/notifier.go:60.33,69.2 1 0
+example/notifications/notifier.go:79.131,86.15 3 2
+example/notifications/notifier.go:104.3,104.10 1 3
 {{< /code-block >}}
 {{% /collapse-content %}}
 
