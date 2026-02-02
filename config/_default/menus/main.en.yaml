@@ -128,10 +128,15 @@ menu:
       url: getting_started/integrations/google_cloud/
       weight: 1203
       parent: getting_started_integrations
+    - name: OCI
+      identifier: getting_started_with_oci
+      url: getting_started/integrations/oci/
+      weight: 1204
+      parent: getting_started_integrations
     - name: Terraform
       identifier: getting_started_with_terraform
       url: getting_started/integrations/terraform/
-      weight: 1204
+      weight: 1205
       parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
