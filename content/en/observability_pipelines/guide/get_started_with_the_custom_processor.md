@@ -312,7 +312,7 @@ if !exists(.ddtags) {
     .ddtags = []
 }
 
-# This checks if 'service' exists, then adds the templatized value of service as a tag. Also, converts to type string
+# This checks if 'service' exists, then adds the templatized value of service as a tag. Also, converts the service value to a string
 if exists(.service) {
   .ddtags = push(array!(.ddtags), "service:" + to_string!({{.service}}) )
 }
