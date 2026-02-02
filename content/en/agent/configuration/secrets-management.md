@@ -887,7 +887,7 @@ The secret `dd_api_key` is automatically mounted at `/run/secrets/dd_api_key`, a
 
 ##### Docker Compose example
 
-Create a `docker-compose.yml` with file-based secrets:
+[Create][6003] a `docker-compose.yml` with file-based secrets:
 
 ```yaml
 version: '3.8'
