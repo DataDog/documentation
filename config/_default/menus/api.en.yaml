@@ -2282,6 +2282,32 @@ menu:
           - ListOrgConfigs
         unstable: []
         order: 100
+    - name: Update organization SAML preferences
+      url: '#update-organization-saml-preferences'
+      identifier: organizations-update-organization-saml-preferences
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgSamlConfigurations
+        unstable:
+          - v2
+        order: 1
+    - name: Update maximum session duration
+      url: '#update-maximum-session-duration'
+      identifier: organizations-update-maximum-session-duration
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLoginOrgConfigMaxSessionDuration
+        unstable:
+          - v2
+        order: 2
     - name: Upload IdP metadata
       url: '#upload-idp-metadata'
       identifier: organizations-upload-idp-metadata

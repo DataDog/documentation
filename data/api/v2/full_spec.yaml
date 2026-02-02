@@ -35048,6 +35048,47 @@ components:
       - ms_channel_name
       - redirect_url
       type: object
+    MaxSessionDurationUpdateAttributes:
+      description: Attributes for updating maximum session duration.
+      properties:
+        max_session_duration:
+          description: Maximum session duration in seconds. Must not exceed 24 hours
+            (86400 seconds).
+          example: 60
+          format: int64
+          maximum: 86400
+          minimum: 1
+          type: integer
+      required:
+      - max_session_duration
+      type: object
+    MaxSessionDurationUpdateRequest:
+      description: Request to update the maximum session duration.
+      properties:
+        data:
+          $ref: '#/components/schemas/MaxSessionDurationUpdateRequestData'
+      required:
+      - data
+      type: object
+    MaxSessionDurationUpdateRequestData:
+      description: Data wrapper for maximum session duration update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MaxSessionDurationUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/MaxSessionDurationUpdateRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    MaxSessionDurationUpdateRequestDataType:
+      description: Type of the resource.
+      enum:
+      - max_session_duration
+      example: max_session_duration
+      type: string
+      x-enum-varnames:
+      - MAX_SESSION_DURATION
     MemberTeam:
       description: A member team
       properties:
@@ -50780,6 +50821,65 @@ components:
           example: report_id
           type: string
       type: object
+    SamlConfigurationsUpdateAttributes:
+      description: Attributes for updating SAML preferences.
+      properties:
+        default_role_uuids:
+          description: List of role UUIDs to assign to JIT-provisioned users. Exactly
+            1 role is required.
+          example:
+          - 19fcc38b-b651-46a0-b463-1f8f56c6a862
+          items:
+            format: uuid
+            type: string
+          maxItems: 1
+          minItems: 1
+          type: array
+        jit_domains:
+          description: 'List of domains for Just-In-Time user provisioning. Maximum
+            50 domains.
+
+            Each domain must be between 1 and 256 characters.'
+          example:
+          - example1.com
+          - example2.com
+          items:
+            maxLength: 256
+            minLength: 1
+            type: string
+          maxItems: 50
+          type: array
+      required:
+      - jit_domains
+      - default_role_uuids
+      type: object
+    SamlConfigurationsUpdateRequest:
+      description: Request to update organization SAML preferences.
+      properties:
+        data:
+          $ref: '#/components/schemas/SamlConfigurationsUpdateRequestData'
+      required:
+      - data
+      type: object
+    SamlConfigurationsUpdateRequestData:
+      description: Data wrapper for SAML preferences update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SamlConfigurationsUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/SamlConfigurationsUpdateRequestDataType'
+      required:
+      - type
+      - attributes
+      type: object
+    SamlConfigurationsUpdateRequestDataType:
+      description: Type of the resource.
+      enum:
+      - saml_preferences
+      example: saml_preferences
+      type: string
+      x-enum-varnames:
+      - SAML_PREFERENCES
     ScaRequest:
       properties:
         data:
@@ -80931,6 +81031,60 @@ paths:
         operator: OR
         permissions:
         - org_management
+  /api/v2/login/org_configs/max_session_duration:
+    put:
+      description: 'Updates the maximum session duration for an organization. This
+        controls how long user sessions
+
+        can remain active before requiring re-authentication. The value must not exceed
+        24 hours (86400 seconds).
+
+
+        Requires `org_management` permission and a session that has been active within
+        the last 12 hours.'
+      operationId: UpdateLoginOrgConfigMaxSessionDuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MaxSessionDurationUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content - The maximum session duration was successfully
+            updated.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Update maximum session duration
+      tags:
+      - Organizations
+      x-menu-order: 2
+      x-unstable: This endpoint is in public beta. If you have any feedback, contact
+        [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/logs:
     post:
       description: 'Send your logs to your Datadog platform over HTTP. Limits per
@@ -85948,6 +86102,65 @@ paths:
         operator: OR
         permissions:
         - on_call_read
+  /api/v2/org/saml_configurations:
+    patch:
+      description: 'Updates SAML preferences for an organization, including JIT provisioning
+        domains and default role assignments.
+
+
+        This endpoint allows you to configure:
+
+        - `jit_domains`: List of domains for Just-In-Time user provisioning (up to
+        50 domains, 1-256 characters each)
+
+        - `default_role_uuids`: List of role UUIDs to assign to JIT-provisioned users
+        (exactly 1 role required)
+
+
+        Requires `org_management` permission. This endpoint is gated by the `org-saml-preferences-api-gate`
+        experiment.'
+      operationId: UpdateOrgSamlConfigurations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SamlConfigurationsUpdateRequest'
+        required: true
+      responses:
+        '204':
+          description: No Content - The SAML preferences were successfully updated.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      summary: Update organization SAML preferences
+      tags:
+      - Organizations
+      x-menu-order: 1
+      x-unstable: This endpoint is in public beta. If you have any feedback, contact
+        [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).

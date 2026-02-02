@@ -1750,6 +1750,12 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
+  "UpdateLoginOrgConfigMaxSessionDuration": {
+    "description": "Updates the maximum session duration for an organization. This controls how long user sessions\ncan remain active before requiring re-authentication. The value must not exceed 24 hours (86400 seconds).\n\nRequires `org_management` permission and a session that has been active within the last 12 hours.",
+    "summary": "Update maximum session duration",
+    "request_description": "",
+    "request_schema_description": "Request to update the maximum session duration."
+  },
   "SubmitLog": {
     "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
     "summary": "Send logs",
@@ -2249,6 +2255,12 @@
     "summary": "Update an On-Call notification rule for a user",
     "request_description": "",
     "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
+  },
+  "UpdateOrgSamlConfigurations": {
+    "description": "Updates SAML preferences for an organization, including JIT provisioning domains and default role assignments.\n\nThis endpoint allows you to configure:\n- `jit_domains`: List of domains for Just-In-Time user provisioning (up to 50 domains, 1-256 characters each)\n- `default_role_uuids`: List of role UUIDs to assign to JIT-provisioned users (exactly 1 role required)\n\nRequires `org_management` permission. This endpoint is gated by the `org-saml-preferences-api-gate` experiment.",
+    "summary": "Update organization SAML preferences",
+    "request_description": "",
+    "request_schema_description": "Request to update organization SAML preferences."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
