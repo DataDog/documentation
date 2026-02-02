@@ -1153,11 +1153,19 @@ Title
 : A title for the table. Select **Markdown** for custom formatting.<br>
 **Value**: string
 
+Title Alignment
+: Determines the horizontal alignment of the title within the table.<br>
+**Provided values**: align left, align center, align right
+
 Data source
 : The array of objects to display in a table.<br>
-**Values**: query, demo data, components
+**Values**: action, query, demo data, components, data transformation
 
 ### Columns
+
+Auto update columns
+: Determines whether the columns automatically update based on incoming data structure. When disabled, you can manually refresh columns.<br>
+**Provided values**: on, off
 
 Each column of data from the data source is represented here and has the following properties:
 
@@ -1173,12 +1181,12 @@ Formatting
 : The type of format that the column takes on.<br>
 **Provided values**: string, link, status pill, date / time, markdown, tags, percent bar, number, score bar, avatar
 
-Sortable
-: Determines whether the user can sort by the column.<br>
-
 Copyable
 : Determines whether the user can click to copy the contents of the column.<br>
 **Provided values**: on, off
+
+Sortable
+: Determines whether the user can sort by the column.<br>
 
 Filterable
 : Determines whether a filter option is available for the column.<br>
@@ -1235,6 +1243,10 @@ Disabled
 : Applies disabled styling and removes interactions.<br>
 **Provided values**: on, off
 
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
 Level
 : Controls the color of the button according to its intent.<br>
 **Provided values**: default, danger, success, warning
@@ -1286,6 +1298,10 @@ Is Visible
 : Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
 **Provided values**: on, off
 
+Empty State Caption
+: The text that is displayed in a column when there is no data to retrieve.<br>
+**Value**: string or expression
+
 ### Events
 
 Event
@@ -1306,7 +1322,7 @@ For more information on events, see [Events][1].
 
 ### Inspect data
 
-Displays property and value pairs in JSON format.
+Displays properties and values in JSON format.
 
 ### Example
 
