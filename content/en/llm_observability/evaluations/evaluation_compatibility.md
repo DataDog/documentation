@@ -26,8 +26,8 @@ Custom LLM-as-a-judge evaluations are supported for the following configurations
 | Evaluation                      | DD-trace version  |  LLM Provider                 | Applicable span |
 | --------------------------------| ----------------- | ------------------------------| ----------------|
 | [Boolean][11]                   | Fully supported   | All third party LLM providers | All span kinds |
-| [Score][11]                     | Fully supported     | OpenAI, Azure OpenAI        | All span kinds |
-| [Categorical][11]               | Fully supported   | OpenAI, Azure OpenAI          | All span kinds |
+| [Score][11]                     | Fully supported     | OpenAI, Azure OpenAI, Anthropic, Vertex AI        | All span kinds |
+| [Categorical][11]               | Fully supported   | OpenAI, Azure OpenAI, Anthropic, Vertex AI          | All span kinds |
 
 #### Template LLM-as-a-judge evaluations
 
