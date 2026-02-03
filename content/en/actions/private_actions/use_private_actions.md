@@ -166,6 +166,104 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 {{% /collapse-content %}}
 
+### Set up programmatically
+
+As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using API and App key-based authentication. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows where manual UI interaction is not practical.
+
+#### API and App key authentication
+
+When using the `--with-api-key` flag, the runner authenticates with Datadog using your [API key][19] and [Application key][20] instead of the one-time enrollment token generated through the UI. The runner automatically enrolls itself with Datadog on startup and persists its configuration locally.
+
+To use this authentication method:
+1. Provide your Datadog API and App keys through the `DD_API_KEY` and `DD_APP_KEY` environment variables.
+2. Pass the `--with-api-key` flag to the runner container.
+
+The runner uses these credentials to:
+- Register itself with your Datadog organization and assign the App key author as the editor
+- Retrieve its configuration
+- Maintain an authenticated connection to Datadog
+
+#### Example configurations
+
+The following examples demonstrate how to deploy a private action runner using API and App key-based authentication.
+
+Set the required environment variables before running any of the commands:
+```bash
+export DD_API_KEY="<YOUR_API_KEY>"
+export DD_APP_KEY="<YOUR_APP_KEY>"
+```
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+```bash
+docker run -d \
+  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
+  -e DD_API_KEY="$DD_API_KEY" \
+  -e DD_APP_KEY="$DD_APP_KEY" \
+  -e RUNNER_NAME="my-runner" \
+  -e 'ACTIONS_ALLOWLIST=com.datadoghq.http.request' \
+  -v ./config:/etc/dd-action-runner/config \
+  gcr.io/datadoghq/private-action-runner:v1.17.1 \
+  --with-api-key
+```
+
+{{% /tab %}}
+
+{{% tab "Docker Compose" %}}
+
+```yaml
+# docker-compose.yaml
+version: '3.8'
+services:
+  private-runner:
+    image: gcr.io/datadoghq/private-action-runner:v1.17.1
+    command: ["--with-api-key"]
+    environment:
+      DD_API_KEY: ${DD_API_KEY}
+      DD_APP_KEY: ${DD_APP_KEY}
+      DD_BASE_URL: https://{{< region-param key=dd_site >}}
+      DD_PRIVATE_RUNNER_CONFIG_DIR: /etc/dd-action-runner/config
+      RUNNER_NAME: my-compose-runner
+      RUNNER_MODES: pull
+      ACTIONS_ALLOWLIST: "com.datadoghq.http.request"
+    volumes:
+      - "./config:/etc/dd-action-runner/config"
+```
+
+Run with:
+```bash
+DD_API_KEY=$DD_API_KEY DD_APP_KEY=$DD_APP_KEY docker compose up -d
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+Generate the runner configuration:
+
+```bash
+docker run \
+  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
+  -e DD_API_KEY="$DD_API_KEY" \
+  -e DD_APP_KEY="$DD_APP_KEY" \
+  -e RUNNER_NAME="my-runner" \
+  -e RUNNER_MODES=pull \
+  -e 'ACTIONS_ALLOWLIST=com.datadoghq.http.request' \
+  -v ./config:/etc/dd-action-runner/config \
+  gcr.io/datadoghq/private-action-runner:v1.17.1 \
+  --with-api-key --enroll -f helm-values > values.yaml
+```
+
+Deploy the Helm chart`:
+```bash
+helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 When you see the **Ready to use** status, you can create a new connection for the runner or see it on the **Private Action Runners** page:
 - To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
 - Click **View Runner** to see the runner on the **Private Action Runners** page.
@@ -437,3 +535,5 @@ To edit the allowlist for a Private Action Runner:
 [16]: /actions/private_actions/
 [17]: /account_management/rbac/
 [18]: /account_management/rbac/permissions/#app-builder--workflow-automations
+[19]: /account_management/api-app-keys/#api-keys
+[20]: /account_management/api-app-keys/#application-keys
