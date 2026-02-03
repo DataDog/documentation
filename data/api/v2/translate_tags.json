@@ -215,6 +215,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "oci-integration": {
+    "name": "OCI Integration",
+    "description": "Auto-generated tag OCI Integration"
+  },
   "observability-pipelines": {
     "name": "Observability Pipelines",
     "description": "Observability Pipelines allows you to collect and process logs within your own infrastructure, and then route them to downstream integrations."
@@ -278,6 +282,22 @@
   "rum-metrics": {
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
+  "rum-replay-heatmaps": {
+    "name": "Rum Replay Heatmaps",
+    "description": "Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views."
+  },
+  "rum-replay-playlists": {
+    "name": "Rum Replay Playlists",
+    "description": "Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration."
+  },
+  "rum-replay-sessions": {
+    "name": "Rum Replay Sessions",
+    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+  },
+  "rum-replay-viewership": {
+    "name": "Rum Replay Viewership",
+    "description": "Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes."
   },
   "rum-retention-filters": {
     "name": "Rum Retention Filters",

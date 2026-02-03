@@ -21633,6 +21633,16 @@ components:
             current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ci_pipeline_indexed_spans_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
             in the current month for all organizations.
@@ -22763,6 +22773,16 @@ components:
           deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
             current date for the given org (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for the given org.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -23907,6 +23927,16 @@ components:
           description: Shows the sum of all browser RUM units over all hours in the
             current month for all organizations (To be deprecated on October 1st,
             2024).
+          format: int64
+          type: integer
+        ccm_spend_monitored_ent_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Enterprise in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Pro in the current month for all organizations.
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:

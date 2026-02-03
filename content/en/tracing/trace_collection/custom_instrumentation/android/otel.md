@@ -34,7 +34,6 @@ dependencies {
     implementation "com.datadoghq:dd-sdk-android-trace-otel:x.x.x"
     //(...)
 }
-
 ```
 
 **Note**:  If you are targeting Android API level lower than 24, enable desugaring by adding the following lines to your `build.gradle` file:
