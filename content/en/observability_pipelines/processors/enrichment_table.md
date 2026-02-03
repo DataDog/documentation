@@ -69,7 +69,7 @@ See [Reference Tables][3] from Datadog's Snowflake integration for information o
 To set up the Enrichment Table processor:
 
 1. Click **Add enrichment**.
-1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a **filter query**. Only logs that match the specified [filter query](#filter-query-syntax) are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. In the **Set lookup mapping** section, select the type of lookup dataset you want to use.
   {{< tabs >}}
   {{% tab "Reference Table" %}}
@@ -78,12 +78,13 @@ To set up the Enrichment Table processor:
       - See [Using reference tables](#using-reference-tables) for more information.
   1. Click **Manage** to go to the Reference Tables configuration page.
   1. (Optional) Select specific columns with which to enrich your logs.
-      - Observability Pipelines enriches logs with all columns in the table by default. If you want to cherry pick columns, you can specify certain attributes to be added. Only selected attributes are enriched.
+      - Observability Pipelines enriches logs with all columns in the table by default. Each column in the table is added as an attribute to the log, where the attribute name is the column name and the attribute value is the column value.
+      - If you want to enrich your logs with specific columns from your Reference Table, select the columns' corresponding attributes in the dropdown menu.
   1. Enter a Datadog Application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data. Ensure you application key is:
       - Associated with a [Service Account][2] (not a personal Datadog user account).
       - Limited to the [`reference_tables_read`][3] scope.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the reference table.
-  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the reference table. See the [Enrichment file example](#enrichment-file-example).
+  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table. See the [Enrichment file example](#enrichment-file-example).
   1. Click **Save**.
 
 [1]: /account_management/api-app-keys/#application-keys
@@ -117,17 +118,16 @@ To set up the Enrichment Table processor:
 
 ##### Enrichment file example
 
-For this example, `merchant_id` is used as the source attribute and `merchant_info` as the target attribute.
+For this example:
 
-This is the example reference table that the enrichment processor uses:
-
-| merch_id | merchant_name   | city      | state    |
-| -------- | --------------- | --------- | -------- |
-| 803      | Andy's Ottomans | Boise     | Idaho    |
-| 536      | Cindy's Couches | Boulder   | Colorado |
-| 235      | Debra's Benches | Las Vegas | Nevada   |
-
-`merch_id` is set as the column name the processor uses to find the source attribute's value. **Note**: The source attribute's value does not have to match the column name.
+- This is the example reference table that the enrichment processor uses:
+  | merch_id | merchant_name   | city      | state    |
+  | -------- | --------------- | --------- | -------- |
+  | 803      | Andy's Ottomans | Boise     | Idaho    |
+  | 536      | Cindy's Couches | Boulder   | Colorado |
+  | 235      | Debra's Benches | Las Vegas | Nevada   |
+- `merchant_id` is used as the source attribute and `merchant_info` as the target attribute.
+- `merch_id` is set as the column name the processor uses to find the source attribute's value. **Note**: The source attribute's value does not have to match the column name.
 
 If the enrichment processor receives a log with `"merchant_id":"536"`:
 
