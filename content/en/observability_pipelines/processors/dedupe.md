@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-The Deduplicate processor removes copies of data to reduce volume and noise. It caches 5,000 messages at a time and compares your incoming logs traffic against the cached messages. For example, this processor can be used to keep only unique warning logs in the case where multiple identical warning logs are sent in succession.
+The Deduplicate processor removes copies of data to reduce volume and noise. It caches messages and compares your incoming logs traffic against the cached messages. For example, this processor can be used to keep only unique warning logs in the case where multiple identical warning logs are sent in succession.
 
 ## Setup
 
@@ -25,7 +25,13 @@ To set up the Deduplicate processor:
     - Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example) below.
 1. Click **Add field** to add additional fields you want to filter on.
 
-#### Path notation example
+### Optional settings
+
+#### Cache size
+
+The default cache size is 5,000 messages (recommended). The cached messages are kept in memory to determine if the incoming messages are duplicates. You can increase the cache size to fit your needs. **Note**: Increasing the cache size increases memory usage.
+
+### Path notation example
 
 For the following message structure:
 
