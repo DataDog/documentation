@@ -56,7 +56,7 @@ Container image scanning works with all major CI/CD platforms including:
 
 The customizable script approach gives you full control over when and how scans are executed in your pipelines.
 
-## Installation and scans
+### Install the Datadog Security CLI
 
 <div class="alert alert-info">The Datadog Security CLI is in Preview and available to install from Datadog package repositories.</div>
 
