@@ -122,7 +122,7 @@ To set up the Enrichment Table processor:
 
 For this example:
 
-- This is the example Reference Table that the enrichment processor uses:
+- This is the Reference Table that the enrichment processor uses:
   | merch_id | merchant_name   | city      | state    |
   | -------- | --------------- | --------- | -------- |
   | 803      | Andy's Ottomans | Boise     | Idaho    |
