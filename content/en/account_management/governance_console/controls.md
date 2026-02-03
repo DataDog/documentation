@@ -1,13 +1,37 @@
 ---
-title: Governance Controls
-description: How to use Governance Controls to enforce consistent configurations and organizational best practices across a Datadog environment.
+title: Controls
+description: How to use Governance Console Controls to enforce consistent configurations and organizational best practices across a Datadog environment.
 ---
 
 ## Overview
-Governance Controls audit and enforce organizational standards. You can use these controls to automate hygiene and quality tasks that typically require manual effort, such as managing unused API keys or enforcing tagging standards.
+Governance Console Controls audit and enforce organizational standards. You can use these controls to automate hygiene and quality tasks that typically require manual effort, such as managing unused API keys or enforcing tagging standards.
 
 ## Using controls
-Select a control from the [Controls][1] page
+
+1. On the Governance Console [Controls][1] page, select a control. 
+2. **Configure detection**.
+
+   Under **Scope detections**, enter parameters to define the control's behavior. Datadog's defaults are based on best practices, but you can adjust the value of each parameter to relax or tighten the standard for your organization.
+
+   <div class="alert alert-info">If you are using multiple Datadog sub-organizations, control behavior and scoping is defined per organization and does not span across organizations.</div>
+
+   To verify your configuration, use the **Manual Mitigation** panel to see what is being detected by this control.
+
+3. **Configure notifications**.
+   
+   Under **Notify users**, select your notification recipients and frequency. The notification email summarizes the control detections identified and unresolved, with a link back to the Governance Console control to review and mitigate.
+
+4. **Configure enforcement**.
+
+   When **Enforce control** is disabled, a control requires manual mitigation. Toggling on **Enforce control** enables automated enforcement actions. Automation allows administrators to automate cleanup activity without having to manually review and apply each change.
+
+   For **Select automated mitigation**, choose from the following options:
+   - **Manual** (Default): The control detects noncompliant assets. You then manually take actions based on these detections.
+   - **Ignore Detection**
+<!-- todo: rest of this list after verification -->
+
+
+
 
 ## All available controls
 
