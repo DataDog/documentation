@@ -119,8 +119,9 @@ const client = OpenFeature.getClient();
 // If applicable, set relevant attributes on the client's global context
 // (e.g. org id, user email)
 await OpenFeature.setContext({
-   org: { id: 2 },
-   user: { id: 'user-123', email: 'user@example.com' },
+   org_id: 2,
+   user_id: 'user-123',
+   email: 'user@example.com',
    targetingKey: 'user-123',
 });
 
