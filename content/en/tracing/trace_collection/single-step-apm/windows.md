@@ -23,11 +23,6 @@ You can enable APM on Windows in the following ways:
 * Instrument only .NET applications on IIS
 * Instrument all Java and .NET applications across your entire Windows host
 
-{{< callout url="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/"
- btn_hidden="false" header="Join the Preview!">}}
-Host-wide instrumentation for Windows is in Preview.
-{{< /callout >}}
-
 {{< tabs >}}
 {{% tab "IIS" %}}
 
@@ -54,7 +49,8 @@ After installation, the Agent automatically loads the Datadog .NET SDK into supp
 {{% tab "Host-wide (Preview)" %}}
 
 <div class="alert alert-info">
-Host-wide instrumentation on Windows is limited to Preview participants. The installation and configuration options described in this tab appear in the Datadog UI only after you're enrolled.
+<strong>Join the Preview!</strong><br>
+Host-wide instrumentation for Windows is in Preview and limited to Preview participants. The installation and configuration options described in this tab appear in Datadog only after you are enrolled. <a href="https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/" class="alert-link">Request access</a> to join the Preview.
 </div>
 
 To instrument Java and .NET applications across your entire Windows host:

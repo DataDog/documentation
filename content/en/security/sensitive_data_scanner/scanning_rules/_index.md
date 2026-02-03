@@ -4,6 +4,9 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/scanning_rules
 further_reading:
+- link: "https://www.datadoghq.com/blog/human-name-detection"
+  tag: "Blog"
+  text: "Detect human names in logs with ML in Sensitive Data Scanner"
 - link: https://www.datadoghq.com/blog/cloudcraft-security/
   tag: Blog
   text: Visually identify and prioritize security risks using Cloudcraft

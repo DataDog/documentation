@@ -1,21 +1,16 @@
 ---
 title: JavaScript Expressions
-description: Use inline JavaScript expressions and dedicated function/expression actions for custom data transformations in workflows.
-disable_toc: false
-aliases:
-- /service_management/workflows/actions/data_transformation/
-- /service_management/workflows/expressions
-further_reading:
-- link: "/service_management/workflows/variables/"
-  tag: "Documentation"
-  text: "Variables and parameters"
+description: Capabilities and limits of JavaScript expressions in App Builder
+code_lang: javascript
+type: multi-code-lang
+code_lang_weight: 10
 ---
 
-JavaScript is available in Workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
+JavaScript (JS) is available in workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
 
 ## Inline JavaScript expressions
 
-You can use JavaScript (JS) expressions directly in workflow steps to perform a wide range of data transformations without needing to include dedicated JS steps.
+You can use JS expressions directly in workflow steps to perform a wide range of data transformations without needing to include dedicated JS steps.
 
 To use an inline expression in your workflow, enclose the expression in `${}`. For example, to convert a string ID (`Trigger.stringId`) to an integer, use `${ parseInt(Trigger.stringId) }`.
 
@@ -62,7 +57,6 @@ And to determine if an array returned by `Array_function` includes the name `Bit
 ```
 _.includes($.Steps.Array_function.data, "Bits")
 ```
-
 ### Function step
 
 The function action allows for variable assignments and complex data transformations requiring multiple expressions.
@@ -89,19 +83,12 @@ To add an expression action:
 - In a new workflow, click **Add step** and search for `expression`. Select the **Expression** action to add it to your workflow.
 - In an existing workflow, click **+** and search for `expression`. Select the **Expression** action to add it to your workflow.
 
-In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Set variables][4].
+In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Variables and parameters][2].
 
 ## Test expressions and functions
 
 See the test and debug page to learn how to [test a workflow step][3].
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
-
 [1]: https://lodash.com/
-[2]: https://chat.datadoghq.com/
+[2]: /actions/workflows/variables/
 [3]: /service_management/workflows/test_and_debug/#test-a-step
-[4]: /service_management/workflows/actions/set_variables

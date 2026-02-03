@@ -17,7 +17,7 @@ further_reading:
 Integration override removal is in Preview. To sign up, click <b>Request Access</b> and complete the form.
 {{< /callout >}}
 
-This page explains how to remove integration overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Service Overrides][10] and [Inferred Services][8].
+This page explains how to remove integration overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Base Service, Integration Overrides, and Service Overrides][10] and [Inferred Services][8].
 
 ## Prerequisites
 
@@ -53,8 +53,10 @@ To remove integration overrides in Datadog:
    {{< img src="tracing/guide/service_overrides/SO_removal_page_sidepanel.png" alt="Service override side panel showing affected monitors and dashboards" style="width:100%;" >}}
 
 1. Remove overrides individually or in bulk:
-   - **Select specific overrides to remove**: Choose individual integration overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides. This action is reversible.
+   - **Select specific overrides to remove**: Choose individual integration overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides.
    - **Remove all overrides**: Select **Finish Migration** to remove all integration overrides and prevent future ones from appearing as APM usage increases. Custom service overrides are not affected.
+  
+   Removing overrides is reversible.
 
 
 ## Examples: Service naming after removal

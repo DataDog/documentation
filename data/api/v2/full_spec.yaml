@@ -14896,6 +14896,185 @@ components:
       type: string
       x-enum-varnames:
       - REFERENCE_TABLE
+    CreateTenancyConfigData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributes'
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataType'
+      required:
+      - type
+      - id
+      type: object
+    CreateTenancyConfigDataAttributes:
+      properties:
+        auth_credentials:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesAuthCredentials'
+        config_version:
+          format: int64
+          nullable: true
+          type: integer
+        cost_collection_enabled:
+          type: boolean
+        dd_compartment_id:
+          type: string
+        dd_stack_id:
+          type: string
+        home_region:
+          example: ''
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesMetricsConfig'
+        regions_config:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesRegionsConfig'
+        resource_collection_enabled:
+          type: boolean
+        user_ocid:
+          example: ''
+          type: string
+      required:
+      - auth_credentials
+      - home_region
+      - user_ocid
+      type: object
+    CreateTenancyConfigDataAttributesAuthCredentials:
+      properties:
+        fingerprint:
+          type: string
+        private_key:
+          example: ''
+          type: string
+      required:
+      - private_key
+      type: object
+    CreateTenancyConfigDataAttributesLogsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        enabled_services:
+          items:
+            type: string
+          type: array
+      type: object
+    CreateTenancyConfigDataAttributesMetricsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        excluded_services:
+          items:
+            type: string
+          type: array
+      type: object
+    CreateTenancyConfigDataAttributesRegionsConfig:
+      properties:
+        available:
+          items:
+            type: string
+          type: array
+        disabled:
+          items:
+            type: string
+          type: array
+        enabled:
+          items:
+            type: string
+          type: array
+      type: object
+    CreateTenancyConfigRequest:
+      example:
+        data:
+          attributes:
+            auth_credentials:
+              fingerprint: ''
+              private_key: '----BEGIN PRIVATE KEY-----
+
+                MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCdvSMmlfLyeD4M
+
+                QsA3WlrWBqKdWa5eVV3/uODyqT3wWMEMIJHcG3/quNs8nh9xrK1/JkQT2qoKEHqR
+
+                C5k59jN6Vp8em8ARJthMgam9K37ELt+IQ/G8ySTSuqZG8T4cHp/cs3fAclNqttOl
+
+                YnGr4RbVAgMBAAECggEAGZNLGbyCUbIRTW6Kh4d8ZVC+eZtJMqGmGJ3KfVaW8Pjn
+
+                QGWfSuJCEe2o2Y8G3phlidFauICnZ44enXA17Rhi+I/whnr7FIyQk2bR7rv+1Uhc
+
+                mOJygWX5eFFMsledgVAdIAl9Luk2nykx7Un3g6rtbl/Vs+5k4m7ITLFMpCHzsJLU
+
+                nm8kBzDOqY2JUkMd08nL88KL6QywWtal05UESzQpNFXd0e5kxYfexeMCsLsWP0mc
+
+                quMLRbn7NuBjCbe9VU2kmIvcfDDaWjurT7d5m1OXx1cc8p6P4PFZTVyCjdhiWOr3
+
+                LQXZ4/vdZNR3zgEHypRoM6D9Yq99LWUOUEMrdiSLQQKBgQDQkh7C1OtAXnpy7F6R
+
+                W+/I3zBHici2p7A57UT7VECQ1IVGg37/uus83DkuOtdZ33JmHLAVrwLFJvUlbyjx
+
+                l6dc/1ms40L5HFdLgaVtd4k0rSPFeOSDr6evz0lX4yBuzlP0fEh+o3XHW7mwe2G+
+
+                rWCULF/Uqza66fjbCSKMNgLIXQKBgQDBm9nZg/s4S0THWCFNWcB1tXBG0p/sH5eY
+
+                PC1H/VmTEINIixStrS4ufczf31X8rcoSjSbO7+vZDTTATdk7OLn1I2uGFVYl8M59
+
+                86BYT2Hi7cwp7YVzOc/cJigVeBAqSRW/iYYyWBEUTiW1gbkV0sRWwhPp67m+c0sP
+
+                XpY/iEZA2QKBgB1w8tynt4l/jKNaUEMOijt9ndALWATIiOy0XG9pxi9rgGCiwTOS
+
+                DBCsOXoYHjv2eayGUijNaoOv6xzcoxfvQ1WySdNIxTRq1ru20kYwgHKqGgmO9hrM
+
+                mcwMY5r/WZ2qjFlPjeAqbL62aPDLidGjoaVo2iIoBPK/gjxQ/5f0MS4N/YQ0zWoYBueSQ0DGs
+
+                -----END PRIVATE KEY-----'
+            config_version: null
+            cost_collection_enabled: true
+            dd_compartment_id: ocid.compartment.test
+            dd_stack_id: ocid.stack.test
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              enabled_services:
+              - service_1
+              - service_1
+            metrics_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              excluded_services:
+              - service_1
+              - service_1
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateTenancyConfigData'
+      required:
+      - data
+      type: object
     CreateUploadRequest:
       description: Request to create an upload for a file to be ingested into a reference
         table.
@@ -45007,6 +45186,118 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    Playlist:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaylistData'
+      required:
+      - data
+      type: object
+    PlaylistArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PlaylistData'
+          type: array
+      required:
+      - data
+      type: object
+    PlaylistData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PlaylistDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/PlaylistDataType'
+      required:
+      - type
+      type: object
+    PlaylistDataAttributes:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/PlaylistDataAttributesCreatedBy'
+        description:
+          type: string
+        name:
+          example: My Playlist
+          type: string
+        session_count:
+          format: int64
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - name
+      type: object
+    PlaylistDataAttributesCreatedBy:
+      properties:
+        handle:
+          example: john.doe@example.com
+          type: string
+        icon:
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        name:
+          type: string
+        uuid:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      required:
+      - handle
+      - id
+      - uuid
+      type: object
+    PlaylistDataType:
+      default: rum_replay_playlist
+      description: Rum replay playlist resource type.
+      enum:
+      - rum_replay_playlist
+      example: rum_replay_playlist
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_PLAYLIST
+    PlaylistsSession:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaylistsSessionData'
+      required:
+      - data
+      type: object
+    PlaylistsSessionArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PlaylistsSessionData'
+          type: array
+      required:
+      - data
+      type: object
+    PlaylistsSessionData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PlaylistsSessionDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataType'
+      required:
+      - type
+      type: object
+    PlaylistsSessionDataAttributes:
+      properties:
+        session_event:
+          additionalProperties: {}
+          type: object
+        track:
+          type: string
+      type: object
     PostmortemAttachmentRequest:
       properties:
         data:
@@ -57667,6 +57958,25 @@ components:
       required:
       - data
       type: object
+    SessionIdArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionIdData'
+          type: array
+      required:
+      - data
+      type: object
+    SessionIdData:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        type:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataType'
+      required:
+      - type
+      type: object
     Shift:
       description: An on-call shift with its associated data and relationships.
       example:
@@ -58177,6 +58487,178 @@ components:
       type: string
       x-enum-varnames:
       - SLO_STATUS
+    Snapshot:
+      properties:
+        data:
+          $ref: '#/components/schemas/SnapshotData'
+      type: object
+    SnapshotArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SnapshotData'
+          type: array
+      required:
+      - data
+      type: object
+    SnapshotCreateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SnapshotCreateRequestData'
+      required:
+      - data
+      type: object
+    SnapshotCreateRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SnapshotCreateRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataType'
+      required:
+      - type
+      type: object
+    SnapshotCreateRequestDataAttributes:
+      properties:
+        application_id:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+        device_type:
+          example: desktop
+          type: string
+        event_id:
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        is_device_type_selected_by_user:
+          example: false
+          type: boolean
+        session_id:
+          type: string
+        snapshot_name:
+          example: My Snapshot
+          type: string
+        start:
+          example: 0
+          format: int64
+          type: integer
+        view_id:
+          type: string
+        view_name:
+          example: /home
+          type: string
+      required:
+      - view_name
+      - device_type
+      - application_id
+      - snapshot_name
+      - event_id
+      - start
+      - is_device_type_selected_by_user
+      type: object
+    SnapshotData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SnapshotDataAttributes'
+        id:
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataType'
+      required:
+      - type
+      type: object
+    SnapshotDataAttributes:
+      properties:
+        application_id:
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          readOnly: true
+          type: string
+        created_by_handle:
+          readOnly: true
+          type: string
+        created_by_user_id:
+          format: int64
+          readOnly: true
+          type: integer
+        device_type:
+          type: string
+        event_id:
+          type: string
+        is_device_type_selected_by_user:
+          type: boolean
+        modified_at:
+          format: date-time
+          readOnly: true
+          type: string
+        org_id:
+          format: int64
+          readOnly: true
+          type: integer
+        session_id:
+          type: string
+        snapshot_name:
+          type: string
+        start:
+          format: int64
+          type: integer
+        view_id:
+          type: string
+        view_name:
+          type: string
+      type: object
+    SnapshotUpdateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SnapshotUpdateRequestData'
+      required:
+      - data
+      type: object
+    SnapshotUpdateRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataAttributes'
+        id:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        type:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataType'
+      required:
+      - type
+      type: object
+    SnapshotUpdateRequestDataAttributes:
+      properties:
+        event_id:
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        is_device_type_selected_by_user:
+          example: false
+          type: boolean
+        session_id:
+          type: string
+        start:
+          example: 0
+          format: int64
+          type: integer
+        view_id:
+          type: string
+      required:
+      - event_id
+      - start
+      - is_device_type_selected_by_user
+      type: object
+    SnapshotUpdateRequestDataType:
+      default: snapshots
+      description: Snapshots resource type.
+      enum:
+      - snapshots
+      example: snapshots
+      type: string
+      x-enum-varnames:
+      - SNAPSHOTS
     SoftwareCatalogTriggerWrapper:
       description: Schema for a Software Catalog-based trigger.
       properties:
@@ -62683,6 +63165,219 @@ components:
           description: Offset type.
           type: string
       type: object
+    TenancyConfig:
+      example:
+        data:
+          attributes:
+            config_version: 2
+            cost_collection_enabled: true
+            dd_compartment_id: ocid.compartment.test
+            dd_stack_id: ocid.stack.test
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              enabled_services:
+              - compute
+            metrics_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              excluded_services:
+              - compute
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          $ref: '#/components/schemas/TenancyConfigData'
+      type: object
+    TenancyConfigData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TenancyConfigDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataType'
+      required:
+      - type
+      type: object
+    TenancyConfigDataAttributes:
+      properties:
+        billing_plan_id:
+          format: int32
+          maximum: 2147483647
+          type: integer
+        config_version:
+          format: int64
+          type: integer
+        cost_collection_enabled:
+          type: boolean
+        dd_compartment_id:
+          type: string
+        dd_stack_id:
+          type: string
+        home_region:
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/TenancyConfigDataAttributesLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/TenancyConfigDataAttributesMetricsConfig'
+        parent_tenancy_name:
+          type: string
+        regions_config:
+          $ref: '#/components/schemas/TenancyConfigDataAttributesRegionsConfig'
+        resource_collection_enabled:
+          type: boolean
+        tenancy_name:
+          type: string
+        user_ocid:
+          type: string
+      type: object
+    TenancyConfigDataAttributesLogsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        enabled_services:
+          items:
+            type: string
+          type: array
+      type: object
+    TenancyConfigDataAttributesMetricsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        excluded_services:
+          items:
+            type: string
+          type: array
+      type: object
+    TenancyConfigDataAttributesRegionsConfig:
+      properties:
+        available:
+          items:
+            type: string
+          type: array
+        disabled:
+          items:
+            type: string
+          type: array
+        enabled:
+          items:
+            type: string
+          type: array
+      type: object
+    TenancyConfigList:
+      example:
+        data:
+        - attributes:
+            config_version: 2
+            cost_collection_enabled: true
+            dd_compartment_id: ocid.compartment.test
+            dd_stack_id: ocid.stack.test
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              enabled_services:
+              - compute
+            metrics_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              excluded_services:
+              - compute
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TenancyConfigData'
+          type: array
+      required:
+      - data
+      type: object
+    TenancyProductsData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TenancyProductsDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/TenancyProductsDataType'
+      required:
+      - type
+      type: object
+    TenancyProductsDataAttributes:
+      properties:
+        products:
+          items:
+            $ref: '#/components/schemas/TenancyProductsDataAttributesProductsItems'
+          type: array
+      type: object
+    TenancyProductsDataAttributesProductsItems:
+      properties:
+        enabled:
+          type: boolean
+        product_key:
+          type: string
+      type: object
+    TenancyProductsDataType:
+      default: oci_tenancy_product
+      description: OCI tenancy product resource type.
+      enum:
+      - oci_tenancy_product
+      example: oci_tenancy_product
+      type: string
+      x-enum-varnames:
+      - OCI_TENANCY_PRODUCT
+    TenancyProductsList:
+      example:
+        data:
+        - attributes:
+            products:
+            - enabled: true
+              product_key: CLOUD_SECURITY_POSTURE_MANAGEMENT
+          id: ocid.tenancy.test
+          type: oci_tenancy_product
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TenancyProductsData'
+          type: array
+      required:
+      - data
+      type: object
     ThreatHuntingJobDataType:
       description: Type of payload.
       enum:
@@ -64369,6 +65064,177 @@ components:
       type: string
       x-enum-varnames:
       - UPDATE_RULESET
+    UpdateTenancyConfigData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributes'
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataType'
+      required:
+      - type
+      - id
+      type: object
+    UpdateTenancyConfigDataAttributes:
+      properties:
+        auth_credentials:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesAuthCredentials'
+        cost_collection_enabled:
+          type: boolean
+        home_region:
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesMetricsConfig'
+        regions_config:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesRegionsConfig'
+        resource_collection_enabled:
+          type: boolean
+        user_ocid:
+          type: string
+      type: object
+    UpdateTenancyConfigDataAttributesAuthCredentials:
+      properties:
+        fingerprint:
+          type: string
+        private_key:
+          example: ''
+          type: string
+      required:
+      - private_key
+      type: object
+    UpdateTenancyConfigDataAttributesLogsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        enabled_services:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateTenancyConfigDataAttributesMetricsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        excluded_services:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateTenancyConfigDataAttributesRegionsConfig:
+      properties:
+        available:
+          items:
+            type: string
+          type: array
+        disabled:
+          items:
+            type: string
+          type: array
+        enabled:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateTenancyConfigDataType:
+      default: oci_tenancy
+      description: OCI tenancy resource type.
+      enum:
+      - oci_tenancy
+      example: oci_tenancy
+      type: string
+      x-enum-varnames:
+      - OCI_TENANCY
+    UpdateTenancyConfigRequest:
+      example:
+        data:
+          attributes:
+            auth_credentials:
+              fingerprint: ''
+              private_key: '----BEGIN PRIVATE KEY-----
+
+                MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCdvSMmlfLyeD4M
+
+                QsA3WlrWBqKdWa5eVV3/uODyqT3wWMEMIJHcG3/quNs8nh9xrK1/JkQT2qoKEHqR
+
+                C5k59jN6Vp8em8ARJthMgam9K37ELt+IQ/G8ySTSuqZG8T4cHp/cs3fAclNqttOl
+
+                YnGr4RbVAgMBAAECggEAGZNLGbyCUbIRTW6Kh4d8ZVC+eZtJMqGmGJ3KfVaW8Pjn
+
+                QGWfSuJCEe2o2Y8G3phlidFauICnZ44enXA17Rhi+I/whnr7FIyQk2bR7rv+1Uhc
+
+                mOJygWX5eFFMsledgVAdIAl9Luk2nykx7Un3g6rtbl/Vs+5k4m7ITLFMpCHzsJLU
+
+                nm8kBzDOqY2JUkMd08nL88KL6QywWtal05UESzQpNFXd0e5kxYfexeMCsLsWP0mc
+
+                quMLRbn7NuBjCbe9VU2kmIvcfDDaWjurT7d5m1OXx1cc8p6P4PFZTVyCjdhiWOr3
+
+                LQXZ4/vdZNR3zgEHypRoM6D9Yq99LWUOUEMrdiSLQQKBgQDQkh7C1OtAXnpy7F6R
+
+                W+/I3zBHici2p7A57UT7VECQ1IVGg37/uus83DkuOtdZ33JmHLAVrwLFJvUlbyjx
+
+                l6dc/1ms40L5HFdLgaVtd4k0rSPFeOSDr6evz0lX4yBuzlP0fEh+o3XHW7mwe2G+
+
+                rWCULF/Uqza66fjbCSKMNgLIXQKBgQDBm9nZg/s4S0THWCFNWcB1tXBG0p/sH5eY
+
+                PC1H/VmTEINIixStrS4ufczf31X8rcoSjSbO7+vZDTTATdk7OLn1I2uGFVYl8M59
+
+                86BYT2Hi7cwp7YVzOc/cJigVeBAqSRW/iYYyWBEUTiW1gbkV0sRWwhPp67m+c0sP
+
+                XpY/iEZA2QKBgB1w8tynt4l/jKNaUEMOijt9ndALWATIiOy0XG9pxi9rgGCiwTOS
+
+                DBCsOXoYHjv2eayGUijNaoOv6xzcoxfvQ1WySdNIxTRq1ru20kYwgHKqGgmO9hrM
+
+                mcwMY5r/WZ2qjFlPjeAqbL62aPDLidGjoaVo2iIoBPK/gjxQ/5f0MS4N/YQ0zWoYBueSQ0DGs
+
+                -----END PRIVATE KEY-----'
+            cost_collection_enabled: true
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              enabled_services:
+              - service_1
+              - service_1
+            metrics_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              excluded_services:
+              - service_1
+              - service_1
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateTenancyConfigData'
+      required:
+      - data
+      type: object
     UpdateWorkflowRequest:
       description: A request object for updating an existing workflow.
       example:
@@ -65291,6 +66157,51 @@ components:
       - CREATE
       - UPDATE
       - DELETE
+    ViewershipHistorySessionArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ViewershipHistorySessionData'
+          type: array
+      required:
+      - data
+      type: object
+    ViewershipHistorySessionData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataType'
+      required:
+      - type
+      type: object
+    ViewershipHistorySessionDataAttributes:
+      properties:
+        event_id:
+          type: string
+        last_watched_at:
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        session_event:
+          additionalProperties: {}
+          type: object
+        track:
+          type: string
+      required:
+      - last_watched_at
+      type: object
+    ViewershipHistorySessionDataType:
+      default: rum_replay_session
+      description: Rum replay session resource type.
+      enum:
+      - rum_replay_session
+      example: rum_replay_session
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_SESSION
     VirusTotalAPIKey:
       description: The definition of the `VirusTotalAPIKey` object.
       properties:
@@ -65779,6 +66690,104 @@ components:
       - X_CONTENT_TYPE_HEADER_MISSING
       - X_PATH_INJECTION
       - XSS
+    Watch:
+      properties:
+        data:
+          $ref: '#/components/schemas/WatchData'
+      required:
+      - data
+      type: object
+    WatchData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WatchDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/WatchDataType'
+      required:
+      - type
+      type: object
+    WatchDataAttributes:
+      properties:
+        application_id:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+        data_source:
+          type: string
+        event_id:
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        timestamp:
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+      required:
+      - application_id
+      - event_id
+      - timestamp
+      type: object
+    WatchDataType:
+      default: rum_replay_watch
+      description: Rum replay watch resource type.
+      enum:
+      - rum_replay_watch
+      example: rum_replay_watch
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_WATCH
+    WatcherArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WatcherData'
+          type: array
+      required:
+      - data
+      type: object
+    WatcherData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WatcherDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/WatcherDataType'
+      required:
+      - type
+      type: object
+    WatcherDataAttributes:
+      properties:
+        handle:
+          example: john.doe@example.com
+          type: string
+        icon:
+          type: string
+        last_watched_at:
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        name:
+          type: string
+        watch_count:
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+      - handle
+      - last_watched_at
+      - watch_count
+      type: object
+    WatcherDataType:
+      default: rum_replay_watcher
+      description: Rum replay watcher resource type.
+      enum:
+      - rum_replay_watcher
+      example: rum_replay_watcher
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_WATCHER
     Weekday:
       description: A day of the week.
       enum:
@@ -77734,7 +78743,16 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/attachments/postmortems:
     post:
-      description: Create a postmortem attachment for an incident.
+      description: 'Create a postmortem attachment for an incident.
+
+
+        The endpoint accepts markdown for notebooks created in Confluence or Google
+        Docs.
+
+        Postmortems created from notebooks need to be formatted using frontend notebook
+        cells,
+
+        in addition to markdown format.'
       operationId: CreateIncidentPostmortemAttachment
       parameters:
       - description: The ID of the incident
@@ -79449,6 +80467,176 @@ paths:
       - Microsoft Teams Integration
       x-codegen-request-body-name: body
       x-menu-order: 1
+  /api/v2/integration/oci/products:
+    get:
+      description: Lists the products for a given tenancy. Returns the enabled/disabled
+        status of Datadog products (such as Cloud Security Posture Management) for
+        specific OCI tenancies.
+      operationId: ListTenancyProducts
+      parameters:
+      - description: Comma-separated list of product keys to filter by.
+        in: query
+        name: productKeys
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyProductsList'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List tenancy products
+      tags:
+      - OCI Integration
+      x-menu-order: 1
+  /api/v2/integration/oci/tenancies:
+    get:
+      description: Get a list of all configured OCI tenancy integrations. Returns
+        basic information about each tenancy including authentication credentials,
+        region settings, and collection preferences for metrics, logs, and resources.
+      operationId: GetTenancyConfigs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfigList'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get tenancy configs
+      tags:
+      - OCI Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+    post:
+      description: 'Create a new tenancy config to establish monitoring and data collection
+        from your OCI environment. Requires OCI authentication credentials and tenancy
+        details. Warning: Datadog recommends interacting with this endpoint only through
+        the Datadog web UI to ensure all necessary OCI resources have been created
+        and configured properly.'
+      operationId: CreateTenancyConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenancyConfigRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfig'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/integration/oci/tenancies/{tenancy_ocid}:
+    delete:
+      description: Delete an existing tenancy config. This will stop all data collection
+        from the specified OCI tenancy and remove the stored configuration. This operation
+        cannot be undone.
+      operationId: DeleteTenancyConfig
+      parameters:
+      - description: The OCID of the tenancy config to delete.
+        in: path
+        name: tenancy_ocid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 4
+    get:
+      description: Get a single tenancy config object by its OCID. Returns detailed
+        configuration including authentication credentials, enabled services, region
+        settings, and collection preferences.
+      operationId: GetTenancyConfig
+      parameters:
+      - description: The OCID of the tenancy config to retrieve.
+        in: path
+        name: tenancy_ocid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfig'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 5
+    patch:
+      description: 'Update an existing tenancy config. You can modify authentication
+        credentials, enable/disable collection types, update service filters, and
+        change region settings. Warning: We recommend using the Datadog web UI to
+        avoid unintended update effects.'
+      operationId: UpdateTenancyConfig
+      parameters:
+      - description: The OCID of the tenancy config to update.
+        in: path
+        name: tenancy_ocid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenancyConfigRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfig'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 6
   /api/v2/integration/opsgenie/services:
     get:
       description: Get a list of all services from the Datadog Opsgenie integration.
@@ -88509,6 +89697,138 @@ paths:
       - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 9
+  /api/v2/replay/heatmap/snapshots:
+    get:
+      description: List heatmap snapshots.
+      operationId: ListReplayHeatmapSnapshots
+      parameters:
+      - description: Device type to filter snapshots.
+        in: query
+        name: filter[device_type]
+        schema:
+          example: desktop
+          type: string
+      - description: View name to filter snapshots.
+        in: query
+        name: filter[view_name]
+        required: true
+        schema:
+          example: /home
+          type: string
+      - description: Maximum number of snapshots to return.
+        in: query
+        name: page[limit]
+        schema:
+          example: 10
+          type: integer
+      - description: Filter by application ID.
+        in: query
+        name: filter[application_id]
+        schema:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List replay heatmap snapshots
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 2
+    post:
+      description: Create a heatmap snapshot.
+      operationId: CreateReplayHeatmapSnapshot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create replay heatmap snapshot
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 1
+  /api/v2/replay/heatmap/snapshots/{snapshot_id}:
+    delete:
+      description: Delete a heatmap snapshot.
+      operationId: DeleteReplayHeatmapSnapshot
+      parameters:
+      - description: Unique identifier of the heatmap snapshot.
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete replay heatmap snapshot
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 4
+    patch:
+      description: Update a heatmap snapshot.
+      operationId: UpdateReplayHeatmapSnapshot
+      parameters:
+      - description: Unique identifier of the heatmap snapshot.
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update replay heatmap snapshot
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 3
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -89943,6 +91263,547 @@ paths:
         operator: OR
         permissions:
         - rum_apps_read
+  /api/v2/rum/replay/playlists:
+    get:
+      description: List playlists.
+      operationId: ListRumReplayPlaylists
+      parameters:
+      - description: Filter playlists by the UUID of the user who created them.
+        in: query
+        name: filter[created_by_uuid]
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      - description: Search query to filter playlists by name.
+        in: query
+        name: filter[query]
+        schema:
+          example: my playlist
+          type: string
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay playlists
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 2
+    post:
+      description: Create a playlist.
+      operationId: CreateRumReplayPlaylist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playlist'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 1
+  /api/v2/rum/replay/playlists/{playlist_id}:
+    delete:
+      description: Delete a playlist.
+      operationId: DeleteRumReplayPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 7
+    get:
+      description: Get a playlist.
+      operationId: GetRumReplayPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 5
+    put:
+      description: Update a playlist.
+      operationId: UpdateRumReplayPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playlist'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 6
+  /api/v2/rum/replay/playlists/{playlist_id}/sessions:
+    delete:
+      description: Remove sessions from a playlist.
+      operationId: BulkRemoveRumReplayPlaylistSessions
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionIdArray'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Bulk remove rum replay playlist sessions
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 4
+    get:
+      description: List sessions in a playlist.
+      operationId: ListRumReplayPlaylistSessions
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistsSessionArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay playlist sessions
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 3
+  /api/v2/rum/replay/playlists/{playlist_id}/sessions/{session_id}:
+    delete:
+      description: Remove a session from a playlist.
+      operationId: RemoveRumReplaySessionFromPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Remove rum replay session from playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 9
+    put:
+      description: Add a session to a playlist.
+      operationId: AddRumReplaySessionToPlaylist
+      parameters:
+      - description: 'Data source type. Valid values: ''rum'' or ''product_analytics''.
+          Defaults to ''rum''.'
+        in: query
+        name: data_source
+        schema:
+          example: rum
+          type: string
+      - description: Server-side timestamp in milliseconds.
+        in: query
+        name: ts
+        required: true
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistsSession'
+          description: OK
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistsSession'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Add rum replay session to playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 8
+  /api/v2/rum/replay/sessions/{session_id}/views/{view_id}/segments:
+    get:
+      description: Get segments for a view.
+      operationId: GetSegments
+      parameters:
+      - description: Unique identifier of the view.
+        in: path
+        name: view_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000002
+          type: string
+      - description: 'Storage source: ''event_platform'' or ''blob''.'
+        in: query
+        name: source
+        schema:
+          example: event_platform
+          type: string
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      - description: Server-side timestamp in milliseconds.
+        in: query
+        name: ts
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: Maximum size in bytes for the segment list.
+        in: query
+        name: max_list_size
+        schema:
+          example: 1048576
+          type: integer
+      - description: Paging token for pagination.
+        in: query
+        name: paging
+        schema:
+          example: eyJuZXh0IjoiYWJjMTIzIn0
+          type: string
+      responses:
+        '200':
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get segments
+      tags:
+      - Rum Replay Sessions
+      x-menu-order: 1
+  /api/v2/rum/replay/sessions/{session_id}/watchers:
+    get:
+      description: List session watchers.
+      operationId: ListRumReplaySessionWatchers
+      parameters:
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WatcherArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay session watchers
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 4
+  /api/v2/rum/replay/sessions/{session_id}/watches:
+    delete:
+      description: Delete session watch history.
+      operationId: DeleteRumReplaySessionWatch
+      parameters:
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete rum replay session watch
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 3
+    post:
+      description: Record a session watch.
+      operationId: CreateRumReplaySessionWatch
+      parameters:
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Watch'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watch'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create rum replay session watch
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 2
+  /api/v2/rum/replay/viewership-history/sessions:
+    get:
+      description: List watched sessions.
+      operationId: ListRumReplayViewershipHistorySessions
+      parameters:
+      - description: Start timestamp in milliseconds for watched_at filter.
+        in: query
+        name: filter[watched_at][start]
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Filter by user UUID. Defaults to current user if not specified.
+        in: query
+        name: filter[created_by]
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      - description: End timestamp in milliseconds for watched_at filter.
+        in: query
+        name: filter[watched_at][end]
+        schema:
+          example: 1704153600000
+          format: int64
+          type: integer
+      - description: Comma-separated list of session IDs to filter by.
+        in: query
+        name: filter[session_ids]
+        schema:
+          example: 11111111-2222-3333-4444-555555555555,22222222-3333-4444-5555-666666666666
+          type: string
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      - description: Filter by application ID.
+        in: query
+        name: filter[application_id]
+        schema:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewershipHistorySessionArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay viewership history sessions
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 1
   /api/v2/saml_configurations/idp_metadata:
     post:
       description: 'Endpoint for uploading IdP metadata for SAML setup.
@@ -101991,6 +103852,8 @@ tags:
     and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
     for more information.
   name: Network Device Monitoring
+- description: Auto-generated tag OCI Integration
+  name: OCI Integration
 - description: Observability Pipelines allows you to collect and process logs within
     your own infrastructure, and then route them to downstream integrations.
   externalDocs:
@@ -102103,6 +103966,18 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
   name: Rum Metrics
+- description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete,
+    and retrieve snapshots to visualize user interactions on specific views.
+  name: Rum Replay Heatmaps
+- description: Create and manage playlists of RUM replay sessions. Organize, categorize,
+    and share collections of replay sessions for analysis and collaboration.
+  name: Rum Replay Playlists
+- description: Retrieve segments for RUM replay sessions. Access session replay data
+    stored in event platform or blob storage.
+  name: Rum Replay Sessions
+- description: Track and manage RUM replay session viewership. Monitor who watches
+    replay sessions and maintain watch history for audit and analytics purposes.
+  name: Rum Replay Viewership
 - description: Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list)
     of RUM for your organization.
   name: Rum Retention Filters
