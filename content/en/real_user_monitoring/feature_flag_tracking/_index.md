@@ -18,10 +18,6 @@ further_reading:
 
 ---
 
-{{< callout header="Create flags directly in Datadog!" hide_image="true" btn_title="Learn More" btn_url="https://www.datadoghq.com/product/feature-flags/">}}
-  <a href="/feature_flags/">Datadog Feature Flags</a> natively integrates feature flag creation with leading observability data, making your workflows faster and more automated. Detect issues directly from new feature rollouts, orchestrate canary releases that automatically roll forward or roll back based on monitors, and support experimentation without sacrificing reliability.
-{{< /callout >}}
-
 ## Overview
 
 Feature flag data provides greater visibility into user experience and performance monitoring. It allows you to determine which users are being shown a specific feature and assess if any changes introduced are impacting user experience or negatively affecting performance. You can use this information to determine whether or not to roll back the feature.
@@ -38,13 +34,7 @@ Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, an
 
 You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of Datadog's integration partners. 
 
-You can track feature flags using one of Datadog's integration partners or your own [custom feature flag management solution][2]:
-
-{{< partial name="rum/rum-feature-flag-tracking.html" >}}
-
-</br>
-
-You can also use [Datadog Feature Flags][3], which natively integrates with RUM and other Datadog observability features.
+Create and track feature flags directly in Datadog, use one of Datadog's integration partners, or use your own [custom feature flag management solution][2]:
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
@@ -62,7 +52,6 @@ To get started with feature flags, set up feature flag tracking for the browser 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/feature_flag_tracking/setup/
 [2]: /real_user_monitoring/setup/?tab=npm#custom-feature-flag-management
