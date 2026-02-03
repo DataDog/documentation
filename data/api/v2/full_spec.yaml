@@ -346,6 +346,16 @@ components:
       required: true
       schema:
         type: string
+    DisableCorrections:
+      description: Whether to exclude correction windows from the SLO status calculation.
+        Defaults to false.
+      in: query
+      name: disable_corrections
+      required: false
+      schema:
+        default: false
+        example: false
+        type: boolean
     EntityID:
       description: UUID or Entity Ref.
       in: path
@@ -457,6 +467,15 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/RelationType'
+    FromTimestamp:
+      description: The starting timestamp for the SLO status query in epoch seconds.
+      in: query
+      name: from_ts
+      required: true
+      schema:
+        example: 1690901870
+        format: int64
+        type: integer
     GCPSTSServiceAccountID:
       description: Your GCP STS enabled service account's unique ID.
       in: path
@@ -762,6 +781,14 @@ components:
       in: query
       name: name
       required: false
+      schema:
+        type: string
+    NotificationRuleIDPathParameter:
+      description: Notification Rule UUID
+      example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+      in: path
+      name: notification_rule_id
+      required: true
       schema:
         type: string
     OnDemandTaskId:
@@ -1082,6 +1109,14 @@ components:
       required: false
       schema:
         type: boolean
+    SloID:
+      description: The ID of the SLO.
+      in: path
+      name: slo_id
+      required: true
+      schema:
+        example: 00000000-0000-0000-0000-000000000000
+        type: string
     SpansMetricIDParameter:
       description: The name of the span-based metric.
       in: path
@@ -1103,6 +1138,15 @@ components:
       required: true
       schema:
         type: string
+    ToTimestamp:
+      description: The ending timestamp for the SLO status query in epoch seconds.
+      in: query
+      name: to_ts
+      required: true
+      schema:
+        example: 1706803070
+        format: int64
+        type: integer
     UserID:
       description: The ID of the user.
       in: path
@@ -3184,6 +3228,36 @@ components:
       required:
       - type
       type: object
+    AnyValue:
+      description: Represents any valid JSON value.
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/AnyValueString'
+      - $ref: '#/components/schemas/AnyValueNumber'
+      - $ref: '#/components/schemas/AnyValueObject'
+      - $ref: '#/components/schemas/AnyValueArray'
+      - $ref: '#/components/schemas/AnyValueBoolean'
+      type: object
+    AnyValueArray:
+      items:
+        $ref: '#/components/schemas/AnyValueItem'
+      type: array
+    AnyValueBoolean:
+      type: boolean
+    AnyValueItem:
+      oneOf:
+      - $ref: '#/components/schemas/AnyValueString'
+      - $ref: '#/components/schemas/AnyValueNumber'
+      - $ref: '#/components/schemas/AnyValueObject'
+      - $ref: '#/components/schemas/AnyValueBoolean'
+    AnyValueNumber:
+      format: double
+      type: number
+    AnyValueObject:
+      additionalProperties: {}
+      type: object
+    AnyValueString:
+      type: string
     ApiID:
       description: API identifier.
       example: 90646597-5fdb-4a17-a240-647003f8c028
@@ -5946,6 +6020,24 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    AutoCloseInactiveCases:
+      description: Auto-close inactive cases settings
+      properties:
+        enabled:
+          description: Whether auto-close is enabled
+          type: boolean
+        max_inactive_time_in_secs:
+          description: Maximum inactive time in seconds before auto-closing
+          format: int64
+          type: integer
+      type: object
+    AutoTransitionAssignedCases:
+      description: Auto-transition assigned cases settings
+      properties:
+        auto_transition_assigned_cases_on_self_assigned:
+          description: Whether to auto-transition cases when self-assigned
+          type: boolean
+      type: object
     AwsAccountId:
       description: The ID of the AWS account.
       example: '123456789012'
@@ -9395,6 +9487,214 @@ components:
       type: string
       x-enum-varnames:
       - PROJECTS
+    CaseNotificationRule:
+      description: A notification rule for case management
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseNotificationRuleAttributes'
+        id:
+          description: The notification rule's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseNotificationRuleResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CaseNotificationRuleAttributes:
+      description: Notification rule attributes
+      properties:
+        is_enabled:
+          description: Whether the notification rule is enabled
+          type: boolean
+        query:
+          description: Query to filter cases for this notification rule
+          type: string
+        recipients:
+          description: List of notification recipients
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleRecipient'
+          type: array
+        triggers:
+          description: List of triggers for this notification rule
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleTrigger'
+          type: array
+      type: object
+    CaseNotificationRuleCreate:
+      description: Notification rule create
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseNotificationRuleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/CaseNotificationRuleResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseNotificationRuleCreateAttributes:
+      description: Notification rule creation attributes
+      properties:
+        is_enabled:
+          default: true
+          description: Whether the notification rule is enabled
+          type: boolean
+        query:
+          description: Query to filter cases for this notification rule
+          type: string
+        recipients:
+          description: List of notification recipients
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleRecipient'
+          type: array
+        triggers:
+          description: List of triggers for this notification rule
+          items:
+            $ref: '#/components/schemas/CaseNotificationRuleTrigger'
+          type: array
+      required:
+      - recipients
+      - triggers
+      type: object
+    CaseNotificationRuleCreateRequest:
+      description: Notification rule create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleCreate'
+      required:
+      - data
+      type: object
+    CaseNotificationRuleRecipient:
+      description: Notification rule recipient
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleRecipientData'
+        type:
+          description: Type of recipient (SLACK_CHANNEL, EMAIL, HTTP, PAGERDUTY_SERVICE,
+            MS_TEAMS_CHANNEL)
+          example: EMAIL
+          type: string
+      type: object
+    CaseNotificationRuleRecipientData:
+      description: Recipient data
+      properties:
+        channel:
+          description: Slack channel name
+          type: string
+        channel_id:
+          description: Slack channel ID
+          type: string
+        channel_name:
+          description: Microsoft Teams channel name
+          type: string
+        connector_name:
+          description: Microsoft Teams connector name
+          type: string
+        email:
+          description: Email address
+          type: string
+        name:
+          description: HTTP webhook name
+          type: string
+        service_name:
+          description: PagerDuty service name
+          type: string
+        team_id:
+          description: Microsoft Teams team ID
+          type: string
+        team_name:
+          description: Microsoft Teams team name
+          type: string
+        tenant_id:
+          description: Microsoft Teams tenant ID
+          type: string
+        tenant_name:
+          description: Microsoft Teams tenant name
+          type: string
+        workspace:
+          description: Slack workspace name
+          type: string
+        workspace_id:
+          description: Slack workspace ID
+          type: string
+      type: object
+    CaseNotificationRuleResourceType:
+      default: notification_rule
+      description: Notification rule resource type
+      enum:
+      - notification_rule
+      example: notification_rule
+      type: string
+      x-enum-varnames:
+      - NOTIFICATION_RULE
+    CaseNotificationRuleResponse:
+      description: Notification rule response
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRule'
+      type: object
+    CaseNotificationRuleTrigger:
+      description: Notification rule trigger
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleTriggerData'
+        type:
+          description: Type of trigger (CASE_CREATED, STATUS_TRANSITIONED, ATTRIBUTE_VALUE_CHANGED,
+            EVENT_CORRELATION_SIGNAL_CORRELATED)
+          example: CASE_CREATED
+          type: string
+      type: object
+    CaseNotificationRuleTriggerData:
+      description: Trigger data
+      properties:
+        change_type:
+          description: Change type (added, removed, changed)
+          type: string
+        field:
+          description: Field name for attribute value changed trigger
+          type: string
+        from_status:
+          description: Status ID to transition from
+          type: string
+        from_status_name:
+          description: Status name to transition from
+          type: string
+        to_status:
+          description: Status ID to transition to
+          type: string
+        to_status_name:
+          description: Status name to transition to
+          type: string
+      type: object
+    CaseNotificationRuleUpdate:
+      description: Notification rule update
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseNotificationRuleAttributes'
+        type:
+          $ref: '#/components/schemas/CaseNotificationRuleResourceType'
+      required:
+      - type
+      type: object
+    CaseNotificationRuleUpdateRequest:
+      description: Notification rule update request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseNotificationRuleUpdate'
+      required:
+      - data
+      type: object
+    CaseNotificationRulesResponse:
+      description: Response with notification rules
+      properties:
+        data:
+          description: Notification rules data
+          items:
+            $ref: '#/components/schemas/CaseNotificationRule'
+          type: array
+      type: object
     CaseObjectAttributes:
       additionalProperties:
         items:
@@ -16882,6 +17182,89 @@ components:
       - started_at
       - finished_at
       type: object
+    DORADeploymentPatchRemediation:
+      description: Remediation details for the deployment.
+      properties:
+        id:
+          description: The ID of the remediation action.
+          example: eG42zNIkVjM
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentPatchRemediationType'
+      required:
+      - id
+      - type
+      type: object
+    DORADeploymentPatchRemediationType:
+      description: The type of remediation action taken.
+      enum:
+      - rollback
+      - rollforward
+      example: rollback
+      type: string
+      x-enum-varnames:
+      - ROLLBACK
+      - ROLLFORWARD
+    DORADeploymentPatchRequest:
+      description: Request to patch a DORA deployment event.
+      example:
+        data:
+          attributes:
+            change_failure: true
+            remediation:
+              id: eG42zNIkVjM
+              type: rollback
+          id: z_RwVLi7v4Y
+          type: dora_deployment_patch_request
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestData'
+      required:
+      - data
+      type: object
+    DORADeploymentPatchRequestAttributes:
+      description: Attributes for patching a DORA deployment event.
+      properties:
+        change_failure:
+          description: Indicates whether the deployment resulted in a change failure.
+          example: true
+          type: boolean
+        remediation:
+          $ref: '#/components/schemas/DORADeploymentPatchRemediation'
+      type: object
+    DORADeploymentPatchRequestData:
+      description: The JSON:API data for patching a deployment.
+      example:
+        attributes:
+          change_failure: true
+          remediation:
+            id: eG42zNIkVjM
+            type: rollback
+        id: z_RwVLi7v4Y
+        type: dora_deployment_patch_request
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestAttributes'
+        id:
+          description: The ID of the deployment to patch.
+          example: z_RwVLi7v4Y
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentPatchRequestDataType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    DORADeploymentPatchRequestDataType:
+      default: dora_deployment_patch_request
+      description: JSON:API type for DORA deployment patch request.
+      enum:
+      - dora_deployment_patch_request
+      example: dora_deployment_patch_request
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENT_PATCH_REQUEST
     DORADeploymentRequest:
       description: Request to create a DORA deployment event.
       properties:
@@ -30450,6 +30833,212 @@ components:
             type: string
           type: array
       type: object
+    IntegrationIncident:
+      description: Incident integration settings
+      properties:
+        auto_escalation_query:
+          description: Query for auto-escalation
+          type: string
+        default_incident_commander:
+          description: Default incident commander
+          type: string
+        enabled:
+          description: Whether incident integration is enabled
+          type: boolean
+        field_mappings:
+          items:
+            $ref: '#/components/schemas/IntegrationIncidentFieldMappingsItems'
+          type: array
+        incident_type:
+          description: Incident type
+          type: string
+        severity_config:
+          $ref: '#/components/schemas/IntegrationIncidentSeverityConfig'
+      type: object
+    IntegrationIncidentFieldMappingsItems:
+      properties:
+        case_field:
+          type: string
+        incident_user_defined_field_id:
+          type: string
+      type: object
+    IntegrationIncidentSeverityConfig:
+      properties:
+        priority_mapping:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    IntegrationJira:
+      description: Jira integration settings
+      properties:
+        auto_creation:
+          $ref: '#/components/schemas/IntegrationJiraAutoCreation'
+        enabled:
+          description: Whether Jira integration is enabled
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/IntegrationJiraMetadata'
+        sync:
+          $ref: '#/components/schemas/IntegrationJiraSync'
+      type: object
+    IntegrationJiraAutoCreation:
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    IntegrationJiraMetadata:
+      properties:
+        account_id:
+          type: string
+        issue_type_id:
+          type: string
+        project_id:
+          type: string
+      type: object
+    IntegrationJiraSync:
+      properties:
+        enabled:
+          type: boolean
+        properties:
+          $ref: '#/components/schemas/IntegrationJiraSyncProperties'
+      type: object
+    IntegrationJiraSyncDueDate:
+      properties:
+        jira_field_id:
+          type: string
+        sync_type:
+          type: string
+      type: object
+    IntegrationJiraSyncProperties:
+      properties:
+        assignee:
+          $ref: '#/components/schemas/SyncProperty'
+        comments:
+          $ref: '#/components/schemas/SyncProperty'
+        custom_fields:
+          additionalProperties:
+            $ref: '#/components/schemas/IntegrationJiraSyncPropertiesCustomFieldsAdditionalProperties'
+          type: object
+        description:
+          $ref: '#/components/schemas/SyncProperty'
+        due_date:
+          $ref: '#/components/schemas/IntegrationJiraSyncDueDate'
+        priority:
+          $ref: '#/components/schemas/SyncPropertyWithMapping'
+        status:
+          $ref: '#/components/schemas/SyncPropertyWithMapping'
+        title:
+          $ref: '#/components/schemas/SyncProperty'
+      type: object
+    IntegrationJiraSyncPropertiesCustomFieldsAdditionalProperties:
+      properties:
+        sync_type:
+          type: string
+        value:
+          $ref: '#/components/schemas/AnyValue'
+      type: object
+    IntegrationMonitor:
+      description: Monitor integration settings
+      properties:
+        auto_resolve_enabled:
+          description: Whether auto-resolve is enabled
+          type: boolean
+        case_type_id:
+          description: Case type ID for monitor integration
+          type: string
+        enabled:
+          description: Whether monitor integration is enabled
+          type: boolean
+        handle:
+          description: Monitor handle
+          type: string
+      type: object
+    IntegrationOnCall:
+      description: On-Call integration settings
+      properties:
+        auto_assign_on_call:
+          description: Whether to auto-assign on-call
+          type: boolean
+        enabled:
+          description: Whether On-Call integration is enabled
+          type: boolean
+        escalation_queries:
+          items:
+            $ref: '#/components/schemas/IntegrationOnCallEscalationQueriesItems'
+          type: array
+      type: object
+    IntegrationOnCallEscalationQueriesItems:
+      properties:
+        enabled:
+          type: boolean
+        id:
+          type: string
+        query:
+          type: string
+        target:
+          $ref: '#/components/schemas/IntegrationOnCallEscalationQueriesItemsTarget'
+      type: object
+    IntegrationOnCallEscalationQueriesItemsTarget:
+      properties:
+        dynamic_team_paging:
+          type: boolean
+        team_id:
+          type: string
+        user_id:
+          type: string
+      type: object
+    IntegrationServiceNow:
+      description: ServiceNow integration settings
+      properties:
+        assignment_group:
+          description: Assignment group
+          type: string
+        auto_creation:
+          $ref: '#/components/schemas/IntegrationServiceNowAutoCreation'
+        enabled:
+          description: Whether ServiceNow integration is enabled
+          type: boolean
+        instance_name:
+          description: ServiceNow instance name
+          type: string
+        sync_config:
+          $ref: '#/components/schemas/IntegrationServiceNowSyncConfig'
+      type: object
+    IntegrationServiceNowAutoCreation:
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    IntegrationServiceNowSyncConfig:
+      properties:
+        enabled:
+          type: boolean
+        properties:
+          $ref: '#/components/schemas/IntegrationServiceNowSyncConfig139772721534496'
+      type: object
+    IntegrationServiceNowSyncConfig139772721534496:
+      properties:
+        comments:
+          $ref: '#/components/schemas/SyncProperty'
+        priority:
+          $ref: '#/components/schemas/IntegrationServiceNowSyncConfigPriority'
+        status:
+          $ref: '#/components/schemas/SyncPropertyWithMapping'
+      type: object
+    IntegrationServiceNowSyncConfigPriority:
+      properties:
+        impact_mapping:
+          additionalProperties:
+            type: string
+          type: object
+        sync_type:
+          type: string
+        urgency_mapping:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     InterfaceAttributes:
       description: The interface attributes
       properties:
@@ -36575,7 +37164,10 @@ components:
       - name
       type: object
     MonitorNotificationRuleCondition:
-      description: Conditions for `conditional_recipients`.
+      description: 'A conditional recipient rule composed of a `scope` (the matching
+        condition) and
+
+        `recipients` (who to notify when it matches).'
       properties:
         recipients:
           $ref: '#/components/schemas/MonitorNotificationRuleRecipients'
@@ -36588,8 +37180,13 @@ components:
       - recipients
       type: object
     MonitorNotificationRuleConditionScope:
-      description: The scope to which the monitor applied.
-      example: transition_type:alert
+      description: 'Defines the condition under which the recipients are notified.
+        Supported formats:
+
+        - Monitor status condition using `transition_type:<status>`, for example `transition_type:is_alert`.
+
+        - A single tag key:value pair, for example `env:prod`.'
+      example: transition_type:is_alert
       maxLength: 3000
       minLength: 1
       type: string
@@ -36642,18 +37239,18 @@ components:
           $ref: '#/components/schemas/MonitorNotificationRuleResourceType'
       type: object
     MonitorNotificationRuleFilter:
-      description: Filter used to associate the notification rule with monitors.
+      description: Specifies the matching criteria for monitor notifications.
       oneOf:
       - $ref: '#/components/schemas/MonitorNotificationRuleFilterTags'
       - $ref: '#/components/schemas/MonitorNotificationRuleFilterScope'
     MonitorNotificationRuleFilterScope:
       additionalProperties: false
-      description: Filter monitor notifications. A monitor notification must match
-        the scope.
+      description: Filters monitor notifications using a scope expression over key:value
+        pairs with boolean logic (AND, OR, NOT).
       properties:
         scope:
-          description: A scope composed of one or several key:value pairs, which can
-            be used to filter monitor notifications on monitor and group tags.
+          description: A scope expression composed by key:value pairs (e.g. `service:foo`)
+            with boolean operators (AND, OR, NOT) and parentheses for grouping.
           example: service:(foo OR bar) AND team:test NOT environment:staging
           maxLength: 3000
           minLength: 1
@@ -36663,12 +37260,11 @@ components:
       type: object
     MonitorNotificationRuleFilterTags:
       additionalProperties: false
-      description: Filter monitor notifications by tags. A monitor notification must
-        match all tags.
+      description: Filters monitor notifications by a list of tag key:value pairs.
       properties:
         tags:
-          description: A list of tags (key:value pairs), which can be used to filter
-            monitor notifications on monitor and group tags.
+          description: A list of tag key:value pairs (e.g. `team:product`). All tags
+            must match (AND semantics).
           example:
           - team:product
           - host:abc
@@ -44411,6 +45007,118 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    Playlist:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaylistData'
+      required:
+      - data
+      type: object
+    PlaylistArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PlaylistData'
+          type: array
+      required:
+      - data
+      type: object
+    PlaylistData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PlaylistDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/PlaylistDataType'
+      required:
+      - type
+      type: object
+    PlaylistDataAttributes:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/PlaylistDataAttributesCreatedBy'
+        description:
+          type: string
+        name:
+          example: My Playlist
+          type: string
+        session_count:
+          format: int64
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - name
+      type: object
+    PlaylistDataAttributesCreatedBy:
+      properties:
+        handle:
+          example: john.doe@example.com
+          type: string
+        icon:
+          type: string
+        id:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        name:
+          type: string
+        uuid:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      required:
+      - handle
+      - id
+      - uuid
+      type: object
+    PlaylistDataType:
+      default: rum_replay_playlist
+      description: Rum replay playlist resource type.
+      enum:
+      - rum_replay_playlist
+      example: rum_replay_playlist
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_PLAYLIST
+    PlaylistsSession:
+      properties:
+        data:
+          $ref: '#/components/schemas/PlaylistsSessionData'
+      required:
+      - data
+      type: object
+    PlaylistsSessionArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PlaylistsSessionData'
+          type: array
+      required:
+      - data
+      type: object
+    PlaylistsSessionData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PlaylistsSessionDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataType'
+      required:
+      - type
+      type: object
+    PlaylistsSessionDataAttributes:
+      properties:
+        session_event:
+          additionalProperties: {}
+          type: object
+        track:
+          type: string
+      type: object
     PostmortemAttachmentRequest:
       properties:
         data:
@@ -45031,13 +45739,51 @@ components:
     ProjectAttributes:
       description: Project attributes
       properties:
+        columns_config:
+          $ref: '#/components/schemas/ProjectColumnsConfig'
+        enabled_custom_case_types:
+          description: List of enabled custom case type IDs
+          items:
+            type: string
+          type: array
         key:
           description: The project's key
           example: CASEM
           type: string
         name:
           description: Project's name
+          example: Security Investigation
           type: string
+        restricted:
+          description: Whether the project is restricted
+          type: boolean
+        settings:
+          $ref: '#/components/schemas/ProjectSettings'
+      type: object
+    ProjectColumnsConfig:
+      description: Project columns configuration
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/ProjectColumnsConfigColumnsItems'
+          type: array
+      type: object
+    ProjectColumnsConfigColumnsItems:
+      properties:
+        sort:
+          $ref: '#/components/schemas/ProjectColumnsConfigColumnsItemsSort'
+        sort_field:
+          type: string
+        type:
+          type: string
+      type: object
+    ProjectColumnsConfigColumnsItemsSort:
+      properties:
+        ascending:
+          type: boolean
+        priority:
+          format: int64
+          type: integer
       type: object
     ProjectCreate:
       description: Project create
@@ -45053,13 +45799,21 @@ components:
     ProjectCreateAttributes:
       description: Project creation attributes
       properties:
+        enabled_custom_case_types:
+          description: List of enabled custom case type IDs
+          items:
+            type: string
+          type: array
         key:
           description: Project's key. Cannot be "CASE"
           example: SEC
           type: string
         name:
-          description: name
+          description: Project name
           example: Security Investigation
+          type: string
+        team_uuid:
+          description: Team UUID to associate with the project
           type: string
       required:
       - name
@@ -45072,6 +45826,32 @@ components:
           $ref: '#/components/schemas/ProjectCreate'
       required:
       - data
+      type: object
+    ProjectNotificationSettings:
+      description: Project notification settings
+      properties:
+        destinations:
+          description: Notification destinations (1=email, 2=slack, 3=in-app)
+          items:
+            type: integer
+          type: array
+        enabled:
+          description: Whether notifications are enabled
+          type: boolean
+        notify_on_case_assignment:
+          type: boolean
+        notify_on_case_closed:
+          type: boolean
+        notify_on_case_comment:
+          type: boolean
+        notify_on_case_comment_mention:
+          type: boolean
+        notify_on_case_priority_change:
+          type: boolean
+        notify_on_case_status_change:
+          type: boolean
+        notify_on_case_unassignment:
+          type: boolean
       type: object
     ProjectRelationship:
       description: Relationship to project
@@ -45116,6 +45896,63 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Project'
+      type: object
+    ProjectSettings:
+      description: Project settings
+      properties:
+        auto_close_inactive_cases:
+          $ref: '#/components/schemas/AutoCloseInactiveCases'
+        auto_transition_assigned_cases:
+          $ref: '#/components/schemas/AutoTransitionAssignedCases'
+        integration_incident:
+          $ref: '#/components/schemas/IntegrationIncident'
+        integration_jira:
+          $ref: '#/components/schemas/IntegrationJira'
+        integration_monitor:
+          $ref: '#/components/schemas/IntegrationMonitor'
+        integration_on_call:
+          $ref: '#/components/schemas/IntegrationOnCall'
+        integration_service_now:
+          $ref: '#/components/schemas/IntegrationServiceNow'
+        notification:
+          $ref: '#/components/schemas/ProjectNotificationSettings'
+      type: object
+    ProjectUpdate:
+      description: Project update
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProjectUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/ProjectResourceType'
+      required:
+      - type
+      type: object
+    ProjectUpdateAttributes:
+      description: Project update attributes
+      properties:
+        columns_config:
+          $ref: '#/components/schemas/ProjectColumnsConfig'
+        enabled_custom_case_types:
+          description: List of enabled custom case type IDs
+          items:
+            type: string
+          type: array
+        name:
+          description: Project name
+          type: string
+        settings:
+          $ref: '#/components/schemas/ProjectSettings'
+        team_uuid:
+          description: Team UUID to associate with the project
+          type: string
+      type: object
+    ProjectUpdateRequest:
+      description: Project update request
+      properties:
+        data:
+          $ref: '#/components/schemas/ProjectUpdate'
+      required:
+      - data
       type: object
     ProjectedCost:
       description: Projected Cost data.
@@ -46394,6 +47231,22 @@ components:
           example: One or several indexes are missing or invalid, results hold data
             from the other indexes
           type: string
+      type: object
+    RawErrorBudgetRemaining:
+      description: The raw error budget remaining for the SLO.
+      properties:
+        unit:
+          description: The unit of the error budget (for example, `seconds`, `requests`).
+          example: seconds
+          type: string
+        value:
+          description: The numeric value of the remaining error budget.
+          example: 86400.5
+          format: double
+          type: number
+      required:
+      - value
+      - unit
       type: object
     ReadinessGate:
       description: Used to merge multiple branches into a single branch.
@@ -52814,12 +53667,14 @@ components:
       - api_security
       - application_security
       - log_detection
+      - workload_activity
       - workload_security
       type: string
       x-enum-varnames:
       - API_SECURITY
       - APPLICATION_SECURITY
       - LOG_DETECTION
+      - WORKLOAD_ACTIVITY
       - WORKLOAD_SECURITY
     SecurityMonitoringRuleTypeRead:
       description: The rule type.
@@ -52830,6 +53685,7 @@ components:
       - cloud_configuration
       - application_security
       - api_security
+      - workload_activity
       type: string
       x-enum-varnames:
       - LOG_DETECTION
@@ -52838,6 +53694,7 @@ components:
       - CLOUD_CONFIGURATION
       - APPLICATION_SECURITY
       - API_SECURITY
+      - WORKLOAD_ACTIVITY
     SecurityMonitoringRuleTypeTest:
       description: The rule type.
       enum:
@@ -56922,6 +57779,25 @@ components:
       required:
       - data
       type: object
+    SessionIdArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SessionIdData'
+          type: array
+      required:
+      - data
+      type: object
+    SessionIdData:
+      properties:
+        id:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        type:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataType'
+      required:
+      - type
+      type: object
     Shift:
       description: An on-call shift with its associated data and relationships.
       example:
@@ -57368,6 +58244,242 @@ components:
       required:
       - attributes
       type: object
+    SloStatusData:
+      description: The data portion of the SLO status response.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SloStatusDataAttributes'
+        id:
+          description: The ID of the SLO.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/SloStatusType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SloStatusDataAttributes:
+      description: The attributes of the SLO status.
+      properties:
+        error_budget_remaining:
+          description: The percentage of error budget remaining.
+          example: 99.5
+          format: double
+          type: number
+        raw_error_budget_remaining:
+          $ref: '#/components/schemas/RawErrorBudgetRemaining'
+        sli:
+          description: The current Service Level Indicator (SLI) value as a percentage.
+          example: 99.95
+          format: double
+          type: number
+        span_precision:
+          description: The precision of the time span in seconds.
+          example: 2
+          format: int64
+          type: integer
+        state:
+          description: The current state of the SLO (for example, `breached`, `warning`,
+            `ok`).
+          example: ok
+          type: string
+      required:
+      - sli
+      - error_budget_remaining
+      - raw_error_budget_remaining
+      - state
+      - span_precision
+      type: object
+    SloStatusResponse:
+      description: The SLO status response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SloStatusData'
+      required:
+      - data
+      type: object
+    SloStatusType:
+      description: The type of the SLO status resource.
+      enum:
+      - slo_status
+      example: slo_status
+      type: string
+      x-enum-varnames:
+      - SLO_STATUS
+    Snapshot:
+      properties:
+        data:
+          $ref: '#/components/schemas/SnapshotData'
+      type: object
+    SnapshotArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SnapshotData'
+          type: array
+      required:
+      - data
+      type: object
+    SnapshotCreateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SnapshotCreateRequestData'
+      required:
+      - data
+      type: object
+    SnapshotCreateRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SnapshotCreateRequestDataAttributes'
+        type:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataType'
+      required:
+      - type
+      type: object
+    SnapshotCreateRequestDataAttributes:
+      properties:
+        application_id:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+        device_type:
+          example: desktop
+          type: string
+        event_id:
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        is_device_type_selected_by_user:
+          example: false
+          type: boolean
+        session_id:
+          type: string
+        snapshot_name:
+          example: My Snapshot
+          type: string
+        start:
+          example: 0
+          format: int64
+          type: integer
+        view_id:
+          type: string
+        view_name:
+          example: /home
+          type: string
+      required:
+      - view_name
+      - device_type
+      - application_id
+      - snapshot_name
+      - event_id
+      - start
+      - is_device_type_selected_by_user
+      type: object
+    SnapshotData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SnapshotDataAttributes'
+        id:
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataType'
+      required:
+      - type
+      type: object
+    SnapshotDataAttributes:
+      properties:
+        application_id:
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          type: string
+        created_by:
+          readOnly: true
+          type: string
+        created_by_handle:
+          readOnly: true
+          type: string
+        created_by_user_id:
+          format: int64
+          readOnly: true
+          type: integer
+        device_type:
+          type: string
+        event_id:
+          type: string
+        is_device_type_selected_by_user:
+          type: boolean
+        modified_at:
+          format: date-time
+          readOnly: true
+          type: string
+        org_id:
+          format: int64
+          readOnly: true
+          type: integer
+        session_id:
+          type: string
+        snapshot_name:
+          type: string
+        start:
+          format: int64
+          type: integer
+        view_id:
+          type: string
+        view_name:
+          type: string
+      type: object
+    SnapshotUpdateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SnapshotUpdateRequestData'
+      required:
+      - data
+      type: object
+    SnapshotUpdateRequestData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataAttributes'
+        id:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+        type:
+          $ref: '#/components/schemas/SnapshotUpdateRequestDataType'
+      required:
+      - type
+      type: object
+    SnapshotUpdateRequestDataAttributes:
+      properties:
+        event_id:
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        is_device_type_selected_by_user:
+          example: false
+          type: boolean
+        session_id:
+          type: string
+        start:
+          example: 0
+          format: int64
+          type: integer
+        view_id:
+          type: string
+      required:
+      - event_id
+      - start
+      - is_device_type_selected_by_user
+      type: object
+    SnapshotUpdateRequestDataType:
+      default: snapshots
+      description: Snapshots resource type.
+      enum:
+      - snapshots
+      example: snapshots
+      type: string
+      x-enum-varnames:
+      - SNAPSHOTS
     SoftwareCatalogTriggerWrapper:
       description: Schema for a Software Catalog-based trigger.
       properties:
@@ -59478,6 +60590,26 @@ components:
           type: array
         suppression:
           $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
+      type: object
+    SyncProperty:
+      description: Sync property configuration
+      properties:
+        sync_type:
+          type: string
+      type: object
+    SyncPropertyWithMapping:
+      description: Sync property with mapping configuration
+      properties:
+        mapping:
+          additionalProperties:
+            type: string
+          type: object
+        name_mapping:
+          additionalProperties:
+            type: string
+          type: object
+        sync_type:
+          type: string
       type: object
     SyntheticsGlobalVariable:
       description: Synthetic global variable.
@@ -64462,6 +65594,51 @@ components:
       - CREATE
       - UPDATE
       - DELETE
+    ViewershipHistorySessionArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ViewershipHistorySessionData'
+          type: array
+      required:
+      - data
+      type: object
+    ViewershipHistorySessionData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/ViewershipHistorySessionDataType'
+      required:
+      - type
+      type: object
+    ViewershipHistorySessionDataAttributes:
+      properties:
+        event_id:
+          type: string
+        last_watched_at:
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        session_event:
+          additionalProperties: {}
+          type: object
+        track:
+          type: string
+      required:
+      - last_watched_at
+      type: object
+    ViewershipHistorySessionDataType:
+      default: rum_replay_session
+      description: Rum replay session resource type.
+      enum:
+      - rum_replay_session
+      example: rum_replay_session
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_SESSION
     VirusTotalAPIKey:
       description: The definition of the `VirusTotalAPIKey` object.
       properties:
@@ -64950,6 +66127,104 @@ components:
       - X_CONTENT_TYPE_HEADER_MISSING
       - X_PATH_INJECTION
       - XSS
+    Watch:
+      properties:
+        data:
+          $ref: '#/components/schemas/WatchData'
+      required:
+      - data
+      type: object
+    WatchData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WatchDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/WatchDataType'
+      required:
+      - type
+      type: object
+    WatchDataAttributes:
+      properties:
+        application_id:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+        data_source:
+          type: string
+        event_id:
+          example: 11111111-2222-3333-4444-555555555555
+          type: string
+        timestamp:
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+      required:
+      - application_id
+      - event_id
+      - timestamp
+      type: object
+    WatchDataType:
+      default: rum_replay_watch
+      description: Rum replay watch resource type.
+      enum:
+      - rum_replay_watch
+      example: rum_replay_watch
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_WATCH
+    WatcherArray:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WatcherData'
+          type: array
+      required:
+      - data
+      type: object
+    WatcherData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/WatcherDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/WatcherDataType'
+      required:
+      - type
+      type: object
+    WatcherDataAttributes:
+      properties:
+        handle:
+          example: john.doe@example.com
+          type: string
+        icon:
+          type: string
+        last_watched_at:
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        name:
+          type: string
+        watch_count:
+          example: 0
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+      - handle
+      - last_watched_at
+      - watch_count
+      type: object
+    WatcherDataType:
+      default: rum_replay_watcher
+      description: Rum replay watcher resource type.
+      enum:
+      - rum_replay_watcher
+      example: rum_replay_watcher
+      type: string
+      x-enum-varnames:
+      - RUM_REPLAY_WATCHER
     Weekday:
       description: A day of the week.
       enum:
@@ -69897,6 +71172,202 @@ paths:
       tags:
       - Case Management
       x-menu-order: 3
+    patch:
+      description: Update a project.
+      operationId: UpdateProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectUpdateRequest'
+        description: Project payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update a project
+      tags:
+      - Case Management
+      x-menu-order: 5
+  /api/v2/cases/projects/{project_id}/notification_rules:
+    get:
+      description: Get all notification rules for a project.
+      operationId: GetProjectNotificationRules
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseNotificationRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
+      summary: Get notification rules
+      tags:
+      - Case Management
+      x-menu-order: 1
+    post:
+      description: Create a notification rule for a project.
+      operationId: CreateProjectNotificationRule
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseNotificationRuleCreateRequest'
+        description: Notification rule payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseNotificationRuleResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Create a notification rule
+      tags:
+      - Case Management
+      x-menu-order: 2
+  /api/v2/cases/projects/{project_id}/notification_rules/{notification_rule_id}:
+    delete:
+      description: Delete a notification rule using the notification rule's `id`.
+      operationId: DeleteProjectNotificationRule
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/NotificationRuleIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Delete a notification rule
+      tags:
+      - Case Management
+      x-menu-order: 4
+    put:
+      description: Update a notification rule.
+      operationId: UpdateProjectNotificationRule
+      parameters:
+      - description: Project UUID
+        example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+        in: path
+        name: project_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/NotificationRuleIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseNotificationRuleUpdateRequest'
+        description: Notification rule payload
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update a notification rule
+      tags:
+      - Case Management
+      x-menu-order: 3
   /api/v2/cases/types:
     get:
       description: Get all case types
@@ -74424,6 +75895,47 @@ paths:
         operator: OR
         permissions:
         - dora_metrics_read
+    patch:
+      description: Use this API endpoint to patch a deployment event.
+      operationId: PatchDORADeployment
+      parameters:
+      - description: The ID of the deployment event.
+        in: path
+        name: deployment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORADeploymentPatchRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Patch a deployment event
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - dora_metrics_write
   /api/v2/dora/failure:
     post:
       description: 'Use this API endpoint to provide failure data.
@@ -83504,8 +85016,6 @@ paths:
         operator: OR
         permissions:
         - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
     post:
       description: Create a new pipeline.
       operationId: CreatePipeline
@@ -83538,8 +85048,6 @@ paths:
         operator: OR
         permissions:
         - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
   /api/v2/obs-pipelines/pipelines/validate:
     post:
       description: 'Validates a pipeline configuration without creating or updating
@@ -83574,8 +85082,6 @@ paths:
         operator: OR
         permissions:
         - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
   /api/v2/obs-pipelines/pipelines/{pipeline_id}:
     delete:
       description: Delete a pipeline.
@@ -83618,8 +85124,6 @@ paths:
         operator: OR
         permissions:
         - observability_pipelines_delete
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
     get:
       description: Get a specific pipeline by its ID.
       operationId: GetPipeline
@@ -83653,8 +85157,6 @@ paths:
         operator: OR
         permissions:
         - observability_pipelines_read
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
     put:
       description: Update a pipeline.
       operationId: UpdatePipeline
@@ -83696,8 +85198,6 @@ paths:
         operator: OR
         permissions:
         - observability_pipelines_deploy
-      x-unstable: '**Note**: This endpoint is in Preview. Fill out this [form](https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/)
-        to request access.'
   /api/v2/on-call/escalation-policies:
     post:
       description: Create a new On-Call escalation policy
@@ -87455,6 +88955,138 @@ paths:
       - CSM Threats
       x-codegen-request-body-name: body
       x-menu-order: 9
+  /api/v2/replay/heatmap/snapshots:
+    get:
+      description: List heatmap snapshots.
+      operationId: ListReplayHeatmapSnapshots
+      parameters:
+      - description: Device type to filter snapshots.
+        in: query
+        name: filter[device_type]
+        schema:
+          example: desktop
+          type: string
+      - description: View name to filter snapshots.
+        in: query
+        name: filter[view_name]
+        required: true
+        schema:
+          example: /home
+          type: string
+      - description: Maximum number of snapshots to return.
+        in: query
+        name: page[limit]
+        schema:
+          example: 10
+          type: integer
+      - description: Filter by application ID.
+        in: query
+        name: filter[application_id]
+        schema:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnapshotArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List replay heatmap snapshots
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 2
+    post:
+      description: Create a heatmap snapshot.
+      operationId: CreateReplayHeatmapSnapshot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create replay heatmap snapshot
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 1
+  /api/v2/replay/heatmap/snapshots/{snapshot_id}:
+    delete:
+      description: Delete a heatmap snapshot.
+      operationId: DeleteReplayHeatmapSnapshot
+      parameters:
+      - description: Unique identifier of the heatmap snapshot.
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete replay heatmap snapshot
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 4
+    patch:
+      description: Update a heatmap snapshot.
+      operationId: UpdateReplayHeatmapSnapshot
+      parameters:
+      - description: Unique identifier of the heatmap snapshot.
+        in: path
+        name: snapshot_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update replay heatmap snapshot
+      tags:
+      - Rum Replay Heatmaps
+      x-menu-order: 3
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -87564,6 +89196,8 @@ paths:
 
         - Logs Pipelines: `logs-pipeline`
 
+        - Case Management Projects: `case-management-project`
+
 
         #### Supported relations for resources
 
@@ -87615,7 +89249,9 @@ paths:
 
         On-Call Team Routing Rules  | `viewer`, `editor`
 
-        Logs Pipelines              | `viewer`, `processors_editor`, `editor`'
+        Logs Pipelines              | `viewer`, `processors_editor`, `editor`
+
+        Case Management Projects    | `viewer`, `contributor`, `manager`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
@@ -88885,6 +90521,547 @@ paths:
         operator: OR
         permissions:
         - rum_apps_read
+  /api/v2/rum/replay/playlists:
+    get:
+      description: List playlists.
+      operationId: ListRumReplayPlaylists
+      parameters:
+      - description: Filter playlists by the UUID of the user who created them.
+        in: query
+        name: filter[created_by_uuid]
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      - description: Search query to filter playlists by name.
+        in: query
+        name: filter[query]
+        schema:
+          example: my playlist
+          type: string
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay playlists
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 2
+    post:
+      description: Create a playlist.
+      operationId: CreateRumReplayPlaylist
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playlist'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 1
+  /api/v2/rum/replay/playlists/{playlist_id}:
+    delete:
+      description: Delete a playlist.
+      operationId: DeleteRumReplayPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 7
+    get:
+      description: Get a playlist.
+      operationId: GetRumReplayPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 5
+    put:
+      description: Update a playlist.
+      operationId: UpdateRumReplayPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Playlist'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update rum replay playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 6
+  /api/v2/rum/replay/playlists/{playlist_id}/sessions:
+    delete:
+      description: Remove sessions from a playlist.
+      operationId: BulkRemoveRumReplayPlaylistSessions
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionIdArray'
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Bulk remove rum replay playlist sessions
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 4
+    get:
+      description: List sessions in a playlist.
+      operationId: ListRumReplayPlaylistSessions
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistsSessionArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay playlist sessions
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 3
+  /api/v2/rum/replay/playlists/{playlist_id}/sessions/{session_id}:
+    delete:
+      description: Remove a session from a playlist.
+      operationId: RemoveRumReplaySessionFromPlaylist
+      parameters:
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Remove rum replay session from playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 9
+    put:
+      description: Add a session to a playlist.
+      operationId: AddRumReplaySessionToPlaylist
+      parameters:
+      - description: 'Data source type. Valid values: ''rum'' or ''product_analytics''.
+          Defaults to ''rum''.'
+        in: query
+        name: data_source
+        schema:
+          example: rum
+          type: string
+      - description: Server-side timestamp in milliseconds.
+        in: query
+        name: ts
+        required: true
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: Unique identifier of the playlist.
+        in: path
+        name: playlist_id
+        required: true
+        schema:
+          example: 1234567
+          type: integer
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistsSession'
+          description: OK
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistsSession'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Add rum replay session to playlist
+      tags:
+      - Rum Replay Playlists
+      x-menu-order: 8
+  /api/v2/rum/replay/sessions/{session_id}/views/{view_id}/segments:
+    get:
+      description: Get segments for a view.
+      operationId: GetSegments
+      parameters:
+      - description: Unique identifier of the view.
+        in: path
+        name: view_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000002
+          type: string
+      - description: 'Storage source: ''event_platform'' or ''blob''.'
+        in: query
+        name: source
+        schema:
+          example: event_platform
+          type: string
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      - description: Server-side timestamp in milliseconds.
+        in: query
+        name: ts
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: Maximum size in bytes for the segment list.
+        in: query
+        name: max_list_size
+        schema:
+          example: 1048576
+          type: integer
+      - description: Paging token for pagination.
+        in: query
+        name: paging
+        schema:
+          example: eyJuZXh0IjoiYWJjMTIzIn0
+          type: string
+      responses:
+        '200':
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get segments
+      tags:
+      - Rum Replay Sessions
+      x-menu-order: 1
+  /api/v2/rum/replay/sessions/{session_id}/watchers:
+    get:
+      description: List session watchers.
+      operationId: ListRumReplaySessionWatchers
+      parameters:
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WatcherArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay session watchers
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 4
+  /api/v2/rum/replay/sessions/{session_id}/watches:
+    delete:
+      description: Delete session watch history.
+      operationId: DeleteRumReplaySessionWatch
+      parameters:
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete rum replay session watch
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 3
+    post:
+      description: Record a session watch.
+      operationId: CreateRumReplaySessionWatch
+      parameters:
+      - description: Unique identifier of the session.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Watch'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Watch'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create rum replay session watch
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 2
+  /api/v2/rum/replay/viewership-history/sessions:
+    get:
+      description: List watched sessions.
+      operationId: ListRumReplayViewershipHistorySessions
+      parameters:
+      - description: Start timestamp in milliseconds for watched_at filter.
+        in: query
+        name: filter[watched_at][start]
+        schema:
+          example: 1704067200000
+          format: int64
+          type: integer
+      - description: Page number for pagination (0-indexed).
+        in: query
+        name: page[number]
+        schema:
+          example: 0
+          type: integer
+      - description: Filter by user UUID. Defaults to current user if not specified.
+        in: query
+        name: filter[created_by]
+        schema:
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      - description: End timestamp in milliseconds for watched_at filter.
+        in: query
+        name: filter[watched_at][end]
+        schema:
+          example: 1704153600000
+          format: int64
+          type: integer
+      - description: Comma-separated list of session IDs to filter by.
+        in: query
+        name: filter[session_ids]
+        schema:
+          example: 11111111-2222-3333-4444-555555555555,22222222-3333-4444-5555-666666666666
+          type: string
+      - description: Number of items per page.
+        in: query
+        name: page[size]
+        schema:
+          example: 25
+          type: integer
+      - description: Filter by application ID.
+        in: query
+        name: filter[application_id]
+        schema:
+          example: aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewershipHistorySessionArray'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: List rum replay viewership history sessions
+      tags:
+      - Rum Replay Viewership
+      x-menu-order: 1
   /api/v2/saml_configurations/idp_metadata:
     post:
       description: 'Endpoint for uploading IdP metadata for SAML setup.
@@ -94806,6 +96983,64 @@ paths:
       x-unstable: '**Note**: This feature is in private beta. To request access, use
         the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export)
         docs.'
+  /api/v2/slo/{slo_id}/status:
+    get:
+      description: 'Get the status of a Service Level Objective (SLO) for a given
+        time period.
+
+
+        This endpoint returns the current SLI value, error budget remaining, and other
+        status information for the specified SLO.'
+      operationId: GetSloStatus
+      parameters:
+      - $ref: '#/components/parameters/SloID'
+      - $ref: '#/components/parameters/FromTimestamp'
+      - $ref: '#/components/parameters/ToTimestamp'
+      - $ref: '#/components/parameters/DisableCorrections'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SloStatusResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - slos_read
+      summary: Get SLO status
+      tags:
+      - Service Level Objectives
+      x-menu-order: 105
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/spa/recommendations/{service}:
     get:
       description: This endpoint is currently experimental and restricted to Datadog
@@ -100987,6 +103222,18 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
   name: Rum Metrics
+- description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete,
+    and retrieve snapshots to visualize user interactions on specific views.
+  name: Rum Replay Heatmaps
+- description: Create and manage playlists of RUM replay sessions. Organize, categorize,
+    and share collections of replay sessions for analysis and collaboration.
+  name: Rum Replay Playlists
+- description: Retrieve segments for RUM replay sessions. Access session replay data
+    stored in event platform or blob storage.
+  name: Rum Replay Sessions
+- description: Track and manage RUM replay session viewership. Monitor who watches
+    replay sessions and maintain watch history for audit and analytics purposes.
+  name: Rum Replay Viewership
 - description: Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list)
     of RUM for your organization.
   name: Rum Retention Filters
