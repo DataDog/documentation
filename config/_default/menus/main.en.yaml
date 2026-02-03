@@ -7513,12 +7513,12 @@ menu:
       url: security/workload_protection/setup/agent
       parent: workload_protection_setup
       identifier: workload_protection_workload_setup_agent
-      weight: 3
+      weight: 1
     - name: Workload Protection Agent Variables
       url: security/workload_protection/setup/agent_variables
       parent: workload_protection_setup
       identifier: workload_protection_agent_variables
-      weight: 4
+      weight: 2
     - name: Detection Rules
       url: security/workload_protection/workload_security_rules
       parent: workload_protection
