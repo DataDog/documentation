@@ -147,7 +147,7 @@ For containerized environments on OKE, you can use the [Datadog Agent for Kubern
 
 ## Explore related services
 
-### GPU Monitoring
+### GPU monitoring
 
 Monitoring OCI GPU instances is essential for ensuring optimal performance and reliability of your high-performance computing workloads. The [OCI GPU integration][22] provides a comprehensive set of GPU metrics through the `gpu_infrastructure_health` namespace, enabling you to track the health, capacity, throughput, status, and performance of your [GPU instances][23]. 
 
