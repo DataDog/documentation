@@ -146,7 +146,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable"
     data-description="SDK is Browser"
-    data-if="6366"
+    data-if="3154"
   >
     <p>
       This page describes how to instrument your web applications with the
@@ -783,7 +783,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="6367"
+    data-if="3155"
   >
     <p>
       This page describes how to instrument your applications for
@@ -2114,7 +2114,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="6368"
+    data-if="3156"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -3304,15 +3304,17 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="6369"
+    data-if="3157"
   >
     <p>
       This page describes how to instrument your applications for
       <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> with the
       Flutter SDK. RUM includes Error Tracking by default, but if you have
       purchased Error Tracking as a standalone product, see the
-      <a href="/error_tracking/">Error Tracking setup guide</a> for specific
-      steps.
+      <a href="/error_tracking/frontend/mobile/flutter/"
+        >Error Tracking setup guide</a
+      >
+      for specific steps.
     </p>
     <h2 id="setup">Setup</h2>
     <h3 id="step-1--specify-application-details-in-the-ui">
@@ -3333,8 +3335,8 @@ title: Client SDK Setup
       </li>
     </ol>
     <p>
-      To ensure the safety of your data, you must use a client token. For more
-      information about setting up a client token, see the
+      To secure your data, you must use a client token. For more information
+      about setting up a client token, see the
       <a href="/account_management/api-app-keys/#client-tokens"
         >Client Token documentation</a
       >.
@@ -3408,15 +3410,15 @@ title: Client SDK Setup
     <p>
       For Android, your <code>minSdkVersion</code> version must be &gt;= 23, and
       your <code>compileSdkVersion</code> must be &gt;= 35. Clients using
-      Flutter after 3.27 will usually have these variables set to Flutter
-      constants (<code>flutter.minSdkVersion</code> and
+      Flutter after 3.27 usually have these variables set to Flutter constants
+      (<code>flutter.minSdkVersion</code> and
       <code>flutter.compileSdkVersion</code>), and they do not have to be
       manually changed.
     </p>
     <p>
       If you are using Kotlin, it should be a version &gt;= 2.1.0. Flutter
-      versions above 3.27 will emit a waring stating that older versions of
-      Kotlin will not be supported, and will provide instructions for updating.
+      versions above 3.27 emit a warning stating that older versions of Kotlin
+      are not supported, and provide instructions for updating.
     </p>
     <p>
       These constraints are usually held in your
@@ -3510,8 +3512,8 @@ title: Client SDK Setup
       >.
     </p>
     <p>
-      To ensure the safety of your data, you must use a client token. You cannot
-      use Datadog API keys to configure the Datadog
+      To secure data, you must use a client token. You cannot use Datadog API
+      keys to configure the Datadog
       <a
         href="https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html"
         >Flutter Plugin</a
@@ -3777,7 +3779,7 @@ title: Client SDK Setup
       For examples that use routers other than <code>go_router</code>, see
       <a href="#automatically-track-views">Automatically track views</a>.
     </p>
-    <h3 id="renaming-views">Renaming Views</h3>
+    <h3 id="renaming-views">Renaming views</h3>
     <p>
       For all setups, you can rename views or supply custom paths by providing a
       <a
@@ -3930,23 +3932,13 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="6370"
+    data-if="3158"
   >
-    <p>
-      This page describes how to instrument your applications for
-      <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> with the
-      React Native SDK. RUM includes Error Tracking by default, but if you have
-      purchased Error Tracking as a standalone product, see the
-      <a href="/error_tracking/">Error Tracking setup guide</a> for specific
-      steps.
-    </p>
     <p>
       The minimum supported version for the React Native SDK is React Native
       v0.65+. Compatibility with older versions is not guaranteed
       out-of-the-box.
     </p>
-    <h2 id="setup">Setup</h2>
-    <h3 id="choose-your-setup-method">Choose your setup method</h3>
     <div class="code-tabs">
       <ul class="nav nav-tabs d-flex"></ul>
       <div class="tab-content">
@@ -3957,7 +3949,7 @@ title: Client SDK Setup
           title="React Native"
         >
           <h3 id="step-1--install-the-sdk">Step 1 - Install the SDK</h3>
-          <p>To install with NPM, run:</p>
+          <p>To install with npm, run:</p>
           <div class="code-snippet-wrapper">
             <div class="code-filename-wrapper d-flex justify-content-end"></div>
             <div class="code-snippet">
@@ -3989,7 +3981,9 @@ title: Client SDK Setup
               </div>
             </div>
           </div>
-          <h3 id="ios">iOS</h3>
+          <h3 id="install-dependencies-for-ios">
+            Install dependencies for iOS
+          </h3>
           <p>Install the added pod:</p>
           <div class="code-snippet-wrapper">
             <div class="code-filename-wrapper d-flex justify-content-end"></div>
@@ -4088,8 +4082,7 @@ title: Client SDK Setup
             </p>
           </div>
           <p>
-            To ensure the safety of your data, you must use a client token. If
-            you used only
+            For data security, you must use a client token. If you used only
             <a href="/account_management/api-app-keys/#api-keys"
               >Datadog API keys</a
             >
@@ -4495,7 +4488,7 @@ title: Client SDK Setup
             range of configuration options.
           </p>
           <h4 id="installation">Installation</h4>
-          <p>To install with NPM, run:</p>
+          <p>To install with npm, run:</p>
           <div class="code-snippet-wrapper">
             <div class="code-filename-wrapper d-flex justify-content-end"></div>
             <div class="code-snippet">
@@ -4551,66 +4544,25 @@ title: Client SDK Setup
             </div>
           </div>
           <p>
-            Once the plugin is installed and configured, it automatically tracks
-            interactions on standard React Native components. No additional code
-            changes are required for basic usage.
+            After the plugin is installed and configured, it automatically
+            tracks interactions on standard React Native components. No
+            additional code changes are required for basic usage.
           </p>
-          <h2 id="sending-data-when-device-is-offline">
-            Sending data when device is offline
-          </h2>
+          <h3 id="codepush-integration--optional">
+            CodePush integration (optional)
+          </h3>
           <p>
-            The React Native SDK ensures availability of data when your user
-            device is offline. In cases of low-network areas, or when the device
-            battery is too low, all events are first stored on the local device
-            in batches. They are sent as soon as the network is available, and
-            the battery is high enough to ensure the React Native SDK does not
-            impact the end user's experience. If the network is not available
-            with your application running in the foreground, or if an upload of
-            data fails, the batch is kept until it can be sent successfully.
+            If you're deploying updates with
+            <a
+              href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/"
+              >CodePush</a
+            >, see the
+            <a
+              href="/real_user_monitoring/application_monitoring/react_native/setup/codepush"
+              >CodePush setup documentation</a
+            >
+            for additional configuration steps.
           </p>
-          <p>
-            This means that even if users open your application while offline,
-            no data is lost.
-          </p>
-          <p>
-            <strong>Note</strong>: The data on the disk is automatically deleted
-            if it gets too old to ensure the React Native SDK does not use too
-            much disk space.
-          </p>
-          <h2 id="track-background-events">Track background events</h2>
-          <div class="alert alert-info">
-            <p>
-              Tracking background events may lead to additional sessions, which
-              can impact billing. For questions,
-              <a href="https://docs.datadoghq.com/help/"
-                >contact Datadog support</a
-              >.
-            </p>
-          </div>
-          <p>
-            You can track events such as crashes and network requests when your
-            application is in the background (for example, when no active view
-            is available).
-          </p>
-          <p>
-            Add the following snippet during initialization in your Datadog
-            configuration:
-          </p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="nx">rumConfiguration</span><span class="p">.</span><span class="nx">trackBackgroundEvents</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
         </div>
         <div
           data-lang="expo"
@@ -4631,7 +4583,7 @@ title: Client SDK Setup
             Datadog recommends using <strong>Expo SDK 45</strong> as a minimum
             version; previous versions may require manual steps.
           </p>
-          <p>To install with NPM, run:</p>
+          <p>To install with npm, run:</p>
           <div class="code-snippet-wrapper">
             <div class="code-filename-wrapper d-flex justify-content-end"></div>
             <div class="code-snippet">
@@ -4699,8 +4651,8 @@ title: Client SDK Setup
             </p>
           </div>
           <p>
-            To ensure the safety of your data, you must use a client token. For
-            more information about setting up a client token, see the
+            For data security, you must use a client token. For more information
+            about setting up a client token, see the
             <a href="/account_management/api-app-keys/#client-tokens"
               >Client Token documentation</a
             >.
@@ -4825,7 +4777,7 @@ title: Client SDK Setup
           <p>
             Add <code>@datadog/datadog-ci</code> as a development dependency.
             This package contains scripts to upload the source maps. You can
-            install it with NPM:
+            install it with npm:
           </p>
           <div class="code-snippet-wrapper">
             <div class="code-filename-wrapper d-flex justify-content-end"></div>
@@ -4873,7 +4825,7 @@ title: Client SDK Setup
             metadata, improving interaction tracking accuracy and enabling a
             range of configuration options.
           </p>
-          <p>To install with NPM, run:</p>
+          <p>To install with npm, run:</p>
           <div class="code-snippet-wrapper">
             <div class="code-filename-wrapper d-flex justify-content-end"></div>
             <div class="code-snippet">
@@ -4928,342 +4880,25 @@ title: Client SDK Setup
             </div>
           </div>
           <p>
-            Once the plugin is installed and configured, it automatically tracks
-            interactions on standard React Native components. No additional code
-            changes are required for basic usage.
+            After the plugin is installed and configured, it automatically
+            tracks interactions on standard React Native components. No
+            additional code changes are required for basic usage.
           </p>
-        </div>
-        <div
-          data-lang="codepush"
-          class="tab-pane fade"
-          role="tabpanel"
-          title="CodePush"
-        >
+          <h3 id="codepush-integration--optional">
+            CodePush integration (optional)
+          </h3>
           <p>
-            If you're using
+            If you're deploying updates with
             <a
               href="https://docs.microsoft.com/en-us/appcenter/distribution/codepush/"
               >CodePush</a
+            >, see the
+            <a
+              href="/real_user_monitoring/application_monitoring/react_native/setup/codepush"
+              >CodePush setup documentation</a
             >
-            to deploy updates to your React Native application, you need to use
-            the CodePush-specific Datadog package to ensure proper version
-            tracking and error symbolication.
+            for additional configuration steps.
           </p>
-          <h3 id="step-1--install-the-sdk">Step 1 - Install the SDK</h3>
-          <p>
-            See the
-            <a href="#react-native"
-              >React Native Monitoring installation steps</a
-            >
-            to install <code>@datadog/mobile-react-native</code>.
-          </p>
-          <p>
-            Then, install <code>@datadog/mobile-react-native-code-push</code>.
-          </p>
-          <p>To install with NPM, run:</p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-shell">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl">npm install @datadog/mobile-react-native-code-push
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <p>To install with Yarn, run:</p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-shell">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl">yarn add @datadog/mobile-react-native-code-push
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <h3 id="step-2--initialize-with-codepush">
-            Step 2 - Initialize with CodePush
-          </h3>
-          <h4 id="initializing-with-ddsdkreactnativeinitialize">
-            Initializing with DdSdkReactNative.initialize
-          </h4>
-          <p>
-            Replace <code>DdSdkReactNative.initialize</code> by
-            <code>DatadogCodepush.initialize</code> in your code:
-          </p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DatadogCodepush</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@datadog/mobile-react-native-code-push&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DatadogProviderConfiguration</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@datadog/mobile-react-native&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DatadogProviderConfiguration</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&lt;CLIENT_TOKEN&gt;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&lt;ENVIRONMENT_NAME&gt;&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">site</span><span class="o">:</span> <span class="s1">&#39;US1&#39;</span><span class="p">,</span> <span class="c1">// Optional: Select your Datadog website (&#34;US1&#34;, &#34;US3&#34;, &#34;US5&#34;, &#34;EU1&#34;, or &#34;US1_FED&#34;). Default is &#34;US1&#34;.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">rumConfiguration</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">applicationId</span><span class="o">:</span> <span class="s1">&#39;&lt;APPLICATION_ID&gt;&#39;</span><span class="p">,</span> <span class="c1">// RUM Application ID
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">trackInteractions</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// Track user interactions (set to false if using Error Tracking only)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">trackResources</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// Track XHR resources (set to false if using Error Tracking only)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">trackErrors</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// Track errors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">sessionSampleRate</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span> <span class="c1">// Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">nativeCrashReportEnabled</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// Optional: Enable or disable native crash reports.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">logsConfiguration</span><span class="o">:</span> <span class="p">{},</span> <span class="c1">// Enable Logs
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">traceConfiguration</span><span class="o">:</span> <span class="p">{}</span> <span class="c1">// Enable Traces
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">await</span> <span class="nx">DatadogCodepush</span><span class="p">.</span><span class="nx">initialize</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <h4 id="initializing-with-datadogprovider">
-            Initializing with DatadogProvider
-          </h4>
-          <p>
-            Replace <code>DatadogProvider</code> by
-            <code>DatadogCodepushProvider</code> in your App component:
-          </p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-javascript">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">DatadogCodepushProvider</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@datadog/mobile-react-native-code-push&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="nx">DatadogCodepushProvider</span> <span class="nx">configuration</span><span class="o">=</span><span class="p">{</span><span class="nx">datadogConfiguration</span><span class="p">}</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">            <span class="o">&lt;</span><span class="nx">Navigation</span> <span class="o">/&gt;</span>
-</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="err">/DatadogCodepushProvider&gt;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <p>
-            As getting the CodePush version is an asynchronous step that needs
-            to be performed before initializing the Datadog React Native SDK for
-            RUM, there is no difference between
-            <code>InitializationMode.SYNC</code> and
-            <code>InitializationMode.ASYNC</code> when using
-            <code>DatadogCodepushProvider</code>.
-          </p>
-          <h3 id="step-3--upload-codepush-source-maps">
-            Step 3 - Upload CodePush source maps
-          </h3>
-          <p>
-            Each time you release a new CodePush version for your React Native
-            application, you need to upload the source maps to Datadog to
-            unminify errors. Using
-            <code>@datadog/mobile-react-native-code-push</code> with the
-            <code>datadog-ci react-native codepush</code> command ensures that
-            the <code>version</code> is consistent in both reported crashes and
-            uploaded source maps.
-          </p>
-          <p>
-            Install
-            <a href="https://github.com/DataDog/datadog-ci"
-              ><code>@datadog/datadog-ci</code></a
-            >
-            as a development dependency to your project.
-          </p>
-          <p>To install it with NPM:</p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-shell">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl">npm install @datadog/datadog-ci --save-dev
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <p>To install it with Yarn:</p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-shell">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl">yarn add -D @datadog/datadog-ci
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <p>
-            Create a gitignored <code>datadog-ci.json</code> file at the root of
-            your project containing your API key and the Datadog site (if not
-            <code>datadoghq.com</code>):
-          </p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-json">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;apiKey&#34;</span><span class="p">:</span> <span class="s2">&#34;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nt">&#34;site&#34;</span><span class="p">:</span> <span class="s2">&#34;datadoghq.eu&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <p>
-            You can also export them as <code>DATADOG_API_KEY</code> and
-            <code>DATADOG_SITE</code> environment variables.
-          </p>
-          <p>
-            When releasing a new CodePush bundle, specify a directory to output
-            the source maps and bundle:
-          </p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-shell">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl">appcenter codepush release-react -a MyOrganization/MyApplication -d MyDeployment --sourcemap-output --output-dir ./build
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <p>
-            Run the <code>datadog-ci react-native codepush</code> command by
-            passing the adequate CodePush <code>app</code> and
-            <code>deployment</code> arguments.
-          </p>
-          <p>To run it with NPM:</p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-shell">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl">npm run datadog-ci react-native codepush --platform ios --service com.company.app --bundle ./build/CodePush/main.jsbundle --sourcemap ./build/CodePush/main.jsbundle.map --app MyOrganization/MyApplication --deployment MyDeployment
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-          <p>To run it with Yarn:</p>
-          <div class="code-snippet-wrapper">
-            <div class="code-filename-wrapper d-flex justify-content-end"></div>
-            <div class="code-snippet">
-              <div class="code-button-wrapper position-absolute">
-                <button class="btn text-primary js-copy-button">Copy</button>
-              </div>
-              <div class="cdoc-code-snippet cdoc-language-shell">
-                <pre
-                  tabindex="0"
-                  class="chroma"
-                ><code><span class="line"><span class="cl">yarn datadog-ci react-native codepush --platform ios --service com.company.app --bundle ./build/CodePush/main.jsbundle --sourcemap ./build/CodePush/main.jsbundle.map --app MyOrganization/MyApplication --deployment MyDeployment
-</span></span></code></pre>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <h2 id="sending-data-when-device-is-offline">
-      Sending data when device is offline
-    </h2>
-    <p>
-      The React Native SDK ensures availability of data when your user device is
-      offline. In cases of low-network areas, or when the device battery is too
-      low, all events are first stored on the local device in batches. They are
-      sent as soon as the network is available, and the battery is high enough
-      to ensure the React Native SDK does not impact the end user's experience.
-      If the network is not available with your application running in the
-      foreground, or if an upload of data fails, the batch is kept until it can
-      be sent successfully.
-    </p>
-    <p>
-      This means that even if users open your application while offline, no data
-      is lost.
-    </p>
-    <p>
-      <strong>Note</strong>: The data on the disk is automatically deleted if it
-      gets too old to ensure the React Native SDK does not use too much disk
-      space.
-    </p>
-    <h2 id="track-background-events">Track background events</h2>
-    <div class="alert alert-info">
-      <p>
-        Tracking background events may lead to additional sessions, which can
-        impact billing. For questions,
-        <a href="https://docs.datadoghq.com/help/">contact Datadog support</a>.
-      </p>
-    </div>
-    <p>
-      You can track events such as crashes and network requests when your
-      application is in the background (for example, when no active view is
-      available).
-    </p>
-    <p>
-      Add the following snippet during initialization in your Datadog
-      configuration:
-    </p>
-    <div class="code-snippet-wrapper">
-      <div class="code-filename-wrapper d-flex justify-content-end"></div>
-      <div class="code-snippet">
-        <div class="code-button-wrapper position-absolute">
-          <button class="btn text-primary js-copy-button">Copy</button>
-        </div>
-        <div class="cdoc-code-snippet cdoc-language-javascript">
-          <pre
-            tabindex="0"
-            class="chroma"
-          ><code><span class="line"><span class="cl"><span class="nx">rumConfiguration</span><span class="p">.</span><span class="nx">trackBackgroundEvents</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</span></span></code></pre>
         </div>
       </div>
     </div>
@@ -5271,15 +4906,17 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="6371"
+    data-if="3159"
   >
     <p>
       This page describes how to instrument your applications for
       <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> with the
       Kotlin Multiplatform SDK. RUM includes Error Tracking by default, but if
       you have purchased Error Tracking as a standalone product, see the
-      <a href="/error_tracking/">Error Tracking setup guide</a> for specific
-      steps.
+      <a href="/error_tracking/frontend/mobile/kotlin-multiplatform/"
+        >Error Tracking setup guide</a
+      >
+      for specific steps.
     </p>
     <p>
       The Datadog Kotlin Multiplatform SDK supports Android 5.0+ (API level 21)
@@ -5505,7 +5142,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="n">ea041275</span><span class="p">-</span><span class="n">e314</span><span class="p">-</span><span class="m">4</span><span class="n">ce3</span><span class="p">-</span><span class="n">b6d5</span><span class="p">-</span><span class="m">6576187</span><span class="n">de141</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">7</span><span class="n">b7ff800</span><span class="p">-</span><span class="m">9</span><span class="n">de2</span><span class="p">-</span><span class="m">4333</span><span class="p">-</span><span class="m">8f</span><span class="n">b2</span><span class="p">-</span><span class="m">65f</span><span class="n">f94b5f96d</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5757,15 +5394,17 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="6372"
+    data-if="3160"
   >
     <p>
       This page describes how to instrument your applications for
       <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> with the
       Roku SDK. RUM includes Error Tracking by default, but if you have
       purchased Error Tracking as a standalone product, see the
-      <a href="/error_tracking/">Error Tracking setup guide</a> for specific
-      steps.
+      <a href="/error_tracking/frontend/mobile/roku/"
+        >Error Tracking setup guide</a
+      >
+      for specific steps.
     </p>
     <p>
       The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and
@@ -6014,15 +5653,17 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="6373"
+    data-if="3161"
   >
     <p>
       This page describes how to instrument your applications for
       <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> with the
       Unity SDK. RUM includes Error Tracking by default, but if you have
       purchased Error Tracking as a standalone product, see the
-      <a href="/error_tracking/">Error Tracking setup guide</a> for specific
-      steps.
+      <a href="/error_tracking/frontend/mobile/unity/"
+        >Error Tracking setup guide</a
+      >
+      for specific steps.
     </p>
     <div class="alert alert-info">
       <p>
@@ -6583,7 +6224,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"6366":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"6366"},"6367":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"6367"},"6368":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"6368"},"6369":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"6369"},"6370":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"6370"},"6371":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"6371"},"6372":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"6372"},"6373":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"6373"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"3154":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"3154"},"3155":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"3155"},"3156":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"3156"},"3157":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"3157"},"3158":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"3158"},"3159":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"3159"},"3160":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"3160"},"3161":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"3161"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 

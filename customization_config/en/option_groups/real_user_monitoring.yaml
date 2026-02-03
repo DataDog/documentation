@@ -35,3 +35,8 @@ rum_browser_sdk_version_for_proxying_options:
   default: true
 - id: gte_4_34_0
 - id: lt_4_34_0
+
+rum_react_native_framework_options:
+  - id: react_native
+    default: true
+  - id: expo

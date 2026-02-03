@@ -13,7 +13,7 @@ This page describes how to instrument your applications for [Real User Monitorin
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 
-To ensure the safety of your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][6].
+To secure your data, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][6].
 
 ### Step 2 - Instrument your application
 
@@ -45,9 +45,9 @@ You can replace `12.0` with any minimum version of iOS you want to support that 
 
 #### Android
 
-For Android, your `minSdkVersion` version must be >= 23, and your `compileSdkVersion` must be >= 35. Clients using Flutter after 3.27 will usually have these variables set to Flutter constants (`flutter.minSdkVersion` and `flutter.compileSdkVersion`), and they do not have to be manually changed.
+For Android, your `minSdkVersion` version must be >= 23, and your `compileSdkVersion` must be >= 35. Clients using Flutter after 3.27 usually have these variables set to Flutter constants (`flutter.minSdkVersion` and `flutter.compileSdkVersion`), and they do not have to be manually changed.
 
-If you are using Kotlin, it should be a version >= 2.1.0. Flutter versions above 3.27 will emit a waring stating that older versions of Kotlin will not be supported, and will provide instructions for updating.
+If you are using Kotlin, it should be a version >= 2.1.0. Flutter versions above 3.27 emit a warning stating that older versions of Kotlin are not supported, and provide instructions for updating.
 
 These constraints are usually held in your `android/app/build.gradle` file, or in your `android/gradle.properties` file.
 
@@ -90,7 +90,7 @@ final configuration = DatadogConfiguration(
 
 For more information on available configuration options, see the [DatadogConfiguration object documentation][7].
 
-To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog [Flutter Plugin][8].
+To secure data, you must use a client token. You cannot use Datadog API keys to configure the Datadog [Flutter Plugin][8].
 
 * If you are using RUM, set up a **Client Token** and **Application ID**.
 * If you are only using Logs, initialize the library with a client token.
@@ -214,7 +214,7 @@ MaterialApp.router(
 
 For examples that use routers other than `go_router`, see [Automatically track views](#automatically-track-views).
 
-### Renaming Views
+### Renaming views
 
 For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][14] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
 
@@ -294,7 +294,7 @@ This means that even if users open your application while offline, no data is lo
 **Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter SDK does not use too much disk space.
 
 [1]: /real_user_monitoring/
-[2]: /error_tracking/
+[2]: /error_tracking/frontend/mobile/flutter/
 [3]: https://app.datadoghq.com/rum/application/create
 [4]: /real_user_monitoring/application_monitoring/flutter/data_collected/
 [5]: https://app.datadoghq.com/error-tracking/settings/setup/client/

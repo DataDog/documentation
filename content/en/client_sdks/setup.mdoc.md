@@ -32,7 +32,22 @@ Follow the instructions below to install and configure the Datadog SDK for your 
 
 <!-- React Native -->
 {% if equals($sdk, "react_native") %}
-{% partial file="sdk/setup/react-native.mdoc.md" /%}
+
+The minimum supported version for the React Native SDK is React Native v0.65+. Compatibility with older versions is not guaranteed out-of-the-box.
+
+{% tabs %}
+{% tab label="React Native" %}
+
+{% partial file="sdk/setup/react-native-cli.mdoc.md" /%}
+
+{% /tab %}
+{% tab label="Expo" %}
+
+{% partial file="sdk/setup/react-native-expo.mdoc.md" /%}
+
+{% /tab %}
+{% /tabs %}
+
 {% /if %}
 
 <!-- Kotlin Multiplatform -->

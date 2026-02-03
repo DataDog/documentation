@@ -614,7 +614,7 @@ Your application appears as pending on the Applications page until Datadog start
 
 See [Advanced Configuration][11].
 
-[1]:/real_user_monitoring/
+[1]: /real_user_monitoring/
 [3]: /error_tracking/frontend/mobile/android
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [5]: https://github.com/DataDog/dd-sdk-android-gradle-plugin

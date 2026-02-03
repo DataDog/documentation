@@ -236,7 +236,7 @@ Each batch follows the intake specification. They are sent as soon as the networ
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 [1]: /real_user_monitoring/
-[2]: /error_tracking/
+[2]: /error_tracking/frontend/mobile/kotlin-multiplatform/
 [3]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
 [7]: /account_management/api-app-keys/#api-keys
 [8]: /account_management/api-app-keys/#client-tokens

@@ -182,7 +182,7 @@ Each batch follows the intake specification. They are sent as soon as the networ
 This means that even if users open your application while offline, no data is lost. To help ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 [1]: /real_user_monitoring/
-[2]: /error_tracking/
+[2]: /error_tracking/frontend/mobile/unity/
 [3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum
 [4]: https://github.com/googlesamples/unity-jar-resolver
 [5]: https://openupm.com/packages/com.google.external-dependency-manager/

@@ -2,10 +2,6 @@
 title: iOS and tvOS Monitoring Setup
 beta: true
 description: "Collect RUM data from your iOS and tvOS applications."
-content_filters:
-  - trait_id: sdk
-    option_group_id: sdk_platform_options
-    label: "SDK"
 aliases:
   - /real_user_monitoring/ios
   - /real_user_monitoring/ios/getting_started

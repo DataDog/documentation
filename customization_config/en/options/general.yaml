@@ -328,6 +328,12 @@ options:
 - label: React Native
   id: react_native
 
+- label: Expo
+  id: expo
+  
+- label: CodePush
+  id: codepush
+
 - label: RedHat
   id: redhat
 
