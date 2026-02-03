@@ -86,8 +86,8 @@ To set up the Enrichment Table processor:
   1. Enter a Datadog Application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data. Ensure you application key is:
       - Associated with a [Service Account][2] (not a personal Datadog user account).
       - Limited to the [`reference_tables_read`][3] scope.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the reference table. See the [Enrichment file example](#enrichment-file-example).
-  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table. See the [Enrichment file example](#enrichment-file-example).
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table. See the [Enrichment file example](#enrichment-file-example).
+  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the Reference Table. See the [Enrichment file example](#enrichment-file-example).
   1. Click **Save**.
 
 [1]: /account_management/api-app-keys/#application-keys
@@ -100,8 +100,8 @@ To set up the Enrichment Table processor:
   1. Enter the file path.
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment file example](#enrichment-file-example) for more information.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the reference table.
-  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table.
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table.
+  1. Enter the target attribute. The target attribute's value stores the information found in the Reference Table as a JSON object.
   1. Click **Save**.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
@@ -110,8 +110,8 @@ To set up the Enrichment Table processor:
 
   1. For GeoIP, enter the GeoIP path to your `.mmdb` file relative to the `<DD_OP_DATA_DIR>/config` directory.
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observabiity Pipelines to find in the reference table. See the [Enrichment file example](#enrichment-file-example) for more information.
-  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the reference table. See the [Enrichment file example](#enrichment-file-example) for more information.
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observabiity Pipelines to find in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
+  1. Enter the target attribute. The target attribute's value stores the information found in the Reference Table as a JSON object. See the [Enrichment file example](#enrichment-file-example) for more information.
   1. Click **Save**.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
@@ -122,7 +122,7 @@ To set up the Enrichment Table processor:
 
 For this example:
 
-- This is the example reference table that the enrichment processor uses:
+- This is the example Reference Table that the enrichment processor uses:
   | merch_id | merchant_name   | city      | state    |
   | -------- | --------------- | --------- | -------- |
   | 803      | Andy's Ottomans | Boise     | Idaho    |
@@ -133,8 +133,8 @@ For this example:
 
 If the enrichment processor receives a log with `"merchant_id":"536"`:
 
-- The processor looks for the value `536` in the reference table's `merch_id` column.
-- After it finds the value, it adds the entire row of information from the reference table to the `merchant_info` attribute as a JSON object:
+- The processor looks for the value `536` in the Reference Table's `merch_id` column.
+- After it finds the value, it adds the entire row of information from the Reference Table to the `merchant_info` attribute as a JSON object:
 
 ```
 merchant_info {
@@ -152,7 +152,7 @@ merchant_info {
 
 When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. The buffer has a maximum capacity of 100,000 logs. If that limit is reached, the buffer begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
-If an authentication error occurs while connecting to the reference table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely and causing the buffer to stop accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
+If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely and causing the buffer to stop accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
 
 If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
 
