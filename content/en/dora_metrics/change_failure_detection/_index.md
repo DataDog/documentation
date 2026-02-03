@@ -172,7 +172,7 @@ EOF
 
 The `remediation` field is optional, but required to calculate failed deployment recovery time.
 
-### Updating status through the UI
+### Update status through the UI
 
 To update a deployment's status from the Datadog UI:
 
