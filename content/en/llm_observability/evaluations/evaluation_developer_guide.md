@@ -136,6 +136,88 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Access per-evaluator results through `context.evaluation_results`, which maps evaluator names to lists of results.
 
+### LLMJudge
+
+The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI and Anthropic providers with structured output formats.
+
+**Supported output types:**
+
+| Output type | Description |
+|-------------|-------------|
+| `BooleanOutput` | Returns `True`/`False` with optional pass/fail assessment. |
+| `ScoreOutput` | Returns a numeric score within a defined range, with optional thresholds. |
+| `CategoricalOutput` | Returns one of a predefined set of categories, with optional pass values. |
+| `Dict[str, JSONType]` | Returns a custom, user-defined JSON structure for arbitrary structured output. |
+
+**Template variables:**
+
+Prompts support `{{field.path}}` syntax to inject context from the evaluated span:
+- `{{input_data}}`: The span's input data
+- `{{output_data}}`: The span's output data
+- `{{expected_output}}`: Expected output for comparison (if available)
+- `{{metadata.key}}`: Nested metadata fields
+
+**Example: Boolean evaluation**
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanOutput
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    user_prompt="Is this response factually accurate? Response: {{output_data}}",
+    structured_output=BooleanOutput(
+        description="Whether the response is factually accurate",
+        reasoning=True,
+        pass_when=True,
+    ),
+)
+{{< /code-block >}}
+
+**Example: Score-based evaluation with thresholds**
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, ScoreOutput
+
+judge = LLMJudge(
+    provider="anthropic",
+    model="claude-sonnet-4-20250514",
+    user_prompt="Rate the helpfulness of this response (1-10): {{output_data}}",
+    structured_output=ScoreOutput(
+        description="Helpfulness score",
+        min_score=1,
+        max_score=10,
+        reasoning=True,
+        min_threshold=7,  # Scores >= 7 pass
+    ),
+)
+{{< /code-block >}}
+
+**Example: Categorical evaluation**
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, CategoricalOutput
+
+judge = LLMJudge(
+    provider="openai",
+    model="gpt-4o",
+    user_prompt="Classify the sentiment: {{output_data}}",
+    structured_output=CategoricalOutput(
+        description="Sentiment classification",
+        categories=["positive", "neutral", "negative"],
+        reasoning=True,
+        pass_values=["positive", "neutral"],
+    ),
+)
+{{< /code-block >}}
+
+**Key points:**
+
+- Requires either a `provider` (`"openai"` or `"anthropic"`) or a custom `client`.
+- Set API keys using `client_options={"api_key": "..."}` or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`).
+- Use `reasoning=True` in structured outputs to include an explanation in results.
+- Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
+
 ### Built-in evaluators
 
 The SDK provides built-in evaluators for common evaluation patterns. These are class-based evaluators that you can use directly without writing custom logic.
