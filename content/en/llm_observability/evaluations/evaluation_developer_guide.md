@@ -136,6 +136,121 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Access per-evaluator results through `context.evaluation_results`, which maps evaluator names to lists of results.
 
+### Built-in evaluators
+
+The SDK provides built-in evaluators for common evaluation patterns. These are class-based evaluators that you can use directly without writing custom logic.
+
+#### StringCheck
+
+Performs string comparison operations between `output_data` and `expected_output`.
+
+| Operation | Description |
+|-----------|-------------|
+| `eq` | Exact match (default) |
+| `ne` | Not equals |
+| `contains` | Output contains expected (case-sensitive) |
+| `icontains` | Output contains expected (case-insensitive) |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import StringCheck
+
+# Exact match (default)
+evaluator = StringCheck(operation="eq", case_sensitive=True)
+
+# Case-insensitive contains
+evaluator = StringCheck(operation="icontains", strip_whitespace=True)
+
+# Extract field from dict output before comparison
+evaluator = StringCheck(
+    operation="eq",
+    output_extractor=lambda x: x.get("message", "") if isinstance(x, dict) else str(x),
+)
+{{< /code-block >}}
+
+#### RegexMatch
+
+Validates output against a regex pattern.
+
+| Match mode | Description |
+|------------|-------------|
+| `search` | Partial match anywhere in string (default) |
+| `match` | Match from start of string |
+| `fullmatch` | Match entire string |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import RegexMatch
+import re
+
+# Validate email format
+evaluator = RegexMatch(
+    pattern=r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+    match_mode="fullmatch"
+)
+
+# Case-insensitive pattern matching
+evaluator = RegexMatch(
+    pattern=r"success|completed",
+    flags=re.IGNORECASE
+)
+{{< /code-block >}}
+
+#### LengthValidator
+
+Validates output length constraints.
+
+| Count type | Description |
+|------------|-------------|
+| `characters` | Count characters (default) |
+| `words` | Count words |
+| `lines` | Count lines |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LengthValidator
+
+# Ensure response is between 50-200 characters
+evaluator = LengthValidator(min_length=50, max_length=200, count_type="characters")
+
+# Validate word count
+evaluator = LengthValidator(min_length=10, max_length=100, count_type="words")
+{{< /code-block >}}
+
+#### JSONValidator
+
+Validates that output is valid JSON, optionally checking for required keys.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import JSONValidator
+
+# Validate JSON syntax
+evaluator = JSONValidator()
+
+# Validate required keys exist
+evaluator = JSONValidator(required_keys=["name", "status", "data"])
+{{< /code-block >}}
+
+#### SemanticSimilarity
+
+Measures semantic similarity between `output_data` and `expected_output` using embeddings. Returns a similarity score between 0.0 and 1.0.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import SemanticSimilarity
+from openai import OpenAI
+
+client = OpenAI()
+
+def get_embedding(text):
+    response = client.embeddings.create(
+        input=text,
+        model="text-embedding-3-small"
+    )
+    return response.data[0].embedding
+
+evaluator = SemanticSimilarity(
+    embedding_fn=get_embedding,
+    threshold=0.8  # Minimum similarity score to pass
+)
+{{< /code-block >}}
+
 ### Function-based evaluators
 
 For straightforward evaluation logic, define a function instead of a class. Function-based evaluators receive the input, output, and expected output directly as arguments.
