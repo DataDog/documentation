@@ -268,7 +268,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 [15]: /security/application_security/exploit-prevention/
 [16]: /tracing/trace_collection/library_config/go/#traces
 [17]: https://github.com/DataDog/dd-trace-go/blob/main/orchestrion/all/orchestrion.tool.go
-[18]: /tracing/troubleshooting/go_compile_time/dockerfile/
+[18]: /tracing/guide/orchestrion_dockerfile/
 
 {{% /tab %}}
 

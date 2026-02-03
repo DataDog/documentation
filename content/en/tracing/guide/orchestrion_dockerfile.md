@@ -1,11 +1,10 @@
 ---
-title: Building Your Go Application With Orchestrion
-description: Learn how to create a Dockerfile for Go applications with APM compile-time instrumentation using Orchestrion.
+title: Building your Go application with Orchestrion
 further_reading:
 - link: "/tracing/trace_collection/library_config/go/"
   tag: "Documentation"
   text: "Tracing Go Applications"
-- link: "/tracing/trace_collection/library_config/go/"
+- link: "https://docs.datadoghq.com/tracing/trace_collection/library_config/go/"
   tag: "Documentation"
   text: "Configuring the Go Tracing Library"
 - link: "/tracing/troubleshooting/go_compile_time/"
