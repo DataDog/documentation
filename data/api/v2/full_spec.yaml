@@ -53955,6 +53955,310 @@ components:
       required:
       - data
       type: object
+    SecurityMonitoringSignalInvestigationFeedbackMetric:
+      description: A feedback metric containing user response.
+      properties:
+        placeholder:
+          description: Placeholder text for the metric.
+          example: Enter your feedback here
+          type: string
+        prompt:
+          description: The question or prompt.
+          example: How helpful was this investigation?
+          type: string
+        response:
+          description: The user's response.
+          example: Very helpful
+          type: string
+        type:
+          description: The type of metric.
+          example: sentiment
+          type: string
+      required:
+      - type
+      - prompt
+      - response
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackRequest:
+      description: Request body for submitting investigation feedback.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackRequestData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackRequestAttributes:
+      description: Attributes for investigation feedback.
+      properties:
+        feedback:
+          description: The feedback text.
+          example: positive
+          type: string
+        feedback_content:
+          description: Structured feedback content.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackSection'
+          type: array
+        incomplete:
+          description: Whether the feedback is incomplete.
+          example: false
+          type: boolean
+        rating:
+          description: The rating value.
+          example: positive
+          type: string
+        signal_id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          description: The type of feedback.
+          example: metrics
+          type: string
+      required:
+      - signal_id
+      - feedback
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackRequestData:
+      description: Data for submitting investigation feedback.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackResponse:
+      description: Response containing investigation feedback.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackResponseData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackResponseAttributes:
+      description: Attributes of investigation feedback.
+      properties:
+        feedback:
+          description: The feedback text.
+          example: positive
+          type: string
+        feedback_content:
+          description: Structured feedback content.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackSection'
+          type: array
+        investigation_id:
+          description: The unique ID of the investigation.
+          example: 550e8400-e29b-41d4-a716-446655440001
+          type: string
+        rating:
+          description: The rating value.
+          example: positive
+          type: string
+        signal_id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+      required:
+      - feedback
+      - signal_id
+      - investigation_id
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackResponseData:
+      description: Data containing investigation feedback.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackResponseAttributes'
+        id:
+          description: The unique ID of the investigation.
+          example: 550e8400-e29b-41d4-a716-446655440001
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackSection:
+      description: A feedback section containing metrics.
+      properties:
+        id:
+          description: The section identifier.
+          example: section-1
+          type: string
+        metrics:
+          description: Array of feedback metrics.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackMetric'
+          type: array
+        title:
+          description: The section title.
+          example: Investigation Quality
+          type: string
+      required:
+      - id
+      - title
+      - metrics
+      type: object
+    SecurityMonitoringSignalInvestigationFeedbackType:
+      description: The type of feedback.
+      enum:
+      - investigation_feedback
+      example: investigation_feedback
+      type: string
+      x-enum-varnames:
+      - INVESTIGATION_FEEDBACK
+    SecurityMonitoringSignalInvestigationRequest:
+      description: Request body for creating a security signal investigation.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationRequestData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringSignalInvestigationRequestAttributes:
+      description: Attributes for creating a signal investigation.
+      properties:
+        deployment:
+          description: Optional deployment override for the investigation.
+          example: live
+          type: string
+        signal_id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+      required:
+      - signal_id
+      type: object
+    SecurityMonitoringSignalInvestigationRequestData:
+      description: Data for creating a signal investigation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringSignalInvestigationResponse:
+      description: Response containing investigation details for a security signal.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationResponseData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringSignalInvestigationResponseAttributes:
+      description: Attributes of a signal investigation response.
+      properties:
+        investigation_id:
+          description: The unique ID of the investigation.
+          example: 550e8400-e29b-41d4-a716-446655440001
+          type: string
+        rule_id:
+          description: The ID of the rule that triggered the signal.
+          example: def-000-an8
+          type: string
+        signal_id:
+          description: The unique ID of the security signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        state:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationState'
+        step:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationStep'
+      required:
+      - signal_id
+      - rule_id
+      - investigation_id
+      type: object
+    SecurityMonitoringSignalInvestigationResponseData:
+      description: Data containing the investigation details.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationResponseAttributes'
+        id:
+          description: The unique ID of the investigation.
+          example: 550e8400-e29b-41d4-a716-446655440001
+          type: string
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringSignalInvestigationState:
+      description: The state of the investigation.
+      enum:
+      - investigating
+      - completed
+      example: completed
+      type: string
+      x-enum-varnames:
+      - INVESTIGATING
+      - COMPLETED
+    SecurityMonitoringSignalInvestigationStep:
+      description: Information about an investigation step.
+      properties:
+        stepOutputs:
+          description: Array of step outputs.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationStepOutput'
+          type: array
+      required:
+      - stepOutputs
+      type: object
+    SecurityMonitoringSignalInvestigationStepOutput:
+      description: Output from an investigation step.
+      properties:
+        currentStepAnalysisOneliner:
+          description: A one-line summary of the step analysis.
+          example: This appears to be a potential security threat.
+          type: string
+        currentStepAnalysisSummary:
+          description: A detailed summary of the step analysis.
+          example: The analysis indicates unusual access patterns that warrant further
+            investigation.
+          type: string
+        name:
+          description: The name of the investigation step.
+          example: startStep
+          type: string
+        verdict:
+          $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationStepOutputVerdict'
+      required:
+      - name
+      - currentStepAnalysisSummary
+      - verdict
+      type: object
+    SecurityMonitoringSignalInvestigationStepOutputVerdict:
+      description: The verdict from the investigation step.
+      enum:
+      - unspecified
+      - benign
+      - suspicious
+      - inconclusive
+      example: benign
+      type: string
+      x-enum-varnames:
+      - UNSPECIFIED
+      - BENIGN
+      - SUSPICIOUS
+      - INCONCLUSIVE
+    SecurityMonitoringSignalInvestigationType:
+      description: The type of investigation signal.
+      enum:
+      - investigation_signal
+      example: investigation_signal
+      type: string
+      x-enum-varnames:
+      - INVESTIGATION_SIGNAL
     SecurityMonitoringSignalListRequest:
       description: The request for a security signal list.
       properties:
@@ -95162,6 +95466,160 @@ paths:
         operator: OR
         permissions:
         - security_monitoring_signals_read
+  /api/v2/security_monitoring/signals/investigation:
+    post:
+      description: Create an investigation for a security signal using AI-powered
+        analysis.
+      operationId: CreateSignalInvestigation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Create a security signal investigation
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/signals/investigation/feedback:
+    put:
+      description: Provide feedback on a security signal investigation.
+      operationId: UpdateInvestigationFeedback
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Update investigation feedback
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/security_monitoring/signals/investigation/feedback/{signal_id}:
+    get:
+      description: Retrieve feedback for a security signal investigation.
+      operationId: GetInvestigationFeedback
+      parameters:
+      - $ref: '#/components/parameters/SignalID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSignalInvestigationFeedbackResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_signals_read
+      summary: Get investigation feedback
+      tags:
+      - Security Monitoring
+      x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_read
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security_monitoring/signals/search:
     post:
       description: 'Returns security signals that match a search query.
