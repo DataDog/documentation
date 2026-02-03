@@ -14896,6 +14896,185 @@ components:
       type: string
       x-enum-varnames:
       - REFERENCE_TABLE
+    CreateTenancyConfigData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributes'
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataType'
+      required:
+      - type
+      - id
+      type: object
+    CreateTenancyConfigDataAttributes:
+      properties:
+        auth_credentials:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesAuthCredentials'
+        config_version:
+          format: int64
+          nullable: true
+          type: integer
+        cost_collection_enabled:
+          type: boolean
+        dd_compartment_id:
+          type: string
+        dd_stack_id:
+          type: string
+        home_region:
+          example: ''
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesMetricsConfig'
+        regions_config:
+          $ref: '#/components/schemas/CreateTenancyConfigDataAttributesRegionsConfig'
+        resource_collection_enabled:
+          type: boolean
+        user_ocid:
+          example: ''
+          type: string
+      required:
+      - auth_credentials
+      - home_region
+      - user_ocid
+      type: object
+    CreateTenancyConfigDataAttributesAuthCredentials:
+      properties:
+        fingerprint:
+          type: string
+        private_key:
+          example: ''
+          type: string
+      required:
+      - private_key
+      type: object
+    CreateTenancyConfigDataAttributesLogsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        enabled_services:
+          items:
+            type: string
+          type: array
+      type: object
+    CreateTenancyConfigDataAttributesMetricsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        excluded_services:
+          items:
+            type: string
+          type: array
+      type: object
+    CreateTenancyConfigDataAttributesRegionsConfig:
+      properties:
+        available:
+          items:
+            type: string
+          type: array
+        disabled:
+          items:
+            type: string
+          type: array
+        enabled:
+          items:
+            type: string
+          type: array
+      type: object
+    CreateTenancyConfigRequest:
+      example:
+        data:
+          attributes:
+            auth_credentials:
+              fingerprint: ''
+              private_key: '----BEGIN PRIVATE KEY-----
+
+                MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCdvSMmlfLyeD4M
+
+                QsA3WlrWBqKdWa5eVV3/uODyqT3wWMEMIJHcG3/quNs8nh9xrK1/JkQT2qoKEHqR
+
+                C5k59jN6Vp8em8ARJthMgam9K37ELt+IQ/G8ySTSuqZG8T4cHp/cs3fAclNqttOl
+
+                YnGr4RbVAgMBAAECggEAGZNLGbyCUbIRTW6Kh4d8ZVC+eZtJMqGmGJ3KfVaW8Pjn
+
+                QGWfSuJCEe2o2Y8G3phlidFauICnZ44enXA17Rhi+I/whnr7FIyQk2bR7rv+1Uhc
+
+                mOJygWX5eFFMsledgVAdIAl9Luk2nykx7Un3g6rtbl/Vs+5k4m7ITLFMpCHzsJLU
+
+                nm8kBzDOqY2JUkMd08nL88KL6QywWtal05UESzQpNFXd0e5kxYfexeMCsLsWP0mc
+
+                quMLRbn7NuBjCbe9VU2kmIvcfDDaWjurT7d5m1OXx1cc8p6P4PFZTVyCjdhiWOr3
+
+                LQXZ4/vdZNR3zgEHypRoM6D9Yq99LWUOUEMrdiSLQQKBgQDQkh7C1OtAXnpy7F6R
+
+                W+/I3zBHici2p7A57UT7VECQ1IVGg37/uus83DkuOtdZ33JmHLAVrwLFJvUlbyjx
+
+                l6dc/1ms40L5HFdLgaVtd4k0rSPFeOSDr6evz0lX4yBuzlP0fEh+o3XHW7mwe2G+
+
+                rWCULF/Uqza66fjbCSKMNgLIXQKBgQDBm9nZg/s4S0THWCFNWcB1tXBG0p/sH5eY
+
+                PC1H/VmTEINIixStrS4ufczf31X8rcoSjSbO7+vZDTTATdk7OLn1I2uGFVYl8M59
+
+                86BYT2Hi7cwp7YVzOc/cJigVeBAqSRW/iYYyWBEUTiW1gbkV0sRWwhPp67m+c0sP
+
+                XpY/iEZA2QKBgB1w8tynt4l/jKNaUEMOijt9ndALWATIiOy0XG9pxi9rgGCiwTOS
+
+                DBCsOXoYHjv2eayGUijNaoOv6xzcoxfvQ1WySdNIxTRq1ru20kYwgHKqGgmO9hrM
+
+                mcwMY5r/WZ2qjFlPjeAqbL62aPDLidGjoaVo2iIoBPK/gjxQ/5f0MS4N/YQ0zWoYBueSQ0DGs
+
+                -----END PRIVATE KEY-----'
+            config_version: null
+            cost_collection_enabled: true
+            dd_compartment_id: ocid.compartment.test
+            dd_stack_id: ocid.stack.test
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              enabled_services:
+              - service_1
+              - service_1
+            metrics_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              excluded_services:
+              - service_1
+              - service_1
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateTenancyConfigData'
+      required:
+      - data
+      type: object
     CreateUploadRequest:
       description: Request to create an upload for a file to be ingested into a reference
         table.
@@ -62986,6 +63165,219 @@ components:
           description: Offset type.
           type: string
       type: object
+    TenancyConfig:
+      example:
+        data:
+          attributes:
+            config_version: 2
+            cost_collection_enabled: true
+            dd_compartment_id: ocid.compartment.test
+            dd_stack_id: ocid.stack.test
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              enabled_services:
+              - compute
+            metrics_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              excluded_services:
+              - compute
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          $ref: '#/components/schemas/TenancyConfigData'
+      type: object
+    TenancyConfigData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TenancyConfigDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataType'
+      required:
+      - type
+      type: object
+    TenancyConfigDataAttributes:
+      properties:
+        billing_plan_id:
+          format: int32
+          maximum: 2147483647
+          type: integer
+        config_version:
+          format: int64
+          type: integer
+        cost_collection_enabled:
+          type: boolean
+        dd_compartment_id:
+          type: string
+        dd_stack_id:
+          type: string
+        home_region:
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/TenancyConfigDataAttributesLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/TenancyConfigDataAttributesMetricsConfig'
+        parent_tenancy_name:
+          type: string
+        regions_config:
+          $ref: '#/components/schemas/TenancyConfigDataAttributesRegionsConfig'
+        resource_collection_enabled:
+          type: boolean
+        tenancy_name:
+          type: string
+        user_ocid:
+          type: string
+      type: object
+    TenancyConfigDataAttributesLogsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        enabled_services:
+          items:
+            type: string
+          type: array
+      type: object
+    TenancyConfigDataAttributesMetricsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        excluded_services:
+          items:
+            type: string
+          type: array
+      type: object
+    TenancyConfigDataAttributesRegionsConfig:
+      properties:
+        available:
+          items:
+            type: string
+          type: array
+        disabled:
+          items:
+            type: string
+          type: array
+        enabled:
+          items:
+            type: string
+          type: array
+      type: object
+    TenancyConfigList:
+      example:
+        data:
+        - attributes:
+            config_version: 2
+            cost_collection_enabled: true
+            dd_compartment_id: ocid.compartment.test
+            dd_stack_id: ocid.stack.test
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              enabled_services:
+              - compute
+            metrics_config:
+              compartment_tag_filters:
+              - compartment.test
+              enabled: true
+              excluded_services:
+              - compute
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TenancyConfigData'
+          type: array
+      required:
+      - data
+      type: object
+    TenancyProductsData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TenancyProductsDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/TenancyProductsDataType'
+      required:
+      - type
+      type: object
+    TenancyProductsDataAttributes:
+      properties:
+        products:
+          items:
+            $ref: '#/components/schemas/TenancyProductsDataAttributesProductsItems'
+          type: array
+      type: object
+    TenancyProductsDataAttributesProductsItems:
+      properties:
+        enabled:
+          type: boolean
+        product_key:
+          type: string
+      type: object
+    TenancyProductsDataType:
+      default: oci_tenancy_product
+      description: OCI tenancy product resource type.
+      enum:
+      - oci_tenancy_product
+      example: oci_tenancy_product
+      type: string
+      x-enum-varnames:
+      - OCI_TENANCY_PRODUCT
+    TenancyProductsList:
+      example:
+        data:
+        - attributes:
+            products:
+            - enabled: true
+              product_key: CLOUD_SECURITY_POSTURE_MANAGEMENT
+          id: ocid.tenancy.test
+          type: oci_tenancy_product
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TenancyProductsData'
+          type: array
+      required:
+      - data
+      type: object
     ThreatHuntingJobDataType:
       description: Type of payload.
       enum:
@@ -64672,6 +65064,177 @@ components:
       type: string
       x-enum-varnames:
       - UPDATE_RULESET
+    UpdateTenancyConfigData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributes'
+        id:
+          example: ''
+          type: string
+        type:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataType'
+      required:
+      - type
+      - id
+      type: object
+    UpdateTenancyConfigDataAttributes:
+      properties:
+        auth_credentials:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesAuthCredentials'
+        cost_collection_enabled:
+          type: boolean
+        home_region:
+          type: string
+        logs_config:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesLogsConfig'
+        metrics_config:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesMetricsConfig'
+        regions_config:
+          $ref: '#/components/schemas/UpdateTenancyConfigDataAttributesRegionsConfig'
+        resource_collection_enabled:
+          type: boolean
+        user_ocid:
+          type: string
+      type: object
+    UpdateTenancyConfigDataAttributesAuthCredentials:
+      properties:
+        fingerprint:
+          type: string
+        private_key:
+          example: ''
+          type: string
+      required:
+      - private_key
+      type: object
+    UpdateTenancyConfigDataAttributesLogsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        enabled_services:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateTenancyConfigDataAttributesMetricsConfig:
+      properties:
+        compartment_tag_filters:
+          items:
+            type: string
+          type: array
+        enabled:
+          type: boolean
+        excluded_services:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateTenancyConfigDataAttributesRegionsConfig:
+      properties:
+        available:
+          items:
+            type: string
+          type: array
+        disabled:
+          items:
+            type: string
+          type: array
+        enabled:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateTenancyConfigDataType:
+      default: oci_tenancy
+      description: OCI tenancy resource type.
+      enum:
+      - oci_tenancy
+      example: oci_tenancy
+      type: string
+      x-enum-varnames:
+      - OCI_TENANCY
+    UpdateTenancyConfigRequest:
+      example:
+        data:
+          attributes:
+            auth_credentials:
+              fingerprint: ''
+              private_key: '----BEGIN PRIVATE KEY-----
+
+                MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCdvSMmlfLyeD4M
+
+                QsA3WlrWBqKdWa5eVV3/uODyqT3wWMEMIJHcG3/quNs8nh9xrK1/JkQT2qoKEHqR
+
+                C5k59jN6Vp8em8ARJthMgam9K37ELt+IQ/G8ySTSuqZG8T4cHp/cs3fAclNqttOl
+
+                YnGr4RbVAgMBAAECggEAGZNLGbyCUbIRTW6Kh4d8ZVC+eZtJMqGmGJ3KfVaW8Pjn
+
+                QGWfSuJCEe2o2Y8G3phlidFauICnZ44enXA17Rhi+I/whnr7FIyQk2bR7rv+1Uhc
+
+                mOJygWX5eFFMsledgVAdIAl9Luk2nykx7Un3g6rtbl/Vs+5k4m7ITLFMpCHzsJLU
+
+                nm8kBzDOqY2JUkMd08nL88KL6QywWtal05UESzQpNFXd0e5kxYfexeMCsLsWP0mc
+
+                quMLRbn7NuBjCbe9VU2kmIvcfDDaWjurT7d5m1OXx1cc8p6P4PFZTVyCjdhiWOr3
+
+                LQXZ4/vdZNR3zgEHypRoM6D9Yq99LWUOUEMrdiSLQQKBgQDQkh7C1OtAXnpy7F6R
+
+                W+/I3zBHici2p7A57UT7VECQ1IVGg37/uus83DkuOtdZ33JmHLAVrwLFJvUlbyjx
+
+                l6dc/1ms40L5HFdLgaVtd4k0rSPFeOSDr6evz0lX4yBuzlP0fEh+o3XHW7mwe2G+
+
+                rWCULF/Uqza66fjbCSKMNgLIXQKBgQDBm9nZg/s4S0THWCFNWcB1tXBG0p/sH5eY
+
+                PC1H/VmTEINIixStrS4ufczf31X8rcoSjSbO7+vZDTTATdk7OLn1I2uGFVYl8M59
+
+                86BYT2Hi7cwp7YVzOc/cJigVeBAqSRW/iYYyWBEUTiW1gbkV0sRWwhPp67m+c0sP
+
+                XpY/iEZA2QKBgB1w8tynt4l/jKNaUEMOijt9ndALWATIiOy0XG9pxi9rgGCiwTOS
+
+                DBCsOXoYHjv2eayGUijNaoOv6xzcoxfvQ1WySdNIxTRq1ru20kYwgHKqGgmO9hrM
+
+                mcwMY5r/WZ2qjFlPjeAqbL62aPDLidGjoaVo2iIoBPK/gjxQ/5f0MS4N/YQ0zWoYBueSQ0DGs
+
+                -----END PRIVATE KEY-----'
+            cost_collection_enabled: true
+            home_region: us-ashburn-1
+            logs_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              enabled_services:
+              - service_1
+              - service_1
+            metrics_config:
+              compartment_tag_filters:
+              - datadog:true
+              - env:prod
+              enabled: true
+              excluded_services:
+              - service_1
+              - service_1
+            regions_config:
+              available:
+              - us-ashburn-1
+              - us-phoenix-1
+              disabled:
+              - us-phoenix-1
+              enabled:
+              - us-ashburn-1
+            resource_collection_enabled: true
+            user_ocid: ocid.user.test
+          id: ocid.tenancy.test
+          type: oci_tenancy
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateTenancyConfigData'
+      required:
+      - data
+      type: object
     UpdateWorkflowRequest:
       description: A request object for updating an existing workflow.
       example:
@@ -79904,6 +80467,176 @@ paths:
       - Microsoft Teams Integration
       x-codegen-request-body-name: body
       x-menu-order: 1
+  /api/v2/integration/oci/products:
+    get:
+      description: Lists the products for a given tenancy. Returns the enabled/disabled
+        status of Datadog products (such as Cloud Security Posture Management) for
+        specific OCI tenancies.
+      operationId: ListTenancyProducts
+      parameters:
+      - description: Comma-separated list of product keys to filter by.
+        in: query
+        name: productKeys
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyProductsList'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List tenancy products
+      tags:
+      - OCI Integration
+      x-menu-order: 1
+  /api/v2/integration/oci/tenancies:
+    get:
+      description: Get a list of all configured OCI tenancy integrations. Returns
+        basic information about each tenancy including authentication credentials,
+        region settings, and collection preferences for metrics, logs, and resources.
+      operationId: GetTenancyConfigs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfigList'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get tenancy configs
+      tags:
+      - OCI Integration
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+    post:
+      description: 'Create a new tenancy config to establish monitoring and data collection
+        from your OCI environment. Requires OCI authentication credentials and tenancy
+        details. Warning: Datadog recommends interacting with this endpoint only through
+        the Datadog web UI to ensure all necessary OCI resources have been created
+        and configured properly.'
+      operationId: CreateTenancyConfig
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenancyConfigRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfig'
+          description: Created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Create tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint may be subject to changes.'
+  /api/v2/integration/oci/tenancies/{tenancy_ocid}:
+    delete:
+      description: Delete an existing tenancy config. This will stop all data collection
+        from the specified OCI tenancy and remove the stored configuration. This operation
+        cannot be undone.
+      operationId: DeleteTenancyConfig
+      parameters:
+      - description: The OCID of the tenancy config to delete.
+        in: path
+        name: tenancy_ocid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 4
+    get:
+      description: Get a single tenancy config object by its OCID. Returns detailed
+        configuration including authentication credentials, enabled services, region
+        settings, and collection preferences.
+      operationId: GetTenancyConfig
+      parameters:
+      - description: The OCID of the tenancy config to retrieve.
+        in: path
+        name: tenancy_ocid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfig'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 5
+    patch:
+      description: 'Update an existing tenancy config. You can modify authentication
+        credentials, enable/disable collection types, update service filters, and
+        change region settings. Warning: We recommend using the Datadog web UI to
+        avoid unintended update effects.'
+      operationId: UpdateTenancyConfig
+      parameters:
+      - description: The OCID of the tenancy config to update.
+        in: path
+        name: tenancy_ocid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenancyConfigRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenancyConfig'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update tenancy config
+      tags:
+      - OCI Integration
+      x-menu-order: 6
   /api/v2/integration/opsgenie/services:
     get:
       description: Get a list of all services from the Datadog Opsgenie integration.
@@ -95486,7 +96219,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
@@ -95631,7 +96364,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
@@ -103119,6 +103852,8 @@ tags:
     and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
     for more information.
   name: Network Device Monitoring
+- description: Auto-generated tag OCI Integration
+  name: OCI Integration
 - description: Observability Pipelines allows you to collect and process logs within
     your own infrastructure, and then route them to downstream integrations.
   externalDocs:

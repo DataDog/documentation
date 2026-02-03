@@ -9834,6 +9834,84 @@ menu:
           - ListDevices
         unstable: []
         order: 1
+    - name: OCI Integration
+      url: /api/latest/oci-integration/
+      identifier: oci-integration
+      generated: true
+    - name: Update tenancy config
+      url: '#update-tenancy-config'
+      identifier: oci-integration-update-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTenancyConfig
+        unstable: []
+        order: 6
+    - name: Get tenancy config
+      url: '#get-tenancy-config'
+      identifier: oci-integration-get-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTenancyConfig
+        unstable: []
+        order: 5
+    - name: Delete tenancy config
+      url: '#delete-tenancy-config'
+      identifier: oci-integration-delete-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTenancyConfig
+        unstable: []
+        order: 4
+    - name: Create tenancy config
+      url: '#create-tenancy-config'
+      identifier: oci-integration-create-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTenancyConfig
+        unstable:
+          - v2
+        order: 3
+    - name: Get tenancy configs
+      url: '#get-tenancy-configs'
+      identifier: oci-integration-get-tenancy-configs
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTenancyConfigs
+        unstable:
+          - v2
+        order: 2
+    - name: List tenancy products
+      url: '#list-tenancy-products'
+      identifier: oci-integration-list-tenancy-products
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTenancyProducts
+        unstable: []
+        order: 1
     - name: Observability Pipelines
       url: /api/latest/observability-pipelines/
       identifier: observability-pipelines
