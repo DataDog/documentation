@@ -12,10 +12,6 @@ further_reading:
   text: "Android and Android TV Monitoring"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your Android or Android TV application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
@@ -39,15 +35,17 @@ dependencies {
 
 Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This ensures all feature flag evaluations and telemetry are captured correctly.
 
-{{< code-block lang="kotlin" >}}
+```kotlin
 val configuration = Configuration.Builder(
     clientToken = "<CLIENT_TOKEN>",
     env = "<ENV_NAME>",
     variant = "<APP_VARIANT_NAME>"
-).build()
+)
+    .useSite(DatadogSite.{{< region-param key="jenkins_site_name" code="true" >}})
+    .build()
 
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
-{{< /code-block >}}
+```
 
 ## Enable flags
 
@@ -82,7 +80,7 @@ FlagsClient.Builder("checkout").build()
 val flagsClient = FlagsClient.get("checkout")
 {{< /code-block >}}
 
-<div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>  
+<div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>
 
 ## Set the evaluation context
 
@@ -215,8 +213,8 @@ Flags.enable(config)
 
   The exact behavior of Graceful Mode depends on your build configuration:
 
-  * **Release builds**: The SDK always enforces Graceful Mode: any misuse is only logged internally if `Datadog.setVerbosity()` is configured.  
-  * **Debug builds** with `gracefulModeEnabled = true` (default): The SDK always logs warnings to the console.  
+  * **Release builds**: The SDK always enforces Graceful Mode: any misuse is only logged internally if `Datadog.setVerbosity()` is configured.
+  * **Debug builds** with `gracefulModeEnabled = true` (default): The SDK always logs warnings to the console.
   * **Debug builds** with `gracefulModeEnabled = false`: The SDK raises `IllegalStateException` for incorrect API usage, enforcing a fail-fast approach that helps detect configuration mistakes early.
 
   You can adjust `gracefulModeEnabled()` depending on your development or QA phase.
