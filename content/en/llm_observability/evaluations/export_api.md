@@ -356,14 +356,14 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
-| eval_metric_type        | string                        | Represents the type of evaluation metric. One of categorical, score, boolean, or JSON. |
-| value        | any                       | The result of the evaluation. Can be a string, float, boolean, or JSON value. |
-| reasoning        | string                       | Reasoning for the evaluation outcome. |
-| assessment        | string                       | Whether the evaluation passed or failed. Either pass or fail. |
-| status        | string                       | The status of the evaluation run. One of OK, WARN, or ERROR. |
+| eval_metric_type        | string                        | The type of evaluation metric. Valid values are `categorical`, `score`, `boolean`, and `json`.  |
+| value        | any                       | The evaluation result. Can be a string, float, Boolean, or JSON value. |
+| reasoning        | string                       | Reasoning for the evaluation result. |
+| assessment        | string                       | Whether the evaluation passed or failed. Valid values are `pass` and `fail`. |
+| status        | string                       | The status of the evaluation run. Valid values are `OK`, `WARN`, and `ERROR`. |
 | error        | [EvalMetricError](#evalmetricerror)                       | Information about the error that occurred when running the evaluation (if any). |
 | tags        | [string]                       | Key-Value pairs associated with the evaluation metric. |
-| action        | string                       | A description of what action was taken on the user's side in response to the evaluation outcome (for user-submitted evaluations). |
+| action        | string                       | The action taken in response to the evaluation result for user-submitted evaluations. |
 | eval_metric_metadata        | Dict[key (string), any]                        | Arbitrary JSON data associated with the evaluation. |
 | llm_output        | string                       | The raw output from the LLM call used to determine the evaluation result. |
 
