@@ -26,10 +26,10 @@ Datadog Fleet Automation vous permet de gérer centralement et d'administrer à 
 ## Cas d'utilisation
 
 Avec la plateforme Fleet Automation, vous pouvez :
-- Affichez les dernières configurations de l'Agent et les modifications historiques pour vérifier les mises à jour de déploiement et garantir la cohérence des configurations.
-- Assurez-vous que l'ensemble de vos Agents utilise les dernières améliorations fonctionnelles en identifiant et en mettant à niveau les versions obsolètes de l'Agent.
-- Envoyez un flare depuis votre organisation, ce qui réduit le temps nécessaire pour déboguer les problèmes sur un Agent.
-- Aidez à faire tourner les clés d'API et assurez-vous que les anciennes clés puissent être désactivées sans impact en identifiant quels Agents, et combien d'Agents, utilisent une clé particulière.
+- Afficher les dernières configurations de l'Agent et les modifications historiques pour vérifier les mises à jour de déploiement et garantir la cohérence des configurations.
+- Vous assurer que l'ensemble de vos Agents utilise les dernières améliorations fonctionnelles en identifiant et en mettant à niveau les versions obsolètes de l'Agent.
+- Envoyer un flare depuis votre organisation, ce qui réduit le temps nécessaire pour déboguer les problèmes sur un Agent.
+- Aider à faire tourner les clés d'API et vous assurer que les anciennes clés puissent être désactivées sans impact en identifiant quels Agents, et combien d'Agents, utilisent une clé particulière.
 
 ## Configurer Fleet Automation
 

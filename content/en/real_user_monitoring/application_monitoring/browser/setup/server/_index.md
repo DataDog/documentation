@@ -39,7 +39,7 @@ Select a platform to start collecting RUM data on your application:
 
 ## Limitations
 
-Keep in mind the following limitations when using auto-instrumentation:
+Consider the following limitations when using auto-instrumentation:
 
 - This instrumentation method **does not support [advanced RUM configurations][1]**.
 - If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK **cannot be injected**. To ensure proper instrumentation:

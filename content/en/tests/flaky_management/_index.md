@@ -166,6 +166,8 @@ Bits AI Dev Agent can automatically diagnose and fix flaky tests that have been 
 
 To enable AI-powered flaky test fixes, enable Bits AI Dev Agent for Test Optimization by following the setup instructions in the [Bits AI Dev Agent documentation][16]. Bits AI Dev Agent automatically create fixes for flaky tests detected by Test Optimization.
 
+<div class="alert alert-info">A flaky test must have at least one failed execution that includes both <code>@error.message</code> and <code>@test.source.file</code> tags to be eligible for a fix. Generating a fix may take some time.</div>
+
 ## AI-powered flaky test categorization
 
 Flaky Tests Management uses AI to automatically assign a root cause category to each flaky test based on execution patterns and error signals. This helps you filter, triage, and prioritize flaky tests more effectively.
@@ -205,10 +207,10 @@ To use Flaky Tests Management features, you must use Datadog's native instrument
 
 | Language        | Quarantine & Disable          | Attempt to fix               |
 | --------------- | ----------------------------- | ---------------------------- |
-| [.NET][6]       | 3.13.0+                       | 3.17.0+                      |
+| [.NET][6]       | 3.13.0+                       | 3.23.0+                      |
 | [Go][7]         | 1.73.0+ (Orchestrion v1.3.0+) | 2.2.2+ (Orchestrion v1.6.0+) |
-| [Java][8]       | 1.48.0+                       | 1.50.0+                      |
-| [JavaScript][9] | 5.44.0+                       | 5.52.0+                      |
+| [Java][8]       | 1.47.0+                       | 1.52.0+                      |
+| [JavaScript][9] | 5.44.0+                       | 5.59.0+                      |
 | [Python][10]    | 3.3.0+                        | 3.8.0+                       |
 | [Ruby][11]      | 1.13.0+                       | 1.17.0+                      |
 | [Swift][12]     | 2.6.1+                        | 2.6.1+                       |

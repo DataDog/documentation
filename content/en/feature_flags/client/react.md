@@ -51,15 +51,16 @@ pnpm add @datadog/openfeature-browser @openfeature/react-sdk @openfeature/core
 
 Create a `DatadogProvider` instance and register it with OpenFeature. Do this as early as possible in your application, before rendering your React components.
 
-{{< code-block lang="javascript" >}}
+```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
-{{< /code-block >}}
+```
 
 ## Set the evaluation context
 
@@ -237,7 +238,7 @@ Flag details help you debug evaluation behavior and understand why a user receiv
 
 Here's a complete example showing how to set up and use Datadog Feature Flags in a React application:
 
-{{< code-block lang="jsx" >}}
+```jsx
 import { Suspense } from 'react';
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeatureProvider, OpenFeature, useBooleanFlagValue } from '@openfeature/react-sdk';
@@ -246,6 +247,7 @@ import { OpenFeatureProvider, OpenFeature, useBooleanFlagValue } from '@openfeat
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
 
@@ -279,7 +281,7 @@ function Page() {
     </div>
   );
 }
-{{< /code-block >}}
+```
 
 ## Update the evaluation context
 
