@@ -288,7 +288,6 @@ unsupported_sites:
   correlation: [gov] #Event management correlation
   cloudprem: [gov]
   data_jobs: [gov]
-  datadog_cloudcraft: [gov]
   datadog_disaster_recovery: [gov]
   ddot_collector: [gov]
   dora_metrics: [gov]

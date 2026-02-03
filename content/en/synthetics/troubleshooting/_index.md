@@ -163,6 +163,29 @@ IOS app features may not function properly during recording or execution due to 
 
 **Solution**: Use Ad Hoc or Development provisioning profiles when distributing your iOS app to minimize entitlement-related issues and improve compatibility.
 
+## Network Path tests
+
+### Datadog Agent not listed as an option in Locations & Agents
+
+If you do not see the Datadog Agent listed as a selectable option during test creation, verify that you meet all prerequisites and completed the setup steps. See [Agent configuration][16] for more information.
+
+### Scheduled tests from the Datadog Agent is not running at the expected schedule
+
+In large or high-volume environments, scheduled tests may not run at the expected intervals if the Datadog Agent does not have enough workers to handle concurrent executions. To optimize performance and maintain consistent scheduling, [increase the number of workers][17] to meet or exceed the total number of tests assigned to the Agent.
+
+### Missing test results executed from the Datadog Agent
+
+If you do not see test results in the Datadog UI, the Datadog Agent is not sending test results to the Synthetics intake (https://http-synthetics.datadoghq.com) that processes test results. Verify that outbound network traffic from the Datadog Agent to this intake is allowed.
+
+If the Datadog Agent is running behind a proxy, make sure the Synthetics forwarder is configured to send traffic through the proxy, for example:
+```
+synthetics: 
+  collector: 
+    enabled: true
+synthetics.forwarder.dd_url: http://my-proxy.com:<proxy-port>
+```
+Additionaly, ensure that the proxy itself is configured to allow outboud network traffic to the Synthetics intake.
+
 ## Private locations
 
 {{< tabs >}}
@@ -358,3 +381,5 @@ Additionally, Private Location versions `>v1.27` depend the `clone3` system call
 [12]: /synthetics/api_tests/http_tests/?tab=requestoptions#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/
 [14]: /synthetics/guide/step-duration
+[16]: /synthetics/network_path_tests/#agent-configuration
+[17]: /network_monitoring/network_path/setup/?tab=linux#increase-the-number-of-workers

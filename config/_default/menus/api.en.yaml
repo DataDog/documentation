@@ -3535,6 +3535,19 @@ menu:
       url: /api/latest/service-level-objectives/
       identifier: service-level-objectives
       generated: true
+    - name: Get SLO status
+      url: '#get-slo-status'
+      identifier: service-level-objectives-get-slo-status
+      parent: service-level-objectives
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSloStatus
+        unstable:
+          - v2
+        order: 105
     - name: Get SLO report status
       url: '#get-slo-report-status'
       identifier: service-level-objectives-get-slo-report-status
@@ -9835,8 +9848,7 @@ menu:
           - v2
         operationids:
           - UpdatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Get a specific pipeline
       url: '#get-a-specific-pipeline'
@@ -9848,8 +9860,7 @@ menu:
           - v2
         operationids:
           - GetPipeline
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Delete a pipeline
       url: '#delete-a-pipeline'
@@ -9861,8 +9872,7 @@ menu:
           - v2
         operationids:
           - DeletePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Validate an observability pipeline
       url: '#validate-an-observability-pipeline'
@@ -9874,8 +9884,7 @@ menu:
           - v2
         operationids:
           - ValidatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Create a new pipeline
       url: '#create-a-new-pipeline'
@@ -9887,8 +9896,7 @@ menu:
           - v2
         operationids:
           - CreatePipeline
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: List pipelines
       url: '#list-pipelines'
@@ -9900,8 +9908,7 @@ menu:
           - v2
         operationids:
           - ListPipelines
-        unstable:
-          - v2
+        unstable: []
         order: 0
     - name: Okta Integration
       url: /api/latest/okta-integration/
@@ -11110,6 +11117,238 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: Rum Replay Heatmaps
+      url: /api/latest/rum-replay-heatmaps/
+      identifier: rum-replay-heatmaps
+      generated: true
+    - name: Update replay heatmap snapshot
+      url: '#update-replay-heatmap-snapshot'
+      identifier: rum-replay-heatmaps-update-replay-heatmap-snapshot
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateReplayHeatmapSnapshot
+        unstable: []
+        order: 3
+    - name: Delete replay heatmap snapshot
+      url: '#delete-replay-heatmap-snapshot'
+      identifier: rum-replay-heatmaps-delete-replay-heatmap-snapshot
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteReplayHeatmapSnapshot
+        unstable: []
+        order: 4
+    - name: Create replay heatmap snapshot
+      url: '#create-replay-heatmap-snapshot'
+      identifier: rum-replay-heatmaps-create-replay-heatmap-snapshot
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateReplayHeatmapSnapshot
+        unstable: []
+        order: 1
+    - name: List replay heatmap snapshots
+      url: '#list-replay-heatmap-snapshots'
+      identifier: rum-replay-heatmaps-list-replay-heatmap-snapshots
+      parent: rum-replay-heatmaps
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListReplayHeatmapSnapshots
+        unstable: []
+        order: 2
+    - name: Rum Replay Playlists
+      url: /api/latest/rum-replay-playlists/
+      identifier: rum-replay-playlists
+      generated: true
+    - name: Add rum replay session to playlist
+      url: '#add-rum-replay-session-to-playlist'
+      identifier: rum-replay-playlists-add-rum-replay-session-to-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AddRumReplaySessionToPlaylist
+        unstable: []
+        order: 8
+    - name: Remove rum replay session from playlist
+      url: '#remove-rum-replay-session-from-playlist'
+      identifier: rum-replay-playlists-remove-rum-replay-session-from-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RemoveRumReplaySessionFromPlaylist
+        unstable: []
+        order: 9
+    - name: List rum replay playlist sessions
+      url: '#list-rum-replay-playlist-sessions'
+      identifier: rum-replay-playlists-list-rum-replay-playlist-sessions
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumReplayPlaylistSessions
+        unstable: []
+        order: 3
+    - name: Bulk remove rum replay playlist sessions
+      url: '#bulk-remove-rum-replay-playlist-sessions'
+      identifier: rum-replay-playlists-bulk-remove-rum-replay-playlist-sessions
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkRemoveRumReplayPlaylistSessions
+        unstable: []
+        order: 4
+    - name: Update rum replay playlist
+      url: '#update-rum-replay-playlist'
+      identifier: rum-replay-playlists-update-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumReplayPlaylist
+        unstable: []
+        order: 6
+    - name: Get rum replay playlist
+      url: '#get-rum-replay-playlist'
+      identifier: rum-replay-playlists-get-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumReplayPlaylist
+        unstable: []
+        order: 5
+    - name: Delete rum replay playlist
+      url: '#delete-rum-replay-playlist'
+      identifier: rum-replay-playlists-delete-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumReplayPlaylist
+        unstable: []
+        order: 7
+    - name: Create rum replay playlist
+      url: '#create-rum-replay-playlist'
+      identifier: rum-replay-playlists-create-rum-replay-playlist
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumReplayPlaylist
+        unstable: []
+        order: 1
+    - name: List rum replay playlists
+      url: '#list-rum-replay-playlists'
+      identifier: rum-replay-playlists-list-rum-replay-playlists
+      parent: rum-replay-playlists
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumReplayPlaylists
+        unstable: []
+        order: 2
+    - name: Rum Replay Sessions
+      url: /api/latest/rum-replay-sessions/
+      identifier: rum-replay-sessions
+      generated: true
+    - name: Get segments
+      url: '#get-segments'
+      identifier: rum-replay-sessions-get-segments
+      parent: rum-replay-sessions
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSegments
+        unstable: []
+        order: 1
+    - name: Rum Replay Viewership
+      url: /api/latest/rum-replay-viewership/
+      identifier: rum-replay-viewership
+      generated: true
+    - name: List rum replay viewership history sessions
+      url: '#list-rum-replay-viewership-history-sessions'
+      identifier: rum-replay-viewership-list-rum-replay-viewership-history-sessions
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumReplayViewershipHistorySessions
+        unstable: []
+        order: 1
+    - name: Create rum replay session watch
+      url: '#create-rum-replay-session-watch'
+      identifier: rum-replay-viewership-create-rum-replay-session-watch
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumReplaySessionWatch
+        unstable: []
+        order: 2
+    - name: Delete rum replay session watch
+      url: '#delete-rum-replay-session-watch'
+      identifier: rum-replay-viewership-delete-rum-replay-session-watch
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRumReplaySessionWatch
+        unstable: []
+        order: 3
+    - name: List rum replay session watchers
+      url: '#list-rum-replay-session-watchers'
+      identifier: rum-replay-viewership-list-rum-replay-session-watchers
+      parent: rum-replay-viewership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRumReplaySessionWatchers
+        unstable: []
+        order: 4
     - name: Rum Retention Filters
       url: /api/latest/rum-retention-filters/
       identifier: rum-retention-filters
