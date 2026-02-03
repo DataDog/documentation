@@ -28,6 +28,7 @@ To create a PR Gates rule in Datadog:
    - Software Composition Analysis (SCA)
    - Code Coverage
    - Infrastructure as Code Scanning (IaC)
+   - New Flaky Tests
 
 1. Under **Define condition**, set the conditions that will cause the rule to fail. Each rule type has its own condition options, and you can use the existing default condition settings when you select a rule type.
 
