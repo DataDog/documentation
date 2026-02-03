@@ -44,7 +44,7 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
 1. Go to [**Cloud Cost > Analyze > Reports**][5] in Datadog.
 1. Click **New Report** to start from scratch, or select a template from the gallery to accelerate your workflow.
 
-   {{< img src="cloud_cost/cost_reports/create-new-report.png" alt="Create a new report or from a template." style="width:100%;" >}}
+   {{< img src="cloud_cost/cost_reports/create-new-report-1.png" alt="Create a new report or from a template" style="width:100%;" >}}
 
    **Available Templates:**
    - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
@@ -54,7 +54,7 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
 
 ## Customizing your report
 
-{{< img src="cloud_cost/cost_reports/customization-options-aws-1.png" alt="Customize your report by selecting cloud providers, filtering, grouping, changing the visualization, and using advanced options." style="width:100%;" >}}
+{{< img src="cloud_cost/cost_reports/customization-options-3.png" alt="Customize your report by selecting cloud providers, filtering, grouping, changing the visualization, and using advanced options" style="width:100%;" >}}
 
 ### Select the type of report
 
@@ -87,7 +87,12 @@ Use filters to include only the specific costs you want to allocate, such as by 
 - Change the **table view**:
   - **Summary**: A consolidated, overall picture of your costs.
   - **Day over day**, **week over week** or **month over month**: Analyze how your costs change on a day to day, week to week, or month to month basis and identify trends or unusual fluctuations.
-- Update the **time frame** to monitor trends about your cloud spend.
+- Update the **time frame** and **comparison time frame**:
+  - Choose your time frame to set the reporting period you want to analyze.
+  - Add a comparison period to spot cost changes:
+    - **Default comparison**: Automatically compares to the immediately preceding period (for example, this week vs. last week).
+    - **Flexible comparison**: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns. Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.
+      
 
 ### Advanced options (optional)
 

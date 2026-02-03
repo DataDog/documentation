@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-suites/"
   tag: "Blog"
   text: "Get organized, actionable insights from complex test environments"
+- link: "/synthetics/guide/how-synthetics-monitors-trigger-alerts/"
+  tag: "Guide"
+  text: "Understanding Synthetic Monitor Alerting"
 ---
 
 ## Overview
@@ -44,7 +47,12 @@ To create a new Test Suite:
    - **Select** one or more tests to include.
 3. Click **Add Tests** to confirm.
 4. _Optionally, remove tests using the Remove Test from Suite icon next to each entry_.
+
 5. Configure alerting for the suite:
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">Alerting for Test Suites is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}})</div>
+{{% /site-region %}}
+
    - By default, all tests are marked as **Critical**, and the alert triggers when any critical test fails. 
 
      **Note**: Suite alerts are separate from individual test alerts. To avoid duplicate notifications, mute alerts on individual tests included in the suite.

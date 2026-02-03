@@ -5,9 +5,6 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
       text: 'Introduction to Incident Management'
-    - link: '/incident_response/incident_management/datadog_clipboard'
-      tag: 'Documentation'
-      text: 'Datadog Clipboard'
     - link: 'https://www.youtube.com/watch?v=QIambwILy_M'
       tag: 'Video'
       text: 'Datadog on Incident Management'
@@ -189,7 +186,7 @@ You can also declare and edit incidents and quickly communicate to your teams th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/slack/
-[2]: /incident_response/incident_management/datadog_clipboard
+[2]: /dashboards/guide/datadog_clipboard
 [3]: /notebooks/#overview
 [4]: /incident_response/incident_management/#from-a-graph
 [5]: /incident_response/incident_management/#from-a-monitor

@@ -93,7 +93,7 @@ To remove the Agent and all Agent configuration files:
     ```
 4. Reboot your machine for the changes to take effect.
 
-## Uninstall the Agent
+### System-wide LaunchDaemon installation
 
 To remove the Agent and all Agent configuration files:
 1. Drag the Datadog application from the application folder to the trash bin.

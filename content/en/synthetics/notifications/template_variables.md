@@ -9,6 +9,9 @@ further_reading:
 - link: "/monitors/templates/"
   tag: "Documentation"
   text: "Learn more about monitor templates"
+- link: "/synthetics/guide/how-synthetics-monitors-trigger-alerts/"
+  tag: "Guide"
+  text: "Understanding Synthetic Monitor Alerting"
 ---
 
 ## Overview
@@ -231,6 +234,8 @@ Located at `{{synthetics.attributes.result.variables.config}}`:
 
 `{{synthetics.attributes.result.variables.config.value}}`
 : Variable value (non-obfuscated only)
+
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/advanced_notifications/#use-local-variables-in-a-notification">advanced notifications</a> page for an example of how to use local variables in a notification.</div>
 
 {{% /tab %}}
 {{% tab "Global variables" %}}

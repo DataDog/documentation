@@ -724,6 +724,8 @@ The below attributes are optional in versions before 6.4.0, but Datadog strongly
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
+**Note**: 'Public User' is displayed in the RUM UI when `usr.name` is not set, even if `usr.email` and `usr.id` are defined.
+
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
 When making changes to the user session object, all RUM events collected after the change contain the updated information.
