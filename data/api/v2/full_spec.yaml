@@ -78180,7 +78180,16 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/{incident_id}/attachments/postmortems:
     post:
-      description: Create a postmortem attachment for an incident.
+      description: 'Create a postmortem attachment for an incident.
+
+
+        The endpoint accepts markdown for notebooks created in Confluence or Google
+        Docs.
+
+        Postmortems created from notebooks need to be formatted using frontend notebook
+        cells,
+
+        in addition to markdown format.'
       operationId: CreateIncidentPostmortemAttachment
       parameters:
       - description: The ID of the incident
@@ -95477,7 +95486,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
@@ -95622,7 +95631,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:

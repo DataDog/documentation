@@ -1279,7 +1279,7 @@
     "request_schema_description": "Create request for an attachment."
   },
   "CreateIncidentPostmortemAttachment": {
-    "description": "Create a postmortem attachment for an incident.",
+    "description": "Create a postmortem attachment for an incident.\n\nThe endpoint accepts markdown for notebooks created in Confluence or Google Docs.\nPostmortems created from notebooks need to be formatted using frontend notebook cells,\nin addition to markdown format.",
     "summary": "Create postmortem attachment",
     "request_description": "",
     "request_schema_description": ""
