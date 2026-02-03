@@ -25,7 +25,7 @@ Jira is an issue and project tracking system for software teams. The Datadog Jir
 The Jira integration with Datadog Incident Management provides you with the following benefits:
 - **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
 - **Supporting Existing Workflows**: Seamlessly integrate with your current processes, making it easier to plan work and manage priorities with Jira.
-- **Customization at Your Fingertips**: With dynamic templates, you can map Datadog severities to Jira priorities, map incident statuses to Jira statuses, add custom labels, define dynamic assignees, and more.
+- **Flexible Mapping and Configuration**: With dynamic templates, you can map Datadog severities to Jira priorities, map incident statuses to Jira statuses, add custom labels, and define dynamic assignees.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 2. Click the toggle for **Enable Jira issue creation** to allow manual or automatic Jira creation.
 3. Select your Jira account, project, and issue type.
 4. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, a Jira issue is created for all new incidents.
-5. Define a template with dynamic variables to drive the content of the Jira ticket. Type `{{` to use incident template variables for fields like Summary, Reporter, and Description. Dynamic variables only work for **string** [Jira field types][5].
+5. Define a template with dynamic variables to populate Jira ticket fields. Type `{{` to insert incident template variables into fields like **Summary**, **Reporter**, and **Description**. Dynamic variables work only with **string** [Jira field types][5].
 
 {{< img src="service_management/incidents/guide/jira/incident_jira_settings.png" alt="Jira integration settings showing account configuration, conditional creation rules, and Jira properties with template variables" style="width:80%;" >}}
 
