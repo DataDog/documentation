@@ -162,7 +162,7 @@ class ConversationalSearch {
                         </svg>
                     </button>
                 </div>
-                <p class="conv-search-disclaimer">AI-generated responses may be inaccurate. Verify important info.</p>
+                <p class="conv-search-disclaimer">AI-generated responses may be inaccurate. Verify important info.<br/> Your use of Docs AI powered by Typesense is subject to our <a href="https://www.datadoghq.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p>
             </div>
         `;
 
@@ -212,6 +212,13 @@ class ConversationalSearch {
             if (suggestionBtn) {
                 const query = suggestionBtn.dataset.query;
                 if (query) {
+                    this.logAction('Conversational Search Suggestion Click', {
+                        conversational_search: {
+                            action: 'suggestion_clicked',
+                            suggestion_query: query,
+                            conversation_id: this.conversationId
+                        },
+                    });
                     this.input.value = query;
                     this.sendMessage();
                 }
