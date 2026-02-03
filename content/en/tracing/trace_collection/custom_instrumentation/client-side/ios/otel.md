@@ -4,6 +4,7 @@ description: 'Instrument your iOS and tvOS application with the OpenTelemetry AP
 aliases:
 - /tracing/trace_collection/otel_instrumentation/ios/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/ios
+- /tracing/trace_collection/custom_instrumentation/ios/otel
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

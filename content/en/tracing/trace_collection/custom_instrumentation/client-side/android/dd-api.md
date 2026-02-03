@@ -1,5 +1,8 @@
 ---
+title: Android and Android TV Custom Instrumentation using the Datadog API
 description: 'Instrument your code with the Datadog API.'
+aliases:
+- /tracing/trace_collection/custom_instrumentation/android/dd-api
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 2
@@ -10,7 +13,6 @@ further_reading:
   - link: tracing/visualization/
     tag: Documentation
     text: Explore your services, resources, and traces
-title: Android and Android TV Custom Instrumentation using the Datadog API
 ---
 
 Send [traces][1] to Datadog from your Android applications with [Datadog's

@@ -26,8 +26,8 @@ If it is not possible to add Open Telemetry to your project, you can use the int
 <div class="alert alert-danger">Open Tracing support for the Android SDK was <strong>discontinued</strong> in version 3.
 <ul>
   <li>Read more in the SDK v3 <a href="/real_user_monitoring/guide/mobile-sdk-upgrade/?tab=android">migration guide</a>.</li>
-  <li>Check the recommended approach with <a href="/tracing/trace_collection/custom_instrumentation/android/otel">Open Telemetry</a>.</li>
-  <li>If it is not possible to add Open Telemetry to your project, you can use the internal <a href="/tracing/trace_collection/custom_instrumentation/android/dd-api">Datadog tracing API</a>.</li>
+  <li>Check the recommended approach with <a href="/tracing/trace_collection/custom_instrumentation/client-side/android/otel">Open Telemetry</a>.</li>
+  <li>If it is not possible to add Open Telemetry to your project, you can use the internal <a href="/tracing/trace_collection/custom_instrumentation/client-side/android/dd-api">Datadog tracing API</a>.</li>
 </ul>
 
 
@@ -987,6 +987,6 @@ The following methods in `AndroidTracer.Builder` can be used when initializing t
 [7]: /real_user_monitoring/android/?tab=us
 [8]: https://github.com/opentracing-contrib/java-rxjava
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
-[10]: /tracing/trace_collection/custom_instrumentation/android/otel
+[10]: /tracing/trace_collection/custom_instrumentation/client-side/android/otel
 [11]: https://opentracing.io
 [12]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file
