@@ -33,8 +33,14 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 <div class="alert alert-danger">New workspaces must authenticate using OAuth. Workspaces integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
 1. As a **Databricks account admin**, login to the Databricks Account Console ([AWS][28], [Azure][29]).
-1. Click on **User Management** in the left menu. Then, under the **Service principals** tab, click **Add service principal**.
-1. Under the **Credentials & secrets** tab, click **Generate secret**. Set **Lifetime (days)** to the maximum value allowed (730), then click **Generate**. Take note of your client ID and client secret. Also take note of your account ID, which can be found by clicking on your profile in the upper-right corner ([AWS][30], [Azure][31]). The account ID will not be visible from within an individual workspace; you must be in the Databricks Account Console.</div>
+1. Click on **User Management** in the left menu. Under the **Service principals** tab, click **Add service principal**.
+1. Under the **Credentials & secrets** tab, click **Generate secret**.
+   1. Set **Lifetime (days)** to the maximum value allowed (730). 
+   1. Click **Generate**. 
+   1. Take note of your client ID and client secret. 
+   1. Take note of your account ID, which can be found by clicking on your profile in the upper-right corner ([AWS][30], [Azure][31]).
+   
+      **Note**: The account ID will not be visible from within an individual workspace; you must be in the Databricks Account Console.
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
   {{< img src="data_jobs/databricks/account-id.png" alt="In Databricks, a drop-down menu showing the user's account ID is displayed." style="width:70%;" >}}
 1. Click **Workspaces** in the left menu, then select the name of your workspace.
