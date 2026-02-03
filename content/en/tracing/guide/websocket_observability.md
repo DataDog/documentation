@@ -1,5 +1,6 @@
 ---
 title: WebSocket Observability
+description: Trace WebSocket connections, messages, and life cycle events in your applications with Datadog APM.
 further_reading:
   - link: '/tracing/'
     tag: 'Documentation'
@@ -11,11 +12,11 @@ further_reading:
 
 ## Overview
 
-WebSocket observability provides comprehensive tracing for WebSocket connections in your applications. This feature captures the HTTP handshake, incoming and outgoing messages, and connection close events, enabling you to monitor the full lifecycle of WebSocket sessions in your traces.
+WebSocket observability provides comprehensive tracing for WebSocket connections in your applications. This feature captures the HTTP handshake, incoming and outgoing messages, and connection close events, enabling you to monitor the full life cycle of WebSocket sessions in your traces.
 
 ## Requirements
 
-### Tracer Versions
+### Tracer versions
 
 The following tracer versions support WebSocket observability out of the box:
 
@@ -26,7 +27,7 @@ The following tracer versions support WebSocket observability out of the box:
 | Java     | `>=1.59.0` |
 | PHP      | `>=1.8.0`  |
 
-### Compatible Libraries
+### Compatible libraries
 
 The following library versions are supported:
 
@@ -41,7 +42,7 @@ The following library versions are supported:
 
 ## How it works
 
-WebSocket observability traces the complete lifecycle of a WebSocket session:
+WebSocket observability traces the complete life cycle of a WebSocket session:
 
 1. **HTTP Handshake**: The initial HTTP upgrade request that establishes the WebSocket connection
 2. **Incoming Messages**: Messages received by your application
@@ -72,9 +73,9 @@ Each incoming WebSocket message creates a separate trace. Incoming, outgoing, an
 
 ### Control sampling behavior
 
-Incoming WebSocket message traces inherit the sampling decision from the HTTP handshake trace by default. This ensures complete WebSocket sessions are captured and prevents incomplete traces.
+Incoming WebSocket message traces inherit the sampling decision from the HTTP handshake trace by default. This helps capture complete WebSocket sessions are captured and prevents incomplete traces.
 
-Unfortunately it's not possible to apply that sampling decision to all outgoing WebSocket messages. For example an application may listen for messages on a Kafka queue then send a WebSocket message once it is received. If the Kafka queue consumption is not sampled then the associated WebSocket send won't be sampled.
+This sampling decision cannot be applied to all outgoing WebSocket messages. For example, an application may listen for messages on a Kafka queue and send a WebSocket message after one is received. If the Kafka queue consumption is not sampled, the associated WebSocket send is also not sampled.
 
 ```sh
 # Inherit sampling from handshake (default)
@@ -84,7 +85,7 @@ DD_TRACE_WEBSOCKET_MESSAGES_INHERIT_SAMPLING=true
 DD_TRACE_WEBSOCKET_MESSAGES_INHERIT_SAMPLING=false
 ```
 
-Setting this to `false` is useful for low-volume WebSocket applications where you want to ensure messages are sampled even with low sampling rates.
+Setting this to `false` is useful for low-volume WebSocket applications where you want messages to be sampled even with low sampling rates.
 
 ### Separate traces vs single trace
 
@@ -98,7 +99,7 @@ DD_TRACE_WEBSOCKET_MESSAGES_SEPARATE_TRACES=true
 DD_TRACE_WEBSOCKET_MESSAGES_SEPARATE_TRACES=false
 ```
 
-Use `false` for applications that quickly connect, exchange a few messages, and close the connection immediately.
+Use `false` for applications that connect, exchange a few messages, and close the connection immediately.
 
 ### Tag session IDs
 
@@ -110,7 +111,7 @@ DD_TRACE_WEBSOCKET_TAG_SESSION_ID=true
 
 <div class="alert alert-info">Not all WebSocket libraries have a built-in session ID concept. If your library doesn't provide one, this setting has no effect. Tracers do not generate session IDs.</div>
 
-### Disable WebSocket Observability
+### Disable WebSocket observability
 
 To disable WebSocket tracing, set the environment variable to `false`:
 
@@ -120,19 +121,19 @@ DD_TRACE_WEBSOCKET_MESSAGES_ENABLED=false
 
 ## Span tags and metrics
 
-### HTTP Handshake span
+### HTTP handshake span
 
 | Tag Name | Value | Type |
 |----------|-------|------|
 | `http.upgraded` | `websocket` | meta |
 | `websocket.session.id` | Session identifier (if available and tagging enabled) | meta |
 
-### Incoming Message spans
+### Incoming message spans
 
 **Semantic Conventions**
 - **Service**: Same as HTTP handshake span
 - **Operation**: `websocket.receive`
-- **Resource**: `websocket` followed by the handshake resource name without HTTP method (e.g., `websocket /ws`)
+- **Resource**: `websocket` followed by the handshake resource name without HTTP method (for example, `websocket /ws`)
 - **Span kind**: `consumer`
 - **Span type**: `websocket`
 
@@ -154,12 +155,12 @@ DD_TRACE_WEBSOCKET_MESSAGES_ENABLED=false
 - **handler**: The span measures the lifetime of a handler function that processes the message
 - **blocking**: The span measures from when a blocking read completes until the next read begins (for async iterators or blocking loops, only used by Python)
 
-### Outgoing Message spans
+### Outgoing message spans
 
 **Semantic Conventions**
 - **Service**: Inherits from parent span or uses default service name
 - **Operation**: `websocket.send`
-- **Resource**: `websocket` followed by the handshake resource name without HTTP method (e.g., `websocket /ws`)
+- **Resource**: `websocket` followed by the handshake resource name without HTTP method (for example, `websocket /ws`)
 - **Span kind**: `producer`
 - **Span type**: `websocket`
 
@@ -173,12 +174,12 @@ DD_TRACE_WEBSOCKET_MESSAGES_ENABLED=false
 | `websocket.message.frames` | Number of frames in the message | metrics |
 | `websocket.message.send_time` | Total time in nanoseconds to send all frames | metrics |
 
-### Connection Close spans
+### Connection close spans
 
 **Semantic Conventions**
 - **Service**: Same as HTTP handshake span
 - **Operation**: `websocket.close`
-- **Resource**: `websocket` followed by the handshake resource name without HTTP method (e.g., `websocket /ws`)
+- **Resource**: `websocket` followed by the handshake resource name without HTTP method (for example, `websocket /ws`)
 - **Span kind**: `consumer` (if closed by peer) or `producer` (if closed locally)
 - **Span type**: `websocket`
 
@@ -195,11 +196,11 @@ DD_TRACE_WEBSOCKET_MESSAGES_ENABLED=false
 
 ## Distributed tracing
 
-In order to properly support distributed tracing tools like Datadog need to inject metadata into messages. For protocols like HTTP or Kafka this means adding arbitrary metadata into the existing headers concept. While it's true that WebSockets are built upon HTTP and the initial handshake does support headers, individual message send and receive operations do not support headers. While some libraries may support adding arbitrary data (for example if a message is guaranteed to be a JSON object) it's not guaranteed that all libraries work this way. For this reason Datadog does not support adding arbitrary distributed tracing metadata to WebSocket messages.
+To support distributed tracing, tools like Datadog inject metadata into messages. For protocols like HTTP or Kafka, this means adding metadata to headers. While the initial WebSocket handshake supports headers, individual message send and receive operations do not. Some libraries support adding arbitrary data (for example, if a message is guaranteed to be a JSON object), but this is not guaranteed across all libraries. For this reason, Datadog does not support adding distributed tracing metadata to WebSocket messages.
 
-However, since the tracing information is known during a handshake, and each individual message sent and received over a WebSocket connection can be counted, we are able to infer a trace identifier by combining the concept of a connection identifier with the message counter.
+However, since tracing information is known during the handshake and each message can be counted, a trace identifier can be inferred by combining a connection identifier with the message counter.
 
-This means that distributed tracing works from the perspective of associating upstream operations with downstream operations. However other commonly expected facets of distributed tracing does not work, such as the ability to associate arbitrary baggage values.
+Distributed tracing associates upstream operations with downstream operations. However, other features like baggage propagation are not supported.
 
 ## Span pointers
 
@@ -225,7 +226,7 @@ WebSocket spans generate separate trace statistics from HTTP spans due to distin
 - `websocket.send`
 - `websocket.close`
 
-This separation ensures WebSocket traffic doesn't affect your existing HTTP metrics and dashboards. The Datadog Agent automatically calculates statistics for these spans based on their `consumer` and `producer` span kinds.
+This separation keeps WebSocket traffic from affecting your existing HTTP metrics and dashboards. The Datadog Agent automatically calculates statistics for these spans based on their `consumer` and `producer` span kinds.
 
 ## Best practices
 
