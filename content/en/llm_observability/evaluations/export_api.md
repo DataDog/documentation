@@ -110,6 +110,7 @@ Method
 
 | Parameter | Type | Description                  |
 |-------|------------------------------|------|
+| filter[query] | string | Searches for spans using generic EVP query syntax. If no query filter is provided, then the other filters will take precedence. |
 | filter[span_id] | string | Searches for a specific span by its span ID. |
 | filter[trace_id] | string | Searches for spans by their trace ID. |
 | filter[tag][key] | string | Searches for spans by tag key / value pairs. |
@@ -158,6 +159,20 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
       "type": "span",
       "attributes": {
         "duration": 83000,
+        "evaluation": {
+          "failure_to_answer": {
+              "eval_metric_type": "categorical",
+              "value": "answered",
+              "assessment": "pass",
+              "status": "OK",
+              "metadata": {
+                  "_dd": {
+                      "evaluation_kind": "failure_to_answer"
+                  }
+              },
+              "llm_output": "answered"
+          }
+        },
         "input": {
           "value": "hi",
           "messages": [
@@ -261,6 +276,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field | Type | Description |
 |-------|------|-------------|
+| query | string | Searches for spans using generic EVP query syntax. If no query filter is provided, then the other filters will take precedence. |
 | span_id | string | Searches for a specific span by its span ID. |
 | trace_id | string | Searches for spans by their trace ID. |
 | tags | Dict[key (string), string] | Search for spans by tag key / value pairs. |
@@ -312,6 +328,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | output        | [SearchedIO](#searchedio)                       | The span’s output information. |
 | tool_definitions        | [[ToolDefinition](#tooldefinition)]                       | List of tools available in an LLM request. |
 | metrics        | Dict[key (string), float]                      | Datadog metrics to collect. |
+| evaluation        | Dict[key (string), [SpanEvalMetric](#spanevalmetric)]                      | A map of evaluations associated with the span. |
 
 ### SearchedIO
 
@@ -334,6 +351,30 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 | name        | string                        | The name of the tool. |
 | description        | string                       | The description of the tool’s function. |
 | schema        | Dict[key (string), any]                       | Data about the arguments a tool accepts. |
+
+### SpanEvalMetric
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| eval_metric_type        | string                        | Represents the type of evaluation metric. One of categorical, score, boolean, or JSON. |
+| value        | any                       | The result of the evaluation. Can be a string, float, boolean, or JSON value. |
+| reasoning        | string                       | Reasoning for the evaluation outcome. |
+| assessment        | string                       | Whether the evaluation passed or failed. Either pass or fail. |
+| status        | string                       | The status of the evaluation run. One of OK, WARN, or ERROR. |
+| error        | [EvalMetricError](#evalmetricerror)                       | Information about the error that occurred when running the evaluation (if any). |
+| tags        | [string]                       | Key-Value pairs associated with the evaluation metric. |
+| action        | string                       | A description of what action was taken on the user's side in response to the evaluation outcome (for user-submitted evaluations). |
+| eval_metric_metadata        | Dict[key (string), any]                        | Arbitrary JSON data associated with the evaluation. |
+| llm_output        | string                       | The raw output from the LLM call used to determine the evaluation result. |
+
+### EvalMetricError
+
+| Field      | Type                          | Description                                |
+|------------|-------------------------------|--------------------------------------------|
+| message        | string                        | A message describing the error that occurred. This could be a list of reasons why the evaluation was skipped or an error message generated from trying to run the evaluation. |
+| stack        | string                        | The stack trace associated with the evaluation error. |
+| type        | string                        | The type of error that occurred. One of a fixed set of generic reasons the evaluation was skipped or errored out. |
+| recommended_resolution        | string                        | A description of what needs to be done in order to remedy the error. |
 
 ### Meta
 
