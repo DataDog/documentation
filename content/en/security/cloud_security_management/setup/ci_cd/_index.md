@@ -44,7 +44,6 @@ To upload scan results to Datadog, configure the following environment variables
 Store your API and application keys as secrets in your CI/CD platform to protect sensitive credentials.
 </div>
 
-## Setup instructions
 
 <div class="alert alert-info">Pre-built integrations for specific CI providers (GitHub Actions, GitLab CI/CD, Azure DevOps, etc.) are coming soon. For now, use the customizable script approach below, which works with any CI/CD platform.</div>
 
