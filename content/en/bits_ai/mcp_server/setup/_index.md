@@ -55,13 +55,13 @@ The following AI clients are compatible with the Datadog MCP Server.
 | [Codex CLI][7] | OpenAI | |
 | [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
-| [Kiro][23] | Amazon | |
+| [Kiro][22] | Amazon | |
 | [Kiro CLI][10] | Amazon | |
-| [Cline][18] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+| [Cline][17] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
 
-Datadog users must have the `Incidents Read` [permission][19] to use the MCP Server.
+Datadog users must have the `Incidents Read` [permission][18] to use the MCP Server.
 
 ## Connect in Cursor and VS Code
 
@@ -203,7 +203,7 @@ The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through 
 }
 {{< /code-block >}}
 
-For security, use a scoped API key and application key from a [service account][24] that has only the required permissions.
+For security, use a scoped API key and application key from a [service account][23] that has only the required permissions.
 
 ### Test access to the MCP Server
 
@@ -222,10 +222,10 @@ For security, use a scoped API key and application key from a [service account][
 The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
 
 - `core`: The default toolset
-- `synthetics`: Tools for interacting with Datadog [Synthetic tests][21]
-- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][22] and [Test Optimization][25])
-- `error-tracking`: Tools for interacting with Datadog [Error Tracking][26]
-- `dbm`: Tools for interacting with [Database Monitoring][27]
+- `synthetics`: Tools for interacting with Datadog [Synthetic tests][20]
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][21] and [Test Optimization][24])
+- `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
+- `dbm`: Tools for interacting with [Database Monitoring][26]
 
 To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
@@ -239,13 +239,6 @@ This section lists the tools available in the Datadog MCP Server and provides ex
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
-### `search_datadog_docs`
-*Toolset: **core***\
-Returns AI-generated answers to Datadog questions, sourced from [Datadog documentation][15].
-- How do you enable Datadog profiling in Python?
-- What's the best way to correlate logs and traces?
-- How does RUM auto-instrumentation work?
-
 ### `search_datadog_events`
 *Toolset: **core***\
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
@@ -254,7 +247,7 @@ Searches events like monitor alerts, deployment notifications, infrastructure ch
 - Find events related to our production environment with error status.
 - Get events tagged with `service:api` from the past hour.
 
-**Note**: See the [Event Management API][16] for more details.
+**Note**: See the [Event Management API][15] for more details.
 
 ### `get_datadog_incident`
 *Toolset: **core***\
@@ -439,7 +432,7 @@ Aggregates CI pipeline events to produce statistics, metrics, and grouped analyt
 
 ### `get_datadog_flaky_tests`
 *Toolset: **software-delivery***\
-Searches Datadog [Test Optimization][25] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
+Searches Datadog [Test Optimization][24] for flaky tests and returns triage details (failure rate, category, owners, history, CI impact), with pagination and sorting.
 
 - Find active flaky tests for the checkout service owned by `@team-abc`, sorted by failure rate.
 - Show flaky tests on branch `main` for repo `github.com/org/repo`, most recent first.
@@ -471,7 +464,7 @@ Retrieves detailed information about a specific Error Tracking Issue from Datado
 
 ### `search_datadog_dbm_plans`
 *Toolset: **dbm***\
-Searches [Database Monitoring][27] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
+Searches [Database Monitoring][26] query execution plans, which show how the database engine executes queries, including index usage, join strategies, and cost estimates. Use this to analyze query performance and identify optimization opportunities.
 
 - Show me execution plans for slow queries on `host:db-prod-1` from the last hour.
 - Find query plans with `@db.plan.type:explain_analyze` for the production database.
@@ -479,7 +472,7 @@ Searches [Database Monitoring][27] query execution plans, which show how the dat
 
 ### `search_datadog_dbm_samples`
 *Toolset: **dbm***\
-Searches [Database Monitoring][27] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
+Searches [Database Monitoring][26] query samples, which represent individual query executions with performance metrics. Use this to analyze database activity patterns, identify slow queries, and investigate database performance issues.
 
 - Show me query samples with `@duration:>1000000000` (duration greater than 1 second) from `db:mydb`.
 - Find slow queries on `host:db-prod-1` filtered by `@db.user:app_user`.
@@ -494,11 +487,11 @@ The Datadog MCP Server is optimized to provide responses in a way that AI agents
 
 ## Track tool calls in Audit Trail
 
-You can view information about calls made by MCP Server tools in Datadog's [Audit Trail][17]. Search or filter by the event name `MCP Server`.
+You can view information about calls made by MCP Server tools in Datadog's [Audit Trail][16]. Search or filter by the event name `MCP Server`.
 
 ## Feedback
 
-The Datadog MCP Server is under significant development. During the Preview, use [this feedback form][20] to share any feedback, use cases, or issues encountered with your prompts and queries.
+The Datadog MCP Server is under significant development. During the Preview, use [this feedback form][19] to share any feedback, use cases, or issues encountered with your prompts and queries.
 
 ## Further reading
 
@@ -518,16 +511,15 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [12]: /developers/ide_plugins/vscode/
 [13]: https://nodejs.org/en/about/previous-releases
 [14]: /developers/ide_plugins/vscode/?tab=cursor#installation
-[15]: /
-[16]: /api/latest/events/
-[17]: /account_management/audit_trail/
-[18]: https://cline.bot/
-[19]: /account_management/rbac/permissions/#case-and-incident-management
-[20]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
-[21]: /synthetics/
-[22]: /continuous_integration/
-[23]: https://kiro.dev/
-[24]: /account_management/org_settings/service_accounts/
-[25]: /tests/
-[26]: /error_tracking/
-[27]: /database_monitoring/
+[15]: /api/latest/events/
+[16]: /account_management/audit_trail/
+[17]: https://cline.bot/
+[18]: /account_management/rbac/permissions/#case-and-incident-management
+[19]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
+[20]: /synthetics/
+[21]: /continuous_integration/
+[22]: https://kiro.dev/
+[23]: /account_management/org_settings/service_accounts/
+[24]: /tests/
+[25]: /error_tracking/
+[26]: /database_monitoring/
