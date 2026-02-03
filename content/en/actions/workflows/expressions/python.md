@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
-The Python function action lets you write custom Python scripts for data transformations, parsing, and payload enrichment within your workflows. Python provides additional capabilities beyond JavaScript for certain use cases.
+The Python function action lets you write custom Python scripts for data transformations, parsing, and payload enrichment within your workflows.
 
 ## Python environment
 
