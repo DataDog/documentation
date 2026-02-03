@@ -140,9 +140,9 @@ While automatic detection and custom rules handle most cases, you can still manu
 ### When to update deployment status
 
 Consider manually updating a deployment's status in the following scenarios:
-- A deployment caused production issues but was not detected as a change failure
-- A deployment was incorrectly classified as a change failure (false positive)
-- You need to immediately reflect the correct status for reporting purposes
+- A deployment caused production issues but was not detected as a change failure.
+- A deployment was incorrectly classified as a change failure (false positive).
+- You need to immediately reflect the correct status for reporting purposes.
 
 ### Updating status through the API
 
