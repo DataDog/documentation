@@ -31,7 +31,7 @@ Prompt Optimization supports any use case where the expected output is known and
 
 ## Prerequisites
 
-- [`ddtrace`][1] version 4.3.0+
+- [`ddtrace`][1] version 4.4.0+
 - LLM Observability enabled with Datadog [API and application keys][2]
 - A [dataset][3] with representative examples (recommended: 50-100 records)
 - Access to an advanced reasoning model (o3-mini, Claude 3.5 Sonnet, or similar)
@@ -376,6 +376,8 @@ You can also view the prompt used for each iteration in the Config tab of the Ex
 
 ## Best practices
 
+You will find a collection of example scripts in the [Experiment cookbook repository][4].
+
 ### Dataset design
 
 - Include 50-100 diverse examples covering typical and edge cases
@@ -411,3 +413,4 @@ Avoid using cheaper models (GPT-3.5-turbo, Claude Haiku) as they lack the reason
 [1]: https://github.com/DataDog/dd-trace-py
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /llm_observability/experiments/datasets?tab=csv
+[4]: https://github.com/DataDog/llm-observability/tree/main/experiments/scripts
