@@ -23,10 +23,6 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-<div class="alert alert-info">
-Fleet Automation for OpenTelemetry Collectors is currently in preview.
-</div>
-
 ## Overview
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents and OpenTelemetry (OTel) Collectors at scale to support your evolving observability needs.

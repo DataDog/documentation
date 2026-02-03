@@ -513,8 +513,8 @@ Push events (spans and metrics) for an experiment.
 
 | Field | Type | Description |
 | ---- | ---- | ---- |
-| `trace_id` | string | Trace ID. |
-| `span_id` | string | Span ID. |
+| `trace_id` | string | Trace ID. Must be different from the `span_id` value. |
+| `span_id` | string | Span ID. Must be different from the `trace_id` value. |
 | `project_id` | string | Project ID. |
 | `dataset_id` | string | Dataset ID. |
 | `name` | string | Span name (for example, task name). |
@@ -529,16 +529,19 @@ Push events (spans and metrics) for an experiment.
 
 #### Object: Metric
 
-| Field | Type | Description |
-| ---- | ---- | ---- |
-| `span_id` | string | Associated span ID. |
-| `metric_type` | string | Metric type. One of: `score`, `categorical`. |
-| `timestamp_ms` | number | UNIX timestamp in milliseconds. |
-| `label` | string | Metric label (evaluator name). |
-| `score_value` | number | Score value (when `metric_type` is `score`). |
-| `categorical_value` | string | Categorical value (when `metric_type` is `categorical`). |
-| `metadata` | json | Arbitrary key-value metadata associated with the metric. |
-| `error.message` | string | Optional error message for the metric. |
+| Field               | Type     | Description                                              |
+|---------------------|----------|----------------------------------------------------------|
+| `span_id`           | string   | Associated span ID.                                      |
+| `metric_type`       | string   | Metric type. One of: `score`, `categorical`.             |
+| `timestamp_ms`      | number   | UNIX timestamp in milliseconds.                          |
+| `label`             | string   | Metric label (evaluator name).                           |
+| `score_value`       | number   | Score value (when `metric_type` is `score`).             |
+| `categorical_value` | string   | Categorical value (when `metric_type` is `categorical`). |
+| `metadata`          | json     | Arbitrary key-value metadata associated with the metric. |
+| `error.message`     | string   | Optional error message for the metric.                   |
+| `reasoning`         | string   | Optional explanation for the metric.                     |
+| `assessment`        | string   | Optional assessment. One of: `pass`, `fail`.             |
+| `tags`              | []string | Tags to associate with the metric.                       |
 
 **Response**
 

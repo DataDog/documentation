@@ -13,10 +13,6 @@ further_reading:
   text: "Browser Monitoring"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your browser JavaScript application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
@@ -51,16 +47,17 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 Create a `DatadogProvider` instance with your Datadog credentials:
 
-{{< code-block lang="javascript" >}}
+```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
-{{< /code-block >}}
+```
 
 ## Set the evaluation context
 
@@ -159,7 +156,7 @@ console.log(details.errorCode);   // Error code, if evaluation failed
 
 Here's a complete example showing how to set up and use Datadog Feature Flags in a JavaScript application:
 
-{{< code-block lang="javascript" >}}
+```javascript
 import { DatadogProvider } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
@@ -167,6 +164,7 @@ import { OpenFeature } from '@openfeature/web-sdk';
 const provider = new DatadogProvider({
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',
 });
 
@@ -186,7 +184,7 @@ const showNewFeature = client.getBooleanValue('new_feature', false);
 if (showNewFeature) {
   console.log('New feature is enabled!');
 }
-{{< /code-block >}}
+```
 
 ## Update the evaluation context
 

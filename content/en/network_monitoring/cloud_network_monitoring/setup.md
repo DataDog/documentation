@@ -264,7 +264,7 @@ agents:
         seLinuxOptions:
           user: "system_u"
           role: "system_r"
-          type: "spc_t"
+          type: "super_t"
           level: "s0"
 ```
 

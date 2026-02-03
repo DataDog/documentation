@@ -18,8 +18,6 @@ title: Instrumentación automática
 type: multi-code-lang
 ---
 
-<div class="alert alert-info">Para probar la vista previa de la Instrumentación automática RUM, sigue las instrucciones de esta página.</div>
-
 ## Información general
 
 La Instrumentación automática te permite añadir RUM JS al HTML de tu aplicación web. Funciona inyectando el SDK del navegador RUM en las respuestas HTML que se sirven a través de un servidor web o proxy. Una vez configurada la instrumentación automática, puedes gestionar las configuraciones desde la interfaz de usuario.
