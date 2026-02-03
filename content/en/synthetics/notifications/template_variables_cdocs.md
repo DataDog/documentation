@@ -185,7 +185,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution"
-    data-if="219"
+    data-if="6243"
   >
     <h3 id="test-execution-variables">Test execution variables</h3>
     <p>Path: <code>synthetics</code> (various shortcuts)</p>
@@ -226,7 +226,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Result"
-    data-if="229"
+    data-if="6261"
   >
     <h3 id="result-attributes">Result attributes</h3>
     <p>Path: <code>synthetics.attributes</code></p>
@@ -234,189 +234,253 @@ title: Synthetic Monitoring Template Variables
       Use these variables to include details about the test, execution location,
       device, counts, and result status in your notification messages.
     </p>
-    <h4 id="test-info">Test Info</h4>
-    <dl>
-      <dt><code>{{synthetics.attributes.test}}</code></dt>
-      <dd>
-        The <code>test</code> object contains information about the test like
-        its <code>name</code>, <code>type</code>, <code>subtype</code>, and
-        <code>id</code>
-      </dd>
-      <dt><code>{{synthetics.attributes.test.name}}</code></dt>
-      <dd>The name of the test</dd>
-      <dt><code>{{synthetics.attributes.test.type}}</code></dt>
-      <dd>Test type (for example, <code>api</code>)</dd>
-      <dt><code>{{synthetics.attributes.test.subType}}</code></dt>
-      <dd>
-        Subtype for API tests (for example, <code>http</code>, <code>dns</code>,
-        and <code>multi</code>)
-      </dd>
-      <dt><code>{{synthetics.attributes.test.id}}</code></dt>
-      <dd>The test's public ID (for example, <code>abc-def-ghi</code>)</dd>
-    </dl>
-    <h4 id="location">Location</h4>
-    <dl>
-      <dt><code>{{synthetics.attributes.location}}</code></dt>
-      <dd>
-        The <code>location</code> object contains information about the location
-        of where the test is run from
-      </dd>
-      <dt><code>{{synthetics.attributes.location.id}}</code></dt>
-      <dd>Location ID (for example, <code>aws:eu-central-1</code>)</dd>
-      <dt><code>{{synthetics.attributes.location.name}}</code></dt>
-      <dd>Name of the location (for example, <code>Frankfurt (AWS)</code>)</dd>
-      <dt><code>{{synthetics.attributes.location.privateLocation}}</code></dt>
-      <dd><code>true</code> for Private Locations</dd>
-    </dl>
-    <div
-      class="cdoc__toggleable"
-      data-description="(Test Type is Browser) or (Test Type is Mobile)"
-      data-if="224"
-    >
-      <h4 id="device">Device</h4>
-      <p>Applies to Browser and Mobile tests.</p>
-      <dl>
-        <dt><code>{{synthetics.attributes.device}}</code></dt>
-        <dd>
-          The <code>device</code> object contains information about the device
-          on which the test is run on
-        </dd>
-        <dt><code>{{synthetics.attributes.device.id}}</code></dt>
-        <dd>Device identifier</dd>
-        <dt><code>{{synthetics.attributes.device.name}}</code></dt>
-        <dd>Human-readable device name</dd>
-        <dt><code>{{synthetics.attributes.device.type}}</code></dt>
-        <dd>Device type classification</dd>
-        <dt>
-          <code>{{synthetics.attributes.device.width}}</code>,
-          <code>{{synthetics.attributes.device.height}}</code>
-        </dt>
-        <dd>Screen resolution dimensions</dd>
-      </dl>
-      <div
-        class="cdoc__toggleable"
-        data-description="Test Type is Browser"
-        data-if="220"
-      >
-        <dl>
-          <dt><code>{{synthetics.attributes.device.browser.type}}</code></dt>
-          <dd>Browser type (browser tests only)</dd>
-        </dl>
-      </div>
-      <div
-        class="cdoc__toggleable cdoc__hidden"
-        data-description="Test Type is Mobile"
-        data-if="221"
-      >
-        <dl>
-          <dt>
-            <code>{{synthetics.attributes.device.platform.name}}</code>,
-            <code>{{synthetics.attributes.device.platform.version}}</code>
-          </dt>
-          <dd>Platform information (mobile tests only)</dd>
-        </dl>
-      </div>
-    </div>
-    <h4 id="result">Result</h4>
-    <dl>
-      <dt><code>{{synthetics.attributes.result}}</code></dt>
-      <dd>
-        The <code>result</code> object contains information about the executed
-        test run
-      </dd>
-      <dt><code>{{synthetics.attributes.result.id}}</code></dt>
-      <dd>Unique result ID</dd>
-      <dt><code>{{synthetics.attributes.result.status}}</code></dt>
-      <dd>
-        Test execution status (for example, <code>passed</code> or
-        <code>failed</code>)
-      </dd>
-      <dt><code>{{synthetics.attributes.result.duration}}</code></dt>
-      <dd>Test duration in milliseconds</dd>
-      <dt>
-        <code>{{synthetics.attributes.result.testStartedAt}}</code>,
-        <code>{{synthetics.attributes.result.testFinishedAt}}</code>,
-        <code>{{synthetics.attributes.result.testTriggeredAt}}</code>
-      </dt>
-      <dd>Epoch timestamps in milliseconds</dd>
-      <dt><code>{{synthetics.attributes.result.failure}}</code></dt>
-      <dd>
-        The <code>failure</code> object contains information about why the test
-        failed
-      </dd>
-      <dt><code>{{synthetics.attributes.result.failure.message}}</code></dt>
-      <dd>The failure message</dd>
-      <dt><code>{{synthetics.attributes.result.failure.code}}</code></dt>
-      <dd>The failure code</dd>
-    </dl>
-    <h4 id="count">Count</h4>
-    <p>Applies to Multistep, Browser, and Mobile tests.</p>
-    <dl>
-      <dt><code>{{synthetics.attributes.count}}</code></dt>
-      <dd>
-        The <code>count</code> object contains step statistics about the test
-      </dd>
-      <dt><code>{{synthetics.attributes.count.steps.total}}</code></dt>
-      <dd>The total number of steps</dd>
-      <dt><code>{{synthetics.attributes.count.steps.completed}}</code></dt>
-      <dd>The number of steps that were run</dd>
-      <dt><code>{{synthetics.attributes.count.errors}}</code></dt>
-      <dd>
-        The total number of errors that occurred while running the test. For
-        multistep and mobile tests, this is the number of failed steps. For
-        browser tests, this is the sum of all browser errors.
-      </dd>
-      <dt><code>{{synthetics.attributes.count.hops}}</code></dt>
-      <dd>The number of traceroute hops for TCP and ICMP tests</dd>
-    </dl>
-    <h4 id="failed-step">Failed Step</h4>
-    <p>Applies to Multistep, Browser, and Mobile tests.</p>
-    <dl>
-      <dt><code>{{synthetics.failed_step}}</code></dt>
-      <dd>
-        The <code>failed_step</code> object provides a shortcut to the step that
-        caused the test to fail, eliminating the need to reference
-        <code>{{synthetics.attributes.result.steps.&lt;step-index&gt;}}</code>
-        directly.
-      </dd>
-    </dl>
-    <div
-      class="cdoc__toggleable cdoc__hidden"
-      data-description="Test Type is Multistep API"
-      data-if="225"
-    >
-      <dl>
-        <dt><code>{{synthetics.failed_step.name}}</code></dt>
-        <dd>
-          Maps to
-          <code
-            >{{synthetics.attributes.result.steps.&lt;step-index&gt;.name}}</code
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          data-lang="test-info"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Test Info"
+        >
+          <dl>
+            <dt><code>{{synthetics.attributes.test}}</code></dt>
+            <dd>
+              The <code>test</code> object contains information about the test
+              like its <code>name</code>, <code>type</code>,
+              <code>subtype</code>, and <code>id</code>
+            </dd>
+            <dt><code>{{synthetics.attributes.test.name}}</code></dt>
+            <dd>The name of the test</dd>
+            <dt><code>{{synthetics.attributes.test.type}}</code></dt>
+            <dd>Test type (for example, <code>api</code>)</dd>
+            <dt><code>{{synthetics.attributes.test.subType}}</code></dt>
+            <dd>
+              Subtype for API tests (for example, <code>http</code>,
+              <code>dns</code>, and <code>multi</code>)
+            </dd>
+            <dt><code>{{synthetics.attributes.test.id}}</code></dt>
+            <dd>
+              The test's public ID (for example, <code>abc-def-ghi</code>)
+            </dd>
+          </dl>
+        </div>
+        <div
+          data-lang="location"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Location"
+        >
+          <dl>
+            <dt><code>{{synthetics.attributes.location}}</code></dt>
+            <dd>
+              The <code>location</code> object contains information about the
+              location of where the test is run from
+            </dd>
+            <dt><code>{{synthetics.attributes.location.id}}</code></dt>
+            <dd>Location ID (for example, <code>aws:eu-central-1</code>)</dd>
+            <dt><code>{{synthetics.attributes.location.name}}</code></dt>
+            <dd>
+              Name of the location (for example, <code>Frankfurt (AWS)</code>)
+            </dd>
+            <dt>
+              <code>{{synthetics.attributes.location.privateLocation}}</code>
+            </dt>
+            <dd><code>true</code> for Private Locations</dd>
+          </dl>
+        </div>
+        <div
+          class="cdoc__toggleable"
+          data-description="(platform is browser) or (platform is mobile)"
+          data-if="6248"
+        >
+          <div
+            data-lang="device"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Device"
           >
-          (Multistep API)
-        </dd>
-      </dl>
-    </div>
-    <div
-      class="cdoc__toggleable"
-      data-description="(Test Type is Browser) or (Test Type is Mobile)"
-      data-if="228"
-    >
-      <dl>
-        <dt><code>{{synthetics.failed_step.description}}</code></dt>
-        <dd>
-          Maps to
-          <code
-            >{{synthetics.attributes.result.steps.&lt;step-index&gt;.description}}</code
+            <dl>
+              <dt><code>{{synthetics.attributes.device}}</code></dt>
+              <dd>
+                The <code>device</code> object contains information about the
+                device on which the test is run on
+              </dd>
+              <dt><code>{{synthetics.attributes.device.id}}</code></dt>
+              <dd>Device identifier</dd>
+              <dt><code>{{synthetics.attributes.device.name}}</code></dt>
+              <dd>Human-readable device name</dd>
+              <dt><code>{{synthetics.attributes.device.type}}</code></dt>
+              <dd>Device type classification</dd>
+              <dt>
+                <code>{{synthetics.attributes.device.width}}</code>,
+                <code>{{synthetics.attributes.device.height}}</code>
+              </dt>
+              <dd>Screen resolution dimensions</dd>
+            </dl>
+            <div
+              class="cdoc__toggleable"
+              data-description="platform is browser"
+              data-if="6244"
+            >
+              <dl>
+                <dt>
+                  <code>{{synthetics.attributes.device.browser.type}}</code>
+                </dt>
+                <dd>Browser type (browser tests only)</dd>
+              </dl>
+            </div>
+            <div
+              class="cdoc__toggleable cdoc__hidden"
+              data-description="platform is mobile"
+              data-if="6245"
+            >
+              <dl>
+                <dt>
+                  <code>{{synthetics.attributes.device.platform.name}}</code>,
+                  <code>{{synthetics.attributes.device.platform.version}}</code>
+                </dt>
+                <dd>Platform information (mobile tests only)</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div
+          data-lang="result"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Result"
+        >
+          <dl>
+            <dt><code>{{synthetics.attributes.result}}</code></dt>
+            <dd>
+              The <code>result</code> object contains information about the
+              executed test run
+            </dd>
+            <dt><code>{{synthetics.attributes.result.id}}</code></dt>
+            <dd>Unique result ID</dd>
+            <dt><code>{{synthetics.attributes.result.status}}</code></dt>
+            <dd>
+              Test execution status (for example, <code>passed</code> or
+              <code>failed</code>)
+            </dd>
+            <dt><code>{{synthetics.attributes.result.duration}}</code></dt>
+            <dd>Test duration in milliseconds</dd>
+            <dt>
+              <code>{{synthetics.attributes.result.testStartedAt}}</code>,
+              <code>{{synthetics.attributes.result.testFinishedAt}}</code>,
+              <code>{{synthetics.attributes.result.testTriggeredAt}}</code>
+            </dt>
+            <dd>Epoch timestamps in milliseconds</dd>
+            <dt><code>{{synthetics.attributes.result.failure}}</code></dt>
+            <dd>
+              The <code>failure</code> object contains information about why the
+              test failed
+            </dd>
+            <dt>
+              <code>{{synthetics.attributes.result.failure.message}}</code>
+            </dt>
+            <dd>The failure message</dd>
+            <dt><code>{{synthetics.attributes.result.failure.code}}</code></dt>
+            <dd>The failure code</dd>
+          </dl>
+        </div>
+        <div
+          class="cdoc__toggleable"
+          data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
+          data-if="6252"
+        >
+          <div
+            data-lang="count"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Count"
           >
-          (Browser, Mobile)
-        </dd>
-      </dl>
+            <p>
+              Applies to Multistep, Browser, and Mobile tests.
+              <code>{{synthetics.attributes.count}}</code> : The
+              <code>count</code> object contains step statistics about the test
+            </p>
+            <dl>
+              <dt><code>{{synthetics.attributes.count.steps.total}}</code></dt>
+              <dd>The total number of steps</dd>
+              <dt>
+                <code>{{synthetics.attributes.count.steps.completed}}</code>
+              </dt>
+              <dd>The number of steps that were run</dd>
+              <dt><code>{{synthetics.attributes.count.errors}}</code></dt>
+              <dd>
+                The total number of errors that occurred while running the test.
+                For multistep and mobile tests, this is the number of failed
+                steps. For browser tests, this is the sum of all browser errors.
+              </dd>
+              <dt><code>{{synthetics.attributes.count.hops}}</code></dt>
+              <dd>The number of traceroute hops for TCP and ICMP tests</dd>
+            </dl>
+          </div>
+        </div>
+        <div
+          class="cdoc__toggleable"
+          data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
+          data-if="6260"
+        >
+          <div
+            data-lang="failed-step"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Failed step"
+          >
+            <p>
+              Applies to Multistep, Browser, and Mobile tests.
+              <code>{{synthetics.failed_step}}</code> : The
+              <code>failed_step</code> object provides a shortcut to the step
+              that caused the test to fail, eliminating the need to reference
+              <code
+                >{{synthetics.attributes.result.steps.&lt;step-index&gt;}}</code
+              >
+              directly.
+            </p>
+            <div
+              class="cdoc__toggleable cdoc__hidden"
+              data-description="platform is multistep"
+              data-if="6253"
+            >
+              <dl>
+                <dt><code>{{synthetics.failed_step.name}}</code></dt>
+                <dd>
+                  Maps to
+                  <code
+                    >{{synthetics.attributes.result.steps.&lt;step-index&gt;.name}}</code
+                  >
+                  (Multistep API)
+                </dd>
+              </dl>
+            </div>
+            <div
+              class="cdoc__toggleable"
+              data-description="(platform is browser) or (platform is mobile)"
+              data-if="6256"
+            >
+              <dl>
+                <dt><code>{{synthetics.failed_step.description}}</code></dt>
+                <dd>
+                  Maps to
+                  <code
+                    >{{synthetics.attributes.result.steps.&lt;step-index&gt;.description}}</code
+                  >
+                  (Browser, Mobile)
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Local"
-    data-if="230"
+    data-if="6262"
   >
     <h3 id="local-variables">Local variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.config</code></p>
@@ -447,7 +511,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Global"
-    data-if="231"
+    data-if="6263"
   >
     <h3 id="global-variables">Global variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.extracted</code></p>
@@ -482,7 +546,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Extracted"
-    data-if="232"
+    data-if="6267"
   >
     <h3 id="extracted-variable-values">Extracted variable values</h3>
     <p>
@@ -491,42 +555,47 @@ title: Synthetic Monitoring Template Variables
         >synthetics.attributes.result.steps.&lt;step-index&gt;.extractedValue</code
       >
     </p>
-    <p><strong>Applies to:</strong> Browser and Mobile tests.</p>
-    <p>
-      These are the actual variable values that a step captured during test
-      execution. For example, if you have a Browser test step that extracts text
-      from a page element into a variable, this is where you access that
-      extracted value.
-    </p>
-    <p>
-      For information on how to access the <code>&lt;step-index&gt;</code>, see
-      the step summary section.
-    </p>
-    <dl>
-      <dt>
-        <code
-          >synthetics.attributes.result.steps.&lt;step-index&gt;.extractedValue.name</code
-        >
-      </dt>
-      <dd>Variable name</dd>
-      <dt>
-        <code
-          >synthetics.attributes.result.steps.&lt;step-index&gt;.extractedValue.secure</code
-        >
-      </dt>
-      <dd>Whether the variable value is obfuscated</dd>
-      <dt>
-        <code
-          >synthetics.attributes.result.steps.&lt;step-index&gt;.extractedValue.value</code
-        >
-      </dt>
-      <dd>Variable value (if step was successful)</dd>
-    </dl>
+    <div
+      class="cdoc__toggleable"
+      data-description="(Test Type is Browser) or (Test Type is Mobile)"
+      data-if="6266"
+    >
+      <p>
+        These are the actual variable values that a step captured during test
+        execution. For example, if you have a Browser test step that extracts
+        text from a page element into a variable, this is where you access that
+        extracted value.
+      </p>
+      <p>
+        For information on how to access the <code>&lt;step-index&gt;</code>,
+        see the step summary section.
+      </p>
+      <dl>
+        <dt>
+          <code
+            >synthetics.attributes.result.steps.&lt;step-index&gt;.extractedValue.name</code
+          >
+        </dt>
+        <dd>Variable name</dd>
+        <dt>
+          <code
+            >synthetics.attributes.result.steps.&lt;step-index&gt;.extractedValue.secure</code
+          >
+        </dt>
+        <dd>Whether the variable value is obfuscated</dd>
+        <dt>
+          <code
+            >synthetics.attributes.result.steps.&lt;step-index&gt;.extractedValue.value</code
+          >
+        </dt>
+        <dd>Variable value (if step was successful)</dd>
+      </dl>
+    </div>
   </div>
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Step"
-    data-if="236"
+    data-if="6275"
   >
     <h3 id="step-execution-details">Step execution details</h3>
     <p>Path: <code>synthetics.attributes.variables.extracted</code></p>
@@ -536,166 +605,238 @@ title: Synthetic Monitoring Template Variables
       metrics, and protocol-specific details. These values are only available
       when the step completes successfully.
     </p>
-    <h4 id="general-steps">General steps</h4>
-    <p>For multistep/browser/mobile tests:</p>
-    <dl>
-      <dt>
-        <code
-          >synthetics.attributes.variables.extracted.steps.allowFailure</code
+    <div class="code-tabs">
+      <ul class="nav nav-tabs d-flex"></ul>
+      <div class="tab-content">
+        <div
+          class="cdoc__toggleable"
+          data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
+          data-if="6271"
         >
-      </dt>
-      <dd>
-        Whether the step is allowed to fail without failing the entire test
-      </dd>
-      <dt>
-        <code>synthetics.attributes.variables.extracted.steps.duration</code>
-      </dt>
-      <dd>Step execution duration in milliseconds</dd>
-      <dt>
-        <code>synthetics.attributes.variables.extracted.steps.failure</code>
-      </dt>
-      <dd>
-        Failure information object containing <code>.code</code> and
-        <code>.message</code>
-      </dd>
-      <dt><code>synthetics.attributes.variables.extracted.steps.id</code></dt>
-      <dd>Unique step identifier</dd>
-      <dt>
-        <code>synthetics.attributes.variables.extracted.steps.isCritical</code>
-      </dt>
-      <dd>Whether the step is critical to the test</dd>
-      <dt>
-        <code>synthetics.attributes.variables.extracted.steps.status</code>
-      </dt>
-      <dd>Step execution status</dd>
-      <dt><code>synthetics.attributes.variables.extracted.steps.type</code></dt>
-      <dd>Type of step being executed</dd>
-    </dl>
-    <p><strong>Subtest information:</strong></p>
-    <dl>
-      <dt>
-        <code>synthetics.attributes.variables.extracted.steps.subTest.id</code>
-      </dt>
-      <dd>Subtest identifier</dd>
-      <dt>
-        <code
-          >synthetics.attributes.variables.extracted.steps.subStep.parentStep.id</code
+          <div
+            data-lang="general"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="General"
+          >
+            <dl>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.allowFailure</code
+                >
+              </dt>
+              <dd>
+                Whether the step is allowed to fail without failing the entire
+                test
+              </dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.duration</code
+                >
+              </dt>
+              <dd>Step execution duration in milliseconds</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.failure</code
+                >
+              </dt>
+              <dd>
+                Failure information object containing <code>.code</code> and
+                <code>.message</code>
+              </dd>
+              <dt>
+                <code>synthetics.attributes.variables.extracted.steps.id</code>
+              </dt>
+              <dd>Unique step identifier</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.isCritical</code
+                >
+              </dt>
+              <dd>Whether the step is critical to the test</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.status</code
+                >
+              </dt>
+              <dd>Step execution status</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.type</code
+                >
+              </dt>
+              <dd>Type of step being executed</dd>
+            </dl>
+            <p><strong>Subtest information:</strong></p>
+            <dl>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.subTest.id</code
+                >
+              </dt>
+              <dd>Subtest identifier</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.subStep.parentStep.id</code
+                >
+              </dt>
+              <dd>Parent step identifier</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.subStep.parentTest.id</code
+                >
+              </dt>
+              <dd>Parent test identifier</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.steps.subStep.level</code
+                >
+              </dt>
+              <dd>
+                Nesting level (1 for subtests, 2 for subtests of subtests)
+              </dd>
+            </dl>
+          </div>
+        </div>
+        <div
+          class="cdoc__toggleable"
+          data-description="platform is browser"
+          data-if="6272"
         >
-      </dt>
-      <dd>Parent step identifier</dd>
-      <dt>
-        <code
-          >synthetics.attributes.variables.extracted.steps.subStep.parentTest.id</code
+          <div
+            data-lang="browser"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Browser"
+          >
+            <p><strong>General:</strong></p>
+            <dl>
+              <dt><code>{{synthetics.attributes.result.startUrl}}</code></dt>
+              <dd>URL from test configuration</dd>
+            </dl>
+            <p><strong>Steps:</strong></p>
+            <dl>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.apiTest.request</code
+                >
+              </dt>
+              <dd>
+                API test request configuration (only for &quot;Run API
+                Test&quot; steps where <code>type</code> is
+                <code>runApiTest</code>)
+              </dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.apiTest.result</code
+                >
+              </dt>
+              <dd>
+                API test result data (similar to
+                <code>attributes.result</code> for API tests)
+              </dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.assertionResult.expected</code
+                >
+              </dt>
+              <dd>Expected value for assertions</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.assertionResults.checkType</code
+                >
+              </dt>
+              <dd>Type of assertion check</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.assertionResults.actual</code
+                >
+              </dt>
+              <dd>Actual value found during assertion</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.browserErrors</code
+                >
+              </dt>
+              <dd>List of browser errors encountered</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.timings.firstByte</code
+                >
+              </dt>
+              <dd>Time to first byte</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.timings.tcp</code
+                >
+              </dt>
+              <dd>TCP connection timing</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.description</code
+                >
+              </dt>
+              <dd>Step description</dd>
+            </dl>
+          </div>
+        </div>
+        <div
+          class="cdoc__toggleable cdoc__hidden"
+          data-description="platform is mobile"
+          data-if="6273"
         >
-      </dt>
-      <dd>Parent test identifier</dd>
-      <dt>
-        <code
-          >synthetics.attributes.variables.extracted.steps.subStep.level</code
+          <div
+            data-lang="mobile"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="Mobile"
+          >
+            <dl>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.application.versionId</code
+                >
+              </dt>
+              <dd>Mobile application version identifier</dd>
+              <dt>
+                <code>synthetics.attributes.variables.extracted.apiTest</code>
+              </dt>
+              <dd>API test data (for API test steps within mobile tests)</dd>
+              <dt>
+                <code
+                  >synthetics.attributes.variables.extracted.description</code
+                >
+              </dt>
+              <dd>Step description</dd>
+            </dl>
+          </div>
+        </div>
+        <div
+          class="cdoc__toggleable cdoc__hidden"
+          data-description="platform is multistep"
+          data-if="6274"
         >
-      </dt>
-      <dd>Nesting level (1 for subtests, 2 for subtests of subtests)</dd>
-    </dl>
-    <div
-      class="cdoc__toggleable"
-      data-description="Test Type is Browser"
-      data-if="233"
-    >
-      <h4 id="browser-tests">Browser Tests</h4>
-      <p><strong>General:</strong></p>
-      <dl>
-        <dt><code>{{synthetics.attributes.result.startUrl}}</code></dt>
-        <dd>URL from test configuration</dd>
-      </dl>
-      <p><strong>Steps:</strong></p>
-      <dl>
-        <dt>
-          <code>synthetics.attributes.variables.extracted.apiTest.request</code>
-        </dt>
-        <dd>
-          API test request configuration (only for &quot;Run API Test&quot;
-          steps where <code>type</code> is <code>runApiTest</code>)
-        </dd>
-        <dt>
-          <code>synthetics.attributes.variables.extracted.apiTest.result</code>
-        </dt>
-        <dd>
-          API test result data (similar to <code>attributes.result</code> for
-          API tests)
-        </dd>
-        <dt>
-          <code
-            >synthetics.attributes.variables.extracted.assertionResult.expected</code
+          <div
+            data-lang="api"
+            class="tab-pane fade"
+            role="tabpanel"
+            title="API"
           >
-        </dt>
-        <dd>Expected value for assertions</dd>
-        <dt>
-          <code
-            >synthetics.attributes.variables.extracted.assertionResults.checkType</code
-          >
-        </dt>
-        <dd>Type of assertion check</dd>
-        <dt>
-          <code
-            >synthetics.attributes.variables.extracted.assertionResults.actual</code
-          >
-        </dt>
-        <dd>Actual value found during assertion</dd>
-        <dt>
-          <code>synthetics.attributes.variables.extracted.browserErrors</code>
-        </dt>
-        <dd>List of browser errors encountered</dd>
-        <dt>
-          <code
-            >synthetics.attributes.variables.extracted.timings.firstByte</code
-          >
-        </dt>
-        <dd>Time to first byte</dd>
-        <dt>
-          <code>synthetics.attributes.variables.extracted.timings.tcp</code>
-        </dt>
-        <dd>TCP connection timing</dd>
-        <dt>
-          <code>synthetics.attributes.variables.extracted.description</code>
-        </dt>
-        <dd>Step description</dd>
-      </dl>
-    </div>
-    <div
-      class="cdoc__toggleable cdoc__hidden"
-      data-description="Test Type is Mobile"
-      data-if="234"
-    >
-      <h4 id="mobile-tests">Mobile Tests</h4>
-      <dl>
-        <dt>
-          <code
-            >synthetics.attributes.variables.extracted.application.versionId</code
-          >
-        </dt>
-        <dd>Mobile application version identifier</dd>
-        <dt><code>synthetics.attributes.variables.extracted.apiTest</code></dt>
-        <dd>API test data (for API test steps within mobile tests)</dd>
-        <dt>
-          <code>synthetics.attributes.variables.extracted.description</code>
-        </dt>
-        <dd>Step description</dd>
-      </dl>
-    </div>
-    <div
-      class="cdoc__toggleable cdoc__hidden"
-      data-description="Test Type is Multistep API"
-      data-if="235"
-    >
-      <h4 id="api-tests">API Tests</h4>
-      <p><strong>Multistep:</strong></p>
-      <dl>
-        <dt><code>synthetics.attributes.variables.extracted.name</code></dt>
-        <dd>Step name</dd>
-        <dt><code>synthetics.attributes.variables.extracted.type</code></dt>
-        <dd>Step type</dd>
-      </dl>
-      <p><em>Note: Follow regular API fields per subType</em></p>
+            <p><strong>Multistep:</strong></p>
+            <dl>
+              <dt>
+                <code>synthetics.attributes.variables.extracted.name</code>
+              </dt>
+              <dd>Step name</dd>
+              <dt>
+                <code>synthetics.attributes.variables.extracted.type</code>
+              </dt>
+              <dd>Step type</dd>
+            </dl>
+            <p><em>Note: Follow regular API fields per subType</em></p>
+          </div>
+        </div>
+      </div>
     </div>
     <h3 id="step-summary">Step summary</h3>
     <p>Path: <code>synthetics.attributes.result.steps</code></p>
@@ -715,32 +856,16 @@ title: Synthetic Monitoring Template Variables
       Use positive numbers to count from the beginning, or negative numbers to
       count from the end:
     </p>
-    <table>
-      <thead>
-        <tr>
-          <th>Syntax</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><code>synthetics.attributes.result.steps.0</code></td>
-          <td>First step</td>
-        </tr>
-        <tr>
-          <td><code>synthetics.attributes.result.steps.1</code></td>
-          <td>Second step</td>
-        </tr>
-        <tr>
-          <td><code>synthetics.attributes.result.steps.-1</code></td>
-          <td>Last step</td>
-        </tr>
-        <tr>
-          <td><code>synthetics.attributes.result.steps.-2</code></td>
-          <td>Second to last step</td>
-        </tr>
-      </tbody>
-    </table>
+    <dl>
+      <dt><code>synthetics.attributes.result.steps.0</code></dt>
+      <dd>First step</dd>
+      <dt><code>synthetics.attributes.result.steps.1</code></dt>
+      <dd>Second step</dd>
+      <dt><code>synthetics.attributes.result.steps.-1</code></dt>
+      <dd>Last step</dd>
+      <dt><code>synthetics.attributes.result.steps.-2</code></dt>
+      <dd>Second to last step</dd>
+    </dl>
     <h4 id="by-step-name">By step name</h4>
     <p>Use the step name in brackets:</p>
     <p><code>.steps[Click button]</code></p>
@@ -766,4 +891,4 @@ title: Synthetic Monitoring Template Variables
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"219":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"219"},"220":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"220"},"221":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"221"},"224":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"222"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"223"}},"v":true,"r":"224"},"225":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"225"},"228":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"226"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"227"}},"v":true,"r":"228"},"229":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"229"},"230":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"230"},"231":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"231"},"232":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"232"},"233":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"233"},"234":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"234"},"235":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"235"},"236":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"236"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"6243":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"6243"},"6244":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6244"},"6245":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6245"},"6248":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6246"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6247"}},"v":true,"r":"6248"},"6252":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6249"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6250"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6251"}},"v":true,"r":"6252"},"6253":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6253"},"6256":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6254"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6255"}},"v":true,"r":"6256"},"6260":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6257"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6258"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6259"}},"v":true,"r":"6260"},"6261":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"6261"},"6262":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"6262"},"6263":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"6263"},"6266":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6264"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6265"}},"v":true,"r":"6266"},"6267":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"6267"},"6271":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6268"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6269"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6270"}},"v":true,"r":"6271"},"6272":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6272"},"6273":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6273"},"6274":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6274"},"6275":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"6275"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>

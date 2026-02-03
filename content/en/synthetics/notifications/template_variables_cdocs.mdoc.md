@@ -53,8 +53,9 @@ Path: `synthetics.attributes`
 
 Use these variables to include details about the test, execution location, device, counts, and result status in your notification messages.
 
-#### Test Info
+{% tabs %}
 
+{% tab label="Test Info" %}
 `{{synthetics.attributes.test}}`
 : The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
 
@@ -70,8 +71,8 @@ Use these variables to include details about the test, execution location, devic
 `{{synthetics.attributes.test.id}}`
 : The test's public ID (for example, `abc-def-ghi`)
 
-#### Location
-
+{% /tab %}
+{% tab label="Location" %}
 `{{synthetics.attributes.location}}`
 : The `location` object contains information about the location of where the test is run from
 
@@ -84,13 +85,11 @@ Use these variables to include details about the test, execution location, devic
 `{{synthetics.attributes.location.privateLocation}}`
 : `true` for Private Locations
 
+{% /tab %}
+
 <!-- Result > Browser or Mobile -->
 {% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
-
-#### Device
-
-Applies to Browser and Mobile tests.
-
+{% tab label="Device" %}
 `{{synthetics.attributes.device}}`
 : The `device` object contains information about the device on which the test is run on
 
@@ -112,7 +111,6 @@ Applies to Browser and Mobile tests.
 : Browser type (browser tests only)
 {% /if %}
 <!-- end Result > Browser or Mobile > Browser -->
-
 <!-- Result > Browser or Mobile > Mobile -->
 {% if equals($platform, "mobile") %}
 `{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
@@ -120,11 +118,11 @@ Applies to Browser and Mobile tests.
 {% /if %}
 <!-- end Result > Browser or Mobile > Mobile -->
 
+{% /tab %}
+
 {% /if %}
 <!-- end Result > Browser or Mobile -->
-
-#### Result
-
+{% tab label="Result" %}
 `{{synthetics.attributes.result}}`
 : The `result` object contains information about the executed test run
 
@@ -149,10 +147,12 @@ Applies to Browser and Mobile tests.
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
 
-#### Count
+{% /tab %}
 
+<!-- Count -->
+{% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
+{% tab label="Count" %}
 Applies to Multistep, Browser, and Mobile tests.
-
 `{{synthetics.attributes.count}}`
 : The `count` object contains step statistics about the test
 
@@ -168,10 +168,15 @@ Applies to Multistep, Browser, and Mobile tests.
 `{{synthetics.attributes.count.hops}}`
 : The number of traceroute hops for TCP and ICMP tests
 
-#### Failed Step
+{% /tab %}
 
+{% /if %}
+<!-- end Count -->
+
+<!-- Failed step -->
+{% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
+{% tab label="Failed step" %}
 Applies to Multistep, Browser, and Mobile tests.
-
 `{{synthetics.failed_step}}`
 : The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly.
 
@@ -181,13 +186,19 @@ Applies to Multistep, Browser, and Mobile tests.
 : Maps to `{{synthetics.attributes.result.steps.<step-index>.name}}` (Multistep API)
 {% /if %}
 <!-- end Result > Multistep -->
-
 <!-- Result > Browser or Mobile -->
 {% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
 `{{synthetics.failed_step.description}}`
 : Maps to `{{synthetics.attributes.result.steps.<step-index>.description}}` (Browser, Mobile)
 {% /if %}
 <!-- end Result > Browser or Mobile -->
+
+{% /tab %}
+
+{% /if %}
+<!-- end Failed step -->
+
+{% /tabs %}
 
 {% /if %}
 <!-- end Result -->
@@ -249,7 +260,7 @@ Available only for **successful test results** and **recovery notifications**.
 
 Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
 
-**Applies to:** Browser and Mobile tests.
+{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
 
 These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
 
@@ -265,6 +276,8 @@ For information on how to access the `<step-index>`, see the step summary sectio
 : Variable value (if step was successful)
 
 {% /if %}
+
+{% /if %}
 <!-- end Extracted -->
 
 <!-- Step -->
@@ -276,10 +289,9 @@ Path: `synthetics.attributes.variables.extracted`
 
 These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
 
-#### General steps
-
-For multistep/browser/mobile tests:
-
+{% tabs %}
+{% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
+{% tab label="General" %}
 `synthetics.attributes.variables.extracted.steps.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
 
@@ -315,11 +327,11 @@ For multistep/browser/mobile tests:
 `synthetics.attributes.variables.extracted.steps.subStep.level`
 : Nesting level (1 for subtests, 2 for subtests of subtests)
 
-<!-- Step > Browser -->
+{% /tab %}
+{% /if %}
+
 {% if equals($platform, "browser") %}
-
-#### Browser Tests
-
+{% tab label="Browser" %}
 **General:**
 
 `{{synthetics.attributes.result.startUrl}}`
@@ -354,14 +366,11 @@ For multistep/browser/mobile tests:
 `synthetics.attributes.variables.extracted.description`
 : Step description
 
+{% /tab %}
 {% /if %}
-<!-- end Step > Browser -->
 
-<!-- Step > Mobile -->
 {% if equals($platform, "mobile") %}
-
-#### Mobile Tests
-
+{% tab label="Mobile" %}
 `synthetics.attributes.variables.extracted.application.versionId`
 : Mobile application version identifier
 
@@ -371,14 +380,11 @@ For multistep/browser/mobile tests:
 `synthetics.attributes.variables.extracted.description`
 : Step description
 
+{% /tab %}
 {% /if %}
-<!-- end Step > Mobile -->
 
-<!-- Step > Multistep -->
 {% if equals($platform, "multistep") %}
-
-#### API Tests
-
+{% tab label="API" %}
 **Multistep:**
 
 `synthetics.attributes.variables.extracted.name`
@@ -389,8 +395,10 @@ For multistep/browser/mobile tests:
 
 *Note: Follow regular API fields per subType*
 
+{% /tab %}
 {% /if %}
-<!-- end Step > Multistep -->
+
+{% /tabs %}
 
 ### Step summary
 
@@ -406,12 +414,17 @@ You can reference steps in three ways:
 
 Use positive numbers to count from the beginning, or negative numbers to count from the end:
 
-| Syntax | Description |
-|--------|-------------|
-| `synthetics.attributes.result.steps.0` | First step |
-| `synthetics.attributes.result.steps.1` | Second step |
-| `synthetics.attributes.result.steps.-1` | Last step |
-| `synthetics.attributes.result.steps.-2` | Second to last step |
+`synthetics.attributes.result.steps.0`
+: First step
+
+`synthetics.attributes.result.steps.1`
+: Second step
+
+`synthetics.attributes.result.steps.-1`
+: Last step
+
+`synthetics.attributes.result.steps.-2`
+: Second to last step
 
 #### By step name
 

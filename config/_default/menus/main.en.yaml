@@ -7882,7 +7882,7 @@ menu:
       parent: synthetics_notifications
       identifier: synthetics_notifications_template_variables_cdocs
       weight: 1001
-    - name: API Template Variables Cdoc
+    - name: API Template Variables
       url: synthetics/notifications/template_variables_api_cdocs
       parent: synthetics_notifications_template_variables_cdocs
       identifier: synthetics_notifications_template_variables_api_cdocs
