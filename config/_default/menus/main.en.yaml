@@ -3921,15 +3921,15 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_reporting
       weight: 5
-    - name: Explorer
-      url: cloud_cost_management/reporting/explorer
-      parent: cloud_cost_reporting
-      identifier: cloud_cost_explorer
-      weight: 501
     - name: Scheduled Reports
       url: cloud_cost_management/reporting/scheduled_reports
       parent: cloud_cost_reporting
       identifier: cloud_cost_scheduled_reports
+      weight: 501
+    - name: Explorer
+      url: cloud_cost_management/reporting/explorer
+      parent: cloud_cost_reporting
+      identifier: cloud_cost_explorer
       weight: 502
     - name: Recommendations
       url: cloud_cost_management/recommendations
