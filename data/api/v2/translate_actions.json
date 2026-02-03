@@ -2288,6 +2288,10 @@
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
   },
+  "EvaluatePolicyResult": {
+    "description": "Retrieve the evaluation result for a specific policy type.",
+    "summary": "Evaluate policy result"
+  },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
     "summary": "List findings"
@@ -3547,6 +3551,34 @@
     "summary": "Patch a global variable",
     "request_description": "JSON Patch document with operations to apply.",
     "request_schema_description": "JSON Patch request for global variable."
+  },
+  "ListTagPolicies": {
+    "description": "Retrieve a list of all tag policies for the organization.",
+    "summary": "List tag policies"
+  },
+  "CreateTagPolicy": {
+    "description": "Create a new tag policy for the organization.",
+    "summary": "Create a tag policy",
+    "request_description": "",
+    "request_schema_description": "Request for creating a tag policy."
+  },
+  "DeleteTagPolicy": {
+    "description": "Delete a specific tag policy by its ID.",
+    "summary": "Delete a tag policy"
+  },
+  "GetTagPolicy": {
+    "description": "Retrieve a specific tag policy by its ID.",
+    "summary": "Get a tag policy"
+  },
+  "UpdateTagPolicy": {
+    "description": "Update an existing tag policy by its ID.",
+    "summary": "Update a tag policy",
+    "request_description": "",
+    "request_schema_description": "Request for updating a tag policy."
+  },
+  "GetTagPolicyScore": {
+    "description": "Retrieve the compliance score for a specific tag policy.",
+    "summary": "Get tag policy score"
   },
   "ListTagPipelinesRulesets": {
     "description": "List all tag pipeline rulesets - Retrieve a list of all tag pipeline rulesets for the organization",
