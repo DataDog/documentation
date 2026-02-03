@@ -33,7 +33,9 @@ Creating and updating filtering policies requires the [`metric_tags_write`][1] R
 
 ## Prerequisites
 
-- Upgrade to Datadog Agent v7.67.0 or higher (v7.70.0 or higher is recommended) to filter DogStastD metrics. Datadog Agent v7.74.0 or higher is required for Agent Integration metrics.
+- Upgrade to Datadog Agent v7.67.0 or higher.
+    - Using v7.70.0 or higher is recommended to filter DogStastD metrics. 
+    - Using v7.74.0 or higher is required for Agent Integration metrics.
 - With [`org_management`][2] permissions, enable [Remote Configuration][3] for your organization.
 - With [`api_keys_write`][4] permissions, enable the [Remote Configuration capability on the API keys][5] used by your Agents. After enabling Remote Configuration on an API key, restart your Agents for the change to take effect.
 
