@@ -133,7 +133,7 @@ Datadog provides default rules that are automatically enabled:
 
 These default rules are fully configurable in the [DORA metrics settings][1] page. They are intended as opinionated starting points that interpret common signals as likely rollforward activity. You should adapt the patterns (such as naming conventions, labels, or version tags) as needed to reflect your own workflows and improve accuracy over time.
 
-## Updating deployment status
+## Update deployment status
 
 While automatic detection and custom rules handle most cases, you can still manually update a deployment's status to mark it as a change failure or mark a change failure as stable.
 
