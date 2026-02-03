@@ -116,7 +116,7 @@ sudo yum install datadog-security-cli
 {{% /tab %}}
 {{% tab "macOS" %}}
 
-### Install with Homebrew
+#### Install with Homebrew
 
 ```bash
 # Install via Homebrew
