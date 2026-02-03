@@ -183,7 +183,7 @@ datadog-security-cli image myapp:latest --fail-on high
 datadog-security-cli image myapp:latest --output json
 ```
 
-## View scan results
+### View scan results
 
 After running your first scan, results appear on the [Cloud Security Vulnerabilities][3] page within minutes. You can:
 
