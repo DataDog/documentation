@@ -54,7 +54,6 @@ Path: `synthetics.attributes`
 Use these variables to include details about the test, execution location, device, counts, and result status in your notification messages.
 
 {% tabs %}
-
 {% tab label="Test Info" %}
 `{{synthetics.attributes.test}}`
 : The `test` object contains information about the test like its `name`, `type`, `subtype`, and `id`
@@ -86,10 +85,13 @@ Use these variables to include details about the test, execution location, devic
 : `true` for Private Locations
 
 {% /tab %}
-
-<!-- Result > Browser or Mobile -->
-{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
 {% tab label="Device" %}
+{% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
+{% alert level="info" %}
+Device information is not available for this test type. Device variables are only available for **Browser** and **Mobile** tests.
+{% /alert %}
+{% /if %}
+{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
 `{{synthetics.attributes.device}}`
 : The `device` object contains information about the device on which the test is run on
 
@@ -108,20 +110,18 @@ Use these variables to include details about the test, execution location, devic
 <!-- Result > Browser or Mobile > Browser -->
 {% if equals($platform, "browser") %}
 `{{synthetics.attributes.device.browser.type}}`
-: Browser type (browser tests only)
+: Browser type (for example, `chrome`)
+
 {% /if %}
 <!-- end Result > Browser or Mobile > Browser -->
 <!-- Result > Browser or Mobile > Mobile -->
 {% if equals($platform, "mobile") %}
 `{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
-: Platform information (mobile tests only)
+: Platform information (for example, `android`, `ios`)
 {% /if %}
 <!-- end Result > Browser or Mobile > Mobile -->
-
-{% /tab %}
-
 {% /if %}
-<!-- end Result > Browser or Mobile -->
+{% /tab %}
 {% tab label="Result" %}
 `{{synthetics.attributes.result}}`
 : The `result` object contains information about the executed test run
@@ -153,6 +153,7 @@ Use these variables to include details about the test, execution location, devic
 {% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
 {% tab label="Count" %}
 Applies to Multistep, Browser, and Mobile tests.
+
 `{{synthetics.attributes.count}}`
 : The `count` object contains step statistics about the test
 
@@ -169,10 +170,8 @@ Applies to Multistep, Browser, and Mobile tests.
 : The number of traceroute hops for TCP and ICMP tests
 
 {% /tab %}
-
 {% /if %}
 <!-- end Count -->
-
 <!-- Failed step -->
 {% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
 {% tab label="Failed step" %}
@@ -192,12 +191,9 @@ Applies to Multistep, Browser, and Mobile tests.
 : Maps to `{{synthetics.attributes.result.steps.<step-index>.description}}` (Browser, Mobile)
 {% /if %}
 <!-- end Result > Browser or Mobile -->
-
 {% /tab %}
-
 {% /if %}
 <!-- end Failed step -->
-
 {% /tabs %}
 
 {% /if %}
@@ -260,6 +256,12 @@ Available only for **successful test results** and **recovery notifications**.
 
 Path: `synthetics.attributes.result.steps.<step-index>.extractedValue`
 
+{% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
+{% alert level="info" %}
+**Note:** Extracted variable values at the step level are only available for Browser and Mobile tests. Select **Browser** or **Mobile** from the Test Type dropdown to see these variables.
+{% /alert %}
+{% /if %}
+
 {% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
 
 These are the actual variable values that a step captured during test execution. For example, if you have a Browser test step that extracts text from a page element into a variable, this is where you access that extracted value.
@@ -288,6 +290,13 @@ For information on how to access the `<step-index>`, see the step summary sectio
 Path: `synthetics.attributes.variables.extracted`
 
 These are step execution metadata and results containing detailed information about how each step ran, including response data, timing metrics, and protocol-specific details. These values are only available when the step completes successfully.
+
+<!-- Alert for single-step API tests about step execution details -->
+{% if not(or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep"))) %}
+{% alert level="info" %}
+**Note:** Step execution details are only available for Multistep API, Browser, and Mobile tests. Select one of these test types to see step execution variables.
+{% /alert %}
+{% /if %}
 
 {% tabs %}
 {% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
@@ -329,7 +338,6 @@ These are step execution metadata and results containing detailed information ab
 
 {% /tab %}
 {% /if %}
-
 {% if equals($platform, "browser") %}
 {% tab label="Browser" %}
 **General:**
@@ -368,7 +376,6 @@ These are step execution metadata and results containing detailed information ab
 
 {% /tab %}
 {% /if %}
-
 {% if equals($platform, "mobile") %}
 {% tab label="Mobile" %}
 `synthetics.attributes.variables.extracted.application.versionId`
@@ -382,7 +389,6 @@ These are step execution metadata and results containing detailed information ab
 
 {% /tab %}
 {% /if %}
-
 {% if equals($platform, "multistep") %}
 {% tab label="API" %}
 **Multistep:**
@@ -397,7 +403,6 @@ These are step execution metadata and results containing detailed information ab
 
 {% /tab %}
 {% /if %}
-
 {% /tabs %}
 
 ### Step summary

@@ -185,7 +185,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution"
-    data-if="6243"
+    data-if="7319"
   >
     <h3 id="test-execution-variables">Test execution variables</h3>
     <p>Path: <code>synthetics</code> (various shortcuts)</p>
@@ -226,7 +226,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Result"
-    data-if="6261"
+    data-if="7341"
   >
     <h3 id="result-attributes">Result attributes</h3>
     <p>Path: <code>synthetics.attributes</code></p>
@@ -290,15 +290,28 @@ title: Synthetic Monitoring Template Variables
           </dl>
         </div>
         <div
-          class="cdoc__toggleable"
-          data-description="(platform is browser) or (platform is mobile)"
-          data-if="6248"
+          data-lang="device"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Device"
         >
           <div
-            data-lang="device"
-            class="tab-pane fade"
-            role="tabpanel"
-            title="Device"
+            class="cdoc__toggleable cdoc__hidden"
+            data-description="not (platform is browser) or (platform is mobile)"
+            data-if="7323"
+          >
+            <div class="alert alert-info">
+              <p>
+                Device information is not available for this test type. Device
+                variables are only available for <strong>Browser</strong> and
+                <strong>Mobile</strong> tests.
+              </p>
+            </div>
+          </div>
+          <div
+            class="cdoc__toggleable"
+            data-description="(platform is browser) or (platform is mobile)"
+            data-if="7328"
           >
             <dl>
               <dt><code>{{synthetics.attributes.device}}</code></dt>
@@ -321,26 +334,29 @@ title: Synthetic Monitoring Template Variables
             <div
               class="cdoc__toggleable"
               data-description="platform is browser"
-              data-if="6244"
+              data-if="7324"
             >
               <dl>
                 <dt>
                   <code>{{synthetics.attributes.device.browser.type}}</code>
                 </dt>
-                <dd>Browser type (browser tests only)</dd>
+                <dd>Browser type (for example, <code>chrome</code>)</dd>
               </dl>
             </div>
             <div
               class="cdoc__toggleable cdoc__hidden"
               data-description="platform is mobile"
-              data-if="6245"
+              data-if="7325"
             >
               <dl>
                 <dt>
                   <code>{{synthetics.attributes.device.platform.name}}</code>,
                   <code>{{synthetics.attributes.device.platform.version}}</code>
                 </dt>
-                <dd>Platform information (mobile tests only)</dd>
+                <dd>
+                  Platform information (for example, <code>android</code>,
+                  <code>ios</code>)
+                </dd>
               </dl>
             </div>
           </div>
@@ -388,7 +404,7 @@ title: Synthetic Monitoring Template Variables
         <div
           class="cdoc__toggleable"
           data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="6252"
+          data-if="7332"
         >
           <div
             data-lang="count"
@@ -396,12 +412,13 @@ title: Synthetic Monitoring Template Variables
             role="tabpanel"
             title="Count"
           >
-            <p>
-              Applies to Multistep, Browser, and Mobile tests.
-              <code>{{synthetics.attributes.count}}</code> : The
-              <code>count</code> object contains step statistics about the test
-            </p>
+            <p>Applies to Multistep, Browser, and Mobile tests.</p>
             <dl>
+              <dt><code>{{synthetics.attributes.count}}</code></dt>
+              <dd>
+                The <code>count</code> object contains step statistics about the
+                test
+              </dd>
               <dt><code>{{synthetics.attributes.count.steps.total}}</code></dt>
               <dd>The total number of steps</dd>
               <dt>
@@ -422,7 +439,7 @@ title: Synthetic Monitoring Template Variables
         <div
           class="cdoc__toggleable"
           data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="6260"
+          data-if="7340"
         >
           <div
             data-lang="failed-step"
@@ -443,7 +460,7 @@ title: Synthetic Monitoring Template Variables
             <div
               class="cdoc__toggleable cdoc__hidden"
               data-description="platform is multistep"
-              data-if="6253"
+              data-if="7333"
             >
               <dl>
                 <dt><code>{{synthetics.failed_step.name}}</code></dt>
@@ -459,7 +476,7 @@ title: Synthetic Monitoring Template Variables
             <div
               class="cdoc__toggleable"
               data-description="(platform is browser) or (platform is mobile)"
-              data-if="6256"
+              data-if="7336"
             >
               <dl>
                 <dt><code>{{synthetics.failed_step.description}}</code></dt>
@@ -480,7 +497,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Local"
-    data-if="6262"
+    data-if="7342"
   >
     <h3 id="local-variables">Local variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.config</code></p>
@@ -511,7 +528,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Global"
-    data-if="6263"
+    data-if="7343"
   >
     <h3 id="global-variables">Global variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.extracted</code></p>
@@ -546,7 +563,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Extracted"
-    data-if="6267"
+    data-if="7351"
   >
     <h3 id="extracted-variable-values">Extracted variable values</h3>
     <p>
@@ -556,9 +573,23 @@ title: Synthetic Monitoring Template Variables
       >
     </p>
     <div
+      class="cdoc__toggleable cdoc__hidden"
+      data-description="not (Test Type is Browser) or (Test Type is Mobile)"
+      data-if="7347"
+    >
+      <div class="alert alert-info">
+        <p>
+          <strong>Note:</strong> Extracted variable values at the step level are
+          only available for Browser and Mobile tests. Select
+          <strong>Browser</strong> or <strong>Mobile</strong> from the Test Type
+          dropdown to see these variables.
+        </p>
+      </div>
+    </div>
+    <div
       class="cdoc__toggleable"
       data-description="(Test Type is Browser) or (Test Type is Mobile)"
-      data-if="6266"
+      data-if="7350"
     >
       <p>
         These are the actual variable values that a step captured during test
@@ -595,7 +626,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Step"
-    data-if="6275"
+    data-if="7364"
   >
     <h3 id="step-execution-details">Step execution details</h3>
     <p>Path: <code>synthetics.attributes.variables.extracted</code></p>
@@ -605,13 +636,26 @@ title: Synthetic Monitoring Template Variables
       metrics, and protocol-specific details. These values are only available
       when the step completes successfully.
     </p>
+    <div
+      class="cdoc__toggleable cdoc__hidden"
+      data-description="not (Test Type is Browser) or (Test Type is Mobile) or (Test Type is Multistep API)"
+      data-if="7356"
+    >
+      <div class="alert alert-info">
+        <p>
+          <strong>Note:</strong> Step execution details are only available for
+          Multistep API, Browser, and Mobile tests. Select one of these test
+          types to see step execution variables.
+        </p>
+      </div>
+    </div>
     <div class="code-tabs">
       <ul class="nav nav-tabs d-flex"></ul>
       <div class="tab-content">
         <div
           class="cdoc__toggleable"
           data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="6271"
+          data-if="7360"
         >
           <div
             data-lang="general"
@@ -701,7 +745,7 @@ title: Synthetic Monitoring Template Variables
         <div
           class="cdoc__toggleable"
           data-description="platform is browser"
-          data-if="6272"
+          data-if="7361"
         >
           <div
             data-lang="browser"
@@ -783,7 +827,7 @@ title: Synthetic Monitoring Template Variables
         <div
           class="cdoc__toggleable cdoc__hidden"
           data-description="platform is mobile"
-          data-if="6273"
+          data-if="7362"
         >
           <div
             data-lang="mobile"
@@ -814,7 +858,7 @@ title: Synthetic Monitoring Template Variables
         <div
           class="cdoc__toggleable cdoc__hidden"
           data-description="platform is multistep"
-          data-if="6274"
+          data-if="7363"
         >
           <div
             data-lang="api"
@@ -891,4 +935,4 @@ title: Synthetic Monitoring Template Variables
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"6243":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"6243"},"6244":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6244"},"6245":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6245"},"6248":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6246"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6247"}},"v":true,"r":"6248"},"6252":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6249"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6250"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6251"}},"v":true,"r":"6252"},"6253":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6253"},"6256":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6254"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6255"}},"v":true,"r":"6256"},"6260":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6257"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6258"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6259"}},"v":true,"r":"6260"},"6261":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"6261"},"6262":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"6262"},"6263":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"6263"},"6266":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6264"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6265"}},"v":true,"r":"6266"},"6267":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"6267"},"6271":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6268"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6269"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6270"}},"v":true,"r":"6271"},"6272":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"6272"},"6273":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"6273"},"6274":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"6274"},"6275":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"6275"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"7319":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"7319"},"7323":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7320"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7321"}},"v":true,"r":"7322"}},"v":false,"r":"7323"},"7324":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7324"},"7325":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7325"},"7328":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7326"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7327"}},"v":true,"r":"7328"},"7332":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7329"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7330"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7331"}},"v":true,"r":"7332"},"7333":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7333"},"7336":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7334"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7335"}},"v":true,"r":"7336"},"7340":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7337"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7338"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7339"}},"v":true,"r":"7340"},"7341":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"7341"},"7342":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"7342"},"7343":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"7343"},"7347":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7344"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7345"}},"v":true,"r":"7346"}},"v":false,"r":"7347"},"7350":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7348"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7349"}},"v":true,"r":"7350"},"7351":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"7351"},"7356":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7352"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7353"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7354"}},"v":true,"r":"7355"}},"v":false,"r":"7356"},"7360":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7357"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7358"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7359"}},"v":true,"r":"7360"},"7361":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7361"},"7362":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7362"},"7363":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7363"},"7364":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"7364"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
