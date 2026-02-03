@@ -86,7 +86,7 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 ### Set up programmatically
 
-As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using [API key][19] and [Application key][20] instead of the one-time enrollment token. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows where manual UI interaction is not practical.
+As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using your [API key][19] and [Application key][20]. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows.
 
 To use this authentication method:
 1. Provide your Datadog API and App keys through the `DD_API_KEY` and `DD_APP_KEY` environment variables.
@@ -96,14 +96,16 @@ The runner uses these credentials to register itself with your Datadog organizat
 
 #### Example commands
 
-1. Update the `RUNNER_NAME`.
-2. Check that `DD_BASE_URL` points to the Datadog site you use, for ex. https://app.datadoghq.com.
-3. Replace `./config` with the path to the directory you created for the runner configuration.
+Use the following commands to create an auto-enrollment script that can be re-run as needed for automated deployments. Once auto-enrollment succeeds, the runner appears on the **Private Action Runners** page.
+
+Before running the commands, update the following values:
+- **RUNNER_NAME**: A unique name for your runner.
+- **DD_BASE_URL**: Your Datadog site URL (for example, `https://app.datadoghq.com`).
+- **./config**: The path to your runner configuration directory.
+- (Optional) **Image version**: Update the image tag to use a newer version of the runner.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-
-Set up an auto-enrollment script with your `DD_API_KEY`, `DD_APP_KEY` and the `docker run` command.
 
 ```bash
 export DD_API_KEY="<YOUR_API_KEY>"
@@ -125,9 +127,7 @@ docker run -d \
 
 {{% tab "Docker Compose" %}}
 
-Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose documentation][101].
-
-Set up an auto-enrollment script with your `DD_API_KEY`, `DD_APP_KEY` and the `docker compose up -d` command.
+Create a `docker-compose.yaml` file with the following content. For more information, see the [official Compose documentation][101].
 
 ```yaml
 # docker-compose.yaml
@@ -161,9 +161,7 @@ DD_API_KEY=$DD_API_KEY DD_APP_KEY=$DD_APP_KEY docker compose up -d
 
 {{% tab "Kubernetes" %}}
 
-Set up an auto-enrollment script with 2 steps:
-1. Generate the runner configuration with your `DD_API_KEY`, `DD_APP_KEY` and the `docker run` command.
-2. Deploy the Helm chart.
+1. Generate the runner configuration:
 
 ```bash
 export DD_API_KEY="<YOUR_API_KEY>"
@@ -181,7 +179,8 @@ docker run \
   --with-api-key --enroll -f helm-values > values.yaml
 ```
 
-Deploy with:
+2. Deploy the Helm chart:
+
 ```bash
 helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
 ```
@@ -189,8 +188,6 @@ helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-
-When the auto-enrollment script succeeds, the new runner will appear on the **Private Action Runners** page.
 When you see the **Ready to use** status, you can create a new connection for the runner or see it on the **Private Action Runners** page:
 - To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
 - Click **View Runner** to see the runner on the **Private Action Runners** page.
