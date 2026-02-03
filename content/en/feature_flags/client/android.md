@@ -39,15 +39,17 @@ dependencies {
 
 Initialize Datadog as early as possible in your app lifecycle—typically in your `Application` class's `onCreate()` method. This ensures all feature flag evaluations and telemetry are captured correctly.
 
-{{< code-block lang="kotlin" >}}
+```kotlin
 val configuration = Configuration.Builder(
     clientToken = "<CLIENT_TOKEN>",
     env = "<ENV_NAME>",
     variant = "<APP_VARIANT_NAME>"
-).build()
+)
+    .useSite(DatadogSite.{{< region-param key="jenkins_site_name" code="true" >}})
+    .build()
 
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
-{{< /code-block >}}
+```
 
 ## Enable flags
 
