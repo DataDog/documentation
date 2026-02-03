@@ -25,7 +25,7 @@ Cloud Cost Management (CCM) uses two permissions to control access to cost data 
 
 ## Permission requirements by page
 
-The table below shows which permissions are required for each CCM page and related features.
+The table below shows the required permissions for each CCM page and related features.
 
 | Page/Functionality                            | Read Permission                                  | Write Permission                                  |
 |-----------------------------------------------|--------------------------------------------------|---------------------------------------------------|
@@ -47,7 +47,7 @@ The table below shows which permissions are required for each CCM page and relat
 
 ## Data access control
 
-Use [Data Access Control][2] to restrict access to cost data by specific tags. With this feature, you can limit teams to see only costs relevant to their resources—for example, restricting a team to view only costs tagged with `team:payments` or `env:production`.
+Use [Data Access Control][2] to restrict access to cost data by specific tags. With this feature, you can limit teams to see only costs relevant to their resources. For example, restricting a team to view only costs tagged with `team:payments` or `env:production`.
 
 ## Further reading
 
