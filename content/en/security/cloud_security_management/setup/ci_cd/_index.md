@@ -75,7 +75,7 @@ The customizable script approach gives you full control over when and how scans 
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
 
-### Install from package repository
+#### Install from package repository
 
 ```bash
 # Import Datadog APT signing key
