@@ -14,7 +14,7 @@ further_reading:
 
 This guide provides a step-by-step approach to building a Dockerfile for Go applications instrumented with Application Performance Monitoring (APM) using [Orchestrion][1]. The goal is to create a production-ready container image that includes compile-time instrumentation for distributed tracing.
 
-This guide focuses on APM instrumentation only. If you need Application Security Management (ASM) features, refer to the [App and API Protection Dockerfile guide][2].
+This guide focuses on APM instrumentation only. If you need Application Security Management (ASM) features, see the [App and API Protection Dockerfile guide][2].
 
 ## Prerequisites
 
