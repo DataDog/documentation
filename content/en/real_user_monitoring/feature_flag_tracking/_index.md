@@ -20,6 +20,10 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">
+This page explains how to enrich RUM data to track feature flag usage and status. If you want to create feature flags directly in Datadog, see the <a href="https://docs.datadoghq.com/feature_flags/">Datadog Feature Flags documentation</a>.
+</div>
+
 Feature flag data provides greater visibility into user experience and performance monitoring. It allows you to determine which users are being shown a specific feature and assess if any changes introduced are impacting user experience or negatively affecting performance. You can use this information to determine whether or not to roll back the feature.
 
 By enriching your RUM data with feature flag data, you can:
