@@ -144,7 +144,7 @@ Consider manually updating a deployment's status in the following scenarios:
 - A deployment was incorrectly classified as a change failure (false positive).
 - You need to immediately reflect the correct status for reporting purposes.
 
-### Updating status through the API
+### Update status through the API
 
 Use the [DORA Metrics API][4] to update a deployment's status programmatically. The following example marks a deployment as a change failure and links it to a rollback remediation:
 
