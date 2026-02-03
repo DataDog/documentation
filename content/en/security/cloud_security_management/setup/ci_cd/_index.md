@@ -128,7 +128,7 @@ brew install --cask datadog-security-cli
 {{% /tab %}}
 {{< /tabs >}}
 
-### Run your first scan
+#### Run your first scan
 
 After installing the Datadog Security CLI, configure your Datadog credentials and scan a container image:
 
