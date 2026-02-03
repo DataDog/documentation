@@ -133,6 +133,55 @@ Datadog provides default rules that are automatically enabled:
 
 These default rules are fully configurable in the [DORA metrics settings][1] page. They are intended as opinionated starting points that interpret common signals as likely rollforward activity. You should adapt the patterns (such as naming conventions, labels, or version tags) as needed to reflect your own workflows and improve accuracy over time.
 
+## Updating deployment status
+
+While automatic detection and custom rules handle most cases, you can still manually update a deployment's status to mark it as a change failure or mark a change failure as stable.
+
+### When to update deployment status
+
+Consider manually updating a deployment's status in the following scenarios:
+- A deployment caused production issues but was not detected as a change failure
+- A deployment was incorrectly classified as a change failure (false positive)
+- You need to immediately reflect the correct status for reporting purposes
+
+### Updating status through the API
+
+Use the [DORA Metrics API][4] to update a deployment's status programmatically. The following example marks a deployment as a change failure and links it to a rollback remediation:
+
+```shell
+curl -X PATCH "https://api.datadoghq.com/api/v2/dora/deployment/{deployment_id}" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-d @- << EOF
+{
+  "data": {
+    "attributes": {
+      "change_failure": true,
+      "remediation": {
+        "id": "eG42zNIkVjM",
+        "type": "rollback"
+      }
+    },
+    "id": "z_RwVLi7v4Y",
+    "type": "dora_deployment_patch_request"
+  }
+}
+EOF
+```
+
+The `remediation` field is optional, but required to calculate failed deployment recovery time.
+
+### Updating status through the UI
+
+To update a deployment's status from the Datadog UI:
+
+1. Navigate to **Software Delivery** > **DORA Metrics** > [**Deployments**][5].
+2. Click on a deployment to open the deployment details panel.
+3. In the deployment details panel, select the **Deployment status** from the dropdown to mark the deployment as failed or stable.
+
+{{< img src="dora_metrics/deployment_status_update.gif" alt="Updating a deployment's change failure status from the Datadog UI" style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -140,3 +189,5 @@ These default rules are fully configurable in the [DORA metrics settings][1] pag
 [1]: https://app.datadoghq.com/ci/settings/dora
 [2]: /dora_metrics/calculation/#change-failure-rate
 [3]: /dora_metrics/calculation/#failed-deployment-recovery-time
+[4]: /api/latest/dora-metrics/#patch-a-deployment-event
+[5]: https://app.datadoghq.com/ci/dora/deployments
