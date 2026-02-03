@@ -2755,7 +2755,7 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
-    - name: JavaScript Expressions
+    - name: Expressions
       url: actions/workflows/expressions/
       parent: workflows
       identifier: workflows_expressions
