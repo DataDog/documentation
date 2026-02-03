@@ -185,7 +185,7 @@ datadog-security-cli image myapp:latest --output json
 
 ## View scan results
 
-After running your first scan, results appear in the [Cloud Security Vulnerabilities][3] page within minutes. You can:
+After running your first scan, results appear on the [Cloud Security Vulnerabilities][3] page within minutes. You can:
 
 - **Filter by resource type**: View vulnerabilities specific to container images scanned in CI/CD
 - **Prioritize by severity**: Focus on critical and high-severity vulnerabilities first
