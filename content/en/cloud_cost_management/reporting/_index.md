@@ -88,11 +88,10 @@ Use filters to include only the specific costs you want to allocate, such as by 
   - **Summary**: A consolidated, overall picture of your costs.
   - **Day over day**, **week over week** or **month over month**: Analyze how your costs change on a day to day, week to week, or month to month basis and identify trends or unusual fluctuations.
 - Update the **time frame** and **comparison time frame**:
-  - **Select your time frame** and **comparison period**:
-    - Choose your time frame to set the reporting period you want to analyze.
-    - Add a comparison period to spot cost changes:
-      - **Default comparison**: Automatically compares to the immediately preceding period (for example, this week vs. last week).
-      - **Flexible comparison**: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns. Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.
+  - Choose your time frame to set the reporting period you want to analyze.
+  - Add a comparison period to spot cost changes:
+    - **Default comparison**: Automatically compares to the immediately preceding period (for example, this week vs. last week).
+    - **Flexible comparison**: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns. Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.
       
 
 ### Advanced options (optional)
