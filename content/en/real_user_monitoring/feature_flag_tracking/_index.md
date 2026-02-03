@@ -34,7 +34,7 @@ Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, an
 
 You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of Datadog's integration partners. 
 
-Create and track feature flags directly in Datadog, use one of Datadog's integration partners, or use your own [custom feature flag management solution][2]:
+Create and track feature flags directly in Datadog, or track feature flags from one of Datadog's integration partners or your own [custom feature flag management solution][2]:
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
