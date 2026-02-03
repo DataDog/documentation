@@ -102,12 +102,15 @@ Datadog recommends using a unique incremental identifier for the incremental col
 
 ##### Checkpoint values
 
-Checkpoint values are updated every job run. To monitor the checkpoint value, there are Worker logs that contain the message `Checkpoint updated` and the latest value that was published. If a job fails or the Worker unexpectedly restarts or shuts down, the checkpoint value reverts to the start value. To determine the checkpoint value for a job that failed:
+Checkpoint values are updated every job run. To monitor the checkpoint value, there are Worker logs that contain the message `Checkpoint updated` and the latest value that the Worker queried. If a job fails or the Worker unexpectedly restarts or shuts down, the checkpoint value reverts to the start value set in the MySQL source. To determine the checkpoint value for a job that failed:
 
 1. Navigate to [Log Explorer][3] and search for Worker logs with the message `Checkpoint updated`.
-1. Check the value found in the latest Worker log to see what the Worker tracked.
-1. Check the log in your destination to which your logs were sent and determine the last value sent.
-1. Manually reset the checkpoint value in the MySQL source in the pipelines UI.
+1. Check the latest Worker log to see the last checkpoint value the Worker received from querying the database.
+1. Check the logs in your destination to see the last checkpoint value it received from the Worker. This value might not be the same as the checkpoint value seen in the latest Worker log. If you want to ensure that every record is sent to the destination at least once, reset the starting checkpoint value in the MySQL source with the destination's last checkpoint value.
+1. To reset the checkpoint value in the MySQL source:
+    1. Navigate to [Observability Pipelines][1].
+    1. Click on your pipeline and click.
+    1. In the MySQL source, enter the destination's last checkpoint value in the **Checkpoint value** field.
 
 #### External tools for validating queries
 
