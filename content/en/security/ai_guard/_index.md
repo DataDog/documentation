@@ -1,6 +1,5 @@
 ---
 title: AI Guard
-private: true
 further_reading:
 - link: /security/ai_guard/onboarding/
   tag: Documentation
@@ -8,10 +7,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-guardrails-best-practices/"
   tag: "Blog"
   text: "LLM guardrails: Best practices for deploying LLM apps securely"
+- link: https://www.datadoghq.com/blog/ai-guard/
+  tag: Blog
+  text: Protect agentic AI applications with Datadog AI Guard
 ---
 
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
+
+{{< callout url="https://www.datadoghq.com/product-preview/ai-security/"
+ btn_hidden="false" header="Join the Preview!">}}
+AI Guard is in Preview. Use this form to submit your request today.
+{{< /callout >}}
 
 Datadog AI Guard is a defense-in-depth product designed to **inspect, block,** and **govern** AI behavior in real-time. AI Guard is built to plug in directly with existing Datadog tracing and observability workflows to secure agentic AI systems in production.
 

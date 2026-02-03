@@ -2702,7 +2702,6 @@ menu:
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 7
-      weight: 10000
     - name: Agents
       url: actions/agents/
       pre: robot-wui
@@ -2846,7 +2845,6 @@ menu:
       parent: app_builder
       identifier: app_builder_saved_actions
       weight: 10
-      weight: 30000
     - name: Datastores
       url: actions/datastores/
       pre: datastores-wui
@@ -7041,6 +7039,172 @@ menu:
       parent: cloud_siem
       identifier: siem_data_security
       weight: 12
+    - name: Code Security
+      identifier: code_security
+      url: /security/code_security/
+      parent: security_platform_heading
+      pre: security-code-security
+      weight: 30000
+    - name: Static Code Analysis (SAST)
+      identifier: sec_static_analysis
+      url: /security/code_security/static_analysis/
+      parent: code_security
+      weight: 1
+    - name: Setup
+      identifier: sec_static_analysis_setup
+      url: /security/code_security/static_analysis/setup/
+      parent: sec_static_analysis
+      weight: 1
+    - name: GitHub Actions
+      identifier: sec_static_analysis_github_actions
+      url: /security/code_security/static_analysis/github_actions/
+      parent: sec_static_analysis
+      weight: 2
+    - name: Generic CI Providers
+      identifier: sec_static_analysis_generic_ci_providers
+      url: /security/code_security/static_analysis/generic_ci_providers/
+      parent: sec_static_analysis
+      weight: 3
+    - name: AI-Enhanced Static Code Analysis
+      identifier: sec_static_analysis_ai
+      url: /security/code_security/static_analysis/ai_enhanced_sast/
+      parent: sec_static_analysis
+      weight: 5
+    - name: SAST Custom Rule Creation Tutorial
+      identifier: sec_static_analysis_custom_rules_tutorial
+      url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 6
+    - name: SAST Custom Rules
+      identifier: sec_static_analysis_custom_rules
+      url: /security/code_security/static_analysis/custom_rules/
+      parent: sec_static_analysis
+      weight: 7
+    - name: SAST Custom Rules Guide
+      identifier: sec_static_analysis_custom_rules_guide
+      url: /security/code_security/static_analysis/custom_rules/guide/
+      parent: sec_static_analysis
+      weight: 8
+    - name: Static Code Analysis (SAST) rules
+      identifier: sec_static_analysis_rules
+      url: /security/code_security/static_analysis/static_analysis_rules/
+      parent: sec_static_analysis
+      weight: 9
+    - name: Software Composition Analysis (SCA)
+      identifier: software_composition_analysis
+      url: /security/code_security/software_composition_analysis/
+      parent: code_security
+      weight: 2
+    - name: Static Setup
+      identifier: sca_setup_static
+      url: /security/code_security/software_composition_analysis/setup_static/
+      parent: software_composition_analysis
+      weight: 1
+    - name: Runtime Setup
+      identifier: sca_setup_runtime
+      url: /security/code_security/software_composition_analysis/setup_runtime/
+      parent: software_composition_analysis
+      weight: 2
+    - name: Library Compatibility
+      identifier: sca_setup_runtime_compatibility
+      url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
+      parent: sca_setup_runtime
+      weight: 1
+    - name: Library Inventory
+      identifier: sca_library_inventory
+      url: /security/code_security/software_composition_analysis/library_inventory/
+      parent: software_composition_analysis
+      weight: 3
+    - name: Secret Scanning
+      identifier: sec_secret_scanning
+      url: /security/code_security/secret_scanning/
+      parent: code_security
+      weight: 3
+    - name: GitHub Actions
+      identifier: sec_secret_scanning_github_actions
+      url: /security/code_security/secret_scanning/github_actions/
+      parent: sec_secret_scanning
+      weight: 1
+    - name: Generic CI Providers
+      identifier: sec_secret_scanning_generic_ci_providers
+      url: /security/code_security/secret_scanning/generic_ci_providers/
+      parent: sec_secret_scanning
+      weight: 2
+    - name: Secret Validation
+      identifier: sec_secret_scanning_secret_validation
+      url: /security/code_security/secret_scanning/secret_validation/
+      parent: sec_secret_scanning
+      weight: 3
+    - name: Runtime Code Analysis (IAST)
+      identifier: sec_iast
+      url: /security/code_security/iast/
+      parent: code_security
+      weight: 4
+    - name: Setup
+      identifier: sec_iast_setup
+      url: /security/code_security/iast/setup/
+      parent: sec_iast
+      weight: 1
+    - name: Security Controls
+      identifier: sec_code_security_controls
+      url: /security/code_security/iast/security_controls/
+      parent: sec_iast
+      weight: 2
+    - name: Infrastructure as Code (IaC) Security
+      identifier: code_security_iac_security
+      url: /security/code_security/iac_security/
+      parent: code_security
+      weight: 5
+    - name: Setup
+      identifier: code_security_iac_security_setup
+      url: /security/code_security/iac_security/setup/
+      parent: code_security_iac_security
+      weight: 100000
+    - name: Exclusions
+      identifier: code_security_iac_security_exclusions
+      url: /security/code_security/iac_security/exclusions/
+      parent: code_security_iac_security
+      weight: 100001
+    - name: Rules
+      identifier: code_security_iac_security_rules
+      url: /security/code_security/iac_security/iac_rules/
+      parent: code_security_iac_security
+      weight: 100002
+    - name: Developer Tool Integrations
+      identifier: dev_tool_int
+      url: /security/code_security/dev_tool_int/
+      parent: code_security
+      weight: 6
+    - name: Pull Request Comments
+      identifier: dev_tool_int_github_pull_requests
+      url: /security/code_security/dev_tool_int/pull_request_comments/
+      parent: dev_tool_int
+      weight: 1
+    - name: PR Gates
+      identifier: dev_tool_int_pr_gates
+      url: /pr_gates/
+      parent: dev_tool_int
+      weight: 2
+    - name: IDE Plugins
+      identifier: dev_tool_int_ide_plugins
+      url: /security/code_security/dev_tool_int/ide_plugins/
+      parent: dev_tool_int
+      weight: 3
+    - name: Git Hooks
+      identifier: dev_tool_int_git_hooks
+      url: /security/code_security/dev_tool_int/git_hooks/
+      parent: dev_tool_int
+      weight: 4
+    - name: Troubleshooting
+      identifier: sec_code_sec_tshoot
+      url: /security/code_security/troubleshooting/
+      parent: code_security
+      weight: 7
+    - name: Guides
+      identifier: code_security_guides
+      url: /security/code_security/guides/
+      parent: code_security
+      weight: 8
     - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
@@ -7097,102 +7261,6 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
       weight: 107
-    - name: Workload Protection
-      url: security/workload_protection/
-      pre: security-workload-security
-      parent: security_platform_heading
-      identifier: workload_protection
-      weight: 60000
-    - name: Setup
-      url: security/workload_protection/setup
-      parent: workload_protection
-      identifier: workload_protection_setup
-      weight: 100
-    - name: Deploy the Agent
-      url: security/workload_protection/setup/agent
-      parent: workload_protection_setup
-      identifier: workload_protection_workload_setup_agent
-      weight: 3
-    - name: Workload Protection Agent Variables
-      url: security/workload_protection/setup/agent_variables
-      parent: workload_protection_setup
-      identifier: workload_protection_agent_variables
-      weight: 4
-    - name: Detection Rules
-      url: security/workload_protection/workload_security_rules
-      parent: workload_protection
-      identifier: workload_protection_workload_security_rules
-      weight: 201
-    - name: OOTB Rules
-      url: /security/workload_protection/setup/ootb_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_ootb_rules
-      weight: 100
-    - name: Custom Rules
-      url: security/workload_protection/workload_security_rules/custom_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_custom_rules
-      weight: 101
-    - name: Investigate Security Signals
-      url: security/workload_protection/security_signals
-      parent: workload_protection
-      identifier: workload_protection_security_signals
-      weight: 202
-    - name: Investigate Agent Events
-      url: security/workload_protection/investigate_agent_events
-      parent: workload_protection
-      identifier: workload_protection_agent_events
-      weight: 203
-    - name: Creating Agent Rule Expressions
-      url: security/workload_protection/agent_expressions
-      parent: workload_protection
-      identifier: workload_protection_agent_expressions
-      weight: 204
-    - name: Writing Custom Rule Expressions
-      url: security/workload_protection/secl_auth_guide
-      parent: workload_protection_agent_expressions
-      identifier: workload_protection_secl_guide
-      weight: 1
-    - name: Linux Syntax
-      url: security/workload_protection/linux_expressions
-      parent: workload_protection_agent_expressions
-      identifier: linux_expressions
-      weight: 2
-    - name: Windows Syntax
-      url: security/workload_protection/windows_expressions
-      parent: workload_protection_agent_expressions
-      identifier: windows_expressions
-      weight: 3
-    - name: Coverage and Posture Management
-      url: security/workload_protection/inventory
-      parent: workload_protection
-      identifier: workload_protection_inventory
-      weight: 205
-    - name: Hosts and Containers
-      url: security/workload_protection/inventory/hosts_and_containers
-      parent: workload_protection_inventory
-      identifier: workload_protection_hosts_and_containers
-      weight: 1
-    - name: Serverless
-      url: security/workload_protection/inventory/serverless
-      parent: workload_protection_inventory
-      identifier: workload_protection_serverless
-      weight: 2
-    - name: Coverage
-      url: security/workload_protection/inventory/coverage_map
-      parent: workload_protection_inventory
-      identifier: workload_protection_coverage_map
-      weight: 3
-    - name: Guides
-      url: security/workload_protection/guide
-      parent: workload_protection
-      identifier: workload_protection_guides
-      weight: 206
-    - name: Troubleshooting
-      url: security/workload_protection/troubleshooting/threats
-      parent: workload_protection
-      identifier: workload_protection_troubleshooting
-      weight: 206
     - name: Security Graph
       url: security/cloud_security_management/security_graph/
       parent: csm
@@ -7419,12 +7487,119 @@ menu:
       parent: application_security
       identifier: appsec_troubleshooting
       weight: 11
+    - name: AI Guard
+      url: /security/ai_guard/
+      pre: siem
+      identifier: ai_guard
+      parent: security_platform_heading
+      weight: 60000
+    - name: Get Started with AI Guard
+      url: /security/ai_guard/onboarding/
+      identifier: ai_guard_onboarding
+      parent: ai_guard
+      weight: 1
+    - name: Workload Protection
+      url: security/workload_protection/
+      pre: security-workload-security
+      parent: security_platform_heading
+      identifier: workload_protection
+      weight: 70000
+    - name: Setup
+      url: security/workload_protection/setup
+      parent: workload_protection
+      identifier: workload_protection_setup
+      weight: 100
+    - name: Deploy the Agent
+      url: security/workload_protection/setup/agent
+      parent: workload_protection_setup
+      identifier: workload_protection_workload_setup_agent
+      weight: 1
+    - name: Workload Protection Agent Variables
+      url: security/workload_protection/setup/agent_variables
+      parent: workload_protection_setup
+      identifier: workload_protection_agent_variables
+      weight: 2
+    - name: Detection Rules
+      url: security/workload_protection/workload_security_rules
+      parent: workload_protection
+      identifier: workload_protection_workload_security_rules
+      weight: 201
+    - name: OOTB Rules
+      url: /security/workload_protection/setup/ootb_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_ootb_rules
+      weight: 100
+    - name: Custom Rules
+      url: security/workload_protection/workload_security_rules/custom_rules
+      parent: workload_protection_workload_security_rules
+      identifier: workload_protection_custom_rules
+      weight: 101
+    - name: Investigate Security Signals
+      url: security/workload_protection/security_signals
+      parent: workload_protection
+      identifier: workload_protection_security_signals
+      weight: 202
+    - name: Investigate Agent Events
+      url: security/workload_protection/investigate_agent_events
+      parent: workload_protection
+      identifier: workload_protection_agent_events
+      weight: 203
+    - name: Creating Agent Rule Expressions
+      url: security/workload_protection/agent_expressions
+      parent: workload_protection
+      identifier: workload_protection_agent_expressions
+      weight: 204
+    - name: Writing Custom Rule Expressions
+      url: security/workload_protection/secl_auth_guide
+      parent: workload_protection_agent_expressions
+      identifier: workload_protection_secl_guide
+      weight: 1
+    - name: Linux Syntax
+      url: security/workload_protection/linux_expressions
+      parent: workload_protection_agent_expressions
+      identifier: linux_expressions
+      weight: 2
+    - name: Windows Syntax
+      url: security/workload_protection/windows_expressions
+      parent: workload_protection_agent_expressions
+      identifier: windows_expressions
+      weight: 3
+    - name: Coverage and Posture Management
+      url: security/workload_protection/inventory
+      parent: workload_protection
+      identifier: workload_protection_inventory
+      weight: 205
+    - name: Hosts and Containers
+      url: security/workload_protection/inventory/hosts_and_containers
+      parent: workload_protection_inventory
+      identifier: workload_protection_hosts_and_containers
+      weight: 1
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_serverless
+      weight: 2
+    - name: Coverage
+      url: security/workload_protection/inventory/coverage_map
+      parent: workload_protection_inventory
+      identifier: workload_protection_coverage_map
+      weight: 3
+    - name: Guides
+      url: security/workload_protection/guide
+      parent: workload_protection
+      identifier: workload_protection_guides
+      weight: 206
+    - name: Troubleshooting
+      url: security/workload_protection/troubleshooting/threats
+      parent: workload_protection
+      identifier: workload_protection_troubleshooting
+      weight: 206
     - name: Sensitive Data Scanner
       url: /security/sensitive_data_scanner/
       pre: sensitive-data-scanner
       identifier: sensitive_data_scanner
       parent: security_platform_heading
-      weight: 70000
+      weight: 80000
     - name: Setup
       url: /security/sensitive_data_scanner/setup/
       identifier: sds_setup
@@ -7460,172 +7635,6 @@ menu:
       identifier: sds_guides
       parent: sensitive_data_scanner
       weight: 3
-    - name: Code Security
-      identifier: code_security
-      url: /security/code_security/
-      parent: security_platform_heading
-      pre: security-code-security
-      weight: 30000
-    - name: Static Code Analysis (SAST)
-      identifier: sec_static_analysis
-      url: /security/code_security/static_analysis/
-      parent: code_security
-      weight: 1
-    - name: Setup
-      identifier: sec_static_analysis_setup
-      url: /security/code_security/static_analysis/setup/
-      parent: sec_static_analysis
-      weight: 1
-    - name: GitHub Actions
-      identifier: sec_static_analysis_github_actions
-      url: /security/code_security/static_analysis/github_actions/
-      parent: sec_static_analysis
-      weight: 2
-    - name: Generic CI Providers
-      identifier: sec_static_analysis_generic_ci_providers
-      url: /security/code_security/static_analysis/generic_ci_providers/
-      parent: sec_static_analysis
-      weight: 3
-    - name: AI-Enhanced Static Code Analysis
-      identifier: sec_static_analysis_ai
-      url: /security/code_security/static_analysis/ai_enhanced_sast/
-      parent: sec_static_analysis
-      weight: 5
-    - name: SAST Custom Rule Creation Tutorial
-      identifier: sec_static_analysis_custom_rules_tutorial
-      url: /security/code_security/static_analysis/custom_rules/tutorial/
-      parent: sec_static_analysis
-      weight: 6
-    - name: SAST Custom Rules
-      identifier: sec_static_analysis_custom_rules
-      url: /security/code_security/static_analysis/custom_rules/
-      parent: sec_static_analysis
-      weight: 7
-    - name: SAST Custom Rules Guide
-      identifier: sec_static_analysis_custom_rules_guide
-      url: /security/code_security/static_analysis/custom_rules/guide/
-      parent: sec_static_analysis
-      weight: 8
-    - name: Static Code Analysis (SAST) rules
-      identifier: sec_static_analysis_rules
-      url: /security/code_security/static_analysis/static_analysis_rules/
-      parent: sec_static_analysis
-      weight: 9
-    - name: Software Composition Analysis (SCA)
-      identifier: software_composition_analysis
-      url: /security/code_security/software_composition_analysis/
-      parent: code_security
-      weight: 2
-    - name: Static Setup
-      identifier: sca_setup_static
-      url: /security/code_security/software_composition_analysis/setup_static/
-      parent: software_composition_analysis
-      weight: 1
-    - name: Runtime Setup
-      identifier: sca_setup_runtime
-      url: /security/code_security/software_composition_analysis/setup_runtime/
-      parent: software_composition_analysis
-      weight: 2
-    - name: Library Compatibility
-      identifier: sca_setup_runtime_compatibility
-      url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
-      parent: sca_setup_runtime
-      weight: 1
-    - name: Library Inventory
-      identifier: sca_library_inventory
-      url: /security/code_security/software_composition_analysis/library_inventory/
-      parent: software_composition_analysis
-      weight: 3
-    - name: Secret Scanning
-      identifier: sec_secret_scanning
-      url: /security/code_security/secret_scanning/
-      parent: code_security
-      weight: 3
-    - name: GitHub Actions
-      identifier: sec_secret_scanning_github_actions
-      url: /security/code_security/secret_scanning/github_actions/
-      parent: sec_secret_scanning
-      weight: 1
-    - name: Generic CI Providers
-      identifier: sec_secret_scanning_generic_ci_providers
-      url: /security/code_security/secret_scanning/generic_ci_providers/
-      parent: sec_secret_scanning
-      weight: 2
-    - name: Secret Validation
-      identifier: sec_secret_scanning_secret_validation
-      url: /security/code_security/secret_scanning/secret_validation/
-      parent: sec_secret_scanning
-      weight: 3
-    - name: Runtime Code Analysis (IAST)
-      identifier: sec_iast
-      url: /security/code_security/iast/
-      parent: code_security
-      weight: 4
-    - name: Setup
-      identifier: sec_iast_setup
-      url: /security/code_security/iast/setup/
-      parent: sec_iast
-      weight: 1
-    - name: Security Controls
-      identifier: sec_code_security_controls
-      url: /security/code_security/iast/security_controls/
-      parent: sec_iast
-      weight: 2
-    - name: Infrastructure as Code (IaC) Security
-      identifier: code_security_iac_security
-      url: /security/code_security/iac_security/
-      parent: code_security
-      weight: 5
-    - name: Setup
-      identifier: code_security_iac_security_setup
-      url: /security/code_security/iac_security/setup/
-      parent: code_security_iac_security
-      weight: 100000
-    - name: Exclusions
-      identifier: code_security_iac_security_exclusions
-      url: /security/code_security/iac_security/exclusions/
-      parent: code_security_iac_security
-      weight: 100001
-    - name: Rules
-      identifier: code_security_iac_security_rules
-      url: /security/code_security/iac_security/iac_rules/
-      parent: code_security_iac_security
-      weight: 100002
-    - name: Developer Tool Integrations
-      identifier: dev_tool_int
-      url: /security/code_security/dev_tool_int/
-      parent: code_security
-      weight: 6
-    - name: Pull Request Comments
-      identifier: dev_tool_int_github_pull_requests
-      url: /security/code_security/dev_tool_int/pull_request_comments/
-      parent: dev_tool_int
-      weight: 1
-    - name: PR Gates
-      identifier: dev_tool_int_pr_gates
-      url: /pr_gates/
-      parent: dev_tool_int
-      weight: 2
-    - name: IDE Plugins
-      identifier: dev_tool_int_ide_plugins
-      url: /security/code_security/dev_tool_int/ide_plugins/
-      parent: dev_tool_int
-      weight: 3
-    - name: Git Hooks
-      identifier: dev_tool_int_git_hooks
-      url: /security/code_security/dev_tool_int/git_hooks/
-      parent: dev_tool_int
-      weight: 4
-    - name: Troubleshooting
-      identifier: sec_code_sec_tshoot
-      url: /security/code_security/troubleshooting/
-      parent: code_security
-      weight: 7
-    - name: Guides
-      identifier: code_security_guides
-      url: /security/code_security/guides/
-      parent: code_security
-      weight: 8
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
