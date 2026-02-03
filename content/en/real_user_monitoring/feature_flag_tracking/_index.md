@@ -12,6 +12,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
   tag: "Blog"
   text: "Help ensure release safety with feature flag tracking in Datadog RUM"
+- link: "/feature_flags/"
+  tag: "Documentation"
+  text: "Create and manage feature flags in Datadog"
+
 ---
 
 {{< callout header="Create flags directly in Datadog!" hide_image="true" btn_title="Learn More" btn_url="https://www.datadoghq.com/product/feature-flags/">}}
@@ -34,13 +38,13 @@ Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, an
 
 You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of Datadog's integration partners. 
 
-You can track feature flags using:
+You can track feature flags using one of Datadog's integration partners or your own [custom feature flag management solution][2]:
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
 </br>
 
-You can also integrate RUM with your own [custom feature flag management solution][2].
+You can also use [Datadog Feature Flags][3], which natively integrates with RUM and other Datadog observability features.
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
