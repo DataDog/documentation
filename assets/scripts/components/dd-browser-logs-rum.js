@@ -1,7 +1,17 @@
 /* eslint import/no-unresolved: 0 */
 import { getConfig } from '../helpers/getConfig';
-const { env, branch } = document.documentElement.dataset;
+// temporarily set env to preview for development
+// TODO: Remove this once development is complete
+console.log('env: dd-browser-logs-rum.js', env);
+let { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
+
+// temporarily set env to preview for development
+// TODO: Remove this once development is complete
+if (env === 'development') {
+    console.log('env: dd-browser-logs-rum.js', env);
+    env = 'preview';
+}
 
 const Config = getConfig(env);
 

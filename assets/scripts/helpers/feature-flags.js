@@ -6,6 +6,7 @@ let env = document.documentElement.dataset?.env || 'preview';
 
 // Temporarily set env to preview for development
 // TODO: Remove this once development is complete
+console.log('env: feature-flags.js', env);
 if (env === 'development') {
     env = 'preview';
 }
