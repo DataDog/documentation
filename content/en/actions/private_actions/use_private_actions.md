@@ -69,9 +69,9 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 {{% tab "Kubernetes" %}}
 1. Click **Kubernetes**.
-1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
+1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output.
+1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output.
+1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
     1. Add the **Private Action Runner** to your Helm repositories.
@@ -81,90 +81,6 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 {{% /tab %}}
 {{< /tabs >}}
-
-{{% collapse-content title="App Builder" level="p" %}}
-1. Enter a name for your runner.
-1. Click **App Builder**.
-1. Enter a runner hostname. App Builder calls your runner using this hostname over HTTPS. You must bring your own SSL termination and forward to port 9016 in the container.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
-{{< tabs >}}
-{{% tab "Docker" %}}
-1. Click **Docker**.
-1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
-
-   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
-
-
-{{% /tab %}}
-
-{{% tab "Docker Compose" %}}
-1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
-1. Replace `./config` with the path to the directory you created for the runner configuration.
-1. Run `docker compose up -d`.
-
-   You can safely ignore the error: `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
-
-[101]: https://docs.docker.com/compose/compose-application-model/
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-1. Click **Kubernetes**.
-1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
-1. Follow the instructions provided in the app to:
-    1. Enroll the runner and generate the config.
-    1. Add the **Private Action Runner** to your Helm repositories.
-    1. Install the Helm chart.
-1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Workflow Automation" level="p" %}}
-1. Enter a name for your runner.
-1. Click **Workflows**.
-1. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-1. Deploy your runner with Docker, Docker Compose, or Kubernetes:
-{{< tabs >}}
-{{% tab "Docker" %}}
-1. Click **Docker**.
-1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
-
-   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
-{{% /tab %}}
-
-{{% tab "Docker Compose" %}}
-1. Click **Docker Compose**.
-1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose docs][101].
-1. Replace `./config` with the path to the directory you created for the runner configuration.
-1. Run `docker compose up -d`.
-
-   You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
-
-[101]: https://docs.docker.com/compose/compose-application-model/
-{{% /tab %}}
-
-{{% tab "Kubernetes" %}}
-1. Click **Kubernetes**.
-1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output, then check the box on the **Private Action Runner** page.
-1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster, then check the box on the **Private Action Runner** page.<br>Further instructions appear in the app.
-1. Follow the instructions provided in the app to:
-    1. Enroll the runner and generate the config.
-    1. Add the **Private Action Runner** to your Helm repositories.
-    1. Install the Helm chart.
-1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-{{% /collapse-content %}}
 
 ### Set up programmatically
 
@@ -523,7 +439,7 @@ To edit the allowlist for a Private Action Runner:
 [3]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.jenkins
 [4]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.temporal
 [5]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.http
-[6]: https://app.datadoghq.com/actions/catalog
+[6]: https://app.datadoghq.com/actions/action-catalog
 [7]: https://app.datadoghq.com/workflow/connections
 [8]: https://app.datadoghq.com/app-builder/connections
 [9]: /actions/private_actions/private_action_credentials
