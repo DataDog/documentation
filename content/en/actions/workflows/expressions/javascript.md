@@ -83,8 +83,12 @@ To add an expression action:
 - In a new workflow, click **Add step** and search for `expression`. Select the **Expression** action to add it to your workflow.
 - In an existing workflow, click **+** and search for `expression`. Select the **Expression** action to add it to your workflow.
 
-In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Set variables][4].
+In an expression step, execution uses _copies_ of all available variables. Mutating a variable within a step has no effect on the variable's value outside of the step. To assign the result of an expression to a variable, see [Set variables][2].
 
 ## Test expressions and functions
 
 See the test and debug page to learn how to [test a workflow step][3].
+
+[1]: https://lodash.com/
+[2]: /service_management/workflows/actions/set_variables
+[3]: /service_management/workflows/test_and_debug/#test-a-step
