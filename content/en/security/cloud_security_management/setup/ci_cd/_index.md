@@ -70,7 +70,6 @@ You can install Datadog Security CLI on Debian/Ubuntu, Red Hat/CentOS, and macOS
 
 The customizable script approach gives you full control over when and how scans are executed in your pipelines. Choose your installation method below.
 
-### Install the Datadog Security CLI
 
 {{< tabs >}}
 {{% tab "Debian/Ubuntu" %}}
