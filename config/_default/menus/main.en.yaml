@@ -5823,18 +5823,23 @@ menu:
     - name: Source Code Management
       url: source_code/source-code-management/
       parent: source_code_integration
-      identifier: source_code_management
+      identifier: sci_source_code_management
       weight: 1
     - name: Service Tagging
       url: source_code/service-tagging/
       parent: source_code_integration
-      identifier: service_tagging
+      identifier: sci_service_tagging
       weight: 2
+    - name: Resource Mapping
+      url: source_code/resource-mapping/
+      parent: source_code_integration
+      identifier: sci_resource_mapping
+      weight: 3
     - name: Features
       url: source_code/features/
       parent: source_code_integration
-      identifier: developer_workflows_features
-      weight: 3
+      identifier: sci_features
+      weight: 4
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
