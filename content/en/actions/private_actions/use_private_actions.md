@@ -81,7 +81,6 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 {{% /tab %}}
 {{< /tabs >}}
-{{% /collapse-content %}}
 
 {{% collapse-content title="App Builder" level="p" %}}
 1. Enter a name for your runner.
