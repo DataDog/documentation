@@ -150,7 +150,7 @@ merchant_info {
 
 [Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persists in the cache for about 10 minutes. After that, they are evicted or refreshed.
 
-When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. The buffer has a maximum capacity of 100,000 logs. If that limit is reached, the buffer begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
+When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity, it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
 If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely and causing the buffer to stop accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
 
