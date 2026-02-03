@@ -180,7 +180,7 @@ To update a deployment's status from the Datadog UI:
 2. Click on a deployment to open the deployment details panel.
 3. In the deployment details panel, select the **Deployment status** from the dropdown to mark the deployment as failed or stable.
 
-{{< img src="dora_metrics/deployment_status_update.mp4" alt="Updating a deployment's change failure status from the Datadog UI" style="width:100%;" >}}
+{{< img src="dora_metrics/deployment_status_update.mp4" alt="Updating a deployment's change failure status from the Datadog UI" video="true" >}}
 
 ## Further reading
 
