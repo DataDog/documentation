@@ -276,7 +276,7 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field | Type | Description |
 |-------|------|-------------|
-| query | string | Searches for spans using generic EVP query syntax. If no query filter is provided, then the other filters will take precedence. |
+| query | string | Searches for spans using generic EVP query syntax. If no query filter is provided, the other filters take precedence. |
 | span_id | string | Searches for a specific span by its span ID. |
 | trace_id | string | Searches for spans by their trace ID. |
 | tags | Dict[key (string), string] | Search for spans by tag key / value pairs. |
