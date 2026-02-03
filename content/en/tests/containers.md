@@ -227,6 +227,7 @@ For a comprehensive list of environment variables set by GitHub Actions for ever
 | `CI_PIPELINE_URL`     | The URL for the pipeline details.                                                                       |
 | `CI_PIPELINE_IID`     | The project-level IID (internal ID) of the current pipeline. Unique only within the current project.      |
 | `CI_PROJECT_PATH`     | The project namespace with the project name included.                                                     |
+| `CI_PROJECT_URL`      | The HTTP(S) address of the project.                                                                       |
 | `CI_PROJECT_DIR`      | The full path the repository is cloned to, and where the job runs from.                                   |
 | `CI_JOB_STAGE`        | The name of the job's stage.                                                                            |
 | `CI_JOB_NAME`         | The name of the job.                                                                                     |
