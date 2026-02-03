@@ -355,6 +355,13 @@
       "description": "Unassign case returns \"OK\" response"
     }
   ],
+  "UpdateProject": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update a project returns \"OK\" response"
+    }
+  ],
   "UpdateAttributes": [
     {
       "group": "case_management",

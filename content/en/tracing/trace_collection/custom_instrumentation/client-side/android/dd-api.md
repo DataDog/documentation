@@ -48,9 +48,9 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-              clientToken = "<CLIENT_TOKEN>",
-              env = "<ENV_NAME>",
-              variant = "<APP_VARIANT_NAME>"
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
           ).build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -86,7 +86,8 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
                clientToken = "<CLIENT_TOKEN>",
                env = "<ENV_NAME>",
                variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.EU1)
+          )
+            .useSite(DatadogSite.EU1)
             .build()
 
         Datadog.initialize(this, configuration, trackingConsent)
@@ -120,10 +121,11 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.US3)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US3)
             .build()
 
         Datadog.initialize(this, configuration, trackingConsent)
@@ -157,10 +159,11 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.US5)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US5)
             .build()
 
         Datadog.initialize(this, configuration, trackingConsent)
@@ -194,10 +197,11 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.US1_FED)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US1_FED)
             .build()
 
         Datadog.initialize(this, configuration, trackingConsent)
@@ -230,10 +234,11 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.AP1)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.AP1)
             .build()
 
           Datadog.initialize(this, configuration, trackingConsent)
@@ -266,10 +271,11 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
       override fun onCreate() {
           super.onCreate()
           val configuration = Configuration.Builder(
-            clientToken = "<CLIENT_TOKEN>",
-            env = "<ENV_NAME>",
-            variant = "<APP_VARIANT_NAME>"
-          ).useSite(DatadogSite.AP2)
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.AP2)
             .build()
           Datadog.initialize(this, configuration, trackingConsent)
       }
@@ -326,7 +332,7 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
 
    ```kotlin
    if (Datadog.isInitialized()) {
-   // your code here
+       // your code here
    }
    ```
 
@@ -444,7 +450,7 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
          childSpan.finish()
        }
      }
-   } catch (e: Error) {
+   } catch (e: Throwable) {
    }
    ```
    {{% /tab %}}
@@ -466,7 +472,7 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
          finally {
            innerScope.close();
          }
-       } catch( Throwable e) {
+       } catch (Throwable e) {
          childSpan.logThrowable(e);
        } finally {
          childSpan.finish();
@@ -475,7 +481,7 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
      finally {
        scope.close();
      }
-   } catch(Error e){
+   } catch (Throwable e){
    }
    ```
    {{% /tab %}}
@@ -524,8 +530,8 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's
        } finally {
            scope.close();
        }
-   } catch(Throwable e) {
-           span.logThrowable(e);
+   } catch (Throwable e) {
+         span.logThrowable(e);
    } finally {
          span.finish();
    }
@@ -798,7 +804,7 @@ val request = Request.Builder()
 {{% tab "Java" %}}
 ```java
 Request.Builder requestBuilder = new Request.Builder()
-  .url(requestUrl)
+  .url(requestUrl);
 Request request = OkHttpRequestExtKt
   .parentSpan(requestBuilder, parentSpan)
   .build();

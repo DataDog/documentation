@@ -137,7 +137,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [4]: /observability_pipelines/environment_variables/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
-[6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
+[6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
 
 {{% /tab %}}
@@ -289,7 +289,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [2]: /observability_pipelines/configuration/update_existing_pipelines/
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
 [4]: https://app.datadoghq.com/organization-settings/remote-config/setup
-[5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
+[5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
 
 {{% /tab %}}

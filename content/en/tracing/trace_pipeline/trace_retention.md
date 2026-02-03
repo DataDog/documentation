@@ -5,6 +5,9 @@ aliases:
 - /tracing/trace_retention/
 - /tracing/trace_queries/one_percent_flat_sampling/
 further_reading:
+- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+  tag: "Blog"
+  text: "Unify and correlate frontend and backend data with retention filters"
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
   text: "Ingestion Mechanisms"
