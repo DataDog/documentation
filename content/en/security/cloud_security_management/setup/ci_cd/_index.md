@@ -206,9 +206,9 @@ If you encounter authentication errors:
 ### Image not found errors
 
 If the CLI cannot find your image:
-1. Verify the image exists locally: `docker images`
-2. Use the full image name including registry if applicable
-3. Ensure the image is built before scanning
+1. Verify the image exists locally: `docker images`.
+2. Use the full image name, including registry (if applicable).
+3. Ensure the image is built before scanning.
 
 ### Network connectivity issues
 
