@@ -60,7 +60,13 @@ The customizable script approach gives you full control over when and how scans 
 
 <div class="alert alert-info">The Datadog Security CLI is in Preview and available to install from Datadog package repositories.</div>
 
-The Datadog Security CLI can be installed on Debian/Ubuntu, Red Hat/CentOS, and macOS systems. Choose your installation method below.
+You can install Datadog Security CLI on Debian/Ubuntu, Red Hat/CentOS, and macOS systems. Container image scanning works with all major CI/CD platforms, including:
+- GitHub Actions
+- GitLab CI/CD
+- Azure DevOps
+- Other CI providers that can execute shell scripts
+
+The customizable script approach gives you full control over when and how scans are executed in your pipelines. Choose your installation method below.
 
 ### Install the Datadog Security CLI
 
