@@ -34,7 +34,7 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 ## Setup
 
 1. On the [Integration Settings page][3], find the Jira integration.
-2. Click the toggle for **Enable Jira issue creation** to allow manual or automatic Jira creation.
+2. Click **Enable Jira issue creation** toggle to allow manual or automatic Jira creation.
 3. Select your Jira account, project, and issue type.
 4. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, a Jira issue is created for all new incidents.
 5. Define a template with dynamic variables to drive the content of the Jira ticket. Type `{{` to use incident template variables for fields like Summary, Reporter, and Description. Dynamic variables only work for **string** [Jira field types][5].
