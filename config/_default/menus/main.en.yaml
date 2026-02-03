@@ -5188,6 +5188,11 @@ menu:
       parent: llm_obs_evaluations
       identifier: llm_obs_external_evaluations
       weight: 402
+    - name: Developer Guide
+      url: llm_observability/evaluations/evaluation_developer_guide
+      parent: llm_obs_evaluations
+      identifier: llm_obs_evaluation_developer_guide
+      weight: 4021
     - name: Quality Evaluations
       url: llm_observability/evaluations/managed_evaluations/quality_evaluations
       parent: llm_obs_managed_evaluations
