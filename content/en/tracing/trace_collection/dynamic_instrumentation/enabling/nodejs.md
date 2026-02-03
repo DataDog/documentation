@@ -4,7 +4,7 @@ description: Set up Dynamic Instrumentation for Node.js applications to add prob
 private: false
 code_lang: nodejs
 type: multi-code-lang
-code_lang_weight: 30
+code_lang_weight: 40
 aliases:
     - /dynamic_instrumentation/enabling/nodejs
     - /tracing/dynamic_instrumentation/enabling/nodejs
@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 ## Installation
 

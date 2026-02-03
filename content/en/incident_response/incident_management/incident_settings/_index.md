@@ -38,6 +38,7 @@ To create an incident type:
     {{< nextlink href="/incident_response/incident_management/incident_settings/property_fields" >}}Property Fields{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/incident_settings/responder_types" >}}Responder Types{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/incident_settings/templates" >}}Templates{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/incident_settings/automations" >}}Automations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents/settings

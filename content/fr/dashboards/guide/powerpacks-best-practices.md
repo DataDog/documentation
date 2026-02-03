@@ -1,4 +1,6 @@
 ---
+description: Standardisez les widgets de dashboard et faites évoluer l'expertise en
+  surveillance entre les équipes en utilisant des groupes de widgets Powerpack réutilisables.
 further_reading:
 - link: /dashboards/widgets/powerpack
   tag: Documentation
@@ -20,8 +22,6 @@ title: Diffuser l'expertise des créateurs de graphiques avec les powerpacks
 
 Les powerpacks sont des groupes de widgets basés sur un modèle qui peuvent être intégrés à des dashboards afin de diffuser l'expertise des créateurs de graphiques. Ils offrent un moyen flexible de recueillir les connaissances d'un domaine ou les normes propres à une organisation et de les partager avec l'ensemble de l'organisation. Les powerpacks permettent aux créateurs de dashboards d'intégrer à leurs dashboards existants les connaissances acquises dans différents domaines technologiques sans avoir à suivre une formation supplémentaire.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/configure_powerpack.png" alt="La page de configuration d'un powerpack dans l'application Datadog, avec une section permettant de configurer des valeurs à l'aide de tags ou d'attributs, plusieurs graphiques issus d'un exemple de powerpack, ainsi qu'un menu sur la droite permettant de parcourir d'autres packs" style="width:100%;" >}}
-
 Les powerpacks peuvent être prédéfinis (créés par Datadog) ou personnalisés (créés par un utilisateur).
 
 - Les powerbacks prédéfinis offrent des vues prêtes à l'emploi pour les mécanismes de surveillance couramment utilisés, tels que les métriques de performance ou l'utilisation de fonctionnalités. Ils sont souvent liés à un produit ou une intégration spécifique (comme le powerpack `RUM Page Views`) et sont tenus à jour par Datadog.
@@ -29,7 +29,7 @@ Les powerpacks peuvent être prédéfinis (créés par Datadog) ou personnalisé
 
 Ce guide aborde les meilleures pratiques relatives à la création et au partage de powerpacks personnalisés.
 
-## Dans quelles circonstances les powerpacks personnalisés sont-ils utiles ?
+## Quand utiliser un Powerpack personnalisé
 
 À mesure qu'une organisation développe son activité, l'expertise et la propriété d'actifs ont tendance à être progressivement réparties entre plusieurs équipes. Les powerbacks s'adressent avant tout aux organisations composées :
 
@@ -62,7 +62,7 @@ Les marqueurs sur les graphiques, tels que les marqueurs horizontaux et les fonc
 
 Les powerpacks se trouvent dans la barre des widgets de dashboards ; vous pouvez les rechercher en saisissant un mot clé ou un tag. Le titre, la description et les tags d'un powerpack sont utilisés lors des recherches. Ces champs sont le moyen le plus simple de trouver votre powerpack.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="Exemple d'une recherche effectuée dans le menu « Add Widgets » d'un dashboard, avec le mot clé « resource »" style="width:60%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="Exemple de recherche effectuée dans le menu Add Widgets d'un dashboard avec le mot-clé resource" style="width:50%;" >}}
 
 Pour vous assurer que les utilisateurs appropriés trouvent votre powerpack, incluez les mots-clés que vos utilisateurs sont susceptibles de saisir (comme « performance ») dans le titre ou la description, et taguez les principales technologies.
 
@@ -74,17 +74,13 @@ Utilisez les tags afin de spécifier les principales technologies utilisées ou 
 
 Pour rechercher des powerpacks par tag dans la barre des widgets, utilisez la syntaxe `tag:chaîne_recherche`.
 
-{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_tag_search.png" alt="Exemple d'une recherche effectuée dans le menu « Add Widgets » d'un dashboard avec la syntaxe de recherche tag:security" style="width:60%;" >}}
+{{< img src="dashboards/guide/powerpacks_best_practices/powerpack_tag_search.png" alt="Exemple de recherche effectuée dans le menu Add Widgets d'un dashboard avec tag:security" style="width:50%;" >}}
 
 ### Configurer la personnalisation des powerpacks
 
 Les powerpacks sont particulièrement utiles lorsqu'ils peuvent être personnalisés par chaque équipe, en fonction de leurs besoins. Définissez des variables de configuration pour permettre leur personnalisation.
 
-Le menu de création d'un powerpack suggère des variables à ajouter à votre pack selon les filtres couramment utilisés qui apparaissent dans les requêtes. Passez votre curseur sur n'importe quelle variable suggérée pour identifier les graphiques affectés par celle-ci. Pour ajouter une variable qui n'a pas été suggérée, modifiez vos graphiques directement dans le dashboard de manière à utiliser la variable souhaitée en tant que filtre ou variable de modèle.
-
-Modifiez les noms des variables pour indiquer aux autres utilisateurs comment les utiliser. Dans l'exemple ci-dessous, la variable `@appsec.type` a été renommée `AttackType` afin de clarifier l'entrée attendue. 
-
-{{< img src="dashboards/guide/powerpacks_best_practices/create_powerpack.png" alt="L'écran de création de powerpack. Sur la gauche figurent les champs « Powerpack Title » et « Group Title » (contenant tous deux la mention « Application Security Overview »), la section « Add Tags » configurée avec les tags « security » et « app », ainsi que plusieurs variables configurées dans la section « Add Variables », notamment l'attribut @appsec.type nommé AttackType. Sous cette section figure une autre intitulée « Add Common Filters as Variables » accompagnée de plusieurs options, dont le filtre @appsec.category:attack_attempt surligné. Plusieurs graphiques sont affichés à droite ; trois d'entre eux sont surlignés avec une couleur identique à celle appliquée au filtre @appsec.category:attack_attempt à gauche" style="width:100%;" >}}
+La fenêtre de création de Powerpack suggère des variables à ajouter à votre pack en fonction des filtres courants qui apparaissent dans les requêtes. Passez la souris sur n'importe quelle variable suggérée pour voir quels graphiques elle affecte. Pour ajouter une variable qui n'est pas suggérée, modifiez vos graphiques directement dans le dashboard pour utiliser la variable souhaitée comme filtre ou template variable. Modifiez les noms des variables pour clarifier comment les autres doivent les utiliser.
 
 Les variables de configuration remplissent deux fonctions. Elles peuvent :
 1. aider les membres d'une équipe à appliquer un filtre à un powerpack en fonction de leurs besoins, et ce avant même que le pack ne soit ajouté à leur dashboard (sélectionner un `service` pour s'assurer qu'un powerpack dédié à la sécurité s'adresse au bon service, par exemple) ;
@@ -96,7 +92,7 @@ Chaque utilisateur d'un powerpack peut, s'il le souhaite, choisir d'enregistrer 
 
 ### Mettre à jour un powerpack
 
-Les modifications apportées à un Powerpack personnalisé existant sont répercutées sur toutes les instances du même Powerpack. Cela peut simplifier le processus de mise à jour d'un contenu dupliqué sur plusieurs dashboards. Cliquez sur **Edit Powerpack Layout** pour modifier les instances synchronisées du Powerpack.
+Les modifications apportées à un Powerpack personnalisé existant sont appliquées à toutes les instances de ce Powerpack, simplifiant les mises à jour sur plusieurs dashboards. Cliquez sur **Edit Powerpack Layout** pour modifier les instances de Powerpack synchronisées.
 
 ### Autorisations
 Par défaut, les droits d'édition des Powerpacks sont réservés à l'auteur. Les droits d'édition peuvent être modifiés à tout moment via le menu déroulant de la barre d'outils du widget ou dans l'en-tête d'une instance de Powerpack.

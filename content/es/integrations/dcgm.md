@@ -1,84 +1,27 @@
 ---
 app_id: dcgm
-app_uuid: 7e03132a-939d-4bae-8114-dfcdf9056646
-assets:
-  dashboards:
-    DCGM Exporter (Nvidia GPU Monitoring) Overview: assets/dashboards/dcgm_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: dcgm.temperature
-      metadata_path: metadata.csv
-      prefix: dcgm.
-    process_signatures:
-    - dcgm-exporter
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10374
-    source_type_name: dcgm
-  monitors:
-    GPU memory usage is high: assets/monitors/memory_usage.json
-    GPU temperature is high: assets/monitors/gpu_temperature.json
-    XID errors detected: assets/monitors/xid_errors.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
 categories:
 - ia/ml
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/dcgm/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: dcgm
-integration_id: dcgm
-integration_title: Nvidia DCGM Exporter
-integration_version: 3.3.0
-is_public: true
-manifest_version: 2.0.0
-name: dcgm
-public_title: Nvidia DCGM Exporter
-short_description: Monitoriza las métricas de GPU expuestas aprovechadas por Nvidia
-  DCGM Exporter
+description: Monitoriza las métricas de GPU expuestas aprovechadas por Nvidia DCGM
+  Exporter
+integration_version: 4.0.0
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::AI/ML
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Monitoriza las métricas de GPU expuestas aprovechadas por Nvidia DCGM
-    Exporter
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Nvidia DCGM Exporter
+title: Nvidia DCGM Exporter
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
-
-
 ## Información general
 
-Este check envía las métricas expuestas por [NVIDIA DCGM Exporter][1] en formato de Datadog Agent. Para obtener más información sobre NVIDIA Data Center GPU Manager (DCGM), consulta [NVIDIA DCGM][2].
+Este check envía las métricas expuestas por el [NVIDIA DCGM Exporter](https://github.com/NVIDIA/dcgm-exporter) en eñ formato del Datadog Agent. Para obtener más información sobre NVIDIA Data Center GPU Manager (DCGM), consulta [NVIDIA DCGM](https://developer.nvidia.com/dcgm).
 
 ## Configuración
 
 ### Instalación
 
-A partir de la versión 7.47.0 del Agent, el check DCGM viene incluido en el paquete del [Datadog Agent][3]. Sin embargo, es necesario poner en marcha el contenedor del exportador DCGM para exponer las métricas de GPU con el fin de que el Agent recopile estos datos. Dado que los contadores por defecto no son suficientes, Datadog recomienda utilizar la siguiente configuración de DCGM para cubrir el mismo terreno que la integración NVML, además de tener métricas útiles. Esta integración es totalmente compatible con el Agent v7.59 o posterior. Es posible que algunas telemetrías no estén disponibles para versiones anteriores del Agent.
+A partir de la versión 7.47.0 del Agent, el check de DCGM se incluye en el paquete del [Datadog Agent ](https://app.datadoghq.com/account/settings/agent/latest). Sin embargo, para que el Agent pueda recopilar estos datos, es necesario poner en marcha el contenedor de DCGM Exporter para exponer las métricas de la GPU. Como los contadores predeterminados no son suficientes, Datadog recomienda utilizar la siguiente configuración de DCGM para cubrir el mismo terreno que la integración de NVML además de disponer de métricas útiles. Esta integración es totalmente compatible con el Agent 7.59+. Algunas telemetrías pueden no estar disponibles para versiones anteriores del Agent.
 
 ```
 # Format
@@ -156,34 +99,33 @@ DCGM_FI_DEV_BRAND                                                 ,label        
 DCGM_FI_DEV_SERIAL                                                ,label                  ,
 ```
 
-
 {{< tabs >}}
+
 {{% tab "Host | Docker" %}}
 
 #### Docker
 
 Para configurar el exportador en un entorno Docker:
 
-1. Crea el archivo `$PWD/default-counters.csv` que contiene los campos predeterminados de NVIDIA `etc/default-counters.csv`, así como otros campos recomendados por Datadog. Para agregar más campos para la recopilación, sigue [estas instrucciones][1]. Para obtener la lista completa de campos, consulta el [manual de referencia de la API de DCGM][2].
-2. Ejecuta el contenedor Docker usando el siguiente comando:
+1. Crea el archivo `$PWD/default-counters.csv` que contiene los campos predeterminados de NVIDIA `etc/default-counters.csv` así como campos adicionales recomendados por Datadog. Para añadir más campos a la recopilación, sigue [estas instrucciones](https://github.com/NVIDIA/dcgm-exporter/tree/main#changing-metrics). Para ver la lista completa de campos, consulta el [Manual de referencia de la API de DCGM](https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html).
+1. Ejecuta el contenedor Docker usando el siguiente comando:
    ```shell
    sudo docker run --pid=host --privileged -e DCGM_EXPORTER_INTERVAL=5000 --gpus all -d -v /proc:/proc -v $PWD/default-counters.csv:/etc/dcgm-exporter/default-counters.csv -p 9400:9400 --name dcgm-exporter nvcr.io/nvidia/k8s/dcgm-exporter:3.1.7-3.1.4-ubuntu20.04
    ```
 
-[1]: https://github.com/NVIDIA/dcgm-exporter/tree/main#changing-metrics
-[2]: https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html
 {{% /tab %}}
+
 {{% tab "Kubernetes" %}}
 
 #### Kubernetes (chart Helm de DCGM Exporter)
 
-El DCGM Exporter se puede instalar rápidamente en un entorno Kubernetes mediante el chart Helm de NVIDIA DCGM Exporter. Las instrucciones que aparecen a continuación derivan de la plantilla proporcionada por NVIDIA [aquí][1].
+El exportador de DCGM puede instalarse rápidamente en un entorno de Kubernetes con el gráfico de Helm de NVIDIA DCGM Exporter. Las instrucciones siguientes se obtienen de la plantilla proporcionada por NVIDIA [aquí](https://github.com/NVIDIA/dcgm-exporter#quickstart-on-kubernetes).
 
 1. Añade el repositorio Helm de NVIDIA DCGM Exporter y asegúrate de que esté actualizado:
    ```shell
    helm repo add gpu-helm-charts https://nvidia.github.io/dcgm-exporter/helm-charts && helm repo update
    ```
-2. Crea un `ConfigMap` que contenga las métricas recomendadas por Datadog de [Instalación](#Installation), así como el `RoleBinding` y el `Role` utilizados por los pods de DCGM para recuperar el `ConfigMap` usando el manifiesto a continuación:
+1. Crea un `ConfigMap` que contenga las métricas recomendadas por Datadog de [Instalación](#Installation), así como el `RoleBinding` y el `Role` utilizados por los pods de DCGM para recuperar el `ConfigMap` usando el manifiesto a continuación:
    ```yaml
    apiVersion: rbac.authorization.k8s.io/v1
    kind: Role
@@ -219,7 +161,7 @@ El DCGM Exporter se puede instalar rápidamente en un entorno Kubernetes mediant
      metrics: |
          # Copy the content from the Installation section.
    ```
-3. Crea tu chart Helm de DCGM Exporter `dcgm-values.yaml` con el siguiente contenido:
+1. Crea tu gráfico de Helm de DCGM Exporter `dcgm-values.yaml` con el siguiente contenido :
    ```yaml
    # Exposing more metrics than the default for additional monitoring - this requires the use of a dedicated ConfigMap for which the Kubernetes ServiceAccount used by the exporter has access thanks to step 1.
    # Ref: https://github.com/NVIDIA/dcgm-exporter/blob/e55ec750def325f9f1fdbd0a6f98c932672002e4/deployment/values.yaml#L38
@@ -241,31 +183,31 @@ El DCGM Exporter se puede instalar rápidamente en un entorno Kubernetes mediant
    serviceMonitor:
      enabled: false
    ```
-4. Instala el chart Helm de DCGM Exporter en el espacio de nombres `default` con el siguiente comando, mientras te encuentras en el directorio con tu `dcgm-values.yaml`:
+1. Instala el chart Helm de DCGM Exporter en el espacio de nombres `default` con el siguiente comando, mientras te encuentras en el directorio con tu `dcgm-values.yaml`:
    ```shell
    helm install dcgm-datadog gpu-helm-charts/dcgm-exporter -n default -f dcgm-values.yaml
    ```
 
 **Nota**: Puedes modificar el nombre de la versión `dcgm-datadog` así como el espacio de nombres, pero debes modificar en consecuencia el manifiesto del paso 1.
 
-[1]: https://github.com/NVIDIA/dcgm-exporter#quickstart-on-kubernetes
 {{% /tab %}}
+
 {{% tab "Operator" %}}
 
 #### Kubernetes (NVIDIA GPU Operator)
 
-El DCGM Exporter se puede instalar en un entorno Kubernetes mediante NVIDIA GPU Operator. Las instrucciones que aparecen a continuación derivan de la plantilla proporcionada por NVIDIA [aquí][1].
+El exportador de DCGM puede instalarse en un entorno de Kubernetes con NVIDIA GPU Operator. Las instrucciones siguientes proceden de la plantilla proporcionada por NVIDIA [aquí](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html).
 
 1. Añade el repositorio Helm de NVIDIA GPU Operator y asegúrate de que esté actualizado:
    ```shell
    helm repo add nvidia https://helm.ngc.nvidia.com/nvidia && helm repo update
    ```
-2. Sigue las instrucciones de [Configuración de métricas personalizadas][2] con el CSV de [Instalación](#installation):
-    * Obtén el archivo de métricas y guárdalo como `dcgm-metrics.csv`: `curl https://raw.githubusercontent.com/NVIDIA/dcgm-exporter/main/etc/dcp-metrics-included.csv > dcgm-metrics.csv`
-    * Edita el archivo de métricas reemplazando su contenido con la asignación proporcionada por Datadog.
-    * Crea un espacio de nombres `gpu-operator` si aún no existe: `kubectl create namespace gpu-operator`.
-    * Crea un ConfigMap utilizando el archivo editado anteriormente: `kubectl create configmap metrics-config -n gpu-operator --from-file=dcgm-metrics.csv`
-3. Crea tu chart Helm de GPU Operator `dcgm-values.yaml` con el siguiente contenido:
+1. Sigue las instrucciones de [Configuración de métricas personalizadas](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#custom-metrics-config) con el CSV de [Instalación](#installation) :
+   - Obtén el archivo de métricas y guárdalo como `dcgm-metrics.csv`: `curl https://raw.githubusercontent.com/NVIDIA/dcgm-exporter/main/etc/dcp-metrics-included.csv > dcgm-metrics.csv`
+   - Edita el archivo de métricas reemplazando su contenido con la asignación proporcionada por Datadog.
+   - Crea un espacio de nombres `gpu-operator` si aún no existe: `kubectl create namespace gpu-operator`.
+   - Crea un ConfigMap utilizando el archivo editado anteriormente: `kubectl create configmap metrics-config -n gpu-operator --from-file=dcgm-metrics.csv`
+1. Crea tu gráfico de Helm de GPU Operator `dcgm-values.yaml` con el siguiente contenido:
    ```yaml
    # Refer to NVIDIA documentation for the driver and toolkit for your GPU-enabled nodes - example below for Amazon Linux 2 g5.xlarge
    driver:
@@ -294,27 +236,26 @@ El DCGM Exporter se puede instalar en un entorno Kubernetes mediante NVIDIA GPU 
            }
          }
    ```
-4. Instala el chart Helm de DCGM Exporter en el espacio de nombres `default` con el siguiente comando, mientras te encuentras en el directorio con tu `dcgm-values.yaml`:
+1. Instala el chart Helm de DCGM Exporter en el espacio de nombres `default` con el siguiente comando, mientras te encuentras en el directorio con tu `dcgm-values.yaml`:
    ```bash
    helm install datadog-dcgm-gpu-operator -n gpu-operator nvidia/gpu-operator -f dcgm-values.yaml
    ```
 
-[1]: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html
-[2]: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/getting-started.html#custom-metrics-config
 {{% /tab %}}
-{{< /tabs >}}
 
+{{< /tabs >}}
 
 ### Configuración
 
 {{< tabs >}}
+
 {{% tab "Host" %}}
 
-#### Host
+#### host
 
 ##### Recopilación de métricas
 
-1. Edita el archivo `dcgm.d/conf.yaml` (ubicado en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent) para comenzar a recopilar tus métricas de GPU. Consulta el [dcgm.d/conf.yaml de muestra][1] para ver todas las opciones de configuración disponibles.
+1. Edita el archivo `dcgm.d/conf.yaml` (ubicado en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent) para comenzar a recopilar tus métricas de GPU. Consulta [ejemplo de dcgm.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/dcgm/datadog_checks/dcgm/data/conf.yaml.example) para ver todas las opciones de configuración disponibles.
 
    ```
    instances:
@@ -327,20 +268,17 @@ El DCGM Exporter se puede instalar en un entorno Kubernetes mediante NVIDIA GPU 
       - openmetrics_endpoint: http://localhost:9400/metrics
    ```
 
-Utiliza el campo de configuración `extra_metrics` para añadir métricas que vayan más allá de las que Datadog [admite de forma predefinida][2]. Consulta los [documentos de NVIDIA][3] para obtener la lista completa de métricas que dcgm-exporter puede recopilar. Asegúrate de [habilitar estos campos en la configuración de dcgm-exporter][4] también.
+Utiliza el campo de configuración `extra_metrics` para añadir métricas que vayan más allá de las que Datadog [admite de fábrica](https://github.com/DataDog/integrations-core/blob/master/dcgm/metadata.csv). Consulta la [documentación de NVIDIA](https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html) para ver la lista completa de métricas que puede recopilar dcgm-exporter. Asegúrate también de [activar estos campos en la configuración de dcgm-exporter](https://github.com/NVIDIA/dcgm-exporter/tree/main#changing-metrics).
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/dcgm/datadog_checks/dcgm/data/conf.yaml.example
-[2]: https://github.com/DataDog/integrations-core/blob/master/dcgm/metadata.csv
-[3]: https://docs.nvidia.com/datacenter/dcgm/latest/dcgm-api/dcgm-api-field-ids.html
-[4]: https://github.com/NVIDIA/dcgm-exporter/tree/main#changing-metrics
 {{% /tab %}}
+
 {{% tab "Docker" %}}
 
 #### Docker
 
 ##### Recopilación de métricas
 
-Establece [Plantillas de integraciones de Autodiscovery][1] como etiquetas de Docker en tu contenedor de DCGM Exporter:
+Configura [Plantillas de integraciones de Autodiscovery](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) como etiquetas Docker en tu contenedor del exportador de DCGM:
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["dcgm"]'
@@ -348,8 +286,8 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint": "http://%%host%%:9400/metrics"}]'
 ```
 
-[1]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
+
 {{% tab "Kubernetes" %}}
 
 #### Kubernetes
@@ -360,7 +298,7 @@ LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint": "http://%%host%%:9
 
 ##### Recopilación de métricas
 
-Configura [plantillas de integraciones de Autodiscovery][1] como anotaciones de pod en el contenedor de tu aplicación. Además de esto, las plantillas también se pueden configurar con [un archivo, un ConfigMap o un almacén de clave-valor][2].
+Configura [Plantillas de integración de Autodiscovery](https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes) como anotaciones de pod en tu contenedor de aplicaciones. Aparte de esto, las plantillas también se pueden configurar con [un archivo, un mapa de configuración o un almacén de valores clave](https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration).
 
 **Anotaciones v2** (para el Datadog Agent v7.47 o posterior)
 
@@ -386,28 +324,72 @@ spec:
     - name: dcgm
 ```
 
-[1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/?tab=kubernetes#configuration
 {{% /tab %}}
+
 {{< /tabs >}}
 
-Cuando hayas terminado de hacer cambios en la configuración, [reinicia el Agent][4].
+Cuando hayas terminado de realizar los cambios de configuración, [reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][5] y busca `dcgm` en la sección Checks.
-
+[Ejecuta el subcomando de estado del Agent(https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `dcgm` en la sección Checks.
 
 ### Ajuste de los monitores
 
-Los monitores predefinidos que vienen con esta integración tienen algunos valores predeterminados según sus umbrales de alerta. Por ejemplo, la temperatura de la GPU se determina según un [rango aceptable para dispositivos industriales][6].
-Sin embargo, Datadog recomienda que verifiques que estos valores se ajusten a tus necesidades particulares.
+Los monitores predefinidos que vienen con esta integración tienen algunos valores predeterminados basados en sus umbrales de alerta. Por ejemplo, la temperatura de la GPU se determina en función de un [rango aceptable para dispositivos industriales](https://en.wikipedia.org/wiki/Operating_temperature).
+Sin embargo, Datadog recomienda que compruebes si estos valores se ajustan a tus necesidades particulares.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "dcgm" >}}
 
+| | |
+| --- | --- |
+| **dcgm.clock_throttle_reasons** <br>(gauge) | Motivos actuales de aceleración del reloj (máscara de bits de DCGM_CLOCKS_THROTTLE_REASON\_\*)|
+| **dcgm.correctable_remapped_rows.count** <br>(count) | Número de filas reasignadas para errores corregibles.<br>_Mostrado como fila_ |
+| **dcgm.dec_utilization** <br>(gauge) | Utilización del descodificador (en %).<br>_Mostrado como porcentaje_ |
+| **dcgm.device.count** <br>(count) | Cambio en el número de dispositivos en el nodo.<br>_Mostrado como dispositivo_ |
+| **dcgm.device.total** <br>(gauge) | Número de dispositivos en el nodo.|
+| **dcgm.dram.active** <br>(gauge) | Proporción de ciclos en los que la interfaz de memoria del dispositivo está activa enviando o recibiendo datos (en %).<br>_Mostrado como fracción_ |
+| **dcgm.enc_utilization** <br>(gauge) | Utilización del codificador (en %).<br>_Mostrado como porcentaje_ |
+| **dcgm.fan_speed** <br>(gauge) | Velocidad del ventilador del dispositivo en porcentaje 0-100.<br>_Mostrado como porcentaje_ |
+| **dcgm.frame_buffer.free** <br>(gauge) | Búfer libre en MB.<br>_Mostrado como megabyte_ |
+| **dcgm.frame_buffer.reserved** <br>(gauge) | Búfer reservado en MB.<br>_Mostrado como megabyte_ |
+| **dcgm.frame_buffer.total** <br>(gauge) | Búfer total de cuadros de la GPU en MB.<br>_Mostrado como megabyte_. |
+| **dcgm.frame_buffer.used** <br>(gauge) | Búfer de cuadros utilizado en MB.<br>_Mostrado como megabyte_ |
+| **dcgm.frame_buffer.used_percent** <br>(gauge) | Porcentaje utilizado del búfer de cuadros: Utilizado/(Total - Reservado). Rango 0.0-1.0<br>_Mostrado como fracción_. |
+| **dcgm.gpu_utilization** <br>(gauge) | Utilización de la GPU (en %).<br>_Mostrado como porcentaje_. |
+| **dcgm.gr_engine_active** <br>(gauge) | Proporción de tiempo que el motor gráfico está activo (en %).<br>_Mostrado como fracción_ |
+| **dcgm.mem.clock** <br>(gauge) | Frecuencia de reloj de la memoria (en MHz).<br>_Mostrado en megahercios_. |
+| **dcgm.mem.copy_utilization** <br>(gauge) | Utilización de la memoria (en %).<br>_Mostrado como porcentaje_. |
+| **dcgm.mem.temperature** <br>(gauge) | Temperatura de la memoria (en C).<br>_Mostrado en grados Celsius_ |
+| **dcgm.nvlink_bandwidth.count** <br>(count) | Cambio en el número de contadores de ancho de banda de NVLink para todos los carriles|
+| **dcgm.nvlink_bandwidth.total** <br>(gauge) | Número total de contadores de ancho de banda de NVLink para todos los carriles|
+| **dcgm.pcie_replay.count** <br>(count) | Cambio en el número de reintentos de PCIe.|
+| **dcgm.pcie_replay.total** <br>(gauge) | Número total de reintentos de PCIe.|
+| **dcgm.pcie_rx_throughput.count** <br>(count) | Cambio en la información de utilización de PCIe Rx.|
+| **dcgm.pcie_rx_throughput.total** <br>(gauge) | Información de utilización de PCIe Rx.|
+| **dcgm.pcie_tx_throughput.count** <br>(count) | Cambio en la información de utilización de PCIe Tx.|
+| **dcgm.pcie_tx_throughput.total** <br>(gauge) | Información de utilización de PCIe Tx|
+| **dcgm.pipe.fp16_active** <br>(gauge) | Proporción de ciclos en los que los pipes fp16 están activos (en %).<br>_Mostrado como fracción_ |
+| **dcgm.pipe.fp32_active** <br>(gauge) | Proporción de ciclos en los que los pipes fp32 están activas (en %).<br>_Mostrado como fracción_ |
+| **dcgm.pipe.fp64_active** <br>(gauge) | Proporción de ciclos en los que los pipes fp64 están activos (en %).<br>_Mostrado como fracción_ |
+| **dcgm.pipe.tensor_active** <br>(gauge) | Proporción de ciclos en los que el tubo tensor (HMMA) está activo (en %).<br>_Mostrado como fracción_ |
+| **dcgm.power_management_limit** <br>(gauge) | Límite de potencia actual del dispositivo.<br>_Mostrado como vatios_ |
+| **dcgm.power_usage** <br>(gauge) | Potencia absorbida (en W).<br>_Mostrado como vatios_. |
+| **dcgm.pstate** <br>(gauge) | Estado de rendimiento (P-State) 0-15. 0=máximo|
+| **dcgm.row_remap_failure** <br>(gauge) | Si ha fallado la reasignación de filas.|
+| **dcgm.slowdown_temperature** <br>(gauge) | Temperatura de ralentización del dispositivo.<br>_Mostrado como grados Celsius_ |
+| **dcgm.sm_active** <br>(gauge) | Proporción de ciclos en los que un SM tiene asignado al menos 1 urdimbre (en %).<br>_Mostrado como fracción_ |
+| **dcgm.sm_clock** <br>(gauge) | Frecuencia del reloj SM (en MHz).<br>_Mostrado como megahercios_ |
+| **dcgm.sm_occupancy** <br>(gauge) | Proporción del número de urdimbres residentes en un SM (en %).<br>_Mostrado como fracción_. |
+| **dcgm.temperature** <br>(gauge) | Temperatura de la GPU (en C).<br>_Mostrado como grados Celsius_ |
+| **dcgm.total_energy_consumption.count** <br>(count) | Cambio en el consumo de energía (en mJ).<br>_Mostrado como milijulios_. |
+| **dcgm.total_energy_consumption.total** <br>(gauge) | Consumo total de energía desde el arranque (en mJ)|
+| **dcgm.uncorrectable_remapped_rows.count** <br>(count) | Cambio en el número de filas reasignadas por errores no corregibles.<br>_Mostrado como fila_ |
+| **dcgm.uncorrectable_remapped_rows.total** <br>(gauge) | Número total de filas reasignadas por errores no corregibles.|
+| **dcgm.vgpu_license_status** <br>(gauge) | Estado de la licencia de vGPU|
+| **dcgm.xid_errors** <br>(gauge) | Valor del último error de XID encontrado.|
 
 ### Eventos
 
@@ -415,13 +397,18 @@ La integración de DCGM no incluye ningún evento.
 
 ### Checks de servicio
 
-Consulta [service_checks.json][7] para obtener una lista de los checks de servicio que proporciona esta integración.
+**dcgm.openmetrics.health**
+
+Devuelve `CRITICAL` si el check no puede acceder al endpoint de métricas de openmetrics del exportador de DCGM.
+
+_Estados: ok, crítico_
 
 ## Solucionar problemas
 
 ### Asignación de métricas
 
-Si has añadido algunas métricas que no aparecen en el archivo [metadata.csv][8] anterior, pero que aparecen en tu cuenta con el formato `DCGM_FI_DEV_NEW_METRIC`, reasigna estas métricas en el archivo de configuración [dcgm.d/conf.yaml][9]:
+Si has añadido algunas métricas que no aparecen en el archivo [metadata.csv](https://github.com/DataDog/integrations-core/blob/master/dcgm/metadata.csv) anterior, pero aparecen en tu cuenta con el formato `DCGM_FI_DEV_NEW_METRIC`, reasigna estas métricas en el archivo de configuración [dcgm.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/dcgm/datadog_checks/dcgm/data/conf.yaml.example):
+
 ```yaml
     ## @param extra_metrics - (list of string or mapping) - optional
     ## This list defines metrics to collect from the `openmetrics_endpoint`, in addition to
@@ -429,6 +416,7 @@ Si has añadido algunas métricas que no aparecen en el archivo [metadata.csv][8
     ## metric definitions here take precedence. Metrics may be defined in 3 ways:
     ...
 ```
+
 El siguiente ejemplo añade la parte de `NEW_METRIC` a espacio de nombres (`dcgm.`), lo que da `dcgm.new_metric`:
 
 ```yaml
@@ -438,7 +426,7 @@ El siguiente ejemplo añade la parte de `NEW_METRIC` a espacio de nombres (`dcgm
 
 ### ¿El campo de DCGM está habilitado, pero no se envía?
 
-Si un campo no se recopila incluso después de habilitarlo en `default-counters.csv` y realizar una solicitud `curl` a `host:9400/metrics`, los [desarrolladores de dcgm-exporter recomiendan][10] consultar el archivo de log en `var/log/nv-hostengine.log`.
+Si un campo no se recopila incluso después de activarlo en `default-counters.csv` y realizar una solicitud a `curl` en `host:9400/metrics`, los [desarrolladores de dcgm-exporter recomiendan](https://github.com/NVIDIA/dcgm-exporter/issues/163#issuecomment-1577506512) consultar el archivo de logs en `var/log/nv-hostengine.log`.
 
 **Nota:** `dcgm-exporter` es un wrapper que contiene las bibliotecas y controladores de nivel inferior que realizan los informes reales.
 
@@ -447,7 +435,7 @@ Si un campo no se recopila incluso después de habilitarlo en `default-counters.
 En algunos casos, la métrica `DCGM_FI_DEV_GPU_UTIL` puede provocar un mayor consumo de recursos. Si estás experimentando este problema:
 
 1. Deshabilita `DCGM_FI_DEV_GPU_UTIL` en `default-counters.csv`.
-2. Asegúrate de que los siguientes campos están habilitados en `default-counters.csv`:
+1. Asegúrate de que los siguientes campos están habilitados en `default-counters.csv`:
    - `DCGM_FI_PROF_DRAM_ACTIVE`
    - `DCGM_FI_PROF_GR_ENGINE_ACTIVE`
    - `DCGM_FI_PROF_PCIE_RX_BYTES`
@@ -458,25 +446,12 @@ En algunos casos, la métrica `DCGM_FI_DEV_GPU_UTIL` puede provocar un mayor con
    - `DCGM_FI_PROF_PIPE_TENSOR_ACTIVE`
    - `DCGM_FI_PROF_SM_ACTIVE`
    - `DCGM_FI_PROF_SM_OCCUPANCY`
-3. Reinicia tanto dcgm-exporter como el Datadog Agent.
+1. Reinicia tanto dcgm-exporter como el Datadog Agent.
 
 ### ¿Necesitas ayuda?
 
-Ponte en contacto con el [soporte de Datadog][11].
+Ponte en contacto con [asistencia técnica de Datadog](https://docs.datadoghq.com/help/).
 
 ## Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
-
-
-[1]: https://github.com/NVIDIA/dcgm-exporter
-[2]: https://developer.nvidia.com/dcgm
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://en.wikipedia.org/wiki/Operating_temperature
-[7]: https://github.com/DataDog/integrations-core/blob/master/dcgm/assets/service_checks.json
-[8]: https://github.com/DataDog/integrations-core/blob/master/dcgm/metadata.csv
-[9]: https://github.com/DataDog/integrations-core/blob/master/dcgm/datadog_checks/dcgm/data/conf.yaml.example
-[10]: https://github.com/NVIDIA/dcgm-exporter/issues/163#issuecomment-1577506512
-[11]: https://docs.datadoghq.com/es/help/
+Documentación útil adicional, enlaces y artículos:
