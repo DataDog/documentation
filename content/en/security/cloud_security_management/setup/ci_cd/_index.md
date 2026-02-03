@@ -30,7 +30,7 @@ To get started with container image scanning in CI/CD:
 3. View scan results in the [Cloud Security Vulnerabilities][3] page
 4. Optionally, [set up local development](#run-local-scans-during-development) for faster iteration
 
-## Authentication
+### Configure Datadog credentials
 
 To upload scan results to Datadog, configure the following environment variables in your CI pipeline:
 
