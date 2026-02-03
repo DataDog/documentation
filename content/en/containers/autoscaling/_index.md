@@ -57,6 +57,7 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
    | Feature | Minimum Agent Version |
    |---------|----------------------|
    | In-app workload scaling recommendations | 7.50+ |
+   | Live workload scaling | 7.66.1+ |
    | Argo Rollout recommendations and autoscaling | 7.71+ |
    | Cluster autoscaling ([preview sign-up][10]) | 7.72+ |
 

@@ -32,7 +32,7 @@ You can also create cases manually from the following products:
 | Product | Instructions    |
 | ------  | ----------- |
 | Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Actions** dropdown menu and select **Create a case**.<br> - In Slack, click **Create case** under a monitor notification. |
-| Security signals | Click into a Security Signal to open up the side panel. Click **Escalate Investigation** and select **Create a case**. |
+| Security signals | Beside a signal, in the **Cases** column, click the **Create Case** icon. Then, enter the case details in the **Create Case** window that opens. |
 | Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Actions** and select **Create a case**. |
 | Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
 | Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
