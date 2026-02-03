@@ -25,10 +25,10 @@ To support CI/CD-based container image scanning, Datadog provides the **Datadog 
 
 To get started with container image scanning in CI/CD:
 
-1. [Configure Datadog credentials](#authentication)
-2. [Install the Datadog Security CLI](#installation-and-scans) in your CI/CD pipeline
-3. View scan results in the [Cloud Security Vulnerabilities][3] page
-4. Optionally, [set up local development](#run-local-scans-during-development) for faster iteration
+1. [Configure Datadog credentials](#configure-datadog-credentials)
+2. [Install the Datadog Security CLI](#install-the-datadog-security-cli) in your CI/CD pipeline
+3. [View scan results](#view-scan-results) on the [Cloud Security Vulnerabilities][3] page
+4. Optionally, [run local scans during development](#run-local-scans-during-development) for faster iteration
 
 ### Configure Datadog credentials
 
