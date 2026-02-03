@@ -96,13 +96,14 @@ The runner uses these credentials to register itself with your Datadog organizat
 
 #### Example commands
 
-{{< tabs >}}
-{{% tab "Docker" %}}
-
 1. Update the `RUNNER_NAME`.
 2. Check that `DD_BASE_URL` points to the Datadog site you use, for ex. https://app.datadoghq.com.
 3. Replace `./config` with the path to the directory you created for the runner configuration.
-4. Set up an auto-enrollment script with your `DD_API_KEY`, `DD_APP_KEY` and the `docker run` command.
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+Set up an auto-enrollment script with your `DD_API_KEY`, `DD_APP_KEY` and the `docker run` command.
 
 ```bash
 export DD_API_KEY="<YOUR_API_KEY>"
@@ -124,11 +125,8 @@ docker run -d \
 
 {{% tab "Docker Compose" %}}
 
-1. Update the `RUNNER_NAME`.
-2. Check that `DD_BASE_URL` points to the Datadog site you use, for ex. https://app.datadoghq.com.
-3. Replace `./config` with the path to the directory you created for the runner configuration.
-4. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose documentation][101].
-5. Set up an auto-enrollment script with your `DD_API_KEY`, `DD_APP_KEY` and the `docker compose up -d` command.
+Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose documentation][101].
+Set up an auto-enrollment script with your `DD_API_KEY`, `DD_APP_KEY` and the `docker compose up -d` command.
 
 ```yaml
 # docker-compose.yaml
@@ -157,14 +155,12 @@ export DD_APP_KEY="<YOUR_APP_KEY>"
 DD_API_KEY=$DD_API_KEY DD_APP_KEY=$DD_APP_KEY docker compose up -d
 ```
 
+[101]: https://docs.docker.com/compose/compose-application-model/
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
-1. Update the `RUNNER_NAME`.
-2. Check that `DD_BASE_URL` points to the Datadog site you use, for ex. https://app.datadoghq.com.
-3. Replace `./config` with the path to the directory you created for the runner configuration.
-4. Set up an auto-enrollment script with 2 steps:
+1. Set up an auto-enrollment script with 2 steps:
   - generate the runner configuration with your `DD_API_KEY`, `DD_APP_KEY` and the `docker run` command.
   - deploy the Helm chart
 
@@ -182,7 +178,10 @@ docker run \
   -v ./config:/etc/dd-action-runner/config \
   gcr.io/datadoghq/private-action-runner:v1.17.1 \
   --with-api-key --enroll -f helm-values > values.yaml
+```
 
+Deploy with:
+```bash
 helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
 ```
 
