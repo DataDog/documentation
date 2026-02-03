@@ -45,10 +45,10 @@ In addition, the host must have the following:
 
 ### Set up from Datadog
 
-From the [Actions Catalog][6], navigate to **Private Action Runners** and click **New Private Action Runner**.
-
+1. Go to [**Actions Catalog**][6] > **Private Action Runners**, and click **New Private Action Runner**.
 1. Enter a name for your runner and select the allowed actions.
-1. Create a directory on your host where the runner can store its configuration, such as ./config, and follow the guidelines to deploy your runner with Docker, Docker Compose, or Kubernetes.
+1. Create a directory on your host where the runner can store its configuration, such as `./config`.
+1. Deploy your runner by following the steps for your container platform:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -71,8 +71,8 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 {{% tab "Kubernetes" %}}
 1. Click **Kubernetes**.
-1. Confirm that you have installed `kubectl` on your machine by running `kubectl version` and verifying that there is output.
-1. Confirm that you have installed `helm` on your machine by running `helm version` and verifying that there is output.
+1. Confirm that you have installed `kubectl` on your machine: run `kubectl version` and verify that there is output.
+1. Confirm that you have installed `helm` on your machine: run `helm version` and verify that there is output.
 1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
@@ -88,7 +88,7 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using your [API key][19] and [Application key][20]. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows.
 
-To use this authentication method:
+To set up the runner programmatically:
 1. Provide your Datadog API and App keys through the `DD_API_KEY` and `DD_APP_KEY` environment variables.
 2. Pass the `--with-api-key` flag to the runner container.
 
@@ -96,13 +96,13 @@ The runner uses these credentials to register itself with your Datadog organizat
 
 #### Example commands
 
-Use the following commands to create an auto-enrollment script that can be re-run as needed for automated deployments. Once auto-enrollment succeeds, the runner appears on the **Private Action Runners** page.
+Use the following commands to create an auto-enrollment script that can be rerun for automated deployments. After the runner enrolls successfully, it appears on the **Private Action Runners** page.
 
 Before running the commands, update the following values:
-- **RUNNER_NAME**: A unique name for your runner.
-- **DD_BASE_URL**: Your Datadog site URL (for example, `https://app.datadoghq.com`).
-- **./config**: The path to your runner configuration directory.
-- (Optional) **Image version**: Update the image tag to use a newer version of the runner.
+- `RUNNER_NAME`: A unique name for your runner.
+- `DD_BASE_URL`: Your Datadog site URL (for example, `https://app.datadoghq.com`).
+- `./config`: The path to your runner configuration directory.
+- (Optional) Image version: The container image tag to use for the runner.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
