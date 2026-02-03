@@ -213,9 +213,9 @@ If the CLI cannot find your image:
 ### Network connectivity issues
 
 If scans fail due to network issues:
-1. Verify your CI environment can reach the Datadog site
-2. Check for proxy or firewall restrictions
-3. Ensure outbound HTTPS connections are allowed
+1. Verify your CI environment can reach the Datadog site.
+2. Check for proxy or firewall restrictions.
+3. Ensure outbound HTTPS connections are allowed.
 
 For additional help, see the [Cloud Security troubleshooting guide][12] or contact [Datadog support][13].
 
