@@ -43,6 +43,8 @@ In addition, the host must have the following:
 
 ## Set up a private action runner
 
+### Set up from Datadog
+
 From the [Actions Catalog][6], navigate to **Private Action Runners** and click **New Private Action Runner**.
 
 1. Enter a name for your runner and select the allowed actions.
@@ -84,24 +86,15 @@ From the [Actions Catalog][6], navigate to **Private Action Runners** and click 
 
 ### Set up programmatically
 
-As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using API and App key-based authentication. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows where manual UI interaction is not practical.
-
-#### API and App key authentication
-
-When using the `--with-api-key` flag, the runner authenticates with Datadog using your [API key][19] and [Application key][20] instead of the one-time enrollment token generated through the UI. The runner automatically enrolls itself with Datadog on startup and persists its configuration locally.
+As an alternative to the UI-based setup, you can enroll and configure a private action runner programmatically using [API key][19] and [Application key][20] instead of the one-time enrollment token. This approach is ideal for automated deployments, CI/CD pipelines, and infrastructure-as-code workflows where manual UI interaction is not practical.
 
 To use this authentication method:
 1. Provide your Datadog API and App keys through the `DD_API_KEY` and `DD_APP_KEY` environment variables.
 2. Pass the `--with-api-key` flag to the runner container.
 
-The runner uses these credentials to:
-- Register itself with your Datadog organization and assign the App key author as the editor
-- Retrieve its configuration
-- Maintain an authenticated connection to Datadog
+The runner uses these credentials to register itself with your Datadog organization and assign the App key author as the runner editor.
 
-#### Example configurations
-
-The following examples demonstrate how to deploy a private action runner using API and App key-based authentication.
+#### Example commands
 
 Set the required environment variables before running any of the commands:
 ```bash
@@ -114,7 +107,7 @@ export DD_APP_KEY="<YOUR_APP_KEY>"
 
 ```bash
 docker run -d \
-  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_BASE_URL=https://app.datadoghq.com \
   -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
   -e DD_API_KEY="$DD_API_KEY" \
   -e DD_APP_KEY="$DD_APP_KEY" \
@@ -139,7 +132,7 @@ services:
     environment:
       DD_API_KEY: ${DD_API_KEY}
       DD_APP_KEY: ${DD_APP_KEY}
-      DD_BASE_URL: https://{{< region-param key=dd_site >}}
+      DD_BASE_URL: https://app.datadoghq.com
       DD_PRIVATE_RUNNER_CONFIG_DIR: /etc/dd-action-runner/config
       RUNNER_NAME: my-compose-runner
       RUNNER_MODES: pull
@@ -160,12 +153,11 @@ Generate the runner configuration:
 
 ```bash
 docker run \
-  -e DD_BASE_URL=https://{{< region-param key=dd_site >}} \
+  -e DD_BASE_URL=https://app.datadoghq.com \
   -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
   -e DD_API_KEY="$DD_API_KEY" \
   -e DD_APP_KEY="$DD_APP_KEY" \
   -e RUNNER_NAME="my-runner" \
-  -e RUNNER_MODES=pull \
   -e 'ACTIONS_ALLOWLIST=com.datadoghq.http.request' \
   -v ./config:/etc/dd-action-runner/config \
   gcr.io/datadoghq/private-action-runner:v1.17.1 \
@@ -176,6 +168,8 @@ Deploy the Helm chart`:
 ```bash
 helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
 ```
+
+When the command succeeds, the new runner will appear on the **Private Action Runners** page.
 
 {{% /tab %}}
 {{< /tabs >}}
