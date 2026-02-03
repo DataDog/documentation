@@ -62,11 +62,11 @@ Is Visible
 
 Left Icon
 : Determines the icon displayed to the left of the button's label.<br>
-**Provided values**: bell, download, folder 
+**Example values**: bell, download, folder 
 
 Right Icon
 : Determines the icon displayed to the right of the button's label<br>
-**Provided values**: bell, download, folder 
+**Example values**: bell, download, folder 
 
 ### Events
 
@@ -117,7 +117,7 @@ Additional Text
 
 Style
 : The visual style of the component.<br>
-**Provided values**: default, primary, success, warning
+**Example values**: default, primary, success, warning
 
 Size
 : Responsively sizes the metric so that it is proportional to the sizing of the value.<br>
@@ -135,7 +135,7 @@ Borderless
 
 Left Icon<br>
 : Determines the icon displayed to the left of the callout's Value and Unit.
-**Provided values**: bell, download, folder
+**Example values**: bell, download, folder
 
 Direction<br>
 : Determines the direction of the arrow displayed to the right of the callout's Value and Unit.
