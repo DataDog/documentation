@@ -33,38 +33,56 @@ Observability Pipelines ingested bytes
 : **Metric**: `datadog.estimated_usage.observability_pipelines.ingested_bytes`
 : **Description**: The volume of data ingested by Observability Pipelines. See [Estimated Usage Metrics][6] for more information.
 
-## Pipeline metrics
+## Host metrics
+
+Uptime
+: **Metrics**: `pipelines.host.uptime`
+: **Description:** The host uptime in seconds.
 
 Bytes in per second
 : **Metrics**: `pipelines.host.network_receive_bytes_total`
-: **Description:** The number of events the pipeline receives per second.
+: **Description:** The number of bytes received by the host on all interfaces. Use the tag `device` to filter per interface.
 
 Bytes out per second
-: **Metrics**: `pipelines.host.network_receive_bytes_total`
-: **Description:** The number of bytes the pipeline receives per second.
+: **Metrics**: `pipelines.host.network_transmit_bytes_total`
+: **Description:** The number of bytes sent by the host on all interfaces. Use the tag `device` to filter per interface.
+
+## Process metrics
+
+Uptime
+: **Metrics**: `pipelines.uptime_seconds`
+: **Description:** The worker uptime in seconds.
+
+CPU usage
+: **Metrics**: `pipelines.cpu_usage_seconds_total`
+: **Description:** The amount of CPU time consumed by the worker process in seconds (in the user and system space). Turning this into a rate per second returns the proportion of a CPU used by the worker.
+
+Memory usage
+: **Metrics**: `pipelines.resident_memory_used_bytes`
+: **Description:** The amount of RSS memory used by the worker process in bytes.
 
 ## Component metrics
 
 These metrics are available for sources, processors, and destinations.
 
-Bytes in per second
-: **Metric**: `pipelines.component_received_bytes_total`
-: **Description**: The number of bytes the component receives per second.
+Events in
+: **Metric**: `pipelines.component_received_events_total`
+: **Description**: The number of events received by the component.
 : **Available for**: Sources, processors, and destinations.
 
-Bytes out per second
+Events out
 : **Metric**: `pipelines.component_sent_events_total`
-: **Description**: The number of bytes the component sends to the destinations.
+: **Description**: The number of events the component sends downstream.
 : **Available for**: Sources, processors, and destinations.
 
-Events in per second
+Bytes in
 : **Metric**: `pipelines.component_received_event_bytes_total`
-: **Description**: The number of events the component receives per second.
+: **Description**: The number of bytes received by the component.
 : **Available for**: Sources, processors, and destinations.
 
-Events out per second
+Bytes out
 : **Metric**: `pipelines.component_sent_event_bytes_total`
-: **Description**: The number of events the component sends to the destinations.
+: **Description**: The number of bytes the component sends downstream.
 : **Available for**: Sources, processors, and destinations.
 
 Errors
