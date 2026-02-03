@@ -1,11 +1,9 @@
 ---
 title: .NET Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your .NET application with the OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 1
-description: 'Instrument your .NET application with the OpenTelemetry API, to send traces to Datadog.'
-algolia:
-    tags: ["C#","APM"]
 aliases:
 - /tracing/trace_collection/otel_instrumentation/dotnet/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
@@ -18,21 +16,29 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-{{% otel-custom-instrumentation-lang %}}
+## Overview
+
+There are a few reasons to manually instrument your applications with the OpenTelemetry API:
+
+- You are not using Datadog supported library instrumentation.
+- You want to extend the Datadog SDK's functionality.
+- You need finer control over instrumenting your applications.
+
+The Datadog SDK provides several techniques to help you achieve these goals. The following sections demonstrate how to use the OpenTelemetry API for custom instrumentation to use with Datadog.
 
 ## Setup
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][5]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][150]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
-2. Install the Datadog .NET tracing library and enable the tracer for your [.NET Framework service][10] or your [.NET Core (and .NET 5+) service][11]. **Preview**: You can optionally do this with [Single Step APM Instrumentation][13].
+2. Install the Datadog .NET tracing library and enable the tracer for your [.NET Framework service][151] or your [.NET Core (and .NET 5+) service][152]. You can optionally do this with [Single Step APM Instrumentation][153].
 
 3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
 4. Run your application.
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [OpenTelemetry instrumentation libraries][8].
+Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It also supports [OpenTelemetry instrumentation libraries][154].
 
 ## Creating custom spans
 
@@ -44,11 +50,10 @@ using OpenTelemetry.Trace;
 
 // Start a new span
 using (Activity? activity = Telemetry.ActivitySource.StartActivity("<RESOURCE NAME>"))
-            {
+{
   activity?.SetTag("operation.name", "custom-operation");
-               // Do something
-            }
-
+  // Do something
+}
 ```
 
 ## Creating spans
@@ -64,7 +69,6 @@ using (Activity? parentScope = Telemetry.ActivitySource.StartActivity("<RESOURCE
    parentScope?.SetTag("operation.name", "manual.sortorders");
    using (Activity? childScope = Telemetry.ActivitySource.StartActivity("<RESOURCE NAME>"))
    {
-       // Nest using statements around the code to trace
        childScope?.SetTag("operation.name", "manual.sortorders.child");
        SortOrders();
    }
@@ -75,33 +79,29 @@ using (Activity? parentScope = Telemetry.ActivitySource.StartActivity("<RESOURCE
 
 Add custom tags to your spans to provide additional context:
 
-{{< highlight csharp "hl_lines=15" >}}
+```csharp
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 public class ShoppingCartController : Controller
 {
-    private IShoppingCartRepository _shoppingCartRepository;
-
     [HttpGet]
     public IActionResult Index(int customerId)
     {
-      Activity? activity =
-      Telemetry.ActivitySource.StartActivity("<RESOURCE NAME>")
+      Activity? activity = Telemetry.ActivitySource.StartActivity("<RESOURCE NAME>")
 
-        // Add a tag to the span for use in the Datadog web UI
-        activity?.SetTag("customer.id", customerId.ToString());
+      // Add a tag to the span for use in the Datadog web UI
+      activity?.SetTag("customer.id", customerId.ToString());
 
-        var cart = _shoppingCartRepository.Get(customerId);
-
-        return View(cart);
+      var cart = _shoppingCartRepository.Get(customerId);
+      return View(cart);
     }
 }
-{{< /highlight >}}
+```
 
 ## Setting errors on spans
 
-Set error information on a span when an error occurs during its execution.
+Set error information on a span when an error occurs during its execution:
 
 ```csharp
 try
@@ -121,18 +121,7 @@ catch(Exception e)
 
 <div class="alert alert-info">Adding span events requires SDK version 2.53.0 or higher.</div>
 
-You can add span events using the `AddEvent` API. This method requires an `ActivityEvent`constructed with the `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span. 
-
-- **Name** [_required_]: A string representing the event's name.
-- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects a `DateTimeOffset` object.
-- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
-  - The key must be a non-empty string.
-  - The value can be either:
-    - A primitive type: string, Boolean, or number.
-    - A homogeneous array of primitive type values (for example, an array of strings).
-  - Nested arrays and arrays containing elements of different data types are not allowed.
-
-The following examples demonstrate different ways to add events to a span:
+You can add span events using the `AddEvent` API:
 
 ```csharp
 var eventTags = new ActivityTagsCollection
@@ -148,20 +137,20 @@ activity.AddEvent(new ActivityEvent("Event With No Attributes"));
 activity.AddEvent(new ActivityEvent("Event With Some Attributes", DateTimeOffset.Now, eventTags));
 ```
 
-Read the [OpenTelemetry][15] specification for more information.
+Read the [OpenTelemetry specification for adding events][103] for more information.
 
 ## Propagating context with headers extraction and injection
 
-You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][14] for information.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[5]: https://opentelemetry.io/docs/instrumentation/net/manual/
-[8]: https://opentelemetry.io/docs/instrumentation/net/libraries/
-[10]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
-[11]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
-[13]: /tracing/trace_collection/single-step-apm/
-[14]: /tracing/trace_collection/trace_context_propagation/
-[15]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[103]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[105]: /tracing/trace_collection/trace_context_propagation/
+[150]: https://opentelemetry.io/docs/instrumentation/net/manual/
+[151]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
+[152]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[153]: /tracing/trace_collection/single-step-apm/
+[154]: https://opentelemetry.io/docs/instrumentation/net/libraries/
