@@ -110,7 +110,7 @@ Method
 
 | Parameter | Type | Description                  |
 |-------|------------------------------|------|
-| filter[query] | string | Searches for spans using generic EVP query syntax. If no query filter is provided, then the other filters will take precedence. |
+| filter[query] | string | Searches for spans using generic EVP query syntax. If no query filter is provided, the other filters take precedence. |
 | filter[span_id] | string | Searches for a specific span by its span ID. |
 | filter[trace_id] | string | Searches for spans by their trace ID. |
 | filter[tag][key] | string | Searches for spans by tag key / value pairs. |
