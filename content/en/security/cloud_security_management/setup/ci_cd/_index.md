@@ -94,7 +94,7 @@ sudo apt install datadog-security-cli
 {{% /tab %}}
 {{% tab "Red Hat/CentOS" %}}
 
-### Install from package repository
+#### Install from package repository
 
 ```bash
 # Import Datadog RPM signing key
