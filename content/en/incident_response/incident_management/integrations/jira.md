@@ -20,6 +20,8 @@ further_reading:
 
 Jira is an issue and project tracking system for software teams. The Datadog Jira integration allows you to create issues from incidents in Datadog and view issues created in Jira as Datadog events.
 
+**Note**: This integration syncs data from Datadog to Jira only. Updates made in Jira do not sync back to Datadog incidents.
+
 The Jira integration with Datadog Incident Management provides you with the following benefits:
 - **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
 - **Supporting Existing Workflows**: Seamlessly integrate with your current processes, making it easier to plan work and manage priorities with Jira.
@@ -44,7 +46,7 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 {{< img src="service_management/incidents/guide/jira/incident_jira_mappings.png" alt="Jira status and severity mappings showing incident states mapped to Jira statuses and severity levels mapped to Jira priorities" style="width:80%;" >}}
 
 As incidents are created, an issue is also created in the corresponding Jira instance. This Jira issue links to the incident in Datadog for reference.
-The Jira issue is synced with the incident based on the template and mappings defined in the [Integration Settings page][3].
+The Jira issue is unidirectionally synced with the incident based on the template and mappings defined in the [Integration Settings page][3].
 
 ## Further Reading
 
