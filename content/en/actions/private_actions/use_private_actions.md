@@ -126,6 +126,7 @@ docker run -d \
 {{% tab "Docker Compose" %}}
 
 Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose documentation][101].
+
 Set up an auto-enrollment script with your `DD_API_KEY`, `DD_APP_KEY` and the `docker compose up -d` command.
 
 ```yaml
@@ -160,9 +161,9 @@ DD_API_KEY=$DD_API_KEY DD_APP_KEY=$DD_APP_KEY docker compose up -d
 
 {{% tab "Kubernetes" %}}
 
-1. Set up an auto-enrollment script with 2 steps:
-  - generate the runner configuration with your `DD_API_KEY`, `DD_APP_KEY` and the `docker run` command.
-  - deploy the Helm chart
+Set up an auto-enrollment script with 2 steps:
+1. Generate the runner configuration with your `DD_API_KEY`, `DD_APP_KEY` and the `docker run` command.
+2. Deploy the Helm chart.
 
 ```bash
 export DD_API_KEY="<YOUR_API_KEY>"
@@ -185,11 +186,11 @@ Deploy with:
 helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
 ```
 
-When the auto-enrollment script succeeds, the new runner will appear on the **Private Action Runners** page.
-
 {{% /tab %}}
 {{< /tabs >}}
 
+
+When the auto-enrollment script succeeds, the new runner will appear on the **Private Action Runners** page.
 When you see the **Ready to use** status, you can create a new connection for the runner or see it on the **Private Action Runners** page:
 - To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
 - Click **View Runner** to see the runner on the **Private Action Runners** page.
