@@ -7,6 +7,9 @@ further_reading:
 - link: "/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
   text: "Advanced Worker configurations"
+- link: "/observability_pipelines/configuration/secrets_management/"
+  tag: "Documentation"
+  text: "Learn more about Secrets Management in Observability Pipelines"
 - link: "/observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/"
   tag: "Documentation"
   text: "Worker CLI commands"
@@ -74,18 +77,20 @@ After setting up your pipeline using the API or Terraform, follow the instructio
     ```
     -p 8282:8088 datadog/observability-pipelines-worker run
     ```
-1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][4] for more information.
-1. Restart the Worker to use the updated bootstrap file:
-    ```
-    sudo systemctl restart observability-pipelines-worker
-    ```
+1. If you are using **Secrets Manager**:
+    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][4] for more information.
+    1. Restart the Worker to use the updated bootstrap file:
+        ```
+        sudo systemctl restart observability-pipelines-worker
+        ```
 
-See [Update Existing Pipelines][3] if you want to make changes to your pipeline's configuration.
+See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
 
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
-[3]: /observability_pipelines/environment_variables/
+[3]: /observability_pipelines/guide/environment_variables/
 [4]: /observability_pipelines/configuration/secrets_management
+[5]: /observability_pipelines/configuration/update_existing_pipelines/
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -108,18 +113,29 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```shell
     helm repo update
     ```
-1. Run the below command to install the Worker.
+1. If you are using:
+    - **Secrets Management**:
+    1. See [Secrets Management][8] on how to configure your `values.yaml` file for your secrets manager.
+    1. Run this command to install the Worker:
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        datadog/observability-pipelines-worker
+        ```
+    - **Environment variables**: Run this command to install the Worker:
 
-    ```shell
-    helm upgrade --install opw \
-	-f values.yaml \
-	--set datadog.apiKey=<DATADOG_API_KEY> \
-	--set datadog.pipelineId=<PIPELINE_ID> \
-	--set <SOURCE_ENV_VARIABLES> \
-	--set <DESTINATION_ENV_VARIABLES> \
-	--set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
-	datadog/observability-pipelines-worker
-    ```
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        --set <SOURCE_ENV_VARIABLES> \
+        --set <DESTINATION_ENV_VARIABLES> \
+        --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
+        datadog/observability-pipelines-worker
+        ```
 
     You must replace the placeholders with the following values:
 
@@ -139,7 +155,7 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
 
-See [Update Existing Pipelines][5] if you want to make changes to your pipeline's configuration.
+See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
 
 **Note**: If you enable [disk buffering][6] for destinations, you must enable Kubernetes [persistent volumes][7] in the Observability Pipelines helm chart.
 
@@ -150,10 +166,11 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [1]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [2]: /observability_pipelines/configuration/update_existing_pipelines
 [3]: https://app.datadoghq.com/organization-settings/remote-config/setup
-[4]: /observability_pipelines/environment_variables/
+[4]: /observability_pipelines/guide/environment_variables/
 [5]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
 [6]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L278
+[8]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
 
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -183,17 +200,18 @@ Follow the steps below if you want to use the one-line installation script to in
         - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
         - See [Environment Variables][3] for a list of destination environment variables.
     **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][5] for more information.
-1. Restart the Worker to use the updated bootstrap file:
-    ```
-    sudo systemctl restart observability-pipelines-worker
-    ```
+1. If you are using **Secrets Manager**:
+    1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][5] for more information.
+    1. Restart the Worker to use the updated bootstrap file:
+        ```
+        sudo systemctl restart observability-pipelines-worker
+        ```
 
 See [Update Existing Pipelines][4] if you want to make changes to your pipeline's configuration.
 
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: /getting_started/site/
-[3]: /observability_pipelines/environment_variables/
+[3]: /observability_pipelines/guide/environment_variables/
 [4]: /observability_pipelines/configuration/update_existing_pipelines
 [5]: /observability_pipelines/configuration/secrets_management
 
@@ -299,6 +317,28 @@ The Observability Pipelines Worker supports all major Kubernetes distributions, 
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
+1. If you are using:
+    - **Secrets Management**:
+    1. See [Secrets Management][7] on how to configure your `values.yaml` file for your secrets manager.
+    1. Run this command to install the Worker:
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        datadog/observability-pipelines-worker
+        ```
+    - **Environment variables**: Run this command to install the Worker:
+        ```shell
+        helm upgrade --install opw \
+        -f values.yaml \
+        --set datadog.apiKey=<DATADOG_API_KEY> \
+        --set datadog.pipelineId=<PIPELINE_ID> \
+        --set <SOURCE_ENV_VARIABLES> \
+        --set <DESTINATION_ENV_VARIABLES> \
+        --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
+        datadog/observability-pipelines-worker
+        ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][2] if you want to make changes to your pipeline's configuration.
@@ -315,6 +355,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 [4]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [5]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
 [6]: https://github.com/DataDog/helm-charts/blob/23624b6e49eef98e84b21689672bb63a7a5df48b/charts/observability-pipelines-worker/values.yaml#L268
+[7]: /observability_pipelines/configuration/secrets_management/?tab=kubernetes#configure-the-worker-to-retrieve-secrets
 
 {{% /tab %}}
 {{% tab "Linux" %}}

@@ -32,14 +32,39 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 
 #### Configure the Worker to use AWS Secrets Manager
 
-After you [install the Worker][3], configure the Worker's bootstrap file to resolve secrets using AWS Secrets Manager:
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Secrets Manager:
 
-```
+```yaml
 backend_type: aws.secrets
 backend_config:
   aws_session:
-    aws_region: {regionName}
+    aws_region: <region_name>
 ```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
+
+```yaml
+bootstrap:
+  config:
+    secret:
+      backend_type: aws.secrets
+      backend_config:
+        aws_session:
+          aws_region: <region_name>
+```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+
+{{% /tab %}}
+{{< /tabs >}}
 
 The following `aws_session` settings are available:
 
@@ -65,15 +90,40 @@ Datadog recommends using the [instance profile method][1] of retrieving secrets 
 
 #### Configure the Worker to use AWS Systems Manager
 
-After you [install the Worker][3], configure the Worker's bootstrap file to resolve secrets using AWS Systems Manager:
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using AWS Systems Manager:
 
-```
+```yaml
 secret:
   backend_type: aws_parameter_store
   backend_config:
     aws_session:
-      aws_region: {regionName}
+      aws_region: <region_name>
 ```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
+
+```yaml
+bootstrap:
+  config:
+    secret:
+      backend_type: aws_parameter_store
+      backend_config:
+        aws_session:
+          aws_region: <region_name>
+```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 {{% collapse-content title="Azure Key Vault" level="h4" expanded=false id="azure-key-vault" %}}
@@ -88,13 +138,37 @@ To access your Key Vault, create a Managed Identity and assign it to your VM. Th
 
 #### Configure the Worker to use Azure Key Vault
 
-After you [install the Worker][3], configure the Worker's bootstrap file to resolve secrets using Azure Key Vault:
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets using Azure Key Vault:
 
-```
+```yaml
 backend_type: azure.keyvault
 backend_config:
-  keyvaulturl: {keyVaultURL}
+  keyvaulturl: <key_vault_url>
 ```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
+
+```yaml
+bootstrap:
+  config:
+    secret:
+      backend_type: azure.keyvault
+      backend_config:
+        keyvaulturl: <key_vault_url>
+```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 {{% collapse-content title="HashiCorp Vault" level="h4" expanded=false id="hashicorp-vault" %}}
@@ -135,9 +209,11 @@ Datadog recommends that you authenticate using the [instance profile method][1] 
 
 #### Configure the Worker to use HashiCorp Vault
 
-After you [install the Worker][3], configure the Worker's bootstrap file to resolve secrets with HashiCorp Vault:
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with HashiCorp Vault:
 
-```
+```yaml
 secret:
   backend_type: vault
   backend_config:
@@ -149,6 +225,33 @@ secret:
       # ... additional session settings
 ```
 
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Before you [install the Worker][1], add the bootstrap configuration to the [`datadog.bootstrap.config`][2] section of the Helm chart `values.yaml` file:
+
+```yaml
+bootstrap:
+  config:
+    secret:
+      backend_type: vault
+      backend_config:
+        vault_address: http://myvaultaddress.net
+        vault_tls_config:
+          # ... TLS settings if applicable
+        vault_session:
+          vault_auth_type: aws
+          # ... additional session settings
+```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=kubernetes#install-the-worker
+[2]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+
+{{% /tab %}}
+{{< /tabs >}}
+
 {{% /collapse-content %}}
 {{% collapse-content title="JSON File" level="h4" expanded=false id="json-file" %}}
 
@@ -158,9 +261,11 @@ The file backend only requires **read** permissions for the configured JSON file
 
 #### Configure the Worker to use a JSON file secret backend
 
-After you [install the Worker][3], configure the Worker's bootstrap file to resolve secrets with a JSON file:
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with a JSON file:
 
-```
+```yaml
 secret:
   backend_type: json
   backend_config:
@@ -171,12 +276,32 @@ secret:
 
 Create the file `/path/to/json/file.json` to store the identifiers and their secret values:
 
-```
+```json
 {
   "us1_api": "<api_key>",
   "secret_identifier1": "<secret1>"
 }
 ```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+You can't pass in a file to configure `secretFileContents`, but you can add your secrets and identifier mapping to the [`datadog.bootstrap.secretFileContents`][1] section of the Helm chart `values.yaml` file:
+
+```yaml
+bootstrap:
+  secretFileContents:
+    us1_api: "<api_key>"
+    secret_identifier1: "<secret1>"
+```
+
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 {{% collapse-content title="YAML File" level="h4" expanded=false id="yaml-file" %}}
@@ -187,7 +312,9 @@ The file backend only requires **read** permissions for the configured YAML file
 
 #### Configure the Worker to use a YAML file secret backend
 
-After you [install the Worker][3], configure the Worker's bootstrap file to resolve secrets with a YAML file:
+{{< tabs >}}
+{{% tab "Docker or Linux" %}}
+After you [install the Worker][1], configure the Worker's [bootstrap file][2] to resolve secrets with a YAML file:
 
 ```
 secret:
@@ -206,6 +333,26 @@ Create the file `/path/to/yaml/file.yaml` to store the identifiers and their sec
 us1_api: "<api_key>"
 secret_identifier1: "<secret1>"
 ```
+
+[1]: /observability_pipelines/configuration/install_the_worker/?tab=docker#install-the-worker
+[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+You can't pass in a file to configure `secretFileContents`, but you can add your secrets and identifier mapping to the [`datadog.bootstrap.secretFileContents`][1] section of the Helm chart `values.yaml` file:
+
+```yaml
+bootstrap:
+  secretFileContents:
+    us1_api: "<api_key>"
+    secret_identifier1: "<secret1>"
+```
+
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L46
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 
