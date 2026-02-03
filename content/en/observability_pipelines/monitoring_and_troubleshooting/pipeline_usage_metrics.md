@@ -75,14 +75,14 @@ Events out
 : **Description**: The number of events the component sends downstream.
 : **Available for**: Sources, processors, and destinations.
 
-Bytes in
+Even bytes in
 : **Metric**: `pipelines.component_received_event_bytes_total`
-: **Description**: The number of bytes received by the component.
+: **Description**: The byte size of events received by the component.
 : **Available for**: Sources, processors, and destinations.
 
-Bytes out
+Even bytes out
 : **Metric**: `pipelines.component_sent_event_bytes_total`
-: **Description**: The number of bytes the component sends downstream.
+: **Description**: The byte size of events the component sends downstream.
 : **Available for**: Sources, processors, and destinations.
 
 Errors
