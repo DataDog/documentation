@@ -5820,15 +5820,15 @@ menu:
       identifier: source_code_integration
       parent: developer_workflows_heading
       weight: 90000
-    - name: Source Code Management
+    - name: Source Code Management Providers
       url: source_code/source-code-management/
       parent: source_code_integration
       identifier: sci_source_code_management
       weight: 1
-    - name: Service Tagging
-      url: source_code/service-tagging/
+    - name: Service Mapping
+      url: source_code/service-mapping/
       parent: source_code_integration
-      identifier: sci_service_tagging
+      identifier: sci_service_mapping
       weight: 2
     - name: Resource Mapping
       url: source_code/resource-mapping/

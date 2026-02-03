@@ -1,5 +1,5 @@
 ---
-title: Source Code Management
+title: Source Code Management Providers
 description: "Connect your Git repositories to Datadog through source code management (SCM) provider integrations."
 further_reading:
 - link: "/integrations/github/"

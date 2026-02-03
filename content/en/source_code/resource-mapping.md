@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Resource Mapping
+title: Kubernetes Resource Mapping for Source Code Integration
 description: "Learn how to connect Kubernetes cluster resources to the source code that was used to deploy them using annotations."
 ---
 
