@@ -199,9 +199,9 @@ After running your first scan, results appear on the [Cloud Security Vulnerabili
 ### Authentication errors
 
 If you encounter authentication errors:
-1. Verify your `DD_API_KEY` and `DD_APP_KEY` are correctly set
-2. Ensure the application key has the `appsec_vm_read` scope
-3. Check that your `DD_SITE` matches your Datadog organization's site
+1. Verify your `DD_API_KEY` and `DD_APP_KEY` are correctly set.
+2. Ensure the application key has the `appsec_vm_read` scope.
+3. Check that your `DD_SITE` matches your Datadog organization's site.
 
 ### Image not found errors
 
