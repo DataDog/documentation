@@ -82,18 +82,19 @@ DatadogFlags.xcframework
 
 Initialize Datadog as early as possible in your app lifecycle—typically in `application(_:didFinishLaunchingWithOptions:)` (or with `@UIApplicationDelegateAdaptor` for SwiftUI apps). This ensures all feature flag evaluations and telemetry are captured correctly.
 
-{{< code-block lang="swift" >}}
+```swift
 import DatadogCore
 
 Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
+        site: .{{< region-param key="dd_datacenter_lowercase" code="true" >}},
         service: "<service name>"
     ),
     trackingConsent: .granted
 )
-{{< /code-block >}}
+```
 
 ## Enable flags
 

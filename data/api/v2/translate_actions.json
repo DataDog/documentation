@@ -2548,6 +2548,26 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "ListReplayHeatmapSnapshots": {
+    "description": "List heatmap snapshots.",
+    "summary": "List replay heatmap snapshots"
+  },
+  "CreateReplayHeatmapSnapshot": {
+    "description": "Create a heatmap snapshot.",
+    "summary": "Create replay heatmap snapshot",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteReplayHeatmapSnapshot": {
+    "description": "Delete a heatmap snapshot.",
+    "summary": "Delete replay heatmap snapshot"
+  },
+  "UpdateReplayHeatmapSnapshot": {
+    "description": "Update a heatmap snapshot.",
+    "summary": "Update replay heatmap snapshot",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -2721,6 +2741,70 @@
     "summary": "Search RUM events",
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
+  },
+  "ListRumReplayPlaylists": {
+    "description": "List playlists.",
+    "summary": "List rum replay playlists"
+  },
+  "CreateRumReplayPlaylist": {
+    "description": "Create a playlist.",
+    "summary": "Create rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteRumReplayPlaylist": {
+    "description": "Delete a playlist.",
+    "summary": "Delete rum replay playlist"
+  },
+  "GetRumReplayPlaylist": {
+    "description": "Get a playlist.",
+    "summary": "Get rum replay playlist"
+  },
+  "UpdateRumReplayPlaylist": {
+    "description": "Update a playlist.",
+    "summary": "Update rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "BulkRemoveRumReplayPlaylistSessions": {
+    "description": "Remove sessions from a playlist.",
+    "summary": "Bulk remove rum replay playlist sessions",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayPlaylistSessions": {
+    "description": "List sessions in a playlist.",
+    "summary": "List rum replay playlist sessions"
+  },
+  "RemoveRumReplaySessionFromPlaylist": {
+    "description": "Remove a session from a playlist.",
+    "summary": "Remove rum replay session from playlist"
+  },
+  "AddRumReplaySessionToPlaylist": {
+    "description": "Add a session to a playlist.",
+    "summary": "Add rum replay session to playlist"
+  },
+  "GetSegments": {
+    "description": "Get segments for a view.",
+    "summary": "Get segments"
+  },
+  "ListRumReplaySessionWatchers": {
+    "description": "List session watchers.",
+    "summary": "List rum replay session watchers"
+  },
+  "DeleteRumReplaySessionWatch": {
+    "description": "Delete session watch history.",
+    "summary": "Delete rum replay session watch"
+  },
+  "CreateRumReplaySessionWatch": {
+    "description": "Record a session watch.",
+    "summary": "Create rum replay session watch",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayViewershipHistorySessions": {
+    "description": "List watched sessions.",
+    "summary": "List rum replay viewership history sessions"
   },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
