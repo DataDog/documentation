@@ -37,7 +37,7 @@ Observability Pipelines ingested bytes
 
 Uptime
 : **Metrics**: `pipelines.host.uptime`
-: **Description:** The host uptime in seconds.
+: **Description:** The amount of time since the host was started, in seconds.
 
 Bytes in
 : **Metrics**: `pipelines.host.network_receive_bytes_total`
@@ -51,7 +51,7 @@ Bytes out
 
 Uptime
 : **Metrics**: `pipelines.uptime_seconds`
-: **Description:** The worker uptime in seconds.
+: **Description:** The amount of time since the worker process was started, in seconds.
 
 CPU usage
 : **Metrics**: `pipelines.cpu_usage_seconds_total`
