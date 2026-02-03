@@ -122,7 +122,7 @@ This widget also helps you to identify "noisy neighbors" (where one or more pods
 
 ### Zombie processes (Live Processes required)
 
-**Note**: This section is only available for customers who have installed [Live Processes][2]. 
+**Note**: This section is only available for customers who have installed the [Live Processes][2] product. 
 
 Zombie processes are often the primary source of wasted GPU spend, as they inappropriately reserve GPU capacity. This widget lists any zombie processes that should be terminated to free up this GPU capacity for other workloads.
 
