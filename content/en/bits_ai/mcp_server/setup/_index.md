@@ -239,13 +239,6 @@ This section lists the tools available in the Datadog MCP Server and provides ex
 
 <div class="alert alert-info">Datadog MCP Server tools are under significant development and are subject to change. Use <a href="https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform">this feedback form</a> to share any feedback, use cases, or issues encountered with your prompts and queries.</div>
 
-### `search_datadog_docs`
-*Toolset: **core***\
-Returns AI-generated answers to Datadog questions, sourced from [Datadog documentation][15].
-- How do you enable Datadog profiling in Python?
-- What's the best way to correlate logs and traces?
-- How does RUM auto-instrumentation work?
-
 ### `search_datadog_events`
 *Toolset: **core***\
 Searches events like monitor alerts, deployment notifications, infrastructure changes, security findings, and service status changes.
