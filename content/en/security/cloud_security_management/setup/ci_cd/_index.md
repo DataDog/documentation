@@ -17,7 +17,7 @@ further_reading:
 
 Cloud Security enables you to scan container images for vulnerabilities during CI/CD, before images are deployed to production. By integrating vulnerability scanning directly into your pipelines, you can detect and remediate security issues early in the development lifecycle.
 
-To support CI/CD-based container image scanning, Datadog provides the **Datadog Security CLI**. The CLI is designed to be run directly inside your CI jobs, giving teams full control over when and how scans are executed as part of their pipelines.
+To support CI/CD-based container image scanning, Datadog provides the **Datadog Security CLI**. The CLI is designed to be run directly inside your CI jobs, giving you full control over when and how scans are executed as part of your pipelines.
 
 **Note**: For vulnerability management in production environments, see [Cloud Security Vulnerabilities][1].
 
