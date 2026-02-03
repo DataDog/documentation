@@ -55,10 +55,11 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 ### Configure the Datadog OCI integration tile
 
 1. Go to the [Datadog OCI integration tile][3] and click **Add New Tenancy**.
+
 2. Select or create a Datadog API key to use for the integration.
 3. Create a Datadog application key.
 4. Enable or disable logs using the toggle.
-5. Click **Create OCI Stack**. This opens the Oracle Resource Manager in the OCI console to complete deployment.<br />
+5. Click **Create OCI Stack**. This opens the Oracle Resource Manager in the OCI console to complete deployment.
    **Note**: Deploy this stack only once per tenancy.
 
 ### Deploy the QuickStart ORM stack
@@ -67,16 +68,16 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 2. Leave the option to use custom Terraform providers unchecked.
 3. Use the default working directory, or optionally choose a different one.
 4. Click **Next**.
-5. Leave the `(Optional) Choose specific subnet(s)` section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the simplest setup.<br />
+5. Leave the `(Optional) Choose specific subnet(s)` section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the simplest setup.
    
-   **Advanced option**: To use existing subnets (maximum of one per OCI region), provide the subnet OCIDs (one per line, without commas). Format: `ocid1.subnet.oc[0-9].*`. Example: `ocid1.subnet.oc1.iad.abcedfgh`.<br />
+   **Advanced option**: To use existing subnets (maximum of one per OCI region), provide the subnet OCIDs (one per line, without commas). Format: `ocid1.subnet.oc[0-9].*`. Example: `ocid1.subnet.oc1.iad.abcedfgh`.
    If using existing subnets, ensure each VCN has HTTP egress through NAT Gateway, a Service Gateway for "All Services In Oracle Services Network", appropriate route table rules, and security rules for HTTP requests.
 
-6. Leave the `(Optional) Choose a User` section blank. QuickStart creates a new User and Group in your current OCI Identity Domain, simplifying IAM setup.<br />
+6. Leave the `(Optional) Choose a User` section blank. QuickStart creates a new User and Group in your current OCI Identity Domain, simplifying IAM setup.
    
    **Advanced option**: To use an existing User and Group, provide both the **Group ID** and **User ID** OCIDs. The user must be a member of the specified group.
 
-7. Leave the `(Optional) Advanced configuration` section blank for most use cases.<br />
+7. Leave the `(Optional) Advanced configuration` section blank for most use cases.
    
    **Advanced options**:
    - **Compartment**: Specify an existing compartment for Datadog-created resources (default creates a new "Datadog" compartment).
@@ -148,9 +149,9 @@ For containerized environments on OKE, you can use the [Datadog Agent for Kubern
 
 ### GPU Monitoring
 
-Monitoring OCI GPU instances is essential for ensuring optimal performance and reliability of your high-performance computing workloads. The [OCI GPU integration][22] provides a comprehensive set of GPU metrics through the `gpu_infrastructure_health` namespace, enabling you to track various aspects of GPU health and utilization.
+Monitoring OCI GPU instances is essential for ensuring optimal performance and reliability of your high-performance computing workloads. The [OCI GPU integration][22] provides a comprehensive set of GPU metrics through the `gpu_infrastructure_health` namespace, enabling you to track the health, capacity, throughput, status, and performance of your [GPU instances][23]. 
 
-This integration lets you monitor and alert on the health, capacity, throughput, status, and performance of your [GPU Instances][23]. After setting up the OCI integration, ensure that the GPU-related namespaces are included in your metric collection configuration.
+After setting up the OCI integration, ensure that the GPU-related namespaces are included in your metric collection configuration. See the **GPU** section of the [OCI Overview dashboard][29] (created automatically when you set up the integration) for an overview of your GPU infrastructure.
 
 ### Cloud Cost Management
 
@@ -203,4 +204,4 @@ Need help? Contact [Datadog support][28].
 [26]: /security/cloud_siem/guide/oci-config-guide-for-cloud-siem/
 [27]: /integrations/guide/oci-integration-troubleshooting
 [28]: /help/
-
+[29]: https://app.datadoghq.com/dash/integration/31417/oracle-cloud-infrastructure-oci-overview
