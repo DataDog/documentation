@@ -45,7 +45,7 @@ Bytes in
 
 Bytes out
 : **Metrics**: `pipelines.host.network_transmit_bytes_total`
-: **Description:** The number of bytes sent by the host on all interfaces. Use the tag `device` to filter per interface.
+: **Description:** The number of bytes sent by the host on all interfaces. Use the `device` tag to filter per interface.
 
 ## Process metrics
 
