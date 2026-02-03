@@ -279,6 +279,22 @@
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
+  "rum-replay-heatmaps": {
+    "name": "Rum Replay Heatmaps",
+    "description": "Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views."
+  },
+  "rum-replay-playlists": {
+    "name": "Rum Replay Playlists",
+    "description": "Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration."
+  },
+  "rum-replay-sessions": {
+    "name": "Rum Replay Sessions",
+    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+  },
+  "rum-replay-viewership": {
+    "name": "Rum Replay Viewership",
+    "description": "Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes."
+  },
   "rum-retention-filters": {
     "name": "Rum Retention Filters",
     "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
