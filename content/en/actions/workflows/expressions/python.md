@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
-The Python function action allows you to write custom Python scripts for data transformations, parsing, and payload enrichment within your workflows. Python provides additional capabilities beyond JavaScript for certain use cases.
+The Python function action lets you write custom Python scripts for data transformations, parsing, and payload enrichment within your workflows. Python provides additional capabilities beyond JavaScript for certain use cases.
 
 ## Python environment
 
@@ -19,8 +19,8 @@ The Python function action runs in a restricted execution environment with the f
 - Network access: Restricted
 
 ## Script structure
-All Python scripts must define a main function that accepts a ctx parameter of type Context.
-Example structure:
+
+All Python scripts must define a `main` function that accepts a `ctx` parameter of type `Context`. For example:
 
 ```python
 from execution_context import Context
@@ -47,7 +47,7 @@ You can use Bits AI to help write Python scripts inside a workflow step.
 To write a script with Bits AI:
 
 1. Add a Python step to your workflow.
-1. In the **Inputs** section, click **Write with Bits AI**.
+1. In the **Inputs** section, click **Write Code with AI**.
 1. Enter a custom prompt or select one of the sample prompts. 
 1. Optionally, click **Test script** to generate a preview of the workflow step. 
 1. To save the script, click **Accept changes**. To continue editing the script, click **Reject changes**.

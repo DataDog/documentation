@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-JavaScript (JS) is available in Workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
+JavaScript (JS) is available in workflows using inline expressions or through the dedicated JS **Function** and **Expression** actions.
 
 ## Inline JavaScript expressions
 
