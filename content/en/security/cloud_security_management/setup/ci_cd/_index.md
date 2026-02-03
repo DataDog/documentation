@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Cloud Security Management (CSM) enables you to scan container images for vulnerabilities during CI/CD, before images are deployed to production. By integrating vulnerability scanning directly into your pipelines, you can detect and remediate security issues early in the development lifecycle.
+Cloud Security enables you to scan container images for vulnerabilities during CI/CD, before images are deployed to production. By integrating vulnerability scanning directly into your pipelines, you can detect and remediate security issues early in the development lifecycle.
 
 To support CI/CD-based container image scanning, Datadog provides the **Datadog Security CLI**. The CLI is designed to be run directly inside your CI jobs, giving teams full control over when and how scans are executed as part of their pipelines.
 
