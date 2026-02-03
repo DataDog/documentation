@@ -139,7 +139,7 @@ services:
     environment:
       DD_API_KEY: ${DD_API_KEY}
       DD_APP_KEY: ${DD_APP_KEY}
-      DD_BASE_URL: https://app.datadoghq.com
+      DD_BASE_URL: <YOUR_DD_SITE>
       DD_PRIVATE_RUNNER_CONFIG_DIR: /etc/dd-action-runner/config
       RUNNER_NAME: my-compose-runner
       RUNNER_MODES: pull
@@ -168,7 +168,7 @@ export DD_API_KEY="<YOUR_API_KEY>"
 export DD_APP_KEY="<YOUR_APP_KEY>"
 
 docker run \
-  -e DD_BASE_URL=https://app.datadoghq.com \
+  -e DD_BASE_URL=<YOUR_DD_SITE> \
   -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
   -e DD_API_KEY="$DD_API_KEY" \
   -e DD_APP_KEY="$DD_APP_KEY" \
