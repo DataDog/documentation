@@ -44,7 +44,7 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
 1. Go to [**Cloud Cost > Analyze > Reports**][5] in Datadog.
 1. Click **New Report** to start from scratch, or select a template from the gallery to accelerate your workflow.
 
-   {{< img src="cloud_cost/cost_reports/create-new-report-1.png" alt="Create a new report or from a template." style="width:100%;" >}}
+   {{< img src="cloud_cost/cost_reports/create-new-report-1.png" alt="Create a new report or from a template" style="width:100%;" >}}
 
    **Available Templates:**
    - **AWS Spend by Service Name**: Understand your EC2, S3, and Lambda costs.
@@ -54,7 +54,7 @@ Use **[Cost Explorer][13]** for flexible investigation and **Cost Reports** for 
 
 ## Customizing your report
 
-{{< img src="cloud_cost/cost_reports/customization-options-3.png" alt="Customize your report by selecting cloud providers, filtering, grouping, changing the visualization, and using advanced options." style="width:100%;" >}}
+{{< img src="cloud_cost/cost_reports/customization-options-3.png" alt="Customize your report by selecting cloud providers, filtering, grouping, changing the visualization, and using advanced options" style="width:100%;" >}}
 
 ### Select the type of report
 
