@@ -110,7 +110,7 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
 
 ### Container Image Scanning in CI/CD
 
-Scan container images for vulnerabilities during your CI/CD pipelines, before images are deployed to production. The Datadog Security CLI runs directly in your CI jobs, giving teams control over when and how scans are executed. For more information, see [Container Image Scanning in CI/CD][9].
+Scan container images for vulnerabilities during your CI/CD pipelines, before deploying images to production. The Datadog Security CLI runs directly in your CI jobs, giving you control over when and how scans are executed. For more information, see [Container Image Scanning in CI/CD][9].
 
 ### AWS CloudTrail Logs
 
