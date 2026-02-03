@@ -20,7 +20,7 @@ further_reading:
 
 Jira is an issue and project tracking system for software teams. The Datadog Jira integration allows you to create issues from incidents in Datadog and view issues created in Jira as Datadog events.
 
-**Note**: This integration syncs data from Datadog to Jira only. Updates made in Jira do not sync back to Datadog incidents.
+**Note**: This integration only syncs data from Datadog to Jira. Updates made in Jira do not sync back to Datadog incidents.
 
 The Jira integration with Datadog Incident Management provides you with the following benefits:
 - **Improved Visibility**: Ensure that all stakeholders are immediately informed about incidents, facilitating a quicker response.
@@ -34,7 +34,7 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 ## Setup
 
 1. On the [Integration Settings page][3], find the Jira integration.
-2. Click the toggle for **Enable Jira issue creation** to allow manual or automatic Jira creation.
+2. Click **Enable Jira issue creation** toggle to allow manual or automatic Jira creation.
 3. Select your Jira account, project, and issue type.
 4. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, a Jira issue is created for all new incidents.
 5. Define a template with dynamic variables to populate Jira ticket fields. Type `{{` to insert incident template variables into fields like **Summary**, **Reporter**, and **Description**. Dynamic variables work only with **string** [Jira field types][5].
