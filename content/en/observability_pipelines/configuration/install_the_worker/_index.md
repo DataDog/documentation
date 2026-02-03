@@ -41,7 +41,7 @@ After setting up your pipeline using the API or Terraform, follow the instructio
 {{% tab "Docker" %}}
 
 1. If you are using:
-    - **Secrets Manager**: Run this command to install the Worker:
+    - **Secrets Management**: Run this command to install the Worker:
         ```
         docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
             -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
@@ -77,7 +77,7 @@ After setting up your pipeline using the API or Terraform, follow the instructio
     ```
     -p 8282:8088 datadog/observability-pipelines-worker run
     ```
-1. If you are using **Secrets Manager**:
+1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][4] for more information.
     1. Restart the Worker to use the updated bootstrap file:
         ```
@@ -180,7 +180,7 @@ If you are running a self-hosted and self-managed Kubernetes cluster, and define
 Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
 
 1. If you are using:
-    - **Secrets Manager**: Run this one-step command to install the Worker:
+    - **Secrets Management**: Run this one-step command to install the Worker:
     ```bash
     DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
     ```
@@ -200,7 +200,7 @@ Follow the steps below if you want to use the one-line installation script to in
         - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
         - See [Environment Variables][3] for a list of destination environment variables.
     **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-1. If you are using **Secrets Manager**:
+1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][5] for more information.
     1. Restart the Worker to use the updated bootstrap file:
         ```
@@ -249,7 +249,7 @@ After you set up your source, destinations, and processors on the Build page of 
 
 1. Select the platform on which you want to install the Worker.
 1. In **Review your secrets management**, if you select:
-    - **Secrets Manager** (Recommended): Ensure that your secrets are configured in your secrets manager.
+    - **Secrets Management** (Recommended): Ensure that your secrets are configured in your secrets manager.
     - **Environment Variables**: Enter the [environment variables][7] for your sources and destinations, if applicable.
 1. Follow the instructions on installing the Worker for your platform.
 
@@ -265,7 +265,7 @@ After you set up your source, destinations, and processors on the Build page of 
         ```
         -p 8282:8088 datadog/observability-pipelines-worker run
         ```
-1. If you are using **Secrets Manager**:
+1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][3] for more information.
     1. Restart the Worker to use the updated bootstrap file:
         ```
@@ -368,7 +368,7 @@ Follow the steps below if you want to use the one-line installation script to in
     - **Note**: The API key must be [enabled for Remote Configuration][2].
 1. Run the one-step command provided in the UI to install the Worker.
     - **Note**: If you are using environment variables, the environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-1. If you are using **Secrets Manager**:
+1. If you are using **Secrets Management**:
     1. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][3] for more information.
     1. Restart the Worker to use the updated bootstrap file:
         ```
@@ -445,7 +445,7 @@ If you prefer not to use the one-line installation script for Linux, follow thes
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 1. If you are using:
-    - **Secrets Manager**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
+    - **Secrets Management**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
         ```shell
         sudo cat <<EOF > /etc/default/observability-pipelines-worker
         DD_API_KEY=<DATADOG_API_KEY>
@@ -498,7 +498,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
     sudo yum install observability-pipelines-worker
     ```
 1. If you are using:
-    - **Secrets Manager**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
+    - **Secrets Management**: Add your API key, site (for example, `datadoghq.com` for US1), and pipeline ID to the Worker's environment file:
         ```shell
         sudo cat <<-EOF > /etc/default/observability-pipelines-worker
         DD_API_KEY=<API_KEY>
