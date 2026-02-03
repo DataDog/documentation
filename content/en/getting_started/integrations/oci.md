@@ -1,6 +1,6 @@
 ---
-title: Getting Started with Oracle Cloud Infrastructure
-description: Integrate your Oracle Cloud Infrastructure environment with Datadog using QuickStart. Set up metric and log collection, and deploy the Datadog Agent for comprehensive monitoring.
+title: Getting Started with Oracle Cloud Infrastructure (OCI)
+description: "Integrate your Oracle Cloud Infrastructure environment with Datadog for comprehensive monitoring"
 further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-oci-with-datadog/'
       tag: 'Blog'
