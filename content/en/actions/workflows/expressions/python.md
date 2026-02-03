@@ -51,7 +51,7 @@ To write a script with Bits AI:
 1. Enter a custom prompt or select one of the sample prompts. 
 1. Optionally, click **Test script** to generate a preview of the workflow step. 
 1. To save the script, click **Accept changes**. To continue editing the script, click **Reject changes**.
-1. Click the **X** to close the AI module. 
+1. Click the **X** to close the AI dialog. 
 1. Enter a **Description**. 
 1. Click **Save**.
 
