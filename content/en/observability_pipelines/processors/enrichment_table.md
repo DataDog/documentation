@@ -86,8 +86,8 @@ To set up the Enrichment Table processor:
   1. Enter a Datadog Application key identifier. Observability Pipelines uses [application keys][1] to access Datadog's programmatic API when enriching data. Ensure you application key is:
       - Associated with a [Service Account][2] (not a personal Datadog user account).
       - Limited to the [`reference_tables_read`][3] scope.
-  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table. See the [Enrichment file example](#enrichment-file-example).
-  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the Reference Table. See the [Enrichment file example](#enrichment-file-example).
+  1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
+  1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
   1. Click **Save**.
 
 [1]: /account_management/api-app-keys/#application-keys
