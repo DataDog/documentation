@@ -30,7 +30,7 @@ With flags, you can:
 
 Code Coverage provides two complementary ways to slice coverage data:
 
-- **Monorepo support features** (per-codeowner and per-service coverage) filter coverage data by **file paths**. Use these to see coverage data for files a particular team owns or for files belonging to a specific service.
+- **[Monorepo support features][3]** (per-codeowner and per-service coverage) filter coverage data by **file paths**. Use these to see coverage data for files a particular team owns or for files belonging to a specific service.
 - **Flags** filter coverage data by **reports**. Use these when the same files can be covered by different test runs, such as unit tests vs. integration tests, or tests running on different runtime versions.
 
 For example, the same source file might be covered by both unit tests and integration tests. Monorepo support features cannot distinguish between these because they operate on file paths. Flags allow you to track unit test coverage and integration test coverage separately by tagging each report with a flag indicating the test type or runtime version.
@@ -65,6 +65,8 @@ This allows you to answer questions like "What is my unit test coverage?" (`unit
 
 ## Add flags to coverage reports
 
+<div class="alert alert-info">The <code>--flags</code> argument is available in datadog-ci v5.6.0 and later.</div>
+
 To add flags to a coverage report, use the `--flags` option when uploading with the `datadog-ci` CLI.
 
 {{< code-block lang="shell" >}}
@@ -87,21 +89,56 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ## View coverage by flag
 
-In the Code Coverage UI, use the **Flag** filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
+In the [Code Coverage UI][4], use the **Flag** filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
 
-{{< img src="/code_coverage/flags_filter_placeholder.png" alt="Code Coverage UI showing the flag filter dropdown" style="width:100%" >}}
-<!-- TODO: Add screenshot of the flag filter in the UI -->
+{{< img src="/code_coverage/flags_filter.png" alt="Code Coverage UI showing the flag filter dropdown" style="width:100%" >}}
 
 When you select a flag, the coverage metrics update to show only the data from reports tagged with that flag.
 
-## Configure PR Gates with flags
+## Set up PR Gates with flags
 
-You can create [PR Gates][1] that evaluate coverage thresholds for specific flags. This allows you to enforce different coverage requirements for different test types.
+You can configure [PR Gates][1] to enforce coverage thresholds for specific flags. This allows you to enforce different coverage requirements for different test types or runtime versions.
 
-Navigate to [PR Gates rule creation][2] and configure a rule to gate on total or patch coverage. In the scope section, select the **Flags** tab and enter the flag names you want to gate on. Use `*` or `**` as wildcards to match multiple flags.
+### Creating a flag-specific gate
 
-{{< img src="/code_coverage/flags_gate_placeholder.png" alt="PR Gates configuration showing the flags scope option" style="width:100%" >}}
-<!-- TODO: Add screenshot of the PR Gates flag configuration -->
+1. Navigate to [PR Gates rule creation][2].
+2. Configure the coverage threshold (total or patch coverage).
+3. In the **per flag** field, select one or more flags the gate should apply to.
+4. Save the rule.
+
+{{< img src="/code_coverage/flags_gate.png" alt="PR Gates configuration showing the flags scope option" style="width:100%" >}}
+
+### How flag gates work
+
+- **With flags specified**: The gate evaluates coverage separately for each specified flag. When multiple flags are specified, each is evaluated independently against the threshold. The gate does not combine coverage across flags.
+- **Without flags specified**: The gate evaluates coverage for the entire repository.
+
+### Example configurations
+
+**Enforce high coverage for unit tests:**
+
+- Condition type: `Overall Code Coverage`
+- Threshold: `80%`
+- Scope: `Flags`
+- Flags: `unit-tests`
+
+**Require all new code in integration tests to be tested:**
+
+- Condition type: `Patch Code Coverage`
+- Threshold: `100%`
+- Scope: `Flags`
+- Flags: `integration-tests`
+
+**Enforce coverage for specific runtime versions:**
+
+- Condition type: `Overall Code Coverage`
+- Threshold: `75%`
+- Scope: `Flags`
+- Flags: `python-3.11`, `python-3.12`
+
+### Multiple gates per repository
+
+You can create multiple gates for the same repository, each applying to different flags. This allows you to enforce different coverage standards for different test types or runtime versions.
 
 ## Common use cases
 
@@ -130,5 +167,7 @@ datadog-ci coverage upload --flags python-3.12 coverage-py312.xml
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /code_coverage/setup/#pr-gates
-[2]: https://app.datadoghq.com/ci/pr-gates/rule/create
+[1]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[3]: /code_coverage/monorepo_support
+[4]: https://app.datadoghq.com/ci/code-coverage
