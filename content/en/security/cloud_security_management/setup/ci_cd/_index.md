@@ -45,16 +45,6 @@ Store your API and application keys as secrets in your CI/CD platform to protect
 </div>
 
 
-<div class="alert alert-info">Pre-built integrations for specific CI providers (GitHub Actions, GitLab CI/CD, Azure DevOps, etc.) are coming soon. For now, use the customizable script approach below, which works with any CI/CD platform.</div>
-
-Container image scanning works with all major CI/CD platforms including:
-- GitHub Actions
-- GitLab CI/CD
-- Azure DevOps
-- Other CI providers that can execute shell scripts
-
-The customizable script approach gives you full control over when and how scans are executed in your pipelines.
-
 ### Install the Datadog Security CLI
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview" >}}
