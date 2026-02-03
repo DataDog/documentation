@@ -46,7 +46,7 @@ A [Datadog account][1] with permissions to create API and application keys.
 
 ## Setup
 
-Datadog's QuickStart for OCI is a fully managed setup experience that provisions all necessary infrastructure in your tenancy with just a few clicks. The setup automatically creates Oracle Service Connector Hubs to stream metrics and logs to Datadog, and continuously discovers new resources and compartments as your environment grows.
+Datadog's QuickStart for OCI is a fully managed setup experience that provisions all necessary infrastructure in your tenancy. The setup automatically creates Oracle Service Connector Hubs to stream metrics and logs to Datadog, and continuously discovers new resources and compartments as your environment grows.
 
 **Note**: Before starting, consider [requesting a service limit increase][4] for Service Connector Hubs. The approximate number needed is:
 
@@ -67,7 +67,7 @@ $$\\text"Service Connector Hubs" = \text"Number of compartments in tenancy" / \t
 2. Leave the option to use custom Terraform providers unchecked.
 3. Use the default working directory, or optionally choose a different one.
 4. Click **Next**.
-5. Leave the `(Optional) Choose specific subnet(s)` section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the most streamlined setup.<br />
+5. Leave the `(Optional) Choose specific subnet(s)` section blank. QuickStart automatically creates a new Virtual Cloud Network (VCN) and subnet in each region, providing the simplest setup.<br />
    
    **Advanced option**: To use existing subnets (maximum of one per OCI region), provide the subnet OCIDs (one per line, without commas). Format: `ocid1.subnet.oc[0-9].*`. Example: `ocid1.subnet.oc1.iad.abcedfgh`.<br />
    If using existing subnets, ensure each VCN has HTTP egress through NAT Gateway, a Service Gateway for "All Services In Oracle Services Network", appropriate route table rules, and security rules for HTTP requests.
@@ -122,7 +122,7 @@ Use the **Metric collection** and **Log collection** tabs to configure which met
 - After modifying tags in OCI, it may take up to 15 minutes for the changes to appear in Datadog.
 - In OCI, tags are not inherited by child compartments; each compartment must be tagged individually.
 
-### Resource Collection
+### Resource collection
 
 On the **Resource Collection** tab of the [Datadog OCI integration tile][3], click the **Enable Resource Collection** toggle. Resources are visible in the [Datadog Resource Catalog][7].
 
@@ -140,7 +140,7 @@ While the OCI integration automatically collects service-level metrics through O
 
 The Agent installs with a single command for most operating systems, including Oracle Linux. See the [Agent installation page][9] for instructions, or read [why you should install the Agent on cloud instances][13] for more details on the benefits.
 
-### Using the Datadog Agent with Oracle Container Engine for Kubernetes (OKE)
+### Using the Datadog Agent with OCI Kubernetes Engine (OKE)
 
 For containerized environments on OKE, you can use the [Datadog Agent for Kubernetes][14]. Use the dedicated Kubernetes documentation to deploy the Agent in your OKE cluster and collect metrics, logs, and traces from your containerized applications.
 
