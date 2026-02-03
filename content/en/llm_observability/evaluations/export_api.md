@@ -371,10 +371,10 @@ Both endpoints have the same response format. [Results are paginated](/logs/guid
 
 | Field      | Type                          | Description                                |
 |------------|-------------------------------|--------------------------------------------|
-| message        | string                        | A message describing the error that occurred. This could be a list of reasons why the evaluation was skipped or an error message generated from trying to run the evaluation. |
+| message        | string                        | A description of the error. This may include reasons the evaluation was skipped or an error message generated while running the evaluation. |
 | stack        | string                        | The stack trace associated with the evaluation error. |
-| type        | string                        | The type of error that occurred. One of a fixed set of generic reasons the evaluation was skipped or errored out. |
-| recommended_resolution        | string                        | A description of what needs to be done in order to remedy the error. |
+| type        | string                        | The error category. One of a fixed set of reasons indicating why the evaluation was skipped or failed. |
+| recommended_resolution        | string                        | The steps required to resolve the error. |
 
 ### Meta
 
