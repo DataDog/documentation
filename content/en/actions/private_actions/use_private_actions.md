@@ -24,7 +24,7 @@ further_reading:
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network, then pair the runner with a Datadog Connection.
 
-For more information about how private actions work, see the full [overview page][17].
+For more information about how private actions work, see the full [overview page][16].
 
 ## Supported private actions
 
@@ -43,13 +43,10 @@ In addition, the host must have the following:
 
 ## Set up a private action runner
 
-From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], click **New Private Action Runner**. The installation steps differ depending on whether you want to install the runner for App Builder, Workflow Automation, or both App Builder and Workflow Automation.
+From the [Actions Catalog][6], navigate to **Private Action Runners** and click **New Private Action Runner**.
 
-{{% collapse-content title="Both App Builder and Workflow Automation" level="p" %}}
-1. Enter a name for your runner.
-1. Click **Both**.
-2. Create a directory on your host where the runner can store its configuration, such as `./config`. You can also use this directory to store any credentials required by the runner's connection.
-3. Deploy your runner with Docker, Docker Compose, or Kubernetes:
+1. Enter a name for your runner and select the allowed actions.
+1. Create a directory on your host where the runner can store its configuration, such as ./config, and follow the guidelines to deploy your runner with Docker, Docker Compose, or Kubernetes.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -178,7 +175,7 @@ See [Connect a runner](#connect-a-runner) for more information on pairing your r
 
 ## Manage access
 
-Use [role-based access control (RBAC)][18] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][19].
+Use [role-based access control (RBAC)][17] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][18].
 
 You can set permissions on the runner to restrict modifications or prevent new connections from being attached. Available granular permissions include **Viewer**, **Contributor**, and **Editor**.
 
@@ -210,17 +207,17 @@ Editor
 Before you can use an action runner, you must pair it with one or more connections.
 
 To pair a runner to a connection:
-1. From the [Workflow Automation][8] or [App Builder][9] Connections page, click **New Connection**.
+1. From the [Workflow Automation][7] or [App Builder][8] Connections page, click **New Connection**.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Add a **Connection Name** and select your runner from the **Private Action Runner** dropdown.
-1. Add the paths to any required credential files. For more information on credentials, see [Handling Private Action Credentials][10].
+1. Add the paths to any required credential files. For more information on credentials, see [Handling Private Action Credentials][9].
 
 ## Use a private action
 
-To use a private action in your [Workflow Automation][11] workflow or [App Builder][12] app:
+To use a private action in your [Workflow Automation][10] workflow or [App Builder][11] app:
 
 {{% collapse-content title="Workflow Automation" level="p" %}}
-1. From the [Workflow Automation][11] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][13].
+1. From the [Workflow Automation][10] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][12].
 1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Enter a name for the step.
 1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner that is paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
@@ -228,7 +225,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 {{% /collapse-content %}}
 
 {{% collapse-content title="App Builder" level="p" %}}
-1. From the [App Builder][12] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][15].
+1. From the [App Builder][11] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][14].
 1. Click **New Query** and search for the private action you want to add to your app. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
 1. Complete any required fields and click **Save** to save your query.
@@ -238,7 +235,7 @@ To use a private action in your [Workflow Automation][11] workflow or [App Build
 
 ### Edit connections or delete runners
 
-From the **Private Action Runner** page in [Workflow Automation][6] or [App Builder][7], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
+From the **Private Action Runner** page in [Actions Catalog][6], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
 
 ### Change the allowlist of a runner
 
@@ -429,16 +426,15 @@ To edit the allowlist for a Private Action Runner:
 [3]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.jenkins
 [4]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.temporal
 [5]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.http
-[6]: https://app.datadoghq.com/workflow/private-action-runners
-[7]: https://app.datadoghq.com/app-builder/private-action-runners
-[8]: https://app.datadoghq.com/workflow/connections
-[9]: https://app.datadoghq.com/app-builder/connections
-[10]: /actions/private_actions/private_action_credentials
-[11]: https://app.datadoghq.com/workflow/
-[12]: https://app.datadoghq.com/app-builder/
-[13]: /service_management/workflows/build
-[14]: /service_management/app_builder/build
-[15]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
-[17]: /actions/private_actions/
-[18]: /account_management/rbac/
-[19]: /account_management/rbac/permissions/#app-builder--workflow-automations
+[6]: https://app.datadoghq.com/actions/catalog
+[7]: https://app.datadoghq.com/workflow/connections
+[8]: https://app.datadoghq.com/app-builder/connections
+[9]: /actions/private_actions/private_action_credentials
+[10]: https://app.datadoghq.com/workflow/
+[11]: https://app.datadoghq.com/app-builder/
+[12]: /service_management/workflows/build
+[13]: /service_management/app_builder/build
+[14]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+[16]: /actions/private_actions/
+[17]: /account_management/rbac/
+[18]: /account_management/rbac/permissions/#app-builder--workflow-automations
