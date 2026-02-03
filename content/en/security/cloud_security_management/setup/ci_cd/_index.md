@@ -148,7 +148,7 @@ You can also view your scan results in Datadog's [Cloud Security Vulnerabilities
 
 For faster iteration before committing to CI, install the Datadog Security CLI locally using the same installation methods described in the [installation section](#install-the-datadog-security-cli) above.
 
-### Local scanning without persisting results
+### Scan locally without persisting results
 
 When testing locally, scan images without uploading results to Datadog using the `--no-persist` flag:
 
