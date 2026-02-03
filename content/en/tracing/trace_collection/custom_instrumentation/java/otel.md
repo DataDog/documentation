@@ -16,7 +16,15 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-{{% otel-custom-instrumentation-lang %}}
+## Overview
+
+There are a few reasons to manually instrument your applications with the OpenTelemetry API:
+
+- You are not using Datadog supported library instrumentation.
+- You want to extend the Datadog SDK's functionality.
+- You need finer control over instrumenting your applications.
+
+The Datadog SDK provides several techniques to help you achieve these goals. The following sections demonstrate how to use the OpenTelemetry API for custom instrumentation to use with Datadog.
 
 ## Setup
 
@@ -24,15 +32,16 @@ further_reading:
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
-1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Java Setup Instructions][15].
+1. If you have not yet read the instructions for auto-instrumentation and setup, start with the [Java Setup Instructions][100].
 
-1. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
+2. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
 
-1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
+3. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
 ## Adding span tags
 
 ### Add custom span tags
+
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
 ```java
@@ -52,12 +61,11 @@ The `dd.tags` property allows you to set tags across all generated spans for an 
 java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
     -Ddd.tags=datacenter:njc,<TAG_KEY>:<TAG_VALUE> \
     -jar <YOUR_APPLICATION_PATH>.jar
-
 ```
 
-### Setting errors on span
+### Setting errors on a span
 
-To set an error on a span, you can use the `setStatus` method on the span like this:
+To set an error on a span, use the `setStatus` method:
 
 ```java
 import static io.opentelemetry.api.trace.StatusCode.ERROR;
@@ -71,22 +79,14 @@ public void doSomething() {
 
 ### Setting tags and errors on a root span from a child span
 
-This example demonstrates how to set tags and errors on a root span from a child span:
+When you want to set tags or errors on the root span from within a child span, you can use the OpenTelemetry Context API:
 
 ```java
-import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.context.Context;
 import io.opentelemetry.context.ContextKey;
 import io.opentelemetry.context.Scope;
-import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
-import io.opentelemetry.sdk.OpenTelemetrySdk;
-import io.opentelemetry.sdk.resources.Resource;
-import io.opentelemetry.sdk.trace.SdkTracerProvider;
-import io.opentelemetry.sdk.trace.export.BatchSpanProcessor;
-import io.opentelemetry.semconv.ResourceAttributes;
-import java.util.concurrent.TimeUnit;
 
 public class Example {
 
@@ -94,7 +94,7 @@ public class Example {
     ContextKey.named("opentelemetry-traces-local-root-span");
 
   public void begin() {
-    tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
+    Tracer tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
     Span parentSpan = tracer.spanBuilder("begin").startSpan();
     try (Scope scope = parentSpan.makeCurrent()) {
       createChildSpan();
@@ -104,13 +104,14 @@ public class Example {
   }
 
   private void createChildSpan() {
+    Tracer tracer = GlobalOpenTelemetry.getTracer("my-scope", "0.1.0");
     Span childSpan = tracer.spanBuilder("child-span").startSpan();
     try {
       Span rootSpan = Context.current().get(CONTEXT_KEY);
         if (null != rootSpan) {
           rootSpan.setAttribute("my-attribute", "my-attribute-value");
           rootSpan.setStatus(StatusCode.ERROR, "Some error details...");
-        } 
+        }
     } finally {
       childSpan.end();
     }
@@ -121,17 +122,16 @@ public class Example {
 
 ## Adding spans
 
-If you aren't using a [supported framework instrumentation][17], or you would like additional depth in your application's [traces][16], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
+If you aren't using a [supported framework instrumentation][101], or you would like additional depth in your application's [traces][102], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
-If modifying application code is not possible, use the environment variable dd.trace.methods to detail these methods.
+If modifying application code is not possible, use the environment variable `dd.trace.methods` to detail these methods.
 
-If you have existing @Trace or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
-
-Traces may also be created using the OpenTelemetry `@WithSpan` annotation as described in [Trace annotations](#trace-annotations).
+If you have existing `@Trace` or similar annotations, or prefer to use annotations to complete any incomplete traces within Datadog, use Trace Annotations.
 
 ### Trace annotations
 
 Add `@WithSpan` to methods to have them be traced when running OpenTelemetry and the `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
+
 OpenTelemetry's `@WithSpan` annotation is provided by the `opentelemetry-instrumentation-annotations` dependency.
 
 ```java
@@ -151,17 +151,9 @@ public class SessionManager {
 To manually create new spans within the current trace context:
 
 ```java
-import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
 import io.opentelemetry.context.Scope;
-import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
-import io.opentelemetry.sdk.OpenTelemetrySdk;
-import io.opentelemetry.sdk.resources.Resource;
-import io.opentelemetry.sdk.trace.SdkTracerProvider;
-import io.opentelemetry.sdk.trace.export.BatchSpanProcessor;
-import io.opentelemetry.semconv.ResourceAttributes;
-import java.util.concurrent.TimeUnit;
 
 public class Example {
 
@@ -177,7 +169,6 @@ public class Example {
       span.end();
     }
   }
-
 }
 ```
 
@@ -188,15 +179,8 @@ public class Example {
 You can add span events using the `addEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
 
 - **Name** [_required_]: A string representing the event's name.
-- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
-  - The key must be a non-empty string.
-  - The value can be either:
-    - A primitive type: string, Boolean, or number.
-    - A homogeneous array of primitive type values (for example, an array of strings).
-  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Attributes** [_optional_]: Key-value pairs where the key is a non-empty string and the value is a primitive type or a homogeneous array of primitive values.
 - **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects an `Instant` object.
-
-The following examples demonstrate different ways to add events to a span:
 
 ```java
 Attributes eventAttributes = Attributes.builder()
@@ -211,21 +195,19 @@ span.addEvent("Event With No Attributes");
 span.addEvent("Event With Some Attributes", eventAttributes);
 ```
 
-Read the [OpenTelemetry][21] specification for more information.
+Read the [OpenTelemetry specification for adding events][103] for more information.
 
 ### Recording exceptions
 
-To record exceptions, use the `recordException` API. This method requires an `exception` parameter and optionally accepts a UNIX `timestamp` parameter. It creates a new span event that includes standardized exception attributes and associates it with the corresponding span.
-
-The following examples demonstrate different ways to record exceptions:
+To record exceptions, use the `recordException` API:
 
 ```java
 span.recordException(new Exception("Error Message"));
-span.recordException(new Exception("Error Message"), 
+span.recordException(new Exception("Error Message"),
     Attributes.builder().put(AttributeKey.stringKey("status"), "failed").build());
 ```
 
-Read the [OpenTelemetry][22] specification for more information.
+Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
 ## Trace client and Agent configuration
 
@@ -233,21 +215,21 @@ Both the tracing client and Datadog Agent offer additional configuration options
 
 ### Propagating context with headers extraction and injection
 
-You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][18] for information.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][105] for information.
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][19] page or in [Ignoring Unwanted Resources][20].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][106] page or in [Ignoring Unwanted Resources][107].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[15]: /tracing/setup/java/
-[16]: /tracing/glossary/#trace
-[17]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
-[18]: /tracing/trace_collection/trace_context_propagation/
-[19]: /tracing/security
-[20]: /tracing/guide/ignoring_apm_resources/
-[21]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
-[22]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception
+[100]: /tracing/setup/java/
+[101]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget#compatibility
+[102]: /tracing/glossary/#trace
+[103]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[104]: https://opentelemetry.io/docs/specs/otel/trace/api/#record-exception
+[105]: /tracing/trace_collection/trace_context_propagation/
+[106]: /tracing/security
+[107]: /tracing/guide/ignoring_apm_resources/

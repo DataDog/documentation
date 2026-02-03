@@ -52,17 +52,26 @@ yarn add @datadog/mobile-react-native-code-push
 Replace `DdSdkReactNative.initialize` by `DatadogCodepush.initialize` in your code:
 
 ```js
-import { DdSdkReactNativeConfiguration } from '@datadog/mobile-react-native';
-import { DatadogCodepush } from '@datadog/mobile-react-native-code-push';
+import { CoreConfiguration } from 'expo-datadog';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new CoreConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track user interactions (such as a tap on buttons). You can use the 'accessibilityLabel' element property to give the tap action a name, otherwise the element type is reported
-    true, // track XHR resources
-    true // track errors
-);
+    trackingConsent,
+    {
+        site: 'US1', // Optional: Select your Datadog website ("US1", "US3", "US5", "EU1", or "US1_FED"). Default is "US1".
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>', // RUM Application ID
+            trackInteractions: true, // Track user interactions (set to false if using Error Tracking only)
+            trackResources: true, // Track XHR resources (set to false if using Error Tracking only)
+            trackErrors: true, // Track errors
+            sessionSampleRate: 80, // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
+            nativeCrashReportEnabled: true // Optional: Enable or disable native crash reports.
+        },
+        logsConfiguration: {}, // Enable Logs
+        traceConfiguration: {} // Enable Traces
+    }
+)
 
 await DatadogCodepush.initialize(config);
 ```
@@ -139,14 +148,9 @@ These steps ensure that the `version` matches the format `{commercialVersion}-co
 You can also do that by specifying a `versionSuffix` in the SDK configuration:
 
 ```js
-const config = new DdSdkReactNativeConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    '<RUM_APPLICATION_ID>',
-    true, // track User interactions (e.g.: Tap on buttons. You can use 'accessibilityLabel' element property to give tap action the name, otherwise element type will be reported)
-    true, // track XHR Resources
-    true // track Errors
-);
+import { CoreConfiguration } from '@datadog/mobile-react-native';
+
+const config = new CoreConfiguration('<CLIENT_TOKEN>', '<ENVIRONMENT_NAME>');
 
 config.versionSuffix = `codepush.${codepushVersion}`; // will result in "1.0.0-codepush.v2"
 ```

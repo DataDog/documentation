@@ -38,7 +38,7 @@ Extend your observability with OpenTelemetry [instrumentation libraries][2] alon
 Datadog supports OpenTelemetry-compatible instrumentation libraries which provide observability for frameworks and technologies not covered by Datadog's native SDKs. This allows you to instrument additional frameworks and libraries while still sending data to Datadog's backend.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/instrument/instrumentation_libraries/" >}}Use OpenTelemetry Instrumentation Libraries with the Datadog SDK{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/instrumentation_libraries/" >}}Use OpenTelemetry Instrumentation Libraries with the Datadog SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

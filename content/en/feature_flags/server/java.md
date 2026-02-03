@@ -10,10 +10,6 @@ further_reading:
   text: "Java APM and Distributed Tracing"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 <div class="alert alert-warning">Java Feature Flags support is experimental and requires enabling an experimental flag in the tracer. See the <a href="#configuration">Configuration section</a> for details.</div>
 
 ## Overview

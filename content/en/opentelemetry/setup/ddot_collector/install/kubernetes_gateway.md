@@ -1,8 +1,9 @@
 ---
 title: Install the DDOT Collector as a Gateway on Kubernetes
-code_lang: kubernetes_gateway
-type: multi-code-lang
-code_lang_weight: 2
+private: true
+# code_lang: kubernetes_gateway
+# type: multi-code-lang
+# code_lang_weight: 2
 further_reading:
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog
@@ -54,7 +55,7 @@ Before you begin, ensure you have the following:
 * **Software**:
     * A Kubernetes cluster (v1.29+). EKS Fargate and GKE Autopilot are not supported.
     * [Helm][3] (v3+).
-    * Datadog Helm chart version 3.160.0 or higher.
+    * Datadog Helm chart version 3.160.1 or higher.
     * [kubectl][4].
 * **Network**:
   {{% otel-network-requirements %}}
@@ -105,28 +106,31 @@ exporters:
     endpoint: http://<release>-datadog-otel-agent-gateway:4318
     tls:
       insecure: true
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 processors:
   infraattributes:
     cardinality: 2
-  batch:
-    timeout: 10s
 connectors:
   datadog/connector:
     traces:
       compute_top_level_by_span_kind: true
+      peer_tags_aggregation: true
+      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [otlphttp, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [otlphttp]
     logs:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [otlphttp]
 ```
 
@@ -146,9 +150,10 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 processors:
-  batch:
-    timeout: 10s
 extension:
   datadog:
     api:
@@ -158,15 +163,12 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog]
     metrics:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog]
     logs:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog]
 ```
 
@@ -291,7 +293,7 @@ targetSystem: "linux"
 fullnameOverride: "my-gw"
 datadog:
   apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY> 
+  appKey: <DATADOG_APP_KEY>
   otelCollector:
     enabled: true
     # RBAC permissions are required for the k8s resolver in the loadbalancing exporter
@@ -549,7 +551,7 @@ For advanced scenarios, you can deploy multiple gateway layers to create a proce
                 receivers: [otlp]
                 exporters: [otlp]
     ```
-    
+
 ## View gateway pods on Fleet Automation
 
 The DDOT Collector gateway includes the [Datadog extension][11] by default. This extension exports Collector build information and configurations to Datadog, allowing you to monitor your telemetry pipeline from Infrastructure Monitoring and Fleet Automation.
@@ -567,12 +569,11 @@ To view your gateway pods:
 ## Known limitations
 
   * **Startup race condition**: When deploying the DaemonSet and gateway in the same release, DaemonSet pods might start before the gateway service is ready, causing initial connection error logs. The OTLP exporter automatically retries, so these logs can be safely ignored. Alternatively, deploy the gateway first and wait for it to become ready before deploying the DaemonSet.
-  * **Ignorable Core Agent Connection Logs**: Gateway pods might generate warning logs about failing to connect to a core Datadog Agent (for example, `grpc: addrConn.createTransport failed to connect`). This occurs because the gateway deployment does not include a core agent in the same pod. These logs are expected and can be safely ignored. This is being actively addressed.
 
 ## Further reading
-  
+
 {{< partial name="whats-next/whats-next.html" >}}
-  
+
 [1]: https://www.datadoghq.com/free-datadog-trial/
 [2]: https://app.datadoghq.com/organization-settings/api-keys/
 [3]: https://helm.sh

@@ -387,6 +387,8 @@ With the key-value store enabled as a template source, the Agent looks for templ
 {{% /tab %}}
 {{< /tabs >}}
 
+To match a log configuration to a set of containers with more granularity than the container short image name, see [Autodiscovery Container Identifiers][22].
+
 ## Advanced log collection
 
 Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
@@ -492,3 +494,4 @@ For troubleshooting steps, see [Container Log Collection Troubleshooting][21].
 [19]: /containers/kubernetes/log/?tab=helm#autodiscovery-annotations
 [20]: /containers/kubernetes/log/?tab=helm#autodiscovery-configuration-files
 [21]: /containers/troubleshooting/log-collection/?tab=datadogoperator
+[22]: /containers/guide/ad_identifiers/
