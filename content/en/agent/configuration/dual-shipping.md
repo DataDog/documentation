@@ -158,15 +158,15 @@ external_metrics_provider:
   endpoints:
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: <DD_SITE> 
+    url: <DD_SITE>
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: https://app.{{< region-param key="dd_site">}}
+    url: <DD_SITE>
 {{< /code-block >}}
 
 ## Orchestrator
 
-### HELM configuration    <!-- CONFIRM THIS SECTION APIs-->
+### HELM configuration
 In Datadog `values.yaml`:
 ```yaml
 agents:
@@ -178,17 +178,16 @@ agents:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
         "https://orchestrator.{{< region-param key="dd_site">}}":
-        - apikey2
+        - apikey3
 
 clusterAgent:
 ...
   datadog_cluster_yaml:
     orchestrator_explorer:
       orchestrator_additional_endpoints:
-        "https://orchestrator.<DD_SITE>":
-        - apikey2
+        "https://orchestrator.<DD_SITE>": # Replace "<DD_SITE>" with its value. For example, "https://orchestrator.ddog-gov.com" for the US1-FED site.
+        - apikey4
 ```
-
 
 ### Environment variable configuration
 
@@ -210,7 +209,7 @@ evp_proxy_config:
     "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://<VERSION>-app.agent.<DD_SITE>":
+    "https://<VERSION>-app.agent.<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://process.datadoghq.eu" for the EU site.
     - apikey4
 ```
 
@@ -441,7 +440,7 @@ and add the relevant settings to `customAgentConfig`.
       force_use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "agent-http-intake.logs.<DD_SITE>"
+        Host: "agent-http-intake.logs.<DD_SITE>" # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.com" for the US1 site.
         Port: 443
         is_reliable: true
 ```
