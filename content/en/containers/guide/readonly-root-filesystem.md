@@ -19,9 +19,14 @@ Enabling read-only root filesystem (ROFS) has become a common container security
 
 If you're using a managed deployment method for the Datadog Agent (Helm chart, Datadog Operator, ECS Terraform module, etc.) then ROFS is already enabled. Otherwise, this guide explains how to run the Datadog Agent with ROFS enabled: by configuring writable volume mounts for your self-managed Datadog Agent installation.
 
-## Configuration pattern
+## Configuration options
 
-To configure the Datadog Agent for ROFS:
+There are two approaches to configure the Datadog Agent for ROFS:
+
+{{< tabs >}}
+{{% tab "Mount Volumes" %}}
+
+This approach provides writable volumes for the required directories at runtime:
 
 1. **Provide writable volumes** for the required directories
 2. **Use an init container** to copy default configuration files before the Agent starts
@@ -82,6 +87,59 @@ To adapt this pattern to other container orchestrators like ECS, Kubernetes, or 
 2. Mount that volume to `/etc/datadog-agent` in the main Datadog Agent container
 3. Mount writable volumes for other runtime directories (like `/opt/datadog-agent/run` and `/var/run/datadog`)
 4. Enable read-only root filesystem
+
+{{% /tab %}}
+{{% tab "Custom Image" %}}
+
+Create a custom Datadog Agent image with pre-defined volumes for writable directories. This is particularly useful when you cannot use init containers or dynamic volume mounting.
+
+### Example
+
+**Step 1:** Create a Dockerfile that extends the Datadog Agent image and declares volumes for required paths:
+
+```dockerfile
+FROM gcr.io/datadoghq/agent:latest
+# Create volumes for all paths the Agent needs to write to
+VOLUME ["/etc/datadog-agent", "/opt/datadog-agent/run", "/var/run/datadog", "/tmp", "/var/log/datadog"]
+# Optional: Copy a custom datadog.yaml if needed
+# ADD datadog.yaml /etc/datadog-agent/datadog.yaml
+```
+
+**Step 2:** Build and tag the custom image:
+
+```shell
+docker build -t your-registry/datadog-agent:7.x-rofs .
+docker push your-registry/datadog-agent:7.x-rofs
+```
+
+**Step 3:** Use the custom image in your container orchestrator with read-only root filesystem enabled:
+
+```yaml
+services:
+  datadog:
+    image: your-registry/datadog-agent:7.x-rofs
+    read_only: true
+    pid: host
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_SITE="datadoghq.com"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+```
+
+**Note**: When using the `VOLUME` directive in a Dockerfile, the container runtime automatically creates anonymous volumes for those paths. This removes the need for an init container, but the volumes are ephemeral and any customizations to the configuration need to be baked into the image or provided through environment variables.
+
+To adapt this pattern to other container orchestrators like ECS or Kubernetes:
+1. Build the custom image with `VOLUME` declarations for all writable paths
+2. Reference the custom image in your task definition or pod specification
+3. Enable read-only root filesystem in your container configuration
+4. The declared volumes will be automatically created by the container runtime
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Datadog Agent filesystem write footprint
 
