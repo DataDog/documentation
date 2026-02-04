@@ -19067,6 +19067,78 @@ components:
             $ref: '#/components/schemas/DeletedSuiteResponseData'
           type: array
       type: object
+    DeletedTestResponseData:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeletedTestResponseDataAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/DeletedTestsResponseType'
+      type: object
+    DeletedTestResponseDataAttributes:
+      properties:
+        deleted_at:
+          description: Deletion timestamp of the Synthetic test ID.
+          type: string
+        public_id:
+          description: The Synthetic test ID deleted.
+          type: string
+      type: object
+    DeletedTestsRequestDelete:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeletedTestsRequestDeleteAttributes'
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/DeletedTestsRequestType'
+      required:
+      - attributes
+      type: object
+    DeletedTestsRequestDeleteAttributes:
+      properties:
+        force_delete_dependencies:
+          type: boolean
+        public_ids:
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+      required:
+      - public_ids
+      type: object
+    DeletedTestsRequestDeleteRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/DeletedTestsRequestDelete'
+      required:
+      - data
+      type: object
+    DeletedTestsRequestType:
+      default: delete_tests_request
+      enum:
+      - delete_tests_request
+      example: delete_tests_request
+      type: string
+      x-enum-varnames:
+      - DELETE_TESTS_REQUEST
+    DeletedTestsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DeletedTestResponseData'
+          type: array
+      type: object
+    DeletedTestsResponseType:
+      default: delete_tests
+      enum:
+      - delete_tests
+      example: delete_tests
+      type: string
+      x-enum-varnames:
+      - DELETE_TESTS
     DependencyLocation:
       description: Static library vulnerability location.
       properties:
@@ -61096,6 +61168,361 @@ components:
           example: example-value
           type: string
       type: object
+    SyntheticsNetworkAssertion:
+      description: Object describing an assertion for a Network Path test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsNetworkAssertionLatency'
+      - $ref: '#/components/schemas/SyntheticsNetworkAssertionMultiNetworkHop'
+      - $ref: '#/components/schemas/SyntheticsNetworkAssertionPacketLossPercentage'
+      - $ref: '#/components/schemas/SyntheticsNetworkAssertionJitter'
+    SyntheticsNetworkAssertionJitter:
+      description: Jitter assertion for a Network Path test.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionOperator'
+        target:
+          description: Target value in milliseconds.
+          example: 5
+          format: double
+          type: number
+        type:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionJitterType'
+      required:
+      - operator
+      - target
+      - type
+      type: object
+    SyntheticsNetworkAssertionJitterType:
+      default: jitter
+      description: Type of the jitter assertion.
+      enum:
+      - jitter
+      example: jitter
+      type: string
+      x-enum-varnames:
+      - JITTER
+    SyntheticsNetworkAssertionLatency:
+      description: Network latency assertion for a Network Path test.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionOperator'
+        property:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionProperty'
+        target:
+          description: Target value in milliseconds.
+          example: 500
+          format: double
+          type: number
+        type:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionLatencyType'
+      required:
+      - operator
+      - property
+      - target
+      - type
+      type: object
+    SyntheticsNetworkAssertionLatencyType:
+      default: latency
+      description: Type of the latency assertion.
+      enum:
+      - latency
+      example: latency
+      type: string
+      x-enum-varnames:
+      - LATENCY
+    SyntheticsNetworkAssertionMultiNetworkHop:
+      description: Multi-network hop assertion for a Network Path test.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionOperator'
+        property:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionProperty'
+        target:
+          description: Target value in number of hops.
+          example: 3
+          format: double
+          type: number
+        type:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionMultiNetworkHopType'
+      required:
+      - operator
+      - property
+      - target
+      - type
+      type: object
+    SyntheticsNetworkAssertionMultiNetworkHopType:
+      default: multiNetworkHop
+      description: Type of the multi-network hop assertion.
+      enum:
+      - multiNetworkHop
+      example: multiNetworkHop
+      type: string
+      x-enum-varnames:
+      - MULTI_NETWORK_HOP
+    SyntheticsNetworkAssertionOperator:
+      description: Assertion operator to apply.
+      enum:
+      - is
+      - isNot
+      - lessThan
+      - lessThanOrEqual
+      - moreThan
+      - moreThanOrEqual
+      example: lessThan
+      type: string
+      x-enum-varnames:
+      - IS
+      - IS_NOT
+      - LESS_THAN
+      - LESS_THAN_OR_EQUAL
+      - MORE_THAN
+      - MORE_THAN_OR_EQUAL
+    SyntheticsNetworkAssertionPacketLossPercentage:
+      description: Packet loss percentage assertion for a Network Path test.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionOperator'
+        target:
+          description: Target value as a percentage (0 to 1).
+          example: 0.05
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        type:
+          $ref: '#/components/schemas/SyntheticsNetworkAssertionPacketLossPercentageType'
+      required:
+      - operator
+      - target
+      - type
+      type: object
+    SyntheticsNetworkAssertionPacketLossPercentageType:
+      default: packetLossPercentage
+      description: Type of the packet loss percentage assertion.
+      enum:
+      - packetLossPercentage
+      example: packetLossPercentage
+      type: string
+      x-enum-varnames:
+      - PACKET_LOSS_PERCENTAGE
+    SyntheticsNetworkAssertionProperty:
+      description: The associated assertion property.
+      enum:
+      - avg
+      - max
+      - min
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - MAX
+      - MIN
+    SyntheticsNetworkTest:
+      description: Object containing details about a Network Path test.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsNetworkTestConfig'
+        locations:
+          description: 'Array of locations used to run the test. Network Path tests
+            can be run from managed locations to test public endpoints,
+
+            or from a [Datadog Agent](https://docs.datadoghq.com/synthetics/network_path_tests/#agent-configuration)
+            to test private environments.'
+          example:
+          - aws:us-east-1
+          - agent:my-agent-name
+          items:
+            description: A location to run the test from.
+            type: string
+          type: array
+        message:
+          description: Notification message associated with the test.
+          example: Network Path test notification
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          example: Example Network Path test
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsTestOptions'
+        public_id:
+          description: The public ID for the test.
+          example: abc-def-123
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsNetworkTestSubType'
+        tags:
+          description: Array of tags attached to the test.
+          example:
+          - env:production
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsNetworkTestType'
+      required:
+      - name
+      - config
+      - locations
+      - options
+      - type
+      - message
+      type: object
+    SyntheticsNetworkTestConfig:
+      description: Configuration object for a Network Path test.
+      properties:
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            property: avg
+            target: 500
+            type: latency
+          items:
+            $ref: '#/components/schemas/SyntheticsNetworkAssertion'
+          type: array
+        request:
+          $ref: '#/components/schemas/SyntheticsNetworkTestRequest'
+      type: object
+    SyntheticsNetworkTestEdit:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsNetworkTest'
+        type:
+          $ref: '#/components/schemas/SyntheticsNetworkTestType'
+      required:
+      - attributes
+      - type
+      type: object
+    SyntheticsNetworkTestEditRequest:
+      description: Network Path test request.
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsNetworkTestEdit'
+      required:
+      - data
+      type: object
+    SyntheticsNetworkTestRequest:
+      description: Object describing the request for a Network Path test.
+      properties:
+        destination_service:
+          description: Destination service name.
+          type: string
+        e2e_queries:
+          description: Number of end-to-end queries.
+          example: 50
+          format: int64
+          type: integer
+        host:
+          description: Host name to query.
+          example: ''
+          type: string
+        max_ttl:
+          description: Maximum TTL for network packets.
+          example: 30
+          format: int64
+          type: integer
+        port:
+          description: 'For TCP or UDP tests, the port to use when performing the
+            test.
+
+            If not set on a UDP test, a random port is assigned, which may affect
+            the results.'
+          example: 443
+          format: int64
+          type: integer
+        source_service:
+          description: Source service name.
+          type: string
+        tcp_method:
+          $ref: '#/components/schemas/SyntheticsNetworkTestRequestTCPMethod'
+        timeout:
+          description: Timeout in seconds.
+          format: int64
+          type: integer
+        traceroute_queries:
+          description: Number of traceroute queries.
+          example: 3
+          format: int64
+          type: integer
+      required:
+      - host
+      - max_ttl
+      - e2e_queries
+      - traceroute_queries
+      type: object
+    SyntheticsNetworkTestRequestTCPMethod:
+      description: For TCP tests, the TCP method to use.
+      enum:
+      - prefer_sack
+      - syn
+      - sack
+      example: prefer_sack
+      type: string
+      x-enum-varnames:
+      - PREFER_SACK
+      - SYN
+      - SACK
+    SyntheticsNetworkTestResponse:
+      description: Network Path test response.
+      properties:
+        data:
+          $ref: '#/components/schemas/SyntheticsNetworkTestResponseData'
+      type: object
+    SyntheticsNetworkTestResponseData:
+      description: Network Path test response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SyntheticsNetworkTest'
+        id:
+          description: The public ID of the Network Path test.
+          example: abc-def-123
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/SyntheticsNetworkTestResponseType'
+      type: object
+    SyntheticsNetworkTestResponseType:
+      default: network_test
+      description: Type of response, `network_test`.
+      enum:
+      - network_test
+      example: network_test
+      type: string
+      x-enum-varnames:
+      - NETWORK_TEST
+    SyntheticsNetworkTestSubType:
+      description: 'Subtype of the Synthetic Network Path test: `tcp`, `udp`, or `icmp`.'
+      enum:
+      - tcp
+      - udp
+      - icmp
+      example: tcp
+      type: string
+      x-enum-varnames:
+      - TCP
+      - UDP
+      - ICMP
+    SyntheticsNetworkTestType:
+      default: network
+      description: Type of the Synthetic test, `network`.
+      enum:
+      - network
+      example: network
+      type: string
+      x-enum-varnames:
+      - NETWORK
     SyntheticsRestrictedRoles:
       deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
@@ -61251,6 +61678,163 @@ components:
       type: string
       x-enum-varnames:
       - SUITES
+    SyntheticsTestOptions:
+      description: Object describing the extra options for a Synthetic test.
+      properties:
+        min_failure_duration:
+          description: Minimum amount of time in failure required to trigger an alert.
+          format: int64
+          type: integer
+        min_location_failed:
+          description: 'Minimum number of locations in failure required to trigger
+
+            an alert.'
+          format: int64
+          type: integer
+        monitor_name:
+          description: The monitor name is used for the alert title as well as for
+            all monitor dashboard widgets and SLOs.
+          type: string
+        monitor_options:
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptions'
+        monitor_priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        scheduling:
+          $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
+        tick_every:
+          description: The frequency at which to run the Synthetic test (in seconds).
+          format: int64
+          maximum: 604800
+          minimum: 30
+          type: integer
+      type: object
+    SyntheticsTestOptionsMonitorOptions:
+      description: 'Object containing the options for a Synthetic test as a monitor
+
+        (for example, renotification).'
+      properties:
+        escalation_message:
+          description: Message to include in the escalation notification.
+          type: string
+        notification_preset_name:
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptionsNotificationPresetName'
+        renotify_interval:
+          description: 'Time interval before renotifying if the test is still failing
+
+            (in minutes).'
+          format: int64
+          minimum: 0
+          type: integer
+        renotify_occurrences:
+          description: The number of times to renotify if the test is still failing.
+          format: int64
+          type: integer
+      type: object
+    SyntheticsTestOptionsMonitorOptionsNotificationPresetName:
+      description: The name of the preset for the notification for the monitor.
+      enum:
+      - show_all
+      - hide_all
+      - hide_query
+      - hide_handles
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
+    SyntheticsTestOptionsRetry:
+      description: Object describing the retry strategy to apply to a Synthetic test.
+      properties:
+        count:
+          description: 'Number of times a test needs to be retried before marking
+            a
+
+            location as failed. Defaults to 0.'
+          format: int64
+          type: integer
+        interval:
+          description: 'Time interval between retries (in milliseconds). Defaults
+            to
+
+            300ms.'
+          format: double
+          type: number
+      type: object
+    SyntheticsTestOptionsScheduling:
+      description: Object containing timeframes and timezone used for advanced scheduling.
+      properties:
+        timeframes:
+          description: Array containing objects describing the scheduling pattern
+            to apply to each day.
+          example:
+          - day: 1
+            from: 07:00
+            to: '16:00'
+          - day: 3
+            from: 07:00
+            to: '16:00'
+          items:
+            $ref: '#/components/schemas/SyntheticsTestOptionsSchedulingTimeframe'
+          type: array
+        timezone:
+          description: Timezone in which the timeframe is based.
+          example: America/New_York
+          type: string
+      required:
+      - timeframes
+      - timezone
+      type: object
+    SyntheticsTestOptionsSchedulingTimeframe:
+      description: Object describing a timeframe.
+      properties:
+        day:
+          description: Number representing the day of the week.
+          example: 1
+          format: int32
+          maximum: 7
+          minimum: 1
+          type: integer
+        from:
+          description: The hour of the day on which scheduling starts.
+          example: 07:00
+          type: string
+        to:
+          description: The hour of the day on which scheduling ends.
+          example: '16:00'
+          type: string
+      required:
+      - day
+      - from
+      - to
+      type: object
+    SyntheticsTestPauseStatus:
+      description: 'Define whether you want to start (`live`) or pause (`paused`)
+        a
+
+        Synthetic test.'
+      enum:
+      - live
+      - paused
+      example: live
+      type: string
+      x-enum-varnames:
+      - LIVE
+      - PAUSED
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
       example:
@@ -99956,6 +100540,182 @@ paths:
         operator: OR
         permissions:
         - synthetics_write
+  /api/v2/synthetics/tests/bulk-delete:
+    post:
+      operationId: DeleteSyntheticsTests
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletedTestsRequestDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedTestsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Bulk delete tests'
+      tags:
+      - Synthetics
+      x-menu-order: 65
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+  /api/v2/synthetics/tests/network:
+    post:
+      operationId: CreateSyntheticsNetworkTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsNetworkTestEditRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsNetworkTestResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Create a Network Path test'
+      tags:
+      - Synthetics
+      x-menu-order: 50
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+        - synthetics_create_edit_trigger
+  /api/v2/synthetics/tests/network/{public_id}:
+    get:
+      operationId: GetSyntheticsNetworkTest
+      parameters:
+      - description: The public ID of the Network Path test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsNetworkTestResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: 'Synthetics: Get a Network Path test'
+      tags:
+      - Synthetics
+      x-menu-order: 55
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+    put:
+      operationId: UpdateSyntheticsNetworkTest
+      parameters:
+      - description: The public ID of the Network Path test to edit.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsNetworkTestEditRequest'
+        description: New Network Path test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsNetworkTestResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: 'Synthetics: Edit a Network Path test'
+      tags:
+      - Synthetics
+      x-menu-order: 60
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+        - synthetics_create_edit_trigger
   /api/v2/synthetics/variables/{variable_id}/jsonpatch:
     patch:
       description: 'Patch a global variable using JSON Patch (RFC 6902).
@@ -104331,12 +105091,24 @@ tags:
     via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/)
     for more information.
   name: Status Pages
-- description: "Datadog Synthetics uses simulated user requests and browser rendering
-    to help you ensure uptime,\nidentify regional issues, and track your application
-    performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
-    [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can
-    use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
-    information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+- description: 'Synthetic tests use simulated requests and actions so you can monitor
+    the availability and performance of systems and applications. Datadog supports
+    the following types of synthetic tests:
+
+    - [API tests](https://docs.datadoghq.com/synthetics/api_tests/)
+
+    - [Browser tests](https://docs.datadoghq.com/synthetics/browser_tests)
+
+    - [Network Path tests](https://docs.datadoghq.com/synthetics/network_path_tests/)
+
+    - [Mobile Application tests](https://docs.datadoghq.com/synthetics/mobile_app_testing)
+
+
+    You can use the Datadog API to create, manage, and organize tests and test suites
+    programmatically.
+
+
+    For more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/).'
   name: Synthetics
 - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
     for more information.

@@ -3890,6 +3890,54 @@ menu:
           - PatchGlobalVariable
         unstable: []
         order: 20
+    - name: 'Synthetics: Edit a Network Path test'
+      url: '#synthetics-edit-a-network-path-test'
+      identifier: synthetics-synthetics-edit-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSyntheticsNetworkTest
+        unstable: []
+        order: 60
+    - name: 'Synthetics: Get a Network Path test'
+      url: '#synthetics-get-a-network-path-test'
+      identifier: synthetics-synthetics-get-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSyntheticsNetworkTest
+        unstable: []
+        order: 55
+    - name: 'Synthetics: Create a Network Path test'
+      url: '#synthetics-create-a-network-path-test'
+      identifier: synthetics-synthetics-create-a-network-path-test
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSyntheticsNetworkTest
+        unstable: []
+        order: 50
+    - name: 'Synthetics: Bulk delete tests'
+      url: '#synthetics-bulk-delete-tests'
+      identifier: synthetics-synthetics-bulk-delete-tests
+      parent: synthetics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSyntheticsTests
+        unstable: []
+        order: 65
     - name: 'Synthetics: Edit a test suite'
       url: '#synthetics-edit-a-test-suite'
       identifier: synthetics-synthetics-edit-a-test-suite
