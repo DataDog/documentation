@@ -26,8 +26,6 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-**Minimum JDK versions**: OpenJDK 8u352+, 11.0.17+, 17.0.5+, or 21+
-
 **Available profile types**:
 - CPU
 - Wallclock (latency)
@@ -35,9 +33,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Live heap (memory leak detection)
 
 {{% /tab %}}
-{{% tab "Windows / macOS" %}}
-
-**Minimum JDK versions**: OpenJDK 8u262+, 11+
+{{% tab "Windows" %}}
 
 **Available profile types**:
 - CPU
