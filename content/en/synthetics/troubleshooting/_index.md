@@ -46,7 +46,7 @@ If you see a sudden spike or overall increase in your API test [timing metrics][
 
 If your website doesn't appear in the Browser Test recorder's iframe after installing the [Datadog extension][4], you may see the message `Your website does not support being loaded through an iframe`. This indicates that your application's security settings, like Content Security Policy (CSP) or related security headers like `X-Frame-Options`, prevent iframe loading.
 
-Similarly, if login attempts fail during iframe recording, your application may be blocking certain requests due to CSP rules or other security configurations.
+Similarly, if login attempts fail during iframe recording, your application may be blocking certain requests due to CSP rules or other security configurations. In some cases, login failures can also be caused by a CSRF token issue when the login flow originates from a web application loaded within an iframe, which can result in the CSRF token being dropped.
 
 **Solution**: Click **Open in Popup** to record your user journey in a separate window instead of the iframe.  
 
