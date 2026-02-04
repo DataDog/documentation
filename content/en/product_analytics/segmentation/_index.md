@@ -27,7 +27,7 @@ To create a new segment, navigate to **[Digital Experience Monitoring > Product 
 
 To create a new segment using Product Analytics data:
 
-1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** tab on the Users & Segments page
+1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** tab on the Users & Segments page.
 
 2. Click **Create Segment**, then select **Product Analytics**.
 3. Select a condition for the users: whether they **performed an action**, share similar **attributes**, or **both**.
