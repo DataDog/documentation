@@ -29,14 +29,14 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 ## Create a custom LLM-as-a-judge evaluation
 
-You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability.
+You can create and manage custom evaluations from the [Evaluations page][1] in LLM Observability. You can start from scratch or use and build on existing [template LLM-as-a-judge evaluations][7] we provide.
 
 Learn more about the [compatibility requirements][6].
 
 ### Configure the prompt
 
 1. In Datadog, navigate to the LLM Observability [Evaluations page][1]. Select **Create Evaluation**, then select **Create your own**.
-   {{< img src="llm_observability/evaluations/custom_llm_judge_1-2.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/custom_llm_judge_1-3.png" alt="The LLM Observability Evaluations page with the Create Evaluation side panel opened. The first item, 'Create your own,' is selected. " style="width:100%;" >}}
 1. Provide a clear, descriptive **evaluation name** (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Use the **Account** drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
     - If you select an **Amazon Bedrock** account, choose a region the account is configured for.
@@ -95,13 +95,13 @@ Span Input: {{span_input}}
 
 ### Define the evaluation output
 
-For OpenAI or Azure OpenAI models, configure [Structured Output](#structured-output).
+For OpenAI, Azure OpenAI, Vertex AI, or Anthropic models, configure [Structured Output](#structured-output).
 
 For Anthropic or Amazon Bedrock models, configure [Keyword Search Output](#keyword-search-output).
 
 For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search Output](#keyword-search-output) are supported. Datadog recommends using Structured Output when your model supports it, and falling back to Keyword Search Output otherwise.
 
-{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, AI Gateway)" level="h4" expanded="true" id="structured-output" %}}
+{{% collapse-content title="Structured Output (OpenAI, Azure OpenAI, Anthropic, AI Gateway, Vertex AI)" level="h4" expanded="true" id="structured-output" %}}
 1. Select an evaluation output type:
 
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
@@ -233,6 +233,8 @@ Under **Evaluation Scope**, define where and how your evaluation runs. This help
    - **Tags**: (Optional) Limit evaluation to spans with certain tags.
    - **Sampling Rate**: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
+{{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
+
 ### Test and preview
 
 The pane on the right shows **Filtered Spans** (or traces) corresponding to the configured evaluation scope.
@@ -289,3 +291,4 @@ You can:
 [4]: /monitors/
 [5]: https://arxiv.org/abs/2504.00050
 [6]: /llm_observability/evaluations/evaluation_compatibility
+[7]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations/
