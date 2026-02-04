@@ -60,12 +60,12 @@ The Performance tab allows you to understand your workload's execution and helps
 
 {{< img src="gpu_monitoring/performance-tab.png" alt="The Performance use-case driven view" style="width:90%;" >}}
 
-It provides several OOTB recommendations: 
-- If your workloads are CPU-intensive, Datadog flags hosts with CPU saturation and provides recommended actions to alleviate that.
-- If your workloads aren't effectively using their allocated GPU devices, Datadog provides recommendations on how to tune your workloads to get more value out of your capacity.
+OOTB recommendations: 
+- If your workloads are CPU-intensive, Datadog flags hosts with CPU saturation and recommends solutions.
+- If your workloads aren't effectively using their allocated GPU devices, Datadog provides recommendations for tuning workloads to get more value out of their capacity.
 
-You'll also see a focused set of metrics relevant for your performance workflow: 
-- ECC / XID Error Count
+Metrics relevant for your performance workflow: 
+- ECC and XID Error Count
 - Graphics Activity
 - SM Activity
 - GPU Memory
