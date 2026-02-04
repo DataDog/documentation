@@ -183,21 +183,34 @@ export function initializeIntegrations() {
         // Use pre-processed lowercase values
         const name = item.nameLower || '';
         const publicTitle = item.publicTitleLower || '';
-        
+
         // Check for exact matches first
         const hasExactMatch = isSearch && (
-            name === filter || 
+            name === filter ||
             publicTitle === filter ||
             filterWords.some(word => name === word || publicTitle === word)
         );
-        
-        // Then check for partial matches
-        const hasPartialMatch = filterWords.some(word => 
-            (isSearch && (name.includes(word) || publicTitle.includes(word))) ||
-            (!isSearch && item.tags && item.tags.indexOf(word.substr(1)) !== -1)
-        );
-        
-        return { hasExactMatch, hasPartialMatch };
+
+        // Calculate match score - count how many search terms match
+        let matchScore = 0;
+        if (isSearch) {
+            for (const word of filterWords) {
+                if (name.includes(word) || publicTitle.includes(word)) {
+                    matchScore++;
+                }
+            }
+        } else {
+            // For category filters, check tags
+            for (const word of filterWords) {
+                if (item.tags && item.tags.indexOf(word.substr(1)) !== -1) {
+                    matchScore++;
+                }
+            }
+        }
+
+        const hasPartialMatch = matchScore > 0;
+
+        return { hasExactMatch, hasPartialMatch, matchScore };
     }
 
     function updateData(filter, isSearch) {
@@ -212,7 +225,7 @@ export function initializeIntegrations() {
             const item = window.integrations[i];
             const domitem = getDomElement(item.id);
             const int = domitem.querySelector('.integration');
-            
+
             if (isAllFilter) {
                 if (!isSafari) {
                     int.classList.remove('dimmer');
@@ -220,8 +233,8 @@ export function initializeIntegrations() {
                 exactMatches.push(item);
                 continue;
             }
-            
-            const { hasExactMatch, hasPartialMatch } = checkMatches(item, filter, filterWords, isSearch);
+
+            const { hasExactMatch, hasPartialMatch, matchScore } = checkMatches(item, filter, filterWords, isSearch);
 
             if (hasExactMatch) {
                 if (!isSafari) {
@@ -232,7 +245,8 @@ export function initializeIntegrations() {
                 if (!isSafari) {
                     int.classList.remove('dimmer');
                 }
-                partialMatches.push(item);
+                // Store match score with the item for sorting
+                partialMatches.push({ item, matchScore });
             } else {
                 if (!isSafari) {
                     int.classList.add('dimmer');
@@ -241,8 +255,12 @@ export function initializeIntegrations() {
             }
         }
 
-        // Combine exact matches first, then partial matches, then hidden items
-        const show = [...exactMatches, ...partialMatches];
+        // Sort partial matches by score (highest first), then extract items
+        partialMatches.sort((a, b) => b.matchScore - a.matchScore);
+        const sortedPartialMatches = partialMatches.map(m => m.item);
+
+        // Combine exact matches first, then sorted partial matches, then hidden items
+        const show = [...exactMatches, ...sortedPartialMatches];
         const mixerItems = [...show, ...hide];
         
         mixer.dataset(mixerItems).then(function () {
@@ -255,7 +273,7 @@ export function initializeIntegrations() {
                     if (isAllFilter) {
                         int.classList.remove('dimmer');
                     } else {
-                        const { hasExactMatch, hasPartialMatch } = checkMatches(item, filter, filterWords, isSearch);
+                        const { hasExactMatch, hasPartialMatch, matchScore } = checkMatches(item, filter, filterWords, isSearch);
 
                         if (hasExactMatch || hasPartialMatch) {
                             int.classList.remove('dimmer');
