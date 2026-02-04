@@ -1,5 +1,5 @@
 ---
-title: AWS Glue
+title: Iceberg Tables (AWS Glue)
 description: "Connect AWS Glue to Datadog Data Observability to monitor Iceberg table metadata, freshness, and quality."
 further_reading:
   - link: '/data_observability/'

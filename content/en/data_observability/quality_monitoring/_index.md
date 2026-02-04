@@ -32,6 +32,10 @@ With Quality Monitoring, you can:
    {{< nextlink href="data_observability/quality_monitoring/data_warehouses/bigquery" >}}BigQuery{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Connect to these data lake catalogs:" >}}
+   {{< nextlink href="data_observability/quality_monitoring/data_lakes/aws_glue" >}}Iceberg Tables (AWS Glue){{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Integrate with these transformation and orchestration tools:" >}}
    {{< nextlink href="data_observability/jobs_monitoring/databricks" >}}Databricks{{< /nextlink >}}
    {{< nextlink href="data_observability/jobs_monitoring/airflow" >}}Airflow{{< /nextlink >}}
