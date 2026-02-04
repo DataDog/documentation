@@ -31,7 +31,7 @@ Set filters to focus on errors that are relevant to you:
 * **Team** - show issues for specific teams
 * **Assignee** -  show issues assigned to specific users
 * **Status** - show issues for a specific status, or any subset of statuses (`For Review`, `Reviewed`, `Resolved`, `Ignored`, `Excluded`)
-* **Repo** - show issues linked to the repo for the current project
+* **Repository** - show issues linked to the repository for the current project
 * **Service** - show issues tagged with a selected service
 * **Environment** - show issues tagged with a selected environment
 * **Time frame** - show issues that fall within the selected time frame (first-seen or last-seen timestamp falls within the time interval)
