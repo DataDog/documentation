@@ -13,7 +13,7 @@ further_reading:
   text: "Cost Explorer"
 - link: "/cloud_cost_management/reporting/dashboards"
   tag: "Documentation"
-  text: "Cost on Dashboards"
+  text: "Dashboards"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -111,7 +111,7 @@ After you've created and customized your report, you can save and share it from 
 - **Save your report** to make it available for personal or team use.
 - **Share your report** by copying the URL or exporting it to CSV or PNG.
 - **Schedule reports** to be automatically sent to your team. [Learn more about scheduling reports][11].
-- **Export report views to Dashboards** to track costs alongside other widgets. [Learn more about cost on dashboards][14].
+- **Export report views to Dashboards** to track costs alongside other widgets. [Learn more about monitoring cost on dashboards][14].
 - **Search saved reports** to find what you need (available from main reports page only).
 
 ## Further reading

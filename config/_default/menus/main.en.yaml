@@ -3929,7 +3929,7 @@ menu:
       parent: cloud_cost_reporting
       identifier: cloud_cost_explorer
       weight: 502
-    - name: Cost on Dashboards
+    - name: Dashboard
       url: cloud_cost_management/reporting/dashboards
       parent: cloud_cost_reporting
       identifier: cloud_cost_dashboards

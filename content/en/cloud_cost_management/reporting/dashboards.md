@@ -1,5 +1,5 @@
 ---
-title: Cost on Dashboards
+title: Dashboards
 description: Visualize and monitor cloud costs on Datadog Dashboards alongside other metrics for comprehensive cost analysis and showback/chargeback reporting.
 further_reading:
 - link: "/cloud_cost_management/reporting/explorer"
@@ -8,6 +8,12 @@ further_reading:
 - link: "/cloud_cost_management/reporting/"
   tag: "Documentation"
   text: "Create and save cost reports"
+- link: "/cloud_cost_management/container_cost_allocation"
+  tag: "Documentation"
+  text: "Container cost allocation"
+- link: "/cloud_cost_management/tag_pipelines"
+  tag: "Documentation"
+  text: "Tag pipelines"
 - link: "/cloud_cost_management/allocation/custom_allocation_rules"
   tag: "Documentation"
   text: "Custom allocation rules"
@@ -21,11 +27,11 @@ further_reading:
 
 ## Overview
 
-Cost on Dashboards enables you to visualize and monitor your cloud spending alongside application performance, infrastructure metrics, and business KPIs in a single unified view. This integration provides a complete picture of how costs relate to system behavior and helps support showback and chargeback initiatives.
+Visualize and monitor your cloud spending on dashboards alongside application performance, infrastructure metrics, and business KPIs in a single unified view. This integration provides a complete picture of how costs relate to system behavior and helps support showback and chargeback initiatives.
 
-Use Cost on Dashboards to:
+Use dashboards to:
 - Track cloud costs alongside application and infrastructure metrics in real time
-- Build executive and team-level cost dashboards for showback and chargeback
+- Build cost dashboards for showback and chargeback
 - Correlate cost trends with performance changes and system events
 - Monitor costs across [AWS][1], [Azure][2], [Google Cloud][3], [Oracle][4], [SaaS providers][5], and [Datadog costs][6]
 - Share cost visibility with stakeholders through customizable dashboard views
@@ -38,77 +44,76 @@ You can add cost visualizations to your dashboards using several methods:
 
 1. Navigate to [**Cloud Cost > Analyze > Explorer**][7] in Datadog.
 2. Build your cost query using filters, groupings, and time ranges.
-3. Click **Export** and select **Export to Dashboard**.
+3. Click **More** and select **Export to Dashboard**.
 4. Choose an existing dashboard or create one.
 5. Customize the widget title and settings.
 
 The cost widget appears on your dashboard and updates automatically based on your query parameters.
 
+{{< img src="cloud_cost/reporting/dashboards/export-from-cost-explorer.png" alt="Cost Explorer interface showing the More menu with Export to Dashboard option highlighted" style="width:100%;" >}}
+
 ### Export from Cost Reports
 
 1. Go to [**Cloud Cost > Analyze > Reports**][8] in Datadog.
 2. Open an existing saved report or create one.
-3. Click **Export** and select **Export to Dashboard**.
+3. Click **More** and select **Export to Dashboard**.
 4. Choose an existing dashboard or create one.
 5. Customize the widget title and settings.
+
+{{< img src="cloud_cost/reporting/dashboards/export-from-cost-report.png" alt="Cost Reports page showing the More menu with Export to Dashboard option highlighted" style="width:100%;" >}}
 
 ### Create a cost widget directly on a dashboard
 
 1. Open any dashboard or create one.
 2. Click **Add Widgets** or **Edit Dashboard**.
-3. Search for and select the **Cloud Cost** widget from the widget tray.
+3. Search for and select a cost widget from the widget tray:
+   - **Cost Summary**: Visualize cost trends over time with customizable filters and groupings
+   - **Cost Budget**: Track spending against budget targets and forecast future costs
+   - **Cloud Cost**: Create custom cost queries with advanced filtering options
 4. Configure your cost query, filters, and visualization options.
 5. Save the widget to your dashboard.
 
+{{< img src="cloud_cost/reporting/dashboards/create-cost-widget-from-dashboard.png" alt="Dashboard widget tray displaying Cost Summary, Cost Budget, and Cloud Cost widget options" style="width:100%;" >}}
+
 ## Showback and chargeback use cases
 
-Cost on Dashboards supports showback and chargeback initiatives by providing transparent, team-specific cost visibility. Showback helps teams understand their cloud spending without enforcing accountability. Chargeback allocates costs to specific teams or business units for direct billing or budget tracking.
+Dashboards support showback and chargeback initiatives by providing transparent cost visibility. Showback helps teams understand their cloud spending without enforcing accountability. Chargeback allocates costs to specific teams or business units for direct billing or budget tracking.
 
-### Allocate costs to teams and business units
+### Allocate costs to any dimension
 
-Use [custom allocation rules][9] to split and assign shared costs to teams, projects, or environments. Allocation rules support:
+Allocate costs to any dimension using:
 
-- **Even allocation**: Split costs evenly among all teams
-- **Custom percentage**: Define specific percentages for each team based on business agreements
-- **Proportional by spend**: Allocate costs based on each team's share of total spend
-- **Dynamic by metric**: Allocate costs based on actual usage metrics (for example, query execution time, API requests)
+- **[Container cost allocation][11]**: Allocate container and Kubernetes costs to specific workloads, namespaces, or teams
+- **[Tag pipelines][12]**: Enrich your cost data with custom tags for flexible grouping and allocation
+- **[Custom allocation rules][9]**: Split and assign shared costs based on custom logic and business requirements
 
-After setting up allocation rules, create team-specific dashboards that display allocated costs alongside team metrics.
+These tools help create accurate cost allocations that reflect your organization's structure and usage patterns.
 
-### Build team-level cost dashboards
+### Build showback reports and dashboards
 
-Create dedicated dashboards for each team or business unit to support showback and chargeback:
+Create dashboards to support showback and chargeback:
 
-1. **Filter by team tags**: Use cost widgets filtered by team-specific tags (for example, `team:analytics`, `team:platform`) to show only costs associated with that team.
+1. **Filter by dimensions**: Use cost widgets filtered by specific tags (for example, `team:analytics`, `env:prod`, `service:api`) to show costs associated with different dimensions.
 
-2. **Include allocated costs**: Add widgets that display costs allocated through custom allocation rules. These costs include an `allocated_by_rule` tag showing which rule applied the allocation.
+2. **Include allocated costs**: Add widgets that display costs allocated through allocation rules to provide a complete cost picture.
 
-3. **Combine with team metrics**: Add application performance, infrastructure, and business metrics alongside cost data to help teams understand the relationship between spending and outcomes.
+3. **Combine with metrics**: Add application performance, infrastructure, and business metrics alongside cost data to understand the relationship between spending and outcomes.
 
-4. **Set up cost alerts**: Create [Cloud Cost Monitors][10] to notify teams when their costs exceed thresholds or change unexpectedly.
+4. **Set up cost alerts**: Create [Cloud Cost Monitors][10] to notify stakeholders when costs exceed thresholds or change unexpectedly.
 
-### Example showback dashboard
+## Example showback dashboard
 
-A typical team showback dashboard might include:
-- Team-specific cloud costs over time (filtered by `team` tag)
+A typical showback dashboard might include:
+- Cloud costs over time (filtered by relevant dimensions)
 - Allocated shared costs (such as support fees, shared databases)
 - Cost breakdown by service or product
-- Top cost drivers for the team
+- Top cost drivers
 - Application performance metrics (latency, error rates, throughput)
 - Infrastructure utilization metrics
 
-This comprehensive view helps teams understand their spending patterns and identify optimization opportunities.
+This comprehensive view helps stakeholders understand spending patterns, identify optimization opportunities, and correlate costs with system behavior. For example, you can track cost spikes during deployments, correlate traffic spikes with cost increases, and measure cost reductions from performance improvements.
 
-## Correlate costs with system behavior
-
-Cost dashboards help you identify relationships between spending and system activity:
-
-- **Cost spikes during deployments**: Track whether new releases increase infrastructure costs
-- **Usage-driven cost changes**: Correlate traffic spikes with cost increases
-- **Resource optimization impact**: Measure cost reductions from performance improvements
-- **Seasonal trends**: Compare costs across time periods alongside business metrics
-
-Add cost widgets to existing operational dashboards to monitor costs in the context of system health and performance.
+[View an example showback dashboard][13].
 
 ## Share and collaborate
 
@@ -141,3 +146,6 @@ For advanced cost allocation scenarios, see the [custom allocation rules documen
 [8]: https://app.datadoghq.com/cost/analyze/reports
 [9]: /cloud_cost_management/allocation/custom_allocation_rules/
 [10]: /monitors/types/cloud_cost/
+[11]: /cloud_cost_management/container_cost_allocation/
+[12]: /cloud_cost_management/tag_pipelines/
+[13]: https://demo.datadoghq.com/dashboard/tkh-nb5-x7g/team-cost-showbacks
