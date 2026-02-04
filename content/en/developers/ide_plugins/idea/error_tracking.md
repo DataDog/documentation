@@ -27,9 +27,9 @@ Additional information shown in this view includes the count, service and first 
 ### Sorting and filtering
 Set filters to focus on errors that are relevant to you:
 
-* **Issue type** - the source of issues (backend, browser, and mobile).
-* **Team** - show issues for a specific team (or subset of teams)
-* **Assignee** -  show issues for a specific user (or subset of users)
+* **Issue type** - the source of issues (backend, browser, or mobile).
+* **Team** - show issues for specific teams
+* **Assignee** -  show issues assigned to specific users
 * **Status** - show issues for a specific status, or any subset of statuses (`For Review`, `Reviewed`, `Resolved`, `Ignored`, `Excluded`)
 * **Repo** - show issues linked to the repo for the current project
 * **Service** - show issues tagged with a selected service
