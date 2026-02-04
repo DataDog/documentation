@@ -70,10 +70,10 @@ Right Icon
 
 ### Events
 
-Event<br>
+Event
 : **Value**: click
 
-Reaction<br>
+Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
 
 State Function
@@ -218,7 +218,7 @@ Event
 : **Value**: change<br>
 
 Reaction
-: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action<br>
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 
 State Functions
@@ -1054,7 +1054,7 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 {{% collapse-content title="Side panel" level="h3" %}}
-Custom chart components have the following properties.
+Side panel components have the following properties.
 
 ### General 
 
