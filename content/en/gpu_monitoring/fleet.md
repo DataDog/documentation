@@ -10,13 +10,13 @@ further_reading:
 
 ## Overview
 
-The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces any optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
+The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces Datadog's OOTB provisioning and performance optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
 
 ## Breakdown your infrastructure by cluster, host, or device
 
-First select how you want to understand your GPU fleet using the toggle that groups your fleet by Kubernetes cluster (only available for Kubernetes users), Host (node), or GPU device:
+First select how you want to understand your GPU fleet using the toggle that groups your fleet by Kubernetes cluster (only available for Kubernetes users), Host (Node), or GPU device:
 
-{{< img src="gpu_monitoring/fleet_toggle-2.png" alt="Toggle for GPU fleet page that groups table results by Kubernetes Cluster, Host or Device." style="width:90%;" >}}
+{{< img src="gpu_monitoring/fleet-toggle-2.png" alt="Toggle for GPU fleet page that groups table results by Kubernetes Cluster, Host or Device." style="width:90%;" >}}
 
 Your selection is used to populate the resulting table. If you select _Cluster_ or _Host_, you can click on the **`>`** button next to each table entry to view a cluster's hosts or a host's devices, respectively. 
 

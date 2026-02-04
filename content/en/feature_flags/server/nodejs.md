@@ -13,13 +13,16 @@ further_reading:
   text: "Learn about Application Performance Monitoring (APM)"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK.
+
+## Prerequisites
+
+Before setting up the Node.js Feature Flags SDK, ensure you have:
+
+- **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
+- **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
 

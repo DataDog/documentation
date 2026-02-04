@@ -57,7 +57,7 @@ To ensure no AI Guard evaluations are dropped, create a custom [retention filter
 ### Limit access to AI Guard spans {#limit-access}
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-Data Access Controls is in Limited Availability. To enroll, <a href="https://help.datadoghq.com/">contact Datadog support</a>.
+Data Access Controls is in Limited Availability. To enroll, <a href="/help">contact Datadog support</a>.
 {{< /callout >}}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
@@ -227,6 +227,7 @@ The messages you pass to AI Guard must follow this format, which is a subset of 
 #### System prompt format {#system-prompt-format}
 
 In the first message, you can set an optional system prompt. It has two mandatory fields:
+
 - `role`: Can be `system` or `developer`.
 - `content`: A string with the content of the system prompt.
 
@@ -239,20 +240,42 @@ Example:
 #### User prompt format {#user-prompt-format}
 
 A user prompt has two mandatory fields:
-- `role`: Must be `user`.
-- `content`: A string with the content of the user prompt.
 
-Example:
+- `role`: Must be `user`.
+- `content`: A string with the content of the user prompt, or an array of content parts.
+
+**String content example**:
 
 ```json
-{"role":"user","content":"Hello World!"}
+{"role": "user", "content": "Hello World!"}
+```
+
+**Content parts example**:
+
+For multi-modal inputs, the `content` field can be an array of content parts. Supported types are `text` and `image_url`.
+
+```json
+{
+    "role": "user",
+    "content": [
+        {
+            "type": "text",
+            "text": "What is in this image?"
+        },
+        {
+            "type": "image_url",
+            "image_url": {"url": "data:image/jpeg;base64,..."}
+        }
+    ]
+}
 ```
 
 #### Assistant response format {#assistant-response-format}
 
 An assistant response with no tool calls has two mandatory fields:
+
 - `role`: Must be `assistant`.
-- `content`: A string with the content of the user prompt.
+- `content`: A string with the content of the assistant response, or an array of content parts.
 
 Example:
 
@@ -301,12 +324,12 @@ SDK instrumentation allows you to set up and monitor AI Guard activity in real t
 
 To use the SDK, ensure the following environment variables are configured:
 
-| Variable               | Value                                                         |
-|:-----------------------|:--------------------------------------------------------------|
-| `DD_AI_GUARD_ENABLED`  | `true`                                                        |
-| `DD_API_KEY`           | `<YOUR_API_KEY>`                                              |
-| `DD_APP_KEY`           | `<YOUR_APPLICATION_KEY>`                                      |
-| `DD_TRACE_ENABLED`     | `true`                                                        |
+| Variable              | Value                    |
+| :-------------------- | :----------------------- |
+| `DD_AI_GUARD_ENABLED` | `true`                   |
+| `DD_API_KEY`          | `<YOUR_API_KEY>`         |
+| `DD_APP_KEY`          | `<YOUR_APPLICATION_KEY>` |
+| `DD_TRACE_ENABLED`    | `true`                   |
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -342,6 +365,31 @@ The `evaluate` method accepts the following parameters:
 The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
 - `reason`: natural language summary of the decision.
+
+#### Example: Evaluate a user prompt with content parts {#python-example-evaluate-user-prompt-content-parts}
+
+For multi-modal inputs, you can pass an array of content parts instead of a string. This is useful when including images or other media:
+
+```py
+from ddtrace.appsec.ai_guard import ContentPart, ImageURL
+
+# Evaluate a user prompt with both text and image content
+result = client.evaluate(
+    messages=[
+        Message(role="system", content="You are an AI Assistant"),
+        Message(
+            role="user",
+            content=[
+                ContentPart(type="text", text="What is in this image?"),
+                ContentPart(
+                    type="image_url",
+                    image_url=ImageURL(url="data:image/jpeg;base64,...")
+                )
+            ]
+        ),
+    ]
+)
+```
 
 #### Example: Evaluate a tool call {#python-example-evaluate-tool-call}
 
@@ -529,11 +577,92 @@ Follow the instructions to create a new [metric monitor][11].
 - To monitor evaluation traffic, use the metric `datadog.ai_guard.evaluations` with the tags `action:deny OR action:abort`.
 - To monitor blocked traffic, use the metric `datadog.ai_guard.evaluations` with the tag `blocking_enabled:true`.
 
+## AI Guard security signals {#security-signals}
+
+AI Guard security signals provide visibility into threats and attacks AI Guard detects in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][14] and integrate with Datadog's security monitoring workflows.
+
+### Understand AI Guard signals
+
+Datadog creates AI Guard security signals when it detects a threat based on a configured detection rule. Signals indicating threats such as prompt injection, jailbreaking, or tool misuse appear in the Datadog Security Signals explorer. These signals can provide:
+
+- **Threat detection**: Attack context based on your configured detection rules
+- **Action insights**: Blocked or allowed actions information according to your rule settings
+- **Rich investigation context**: Attack categories detected, AI Guard evaluation results, and links to related AI Guard spans for comprehensive analysis
+- **Custom runbooks**: Custom remediation guidance and response procedures for specific threat scenarios
+
+### Create detection rules
+
+You can create custom detection rules by defining thresholds for when you want to receive notifications; for example, more than 5 `DENY` actions in 10 minutes. When AI Guard evaluations exceed those thresholds, it generates security signals.
+
+To create AI Guard detection rules:
+1. In Datadog, go to the [AI Guard detection rule explorer][17], then click **New Rule**.
+   {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
+1. Under **Define Search Queries**, define the types of tags you want to create signals for. You can use the following AI Guard attributes to filter and target specific threat patterns:
+   <table>
+     <thead>
+       <tr>
+         <th>Tag</th>
+         <th>Description</th>
+         <th>Possible values</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td><code>@ai_guard.action</code></td>
+         <td>Filter by AI Guard's evaluation result</td>
+         <td><code>ALLOW</code> or <code>DENY</code></td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.attack_categories</code></td>
+         <td>Target specific attack types</td>
+         <td>
+           <ul>
+             <li><code>jailbreak</code></li>
+             <li><code>indirect-prompt-injection</code></li>
+             <li><code>destructive-tool-call</code></li>
+             <li><code>denial-of-service-tool-call</code></li>
+             <li><code>security-exploit</code></li>
+             <li><code>authority-override</code></li>
+             <li><code>role-play</code></li>
+             <li><code>instruction-override</code></li>
+             <li><code>obfuscation</code></li>
+             <li><code>system-prompt-extraction</code></li>
+             <li><code>data-exfiltration</code></li>
+           </ul>
+         </td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.blocked</code></td>
+         <td>Filter based on whether an action in the trace was blocked</td>
+         <td><code>true</code> or <code>false</code></td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.tools</code></td>
+         <td>Filter by specific tool names involved in the evaluation</td>
+         <td><code>get_user_profile</code>, <code>user_recent_transactions</code>, etc.</td>
+       </tr>
+     </tbody>
+   </table>
+1. Under **Define Rule Conditions**, define your threshold conditions, set severity levels, choose who should get notifications for new signals and how often, and choose security responses to take.
+1. Under **Describe your Playbook**, customize the notification and define tags to send with the signals.
+
+For more comprehensive detection rule capabilities, see [detection rules][15].
+
+### Investigate signals
+
+To view and investigate AI Guard security signals, and correlate them with other security events, you can view signals in two places:
+- [Application and API Protection Security Signals explorer][18]
+- [Cloud SIEM Security Signals explorer][16] 
+  
+  In the Cloud SIEM Security Signals explorer, beside the search bar, click the **Filter** icon and select the **App & API Protection** checkbox to view AI Guard signals.
+
+The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.datadoghq.com/
+[1]: /help
 [2]: /account_management/api-app-keys/
 [3]: /account_management/api-app-keys/#scopes
 [4]: /agent/?tab=Host-based
@@ -546,3 +675,8 @@ Follow the instructions to create a new [metric monitor][11].
 [11]: /monitors/types/metric/
 [12]: https://platform.openai.com/docs/api-reference/chat/object
 [13]: /security/ai_guard/
+[14]: /security/application_security/security_signals/
+[15]: /security/detection_rules/
+[16]: https://app.datadoghq.com/security/siem/signals
+[17]: https://app.datadoghq.com/security/ai-guard/settings/detection-rules
+[18]: https://app.datadoghq.com/security/appsec/signals

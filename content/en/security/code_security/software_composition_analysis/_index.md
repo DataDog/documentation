@@ -43,17 +43,16 @@ SCA supports both static and runtime dependency detection:
 The [Vulnerabilities][11] explorer provides a vulnerability-centric view of library vulnerabilities detected by SCA, alongside vulnerabilities detected by other Code Security capabilities (SAST and IAST). All vulnerabilities in the explorer are either detected on the default branch at the last commit of a scanned repository, or are affecting a running service.
 
 ### Datadog severity score
-Each vulnerability has a defined base severity score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by considering evidence of suspicious requests or attacks, the business sensitivity or internet exposure of the environment, and the risk of a successful exploit.
+Each vulnerability begins with a base CVSS score. To assist in prioritizing remediation, Datadog modifies the base CVSS score into the Datadog Severity Score by incorporating runtime context and exploitability signals. These factors help distinguish theoretical risk from vulnerabilities that are more likely to be exploited in real-world environments. The table below describes how each factor influences the final score.
 
-Four score modifiers may apply to a base score. Two are provided by runtime context:
- - Vulnerability is in production
- - Service affected by vulnerability is under attack
-
-Two are provided by CVE context:
- - Whether an exploit is available
- - The exploitation probability
-
-Datadog shows how the base CVSS score is adjusted to the Datadog Severity Score based on the factors above.
+| Risk factor                       | How it is evaluated                                                  | Impact on the score                                    |
+|-----------------------------------|----------------------------------------------------------------------|--------------------------------------------------------|
+| Base CVSS score                   | Published CVSS score for the vulnerability.                          | Starting point for the severity score.                 |
+| Reachability                      | Whether the vulnerable code path is actually executed.               | Increased when the vulnerable code is invoked.         |
+| Production runtime context        | Whether the affected service is running in a production environment. | Decreased if the service is not running in production. |
+| Under attack                      | Evidence of active attack activity targeting the service.            | Decreased if there is no observed attack activity.     |
+| Exploit availability              | Availability of public exploits for the vulnerability.               | Decreased if no exploit is available.                  |
+| Exploitation probability (EPSS)   | Likelihood of real-world exploitation based on EPSS data.            | Decreased when the probability of exploitation is low. |
 
 ### Repositories explorer
 The [Repositories][12] explorer provides a repository-centric view of all scan results across Static Code Analysis (SAST) and Software Composition Analysis (SCA). Click on a repository to analyze **Library Vulnerabilities** and **Library Catalog** results from SCA scoped to your chosen branch and commit.

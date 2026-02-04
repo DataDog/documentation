@@ -13,6 +13,9 @@ further_reading:
 - link: /database_monitoring/guide/sql_extended_events/
   tag: Documentación
   text: Configurar la finalización de consultas y la recopilación de errores de consulta
+- link: /database_monitoring/guide/parameterized_queries/
+  tag: Documentación
+  text: Captura de valores de parámetros de consulta SQL
 title: Configuración de Database Monitoring para SQL Server en Amazon RDS
 ---
 

@@ -4,8 +4,8 @@ description: "Monitor jobs from in-house tools, custom pipelines, and orchestrat
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Data Observability'
-  - link: '/data_observability/integrations/openlineage/datadog_agent_for_openlineage'
+    text: 'Data Observability Overview'
+  - link: '/data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/'
     tag: 'Documentation'
     text: 'Set up Datadog Agent for OpenLineage Proxy'
 ---
@@ -131,4 +131,4 @@ client = OpenLineageClient.from_environment()
 [1]: https://openlineage.io/
 [2]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
 [3]: /getting_started/site/#access-the-datadog-site
-[4]: /data_observability/integrations/openlineage/datadog_agent_for_openlineage
+[4]: /data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/

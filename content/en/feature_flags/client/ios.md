@@ -12,10 +12,6 @@ further_reading:
   text: "iOS and tvOS Monitoring"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your iOS or tvOS application with the Datadog Feature Flags SDK. Datadog feature flags provide a unified way to remotely control feature availability in your app, experiment safely, and deliver new experiences with confidence.
@@ -82,18 +78,19 @@ DatadogFlags.xcframework
 
 Initialize Datadog as early as possible in your app lifecycle—typically in `application(_:didFinishLaunchingWithOptions:)` (or with `@UIApplicationDelegateAdaptor` for SwiftUI apps). This ensures all feature flag evaluations and telemetry are captured correctly.
 
-{{< code-block lang="swift" >}}
+```swift
 import DatadogCore
 
 Datadog.initialize(
     with: Datadog.Configuration(
         clientToken: "<client token>",
         env: "<environment>",
+        site: .{{< region-param key="dd_datacenter_lowercase" code="true" >}},
         service: "<service name>"
     ),
     trackingConsent: .granted
 )
-{{< /code-block >}}
+```
 
 ## Enable flags
 
@@ -128,7 +125,7 @@ FlagsClient.create(name: "checkout")
 let flagsClient = FlagsClient.shared(named: "checkout")
 {{< /code-block >}}
 
-<div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>  
+<div class="alert alert-info">If a client with the given name already exists, the existing instance is reused.</div>
 
 ## Set the evaluation context
 
@@ -234,10 +231,10 @@ let config = flagsClient.getObjectValue(
 
 When you need more than just the flag value, use the `get<Type>Details` APIs. These methods return both the evaluated value and metadata explaining the evaluation:
 
-* `getBooleanDetails(key:defaultValue:) -> FlagDetails<Bool>`  
-* `getStringDetails(key:defaultValue:) -> FlagDetails<String>`  
-* `getIntegerDetails(key:defaultValue:) -> FlagDetails<Int>`  
-* `getDoubleDetails(key:defaultValue:) -> FlagDetails<Double>`  
+* `getBooleanDetails(key:defaultValue:) -> FlagDetails<Bool>`
+* `getStringDetails(key:defaultValue:) -> FlagDetails<String>`
+* `getIntegerDetails(key:defaultValue:) -> FlagDetails<Int>`
+* `getDoubleDetails(key:defaultValue:) -> FlagDetails<Double>`
 * `getObjectDetails(key:defaultValue:) -> FlagDetails<AnyValue>`
 
 For example:
@@ -276,8 +273,8 @@ Flags.enable(with: config)
 
   The exact behavior of Graceful Mode depends on your build configuration:
 
-  * **Release builds**: The SDK always enforces Graceful Mode: any misuse is only logged internally if `Datadog.verbosityLevel` is configured.  
-  * **Debug builds** with `gracefulModeEnabled = true` (default): The SDK always logs warnings to the console.  
+  * **Release builds**: The SDK always enforces Graceful Mode: any misuse is only logged internally if `Datadog.verbosityLevel` is configured.
+  * **Debug builds** with `gracefulModeEnabled = true` (default): The SDK always logs warnings to the console.
   * **Debug builds** with `gracefulModeEnabled = false`: The SDK raises `fatalError` for incorrect API usage, enforcing a fail-fast approach that helps detect configuration mistakes early.
 
   You can adjust `gracefulModeEnabled` depending on your development or QA phase.

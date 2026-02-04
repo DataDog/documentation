@@ -216,15 +216,17 @@ From a notebook, click the cog icon and click **Version history** to open the Ve
 
 ### Graph snapshots
 
-Notebooks can be set to automatically take snapshots of graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
+Notebooks automatically snapshot graphs with fixed time ranges to preserve the view before data retention limits apply. No setup is required. Use the kebab menu next to a graph to view or download a snapshot.
 
-{{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
+{{< img src="notebooks/kebab_snapshots.png" alt="Kebab menu option to view or download a snapshot" style="width:100%;">}}
 
- Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
+Snapshots are static images of graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). A snapshot updates when the graph is updated, as long as the graph continues to use a fixed time range. Switching the graph to a global time range (for example, `Past 1 hour`) removes the snapshot.
 
-You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
+You can preview snapshot status for a notebook by hovering over the graph snapshot indicator under the notebook title. The preview shows the time of the most recent snapshot and the number of snapshots created.
 
-To share a version of your notebook with snapshots, from the cog menu, click **View snapshots**. Copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
+{{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator showing how many snapshots have been generated" style="width:100%;">}}
+
+When a notebook contains a graph with data that is past its data retention limits, the notebook displays an inline snapshot of the graph. The snapshot is a static image, but it is replaced if you edit the underlying graph.
 
 ### Permissions
 
