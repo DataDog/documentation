@@ -32,11 +32,11 @@ The `EvaluatorContext` is a frozen dataclass that provides all the information n
 | Field | Type | Description |
 |-------|------|-------------|
 | `input_data` | `Any` | The input data to evaluate. |
-| `output_data` | `Any` | The output data from the span being evaluated. |
-| `expected_output` | `Any` | The expected output, if provided in the dataset record. |
-| `metadata` | `Dict[str, Any]` | Additional metadata associated with the span. |
-| `span_id` | `str` | The unique identifier of the span. |
-| `trace_id` | `str` | The unique identifier of the trace containing the span. |
+| `output_data` | `Any` | The output data to evaluate. |
+| `expected_output` | `Any` | The expected output. |
+| `metadata` | `Dict[str, Any]` | Additional metadata. |
+| `span_id` | `str` | The span's unique identifier. |
+| `trace_id` | `str` | The trace's unique identifier. |
 
 ### SummaryEvaluatorContext
 
