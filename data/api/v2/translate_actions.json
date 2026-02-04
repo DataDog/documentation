@@ -1128,6 +1128,60 @@
     "description": "Get the details of an event by `event_id`.",
     "summary": "Get an event"
   },
+  "ListForms": {
+    "description": "Get a list of all forms.",
+    "summary": "List all forms"
+  },
+  "CreateForm": {
+    "description": "Create a new form with the specified configuration.",
+    "summary": "Create a new form",
+    "request_description": "",
+    "request_schema_description": "Request for creating a form."
+  },
+  "CreateAndPublishForm": {
+    "description": "Create a new form and publish it immediately.",
+    "summary": "Create and publish a form",
+    "request_description": "",
+    "request_schema_description": "Request for creating a form."
+  },
+  "DeleteForm": {
+    "description": "Delete a form by ID.",
+    "summary": "Delete a form"
+  },
+  "GetForm": {
+    "description": "Get a form by ID.",
+    "summary": "Get a form"
+  },
+  "UpdateForm": {
+    "description": "Update a form by ID.",
+    "summary": "Update a form",
+    "request_description": "",
+    "request_schema_description": "Request for updating a form."
+  },
+  "PublishForm": {
+    "description": "Publish a specific version of a form.",
+    "summary": "Publish a form",
+    "request_description": "",
+    "request_schema_description": "Request for publishing a form."
+  },
+  "SubmitForm": {
+    "description": "Submit data to a form.",
+    "summary": "Submit a form",
+    "request_description": "",
+    "request_schema_description": "Request for submitting a form."
+  },
+  "UpsertFormVersion": {
+    "description": "Create or update a form version.",
+    "summary": "Create a form version",
+    "request_description": "",
+    "request_schema_description": "Request for creating or updating a form version."
+  },
+  "UpsertAndPublishFormVersion": {
+    "description": "Create or update a form version and publish it immediately.",
+    "summary": "Upsert and publish a form version",
+    "request_description": "",
+    "request_schema_description": "Request for creating or updating a form version."
+  },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",
     "summary": "Get HAMR organization connection"

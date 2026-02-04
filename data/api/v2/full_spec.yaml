@@ -25386,6 +25386,592 @@ components:
       required:
       - data
       type: object
+    FormCreateRequest:
+      description: Request for creating a form.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormDataRequest'
+      required:
+      - data
+      type: object
+    FormDataAttributesRequest:
+      description: Attributes for creating a form.
+      properties:
+        data_definition:
+          description: The data definition for the form.
+          example: {}
+          type: object
+        description:
+          description: The description of the form.
+          example: test description
+          type: string
+        name:
+          description: The name of the form.
+          example: test form happy path
+          type: string
+        ui_definition:
+          description: The UI definition for the form.
+          example: {}
+          type: object
+      required:
+      - name
+      - description
+      - data_definition
+      - ui_definition
+      type: object
+    FormDataAttributesResponse:
+      description: Attributes of a form.
+      properties:
+        created_at:
+          description: Creation timestamp.
+          example: '2026-01-13T17:14:57.877323Z'
+          format: date-time
+          type: string
+        datastore_config:
+          $ref: '#/components/schemas/FormDatastoreConfig'
+        description:
+          description: The description of the form.
+          example: test description
+          type: string
+        modified_at:
+          description: Last modification timestamp.
+          example: '2026-01-13T17:14:57.877323Z'
+          format: date-time
+          type: string
+        name:
+          description: The name of the form.
+          example: test form happy path
+          type: string
+        org_id:
+          description: The organization ID.
+          example: 2
+          format: int64
+          type: integer
+        publication:
+          $ref: '#/components/schemas/FormPublication'
+        user_id:
+          description: The ID of the user who created the form.
+          example: 1
+          format: int64
+          type: integer
+        user_uuid:
+          description: The UUID of the user who created the form.
+          example: 7a35d794-2294-44f7-97e4-689e593cedbe
+          format: uuid
+          type: string
+        version:
+          $ref: '#/components/schemas/FormVersion'
+      required:
+      - org_id
+      - name
+      - description
+      - datastore_config
+      - created_at
+      - modified_at
+      - user_id
+      - user_uuid
+      type: object
+    FormDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormDataAttributesRequest'
+        id:
+          description: The form identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/FormType'
+      required:
+      - type
+      - attributes
+      type: object
+    FormDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormDataAttributesResponse'
+        id:
+          description: The form identifier.
+          example: 62172096-f84c-453f-a8ee-5d768fef1b19
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/FormType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FormDatastoreConfig:
+      description: Configuration for the form's associated datastore.
+      properties:
+        datastore_id:
+          description: The unique identifier of the datastore.
+          example: 6883d0d5-edf6-49b1-8848-47427d3fb84b
+          format: uuid
+          type: string
+        primary_column_name:
+          description: The name of the primary key column.
+          example: id
+          type: string
+        primary_key_generation_strategy:
+          description: The strategy used for generating primary keys.
+          example: uuid
+          type: string
+      required:
+      - datastore_id
+      - primary_column_name
+      - primary_key_generation_strategy
+      type: object
+    FormPublication:
+      description: Publication information for the form.
+      properties:
+        created_at:
+          description: Creation timestamp.
+          example: '2026-01-13T17:14:55.62611Z'
+          format: date-time
+          type: string
+        form_id:
+          description: The form identifier.
+          example: 10084e11-8789-4363-b0c8-4e8275a7e1cf
+          format: uuid
+          type: string
+        form_version:
+          description: The version of the form that was published.
+          example: 1
+          format: int64
+          type: integer
+        id:
+          description: The unique identifier of the publication.
+          example: '2'
+          type: string
+        modified_at:
+          description: Last modification timestamp.
+          example: '2026-01-13T17:14:55.62611Z'
+          format: date-time
+          type: string
+        org_id:
+          description: The organization ID.
+          example: 2
+          format: int64
+          type: integer
+        publish_seq:
+          description: The publication sequence number.
+          example: 1
+          format: int64
+          type: integer
+        user_id:
+          description: The ID of the user who published.
+          example: 10001
+          format: int64
+          type: integer
+        user_uuid:
+          description: The UUID of the user who published.
+          example: 78533ca4-048c-4f4a-b6dd-964669a84436
+          format: uuid
+          type: string
+      required:
+      - id
+      - org_id
+      - form_id
+      - created_at
+      - modified_at
+      - user_id
+      - user_uuid
+      type: object
+    FormPublicationAttributes:
+      properties:
+        version:
+          description: The version number to publish.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - version
+      type: object
+    FormPublicationDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormPublicationAttributes'
+        type:
+          $ref: '#/components/schemas/FormPublicationType'
+      required:
+      - type
+      - attributes
+      type: object
+    FormPublicationDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormPublication'
+        id:
+          description: The publication identifier.
+          example: '21'
+          type: string
+        type:
+          $ref: '#/components/schemas/FormPublicationType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FormPublicationRequest:
+      description: Request for publishing a form.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormPublicationDataRequest'
+      required:
+      - data
+      type: object
+    FormPublicationResponse:
+      description: Response for a form publication.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormPublicationDataResponse'
+      required:
+      - data
+      type: object
+    FormPublicationType:
+      description: Type for form publications.
+      enum:
+      - form_publications
+      example: form_publications
+      type: string
+      x-enum-varnames:
+      - FORM_PUBLICATIONS
+    FormResponse:
+      description: Response containing a single form.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormDataResponse'
+      required:
+      - data
+      type: object
+    FormSubmissionAttributes:
+      properties:
+        submission_data:
+          description: The data submitted with the form.
+          example: {}
+          type: object
+      required:
+      - submission_data
+      type: object
+    FormSubmissionDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormSubmissionAttributes'
+        type:
+          $ref: '#/components/schemas/FormSubmissionType'
+      required:
+      - type
+      - attributes
+      type: object
+    FormSubmissionDataResponse:
+      properties:
+        id:
+          description: The submission identifier.
+          example: edb9a20e-34d4-48d7-9bbd-bb6beaf01729
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/FormSubmissionType'
+      required:
+      - id
+      - type
+      type: object
+    FormSubmissionRequest:
+      description: Request for submitting a form.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormSubmissionDataRequest'
+      required:
+      - data
+      type: object
+    FormSubmissionResponse:
+      description: Response for a form submission.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormSubmissionDataResponse'
+      required:
+      - data
+      type: object
+    FormSubmissionType:
+      description: Type for form submissions.
+      enum:
+      - form_submissions
+      example: form_submissions
+      type: string
+      x-enum-varnames:
+      - FORM_SUBMISSIONS
+    FormType:
+      description: Type for forms.
+      enum:
+      - forms
+      example: forms
+      type: string
+      x-enum-varnames:
+      - FORMS
+    FormUpdateAttributes:
+      description: Attributes for updating a form.
+      properties:
+        form_update:
+          $ref: '#/components/schemas/FormUpdateAttributesFormUpdate'
+      type: object
+    FormUpdateAttributesFormUpdate:
+      description: Update parameters for the form.
+      properties:
+        description:
+          description: The updated description of the form.
+          example: Updated description
+          type: string
+        name:
+          description: The updated name of the form.
+          example: New Form Name
+          type: string
+      type: object
+    FormUpdateDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormUpdateAttributes'
+        id:
+          description: The form identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          $ref: '#/components/schemas/FormType'
+      required:
+      - type
+      - attributes
+      type: object
+    FormUpdateRequest:
+      description: Request for updating a form.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormUpdateDataRequest'
+      required:
+      - data
+      type: object
+    FormVersion:
+      description: Version information for the form.
+      properties:
+        created_at:
+          description: Creation timestamp.
+          example: '2026-01-13T17:14:57.877323Z'
+          format: date-time
+          type: string
+        data_definition:
+          description: The data definition for the form.
+          example: {}
+          type: object
+        definition_signature:
+          description: Signature of the form definition.
+          example: '{"signature":"555f403cfc78022f3a8dfeee0d00bcda1aaa64a7e63bb605f01d4b39d3634214","version":1}'
+          type: string
+        etag:
+          description: The entity tag for the version.
+          example: b51f08b698d88d8027a935d9db649774949f5fb41a0c559bfee6a9a13225c72d
+          type: string
+        id:
+          description: The unique identifier of the form version.
+          example: '6'
+          type: string
+        modified_at:
+          description: Last modification timestamp.
+          example: '2026-01-13T17:14:57.877323Z'
+          format: date-time
+          type: string
+        state:
+          $ref: '#/components/schemas/FormVersionState'
+        ui_definition:
+          description: The UI definition for the form.
+          example: {}
+          type: object
+        user_id:
+          description: The ID of the user who created the version.
+          example: 1
+          format: int64
+          type: integer
+        user_uuid:
+          description: The UUID of the user who created the version.
+          example: 7a35d794-2294-44f7-97e4-689e593cedbe
+          format: uuid
+          type: string
+        version:
+          description: The version number.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - id
+      - state
+      - data_definition
+      - ui_definition
+      - created_at
+      - modified_at
+      - user_id
+      - user_uuid
+      type: object
+    FormVersionAttributes:
+      properties:
+        data_definition:
+          description: The data definition for the form.
+          example:
+            updated: 'true'
+          type: object
+        state:
+          $ref: '#/components/schemas/FormVersionState'
+        ui_definition:
+          description: The UI definition for the form.
+          example: {}
+          type: object
+        upsert_params:
+          $ref: '#/components/schemas/FormVersionUpsertParams'
+      required:
+      - data_definition
+      - ui_definition
+      - upsert_params
+      type: object
+    FormVersionDataAttributesResponse:
+      description: Attributes of a form version.
+      properties:
+        created_at:
+          description: Creation timestamp.
+          example: '2026-01-13T17:14:58.915007Z'
+          format: date-time
+          type: string
+        data_definition:
+          description: The data definition for the form.
+          example:
+            updated: 'true'
+          type: object
+        definition_signature:
+          description: Signature of the form definition.
+          example: '{"signature":"c5f07b59cd4b5e431264d68a7e2e2d804c4eb515c006ab87e9bb7a04f1e711b6","version":1}'
+          type: string
+        etag:
+          description: The entity tag for the version.
+          example: d601c99730cb76542157e9e9eb3f1b41890f6af333d7d018baf56cfbbc1e2acc
+          type: string
+        modified_at:
+          description: Last modification timestamp.
+          example: '2026-01-13T17:14:58.923633Z'
+          format: date-time
+          type: string
+        state:
+          $ref: '#/components/schemas/FormVersionState'
+        ui_definition:
+          description: The UI definition for the form.
+          example: {}
+          type: object
+        user_id:
+          description: The ID of the user who created the version.
+          example: 1
+          format: int64
+          type: integer
+        user_uuid:
+          description: The UUID of the user who created the version.
+          example: 7a35d794-2294-44f7-97e4-689e593cedbe
+          format: uuid
+          type: string
+        version:
+          description: The version number.
+          example: 2
+          format: int64
+          type: integer
+      required:
+      - created_at
+      - data_definition
+      - definition_signature
+      - etag
+      - modified_at
+      - state
+      - ui_definition
+      - user_id
+      - user_uuid
+      - version
+      type: object
+    FormVersionDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormVersionAttributes'
+        type:
+          $ref: '#/components/schemas/FormVersionType'
+      required:
+      - type
+      - attributes
+      type: object
+    FormVersionDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FormVersionDataAttributesResponse'
+        id:
+          description: The version identifier.
+          example: '46'
+          type: string
+        type:
+          $ref: '#/components/schemas/FormVersionType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    FormVersionRequest:
+      description: Request for creating or updating a form version.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormVersionDataRequest'
+      required:
+      - data
+      type: object
+    FormVersionResponse:
+      description: Response for a form version.
+      properties:
+        data:
+          $ref: '#/components/schemas/FormVersionDataResponse'
+      required:
+      - data
+      type: object
+    FormVersionState:
+      description: The state of the form version.
+      enum:
+      - draft
+      - frozen
+      example: draft
+      type: string
+      x-enum-varnames:
+      - DRAFT
+      - FROZEN
+    FormVersionType:
+      description: Type for form versions.
+      enum:
+      - form_versions
+      example: form_versions
+      type: string
+      x-enum-varnames:
+      - FORM_VERSIONS
+    FormVersionUpsertParams:
+      description: Parameters for upserting a form version.
+      properties:
+        etag:
+          description: The entity tag for conflict detection.
+          example: b51f08b698d88d8027a935d9db649774949f5fb41a0c559bfee6a9a13225c72d
+          type: string
+        match_policy:
+          description: The match policy for upserting.
+          example: none
+          type: string
+      type: object
+    FormsListResponse:
+      description: Response containing a list of forms.
+      properties:
+        data:
+          description: An array of forms.
+          items:
+            $ref: '#/components/schemas/FormDataResponse'
+          type: array
+      required:
+      - data
+      type: object
     FormulaLimit:
       description: 'Message for specifying limits to the number of values returned
         by a query.
@@ -77659,6 +78245,472 @@ paths:
         operator: OR
         permissions:
         - events_read
+  /api/v2/forms:
+    get:
+      description: Get a list of all forms.
+      operationId: ListForms
+      parameters:
+      - description: Filter forms by name.
+        in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormsListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all forms
+      tags:
+      - Forms
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new form with the specified configuration.
+      operationId: CreateForm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new form
+      tags:
+      - Forms
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/forms/create_and_publish:
+    post:
+      description: Create a new form and publish it immediately.
+      operationId: CreateAndPublishForm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create and publish a form
+      tags:
+      - Forms
+      x-menu-order: 3
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/forms/{form_id}:
+    delete:
+      description: Delete a form by ID.
+      operationId: DeleteForm
+      parameters:
+      - description: The ID of the form.
+        in: path
+        name: form_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a form
+      tags:
+      - Forms
+      x-menu-order: 6
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get a form by ID.
+      operationId: GetForm
+      parameters:
+      - description: The ID of the form.
+        in: path
+        name: form_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - description: The version number of the form.
+        in: query
+        name: version
+        required: false
+        schema:
+          type: integer
+      - description: Whether to get the published version.
+        in: query
+        name: published_version
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a form
+      tags:
+      - Forms
+      x-menu-order: 4
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a form by ID.
+      operationId: UpdateForm
+      parameters:
+      - description: The ID of the form.
+        in: path
+        name: form_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a form
+      tags:
+      - Forms
+      x-menu-order: 5
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/forms/{form_id}/publish:
+    post:
+      description: Publish a specific version of a form.
+      operationId: PublishForm
+      parameters:
+      - description: The ID of the form.
+        in: path
+        name: form_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormPublicationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormPublicationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Publish a form
+      tags:
+      - Forms
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/forms/{form_id}/submit:
+    post:
+      description: Submit data to a form.
+      operationId: SubmitForm
+      parameters:
+      - description: The ID of the form.
+        in: path
+        name: form_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormSubmissionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormSubmissionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Submit a form
+      tags:
+      - Forms
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/forms/{form_id}/versions:
+    post:
+      description: Create or update a form version.
+      operationId: UpsertFormVersion
+      parameters:
+      - description: The ID of the form.
+        in: path
+        name: form_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormVersionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormVersionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a form version
+      tags:
+      - Forms
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/forms/{form_id}/versions/upsert_and_publish:
+    post:
+      description: Create or update a form version and publish it immediately.
+      operationId: UpsertAndPublishFormVersion
+      parameters:
+      - description: The ID of the form.
+        in: path
+        name: form_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FormVersionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Unauthorized
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Upsert and publish a form version
+      tags:
+      - Forms
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/hamr:
     get:
       description: 'Retrieve the High Availability Multi-Region (HAMR) organization
@@ -103966,6 +105018,8 @@ tags:
 
     - Upgrade the Datadog Agent to specific versions'
   name: Fleet Automation
+- description: Create and manage forms for collecting data from users.
+  name: Forms
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
     through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
