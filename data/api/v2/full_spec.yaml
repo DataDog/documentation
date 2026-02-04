@@ -24024,6 +24024,22 @@ components:
           type: string
         flaky_state:
           $ref: '#/components/schemas/FlakyTestAttributesFlakyState'
+        history:
+          description: 'Chronological history of status changes for this flaky test,
+            ordered from most recent to oldest.
+
+            Includes state transitions like new -> quarantined -> fixed, along with
+            the associated commit SHA when available.'
+          example:
+          - commit_sha: abc123def456
+            status: quarantined
+            timestamp: 1704067200000
+          - commit_sha: ''
+            status: new
+            timestamp: 1703980800000
+          items:
+            $ref: '#/components/schemas/FlakyTestHistory'
+          type: array
         last_flaked_branch:
           description: The branch name where the test exhibited flakiness for the
             last time.
@@ -24108,6 +24124,29 @@ components:
       - FIXED
       - QUARANTINED
       - DISABLED
+    FlakyTestHistory:
+      description: A single history entry representing a status change for a flaky
+        test.
+      properties:
+        commit_sha:
+          description: The commit SHA associated with this status change. Will be
+            an empty string if the commit SHA is not available.
+          example: abc123def456
+          type: string
+        status:
+          description: The test status at this point in history.
+          example: quarantined
+          type: string
+        timestamp:
+          description: Unix timestamp in milliseconds when this status change occurred.
+          example: 1704067200000
+          format: int64
+          type: integer
+      required:
+      - status
+      - commit_sha
+      - timestamp
+      type: object
     FlakyTestPipelineStats:
       description: CI pipeline related statistics for the flaky test. This information
         is only available if test runs are associated with CI pipeline events from
@@ -24254,6 +24293,17 @@ components:
       properties:
         filter:
           $ref: '#/components/schemas/FlakyTestsSearchFilter'
+        include_history:
+          default: false
+          description: 'Whether to include the status change history for each flaky
+            test in the response.
+
+            When set to true, each test will include a `history` array with chronological
+            status changes.
+
+            Defaults to false.'
+          example: true
+          type: boolean
         page:
           $ref: '#/components/schemas/FlakyTestsSearchPageOptions'
         sort:
@@ -102098,8 +102148,33 @@ paths:
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
     post:
-      description: List endpoint returning flaky tests from Flaky Test Management.
+      description: 'List endpoint returning flaky tests from Flaky Test Management.
         Results are paginated.
+
+
+        The response includes comprehensive test information including:
+
+        - Test identification and metadata (module, suite, name)
+
+        - Flaky state and categorization
+
+        - First and last flake occurrences (timestamp, branch, commit SHA)
+
+        - Test execution statistics from the last 7 days (failure rate)
+
+        - Pipeline impact metrics (failed pipelines count, total lost time)
+
+        - Complete status change history (optional, ordered from most recent to oldest)
+
+
+        Set `include_history` to `true` in the request to receive the status change
+        history for each test.
+
+        History is disabled by default for better performance.
+
+
+        Results support filtering by various facets including service, environment,
+        repository, branch, and test state.'
       operationId: SearchFlakyTests
       requestBody:
         content:
