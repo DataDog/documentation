@@ -344,7 +344,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : callback<br>
@@ -390,7 +390,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : callback<br>
@@ -447,7 +447,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 For more information on events, see [Events][1].
 
@@ -530,10 +530,10 @@ Is Disabled
 ### Events
 
 Event
-: **Value**: submit, change, validate
+: **Value**: submit, change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : callback<br>
@@ -670,7 +670,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : callback<br>
@@ -709,7 +709,7 @@ Is Visible
 ### Events
 
 Event
-: **Values**: toggleOpen, close, open
+: **Values**: toggle open, close, open
 
 Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
@@ -778,7 +778,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : callback<br>
@@ -1033,7 +1033,7 @@ Event
 : **Value**: change
 
 Reaction
-: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : callback<br>
@@ -1075,7 +1075,7 @@ Hide Close Button
 ### Events
 
 Event
-: **Values**: toggleOpen, close, open
+: **Values**: toggle open, close, open
 
 Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
@@ -1325,7 +1325,7 @@ Empty State Caption
 ### Events
 
 Event
-: **Values**: pageChange, tableRowClick
+: **Values**: page change, table row click
 
 Reaction
 : **Values**: download file, open modal, close modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action, custom
@@ -1429,7 +1429,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setValue<br>
 **Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
@@ -1477,7 +1477,7 @@ Event
 : **Values**: change, submit
 
 Reaction
-: **Values**: : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
 : callback<br>
