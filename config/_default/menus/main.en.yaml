@@ -6817,6 +6817,11 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
       weight: 603
+    - name: Guides
+      url: /cloudprem/guides/
+      parent: cloudprem
+      identifier: cloudprem_guides
+      weight: 10
     - name: Security Overview
       url: security/
       pre: security-platform
