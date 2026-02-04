@@ -1,5 +1,5 @@
 ---
-title: Send OpenTelemetry Logs to CloudPrem through Observability Pipelines
+title: Send OpenTelemetry logs with Observability Pipelines
 description: A quick guide to send OpenTelemetry logs through Observability Pipelines to CloudPrem in less than 5 minutes
 further_reading:
 - link: "/cloudprem/quickstart/"
@@ -19,7 +19,9 @@ further_reading:
 
 ## Overview
 
-This guide walks you through setting up a complete logging pipeline from OpenTelemetry to CloudPrem using Observability Pipelines. You will:
+CloudPrem supports log ingestion from OTEL collectors by using Observability Pipelines as the ingestion layer. This guide provides step-by-step instructions to connect OTEL logs to CloudPrem—without disrupting your existing OTEL configuration.
+
+By the end of this guide, you will be able to:
 1. [Start CloudPrem locally](#step-1-start-cloudprem).
 2. [Create an Observability Pipeline with a custom processor to add tags](#step-2-create-an-observability-pipeline-with-the-api).
 3. [Run the Observability Pipelines Worker](#step-3-run-the-observability-pipelines-worker).
