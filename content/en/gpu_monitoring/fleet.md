@@ -42,12 +42,12 @@ The Provisioning tab shows key recommendations and metrics insights for allocati
 
 {{< img src="gpu_monitoring/provisioning-tab.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
 
-In terms of OOTB recommendations: 
-- Datadog proactively detects whether there's thermal throttling or hardware defects and instantly recommends remediation actions based on hardware errors like ECC/XID errors.
-- Datadog also detects if there are inactive devices available that should be provisioned such that you avoid having devices sit idle.
+OOTB recommendations: 
+- Datadog proactively detects thermal throttling or hardware defects and instantly recommends remediation based on hardware errors like ECC/XID errors.
+- Datadog detects whether inactive devices should be provisioned to avoid having devices sit idle.
 
-You'll also see a focused set of metrics relevant for your provisioning workflow: 
-- ECC / XID Error Count
+Metrics relevant for your provisioning workflow: 
+- ECC and XID Error Count
 - Graphics Activity
 - SM Activity
 - GPU Memory
