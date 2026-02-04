@@ -7,6 +7,16 @@ content_filters:
 - trait_id: synthetics_variables
   option_group_id: synthetics_variables_options
   label: "Variables"
+further_reading:
+- link: "/monitors/manage/"
+  tag: "Documentation"
+  text: "Learn how to manage monitors"
+- link: "/monitors/templates/"
+  tag: "Documentation"
+  text: "Learn more about monitor templates"
+- link: "/synthetics/guide/how-synthetics-monitors-trigger-alerts/"
+  tag: "Guide"
+  text: "Understanding Synthetic Monitor Alerting"
 ---
 
 ## Overview
@@ -69,7 +79,6 @@ Use these variables to include details about the test, execution location, devic
 
 `{{synthetics.attributes.test.id}}`
 : The test's public ID (for example, `abc-def-ghi`)
-
 {% /tab %}
 {% tab label="Location" %}
 `{{synthetics.attributes.location}}`
@@ -83,7 +92,6 @@ Use these variables to include details about the test, execution location, devic
 
 `{{synthetics.attributes.location.privateLocation}}`
 : `true` for Private Locations
-
 {% /tab %}
 {% tab label="Device" %}
 {% if not(or(equals($platform, "browser"), equals($platform, "mobile"))) %}
@@ -107,19 +115,14 @@ Device information is not available for this test type. Device variables are onl
 `{{synthetics.attributes.device.width}}`, `{{synthetics.attributes.device.height}}`
 : Screen resolution dimensions
 
-<!-- Result > Browser or Mobile > Browser -->
 {% if equals($platform, "browser") %}
 `{{synthetics.attributes.device.browser.type}}`
 : Browser type (for example, `chrome`)
-
 {% /if %}
-<!-- end Result > Browser or Mobile > Browser -->
-<!-- Result > Browser or Mobile > Mobile -->
 {% if equals($platform, "mobile") %}
 `{{synthetics.attributes.device.platform.name}}`, `{{synthetics.attributes.device.platform.version}}`
 : Platform information (for example, `android`, `ios`)
 {% /if %}
-<!-- end Result > Browser or Mobile > Mobile -->
 {% /if %}
 {% /tab %}
 {% tab label="Result" %}
@@ -147,12 +150,12 @@ Device information is not available for this test type. Device variables are onl
 `{{synthetics.attributes.result.failure.code}}`
 : The failure code
 
+For a complete list of API test error codes, see [API Testing Errors](/synthetics/api_tests/errors/). Review the [conditional alerting](/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code) page for an example of how to use the `synthetics.attributes.result.failure` variable in a notification.
 {% /tab %}
 
 <!-- Count -->
 {% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
 {% tab label="Count" %}
-Applies to Multistep, Browser, and Mobile tests.
 
 `{{synthetics.attributes.count}}`
 : The `count` object contains step statistics about the test
@@ -168,29 +171,33 @@ Applies to Multistep, Browser, and Mobile tests.
 
 `{{synthetics.attributes.count.hops}}`
 : The number of traceroute hops for TCP and ICMP tests
-
 {% /tab %}
 {% /if %}
 <!-- end Count -->
 <!-- Failed step -->
 {% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
 {% tab label="Failed step" %}
-Applies to Multistep, Browser, and Mobile tests.
+
 `{{synthetics.failed_step}}`
 : The `failed_step` object provides a shortcut to the step that caused the test to fail, eliminating the need to reference `{{synthetics.attributes.result.steps.<step-index>}}` directly.
 
-<!-- Result > Multistep -->
-{% if equals($platform, "multistep") %}
-`{{synthetics.failed_step.name}}`
-: Maps to `{{synthetics.attributes.result.steps.<step-index>.name}}` (Multistep API)
-{% /if %}
-<!-- end Result > Multistep -->
-<!-- Result > Browser or Mobile -->
-{% if or(equals($platform, "browser"), equals($platform, "mobile")) %}
-`{{synthetics.failed_step.description}}`
-: Maps to `{{synthetics.attributes.result.steps.<step-index>.description}}` (Browser, Mobile)
-{% /if %}
-<!-- end Result > Browser or Mobile -->
+{% table %}
+* Shortcut {% colspan=2 %}
+* Test Type
+* Maps To
+---
+* `{{synthetics.failed_step.name}}` {% colspan=2 %}
+* Multistep API
+* `{{synthetics.attributes.result.steps.<step-index>.name}}`
+---
+* `{{synthetics.failed_step.description}}` {% colspan=2 %}
+* Browser, Mobile
+* `{{synthetics.attributes.result.steps.<step-index>.description}}`
+{% /table %}
+
+{% alert level="tip" %}
+Review the [conditional alerting](/synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut) page for an example of how to use the `synthetics.failed_step.description` shortcut variable in a Browser Test notification.
+{% /alert %}
 {% /tab %}
 {% /if %}
 <!-- end Failed step -->
@@ -299,8 +306,7 @@ These are step execution metadata and results containing detailed information ab
 {% /if %}
 
 {% tabs %}
-{% if or(equals($platform, "browser"), equals($platform, "mobile"), equals($platform, "multistep")) %}
-{% tab label="General" %}
+{% tab label="General steps" %}
 `synthetics.attributes.variables.extracted.steps.allowFailure`
 : Whether the step is allowed to fail without failing the entire test
 
@@ -322,30 +328,11 @@ These are step execution metadata and results containing detailed information ab
 `synthetics.attributes.variables.extracted.steps.type`
 : Type of step being executed
 
-**Subtest information:**
-
-`synthetics.attributes.variables.extracted.steps.subTest.id`
-: Subtest identifier
-
-`synthetics.attributes.variables.extracted.steps.subStep.parentStep.id`
-: Parent step identifier
-
-`synthetics.attributes.variables.extracted.steps.subStep.parentTest.id`
-: Parent test identifier
-
-`synthetics.attributes.variables.extracted.steps.subStep.level`
-: Nesting level (1 for subtests, 2 for subtests of subtests)
-
-{% /tab %}
-{% /if %}
 {% if equals($platform, "browser") %}
-{% tab label="Browser" %}
-**General:**
+**Browser-specific:**
 
 `{{synthetics.attributes.result.startUrl}}`
 : URL from test configuration
-
-**Steps:**
 
 `synthetics.attributes.variables.extracted.apiTest.request`
 : API test request configuration (only for "Run API Test" steps where `type` is `runApiTest`)
@@ -373,11 +360,11 @@ These are step execution metadata and results containing detailed information ab
 
 `synthetics.attributes.variables.extracted.description`
 : Step description
-
-{% /tab %}
 {% /if %}
+
 {% if equals($platform, "mobile") %}
-{% tab label="Mobile" %}
+**Mobile-specific:**
+
 `synthetics.attributes.variables.extracted.application.versionId`
 : Mobile application version identifier
 
@@ -386,12 +373,10 @@ These are step execution metadata and results containing detailed information ab
 
 `synthetics.attributes.variables.extracted.description`
 : Step description
-
-{% /tab %}
 {% /if %}
+
 {% if equals($platform, "multistep") %}
-{% tab label="API" %}
-**Multistep:**
+**Multistep-specific:**
 
 `synthetics.attributes.variables.extracted.name`
 : Step name
@@ -400,23 +385,39 @@ These are step execution metadata and results containing detailed information ab
 : Step type
 
 *Note: Follow regular API fields per subType*
-
-{% /tab %}
 {% /if %}
+{% /tab %}
+
+{% tab label="Sub-tests" %}
+`synthetics.attributes.variables.extracted.steps.subTest.id`
+: Subtest identifier
+
+`synthetics.attributes.variables.extracted.steps.subStep.parentStep.id`
+: Parent step identifier
+
+`synthetics.attributes.variables.extracted.steps.subStep.parentTest.id`
+: Parent test identifier
+
+`synthetics.attributes.variables.extracted.steps.subStep.level`
+: Nesting level (1 for subtests, 2 for subtests of subtests)
+{% /tab %}
 {% /tabs %}
 
-### Step summary
+{% /if %}
+<!-- end Step -->
+
+## Step summary
 
 Path: `synthetics.attributes.result.steps`
 
-Access step data by index, name, or ID to reference specific steps in your notification messages.
+Access step data by index, name, or ID to reference specific steps in your notification messages. Use these reference methods when working with step-related variables throughout this documentation.
 
 Each step exposes the following properties: `.id`, `.status`, `.type`, `.duration`, `.description`, `.failure.message`, `.code`, and `.url`.
 
 You can reference steps in three ways:
 
-#### By index (0-based)
-
+{% tabs %}
+{% tab label="By index" %}
 Use positive numbers to count from the beginning, or negative numbers to count from the end:
 
 `synthetics.attributes.result.steps.0`
@@ -431,25 +432,36 @@ Use positive numbers to count from the beginning, or negative numbers to count f
 `synthetics.attributes.result.steps.-2`
 : Second to last step
 
-#### By step name
+**Example:** `{{synthetics.attributes.result.steps.-1.status}}` returns the status of the last step.
+{% /tab %}
 
+{% tab label="By name" %}
 Use the step name in brackets:
 
-`.steps[Click button]`
+`synthetics.attributes.result.steps[Click button]`
+: References the step named "Click button"
 
-#### By step ID
+**Example:** `{{synthetics.attributes.result.steps[Click button].status}}` returns the status of the step named "Click button".
+{% /tab %}
 
+{% tab label="By ID" %}
 Use the step's unique identifier:
 
-`.steps.abc-def-ghi`
+`synthetics.attributes.result.steps.abc-def-ghi`
+: References the step with ID "abc-def-ghi"
 
-#### Accessing step properties
+**Example:** `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` returns the status of the step with step ID "abc-def-ghi".
+{% /tab %}
+{% /tabs %}
+
+{% alert level="tip" %}
+Review the [conditional alerting](/synthetics/notifications/conditional_alerting/) page for an example of how to use the `synthetics.attributes.result.step` variable in a Slack notification based on a failed step.
+{% /alert %}
+
+### Accessing step properties
 
 Combine any reference method with a property:
 
 - `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
 - `{{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
 - `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
-
-{% /if %}
-<!-- end Step -->

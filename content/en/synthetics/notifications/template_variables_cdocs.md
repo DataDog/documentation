@@ -1,5 +1,15 @@
 ---
 title: Synthetic Monitoring Template Variables
+further_reading:
+  - link: /monitors/manage/
+    tag: Documentation
+    text: Learn how to manage monitors
+  - link: /monitors/templates/
+    tag: Documentation
+    text: Learn more about monitor templates
+  - link: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
+    tag: Guide
+    text: Understanding Synthetic Monitor Alerting
 ---
 <div id="cdoc-selector"><div id="cdoc-filters-menu"><div class="filter-selector-menu" id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
     id="cdoc-platform-pills-label" 
@@ -185,7 +195,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution"
-    data-if="7319"
+    data-if="10136"
   >
     <h3 id="test-execution-variables">Test execution variables</h3>
     <p>Path: <code>synthetics</code> (various shortcuts)</p>
@@ -226,7 +236,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Result"
-    data-if="7341"
+    data-if="10154"
   >
     <h3 id="result-attributes">Result attributes</h3>
     <p>Path: <code>synthetics.attributes</code></p>
@@ -298,7 +308,7 @@ title: Synthetic Monitoring Template Variables
           <div
             class="cdoc__toggleable cdoc__hidden"
             data-description="not (platform is browser) or (platform is mobile)"
-            data-if="7323"
+            data-if="10140"
           >
             <div class="alert alert-info">
               <p>
@@ -311,7 +321,7 @@ title: Synthetic Monitoring Template Variables
           <div
             class="cdoc__toggleable"
             data-description="(platform is browser) or (platform is mobile)"
-            data-if="7328"
+            data-if="10145"
           >
             <dl>
               <dt><code>{{synthetics.attributes.device}}</code></dt>
@@ -334,7 +344,7 @@ title: Synthetic Monitoring Template Variables
             <div
               class="cdoc__toggleable"
               data-description="platform is browser"
-              data-if="7324"
+              data-if="10141"
             >
               <dl>
                 <dt>
@@ -346,7 +356,7 @@ title: Synthetic Monitoring Template Variables
             <div
               class="cdoc__toggleable cdoc__hidden"
               data-description="platform is mobile"
-              data-if="7325"
+              data-if="10142"
             >
               <dl>
                 <dt>
@@ -400,11 +410,23 @@ title: Synthetic Monitoring Template Variables
             <dt><code>{{synthetics.attributes.result.failure.code}}</code></dt>
             <dd>The failure code</dd>
           </dl>
+          <p>
+            For a complete list of API test error codes, see
+            <a href="/synthetics/api_tests/errors/">API Testing Errors</a>.
+            Review the
+            <a
+              href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-an-error-code"
+              >conditional alerting</a
+            >
+            page for an example of how to use the
+            <code>synthetics.attributes.result.failure</code> variable in a
+            notification.
+          </p>
         </div>
         <div
           class="cdoc__toggleable"
           data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="7332"
+          data-if="10149"
         >
           <div
             data-lang="count"
@@ -412,7 +434,6 @@ title: Synthetic Monitoring Template Variables
             role="tabpanel"
             title="Count"
           >
-            <p>Applies to Multistep, Browser, and Mobile tests.</p>
             <dl>
               <dt><code>{{synthetics.attributes.count}}</code></dt>
               <dd>
@@ -439,7 +460,7 @@ title: Synthetic Monitoring Template Variables
         <div
           class="cdoc__toggleable"
           data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="7340"
+          data-if="10153"
         >
           <div
             data-lang="failed-step"
@@ -447,47 +468,62 @@ title: Synthetic Monitoring Template Variables
             role="tabpanel"
             title="Failed step"
           >
-            <p>
-              Applies to Multistep, Browser, and Mobile tests.
-              <code>{{synthetics.failed_step}}</code> : The
-              <code>failed_step</code> object provides a shortcut to the step
-              that caused the test to fail, eliminating the need to reference
-              <code
-                >{{synthetics.attributes.result.steps.&lt;step-index&gt;}}</code
-              >
-              directly.
-            </p>
-            <div
-              class="cdoc__toggleable cdoc__hidden"
-              data-description="platform is multistep"
-              data-if="7333"
-            >
-              <dl>
-                <dt><code>{{synthetics.failed_step.name}}</code></dt>
-                <dd>
-                  Maps to
-                  <code
-                    >{{synthetics.attributes.result.steps.&lt;step-index&gt;.name}}</code
-                  >
-                  (Multistep API)
-                </dd>
-              </dl>
-            </div>
-            <div
-              class="cdoc__toggleable"
-              data-description="(platform is browser) or (platform is mobile)"
-              data-if="7336"
-            >
-              <dl>
-                <dt><code>{{synthetics.failed_step.description}}</code></dt>
-                <dd>
-                  Maps to
-                  <code
-                    >{{synthetics.attributes.result.steps.&lt;step-index&gt;.description}}</code
-                  >
-                  (Browser, Mobile)
-                </dd>
-              </dl>
+            <dl>
+              <dt><code>{{synthetics.failed_step}}</code></dt>
+              <dd>
+                The <code>failed_step</code> object provides a shortcut to the
+                step that caused the test to fail, eliminating the need to
+                reference
+                <code
+                  >{{synthetics.attributes.result.steps.&lt;step-index&gt;}}</code
+                >
+                directly.
+              </dd>
+            </dl>
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="2">Shortcut</th>
+                  <th>Test Type</th>
+                  <th>Maps To</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <code>{{synthetics.failed_step.name}}</code>
+                  </td>
+                  <td>Multistep API</td>
+                  <td>
+                    <code
+                      >{{synthetics.attributes.result.steps.&lt;step-index&gt;.name}}</code
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <code>{{synthetics.failed_step.description}}</code>
+                  </td>
+                  <td>Browser, Mobile</td>
+                  <td>
+                    <code
+                      >{{synthetics.attributes.result.steps.&lt;step-index&gt;.description}}</code
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="alert alert-tip">
+              <p>
+                Review the
+                <a
+                  href="/synthetics/notifications/conditional_alerting/#send-alerts-to-a-specific-slack-channel-based-on-failed-step-using-a-variable-shortcut"
+                  >conditional alerting</a
+                >
+                page for an example of how to use the
+                <code>synthetics.failed_step.description</code> shortcut
+                variable in a Browser Test notification.
+              </p>
             </div>
           </div>
         </div>
@@ -497,7 +533,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Local"
-    data-if="7342"
+    data-if="10155"
   >
     <h3 id="local-variables">Local variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.config</code></p>
@@ -528,7 +564,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Global"
-    data-if="7343"
+    data-if="10156"
   >
     <h3 id="global-variables">Global variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.extracted</code></p>
@@ -563,7 +599,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Extracted"
-    data-if="7351"
+    data-if="10164"
   >
     <h3 id="extracted-variable-values">Extracted variable values</h3>
     <p>
@@ -575,7 +611,7 @@ title: Synthetic Monitoring Template Variables
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="not (Test Type is Browser) or (Test Type is Mobile)"
-      data-if="7347"
+      data-if="10160"
     >
       <div class="alert alert-info">
         <p>
@@ -589,7 +625,7 @@ title: Synthetic Monitoring Template Variables
     <div
       class="cdoc__toggleable"
       data-description="(Test Type is Browser) or (Test Type is Mobile)"
-      data-if="7350"
+      data-if="10163"
     >
       <p>
         These are the actual variable values that a step captured during test
@@ -626,7 +662,7 @@ title: Synthetic Monitoring Template Variables
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Step"
-    data-if="7364"
+    data-if="10173"
   >
     <h3 id="step-execution-details">Step execution details</h3>
     <p>Path: <code>synthetics.attributes.variables.extracted</code></p>
@@ -639,7 +675,7 @@ title: Synthetic Monitoring Template Variables
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="not (Test Type is Browser) or (Test Type is Mobile) or (Test Type is Multistep API)"
-      data-if="7356"
+      data-if="10169"
     >
       <div class="alert alert-info">
         <p>
@@ -653,113 +689,66 @@ title: Synthetic Monitoring Template Variables
       <ul class="nav nav-tabs d-flex"></ul>
       <div class="tab-content">
         <div
-          class="cdoc__toggleable"
-          data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="7360"
+          data-lang="general-steps"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="General steps"
         >
+          <dl>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.allowFailure</code
+              >
+            </dt>
+            <dd>
+              Whether the step is allowed to fail without failing the entire
+              test
+            </dd>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.duration</code
+              >
+            </dt>
+            <dd>Step execution duration in milliseconds</dd>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.failure</code
+              >
+            </dt>
+            <dd>
+              Failure information object containing <code>.code</code> and
+              <code>.message</code>
+            </dd>
+            <dt>
+              <code>synthetics.attributes.variables.extracted.steps.id</code>
+            </dt>
+            <dd>Unique step identifier</dd>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.isCritical</code
+              >
+            </dt>
+            <dd>Whether the step is critical to the test</dd>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.status</code
+              >
+            </dt>
+            <dd>Step execution status</dd>
+            <dt>
+              <code>synthetics.attributes.variables.extracted.steps.type</code>
+            </dt>
+            <dd>Type of step being executed</dd>
+          </dl>
           <div
-            data-lang="general"
-            class="tab-pane fade"
-            role="tabpanel"
-            title="General"
+            class="cdoc__toggleable"
+            data-description="platform is browser"
+            data-if="10170"
           >
-            <dl>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.allowFailure</code
-                >
-              </dt>
-              <dd>
-                Whether the step is allowed to fail without failing the entire
-                test
-              </dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.duration</code
-                >
-              </dt>
-              <dd>Step execution duration in milliseconds</dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.failure</code
-                >
-              </dt>
-              <dd>
-                Failure information object containing <code>.code</code> and
-                <code>.message</code>
-              </dd>
-              <dt>
-                <code>synthetics.attributes.variables.extracted.steps.id</code>
-              </dt>
-              <dd>Unique step identifier</dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.isCritical</code
-                >
-              </dt>
-              <dd>Whether the step is critical to the test</dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.status</code
-                >
-              </dt>
-              <dd>Step execution status</dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.type</code
-                >
-              </dt>
-              <dd>Type of step being executed</dd>
-            </dl>
-            <p><strong>Subtest information:</strong></p>
-            <dl>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.subTest.id</code
-                >
-              </dt>
-              <dd>Subtest identifier</dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.subStep.parentStep.id</code
-                >
-              </dt>
-              <dd>Parent step identifier</dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.subStep.parentTest.id</code
-                >
-              </dt>
-              <dd>Parent test identifier</dd>
-              <dt>
-                <code
-                  >synthetics.attributes.variables.extracted.steps.subStep.level</code
-                >
-              </dt>
-              <dd>
-                Nesting level (1 for subtests, 2 for subtests of subtests)
-              </dd>
-            </dl>
-          </div>
-        </div>
-        <div
-          class="cdoc__toggleable"
-          data-description="platform is browser"
-          data-if="7361"
-        >
-          <div
-            data-lang="browser"
-            class="tab-pane fade"
-            role="tabpanel"
-            title="Browser"
-          >
-            <p><strong>General:</strong></p>
+            <p><strong>Browser-specific:</strong></p>
             <dl>
               <dt><code>{{synthetics.attributes.result.startUrl}}</code></dt>
               <dd>URL from test configuration</dd>
-            </dl>
-            <p><strong>Steps:</strong></p>
-            <dl>
               <dt>
                 <code
                   >synthetics.attributes.variables.extracted.apiTest.request</code
@@ -823,18 +812,12 @@ title: Synthetic Monitoring Template Variables
               <dd>Step description</dd>
             </dl>
           </div>
-        </div>
-        <div
-          class="cdoc__toggleable cdoc__hidden"
-          data-description="platform is mobile"
-          data-if="7362"
-        >
           <div
-            data-lang="mobile"
-            class="tab-pane fade"
-            role="tabpanel"
-            title="Mobile"
+            class="cdoc__toggleable cdoc__hidden"
+            data-description="platform is mobile"
+            data-if="10171"
           >
+            <p><strong>Mobile-specific:</strong></p>
             <dl>
               <dt>
                 <code
@@ -854,19 +837,12 @@ title: Synthetic Monitoring Template Variables
               <dd>Step description</dd>
             </dl>
           </div>
-        </div>
-        <div
-          class="cdoc__toggleable cdoc__hidden"
-          data-description="platform is multistep"
-          data-if="7363"
-        >
           <div
-            data-lang="api"
-            class="tab-pane fade"
-            role="tabpanel"
-            title="API"
+            class="cdoc__toggleable cdoc__hidden"
+            data-description="platform is multistep"
+            data-if="10172"
           >
-            <p><strong>Multistep:</strong></p>
+            <p><strong>Multistep-specific:</strong></p>
             <dl>
               <dt>
                 <code>synthetics.attributes.variables.extracted.name</code>
@@ -880,59 +856,150 @@ title: Synthetic Monitoring Template Variables
             <p><em>Note: Follow regular API fields per subType</em></p>
           </div>
         </div>
+        <div
+          data-lang="sub-tests"
+          class="tab-pane fade"
+          role="tabpanel"
+          title="Sub-tests"
+        >
+          <dl>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.subTest.id</code
+              >
+            </dt>
+            <dd>Subtest identifier</dd>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.subStep.parentStep.id</code
+              >
+            </dt>
+            <dd>Parent step identifier</dd>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.subStep.parentTest.id</code
+              >
+            </dt>
+            <dd>Parent test identifier</dd>
+            <dt>
+              <code
+                >synthetics.attributes.variables.extracted.steps.subStep.level</code
+              >
+            </dt>
+            <dd>Nesting level (1 for subtests, 2 for subtests of subtests)</dd>
+          </dl>
+        </div>
       </div>
     </div>
-    <h3 id="step-summary">Step summary</h3>
-    <p>Path: <code>synthetics.attributes.result.steps</code></p>
-    <p>
-      Access step data by index, name, or ID to reference specific steps in your
-      notification messages.
-    </p>
-    <p>
-      Each step exposes the following properties: <code>.id</code>,
-      <code>.status</code>, <code>.type</code>, <code>.duration</code>,
-      <code>.description</code>, <code>.failure.message</code>,
-      <code>.code</code>, and <code>.url</code>.
-    </p>
-    <p>You can reference steps in three ways:</p>
-    <h4 id="by-index--0-based">By index (0-based)</h4>
-    <p>
-      Use positive numbers to count from the beginning, or negative numbers to
-      count from the end:
-    </p>
-    <dl>
-      <dt><code>synthetics.attributes.result.steps.0</code></dt>
-      <dd>First step</dd>
-      <dt><code>synthetics.attributes.result.steps.1</code></dt>
-      <dd>Second step</dd>
-      <dt><code>synthetics.attributes.result.steps.-1</code></dt>
-      <dd>Last step</dd>
-      <dt><code>synthetics.attributes.result.steps.-2</code></dt>
-      <dd>Second to last step</dd>
-    </dl>
-    <h4 id="by-step-name">By step name</h4>
-    <p>Use the step name in brackets:</p>
-    <p><code>.steps[Click button]</code></p>
-    <h4 id="by-step-id">By step ID</h4>
-    <p>Use the step's unique identifier:</p>
-    <p><code>.steps.abc-def-ghi</code></p>
-    <h4 id="accessing-step-properties">Accessing step properties</h4>
-    <p>Combine any reference method with a property:</p>
-    <ul>
-      <li>
-        <code>{{synthetics.attributes.result.steps.-1.status}}</code> - Status
-        of the last step
-      </li>
-      <li>
-        <code>{{synthetics.attributes.result.steps[Click button].status}}</code>
-        - Status of the step named &quot;Click button&quot;
-      </li>
-      <li>
-        <code>{{synthetics.attributes.result.steps.abc-def-ghi.status}}</code> -
-        Status of the step with step ID &quot;abc-def-ghi&quot;
-      </li>
-    </ul>
   </div>
-</article>
+  <h2 id="step-summary">Step summary</h2>
+  <p>Path: <code>synthetics.attributes.result.steps</code></p>
+  <p>
+    Access step data by index, name, or ID to reference specific steps in your
+    notification messages. Use these reference methods when working with
+    step-related variables throughout this documentation.
+  </p>
+  <p>
+    Each step exposes the following properties: <code>.id</code>,
+    <code>.status</code>, <code>.type</code>, <code>.duration</code>,
+    <code>.description</code>, <code>.failure.message</code>,
+    <code>.code</code>, and <code>.url</code>.
+  </p>
+  <p>You can reference steps in three ways:</p>
+  <div class="code-tabs">
+    <ul class="nav nav-tabs d-flex"></ul>
+    <div class="tab-content">
+      <div
+        data-lang="by-index"
+        class="tab-pane fade"
+        role="tabpanel"
+        title="By index"
+      >
+        <p>
+          Use positive numbers to count from the beginning, or negative numbers
+          to count from the end:
+        </p>
+        <dl>
+          <dt><code>synthetics.attributes.result.steps.0</code></dt>
+          <dd>First step</dd>
+          <dt><code>synthetics.attributes.result.steps.1</code></dt>
+          <dd>Second step</dd>
+          <dt><code>synthetics.attributes.result.steps.-1</code></dt>
+          <dd>Last step</dd>
+          <dt><code>synthetics.attributes.result.steps.-2</code></dt>
+          <dd>Second to last step</dd>
+        </dl>
+        <p>
+          <strong>Example:</strong>
+          <code>{{synthetics.attributes.result.steps.-1.status}}</code> returns
+          the status of the last step.
+        </p>
+      </div>
+      <div
+        data-lang="by-name"
+        class="tab-pane fade"
+        role="tabpanel"
+        title="By name"
+      >
+        <p>Use the step name in brackets:</p>
+        <dl>
+          <dt><code>synthetics.attributes.result.steps[Click button]</code></dt>
+          <dd>References the step named &quot;Click button&quot;</dd>
+        </dl>
+        <p>
+          <strong>Example:</strong>
+          <code
+            >{{synthetics.attributes.result.steps[Click button].status}}</code
+          >
+          returns the status of the step named &quot;Click button&quot;.
+        </p>
+      </div>
+      <div
+        data-lang="by-id"
+        class="tab-pane fade"
+        role="tabpanel"
+        title="By ID"
+      >
+        <p>Use the step's unique identifier:</p>
+        <dl>
+          <dt><code>synthetics.attributes.result.steps.abc-def-ghi</code></dt>
+          <dd>References the step with ID &quot;abc-def-ghi&quot;</dd>
+        </dl>
+        <p>
+          <strong>Example:</strong>
+          <code>{{synthetics.attributes.result.steps.abc-def-ghi.status}}</code>
+          returns the status of the step with step ID &quot;abc-def-ghi&quot;.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-tip">
+    <p>
+      Review the
+      <a href="/synthetics/notifications/conditional_alerting/"
+        >conditional alerting</a
+      >
+      page for an example of how to use the
+      <code>synthetics.attributes.result.step</code> variable in a Slack
+      notification based on a failed step.
+    </p>
+  </div>
+  <h3 id="accessing-step-properties">Accessing step properties</h3>
+  <p>Combine any reference method with a property:</p>
+  <ul>
+    <li>
+      <code>{{synthetics.attributes.result.steps.-1.status}}</code> - Status of
+      the last step
+    </li>
+    <li>
+      <code>{{synthetics.attributes.result.steps[Click button].status}}</code> -
+      Status of the step named &quot;Click button&quot;
+    </li>
+    <li>
+      <code>{{synthetics.attributes.result.steps.abc-def-ghi.status}}</code> -
+      Status of the step with step ID &quot;abc-def-ghi&quot;
+    </li>
+  </ul>
+<h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/monitors/manage/"><span class="w-100 d-flex justify-content-between "><span class="text">Learn how to manage monitors</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/monitors/templates/"><span class="w-100 d-flex justify-content-between "><span class="text">Learn more about monitor templates</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/synthetics/guide/how-synthetics-monitors-trigger-alerts/"><span class="w-100 d-flex justify-content-between "><span class="text">Understanding Synthetic Monitor Alerting</span><span class="badge badge-white pe-2 border-0">GUIDE</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"7319":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"7319"},"7323":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7320"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7321"}},"v":true,"r":"7322"}},"v":false,"r":"7323"},"7324":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7324"},"7325":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7325"},"7328":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7326"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7327"}},"v":true,"r":"7328"},"7332":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7329"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7330"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7331"}},"v":true,"r":"7332"},"7333":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7333"},"7336":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7334"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7335"}},"v":true,"r":"7336"},"7340":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7337"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7338"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7339"}},"v":true,"r":"7340"},"7341":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"7341"},"7342":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"7342"},"7343":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"7343"},"7347":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7344"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7345"}},"v":true,"r":"7346"}},"v":false,"r":"7347"},"7350":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7348"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7349"}},"v":true,"r":"7350"},"7351":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"7351"},"7356":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7352"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7353"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7354"}},"v":true,"r":"7355"}},"v":false,"r":"7356"},"7360":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7357"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7358"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7359"}},"v":true,"r":"7360"},"7361":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"7361"},"7362":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"7362"},"7363":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"7363"},"7364":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"7364"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"10136":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"10136"},"10140":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10137"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10138"}},"v":true,"r":"10139"}},"v":false,"r":"10140"},"10141":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10141"},"10142":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10142"},"10145":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10143"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10144"}},"v":true,"r":"10145"},"10149":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10146"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10147"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10148"}},"v":true,"r":"10149"},"10153":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10150"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10151"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10152"}},"v":true,"r":"10153"},"10154":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"10154"},"10155":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"10155"},"10156":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"10156"},"10160":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10157"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10158"}},"v":true,"r":"10159"}},"v":false,"r":"10160"},"10163":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10161"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10162"}},"v":true,"r":"10163"},"10164":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"10164"},"10169":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10165"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10166"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10167"}},"v":true,"r":"10168"}},"v":false,"r":"10169"},"10170":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10170"},"10171":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10171"},"10172":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10172"},"10173":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"10173"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
