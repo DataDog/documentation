@@ -167,7 +167,7 @@ When you're evaluating failed or flaky tests, or the performance of a CI test, y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-repositories
+[1]: https://app.datadoghq.com/ci/test/health
 [2]: https://app.datadoghq.com/ci/settings/test-optimization
 [3]: /continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists
