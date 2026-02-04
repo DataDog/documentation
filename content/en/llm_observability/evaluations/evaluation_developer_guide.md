@@ -17,7 +17,11 @@ further_reading:
 
 ## Overview
 
-This guide covers how to evaluate your LLM applications, either within an experiment or by evaluating production spans.
+This guide covers how to evaluate your LLM applications, either within an experiment or by evaluating production spans. It includes:
+
+- The evaluation data model
+- Using the SDK to create evaluations
+- Using the HTTP API to submit evaluations
 
 ## Evaluation data model
 
