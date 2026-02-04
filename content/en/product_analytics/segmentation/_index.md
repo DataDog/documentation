@@ -16,22 +16,28 @@ For example, you can segment users by purchase amount, by activity within a spec
 After a segment is created, it can be reused across charts and dashboards to compare how different groups of users behave.
 
 ## Build a segment
-To create a new segment, navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** and select one of the two sources of data:
+To create a segment:
+1. Navigate to **[Digital Experience Monitoring > Product Analytics > Segments][1]** and click **Create Segment**.
+   
+1. Then, select a data source:
+   - [Product Analytics data](#segment-pana): Define users based on their activity in your product.
+   - [CSV file](#segment-csv): Upload a predefined list of users.
 
-- [Product Analytics data](#segment-pana)
-- [CSV file](#segment-csv)
-
-{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segment page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
+{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
 {{% collapse-content title="Using Product Analytics data" level="h4" expanded=false id="segment-pana" %}}
 
-To create a new segment using Product Analytics data:
+To create a segment using Product Analytics data:
 
-1. Navigate to the **[Segments](https://app.datadoghq.com/product-analytics/segments)** tab on the Users & Segments page.
+1. Select **Product Analytics** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
 
-2. Click **Create Segment**, then select **Product Analytics**.
-3. Select a condition for the users: whether they **performed an action**, share similar **attributes**, or **both**.
-4. **Filter** by user characteristics to focus on specific users, like those in a particular country or who signed up in the last 30 days.
+2. Select a **condition** for the users in the segment.
+      - **performed event(s)**
+      - **have attribute(s)**
+
+<div class="alert alert-info"> You can also define a segment that includes both conditions.</div>
+
+1. Add **filters** to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
    In the following image, the segment is filtered to all users who were on the `/cart` page and then clicked the checkout button (and did so from Brazil) within the same session in the past week:
 
@@ -44,9 +50,9 @@ To create a new segment using Product Analytics data:
 
 Or, directly click the <strong>Create Segment</strong> button to select your data source:
 
-{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segment page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
+{{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
-On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new Segment</a> page, add the properties specifying the users: <br>
+On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new segment</a> page, add the properties specifying the users: <br>
 – who **viewed** the <code>/cart</code> page <br>
 – **then** <code> did not</code> ...  <br>
 – perform the **action** of <code> click on CHECKOUT</code> <br>
@@ -60,20 +66,30 @@ You can define additional attributes, such as the <code> device type</code>, to 
 
 {{% collapse-content title="Importing CSV files" level="h4" expanded=false id="segment-csv" %}}
 
-If you already have a list of users, for example, from a survey, experiment, or CRM, you can upload it as a CSV and turn it into a segment. Click **CSV File** to upload a list of users from your own file. The file needs a column with either `usr.id` or `usr.email` so it can be mapped with Product Analytics data. The following example maps the `@user.id` attribute to the column named `id` in the CSV file.
+If you already have a list of users, for example, from a survey, experiment, or CRM, you can upload it as a CSV file and turn it into a segment.
 
-{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attribute." style="width:80%">}}
+To create a segment using an uploaded list of users from your own file:
+
+1. Select **CSV File** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
+
+1. Click the **Browse files** element to upload your CSV file.
+
+The file needs a column containing either user IDs or user emails so it can be mapped with the `usr.id` or `usr.email` attributes in the Product Analytics platform.
+
+The following example maps the Product Analytics attribute `@usr.id` to the column named `id` in the CSV file.
+
+{{< img src="product_analytics/segmentation/segment_link_csv.png" alt="A view of the CSV import page showing the options for mapping your file to Product Analytics attributes." style="width:80%">}}
 
 {{% /collapse-content %}}
 
-## Use segments across Product Analytics
+## Use Segments across Product Analytics
 
-### In pathways
+### In Pathways
 Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the path taken by the "Premium Shopist Customers" segment navigating your product.
 
 {{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the Premium Shopist Customers segment.">}}
 
-### In analytics explorer
+### In Analytics Explorer
 
 Filter the Analytics Explorer visualization to see how a segment of users use your product. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
 
