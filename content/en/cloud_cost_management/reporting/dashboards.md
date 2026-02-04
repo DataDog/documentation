@@ -34,7 +34,7 @@ Use Cost on Dashboards to:
 
 You can add cost visualizations to your dashboards using several methods:
 
-### Export from cost explorer
+### Export from Cost Explorer
 
 1. Navigate to [**Cloud Cost > Analyze > Explorer**][7] in Datadog.
 2. Build your cost query using filters, groupings, and time ranges.
@@ -44,7 +44,7 @@ You can add cost visualizations to your dashboards using several methods:
 
 The cost widget appears on your dashboard and updates automatically based on your query parameters.
 
-### Export from cost reports
+### Export from Cost Reports
 
 1. Go to [**Cloud Cost > Analyze > Reports**][8] in Datadog.
 2. Open an existing saved report or create one.
