@@ -2765,6 +2765,45 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 4
+    - name: Deactivate content pack
+      url: '#deactivate-content-pack'
+      identifier: security-monitoring-deactivate-content-pack
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeactivateContentPack
+        unstable:
+          - v2
+        order: 1
+    - name: Activate content pack
+      url: '#activate-content-pack'
+      identifier: security-monitoring-activate-content-pack
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ActivateContentPack
+        unstable:
+          - v2
+        order: 2
+    - name: Get content pack states
+      url: '#get-content-pack-states'
+      identifier: security-monitoring-get-content-pack-states
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetContentPacksStates
+        unstable:
+          - v2
+        order: 3
     - name: Get a suppression's version history
       url: '#get-a-suppressions-version-history'
       identifier: security-monitoring-get-a-suppressions-version-history
