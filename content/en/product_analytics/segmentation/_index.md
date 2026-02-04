@@ -13,7 +13,7 @@ Segmenting helps you focus on specific user groups based on characteristics or b
 
 For example, you can segment users by purchase amount, by activity within a specific country, by trial status, or by users who started a trial and later converted to paying customers.
 
-After a segment is created, it can be reused across charts and dashboards to compare how different groups of users behave.
+After creating a segment, you can reuse it across charts and dashboards to compare how different groups of users behave.
 
 ## Build a segment
 To create a segment:
@@ -31,7 +31,7 @@ To create a segment using Product Analytics data:
 
 1. Select **Product Analytics** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
 
-2. Select a **condition** for the users in the segment.
+2. Select a **condition** for the users in the segment:
       - **performed event(s)**
       - **have attribute(s)**
 
@@ -45,10 +45,10 @@ To create a segment using Product Analytics data:
 
 <div class="alert" style="background: #f2ecfc">
 <h3 class="text-black">Example: See users who dropped before buying</h3>
-<p class="text-black">With the filtering and segmentation capabilities on the <strong>Users & Segments</strong> page, you can determine, for example, which users almost bought an item, but dropped before checking out. <br><br> To begin, you can first filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles </a> page, then add additional event properties using the <strong> Create Segment</strong> button...
+<p class="text-black">With the filtering and segmentation capabilities on the <strong>Users & Segments</strong> page, you can determine, for example, which users almost bought an item, but dropped before checking out. <br><br> To begin, you can first filter your users on the <a href="https://app.datadoghq.com/product-analytics/profiles">User Profiles </a> page, then add additional event properties using the <strong> Create Segment</strong> button:
 {{< img src="product_analytics/segmentation/segment_create_button_0.png" alt="Definition of a segment grouping people who almost bought an item." style="width:100%">}}
 
-Or, directly click the <strong>Create Segment</strong> button to select your data source:
+Or, directly click <strong>Create Segment</strong> to select your data source:
 
 {{< img src="product_analytics/segmentation/segments_data_source.png" alt="A view of the Users and Segments page with the option to select Product Analytics or a CSV file as a data source." style="width:55%;">}}
 
@@ -59,7 +59,7 @@ On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Cre
 
 {{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="Definition of a segment grouping people who almost bought an item." style="width:80%">}}
 
-You can define additional attributes, such as the <code> device type</code>, to further specify your users.
+You can define additional attributes, such as the Device Type, to further specify your users.
 </div>
 
 {{% /collapse-content %}}
@@ -82,7 +82,7 @@ The following example maps the Product Analytics attribute `@usr.id` to the colu
 
 {{% /collapse-content %}}
 
-## Use Segments across Product Analytics
+## Use segments across Product Analytics
 
 ### In Pathways
 Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the path taken by the "Premium Shopist Customers" segment.
