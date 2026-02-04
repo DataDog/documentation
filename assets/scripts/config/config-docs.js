@@ -30,8 +30,11 @@ module.exports = {
             apiKey: 'c00312a19630387f86998847cca3b65c'
         },
         typesense: {
-            host: 'dnm1k9zrpctsvjowp',
-            public_key: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
+            // host: 'dnm1k9zrpctsvjowp',
+            // public_key: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
+            // TODO: Remove this once Dev Cluster  migration to v30 is complete
+            host: 'dsjih73t85kpqe0cp',
+            public_key: 'SkRUMwyAJA2FCasO0801KsABcPsmFeNV',
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
             partnersIndex: 'docs_partners_alias'
