@@ -48,7 +48,7 @@ Live Debugger provides:
 
 ## Requirements and setup
 
-Live Debugger supports Python, Java, .NET, Ruby, Node.js, and PHP. It requires the [Datadog Agent][2], an
+Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires the [Datadog Agent][2], an
 [APM-instrumented application][3], and [Remote Configuration][4]. You can enable it for an individual service either in-app, or by
 setting an environment variable.
 
@@ -58,7 +58,7 @@ The enablement method depends on your tracer version, see the table below for de
 |---|---|---|
 | **How to Enable** | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | [Python][5] ≥ 3.10.0<br>[Java][6] ≥ 1.48.0<br>[.NET][7] ≥ 3.29.0 | [Python][5] ≥ 2.2.0<br>[Java][6] ≥ 1.34.0<br>[.NET][7] ≥ 2.54.0<br>[Node.js][8] ≥ 5.39.0<br>[Ruby][9] ≥ 2.9.0<br>[PHP][10] ≥ 1.5.0 |
+| **Minimum Tracer Versions** | [Python][5] ≥ 3.10.0<br>[Java][6] ≥ 1.48.0<br>[.NET][7] ≥ 3.29.0 | [Python][5] ≥ 2.2.0<br>[Java][6] ≥ 1.34.0<br>[.NET][7] ≥ 2.54.0<br>[Node.js][8] ≥ 5.39.0<br>[Ruby][9] ≥ 2.9.0<br>[PHP][10] ≥ 1.5.0<br>[Go][22] ≥ 2.2.3 (or 1.74.6) |
 
 To enable Live Debugger in-app, navigate to the Live Debugger **Settings** page, select the desired service, and toggle
 it to **Enabled**.
@@ -184,3 +184,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [19]: /dynamic_instrumentation/
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
+[22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go

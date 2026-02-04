@@ -460,6 +460,32 @@
     "description": "Get the details of a project by `project_id`.",
     "summary": "Get the details of a project"
   },
+  "UpdateProject": {
+    "description": "Update a project.",
+    "summary": "Update a project",
+    "request_description": "Project payload",
+    "request_schema_description": "Project update request"
+  },
+  "GetProjectNotificationRules": {
+    "description": "Get all notification rules for a project.",
+    "summary": "Get notification rules"
+  },
+  "CreateProjectNotificationRule": {
+    "description": "Create a notification rule for a project.",
+    "summary": "Create a notification rule",
+    "request_description": "Notification rule payload",
+    "request_schema_description": "Notification rule create request"
+  },
+  "DeleteProjectNotificationRule": {
+    "description": "Delete a notification rule using the notification rule's `id`.",
+    "summary": "Delete a notification rule"
+  },
+  "UpdateProjectNotificationRule": {
+    "description": "Update a notification rule.",
+    "summary": "Update a notification rule",
+    "request_description": "Notification rule payload",
+    "request_schema_description": "Notification rule update request"
+  },
   "GetAllCaseTypes": {
     "description": "Get all case types",
     "summary": "Get all case types"
@@ -1000,6 +1026,12 @@
     "description": "Use this API endpoint to get a deployment event.",
     "summary": "Get a deployment event"
   },
+  "PatchDORADeployment": {
+    "description": "Use this API endpoint to patch a deployment event.",
+    "summary": "Patch a deployment event",
+    "request_description": "",
+    "request_schema_description": "Request to patch a DORA deployment event."
+  },
   "CreateDORAFailure": {
     "description": "Use this API endpoint to provide failure data.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
     "summary": "Send a failure event",
@@ -1116,6 +1148,36 @@
     "request_description": "Incident payload.",
     "request_schema_description": "Create request for an incident."
   },
+  "DeleteGlobalIncidentHandle": {
+    "description": "Delete a global incident handle.",
+    "summary": "Delete global incident handle"
+  },
+  "ListGlobalIncidentHandles": {
+    "description": "Retrieve a list of global incident handles.",
+    "summary": "List global incident handles"
+  },
+  "CreateGlobalIncidentHandle": {
+    "description": "Create a new global incident handle.",
+    "summary": "Create global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "UpdateGlobalIncidentHandle": {
+    "description": "Update an existing global incident handle.",
+    "summary": "Update global incident handle",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetGlobalIncidentSettings": {
+    "description": "Retrieve global incident settings for the organization.",
+    "summary": "Get global incident settings"
+  },
+  "UpdateGlobalIncidentSettings": {
+    "description": "Update global incident settings for the organization.",
+    "summary": "Update global incident settings",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
     "summary": "List incident notification rules"
@@ -1214,10 +1276,10 @@
     "description": "Create an incident attachment.",
     "summary": "Create incident attachment",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Create request for an attachment."
   },
   "CreateIncidentPostmortemAttachment": {
-    "description": "Create a postmortem attachment for an incident.",
+    "description": "Create a postmortem attachment for an incident.\n\nThe endpoint accepts markdown for notebooks created in Confluence or Google Docs.\nPostmortems created from notebooks need to be formatted using frontend notebook cells,\nin addition to markdown format.",
     "summary": "Create postmortem attachment",
     "request_description": "",
     "request_schema_description": ""
@@ -1228,7 +1290,7 @@
   "UpdateIncidentAttachment": {
     "summary": "Update incident attachment",
     "request_description": "",
-    "request_schema_description": ""
+    "request_schema_description": "Request to update an attachment."
   },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
@@ -1470,6 +1532,34 @@
     "request_description": "Workflows Webhook handle payload.",
     "request_schema_description": "Update Workflows webhook handle request."
   },
+  "ListTenancyProducts": {
+    "description": "Lists the products for a given tenancy. Returns the enabled/disabled status of Datadog products (such as Cloud Security Posture Management) for specific OCI tenancies.",
+    "summary": "List tenancy products"
+  },
+  "GetTenancyConfigs": {
+    "description": "Get a list of all configured OCI tenancy integrations. Returns basic information about each tenancy including authentication credentials, region settings, and collection preferences for metrics, logs, and resources.",
+    "summary": "Get tenancy configs"
+  },
+  "CreateTenancyConfig": {
+    "description": "Create a new tenancy config to establish monitoring and data collection from your OCI environment. Requires OCI authentication credentials and tenancy details. Warning: Datadog recommends interacting with this endpoint only through the Datadog web UI to ensure all necessary OCI resources have been created and configured properly.",
+    "summary": "Create tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteTenancyConfig": {
+    "description": "Delete an existing tenancy config. This will stop all data collection from the specified OCI tenancy and remove the stored configuration. This operation cannot be undone.",
+    "summary": "Delete tenancy config"
+  },
+  "GetTenancyConfig": {
+    "description": "Get a single tenancy config object by its OCID. Returns detailed configuration including authentication credentials, enabled services, region settings, and collection preferences.",
+    "summary": "Get tenancy config"
+  },
+  "UpdateTenancyConfig": {
+    "description": "Update an existing tenancy config. You can modify authentication credentials, enable/disable collection types, update service filters, and change region settings. Warning: We recommend using the Datadog web UI to avoid unintended update effects.",
+    "summary": "Update tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -1493,6 +1583,46 @@
     "summary": "Update a single service object",
     "request_description": "Opsgenie service payload.",
     "request_schema_description": "Update request for an Opsgenie service."
+  },
+  "ListServiceNowAssignmentGroups": {
+    "description": "Get all assignment groups for a ServiceNow instance.",
+    "summary": "List ServiceNow assignment groups"
+  },
+  "ListServiceNowBusinessServices": {
+    "description": "Get all business services for a ServiceNow instance.",
+    "summary": "List ServiceNow business services"
+  },
+  "ListServiceNowTemplates": {
+    "description": "Get all ServiceNow templates for the organization.",
+    "summary": "List ServiceNow templates"
+  },
+  "CreateServiceNowTemplate": {
+    "description": "Create a new ServiceNow template.",
+    "summary": "Create ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to create a ServiceNow template"
+  },
+  "DeleteServiceNowTemplate": {
+    "description": "Delete a ServiceNow template by ID.",
+    "summary": "Delete ServiceNow template"
+  },
+  "GetServiceNowTemplate": {
+    "description": "Get a ServiceNow template by ID.",
+    "summary": "Get ServiceNow template"
+  },
+  "UpdateServiceNowTemplate": {
+    "description": "Update a ServiceNow template by ID.",
+    "summary": "Update ServiceNow template",
+    "request_description": "",
+    "request_schema_description": "Request to update a ServiceNow template"
+  },
+  "ListServiceNowInstances": {
+    "description": "Get all ServiceNow instances for the organization.",
+    "summary": "List ServiceNow instances"
+  },
+  "ListServiceNowUsers": {
+    "description": "Get all users for a ServiceNow instance.",
+    "summary": "List ServiceNow users"
   },
   "ListCloudflareAccounts": {
     "description": "List Cloudflare accounts.",
@@ -2446,6 +2576,26 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "ListReplayHeatmapSnapshots": {
+    "description": "List heatmap snapshots.",
+    "summary": "List replay heatmap snapshots"
+  },
+  "CreateReplayHeatmapSnapshot": {
+    "description": "Create a heatmap snapshot.",
+    "summary": "Create replay heatmap snapshot",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteReplayHeatmapSnapshot": {
+    "description": "Delete a heatmap snapshot.",
+    "summary": "Delete replay heatmap snapshot"
+  },
+  "UpdateReplayHeatmapSnapshot": {
+    "description": "Update a heatmap snapshot.",
+    "summary": "Update replay heatmap snapshot",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -2455,7 +2605,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -2619,6 +2769,70 @@
     "summary": "Search RUM events",
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
+  },
+  "ListRumReplayPlaylists": {
+    "description": "List playlists.",
+    "summary": "List rum replay playlists"
+  },
+  "CreateRumReplayPlaylist": {
+    "description": "Create a playlist.",
+    "summary": "Create rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteRumReplayPlaylist": {
+    "description": "Delete a playlist.",
+    "summary": "Delete rum replay playlist"
+  },
+  "GetRumReplayPlaylist": {
+    "description": "Get a playlist.",
+    "summary": "Get rum replay playlist"
+  },
+  "UpdateRumReplayPlaylist": {
+    "description": "Update a playlist.",
+    "summary": "Update rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "BulkRemoveRumReplayPlaylistSessions": {
+    "description": "Remove sessions from a playlist.",
+    "summary": "Bulk remove rum replay playlist sessions",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayPlaylistSessions": {
+    "description": "List sessions in a playlist.",
+    "summary": "List rum replay playlist sessions"
+  },
+  "RemoveRumReplaySessionFromPlaylist": {
+    "description": "Remove a session from a playlist.",
+    "summary": "Remove rum replay session from playlist"
+  },
+  "AddRumReplaySessionToPlaylist": {
+    "description": "Add a session to a playlist.",
+    "summary": "Add rum replay session to playlist"
+  },
+  "GetSegments": {
+    "description": "Get segments for a view.",
+    "summary": "Get segments"
+  },
+  "ListRumReplaySessionWatchers": {
+    "description": "List session watchers.",
+    "summary": "List rum replay session watchers"
+  },
+  "DeleteRumReplaySessionWatch": {
+    "description": "Delete session watch history.",
+    "summary": "Delete rum replay session watch"
+  },
+  "CreateRumReplaySessionWatch": {
+    "description": "Record a session watch.",
+    "summary": "Create rum replay session watch",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayViewershipHistorySessions": {
+    "description": "List watched sessions.",
+    "summary": "List rum replay viewership history sessions"
   },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
@@ -2958,6 +3172,18 @@
     "description": "Get a suppression's version history.",
     "summary": "Get a suppression's version history"
   },
+  "GetContentPacksStates": {
+    "description": "Get the activation and configuration states for all security monitoring content packs.\nThis endpoint returns status information about each content pack including activation state,\nintegration status, and log collection status.",
+    "summary": "Get content pack states"
+  },
+  "ActivateContentPack": {
+    "description": "Activate a security monitoring content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
+    "summary": "Activate content pack"
+  },
+  "DeactivateContentPack": {
+    "description": "Deactivate a security monitoring content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
+    "summary": "Deactivate content pack"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -3240,6 +3466,10 @@
     "description": "Get the status of the SLO report job.",
     "summary": "Get SLO report status"
   },
+  "GetSloStatus": {
+    "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
+    "summary": "Get SLO status"
+  },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
     "summary": "Get SPA Recommendations"
@@ -3273,6 +3503,54 @@
     "summary": "POST request to resolve vulnerable symbols",
     "request_description": "",
     "request_schema_description": ""
+  },
+  "DeleteCustomRuleset": {
+    "description": "Delete a custom ruleset",
+    "summary": "Delete Custom Ruleset"
+  },
+  "GetCustomRuleset": {
+    "description": "Get a custom ruleset by name",
+    "summary": "Show Custom Ruleset"
+  },
+  "UpdateCustomRuleset": {
+    "description": "Update an existing custom ruleset",
+    "summary": "Update Custom Ruleset",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateCustomRule": {
+    "description": "Create a new custom rule within a ruleset",
+    "summary": "Create Custom Rule",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteCustomRule": {
+    "description": "Delete a custom rule",
+    "summary": "Delete Custom Rule"
+  },
+  "GetCustomRule": {
+    "description": "Get a custom rule by name",
+    "summary": "Show Custom Rule"
+  },
+  "ListCustomRuleRevisions": {
+    "description": "Get all revisions for a custom rule",
+    "summary": "List Custom Rule Revisions"
+  },
+  "CreateCustomRuleRevision": {
+    "description": "Create a new revision for a custom rule",
+    "summary": "Create Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "RevertCustomRuleRevision": {
+    "description": "Revert a custom rule to a previous revision",
+    "summary": "Revert Custom Rule Revision",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "GetCustomRuleRevision": {
+    "description": "Get a specific revision of a custom rule",
+    "summary": "Show Custom Rule Revision"
   },
   "ListMultipleRulesets": {
     "description": "Get rules for multiple rulesets in batch.",

@@ -16,6 +16,8 @@ Bits AI Dev Agent is in Preview. To sign up, click <strong>Request Access</stron
 
 Bits AI Dev Agent is a generative AI coding assistant that uses observability data from Datadog to automatically diagnose and fix issues in your code. It integrates with GitHub to create production-ready pull requests, iterates on fixes using CI logs and developer feedback, and draws on multiple Datadog products to generate contextual fixes.
 
+Each time the Dev Agent investigates an issue or generates a fix, it creates a [**code session**][7], which captures the agent's analysis, actions, and any resulting code changes across supported Datadog products.
+
 ## Supported Datadog products
 
 Bits AI Dev Agent is available for the following Datadog products:
@@ -68,7 +70,9 @@ Auto-push is available for Error Tracking and Test Optimization.
 
 #### Security considerations
 
-Allowing any AI-based tool to read untrusted data can let attackers trick it into outputting malicious code or other output. In some environments, an attacker could craft errors, traces, or other telemetry containing malicious payloads that the Dev Agent reads. Datadog runs security scanning on the output of the Dev Agent, but it is not foolproof. 
+Allowing any AI-based tool to read untrusted data can let attackers influence its output. Auto-push behavior depends on the type of data the Dev Agent works with: code-only workflows operate on source code the Agent can inspect directly, while telemetry-based workflows (such as errors or traces) may include untrusted runtime inputs.
+
+To balance safety and automation, you can configure auto-push behavior in [Datadog][14] (for example, limiting auto-push to code-only workflows or requiring review when telemetry is involved). Datadog scans all Agent-generated code before pushing changes, but these safeguards are not foolproof.
 
 ### Error tracking
 
@@ -103,6 +107,8 @@ Bits AI Dev Agent remediates vulnerabilities at scale, from single issues to lar
 - Create PR batches to fix multiple vulnerabilities at once.
 - Use the Campaign tool to push PRs incrementally and manage review workload across teams.
 
+Datadog Code Security uses Bits AI to enhance static analysis and generate remediation suggestions, which can be reviewed and applied through the Bits AI Dev Agent. Learn more about [AI-Enhanced Static Code Analysis][15].
+
 ## Get started
 
 To enable Bits AI Dev Agent, see [Setup][6].
@@ -122,9 +128,11 @@ To enable Bits AI Dev Agent, see [Setup][6].
 [4]: /tests/
 [5]: https://app.datadoghq.com/integrations/github
 [6]: /bits_ai/bits_ai_dev_agent/setup/
-[7]: https://app.datadoghq.com/code?tab=my-sessions
+[7]: https://app.datadoghq.com/code
 [8]: /bits_ai/bits_ai_sre/
 [10]: /profiler/automated_analysis/
 [11]: /tracing/trace_explorer/
 [12]: /containers/
 [13]: /containers/bits_ai_kubernetes_remediation
+[14]: https://app.datadoghq.com/code/settings
+[15]: /security/code_security/static_analysis/ai_enhanced_sast/

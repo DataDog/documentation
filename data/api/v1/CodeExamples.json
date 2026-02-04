@@ -443,8 +443,23 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_416487533",
+      "description": "Create a new dashboard with timeseries widget using order_by tags"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1259346254",
+      "description": "Create a new dashboard with timeseries widget using order_by values"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_3520534424",
       "description": "Create a new dashboard with timeseries widget with custom_unit"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3631423980",
+      "description": "Create a new dashboard with timeseries widget without order_by for backward compatibility"
     },
     {
       "group": "dashboards",

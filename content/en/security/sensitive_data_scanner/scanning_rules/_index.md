@@ -4,6 +4,9 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/scanning_rules
 further_reading:
+- link: "https://www.datadoghq.com/blog/human-name-detection"
+  tag: "Blog"
+  text: "Detect human names in logs with ML in Sensitive Data Scanner"
 - link: https://www.datadoghq.com/blog/cloudcraft-security/
   tag: Blog
   text: Visually identify and prioritize security risks using Cloudcraft
@@ -11,7 +14,7 @@ further_reading:
 
 ## Telemetry Data
 
-{{< site-region region="eu,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-info">Human Name Scanner detects personal names in logs using machine learning. The feature is in Preview for the {{< region-param key="dd_site_name" >}} site. Fill out the <a href="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/">form</a> to request access.</a></div>
 {{< /site-region >}}
 

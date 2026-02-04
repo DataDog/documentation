@@ -72,6 +72,10 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Agent configuration
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">Network Path testing with the Datadog Agent is not supported for this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
+
 ### Prerequisites
 
 Requires [Agent version][7] `7.72` or higher.

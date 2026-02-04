@@ -13,10 +13,6 @@ further_reading:
   text: "Learn about Application Performance Monitoring (APM)"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK.
@@ -68,7 +64,7 @@ Define an evaluation context that identifies the user or entity for flag targeti
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
-  targetingKey: 'user-123',  # Targeting key (typically user ID)
+  targeting_key: 'user-123',  # Targeting key (typically user ID)
   email: 'user@example.com',
   country: 'US',
   tier: 'premium',
