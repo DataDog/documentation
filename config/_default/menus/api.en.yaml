@@ -10091,6 +10091,49 @@ menu:
           - ListOktaAccounts
         unstable: []
         order: 1
+    - name: On Prem Management Service
+      url: /api/latest/on-prem-management-service/
+      identifier: on-prem-management-service
+      generated: true
+    - name: Register a token
+      url: '#register-a-token'
+      identifier: on-prem-management-service-register-a-token
+      parent: on-prem-management-service
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RegisterOnPremManagementServiceToken
+        unstable:
+          - v2
+        order: 3
+    - name: Get enrollment status
+      url: '#get-enrollment-status'
+      identifier: on-prem-management-service-get-enrollment-status
+      parent: on-prem-management-service
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnPremManagementServiceEnrollment
+        unstable:
+          - v2
+        order: 2
+    - name: Create an enrollment
+      url: '#create-an-enrollment'
+      identifier: on-prem-management-service-create-an-enrollment
+      parent: on-prem-management-service
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnPremManagementServiceEnrollment
+        unstable:
+          - v2
+        order: 1
     - name: On-Call
       url: /api/latest/on-call/
       identifier: on-call

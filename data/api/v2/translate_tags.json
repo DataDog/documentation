@@ -227,6 +227,10 @@
     "name": "Okta Integration",
     "description": "Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/) directly through the Datadog API."
   },
+  "on-prem-management-service": {
+    "name": "On Prem Management Service",
+    "description": "Manage on-premises runners for workflow automation and app builder. Use these endpoints to enroll runners, check enrollment status, and register tokens for query execution."
+  },
   "on-call": {
     "name": "On-Call",
     "description": "Configure your [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\ndirectly through the Datadog API."

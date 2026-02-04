@@ -2278,6 +2278,22 @@
     "request_description": "",
     "request_schema_description": "A top-level wrapper for updating a notification rule for a user"
   },
+  "CreateOnPremManagementServiceEnrollment": {
+    "description": "Create a new enrollment for an on-prem runner. This endpoint initiates the enrollment process and returns a token that the runner will use to complete the enrollment.",
+    "summary": "Create an enrollment",
+    "request_description": "",
+    "request_schema_description": "Request to create an enrollment for an on-prem runner."
+  },
+  "GetOnPremManagementServiceEnrollment": {
+    "description": "Get the status of an enrollment for an on-prem runner using the enrollment token hash.",
+    "summary": "Get enrollment status"
+  },
+  "RegisterOnPremManagementServiceToken": {
+    "description": "Register a token for query execution. This endpoint allows an on-prem runner to register a token that will be used to execute queries on a specific connection.",
+    "summary": "Register a token",
+    "request_description": "",
+    "request_schema_description": "Request to register a token for query execution."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
