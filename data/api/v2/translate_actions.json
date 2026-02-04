@@ -928,6 +928,10 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "SearchDashboards": {
+    "description": "Search for dashboards using a query string.",
+    "summary": "Search dashboards"
+  },
   "GetAllDatasets": {
     "description": "Get all datasets that have been configured for an organization.",
     "summary": "Get all datasets"
@@ -2129,6 +2133,10 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
+  },
+  "SearchNotebooks": {
+    "description": "Search for notebooks using a query string.",
+    "summary": "Search notebooks"
   },
   "ListPipelines": {
     "description": "Retrieve a list of pipelines.",

@@ -519,6 +519,19 @@ menu:
       url: /api/latest/dashboards/
       identifier: dashboards
       generated: true
+    - name: Search dashboards
+      url: '#search-dashboards'
+      identifier: dashboards-search-dashboards
+      parent: dashboards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchDashboards
+        unstable:
+          - v2
+        order: 1
     - name: Update a dashboard
       url: '#update-a-dashboard'
       identifier: dashboards-update-a-dashboard
@@ -2182,6 +2195,19 @@ menu:
       url: /api/latest/notebooks/
       identifier: notebooks
       generated: true
+    - name: Search notebooks
+      url: '#search-notebooks'
+      identifier: notebooks-search-notebooks
+      parent: notebooks
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchNotebooks
+        unstable:
+          - v2
+        order: 1
     - name: Update a notebook
       url: '#update-a-notebook'
       identifier: notebooks-update-a-notebook

@@ -111,6 +111,10 @@
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
   },
+  "dashboards": {
+    "name": "Dashboards",
+    "description": "Interact with your dashboards through the API to search and retrieve dashboards."
+  },
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
@@ -214,6 +218,10 @@
   "network-device-monitoring": {
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
+  },
+  "notebooks": {
+    "name": "Notebooks",
+    "description": "Interact with your notebooks through the API to search and retrieve notebooks."
   },
   "oci-integration": {
     "name": "OCI Integration",

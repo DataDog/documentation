@@ -18130,6 +18130,310 @@ components:
             $ref: '#/components/schemas/DashboardListItemResponse'
           type: array
       type: object
+    DashboardSearchAggregationBucketKey:
+      description: Aggregation bucket with a single key value.
+      properties:
+        count:
+          description: Number of results in this bucket.
+          example: 18
+          format: int64
+          type: integer
+        value:
+          description: Key value for this bucket.
+          example: team:dashboards-backend
+          type: string
+      required:
+      - count
+      - value
+      type: object
+    DashboardSearchAggregationBucketMultiKey:
+      description: Aggregation bucket with multiple key values.
+      properties:
+        count:
+          description: Number of results in this bucket.
+          example: 8
+          format: int64
+          type: integer
+        value:
+          description: Key values for this bucket.
+          example:
+          - David Leonard
+          - david.leonard@datadoghq.com
+          items:
+            type: string
+          type: array
+      required:
+      - count
+      - value
+      type: object
+    DashboardSearchAggregations:
+      description: Aggregations of dashboard search results.
+      properties:
+        author:
+          description: Aggregation by author.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketMultiKey'
+          type: array
+        is_shared:
+          description: Aggregation by share status.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        share_type:
+          description: Aggregation by share type.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        shared_by.handle:
+          description: Aggregation by who shared the dashboard.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        status:
+          description: Aggregation by status.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        tags:
+          description: Aggregation by tags.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        template_variables.name:
+          description: Aggregation by template variable names.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        type:
+          description: Aggregation by dashboard type.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        widgets.metrics:
+          description: Aggregation by widget metrics.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+        widgets.type:
+          description: Aggregation by widget type.
+          items:
+            $ref: '#/components/schemas/DashboardSearchAggregationBucketKey'
+          type: array
+      type: object
+    DashboardSearchAttributes:
+      description: Dashboard search result attributes.
+      properties:
+        tags:
+          description: List of tags for the dashboard.
+          example:
+          - team:dashboards-backend
+          items:
+            type: string
+          type: array
+        title:
+          description: Title of the dashboard.
+          example: Public Dashboard Metadata caching
+          type: string
+      required:
+      - tags
+      - title
+      type: object
+    DashboardSearchMetadata:
+      description: Metadata about the dashboard.
+      properties:
+        author:
+          $ref: '#/components/schemas/DashboardSearchUser'
+        created_at:
+          description: Time at which the dashboard was created.
+          example: '2021-10-28T19:10:04.601117Z'
+          format: date-time
+          type: string
+        deleted_at:
+          description: Time at which the dashboard was deleted, or null if not deleted.
+          example: null
+          format: date-time
+          nullable: true
+          type: string
+        embeddable_domains:
+          description: List of domains the dashboard is allowed to be embedded in.
+          example: null
+          items:
+            type: string
+          nullable: true
+          type: array
+        experience_type:
+          description: Dashboard experience type.
+          example: default
+          type: string
+        expiration:
+          description: When the public dashboard link will expire.
+          example: null
+          format: date-time
+          nullable: true
+          type: string
+        has_monitors:
+          description: Whether the dashboard has monitors.
+          example: null
+          nullable: true
+          type: boolean
+        is_favorited:
+          description: Whether the dashboard is favorited by the user.
+          example: false
+          type: boolean
+        is_public_dashboard_ownerless:
+          description: Whether the public dashboard owner is deactivated.
+          example: false
+          type: boolean
+        is_shared:
+          description: Whether the dashboard is shared publicly.
+          example: true
+          type: boolean
+        last_accessed:
+          description: Last time the dashboard was accessed.
+          example: null
+          format: date-time
+          nullable: true
+          type: string
+        modified_at:
+          description: Time at which the dashboard was last updated.
+          example: '2024-02-16T12:43:31.942554Z'
+          format: date-time
+          type: string
+        popularity:
+          description: Relative measure of dashboard popularity.
+          example: 0
+          format: double
+          type: number
+        public_title:
+          description: Published title of the public dashboard.
+          example: Public Dashboard Metadata caching
+          type: string
+        quality_score:
+          description: Quality score of the dashboard.
+          example: null
+          format: double
+          nullable: true
+          type: number
+        share_list:
+          description: List of email addresses for invite-only public dashboards.
+          example: []
+          items:
+            type: string
+          nullable: true
+          type: array
+        share_type:
+          description: Share type of the public dashboard.
+          example: invite
+          type: string
+        shared_by:
+          $ref: '#/components/schemas/DashboardSearchUser'
+        status:
+          description: Status of the public dashboard.
+          example: active
+          type: string
+        token:
+          description: Unique public dashboard token.
+          example: yB5yjZ-f0d1a5802e21f5576f5e34feb9cddc4c
+          type: string
+        type:
+          description: Dashboard type.
+          example: custom_timeboard
+          type: string
+        url:
+          description: URL path to the dashboard.
+          example: /dashboard/e8y-qtx-r3w/public-dashboard-metadata-caching
+          type: string
+        widget_count:
+          description: Number of widgets in the dashboard.
+          example: 1
+          format: int64
+          type: integer
+      required:
+      - author
+      - created_at
+      - deleted_at
+      - is_favorited
+      - is_shared
+      - modified_at
+      - popularity
+      - quality_score
+      - has_monitors
+      - type
+      - url
+      - experience_type
+      - widget_count
+      - public_title
+      - shared_by
+      - is_public_dashboard_ownerless
+      - share_type
+      - share_list
+      - embeddable_domains
+      - last_accessed
+      - expiration
+      - status
+      - token
+      type: object
+    DashboardSearchResponse:
+      description: Response containing dashboard search results.
+      properties:
+        data:
+          description: List of dashboard search results.
+          items:
+            $ref: '#/components/schemas/DashboardSearchResultData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DashboardSearchResponseMeta'
+      required:
+      - data
+      - meta
+      type: object
+    DashboardSearchResponseMeta:
+      description: Metadata about the dashboard search results.
+      properties:
+        aggregations:
+          $ref: '#/components/schemas/DashboardSearchAggregations'
+        total:
+          description: Total number of dashboards found.
+          example: 18
+          format: int64
+          type: integer
+      required:
+      - total
+      type: object
+    DashboardSearchResultData:
+      description: A dashboard search result.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DashboardSearchAttributes'
+        id:
+          description: Dashboard identifier.
+          example: e8y-qtx-r3w
+          type: string
+        meta:
+          $ref: '#/components/schemas/DashboardSearchMetadata'
+        type:
+          $ref: '#/components/schemas/MetricDashboardType'
+      required:
+      - id
+      - type
+      - attributes
+      - meta
+      type: object
+    DashboardSearchUser:
+      description: User information.
+      properties:
+        handle:
+          description: User handle or email.
+          example: david.leonard@datadoghq.com
+          type: string
+        name:
+          description: User display name.
+          example: David Leonard
+          type: string
+      required:
+      - handle
+      - name
+      type: object
     DashboardTriggerWrapper:
       description: Schema for a Dashboard-based trigger.
       properties:
@@ -37997,6 +38301,235 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
+      type: object
+    NotebookSearchAggregationBucketKey:
+      description: Aggregation bucket with a single key value.
+      properties:
+        count:
+          description: Number of results in this bucket.
+          example: 10
+          format: int64
+          type: integer
+        value:
+          description: Key value for this bucket.
+          example: team:notebooks-backend
+          type: string
+      required:
+      - count
+      - value
+      type: object
+    NotebookSearchAggregationBucketMultiKey:
+      description: Aggregation bucket with multiple key values.
+      properties:
+        count:
+          description: Number of results in this bucket.
+          example: 5
+          format: int64
+          type: integer
+        value:
+          description: Key values for this bucket.
+          example:
+          - User Name
+          - user@datadoghq.com
+          items:
+            type: string
+          type: array
+      required:
+      - count
+      - value
+      type: object
+    NotebookSearchAggregations:
+      description: Aggregations of notebook search results.
+      properties:
+        author:
+          description: Aggregation by author.
+          items:
+            $ref: '#/components/schemas/NotebookSearchAggregationBucketMultiKey'
+          type: array
+        tags:
+          description: Aggregation by tags.
+          items:
+            $ref: '#/components/schemas/NotebookSearchAggregationBucketKey'
+          type: array
+        template_variables.name:
+          description: Aggregation by template variable names.
+          items:
+            $ref: '#/components/schemas/NotebookSearchAggregationBucketKey'
+          type: array
+        type:
+          description: Aggregation by notebook type.
+          items:
+            $ref: '#/components/schemas/NotebookSearchAggregationBucketKey'
+          type: array
+      type: object
+    NotebookSearchAttributes:
+      description: Notebook search result attributes.
+      properties:
+        meta:
+          $ref: '#/components/schemas/NotebookSearchMetadata'
+        name:
+          description: Name of the notebook.
+          example: My Notebook
+          type: string
+        tags:
+          description: List of tags for the notebook.
+          example:
+          - team:notebooks-backend
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - tags
+      - meta
+      type: object
+    NotebookSearchHighlight:
+      description: Highlighted fields from the notebook search.
+      properties:
+        cells.text:
+          description: Highlighted cell text matches.
+          items:
+            type: string
+          type: array
+        cells.title:
+          description: Highlighted cell title matches.
+          items:
+            type: string
+          type: array
+        name:
+          description: Highlighted notebook name matches.
+          items:
+            type: string
+          type: array
+      type: object
+    NotebookSearchMetadata:
+      description: Metadata about the notebook.
+      properties:
+        author:
+          $ref: '#/components/schemas/NotebookSearchUser'
+        cell_count:
+          description: Number of cells in the notebook.
+          example: 5
+          format: int64
+          type: integer
+        created_at:
+          description: Time at which the notebook was created.
+          example: '2021-10-28T19:10:04.601117Z'
+          format: date-time
+          type: string
+        deleted_at:
+          description: Time at which the notebook was deleted, or null if not deleted.
+          example: null
+          format: date-time
+          nullable: true
+          type: string
+        experience_type:
+          description: Experience type of the notebook.
+          example: null
+          nullable: true
+          type: string
+        has_computational_cells:
+          description: Whether the notebook has computational cells.
+          example: false
+          type: boolean
+        is_favorited:
+          description: Whether the notebook is favorited by the user.
+          example: false
+          type: boolean
+        is_template:
+          description: Whether the notebook is a template.
+          example: false
+          type: boolean
+        modified_at:
+          description: Time at which the notebook was last updated.
+          example: '2024-02-16T12:43:31.942554Z'
+          format: date-time
+          type: string
+        status:
+          description: Status of the notebook.
+          example: published
+          type: string
+        take_snapshots:
+          description: Whether the notebook can take a snapshot.
+          example: false
+          type: boolean
+        type:
+          description: Notebook type.
+          example: notebook
+          type: string
+      required:
+      - author
+      - cell_count
+      - created_at
+      - deleted_at
+      - is_favorited
+      - is_template
+      - modified_at
+      - status
+      - take_snapshots
+      - type
+      - has_computational_cells
+      - experience_type
+      type: object
+    NotebookSearchResponse:
+      description: Response containing notebook search results.
+      properties:
+        data:
+          description: List of notebook search results.
+          items:
+            $ref: '#/components/schemas/NotebookSearchResultData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/NotebookSearchResponseMeta'
+      required:
+      - data
+      - meta
+      type: object
+    NotebookSearchResponseMeta:
+      description: Metadata about the notebook search results.
+      properties:
+        aggregations:
+          $ref: '#/components/schemas/NotebookSearchAggregations'
+        total:
+          description: Total number of notebooks found.
+          example: 25
+          format: int64
+          type: integer
+      required:
+      - total
+      type: object
+    NotebookSearchResultData:
+      description: A notebook search result.
+      properties:
+        highlight:
+          $ref: '#/components/schemas/NotebookSearchHighlight'
+        id:
+          description: Notebook identifier.
+          example: '123456'
+          type: string
+        notebook_data:
+          $ref: '#/components/schemas/NotebookSearchAttributes'
+        type:
+          $ref: '#/components/schemas/MetricNotebookType'
+      required:
+      - id
+      - type
+      - notebook_data
+      type: object
+    NotebookSearchUser:
+      description: User information.
+      properties:
+        handle:
+          description: User handle or email.
+          example: user@datadoghq.com
+          type: string
+        name:
+          description: User display name.
+          example: User Name
+          type: string
+      required:
+      - handle
+      - name
       type: object
     NotebookTriggerWrapper:
       description: Schema for a Notebook-based trigger.
@@ -75739,6 +76272,74 @@ paths:
       - Dashboard Lists
       x-codegen-request-body-name: body
       x-menu-order: 3
+  /api/v2/dashboards/search:
+    get:
+      description: Search for dashboards using a query string.
+      operationId: SearchDashboards
+      parameters:
+      - description: Search query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          example: team:dashboards-backend
+          type: string
+      - description: Sort field for results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          example: metadata.created_at
+          type: string
+      - description: Additional data to include in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          example: meta.aggregations
+          type: string
+      - description: Page number for pagination.
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 0
+          type: integer
+      - description: Maximum number of results to return.
+        in: query
+        name: limit
+        required: false
+        schema:
+          example: 10
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSearchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Service Unavailable
+      summary: Search dashboards
+      tags:
+      - Dashboards
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/datasets:
     get:
       description: Get all datasets that have been configured for an organization.
@@ -85889,6 +86490,80 @@ paths:
       tags:
       - Cloud Network Monitoring
       x-menu-order: 2
+  /api/v2/notebooks/search:
+    get:
+      description: Search for notebooks using a query string.
+      operationId: SearchNotebooks
+      parameters:
+      - description: Search query string.
+        in: query
+        name: query
+        required: false
+        schema:
+          example: team:notebooks-backend
+          type: string
+      - description: Sort field for results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          example: metadata.created_at
+          type: string
+      - description: Additional data to include in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          example: meta.aggregations
+          type: string
+      - description: Page number for pagination.
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 0
+          type: integer
+      - description: Maximum number of results to return.
+        in: query
+        name: limit
+        required: false
+        schema:
+          example: 10
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotebookSearchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Service Unavailable
+      summary: Search notebooks
+      tags:
+      - Notebooks
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/obs-pipelines/pipelines:
     get:
       description: Retrieve a list of pipelines.
@@ -103891,6 +104566,9 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: Interact with your dashboards through the API to search and retrieve
+    dashboards.
+  name: Dashboards
 - description: 'Data Access Controls in Datadog is a feature that allows administrators
     and access managers to regulate
 
@@ -104131,6 +104809,9 @@ tags:
     and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
     for more information.
   name: Network Device Monitoring
+- description: Interact with your notebooks through the API to search and retrieve
+    notebooks.
+  name: Notebooks
 - description: Auto-generated tag OCI Integration
   name: OCI Integration
 - description: Observability Pipelines allows you to collect and process logs within
