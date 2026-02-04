@@ -1,5 +1,21 @@
 options:
 
+# earlier than 2.13.0
+- label: "<2.13.0"
+  id: lt_2_13_0
+
+# 2.13.0 or later
+- label: ">=2.13.0"
+  id: gte_2_13_0
+
+# 2.17.0 or later
+- label: ">=2.17.0"
+  id: gte_2_17_0
+
+# 4.13.0 or later
+- label: ">=4.13.0"
+  id: gte_4_13_0
+
 # Earlier than 4.34.0
 - label: "<4.34.0"
   id: lt_4_34_0
@@ -11,3 +27,19 @@ options:
 # 5.4.0 or later
 - label: ">=5.4.0"
   id: gte_5_4_0
+
+# 4.49.0 or later
+- label: ">=4.49.0"
+  id: gte_4_49_0
+
+# 5.4.0 or later
+- label: ">=5.22.0"
+  id: gte_5_22_0
+
+# 5.4.0 or later
+- label: ">=5.28.0"
+  id: gte_5_28_0
+
+# 6.4.0
+- label: ">=6.4.0"
+  id: gte_6_4_0
