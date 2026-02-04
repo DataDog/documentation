@@ -40,14 +40,14 @@ The `EvaluatorContext` is a frozen dataclass that provides all the information n
 
 ### SummaryEvaluatorContext
 
-The `SummaryEvaluatorContext` is a frozen dataclass that provides aggregated information across all spans in an experiment run. It is passed to the `evaluate()` method of summary evaluators.
+The `SummaryEvaluatorContext` is a frozen dataclass that provides aggregated evaluation results across all dataset records in an experiment.
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `inputs` | `List[Any]` | List of all input data from the experiment. |
 | `outputs` | `List[Any]` | List of all output data from the experiment. |
 | `expected_outputs` | `List[Any]` | List of all expected outputs from the experiment. |
-| `evaluation_results` | `Dict[str, List[Any]]` | Dictionary mapping evaluator names to their results across all spans. |
+| `evaluation_results` | `Dict[str, List[Any]]` | Dictionary mapping evaluator names to their results. |
 | `metadata` | `Dict[str, Any]` | Additional metadata associated with the experiment. |
 
 ### EvaluatorResult
@@ -80,7 +80,7 @@ Class-based evaluators provide a structured way to implement reusable evaluation
 
 #### BaseEvaluator
 
-The `BaseEvaluator` class is the base class for creating span-level evaluators.
+The `BaseEvaluator` class is the base class to create an evaluator.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs, BaseEvaluator, EvaluatorContext, EvaluatorResult
@@ -174,7 +174,7 @@ You can return either:
 
 ## Using evaluators with experiments
 
-Combine class-based and function-based evaluators with experiments for systematic evaluation of your LLM application.
+Use evaluators with experiments to systematically evaluate your LLM application.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs, Dataset, DatasetRecord
@@ -237,6 +237,43 @@ Use `LLMObs.submit_evaluation()` to submit custom evaluations associated with a 
 
 **Note**: Exactly one of `span` or `span_with_tag_value` is required.
 
+### Example: Using an evaluator to evaluate a span
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs, EvaluatorContext
+from ddtrace.llmobs.decorators import llm
+
+# Create an evaluator instance
+evaluator = MyCustomEvaluator()
+
+@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
+def llm_call(input_text):
+    completion = ...  # Your LLM application logic
+
+    # Create the evaluation context
+    context = EvaluatorContext(
+        input_data=input_text,
+        output_data=completion,
+        expected_output=None,
+    )
+
+    # Run the evaluator
+    result = evaluator.evaluate(context)
+
+    # Submit the evaluation result
+    LLMObs.submit_evaluation(
+        span=LLMObs.export_span(),
+        ml_app="chatbot",
+        label=evaluator.name,
+        metric_type="score",
+        value=result.value,
+        assessment=result.assessment,
+        reasoning=result.reasoning,
+    )
+
+    return completion
+{{< /code-block >}}
+
 ### Example: Joining by span context
 
 {{< code-block lang="python" >}}
@@ -295,25 +332,9 @@ def llm_call():
     return completion
 {{< /code-block >}}
 
-## Exporting a span
-
-Use `LLMObs.export_span()` to extract the span context from a span for associating evaluations.
-
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-
-# Export the current active span
-span_context = LLMObs.export_span(span=None)
-
-# Or export a specific span
-span_context = LLMObs.export_span(span=my_span)
-{{< /code-block >}}
-
-The returned dictionary contains `span_id` and `trace_id` which uniquely identify the span.
-
 ## HTTP API reference
 
-For submitting evaluations from languages other than Python or Node.js, or from external systems, use the HTTP API.
+You can also submit evaluations using the HTTP API.
 
 <div class="alert alert-info">To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation.</div>
 
@@ -357,7 +378,7 @@ For the full API specification including request/response models, see the [Evalu
 
 ### Concurrent execution
 
-When running experiments, evaluators execute concurrently to improve performance. Both tasks and evaluators run in parallel, allowing experiments to complete faster when processing multiple dataset records.
+Set the `jobs` parameter to run tasks and evaluators concurrently on multiple threads, allowing experiments to complete faster when processing multiple dataset records.
 
 **Note**: Asynchronous evaluators are not yet supported for concurrent execution. Only synchronous evaluators benefit from parallel execution.
 
