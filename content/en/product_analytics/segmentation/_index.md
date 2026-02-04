@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Segmenting helps you focus on specific user groups based on characteristics or behaviors. This helps you uncover insights, identify trends, and make data-driven decisions about your product.
+Segmenting helps you focus on specific user groups based on characteristics or behaviors. This allows you to uncover insights, identify trends, and make data-driven decisions about your product.
 
 For example, you can segment users by purchase amount, by activity within a specific country, by trial status, or by users who started a trial and later converted to paying customers.
 
