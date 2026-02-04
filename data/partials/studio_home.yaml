@@ -1,0 +1,90 @@
+heading: Build with Datadog Studio
+
+guides:
+  # There can be only 3 guides in this section - "Start here" content
+  - title: Set Up Studio
+    desc: Install the SDK and start monitoring your app in minutes.
+    link_text: Getting Started
+    link: studio/getting_started/
+  - title: Track User Behavior
+    desc: Understand how users navigate your app with session replay and product analytics.
+    link_text: View User Insights
+    link: studio/understand_users/
+  - title: Debug and Fix Issues
+    desc: Monitor backend services, catch errors in real time, and debug with full traces.
+    link_text: Monitor and Debug
+    link: studio/monitor_and_debug/
+
+nav_sections:
+  # For a better rendering, sections should include sub-sections with multiple of 4.
+  - nav_section:
+    - name: 'Understand your users and what they do in your app'
+    - navtiles:
+      - title: Error Tracking
+        link: error_tracking/
+        icon: error-tracking
+        desc: Identify critical errors and accelerate resolution across web, mobile, and backend
+      - title: Product Analytics
+        link: product_analytics/
+        icon: product-analytics
+        desc: Gain insight into user behavior and make data-driven product decisions
+      - title: Session Replay
+        link: session_replay/
+        icon: session-replay
+        desc: Capture and visually replay the user experience of your users
+      - title: Real User Monitoring
+        link: real_user_monitoring/
+        icon: rum
+        desc: Capture, observe, and analyze the user experience of your applications
+  - nav_section:
+    - name: 'Make sure your app works and fix errors'
+    - navtiles:
+      - title: Error Tracking
+        link: error_tracking/
+        icon: error-tracking
+        desc: Identify critical errors and accelerate resolution across web, mobile, and backend
+      - title: Log Management
+        link: logs/
+        icon: log
+        desc: Process, monitor, and archive your ingested logs
+      - title: Metrics
+        link: metrics/
+        icon: metric
+        desc: Explore, search, and create distributions for your metrics
+      - title: APM
+        link: tracing/
+        icon: apm
+        desc: Explore out-of-the-box performance dashboards and distributed traces
+  - nav_section:
+    - name: 'Build and improve LLM agents'
+    - navtiles:
+      - title: LLM Observability
+        link: llm_observability/
+        icon: llm-observability
+        desc: Trace, monitor, and secure your LLM applications
+      - title: Datadog Watchdog
+        link: watchdog/
+        icon: watchdog
+        desc: Detect and surface application and infrastructure anomalies
+      - title: Monitors and Alerting
+        link: monitors/
+        icon: monitor
+        desc: Create, edit, and manage your monitors and notifications
+      - title: Dashboards
+        link: dashboards/
+        icon: dashboard
+        desc: Visualize, analyze, and generate insights about your data
+
+popular_searches:
+  - title: Getting Started
+    link: studio/getting_started/
+    weight: 10
+  - title: Error Tracking
+    link: error_tracking/
+    weight: 20
+  - title: Session Replay
+    link: session_replay/
+    weight: 30
+  - title: LLM Observability
+    link: llm_observability/
+    weight: 40
