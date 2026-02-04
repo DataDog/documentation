@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-This guide covers building custom evaluators for LLM Observability, including data models, class-based and function-based evaluators, SDK methods, and the HTTP API.
+This guide covers how to evaluate your LLM applications, either within an experiment or by evaluating production spans.
 
 ## Evaluation data model
 
