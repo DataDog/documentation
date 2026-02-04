@@ -31,9 +31,9 @@ The `EvaluatorContext` is a frozen dataclass that provides all the information n
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `input_data` | `Any` | The input data to evaluate. |
-| `output_data` | `Any` | The output data to evaluate. |
-| `expected_output` | `Any` | The expected output. |
+| `input_data` | `Any` | The input provided to the LLM application (for example, a prompt). |
+| `output_data` | `Any` | The actual output from the LLM application. |
+| `expected_output` | `Any` | The expected or ideal output the LLM should have produced. |
 | `metadata` | `Dict[str, Any]` | Additional metadata. |
 | `span_id` | `str` | The span's unique identifier. |
 | `trace_id` | `str` | The trace's unique identifier. |
