@@ -474,3 +474,14 @@ options:
 
 - label: gRPC
   id: grpc
+- label: OpenTelemetry
+  id: otel_api
+
+- label: Datadog
+  id: dd_api
+
+- label: C++
+  id: cpp
+
+- label: Elixir
+  id: elixir
