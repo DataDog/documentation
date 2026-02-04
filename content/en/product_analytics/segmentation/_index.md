@@ -74,7 +74,7 @@ To create a segment using an uploaded list of users from your own file:
 
 2. Click **Browse files** to upload your CSV file.
 
-The file needs a column containing either user IDs or user emails so it can be mapped with the `usr.id` or `usr.email` attributes in the Product Analytics platform.
+The file needs a column containing either user IDs or user emails so the data can be mapped with the `usr.id` or `usr.email` attributes in the Product Analytics platform.
 
 The following example maps the Product Analytics attribute `@usr.id` to the column named `id` in the CSV file.
 
@@ -91,7 +91,7 @@ Filter the Pathways visualization to focus on a specific segment and see how tho
 
 ### In Analytics Explorer
 
-Filter the Analytics Explorer visualization to see how a segment of users use your product. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
+Filter the Analytics Explorer visualization to see how a segment uses your product. The following example shows a list of users in the "Premium Shopist Customers" segment who were active in the last month, organized by the total number of events.
 
 {{< img src="product_analytics/segmentation/segment-analytics-explorer-3.png" alt="Show a list of users in the Premium Shopist Customers segment who were active in the last month, organized by the total number of events">}}
 
