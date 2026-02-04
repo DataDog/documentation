@@ -13,6 +13,7 @@ aliases:
     - /real_user_monitoring/reactnative-expo/
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/expo
     - /real_user_monitoring/mobile_and_tv_monitoring/expo/setup
+    - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/expo/
 content_filters:
 - trait_id: platform
   option_group_id: rum_react_native_framework_options

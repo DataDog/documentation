@@ -338,7 +338,7 @@ export default function App() {
 
 #### Sample session rates
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][11] as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK](#step-3--initialize-the-library-with-application-context) as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
 
 #### Set tracking consent (GDPR compliance)
 
@@ -390,13 +390,12 @@ After the plugin is installed and configured, it automatically tracks interactio
 
 ### CodePush integration (optional)
 
-If you're deploying updates with [CodePush][13], see the [CodePush setup documentation][14] for additional configuration steps.
+If you're deploying updates with [CodePush][11], see the [CodePush setup documentation][12] for additional configuration steps.
 
 [7]: https://app.datadoghq.com/rum/application/create
 [8]: https://app.datadoghq.com/error-tracking/settings/setup/client/
 [9]: /account_management/api-app-keys/#api-keys
 [10]: /account_management/api-app-keys/#client-tokens
-[11]: /real_user_monitoring/application_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context
-[13]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[14]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
+[11]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
+[12]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
 
