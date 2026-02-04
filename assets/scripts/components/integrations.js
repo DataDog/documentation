@@ -184,11 +184,10 @@ export function initializeIntegrations() {
         const name = item.nameLower || '';
         const publicTitle = item.publicTitleLower || '';
 
-        // Check for exact matches first
+        // Check for exact matches first (only full query match, not individual words)
         const hasExactMatch = isSearch && (
             name === filter ||
-            publicTitle === filter ||
-            filterWords.some(word => name === word || publicTitle === word)
+            publicTitle === filter
         );
 
         // Calculate match score - count how many search terms match
