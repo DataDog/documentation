@@ -26,13 +26,13 @@ There are two approaches to configure the Datadog Agent for ROFS:
 {{< tabs >}}
 {{% tab "Mount writable volumes" %}}
 
-Mount writable volumes onto your Datadog Agent container to provide necessary write access for directories at runtime. This method works with any container orchestrator, such as Docker Compose, ECS, or Kubernetes.
+Use writable volumes on your Datadog Agent container to ensure write access at runtime. This method works with any container orchestrator, such as Docker Compose, ECS, or Kubernetes.
 
 ### Steps
 
 1. Create named volumes for the required directories (`/etc/datadog-agent`, `/opt/datadog-agent/run`, `/var/run/datadog`, and optionally `/var/log/datadog`).
 2. Configure an init container to copy default configuration files from the Agent image to the shared `datadog-config` volume.
-3. Configure the Agent container with `read_only: true` and mount the volumes with read-write permissions. Use tmpfs for `/tmp`.
+3. Configure the Agent container with `read_only: true` and mount the volumes with read-write permissions.
 
 Complete example:
 ```yaml
@@ -72,7 +72,7 @@ volumes:
   datadog-logs:
 ```
 
-**Note**: The init container copies default configuration files to the shared volume before the Agent starts. The Agent then runs with a read-only root filesystem while writing to the mounted volumes and tmpfs.
+**Note**: The init container copies default configuration files into the shared volume before the Agent starts. While the Agent can start without the init container prepopulating this volume, some checks might be missing or incomplete.
 
 {{% /tab %}}
 {{% tab "Create a custom Agent image" %}}
@@ -116,7 +116,7 @@ services:
       - /tmp
 ```
 
-**Note**: When using the `VOLUME` directive in a Dockerfile, the container runtime automatically creates anonymous volumes for those paths. This removes the need for an init container, but these volumes are ephemeral and any customizations to `datadog.yaml` or `conf.d/` need to be baked into the image or provided through environment variables.
+**Note**: When using the `VOLUME` directive in a Dockerfile, the container runtime automatically creates anonymous volumes for those paths. This removes the need for an init container, but these volumes are ephemeral so any customizations to `datadog.yaml` or `conf.d/` need to be baked into the image or mounted as named volumes.
 
 {{% /tab %}}
 {{< /tabs >}}
