@@ -130,13 +130,7 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
 ```
 
-**Note**: When using the `VOLUME` directive in a Dockerfile, the container runtime automatically creates anonymous volumes for those paths. This removes the need for an init container, but the volumes are ephemeral and any customizations to the configuration need to be baked into the image or provided through environment variables.
-
-To adapt this pattern to other container orchestrators like ECS or Kubernetes:
-1. Build the custom image with `VOLUME` declarations for all writable paths
-2. Reference the custom image in your task definition or pod specification
-3. Enable read-only root filesystem in your container configuration
-4. The declared volumes will be automatically created by the container runtime
+**Note**: When using the `VOLUME` directive in a Dockerfile, the container runtime automatically creates anonymous volumes for those paths. This removes the need for an init container, but these volumes are ephemeral and any customizations to `datadog.yaml` or `conf.d/` need to be baked into the image or provided through environment variables.
 
 {{% /tab %}}
 {{< /tabs >}}
