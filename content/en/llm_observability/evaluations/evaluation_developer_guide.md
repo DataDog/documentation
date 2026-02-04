@@ -27,7 +27,7 @@ This guide covers how to evaluate your LLM applications, either within an experi
 
 ### EvaluatorContext
 
-The `EvaluatorContext` is a frozen dataclass that provides all the information needed to evaluate a single span. It is passed to the `evaluate()` method of class-based evaluators and function-based evaluators.
+The `EvaluatorContext` is a frozen dataclass that provides all the information needed to run an evaluation.
 
 | Field | Type | Description |
 |-------|------|-------------|
