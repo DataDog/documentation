@@ -84,7 +84,7 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8.In the **User** field, enter your evaluation prompt and explicitly specify which parts of the span should be evaluated. In most cases, this is span input (`{{span_input}}`) and/or span output (`{{span_output}}`).
+8. In the **User** field, provide your user prompt. Explicitly specify what parts of the span to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. An autocomplete dropdown appears when you type `{{` to help you select available fields.
 
    Additional variables are available: type `{{` to see the full list. You may also use **Filtered Spans** or **Filtered Traces** (on the right side) to add span data as a variable:
    1. Choose an account and an application so that spans/traces show up on the right.
