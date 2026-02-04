@@ -24,23 +24,19 @@ If you're using a managed deployment method for the Datadog Agent (Helm chart, D
 There are two approaches to configure the Datadog Agent for ROFS:
 
 {{< tabs >}}
-{{% tab "Mount Volumes" %}}
+{{% tab "Mount writable volumes" %}}
 
-This approach provides writable volumes for the required directories at runtime:
+Mount writable volumes onto your Datadog Agent container to provide necessary write access for directories at runtime. This method works with any container orchestrator, such as Docker Compose, ECS, or Kubernetes.
 
-1. **Provide writable volumes** for the required directories
-2. **Use an init container** to copy default configuration files before the Agent starts
-3. **Mount volumes** to both the init and Agent containers
+### Steps
 
-Specific implementation varies by platform (Kubernetes, Docker, ECS, etc.), but the pattern remains the same.
+1. Create named volumes for the required directories (`/etc/datadog-agent`, `/opt/datadog-agent/run`, `/var/run/datadog`, and optionally `/var/log/datadog`).
+2. Configure an init container to copy default configuration files from the Agent image to the shared `datadog-config` volume.
+3. Configure the Agent container with `read_only: true` and mount the volumes with read-write permissions. Use tmpfs for `/tmp`.
 
-### Example
-
-The following is complete Docker Compose example demonstrating the read-only root filesystem configuration pattern:
-
+Complete example:
 ```yaml
 services:
-  # Init container populating 'datadog-config' volume with config files.
   datadog-init:
     image: gcr.io/datadoghq/agent:latest
     command: ["sh", "-c", "cp -R /etc/datadog-agent/* /opt/datadog-agent-config/"]
@@ -62,11 +58,9 @@ services:
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      # Mounting populated config volume with read-write permissions.
       - datadog-config:/etc/datadog-agent:rw
       - datadog-run:/opt/datadog-agent/run:rw
       - datadog-sockets:/var/run/datadog:rw
-      # (optional) The Agent will operate mostly normally without this volume
       - datadog-logs:/var/log/datadog:rw
     tmpfs:
       - /tmp
@@ -78,42 +72,32 @@ volumes:
   datadog-logs:
 ```
 
-- `datadog-init` service copies default configuration files to the `datadog-config` volume.
-- `datadog` service starts only after init completes successfully.
-- All required directories are mounted as writable volumes.
-
-To adapt this pattern to other container orchestrators like ECS, Kubernetes, or plain Docker:
-1. Create an init container that copies `/etc/datadog-agent/*` to a shared volume
-2. Mount that volume to `/etc/datadog-agent` in the main Datadog Agent container
-3. Mount writable volumes for other runtime directories (like `/opt/datadog-agent/run` and `/var/run/datadog`)
-4. Enable read-only root filesystem
+**Note**: The init container copies default configuration files to the shared volume before the Agent starts. The Agent then runs with a read-only root filesystem while writing to the mounted volumes and tmpfs.
 
 {{% /tab %}}
-{{% tab "Custom Image" %}}
+{{% tab "Create a custom Agent image" %}}
 
 Create a custom Datadog Agent image with pre-defined volumes for writable directories. This is particularly useful when you cannot use init containers or dynamic volume mounting.
 
-### Example
+### Steps
 
-**Step 1:** Create a Dockerfile that extends the Datadog Agent image and declares volumes for required paths:
-
+1. Create a Dockerfile that extends the Datadog Agent image and declares volumes for required paths:
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
-# Create volumes for all paths the Agent needs to write to
+
 VOLUME ["/etc/datadog-agent", "/opt/datadog-agent/run", "/var/run/datadog", "/var/log/datadog"]
-# Optional: Copy a custom datadog.yaml if needed
+
+# Optional: If needed, copy a custom datadog.yaml or check config.
 # ADD datadog.yaml /etc/datadog-agent/datadog.yaml
 ```
-
-**Step 2:** Build and tag the custom image:
+2. Build and tag your custom image:
 
 ```shell
 docker build -t your-registry/datadog-agent:7.x-rofs .
 docker push your-registry/datadog-agent:7.x-rofs
 ```
 
-**Step 3:** Use the custom image in your container orchestrator with read-only root filesystem enabled:
-
+3. Use the custom image in your container orchestrator with read-only root filesystem enabled:
 ```yaml
 services:
   datadog:
