@@ -56,7 +56,7 @@ Metrics relevant for your provisioning workflow:
 - Idle Cost
 
 ### Performance
-The Performance tab allows you to understand your workload's execution and helps you tune GPU utilization to more effectively use your devices.
+The Performance tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
 
 {{< img src="gpu_monitoring/performance-tab.png" alt="The Performance use-case driven view" style="width:90%;" >}}
 
