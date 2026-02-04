@@ -148,16 +148,16 @@ Performs string comparison operations between `output_data` and `expected_output
 |-----------|-------------|
 | `eq` | Exact match (default) |
 | `ne` | Not equals |
-| `contains` | Output contains expected (case-sensitive) |
-| `icontains` | Output contains expected (case-insensitive) |
+| `contains` | `output_data` contains `expected_output` (case-sensitive) |
+| `icontains` | `output_data` contains `expected_output` (case-insensitive) |
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs._evaluators import StringCheck
 
-# Exact match (default)
+# Perform an exact match (default)
 evaluator = StringCheck(operation="eq", case_sensitive=True)
 
-# Case-insensitive contains
+# Check whether output_data contains expected_output (case-insensitive)
 evaluator = StringCheck(operation="icontains", strip_whitespace=True)
 
 # Extract field from dict output before comparison
@@ -187,7 +187,7 @@ evaluator = RegexMatch(
     match_mode="fullmatch"
 )
 
-# Case-insensitive pattern matching
+# Validate output pattern (case-insensitive)
 evaluator = RegexMatch(
     pattern=r"success|completed",
     flags=re.IGNORECASE
@@ -207,7 +207,7 @@ Validates output length constraints.
 {{< code-block lang="python" >}}
 from ddtrace.llmobs._evaluators import LengthValidator
 
-# Ensure response is between 50-200 characters
+# Ensure response is 50-200 characters
 evaluator = LengthValidator(min_length=50, max_length=200, count_type="characters")
 
 # Validate word count
@@ -216,7 +216,7 @@ evaluator = LengthValidator(min_length=10, max_length=100, count_type="words")
 
 #### JSONValidator
 
-Validates that output is valid JSON, optionally checking for required keys.
+Validates that output is valid JSON, and optionally checks for required keys.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs._evaluators import JSONValidator
@@ -224,7 +224,7 @@ from ddtrace.llmobs._evaluators import JSONValidator
 # Validate JSON syntax
 evaluator = JSONValidator()
 
-# Validate required keys exist
+# Validate that required keys exist
 evaluator = JSONValidator(required_keys=["name", "status", "data"])
 {{< /code-block >}}
 
