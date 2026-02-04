@@ -58,7 +58,9 @@ Different applications and environments have CSP configurations and other varyin
 
 #### HTTP requests warning banner appears in iframe
 
-This warning appears when attempting to record on an `http` page. The recorder iframe only supports `https` pages. **Solution**: Either open your page in a pop-up window or change your URL to use `https`. 
+This warning appears when attempting to record on an `http` page. The recorder iframe only supports `https` pages.
+
+**Solution**: Either open your page in a pop-up window or change your URL to use `https`. 
 
 #### Website fails to load and recording doesn't work in iframe or pop-up
 
