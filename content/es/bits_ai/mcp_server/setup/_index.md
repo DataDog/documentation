@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/
   tag: Blog
   text: 'Datadog + OpenAI: integración de Codex CLI para DevOps asistidos por IA'
-private: true
 title: Configurar el servidor MCP de Datadog
 ---
 

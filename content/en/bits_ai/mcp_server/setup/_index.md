@@ -1,7 +1,9 @@
 ---
 title: Set Up the Datadog MCP Server
 description: "Learn how to set up and configure the Datadog MCP Server to connect your AI agents to Datadog observability tools and data."
-private: true
+algolia:
+  tags: ["mcp", "mcp server", "setup"]
+  rank: 75
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
