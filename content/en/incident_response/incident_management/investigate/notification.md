@@ -2,6 +2,7 @@
 title: Incident Notification
 aliases:
 - /service_management/incident_management/notification/
+- /incident_response/incident_management/notification
 further_reading:
 - link: "/incident_response/incident_management/incident_settings"
   tag: "Documentation"

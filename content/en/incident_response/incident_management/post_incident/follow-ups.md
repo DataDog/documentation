@@ -3,6 +3,7 @@ title: Incident Follow-ups
 description: Manage follow-up tasks defined during your incident response process.
 aliases:
 - /service_management/incident_management/follow-ups/
+- /incident_response/incident_management/follow-ups
 further_reading:
 - link: "/service_management/incident_management/incident_settings"
   tag: "Documentation"

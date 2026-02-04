@@ -2,6 +2,7 @@
 title: Declare an Incident
 aliases:
 - /service_management/incident_management/declare/
+- /incident_response/incident_management/declare
 ---
 
 ## Overview

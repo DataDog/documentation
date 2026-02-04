@@ -2469,71 +2469,66 @@ menu:
       parent: incident_response_heading
       identifier: incidents
       weight: 20000
-    - name: Declare an Incident
-      url: incident_response/incident_management/declare
-      parent: incidents
-      identifier: incident_declare
-      weight: 1
-    - name: Describe an Incident
-      url: incident_response/incident_management/describe
-      parent: incidents
-      identifier: incident_describe
-      weight: 2
-    - name: Response Team
-      url: incident_response/incident_management/response_team
-      parent: incidents
-      identifier: response_team
-      weight: 3
-    - name: Notification
-      url: incident_response/incident_management/notification
-      parent: incidents
-      identifier: incident_notification
-      weight: 4
-    - name: Investigate an Incident
+    - name: Incident Investigation
       url: incident_response/incident_management/investigate
       parent: incidents
       identifier: incident_investigate
-      weight: 5
+      weight: 1
+    - name: Declare an Incident
+      url: incident_response/incident_management/investigate/declare
+      parent: incident_investigate
+      identifier: incident_declare
+      weight: 101
+    - name: Describe an Incident
+      url: incident_response/incident_management/investigate/describe
+      parent: incident_investigate
+      identifier: incident_describe
+      weight: 102
+    - name: Response Team
+      url: incident_response/incident_management/investigate/response_team
+      parent: incident_investigate
+      identifier: response_team
+      weight: 103
+    - name: Notification
+      url: incident_response/incident_management/investigate/notification
+      parent: incident_investigate
+      identifier: incident_notification
+      weight: 104
     - name: Timeline
       url: incident_response/incident_management/investigate/timeline
       parent: incident_investigate
       identifier: incident_investigate_timeline
-      weight: 501
-    - name: Follow-ups
-      url: incident_response/incident_management/follow-ups
-      parent: incident_investigate
-      identifier: incident_investigate_follow_ups
-      weight: 502
+      weight: 105
     - name: Incident AI
-      url: incident_response/incident_management/incident_ai
+      url: incident_response/incident_management/investigate/incident_ai
       identifier: incident_ai
-      parent: incidents
-      weight: 6
+      parent: incident_investigate
+      weight: 106
     - name: Incident Settings
       url: incident_response/incident_management/incident_settings
       parent: incidents
       identifier: incidents_settings
-      weight: 7
+      weight: 2
     - name: Information
       url: incident_response/incident_management/incident_settings/information
       parent: incidents_settings
       identifier: incidents_settings_information
-      weight: 701
+      weight: 201
     - name: Property Fields
       url: incident_response/incident_management/incident_settings/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
-      weight: 702
+      weight: 202
     - name: Responder Types
       url: incident_response/incident_management/incident_settings/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 703
+      weight: 203
     - name: Integrations
       url: incident_response/incident_management/incident_settings/integrations
       parent: incidents_settings
       identifier: incidents_settings_integrations
-      weight: 704
+      weight: 204
     - name: Automations
       url: incident_response/incident_management/incident_settings/automations
       parent: incidents_settings
@@ -2543,16 +2538,26 @@ menu:
       url: incident_response/incident_management/incident_settings/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 706
+      weight: 206
     - name: Templates
       url: incident_response/incident_management/incident_settings/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 707
-    - name: Incident Analytics
-      url: incident_response/incident_management/analytics
+      weight: 207
+    - name: Post Incident
+      url: incident_response/incident_management/post_incident
       parent: incidents
-      identifier: analytics
+      identifier: post_incident
+      weight: 6
+    - name: Follow-ups
+      url: incident_response/incident_management/post_incident/follow-ups
+      parent: post_incident
+      identifier: post_incident_follow_ups
+      weight: 601
+    - name: Analytics and Reporting
+      url: incident_response/incident_management/analytics_and_reporting
+      parent: incidents
+      identifier: analytics_and_reporting
       weight: 8
     - name: Integrations
       url: incident_response/incident_management/integrations

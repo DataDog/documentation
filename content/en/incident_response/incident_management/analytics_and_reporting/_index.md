@@ -1,9 +1,10 @@
 ---
-title: Incident Management Analytics
+title: Analytics and Reporting
 description: Track and analyze aggregated incident management statistics in Dashboards and Notebooks
 aliases:
 - /monitors/incident_management/analytics
 - /service_management/incident_management/analytics/
+- /incident_response/incident_management/analytics
 further_reading:
 - link: "/incident_response/incident_management/incident_settings"
   tag: "Documentation"
@@ -28,7 +29,7 @@ Use Incident Analytics to learn from past incidents and understand the efficienc
 ## Data collected
 
 Incident Management Analytics is a queryable data source for aggregated incident statistics. You can query these analytics in a variety of graph widgets in both Dashboards and Notebooks to analyze the history of your incident response over time. To give you a starting point, Datadog provides the following out-of-the-box resources that you can clone and customize:
-- [Incident Management Overview Dashboard template][3] 
+- [Incident Management Overview Dashboard template][3]
 - [Notebook Incident Report template][4]
 
 ### Incident timestamps
@@ -50,7 +51,7 @@ Incident Management reports the following analytic measures, which you can use t
 - `Time to Repair`: The duration from the incident's detection time to the last customer impact.
 - `Time to Resolve`: The duration from the incident's declaration time to the time it was resolved.
 
-In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7]. 
+In addition to these defaults, you can create new measures by adding custom *Number* property fields in your [Incident Settings][7].
 
 ### Timestamp overrides
 
@@ -87,7 +88,7 @@ To configure your graph using Incident Management Analytics data, follow these s
 
 {{< img src="/service_management/incidents/analytics/analytics_graph_configuration.png" alt="Timeseries graph configuration showing Incidents data source filtered by severity, showing the customer impact duration grouped by service" style="width:90%;" >}}
 
-This example configuration shows you an aggregation of your incidents that are SEV-1 or SEV-2. The graph displays the Customer Impact Duration of those incidents grouped by service. 
+This example configuration shows you an aggregation of your incidents that are SEV-1 or SEV-2. The graph displays the Customer Impact Duration of those incidents grouped by service.
 
 1. Widget: [Timeseries Line Graph][8]
 2. Datasource: `Incidents`

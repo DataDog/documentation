@@ -1,0 +1,806 @@
+WEBVTT
+
+1
+00:00:00.270 --> 00:00:01.540
+Esther Kim: Okay, you're good.
+
+2
+00:00:01.540 --> 00:00:18.880
+Alex Flinois: Cool, okay, so basically, when I'm here, the remediation today that we pitch is like, oh, like, if you've seen this problem before, you probably codified it in a workflow, that you can just kind of run, and so you can imagine, I think we have one that's… we use a dash.
+
+3
+00:00:18.880 --> 00:00:23.800
+Alex Flinois: Yeah, which is like a service restart. And so you could imagine that, like, okay,
+
+4
+00:00:24.010 --> 00:00:38.029
+Alex Flinois: I have a workflow, I just need to give it the service, and then I can run it, and it'll restart it, and so I can put out the fire quickly. And so that's what I really… I meant by remediation, and just talk about this button, and what it can do, and why it's useful. We're actually going to move this button in here.
+
+5
+00:00:38.690 --> 00:00:51.219
+Alex Flinois: Similarly to how for automations you have here… notifications you have here, and page you have here, and the reason for it is, basically, here you have all your automations that are triggered automatically, but the idea is, like.
+
+6
+00:00:51.420 --> 00:01:02.139
+Alex Flinois: this run workflow is basically running on automation manually, and so we're just going to move that button there, and so I wonder if we just want to talk about that in the… within automations themselves.
+
+7
+00:01:04.120 --> 00:01:07.649
+Esther Kim: Yeah, I think… I think we can put… leave it there, then.
+
+8
+00:01:07.950 --> 00:01:11.700
+Esther Kim: If it's going to move into automations, like mentioned.
+
+9
+00:01:11.940 --> 00:01:16.900
+Esther Kim: What about, what about the actual remediation tab?
+
+10
+00:01:17.060 --> 00:01:19.320
+Esther Kim: Is that documented in…
+
+11
+00:01:19.590 --> 00:01:34.530
+Alex Flinois: So we're doing a few things on the UI that we're changing. I want to show you what we're doing there. So… It's gonna take a while to get there, but maybe our prioritization on the documentation side should just take that into consideration.
+
+12
+00:01:34.680 --> 00:01:50.989
+Alex Flinois: So this is kind of the new UI that we're gonna work on, and you can see there's three things. There's, like, live details, which is the live incident you're running, post incidents, and automations. Automations will basically include notifications and automation together, and they'll just be one thing, which will look the same.
+
+13
+00:01:51.150 --> 00:02:01.639
+Alex Flinois: Post-incident, which, we haven't built… we haven't added to this, prototype, but I can show you what it looks like as well. I might actually have it in…
+
+14
+00:02:02.960 --> 00:02:05.340
+Alex Flinois: Here, because I just showed it to a customer.
+
+15
+00:02:08.680 --> 00:02:15.850
+Alex Flinois: Currently… You can't see that good, let me just… Pa-dum… Where is it? Okay, cool.
+
+16
+00:02:17.850 --> 00:02:23.279
+Alex Flinois: This is what the post-incident would look like. So, basically, you have an embedded post-mortem.
+
+17
+00:02:24.070 --> 00:02:33.130
+Alex Flinois: which is a notebook that you can open. You have a draft, which is a state, and then owner, and then on the right, you have the follow-ups that you can, like, create manually.
+
+18
+00:02:33.170 --> 00:02:40.470
+Alex Flinois: That's gonna be post-incident. And for live incident, you have, like, the summary, which you're familiar with, customer impact, which you're familiar with.
+
+19
+00:02:40.470 --> 00:02:53.699
+Alex Flinois: this, like, response team, which is supposed to be, like, a live updating based on what we know people are doing, and on the right is, like, this dynamic plan, which is, like, a combination of what the agents are doing, what the humans are doing. And then you have, like, your typical properties view.
+
+20
+00:02:53.720 --> 00:02:57.150
+Alex Flinois: And then, yeah, we've decluttered a lot of the things.
+
+21
+00:02:57.210 --> 00:03:14.709
+Alex Flinois: And yeah, so this automation, which is something we've already shipped, it looks kind of different, but yeah. So that's kind of where we're heading, which is why I think, doing the remediation tab might not make that much sense, or we shouldn't call it the remediation tab. We should just call it, like, post-incident or something.
+
+22
+00:03:15.190 --> 00:03:20.250
+Alex Flinois: Maybe in the short term, we can just call it post-incidence and alleviations, and maybe that makes the most sense?
+
+23
+00:03:23.070 --> 00:03:29.629
+Esther Kim: Yeah, I think it is… I think you did already propose that, and that's in the…
+
+24
+00:03:30.010 --> 00:03:31.420
+Alex Flinois: Oh, they did? Okay, cool.
+
+25
+00:03:32.320 --> 00:03:51.309
+Alex Flinois: let's just call… let's consider what's on this page as post-incident, and the flows there are… basically, the incident's done, or is stable, and now you're moving into the next phase, which is generating a post-mortem. It's, you know, maybe you might link other documents, but I think that's, like, mostly not the case, and then you can create these follow-ups, which is like, okay, Esther.
+
+26
+00:03:51.310 --> 00:03:56.490
+Alex Flinois: It's gonna have to, like, document this so that it doesn't happen again, or whatever. And then you assign it to this person, whatever.
+
+27
+00:03:58.610 --> 00:04:00.250
+Alex Flinois: Yeah, so that's that.
+
+28
+00:04:00.420 --> 00:04:03.020
+Alex Flinois: Yeah.
+
+29
+00:04:03.510 --> 00:04:07.299
+Esther Kim: When… when will the new UI go GA?
+
+30
+00:04:07.530 --> 00:04:18.319
+Alex Flinois: It's gonna take a while. I think it's gonna… I want it to be done by Q2, so not beginning of Q2, but during the quarter of Q2. What we're doing this quarter is the post-incident, tab.
+
+31
+00:04:18.370 --> 00:04:30.509
+Alex Flinois: And so we're gonna tackle that first, and we're also reorganizing the settings, which is connected to what you've been working on. And a lot of the mapping just is kind of where we're heading.
+
+32
+00:04:30.510 --> 00:04:44.360
+Alex Flinois: towards, I can also show you designs there. So yeah, I think mid-Q2, end of Q2, we'll have the redesign of both the live incident, the post-incident, the settings, and we have this new concept called the life cycle, which is a visual representation of your process.
+
+33
+00:04:44.390 --> 00:04:46.329
+Alex Flinois: Yeah. So, yeah.
+
+34
+00:04:47.770 --> 00:04:48.470
+Esther Kim: Okay.
+
+35
+00:04:51.560 --> 00:04:53.500
+Esther Kim: A lot of paperwork.
+
+36
+00:04:53.500 --> 00:04:57.860
+Alex Flinois: Yeah, there's a lot going on. Yes.
+
+37
+00:04:58.060 --> 00:04:59.290
+Esther Kim: Yeah.
+
+38
+00:05:00.200 --> 00:05:12.229
+Alex Flinois: So, yeah, so… let me… do you want to share your screen again and look at what you were looking at to see what we wanted to tackle? I'm assuming that we'll iterate on it as, like, things evolve, but I think we have a good structure to start with.
+
+39
+00:05:15.100 --> 00:05:20.340
+Esther Kim: Yeah, cause this makes sense to me now.
+
+40
+00:05:20.340 --> 00:05:20.880
+Alex Flinois: Okay.
+
+41
+00:05:21.130 --> 00:05:29.779
+Esther Kim: If you're… if you're simplifying it for, like, the investigation, post-incident, and then automations, the structure makes a lot more sense.
+
+42
+00:05:30.060 --> 00:05:34.420
+Esther Kim: And I also appreciate that you kind of gave me, like.
+
+43
+00:05:35.130 --> 00:05:38.359
+Esther Kim: A purpose for why we need to do this.
+
+44
+00:05:43.810 --> 00:05:47.779
+Esther Kim: Setup and configuration… Then I guess this…
+
+45
+00:05:48.280 --> 00:05:52.299
+Esther Kim: Oh, this is right, you wanted… you wanted this step split out.
+
+46
+00:05:53.010 --> 00:06:02.970
+Alex Flinois: Yeah, so scroll back up, what section are we in? Yeah, so let's look at the setup redesign, which we're gonna build this quarter, so you get an idea of where we're going.
+
+47
+00:06:02.970 --> 00:06:03.580
+Esther Kim: Okay.
+
+48
+00:06:03.580 --> 00:06:18.189
+Alex Flinois: So they were doing two things on the setting. One is an onboarding page, and the other one is, like, the settings. So today we have an onboarding page, which looks like it was built in the 90s, and so we're trying to, like, update that, and then the other piece is, like,
+
+49
+00:06:18.610 --> 00:06:30.119
+Alex Flinois: So there's, like, a welcome screen today, which is, like, yellow, and then there's, like, nothing. You arrive in settings, and so one of the things we're building is, basically a simple screen.
+
+50
+00:06:30.560 --> 00:06:36.780
+Alex Flinois: Single page that just, pushes the user to set up the things that are the most important.
+
+51
+00:06:36.780 --> 00:06:51.560
+Alex Flinois: to just test an incident, and which is basically set up Slack and connect, like, your Zoom. And once they've done that, and from our opinion, they could use opinion default with everything else, and it would work pretty well. And so, that's what we're building right now, and so it should be live pretty soon.
+
+52
+00:06:51.800 --> 00:07:05.339
+Alex Flinois: This is the ugly thing I don't like, but we are keeping it for now, so we have some logic of where people land. And then the other piece is, like, we're reorganizing settings. I can show you this thing afterwards, by the way, so you can take a look on your own time.
+
+53
+00:07:06.150 --> 00:07:10.940
+Alex Flinois: Yeah, so we're changing the organization, so today it kind of looks like this.
+
+54
+00:07:11.170 --> 00:07:11.880
+Esther Kim: Yeah.
+
+55
+00:07:11.880 --> 00:07:21.930
+Alex Flinois: And we're changing it to look like this. And so, on the left, you have a drop-down for your instant types, so you don't have anything being polluted, and so you could do a little drop-down and look at other instant types if you have many.
+
+56
+00:07:22.090 --> 00:07:35.040
+Alex Flinois: And then it follows the customer journey, so you have, like, define, coordination, post instance, and settings. And then… so the things that you already know about, like, information, property fields, integrations will be there.
+
+57
+00:07:35.040 --> 00:07:52.300
+Alex Flinois: Coordination is about automation, so some that you've already done. Chat and video are just going to be pulling out the integrations for chat and video, since they're so primary there, and have a view specifically for them. And then post-incident will be post-mortems and follow-ups, which will include, the templates, as well as the settings.
+
+58
+00:07:52.490 --> 00:08:00.399
+Alex Flinois: And then automations also has notifications, and then analytics will live here. And so, yeah, this is something we're building as well this quarter.
+
+59
+00:08:01.990 --> 00:08:06.620
+Esther Kim: And is incidents under… or, sorry, integrations under that? Okay, yeah, it is.
+
+60
+00:08:06.620 --> 00:08:15.489
+Alex Flinois: So yeah, yeah, so integration is here. And then the thing, the new thing we're introducing is this concept of a life cycle, which is basically supposed to…
+
+61
+00:08:15.620 --> 00:08:23.220
+Alex Flinois: Represent a visual view of all the settings together and how they work when the incident transitions from one state to another.
+
+62
+00:08:23.360 --> 00:08:40.319
+Alex Flinois: And so, the experience… I think they've changed the design a little bit, but it kind of looks like this, where you filter it by a severity, and you can add other conditions, and then it'll show you how things work, and then you can click on, like, okay, what automations are fired, both the ones you've created and are, like, automatically created.
+
+63
+00:08:40.390 --> 00:08:44.889
+Alex Flinois: And it's supposed to give the customer the ability to have a view
+
+64
+00:08:44.980 --> 00:08:55.119
+Alex Flinois: of everything in one place, and simplified. So that, we're probably gonna start building in Q2. We're trying to finalize the design now. Yeah, so that, that's, that's basically it.
+
+65
+00:08:55.690 --> 00:08:56.380
+Esther Kim: Okay.
+
+66
+00:08:57.320 --> 00:09:01.910
+Alex Flinois: So I could share that with you as well. I'll share all the links we talked about.
+
+67
+00:09:02.160 --> 00:09:05.149
+Alex Flinois: Cool. You wanna bring back the screen for a second? See where we are?
+
+68
+00:09:09.090 --> 00:09:13.679
+Esther Kim: That was… Setting… setup and configuration…
+
+69
+00:09:13.880 --> 00:09:18.040
+Esther Kim: And then, you had wanted new docs for testing incidents?
+
+70
+00:09:18.250 --> 00:09:37.159
+Alex Flinois: Yeah, so you see the new design, right? At the beginning, you do chat and video, and then there's, like, test incidents, and in general, I think we've heard and seen customers really test incidents, or want to test incidents more, but, we don't have any documentation on it, and the UI itself is a little hidden. We're gonna make that more primary, and so…
+
+71
+00:09:37.160 --> 00:09:46.809
+Alex Flinois: I think adding a page that's specifically about testing an incident would be useful, just looking at our existing capabilities and, you know, what the entry points are and how to use them, I think would be valuable.
+
+72
+00:09:48.790 --> 00:09:53.669
+Esther Kim: Is that something, you or somebody on your team can demo?
+
+73
+00:09:54.860 --> 00:09:55.690
+Esther Kim: Yeah.
+
+74
+00:09:55.690 --> 00:09:59.049
+Alex Flinois: I mean, yeah, it's pretty easy to show.
+
+75
+00:09:59.050 --> 00:09:59.589
+Esther Kim: Oh, okay.
+
+76
+00:09:59.590 --> 00:10:01.189
+Alex Flinois: I could show you.
+
+77
+00:10:01.510 --> 00:10:02.510
+Alex Flinois: No.
+
+78
+00:10:02.930 --> 00:10:09.339
+Alex Flinois: So, I mean, basically, a test incident is really just an incident, it just doesn't affect your data.
+
+79
+00:10:09.770 --> 00:10:14.190
+Alex Flinois: So, if I go to an incident, you have to choose, like, a…
+
+80
+00:10:15.340 --> 00:10:17.819
+Alex Flinois: Like, here, drop down, declare a test incident.
+
+81
+00:10:18.640 --> 00:10:22.810
+Alex Flinois: And so now I'm in the test instance, and… should I call it Esther Test.
+
+82
+00:10:22.990 --> 00:10:27.809
+Alex Flinois: And then you can decide the type. I'm gonna choose my thing for…
+
+83
+00:10:29.310 --> 00:10:32.050
+Alex Flinois: Oh, am I in prod? I'm in prod, I'm not doing that.
+
+84
+00:10:32.500 --> 00:10:35.550
+Alex Flinois: No, I'm not impressed. Where is my…
+
+85
+00:10:36.740 --> 00:10:38.989
+Alex Flinois: Or maybe I didn't enable test instance.
+
+86
+00:10:45.170 --> 00:11:00.329
+Alex Flinois: Yeah, I guess it's a setting you have to turn on, because it's clearly not a thing here. Okay, so I put the type of incident, I can do whatever it is, I can put all the information, and then here, you can see I can decide if it's, like, gonna execute the integrations, or notification rules, or analytics, or anything.
+
+87
+00:11:00.330 --> 00:11:08.010
+Alex Flinois: I can decide if it's private or not, and then I can just hit the clear incident, and then it'll just say it's a test incident, but then I can just kind of play with it.
+
+88
+00:11:08.010 --> 00:11:13.379
+Alex Flinois: And change everything, and kind of see how the experience will change and work.
+
+89
+00:11:14.650 --> 00:11:26.160
+Alex Flinois: And so, I mean, that's basically it. Like, it's there for you to test things without breaking things, or triggering, integrations, or bothering people if you don't want to, and see how it works.
+
+90
+00:11:26.640 --> 00:11:28.589
+Alex Flinois: So, yeah, I mean, that's basically it.
+
+91
+00:11:29.950 --> 00:11:33.650
+Esther Kim: For the docs, this is just to help customers
+
+92
+00:11:34.080 --> 00:11:37.649
+Esther Kim: Understand how it works, or, like, bring it to light that they can do this.
+
+93
+00:11:38.190 --> 00:11:52.129
+Alex Flinois: Yeah, or also give them an idea, and this is where I think Chris might be useful, because the feature predates me, of, like, how people should use it. I've heard customers want to use it, but sometimes, like, you know, they run into gaps.
+
+94
+00:11:52.130 --> 00:12:00.490
+Alex Flinois: And so, I think just, yeah, both the best practice, like a guide, I guess, which is what you've done, and of, like, the configuration.
+
+95
+00:12:00.490 --> 00:12:09.489
+Alex Flinois: I'm looking now, but I'm assuming that there is something in the settings that allows me to enable testing settings. I'm just looking at mine.
+
+96
+00:12:10.320 --> 00:12:13.390
+Alex Flinois: Okay, I'll just do it with you, because we're recording.
+
+97
+00:12:13.810 --> 00:12:19.150
+Alex Flinois: So I'm just in my incident type here, test insidency, there's a setting.
+
+98
+00:12:19.520 --> 00:12:20.190
+Esther Kim: Got it.
+
+99
+00:12:20.190 --> 00:12:22.060
+Alex Flinois: Now I can test this type of incident.
+
+100
+00:12:22.540 --> 00:12:24.110
+Alex Flinois: Yeah.
+
+101
+00:12:24.400 --> 00:12:27.120
+Alex Flinois: So I think, that would be…
+
+102
+00:12:27.790 --> 00:12:31.320
+Alex Flinois: Yeah, let me see the organization…
+
+103
+00:12:31.990 --> 00:12:34.180
+Alex Flinois: What's the name of the dock that you were looking at?
+
+104
+00:12:35.910 --> 00:12:36.760
+Alex Flinois: Citizens.
+
+105
+00:12:36.760 --> 00:12:38.460
+Esther Kim: Which one?
+
+106
+00:12:39.640 --> 00:12:40.439
+Alex Flinois: They're the one that you're sharing.
+
+107
+00:12:40.440 --> 00:12:46.409
+Esther Kim: Oh, I'm sorry, it's called Technical Documentation Reorg Plan. I can send it to you.
+
+108
+00:12:46.410 --> 00:12:47.959
+Alex Flinois: No worries, Darry, I'll find it.
+
+109
+00:12:49.100 --> 00:12:50.599
+Esther Kim: If you got it, yeah.
+
+110
+00:12:50.740 --> 00:12:54.679
+Alex Flinois: Okay, cool, yeah, just so we don't have to, like, keep changing.
+
+111
+00:12:55.260 --> 00:13:07.809
+Alex Flinois: Yeah, so test an incident… we put it… I guess it's under setup, right? Yeah, because I do think it's a setup feature. You're trying… you add a new feature, and you test it, and you want to see how it works. I think that's how people would use it?
+
+112
+00:13:08.330 --> 00:13:18.029
+Alex Flinois: So yeah, so this is, like, the live incident view, Claire described, whatever, whatever, how to use AI during it, which is great, getting started, configurations…
+
+113
+00:13:18.130 --> 00:13:20.149
+Alex Flinois: And post-incident, yeah.
+
+114
+00:13:21.190 --> 00:13:36.150
+Alex Flinois: Cool. Yeah, I think one thing that we might want to do… let's set this up. I think we might want, like, an AI piece. I think people had a lot of questions about, like, where do I set up AI? So maybe in the UI, we need to make that better. Maybe there's an AI entry, but, like, the AI stuff is, like, kind of in different places.
+
+115
+00:13:36.330 --> 00:13:41.829
+Alex Flinois: But yeah, I think for now, this looks pretty good. Do you have any other questions on it?
+
+116
+00:13:43.190 --> 00:13:50.379
+Esther Kim: Oh, let me see… You had a comment about adding on call-to integrations?
+
+117
+00:13:50.970 --> 00:13:55.569
+Alex Flinois: Yeah, so one of the… oh yeah, I think you asked me about this.
+
+118
+00:13:55.820 --> 00:14:00.350
+Alex Flinois: I've actually never done it myself, but I've seen it, and so in…
+
+119
+00:14:07.090 --> 00:14:08.459
+Alex Flinois: We're on call here
+
+120
+00:14:11.960 --> 00:14:17.989
+Alex Flinois: So I guess this is more of a setting than, like, an integration, honestly. Should probably move it somewhere else, now that I see it.
+
+121
+00:14:18.370 --> 00:14:28.679
+Alex Flinois: And so if I do this, when you basically page from the incident, or escalate from a page, then it will be connected to an incident, and so then it would auto-resolve it.
+
+122
+00:14:29.320 --> 00:14:35.029
+Alex Flinois: But that feels like it should be… not here. Integrations, to me, is third-party integrations.
+
+123
+00:14:35.300 --> 00:14:38.870
+Alex Flinois: And then this is, status pages, so you can create…
+
+124
+00:14:39.170 --> 00:14:45.160
+Alex Flinois: status page updates from incidents, so I think these two should be somewhere else, in my opinion.
+
+125
+00:14:45.870 --> 00:14:47.230
+Alex Flinois: Yeah, that's what I meant.
+
+126
+00:14:56.330 --> 00:14:58.469
+Esther Kim: Okay, I think,
+
+127
+00:14:58.570 --> 00:15:04.969
+Esther Kim: I think we covered everything. For the… so for now, for the remediation ask, we're just gonna table that.
+
+128
+00:15:05.160 --> 00:15:07.890
+Esther Kim: Until the reorg happens.
+
+129
+00:15:07.890 --> 00:15:10.200
+Alex Flinois: I think what you can probably do…
+
+130
+00:15:10.950 --> 00:15:16.460
+Alex Flinois: Is we can maybe, in the index of post-incidence, or maybe… let me see…
+
+131
+00:15:17.560 --> 00:15:20.579
+Alex Flinois: Where did I suggest we put it? Or maybe in here?
+
+132
+00:15:21.030 --> 00:15:26.189
+Alex Flinois: Describe, response, investigate. Maybe there's… it could be an entry here around, like.
+
+133
+00:15:26.260 --> 00:15:44.139
+Alex Flinois: things that you can do, because I think you can send a notification, will probably be a notification. There's… you can page people, which is maybe related to response team, and the thing that we don't have is that you can trigger a workflow, and so maybe there's an entry here that is related to that. We could maybe call it remediation,
+
+134
+00:15:45.390 --> 00:15:47.299
+Alex Flinois: Or maybe we just call it automation.
+
+135
+00:15:48.620 --> 00:15:54.800
+Esther Kim: Do you want me to add a new section there versus adding it into automations and notifications?
+
+136
+00:15:55.230 --> 00:15:58.850
+Alex Flinois: Yeah, I think we can maybe, like, add it here,
+
+137
+00:15:59.170 --> 00:16:06.859
+Alex Flinois: I wonder if what we want to do is just… because to me, like, the job to be done is the same if I am paging
+
+138
+00:16:06.930 --> 00:16:24.439
+Alex Flinois: if I am, notifying, like, these three things, the manual version is kind of the same. Like, here's like, okay, I need somebody else, let me page them. Okay, I need to notify Esther, let me do it. And then this is, like, okay, I want to, like, remediate an issue, there's a button here to do it.
+
+139
+00:16:24.640 --> 00:16:32.640
+Alex Flinois: And so, maybe we put these three sections together, yo.
+
+140
+00:16:34.910 --> 00:16:36.480
+Alex Flinois: Yeah, because you have…
+
+141
+00:16:38.200 --> 00:16:44.230
+Alex Flinois: The other thing we could do is, like, put the paging response team and notifications in one section.
+
+142
+00:16:44.410 --> 00:16:48.809
+Alex Flinois: And put automation in another one, because the automation is usually trying to…
+
+143
+00:16:49.030 --> 00:16:54.349
+Alex Flinois: I mean, we're assuming it's a remediation, I guess, but it could be more than that.
+
+144
+00:16:54.820 --> 00:16:58.760
+Alex Flinois: Kind of thinking out loud right now, but… .
+
+145
+00:17:01.310 --> 00:17:05.060
+Esther Kim: Basically, you want whoever's coming to the docs to know
+
+146
+00:17:05.500 --> 00:17:14.619
+Esther Kim: This is how you work within an incident, and then, like, the steps to do it, to notify the people, to investigate, and then describe it.
+
+147
+00:17:15.040 --> 00:17:27.380
+Alex Flinois: Yeah. As I'm thinking about it, I'm just gonna put a suggestion, is I think, we want, like, a remediation MD, or maybe it's not a page itself, but I think we want to align, like, triggering a workflow
+
+148
+00:17:28.040 --> 00:17:39.980
+Alex Flinois: manually, here, because this is a story we want to tell, and then I wonder if, like, these things could be… also include…
+
+149
+00:17:41.020 --> 00:17:44.739
+Alex Flinois: Paging some, a teen or person?
+
+150
+00:17:46.060 --> 00:17:59.429
+Alex Flinois: so it's like, I want to notify… Include… Or wake up.
+
+151
+00:17:59.690 --> 00:18:01.839
+Alex Flinois: Just paging, someone.
+
+152
+00:18:02.640 --> 00:18:05.759
+Alex Flinois: That's the… that's the job to be done for these things.
+
+153
+00:18:05.890 --> 00:18:09.149
+Alex Flinois: Yeah, that's my thought.
+
+154
+00:18:09.800 --> 00:18:10.500
+Esther Kim: Okay.
+
+155
+00:18:14.490 --> 00:18:16.719
+Esther Kim: Cool. Yep, that makes sense.
+
+156
+00:18:17.240 --> 00:18:21.930
+Alex Flinois: While we're… is there anything else on this that you need from me? Are you good? Cool.
+
+157
+00:18:21.930 --> 00:18:22.320
+Esther Kim: Good.
+
+158
+00:18:22.320 --> 00:18:31.319
+Alex Flinois: There's one thing that, has come up a few times that I want to demo to you, and I do think that we want to document it, which is specifically on the…
+
+159
+00:18:32.660 --> 00:18:41.970
+Alex Flinois: post-mortem, or it, sorry, the follow-ups. So specifically, I'll literally just paste the, what this person asked me.
+
+160
+00:18:43.050 --> 00:18:48.450
+Alex Flinois: And so you can take a look, so I… It's the thing, okay.
+
+161
+00:18:49.590 --> 00:18:51.330
+Alex Flinois: We're gonna look at this Slack together.
+
+162
+00:18:57.100 --> 00:19:01.120
+Alex Flinois: Cool. Did not load, okay. Open in the browser.
+
+163
+00:19:02.270 --> 00:19:20.069
+Alex Flinois: Okay, so this person, is a sales engineer, and he's saying, hey Alex, does incident management do bi-directional syncing, or is it just case management? What's the best way to do it? And so I gave him this answer, which I can forward you, but basically here, there's, like, multiple things he's asking about. He's asking about the Jira integration.
+
+164
+00:19:20.070 --> 00:19:27.370
+Alex Flinois: Which, in our documentation, is, like, extremely light, I was checking. And then, he's also asking about,
+
+165
+00:19:27.460 --> 00:19:28.700
+Alex Flinois: you know.
+
+166
+00:19:28.860 --> 00:19:41.619
+Alex Flinois: follow-ups, or the incident level, and it's something that keeps coming up, and he talks about by singing him. So, specifically, in incident management, there's two different ways to think about it. One is at the incident level.
+
+167
+00:19:41.750 --> 00:19:56.520
+Alex Flinois: Do I want to push that to Jira, and does that want to be u-directional or bi-directional, right? Today, in the integration section, you can set up at the instant level if it's unidirectional.
+
+168
+00:19:56.720 --> 00:19:59.359
+Alex Flinois: And we're trying to make that bidirectional this quarter.
+
+169
+00:19:59.570 --> 00:20:04.919
+Alex Flinois: But that's, like, not super clear. The second piece is follow-ups themselves.
+
+170
+00:20:05.050 --> 00:20:12.220
+Alex Flinois: can also be connected to Jira, and by default, if you use the,
+
+171
+00:20:12.770 --> 00:20:18.050
+Alex Flinois: If you use the settings that exist by default… let's go back to this…
+
+172
+00:20:19.650 --> 00:20:25.949
+Alex Flinois: If you're, you know, you'll just assume Jira is the right option, but this is actually only unidirectional.
+
+173
+00:20:26.100 --> 00:20:38.549
+Alex Flinois: Case management allows you to do bidirectional, but that's, like, super unclear to the customer, and that's something we're trying to improve, but I think in the short term, we can make that clear in the documentation. And so, I think the ask is…
+
+174
+00:20:38.920 --> 00:20:41.439
+Alex Flinois: Maybe threefold, which is, like…
+
+175
+00:20:41.660 --> 00:21:01.329
+Alex Flinois: is there something we could do specifically on the JIRA integration? And that section covers the fact that with Jira, you can touch things at the instant level, at the follow-up level, and then, you know, the nuances of unidirectional and bidirectional, and, like, the features that exist that don't exist. That's, like, maybe one ask. And the other one is
+
+176
+00:21:01.410 --> 00:21:10.719
+Alex Flinois: refer to this, or, like, in the follow-up section, mention the different types of templates that exist, and how case management can give you bidirectionality.
+
+177
+00:21:11.010 --> 00:21:28.890
+Alex Flinois: And then, yeah, and the incident settings may point to the integration. I'm not sure exactly how everything's gotta connect, but telling this story so a customer who wants to basically set up JIRA integration, have it, like, very clear, today, we just… the UI is not good enough, that's why bridging the gap with docs, I think, makes sense in the short term.
+
+178
+00:21:31.580 --> 00:21:33.890
+Alex Flinois: that's it, yeah.
+
+179
+00:21:35.230 --> 00:21:38.410
+Esther Kim: Yeah, if you wouldn't mind just sending that to me, I can…
+
+180
+00:21:42.270 --> 00:21:43.400
+Alex Flinois: Very cool.
+
+181
+00:21:44.230 --> 00:21:46.490
+Alex Flinois: I will review everything, so…
+
+182
+00:21:58.390 --> 00:21:59.120
+Alex Flinois: Cool.
+
+183
+00:21:59.340 --> 00:21:59.970
+Esther Kim: Yep.
+
+184
+00:22:01.930 --> 00:22:11.229
+Alex Flinois: Yeah, there's other things that the team has done, which I don't know if you were involved, but there… we added this page on instant response billing. Did you see that?
+
+185
+00:22:12.850 --> 00:22:17.960
+Esther Kim: No, but I also… Docs doesn't usually cover billing unless it's, like.
+
+186
+00:22:19.880 --> 00:22:21.839
+Alex Flinois: Yeah, I just want to make sure you're aware.
+
+187
+00:22:21.840 --> 00:22:22.510
+Esther Kim: Okay.
+
+188
+00:22:22.510 --> 00:22:31.110
+Alex Flinois: this, you can decide to not do anything about it, but, so in Instant Management, I think it's, like, connected at the end.
+
+189
+00:22:37.250 --> 00:22:54.009
+Alex Flinois: Here, it's here. Okay, so we have this page, which is an instant response, under account management, I guess, and in there it talks about, like, billing, and so I don't know if we want to make that more explicit somewhere, but it is a page that I send to sales rep and customers 5 to 6 times a week.
+
+190
+00:22:54.430 --> 00:22:56.400
+Alex Flinois: Yeah. And so…
+
+191
+00:22:57.180 --> 00:23:02.249
+Alex Flinois: Something to think about when you think about the structure of the docs, if that should be more primary or not.
+
+192
+00:23:05.330 --> 00:23:06.110
+Esther Kim: Yeah.
+
+193
+00:23:07.330 --> 00:23:08.210
+Esther Kim: Okay.
+
+194
+00:23:09.720 --> 00:23:11.380
+Esther Kim: I will take a look.
+
+195
+00:23:12.160 --> 00:23:13.000
+Alex Flinois: But…
+
+196
+00:23:13.000 --> 00:23:18.510
+Esther Kim: Yeah, but thanks… thanks for outlining all of that for me. Makes it easier.
+
+197
+00:23:18.860 --> 00:23:21.509
+Alex Flinois: 100%, yeah, thanks for, being proactive and…
+
+198
+00:23:21.690 --> 00:23:26.529
+Alex Flinois: Getting the call set up. Looking forward to keep chatting, happy to do async or more meetings as needed.
+
+199
+00:23:27.240 --> 00:23:28.970
+Esther Kim: Sounds good. Thank you, Alex.
+
+200
+00:23:28.970 --> 00:23:29.680
+Alex Flinois: Hi, Esther.
+
+201
+00:23:29.680 --> 00:23:30.300
+Esther Kim: Right.
+
