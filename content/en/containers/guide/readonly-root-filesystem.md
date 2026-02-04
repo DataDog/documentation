@@ -43,7 +43,7 @@ services:
   # Init container populating 'datadog-config' volume with config files.
   datadog-init:
     image: gcr.io/datadoghq/agent:latest
-    command: ["sh", "-c", "cp -r /etc/datadog-agent/* /opt/datadog-agent-config/"]
+    command: ["sh", "-c", "cp -R /etc/datadog-agent/* /opt/datadog-agent-config/"]
     volumes:
       - datadog-config:/opt/datadog-agent-config
 
@@ -66,15 +66,15 @@ services:
       - datadog-config:/etc/datadog-agent:rw
       - datadog-run:/opt/datadog-agent/run:rw
       - datadog-sockets:/var/run/datadog:rw
-      # (optional) The Agent will operate mostly normally without these volumes
-      - datadog-tmp:/tmp:rw
+      # (optional) The Agent will operate mostly normally without this volume
       - datadog-logs:/var/log/datadog:rw
+    tmpfs:
+      - /tmp
 
 volumes:
   datadog-config:
   datadog-run:
   datadog-sockets:
-  datadog-tmp:
   datadog-logs:
 ```
 
@@ -100,7 +100,7 @@ Create a custom Datadog Agent image with pre-defined volumes for writable direct
 ```dockerfile
 FROM gcr.io/datadoghq/agent:latest
 # Create volumes for all paths the Agent needs to write to
-VOLUME ["/etc/datadog-agent", "/opt/datadog-agent/run", "/var/run/datadog", "/tmp", "/var/log/datadog"]
+VOLUME ["/etc/datadog-agent", "/opt/datadog-agent/run", "/var/run/datadog", "/var/log/datadog"]
 # Optional: Copy a custom datadog.yaml if needed
 # ADD datadog.yaml /etc/datadog-agent/datadog.yaml
 ```
@@ -128,6 +128,8 @@ services:
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    tmpfs:
+      - /tmp
 ```
 
 **Note**: When using the `VOLUME` directive in a Dockerfile, the container runtime automatically creates anonymous volumes for those paths. This removes the need for an init container, but these volumes are ephemeral and any customizations to `datadog.yaml` or `conf.d/` need to be baked into the image or provided through environment variables.
