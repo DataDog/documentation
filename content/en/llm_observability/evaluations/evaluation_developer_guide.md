@@ -451,7 +451,6 @@ def llm_call(input_text):
     context = EvaluatorContext(
         input_data=input_text,
         output_data=completion,
-        expected_output=None,
     )
 
     # Run the evaluator
