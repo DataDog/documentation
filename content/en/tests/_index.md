@@ -5,6 +5,8 @@ aliases:
   - /continuous_integration/guides/test_configurations/
   - /continuous_integration/integrate_tests/
   - /continuous_integration/tests/
+  - /tests/repositories/
+  - /tests/search/
 further_reading:
     - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
       tag: "Release Notes"
