@@ -128,11 +128,20 @@ C++ does not support the OpenTelemetry API. Select **Datadog** from the API drop
 {% /if %}
 {% /if %}
 
-<!-- Rust, Elixir only support OpenTelemetry API -->
-{% if or(equals($prog_lang, "rust"), equals($prog_lang, "elixir")) %}
+<!-- Rust only supports OpenTelemetry API -->
+{% if equals($prog_lang, "rust") %}
 {% if equals($api_type, "dd_api") %}
 {% alert level="danger" %}
-Rust and Elixir do not support the Datadog API. Select **OpenTelemetry** from the API dropdown to see custom instrumentation documentation.
+Rust does not support the Datadog API. Select **OpenTelemetry** from the API dropdown to see Rust custom instrumentation documentation.
+{% /alert %}
+{% /if %}
+{% /if %}
+
+<!-- Elixir only supports OpenTelemetry API -->
+{% if equals($prog_lang, "elixir") %}
+{% if equals($api_type, "dd_api") %}
+{% alert level="danger" %}
+Elixir does not support the Datadog API. Select **OpenTelemetry** from the API dropdown to see Elixir custom instrumentation documentation.
 {% /alert %}
 {% /if %}
 {% /if %}
