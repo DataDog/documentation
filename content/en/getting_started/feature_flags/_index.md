@@ -20,10 +20,6 @@ further_reading:
 site_support_id: getting_started_feature_flags
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Datadog feature flags offer a powerful, integrated way to manage feature delivery, with built-in observability and seamless integration across the platform.
@@ -102,10 +98,10 @@ Go to [**Create Feature Flag**][2] in Datadog and configure the following:
 * **Distribution channels**: Which types of SDKs receive this flag's configuration (client-side, server-side, or both)
 
 <div class="alert alert-warning">
-  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs. 
+  <b>Flag keys</b>, <b>variant keys</b>, and <b>variant values</b> should be considered public when sent to client SDKs.
 </div>
 
-{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}} 
+{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}}
 
 ### Step 3: Evaluate the flag and write feature code
 
