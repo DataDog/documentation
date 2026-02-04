@@ -138,7 +138,7 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 
 ### LLMJudge
 
-The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI and Anthropic providers with structured output formats.
+The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI, Anthropic, and custom LLM clients with structured output formats.
 
 **Supported output types:**
 
@@ -207,6 +207,28 @@ judge = LLMJudge(
         categories=["positive", "neutral", "negative"],
         reasoning=True,
         pass_values=["positive", "neutral"],
+    ),
+)
+{{< /code-block >}}
+
+**Example: Custom LLM client**
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanOutput
+
+def my_llm_client(provider, messages, json_schema, model, model_params):
+    # Call your custom LLM implementation
+    response = call_my_llm(messages, model)
+    return response
+
+judge = LLMJudge(
+    client=my_llm_client,
+    model="my-custom-model",
+    user_prompt="Is this response accurate? {{output_data}}",
+    structured_output=BooleanOutput(
+        description="Accuracy check",
+        reasoning=True,
+        pass_when=True,
     ),
 )
 {{< /code-block >}}
