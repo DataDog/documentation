@@ -24,15 +24,6 @@ The profiler automatically selects the appropriate engine based on your environm
 
 ### Linux (Datadog Profiler)
 
-On Linux, the Datadog profiler engine provides the full set of profile types.
-
-| JDK Version | CPU | Wallclock | Allocation | Live Heap |
-|-------------|:---:|:---------:|:----------:|:---------:|
-| OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ | ✓ | ✓ | ✓ | ✓ (21.0.3+) |
-| Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+ | ✓ | ✓ | ✓ | ✓ (21.0.3+) |
-| OpenJ9 8u372+, 11.0.18+, 17.0.6+ | ✓ | ✓ | ✓ | ✓ |
-| Azul Platform Prime 23.05.0.0+ | ✓ | ✓ | ✓ | ✓ |
-
 <div class="alert alert-info">
 <strong>Version requirements</strong>: The Datadog Profiler requires specific JDK versions due to a fix for a <a href="https://bugs.openjdk.org/browse/JDK-8283849">known issue</a> in the <code>AsyncGetCallTrace</code> JVM API. This fix was backported to 8u352, 11.0.17, and 17.0.5.
 </div>
@@ -40,15 +31,6 @@ On Linux, the Datadog profiler engine provides the full set of profile types.
 **Live heap profiling** requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+ due to JVMTI API stability requirements.
 
 ### Windows and macOS (JFR)
-
-On Windows and macOS, the profiler uses Java Flight Recorder (JFR).
-
-| JDK Version | CPU | Allocation |
-|-------------|:---:|:----------:|
-| OpenJDK 8u262+, 11+ | ✓ | ✓ (JDK 16+ by default) |
-| Oracle JDK 11+ | ✓ | ✓ |
-| Azul Zulu 8u212+, 11+ | ✓ | ✓ |
-| GraalVM 17+ (JIT mode) | ✓ | ✓ |
 
 <div class="alert alert-warning">
 Oracle JDK 11+ may require a commercial license from Oracle to enable JFR. Contact your Oracle representative to confirm whether JFR is included in your license.

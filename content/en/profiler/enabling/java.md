@@ -31,6 +31,16 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Wallclock (latency)
 - Allocations
 - Live heap (memory leak detection)
+- Exception profiling
+
+**Note**: On Linux, the Datadog profiler engine (ddprof) provides the full set of profile types.
+
+| JDK Version | CPU | Wallclock | Allocation | Live Heap |
+|-------------|:---:|:---------:|:----------:|:---------:|
+| OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+ | ✓ | ✓ | ✓ | ✓ |
+| Oracle JDK 8u351+, 11.0.17+, 17.0.5+, 21+ | ✓ | ✓ | ✓ | ✓ |
+| OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ | ✓ | ✓ | ✓ | ✓ |
+| Azul Platform Prime 23.05.0.0+ | ✓ | ✓ | ✓ | ✓ |
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -38,6 +48,16 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 **Available profile types**:
 - CPU
 - Allocations
+
+**Minimum JDK Versions**:
+
+| JDK Distribution | Minimum Version | Notes |
+|------------------|-----------------|-------|
+| OpenJDK | 8u282+, 11.0.17+, 17.0.5+, 21.0.3+ | Includes builds from Amazon Corretto, Azul Zulu, Eclipse Temurin, BellSoft Liberica, and other OpenJDK-based distributions |
+| Oracle JDK | 11.0.17+, 17.0.5+, 21.0.3+ | JFR may require commercial license. Oracle JDK 8u40+ supported with limited features (CPU profiling only) |
+| Azul Zulu | 8u212+, 11.0.17+, 17.0.5+, 21.0.3+ | |
+| OpenJ9 JDK | 8u372+, 11.0.18+, 17.0.6+ | Used in Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime |
+| GraalVM | 17.0.11+, 21.0.3+ | JIT mode only; native-image (AOT) not supported |
 
 {{% /tab %}}
 {{< /tabs >}}
