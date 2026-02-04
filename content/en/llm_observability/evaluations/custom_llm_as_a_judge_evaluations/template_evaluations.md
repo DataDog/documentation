@@ -8,8 +8,6 @@ further_reading:
 - link: "/llm_observability/setup"
   tag: "Documentation"
   text: "Learn how to set up LLM Observability"
-aliases:
-    - /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
 ---
 
 Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Prompt Injection][14], [Sentiment][12], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
