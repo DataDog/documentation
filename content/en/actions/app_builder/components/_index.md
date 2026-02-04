@@ -77,7 +77,7 @@ Reaction<br>
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
 
 State Function
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
@@ -221,8 +221,10 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action<br>
 
 
-State Function
-: fetch<br>
+State Functions
+: callback<br>
+**Example**: See [events][9].
+: setIsChecked<br>
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
@@ -344,6 +346,12 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
+State Functions
+: callback<br>
+**Example**: See [events][9].
+: setValue<br>
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
+
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -384,9 +392,11 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file
 
-State Function
-: fetch<br>
+State Functions
+: callback<br>
 **Example**: See [events][9].
+: setValue<br>
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
 
 For more information on events, see [Events][1].
 
@@ -525,7 +535,9 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
+State Functions
+: callback<br>
+**Example**: See [events][9].
 : setValue<br>
 **Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
 
@@ -660,9 +672,11 @@ Event
 Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
-State Function
-: fetch<br>
+State Functions
+: callback<br>
 **Example**: See [events][9].
+: setValue<br>
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
 
 For more information on events, see [Events][1].
 
@@ -701,7 +715,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setIsOpen<br>
 **Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
@@ -767,7 +781,7 @@ Reaction
 : **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setValue<br>
 **Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
@@ -839,7 +853,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setValue<br>
 **Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
@@ -941,7 +955,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setValue<br>
 **Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
@@ -1022,7 +1036,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, open URL, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setValue<br>
 **Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
@@ -1065,6 +1079,12 @@ Event
 
 Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+State Functions
+: callback<br>
+**Example**: See [events][9].
+: setIsOpen<br>
+**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.
 
 For more information on events, see [Events][1].
 
@@ -1129,7 +1149,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setTabIndex<br>
 **Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
@@ -1311,7 +1331,7 @@ Reaction
 : **Values**: download file, open modal, close modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action, custom
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setSelectedRow<br>
 **Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
@@ -1460,7 +1480,7 @@ Reaction
 : **Values**: : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch<br>
+: callback<br>
 **Example**: See [events][9].
 : setValue<br>
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
