@@ -10742,6 +10742,40 @@ components:
       type: string
       x-enum-varnames:
       - CLOUD_CONFIGURATION
+    CloudTrailQueryAttributes:
+      description: CloudTrail query attributes.
+      properties:
+        cloudtrail_query:
+          description: The CloudTrail query string.
+          example: dummy
+          type: string
+      required:
+      - cloudtrail_query
+      type: object
+    CloudTrailQueryData:
+      description: CloudTrail query data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CloudTrailQueryAttributes'
+        id:
+          description: The resource identifier.
+          example: '2'
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceContextType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    CloudTrailQueryResponse:
+      description: Response for CloudTrail query.
+      properties:
+        data:
+          $ref: '#/components/schemas/CloudTrailQueryData'
+      required:
+      - data
+      type: object
     CloudWorkloadSecurityAgentPoliciesListResponse:
       description: Response object that includes a list of Agent policies
       properties:
@@ -47567,6 +47601,40 @@ components:
         data:
           $ref: '#/components/schemas/AppKeyRegistrationData'
       type: object
+    RelatedCloudLogsAttributes:
+      description: Related cloud logs attributes.
+      properties:
+        logs_query:
+          description: The logs query string.
+          example: dummy
+          type: string
+      required:
+      - logs_query
+      type: object
+    RelatedCloudLogsData:
+      description: Related cloud logs data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RelatedCloudLogsAttributes'
+        id:
+          description: The resource identifier.
+          example: '2'
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceContextType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    RelatedCloudLogsResponse:
+      description: Response for related cloud logs query.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelatedCloudLogsData'
+      required:
+      - data
+      type: object
     RelationAttributes:
       description: Relation attributes.
       properties:
@@ -48446,6 +48514,14 @@ components:
         value:
           type: string
       type: object
+    ResourceContextType:
+      description: The resource context type.
+      enum:
+      - resource_context
+      example: resource_context
+      type: string
+      x-enum-varnames:
+      - RESOURCE_CONTEXT
     ResourceFilterAttributes:
       description: Attributes of a resource filter.
       example:
@@ -73651,6 +73727,130 @@ paths:
         permissions:
         - security_monitoring_rules_read
         - security_monitoring_rules_write
+  /api/v2/cloud_security_management/resource_context/cloudtrail_query:
+    get:
+      description: Get the CloudTrail query string for a given resource. This endpoint
+        helps retrieve CloudTrail logs related to a specific cloud resource.
+      operationId: GetCloudTrailQuery
+      parameters:
+      - description: The resource identifier.
+        in: query
+        name: resource_id
+        required: true
+        schema:
+          example: '2'
+          type: string
+      - description: The resource type.
+        in: query
+        name: resource_type
+        required: true
+        schema:
+          example: aws_ec2_instance
+          type: string
+      - description: The external identifier for the resource.
+        in: query
+        name: external_id
+        required: false
+        schema:
+          type: string
+      - description: The resource name.
+        in: query
+        name: resource_name
+        required: false
+        schema:
+          type: string
+      - description: The resource display name.
+        in: query
+        name: resource_display_name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudTrailQueryResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get CloudTrail query for a resource
+      tags:
+      - Cloud Security Management
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cloud_security_management/resource_context/related_cloud_logs:
+    get:
+      description: Get the cloud logs query string for a given resource. This endpoint
+        helps retrieve logs related to a specific cloud resource for security analysis.
+      operationId: GetRelatedCloudLogs
+      parameters:
+      - description: The resource identifier.
+        in: query
+        name: resource_id
+        required: true
+        schema:
+          example: '2'
+          type: string
+      - description: The resource type.
+        in: query
+        name: resource_type
+        required: true
+        schema:
+          example: aws_ec2_instance
+          type: string
+      - description: The external identifier for the resource.
+        in: query
+        name: external_id
+        required: false
+        schema:
+          type: string
+      - description: The resource name.
+        in: query
+        name: resource_name
+        required: false
+        schema:
+          type: string
+      - description: The resource display name.
+        in: query
+        name: resource_display_name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RelatedCloudLogsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get related cloud logs for a resource
+      tags:
+      - Cloud Security Management
+      x-menu-order: 2
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/cloud_security_management/resource_filters:
     get:
       description: List resource filters.
@@ -103862,6 +104062,10 @@ tags:
     and [DNS Monitoring page](https://docs.datadoghq.com/network_monitoring/dns/)
     for more information.
   name: Cloud Network Monitoring
+- description: Manage and query cloud security resources and their context. These
+    endpoints provide access to security-related information about cloud resources,
+    including CloudTrail logs and related cloud logs for security analysis and investigation.
+  name: Cloud Security Management
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
