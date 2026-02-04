@@ -40,7 +40,7 @@ further_reading:
   Explore and register for Foundation Enablement sessions. Learn how Datadog Incident Management enables DevOps teams and SREs to more effectively manage their incident response workflows from start to finish, saving time and reducing frustration when it matters most.
 {{< /learning-center-callout >}}
 
-Datadog Incident Management helps your team members identify, mitigate, and analyze disruptions and threats to your organization's services. With Incident Management, you can design an automation-enhanced response process that helps your teams assemble around a shared framework and toolkit. You can also use incident analytics to evaluate the effectiveness of your incident response process. 
+Datadog Incident Management helps your team members identify, mitigate, and analyze disruptions and threats to your organization's services. With Incident Management, you can design an automation-enhanced response process that helps your teams assemble around a shared framework and toolkit. You can also use incident analytics to evaluate the effectiveness of your incident response process.
 
 Incidents live in Datadog alongside your metrics, traces, and logs. Your teams can declare incidents from monitor alerts, security signals, events, cases, and more. You can also configure monitors to [declare incidents automatically][30].
 
@@ -53,6 +53,10 @@ Incident Management requires no installation. Get started by taking a Learning C
     {{< nextlink href="https://docs.datadoghq.com/getting_started/incident_management/" >}}Guided walkthrough of an Incident workflow{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/declare" >}}Declare an incident{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Billing
+
+Incident Management is a seat-based SKU. To learn more about how Incident Management is billed and how to manage seats within Datadog, visit our [pricing page][31] and the [Incident Response billing documentation][32].
 
 ## View your incidents
 
@@ -106,10 +110,6 @@ Incident Management integrates with third-party applications, including:
 - [Slack][11] to create channels for incidents.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Zoom][24] to launch video calls for incidents.
-
-## Billing
-
-Incident Management is a seat-based SKU. To learn more about how Incident Management is billed and how to manage seats within Datadog, visit our [pricing page][31] and the [Incident Response billing documentation][32].
 
 ## Further Reading
 

@@ -2,6 +2,7 @@
 title: Describe an Incident
 aliases:
 - /service_management/incident_management/describe/
+- /incident_response/incident_management/describe
 further_reading:
 - link: "/incident_response/incident_management/incident_settings"
   tag: "Documentation"
