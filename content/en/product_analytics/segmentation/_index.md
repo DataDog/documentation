@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Segmenting helps you focus on specific user groups based on characteristics or behaviors. This makes it easier to uncover insights, identify trends, and make data-driven decisions about your product.
+Segmenting helps you focus on specific user groups based on characteristics or behaviors. This helps you uncover insights, identify trends, and make data-driven decisions about your product.
 
 For example, you can segment users by purchase amount, by activity within a specific country, by trial status, or by users who started a trial and later converted to paying customers.
 
@@ -37,7 +37,7 @@ To create a segment using Product Analytics data:
 
 <div class="alert alert-info"> You can also define a segment that includes both conditions.</div>
 
-1. Add **filters** to focus on specific users, like those in a particular country or who signed up in the last 30 days.
+3. Add **filters** to focus on specific users, like those in a particular country or who signed up in the last 30 days.
 
    In the following image, the segment is filtered to all users who were on the `/cart` page and then clicked the checkout button (and did so from Brazil) within the same session in the past week:
 
@@ -72,7 +72,7 @@ To create a segment using an uploaded list of users from your own file:
 
 1. Select **CSV File** on the **[Create a new segment](https://app.datadoghq.com/product-analytics/segments/create)** page.
 
-1. Click the **Browse files** element to upload your CSV file.
+2. Click **Browse files** to upload your CSV file.
 
 The file needs a column containing either user IDs or user emails so it can be mapped with the `usr.id` or `usr.email` attributes in the Product Analytics platform.
 
@@ -85,7 +85,7 @@ The following example maps the Product Analytics attribute `@usr.id` to the colu
 ## Use Segments across Product Analytics
 
 ### In Pathways
-Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the path taken by the "Premium Shopist Customers" segment navigating your product.
+Filter the Pathways visualization to focus on a specific segment and see how those users navigate your product. The following example shows the path taken by the "Premium Shopist Customers" segment.
 
 {{< img src="product_analytics/segmentation/segmentation-pathways-1.png" alt="Filter down the Pathways visualization to reflect the journey taken by the Premium Shopist Customers segment.">}}
 
