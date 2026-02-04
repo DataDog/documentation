@@ -133,12 +133,12 @@ Borderless
 
 ### Appearance
 
-Left Icon<br>
-: Determines the icon displayed to the left of the callout's Value and Unit.
+Left Icon
+: Determines the icon displayed to the left of the callout's Value and Unit.<br>
 **Example values**: bell, download, folder
 
-Direction<br>
-: Determines the direction of the arrow displayed to the right of the callout's Value and Unit.
+Direction
+: Determines the direction of the arrow displayed to the right of the callout's Value and Unit.<br>
 **Provided values**: up, down, none
 
 Is Loading
@@ -297,7 +297,7 @@ Is Visible
 **Provided values**: on, off
 
 Show Borders 
-: Determines whether the chart displays borders on its edges. 
+: Determines whether the chart displays borders on its edges.<br> 
 **Provided values**: on, off
 
 ### Inspect data
@@ -350,7 +350,7 @@ State Functions
 : callback<br>
 **Example**: See [events][9].
 : setValue<br>
-**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
+**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
@@ -396,7 +396,7 @@ State Functions
 : callback<br>
 **Example**: See [events][9].
 : setValue<br>
-**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
+**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
@@ -657,7 +657,7 @@ Is Read Only
 **Provided values**: on, off
 
 Default View Mode
-: Determines whether the JSON data is displayed as raw text or as a graphical interface.
+: Determines whether the JSON data is displayed as raw text or as a graphical interface.<br>
 **Provided values**: raw, GUI 
 
 Is Visible
@@ -676,7 +676,7 @@ State Functions
 : callback<br>
 **Example**: See [events][9].
 : setValue<br>
-**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
+**Example**: See [events][9].
 
 For more information on events, see [Events][1].
 
