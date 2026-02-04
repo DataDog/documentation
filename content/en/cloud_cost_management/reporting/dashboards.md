@@ -50,7 +50,7 @@ You can add cost visualizations to your dashboards using several methods:
 
 The cost widget appears on your dashboard and updates automatically based on your query parameters.
 
-{{< img src="cloud_cost/reporting/dashboards/export-from-cost-explorer.png" alt="Cost Explorer interface showing the More menu with Export to Dashboard option highlighted" style="width:100%;" >}}
+{{< img src="cloud_cost/reporting/dashboards/export-from-cost-explorer.png" alt="Cost Explorer interface showing the More menu with Export to Dashboard option highlighted" style="width:80%;" >}}
 
 ### Export from Cost Reports
 
@@ -60,7 +60,7 @@ The cost widget appears on your dashboard and updates automatically based on you
 4. Choose an existing dashboard or create one.
 5. Customize the widget title and settings.
 
-{{< img src="cloud_cost/reporting/dashboards/export-from-cost-report.png" alt="Cost Reports page showing the More menu with Export to Dashboard option highlighted" style="width:100%;" >}}
+{{< img src="cloud_cost/reporting/dashboards/export-from-cost-report.png" alt="Cost Reports page showing the More menu with Export to Dashboard option highlighted" style="width:80%;" >}}
 
 ### Create a cost widget directly on a dashboard
 
@@ -70,10 +70,10 @@ The cost widget appears on your dashboard and updates automatically based on you
    - **Cost Summary**: Visualize cost trends over time with customizable filters and groupings
    - **Cost Budget**: Track spending against budget targets and forecast future costs
    - **Cloud Cost**: Create custom cost queries with advanced filtering options
+
+   {{< img src="cloud_cost/reporting/dashboards/create-cost-widget-from-dashboard.png" alt="Dashboard widget tray displaying Cost Summary, Cost Budget, and Cloud Cost widget options" style="width:100%;" >}}
 4. Configure your cost query, filters, and visualization options.
 5. Save the widget to your dashboard.
-
-{{< img src="cloud_cost/reporting/dashboards/create-cost-widget-from-dashboard.png" alt="Dashboard widget tray displaying Cost Summary, Cost Budget, and Cloud Cost widget options" style="width:100%;" >}}
 
 ## Showback and chargeback use cases
 
