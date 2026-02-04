@@ -115,6 +115,12 @@
     "request_description": "",
     "request_schema_description": "Request to insert multiple items into a datastore in a single operation."
   },
+  "CreateCustomAgentConversation": {
+    "description": "Initiates or continues a conversation with a custom agent. Supports streaming responses.",
+    "summary": "Create a custom agent conversation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListAppKeyRegistrations": {
     "description": "List App Key Registrations",
     "summary": "List App Key Registrations"
@@ -3980,6 +3986,42 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "CreateDataTransformation": {
+    "description": "Generates data transformation code (JavaScript or Python) based on user prompt and context.",
+    "summary": "Generate data transformation code",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateDataTransformationDescription": {
+    "description": "Generates a summary and detailed description for data transformation code.",
+    "summary": "Generate data transformation description",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateWorkflowDescription": {
+    "description": "Generates a description and summary for a workflow based on its specification.",
+    "summary": "Generate workflow description",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreatePickAction": {
+    "description": "Finds similar actions based on a user prompt using vector search.",
+    "summary": "Pick relevant actions",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreatePickRemediationFromInvestigation": {
+    "description": "Generates keywords from an investigation and finds relevant remediation actions.",
+    "summary": "Pick remediation actions from investigation",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "CreateWorkflowScaffoldAgenticStream": {
+    "description": "Generates or updates a workflow scaffold using agentic streaming based on user prompts.",
+    "summary": "Generate workflow scaffold with agentic stream",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "CreateWorkflow": {
     "description": "Create a new workflow, returning the workflow ID. This API requires a [registered application key](https://docs.datadoghq.com/api/latest/action-connection/#register-a-new-app-key). Alternatively, you can configure these permissions [in the UI](https://docs.datadoghq.com/account_management/api-app-keys/#actions-api-access).",

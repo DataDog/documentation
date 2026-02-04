@@ -13269,3 +13269,94 @@ menu:
           - CreateWorkflow
         unstable: []
         order: 2
+    - name: Generate workflow scaffold with agentic stream
+      url: '#generate-workflow-scaffold-with-agentic-stream'
+      identifier: workflow-automation-generate-workflow-scaffold-with-agentic-stream
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowScaffoldAgenticStream
+        unstable:
+          - v2
+        order: 15
+    - name: Pick remediation actions from investigation
+      url: '#pick-remediation-actions-from-investigation'
+      identifier: workflow-automation-pick-remediation-actions-from-investigation
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePickRemediationFromInvestigation
+        unstable:
+          - v2
+        order: 14
+    - name: Pick relevant actions
+      url: '#pick-relevant-actions'
+      identifier: workflow-automation-pick-relevant-actions
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePickAction
+        unstable:
+          - v2
+        order: 13
+    - name: Generate workflow description
+      url: '#generate-workflow-description'
+      identifier: workflow-automation-generate-workflow-description
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateWorkflowDescription
+        unstable:
+          - v2
+        order: 12
+    - name: Generate data transformation description
+      url: '#generate-data-transformation-description'
+      identifier: workflow-automation-generate-data-transformation-description
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataTransformationDescription
+        unstable:
+          - v2
+        order: 11
+    - name: Generate data transformation code
+      url: '#generate-data-transformation-code'
+      identifier: workflow-automation-generate-data-transformation-code
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDataTransformation
+        unstable:
+          - v2
+        order: 10
+    - name: Create a custom agent conversation
+      url: '#create-a-custom-agent-conversation'
+      identifier: workflow-automation-create-a-custom-agent-conversation
+      parent: workflow-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateCustomAgentConversation
+        unstable:
+          - v2
+        order: 9
