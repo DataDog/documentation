@@ -57,7 +57,7 @@ To ensure no AI Guard evaluations are dropped, create a custom [retention filter
 ### Limit access to AI Guard spans {#limit-access}
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-Data Access Controls is in Limited Availability. To enroll, <a href="https://help.datadoghq.com/">contact Datadog support</a>.
+Data Access Controls is in Limited Availability. To enroll, <a href="/help">contact Datadog support</a>.
 {{< /callout >}}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][7]. Follow the instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
@@ -579,51 +579,90 @@ Follow the instructions to create a new [metric monitor][11].
 
 ## AI Guard security signals {#security-signals}
 
-AI Guard security signals provide visibility into threats and attacks detected by AI Guard in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][14] and integrate seamlessly with Datadog's security monitoring workflows.
+AI Guard security signals provide visibility into threats and attacks AI Guard detects in your applications. These signals are built on top of [AAP (Application and API Protection) security signals][14] and integrate with Datadog's security monitoring workflows.
 
-### Understanding AI Guard signals
+### Understand AI Guard signals
 
-AI Guard security signals are created when Datadog detects a threat based on a configured detection rule. When threats such as prompt injection, jailbreaking, or tool misuse are detected according to your detection rules, security signals appear in the Datadog Security Signals explorer. These signals can provide:
+Datadog creates AI Guard security signals when it detects a threat based on a configured detection rule. Signals indicating threats such as prompt injection, jailbreaking, or tool misuse appear in the Datadog Security Signals explorer. These signals can provide:
 
 - **Threat detection**: Attack context based on your configured detection rules
 - **Action insights**: Blocked or allowed actions information according to your rule settings
 - **Rich investigation context**: Attack categories detected, AI Guard evaluation results, and links to related AI Guard spans for comprehensive analysis
 - **Custom runbooks**: Custom remediation guidance and response procedures for specific threat scenarios
 
-### Creating detection rules
+### Create detection rules
 
-You can create custom detection rules using the AI Guard detection rule explorer. Custom detection rules generate security signals based on AI Guard evaluations. Currently, only *threshold-based rules* are supported.
+You can create custom detection rules by defining thresholds for when you want to receive notifications; for example, more than 5 `DENY` actions in 10 minutes. When AI Guard evaluations exceed those thresholds, it generates security signals.
 
 To create AI Guard detection rules:
-1. GO to the [AI Guard detection rule explorer][17].
-2. Define your threshold conditions. For example, more than 5 `DENY` actions in 10 minutes.
-3. Set severity levels and notification preferences.
-4. Configure signal metadata and tags.
-
-{{< img src="security/ai_guard/ai_guard_detection_rules.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
+1. In Datadog, go to the [AI Guard detection rule explorer][17], then click **New Rule**.
+   {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
+1. Under **Define Search Queries**, define the types of tags you want to create signals for. You can use the following AI Guard attributes to filter and target specific threat patterns:
+   <table>
+     <thead>
+       <tr>
+         <th>Tag</th>
+         <th>Description</th>
+         <th>Possible values</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr>
+         <td><code>@ai_guard.action</code></td>
+         <td>Filter by AI Guard's evaluation result</td>
+         <td><code>ALLOW</code> or <code>DENY</code></td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.attack_categories</code></td>
+         <td>Target specific attack types</td>
+         <td>
+           <ul>
+             <li><code>jailbreak</code></li>
+             <li><code>indirect-prompt-injection</code></li>
+             <li><code>destructive-tool-call</code></li>
+             <li><code>denial-of-service-tool-call</code></li>
+             <li><code>security-exploit</code></li>
+             <li><code>authority-override</code></li>
+             <li><code>role-play</code></li>
+             <li><code>instruction-override</code></li>
+             <li><code>obfuscation</code></li>
+             <li><code>system-prompt-extraction</code></li>
+             <li><code>data-exfiltration</code></li>
+           </ul>
+         </td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.blocked</code></td>
+         <td>Filter based on whether an action in the trace was blocked</td>
+         <td><code>true</code> or <code>false</code></td>
+       </tr>
+       <tr>
+         <td><code>@ai_guard.tools</code></td>
+         <td>Filter by specific tool names involved in the evaluation</td>
+         <td><code>get_user_profile</code>, <code>user_recent_transactions</code>, etc.</td>
+       </tr>
+     </tbody>
+   </table>
+1. Under **Define Rule Conditions**, define your threshold conditions, set severity levels, choose who should get notifications for new signals and how often, and choose security responses to take.
+1. Under **Describe your Playbook**, customize the notification and define tags to send with the signals.
 
 For more comprehensive detection rule capabilities, see [detection rules][15].
 
-#### Available AI Guard tags for detection rules
+### Investigate signals
 
-When creating detection rules, you can use the following AI Guard attributes to filter and target specific threat patterns:
+To view and investigate AI Guard security signals, and correlate them with other security events, you can view signals in two places:
+- [Application and API Protection Security Signals explorer][18]
+- [Cloud SIEM Security Signals explorer][16] 
+  
+  In the Cloud SIEM Security Signals explorer, beside the search bar, click the **Filter** icon and select the **App & API Protection** checkbox to view AI Guard signals.
 
-- **@ai_guard.action**: Filter by AI Guard's evaluation result (`ALLOW` or `DENY`)
-- **@ai_guard.attack_categories**: Target specific attack types such as `jailbreak`, `indirect-prompt-injection`, `destructive-tool-call`, `denial-of-service-tool-call`, `security-exploit`, `authority-override`, `role-play`, `instruction-override`, `obfuscation`, `system-prompt-extraction`, or `data-exfiltration`
-- **@ai_guard.blocked**: Filter based on whether an action in the trace was blocked (`true` or `false`)
-- **@ai_guard.tools**: Filter by specific tool names involved in the evaluation (for example, `get_user_profile`, `user_recent_transactions`)
-
-### Investigating signals
-
-To view and investigate AI Guard security signals, you can access signals through the [Application and API Protection Security Signals explorer][18] or [Cloud SIEM Security Signals explorer][16] and correlate with other security events. When using the Cloud SIEM Security Signals explorer, make sure to check the **AAP** checkbox filter to view AI Guard signals.
-
-The Security Signals explorer allows you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
+The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.datadoghq.com/
+[1]: /help
 [2]: /account_management/api-app-keys/
 [3]: /account_management/api-app-keys/#scopes
 [4]: /agent/?tab=Host-based
