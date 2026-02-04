@@ -189,7 +189,7 @@ To see metrics about your Enrichment Table processor using a Reference Table, ad
 : This counter is incremented for each processed log that does not have a corresponding row in the table.
 
 `pipelines.reference_table_cached_rows`
-: This gauge metric reports the number of rows stored in the local cache. The tag `found:true` reports rows existing in the table, and `found:false` reports rows that do not exist in the table. The cache has a maximum capacity of 100,000 entries.
+: This gauge metric reports the number of rows stored in the local cache. The tag `found:true` reports rows existing in the table, and `found:false` reports rows that do not exist in the table.
 
 `pipelines.reference_table_queued_keys`
 : This gauge metric reports the number of row keys waiting to be read from the Reference Tables API. The queue has a maximum capacity of 5,000 keys. When a log attempts to insert a key that would exceed this limit, the log is immediately sent downstream without enrichment.
