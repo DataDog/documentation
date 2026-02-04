@@ -17,6 +17,9 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 
 ### Set up the destination
 
+<div class="alert alert-danger">Only enter the identifiers for the Amazon OpenSearch endpoint URL, and if applicable, username and password. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your Amazon OpenSearch endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
 1. In the **Mode** dropdown menu, select **Bulk** or **Data streams**.
 	- **Bulk** mode
 		- Uses Amazon OpenSearch's [Bulk API][4] to send batched events directly into a standard index.
@@ -31,13 +34,40 @@ Set up the Amazon OpenSearch destination and its environment variables when you 
 			- In the **Dataset** field, specify the format or data source that describes the structure, for example `apache`.
 			- In the **Namespace** field, enter the grouping for organizing your data streams, for example `production`.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
-1. Select an authentication strategy, **Basic** or **AWS**. For **AWS**, enter the AWS region.
+1. Optionally, enter the name of the Amazon OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+1. Select an authentication strategy, **Basic** or **AWS**. If you selected:
+	- **Basic**:
+		- Enter the identifier for your Amazon OpenSearch username. If you leave it blank, the [default](#set-secrets) is used.
+		- Enter the identifier for your Amazon OpenSearch password. If you leave it blank, the [default](#set-secrets) is used.
+	- **AWS**:
+		1. Enter the AWS region.
+		1. (Optional) Select an AWS authentication option. The **Assume role** option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select **Assume role**:
+			1. Enter the ARN of the IAM role you want to assume.
+			1. Optionally, enter the assumed role session name and external ID.
 {{% observability_pipelines/destination_buffer_numbered %}}
 
+### Set secrets
 
-### Set the environment variables
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Amazon OpenSearch endpoint URL identifier:
+	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_ENDPOINT_URL`.
+- Amazon OpenSearch authentication username identifier:
+	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_USERNAME`.
+- Amazon OpenSearch authentication password identifier:
+	- The default identifier is `DESTINATION_AMAZON_OPENSEARCH_PASSWORD`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 
