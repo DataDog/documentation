@@ -31,7 +31,7 @@ The `EvaluatorContext` is a frozen dataclass that provides all the information n
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `input_data` | `Any` | The input data for the span being evaluated. |
+| `input_data` | `Any` | The input data to evaluate. |
 | `output_data` | `Any` | The output data from the span being evaluated. |
 | `expected_output` | `Any` | The expected output, if provided in the dataset record. |
 | `metadata` | `Dict[str, Any]` | Additional metadata associated with the span. |
