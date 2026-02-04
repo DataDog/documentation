@@ -222,13 +222,13 @@ Complete the following steps to configure these components.
               compute_stats_by_span_kind: true
 
         service:
-          extensions: [datadog/extension]
+          extensions: [health_check, datadog/extension]
           pipelines:
             traces:
               processors: [memory_limiter, resource, resourcedetection, transform]
-              exporters: [otlp, debug, spanmetrics, datadog, datadog/connector]
+              exporters: [otlp/jaeger, debug, spanmetrics, datadog, datadog/connector]
             metrics:
-              receivers: [datadog/connector, docker_stats, httpcheck/frontend-proxy, hostmetrics, nginx, otlp, postgresql, redis, spanmetrics]
+              receivers: [datadog/connector, otlp, spanmetrics]
               processors: [memory_limiter, resource, resourcedetection, transform]
               exporters: [otlphttp/prometheus, debug, datadog]
             logs:

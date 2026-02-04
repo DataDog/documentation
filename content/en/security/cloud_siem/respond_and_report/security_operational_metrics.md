@@ -36,9 +36,14 @@ Cloud SIEM provides security operational metrics to help you determine the effec
 : **Description**: The time (in seconds) between when a signal is triggered and when an investigation on the signal begins.
 : **Metric type**: [DISTRIBUTION][3]
 
+`datadog.security.siem_signal.time_to_investigate`
+: **Name**: Time to Investigate (TTI)
+: **Description**: The time (in seconds) between when an investigation on the signal begins and when the signal is archived.
+: **Metric type**: [DISTRIBUTION][3]
+
 `datadog.security.siem_signal.time_to_resolve`
 : **Name**: Time to Resolve (TTR)
-: **Description**: The time (in seconds) it takes to close a signal starting from the time when you are first notified of the detection.
+: **Description**: The time (in seconds) it takes to archive a signal starting from the time when you are first notified of the detection.
 : **Metric type**: [DISTRIBUTION][3]
 
 ## How the metrics are calculated
@@ -50,10 +55,11 @@ The TTD, TTA, and TTR metrics are calculated based on these timestamps:
 1. The timestamp (`T2`) of when the signal status is changed to `under_review`.
 1. The timestamp (`T3`) of when the signal status is changed to `archived`.
 
-| Metric                                                                                | How the metric is calculated |
-| ------------------------------------------------------------------------------------- | ---------------------------- |
+| Metric                                                                          | How the metric is calculated |
+|---------------------------------------------------------------------------------|------------------------------|
 | Time to Detect (TTD)<br>`datadog.security.siem_signal.time_to_detect`           | `T1 - T0`                    |
 | Time to Acknowledge (TTA)<br>`datadog.security.siem_signal.time_to_acknowledge` | `T2 - T1`                    |
+| Time to Investigate (TTI)<br>`datadog.security.siem_signal.time_to_investigate` | `T3 - T2`                    |
 | Time to Resolve (TTR)<br>`datadog.security.siem_signal.time_to_resolve`         | `T3 - T1`                    |
 
 ## Explore, visualize, and monitor the metrics
