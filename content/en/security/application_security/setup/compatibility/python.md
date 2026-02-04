@@ -49,7 +49,7 @@ And the library supports the following runtimes:
 
 ### Supported frameworks
 
-The tornado support was added in ddtrace python 4.4 release.
+**Note:** Tornado support is available starting in ddtrace Python version 4.4.
 
 | Framework | Versions   | Threat Detection supported? | Threat Protection supported? |
 |-----------|------------|-----------------------------|------------------------------|
