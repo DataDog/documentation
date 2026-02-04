@@ -38,7 +38,7 @@ You can also **Search** or **Group** by other tags in the fields shown below. Fo
 Datadog guides you through your provisioning and performance optimization workflows by providing two dedicated use-case driven views. 
 
 ### Provisioning
-The Provisioning tab hones in on key recommendations and metrics insights most pertinent to allocating and managing your capacity. 
+The Provisioning tab shows key recommendations and metrics insights for allocating and managing your capacity. 
 
 {{< img src="gpu_monitoring/provisioning-tab.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
 
