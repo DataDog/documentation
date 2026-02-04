@@ -151,7 +151,7 @@ For containerized environments on OKE, you can use the [Datadog Agent for Kubern
 
 Monitoring OCI GPU instances is essential for ensuring optimal performance and reliability of your high-performance computing workloads. The [OCI GPU integration][22] provides a comprehensive set of GPU metrics through the `gpu_infrastructure_health` namespace, enabling you to track the health, capacity, throughput, status, and performance of your [GPU instances][23]. 
 
-After setting up the OCI integration, ensure that the GPU-related namespaces are included in your metric collection configuration. See the **GPU** section of the [OCI Overview dashboard][29] (created automatically when you set up the main OCI integration) for an overview of your GPU infrastructure.
+After setting up the OCI integration, ensure that the GPU-related namespaces are included in your metric collection configuration. See the [OCI GPU Overview dashboard][29] (created automatically when you set up the OCI GPU integration) for an overview of your GPU infrastructure.
 
 ### Cloud Cost Management
 
@@ -204,4 +204,4 @@ Need help? Contact [Datadog support][28].
 [26]: /security/cloud_siem/guide/oci-config-guide-for-cloud-siem/
 [27]: /integrations/guide/oci-integration-troubleshooting
 [28]: /help/
-[29]: https://app.datadoghq.com/dash/integration/31417/oracle-cloud-infrastructure-oci-overview
+[29]: https://app.datadoghq.com/dash/integration/31744/oci-gpu-overview
