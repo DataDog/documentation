@@ -669,6 +669,10 @@
     "request_description": "",
     "request_schema_description": "The request for a tests search."
   },
+  "ListAWSCloudAuthPersonaMappings": {
+    "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
+    "summary": "List AWS cloud authentication persona mappings"
+  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",

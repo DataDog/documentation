@@ -1799,6 +1799,65 @@ components:
       required:
       - role_name
       type: object
+    AWSCloudAuthPersonaMappingAttributesResponse:
+      description: Attributes for AWS cloud authentication persona mapping response
+      properties:
+        account_identifier:
+          description: Datadog account identifier (email or handle) mapped to the
+            AWS principal
+          example: test@test.com
+          type: string
+        account_uuid:
+          description: Datadog account UUID
+          example: 12bbdc5c-5966-47e0-8733-285f9e44bcf4
+          type: string
+        arn_pattern:
+          description: AWS IAM ARN pattern to match for authentication
+          example: arn:aws:iam::123456789012:user/testuser
+          type: string
+      required:
+      - arn_pattern
+      - account_identifier
+      - account_uuid
+      type: object
+    AWSCloudAuthPersonaMappingDataResponse:
+      description: Data for AWS cloud authentication persona mapping response
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AWSCloudAuthPersonaMappingAttributesResponse'
+        id:
+          description: Unique identifier for the persona mapping
+          example: c5c758c6-18c2-4484-ae3f-46b84128404a
+          type: string
+        type:
+          $ref: '#/components/schemas/AWSCloudAuthPersonaMappingType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    AWSCloudAuthPersonaMappingType:
+      description: Type identifier for AWS cloud authentication persona mapping
+      enum:
+      - aws_cloud_auth_config
+      example: aws_cloud_auth_config
+      type: string
+      x-enum-varnames:
+      - AWS_CLOUD_AUTH_CONFIG
+    AWSCloudAuthPersonaMappingsData:
+      description: List of AWS cloud authentication persona mappings
+      items:
+        $ref: '#/components/schemas/AWSCloudAuthPersonaMappingDataResponse'
+      type: array
+    AWSCloudAuthPersonaMappingsResponse:
+      description: Response containing a list of AWS cloud authentication persona
+        mappings
+      properties:
+        data:
+          $ref: '#/components/schemas/AWSCloudAuthPersonaMappingsData'
+      required:
+      - data
+      type: object
     AWSCredentials:
       description: The definition of `AWSCredentials` object.
       oneOf:
@@ -73500,6 +73559,40 @@ paths:
         permissions:
         - ci_visibility_read
         - test_optimization_read
+  /api/v2/cloud_auth/aws/persona_mapping:
+    get:
+      description: List all AWS cloud authentication persona mappings. This endpoint
+        retrieves all configured persona mappings that associate AWS IAM principals
+        with Datadog users.
+      operationId: ListAWSCloudAuthPersonaMappings
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSCloudAuthPersonaMappingsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List AWS cloud authentication persona mappings
+      tags:
+      - Cloud Authentication
+      x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/cloud_security_management/custom_frameworks:
     post:
       description: Create a custom framework.
@@ -96498,7 +96591,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
@@ -96643,7 +96736,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
@@ -103851,6 +103944,9 @@ tags:
     Management page](https://docs.datadoghq.com/service_management/case_management/)
     for more information.
   name: Case Management Type
+- description: Configure AWS cloud authentication mappings for persona and intake
+    authentication through the Datadog API.
+  name: Cloud Authentication
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
     Cloud Cost Management accounts for AWS, Azure, and Google Cloud. You can query
     your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)
