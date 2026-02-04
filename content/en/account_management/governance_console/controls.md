@@ -15,7 +15,7 @@ Governance Console Controls audit and enforce organizational standards. You can 
 
    <div class="alert alert-info">If you are using multiple Datadog sub-organizations, control behavior and scoping is defined per organization and does not span across organizations.</div>
 
-   To verify your configuration, use the **Manual Mitigation** panel to see what is being detected by this control.
+   To verify your configuration, use the **Manual Mitigation** tab to see what is being detected by this control.
 
 3. **Configure notifications**.
    
@@ -25,10 +25,11 @@ Governance Console Controls audit and enforce organizational standards. You can 
 
    When **Enforce control** is disabled, a control requires manual mitigation. Toggling on **Enforce control** enables automated enforcement actions. Automation allows administrators to automate cleanup activity without having to manually review and apply each change.
 
-   For **Select automated mitigation**, choose from the following options:
-   - **Manual** (Default): The control detects noncompliant assets. You then manually take actions based on these detections.
-   - **Ignore Detection**
-<!-- todo: rest of this list after verification -->
+   For **Select automated mitigation**, select a mitigation. If you select **Manual** (default), the control detects noncompliant assets, and you can manually take actions based on these detections.
+
+   To delay mitigation, enter a number of days under **Remediation Delay**. You can delay remediation for up to one week. This grants additional time for administrators to take additional actions before automatic enforcement occurs.
+
+Use the **Manual Mitigation** tab to view all detections. Use the **History** tab 
 
 
 
