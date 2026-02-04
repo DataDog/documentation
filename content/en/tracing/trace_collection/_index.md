@@ -142,25 +142,6 @@ Auto-instrumentation automatically creates spans for supported frameworks and li
     <td style="border:1px solid #ccc;">Yes (to add or modify spans)</td>
   </tr>
   <tr>
-    <td style="border:1px solid #ccc; font-weight:bold;">Use cases</td>
-    <td style="border:1px solid #ccc;">
-      <ul style="margin:0; padding-left:20px;">
-        <li>Adding spans to production without redeploying</li>
-        <li>Debugging specific code paths</li>
-        <li>Adding logs or metrics at runtime</li>
-        <li>Fast instrumentation changes</li>
-      </ul>
-    </td>
-    <td style="border:1px solid #ccc;">
-      <ul style="margin:0; padding-left:20px;">
-        <li>Instrumenting custom business logic</li>
-        <li>Adding application-specific metadata to spans</li>
-        <li>Removing unwanted spans from traces</li>
-        <li>Complex span manipulation</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
     <td style="border:1px solid #ccc; font-weight:bold;">When to use</td>
     <td style="border:1px solid #ccc;">Add custom spans without code changes or redeployments.</td>
     <td style="border:1px solid #ccc;">Progress to this when you need complex instrumentation logic or want spans permanently defined in code.</td>
