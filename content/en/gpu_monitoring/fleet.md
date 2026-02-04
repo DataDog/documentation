@@ -34,12 +34,47 @@ You can also **Search** or **Group** by other tags in the fields shown below. Fo
 
 {{< img src="gpu_monitoring/filters_and_groupings-2.png" alt="The menu for filtering and grouping in the GPU Fleet page" style="width:90%;" >}}
 
-Below the search and filtering fields, Datadog provides preset filters that allow you to instantly identify optimization opportunities for clusters, hosts, and devices with: 
+## Use-case driven views
+Datadog guides you through your provisioning and performance optimization workflows by providing two dedicated use-case driven views. 
 
-- CPU saturation
-- Ineffective devices (the streaming multiprocessor on the device is active less than 50% of the time)
-- Inefficient devices (only if you've enabled System Probe; this shows devices where the GPU core utilization is less than 50%)
-- Inactive devices (both the streaming multiprocessor and graphics engine are active less than 1% of the time)
+### Provisioning
+The Provisioning tab hones in on key recommendations and metrics insights most pertinent to allocating and managing your capacity. 
+
+{{< img src="gpu_monitoring/provisioning-tab.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
+
+In terms of OOTB recommendations: 
+- Datadog proactively detects whether there's thermal throttling or hardware defects and instantly recommends remediation actions based on hardware errors like ECC/XID errors.
+- Datadog also detects if there are inactive devices available that should be provisioned such that you avoid having devices sit idle.
+
+You'll also see a focused set of metrics relevant for your provisioning workflow: 
+- ECC / XID Error Count
+- Graphics Activity
+- SM Activity
+- GPU Memory
+- Allocated Devices
+- Active Devices
+- Idle Cost
+
+### Performance
+The Performance tab allows you to understand your workload's execution and helps you tune GPU utilization to more effectively use your devices.
+
+{{< img src="gpu_monitoring/performance-tab.png" alt="The Performance use-case driven view" style="width:90%;" >}}
+
+It provides several OOTB recommendations: 
+- If your workloads are CPU-intensive, Datadog flags hosts with CPU saturation and provides recommended actions to alleviate that.
+- If your workloads aren't effectively using their allocated GPU devices, Datadog provides recommendations on how to tune your workloads to get more value out of your capacity.
+
+You'll also see a focused set of metrics relevant for your performance workflow: 
+- ECC / XID Error Count
+- Graphics Activity
+- SM Activity
+- GPU Memory
+- Effective Devices
+- Power
+- Temperature
+- PCIe RX
+- PCIe Tx
+- CPU Utilization
 
 ## Summary Graph
 
