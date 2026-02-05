@@ -514,7 +514,7 @@
       - repo_name: helm-charts
         contents:
           - action: pull-and-push-file
-            branch: main
+            branch: fanny/AGENTONB-2748/migration-docs
             globs:
               - 'charts/datadog/docs/Migration_Helm_to_Operator.md'
             options:
