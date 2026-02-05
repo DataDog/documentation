@@ -123,7 +123,11 @@ The collection interval for the metric in seconds.
 
 #### Metric description
 
-The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
+The metric description helps you understand what a metric represents, why it exists, and how it is typically used. Descriptions are pre-populated for metrics coming from supported [integrations][9].
+
+For custom metrics with connected source code, Datadog can automatically generate descriptions to provide additional context. These descriptions are fully editable, and any human edits always persist over generated descriptions.
+
+Use this field to update the descriptions for your [custom metrics][4].
 
 ## Metric Context Explorer
 
