@@ -38,6 +38,8 @@ Datadog publishes container images to the Datadog Container Registry, Google Art
 
 {{% container-registry-info %}}
 
+<div class="alert alert-info">The Helm chart and Datadog Operator will default to the Datadog Container Registry (<code>registry.datadoghq.com</code>) in a future release.</div>
+
 ### Minimum Agent and Cluster Agent versions
 
 For optimal compatibility Datadog recommends to keep your Cluster Agent and Agent on matching versions. For a full support matrix of Kubernetes versions and Datadog versions see the [Kubernetes installation page][2].
