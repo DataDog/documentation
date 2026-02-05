@@ -228,6 +228,8 @@ Datadog publishes container images to the Datadog Container Registry, Google Art
 
 {{% container-registry-info %}}
 
+<div class="alert alert-info">The Helm chart and Datadog Operator will default to the Datadog Container Registry (<code>registry.datadoghq.com</code>) in a future release.</div>
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
