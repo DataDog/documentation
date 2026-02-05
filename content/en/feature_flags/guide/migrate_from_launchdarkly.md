@@ -33,19 +33,13 @@ Datadog Feature Flags are built on the [OpenFeature][2] standard, which provides
 
 Follow the installation instructions for your platform:
 
-**Client-side SDKs:**
-- [JavaScript][3]
-- [React][10]
-- [Android][11]
-- [iOS][12]
+### Client-side SDKs
 
-**Server-side SDKs:**
-- [Node.js][4]
-- [Python][5]
-- [Java][6]
-- [Go][7]
-- [.NET][8]
-- [Ruby][9]
+{{< partial name="feature_flags/feature_flags_client.html" >}}
+
+### Server-side SDKs
+
+{{< partial name="feature_flags/feature_flags_server.html" >}}
 
 After installation, ensure you have initialized the Datadog provider with your credentials and set up an evaluation context that includes user attributes for targeting.
 
