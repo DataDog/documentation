@@ -4,7 +4,7 @@ aliases:
 - /service_management/incident_management/response_team/
 - /incident_response/incident_management/response_team
 further_reading:
-- link: "/incident_response/incident_management/incident_settings/responder_types"
+- link: "/incident_response/incident_management/setup_and_configuration/responder_types"
   tag: "Documentation"
   text: "Customize responder types in Incident Settings"
 ---
@@ -48,4 +48,4 @@ When you assign a responder type, the assignee is notified about it in Slack.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/incident_management/incident_settings/responder_types
+[1]: /incident_response/incident_management/setup_and_configuration/responder_types

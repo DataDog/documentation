@@ -6,7 +6,7 @@ aliases:
 - /service_management/incident_management/analytics/
 - /incident_response/incident_management/analytics
 further_reading:
-- link: "/incident_response/incident_management/incident_settings"
+- link: "/incident_response/incident_management/setup_and_configuration"
   tag: "Documentation"
   text: "Incident Settings"
 - link: "https://app.datadoghq.com/dash/integration/30523/incident-management-overview"
@@ -116,7 +116,7 @@ Use the out-of-the-box Notebook template to create the Incident Report or build 
 [4]: https://app.datadoghq.com/notebook/template/11/incident-management-overview
 [5]: /dashboards/querying/#select-your-visualization
 [6]: /dashboards/querying/#create-a-title
-[7]: /incident_response/incident_management/incident_settings#property-fields
+[7]: /incident_response/incident_management/setup_and_configuration/property_fields
 [8]: /dashboards/widgets/timeseries/
 [9]: https://app.datadoghq.com/notebook/template/11/incident-report
 [10]: /notebooks/#share-notebooks

@@ -31,9 +31,9 @@ To create an incident type:
 ## Customize incident response
 
 {{< whatsnext desc="Set additional customizations on the following:">}}
-    {{< nextlink href="/incident_response/incident_management/incident_settings/information" >}}Information{{< /nextlink >}}
-    {{< nextlink href="/incident_response/incident_management/incident_settings/integrations" >}}Integrations{{< /nextlink >}}
-    {{< nextlink href="/incident_response/incident_management/incident_settings/templates" >}}Templates{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/information" >}}Information{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/integrations" >}}Integrations{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/templates" >}}Templates{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents/settings

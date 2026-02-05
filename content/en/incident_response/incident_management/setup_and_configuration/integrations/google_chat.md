@@ -4,7 +4,7 @@ description: Manage Datadog incidents directly from Google Chat.
 aliases:
 - /service_management/incident_management/integrations/google_chat/
 further_reading:
-  - link: "/incident_response/incident_management/incident_settings/integrations"
+  - link: "/incident_response/incident_management/setup_and_configuration/integrations"
     tag: "Documentation"
     text: "Incident Integrations Settings"
   - link: "/integrations/google-hangouts-chat"

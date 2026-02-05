@@ -148,4 +148,4 @@ To generate an AI-assisted postmortem draft:
 [2]: https://app.datadoghq.com/incidents/settings?section=notification-rules
 [3]: https://app.datadoghq.com/incidents/settings?section=postmortem-templates
 [4]: https://app.datadoghq.com/incidents/settings?section=integrations
-[5]: /incident_response/incident_management/follow-ups
+[5]: /incident_response/incident_management/post_incident/follow-ups
