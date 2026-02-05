@@ -57,7 +57,7 @@ The following architecture diagram is for a container-based architecture, where 
 
 {{< img src="observability_pipelines/scaling_best_practices/containerized-infra.png" alt="Diagram showing the Worker as part of a statefulset" style="width:100%;" >}}
 
-See [reference architecture for Kubernetes deployment](https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/) for more details.
+See [Observability Pipelines for Kubernetes deployment](https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/) for more details.
 
 ### Choosing a VM-based vs Kubernetes-based architecture
 
