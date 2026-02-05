@@ -23,7 +23,7 @@ When selecting a container registry, Datadog recommends the following approach:
    - GCP deployments: `gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, or `asia.gcr.io/datadoghq`
    - Azure deployments: `datadoghq.azurecr.io`
 
-3. **Datadog Container Registry**: Use `registry.datadoghq.com` for simplicity. This registry requires no additional setup. Allowlist the endpoint and `us-docker.pkg.dev/datadog-prod/public-images` for failover. It has very high rate limits and provides a consistent experience across all environments.
+3. **Datadog Container Registry**: Use `registry.datadoghq.com` for simplicity. This registry requires no additional setup and has very high rate limits. Ensure your firewall allows traffic to `us-docker.pkg.dev/datadog-prod/public-images`, as the registry may redirect requests to this URL.
 
 4. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
 
