@@ -36,13 +36,14 @@ Any compliant StatsD client works with DogStatsD and the Agent, but does not inc
 
 **Note**: DogStatsD does NOT implement timers from StatsD as a native metric type (though it does support them through [histograms][2]).
 
-DogStatsD is available on the Datadog Container Registry, GAR, ECR, and Docker Hub:
+DogStatsD is available on the Datadog Container Registry, GAR, ECR, Azure ACR, and Docker Hub:
 
 | Registry                   | Image                                                     |
 |----------------------------|-----------------------------------------------------------|
 | Datadog Container Registry | [registry.datadoghq.com/dogstatsd][33]                    |
 | Google Artifact Registry   | [gcr.io/datadoghq/dogstatsd][4]                           |
 | Amazon ECR                 | [public.ecr.aws/datadog/dogstatsd][34]                    |
+| Azure ACR                  | datadoghq.azurecr.io/dogstatsd                            |
 | Docker Hub                 | [hub.docker.com/r/datadog/dogstatsd][3]                   |
 
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you use the Datadog Container Registry or a cloud-provider registry instead. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
