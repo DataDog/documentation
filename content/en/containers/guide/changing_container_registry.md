@@ -18,17 +18,13 @@ When selecting a container registry, Datadog recommends the following approach:
    - GCP deployments: `gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, or `asia.gcr.io/datadoghq`
    - Azure deployments: `datadoghq.azurecr.io`
 
-2. **Datadog Container Registry (default)**: If no cloud-specific registry applies or you want simplicity, use `registry.datadoghq.com`. This registry requires no additional setup. Allowlist the endpoint and `us-docker.pkg.dev/datadog-prod/public-images` for failover. It has very high rate limits and provides a consistent experience across all environments.
+2. **Datadog Container Registry**: If no cloud-specific registry applies or you want simplicity, use `registry.datadoghq.com`. This registry requires no additional setup. Allowlist the endpoint and `us-docker.pkg.dev/datadog-prod/public-images` for failover. It has very high rate limits and provides a consistent experience across all environments.
 
-3. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits.
+   **Note**: The Helm chart and Datadog Operator currently default to `gcr.io/datadoghq`. To use the Datadog Container Registry, update your configuration as described below.
 
-<div class="alert alert-warning">Only Docker Hub supports Notary for image signature verification. If you switch to another registry, this feature is not available.</div>
+3. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
 
-<div class="alert alert-info">The Helm chart and Datadog Operator currently default to Google Artifact Registry (<code>gcr.io/datadoghq</code>). To use the Datadog Container Registry, update your configuration as described below.</div>
-
-To update your registry, you need to update your registry values based on the type of container environment you are deploying on.
-
-<div class="alert alert-info">You can also use a private registry, but you need to create a pull secret to pull the images from the private registry. For more information about creating a pull secret, see the <a href="https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials">Kubernetes documentation</a>.</div>
+To update your registry, update your registry values based on the type of container environment you are deploying on. You can also use a private registry, but you need to [create a pull secret][1] to pull the images.
 
 ## Docker
 
