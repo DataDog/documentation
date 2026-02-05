@@ -95,7 +95,9 @@ A hybrid approach uses a dedicated Kubernetes cluster or managed instance group 
 
 ### Instance sizing
 
-Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. The Observability Pipelines Worker is almost always CPU constrained. CPU utilization is the strongest signal for autoscaling because CPU utilization metrics do not produce false positives. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][7] enabled. Do not rely on a statically configured number of VMs or containers. This helps ensure you can safely handle traffic spikes without data loss and maintain high availability if a Worker goes down.
+Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. 
+
+The Observability Pipelines Worker is almost always CPU constrained and since CPU utilization metrics do not produce false positives, they provide a reliable signal for autoscaling. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][7] enabled. Do not rely on a statically configured number of VMs or containers. This helps ensure you can safely handle traffic spikes without data loss and maintain high availability if a Worker goes down.
 
 For high throughput environments, Datadog recommends larger machine types because they typically have higher network bandwidth. Consult your cloud provider's documentation for details (for example, [Amazon EC2 instance network bandwith][8]).
 
