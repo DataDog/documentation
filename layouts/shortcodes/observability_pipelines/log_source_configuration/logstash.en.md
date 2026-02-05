@@ -10,4 +10,4 @@ output {
 }
 ```
 
-**Note**: Use the HTTP/S server source in the Observability Pipelines Worker to receive logs from Logstash's HTTP output. The lumberjack output is deprecated.
+**Note**: Logstash requires SSL to be configured.
