@@ -7,5 +7,3 @@ Datadog also publishes images on cloud-provider registries:
 
 <div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you use the Datadog Container Registry or a cloud-provider registry instead. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
-<div class="alert alert-info">The Helm chart and Datadog Operator currently default to Google Artifact Registry (<code>gcr.io/datadoghq</code>). To use the Datadog Container Registry, update your configuration as described in <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
-
