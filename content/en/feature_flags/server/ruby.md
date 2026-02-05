@@ -13,10 +13,6 @@ further_reading:
   text: "Learn about Application Performance Monitoring (APM)"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK.
