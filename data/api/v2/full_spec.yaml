@@ -56323,8 +56323,9 @@ components:
 
             The number of keywords in the list must be less than or equal to 30.'
           example:
-          - credit card
-          - cc
+          - email
+          - address
+          - login
           items:
             type: string
           type: array
@@ -56463,6 +56464,8 @@ components:
           maximum: 5
           minimum: 1
           type: integer
+        suppressions:
+          $ref: '#/components/schemas/SensitiveDataScannerSuppressions'
         tags:
           description: List of tags.
           items:
@@ -56683,6 +56686,41 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/SensitiveDataScannerStandardPatternType'
+      type: object
+    SensitiveDataScannerSuppressions:
+      description: 'Object describing the suppressions for a rule. There are three
+        types of suppressions, `starts_with`, `ends_with`, and `exact_match`.
+
+        Suppressed matches are not obfuscated, counted in metrics, or displayed in
+        the Findings page.'
+      properties:
+        ends_with:
+          description: List of strings to use for suppression of matches ending with
+            these strings.
+          example:
+          - '@example.com'
+          - another.example.com
+          items:
+            type: string
+          type: array
+        exact_match:
+          description: List of strings to use for suppression of matches exactly matching
+            these strings.
+          example:
+          - admin@example.com
+          - user@example.com
+          items:
+            type: string
+          type: array
+        starts_with:
+          description: List of strings to use for suppression of matches starting
+            with these strings.
+          example:
+          - admin
+          - user
+          items:
+            type: string
+          type: array
       type: object
     SensitiveDataScannerTextReplacement:
       description: Object describing how the scanned event will be replaced.
