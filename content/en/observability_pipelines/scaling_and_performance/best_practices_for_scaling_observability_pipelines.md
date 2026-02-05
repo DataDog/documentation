@@ -49,7 +49,7 @@ The following architecture diagram is for a host-based architecture, where a loa
 
 {{< img src="observability_pipelines/scaling_best_practices/vm-infra.png" alt="Diagram showing the Worker as part of a managed instance group" style="width:100%;" >}}
 
-See [reference architecture for VM deployment](https://www.datadoghq.com/architecture/op-vm-deployment/) for more details.
+See [Observability Pipelines VM deployment](https://www.datadoghq.com/architecture/op-vm-deployment/) for more details.
 
 #### Kubernetes-based architecture
 
