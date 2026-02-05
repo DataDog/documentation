@@ -470,9 +470,11 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 ### Visualize the downstream database hosts of APM services
 
-{{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
+On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's database dependencies, first, click on the service in the [Software Catalog][26] to open a details panel, then click **View Service Page** in the panel. On the service page, select the **Databases section**, then select the **Databases tab**.
 
-On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Software Catalog][26] to open a details panel, then click **View Service Page** in the panel.
+### Visualize span durations and view query details
+
+Select the **Queries tab** from the **Databases section** on the APM service page to view latency outliers and a full list of queries from the selected time interval. Click on a query in the table to view the query panel and access diagnostics, error details, and trace information.
 
 ### Identify potential optimizations using explain plans for database queries in traces
 
