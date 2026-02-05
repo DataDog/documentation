@@ -29,7 +29,7 @@ By capturing these items as follow-ups, your team can stay focused on incident r
 
 Follow-ups can be created at any point during an incident (even before it's resolved), allowing responders to document necessary work as they discover it. After resolution, you can [export follow-ups](#export-follow-ups) to Jira or Case Management to integrate them into your team's existing workflows.
 
-**From Datadog**: Go to the incident's **Remediation** tab to view, create, edit, and track all follow-ups associated with the incident.
+**From Datadog**: Go to the incident's **Post-Incident** tab to view, create, edit, and track all follow-ups associated with the incident.
 
 **From Slack**: In the incident channel, run `/datadog followup` to create a new follow-up or `/datadog followup list` to view and manage existing follow-ups. For more Slack commands, see [Integrate Slack with Datadog Incident Management][5].
 
@@ -56,7 +56,7 @@ After defining an export template, you have two options:
 
 | Export Option      | Description                                                                                      | When to Use                                                                                      |
 |--------------------|--------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| **Manual export**  | Export individual follow-ups on demand from the incident's Remediation tab.                      | Use this if you prefer to selectively export only certain follow-ups.                            |
+| **Manual export**  | Export individual follow-ups on demand from the incident's Post-Incident tab.                      | Use this if you prefer to selectively export only certain follow-ups.                            |
 | **Automatic export** | Configure Incident Management to automatically export all follow-ups using the template whenever they're created. | Choose this if you want all follow-ups to be tracked in your external system by default.         |
 
 ### Case Management exports

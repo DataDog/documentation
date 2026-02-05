@@ -1,5 +1,5 @@
 ---
-title: Investigate Incidents
+title: Incident Investigation
 description: Manage the context and work for an incident
 aliases:
 - /monitors/incident_management/incident_details
@@ -56,7 +56,7 @@ In addition to housing your property fields, the Overview tab also provides the 
 |-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Condensed Timeline | Displays the timestamps when incident status changes occurred, as well as when impact started and ended. This provides a high-level view of the incident's lifecycle. |
 | Latest Notifications| Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification tab][7].|
-| Pending Tasks | Displays the most recent incomplete task, with quick access to the full list of tasks in the Remediation tab. |
+| Pending Tasks | Displays the most recent incomplete task, with quick access to the full list of tasks in the Post-Incident tab. |
 | Responders | Displays the current incident commander as well as avatars for the remaining responders assigned to the incident. |
 | Recent Timeline Entries | Displays the five most recent entries in the incident timeline, with quick access to see the entire Timeline tab. For more information, see the [Timeline][8] documentation. |
 
