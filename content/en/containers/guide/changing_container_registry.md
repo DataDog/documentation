@@ -13,14 +13,19 @@ Datadog publishes container images on the Datadog Container Registry, Google Art
 
 When selecting a container registry, Datadog recommends the following approach:
 
-1. **Cloud-provider registries**: If your deployment is in a specific cloud provider (AWS, GCP, or Azure), use the corresponding registry:
+1. **Private pull-through cache**: Set up a pull-through cache in your own infrastructure. This provides the best control over your image dependencies. See your cloud provider's documentation:
+   - AWS: [Amazon ECR pull through cache][12]
+   - GCP: [Artifact Registry remote repositories][13]
+   - Azure: [Azure Container Registry cache][14]
+
+2. **Cloud-provider registries**: If your deployment is in a specific cloud provider (AWS, GCP, or Azure), use the corresponding Datadog public registry:
    - AWS deployments: `public.ecr.aws/datadog`
    - GCP deployments: `gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, or `asia.gcr.io/datadoghq`
    - Azure deployments: `datadoghq.azurecr.io`
 
-2. **Datadog Container Registry**: Use `registry.datadoghq.com` for simplicity. This registry requires no additional setup. Allowlist the endpoint and `us-docker.pkg.dev/datadog-prod/public-images` for failover. It has very high rate limits and provides a consistent experience across all environments.
+3. **Datadog Container Registry**: Use `registry.datadoghq.com` for simplicity. This registry requires no additional setup. Allowlist the endpoint and `us-docker.pkg.dev/datadog-prod/public-images` for failover. It has very high rate limits and provides a consistent experience across all environments.
 
-3. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
+4. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
 
 <div class="alert alert-info">The Helm chart and Datadog Operator will default to the Datadog Container Registry in a future release.</div>
 
@@ -186,3 +191,6 @@ image:
 [9]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/#deploy-the-agent-on-eks
 [10]: https://docs.datadoghq.com/agent/cluster_agent/
 [11]: https://docs.datadoghq.com/agent/cluster_agent/setup/?tab=helm
+[12]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
+[13]: https://cloud.google.com/artifact-registry/docs/repositories/remote-repo
+[14]: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-artifact-cache

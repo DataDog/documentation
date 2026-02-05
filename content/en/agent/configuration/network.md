@@ -290,7 +290,7 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 
 If you are installing the Datadog Operator in a Kubernetes environment with limited connectivity, you need to allowlist the following endpoints for TCP port 443, based on your registry:
 
-- `registry.datadoghq.com` (Datadog Container Registry - default)
+- `registry.datadoghq.com` (Datadog Container Registry)
   - `us-docker.pkg.dev/datadog-prod/public-images` (failover)
 - `gcr.io/datadoghq` (GCR US)
 - `eu.gcr.io/datadoghq` (GCR Europe)
