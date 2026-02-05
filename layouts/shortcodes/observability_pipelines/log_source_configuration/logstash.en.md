@@ -2,13 +2,12 @@ To configure Logstash to send logs to the Observability Pipelines Worker, use th
 
 ```
 output {
-	lumberjack {
-		# update these to point to your Observability Pipelines Worker
-		hosts => ["127.0.0.1"]
-		port => 5044
-		ssl_certificate => "/path/to/certificate.crt"
-	}
+  http {
+    url => "http://127.0.0.1:9997"
+    http_method => "post"
+    format => "json"
+  }
 }
 ```
 
-**Note**: Logstash requires SSL to be configured.
+**Note**: Use the HTTP/S server source in the Observability Pipelines Worker to receive logs from Logstash's HTTP output. The lumberjack output is deprecated.
