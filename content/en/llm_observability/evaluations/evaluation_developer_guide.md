@@ -140,7 +140,7 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 
 The SDK provides built-in evaluators for common evaluation patterns. These are class-based evaluators that you can use directly without writing custom logic.
 
-#### StringCheck
+#### StringCheckEvaluator
 
 Performs string comparison operations between `output_data` and `expected_output`.
 
@@ -152,22 +152,22 @@ Performs string comparison operations between `output_data` and `expected_output
 | `icontains` | `output_data` contains `expected_output` (case-insensitive) |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import StringCheck
+from ddtrace.llmobs._evaluators import StringCheckEvaluator
 
 # Perform an exact match (default)
-evaluator = StringCheck(operation="eq", case_sensitive=True)
+evaluator = StringCheckEvaluator(operation="eq", case_sensitive=True)
 
 # Check whether output_data contains expected_output (case-insensitive)
-evaluator = StringCheck(operation="icontains", strip_whitespace=True)
+evaluator = StringCheckEvaluator(operation="icontains", strip_whitespace=True)
 
 # Extract field from dict output before comparison
-evaluator = StringCheck(
+evaluator = StringCheckEvaluator(
     operation="eq",
     output_extractor=lambda x: x.get("message", "") if isinstance(x, dict) else str(x),
 )
 {{< /code-block >}}
 
-#### RegexMatch
+#### RegexMatchEvaluator
 
 Validates output against a regex pattern.
 
@@ -178,23 +178,23 @@ Validates output against a regex pattern.
 | `fullmatch` | Match entire string |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import RegexMatch
+from ddtrace.llmobs._evaluators import RegexMatchEvaluator
 import re
 
 # Validate email format
-evaluator = RegexMatch(
+evaluator = RegexMatchEvaluator(
     pattern=r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
     match_mode="fullmatch"
 )
 
 # Validate output pattern (case-insensitive)
-evaluator = RegexMatch(
+evaluator = RegexMatchEvaluator(
     pattern=r"success|completed",
     flags=re.IGNORECASE
 )
 {{< /code-block >}}
 
-#### LengthValidator
+#### LengthEvaluator
 
 Validates output length constraints.
 
@@ -205,35 +205,35 @@ Validates output length constraints.
 | `lines` | Count lines |
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LengthValidator
+from ddtrace.llmobs._evaluators import LengthEvaluator
 
 # Ensure response is 50-200 characters
-evaluator = LengthValidator(min_length=50, max_length=200, count_type="characters")
+evaluator = LengthEvaluator(min_length=50, max_length=200, count_type="characters")
 
 # Validate word count
-evaluator = LengthValidator(min_length=10, max_length=100, count_type="words")
+evaluator = LengthEvaluator(min_length=10, max_length=100, count_type="words")
 {{< /code-block >}}
 
-#### JSONValidator
+#### JSONEvaluator
 
 Validates that output is valid JSON, and optionally checks for required keys.
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import JSONValidator
+from ddtrace.llmobs._evaluators import JSONEvaluator
 
 # Validate JSON syntax
-evaluator = JSONValidator()
+evaluator = JSONEvaluator()
 
 # Validate that required keys exist
-evaluator = JSONValidator(required_keys=["name", "status", "data"])
+evaluator = JSONEvaluator(required_keys=["name", "status", "data"])
 {{< /code-block >}}
 
-#### SemanticSimilarity
+#### SemanticSimilarityEvaluator
 
 Measures semantic similarity between `output_data` and `expected_output` using embeddings. Returns a similarity score between 0.0 and 1.0.
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import SemanticSimilarity
+from ddtrace.llmobs._evaluators import SemanticSimilarityEvaluator
 from openai import OpenAI
 
 client = OpenAI()
@@ -245,7 +245,7 @@ def get_embedding(text):
     )
     return response.data[0].embedding
 
-evaluator = SemanticSimilarity(
+evaluator = SemanticSimilarityEvaluator(
     embedding_fn=get_embedding,
     threshold=0.8  # Minimum similarity score to pass
 )
