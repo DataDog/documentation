@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Monitor the usage of Flex compute through various graphs on the [Flex Logs Controls][1] page. Track both concurrent query utilization and fair use limit impact to make informed decisions on cost-performance tradeoffs and balance operational success with financial efficiency.
+Monitor the usage of Flex compute through various graphs on the [Flex Logs Controls][1] page. Track concurrent query utilization and fair use limit impact to make informed decisions on cost-performance tradeoffs.
 
 {{< img src="/logs/guide/flex_compute/flex_compute_graphs_1.png" alt="Dashboard showing the query performance and compute size metrics, including query slowdowns, top sources of slowdowns, and compute usage over time" style="width:100%;" >}}
 
@@ -20,7 +20,7 @@ Monitor the usage of Flex compute through various graphs on the [Flex Logs Contr
 
 Flex compute is limited by two factors:
 - The number of concurrent queries
-- The maximum number of logs that can be scanned per query
+- The per-query [fair use limit][4] on addressable logs
 
 Query slowdowns occur when the concurrent query limit is reached, and a query is retrying to find an available slot to run in. If an available slot is not found, the query will not run. Datadog displays an error message advising you to retry your query at a later time.
 
@@ -63,7 +63,7 @@ Use this information to optimize your usage.
 ### Reduce fair use limit rejections
 
 1. **Narrow query time ranges** to reduce the number of addressable logs targeted by each query.
-1. **Scope queries to a specific index** using `index:<name>` to avoid scanning all Flex-enabled indexes. If the logs you are querying belong to a specific index, scoping to that index reduces the addressable logs count and can speed up your search.
+1. **Scope queries to a specific index** using `index:<name>` to reduce the number of addressable logs counted by the query.
 1. **Consider upgrading your Flex compute size** if queries regularly reach the fair use limit. Larger compute tiers support a higher number of addressable logs per query.
 
 To learn more about compute sizes, see the [Flex Logs][3] documentation.
