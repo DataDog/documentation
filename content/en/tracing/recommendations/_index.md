@@ -67,16 +67,11 @@ multifiltersearch:
       scope: Databases
       recommendation_description: The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
       recommendation_prerequisite: APM + DBM
-    - category: User experience
-      recommendation_type: User frustration action
-      scope: Browser applications
-      recommendation_description: Common rage or dead actions are detected on elements on a page signaling misleading UI or broken elements.
-      recommendation_prerequisite: RUM
-    - category: User experience
-      recommendation_type: Unoptimized bundle size
-      scope: Browser applications and web views on mobile applications
-      recommendation_description: Large JS resources causing delays in the initial page render signaling misleading UI or broken elements.
-      recommendation_prerequisite: RUM
+    - category: Reliability
+      recommendation_type: Aggressive Retries
+      scope: Backend services
+      recommendation_description: A backend application triggers rapid-fire retry attempts without adequate backoff, sustaining high pressure on struggling dependencies and risking prolonged outages by preventing system recovery during transient failures.
+      recommendation_prerequisite: APM
     - category: Reliability
       recommendation_type: High Exception Volumes
       scope: Backend services
@@ -85,15 +80,11 @@ multifiltersearch:
 
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/apm-proactive-recommendations/" >}}
-APM Recommendations are in Preview. Features and recommendations may change before general availability. To request access, fill out this form.
-{{< /callout >}}
-
 APM Recommendations help you improve your applications' performance and reliability by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to:
 
 - Identify and resolve performance bottlenecks
 - Improve service reliability and uptime
-- Reduce error rates and improve end-user experience
+- Improve end-user experience
 
 {{< img src="/tracing/recommendations/apm_recommendations.png" alt="Your image description" style="width:100%;" >}}
 
@@ -105,14 +96,13 @@ Certain recommendations rely on specific Datadog products. Use the **Recommendat
 
 APM Recommendations are based on data collected from different parts of your stack:
 
-- Sessions and user journeys from Real User Monitoring (RUM)
 - Distributed traces from Application Performance Monitoring (APM)
-- Error data from Error Tracking
 - Database telemetry from Database Monitoring (DBM)
+- Sessions and user journeys from Real User Monitoring (RUM)
 
 By looking at these sources together, Datadog finds ways to help you improve performance, reliability, and user experience.
 
-Datadog prioritizes recommendations by computing a severity score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. This ensures that the most critical insights for improving service health appear first.
+Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. This ensures that the most critical insights for improving service reliability and performance appear first.
 
 ## Using APM Recommendations
 
@@ -123,16 +113,23 @@ To review recommendations that need your attention:
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
 
-After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to *Reviewed*, *Ignored*, or *Resolved*. Alternatively, you can click **Create Ticket** to assign the recommendation to an owner and track related work in Jira or Case Management.
+After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to *Reviewed*, *Ignored*, or *Resolved*. Alternatively, you can assign the recommendation to an owner and track related work in Case Management or Jira.
 
 ## Supported recommendations
 
 <!-- The table below is auto-generated. Add new entries in multifiltersearch with new recommendations as they become available. -->
 
-{{< multifilter-search >}} 
+{{< multifilter-search >}}
+
+### Missing Index recommendations: APM vs. DBM
+
+If you use both APM and Database Monitoring (DBM), you may see fewer Missing Index recommendations on the APM Recommendations page than on the [DBM Recommendations page][2]. This is expected behavior.
+
+DBM detects Missing Index recommendations at the database level based on query analysis. APM Recommendations only surface Missing Index recommendations when Datadog can associate the affected queries with an instrumented application service. As a result, Missing Index recommendations that cannot be linked to a specific service are shown only in DBM.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/recommendations
+[2]: /database_monitoring/recommendations/
