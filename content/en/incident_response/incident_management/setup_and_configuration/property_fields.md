@@ -2,6 +2,7 @@
 title: Property Fields
 aliases:
 - /service_management/incident_management/incident_settings/property_fields/
+- /incident_response/incident_management/incident_settings/property_fields
 ---
 
 ## Overview
@@ -89,7 +90,7 @@ In Incident Management Analytics, number fields appear as measures that can be g
 [6]: /getting_started/tagging/using_tags/?tab=assignment#metrics
 [7]: /dashboards/
 [8]: /notebooks/
-[9]: /incident_response/incident_management/incident_settings/notification_rules
+[9]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [10]: /incident_response/incident_management/investigate/timeline
 [11]: /incident_response/incident_management/declare
 [12]: /incident_response/incident_management/incident_settings/property_fields#custom-fields-in-search-and-analytics

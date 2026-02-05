@@ -72,7 +72,7 @@ For more information on how to create a message template, see the [Incident Sett
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/incident_management/incident_settings/notification_rules
+[1]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [2]: /monitors/notify/variables/?tab=is_alert
 [3]: /incident_response/incident_management/incident_settings/templates
 [4]: /incident_response/on-call/

@@ -19,7 +19,7 @@ After an incident is resolved or reaches a stable state, the post-incident phase
 
 Use post-incident activities to:
 
-- Generate comprehensive postmortems documenting incident details, root cause, and learnings
+- Generate postmortems documenting incident details, root cause, and learnings
 - Create and manage follow-up tasks for remediation and process improvements
 - Communicate incident status and resolution to stakeholders
 - Build a knowledge base of incident patterns and resolutions

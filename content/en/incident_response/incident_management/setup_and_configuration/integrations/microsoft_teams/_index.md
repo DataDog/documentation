@@ -147,4 +147,4 @@ You can view the full list of available commands at any time by typing `@Datadog
 [1]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
-[4]: /incident_response/incident_management/incident_settings/notification_rules
+[4]: /incident_response/incident_management/setup_and_configuration/notification_rules

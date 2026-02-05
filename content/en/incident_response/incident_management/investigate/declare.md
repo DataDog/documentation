@@ -119,6 +119,6 @@ You can declare an incident from individual Handoff Notification cards.
 [8]: https://app.datadoghq.com/synthetics/tests
 [9]: https://app.datadoghq.com/incidents/settings?section=global-settings
 [10]: /incident_response/incident_management/incident_settings/property_fields
-[11]: /incident_response/incident_management/incident_settings/notification_rules
+[11]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [12]: /incident_response/on-call/
 [13]: https://app.datadoghq.com/on-call/pages

@@ -2,6 +2,7 @@
 title: Templates
 aliases:
 - /service_management/incident_management/incident_settings/templates/
+- /incident_response/incident_management/incident_settings/templates
 further_reading:
 - link: "/incident_response/incident_management/notification"
   tag: "Documentation"

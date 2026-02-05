@@ -1,10 +1,11 @@
 ---
-title: Incident Settings
+title: Setup and Configuration
 description: Configure and customize your Incident Management experience
 aliases:
 - /monitors/incident_management/notification_rules
 - /monitors/incident_management/incident_settings
 - /service_management/incident_management/incident_settings/
+- /incident_response/incident_management/incident_settings
 ---
 
 ## Overview
@@ -31,9 +32,14 @@ To create an incident type:
 ## Customize incident response
 
 {{< whatsnext desc="Set additional customizations on the following:">}}
-    {{< nextlink href="/incident_response/incident_management/incident_settings/information" >}}Information{{< /nextlink >}}
-    {{< nextlink href="/incident_response/incident_management/incident_settings/integrations" >}}Integrations{{< /nextlink >}}
-    {{< nextlink href="/incident_response/incident_management/incident_settings/templates" >}}Templates{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/information" >}}Information{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/integrations" >}}Integrations{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/post_incident/follow-ups" >}}Follow-ups{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/notification_rules" >}}Notification Rules{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/property_fields" >}}Property Fields{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/responder_types" >}}Responder Types{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/templates" >}}Templates{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/setup_and_configuration/automations" >}}Automations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents/settings

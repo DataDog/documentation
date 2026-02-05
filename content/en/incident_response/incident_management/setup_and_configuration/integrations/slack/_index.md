@@ -179,5 +179,5 @@ You can view the full list of available Slack commands at any time by typing `/d
 [2]: /integrations/slack/?tab=datadogforslack
 [3]: https://app.datadoghq.com/incidents/settings#Integrations
 [4]: /integrations/jira/
-[5]: /incident_response/incident_management/incident_settings/notification_rules/
+[5]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /integrations/slack/?tab=datadogforslack#permissions
