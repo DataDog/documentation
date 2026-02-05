@@ -435,14 +435,16 @@ configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate al
 {{% /tab %}}
 {{% /tabs %}}
 
-#### Enable `URLSessionInstrumentation`
+Network requests are automatically tracked after you enable RUM with `urlSessionTracking` configuration.
 
-To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
+#### (Optional) Enable detailed timing breakdown
+
+To additionally capture detailed network timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), optionally enable `URLSessionInstrumentation` for your delegate type:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-URLSessionInstrumentation.enable(
+URLSessionInstrumentation.enableDurationBreakdown(
     with: .init(
         delegateClass: <YourSessionDelegate>.self
     )

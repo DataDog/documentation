@@ -623,14 +623,16 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 
 ### Automatically track network requests
 
-#### Basic network instrumentation
+Network requests are automatically tracked after you enable RUM with the `urlSessionTracking` option. 
 
-To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `urlSessionTracking` option when enabling RUM and enable `URLSessionInstrumentation`:
+#### (Optional) Enable detailed timing breakdown
+
+To get detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), optionally enable `URLSessionInstrumentation` for your delegate type:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
-URLSessionInstrumentation.enable(
+URLSessionInstrumentation.enableDurationBreakdown(
     with: .init(
         delegateClass: <YourSessionDelegate>.self
     )
@@ -654,6 +656,11 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+**Notes**:
+- Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides additional detailed timing breakdown for performance analysis.
+- Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) for tasks with completion handlers in automatic mode, and for all tasks after enabling `URLSessionInstrumentation`.
+- To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
 <div class="alert alert-info">Be mindful of delegate retention.
 While Datadog instrumentation does not create memory leaks directly, it relies on <code>URLSession</code> delegates. According to <a href="https://developer.apple.com/documentation/foundation/urlsession/init(configuration:delegate:delegatequeue:)#parameters"> Apple documentation</a>:
