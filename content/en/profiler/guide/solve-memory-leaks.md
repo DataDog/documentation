@@ -33,7 +33,7 @@ To use this walkthrough, you need:
 * A containerized service with either the Datadog Kubernetes integration or the Datadog Container integration installed.
 * [Continuous Profiler enabled][3].
   * Ensure that your profiles are tagged with `container_id`. This is necessary to link between container memory utilization metrics and profiling data.
-  * For Java ([Enabling the heap histogram metrics][6]) and .NET ([Heap snapshot][7]) ensure that heap profiling is enabled so that heap data is available for analysis.
+  * For Java ([Enabling the heap class histogram collection][6]) and .NET ([Heap snapshot][7]) ensure that heap profiling is enabled so that heap data is available for analysis.
 
 
 ## Get started
