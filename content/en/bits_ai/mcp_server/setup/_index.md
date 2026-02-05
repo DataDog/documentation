@@ -17,8 +17,6 @@ further_reading:
 The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
 {{< /callout >}}
 
-This page explains how to connect your AI agent to the Datadog MCP Server.
-
 ## Connect in Cursor and VS Code
 
 Datadog's [Cursor and VS Code extension][12] includes built-in access to the managed Datadog MCP Server. Benefits include:
