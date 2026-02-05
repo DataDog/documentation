@@ -86,7 +86,7 @@ APM Recommendations help you improve your applications' performance and reliabil
 - Improve service reliability and uptime
 - Improve end-user experience
 
-{{< img src="/tracing/recommendations/apm_recommendations.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/tracing/recommendations/apm_recommendations-2.png" alt="APM Recommendations page showing a list of recommendations with filters for status and type" style="width:100%;" >}}
 
 ## Prerequisites
 
@@ -102,9 +102,9 @@ APM Recommendations are based on data collected from different parts of your sta
 
 By looking at these sources together, Datadog finds ways to help you improve performance, reliability, and user experience.
 
-Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. This ensures that the most critical insights for improving service reliability and performance appear first.
+Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. This helps ensure that the most critical insights for improving service reliability and performance appear first.
 
-## Using APM Recommendations
+## Using APM recommendations
 
 To review recommendations that need your attention:
 
