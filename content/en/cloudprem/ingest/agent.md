@@ -161,7 +161,7 @@ spec:
     spec:
       containers:
       - name: agent
-        image: gcr.io/datadoghq/agent:latest
+        image: registry.datadoghq.com/agent:latest
         env:
         - name: DD_API_KEY
           value: <YOUR_API_KEY>

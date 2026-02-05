@@ -36,13 +36,17 @@ Any compliant StatsD client works with DogStatsD and the Agent, but does not inc
 
 **Note**: DogStatsD does NOT implement timers from StatsD as a native metric type (though it does support them through [histograms][2]).
 
-DogStatsD is available on Docker Hub and GCR:
+DogStatsD is available on the Datadog Container Registry, GAR, ECR, Azure ACR, and Docker Hub:
 
-| Docker Hub                                       | GCR                                                       |
-|--------------------------------------------------|-----------------------------------------------------------|
-| [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+| Registry                   | Image                                                     |
+|----------------------------|-----------------------------------------------------------|
+| Datadog Container Registry | [registry.datadoghq.com/dogstatsd][33]                    |
+| Google Artifact Registry   | [gcr.io/datadoghq/dogstatsd][4]                           |
+| Amazon ECR                 | [public.ecr.aws/datadog/dogstatsd][34]                    |
+| Azure ACR                  | datadoghq.azurecr.io/dogstatsd                            |
+| Docker Hub                 | [hub.docker.com/r/datadog/dogstatsd][3]                   |
 
-<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you use the Datadog Container Registry or a cloud-provider registry instead. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ## How it works
 
@@ -96,7 +100,7 @@ docker run -d --cgroupns host \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 
 If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [UNIX domain socket][1].
@@ -615,7 +619,7 @@ If you're interested in learning more about the datagram format used by DogStats
 [1]: https://github.com/statsd/statsd
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
-[4]: https://gcr.io/datadoghq/dogstatsd
+[4]: https://registry.datadoghq.com/dogstatsd
 [5]: /metrics/custom_metrics/
 [6]: /events/guides/dogstatsd/
 [7]: /developers/service_checks/dogstatsd_service_checks_submission/
@@ -623,3 +627,5 @@ If you're interested in learning more about the datagram format used by DogStats
 [9]: /developers/dogstatsd/datagram_shell/
 [10]: /developers/community/libraries/
 [11]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
+[33]: https://registry.datadoghq.com/v2/dogstatsd/tags/list
+[34]: https://gallery.ecr.aws/datadog/dogstatsd

@@ -5,18 +5,31 @@ aliases:
  - /agent/guide/changing_container_registry
 ---
 
-Datadog publishes container images in Google's gcr.io, Azure ACR, AWS' ECR, and on Docker Hub:
+Datadog publishes container images on the Datadog Container Registry, Google Artifact Registry (GAR), Amazon ECR, Azure ACR, and Docker Hub:
 
 {{% container-images-table %}}
 
-Pulling from the ACR, GCR or ECR registry works the same (except for Notary) as pulling from Docker Hub. You can use the same command (with different parameters) and get the same image.
+## Choosing a container registry
 
-**Note**: ACR, ECR and GCR do not support Notary. If you are verifying the signature of images pulled from Docker, this feature does not work on GCR or ECR.
+When selecting a container registry, Datadog recommends the following approach:
 
-To update your registry, you need to update your registry values based on the type of container environment you are deploying on.
+1. **Private pull-through cache**: Set up a pull-through cache in your own infrastructure. This provides the best control over your image dependencies. See your cloud provider's documentation:
+   - AWS: [Amazon ECR pull through cache][12]
+   - GCP: [Artifact Registry remote repositories][13]
+   - Azure: [Azure Container Registry cache][14]
 
-**Note**: You can also use a private registry, but you will need to create a pull secret to be able the pull the images from the private registry.
-For more information about creating a pull secret, see the [Kubernetes documentation][1].
+2. **Cloud-provider registries**: If your deployment is in a specific cloud provider (AWS, GCP, or Azure), use the corresponding Datadog public registry:
+   - AWS deployments: `public.ecr.aws/datadog`
+   - GCP deployments: `gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, or `asia.gcr.io/datadoghq`
+   - Azure deployments: `datadoghq.azurecr.io`
+
+3. **Datadog Container Registry**: Use `registry.datadoghq.com` for simplicity. This registry requires no additional setup and has very high rate limits. Ensure your firewall allows traffic to `us-docker.pkg.dev/datadog-prod/public-images`, as the registry may redirect requests to this URL.
+
+4. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
+
+<div class="alert alert-info">The Helm chart and Datadog Operator will default to the Datadog Container Registry in a future release.</div>
+
+To update your registry, update your registry values based on the type of container environment you are deploying on. You can also use a private registry, but you need to [create a pull secret][1] to pull the images.
 
 ## Docker
 
@@ -32,26 +45,26 @@ To update your containers registry while deploying the Datadog Agent (or Datadog
 
 1. Update your `values.yaml`:
     ```yaml
-    registry: gcr.io/datadoghq
+    registry: registry.datadoghq.com
     ```
 2. Remove any overrides for `agents.image.repository`, `clusterAgent.image.repository`, or `clusterChecksRunner.image.repository` in the `values.yaml`.
 
 ### Datadog Helm chart < v2.7.0
 
-Change the repository to `gcr.io`:
+Change the repository to the registry of your choice. For example, using the Datadog Container Registry:
 
 ```yaml
 agents:
   image:
-    repository: gcr.io/datadoghq/agent
+    repository: registry.datadoghq.com/agent
 
 clusterAgent:
   image:
-    repository: gcr.io/datadoghq/cluster-agent
+    repository: registry.datadoghq.com/cluster-agent
 
 clusterChecksRunner:
   image:
-    repository: gcr.io/datadoghq/agent
+    repository: registry.datadoghq.com/agent
 ```
 
 For more information about using the Datadog Helm chart, see the [Datadog Kubernetes documentation][3] and the example [`values.yaml`][4] file.
@@ -86,7 +99,7 @@ metadata:
   name: datadog
 spec:
   global:
-    registry: gcr.io/datadoghq
+    registry: public.ecr.aws/datadog
   // ..
 ```
 
@@ -119,13 +132,13 @@ For more information about the Datadog Operator, see [Deploying an Agent with th
 
 ### Using another container registry with Helm
 
-You could also switch from the default `gcr.io/datadoghq` registry to another registry, such as `datadoghq.azurecr.io` when installing the Operator with the Helm chart:
+You can switch from the default `gcr.io/datadoghq` registry to another registry, such as `public.ecr.aws/datadog` when installing the Operator with the Helm chart:
 
 Update [`values.yaml`][6] with the new image:
 
 ```yaml
 image:
-  repository: datadoghq.azurecr.io
+  repository: public.ecr.aws/datadog
 ```
 
 ## ECS
@@ -158,13 +171,13 @@ For more information about the Datadog Cluster Agent, see the [Cluster Agent doc
 
 ## Kubernetes Helm for the Datadog Private Location worker
 
-To update your registry for the Private Location worker, update the `datadog/synthetics-private-location-worker` image to the `public.ecr.aws/datadog/synthetics-private-location-worker` or `gcr.io/datadoghq/synthetics-private-location-worker` images.
+To update your registry for the Private Location worker, update the `datadog/synthetics-private-location-worker` image to a different registry such as `public.ecr.aws/datadog/synthetics-private-location-worker` or `gcr.io/datadoghq/synthetics-private-location-worker`.
 
 To change the default repository (`gcr.io/datadoghq`), update the `values.yaml` with the new image:
 
 ```yaml
 image:
-  repository: gcr.io/datadoghq/synthetics-private-location-worker
+  repository: public.ecr.aws/datadog/synthetics-private-location-worker
 ```
 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials
@@ -178,3 +191,6 @@ image:
 [9]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/#deploy-the-agent-on-eks
 [10]: https://docs.datadoghq.com/agent/cluster_agent/
 [11]: https://docs.datadoghq.com/agent/cluster_agent/setup/?tab=helm
+[12]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
+[13]: https://cloud.google.com/artifact-registry/docs/repositories/remote-repo
+[14]: https://learn.microsoft.com/en-us/azure/container-registry/container-registry-artifact-cache

@@ -55,7 +55,7 @@ docker run -d --cgroupns host --pid host --name dd-agent \
   -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
   -e DD_SITE=<DATADOG_SITE> \
   -e DD_API_KEY=<DATADOG_API_KEY> \
-  gcr.io/datadoghq/agent:7
+  registry.datadoghq.com/agent:7
 ```
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -66,7 +66,7 @@ docker run -d --name dd-agent `
   -v \\.\pipe\docker_engine:\\.\pipe\docker_engine `
   -e DD_SITE=<DATADOG_SITE> `
   -e DD_API_KEY=<DATADOG_API_KEY> `
-  gcr.io/datadoghq/agent:7
+  registry.datadoghq.com/agent:7
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -81,17 +81,13 @@ After the Datadog Docker Agent is up and running, you can [configure Datadog int
 
 ### Container registries
 
-Images are available for 64-bit x86 and Arm v8 architectures. Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
+Images are available for 64-bit x86 and Arm v8 architectures. Datadog publishes container images to the Datadog Container Registry, Google Artifact Registry (GAR), Amazon ECR, Azure ACR, and Docker Hub:
 
-| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
-| ------------------------ | ---------------------- | -------------------- | ----------------- |
-| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
+{{% container-images-table %}}
 
-By default, the above instructions pull the image from Google Artifact Registry (`gcr.io/datadoghq`). If Google Artifact Registry is not accessible in your deployment region, use another registry.
+By default, the above instructions pull the image from the Datadog Container Registry (`registry.datadoghq.com`). If you use this registry, ensure your firewall allows traffic to `us-docker.pkg.dev/datadog-prod/public-images`, as the registry may redirect requests to this URL.
 
-If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
-
-<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your configuration to pull from another registry. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ### Environment variables
 
@@ -274,8 +270,8 @@ See the [Agent Commands guides][21] to discover all the Docker Agent commands.
 By default, the Docker Agent collects metrics with the following core checks. To collect metrics from other technologies, see the [Integrations](#integrations) section.
 
 | Check       | Metrics       |
-|-------------|---------------|
-| Container   | [Metrics][22]
+| ----------- | ------------- |
+| Container   | [Metrics][22] |
 | CPU         | [System][23]  |
 | Disk        | [Disk][24]    |
 | Docker      | [Docker][25]  |

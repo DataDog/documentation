@@ -163,7 +163,7 @@ The default Agent installation does not come with a bundled JVM and uses the one
 
 **Notes**:
 
-- The `gcr.io/datadoghq/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch. Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
+- The `registry.datadoghq.com/agent:latest-jmx` Docker image does include a JVM, which the Agent needs to run jmxfetch. Alternatively, you can specify the JVM path in the integration's configuration file with the `java_bin_path` parameter.
 - Only one valid Java path needs to be specified for JMXFetch.
 
 ### JVM metrics

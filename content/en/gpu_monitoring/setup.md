@@ -121,7 +121,7 @@ docker run \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
 -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-gcr.io/datadoghq/agent:latest
+registry.datadoghq.com/agent:latest
 ```
 
 To enable advanced eBPF metrics, use the following configuration for the required permissions to run eBPF programs:
@@ -157,7 +157,7 @@ docker run \
 --cap-add=SYS_PTRACE \
 --cap-add=IPC_LOCK \
 --cap-add=CHOWN \
-gcr.io/datadoghq/agent:latest
+registry.datadoghq.com/agent:latest
 ```
 
 Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
@@ -173,7 +173,7 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 version: '3'
 services:
   datadog:
-    image: "gcr.io/datadoghq/agent:latest"
+    image: "registry.datadoghq.com/agent:latest"
     environment:
       - DD_GPU_ENABLED=true
       - DD_API_KEY=<DATADOG_API_KEY>
@@ -196,7 +196,7 @@ To enable advanced eBPF metrics, use the following configuration for the require
 version: '3'
 services:
   datadog:
-    image: "gcr.io/datadoghq/agent:latest"
+    image: "registry.datadoghq.com/agent:latest"
     environment:
       - DD_GPU_MONITORING_ENABLED=true  # only for advanced eBPF metrics
       - DD_GPU_ENABLED=true

@@ -38,13 +38,13 @@ Complete example:
 ```yaml
 services:
   datadog-init:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     command: ["sh", "-c", "cp -R /etc/datadog-agent/* /opt/datadog-agent-config/"]
     volumes:
       - datadog-config:/opt/datadog-agent-config
 
   datadog:
-    image: gcr.io/datadoghq/agent:latest
+    image: registry.datadoghq.com/agent:latest
     read_only: true
     pid: host
     depends_on:
@@ -125,13 +125,13 @@ services:
 
 Following [Linux Filesystem Hierarchy Standard (FHS)][4] guidelines, the Datadog Agent writes defaults to the following directories, which require read/write permissions:
 
-| Directory | Purpose | Read/Write Required |
-|-----------|---------|----------|
-| `/etc/datadog-agent/` | Configuration and check files | Yes |
-| `/opt/datadog-agent/run/` | Runtime state files | Yes |
-| `/var/run/datadog/` | APM and DogStatsD sockets | Yes |
-| `/var/log/datadog/` | Agent log output | No |
-| `/tmp/` | Temporary files for flares and diagnostics | No |
+| Directory                 | Purpose                                    | Read/Write Required |
+| ------------------------- | ------------------------------------------ | ------------------- |
+| `/etc/datadog-agent/`     | Configuration and check files              | Yes                 |
+| `/opt/datadog-agent/run/` | Runtime state files                        | Yes                 |
+| `/var/run/datadog/`       | APM and DogStatsD sockets                  | Yes                 |
+| `/var/log/datadog/`       | Agent log output                           | No                  |
+| `/tmp/`                   | Temporary files for flares and diagnostics | No                  |
 
 ## Troubleshooting
 

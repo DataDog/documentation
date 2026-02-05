@@ -29,13 +29,13 @@ For dedicated documentation and examples for monitoring the Kubernetes control p
 
 Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes version | Agent version  | Cluster Agent version | Reason                                                                         |
-|--------------------|----------------|-----------------------|--------------------------------------------------------------------------------|
-| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation                                                    |
-| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation                                                |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | Supports dynamic service account token                                         |
-| 1.25.0+            | 7.40.0+        | 7.40.0+               | Supports `v1` API group                                                        |
-| 1.33.0+            | 7.67.0+        | 7.67.0+               | Fixes incompatibilities with Kubernetes `AllocatedResources` in `/pods` output |
+| Kubernetes version | Agent version | Cluster Agent version | Reason                                                                         |
+| ------------------ | ------------- | --------------------- | ------------------------------------------------------------------------------ |
+| 1.16.0+            | 7.19.0+       | 1.9.0+                | Kubelet metrics deprecation                                                    |
+| 1.21.0+            | 7.36.0+       | 1.20.0+               | Kubernetes resource deprecation                                                |
+| 1.22.0+            | 7.37.0+       | 7.37.0+               | Supports dynamic service account token                                         |
+| 1.25.0+            | 7.40.0+       | 7.40.0+               | Supports `v1` API group                                                        |
+| 1.33.0+            | 7.67.0+       | 7.67.0+               | Fixes incompatibilities with Kubernetes `AllocatedResources` in `/pods` output |
 
 For optimal compatibility Datadog recommends to keep your Cluster Agent and Agent on matching versions.
 
@@ -222,17 +222,13 @@ helm install datadog-agent -f datadog-values.yaml datadog/datadog
 
 ### Container registries
 
-Datadog publishes container images to Google Artifact Registry, Amazon ECR, Azure ACR, and Docker Hub:
+Datadog publishes container images to the Datadog Container Registry, Google Artifact Registry (GAR), Amazon ECR, Azure ACR, and Docker Hub:
 
-| Google Artifact Registry | Amazon ECR             | Azure ACR            | Docker Hub        |
-| ------------------------ | ---------------------- | -------------------- | ----------------- |
-| gcr.io/datadoghq         | public.ecr.aws/datadog | datadoghq.azurecr.io | docker.io/datadog |
+{{% container-images-table %}}
 
-By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, use another registry.
+By default, the Helm chart and Datadog Operator pull images from Google Artifact Registry (`gcr.io/datadoghq`). This will change to the Datadog Container Registry (`registry.datadoghq.com`) in a future release.
 
-If you are deploying the Agent in an AWS environment, Datadog recommend that you use Amazon ECR.
-
-<div class="alert alert-danger">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from Google Artifact Registry or Amazon ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from another registry. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}

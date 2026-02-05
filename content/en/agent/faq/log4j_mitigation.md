@@ -194,7 +194,7 @@ Use the following Dockerfile to build the custom image:
 ```
 ARG AGENT_VERSION=7.32.2
 
-FROM gcr.io/datadoghq/agent:$AGENT_VERSION-jmx
+FROM registry.datadoghq.com/agent:$AGENT_VERSION-jmx
 
 RUN apt update && apt install zip -y
 
