@@ -8945,6 +8945,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update postmortem template
+      url: '#update-postmortem-template'
+      identifier: incidents-update-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 47
+    - name: Get postmortem template
+      url: '#get-postmortem-template'
+      identifier: incidents-get-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 46
+    - name: Delete postmortem template
+      url: '#delete-postmortem-template'
+      identifier: incidents-delete-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 48
+    - name: Create postmortem template
+      url: '#create-postmortem-template'
+      identifier: incidents-create-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 45
+    - name: List postmortem templates
+      url: '#list-postmortem-templates'
+      identifier: incidents-list-postmortem-templates
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentPostmortemTemplates
+        unstable:
+          - v2
+        order: 44
     - name: Update incident notification template
       url: '#update-incident-notification-template'
       identifier: incidents-update-incident-notification-template

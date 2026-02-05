@@ -1226,6 +1226,30 @@
     "request_description": "",
     "request_schema_description": "Update request for a notification template."
   },
+  "ListIncidentPostmortemTemplates": {
+    "description": "Retrieve a list of all postmortem templates for incidents.",
+    "summary": "List postmortem templates"
+  },
+  "CreateIncidentPostmortemTemplate": {
+    "description": "Create a new postmortem template for incidents.",
+    "summary": "Create postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentPostmortemTemplate": {
+    "description": "Delete a postmortem template.",
+    "summary": "Delete postmortem template"
+  },
+  "GetIncidentPostmortemTemplate": {
+    "description": "Retrieve details of a specific postmortem template.",
+    "summary": "Get postmortem template"
+  },
+  "UpdateIncidentPostmortemTemplate": {
+    "description": "Update an existing postmortem template.",
+    "summary": "Update postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
