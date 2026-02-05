@@ -70,7 +70,7 @@ Worker version 2.13.0 gives you access to the following:
 
 - Live Capture has been updated and bugs have been fixed.
 - The Search Syntax bug with handling hyphenated segments has been fixed.
-- The syslog source in UDP mode emits the standard `component_received` metrics, like it does with TCP mode:
+- The syslog source in UDP mode emits the standard `component_received` metrics, like how it does with TCP mode:
     - `component_received_events_total`
     - `component_received_event_bytes_total`
     - `component_received_bytes_total`
@@ -91,7 +91,7 @@ Worker version 2.12.0 gives you access to the following:
 #### New features
 
 - [HTTP destination][29] for metrics pipelines: Routes metrics to an HTTP client endpoint.
-- [MySQL Source][30]: Send logs from a MySQL database to Observability Pipelines.
+- [MySQL Source][30]: Sends logs from a MySQL database to Observability Pipelines.
 
 #### Enhancements
 
@@ -102,10 +102,10 @@ Worker version 2.12.0 gives you access to the following:
 
 #### Fixes
 
-- Ensure that the message field is always a string, JSON-encoding it if necessary.
-- The default log level reports all `info` level and above.
+- The Amazon S3 destination has been updated to ensure the `message` field is always a string, JSON-encoding it if necessary.
+- Worker bug has been fixed to ensure Worker logs are reported correctly.
 - The hostname is renamed to host when shipping logs to Datadog archives.
-- The Datadog Agent metrics source does not store the API key presented by the Agent to match the behavior of the corresponding logs source.
+- For metrics sources, Workers have been updated to use their own copy of the Datadog key for authentication, disregarding any keys sent in by the Datadog Agent to prevent the use of stale keys.
 - The Worker uses proxy settings configured with environment variables (for example, the `DD_PROXY_HTTPS` environment variable) or in the bootstrap file when it publishes events to Live Capture.
 
 ---
