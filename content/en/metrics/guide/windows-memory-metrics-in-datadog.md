@@ -36,14 +36,14 @@ For additional context on Windows memory architecture, see Microsoft's [Memory P
 Physical Memory
 : Actual physical RAM that is in use. Sometimes also called the "working set" or RSS.
 
-Virtual Memory
-: Amount of virtual address space being used by a process. Since virtual addresses can be reserved without actually taking up any memory, this value can be huge and often is not representative of how much memory is actually in use.
-
 Commit charge
 : Total of all memory that must be backed by RAM or the paging files. Sometimes also called "private bytes".
 
 Commit limit
 : The system-wide max commit charge, it is the sum of the capacity of the paging files and physical RAM.
+
+Virtual Memory
+: Amount of virtual address space being used by a process. Since virtual addresses can be reserved without actually taking up any memory, this value can be huge and often is not representative of how much memory is actually in use.
 
 **Note**: Windows can reach an out-of-memory condition by exhausting physical memory or by reaching the commit limit. It is helpful to monitor both.
 
@@ -56,9 +56,9 @@ The table also includes corresponding Live Processes metrics and native Windows 
 | Memory Type | Description | Datadog System Metric | Live Processes Metric | Windows Performance Counter |
 | :---- | :---- | :---- | :---- | :---- |
 | Physical Memory | Actual physical RAM. Known as RSS or "working set". | `system.mem.total` `system.mem.usable` `system.mem.pct_usable` `system.mem.used` `system.mem.shared` `system.processes.mem.rss` | RSS Memory RSS Memory % | `\Memory\Available Bytes` `\Process()\Working Set` `\Process()\Working Set - Private` |
-| Virtual Memory | Amount of virtual address space being used by a process. |  | Virtual Memory | `\Process()\Virtual Bytes` |
 | Commit Charge | Total of all memory that must be backed by RAM or the paging files. Known as "private bytes" | `system.mem.pagefile.*` `system.swap.*` `system.mem.committed` `system.processes.mem.vms` | N/A | `\Memory\Committed Bytes` `\Process()\Private Bytes` |
 | Commit Limit | The system-wide max commit charge, it is the sum of the capacity of the paging files and physical RAM | `system.mem.pagefile.total` `system.swap.total` | N/A | `\Memory\Commit Limit` |
+| Virtual Memory | Amount of virtual address space being used by a process. |  | Virtual Memory | `\Process()\Virtual Bytes` |
 
 ### Example: Windows Process Explorer
 
@@ -91,15 +91,16 @@ What each metric measures:
 
 Agent versions `7.76` and later have the following metrics available for monitoring paging file (pagefile.sys) usage:
 
-| `system.paging.total` | The total amount of allocated pagefile in bytes. |
+| Metric | Description |
 | :---- | :---- |
+| `system.paging.total` | The total amount of allocated pagefile in bytes. |
 | `system.paging.used` | The amount of pagefile that is used in bytes |
 | `system.paging.pct_free` | The percentage of pagefile that is not used. |
 | `system.paging.free` | The amount of pagefile that is not used in bytes. |
 
 ### For Agent versions 7.75 and previous
 
-If you're using an Agent version previous to 7.76, the total size of all paging files (pagefile.sys) can be calculated with the following formula:
+If you're using an Agent version previous to 7.76, the total size of all paging files (pagefile.sys) can be calculated with the following formula (open the [Metric Explorer][4] to try it out):
 
 ```
 system.mem.pagefile.total - system.mem.total
@@ -118,3 +119,4 @@ The following performance counters can also be collected through the Windows Per
 [1]: https://learn.microsoft.com/windows/win32/memory/memory-performance-information
 [2]: https://learn.microsoft.com/windows/win32/api/winbase/ns-winbase-memorystatus
 [3]: https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getperformanceinfo
+[4]: https://app.datadoghq.com/metric/explorer
