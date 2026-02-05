@@ -1,8 +1,6 @@
 ---
 title: "Enable Data Observability: Jobs Monitoring for Apache Airflow"
 description: "Monitor Apache Airflow DAG workflows with Data Observability: Jobs Monitoring using OpenLineage provider across Kubernetes, Amazon MWAA, and other platforms."
-is_beta: true
-private: true
 aliases:
   - /data_jobs/airflow
 further_reading:
