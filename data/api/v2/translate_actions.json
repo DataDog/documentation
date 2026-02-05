@@ -1226,6 +1226,30 @@
     "request_description": "",
     "request_schema_description": "Update request for a notification template."
   },
+  "ListIncidentConfigRules": {
+    "description": "Retrieve a list of all incident rules for the organization.",
+    "summary": "List incident rules"
+  },
+  "CreateIncidentConfigRule": {
+    "description": "Create a new incident rule for the organization.",
+    "summary": "Create incident rule",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentConfigRule": {
+    "description": "Delete an incident rule.",
+    "summary": "Delete incident rule"
+  },
+  "GetIncidentConfigRule": {
+    "description": "Retrieve details of a specific incident rule.",
+    "summary": "Get incident rule"
+  },
+  "UpdateIncidentConfigRule": {
+    "description": "Update an existing incident rule.",
+    "summary": "Update incident rule",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"

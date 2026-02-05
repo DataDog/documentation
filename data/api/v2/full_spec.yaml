@@ -29677,6 +29677,92 @@ components:
         user_defined_fields:
           $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFields'
       type: object
+    IncidentRuleAttributesRequest:
+      properties:
+        name:
+          description: The name of the rule.
+          example: High Severity Rule
+          type: string
+      required:
+      - name
+      type: object
+    IncidentRuleAttributesResponse:
+      properties:
+        createdAt:
+          description: When the rule was created.
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        modifiedAt:
+          description: When the rule was last modified.
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        name:
+          description: The name of the rule.
+          example: High Severity Rule
+          type: string
+      required:
+      - name
+      - createdAt
+      - modifiedAt
+      type: object
+    IncidentRuleDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentRuleAttributesRequest'
+        type:
+          $ref: '#/components/schemas/IncidentRuleType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentRuleDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentRuleAttributesResponse'
+        id:
+          description: The ID of the rule.
+          example: 612e0c88-9137-4bd2-8de4-9356867d4c6a
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentRuleType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IncidentRuleRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentRuleDataRequest'
+      required:
+      - data
+      type: object
+    IncidentRuleResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentRuleDataResponse'
+      required:
+      - data
+      type: object
+    IncidentRuleType:
+      description: Incident rule resource type.
+      enum:
+      - incident_rule
+      example: incident_rule
+      type: string
+      x-enum-varnames:
+      - INCIDENT_RULE
+    IncidentRulesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/IncidentRuleDataResponse'
+          type: array
+      required:
+      - data
+      type: object
     IncidentSearchResponse:
       description: Response with incidents and facets.
       properties:
@@ -78447,6 +78533,183 @@ paths:
         permissions:
         - incident_notification_settings_write
       x-unstable: '**Note**: This endpoint is in Preview.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/rules:
+    get:
+      description: Retrieve a list of all incident rules for the organization.
+      operationId: ListIncidentConfigRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentRulesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List incident rules
+      tags:
+      - Incidents
+      x-menu-order: 45
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new incident rule for the organization.
+      operationId: CreateIncidentConfigRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentRuleRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentRuleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create incident rule
+      tags:
+      - Incidents
+      x-menu-order: 46
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/rules/{rule_id}:
+    delete:
+      description: Delete an incident rule.
+      operationId: DeleteIncidentConfigRule
+      parameters:
+      - description: The ID of the incident rule.
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 612e0c88-9137-4bd2-8de4-9356867d4c6a
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete incident rule
+      tags:
+      - Incidents
+      x-menu-order: 49
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieve details of a specific incident rule.
+      operationId: GetIncidentConfigRule
+      parameters:
+      - description: The ID of the incident rule.
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 612e0c88-9137-4bd2-8de4-9356867d4c6a
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get incident rule
+      tags:
+      - Incidents
+      x-menu-order: 47
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing incident rule.
+      operationId: UpdateIncidentConfigRule
+      parameters:
+      - description: The ID of the incident rule.
+        in: path
+        name: rule_id
+        required: true
+        schema:
+          example: 612e0c88-9137-4bd2-8de4-9356867d4c6a
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentRuleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentRuleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update incident rule
+      tags:
+      - Incidents
+      x-menu-order: 48
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/config/types:
