@@ -1,9 +1,6 @@
 ---
 title: Datadog MCP Server
 description: "Connect AI agents to Datadog observability data using the MCP Server to query metrics, logs, traces, and other insights."
-aliases:
-  - /bits_ai/mcp_server/setup
-  - /bits_ai/mcp_server/setup/
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
@@ -35,6 +32,8 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 
 {{< img src="bits_ai/mcp_server/mcp_cursor_demo_3.mp4" alt="Demo of Datadog MCP Server in Cursor and Claude Code" video="true" >}}
 
+<div class="alert alert-info"><strong>Ready to get started?</strong> See <a href="/bits_ai/mcp_server/setup">Set Up the Datadog MCP Server</a> for connection instructions.</div>
+
 <div class="alert alert-tip">Use the <a href="https://docs.datadoghq.com/developers/ide_plugins/vscode/?tab=cursor">Datadog extension for Cursor</a> to enhance the editor's AI-assisted coding capabilities with informed insights from Datadog. The Datadog MCP Server is included in the extension.</div>
 
 ## Disclaimers
@@ -53,175 +52,24 @@ The following AI clients are compatible with the Datadog MCP Server.
 
 | Client | Developer | Notes |
 |--------|------|------|
-| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
+| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](/bits_ai/mcp_server/setup#connect-in-cursor-and-vs-code) recommended. |
 | [Claude Code][5] | Anthropic | |
-| [Claude&nbsp;Desktop][6] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+| [Claude&nbsp;Desktop][6] | Anthropic | Limited support for remote authentication. Use [local binary authentication](/bits_ai/mcp_server/setup?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 | [Codex CLI][7] | OpenAI | |
-| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
+| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](/bits_ai/mcp_server/setup#connect-in-cursor-and-vs-code) recommended. |
 | [Goose][9] | Block | |
 | [Kiro][22] | Amazon | |
 | [Kiro CLI][10] | Amazon | |
-| [Cline][17] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+| [Cline][17] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](/bits_ai/mcp_server/setup?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
 
 ## Requirements
 
 Datadog users must have the `Incidents Read` [permission][18] to use the MCP Server.
 
-## Connect in Cursor and VS Code
-
-Datadog's [Cursor and VS Code extension][12] includes built-in access to the managed Datadog MCP Server. Benefits include:
-
-* No additional MCP Server setup after you install the extension and connect to Datadog.
-* One-click transitions between multiple Datadog organizations.
-* [Cursor only] Better fixes from **Fix in Chat** on Code Insights (issues from Error Tracking, Code Vulnerabilities, and Library Vulnerabilities), informed by context from the MCP Server.
-
-To install the extension:
-
-1. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts. To find the MCP Server configuration:
-   - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`) and select the **MCP** tab.
-   - VS Code: Open the command palette (`Shift` + `Cmd/Ctrl` + `P`) and run `MCP: Open User Configuration`.
-2. Install the Datadog extension following [these instructions][14]. If you have the extension installed already, make sure it's the latest version, as new features are released regularly.
-3. Sign in to your Datadog account. If you have multiple accounts, use the account included in your Product Preview.
-    {{< img src="bits_ai/mcp_server/ide_sign_in.png" alt="Sign in to Datadog from the IDE extension" style="width:70%;" >}}
-4. **Restart the IDE.**
-5. Confirm the Datadog MCP Server is available and the [tools](#available-tools) are listed in your IDE:
-    - Cursor: Go to **Cursor Settings** (`Shift` + `Cmd/Ctrl` + `J`), and select the **MCP** tab.
-    - VS Code: Open the chat panel, select agent mode, and click the **Configure Tools** button.
-       {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
-
-## Connect in supported AI clients
-
-The following instructions are for all [MCP-compatible clients](#client-compatibility). For Cursor or VS Code, use the [Datadog extension](#connect-in-cursor-and-vs-code) for built-in access to the Datadog MCP Server.
-
-{{< tabs >}}
-{{% tab "Remote authentication" %}}
-This method uses the MCP specification's [Streamable HTTP][1] transport mechanism to connect to the MCP Server.
-
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][2]. For example, if you're using `app.datadoghq.com` to access Datadog, use the endpoint for the US1 site.
-
-If your organization uses a [custom sub-domain][3], use the endpoint that corresponds to your regional Datadog site. For example, if your custom sub-domain is `myorg.datadoghq.com`, use the US1 endpoint.
-
-| Datadog Site | MCP Server Endpoint |
-|--------|------|
-| **US1** (`app.datadoghq.com`) | `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US3** (`us3.datadoghq.com`) | `https://mcp.us3.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **US5** (`us5.datadoghq.com`) | `https://mcp.us5.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **EU1** (`app.datadoghq.eu`) | `https://mcp.datadoghq.eu/api/unstable/mcp-server/mcp` |
-| **AP1** (`ap1.datadoghq.com`) | `https://mcp.ap1.datadoghq.com/api/unstable/mcp-server/mcp` |
-| **AP2** (`ap2.datadoghq.com`) | `https://mcp.ap2.datadoghq.com/api/unstable/mcp-server/mcp` |
-
-### Example configurations
-
-These examples are for the US1 site:
-
-* **Command line**: For Claude Code, run:
-  ```bash
-  claude mcp add --transport http datadog-mcp https://mcp.datadoghq.com/api/unstable/mcp-server/mcp
-  ```
-
-* **Configuration file**: Edit the configuration file for your AI agent:
-  * Codex CLI: `~/.codex/config.toml`
-  * Gemini CLI: `~/.gemini/settings.json`
-  * Kiro CLI: `~/.kiro/settings/mcp.json`
-
-  ```json
-  {
-    "mcpServers": {
-      "datadog": {
-        "type": "http",
-        "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp"
-      }
-    }
-  }
-  ```
-
-[1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http
-[2]: /getting_started/site/
-[3]: /account_management/multi_organization/#custom-sub-domains
-{{% /tab %}}
-
-{{% tab "Local binary authentication" %}}
-
-This method uses the MCP specification's [stdio][1] transport mechanism to connect to the MCP Server.
-
-Use this option if direct remote authentication is not available for you. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
-
-1. Install the Datadog MCP Server binary:
-    * macOS and Linux:
-      ```bash
-      curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-      ```
-
-      This installs the MCP Server binary to `~/.local/bin/datadog_mcp_cli` and then you can use it like any other stdio MCP server.<br/><br/>
-
-    * Windows: Download the [Windows version][2].
-
-2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow.
-
-    The MCP Server automatically starts the OAuth flow if a client needs it, but doing it manually lets you choose a [Datadog site][3] and avoid the AI client timing out.
-
-3. Configure your AI client to use the Datadog MCP Server. Follow your client's configuration instructions, as MCP Server setup varies between third-party AI clients.
-
-    For example, for Claude Code, add this to `~/.claude.json`, making sure to replace `<USERNAME>` in the command path:
-
-      ```json
-      {
-        "mcpServers": {
-          "datadog": {
-            "type": "stdio",
-            "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-            "args": [],
-            "env": {}
-          }
-        }
-      }
-      ```
-
-    Alternatively, you can also configure Claude Code by running the following:
-      ```bash
-      claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
-      ```
-
-[1]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
-[2]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
-[3]: /getting_started/site/
-{{% /tab %}}
-{{< /tabs >}}
-
-### Authentication
-
-The MCP Server uses OAuth 2.0 for [authentication][2]. If you cannot go through the OAuth flow (for example, on a server), you can provide a Datadog [API key and application key][3] as `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers. For example:
-
-{{< code-block lang="json" >}}
-{
-  "mcpServers": {
-    "datadog": {
-      "type": "http",
-      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
-      "headers": {
-          "DD_API_KEY": "<YOUR_API_KEY>",
-          "DD_APPLICATION_KEY": "<YOUR_APPLICATION_KEY>"
-      }
-    }
-  }
-}
-{{< /code-block >}}
-
-For security, use a scoped API key and application key from a [service account][23] that has only the required permissions.
-
-### Test access to the MCP Server
-
-1. Install the [MCP inspector][4], a developer tool for testing and debugging MCP servers.
-
-    ```bash
-    npx @modelcontextprotocol/inspector
-    ```
-2. In the inspector's web UI, for **Transport Type**, select **Streamable HTTP**.
-3. For **URL**, enter the [MCP Server URL](?tab=remoteauthentication#connect-in-supported-ai-clients) for your regional Datadog site.
-4. Click **Connect**, then go to **Tools** > **List Tools**.
-5. Check if the [available tools](#available-tools) appear.
+For setup instructions, see [Set Up the Datadog MCP Server](/bits_ai/mcp_server/setup).
 
 ## Toolsets
+
 
 The Datadog MCP Server supports _toolsets_, which allow you to use only the tools you need, saving valuable context window space. These toolsets are available:
 
@@ -231,7 +79,7 @@ The Datadog MCP Server supports _toolsets_, which allow you to use only the tool
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][25]
 - `dbm`: Tools for interacting with [Database Monitoring][26]
 
-To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
+To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](/bits_ai/mcp_server/setup?tab=remote-authentication#connect-in-supported-ai-clients) only). For example:
 
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp` retrieves only the core tools (this is the default if `toolsets` is not specified).
 - `https://mcp.datadoghq.com/api/unstable/mcp-server/mcp?toolsets=synthetics` retrieves only Synthetic Testing-related tools.
