@@ -38,7 +38,7 @@ By default, destinations have an in-memory buffer which can store 500 events. De
 
 ### Destination buffer behavior
 
-If a destination becomes unavailable, events start to fill the destination buffer. The destination retries indefinitely to ensure the pipeline flows again as soon as the destination becomes available. If the buffer fills up during this time, it blocks new events from being processed upstream. This eventually results in backpressure propagation, which stops any new events from being ingested from your source. 
+If a destination becomes unavailable, events start to fill the destination buffer. The destination retries indefinitely to ensure the pipeline flows again as soon as the destination becomes available. If the buffer fills up during this time, it blocks new events from being processed upstream. This eventually results in backpressure propagation, which stops your source from ingesting any new events. 
 
 #### Which buffer type to use for a destination
 
