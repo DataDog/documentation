@@ -451,7 +451,6 @@ Aggregates Datadog Test Optimization events to quantify reliability and performa
 Searches [Test Optimization][24] test events with filters and returns details on them.
 
 - Show me failed tests on branch `main` from the last 24 hours.
-- Find tests matching name pattern `*login*` and show their results.
 - Get test executions for commit `abc123` to see what passed and failed.
 - Show me all flaky test runs for the checkout service.
 - Find tests owned by `@team-name` that are failing.
