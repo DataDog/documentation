@@ -103,8 +103,8 @@ Worker version 2.12.0 gives you access to the following:
 #### Fixes
 
 - The Amazon S3 destination has been updated to ensure the `message` field is always a string, JSON-encoding it if necessary.
-- Worker bug has been fixed to ensure Worker logs are reported correctly.
-- The hostname is renamed to host when shipping logs to Datadog archives.
+- A Worker bug has been fixed to ensure Worker logs are reported correctly.
+- The `hostname` is renamed to `host` when shipping logs to Datadog archives.
 - For metrics sources, Workers have been updated to use their own copy of the Datadog key for authentication, disregarding any keys sent in by the Datadog Agent to prevent the use of stale keys.
 - The Worker uses proxy settings configured with environment variables (for example, the `DD_PROXY_HTTPS` environment variable) or in the bootstrap file when it publishes events to Live Capture.
 
