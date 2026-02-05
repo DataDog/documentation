@@ -760,11 +760,14 @@ Jest's [test.concurrent][13] is not supported.
 ### Jest's `--forceExit`
 Jest's [--forceExit][14] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
+### Jest's `--workerThreads`
+Jest's [workerThreads][15] option is not supported.
+
 ### Mocha's `--exit`
-Mocha's [--exit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
+Mocha's [--exit][16] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
 
 ### Vitest's browser mode
-Vitest's [browser mode][18] is not supported.
+Vitest's [browser mode][17] is not supported.
 
 ## Best practices
 
@@ -783,7 +786,7 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][16] instead:
+And use [`test.each`][18] instead:
 
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
@@ -791,7 +794,7 @@ test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][17]:
+For `mocha`, use [`mocha-each`][19]:
 
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
@@ -851,7 +854,8 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
 [13]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
 [14]: https://jestjs.io/docs/cli#--forceexit
-[15]: https://mochajs.org/#-exit
-[16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[17]: https://www.npmjs.com/package/mocha-each
-[18]: https://vitest.dev/guide/browser/
+[15]: https://jestjs.io/docs/configuration#workerthreads
+[16]: https://mochajs.org/#-exit
+[17]: https://vitest.dev/guide/browser/
+[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[19]: https://www.npmjs.com/package/mocha-each
