@@ -433,6 +433,54 @@ options:
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
 
+- label: Mobile
+  id: mobile
+
+- label: Multistep API
+  id: multistep
+
+- label: Test execution
+  id: execution
+
+- label: Test Metadata
+  id: test_metadata
+
+- label: Device Information
+  id: device_info
+
+- label: Execution Results
+  id: execution_results
+
+- label: Failed Step Information
+  id: failed_step_info
+
+- label: Local & Global Variables
+  id: local_global_variables
+
+- label: Extracted
+  id: extracted
+
+- label: Step
+  id: step
+
+- label: DNS
+  id: dns
+
+- label: SSL
+  id: ssl
+
+- label: WebSocket
+  id: websocket
+
+- label: UDP
+  id: udp
+
+- label: ICMP
+  id: icmp
+
+- label: gRPC
+  id: grpc
+
 - label: OpenTelemetry
   id: otel_api
 
