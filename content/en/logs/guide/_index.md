@@ -59,7 +59,7 @@ cascade:
     {{< nextlink href="/logs/guide/logs-not-showing-expected-timestamp" >}}Logs Not Showing the Expected Timestamp{{< /nextlink >}}
     {{< nextlink href="/logs/guide/remap-custom-severity-to-official-log-status" >}}Remap Custom Severity Values to the Official Log Status{{< /nextlink >}}
     {{< nextlink href="/logs/guide/logs-show-info-status-for-warnings-or-errors" >}}Logs Show Info Status for Warnings or Errors{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/regex_log_parsing" >}}Understanding Regular Expressions (Regex) for Log Parsing in Datadog{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/regex_log_parsing" >}}Writing Effective Grok Parsing Rules with Regular Expressions{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
