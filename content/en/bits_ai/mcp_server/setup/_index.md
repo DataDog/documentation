@@ -19,7 +19,7 @@ The Datadog MCP Server is in Preview. There is no charge for using the Datadog M
 
 ## Client compatibility
 
-The following AI clients are compatible with the Datadog MCP Server.
+The following AI clients are known to be compatible with the Datadog MCP Server.
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
@@ -57,7 +57,7 @@ To install the extension:
     - VS Code: Open the chat panel, select agent mode, and click the **Configure Tools** button.
        {{< img src="bits_ai/mcp_server/vscode_configure_tools_button.png" alt="Configure Tools button in VS Code" style="width:70%;" >}}
 
-## Connect in supported AI clients
+## Connect in other AI clients
 
 The following instructions are for all [MCP-compatible clients][21]. For Cursor or VS Code, use the [Datadog extension](#connect-in-cursor-and-vs-code) for built-in access to the Datadog MCP Server.
 
