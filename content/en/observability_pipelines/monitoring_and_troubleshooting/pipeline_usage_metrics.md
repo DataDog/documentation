@@ -51,7 +51,7 @@ Bytes out
 
 Uptime
 : **Metrics**: `pipelines.uptime_seconds`
-: **Description:** The amount of time since the worker process was started, in seconds.
+: **Description:** The amount of time since the Worker process was started, in seconds.
 
 CPU usage
 : **Metrics**: `pipelines.cpu_usage_seconds_total`
