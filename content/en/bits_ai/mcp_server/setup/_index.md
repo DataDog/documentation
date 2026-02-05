@@ -17,6 +17,24 @@ further_reading:
 The Datadog MCP Server is in Preview. There is no charge for using the Datadog MCP Server during the Preview, but pricing may change when the feature becomes generally available. If you're interested in the MCP server and need access, complete this form.
 {{< /callout >}}
 
+## Client compatibility
+
+The following AI clients are compatible with the Datadog MCP Server.
+
+<div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
+
+| Client | Developer | Notes |
+|--------|------|------|
+| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
+| [Claude Code][5] | Anthropic | |
+| [Claude&nbsp;Desktop][6] | Anthropic | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+| [Codex CLI][7] | OpenAI | |
+| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](#connect-in-cursor-and-vs-code) recommended. |
+| [Goose][9] | Block | |
+| [Kiro][22] | Amazon | |
+| [Kiro CLI][10] | Amazon | |
+| [Cline][17] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
+
 ## Connect in Cursor and VS Code
 
 Datadog's [Cursor and VS Code extension][12] includes built-in access to the managed Datadog MCP Server. Benefits include:
@@ -178,8 +196,16 @@ For security, use a scoped API key and application key from a [service account][
 [2]: https://modelcontextprotocol.io/specification/draft/basic/authorization
 [3]: /account_management/api-app-keys/
 [4]: https://github.com/modelcontextprotocol/inspector
+[5]: https://www.anthropic.com/claude-code
+[6]: https://claude.ai/download
+[7]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
+[8]: https://www.cursor.com/
+[9]: https://github.com/block/goose
+[10]: https://kiro.dev/cli/
+[11]: https://code.visualstudio.com/
 [12]: /developers/ide_plugins/vscode/
 [14]: /developers/ide_plugins/vscode/?tab=cursor#installation
+[17]: https://cline.bot/
 [20]: /bits_ai/mcp_server#available-tools
-[21]: /bits_ai/mcp_server#client-compatibility
+[22]: https://kiro.dev/
 [23]: /account_management/org_settings/service_accounts/

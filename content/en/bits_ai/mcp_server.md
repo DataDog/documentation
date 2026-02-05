@@ -43,24 +43,6 @@ This demo shows the Datadog MCP Server being used in Cursor and Claude Code (unm
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
 
-## Client compatibility
-
-The following AI clients are compatible with the Datadog MCP Server.
-
-<div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
-
-| Client | Developer | Notes |
-|--------|------|------|
-| [Cursor][8] | Anysphere | Datadog [Cursor & VS Code extension](/bits_ai/mcp_server/setup#connect-in-cursor-and-vs-code) recommended. |
-| [Claude Code][5] | Anthropic | |
-| [Claude&nbsp;Desktop][6] | Anthropic | Limited support for remote authentication. Use [local binary authentication](/bits_ai/mcp_server/setup?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
-| [Codex CLI][7] | OpenAI | |
-| [VS Code][11] | Microsoft | Datadog [Cursor & VS Code extension](/bits_ai/mcp_server/setup#connect-in-cursor-and-vs-code) recommended. |
-| [Goose][9] | Block | |
-| [Kiro][22] | Amazon | |
-| [Kiro CLI][10] | Amazon | |
-| [Cline][17] | Cline Bot | Limited support for remote authentication. Use [local binary authentication](/bits_ai/mcp_server/setup?tab=localbinaryauthentication#connect-in-supported-ai-clients) as needed. |
-
 ## Requirements
 
 Datadog users must have the `Incidents Read` [permission][18] to use the MCP Server.
@@ -349,27 +331,12 @@ The Datadog MCP Server is under significant development. During the Preview, use
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://modelcontextprotocol.io/
-[2]: https://modelcontextprotocol.io/specification/draft/basic/authorization
-[3]: /account_management/api-app-keys/
-[4]: https://github.com/modelcontextprotocol/inspector
-[5]: https://www.anthropic.com/claude-code
-[6]: https://claude.ai/download
-[7]: https://help.openai.com/en/articles/11096431-openai-codex-cli-getting-started
-[8]: https://www.cursor.com/
-[9]: https://github.com/block/goose
-[10]: https://kiro.dev/cli/
-[11]: https://code.visualstudio.com/
-[12]: /developers/ide_plugins/vscode/
-[14]: /developers/ide_plugins/vscode/?tab=cursor#installation
 [15]: /api/latest/events/
 [16]: /account_management/audit_trail/
-[17]: https://cline.bot/
 [18]: /account_management/rbac/permissions/#case-and-incident-management
 [19]: https://docs.google.com/forms/d/e/1FAIpQLSeorvIrML3F4v74Zm5IIaQ_DyCMGqquIp7hXcycnCafx4htcg/viewform
 [20]: /synthetics/
 [21]: /continuous_integration/
-[22]: https://kiro.dev/
-[23]: /account_management/org_settings/service_accounts/
 [24]: /tests/
 [25]: /error_tracking/
 [26]: /database_monitoring/
