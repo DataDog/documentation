@@ -54,39 +54,7 @@ After installation, ensure you have initialized the Datadog provider with your c
 {{< tabs >}}
 {{% tab "Client-side SDKs" %}}
 
-{{% collapse-content title="JavaScript (browser)" level="h4" expanded=false id="set-up-flag-javascript" %}}
-{{< code-block lang="javascript" >}}
-const client = OpenFeature.getClient();
-
-// Context is set on the provider, not passed to getBooleanValue
-const showNewFeature = client.getBooleanValue(
-    'show-new-feature',
-    false  // default value
-);
-
-if (showNewFeature) {
-    // Feature is enabled
-}
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="React" level="h4" expanded=false id="set-up-flag-react" %}}
-{{< code-block lang="jsx" >}}
-import { useBooleanFlagValue } from '@openfeature/react-sdk';
-
-function MyComponent() {
-    const showNewFeature = useBooleanFlagValue('show-new-feature', false);
-
-    if (showNewFeature) {
-        return <NewFeature />;
-    }
-
-    return <OldFeature />;
-}
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Android" level="h4" expanded=false id="set-up-flag-android" %}}
+{{% collapse-content title="Android & Android TV" level="h4" expanded=false id="set-up-flag-android" %}}
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.FlagsClient
 import com.datadog.android.flags.EvaluationContext
@@ -116,7 +84,7 @@ if (showNewFeature) {
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="iOS" level="h4" expanded=false id="set-up-flag-ios" %}}
+{{% collapse-content title="iOS & tvOS" level="h4" expanded=false id="set-up-flag-ios" %}}
 {{< code-block lang="swift" >}}
 import DatadogFlags
 
@@ -141,6 +109,38 @@ let showNewFeature = flagsClient.resolveBooleanValue(
 
 if showNewFeature {
     // Feature is enabled
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="JavaScript (browser)" level="h4" expanded=false id="set-up-flag-javascript" %}}
+{{< code-block lang="javascript" >}}
+const client = OpenFeature.getClient();
+
+// Context is set on the provider, not passed to getBooleanValue
+const showNewFeature = client.getBooleanValue(
+    'show-new-feature',
+    false  // default value
+);
+
+if (showNewFeature) {
+    // Feature is enabled
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="React" level="h4" expanded=false id="set-up-flag-react" %}}
+{{< code-block lang="jsx" >}}
+import { useBooleanFlagValue } from '@openfeature/react-sdk';
+
+function MyComponent() {
+    const showNewFeature = useBooleanFlagValue('show-new-feature', false);
+
+    if (showNewFeature) {
+        return <NewFeature />;
+    }
+
+    return <OldFeature />;
 }
 {{< /code-block >}}
 {{% /collapse-content %}}
@@ -310,6 +310,125 @@ Implement a wrapper function that provides a fallback mechanism to use the Launc
 {{< tabs >}}
 {{% tab "Client-side SDKs" %}}
 
+{{% collapse-content title="Android & Android TV" level="h4" expanded=false id="fallback-android" %}}
+{{< code-block lang="kotlin" filename="FallbackWrapper.kt" >}}
+import com.launchdarkly.sdk.LDContext
+import com.launchdarkly.sdk.android.LDClient
+import com.launchdarkly.sdk.android.LDConfig
+import com.datadog.android.flags.Flags
+import com.datadog.android.flags.FlagsClient
+import com.datadog.android.flags.EvaluationContext
+
+class FallbackWrapper(
+    userId: String,
+    evaluationContext: Map<String, String>
+) {
+    private val ldClient: LDClient
+    private val ddClient: FlagsClient
+
+    init {
+        val ldConfig = LDConfig.Builder()
+            .mobileKey('YOUR_LD_MOBILE_KEY')
+            .build()
+
+        val cb = LDContext.builder(userId)
+        for ((key, value) in evaluationContext) {
+            cb.set(key, value)
+        }
+        val ldContext = cb.build()
+        ldClient = LDClient.init(this@BaseApplication, ldConfig, ldContext, 5)
+
+        val ddConfig = Configuration.Builder(
+            clientToken = 'YOUR_DD_CLIENT_TOKEN',
+            env = 'DD_ENV',
+            variant = 'APP_VARIANT_NAME'
+        )
+
+        Flags.enable()
+
+        ddClient = FlagsClient.Builder().build()
+        ddClient.setEvaluationContext(
+            EvaluationContext(
+                targetingKey = userId,
+                attributes = evaluationContext
+            )
+        )
+    }
+
+    fun getBooleanFlag(
+        flagKey: String,
+        defaultValue: Boolean
+    ): Boolean {
+        return try {
+            ddClient.resolveBooleanValue(
+                flagKey = flagKey,
+                defaultValue = defaultValue
+            )
+        } catch (e: Exception) {
+            println("Falling back to LaunchDarkly for flag: $flagKey")
+            ldClient.boolVariation(flagKey, defaultValue)
+        }
+    }
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="iOS & tvOS" level="h4" expanded=false id="fallback-ios" %}}
+{{< code-block lang="swift" filename="FallbackWrapper.swift" >}}
+import Foundation
+import LaunchDarkly
+import DatadogFlags
+import DatadogCore
+
+class FallbackWrapper {
+    private let ldClient: LDClient
+    private let ddClient: FlagsClient
+
+    init(userId: String, evaluationContext: [String: AnyValue] = [:]) {
+        let ldConfig = LDConfig(mobileKey: 'YOUR_LD_MOBILE_KEY', autoEnvAttributes: .enabled)
+        var ldContext = LDContextBuilder(key: userId)
+        for (key, value) in evaluationContext {
+            ldContext.trySetValue(key, value)
+        }
+        LDClient.start(config: ldConfig, context: ldContext)
+
+        self.ldClient = LDClient.get()!
+
+        Datadog.initialize(
+            with: Datadog.Configuration(
+                clientToken: "<client token>",
+                env: "<environment>",
+                service: "<service name>"
+            ),
+            trackingConsent: .granted
+        )
+
+        Flags.enable()
+
+        self.ddClient = FlagsClient.create()
+        self.ddClient.setEvaluationContext(
+            FlagsEvaluationContext(
+                targetingKey: userId,
+                attributes: evaluationContext
+            )
+        )
+    }
+
+    func getBooleanFlag(flagKey: String, defaultValue: Bool) -> Bool {
+        do {
+            return self.ddClient.resolveBooleanValue(
+                flagKey: flagKey,
+                defaultValue: defaultValue
+            )
+        } catch {
+            print("Falling back to LaunchDarkly for flag: \(flagKey)")
+            return self.ldClient.boolVariation(forKey: flagKey, defaultValue: defaultValue)
+        }
+    }
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 {{% collapse-content title="JavaScript (browser)" level="h4" expanded=false id="fallback-javascript" %}}
 {{< code-block lang="javascript" filename="fallback-wrapper.js" >}}
 import * as ld from 'launchdarkly-js-client-sdk';
@@ -378,125 +497,6 @@ export function useFeatureFlagWithFallback(flagKey, defaultValue) {
 
         return ddFlagValue;
     }, [ddFlagValue, ddError, ldClient]);
-}
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="Android" level="h4" expanded=false id="fallback-android" %}}
-{{< code-block lang="kotlin" filename="FallbackWrapper.kt" >}}
-import com.launchdarkly.sdk.LDContext
-import com.launchdarkly.sdk.android.LDClient
-import com.launchdarkly.sdk.android.LDConfig
-import com.datadog.android.flags.Flags
-import com.datadog.android.flags.FlagsClient
-import com.datadog.android.flags.EvaluationContext
-
-class FallbackWrapper(
-    userId: String,
-    evaluationContext: Map<String, String>
-) {
-    private val ldClient: LDClient
-    private val ddClient: FlagsClient
-
-    init {
-        val ldConfig = LDConfig.Builder()
-            .mobileKey('YOUR_LD_MOBILE_KEY')
-            .build()
-
-        val cb = LDContext.builder(userId)
-        for ((key, value) in evaluationContext) {
-            cb.set(key, value)
-        }
-        val ldContext = cb.build()
-        ldClient = LDClient.init(this@BaseApplication, ldConfig, ldContext, 5)
-
-        val ddConfig = Configuration.Builder(
-            clientToken = 'YOUR_DD_CLIENT_TOKEN',
-            env = 'DD_ENV',
-            variant = 'APP_VARIANT_NAME'
-        )
-
-        Flags.enable()
-
-        ddClient = FlagsClient.Builder().build()
-        ddClient.setEvaluationContext(
-            EvaluationContext(
-                targetingKey = userId,
-                attributes = evaluationContext
-            )
-        )
-    }
-
-    fun getBooleanFlag(
-        flagKey: String,
-        defaultValue: Boolean
-    ): Boolean {
-        return try {
-            ddClient.resolveBooleanValue(
-                flagKey = flagKey,
-                defaultValue = defaultValue
-            )
-        } catch (e: Exception) {
-            println("Falling back to LaunchDarkly for flag: $flagKey")
-            ldClient.boolVariation(flagKey, defaultValue)
-        }
-    }
-}
-{{< /code-block >}}
-{{% /collapse-content %}}
-
-{{% collapse-content title="iOS" level="h4" expanded=false id="fallback-ios" %}}
-{{< code-block lang="swift" filename="FallbackWrapper.swift" >}}
-import Foundation
-import LaunchDarkly
-import DatadogFlags
-import DatadogCore
-
-class FallbackWrapper {
-    private let ldClient: LDClient
-    private let ddClient: FlagsClient
-
-    init(userId: String, evaluationContext: [String: AnyValue] = [:]) {
-        let ldConfig = LDConfig(mobileKey: 'YOUR_LD_MOBILE_KEY', autoEnvAttributes: .enabled)
-        var ldContext = LDContextBuilder(key: userId)
-        for (key, value) in evaluationContext {
-            ldContext.trySetValue(key, value)
-        }
-        LDClient.start(config: ldConfig, context: ldContext)
-
-        self.ldClient = LDClient.get()!
-
-        Datadog.initialize(
-            with: Datadog.Configuration(
-                clientToken: "<client token>",
-                env: "<environment>",
-                service: "<service name>"
-            ),
-            trackingConsent: .granted
-        )
-
-        Flags.enable()
-
-        self.ddClient = FlagsClient.create()
-        self.ddClient.setEvaluationContext(
-            FlagsEvaluationContext(
-                targetingKey: userId,
-                attributes: evaluationContext
-            )
-        )
-    }
-
-    func getBooleanFlag(flagKey: String, defaultValue: Bool) -> Bool {
-        do {
-            return self.ddClient.resolveBooleanValue(
-                flagKey: flagKey,
-                defaultValue: defaultValue
-            )
-        } catch {
-            print("Falling back to LaunchDarkly for flag: \(flagKey)")
-            return self.ldClient.boolVariation(forKey: flagKey, defaultValue: defaultValue)
-        }
-    }
 }
 {{< /code-block >}}
 {{% /collapse-content %}}
