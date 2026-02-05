@@ -487,6 +487,15 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+
+        mark {
+            display: inline;
+            background-color: transparent;
+            color: #632ca6;
+            font-weight: 600;
+            padding: 0;
+            border-radius: 0;
+        }
     }
     .title {
         display: none;
