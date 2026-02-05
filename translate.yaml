@@ -42,7 +42,7 @@ ignores:
   - "**/*.es.json"
   - "**/es.json"
 
-# These files will be uploaded to Transifex for translation when syncing.
+# These files will be uploaded to Transifex for translation when syncing
 sources:
 - src: "content/en/**/*.md"
   dst: "content/{lang}/**/*.md"
