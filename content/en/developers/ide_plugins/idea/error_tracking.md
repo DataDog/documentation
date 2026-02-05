@@ -15,7 +15,7 @@ Errors are highlighted in the source editor with a distinctive icon in the gutte
 
 {{< img src="/developers/ide_plugins/idea/error_tracking/editor.png" alt="Error Tracking in the source editor" style="width:100%;" >}}
 
-Filters apply to the errors shown in the editor, as described below.
+Errors shown in the editor are filtered by controls on the Error Tracking tab, described in the next section.
 
 ## Error Tracking tab
 Use the Error Tracking tab in the tool-window to filter, sort and inspect errors, view stack traces, navigate to relevant locations in your source code, attempt fixes with your local agent, or navigate to the Datadog web UI to continue your investigations.
