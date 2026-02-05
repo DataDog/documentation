@@ -85,7 +85,9 @@ Images are available for 64-bit x86 and Arm v8 architectures. Datadog publishes 
 
 {{% container-images-table %}}
 
-{{% container-registry-info %}}
+By default, the above instructions pull the image from the Datadog Container Registry (`registry.datadoghq.com`). If you use this registry, also allowlist `us-docker.pkg.dev/datadog-prod/public-images` for failover.
+
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your configuration to pull from another registry. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ### Environment variables
 
