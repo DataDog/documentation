@@ -528,21 +528,6 @@
                   - /containers/datadog_operator/migration
                   - /containers/kubernetes/helm_operator_migration
                   - /containers/guide/helm_operator_migration
-          - action: pull-and-push-file
-            branch: main
-            globs:
-              - 'charts/datadog/docs/Migration_Helm_to_Operator_Advanced.md'
-            options:
-              dest_path: '/containers/datadog_operator/migration_advanced'
-              file_name: 'Migration_Helm_to_Operator_Advanced.md'
-              front_matters:
-                title: Migrate to the Datadog Operator from the Datadog Helm Chart (Advanced)
-                description: "Migrate the Datadog Helm installation to the Datadog Operator for managing Datadog Agent deployments (Advanced)"
-                dependencies: [ "https://github.com/DataDog/helm-charts/blob/main/charts/datadog/docs/Migration_Helm_to_Operator.md" ]
-                aliases:
-                  - /containers/datadog_operator/migration_advanced
-                  - /containers/kubernetes/helm_operator_migration_advanced
-                  - /containers/guide/helm_operator_migration_advanced
 
       - repo_name: dd-trace-rb
         contents:
