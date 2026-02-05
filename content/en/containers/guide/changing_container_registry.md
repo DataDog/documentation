@@ -20,8 +20,6 @@ When selecting a container registry, Datadog recommends the following approach:
 
 2. **Datadog Container Registry**: If no cloud-specific registry applies or you want simplicity, use `registry.datadoghq.com`. This registry requires no additional setup. Allowlist the endpoint and `us-docker.pkg.dev/datadog-prod/public-images` for failover. It has very high rate limits and provides a consistent experience across all environments.
 
-   **Note**: The Helm chart and Datadog Operator currently default to `gcr.io/datadoghq`. To use the Datadog Container Registry, update your configuration as described below.
-
 3. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
 
 To update your registry, update your registry values based on the type of container environment you are deploying on. You can also use a private registry, but you need to [create a pull secret][1] to pull the images.
