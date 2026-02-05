@@ -153,24 +153,21 @@ const evaluationContext = {
   companyID: req.session?.companyID
 };
 
-const theme = await client.getStringValue(
-  'ui-theme', // flag key
-  'light', // default value
+const searchAlgorithm = await client.getStringValue(
+  'search-algorithm', // flag key
+  'basic', // default value
   evaluationContext,
 );
 
-switch (theme) {
-  case 'light':
-      setLightTheme();
-      break;
-  case 'dark':
-      setDarkTheme();
-      break;
-  case 'blue':
-      setBlueTheme();
-      break;
+switch (searchAlgorithm) {
+  case 'basic':
+      return basicSearch(query);
+  case 'fuzzy':
+      return fuzzySearch(query);
+  case 'semantic':
+      return semanticSearch(query);
   default:
-      setLightTheme();
+      return basicSearch(query);
 }
 ```
 
