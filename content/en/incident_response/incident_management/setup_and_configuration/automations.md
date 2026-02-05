@@ -1,11 +1,13 @@
 ---
 title: Automations
 site_support_id: actions
+aliases:
+- /incident_response/incident_management/incident_settings/automations/
 further_reading:
 - link: "/actions/workflows/"
   tag: "Documentation"
   text: "Workflow Automation"
-- link: "/incident_response/incident_management/incident_settings/notification_rules"
+- link: "/incident_response/incident_management/setup_and_configuration/notification_rules"
   tag: "Documentation"
   text: "Notification Rules"
 ---
@@ -249,6 +251,6 @@ Access the [blueprint in Datadog][10].
 [5]: https://app.datadoghq.com/actions/action-catalog
 [6]: /incident_response/incident_management/incident_settings/information#test-incidents
 [7]: /incident_response/incident_management/investigate/timeline
-[8]: /incident_response/incident_management/incident_settings/notification_rules
+[8]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [9]: https://app.datadoghq.com/workflow/blueprints/add-datadog-team-to-incident-channel
 [10]: https://app.datadoghq.com/workflow/blueprints/nudge-incident-commander-old-incident

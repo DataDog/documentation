@@ -2504,46 +2504,46 @@ menu:
       identifier: incident_ai
       parent: incident_investigate
       weight: 106
-    - name: Incident Settings
-      url: incident_response/incident_management/incident_settings
+    - name: Setup and Configuration
+      url: incident_response/incident_management/setup_and_configuration
       parent: incidents
       identifier: incidents_settings
       weight: 2
     - name: Information
-      url: incident_response/incident_management/incident_settings/information
+      url: incident_response/incident_management/setup_and_configuration/information
       parent: incidents_settings
       identifier: incidents_settings_information
       weight: 201
     - name: Property Fields
-      url: incident_response/incident_management/incident_settings/property_fields
+      url: incident_response/incident_management/setup_and_configuration/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
       weight: 202
     - name: Responder Types
-      url: incident_response/incident_management/incident_settings/responder_types
+      url: incident_response/incident_management/setup_and_configuration/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
       weight: 203
-    - name: Integrations
-      url: incident_response/incident_management/incident_settings/integrations
-      parent: incidents_settings
-      identifier: incidents_settings_integrations
-      weight: 204
     - name: Automations
-      url: incident_response/incident_management/incident_settings/automations
+      url: incident_response/incident_management/setup_and_configuration/automations
       parent: incidents_settings
       identifier: incidents_settings_automations
-      weight: 705
+      weight: 204
     - name: Notification Rules
-      url: incident_response/incident_management/incident_settings/notification_rules
+      url: incident_response/incident_management/setup_and_configuration/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
       weight: 206
     - name: Templates
-      url: incident_response/incident_management/incident_settings/templates
+      url: incident_response/incident_management/setup_and_configuration/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
       weight: 207
+    - name: Integrations
+      url: incident_response/incident_management/setup_and_configuration/integrations
+      parent: incidents_settings
+      identifier: incidents_integrations
+      weight: 208
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
@@ -2559,46 +2559,6 @@ menu:
       parent: incidents
       identifier: analytics_and_reporting
       weight: 8
-    - name: Integrations
-      url: incident_response/incident_management/integrations
-      parent: incidents
-      identifier: incidents_integrations
-      weight: 9
-    - name: Slack
-      url: incident_response/incident_management/integrations/slack
-      parent: incidents_integrations
-      identifier: incidents_integrations_slack
-      weight: 901
-    - name: Microsoft Teams
-      url: incident_response/incident_management/integrations/microsoft_teams
-      parent: incidents_integrations
-      identifier: incidents_microsoft_teams
-      weight: 902
-    - name: Google Chat
-      url: incident_response/incident_management/integrations/google_chat
-      parent: incidents_integrations
-      identifier: incidents_integrations_google_chat
-      weight: 903
-    - name: Jira
-      url: incident_response/incident_management/integrations/jira
-      parent: incidents_integrations
-      identifier: incidents_integrations_jira
-      weight: 904
-    - name: ServiceNow
-      url: incident_response/incident_management/integrations/servicenow
-      parent: incidents_integrations
-      identifier: incidents_integrations_servicenow
-      weight: 905
-    - name: Status Pages
-      url: incident_response/incident_management/integrations/status_pages
-      parent: incidents_integrations
-      identifier: incidents_integrations_status_pages
-      weight: 906
-    - name: Atlassian Statuspage
-      url: incident_response/incident_management/integrations/statuspage
-      parent: incidents_integrations
-      identifier: incidents_integrations_statuspage
-      weight: 907
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call

@@ -2,6 +2,7 @@
 title: Integrations
 aliases:
 - /service_management/incident_management/incident_settings/integrations/
+- /incident_response/incident_management/incident_settings/integrations
 further_reading:
 - link: "/incident_response/incident_management/integrations"
   tag: "Documentation"
@@ -50,7 +51,7 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 [4]: /incident_response/incident_management/integrations/slack/
 [5]: /integrations/microsoft-teams/?tab=datadogapprecommended
 [6]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
-[7]: /incident_response/incident_management/incident_settings/notification_rules
+[7]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [8]: /integrations/pagerduty/
 [9]: /integrations/opsgenie/
 [10]: /coscreen
