@@ -6548,9 +6548,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.1.tgz":
-  version: 1.2.1
-  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.1.tgz"
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz":
+  version: 1.3.0
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz"
   dependencies:
     "@types/semver": "npm:^7.7.0"
     js-yaml: "npm:^4.1.0"
@@ -6562,18 +6562,18 @@ __metadata:
     typedoc-plugin-zod: "npm:^1.3.1"
     uuid: "npm:^11.0.5"
     zod: "npm:^4.1.12"
-  checksum: 10/1325be16ab5c2381c5d7c54d8343e7b01da4825e16589116fe82ab5ffa8a25d8b7d870f4d72b20a5e1800932140871e8dfeb830b6fc69bf8637e521fe936e09f
+  checksum: 10/5582490d1b31ffcfcc496c1753603bf5f7d07ccc6a1177b3136855b403a4f3c2cd4d8ac82e56a41541741a43705dbb8f3a586a95857a47312b3316addce0a072
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.3.2.tgz":
-  version: 2.3.2
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.3.2.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.4.tgz":
+  version: 2.5.4
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.4.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
     "@vitejs/plugin-react": "npm:^4.3.3"
-    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.1.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz"
     cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz"
     chokidar: "npm:^4.0.3"
     chroma-highlight: "npm:^2.4.2"
@@ -6593,7 +6593,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-  checksum: 10/0ae5af6ed35dbf1e240961210dcd396e890343344a2507fd83de6537bbdd6656189565a6ea6274b8f5c1b13aa79e760257bc979b47fb7289504eddba9e57f108
+  checksum: 10/cbe172a8947c1893871a333b21e8c89afc7a47bdffd372031d5d7e7f308fe6b48d00e0e5d35b475f598afcae001ecee6d473ceb6bfc2edb00c38d6a53a60e637
   languageName: node
   linkType: hard
 
@@ -7640,7 +7640,7 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.3.2.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.4.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
     eslint: "npm:^6.8.0"
@@ -7690,7 +7690,7 @@ __metadata:
     traverse: "npm:0.6.8"
     typesense: "npm:^1.8.2"
     typesense-instantsearch-adapter: "npm:^2.8.0"
-    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.3.0.tgz"
+    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.4.0.tgz"
     yaml-lint: "npm:^1.7.0"
   languageName: unknown
   linkType: soft
@@ -16908,9 +16908,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.3.0.tgz":
-  version: 1.3.0
-  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.3.0.tgz"
+"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.4.0.tgz":
+  version: 1.4.0
+  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.4.0.tgz"
   dependencies:
     "@babel/runtime": "npm:^7.25.0"
     dotenv: "npm:^16.4.5"
@@ -16918,7 +16918,7 @@ __metadata:
     typesense: "npm:^2.0.3"
     winston: "npm:^3.14.2"
     yargs: "npm:^17.7.2"
-  checksum: 10/721b063ea759d4e8fa9dd2e7be9e71bf4ef5b8ca2dba30218bb96f5736d808bdc6202465977127c35dab12dafea9f0546086f260932624f81178e2799298964d
+  checksum: 10/07486ce15a7fcac4a790d7e8a0c24b0f571fc3fcac0fb9a4a081e29d88f7d770c962058ce1b9b40219f263d58ba5cd72c9ed2376320d0458524c4edf371f2db5
   languageName: node
   linkType: hard
 

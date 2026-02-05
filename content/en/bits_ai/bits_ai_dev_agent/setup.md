@@ -65,20 +65,30 @@ You can also define global custom instructions, which apply to all Dev Agent ses
 
 ### Configure repository environment
 
-Configure a custom environment for the Dev Agent to install dependencies, formatters, linters, and build tools that are needed for your codebase. The setup command runs with network access to download dependencies, then network access is disabled during Agent execution for security.
+Configure a custom environment for the Dev Agent to install dependencies, formatters, linters, and build tools that are needed for your codebase. Each repository runs in its own isolated sandbox, and the environment defines the settings for that sandbox. 
 
 To configure a repository environment:
 
 1. Go to **Bits AI Dev** > **Settings** > [**Repositories**][11], and find the **Environments** section.
-1. Click **Add Environment** to create a repository configuration.
-   1. Define any required environment variables or secrets.
-   1. Add setup commands to the shell script (for example: `pip install -r requirements.txt`).
+1. Click **Add Environment** to create a repository configuration:
+   1. Select a repository from the dropdown.
+   1. (Optional) Under **Pre-installed Languages**, click **Select Versions** to specify the language versions the sandbox should use.
+   1. (Optional) Define environment variables or secrets. These are available during both environment setup and Dev Agent execution.
+   1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
 1. Run the setup command to ensure it runs successfully.
 1. Save the configuration.
 
-When you launch the Dev Agent, it runs the setup command at startup and can use any tools installed in your environment. 
+When you launch the Dev Agent, it runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. Once setup is complete, network access is disabled during Agent execution for security.
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
+
+## Troubleshooting
+
+### Creation of PRs fails unexpectedly
+
+In some cases, especially in repositories with many branches, GitHub does not run the permission check when creating a branch for the session. If you use a custom GitHub App, you can work around this issue by adding the `workflows:write` permission to your app in [Source Code Integration][5].
+
+**Note**: This permission allows Bits AI to create workflows in your repository and has security implications.
 
 [1]: /error_tracking
 [2]: /security/code_security  

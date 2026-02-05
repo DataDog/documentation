@@ -181,34 +181,13 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
-These reasons include the following:
-
-`gRPC specific errors`
-: gRPC has a list of specific status codes that can be found in the [official gRPC documentation][10].
-
-`CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or losing connectivity to the web server.
-
-`DNS`
-: DNS entry not found for the test URL. Possible causes include a misconfigured test URL or the wrong configuration of your DNS entries.
-
-`INVALID_REQUEST`
-: The configuration of the test is invalid (for example, a typo in the URL).
-
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][11].
-
-`TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60 seconds).
-  For each request, only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request and assertions) hits the maximum duration of 60.5 seconds.
+For a complete list of gRPC error codes, see [API Testing Errors][10].
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic gRPC tests. To get create, edit, and delete access to Synthetic gRPC tests, upgrade your user to one of those two [default roles][12].
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can create, edit, and delete Synthetic gRPC tests. To get create, edit, and delete access to Synthetic gRPC tests, upgrade your user to one of those two [default roles][11].
 
-If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
 ### Restrict access
 
@@ -228,7 +207,6 @@ If you are using the [custom role feature][13], add your user to any custom role
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors
 [9]: /synthetics/settings/#global-variables
-[10]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
-[11]: /synthetics/api_tests/errors/#ssl-errors
-[12]: /account_management/rbac/
-[13]: /account_management/rbac#custom-roles
+[10]: /synthetics/api_tests/errors/#grpc-errors
+[11]: /account_management/rbac/
+[12]: /account_management/rbac#custom-roles

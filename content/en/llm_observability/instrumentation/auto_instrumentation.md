@@ -55,6 +55,7 @@ Datadog's LLM Observability can automatically trace and annotate calls to suppor
 | [OpenAI](#openai), [Azure OpenAI](#openai) | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [Vercel AI SDK](#vercel-ai-sdk)            | >=4.0.0            | >= 5.63.0 (CJS), >=5.63.0 (ESM)             |
 | [VertexAI](#vertex-ai)                     | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
+| [Google GenAI](#google-genai)              | >= 1.19.0          | >= 5.81.0 (CJS), >=5.81.0 (ESM)             |
 
 {{% collapse-content title="Support for ESMAScript Modules (ESM)" level="h4" expanded=false id="esm-support" %}}
 Automatic instrumentation for ESM projects is supported starting from `dd-trace@>=5.38.0`. To enable automatic instrumentation in your ESM projects, run your application with the following Node option:
@@ -360,6 +361,25 @@ The Google GenAI integration instruments the following methods:
 [2]: https://ai.google.dev/api/generate-content#method:-models.generatecontent
 [3]: https://ai.google.dev/api/embeddings#method:-models.embedcontent
 {{% /tab %}}
+{{% tab "Node.js" %}}
+The Google GenAI integration automatically traces methods in the [Google GenAI Node.js SDK][1] by instrumenting the [`@google/genai` package][4].
+
+**Note:** The [Google GenAI Node.js SDK][1] succeeds the [Google GenerativeAI SDK][6], and exposes both Gemini Developer API as well as Vertex.
+
+### Traced methods
+
+The Google GenAI integration instruments the following methods:
+
+- [Generating content][2] (including [streamed calls][5])
+- [Embedding content][3]
+
+[1]: https://ai.google.dev/gemini-api/docs#javascript
+[2]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt-JAVASCRIPT
+[3]: https://ai.google.dev/api/embeddings#embed_content-JAVASCRIPT
+[4]: https://www.npmjs.com/package/@google/genai
+[5]: https://ai.google.dev/api/generate-content#text_gen_text_only_prompt_streaming-JAVASCRIPT
+[6]: https://www.npmjs.com/package/@google/generative-ai
+{{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
 
@@ -555,7 +575,8 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Embeddings][6]:
   - `openai.embeddings.create()` and `azureopenai.embeddings.create()`
 - [Calls made to DeepSeek through the OpenAI Node.js SDK][7] (as of `dd-trace@5.42.0`)
-- [Responses][8] (as of `dd-trace@5.76.0`)
+- [Responses][8]
+  - `openai.responses.create()` (as of `dd-trace@5.76.0`)
 
 [1]: /integrations/openai/
 [2]: https://platform.openai.com/docs/api-reference/introduction
@@ -564,7 +585,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 [5]: https://platform.openai.com/docs/api-reference/chat
 [6]: https://platform.openai.com/docs/api-reference/embeddings
 [7]: https://api-docs.deepseek.com/
-[8]: https://platform.openai.com/docs/api-reference/responses/create
+[8]: https://platform.openai.com/docs/api-reference/responses
 
 {{% /tab %}}
 {{< /tabs >}}

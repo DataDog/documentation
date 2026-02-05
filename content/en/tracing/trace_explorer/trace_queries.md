@@ -63,7 +63,7 @@ Filter the result set of traces further by applying filters on trace-level attri
 |-----|-----|-----|
 | `span_count(a)` | Number of occurrences of a span | Traces that contain more than 10 calls to a mongo database: <br/>- **queryA**:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- **Traces matching**:`a`<br/>- **Where**:`span_count(a):>10`|
 | `total_span_count` | Number of spans in the trace | Traces that contain more than 1000 spans: <br/>**Where**`total_span_count:>1000` |
-| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>**Where**:`trace_duration:>2s` |
+| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>**Where**:`trace_duration:>5s` |
 
 ## Flow Map
 
@@ -106,7 +106,7 @@ Trace Queries run on traces indexed by the [intelligent retention filter][3] and
 {{< img src="tracing/trace_queries/trace_queries_base_data.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Flow showing where trace retention filters apply in the processing pipeline" >}}
 
 The intelligent retention filter is enabled by default and includes:
-- [Flat sampling][4]: Uniformly samples 1% of ingested spans.
+- [Flat sampling][4]: Retains all traces correlated with 1% of ingested RUM sessions, plus a uniform 1% sample of ingested spans, ensuring correlation between frontend sessions and backend traces.
 - [Diversity sampling][5]: Retains a diverse set of traces to maintain visibility across environments, services, operations, and resources.
 
 Both Flat sampling and Diversity sampling capture **complete traces**, meaning all spans within a trace are indexed to ensure accurate results in Trace Queries.

@@ -57,6 +57,8 @@ Setting up cloud-provider based authentication for AWS involves two parts:
 
 First, map your AWS identities (ARNs) to Datadog service accounts or user accounts. During the preview, you must perform the mapping using the Datadog API.
 
+If you need to create IAM roles in AWS, see the [AWS IAM role creation documentation][5].
+
 #### Map an AWS ARN to a Datadog user account
 For `account_identifier`, use the email shown in the user's Datadog profile.
 
@@ -80,12 +82,14 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 ```
 
 #### Map an AWS ARN to a Datadog service account
-To get a service account's `account_identifier`, go to **Organization settings > Service accounts**, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6` as an account identifier for your service account.
+For `account_identifier`, you can use either:
+- The service account's **UUID**: Go to **Organization settings > Service accounts**, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
+- The service account's **email address**: Use the email address shown in the service account's details.
 
-**Example**: An API call that maps an AWS ARN to a Datadog service account, `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
+**Example**: An API call that maps an AWS ARN to a Datadog service account using the UUID, `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
 
 ```bash
-# Example: map an AWS ARN to a Datadog Service Account
+# Example: map an AWS ARN to a Datadog Service Account using UUID
 curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -100,6 +104,58 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
   }
 }'
 ```
+
+**Example**: An API call that maps an AWS ARN to a Datadog service account using the email address, `terraform-service-account@myorg.com`.
+
+```bash
+# Example: map an AWS ARN to a Datadog Service Account using email
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "terraform-service-account@myorg.com",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/terraform-runner"
+    }
+  }
+}'
+```
+
+#### Using wildcards in ARN patterns
+
+ARN patterns support wildcard matching to handle dynamic or variable portions of resource ARNs. This is useful when working with assumed roles that include session identifiers or other variable components.
+
+**Wildcard rules**:
+- Wildcards (`*`) are only allowed in the last portion of the resource ARN
+- You must specify a specific resource before the wildcard
+- Wildcards cannot be placed in the middle of the ARN
+
+**Example**: Match any session assuming the `DatadogTerraformerRole`:
+
+```bash
+curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "type": "aws_cloud_auth_config",
+    "attributes": {
+      "account_identifier": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "arn_pattern": "arn:aws:sts::123456789012:assumed-role/DatadogTerraformerRole/*"
+    }
+  }
+}'
+```
+
+This pattern matches actual assumed role ARNs like:
+- `arn:aws:sts::123456789012:assumed-role/DatadogTerraformerRole/run-abcdefghijk`
+- `arn:aws:sts::123456789012:assumed-role/DatadogTerraformerRole/session-xyz789`
+
+<div class="alert alert-info">Wildcard matching is particularly useful for CI/CD pipelines where role sessions have dynamically generated identifiers.</div>
 
 #### List existing mappings
 
@@ -158,3 +214,4 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 [2]: https://app.datadoghq.com/api/v2/current_user
 [3]: /integrations/amazon-web-services/
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
+[5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html

@@ -7,6 +7,9 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/ruby
   - /security/application_security/threats_detection/ruby
   - /security/application_security/setup/aws/fargate/ruby
+  - /security/application_security/setup/standalone/ruby
+  - /security/application_security/setup/threat_detection/ruby
+  - /security/application_security/enabling/ruby
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
