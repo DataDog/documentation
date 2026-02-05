@@ -55,13 +55,25 @@ When you call `setProvider` without waiting, the client returns default values u
 OpenFeature.setProvider(tracer.openfeature);
 const client = OpenFeature.getClient();
 
-app.get('/my-endpoint', (req, res) => {
-  const value = client.getBooleanValue('my-flag', false);
+app.get('/my-endpoint', async (req, res) => {
+
+  const flagKey = 'my-flag';
+  const defaultValue = false;
+  const evaluationContext = {
+    targetingKey: req.session?.userID ?? 'unknown', // targetingKey is required context
+    companyID: req.session?.companyID
+  };
+
+  // Note: evaluations are synchronous, but return a Promise type
+  //       to follow the OpenFeature provider specifications
+  const value = await client.getBooleanValue(flagKey, defaultValue, evaluationContext);
+
   if (value) {
     res.send('feature enabled!');
   } else {
     res.send('feature disabled!');
   }
+
 });
 ```
 
@@ -74,19 +86,27 @@ const initializationPromise = OpenFeature.setProviderAndWait(tracer.openfeature)
 const client = OpenFeature.getClient();
 
 app.get('/my-endpoint', async (req, res) => {
-  await initializationPromise;
 
+  const flagKey = 'my-flag';
+  const defaultValue = false;
   const evaluationContext = {
-    targetingKey: req.session?.userID,
+    targetingKey: req.session?.userID ?? 'unknown', // targetingKey is required context
     companyID: req.session?.companyID
   };
 
-  const value = client.getBooleanValue('my-flag', false, evaluationContext);
+  // Wait for initialization if necessary
+  await initializationPromise;
+
+  // Note: evaluations are synchronous, but return a Promise type
+  //       to follow the OpenFeature provider specifications
+  const value = await client.getBooleanValue(flagKey, defaultValue, evaluationContext);
+
   if (value) {
     res.send('feature enabled!');
   } else {
     res.send('feature disabled!');
   }
+
 });
 ```
 
@@ -106,11 +126,11 @@ Use `getBooleanValue()` for flags that represent on/off or true/false conditions
 
 ```javascript
 const evaluationContext = {
-  targetingKey: req.session?.userID,
+  targetingKey: req.session?.userID ?? 'unknown',
   companyID: req.session?.companyID
 };
 
-const isNewCheckoutEnabled = client.getBooleanValue(
+const isNewCheckoutEnabled = await client.getBooleanValue(
     'new-checkout-flow', // flag key
     false, // default value
     evaluationContext, // context
@@ -129,11 +149,11 @@ Use `getStringValue()` for flags that select between multiple variants or config
 
 ```javascript
 const evaluationContext = {
-  targetingKey: req.session?.userID,
+  targetingKey: req.session?.userID ?? 'unknown',
   companyID: req.session?.companyID
 };
 
-const theme = client.getStringValue(
+const theme = await client.getStringValue(
   'ui-theme', // flag key
   'light', // default value
   evaluationContext,
@@ -159,18 +179,18 @@ switch (theme) {
 For number flags, use `getNumberValue()`. This is appropriate when a feature depends on a numeric parameter such as a limit, percentage, or multiplier:
 
 ```javascript
-const evalutationContext = {
-  targetingKey: req.session?.userID,
+const evaluationContext = {
+  targetingKey: req.session?.userID ?? 'unknown',
   companyID: req.session?.companyID,
 };
 
-const maxItems = client.getNumberValue(
+const maxItems = await client.getNumberValue(
     'max-cart-items', // flag key
     20, // default value
     evaluationContext,
 );
 
-const priceMultiplier = client.getNumberValue(
+const priceMultiplier = await client.getNumberValue(
     'pricing-multiplier', // flag key
     1.3, // default value
     evaluationContext,
@@ -182,31 +202,32 @@ const priceMultiplier = client.getNumberValue(
 For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful for Remote Configuration scenarios where multiple properties need to be provided together.
 
 ```javascript
-OpenFeature.setContext({
-  targetingKey: req.session?.userID,
-  companyID: req.session?.companyID
-});
-
 const defaultConfig = {
   color: '#00A3FF',
   fontSize: 14,
 };
-const config = client.getObjectValue('ui-config', defaultConfig);
+
+const evaluationContext = {
+  targetingKey: req.session?.userID ?? 'unknown',
+  companyID: req.session?.companyID,
+};
+
+const config = await client.getObjectValue('ui-config', defaultConfig, evaluationContext);
 ```
 
 ### Flag evaluation details
 
 When you need more than just the flag value, use the `get<Type>Details` functions. These methods return both the evaluated value and metadata explaining the evaluation:
 
-* `getBooleanDetails() -> EvaluationDetails<boolean>`
-* `getStringDetails() -> EvaluationDetails<string>`
-* `getNumberDetails() -> EvaluationDetails<number>`
-* `getObjectDetails() -> EvaluationDetails<JsonValue>`
+* `getBooleanDetails() -> Promise<EvaluationDetails<boolean>>`
+* `getStringDetails() -> Promise<EvaluationDetails<string>>`
+* `getNumberDetails() -> Promise<EvaluationDetails<number>>`
+* `getObjectDetails() -> Promise<EvaluationDetails<JsonValue>>`
 
 For example:
 
 ```javascript
-const details = client.getStringDetails('paywall-layout', 'control');
+const details = await client.getStringDetails('paywall-layout', 'control', evaluationContext);
 
 console.log(details.value);        // Evaluated value (for example: "A", "B", or "control")
 console.log(details.variant);      // Variant name, if applicable
