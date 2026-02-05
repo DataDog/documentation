@@ -1,6 +1,6 @@
 By default, the Agent image is pulled from the Datadog Container Registry (`registry.datadoghq.com`). This registry requires no additional setup and has very high rate limits. If you use this registry, also allowlist `us-docker.pkg.dev/datadog-prod/public-images` for failover.
 
-If you prefer a registry from your cloud provider for optimal performance, you can use the corresponding registry:
+Datadog also publishes images on cloud-provider registries:
 - AWS deployments: `public.ecr.aws/datadog`
 - GCP deployments: `gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, or `asia.gcr.io/datadoghq`
 - Azure deployments: `datadoghq.azurecr.io`

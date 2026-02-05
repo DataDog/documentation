@@ -13,7 +13,7 @@ Datadog publishes container images on the Datadog Container Registry, Google Art
 
 When selecting a container registry, Datadog recommends the following approach:
 
-1. **Same cloud provider and region**: If your deployment is in a specific cloud provider (AWS, GCP, or Azure), prefer the corresponding registry in the same region for optimal performance:
+1. **Cloud-provider registries**: Datadog also publishes images on cloud-provider registries. If your deployment is in a specific cloud provider (AWS, GCP, or Azure), you can use the corresponding registry:
    - AWS deployments: `public.ecr.aws/datadog`
    - GCP deployments: `gcr.io/datadoghq`, `eu.gcr.io/datadoghq`, or `asia.gcr.io/datadoghq`
    - Azure deployments: `datadoghq.azurecr.io`
