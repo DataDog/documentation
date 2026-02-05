@@ -307,7 +307,7 @@ if (showNewFeature) {
 
 Implement a wrapper function that provides a fallback mechanism to use the LaunchDarkly flag values if the application experiences issues fetching the Datadog flag.
 
-<div class="alert alert-info">LaunchDarkly and Datadog SDKs use strongly typed methods for flag evaluation (for example, <code>getBooleanValue</code>, <code>getStringValue</code>, <code>getIntegerValue</code>). The examples below demonstrate boolean flag evaluation. You will need to create similar wrapper functions for each flag type used in your application.</div>
+<div class="alert alert-info">LaunchDarkly and Datadog SDKs use strongly typed methods for flag evaluation (for example, <code>getBooleanValue</code>, <code>getStringValue</code>, <code>getIntegerValue</code>). The examples below demonstrate Boolean flag evaluation. You will need to create similar wrapper functions for each flag type used in your application.</div>
 
 {{< tabs >}}
 {{% tab "JavaScript (browser)" %}}
