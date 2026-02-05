@@ -5,7 +5,7 @@ aliases:
 - /service_management/incident_management/follow-ups/
 - /incident_response/incident_management/follow-ups
 further_reading:
-- link: "/service_management/incident_management/incident_settings"
+- link: "/incident_response/incident_management/setup_and_configuration"
   tag: "Documentation"
   text: "Incident Settings"
 - link: "/service_management/incident_management/integrations/slack/"

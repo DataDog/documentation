@@ -2,7 +2,7 @@
 title: Post Incident
 description: Manage postmortems and follow-up tasks after incident resolution
 further_reading:
-- link: "/incident_response/incident_management/incident_settings/templates"
+- link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
   text: "Configure postmortem and message templates"
 - link: "/incident_response/incident_management/post_incident/follow-ups"
@@ -69,7 +69,7 @@ For more information on integrating status pages with your incident workflow, se
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: /incident_response/incident_management/incident_settings/templates#postmortems
+[2]: /incident_response/incident_management/setup_and_configuration/templates#postmortems
 [3]: /integrations/jira/
 [4]: /incident_response/case_management/
 [5]: /incident_response/incident_management/post_incident/follow-ups

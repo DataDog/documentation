@@ -4,7 +4,7 @@ description: Integrate Microsoft Teams with Datadog Incident Management to autom
 aliases:
 - /service_management/incident_management/integrations/microsoft_teams/
 further_reading:
-- link: "/incident_response/incident_management/incident_settings/integrations"
+- link: "/incident_response/incident_management/setup_and_configuration/integrations"
   tag: "Documentation"
   text: "Incident Integrations Settings"
 - link: "/integrations/microsoft-teams"

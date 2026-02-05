@@ -92,6 +92,6 @@ In Incident Management Analytics, number fields appear as measures that can be g
 [8]: /notebooks/
 [9]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [10]: /incident_response/incident_management/investigate/timeline
-[11]: /incident_response/incident_management/declare
-[12]: /incident_response/incident_management/incident_settings/property_fields#custom-fields-in-search-and-analytics
+[11]: /incident_response/incident_management/investigate/declare
+[12]: /incident_response/incident_management/setup_and_configuration/property_fields/#custom-fields-in-search-and-analytics
 [13]: /actions/workflows/

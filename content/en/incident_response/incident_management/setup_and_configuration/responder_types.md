@@ -4,7 +4,7 @@ aliases:
 - /service_management/incident_management/incident_settings/responder_types/
 - /incident_response/incident_management/incident_settings/responder_types
 further_reading:
-- link: "/incident_response/incident_management/describe/#response-team"
+- link: "/incident_response/incident_management/investigate/describe/#response-team"
   tag: "Documentation"
   text: "Describe an incident"
 ---
@@ -37,6 +37,6 @@ Responder types allow your responders to understand what their responsibilities 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/incident_management/response_team
+[1]: /incident_response/incident_management/investigate/response_team
 [2]: /account_management/rbac/?tab=datadogapplication#pagetitle
 [3]: https://app.datadoghq.com/incidents/settings#Responder-Types
