@@ -22,6 +22,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
       tag: 'Blog'
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
+    - link: '/network_monitoring/devices/glossary'
+      tag: 'Doc'
+      text: 'NDM Terms and Concepts'
+    - link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
+      tag: "Blog"
+      text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 algolia:
   tags: ['network device monitoring']
 ---

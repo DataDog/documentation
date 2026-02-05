@@ -50,7 +50,7 @@ You can review your recorded terminal sessions and process data in Datadog:
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /security/sensitive_data_scanner/
-[3]: /service_management/case_management/
+[3]: /incident_response/case_management/
 [4]: http://app.datadoghq.com/event/explorer?query=source%3Acoterm_process_info
 [5]: https://app.datadoghq.com/logs?query=service%3Addcoterm
 [6]: https://app.datadoghq.com/terminal-streams

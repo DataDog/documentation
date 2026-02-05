@@ -4,6 +4,9 @@ aliases:
 description: Analizar, enriquecer y gestionar tus logs con pipelines y procesadores
   Datadog
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-siem-ocsf-processor
+  tag: Blog
+  text: Normaliza cualquier log de Cloud SIEM con el procesador OCSF de Datadog.
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: Blog
   text: Cómo utilizamos Datadog para obtener una visibilidad completa y detallada
@@ -31,7 +34,8 @@ further_reading:
   text: Monitorizar 1Password con Datadog Cloud SIEM
 - link: https://www.datadoghq.com/blog/ocsf-common-data-model/
   tag: Blog
-  text: Normaliza tus datos con el OCSF Common Data Model en Cloud SIEM de Datadog
+  text: Normaliza tus datos con el Modelo de datos comunes del OCSF  en Cloud SIEM
+    de Datadog
 title: Pipelines
 ---
 
@@ -288,6 +292,8 @@ Identifica cuándo se ha realizado el último cambio en un pipeline o procesador
 Reordena con precisión los pipelines utilizando la opción `Move to` del panel deslizante de opciones. Desplázate y haz clic en la posición exacta a la que quieres mover el pipeline seleccionado con el modal `Move to`. Los pipelines no pueden introducirse en otros pipelines de sólo lectura. Los pipelines que contienen pipelines anidados sólo pueden moverse a otras posiciones de nivel superior y no pueden moverse a otros pipelines.
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="Reordenar tus pipelines con precisión utilizando el modal Move to (Mover a)" style="width:50%;">}}
+
+Clona pipelines para reutilizar reglas y procesadores existentes sin tener que empezar de nuevo. Cuando clonas un pipeline, Datadog desactiva automáticamente el pipeline clonado. Haz clic en el conmutador para activarlo.
 
 ## Métricas de uso estimado
 

@@ -895,6 +895,174 @@ components:
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
+    BarChartWidgetDefinition:
+      description: The bar chart visualization displays categorical data using vertical
+        bars, allowing you to compare values across different groups.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: '#/components/schemas/WidgetCustomLink'
+          type: array
+        requests:
+          description: List of bar chart widget requests.
+          example:
+          - q: system.load.1
+          items:
+            $ref: '#/components/schemas/BarChartWidgetRequest'
+          maxItems: 1
+          minItems: 1
+          type: array
+        style:
+          $ref: '#/components/schemas/BarChartWidgetStyle'
+        time:
+          $ref: '#/components/schemas/WidgetTime'
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: '#/components/schemas/WidgetTextAlign'
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: '#/components/schemas/BarChartWidgetDefinitionType'
+      required:
+      - type
+      - requests
+      type: object
+    BarChartWidgetDefinitionType:
+      default: bar_chart
+      description: Type of the bar chart widget.
+      enum:
+      - bar_chart
+      example: bar_chart
+      type: string
+      x-enum-varnames:
+      - BAR_CHART
+    BarChartWidgetDisplay:
+      description: Bar chart widget display options.
+      oneOf:
+      - $ref: '#/components/schemas/BarChartWidgetStacked'
+      - $ref: '#/components/schemas/BarChartWidgetFlat'
+    BarChartWidgetFlat:
+      description: Bar chart widget flat display.
+      properties:
+        type:
+          $ref: '#/components/schemas/BarChartWidgetFlatType'
+      required:
+      - type
+      type: object
+    BarChartWidgetFlatType:
+      default: flat
+      description: Bar chart widget flat display type.
+      enum:
+      - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+      - FLAT
+    BarChartWidgetLegend:
+      description: Bar chart widget stacked legend behavior.
+      enum:
+      - automatic
+      - inline
+      - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - AUTOMATIC
+      - INLINE
+      - NONE
+    BarChartWidgetRequest:
+      description: Updated bar chart widget.
+      properties:
+        apm_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        audit_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        conditional_formats:
+          description: List of conditional formats.
+          example:
+          - comparator: '>='
+            palette: blue
+            value: 1.0
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
+          type: array
+        event_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
+        log_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        network_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        process_query:
+          $ref: '#/components/schemas/ProcessQueryDefinition'
+        profile_metrics_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        q:
+          description: Widget query.
+          type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
+        rum_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        security_query:
+          $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
+        style:
+          $ref: '#/components/schemas/WidgetRequestStyle'
+      type: object
+    BarChartWidgetScaling:
+      description: Bar chart widget scaling definition.
+      enum:
+      - absolute
+      - relative
+      type: string
+      x-enum-varnames:
+      - ABSOLUTE
+      - RELATIVE
+    BarChartWidgetStacked:
+      description: Bar chart widget stacked display options.
+      properties:
+        legend:
+          $ref: '#/components/schemas/BarChartWidgetLegend'
+        type:
+          $ref: '#/components/schemas/BarChartWidgetStackedType'
+      required:
+      - type
+      type: object
+    BarChartWidgetStackedType:
+      default: stacked
+      description: Bar chart widget stacked display type.
+      enum:
+      - stacked
+      example: stacked
+      type: string
+      x-enum-varnames:
+      - STACKED
+    BarChartWidgetStyle:
+      description: Style customization for a bar chart widget.
+      properties:
+        display:
+          $ref: '#/components/schemas/BarChartWidgetDisplay'
+        palette:
+          description: Color palette to apply to the widget.
+          type: string
+        scaling:
+          $ref: '#/components/schemas/BarChartWidgetScaling'
+      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1741,6 +1909,9 @@ components:
           type: string
         markers:
           description: List of markers.
+          example:
+          - display_type: percentile
+            value: '90'
           items:
             $ref: '#/components/schemas/WidgetMarker'
           type: array
@@ -1799,14 +1970,6 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
-    DistributionWidgetHistogramRequestType:
-      description: Request type for the histogram request.
-      enum:
-      - histogram
-      example: histogram
-      type: string
-      x-enum-varnames:
-      - HISTOGRAM
     DistributionWidgetRequest:
       description: Updated distribution widget.
       properties:
@@ -1816,6 +1979,11 @@ components:
           $ref: '#/components/schemas/ApmStatsQueryDefinition'
         event_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        formulas:
+          description: List of formulas that operate on queries.
+          items:
+            $ref: '#/components/schemas/WidgetFormula'
+          type: array
         log_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         network_query:
@@ -1827,10 +1995,17 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
         query:
           $ref: '#/components/schemas/DistributionWidgetHistogramRequestQuery'
         request_type:
-          $ref: '#/components/schemas/DistributionWidgetHistogramRequestType'
+          $ref: '#/components/schemas/WidgetHistogramRequestType'
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -1854,6 +2029,12 @@ components:
           description: Specifies minimum value to show on the x-axis. It takes a number,
             percentile (p90 === 90th percentile), or auto for default behavior.
           type: string
+        num_buckets:
+          description: Number of value buckets to target, also known as the resolution
+            of the value bins.
+          format: int64
+          minimum: 1
+          type: integer
         scale:
           default: linear
           description: Specifies the scale type. Possible values are `linear`.
@@ -3555,9 +3736,10 @@ components:
             $ref: '#/components/schemas/WidgetCustomLink'
           type: array
         requests:
-          description: 'Array of one request object to display in the widget. The
-            request must contain a `group-by` tag whose value is a country ISO code.
-
+          description: 'Array of request objects to display in the widget. May include
+            an optional request for the region layer and/or an optional request for
+            the points layer. Region layer requests must contain a `group-by` tag
+            whose value is a country ISO code.
 
             See the [Request JSON schema documentation](https://docs.datadoghq.com/dashboards/graphing_json/request_json)
 
@@ -3568,7 +3750,7 @@ components:
                 query: <METRIC_1>{<SCOPE_1>}
           items:
             $ref: '#/components/schemas/GeomapWidgetRequest'
-          maxItems: 1
+          maxItems: 2
           minItems: 1
           type: array
         style:
@@ -3626,8 +3808,9 @@ components:
         focus: WORLD
       properties:
         focus:
-          description: The 2-letter ISO code of a country to focus the map on. Or
-            `WORLD`.
+          description: The 2-letter ISO code of a country to focus the map on, or
+            `WORLD` for global view, or a region (`EMEA`, `APAC`, `LATAM`), or a continent
+            (`NORTH_AMERICA`, `SOUTH_AMERICA`, `EUROPE`, `AFRICA`, `ASIA`, `OCEANIA`).
           example: WORLD
           type: string
       required:
@@ -3645,6 +3828,12 @@ components:
             width: full
           items:
             $ref: '#/components/schemas/ListStreamColumn'
+          type: array
+        conditional_formats:
+          description: Threshold (numeric) conditional formatting rules may be used
+            by a regions layer.
+          items:
+            $ref: '#/components/schemas/WidgetConditionalFormat'
           type: array
         formulas:
           description: List of formulas that operate on queries.
@@ -3671,6 +3860,23 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         sort:
           $ref: '#/components/schemas/WidgetSortBy'
+        style:
+          $ref: '#/components/schemas/GeomapWidgetRequestStyle'
+        text_formats:
+          description: Text formatting rules may be used by a points layer.
+          items:
+            $ref: '#/components/schemas/TableWidgetTextFormatRule'
+          type: array
+      type: object
+    GeomapWidgetRequestStyle:
+      description: The style to apply to the request for points layer.
+      example:
+        color_by: status
+      properties:
+        color_by:
+          description: The category to color the points by.
+          example: status
+          type: string
       type: object
     GraphSnapshot:
       description: Object representing a graph snapshot.
@@ -3834,6 +4040,14 @@ components:
           type: array
         legend_size:
           $ref: '#/components/schemas/WidgetLegendSize'
+        markers:
+          description: List of markers.
+          example:
+          - display_type: percentile
+            value: '90'
+          items:
+            $ref: '#/components/schemas/WidgetMarker'
+          type: array
         requests:
           description: List of widget types.
           example:
@@ -3858,6 +4072,8 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/HeatMapWidgetDefinitionType'
+        xaxis:
+          $ref: '#/components/schemas/HeatMapWidgetXAxis'
         yaxis:
           $ref: '#/components/schemas/WidgetAxis'
       required:
@@ -3901,6 +4117,10 @@ components:
           items:
             $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
           type: array
+        query:
+          $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
+        request_type:
+          $ref: '#/components/schemas/WidgetHistogramRequestType'
         response_format:
           $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
@@ -3909,6 +4129,18 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetStyle'
+      type: object
+    HeatMapWidgetXAxis:
+      description: X Axis controls for the heat map widget.
+      properties:
+        num_buckets:
+          description: 'Number of time buckets to target, also known as the resolution
+
+            of the time bins. This is only applicable for distribution of
+
+            points (group distributions use the roll-up modifier).'
+          format: int64
+          type: integer
       type: object
     Host:
       description: Object representing a host.
@@ -4262,14 +4494,14 @@ components:
           type: boolean
       type: object
     HostTags:
-      description: Set of tags to associate with your host.
+      description: Host name and an array of its tags
       properties:
         host:
           description: Your host name.
           example: test.host
           type: string
         tags:
-          description: A list of tags to apply to the host.
+          description: A list of tags associated with a host.
           items:
             description: A given tag in a list.
             example: environment:production
@@ -4363,6 +4595,7 @@ components:
       - appsec_usage
       - asm_serverless_traced_invocations_usage
       - asm_serverless_traced_invocations_percentage
+      - bits_ai_investigations_usage
       - browser_usage
       - ci_pipeline_indexed_spans_usage
       - ci_test_indexed_spans_usage
@@ -4388,6 +4621,8 @@ components:
       - estimated_indexed_spans_usage
       - estimated_ingested_spans_usage
       - fargate_usage
+      - flex_logs_starter
+      - flex_stored_logs
       - functions_usage
       - incident_management_monthly_active_users_usage
       - indexed_spans_usage
@@ -4397,6 +4632,7 @@ components:
       - invocations_usage
       - lambda_traced_invocations_usage
       - llm_observability_usage
+      - llm_spans_usage
       - logs_indexed_15day_usage
       - logs_indexed_180day_usage
       - logs_indexed_1day_usage
@@ -4444,6 +4680,7 @@ components:
       - APPSEC_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
+      - BITS_AI_INVESTIGATIONS_USAGE
       - BROWSER_USAGE
       - CI_PIPELINE_INDEXED_SPANS_USAGE
       - CI_TEST_INDEXED_SPANS_USAGE
@@ -4469,6 +4706,8 @@ components:
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
       - FARGATE_USAGE
+      - FLEX_LOGS_STARTER
+      - FLEX_STORED_LOGS
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
       - INDEXED_SPANS_USAGE
@@ -4478,6 +4717,7 @@ components:
       - INVOCATIONS_USAGE
       - LAMBDA_TRACED_INVOCATIONS_USAGE
       - LLM_OBSERVABILITY_USAGE
+      - LLM_SPANS_USAGE
       - LOGS_INDEXED_15DAY_USAGE
       - LOGS_INDEXED_180DAY_USAGE
       - LOGS_INDEXED_1DAY_USAGE
@@ -6021,6 +6261,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - name
       - filter
@@ -6108,6 +6358,16 @@ components:
           example: 15
           format: int64
           type: integer
+        tags:
+          description: A list of tags associated with the index. Tags must be in `key:value`
+            format.
+          example:
+          - team:backend
+          - env:production
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
       required:
       - filter
       type: object
@@ -7610,6 +7870,104 @@ components:
       - data_source
       - query
       type: object
+    MonitorFormulaAndFunctionDataQualityDataSource:
+      description: Data source for data quality queries.
+      enum:
+      - data_quality_metrics
+      example: data_quality_metrics
+      type: string
+      x-enum-varnames:
+      - DATA_QUALITY_METRICS
+    MonitorFormulaAndFunctionDataQualityMeasure:
+      description: 'The data quality measure to query. Common values include:
+
+        `bytes`, `cardinality`, `custom`, `freshness`, `max`, `mean`, `min`,
+
+        `nullness`, `percent_negative`, `percent_zero`, `row_count`, `stddev`,
+
+        `sum`, `uniqueness`. Additional values may be supported.'
+      example: row_count
+      type: string
+    MonitorFormulaAndFunctionDataQualityModelTypeOverride:
+      description: Override for the model type used in anomaly detection.
+      enum:
+      - freshness
+      - percentage
+      - any
+      type: string
+      x-enum-varnames:
+      - FRESHNESS
+      - PERCENTAGE
+      - ANY
+    MonitorFormulaAndFunctionDataQualityMonitorOptions:
+      description: Monitor configuration options for data quality queries.
+      properties:
+        crontab_override:
+          description: Crontab expression to override the default schedule.
+          example: '* * * 10'
+          type: string
+        custom_sql:
+          description: Custom SQL query for the monitor.
+          example: SELECT COUNT(*) FROM users AS dd_value
+          type: string
+        custom_where:
+          description: Custom WHERE clause for the query.
+          example: USER_ID = 123
+          type: string
+        group_by_columns:
+          description: Columns to group results by.
+          example:
+          - col1
+          - col2
+          items:
+            type: string
+          type: array
+        model_type_override:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride'
+      type: object
+    MonitorFormulaAndFunctionDataQualityQueryDefinition:
+      description: A formula and functions data quality query.
+      properties:
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityDataSource'
+        filter:
+          description: Filter expression used to match on data entities. Uses Aastra
+            query syntax.
+          example: search for column where `database:production AND table:users`
+          type: string
+        group_by:
+          description: Optional grouping fields for aggregation.
+          example:
+          - entity_id
+          items:
+            type: string
+          type: array
+        measure:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityMeasure'
+        monitor_options:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityMonitorOptions'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        schema_version:
+          description: Schema version for the data quality query.
+          example: 0.0.1
+          type: string
+        scope:
+          description: 'Optional scoping expression to further filter metrics. Uses
+            metrics filter syntax.
+
+            This is useful when an entity has been configured to emit metrics with
+            additional tags.'
+          example: env:production
+          type: string
+      required:
+      - name
+      - data_source
+      - measure
+      - filter
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7744,6 +8102,7 @@ components:
       - spans
       - database_queries
       - network
+      - network_path
       example: rum
       type: string
       x-enum-varnames:
@@ -7756,11 +8115,13 @@ components:
       - SPANS
       - DATABASE_QUERIES
       - NETWORK
+      - NETWORK_PATH
     MonitorFormulaAndFunctionQueryDefinition:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionDataQualityQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -8139,12 +8500,18 @@ components:
       - hide_query
       - hide_handles
       - hide_all
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
       - HIDE_ALL
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
@@ -8234,7 +8601,7 @@ components:
           readOnly: true
       type: object
     MonitorSearchResponse:
-      description: The response form a monitor search.
+      description: The response from a monitor search.
       example:
         counts:
           muted:
@@ -8599,6 +8966,8 @@ components:
       - database-monitoring alert
       - network-performance alert
       - cost alert
+      - data-quality alert
+      - network-path alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -8621,6 +8990,8 @@ components:
       - DATABASE_MONITORING_ALERT
       - NETWORK_PERFORMANCE_ALERT
       - COST_ALERT
+      - DATA_QUALITY_ALERT
+      - NETWORK_PATH_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -8780,6 +9151,8 @@ components:
       - appsec_percentage
       - asm_serverless_traced_invocations_usage
       - asm_serverless_traced_invocations_percentage
+      - bits_ai_investigations_usage
+      - bits_ai_investigations_percentage
       - browser_usage
       - browser_percentage
       - ci_visibility_itr_usage
@@ -8822,6 +9195,10 @@ components:
       - estimated_ingested_spans_percentage
       - fargate_usage
       - fargate_percentage
+      - flex_logs_starter_usage
+      - flex_logs_starter_percentage
+      - flex_stored_logs_usage
+      - flex_stored_logs_percentage
       - functions_usage
       - functions_percentage
       - incident_management_monthly_active_users_usage
@@ -8834,6 +9211,8 @@ components:
       - lambda_traced_invocations_percentage
       - llm_observability_usage
       - llm_observability_percentage
+      - llm_spans_usage
+      - llm_spans_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
       - ndm_netflow_usage
@@ -8937,6 +9316,8 @@ components:
       - APPSEC_PERCENTAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
       - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
+      - BITS_AI_INVESTIGATIONS_USAGE
+      - BITS_AI_INVESTIGATIONS_PERCENTAGE
       - BROWSER_USAGE
       - BROWSER_PERCENTAGE
       - CI_VISIBILITY_ITR_USAGE
@@ -8979,6 +9360,10 @@ components:
       - ESTIMATED_INGESTED_SPANS_PERCENTAGE
       - FARGATE_USAGE
       - FARGATE_PERCENTAGE
+      - FLEX_LOGS_STARTER_USAGE
+      - FLEX_LOGS_STARTER_PERCENTAGE
+      - FLEX_STORED_LOGS_USAGE
+      - FLEX_STORED_LOGS_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -8991,6 +9376,8 @@ components:
       - LAMBDA_TRACED_INVOCATIONS_PERCENTAGE
       - LLM_OBSERVABILITY_USAGE
       - LLM_OBSERVABILITY_PERCENTAGE
+      - LLM_SPANS_USAGE
+      - LLM_SPANS_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
       - NDM_NETFLOW_USAGE
@@ -9144,6 +9531,14 @@ components:
         asm_serverless_traced_invocations_usage:
           description: The Application Security Monitoring Serverless traced invocations
             usage by tag(s).
+          format: double
+          type: number
+        bits_ai_investigations_percentage:
+          description: The percentage of Bits AI `SRE` investigation usage by tag(s).
+          format: double
+          type: number
+        bits_ai_investigations_usage:
+          description: The Bits AI `SRE` investigation usage by tag(s).
           format: double
           type: number
         browser_percentage:
@@ -9338,6 +9733,22 @@ components:
           description: The Fargate usage by tags.
           format: double
           type: number
+        flex_logs_starter_percentage:
+          description: The percentage of Flex Logs Starter usage by tags.
+          format: double
+          type: number
+        flex_logs_starter_usage:
+          description: The Flex Logs Starter usage by tags.
+          format: double
+          type: number
+        flex_stored_logs_percentage:
+          description: The percentage of Flex Stored Logs usage by tags.
+          format: double
+          type: number
+        flex_stored_logs_usage:
+          description: The Flex Stored Logs usage by tags.
+          format: double
+          type: number
         functions_percentage:
           description: The percentage of Lambda function usage by tag(s).
           format: double
@@ -9409,6 +9820,14 @@ components:
           type: number
         llm_observability_usage:
           description: The LLM Observability usage by tag(s).
+          format: double
+          type: number
+        llm_spans_percentage:
+          description: The percentage of LLM Spans usage by tag(s).
+          format: double
+          type: number
+        llm_spans_usage:
+          description: The LLM Spans usage by tag(s).
           format: double
           type: number
         logs_indexed_15day_percentage:
@@ -14549,6 +14968,7 @@ components:
     SplitGraphSourceWidgetDefinition:
       description: The original widget we are splitting on.
       oneOf:
+      - $ref: '#/components/schemas/BarChartWidgetDefinition'
       - $ref: '#/components/schemas/ChangeWidgetDefinition'
       - $ref: '#/components/schemas/GeomapWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
@@ -14794,6 +15214,61 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAPITestStep'
       - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
+      - $ref: '#/components/schemas/SyntheticsAPISubtestStep'
+    SyntheticsAPISubtestStep:
+      description: The subtest step used in a Synthetics multi-step API test.
+      properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
+        id:
+          description: ID of the step.
+          example: abc-def-123
+          readOnly: true
+          type: string
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        subtestPublicId:
+          description: Public ID of the test to be played as part of a `playSubTest`
+            step type.
+          example: ''
+          type: string
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPISubtestStepSubtype'
+      required:
+      - name
+      - subtype
+      - subtestPublicId
+      type: object
+    SyntheticsAPISubtestStepSubtype:
+      description: The subtype of the Synthetic multi-step API subtest step.
+      enum:
+      - playSubTest
+      example: playSubTest
+      type: string
+      x-enum-varnames:
+      - PLAY_SUB_TEST
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -16751,7 +17226,7 @@ components:
         tests:
           description: Array of Synthetic tests configuration.
           items:
-            $ref: '#/components/schemas/SyntheticsTestDetails'
+            $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           type: array
       type: object
     SyntheticsLocalVariableParsingOptionsType:
@@ -17427,8 +17902,10 @@ components:
           type: string
       type: object
     SyntheticsRestrictedRoles:
+      deprecated: true
       description: A list of role identifiers that can be pulled from the Roles API,
-        for restricting read and write access.
+        for restricting read and write access. This field is deprecated. Use the restriction
+        policies API to manage permissions.
       example:
       - xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
       items:
@@ -17782,7 +18259,7 @@ components:
         status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
         steps:
-          description: For browser test, the steps of the test.
+          description: The steps of the test if they exist.
           items:
             $ref: '#/components/schemas/SyntheticsStep'
           type: array
@@ -17834,6 +18311,52 @@ components:
       - API
       - BROWSER
       - MOBILE
+    SyntheticsTestDetailsWithoutSteps:
+      description: Object containing details about your Synthetic test, without test
+        steps.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsTestConfig'
+        creator:
+          $ref: '#/components/schemas/Creator'
+        locations:
+          description: Array of locations used to run the test.
+          example:
+          - aws:eu-west-3
+          items:
+            description: A location from which the test was run.
+            type: string
+          type: array
+        message:
+          description: Notification message associated with the test.
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsTestOptions'
+        public_id:
+          description: The test public ID.
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsTestDetailsSubType'
+        tags:
+          description: Array of tags attached to the test.
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsTestDetailsType'
+      type: object
     SyntheticsTestExecutionRule:
       description: Execution rule for a Synthetic test.
       enum:
@@ -18016,12 +18539,18 @@ components:
       - hide_all
       - hide_query
       - hide_handles
+      - hide_query_and_handles
+      - show_only_snapshot
+      - hide_handles_and_footer
       type: string
       x-enum-varnames:
       - SHOW_ALL
       - HIDE_ALL
       - HIDE_QUERY
       - HIDE_HANDLES
+      - HIDE_QUERY_AND_HANDLES
+      - SHOW_ONLY_SNAPSHOT
+      - HIDE_HANDLES_AND_FOOTER
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
@@ -18900,18 +19429,18 @@ components:
       - match
       type: object
     TagToHosts:
-      description: In this object, the key is the tag, the value is a list of host
-        names that are reporting that tag.
+      description: In this object, the key is the tag, and the value is a list of
+        host names that are reporting that tag.
       properties:
         tags:
           additionalProperties:
-            description: A list of additional properties for tags.
+            description: A list of host names which contain this tag
             items:
               description: A given tag in a list.
               example: test.metric.host
               type: string
             type: array
-          description: A list of tags to apply to the host.
+          description: A mapping of tags to host names
           type: object
       type: object
     TargetFormatType:
@@ -21104,6 +21633,16 @@ components:
             current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         ci_pipeline_indexed_spans_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
             in the current month for all organizations.
@@ -21147,6 +21686,11 @@ components:
         cloud_cost_management_host_count_avg:
           description: Host count average of Cloud Cost Management for all cloud providers
             for the given date and given organization.
+          format: int64
+          type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
           format: int64
           type: integer
         cloud_siem_events_sum:
@@ -21381,6 +21925,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         error_tracking_apm_error_events_sum:
@@ -21677,6 +22226,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for all organizations.
           format: int64
           type: integer
         published_app_hwm:
@@ -22216,6 +22775,16 @@ components:
             current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
+        ccm_spend_monitored_ent_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Enterprise over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last:
+          description: Shows the last value of the amount of cloud spend monitored
+            for Pro over all hours in the current date for the given org.
+          format: int64
+          type: integer
         ci_pipeline_indexed_spans_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
             in the current date for the given org.
@@ -22260,6 +22829,11 @@ components:
         cloud_cost_management_host_count_avg:
           description: Host count average of Cloud Cost Management for all cloud providers
             for the given date and given org.
+          format: int64
+          type: integer
+        cloud_cost_management_oci_host_count_avg:
+          description: Average host count for Cloud Cost Management on OCI for the
+            given date and organization.
           format: int64
           type: integer
         cloud_siem_events_sum:
@@ -22500,6 +23074,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current date for the given organization.
           format: int64
           type: integer
         error_tracking_apm_error_events_sum:
@@ -22794,6 +23373,16 @@ components:
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
             within the current date for the given org.
+          format: int64
+          type: integer
+        proxmox_host_sum:
+          description: Sum of all Proxmox hosts over all hours in the current date
+            for the given organization.
+          format: int64
+          type: integer
+        proxmox_host_top99p:
+          description: 99th percentile of all Proxmox hosts over all hours in the
+            current date for the given organization.
           format: int64
           type: integer
         public_id:
@@ -23340,6 +23929,16 @@ components:
             2024).
           format: int64
           type: integer
+        ccm_spend_monitored_ent_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Enterprise in the current month for all organizations.
+          format: int64
+          type: integer
+        ccm_spend_monitored_pro_last_sum:
+          description: Shows the sum of the last value of the amount of cloud spend
+            monitored for Pro in the current month for all organizations.
+          format: int64
+          type: integer
         ci_pipeline_indexed_spans_agg_sum:
           description: Shows the sum of all CI pipeline indexed spans over all hours
             in the current month for all organizations.
@@ -23383,6 +23982,11 @@ components:
         cloud_cost_management_host_count_avg_sum:
           description: Sum of the host count average for Cloud Cost Management for
             all cloud providers.
+          format: int64
+          type: integer
+        cloud_cost_management_oci_host_count_avg_sum:
+          description: Sum of the average host counts for Cloud Cost Management on
+            OCI.
           format: int64
           type: integer
         cloud_siem_events_agg_sum:
@@ -23624,6 +24228,11 @@ components:
         eph_infra_host_proplus_agg_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_proxmox_agg_sum:
+          description: Sum of all ephemeral infrastructure hosts for Proxmox over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         error_tracking_apm_error_events_agg_sum:
@@ -23941,6 +24550,16 @@ components:
           type: integer
         profiling_host_count_top99p_sum:
           description: Shows the 99th percentile of all profiled hosts over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_agg_sum:
+          description: Sum of all Proxmox hosts over all hours in the current month
+            for all organizations.
+          format: int64
+          type: integer
+        proxmox_host_top99p_sum:
+          description: Sum of the 99th percentile of all Proxmox hosts over all hours
             in the current month for all organizations.
           format: int64
           type: integer
@@ -24980,6 +25599,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/AlertGraphWidgetDefinition'
       - $ref: '#/components/schemas/AlertValueWidgetDefinition'
+      - $ref: '#/components/schemas/BarChartWidgetDefinition'
       - $ref: '#/components/schemas/ChangeWidgetDefinition'
       - $ref: '#/components/schemas/CheckStatusWidgetDefinition'
       - $ref: '#/components/schemas/DistributionWidgetDefinition'
@@ -25192,6 +25812,14 @@ components:
       x-enum-varnames:
       - CHECK
       - CLUSTER
+    WidgetHistogramRequestType:
+      description: Request type for the histogram request.
+      enum:
+      - histogram
+      example: histogram
+      type: string
+      x-enum-varnames:
+      - HISTOGRAM
     WidgetHorizontalAlign:
       description: Horizontal alignment.
       enum:
@@ -25396,7 +26024,7 @@ components:
         display_type:
           description: "Combination of:\n  - A severity error, warning, ok, or info\n
             \ - A line type: dashed, solid, or bold\nIn this case of a Distribution
-            widget, this can be set to be `x_axis_percentile`."
+            widget, this can be set to be `percentile`."
           example: error dashed
           type: string
         label:
@@ -25407,8 +26035,13 @@ components:
           description: Timestamp for the widget.
           type: string
         value:
-          description: Value to apply. Can be a single value y = 15 or a range of
+          description: 'Value to apply. Can be a single value y = 15 or a range of
             values 0 < y < 10.
+
+            For Distribution widgets with `display_type` set to `percentile`, this
+            should be
+
+            a numeric percentile value (for example, "90" for P90).'
           example: y = 15
           type: string
       required:
@@ -25619,6 +26252,8 @@ components:
           $ref: '#/components/schemas/WidgetLineType'
         line_width:
           $ref: '#/components/schemas/WidgetLineWidth'
+        order_by:
+          $ref: '#/components/schemas/WidgetStyleOrderBy'
         palette:
           description: Color palette to apply to the widget.
           type: string
@@ -25681,6 +26316,19 @@ components:
           description: Color palette to apply to the widget.
           type: string
       type: object
+    WidgetStyleOrderBy:
+      description: 'How to order series in timeseries visualizations.
+
+        - `tags`: Order series alphabetically by tag name (default behavior)
+
+        - `values`: Order series by their current metric values (typically descending)'
+      enum:
+      - tags
+      - values
+      type: string
+      x-enum-varnames:
+      - TAGS
+      - VALUES
     WidgetSummaryType:
       description: Which summary type should be used.
       enum:
@@ -31769,10 +32417,11 @@ paths:
         alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit:
         `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring:
         `database-monitoring alert`\n- network-performance: `network-performance alert`\n-
-        cloud cost: `cost alert`\n\n**Notes**:\n- Synthetic monitors are created through
-        the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/)
-        documentation for more information.\n- Log monitors require an unscoped App
-        Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
+        cloud cost: `cost alert`\n- network-path: `network-path alert`\n\n**Notes**:\n-
+        Synthetic monitors are created through the Synthetics API. See the [Synthetics
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        more information.\n- Log monitors require an unscoped App Key.\n\n#### Query
+        Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
         [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n-
         `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor
         type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type)
@@ -31902,7 +32551,15 @@ paths:
         \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
         for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
         `forecast` supports `>`\n- `#` an integer or decimal number used to set the
-        threshold."
+        threshold.\n\n**Network Path Alert Query**\n\nExample: `network-path(query).index(index_name).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `index_name` The data type to monitor on - supports `netpath-path` and `netpath-hop`.\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold."
       operationId: CreateMonitor
       requestBody:
         content:
@@ -36208,7 +36865,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SyntheticsTestDetails'
+                $ref: '#/components/schemas/SyntheticsTestDetailsWithoutSteps'
           description: OK
         '403':
           content:
@@ -36781,11 +37438,13 @@ paths:
         - synthetics_global_variable_write
   /api/v1/tags/hosts:
     get:
-      description: Return a mapping of tags to hosts for your whole infrastructure.
+      description: Returns a mapping of tags to hosts. For each tag, the response
+        returns a list of host names that contain this tag. There is a restriction
+        of 10k total host names from the org that can be attached to tags and returned.
       operationId: ListHostTags
       parameters:
-      - description: When specified, filters host list to those tags with the specified
-          source.
+      - description: Source to filter. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags.
         in: query
         name: source
         required: false
@@ -36816,7 +37475,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ: []
-      summary: Get Tags
+      summary: Get All Host Tags
       tags:
       - Tags
       x-menu-order: 1
@@ -36825,21 +37484,21 @@ paths:
         permissions: []
   /api/v1/tags/hosts/{host_name}:
     delete:
-      description: 'This endpoint allows you to remove all user-assigned tags
+      description: 'This endpoint allows you to remove all tags
 
-        for a single host.'
+        for a single host. If no source is specified, only deletes from the source
+        "User".'
       operationId: DeleteHostTags
       parameters:
-      - description: This endpoint allows you to remove all user-assigned tags for
-          a single host.
+      - description: Specified host name to delete tags
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (for example chef, puppet).
-
-          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+      - description: Source of the tags to be deleted. [Complete list of source attribute
+          values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags.
         in: query
         name: source
         required: false
@@ -36870,14 +37529,14 @@ paths:
       description: Return the list of tags that apply to a given host.
       operationId: GetHostTags
       parameters:
-      - description: When specified, filters list of tags to those tags with the specified
-          source.
+      - description: Name of the host to retrieve tags for
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: Source to filter.
+      - description: Source to filter. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags.
         in: query
         name: source
         required: false
@@ -36904,26 +37563,26 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get host tags
+      summary: Get Host Tags
       tags:
       - Tags
       x-menu-order: 2
     post:
       description: 'This endpoint allows you to add new tags to a host,
 
-        optionally specifying where these tags come from.'
+        optionally specifying what source these tags come from. If tags already exist,
+        appends new tags to the tag list. If no source is specified, defaults to "user".'
       operationId: CreateHostTags
       parameters:
-      - description: This endpoint allows you to add new tags to a host, optionally
-          specifying where the tags came from.
+      - description: Specified host name to add new tags
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: 'The source of the tags.
-
-          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).'
+      - description: Source to add tags. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags. If no source is specified, defaults
+          to "user".
         example: chef
         in: query
         name: source
@@ -36969,16 +37628,15 @@ paths:
         an integration source with those supplied in the request.'
       operationId: UpdateHostTags
       parameters:
-      - description: This endpoint allows you to update/replace all in an integration
-          source with those supplied in the request.
+      - description: Specified host name to change tags
         in: path
         name: host_name
         required: true
         schema:
           type: string
-      - description: 'The source of the tags (for example chef, puppet).
-
-          [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value)'
+      - description: Source to update tags. [Complete list of source attribute values](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
+          Use "user" source for custom-defined tags. If no source specified, defaults
+          to "user".
         in: query
         name: source
         required: false
@@ -37683,7 +38341,10 @@ paths:
         code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
-        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
+        next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\nThe
+        following values have been **deprecated**:\n    `estimated_indexed_spans_usage`,
+        `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`, `estimated_ingested_spans_percentage`,
+        `llm_observability_usage`, `llm_observability_percentage`."
       operationId: GetHourlyUsageAttribution
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -38270,7 +38931,7 @@ paths:
           The following values have been **deprecated**:
 
           `estimated_indexed_spans_usage`, `estimated_indexed_spans_percentage`, `estimated_ingested_spans_usage`,
-          `estimated_ingested_spans_percentage`.'
+          `estimated_ingested_spans_percentage`, `llm_observability_usage`, `llm_observability_percentage`.'
         in: query
         name: fields
         required: true
@@ -40110,7 +40771,8 @@ tags:
 
     by a source. For example, some valid sources include nagios, hudson, jenkins,
 
-    users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.
+    users, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc. Find a complete
+    list of source type names under [API Source Attributes](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).
 
 
     Read more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/).'

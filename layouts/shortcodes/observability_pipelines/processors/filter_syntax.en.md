@@ -13,4 +13,4 @@ The following are logs filter query examples:
 
 Learn more about writing filter queries in [Observability Pipelines Search Syntax][4001].
 
-[4001]: /observability_pipelines/search_syntax/
+[4001]: /observability_pipelines/search_syntax/logs/

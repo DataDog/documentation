@@ -1,8 +1,85 @@
 ---
 title: Throttle Processor
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+{{< jqmath-vanilla >}}
+
+{{< product-availability >}}
 
 {{% observability_pipelines/processors/throttle %}}
 
+## Overview
+
+Use this processor to set a limit on the number of logs sent within a specific time window. For example, you can set a limit so that only 100 logs are sent per second. Setting a rate limit can help you catch any spikes in log ingestion and prevent unexpected billing costs.
+
+## Setup
+
+To set up the processor:
+
+1. Define a [filter query](#filter-query-syntax).
+    - Only logs that match the specified filter query are processed.
+    - All matched logs get throttled. Logs that are sent within the throttle limit and logs that do not match the filter are sent to the next step. Logs sent after the throttle limit has been reached, are dropped.
+1. Set the throttling rate. This is the number of events allowed for a given bucket during the set time window.
+    - **Note**: This rate limit is applied on a **per-worker level**. If you scale the number of workers up or down, you may want to adjust the processor rate limit accordingly. You can update the rate limit programmatically using the [Observability Pipelines API][1].
+1. Set the time window.
+1. Optionally, click **Add Field** if you want to group by a field.
+
 {{% observability_pipelines/processors/filter_syntax %}}
+
+## How the Throttle processor works
+
+The Throttle processor sets a rate limit on the number of logs sent within a specified time window. While similar to the [Quota processor][2], the main difference between the Throttle and Quota processors is that the Quota processor's time window is fixed at 24 hours and cannot be changed, while the Throttle processor's time window can be configured. Since the Throttle processor's time window is configurable, the processor has a capacity replenishment rate based on the throttling rate and time window you set. See [Capacity replenishment rate](#capacity-replenishment-rate) for more information.
+
+The following table compares the Throttle processor with the Quota processor:
+
+| Feature | Quota Processor | Throttle Processor |
+|---------|----------------|-------------------|
+| Time window | Fixed at 24 hours | Configurable |
+| Handling initial burst of events | Processes data up to the fixed daily limit. | Processes events up to your configured throttling rate. |
+| After the limit is reached | Stops processing data until the 24-hour time window is reset. | Continues at a steady, calculated rate. |
+| Reset mechanism | Resets every 24 hours. | Continuous replenishment. Time window also resets if you redeploy the Worker or the pipeline. |
+| How limits are stored or tracked | Quota limits persist even if the Worker is restarted, because the limits are stored in the backend. | The time window resets if you redeploy the Worker or the pipeline, because throttle limits are tracked in the Worker's memory. |
+
+### Initial capacity
+
+{{< img src="observability_pipelines/processors/throttling_rate.png" alt="The Throttle processor with the throttling rate set to 1000 K" style="width:40%;" >}}
+
+When the Throttle processor is enabled, the number of logs the processor allows through immediately is based on the configured **Throttling Rate**. For example, if the **Throttling Rate** is set to `1000` events over 60 seconds, and 5,000 events arrive the moment the processor is enabled:
+
+- The processor allows an initial capacity of 1,000 events to pass through.
+- The remaining 4,000 events are dropped.
+- This initial behavior is identical to a Quota processor's.
+
+### Capacity replenishment rate
+
+The Throttle processor uses a [generic cell rate algorithm][3], which enables a steady rate of events to pass through. The replenishment rate is based on the settings of your Throttle processor and allows a certain number of events to pass through per second. This rate can be calculated as follows:
+
+$$\text"Throttle rate" / \text"Time window (in seconds)"$$
+
+#### Example
+
+If you use the following processor settings:
+- Throttling rate = 1000 events
+- Time window = 60 minutes (3600 seconds)
+
+The capacity replenishment rate is:
+
+$$\text"1000 events" / \text"60 minutes" ≈ \text"17 events"/ \text"minute" ≈ \text"0.28 events"/ \text"second"$$
+
+If `T` is the time when the processor is enabled and the processor receives 5000 events at that time, the number of events that the processor allows through based on `T` is as follows:
+- `T + 0` minutes (when the processor is enabled):
+    - 1000 events processed.
+    - 4000 events dropped.
+- `T + 1` minute: ~17 events can be processed
+- `T + 2` minutes: ~17 events can be processed
+- ...the processor continues processing events at a steady rate of ~17 events per minute and dropping the rest until the next minute.
+
+**Note**: The replenishment rate determines the maximum throughput after the initial capacity. You can adjust the throttling rate for a higher or lower throughput if needed.
+
+[1]: /api/latest/observability-pipelines/#update-a-pipeline
+[2]: /observability_pipelines/processors/quota/
+[3]: https://en.wikipedia.org/wiki/Generic_cell_rate_algorithm

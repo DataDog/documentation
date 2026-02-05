@@ -70,10 +70,10 @@ spec:
   lifecycle: production
   tier: "0"
   components:
-  - service: product-recommendation
-  - service: orders-app
-  - api: products
-  - system: shopist-user-trends
+  - service:product-recommendation
+  - service:orders-app
+  - api:products
+  - system:shopist-user-trends
 {{< /code-block >}}
 
 This user-defined system appears in Software Catalog as shown:

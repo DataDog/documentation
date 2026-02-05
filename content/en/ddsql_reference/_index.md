@@ -233,7 +233,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `AVG(numeric n)`                                 | numeric                               | Returns the average value (arithmetic mean) across all input values.                                                                                                                              |
 | `BOOL_AND(boolean b)`                            | boolean                               | Returns whether all non-null input values are true.                                                                                                                                               |
 | `BOOL_OR(boolean b)`                             | boolean                               | Returns whether any non-null input value is true.                                                                                                                                                 |
-| `CEIL(numeric n)`                                | numeric                               | Returns the value rounded up to the nearest integer.                                                                                                                                              |
+| `CEIL(numeric n)` / `CEILING(numeric n)`         | numeric                               | Returns the value rounded up to the nearest integer. Both `CEIL` and `CEILING` are supported as aliases.                                                                                         |
 | `FLOOR(numeric n)`                               | numeric                               | Returns the value rounded down to the nearest integer.                                                                                                                                            |
 | `ROUND(numeric n)`                               | numeric                               | Returns the value rounded to the nearest integer.                                                                                                                                                 |
 | `POWER(numeric base, numeric exponent)`          | numeric                               | Returns the value of base raised to the power of exponent.                                                                                                                                        |
@@ -246,18 +246,21 @@ The following SQL functions are supported. For Window function, see the separate
 | `TRIM(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                                                                                                                                          |
 | `REPLACE(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring.                                                                                                                       |
 | `SUBSTRING(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length.                                                                                                      |
+| `REVERSE(string s)`                              | string                                | Returns the string with characters in reverse order.                                                                                                                                               |
 | `STRPOS(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match.                                                                                                   |
 | `SPLIT_PART(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one.                                                                                          |
 | `EXTRACT(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval.                                                                                                     |
 | `TO_TIMESTAMP(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.                                                                                                                                   |
+| `TO_TIMESTAMP(numeric epoch)`                    | timestamp                             | Converts a UNIX epoch timestamp (in seconds) to a timestamp.                                                                                                                                      |
 | `TO_CHAR(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.                                                                                                                                   |
 | `DATE_BIN(interval stride, timestamp source, timestamp origin)` | timestamp                             | Aligns a timestamp (source) to buckets of even length (stride). Returns the start of the bucket containing the source, calculated as the largest timestamp that is less than or equal to source and is a multiple of stride lengths from origin. |
 | `DATE_TRUNC(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.                                                                                                                        |
 | `CURRENT_SETTING(string setting_name)`           | string                                | Returns the current value of the specified setting. Supports the parameters `dd.time_frame_start` and `dd.time_frame_end`, which return the start and end of the global time frame, respectively. |
-| `NOW()`                                          | timestamp                             | Returns the current timestamp at the start of the current query.                                                                                                                                  |
+| `NOW()`                                          | timestamp                             | Returns the current UTC timestamp at the start of the current query.                                                                                                                              |
 | `CARDINALITY(array a)`                           | integer                               | Returns the number of elements in the array.                                                                                                                                                      |
 | `ARRAY_POSITION(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found.                                                                                         |
 | `STRING_TO_ARRAY(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter.                                                                                                                       |
+| `ARRAY_TO_STRING(array a, string delimiter)`     | string                                | Converts an array to a string by concatenating elements with the given delimiter.                                                                                                                 |
 | `ARRAY_AGG(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                                                                                                                                              |
 | `APPROX_PERCENTILE(double percentile) WITHIN GROUP (ORDER BY expression e)` | typeof expression        | Computes an approximate percentile value. The percentile must be between 0.0 and 1.0 (inclusive). Requires the `WITHIN GROUP (ORDER BY ...)` syntax.                                              |
 | `UNNEST(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause.                                                                                                                    |
@@ -411,6 +414,15 @@ FROM
   books
 {{< /code-block >}}
 
+### `REVERSE`
+{{< code-block lang="sql" >}}
+SELECT
+  REVERSE(username) AS reversed_username
+FROM
+  users
+LIMIT 5
+{{< /code-block >}}
+
 ### `STRPOS`
 {{< code-block lang="sql" >}}
 SELECT
@@ -450,6 +462,10 @@ FROM
 
 ### `TO_TIMESTAMP`
 
+`TO_TIMESTAMP` has two forms:
+
+**Form 1: Convert string to timestamp with format**
+
 Supported patterns for date/time formatting:
 | Pattern     | Description                          |
 | ----------- | ------------------------------------ |
@@ -471,6 +487,13 @@ Supported patterns for date/time formatting:
 {{< code-block lang="sql" >}}
 SELECT
   TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
+{{< /code-block >}}
+
+**Form 2: Convert UNIX epoch timestamp to timestamp**
+
+{{< code-block lang="sql" >}}
+SELECT
+  TO_TIMESTAMP(1735142580) AS ts_from_epoch
 {{< /code-block >}}
 
 ### `TO_CHAR`
@@ -580,6 +603,12 @@ FROM
 {{< code-block lang="sql" >}}
 SELECT
   STRING_TO_ARRAY('a,b,c,d,e,f', ',')
+{{< /code-block >}}
+
+### `ARRAY_TO_STRING`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_TO_STRING(ARRAY['a', 'b', 'c'], ',') AS joined_string
 {{< /code-block >}}
 
 ### `ARRAY_AGG`

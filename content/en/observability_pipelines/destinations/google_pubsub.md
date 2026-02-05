@@ -1,7 +1,13 @@
 ---
 title: Google Pub/Sub Destination
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
+
+{{< product-availability >}}
 
 ## Overview
 
@@ -93,28 +99,47 @@ Set up the Google Pub/Sub destination and its environment variables when you [se
 
 #### Optional settings
 
-- Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
-	- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-	- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
-	- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
-- Toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access to the Preview.
-	- If disabled (default): Up to 500 events are buffered before flush.
-	- If enabled:
-		1. Select the buffer type you want to set.
-			- **Memory**: Fast, limited by RAM
-			- **Buffer size**: Durable, survives restarts
-		1. Enter the buffer size and select the unit.
-			- Maximum capacity in MB or GB.
+##### Enable TLS
+
+Toggle the switch to **Enable TLS** if your organization requires secure connections with custom certificates.
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
+
+##### Buffering options
+
+{{% observability_pipelines/destination_buffer %}}
 
 {{< img src="observability_pipelines/destinations/google_pubsub_settings.png" alt="The google pub/sub destination with sample values" style="width:30%;" >}}
 
-### Set environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- (Optional) Google Pub/Sub endpoint URL identifier:
+	- By default the Worker sends data to the global endpoint: `https://pubsub.googleapis.com`.
+	- If your Pub/Sub topic is region-specific, configure the Google Pub/Sub alternative endpoint URL with the regional endpoint. See [About Pub/Sub endpoints][1] for more information. Enter the configured endpoint URL into your secrets manager.
+	- The default identifier is `DESTINATION_GCP_PUBSUB_ENDPOINT_URL`.
+- Google Pub/Sub TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_GCP_PUBSUB_KEY_PASS`.
+
+[1]: https://docs.cloud.google.com/pubsub/docs/reference/service_apis_overview#pubsub_endpoints
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 #### Optional alternative Pub/Sub endpoints
 
 {{< img src="observability_pipelines/destinations/google_pubsub_env_var.png" alt="The install page showing the Google Pub/Sub environment variable field" style="width:70%;" >}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_pubsub %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 

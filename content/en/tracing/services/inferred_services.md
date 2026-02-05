@@ -156,7 +156,7 @@ Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
 If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
 
-**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it take precedence over all other attributes.
+**Note**: Datadog never sets the `peer.service` for inferred databases and queues. `peer.service` is the highest priority peer attribute. If set, it takes precedence over all other attributes.
 
 ## Migrate to global default service naming
 
