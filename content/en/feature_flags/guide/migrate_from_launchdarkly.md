@@ -46,13 +46,15 @@ After installation, ensure you have initialized the Datadog provider with your c
 ### 2. Set up and verify a new flag {#set-up-flag}
 
 1. Create a flag in Datadog by navigating to **Software Delivery** > **Feature Flags**, then clicking **Create Flag**.
-2. Implement the flag in your application code.
+2. Implement the flag in your application code (see the code examples below these steps).
 3. Test the flag in your local development environment to ensure it works as expected.
 4. Deploy the application to your staging or testing environments and verify the flag's functionality.
 5. Once verified, deploy the application to your production environment and test the flag again.
 
 {{< tabs >}}
-{{% tab "JavaScript (browser)" %}}
+{{% tab "Client-side SDKs" %}}
+
+{{% collapse-content title="JavaScript (browser)" level="h4" expanded=false id="set-up-flag-javascript" %}}
 {{< code-block lang="javascript" >}}
 const client = OpenFeature.getClient();
 
@@ -66,9 +68,9 @@ if (showNewFeature) {
     // Feature is enabled
 }
 {{< /code-block >}}
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "React" %}}
+{{% collapse-content title="React" level="h4" expanded=false id="set-up-flag-react" %}}
 {{< code-block lang="jsx" >}}
 import { useBooleanFlagValue } from '@openfeature/react-sdk';
 
@@ -82,176 +84,9 @@ function MyComponent() {
     return <OldFeature />;
 }
 {{< /code-block >}}
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Node.js (server)" %}}
-{{< code-block lang="javascript" >}}
-const client = OpenFeature.getClient();
-
-const evaluationContext = {
-    targetingKey: req.session?.userID,
-    companyID: req.session?.companyID,
-    country: user.country
-};
-
-const showNewFeature = client.getBooleanValue(
-    'show-new-feature',
-    false,
-    evaluationContext
-);
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Python" %}}
-{{< code-block lang="python" >}}
-from openfeature import api
-from openfeature.evaluation_context import EvaluationContext
-
-client = api.get_client()
-
-eval_ctx = EvaluationContext(
-    targeting_key="user-123",
-    attributes={
-        "country": "US",
-        "tier": "premium"
-    }
-)
-
-show_new_feature = client.get_boolean_value(
-    "show-new-feature",
-    False,
-    eval_ctx
-)
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Java" %}}
-{{< code-block lang="java" >}}
-import dev.openfeature.sdk.Client;
-import dev.openfeature.sdk.EvaluationContext;
-import dev.openfeature.sdk.MutableContext;
-import dev.openfeature.sdk.OpenFeatureAPI;
-
-Client client = OpenFeatureAPI.getInstance().getClient();
-
-EvaluationContext context = new MutableContext("user-123")
-    .add("email", "user@example.com")
-    .add("tier", "premium");
-
-boolean showNewFeature = client.getBooleanValue(
-    "show-new-feature",
-    false,
-    context
-);
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Go" %}}
-{{< code-block lang="go" >}}
-import (
-    "context"
-    "github.com/open-feature/go-sdk/openfeature"
-)
-
-client := openfeature.NewClient("my-service")
-
-ctx := openfeature.NewEvaluationContext(
-    "user-123",
-    map[string]interface{}{
-        "country": "US",
-        "tier": "premium",
-    },
-)
-
-showNewFeature, _ := client.BooleanValue(
-    context.Background(),
-    "show-new-feature",
-    false,
-    ctx,
-)
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab ".NET" %}}
-{{< code-block lang="csharp" >}}
-using OpenFeature;
-using OpenFeature.Model;
-
-var client = Api.Instance.GetClient("my-service");
-
-var evalCtx = EvaluationContext.Builder()
-    .SetTargetingKey("user-123")
-    .Set("country", "US")
-    .Set("tier", "premium")
-    .Build();
-
-var showNewFeature = await client.GetBooleanValueAsync(
-    "show-new-feature",
-    false,
-    evalCtx
-);
-
-if (showNewFeature)
-{
-    // Feature is enabled
-}
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Ruby" %}}
-{{< code-block lang="ruby" >}}
-require 'openfeature/sdk'
-
-client = OpenFeature::SDK.build_client
-
-context = OpenFeature::SDK::EvaluationContext.new(
-    targeting_key: 'user-123',
-    country: 'US',
-    tier: 'premium'
-)
-
-show_new_feature = client.fetch_boolean_value(
-    flag_key: 'show-new-feature',
-    default_value: false,
-    evaluation_context: context
-)
-
-if show_new_feature
-    # Feature is enabled
-end
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-{{< code-block lang="swift" >}}
-import DatadogFlags
-
-let flagsClient = FlagsClient.shared()
-
-// Set evaluation context
-flagsClient.setEvaluationContext(
-    FlagsEvaluationContext(
-        targetingKey: "user-123",
-        attributes: [
-            "country": .string("US"),
-            "tier": .string("premium")
-        ]
-    )
-)
-
-// Evaluate flag
-let showNewFeature = flagsClient.resolveBooleanValue(
-    flagKey: "show-new-feature",
-    defaultValue: false
-)
-
-if showNewFeature {
-    // Feature is enabled
-}
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Android" %}}
+{{% collapse-content title="Android" level="h4" expanded=false id="set-up-flag-android" %}}
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.FlagsClient
 import com.datadog.android.flags.EvaluationContext
@@ -279,6 +114,179 @@ if (showNewFeature) {
     // Feature is enabled
 }
 {{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="iOS" level="h4" expanded=false id="set-up-flag-ios" %}}
+{{< code-block lang="swift" >}}
+import DatadogFlags
+
+let flagsClient = FlagsClient.shared()
+
+// Set evaluation context
+flagsClient.setEvaluationContext(
+    FlagsEvaluationContext(
+        targetingKey: "user-123",
+        attributes: [
+            "country": .string("US"),
+            "tier": .string("premium")
+        ]
+    )
+)
+
+// Evaluate flag
+let showNewFeature = flagsClient.resolveBooleanValue(
+    flagKey: "show-new-feature",
+    defaultValue: false
+)
+
+if showNewFeature {
+    // Feature is enabled
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% /tab %}}
+
+{{% tab "Server-side SDKs" %}}
+
+{{% collapse-content title=".NET" level="h4" expanded=false id="set-up-flag-dotnet" %}}
+{{< code-block lang="csharp" >}}
+using OpenFeature;
+using OpenFeature.Model;
+
+var client = Api.Instance.GetClient("my-service");
+
+var evalCtx = EvaluationContext.Builder()
+    .SetTargetingKey("user-123")
+    .Set("country", "US")
+    .Set("tier", "premium")
+    .Build();
+
+var showNewFeature = await client.GetBooleanValueAsync(
+    "show-new-feature",
+    false,
+    evalCtx
+);
+
+if (showNewFeature)
+{
+    // Feature is enabled
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Go" level="h4" expanded=false id="set-up-flag-go" %}}
+{{< code-block lang="go" >}}
+import (
+    "context"
+    "github.com/open-feature/go-sdk/openfeature"
+)
+
+client := openfeature.NewClient("my-service")
+
+ctx := openfeature.NewEvaluationContext(
+    "user-123",
+    map[string]interface{}{
+        "country": "US",
+        "tier": "premium",
+    },
+)
+
+showNewFeature, _ := client.BooleanValue(
+    context.Background(),
+    "show-new-feature",
+    false,
+    ctx,
+)
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Java" level="h4" expanded=false id="set-up-flag-java" %}}
+{{< code-block lang="java" >}}
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.MutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+Client client = OpenFeatureAPI.getInstance().getClient();
+
+EvaluationContext context = new MutableContext("user-123")
+    .add("email", "user@example.com")
+    .add("tier", "premium");
+
+boolean showNewFeature = client.getBooleanValue(
+    "show-new-feature",
+    false,
+    context
+);
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Node.js" level="h4" expanded=false id="set-up-flag-nodejs" %}}
+{{< code-block lang="javascript" >}}
+const client = OpenFeature.getClient();
+
+const evaluationContext = {
+    targetingKey: req.session?.userID,
+    companyID: req.session?.companyID,
+    country: user.country
+};
+
+const showNewFeature = client.getBooleanValue(
+    'show-new-feature',
+    false,
+    evaluationContext
+);
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Python" level="h4" expanded=false id="set-up-flag-python" %}}
+{{< code-block lang="python" >}}
+from openfeature import api
+from openfeature.evaluation_context import EvaluationContext
+
+client = api.get_client()
+
+eval_ctx = EvaluationContext(
+    targeting_key="user-123",
+    attributes={
+        "country": "US",
+        "tier": "premium"
+    }
+)
+
+show_new_feature = client.get_boolean_value(
+    "show-new-feature",
+    False,
+    eval_ctx
+)
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Ruby" level="h4" expanded=false id="set-up-flag-ruby" %}}
+{{< code-block lang="ruby" >}}
+require 'openfeature/sdk'
+
+client = OpenFeature::SDK.build_client
+
+context = OpenFeature::SDK::EvaluationContext.new(
+    targeting_key: 'user-123',
+    country: 'US',
+    tier: 'premium'
+)
+
+show_new_feature = client.fetch_boolean_value(
+    flag_key: 'show-new-feature',
+    default_value: false,
+    evaluation_context: context
+)
+
+if show_new_feature
+    # Feature is enabled
+end
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -300,7 +308,9 @@ Implement a wrapper function that provides a fallback mechanism to use the Launc
 <div class="alert alert-info">LaunchDarkly and Datadog SDKs use strongly typed methods for flag evaluation (for example, <code>getBooleanValue</code>, <code>getStringValue</code>, <code>getIntegerValue</code>). The examples below demonstrate Boolean flag evaluation. You will need to create similar wrapper functions for each flag type used in your application.</div>
 
 {{< tabs >}}
-{{% tab "JavaScript (browser)" %}}
+{{% tab "Client-side SDKs" %}}
+
+{{% collapse-content title="JavaScript (browser)" level="h4" expanded=false id="fallback-javascript" %}}
 {{< code-block lang="javascript" filename="fallback-wrapper.js" >}}
 import * as ld from 'launchdarkly-js-client-sdk';
 import { OpenFeature } from '@openfeature/web-sdk';
@@ -347,9 +357,9 @@ class FallbackWrapper {
     }
 }
 {{< /code-block >}}
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "React" %}}
+{{% collapse-content title="React" level="h4" expanded=false id="fallback-react" %}}
 {{< code-block lang="jsx" filename="FallbackWrapper.jsx" >}}
 import * as React from 'react';
 import { useLDClient } from 'launchdarkly-react-client-sdk';
@@ -370,299 +380,9 @@ export function useFeatureFlagWithFallback(flagKey, defaultValue) {
     }, [ddFlagValue, ddError, ldClient]);
 }
 {{< /code-block >}}
-{{% /tab %}}
+{{% /collapse-content %}}
 
-{{% tab "Node.js (server)" %}}
-{{< code-block lang="javascript" filename="fallback-wrapper.js" >}}
-import * as LaunchDarkly from '@launchdarkly/node-server-sdk';
-import { OpenFeature } from '@openfeature/server-sdk';
-
-const ldClient = LaunchDarkly.initialize('YOUR_LD_SDK_KEY');
-
-export async function getBooleanFeatureFlag(flagKey, userId, attributes, defaultValue) {
-    const ddClient = OpenFeature.getClient();
-    try {
-        const ddContext = {
-            targetingKey: userId,
-            ...attributes
-        };
-        return ddClient.getBooleanValue(flagKey, defaultValue, ddContext);
-    } catch (e) {
-        console.warn(`Falling back to LaunchDarkly for flag: ${flagKey}`);
-        const ldContext = { key: userId, ...attributes };
-        return ldClient.variation(flagKey, ldContext, defaultValue);
-    }
-}
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Python" %}}
-{{< code-block lang="python" filename="fallback_wrapper.py" >}}
-import ldclient
-from ldclient import Context
-from openfeature import api
-from openfeature.evaluation_context import EvaluationContext
-
-def get_boolean_feature_flag(flag_key, user_id, evaluation_context, default_value):
-    ld_client = ldclient.get()
-    dd_client = api.get_client()
-
-    try:
-        dd_context = EvaluationContext(
-            targeting_key=user_id,
-            attributes=evaluation_context
-        )
-
-        return dd_client.get_boolean_value(flag_key, default_value, dd_context)
-    except Exception as e:
-        print(f"Falling back to LaunchDarkly for flag: {flag_key}")
-        cb = Context.builder(user_id)
-
-        for key, value in evaluation_context.items():
-            cb.set(key, value)
-
-        return ld_client.variation(flag_key, cb.build(), default_value)
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Java" %}}
-{{< code-block lang="java" filename="FallbackWrapper.java" >}}
-import java.util.Map;
-import com.launchdarkly.sdk.ContextBuilder;
-import com.launchdarkly.sdk.LDContext;
-import com.launchdarkly.sdk.server.LDClient;
-import dev.openfeature.sdk.Client;
-import dev.openfeature.sdk.EvaluationContext;
-import dev.openfeature.sdk.MutableContext;
-import dev.openfeature.sdk.OpenFeatureAPI;
-
-public class FallbackWrapper {
-    private final LDClient ldClient;
-    private final Client ddClient;
-
-    public FallbackWrapper(String ldKey) {
-        this.ldClient = new LDClient(ldKey);
-        this.ddClient = OpenFeatureAPI.getInstance().getClient();
-    }
-
-    public boolean getBooleanFlag(String flagKey, String userId, Map<String, String> evaluationContext, boolean defaultValue) {
-        try {
-            EvaluationContext context = new MutableContext(userId);
-            for (Map.Entry<String, String> entry : evaluationContext.entrySet()) {
-                context.add(entry.getKey(), entry.getValue());
-            }
-
-            return ddClient.getBooleanValue(flagKey, defaultValue, context);
-        } catch (Exception e) {
-            System.out.println("Falling back to LaunchDarkly for flag: " + flagKey);
-            ContextBuilder cb = LDContext.builder(userId);
-
-            for (Map.Entry<String, String> entry : evaluationContext.entrySet()) {
-                cb.set(entry.getKey(), entry.getValue());
-            }
-
-            return ldClient.boolVariation(flagKey, cb.build(), defaultValue);
-        }
-    }
-}
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Go" %}}
-{{< code-block lang="go" filename="fallback_wrapper.go" >}}
-package main
-
-import (
-    "context"
-    "log"
-
-    ld "github.com/launchdarkly/go-server-sdk/v6"
-    "github.com/launchdarkly/go-sdk-common/v3/ldcontext"
-    "github.com/open-feature/go-sdk/openfeature"
-)
-
-type FallbackWrapper struct {
-    ldClient *ld.LDClient
-    ddClient *openfeature.Client
-}
-
-func (fw *FallbackWrapper) GetBooleanFlag(
-    ctx context.Context,
-    flagKey string,
-    userId string,
-    evaluationContext map[string]string,
-    defaultValue bool,
-) bool {
-    ofContext := openfeature.NewEvaluationContext(
-        userId,
-        evaluationContext,
-    )
-
-    ddValue, err := fw.ddClient.BooleanValue(ctx, flagKey, defaultValue, ofContext)
-    if err != nil {
-        log.Printf("Falling back to LaunchDarkly for flag: %s", flagKey)
-        cb := ldcontext.NewBuilder(userId)
-
-        for k, v := range evaluationContext {
-            cb.SetString(k, v)
-        }
-
-        ldValue, _ := fw.ldClient.BoolVariation(flagKey, cb.Build(), defaultValue)
-        return ldValue
-    }
-
-    return ddValue
-}
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab ".NET" %}}
-{{< code-block lang="csharp" filename="FallbackWrapper.cs" >}}
-using OpenFeature;
-using OpenFeature.Model;
-using LaunchDarkly.Sdk;
-using LaunchDarkly.Sdk.Server;
-
-public class FallbackWrapper
-{
-    private readonly LdClient ldClient;
-    private readonly IFeatureClient ddClient;
-
-    public FallbackWrapper()
-    {
-        var config = Configuration.Builder("YOUR_LD_KEY").Build();
-        ldClient = new LdClient(config);
-        ddClient = Api.Instance.GetClient("my-service");
-    }
-
-    public async Task<bool> GetBooleanFlagAsync(
-        string flagKey,
-        string userId,
-        Dictionary<string, string> evaluationContext,
-        bool defaultValue)
-    {
-        try
-        {
-            var evalCtx = EvaluationContext.Builder()
-                .SetTargetingKey(userId);
-
-            foreach (var attr in evaluationContext)
-            {
-                evalCtx.Set(attr.Key, attr.Value);
-            }
-
-            return await ddClient.GetBooleanValueAsync(
-                flagKey, defaultValue, evalCtx.Build());
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"Falling back to LaunchDarkly for flag: {flagKey}");
-
-            var cb = Context.Builder(userId);
-
-            foreach (var attr in evaluationContext)
-            {
-                cb.Set(attr.Key, attr.Value);
-            }
-
-            return ldClient.BoolVariation(flagKey, cb.Build(), defaultValue);
-        }
-    }
-}
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Ruby" %}}
-{{< code-block lang="ruby" filename="fallback_wrapper.rb" >}}
-require 'ldclient-rb'
-require 'openfeature/sdk'
-
-class FallbackWrapper
-    def initialize(ld_key)
-        @ld_client = LaunchDarkly::LDClient.new(ld_key)
-        @dd_client = OpenFeature::SDK.build_client
-    end
-
-    def get_boolean_flag(flag_key, user_id, evaluation_context, default_value)
-        begin
-            context_attrs = { targeting_key: user_id }
-            context_attrs.merge!(evaluation_context)
-            context = OpenFeature::SDK::EvaluationContext.new(context_attrs)
-
-            @dd_client.fetch_boolean_value(
-                flag_key: flag_key,
-                default_value: default_value,
-                evaluation_context: context
-            )
-        rescue => e
-            puts "Falling back to LaunchDarkly for flag: #{flag_key}"
-            ld_context_attrs = { key: user_id }
-            ld_context_attrs.merge!(evaluation_context)
-            ld_context = LaunchDarkly::LDContext.create(ld_context_attrs)
-            @ld_client.variation(flag_key, ld_context, default_value)
-        end
-    end
-end
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-{{< code-block lang="swift" filename="FallbackWrapper.swift" >}}
-import Foundation
-import LaunchDarkly
-import DatadogFlags
-import DatadogCore
-
-class FallbackWrapper {
-    private let ldClient: LDClient
-    private let ddClient: FlagsClient
-
-    init(userId: String, evaluationContext: [String: AnyValue] = [:]) {
-        let ldConfig = LDConfig(mobileKey: 'YOUR_LD_MOBILE_KEY', autoEnvAttributes: .enabled)
-        var ldContext = LDContextBuilder(key: userId)
-        for (key, value) in evaluationContext {
-            ldContext.trySetValue(key, value)
-        }
-        LDClient.start(config: ldConfig, context: ldContext)
-
-        self.ldClient = LDClient.get()!
-
-        Datadog.initialize(
-            with: Datadog.Configuration(
-                clientToken: "<client token>",
-                env: "<environment>",
-                service: "<service name>"
-            ),
-            trackingConsent: .granted
-        )
-
-        Flags.enable()
-
-        self.ddClient = FlagsClient.create()
-        self.ddClient.setEvaluationContext(
-            FlagsEvaluationContext(
-                targetingKey: userId,
-                attributes: evaluationContext
-            )
-        )
-    }
-
-    func getBooleanFlag(flagKey: String, defaultValue: Bool) -> Bool {
-        do {
-            return self.ddClient.resolveBooleanValue(
-                flagKey: flagKey,
-                defaultValue: defaultValue
-            )
-        } catch {
-            print("Falling back to LaunchDarkly for flag: \(flagKey)")
-            return self.ldClient.boolVariation(forKey: flagKey, defaultValue: defaultValue)
-        }
-    }
-}
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Android" %}}
+{{% collapse-content title="Android" level="h4" expanded=false id="fallback-android" %}}
 {{< code-block lang="kotlin" filename="FallbackWrapper.kt" >}}
 import com.launchdarkly.sdk.LDContext
 import com.launchdarkly.sdk.android.LDClient
@@ -723,6 +443,302 @@ class FallbackWrapper(
     }
 }
 {{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="iOS" level="h4" expanded=false id="fallback-ios" %}}
+{{< code-block lang="swift" filename="FallbackWrapper.swift" >}}
+import Foundation
+import LaunchDarkly
+import DatadogFlags
+import DatadogCore
+
+class FallbackWrapper {
+    private let ldClient: LDClient
+    private let ddClient: FlagsClient
+
+    init(userId: String, evaluationContext: [String: AnyValue] = [:]) {
+        let ldConfig = LDConfig(mobileKey: 'YOUR_LD_MOBILE_KEY', autoEnvAttributes: .enabled)
+        var ldContext = LDContextBuilder(key: userId)
+        for (key, value) in evaluationContext {
+            ldContext.trySetValue(key, value)
+        }
+        LDClient.start(config: ldConfig, context: ldContext)
+
+        self.ldClient = LDClient.get()!
+
+        Datadog.initialize(
+            with: Datadog.Configuration(
+                clientToken: "<client token>",
+                env: "<environment>",
+                service: "<service name>"
+            ),
+            trackingConsent: .granted
+        )
+
+        Flags.enable()
+
+        self.ddClient = FlagsClient.create()
+        self.ddClient.setEvaluationContext(
+            FlagsEvaluationContext(
+                targetingKey: userId,
+                attributes: evaluationContext
+            )
+        )
+    }
+
+    func getBooleanFlag(flagKey: String, defaultValue: Bool) -> Bool {
+        do {
+            return self.ddClient.resolveBooleanValue(
+                flagKey: flagKey,
+                defaultValue: defaultValue
+            )
+        } catch {
+            print("Falling back to LaunchDarkly for flag: \(flagKey)")
+            return self.ldClient.boolVariation(forKey: flagKey, defaultValue: defaultValue)
+        }
+    }
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% /tab %}}
+
+{{% tab "Server-side SDKs" %}}
+
+{{% collapse-content title=".NET" level="h4" expanded=false id="fallback-dotnet" %}}
+{{< code-block lang="csharp" filename="FallbackWrapper.cs" >}}
+using OpenFeature;
+using OpenFeature.Model;
+using LaunchDarkly.Sdk;
+using LaunchDarkly.Sdk.Server;
+
+public class FallbackWrapper
+{
+    private readonly LdClient ldClient;
+    private readonly IFeatureClient ddClient;
+
+    public FallbackWrapper()
+    {
+        var config = Configuration.Builder("YOUR_LD_KEY").Build();
+        ldClient = new LdClient(config);
+        ddClient = Api.Instance.GetClient("my-service");
+    }
+
+    public async Task<bool> GetBooleanFlagAsync(
+        string flagKey,
+        string userId,
+        Dictionary<string, string> evaluationContext,
+        bool defaultValue)
+    {
+        try
+        {
+            var evalCtx = EvaluationContext.Builder()
+                .SetTargetingKey(userId);
+
+            foreach (var attr in evaluationContext)
+            {
+                evalCtx.Set(attr.Key, attr.Value);
+            }
+
+            return await ddClient.GetBooleanValueAsync(
+                flagKey, defaultValue, evalCtx.Build());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Falling back to LaunchDarkly for flag: {flagKey}");
+
+            var cb = Context.Builder(userId);
+
+            foreach (var attr in evaluationContext)
+            {
+                cb.Set(attr.Key, attr.Value);
+            }
+
+            return ldClient.BoolVariation(flagKey, cb.Build(), defaultValue);
+        }
+    }
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Go" level="h4" expanded=false id="fallback-go" %}}
+{{< code-block lang="go" filename="fallback_wrapper.go" >}}
+package main
+
+import (
+    "context"
+    "log"
+
+    ld "github.com/launchdarkly/go-server-sdk/v6"
+    "github.com/launchdarkly/go-sdk-common/v3/ldcontext"
+    "github.com/open-feature/go-sdk/openfeature"
+)
+
+type FallbackWrapper struct {
+    ldClient *ld.LDClient
+    ddClient *openfeature.Client
+}
+
+func (fw *FallbackWrapper) GetBooleanFlag(
+    ctx context.Context,
+    flagKey string,
+    userId string,
+    evaluationContext map[string]string,
+    defaultValue bool,
+) bool {
+    ofContext := openfeature.NewEvaluationContext(
+        userId,
+        evaluationContext,
+    )
+
+    ddValue, err := fw.ddClient.BooleanValue(ctx, flagKey, defaultValue, ofContext)
+    if err != nil {
+        log.Printf("Falling back to LaunchDarkly for flag: %s", flagKey)
+        cb := ldcontext.NewBuilder(userId)
+
+        for k, v := range evaluationContext {
+            cb.SetString(k, v)
+        }
+
+        ldValue, _ := fw.ldClient.BoolVariation(flagKey, cb.Build(), defaultValue)
+        return ldValue
+    }
+
+    return ddValue
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Java" level="h4" expanded=false id="fallback-java" %}}
+{{< code-block lang="java" filename="FallbackWrapper.java" >}}
+import java.util.Map;
+import com.launchdarkly.sdk.ContextBuilder;
+import com.launchdarkly.sdk.LDContext;
+import com.launchdarkly.sdk.server.LDClient;
+import dev.openfeature.sdk.Client;
+import dev.openfeature.sdk.EvaluationContext;
+import dev.openfeature.sdk.MutableContext;
+import dev.openfeature.sdk.OpenFeatureAPI;
+
+public class FallbackWrapper {
+    private final LDClient ldClient;
+    private final Client ddClient;
+
+    public FallbackWrapper(String ldKey) {
+        this.ldClient = new LDClient(ldKey);
+        this.ddClient = OpenFeatureAPI.getInstance().getClient();
+    }
+
+    public boolean getBooleanFlag(String flagKey, String userId, Map<String, String> evaluationContext, boolean defaultValue) {
+        try {
+            EvaluationContext context = new MutableContext(userId);
+            for (Map.Entry<String, String> entry : evaluationContext.entrySet()) {
+                context.add(entry.getKey(), entry.getValue());
+            }
+
+            return ddClient.getBooleanValue(flagKey, defaultValue, context);
+        } catch (Exception e) {
+            System.out.println("Falling back to LaunchDarkly for flag: " + flagKey);
+            ContextBuilder cb = LDContext.builder(userId);
+
+            for (Map.Entry<String, String> entry : evaluationContext.entrySet()) {
+                cb.set(entry.getKey(), entry.getValue());
+            }
+
+            return ldClient.boolVariation(flagKey, cb.build(), defaultValue);
+        }
+    }
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Node.js" level="h4" expanded=false id="fallback-nodejs" %}}
+{{< code-block lang="javascript" filename="fallback-wrapper.js" >}}
+import * as LaunchDarkly from '@launchdarkly/node-server-sdk';
+import { OpenFeature } from '@openfeature/server-sdk';
+
+const ldClient = LaunchDarkly.initialize('YOUR_LD_SDK_KEY');
+
+export async function getBooleanFeatureFlag(flagKey, userId, attributes, defaultValue) {
+    const ddClient = OpenFeature.getClient();
+    try {
+        const ddContext = {
+            targetingKey: userId,
+            ...attributes
+        };
+        return ddClient.getBooleanValue(flagKey, defaultValue, ddContext);
+    } catch (e) {
+        console.warn(`Falling back to LaunchDarkly for flag: ${flagKey}`);
+        const ldContext = { key: userId, ...attributes };
+        return ldClient.variation(flagKey, ldContext, defaultValue);
+    }
+}
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Python" level="h4" expanded=false id="fallback-python" %}}
+{{< code-block lang="python" filename="fallback_wrapper.py" >}}
+import ldclient
+from ldclient import Context
+from openfeature import api
+from openfeature.evaluation_context import EvaluationContext
+
+def get_boolean_feature_flag(flag_key, user_id, evaluation_context, default_value):
+    ld_client = ldclient.get()
+    dd_client = api.get_client()
+
+    try:
+        dd_context = EvaluationContext(
+            targeting_key=user_id,
+            attributes=evaluation_context
+        )
+
+        return dd_client.get_boolean_value(flag_key, default_value, dd_context)
+    except Exception as e:
+        print(f"Falling back to LaunchDarkly for flag: {flag_key}")
+        cb = Context.builder(user_id)
+
+        for key, value in evaluation_context.items():
+            cb.set(key, value)
+
+        return ld_client.variation(flag_key, cb.build(), default_value)
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="Ruby" level="h4" expanded=false id="fallback-ruby" %}}
+{{< code-block lang="ruby" filename="fallback_wrapper.rb" >}}
+require 'ldclient-rb'
+require 'openfeature/sdk'
+
+class FallbackWrapper
+    def initialize(ld_key)
+        @ld_client = LaunchDarkly::LDClient.new(ld_key)
+        @dd_client = OpenFeature::SDK.build_client
+    end
+
+    def get_boolean_flag(flag_key, user_id, evaluation_context, default_value)
+        begin
+            context_attrs = { targeting_key: user_id }
+            context_attrs.merge!(evaluation_context)
+            context = OpenFeature::SDK::EvaluationContext.new(context_attrs)
+
+            @dd_client.fetch_boolean_value(
+                flag_key: flag_key,
+                default_value: default_value,
+                evaluation_context: context
+            )
+        rescue => e
+            puts "Falling back to LaunchDarkly for flag: #{flag_key}"
+            ld_context_attrs = { key: user_id }
+            ld_context_attrs.merge!(evaluation_context)
+            ld_context = LaunchDarkly::LDContext.create(ld_context_attrs)
+            @ld_client.variation(flag_key, ld_context, default_value)
+        end
+    end
+end
+{{< /code-block >}}
+{{% /collapse-content %}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
