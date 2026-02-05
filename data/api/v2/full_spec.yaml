@@ -6752,6 +6752,8 @@ components:
           description: Optional prefix for blobs written to the container.
           example: logs/
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         container_name:
           description: The name of the Azure Blob Storage container to store logs
             in.
@@ -36625,6 +36627,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         client_id:
           description: Azure AD client ID used for authentication.
           example: a1b2c3d4-5678-90ab-cdef-1234567890ab
@@ -38571,6 +38575,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineAmazonOpenSearchDestinationAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to.
           example: logs-index
@@ -38652,6 +38658,8 @@ components:
           description: S3 bucket name.
           example: error-logs
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: Unique identifier for the destination component.
           example: amazon-s3-destination
@@ -38773,6 +38781,8 @@ components:
           description: Name of the Amazon S3 bucket in Security Lake (3-63 characters).
           example: security-lake-bucket
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         custom_source_name:
           description: Custom source name for the logs in Security Lake.
           example: my-custom-source
@@ -38832,6 +38842,39 @@ components:
             role session.
           type: string
       type: object
+    ObservabilityPipelineBufferOptions:
+      description: Configuration for buffer settings on destination components.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineDiskBufferOptions'
+      - $ref: '#/components/schemas/ObservabilityPipelineMemoryBufferOptions'
+      - $ref: '#/components/schemas/ObservabilityPipelineMemoryBufferSizeOptions'
+    ObservabilityPipelineBufferOptionsDiskType:
+      default: disk
+      description: The type of the buffer that will be configured, a disk buffer.
+      enum:
+      - disk
+      type: string
+      x-enum-varnames:
+      - DISK
+    ObservabilityPipelineBufferOptionsMemoryType:
+      default: memory
+      description: The type of the buffer that will be configured, a memory buffer.
+      enum:
+      - memory
+      type: string
+      x-enum-varnames:
+      - MEMORY
+    ObservabilityPipelineBufferOptionsWhenFull:
+      default: block
+      description: Behavior when the buffer is full (block and stop accepting new
+        events, or drop new events)
+      enum:
+      - block
+      - drop_newest
+      type: string
+      x-enum-varnames:
+      - BLOCK
+      - DROP_NEWEST
     ObservabilityPipelineCloudPremDestination:
       description: 'The `cloud_prem` destination sends logs to Datadog CloudPrem.
 
@@ -39102,6 +39145,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         compression:
           $ref: '#/components/schemas/ObservabilityPipelineCrowdStrikeNextGenSiemDestinationCompression'
         encoding:
@@ -39327,6 +39372,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: datadog-logs-destination
@@ -39581,6 +39628,19 @@ components:
       type: string
       x-enum-varnames:
       - DEDUPE
+    ObservabilityPipelineDiskBufferOptions:
+      description: Options for configuring a disk buffer.
+      properties:
+        max_size:
+          description: Maximum size of the disk buffer.
+          example: 4096
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsDiskType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
+      type: object
     ObservabilityPipelineElasticsearchDestination:
       description: 'The `elasticsearch` destination writes logs to an Elasticsearch
         cluster.
@@ -39590,6 +39650,8 @@ components:
       properties:
         api_version:
           $ref: '#/components/schemas/ObservabilityPipelineElasticsearchDestinationApiVersion'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to in Elasticsearch.
           example: logs-index
@@ -40135,6 +40197,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         customer_id:
           description: The Google Chronicle customer ID.
           example: abcdefg123456789
@@ -40203,6 +40267,8 @@ components:
           description: Name of the GCS bucket.
           example: error-logs
           type: string
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: Unique identifier for the destination component.
           example: gcs-destination
@@ -40287,6 +40353,8 @@ components:
       properties:
         auth:
           $ref: '#/components/schemas/ObservabilityPipelineGcpAuth'
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineGooglePubSubDestinationEncoding'
         id:
@@ -40813,6 +40881,28 @@ components:
       type: string
       x-enum-varnames:
       - LOGSTASH
+    ObservabilityPipelineMemoryBufferOptions:
+      description: Options for configuring a memory buffer by byte size.
+      properties:
+        max_size:
+          description: Maximum size of the memory buffer.
+          example: 4096
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+      type: object
+    ObservabilityPipelineMemoryBufferSizeOptions:
+      description: Options for configuring a memory buffer by queue length.
+      properties:
+        max_events:
+          description: Maximum events for the memory buffer.
+          example: 500
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+      type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
       properties:
@@ -40935,6 +41025,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: new-relic-destination
@@ -41081,6 +41173,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         bulk_index:
           description: The index to write logs to.
           example: logs-index
@@ -41794,6 +41888,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: rsyslog-destination
@@ -42299,6 +42395,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: sentinelone-destination
@@ -42353,6 +42451,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSocketDestinationEncoding'
         framing:
@@ -42729,6 +42829,8 @@ components:
             If `false`, Splunk assigns the time the event was received.'
           example: true
           type: boolean
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSplunkHecDestinationEncoding'
         id:
@@ -42853,6 +42955,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         encoding:
           $ref: '#/components/schemas/ObservabilityPipelineSumoLogicDestinationEncoding'
         header_custom_fields:
@@ -42966,6 +43070,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        buffer:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptions'
         id:
           description: The unique identifier for this component.
           example: syslog-ng-destination
@@ -45375,6 +45481,92 @@ components:
       type: string
       x-enum-varnames:
       - MARKDOWN
+    PostmortemTemplateAttributesRequest:
+      properties:
+        name:
+          description: The name of the template
+          example: Standard Postmortem Template
+          type: string
+      required:
+      - name
+      type: object
+    PostmortemTemplateAttributesResponse:
+      properties:
+        createdAt:
+          description: When the template was created
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        modifiedAt:
+          description: When the template was last modified
+          example: '2026-01-13T17:15:53.208340Z'
+          format: date-time
+          type: string
+        name:
+          description: The name of the template
+          example: Standard Postmortem Template
+          type: string
+      required:
+      - name
+      - createdAt
+      - modifiedAt
+      type: object
+    PostmortemTemplateDataRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemTemplateAttributesRequest'
+        type:
+          $ref: '#/components/schemas/PostmortemTemplateType'
+      required:
+      - type
+      - attributes
+      type: object
+    PostmortemTemplateDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PostmortemTemplateAttributesResponse'
+        id:
+          description: The ID of the template
+          example: template-456
+          type: string
+        type:
+          $ref: '#/components/schemas/PostmortemTemplateType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    PostmortemTemplateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/PostmortemTemplateDataRequest'
+      required:
+      - data
+      type: object
+    PostmortemTemplateResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/PostmortemTemplateDataResponse'
+      required:
+      - data
+      type: object
+    PostmortemTemplateType:
+      description: Postmortem template resource type
+      enum:
+      - postmortem_template
+      example: postmortem_template
+      type: string
+      x-enum-varnames:
+      - POSTMORTEM_TEMPLATE
+    PostmortemTemplatesResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PostmortemTemplateDataResponse'
+          type: array
+      required:
+      - data
+      type: object
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -78449,6 +78641,189 @@ paths:
       x-unstable: '**Note**: This endpoint is in Preview.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/postmortem-templates:
+    get:
+      description: Retrieve a list of all postmortem templates for incidents.
+      operationId: ListIncidentPostmortemTemplates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostmortemTemplatesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List postmortem templates
+      tags:
+      - Incidents
+      x-menu-order: 44
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new postmortem template for incidents.
+      operationId: CreateIncidentPostmortemTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostmortemTemplateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostmortemTemplateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create postmortem template
+      tags:
+      - Incidents
+      x-menu-order: 45
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/config/postmortem-templates/{template_id}:
+    delete:
+      description: Delete a postmortem template.
+      operationId: DeleteIncidentPostmortemTemplate
+      parameters:
+      - description: The ID of the postmortem template
+        in: path
+        name: template_id
+        required: true
+        schema:
+          example: template-456
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete postmortem template
+      tags:
+      - Incidents
+      x-menu-order: 48
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Retrieve details of a specific postmortem template.
+      operationId: GetIncidentPostmortemTemplate
+      parameters:
+      - description: The ID of the postmortem template
+        in: path
+        name: template_id
+        required: true
+        schema:
+          example: template-456
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostmortemTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get postmortem template
+      tags:
+      - Incidents
+      x-menu-order: 46
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing postmortem template.
+      operationId: UpdateIncidentPostmortemTemplate
+      parameters:
+      - description: The ID of the postmortem template
+        in: path
+        name: template_id
+        required: true
+        schema:
+          example: template-456
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostmortemTemplateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostmortemTemplateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update postmortem template
+      tags:
+      - Incidents
+      x-menu-order: 47
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents/config/types:
     get:
       description: Get all incident types.
@@ -96498,7 +96873,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerGroupCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
@@ -96643,7 +97018,7 @@ paths:
               $ref: '#/components/schemas/SensitiveDataScannerRuleCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:
