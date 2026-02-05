@@ -1,6 +1,6 @@
 ---
-title: Service Override Removal
-description: Learn how to remove integration service overrides from Datadog.
+title: Integration Override Removal
+description: Learn how to remove integration overrides from Datadog.
 disable_toc: false
 site_support_id: service_override_removal
 further_reading:
@@ -14,14 +14,14 @@ further_reading:
 
 {{< callout url="https://www.datadoghq.com/product-preview/service-overrides-removal-from-the-ui/"
  btn_hidden="false" header="Join the Preview!">}}
-Service override removal is in Preview. To sign up, click <b>Request Access</b> and complete the form.
+Integration override removal is in Preview. To sign up, click <b>Request Access</b> and complete the form.
 {{< /callout >}}
 
-This page explains how to remove integration service overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Service Overrides][10] and [Inferred Services][8].
+This page explains how to remove integration overrides, which use integration-specific service names to represent calls to other services. For conceptual background, see [Base Service, Integration Overrides, and Service Overrides][10] and [Inferred Services][8].
 
 ## Prerequisites
 
-Before you remove integration service overrides:
+Before you remove integration overrides:
 
 1. You must have the `apm_service_renaming_write` permission.
 1. Your Datadog SDK version must support override removal. See [SDK version requirements](#sdk-version-requirements).
@@ -38,13 +38,13 @@ Before you remove integration service overrides:
 | Python     | [1.19.0][6]               |
 | Ruby       | [1.15.0][7]               |
 
-## Remove service overrides
+## Remove integration overrides
 
-To remove service overrides in Datadog:
+To remove integration overrides in Datadog:
 
 1. Navigate to **Software Catalog** > **Manage** > [**Manage Remapping Rules**][12], and click **Manage Overrides**. 
 
-   {{< img src="tracing/guide/service_overrides/SO_removal_page.png" alt="Service Overrides page showing migration progress and removal options" style="width:100%;" >}}
+   {{< img src="tracing/guide/service_overrides/SO_removal_page.png" alt="Integration Overrides page showing migration progress and removal options" style="width:100%;" >}}
 
 1. For each override you plan to remove, review the related monitors and dashboards.
 
@@ -53,32 +53,33 @@ To remove service overrides in Datadog:
    {{< img src="tracing/guide/service_overrides/SO_removal_page_sidepanel.png" alt="Service override side panel showing affected monitors and dashboards" style="width:100%;" >}}
 
 1. Remove overrides individually or in bulk:
-   - **Select specific overrides to remove**: Choose individual integration service overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides. This action is reversible.
-   - **Remove all overrides**: Select **Remove All Overrides** to permanently remove all integration service overrides and prevent future ones from appearing as APM usage increases. Custom service overrides are not affected.
+   - **Select specific overrides to remove**: Choose individual integration overrides to remove. A **Migration Progress** bar shows your progress as you remove overrides.
+   - **Remove all overrides**: Select **Finish Migration** to remove all integration overrides and prevent future ones from appearing as APM usage increases. Custom service overrides are not affected.
+  
+   Removing overrides is reversible.
 
-     <div class="alert alert-danger">Removing all integration service overrides is permanent and cannot be undone.</div>
 
 ## Examples: Service naming after removal
 
-Removing service overrides changes how client spans are tagged and how downstream dependencies are identified. After overrides are removed, client spans use the calling service's name (`service:<DD_SERVICE>`) instead of the integration-specific name. The called dependency is identified using [`peer.*` attributes][11] (for example, database or queue).
+Removing integration overrides changes how client spans are tagged and how downstream dependencies are identified. After overrides are removed, client spans use the calling service's name (`service:<DD_SERVICE>`) instead of the integration-specific name. The called dependency is identified using [`peer.*` attributes][11] (for example, database or queue).
 
 **gRPC example:**
 
 | Scenario                  | Service name                                              | Additional `peer.*` attributes |
 |---------------------------|-----------------------------------------------------------|--------------------------------|
-| With service overrides    | `service:my-service-grpc-client` or `service:grpc-client` | None                           |
-| Without service overrides | `service:myservice`                                       | `@peer.service:otherservice`   |
+| With integration overrides  | `service:my-service-grpc-client` or `service:grpc-client` | None                           |
+| Without integration overrides | `service:myservice`                                       | `@peer.service:otherservice`   |
 
 **MySQL example:**
 
 | Scenario | Service name | Additional `peer.*` attributes |
 |----------|--------------|--------------------------------|
-| With service overrides | `service:my-service-mysql` or `service:mysql` | None |
-| Without service overrides | `service:myservice` | `@peer.db.name:user-db`, `@peer.db.system:mysql` |
+| With integration overrides | `service:my-service-mysql` or `service:mysql` | None |
+| Without integration overrides | `service:myservice` | `@peer.db.name:user-db`, `@peer.db.system:mysql` |
 
 ## Configuration-based removal
 
-You can also remove integration service overrides by setting an environment variable in your application configuration. This approach is useful if you cannot access the Datadog UI.
+You can also remove integration overrides by setting an environment variable in your application configuration. This approach is useful if you cannot access the Datadog UI.
 
 1. Confirm that your SDK meets the [minimum version requirements](#sdk-version-requirements).
 2. Set the following environment variable:
