@@ -102,7 +102,7 @@ Datadog correlates these sources to identify opportunities to improve performanc
 
 Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. The most critical insights for improving service reliability and performance appear first.
 
-## Using APM recommendations
+## Using APM Recommendations
 
 To review recommendations that need your attention:
 
