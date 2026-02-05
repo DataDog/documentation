@@ -51,6 +51,7 @@ The Data Observability crawler requires additional permissions to monitor Glue I
         "glue:GetJobRun",
         "glue:GetJobRuns",
         "glue:GetJob",
+        "glue:GetJobs",
         "glue:GetTable",
         "glue:GetTables",
         "glue:ListJobs",
