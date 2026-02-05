@@ -5,8 +5,6 @@ algolia:
   tags:
     - apm recommendations
     - apm recommendation
-    - rum recommendation
-    - rum recommendations
     - application performance monitoring
     - performance recommendations
     - reliability recommendations
@@ -80,7 +78,7 @@ multifiltersearch:
 
 ---
 
-APM Recommendations help you improve your applications' performance and reliability by providing optimization opportunities based on the telemetry collected on your applications. These recommendations are designed to:
+APM Recommendations help you improve your applications' performance and reliability by surfacing optimization opportunities from your collected telemetry. These recommendations are designed to:
 
 - Identify and resolve performance bottlenecks
 - Improve service reliability and uptime
@@ -90,7 +88,7 @@ APM Recommendations help you improve your applications' performance and reliabil
 
 ## Prerequisites
 
-Certain recommendations rely on specific Datadog products. Use the **Recommendation Prerequisite** dropdown to filter for the recommendations you can expect to see based on your specific setup.
+Certain recommendations rely on specific Datadog products. Use the **Recommendation Prerequisite** dropdown to filter recommendations by the Datadog products in your setup.
 
 ## How it works
 
@@ -100,9 +98,9 @@ APM Recommendations are based on data collected from different parts of your sta
 - Database telemetry from Database Monitoring (DBM)
 - Sessions and user journeys from Real User Monitoring (RUM)
 
-By looking at these sources together, Datadog finds ways to help you improve performance, reliability, and user experience.
+Datadog correlates these sources to identify opportunities to improve performance, reliability, and user experience.
 
-Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. This helps ensure that the most critical insights for improving service reliability and performance appear first.
+Datadog ranks recommendations by computing a priority score that weighs the potential impact of an issue against telemetry signals, such as relative request volume and performance trends. The most critical insights for improving service reliability and performance appear first.
 
 ## Using APM recommendations
 
@@ -121,11 +119,7 @@ After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdow
 
 {{< multifilter-search >}}
 
-### Missing Index recommendations: APM vs. DBM
-
-If you use both APM and Database Monitoring (DBM), you may see fewer Missing Index recommendations on the APM Recommendations page than on the [DBM Recommendations page][2]. This is expected behavior.
-
-DBM detects Missing Index recommendations at the database level based on query analysis. APM Recommendations only surface Missing Index recommendations when Datadog can associate the affected queries with an instrumented application service. As a result, Missing Index recommendations that cannot be linked to a specific service are shown only in DBM.
+**Note**: If you use both APM and Database Monitoring (DBM), you may see fewer Missing Index recommendations here than on the [DBM Recommendations page][2]. APM Recommendations only surface Missing Index issues that Datadog can associate with an instrumented application service. Missing Index recommendations that cannot be linked to a specific service appear only in DBM.
 
 ## Further reading
 
