@@ -59,7 +59,7 @@ CPU usage
 
 Memory usage
 : **Metrics**: `pipelines.resident_memory_used_bytes`
-: **Description:** The amount of RSS memory used by the worker process in bytes.
+: **Description:** The amount of RSS memory used by the Worker process in bytes.
 
 ## Component metrics
 
