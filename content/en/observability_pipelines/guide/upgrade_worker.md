@@ -44,8 +44,8 @@ Worker version 2.13.0 gives you access to the following:
 
 #### New features
 
-- [Custom processor][24] for metrics: Use VRL to transform metric events.
-- [Secrets Managment][31]: Observability Pipelines can retrieve secrets using Datadog Secrets Management.
+- [Custom Processor][24] for metrics: Use VRL to transform metric events.
+- [Secrets Management][31]: Observability Pipelines can retrieve secrets using Datadog Secrets Management.
 - [Live capture][25] is available for metrics pipelines.
 - The [Enrichment Tables][28] processor can use datasets in Reference Tables.
 
@@ -53,14 +53,13 @@ Worker version 2.13.0 gives you access to the following:
 
 - [Disk buffers][26] have been updated to drop logs when the buffer is full.
 - The Dedupe processor has been updated with a configurable cache size.
-- New "Custom Authorization" HTTP auth strategy that allows users to configure a custom HTTP Authorization Header.
 - The Datadog Agent source has been updated with configurable request timeouts.
-- Buffers for sources have metrics that record the utilization level of the buffer:
+- Source buffers have been updated to record the utilization level of the buffer with these metrics:
     - `source_buffer_max_byte_size`
     - `source_buffer_max_event_size`
     - `source_buffer_utilization`
     - `source_buffer_utilization_level`
-- Buffers for processors have metrics to record the utilization level of the buffers:
+- Processor buffers have been updated to record the utilization level of the buffers with these metrics:
     - `transform_buffer_max_byte_size`
     - `transform_buffer_max_event_size`
     - `transform_buffer_utilization`
@@ -70,8 +69,8 @@ Worker version 2.13.0 gives you access to the following:
 #### Fixes
 
 - Live Capture has been updated and bugs have been fixed.
-- Search Syntax bug with handling hyphenated segments has been fixed.
-- The syslog source in UDP mode emits the standard `component_received` metrics, aligning behavior with TCP and the component specification:
+- The Search Syntax bug with handling hyphenated segments has been fixed.
+- The syslog source in UDP mode emits the standard `component_received` metrics, like it does with TCP mode:
     - `component_received_events_total`
     - `component_received_event_bytes_total`
     - `component_received_bytes_total`
@@ -107,7 +106,7 @@ Worker version 2.12.0 gives you access to the following:
 - The default log level reports all `info` level and above.
 - The hostname is renamed to host when shipping logs to Datadog archives.
 - The Datadog Agent metrics source does not store the API key presented by the Agent to match the behavior of the corresponding logs source.
-- For events publishing in Live Capture, Proxy settings configured with OPW environment variables / bootstrap file (for example, the `DD_PROXY_HTTPS` env var) are used when publishing events in Live Capture.
+- The Worker uses proxy settings configured with environment variables (for example, the `DD_PROXY_HTTPS` environment variable) or in the bootstrap file when it publishes events to Live Capture.
 
 ---
 
