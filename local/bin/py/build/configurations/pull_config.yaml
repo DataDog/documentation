@@ -520,8 +520,8 @@
             globs:
               - 'charts/datadog/docs/Migration_Helm_to_Operator.md'
             options:
-              dest_path: '/containers/datadog_operator/migration'
-              file_name: 'Migration_Helm_to_Operator.md'
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'migration.md'
               front_matters:
                 title: Migrate to the Datadog Operator from the Datadog Helm Chart
                 description: "Migrate the Datadog Helm installation to the Datadog Operator for managing Datadog Agent deployments"
