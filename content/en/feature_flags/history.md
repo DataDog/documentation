@@ -1,5 +1,5 @@
 ---
-title: Flag History
+title: Feature Flag History
 description: "Track and manage the history of your feature flags"
 further_reading:
 - link: "/getting_started/feature_flags/"
@@ -10,13 +10,9 @@ further_reading:
   text: "Learn about Feature Flags"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
-Flag History allows you to track changes and maintain an audit trail of your feature flags over time. Knowing who changed what can be useful for governance and troubleshooting unexpected behavior in your application. You can view the history of individual flags or access a global view of all flag changes across your organization.
+Flag History allows you to track changes and maintain an audit trail of your Datadog feature flags over time. Knowing who changed what can be useful for governance and troubleshooting unexpected behavior in your application. You can view the history of individual flags or access a global view of all flag changes across your organization.
 
 ## Individual flag history
 
@@ -29,7 +25,7 @@ When you view an individual feature flag, the **History** panel displays all cha
 
 ## Global flag history
 
-Navigate to **Feature Flags > Global Flag History** to show all flag changes across your organization in a single view.
+Navigate to **Feature Flags > [Global Flag History][1]** to show all flag changes across your organization in a single view.
 
 - Use the **Environment** filter to view changes in a particular environment or all environments.
 - Use the **Feature Flag** filter to view changes for a specific flag.
@@ -41,3 +37,5 @@ Navigate to **Feature Flags > Global Flag History** to show all flag changes acr
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/feature-flags/global-history
