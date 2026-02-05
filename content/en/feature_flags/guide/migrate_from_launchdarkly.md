@@ -13,10 +13,6 @@ further_reading:
   text: "Server-Side Feature Flags"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This guide walks you through the process of migrating feature flags from LaunchDarkly to [Datadog Feature Flags][1]. Follow these general steps:
