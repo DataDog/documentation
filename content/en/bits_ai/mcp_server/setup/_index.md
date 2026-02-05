@@ -446,6 +446,16 @@ Aggregates Datadog Test Optimization events to quantify reliability and performa
 - Show me the 95th-percentile duration for each test suite to identify the slowest ones.
 - Count all passing and failing tests, grouped by code owners.
 
+### `search_datadog_test_events`
+*Toolset: **software-delivery***\
+Searches [Test Optimization][24] test events with filters and returns details on them.
+
+- Show me failed tests on branch `main` from the last 24 hours.
+- Find tests matching name pattern `*login*` and show their results.
+- Get test executions for commit `abc123` to see what passed and failed.
+- Show me all flaky test runs for the checkout service.
+- Find tests owned by `@team-name` that are failing.
+
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\
 Searches Error Tracking Issues across data sources (RUM, Logs, Traces).
