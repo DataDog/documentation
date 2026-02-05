@@ -195,7 +195,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Variables is Test execution"
-    data-if="10136"
+    data-if="21816"
   >
     <h3 id="test-execution-variables">Test execution variables</h3>
     <p>Path: <code>synthetics</code> (various shortcuts)</p>
@@ -236,7 +236,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Result"
-    data-if="10154"
+    data-if="21834"
   >
     <h3 id="result-attributes">Result attributes</h3>
     <p>Path: <code>synthetics.attributes</code></p>
@@ -308,7 +308,7 @@ further_reading:
           <div
             class="cdoc__toggleable cdoc__hidden"
             data-description="not (platform is browser) or (platform is mobile)"
-            data-if="10140"
+            data-if="21820"
           >
             <div class="alert alert-info">
               <p>
@@ -321,7 +321,7 @@ further_reading:
           <div
             class="cdoc__toggleable"
             data-description="(platform is browser) or (platform is mobile)"
-            data-if="10145"
+            data-if="21825"
           >
             <dl>
               <dt><code>{{synthetics.attributes.device}}</code></dt>
@@ -344,7 +344,7 @@ further_reading:
             <div
               class="cdoc__toggleable"
               data-description="platform is browser"
-              data-if="10141"
+              data-if="21821"
             >
               <dl>
                 <dt>
@@ -356,7 +356,7 @@ further_reading:
             <div
               class="cdoc__toggleable cdoc__hidden"
               data-description="platform is mobile"
-              data-if="10142"
+              data-if="21822"
             >
               <dl>
                 <dt>
@@ -426,7 +426,7 @@ further_reading:
         <div
           class="cdoc__toggleable"
           data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="10149"
+          data-if="21829"
         >
           <div
             data-lang="count"
@@ -460,7 +460,7 @@ further_reading:
         <div
           class="cdoc__toggleable"
           data-description="(platform is browser) or (platform is mobile) or (platform is multistep)"
-          data-if="10153"
+          data-if="21833"
         >
           <div
             data-lang="failed-step"
@@ -533,7 +533,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Local"
-    data-if="10155"
+    data-if="21835"
   >
     <h3 id="local-variables">Local variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.config</code></p>
@@ -564,7 +564,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Global"
-    data-if="10156"
+    data-if="21836"
   >
     <h3 id="global-variables">Global variables</h3>
     <p>Path: <code>synthetics.attributes.result.variables.extracted</code></p>
@@ -599,7 +599,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Extracted"
-    data-if="10164"
+    data-if="21844"
   >
     <h3 id="extracted-variable-values">Extracted variable values</h3>
     <p>
@@ -611,7 +611,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="not (Test Type is Browser) or (Test Type is Mobile)"
-      data-if="10160"
+      data-if="21840"
     >
       <div class="alert alert-info">
         <p>
@@ -625,7 +625,7 @@ further_reading:
     <div
       class="cdoc__toggleable"
       data-description="(Test Type is Browser) or (Test Type is Mobile)"
-      data-if="10163"
+      data-if="21843"
     >
       <p>
         These are the actual variable values that a step captured during test
@@ -662,7 +662,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Variables is Step"
-    data-if="10173"
+    data-if="21853"
   >
     <h3 id="step-execution-details">Step execution details</h3>
     <p>Path: <code>synthetics.attributes.variables.extracted</code></p>
@@ -675,7 +675,7 @@ further_reading:
     <div
       class="cdoc__toggleable cdoc__hidden"
       data-description="not (Test Type is Browser) or (Test Type is Mobile) or (Test Type is Multistep API)"
-      data-if="10169"
+      data-if="21849"
     >
       <div class="alert alert-info">
         <p>
@@ -743,7 +743,7 @@ further_reading:
           <div
             class="cdoc__toggleable"
             data-description="platform is browser"
-            data-if="10170"
+            data-if="21850"
           >
             <p><strong>Browser-specific:</strong></p>
             <dl>
@@ -815,7 +815,7 @@ further_reading:
           <div
             class="cdoc__toggleable cdoc__hidden"
             data-description="platform is mobile"
-            data-if="10171"
+            data-if="21851"
           >
             <p><strong>Mobile-specific:</strong></p>
             <dl>
@@ -840,7 +840,7 @@ further_reading:
           <div
             class="cdoc__toggleable cdoc__hidden"
             data-description="platform is multistep"
-            data-if="10172"
+            data-if="21852"
           >
             <p><strong>Multistep-specific:</strong></p>
             <dl>
@@ -1002,4 +1002,4 @@ further_reading:
   </ul>
 <h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/monitors/manage/"><span class="w-100 d-flex justify-content-between "><span class="text">Learn how to manage monitors</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/monitors/templates/"><span class="w-100 d-flex justify-content-between "><span class="text">Learn more about monitor templates</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/synthetics/guide/how-synthetics-monitors-trigger-alerts/"><span class="w-100 d-flex justify-content-between "><span class="text">Understanding Synthetic Monitor Alerting</span><span class="badge badge-white pe-2 border-0">GUIDE</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"10136":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"10136"},"10140":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10137"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10138"}},"v":true,"r":"10139"}},"v":false,"r":"10140"},"10141":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10141"},"10142":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10142"},"10145":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10143"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10144"}},"v":true,"r":"10145"},"10149":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10146"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10147"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10148"}},"v":true,"r":"10149"},"10153":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10150"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10151"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10152"}},"v":true,"r":"10153"},"10154":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"10154"},"10155":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"10155"},"10156":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"10156"},"10160":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10157"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10158"}},"v":true,"r":"10159"}},"v":false,"r":"10160"},"10163":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10161"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10162"}},"v":true,"r":"10163"},"10164":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"10164"},"10169":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10165"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10166"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10167"}},"v":true,"r":"10168"}},"v":false,"r":"10169"},"10170":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"10170"},"10171":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"10171"},"10172":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"10172"},"10173":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"10173"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"21816":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"execution"},"v":true,"r":"21816"},"21820":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21817"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21818"}},"v":true,"r":"21819"}},"v":false,"r":"21820"},"21821":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21821"},"21822":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21822"},"21825":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21823"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21824"}},"v":true,"r":"21825"},"21829":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21826"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21827"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"21828"}},"v":true,"r":"21829"},"21833":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21830"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21831"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"21832"}},"v":true,"r":"21833"},"21834":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"result"},"v":false,"r":"21834"},"21835":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"local"},"v":false,"r":"21835"},"21836":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"global"},"v":false,"r":"21836"},"21840":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21837"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21838"}},"v":true,"r":"21839"}},"v":false,"r":"21840"},"21843":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21841"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21842"}},"v":true,"r":"21843"},"21844":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"extracted"},"v":false,"r":"21844"},"21849":{"m":"F","n":"n","p":{"0":{"m":"F","n":"o","p":{"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21845"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21846"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"21847"}},"v":true,"r":"21848"}},"v":false,"r":"21849"},"21850":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"browser"},"v":true,"r":"21850"},"21851":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"mobile"},"v":false,"r":"21851"},"21852":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"browser"},"1":"multistep"},"v":false,"r":"21852"},"21853":{"m":"F","n":"e","p":{"0":{"m":"V","p":["synthetics_variables"],"v":"execution"},"1":"step"},"v":false,"r":"21853"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"synthetics_test_type_options","label":"Test Type"},"defaultValsByOptionGroupId":{"synthetics_test_type_options":"browser"}},"synthetics_variables":{"config":{"trait_id":"synthetics_variables","option_group_id":"synthetics_variables_options","label":"Variables"},"defaultValsByOptionGroupId":{"synthetics_variables_options":"execution"}}},"defaultValsByTraitId":{"platform":"browser","synthetics_variables":"execution"},"optionGroupsById":{"synthetics_test_type_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"mobile","label":"Mobile"},{"id":"multistep","label":"Multistep API"}],"synthetics_variables_options":[{"default":true,"id":"execution","label":"Test execution"},{"id":"result","label":"Result"},{"id":"local","label":"Local"},{"id":"global","label":"Global"},{"id":"extracted","label":"Extracted"},{"id":"step","label":"Step"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
