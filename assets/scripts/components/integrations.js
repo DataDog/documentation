@@ -86,6 +86,41 @@ export function initializeIntegrations() {
         return domElements.get(id);
     }
 
+    // Helper function to highlight matching search terms in text
+    function highlightMatches(element, searchTerms) {
+        if (!element || !searchTerms || searchTerms.length === 0) return;
+
+        // Store original text if not already stored
+        if (!element.dataset.originalText) {
+            element.dataset.originalText = element.textContent;
+        }
+
+        let highlightedText = element.dataset.originalText;
+
+        // Escape special regex characters in search terms
+        const escapedTerms = searchTerms.map(term =>
+            term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        );
+
+        // Replace each term with highlighted version
+        escapedTerms.forEach(term => {
+            const regex = new RegExp(`(${term})`, 'gi');
+            highlightedText = highlightedText.replace(regex, '<mark>$1</mark>');
+        });
+
+        // Wrap in span to prevent flex container from splitting text nodes
+        element.innerHTML = `<span>${highlightedText}</span>`;
+    }
+
+    // Helper function to clear highlights
+    function clearHighlights(element) {
+        if (!element) return;
+
+        if (element.dataset.originalText) {
+            element.textContent = element.dataset.originalText;
+        }
+    }
+
     controls.addEventListener('click', function (e) {
         handleButtonClick(e.target, filters);
 
@@ -224,11 +259,14 @@ export function initializeIntegrations() {
             const item = window.integrations[i];
             const domitem = getDomElement(item.id);
             const int = domitem.querySelector('.integration');
+            const pictureTitle = domitem.querySelector('.picture-title');
 
             if (isAllFilter) {
                 if (!isSafari) {
                     int.classList.remove('dimmer');
                 }
+                // Clear highlights when showing all
+                clearHighlights(pictureTitle);
                 exactMatches.push(item);
                 continue;
             }
@@ -239,10 +277,18 @@ export function initializeIntegrations() {
                 if (!isSafari) {
                     int.classList.remove('dimmer');
                 }
+                // Highlight matches in search mode
+                if (isSearch) {
+                    highlightMatches(pictureTitle, filterWords);
+                }
                 exactMatches.push(item);
             } else if (hasPartialMatch) {
                 if (!isSafari) {
                     int.classList.remove('dimmer');
+                }
+                // Highlight matches in search mode
+                if (isSearch) {
+                    highlightMatches(pictureTitle, filterWords);
                 }
                 // Store match score with the item for sorting
                 partialMatches.push({ item, matchScore });
@@ -250,6 +296,8 @@ export function initializeIntegrations() {
                 if (!isSafari) {
                     int.classList.add('dimmer');
                 }
+                // Clear highlights for non-matching items
+                clearHighlights(pictureTitle);
                 hide.push(item);
             }
         }
@@ -268,16 +316,22 @@ export function initializeIntegrations() {
                     const item = window.integrations[i];
                     const domitem = getDomElement(item.id);
                     const int = domitem.querySelector('.integration');
-                    
+                    const pictureTitle = domitem.querySelector('.picture-title');
+
                     if (isAllFilter) {
                         int.classList.remove('dimmer');
+                        clearHighlights(pictureTitle);
                     } else {
                         const { hasExactMatch, hasPartialMatch, matchScore } = checkMatches(item, filter, filterWords, isSearch);
 
                         if (hasExactMatch || hasPartialMatch) {
                             int.classList.remove('dimmer');
+                            if (isSearch) {
+                                highlightMatches(pictureTitle, filterWords);
+                            }
                         } else {
                             int.classList.add('dimmer');
+                            clearHighlights(pictureTitle);
                         }
                     }
                 }
