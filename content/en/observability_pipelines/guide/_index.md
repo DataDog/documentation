@@ -7,7 +7,7 @@ disable_toc: false
     {{< nextlink href="observability_pipelines/guide/strategies_for_reducing_log_volume" >}}Strategies for reducing log volume{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/set_up_the_worker_in_ecs_fargate" >}}Set up the Worker in ECS Fargate{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/environment_variables" >}}Environment variables for sources, processors, and destinations{{< /nextlink >}}
-    {{< nextlink href="/cloudprem/guides/send_otel_logs_observability_pipelines" >}}Send OpenTelemetry logs with Observability Pipelines{{< /nextlink >}}
+    {{< nextlink href="/cloudprem/guides/send_otel_logs_observability_pipelines" >}}Send OpenTelemetry logs to CloudPrem with Observability Pipelines{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Worker Upgrade Guides" >}}
