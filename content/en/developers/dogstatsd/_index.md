@@ -223,7 +223,7 @@ To **disable** origin detection in a client, perform one of the following action
 #### In the Datadog Agent
 Origin detection is not enabled by default in the Datadog Agent. To **enable** origin detection in the Datadog Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
 
-<div class="alert alert-info">Origin detection is not supported for EKS Fargate.</div>
+<div class="alert alert-info">Set [`shareProcessNamespace:true` in the pod spec][12] to assist the Agent for origin detection on EKS Fargate.</div>
 
 #### How origins are detected
 
@@ -623,3 +623,4 @@ If you're interested in learning more about the datagram format used by DogStats
 [9]: /developers/dogstatsd/datagram_shell/
 [10]: /developers/community/libraries/
 [11]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
+[12]: https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/
