@@ -256,26 +256,22 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 }
 
-.copy-btn-icon__after {
+.copy-btn-icon {
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0;
 
     img {
         opacity: inherit;
     }
 }
 
-.copy-btn-icon__before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 1;
+.copy-btn-icon__after {
+    opacity: 0;
+}
 
-    img {
-        opacity: inherit;
-    }
+.copy-btn-icon__before {
+    opacity: 1;
 }
 
 .toc-container-mobile {
