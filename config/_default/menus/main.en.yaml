@@ -921,7 +921,7 @@ menu:
       weight: 1104
     - name: Client SDKs
       url: client_sdks/
-      pre: wrench
+      pre: building-block
       identifier: sdk
       parent: essentials_heading
       weight: 60000
