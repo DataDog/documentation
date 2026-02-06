@@ -96,7 +96,7 @@ Worker version 2.12.0 gives you access to the following:
 #### Enhancements
 
 - The HTTP Client source and destination have been updated so you can set a custom authorization strategy.
-- Filtering metrics on `kind` and `value` (name only) is supported.
+- The metrics filter processor was updated to filter metrics on `kind` and `value`.
 - Processor groups that route and process only targeted events have been updated to reduce processing overhead.
 - The Datadog Agent source has been updated to support timeouts, incrementing the `component_timed_out_events_total` and `component_timed_out_requests_total` metrics.
 
@@ -158,6 +158,11 @@ Worker version 2.10.0 gives you access to the following:
     - The `parse_aws_alb_log` function has been updated with an optional `strict_mode` parameter.
         - When `strict_mode` is set to `false`, the parser ignores any newly added or trailing fields in AWS ALB logs, instead of failing.
         - Defaults to `true` to preserve current behavior.
+    - [Metrics pipelines][32]:
+        - [Datadog Agent source][33]: Send metrics from the Datadog Agent to Observability Pipelines for processing.
+        - [Filter processor][35]: Filter the metrics you want to process.
+        - [Tag processor][36]: Include or exclude specific tags in your metrics.
+        - [Datadog Metrics destination][34]: Send your processed metrics Datadog.
 
 #### Enhancements
 
@@ -321,3 +326,8 @@ Worker version 2.7.0 gives you access to the following:
 [29]: /observability_pipelines/destinations/http_client/
 [30]: /observability_pipelines/sources/mysql/
 [31]: /observability_pipelines/configuration/secrets_management
+[32]: /observability_pipelines/configuration/set_up_pipelines/?tab=metrics#set-up-a-pipeline-in-the-ui
+[33]: /observability_pipelines/sources/datadog_agent/?tab=metrics
+[34]: /observability_pipelines/destinations/datadog_metrics/?tab=secretsmanagement
+[35]: /observability_pipelines/processors/filter/?tab=metrics
+[36]: /observability_pipelines/processors/tag_control/metrics
