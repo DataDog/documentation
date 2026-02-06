@@ -1,41 +1,99 @@
-// Store pre-fetched content for one page at a time
-let cachedUrl = null;
-let cachedText = null;
+let pageTextLoadingPromise = null;
 
-async function copyPageText(copyButton) {
-    console.log('Copying page text to clipboard ...');
-    const mdUrl = copyButton.dataset.mdUrl;
+const pageTextCache = {
+    mdUrl: null,
+    text: null
+};
 
-    let text;
+export function initCopyPageButton() {
+    const copyBtn = document.getElementById('page-copy-btn');
 
-    try {
-        if (!mdUrl) {
-            text = extractMainContentAsMarkdown();
-        } else if (cachedUrl === mdUrl && cachedText) {
-            text = cachedText;
-        } else {
-            const response = await fetch(mdUrl, { credentials: 'omit' });
+    if (copyBtn) {
+        copyBtn.addEventListener('mouseenter', function () {
+            loadPageText();
+        });
 
-            if (!response.ok) {
-                throw new Error(`Failed to fetch Markdown: ${response.status}`);
-            }
-
-            text = await response.text();
-            console.log('Markdown content fetched successfully for copy.');
-        }
-    } catch (err) {
-        text = extractMainContentAsMarkdown();
+        copyBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            copyPageText();
+        });
     }
+}
 
+/**
+ * Copy the page text to clipboard
+ * and display a success indicator.
+ */
+async function copyPageText() {
+    const text = await loadPageText();
     await navigator.clipboard.writeText(text);
 
-    // Optional UX feedback
     displaySuccessFeedback();
 
     console.log(text);
     console.log('Above text copied to clipboard.');
 }
 
+/**
+ * Build the URL of the plaintext page
+ * from the URL of the HTML page.
+ */
+function getMdUrl() {
+    let url = `http://docs.datadoghq.com` + window.location.pathname;
+    if (url.endsWith('/')) {
+        url = url.slice(0, -1);
+    }
+    return url + '.md';
+}
+
+/**
+ * Attempt to load the page's .md URL contents,
+ * failing over to extracting the text from the DOM.
+ */
+async function loadPageText() {
+    const mdUrl = getMdUrl();
+
+    // If already cached, return immediately
+    if (pageTextCache.mdUrl === mdUrl && pageTextCache.text) {
+        return pageTextCache.text;
+    }
+
+    // If currently loading, wait for the existing promise
+    if (pageTextLoadingPromise) {
+        return pageTextLoadingPromise;
+    }
+
+    // Start a new load
+    pageTextLoadingPromise = (async () => {
+        try {
+            const response = await fetch(mdUrl, { credentials: 'omit' });
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch Markdown: ${response.status}`);
+            }
+
+            const text = await response.text();
+            console.log('Markdown content fetched successfully for copy.');
+            pageTextCache.mdUrl = mdUrl;
+            pageTextCache.text = text;
+            return text;
+        } catch (err) {
+            console.log('Falling back to DOM extraction for copy.');
+            const text = extractMainContentAsMarkdown();
+            pageTextCache.text = text;
+            pageTextCache.mdUrl = mdUrl;
+            return text;
+        } finally {
+            pageTextLoadingPromise = null;
+        }
+    })();
+
+    return pageTextLoadingPromise;
+}
+
+/**
+ * Show "Copied" feedback and a success icon.
+ */
 function displaySuccessFeedback() {
     const copyText = document.getElementById('page-copy-text');
     const copiedText = document.getElementById('page-copied-text');
@@ -57,21 +115,10 @@ function displaySuccessFeedback() {
     }, 3000);
 }
 
-export function initCopyPageButton() {
-    const copyBtn = document.getElementById('page-copy-btn');
-
-    if (copyBtn) {
-        // Pre-fetch on hover for faster copy
-        copyBtn.addEventListener('mouseenter', function () {
-            prefetchPageText(this);
-        });
-
-        copyBtn.addEventListener('click', function () {
-            copyPageText(this);
-        });
-    }
-}
-
+/**
+ * Extract the main content of the page as Markdown
+ * (used as a fallback if fetching the .md file fails).
+ */
 function extractMainContentAsMarkdown() {
     console.log('Failing back to DOM extraction for copy ...');
     const mainContent = document.getElementById('mainContent');
@@ -147,30 +194,4 @@ function extractMainContentAsMarkdown() {
         .replace(/ +\n/g, '\n')
         .replace(/\n{3,}/g, '\n\n')
         .trim();
-}
-
-async function prefetchPageText(copyButton) {
-    const mdUrl = copyButton.dataset.mdUrl;
-
-    if (!mdUrl) {
-        console.warn('No Markdown URL found for prefetching, failing over to DOM extraction on copy.');
-        return;
-    }
-
-    if (cachedUrl === mdUrl) {
-        return; // Already cached
-    }
-
-    try {
-        const response = await fetch(mdUrl);
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch Markdown: ${response.status}`);
-        }
-
-        const text = await response.text();
-        console.log('Markdown content prefetched successfully for copy.');
-        cachedUrl = mdUrl;
-        cachedText = text;
-    } catch (err) {}
 }
