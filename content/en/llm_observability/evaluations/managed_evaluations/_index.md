@@ -126,7 +126,6 @@ Connect Vertex AI to LLM Observability with your Google Cloud Platform account. 
 
 {{% tab "AI Gateway" %}}
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you only connect to an AI Gateway that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
-<div class="alert alert-info">This feature is in Private Preview. Contact your account team for access.</div>
 
 Your AI Gateway must be compatible with the [OpenAI API specification][2].
 
