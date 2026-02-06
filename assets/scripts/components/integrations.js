@@ -254,9 +254,27 @@ export function initializeIntegrations() {
             }
         }
 
-        // Sort partial matches by score (highest first), then extract items
-        partialMatches.sort((a, b) => b.matchScore - a.matchScore);
+        // Sort partial matches by:
+        // 1. Non-marketplace (native) integrations first
+        // 2. Match score (highest first)
+        // 3. Marketplace integrations last
+        partialMatches.sort((a, b) => {
+            // Prioritize non-marketplace over marketplace
+            if (a.item.is_marketplace !== b.item.is_marketplace) {
+                return a.item.is_marketplace ? 1 : -1;
+            }
+            // Within same marketplace status, sort by match score
+            return b.matchScore - a.matchScore;
+        });
         const sortedPartialMatches = partialMatches.map(m => m.item);
+
+        // Sort exact matches the same way (non-marketplace first)
+        exactMatches.sort((a, b) => {
+            if (a.is_marketplace !== b.is_marketplace) {
+                return a.is_marketplace ? 1 : -1;
+            }
+            return 0;
+        });
 
         // Combine exact matches first, then sorted partial matches, then hidden items
         const show = [...exactMatches, ...sortedPartialMatches];
