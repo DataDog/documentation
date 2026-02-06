@@ -146,7 +146,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable"
     data-description="SDK is Browser"
-    data-if="3154"
+    data-if="5590"
   >
     <p>
       This page describes how to instrument your web applications with the
@@ -783,7 +783,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Android"
-    data-if="3155"
+    data-if="5591"
   >
     <p>
       This page describes how to instrument your applications for
@@ -2114,7 +2114,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is iOS"
-    data-if="3156"
+    data-if="5592"
   >
     <p>
       This page describes how to instrument your iOS and tvOS applications for
@@ -3304,7 +3304,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Flutter"
-    data-if="3157"
+    data-if="5593"
   >
     <p>
       This page describes how to instrument your applications for
@@ -3932,7 +3932,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is React Native"
-    data-if="3158"
+    data-if="5594"
   >
     <p>
       The minimum supported version for the React Native SDK is React Native
@@ -4423,8 +4423,7 @@ title: Client SDK Setup
           <p>
             To control the data your application sends to Datadog RUM, you can
             specify a sampling rate for RUM sessions while
-            <a
-              href="/real_user_monitoring/application_monitoring/react_native/setup/reactnative/#initialize-the-library-with-application-context"
+            <a href="#step-3--initialize-the-library-with-application-context"
               >initializing the RUM React Native SDK</a
             >
             as a percentage between 0 and 100. You can specify the rate with the
@@ -4906,7 +4905,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Kotlin Multiplatform"
-    data-if="3159"
+    data-if="5595"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5142,7 +5141,7 @@ title: Client SDK Setup
 </span></span><span class="line"><span class="cl">            <span class="n">clientToken</span> <span class="p">=</span> <span class="n">appClientToken</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">env</span> <span class="p">=</span> <span class="n">appEnvironment</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">            <span class="n">variant</span> <span class="p">=</span> <span class="n">appVariantName</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">7</span><span class="n">b7ff800</span><span class="p">-</span><span class="m">9</span><span class="n">de2</span><span class="p">-</span><span class="m">4333</span><span class="p">-</span><span class="m">8f</span><span class="n">b2</span><span class="p">-</span><span class="m">65f</span><span class="n">f94b5f96d</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span><span class="m">2</span><span class="n">e814c11</span><span class="p">-</span><span class="n">f634</span><span class="p">-</span><span class="m">45</span><span class="n">bf</span><span class="p">-</span><span class="m">8</span><span class="n">ef1</span><span class="p">-</span><span class="n">e0fdb9b4c746</span>
 </span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">build</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="nc">Datadog</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">configuration</span><span class="p">,</span> <span class="n">trackingConsent</span><span class="p">)</span>
@@ -5394,7 +5393,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Roku"
-    data-if="3160"
+    data-if="5596"
   >
     <p>
       This page describes how to instrument your applications for
@@ -5653,7 +5652,7 @@ title: Client SDK Setup
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="SDK is Unity"
-    data-if="3161"
+    data-if="5597"
   >
     <p>
       This page describes how to instrument your applications for
@@ -6224,7 +6223,7 @@ title: Client SDK Setup
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"3154":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"3154"},"3155":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"3155"},"3156":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"3156"},"3157":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"3157"},"3158":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"3158"},"3159":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"3159"},"3160":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"3160"},"3161":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"3161"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"5590":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"browser"},"v":true,"r":"5590"},"5591":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"android"},"v":false,"r":"5591"},"5592":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"ios"},"v":false,"r":"5592"},"5593":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"flutter"},"v":false,"r":"5593"},"5594":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"react_native"},"v":false,"r":"5594"},"5595":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"kotlin_multiplatform"},"v":false,"r":"5595"},"5596":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"roku"},"v":false,"r":"5596"},"5597":{"m":"F","n":"e","p":{"0":{"m":"V","p":["sdk"],"v":"browser"},"1":"unity"},"v":false,"r":"5597"}},    filtersManifest: {"filtersByTraitId":{"sdk":{"config":{"trait_id":"sdk","option_group_id":"sdk_platform_options","label":"SDK"},"defaultValsByOptionGroupId":{"sdk_platform_options":"browser"}}},"defaultValsByTraitId":{"sdk":"browser"},"optionGroupsById":{"sdk_platform_options":[{"default":true,"id":"browser","label":"Browser"},{"id":"android","label":"Android"},{"id":"ios","label":"iOS"},{"id":"flutter","label":"Flutter"},{"id":"react_native","label":"React Native"},{"id":"kotlin_multiplatform","label":"Kotlin Multiplatform"},{"id":"roku","label":"Roku"},{"id":"unity","label":"Unity"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="real_user_monitoring/android/android-new-application.png" style="display:none;" alt="" >}}
 

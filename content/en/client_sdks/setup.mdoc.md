@@ -38,7 +38,7 @@ The minimum supported version for the React Native SDK is React Native v0.65+. C
 {% tabs %}
 {% tab label="React Native" %}
 
-{% partial file="sdk/setup/react-native-cli.mdoc.md" /%}
+{% partial file="sdk/setup/react-native.mdoc.md" /%}
 
 {% /tab %}
 {% tab label="Expo" %}

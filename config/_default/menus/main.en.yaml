@@ -919,6 +919,17 @@ menu:
       identifier: otel_otlp_metric_types
       parent: otel_reference
       weight: 1104
+    - name: Client SDKs
+      url: client_sdks/
+      pre: wrench
+      identifier: sdk
+      parent: essentials_heading
+      weight: 60000
+    - name: Setup
+      url: client_sdks/setup/
+      parent: sdk
+      identifier: sdk_setup
+      weight: 1
     - name: Developers
       url: developers/
       pre: dev-code
@@ -7998,17 +8009,6 @@ menu:
       parent: continuous_testing
       identifier: continuous_testing_troubleshooting
       weight: 7
-    - name: Client SDKs
-      url: client_sdks/
-      pre: wrench
-      identifier: sdk
-      parent: digital_experience_heading
-      weight: 20000
-    - name: Setup
-      url: client_sdks/setup/
-      parent: sdk
-      identifier: sdk_setup
-      weight: 1
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum

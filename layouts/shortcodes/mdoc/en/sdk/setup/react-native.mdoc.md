@@ -1,5 +1,5 @@
 <!--
-React Native CLI setup instructions.
+React Native setup instructions.
 -->
 
 ### Step 1 - Install the SDK
