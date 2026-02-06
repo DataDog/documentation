@@ -40,9 +40,9 @@ In the Network Topology Map, the following navigation options are available:
 
 ### Group by
 
-Under Group By, use **tags** such as `team`, `service`, and `vendor` to select how you want to visualize your devices:
+Under Group By, use **tags** such as `location` and `vendor` to select how you want to visualize your devices:
 
-{{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by.png" alt="A Group by control showing tags for team, service, and vendor." style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by_2.png" alt="A Group by control showing tags for location and vendor." style="width:80%;" >}}
 
 ### Filter devices
 
