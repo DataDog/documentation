@@ -149,7 +149,7 @@ After running your first scan, results appear on the [Cloud Security Vulnerabili
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page" width="100%">}}
 
-## Run local scans during development
+### Run local scans during development
 
 For faster iteration before committing to CI, install the Datadog Security CLI locally using the same installation methods described in the [installation section](#install-the-datadog-security-cli) above.
 
