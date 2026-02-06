@@ -65,6 +65,11 @@ multifiltersearch:
       scope: Databases
       recommendation_description: The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
       recommendation_prerequisite: APM + DBM
+    - category: Performance
+      recommendation_type: Unbalanced Read Load
+      scope: Databases
+      recommendation_description: A service is making read-only queries to a primary database instance when replicas are available. Routing these queries to replicas can reduce primary load and improve performance.
+      recommendation_prerequisite: APM + DBM
     - category: Reliability
       recommendation_type: Aggressive Retries
       scope: Backend services
