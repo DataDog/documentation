@@ -311,6 +311,10 @@
     "name": "Security Monitoring",
     "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
   },
+  "security-vulnerabilities-pipelines": {
+    "name": "Security Vulnerabilities Pipelines",
+    "description": "Manage security vulnerabilities pipelines rules through the Datadog API."
+  },
   "sensitive-data-scanner": {
     "name": "Sensitive Data Scanner",
     "description": "Create, update, delete, and retrieve sensitive data scanner groups and rules. See the [Sensitive Data Scanner page](https://docs.datadoghq.com/sensitive_data_scanner/) for more information."

@@ -3072,6 +3072,110 @@
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
   },
+  "ListSecurityVulnerabilitiesPipelinesDueDateRules": {
+    "description": "Retrieve a list of all due date rules for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "List due date rules"
+  },
+  "CreateSecurityVulnerabilitiesPipelinesDueDateRule": {
+    "description": "Create a new due date rule for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Create a due date rule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a due date rule."
+  },
+  "ReorderSecurityVulnerabilitiesPipelinesDueDateRules": {
+    "description": "Reorder the priority of due date rules for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Reorder due date rules",
+    "request_description": "",
+    "request_schema_description": "Request body for reordering rules."
+  },
+  "DeleteSecurityVulnerabilitiesPipelinesDueDateRule": {
+    "description": "Delete a specific due date rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Delete a due date rule"
+  },
+  "GetSecurityVulnerabilitiesPipelinesDueDateRule": {
+    "description": "Retrieve a specific due date rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Get a due date rule"
+  },
+  "PatchSecurityVulnerabilitiesPipelinesDueDateRule": {
+    "description": "Partially update a specific due date rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Partially update a due date rule",
+    "request_description": "",
+    "request_schema_description": "Request body for partially updating a due date rule."
+  },
+  "UpdateSecurityVulnerabilitiesPipelinesDueDateRule": {
+    "description": "Update a specific due date rule by ID for security vulnerabilities pipelines. This replaces the entire rule.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Update a due date rule",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a due date rule."
+  },
+  "ListSecurityVulnerabilitiesPipelinesInboxRules": {
+    "description": "Retrieve a list of all inbox rules for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "List inbox rules"
+  },
+  "CreateSecurityVulnerabilitiesPipelinesInboxRule": {
+    "description": "Create a new inbox rule for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Create an inbox rule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating an inbox rule."
+  },
+  "ReorderSecurityVulnerabilitiesPipelinesInboxRules": {
+    "description": "Reorder the priority of inbox rules for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Reorder inbox rules",
+    "request_description": "",
+    "request_schema_description": "Request body for reordering rules."
+  },
+  "GetSecurityVulnerabilitiesPipelinesInboxRule": {
+    "description": "Retrieve a specific inbox rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Get an inbox rule"
+  },
+  "PatchSecurityVulnerabilitiesPipelinesInboxRule": {
+    "description": "Partially update a specific inbox rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Partially update an inbox rule",
+    "request_description": "",
+    "request_schema_description": "Request body for partially updating an inbox rule."
+  },
+  "ListSecurityVulnerabilitiesPipelinesMuteRules": {
+    "description": "Retrieve a list of all mute rules for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "List mute rules"
+  },
+  "CreateSecurityVulnerabilitiesPipelinesMuteRule": {
+    "description": "Create a new mute rule for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Create a mute rule",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a mute rule."
+  },
+  "ReorderSecurityVulnerabilitiesPipelinesMuteRules": {
+    "description": "Reorder the priority of mute rules for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Reorder mute rules",
+    "request_description": "",
+    "request_schema_description": "Request body for reordering rules."
+  },
+  "DeleteSecurityVulnerabilitiesPipelinesMuteRule": {
+    "description": "Delete a specific mute rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Delete a mute rule"
+  },
+  "GetSecurityVulnerabilitiesPipelinesMuteRule": {
+    "description": "Retrieve a specific mute rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Get a mute rule"
+  },
+  "PatchSecurityVulnerabilitiesPipelinesMuteRule": {
+    "description": "Partially update a specific mute rule by ID for security vulnerabilities pipelines.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Partially update a mute rule",
+    "request_description": "",
+    "request_schema_description": "Request body for partially updating a mute rule."
+  },
+  "UpdateSecurityVulnerabilitiesPipelinesMuteRule": {
+    "description": "Update a specific mute rule by ID for security vulnerabilities pipelines. This replaces the entire rule.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Update a mute rule",
+    "request_description": "",
+    "request_schema_description": "Request body for updating a mute rule."
+  },
+  "CreateSecurityVulnerabilitiesPipelinesQueryMigrationJob": {
+    "description": "Create a new query migration job to migrate queries in security vulnerabilities pipelines rules.\n\n**Note**: This endpoint is in preview and is subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Create a query migration job",
+    "request_description": "",
+    "request_schema_description": "Request body for creating a query migration job."
+  },
   "ListVulnerableAssets": {
     "description": "Get a list of vulnerable assets.\n\n### Pagination\n\nPlease review the [Pagination section for the \"List Vulnerabilities\"](#pagination) endpoint.\n\n### Filtering\n\nPlease review the [Filtering section for the \"List Vulnerabilities\"](#filtering) endpoint.\n\n### Metadata\n\nPlease review the [Metadata section for the \"List Vulnerabilities\"](#metadata) endpoint.",
     "summary": "List vulnerable assets"
