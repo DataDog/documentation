@@ -79,7 +79,7 @@ async function loadPageText() {
             return text;
         } catch (err) {
             console.log('Falling back to DOM extraction for copy.');
-            const text = extractMainContentAsMarkdown();
+            const text = extractPageText();
             pageTextCache.text = text;
             pageTextCache.mdUrl = mdUrl;
             return text;
@@ -116,10 +116,10 @@ function displaySuccessFeedback() {
 }
 
 /**
- * Extract the main content of the page as Markdown
+ * Extract the content of the page from the DOM
  * (used as a fallback if fetching the .md file fails).
  */
-function extractMainContentAsMarkdown() {
+function extractPageText() {
     console.log('Failing back to DOM extraction for copy ...');
     const mainContent = document.getElementById('mainContent');
     if (!mainContent) {
@@ -160,7 +160,7 @@ function extractMainContentAsMarkdown() {
                 }
                 const level = parseInt(tagName[1]);
                 const headingText = currentNode.textContent.trim();
-                lines.push('#'.repeat(level) + ' ' + headingText + '\n\n');
+                lines.push('\n' + '#'.repeat(level) + ' ' + headingText + '\n\n');
                 lastAddedNewline = true;
                 // Skip children since we already got the text
                 walker.currentNode = currentNode;
