@@ -45,10 +45,6 @@ Incident Management also integrates with:
 - [Webhooks][6] to send incident notifications using webhooks (for example, [sending SMS to Twilio][7]).
 - [Zoom][8] to create Zoom meetings for an incident.
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/pagerduty/
