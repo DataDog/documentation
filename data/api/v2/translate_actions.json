@@ -2340,6 +2340,30 @@
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
   },
+  "ListPersonalAccessTokens": {
+    "description": "List all personal access tokens in your organization. Supports filtering,\npagination, and sorting.",
+    "summary": "List personal access tokens"
+  },
+  "CreatePersonalAccessToken": {
+    "description": "Create a new personal access token with fine-grained permissions. The token value\nwill be returned in the response and cannot be retrieved later. Be sure to save it\nsecurely.",
+    "summary": "Create personal access token",
+    "request_description": "",
+    "request_schema_description": "Request to create a personal access token."
+  },
+  "RevokePersonalAccessToken": {
+    "description": "Revoke a personal access token. Once revoked, the token can no longer be used\nto authenticate API requests.",
+    "summary": "Revoke personal access token"
+  },
+  "GetPersonalAccessToken": {
+    "description": "Get a specific personal access token by UUID.",
+    "summary": "Get personal access token"
+  },
+  "UpdatePersonalAccessToken": {
+    "description": "Update the name and/or scopes of an existing personal access token. The ID in the\nrequest body must match the UUID in the path.",
+    "summary": "Update personal access token",
+    "request_description": "",
+    "request_schema_description": "Request to update a personal access token."
+  },
   "ListFindings": {
     "description": "Get a list of findings. These include both misconfigurations and identity risks.\n\n**Note**: To filter and return only identity risks, add the following query parameter: `?filter[tags]=dd_rule_type:ciem`\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery parameters must be only among the documented ones and with values of correct types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`) are not allowed.\n\n### Additional extension fields\n\nAdditional extension fields are available for some findings.\n\nThe data is available when you include the query parameter `?detailed_findings=true` in the request.\n\nThe following fields are available for findings:\n- `external_id`: The resource external ID related to the finding.\n- `description`: The description and remediation steps for the finding.\n- `datadog_link`: The Datadog relative link for the finding.\n- `ip_addresses`: The list of private IP addresses for the resource related to the finding.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.",
     "summary": "List findings"

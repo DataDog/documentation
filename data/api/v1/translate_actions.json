@@ -721,6 +721,24 @@
     "request_description": "",
     "request_schema_description": "Object describing the IdP configuration."
   },
+  "RevokeClientToken": {
+    "description": "Revoke a client token (public API key). Once revoked, the token can no longer be used\nto submit data to Datadog.",
+    "summary": "Revoke client token",
+    "request_description": "",
+    "request_schema_description": "Request to revoke a client token."
+  },
+  "CreateClientToken": {
+    "description": "Create a new client token (public API key) to submit data from your browser or mobile\napplications to Datadog.",
+    "summary": "Create client token",
+    "request_description": "",
+    "request_schema_description": "Request to create a new client token."
+  },
+  "UpdateClientToken": {
+    "description": "Update the name and/or origin URLs of an existing client token (public API key).",
+    "summary": "Update client token",
+    "request_description": "",
+    "request_schema_description": "Request to update an existing client token."
+  },
   "QueryMetrics": {
     "description": "Query timeseries points.",
     "summary": "Query timeseries points"
