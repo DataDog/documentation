@@ -378,7 +378,6 @@ test:
 </pre>
 {{% /tab %}}
 {{% tab "Azure Pipelines" %}}
-<pre>
 <code class="language-yaml" data-lang="yaml">
 - script: datadog-ci coverage upload --format=clover coverage/clover.xml
   displayName: 'Upload coverage to Datadog'
