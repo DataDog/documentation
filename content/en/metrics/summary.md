@@ -127,7 +127,6 @@ The metric description helps you understand what a metric represents, why it exi
 
 For custom metrics with connected source code, Datadog can automatically generate descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence. To enable auto-generated descriptions from source code, [sign up for Metric Context: Source Code][40].
 
-Use this field to update the descriptions for your [custom metrics][4].
 
 ## Metric Context: Source Code
 
