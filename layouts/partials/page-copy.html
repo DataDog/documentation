@@ -4,6 +4,8 @@ partialCached "pages-json-cache.html" "pages.json" -}} {{- if index $pages $mdUR
     <a href="#" class="text-primary text-uppercase font-semibold" role="button" data-md-url="{{ $mdURL }}">
         {{ partial "img.html" (dict "root" $ctx "src" "icons/clipboard-mdi.svg" "class" "static copy-btn-icon" "alt"
         "copy" "width" "25") }}
+        {{ partial "img.html" (dict "root" $ctx "src" "icons/clipboard-mdi-success.svg" "class" "static copy-btn-icon" "alt"
+        "copy" "width" "25") }}
         <span id="page-copy-text">{{ i18n "copy" }}</span>
         <span id="page-copied-text">{{ i18n "copied" }}</span>
     </a>
