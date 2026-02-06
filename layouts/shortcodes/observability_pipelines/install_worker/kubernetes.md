@@ -39,6 +39,15 @@ See [Update Existing Pipelines][602] if you want to make changes to your pipelin
 
 **Note**: If you enable [disk buffering][605] for destinations, you must enable Kubernetes [persistent volumes][606] in the Observability Pipelines helm chart .
 
+#### Kubernetes services
+
+When you install the Observability Pipelines Worker on Kubernetes, the Helm chart creates two services:
+
+- **Headless service**: Provides stable DNS names per pod and direct Pod IP resolution without load balancing. This service is for the Worker itself and is not intended for end users.
+- **Load balancer service**: Provides load balancing for both internal and external cluster communications.
+
+**Use the load balancer service** (non-headless service) to send logs to the Observability Pipelines Worker.
+
 #### Self-hosted and self-managed Kubernetes clusters
 
 If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
