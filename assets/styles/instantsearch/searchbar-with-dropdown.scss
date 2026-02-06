@@ -202,10 +202,9 @@
         border-bottom: 1px solid #e6e6e6;
         
         &:has(.ais-Hits-ai-suggestion) {
-            display: block !important; // Always show when there's an AI suggestion
+            display: block !important;
         }
         
-        // Hide border when there's no AI suggestion
         &:not(:has(.ais-Hits-ai-suggestion)) {
             border-bottom: none;
         }
@@ -215,7 +214,6 @@
         padding: 0 !important;
         margin: 0;
         
-        // Never hide the AI list
         &.no-hits {
             display: block !important;
         }
@@ -223,62 +221,53 @@
 
     .ais-Hits-ai-suggestion {
         display: block;
+        padding: 6px 10px !important;
         
         .ask-docs-ai-link {
             display: flex !important;
             align-items: center;
-            gap: 12px;
-            padding: 12px 16px !important;
-            background: linear-gradient(135deg, #f8f4ff 0%, #f3eefa 100%);
+            gap: 7px;
+            padding: 6px 12px !important;
+            background: #f5f5f5;
+            border: 1px solid #e4e4e7;
+            border-radius: 6px;
             text-decoration: none;
-            transition: background 0.15s ease, outline 0.15s ease;
+            cursor: pointer;
+            transition: background 0.15s ease, border-color 0.15s ease;
             
             &:hover {
-                background: linear-gradient(135deg, #f3eefa 0%, #ebe3f7 100%);
+                background: #eeebf5;
+                border-color: rgba(99, 44, 166, 0.25);
             }
         }
         
-        // Selected state for keyboard navigation
         &.selected-item .ask-docs-ai-link {
-            outline: 2px solid rgba(99, 44, 166, 0.4);
-            outline-offset: -2px;
-            background: linear-gradient(135deg, #f3eefa 0%, #ebe3f7 100%);
+            background: #eeebf5;
+            border-color: rgba(99, 44, 166, 0.25);
         }
         
         .ask-ai-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: #632CA6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 13px;
+            height: 13px;
             flex-shrink: 0;
-            
-            svg {
-                stroke: white;
-            }
+            color: #632CA6;
         }
         
         .ask-ai-content {
             flex: 1;
             min-width: 0;
-        }
-        
-        .ask-ai-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #632CA6;
-            margin: 0 0 2px 0 !important;
-        }
-        
-        .ask-ai-query {
             font-size: 13px;
-            color: #71717a;
+            font-weight: 500;
+            color: #632CA6;
             margin: 0 !important;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        
+        .ask-ai-query {
+            font-weight: 400;
+            color: #71717a;
         }
     }
 

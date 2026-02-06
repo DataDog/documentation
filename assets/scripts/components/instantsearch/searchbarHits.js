@@ -12,22 +12,18 @@ initializeFeatureFlags().then((client) => {
 
 // Generate the "Ask Docs AI" suggestion HTML
 const generateAskAISuggestion = (query) => {
-    if (!query?.trim()) return null;
+    const trimmedQuery = query?.trim() || '';
+    const contentText = trimmedQuery
+        ? `Ask AI about <span class="ask-ai-query">"${trimmedQuery}"</span>`
+        : `Ask Docs AI anything`;
     
     return `
-        <li class="ais-Hits-item ais-Hits-ai-suggestion" data-query="${query.replace(/"/g, '&quot;')}">
+        <li class="ais-Hits-item ais-Hits-ai-suggestion" data-query="${trimmedQuery.replace(/"/g, '&quot;')}">
             <a href="#" class="ask-docs-ai-link">
-                <div class="ask-ai-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
-                        <path d="M5 19l1 3 3-1-3 1z" opacity="0.6"/>
-                        <path d="M19 5l1 3 3-1-3 1z" opacity="0.6"/>
-                    </svg>
-                </div>
-                <div class="ask-ai-content">
-                    <p class="ask-ai-title">Ask Docs AI</p>
-                    <p class="ask-ai-query">"${query}"</p>
-                </div>
+                <svg class="ask-ai-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
+                </svg>
+                <p class="ask-ai-content">${contentText}</p>
             </a>
         </li>
     `;
@@ -169,13 +165,16 @@ const renderHits = (renderOptions, isFirstRender) => {
         addHitsToEmptyElements(containerDiv);
         hideOrShowElements(containerDiv);
         
-        // Auto-select AI suggestion as default (for keyboard navigation)
-        if (isDocsContainer && IS_CONVERSATIONAL_SEARCH_ENABLED) {
-            // First, clear any existing selection
-            containerDiv.querySelectorAll('.selected-item').forEach(item => {
-                item.classList.remove('selected-item');
-            });
-            // Then select the AI suggestion if it exists
+        // Auto-select first item for keyboard navigation
+        // First, clear any existing selection
+        containerDiv.querySelectorAll('.selected-item').forEach(item => {
+            item.classList.remove('selected-item');
+        });
+        // Select first regular search result if available, otherwise fall back to AI suggestion
+        const firstRegularItem = containerDiv.querySelector('.ais-Hits-item:not(.ais-Hits-category):not(.ais-Hits-ai-suggestion)');
+        if (firstRegularItem) {
+            firstRegularItem.classList.add('selected-item');
+        } else if (isDocsContainer && IS_CONVERSATIONAL_SEARCH_ENABLED) {
             const aiSuggestion = containerDiv.querySelector('.ais-Hits-ai-suggestion');
             if (aiSuggestion) {
                 aiSuggestion.classList.add('selected-item');
@@ -240,7 +239,9 @@ const renderHits = (renderOptions, isFirstRender) => {
     const guidesHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'guide');
     const apiHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'api');
     
-    const currentQuery = results?.query || '';
+    // Use the live input value (not results.query which lags due to debounce) to avoid text flicker
+    const liveInput = document.querySelector('.ais-SearchBox-input');
+    const currentQuery = liveInput ? liveInput.value.trim() : (results?.query || '');
     const aiSuggestionHTML =
         isDocsContainer && IS_CONVERSATIONAL_SEARCH_ENABLED
             ? generateAskAISuggestion(currentQuery)
