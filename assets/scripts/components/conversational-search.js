@@ -172,7 +172,7 @@ class ConversationalSearch {
                         </svg>
                     </button>
                 </div>
-                <p class="conv-search-disclaimer">AI-generated responses may be inaccurate. Verify important info.<br/> Your use of Docs AI powered by Typesense is subject to our <a href="https://www.datadoghq.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p>
+                <p class="conv-search-disclaimer">AI-generated responses may be inaccurate. Verify important info.</p>
             </div>
         `;
 
