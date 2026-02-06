@@ -3,7 +3,7 @@ title: Automations
 aliases:
 - /service_management/on-call/automations/
 further_reading:
-- link: '/incident_response/on-call/'
+- link: '/service_management/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 - link: "https://docs.datadoghq.com/service_management/workflows/"

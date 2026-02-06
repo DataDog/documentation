@@ -3,7 +3,7 @@ title: Create a Case
 aliases:
 - /service_management/case_management/create_case/
 further_reading:
-- link: "/incident_response/case_management/view_and_manage"
+- link: "/service_management/case_management/view_and_manage"
   tag: "Documentation"
   text: "View and Manage Cases"
 - link: "/incident_response/case_management/customization"

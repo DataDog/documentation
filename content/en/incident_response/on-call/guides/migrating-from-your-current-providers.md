@@ -3,7 +3,7 @@ title: Migrating from your current on-call provider
 aliases:
 - /service_management/on-call/guides/migrating-from-your-current-providers/
 further_reading:
-- link: "/incident_response/on-call/"
+- link: "/service_management/on-call/"
   tag: "Documentation"
   text: "On-Call"
 - link: "/incident_response/incident_management/"

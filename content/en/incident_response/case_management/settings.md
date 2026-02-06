@@ -3,7 +3,7 @@ title: Settings
 aliases:
 - /service_management/case_management/settings/
 further_reading:
-- link: "/incident_response/case_management/troubleshooting"
+- link: "/service_management/case_management/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting third-party integrations"
 - link: "/incident_response/case_management/customization"

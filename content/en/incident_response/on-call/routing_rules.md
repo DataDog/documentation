@@ -1,7 +1,7 @@
 ---
 title: Routing Rules
 further_reading:
-- link: '/incident_response/on-call/'
+- link: '/service_management/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 aliases:
@@ -32,11 +32,11 @@ With routing rules, you can define granular logic to control how alerts reach yo
 - Trigger workflows (coming soon): Use routing rules to trigger automated workflows in response to matching alerts.
 
 ## Send Pages to Slack or Microsoft Teams
-{{< img src="service_management/oncall/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams." style="width:100%;" >}}
+{{< img src="incident_response/on-call/page_in_slack_or_ms_teams.png" alt="A sample routing rule, which routes all incoming Pages to Slack and Microsoft Teams." style="width:100%;" >}}
 
 When you route Pages to Slack or Microsoft Teams, Datadog sends a notification to the configured channel and creates a corresponding Page object in the On-Call platform. From Slack, team members can use interactive buttons to acknowledge, resolve, escalate, or declare an incident. This streamlines incident response without leaving the chat environment.
 
-{{< img src="service_management/oncall/page_representation_in_slack.png" alt="A sample Page rendered in Slack." style="width:70%;" >}}
+{{< img src="incident_response/on-call/page_representation_in_slack.png" alt="A sample Page rendered in Slack." style="width:70%;" >}}
 
 When a Page is acknowledged or resolved in Slack, Datadog updates the original notification in place, without sending additional messages. This keeps responders focused by reducing noise and showing the current Page status directly in the original thread.
 

@@ -11,7 +11,7 @@ From the [Incident Settings Information][1] page, you can customize the statuses
 
 ## Severity levels
 
- {{< img src="/service_management/incidents/incident_settings/settings_info_severity_levels.png" alt="Customizable severity levels in incident settings" style="width:100%;" >}}
+ {{< img src="/incident_response/incident_management/setup_and_configuration/information/settings_info_severity_levels.png" alt="Customizable severity levels in incident settings" style="width:100%;" >}}
 
 Use severity level settings to:
 
@@ -25,7 +25,7 @@ Use severity level settings to:
 
 ## Status levels
 
-{{< img src="/service_management/incidents/incident_settings/settings_info_status_levels.png" alt="Customizable status levels in incident settings" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/information/settings_info_status_levels.png" alt="Customizable status levels in incident settings" style="width:100%;" >}}
 
 Use status level settings to:
 
@@ -36,7 +36,7 @@ Use status level settings to:
 
 ## Helper text
 
-{{< img src="/service_management/incidents/incident_settings/settings_info_helper_text.png" alt="Declare Incident Helper Text Settings" style="width:100%;">}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/information/settings_info_helper_text.png" alt="Declare Incident Helper Text Settings" style="width:100%;">}}
 
 Helper text appears alongside the [Incident Creation Modal][4] and helps your responders understand how they should define the incident.
 

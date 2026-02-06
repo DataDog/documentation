@@ -3,7 +3,7 @@ title: Cross-org Paging
 aliases:
 - /service_management/on-call/cross_org_paging/
 further_reading:
-- link: '/incident_response/on-call/'
+- link: '/service_management/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---

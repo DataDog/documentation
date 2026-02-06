@@ -19,7 +19,7 @@ cascade:
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="Overview of how Pages are routed. From a monitor, incident, security signal, or API call, the Page is sent to a Team (e.g. 'payments-team'), then to routing rules (e.g. based on priority) then to an escalation policy. There, it can be sent to a schedule or directly to a user." style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="Overview of how Pages are routed. From a monitor, incident, security signal, or API call, the Page is sent to a Team (e.g. 'payments-team'), then to routing rules (e.g. based on priority) then to an escalation policy. There, it can be sent to a schedule or directly to a user." style="width:100%;" >}}
 
 ## Concepts
 
@@ -33,15 +33,15 @@ Datadog On-Call integrates monitoring, paging, and incident response into one pl
 
 **Teams** are the central organizational unit of Datadog On-Call. When a notification is triggered in Datadog, a **Page** is sent to the designated On-Call Team.
 
-{{< img src="service_management/oncall/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
 
 Each Team owns **escalation policies** and **schedules**. Escalation policies define how a Page is sent to various schedules, such as _Checkout Operations - Interrupt Handler_, _Primary_, and _Secondary_ in the following screenshot. Each Team can also configure **routing rules** to route Pages to different escalation policies.
 
-{{< img src="service_management/oncall/escalation_policy.png" alt="A sample escalation policy." style="width:80%;" >}}
+{{< img src="incident_response/on-call/escalation_policy.png" alt="A sample escalation policy." style="width:80%;" >}}
 
 A schedule defines specific times when Team members are assigned to respond to Pages. Schedules organize and manage the availability of Team members across different time zones and shifts.
 
-{{< img src="service_management/oncall/schedule.png" alt="A sample schedule, with multiple layers for JP, EU, and US business hours." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="A sample schedule, with multiple layers for JP, EU, and US business hours." style="width:80%;" >}}
 
 ## Granular access control
 

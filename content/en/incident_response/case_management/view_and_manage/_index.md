@@ -3,14 +3,14 @@ title: View and Manage Cases
 aliases:
 - /service_management/case_management/view_and_manage/
 further_reading:
-- link: "incident_response/case_management/settings"
+- link: "service_management/case_management/settings"
   tag: "Documentation"
   text: "Case settings"
 ---
 
 ## Overview
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
 
 On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. Toggle between **List** view and **Board** view: The List view provides a detailed table, and the Board view offers a Kanban board with drag-and-drop functionality.
 
@@ -55,7 +55,7 @@ To create a custom view:
 
 ## Case details
 
-{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
 
 The Case Details page acts as the single source of truth on what is going on with the investigation. Each case has the following properties:
 
@@ -91,7 +91,7 @@ From an individual case:
 
 ## Case Analytics
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the cases options selected as a data source" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the cases options selected as a data source" style="width:100%;" >}}
 
 Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][7] and [Notebooks][3] to analyze team productivity and identify patterns in issues.
 

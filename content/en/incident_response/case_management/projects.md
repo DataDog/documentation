@@ -4,7 +4,7 @@ aliases:
 - /service_management/case_management/projects/
 disable_toc: false
 further_reading:
-- link: "incident_response/case_management/create_case"
+- link: "service_management/case_management/create_case"
   tag: "Documentation"
   text: "Create a case"
 ---
@@ -15,7 +15,7 @@ A project is a container object that holds a set of cases. Organize your work ar
 
 ## Create a project
 
-{{< img src="service_management/case_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Case management Settings" style="width:100%;" >}}
+{{< img src="incident_response/case_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Case management Settings" style="width:100%;" >}}
 
 To create a project:
 1. Select **New Project** on the Projects view or click on the **+** icon next to *Your Projects* in the left navigation bar.

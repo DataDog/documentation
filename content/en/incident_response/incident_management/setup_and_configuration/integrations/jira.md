@@ -39,11 +39,11 @@ To use automatic ticket creation, install the integration through the [Jira Inte
 4. Add a condition to define when to automatically create a Jira issue. If this condition is left blank, a Jira issue is created for all new incidents.
 5. Define a template with dynamic variables to populate Jira ticket fields. Type `{{` to insert incident template variables into fields like **Summary**, **Reporter**, and **Description**. Dynamic variables work only with **string** [Jira field types][5].
 
-{{< img src="service_management/incidents/guide/jira/incident_jira_settings.png" alt="Jira integration settings showing account configuration, conditional creation rules, and Jira properties with template variables" style="width:80%;" >}}
+{{< img src="incident_response/incident_management/setup_and_configuration/integrations/jira/incident_jira_settings.png" alt="Jira integration settings showing account configuration, conditional creation rules, and Jira properties with template variables" style="width:80%;" >}}
 
 6. Configure status and severity mappings to sync incident states and severities to Jira statuses and priorities.
 
-{{< img src="service_management/incidents/guide/jira/incident_jira_mappings.png" alt="Jira status and severity mappings showing incident states mapped to Jira statuses and severity levels mapped to Jira priorities" style="width:80%;" >}}
+{{< img src="incident_response/incident_management/setup_and_configuration/integrations/jira/incident_jira_mappings.png" alt="Jira status and severity mappings showing incident states mapped to Jira statuses and severity levels mapped to Jira priorities" style="width:80%;" >}}
 
 As incidents are created, an issue is also created in the corresponding Jira instance. This Jira issue links to the incident in Datadog for reference.
 The Jira issue is unidirectionally synced with the incident based on the template and mappings defined in the [Integration Settings page][3].

@@ -3,7 +3,7 @@ title: Offboarding teams and users from Datadog On-Call
 aliases:
 - /service_management/on-call/guides/offboarding-teams-and-users/
 further_reading:
-- link: "/incident_response/on-call/"
+- link: "/service_management/on-call/"
   tag: "Documentation"
   text: "On-Call"
 - link: "/incident_response/on-call/teams/"

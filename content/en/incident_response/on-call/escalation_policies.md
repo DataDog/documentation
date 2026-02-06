@@ -3,7 +3,7 @@ title: Escalation Policies
 aliases:
 - /service_management/on-call/escalation_policies/
 further_reading:
-- link: '/incident_response/on-call/'
+- link: '/service_management/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -13,7 +13,7 @@ In Datadog On-Call, escalation policies ensure that Pages are promptly addressed
 Datadog creates a default escalation policy when you [onboard a Team to On-Call][1].
 
 ## Create a new escalation policy
-{{< img src="service_management/oncall/escalation_policy_2.png" alt="A sample escalation policy." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policy_2.png" alt="A sample escalation policy." style="width:100%;" >}}
 
 1. Go to [**On-Call** > **Escalation Policies**][2].
 1. Select [**+ New Escalation Policy**][3].
@@ -24,13 +24,13 @@ Datadog creates a default escalation policy when you [onboard a Team to On-Call]
 	   1. Select one of the following notification methods: `Notify All`, `Round Robin`. See [Escalation policy notification types](#escalation-policy-step-notification-types) for details.
 	   1. Specify how many minutes the recipient has to acknowledge the page before it is escalated to the next tier.
    For example, the following will notify the current on-call user when a page is triggered. It will escalate to Jane Doe if John does not acknowledge the page within 5 minutes.
-   {{< img src="service_management/oncall/escalation_policy_2_steps_v2.png" alt="An escalation policy configured to notify the scheduled on-call user and escalate to Jane Doe if the page is not acknowledged after 5 minutes." style="width:100%;" >}}
+   {{< img src="incident_response/on-call/escalation_policy_2_steps_v2.png" alt="An escalation policy configured to notify the scheduled on-call user and escalate to Jane Doe if the page is not acknowledged after 5 minutes." style="width:100%;" >}}
 1. Set how many times to repeat the steps if no one acknowledges the page.
 1. Select whether Datadog should automatically update the page status to **Resolved** after executing all rules and repeats.
 
 ## Escalation policy step notification types
 In each step of an escalation policy, you can keep the standard `Notify All` behavior or opt-in for `Round Robin`.
-{{< img src="service_management/oncall/escalation_policy_notification_type.png" alt="Notification type selector in Escalation Policy creation" style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policy_notification_type.png" alt="Notification type selector in Escalation Policy creation" style="width:100%;" >}}
 
 ### Notify all (default)
 Notify all targets of the step at the same time.
@@ -58,7 +58,7 @@ If you want the page to go to the next target in the round robin, use only one r
 In each step of an escalation policy, you can notify individual users, entire teams, or whoever is on-call in a schedule.
 
 ### Schedules
-{{< img src="service_management/oncall/escalation_policy_notify_schedule.png" alt="A sample escalation policy step that notifies a schedule." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policy_notify_schedule.png" alt="A sample escalation policy step that notifies a schedule." style="width:100%;" >}}
 
 Escalation policies can notify whoever is on-call according to a predefined schedule. The system checks the schedule and notifies the person or group that is actively on-call during the incident. Using schedules is beneficial for:
 
@@ -68,10 +68,10 @@ Escalation policies can notify whoever is on-call according to a predefined sche
 
 If no one is on-call for a given schedule, the escalation step gracefully skips and the process moves forward without delays or interruptions. The UI indicates a skipped escalation.
 
-{{< img src="service_management/oncall/escalation_policy_schedule_skipped.png" alt="A sample escalation policy indicating a skipped escalation due to no one being on call." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policy_schedule_skipped.png" alt="A sample escalation policy indicating a skipped escalation due to no one being on call." style="width:100%;" >}}
 
 ### Users
-{{< img src="service_management/oncall/escalation_policy_notify_user.png" alt="A sample escalation policy that specifies a user in the escalation policy." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policy_notify_user.png" alt="A sample escalation policy that specifies a user in the escalation policy." style="width:100%;" >}}
 
 You can include specific users in an escalation policy to ensure key individuals are always notified in the event of a Page. Common use cases for directly paging a user are:
 
@@ -80,7 +80,7 @@ You can include specific users in an escalation policy to ensure key individuals
 - Routing alerts to a backup responder if the primary contact is unavailable.
 
 ### Teams
-{{< img src="service_management/oncall/escalation_policy_notify_team.png" alt="A sample escalation policy that notifies an entire Team." style="width:100%;" >}}
+{{< img src="incident_response/on-call/escalation_policy_notify_team.png" alt="A sample escalation policy that notifies an entire Team." style="width:100%;" >}}
 
 Common use cases for paging an entire Team are:
 

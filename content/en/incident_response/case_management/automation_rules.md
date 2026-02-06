@@ -3,7 +3,7 @@ title: Case automation rules
 aliases:
 - /service_management/case_management/automation_rules/
 further_reading:
-- link: "/incident_response/case_management"
+- link: "/service_management/case_management"
   tag: "Documentation"
   text: "Learn more about Case management"
 ---
@@ -27,7 +27,7 @@ To configure automation rules:
 1. Select **Automation**.
 1. Click **New Rule**.
 
-{{< img src="/service_management/case_management/automation_rules/create_case_automation_rule.png" alt="Screenshot of the Create Automation Rule dialog in a case management system. The dialog includes steps to set when to evaluate the rule, specify workflow for rule match, name the rule, and set its status." style="width:100%;" >}}
+{{< img src="/incident_response/case_management/automation_rules/create_case_automation_rule.png" alt="Screenshot of the Create Automation Rule dialog in a case management system. The dialog includes steps to set when to evaluate the rule, specify workflow for rule match, name the rule, and set its status." style="width:100%;" >}}
 
 Add the following to your configuration:
 

@@ -3,7 +3,7 @@ title: Set Up Your Mobile Device for Datadog On-Call
 aliases:
 - /service_management/on-call/guides/configure-mobile-device-for-on-call/
 further_reading:
-- link: "/incident_response/on-call/"
+- link: "/service_management/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
 ---

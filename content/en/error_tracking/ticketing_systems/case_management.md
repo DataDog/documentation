@@ -9,7 +9,7 @@ further_reading:
   - link: '/error_tracking/issue_states/'
     tag: 'Documentation'
     text: 'Issue States in Error Tracking'
-  - link: '/service_management/case_management/'
+  - link: '/incident_response/case_management/'
     tag: 'Documentation'
     text: 'Case Management'
 ---

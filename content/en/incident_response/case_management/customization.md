@@ -4,7 +4,7 @@ description: "Customize Datadog Case Management with custom case types, attribut
 aliases:
 - /service_management/case_management/customization/
 further_reading:
-- link: "/incident_response/case_management/"
+- link: "/service_management/case_management/"
   tag: "Documentation"
   text: "Case Management Overview"
 - link: "/incident_response/case_management/create_case"
@@ -50,7 +50,7 @@ After you create a custom case type, you must explicitly assign it to each proje
 4. Scroll down to the Case Types section in the settings panel.
 5. Under **From your organization**, open the dropdown and select the custom case type you created.
 
-{{< img src="/service_management/case_management/customization/enable_custom_attribute.png" alt="Enable a custom case type in project settings" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/customization/enable_custom_attribute.png" alt="Enable a custom case type in project settings" style="width:100%;" >}}
 
 After you add the case type, it is available as an option when you create a new case within that project.
 
@@ -70,7 +70,7 @@ Custom attributes allow you to capture the structured data your team needs to wo
 * Datacenters
 * Versions
 
-{{< img src="/service_management/case_management/customization/add_custom_attribute.png" alt="Add a custom attribute to a case type" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/customization/add_custom_attribute.png" alt="Add a custom attribute to a case type" style="width:100%;" >}}
 
 You can add attributes that reflect your team's specific needs, such as escalation levels, component owners, business impact, or external links. To add a custom attribute:
 

@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-{{< img src="/service_management/case_management/case_management_overview_cropped.png" alt="Overview of the Case Management page" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/case_management_overview_cropped.png" alt="Overview of the Case Management page" style="width:100%;" >}}
 
 Datadog Case Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a case, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the case.
 

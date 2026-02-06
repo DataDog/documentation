@@ -4,7 +4,7 @@ aliases:
 - /service_management/on-call/pages
 - /service_management/on-call/triggering_pages/
 further_reading:
-- link: '/incident_response/on-call/'
+- link: '/service_management/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -14,7 +14,7 @@ A Page is sent to a Team and subsequently routed through that Team's escalation 
 ### Page from notifications
 You can send a Page by mentioning a Team's handle with `oncall-` prepended. For example: to send a Page to the Checkout Operations team (`@checkout-operations`), mention `@oncall-checkout-operations`.
 
-{{< img src="service_management/oncall/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="Notification that mentions an On-Call Team." style="width:80%;" >}}
 
 You can send Pages to On-Call Teams wherever @-handles are supported, including monitors, Incident Management, security detection rules, Event Management, and more.
 
@@ -64,7 +64,7 @@ The new recipient is notified immediately, and the Page continues from its curre
 
 1. Go to [**On-Call** > **Teams**][2].
 1. Find the Team you want to page. Select **Page**.
-   {{< img src="service_management/oncall/manual_page.png" alt="The list of On-Call Teams, showing the Checkout Operations Team. Three buttons are displayed: Schedules, Escalation Policies, Page." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/manual_page.png" alt="The list of On-Call Teams, showing the Checkout Operations Team. Three buttons are displayed: Schedules, Escalation Policies, Page." style="width:80%;" >}}
 1. Enter a **Page title**. You can also select **Tags** and add more context in the **Description** field. Select **Page**.
 
 Manually paging a Team through Datadog always results in a `high` urgency Page.

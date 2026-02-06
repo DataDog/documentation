@@ -3,7 +3,7 @@ title: Onboard a Team
 aliases:
 - /service_management/on-call/teams/
 further_reading:
-- link: '/incident_response/on-call/'
+- link: '/service_management/on-call/'
   tag: 'Documentation'
   text: 'Datadog On-Call'
 ---
@@ -28,13 +28,13 @@ On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed o
   {{% /tab %}}
   {{< /tabs >}}
 1. Add a default escalation policy. 
-   {{< img src="service_management/oncall/escalation_policy_blank.png" alt="Setup view of a new escalation policy. Notifies three proposed schedules." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/escalation_policy_blank.png" alt="Setup view of a new escalation policy. Notifies three proposed schedules." style="width:80%;" >}}
    - Datadog automatically proposes _Interrupt Handler_, _Primary_, and _Secondary_ schedules for your Team. You can define these schedules in the next step. 
    - You can also notify an existing schedule owned by another Team. 
 
    See [Escalation Policies][5] for more details.
 1. Define the schedules created in the previous step. 
-   {{< img src="service_management/oncall/schedule_blank.png" alt="Setup view of a new schedule." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/schedule_blank.png" alt="Setup view of a new schedule." style="width:80%;" >}}
    - **Schedule Time Zone**: Select the time zone you want to operate your schedule in. Other settings, such as handoff times, adhere to this selection.
    - **Schedule Rotations**: Add your desired rotations.
    See [Schedules][6] for more details.

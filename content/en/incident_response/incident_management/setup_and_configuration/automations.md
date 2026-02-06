@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="/incident_response/incident_automations_workflow.png" alt="Incident automations workflow diagram showing automation actions." style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/automations/incident_automations_workflow.png" alt="Incident automations workflow diagram showing automation actions." style="width:100%;" >}}
 
 Automations enable you to customize and extend incident management to fit your organization's specific processes. Automatically trigger actions based on incident events such as severity changes, or state transitions.
 
@@ -78,7 +78,7 @@ Define conditions to specify which incidents trigger the automation. Conditions 
 
 **Example**: Set conditions for `severity:SEV-1`, `severity:SEV-2`, and `summary:is empty`. The automation runs when the incident is (SEV-1 **OR** SEV-2) **AND** the summary is empty.
 
-{{< img src="/incident_response/incident_automations_conditions.png" alt="Screenshot showing incident automation conditions configuration in Datadog. Displays UI for setting trigger, severity, and summary conditions." style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/automations/incident_automations_conditions.png" alt="Screenshot showing incident automation conditions configuration in Datadog. Displays UI for setting trigger, severity, and summary conditions." style="width:90%;" >}}
 
 ## Building automation workflows
 

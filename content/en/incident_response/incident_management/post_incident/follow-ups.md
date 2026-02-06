@@ -91,6 +91,6 @@ Organizations that need two-way sync should export to a Case Management project 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/incidents/settings?section=follow-ups
-[2]: /service_management/case_management
+[2]: /incident_response/case_management
 [4]: /integrations/jira/
 [5]: /service_management/incident_management/integrations/slack/#slack-commands

@@ -44,13 +44,13 @@ You must have a role with Incidents Write and Integrations Read permissions to a
 1. At the top of the incident page, click **Add a Statuspage incident**.
 1. Enter all the required fields, which include Select a Statuspage, Incident name, and Incident status. You can also specify which Statuspage components are affected.
 
-{{< img src="service_management/incidents/guide/statuspage/add_update_statuspage_form.png" alt="Form to add or update a Statuspage incident, including required fields for Select a Statuspage, Incident name, and Incident status" style="width:70%;" >}}
+{{< img src="incident_response/incident_management/setup_and_configuration/integrations/statuspage/add_update_statuspage_form.png" alt="Form to add or update a Statuspage incident, including required fields for Select a Statuspage, Incident name, and Incident status" style="width:70%;" >}}
 
 ## Update status
 
 After a Statuspage is added to an incident, you can continue updating the Statuspage until the incident is resolved.
 
-{{< img src="service_management/incidents/guide/statuspage/update_status_modal.png" alt="Example incident highlighting the linked statuspage incident and the option to Update Statuspage incident" style="width:80%;" >}}
+{{< img src="incident_response/incident_management/setup_and_configuration/integrations/statuspage/update_status_modal.png" alt="Example incident highlighting the linked statuspage incident and the option to Update Statuspage incident" style="width:80%;" >}}
 
 1. In the [Incidents page][4], open the incident you want to update.
 1. Find the Statuspage you added and click the button to open an integration modal. You can unlink the Statuspage integration, change the impact, or update the Statuspage.

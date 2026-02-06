@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="service_management/incidents/analytics/incident_analytics.mp4" alt="Scroll through the Incident Management Overview dashboard" video=true style="width:100%;">}}
+{{< img src="incident_response/incident_management/analytics_and_reporting/incident_analytics.mp4" alt="Scroll through the Incident Management Overview dashboard" video=true style="width:100%;">}}
 
 Use Incident Analytics to learn from past incidents and understand the efficiency and performance of your incident response process. Incident analytics allows you to pull aggregated statistics on your incidents over time. You can use these statistics to create reports that help you to:
 - Analyze whether your incident response process is improving over time
@@ -86,7 +86,7 @@ To configure your graph using Incident Management Analytics data, follow these s
 
 ### Example: Weekly outage customer impact duration grouped by service
 
-{{< img src="/service_management/incidents/analytics/analytics_graph_configuration.png" alt="Timeseries graph configuration showing Incidents data source filtered by severity, showing the customer impact duration grouped by service" style="width:90%;" >}}
+{{< img src="/incident_response/incident_management/analytics_and_reporting/analytics_graph_configuration.png" alt="Timeseries graph configuration showing Incidents data source filtered by severity, showing the customer impact duration grouped by service" style="width:90%;" >}}
 
 This example configuration shows you an aggregation of your incidents that are SEV-1 or SEV-2. The graph displays the Customer Impact Duration of those incidents grouped by service.
 

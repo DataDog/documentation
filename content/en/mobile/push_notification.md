@@ -2,7 +2,7 @@
 title: Set Up Push Notifications on Mobile App
 description: "Configure push notifications on iOS and Android for on-call alerts, incidents, and workflow updates with critical alert settings."
 further_reading:
-- link: "/incident_response/on-call/"
+- link: "/service_management/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
 - link: "/incident_response/incident_management/notification/"

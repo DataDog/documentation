@@ -72,7 +72,7 @@ Incident AI can dynamically populate key details in stakeholder notifications, d
         </tr>
     </tbody>
    </table>
-   {{< img src="service_management/incidents/incident_ai/message_template_variables.png" alt="New message template with AI variables in it" style="width:100%;" >}}
+   {{< img src="incident_response/incident_management/investigate/incident_ai/message_template_variables.png" alt="New message template with AI variables in it" style="width:100%;" >}}
 1. Click **Save** to save the template.
 1. Go to your incident [Notification Rules][2].
 1. Click **New Rule**.
@@ -85,7 +85,7 @@ When you join an incident channel in Slack (connected to Datadog Incident Manage
 
 When an incident is changed to resolved, Incident AI posts a final summary. This is visible to everyone in the channel.
 
-{{< img src="service_management/incidents/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/incident_summary.png" alt="Example incident summary in Slack" style="width:100%;" >}}
 
 ## Proactive follow-up task suggestion
 
