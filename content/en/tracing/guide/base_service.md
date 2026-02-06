@@ -2,6 +2,8 @@
 title: Base Service, Integration Overrides, and Service Overrides
 description: Understand service overrides, integration overrides, and how to adapt your configuration when using inferred services to improve service dependency representation.
 disable_toc: false
+aliases:
+- /tracing/guide/service_overrides/
 further_reading:
 - link: "/tracing/services/service_override_removal"
   tag: "Documentation"
@@ -31,19 +33,19 @@ Integration overrides and service overrides are represented similarly in APM.
 
 Services that are overrides are flagged in the service page header. Hover over the flag to see the list of base services where the service name is overridden.
 
-{{< img src="/tracing/guide/service_overrides/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
+{{< img src="/tracing/guide/base_service/service_overrides_service_page.png" alt="Service page overrides" style="width:70%;">}}
 
 #### In service maps
 
 In service maps, overrides are represented as part of the edge going from the base service and the inferred service.
 
-{{< img src="/tracing/guide/service_overrides/service_overrides_service_map.png" alt="Service map overrides" style="width:80%;">}}
+{{< img src="/tracing/guide/base_service/service_overrides_service_map.png" alt="Service map overrides" style="width:80%;">}}
 
 #### In traces
 
 In the trace side panel, the client span header represents the call going from the base service to the inferred service. The top of the overview section also shows information about the base service name, the overridden service name, and the inferred entity name.
 
-{{< img src="/tracing/guide/service_overrides/service_overrides_traces.png" alt="Trace side panel service overrides" style="width:80%;">}}
+{{< img src="/tracing/guide/base_service/service_overrides_traces.png" alt="Trace side panel service overrides" style="width:80%;">}}
 
 
 ## Removing integration overrides
