@@ -134,7 +134,7 @@ The Metric Context: Source Code section in the metric side panel provides a cent
 
 {{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Context: Source Code is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
 
-Use the Metric Context: Source Code to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
+Use the Metric Context: Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
 
 {{< img src="metrics/summary/metric_context_source_code_02052026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
