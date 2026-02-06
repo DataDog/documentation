@@ -73,14 +73,14 @@ Use these tables to decide which solution to start with:
 | Vulnerability prioritization              | Yes                                           | Yes, with runtime context      |
 | Vulnerability scanning frequency          | 12 hours                                      | Real-time                      |
 
-| Vulnerability detection scope             | Agentless                                     | Unified Datadog Agent          |
-|-------------------------------------------|-----------------------------------------------|--------------------------------|
-| Host and host image                       | OS packages and app packages, mapped to image | OS packages                    |
-| Container image                           | OS packages and app packages, mapped to image | OS packages                    |
-| Cloud provider                            | AWS, Azure, GCP                               | AWS, Azure, GCP, on-prem, etc. |
-| Operating system                          | Linux, Windows                                | Linux, Windows                 |
-| Serverless                                | AWS Lambda, AWS ECS Fargate, GCP Cloud Run    | Not applicable                 |
-| Container registries                      | AWS ECR, Google Artifact Registry             | Not applicable                 |
+| Vulnerability detection scope | Agentless                                     | Unified Datadog Agent          |
+|-------------------------------|-----------------------------------------------|--------------------------------|
+| Host and host image           | OS packages and app packages, mapped to image | OS packages                    |
+| Container image               | OS packages and app packages, mapped to image | OS packages                    |
+| Cloud provider                | AWS, Azure, GCP                               | AWS, Azure, GCP, on-prem, etc. |
+| Operating system              | Linux, Windows                                | Linux, Windows                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, GCP Cloud Run | Not applicable                 |
+| Container registries          | Amazon ECR, Google Artifact Registry          | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
