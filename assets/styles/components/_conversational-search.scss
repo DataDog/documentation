@@ -11,7 +11,7 @@ $conv-search-text-muted: #6b7280; // Gray-500
 $conv-search-user-bg: #632CA6;
 $conv-search-assistant-bg: #f4f4f5;
 
-// Floating Button - Squarish shape, purple filled
+// Floating Button - Uses brand primary purple
 .conv-search-float-btn {
     position: fixed;
     bottom: 24px;
@@ -20,7 +20,7 @@ $conv-search-assistant-bg: #f4f4f5;
     height: 44px;
     padding: 0 16px;
     border-radius: 4px;
-    background: $conv-search-purple;
+    background: $conv-search-purple; // Brand primary #632CA6
     border: none;
     cursor: pointer;
     display: flex;
@@ -875,8 +875,8 @@ $conv-search-assistant-bg: #f4f4f5;
     height: 38px; // Match search bar height for alignment
     border: none;
     border-radius: 4px;
-    background: white;
-    color: $conv-search-purple;
+    background: $conv-search-purple-dark; // Darker purple as default
+    color: white;
     font-size: 14px;
     font-weight: 600;
     font-family: inherit;
@@ -884,7 +884,7 @@ $conv-search-assistant-bg: #f4f4f5;
     transition: all 0.15s ease;
     flex-shrink: 0;
     white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(99, 44, 166, 0.25);
     
     .conv-search-enabled & {
         display: inline-flex;
@@ -897,12 +897,12 @@ $conv-search-assistant-bg: #f4f4f5;
     }
     
     &:hover {
-        background: #f8f8f8;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        background: $conv-search-purple; // Lighter purple on hover
+        box-shadow: 0 4px 12px rgba(99, 44, 166, 0.35);
     }
     
     &:active {
-        background: #f0f0f0;
+        background: darken($conv-search-purple-dark, 5%);
     }
 }
 
