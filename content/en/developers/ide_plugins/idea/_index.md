@@ -76,9 +76,9 @@ To remove a service, select it in the **Services** table and click the minus ico
 ### Error Tracking
 The [**Error Tracking**][25] integration helps you find and fix runtime errors from Error Tracking.
 
-{{< img src="/developers/ide_plugins/idea/error-tracking-in-editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/error_tracking/editor.png" alt="Error tracking in the source editor" style="width:100%;" >}}
 
-Click the inlay to open the Datadog tool-window and inspect details of the runtime error.
+Click the gutter icon to open the Datadog tool window and inspect details of the runtime error.
 
 ### Logs
 
