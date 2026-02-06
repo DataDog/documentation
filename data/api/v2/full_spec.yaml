@@ -494,6 +494,15 @@ components:
         items:
           $ref: '#/components/schemas/GetIssueIncludeQueryParameterItem'
         type: array
+    IncidentID:
+      description: The UUID of the incident.
+      in: path
+      name: incident_id
+      required: true
+      schema:
+        example: 9cecfde8-e35d-4387-8985-9b30dcb9cb1c
+        format: uuid
+        type: string
     IncidentIDPathParameter:
       description: The UUID of the incident.
       in: path
@@ -660,6 +669,14 @@ components:
       schema:
         example: ExampleTeamName
         type: string
+    IncidentTimestampOverrideInclude:
+      description: Specifies which types of related objects are included in the response.
+      in: query
+      name: include
+      required: false
+      schema:
+        example: created_by_user,last_modified_by_user
+        type: string
     IncidentTodoIDPathParameter:
       description: The UUID of the incident todo.
       in: path
@@ -689,6 +706,15 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/IncludeType'
+    IncludeDeleted:
+      description: Specifies whether to include deleted timestamp overrides in the
+        response.
+      in: query
+      name: include-deleted
+      required: false
+      schema:
+        example: false
+        type: boolean
     InstanceId:
       description: The ID of the workflow instance.
       in: path
@@ -1137,6 +1163,15 @@ components:
       name: histsignal_id
       required: true
       schema:
+        type: string
+    TimestampOverrideID:
+      description: The UUID of the timestamp override.
+      in: path
+      name: timestamp_override_id
+      required: true
+      schema:
+        example: 6f48a86f-9a39-4bcf-a76b-9a1b20188995
+        format: uuid
         type: string
     ToTimestamp:
       description: The ending timestamp for the SLO status query in epoch seconds.
@@ -30326,6 +30361,168 @@ components:
           nullable: false
           type: string
       type: object
+    IncidentTimestampOverrideAttributes:
+      description: Attributes of an incident timestamp override.
+      properties:
+        created_at:
+          description: Timestamp of when the override was created.
+          example: '2026-01-13T17:15:55.379155748Z'
+          format: date-time
+          type: string
+        deleted_at:
+          description: Timestamp of when the override was deleted (soft delete).
+          example: null
+          format: date-time
+          nullable: true
+          type: string
+        incident_id:
+          description: The UUID of the incident.
+          example: 9cecfde8-e35d-4387-8985-9b30dcb9cb1c
+          format: uuid
+          type: string
+        modified_at:
+          description: Timestamp of when the override was last modified.
+          example: '2026-01-13T17:15:55.379155834Z'
+          format: date-time
+          type: string
+        timestamp_type:
+          $ref: '#/components/schemas/TimestampType'
+        timestamp_value:
+          description: The timestamp value for the override.
+          example: '2024-12-29T10:00:00Z'
+          format: date-time
+          type: string
+      required:
+      - incident_id
+      - timestamp_type
+      - timestamp_value
+      - created_at
+      - modified_at
+      - deleted_at
+      type: object
+    IncidentTimestampOverrideCreateAttributes:
+      description: Attributes for creating an incident timestamp override.
+      properties:
+        timestamp_type:
+          $ref: '#/components/schemas/TimestampType'
+        timestamp_value:
+          description: The timestamp value for the override.
+          example: '2024-12-29T10:00:00Z'
+          format: date-time
+          type: string
+      required:
+      - timestamp_type
+      - timestamp_value
+      type: object
+    IncidentTimestampOverrideCreateData:
+      description: Data for creating an incident timestamp override.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTimestampOverrideCreateAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentsTimestampOverridesType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTimestampOverrideCreateRequest:
+      description: Request to create an incident timestamp override.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTimestampOverrideCreateData'
+      required:
+      - data
+      type: object
+    IncidentTimestampOverrideData:
+      description: Data for a single incident timestamp override.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTimestampOverrideAttributes'
+        id:
+          description: The UUID of the timestamp override.
+          example: 35301c93-75c0-4ec4-a889-28e1dfc092a9
+          format: uuid
+          type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentTimestampOverrideRelationships'
+        type:
+          $ref: '#/components/schemas/IncidentsTimestampOverridesType'
+      required:
+      - id
+      - type
+      - attributes
+      - relationships
+      type: object
+    IncidentTimestampOverridePatchAttributes:
+      description: Attributes for patching an incident timestamp override.
+      properties:
+        timestamp_value:
+          description: The timestamp value for the override.
+          example: '2024-12-29T11:00:00Z'
+          format: date-time
+          type: string
+      required:
+      - timestamp_value
+      type: object
+    IncidentTimestampOverridePatchData:
+      description: Data for patching an incident timestamp override.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IncidentTimestampOverridePatchAttributes'
+        type:
+          $ref: '#/components/schemas/IncidentsTimestampOverridesType'
+      required:
+      - type
+      - attributes
+      type: object
+    IncidentTimestampOverridePatchRequest:
+      description: Request to patch an incident timestamp override.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTimestampOverridePatchData'
+      required:
+      - data
+      type: object
+    IncidentTimestampOverrideRelationships:
+      description: Relationships for incident timestamp override.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/TimestampOverrideUserRelationship'
+        last_modified_by_user:
+          $ref: '#/components/schemas/TimestampOverrideUserRelationship'
+      required:
+      - created_by_user
+      - last_modified_by_user
+      type: object
+    IncidentTimestampOverrideResponse:
+      description: Response containing a single incident timestamp override.
+      properties:
+        data:
+          $ref: '#/components/schemas/IncidentTimestampOverrideData'
+        included:
+          description: Included related resources.
+          items:
+            $ref: '#/components/schemas/UserIncluded'
+          type: array
+      required:
+      - data
+      type: object
+    IncidentTimestampOverridesResponse:
+      description: Response containing a list of incident timestamp overrides.
+      properties:
+        data:
+          description: Array of incident timestamp overrides.
+          items:
+            $ref: '#/components/schemas/IncidentTimestampOverrideData'
+          type: array
+        included:
+          description: Included related resources.
+          items:
+            $ref: '#/components/schemas/UserIncluded'
+          type: array
+      required:
+      - data
+      type: object
     IncidentTodoAnonymousAssignee:
       description: Anonymous assignee entity.
       properties:
@@ -30986,6 +31183,15 @@ components:
       required:
       - data
       type: object
+    IncidentsTimestampOverridesType:
+      default: incidents_timestamp_overrides
+      description: The JSON:API type for timestamp overrides.
+      enum:
+      - incidents_timestamp_overrides
+      example: incidents_timestamp_overrides
+      type: string
+      x-enum-varnames:
+      - INCIDENTS_TIMESTAMP_OVERRIDES
     IncludeType:
       description: Supported include types.
       enum:
@@ -64287,6 +64493,44 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
+    TimestampOverrideUserRelationship:
+      description: Relationship to a user.
+      properties:
+        data:
+          $ref: '#/components/schemas/TimestampOverrideUserRelationshipData'
+      required:
+      - data
+      type: object
+    TimestampOverrideUserRelationshipData:
+      description: User relationship data.
+      properties:
+        id:
+          description: The UUID of the user.
+          example: 8ec982dd-cd99-41c6-992a-c47fc9168cad
+          format: uuid
+          type: string
+        type:
+          description: The type of the related resource.
+          example: users
+          type: string
+      required:
+      - id
+      - type
+      type: object
+    TimestampType:
+      description: The type of timestamp being overridden.
+      enum:
+      - created
+      - detected
+      - resolved
+      - declared
+      example: created
+      type: string
+      x-enum-varnames:
+      - CREATED
+      - DETECTED
+      - RESOLVED
+      - DECLARED
     TokenName:
       description: Name for tokens.
       example: MyTokenName
@@ -66025,6 +66269,56 @@ components:
           $ref: '#/components/schemas/UserCreateData'
       required:
       - data
+      type: object
+    UserIncluded:
+      description: Included user data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserIncludedAttributes'
+        id:
+          description: The UUID of the user.
+          example: 8ec982dd-cd99-41c6-992a-c47fc9168cad
+          format: uuid
+          type: string
+        type:
+          description: The type of the included resource.
+          example: users
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    UserIncludedAttributes:
+      description: Attributes of an included user.
+      properties:
+        email:
+          description: The email address of the user.
+          example: fake1@email.com
+          type: string
+        handle:
+          description: The handle of the user.
+          example: fakeUserHandle1
+          type: string
+        icon:
+          description: The icon URL for the user.
+          example: http://a.com/some-icon-1.jpg
+          type: string
+        name:
+          description: The name of the user.
+          example: fakeUserName1
+          type: string
+        uuid:
+          description: The UUID of the user.
+          example: 8ec982dd-cd99-41c6-992a-c47fc9168cad
+          format: uuid
+          type: string
+      required:
+      - email
+      - handle
+      - icon
+      - name
+      - uuid
       type: object
     UserInvitationData:
       description: Object to create a user invitation.
@@ -80002,6 +80296,188 @@ paths:
         permissions:
         - incident_write
       x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/timestamp-overrides:
+    get:
+      description: Get all timestamp overrides for a specific incident.
+      operationId: ListIncidentTimestampOverrides
+      parameters:
+      - $ref: '#/components/parameters/IncidentID'
+      - $ref: '#/components/parameters/IncidentTimestampOverrideInclude'
+      - $ref: '#/components/parameters/IncludeDeleted'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTimestampOverridesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_read
+      summary: List timestamp overrides for an incident
+      tags:
+      - Incidents
+      x-menu-order: 49
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create a new timestamp override for a specific incident.
+      operationId: CreateIncidentTimestampOverride
+      parameters:
+      - $ref: '#/components/parameters/IncidentID'
+      - $ref: '#/components/parameters/IncidentTimestampOverrideInclude'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTimestampOverrideCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTimestampOverrideResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Create a timestamp override for an incident
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 50
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/incidents/{incident_id}/timestamp-overrides/{timestamp_override_id}:
+    delete:
+      description: Delete an existing timestamp override for a specific incident.
+      operationId: DeleteIncidentTimestampOverride
+      parameters:
+      - $ref: '#/components/parameters/IncidentID'
+      - $ref: '#/components/parameters/TimestampOverrideID'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Delete a timestamp override for an incident
+      tags:
+      - Incidents
+      x-menu-order: 52
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update an existing timestamp override for a specific incident.
+      operationId: UpdateIncidentTimestampOverride
+      parameters:
+      - $ref: '#/components/parameters/IncidentID'
+      - $ref: '#/components/parameters/TimestampOverrideID'
+      - $ref: '#/components/parameters/IncidentTimestampOverrideInclude'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IncidentTimestampOverridePatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncidentTimestampOverrideResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - incident_write
+      summary: Update a timestamp override for an incident
+      tags:
+      - Incidents
+      x-codegen-request-body-name: body
+      x-menu-order: 51
+      x-unstable: '**Note**: This endpoint is in preview and is subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/integration/aws/accounts:
