@@ -113,7 +113,7 @@ A typical showback dashboard might include:
 
 This comprehensive view helps stakeholders understand spending patterns, identify optimization opportunities, and correlate costs with system behavior. For example, you can track cost spikes during deployments, correlate traffic spikes with cost increases, and measure cost reductions from performance improvements.
 
-   {{< img src="cloud_cost/reporting/dashboards/example-showback-dashboard.png" alt="Dashboard widget tray displaying Cost Summary, Cost Budget, and Cloud Cost widget options" style="width:100%;" >}}
+   {{< img src="cloud_cost/reporting/dashboards/example-showback-dashboard-1.png" alt="Dashboard widget tray displaying Cost Summary, Cost Budget, and Cloud Cost widget options" style="width:100%;" >}}
 
 ## Share and collaborate
 
