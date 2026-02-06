@@ -94,7 +94,7 @@ Build benchmark datasets with human-verified labels for regression testing and c
 
 Add traces to a queue manually from the Trace Explorer:
 
-1. Navigate to [**AI Observability > Traces**][2]
+1. Navigate to [**AI Observability > Traces**][1]
 2. Filter traces using available facets (evaluation results, error status, application, time range)
 3. Select individual traces or bulk select multiple traces
 4. Click **Flag for Annotation**
@@ -146,7 +146,7 @@ Review your queue configuration and click **Create** to create the queue. Select
 
 ### Accessing your queues
 
-Navigate to [**AI Observability > Experiment > Annotations**][3] to see all available annotation queues. Click on a queue to see the trace list, then click **Review** to begin annotating.
+Navigate to [**AI Observability > Experiment > Annotations**][2] to see all available annotation queues. Click on a queue to see the trace list, then click **Review** to begin annotating.
 
 Review Mode displays:
 - **Full trace context** (right panel):
@@ -218,7 +218,7 @@ Transfer annotated traces to datasets for experiment evaluation:
 4. Choose existing dataset or create new
 5. Human labels are included with each trace as metadata
 
-See [Datasets documentation][4] for more on using datasets in experiments.
+See [Datasets documentation][3] for more on using datasets in experiments.
 
 ### Deleting queues
 
@@ -239,7 +239,6 @@ To delete a queue:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /llm_observability/evaluations/automations
-[2]: https://app.datadoghq.com/llm/traces
-[3]: https://app.datadoghq.com/llm/annotations
-[4]: /llm_observability/datasets
+[1]: https://app.datadoghq.com/llm/traces
+[2]: https://app.datadoghq.com/llm/annotations/queues
+[3]: /llm_observability/experiments/datasets
