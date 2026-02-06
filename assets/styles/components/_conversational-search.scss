@@ -72,7 +72,7 @@ $conv-search-assistant-bg: #f4f4f5;
     }
 }
 
-// Modal (top 5%, centered, grows with content, less space at bottom)
+// Modal (top 5%, centered, never overflows viewport)
 .conv-search-sidebar {
     position: fixed;
     top: 5%;
@@ -80,9 +80,9 @@ $conv-search-assistant-bg: #f4f4f5;
     transform: translateX(-50%) scale(0.95);
     z-index: 10000;
     width: 90vw;
-    min-height: 500px;
     max-width: 720px;
-    max-height: 800px;
+    min-height: unquote("min(600px, 80vh)"); // Keep dialog tall after suggestions are removed
+    max-height: unquote("min(800px, 90vh)"); // Never exceed 90% of viewport height
     background: $conv-search-bg;
     display: flex;
     flex-direction: column;
@@ -101,13 +101,6 @@ $conv-search-assistant-bg: #f4f4f5;
         visibility: visible;
     }
 
-    // Small vertical screens - constrain to viewport
-    @media (max-height: 600px) {
-        min-height: unset;
-        height: calc(100vh - 10%);
-        max-height: calc(100vh - 10%);
-    }
-
     // Mobile - full screen
     @media (max-width: 640px) {
         inset: 0;
@@ -118,7 +111,6 @@ $conv-search-assistant-bg: #f4f4f5;
         max-width: none;
         height: 100%;
         max-height: none;
-        min-height: unset;
         border-radius: 0;
         
         &.open {
