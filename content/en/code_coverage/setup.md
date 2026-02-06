@@ -385,7 +385,6 @@ test:
     DD_API_KEY: $(DD_API_KEY)
     DD_SITE: 'datadoghq.com'
 </code>
-</pre>
 {{% /tab %}}
 {{< /tabs >}}
 
