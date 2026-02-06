@@ -186,8 +186,7 @@ Custom authentication detection is possible by configuring [Endpoint Tagging Rul
 |Technology| Minimum tracer version |
 |----------|------------------------|
 |Java      | v1.55.0                |
-|.NET Core | Coming Soon            |
-|.NET Fx   | v2.47.0                |
+|.NET      | Coming Soon            |
 |Node.js   | v5.76.0                |
 |Python    | v3.17.0                |
 |Ruby      | v2.23.0                |
