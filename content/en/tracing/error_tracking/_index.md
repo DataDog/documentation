@@ -42,6 +42,15 @@ The Datadog tracers collect errors through integrations and the manual instrumen
 
 Error Tracking computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue. For more information, see the [Trace Explorer documentation][2].
 
+## Control which errors are tracked
+
+While Error Tracking automatically processes all error spans, you can control which errors are ingested and how they are managed:
+
+- **Filter errors with inclusion and exclusion rules**: Define rules to include or exclude errors based on attributes such as service, environment, or error type. See [Manage Data Collection][7].
+- **Set rate limits**: Control the volume of errors ingested per day to manage costs. See [Manage Data Collection][7].
+- **Exclude specific issues**: Mark recurring non-actionable issues as `EXCLUDED` to stop collecting them. See [Issue States][8].
+- **Filter entire traces**: To prevent traces from being sent to Datadog (rather than filtering errors), see [Ignoring Unwanted Resources in APM][9].
+
 ## Examine issues to start troubleshooting or debugging
 
 Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][5]. See the [Error Tracking Explorer documentation][3] for a tour of key features.
@@ -58,3 +67,6 @@ Issues created from APM include the distribution of impacted spans, the latest m
 [4]: /tracing
 [5]: https://app.datadoghq.com/apm/error-tracking
 [6]: /integrations/guide/source-code-integration
+[7]: /error_tracking/manage_data_collection/
+[8]: /error_tracking/issue_states/
+[9]: /tracing/guide/ignoring_apm_resources/
