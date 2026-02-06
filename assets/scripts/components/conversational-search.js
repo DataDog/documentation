@@ -126,11 +126,12 @@ class ConversationalSearch {
                     </span>
                 </div>
                 <div class="conv-search-header-actions">
-                    <button class="conv-search-new" aria-label="New chat" title="New chat">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <button class="conv-search-new" aria-label="New Question" title="New Question">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
                         </svg>
+                        <span>New Question</span>
                     </button>
                     <button class="conv-search-close" aria-label="Close">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -265,12 +266,8 @@ class ConversationalSearch {
         this.overlay.classList.remove('open');
         this.floatButton.classList.remove('hidden');
         document.body.style.overflow = '';
-        
-        // Abort any ongoing request
-        if (this.abortController) {
-            this.abortController.abort();
-            this.abortController = null;
-        }
+        // Let any ongoing request continue in the background so the
+        // response is still there when the user reopens the dialog.
     }
 
     newChat() {
