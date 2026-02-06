@@ -2,46 +2,18 @@
 let cachedUrl = null;
 let cachedText = null;
 
-async function prefetchPageText(copyButton) {
-    const mdUrl = copyButton.dataset.mdUrl;
-
-    if (!mdUrl) {
-        console.warn('No Markdown URL found for prefetching.');
-        return;
-    }
-
-    if (cachedUrl === mdUrl) {
-        return; // Already cached
-    }
-
-    try {
-        const response = await fetch(mdUrl);
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch Markdown: ${response.status}`);
-        }
-
-        const text = await response.text();
-        cachedUrl = mdUrl;
-        cachedText = text;
-    } catch (err) {}
-}
-
 async function copyPageText(copyButton) {
     console.log('Copying page text to clipboard ...');
     const mdUrl = copyButton.dataset.mdUrl;
 
-    try {
-        let text;
+    let text;
 
+    try {
         if (!mdUrl) {
-            // Use fallback extraction from DOM
             text = extractMainContentAsMarkdown();
         } else if (cachedUrl === mdUrl && cachedText) {
-            // Check if we have cached content from hover
             text = cachedText;
         } else {
-            // Fallback to fetching if not cached
             const response = await fetch(mdUrl, { credentials: 'omit' });
 
             if (!response.ok) {
@@ -49,19 +21,19 @@ async function copyPageText(copyButton) {
             }
 
             text = await response.text();
+            console.log('Markdown content fetched successfully for copy.');
         }
-
-        await navigator.clipboard.writeText(text);
-
-        // Optional UX feedback
-        displaySuccessFeedback();
-
-        console.log(text);
-        console.log('Above text copied to clipboard.');
     } catch (err) {
-        console.error('Error copying plaintext markdown:', err);
-        alert('Failed to copy page text. Please try again.');
+        text = extractMainContentAsMarkdown();
     }
+
+    await navigator.clipboard.writeText(text);
+
+    // Optional UX feedback
+    displaySuccessFeedback();
+
+    console.log(text);
+    console.log('Above text copied to clipboard.');
 }
 
 function displaySuccessFeedback() {
@@ -175,4 +147,30 @@ function extractMainContentAsMarkdown() {
         .replace(/ +\n/g, '\n')
         .replace(/\n{3,}/g, '\n\n')
         .trim();
+}
+
+async function prefetchPageText(copyButton) {
+    const mdUrl = copyButton.dataset.mdUrl;
+
+    if (!mdUrl) {
+        console.warn('No Markdown URL found for prefetching.');
+        return;
+    }
+
+    if (cachedUrl === mdUrl) {
+        return; // Already cached
+    }
+
+    try {
+        const response = await fetch(mdUrl);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch Markdown: ${response.status}`);
+        }
+
+        const text = await response.text();
+        console.log('Markdown content prefetched successfully for copy.');
+        cachedUrl = mdUrl;
+        cachedText = text;
+    } catch (err) {}
 }
