@@ -227,6 +227,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 
     a {
+        position: relative;
         font-size: 18px;
         &:lang(ja) {
             font-size: 16px;
@@ -243,7 +244,25 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 }
 
 .copy-btn-icon__after {
-    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+
+    img {
+        opacity: inherit;
+    }
+}
+
+.copy-btn-icon__before {
+    position: relative;
+    top: -1px;
+    left: 0;
+    opacity: 1;
+
+    img {
+        opacity: inherit;
+    }
 }
 
 .toc-container-mobile {

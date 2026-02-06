@@ -70,15 +70,14 @@ function displaySuccessFeedback() {
     const beforeIcon = document.querySelector('#page-copy-btn .copy-btn-icon__before');
     const afterIcon = document.querySelector('#page-copy-btn .copy-btn-icon__after');
 
-    beforeIcon.style.display = 'none';
-    afterIcon.style.display = 'inline';
-    afterIcon.querySelector('img').style.display = 'inline';
+    beforeIcon.style.opacity = '0';
+    afterIcon.style.opacity = '1';
 
     setTimeout(() => {
         copyText.style.display = 'inline';
         copiedText.style.display = 'none';
-        beforeIcon.style.display = 'inline';
-        afterIcon.style.display = 'none';
+        beforeIcon.style.opacity = '1';
+        afterIcon.style.opacity = '0';
     }, 3000);
 }
 
