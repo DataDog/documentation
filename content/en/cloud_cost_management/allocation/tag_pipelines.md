@@ -56,7 +56,10 @@ For example, you can create a rule to tag all resources with their business unit
 
 Under the **Additional options** section, you have the following options:
 
-- **Only apply if tag `{tag}` doesn't exist** - Ensures the rule only applies if the specified tag (`business-unit` in the example above) doesn't already exist.
+- **Action when tag `{tag}` exists** - Choose what to do if the specified tag (`business-unit` in the example above) already exists:
+  - **Don't apply the rule** - Skips the rule if the tag already exists, preserving the original value.
+  - **Append the tag** - Adds the new value to the existing tag without removing the original value.
+  - **Replace the tag** - Replaces the existing tag value with the new value. <div class="alert alert-warning">Replacing tags can overwrite existing data. Use this option with caution.</div>
 - **Apply case-insensitive matching to resource tags** - Enables tags defined in the `To resources with tag(s)` field and tags from the cost data to be case insensitive. For example, if resource tags from the UI are: `foo:bar` and the tag from the cost data is `Foo:bar`, then the two can be matched.
 
 ### Alias tag keys
