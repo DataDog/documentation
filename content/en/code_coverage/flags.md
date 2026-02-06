@@ -13,10 +13,6 @@ further_reading:
     text: "Configure Code Coverage"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
-
 ## Overview
 
 Flags let you organize and filter coverage data by custom categories. Use flags to separate coverage reports by test type (unit, integration, end-to-end), runtime version (JVM 17, JVM 21), or any other criteria relevant to your project.
