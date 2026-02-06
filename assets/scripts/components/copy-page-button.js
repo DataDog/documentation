@@ -39,7 +39,16 @@ async function copyPageText() {
  * from the URL of the HTML page.
  */
 function getMdUrl() {
-    let url = `http://docs.datadoghq.com` + window.location.pathname;
+    const commitRef = document.documentElement.dataset.commitRef || '';
+    const commitRefLen = commitRef.length ? commitRef.length + 1 : 0;
+
+    // Remove branch name from pathname if in preview/staging
+    let pathname = window.location.pathname;
+    if (commitRefLen > 0) {
+        pathname = pathname.slice(commitRefLen);
+    }
+
+    let url = `https://docs.datadoghq.com` + pathname;
     if (url.endsWith('/')) {
         url = url.slice(0, -1);
     }
