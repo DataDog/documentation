@@ -131,7 +131,7 @@ Use this field to update the descriptions for your [custom metrics][4].
 
 ## Metric Context: Source Code
 
-The Metric Context: Source Code provides a centralized view of every Custom Metric and its underlying context. 
+The Metric Context: Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
 
 {{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Context: Source Code is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
 
