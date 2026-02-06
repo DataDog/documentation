@@ -117,8 +117,6 @@ If you want to make changes to your pipeline after you have deployed it, see [Up
 
 ## Set up a pipeline with the API
 
-<div class="alert alert-info">Creating pipelines using the Observability Pipelines API is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/observability-pipelines-api-and-terraform-support/"> form</a> to request access.</div>
-
 1. Use the Observability Pipelines API to [create a pipeline][6]. See the API reference for example request payloads.
 
 1. After creating the pipeline, [install the Worker][7] to send data through the pipeline.

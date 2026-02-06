@@ -4090,71 +4090,26 @@ menu:
       parent: tracing_trace_collection
       identifier: custom_instrumentation
       weight: 203
-    - name: Java
-      url: tracing/trace_collection/custom_instrumentation/java/otel
+    - name: Server-Side Languages
+      url: tracing/trace_collection/custom_instrumentation/server-side/
       parent: custom_instrumentation
-      identifier: custom_instrumentation_java
+      identifier: custom_instrumentation_server_side
       weight: 2031
-    - name: Python
-      url: tracing/trace_collection/custom_instrumentation/python/otel
+    - name: Client-Side Languages
+      url: tracing/trace_collection/custom_instrumentation/client-side/
       parent: custom_instrumentation
-      identifier: custom_instrumentation_python
+      identifier: custom_instrumentation_client_side
       weight: 2032
-    - name: Ruby
-      url: tracing/trace_collection/custom_instrumentation/ruby/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_ruby
-      weight: 2033
-    - name: Go
-      url: tracing/trace_collection/custom_instrumentation/go/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_go
-      weight: 2034
-    - name: Node.js
-      url: tracing/trace_collection/custom_instrumentation/nodejs/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_nodejs
-      weight: 2035
-    - name: PHP
-      url: tracing/trace_collection/custom_instrumentation/php/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_php
-      weight: 2036
-    - name: C++
-      url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_cpp
-      weight: 2037
-    - name: .NET
-      url: tracing/trace_collection/custom_instrumentation/dotnet/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_dotnet
-      weight: 2038
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android/otel
-      parent: custom_instrumentation
+      url: tracing/trace_collection/custom_instrumentation/client-side/android/otel
+      parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_android
-      weight: 2039
+      weight: 20321
     - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/ios/otel
-      parent: custom_instrumentation
+      url: tracing/trace_collection/custom_instrumentation/client-side/ios/otel
+      parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_ios
-      weight: 2040
-    - name: Rust
-      url: tracing/trace_collection/custom_instrumentation/rust
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_rust
-      weight: 2041
-    - name: Swift
-      url: tracing/trace_collection/custom_instrumentation/swift
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_swift
-      weight: 2042
-    - name: Elixir
-      url: tracing/trace_collection/custom_instrumentation/elixir
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_elixir
-      weight: 2043
+      weight: 20322
     - name: Dynamic Instrumentation
       url: tracing/trace_collection/dynamic_instrumentation/
       identifier: dyninst
@@ -5745,7 +5700,7 @@ menu:
       weight: 4
     - name: Feature Flags
       url: feature_flags/
-      pre: ci
+      pre: signpost
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
@@ -5809,6 +5764,11 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
+    - name: Flag History
+      url: feature_flags/history
+      parent: feature_flags
+      identifier: feature_flags_history
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
