@@ -77,7 +77,7 @@ Use these tables to decide which solution to start with:
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
 | Host and host image                       | OS packages and app packages, mapped to image | OS packages                    |
 | Container image                           | OS packages and app packages, mapped to image | OS packages                    |
-| Cloud provider                            | AWS, [Azure (Preview)][15], GCP               | AWS, Azure, GCP, on-prem, etc. |
+| Cloud provider                            | AWS, Azure, GCP                               | AWS, Azure, GCP, on-prem, etc. |
 | Operating system                          | Linux, Windows                                | Linux, Windows                 |
 | Serverless                                | AWS Lambda, AWS ECS Fargate, GCP Cloud Run    | Not applicable                 |
 | Container registries                      | AWS ECR, Google Artifact Registry             | Not applicable                 |
@@ -131,7 +131,6 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /security/cloud_security_management/troubleshooting/vulnerabilities/
-[15]: https://www.datadoghq.com/product-preview/agentless-vulnerability-scanning-for-azure/
 [16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
