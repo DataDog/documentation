@@ -754,14 +754,14 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
+### Jest's `--workerThreads`
+Jest's [workerThreads][13] option is not supported.
+
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][13] is not supported.
+Jest's [test.concurrent][14] is not supported.
 
 ### Jest's `--forceExit`
-Jest's [--forceExit][14] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
-
-### Jest's `--workerThreads`
-Jest's [workerThreads][15] option is not supported.
+Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
 ### Mocha's `--exit`
 Mocha's [--exit][16] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
@@ -852,10 +852,10 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[13]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[14]: https://jestjs.io/docs/cli#--forceexit
-[15]: https://jestjs.io/docs/configuration#workerthreads
-[16]: https://mochajs.org/#-exit
+[13]: https://jestjs.io/docs/configuration#workerthreads
+[14]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[15]: https://jestjs.io/docs/cli#--forceexit
+[16]: https://mochajs.org/running/cli/#--exit
 [17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
