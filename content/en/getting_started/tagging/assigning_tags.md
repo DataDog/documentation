@@ -161,6 +161,8 @@ For containerized environments, it is recommended to follow the [unified service
 
 After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agent's main configuration file. If you specify multiple tags, separate each one with a space.
 
+**Note**: When using `DD_TAGS`, whitespaces act as separators between tags and are NOT converted to underscores. For example, setting `DD_TAGS="test:this is a test"` creates four separate tags: `test:this`, `is`, `a`, and `test`. To include spaces in tag values, use configuration methods such as integration annotations or YAML configuration files. In those methods, whitespaces are converted to underscores (for example, `tags:["test:this is a test"]` becomes `test:this_is_a_test`).
+
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
 | Environment Variable               | Description                                                                                             |

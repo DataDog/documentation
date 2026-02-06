@@ -67,6 +67,8 @@ Below are Datadog's tagging requirements:
 
     Other special characters are converted to underscores.
 
+    **Note**: Some cross-product exceptions exist. For example, when `env` is set at the Agent level, trace, metrics, and log data can include an environment name that begins with a digit. While this is known behavior, using tags that don't follow standard naming conventions can increase tag cardinality. Non-standard tags (such as numeric prefixes) can potentially impact data volume limits, especially for tracing data. Follow the standard tag naming rule when possible.
+
 2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
@@ -78,6 +80,8 @@ Below are Datadog's tagging requirements:
 
 5. Tags should not originate from unbounded sources, such as epoch timestamps, user IDs, or request IDs. Doing so may infinitely [increase the number of metrics][2] for your organization and impact your billing.
 6. Limitations (such as downcasing) only apply to metric tags, not log attributes or span tags.
+
+**Note**: When using the `DD_TAGS` environment variable, whitespaces are used as separators between tags and are NOT converted to underscores. For example, `DD_TAGS="test:this is a test"` results in four separate tags: `test:this`, `is`, `a`, and `test`. To include spaces in tag values, use alternative methods such as integration annotations or configuration files. In those methods, whitespaces are converted to underscores.
 
 ## Assign tags
 
