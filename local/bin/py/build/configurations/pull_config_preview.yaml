@@ -513,7 +513,7 @@
                 title: Migrate DatadogAgent CRDs to v2alpha1
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/v2alpha1_migration.md"]
 
-      - repo-name: helm-charts
+      - repo_name: helm-charts
         contents:
           - action: pull-and-push-file 
             branch: fanny/AGENTONB-2748/migration-docs
