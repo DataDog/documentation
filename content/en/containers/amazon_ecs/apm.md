@@ -333,7 +333,7 @@ The script performs the following steps:
 
 #### Set DD_AGENT_HOST for Windows containers
 
-After configuring the network routes, retrieve the EC2 private IP address and set `DD_AGENT_HOST`. The following example shows a complete task definition `entryPoint` configuration that sets up routes and configures `DD_AGENT_HOST`. Substitute `<Windows Startup Command>` with your application's startup command:
+In the container's `entryPoint` configuration, add the PowerShell bootstrap script to configure network routes, retrieve the EC2 private IP address, and set `DD_AGENT_HOST`. Substitute `<Windows Startup Command>` with your application's startup command:
 
 ```json
 "entryPoint": [
@@ -355,7 +355,16 @@ For IIS applications using the .NET Framework tracer, write the `DD_AGENT_HOST` 
 ]
 ```
 
-Alternatively, create a PowerShell startup script (`.ps1`) containing the bootstrap commands and reference it in your Dockerfile's `ENTRYPOINT`:
+Alternatively, if you use the `ENTRYPOINT` command in your Dockerfile, add the bootstrap script to the `.ps1` file:
+
+```powershell
+$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop
+$ifIndex = (Get-NetAdapter -InterfaceDescription "Hyper-V Virtual Ethernet*" | Sort-Object | Select ifIndex).ifIndex
+New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore
+New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore
+```
+
+Then reference the script in your Dockerfile:
 
 ```dockerfile
 ENTRYPOINT ["powershell.exe", "C:\\app\\startup.ps1"]
