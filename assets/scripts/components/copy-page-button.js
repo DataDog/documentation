@@ -2,11 +2,92 @@
 let cachedUrl = null;
 let cachedText = null;
 
+function extractMainContentAsMarkdown() {
+    console.log('Failing back to DOM extraction for copy ...');
+    const mainContent = document.getElementById('mainContent');
+    if (!mainContent) {
+        return '';
+    }
+
+    const lines = [];
+    const walker = document.createTreeWalker(mainContent, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+        acceptNode: function (node) {
+            // Skip hidden elements
+            if (node.nodeType === Node.ELEMENT_NODE) {
+                const style = window.getComputedStyle(node);
+                if (style.display === 'none' || style.visibility === 'hidden') {
+                    return NodeFilter.FILTER_REJECT;
+                }
+            }
+            return NodeFilter.FILTER_ACCEPT;
+        }
+    });
+
+    let currentNode;
+    let lastAddedNewline = false;
+
+    while ((currentNode = walker.nextNode())) {
+        if (currentNode.nodeType === Node.TEXT_NODE) {
+            const text = currentNode.textContent.trim();
+            if (text) {
+                lines.push(text);
+                lastAddedNewline = false;
+            }
+        } else if (currentNode.nodeType === Node.ELEMENT_NODE) {
+            const tagName = currentNode.tagName.toLowerCase();
+
+            // Handle headings
+            if (/^h[1-6]$/.test(tagName)) {
+                if (!lastAddedNewline && lines.length > 0) {
+                    lines.push('\n');
+                }
+                const level = parseInt(tagName[1]);
+                const headingText = currentNode.textContent.trim();
+                lines.push('#'.repeat(level) + ' ' + headingText + '\n\n');
+                lastAddedNewline = true;
+                // Skip children since we already got the text
+                walker.currentNode = currentNode;
+                continue;
+            }
+
+            // Handle links
+            if (tagName === 'a' && currentNode.href) {
+                const linkText = currentNode.textContent.trim();
+                if (linkText) {
+                    lines.push(`[${linkText}](${currentNode.href})`);
+                    lastAddedNewline = false;
+                }
+                // Skip children since we already got the text
+                walker.currentNode = currentNode;
+                continue;
+            }
+
+            // Add newlines for block elements
+            if (['p', 'div', 'li', 'br', 'hr'].includes(tagName)) {
+                if (!lastAddedNewline && lines.length > 0) {
+                    lines.push('\n');
+                    lastAddedNewline = true;
+                }
+            }
+        }
+    }
+
+    return lines
+        .join(' ')
+        .replace(/ +\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+}
+
 async function prefetchPageText(copyButton) {
     const mdUrl = copyButton.dataset.mdUrl;
 
-    if (!mdUrl || cachedUrl === mdUrl) {
-        return; // Already cached or no URL
+    if (!mdUrl) {
+        return;
+    }
+
+    if (cachedUrl === mdUrl) {
+        return; // Already cached
     }
 
     try {
@@ -26,16 +107,14 @@ async function copyPageText(copyButton) {
     console.log('Copying page text to clipboard ...');
     const mdUrl = copyButton.dataset.mdUrl;
 
-    if (!mdUrl) {
-        console.error('No data-md-url found on button');
-        return;
-    }
-
     try {
         let text;
 
-        // Check if we have cached content from hover
-        if (cachedUrl === mdUrl && cachedText) {
+        if (!mdUrl) {
+            // Use fallback extraction from DOM
+            text = extractMainContentAsMarkdown();
+        } else if (cachedUrl === mdUrl && cachedText) {
+            // Check if we have cached content from hover
             text = cachedText;
         } else {
             // Fallback to fetching if not cached
