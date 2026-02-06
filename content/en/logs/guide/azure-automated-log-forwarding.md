@@ -122,7 +122,7 @@ The ARM template grants the control plane only the permissions needed to manage 
 
 No information about your resources is exported. Datadog only requests the information required to enable log output, and the only output of this architecture is the logs sent to Datadog.
 
-**Note**: Optionally, you can generate metrics, logs, and events about the health of the control plane and send them to Datadog for debugging purposes. This is enabled through a feature flag.
+**Note**: Optionally, you can enable the control plane to submit its own health metrics, logs, and events to Datadog for debugging purposes. To do this, set the environment variable `DD_TELEMETRY=true` on any Function App or Container App in the control plane.
 
 {{% azure-log-archiving %}}
 

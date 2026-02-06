@@ -14,9 +14,6 @@ further_reading:
     - link: "coterm"
       tag: "Documentation"
       text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
-    - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
-      tag: "Documentation"
-      text: "Best practices for creating custom rules"
     - link: "/data_security/"
       tag: "Documentation"
       text: "Reducing data related risks"
@@ -41,6 +38,15 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/sds-for-insurance-companies/"
       tag: "Blog"
       text: "How insurance companies discover, classify, and act on sensitive data risks with Datadog"
+    - link: https://www.datadoghq.com/blog/llm-aws-strands
+      tag: Blog
+      text: Gain visibility into Strands Agents workflows with Datadog LLM Observability
+    - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+      tag: "Blog"
+      text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
+    - link: "https://www.datadoghq.com/blog/datadog-cloud-security-compliance"
+      tag: "Blog"
+      text: "Scale compliance across global frameworks with Datadog Cloud Security"
 ---
 
 ## Overview
@@ -91,15 +97,15 @@ See [Set Up Pipelines][7] for more information.
 
 ## Scan cloud storage
 
-{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
 {{< /callout >}}
 
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="The Findings page's datastore section with three Amazon S3 findings" style="width:100%;" >}}
 
-If you have Sensitive Data Scanner enabled, you can catalog and classify sensitive data in your Amazon S3 buckets and RDS instances. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
+If you have Sensitive Data Scanner enabled, you can catalog and classify sensitive data in your Amazon S3 buckets. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
 
-Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time.
+Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][8] in your cloud environments. These scanning instances retrieve a list of all S3 buckets through [Remote Configuration][9], and have set instructions to scan text files—such as CSVs and JSONs over time.
 
 Sensitive Data Scanner leverages its [entire rules library][10] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. **Note**: Data stores and their files are only read in your environment—no sensitive data that was scanned is sent back to Datadog.
 

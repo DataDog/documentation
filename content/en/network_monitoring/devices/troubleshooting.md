@@ -6,6 +6,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"
   text: "Monitor SNMP with Datadog"
+- link: "/network_monitoring/devices/glossary"
+  tag: "Doc"
+  text: "NDM terms and concepts"
 ---
 
 ## Overview
@@ -197,7 +200,7 @@ Check for rules blocking UDP traffic on the configured ports.
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Starting with version `7.67`, the Agent's `datadog-agent diagnose` command automatically checks for blocking firewall rules and displays warnings if any are found.
+Starting with version `7.67`, the Agent's `agent.exe diagnose` command automatically checks for blocking firewall rules and displays warnings if any are found.
 
 To manually inspect firewall rules:
 

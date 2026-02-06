@@ -292,7 +292,45 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 - Running the Java tracer in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
-- When enabling the tracer for Java 24+, you may see warnings related to JNI native access or `sun.misc.Unsafe` memory access. Suppress these warnings by adding the `--illegal-native-access=allow` and `--sun-misc-unsafe-memory-access=allow` environment variables right before the `-javaagent:/path/to/dd-java-agent.jar` argument. See [JEP 472][13] and [JEP 498][14] for more information.
+- When running the tracer with Java 24+, you may see warnings related to JNI native access. Suppress these warnings by adding the `--enable-native-access=ALL-UNNAMED` flag. See [JEP 472][13] for more information.
+
+## Ahead-of-time (AOT) class loading & linking support
+
+To improve startup time, Ahead-of-time (AOT) class loading & linking makes application classes instantly available in a loaded and linked state when the JVM starts. See [JEP 483][14] and [JEP 514][15] for more information.
+
+### Requirements
+
+Use:
+
+- Java 25 or later
+- [Datadog Java tracer][1] 1.57.0 or later
+
+### Setup
+
+To set up AOT class loading & linking for APM, add the Datadog Java tracer during the training run:
+```shell
+java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCacheOutput=app.aot -jar App.jar
+```
+
+#### Usage
+
+During production, add the same Datadog Java tracer along with the previously cached training data:
+```shell
+java -javaagent:/path/to/dd-java-agent.jar -XX:AOTCache=app.aot -jar App.jar
+```
+
+You can view traces using the [Trace Explorer][9].
+
+{{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Not attaching the Datadog Java tracer during the training run
+
+If you see this warning in production, it means the Datadog Java tracer wasn't attached during training:
+```
+Mismatched values for property jdk.module.addmods: java.instrument specified during runtime but not during dump time
+```
+The JVM cannot then use the AOT cache to improve startup time. The solution is to attach the tracer during training.
+
+{{% /collapse-content %}}
 
 ## GraalVM Native Image support
 
@@ -486,4 +524,5 @@ For more information, see [Configure APM and DogstatsD communication mode][11]. 
 [11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
 [12]: /tracing/trace_collection/library_config/#agent
 [13]: https://openjdk.org/jeps/472
-[14]: https://openjdk.org/jeps/498
+[14]: https://openjdk.org/jeps/483
+[15]: https://openjdk.org/jeps/514

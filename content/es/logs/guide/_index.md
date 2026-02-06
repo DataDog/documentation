@@ -21,33 +21,31 @@ title: Guías de logs
 
 <br>
 
-{{< whatsnext desc="log Collection" >}}
-    {{< nextlink href="/agent/logs/advanced_log_collection" >}}Configuraciones avanzadas de recopilación de logs {{< /nextlink >}}
-    {{< nextlink href="/logs/guide/reduce_data_transfer_fees" >}}Cómo enviar logs a Datadog reduciendo las tarifas de transferencia de datos{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/forwarder/" >}}Configuración de Datadog Lambda Forwarder{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Envía logs de servicios de AWS con la función Datadog Lambda{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Envía logs de servicios de AWS con el destino Datadog Amazon Data Firehose{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/aws-account-level-logs/" >}}Configurar suscripciones de logs a nivel de cuenta de AWS {{< /nextlink >}}
-    {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Envío de eventos y logs a Datadog con los destinos API de Amazon EventBridge{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Envío de logs de Amazon EKS Fargate con Amazon Data Firehose{{< /nextlink >}}
+{{< whatsnext desc="Recopilación de logs" >}}
+    {{< nextlink href="/agent/logs/advanced_log_collection" >}}Configuraciones avanzadas para la recopilación de logs{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/reduce_data_transfer_fees" >}}Enviar logs a Datadog mientras se reducen los cargos por la transferencia de datos{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/forwarder/" >}}Configurar el Datadog Forwarder de Lambda{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Enviar logs de servicios Datadog utilizando la función Datadog Lambda{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Enviar logs de servicios Datadog con el destino Datadog Amazon Data Firehose{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/aws-account-level-logs/" >}}Configurar suscripciones a logs a nivel de la cuenta AWS{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Enviar eventos y logs a Datadog con las API de Amazon EventBridge como destino{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose" >}}Enviar logs de Amazon EKS Fargate con Amazon Data Firehose{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-automated-log-forwarding" >}}Reenvío automatizado de logs de Azure{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-manual-log-forwarding" >}}Reenvío manual de logs de Azure{{< /nextlink >}}
     {{< nextlink href="/logs/guide/apigee" >}}Recopilar logs de Apigee{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Envío de logs de Azure a Datadog{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-automated-log-forwarding" >}}Reenvío automatizado de logs de Azure {{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-automated-logs-architecture/" >}}Arquitectura y configuración de reenvío automatizado de logs de Azure{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Envío de logs de Azure con el recurso de Datadog {{< /nextlink >}}
     {{< nextlink href="/logs/guide/fluentbit" >}}Enviar logs de Fluent Bit{{< /nextlink >}}
     {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Recopilar logs de Google Cloud con la plantilla Datadog Dataflow{{< /nextlink >}}
     {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Recopilar logs de Google Cloud con una suscripción Pub/Sub Push{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Recopilar logs de Heroku{{< /nextlink >}}
-    {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Guía de solución de problemas de recopilación de logs{{< /nextlink >}}
-    {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Guía de solución de problemas de recopilación de logs de Docker{{< /nextlink >}}
-    {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Guía de solución de problemas de la recopilación de logs de Lambda {{< /nextlink >}}
-    {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Configuración de permisos de archivo para la rotación de logs (Linux){{< /nextlink >}}
-    {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}Utiliza el Datadog Agent sólo para la recopilación de logs{{< /nextlink >}}
-    {{< nextlink href="logs/guide/increase-number-of-log-files-tailed" >}}Aumentar el número de logs de archivos recopilados por el Agent{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Utilizar el Agent de contenedor para el seguimiento de logs desde el Host{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}Mecanismos para asegurar que los logs no se pierdan{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Envío de logs desde un archivo personalizado de logs con permisos de lectura ampliados{{< /nextlink >}}
+    {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Guía para solucionar problemas relacionados con la recopilación de logs{{< /nextlink >}}
+    {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Guía para solucionar problemas relacionados con la recopilación de logs de Docker{{< /nextlink >}}
+    {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Guía para solucionar problemas relacionados con la recopilación de logs de Lambda{{< /nextlink >}}
+    {{< nextlink href="logs/guide/setting-file-permissions-for-rotating-logs" >}}Configurar permisos de archivos para la rotación de logs (Linux){{< /nextlink >}}
+    {{< nextlink href="/logs/guide/how-to-set-up-only-logs" >}}Uso del Datadog Agent solo para la recopilación de logs{{< /nextlink >}}
+    {{< nextlink href="logs/guide/increase-number-of-log-files-tailed" >}}Incrementar el número de archivos de logs rastreados por el Agent{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/container-agent-to-tail-logs-from-host" >}}Uso del Agent de contenedor para rastrear logs desde el host{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/mechanisms-ensure-logs-not-lost" >}}Mecanismos para evitar la pérdida de logs{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/custom-log-file-with-heightened-read-permissions" >}}Enviar logs desde un archivo de log personalizado con permisos de lectura ampliados{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

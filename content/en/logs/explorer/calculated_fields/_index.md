@@ -2,6 +2,9 @@
 title: Calculated Fields
 disable_toc: false
 further_reading:
+- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
+  tag: Blog
+  text: Accelerate investigations with AI-powered log parsing
 - link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
   text: "Calculated Fields Formulas"
@@ -90,7 +93,7 @@ Extraction uses Grok parsing rules to capture values from raw log messages or at
 
 For example, you can extract the first three words of a message into separate fields:
 ```
-%{WORD:first} %{WORD:second} %{WORD:third}
+%{word:first} %{word:second} %{word:third}
 ```
 
 Extraction rules are evaluated globally across all logs in your session. For more details and syntax examples, see [Extractions][4].

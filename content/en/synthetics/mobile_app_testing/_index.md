@@ -24,6 +24,9 @@ further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 cascade:
   algolia:
     tags: ['mobile_testing']
@@ -175,6 +178,10 @@ By default, mobile app tests are set up for on-demand testing, meaning these tes
 You can customize alert conditions to define how often you want to send an alert and the circumstances under which you want a test to send a notification alert.
 
 * An alert is triggered if any assertion fails for `X` minutes.
+
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
 
 ### Configure the test monitor
 

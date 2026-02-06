@@ -6548,9 +6548,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.0.tgz":
-  version: 1.2.0
-  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.0.tgz"
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz":
+  version: 1.3.0
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz"
   dependencies:
     "@types/semver": "npm:^7.7.0"
     js-yaml: "npm:^4.1.0"
@@ -6561,20 +6561,20 @@ __metadata:
     typedoc-plugin-markdown: "npm:^4.4.1"
     typedoc-plugin-zod: "npm:^1.3.1"
     uuid: "npm:^11.0.5"
-    zod: "npm:^3.22.4"
-  checksum: 10/28a8dcbd80356eefb98149d408f8fd284604829a56559f7249152be5578199abc9e8c800c433e80efabc19c142ef2ceb08151725594dd9947802aee76813475d
+    zod: "npm:^4.1.12"
+  checksum: 10/5582490d1b31ffcfcc496c1753603bf5f7d07ccc6a1177b3136855b403a4f3c2cd4d8ac82e56a41541741a43705dbb8f3a586a95857a47312b3316addce0a072
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.2.1.tgz":
-  version: 2.2.1
-  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.2.1.tgz"
+"cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.4.tgz":
+  version: 2.5.4
+  resolution: "cdocs-hugo-integration@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.4.tgz"
   dependencies:
     "@prettier/sync": "npm:^0.5.2"
     "@types/markdown-it": "npm:^14.1.2"
     "@vitejs/plugin-react": "npm:^4.3.3"
-    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.2.0.tgz"
-    cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.1.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.3.0.tgz"
+    cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz"
     chokidar: "npm:^4.0.3"
     chroma-highlight: "npm:^2.4.2"
     interweave: "npm:^13.1.0"
@@ -6592,14 +6592,14 @@ __metadata:
     uuid: "npm:^10.0.0"
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
-    zod: "npm:^3.22.4"
-  checksum: 10/70a176a290192a15125402896e905e19ce0195b2df6367cdded1a20682ef95f77ed30c1e85192c295e69f828759e1dbdfd1982ce596463fac83c719b7454626c
+    zod: "npm:^4.1.12"
+  checksum: 10/cbe172a8947c1893871a333b21e8c89afc7a47bdffd372031d5d7e7f308fe6b48d00e0e5d35b475f598afcae001ecee6d473ceb6bfc2edb00c38d6a53a60e637
   languageName: node
   linkType: hard
 
-"cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.1.tgz":
-  version: 1.0.1
-  resolution: "cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.1.tgz"
+"cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz":
+  version: 1.0.2
+  resolution: "cdocs-markdoc@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.2.tgz"
   dependencies:
     "@types/linkify-it": "npm:^3.0.1"
     "@types/markdown-it": "npm:12.2.3"
@@ -6608,7 +6608,7 @@ __metadata:
       optional: true
     "@types/markdown-it":
       optional: true
-  checksum: 10/52bbad0010c7842677cb5a27836b3efaac1891d527eb5ccf7d8a8eb10e8abd6c695754d4a091c627473a495ea7b341e8fcf786db59b43a9a34bc2b7f13df3a3c
+  checksum: 10/844190c9cbb525414c8f24cf874908535504cacb8d5ecbe86edfff00bb595f233d29044ed763b0b612e6fdccaa2376aa4999a56e3d94cfef0f4b325fcad9602e
   languageName: node
   linkType: hard
 
@@ -7138,13 +7138,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crypto@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "crypto@npm:1.0.1"
-  checksum: 10/087fe3165bd94c333a49e6ed66a0193911f63eac38a24f379b3001a5fe260a59c413646e53a0f67875ba13902b2686d81dc703cb2c147a4ec727dcdc04e5645e
-  languageName: node
-  linkType: hard
-
 "css-blank-pseudo@npm:^0.1.4":
   version: 0.1.4
   resolution: "css-blank-pseudo@npm:0.1.4"
@@ -7630,19 +7623,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz":
-  version: 1.0.0
-  resolution: "docs-llms-txt@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
-  dependencies:
-    js-yaml: "npm:^4.1.0"
-    rimraf: "npm:^5.0.5"
-    simple-git: "npm:^3.28.0"
-    uuid: "npm:^11.1.0"
-    zod: "npm:^3.22.4"
-  checksum: 10/61474d8bc8072864616af5d8fa585fd8951c1a967985edc47dd3c27f7783aa8e68160ceef22199be816a0b66a4c63fda58675a4b397754ad8e6414edb328c8b6
-  languageName: node
-  linkType: hard
-
 "docs@workspace:.":
   version: 0.0.0-use.local
   resolution: "docs@workspace:."
@@ -7660,10 +7640,9 @@ __metadata:
     acorn: "npm:^7.4.1"
     alpinejs: "npm:^3.13.7"
     bootstrap: "npm:^5.2"
-    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.2.1.tgz"
+    cdocs-hugo-integration: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-hugo-integration-v2.5.4.tgz"
     cross-env: "npm:^5.2.1"
     del: "npm:4.1.1"
-    docs-llms-txt: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/docs-llms-txt-v1.0.0.tgz"
     eslint: "npm:^6.8.0"
     eslint-config-airbnb: "npm:^18.2.1"
     eslint-config-prettier: "npm:^6.15.0"
@@ -7711,7 +7690,7 @@ __metadata:
     traverse: "npm:0.6.8"
     typesense: "npm:^1.8.2"
     typesense-instantsearch-adapter: "npm:^2.8.0"
-    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.1.0.tgz"
+    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.4.0.tgz"
     yaml-lint: "npm:^1.7.0"
   languageName: unknown
   linkType: soft
@@ -15591,17 +15570,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"simple-git@npm:^3.28.0":
-  version: 3.28.0
-  resolution: "simple-git@npm:3.28.0"
-  dependencies:
-    "@kwsites/file-exists": "npm:^1.1.1"
-    "@kwsites/promise-deferred": "npm:^1.1.1"
-    debug: "npm:^4.4.0"
-  checksum: 10/2582e6c1c50db8aa0b7d07ed0f0f86eb4ea647e6b33d1596cf44e509c7b658372da9db1dcbea626e7d71e30e8d826a84410bbc73c5d1066f2526724a31836f81
-  languageName: node
-  linkType: hard
-
 "simple-swizzle@npm:^0.2.2":
   version: 0.2.2
   resolution: "simple-swizzle@npm:0.2.2"
@@ -16940,17 +16908,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.1.0.tgz":
-  version: 1.1.0
-  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.1.0.tgz"
+"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.4.0.tgz":
+  version: 1.4.0
+  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.4.0.tgz"
   dependencies:
     "@babel/runtime": "npm:^7.25.0"
-    crypto: "npm:^1.0.1"
     dotenv: "npm:^16.4.5"
+    lodash: "npm:^4.17.21"
     typesense: "npm:^2.0.3"
     winston: "npm:^3.14.2"
     yargs: "npm:^17.7.2"
-  checksum: 10/77da8f5b5dd30a8172353c3653f30af473af544c9c18216d8bfaf73fcbd72395501ad24af30aa869c260bb8312180c372e27733b428f41d4d2365ec593015eb2
+  checksum: 10/07486ce15a7fcac4a790d7e8a0c24b0f571fc3fcac0fb9a4a081e29d88f7d770c962058ce1b9b40219f263d58ba5cd72c9ed2376320d0458524c4edf371f2db5
   languageName: node
   linkType: hard
 
@@ -17204,7 +17172,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^11.0.5, uuid@npm:^11.1.0":
+"uuid@npm:^11.0.5":
   version: 11.1.0
   resolution: "uuid@npm:11.1.0"
   bin:
@@ -17897,9 +17865,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^3.22.4":
-  version: 3.24.2
-  resolution: "zod@npm:3.24.2"
-  checksum: 10/604c62a8cf8e330d78b106a557f4b44f5d14845d20b1360a423ccc09b58cb8525ccf7e4b40cf1bd4852d22393d2c67774b5817ec5a2fedab25f543b36ed15943
+"zod@npm:^4.1.12":
+  version: 4.1.13
+  resolution: "zod@npm:4.1.13"
+  checksum: 10/0679190318928f69fcb07751063719de232c663b13955fcdb55db59839569d39f3f29b955cb0cba7af0b724233f88c06b3e84c550397ad4e68f8088fa6799d88
   languageName: node
   linkType: hard

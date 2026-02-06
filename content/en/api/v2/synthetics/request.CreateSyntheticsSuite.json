@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "message": "Notification message",
+      "name": "Example suite name",
+      "options": {},
+      "tags": [
+        "env:production"
+      ],
+      "tests": [],
+      "type": "suite"
+    },
+    "type": "suites"
+  }
+}

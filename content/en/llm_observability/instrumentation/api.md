@@ -4,6 +4,15 @@ aliases:
     - /tracing/llm_observability/api
     - /llm_observability/api
     - /llm_observability/setup/api
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
+    tag: Blog
+    text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+
 ---
 
 ## Overview
@@ -141,9 +150,11 @@ If the request is successful, the API responds with a 202 network code and an em
 | Field   | Type   | Description  |
 |---------|--------|--------------|
 | value   | string | Input or output value. If not set, this value is inferred from messages or documents. |
-| messages| [Message](#message) | List of messages. This should only be used for LLM spans. |
-| documents| [Document](#document) | List of documents. This should only be used as the output for retrieval spans |
+| messages| [[Message](#message)] | List of messages. Use only for LLM spans. |
+| documents| [[Document](#document)] | List of documents. Use only as output for retrieval spans. |
 | prompt | [Prompt](#prompt) | Structured prompt metadata that includes the template and variables used for the LLM input. This should only be used for input IO on LLM spans. |
+| embedding | [float] | List of embedding values. |
+| parameters | Dict[key (string), value] | Additional parameters for the input or output. |
 
 
 **Note**: When only `input.messages` is set for an LLM span, Datadog infers `input.value` from `input.messages` and uses the following inference logic:
@@ -157,6 +168,8 @@ If the request is successful, the API responds with a 202 network code and an em
 |----------------------|--------|--------------------------|
 | content [*required*] | string | The body of the message. |
 | role                 | string | The role of the entity.  |
+| tool_calls | [[ToolCall](#toolcall)] | List of tool calls made in this message. |
+| tool_results | [[ToolResult](#toolresult)] | List of tool execution results in this message. |
 
 #### Document
 | Field                | Type   | Description              |
@@ -165,11 +178,51 @@ If the request is successful, the API responds with a 202 network code and an em
 | name    | string | The name of the document.  |
 | score | float | The score associated with this document. |
 | id    | string | The id of this document.  |
+| ranking | integer | The ranking of this document. |
+| metadata | Dict[key (string), value] | Additional metadata for this document. |
+
+#### ToolCall
+
+| Field | Type | Description |
+|-------|------|-------------|
+| name | string | The name of the tool being called. |
+| arguments | Dict[key (string), value] | The arguments passed to the tool. |
+| tool_id | string | Unique identifier for this tool call. |
+| type | string | The type of tool call. |
+
+#### ToolResult
+
+| Field | Type | Description |
+|-------|------|-------------|
+| name | string | The name of the tool that was called. |
+| result | string | The result returned by the tool. |
+| tool_id | string | Unique identifier matching the corresponding tool call. |
+| type | string | The type of tool result. |
+
+#### ToolDefinition
+
+| Field | Type | Description |
+|-------|------|-------------|
+| name | string | The name of the tool. |
+| description | string | A description of what the tool does. |
+| schema | Dict[key (string), value] | The schema defining the tool's parameters. |
+
+#### SpanField
+
+| Field | Type | Description |
+|-------|------|-------------|
+| kind | string | The kind of span field. |
 
 #### Prompt
+
+<div class="alert alert-info">LLM Observability registers new versions of templates when the <code>template</code> or <code>chat_template</code> value is updated. If the input is expected to change between invocations, extract the dynamic parts into a variable.</div>
+
+{{< tabs >}}
+{{% tab "Model" %}}
 | Field                | Type   | Description              |
 |----------------------|--------|--------------------------|
 | id    | string | Logical identifier for this prompt template. Should be unique per `ml_app`.  |
+| name | string | Human-readable name for the prompt. |
 | version | string | Version tag for the prompt (for example, "1.0.0"). If not provided, LLM Observability automatically generates a version by computing a hash of the template content. |
 | template | string | Single string template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables. This should not be set with `chat_template`. |
 | chat_template | [[Message]](#message) | Multi-message template form. Use placeholder syntax (like `{{variable_name}}`) to embed variables in message content. This should not be set with `template`. |
@@ -178,6 +231,28 @@ If the request is successful, the API responds with a 202 network code and an em
 | context_variable_keys | [string] | Variable keys that contain ground-truth or context content. Used for hallucination detection. |
 | tags | Dict[key (string), string] | Tags to attach to the prompt run. |
 
+{{% /tab %}}
+{{% tab "Example" %}}
+{{< code-block lang="json" >}}
+{
+  "id": "translation-prompt",
+  "chat_template": [
+    {
+      "role": "system",
+      "content": "You are a translation service. You translate to {{language}}."
+    }, {
+      "role": "user",
+      "content": "{{user_input}}"
+    }
+  ],
+  "variables": {
+    "language": "french",
+    "user_input": "<USER_INPUT_TEXT>"
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Meta
 | Field       | Type              | Description  |
@@ -187,15 +262,31 @@ If the request is successful, the API responds with a 202 network code and an em
 | input       | [IO](#io)                | The span's input information.               |
 | output      | [IO](#io)                | The span's output information.              |
 | metadata    | Dict[key (string), value] where the value is a float, bool, or string | Data about the span that is not input or output related. Use the following metadata keys for LLM spans: `temperature`, `max_tokens`, `model_name`, and `model_provider`. |
+| model_name | string | The name of the model used for LLM spans. |
+| model_provider | string | The provider of the model used for LLM spans. |
+| model_version | string | The version of the model used for LLM spans. |
+| embedding_for_prompt_idx | integer | The prompt index for which embeddings were computed. |
+| span | [SpanField](#spanfield) | Span field information. |
+| tool_definitions | [[ToolDefinition](#tooldefinition)] | List of available tool definitions. |
+| expected_output | [IO](#io) | The expected output information. |
+| intent | string | The intent of the span. |
 
 #### Metrics
-| Field                  | Type    | Description  |
-|------------------------|---------|--------------|
-| input_tokens           | float64 | The number of input tokens. **Only valid for LLM spans.**      |
-| output_tokens          | float64 | The number of output tokens. **Only valid for LLM spans.**     |
-| total_tokens           | float64 | The total number of tokens associated with the span. **Only valid for LLM spans.**   |
-| time_to_first_token    | float64 | The time in seconds it takes for the first output token to be returned in streaming-based LLM applications. Set for root spans. |
-| time_per_output_token  | float64 | The time in seconds it takes for the per output token to be returned in streaming-based LLM applications. Set for root spans. |
+
+A dictionary of metrics to collect for the span. The keys are metric names (strings) and values are metric values (float64 pointers). Common metrics include:
+- `input_tokens` - The number of input tokens (LLM spans)
+- `output_tokens` - The number of output tokens (LLM spans)
+- `total_tokens` - The total number of tokens (LLM spans)
+- `time_to_first_token` - Time in seconds for first output token (streaming LLM, root spans)
+- `time_per_output_token` - Time in seconds per output token (streaming LLM, root spans)
+- `input_cost` - Input cost in dollars (LLM and embedding spans)
+- `output_cost` - Output cost in dollars (LLM spans)
+- `total_cost` - Total cost in dollars (LLM spans)
+- `non_cached_input_cost` - Non-cached input cost in dollars (LLM spans)
+- `cache_read_input_cost` - Cache read input cost in dollars (LLM spans)
+- `cache_write_input_cost` - Cache write input cost in dollars (LLM spans)
+
+Type: `Dict[key (string), float64]`
 
 #### Span
 
@@ -210,9 +301,11 @@ If the request is successful, the API responds with a 202 network code and an em
 | meta [*required*]         | [Meta](#meta)              | The core content relative to the span.       |
 | status      | string            | Error status (`"ok"` or `"error"`). Defaults to `"ok"`.      |
 | apm_trace_id | string      | The ID of the associated APM trace. Defaults to match the `trace_id` field.   |
-| metrics     | [Metrics](#metrics)           | Datadog metrics to collect.         |
+| metrics     | Dict[key (string), float64]           | Datadog metrics to collect. See [Metrics](#metrics) for common metric names.         |
 | session_id  | string     | The span's `session_id`. Overrides the top-level `session_id` field.    |
 | tags        | [[Tag](#tag)] | A list of tags to apply to this particular span.       |
+| service | string | The service name. |
+| ml_app | string | The LLM application name for this span. Overrides the top-level `ml_app` field. |
 
 #### SpansRequestData
 | Field      | Type                          | Description                                |
@@ -311,6 +404,19 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "score_value": 3,
           "assessment": "fail",
           "reasoning": "The response provided incorrect information about the weather forecast."
+        },
+        {
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1609479200,
+          "metric_type": "boolean",
+          "label": "Topic Relevancy",
+          "boolean_value": true,
         }
       ]
     }
@@ -369,6 +475,22 @@ Evaluations must be joined to a unique span. You can identify the target span us
           "score_value": 3,
           "assessment": "fail",
           "reasoning": "The response provided incorrect information about the weather forecast."
+        },
+        {
+          "id": "haz3fc7-g3p2-1s37-8m12-ndk4hbf7a522",
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
+          "span_id": "20245611112024561111",
+          "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1609479200,
+          "metric_type": "boolean",
+          "label": "Topic Relevancy",
+          "boolean_value": true,
         }
       ]
     }
@@ -389,19 +511,20 @@ Evaluations must be joined to a unique span. You can identify the target span us
 
 #### EvalMetric
 
-| Field                  | Type   | Description  |
-|------------------------|--------|--------------|
-| ID                     | string | Evaluation metric UUID (generated upon submission). |
-| join_on [*required*]    | [[JoinOn](#joinon)] | How the evaluation is joined to a span. |
-| timestamp_ms [*required*] | int64  | A UTC UNIX timestamp in milliseconds representing the time the request was sent. |
-| ml_app [*required*] | string | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
-| metric_type [*required*]| string | The type of evaluation: `"categorical"` or `"score"`. |
-| label [*required*]      | string | The unique name or label for the provided evaluation . |
-| categorical_value [*required if the metric_type is "categorical"*]    | string | A string representing the category that the evaluation belongs to. |
-| score_value [*required if the metric_type is "score"*]    | number | A score value of the evaluation. |
-| assessment | string | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
-| reasoning | string | A text explanation of the evaluation result. |
-| tags        | [[Tag](#tag)] | A list of tags to apply to this particular evaluation metric.       |
+| Field                                                              | Type                | Description                                                                                            |
+|--------------------------------------------------------------------|---------------------|--------------------------------------------------------------------------------------------------------|
+| ID                                                                 | string              | Evaluation metric UUID (generated upon submission).                                                    |
+| join_on [*required*]                                               | [[JoinOn](#joinon)] | How the evaluation is joined to a span.                                                                |
+| timestamp_ms [*required*]                                          | int64               | A UTC UNIX timestamp in milliseconds representing the time the request was sent.                       |
+| ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
+| metric_type [*required*]                                           | string              | The type of evaluation: `"categorical"`, `"score"`, or `"boolean"`.                                    |
+| label [*required*]                                                 | string              | The unique name or label for the provided evaluation .                                                 |
+| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category that the evaluation belongs to.                                     |
+| score_value [*required if the metric_type is "score"*]             | number              | A score value of the evaluation.                                                                       |
+| boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value of the evaluation.                                                                     |
+| assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
+| reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
+| tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
 
 #### JoinOn
 
@@ -431,6 +554,10 @@ Evaluations must be joined to a unique span. You can identify the target span us
 |------------|-----------------|--------------|
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[Attributes](#attributes)] | The body of the request. |
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/setup/sdk/
 [2]: /llm_observability/terms/

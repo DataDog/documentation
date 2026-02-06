@@ -9,6 +9,15 @@ export default {
     gov: 'US1-FED',
     ap2: 'AP2'
   },
+  dd_datacenter_lowercase: {
+    us: 'us1',
+    us3: 'us3',
+    us5: 'us5',
+    eu: 'eu1',
+    ap1: 'ap1',
+    ap2: 'ap2',
+    gov: 'us1_fed'
+  },
   dd_site: {
     us: 'datadoghq.com',
     us3: 'us3.datadoghq.com',
@@ -350,12 +359,12 @@ export default {
     gov: 'https://ip-ranges.ddog-gov.com'
   },
   otlp_trace_endpoint: {
-    us: 'https://trace.agent.datadoghq.com/v1/traces',
-    us3: 'https://trace.agent.us3.datadoghq.com/v1/traces',
-    us5: 'https://trace.agent.us5.datadoghq.com/v1/traces',
-    eu: 'https://trace.agent.datadoghq.eu/v1/traces',
-    ap1: 'https://trace.agent.ap1.datadoghq.com/v1/traces',
-    ap2: 'https://trace.agent.ap2.datadoghq.com/v1/traces'
+    us: 'https://otlp.datadoghq.com/v1/traces',
+    us3: 'https://otlp.us3.datadoghq.com/v1/traces',
+    us5: 'https://otlp.us5.datadoghq.com/v1/traces',
+    eu: 'https://otlp.datadoghq.eu/v1/traces',
+    ap1: 'https://otlp.ap1.datadoghq.com/v1/traces',
+    ap2: 'https://otlp.ap2.datadoghq.com/v1/traces'
   },
   otlp_metrics_endpoint: {
     us: 'https://otlp.datadoghq.com/v1/metrics',
@@ -588,5 +597,77 @@ export default {
     ap1: '',
     ap2: '',
     gov: ''
+  },
+  kotlin_multiplatform_site_config: {
+    us: '',
+    us3: '\n        .useSite(DatadogSite.US3)\n        .trackCrashes(true)',
+    us5: '\n        .useSite(DatadogSite.US5)\n        .trackCrashes(true)',
+    eu: '\n        .useSite(DatadogSite.EU1)\n        .trackCrashes(true)',
+    ap1: '\n        .useSite(DatadogSite.AP1)\n        .trackCrashes(true)',
+    ap2: '\n        .useSite(DatadogSite.AP2)\n        .trackCrashes(true)',
+    gov: '\n        .useSite(DatadogSite.US1_FED)\n        .trackCrashes(true)'
+  },
+  flutter_web_logs_cdn_path: {
+    us: 'us1/v5/datadog-logs.js',
+    us3: 'us3/v5/datadog-logs.js',
+    us5: 'us5/v5/datadog-logs.js',
+    eu: 'eu1/v5/datadog-logs.js',
+    ap1: 'ap1/v5/datadog-logs.js',
+    ap2: 'ap2/v5/datadog-logs.js',
+    gov: 'datadog-logs-v5.js'
+  },
+  flutter_web_rum_cdn_path: {
+    us: 'us1/v6/datadog-rum-slim.js',
+    us3: 'us3/v6/datadog-rum-slim.js',
+    us5: 'us5/v6/datadog-rum-slim.js',
+    eu: 'eu1/v6/datadog-rum-slim.js',
+    ap1: 'ap1/v6/datadog-rum-slim.js',
+    ap2: 'ap2/v6/datadog-rum-slim.js',
+    gov: 'datadog-rum-slim-v6.js'
+  },
+  reactnative_sdk_init: {
+    us: '',
+    us3: '',
+    us5: '\n\nawait DdSdkReactNative.initialize(config);',
+    eu: '',
+    ap1: '',
+    ap2: '',
+    gov: ''
+  },
+  roku_site: {
+    us: 'us1',
+    us3: 'us3',
+    us5: 'us5',
+    eu: 'eu1',
+    ap1: 'ap1',
+    ap2: 'ap2',
+    gov: 'us1_fed'
+  },
+  synthetics_intake_endpoint: {
+    us: 'intake.synthetics.datadoghq.com',
+    us3: 'intake.synthetics.us3.datadoghq.com',
+    us5: 'intake.synthetics.us5.datadoghq.com',
+    eu: 'intake.synthetics.datadoghq.eu',
+    ap1: 'intake.synthetics.ap1.datadoghq.com',
+    ap2: 'intake.synthetics.ap2.datadoghq.com',
+    gov: 'intake.synthetics.ddog-gov.com'
+  },
+  cursor_mcp_install_deeplink: {
+    us: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuY29tL2FwaS91bnN0YWJsZS9tY3Atc2VydmVyL21jcD90b29sc2V0cz1vbmJvYXJkaW5nIiwidHlwZSI6Im9hdXRoIn0=',
+    us3: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us3&config=eyJ1cmwiOiJodHRwczovL21jcC51czMuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    us5: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-us5&config=eyJ1cmwiOiJodHRwczovL21jcC51czUuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    eu: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-eu1&config=eyJ1cmwiOiJodHRwczovL21jcC5kYXRhZG9naHEuZXUvYXBpL3Vuc3RhYmxlL21jcC1zZXJ2ZXIvbWNwP3Rvb2xzZXRzPW9uYm9hcmRpbmciLCJ0eXBlIjoib2F1dGgifQ==',
+    ap1: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap1&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDEuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    ap2: 'cursor://anysphere.cursor-deeplink/mcp/install?name=datadog-onboarding-ap2&config=eyJ1cmwiOiJodHRwczovL21jcC5hcDIuZGF0YWRvZ2hxLmNvbS9hcGkvdW5zdGFibGUvbWNwLXNlcnZlci9tY3A/dG9vbHNldHM9b25ib2FyZGluZyIsInR5cGUiOiJvYXV0aCJ9',
+    gov: 'N/A'
+  },
+  microsoft_teams_app_name: {
+    us: 'Datadog',
+    us3: 'Datadog',
+    us5: 'Datadog',
+    eu: 'Datadog',
+    ap1: 'Datadog',
+    ap2: 'Datadog',
+    gov: 'Datadog for Government'
   }
 };

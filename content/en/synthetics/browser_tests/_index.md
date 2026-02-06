@@ -151,7 +151,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 
    Enter one or more request patterns to block from loading while the test is run. Enter one request pattern per line using the [match pattern format][1]. Wildcards (for example, `*://*.example.com/*`) are supported.
 
-   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/actions). View blocked requests in the [Resources tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
+   Blocked requests are skipped during test execution but do not affect page rendering when [recording steps](/synthetics/browser_tests/test_steps). View blocked requests in the [Resources tab](/synthetics/browser_tests/test_results#resources) of test runs. Blocked requests have a status of `blocked`.
 
 [1]: https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
 
@@ -199,6 +199,10 @@ In case of failure, retry `X` times before location is marked as failed. This al
 When a test fails, fast retry allows you to retry the test X times after Y ms before marking it as failed. Customizing the retry interval helps reduce false positives and improves your alerting accuracy.
 
 Since location uptime is computed based on the final test result after retries complete, fast retry intervals directly impact what appears in your total uptime graph. The total uptime is computed based on the configured alert conditions, and notifications are sent based on the total uptime.
+
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
 
 ### Configure the test monitor
 
@@ -360,17 +364,18 @@ Use [granular access control][17] to limit who has access to your test based on 
 [2]: /continuous_testing/environments/proxy_firewall_vpn
 [3]: /help/
 [4]: /synthetics/settings/#global-variables
-[5]: /synthetics/browser_tests/actions#variables
+[5]: /synthetics/browser_tests/test_steps#variables
 [6]: /api/latest/synthetics/#create-or-clone-a-test
 [7]: http://daringfireball.net/projects/markdown/syntax
 [8]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [9]: /synthetics/notifications/
 [10]: https://www.google.com/chrome
 [11]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[12]: /synthetics/browser_tests/actions/#assertion
+[12]: /synthetics/browser_tests/test_steps/#assertion
 [13]: /synthetics/guide/explore-rum-through-synthetics/
-[14]: /synthetics/browser_tests/actions/
+[14]: /synthetics/browser_tests/test_steps/
 [15]: /account_management/rbac#custom-roles
 [16]: /account_management/rbac/#create-a-custom-role
 [17]: /account_management/rbac/granular_access
 [18]: https://www.microsoft.com/edge
+[19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/

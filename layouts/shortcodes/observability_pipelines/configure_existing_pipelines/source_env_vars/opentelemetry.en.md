@@ -2,10 +2,15 @@ You must provide both HTTP and gRPC endpoints. Configure your OTLP exporters to 
 
 - HTTP listener address
 	- The Observability Pipelines Worker listens to this socket address to receive logs from the OTel collector.
-    - Stored as the environment variable `DD_OP_SOURCE_OTEL_HTTP_ADDRESS`.
+    - The default environment variable is `DD_OP_SOURCE_OTEL_HTTP_ADDRESS`.
 
 - gRPC listener address
 	- The Observability Pipelines Worker listens to this socket address to receive logs from the OTel collector.
-    - Stored as the environment variable `DD_OP_SOURCE_OTEL_GRPC_ADDRESS`.
+    - The default environment variable is `DD_OP_SOURCE_OTEL_GRPC_ADDRESS`.
 
-    [10230]: /observability_pipelines/sources/opentelemetry/#send-logs-to-the-observability-pipelines-worker
+If TLS is enabled:
+
+- OpenTelemetry TLS passphrase
+    - The default environment variable is `DD_OP_SOURCE_OTEL_KEY_PASS`.
+
+[10230]: /observability_pipelines/sources/opentelemetry/#send-logs-to-the-observability-pipelines-worker
