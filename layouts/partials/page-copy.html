@@ -6,10 +6,12 @@
 
 <div id="page-copy-btn" {{ if index $pages $mdURL }}data-md-url="{{ $mdURL }}"{{ end }} class="pb-2 toc-copy-btn">
     <a href="#" class="text-primary text-uppercase font-semibold" role="button" {{ if index $pages $mdURL }}data-md-url="{{ $mdURL }}"{{ end }}>
-        {{ partial "img.html" (dict "root" $ctx "src" "icons/clipboard-mdi.svg" "class" "static copy-btn-icon copy-btn-icon__before" "alt"
-        "copy" "width" "22") }}
-        {{ partial "img.html" (dict "root" $ctx "src" "icons/clipboard-mdi-success.svg" "class" "static copy-btn-icon copy-btn-icon__after" "alt"
-        "copy" "width" "22") }}
+        <span class="copy-btn-icon-wrapper">
+            {{ partial "img.html" (dict "root" $ctx "src" "icons/clipboard-mdi.svg" "class" "static copy-btn-icon copy-btn-icon__before" "alt"
+            "copy" "width" "22") }}
+            {{ partial "img.html" (dict "root" $ctx "src" "icons/clipboard-mdi-success.svg" "class" "static copy-btn-icon copy-btn-icon__after" "alt"
+            "copy" "width" "22") }}
+        </span>
         <span id="page-copy-text">{{ i18n "copy" }}</span>
         <span id="page-copied-text">{{ i18n "copied" }}</span>
     </a>

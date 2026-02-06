@@ -243,6 +243,14 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         }
     }
 
+    .copy-btn-icon-wrapper {
+        position: relative;
+        top: 4px;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+    }
+
     #page-copied-text {
         display: none;
     }
@@ -260,8 +268,8 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 }
 
 .copy-btn-icon__before {
-    position: relative;
-    top: -1px;
+    position: absolute;
+    top: 0;
     left: 0;
     opacity: 1;
 
