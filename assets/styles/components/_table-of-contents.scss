@@ -207,13 +207,18 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         display: block;
     }
 
+    img {
+        position: relative;
+        top: -1px;
+    }
+
     a {
         font-size: 18px;
         &:lang(ja) {
             font-size: 16px;
 
             .toc-edit-btn img {
-                width: 35px;
+                width: 30px;
             }
         }
     }
@@ -233,7 +238,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
             font-size: 16px;
 
             .toc-copy-btn img {
-                width: 35px;
+                width: 30px;
             }
         }
     }
