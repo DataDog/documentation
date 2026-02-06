@@ -138,7 +138,16 @@ The CLI outputs scan results directly to your terminal, showing:
 
 {{< img src="security/vulnerabilities/csm-vm-cli-output.png" alt="Datadog Security CLI output showing vulnerability scan results for a container image" style="width:100%;" >}}
 
-You can also view your scan results in Datadog's [Cloud Security Vulnerabilities][3] explorer.
+### View scan results
+
+After running your first scan, results appear on the [Cloud Security Vulnerabilities][3] page within minutes. You can:
+
+- **Filter by resource type**: View vulnerabilities specific to container images scanned in CI/CD
+- **Prioritize by severity**: Focus on critical and high-severity vulnerabilities first
+- **Track remediation**: Assign vulnerabilities to team members and track resolution
+- **Set up notifications**: Get alerted when new critical vulnerabilities are detected
+
+{{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page" width="100%">}}
 
 ## Run local scans during development
 
@@ -178,17 +187,6 @@ datadog-security-cli image myapp:latest --fail-on high
 # Output results in JSON format
 datadog-security-cli image myapp:latest --output json
 ```
-
-### View scan results
-
-After running your first scan, results appear on the [Cloud Security Vulnerabilities][3] page within minutes. You can:
-
-- **Filter by resource type**: View vulnerabilities specific to container images scanned in CI/CD
-- **Prioritize by severity**: Focus on critical and high-severity vulnerabilities first
-- **Track remediation**: Assign vulnerabilities to team members and track resolution
-- **Set up notifications**: Get alerted when new critical vulnerabilities are detected
-
-{{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page" width="100%">}}
 
 ## Troubleshooting
 
