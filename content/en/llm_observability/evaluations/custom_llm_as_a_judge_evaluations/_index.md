@@ -107,6 +107,7 @@ For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search
    - **Boolean**: True/false results (for example, "Did the model follow instructions?")
    - **Score**: Numeric ratings (for example, a 1–5 scale for helpfulness)
    - **Categorical**: Discrete labels (for example, "Good", "Bad", "Neutral")
+   - **JSON**: JSON allows free form schemas
 
 2. Optionally, select **Enable Reasoning**. This configures the LLM judge to provide a short justification for its decision (for example, why a score of 8 was given). Reasoning helps you understand how and why evaluations are made, and is particularly useful for auditing subjective metrics like tone, empathy, or helpfulness. Adding reasoning can also [make the LLM judge more accurate](https://arxiv.org/abs/2504.00050).
 
@@ -127,6 +128,7 @@ For the **Categorical** output type:
 - Add or remove categories by editing the JSON schema.
 - Edit category names.
 - Edit the `description` field of categories to further explain what they mean in the context of your evaluation.
+
 
 An example schema for a categorical evaluation:
 
@@ -176,6 +178,52 @@ An example schema for a categorical evaluation:
 }
 ```
 {{% /tab %}}
+{{% tab "JSON" %}}
+For the **JSON** output type, define a free form JSON schema to capture complex, structured evaluation outputs.
+
+An example schema for a JSON evaluation:
+
+```
+{
+    "name": "json_eval",
+    "schema": {
+        "type": "object",
+        "required": [
+            "result",
+            "reasoning"
+        ],
+        "properties": {
+            "result": {
+                "type": "object",
+                "description": "The structured evaluation result",
+                "properties": {
+                    "is_compliant": {
+                        "type": "boolean",
+                        "description": "Whether the response meets compliance requirements"
+                    },
+                    "confidence_score": {
+                        "type": "number",
+                        "description": "Confidence level of the evaluation from 0 to 1"
+                    },
+                    "issue_count": {
+                        "type": "integer",
+                        "description": "Number of issues identified in the response"
+                    }
+                },
+                "required": ["is_compliant", "confidence_score", "issue_count"],
+                "additionalProperties": false
+            },
+            "reasoning": {
+                "type": "string",
+                "description": "Describe the reasoning behind your evaluation"
+            }
+        },
+        "additionalProperties": false
+    },
+    "strict": true
+}
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -192,6 +240,9 @@ Define numerical thresholds to determine passing performance.
 {{% /tab %}}
 {{% tab "Categorical" %}}
 Select the categories that should map to a passing state. For example, if you have the categories `Excellent`, `Good`, and `Poor`, where only `Poor` should correspond to a failing state, select `Excellent` and `Good`.
+{{% /tab %}}
+{{% tab "JSON" %}}
+Assessment Criteria is not currently available for JSON evaluations.
 {{% /tab %}}
 {{< /tabs >}}
 
