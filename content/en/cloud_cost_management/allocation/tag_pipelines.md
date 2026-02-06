@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Tags are the foundation for all Cloud Cost Management analysis and allocation. They enable you to break down spending by service, team, project, environment, or any dimension relevant to your business. Tag Pipelines enforce the use of standardized tags across your cloud resources and ensure consistent, accurate cost attribution throughout your organization.
+Tags are the foundation for all Cloud Cost Management analysis and allocation. They enable you to break down spending by service, team, project, environment, or any dimension relevant to your business. Tag Pipelines enforce the use of standardized tags across your cloud resources and help ensure consistent, accurate cost attribution throughout your organization.
 
 With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking. These standardized tags power all cost analysis capabilities, including container cost allocation, custom allocation rules, and cost recommendations.
 
