@@ -3,6 +3,7 @@ title: Integrate Datadog Status Pages with Datadog Incident Management
 description: Learn how to integrate Datadog Status Pages with Incident Management to communicate real-time service status during incidents.
 aliases:
 - /service_management/incident_management/integrations/status_pages/
+- /incident_response/incident_management/integrations/status_pages/
 further_reading:
 - link: https://www.datadoghq.com/blog/status-pages
   tag: Blog

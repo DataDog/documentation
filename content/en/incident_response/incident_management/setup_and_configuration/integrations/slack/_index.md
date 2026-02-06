@@ -3,6 +3,7 @@ title: Integrate Slack with Datadog Incident Management
 description: Manage Datadog incidents directly from Slack.
 aliases:
 - /service_management/incident_management/integrations/slack/
+- /incident_response/incident_management/integrations/slack/
 further_reading:
 - link: "integrations/slack/"
   tag: "Documentation"

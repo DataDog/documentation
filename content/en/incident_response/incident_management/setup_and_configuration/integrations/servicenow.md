@@ -2,6 +2,7 @@
 title: Integrate ServiceNow with Datadog Incident Management
 aliases:
 - /service_management/incident_management/integrations/servicenow/
+- /incident_response/incident_management/integrations/servicenow/
 further_reading:
 - link: "integrations/servicenow/"
   tag: "Documentation"

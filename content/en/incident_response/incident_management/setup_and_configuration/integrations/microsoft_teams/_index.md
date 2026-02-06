@@ -3,6 +3,7 @@ title: Integrate Microsoft Teams with Datadog Incident Management
 description: Integrate Microsoft Teams with Datadog Incident Management to automate incident channel creation, synchronize messages, and collaborate with your team directly within Microsoft Teams.
 aliases:
 - /service_management/incident_management/integrations/microsoft_teams/
+- /incident_response/incident_management/integrations/microsoft_teams/
 further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/integrations"
   tag: "Documentation"
