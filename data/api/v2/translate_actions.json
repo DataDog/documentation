@@ -2924,6 +2924,50 @@
     "request_description": "",
     "request_schema_description": "Definition of a user."
   },
+  "ListScorecardCampaigns": {
+    "description": "Fetches all scorecard campaigns.",
+    "summary": "List all campaigns"
+  },
+  "CreateScorecardCampaign": {
+    "description": "Creates a new scorecard campaign.",
+    "summary": "Create a new campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to create a new campaign."
+  },
+  "DeleteScorecardCampaign": {
+    "description": "Deletes a single campaign by ID or key.",
+    "summary": "Delete a campaign"
+  },
+  "GetScorecardCampaign": {
+    "description": "Fetches a single campaign by ID or key.",
+    "summary": "Get a campaign"
+  },
+  "UpdateScorecardCampaign": {
+    "description": "Updates an existing campaign.",
+    "summary": "Update a campaign",
+    "request_description": "Campaign data.",
+    "request_schema_description": "Request to update a campaign."
+  },
+  "GenerateScorecardCampaignTeamReports": {
+    "description": "Generates and sends team-specific campaign reports to Slack.",
+    "summary": "Generate team-specific campaign reports",
+    "request_description": "Team report generation request.",
+    "request_schema_description": "Request to generate team-specific campaign reports."
+  },
+  "GenerateScorecardCampaignReport": {
+    "description": "Generates and sends a campaign report to Slack.",
+    "summary": "Generate campaign report",
+    "request_description": "Report generation request.",
+    "request_schema_description": "Request to generate a campaign report."
+  },
+  "ListScorecardDefaultRules": {
+    "description": "Fetches all default scorecard rules available for the organization.",
+    "summary": "List default rules"
+  },
+  "ListScorecardFacets": {
+    "description": "Fetches facets for scorecard entities with counts.",
+    "summary": "List entity facets"
+  },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
     "summary": "List all rule outcomes"
@@ -2959,6 +3003,28 @@
     "summary": "Update an existing rule",
     "request_description": "Rule attributes.",
     "request_schema_description": "Request to update a scorecard rule."
+  },
+  "DeleteScorecardRuleWorkflow": {
+    "description": "Removes workflow association from a scorecard rule.",
+    "summary": "Delete rule workflow"
+  },
+  "UpdateScorecardRuleWorkflow": {
+    "description": "Associates a workflow with a scorecard rule.",
+    "summary": "Associate workflow with rule"
+  },
+  "ListScorecards": {
+    "description": "Fetches all scorecards.",
+    "summary": "List all scorecards"
+  },
+  "ListScorecardScores": {
+    "description": "Fetches scorecard scores aggregated by entity, rule, scorecard, service, or team.",
+    "summary": "List scores by aggregation"
+  },
+  "SetupScorecardRules": {
+    "description": "Sets up default scorecard rules for the organization.",
+    "summary": "Set up rules for organization",
+    "request_description": "Setup rules request.",
+    "request_schema_description": "Request to set up rules for an organization."
   },
   "ListEntityRiskScores": {
     "description": "Get a list of entity risk scores for your organization. Entity risk scores provide security risk assessment for entities like cloud resources, identities, or services based on detected signals, misconfigurations, and identity risks.",

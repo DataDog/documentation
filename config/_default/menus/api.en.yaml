@@ -11999,6 +11999,71 @@ menu:
       url: /api/latest/service-scorecards/
       identifier: service-scorecards
       generated: true
+    - name: Set up rules for organization
+      url: '#set-up-rules-for-organization'
+      identifier: service-scorecards-set-up-rules-for-organization
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SetupScorecardRules
+        unstable:
+          - v2
+        order: 21
+    - name: List scores by aggregation
+      url: '#list-scores-by-aggregation'
+      identifier: service-scorecards-list-scores-by-aggregation
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardScores
+        unstable:
+          - v2
+        order: 20
+    - name: List all scorecards
+      url: '#list-all-scorecards'
+      identifier: service-scorecards-list-all-scorecards
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecards
+        unstable:
+          - v2
+        order: 19
+    - name: Associate workflow with rule
+      url: '#associate-workflow-with-rule'
+      identifier: service-scorecards-associate-workflow-with-rule
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardRuleWorkflow
+        unstable:
+          - v2
+        order: 18
+    - name: Delete rule workflow
+      url: '#delete-rule-workflow'
+      identifier: service-scorecards-delete-rule-workflow
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScorecardRuleWorkflow
+        unstable:
+          - v2
+        order: 17
     - name: Update an existing rule
       url: '#update-an-existing-rule'
       identifier: service-scorecards-update-an-existing-rule
@@ -12011,7 +12076,7 @@ menu:
           - UpdateScorecardRule
         unstable:
           - v2
-        order: 4
+        order: 7
     - name: Delete a rule
       url: '#delete-a-rule'
       identifier: service-scorecards-delete-a-rule
@@ -12024,7 +12089,7 @@ menu:
           - DeleteScorecardRule
         unstable:
           - v2
-        order: 3
+        order: 6
     - name: Create a new rule
       url: '#create-a-new-rule'
       identifier: service-scorecards-create-a-new-rule
@@ -12050,7 +12115,7 @@ menu:
           - ListScorecardRules
         unstable:
           - v2
-        order: 2
+        order: 5
     - name: Create outcomes batch
       url: '#create-outcomes-batch'
       identifier: service-scorecards-create-outcomes-batch
@@ -12063,7 +12128,7 @@ menu:
           - CreateScorecardOutcomesBatch
         unstable:
           - v2
-        order: 1
+        order: 2
     - name: Update Scorecard outcomes asynchronously
       url: '#update-scorecard-outcomes-asynchronously'
       identifier: service-scorecards-update-scorecard-outcomes-asynchronously
@@ -12076,7 +12141,7 @@ menu:
           - UpdateScorecardOutcomesAsync
         unstable:
           - v2
-        order: 1
+        order: 3
     - name: List all rule outcomes
       url: '#list-all-rule-outcomes'
       identifier: service-scorecards-list-all-rule-outcomes
@@ -12089,7 +12154,124 @@ menu:
           - ListScorecardOutcomes
         unstable:
           - v2
-        order: 2
+        order: 4
+    - name: List entity facets
+      url: '#list-entity-facets'
+      identifier: service-scorecards-list-entity-facets
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardFacets
+        unstable:
+          - v2
+        order: 16
+    - name: List default rules
+      url: '#list-default-rules'
+      identifier: service-scorecards-list-default-rules
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardDefaultRules
+        unstable:
+          - v2
+        order: 15
+    - name: Generate campaign report
+      url: '#generate-campaign-report'
+      identifier: service-scorecards-generate-campaign-report
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GenerateScorecardCampaignReport
+        unstable:
+          - v2
+        order: 13
+    - name: Generate team-specific campaign reports
+      url: '#generate-team-specific-campaign-reports'
+      identifier: service-scorecards-generate-team-specific-campaign-reports
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GenerateScorecardCampaignTeamReports
+        unstable:
+          - v2
+        order: 14
+    - name: Update a campaign
+      url: '#update-a-campaign'
+      identifier: service-scorecards-update-a-campaign
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateScorecardCampaign
+        unstable:
+          - v2
+        order: 11
+    - name: Get a campaign
+      url: '#get-a-campaign'
+      identifier: service-scorecards-get-a-campaign
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScorecardCampaign
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a campaign
+      url: '#delete-a-campaign'
+      identifier: service-scorecards-delete-a-campaign
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteScorecardCampaign
+        unstable:
+          - v2
+        order: 12
+    - name: Create a new campaign
+      url: '#create-a-new-campaign'
+      identifier: service-scorecards-create-a-new-campaign
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateScorecardCampaign
+        unstable:
+          - v2
+        order: 9
+    - name: List all campaigns
+      url: '#list-all-campaigns'
+      identifier: service-scorecards-list-all-campaigns
+      parent: service-scorecards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListScorecardCampaigns
+        unstable:
+          - v2
+        order: 8
     - name: ServiceNow Integration
       url: /api/latest/servicenow-integration/
       identifier: servicenow-integration
