@@ -139,7 +139,7 @@ Connect your AI Gateway to LLM Observability with your base URL, API key, and he
    - Provide your base URL.
    - Provide your API key and optionally any headers.
 
-{{< img src="llm_observability/configuration/ai-gateway-tile-2.png" alt="The AI Gateway configuration tile in LLM Observability. Lists instructions for configuring an ai gateway" style="width:100%;" >}}
+{{< img src="llm_observability/configuration/ai-gateway-tile-3.png" alt="The AI Gateway configuration tile in LLM Observability. Lists instructions for configuring an ai gateway" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/api-reference/introduction
