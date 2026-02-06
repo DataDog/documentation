@@ -818,31 +818,24 @@ $conv-search-assistant-bg: #f4f4f5;
 }
 
 // ============================================
-// Home Page Search Row (search bar + AI button inline)
+// Home Page Search Row
 // ============================================
 .home-search-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
     
-    // Make the search wrapper sized appropriately
     .nav-search-wrapper {
         flex: 0 1 auto;
         width: 100%;
-        max-width: 560px;
+        max-width: 600px;
     }
     
-    // Remove margin-bottom from searchbox to align with AI button
     .searchbox-container {
         margin-bottom: 0;
     }
     
-    // Wrap to second line on tablet/mobile (same breakpoint as burger menu)
     @media (max-width: 991px) {
-        flex-wrap: wrap;
-        gap: 16px;
-        
         .nav-search-wrapper {
             flex: 1 1 100%;
             max-width: 100%;
@@ -850,59 +843,71 @@ $conv-search-assistant-bg: #f4f4f5;
     }
 }
 
-.home-ai-divider {
-    display: none; // Hidden by default - shown via JS when feature flag is enabled
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 13px;
-    font-weight: 400;
-    
+// ============================================
+// Inline Search / AI segmented toggle (inside the search bar)
+// ============================================
+.search-mode-toggle {
+    display: none; // Hidden by default
+
+    // Show toggle & hide submit when feature flag is enabled
     .conv-search-enabled & {
-        display: inline;
-        
-        // Hide on mobile/tablet when stacked
-        @media (max-width: 991px) {
-            display: none;
+        display: flex;
+    }
+
+    align-items: center;
+    height: 100%;
+    flex-shrink: 0;
+    background: #f0f0f0;
+    border-left: 1px solid #e4e4e4;
+    border-radius: 0 3px 3px 0;
+    padding: 3px;
+    gap: 2px;
+
+    .mode-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        height: 100%;
+        padding: 0 12px;
+        border: none;
+        border-radius: 2px;
+        background: transparent;
+        color: #888;
+        font-size: 13px;
+        font-weight: 600;
+        font-family: inherit;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+
+        svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
+        &:hover:not(.active) {
+            color: #555;
+            background: #e8e8e8;
+        }
+
+        &.active {
+            background: $conv-search-purple;
+            color: #fff;
+            box-shadow: 0 1px 3px rgba(99, 44, 166, 0.3);
+
+            svg {
+                stroke: #fff;
+                fill: #fff;
+            }
         }
     }
 }
 
-.home-ai-btn {
-    display: none; // Hidden by default - shown via JS when feature flag is enabled
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 0 16px;
-    height: 38px; // Match search bar height for alignment
-    border: none;
-    border-radius: 4px;
-    background: $conv-search-purple-dark; // Darker purple as default
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    flex-shrink: 0;
-    white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(99, 44, 166, 0.25);
-    
-    .conv-search-enabled & {
-        display: inline-flex;
-    }
-    
-    svg {
-        flex-shrink: 0;
-        width: 16px;
-        height: 16px;
-    }
-    
-    &:hover {
-        background: $conv-search-purple; // Lighter purple on hover
-        box-shadow: 0 4px 12px rgba(99, 44, 166, 0.35);
-    }
-    
-    &:active {
-        background: darken($conv-search-purple-dark, 5%);
-    }
+// Hide the original submit button when the toggle is visible
+.conv-search-enabled .home-search-row button.ais-SearchBox-submit {
+    display: none;
 }
 

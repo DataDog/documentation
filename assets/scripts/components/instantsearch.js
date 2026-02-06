@@ -503,6 +503,63 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 window.addEventListener('resize', handleResizeDebounced);
             }
         }
+
+        // ── Home page: inject Search/AI toggle into search bar ──
+        // Injected always; CSS hides it until conv-search-enabled is on body
+        if (homepage) {
+            const searchForm = searchBoxContainerContainer.querySelector('.ais-SearchBox-form');
+            if (searchForm) {
+                const toggle = document.createElement('div');
+                toggle.className = 'search-mode-toggle';
+                toggle.innerHTML = `
+                    <button type="button" class="mode-btn active" data-mode="search">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <span>Search</span>
+                    </button>
+                    <button type="button" class="mode-btn" data-mode="ai">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
+                        <span>Ask AI</span>
+                    </button>
+                `;
+                searchForm.appendChild(toggle);
+
+                let currentMode = 'search';
+                const modeBtns = toggle.querySelectorAll('.mode-btn');
+
+                modeBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const mode = btn.dataset.mode;
+                        if (mode === currentMode) return;
+                        currentMode = mode;
+
+                        modeBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+
+                        if (mode === 'ai') {
+                            aisSearchBoxInput.setAttribute('placeholder', 'Ask Docs AI anything...');
+                        } else {
+                            aisSearchBoxInput.setAttribute('placeholder', 'Search documentation...');
+                        }
+
+                        aisSearchBoxInput.focus();
+                    });
+                });
+
+                // In AI mode, Enter opens the AI dialog
+                aisSearchBoxInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && currentMode === 'ai') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const query = aisSearchBoxInput.value.trim();
+                        if (window.askDocsAI) {
+                            window.askDocsAI(query || '');
+                            hitsContainerContainer.classList.add('d-none');
+                            searchBoxContainerContainer.classList.remove('active-search');
+                        }
+                    }
+                }, true);
+            }
+        }
     }
 }
 
