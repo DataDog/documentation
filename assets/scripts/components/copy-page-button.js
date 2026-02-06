@@ -153,7 +153,7 @@ async function prefetchPageText(copyButton) {
     const mdUrl = copyButton.dataset.mdUrl;
 
     if (!mdUrl) {
-        console.warn('No Markdown URL found for prefetching.');
+        console.warn('No Markdown URL found for prefetching, failing over to DOM extraction on copy.');
         return;
     }
 
