@@ -44,12 +44,12 @@ Error Tracking computes a fingerprint for each error span it processes using the
 
 ## Control which errors are tracked
 
-While Error Tracking automatically processes all error spans, you can control which errors are ingested and how they are managed:
+Error Tracking automatically processes all error spans, but you can control which errors are ingested and how they are managed:
 
 - **Filter errors with inclusion and exclusion rules**: Define rules to include or exclude errors based on attributes such as service, environment, or error type. See [Manage Data Collection][7].
 - **Set rate limits**: Control the volume of errors ingested per day to manage costs. See [Manage Data Collection][7].
 - **Exclude specific issues**: Mark recurring non-actionable issues as `EXCLUDED` to stop collecting them. See [Issue States][8].
-- **Filter entire traces**: To prevent traces from being sent to Datadog (rather than filtering errors), see [Ignoring Unwanted Resources in APM][9].
+- **Filter entire traces**: Prevent traces from being sent to Datadog (rather than filtering errors). See [Ignoring Unwanted Resources in APM][9].
 
 ## Examine issues to start troubleshooting or debugging
 
