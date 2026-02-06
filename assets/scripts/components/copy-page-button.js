@@ -10,7 +10,7 @@ async function prefetchPageText(copyButton) {
     }
 
     try {
-        const response = await fetch(mdUrl, { credentials: 'omit' });
+        const response = await fetch(mdUrl);
 
         if (!response.ok) {
             throw new Error(`Failed to fetch Markdown: ${response.status}`);
@@ -19,10 +19,7 @@ async function prefetchPageText(copyButton) {
         const text = await response.text();
         cachedUrl = mdUrl;
         cachedText = text;
-    } catch (err) {
-        console.error('Error prefetching markdown:', err);
-        // Silently fail on prefetch - will try again on click
-    }
+    } catch (err) {}
 }
 
 async function copyPageText(copyButton) {
@@ -54,31 +51,35 @@ async function copyPageText(copyButton) {
         await navigator.clipboard.writeText(text);
 
         // Optional UX feedback
-        const copyText = document.getElementById('page-copy-text');
-        const copiedText = document.getElementById('page-copied-text');
-
-        if (copyText && copiedText) {
-            const icon = copyButton.closest('.copy-btn-icon');
-            if (icon) {
-                icon.src = icon.src.replace('clipboard-mdi.svg', 'clipboard-mdi-success.svg');
-            }
-            copyText.style.display = 'none';
-            copiedText.style.display = 'inline';
-
-            setTimeout(() => {
-                copyText.style.display = 'inline';
-                copiedText.style.display = 'none';
-                if (icon) {
-                    icon.src = icon.src.replace('clipboard-mdi-success.svg', 'clipboard-mdi.svg');
-                }
-            }, 1500);
-        }
+        displaySuccessFeedback();
 
         console.log('... text copied to clipboard.');
     } catch (err) {
         console.error('Error copying plaintext markdown:', err);
         alert('Failed to copy page text. Please try again.');
     }
+}
+
+function displaySuccessFeedback() {
+    const copyText = document.getElementById('page-copy-text');
+    const copiedText = document.getElementById('page-copied-text');
+
+    copyText.style.display = 'none';
+    copiedText.style.display = 'inline';
+
+    const beforeIcon = document.querySelector('#page-copy-btn .copy-btn-icon__before');
+    const afterIcon = document.querySelector('#page-copy-btn .copy-btn-icon__after');
+
+    beforeIcon.style.display = 'none';
+    afterIcon.style.display = 'inline';
+    afterIcon.querySelector('img').style.display = 'inline';
+
+    setTimeout(() => {
+        copyText.style.display = 'inline';
+        copiedText.style.display = 'none';
+        beforeIcon.style.display = 'inline';
+        afterIcon.style.display = 'none';
+    }, 3000);
 }
 
 export function initCopyPageButton() {

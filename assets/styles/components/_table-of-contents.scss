@@ -242,6 +242,10 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     }
 }
 
+.copy-btn-icon__after {
+    display: none;
+}
+
 .toc-container-mobile {
     display: none;
     padding: 105px 0 0 0;
