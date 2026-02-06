@@ -164,6 +164,6 @@ func main() {
 }
 {{- end -}}
 
-{{- $p := printf "partials/api/openapi-code-go-%s.html" .method -}}
+{{- $p := printf "api/openapi-code-go-%s.html" .method -}}
 {{- $pr := partial $p (dict "payload" .payload "path" .path) }}
 {{- highlight (trim $pr "\n\r") "golang" -}}

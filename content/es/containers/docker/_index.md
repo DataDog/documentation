@@ -35,7 +35,7 @@ title: Docker Agent para Docker, containerd y Podman
 
 El Datadog Docker Agent es la versión en contenedores del [Agent][1] host. El Docker Agent admite los tiempos de ejecución de Docker, containerd y Podman. La [imagen de Docker][2] oficial está disponible en Docker Hub, Google Container Registry (GCR) y ECR-Public.
 
-<div class="alert alert-warning">Docker Hub está sujeto a límites en la tasa de extracción de imágenes. Si no eres cliente de Docker Hub, Datadog recomienda que actualices tu configuración de Datadog Agent y Cluster Agent para extraer desde GCR o ECR. Para obtener instrucciones, consulta <a href="/agent/guide/changing_container_registry">Cambiar tu registro de contenedor</a>.</div>
+<div class="alert alert-danger">Docker Hub está sujeto a límites en la tasa de extracción de imágenes. Si no eres cliente de Docker Hub, Datadog recomienda que actualices tu configuración de Datadog Agent y Cluster Agent para extraer desde GCR o ECR. Para obtener instrucciones, consulta <a href="/agent/guide/changing_container_registry">Cambiar tu registro de contenedor</a>.</div>
 
 Las imágenes están disponibles para las arquitecturas de 64-bit x86 y Arm v8.
 
@@ -187,7 +187,7 @@ Envía las métricas con el [protocolo de StatsD][20]:
 | `DD_DOGSTATSD_SOCKET`            | La ruta al socket Unix que hay que escuchar. Debe estar en un volumen montado `rw`.                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | Activa detección de contenedores y etiquetado para métricas de socket Unix.                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | Etiquetas adicionales para anexar a todas las métricas, los eventos y los checks de servicios recibidos por este servidor de DogStatsD, por ejemplo: `"env:golden group:retrievers"`. |
-| `DD_USE_DOGSTATSD`           | Activar o desactivar el envío de métricas personalizadas desde la biblioteca de DogStatsD.                                                                                                |
+| `DD_USE_DOGSTATSD`           | Activar o desactivar el envío de métricas personalizadas desde la librería de DogStatsD.                                                                                                |
 Aprende más sobre [DogStatsD en Sockets de Dominio de Unix][21].
 
 ### Etiquetado

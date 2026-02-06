@@ -1,4 +1,4 @@
-<div class="alert alert-warning">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
+<div class="alert alert-danger">The rsyslog and syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format. </div>
 
 The rsyslog and syslog-ng destinations match these log fields to the following Syslog fields:
 

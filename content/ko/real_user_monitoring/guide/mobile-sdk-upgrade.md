@@ -67,7 +67,7 @@ v1에서 v2로 마이그레이션하면 성능이 향상되며 v2 네이티브 S
 
 **참고**: 다른 모든 아티팩트의 Maven 좌표는 동일하게 유지됩니다.
 
-<div class="alert alert-warning">v2는 Android API 19(KitKat)를 지원하지 않습니다. 지원하는 최소 SDK는 API 21(Lollipop)입니다. Kotlin 1.7이 필요합니다. SDK 자체는 Kotlin 1.8로 컴파일되므로, Kotlin 1.6 버전 이하 컴파일러는 SDK 클래스 메타데이터를 읽을 수 없습니다.</div>
+<div class="alert alert-danger">v2는 Android API 19(KitKat)를 지원하지 않습니다. 지원하는 최소 SDK는 API 21(Lollipop)입니다. Kotlin 1.7이 필요합니다. SDK 자체는 Kotlin 1.8로 컴파일되므로, Kotlin 1.6 버전 이하 컴파일러는 SDK 클래스 메타데이터를 읽을 수 없습니다.</div>
 
 다음과 같은 오류가 발생하는 경우
 

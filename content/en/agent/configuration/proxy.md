@@ -1,5 +1,6 @@
 ---
 title: Datadog Agent Proxy Configuration
+description: "Configure the Datadog Agent to send traffic through HTTP/HTTPS proxies with authentication and bypass options."
 aliases:
 - /account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 - /agent/proxy

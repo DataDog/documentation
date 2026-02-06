@@ -3,11 +3,14 @@ aliases:
 - /es/tracing/visualization/search/
 - /es/tracing/trace_search_and_analytics/
 - /es/tracing/advanced_usage/
+description: Documentación de las funciones obsoletas de App Analytics con información
+  de configuración para configuraciones legacy y orientación para la migración a nuevos
+  controles de ingesta.
 title: Aplicación Analytics
 ---
 
-<div class="alert alert-danger">
-Esta página describe características obsoletas con información de configuración relevante para App Analytics heredadas, útiles para solucionar problemas o para modificar algunas configuraciones antiguas. Para tener un control total sobre tus trazas (traces), utiliza <a href="/tracing/trace_pipeline">controles de ingesta y filtros de retención</a>.
+<div class="alert alert-warning">
+Esta página describe funciones obsoletas con información de configuración relevante para App Analytics heredado, útil para solucionar problemas o para modificar algunas configuraciones antiguas. Para tener un control total sobre tus trazas (traces), en su lugar utiliza <a href="/tracing/trace_pipeline">controles de ingesta y filtros de retención</a>.
 </div>
 
 ##  Migrar a las nuevas opciones de configuración
@@ -51,7 +54,7 @@ Para ello, define `DD_TRACE_ANALYTICS_ENABLED=true` en tu entorno o configura:
 Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
-* `true` permite el análisis de todos los marcos web.
+* `true` permite el análisis de todos los frameworks web.
 * `false` o `nil` desactiva el análisis, excepto para integraciones que lo activan explícitamente. (Por defecto)
 
 {{< /programming-lang >}}
@@ -414,7 +417,7 @@ En el caso de la instrumentación personalizada, se ha añadido una etiqueta esp
 span.SetTag(ext.AnalyticsEvent, true)
 ```
 
-Esto marca el tramo (span) como un evento de App Analytics.
+Esto marca el tramo como un evento de App Analytics.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
@@ -479,8 +482,8 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### En el Datadog Agent
 
-<div class="alert alert-danger">
-En esta sección se describen las funciones obsoletas con información de configuración relevante para App Analytics heredada.
+<div class="alert alert-warning">
+Esta sección describe funciones obsoletas con información de configuración relevante para App Analytics legacy.
 </div>
 
 Para definir la frecuencia de tramos a analizar por servicio, configura lo siguiente en el archivo `datadog.yaml`:

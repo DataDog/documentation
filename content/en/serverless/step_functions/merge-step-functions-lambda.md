@@ -101,7 +101,7 @@ Your State Machine definition is using `JSONPath`. If your definition's top-leve
 1. If you have not already, install the [Datadog CLI][9] v2.18.0+.
 
    ```shell
-   npm install -g @datadog/datadog-ci
+   npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-stepfunctions
    ```
 2. Ensure you have deployed the [Datadog Lambda Forwarder][10], a Lambda function that ships logs from AWS to Datadog, and that you are using v3.130.0+. You may need to [update your Forwarder][11].
 
@@ -126,7 +126,7 @@ Your State Machine definition is using `JSONPath`. If your definition's top-leve
 [10]: /serverless/libraries_integrations/cli/
 [11]: /logs/guide/forwarder/
 [12]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
-[13]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
+[13]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-stepfunctions#readme
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}

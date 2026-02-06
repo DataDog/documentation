@@ -125,7 +125,7 @@ Airflow `statsd` 기능을 사용해 Airflow를 DogStatsD(Datadog 에이전트�
 
 2. Airflow 구성 파일 `airflow.cfg`에 다음 구성을 추가해 업데이트합니다.
 
-   <div class="alert alert-warning">`statsd_datadog_enabled`를 true로 설정하지 마세요. `statsd_datadog_enabled`를 활성화하면 충돌이 발생할 수 있습니다. 문제를 예방하려면 이 변수를 `False`로 설정해야 합니다.</div>
+   <div class="alert alert-danger">`statsd_datadog_enabled`를 true로 설정하지 마세요. `statsd_datadog_enabled`를 활성화하면 충돌이 발생할 수 있습니다. 문제를 예방하려면 이 변수를 `False`로 설정해야 합니다.</div>
 
    ```conf
    [scheduler]

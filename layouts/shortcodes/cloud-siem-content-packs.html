@@ -45,6 +45,7 @@
     {{- with .investigator -}}<li>{{ upper . }} Investigator</li>{{- end -}}
     {{- with .workflow_automation -}}<li>Workflow Automation</li>{{- end -}}
     {{- with .documentation_href -}}<li><a href="{{.}}">Configuration guide</a></li>{{- end -}}
+    {{- with .ocsf_pipelines -}}<li>OCSF pipelines</li>{{- end -}}
 </ul>
 {{- end -}}
 {{- end -}}

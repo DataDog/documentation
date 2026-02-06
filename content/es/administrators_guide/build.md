@@ -41,7 +41,7 @@ La forma de este sistema será diferente dependiendo de tu entorno, pero hay alg
     - Crear un nuevo nodo de clúster vSphere
     - Crear una nueva instancia de base de datos
     - Monitorizar nuevos productos de software de terceros
-    - Añadir tests Synthetic
+    - Añadir tests de monitorización Synthetic
     - Crear una alerta/monitor
     - Crear/Actualizar un dashboard
 

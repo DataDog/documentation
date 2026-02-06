@@ -15,7 +15,7 @@ further_reading:
 title: (LEGACY) Logs de ruta  en formato rehidratable de Datadog a Amazon S3
 ---
 
-<div class="alert alert-warning">El destino Observability Pipelines Datadog Archives está en fase beta.</div>
+<div class="alert alert-danger">El destino Observability Pipelines Datadog Archives está en fase beta.</div>
 
 ## Información general
 
@@ -194,7 +194,7 @@ Para obtener más información, consulta la [documentación de los archivos de l
 
 Puedes configurar el destino `datadog_archives` utilizando el [archivo de configuración(#configuration-file) o la [interfaz de usuario del compilador de pipeline](#configuration-file).
 
-<div class="alert alert-warning">Si el worker está ingiriendo logs que no provienen del Datadog Agent y son enrutados al destino de Archivos de Datadog, esos logs no son etiquetados con <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">atributos reservados</a>. Esto significa que se pierde la telemetría de Datadog y las ventajas del <a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">etiquetado de servicios unificado</a>. Por ejemplo, digamos que tus syslogs se envíen a <code>datadog_archives</code> y esos logs tienen el estado etiquetado como <code>severity</code> en lugar del atributo reservado de <code>status</code> y el host etiquetado como <code>hostname</code> en lugar del atributo reservado <code>host</code>. Cuando estos logs se rehidratan en Datadog, el <code>estado</code> de los logs se establece en <code>info</code> y ninguno de los logs tendrá una etiqueta hostname.</div>
+<div class="alert alert-danger">Si el worker está ingiriendo logs que no provienen del Datadog Agent y son enrutados al destino de Archivos de Datadog, esos logs no son etiquetados con <a href="https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#reserved-attributes">atributos reservados</a>. Esto significa que se pierde la telemetría de Datadog y las ventajas del <a href="https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes">etiquetado de servicios unificado</a>. Por ejemplo, digamos que tus syslogs se envíen a <code>datadog_archives</code> y esos logs tienen el estado etiquetado como <code>severity</code> en lugar del atributo reservado de <code>status</code> y el host etiquetado como <code>hostname</code> en lugar del atributo reservado <code>host</code>. Cuando estos logs se rehidratan en Datadog, el <code>estado</code> de los logs se establece en <code>info</code> y ninguno de los logs tendrá una etiqueta hostname.</div>
 
 ### Archivo de configuración
 

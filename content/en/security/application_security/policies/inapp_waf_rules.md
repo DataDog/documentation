@@ -49,6 +49,37 @@ Custom In-App WAF rules enable users to log or block specific types of requests 
 
 **Note:** Default rules in In-App WAF are read-only. To refine your In-App WAF behavior, modify the In-App WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests.
 
+## Suggested rules
+
+Datadog's App and API Protection [Suggested Rules][5] feature automatically analyzes application traffic and proposes rules to help monitor and protect login and API flows. Rules are pre-built around common authentication patterns like `users.login.success` or `users.login.failure`, which are the most critical signals for detecting suspicious login behavior.
+
+Suggested rules benefits include:
+
+- Reducing manual configuration by offering baseline coverage for authentication endpoints. 
+- Improving the speed of deploying protections across services and environments to guard against common attack vectors like brute force, credential stuffing, and automated login abuse.
+- Providing high-fidelity telemetry on login attempts that can be correlated with anomalous patterns such as sudden bursts of failed logins, repeated attempts from the same IP, or login activity from unusual geographies. 
+- Providing visibility for [account takeover (ATO) protection][6], where most ATO campaigns are surfaced first through abnormal authentication activity. 
+- Detecting and responding to credential abuse before accounts are compromised.
+
+Suggested rules use cases include:
+
+  * Quickly deploy protections for brute force, credential stuffing, and bot-driven login abuse.
+  * Use Suggested Rules as baselines for ATO protection by tracking successful and failed login attempts and tuning conditions (for example, the POST method plus 401/403 failures).
+  * Apply consistent detection logic across services to make it harder for attackers to bypass defenses in less monitored environments.
+  * Detect signs of **account takeover attempts** by monitoring abnormal login activity (for example, spikes in failures, unusual login success rates after repeated failures).
+
+To use a suggested rule, do one of the following:
+- Create a custom rule from a suggested rule:
+  1. In [Suggested Rules][5], select one or more rules and click **Create Selected Suggested Rules**.
+  2. In **Create suggested custom In-App WAF rules**, click **Create rules**. This creates custom In-App WAF rules to monitor the security activities of the rules you selected.
+- Modify a suggested rule to create a custom rule:
+  1. In [Suggested Rules][5], identify a rule you want to use and click **View suggested rule**.
+  2. In **Add a new Business Logic**, edit the rule as needed.
+  3. Click **Continue in In-App WAF**.
+  4. In **Define your custom rule**, make any further changes.
+  5. Click **Save Rule**.
+
+
 ## Configure an AAP In-App WAF rule
 
 Blocking on a service is defined through the policy rules. Three Datadog default policies are included in the In-App WAF: *Datadog Recommended*, *Datadog Monitoring-only*, which monitors attacks only, and *Datadog Block Attack tools*, which blocks attack tools and monitors all other attacks.
@@ -113,3 +144,5 @@ Next, [configure detection rules to create security signals][1] based on those s
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /security/application_security/setup/
 [4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
+[5]: https://app.datadoghq.com/security/appsec/policies/in-app-waf?config_by=suggested-rules
+[6]: /security/account_takeover_protection

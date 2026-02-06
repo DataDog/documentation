@@ -11,11 +11,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'ansible.md'
             front_matters:
               title: Ansible
               dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/ansible/
 
     - org_name: aws
 
@@ -33,18 +35,6 @@
     - org_name: DataDog
 
       repos:
-      - repo_name: dd-go
-
-        contents:
-
-        - action: npm-integrations
-          branch: prod
-          globs:
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/gcp_services.go
-          - networks/model/domain/gcp_services.go
-          # https://github.com/DataDog/dd-go/blob/prod/networks/model/domain/azure_services.go
-          - networks/model/domain/azure_services.go
-
       - repo_name: ansible-datadog
         contents:
 
@@ -67,11 +57,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'chef.md'
             front_matters:
               title: Chef
               dependencies: ["https://github.com/DataDog/chef-datadog/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/chef/
 
       - repo_name: heroku-buildpack-datadog
         contents:
@@ -81,13 +73,14 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'heroku.md'
             front_matters:
               title: Datadog Heroku Buildpack
               dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
               aliases:
               - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+              - /agent/basic_agent_usage/heroku/
 
       - repo_name: puppet-datadog-agent
         contents:
@@ -97,11 +90,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'puppet.md'
             front_matters:
               title: Puppet
               dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/puppet/
 
       - repo_name: datadog-formula
         contents:
@@ -111,11 +106,13 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
+            dest_path: '/agent/supported_platforms/'
             file_name: 'saltstack.md'
             front_matters:
               title: SaltStack
               dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/saltstack/
 
       - repo_name: dd-trace-rb
         contents:
@@ -124,7 +121,7 @@
           globs:
           - 'docs/GettingStarted.md'
           options:
-            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
+            dest_path: '/tracing/trace_collection/dd_libraries/'
             file_name: 'ruby.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
@@ -140,13 +137,13 @@
               - /agent/apm/ruby/
               - /tracing/setup_overview/setup/ruby
               - /tracing/trace_collection/ruby
-              - /tracing/trace_collection/dd_libraries/ruby/
+              - /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby
         - action: pull-and-push-file
           branch: release
           globs:
           - 'docs/legacy/GettingStarted-v1.md'
           options:
-            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
+            dest_path: '/tracing/trace_collection/dd_libraries/'
             file_name: 'ruby_v1.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/legacy/GettingStarted-v1.md"]
@@ -199,12 +196,12 @@
         - action: pull-and-push-file
           branch: master
           globs:
-          - 'packages/datadog-ci/src/commands/lambda/README.md'
+          - 'packages/plugin-lambda/README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'cli.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/lambda/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-lambda/README.md"]
               title: Datadog Serverless CLI
               aliases:
                 - /serverless/datadog_lambda_library/
@@ -212,12 +209,22 @@
         - action: pull-and-push-file
           branch: master
           globs:
-          - 'packages/datadog-ci/src/commands/synthetics/README.md'
+          - 'packages/plugin-cloud-run/README.md'
+          options:
+            dest_path: '/serverless/libraries_integrations/'
+            file_name: 'cli-cloud-run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-cloud-run/README.md"]
+              title: Datadog Serverless CLI for Cloud Run
+        - action: pull-and-push-file
+          branch: master
+          globs:
+          - 'packages/plugin-synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/synthetics/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/packages/plugin-synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
@@ -394,6 +401,7 @@
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
+              exclude_headers_from_search: true
 
       - repo_name: datadog-agent
         contents:
@@ -405,7 +413,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.70.x
+          branch: 7.75.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -429,6 +437,19 @@
 
       - repo_name: datadog-operator
         contents:
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/configuration_public.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'configuration.md'
+              front_matters:
+                title: Configure the Datadog Operator
+                description: "Configure Datadog Agent deployment options using DatadogAgent custom resource specifications and example manifests"
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/configuration_public.md"]
+                aliases:
+                  - /containers/datadog_operator/config
           - action: pull-and-push-file
             branch: main
             globs:
@@ -464,11 +485,13 @@
             globs:
               - 'docs/kubectl-plugin.md'
             options:
-              dest_path: '/containers/datadog_operator/'
+              dest_path: '/containers/kubernetes/'
               file_name: 'kubectl_plugin.md'
               front_matters:
-                title: Datadog Operator Plugin for kubectl
+                title: Datadog Plugin for kubectl
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/kubectl-plugin.md"]
+                aliases:
+                  - /containers/datadog_operator/kubectl_plugin
           - action: pull-and-push-file
             branch: main
             globs:

@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Code Security
+description: Secure applications with SAST, SCA, and IAST tools to detect vulnerabilities in first-party code and open source libraries.
 aliases:
 - /getting_started/code_analysis/
 ---
@@ -46,15 +47,14 @@ To start running code scans in your IDE, see the respective documentation for yo
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Customize your repository settings
 In [Code Security Settings][3], you can manage which repositories have PR comments enabled, as well as [customize the configuration][11] of which Static Code Analysis (SAST) rules are applied across or within repositories. For all the default rules provided by Datadog, see the [SAST Rules][4].
 
-### Set up Quality Gates
+### Set up PR Gates
 
-Datadog provides [Quality Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [Quality Gate setup][7].
+Datadog provides [PR Gates][6] as a platform capability to help you maintain and enforce security and quality standards for changes introduced to your codebase. For more information, see [PR Gate setup][7].
 
 ## Prioritize vulnerabilities with runtime context
 
@@ -199,8 +199,8 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [3]: https://app.datadoghq.com/security/configuration/code-security/setup
 [4]: /security/code_security/static_analysis/static_analysis_rules/
 [5]: /security/code_security/dev_tool_int/ide_plugins/
-[6]: /quality_gates/
-[7]: /quality_gates/setup
+[6]: /pr_gates/
+[7]: /pr_gates/setup
 [8]: /security/code_security/software_composition_analysis/#datadog-severity-score
 [9]: https://app.datadoghq.com/security/configuration/notification-rules
 [10]: /account_management/teams/

@@ -1,23 +1,25 @@
 {{ $path := .Get "path" }}
+{{ $functions := .Get "functions" }}
+{{ $jobs := .Get "jobs" }}
 <div class="logs-containers">
     <div class="container cards-dd col-num-3">
-        <div class="row row-cols-2 row-cols-md-4 g-2 g-xl-3 justify-content-sm-center">
+        <div class="row {{ if or (eq $functions "true") (eq $jobs "true") }}row-cols-2 row-cols-sm-3{{ else }}row-cols-2 row-cols-md-4{{ end }} g-2 g-xl-3 justify-content-sm-center">
             <div class="col">
-                <a class="card h-100" href="/serverless/google_cloud_run/containers/{{ $path }}/python/">
+                <a class="card h-100" href="/serverless/{{ $path }}/python/">
                     <div class="card-body text-center py-2 px-1">
                         {{ partial "img.html" (dict "root" . "src" "integrations_logos/python.png" "class" "img-fluid" "alt" "Python" "width" "400") }}
                     </div>
                 </a>
             </div>
             <div class="col">
-              <a class="card h-100" href="/serverless/google_cloud_run/containers/{{ $path }}/nodejs/">
+              <a class="card h-100" href="/serverless/{{ $path }}/nodejs/">
                     <div class="card-body text-center py-2 px-1">
                         {{ partial "img.html" (dict "root" . "src" "integrations_logos/nodejs.png" "class" "img-fluid" "alt" "Node.js" "width" "400") }}
                     </div>
                 </a>
             </div>
             <div class="col">
-              <a class="card h-100" href="/serverless/google_cloud_run/containers/{{ $path }}/go/">
+              <a class="card h-100" href="/serverless/{{ $path }}/go/">
                 <div class="card-body text-center py-2 px-1">
                   {{ partial "img.html" (dict "root" . "src" "integrations_logos/go-metro.png" "class" "img-fluid" "alt" "go" "width" "400") }}
                 </div>
@@ -25,33 +27,33 @@
             </div>
             <div class="w-100 d-none d-md-block"></div>
             <div class="col">
-              <a class="card h-100" href="/serverless/google_cloud_run/containers/{{ $path }}/java/">
+              <a class="card h-100" href="/serverless/{{ $path }}/java/">
                 <div class="card-body text-center py-2 px-1">
                   {{ partial "img.html" (dict "root" . "src" "integrations_logos/java.png" "class" "img-fluid" "alt" "Java" "width" "400") }}
                 </div>
               </a>
             </div>
             <div class="col">
-              <a class="card h-100" href="/serverless/google_cloud_run/containers/{{ $path }}/dotnet/">
+              <a class="card h-100" href="/serverless/{{ $path }}/dotnet/">
                     <div class="card-body text-center py-2 px-1">
                         {{ partial "img.html" (dict "root" . "src" "integrations_logos/dotnet_text.png" "class" "img-fluid" "alt" ".NET" "width" "400") }}
                     </div>
                 </a>
-            </div>
+            </div>{{ if ne $jobs "true" }}
             <div class="col">
-              <a class="card h-100" href="/serverless/google_cloud_run/containers/{{ $path }}/ruby/">
+              <a class="card h-100" href="/serverless/{{ $path }}/ruby/">
                 <div class="card-body text-center py-2 px-1">
                   {{ partial "img.html" (dict "root" . "src" "integrations_logos/ruby.png" "class" "img-fluid" "alt" "Ruby" "width" "400") }}
                 </div>
               </a>
-            </div>
+            </div>{{ end }}{{ if and (ne $functions "true") (ne $jobs "true") }}
             <div class="col">
-              <a class="card h-100" href="/serverless/google_cloud_run/containers/{{ $path }}/php/">
+              <a class="card h-100" href="/serverless/{{ $path }}/php/">
                     <div class="card-body text-center py-2 px-1">
                         {{ partial "img.html" (dict "root" . "src" "integrations_logos/php.png" "class" "img-fluid" "alt" "PHP" "width" "400") }}
                     </div>
                 </a>
-            </div>
+            </div>{{ end }}
         </div>
     </div>
 </div>

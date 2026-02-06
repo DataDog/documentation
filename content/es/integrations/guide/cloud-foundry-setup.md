@@ -91,8 +91,8 @@ Hay tres puntos de integración con Datadog, cada uno de los cuales logra un obj
 - **Datadog Cluster Agent BOSH release** (Versión del Datadog Cluster Agent BOSH): despliega un trabajo del Datadog Cluster Agent. El trabajo consulta CAPI y la API BBS para recopilar metadatos a nivel de clúster y de aplicación para proporcionar capacidades mejoradas de etiquetado en tus aplicaciones y contenedores.
 - **Datadog Firehose Nozzle**: despliega uno o más trabajos de Datadog Firehose Nozzle. Las tareas acceden al Loggregator Firehose de tu despliegue y envían todo lo que no sean métricas de contenedor a Datadog.
 
-<div class="alert alert-warning">
-Estas integraciones están destinadas a los administradores de despliegue de Cloud Foundry, no a los usuarios finales.
+<div class="alert alert-danger">
+Estas integraciones están pensadas para administradores de despliegues de Cloud Foundry, no para usuarios finales.
 </div>
 
 ### Requisitos previos
@@ -101,7 +101,12 @@ Debes tener un despliegue de Cloud Foundry en funcionamiento y acceso al BOSH Di
 
 ### Instalar la versión del Datadog Agent BOSH
 
-Datadog proporciona tarballs del Datadog Agent empaquetados como una versión de BOSH. Sube la última versión a tu BOSH Director e instálala en cada nodo de tu despliegue como un [complemento][17] (del mismo modo que un Director despliega el BOSH Agent en todos los nodos).
+Datadog proporciona los archivos tar del Datadog Agent empaquetados como una versión de BOSH. 
+
+Sigue la [guía de instalación de la aplicación en Fleet Automation][36] para generar comandos de BOSH compatibles con el sitio y una `runtime.yml` previamente rellenada que instala el Datadog Agent como complemento de BOSH en todas las máquinas virtuales de Cloud Foundry.
+
+{{< img src="/agent/basic_agent_usage/agent_install_foundry.png" alt="Pasos de instalación de la aplicación para el Datadog Agent en Cloud Foundry." style="width:90%;">}}
+
 
 #### Cargar la versión de Datadog a tu BOSH Director
 
@@ -226,7 +231,7 @@ bosh upload release https://cloudfoundry.datadoghq.com/datadog-cluster-agent/dat
 bosh upload-release -e <BOSH_ENV> https://cloudfoundry.datadoghq.com/datadog-cluster-agent/datadog-cluster-agent-boshrelease-latest.tgz
 ```
 
-#### Despliegue
+#### Implementación
 Utiliza la plantilla de manifiesto de despliegue de ejemplo que aparece a continuación para desplegar el Datadog Cluster Agent y exponerlo al Datadog Agent. Consulta la [especificación en GitHub][33] para ver las propiedades disponibles.
 
 ```yaml
@@ -481,7 +486,7 @@ Puedes activar o desactivar el prefijo de metadatos de la aplicación en las mé
 
 {{< img src="integrations/cloud_foundry/enable_metadata_app_prefix.png" alt="La configuración del cuadro de integración en Datadog con Habilitar prefijo de métricas de aplicación de metadatos sin marcar" >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -495,7 +500,6 @@ Puedes activar o desactivar el prefijo de metadatos de la aplicación en las mé
 [8]: https://github.com/cf-platform-eng/meta-buildpack
 [15]: https://bosh.io/docs/bosh-cli.html
 [16]: https://bosh.io/docs/cli-v2.html#install
-[17]: https://bosh.io/docs/runtime-config.html#addons
 [18]: https://github.com/DataDog/datadog-agent-boshrelease
 [19]: https://github.com/DataDog/datadog-agent-boshrelease/blob/master/jobs/dd-agent/spec
 [20]: https://app.datadoghq.com/infrastructure/map
@@ -513,3 +517,4 @@ Puedes activar o desactivar el prefijo de metadatos de la aplicación en las mé
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
 [34]: /es/containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
 [35]: /es/containers/cluster_agent/clusterchecks/
+[36]: https://app.datadoghq.com/fleet/install-agent/latest?platform=cloud_foundry

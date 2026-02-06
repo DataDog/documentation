@@ -1,5 +1,6 @@
 ---
 title: Containers Guides
+description: List of guides for container monitoring setup and configuration
 private: true
 disable_toc: true
 ---
@@ -13,6 +14,7 @@ disable_toc: true
     {{< nextlink href="/containers/guide/compose-and-the-datadog-agent" >}}Compose and the Datadog Agent{{< /nextlink >}}
     {{< nextlink href="/containers/guide/docker-deprecation" >}}Deprecating Docker in Kubernetes{{< /nextlink >}}
     {{< nextlink href="/containers/guide/podman-support-with-docker-integration" >}}Using the Docker integration with Podman container runtime{{< /nextlink >}}
+    {{< nextlink href="/containers/guide/readonly-root-filesystem" >}}Running the Datadog Agent with a Read-Only Root Filesystem{{< /nextlink >}}
     {{< nextlink href="/containers/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}
     {{< nextlink href="/containers/guide/sync_container_images" >}}Synchronize Datadog's images with a private registry{{< /nextlink >}}
     {{< nextlink href="/containers/guide/how-to-import-datadog-resources-into-terraform/" >}}How to Import Datadog Resources into Terraform{{< /nextlink >}}

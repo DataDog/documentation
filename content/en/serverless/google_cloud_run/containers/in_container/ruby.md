@@ -30,7 +30,7 @@ gem 'datadog'
 
 2. **Install serverless-init**.
 
-   {{% gcr-install-serverless-init cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
+   {{% serverless-init-install mode="in-container" cmd="\"rails\", \"server\", \"-b\", \"0.0.0.0\"" %}}
 
 3. **Set up logs**.
 
@@ -52,7 +52,7 @@ logger.info "Hello world!"
 
 4. **Configure your application**.
 
-{{% gcr-configure %}}
+{{% serverless-init-configure cloudrun="true" %}}
 
 5. {{% gcr-service-label %}}
 
@@ -60,11 +60,11 @@ logger.info "Hello world!"
 
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars instrumentationMethod="in-container" language="ruby" %}}
+{{% serverless-init-env-vars-in-container language="ruby" defaultSource="cloudrun" %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -73,4 +73,4 @@ logger.info "Hello world!"
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/#instrument-your-application
 [2]: /tracing/other_telemetry/connect_logs_and_traces/ruby/
 [3]: /developers/dogstatsd/?tab=ruby#install-the-dogstatsd-client
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples
+[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=ruby#code-examples-5

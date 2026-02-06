@@ -1,5 +1,6 @@
 ---
 title: Datadog Audit Trail
+description: Monitor Datadog user activity, API requests, and resource changes with comprehensive audit logging for compliance, security, and governance.
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -61,7 +62,7 @@ To see who enabled Audit Trail:
 
 
 ### Permissions
-Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer.
 
 ### Archiving
 
@@ -134,7 +135,7 @@ Notable events are a subset of audit events that show potential critical configu
 
 {{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
 
-Events that match the following queries are marked as notable.
+Events that match the following queries are marked as notable. You can also retrieve all notable events using the query `is_notable_event:true`.
 
 | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------------------------------------------------- | --------------------------------------------------|
@@ -147,6 +148,7 @@ Events that match the following queries are marked as notable.
 | Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
 | Changes to Sensitive Data Scanner scanning groups | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
 | Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Activation, deactivation, and modification of Product Analytics for applications | `@evt.name:"Product Analytics" @asset.type:product_analytics @action:(enabled OR disabled OR modified)` |
 
 ### Inspect Changes (Diff)
 
@@ -156,7 +158,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 ## Filter audit events based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+<div class="alert alert-danger">Reference Tables containing over 1,000,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 
@@ -172,7 +174,7 @@ Log management users can audit API key usage with Audit Trail. For API key audit
 
 ## Create a monitor
 
-To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][7]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
+To create a monitor on a type of audit trail event or by specific Audit Trail attributes, see the [Audit Trail Monitor documentation][7]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
 ## Create a dashboard or a graph
 
@@ -184,23 +186,17 @@ Give more visual context to your audit trail events with dashboards. To create a
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-## Create a scheduled report
+## Send out a scheduled report
 
-Datadog Audit Trail allows you to send out audit analytics views as routinely scheduled emails. These reports are useful for regular monitoring of the Datadog platform usage. For example, you can choose to get a weekly report of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
+You can save your Audit Trail query as a dashboard and send out a scheduled report. These reports can be useful for regular monitoring of the Datadog platform usage. For example, you can send out a weekly email of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
 
-To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
+To create a scheduled report:
 
-**Note**: The **List** view does not have the option to export to a scheduled report.
-
-{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
-
-1. Enter a name for the dashboard, which is created with the query widget. A new dashboard is created for every scheduled report. This dashboard can be referenced and changed later if you need to change the report content or schedule.
-2. Schedule the email report by customizing the report frequency and time frame.
-3. Add recipients that you want to send the email to.
-4. Add any additional customized messages that needs to be part of the email report.
-5. Click **Create Dashboard and Schedule Report**.
-
-{{< img src="account_management/audit_logs/export_workflow.png" alt="Exporting a audit analytics view into a scheduled email" style="width:80%;" >}}
+1. Navigate to [Audit Trail][1], enter your query to filter your audit events.
+1. Click **More** and select **Save to dashboard**.
+    - You can either save to an existing dashboard or create a new dashboard.
+1. On your dashboard, click **Share** and select **Schedule report**.
+1. Follow the instructions in [Schedule a Report][17] to set up your report.
 
 ## Download Audit Events as CSV
 
@@ -243,3 +239,5 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [14]: /coterm
 [15]: /security/cloud_siem/
 [16]: /getting_started/cloud_siem/
+[17]: /dashboards/sharing/scheduled_reports/#schedule-a-report
+

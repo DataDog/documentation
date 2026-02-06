@@ -24,7 +24,7 @@ version: '1.0'
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">L'intégration Alibaba Cloud ne prend pas en charge le site gouvernemental de Datadog.</div>
+<div class="alert alert-danger">L'intégration Alibaba Cloud ne prend pas en charge le site gouvernemental de Datadog.</div>
 {{< /site-region >}}
 
 ## Présentation

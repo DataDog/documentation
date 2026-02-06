@@ -2,9 +2,15 @@
 title: Error Tracking
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: 'https://www.datadoghq.com/blog/error-tracking-and-github/'
   tag: 'Blog'
   text: 'Troubleshoot root causes with GitHub commit and ownership data in Error Tracking'
+- link: 'https://www.datadoghq.com/blog/go-error-handling/'
+  tag: 'Blog'
+  text: 'A practical guide to error handling in Go'
 ---
 
 ## Overview
@@ -19,6 +25,19 @@ Additional features are available depending on the source of the error. See [sup
 
 - Take a tour of key Error Tracking features in the [Error Tracking Explorer][5] documentation.
 - Use the product-specific links in the next section to set up Error Tracking for a particular error source.
+
+## Setup
+{{< whatsnext desc="To get started with Datadog Error Tracking, choose one of the following setup options:" >}}
+    {{< nextlink href="agentic_onboarding/setup" >}}Agentic Onboarding{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/browser" >}}Browser{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/android" >}}Android{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/ios" >}}iOS{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/expo" >}}Expo{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/reactnative" >}}React Native{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/mobile/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="error_tracking/frontend/logs" >}}Logs{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Supported error sources
 

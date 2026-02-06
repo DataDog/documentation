@@ -1,5 +1,6 @@
 ---
 title: Send traces to the Agent by API
+description: Learn how to send traces directly to the Datadog Agent using the tracing API for custom integrations and unsupported frameworks.
 
 further_reading:
   - link: '/tracing/'

@@ -6,7 +6,7 @@ private: true
 title: CloudPrem
 ---
 
-<div class="alert alert-warning">CloudPrem está en Vista previa.</div>
+<div class="alert alert-danger">CloudPrem está en Vista previa.</div>
 
 ## Información general
 

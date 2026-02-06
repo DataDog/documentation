@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/custom-metrics-governance/"
   tag: "Blog"
   text: "Best practices for end-to-end custom metrics governance"
+- link: "https://www.datadoghq.com/blog/govern-custom-metrics/"
+  tag: "Blog"
+  text: "A FinOps engineer's guide to governing custom metrics"
 ---
 
 ## Overview
@@ -33,7 +36,7 @@ Check out this [interactive walk through][17] of Datadog's custom metrics govern
 
 ## Prerequisites
 
-<div class="alert alert-warning">Some product features require Administrator access.</div> 
+<div class="alert alert-danger">Some product features require Administrator access.</div> 
 
 {{< whatsnext desc="This guide assumes you have an understanding of the following concepts in custom metrics:" >}}
     {{< nextlink href="/metrics/custom_metrics/" >}}What is considered a custom metric{{< /nextlink >}}
@@ -49,7 +52,7 @@ See the steps in this section to review your total account's monthly metric usag
 
 ### Account-level visibility
 
-<div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
+<div class="alert alert-danger">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
 The [Plan and Usage][1] provides you an out-of-the-box (OOTB) summary of your account's monthly billable custom metrics usage with detailed insights on your costs, burn rate, and Top Custom Metric names.
 
@@ -76,7 +79,7 @@ Team-level visibility enables account administrators to hold teams accountable. 
 Individual teams might have limited insights into the costs of the metrics and tags they're submitting. This results in teams being less motivated to control their usage or even limit usage growth. It is crucial for everyone to have visibility into their usage and feel empowered to take ownership in managing those volumes and associated costs.
 
 #### Find the source of your largest custom metrics
-<div class="alert alert-warning">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
+<div class="alert alert-danger">You must have the <a href="https://docs.datadoghq.com/account_management/rbac/?tab=datadogapplication">Datadog Admin Role</a> to access the Plan & Usage page.</div>
 
 {{< img src="metrics/guide/custom_metrics_governance/team_attribution_plan_usage_table.png" alt="Navigate to the Metrics Summary from the Plan & Usage page through the Top Custom Metrics table" style="width:90%;" >}}
 

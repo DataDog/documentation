@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Datadog Sites
+description: Learn about different Datadog sites for your region and security requirements, including government-compliant options.
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/dashboards-slos'
   tag: 'Learning Center'

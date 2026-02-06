@@ -6,7 +6,7 @@ aliases:
 title: App Analytics
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Cette page décrit des fonctionnalités obsolètes, dont la configuration repose sur l'ancienne solution App Analytics, qui peuvent s'avérer utiles pour diagnostiquer des problèmes ou modifier d'anciennes configurations. Pour contrôler tous les aspects de vos traces, utilisez plutôt les <a href="/tracing/trace_pipeline">contrôles d'ingestion et filtres de rétention</a>.
 </div>
 
@@ -476,7 +476,7 @@ span->SetTag(datadog::tags::analytics_event, 0.5);
 
 ### Dans l'Agent Datadog
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 Cette section décrit des fonctionnalités obsolètes, dont la configuration repose sur l'ancienne solution App Analytics.
 </div>
 

@@ -1,4 +1,4 @@
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   観測可能性パイプラインのリモート構成は、非公開ベータ版です。アクセスについては、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>またはカスタマーサクセスマネージャーにお問い合わせください。
 </div>
 

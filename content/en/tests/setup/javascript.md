@@ -45,7 +45,7 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
 </div>
 
@@ -207,7 +207,7 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
 ```
 **Note**: `description` values in annotations are [typed as strings][2]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
@@ -217,7 +217,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
 [2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
-[3]: /real_user_monitoring/browser/setup/
+[3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
@@ -483,12 +483,12 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [7]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
 [8]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [9]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[10]: /real_user_monitoring/browser/setup/
+[10]: /real_user_monitoring/application_monitoring/browser/setup/
 [11]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
@@ -632,7 +632,7 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 
 ## Manual testing API
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
@@ -754,14 +754,20 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
+### Jest's `--workerThreads`
+Jest's [workerThreads][13] option is not supported.
+
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][13] is not supported.
+Jest's [test.concurrent][14] is not supported.
 
 ### Jest's `--forceExit`
-Jest's [--forceExit][14] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
+Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
 ### Mocha's `--exit`
-Mocha's [--exit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
+Mocha's [--exit][16] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
+
+### Vitest's browser mode
+Vitest's [browser mode][17] is not supported.
 
 ## Best practices
 
@@ -780,7 +786,7 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][16] instead:
+And use [`test.each`][18] instead:
 
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
@@ -788,7 +794,7 @@ test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][17]:
+For `mocha`, use [`mocha-each`][19]:
 
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
@@ -842,12 +848,14 @@ Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary betwe
 [6]: /tests/code_coverage/?tab=javascripttypescript
 [7]: /getting_started/tagging/unified_service_tagging
 [8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[9]: /real_user_monitoring/browser/
+[9]: /real_user_monitoring/application_monitoring/browser/
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[13]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[14]: https://jestjs.io/docs/cli#--forceexit
-[15]: https://mochajs.org/#-exit
-[16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[17]: https://www.npmjs.com/package/mocha-each
+[13]: https://jestjs.io/docs/configuration#workerthreads
+[14]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[15]: https://jestjs.io/docs/cli#--forceexit
+[16]: https://mochajs.org/running/cli/#--exit
+[17]: https://vitest.dev/guide/browser/
+[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[19]: https://www.npmjs.com/package/mocha-each

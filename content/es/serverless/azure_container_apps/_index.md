@@ -19,13 +19,13 @@ Azure Container Apps es una plataforma serverless totalmente gestionada que sirv
 {{< tabs >}}
 {{% tab "Node.js" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-js`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Node.js][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-js`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Node.js][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
 En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
@@ -41,13 +41,13 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab "Python" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-py`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Python][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-py`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Python][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
 En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
@@ -63,13 +63,13 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab "Java" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-java`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Java][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-java`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Java][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
 En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
@@ -85,13 +85,13 @@ Para configurar el registro en tu aplicación, consulta [Recopilación de logs d
 {{% /tab %}}
 {{% tab "Go" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-go`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Go][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-go`. Para obtener instrucciones, consulta [Rastreo de aplicaciones Go][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
 En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
@@ -107,13 +107,13 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab ".NET" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-dotnet`. Para obtener instrucciones, consulta [Rastreo de aplicaciones .NET][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-dotnet`. Para obtener instrucciones, consulta [Rastreo de aplicaciones .NET][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
 En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 
@@ -129,13 +129,13 @@ Para configurar la generación de logs en tu aplicación, consulta [Recopilació
 {{% /tab %}}
 {{% tab "PHP" %}}
 #### Rastreo
-Instrumenta tu aplicación principal con la biblioteca `dd-trace-php`. Para obtener instrucciones, consulta [Rastreo de aplicaciones PHP][1].
+Instrumenta tu aplicación principal con la librería `dd-trace-php`. Para obtener instrucciones, consulta [Rastreo de aplicaciones PHP][1].
 
 #### Métricas
 Las métricas personalizadas también se recopilan a través del rastreador. Consulta los [ejemplos de código][2].
 
 #### Logs
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs. 
+El sidecar de Datadog utiliza el seguimiento de archivos para recopilar logs.
 
 En Azure, añade un volumen de montaje al contenedor auxiliar *y* a tus contenedores de aplicación utilizando el [almacenamiento de alcance de réplica][5]. Utiliza el tipo "Almacenamiento efímero" cuando crees tu volumen. Los ejemplos en esta página utilizan el nombre de volumen `logs` y la ruta de montaje `/LogFiles`.
 

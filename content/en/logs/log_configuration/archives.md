@@ -26,7 +26,7 @@ Configure your Datadog account to forward all the logs ingested—whether [index
 
 {{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
-Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
+Navigate to the [**Log Archiving & Forwarding** page][3] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
 1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
 2. Create a [storage bucket](#create-a-storage-bucket).
@@ -36,6 +36,12 @@ Navigate to the [**Log Forwarding** page][3] to set up an archive for forwarding
 6. [Validate](#validation) your setup and check for possible misconfigurations that Datadog would be able to detect for you.
 
 See how to [archive your logs with Observability Pipelines][4] if you want to route your logs to a storage-optimized archive directly from your environment.
+
+The following metrics report on logs that have been archived successfully, including logs that were sent successfully after retries.
+
+- datadog.archives.logs.bytes
+- datadog.archives.logs.count
+
 
 ## Configure an archive
 
@@ -72,7 +78,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 ### Create a storage bucket
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+<div class="alert alert-danger">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
 {{< /site-region >}}
 
 {{< tabs >}}
@@ -81,7 +87,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **Notes:**
@@ -194,7 +200,7 @@ Only Datadog users with the [`logs_write_archive` permission][5] can create, mod
 
 ### Route your logs to a bucket
 
-Navigate to the [Log Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
+Navigate to the [Log Archiving & Forwarding page][6] and select **Add a new archive** on the **Archives** tab.
 
 **Notes:**
 * Only Datadog users with the [`logs_write_archive` permission][5] can complete this and the following step.
@@ -309,15 +315,15 @@ To set or check your S3 bucket's encryption configuration:
 {{% /tab %}}
 {{% tab "Amazon S3 managed keys" %}}
 
-This option ensures that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket. 
+This option ensures that all archives objects are uploaded with [SSE_S3][1], using Amazon S3 managed keys. This overrides any default encryption setting on the S3 bucket.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html
 {{% /tab %}}
 {{% tab "AWS Key Management Service" %}}
 
-This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket. 
+This option ensures that all archives objects are uploaded using a customer-managed key (CMK) from [AWS KMS][1]. This overrides any default encryption setting on the S3 bucket.
 
-Ensure that you have completed the following steps to create a valid CMK and CMK policy. You will need to provide the CMK ARN to successfully configure this encryption type. 
+Ensure that you have completed the following steps to create a valid CMK and CMK policy. Then, provide the CMK ARN to successfully configure this encryption type.
 
 1. Create your CMK.
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
@@ -404,27 +410,11 @@ It is important to order your archives carefully. For example, if you create a f
 The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
 
 ```
-/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz
-/my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<DATADOG_ID>.json.gz
+/my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.02aafad5-f525-4592-905e-e962d1a5b2f7.json.gz
+/my/bucket/prefix/dt=<YYYYMMDD>/hour=<HH>/archive_<HHmmss.SSSS>.<UUID>.json.gz
 ```
 
 This directory structure simplifies the process of querying your historical log archives based on their date.
-
-Within the zipped JSON file, each event's content is formatted as follows:
-
-```json
-{
-    "_id": "123456789abcdefg",
-    "date": "2018-05-15T14:31:16.003Z",
-    "host": "i-12345abced6789efg",
-    "source": "source_name",
-    "service": "service_name",
-    "status": "status_level",
-    "message": "2018-05-15T14:31:16.003Z INFO rid='acb-123' status=403 method=PUT",
-    "attributes": { "rid": "abc-123", "http": { "status_code": 403, "method": "PUT" } },
-    "tags": [ "env:prod", "team:acme" ]
-}
-```
 
 ## Further Reading
 
@@ -437,7 +427,7 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [1]: /logs/indexes/#exclusion-filters
 [2]: /logs/archives/rehydrating/
 [3]: https://app.datadoghq.com/logs/pipelines/log-forwarding
-[4]: /observability_pipelines/archive_logs/
+[4]: /observability_pipelines/configuration/explore_templates/?tab=logs#archive-logs
 [5]: /account_management/rbac/permissions/?tab=ui#logs_write_archives
 [6]: https://app.datadoghq.com/logs/pipelines/archives
 [7]: /integrations/azure/
@@ -448,4 +438,4 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [12]: /account_management/rbac/permissions#logs_read_index_data
 [13]: /account_management/rbac/permissions#logs_read_data
 [14]: /logs/explorer/live_tail/
-[15]: /service_management/events/explorer/
+[15]: /events/explorer/

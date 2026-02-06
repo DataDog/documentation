@@ -19,7 +19,7 @@ For more details and information, view the [OpenTracing API][1].
 
 ## Setup
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note:</strong> Starting with v3.0.0, OpenTracing support requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 

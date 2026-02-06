@@ -1,12 +1,19 @@
 ---
 title: Code Coverage
+description: "Upload coverage reports to Datadog, visualize coverage data for pull requests, and block merges based on configurable thresholds."
 further_reading:
   - link: "/code_coverage/setup"
     tag: "Documentation"
     text: "Set up Code Coverage"
+  - link: "/code_coverage/configuration"
+    tag: "Documentation"
+    text: "Configure Code Coverage"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
+  - link: "/code_coverage/monorepo_support"
+    tag: "Documentation"
+    text: "Learn how Code Coverage supports large monorepos"
 algolia:
   tags: ["code coverage"]
 ---

@@ -1,55 +1,96 @@
 ---
 title: Install CloudPrem on AWS EKS
+aliases:
+- /cloudprem/configure/aws_config/
 description: Learn how to install and configure CloudPrem on AWS EKS
 further_reading:
-- link: "/cloudprem/configure/aws_config/"
-  tag: "Documentation"
-  text: "AWS Configuration"
 - link: "/cloudprem/configure/ingress/"
   tag: "Documentation"
   text: "Configure CloudPrem Ingress"
-- link: "/cloudprem/ingest_logs/"
+- link: "/cloudprem/ingest/"
   tag: "Documentation"
   text: "Configure Log Ingestion"
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog CloudPrem is in Preview.
+{{< callout url="https://www.datadoghq.com/product-preview/cloudprem/" btn_hidden="false" header="CloudPrem is in Preview" >}}
+  Join the CloudPrem Preview to access new self-hosted log management features.
 {{< /callout >}}
 
 ## Overview
 
-This document walks you through the process of installing CloudPrem on AWS EKS.
+This document walks you through the process of configuring your AWS environment and installing CloudPrem on AWS EKS.
 
 ## Prerequisites
 
-Before getting started with CloudPrem, ensure you have:
+To deploy CloudPrem on AWS, you need to configure:
+- AWS credentials and authentication
+- AWS region selection
+- IAM permissions for S3 object storage
+- RDS PostgreSQL database (recommended)
+- EKS cluster with AWS Load Balancer Controller
 
-- AWS account with necessary permissions
-- Kubernetes `1.25+` ([EKS][1] recommended)
-- [AWS Load Balancer Controller installed][2]
-- PostgreSQL database ([RDS][3] recommended)
-- S3 bucket for log storage
-- Datadog Agent
-- Kubernetes command line tool (`kubectl`)
-- Helm command line tool (`helm`)
+### AWS credentials
 
-## Installation steps
+When starting a node, CloudPrem attempts to find AWS credentials using the credential provider chain implemented by [rusoto_core::ChainProvider][2] and looks for credentials in this order:
 
-1. [Prepare your AWS environment](#prepare-your-aws-environment)
-2. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
-3. [Verify installation](#verification)
-4. [Configure your Datadog account](#configure-your-datadog-account)
+1. Environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, or `AWS_SESSION_TOKEN` (optional).
+2. Credential profiles file, typically located at `~/.aws/credentials` or otherwise specified by the `AWS_SHARED_CREDENTIALS_FILE` and `AWS_PROFILE` environment variables if set and not empty.
+3. Amazon ECS container credentials, loaded from the Amazon ECS container if the environment variable `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` is set.
+4. Instance profile credentials, used on Amazon EC2 instances, and delivered through the Amazon EC2 metadata service.
 
-## Prepare your AWS environment
+An error is returned if no credentials are found in the chain.
 
-Before installing CloudPrem on EKS, ensure your AWS environment is properly configured. For detailed AWS configuration instructions, see the [AWS Configuration guide][7].
+### AWS Region
 
-Key requirements:
-- AWS credentials configured (IAM role or access keys)
-- Appropriate IAM permissions for S3 access
-- EKS cluster with AWS Load Balancer Controller installed
-- RDS PostgreSQL instance or compatible database
+CloudPrem attempts to find the AWS region from multiple sources, using the following order of precedence:
+
+1. **Environment variables**: Checks `AWS_REGION`, then `AWS_DEFAULT_REGION`.
+2. **AWS config file**: Typically located at `~/.aws/config`, or at the path specified by the `AWS_CONFIG_FILE` environment variable (if set and not empty).
+3. **EC2 instance metadata**: Uses the region of the currently running Amazon EC2 instance.
+4. **Default**: Falls back to `us-east-1` if no other source provides a region.
+
+### IAM permissions for S3
+
+Required authorized actions:
+
+* `ListBucket` (on the bucket directly)
+* `GetObject`
+* `PutObject`
+* `DeleteObject`
+* `ListMultipartUploadParts`
+* `AbortMultipartUpload`
+
+Here is an example of a bucket policy:
+
+```json
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:ListBucket"
+     ],
+     "Resource": [
+       "arn:aws:s3:::my-bucket"
+     ]
+   },
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:GetObject",
+       "s3:PutObject",
+       "s3:DeleteObject",
+       "s3:ListMultipartUploadParts",
+       "s3:AbortMultipartUpload"
+     ],
+     "Resource": [
+       "arn:aws:s3:::my-bucket/*"
+     ]
+   }
+ ]
+}
+```
 
 ### Create an RDS database
 
@@ -77,30 +118,50 @@ echo "postgres://cloudprem:FixMeCloudPrem@$ENDPOINT:$PORT/$DATABASE"
 echo ""
 ```
 
+## Installation steps
+
+1. [Install the CloudPrem Helm chart](#install-the-cloudprem-helm-chart)
+2. [Verify installation](#verification)
+
 ## Install the CloudPrem Helm chart
 
 1. Add and update the Datadog Helm repository:
-
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    ```
 
-2. Create a Kubernetes namespace for the chart:
-
+1. Create a Kubernetes namespace for the chart:
    ```shell
    kubectl create namespace <NAMESPACE_NAME>
    ```
 
-3. Store the PostgreSQL database connection string as a Kubernetes secret:
+   For example, to create a `cloudprem` namespace:
+   ```shell
+   kubectl create namespace cloudprem
+   ```
+
+   **Note**: You can set a default namespace for your current context to avoid having to type `-n <NAMESPACE_NAME>` with every command:
+   ```shell
+   kubectl config set-context --current --namespace=cloudprem
+   ```
+
+1. Store your Datadog API key as a Kubernetes secret:
 
    ```shell
-   kubectl create secret generic <SECRET_NAME> \
+   kubectl create secret generic datadog-secret \
+   -n <NAMESPACE_NAME> \
+   --from-literal api-key="<DD_API_KEY>"
+   ```
+
+1. Store the PostgreSQL database connection string as a Kubernetes secret:
+   ```shell
+   kubectl create secret generic cloudprem-metastore-uri \
    -n <NAMESPACE_NAME> \
    --from-literal QW_METASTORE_URI="postgres://<USERNAME>:<PASSWORD>@<ENDPOINT>:<PORT>/<DATABASE>"
    ```
 
-4. Customize the Helm chart
+1. Customize the Helm chart
 
    Create a `datadog-values.yaml` file to override the default values with your custom configuration. This is where you define environment-specific settings such as the image tag, AWS account ID, service account, ingress setup, resource requests and limits, and more.
 
@@ -122,6 +183,13 @@ echo ""
    environment:
      AWS_REGION: us-east-1
 
+   # Datadog configuration
+   datadog:
+      # The Datadog [site](https://docs.datadoghq.com/getting_started/site/) to connect to. Defaults to `datadoghq.com`.
+      # site: datadoghq.com
+      # The name of the existing Secret containing the Datadog API key. The secret key name must be `api-key`.
+      apiKeyExistingSecret: datadog-secret
+
    # Service account configuration
    # If `serviceAccount.create` is set to `true`, a service account is created with the specified name.
    # The service account will be annotated with the IAM role ARN if `aws.accountId` and serviceAccount.eksRoleName` are set.
@@ -141,29 +209,11 @@ echo ""
      # All indexes created in CloudPrem are stored under this location.
      default_index_root_uri: s3://<BUCKET_NAME>/indexes
 
-   # Ingress configuration
-   # The chart supports two ingress configurations:
-   # 1. A public ingress for external access through the internet that will be used exclusively by Datadog's control plane and query service.
-   # 2. An internal ingress for access within the VPC
-   #
-   # Both ingresses provision an Application Load Balancers (ALBs) in AWS.
-   # The public ingress ALB is created in public subnets.
-   # The internal ingress ALB is created in private subnets.
+   # Internal ingress configuration for access within the VPC
+   # The ingress provisions an Application Load Balancers (ALBs) in AWS which is created in private subnets.
    #
    # Additional annotations can be added to customize the ALB behavior.
    ingress:
-     # The public ingress is configured to only accept TLS traffic and requires mutual TLS (mTLS) authentication.
-     # Datadog's control plane and query service authenticate themselves using client certificates,
-     # ensuring that only authorized Datadog services can access CloudPrem nodes through the public ingress.
-     public:
-       enabled: true
-       name: cloudprem-public
-       host: cloudprem.acme.corp
-       extraAnnotations:
-         alb.ingress.kubernetes.io/load-balancer-name: cloudprem-public
-
-     # The internal ingress is used by Datadog Agents and other collectors running outside
-     # the Kubernetes cluster to send their logs to CloudPrem.
      internal:
        enabled: true
        name: cloudprem-internal
@@ -227,7 +277,7 @@ echo ""
          memory: "16Gi"
    ```
 
-5. Install or upgrade the Helm chart
+1. Install or upgrade the Helm chart
 
    ```shell
    helm upgrade --install <RELEASE_NAME> datadog/cloudprem \
@@ -264,10 +314,6 @@ helm uninstall <RELEASE_NAME>
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/eks/
-[2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller
+[2]: https://docs.rs/rusoto_credential/latest/rusoto_credential/struct.ChainProvider.html
 [3]: https://aws.amazon.com/rds/
-[4]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/
-[5]: /getting_started/containers/datadog_operator/#installation-and-deployment
-[6]: /help/
-[7]: /cloudprem/configure/aws_config
-[8]: /cloudprem/ingest_logs/datadog_agent/
+[8]: /cloudprem/ingest/agent/

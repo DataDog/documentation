@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_ace/README.md
 display_on_public_website: true
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ibm_ace
 integration_id: ibm-ace
 integration_title: IBM ACE
-integration_version: 2.2.2
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_ace
@@ -75,7 +75,7 @@ tile:
 IBM ACE からメトリクスメッセージを消費するためには、[IBM MQ][3] サーバーが必要です。
 
 <div class="alert alert-warning">
-For Linux, make sure to set the LD_LIBRARY_PATH environment variable as described in the <a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ setup</a> before continuing.
+Linux では、続行する前に、<a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ セットアップ</a> に記載のとおり LD_LIBRARY_PATH 環境変数を設定してください。
 </div>
 
 ### IBM ACE
@@ -146,7 +146,7 @@ IBM ACE チェックは [Datadog Agent][6] パッケージに含まれていま�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "ibm-ace" >}}
+{{< get-metrics-from-git "ibm_ace" >}}
 
 
 ### イベント
@@ -154,7 +154,7 @@ IBM ACE チェックは [Datadog Agent][6] パッケージに含まれていま�
 IBM ACE インテグレーションには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "ibm-ace" >}}
+{{< get-service-checks-from-git "ibm_ace" >}}
 
 
 ### ログ収集
@@ -165,7 +165,7 @@ IBM ACE インテグレーションには、イベントは含まれません。
     logs_enabled: true
     ```
 
-2. To start collecting your IBM ACE logs, add this configuration block to your `ibm_ace.d/conf.yaml` file:
+2. IBM ACE ログの収集を開始するには、次の設定ブロックを `ibm_ace.d/conf.yaml` ファイルに追加してください:
 
     ```yaml
     logs:
@@ -174,7 +174,7 @@ IBM ACE インテグレーションには、イベントは含まれません。
         source: ibm_ace
     ```
 
-    Change the `path` parameter value based on your environment. See the [sample `ibm_ace.d/conf.yaml` file][7] for all available configuration options.
+    お使いの環境に合わせて `path` パラメーターの値を変更してください。利用できる設定オプションの一覧は、[サンプル `ibm_ace.d/conf.yaml` ファイル][7] を参照してください。
 
 ## トラブルシューティング
 

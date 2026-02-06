@@ -1,8 +1,12 @@
 ---
+description: Monitoriza Core Web Vitals, tiempos de carga y telemetrías de rendimiento
+  de páginas con el SDK del navegador RUM para optimizar la experiencia del usuario
+  y solucionar problemas.
 further_reading:
-- link: https://learn.datadoghq.com/courses/core-web-vitals-lab
+- link: https://learn.datadoghq.com/courses/rum-optimize-frontend-performance
   tag: Centro de aprendizaje
-  text: 'Laboratorio interactivo: métricas de Core Web Vitals'
+  text: 'Laboratorio interactivo: Optimización del rendimiento frontend mediante la
+    monitorización del navegador RUM de Datadog'
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: Blog
   text: Monitor de métricas de Core Web Vitals con Datadog RUM y Monitorización Sintético
@@ -35,8 +39,8 @@ Puedes acceder a la telemetría de rendimiento de tus vistas en:
 
 ## Tiempos de eventos y métricas de core web vitals
 
-<div class="alert alert-warning">
-  La telemetría de Core Web Vitals de Datadog está disponible en el paquete <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> v2.2.0 o posterior.
+<div class="alert alert-danger">
+  La telemetría de Core Web Vitals de Datadog está disponible en el paquete <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> de v2.2.0 o posterior.
 </div>
 
 Los [Core Web Vitals de Google'][5] son un conjunto de tres KPI diseñados para monitorizar la experiencia de usuario de un sitio. Estos KPI se centran en ofrecer una visión del rendimiento de carga, la interactividad y la estabilidad visual. Cada KPI viene acompañado de una guía del rango de valores que se traducen en una buena experiencia de usuario. Datadog recomienda monitorizar el percentil 75 de estos KPI.
@@ -139,6 +143,15 @@ window.DD_RUM.init({
         (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
+```
+
+También puedes ignorar determinadas mutaciones DOM marcando un elemento (o uno de sus ancestros) con el atributo `data-dd-excluded-activity-mutations`.  
+Esto es útil para elementos que se actualizan constantemente pero que no indican una inestabilidad real de la interfaz de usuario, como los loading spinners, las barras de progreso o los relojes en vivo.
+
+```html
+<div id="loading-spinner" data-dd-excluded-activity-mutations>
+  <svg> ... </svg>
+</div>
 ```
 
 ### Navegación en Hash SPA

@@ -323,7 +323,7 @@ Gradle 플러그인은 빌드 시점에 적절한 ProGuard `mapping.txt` 파일�
 
 ### 샘플 세션
 
-<div class="alert alert-warning">세션 샘플 속도 구성은 Error Tracking에는 적용되지 않습니다.</div>
+<div class="alert alert-danger">세션 샘플 속도 구성은 Error Tracking에는 적용되지 않습니다.</div>
 
 애플리케이션이 Datadog로 전송하는 데이터를 제어하려면 [RUM 초기화][11] 시 세션의 샘플 속도를 지정할 수 있습니다. 비율은 0에서 100 사이의 백분율입니다. 기본적으로 `sessionSamplingRate`은 100으로 설정되어 있습니다(모든 세션 유지).
 

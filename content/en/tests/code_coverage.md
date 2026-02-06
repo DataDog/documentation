@@ -6,6 +6,9 @@ aliases:
 - /continuous_integration/integrate_tests/code_coverage/
 - /continuous_integration/tests/code_coverage/
 further_reading:
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: "/tests"
   tag: "Documentation"
   text: "Learn about Test Optimization"
@@ -37,7 +40,7 @@ Ensure that [Test Optimization][1] is already set up for your language.
 * `cucumber-js>=7.0.0`.
 * `vitest>=2.0.0`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: The DataDog Tracer does not generate code coverage. If your tests are run with code coverage enabled, <code>dd-trace</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
 </div>
 
@@ -288,7 +291,7 @@ DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 * `datadog-ci-rb>=1.7.0`
 * `simplecov>=0.18.0`.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>datadog-ci-rb</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
 </div>
 
@@ -305,7 +308,7 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 
 * `go test -cover`
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
   <strong>Note</strong>: The DataDog library does not generate total code coverage. If your tests are run with code coverage enabled, <code>dd-trace-go</code> reports it under the <code>test.code_coverage.lines_pct</code> tag for your test sessions automatically.
 </div>
 

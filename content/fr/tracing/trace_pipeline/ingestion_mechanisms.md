@@ -46,7 +46,7 @@ Par exemple, si le service `A` génère plus de trafic que le service `B`, l'Age
 
 #### Configuration à distance
 
-<div class="alert alert-warning">La fonctionnalité Remote Configuration pour la configuration de l'ingestion dans l'Agent est disponible en version bêta. Contactez l'<a href="/help/">assistance Datadog</a> pour en bénéficier.</div>
+<div class="alert alert-danger">La fonctionnalité Remote Configuration pour la configuration de l'ingestion dans l'Agent est disponible en version bêta. Contactez l'<a href="/help/">assistance Datadog</a> pour en bénéficier.</div>
 
 La configuration du taux d'échantillonnage pour l'Agent peut être effectuée à distance, tant que vous utilisez la version [7.42.0][20] ou une version plus récente de l'Agent. Consultez l'article de blog [Fonctionnement de Remote Configuration][23] (en anglais) pour découvrir comment activer la configuration à distance dans vos Agents. Grâce à cette fonctionnalité, vous pouvez modifier le paramètre sans avoir à redémarrer l'Agent.
 
@@ -252,7 +252,7 @@ L'échantillonneur error intercepte des traces qui contiennent des spans d'erreu
 
 #### Agent Datadog 7.42.0 et versions ultérieures
 
-<div class="alert alert-warning"> Cette fonctionnalité est actuellement disponible en version bêta. Contactez l'<a href="https://www.datadoghq.com/support/">assistance Datadog</a> pour en bénéficier.</div>
+<div class="alert alert-danger"> Cette fonctionnalité est actuellement disponible en version bêta. Contactez l'<a href="https://www.datadoghq.com/support/">assistance Datadog</a> pour en bénéficier.</div>
 
 Il est possible de configurer à distance l'échantillonnage rare, tant que vous utilisez la version [7.42.0][20] ou une version plus récente de l'Agent. Référez-vous à la [documentation dédiée][21] pour activer la configuration à distance dans vos Agents. Cela vous permet de recueillir des spans rare sans avoir à redémarrer l'Agent Datadog.
 
@@ -275,7 +275,7 @@ L'échantillonneur rare envoie un ensemble de spans rares à Datadog. Il interce
 
 #### Agent Datadog 7.42.0 et versions ultérieures
 
-<div class="alert alert-warning"> Cette fonctionnalité est actuellement disponible en version bêta. Contactez l'<a href="https://www.datadoghq.com/support/">assistance Datadog</a> pour en bénéficier.</div>
+<div class="alert alert-danger"> Cette fonctionnalité est actuellement disponible en version bêta. Contactez l'<a href="https://www.datadoghq.com/support/">assistance Datadog</a> pour en bénéficier.</div>
 
 Il est possible de configurer à distance le taux d'échantillonnage error, tant que vous utilisez la version [7.42.0][20] ou une version plus récente de l'Agent. Référez-vous à la [documentation dédiée][21] pour activer la configuration à distance dans vos Agents. Cela vous permet de modifier la valeur du paramètre sans avoir à redémarrer l'Agent Datadog.
 
@@ -718,7 +718,7 @@ Pour en savoir plus sur les paramètres d'échantillonnage, consultez la [docume
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"> Le mécanisme <a href="/tracing/legacy_app_analytics/">App Analytics</a> est désormais obsolète. Pour ingérer des spans uniques sans la trace complète, utilisez la configuration d'<a href="/tracing/trace_pipeline/ingestion_mechanisms#spans-uniques">échantillonnage de spans uniques</a>. Pour ingérer les traces complètes, utilisez les configurations d'<a href="/tracing/trace_pipeline/ingestion_mechanisms#echantillonnage-en-amont">échantillonnage en amont</a> configurations.</div>
+<div class="alert alert-danger"> Le mécanisme <a href="/tracing/legacy_app_analytics/">App Analytics</a> est désormais obsolète. Pour ingérer des spans uniques sans la trace complète, utilisez la configuration d'<a href="/tracing/trace_pipeline/ingestion_mechanisms#spans-uniques">échantillonnage de spans uniques</a>. Pour ingérer les traces complètes, utilisez les configurations d'<a href="/tracing/trace_pipeline/ingestion_mechanisms#echantillonnage-en-amont">échantillonnage en amont</a> configurations.</div>
 
 ## Spans ingérées par le produit
 

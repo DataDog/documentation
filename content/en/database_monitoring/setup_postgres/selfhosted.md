@@ -5,7 +5,12 @@ further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
   text: "Basic Postgres Integration"
-
+- link: "/database_monitoring/guide/parameterized_queries/"
+  tag: "Documentation"
+  text: "Capturing SQL Query Parameter Values"
+- link: "https://www.datadoghq.com/blog/database-monitoring-explain-analyze"
+  tag: "Blog"
+  text: "Debug PostgreSQL query latency faster with EXPLAIN ANALYZE in Datadog Database Monitoring"
 ---
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -19,7 +24,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
 
 Prerequisites
 : Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
@@ -147,6 +152,8 @@ curs REFCURSOR;
 plan JSON;
 
 BEGIN
+   SET TRANSACTION READ ONLY;
+
    OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
    FETCH curs INTO plan;
    CLOSE curs;
@@ -208,46 +215,38 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres. 
+Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres.
 If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, return here to continue with the instructions for your installation method.
 
-Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][1].
+Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][9].
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
+```yaml
+init_config:
+instances:
+ - dbm: true
+   host: localhost
+   port: 5432
+   username: datadog
+   password: 'ENC[datadog_user_database_password]'
 
-      ## Optional: Connect to a different database if needed for `custom_queries`
-      # dbname: '<DB_NAME>'
-
-   ```
+  ## Optional: Connect to a different database if needed for `custom_queries`
+  # dbname: '<DB_NAME>'
+```
 
 **Note**: If your password includes special characters, wrap it in single quotes.
 
-[Restart the Agent][2] to apply the changes.
-
-[1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /agent/configuration/agent-commands/#restart-the-agent
+[Restart the Agent][16] to apply the changes.
 
 ### Collecting logs (optional)
 
 PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. Refer to the PostgreSQL [documentation][11] on this topic for additional details.
 
-1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
+1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, set the following parameters in the log section:
    ```conf
      logging_collector = on
-     log_directory = 'pg_log'  # directory where log files are written,
-                               # can be absolute or relative to PGDATA
-     log_filename = 'pg.log'   # log file name, can include pattern
-     log_statement = 'all'     # log all queries
-     #log_duration = on
-     log_line_prefix= '%m [%p] %d %a %u %h %c '
+     log_line_prefix = '%m [%p] %d %a %u %h %c ' # this pattern is required to correlate metrics in the Datadog product
      log_file_mode = 0644
+
      ## For Windows
      #log_destination = 'eventlog'
    ```
@@ -282,6 +281,41 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
    Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
 5. [Restart the Agent][10].
 
+### Collecting plans with `auto_explain` (optional)
+
+By default, the agent only gathers [`EXPLAIN`][17] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
+
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][18], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so be sure to enable it before continuing.
+
+<div class="alert alert-danger">
+  <strong>Important:</strong> <code>auto_explain</code> produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> permission to control who can see the resulting plans, but the log lines themselves <i>are</i> visible to all users within your Datadog org. Using <a href="/logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
+</div>
+
+After you enable logging collection:
+
+1. Add `auto_explain` to your list of `shared_preload_libraries` in `postgresql.conf`. For instance, if `shared_preload_libraries` is set to `pg_stat_statements`, change it to `pg_stat_statements,auto_explain`
+
+2. Change the `log_line_prefix` to enable richer event correlation. This pattern is required to ingest auto_explain plans.
+   ```conf
+     log_line_prefix = '%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a:'
+   ```
+
+3. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
+
+   ```conf
+    auto_explain.log_format: "json"
+    auto_explain.log_min_duration: "1000"
+    auto_explain.log_analyze: "on"
+    auto_explain.log_buffers: "on"
+    auto_explain.log_timing: "off"
+    auto_explain.log_triggers: "on"
+    auto_explain.log_verbose: "on"
+    auto_explain.log_nested_statements: "on"
+    auto_explain.sample_rate: "1"
+   ```
+
+4. [Restart the Agent][10].
+
 ### Validate
 
 [Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
@@ -297,9 +331,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
-[1]: https://www.postgresql.org/docs/12/contrib.html
-
+[1]: https://www.postgresql.org/docs/current/contrib.html
 [2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
@@ -314,3 +346,6 @@ If you have installed and configured the integrations and Agent as described and
 [13]: /agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /database_monitoring/troubleshooting/?tab=postgres
+[16]: /agent/configuration/agent-commands/#restart-the-agent
+[17]: https://www.postgresql.org/docs/current/sql-explain.html
+[18]: https://www.postgresql.org/docs/current/auto-explain.html

@@ -8,7 +8,7 @@ title: Oracle RAC용 데이터베이스 모니터링 설정
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">이 사이트에서는 데이터베이스 모니터링이 지원되지 않습니다.</div>
+<div class="alert alert-danger">이 사이트에서는 데이터베이스 모니터링이 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">
@@ -17,7 +17,7 @@ title: Oracle RAC용 데이터베이스 모니터링 설정
 
 데이터베이스 모니터링은 쿼리 샘플을 노출하여 다양한 워크로드를 프로파일링하고 문제를 진단함으로써 Oracle 데이터베이스에 대한 심층적인 가시성을 제공합니다.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 아래 단계를 완료하기 전에 데이터베이스 모니터링에 대한 <a href="/database_monitoring/setup_oracle/?tab=linux#prerequisites">사전 요구 사항</a>을 충족했는지 확인하세요.
 </div>
 
@@ -64,7 +64,7 @@ Agent는 CDB에만 연결합니다. CDB에 연결되어 있는 동안 PDB에 대
 
 데이터베이스 모니터링은 Oracle 데이터베이스에 대한 커스텀 쿼리를 지원합니다. 사용 가능한 구성 옵션에 대해 자세히 알아보려면 [conf.yaml.example][11]을 참조하세요.
 
-<div class="alert alert-warning">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
+<div class="alert alert-danger">커스텀 쿼리를 실행하면 Oracle에서 부과하는 추가 비용 또는 수수료가 발생할 수 있습니다.</div>
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example

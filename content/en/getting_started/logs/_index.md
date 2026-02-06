@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Logs
+description: Collect logs from multiple sources, process and analyze them, and correlate these logs with traces and metrics.
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
       tag: 'Learning Center'

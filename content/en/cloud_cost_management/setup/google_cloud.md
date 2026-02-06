@@ -13,6 +13,9 @@ further_reading:
 - link: "/cloud_cost_management/azure"
   tag: "Documentation"
   text: "Gain insights into your Azure bill"
+- link: "/cloud_cost_management/oracle"
+  tag: "Documentation"
+  text: "Gain insights into your Oracle bill"
 ---
 
 
@@ -25,11 +28,13 @@ To use Google Cloud Cost Management in Datadog, follow these steps:
 
 ## Setup
 
+You can setup using the [API][18], [Terraform][19], or directly in Datadog by following the instructions below.
+
 ### Configure the Google Cloud Platform integration
 Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
 
-<div class="alert alert-warning">
+<div class="alert alert-danger">
 The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
 To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the <strong>Limit Metric Collection Filters</strong> section of the integration page.
 </div>
@@ -119,7 +124,7 @@ If your integrated Service Account exists in a different Google Cloud Platform p
 1. Trigger the service agent creation by following the [official documentation][11] using the following values:
    * ENDPOINT: `bigquerydatatransfer.googleapis.com`
    * RESOURCE_TYPE: `project`
-   * RESOURCE_ID: export dataset project</br></br>
+   * RESOURCE_ID: export dataset project<br><br>
 
      This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
 
@@ -130,7 +135,13 @@ If your integrated Service Account exists in a different Google Cloud Platform p
 ### Configure Cloud Cost
 Continue to follow the steps indicated in [Setup & Configuration][3].
 
-**Note**: Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
+**Note**: Data can take 48 to 72 hours after setup to stabilize in Datadog.
+
+### Getting historical data
+
+Newly created BigQuery billing export datasets only contain the most recent 2 months of data. It can take a day or two for this data to backfill in BigQuery. Datadog automatically ingests up to 15 months of available historical cost data once it appears in the BigQuery table.
+
+Google Cloud does not provide a process for backfilling additional historical data beyond the 2 months automatically included when the BigQuery export is first created.
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
@@ -142,9 +153,10 @@ You can visualize your ingested data using the following cost types:
 | `gcp.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
-Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data.
 
-The following out-of-the-box tags are available for filtering and grouping data:
+Datadog automatically enriches your Google Cloud cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][17].
+
+The following out-of-the-box tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data:
 
 | Tag Name                         | Tag Description       |
 | ---------------------------- | ----------------- |
@@ -204,3 +216,6 @@ The following out-of-the-box tags are available:
 [14]: /cloud_cost_management/container_cost_allocation/
 [15]: /cloud_cost_management/setup/google_cloud/#create-or-select-a-google-cloud-storage-bucket
 [16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage
+[17]: /cloud_cost_management/tags
+[18]: /api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
+[19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config

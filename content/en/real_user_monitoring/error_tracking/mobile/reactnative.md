@@ -40,15 +40,21 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 Update your initialization snippet to enable native JavaScript crash reporting:
 
 ```javascript
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<APPLICATION_ID>',
-    true,
-    true,
-    true // enable JavaScript crash reporting
+    {
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>',
+            trackInteractions: true,
+            trackResources: true,
+            trackErrors: true, // <-- Enable JavaScript Crash Reporting
+            nativeCrashReportEnabled: true, // Optional: Enable Native Crash Reporting
+        },
+        logsConfiguration: {},
+        traceConfiguration: {}
+    }
 );
-config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
 ## Get deobfuscated stack traces
@@ -476,9 +482,9 @@ Find the loop on `applicationVariants` in the `android/app/build.gradle` file. I
 Inside the loop, add the following snippet:
 
 ```groovy
-        if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
-            tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
-        }
+if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
+    tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
+}
 ```
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
@@ -499,9 +505,9 @@ Inside the loop, add the following snippet:
 [9]: https://fastlane.tools/
 [10]: https://appcenter.ms/
 [11]: https://www.bitrise.io/
-[12]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#xcode
+[12]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/react-native#xcode
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
-[17]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/react-native/README.md#inject-debug-id
+[17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id

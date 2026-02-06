@@ -12,20 +12,27 @@ further_reading:
 - link: "/cloud_cost_management/setup/google_cloud"
   tag: "Documentation"
   text: "Gain insights into your Google Cloud bill"
+- link: "/cloud_cost_management/oracle"
+  tag: "Documentation"
+  text: "Gain insights into your Oracle bill"
 ---
 
 
 ## Overview
 
-To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
+To use Azure Cloud Cost Management in Datadog, you must configure the Datadog Azure integration and create **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup. To determine your account type, see the [Azure documentation][10]. **Note**: If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup.
+
+To determine your account type, see the [Azure documentation][10]. **Note:** If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
 
 ## Setup
 
+You can setup using the [API][13], [Terraform][14], or directly in Datadog by following the instructions below.
 
 {{% site-region region="us3" %}}
-**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an app registration][2].
+
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -64,8 +71,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-    - Choose **CSV** as the format. **Parquet is not supported.**
-    - Choose **Gzip** as the compression type. **None** is also supported.
+    - Choose **CSV** or **Parquet** as the format.
+    - Choose the compression type. For **CSV**: **Gzip** and **None** are supported. For **Parquet**: **Snappy** and **None** are supported.
     - Ensure that **File partitioning** is checked.
     - Ensure that **Overwrite data** is not checked.
         - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
@@ -89,8 +96,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
-    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note:** If you do not see your App Registration listed, start typing in the name for the UI to update and show it, if it is available.
-    - Select *review + assign*.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note**: If you do not see your App Registration listed, start typing the name for the UI to update and show it, if it is available.
+    - Select **Review + assign**.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 {{% /tab %}}
@@ -105,7 +112,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
-    - Select *review + assign*.
+    - Select **Review + assign**.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
@@ -127,13 +134,16 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: If you have the proper permissions on the app registration but your network is blocking Datadog's webhook IPs, you may encounter errors that appear to be permission-related.
+
+To resolve this, add Datadog's webhook IPs to your network allowlist by visiting the `Webhooks` section at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
+
 ### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Getting historical data
-Datadog automatically ingests up to 15 months of available historical cost data.
 
-Azure exports cost data starting from the month you created the export. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
+Azure exports cost data starting from the month you created the export. Datadog automatically ingests up to 15 months of available historical cost data from these exports. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
@@ -165,7 +175,9 @@ You can visualize your ingested data using the following cost types:
 
 ### Out-of-the-box tags
 
-Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [usage cost report][9] and make it easier to discover and understand cost data.
+Datadog automatically enriches your Azure cost data with tags from multiple sources. For a comprehensive overview of how tags are applied to cost data, see [Tags][12].
+
+The following out-of-the-box tags are derived from your [usage cost report][9] and make it easier to discover and understand cost data:
 
 | Tag Name                         | Tag Description       |
 | ---------------------------- | ----------------- |
@@ -192,7 +204,7 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `frequency` | Indicates whether a charge is expected to repeat. Charges can either happen once (`OneTime`), repeat on a monthly or yearly basis (`Recurring`), or be based on usage (`Usage`) |
 | `InvoiceId` | The unique document ID listed on the invoice PDF. |
 | `invoicesectionid` | The ID of the MCA invoice section. |
-| `invoicesectionname` | The name of the EA department. |
+| `invoicesectionname` | The name of the Enterprise Agreement (EA) department. |
 | `isazurecrediteligible` | `true` if the charge is eligible to be paid for using Azure credits. |
 | `location` | The data center location where the resource is running. |
 | `metercategory` | The top level service that this usage belongs to (such as `Networking`). |
@@ -218,7 +230,7 @@ Datadog adds out-of-the-box tags to ingested cost data to help you further break
 | `resourceid` | The ID of the Azure resource. |
 | `resourcelocation` | The data center location where the resource is running (such as `westus2`). |
 | `resourcename` | The name of the resource. Not all charges come from deployed resources. |
-| ResourceType |  |
+| `resourcetype` | The type of the Azure resource. |
 | `servicefamily` | The service family that the service belongs to (such as `Compute`). The tag `consumedservice` has deeper insights on infrastructure types. |
 | `ServicePeriodEndDate` | The termination date of the Azure service period. |
 | `ServicePeriodStartDate` | The start date the Azure service period. |
@@ -248,3 +260,6 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [9]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-daily-usage
 [10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
 [11]: /help/
+[12]: /cloud_cost_management/tags
+[13]: /api/latest/cloud-cost-management/#create-cloud-cost-management-azure-configs
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/azure_uc_config

@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/graphing/widgets/geomap/
+description: Visualiza datos geográficos con regiones o puntos sombreados para mostrar
+  métricas y patrones basados en ubicaciones.
 further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentación
@@ -18,28 +20,28 @@ El widget geomap visualiza datos geográficos con regiones o puntos sombreados. 
 - Ver sesiones de usuario filtradas por empleado.
 - Monitorizar las métricas de rendimiento como el tiempo de carga, los valores de estado de la web y el porcentaje de vistas con errores.
 
-{{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="Visualización de geomap con la superposición de puntos" >}}
+{{< img src="/dashboards/widgets/geomap/geomap_zoom_region.mp4" alt="Haciendo zoom en una región con el widget Geomapa" video=true >}}
 
 ## Configuración
 
-{{< img src="dashboards/widgets/geomap/geomap_setup2.png" alt="Gráfico de geomap de tu sección de datos de la configuración de widget">}}
+{{< img src="dashboard/widgets/geomap/geomap_setup3.png" alt="Grafica en geomapas tu sección de datos de configuración de widgets">}}
 
 ### Configuración
 1. Elige la capa de visualización:
-    * **Regiones**: medidas agregadas a nivel de país.
+    * **Regiones**: Medidas agregadas a nivel de país o subdivisiones de país.
     * **Puntos**: superposición de eventos como puntos en el mapa para mostrar datos geográficos del evento.
 
 2. Elige los datos a graficar: <br>
   **Nota**: La compatibilidad con las fuentes de datos varía en función de la capa de visualización seleccionada.
   {{< tabs >}}
   {{% tab "Regions" %}}
-  | Fuente de datos | Notas | 
+  | Origen de los datos | Notas |
   | -------------- | -------- |
-  |Eventos de log   | El grupo por etiqueta (tag) debe incluir un código ISO de país con el formato ISO alfa-2. Puedes utilizar el [Procesador GeoIP][1] para hacer esto, o puedes incluir de forma manual las [etiquetas en la incorporación][2]. Consulta la [documentación de búsqueda de logs][3] para configurar una consulta de eventos de log.|
-  |Métrica   |  El grupo por etiqueta debe incluir un código ISO de país con el formato ISO alfa-2. Puedes [generar las métricas a partir de logs incorporados][4], o puedes incluir de forma manual las [etiquetas en la incorporación][2]. Consulta la [documentación de consulta][5] para configurar una consulta de métrica.|
+  |Eventos de logs | El grupo por etiqueta (tag) debe incluir un código ISO de país (formato ISO alfa-2) o un código ISO de subdivisión de país (formato ISO-3166-2). Para ello, puedes utilizar el [Procesador GeoIP][1] o incluir manualmente las [etiquetas en la ingesta][2]. Consulta la [documentación sobre la búsqueda de logs][3] para configurar una consulta de eventos de logs.|
+  |Métrica | El grupo por etiqueta debe incluir un código ISO de país (formato ISO alfa-2) o un código ISO de subdivisión de país (formato ISO-3166-2). Puedes [generar métricas a partir de la ingesta de logs][4] o incluir manualmente las [etiquetas en la ingesta][2]. Consulta la [documentación sobre consultas][5] para configurar una consulta de métricas.|
   |RUM | Consulta la [documentación de RUM][6] para configurar una consulta de RUM. |
   |SLO | Consulta la [documentación de búsqueda de SLO][7] para configurar una consulta de SLO. |
-  |Señales de seguridad <br> Application Security <br> Audit Trail | Consulta la [documentación de búsqueda de log][3] para configurar una consulta. |
+  |Señales de seguridad <br> Protección de aplicaciones y API <br> Audit Trail | Consulta la [documentación de búsqueda de logs][3] para configurar una consulta. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
   [2]: /getting_started/tagging/#define-tags
@@ -47,14 +49,16 @@ El widget geomap visualiza datos geográficos con regiones o puntos sombreados. 
   [4]: /logs/logs_to_metrics/
   [5]: /dashboards/querying/
   [6]: /real_user_monitoring/explorer/search_syntax/
-  [7]: /service_management/service_level_objectives/#searching-slos
+  [7]: /service_level_objectives/#searching-slos
   {{% /tab %}}
 
-  {{% tab "Points" %}}
-  |  Fuente de datos | Notas |
-  | -----------  | ----- | 
-  |Eventos de log   | El grupo por etiqueta debe incluir un código ISO de país con el formato ISO alfa-2. Puedes utilizar el [Procesador de GeoIP][1] para hacer esto, o puedes incluir de forma manual las [etiquetas en la incorporación][2]. Consulta la [documentación de búsqueda de logs][3] para configurar una consulta de evento de log. |
-  |RUM   | Consulta la [documentación de RUM][4] para configurar una consulta de RUM. |
+  {{% tab "Puntos" %}}
+  |  Origen de los datos | Notas |
+  | -----------  | ----- |
+  | Eventos de logs | El grupo por etiqueta debe incluir un código ISO de país que siga el formato ISO alfa-2. Para ello, puedes utilizar el [Procesador GeoIP][1] o incluir manualmente las [etiquetas en la ingesta][2]. Consulta la [documentación sobre la búsqueda de logs][3] para configurar una consulta de eventos de logs. |
+  | RUM | Consulta la [documentación de RUM][4] para configurar una consulta RUM. |
+
+  **Nota**: La capa Puntos muestra un máximo de 100.000 eventos a la vez.
 
   [1]: /logs/log_configuration/processors/#geoip-parser
   [2]: /getting_started/tagging/#define-tags
@@ -63,7 +67,7 @@ El widget geomap visualiza datos geográficos con regiones o puntos sombreados. 
   {{% /tab %}}
   {{< /tabs >}}
 
-3. Opcional: configura tu cuadro de vista para especificar dónde quieres enfocar el mapa inicialmente.
+3. (Opcional) En **Visual Options** (Opciones visuales), utiliza el desplegable **Set widget default view** (Configurar vista por defecto del widget) para seleccionar dónde enfocar inicialmente el mapa. Selecciona **Custom* (Personalizar) para definir una región personalizada, o busca el nombre de un país, estado o provincia.
 
 ### Opciones
 

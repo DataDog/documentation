@@ -82,7 +82,7 @@ DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true
 
 이렇게 하면 `service` 속성이 항상 통합 이름(예:`*-postgres`, `*-http-client`)을 추가하는 대신, 기본 서비스 이름을 사용하도록 할 수 있습니다.
 
-<div class="alert alert-danger">서비스 재정의 제거는 중대한 <b>변경</b> 사항입니다. 재정의된 서비스 이름을 기반으로 하는 메트릭, 모니터 또는 대시보드 쿼리가 더 이상 일치하지 않게 되기 때문입니다.</div>
+<div class="alert alert-warning">서비스 재정의 제거는 중대한 <b>변경</b> 사항입니다. 재정의된 서비스 이름을 기반으로 하는 메트릭, 모니터 또는 대시보드 쿼리가 더 이상 일치하지 않게 되기 때문입니다.</div>
 
 변경으로 인해 중요한 자산(대시보드, 모니터, 보존 필터 등)이 영향을 받지 않도록 서비스별로 서비스 재정의를 점진적으로 제거하는 것이 좋습니다. 새 모델로 원활하게 전환하려면 [상세 지침](#remove-service-overrides-progressively)을 따르세요.
 

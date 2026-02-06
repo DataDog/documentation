@@ -257,7 +257,7 @@ further_reading:
 ---
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">
+<div class="alert alert-warning">
     Code Security n'est pas disponible pour le site {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}

@@ -1,5 +1,6 @@
 ---
 title: Monitor Templates
+description: "Use pre-configured monitor templates from Datadog and integration partners to quickly set up comprehensive monitoring coverage."
 aliases:
 - /monitors/recommended/
 further_reading:

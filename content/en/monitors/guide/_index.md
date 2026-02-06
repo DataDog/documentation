@@ -1,5 +1,6 @@
 ---
 title: Monitor Guides
+description: "Guides covering monitor best practices, configuration, troubleshooting, and advanced use cases for Datadog monitoring."
 private: true
 disable_toc: true
 cascade:
@@ -17,7 +18,7 @@ cascade:
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}Recovery thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert_aggregation" >}}Alert aggregation{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/notification-message-best-practices" >}}Notification message Best Practice{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/notification-message-best-practices" >}}Notification Message Best Practices{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Tutorial:" >}}

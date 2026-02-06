@@ -28,7 +28,7 @@ title: Data Streams Monitoring
 
 
 {{% site-region region="gov,ap1" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     Data Streams Monitoring n'est pas disponible pour le site {{< region-param key="dd_site_name" >}}.
 </div>
 {{% /site-region %}}

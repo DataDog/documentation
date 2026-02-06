@@ -8,7 +8,7 @@ Si eres un usuario más avanzado de Datadog, es posible que desees utilizar [la 
 
 ## Ejemplos
 
-Si, por ejemplo, deseas consultar datos generales de todos tus hosts que incluyan el `env:prod` y la etiqueta `role:elasticsearch`, puedes realizar la siguiente llamada a la API con la biblioteca de Python `requests`:
+Si, por ejemplo, deseas consultar datos generales de todos tus hosts que incluyan el `env:prod` y la etiqueta `role:elasticsearch`, puedes realizar la siguiente llamada a la API con la librería de Python `requests`:
 
 ```python
 import requests

@@ -1,5 +1,6 @@
 ---
 title: Tracer Startup Logs
+description: Configure and analyze tracer startup logs to troubleshoot configuration issues and Agent connectivity.
 further_reading:
 - link: "/tracing/troubleshooting/connection_errors/"
   tag: "Documentation"

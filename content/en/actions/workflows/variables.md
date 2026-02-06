@@ -1,5 +1,6 @@
 ---
 title: Variables and parameters
+description: Use context variables, input parameters, output parameters, and custom variables to pass data between workflow steps.
 disable_toc: false
 aliases:
   - /service_management/workflows/actions/set_variables/
@@ -144,7 +145,7 @@ To avoid a type error resulting from an undefined variable, assign a custom vari
 
 [1]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.core/com.datadoghq.core.setVariable
 [2]: /service_management/workflows/actions/flow_control#for-loop
-[3]: https://datadoghq.slack.com/
+[3]: https://chat.datadoghq.com/
 [4]: https://handlebarsjs.com/guide/expressions.html#expressions
 [5]: /service_management/workflows/trigger
 [6]: /service_management/app_builder/queries/#return-workflow-results-to-an-app

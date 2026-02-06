@@ -22,7 +22,7 @@ Amazon CloudWatch Metric Streams 및 Amazon Data Firehose를 사용하면 단 2-
    - (선택 사항) 스트리밍할 제한된 네임스페이스 또는 메트릭 세트를 지정합니다.
 2. Metric Stream을 생성하면 Datadog은 즉시 스트리밍 메트릭 수신을 시작하고 추가 설정 없이 이를 Datadog 사이트에 표시합니다.
 
-<div class="alert alert-danger">AWS 통합 타이틀에 구성된 네임스페이스 필터링은 CloudWatch Metric Streams에는 <b>적용되지 않습니다</b>. 상세한 내용은 아래를 참고하세요.</div>   
+<div class="alert alert-warning">AWS 통합 타이틀에 구성된 네임스페이스 필터링은 CloudWatch Metric Streams에는 <b>적용되지 않습니다</b>. 상세한 내용은 아래를 참고하세요.</div>   
 
 ### Metric Streaming vs API 폴링 {#streaming-vs-polling}
 

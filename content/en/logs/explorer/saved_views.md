@@ -8,6 +8,9 @@ further_reading:
     - link: "/logs/log_configuration/processors"
       tag: 'Documentation'
       text: 'Learn how to process your logs'
+    - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
+      tag: Blog
+      text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
 ---
 
 ## Overview

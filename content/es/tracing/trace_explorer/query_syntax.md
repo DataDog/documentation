@@ -19,6 +19,9 @@ aliases:
 - /es/tracing/trace_explorer/trace_groups
 description: Búsqueda global de todas tus trazas (traces) con etiquetas (tags)
 further_reading:
+- link: /getting_started/search/
+  tag: Documentación
+  text: Empezando con las búsquedas en Datadog
 - link: /tracing/trace_collection/
   tag: Documentación
   text: Aprender a configurar el rastreo de APM con tu aplicación
@@ -33,7 +36,7 @@ further_reading:
   text: Más información sobre servicios en Datadog
 - link: /tracing/services/resource_page/
   tag: Documentación
-  text: Profundizar en el rendimiento de tus recursos y trazas
+  text: Profundizar en el rendimiento de tus recursos y trazas (traces)
 title: Sintaxis de consulta
 ---
 
@@ -162,11 +165,11 @@ Para buscar un servicio, utiliza el atributo `service`. Para buscar otro [tipo d
 [22]: /es/tracing/services/inferred_services#migrate-to-global-default-service-naming
 {{< /site-region >}}
 
-## Intervalo de tiempo
+## Rango de tiempo
 
 El intervalo de tiempo te permite visualizar trazas dentro de un periodo determinado. Cambia rápidamente el intervalo de tiempo seleccionando un intervalo preestablecido en el menú desplegable (o [introduciendo un intervalo de tiempo personalizado][3]):
 
-{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Seleccionar marco temporal" >}}
+{{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Seleccionar el marco temporal" >}}
 
 ## Tabla de tramo
 

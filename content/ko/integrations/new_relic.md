@@ -56,7 +56,7 @@ tile:
 
 ## 개요
 
-<div class="alert alert-danger">New Relic APM 통합은 사용이 중지되었고 기능이 축소되었습니다. APM 메트릭 레이블을 사용할 수 없습니다.</div>
+<div class="alert alert-warning">New Relic APM 통합은 사용이 중지되었고 기능이 축소되었습니다. APM 메트릭 레이블을 사용할 수 없습니다.</div>
 
 이벤트 스트림에서 New Relic 알림을 보려면 New Relic을 연결하세요.
 

@@ -135,7 +135,7 @@ docker-compose -f service-docker-compose-linux.yaml rm
 
    자동으로 Datadog 서비스를 포함하는 애플리케이션을 계측합니다.
 
-   <div class="alert alert-warning"><strong>참고</strong>: 이 샘플 명령의 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있습니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 대해 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
+   <div class="alert alert-danger"><strong>참고</strong>: 이 샘플 명령의 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있습니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 대해 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
 
 3. [유니버설 서비스 태그][10]는 다양한 버전 및 배포 환경에서 추적된 서비스를 식별하여 Datadog 내에서 상호 연관시킬 수 있으므로 이를 사용하여 검색 및 필터링할 수 있습니다. 통합 서비스 태그에 사용되는 세 가지 환경 변수는 `DD_SERVICE`, `DD_ENV`, `DD_VERSION`입니다. Docker로 배포된 애플리케이션의 경우 이러한 환경 변수를 Dockerfile 또는 `docker-compose` 파일 내에 추가할 수 있습니다.
    이 튜토리얼의 경우 `service-docker-compose-linux.yaml` 파일에 이러한 환경 변수가 이미 정의되어 있습니다.
@@ -347,7 +347,7 @@ Java 추적 라이브러리는 Java에 내장된 Agent 및 모니터링 지원�
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   <div class="alert alert-warning"><strong>참고</strong>: 이 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있음을 다시 강조합니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
+   <div class="alert alert-danger"><strong>참고</strong>: 이 플래그, 특히 샘플 속도는 이 튜토리얼이 적용되지 않은 환경에는 적합하지 않을 수 있음을 다시 강조합니다. 실제 환경에서 어떤 플래그를 사용해야 하는지에 살펴보려면 <a href="#tracing-configuration">추적 설정</a>을 참고하세요.</div>
 
 3. `docker/service-docker-compose-linux.yaml`을 열고 `calendar` 서비스에 대한 환경 변수를 주석 처리하여 앱과 Docker에 대한 Agent 호스트 및 통합 서비스 태그를 설정합니다. `notes` 컨테이너에서와 마찬가지로 `DD_AGENT_HOST` 값을 Docker에 필요한 것과 일치하도록 설정하고 리눅스가 아닌 경우 `extra_hosts` 을 제거합니다:
 

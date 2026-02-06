@@ -155,7 +155,7 @@ When the service binary is built, you can use environment variables to enable an
 
 4. Optional: Set up [Source Code Integration][7] to connect your profiling data with your Git repositories.
 
-5. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][8].
+5. A couple of minutes after you start your application, your profiles appear on the [Datadog APM > Profiling page][8]. If they do not, refer to the [Troubleshooting][16] guide.
 
 ### Enabling CPU profiler engine options
 
@@ -309,7 +309,7 @@ The allocation engine does not depend on the `/proc/sys/kernel/perf_event_parano
 
 If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include things like JVM internals, native libraries used by your application or the JVM, and syscalls.
 
-<div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
+<div class="alert alert-danger">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</a></div>
 
 To enable native stack trace collection, understanding that it can destabilize your application, set:
 
@@ -363,3 +363,4 @@ The [Getting Started with Profiler][11] guide takes a sample service with a perf
 [13]: /profiler/enabling/supported_versions/
 [14]: /tracing/trace_collection/compatibility/java/?tab=graalvm#setup
 [15]: https://docs.datadoghq.com/profiler/enabling/java/?tab=datadogprofiler#
+[16]: /profiler/profiler_troubleshooting/java/

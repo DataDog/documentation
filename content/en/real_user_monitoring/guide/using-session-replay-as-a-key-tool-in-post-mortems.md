@@ -1,6 +1,6 @@
 ---
 title: Using Session Replay As A Key Tool In Post-Mortems
-
+description: "Leverage Session Replay for post-mortem analysis to visually reproduce errors and document incident investigations effectively."
 further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'blog'

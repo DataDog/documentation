@@ -4,6 +4,7 @@ description: "Create intelligent, self-maintaining mobile tests to ensure the mo
 aliases:
 - /mobile_testing
 - /mobile_app_testing
+- /mobile_app_testing/mobile_app_tests/
 further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
@@ -23,13 +24,13 @@ further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
+- link: "https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/"
+  tag: "Blog"
+  text: "How to build reliable and accurate synthetic tests for your mobile apps"
 cascade:
   algolia:
     tags: ['mobile_testing']
 ---
-
-{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -178,6 +179,10 @@ You can customize alert conditions to define how often you want to send an alert
 
 * An alert is triggered if any assertion fails for `X` minutes.
 
+<div class="alert alert-info">
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see <a href="/synthetics/guide/how-synthetics-monitors-trigger-alerts/">Understanding Synthetic Monitor Alerting</a>.
+</div>
+
 ### Configure the test monitor
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
@@ -277,5 +282,5 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
-[15]: /real_user_monitoring/mobile_and_tv_monitoring/
+[15]: /real_user_monitoring/application_monitoring/
 [16]: /synthetics/mobile_app_testing/devices

@@ -1,18 +1,19 @@
 ---
 title: Set Up Push Notifications on Mobile App
+description: "Configure push notifications on iOS and Android for on-call alerts, incidents, and workflow updates with critical alert settings."
 further_reading:
-- link: "https://docs.datadoghq.com/service_management/on-call/"
+- link: "/incident_response/on-call/"
   tag: "Documentation"
   text: "On-Call Documentation"
-- link: "https://docs.datadoghq.com/service_management/incident_management/notification/"
+- link: "/incident_response/incident_management/notification/"
   tag: "Documentation"
   text: "Incident Notification Rules Documentation"
-- link: "https://docs.datadoghq.com/getting_started/workflow_automation/"
+- link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Workflow Automation Documentation"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Only Incident Management push notifications are supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Only Incident Management push notifications are supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 Receive mobile push notifications for [on-call alerts](#circumvent-mute-and-Do-Not-Disturb-mode-for-On-Call), [incidents](#incident-notifications), and [workflow automation updates](#workflow-automation-notifications), so you can stay informed in real time from the Datadog mobile app.
 
@@ -31,9 +32,20 @@ By default, the mobile app is not allowed to send you notifications. To receive 
 
    {{< img src="service_management/mobile/ios_notification_may_2025.png" alt="Configure the system notification settings of your iOS device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
-3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog highly recommends you also enable the **Sound** and **Badges** toggles.
+3. Within the iOS system settings, make sure you enable the **Allow Notifications** toggle. Datadog recommends you also enable the **Sound** and **Badges** toggles.
 
 Make sure you grant the mobile app the necessary permissions.
+
+### Custom sounds
+
+You can override the default system notification sounds with custom sounds preloaded in the Datadog mobile app.
+
+To customize notification sounds:
+
+1. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+2. Select the notification category you want to customize.
+3. Select a sound from the available options.
+
 {{% /tab %}}
 
 {{% tab "Android" %}}
@@ -45,11 +57,22 @@ Make sure you grant the mobile app the necessary permissions.
 
    {{< img src="service_management/mobile/android_notification_may_2025.png" alt="Configure the system notification settings of your Android device." style="width:100%; background:none; border:none; box-shadow:none;" >}}
 
+### Custom sounds
+
+You can override the default system notification sounds with custom sounds preloaded in the Datadog mobile app.
+
+To customize notification sounds:
+
+1. Go to **Device Settings** > **Notifications** > **Advanced Settings**.
+2. Select **Manage notification categories for each app** and make sure Datadog is selected.
+3. In the Datadog mobile app, navigate to **Settings** > **Notifications** > **Notification categories**.
+4. Select the notification category you want to customize.
+5. Select a sound from the available options.
+
+**Note**: The volume for push notifications is dictated by your device's system volume settings.
+
 {{% /tab %}}
 {{< /tabs >}}
-
-### Custom sounds
-On both iOS and Android, you have the option to override the default system notification sounds. The Datadog app comes preloaded with a selection of custom sounds.   
 
 ## Circumvent mute and Do Not Disturb mode for On-Call
 You can override your device's system volume and Do Not Disturb mode for both push notifications (from the Datadog mobile app) and telephony notifications (such as voice call and SMS).
@@ -58,7 +81,7 @@ For more information, see the [guide on setting up your mobile device for On-Cal
 
 ### Critical push notifications
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 <div class="alert alert-info">
 Critical push notifications are only available for On-Call. If you are setting up On-Call on the Datadog mobile app for the first time, an onboarding flow takes care of notification settings and permissions.
@@ -103,7 +126,7 @@ Critical push notifications are only available for On-Call. If you are setting u
 
 6. Test the setup of your critical push notification by tapping **Test push notifications**.
 
-<div class="alert alert-danger">
+<div class="alert alert-warning">
 On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb settings when used within a Work Profile. As a workaround, install the Datadog mobile app on your personal profile.
 </div>
 
@@ -111,6 +134,9 @@ On Android, the Datadog mobile app cannot bypass system volume or Do Not Disturb
 {{< /tabs >}}
 
 ### Custom sounds and volume for critical push
+
+<div class="alert alert-info"> Volume and sound controls are available only for On-Call notifications. Incident and workflow notifications use your device's default system settings. </div>
+
 For high-urgency notifications, Datadog strongly recommends customizing your system sounds and volume settings. This ensures that alerts are not only more distinct and recognizable, but also more effective in capturing attention. Test your critical push notification preferences to confirm that they behave as expected.
 
 ## Incident notifications
@@ -119,7 +145,7 @@ Receive status updates on your active incidents by setting up [Notification Rule
 1. In Incidents, navigate to **Settings** > [**Notification Rules**][1].
 2. Click the **+ New Rule** button on the top right.
 3. Enter your desired condition fields for **When an incident is...** and **And meets the following conditions...**. By default, these filters are empty, and a notification rule triggers for any incident.
-4. Under **Nofity...** select your notification recipient.If you want to notify a recipient’s mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
+4. Under **Notify...** select your notification recipient.If you want to notify a recipient’s mobile device, select the option for their name that includes **(Mobile Push Notification)**. The recipient must have enabled notifications in the Datadog mobile app for this option to appear.
 5. **With Template:** Select the desired message template you want the notification rule to use.
 6. **Renotify on updates to:** Select the incident properties that trigger notifications. A new notification is sent whenever one or more of the selected properties change.
 7. Click **Save**.
@@ -128,7 +154,7 @@ By default if you have push notifications enabled and are assigned as a commande
 
 ## Workflow automation notifications
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Workflow automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">Workflow automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Create [workflow automations][3] that send mobile push notifications.
@@ -143,6 +169,6 @@ Create [workflow automations][3] that send mobile push notifications.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]:https://app.datadoghq.com/incidents/settings?_gl=1*334tvl*_gcl_aw*R0NMLjE3NDUwMDYwODQuQ2p3S0NBand0ZGlfQmhBQ0Vpd0E5N3k4QkxnWmU4cTdmazJtUlJoQ3o1OTZXcTNmRWJIQTk1Rzg4dnAtUmZtUHBQUGx0OVNVSjRlSk9Sb0Nwek1RQXZEX0J3RQ..*_gcl_au*MTAxODMyNDk1My4xNzQwNDk1NzA3LjExNzUxOTU1MTUuMTc0NjQ5NTU3OS4xNzQ2NDk1NTc5*_ga*MjExMzI1MjUyOS4xNzQ1ODU2NjMx*_ga_KN80RDFSQK*czE3NDY0OTQzMzYkbzU4JGcxJHQxNzQ2NDk5MzA0JGowJGwwJGg5NTQ2NTk0Ng..*_fplc*Q2V5WVJmNnRSV2R0RmljTDZyWmg3ZEVZMFZPeDNlTFhLZkxnenFCOXBvTUslMkZTWWk0a3JzVEw1cDU5YlZzTW55TE5YazY5bjdhJTJGOXpySzJ0TFMxTEozZms0WTVlOWVibEN5ZFBNNm1XYmJJQll0R0d4YnlralJ2eU1CS1NoUSUzRCUzRA..#Rules
-[2]:https://docs.datadoghq.com/service_management/incident_management/incident_settings/notification_rules/
+[2] /incident_response/incident_management/incident_settings/notification_rules/
 [3]:https://docs.datadoghq.com/getting_started/workflow_automation/
-[4]:/service_management/on-call/guides/configure-mobile-device-for-on-call
+[4]: /incident_response/on-call/guides/configure-mobile-device-for-on-call

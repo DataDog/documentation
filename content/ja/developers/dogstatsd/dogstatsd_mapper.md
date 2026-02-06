@@ -30,14 +30,14 @@ Agent バージョン 7.17+ では、DogStatsD Mapper 機能でマッピング�
 
 ```yaml
 dogstatsd_mapper_profiles:
-    - name: '<プロファイル名>'
-      prefix: '<プロファイルのプレフィックス>'
+    - name: <PROFILE_NAME>
+      prefix: <PROFILE_PREFIX>
       mappings:
-          - match: '<一致するメトリクス>'
-            match_type: '<一致タイプ>'
-            name: '<マッピング済みのメトリクス名>'
+          - match: <METRIC_TO_MATCH>
+            match_type: <MATCH_TYPE>
+            name: <MAPPED_METRIC_NAME>
             tags:
-                '<タグキー>': '<展開するタグ値>'
+                <TAG_KEY>: <TAG_VALUE_TO_EXPAND>
 ```
 
 次のプレースホルダーと組み合わせます。
@@ -66,12 +66,12 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric.process.*.*'
+          - match: custom_metric.process.*.*
             match_type: wildcard
             name: custom_metric.process
             tags:
-                tag_key_1: '$1'
-                tag_key_2: '$2'
+                tag_key_1: $1
+                tag_key_2: $2
 ```
 
 メトリクス `custom_metric.process` にタグ `tag_key_1:value_1` および `tag_key_2:value_2` が付与され、Datadog に送られます。
@@ -90,12 +90,12 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric\.process\.([\w_]+)\.(.+)'
+          - match: custom_metric\.process\.([\w_]+)\.(.+)
             match_type: regex
             name: custom_metric.process
             tags:
-                tag_key_1: '$1'
-                tag_key_2: '$2'
+                tag_key_1: $1
+                tag_key_2: $2
 ```
 
 メトリクス `custom_metric.process` にタグ `tag_key_1:value_1` および `tag_key_2:value.with.dots._2` が付与され、Datadog に送られます。
@@ -109,11 +109,11 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric.process.*.*'
+          - match: custom_metric.process.*.*
             match_type: wildcard
-            name: 'custom_metric.process.prod.$1.live'
+            name: custom_metric.process.prod.$1.live
             tags:
-                tag_key_2: '$2'
+                tag_key_2: $2
 ```
 
 メトリクス `custom_metric.process.prod.value_1.live` にタグ `tag_key_2:value_2` が付与され、Datadog に送られます。

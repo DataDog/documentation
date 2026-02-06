@@ -21,7 +21,7 @@ La monitorización de tu aplicación de extremo a extremo es crucial para compre
 Datadog recomienda crear primero los tests de navegador en la IU de Datadog y recuperar las configuraciones de los tests con la API.
 
 1. [Crea un test de navegador][2] y [guarda una grabación][3].
-2. Utiliza el [endpoint Get the list of all tests][4] para recuperar el lista de todos los tests de Synthetics.
+2. Utiliza el [endpoint Obtener la lista de todos los tests][4] para recuperar la lista de todos los tests de Synthetic Monitoring.
 3. Filtra en `type: browser` y recupera el `public_ids` de los tests de navegador que deseas gestionar con la API.
 4. Utiliza el [endpoint Get a browser test][5] para recuperar los archivos de configuración de cada test de navegador.
 

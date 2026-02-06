@@ -108,7 +108,7 @@ Par exemple, vous pouvez définir plusieurs priorités pour les notifications `a
 
 Les notifications de monitor incluent diverses informations telles que la requête du monitor, les mentions « @ » utilisées, les snapshots de métrique (pour les monitors de métrique) et les liens renvoyant aux pages pertinentes dans Datadog. Vous pouvez choisir le contenu que vous souhaitez inclure ou exclure des notifications pour un monitor donné.
 
-<div class="alert alert-warning">Les métriques de distribution avec des agrégateurs de percentiles (tels que `p50`, `p75`, `p95`, ou `p99`) ne génèrent pas de graphiques snapshot dans les notifications. </div>
+<div class="alert alert-danger">Les métriques de distribution avec des agrégateurs de percentiles (tels que `p50`, `p75`, `p95`, ou `p99`) ne génèrent pas de graphiques snapshot dans les notifications. </div>
 
 {{< img src="monitors/notifications/monitor_notification_presets.png" alt="Définir un préréglage de monitor" style="width:70%;" >}}
 

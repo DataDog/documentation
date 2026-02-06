@@ -11,7 +11,7 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 | Alpine Linux             | 2.2-2.7, 3.0-3.19 (edge is not supported)           | apk                       | {{< X >}}         | {{< X >}}         |
 | Wolfi Linux              | N/A                                                 | apk                       | {{< X >}}         | {{< X >}}         |
 | Chainguard               | N/A                                                 | apk                       | {{< X >}}         | {{< X >}}         |
-| Red Hat Enterprise Linux | 6, 7, 8                                             | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
+| Red Hat Enterprise Linux | 6, 7, 8, 9                                          | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
 | CentOS                   | 6, 7, 8                                             | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
 | AlmaLinux                | 8, 9                                                | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
 | Rocky Linux              | 8, 9                                                | dnf/yum/rpm               | {{< X >}}         | {{< X >}}         |
@@ -24,6 +24,10 @@ Cloud Security Vulnerabilities supports vulnerability scanning for hosts and con
 | Debian GNU/Linux         | 7, 8, 9, 10, 11, 12 (unstable/sid is not supported) | apt/dpkg                  | {{< X >}}         | {{< X >}}         |
 | Ubuntu                   | All versions supported by Canonical                 | apt/dpkg                  | {{< X >}}         | {{< X >}}         |
 | Windows                  | Windows Server 2016/2019/2022, Windows 10 and later | Windows OS                | {{< X >}}         | {{< X >}}         |
+
+<div class="alert alert-info">
+Datadog supports official OS packages from vendors listed above. Third-party or self-compiled packages are not supported.
+</div>
 
 {{% collapse-content title="Windows limitations" level="h4" %}}
 - Datadog detects vulnerabilities in Windows by identifying the Windows version and installed security knowledge base (KB) updates to address vulnerabilities associated with that version. However, some KB updates are cumulative and contain other KB updates, which might cause Datadog to misidentify which updates have been installed.

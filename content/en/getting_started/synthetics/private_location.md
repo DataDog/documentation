@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Private Locations
+description: Set up private locations to monitor internal applications and private URLs. Create custom locations for mission-critical areas and internal testing environments.
 further_reading:
     - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
       tag: 'Blog'

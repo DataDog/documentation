@@ -1,5 +1,6 @@
 ---
 title: Events
+description: Configure UI component event triggers and reactions, including state functions for dynamic app interactions and behaviors.
 aliases:
 - /app_builder/events
 - /service_management/app_builder/events
@@ -21,6 +22,10 @@ UI components can trigger reactions on an **Event**. Event triggers differ accor
 An event can set the state of a UI component, open or close a modal, trigger another query, or even run custom JavaScript.
 
 For example, the [GitHub PR summarizer][2] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
+
+In addition to working with events manually, you can use Bits AI to set up event handlers, configure event-driven actions, and optimize event logic:
+   1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
+   1. Enter a custom prompt for an event, or try the prompt `How can you help me with events?`.
 
 ### State functions
 
@@ -61,4 +66,4 @@ To see what state functions are available for a given component, see [Components
 
 [1]: /service_management/app_builder/components
 [2]: https://app.datadoghq.com/app-builder/apps/edit?viewMode=edit&template=github-pr-summarizer
-[8]: https://datadoghq.slack.com/
+[8]: https://chat.datadoghq.com/
