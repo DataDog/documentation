@@ -67,7 +67,7 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 ### Copy, import, or export dashboard JSON
 
-Copy, import, or export a dashboard's JSON by clicking the gear icon (upper right) with the following options:
+Copy, import, or export a dashboard's JSON by clicking the **Configure** icon (upper right) with the following options:
 
 | Option                          | Description                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -75,7 +75,7 @@ Copy, import, or export a dashboard's JSON by clicking the gear icon (upper righ
 | Import&nbsp;dashboard&nbsp;JSON | Paste or import your JSON to the dashboard. This option overwrites all content on the dashboard. If the JSON is already on your clipboard, use `Ctrl V` (`Cmd V` for Mac). |
 | Export&nbsp;dashboard&nbsp;JSON | Download a JSON file containing the JSON of your dashboard.                                                                                                                |
 
-Options for copying or exporting the JSON can also be accessed from the export icon in the upper right.
+Options for copying or exporting the JSON can also be accessed from the **Share** icon in the upper right.
 
 ### Delete dashboard
 
