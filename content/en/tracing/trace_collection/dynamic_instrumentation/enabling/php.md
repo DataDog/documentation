@@ -13,6 +13,8 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
+{{< partial name="dynamic_instrumentation/beta-callout.html" language="PHP" limitations_anchor="unsupported-features" >}}
+
 Dynamic Instrumentation is a feature provided by the Datadog tracing library. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 ## Installation
