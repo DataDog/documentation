@@ -248,7 +248,7 @@
                 },
                 {
                     "id": "rbac",
-                    "synonyms": ["rbac", "role based access control"]
+                    "synonyms": ["rbac","role based access control"]
                 }
             ],
             "presets": [
