@@ -142,11 +142,63 @@ $conv-search-assistant-bg: #f4f4f5;
     }
 }
 
+.conv-search-title-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
 .conv-search-title {
     font-size: 15px;
     font-weight: 600;
     color: $conv-search-text;
     letter-spacing: -0.01em;
+}
+
+// Info icon tooltip in header
+.conv-search-info-tooltip {
+    display: inline-flex;
+    
+    .conv-search-info-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+        color: $conv-search-text-muted;
+        cursor: pointer;
+        text-decoration: none;
+        transition: color 0.15s ease, background 0.15s ease;
+
+        &:hover {
+            color: $conv-search-purple;
+            background: rgba($conv-search-purple, 0.08);
+        }
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+// Tooltip gets moved to document.body by tooltip.js, so target by ID at root level
+#tooltip-docs-ai-info {
+    z-index: 10001; // Above the conv-search-sidebar (z-index: 10000)
+    max-width: 320px;
+
+    a {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: underline;
+        
+        &:hover {
+            color: #ffffff;
+        }
+    }
 }
 
 .conv-search-header-actions {

@@ -114,7 +114,17 @@ class ConversationalSearch {
         this.sidebar.className = 'conv-search-sidebar';
         this.sidebar.innerHTML = `
             <div class="conv-search-header">
-                <span class="conv-search-title">Datadog Docs AI</span>
+                <div class="conv-search-title-group">
+                    <span class="conv-search-title">Datadog Docs AI</span>
+                    <span class="tooltip-container conv-search-info-tooltip">
+                        <button class="tooltip-trigger conv-search-info-btn" aria-describedby="tooltip-docs-ai-info">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                        </button>
+                        <span id="tooltip-docs-ai-info" class="tooltip-content" role="tooltip">AI-generated responses may be inaccurate. Verify important info. Your use of Docs AI powered by Typesense is subject to our <a href="https://www.datadoghq.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
+                    </span>
+                </div>
                 <div class="conv-search-header-actions">
                     <button class="conv-search-new" aria-label="New chat" title="New chat">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
