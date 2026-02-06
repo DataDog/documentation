@@ -78,7 +78,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 - Medium (M)
 - Large (L)
 
-Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by two factors: the number of concurrent queries and the [fair use limit](#fair-use-limit).
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by two factors: the number of concurrent queries and the [Fair Use limit](#fair-use-limit).
 
 ### Determine the compute size that you need
 
@@ -229,9 +229,9 @@ For each organization where you want to use Flex Logs, you must enable a compute
 
 When your organization reaches the concurrent query limit, you may experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
 
-### Fair use limit
+### Fair Use limit
 
-Each Flex Logs compute tier enforces a per-query fair use limit on the number of **addressable logs**. Addressable logs are the total number of logs (stored inside and outside of the Flex tier) that match a query's time range and index scope. This count includes all logs in matching indexes for that time range, regardless of other search filters such as tags or keywords.
+Each Flex Logs compute tier enforces a per-query Fair Use limit on the number of **addressable logs**. Addressable logs are the total number of logs (stored inside and outside of the Flex tier) that match a query's time range and index scope. This count includes all logs in matching indexes for that time range, regardless of other search filters such as tags or keywords.
 
 The addressable logs for a query are determined as follows:
 - If the query specifies an index (for example, `index:my-index`), only logs in that index within the query's time range count toward the limit.
