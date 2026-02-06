@@ -215,7 +215,7 @@ The [generic profile][114] collects metrics for all devices not supported by a v
 
 ### Vendor profiles
 
-The following vendor devices are supported with dedicated profiles.
+The following vendor devices are supported with dedicated profiles. Some vendors provide dedicated integration pages with additional setup instructions, dashboards, and enhanced monitoring capabilities. All vendors provide SNMP profile configuration files that define which metrics to collect from devices.
 If a vendor or device type isn't listed, see the [Troubleshooting](#troubleshooting) section below.
 
 
