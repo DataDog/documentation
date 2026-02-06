@@ -50,7 +50,7 @@ You can add cost visualizations to your dashboards using several methods:
 
 The cost widget appears on your dashboard and updates automatically based on your query parameters.
 
-{{< img src="cloud_cost/reporting/dashboards/export-from-cost-explorer.png" alt="Cost Explorer interface showing the More menu with Export to Dashboard option highlighted" style="width:80%;" >}}
+{{< img src="cloud_cost/reporting/dashboards/export-from-cost-explorer-1.png" alt="Cost Explorer interface showing the More menu with Export to Dashboard option highlighted" style="width:80%;" >}}
 
 ### Export from Cost Reports
 
@@ -113,7 +113,7 @@ A typical showback dashboard might include:
 
 This comprehensive view helps stakeholders understand spending patterns, identify optimization opportunities, and correlate costs with system behavior. For example, you can track cost spikes during deployments, correlate traffic spikes with cost increases, and measure cost reductions from performance improvements.
 
-[View an example showback dashboard][13].
+   {{< img src="cloud_cost/reporting/dashboards/example-showback-dashboard.png" alt="Dashboard widget tray displaying Cost Summary, Cost Budget, and Cloud Cost widget options" style="width:100%;" >}}
 
 ## Share and collaborate
 
@@ -148,4 +148,3 @@ For advanced cost allocation scenarios, see the [custom allocation rules documen
 [10]: /monitors/types/cloud_cost/
 [11]: /cloud_cost_management/container_cost_allocation/
 [12]: /cloud_cost_management/tag_pipelines/
-[13]: https://demo.datadoghq.com/dashboard/tkh-nb5-x7g/team-cost-showbacks
