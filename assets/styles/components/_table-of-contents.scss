@@ -228,7 +228,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
     display: none;
     @media (min-width: 991px) {
         display: block;
-        margin-top: -0.6rem;
+        margin-top: -1rem;
     }
 
     a {
@@ -245,6 +245,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 
     .copy-btn-icon-wrapper {
         position: relative;
+        margin-right: 4px;
         top: 5px;
         display: inline-block;
         width: 22px;
