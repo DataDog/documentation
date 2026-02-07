@@ -92,7 +92,7 @@ Find out more in the [Logs][23] sub-section.
 
 The [**Live Debugger**][20] enables you to add logpoints—auto-expiring, non-breaking breakpoints—to your runtime code to collect information for debugging.
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab-v2.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
 Find out more in the [Live Debugger][20] sub-section.
 
