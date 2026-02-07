@@ -34,7 +34,7 @@ The *Declare Incident* modal displays a collapsible side panel that contains hel
 
 ## From a monitor
 
-You can declare an incident directly from a monitor from the Actions dropdown. Select **Declare incident** to open an incident creation modal, and the monitor is added into the incident as a signal. You can also add a monitor to an existing incident.
+You can declare an incident directly from a monitor. Select **Declare incident** to open an incident creation modal, and the monitor is added into the incident as a signal. You can also add a monitor to an existing incident.
 
 {{< img src="service_management/incidents/declare/declare_monitor.png" alt="Actions dropdown menu on monitors where you can select the Declare incident option" style="width:50%;" >}}
 
