@@ -4085,71 +4085,26 @@ menu:
       parent: tracing_trace_collection
       identifier: custom_instrumentation
       weight: 203
-    - name: Java
-      url: tracing/trace_collection/custom_instrumentation/java/otel
+    - name: Server-Side Languages
+      url: tracing/trace_collection/custom_instrumentation/server-side/
       parent: custom_instrumentation
-      identifier: custom_instrumentation_java
+      identifier: custom_instrumentation_server_side
       weight: 2031
-    - name: Python
-      url: tracing/trace_collection/custom_instrumentation/python/otel
+    - name: Client-Side Languages
+      url: tracing/trace_collection/custom_instrumentation/client-side/
       parent: custom_instrumentation
-      identifier: custom_instrumentation_python
+      identifier: custom_instrumentation_client_side
       weight: 2032
-    - name: Ruby
-      url: tracing/trace_collection/custom_instrumentation/ruby/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_ruby
-      weight: 2033
-    - name: Go
-      url: tracing/trace_collection/custom_instrumentation/go/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_go
-      weight: 2034
-    - name: Node.js
-      url: tracing/trace_collection/custom_instrumentation/nodejs/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_nodejs
-      weight: 2035
-    - name: PHP
-      url: tracing/trace_collection/custom_instrumentation/php/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_php
-      weight: 2036
-    - name: C++
-      url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_cpp
-      weight: 2037
-    - name: .NET
-      url: tracing/trace_collection/custom_instrumentation/dotnet/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_dotnet
-      weight: 2038
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android/otel
-      parent: custom_instrumentation
+      url: tracing/trace_collection/custom_instrumentation/client-side/android/otel
+      parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_android
-      weight: 2039
+      weight: 20321
     - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/ios/otel
-      parent: custom_instrumentation
+      url: tracing/trace_collection/custom_instrumentation/client-side/ios/otel
+      parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_ios
-      weight: 2040
-    - name: Rust
-      url: tracing/trace_collection/custom_instrumentation/rust
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_rust
-      weight: 2041
-    - name: Swift
-      url: tracing/trace_collection/custom_instrumentation/swift
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_swift
-      weight: 2042
-    - name: Elixir
-      url: tracing/trace_collection/custom_instrumentation/elixir
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_elixir
-      weight: 2043
+      weight: 20322
     - name: Dynamic Instrumentation
       url: tracing/trace_collection/dynamic_instrumentation/
       identifier: dyninst
@@ -5190,22 +5145,27 @@ menu:
       url: llm_observability/evaluations/managed_evaluations/quality_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_quality
-      weight: 40101
+      weight: 40001
     - name: Security and Safety Evaluations
       url: llm_observability/evaluations/managed_evaluations/security_and_safety_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_security
-      weight: 40102
+      weight: 40002
     - name: Session Level Evaluations
       url: llm_observability/evaluations/managed_evaluations/session_level_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_session
-      weight: 40103
+      weight: 40003
     - name: Agent Evaluations
       url: llm_observability/evaluations/managed_evaluations/agent_evaluations
       parent: llm_obs_managed_evaluations
       identifier: llm_obs_managed_evaluations_agent
-      weight: 40104
+      weight: 40004
+    - name: Template Evaluations
+      url: llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations
+      parent: llm_obs_custom_llm_as_a_judge_evaluations
+      identifier: llm_obs_custom_llm_as_a_judge_evaluations_template
+      weight: 40101
     - name: Ragas
       url: llm_observability/evaluations/ragas_evaluations
       parent: llm_obs_external_evaluations
@@ -5730,7 +5690,7 @@ menu:
       weight: 4
     - name: Feature Flags
       url: feature_flags/
-      pre: ci
+      pre: signpost
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
@@ -5794,6 +5754,11 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
+    - name: Flag History
+      url: feature_flags/history
+      parent: feature_flags
+      identifier: feature_flags_history
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -5840,21 +5805,26 @@ menu:
       url: /observability_pipelines/configuration/install_the_worker/run_multiple_pipelines_on_a_host/
       parent: observability_pipelines_install_the_worker
       weight: 10302
+    - name: Secrets Management
+      url: observability_pipelines/configuration/secrets_management
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_secrets_management
+      weight: 104
     - name: Live Capture
       identifier: observability_pipelines/configuration/live_capture/
       url: /observability_pipelines/configuration/live_capture/
       parent: observability_pipelines_configuration
-      weight: 104
+      weight: 105
     - name: Update Existing Pipelines
       url: observability_pipelines/configuration/update_existing_pipelines
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_update_existing_pipelines
-      weight: 105
+      weight: 106
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 106
+      weight: 107
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -6802,6 +6772,11 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
       weight: 603
+    - name: Guides
+      url: /cloudprem/guides/
+      parent: cloudprem
+      identifier: cloudprem_guides
+      weight: 10
     - name: Security Overview
       url: security/
       pre: security-platform

@@ -144,6 +144,7 @@ Or, modify the `package.json` file if you typically start an application with np
 | [redis][39]            | `>=0.12` | Fully supported |                                                  |
 | [sharedb][40]          | `>=1`    | Fully supported |                                                  |
 | [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| [Prisma][69]           | `>=6.1.0`| Fully supported |                                                  |
 
 ### Worker compatibility
 
