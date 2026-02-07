@@ -99,7 +99,6 @@ Failed test runs that were known to be flaky as per the definition above are dis
 
 [1]: /glossary/#flaky-test
 [2]: https://app.datadoghq.com/ci/test-runs
-[3]: https://app.datadoghq.com/ci/test-repositories?view=branches
 [4]: /tests/#use-ci-tests-data
 [5]: /tests/flaky_test_management/#ignore-new-flaky-tests-detected-by-mistake
 [6]: https://app.datadoghq.com/dash/integration/ci_app_tests
