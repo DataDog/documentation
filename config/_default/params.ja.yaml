@@ -1,10 +1,10 @@
+site_name: "Datadog でインフラストラクチャーとアプリケーションのモニタリング"
+meta_title: Datadog を始めてみましょう
+meta_description: Datadog が大規模なクラウドのモニタリングサービスをリードします。
+disclaimer: "このページは日本語には対応しておりません。随時翻訳に取り組んでいます。<br>翻訳に関してご質問やご意見ございましたら、<a href=\"https://docs.datadoghq.com/help/\">お気軽にご連絡ください</a>。"
 announcement_banner:
-  desktop_message: Datadog named a Leader in the Gartner® Magic Quadrant™ for Observability Platforms
-  mobile_message: Leader in the Gartner® Magic Quadrant™
-  external_link: https://www.datadoghq.com/resources/gartner-magic-quadrant-observability-platforms-2025/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=dg-apm-ww-announcement-corpsite-announcement-gartnermq2025-obsplat
-disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。<br>翻訳に関してご質問やご意見ございましたら、<a href="https://docs.datadoghq.com/ja/help/">お気軽にご連絡ください</a>。
-meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
-meta_title: Datadogを始めてみましょう
-site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング
-translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。
-site_support_banner: "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
+    desktop_message: '2025 年版「コンテナとサーバーレスの現状」レポートを公開'
+    mobile_message: '「コンテナとサーバーレスの現状」レポートを公開'
+    external_link: 'https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025'
+translate_status_banner: "このドキュメントは最新ではありません最新版はこちらをクリックして英語版をご覧ください。"
+site_support_banner: "この製品は、選択した <a href=\"/getting_started/site\">Datadog サイト</a>ではサポートされていません。"
