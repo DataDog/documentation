@@ -142,6 +142,21 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+Create the function **in every database** to enable the Agent to collect column statistics.
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_stats() RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real
+) AS
+$$
+  SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac
+  FROM pg_stats;
+$$
+LANGUAGE sql
+SECURITY DEFINER;
+```
+
 ### Securely store your password
 {{% dbm-secret %}}
 
