@@ -2,11 +2,6 @@
 title: Error Grouping
 description: Understand how errors are grouped into issues.
 aliases:
-  - /logs/error_tracking/custom_grouping
-  - /logs/error_tracking/default_grouping
-  - /tracing/error_tracking/custom_grouping
-  - /real_user_monitoring/error_tracking/custom_grouping
-  - /real_user_monitoring/error_tracking/default_grouping
   - /error_tracking/default_grouping
 content_filters:
   - trait_id: product
@@ -16,4 +11,22 @@ content_filters:
     option_group_id: <PRODUCT>_error_grouping_context_options
 ---
 
-{% partial file="error_tracking/error_grouping.mdoc.md" /%}
+
+{% partial file="error_tracking/grouping/overview.mdoc.md" /%}
+
+## Setup
+
+<!-- APM -->
+{% if equals($product, "apm") %}
+{% partial file="error_tracking/grouping/setup/apm.mdoc.md" /%}
+{% /if %}
+
+<!-- Logs -->
+{% if equals($product, "logs") %}
+{% partial file="error_tracking/grouping/setup/logs.mdoc.md" /%}
+{% /if %}
+
+<!-- RUM -->
+{% if equals($product, "rum") %}
+{% partial file="error_tracking/grouping/setup/rum.mdoc.md" /%}
+{% /if %}
