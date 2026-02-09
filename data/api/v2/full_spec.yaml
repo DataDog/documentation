@@ -2868,6 +2868,31 @@ components:
       type: string
       x-enum-varnames:
       - ACTION
+    ActionsCompletionGate:
+      properties:
+        completionCondition:
+          $ref: '#/components/schemas/Condition'
+        retryStrategy:
+          $ref: '#/components/schemas/ActionsRetryStrategy'
+      type: object
+    ActionsRetryStrategy:
+      properties:
+        exponential:
+          $ref: '#/components/schemas/ExponentialRetry'
+        kind:
+          $ref: '#/components/schemas/ActionsRetryStrategyKind'
+        linear:
+          $ref: '#/components/schemas/LinearRetry'
+      required:
+      - kind
+      type: object
+    ActionsRetryStrategyKind:
+      description: Type of retry strategy
+      enum:
+      - RETRY_STRATEGY_LINEAR
+      - RETRY_STRATEGY_EXPONENTIAL
+      example: RETRY_STRATEGY_LINEAR
+      type: string
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -11934,6 +11959,32 @@ components:
       - SEARCH
       - CONTAINER
       - CALLOUTVALUE
+    Condition:
+      properties:
+        operand1:
+          description: First operand for the condition
+          example: test
+        operand2:
+          description: Second operand for the condition
+          example: test
+        operator:
+          $ref: '#/components/schemas/ConditionOperator'
+      required:
+      - operator
+      - operand1
+      - operand2
+      type: object
+    ConditionOperator:
+      description: Operator for condition evaluation
+      enum:
+      - OPERATOR_EQUAL
+      - OPERATOR_NOT_EQUAL
+      - OPERATOR_LESS_THAN
+      - OPERATOR_LESS_THAN_OR_EQUAL
+      - OPERATOR_GREATER_THAN
+      - OPERATOR_GREATER_THAN_OR_EQUAL
+      example: OPERATOR_EQUAL
+      type: string
     ConfigCatCredentials:
       description: The definition of the `ConfigCatCredentials` object.
       oneOf:
@@ -15298,6 +15349,25 @@ components:
           description: Name of the creator.
           nullable: true
           type: string
+      type: object
+    CreatorData:
+      properties:
+        id:
+          description: User ID of the creator
+          example: 2a10fb69-5ee6-47c8-96f5-d30e18bf883d
+          type: string
+        type:
+          $ref: '#/components/schemas/UserType'
+      required:
+      - id
+      - type
+      type: object
+    CreatorRelationship:
+      properties:
+        data:
+          $ref: '#/components/schemas/CreatorData'
+      required:
+      - data
       type: object
     CsmAgentData:
       description: Single Agent Data.
@@ -22902,6 +22972,31 @@ components:
           example: One or several indexes are missing or invalid. Results hold data
             from the other indexes.
           type: string
+      type: object
+    ExponentialRetry:
+      properties:
+        initialInterval:
+          description: Initial duration between retries in ISO 8601 duration format
+          example: 1s
+          type: string
+        maxInterval:
+          description: Maximum duration between retries in ISO 8601 duration format
+          example: 60s
+          type: string
+        maxRetries:
+          description: Maximum number of retries
+          example: 5
+          type: integer
+        multiplier:
+          description: Multiplier for exponential backoff
+          example: 2.0
+          format: double
+          type: number
+      required:
+      - initialInterval
+      - maxInterval
+      - maxRetries
+      - multiplier
       type: object
     ExternalUser:
       description: Definition of a user.
@@ -33101,6 +33196,20 @@ components:
       required:
       - name
       type: object
+    LinearRetry:
+      properties:
+        interval:
+          description: Duration between retries in ISO 8601 duration format
+          example: 10s
+          type: string
+        maxRetries:
+          description: Maximum number of retries
+          example: 3
+          type: integer
+      required:
+      - interval
+      - maxRetries
+      type: object
     Links:
       description: The JSON:API links related to pagination.
       properties:
@@ -38051,6 +38160,20 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
+      type: object
+    NamedParameter:
+      properties:
+        name:
+          description: Name of the parameter
+          example: before_id
+          type: string
+        value:
+          description: Value of the parameter (can be string, number, boolean, or
+            object)
+          example: test
+      required:
+      - name
+      - value
       type: object
     NotebookTriggerWrapper:
       description: Schema for a Notebook-based trigger.
@@ -44625,6 +44748,31 @@ components:
       - ARRAY_NUMBER
       - ARRAY_BOOLEAN
       - ARRAY_OBJECT
+    PageInfo:
+      properties:
+        totalCount:
+          description: Total number of saved actions
+          example: 2
+          format: int32
+          maximum: 2147483647
+          type: integer
+        totalFilteredCount:
+          description: Total number of saved actions matching the filter
+          example: 2
+          format: int32
+          maximum: 2147483647
+          type: integer
+      required:
+      - totalCount
+      - totalFilteredCount
+      type: object
+    PageMetaData:
+      properties:
+        page:
+          $ref: '#/components/schemas/PageInfo'
+      required:
+      - page
+      type: object
     PageUrgency:
       default: high
       description: On-Call Page urgency level.
@@ -51313,6 +51461,218 @@ components:
           example: report_id
           type: string
       type: object
+    SavedActionAttributesCreateRequest:
+      properties:
+        actionDisplayName:
+          description: Display name of the action
+          example: Chat completion
+          type: string
+        actionFqn:
+          description: Fully qualified name of the action
+          example: com.datadoghq.anthropic.chatCompletion
+          type: string
+        description:
+          description: Description of the saved action
+          example: Generate chat completions using AI
+          type: string
+        name:
+          description: Name of the saved action
+          example: Chat completion
+          type: string
+        snippetData:
+          $ref: '#/components/schemas/SavedActionData'
+        visibility:
+          $ref: '#/components/schemas/SavedActionVisibility'
+      required:
+      - name
+      - visibility
+      - actionFqn
+      - actionDisplayName
+      type: object
+    SavedActionAttributesResponse:
+      properties:
+        actionDisplayName:
+          description: Display name of the action
+          example: List models
+          type: string
+        actionFqn:
+          description: Fully qualified name of the action
+          example: com.datadoghq.anthropic.listModels
+          type: string
+        createdAt:
+          description: Creation timestamp
+          example: '2022-03-24T19:31:17Z'
+          format: date-time
+          type: string
+        description:
+          description: Description of the saved action
+          example: List all available AI models
+          type: string
+        name:
+          description: Name of the saved action
+          example: List Models
+          type: string
+        snippetData:
+          $ref: '#/components/schemas/SavedActionData'
+        updatedAt:
+          description: Last update timestamp
+          example: '2022-03-24T19:31:28Z'
+          format: date-time
+          type: string
+        visibility:
+          $ref: '#/components/schemas/SavedActionVisibility'
+      required:
+      - actionDisplayName
+      - actionFqn
+      - createdAt
+      - updatedAt
+      - name
+      - visibility
+      - snippetData
+      type: object
+    SavedActionAttributesUpdateRequest:
+      properties:
+        actionDisplayName:
+          description: Display name of the action
+          example: List models
+          type: string
+        actionFqn:
+          description: Fully qualified name of the action
+          example: com.datadoghq.anthropic.listModels
+          type: string
+        description:
+          description: Description of the saved action
+          example: Updated description
+          type: string
+        name:
+          description: Name of the saved action
+          example: List Models 2
+          type: string
+        snippetData:
+          $ref: '#/components/schemas/SavedActionData'
+        visibility:
+          $ref: '#/components/schemas/SavedActionVisibility'
+      type: object
+    SavedActionCreateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SavedActionDataCreateRequest'
+      required:
+      - data
+      type: object
+    SavedActionData:
+      properties:
+        actionInputs:
+          description: List of action input parameters
+          items:
+            $ref: '#/components/schemas/NamedParameter'
+          type: array
+        completionGate:
+          $ref: '#/components/schemas/ActionsCompletionGate'
+        connectionId:
+          description: ID of the connection to use with this action
+          example: 12345678-1234-5678-1234-567812345678
+          type: string
+        connectionIntegration:
+          description: Integration type for the connection
+          example: DATADOG_INTEGRATION_SLACK
+          type: string
+      type: object
+    SavedActionDataCreateRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SavedActionAttributesCreateRequest'
+        type:
+          $ref: '#/components/schemas/SavedActionType'
+      required:
+      - type
+      - attributes
+      type: object
+    SavedActionDataResponse:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SavedActionAttributesResponse'
+        id:
+          description: Saved action identifier
+          example: test-id
+          type: string
+        relationships:
+          $ref: '#/components/schemas/SavedActionRelationships'
+        type:
+          $ref: '#/components/schemas/SavedActionType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SavedActionDataUpdateRequest:
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SavedActionAttributesUpdateRequest'
+        id:
+          description: Saved action identifier
+          example: 0cc1171d-78c9-4f15-8ae5-89ae301612a6
+          type: string
+        type:
+          $ref: '#/components/schemas/SavedActionType'
+      required:
+      - type
+      - id
+      - attributes
+      type: object
+    SavedActionListDataResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/SavedActionDataResponse'
+          type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaData'
+      required:
+      - data
+      - meta
+      type: object
+    SavedActionRelationships:
+      properties:
+        creator:
+          $ref: '#/components/schemas/CreatorRelationship'
+      type: object
+    SavedActionResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/SavedActionDataResponse'
+      required:
+      - data
+      type: object
+    SavedActionType:
+      description: The type of the resource (saved_actions)
+      enum:
+      - saved_actions
+      example: saved_actions
+      type: string
+      x-enum-varnames:
+      - SAVED_ACTIONS
+    SavedActionUpdateRequest:
+      properties:
+        data:
+          $ref: '#/components/schemas/SavedActionDataUpdateRequest'
+      required:
+      - data
+      type: object
+    SavedActionVisibility:
+      description: 'The visibility scope of the saved action.
+
+        - ORG: Visible to the organization
+
+        - USER: Visible only to the user who created it'
+      enum:
+      - ORG
+      - USER
+      example: ORG
+      type: string
+      x-enum-varnames:
+      - ORG
+      - USER
     ScaRequest:
       properties:
         data:
@@ -66377,6 +66737,14 @@ components:
         meta:
           $ref: '#/components/schemas/TeamsResponseMeta'
       type: object
+    UserType:
+      description: The type of the resource (users)
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
     UserUpdateAttributes:
       description: Attributes of the edited user.
       properties:
@@ -92465,6 +92833,216 @@ paths:
         operator: OR
         permissions:
         - org_management
+  /api/v2/saved_action:
+    get:
+      description: 'List all saved actions. Saved actions are reusable action configurations
+        that can be used in workflows.
+
+
+        **Note**: This endpoint is in public beta and it''s subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: ListSavedAction
+      parameters:
+      - description: Filter saved actions by name or description using a search text
+        example: list models
+        in: query
+        name: filter[search_text_like]
+        schema:
+          type: string
+      - description: Page number for pagination
+        example: 1
+        in: query
+        name: page[number]
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of saved actions per page
+        example: 25
+        in: query
+        name: page[size]
+        schema:
+          default: 25
+          maximum: 100
+          minimum: 1
+          type: integer
+      - description: Client identifier for filtering
+        example: APP_BUILDER
+        in: query
+        name: client
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedActionListDataResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: An unexpected error response
+      summary: List Saved Actions
+      tags:
+      - Workflow Automation
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: 'Create a new saved action. Saved actions are reusable action configurations
+        that can be used in workflows.
+
+
+        **Note**: This endpoint is in public beta and it''s subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: CreateSavedAction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedActionCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedActionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: An unexpected error response
+      summary: Create Saved Action
+      tags:
+      - Workflow Automation
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/saved_action/{saved_action_id}:
+    delete:
+      description: 'Delete a saved action.
+
+
+        **Note**: This endpoint is in public beta and it''s subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: DeleteSavedAction
+      parameters:
+      - description: The ID of the saved action to delete
+        example: 0cc1171d-78c9-4f15-8ae5-89ae301612a6
+        in: path
+        name: saved_action_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: An unexpected error response
+      summary: Delete Saved Action
+      tags:
+      - Workflow Automation
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: 'Update an existing saved action.
+
+
+        **Note**: This endpoint is in public beta and it''s subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      operationId: UpdateSavedAction
+      parameters:
+      - description: The ID of the saved action to update
+        example: 0cc1171d-78c9-4f15-8ae5-89ae301612a6
+        in: path
+        name: saved_action_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SavedActionUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavedActionResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: An unexpected error response
+      summary: Update Saved Action
+      tags:
+      - Workflow Automation
+      x-unstable: '**Note**: This endpoint is in public beta and it''s subject to
+        change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/scim/Groups:
     get:
       description: 'List groups in the organization.

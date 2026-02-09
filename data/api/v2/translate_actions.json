@@ -2864,6 +2864,26 @@
     "request_description": "",
     "request_schema_description": "The form data submitted to upload IdP metadata"
   },
+  "ListSavedAction": {
+    "description": "List all saved actions. Saved actions are reusable action configurations that can be used in workflows.\n\n**Note**: This endpoint is in public beta and it's subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "List Saved Actions"
+  },
+  "CreateSavedAction": {
+    "description": "Create a new saved action. Saved actions are reusable action configurations that can be used in workflows.\n\n**Note**: This endpoint is in public beta and it's subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Create Saved Action",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteSavedAction": {
+    "description": "Delete a saved action.\n\n**Note**: This endpoint is in public beta and it's subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Delete Saved Action"
+  },
+  "UpdateSavedAction": {
+    "description": "Update an existing saved action.\n\n**Note**: This endpoint is in public beta and it's subject to change.\nIf you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).",
+    "summary": "Update Saved Action",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListSCIMGroups": {
     "description": "List groups in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
     "summary": "List groups"
