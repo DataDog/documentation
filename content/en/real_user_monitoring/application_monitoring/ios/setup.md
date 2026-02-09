@@ -439,7 +439,7 @@ Network requests are automatically tracked after you enable RUM with `urlSession
 
 #### (Optional) Enable detailed timing breakdown
 
-To additionally capture detailed network timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), optionally enable `URLSessionInstrumentation` for your delegate type:
+To capture additional detailed network timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your delegate type:
 
 {{< tabs >}}
 {{% tab "Swift" %}}

@@ -623,11 +623,11 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 
 ### Automatically track network requests
 
-Network requests are automatically tracked after you enable RUM with the `urlSessionTracking` option. 
+Network requests are automatically tracked after you enable RUM with the `urlSessionTracking` configuration. 
 
 #### (Optional) Enable detailed timing breakdown
 
-To get detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), optionally enable `URLSessionInstrumentation` for your delegate type:
+To get detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your delegate type:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -658,7 +658,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{< /tabs >}}
 
 **Notes**:
-- Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides additional detailed timing breakdown for performance analysis.
+- Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
 - Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) for tasks with completion handlers in automatic mode, and for all tasks after enabling `URLSessionInstrumentation`.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
