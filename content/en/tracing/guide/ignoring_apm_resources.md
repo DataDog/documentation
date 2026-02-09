@@ -46,7 +46,7 @@ Configuring the Trace Agent to ignore certain spans or resources applies to all 
 
 Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
-**Important**: The filter matches tags on the **root span** of a trace, but it drops the **entire trace** (also called a chunk). Individual spans within a trace cannot be selectively dropped—if the root span matches the filter criteria, the complete trace is discarded.
+<div class="alert alert-info">The filter matches tags on the <strong>root span</strong> of a trace, but it drops the <strong>entire trace</strong> (also called a chunk). Individual spans within a trace cannot be selectively dropped—if the root span matches the filter criteria, the complete trace is discarded.</div>
 
 If you can programmatically identify a set of traces that you know you don't want to send to Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so Datadog can continue to expand this functionality.
 
@@ -130,101 +130,6 @@ agents:
 {{% k8s-helm-redeploy %}}
 
 [1]: /agent/kubernetes/?tab=helm#installation
-{{% /tab %}}
-{{% tab "Kubernetes daemonset" %}}
-
-In the dedicated trace-agent container, add the environment variable `DD_APM_FILTER_TAGS_REJECT`:
-
-{{< code-block lang="yaml" >}}
-    - name: trace-agent
-        image: "gcr.io/datadoghq/agent:latest"
-        imagePullPolicy: IfNotPresent
-        command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
-        resources: {}
-        ports:
-        - containerPort: 8126
-          hostPort: 8126
-          name: traceport
-          protocol: TCP
-        env:
-        - name: DD_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: "datadog-secret"
-              key: api-key
-        - name: DD_KUBERNETES_KUBELET_HOST
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-        - name: KUBERNETES
-          value: "yes"
-        - name: DOCKER_HOST
-          value: unix:///host/var/run/docker.sock
-        - name: DD_LOG_LEVEL
-          value: "INFO"
-        - name: DD_APM_ENABLED
-          value: "true"
-        - name: DD_APM_NON_LOCAL_TRAFFIC
-          value: "true"
-        - name: DD_APM_RECEIVER_PORT
-          value: "8126"
-        - name: DD_KUBELET_TLS_VERIFY
-          value: "false"
-        - name: DD_APM_FILTER_TAGS_REJECT
-          value: "http.url:http://localhost:5050/healthcheck"
-{{< /code-block >}}
-
-For multiple values:
-
-{{< code-block lang="yaml" >}}
-        - name: DD_APM_FILTER_TAGS_REJECT
-          value: "key1:value1 key2:value2"
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Docker compose" %}}
-
-In the Datadog Agent container's list of environment variables, add `DD_APM_FILTER_TAGS_REJECT`:
-
-{{< code-block lang="yaml" >}}
-    environment:
-      // other Datadog Agent environment variables
-      - DD_APM_FILTER_TAGS_REJECT=http.url:http://localhost:5050/healthcheck
-{{< /code-block >}}
-
-For multiple values:
-
-{{< code-block lang="yaml" >}}
-    environment:
-      // other Datadog Agent environment variables
-      - DD_APM_FILTER_TAGS_REJECT=key1:value1 key2:value2
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Docker run" %}}
-
-In your docker run command to spin up the Datadog Agent, add `DD_APM_FILTER_TAGS_REJECT`:
-
-{{< code-block lang="shell" >}}
-docker run -d --name datadog-agent \
-              --cgroupns host \
-              --pid host \
-              -v /var/run/docker.sock:/var/run/docker.sock:ro \
-              -v /proc/:/host/proc/:ro \
-              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-              -e DD_API_KEY=<> \
-              -e DD_APM_FILTER_TAGS_REJECT="http.url:http://localhost:5050/healthcheck" \
-              -e DD_APM_ENABLED=true \
-              -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
-{{< /code-block >}}
-
-For multiple values:
-
-{{< code-block lang="shell" >}}
-              -e DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2" \
-{{< /code-block >}}
-
 {{% /tab %}}
 {{< /tabs >}}
 
