@@ -2,6 +2,7 @@
 title: Declare an Incident
 aliases:
 - /service_management/incident_management/declare/
+- /incident_response/incident_management/declare
 ---
 
 ## Overview
@@ -105,11 +106,11 @@ You can declare an incident from individual Handoff Notification cards.
 ## What's next
 
 {{< whatsnext desc="Add helpful information to your incident and give context to everyone that is involved in the investigation.">}}
-    {{< nextlink href="/incident_response/incident_management/describe" >}}Describe the Incident: Add context and details{{< /nextlink >}}
+    {{< nextlink href="/incident_response/incident_management/investigate/describe" >}}Describe the Incident: Add context and details{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://app.datadoghq.com/incidents
-[2]: /incident_response/incident_management/incident_settings#information
+[2]: /incident_response/incident_management/setup_and_configuration/information
 [3]: /security/workload_protection/security_signals/#declare-an-incident
 [4]:/security/workload_protection/security_signals/#declare-an-incident
 [5]: /incident_response/case_management/view_and_manage
@@ -117,7 +118,7 @@ You can declare an incident from individual Handoff Notification cards.
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: https://app.datadoghq.com/synthetics/tests
 [9]: https://app.datadoghq.com/incidents/settings?section=global-settings
-[10]: /incident_response/incident_management/incident_settings/property_fields
-[11]: /incident_response/incident_management/incident_settings/notification_rules
+[10]: /incident_response/incident_management/setup_and_configuration/property_fields
+[11]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [12]: /incident_response/on-call/
 [13]: https://app.datadoghq.com/on-call/pages

@@ -9,7 +9,7 @@ further_reading:
 - link: "/incident_response/incident_management/declare"
   tag: "Documentation"
   text: "Declare an Incident"
-- link: "/incident_response/incident_management/describe"
+- link: "/incident_response/incident_management/investigate/describe"
   tag: "Documentation"
   text: "Describe an Incident"
 ---
@@ -73,11 +73,11 @@ After declaring an incident, responders can use the Incident Details Page to app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/incident_management/describe/#incident-details
+[1]: /incident_response/incident_management/investigate/describe/#incident-details
 [2]: /incident_response/incident_management/#integrations
-[3]: /incident_response/incident_management/incident_settings#integrations
-[4]: /incident_response/incident_management/incident_settings/templates#postmortems
+[3]: /incident_response/incident_management/setup_and_configuration/integrations
+[4]: /incident_response/incident_management/setup_and_configuration/templates/#postmortems
 [5]: https://app.datadoghq.com/incidents/settings#Postmortems
-[6]: /incident_response/incident_management/incident_settings/property_fields
+[6]: /incident_response/incident_management/setup_and_configuration/property_fields
 [7]: /incident_response/incident_management/notification/
 [8]: /incident_response/incident_management/investigate/timeline

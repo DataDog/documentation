@@ -3,6 +3,7 @@ title: Integrate Atlassian Statuspage with Datadog Incident Management
 aliases:
 - /service_management/incident_management/guides/statuspage
 - /service_management/incident_management/integrations/statuspage/
+- /incident_response/incident_management/integrations/statuspage/
 further_reading:
 - link: "integrations/statuspage/"
   tag: "Documentation"

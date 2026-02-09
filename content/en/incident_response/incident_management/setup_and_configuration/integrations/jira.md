@@ -3,6 +3,7 @@ title: Integrate Jira with Datadog Incident Management
 aliases:
 - /service_management/incident_management/guides/jira
 - /service_management/incident_management/integrations/jira/
+- /incident_response/incident_management/integrations/jira/
 further_reading:
 - link: "integrations/jira/"
   tag: "Documentation"
@@ -10,7 +11,7 @@ further_reading:
 - link: "https://app.datadoghq.com/integrations/jira"
   tag: "App"
   text: "In-app Jira integration tile"
-- link: "/incident_response/incident_management/follow-ups"
+- link: "/incident_response/incident_management/post_incident/follow-ups"
   tag: "Documentation"
   text: "Export follow-ups to Jira"
 

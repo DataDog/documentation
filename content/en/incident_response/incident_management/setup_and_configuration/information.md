@@ -2,6 +2,7 @@
 title: Information
 aliases:
 - /service_management/incident_management/incident_settings/information/
+- /incident_response/incident_management/incident_settings/information
 ---
 
 ## Overview
@@ -82,7 +83,7 @@ When test incidents are enabled in an incident type, any user with the **Inciden
 Test incidents are visually distinguished by a purple banner. By default, test incidents do not by appear in incident search, execute automations, execute notification rules, or affect analytics. The declarer can opt into these functions during declaration.
 
 [1]: https://app.datadoghq.com/incidents/settings#Information
-[2]: /incident_response/incident_management/incident_settings/notification_rules
-[3]: /incident_response/incident_management/analytics
+[2]: /incident_response/incident_management/setup_and_configuration/notification_rules
+[3]: /incident_response/incident_management/analytics_and_reporting
 [4]: /incident_response/incident_management/#from-the-incidents-page
 [5]: https://app.datadoghq.com/incidents

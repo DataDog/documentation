@@ -2,8 +2,9 @@
 title: Notification Rules
 aliases:
 - /service_management/incident_management/incident_settings/notification_rules/
+- /incident_response/incident_management/incident_settings/notification_rules/
 further_reading:
-- link: "/incident_response/incident_management/incident_settings/templates"
+- link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
   text: "Customize message templates"
 ---

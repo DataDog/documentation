@@ -2,8 +2,9 @@
 title: Incident Response Team
 aliases:
 - /service_management/incident_management/response_team/
+- /incident_response/incident_management/response_team
 further_reading:
-- link: "/incident_response/incident_management/incident_settings/responder_types"
+- link: "/incident_response/incident_management/setup_and_configuration/responder_types"
   tag: "Documentation"
   text: "Customize responder types in Incident Settings"
 ---
@@ -25,13 +26,13 @@ Datadog also automatically adds users as responders when:
 * They perform any action that updates the incident, including writing to the timeline.
 * They are notified about the incident through a notification rule or a manual incident notification.
 
-The **Response Team** tab of the Incident Details page records the time an individual was added to the incident’s response team. It also records the time the responder last took an action affecting the incident in Datadog, such as updating its attributes or writing to its timeline.
+The **Response Team** tab of the Incident Details page records the time an individual was added to the incident's response team. It also records the time the responder last took an action affecting the incident in Datadog, such as updating its attributes or writing to its timeline.
 
 You can remove responders if they are not assigned to any responder types and if they have not yet performed any actions updating the incident.
 
 ## Assigning responder types
 
-<div class="alert alert-info">Responder types are unrelated to the <a href="/account_management/rbac/?tab=datadogapplication">Role Based Access Control (RBAC)</a> system. The Responder Type in Incident Management does not affect a user’s permissions.</a></div>
+<div class="alert alert-info">Responder types are unrelated to the <a href="/account_management/rbac/?tab=datadogapplication">Role Based Access Control (RBAC)</a> system. The Responder Type in Incident Management does not affect a user's permissions.</a></div>
 
 From the **Response Team** tab of the Incident Details page, you can modify the responder types for any responder.
 
@@ -47,4 +48,4 @@ When you assign a responder type, the assignee is notified about it in Slack.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /incident_response/incident_management/incident_settings/responder_types
+[1]: /incident_response/incident_management/setup_and_configuration/responder_types
