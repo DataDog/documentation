@@ -84,7 +84,7 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>X.X.X</version>
+        <version>1.57.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}

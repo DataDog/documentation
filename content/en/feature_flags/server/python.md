@@ -46,8 +46,8 @@ pip install ddtrace openfeature-sdk
 Or add them to your `requirements.txt`:
 
 {{< code-block lang="text" filename="requirements.txt" >}}
-ddtrace>=3.19.0
-openfeature-sdk>=0.5.0
+ddtrace>=4.0.2
+openfeature-sdk>=0.7.0
 {{< /code-block >}}
 
 ## Initialize the SDK
@@ -55,8 +55,12 @@ openfeature-sdk>=0.5.0
 Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog tracer's Remote Configuration system to receive flag configurations.
 
 {{< code-block lang="python" >}}
+from ddtrace import tracer
 from openfeature import api
 from ddtrace.openfeature import DataDogProvider
+
+# Initialize the tracer (required for Remote Configuration)
+tracer.configure()
 
 # Create and register the Datadog provider
 provider = DataDogProvider()
