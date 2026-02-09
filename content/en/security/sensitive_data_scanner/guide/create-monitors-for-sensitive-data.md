@@ -14,7 +14,7 @@ further_reading:
   - link: /monitors/types/apm/
     tag: Documentation
     text: Learn to set up APM monitors
-- link: /monitors/types/real_user_monitoring/
+  - link: /monitors/types/real_user_monitoring/
     tag: Documentation
     text: Learn to set up RUM monitors
 ---
