@@ -8478,21 +8478,6 @@ menu:
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_profiling
       weight: 603
-    - name: Browser Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_browser
-      weight: 604
-    - name: Android Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_android
-      weight: 605
-    - name: iOS Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_ios
-      weight: 606
     - name: Correlate Synthetics with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
