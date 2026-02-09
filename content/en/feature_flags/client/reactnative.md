@@ -82,10 +82,13 @@ import { OpenFeature, OpenFeatureProvider } from '@openfeature/react-sdk';
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<APPLICATION_ID>',
-    true, // trackInteractions
-    true, // trackResources
-    true  // trackErrors
+    trackingConsent,
+    {
+      rumConfiguration: {
+        applicationId: '<APPLICATION_ID>',
+      },
+      // ...
+    },
 );
 config.site = '{{< region-param key="dd_site" code="true" >}}';
 
@@ -256,7 +259,6 @@ For example:
 import { useBooleanFlag } from '@openfeature/react-sdk';
 import { Suspense } from 'react';
 
-import
 function Content() {
   // Display a loading message if the component uses feature flags and the provider is not ready
   return (
