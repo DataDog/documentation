@@ -4,12 +4,12 @@ description: Set up Datadog Feature Flags for React Native applications.
 aliases:
   - /feature_flags/setup/reactnative/
 further_reading:
-- link: "/feature_flags/client/"
-  tag: "Documentation"
-  text: "Client-Side Feature Flags"
 - link: "https://openfeature.dev/docs/reference/sdks/client/web/react/"
   tag: "OpenFeature"
   text: "OpenFeature React SDK"
+- link: "/feature_flags/client/"
+  tag: "Documentation"
+  text: "Client-Side Feature Flags"
 - link: "/real_user_monitoring/application_monitoring/react_native/"
   tag: "Documentation"
   text: "React Native Monitoring"
@@ -56,7 +56,7 @@ Install the added pod:
 
 ### Android setup
 
-If you use a React Native version strictly over 0.67, use Java version 17. If you use React Native version equal or below 0.67, use Java version 11.
+If you use React Native version 0.68 or higher, use Java 17. If you use React Native version 0.67 or lower, use Java version 11.
 
 In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
 
@@ -258,7 +258,7 @@ Built-in [suspense](https://react.dev/reference/react/Suspense) support allows y
 For example:
 
 {{< code-block lang="jsx" >}}
-import { useBooleanFlag } from '@openfeature/react-sdk';
+import { useBooleanFlagValue } from '@openfeature/react-sdk';
 import { Suspense } from 'react';
 
 function Content() {
@@ -271,7 +271,7 @@ function Content() {
 }
 
 function WelcomeMessage() {
-  const { value: showNewMessage } = useBooleanFlag('show-new-welcome-message', false, { suspend: true });
+  const { value: showNewMessage } = useBooleanFlagValue('show-new-welcome-message', false, { suspend: true });
 
   return (
     <>
@@ -321,7 +321,7 @@ import { Suspense } from 'react';
 import { View } from 'react-native';
 import { DatadogProvider, DatadogProviderConfiguration, DdFlags } from '@datadog/mobile-react-native';
 import { DatadogOpenFeatureProvider } from '@datadog/mobile-react-native-openfeature';
-import { OpenFeature, OpenFeatureProvider, useFlag } from '@openfeature/react-sdk';
+import { OpenFeature, OpenFeatureProvider, useBooleanFlagValue } from '@openfeature/react-sdk';
 
 const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
