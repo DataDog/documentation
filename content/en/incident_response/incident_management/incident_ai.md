@@ -92,7 +92,7 @@ After an incident is resolved, Incident AI collects any follow-up tasks responde
 
 To view suggested follow-up tasks:
 1. Navigate to the relevant incident in Datadog.
-1. Open the **Remediation** tab to view a list of all follow-up tasks you've saved from Slack.
+1. Open the **Post-Incident** tab to view a list of all follow-up tasks you've saved from Slack.
 
 ## Related incident detection
 
