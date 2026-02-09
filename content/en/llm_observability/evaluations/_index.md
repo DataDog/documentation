@@ -30,11 +30,10 @@ You can also submit [external evaluations][3] using Datadog's API. This mechanis
 
 ### Evaluation developer guide
 
-For developers building custom evaluations, the [Evaluation Developer Guide][10] provides comprehensive documentation on:
-- Evaluation data models (`EvaluatorContext`, `EvaluatorResult`)
-- Class-based evaluators (`BaseEvaluator`, `BaseSummaryEvaluator`)
-- SDK methods (`submit_evaluation`, `export_span`)
-- HTTP API reference
+For developers building custom evaluators, the [Evaluation Developer Guide][10] covers:
+- Key concepts: how evaluations work in experiments versus production
+- Building class-based and function-based evaluators (`BaseEvaluator`, `BaseSummaryEvaluator`)
+- Data model reference (`EvaluatorContext`, `EvaluatorResult`, metric types)
 
 ### Evaluation integrations
 

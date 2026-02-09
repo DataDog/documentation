@@ -1,6 +1,6 @@
 ---
 title: Evaluation Developer Guide
-description: Learn how to build custom evaluators using the LLM Observability SDK and API.
+description: Learn how to build custom evaluators using the LLM Observability SDK.
 aliases:
     - /llm_observability/evaluations/developer_guide
 further_reading:
@@ -17,73 +17,52 @@ further_reading:
 
 ## Overview
 
-This guide covers how to evaluate your LLM applications, either within an experiment or by evaluating production spans. It includes:
+This guide covers how to build custom evaluators with the LLM Observability SDK and use them in experiments and production. It walks through:
 
-- The evaluation data model
-- Using the SDK to create evaluations
-- Using the HTTP API to submit evaluations
+- [Key concepts](#key-concepts): How evaluations work in experiments versus production
+- [Building evaluators](#building-evaluators): Class-based and function-based approaches
+- [Using evaluators in experiments](#using-evaluators-in-experiments): Running evaluators against a dataset
+- [Using evaluators in production](#using-evaluators-in-production): Evaluating live spans
+- [Data model reference](#data-model-reference): Detailed field descriptions for all evaluation types
 
-## Evaluation data model
+## Key concepts
 
-### EvaluatorContext
+An **evaluation** measures a specific quality of your LLM application's output, such as accuracy, tone, or harmfulness. You write the evaluation logic inside an **evaluator**, which receives context about the LLM interaction and returns a result.
 
-The `EvaluatorContext` is a frozen dataclass that provides all the information needed to run an evaluation.
+There are two contexts for running evaluators:
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `input_data` | `Any` | The input provided to the LLM application (for example, a prompt). |
-| `output_data` | `Any` | The actual output from the LLM application. |
-| `expected_output` | `Any` | The expected or ideal output the LLM should have produced. |
-| `metadata` | `Dict[str, Any]` | Additional metadata. |
-| `span_id` | `str` | The span's unique identifier. |
-| `trace_id` | `str` | The trace's unique identifier. |
+| | Experiments | Production |
+|---|---|---|
+| **Purpose** | Test your LLM application against a dataset before deploying. | Monitor the quality of live LLM responses. |
+| **How evaluators run** | Automatically — the SDK calls your evaluator on each dataset record. | Manually — you call the evaluator in your application code and submit the result. |
+| **Available through** | SDK | SDK or HTTP API |
 
-### SummaryEvaluatorContext
+### Evaluation components
 
-The `SummaryEvaluatorContext` is a frozen dataclass that provides aggregated evaluation results across all dataset records in an experiment.
+The evaluation system has four main components:
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `inputs` | `List[Any]` | List of all input data from the experiment. |
-| `outputs` | `List[Any]` | List of all output data from the experiment. |
-| `expected_outputs` | `List[Any]` | List of all expected outputs from the experiment. |
-| `evaluation_results` | `Dict[str, List[Any]]` | Dictionary mapping evaluator names to their results. |
-| `metadata` | `Dict[str, Any]` | Additional metadata associated with the experiment. |
+1. **[EvaluatorContext](#evaluatorcontext)** — The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In experiments, the SDK builds this automatically from each dataset record. In production, you construct it yourself.
+2. **[EvaluatorResult](#evaluatorresult)** — The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`) instead.
+3. **[Metric type](#metric-types)** — Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), or `boolean` (pass/fail).
+4. **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
 
-### EvaluatorResult
+The typical flow:
 
-The `EvaluatorResult` class allows you to return rich evaluation results with additional context.
+- **Experiments**: Dataset record → `EvaluatorContext` → Evaluator → `EvaluatorResult` → (after all records) `SummaryEvaluatorContext` → Summary evaluator → summary result
+- **Production**: Span data → `EvaluatorContext` (built manually) → Evaluator → `EvaluatorResult` → `LLMObs.submit_evaluation()` or HTTP API
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `value` | `Union[str, float, int, bool]` | The evaluation value. Type depends on `metric_type`. |
-| `reasoning` | `Optional[str]` | A text explanation of the evaluation result. |
-| `assessment` | `Optional[str]` | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
-| `metadata` | `Optional[Dict[str, Any]]` | Additional metadata about the evaluation. |
-| `tags` | `Optional[Dict[str, str]]` | Tags to apply to the evaluation metric. |
-
-### Metric types
-
-LLM Observability supports three metric types for evaluations:
-
-| Metric type | Value type | Use case |
-|-------------|------------|----------|
-| `categorical` | `str` | Classifying outputs into categories (for example, "Positive", "Negative", "Neutral") |
-| `score` | `float` or `int` | Numeric scores or ratings (for example, 0.0-1.0, 1-10) |
-| `boolean` | `bool` | Pass/fail or yes/no evaluations |
-
-## SDK guide
+## Building evaluators
 
 ### Class-based evaluators
 
-Class-based evaluators provide a structured way to implement reusable evaluation logic.
+Class-based evaluators provide a structured way to implement reusable evaluation logic with custom configuration.
 
 #### BaseEvaluator
 
-The `BaseEvaluator` class is the base class to create an evaluator.
+Subclass `BaseEvaluator` to create an evaluator that runs on a single span or dataset record. Implement the `evaluate` method, which receives an [`EvaluatorContext`](#evaluatorcontext) and returns an [`EvaluatorResult`](#evaluatorresult) (or a plain value).
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs, BaseEvaluator, EvaluatorContext, EvaluatorResult
+from ddtrace.llmobs import BaseEvaluator, EvaluatorContext, EvaluatorResult
 
 class SemanticSimilarityEvaluator(BaseEvaluator):
     """Evaluates semantic similarity between output and expected output."""
@@ -93,7 +72,6 @@ class SemanticSimilarityEvaluator(BaseEvaluator):
         self.threshold = threshold
 
     def evaluate(self, context: EvaluatorContext) -> EvaluatorResult:
-        # Custom evaluation logic
         score = compute_similarity(context.output_data, context.expected_output)
 
         return EvaluatorResult(
@@ -107,13 +85,15 @@ class SemanticSimilarityEvaluator(BaseEvaluator):
 
 **Key points:**
 
-- Override the `__init__` method to accept custom configuration and call `super().__init__(name="evaluator_name")`
-- Implement the `evaluate(context: EvaluatorContext)` method
-- Return either a value directly or an `EvaluatorResult` for rich results
+- Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
+- Implement `evaluate(context: EvaluatorContext)` with your evaluation logic.
+- Return an `EvaluatorResult` for rich results, or a plain value (`str`, `float`, `int`, `bool`).
 
 #### BaseSummaryEvaluator
 
-The `BaseSummaryEvaluator` class is used to create evaluators that operate on aggregated results from an entire experiment run.
+<div class="alert alert-info">Summary evaluators are only available in experiments.</div>
+
+Subclass `BaseSummaryEvaluator` to create an evaluator that operates on the aggregated results of an entire experiment run. It receives a [`SummaryEvaluatorContext`](#summaryevaluatorcontext) containing all inputs, outputs, and per-evaluator results.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import BaseSummaryEvaluator, SummaryEvaluatorContext
@@ -134,13 +114,12 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 
 **Key points:**
 
-- Override the `__init__` method and call `super().__init__(name="evaluator_name")`
-- Access aggregated results through `context.evaluation_results`
-- Useful for computing statistics like averages, pass rates, or distributions
+- Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
+- Access per-evaluator results through `context.evaluation_results`, which maps evaluator names to lists of results.
 
-## Function-based evaluators
+### Function-based evaluators
 
-Function-based evaluators are lightweight functions for straightforward evaluation logic. They take input, output, and expected output as arguments.
+For straightforward evaluation logic, define a function instead of a class. Function-based evaluators receive the input, output, and expected output directly as arguments.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import EvaluatorResult
@@ -152,8 +131,6 @@ def exact_match_evaluator(input_data, output_data, expected_output):
         value=matches,
         reasoning="Exact match" if matches else "Output differs from expected",
         assessment="pass" if matches else "fail",
-        metadata={"comparison_type": "exact"},
-        tags={"evaluator": "exact_match"}
     )
 {{< /code-block >}}
 
@@ -169,12 +146,12 @@ def evaluator_function(
 {{< /code-block >}}
 
 You can return either:
-- A value (`str`, `float`, `int`, `bool`)
+- A plain value (`str`, `float`, `int`, `bool`)
 - An `EvaluatorResult` for rich results with reasoning and metadata
 
-## Using evaluators with experiments
+## Using evaluators in experiments
 
-Use evaluators with experiments to systematically evaluate your LLM application.
+Pass your evaluators to `LLMObs.experiment()` to run them against every record in a dataset. The SDK automatically builds an `EvaluatorContext` for each record and calls your evaluator. After all records are processed, any summary evaluators run on the aggregated results.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs, Dataset, DatasetRecord
@@ -196,14 +173,13 @@ dataset = Dataset(
 
 # Define task
 def qa_task(input_data, config):
-    # Your LLM application logic
     return generate_answer(input_data["question"])
 
 # Create evaluators
 semantic_eval = SemanticSimilarityEvaluator(threshold=0.7)
 summary_eval = AverageScoreEvaluator("semantic_similarity")
 
-# Run experiment with mixed evaluators
+# Run experiment
 experiment = LLMObs.experiment(
     name="qa_experiment",
     task=qa_task,
@@ -215,42 +191,23 @@ experiment = LLMObs.experiment(
 experiment.run()
 {{< /code-block >}}
 
-## Submitting evaluations
+## Using evaluators in production
 
-Use `LLMObs.submit_evaluation()` to submit custom evaluations associated with a span.
+In production, you construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
 
-### Arguments
-
-| Argument | Type | Required | Description |
-|----------|------|----------|-------------|
-| `label` | `str` | Yes | The name of the evaluation. |
-| `metric_type` | `str` | Yes | The type of evaluation: `categorical`, `score`, or `boolean`. |
-| `value` | `str`, `int`, `float`, `bool` | Yes | The evaluation value. Type must match `metric_type`. |
-| `span` | `dict` | No* | Dictionary with `span_id` and `trace_id`. Use `LLMObs.export_span()` to generate. |
-| `span_with_tag_value` | `dict` | No* | Dictionary with `tag_key` and `tag_value` to identify the span. |
-| `ml_app` | `str` | Yes | The name of the ML application. |
-| `timestamp_ms` | `int` | No | Unix timestamp in milliseconds. Defaults to current time. |
-| `tags` | `dict` | No | Dictionary of string key-value pairs as tags. |
-| `assessment` | `str` | No | Assessment of evaluation. Accepted values: `pass`, `fail`. |
-| `reasoning` | `str` | No | Text explanation of the evaluation result. |
-| `metadata` | `dict` | No | Additional metadata about the evaluation. |
-
-**Note**: Exactly one of `span` or `span_with_tag_value` is required.
-
-### Example: Using an evaluator to evaluate a span
+For the full `submit_evaluation()` arguments and span-joining options, see the [external evaluations documentation][1]. For the HTTP API specification, see the [Evaluations API reference][2].
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs, EvaluatorContext
 from ddtrace.llmobs.decorators import llm
 
-# Create an evaluator instance
-evaluator = MyCustomEvaluator()
+evaluator = SemanticSimilarityEvaluator(threshold=0.8)
 
 @llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
 def llm_call(input_text):
     completion = ...  # Your LLM application logic
 
-    # Create the evaluation context
+    # Build the evaluation context from the span data
     context = EvaluatorContext(
         input_data=input_text,
         output_data=completion,
@@ -260,7 +217,7 @@ def llm_call(input_text):
     # Run the evaluator
     result = evaluator.evaluate(context)
 
-    # Submit the evaluation result
+    # Submit the result to Datadog
     LLMObs.submit_evaluation(
         span=LLMObs.export_span(),
         ml_app="chatbot",
@@ -274,113 +231,58 @@ def llm_call(input_text):
     return completion
 {{< /code-block >}}
 
-### Example: Joining by span context
+## Data model reference
 
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import llm
+### EvaluatorContext
 
-@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
-def llm_call():
-    completion = ...  # Your LLM application logic
+A frozen dataclass containing all the information needed to run an evaluation.
 
-    # Export span context for evaluation
-    span_context = LLMObs.export_span(span=None)
+| Field | Type | Description |
+|-------|------|-------------|
+| `input_data` | `Any` | The input provided to the LLM application (for example, a prompt). |
+| `output_data` | `Any` | The actual output from the LLM application. |
+| `expected_output` | `Any` | The expected or ideal output the LLM should have produced. |
+| `metadata` | `Dict[str, Any]` | Additional metadata. |
+| `span_id` | `str` | The span's unique identifier. |
+| `trace_id` | `str` | The trace's unique identifier. |
 
-    LLMObs.submit_evaluation(
-        span=span_context,
-        ml_app="chatbot",
-        label="quality",
-        metric_type="score",
-        value=0.95,
-        tags={"evaluator": "custom"},
-        assessment="pass",
-        reasoning="High quality response with accurate information"
-    )
+In experiments, the SDK populates this automatically from each dataset record. In production, you construct it yourself from your span data.
 
-    return completion
-{{< /code-block >}}
+### EvaluatorResult
 
-### Example: Joining by tag
+Allows you to return rich evaluation results with additional context. Used in both experiments and production.
 
-{{< code-block lang="python" >}}
-from ddtrace.llmobs import LLMObs
-from ddtrace.llmobs.decorators import llm
+| Field | Type | Description |
+|-------|------|-------------|
+| `value` | `Union[str, float, int, bool]` | The evaluation value. Type depends on `metric_type`. |
+| `reasoning` | `Optional[str]` | A text explanation of the evaluation result. |
+| `assessment` | `Optional[str]` | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
+| `metadata` | `Optional[Dict[str, Any]]` | Additional metadata about the evaluation. |
+| `tags` | `Optional[Dict[str, str]]` | Tags to apply to the evaluation metric. |
 
-@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
-def llm_call():
-    completion = ...  # Your LLM application logic
+### SummaryEvaluatorContext
 
-    # Add a unique tag to the span
-    msg_id = get_msg_id()
-    LLMObs.annotate(tags={"msg_id": msg_id})
+A frozen dataclass providing aggregated evaluation results across all dataset records in an experiment. Only used by summary evaluators.
 
-    # Submit evaluation using tag-based joining
-    LLMObs.submit_evaluation(
-        span_with_tag_value={
-            "tag_key": "msg_id",
-            "tag_value": msg_id
-        },
-        ml_app="chatbot",
-        label="harmfulness",
-        metric_type="score",
-        value=0,
-        assessment="pass",
-        reasoning="No harmful content detected"
-    )
+| Field | Type | Description |
+|-------|------|-------------|
+| `inputs` | `List[Any]` | List of all input data from the experiment. |
+| `outputs` | `List[Any]` | List of all output data from the experiment. |
+| `expected_outputs` | `List[Any]` | List of all expected outputs from the experiment. |
+| `evaluation_results` | `Dict[str, List[Any]]` | Dictionary mapping evaluator names to their results. |
+| `metadata` | `Dict[str, Any]` | Additional metadata associated with the experiment. |
 
-    return completion
-{{< /code-block >}}
+### Metric types
 
-## HTTP API reference
+LLM Observability supports three metric types for evaluations. The metric type is set when submitting an evaluation (through `submit_evaluation()` or the HTTP API) and determines how the value is validated and displayed in Datadog.
 
-You can also submit evaluations using the HTTP API.
-
-<div class="alert alert-info">To submit evaluations for <a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry spans</a> directly to the Evaluations API, you must include the <code>source:otel</code> tag in the evaluation.</div>
-
-Endpoint
-: `POST https://api.datadoghq.com/api/intake/llm-obs/v2/eval-metric`
-
-For the full API specification including request/response models, see the [Evaluations API reference][1].
-
-### API example
-
-{{< code-block lang="json" >}}
-{
-  "data": {
-    "type": "evaluation_metric",
-    "attributes": {
-      "metrics": [
-        {
-          "join_on": {
-            "span": {
-              "span_id": "20245611112024561111",
-              "trace_id": "13932955089405749200"
-            }
-          },
-          "ml_app": "weather-bot",
-          "timestamp_ms": 1609459200,
-          "metric_type": "score",
-          "label": "Accuracy",
-          "score_value": 0.95,
-          "assessment": "pass",
-          "reasoning": "The response accurately answered the question."
-        }
-      ]
-    }
-  }
-}
-{{< /code-block >}}
-
-[1]: /llm_observability/instrumentation/api/#evaluations-api
+| Metric type | Value type | Use case |
+|-------------|------------|----------|
+| `categorical` | `str` | Classifying outputs into categories (for example, "Positive", "Negative", "Neutral") |
+| `score` | `float` or `int` | Numeric scores or ratings (for example, 0.0-1.0, 1-10) |
+| `boolean` | `bool` | Pass/fail or yes/no evaluations |
 
 ## Best practices
-
-### Concurrent execution
-
-Set the `jobs` parameter to run tasks and evaluators concurrently on multiple threads, allowing experiments to complete faster when processing multiple dataset records.
-
-**Note**: Asynchronous evaluators are not yet supported for concurrent execution. Only synchronous evaluators benefit from parallel execution.
 
 ### Naming conventions
 
@@ -393,29 +295,20 @@ Evaluation labels must follow these conventions:
 - Must not exceed 200 characters (fewer than 100 is preferred)
 - Must be unique for a given LLM application (`ml_app`) and organization
 
+### Concurrent execution
+
+Set the `jobs` parameter to run tasks and evaluators concurrently on multiple threads, allowing experiments to complete faster when processing multiple dataset records.
+
+**Note**: Asynchronous evaluators are not yet supported for concurrent execution. Only synchronous evaluators benefit from parallel execution.
+
 ### OpenTelemetry integration
 
-When submitting evaluations for OpenTelemetry-instrumented spans, include the `source:otel` tag:
-
-{{< code-block lang="python" >}}
-LLMObs.submit_evaluation(
-    span=span_context,
-    ml_app="my_app",
-    label="quality",
-    metric_type="score",
-    value=0.9,
-    tags={"source": "otel"}
-)
-{{< /code-block >}}
-
-Or in API requests:
-
-{{< code-block lang="json" >}}
-{
-  "tags": ["source:otel"]
-}
-{{< /code-block >}}
+When submitting evaluations for [OpenTelemetry-instrumented spans][3], include the `source:otel` tag in the evaluation. See the [external evaluations documentation][1] for examples.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /llm_observability/evaluations/external_evaluations
+[2]: /llm_observability/instrumentation/api/#evaluations-api
+[3]: /llm_observability/instrumentation/otel_instrumentation
