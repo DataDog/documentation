@@ -2,7 +2,7 @@
 title: Correlate RUM and Profiling
 description: "Use profiling with RUM to understand application performance issues affecting user experience."
 content_filters:
-  - trait_id: sdk_profiling
+  - trait_id: platform
     option_group_id: rum_sdk_profiling_options
     label: "SDK"
 aliases:
@@ -31,7 +31,7 @@ further_reading:
 Datadog RUM supports profiling for browser, iOS, and Android applications. Use profiling data to identify performance bottlenecks, optimize slow code paths, and improve rendering performance at both the system and code level.
 
 <!-- Browser -->
-{% if equals($sdk_profiling, "browser") %}
+{% if equals($platform, "browser") %}
 
 {% callout url="https://www.datadoghq.com/product-preview/browser-profiler/" header="Join the Preview!" btn_hidden=false %}
 Browser Profiling is in Preview.
@@ -163,7 +163,7 @@ You can also find profiling data when reviewing individual events within the **S
 <!-- end Browser -->
 
 <!-- Android -->
-{% if equals($sdk_profiling, "android") %}
+{% if equals($platform, "android") %}
 
 {% callout url="https://www.datadoghq.com/product-preview/android-profiler/" header="Join the Preview!" btn_hidden=false %}
 Android Profiling is in Preview.
@@ -245,7 +245,7 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 <!-- end Android -->
 
 <!-- iOS -->
-{% if equals($sdk_profiling, "ios") %}
+{% if equals($platform, "ios") %}
 
 {% callout url="https://www.datadoghq.com/product-preview/ios-profiler/" header="Join the Preview!" btn_hidden=false %}
 iOS Profiling is in Preview.

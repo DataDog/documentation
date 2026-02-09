@@ -43,9 +43,6 @@ traits:
   type: text
   internal_notes: The source of a software library that the customer is trying to use in their code, such as an SDK. This is most often a package manager like NPM. But it could also have a more general value, like "CDN" or "GitHub".
 
-- id: sdk_profiling
-  type: text
-  label: SDK Profiling
 - id: api_type
   label: "API"
   type: text
