@@ -326,6 +326,56 @@ Displays property and value pairs in JSON format.
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Image" level="h3" %}}
+Image components have the following properties.
+
+### General 
+
+Source
+: The image to display.<br>
+**Values**: URL or file
+
+### Appearance
+
+Fit
+: Determines the dimensions of the image within the bounds of the image component.<br>
+**Provided values**: fill, contain, cover, none
+
+Padding
+: Determines the width of space between the bounds of the image and the bounds of the image component.<br>
+**Provided values**: none, small, medium, large
+
+Vertical Alignment
+: Determines the vertical position of the image within the bounds of the image component.<br>
+**Provided values**: align top, align center, align bottom
+
+Horizontal Alignment 
+: Determines the horizontal position of the image within the bounds of the image component.<br>
+**Provided values**: align left, align center, align right
+
+Border
+: Determines whether the image component has a visual border around its edges.<br>
+**Provided values**: on, off
+
+Transparent Background
+: Determines whether the background inside the image component is transparent.<br>
+**Provided values**: on, off
+
+Is Loading
+: Determines whether a loading icon is displayed while the image is being loaded.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays properties in JSON format.
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Integration logo" level="h3" %}}
 Integration logo components have the following properties.
 
