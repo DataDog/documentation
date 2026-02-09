@@ -35,13 +35,13 @@ Install the Datadog React Native SDK, the OpenFeature provider, and the OpenFeat
 {{< tabs >}}
 {{% tab "npm" %}}
 {{< code-block lang="bash" >}}
-npm install @datadog/mobile-react-native @datadog/mobile-react-native-openfeature @openfeature/react-sdk
+npm install @datadog/mobile-react-native @datadog/mobile-react-native-openfeature @openfeature/react-sdk @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "yarn" %}}
 {{< code-block lang="bash" >}}
-yarn add @datadog/mobile-react-native @datadog/mobile-react-native-openfeature @openfeature/react-sdk
+yarn add @datadog/mobile-react-native @datadog/mobile-react-native-openfeature @openfeature/react-sdk @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
