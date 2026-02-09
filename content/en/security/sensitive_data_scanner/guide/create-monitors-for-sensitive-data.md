@@ -1,5 +1,5 @@
 ---
-title: Create Monitors for Sensitive Data
+title: Create Monitors to Alert on Sensitive Data
 description: Best practices for creating monitors to alert on sensitive data matches detected by Sensitive Data Scanner across logs, APM traces, and RUM events.
 further_reading:
   - link: /security/sensitive_data_scanner/
