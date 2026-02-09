@@ -47,15 +47,15 @@ To create a log monitor for sensitive data matches:
 
 1. Navigate to **Monitors > New Monitor > [Logs][2]**.
 2. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to all logs that contain sensitive data matches.
-  - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:credit_card` for financial data or `sensitive_data_category:pii` for personally identifiable information (PII).
+    - To scope to specific types of sensitive data, use domain-specific tags such as `sensitive_data_category:credit_card` for financial data or `sensitive_data_category:pii` for personally identifiable information (PII).
 3. Configure the alert conditions based on your needs:
-  - **Threshold**: Set a threshold for the number of matches over a time period (for example, alert when more than 10 sensitive data matches occur within five minutes).
-  - **Group by**: Group by `service`, `env`, or `team` to identify which services are logging sensitive data.
+    - **Threshold**: Set a threshold for the number of matches over a time period (for example, alert when more than 10 sensitive data matches occur within five minutes).
+    - **Group by**: Group by `service`, `env`, or `team` to identify which services are logging sensitive data.
 4. Configure [notifications][7] to alert the appropriate security or compliance teams.
 5. Add a descriptive monitor message that includes:
-  - Which type of sensitive data was detected
-  - Recommended remediation steps (for example, "Review application code to remove sensitive data from logs")
-  - Links to relevant documentation or runbooks
+    - Which type of sensitive data was detected
+    - Recommended remediation steps (for example, "Review application code to remove sensitive data from logs")
+    - Links to relevant documentation or runbooks
 
 #### Monitor for credit card data in production logs
 
@@ -74,10 +74,10 @@ To create an APM monitor for sensitive data in traces:
 1. Navigate to **Monitors > New Monitor > [APM][3]**.
 2. Select **Trace Analytics** as the monitor type.
 3. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to traces containing sensitive data.
-  - Use `sensitive_data_category:*` tags to scope to specific categories of sensitive data.
+    - Use `sensitive_data_category:*` tags to scope to specific categories of sensitive data.
 4. Configure the alert conditions:
-  - **Threshold**: Set appropriate thresholds based on your expected trace volume.
-  - **Group by**: Group by `service`, `resource`, or `env` to identify which services or endpoints are transmitting sensitive data.
+    - **Threshold**: Set appropriate thresholds based on your expected trace volume.
+    - **Group by**: Group by `service`, `resource`, or `env` to identify which services or endpoints are transmitting sensitive data.
 5. Configure [notifications][7] and add a monitor message with remediation guidance.
 
 #### Monitor for API keys in APM spans
@@ -93,8 +93,8 @@ To create a RUM monitor for sensitive data in events:
 1. Navigate to **Monitors > New Monitor > [RUM][4]**.
 2. In the **Define the search query** section, add the `sensitive_data:*` tag to scope your monitor to RUM events containing sensitive data.
 3. Configure the alert conditions:
-  - **Threshold**: Set appropriate thresholds for sensitive data matches in user sessions.
-  - **Group by**: Group by `application.name`, `view.name`, or `geo.country` to identify where sensitive data is being captured.
+    - **Threshold**: Set appropriate thresholds for sensitive data matches in user sessions.
+    - **Group by**: Group by `application.name`, `view.name`, or `geo.country` to identify where sensitive data is being captured.
 4. Configure [notifications][7] and add a monitor message.
 
 #### Monitor for email addresses in RUM events
