@@ -2765,6 +2765,45 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 4
+    - name: Deactivate content pack
+      url: '#deactivate-content-pack'
+      identifier: security-monitoring-deactivate-content-pack
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeactivateContentPack
+        unstable:
+          - v2
+        order: 1
+    - name: Activate content pack
+      url: '#activate-content-pack'
+      identifier: security-monitoring-activate-content-pack
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ActivateContentPack
+        unstable:
+          - v2
+        order: 2
+    - name: Get content pack states
+      url: '#get-content-pack-states'
+      identifier: security-monitoring-get-content-pack-states
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetContentPacksStates
+        unstable:
+          - v2
+        order: 3
     - name: Get a suppression's version history
       url: '#get-a-suppressions-version-history'
       identifier: security-monitoring-get-a-suppressions-version-history
@@ -8906,6 +8945,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update postmortem template
+      url: '#update-postmortem-template'
+      identifier: incidents-update-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 47
+    - name: Get postmortem template
+      url: '#get-postmortem-template'
+      identifier: incidents-get-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 46
+    - name: Delete postmortem template
+      url: '#delete-postmortem-template'
+      identifier: incidents-delete-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 48
+    - name: Create postmortem template
+      url: '#create-postmortem-template'
+      identifier: incidents-create-postmortem-template
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentPostmortemTemplate
+        unstable:
+          - v2
+        order: 45
+    - name: List postmortem templates
+      url: '#list-postmortem-templates'
+      identifier: incidents-list-postmortem-templates
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentPostmortemTemplates
+        unstable:
+          - v2
+        order: 44
     - name: Update incident notification template
       url: '#update-incident-notification-template'
       identifier: incidents-update-incident-notification-template
@@ -9832,6 +9936,84 @@ menu:
           - v2
         operationids:
           - ListDevices
+        unstable: []
+        order: 1
+    - name: OCI Integration
+      url: /api/latest/oci-integration/
+      identifier: oci-integration
+      generated: true
+    - name: Update tenancy config
+      url: '#update-tenancy-config'
+      identifier: oci-integration-update-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTenancyConfig
+        unstable: []
+        order: 6
+    - name: Get tenancy config
+      url: '#get-tenancy-config'
+      identifier: oci-integration-get-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTenancyConfig
+        unstable: []
+        order: 5
+    - name: Delete tenancy config
+      url: '#delete-tenancy-config'
+      identifier: oci-integration-delete-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTenancyConfig
+        unstable: []
+        order: 4
+    - name: Create tenancy config
+      url: '#create-tenancy-config'
+      identifier: oci-integration-create-tenancy-config
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTenancyConfig
+        unstable:
+          - v2
+        order: 3
+    - name: Get tenancy configs
+      url: '#get-tenancy-configs'
+      identifier: oci-integration-get-tenancy-configs
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetTenancyConfigs
+        unstable:
+          - v2
+        order: 2
+    - name: List tenancy products
+      url: '#list-tenancy-products'
+      identifier: oci-integration-list-tenancy-products
+      parent: oci-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTenancyProducts
         unstable: []
         order: 1
     - name: Observability Pipelines

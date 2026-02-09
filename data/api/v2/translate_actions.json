@@ -1226,6 +1226,30 @@
     "request_description": "",
     "request_schema_description": "Update request for a notification template."
   },
+  "ListIncidentPostmortemTemplates": {
+    "description": "Retrieve a list of all postmortem templates for incidents.",
+    "summary": "List postmortem templates"
+  },
+  "CreateIncidentPostmortemTemplate": {
+    "description": "Create a new postmortem template for incidents.",
+    "summary": "Create postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentPostmortemTemplate": {
+    "description": "Delete a postmortem template.",
+    "summary": "Delete postmortem template"
+  },
+  "GetIncidentPostmortemTemplate": {
+    "description": "Retrieve details of a specific postmortem template.",
+    "summary": "Get postmortem template"
+  },
+  "UpdateIncidentPostmortemTemplate": {
+    "description": "Update an existing postmortem template.",
+    "summary": "Update postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -1279,7 +1303,7 @@
     "request_schema_description": "Create request for an attachment."
   },
   "CreateIncidentPostmortemAttachment": {
-    "description": "Create a postmortem attachment for an incident.",
+    "description": "Create a postmortem attachment for an incident.\n\nThe endpoint accepts markdown for notebooks created in Confluence or Google Docs.\nPostmortems created from notebooks need to be formatted using frontend notebook cells,\nin addition to markdown format.",
     "summary": "Create postmortem attachment",
     "request_description": "",
     "request_schema_description": ""
@@ -1531,6 +1555,34 @@
     "summary": "Update Workflows webhook handle",
     "request_description": "Workflows Webhook handle payload.",
     "request_schema_description": "Update Workflows webhook handle request."
+  },
+  "ListTenancyProducts": {
+    "description": "Lists the products for a given tenancy. Returns the enabled/disabled status of Datadog products (such as Cloud Security Posture Management) for specific OCI tenancies.",
+    "summary": "List tenancy products"
+  },
+  "GetTenancyConfigs": {
+    "description": "Get a list of all configured OCI tenancy integrations. Returns basic information about each tenancy including authentication credentials, region settings, and collection preferences for metrics, logs, and resources.",
+    "summary": "Get tenancy configs"
+  },
+  "CreateTenancyConfig": {
+    "description": "Create a new tenancy config to establish monitoring and data collection from your OCI environment. Requires OCI authentication credentials and tenancy details. Warning: Datadog recommends interacting with this endpoint only through the Datadog web UI to ensure all necessary OCI resources have been created and configured properly.",
+    "summary": "Create tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteTenancyConfig": {
+    "description": "Delete an existing tenancy config. This will stop all data collection from the specified OCI tenancy and remove the stored configuration. This operation cannot be undone.",
+    "summary": "Delete tenancy config"
+  },
+  "GetTenancyConfig": {
+    "description": "Get a single tenancy config object by its OCID. Returns detailed configuration including authentication credentials, enabled services, region settings, and collection preferences.",
+    "summary": "Get tenancy config"
+  },
+  "UpdateTenancyConfig": {
+    "description": "Update an existing tenancy config. You can modify authentication credentials, enable/disable collection types, update service filters, and change region settings. Warning: We recommend using the Datadog web UI to avoid unintended update effects.",
+    "summary": "Update tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -3144,6 +3196,18 @@
     "description": "Get a suppression's version history.",
     "summary": "Get a suppression's version history"
   },
+  "GetContentPacksStates": {
+    "description": "Get the activation and configuration states for all security monitoring content packs.\nThis endpoint returns status information about each content pack including activation state,\nintegration status, and log collection status.",
+    "summary": "Get content pack states"
+  },
+  "ActivateContentPack": {
+    "description": "Activate a security monitoring content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
+    "summary": "Activate content pack"
+  },
+  "DeactivateContentPack": {
+    "description": "Deactivate a security monitoring content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
+    "summary": "Deactivate content pack"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -3854,7 +3918,7 @@
     "request_schema_description": "Request to update the state of multiple flaky tests."
   },
   "SearchFlakyTests": {
-    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
+    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.\n\nThe response includes comprehensive test information including:\n- Test identification and metadata (module, suite, name)\n- Flaky state and categorization\n- First and last flake occurrences (timestamp, branch, commit SHA)\n- Test execution statistics from the last 7 days (failure rate)\n- Pipeline impact metrics (failed pipelines count, total lost time)\n- Complete status change history (optional, ordered from most recent to oldest)\n\nSet `include_history` to `true` in the request to receive the status change history for each test.\nHistory is disabled by default for better performance.\n\nResults support filtering by various facets including service, environment, repository, branch, and test state.",
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."
