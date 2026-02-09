@@ -1,8 +1,8 @@
 error_tracking_product_options:
-  - id: logs
+  - id: apm
     default: true
   - id: rum
-  - id: apm
+  - id: logs
 
 apm_error_grouping_context_options:
   - id: server
