@@ -1,0 +1,27 @@
+error_tracking_product_options:
+  - id: apm
+    default: true
+  - id: logs
+  - id: rum
+
+apm_error_grouping_context_options:
+  - id: server
+    default: true
+
+logs_error_grouping_context_options:
+  - id: show_all
+    default: true
+  - id: server
+  - id: android
+  - id: flutter
+  - id: ios
+  - id: react_native
+
+rum_error_grouping_context_options:
+  - id: show_all
+    default: true
+  - id: browser
+  - id: android
+  - id: flutter
+  - id: ios
+  - id: react_native
