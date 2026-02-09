@@ -46,7 +46,7 @@ Configuring the Trace Agent to ignore certain spans or resources applies to all 
 
 Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
-<div class="alert alert-info">The filter matches tags on the <strong>root span</strong> of a trace, but it drops the <strong>entire trace</strong> (also called a chunk). Individual spans within a trace cannot be selectively dropped—if the root span matches the filter criteria, the complete trace is discarded.</div>
+<div class="alert alert-info">Individual spans within a trace cannot be selectively dropped—if the root span matches the filter criteria, the complete trace is discarded.</div>
 
 If you can programmatically identify a set of traces that you know you don't want to send to Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so Datadog can continue to expand this functionality.
 
