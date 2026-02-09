@@ -143,7 +143,7 @@ spec:
         name: gcr.io/datadoghq/agent:6.33.0
 ```
 
-Use the `spec.global.registry` if you need to change the default registry. The default is `registry.datadoghq.com`.
+Use the `spec.global.registry` if you need to change the default registry. The default is `gcr.io/datadoghq`.
 
 Then, pin the Agent 7 image tag in `spec.override.nodeAgent.image.tag`.
 
