@@ -41,7 +41,7 @@ Uptime
 
 Bytes in
 : **Metrics**: `pipelines.host.network_receive_bytes_total`
-: **Description:** The number of bytes received by the host on all interfaces. Use the `device` tag to filter per interface.
+: **Description:** The number of bytes received by the host on all interfaces. Use the `device` tag to filter per interface, for example `device:eth0`.
 
 Bytes out
 : **Metrics**: `pipelines.host.network_transmit_bytes_total`
@@ -55,7 +55,7 @@ Uptime
 
 CPU usage
 : **Metrics**: `pipelines.cpu_usage_seconds_total`
-: **Description:** The amount of CPU time consumed by the worker process in seconds (in the user and system space). Turning this into a rate per second returns the proportion of a CPU used by the worker.
+: **Description:** The amount of CPU time consumed by the Worker process in seconds (in the user and system space). The rate per second of that metric shows the proportion of the CPU used by the Worker.
 
 Memory usage
 : **Metrics**: `pipelines.resident_memory_used_bytes`
