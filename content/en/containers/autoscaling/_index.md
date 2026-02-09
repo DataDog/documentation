@@ -405,7 +405,20 @@ spec:
             window: 5m0s
     fallback:
         horizontal:
+            # With custom queries, local fallback is not activated by default
             enabled: false
+            # Direction can be ScaleUp, ScaleDown or All.
+            direction: ScaleUp
+            # When using custom queries, a CPU or Memory fallback objective is required
+            objectives:
+                - type: PodResource
+                  podResource:
+                    name: cpu
+                    value:
+                        type: Utilization
+                        utilization: 70
+            triggers:
+                staleRecommendationThresholdSeconds: 600
 ```
 
 {{% /tab %}}
