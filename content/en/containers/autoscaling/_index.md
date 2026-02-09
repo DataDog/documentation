@@ -407,7 +407,7 @@ spec:
         horizontal:
             # With custom queries, local fallback is not activated by default
             enabled: false
-            # Direction can be ScaleUp, ScaleDown or All.
+            # Direction can be ScaleUp, ScaleDown or All
             direction: ScaleUp
             # When using custom queries, a CPU or Memory fallback objective is required
             objectives:
