@@ -251,20 +251,15 @@ spec:
                   type: Percent
                   value: 50
             stabilizationWindowSeconds: 300
-            strategy: Max
         scaleUp:
             rules:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
             stabilizationWindowSeconds: 300
-            strategy: Max
         update:
             strategy: Auto
     constraints:
-        containers:
-            - enabled: true
-              name: '*'
         maxReplicas: 100
         # Allow scaling down to 1 replica for maximum savings
         minReplicas: 1
@@ -276,19 +271,6 @@ spec:
             value:
                 type: Utilization
                 utilization: 85
-    fallback:
-        horizontal:
-            direction: ScaleUp
-            enabled: true
-            objectives:
-                - type: PodResource
-                  podResource:
-                    name: cpu
-                    value:
-                        type: Utilization
-                        utilization: 85
-            triggers:
-                staleRecommendationThresholdSeconds: 600
 ```
 
 {{% /tab %}}
@@ -317,20 +299,15 @@ spec:
                   type: Percent
                   value: 20
             stabilizationWindowSeconds: 600
-            strategy: Max
         scaleUp:
             rules:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
             stabilizationWindowSeconds: 600
-            strategy: Max
         update:
             strategy: Auto
     constraints:
-        containers:
-            - enabled: true
-              name: '*'
         maxReplicas: 100
         # Maintain at least 2 replicas for availability
         minReplicas: 2
@@ -342,19 +319,6 @@ spec:
             value:
                 type: Utilization
                 utilization: 70
-    fallback:
-        horizontal:
-            direction: ScaleUp
-            enabled: true
-            objectives:
-                - type: PodResource
-                  podResource:
-                    name: cpu
-                    value:
-                        type: Utilization
-                        utilization: 70
-            triggers:
-                staleRecommendationThresholdSeconds: 600
 ```
 
 {{% /tab %}}
@@ -384,27 +348,7 @@ spec:
         update:
             strategy: Auto
     constraints:
-        containers:
-            - enabled: true
-              name: '*'
         maxReplicas: 100
-        minReplicas: 2
-    # No objectives defined — Datadog recommends CPU and memory
-    # values based on observed usage patterns
-    fallback:
-        horizontal:
-            direction: ScaleUp
-            # Horizontal fallback disabled for vertical-only scaling
-            enabled: false
-            objectives:
-                - type: PodResource
-                  podResource:
-                    name: cpu
-                    value:
-                        type: Utilization
-                        utilization: 70
-            triggers:
-                staleRecommendationThresholdSeconds: 600
 ```
 
 {{% /tab %}}
@@ -432,14 +376,12 @@ spec:
                   type: Percent
                   value: 20
             stabilizationWindowSeconds: 600
-            strategy: Min
         scaleUp:
             rules:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
             stabilizationWindowSeconds: 600
-            strategy: Min
         # Vertical updates disabled — horizontal only
         update:
             strategy: Disabled
@@ -463,17 +405,7 @@ spec:
             window: 5m0s
     fallback:
         horizontal:
-            direction: ScaleUp
             enabled: false
-            objectives:
-                - type: PodResource
-                  podResource:
-                    name: cpu
-                    value:
-                        type: Utilization
-                        utilization: 70
-            triggers:
-                staleRecommendationThresholdSeconds: 600
 ```
 
 {{% /tab %}}
