@@ -147,3 +147,5 @@ When a sensitive data monitor triggers, use [Case Management][5] to:
 [5]: /service_management/case_management/
 [6]: /account_management/rbac/permissions/#monitors
 [7]: /monitors/notify/
+[6]: /account_management/rbac/permissions/#monitors
+[7]: /monitors/notify/
