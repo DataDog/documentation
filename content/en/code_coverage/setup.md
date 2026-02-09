@@ -377,6 +377,15 @@ test:
 </code>
 </pre>
 {{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+<code class="language-yaml" data-lang="yaml">
+- script: datadog-ci coverage upload --format=clover coverage/clover.xml
+  displayName: 'Upload coverage to Datadog'
+  env:
+    DD_API_KEY: $(DD_API_KEY)
+    DD_SITE: 'datadoghq.com'
+</code>
+{{% /tab %}}
 {{< /tabs >}}
 
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
