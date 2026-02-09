@@ -49,7 +49,7 @@ dependencies {
     implementation 'dev.openfeature:sdk:1.18.2'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:X.X.X'
+    implementation 'com.datadoghq:dd-openfeature:1.57.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -63,7 +63,7 @@ dependencies {
     implementation("dev.openfeature:sdk:1.18.2")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:X.X.X")
+    implementation("com.datadoghq:dd-openfeature:1.57.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -193,10 +193,13 @@ public class App {
             client = api.getClient("my-app");
             logger.info("OpenFeature provider initialized successfully");
         } catch (ProviderNotReadyError e) {
-            // Optional: Handle gracefully - app will use default flag values
-            logger.warn("Provider not ready (no tracer/configuration available), continuing with defaults", e);
+            // Handle gracefully - app will use default flag values
+            logger.warn("Provider not ready (no tracer/config available), continuing with defaults", e);
             client = api.getClient("my-app");
             logger.info("App will use default flag values until provider is ready");
+        } catch (Exception e) {
+            logger.error("Failed to initialize OpenFeature provider", e);
+            throw e;
         }
 
         // Your application code here
