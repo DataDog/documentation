@@ -2526,6 +2526,11 @@ components:
         xray_services:
           $ref: '#/components/schemas/XRayServicesList'
       type: object
+    AcceptRecommendedEntitiesRequest:
+      description: Request to accept recommended entities.
+      items:
+        $ref: '#/components/schemas/RecommendedEntityWithSchema'
+      type: array
     AccountFilteringConfig:
       description: The account filtering configuration.
       properties:
@@ -13055,6 +13060,10 @@ components:
       - IDENTITY
       - GZIP
       - DEFLATE
+    ConvertCatalogEntityResponse:
+      description: Response containing converted entities.
+      example: "apiVersion: v3\nkind: service\nmetadata:\n  name: myservice"
+      type: string
     ConvertJobResultsToSignalsAttributes:
       description: Attributes for converting threat hunting job results to signals.
       properties:
@@ -18648,6 +18657,11 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    DeclineRecommendedEntitiesRequest:
+      description: Request to decline recommended entities.
+      items:
+        $ref: '#/components/schemas/RecommendedEntityID'
+      type: array
     Degradation:
       properties:
         data:
@@ -20836,6 +20850,20 @@ components:
           format: int64
           type: integer
       type: object
+    EntitySchemaVersion:
+      description: Entity schema version for conversion.
+      enum:
+      - v2
+      - v2.1
+      - v2.2
+      - v3
+      example: v3
+      type: string
+      x-enum-varnames:
+      - V2
+      - V2_1
+      - V2_2
+      - V3
     EntityToIncidents:
       description: Entity to incidents relationship.
       properties:
@@ -28115,6 +28143,89 @@ components:
       description: The ID of a notification rule.
       example: aaa-bbb-ccc
       type: string
+    IDPConfigAttributes:
+      description: IDP configuration attributes.
+      properties:
+        value:
+          description: Configuration value (can be object, array, or primitive).
+          example:
+          - displayName: My Dashboard
+            id: dashboard-1
+          items:
+            $ref: '#/components/schemas/IDPConfigValueItem'
+          type: array
+      required:
+      - value
+      type: object
+    IDPConfigData:
+      description: IDP configuration data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IDPConfigAttributes'
+        id:
+          description: Configuration identifier.
+          example: idp_pinned_dashboards
+          type: string
+        type:
+          $ref: '#/components/schemas/IDPConfigType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    IDPConfigRequest:
+      description: Request to set IDP configuration value.
+      properties:
+        data:
+          $ref: '#/components/schemas/IDPConfigRequestData'
+      required:
+      - data
+      type: object
+    IDPConfigRequestAttributes:
+      description: IDP configuration request attributes.
+      properties:
+        value:
+          description: Configuration value to set (can be object, array, or primitive).
+          example:
+          - displayName: My Dashboard
+            id: dashboard-1
+          items:
+            $ref: '#/components/schemas/IDPConfigValueItem'
+          type: array
+      required:
+      - value
+      type: object
+    IDPConfigRequestData:
+      description: IDP configuration request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/IDPConfigRequestAttributes'
+        type:
+          $ref: '#/components/schemas/IDPConfigType'
+      required:
+      - type
+      - attributes
+      type: object
+    IDPConfigResponse:
+      description: Response containing IDP configuration value.
+      properties:
+        data:
+          $ref: '#/components/schemas/IDPConfigData'
+      required:
+      - data
+      type: object
+    IDPConfigType:
+      description: Resource type.
+      enum:
+      - idp_config
+      example: idp_config
+      type: string
+      x-enum-varnames:
+      - IDP_CONFIG
+    IDPConfigValueItem:
+      additionalProperties: {}
+      description: An item in the IDP configuration value array.
+      type: object
     IPAllowlistAttributes:
       description: Attributes of the IP allowlist.
       properties:
@@ -47736,6 +47847,29 @@ components:
       type: string
       x-enum-varnames:
       - RECOMMENDATION
+    RecommendedEntityID:
+      description: A recommended entity identifier.
+      properties:
+        id:
+          description: Unique identifier for the recommended entity.
+          example: 123abcdef
+          type: string
+      required:
+      - id
+      type: object
+    RecommendedEntityWithSchema:
+      description: A recommended entity with its schema definition.
+      properties:
+        id:
+          description: Unique identifier for the recommended entity.
+          example: 123abc456def
+          type: string
+        schema:
+          $ref: '#/components/schemas/EntityV3'
+      required:
+      - id
+      - schema
+      type: object
     ReferenceTableCreateSourceType:
       description: The source type for creating reference table data. Only these source
         types can be created through this API.
@@ -73139,6 +73273,54 @@ paths:
       - Software Catalog
       x-codegen-request-body-name: body
       x-menu-order: 2
+  /api/v2/catalog/entity/convert:
+    post:
+      description: Convert entities from one schema version to another in Software
+        Catalog.
+      operationId: ConvertCatalogEntities
+      parameters:
+      - description: The target schema version to convert entities to.
+        in: query
+        name: target_version
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntitySchemaVersion'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertCatalogEntityRequest'
+        description: Entity YAML or JSON to convert.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertCatalogEntityResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Convert entities between schema versions
+      tags:
+      - Software Catalog
+      x-menu-order: 3.6
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/catalog/entity/preview:
     post:
       operationId: PreviewCatalogEntities
@@ -73288,6 +73470,120 @@ paths:
       tags:
       - Software Catalog
       x-menu-order: 6
+  /api/v2/catalog/recommended_entity/bulk_accept:
+    post:
+      description: Accept multiple recommended entities in Software Catalog in a single
+        request.
+      operationId: AcceptRecommendedEntities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptRecommendedEntitiesRequest'
+        description: List of recommended entities to accept with their schemas.
+        required: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Accept recommended entities in bulk
+      tags:
+      - Software Catalog
+      x-menu-order: 7
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/catalog/recommended_entity/bulk_decline:
+    post:
+      description: Decline multiple recommended entities in Software Catalog in a
+        single request.
+      operationId: DeclineRecommendedEntities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeclineRecommendedEntitiesRequest'
+        description: List of recommended entity IDs to decline.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Decline recommended entities in bulk
+      tags:
+      - Software Catalog
+      x-menu-order: 8
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/catalog/recommended_entity/trigger:
+    post:
+      description: Trigger the discovery of recommended entities in Software Catalog.
+      operationId: TriggerRecommendedEntities
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+        description: Optional request body for triggering recommended entity discovery.
+        required: false
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Trigger recommended entity discovery
+      tags:
+      - Software Catalog
+      x-menu-order: 9
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/catalog/relation:
     get:
       description: Get a list of entity relations from Software Catalog.
@@ -78037,6 +78333,105 @@ paths:
       tags:
       - High Availability MultiRegion
       x-menu-order: 1
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/idp/config/{config_name}:
+    get:
+      description: Get a configuration value for the Internal Developer Portal (IDP).
+      operationId: GetIDPConfigValue
+      parameters:
+      - description: The configuration key to retrieve.
+        in: path
+        name: config_name
+        required: true
+        schema:
+          example: idp_pinned_dashboards
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IDPConfigResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: Get Internal Developer Portal configuration
+      tags:
+      - Software Catalog
+      x-menu-order: 10
+      x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Create or update a configuration value for the Internal Developer
+        Portal (IDP).
+      operationId: UpsertIDPConfigValue
+      parameters:
+      - description: The configuration key to create or update.
+        in: path
+        name: config_name
+        required: true
+        schema:
+          example: idp_pinned_dashboards
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IDPConfigRequest'
+        description: Configuration value to set.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Internal Server Error
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create or update IDP configuration
+      tags:
+      - Software Catalog
+      x-menu-order: 11
       x-unstable: '**Note**: This endpoint is in public beta and is subject to change.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
