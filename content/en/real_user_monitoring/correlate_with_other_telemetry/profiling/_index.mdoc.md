@@ -45,9 +45,9 @@ Browser profiling provides visibility into how your application behaves in your 
 
 To get started, enable browser profiling in your RUM SDK configuration. After enabling it, click on a profiled event sample to see detailed profiling data.
 
-## Setup {% #setup-browser %}
+## Setup
 
-### Step 1 - Set up RUM {% #step-1-set-up-rum-browser %}
+### Step 1 - Set up RUM
 
 {% alert %}
 Browser SDK version 6.12 or later is required.
@@ -55,7 +55,7 @@ Browser SDK version 6.12 or later is required.
 
 To start collecting data, set up [RUM Browser Monitoring][2].
 
-### Step 2 - Configure the profiling sampling rate {% #step-2-configure-the-profiling-sampling-rate-browser %}
+### Step 2 - Configure the profiling sampling rate
 
 1. Initialize the RUM SDK and configure `profilingSampleRate`, which determines the percentage of sessions that are profiled (for example, 25% means profiling runs on 25 out of 100 sessions).
     ```javascript
@@ -139,9 +139,9 @@ A script is eligible for attribution in the JS Self-Profiling API only when both
 
 {% /collapse-content %}
 
-## Explore profiling {% #explore-profiling-browser %}
+## Explore profiling
 
-### Within the Optimization page {% #within-the-optimization-page-browser %}
+### Within the Optimization page
 
 The **Optimization page** surfaces profiling data in several contexts:
 
@@ -154,7 +154,7 @@ The **Optimization page** surfaces profiling data in several contexts:
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
 
 
-### Within the Sessions Explorer {% #within-the-sessions-explorer-browser %}
+### Within the Sessions Explorer
 You can also find profiling data when reviewing individual events within the **Sessions Explorer**. This opens the same Long Task view panel with profiling data, allowing you to inspect what code was executing during that task and how it affected the user's experience.
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_sessions_explorer.png" alt="Browser profiling troubleshoot section example within the Optimization page." style="width:100%;" /%}
@@ -177,18 +177,18 @@ Android profiling captures detailed data about your application's performance du
 Only devices running Android 15 (API level 35) or higher generate profiling data.
 {% /alert %}
 
-## Prerequisites {% #prerequisites-android %}
+## Prerequisites
 
 - Your Android application must use the Datadog Android SDK version 3.6.0+.
 - [RUM without Limits][5] must be enabled in your organization.
 
-## Setup {% #setup-android %}
+## Setup
 
-### Step 1 - Set up RUM {% #step-1-set-up-rum-android %}
+### Step 1 - Set up RUM
 
 To start collecting data, set up [Mobile RUM for Android][6].
 
-### Step 2 - Configure the profiling sampling rate {% #step-2-configure-the-profiling-sampling-rate-android %}
+### Step 2 - Configure the profiling sampling rate
 
 1. Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 15% means profiling runs on 15 out of 100 launches).
 
@@ -229,9 +229,9 @@ To start collecting data, set up [Mobile RUM for Android][6].
 
 The [ProfilingManager API][7] also supports disabling rate limiting during debug builds. 
 
-## Explore profiling data {% #explore-profiling-data-android %}
+## Explore profiling data
 
-### During the time to initial display {% #during-the-time-to-initial-display-android %}
+### During the time to initial display
 
 Android application launch profiling data is attached to the [time to initial display][8] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
 
@@ -255,17 +255,17 @@ iOS Profiling is in Preview.
 
 iOS profiling captures detailed data about your application's performance during launch, helping you identify slow functions and optimize startup time. iOS profiling is built on top of the [mach Kernel API][9] and periodically samples all application threads to collect call stacks. 
 
-## Prerequisites {% #prerequisites-ios %}
+## Prerequisites
 
 - Your iOS application must use the Datadog iOS SDK version 3.6.0+.
 - [RUM without Limits][10] must be enabled in your organization.
 
-## Setup {% #setup-ios %}
+## Setup
 
-### Step 1 - Set up RUM {% #step-1-set-up-rum-ios %}
+### Step 1 - Set up RUM
 To start collecting data, set up [Mobile RUM for iOS][11].
 
-### Step 2 - Configure the profiling sampling rate {% #step-2-configure-the-profiling-sampling-rate-ios %}
+### Step 2 - Configure the profiling sampling rate
 
 Initialize the RUM SDK and configure the `applicationLaunchSampleRate`, which determines the percentage of application launches that are profiled (for example, 5% means profiling runs on 5 out of 100 launches).
 
@@ -299,9 +299,9 @@ If no value is specified, the default `applicationLaunchSampleRate` is 5 percent
     Profiling.enable() // default is 5%
 ```
 
-## Explore profiling data {% #explore-profiling-data-ios %}
+## Explore profiling data
 
-### During the time to initial display {% #during-the-time-to-initial-display-ios %}
+### During the time to initial display
 
 iOS application launch profiling data is attached to the [time to initial display][12] vital event in a RUM session. You can access the time to initial display from the session side panel, view side panel, or directly from the time to initial display vital side panel.
 
