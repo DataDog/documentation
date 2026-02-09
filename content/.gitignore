@@ -13,3 +13,5 @@
 /en/tracing/trace_collection/custom_instrumentation/server-side/_index.md
 /en/error_tracking/error_grouping.md
 /en/logs/error_tracking/error_grouping.md
+/en/real_user_monitoring/error_tracking/error_grouping.md
+/en/tracing/error_tracking/error_grouping.md
