@@ -20,43 +20,42 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 
 - A Cloudflare account with Logpush enabled.
 - A server or a server pool, fronted by a load balancer, that runs the Observability Pipelines Worker and allows traffic from the public internet.
-- A DNS entry that points to your Observability Pipelines server.
+- A DNS entry that points to your Observability Pipelines Worker.
 - An SSL/TLS certificate for your domain. Cloudflare requires an HTTPS endpoint and does not accept HTTP.
 	- **Note**: You cannot use Cloudflare origin certificates because they are not publicly trusted.
-
-## Set up TLS certificates
-
-Cloudflare requires an HTTPS endpoint and does not accept HTTP, so you need an SSL certificate for Observability Pipelines.
-
-1. Create a DNS entry that points to your Observability Pipelines server.
-1. Obtain an SSL/TLS certificate for your domain. Users generally bring their own certificates.
-1. Open your firewall for port 443 to the Observability Pipelines server.
+- If you are using a firewall, ensure you add [Cloudflare's IP addresses][1] to your allowlist.
 
 ## Set up a pipeline
 
-1. Navigate to [Observability Pipelines][1].
+### Set up the pipeline components
+
+1. Navigate to [Observability Pipelines][2].
 1. Select a log template to create a pipeline.
 1. Select the HTTP Server source:
-  1. Set the authorization strategy to **Basic**.
+  1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Set secrets][3] for the defaults used.
+  1. Set the authorization strategy to **Basic**. If you are using Secrets Management, enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
   1. In the **Decoding** dropdown menu, select **Bytes**.
   1. Enable TLS:
-      1. Set the certificate path to `/fullchain.pem`.
-      1. Set the private key path to `/privkey.pem`.
-        - Observability Pipelines automatically fills in `/var/lib/observability-pipelines-worker/config` as the base path.
-        - Users insert their own certificate names.
-      1. If your certificate has a TLS passphrase, enter it.
-1. After you set up your destinations and processors, click **Next: Install**.
-1. Before installing the Observability Pipelines Worker, copy your certificates into the configuration directory:
+      1. If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
+      1. Enter `/fullchain.pem` in the **Certificate path** field.
+      1. Enter `/privkey.pem` in the **Private key path** field.
+        - Observability Pipelines automatically appends `/var/lib/observability-pipelines-worker/config` as the base path.
+1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory
     sudo mkdir -p /var/lib/observability-pipelines-worker/config
+
     # Copy your certificates
     sudo cp /path/to/your/fullchain.pem /var/lib/observability-pipelines-worker/config/fullchain.pem
     sudo cp /path/to/your/privkey.pem /var/lib/observability-pipelines-worker/config/privkey.pem
     ```
-1. On the **Install** page, configure your basic authentication credentials.
-1. Follow the instructions on the page to install the Worker based on your platform.
-1. After installation, change ownership of the certificates so the Observability Pipelines Worker can read them:
+1. After you set up your destinations and processors, click **Next: Install**.
+
+### Install the Worker
+
+1. On the **Install** page, select your platform in the dropdown menu.
+1. Follow the instructions on the page to install the Worker based on your platform. See [Install the Worker][4] for details.
+1. After installing the Worker, change ownership of the certificates so the Observability Pipelines Worker can read them:
     ```shell
     # Change ownership so the Worker can read the certificates
     sudo chgrp observability-pipelines-worker /var/lib/observability-pipelines-worker/config/fullchain.pem
@@ -65,7 +64,7 @@ Cloudflare requires an HTTPS endpoint and does not accept HTTP, so you need an S
     sudo chmod 640 /var/lib/observability-pipelines-worker/config/privkey.pem
     ```
 1. Deploy the configuration from the Observability Pipelines UI.
-1. Test your endpoint:
+1. Test your endpoint using curl:
     ```shell
     curl -X POST https://your-domain.com \
       -u username:password \
@@ -75,24 +74,14 @@ Cloudflare requires an HTTPS endpoint and does not accept HTTP, so you need an S
 
 ## Set up Cloudflare Logpush
 
-Follow the [Cloudflare Logpush HTTP destination documentation][2].
+Follow the [Cloudflare Logpush HTTP destination documentation][5].
+  - For the **HTTP endpoint**, the basic authorization headers need to be in the URL needs: `https://clodflare.your-domain.com?header_Authorization=Basic%20<base64-encoded-credentials>`
 
-1. In Cloudflare, navigate to **Analytics & Logs** > **Logs**.
-1. Click **Create a Logpush job**.
-1. Select **HTTP Destination**.
-1. Configure your endpoint URL:
-    - Basic authentication headers need to be in the URL. Logpush doesn't support any other way of adding them.
-    - Base64 encode your authentication credentials.
-    - Format your URL as: `https://your-domain.com?header_Authorization=Basic%20<base64-encoded-credentials>`
-    - **Note**: Logpush does not support HTTP and must use HTTPS.
-1. Validate your destination. You get a validation message at the bottom of the screen.
-1. Select the datasets to send through Logpush to your Observability Pipelines destination.
-1. Configure the job:
-    1. Select the fields to include in the logs.
-    1. Configure additional job settings as needed.
-1. Click **Submit**. You get a validation message at the bottom of the screen.
-1. View your Cloudflare Logpush logs in Datadog [Log Explorer][3].
+After your job has been successfully created, you can view your Cloudflare Logpush logs in Datadog [Log Explorer][6].
 
-[1]: https://app.datadoghq.com/observability-pipelines
-[2]: https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/http/
-[3]: https://app.datadoghq.com/logs
+[1]: https://www.cloudflare.com/en-in/ips/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /observability_pipelines/sources/http_server/?tab=secretsmanagement#set-secrets
+[4]: /observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
+[5]: https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/http/
+[6]: https://app.datadoghq.com/logs
