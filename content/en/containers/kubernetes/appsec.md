@@ -1,6 +1,7 @@
 ---
 title: App and API Protection for Kubernetes
 description: Automatically enable App and API Protection for your Kubernetes ingress proxies and gateways
+site_support_id: containers_kubernetes_appsec
 aliases:
     - /agent/kubernetes/appsec
     - /security/application_security/setup/kubernetes/appsec-injector

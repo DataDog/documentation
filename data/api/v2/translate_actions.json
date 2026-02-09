@@ -1226,6 +1226,30 @@
     "request_description": "",
     "request_schema_description": "Update request for a notification template."
   },
+  "ListIncidentPostmortemTemplates": {
+    "description": "Retrieve a list of all postmortem templates for incidents.",
+    "summary": "List postmortem templates"
+  },
+  "CreateIncidentPostmortemTemplate": {
+    "description": "Create a new postmortem template for incidents.",
+    "summary": "Create postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentPostmortemTemplate": {
+    "description": "Delete a postmortem template.",
+    "summary": "Delete postmortem template"
+  },
+  "GetIncidentPostmortemTemplate": {
+    "description": "Retrieve details of a specific postmortem template.",
+    "summary": "Get postmortem template"
+  },
+  "UpdateIncidentPostmortemTemplate": {
+    "description": "Update an existing postmortem template.",
+    "summary": "Update postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -3894,7 +3918,7 @@
     "request_schema_description": "Request to update the state of multiple flaky tests."
   },
   "SearchFlakyTests": {
-    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
+    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.\n\nThe response includes comprehensive test information including:\n- Test identification and metadata (module, suite, name)\n- Flaky state and categorization\n- First and last flake occurrences (timestamp, branch, commit SHA)\n- Test execution statistics from the last 7 days (failure rate)\n- Pipeline impact metrics (failed pipelines count, total lost time)\n- Complete status change history (optional, ordered from most recent to oldest)\n\nSet `include_history` to `true` in the request to receive the status change history for each test.\nHistory is disabled by default for better performance.\n\nResults support filtering by various facets including service, environment, repository, branch, and test state.",
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."

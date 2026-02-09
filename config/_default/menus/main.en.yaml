@@ -1070,21 +1070,26 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
+    - name: Error Tracking
+      url: developers/ide_plugins/idea/error_tracking/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_error_tracking
+      weight: 7011
     - name: Logs
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
-      weight: 7011
+      weight: 7012
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_debugger
-      weight: 7012
+      weight: 7013
     - name: Code Security
       url: developers/ide_plugins/idea/code_security/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
-      weight: 7013
+      weight: 7014
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
@@ -5695,7 +5700,7 @@ menu:
       weight: 4
     - name: Feature Flags
       url: feature_flags/
-      pre: ci
+      pre: signpost
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
@@ -5759,6 +5764,11 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
+    - name: Flag History
+      url: feature_flags/history
+      parent: feature_flags
+      identifier: feature_flags_history
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
