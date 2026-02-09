@@ -60,19 +60,7 @@ You can specify span tags to require or reject by using a list of keys and value
 `DD_APM_FILTER_TAGS_REJECT`
 : Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. In Datadog Agent 7.49+, regular expressions can be provided with `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
-**OR Logic for Multiple Tags**: When you specify multiple tags, the filter uses **OR logic**, not AND logic. A trace is dropped if its root span matches **any** of the specified tags, not all of them.
-
-For example, with the configuration:
-```shell
-DD_APM_FILTER_TAGS_REJECT="http.status_code:200 outcome:success"
-```
-
-The following traces would be dropped:
-- A trace with root span tag `http.status_code:200` (matches first condition)
-- A trace with root span tag `outcome:success` (matches second condition)
-- A trace with both `http.status_code:200` AND `outcome:success` (matches both conditions)
-
-To drop traces only when they match multiple conditions simultaneously, you would need to use a custom tag that combines both criteria.
+When you specify multiple tags in these filters, the Agent uses **OR logic**: a trace is dropped if its root span matches **any** of the specified tags, not all of them. For example, the configuration `DD_APM_FILTER_TAGS_REJECT="http.status_code:200 outcome:success"` drops traces where the root span contains `http.status_code:200` OR `outcome:success` OR both. To drop traces only when they match multiple conditions simultaneously, you would need to use a custom tag that combines both criteria.
 
 {{< tabs >}}
 {{% tab "datadog.yaml" %}}
