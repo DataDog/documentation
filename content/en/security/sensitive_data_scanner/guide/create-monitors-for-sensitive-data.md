@@ -97,7 +97,7 @@ To create a RUM monitor for sensitive data in events:
   - **Group by**: Group by `application.name`, `view.name`, or `geo.country` to identify where sensitive data is being captured.
 4. Configure [notifications][7] and add a monitor message.
 
-#### Example: Monitor for email addresses in RUM events
+#### Monitor for email addresses in RUM events
 
 Use this query to monitor for email address detected in RUM events: `sensitive_data:email_address application.name:checkout-app`
 
