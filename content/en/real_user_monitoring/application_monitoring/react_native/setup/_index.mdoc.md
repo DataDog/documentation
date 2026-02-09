@@ -7,7 +7,6 @@ aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative
     - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup
     - /real_user_monitoring/mobile_and_tv_monitoring/react_native/setup/reactnative/
-    - /real_user_monitoring/application_monitoring/react_native/setup/
     - /real_user_monitoring/application_monitoring/react_native/setup/expo/
     - /real_user_monitoring/reactnative/expo/
     - /real_user_monitoring/reactnative-expo/
