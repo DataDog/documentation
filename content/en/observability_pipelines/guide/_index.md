@@ -11,7 +11,7 @@ disable_toc: false
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Worker Upgrade Guides" >}}
-    {{< nextlink href="/observability_pipelines/guide/upgrade_worker" >}}Upgrade to Worker versions 2.7 to 2.11{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/upgrade_worker" >}}Upgrade to Worker versions{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/upgrade_your_filter_queries_to_the_new_search_syntax" >}}Upgrade Your Filter Queries to the New Search Syntax{{< /nextlink >}}
 {{< /whatsnext >}}
 
