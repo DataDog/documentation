@@ -3,7 +3,7 @@ This partial contains PHP traces content for the OTel API.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-## Setup
+## Setup {% #setup-otel-php %}
 
 To configure OpenTelemetry to use the Datadog trace provider:
 
@@ -20,7 +20,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
 
-## Adding span tags
+## Adding span tags {% #adding-span-tags-otel-php %}
 
 You can add attributes at the exact moment as you are starting the span:
 
@@ -37,7 +37,7 @@ $activeSpan = OpenTelemetry\API\Trace\Span::getCurrent();
 $activeSpan->setAttribute('key', 'value');
 ```
 
-## Setting errors on a span
+## Setting errors on a span {% #setting-errors-on-a-span-otel-php %}
 
 Exception information is captured and attached to a span if one is active when the exception is raised:
 
@@ -65,7 +65,7 @@ try {
 }
 ```
 
-## Adding spans
+## Adding spans {% #adding-spans-otel-php %}
 
 To add a span:
 
@@ -83,7 +83,7 @@ $span = $tracer->spanBuilder('mySpan')->startSpan();
 $span->end();
 ```
 
-## Adding span events
+## Adding span events {% #adding-span-events-otel-php %}
 
 {% alert level="info" %}
 Adding span events requires SDK version 1.3.0 or higher.
@@ -107,7 +107,7 @@ $span->addEvent(
 
 Read the [OpenTelemetry specification for adding events][103] for more information.
 
-### Recording exceptions
+### Recording exceptions {% #recording-exceptions-otel-php %}
 
 To record exceptions, use the `recordException` API:
 
@@ -118,7 +118,7 @@ $span->recordException(new \Exception("Error Message"), [ "status" => "failed" ]
 
 Read the [OpenTelemetry specification for recording exceptions][104] for more information.
 
-## Accessing active spans
+## Accessing active spans {% #accessing-active-spans-otel-php %}
 
 To access the currently active span:
 

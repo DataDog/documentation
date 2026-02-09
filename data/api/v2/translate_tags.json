@@ -215,6 +215,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "oci-integration": {
+    "name": "OCI Integration",
+    "description": "Auto-generated tag OCI Integration"
+  },
   "observability-pipelines": {
     "name": "Observability Pipelines",
     "description": "Observability Pipelines allows you to collect and process logs within your own infrastructure, and then route them to downstream integrations."

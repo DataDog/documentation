@@ -1,4 +1,4 @@
-Track buffer behavior with these additional metrics:
+Track buffer behavior with these metrics:
 
 `pipelines.buffer_size_events`
 : Number of events currently in the buffer.
