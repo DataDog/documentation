@@ -28,21 +28,21 @@ Product-specific permissions restrict users' ability to change product-specific 
 
 ## Using Governance Console
 
-{{< img src="account_management/governance_console/governance-console-overview-2.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="account_management/governance_console/governance-console-overview-2.png" alt="Governance Console Summary page. Shows an Org Usage Summary section with visualizations of key metrics." style="width:100%;" >}}
 
 ### Summary 
 
-The [Summary][1] page displays an overview of your organization's usage of Datadog products.
+The [Summary page][1] displays an overview of your organization's usage of Datadog products.
 
 ### Products
 
-The [Products][2] page displays the Datadog products used by your organization, with relevant metrics for each product. Select **View Details** to see more information about your organization's usage of a particular product, including limits and quotas.
+The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select **View Details** to see more information about your organization's usage of a particular product, including limits and quotas.
 
 ### Controls
 
 Datadog Governance Controls help you automatically implement policies in your Datadog organization by identifying configuration drift and notifying the accountable users. Each control helps establish and maintain your compliance with best practices.
 
-The [Controls][3] page displays
+The [Controls page][3] displays a list of controls, for which you can configure detection, notification, and automatic enforcement. See [Governance Console Controls][4] for more information.
 
 
 ## Further reading
@@ -52,3 +52,4 @@ The [Controls][3] page displays
 [1]: https://app.datadoghq.com/governance/summary
 [2]: https://app.datadoghq.com/governance/products
 [3]: https://app.datadoghq.com/governance/controls
+[4]: /account_management/governance_console/controls
