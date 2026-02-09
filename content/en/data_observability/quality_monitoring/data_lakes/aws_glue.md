@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The AWS Glue integration connects Datadog to your AWS Glue Data Catalog to sync metadata about your Iceberg tables. Use it to monitor table schemas, data freshness, row counts, and table sizes.
+If you're [using the Iceberg framework in AWS Glue][5], you can see metadata from your Iceberg tables in Datadog through the [AWS Glue integration][6]. Use this data to monitor table schemas, data freshness, row counts, and table sizes.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ Before you begin, make sure you have:
 
    {{< img src="data_observability/aws_glue/settings-configure-button.png" alt="AWS Glue configuration option in the Data Observability Settings page" style="width:100%;" >}}
 
-3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS Integration documentation][1].
+3. Select an existing AWS account that is already connected to Datadog, or add a new one. For help adding a new account, see the [AWS integration documentation][1].
 
    {{< img src="data_observability/aws_glue/account-selection.png" alt="AWS account selection dropdown in the configuration flow" style="width:100%;" >}}
 
@@ -78,15 +78,17 @@ The Data Observability crawler requires additional permissions to monitor Glue I
 
 ### (Optional) Restrict access to specific databases and tables
 
-The policy above grants access to all Glue resources. To monitor only specific databases or tables, replace the `Resource: ["*"]` in the Glue actions with explicit ARNs.
+The policy above grants access to all Glue resources. To monitor only specific databases or tables, replace `Resource: ["*"]` in the example policy above with explicit ARNs of the databases or tables to monitor.
 
-AWS Glue IAM permissions are hierarchical. To access a table, the policy must include the catalog, the database, and the table. Missing any level results in an access denied error.
+AWS Glue IAM permissions are hierarchical. To access a table, the policy must include the catalog, the database, and the table. Omitting any level results in an access denied error.
 
 | Resource | ARN format | Example |
 |----------|------------|---------|
 | Catalog | `arn:aws:glue:<REGION>:<ACCOUNT_ID>:catalog` | `arn:aws:glue:us-east-1:123456789012:catalog` |
 | Database | `arn:aws:glue:<REGION>:<ACCOUNT_ID>:database/<DB_NAME>` | `arn:aws:glue:us-east-1:123456789012:database/analytics` |
 | Table | `arn:aws:glue:<REGION>:<ACCOUNT_ID>:table/<DB_NAME>/<TABLE_NAME>` | `arn:aws:glue:us-east-1:123456789012:table/analytics/events` |
+
+#### Example policies
 
 {{< tabs >}}
 {{% tab "Specific databases" %}}
@@ -202,7 +204,7 @@ aws lakeformation grant-permissions \
 
 ## Next steps
 
-After you save, Datadog begins syncing your Glue Iceberg table metadata in the background. Initial syncs can take up to an hour depending on the number of tables in your catalog.
+After you complete the setup, Datadog begins syncing your Glue Iceberg table metadata in the background. Initial syncs can take up to an hour depending on the number of tables in your catalog.
 
 After the sync completes, your tables appear in the [Data Catalog][3].
 
@@ -214,3 +216,5 @@ After the sync completes, your tables appear in the [Data Catalog][3].
 [2]: https://app.datadoghq.com/datasets/settings/integrations
 [3]: https://app.datadoghq.com/datasets/catalog?integration=awsglue%2Fdatabase_account
 [4]: https://docs.aws.amazon.com/glue/latest/dg/security_iam_id-based-policy-examples.html
+[5]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html
+[6]: /integrations/amazon-glue/
