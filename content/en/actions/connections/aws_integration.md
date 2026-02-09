@@ -38,7 +38,7 @@ To successfully execute actions with this integration:
 
 - The **AWS Integration IAM Role** configured for Role Delegation must have the permissions required for the operations desired (such as  `ecs:ListClusters`).
 - The selected action must be read-only. Write or mutating actions (such as `Put*`, `Delete*`, and `Update*`) are not supported and fail when running.
-- The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (more details [below][3]).
+- The user, user's team, or user's org **must** have been given explicit 'Executor' permission on the AWS Integration in Datadog (more details [below](#configuration)).
 
 <div class="alert alert-info">
 Executing actions using the Datadog AWS Integration is only available for users that have set up the Datadog AWS Integration through <a href="/integrations/guide/aws-manual-setup/?tab=roledelegation" target="_blank">role delegation</a>. Additionally, while operations under the <a href="https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html" target="_blank">ViewOnlyAccess permissions</a> are allowed, the IAM Role associated with the Datadog AWS Integration may not have the permissions needed. Make sure that the role has the correct permissions if you encounter issues.
@@ -77,7 +77,6 @@ To configure the **Executor** permission for the Datadog AWS Integration:
 1. Click **Save**.
 
 [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ViewOnlyAccess.html 
-[2]: /actions/connections/?tab=workflowautomation#work-with-connections 
-[3]: /add-aws-int-docs/actions/connections/aws_integration/#configuration 
+[2]: /actions/connections/?tab=workflowautomation#work-with-connections
 [4]: https://app.datadoghq.com/integrations 
 [5]: https://app.datadoghq.com/workflow
