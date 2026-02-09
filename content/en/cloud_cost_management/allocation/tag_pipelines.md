@@ -72,7 +72,13 @@ For example, if your organization wants to use the standard `application` tag ke
 
 Add the application tag to resources with `app`, `webapp`, or `apps` tags. The rule stops executing for each resource after the first match is found. For example, if a resource already has an `app` tag, then the rule no longer attempts to identify a `webapp` or `apps` tag.
 
-To ensure the rule only applies if the `application` tag doesn't already exist, click the toggle in the **Additional options** section.
+Under the **Additional options** section, you have the following options:
+
+- **Action when tag `{tag}` exists** - Choose what to do if the specified tag (`application` in the example above) already exists:
+  - **Don't apply the rule** - Skips the rule if the tag already exists, preserving the original value.
+  - **Append the tag** - Adds the new value to the existing tag without removing the original value.
+  - **Replace the tag** - Replaces the existing tag value with the new value. <div class="alert alert-warning">Replacing tags can overwrite existing data. Use this option with caution.</div>
+- **Apply case-insensitive matching to resource tags** - Enables tags defined in the alias tag keys and tags from the cost data to be case insensitive. For example, if resource tags from the UI are: `app:bar` and the tag from the cost data is `App:bar`, then the two can be matched.
 
 ### Map multiple tags
 
@@ -86,7 +92,10 @@ Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each 
 
 Under the **Additional options** section, you have the following options:
 
-- **Only apply if columns don't exist** - Ensures the defined columns are only added if they do not already exist with the associated tags from the cost data.
+- **Action when column exists** - Choose what to do if the specified columns already exist:
+  - **Don't apply the rule** - Skips the rule if the columns already exist, preserving the original values.
+  - **Append the column** - Adds the new values to the existing columns without removing the original values.
+  - **Replace the column** - Replaces the existing column values with the new values. <div class="alert alert-warning">Replacing columns can overwrite existing data. Use this option with caution.</div>
 - **Apply case-insensitive matching for primary key values** - Enables case-insensitive matching between the primary key value from the reference table and the value of the tag in the cost data where the tag key matches the primary key. For example, if the primary key value pair from the UI is `foo:Bar` and the tag from the cost data is `foo:bar`, then the two can be matched.
 
 ## Reserved tags
