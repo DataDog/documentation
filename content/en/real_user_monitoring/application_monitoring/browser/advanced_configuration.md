@@ -725,6 +725,8 @@ The below attributes are optional but Datadog strongly recommends providing at l
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: 'Public User' is displayed in the RUM UI when `usr.name` is not set, even if `usr.email` and `usr.id` are defined.
+
 Increase your filtering capabilities by adding extra attributes on top of the recommended ones. For instance, add information about the user plan, or which user group they belong to.
 
 When making changes to the user session object, all RUM events collected after the change contain the updated information.

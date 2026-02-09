@@ -58,6 +58,8 @@ Blueprints are helpful app templates that cover common use cases and showcase be
 1. Click **Open in Editor**.
 1. [Customize your app][15].
 
+<div class="alert alert-tip">You can also access blueprints from the <a href="https://app.datadoghq.com/integrations">integrations page</a>. Click an integration, then click <b>Monitoring Resources</b> to see the available blueprints.</div>
+
 ### Build an app from a layout
 
 Choosing a layout is the fastest way to create a minimal, ready-to-edit app. 
@@ -163,7 +165,7 @@ App Builder keeps a record of every saved version of your app.
 
 To view the version history for your app, in the left-hand menu of your app, click the version history {{< img src="icons/version-history.png" inline="true" style="width:14px;">}} icon.
 
-The UI displays up to 50 saved or published versions of your app, along with the icon of the user who saved or published the version:
+The UI displays previously saved or published versions of your app, along with the icon of the user who saved or published the version:
 
 {{< img src="service_management/app_builder/version-history-example.png" alt="An example App Builder version history list with two items, the current version and a previous version" style="width:70%;" >}}
 

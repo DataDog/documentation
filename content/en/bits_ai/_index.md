@@ -28,7 +28,6 @@ Bits AI is your agentic teammate in Datadog, built to automate development, secu
    {{< nextlink href="bits_ai/bits_ai_sre" >}}Investigate alerts with Bits AI SRE{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_ai_dev_agent" >}}Automate code fixes with Bits AI Dev Agent{{< /nextlink >}}
    <!-- {{< nextlink href="link" >}}Automate Cloud SIEM investigations with Bits AI Security Analyst{{< /nextlink >}} -->
-   {{< nextlink href="actions/action_interface" >}}Take action on your systems with Action Interface{{< /nextlink >}}
    {{< nextlink href="bits_ai/chat_with_bits_ai" >}}Chat with Bits about your observability data{{< /nextlink >}}
    {{< nextlink href="bits_ai/mcp_server" >}}Get observability insights from AI agents with the Datadog MCP server{{< /nextlink >}}
 {{< /whatsnext >}}

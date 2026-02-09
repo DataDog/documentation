@@ -295,14 +295,16 @@ cel_workload_exclude:
       - container.pod.annotations["low_priority"] == "true"
 ```
 
-The CEL-backed workload exclusion can also be configured by providing a JSON-formatted environment value to `DD_CEL_WORKLOAD_EXCLUDE`.
+You can also configure CEL-backed workload exclusion using one of the following methods:
+- Set the `DD_CEL_WORKLOAD_EXCLUDE` environment variable with a JSON-formatted string containing your rules, in any containerized Agent setup.
+- For the Datadog Operator or Helm Chart, add your CEL rules to the appropriate configuration option (as shown in the examples below).
 
-{{% collapse-content title="Setting environment variables" level="h4" expanded=false id="setting-environment-variables" %}}
+{{% collapse-content title="Configuring CEL exclusion rules" level="h4" expanded=false id="setting-environment-variables" %}}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-In Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
+In Datadog Operator (>=v1.23.0), use the `spec.override.nodeAgent.celWorkloadExclude` and `spec.override.clusterAgent.celWorkloadExclude` options.
 
 ##### Example
 
@@ -317,10 +319,17 @@ spec:
       apiKey: <DATADOG_API_KEY>
   override:
     nodeAgent:
-      env:
-      - name: DD_CEL_WORKLOAD_EXCLUDE
-        value: >
-          [{"products":["global"],"rules":{"containers":["container.name == \"redis\""]}}]
+      celWorkloadExclude:
+        - products: [ global ]
+          rules:
+            containers:
+              - container.name == "redis"
+    clusterAgent:
+      celWorkloadExclude:
+        - products: [ global ]
+          rules:
+            containers:
+              - container.name == "redis"
 ```
 
 {{% /tab %}}

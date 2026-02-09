@@ -40,6 +40,10 @@ To get started with Cloud Security, review the following:
 
 ## Enable Agentless Scanning
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
 
 To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].

@@ -166,13 +166,9 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 2. From the **Log Router** tab, select **Create Sink**.
 3. Provide a name for the sink.
 4. Choose _Cloud Pub/Sub_ as the destination and select the Cloud Pub/Sub topic that was created for that purpose. **Note**: The Cloud Pub/Sub topic can be located in a different project.
-
-    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
-
+   {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
 5. Choose the logs you want to include in the sink with an optional inclusion or exclusion filter. You can filter the logs with a search query, or use the [sample function][426]. For example, to include only 10% of the logs with a `severity` level of `ERROR`, create an inclusion filter with `severity="ERROR" AND sample(insertId, 0.1)`.
-
-    {{< img src="integrations/google_cloud_platform/sink_inclusion_filter_2.png" alt="The inclusion filter for a Google Cloud logging sink with a query of severity=ERROR and sample(insertId, 0.1)" >}}
-
+   {{< img src="integrations/google_cloud_platform/sink_inclusion_filter_2.png" alt="The inclusion filter for a Google Cloud logging sink with a query of severity=ERROR and sample(insertId, 0.1)" >}}
 6. Click **Create Sink**.
 
 **Note**: It is possible to create several exports from Google Cloud Logging to the same Cloud Pub/Sub topic with different sinks.
@@ -182,31 +178,31 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Go to the [Create job from template][427] page in the Google Cloud console.
 2. Give the job a name and select a Dataflow regional endpoint.
 3. Select `Pub/Sub to Datadog` in the **Dataflow template** dropdown, and the **Required parameters** section appears.
-   a. Select the input subscription in the **Pub/Sub input subscription** dropdown.
-   b. Enter the following in the **Datadog Logs API URL** field:
-   <pre>https://{{< region-param key="http_endpoint" code="true" >}}</pre>
+   1. Select the input subscription in the **Pub/Sub input subscription** dropdown.
+   1. Enter the following in the **Datadog Logs API URL** field:
+      <pre>https://{{< region-param key="http_endpoint" code="true" >}}</pre>
 
-   **Note**: Ensure that the Datadog site selector on the right of the page is set to your [Datadog site][428] before copying the URL above.
+      **Note**: Ensure that the Datadog site selector on the right of the page is set to your [Datadog site][428] before copying the URL above.
 
-   c. Select the topic created to receive message failures in the **Output deadletter Pub/Sub topic** dropdown.
-   d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
+   1. Select the topic created to receive message failures in the **Output deadletter Pub/Sub topic** dropdown.
+   1. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
 
-{{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Required parameters in the Datadog Dataflow template" style="width:80%;">}}
+      {{< img src="integrations/google_cloud_platform/dataflow_parameters.png" alt="Required parameters in the Datadog Dataflow template" style="width:80%;">}}
 
 4. Under **Optional Parameters**, check `Include full Pub/Sub message in the payload`.
 
 5. If you created a secret in Secret Manager with your Datadog API key value as mentioned in [step 1](#1-create-a-cloud-pubsub-topic-and-subscription), enter the **resource name** of the secret in the **Google Cloud Secret Manager ID** field.
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Optional parameters in the Datadog Dataflow template with Google Cloud Secret Manager ID and Source of the API key passed fields both highlighted" style="width:80%;">}}
+   {{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Optional parameters in the Datadog Dataflow template with Google Cloud Secret Manager ID and Source of the API key passed fields both highlighted" style="width:80%;">}}
 
-See [Template parameters][412] in the Dataflow template for details on using the other available options:
+   See [Template parameters][412] in the Dataflow template for details on using the other available options:
 
-   - `apiKeySource=KMS` with `apiKeyKMSEncryptionKey` set to your [Cloud KMS][429] key ID and `apiKey` set to the encrypted API key
-   - **Not recommended**: `apiKeySource=PLAINTEXT` with `apiKey` set to the plaintext API key
+      - `apiKeySource=KMS` with `apiKeyKMSEncryptionKey` set to your [Cloud KMS][429] key ID and `apiKey` set to the encrypted API key
+      - **Not recommended**: `apiKeySource=PLAINTEXT` with `apiKey` set to the plaintext API key
 
 6. If you created a custom worker service account, select it in the **Service account email** dropdown.
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Optional parameters in the Datadog Dataflow template with the service account email dropdown highlighted" style="width:80%;">}}
+   {{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Optional parameters in the Datadog Dataflow template with the service account email dropdown highlighted" style="width:80%;">}}
 
 7. Click **RUN JOB**.
 

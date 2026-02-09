@@ -10,7 +10,7 @@
         "scope": "markdoc",
         "prefix": ";;callout",
         "body": [
-            "{% callout src=\"${1:https://www.example.com}\" header=\"${2:Join the Preview!}\" btn_hidden=${3|false,true|} %}",
+            "{% callout url=\"${1:https://www.example.com}\" header=\"${2:Join the Preview!}\" btn_hidden=${3|false,true|} %}",
             "${4:Callout content goes here.}",
             "{% /callout %}"
         ],

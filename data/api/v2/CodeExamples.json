@@ -355,6 +355,13 @@
       "description": "Unassign case returns \"OK\" response"
     }
   ],
+  "UpdateProject": [
+    {
+      "group": "case_management",
+      "suffix": "",
+      "description": "Update a project returns \"OK\" response"
+    }
+  ],
   "UpdateAttributes": [
     {
       "group": "case_management",
@@ -821,6 +828,13 @@
       "description": "Create an incident type returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentAttachment": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create incident attachment returns \"Created\" response"
+    }
+  ],
   "CreateIncidentNotificationRule": [
     {
       "group": "incidents",
@@ -854,6 +868,13 @@
       "group": "incidents",
       "suffix": "",
       "description": "Update an incident type returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentAttachment": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update incident attachment returns \"OK\" response"
     }
   ],
   "UpdateIncidentNotificationRule": [
@@ -1448,6 +1469,18 @@
       "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
+  "AttachJiraIssue": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_3042842144",
+      "description": "Attach security finding to a Jira issue returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Attach security findings to a Jira issue returns \"OK\" response"
+    }
+  ],
   "AttachCase": [
     {
       "group": "security_monitoring",
@@ -1458,6 +1491,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Attach security findings to a case returns \"OK\" response"
+    }
+  ],
+  "BulkExportSecurityMonitoringRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Bulk export security monitoring rules returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [
@@ -1479,6 +1519,23 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Convert a rule from JSON to Terraform returns \"OK\" response"
+    }
+  ],
+  "CreateJiraIssues": [
+    {
+      "group": "security_monitoring",
+      "suffix": "_379590688",
+      "description": "Create Jira issue for security finding returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_829823123",
+      "description": "Create Jira issue for security findings returns \"Created\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create Jira issues for security findings returns \"Created\" response"
     }
   ],
   "CreateSecurityMonitoringRule": [
@@ -1531,6 +1588,13 @@
       "group": "security_monitoring",
       "suffix": "_868881438",
       "description": "Create a scheduled detection rule returns \"OK\" response"
+    }
+  ],
+  "CreateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a critical asset returns \"OK\" response"
     }
   ],
   "CreateCustomFramework": [
@@ -1646,6 +1710,18 @@
       "description": "Run a threat hunting job returns \"Status created\" response"
     }
   ],
+  "SearchSecurityFindings": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Search security findings returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3678541639",
+      "description": "Search security findings returns \"OK\" response with pagination"
+    }
+  ],
   "TestSecurityMonitoringRule": [
     {
       "group": "security_monitoring",
@@ -1663,6 +1739,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update an existing rule returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringCriticalAsset": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a critical asset returns \"OK\" response"
     }
   ],
   "UpdateCustomFramework": [
@@ -1889,11 +1972,60 @@
       "description": "Update a span-based metric returns \"OK\" response"
     }
   ],
+  "CreateComponent": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create component returns \"Created\" response"
+    }
+  ],
+  "CreateDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create degradation returns \"Created\" response"
+    }
+  ],
+  "CreateStatusPage": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Create status page returns \"Created\" response"
+    }
+  ],
+  "UpdateComponent": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update component returns \"OK\" response"
+    }
+  ],
+  "UpdateDegradation": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update degradation returns \"OK\" response"
+    }
+  ],
+  "UpdateStatusPage": [
+    {
+      "group": "status_pages",
+      "suffix": "",
+      "description": "Update status page returns \"OK\" response"
+    }
+  ],
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",
       "suffix": "",
       "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
+    }
+  ],
+  "CreateSyntheticsSuite": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Synthetics: Create a test suite returns \"OK\" response"
     }
   ],
   "AddTeamHierarchyLink": [

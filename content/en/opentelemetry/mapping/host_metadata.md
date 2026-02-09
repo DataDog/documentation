@@ -102,7 +102,7 @@ To use this feature, set the `datadog.ccrid` resource attribute to the value of 
 See below for the list of identifier formats per-cloud:
 | Cloud   | Identifier Type    | Example                                                                                                                                      |
 |---------|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| AWS     | ARN                | `arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name`                                                                                  |
+| AWS     | ARN                | `arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi`                                                                                    |
 | Azure   | Resource ID        | `/subscriptions/0b62a232-b8db-4380-9da6-640f7272ed6d/resourcegroups/lfotriggertest/providers/microsoft.web/sites/resources-task-19cb7afdcbbc`|
 | GCP     | CAI Resource Name  | `//file.googleapis.com/projects/datadog-sandbox/locations/us-central1/backups/kevin-test-backup`                                             |
 | OCI     | OCID               | `ocid1.bucket.oc1.eu-frankfurt-1.aaaaaaaa5b5d7phlob22x4xin2lopq33ugriqiglek2ecxecrjx2awceb7eq`                                               |
@@ -125,15 +125,15 @@ processors:
     metric_statements:
       - context: resource
         statements:
-          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
+          - set(attributes["datadog.ccrid"], "arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi")
     trace_statements:
       - context: resource
         statements:
-          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
+          - set(attributes["datadog.ccrid"], "arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi")
     log_statements:
       - context: resource
         statements:
-          - set(attributes["datadog.ccrid"], "arn:aws:sns:us-east-1:123456789012:instance/example-sns-topic-name")
+          - set(attributes["datadog.ccrid"], "arn:aws:ec2:us-east-1:123456789012:instance/i-abcdefghi")
 ```
 
 The OpenTelemetry semantic conventions also define the [cloud.resource_id][14] attribute, which can be mapped in the configuration using the [attributes processor][15].

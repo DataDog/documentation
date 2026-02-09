@@ -3,6 +3,9 @@ aliases:
 - /es/agent/autodiscovery/basic_autodiscovery
 - /es/getting_started/agent/autodiscovery
 - /es/agent/autodiscovery
+description: Monitoriza automáticamente servicios en contenedores con Datadog Agent
+  Autodiscovery. Configure plantillas para detectar dinámicamente y monitorizar servicios
+  a través de los contenedores.
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentación
@@ -17,7 +20,7 @@ further_reading:
   tag: Documentación
   text: Asigna y recopila las etiquetas (tags) de tu aplicación dinámicamente
 - link: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
-  tag: faq
+  tag: preguntas frecuentes
   text: Configuración de la integración de ECS y Fargate
 - link: /agent/configuration/secrets-management/
   tag: Documentación
@@ -137,9 +140,9 @@ Una plantilla de integración puede definirse de varias formas, a saber: con ano
 
 ### Notas
 
-Si utilizas Autodiscovery y se despliega una aplicación en un nodo nuevo, es posible que experimentes algún retraso al ver las métricas que aparecen en Datadog. Cuando cambias a un nodo nuevo, el Datadog Agent tarda un poco en recopilar metadatos de tu aplicación.
+Si utilizas Autodiscovery y se despliega una aplicación en un nodo nuevo, es posible que experimentes algún retraso al ver las métricas en Datadog. Cuando cambias a un nodo nuevo, el Datadog Agent tarda un poco en recopilar metadatos de tu aplicación.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,6 +1,19 @@
 ---
 title: Code-Based Custom Instrumentation
 description: Add custom spans, tags, and instrumentation to capture application-specific observability data using Datadog APIs and OpenTelemetry.
+aliases:
+    - /tracing/setup/php/manual-installation
+    - /agent/apm/php/manual-installation
+    - /tracing/guide/distributed_tracing/
+    - /tracing/advanced/manual_instrumentation/
+    - /tracing/advanced/opentracing/
+    - /tracing/opentracing/
+    - /tracing/manual_instrumentation/
+    - /tracing/guide/adding_metadata_to_spans
+    - /tracing/advanced/adding_metadata_to_spans/
+    - /tracing/custom_instrumentation
+    - /tracing/setup_overview/custom_instrumentation/undefined
+    - /tracing/setup_overview/custom_instrumentation/
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
@@ -68,10 +81,6 @@ If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[2]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
-[3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
-[4]: /tracing/trace_collection/custom_instrumentation/opentracing/
 [5]: /tracing/trace_collection/single-step-apm
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [7]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

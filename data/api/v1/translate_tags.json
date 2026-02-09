@@ -121,7 +121,7 @@
   },
   "tags": {
     "name": "Tags",
-    "description": "The tag endpoint allows you to assign tags to hosts,\nfor example: `role:database`. Those tags are applied to\nall metrics sent by the host. Refer to hosts by name\n(`yourhost.example.com`) when fetching and applying\ntags to a particular host.\n\nThe component of your infrastructure responsible for a tag is identified\nby a source. For example, some valid sources include nagios, hudson, jenkins,\nusers, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc.\n\nRead more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/)."
+    "description": "The tag endpoint allows you to assign tags to hosts,\nfor example: `role:database`. Those tags are applied to\nall metrics sent by the host. Refer to hosts by name\n(`yourhost.example.com`) when fetching and applying\ntags to a particular host.\n\nThe component of your infrastructure responsible for a tag is identified\nby a source. For example, some valid sources include nagios, hudson, jenkins,\nusers, feed, chef, puppet, git, bitbucket, fabric, capistrano, etc. Find a complete list of source type names under [API Source Attributes](https://docs.datadoghq.com/integrations/faq/list-of-api-source-attribute-value).\n\nRead more about tags on [Getting Started with Tags](https://docs.datadoghq.com/getting_started/tagging/)."
   },
   "timeboards": {
     "name": "Timeboards",

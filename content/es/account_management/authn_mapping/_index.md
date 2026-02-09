@@ -2,16 +2,19 @@
 aliases:
 - /es/account_management/authen_mapping/
 beta: true
+description: Asigna automáticamente grupos de proveedores de identidad a funciones
+  de Datadog mediante la API de asignación de autenticación para sistemas de autenticación
+  federada.
 further_reading:
 - link: /account_management/rbac/log_management/
   tag: Documentación
-  text: Control de acceso basado en roles para gestionar logs
+  text: Control de acceso basado en roles (RBAC) para gestionar logs
 title: API para asignar atributos de autenticación federada a un rol
 ---
 
 Si estás utilizando mecanismos de autenticación federada, esta API te permite asignar de forma automática grupos de usuarios a roles de Datadog utilizando atributos enviados por tu proveedor de identidades. Para crear y gestionar las asignaciones de autenticación a través de la API, los usuarios deben utilizar una clave de aplicación que pertenezca a un usuario con el permiso de gestión de acceso.
 
-**Nota**: Si eres usuario de SAML y has estado utilizando la versión beta existente del mecanismo de asignación federada (`roles_v2_saml`), Datadog te recomienda encarecidamente que migres a esta API.
+**Nota**: Si utilizas SAML, Datadog te recomienda que optes por el uso de esta API.
 
 También puede crear y gestionar asignaciones en la interfaz de usuario de Datadog, en la pestaña **Mappings** (Asignaciones) de User Management (Gestión de usuarios). Consulta la [asignación de grupos SAML][1] para obtener más información.
 
@@ -142,7 +145,7 @@ curl -X POST \
 
 ### Consultar todas las asignaciones de autenticación
 
-Devuelve una lista con las asignaciones de autenticación.
+Devuelve una lista con las asignaciones de autenticación
 
 | Método | Ruta del endpoint        | Carga útil obligatoria          |
 |--------|----------------------|---------------------------|
@@ -151,13 +154,13 @@ Devuelve una lista con las asignaciones de autenticación.
 ##### ARGUMENTOS
 
 * **`sort`** [*opcional*, *default*=**created\_at**]:
-  Atributo y orden de clasificación; el orden predeterminado es ascendente, mientras que el `-<attribute>` clasifica en orden descendente. También es posible la clasificación según los atributos de relación `role.name`, `saml_assertion_attribute.attribute_key`, `saml_assertion_attribute.attribute_value`.
+  El atributo y el orden de clasificación. Por defecto, en orden ascendente, `-<attribute>` sorts in descending order. Can also sort on relationship attributes `role.name`, `saml_assertion_attribute.attribute_key`, `saml_assertion_attribute.attribute_value`.
 * **`page[number]`** [*opcional*, *default*=**0**, *minimum*=**0**]:
   La página de resultados que devolverá.
 * **`page[size]`** [*opcional*, *default*=**10**]:
   El número de resultados que devolverá por página.
 * **`filter`** [*opcional*, default=none]:
-  Filtrar por etiquetas (tags) en forma de cadenas. Ejemplo: `Billing Users`.
+  Filtrar por etiquetas (tags) en forma de cadenas. Por ejemplo, `Billing Users`.
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -251,7 +254,7 @@ Devuelve una asignación de autenticación a través de su UUID.
 
 | Método | Ruta del endpoint            | Carga útil obligatoria |
 |--------|--------------------------|------------------|
-| `GET`  | `/authn_mappings/{authn_mapping_id}` | Parámetro de URL    |
+| `GET`  | `/authn_mappings/{authn_mapping_id}` | Parámetros de URL    |
 
 ##### ARGUMENTOS
 
@@ -467,7 +470,7 @@ Elimina una asignación de autenticación específica.
 
 | Método   | Ruta del endpoint                           | Carga útil obligatoria |
 |----------|-----------------------------------------|------------------|
-| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | Parámetro de URL    |
+| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | Parámetros de URL    |
 
 ##### ARGUMENTOS
 
@@ -504,7 +507,7 @@ Comprueba si las asignaciones de autenticación están activadas o desactivadas.
 
 | Método   | Ruta del endpoint              | Carga útil obligatoria |
 |----------|----------------------------|------------------|
-| `GET`    | `/v1/org_preferences`      | Ninguna             |
+| `GET`    | `/v1/org_preferences`      | Ninguno             |
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -543,7 +546,7 @@ curl -X GET \
 ### Activar o desactivar las asignaciones
 
 <div class="alert alert-danger">
-Al activar las asignaciones, se eliminan los roles de todos los usuarios que inician sesión con SAML y se les reasignan unos teniendo en cuenta los valores de su aserción SAML. Recuerda verificar que recibes las aserciones SAML previstas en tu conexión antes de activar la aplicación de asignaciones.
+Cuando se habilitan las asignaciones, todos los usuarios que inician sesión con SAML son despojados de sus roles y se les reasignan roles basados en los valores de su aserción SAML. Es importante confirmar que estás recibiendo las aserciones SAML esperadas en tu inicio de sesión antes de habilitar la aplicación de las asignaciones.
 </div>
 
 Activa/desactiva la aplicación de todas las asignaciones de autenticación.
@@ -555,9 +558,9 @@ Activa/desactiva la aplicación de todas las asignaciones de autenticación.
 ##### ARGUMENTOS
 
 * **`{preference_type}`** [*obligatorio*, sin default]:
-  Preferencia para actualizar; debe ser "saml_authn_mapping_roles"
+  Preferencia a actualizar, debe ser "saml_authn_mapping_roles"
 * **`{preference_data}`** [*obligatorio*, sin default]:
-  Datos con los que actualizar la preferencia. Debe ser true o false: true para activar todas las asignaciones, false para desactivarlas.
+  Datos con los que actualizar la preferencia. Debe ser verdadero o falso: verdadero para activar todas las asignaciones, falso para desactivarlas.
 
 {{< tabs >}}
 {{% tab "Ejemplo" %}}
@@ -603,7 +606,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

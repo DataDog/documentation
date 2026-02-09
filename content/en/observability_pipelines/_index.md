@@ -2,6 +2,9 @@
 title: Observability Pipelines
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
   tag: Blog
   text: Manage metric volume and tags in your environment with Observability Pipelines

@@ -22,8 +22,8 @@ further_reading:
 
 This page provides a list of UI components that you can use when creating apps in App Builder.
 
-Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7].
-<br><br>
+Many component properties allow you to select from provided values. If you want to use an expression for a property's value, click **&lt;/&gt;** next to the property to use the code editor. For more information on using JavaScript in App Builder, see [JavaScript Expressions][7]. For more information about saving your components as a template, see [Reusable Modules][12].
+<br><br> 
 
 {{% collapse-content title="Button" level="h3" %}}
 Button components have the following properties.
@@ -1223,3 +1223,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [9]: /service_management/app_builder/events/#state-functions
 [10]: /service_management/app_builder/components/custom_charts/
 [11]: /actions/app_builder/components/react_renderer/
+[12]: /actions/app_builder/components/reusable_modules/

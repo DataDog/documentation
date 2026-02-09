@@ -13,10 +13,6 @@ further_reading:
   text: "Learn about Application Performance Monitoring (APM)"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/feature-flags/" >}}
-Feature Flags are in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 This page describes how to instrument your Ruby application with the Datadog Feature Flags SDK.
@@ -29,6 +25,8 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Datadog Ruby tracer** `datadog` version 2.23.0 or later
 - **OpenFeature Ruby SDK** `openfeature-sdk` version 0.4.1 or later
 - **Service and environment configured** - Feature flags are targeted by service and environment
+- **Supported operating system** - Feature flags are only [supported on Linux operating systems][2]. Windows and macOS are not natively supported, but Dockerized Linux environments running on those operating systems are.
+
 
 ## Installing and initializing
 
@@ -66,7 +64,7 @@ Define an evaluation context that identifies the user or entity for flag targeti
 
 ```ruby
 context = OpenFeature::SDK::EvaluationContext.new(
-  targetingKey: 'user-123',  # Targeting key (typically user ID)
+  targeting_key: 'user-123',  # Targeting key (typically user ID)
   email: 'user@example.com',
   country: 'US',
   tier: 'premium',
@@ -235,3 +233,4 @@ Look for messages about:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/
+[2]: /tracing/trace_collection/compatibility/ruby/#supported-operating-systems

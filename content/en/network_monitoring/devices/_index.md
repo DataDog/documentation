@@ -25,6 +25,9 @@ further_reading:
     - link: '/network_monitoring/devices/glossary'
       tag: 'Doc'
       text: 'NDM Terms and Concepts'
+    - link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
+      tag: "Blog"
+      text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
 algolia:
   tags: ['network device monitoring']
 ---

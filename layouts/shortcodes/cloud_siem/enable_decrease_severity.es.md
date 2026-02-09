@@ -1,0 +1,3 @@
+Activa la opción **Decrease severity for non-production environments** (Disminuir gravedad para entornos de no producción) si quieres dar prioridad a las señales de entornos de producción sobre las de no producción.
+- La gravedad de las señales en entornos de no producción disminuye un nivel respecto a la definida por el caso regla.
+- La disminución de la gravedad se aplica a las señales con una etiqueta (tag) de entorno empezando por `staging`, `test` o `dev`.

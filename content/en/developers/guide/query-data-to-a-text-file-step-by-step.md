@@ -14,16 +14,11 @@ Prerequisite: Python and `pip` installed on your localhost. Windows users see [I
 3. Create a new folder: `mkdir <NAME_OF_THE_FOLDER>`.
 4. Enter the folder: `cd <NAME_OF_THE_FOLDER>`.
 5. Download the script [api_query_data.py][3] to the folder created in step 3 and edit it:
-
-    a. Replace `<YOUR_DD_API_KEY>` and `<YOUR_DD_APP_KEY>` with your [Datadog API and app keys][4].
-
-    b. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary][5].
-
-    c. Optionally, replace `*` with a host to filter the data. A list of your hosts is displayed in the [Datadog Infrastructure List][6].
-
-    d. Optionally, change the time period to collect the data. The current setting is 3600 seconds (one hour). **Note**: If you run this too aggressively, you may reach the [Datadog API limits][7].
-
-    e. Save your file and confirm its location.
+   1. Replace `<YOUR_DD_API_KEY>` and `<YOUR_DD_APP_KEY>` with your [Datadog API and app keys][4].
+   1. Replace `system.cpu.idle` with a metric you want to fetch. A list of your metrics is displayed in the [Datadog Metric Summary][5].
+   1. Optionally, replace `*` with a host to filter the data. A list of your hosts is displayed in the [Datadog Infrastructure List][6].
+   1. Optionally, change the time period to collect the data. The current setting is 3600 seconds (one hour). **Note**: If you run this too aggressively, you may reach the [Datadog API limits][7].
+   1. Save your file and confirm its location.
 
 Once the above is complete:
 

@@ -138,20 +138,20 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. Enter a name for the job.
 1. Select a regional endpoint.
 1. In the **Dataflow template** dropdown menu, select **Pub/Sub to Datadog**.
-1. In **Required Parameters** section:
-      a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a new [Pub/Sub system](#create-a-google-cloud-publishsubscription-pubsub-system).
-      b. Enter the following in the **Datadog Logs API URL** field:
+1. In the **Required Parameters** section:
+   1. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a new [Pub/Sub system](#create-a-google-cloud-publishsubscription-pubsub-system).
+   1. Enter the following in the **Datadog Logs API URL** field:
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
       ```
       **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the URL above.
-      c. In the **Output deadletter Pub/Sub topic** field, select the [additional topic](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) you created earlier for receiving messages rejected by the Datadog API.
-      d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
+   1. In the **Output deadletter Pub/Sub topic** field, select the [additional topic](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) you created earlier for receiving messages rejected by the Datadog API.
+   1. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
 1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:
-    a. Click **Optional Parameters** to see the additional fields.
-    b. Enter the resource name of the secret in the **Google Cloud Secret Manager ID** field.
-        To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.
-    c. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.
+   1. Click **Optional Parameters** to see the additional fields.
+   1. Enter the resource name of the secret in the **Google Cloud Secret Manager ID** field.<br />
+      To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.
+   1. Enter `SECRET_MANAGER` in the **Source of the API key passed** field.
 1. If you are not using a secret for your Datadog API key value:
     - **Recommended**:
         - Set `Source of API key passed` to `KMS`.

@@ -40,7 +40,7 @@ Then run `terraform init` from within this directory to pull the datadog terrafo
 
 Now you can use `terraformer` to start importing resources. For example, to import Dashboard `abc-def-ghi` you can run
 
-`terraformer import datadog --resources=dashboard --filter=dashboard=abc-def-ghi --api-key <YOUR_API_KEY> --app-key <YOUR_APP_KEY> --api-url <YOUR_DATADOG_SITE_URL>`
+`terraformer import datadog --resources=dashboard --filter=dashboard=abc-def-ghi --no-sort --api-key <YOUR_API_KEY> --app-key <YOUR_APP_KEY> --api-url <YOUR_DATADOG_SITE_URL>`
 
 This generates a folder `generated` that contains both a terraform state file, as well as HCL terraform config files representing the imported resource.
 
@@ -63,11 +63,13 @@ generated
 
 All example commands require the `--api-key`, `--app-key`, and `--api-url` flags.
 
+The `--no-sort` flag should be added for resources like dashboards where the order of elements is meaningful. Without it `terraformer` may re-sort the widgets on your dashboards.
+
 * Import all monitors: `terraformer import datadog --resources=monitor`
 * Import monitor with id 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234`
 * Import monitors with id 1234 and 12345: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
-* Import all monitors and dashboards: `terraformer import datadog --resources=monitor,dashboard`
-* Import monitor with id 1234 and dashboard with id abc-def-ghi: `terraformer import datadog --resources=monitor,dashboard --filter=monitor=1234,dashboard=abc-def-ghi`
+* Import all monitors and dashboards: `terraformer import datadog --no-sort --resources=monitor,dashboard`
+* Import monitor with id 1234 and dashboard with id abc-def-ghi: `terraformer import datadog --resources=monitor,dashboard --no-sort --filter=monitor=1234,dashboard=abc-def-ghi`
 
 ## Generating resources with Terraform v0.13+
 

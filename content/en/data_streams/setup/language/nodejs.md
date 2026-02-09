@@ -30,6 +30,7 @@ aliases:
 | Amazon Kinesis  | [client-kinesis](https://www.npmjs.com/package/@aws-sdk/client-kinesis)                  | {{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="minimal" >}}             | {{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="recommended" >}}             |
 | Amazon SNS      | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)                          | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="minimal" >}}                 | {{< dsm-tracer-version lang="nodejs" lib="client-sns" type="recommended" >}}                 |
 | Google Pub/Sub  | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub)                | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="minimal" >}}        | {{< dsm-tracer-version lang="nodejs" lib="google-cloud-pubsub" type="recommended" >}}        |
+| BullMQ          | [bullmq](https://www.npmjs.com/package/bullmq)                                           | {{< dsm-tracer-version lang="nodejs" lib="bullmq" type="minimal" >}}                     | {{< dsm-tracer-version lang="nodejs" lib="bullmq" type="recommended" >}}                     |
 
 #### Support for Amazon SQS with AWS Lambda
 
@@ -37,7 +38,7 @@ To monitor data streams for Node.js Lambda functions calling Amazon SQS, SNS, or
 
 ### Installation
 
-Node.js uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka.
+Node.js uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) your streaming technology.
 
 For example:
 

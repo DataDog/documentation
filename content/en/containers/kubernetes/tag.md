@@ -337,7 +337,7 @@ datadog:
 To extract a given resource annotation `<ANNOTATION>` and transform them as tag keys `<TAG_KEY>` within Datadog, add the following environment variable to **both** your Agent and Cluster Agent containers.
 
 ```yaml
-- name: DD_KUBERNETES_RESOURCES_LABELS_AS_TAGS
+- name: DD_KUBERNETES_RESOURCES_ANNOTATIONS_AS_TAGS
   value: '{"<RESOURCE>":{"<ANNOTATION>":"<TAG_KEY>"}}'
 ```
 

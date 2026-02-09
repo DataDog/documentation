@@ -39,7 +39,10 @@ In the On-Call product, a user does not need a seat to view existing pages, esca
 
 A user needs an **Incident Management seat** if they perform any of the following actions. These actions require a seat whether they are performed in the Datadog UI or through integrations such as Microsoft Teams or Slack.
 - Modify an incident (for example, update severity)
+- Delete an incident
 - Add a comment, graph, or link to an incident timeline
+- Assign a task to a user within an incident (the assignee must have a seat)
+- Assign a responder to a user-defined role within an incident (the assignee must have a seat) 
 
 In Incident Management, a user does not need a seat to create incidents, view incidents, or join incident channels. Commenting in Slack, including posting messages that sync to the incident timeline, also does not require a seat. Only actions taken through the Datadog app in Slack, such as using action buttons or interacting with @Datadog, trigger a seat requirement.
 

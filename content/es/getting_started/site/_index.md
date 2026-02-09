@@ -3,6 +3,8 @@ algolia:
   tags:
   - sitio
   - sitio de Datadog
+description: Infórmate sobre los distintos sitios Datadog de tu región y los requisitos
+  de seguridad, incluidas las opciones que cumplen las normas gubernamentales.
 further_reading:
 - link: https://learn.datadoghq.com/courses/dashboards-slos
   tag: Centro de aprendizaje
@@ -61,7 +63,7 @@ Por ejemplo, para ver la documentación del sitio Datadog for Government, selecc
 
 ## Acceder al sitio Datadog for Government
 
-El sitio Datadog for Government (US1-FED) es el sitio FedRAMP Moderate Authorized de Datadog. US1-FED está pensado para permitir que las agencias gubernamentales y socios de EE.UU. monitoricen sus aplicaciones e infraestructuras. Para obtener información sobre los controles y marcos de seguridad y conformidad de US1-FED, así como sobre su compatibilidad con FedRAMP, consulta la [page (página) Seguridad][1].
+El sitio Datadog for Government (US1-FED) es el sitio FedRAMP Moderate Authorized de Datadog. US1-FED está pensado para permitir que las agencias gubernamentales y socios de EE.UU. monitoricen sus aplicaciones e infraestructuras. Para obtener información sobre los controles y frameworks de seguridad y conformidad de US1-FED, así como sobre su compatibilidad con FedRAMP, consulta la [page (página) Seguridad][1].
 
 ## Referencias adicionales
 

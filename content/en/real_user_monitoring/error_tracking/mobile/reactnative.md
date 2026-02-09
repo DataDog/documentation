@@ -40,15 +40,21 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 Update your initialization snippet to enable native JavaScript crash reporting:
 
 ```javascript
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<APPLICATION_ID>',
-    true,
-    true,
-    true // enable JavaScript crash reporting
+    {
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>',
+            trackInteractions: true,
+            trackResources: true,
+            trackErrors: true, // <-- Enable JavaScript Crash Reporting
+            nativeCrashReportEnabled: true, // Optional: Enable Native Crash Reporting
+        },
+        logsConfiguration: {},
+        traceConfiguration: {}
+    }
 );
-config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
 ## Get deobfuscated stack traces
@@ -476,9 +482,9 @@ Find the loop on `applicationVariants` in the `android/app/build.gradle` file. I
 Inside the loop, add the following snippet:
 
 ```groovy
-        if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
-            tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
-        }
+if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
+    tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
+}
 ```
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.

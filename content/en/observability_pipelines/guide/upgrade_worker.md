@@ -211,7 +211,7 @@ Worker version 2.7.0 gives you access to the following:
 [15]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.7.0
 [16]: /observability_pipelines/destinations/http_client/
 [17]: /observability_pipelines/processors/#processor-groups
-[18]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#disk-buffers
-[19]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#in-memory-buffering-for-components
+[18]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#destination-buffer-behavior
+[19]: /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/#component-buffers
 [20]: /observability_pipelines/processors/sample/#group-by-example
 [21]: /observability_pipelines/destinations/elasticsearch/#set-up-the-destination

@@ -28,9 +28,9 @@ These are the available destinations:
 - [CrowdStrike Next-Gen SIEM][6]
 - [Datadog Logs][7]
 - [Elasticsearch][8]
-- [Google Chronicle][9]
 - [Google Cloud Storage][10]
 - [Google Pub/Sub][11]
+- [Google SecOps][9]
 - [HTTP Client][12]
 - [Kafka][13]
 - [Microsoft Sentinel][14]
@@ -50,7 +50,7 @@ These are the available destinations:
 [6]: /observability_pipelines/destinations/crowdstrike_ng_siem/
 [7]: /observability_pipelines/destinations/datadog_logs/
 [8]: /observability_pipelines/destinations/elasticsearch/
-[9]: /observability_pipelines/destinations/google_chronicle/
+[9]: /observability_pipelines/destinations/google_secops/
 [10]: /observability_pipelines/destinations/google_cloud_storage/
 [11]: /observability_pipelines/destinations/google_pubsub/
 [12]: /observability_pipelines/destinations/http_client/

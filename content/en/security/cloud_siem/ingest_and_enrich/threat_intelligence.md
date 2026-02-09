@@ -67,7 +67,7 @@ ip_address,additional_data,category,intention,source
 | Field           | Data | Description                                                                              | Required | Example                                                                   |
 |-----------------|------|------------------------------------------------------------------------------------------|----------|---------------------------------------------------------------------------|
 | domain          | text | The primary key for the reference table.                                                 | true     | mal-domain.com                                                            |
-| additional_data | json | Additional data to enrich the trace.                                                     | false    | `{"ref":"hxxp://example.org"}`                                            |
+| additional_data | json | Additional data to enrich the logs.                                                      | false    | `{"ref":"hxxp://example.org"}`                                            |
 | category        | text | The threat intel [category][8]. This is used by some out-of-the-box detection rules.     | true     | Phishing                                                                  |
 | intention       | text | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.       | true     | malicious                                                                 |
 | source          | text | The name of the source and the link to its site, such as your team and your team's wiki. | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |

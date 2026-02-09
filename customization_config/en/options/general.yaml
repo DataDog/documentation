@@ -256,6 +256,9 @@ options:
 - label: Maven
   id: maven
 
+- label: Metrics
+  id: metrics
+
 - label: MongoDB
   id: mongo_db
 
@@ -343,6 +346,9 @@ options:
 - label: Ruby
   id: ruby
 
+- label: Rust
+  id: rust
+
 - label: Sensitive Data Scanner
   id: sensitive_data_scanner
 
@@ -391,6 +397,9 @@ options:
 - label: TOML
   id: toml
 
+- label: Traces
+  id: traces
+
 - label: Wget
   id: wget
 
@@ -423,3 +432,15 @@ options:
   
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
+
+- label: OpenTelemetry
+  id: otel_api
+
+- label: Datadog
+  id: dd_api
+
+- label: C++
+  id: cpp
+
+- label: Elixir
+  id: elixir

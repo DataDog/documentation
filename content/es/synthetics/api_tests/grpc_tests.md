@@ -37,18 +37,18 @@ Los tests gRPC te permiten monitorizar de forma proactiva tus servicios y sus se
 Checks de comportamiento
 : Envía solicitudes gRPC a los endpoints de API de tus aplicaciones para verificar las respuestas y las condiciones definidas, como el tiempo de respuesta general, la cabecera o el contenido del cuerpo.
 
-Checks de estado
+Checks de estado 
 Los checks de estado de gRPC son un estándar para informar sobre el estado de servicios gRPC. Determina si tus servidores y servicios gRPC responden, funcionan y son capaces de gestionar llamadas a procedimientos remotos (RPC).<br><br>Mediante la implementación de checks de estado de gRPC, puedes ejecutar tests de checks de estado de gRPC sin tener que proporcionar un archivo `.proto` a Datadog. Para obtener más información, consulta el [archivo `.proto` de checks de estado de ejemplo][1] compartido por la comunidad gRPC.
 
 Los tests gRPC pueden ejecutarse tanto desde [localizaciones gestionadas](#select-locations) como de [localizaciones privadas][2] dependiendo de tu preferencia de ejecución de tests desde fuera o dentro de tu red. Los tests gRPC pueden ejecutarse de forma programada, bajo demanda o directamente dentro de tus [pipelines CI/CD][3].
 
-## Configuración
+## Configuración 
 
 Puedes crear un test utilizando una de las siguientes opciones:
 
    - **Crea un test a partir de una plantilla**:
 
-       1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor.
+       1. Pasa el ratón por encima de una de las plantillas ya rellenadas y haz clic en **View Template** (Ver plantilla). Se abrirá un panel lateral en el que se mostrará la información de configuración rellenada previamente, que incluye: detalles de tests, detalles de solicitudes, aserciones, condiciones de alerta y parámetros de monitor. 
        2. Haz clic en **+Create Test** (+Crear test) para abrir la página **Definir solicitud**, en la que podrás revisar y editar las opciones de configuración rellenadas previamente. Los campos presentados son idénticos a aquellos disponibles cuando se crea un test desde cero.
        3. Haz clic en **Save Details** (Guardar detalles) para enviar tu test de API. <br /><br>
           {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vídeo de la página de inicio del test de la API Synthetics" video="true" >}}
@@ -94,7 +94,7 @@ Para un check de estado, introduce el nombre del servicio. Deja este campo vací
 
 <br/>
 
-Puedes utilizar la librería `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
+Puedes utilizar la biblioteca `openssl` para convertir tus certificados. Por ejemplo, puedes convertir un certificado `PKCS12` en certificados y claves privadas en formato `PEM`.
 
 ```bash
    openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
@@ -106,7 +106,7 @@ Puedes utilizar la librería `openssl` para convertir tus certificados. Por ejem
 
    5. **Pon un nombre** a tu test gRPC.
 
-   6. Añade **etiquetas** (tags) de entorno así como cualquier otra etiqueta a tu test gRPC. A continuación, puedes utilizar estas etiquetas para filtrar tus tests Synthetic en la [página de monitorización Synthetic y tests continuos][4].
+   6. Añade **etiquetas** (tags) de entorno así como cualquier otra etiqueta a tu test gRPC. A continuación, puedes utilizar estas etiquetas para filtrar tus tests Synthetic en la [página de monitorización Synthetic y tests continuos][4]. 
 
    7. Haz clic en **Invoke** (Invocar) para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
 
@@ -184,36 +184,15 @@ Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 Un test se considera `FAILED` si no satisface una o más aserciones o si la solicitud ha fallado prematuramente. En algunos casos, el test puede fallar sin comprobar las aserciones respecto al endpoint.
 
-Entre las razones figuran las siguientes:
-
-`gRPC specific errors`
-: gRPC tiene una lista de códigos de estado específicos que se pueden encontrar en la [documentación oficial de gRPC][10].
-
-`CONNRESET`
-: El servidor remoto ha finalizado bruscamente la conexión. Entre las posibles causas se incluyen que el servidor web haya encontrado un error o falla al responder, o que se haya perdido la conectividad del servidor web.
-
-`DNS`:
-No se ha encontrado la entrada DNS para la URL del test. Entre las posibles causas se incluyen una URL de test mal configurada o una configuración incorrecta de las entradas DNS.
-
-`INVALID_REQUEST`
-: La configuración del test no es válida (por ejemplo, un error tipográfico en la URL).
-
-`SSL`
-: No se ha podido realizar la conexión SSL. [Para obtener más información, consulta la página de errores específica][11].
-
-`TIMEOUT`
-: La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60 segundos).
-  Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima de 60,5 segundos.
+Para obtener una lista completa de los códigos de error de gRPC, consulta [Errores de test de la API][10].
 
 ## Permisos
 
-De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][12] pueden crear, editar y eliminar tests gRPC Synthetic. Para crear, editar y eliminar tests gRPC Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][12].
+De manera predeterminada, solo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][11] pueden crear, editar y eliminar tests gRPC Synthetic. Para crear, editar y eliminar tests gRPC Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][11].
 
-Si utilizas la función [rol personalizado][13], añade tu usuario a cualquier rol personalizado que incluya permisos de `synthetics_read` y `synthetics_write`.
+Si estás utilizando la [función de rol personalizado][12], añade tu usuario a cualquier rol que incluya permisos `synthetics_read` y `synthetics_write`.
 
-## Restringir el acceso
+### Restringir el acceso
 
 {{% synthetics_grace_permissions %}}
 
@@ -231,7 +210,6 @@ Si utilizas la función [rol personalizado][13], añade tu usuario a cualquier r
 [7]: /es/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /es/synthetics/guide/synthetic-test-monitors
 [9]: /es/synthetics/settings/#global-variables
-[10]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
-[11]: /es/synthetics/api_tests/errors/#ssl-errors
-[12]: /es/account_management/rbac/
-[13]: /es/account_management/rbac#custom-roles
+[10]: /es/synthetics/api_tests/errors/#grpc-errors
+[11]: /es/account_management/rbac/
+[12]: /es/account_management/rbac#custom-roles

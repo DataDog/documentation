@@ -153,7 +153,7 @@ See [privacy options specific to Session Replay][19].
 [13]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [14]: /help/
 [15]: /account_management/rbac/permissions/#real-user-monitoring
-[16]: /session_replay/privacy_options#override-an-html-element
+[16]: /session_replay/browser/privacy_options/#override-an-html-element
 [17]: /security/sensitive_data_scanner/
 [18]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [19]: /session_replay/browser/privacy_options

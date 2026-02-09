@@ -2,9 +2,15 @@
 title: Send Akamai DataStream logs to Observability Pipelines
 description: Learn how to send Akamai DataStream logs to Observability Pipelines
 disable_toc: false
+products:
+- name: Logs
+  icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 aliases:
     - /observability_pipelines/sources/akamai_datastreamer
 ---
+
+{{< product-availability >}}
 
 ## Overview
 

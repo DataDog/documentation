@@ -60,7 +60,7 @@ instances:
 ### Configuración
 
 <div class="alert alert-danger">
-Los nombres de los archivos de configuración y check deben coincidir. Si tu check se llama <code>micheck.py</code> tu archivo de configuración <em>debe</em> llamarse <code>micheck.yaml</code>.
+Los nombres de los archivos de configuración y check deben coincidir. Si tu check se llama <code>mycheck.py</code>, tu archivo de configuración <em>debe</em> llamarse <code>mycheck.yaml</code>.
 </div>
 
 La configuración para un check de Openmetrics es casi igual que un [check de Agent][5] normal. La principal diferencia consiste en incluir la variable `openmetrics_endpoint` en tu archivo `check.yaml`. Esto va en `conf.d/kong.yaml`:
@@ -75,7 +75,7 @@ instances:
 
 ### Escribir el check
 
-Todos los checks de OpenMetrics heredan de la [clase `OpenMetricsBasecheckV2`][6]:
+Todos los checks de OpenMetrics heredan de la [clase `OpenMetricsBaseCheckV2`][6]:
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -195,7 +195,7 @@ def check(self, instance):
         raise ConfigurationError("Unable to find openmetrics_endpoint in config file.")
 ```
 
-En cuanto dispongas de datos, elimina:
+En cuanto dispongas de datos, descarga:
 
 ```python
 
@@ -264,7 +264,7 @@ métricas expuestas desde las que compartir etiquetas, y los valores son asignac
 `exclude_labels`
  `exclude_labels` es una matriz de etiquetas a excluir. Esas etiquetas no se añaden como etiquetas al enviar la métrica.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -153,7 +153,7 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
 4. Enable tracking for web views with the following code snippet:
 
    ```kotlin
-     WebViewTracking.enable(webView, allowedHosts)
+   WebViewTracking.enable(webView, allowedHosts)
    ```
 
 `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
@@ -162,7 +162,7 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
 In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
 
 ```kotlin
-    webView.settings.javaScriptEnabled = true
+webView.settings.javaScriptEnabled = true
 ```
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
@@ -329,15 +329,15 @@ The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the give
 4. Enable tracking for web views with the following code snippet:
 
    ```kotlin
-     // call it in Android or iOS source set, not in the common one
-     WebViewTracking.enable(webView, allowedHosts)
+   // call it in Android or iOS source set, not in the common one
+   WebViewTracking.enable(webView, allowedHosts)
    ```
 
 5. Disable tracking of web views once web view instance can be released (iOS only):
 
    ```kotlin
-     // call it in iOS source set, not in the common one
-     WebViewTracking.disable(webView, allowedHosts)
+   // call it in iOS source set, not in the common one
+   WebViewTracking.disable(webView, allowedHosts)
    ```
 
 `allowedHosts` matches the given hosts and their subdomain. No regular expressions are allowed.

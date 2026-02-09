@@ -26,45 +26,49 @@ These are the available sources:
 {{< tabs >}}
 {{% tab "Logs" %}}
 
-- [Amazon Data Firehose][1]
-- [Amazon S3][2]
-- [Azure Event Hubs][3]
-- [Datadog Agent][4]
-- [Filebeat][5]
-- [Fluentd and Fluent Bit][6]
-- [Google Pub/Sub][7]
-- [HTTP Client][8]
-- [HTTP Server][9]
-- [Kafka][10]
-- [Lambda Extension][11]
-- [Lambda Forwarder][12]
-- [Logstash][13]
-- [OpenTelemetry][14]
-- [Socket][15]
-- [Splunk HTTP Event Collector (HEC)][16]
-- [Splunk Heavy or Universal Forwarders (TCP)][17]
-- [Sumo Logic Hosted Collector][18]
-- [Syslog][19]
+- [Akamai DataStream][1]
+- [Amazon Data Firehose][2]
+- [Amazon S3][3]
+- [Azure Event Hubs][4]
+- [Datadog Agent][5]
+- [Filebeat][6]
+- [Fluentd and Fluent Bit][7]
+- [Google Pub/Sub][8]
+- [HTTP Client][9]
+- [HTTP Server][10]
+- [Kafka][11]
+- [Lambda Extension][12]
+- [Lambda Forwarder][13]
+- [Logstash][14]
+- [MySQL][15]
+- [OpenTelemetry][16]
+- [Socket][17]
+- [Splunk HTTP Event Collector (HEC)][18]
+- [Splunk Heavy or Universal Forwarders (TCP)][19]
+- [Sumo Logic Hosted Collector][20]
+- [Syslog][21]
 
-[1]: /observability_pipelines/sources/amazon_data_firehose/
-[2]: /observability_pipelines/sources/amazon_s3/
-[3]: /observability_pipelines/sources/azure_event_hubs/
-[4]: /observability_pipelines/sources/datadog_agent/
-[5]: /observability_pipelines/sources/filebeat/
-[6]: /observability_pipelines/sources/fluent/
-[7]: /observability_pipelines/sources/google_pubsub/
-[8]: /observability_pipelines/sources/http_client/
-[9]: /observability_pipelines/sources/http_server/
-[10]: /observability_pipelines/sources/kafka/
-[11]: /observability_pipelines/sources/lambda_extension/
-[12]: /observability_pipelines/sources/lambda_forwarder/
-[13]: /observability_pipelines/sources/logstash/
-[14]: /observability_pipelines/sources/opentelemetry/
-[15]: /observability_pipelines/sources/socket/
-[16]: /observability_pipelines/sources/splunk_hec/
-[17]: /observability_pipelines/sources/splunk_tcp/
-[18]: /observability_pipelines/sources/sumo_logic/
-[19]: /observability_pipelines/sources/syslog/
+[1]: /observability_pipelines/sources/akamai_datastream/
+[2]: /observability_pipelines/sources/amazon_data_firehose/
+[3]: /observability_pipelines/sources/amazon_s3/
+[4]: /observability_pipelines/sources/azure_event_hubs/
+[5]: /observability_pipelines/sources/datadog_agent/
+[6]: /observability_pipelines/sources/filebeat/
+[7]: /observability_pipelines/sources/fluent/
+[8]: /observability_pipelines/sources/google_pubsub/
+[9]: /observability_pipelines/sources/http_client/
+[10]: /observability_pipelines/sources/http_server/
+[11]: /observability_pipelines/sources/kafka/
+[12]: /observability_pipelines/sources/lambda_extension/
+[13]: /observability_pipelines/sources/lambda_forwarder/
+[14]: /observability_pipelines/sources/logstash/
+[15]: /observability_pipelines/sources/mysql/
+[16]: /observability_pipelines/sources/opentelemetry/
+[17]: /observability_pipelines/sources/socket/
+[18]: /observability_pipelines/sources/splunk_hec/
+[19]: /observability_pipelines/sources/splunk_tcp/
+[20]: /observability_pipelines/sources/sumo_logic/
+[21]: /observability_pipelines/sources/syslog/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}

@@ -10,8 +10,11 @@ further_reading:
   tag: "Blog"
   text: "Identify slowdowns across your entire network with Datadog Network Path"
 - link: "network_monitoring/network_path/glossary"
-  tag: "Doc"
+  tag: "Documentation"
   text: "Network Path terms and concepts"
+- link: "/monitors/types/network_path/"
+  tag: "Documentation"
+  text: Network Path Monitor
 ---
 
 ## Overview
