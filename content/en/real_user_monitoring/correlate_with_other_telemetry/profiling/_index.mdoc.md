@@ -33,8 +33,8 @@ Datadog RUM supports profiling for browser, iOS, and Android applications. Use p
 <!-- Browser -->
 {% if equals($sdk_profiling, "browser") %}
 
-{% callout header="Join the Preview!" btn_hidden="true" %}
-Browser Profiling is in Preview. To request access, fill out [this form](https://www.datadoghq.com/product-preview/browser-profiler/).
+{% callout url="https://www.datadoghq.com/product-preview/browser-profiler/" header="Join the Preview!" btn_hidden=false %}
+Browser Profiling is in Preview.
 {% /callout %}
 
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler.png" 
@@ -165,8 +165,8 @@ You can also find profiling data when reviewing individual events within the **S
 <!-- Android -->
 {% if equals($sdk_profiling, "android") %}
 
-{% callout header="Join the Preview!" btn_hidden="true" %}
-Android Profiling is in Preview. To request access, fill out [this form](https://www.datadoghq.com/product-preview/android-profiler/).
+{% callout url="https://www.datadoghq.com/product-preview/android-profiler/" header="Join the Preview!" btn_hidden=false %}
+Android Profiling is in Preview.
 {% /callout %}
 
 {% img src="real_user_monitoring/android/android-profiling-ttid.png" alt="Android profiling data in a time to initial display vital event." style="width:90%;" /%}
@@ -247,8 +247,8 @@ Use the **flame graph** to identify which methods consume the most CPU time duri
 <!-- iOS -->
 {% if equals($sdk_profiling, "ios") %}
 
-{% callout header="Join the Preview!" btn_hidden="true" %}
-iOS Profiling is in Preview. To request access, fill out [this form](https://www.datadoghq.com/product-preview/ios-profiler/).
+{% callout url="https://www.datadoghq.com/product-preview/ios-profiler/" header="Join the Preview!" btn_hidden=false %}
+iOS Profiling is in Preview.
 {% /callout %}
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
