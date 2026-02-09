@@ -16,5 +16,4 @@ content_filters:
     option_group_id: <PRODUCT>_error_grouping_context_options
 ---
 
-
 {% partial file="error_tracking/error_grouping.mdoc.md" /%}
