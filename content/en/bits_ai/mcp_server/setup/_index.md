@@ -28,7 +28,7 @@ The Datadog MCP Server is in Preview. There is no charge for using the Datadog M
 
 - The Datadog MCP Server is not supported for production use during the Preview.
 - Only Datadog organizations that have been specifically allowlisted can use the Datadog MCP Server. It is not available to the general public.
-- The Datadog MCP Server is not available for organizations that require HIPAA compliance.
+- The Datadog MCP Server is HIPAA-eligible. You are responsible for ensuring that the AI tools you connect to the Datadog MCP Server meet your compliance requirements, such as HIPAA.
 - Datadog collects certain information about your usage of the Remote Datadog MCP Server, including how you interact with it, whether errors occurred while using it, what caused those errors, and user identifiers in accordance with the <a href="https://www.datadoghq.com/legal/privacy/" target="_blank">Datadog Privacy Policy</a> and Datadog's <a href="https://www.datadoghq.com/legal/eula/" target="_blank">EULA</a>. This data is used to help improve the server's performance and features, including transitions to and from the server and the applicable Datadog login page for accessing the Services, and context (for example, user prompts) leading to the use of MCP tools. The data is stored for 120 days.
 
 ## Overview
@@ -445,6 +445,15 @@ Aggregates Datadog Test Optimization events to quantify reliability and performa
 - Count the number of failed tests over the last week, grouped by branch.
 - Show me the 95th-percentile duration for each test suite to identify the slowest ones.
 - Count all passing and failing tests, grouped by code owners.
+
+### `search_datadog_test_events`
+*Toolset: **software-delivery***\
+Searches [Test Optimization][24] test events with filters and returns details on them.
+
+- Show me failed tests on branch `main` from the last 24 hours.
+- Get test executions for commit `abc123` to see what passed and failed.
+- Show me all flaky test runs for the checkout service.
+- Find tests owned by `@team-name` that are failing.
 
 ### `search_datadog_error_tracking_issues`
 *Toolset: **error-tracking***\

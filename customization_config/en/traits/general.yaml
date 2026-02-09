@@ -52,3 +52,7 @@ traits:
   type: text
   label: Product
   internal_notes: The product that the customer is trying to use to instrument their application with, such as RUM, Error Tracking, etc.
+- id: api_type
+  label: "API"
+  type: text
+  internal_notes: The instrumentation API type, such as OpenTelemetry API or Datadog native API.

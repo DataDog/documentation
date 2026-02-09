@@ -283,6 +283,7 @@ unsupported_sites:
   code_coverage: [gov]
   code_security: [gov]
   configuration_at_runtime: [gov]
+  containers_kubernetes_appsec: [gov]
   continuous_delivery: [gov]
   continuous_integration: [gov]
   correlation: [gov] #Event management correlation
