@@ -76726,9 +76726,6 @@ paths:
       x-permission:
         operator: OPEN
         permissions: []
-      x-unstable: '**Note: Data Access is in preview. If you have any feedback,
-
-        contact [Datadog support](https://docs.datadoghq.com/help/).**'
     put:
       description: Edits the dataset associated with the ID.
       operationId: UpdateDataset

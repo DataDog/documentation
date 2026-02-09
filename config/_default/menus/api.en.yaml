@@ -7906,8 +7906,7 @@ menu:
           - v2
         operationids:
           - GetDataset
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Delete a dataset
       url: '#delete-a-dataset'
