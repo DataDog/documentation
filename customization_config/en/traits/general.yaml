@@ -46,3 +46,7 @@ traits:
 - id: sdk_profiling
   type: text
   label: SDK Profiling
+- id: api_type
+  label: "API"
+  type: text
+  internal_notes: The instrumentation API type, such as OpenTelemetry API or Datadog native API.

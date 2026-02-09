@@ -123,17 +123,20 @@ The collection interval for the metric in seconds.
 
 #### Metric description
 
-The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
+The metric description helps you understand what a metric represents, why it exists, and how it is typically used. Use this field to view and update descriptions for your [custom metrics][4]. Descriptions are pre-populated for metrics coming from supported [integrations][9].
 
-## Metric Context Explorer
+For custom metrics with connected source code, Datadog can automatically generate descriptions to provide additional context. These descriptions are fully editable, and human edits always take precedence. To enable auto-generated descriptions from source code, [sign up for Metric Context: Source Code][40].
 
-The Metric Context Explorer provides a centralized view of every Custom Metric and its underlying context. 
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Context Explorer is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+## Metric Context: Source Code
 
-Use the Metric Context Explorer to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
+The Metric Context: Source Code section in the metric side panel provides a centralized view of every custom metric and its underlying context.
 
-{{< img src="metrics/summary/metric_context_explorer_12112025.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
+{{< callout url="https://www.datadoghq.com/product-preview/metrics-source-code-attribution/" >}} Metric Context: Source Code is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+
+Use the Metric Context: Source Code section in the metric side panel to identify a metric's source code, understand how it is generated, and determine ownership. It provides visibility into context and ownership, helping you troubleshoot and optimize faster by linking directly to the metric's source file, commit history, and blame data.
+
+{{< img src="metrics/summary/metric_context_source_code_02052026.png" alt="Source Code Example in Metrics sidepanel" style="width:80%;">}}
 
 To ensure full coverage of your metric's source code, ensure that you've installed Datadog's [GitHub][36], [Gitlab][37], or [Azure DevOps][38] integration and that all your [repositories][39] are connected.
 
@@ -268,3 +271,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [37]: https://app.datadoghq.com/integrations/gitlab-source-code
 [38]: https://app.datadoghq.com/integrations/azure-devops-source-code?subPath=configuration
 [39]: https://app.datadoghq.com/source-code/repositories
+[40]: https://www.datadoghq.com/product-preview/metrics-source-code-attribution/

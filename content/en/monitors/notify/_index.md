@@ -228,7 +228,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [10]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [11]: /service_management/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
-[13]: /incident_response/incident_management/incident_settings/property_fields
+[13]: /incident_response/incident_management/setup_and_configuration/property_fields
 [14]: /incident_response/incident_management/notification
 [15]: /monitors/notify/variables/?tab=is_renotify#examples
 [16]: /monitors/settings/#tag-policies
