@@ -28,7 +28,7 @@ When Sensitive Data Scanner detects a match, it automatically adds tags to the d
 
 ## Prerequisites
 
-Before creating monitors for sensitive data, ensure you have:
+Before creating monitors that alert on sensitive data, ensure you have:
 
 - Sensitive Data Scanner configured with scanning groups and scanning rules. See [Set up Sensitive Data Scanner][1] for more information.
 - The appropriate monitor creation permissions in your Datadog account.
