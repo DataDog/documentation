@@ -24,7 +24,7 @@ After setting up Sensitive Data Scanner to detect and redact sensitive informati
 - Track sensitive data volume trends over time
 - Identify services or teams that need additional security guidance
 
-When Sensitive Data Scanner detects a match, it automatically adds tags to the data that you can use to create targeted monitors. This guide shows you how to create monitors for sensitive data across logs, APM traces, and RUM events.
+When Sensitive Data Scanner detects a match, it automatically adds tags to the data that you can use to create targeted monitors. This guide shows you how to create monitors that alert on sensitive data detected across logs, APM traces, and RUM events.
 
 ## Prerequisites
 
