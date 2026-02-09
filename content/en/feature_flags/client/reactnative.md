@@ -1,6 +1,8 @@
 ---
 title: React Native Feature Flags
 description: Set up Datadog Feature Flags for React Native applications.
+aliases:
+  - /feature_flags/setup/reactnative/
 further_reading:
 - link: "/feature_flags/client/"
   tag: "Documentation"
