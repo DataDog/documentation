@@ -1,5 +1,5 @@
 ---
-title: Investigate Security Signals
+title: Signals
 disable_toc: false
 aliases:
   - /security/threats/security_signals
