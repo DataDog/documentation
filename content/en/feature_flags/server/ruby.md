@@ -36,50 +36,7 @@ Feature Flagging is provided by Application Performance Monitoring (APM). To int
 gem install ddtrace openfeature-sdk
 ```
 
-### Enable the feature flagging provider
-
-You can enable the feature flagging provider using either an environment variable or code-based configuration.
-
-{{< tabs >}}
-{{% tab "Environment Variables" %}}
-Set the following environment variable before starting your application:
-
-{{< code-block lang="bash" >}}
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-Then configure Datadog with Remote Configuration enabled:
-
-{{< code-block lang="ruby" >}}
-require 'datadog'
-require 'open_feature/sdk'
-require 'datadog/open_feature/provider'
-
-INITIALIZATION_TIMEOUT = 30
-
-# Configure Datadog with Remote Configuration
-Datadog.configure do |config|
-  config.remote.enabled = true
-  config.remote.boot_timeout_seconds = INITIALIZATION_TIMEOUT
-end
-
-# Configure OpenFeature SDK with Datadog provider and wait for initialization
-OpenFeature::SDK.configure do |config|
-  config.set_provider_and_wait(
-    Datadog::OpenFeature::Provider.new,
-    timeout: INITIALIZATION_TIMEOUT
-  )
-end
-
-# Create OpenFeature client
-client = OpenFeature::SDK.build_client
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Code Configuration" %}}
-Enable feature flagging directly in your Datadog configuration:
-
-{{< code-block lang="ruby" >}}
+```ruby
 require 'datadog'
 require 'open_feature/sdk'
 require 'datadog/open_feature/provider'
@@ -103,9 +60,7 @@ end
 
 # Create OpenFeature client
 client = OpenFeature::SDK.build_client
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
+```
 
 Using `set_provider_and_wait` blocks until the provider is fully initialized or the timeout is reached. This ensures flags are ready before your application starts handling requests. If you prefer non-blocking initialization, use `set_provider` instead—the client returns default values until Remote Configuration loads in the background.
 

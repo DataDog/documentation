@@ -46,8 +46,8 @@ pip install ddtrace openfeature-sdk
 Or add them to your `requirements.txt`:
 
 {{< code-block lang="text" filename="requirements.txt" >}}
-ddtrace>=4.0.2
-openfeature-sdk>=0.7.0
+ddtrace>=3.19.0
+openfeature-sdk>=0.5.0
 {{< /code-block >}}
 
 ## Initialize the SDK

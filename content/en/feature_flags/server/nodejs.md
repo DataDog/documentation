@@ -33,34 +33,7 @@ Feature Flagging is provided by Application Performance Monitoring (APM). To int
 npm install dd-trace @openfeature/server-sdk
 ```
 
-### Enable the feature flagging provider
-
-You can enable the feature flagging provider using either an environment variable or code-based configuration.
-
-{{< tabs >}}
-{{% tab "Environment Variables" %}}
-Set the following environment variable before starting your application:
-
-{{< code-block lang="bash" >}}
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-Then initialize the tracer and set the OpenFeature provider:
-
-{{< code-block lang="javascript" >}}
-import { OpenFeature } from '@openfeature/server-sdk'
-import tracer from 'dd-trace';
-
-tracer.init();
-
-OpenFeature.setProvider(tracer.openfeature);
-{{< /code-block >}}
-{{% /tab %}}
-
-{{% tab "Code Configuration" %}}
-Enable feature flagging directly in the tracer configuration:
-
-{{< code-block lang="javascript" >}}
+```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
 import tracer from 'dd-trace';
 
@@ -73,9 +46,7 @@ tracer.init({
 });
 
 OpenFeature.setProvider(tracer.openfeature);
-{{< /code-block >}}
-{{% /tab %}}
-{{< /tabs >}}
+```
 
 ### Accepting default values before initialization
 

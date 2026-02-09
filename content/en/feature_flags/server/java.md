@@ -26,7 +26,7 @@ The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
 - **Datadog Java APM Tracer**: Version **1.57.0** or later
 - **OpenFeature SDK**: Version **1.18.2** or later
-- **Datadog Agent**: Version **7.x or later** with Remote Configuration enabled
+- **Datadog Agent**: Version **7.x or later** with [Remote Configuration][1] enabled
 - **Datadog API Key**: Required for Remote Configuration
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
@@ -570,3 +570,5 @@ Add `-Ddd.experimental.flagging.provider.enabled=true` to your Java command or s
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /remote_configuration/
