@@ -9,8 +9,8 @@ The following table summarizes the Cloud Security features available relative to
 | Deployment type     | Agent Required (7.46+) | Misconfigurations | Vulnerabilities              | Identity Risks | Agentless Scanning |
 |---------------------|------------------------|-------------------|------------------------------|----------------|--------------------|
 | AWS Account         |                        | {{< X >}}         | {{< X >}}                    | {{< X >}}      | {{< X >}}          |
-| Azure Account       |                        | {{< X >}}         | Agentless Scanning (Preview) | {{< X >}}      |                    |
-| GCP Account         |                        | {{< X >}}         |                              |                |                    |
+| Azure Subscription  |                        | {{< X >}}         | {{< X >}}                    | {{< X >}}      | {{< X >}}          |
+| GCP Project         |                        | {{< X >}}         | {{< X >}}                    | {{< X >}}      | {{< X >}}          |
 | Terraform           |                        |                   |                              |                | {{< X >}}          |
 | Docker              | {{< X >}}              | {{< X >}}         |                              |                |                    |
 | Kubernetes          | {{< X >}}              | {{< X >}}         | {{< X >}}                    |                |                    |
@@ -22,16 +22,15 @@ The following table summarizes the Cloud Security features available relative to
 The following table summarizes the scope of coverage available relative to each Cloud Security feature.
 | Resources monitored             | Misconfigurations | Vulnerabilities | Identity Risks | Agentless scanning |
 |---------------------------------|-------------------|-----------------|----------------|--------------------|
-| Resources in AWS Account        | {{< X >}}         | {{< X >}}       |                | {{< X >}}          |
-| Resources in Azure Subscription | {{< X >}}         |                 |                |                    |
-| Resources in GCP Project        | {{< X >}}         |                 |                |                    |
+| AWS Resources/IAM               | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| Azure Resources/IAM             | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| GCP Resources/IAM              | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
 | Kubernetes Cluster              | {{< X >}}         |                 |                |                    |
 | Docker Host                     | {{< X >}}         |                 |                |                    |
 | Linux Host                      | {{< X >}}         | {{< X >}}       |                | {{< X >}}          |
-| Windows Host                    |                   | {{< X >}}       |                |                    |
-| Docker Container                |                   |                 |                |                    |
+| Windows Host                    |                   | {{< X >}}       |                | {{< X >}}          |
+| Docker Container                |                   |                 |                | {{< X >}}          |
 | Container Image                 |                   | {{< X >}}       |                | {{< X >}}          |
-| IAM in AWS Account              |                   |                 | {{< X >}}      |                    |
 
 **Note**: Cloud Security Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 
