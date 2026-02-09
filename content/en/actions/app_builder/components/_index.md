@@ -831,6 +831,46 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 {{% /collapse-content %}}
 
 
+{{% collapse-content title="Side panel" level="h3" %}}
+Side panel components have the following properties.
+
+### General 
+
+Title
+: The title for the side panel.<br>
+**Value**: string
+
+### Appearance
+
+Width
+: Determines the width of the side panel.<br>
+**Value**: integer
+
+Hide Close Button
+: Determines whether side panel displays an X to close the panel.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Values**: toggle open, close, open
+
+Reaction
+: **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
+
+State Functions
+: fetch, setIsOpen<br>
+**Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays properties and values in JSON format.
+
+{{% /collapse-content %}}
+
+
 {{% collapse-content title="Tab" level="h3" %}}
 
 Tab components have the following properties.
