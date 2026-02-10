@@ -1,11 +1,10 @@
 ---
 categories:
-  - log collection
-  - Sécurité
-description: Ingérer et traiter vos logs Alcide
+- log collection
+- Security
+description: Importer et traiter vos logs Alcide
 doc_link: https://docs.datadoghq.com/integrations/alcide/
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md"]
 has_logo: true
 integration_title: Alcide
 is_public: true
@@ -14,43 +13,44 @@ name: alcide
 public_title: Intégration Datadog/Alcide
 short_description: Importer et traiter vos logs Alcide
 version: '1.0'
-integration_id: alcide
+integration_id: "alcide"
 ---
+
 ## Présentation
 
-Alcide fournit des fonctionnalités d'audit de Kubernetes et de surveillance des anomalies. Grâce à cette intégration, Datadog peut ingérer et traiter les logs Alcide.
+Alcide fournit des services de surveillance des audits et des anomalies Kubernetes. Cette intégration permet à Datadog d'ingérer et de traiter les journaux d'Alcide.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
-Datadog active automatiquement un pipeline de traitement de logs lorsque des logs Alcide sont détectés. Vous n'avez donc rien à installer.
+Datadog active automatiquement un pipeline de traitement des journaux lorsque des journaux Alcide sont détectés. Aucune étape d'installation n'est requise.
 
-### Configuration
+### Créez un fichier \`conf.yaml\` dans le dossier \`logstash.d/\` précédemment créé.
 
 Dans Alcide, sélectionnez l'onglet _Integrations_ et accédez à la section _Detections Integrations Configuration_, qui vous permet de configurer des intégrations pour les logs comportant des informations sur les menaces.
 
-1. Sélectionnez la cible **HTTP API**.
+1. Sélectionnez la cible \*\*HTTP API\*\*.
 
-2. Dans le champ URL, saisissez `https://http-intake.logs.<SITE_DATADOG>/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=alcide`. Remplacez le paramètre fictif `<SITE_DATADOG>` par `datadoghq.com` pour le site américain ou par `datadoghq.eu` pour le site européen. Remplacez le paramètre fictif `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
+2. Dans la boîte URL, entrez `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Remplacez la valeur de remplacement `<DATADOG_SITE>` par `datadoghq.com` pour le site américain, ou par `datadoghq.eu` pour le site européen. Remplacez la valeur de remplacement `<DATADOG_API_KEY>` par votre [clé API Datadog][1].
 
-3. Pour _Entities Types_, sélectionnez les types pour lesquels vous souhaitez transmettre des informations sur des menaces. Nous vous recommandons de sélectionner tous les types.
+3. Sous _Types d'entités_, sélectionnez les types pour lesquels vous souhaitez transmettre des renseignements sur les menaces. Datadog recommande de sélectionner tous ces types.
 
-4. Pour _Detection Categories_, sélectionnez les catégories à transmettre. Nous vous recommandons de sélectionner _incidents_ et _anomalies_.
+4. Sous _Catégories de détection_, sélectionnez les catégories que vous souhaitez transmettre. Datadog recommande de sélectionner à la fois _incidents_ et _anomalies_.
 
-5. Pour _Detection Confidence_, sélectionnez les niveaux de confiance de votre choix. Nous vous recommandons de sélectionner au minimum les niveaux _high_ et _medium_.
+5. Sous _Confiance de Détection_, sélectionnez vos niveaux de confiance souhaités. Datadog recommande de sélectionner au moins _élevé_ et _moyen_.
 
 6. Vous pouvez également créer des filtres d'inclusion et d'exclusion pour les entités, à l'aide des cases _Entities Matching_ et _Entities Not Matching_.
 
-Accédez ensuite à la section _Selected Audit Entries Integration Configuration_, située sous la section précédente. Vous pourrez ainsi configurer des intégrations pour les logs d'audit.
+Ensuite, allez à la section _Configuration d'Intégration des Entrées d'Audit Sélectionnées_, située sous la section précédente. Cette section est utilisée pour configurer les intégrations pour les journaux d'audit.
 
-1. Sélectionnez la cible **HTTP API**.
+1. Sélectionnez la cible \*\*HTTP API\*\*.
 
-2. Dans le champ URL, saisissez `https://http-intake.logs.<SITE_DATADOG>/api/v2/logs?dd-api-key=<CLÉ_API_DATADOG>&ddsource=alcide`. Remplacez le paramètre fictif `<SITE_DATADOG>` par `datadoghq.com` pour le site américain ou par `datadoghq.eu` pour le site européen. Remplacez le paramètre fictif `<CLÉ_API_DATADOG>` par votre [clé d'API Datadog][1].
+2. Dans la boîte URL, entrez `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Remplacez la valeur de remplacement `<DATADOG_SITE>` par `datadoghq.com` pour le site américain, ou par `datadoghq.eu` pour le site européen. Remplacez la valeur de remplacement `<DATADOG_API_KEY>` par votre [clé API Datadog][1].
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][2].
+Besoin d'aide ? Contactez l'\[assistance Datadog]\[38].
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /fr/help/
+[2]: /help/
