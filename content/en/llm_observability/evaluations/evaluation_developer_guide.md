@@ -34,8 +34,16 @@ There are two contexts for running evaluators:
 | | Experiments | Production |
 |---|---|---|
 | **Purpose** | Test your LLM application against a dataset before deploying. | Monitor the quality of live LLM responses. |
-| **How evaluators run** | Automatically — the SDK calls your evaluator on each dataset record. | Manually — you call the evaluator in your application code and submit the result. |
-| **Available through** | SDK | SDK or HTTP API |
+| **How evaluators run** | Automatically — the SDK calls your evaluator on each dataset record. | Manually with `submit_evaluation()`, or automatically with [custom LLM-as-a-judge evaluations][4]. |
+| **Available through** | SDK | SDK, HTTP API, or Datadog UI |
+
+For production, there are two approaches:
+- **Manual evaluations** (this guide): You run evaluators in your application code and submit results with `LLMObs.submit_evaluation()` or the HTTP API. This gives you full control over evaluation logic and timing.
+- **[Custom LLM-as-a-judge evaluations][4]**: You configure evaluations in the Datadog UI using natural language prompts. Datadog automatically runs them on production traces in real time, with no code changes required.
+
+This guide focuses on manual evaluations. For managed LLM-as-a-judge evaluations, see [Custom LLM-as-a-Judge Evaluations][4].
+
+[4]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations
 
 ### Evaluation components
 
@@ -193,7 +201,9 @@ experiment.run()
 
 ## Using evaluators in production
 
-In production, you construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
+<div class="alert alert-info">To evaluate production traces without code changes, see <a href="/llm_observability/evaluations/custom_llm_as_a_judge_evaluations">Custom LLM-as-a-Judge Evaluations</a> instead.</div>
+
+To submit evaluations from your application code, construct the `EvaluatorContext` yourself, call the evaluator, and submit the result with `LLMObs.submit_evaluation()`. You can also submit evaluations through the HTTP API.
 
 For the full `submit_evaluation()` arguments and span-joining options, see the [external evaluations documentation][1]. For the HTTP API specification, see the [Evaluations API reference][2].
 
