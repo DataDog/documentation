@@ -286,7 +286,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch, setValue<br>
+: setValue<br>
 **Example**: See [events][9].
 
 For more information on events, see [Events][1].
