@@ -27,14 +27,36 @@ In addition to working with events manually, you can use Bits AI to set up event
    1. Click the **Build with AI** icon (**<i class="icon-bits-ai"></i>**).
    1. Enter a custom prompt for an event, or try the prompt `How can you help me with events?`.
 
+
+### Events and reactions
+
+In App Builder, events and reactions work together to determine component behavior. 
+
+Events are triggered both by components (such as a button click or a form submit) and actions (execution finished). Events differ depending on which component you use. For component-specific event details, see [Components][1].
+
+Reactions specify what happens when an event is triggered. Any component that can trigger an event has the following available reactions: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, and trigger action.
+
+#### Custom reactions
+
+Custom reactions allow for more advanced use cases or custom behavior beyond the built-in reactions. For example, you can execute actions conditionally based on other data in the app. The following example triggers different actions based on the current user's team:
+
+```javascript
+${() => {
+    console.log("Trigger actions by team")
+    const teams = global?.user?.teams ?? []
+    if (teams.some(t => t?.name === "team1")) {
+        makeRequest0?.fetch()
+    } else if (teams.some(t => t?.name === "team2")) {
+        makeRequest1?.fetch()
+    } else {
+        makeRequest2?.fetch()
+    }
+}}
+```
+
 ### State functions
 
-App Builder provides functions for some types of app state changes. These functions are available in custom event reactions for specific components and in post-query hooks.
-
-
-fetch
-: Executes the query that you run this function on. This function is available for all components that offer the custom event reaction type.<br>
-**Example**: `query0.fetch()` executes the query named `query0`.
+App Builder provides functions for some types of app state changes. These functions are available with the **Set Component State** reaction for specific components and in post-query hooks.
 
 setIsOpen
 : Sets the status of a modal to open or closed based on the boolean value that you provide.<br>
