@@ -17,6 +17,10 @@ further_reading:
 
 Use the Events Explorer to aggregate and view events coming into Datadog. Group or filter events by attribute and graphically represent them with event analytics. Use the query syntax to filter events using Boolean and wildcard operators.
 
+<div class="alert alert-info">
+The Events Explorer is not designed as a comprehensive audit tool. To track user activity, API requests, configuration changes, and resource modifications for auditing, compliance, or security use cases, use <a href="/account_management/audit_trail/">Audit Trail</a>.
+</div>
+
 {{< whatsnext desc="Features of the Events Explorer:" >}}
     {{< nextlink href="/events/explorer/searching" >}}Searching{{< /nextlink >}}
     {{< nextlink href="/events/explorer/navigate" >}}Navigate the Explorer{{< /nextlink >}}

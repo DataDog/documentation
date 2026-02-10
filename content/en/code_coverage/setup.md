@@ -8,14 +8,16 @@ further_reading:
   - link: "/code_coverage/configuration"
     tag: "Documentation"
     text: "Configure Code Coverage"
+  - link: "/code_coverage/flags"
+    tag: "Documentation"
+    text: "Organize coverage data with flags"
   - link: "/code_coverage/data_collected"
     tag: "Documentation"
     text: "Learn what data is collected for Code Coverage"
+  - link: "/code_coverage/monorepo_support"
+    tag: "Documentation"
+    text: "Learn how Code Coverage supports large monorepos"
 ---
-
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
 
 Setting up Code Coverage involves the following steps:
 
@@ -373,6 +375,15 @@ test:
     - datadog-ci coverage upload . # make sure to add the DD_API_KEY CI/CD variable
 </code>
 </pre>
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
+<code class="language-yaml" data-lang="yaml">
+- script: datadog-ci coverage upload --format=clover coverage/clover.xml
+  displayName: 'Upload coverage to Datadog'
+  env:
+    DD_API_KEY: $(DD_API_KEY)
+    DD_SITE: 'datadoghq.com'
+</code>
 {{% /tab %}}
 {{< /tabs >}}
 
