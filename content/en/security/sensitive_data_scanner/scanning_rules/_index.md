@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/phone-number-physical-address-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
-PII detection for human names, phone numbers, and physical addresses in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
+Phone number and physical address PII detection in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
 {{< site-region region="gov" >}}
