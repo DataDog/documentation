@@ -9,11 +9,11 @@ further_reading:
   text: Visually identify and prioritize security risks using Cloudcraft
 ---
 
-## Telemetry Data
+{{< callout url="https://www.datadoghq.com/product-preview/phone-number-physical-address-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
+PII detection for human names, phone numbers, and physical addresses in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
 
-{{< site-region region="eu,gov" >}}
-<div class="alert alert-info">Human Name Scanner detects personal names in logs using machine learning. The feature is in Preview for the {{< region-param key="dd_site_name" >}} site. Fill out the <a href="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/">form</a> to request access.</a></div>
-{{< /site-region >}}
+## Telemetry Data
 
 Sensitive Data Scanner for Telemetry Data uses scanning rules to determine what sensitive information to match within the data. This data can be from your application logs, APM spans, RUM events, and events from Event Management. You can use Datadog's [Scanning Rule Library][1] to create rules or you can create [custom rules][2].
 
