@@ -41,13 +41,24 @@ Choose the query language you want to use.
 {{% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}}
 You can use SQL syntax to write detection rules for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][1].
 
-<div class="alert alert-info">SQL queries are in Preview.</div>
+In Datadog, SQL queries are compatible with data stored in [datasets][2]. You can create datasets to format data already stored in tables for the following data types:
+- Logs
+- Audit Trail
+- Events
+- Security signals
+- Spans
+- RUM
+- Product Analytics
+- Cloud Network
+- NetFlow
+- Reference tables
+- Infrastructure tables
 
-You can use SQL to query either datasets or tables. You can create datasets that specify the kind of data you want to query (security signals, logs, reference tables, etc.), then create queries that target data in those datasets.
+<!-- Markdown workaround - need to put something here so the image doesn't appear as part of the last list item -->
 
-{{< img src="security/security_monitoring/detection_rules/sql-query-example.png" alt="Example of a SQL dataset and query" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/sql-query-example.png" alt="Example of a SQL dataset and query" style="width:100%" >}}
 
-1. Under **Define Datasets**, choose one or more [datasets][2] to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a database from scratch.
+1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a database from scratch.
    - If you chose an existing dataset and made changes, click **Update** to make those changes to that dataset, or **Clone With Changes** to create a dataset with your changes applied.
    - If you created a dataset, click **Create** so you can use it in your rule.
 2. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][1]. Click **Preview** to see a list of matching results.
