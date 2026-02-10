@@ -8594,7 +8594,7 @@ menu:
       identifier: product_analytics
       parent: digital_experience_heading
       weight: 50000
-    - name: Vizualizing with Charts
+    - name: Charts
       url: product_analytics/charts
       parent: product_analytics
       identifier: pa_charts
