@@ -31056,6 +31056,11 @@ components:
     InputSchemaParameters:
       description: The definition of `InputSchemaParameters` object.
       properties:
+        allowExtraValues:
+          description: The `InputSchemaParameters` `allowExtraValues`.
+          type: boolean
+        allowedValues:
+          description: The `InputSchemaParameters` `allowedValues`.
         defaultValue:
           description: The `InputSchemaParameters` `defaultValue`.
         description:
