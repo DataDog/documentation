@@ -51,7 +51,9 @@
             playsinline
             autoplay
             loop
-            controls >
+            controls 
+            onerror="this.onerror=null;"
+            >
         <source src="{{ $img }}"
                 type="video/mp4"
                 media="(min-width: 0px)" >
@@ -68,26 +70,25 @@
   {{- if $wide -}}
     {{ $e := (print $img_resource "?auto=format" safeURL) }}
     {{- if eq $image_ext "gif" -}}
-      <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
+      <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} onerror="this.onerror=null;"/>
     {{- else -}}
       <picture {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }}>
-        <img class="img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} />
+        <img class="img-fluid" srcset="{{ $e }}" {{ if .Get "style" }} style="{{ with .Get "style" }}{{ . | safeCSS }}{{end}}" {{ end }} {{ if .Get "alt" }} alt="{{ with .Get "alt"}}{{ . }}{{ end }}" {{ end }} onerror="this.onerror=null;"/>
       </picture>
     {{- end -}}
   {{- else -}}
-      {{ $e := (print $img_resource "?auto=format" | safeURL) }}
+      {{ $e := (print $img_resource "?auto=format" | safeURL ) }}
       {{- if eq $image_ext "gif" -}}
-          <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
+          <img class="img-fluid" src="{{ (print $img_resource | safeURL) }}" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{ . | safeCSS }}{{- end -}}" {{ end }} {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} onerror="this.onerror=null;"/>
       {{- else -}}
-        <picture class="" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }} >
-          <img 
-              class="img-fluid" 
-              srcset="{{ $e }}" 
-              {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
-              {{- with $img_width -}} width="{{ . }}" {{- end -}}
-              {{- with $img_height -}} height="{{ . }}" {{- end -}}
-              {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} />
-        </picture>
+          <picture class="" {{ if .Get "style" }} style="{{- with .Get "style" -}}{{- . | safeCSS -}}{{- end -}}" {{ end }} >
+            <img 
+                class="img-fluid"
+                {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
+                {{- with $img_width -}} width="{{ . }}" {{- end -}}
+                {{- with $img_height -}} height="{{ . }}" {{- end -}}
+                {{ if .Get "alt" }} alt="{{- with .Get "alt" -}}{{.}}{{- end -}}" {{ end }} onerror="this.onerror=null;"/>
+          </picture>
       {{- end -}}
   {{- end -}}
   {{- if (and (eq $isPopup "true") (ne $image_ext "gif")) -}}
@@ -108,5 +109,7 @@
     srcset="{{ $e }}" 
     {{ if .Get "style" }}style="{{ with .Get "style" }}{{ . | safeCSS }}{{ end }}" {{ end }} 
     {{- with $img_width -}} width="{{ . }}" {{- end -}}
-    {{- with $img_height -}} height="{{ . }}" {{- end -}} />
+    {{- with $img_height -}} height="{{ . }}" {{- end -}} 
+    onerror="this.onerror=null;"
+    />
   {{- end -}}
