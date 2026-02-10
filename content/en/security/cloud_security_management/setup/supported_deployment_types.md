@@ -15,9 +15,9 @@ The following table summarizes the Cloud Security features available relative to
 | Docker              | {{< X >}}              | {{< X >}}         |                              |                |                    |
 | Kubernetes          | {{< X >}}              | {{< X >}}         | {{< X >}}                    |                |                    |
 | Linux               | {{< X >}}              | {{< X >}}         | {{< X >}}                    |                |                    |
-| Amazon ECS/EKS      | {{< X >}}              | {{< X >}}         | {{< X >}}                    |                |                    |
+| Amazon ECS/EKS      | {{< X >}}              | {{< X >}}         | {{< X >}}                    |                | {{< X >}}          |
 | Windows             | {{< X >}}              |                   | {{< X >}}                    |                |                    |
-| AWS Fargate ECS/EKS | {{< X >}}              |                   |                              |                |                    |
+| AWS Fargate ECS/EKS | {{< X >}}              |                   |                              |                | ECS Fargate only |
 
 The following table summarizes the scope of coverage available relative to each Cloud Security feature.
 | Resources monitored             | Misconfigurations | Vulnerabilities | Identity Risks | Agentless scanning |
