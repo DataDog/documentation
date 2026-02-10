@@ -1070,21 +1070,26 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
+    - name: Error Tracking
+      url: developers/ide_plugins/idea/error_tracking/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_error_tracking
+      weight: 7011
     - name: Logs
       url: developers/ide_plugins/idea/logs/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_logs
-      weight: 7011
+      weight: 7012
     - name: Live Debugger
       url: developers/ide_plugins/idea/live_debugger/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_debugger
-      weight: 7012
+      weight: 7013
     - name: Code Security
       url: developers/ide_plugins/idea/code_security/
       parent: ide_plugins_idea
       identifier: ide_plugins_idea_code_security
-      weight: 7013
+      weight: 7014
     - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
@@ -2469,131 +2474,96 @@ menu:
       parent: incident_response_heading
       identifier: incidents
       weight: 20000
-    - name: Declare an Incident
-      url: incident_response/incident_management/declare
-      parent: incidents
-      identifier: incident_declare
-      weight: 1
-    - name: Describe an Incident
-      url: incident_response/incident_management/describe
-      parent: incidents
-      identifier: incident_describe
-      weight: 2
-    - name: Response Team
-      url: incident_response/incident_management/response_team
-      parent: incidents
-      identifier: response_team
-      weight: 3
-    - name: Notification
-      url: incident_response/incident_management/notification
-      parent: incidents
-      identifier: incident_notification
-      weight: 4
-    - name: Investigate an Incident
+    - name: Incident Investigation
       url: incident_response/incident_management/investigate
       parent: incidents
       identifier: incident_investigate
-      weight: 5
+      weight: 1
+    - name: Declare an Incident
+      url: incident_response/incident_management/investigate/declare
+      parent: incident_investigate
+      identifier: incident_declare
+      weight: 101
+    - name: Describe an Incident
+      url: incident_response/incident_management/investigate/describe
+      parent: incident_investigate
+      identifier: incident_describe
+      weight: 102
+    - name: Response Team
+      url: incident_response/incident_management/investigate/response_team
+      parent: incident_investigate
+      identifier: response_team
+      weight: 103
+    - name: Notification
+      url: incident_response/incident_management/investigate/notification
+      parent: incident_investigate
+      identifier: incident_notification
+      weight: 104
     - name: Timeline
       url: incident_response/incident_management/investigate/timeline
       parent: incident_investigate
       identifier: incident_investigate_timeline
-      weight: 501
-    - name: Follow-ups
-      url: incident_response/incident_management/follow-ups
-      parent: incident_investigate
-      identifier: incident_investigate_follow_ups
-      weight: 502
+      weight: 105
     - name: Incident AI
-      url: incident_response/incident_management/incident_ai
+      url: incident_response/incident_management/investigate/incident_ai
       identifier: incident_ai
-      parent: incidents
-      weight: 6
-    - name: Incident Settings
-      url: incident_response/incident_management/incident_settings
+      parent: incident_investigate
+      weight: 106
+    - name: Setup and Configuration
+      url: incident_response/incident_management/setup_and_configuration
       parent: incidents
       identifier: incidents_settings
-      weight: 7
+      weight: 2
     - name: Information
-      url: incident_response/incident_management/incident_settings/information
+      url: incident_response/incident_management/setup_and_configuration/information
       parent: incidents_settings
       identifier: incidents_settings_information
-      weight: 701
+      weight: 201
     - name: Property Fields
-      url: incident_response/incident_management/incident_settings/property_fields
+      url: incident_response/incident_management/setup_and_configuration/property_fields
       parent: incidents_settings
       identifier: incidents_settings_property_fields
-      weight: 702
+      weight: 202
     - name: Responder Types
-      url: incident_response/incident_management/incident_settings/responder_types
+      url: incident_response/incident_management/setup_and_configuration/responder_types
       parent: incidents_settings
       identifier: incidents_settings_responder_types
-      weight: 703
-    - name: Integrations
-      url: incident_response/incident_management/incident_settings/integrations
-      parent: incidents_settings
-      identifier: incidents_settings_integrations
-      weight: 704
+      weight: 203
     - name: Automations
-      url: incident_response/incident_management/incident_settings/automations
+      url: incident_response/incident_management/setup_and_configuration/automations
       parent: incidents_settings
       identifier: incidents_settings_automations
-      weight: 705
+      weight: 204
     - name: Notification Rules
-      url: incident_response/incident_management/incident_settings/notification_rules
+      url: incident_response/incident_management/setup_and_configuration/notification_rules
       parent: incidents_settings
       identifier: incidents_settings_notification_rules
-      weight: 706
+      weight: 206
     - name: Templates
-      url: incident_response/incident_management/incident_settings/templates
+      url: incident_response/incident_management/setup_and_configuration/templates
       parent: incidents_settings
       identifier: incidents_settings_templates
-      weight: 707
-    - name: Incident Analytics
-      url: incident_response/incident_management/analytics
-      parent: incidents
-      identifier: analytics
-      weight: 8
+      weight: 207
     - name: Integrations
-      url: incident_response/incident_management/integrations
-      parent: incidents
+      url: incident_response/incident_management/setup_and_configuration/integrations
+      parent: incidents_settings
       identifier: incidents_integrations
-      weight: 9
-    - name: Slack
-      url: incident_response/incident_management/integrations/slack
-      parent: incidents_integrations
-      identifier: incidents_integrations_slack
-      weight: 901
-    - name: Microsoft Teams
-      url: incident_response/incident_management/integrations/microsoft_teams
-      parent: incidents_integrations
-      identifier: incidents_microsoft_teams
-      weight: 902
-    - name: Google Chat
-      url: incident_response/incident_management/integrations/google_chat
-      parent: incidents_integrations
-      identifier: incidents_integrations_google_chat
-      weight: 903
-    - name: Jira
-      url: incident_response/incident_management/integrations/jira
-      parent: incidents_integrations
-      identifier: incidents_integrations_jira
-      weight: 904
-    - name: ServiceNow
-      url: incident_response/incident_management/integrations/servicenow
-      parent: incidents_integrations
-      identifier: incidents_integrations_servicenow
-      weight: 905
-    - name: Status Pages
-      url: incident_response/incident_management/integrations/status_pages
-      parent: incidents_integrations
-      identifier: incidents_integrations_status_pages
-      weight: 906
-    - name: Atlassian Statuspage
-      url: incident_response/incident_management/integrations/statuspage
-      parent: incidents_integrations
-      identifier: incidents_integrations_statuspage
-      weight: 907
+      weight: 208
+    - name: Post Incident
+      url: incident_response/incident_management/post_incident
+      parent: incidents
+      identifier: post_incident
+      weight: 6
+    - name: Follow-ups
+      url: incident_response/incident_management/post_incident/follow-ups
+      parent: post_incident
+      identifier: post_incident_follow_ups
+      weight: 601
+    - name: Analytics and Reporting
+      url: incident_response/incident_management/analytics_and_reporting
+      parent: incidents
+      identifier: analytics_and_reporting
+      weight: 8
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
@@ -3929,6 +3899,11 @@ menu:
       parent: cloud_cost_reporting
       identifier: cloud_cost_explorer
       weight: 502
+    - name: Dashboard
+      url: cloud_cost_management/reporting/dashboards
+      parent: cloud_cost_reporting
+      identifier: cloud_cost_dashboards
+      weight: 503
     - name: Recommendations
       url: cloud_cost_management/recommendations
       parent: cloud_cost
@@ -4085,71 +4060,26 @@ menu:
       parent: tracing_trace_collection
       identifier: custom_instrumentation
       weight: 203
-    - name: Java
-      url: tracing/trace_collection/custom_instrumentation/java/otel
+    - name: Server-Side Languages
+      url: tracing/trace_collection/custom_instrumentation/server-side/
       parent: custom_instrumentation
-      identifier: custom_instrumentation_java
+      identifier: custom_instrumentation_server_side
       weight: 2031
-    - name: Python
-      url: tracing/trace_collection/custom_instrumentation/python/otel
+    - name: Client-Side Languages
+      url: tracing/trace_collection/custom_instrumentation/client-side/
       parent: custom_instrumentation
-      identifier: custom_instrumentation_python
+      identifier: custom_instrumentation_client_side
       weight: 2032
-    - name: Ruby
-      url: tracing/trace_collection/custom_instrumentation/ruby/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_ruby
-      weight: 2033
-    - name: Go
-      url: tracing/trace_collection/custom_instrumentation/go/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_go
-      weight: 2034
-    - name: Node.js
-      url: tracing/trace_collection/custom_instrumentation/nodejs/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_nodejs
-      weight: 2035
-    - name: PHP
-      url: tracing/trace_collection/custom_instrumentation/php/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_php
-      weight: 2036
-    - name: C++
-      url: tracing/trace_collection/custom_instrumentation/cpp/dd-api
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_cpp
-      weight: 2037
-    - name: .NET
-      url: tracing/trace_collection/custom_instrumentation/dotnet/otel
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_dotnet
-      weight: 2038
     - name: Android
-      url: tracing/trace_collection/custom_instrumentation/android/otel
-      parent: custom_instrumentation
+      url: tracing/trace_collection/custom_instrumentation/client-side/android/otel
+      parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_android
-      weight: 2039
+      weight: 20321
     - name: iOS
-      url: tracing/trace_collection/custom_instrumentation/ios/otel
-      parent: custom_instrumentation
+      url: tracing/trace_collection/custom_instrumentation/client-side/ios/otel
+      parent: custom_instrumentation_client_side
       identifier: custom_instrumentation_ios
-      weight: 2040
-    - name: Rust
-      url: tracing/trace_collection/custom_instrumentation/rust
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_rust
-      weight: 2041
-    - name: Swift
-      url: tracing/trace_collection/custom_instrumentation/swift
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_swift
-      weight: 2042
-    - name: Elixir
-      url: tracing/trace_collection/custom_instrumentation/elixir
-      parent: custom_instrumentation
-      identifier: custom_instrumentation_elixir
-      weight: 2043
+      weight: 20322
     - name: Dynamic Instrumentation
       url: tracing/trace_collection/dynamic_instrumentation/
       identifier: dyninst
@@ -5740,7 +5670,7 @@ menu:
       weight: 4
     - name: Feature Flags
       url: feature_flags/
-      pre: ci
+      pre: signpost
       parent: software_delivery_heading
       identifier: feature_flags
       weight: 80000
@@ -5804,6 +5734,11 @@ menu:
       parent: feature_flags_server
       identifier: feature_flags_server_ruby
       weight: 206
+    - name: Flag History
+      url: feature_flags/history
+      parent: feature_flags
+      identifier: feature_flags_history
+      weight: 6
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
@@ -8543,21 +8478,6 @@ menu:
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_profiling
       weight: 603
-    - name: Browser Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_browser
-      weight: 604
-    - name: Android Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_android
-      weight: 605
-    - name: iOS Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_ios
-      weight: 606
     - name: Correlate Synthetics with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
