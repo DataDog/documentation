@@ -5,7 +5,7 @@ description: Learn how to exclude unwanted resources like health checks from tra
 
 A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application. This documentation covers two main options: sampling and filtering.
 
-If you need assistance deciding which option is the most relevant for your use case, contact [Datadog support][1].
+If you need assistance deciding which option is the most relevant for your use case, contact [Datadog support][1]. If you can programmatically identify a set of traces and no option in this guide solves your requirement, consider adding a [custom span tag][2] to drop the traces. [Reach out to Support][1] to discuss your use case further.
 
 ## Sampling
 
@@ -53,8 +53,6 @@ Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops trac
 The filter tags option requires an exact string match. For regex-based filtering, see [Ignoring based on resources](#ignoring-based-on-resources).
 
 When you specify multiple tags, the filter uses **OR logic**—traces are dropped if the root span matches **any** of the tags. For example, `DD_APM_FILTER_TAGS_REJECT="http.status_code:200 outcome:success"` drops traces with either tag. To match multiple conditions simultaneously, use a custom tag combining both criteria.
-
-<div class="alert alert-warning">If no existing span tags meet your filtering needs, you can add a <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">custom span tag</a>. <a href="/help/">Contact Support</a> to discuss your use case.</div>
 
 ##### Configuration
 
