@@ -110,7 +110,7 @@ The table lists the applied sampling rates by resource of the service.
 
 **Note**: If the service is not making sampling decisions, the service's resources will be collapsed under the `Resources not making sampling decisions` row.
 
-**Note**: When the Effective Sampling Rate is set to 100% but the UI shows a value lower than 100% on short timeframes (for example, 1 hour or 4 hours), the difference is due to estimation of total traces and does not indicate missing traces or that the actual value differs from 100%.
+**Note**: On short timeframes (such as 1 hour or 4 hours), the Effective Sampling Rate may display below `100%` even when set to `100%`, because total traces are estimated for the calculation. This does not indicate missing traces or that the actual rate differs from 100%.
 
 #### Ingestion Reasons and sampling decision makers
 
