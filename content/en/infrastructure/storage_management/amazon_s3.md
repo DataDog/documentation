@@ -279,7 +279,7 @@ module "datadog_storage_management" {
 }
 ```
 
-After inventories are being generated (can take up to 24 hours), verify Storage Management is enabled on your buckets by navigating to **Storage Management** > [**Enable Buckets**][402] > **Use existing inventories** and confirming your destination bucket is listed and enabled.
+After Amazon S3 has generated inventories (which can take up to 24 hours), verify Storage Management is enabled on your buckets by navigating to **Storage Management** > [**Enable Buckets**][402] > **Use existing inventories** and confirming your destination bucket is listed and enabled.
 
 [401]: https://registry.terraform.io/modules/DataDog/storage-management-datadog/aws/latest
 [402]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
