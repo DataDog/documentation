@@ -21,6 +21,8 @@ Set up the Google SecOps destination and its environment variables when you [set
 
 To set up the Worker's Google SecOps destination:
 
+1. Enter the identifier for your Google SecOps endpoint URL. If you leave it blank, the [default](#set-secrets) is used.
+	- **Note**: Only enter the identifier for the endpoint URL. Do **not** enter the actual URL.
 1. Enter the customer ID for your Google SecOps instance.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
@@ -31,9 +33,24 @@ To set up the Worker's Google SecOps destination:
 
 **Note**: Logs sent to the Google SecOps destination must have ingestion labels. For example, if the logs are from a A10 load balancer, it must have the ingestion label `A10_LOAD_BALANCER`. See Google Cloud's [Support log types with a default parser][5] for a list of available log types and their respective ingestion labels.
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Google Chronicle endpoint URL identifier:
+	- The default identifier is `DESTINATION_GOOGLE_CHRONICLE_UNSTRUCTURED_ENDPOINT_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### How the destination works
 

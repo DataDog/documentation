@@ -1,6 +1,6 @@
 ---
 title: Feature Flag Tracking
-description: "Track feature flag usage and performance impact in RUM to ensure release safety and optimize user experience with controlled rollouts."
+description: "Track feature flag usage and performance impact in RUM to maintain release safety and optimize user experience with controlled rollouts."
 disable_toc: false
 further_reading:
 - link: "/real_user_monitoring/guide/setup-feature-flag-data-collection/"
@@ -11,10 +11,18 @@ further_reading:
   text: "Learn about the RUM Explorer"
 - link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
   tag: "Blog"
-  text: "Ensure release safety with feature flag tracking in Datadog RUM"
+  text: "Help ensure release safety with feature flag tracking in Datadog RUM"
+- link: "/feature_flags/"
+  tag: "Documentation"
+  text: "Create and manage feature flags in Datadog"
+
 ---
 
 ## Overview
+
+<div class="alert alert-info">
+This page explains how to enrich RUM data to track feature flag usage and status. If you want to create feature flags directly in Datadog, see the <a href="https://docs.datadoghq.com/feature_flags/">Datadog Feature Flags documentation</a>.
+</div>
 
 Feature flag data provides greater visibility into user experience and performance monitoring. It allows you to determine which users are being shown a specific feature and assess if any changes introduced are impacting user experience or negatively affecting performance. You can use this information to determine whether or not to roll back the feature.
 
@@ -22,7 +30,7 @@ By enriching your RUM data with feature flag data, you can:
 
 - Be confident that your feature successfully launches without unintentionally causing a bug or performance regression
 - Correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster
-- Streamline data collection and analysis and focus on troubleshooting
+- Simplify data collection and analysis and focus on troubleshooting
 
 ## Supported frameworks
 
@@ -30,7 +38,7 @@ Feature flag tracking is available in the RUM Browser, iOS, Android, Flutter, an
 
 You can start collecting feature flag data for [custom feature flag management solutions][2], or using one of Datadog's integration partners. 
 
-We support integrations with:
+Create and track feature flags directly in Datadog, or track feature flags from one of Datadog's integration partners or your own [custom feature flag management solution][2]:
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
@@ -48,7 +56,6 @@ To get started with feature flags, set up feature flag tracking for the browser 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/feature_flag_tracking/setup/
 [2]: /real_user_monitoring/setup/?tab=npm#custom-feature-flag-management

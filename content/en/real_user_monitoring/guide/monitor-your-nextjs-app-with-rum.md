@@ -101,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {`
           (function(h,o,u,n,d) {
             h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-            d=o.createElement(u);d.async=1;d.src=n
+            d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
             n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
           })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
           window.DD_RUM.onReady(function() {
@@ -138,6 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           id="dd-rum-sync"
           src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+          crossOrigin=""
           type="text/javascript"
           strategy="beforeInteractive"
         />
@@ -217,7 +218,7 @@ export default function App({ Component, pageProps }: AppProps) {
         {`
           (function(h,o,u,n,d) {
             h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-            d=o.createElement(u);d.async=1;d.src=n
+            d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
             n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
           })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
           window.DD_RUM.onReady(function() {
@@ -254,6 +255,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Script
         id="dd-rum-sync"
         src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+        crossOrigin=""
         type="text/javascript"
         strategy="beforeInteractive"
       />
