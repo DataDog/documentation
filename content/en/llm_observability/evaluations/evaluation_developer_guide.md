@@ -20,7 +20,7 @@ further_reading:
 This guide covers how to build custom evaluators with the LLM Observability SDK and use them in experiments and production. It walks through:
 
 - [Key concepts](#key-concepts): How evaluations work in experiments versus production
-- [Building evaluators](#building-evaluators): Class-based and function-based approaches
+- [Building evaluators](#building-evaluators): Class-based, built-in, and function-based approaches
 - [Using evaluators in experiments](#using-evaluators-in-experiments): Running evaluators against a dataset
 - [Using evaluators in production](#using-evaluators-in-production): Evaluating live spans
 - [Data model reference](#data-model-reference): Detailed field descriptions for all evaluation types
@@ -135,6 +135,121 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Access per-evaluator results through `context.evaluation_results`, which maps evaluator names to lists of results.
+
+### Built-in evaluators
+
+The SDK provides built-in evaluators for common evaluation patterns. These are class-based evaluators that you can use directly without writing custom logic.
+
+#### StringCheckEvaluator
+
+Performs string comparison operations between `output_data` and `expected_output`.
+
+| Operation | Description |
+|-----------|-------------|
+| `eq` | Exact match (default) |
+| `ne` | Not equals |
+| `contains` | `output_data` contains `expected_output` (case-sensitive) |
+| `icontains` | `output_data` contains `expected_output` (case-insensitive) |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import StringCheckEvaluator
+
+# Perform an exact match (default)
+evaluator = StringCheckEvaluator(operation="eq", case_sensitive=True)
+
+# Check whether output_data contains expected_output (case-insensitive)
+evaluator = StringCheckEvaluator(operation="icontains", strip_whitespace=True)
+
+# Extract field from dict output before comparison
+evaluator = StringCheckEvaluator(
+    operation="eq",
+    output_extractor=lambda x: x.get("message", "") if isinstance(x, dict) else str(x),
+)
+{{< /code-block >}}
+
+#### RegexMatchEvaluator
+
+Validates output against a regex pattern.
+
+| Match mode | Description |
+|------------|-------------|
+| `search` | Partial match anywhere in string (default) |
+| `match` | Match from start of string |
+| `fullmatch` | Match entire string |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import RegexMatchEvaluator
+import re
+
+# Validate email format
+evaluator = RegexMatchEvaluator(
+    pattern=r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+    match_mode="fullmatch"
+)
+
+# Validate output pattern (case-insensitive)
+evaluator = RegexMatchEvaluator(
+    pattern=r"success|completed",
+    flags=re.IGNORECASE
+)
+{{< /code-block >}}
+
+#### LengthEvaluator
+
+Validates output length constraints.
+
+| Count type | Description |
+|------------|-------------|
+| `characters` | Count characters (default) |
+| `words` | Count words |
+| `lines` | Count lines |
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import LengthEvaluator
+
+# Ensure response is 50-200 characters
+evaluator = LengthEvaluator(min_length=50, max_length=200, count_type="characters")
+
+# Validate word count
+evaluator = LengthEvaluator(min_length=10, max_length=100, count_type="words")
+{{< /code-block >}}
+
+#### JSONEvaluator
+
+Validates that output is valid JSON, and optionally checks for required keys.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import JSONEvaluator
+
+# Validate JSON syntax
+evaluator = JSONEvaluator()
+
+# Validate that required keys exist
+evaluator = JSONEvaluator(required_keys=["name", "status", "data"])
+{{< /code-block >}}
+
+#### SemanticSimilarityEvaluator
+
+Measures semantic similarity between `output_data` and `expected_output` using embeddings. Returns a similarity score between 0.0 and 1.0.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs._evaluators import SemanticSimilarityEvaluator
+from openai import OpenAI
+
+client = OpenAI()
+
+def get_embedding(text):
+    response = client.embeddings.create(
+        input=text,
+        model="text-embedding-3-small"
+    )
+    return response.data[0].embedding
+
+evaluator = SemanticSimilarityEvaluator(
+    embedding_fn=get_embedding,
+    threshold=0.8  # Minimum similarity score to pass
+)
+{{< /code-block >}}
 
 ### Function-based evaluators
 
