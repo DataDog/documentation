@@ -859,7 +859,7 @@ Reaction
 : **Values**: custom, close modal, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 State Functions
-: fetch, setIsOpen<br>
+: setIsOpen<br>
 **Example**: `sidePanel0.setIsOpen(true)` sets the state of `sidePanel0` to open.
 
 For more information on events, see [Events][1].
