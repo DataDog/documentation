@@ -513,7 +513,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 toggle.className = 'search-mode-toggle';
                 toggle.innerHTML = `
                     <button type="button" class="mode-btn active" data-mode="search">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <kbd class="mode-shortcut">/</kbd>
                         <span>Search</span>
                     </button>
                     <button type="button" class="mode-btn" data-mode="ai">
@@ -523,15 +523,40 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 `;
                 searchForm.appendChild(toggle);
 
+                // Hide original submit button and "/" shortcut immediately (prevents flash)
+                aisSearchBoxSubmit.style.display = 'none';
+                const aisSearchBox = searchBoxContainerContainer.querySelector('.ais-SearchBox');
+                if (aisSearchBox) {
+                    aisSearchBox.classList.add('no-shortcut-hint');
+                }
+
                 let currentMode = 'search';
                 const modeBtns = toggle.querySelectorAll('.mode-btn');
 
                 modeBtns.forEach(btn => {
                     btn.addEventListener('click', () => {
                         const mode = btn.dataset.mode;
-                        if (mode === currentMode) return;
-                        currentMode = mode;
 
+                        // Second click on the already-active button → perform the action
+                        if (mode === currentMode) {
+                            const query = aisSearchBoxInput.value.trim();
+                            if (mode === 'search') {
+                                if (query) {
+                                    sendSearchRumAction(query);
+                                }
+                                window.location.pathname = searchPathname;
+                            } else {
+                                if (window.askDocsAI) {
+                                    window.askDocsAI(query || '');
+                                    hitsContainerContainer.classList.add('d-none');
+                                    searchBoxContainerContainer.classList.remove('active-search');
+                                }
+                            }
+                            return;
+                        }
+
+                        // First click → switch mode
+                        currentMode = mode;
                         modeBtns.forEach(b => b.classList.remove('active'));
                         btn.classList.add('active');
 
