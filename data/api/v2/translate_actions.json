@@ -572,6 +572,46 @@
     "request_description": "Case priority update payload",
     "request_schema_description": "Case update priority request"
   },
+  "LinkIncident": {
+    "description": "Link an incident to a case",
+    "summary": "Link incident to case",
+    "request_description": "Incident link request",
+    "request_schema_description": "Relationship to incident request"
+  },
+  "UnlinkJiraIssue": {
+    "description": "Remove the link between a Jira issue and a case",
+    "summary": "Remove Jira issue link from case"
+  },
+  "LinkJiraIssueToCase": {
+    "description": "Link an existing Jira issue to a case",
+    "summary": "Link existing Jira issue to case",
+    "request_description": "Jira issue link request",
+    "request_schema_description": "Jira issue link request"
+  },
+  "CreateCaseJiraIssue": {
+    "description": "Create a new Jira issue and link it to a case",
+    "summary": "Create Jira issue for case",
+    "request_description": "Jira issue creation request",
+    "request_schema_description": "Jira issue creation request"
+  },
+  "CreateCaseNotebook": {
+    "description": "Create a new investigation notebook and link it to a case",
+    "summary": "Create investigation notebook for case",
+    "request_description": "Notebook creation request",
+    "request_schema_description": "Notebook creation request"
+  },
+  "MoveCaseToProject": {
+    "description": "Update the project associated with a case",
+    "summary": "Update case project",
+    "request_description": "Project update request",
+    "request_schema_description": "Relationship to project"
+  },
+  "CreateCaseServiceNowTicket": {
+    "description": "Create a new ServiceNow incident ticket and link it to a case",
+    "summary": "Create ServiceNow ticket for case",
+    "request_description": "ServiceNow ticket creation request",
+    "request_schema_description": "ServiceNow ticket creation request"
+  },
   "UpdateStatus": {
     "description": "Update case status",
     "summary": "Update case status",

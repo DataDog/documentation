@@ -5466,71 +5466,66 @@ menu:
       parent: tests
       identifier: tests_containers
       weight: 3
-    - name: Repositories
-      url: /tests/repositories
-      parent: tests
-      identifier: tests_repositories
-      weight: 4
     - name: Explorer
       url: tests/explorer/
       parent: tests
       identifier: tests_explorer
-      weight: 5
+      weight: 4
     - name: Search Syntax
       url: tests/explorer/search_syntax
       parent: tests_explorer
       identifier: tests_explorer_search_syntax
-      weight: 501
+      weight: 401
     - name: Search Test Runs
       url: tests/explorer/facets/
       parent: tests_explorer
       identifier: tests_explorer_facets
-      weight: 502
+      weight: 402
     - name: Export
       url: tests/explorer/export/
       parent: tests_explorer
       identifier: tests_explorer_export
-      weight: 503
+      weight: 403
     - name: Saved Views
       url: tests/explorer/saved_views/
       parent: tests_explorer
       identifier: tests_explorer_saved_views
-      weight: 504
+      weight: 404
     - name: Monitors
       url: monitors/types/ci/?tab=tests
       parent: tests
       identifier: tests_monitors
-      weight: 6
+      weight: 5
     - name: Test Health
       url: tests/test_health
       parent: tests
       identifier: tests_test_health
-      weight: 7
+      weight: 6
     - name: Flaky Test Management
       url: tests/flaky_management
       parent: tests
       identifier: tests_flaky_management
-      weight: 8
+      weight: 7
     - name: Working with Flaky Tests
       url: tests/flaky_tests
       parent: tests
       identifier: tests_flaky_tests
-      weight: 9
+      weight: 8
     - name: Early Flake Detection
       url: tests/flaky_tests/early_flake_detection
       parent: tests_flaky_tests
       identifier: tests_early_flake_detection
-      weight: 901
+      weight: 801
     - name: Auto Test Retries
       url: tests/flaky_tests/auto_test_retries
       parent: tests_flaky_tests
       identifier: tests_auto_test_retries
-      weight: 902
+      weight: 802
     - name: Test Impact Analysis
       url: tests/test_impact_analysis
       parent: tests
       identifier: test_impact_analysis
-      weight: 10
+      weight: 9
     - name: Setup
       url: tests/test_impact_analysis/setup/
       parent: test_impact_analysis
@@ -5540,82 +5535,82 @@ menu:
       url: tests/test_impact_analysis/setup/dotnet/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_dotnet
-      weight: 10101
+      weight: 9101
     - name: JavaScript and TypeScript
       url: tests/test_impact_analysis/setup/javascript/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_javascript
-      weight: 10102
+      weight: 9102
     - name: Python
       url: tests/test_impact_analysis/setup/python/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_python
-      weight: 10103
+      weight: 9103
     - name: Swift
       url: tests/test_impact_analysis/setup/swift/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_swift
-      weight: 10104
+      weight: 9104
     - name: Java
       url: tests/test_impact_analysis/setup/java/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_java
-      weight: 10105
+      weight: 9105
     - name: Ruby
       url: tests/test_impact_analysis/setup/ruby/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_ruby
-      weight: 10106
+      weight: 9106
     - name: Go
       url: tests/test_impact_analysis/setup/go/
       parent: test_impact_analysis_setup
       identifier: test_impact_analysis_setup_go
-      weight: 10107
+      weight: 9107
     - name: How It Works
       url: tests/test_impact_analysis/how_it_works/
       parent: test_impact_analysis
       identifier: test_impact_analysis_how_it_works
-      weight: 1002
+      weight: 902
     - name: Troubleshooting
       url: tests/test_impact_analysis/troubleshooting/
       parent: test_impact_analysis
       identifier: test_impact_analysis_troubleshooting
-      weight: 1003
+      weight: 903
     - name: Developer Workflows
       url: tests/developer_workflows
       parent: tests
       identifier: tests_developer_workflows
-      weight: 11
+      weight: 10
     - name: Code Coverage
       url: tests/code_coverage
       parent: tests
       identifier: tests_code_coverage
-      weight: 12
+      weight: 11
     - name: Instrument Browser Tests with RUM
       url: tests/browser_tests
       parent: tests
       identifier: tests_browser_tests
-      weight: 13
+      weight: 12
     - name: Instrument Swift Tests with RUM
       url: tests/swift_tests
       parent: tests
       identifier: tests_swift_tests
-      weight: 14
+      weight: 13
     - name: Correlate Logs and Tests
       url: tests/correlate_logs_and_tests
       parent: tests
       identifier: tests_correlate_logs_and_tests
-      weight: 15
+      weight: 14
     - name: Guides
       url: tests/guides/
       parent: tests
       identifier: tests_guides
-      weight: 16
+      weight: 15
     - name: Troubleshooting
       url: tests/troubleshooting/
       parent: tests
       identifier: tests_troubleshooting
-      weight: 17
+      weight: 16
     - name: Code Coverage
       url: code_coverage/
       pre: ci
@@ -5637,11 +5632,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_monorepo_support
       weight: 3
+    - name: Flags
+      url: code_coverage/flags/
+      parent: code_coverage
+      identifier: code_coverage_flags
+      weight: 4
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 4
+      weight: 5
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -8489,21 +8489,6 @@ menu:
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_profiling
       weight: 603
-    - name: Browser Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_browser
-      weight: 604
-    - name: Android Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_android
-      weight: 605
-    - name: iOS Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_ios
-      weight: 606
     - name: Correlate Synthetics with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
@@ -8614,8 +8599,8 @@ menu:
       pre: product-analytics
       identifier: product_analytics
       parent: digital_experience_heading
-      weight: 40000
-    - name: Vizualizing with Charts
+      weight: 50000
+    - name: Charts
       url: product_analytics/charts
       parent: product_analytics
       identifier: pa_charts
