@@ -598,7 +598,7 @@ roleRef:
   name: datadog-secret-reader
 subjects:
 - kind: ServiceAccount
-  name: datadog-agent
+  name: <serviceaccount name>  # datadog is typically the default ServiceAccount name
   namespace: datadog  # Where Agent runs
 ```
 
