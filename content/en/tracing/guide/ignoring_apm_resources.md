@@ -48,9 +48,15 @@ Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops trac
 
 <div class="alert alert-info">Individual spans within a trace cannot be selectively dropped—if the root span matches the filter criteria, the complete trace is discarded.</div>
 
-If you can programmatically identify a set of traces that you know you don't want to send to Datadog, and no other option in this guide solves your requirement, you can consider adding a [custom span tag][2] so you can drop the traces. [Reach out to Support][1] to discuss your use case further so Datadog can continue to expand this functionality.
+##### How filter tags work
 
-The filter tags option requires an exact string match. If your use case requires ignoring by regex, see [Ignoring based on resources](#ignoring-based-on-resources).
+The filter tags option requires an exact string match. For regex-based filtering, see [Ignoring based on resources](#ignoring-based-on-resources).
+
+When you specify multiple tags, the filter uses **OR logic**—traces are dropped if the root span matches **any** of the tags. For example, `DD_APM_FILTER_TAGS_REJECT="http.status_code:200 outcome:success"` drops traces with either tag. To match multiple conditions simultaneously, use a custom tag combining both criteria.
+
+<div class="alert alert-warning">If no existing span tags meet your filtering needs, you can add a <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">custom span tag</a>. <a href="/help/">Contact Support</a> to discuss your use case.</div>
+
+##### Configuration
 
 You can specify span tags to require or reject by using a list of keys and values separated by spaces in environment variables:
 
@@ -121,9 +127,9 @@ agents:
 {{% /tab %}}
 {{< /tabs >}}
 
-Filtering traces this way removes these requests from [trace metrics][3]. For more information on how to reduce ingestion without affecting the trace metrics, see [Ingestion Controls][4].
+##### Available span tags
 
-On the backend, Datadog creates and adds the following span tags to spans after ingestion. Note, these tags cannot be used to drop traces at the Datadog Agent level, as the agent only filters based on tags available before ingestion.
+Datadog creates and adds the following span tags after ingestion on the backend. These tags **cannot** be used for Agent-level filtering because the Agent only sees tags available before ingestion. To filter on these concepts at the Agent level, use the corresponding tags from the **Remap from** column in the tables below.
 
 
 | Name                                    | Description                                      |
