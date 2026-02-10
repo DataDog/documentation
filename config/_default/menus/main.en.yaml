@@ -8996,6 +8996,11 @@ menu:
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
       weight: 1202
+    - name: Partner Experience
+      identifier: account_management_partner_experience
+      url: account_management/plan_and_usage/partner_experience/
+      parent: account_management_plan_and_usage
+      weight: 1203
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
