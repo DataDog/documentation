@@ -178,7 +178,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 {{% /tab %}}
 {{% tab "JavaScript" %}}
 
-Use JavaScript assertions to create custom logic for validating API responses. Synthetic Monitoring uses the [Chai assertion library][20], providing `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
+Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.  
 
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
@@ -210,7 +210,7 @@ With the regex `/^(major|critical|minor)$/`, the test **fails** because `"none"`
 
 #### Using dd.should
 
-Use `dd.should` for assertions with a more natural language syntax:
+Use `dd.should` to write assertions with natural language syntax:
 
 {{< code-block lang="javascript" >}}
 const response = JSON.parse(dd.response.body);
