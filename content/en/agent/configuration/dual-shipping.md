@@ -39,10 +39,10 @@ In `datadog.yaml`:
 
 ```yaml
 additional_endpoints:
-  "https://{{< region-param key="dd_site">}}":
+  "https://app.{{< region-param key="dd_site">}}":
   - apikey2
   - apikey3
-  "<DD_SITE>": # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
+  "https://app.<DD_SITE>": # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
   - apikey4
 ```
 
@@ -51,7 +51,7 @@ additional_endpoints:
 Requires Agent version >= 6.18 or 7.18.
 
 ```bash
-DD_ADDITIONAL_ENDPOINTS='{\"https://app.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"<DD_SITE>\": [\"apikey4\"]}'
+DD_ADDITIONAL_ENDPOINTS='{\"https://app.{{< region-param key="dd_site">}}\": [\"apikey2\", \"apikey3\"], \"https://app.<DD_SITE>\": [\"apikey4\"]}'
 ```
 
 ## APM
@@ -158,10 +158,10 @@ external_metrics_provider:
   endpoints:
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: <DD_SITE>
+    url: https://app.<DD_SITE>
   - api_key: <DATADOG_API_KEY>
     app_key: <DATADOG_APP_KEY>
-    url: <DD_SITE>
+    url: https://app.<DD_SITE>
 {{< /code-block >}}
 
 ## Orchestrator
@@ -430,10 +430,10 @@ and add the relevant settings to `customAgentConfig`.
   ## Note the `agents.useConfigMap` needs to be set to `true` for this parameter to be taken into account.
   customAgentConfig:
     additional_endpoints:
-      "<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.com" for the US1 site.
+      "https://app.<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.com" for the US1 site.
       - apikey2
       - apikey3
-      "<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
+      "https://app.<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
       - apikey4
 
     logs_config:
@@ -449,7 +449,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 1. Create a Kubernetes secret with your environment variable configuration value from this guide:
     ```bash
-    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"<DD_SITE>": ["apikey4"]}'
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.<DD_SITE>": ["apikey4"]}'
     ```
 2. Use the [Helm chart parameters][2] `datadog.env` or `datadog.envFrom` to reference this secret in your configuration:
     ```yaml
@@ -485,10 +485,10 @@ spec:
           # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.com" for the US1 site using `apikey2` and `apikey3` and  "https://app.datadoghq.eu" for the EU site using `apikey4`.
           configData: |-
             additional_endpoints:
-              "<DD_SITE>":  
+              "https://app.<DD_SITE>":  
               - apikey2
               - apikey3
-              "<DD_SITE>":  
+              "https://app.<DD_SITE>":  
               - apikey4
             logs_config:
               force_use_http: true
@@ -503,7 +503,7 @@ To avoid exposing your API key(s) in clear text inside the `ConfigMap`, you can 
 
 1. Create a Kubernetes secret with your environment variable configuration value from this guide:
     ```bash
-    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"<DD_SITE>": ["apikey4"]}'
+    kubectl create -n <DATADOG AGENT NAMESPACE> secret generic dual-shipping --from-literal metrics='{"https://app.<DD_SITE>": ["apikey4"]}'
     ```
 2. Use the `[key].env` parameter to reference this secret in your configuration:
     ```yaml
