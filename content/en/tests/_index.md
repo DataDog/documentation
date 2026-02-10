@@ -5,6 +5,8 @@ aliases:
   - /continuous_integration/guides/test_configurations/
   - /continuous_integration/integrate_tests/
   - /continuous_integration/tests/
+  - /tests/repositories/
+  - /tests/search/
 further_reading:
     - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
       tag: "Learning Center"
@@ -173,7 +175,7 @@ When you're evaluating failed or flaky tests, or the performance of a CI test, y
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-repositories
+[1]: https://app.datadoghq.com/ci/test/health
 [2]: https://app.datadoghq.com/ci/settings/test-optimization
 [3]: /continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists
