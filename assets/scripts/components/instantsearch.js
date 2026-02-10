@@ -485,7 +485,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 if (query) {
                     aiContent.innerHTML = `Ask AI about <span class="ask-ai-query">"${query.replace(/</g, '&lt;').replace(/>/g, '&gt;')}"</span>`;
                 } else {
-                    aiContent.innerHTML = `Ask Docs AI anything`;
+                    aiContent.innerHTML = `Ask AI anything`;
                 }
             }
             // Also update the data-query attribute for Enter key handling

@@ -94,88 +94,23 @@ class ConversationalSearch {
     }
 
     createElements() {
-        // Create floating button with sparkles icon
-        this.floatButton = document.createElement('button');
-        this.floatButton.className = 'conv-search-float-btn';
-        this.floatButton.innerHTML = `
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
-            </svg>
-            <span>Ask Docs AI</span>
-        `;
-        this.floatButton.setAttribute('aria-label', 'Ask Docs AI');
+        // Clone from Hugo-rendered <template> (see layouts/partials/conversational-search.html)
+        const template = document.getElementById('conv-search-template');
+        if (!template) {
+            console.error('[Conversational Search] Template #conv-search-template not found in DOM');
+            return;
+        }
 
-        // Create sidebar overlay
-        this.overlay = document.createElement('div');
-        this.overlay.className = 'conv-search-overlay';
+        const content = template.content;
 
-        // Create sidebar
-        this.sidebar = document.createElement('div');
-        this.sidebar.className = 'conv-search-sidebar';
-        this.sidebar.innerHTML = `
-            <div class="conv-search-header">
-                <div class="conv-search-title-group">
-                    <span class="conv-search-title">Datadog Docs AI</span>
-                    <span class="tooltip-container conv-search-info-tooltip">
-                        <button class="tooltip-trigger conv-search-info-btn" aria-describedby="tooltip-docs-ai-info">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                            </svg>
-                        </button>
-                        <span id="tooltip-docs-ai-info" class="tooltip-content" role="tooltip">AI-generated responses may be inaccurate. Verify important info. Your use of Docs AI powered by Typesense is subject to our <a href="https://www.datadoghq.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span>
-                    </span>
-                </div>
-                <div class="conv-search-header-actions">
-                    <button class="conv-search-new" aria-label="New Question" title="New Question">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="1 4 1 10 7 10"></polyline>
-                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-                        </svg>
-                        <span>New Question</span>
-                    </button>
-                    <button class="conv-search-close" aria-label="Close">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="conv-search-messages">
-                <div class="conv-search-empty-state">
-                    <div class="conv-search-empty-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
-                            <path d="M5 19l1 3 3-1-3 1z" opacity="0.6"/>
-                            <path d="M19 5l1 3 3-1-3 1z" opacity="0.6"/>
-                        </svg>
-                    </div>
-                    <h3 class="conv-search-empty-title">How can I help you today?</h3>
-                    <p class="conv-search-empty-subtitle">Ask me anything about Datadog documentation</p>
-                    <div class="conv-search-suggestions">
-                        <button class="conv-search-suggestion" data-query="How to setup LLM Observability for an existing AWS Lambda function?">How to setup LLM Observability for an existing AWS Lambda function?</button>
-                        <button class="conv-search-suggestion" data-query="What is the Datadog Agent?">What is the Datadog Agent?</button>
-                        <button class="conv-search-suggestion" data-query="How do I set up APM tracing step by step?">How do I set up APM tracing step by step?</button>
-                    </div>
-                </div>
-            </div>
-            <div class="conv-search-footer">
-                <div class="conv-search-input-container">
-                    <textarea 
-                        class="conv-search-input" 
-                        placeholder="Ask a question..." 
-                        rows="1"
-                    ></textarea>
-                    <button class="conv-search-send" aria-label="Send">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="22" y1="2" x2="11" y2="13"></line>
-                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                        </svg>
-                    </button>
-                </div>
-                <p class="conv-search-disclaimer">AI-generated responses may be inaccurate. Verify important info.</p>
-            </div>
-        `;
+        // Clone the three top-level elements from the template
+        this.floatButton = content.querySelector('.conv-search-float-btn').cloneNode(true);
+        this.overlay = content.querySelector('.conv-search-overlay').cloneNode(true);
+        this.sidebar = content.querySelector('.conv-search-sidebar').cloneNode(true);
+
+        // Inject the empty state into the messages container
+        const messagesContainer = this.sidebar.querySelector('.conv-search-messages');
+        this.injectEmptyState(messagesContainer);
 
         // Append to DOM
         document.body.appendChild(this.floatButton);
@@ -185,9 +120,20 @@ class ConversationalSearch {
         // Cache DOM references
         this.closeBtn = this.sidebar.querySelector('.conv-search-close');
         this.newChatBtn = this.sidebar.querySelector('.conv-search-new');
-        this.messagesContainer = this.sidebar.querySelector('.conv-search-messages');
+        this.messagesContainer = messagesContainer;
         this.input = this.sidebar.querySelector('.conv-search-input');
         this.sendBtn = this.sidebar.querySelector('.conv-search-send');
+    }
+
+    /**
+     * Clone the empty state from its <template> and inject into a container.
+     * Used by both createElements() (initial load) and newChat() (reset).
+     */
+    injectEmptyState(container) {
+        const emptyStateTemplate = document.getElementById('conv-search-empty-state');
+        if (emptyStateTemplate) {
+            container.appendChild(emptyStateTemplate.content.cloneNode(true));
+        }
     }
 
     bindEvents() {
@@ -283,25 +229,9 @@ class ConversationalSearch {
         this.isLoading = false;
         this.sendBtn.disabled = false;
 
-        // Clear messages and restore empty state with suggestions
-        this.messagesContainer.innerHTML = `
-            <div class="conv-search-empty-state">
-                <div class="conv-search-empty-icon">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/>
-                        <path d="M5 19l1 3 3-1-3 1z" opacity="0.6"/>
-                        <path d="M19 5l1 3 3-1-3 1z" opacity="0.6"/>
-                    </svg>
-                </div>
-                <h3 class="conv-search-empty-title">How can I help you today?</h3>
-                <p class="conv-search-empty-subtitle">Ask me anything about Datadog documentation</p>
-                <div class="conv-search-suggestions">
-                    <button class="conv-search-suggestion" data-query="How to setup LLM Observability for an existing AWS Lambda function?">How to setup LLM Observability for an existing AWS Lambda function?</button>
-                    <button class="conv-search-suggestion" data-query="What is the Datadog Agent?">What is the Datadog Agent?</button>
-                    <button class="conv-search-suggestion" data-query="How do I set up APM tracing step by step?">How do I set up APM tracing step by step?</button>
-                </div>
-            </div>
-        `;
+        // Clear messages and restore empty state from template
+        this.messagesContainer.innerHTML = '';
+        this.injectEmptyState(this.messagesContainer);
 
         // Clear and focus input
         this.input.value = '';

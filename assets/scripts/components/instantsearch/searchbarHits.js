@@ -10,12 +10,12 @@ initializeFeatureFlags().then((client) => {
     IS_CONVERSATIONAL_SEARCH_ENABLED = getBooleanFlag(client, CONVERSATIONAL_SEARCH_FLAG_KEY);
 });
 
-// Generate the "Ask Docs AI" suggestion HTML
+// Generate the "Ask AI" suggestion HTML
 const generateAskAISuggestion = (query) => {
     const trimmedQuery = query?.trim() || '';
     const contentText = trimmedQuery
         ? `Ask AI about <span class="ask-ai-query">"${trimmedQuery}"</span>`
-        : `Ask Docs AI anything`;
+        : `Ask AI anything`;
     
     return `
         <li class="ais-Hits-item ais-Hits-ai-suggestion" data-query="${trimmedQuery.replace(/"/g, '&quot;')}">

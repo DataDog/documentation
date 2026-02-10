@@ -48,10 +48,11 @@ $conv-search-assistant-bg: #f4f4f5;
         pointer-events: none;
     }
 
-    svg {
+    svg, img {
         width: 18px;
         height: 18px;
         flex-shrink: 0;
+        filter: brightness(0) invert(1); // Make icon white
     }
 }
 
@@ -169,11 +170,20 @@ $conv-search-assistant-bg: #f4f4f5;
         &:hover {
             color: $conv-search-purple;
             background: rgba($conv-search-purple, 0.08);
+
+            img {
+                opacity: 0.7;
+            }
         }
 
-        svg {
+        svg, img {
             width: 16px;
             height: 16px;
+        }
+
+        img {
+            opacity: 0.45; // Muted appearance for black SVG rendered as <img>
+            transition: opacity 0.15s ease;
         }
     }
 }
@@ -303,8 +313,11 @@ $conv-search-assistant-bg: #f4f4f5;
     justify-content: center;
     margin-bottom: 16px;
     
-    svg {
-        stroke: $conv-search-purple;
+    svg, img {
+        width: 32px;
+        height: 32px;
+        // Colorize the black SVG to match the purple theme
+        filter: invert(18%) sepia(80%) saturate(3000%) hue-rotate(260deg) brightness(80%) contrast(95%);
     }
 }
 
@@ -767,7 +780,7 @@ $conv-search-assistant-bg: #f4f4f5;
 }
 
 // ============================================
-// Sidebar "Ask Docs AI" Button (next to Datadog Docs title)
+// Sidebar "Ask AI" Button (next to Datadog Docs title)
 // ============================================
 .sidenav-header {
     display: flex;
@@ -801,7 +814,7 @@ $conv-search-assistant-bg: #f4f4f5;
         display: inline-flex;
     }
     
-    svg {
+    svg, img {
         flex-shrink: 0;
         width: 11px;
         height: 11px;
@@ -890,10 +903,11 @@ $conv-search-assistant-bg: #f4f4f5;
         display: inline-flex;
     }
     
-    svg {
+    svg, img {
         flex-shrink: 0;
         width: 16px;
         height: 16px;
+        filter: brightness(0) invert(1); // Make icon white
     }
     
     &:hover {
