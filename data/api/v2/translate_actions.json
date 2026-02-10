@@ -1512,6 +1512,34 @@
     "request_description": "Create a delegate service account within Datadog.",
     "request_schema_description": ""
   },
+  "GetSpaceByDisplayName": {
+    "description": "Get the resource name and organization binding ID of a space in the Datadog Google Chat integration.",
+    "summary": "Get space information by display name"
+  },
+  "ListOrganizationHandles": {
+    "description": "Get a list of all organization handles from the Datadog Google Chat integration.",
+    "summary": "Get all organization handles"
+  },
+  "CreateOrganizationHandle": {
+    "description": "Create an organization handle in the Datadog Google Chat integration.",
+    "summary": "Create organization handle",
+    "request_description": "Organization handle payload.",
+    "request_schema_description": "Create organization handle request."
+  },
+  "DeleteOrganizationHandle": {
+    "description": "Delete an organization handle from the Datadog Google Chat integration.",
+    "summary": "Delete organization handle"
+  },
+  "GetOrganizationHandle": {
+    "description": "Get an organization handle from the Datadog Google Chat integration.",
+    "summary": "Get organization handle"
+  },
+  "UpdateOrganizationHandle": {
+    "description": "Update an organization handle from the Datadog Google Chat integration.",
+    "summary": "Update organization handle",
+    "request_description": "Organization handle payload.",
+    "request_schema_description": "Update organization handle request."
+  },
   "ListJiraAccounts": {
     "description": "Get all Jira accounts for the organization.",
     "summary": "List Jira accounts"
