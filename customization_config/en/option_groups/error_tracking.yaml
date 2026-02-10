@@ -1,8 +1,8 @@
 error_tracking_product_options:
   - id: apm
     default: true
-  - id: rum
   - id: logs
+  - id: rum
 
 apm_error_grouping_context_options:
   - id: server
@@ -10,8 +10,8 @@ apm_error_grouping_context_options:
 
 logs_error_grouping_context_options:
   - id: show_all
-    default: true
   - id: server
+    default: true
   - id: android
   - id: flutter
   - id: ios
@@ -19,8 +19,8 @@ logs_error_grouping_context_options:
 
 rum_error_grouping_context_options:
   - id: show_all
-    default: true
   - id: browser
+    default: true
   - id: android
   - id: flutter
   - id: ios
