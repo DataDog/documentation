@@ -269,7 +269,8 @@
                         "query_by": "tags,content,title,section_header",
                         "group_by": "distinct_base_url",
                         "group_limit": 1,
-                        "stopwords": "stopwords"
+                        "stopwords": "stopwords",
+                        "group_max_condidates": 1000
                     }
                 }
             ]
