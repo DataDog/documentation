@@ -138,35 +138,52 @@ class AverageScoreEvaluator(BaseSummaryEvaluator):
 
 ### LLMJudge
 
-The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI, Anthropic, and custom LLM clients with structured output formats.
+The `LLMJudge` class enables automated evaluation of LLM outputs using another LLM as the judge. It supports OpenAI, Anthropic, Amazon Bedrock, and custom LLM clients with structured output formats.
 
-**Supported output types:**
+#### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `user_prompt` | `str` | Yes | Prompt template with `{{field.path}}` syntax for span context injection. |
+| `system_prompt` | `str` | No | System prompt to set the judge's behavior or persona. |
+| `structured_output` | `StructuredOutput` | No | Output format specification. See [structured output types](#structured-output-types). |
+| `provider` | `str` | Conditional | LLM provider: `"openai"`, `"anthropic"`, or `"bedrock"`. Required if `client` is not provided. |
+| `model` | `str` | No | Model identifier (for example, `"gpt-4o"`, `"claude-sonnet-4-20250514"`). |
+| `model_params` | `dict` | No | Additional parameters passed to the LLM API (for example, `temperature`). |
+| `client` | callable | Conditional | Custom LLM client function. Required if `provider` is not provided. |
+| `name` | `str` | No | Evaluator name for identification in results. |
+| `client_options` | `dict` | No | Provider-specific configuration (for example, API keys). |
+
+#### Template variables
+
+The `user_prompt` supports `{{field.path}}` syntax to inject context from the evaluated span. Nested paths are supported.
+
+- `{{input_data}}` — The span's input data.
+- `{{output_data}}` — The span's output data.
+- `{{expected_output}}` — Expected output for comparison (if available).
+- `{{metadata.key}}` — Nested metadata fields (for example, `{{metadata.topic}}`).
+
+#### Structured output types
 
 | Output type | Description |
 |-------------|-------------|
-| `BooleanOutput` | Returns `True`/`False` with optional pass/fail assessment. |
-| `ScoreOutput` | Returns a numeric score within a defined range, with optional thresholds. |
-| `CategoricalOutput` | Returns one of a predefined set of categories, with optional pass values. |
-| `Dict[str, JSONType]` | Returns a custom, user-defined JSON structure for arbitrary structured output. |
+| `BooleanStructuredOutput` | Returns `True`/`False` with optional pass/fail assessment. |
+| `ScoreStructuredOutput` | Returns a numeric score within a defined range, with optional thresholds. |
+| `CategoricalStructuredOutput` | Returns one of a predefined set of categories, with optional pass values. |
+| `Dict[str, JSONType]` | Custom JSON schema for arbitrary structured output. |
 
-**Template variables:**
+All structured output types accept `reasoning=True` to include an explanation in results, and `reasoning_description` to customize the reasoning field's description.
 
-Prompts support `{{field.path}}` syntax to inject context from the evaluated span:
-- `{{input_data}}`: The span's input data
-- `{{output_data}}`: The span's output data
-- `{{expected_output}}`: Expected output for comparison (if available)
-- `{{metadata.key}}`: Nested metadata fields
-
-**Example: Boolean evaluation**
+#### Example: Boolean evaluation
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, BooleanOutput
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
 
 judge = LLMJudge(
     provider="openai",
     model="gpt-4o",
     user_prompt="Is this response factually accurate? Response: {{output_data}}",
-    structured_output=BooleanOutput(
+    structured_output=BooleanStructuredOutput(
         description="Whether the response is factually accurate",
         reasoning=True,
         pass_when=True,
@@ -174,16 +191,16 @@ judge = LLMJudge(
 )
 {{< /code-block >}}
 
-**Example: Score-based evaluation with thresholds**
+#### Example: Score-based evaluation with thresholds
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, ScoreOutput
+from ddtrace.llmobs._evaluators import LLMJudge, ScoreStructuredOutput
 
 judge = LLMJudge(
     provider="anthropic",
     model="claude-sonnet-4-20250514",
     user_prompt="Rate the helpfulness of this response (1-10): {{output_data}}",
-    structured_output=ScoreOutput(
+    structured_output=ScoreStructuredOutput(
         description="Helpfulness score",
         min_score=1,
         max_score=10,
@@ -193,31 +210,33 @@ judge = LLMJudge(
 )
 {{< /code-block >}}
 
-**Example: Categorical evaluation**
+#### Example: Categorical evaluation
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, CategoricalOutput
+from ddtrace.llmobs._evaluators import LLMJudge, CategoricalStructuredOutput
 
 judge = LLMJudge(
     provider="openai",
     model="gpt-4o",
     user_prompt="Classify the sentiment: {{output_data}}",
-    structured_output=CategoricalOutput(
-        description="Sentiment classification",
-        categories=["positive", "neutral", "negative"],
+    structured_output=CategoricalStructuredOutput(
+        categories={
+            "positive": "The response has a positive sentiment.",
+            "neutral": "The response has a neutral sentiment.",
+            "negative": "The response has a negative sentiment.",
+        },
         reasoning=True,
         pass_values=["positive", "neutral"],
     ),
 )
 {{< /code-block >}}
 
-**Example: Custom LLM client**
+#### Example: Custom LLM client
 
 {{< code-block lang="python" >}}
-from ddtrace.llmobs._evaluators import LLMJudge, BooleanOutput
+from ddtrace.llmobs._evaluators import LLMJudge, BooleanStructuredOutput
 
 def my_llm_client(provider, messages, json_schema, model, model_params):
-    # Call your custom LLM implementation
     response = call_my_llm(messages, model)
     return response
 
@@ -225,7 +244,7 @@ judge = LLMJudge(
     client=my_llm_client,
     model="my-custom-model",
     user_prompt="Is this response accurate? {{output_data}}",
-    structured_output=BooleanOutput(
+    structured_output=BooleanStructuredOutput(
         description="Accuracy check",
         reasoning=True,
         pass_when=True,
@@ -233,10 +252,10 @@ judge = LLMJudge(
 )
 {{< /code-block >}}
 
-**Key points:**
+#### Key points
 
-- Requires either a `provider` (`"openai"` or `"anthropic"`) or a custom `client`.
-- Set API keys using `client_options={"api_key": "..."}` or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`).
+- Requires either a `provider` (`"openai"`, `"anthropic"`, or `"bedrock"`) or a custom `client`.
+- Set API keys using `client_options={"api_key": "..."}` or environment variables (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`). For Bedrock, configure AWS credentials through environment variables or `client_options`.
 - Use `reasoning=True` in structured outputs to include an explanation in results.
 - Define pass/fail criteria with `pass_when` (boolean), `pass_values` (categorical), or `min_threshold`/`max_threshold` (score).
 
