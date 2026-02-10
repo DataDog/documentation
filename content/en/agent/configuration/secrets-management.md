@@ -30,7 +30,7 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 ### Option 1: Using native Agent support for fetching secrets
 
-**Note**: This option is not available for FIPS-enabled Agents at this time.
+**Note**: As of Agent version `7.76` and onwards, native secrets management is available for FIPS-enabled Agents.
 
 Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`.
 
@@ -417,6 +417,8 @@ api_key: "ENC[secretKeyNameInKeyVault]"
 {{% /collapse-content %}}
 
 {{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+
+**Available in Agent version 7.74+**
 
 The following GCP services are supported:
 
