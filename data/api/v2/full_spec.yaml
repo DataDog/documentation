@@ -783,6 +783,27 @@ components:
       required: false
       schema:
         type: string
+    NDMPageNumber:
+      description: Specific page number to return. Defaults to 0.
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 0
+        example: 0
+        format: int64
+        type: integer
+    NDMPageSize:
+      description: Size for a given page. The maximum allowed value is 500. Defaults
+        to 50.
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 50
+        example: 50
+        format: int64
+        type: integer
     NotificationRuleIDPathParameter:
       description: Notification Rule UUID
       example: e555e290-ed65-49bd-ae18-8acbfcf18db7
@@ -86642,14 +86663,15 @@ paths:
       description: Get the list of devices.
       operationId: ListDevices
       parameters:
-      - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageNumber'
-      - description: The field to sort the devices by.
+      - $ref: '#/components/parameters/NDMPageSize'
+      - $ref: '#/components/parameters/NDMPageNumber'
+      - description: The field to sort the devices by. Defaults to `name`.
         example: status
         in: query
         name: sort
         required: false
         schema:
+          default: name
           type: string
       - description: Filter devices by tag.
         example: status:ok
