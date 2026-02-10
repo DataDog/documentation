@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-The [Logs Explorer][1] lets you search and view individual logs as a list. However, the most valuable insights often come from aggregating logs at scale. Using the search feature, you can filter logs and visualize them as timeseries charts, top lists, tree maps, pie charts, or tables to better understand trends, patterns, and outliers across your log data.
+The [Log Explorer][1] lets you search and view individual logs as a list. However, the most valuable insights often come from aggregating logs at scale. Using the search feature, you can filter logs and visualize them as timeseries charts, top lists, tree maps, pie charts, or tables to better understand trends, patterns, and outliers across your log data.
 
 ## Natural language queries
 
@@ -59,21 +59,21 @@ The Log Explorer search bar includes several features to help you write queries 
 
 Syntax highlighting clearly differentiates input types: keys, values, free text, and control characters. For example, `service` and `status` are keys, `auth-dotnet` and `error` are values, `500` and `check-token` are free text, and parentheses are control characters. Status attributes are color-coded by status (red for `error`, blue for `info`).
 
-{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query with differentiable syntax highlighting" style="width:100%;">}}
+{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The Log Explorer search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query with differentiable syntax highlighting" style="width:100%;">}}
 
-Error validation identifies syntax errors and suggests fixes, such as missing values in key:value pairs, incomplete range queries, or unclosed parentheses.
+Error validation identifies syntax errors and suggests fixes, such as missing values in `key:value` pairs, incomplete range queries, or unclosed parentheses.
 
-{{< img src="logs/explorer/search/log_error_states.png" alt="The logs search bar showing `service:(web-store OR auth-dotnet` as the query with the message `Missing closing parenthesis character`" style="width:50%;">}}
+{{< img src="logs/explorer/search/log_error_states.png" alt="The Log Explorer search bar showing `service:(web-store OR auth-dotnet` as the query with the message `Missing closing parenthesis character`" style="width:50%;">}}
 
 ### Autocomplete
 
 The search bar's autocomplete feature helps you complete queries using existing keys and values in your logs, recent searches, and saved views.
 
-{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The Log Explorer search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
 
 Autocomplete suggests facets and values based on your input, displayed in the order they appear in the [facet panel][7]. After selecting a facet and entering `:`, values appear in descending order by log count from the past 15 minutes.
 
-{{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="The logs search bar showing `network` as the query and the facets @network.bytes_written, @network.client.ip, and @network.interface as autocomplete options" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="The Log Explorer search bar showing `network` as the query and the facets @network.bytes_written, @network.client.ip, and @network.interface as autocomplete options" style="width:80%;">}}
 
 Your 100 most recent searches are retained and suggested as you type. Saved Views that match your query are also suggested, displayed in the same order as the Saved Views panel.
 
