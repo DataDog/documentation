@@ -42,7 +42,7 @@ additional_endpoints:
   "https://{{< region-param key="dd_site">}}":
   - apikey2
   - apikey3
-  "<DD_SITE>" # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
+  "<DD_SITE>": # Replace "<DD_SITE>" with its value. For example, "https://app.datadoghq.eu" for the EU site.
   - apikey4
 ```
 
@@ -68,7 +68,7 @@ apm_config:
     "https://trace.agent.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://trace.agent.<DD_SITE>" # Replace "<DD_SITE>" with its value. For example, "https://trace.agent.datadoghq.eu" for the EU site.
+    "https://trace.agent.<DD_SITE>": # Replace "<DD_SITE>" with its value. For example, "https://trace.agent.datadoghq.eu" for the EU site.
     - apikey4
 ```
 
@@ -96,7 +96,7 @@ apm_config:
     - apikey2
     - apikey3
     "https://intake.profile.<DD_SITE>/api/v2/profile": # Replace "<DD_SITE>" with its value. For example, "https://intake.profile.datadoghq.eu/api/v2/profile" for the EU site.
-    - apikey
+    - apikey4
 ```
 
 ### Environment variable configuration
@@ -122,7 +122,7 @@ In `datadog.yaml`:
 process_config:
   [...]
   additional_endpoints:
-    "https://process.{{< region-param key="dd_site">}}/api/v2/profile":
+    "https://process.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
     "https://process.<DD_SITE>": # Replace "<DD_SITE>" with its value. For example, "https://process.datadoghq.eu" for the EU site.
@@ -209,7 +209,7 @@ evp_proxy_config:
     "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}":
     - apikey2
     - apikey3
-    "https://<VERSION>-app.agent.<DD_SITE>":  # Replace "<DD_SITE>" with its value. For example, "https://process.datadoghq.eu" for the EU site.
+    "https://<VERSION>-app.agent.<DD_SITE>":  # Replace "<VERSION>" and "<DD_SITE>" with their values. For example, "https://7-38-0-app.agent.datadoghq.eu" for Agent version 7.38.0 on the EU site.
     - apikey4
 ```
 
@@ -285,9 +285,9 @@ database_monitoring:
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
-DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.{{< region-param key="dd_site">}}"\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
-DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.{{< region-param key="dd_site">}}", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
 DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
@@ -332,7 +332,7 @@ network_devices:
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
-DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.{{< region-param key="dd_site">}}"\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
