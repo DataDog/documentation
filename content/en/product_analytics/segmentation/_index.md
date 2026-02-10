@@ -54,7 +54,7 @@ Or, directly click <strong>Create Segment</strong> to select your data source:
 
 On the <a href="https://app.datadoghq.com/product-analytics/segments/create">Create a new segment</a> page, add the properties specifying the users: <br>
 – who **viewed** the <code>/cart</code> page <br>
-– **then** <code> did not</code> ...  <br>
+– **then** <code> did not</code> <br>
 – perform the **action** of <code> click on CHECKOUT</code> <br>
 
 {{< img src="product_analytics/segmentation/user_profile_example_1.png" alt="Definition of a segment grouping people who almost bought an item." style="width:80%">}}
