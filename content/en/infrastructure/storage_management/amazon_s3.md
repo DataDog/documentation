@@ -407,10 +407,12 @@ To verify your setup:
 
 ### Best practices
 
-Follow these best practices to optimize Storage Management set up:
-   - **Configure lifecycle policies for inventory destination buckets**: S3 Inventory reports are generated daily and stored in your destination bucket. To prevent old inventory files from accumulating and incurring storage costs, add a lifecycle policy to automatically delete inventory reports older than 3 days.
+Follow these best practices to optimize Storage Management setup:
+- **Configure lifecycle policies for inventory destination buckets**: S3 Inventory reports are generated daily and stored in your destination bucket. To prevent old inventory files from accumulating and incurring storage costs, add a lifecycle policy to automatically delete inventory reports older than three days.
    
-   - **Configure lifecycle policies for S3 access logs**: If you have enabled S3 Access Logs for prefix-level request metrics, the raw log files accumulate in your destination bucket. After these logs are forwarded to Datadog, the raw files are no longer needed for Storage Management purposes. To automatically delete access log files after forwarding to Datadog, add a lifecycle rule. **Note**: Before enabling automatic deletion, verify that there are no compliance or audit requirements in your organization that mandate retaining raw S3 access logs for a specific period.
+- **Configure lifecycle policies for S3 access logs**: If you have enabled S3 access logs for prefix-level request metrics, the raw log files accumulate in your destination bucket. After these logs are forwarded to Datadog, the raw files are no longer needed for Storage Management purposes. To automatically delete access log files after forwarding to Datadog, add a lifecycle rule.
+
+  **Note**: Before enabling automatic deletion, verify that there are no compliance or audit requirements in your organization that mandate retaining raw S3 access logs for a specific period.
 
 ### Troubleshooting
 
