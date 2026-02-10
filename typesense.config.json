@@ -244,11 +244,11 @@
                 },
                 {
                     "id": "asm",
-                    "synonyms": ["asm","application security management"]
+                    "synonyms": ["asm", "application security management"]
                 },
                 {
                     "id": "rbac",
-                    "synonyms": ["rbac","role based access control"]
+                    "synonyms": ["rbac", "role based access control"]
                 }
             ],
             "presets": [
