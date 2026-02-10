@@ -13,6 +13,9 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
+- link: "https://www.youtube.com/watch?v=OztSU3JzfC8&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=4&t=245s"
+  tag: "Video"
+  text: "Tips and tricks: Add business data to logs from retail endpoints"
 algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---

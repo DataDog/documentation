@@ -22,18 +22,29 @@ Set up the CloudPrem destination and its environment variables when you [set up 
 
 ### Set up the destination
 
-Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**Note**: Contact your account manager to request access.
-- If disabled (default): Up to 500 events are buffered before flush.
-- If enabled:
-	1. Select the buffer type you want to set.
-		- **Memory**: Fast, limited by RAM
-		- **Buffer size**: Durable, survives restarts
-	1. Enter the buffer size and select the unit.
-		- Maximum capacity in MB or GB.
+#### Optional settings
+
+{{% observability_pipelines/destination_buffer %}}
 
 {{< img src="observability_pipelines/destinations/cloudprem_settings.png" alt="The CloudPrem destination settings" style="width:35%;" >}}
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- CloudPrem endpoint URL identifier:
+	- References the intake endpoint to which Observability Pipelines sends logs. 
+	- In your secrets manager:
+		- Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
+		- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
+	- The default identifier is `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the CloudPrem environment variable field" style="width:75%;" >}}
 
@@ -41,6 +52,9 @@ Optionally, toggle the switch to enable **Buffering Options** (Preview).<br>**No
 	- Observability Pipelines sends logs to the CloudPrem intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

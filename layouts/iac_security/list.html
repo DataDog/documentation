@@ -278,7 +278,7 @@
                             {{ $pad.SetInMap "filters" "Providers" (union (index ($pad.Get "filters") "Providers") (slice .Params.meta.cloud_provider)) }}
                             {{ $pad.SetInMap "filters" "Platforms" (union (index ($pad.Get "filters") "Platforms") (slice .Params.meta.platform)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
-                            {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW" "INFO") }}
+                            {{ $pad.SetInMap "filters" "Severities" (slice "CRITICAL" "HIGH" "MEDIUM" "LOW") }}
                             {{/*  
                                 build object of arrays with unique cloud provider for each ruleset header (.set-header )
                                 cloudProvidersByRuleset: {
@@ -310,8 +310,9 @@
                                 <span class="set-header__plus fw-semibold">+{{sub (len $ruleset_providers) 1}}</span>
                                 {{ end }}
                             </div>
-                            <span class="set-header__text fw-semibold">{{$cloud_provider}}</span>
-                            <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $cloud_provider) ) }}</span>
+                           
+                            <span class="set-header__text fw-semibold">{{ $group_id }}</span>
+                            <span data-anchor="#{{$group_id}}" @click.stop="copyHref($el)">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $group_id) ) }}</span>
                             <span class="d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9" ) }}</span>
                         </div>
                         <div class="set-header__arrow fw-semibold">></div>

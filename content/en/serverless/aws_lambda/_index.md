@@ -49,7 +49,7 @@ To get started, follow the [installation instructions][1] to collect metrics, tr
 
 Datadog Serverless Monitoring makes use of a runtime-specific Datadog Lambda Library, in conjunction with the Datadog Lambda extension, to send telemetry from your Lambda functions.
 
-The Datadog Lambda extension collects logs through CloudWatch, in addition to traces, enhanced metrics, and custom metrics from the Datadog Lambda Library.
+The Datadog Lambda Extension collects function logs using the Lambda Telemetry API, eliminating the need for CloudWatch. It also generates enhanced metrics. It unifies these telemetry signals with APM traces, custom spans, and custom metrics from the Datadog Lambda Library.
 
 ## Usage
 

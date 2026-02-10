@@ -19,19 +19,21 @@ aliases:
 
 Network Device Monitoring (NDM) supports a growing set of integrations for routers, switches, firewalls, SD-WAN platforms, and virtual infrastructure. Use the integration icons below to explore which integrations include built-in SNMP profiles or metadata that can be collected through NDM.
 
-## SNMP
-
-These integrations use the **SNMP protocol** to collect metrics directly from network hardware such as routers, switches, and firewalls. NDM automatically applies the appropriate SNMP profile when it detects one of these devices. Beyond the integrations shown below, NDM includes built-in SNMP profiles for over 80 [supported vendors][3].
-
-{{< partial name="ndm/ndm_integrations.html" >}}
-
-<br>
+<div class="alert alert-info">Beyond the integrations shown below, NDM includes built-in SNMP profiles for over 80 <a href="/network_monitoring/devices/supported_devices/">supported vendors</a>.</div>
 
 ## Software Defined Networking
 
 The following integrations cover **software-defined and edge networking platforms** that support NDM collection. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). They provide visibility into link health, throughput, and connectivity across distributed sites.
 
 {{< partial name="ndm/sd-wan.html" >}}
+
+<br>
+
+## Wireless Networking
+
+The following integrations cover **wireless networking platforms** that support NDM collection. These integrations provide visibility into wireless access points, client connections, and network performance across your wireless infrastructure.
+
+{{< partial name="ndm/wireless.html" >}}
 
 <br>
 
@@ -54,4 +56,3 @@ NDM can also monitor **virtualized environments** that expose network telemetry 
 
 [1]: /network_monitoring/devices/supported_devices
 [2]: /network_monitoring/devices/profiles/
-[3]: /network_monitoring/devices/supported_devices/
