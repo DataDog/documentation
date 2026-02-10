@@ -61,6 +61,17 @@ The typical flow:
 
 ## Building evaluators
 
+There are two ways to define an evaluator: class-based and function-based.
+
+| | Class-based | Function-based |
+|---|---|---|
+| **Best for** | Reusable evaluators with custom configuration or state. | One-off evaluators with straightforward logic. |
+| **Receives** | An `EvaluatorContext` object with full span context (input, output, expected output, metadata, span/trace IDs). | `input_data`, `output_data`, and `expected_output` as separate arguments. |
+| **Supports summary evaluators** | Yes (`BaseSummaryEvaluator`). | No. |
+| **Future capabilities** | Class-based evaluators are the foundation for upcoming features such as defining custom LLM-as-a-judge evaluators from code. | No additional features planned. |
+
+If you are unsure, start with class-based evaluators. They provide the same capabilities as function-based evaluators today and support additional features going forward.
+
 ### Class-based evaluators
 
 Class-based evaluators provide a structured way to implement reusable evaluation logic with custom configuration.
