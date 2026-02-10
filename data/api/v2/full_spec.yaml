@@ -39748,6 +39748,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        cache:
+          $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessorCache'
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
@@ -39785,6 +39787,19 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineDedupeProcessorCache:
+      description: Configuration for the cache used to detect duplicates.
+      properties:
+        num_events:
+          description: The number of events to cache for duplicate detection.
+          example: 5000
+          format: int64
+          maximum: 1000000000
+          minimum: 1
+          type: integer
+      required:
+      - num_events
+      type: object
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
       enum:
