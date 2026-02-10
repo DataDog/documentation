@@ -152,6 +152,8 @@ For GraalVM native-image applications, see [Enabling the Profiler for GraalVM Na
 
 The [Getting Started with Profiler][9] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
+For additional configuration options and troubleshooting guidance, see [Java Profiler Troubleshooting][10].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -165,3 +167,4 @@ The [Getting Started with Profiler][9] guide takes a sample service with a perfo
 [7]: /getting_started/tagging/unified_service_tagging
 [8]: /profiler/enabling/graalvm/
 [9]: /getting_started/profiler/
+[10]: /profiler/profiler_troubleshooting/java/

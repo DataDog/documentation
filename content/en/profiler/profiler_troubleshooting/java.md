@@ -13,28 +13,102 @@ further_reading:
 
 The Java profiler uses two different profiling engines depending on your operating system:
 
-| Engine | Platforms | Description |
-|--------|-----------|-------------|
-| **Datadog Profiler** | Linux | A native profiler based on async-profiler. Uses the `AsyncGetCallTrace` JVM API and perf events for accurate CPU sampling. Provides the full set of profile types including wallclock profiling for latency analysis. Default since dd-trace-java v1.7.0. |
-| **Java Flight Recorder (JFR)** | Windows, macOS, Linux (fallback) | Uses the JVM's built-in flight recorder. Available on all platforms but with fewer profile types. On Linux, used as a fallback when the Datadog Profiler cannot be enabled. |
+| Engine | Platforms |
+|--------|-----------|
+| **Datadog Profiler** | Linux |
+| **Java Flight Recorder (JFR)** | Windows, macOS, Linux (fallback) |
 
-The profiler automatically selects the appropriate engine based on your environment. You do not need to configure this manually.
+- **Datadog Profiler**: The Datadog Java profiler was implemented on top of async-profiler and used JVM sampling hooks such as `AsyncGetCallTrace` (and, on Linux, the kernel perf subsystem) to collect stacks and samples. To improve robustness the tracer now performs its own stack unwinding / stack walking in newer agent releases: starting with dd-trace-java 1.55.0 the Datadog profiler uses its own stable stack-walker implementation instead of relying solely on `AsyncGetCallTrace`. That reduces ASGCT-related crashes and gives the profiler more control over unwinding across JVMs and GC modes.
+- **Java Flight Recorder (JFR)**: Uses the JVM's built-in flight recorder. Available on all platforms but with fewer profile types. On Linux, used as a fallback when the Datadog Profiler cannot be enabled.
+
+The profiler automatically selects the appropriate engine based on your environment. You do not need to configure this manually. Below are the different profile types and the related configurations.
+
+## CPU profiling
+
+Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling.
+
+| Engine | Environment Variable | System Property | JMC Event | Notes |
+|--------|---------------------|-----------------|-----------|-------|
+| **Datadog** (default in v1.7.0+) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_CPU_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.cpu.enabled=true` | `datadog.ExecutionSample` | Default on Linux |
+| **JFR** | `DD_PROFILING_DDPROF_CPU_ENABLED=false` | `-Ddd.profiling.ddprof.cpu.enabled=false` | `jdk.ExecutionSample` | To switch from Datadog to JFR (v1.7.0+) |
+
+### Linux settings
+
+The CPU engine works on most systems, but if the value of `/proc/sys/kernel/perf_event_paranoid` is set to `3`, the profiler can't use perf events to schedule CPU sampling. This results in degraded profile quality, falling back to using itimer. Set `/proc/sys/kernel/perf_event_paranoid` to `2` or lower with the following command:
+
+```shell
+sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
+```
+
+## Wallclock
+
+The Datadog profiler wallclock engine:
+- Samples all threads, on- or off-CPU, with active tracing activity
+- Can be used to diagnose trace or span latency
+- Is useful for profiling latency and integrates tightly with APM tracing
+- Enabled by default
+- Is specific to the Datadog profiler and is not available on Windows
+
+| Configuration | Environment Variable | System Property | JMC Event |
+|---------------|---------------------|-----------------|-----------|
+| **Enable** (default in v1.7.0+) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_WALL_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.wall.enabled=true` | `datadog.MethodSample` |
+
+**Note**: The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+
+## Allocation profiling
+
+The Datadog allocation profiling engine:
+- Contextualizes allocation profiles with endpoint information
+- Supports allocation profiles filtered by endpoint
+- Relies on JVMTI APIs; automatically disabled on OpenJDK < 21.0.3 to prevent stability issues
+- For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`
+
+The JFR-based allocation profiling engine:
+- Enabled by default since JDK 16
+- Not enabled by default for JDK 8 and 11, as allocation-intensive applications can lead to high overhead and large recording sizes
+- For JMC users, the JFR allocation events are `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB`
+
+| Engine | Environment Variable | System Property |
+|--------|---------------------|-----------------|
+| **Datadog** (default) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_ALLOC_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.alloc.enabled=true` |
+| **JFR** | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` |
+
+**Note**: The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+
+## Live heap profiling
+
+The live-heap profiler engine:
+- Useful for investigating the overall memory usage of service and identifying potential memory leaks
+- Samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle
+- Uses the number of surviving samples to estimate the number of live objects in the heap
+- Limits the number of tracked samples to avoid unbounded growth of the profiler's memory usage
+- Disabled by default
+- Not available on Windows
+- For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`
+
+| Configuration | Environment Variable | System Property |
+|---------------|---------------------|-----------------|
+| **Enable** (Requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+) | `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED=true` | `-Ddd.profiling.ddprof.liveheap.enabled=true` |
+
+**Note**: The live-heap engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+
+## Collecting native stack traces
+
+If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include:
+- JVM internals
+- Native libraries used by your application or the JVM
+- Syscalls
+
+| Configuration | Environment Variable | System Property |
+|---------------|---------------------|-----------------|
+| **Enable** | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_CSTACK=dwarf` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.cstack=dwarf` |
+
+<div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</div>
 
 ## Supported versions and profile types
 
-### Linux (Datadog Profiler)
 
-<div class="alert alert-info">
-<strong>Version requirements</strong>: The Datadog Profiler requires specific JDK versions due to a fix for a <a href="https://bugs.openjdk.org/browse/JDK-8283849">known issue</a> in the <code>AsyncGetCallTrace</code> JVM API. This fix was backported to 8u352, 11.0.17, and 17.0.5.
-</div>
 
-**Live heap profiling** requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+ due to JVMTI API stability requirements.
-
-### Windows and macOS (JFR)
-
-<div class="alert alert-warning">
-Oracle JDK 11+ may require a commercial license from Oracle to enable JFR. Contact your Oracle representative to confirm whether JFR is included in your license.
-</div>
 
 ### GraalVM native-image
 
