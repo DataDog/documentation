@@ -50,8 +50,8 @@ This guide focuses on manual evaluations. For managed LLM-as-a-judge evaluations
 The evaluation system has four main components:
 
 1. **[EvaluatorContext](#evaluatorcontext)** — The input to an evaluator. Contains the LLM's input, output, expected output, and span identifiers. In experiments, the SDK builds this automatically from each dataset record. In production, you construct it yourself.
-2. **[EvaluatorResult](#evaluatorresult)** — The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`) instead.
-3. **[Metric type](#metric-types)** — Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), or `boolean` (pass/fail).
+2. **[EvaluatorResult](#evaluatorresult)** — The output of an evaluator. Contains a typed value, optional reasoning, a pass/fail assessment, metadata, and tags. You can also return a plain value (`str`, `float`, `int`, `bool`, `dict`) instead.
+3. **[Metric type](#metric-types)** — Determines how the evaluation value is interpreted and displayed: `categorical` (string labels), `score` (numeric), `boolean` (pass/fail), or `json` (structured data).
 4. **[SummaryEvaluatorContext](#summaryevaluatorcontext)** — Experiments only. After all dataset records are evaluated, summary evaluators receive the aggregated results to compute statistics like averages or pass rates.
 
 The typical flow:
@@ -106,7 +106,7 @@ class SemanticSimilarityEvaluator(BaseEvaluator):
 
 - Call `super().__init__(name="evaluator_name")` to set the evaluator's label.
 - Implement `evaluate(context: EvaluatorContext)` with your evaluation logic.
-- Return an `EvaluatorResult` for rich results, or a plain value (`str`, `float`, `int`, `bool`).
+- Return an `EvaluatorResult` for rich results, or a plain value (`str`, `float`, `int`, `bool`, `dict`).
 
 #### BaseSummaryEvaluator
 
@@ -165,7 +165,7 @@ def evaluator_function(
 {{< /code-block >}}
 
 You can return either:
-- A plain value (`str`, `float`, `int`, `bool`)
+- A plain value (`str`, `float`, `int`, `bool`, `dict`)
 - An `EvaluatorResult` for rich results with reasoning and metadata
 
 ## Using evaluators in experiments
@@ -275,7 +275,7 @@ Allows you to return rich evaluation results with additional context. Used in bo
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `value` | `Union[str, float, int, bool]` | The evaluation value. Type depends on `metric_type`. |
+| `value` | `Union[str, float, int, bool, dict]` | The evaluation value. Type depends on `metric_type`. |
 | `reasoning` | `Optional[str]` | A text explanation of the evaluation result. |
 | `assessment` | `Optional[str]` | An assessment of this evaluation. Accepted values are `pass` and `fail`. |
 | `metadata` | `Optional[Dict[str, Any]]` | Additional metadata about the evaluation. |
@@ -295,13 +295,14 @@ A frozen dataclass providing aggregated evaluation results across all dataset re
 
 ### Metric types
 
-LLM Observability supports three metric types for evaluations. The metric type is set when submitting an evaluation (through `submit_evaluation()` or the HTTP API) and determines how the value is validated and displayed in Datadog.
+The metric type is set when submitting an evaluation (through `submit_evaluation()` or the HTTP API) and determines how the value is validated and displayed in Datadog.
 
 | Metric type | Value type | Use case |
 |-------------|------------|----------|
 | `categorical` | `str` | Classifying outputs into categories (for example, "Positive", "Negative", "Neutral") |
 | `score` | `float` or `int` | Numeric scores or ratings (for example, 0.0-1.0, 1-10) |
 | `boolean` | `bool` | Pass/fail or yes/no evaluations |
+| `json` | `dict` | Structured evaluation data (for example, multi-dimensional rubrics or detailed breakdowns) |
 
 ## Best practices
 
