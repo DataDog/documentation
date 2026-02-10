@@ -13,7 +13,7 @@ further_reading:
 
 Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that notify on *No Data* are available for 48 hours. If you do not have *No Data* alert settings enabled and your group for a metric monitor stops reporting data, the group persists on the monitor status page until it ages out, though that group stops being evaluated after a short absence. The specific timing for how long the group persists depends on your settings.
 
-For event monitors, however, Datadog also keeps groups for evaluations for at least 24 hours. This means that if a monitor is updated and the groups are changed in the query, some old groups may persist. If you must change the group settings on your event monitor, you may want to clone or create a new monitor to reflect your new groups. Alternatively, you can mute them if you would like to maintain the monitor but silence any alerts that would result from the changes.
+For event monitors, however, Datadog also keeps groups for evaluations for at least 24 hours. This means that if a monitor is updated and the groups are changed in the query, some old groups may persist. If you must change the group settings on your event monitor, you may want to clone or create a monitor to reflect your new groups. Alternatively, you can mute them if you would like to maintain the monitor but silence any alerts that would result from the changes.
 
 ## Renamed or decommissioned hosts appearing in alerts
 
@@ -23,14 +23,14 @@ When a host is renamed at the operating system (OS) level or decommissioned, the
 - **Host Monitors**: 48 hours
 - **Service Check Monitors**: 48 hours
 
-The old hostname will remain in an alert state until the retention period expires, after which it will automatically age out and disappear from the monitor. Note that the old hostname will no longer appear in **Infrastructure > Hosts**, but will continue to be evaluated by monitors until the retention window passes.
+The old hostname remains in an alert state until the retention period expires, after which it automatically ages out and disappears from the monitor. **Note**: The old hostname will no longer appear in **Infrastructure > Hosts**, but will continue to be evaluated by monitors until the retention window passes.
 
 ### Workarounds
 
 If you need to remove the old hostname from alerts before the retention period expires, you can use one of the following workarounds:
 
-- **Mute the alert group**: Mute the specific alert group for the old hostname while waiting for it to age out naturally.
-- **Add an exclusion filter**: Add an exclusion filter to the monitor query (for example, `-host:old-hostname`) to immediately remove it from evaluation.
+- **Mute the specific alert group** for the old hostname while it ages out naturally.
+- **Add an exclusion filter** to the monitor query (for example, `-host:old-hostname`) to immediately remove the hostname from evaluation.
 
 
 ## Further reading

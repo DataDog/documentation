@@ -29,7 +29,7 @@ This guide provides an overview of some foundational concepts that can help you 
 - [Data availability and evaluation issues](#data-availability-and-evaluation-issues)
 - [Alert condition configuration](#alert-conditions)
 - [Monitor groups and retention](#monitor-groups-and-retention)
-- [Notification problems](#notification-issues)
+- [Notification issues](#notification-issues)
 
 ## Monitor state and status
 
@@ -45,7 +45,7 @@ The state of a monitor may also sometimes update in the absence of a monitor eva
 
 ## Data availability and evaluation issues
 
-If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. `N/A` groups are not included in monitors but are visible in dashboard queries.
+If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the datapoints being pulled in by the metric query. `N/A` groups are not included in monitors but are visible in dashboard queries.
 
 ### Sparse metrics
 
@@ -53,13 +53,13 @@ If metrics are absent from a monitor's evaluation window, and the monitor is not
 
 ### "No Data" status with rollup functions
 
-If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
+If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 datapoints within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
 
 For most use cases, disable the "Require Full Window" setting unless your specific scenario demands complete data for accurate evaluation. For more information, see [Rollups in monitors][21].
 
 ### Cloud metric delays
 
-If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
+If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to help ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
 ## Alert conditions
 
