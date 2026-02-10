@@ -62,7 +62,7 @@ end
 client = OpenFeature::SDK.build_client
 ```
 
-Using `set_provider_and_wait` blocks until the provider is fully initialized or the timeout is reached. This ensures flags are ready before your application starts handling requests. If you prefer non-blocking initialization, use `set_provider` instead—the client returns default values until Remote Configuration loads in the background.
+Using `set_provider_and_wait` blocks your application from proceeding until the provider is fully initialized or the timeout is reached. This ensures flags are ready before your application starts handling requests. If you prefer non-blocking initialization, use `set_provider` instead. If you do, the client returns default values until Remote Configuration loads in the background.
 
 ## Set the evaluation context
 
