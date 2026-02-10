@@ -16,7 +16,7 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
       tag: "Blog"
       text: "Best practices for managing Datadog organizations at scale"
-    - link: "https://www.youtube.com/watch?v=2OEzAE7c2c0&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=2&t=94s"
+    - link: "https://www.youtube.com/watch?v=2OEzAE7c2c0&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=1&pp=iAQB"
       tag: "Video"
       text: "Datadog Tips & Tricks: Improve log utilization with Datadog log exclusion filters"
 algolia:
