@@ -63,6 +63,33 @@ const typesenseConfig = getConfig(env).typesense;
 const docsIndex = typesenseConfig.docsIndex;
 const partnersIndex = typesenseConfig.partnersIndex;
 
+// Local search parameters (bypass remote presets for testing)
+// TODO: Once optimal weights are found, sync to remote presets and revert to using presets
+const localSearchParams = {
+    docs: {
+        // SOTA: Title-first, aggressive exponential weighting
+        query_by: 'title,tags,section_header,content',
+        query_by_weights: '10,8,4,1',
+        group_by: 'distinct_base_url',
+        group_limit: 1,
+        // Tie-breaker: Text Score → Global Importance → Section Priority
+        sort_by: '_text_match:desc,rank:desc,order:asc',
+    },
+    docs_api: {
+        query_by: 'title,tags,section_header,content',
+        query_by_weights: '10,8,4,1',
+        group_by: 'distinct_base_url',
+        group_limit: 1,
+        // API pages: rank:asc prioritizes API endpoints
+        sort_by: 'rank:asc,_text_match:desc,order:asc'
+    },
+    partners: {
+        query_by: 'title,content',
+        query_by_weights: '10,1',
+        sort_by: '_text_match:desc'
+    }
+};
+
 const adapterOptions = {
     server: {
         apiKey: typesenseConfig.public_key,
@@ -92,11 +119,11 @@ const adapterOptions = {
     },
     collectionSpecificSearchParameters: {
         [docsIndex]: {
-            preset: 'docs_alias_view',
+            ...localSearchParams.docs,
             collection: docsIndex
         },
         [partnersIndex]: {
-            preset: 'docs_partners_view',
+            ...localSearchParams.partners,
             collection: partnersIndex
         }
     }
@@ -187,11 +214,11 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             ...{
                 collectionSpecificSearchParameters: {
                     [docsIndex]: {
-                        preset: 'docs_alias_api_view',
+                        ...localSearchParams.docs_api,
                         collection: docsIndex
                     },
                     [partnersIndex]: {
-                        preset: 'docs_partners_view',
+                        ...localSearchParams.partners,
                         collection: partnersIndex
                     }
                 }
