@@ -10,10 +10,6 @@ further_reading:
     text: "Datadog Software Catalog"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
-
 ## Overview
 
 For large monorepos containing multiple projects or components, or where multiple teams collaborate, viewing code coverage data for the entire repository may not provide actionable insights. Code Coverage supports splitting coverage data by services and code owners, allowing you to:

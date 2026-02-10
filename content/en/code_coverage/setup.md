@@ -19,10 +19,6 @@ further_reading:
     text: "Learn how Code Coverage supports large monorepos"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
-
 Setting up Code Coverage involves the following steps:
 
 1. Configure the integration with your [source code provider](#integrate-with-source-code-provider) in the Datadog UI.

@@ -13,10 +13,6 @@ further_reading:
     text: "Organize coverage data with flags"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/code-coverage/" >}}
-Code Coverage is in Preview. This product replaces Test Optimization's <a href="https://docs.datadoghq.com/tests/code_coverage">code coverage</a> feature, which is being deprecated. Complete the form to request access for the new Code Coverage product.
-{{< /callout >}}
-
 ## Overview
 
 You can configure Code Coverage behavior by creating a configuration file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository.
