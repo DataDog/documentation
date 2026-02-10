@@ -226,7 +226,7 @@ This template creates two IAM policies:
 ### Finish setting up S3 buckets for Storage Management
   After completing the CloudFormation setup, enable buckets for Storage Management from the Datadog UI:
   - Navigate to **Storage Management** → [Enable Buckets][105].
-  - In step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **I enabled it myself**.
+  - In step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **Use existing inventories**.
   - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**.
 
 {{< img src="infrastructure/storage_management/enable-it-for-me.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
@@ -279,7 +279,9 @@ module "datadog_storage_management" {
 }
 ```
 
-After Amazon S3 has generated inventories (which can take up to 24 hours), verify Storage Management is enabled on your buckets by navigating to **Storage Management** > [**Enable Buckets**][402] > **Use existing inventories** and confirming your destination bucket is listed and enabled.
+After enabling S3 inventory, it may take up to 24 hours for the first inventory reports to be generated. To check that inventories are being created, go to the AWS Console, navigate to your destination bucket, and check that inventory files appear in the destination prefix you specified during setup. 
+
+Once you've confirmed inventory files are present, verify Storage Management is enabled on your buckets by navigating to **Storage Management** > [**Enable Buckets**][402] > **Use existing inventories** and confirming your destination bucket is listed and enabled.
 
 [401]: https://registry.terraform.io/modules/DataDog/storage-management-datadog/aws/latest
 [402]: https://app.datadoghq.com/storage-monitoring?mConfigure=true&mStorageRecGroupBy=&mView=s3
@@ -363,10 +365,10 @@ For each bucket you want to monitor:
 
   After the inventory configuration is set up and your inventory files begin appearing in the destination bucket, enable buckets for Storage Management from the Datadog UI:
   - Navigate to **Storage Management** → [Enable Buckets][205].
-  - In Step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **I enabled it myself**.
+  - In Step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **Use existing inventories**.
   - Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**.
 
-   **Note**: If you don't see a list of your existing destination buckets under **I enabled it myself**, you need to provide required S3 permissions as part of [AWS Resource Collection][207].
+   **Note**: If you don't see a list of your existing destination buckets under **Use existing inventories**, you need to provide required S3 permissions as part of [AWS Resource Collection][207].
 
 {{< img src="infrastructure/storage_management/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
@@ -382,10 +384,10 @@ For each bucket you want to monitor:
   **Note**: Storage Management only supports CSV format for inventories.
 
   1. Navigate to **Storage Management** > [**Enable Buckets**][603].
-  2. In Step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **I enabled it myself**.
+  2. In Step 2, under **Enable S3 Inventory to get prefix level monitoring**, select **Use existing inventories**.
   3. Choose the destination buckets that contain the inventory files for the source buckets you want to monitor and click **Confirm**.
 
-**Note**: If you don't see a list of your existing destination buckets under **I enabled it myself**, you need to provide required S3 permissions as part of [AWS Resource Collection][604].
+**Note**: If you don't see a list of your existing destination buckets under **Use existing inventories**, you need to provide required S3 permissions as part of [AWS Resource Collection][604].
 
 {{< img src="infrastructure/storage_management/enabled-it-myself.png" alt="Select destination buckets for enabling Storage Monitoring" responsive="true">}}
 
