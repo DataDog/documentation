@@ -3,11 +3,11 @@ title: Ignoring Unwanted Resources in APM
 description: Learn how to exclude unwanted resources like health checks from traces using sampling rules and filtering to reduce noise and manage costs.
 ---
 
-A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application. This documentation covers two main options: sampling and filtering.
+Services often handle endpoints you may not want to trace (for example, health checks). This guide explains the following approaches for excluding that traffic:
 
-<div class="alert alert-info">
-If you can programmatically identify a set of traces and no option in this guide solves your requirement, consider adding a <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">custom span tag</a> to drop the traces.
-</div>
+- **Sampling**: Use when you want requests to remain visible in trace metrics, but reduce trace ingestion volume.
+- **Filtering in the Datadog Agent**: Use to exclude requests entirely (including from trace metrics) across all services reporting to the Agent.
+- **Tracer configuration**: Use when filtering logic must be applied per service or depends on application-specific context (for example, request attributes or runtime state).
 
 If you need assistance deciding which option is the most relevant for your use case, contact [Datadog support][1]. 
 
@@ -31,32 +31,33 @@ DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "samp
 
 <div class="alert alert-info">Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
 
-## Filtering
+## Filtering in the Datadog Agent
 
-If you don't want the span ingested and don't want to see it reflected in trace metrics, use one of the following filter methods:
+If you don't want these requests ingested or reflected in trace metrics, use filtering in the Datadog Agent.
 
-- [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent)
-- [Tracer configuration](#tracer-configuration-options)
+The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from being sent: ignoring span tags or ignoring resources. If traces are dropped due to these settings, the trace metrics exclude these requests.
 
-### Trace Agent configuration 
+Configuring the Trace Agent to ignore certain traces or resources applies to all services that send traces to this Datadog Agent. If you have application-specific requirements, use [Tracer configuration](#tracer-configuration) instead.
 
-The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from coming through: ignoring span tags or ignoring resources. If traces are dropped due to these settings, the trace metrics exclude these requests.
+<div class="alert alert-info">
+If none of the options in this guide meet your requirements, consider adding a <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">custom span tag</a> in your application and using it to drop traces at the Agent.
+</div>
 
-Configuring the Trace Agent to ignore certain spans or resources applies to all services that send traces to this particular Datadog Agent. If you have application-specific requirements, use the [Tracer configuration](#tracer-configuration) method instead.
+### Ignoring based on span tags
 
-#### Ignoring based on span tags
+Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
-Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
+<div class="alert alert-info">
+Individual spans within a trace cannot be selectively dropped; if the root span matches the filter criteria, the complete trace is discarded.
+</div>
 
-<div class="alert alert-info">Individual spans within a trace cannot be selectively dropped; if the root span matches the filter criteria, the complete trace is discarded.</div>
-
-##### Match behavior 
+**Match behavior:**
 
 The filter tags option requires an exact string match. For regex-based filtering, see [Ignoring based on resources](#ignoring-based-on-resources).
 
-When you specify multiple tags, the filter uses **OR logic**: traces are dropped if the root span matches **any** of the tags. To match multiple conditions simultaneously, use a custom tag combining both criteria.
+When you specify multiple tags, the filter uses **OR logic**: traces are dropped if the root span matches **any** of the tags. To match multiple conditions simultaneously, add a custom tag that represents those combined criteria.
 
-##### Configuration
+**Configuration:**
 
 You can specify span tags to require or reject by using a list of keys and values separated by spaces in environment variables:
 
@@ -90,7 +91,7 @@ apm_config:
 
 {{% tab "Kubernetes" %}}
 
-##### Datadog Operator
+#### Datadog Operator
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 apiVersion: datadoghq.com/v2alpha1
@@ -109,7 +110,7 @@ spec:
 
 {{% k8s-operator-redeploy %}}
 
-##### Helm
+#### Helm
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 agents:
@@ -129,7 +130,7 @@ agents:
 {{< /tabs >}}
 
 
-##### Available span tags
+#### Available span tags
 
 On the backend, Datadog creates and adds the following span tags to spans after ingestion. 
 
@@ -150,7 +151,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 <div class="alert alert-danger">Starting from October 1st 2022, Datadog backend applies a remapping in order to apply <a href="/tracing/trace_collection/tracing_naming_convention">Span Tags Semantics
 </a> across tracers on all ingested spans. If you want to drop traces based on root span tags at the Datadog Agent level, use tags in the <strong>Remap from</strong> column.</div>
 
-##### Network communications
+#### Network communications
 
 | **Name**                   | **Remap from**                                      |
 |----------------------------|-----------------------------------------------------|
@@ -158,7 +159,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `network.destination.ip`   | `out.host` - All languages  |
 | `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - All languages  |
 
-##### HTTP requests
+#### HTTP requests
 
 | **Name**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
@@ -166,7 +167,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `http.useragent`               | `user_agent` - Java, C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
-##### Database
+#### Database
 
 | **Name**                         | **Remap from**                                                                                                                                                                                                                  |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -181,7 +182,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `db.mongodb.collection`          | `mongodb.collection` - Python, .NET, Ruby, PHP                                                                                                                                                                                  |
 | `db.cosmosdb.container`          | `cosmosdb.container` - .NET                                                                                                                                                                                                     |
 
-##### Message Queue
+#### Message Queue
 
 | **Name**                               | **Remap from**                                                                                             |
 |----------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -201,7 +202,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
 
 
-##### Remote procedure calls
+#### Remote procedure calls
 
 | **Name**                       | **Remap from**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
@@ -214,13 +215,13 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
 | `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js
 
-##### Errors
+#### Errors
 
 | **Name**                       | **Remap from**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
 | `error.message`                  | `error.msg` - All languages                      |
 
-#### Ignoring based on resources
+### Ignoring based on resources
 
 The **ignore resources** option allows resources to be excluded if the global root span of the trace matches certain criteria. See [Exclude resources from being collected][5]. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of ignore resources are not included in trace metrics.
 
@@ -249,7 +250,7 @@ DD_APM_IGNORE_RESOURCES="(GET|POST) /healthcheck,API::NotesController#index"
 - Depending on your deployment strategy, you may have to adjust the regex by escaping special characters.
 - If you use dedicated containers with Kubernetes, make sure that the environment variable for the ignore resource option is being applied to the **trace-agent** container.
 
-##### Example
+#### Example
 
 Consider a trace that contains calls to `/api/healthcheck` that you don't want traces from:
 
@@ -428,11 +429,13 @@ If you use Amazon ECS (such as on EC2), in your Datadog Agent container definiti
 
 <div class="alert alert-danger">Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
-### Tracer configuration
+## Tracer configuration
 
-Some of the language-specific tracers have an option to modify spans before they are sent to the Datadog Agent. Use this option if you have application-specific requirements and are using a language listed below.
+Some language tracers can drop traces before they are sent to the Datadog Agent. Use this option if you have application-specific requirements.
 
-<div class="alert alert-warning">1. If the request is associated with a distributed trace, the resulting trace can have sampling inaccuracy if you drop portions of it due to these filtering rules.<br> 2. Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
+<div class="alert alert-warning">
+1. If the request is associated with a distributed trace, the resulting trace can have sampling inaccuracy if you drop portions of it due to these filtering rules.<br> 
+2. Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
@@ -457,7 +460,7 @@ Datadog::Tracing.before_flush(
 
 The Python tracer provides an option to filter unwanted traces:
 
-#### Using custom filters
+### Using custom filters
 
 For advanced use cases, you can create custom filters:
 
