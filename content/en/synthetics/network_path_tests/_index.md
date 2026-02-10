@@ -41,10 +41,10 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 3. Optional: Configure advanced options:  
    1. **Source service**: The label displayed for the source host in the Network Path visualization.  
    2. **Destination service**: The label displayed for the destination host in the Network Path visualization.  
-   3. **Max TTL**: Maximum time-to-live (maximum number of hops) for outgoing probe packets. Defaults to 30 hops.  
-   4. **E2E Queries**: Number of packets sent to the destination to measure packet loss, latency, and jitter. Defaults to 50.
-   5. **Traceroute Queries**: Number of traceroute path tracings to perform. Results are aggregated in each test run details panel. Defaults to 3.
-   6. **TCP traceroute strategy** (TCP tests only): Choose between Selective Acknowledgement (SACK) and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic.
+   3. **Max {{< tooltip text="TTL" tooltip="Time-to-live: The maximum number of network hops a packet can traverse before being discarded" >}}**: Maximum time-to-live (maximum number of hops) for outgoing probe packets. Defaults to 30 hops.  
+   4. **E2E Queries**: Number of packets sent to the destination to measure {{< tooltip text="packet loss" tooltip="The percentage of data packets that fail to reach their destination" >}}, latency, and {{< tooltip text="jitter" tooltip="The variation in latency between consecutive packets" >}}. Defaults to 50.
+   5. **{{< tooltip text="Traceroute" tooltip="The mechanism that Network Path uses to determine intermediate hops and latency." >}} Queries**: Number of traceroute path tracings to perform. Results are aggregated in each test run details panel. Defaults to 3.
+   6. **TCP traceroute strategy** (TCP tests only): Choose between {{< tooltip text="Selective Acknowledgement (SACK)" tooltip="A TCP option that allows receivers to acknowledge non-contiguous data blocks, improving retransmission efficiency" >}} and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic.
 4. Optional: Add **Tags** to your test, including environment tags. Use tags to filter your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][1].
 
   {{< img src="synthetics/network_tests/new_network_path_test.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
@@ -58,7 +58,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | latency | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
    | packet loss |  | `is`, `<`, `<=`, `>`, `>=` | int (0 to 100) |
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
-   | network hops  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
+   | network {{< tooltip text="hops" tooltip="The number of intermediate network devices (routers, switches) a packet passes through between source and destination" >}}  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
 6. Select the **locations** from which to run your test. You can run Network Path tests from managed locations to test public endpoints, or from a [Datadog Agent](#agent-configuration) to test private environments.
 
