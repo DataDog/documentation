@@ -264,7 +264,7 @@ Tooltip
 **Value**: string or expression
 
 Default Value
-: The default date that the date picker displays.<br>
+: The default date of the date picker, displayed as a UNIX timestamp in milliseconds.<br>
 **Value**: integer
 
 Allow Future Dates
