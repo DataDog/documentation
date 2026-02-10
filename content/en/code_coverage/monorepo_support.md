@@ -228,4 +228,4 @@ Confirm that:
 [4]: /service_catalog/service_definition_api/
 [5]: https://app.datadoghq.com/ci/code-coverage
 [6]: /code_coverage/configuration
-[7]: /pr_gates
+[7]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
