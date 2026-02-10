@@ -110,6 +110,8 @@ The table lists the applied sampling rates by resource of the service.
 
 **Note**: If the service is not making sampling decisions, the service's resources will be collapsed under the `Resources not making sampling decisions` row.
 
+**Note**: When the Effective Sampling Rate is set to 100% but the UI shows a value lower than 100% on short timeframes (for example, 1 hour or 4 hours), the difference is due to estimation of total traces and does not indicate missing traces or that the actual value differs from 100%.
+
 #### Ingestion Reasons and sampling decision makers
 
 Explore the **Ingestion reasons breakdown** to see which mechanisms are responsible for your service ingestion. Each ingestion reason relates to one specific [ingestion mechanism][11]. After changing your service ingestion configuration, you can observe the increase or decrease of ingested bytes and spans in this timeseries graph based on the past hour of ingested data.
