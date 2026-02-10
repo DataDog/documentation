@@ -5626,11 +5626,16 @@ menu:
       parent: code_coverage
       identifier: code_coverage_monorepo_support
       weight: 3
+    - name: Flags
+      url: code_coverage/flags/
+      parent: code_coverage
+      identifier: code_coverage_flags
+      weight: 4
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 4
+      weight: 5
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -8478,21 +8483,6 @@ menu:
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_profiling
       weight: 603
-    - name: Browser Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/browser_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_browser
-      weight: 604
-    - name: Android Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/android_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_android
-      weight: 605
-    - name: iOS Profiling
-      url: real_user_monitoring/correlate_with_other_telemetry/profiling/ios_profiling/
-      parent: rum_correlate_with_other_telemetry_profiling
-      identifier: rum_profiling_ios
-      weight: 606
     - name: Correlate Synthetics with RUM
       url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
