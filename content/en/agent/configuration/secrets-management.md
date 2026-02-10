@@ -32,7 +32,7 @@ Instead of hardcoding sensitive values like API keys or passwords in plaintext w
 
 ### Option 1: Using native Agent support for fetching secrets
 
-**Note**: This option is not available for FIPS-enabled Agents at this time.
+**Note**: As of Agent version `7.76` and onwards, native secrets management is available for FIPS-enabled Agents.
 
 Starting in Agent version `7.70`, the Datadog Agent natively supports several secret management solutions. Two new settings have been introduced to `datadog.yaml`: `secret_backend_type` and `secret_backend_config`.
 
@@ -599,7 +599,7 @@ roleRef:
   name: datadog-secret-reader
 subjects:
 - kind: ServiceAccount
-  name: datadog-agent
+  name: <serviceaccount name>  # datadog is typically the default ServiceAccount name
   namespace: datadog  # Where Agent runs
 ```
 
@@ -698,7 +698,7 @@ spec:
         value: "ENC[secrets-ns/dd-api-key;api_key]"
 ```
 
-**Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. Auto-RBAC through the Operator's `roles:` field is not supported for type-based backends.
+**Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
 <div class="alert alert-info"> The Operator does not have native <code>secretBackend.type</code> configuration. Use environment variables in <code>override.nodeAgent.env</code>. </div>
 

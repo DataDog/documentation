@@ -43,6 +43,8 @@ Use the table below to determine whether to open a [support ticket][1] or [reach
 | Incidents and outages           | Documentation clarification
 | Complex support troubleshooting across many configuration files, logs, or queries | Minor issues involving a specific configuration file, log, or query
 
+<div class="alert alert-info">You can also use AI assistant to find answers to your questions. To access AI assistant, click the <strong>Support</strong> button in the bottom-left corner of the navigation menu.</div>
+
 If you're not sure which option is best, feel free to use either channel to connect with Datadog support. A support ticket is automatically created whenever a chat is closed, so the issue can continue to be investigated even if it's not resolved in chat.
 
 ## Reaching out on chat
@@ -52,6 +54,8 @@ If you're not sure which option is best, feel free to use either channel to conn
 To get started, click **Support** on the bottom-left corner of the navigation menu.
 
 {{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
+
+AI assistant appears on your screen. You can ask AI assistant questions or select **Live Chat With Support**.
 
 When a new chat is opened, you are asked if you have a **technical** or **sales** question.
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.

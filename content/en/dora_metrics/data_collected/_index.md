@@ -110,6 +110,6 @@ For more information about using custom tags in DORA Metrics, see [DORA Metrics 
 [12]: /dora_metrics/deployments/#limitations
 [13]: https://www.datadoghq.com/blog/service-catalog-setup/
 [14]: https://app.datadoghq.com/incidents
-[15]: /incident_response/incident_management/describe#attributes
+[15]: /incident_response/incident_management/investigate/describe/
 [16]: /dora_metrics/
 [17]: /dora_metrics/change_failure_detection/

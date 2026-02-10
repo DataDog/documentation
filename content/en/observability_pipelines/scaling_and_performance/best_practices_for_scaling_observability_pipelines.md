@@ -2,6 +2,13 @@
 title: Best Practices for Scaling Observability Pipelines
 aliases:
     - /observability_pipelines/best_practices_for_scaling_observability_pipelines/
+further_reading:
+- link: "https://www.datadoghq.com/architecture/op-vm-deployment/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines VM deployment"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines for Kubernetes deployment"
 ---
 
 <div class="alert alert-info">
@@ -45,13 +52,14 @@ The Worker can also be scaled [vertically][2], which takes advantage of addition
 
 #### VM-based architecture
 
-The following architecture diagram is for a host-based architecture, where a load balancer accepts traffic from push-based sources. If only pull-based sources are being used, a load balancer is not required. In the diagram, the Worker is part of a managed instance group that scales based on processing needs. The Observability Pipelines Worker is almost always CPU constrained. CPU utilization is the strongest signal for autoscaling because CPU utilization metrics do not produce false positives.
+The following architecture diagram is for a host-based architecture, where a load balancer accepts traffic from push-based sources. If only pull-based sources are being used, a load balancer is not required. In the diagram, the Worker is part of a managed instance group that scales based on processing needs. See [Observability Pipelines VM deployment][9] for more details.
 
 {{< img src="observability_pipelines/scaling_best_practices/vm-infra.png" alt="Diagram showing the Worker as part of a managed instance group" style="width:100%;" >}}
 
+
 #### Kubernetes-based architecture
 
-The following architecture diagram is for a container-based architecture, where the Kubernetes service acts as the router to the statefulset and accepts traffic from push-based sources. If you are sending telemetry from outside the cluster, set the [service.type to `LoadBalancer`][3] or install an [ingress controller][4] and configure an [ingress][5] for routing. The Worker runs as part of a statefulset and supports horizontal pod autoscaling to adjust capacity based on processing needs. Like the VM-based architecture, Workers can also scale vertically and take advantage of multiple cores for parallel processing.
+The following architecture diagram is for a container-based architecture, where the Kubernetes service acts as the router to the statefulset and accepts traffic from push-based sources. If you are sending telemetry from outside the cluster, set the [service.type to `LoadBalancer`][3] or install an [ingress controller][4] and configure an [ingress][5] for routing. The Worker runs as part of a statefulset and supports horizontal pod autoscaling to adjust capacity based on processing needs. Like the VM-based architecture, Workers can also scale vertically and take advantage of multiple cores for parallel processing. See [Observability Pipelines for Kubernetes deployment][10] for more details.
 
 {{< img src="observability_pipelines/scaling_best_practices/containerized-infra.png" alt="Diagram showing the Worker as part of a statefulset" style="width:100%;" >}}
 
@@ -87,7 +95,9 @@ A hybrid approach uses a dedicated Kubernetes cluster or managed instance group 
 
 ### Instance sizing
 
-Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][7] enabled. Do not rely on a statically configured number of VMs or containers. This helps ensure you can safely handle traffic spikes without data loss and maintain high availability if a Worker goes down.
+Based on performance benchmarking for a pipeline that is using 12 processors to transform data, the Worker can handle approximately 1 TB per vCPU per day. For example, if you have 4 TB of events per day, you should provision enough compute plus headroom to account for your volumes. This could be three two-core machines or containers, or one six-core machine or container. 
+
+The Observability Pipelines Worker is almost always CPU constrained and since CPU utilization metrics do not produce false positives, they provide the strongest signal for autoscaling. Datadog recommends deploying Workers as part of an autoscaling group or deployed with [Horizontal Pod Autoscaling][7] enabled. Do not rely on a statically configured number of VMs or containers. This helps ensure you can safely handle traffic spikes without data loss and maintain high availability if a Worker goes down.
 
 For high throughput environments, Datadog recommends larger machine types because they typically have higher network bandwidth. Consult your cloud provider's documentation for details (for example, [Amazon EC2 instance network bandwith][8]).
 
@@ -201,6 +211,10 @@ Auto-scaling should be based on average CPU utilization. For the vast majority o
 - Average CPU with a 85% utilization target.
 - A five minute stabilization period for scaling up and down.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#horizontal-scaling
 [2]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#vertical-scaling
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L208-L209
@@ -209,3 +223,5 @@ Auto-scaling should be based on average CPU utilization. For the vast majority o
 [6]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#optimize-the-instance
 [7]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L70-L85
 [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html
+[9]: https://www.datadoghq.com/architecture/op-vm-deployment/
+[10]: https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/

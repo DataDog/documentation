@@ -1207,6 +1207,16 @@
       "group": "observability_pipelines",
       "suffix": "",
       "description": "Create a new pipeline returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3363445359",
+      "description": "Create a pipeline with dedupe processor with cache returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_581245895",
+      "description": "Create a pipeline with dedupe processor without cache returns \"OK\" response"
     }
   ],
   "UpdatePipeline": [
