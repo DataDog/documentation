@@ -22,9 +22,9 @@ The following table summarizes the Cloud Security features available relative to
 The following table summarizes the scope of coverage available relative to each Cloud Security feature.
 | Resources monitored             | Misconfigurations | Vulnerabilities | Identity Risks | Agentless scanning |
 |---------------------------------|-------------------|-----------------|----------------|--------------------|
-| AWS Resources/IAM               | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
-| Azure Resources/IAM             | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
-| GCP Resources/IAM              | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| AWS Resources                   | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| Azure Resources                 | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
+| GCP Resources                   | {{< X >}}         | {{< X >}}       | {{< X >}}      | {{< X >}}          |
 | Kubernetes Cluster              | {{< X >}}         |                 |                |                    |
 | Docker Host                     | {{< X >}}         |                 |                |                    |
 | Linux Host                      | {{< X >}}         | {{< X >}}       |                | {{< X >}}          |
