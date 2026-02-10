@@ -57,7 +57,7 @@ def get_staged_files():
     """Get staged markdown files or all files if no staged files."""
     try:
         result = subprocess.run(
-            ['git', 'diff', '--cached', '--name-only', '--diff-filter=ACM'],
+            ['git', 'diff', '--cached', '--name-only', '--diff-filter=ACMR'],
             capture_output=True,
             text=True,
             check=True
@@ -76,14 +76,20 @@ def check_circular_aliases():
     """Check for circular aliases in markdown files."""
     errors = []
     staged_files = get_staged_files()
-    
+
     for file_path in staged_files:
-        if not file_path or not os.path.exists(file_path):
+        if not file_path:
             continue
-        
+
         try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
+            # Read the STAGED version of the file, not the working directory version
+            result = subprocess.run(
+                ['git', 'show', f':{file_path}'],
+                capture_output=True,
+                text=True,
+                check=True
+            )
+            content = result.stdout
             
             frontmatter = parse_frontmatter(content)
             aliases = frontmatter.get('aliases', [])

@@ -6,6 +6,9 @@ aliases:
   - /continuous_integration/integrate_tests/
   - /continuous_integration/tests/
 further_reading:
+    - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+      tag: "Learning Center"
+      text: "Getting Started with Test Optimization"
     - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
       tag: "Release Notes"
       text: "Check out the latest Software Delivery releases! (App login required)"
@@ -39,6 +42,11 @@ cascade:
         rank: 70
         tags: ['ci test', 'ci tests', 'test optimization', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
+
+{{< learning-center-callout header="Try Getting Started with Test Optimization in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-test-optimization">}}
+  Learn how to accelerate your CI pipelines by setting up test monitoring, identifying flaky tests and using Test Impact Analysis to run only the tests that matter.
+{{< /learning-center-callout >}}
+
 
 ## Overview
 

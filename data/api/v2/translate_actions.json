@@ -572,6 +572,46 @@
     "request_description": "Case priority update payload",
     "request_schema_description": "Case update priority request"
   },
+  "LinkIncident": {
+    "description": "Link an incident to a case",
+    "summary": "Link incident to case",
+    "request_description": "Incident link request",
+    "request_schema_description": "Relationship to incident request"
+  },
+  "UnlinkJiraIssue": {
+    "description": "Remove the link between a Jira issue and a case",
+    "summary": "Remove Jira issue link from case"
+  },
+  "LinkJiraIssueToCase": {
+    "description": "Link an existing Jira issue to a case",
+    "summary": "Link existing Jira issue to case",
+    "request_description": "Jira issue link request",
+    "request_schema_description": "Jira issue link request"
+  },
+  "CreateCaseJiraIssue": {
+    "description": "Create a new Jira issue and link it to a case",
+    "summary": "Create Jira issue for case",
+    "request_description": "Jira issue creation request",
+    "request_schema_description": "Jira issue creation request"
+  },
+  "CreateCaseNotebook": {
+    "description": "Create a new investigation notebook and link it to a case",
+    "summary": "Create investigation notebook for case",
+    "request_description": "Notebook creation request",
+    "request_schema_description": "Notebook creation request"
+  },
+  "MoveCaseToProject": {
+    "description": "Update the project associated with a case",
+    "summary": "Update case project",
+    "request_description": "Project update request",
+    "request_schema_description": "Relationship to project"
+  },
+  "CreateCaseServiceNowTicket": {
+    "description": "Create a new ServiceNow incident ticket and link it to a case",
+    "summary": "Create ServiceNow ticket for case",
+    "request_description": "ServiceNow ticket creation request",
+    "request_schema_description": "ServiceNow ticket creation request"
+  },
   "UpdateStatus": {
     "description": "Update case status",
     "summary": "Update case status",
@@ -1226,6 +1266,30 @@
     "request_description": "",
     "request_schema_description": "Update request for a notification template."
   },
+  "ListIncidentPostmortemTemplates": {
+    "description": "Retrieve a list of all postmortem templates for incidents.",
+    "summary": "List postmortem templates"
+  },
+  "CreateIncidentPostmortemTemplate": {
+    "description": "Create a new postmortem template for incidents.",
+    "summary": "Create postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteIncidentPostmortemTemplate": {
+    "description": "Delete a postmortem template.",
+    "summary": "Delete postmortem template"
+  },
+  "GetIncidentPostmortemTemplate": {
+    "description": "Retrieve details of a specific postmortem template.",
+    "summary": "Get postmortem template"
+  },
+  "UpdateIncidentPostmortemTemplate": {
+    "description": "Update an existing postmortem template.",
+    "summary": "Update postmortem template",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -1279,7 +1343,7 @@
     "request_schema_description": "Create request for an attachment."
   },
   "CreateIncidentPostmortemAttachment": {
-    "description": "Create a postmortem attachment for an incident.",
+    "description": "Create a postmortem attachment for an incident.\n\nThe endpoint accepts markdown for notebooks created in Confluence or Google Docs.\nPostmortems created from notebooks need to be formatted using frontend notebook cells,\nin addition to markdown format.",
     "summary": "Create postmortem attachment",
     "request_description": "",
     "request_schema_description": ""
@@ -1531,6 +1595,34 @@
     "summary": "Update Workflows webhook handle",
     "request_description": "Workflows Webhook handle payload.",
     "request_schema_description": "Update Workflows webhook handle request."
+  },
+  "ListTenancyProducts": {
+    "description": "Lists the products for a given tenancy. Returns the enabled/disabled status of Datadog products (such as Cloud Security Posture Management) for specific OCI tenancies.",
+    "summary": "List tenancy products"
+  },
+  "GetTenancyConfigs": {
+    "description": "Get a list of all configured OCI tenancy integrations. Returns basic information about each tenancy including authentication credentials, region settings, and collection preferences for metrics, logs, and resources.",
+    "summary": "Get tenancy configs"
+  },
+  "CreateTenancyConfig": {
+    "description": "Create a new tenancy config to establish monitoring and data collection from your OCI environment. Requires OCI authentication credentials and tenancy details. Warning: Datadog recommends interacting with this endpoint only through the Datadog web UI to ensure all necessary OCI resources have been created and configured properly.",
+    "summary": "Create tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteTenancyConfig": {
+    "description": "Delete an existing tenancy config. This will stop all data collection from the specified OCI tenancy and remove the stored configuration. This operation cannot be undone.",
+    "summary": "Delete tenancy config"
+  },
+  "GetTenancyConfig": {
+    "description": "Get a single tenancy config object by its OCID. Returns detailed configuration including authentication credentials, enabled services, region settings, and collection preferences.",
+    "summary": "Get tenancy config"
+  },
+  "UpdateTenancyConfig": {
+    "description": "Update an existing tenancy config. You can modify authentication credentials, enable/disable collection types, update service filters, and change region settings. Warning: We recommend using the Datadog web UI to avoid unintended update effects.",
+    "summary": "Update tenancy config",
+    "request_description": "",
+    "request_schema_description": ""
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -2548,6 +2640,26 @@
     "request_description": "New definition of the Agent policy",
     "request_schema_description": "Request object that includes the Agent policy with the attributes to update"
   },
+  "ListReplayHeatmapSnapshots": {
+    "description": "List heatmap snapshots.",
+    "summary": "List replay heatmap snapshots"
+  },
+  "CreateReplayHeatmapSnapshot": {
+    "description": "Create a heatmap snapshot.",
+    "summary": "Create replay heatmap snapshot",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteReplayHeatmapSnapshot": {
+    "description": "Delete a heatmap snapshot.",
+    "summary": "Delete replay heatmap snapshot"
+  },
+  "UpdateReplayHeatmapSnapshot": {
+    "description": "Update a heatmap snapshot.",
+    "summary": "Update replay heatmap snapshot",
+    "request_description": "",
+    "request_schema_description": ""
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -2557,7 +2669,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -2721,6 +2833,70 @@
     "summary": "Search RUM events",
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
+  },
+  "ListRumReplayPlaylists": {
+    "description": "List playlists.",
+    "summary": "List rum replay playlists"
+  },
+  "CreateRumReplayPlaylist": {
+    "description": "Create a playlist.",
+    "summary": "Create rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "DeleteRumReplayPlaylist": {
+    "description": "Delete a playlist.",
+    "summary": "Delete rum replay playlist"
+  },
+  "GetRumReplayPlaylist": {
+    "description": "Get a playlist.",
+    "summary": "Get rum replay playlist"
+  },
+  "UpdateRumReplayPlaylist": {
+    "description": "Update a playlist.",
+    "summary": "Update rum replay playlist",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "BulkRemoveRumReplayPlaylistSessions": {
+    "description": "Remove sessions from a playlist.",
+    "summary": "Bulk remove rum replay playlist sessions",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayPlaylistSessions": {
+    "description": "List sessions in a playlist.",
+    "summary": "List rum replay playlist sessions"
+  },
+  "RemoveRumReplaySessionFromPlaylist": {
+    "description": "Remove a session from a playlist.",
+    "summary": "Remove rum replay session from playlist"
+  },
+  "AddRumReplaySessionToPlaylist": {
+    "description": "Add a session to a playlist.",
+    "summary": "Add rum replay session to playlist"
+  },
+  "GetSegments": {
+    "description": "Get segments for a view.",
+    "summary": "Get segments"
+  },
+  "ListRumReplaySessionWatchers": {
+    "description": "List session watchers.",
+    "summary": "List rum replay session watchers"
+  },
+  "DeleteRumReplaySessionWatch": {
+    "description": "Delete session watch history.",
+    "summary": "Delete rum replay session watch"
+  },
+  "CreateRumReplaySessionWatch": {
+    "description": "Record a session watch.",
+    "summary": "Create rum replay session watch",
+    "request_description": "",
+    "request_schema_description": ""
+  },
+  "ListRumReplayViewershipHistorySessions": {
+    "description": "List watched sessions.",
+    "summary": "List rum replay viewership history sessions"
   },
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
@@ -3060,6 +3236,18 @@
     "description": "Get a suppression's version history.",
     "summary": "Get a suppression's version history"
   },
+  "GetContentPacksStates": {
+    "description": "Get the activation and configuration states for all security monitoring content packs.\nThis endpoint returns status information about each content pack including activation state,\nintegration status, and log collection status.",
+    "summary": "Get content pack states"
+  },
+  "ActivateContentPack": {
+    "description": "Activate a security monitoring content pack. This operation configures the necessary\nlog filters or security filters depending on the pricing model and updates the content\npack activation state.",
+    "summary": "Activate content pack"
+  },
+  "DeactivateContentPack": {
+    "description": "Deactivate a security monitoring content pack. This operation removes the content pack's\nconfiguration from log filters or security filters and updates the content pack activation state.",
+    "summary": "Deactivate content pack"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -3341,6 +3529,10 @@
   "GetSLOReportJobStatus": {
     "description": "Get the status of the SLO report job.",
     "summary": "Get SLO report status"
+  },
+  "GetSloStatus": {
+    "description": "Get the status of a Service Level Objective (SLO) for a given time period.\n\nThis endpoint returns the current SLI value, error budget remaining, and other status information for the specified SLO.",
+    "summary": "Get SLO status"
   },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
@@ -3766,7 +3958,7 @@
     "request_schema_description": "Request to update the state of multiple flaky tests."
   },
   "SearchFlakyTests": {
-    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.",
+    "description": "List endpoint returning flaky tests from Flaky Test Management. Results are paginated.\n\nThe response includes comprehensive test information including:\n- Test identification and metadata (module, suite, name)\n- Flaky state and categorization\n- First and last flake occurrences (timestamp, branch, commit SHA)\n- Test execution statistics from the last 7 days (failure rate)\n- Pipeline impact metrics (failed pipelines count, total lost time)\n- Complete status change history (optional, ordered from most recent to oldest)\n\nSet `include_history` to `true` in the request to receive the status change history for each test.\nHistory is disabled by default for better performance.\n\nResults support filtering by various facets including service, environment, repository, branch, and test state.",
     "summary": "Search flaky tests",
     "request_description": "",
     "request_schema_description": "The request for a flaky tests search."

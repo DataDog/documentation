@@ -2056,11 +2056,11 @@ The `LLMObs.submit_evaluation()` method accepts the following arguments:
 
 `metric_type`
 : required - _string_
-<br />The type of the evaluation. Must be `categorical`, `score`, or `boolean`.
+<br />The type of the evaluation. Must be `categorical`, `score`, `boolean` or `json`.
 
 `value`
-: required - _string or numeric type_
-<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), or boolean (`metric_type==boolean`).
+: required - _string, numeric type, or dict_
+<br />The value of the evaluation. Must be a string (`metric_type==categorical`), integer/float (`metric_type==score`), boolean (`metric_type==boolean`), or dict (`metric_type==json`).
 
 `span`
 : optional - _dictionary_
