@@ -12,6 +12,7 @@ further_reading:
   text: Visually identify and prioritize security risks using Cloudcraft
 ---
 
+## Telemetry Data
 {{< callout url="https://www.datadoghq.com/product-preview/phone-number-physical-address-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
 Phone number and physical address PII detection in logs using machine learning are in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
