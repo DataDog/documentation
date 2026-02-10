@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Flags let you organize and filter coverage data by custom categories. Use flags to separate coverage reports by test type (unit, integration, end-to-end), runtime version (JVM 17, JVM 21), or any other criteria relevant to your project.
+Flags in Code Coverage let you organize and filter coverage data by custom categories. Use flags to separate coverage reports by test type (unit, integration, end-to-end), runtime version (JVM 17, JVM 21), or any other criteria relevant to your project.
 
 With flags, you can:
 - View coverage data filtered by a specific flag in the Datadog UI.
@@ -24,7 +24,7 @@ With flags, you can:
 
 ### Flags vs. monorepo support features
 
-Code Coverage provides two complementary ways to slice coverage data:
+Code Coverage provides two complementary ways to filter coverage data:
 
 - **[Monorepo support features][3]** (per-codeowner and per-service coverage) filter coverage data by **file paths**. Use these to see coverage data for files a particular team owns or for files belonging to a specific service.
 - **Flags** filter coverage data by **reports**. Use these when the same files can be covered by different test runs, such as unit tests vs. integration tests, or tests running on different runtime versions.
@@ -61,9 +61,9 @@ This allows you to answer questions like "What is my unit test coverage?" (`unit
 
 ## Add flags to coverage reports
 
-<div class="alert alert-info">The <code>--flags</code> argument is available in datadog-ci v5.6.0 and later.</div>
+<div class="alert alert-info">The <code>--flags</code> argument is available in <code>datadog-ci</code> v5.6.0 and later.</div>
 
-To add flags to a coverage report, use the `--flags` option when uploading with the `datadog-ci` CLI.
+To add flags to a coverage report, use the `--flags` option when uploading with the `datadog-ci` CLI:
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --flags unit-tests coverage-unit.xml
@@ -85,7 +85,7 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ## View coverage by flag
 
-In the [Code Coverage UI][4], use the **Flag** filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
+In the [Code Coverage UI][4], select a repository and use the **Flag** filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
 
 {{< img src="/code_coverage/flags_filter.png" alt="Code Coverage UI showing the flag filter dropdown" style="width:100%" >}}
 
@@ -95,7 +95,7 @@ When you select a flag, the coverage metrics update to show only the data from r
 
 You can configure [PR Gates][1] to enforce coverage thresholds for specific flags. This allows you to enforce different coverage requirements for different test types or runtime versions.
 
-### Creating a flag-specific gate
+### Create a flag-specific gate
 
 1. Navigate to [PR Gates rule creation][2].
 2. Configure the coverage threshold (total or patch coverage).
