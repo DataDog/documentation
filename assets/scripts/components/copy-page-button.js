@@ -29,9 +29,6 @@ async function copyPageText() {
     await navigator.clipboard.writeText(text);
 
     displaySuccessFeedback();
-
-    console.log(text);
-    console.log('Above text copied to clipboard.');
 }
 
 /**
@@ -82,12 +79,11 @@ async function loadPageText() {
             }
 
             const text = await response.text();
-            console.log('Markdown content fetched successfully for copy.');
             pageTextCache.mdUrl = mdUrl;
             pageTextCache.text = text;
             return text;
         } catch (err) {
-            console.log('Falling back to DOM extraction for copy.');
+            // Fail over to extracting text from the DOM
             const text = extractPageText();
             pageTextCache.text = text;
             pageTextCache.mdUrl = mdUrl;
@@ -129,7 +125,6 @@ function displaySuccessFeedback() {
  * (used as a fallback if fetching the .md file fails).
  */
 function extractPageText() {
-    console.log('Failing back to DOM extraction for copy ...');
     const mainContent = document.getElementById('mainContent');
     if (!mainContent) {
         return '';
