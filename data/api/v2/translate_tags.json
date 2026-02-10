@@ -127,6 +127,10 @@
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
   },
+  "entity-risk-scores": {
+    "name": "Entity Risk Scores",
+    "description": "Retrieves security risk scores for entities in your organization."
+  },
   "error-tracking": {
     "name": "Error Tracking",
     "description": "View and manage issues within Error Tracking. See the [Error Tracking page](https://docs.datadoghq.com/error_tracking/) for more information."
@@ -147,6 +151,10 @@
     "name": "GCP Integration",
     "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
+  "high-availability-multiregion": {
+    "name": "High Availability MultiRegion",
+    "description": "Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.\nHAMR provides disaster recovery capabilities by maintaining synchronized data between primary\nand secondary organizations across different datacenters."
+  },
   "ip-allowlist": {
     "name": "IP Allowlist",
     "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information."
@@ -162,6 +170,10 @@
   "incidents": {
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
+  },
+  "jira-integration": {
+    "name": "Jira Integration",
+    "description": "Manage your Jira Integration. Atlassian Jira is a project management and issue tracking tool for teams to coordinate work and handle tasks efficiently."
   },
   "key-management": {
     "name": "Key Management",
@@ -203,6 +215,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "oci-integration": {
+    "name": "OCI Integration",
+    "description": "Auto-generated tag OCI Integration"
+  },
   "observability-pipelines": {
     "name": "Observability Pipelines",
     "description": "Observability Pipelines allows you to collect and process logs within your own infrastructure, and then route them to downstream integrations."
@@ -239,6 +255,10 @@
     "name": "Processes",
     "description": "The processes API allows you to query processes data for your organization. See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/) for more information."
   },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "Send server-side events to Product Analytics. Server-Side Events Ingestion allows you to collect custom events\nfrom any server-side source, and retains events for 15 months. Server-side events are helpful for understanding\ncauses of a funnel drop-off which are external to the client-side (for example, payment processing error).\nSee the [Product Analytics page](https://docs.datadoghq.com/product_analytics/) for more information."
+  },
   "rum": {
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
@@ -262,6 +282,22 @@
   "rum-metrics": {
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
+  "rum-replay-heatmaps": {
+    "name": "Rum Replay Heatmaps",
+    "description": "Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views."
+  },
+  "rum-replay-playlists": {
+    "name": "Rum Replay Playlists",
+    "description": "Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration."
+  },
+  "rum-replay-sessions": {
+    "name": "Rum Replay Sessions",
+    "description": "Retrieve segments for RUM replay sessions. Access session replay data stored in event platform or blob storage."
+  },
+  "rum-replay-viewership": {
+    "name": "Rum Replay Viewership",
+    "description": "Track and manage RUM replay session viewership. Monitor who watches replay sessions and maintain watch history for audit and analytics purposes."
   },
   "rum-retention-filters": {
     "name": "Rum Retention Filters",
@@ -295,6 +331,10 @@
     "name": "Service Scorecards",
     "description": "API to create and update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
+  "servicenow-integration": {
+    "name": "ServiceNow Integration",
+    "description": "Manage your ServiceNow Integration. ServiceNow is a cloud-based platform that helps organizations manage digital workflows for enterprise operations."
+  },
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."
@@ -314,6 +354,10 @@
   "static-analysis": {
     "name": "Static Analysis",
     "description": "API for static analysis"
+  },
+  "status-pages": {
+    "name": "Status Pages",
+    "description": "Manage your status pages and communicate service disruptions to stakeholders via Datadog's API. See the [Status Pages documentation](https://docs.datadoghq.com/incident_response/status_pages/) for more information."
   },
   "synthetics": {
     "name": "Synthetics",

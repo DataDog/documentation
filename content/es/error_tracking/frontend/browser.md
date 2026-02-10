@@ -198,14 +198,6 @@ Más información sobre [etiquetado][19] en Datadog.
 
 Consulta la [referencia de la API del SDK del navegador][9] para ver la lista completa de opciones de configuración disponibles.
 
-## Funciones avanzadas (opcionales)
-
-### Gestionar los mapas de fuentes cargados
-
-Consulta todos los símbolos cargados y gestiona tus mapas de fuentes en la página [Símbolos de depuración][17].
-
-**Nota**: El tamaño de los mapas de fuentes está limitado a **500 MB** cada uno.
-
 ## Siguientes pasos
 
 Puedes monitorizar excepciones no gestionadas, rechazos de promesas no gestionadas, excepciones gestionadas, rechazos de promesas gestionadas y otros errores que el SDK del navegador no rastrea automáticamente. Más información sobre [Recopilación de errores del navegador][3].
@@ -223,7 +215,7 @@ Puedes monitorizar excepciones no gestionadas, rechazos de promesas no gestionad
 [7]: /es/real_user_monitoring/application_monitoring/browser/data_collected/
 [8]: /es/real_user_monitoring/platform/dashboards/errors/
 [9]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[10]: /es/real_user_monitoring/session_replay/browser/privacy_options#mask-action-names
+[10]: /es/session_replay/browser/privacy_options#mask-action-names
 [11]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#sourcemaps-command
 [12]: https://github.com
 [13]: https://about.gitlab.com

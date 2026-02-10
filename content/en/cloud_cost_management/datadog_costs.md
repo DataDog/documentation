@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][1], and Cloud Cost Explorer, along with your entire organization's cloud provider and [SaaS costs][2].
+Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][1], Cloud Cost Explorer, [reports][12], and [budgets][11], along with your entire organization's cloud provider and [SaaS costs][2].
 
 You can view daily Datadog costs in [Cloud Cost Management][3](CCM), and access additional Datadog cost capabilities like [Cost Summary][5] and [Cost Chargebacks][6] on the [**Plan & Usage** page][7].
 
@@ -86,3 +86,5 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [8]: /help/
 [9]: /account_management/billing/usage_attribution/
 [10]: /account_management/plan_and_usage/cost_details/#cost-summary-sub-organization
+[11]: /cloud_cost_management/planning/budgets?tab=basic
+[12]: /cloud_cost_management/reporting

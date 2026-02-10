@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -16,16 +17,33 @@ Set up the New Relic destination and its environment variables when you [set up 
 
 ### Set up the destination
 
-1. Select the data center region (**US** or **EU**) of your New Relic account.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+<div class="alert alert-danger">Only enter the identifiers for the account ID and license. Do <b>not</b> enter the actual values.</div>
 
-### Set the environment variables
+1.  Enter the identifier for your account ID. If you leave it blank, the [default](#set-secrets) is used.
+1.  Enter the identifier for your license. If you leave it blank, the [default](#set-secrets) is used.
+1. Select the data center region (**US** or **EU**) of your New Relic account.
+{{% observability_pipelines/destination_buffer_numbered %}}
+
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- New Relic account ID identifier:
+	- The default identifier is `DESTINATION_NEW_RELIC_ACCOUNT_ID`.
+- New Relic license identifier:
+	- The default identifier is `DESTINATION_NEW_RELIC_LICENSE_KEY`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/new_relic %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

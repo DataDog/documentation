@@ -4,6 +4,7 @@ disable_toc: false
 products:
 - name: Logs
   icon: logs
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -40,8 +41,8 @@ Set up the Kafka destination and its environment variables when you [set up a pi
 ##### Enable TLS
 
 Toggle the switch to enable **TLS**. The following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][6] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).
+- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
 - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS#8) format.
 
 ##### Enable SASL authentication
@@ -55,16 +56,9 @@ Toggle the switch to enable **TLS**. The following certificate and key files are
 1. In the **Compression Algorithm** dropdown menu, select a compression algorithm (**gzip**, **zstd**, **lz4**, or **snappy**).
 1. (Optional) Select a **Compression Level** in the dropdown menu. If the level is not specified, the algorithm's default level is used.
 
-##### Buffering options (Preview)
+##### Buffering options
 
-Toggle the switch to enable **Buffering Options** ({{< tooltip glossary="preview" case="title" >}}).<br>**Note**: Contact your account manager to request access to the Preview.
-- If disabled (default): Up to 500 events are buffered before flush.
-- If enabled:
-	1. Select the buffer type you want to set.
-        - **Memory**: Fast, limited by RAM
-        - **Buffer size**: Durable, survives restarts
-	1. Enter the buffer size and select the unit.
-	    - Maximum capacity in MB or GB.
+{{% observability_pipelines/destination_buffer %}}
 
 ##### Advanced options
 
@@ -83,11 +77,35 @@ Click **Advanced** if you want to set any of the following fields:
     1. Check your values against the [librdkafka documentation][7] to make sure they have the correct type and are within the set range.
     1. Click **Add Option** to add another librdkafka option.
 
-### Set environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Kafka bootstrap servers identifier:
+    - References the bootstrap server that the client uses to connect to the Kafka cluster and discover all the other hosts in the cluster.
+	- In your secrets manager, the host and port must be entered in the format of `host:port`, such as `10.14.22.123:9092`. If there is more than one server, use commas to separate them.
+	- The default identifier is `DESTINATION_KAFKA_BOOTSTRAP_SERVERS`.
+- Kafka TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_KAFKA_KEY_PASS`.
+- SASL authentication (when enabled):
+	- Kafka SASL username identifier:
+		- The default identifier is `DESTINATION_KAFKA_SASL_USERNAME`.
+	- Kafka SASL password identifier:
+		- The default identifier is `DESTINATION_KAFKA_SASL_PASSWORD`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{< img src="observability_pipelines/destinations/kafka_env_var.png" alt="The install page showing the Kafka environment variable field" style="width:70%;" >}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/kafka %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## librdkafka options
 

@@ -67,96 +67,45 @@ To ensure the safety of your data, you must use a client token. For more informa
 First, ensure that you have your environment set up properly for each platform.
 
 <div class="alert alert-info">
-Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
+Datadog supports Flutter Monitoring for iOS, Android, and Web for Flutter 3.27+.
 </div>
 
-Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
+Datadog supports Flutter Web starting with v3 of the SDK, with a few known limitations.
 
-* All Actions reported from Flutter are labeled with type `custom`.
-* Long running actions (`startAction` and `stopAction`) are not supported.
-* Manually reporting RUM resources (`startResource` and `stopResource`) is not supported.
+* Long running actions (`startAction` and `stopAction`) are not supported
+* Actions (`addAction`) and manually reported Resources (`startResource` and `stopResource`) do not properly associate with Errors or Actions.
 * Event mappers are not supported.
-* Tags on loggers are not supported.
-* `addUserExtraInfo` is not supported.
-* `stopSession` is not supported.
-
-No Flutter Web support is planned, but Datadog's priorities are often re-evaluated based on your feedback. If you have a Flutter Web app and would want to use the Datadog SDK to monitor its performance, reach out to your customer support team and escalate this feature request.
 
 #### iOS
 
-Your iOS Podfile, located in `ios/Podfile`, must have `use_frameworks!` set to true (which is the default in Flutter) and must set its target iOS version >= 11.0.
+The Datadog SDK for Flutter supports integration with both Cocoapods and Swift Package Manager (SPM).
+
+If you are using Cocoapods, your iOS Podfile, located in `ios/Podfile`, must have `use_frameworks!` set to true (which is the default in Flutter) and must set its target iOS version >= 12.0.
 
 This constraint is usually commented out on the top line of the Podfile, and should read:
 
 ```ruby
-platform :ios, '11.0'
+platform :ios, '12.0'
 ```
 
-You can replace `11.0` with any minimum version of iOS you want to support that is 11.0 or higher.
+You can replace `12.0` with any minimum version of iOS you want to support that is 12.0 or higher.
 
 #### Android
 
-For Android, your `minSdkVersion` version must be >= 21, and if you are using Kotlin, it should be a version >= 1.8.0. These constraints are usually held in your `android/app/build.gradle` file.
+For Android, your `minSdkVersion` version must be >= 23, and your `compileSdkVersion` must be >= 35. Clients using Flutter after 3.27 will usually have these variables set to Flutter constants (`flutter.minSdkVersion` and `flutter.compileSdkVersion`), and they do not have to be manually changed.
+
+If you are using Kotlin, it should be a version >= 2.1.0. Flutter versions above 3.27 will emit a waring stating that older versions of Kotlin will not be supported, and will provide instructions for updating.
+
+These constraints are usually held in your `android/app/build.gradle` file, or in your `android/grade.properties` file.
 
 #### Web
 
-For Web, add the following to your `index.html` under the `head` tag, for **{{<region-param key="dd_site_name">}}** site:
-{{< site-region region="us" >}}
+For Web, add the following to your `index.html` under the `head` tag:
 
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_logs_cdn_path >}}" crossorigin></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/{{< region-param key=flutter_web_rum_cdn_path >}}" crossorigin></script>
 ```
-
-{{</ site-region>}}
-{{< site-region region="ap1" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="ap2" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap2/v5/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum-slim.js"></script>
-```
-
-{{</ site-region>}}
-{{< site-region region="gov" >}}
-
-```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v5.js"></script>
-```
-
-{{</ site-region>}}
 
 This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchronous CDN-delivered version of the Browser SDK is the only version supported by the Datadog Flutter Plugin.
 
@@ -166,7 +115,7 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
 
    ```yaml
    dependencies:
-     datadog_flutter_plugin: ^2.0.0
+     datadog_flutter_plugin: ^3.0.0
    ```
 
 2. Create a configuration object for each Datadog feature (such as Logs or RUM) with the following snippet. If you do not pass a configuration for a given feature, that feature is disabled.
@@ -205,7 +154,7 @@ You can initialize the library using one of two methods in your `main.dart` file
    })
    ```
 
-* You can also manually set up [Error Tracking][6] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
+* You can also manually set up [Error Tracking][6]. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
