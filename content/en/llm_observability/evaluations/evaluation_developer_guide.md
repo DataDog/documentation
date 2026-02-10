@@ -20,7 +20,7 @@ further_reading:
 This guide covers how to build custom evaluators with the LLM Observability SDK and use them in experiments and production. It walks through:
 
 - [Key concepts](#key-concepts): How evaluations work in experiments versus production
-- [Building evaluators](#building-evaluators): Class-based and function-based approaches
+- [Building evaluators](#building-evaluators): Class-based, built-in, and function-based approaches
 - [Using evaluators in experiments](#using-evaluators-in-experiments): Running evaluators against a dataset
 - [Using evaluators in production](#using-evaluators-in-production): Evaluating live spans
 - [Data model reference](#data-model-reference): Detailed field descriptions for all evaluation types
