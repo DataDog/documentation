@@ -33,7 +33,7 @@ DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "samp
 
 ## Filtering in the Datadog Agent
 
-If you don't want these requests ingested or reflected in trace metrics, use filtering in the Datadog Agent.
+If you don't want the span ingested or reflected in trace metrics, use filtering in the Datadog Agent.
 
 The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from being sent: ignoring span tags or ignoring resources. If traces are dropped due to these settings, the trace metrics exclude these requests.
 
@@ -68,26 +68,6 @@ You can specify span tags to require or reject by using a list of keys and value
 : Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. In Datadog Agent 7.49+, regular expressions can be provided with `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
 {{< tabs >}}
-{{% tab "datadog.yaml" %}}
-
-You can set these values in the Agent configuration file using a comma-separated list:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-apm_config:
-  filter_tags:
-    require: ["db:sql", "db.instance:mysql"]
-    reject: ["outcome:success", "key2:value2"]
-{{< /code-block >}}
-
-For example, to ignore health checks where the `http.url` matches this endpoint:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-apm_config:
-  filter_tags:
-    reject: ["http.url:http://localhost:5050/healthcheck"]
-{{< /code-block >}}
-
-{{% /tab %}}
 
 {{% tab "Kubernetes" %}}
 
@@ -127,6 +107,28 @@ agents:
 [1]: /agent/kubernetes/?tab=helm#installation
 
 {{% /tab %}}
+
+{{% tab "datadog.yaml" %}}
+
+You can also set these values in the Agent configuration file using a comma-separated list:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
+  filter_tags:
+    require: ["db:sql", "db.instance:mysql"]
+    reject: ["outcome:success", "key2:value2"]
+{{< /code-block >}}
+
+For example, to ignore health checks where the `http.url` matches this endpoint:
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
+  filter_tags:
+    reject: ["http.url:http://localhost:5050/healthcheck"]
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -151,7 +153,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 <div class="alert alert-danger">Starting from October 1st 2022, Datadog backend applies a remapping in order to apply <a href="/tracing/trace_collection/tracing_naming_convention">Span Tags Semantics
 </a> across tracers on all ingested spans. If you want to drop traces based on root span tags at the Datadog Agent level, use tags in the <strong>Remap from</strong> column.</div>
 
-#### Network communications
+##### Network communications
 
 | **Name**                   | **Remap from**                                      |
 |----------------------------|-----------------------------------------------------|
@@ -159,7 +161,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `network.destination.ip`   | `out.host` - All languages  |
 | `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - All languages  |
 
-#### HTTP requests
+##### HTTP requests
 
 | **Name**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
@@ -167,7 +169,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `http.useragent`               | `user_agent` - Java, C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
-#### Database
+##### Database
 
 | **Name**                         | **Remap from**                                                                                                                                                                                                                  |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -182,7 +184,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `db.mongodb.collection`          | `mongodb.collection` - Python, .NET, Ruby, PHP                                                                                                                                                                                  |
 | `db.cosmosdb.container`          | `cosmosdb.container` - .NET                                                                                                                                                                                                     |
 
-#### Message Queue
+##### Message Queue
 
 | **Name**                               | **Remap from**                                                                                             |
 |----------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -202,7 +204,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
 
 
-#### Remote procedure calls
+##### Remote procedure calls
 
 | **Name**                       | **Remap from**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
@@ -215,7 +217,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
 | `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js
 
-#### Errors
+##### Errors
 
 | **Name**                       | **Remap from**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
