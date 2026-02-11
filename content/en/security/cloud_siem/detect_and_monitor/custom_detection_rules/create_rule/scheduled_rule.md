@@ -45,14 +45,14 @@ You can use SQL syntax to write detection rules for additional flexibility, cons
 
 In Datadog, SQL queries are compatible with data stored in [datasets][2]. You can create datasets to format data already stored in tables for the following data types:
 - Logs
-- Audit Trail
+- Audit Trail logs
 - Events
 - Security signals
 - Spans
-- RUM
-- Product Analytics
-- Cloud Network
-- NetFlow
+- RUM events
+- Product Analytics events
+- Cloud Network data
+- NetFlow data
 - Reference tables
 - Infrastructure tables
 
