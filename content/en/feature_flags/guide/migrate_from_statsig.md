@@ -5,7 +5,7 @@ description: Learn how to migrate feature flags from Statsig to Eppo by Datadog.
 
 This guide outlines the process for migrating your feature flagging logic from Statsig to Datadog. It covers conceptual mappings, SDK installation, initialization, and flag evaluation.
 
-## **Summary Checklist**
+## **Summary checklist**
 
 * Replace statsig-js with @datadog/openfeature-browser.  
 * Swap statsig.initialize with OpenFeature.setProvider.  
@@ -19,7 +19,7 @@ The core concepts between Statsig and Datadog are similar, but the terminology d
 
 | Statsig Concept | Datadog Concept | Notes |
 | :---- | :---- | :---- |
-| **Feature Gate** | **Feature Flag** (Boolean) | Simple on/off toggles. |
+| **Feature Gate** | **Feature Flag** (Boolean) | Basic on/off toggles. |
 | **Dynamic Config** | **Feature Flag** (JSON/String variants) | Flags in Datadog can return Strings, JSON, or Numbers, covering Statsig's Dynamic Config use cases. |
 | **Experiment** | **Feature Flag** (w/ Targeting) | A Datadog Flag can be configured with percentage-based rollouts and specific targeting rules to run experiments. |
 | **User/StatsigUser** | **Evaluation Context** | The context (attributes) passed to the SDK to evaluate flags. |
@@ -40,13 +40,13 @@ npm install @datadog/openfeature-browser @openfeature/web-sdk
 \# or  
 yarn add @datadog/openfeature-browser @openfeature/web-sdk
 ```
-**Note:** For server-side implementations (Node.js, Go, etc.), refer to the specific Datadog Server SDK documentation, but the OpenFeature pattern remains similar.
+**Note:** For server-side implementations (Node.js, Go, etc.), see the specific Datadog Server SDK documentation, but the OpenFeature pattern remains similar.
 
 ## **3\. Initialization**
 
 You must replace the statsig.initialize() call with the OpenFeature provider setup.
 
-### **Statsig (Old)**
+### **Statsig (old)**
 ```
 import statsig from 'statsig-js';
 
@@ -55,7 +55,7 @@ await statsig.initialize(
   { userID: 'user-123' }  
 );
 ```
-### **Datadog (New)**
+### **Datadog (new)**
 ```
 import { DatadogProvider } from '@datadog/openfeature-browser';  
 import { OpenFeature } from '@openfeature/web-sdk';
@@ -78,7 +78,7 @@ await OpenFeature.setProviderAndWait(provider);
 
 Replace checkGate calls with OpenFeature's getBooleanValue.
 
-### **Statsig (Old)**
+### **Statsig (old)**
 ```
 const isEnabled \= statsig.checkGate('new\_homepage\_design');
 
@@ -88,7 +88,7 @@ if (isEnabled) {
   // Show old design  
 }
 ```
-### **Datadog (New)**
+### **Datadog (new)**
 ```
 const client \= OpenFeature.getClient();
 
@@ -103,7 +103,7 @@ if (isEnabled) {
 ```
 ## **5\. Getting Configuration (Dynamic Configs)**
 
-If you were using getConfig or getExperiment to retrieve non-boolean values (strings, JSON, numbers), use the appropriate typed method in OpenFeature.
+If you were using getConfig or getExperiment to retrieve non-Boolean values (strings, JSON, numbers), use the appropriate typed method in OpenFeature.
 
 ### **Statsig (Old)**
 ```
