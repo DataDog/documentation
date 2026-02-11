@@ -75,7 +75,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 ## Set up Cloudflare Logpush
 
 Follow the [Cloudflare Logpush HTTP destination documentation][5] to set up Logpush to send logs to an HTTP endpoint.
-  - For the **HTTP endpoint**, the basic authorization headers need to be base64 encoded in the URL: `https://subdomain.your-domain.com?header_Authorization=Basic%20<base64-encoded-credentials>`
+  - For the **HTTP endpoint**, the basic authorization headers in the URL need to be base64 encoded: `https://subdomain.your-domain.com?header_Authorization=Basic%20<base64-encoded-credentials>`
 
 After your Logpush job has been successfully created, you can view your Cloudflare Logpush logs in Datadog [Log Explorer][6].
 
