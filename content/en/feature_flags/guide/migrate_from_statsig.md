@@ -3,17 +3,15 @@ title: Migrate Your Feature Flags from Statsig
 description: Learn how to migrate feature flags from Statsig to Eppo by Datadog.
 ---
 
-# **Migrating from Statsig to Datadog Feature Flags**
-
 This guide outlines the process for migrating your feature flagging logic from Statsig to Datadog. It covers conceptual mappings, SDK installation, initialization, and flag evaluation.
 
-## **Key Steps Summary**
+## **Summary Checklist**
 
-* \[ \] Replace statsig-js with @datadog/openfeature-browser.  
-* \[ \] Swap statsig.initialize with OpenFeature.setProvider.  
-* \[ \] Convert checkGate to client.getBooleanValue.  
-* \[ \] Convert getConfig to client.getObjectValue or client.getStringValue.  
-* \[ \] Ensure targetingKey is used in the context to identify users.
+* Replace statsig-js with @datadog/openfeature-browser.  
+* Swap statsig.initialize with OpenFeature.setProvider.  
+* Convert checkGate to client.getBooleanValue.  
+* Convert getConfig to client.getObjectValue or client.getStringValue.  
+* Ensure targetingKey is used in the context to identify users.
 
 ## **1\. Conceptual Mapping**
 
