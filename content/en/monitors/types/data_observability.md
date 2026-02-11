@@ -248,120 +248,29 @@ Observed value {{observed}} is within the expected range.
 
 ## Example monitors
 
-### Stale table detection
-
-This monitor alerts when a critical table has not been updated within the expected time window.
-
-#### Build the monitoring query
-
-1. In Datadog, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
-1. Select **Table** as the entity type.
-1. Select **Freshness** as the metric type.
-1. Select the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
-1. Select **Threshold** as the detection method.
-1. Set the expected update frequency to **6 hours**.
-
-#### Set the alert threshold
-
-1. Set the **Alert threshold** to trigger when the table has not been updated for more than 6 hours.
-1. Optionally, set a **Warning threshold** at 4 hours to receive an early warning.
-
-#### Configure notifications
-
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
-{{< code-block lang="text" >}}
-{{#is_alert}}
-Table {{database.name}}.{{schema.name}}.{{table.name}} has not been updated
-in over {{threshold}}. Investigate potential pipeline delays.
-{{/is_alert}}
-
-{{#is_recovery}}
-Table {{database.name}}.{{schema.name}}.{{table.name}} has been updated.
-Freshness has recovered.
-{{/is_recovery}}
-{{< /code-block >}}
-1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
-
-#### Verify and save the monitor
-
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
-1. Click **Create** to save the monitor.
+To create any of the examples below, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
 
 ### Unexpected row count drop
 
-This monitor detects a significant decrease in row count that could indicate a pipeline failure or missing data.
+Detect a significant decrease in row count that could indicate a pipeline failure or missing data.
 
-#### Build the monitoring query
+1. Select **Table** > **Row Count** and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
+1. Select **Anomaly** as the detection method. The monitor triggers when the row count deviates from its historical baseline.
 
-1. In Datadog, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
-1. Select **Table** as the entity type.
-1. Select **Row Count** as the metric type.
-1. Select the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
-1. Select **Anomaly** as the detection method.
+### Stale table detection
 
-#### Set the alert threshold
+Alert when a critical table has not been updated within the expected time window.
 
-1. The anomaly detection automatically triggers when the row count deviates from its historical baseline.
-1. To gain context on normal row count ranges, expand the time frame using the dropdown menu at the top of the chart.
-
-#### Configure notifications
-
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
-{{< code-block lang="text" >}}
-{{#is_alert}}
-Row count anomaly detected for {{database.name}}.{{schema.name}}.{{table.name}}.
-Observed: {{observed}} rows (expected: {{predicted}}, range: {{lower_bound}} to {{upper_bound}}).
-{{/is_alert}}
-
-{{#is_recovery}}
-Row count for {{database.name}}.{{schema.name}}.{{table.name}} has recovered
-to expected levels.
-{{/is_recovery}}
-{{< /code-block >}}
-1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
-
-#### Verify and save the monitor
-
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
-1. Click **Create** to save the monitor.
+1. Select **Table** > **Freshness** and choose the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
+1. Select **Threshold** as the detection method.
+1. Set the **Alert threshold** to **6 hours** and optionally a **Warning threshold** at **4 hours**.
 
 ### Column null percentage spike
 
-This monitor detects when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
+Detect when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
 
-#### Build the monitoring query
-
-1. In Datadog, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
-1. Select **Column** as the entity type.
-1. Select **Nullness** as the metric type.
-1. Select the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
+1. Select **Column** > **Nullness** and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
 1. Select **Anomaly** as the detection method.
-
-#### Set the alert threshold
-
-1. Set the **Alert threshold** to trigger when the null percentage deviates significantly from the historical baseline.
-1. To gain context on normal null percentage ranges, expand the time frame to **Past 1 Month** using the dropdown menu at the top of the chart.
-
-#### Configure notifications
-
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
-{{< code-block lang="text" >}}
-{{#is_alert}}
-Null percentage for {{database.name}}.{{schema.name}}.{{table.name}}.EMAIL
-has exceeded expected levels with a value of {{value}}.
-{{/is_alert}}
-
-{{#is_recovery}}
-Null percentage for {{database.name}}.{{schema.name}}.{{table.name}}.EMAIL
-has returned to expected levels.
-{{/is_recovery}}
-{{< /code-block >}}
-1. Add yourself to the notification recipients by typing and then selecting your name in the **Notify your services and your team members** box.
-
-#### Verify and save the monitor
-
-1. To verify the monitor setup, click **Test Notifications**. Trigger a test alert by choosing **Alert**, then click **Run Test**.
-1. Click **Create** to save the monitor.
 
 ## Further Reading
 
