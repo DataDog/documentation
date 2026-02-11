@@ -30,6 +30,13 @@
       "description": "Update a retention filter with trace rate returns \"OK\" response"
     }
   ],
+  "CreateAWSAccountCCMConfig": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create AWS CCM config returns \"AWS CCM Config object\" response"
+    }
+  ],
   "CreateAWSAccount": [
     {
       "group": "aws_integration",
@@ -40,6 +47,13 @@
       "group": "aws_integration",
       "suffix": "",
       "description": "Create an AWS integration returns \"AWS Account object\" response"
+    }
+  ],
+  "UpdateAWSAccountCCMConfig": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Update AWS CCM config returns \"AWS CCM Config object\" response"
     }
   ],
   "UpdateAWSAccount": [

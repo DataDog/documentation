@@ -192,7 +192,7 @@
   },
   "CreateScanningGroup": {
     "responses": {
-      "201": {
+      "200": {
         "json": {
           "data": {
             "attributes": {
@@ -457,7 +457,7 @@
   },
   "CreateScanningRule": {
     "responses": {
-      "201": {
+      "200": {
         "json": {
           "data": {
             "attributes": {

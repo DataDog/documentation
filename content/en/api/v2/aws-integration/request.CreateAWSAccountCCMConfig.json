@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "ccm_config": {
+        "data_export_configs": [
+          {
+            "bucket_name": "billing",
+            "bucket_region": "us-east-1",
+            "report_name": "cost-and-usage-report",
+            "report_prefix": "reports",
+            "report_type": "CUR2.0"
+          }
+        ]
+      }
+    },
+    "type": "ccm_config"
+  }
+}
