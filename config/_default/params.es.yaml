@@ -1,15 +1,10 @@
-announcement_banner:
-  desktop_message: Read the 2025 State of Containers and Serverless Report!
-  external_link: https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025
-  mobile_message: Read the State of Containers and Serverless Report!
-disclaimer: Esta página aún no está disponible en español. Estamos trabajando en su
-  traducción. <br> Si tienes alguna pregunta o comentario sobre nuestro actual proyecto
-  de traducción, <a href="https://docs.datadoghq.com/es/help/">no dudes en ponerte
-  en contacto con nosotros</a>.
-meta_description: Datadog, el servicio líder de monitorización a escala en nube.
+site_name: "Monitorización de la infraestructura y las aplicaciones de Datadog"
 meta_title: Empezando con Datadog
-site_name: Monitorización de la infraestructura y las aplicaciones de Datadog
-site_support_banner: Este producto no es compatible con el <a href="/getting_started/site">sitio
-  Datadog</a> seleccionado.
-translate_status_banner: Esta traducción no está actualizada. Para consultar la última
-  versión en inglés, haz clic aquí
+meta_description: "Datadog, el servicio líder de monitorización a escala en nube."
+disclaimer: "Esta página aún no está disponible en inglés. Estamos trabajando en su traducción. <br> Si tienes alguna pregunta o comentario sobre nuestro proyecto de traducción actual, <a href=\"https://docs.datadoghq.com/help/\">¡no dudes en contactarnos!</a>"
+announcement_banner:
+    desktop_message: '¡Lee el Informe sobre el Estado de Contenedores y Serverless 2025!'
+    mobile_message: '¡Lee el Informe sobre el Estado de Contenedores y Serverless!'
+    external_link: 'https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025'
+translate_status_banner: "Esta traducción no está actualizada. Para la versión más reciente en inglés, haz clic aquí"
+site_support_banner: "Este producto no es compatible con tu <a href=\"/getting_started/site\">sitio de Datadog</a> seleccionado."
