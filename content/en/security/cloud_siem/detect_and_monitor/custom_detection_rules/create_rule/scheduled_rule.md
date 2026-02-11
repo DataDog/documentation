@@ -39,6 +39,8 @@ Choose the query language you want to use.
 {{% cloud_siem/unit_testing %}}
 {{% /collapse-content %}}
 {{% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}}
+<div class="alert alert-info">SQL queries are in Preview.</div>
+
 You can use SQL syntax to write detection rules for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][1].
 
 In Datadog, SQL queries are compatible with data stored in [datasets][2]. You can create datasets to format data already stored in tables for the following data types:
