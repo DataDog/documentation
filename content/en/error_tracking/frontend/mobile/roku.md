@@ -52,7 +52,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 1. Navigate to [**Error Tracking** > **Settings** > **Browser and Mobile**][101] and click **+ New Application**.
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings. For more information, see [Roku Data Collected][201].
+3. To disable automatic user data collection for geolocation data or client IP, uncheck the boxes for those settings. For more information, see [Roku Data Collected][201].
 
    {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create an application for Roku in Datadog" style="width:90%;">}}
 
@@ -242,7 +242,7 @@ To verify your Roku Crash Reporting and Error Tracking configuration, trigger a 
 
 To test your implementation:
 
-1. Run your application on an Roku device.
+1. Run your application on a Roku device.
 2. Execute some code containing a crash. For example:
 
    ```brightscript
