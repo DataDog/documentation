@@ -62,9 +62,10 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 {{% /tab %}}
 {{< /tabs >}}
 
-All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
+- All JVM-based languages, such as Java, Scala, Groovy, Kotlin, and Clojure are supported.
 
-Continuous Profiler is not supported on serverless platforms such as AWS Lambda.
+- Java Continuous Profiler is not supported on serverless platforms such as AWS Lambda.
+
 
 ## Installation
 
@@ -129,7 +130,14 @@ java \
 
 4. Optional: Set up [Source Code Integration][5] to connect your profiling data with your Git repositories.
 
-5. After a couple of minutes, your profiles appear on the [Datadog APM > Profiling page][6].
+5. For more information on available profile types , see [Profile Types][11].
+
+5. After a couple of minutes, your profiles appear on the [Datadog APM > Profiling page][6]. 
+
+7. For GraalVM native-image applications, see [Enabling the Profiler for GraalVM Native Image][8].
+
+
+
 
 ## Configuration
 
@@ -144,9 +152,7 @@ You can configure the profiler using the following environment variables:
 | `DD_VERSION`                                     | String        | The [version][7] of your service. |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
-## GraalVM native-image
 
-For GraalVM native-image applications, see [Enabling the Profiler for GraalVM Native Image][8].
 
 ## Not sure what to do next?
 
@@ -168,3 +174,5 @@ For additional configuration options and troubleshooting guidance, see [Java Pro
 [8]: /profiler/enabling/graalvm/
 [9]: /getting_started/profiler/
 [10]: /profiler/profiler_troubleshooting/java/
+[11]: /profiler/profile_types/?tab=java
+

@@ -53,7 +53,6 @@ The Datadog profiler wallclock engine:
 |---------------|---------------------|-----------------|-----------|
 | **Enable** (default in v1.7.0+) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_WALL_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.wall.enabled=true` | `datadog.MethodSample` |
 
-**Note**: The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
 ## Allocation profiling
 
@@ -73,7 +72,14 @@ The JFR-based allocation profiling engine:
 | **Datadog** (default) | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_ALLOC_ENABLED=true` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.alloc.enabled=true` |
 | **JFR** | `DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` | `-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB` |
 
-**Note**: The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+
+**Note**: On Java 15 and lower, the allocation profiler is turned off by default because it can overwhelm the profiler in allocation-heavy applications. Alternatively for JFR, you can enable the following events in your `jfp` override template file 
+[Learn how to use override templates.](#creating-and-using-a-jfr-template-override-file)
+
+```
+jdk.ObjectAllocationInNewTLAB#enabled=true
+jdk.ObjectAllocationOutsideTLAB#enabled=true
+```
 
 ## Live heap profiling
 
@@ -92,6 +98,26 @@ The live-heap profiler engine:
 
 **Note**: The live-heap engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
+
+## Heap Profiling
+<div class="alert alert-info">This feature requires at least Java 11.0.12, 15.0.4, 16.0.2, 17.0.3 or 18 and newer</div>
+
+To enable the heap profiler, start your application with the `-Ddd.profiling.heap.enabled=true` JVM setting or the `DD_PROFILING_HEAP_ENABLED=true` environment variable.
+
+Alternatively, you can enable the following events in your `jfp` [override template file](#creating-and-using-a-jfr-template-override-file):
+
+```
+jdk.OldObjectSample#enabled=true
+```
+
+
+## Heap histogram metrics
+
+<div class="alert alert-info">This feature requires at least Java 17.0.9 or newer and does not work with ZGC</div>
+
+To enable the heap histogram metrics, start your application with the `-Ddd.profiling.heap.histogram.enabled=true` JVM setting or the `DD_PROFILING_HEAP_HISTOGRAM_ENABLED=true` environment variable.
+
+
 ## Collecting native stack traces
 
 If the Datadog profiler CPU or wallclock engines are enabled, you can collect native stack traces. Native stack traces include:
@@ -104,12 +130,6 @@ If the Datadog profiler CPU or wallclock engines are enabled, you can collect na
 | **Enable** | `DD_PROFILING_DDPROF_ENABLED=true`<br>`DD_PROFILING_DDPROF_CSTACK=dwarf` | `-Ddd.profiling.ddprof.enabled=true`<br>`-Ddd.profiling.ddprof.cstack=dwarf` |
 
 <div class="alert alert-warning">Native stack traces are not collected by default because usually they do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before you try using it in production.</div>
-
-## Supported versions and profile types
-
-
-
-
 ### GraalVM native-image
 
 For applications compiled as GraalVM native images, see [Enabling the Profiler for GraalVM Native Image][3].
@@ -242,7 +262,7 @@ The Datadog exception profiler has a small footprint and overhead under normal c
 
 To disable exception profiling, start the tracer with the `-Ddd.integration.throwables.enabled=false` JVM setting.
 
-Remember to turn this setting back on after you've returned to a more typical rate of exceptions.
+Note: Turn this setting back on after you've returned to a more typical rate of exceptions.
 
 ## Java 8 support
 
@@ -363,7 +383,7 @@ or:
 
 ## Advanced profiler engine configuration
 
-The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases.
+The following settings allow fine-grained control over the profiler engines. These are typically not needed for standard use cases. For detailed information about each profiler type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
 
 | Environment variable | System property | Description |
 |---------------------|-----------------|-------------|
@@ -374,25 +394,9 @@ The following settings allow fine-grained control over the profiler engines. The
 | `DD_PROFILING_DDPROF_LIVEHEAP_ENABLED` | `-Ddd.profiling.ddprof.liveheap.enabled` | Enable live heap profiling (requires JDK 11.0.23+, 17.0.11+, 21.0.3+, or 22+) |
 | `DD_PROFILING_ENABLED_EVENTS` | `-Ddd.profiling.enabled.events` | Enable specific JFR events (for example: `jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB`) |
 
-## Collecting native stack traces
-
-You can collect native stack traces (JVM internals, native libraries, syscalls) by enabling the following setting:
-
-<div class="alert alert-danger">Native stack traces are not collected by default because they usually do not provide actionable insights and walking native stacks can potentially impact application stability. Test this setting in a non-production environment before using it in production.</div>
-
-```shell
-export DD_PROFILING_DDPROF_CSTACK=dwarf
-```
-
-or:
-
-```
--Ddd.profiling.ddprof.cstack=dwarf
-```
-
 ## JDK Mission Control (JMC) event reference
 
-If you are analyzing profiles with JDK Mission Control, the following events are emitted by the profiler:
+If you are analyzing profiles with JDK Mission Control, the following table provides a quick reference for events emitted by the profiler. For detailed information about each profile type, see the corresponding sections above: [CPU profiling](#cpu-profiling), [Wallclock](#wallclock), [Allocation profiling](#allocation-profiling), and [Live heap profiling](#live-heap-profiling).
 
 | Profile type | JFR event | Datadog event |
 |--------------|-----------|---------------|
