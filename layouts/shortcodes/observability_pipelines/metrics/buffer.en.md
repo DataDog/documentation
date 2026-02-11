@@ -36,7 +36,7 @@ pipelines.buffer_discarded_bytes_total
 : Description: Bytes discarded by the buffer. Use the `intentional` tag to filter or group by intentional or unintentional discards.
 : Metric type: counter
 
-### Source buffer metrics
+#### Source buffer metrics
 
 These metrics are specific to source buffers, located downstream of a source. Each source emits its own respective buffer metrics. **Note**: Source buffers are not configurable, but these metrics can help monitor backpressure as it propagates to your pipeline's source.
 
@@ -56,34 +56,34 @@ pipelines.source_buffer_max_size_events
 : Description: A source buffer's maximum event capacity.
 : Metric type: gauge
 
-### Processor buffer metrics
+#### Processor buffer metrics
 
 These metrics are specific to processor buffers, located upstream of a processor. Each processor emits its own respective buffer metrics. **Note**: Processor buffers are not configurable, but these metrics can help monitor backpressure as it propagates through your pipeline's processors.
 
-pipelines.transform_buffer_utilization
-: Description: Event count in a processor's buffer.
-: Metric type: histogram
+`pipelines.transform_buffer_utilization`
+: **Description**: Event count in a processor's buffer.
+: **Metric type:** histogram
 
-pipelines.transform_buffer_utilization_level
-: Description: Event count in a processor's buffer.
-: Metric type: gauge
+`pipelines.transform_buffer_utilization_level{{% observability_pipelines/metrics/buffer %}}
+: **Description**: Event count in a processor's buffer.
+: **Metric type**: gauge
 
-pipelines.transform_buffer_utilization_mean
-: Description: The exponentially weighted moving average (EWMA) of the number of events in a processor's buffer.
-: Metric type: gauge
+`pipelines.transform_buffer_utilization_mean`
+: **Description**: The exponentially weighted moving average (EWMA) of the number of events in a processor's buffer.
+: **Metric type**: gauge
 
-pipelines.transform_buffer_max_size_events
-: Description: A processor buffer's maximum event capacity.
-: Metric type: gauge
+`pipelines.transform_buffer_max_size_events`
+: **Description**: A processor buffer's maximum event capacity.
+: **Metric type**: gauge
 
-### Deprecated buffer metrics
+#### Deprecated buffer metrics
 
-These metrics are still emitted by the Observability Pipelines Worker for backwards compatibility. Use the recommended replacements when possible.
+These metrics are still emitted by the Observability Pipelines Worker for backwards compatibility. Datadog recommends using the replacements when possible.
 
-pipelines.buffer_events
-: Description: Number of events in a destination's buffer. Use `pipelines.buffer_size_events` instead.
-: Metric type: gauge
+`pipelines.buffer_events`
+: **Description**: Number of events in a destination's buffer. Use `pipelines.buffer_size_events` instead.
+: **Metric type**: gauge
 
-pipelines.buffer_byte_size
-: Description: Number of bytes in a destination's buffer. Use `pipelines.buffer_size_bytes` instead.
-: Metric type: gauge
+`pipelines.buffer_byte_size`
+: **Description**: Number of bytes in a destination's buffer. Use `pipelines.buffer_size_bytes` instead.
+: **Metric type**: gauge
