@@ -6,6 +6,7 @@ import { initializeIntegrations } from './components/integrations';
 import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
+import { initCopyPageButton } from './components/copy-page-button';
 import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
@@ -45,6 +46,8 @@ const scrollActiveNavItemToTop = () => {
 
 const doOnLoad = () => {
     window.history.replaceState({}, '', window.location.href);
+
+    initCopyPageButton();
 
     const responsiveTableElements = document.querySelectorAll('.table-responsive-container table');
 
@@ -133,20 +136,20 @@ const doOnLoad = () => {
 
 DOMReady(doOnLoad);
 
-function getVisibleParentPath(ancestralEl, path){
+function getVisibleParentPath(ancestralEl, path) {
     // returns the closest visible parent path
     // of a child path not visible in the left nav (anything more than 4 levels deep)
 
-    let el = document.querySelector(`${ancestralEl} [data-path="${path}"]`)
+    let el = document.querySelector(`${ancestralEl} [data-path="${path}"]`);
     // account for preview branch name in url
-    let endIdx = env === 'preview' ? 6 : 4
+    let endIdx = env === 'preview' ? 6 : 4;
 
-    while(!el && endIdx){
-        path = path.split('/').slice(0,endIdx).join('/')
-        el = document.querySelector(`${ancestralEl} [data-path="${path}"]`)
-        endIdx -= 1
+    while (!el && endIdx) {
+        path = path.split('/').slice(0, endIdx).join('/');
+        el = document.querySelector(`${ancestralEl} [data-path="${path}"]`);
+        endIdx -= 1;
     }
-    return el
+    return el;
 }
 
 // Get sidebar
@@ -174,7 +177,9 @@ function hasParentLi(el) {
 
 function getPathElement(event = null) {
     let path = window.location.pathname;
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active');
+    const activeMenus = document.querySelectorAll(
+        '.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active'
+    );
 
     // remove active class from all sidenav links to close all open menus
     for (let i = 0; i < activeMenus.length; i++) {
@@ -184,7 +189,7 @@ function getPathElement(event = null) {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let sideNavPathElement = getVisibleParentPath('.side',path)
+    let sideNavPathElement = getVisibleParentPath('.side', path);
 
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
@@ -237,7 +242,9 @@ function getPathElement(event = null) {
 
 // remove open class from li elements and active class from <a> elements
 function closeNav() {
-    const activeMenus = document.querySelectorAll('.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active');
+    const activeMenus = document.querySelectorAll(
+        '.side .sidenav-nav-js-load .active, header .sidenav-nav-js-load .active'
+    );
     const openMenus = document.querySelectorAll('.side .sidenav-nav-js-load .open, header .sidenav-nav-js-load .open');
 
     for (let i = 0; i < activeMenus.length; i++) {
@@ -353,7 +360,7 @@ function navClickEventHandler(event) {
 
 /**
  * Determines if the link should be loaded via AJAX
- * @param {object} element 
+ * @param {object} element
  * @returns boolean
  */
 function loadViaAjax(element) {
@@ -407,7 +414,7 @@ window.addEventListener('click', (event) => {
 window.onload = function () {
     getPathElement();
     setMobileNav();
-    
+
     // Handle glossary anchor scrolling from search results
     if (window.location.pathname.includes('/glossary/')) {
         const scrollTarget = sessionStorage.getItem('glossaryScrollTarget');
@@ -421,10 +428,10 @@ window.onload = function () {
                         const header = document.querySelector('.navbar');
                         const glossaryNav = document.querySelector('.glossary-nav');
                         let offset = 20;
-                        
+
                         if (header) offset += header.offsetHeight;
                         if (glossaryNav) offset += glossaryNav.offsetHeight;
-                        
+
                         const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
                         window.scrollTo({
                             top: elementTop - offset,
@@ -442,10 +449,10 @@ window.onload = function () {
                         const header = document.querySelector('.navbar');
                         const glossaryNav = document.querySelector('.glossary-nav');
                         let offset = 20;
-                        
+
                         if (header) offset += header.offsetHeight;
                         if (glossaryNav) offset += glossaryNav.offsetHeight;
-                        
+
                         const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
                         window.scrollTo({
                             top: elementTop - offset,
@@ -468,11 +475,8 @@ function replaceURL(inputUrl) {
     return inputUrl.replace('https://www.docs.datadoghq.com', thisurl);
 }
 
-window.addEventListener(
-    'popstate',
-    function (event) {
-        setMobileNav();
-        closeNav();
-        getPathElement();
-    }
-);
+window.addEventListener('popstate', function (event) {
+    setMobileNav();
+    closeNav();
+    getPathElement();
+});

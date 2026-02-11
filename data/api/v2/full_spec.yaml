@@ -783,6 +783,27 @@ components:
       required: false
       schema:
         type: string
+    NDMPageNumber:
+      description: Specific page number to return. Defaults to 0.
+      in: query
+      name: page[number]
+      required: false
+      schema:
+        default: 0
+        example: 0
+        format: int64
+        type: integer
+    NDMPageSize:
+      description: Size for a given page. The maximum allowed value is 500. Defaults
+        to 50.
+      in: query
+      name: page[size]
+      required: false
+      schema:
+        default: 50
+        example: 50
+        format: int64
+        type: integer
     NotificationRuleIDPathParameter:
       description: Notification Rule UUID
       example: e555e290-ed65-49bd-ae18-8acbfcf18db7
@@ -31035,6 +31056,11 @@ components:
     InputSchemaParameters:
       description: The definition of `InputSchemaParameters` object.
       properties:
+        allowExtraValues:
+          description: The `InputSchemaParameters` `allowExtraValues`.
+          type: boolean
+        allowedValues:
+          description: The `InputSchemaParameters` `allowedValues`.
         defaultValue:
           description: The `InputSchemaParameters` `defaultValue`.
         description:
@@ -39748,6 +39774,8 @@ components:
 
         **Supported pipeline types:** logs'
       properties:
+        cache:
+          $ref: '#/components/schemas/ObservabilityPipelineDedupeProcessorCache'
         display_name:
           $ref: '#/components/schemas/ObservabilityPipelineComponentDisplayName'
         enabled:
@@ -39785,6 +39813,19 @@ components:
       type: object
       x-pipeline-types:
       - logs
+    ObservabilityPipelineDedupeProcessorCache:
+      description: Configuration for the cache used to detect duplicates.
+      properties:
+        num_events:
+          description: The number of events to cache for duplicate detection.
+          example: 5000
+          format: int64
+          maximum: 1000000000
+          minimum: 1
+          type: integer
+      required:
+      - num_events
+      type: object
     ObservabilityPipelineDedupeProcessorMode:
       description: The deduplication mode to apply to the fields.
       enum:
@@ -41067,6 +41108,8 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
       type: object
     ObservabilityPipelineMemoryBufferSizeOptions:
       description: Options for configuring a memory buffer by queue length.
@@ -41078,6 +41121,8 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsMemoryType'
+        when_full:
+          $ref: '#/components/schemas/ObservabilityPipelineBufferOptionsWhenFull'
       type: object
     ObservabilityPipelineMetadataEntry:
       description: A custom metadata entry.
@@ -86627,14 +86672,15 @@ paths:
       description: Get the list of devices.
       operationId: ListDevices
       parameters:
-      - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageNumber'
-      - description: The field to sort the devices by.
+      - $ref: '#/components/parameters/NDMPageSize'
+      - $ref: '#/components/parameters/NDMPageNumber'
+      - description: The field to sort the devices by. Defaults to `name`.
         example: status
         in: query
         name: sort
         required: false
         schema:
+          default: name
           type: string
       - description: Filter devices by tag.
         example: status:ok
