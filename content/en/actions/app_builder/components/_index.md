@@ -69,9 +69,6 @@ Is Visible
 Event
 : **Value**: click
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, open url, download file, set state variable value
-
 For more information on events, see [Events][1].
 
 ### Inspect data
