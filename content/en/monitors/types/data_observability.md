@@ -202,9 +202,10 @@ You can use the following template variables in your notification messages:
 
 | Variable            | Description                                    |
 |---------------------|------------------------------------------------|
-| `{{table.name}}`    | The name of the affected table.               |
+| `{{database.name}}` | The database containing the affected table.    |
 | `{{schema.name}}`   | The schema containing the affected table.      |
-| `{{database.name}}` | The database containing the affected table.      |
+| `{{table.name}}`    | The name of the affected table.                |
+| `{{column.name}}`   | The name of the affected column (column-level monitors only). |
 | `{{threshold}}`     | The alert threshold value.                     |
 | `{{value}}`         | The current value that triggered the alert.    |
 
