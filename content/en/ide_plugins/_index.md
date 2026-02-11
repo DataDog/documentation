@@ -4,6 +4,7 @@ description: Learn how to set up Datadog IDE plugins.
 disable_toc: false
 aliases:
 - '/developers/ide_integrations/'
+- '/developers/ide_plugins/'
 - '/developers/ide_integrations/visual_studio/'
 - '/developers/ide_plugins/visual_studio/'
 ---

@@ -1,6 +1,8 @@
 ---
 title: Live Debugger
 type: documentation
+aliases:
+- '/developers/ide_plugins/idea/live_debugger/'
 further_reading:
 - link: "/tracing/live_debugger/"
   tag: "Documentation"

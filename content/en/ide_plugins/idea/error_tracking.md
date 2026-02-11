@@ -1,6 +1,8 @@
 ---
 title: Error Tracking
 type: documentation
+aliases:
+- '/developers/ide_plugins/idea/error_tracking/'
 further_reading:
 - link: "/tracing/error_tracking/"
   tag: "Documentation"

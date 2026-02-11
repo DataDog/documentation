@@ -4,6 +4,7 @@ description: Integrate Datadog telemetry and insights into your source code in V
 is_beta: true
 aliases:
 - '/developers/ide_integrations/vscode/'
+- '/developers/ide_plugins/vscode/'
 further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
