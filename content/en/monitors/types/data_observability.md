@@ -26,25 +26,25 @@ further_reading:
 
 [Data Observability][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
 
-Data Observability monitors support the following monitor types:
+Data Observability monitors support the following metric types:
 
-**Table-level monitors:**
-| Monitor type | Description |
+**Table-level metric types:**
+| Metric type | Description |
 |---|---|
-| [Freshness](#select-an-entity-type-and-monitor-type) | Tracks the time elapsed since a table was last updated. |
-| [Row Count](#select-an-entity-type-and-monitor-type) | Tracks the number of rows in a table or view. |
-| [Custom SQL](#select-an-entity-type-and-monitor-type) | Tracks a custom metric value returned by a SQL query. |
+| [Freshness](#select-an-entity-type-and-metric-type) | Tracks the time elapsed since a table was last updated. |
+| [Row Count](#select-an-entity-type-and-metric-type) | Tracks the number of rows in a table or view. |
+| [Custom SQL](#select-an-entity-type-and-metric-type) | Tracks a custom metric value returned by a SQL query. |
 
-**Column-level monitors:**
-| Monitor type | Description |
+**Column-level metric types:**
+| Metric type | Description |
 |---|---|
-| [Freshness](#select-an-entity-type-and-monitor-type) | Tracks the most recent date seen in a datetime column. |
-| [Uniqueness](#select-an-entity-type-and-monitor-type) | Tracks the percentage of unique values. |
-| [Nullness](#select-an-entity-type-and-monitor-type) | Tracks the percentage of null values. |
-| [Cardinality](#select-an-entity-type-and-monitor-type) | Tracks the number of distinct values. |
-| [Percent Zero](#select-an-entity-type-and-monitor-type) | Tracks the percentage of values equal to zero. |
-| [Percent Negative](#select-an-entity-type-and-monitor-type) | Tracks the percentage of negative values. |
-| [Min / Max / Mean / Sum / Standard Deviation](#select-an-entity-type-and-monitor-type) | Tracks statistical measures across column values. |
+| [Freshness](#select-an-entity-type-and-metric-type) | Tracks the most recent date seen in a datetime column. |
+| [Uniqueness](#select-an-entity-type-and-metric-type) | Tracks the percentage of unique values. |
+| [Nullness](#select-an-entity-type-and-metric-type) | Tracks the percentage of null values. |
+| [Cardinality](#select-an-entity-type-and-metric-type) | Tracks the number of distinct values. |
+| [Percent Zero](#select-an-entity-type-and-metric-type) | Tracks the percentage of values equal to zero. |
+| [Percent Negative](#select-an-entity-type-and-metric-type) | Tracks the percentage of negative values. |
+| [Min / Max / Mean / Sum / Standard Deviation](#select-an-entity-type-and-metric-type) | Tracks statistical measures across column values. |
 
 Where possible, Datadog collects metrics such as row count and freshness from system metadata (for example, `INFORMATION_SCHEMA`). When system metadata is not available for a given metric, the monitor pushes down a query directly to the warehouse to compute the value.
 
@@ -56,25 +56,25 @@ To create a Data Observability monitor in Datadog, navigate to [**Monitors** > *
 
 <div class="alert alert-info">There is a default limit of 1000 Data Observability monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
-## Select an entity type and monitor type
+## Select an entity type and metric type
 
 First, select the **entity type** to determine whether you are monitoring at the table level or column level:
 
 - **Table**: Monitor table-level signals such as freshness, row count, or a custom SQL query result.
 - **Column**: Monitor column-level metrics such as nullness, uniqueness, cardinality, or statistical measures.
 
-Then, choose a monitor type based on the data quality signal you want to track:
+Then, choose a metric type based on the data quality signal you want to track:
 
 {{< tabs >}}
 {{% tab "Freshness" %}}
 
-**Freshness** monitors detect when data has not been updated within an expected time window. Use freshness monitors to catch stale data before it affects downstream reports or models.
+The **Freshness** metric type detects when data has not been updated within an expected time window. Use it to catch stale data before it affects downstream reports or models.
 
 - **Table freshness** tracks the time elapsed since the table was last updated.
 - **Column freshness** tracks the most recent date seen in a datetime column.
 
 1. Select the entity type: **Table** or **Column**.
-1. Select **Freshness** as the monitor type.
+1. Select **Freshness** as the metric type.
 1. Choose the target table or column to monitor.
 1. Select the detection method:
     - **Anomaly**: Alert when the freshness deviates from an expected pattern.
@@ -84,10 +84,10 @@ Then, choose a monitor type based on the data quality signal you want to track:
 {{% /tab %}}
 {{% tab "Row Count" %}}
 
-**Row Count** monitors track row count changes in your tables. Use row count monitors to detect unexpected drops or spikes in data that could indicate pipeline failures or upstream issues.
+The **Row Count** metric type tracks row count changes in your tables. Use it to detect unexpected drops or spikes in data that could indicate pipeline failures or upstream issues.
 
 1. Select **Table** as the entity type.
-1. Select **Row Count** as the monitor type.
+1. Select **Row Count** as the metric type.
 1. Choose the target table to monitor.
 1. Select the detection method:
     - **Anomaly**: Alert when the row count deviates from its historical baseline.
@@ -96,7 +96,7 @@ Then, choose a monitor type based on the data quality signal you want to track:
 {{% /tab %}}
 {{% tab "Column Metric" %}}
 
-**Column Metric** monitors track column-level metrics to detect data drift or quality degradation. Select from the following metrics:
+**Column** metric types track column-level metrics to detect data drift or quality degradation. Select from the following:
 
 | Metric | Description |
 |---|---|
@@ -123,10 +123,10 @@ Then, choose a monitor type based on the data quality signal you want to track:
 {{% /tab %}}
 {{% tab "Custom SQL" %}}
 
-**Custom SQL** monitors track a custom metric value returned by a SQL query that you define. Use Custom SQL monitors when built-in metrics do not cover your use case, such as monitoring business-specific data quality rules.
+The **Custom SQL** metric type tracks a custom metric value returned by a SQL query that you define. Use it when built-in metric types do not cover your use case, such as monitoring business-specific data quality rules.
 
 1. Select **Table** as the entity type.
-1. Select **Custom SQL** as the monitor type.
+1. Select **Custom SQL** as the metric type.
 1. Choose the target table to monitor.
 1. Select a **model type** that describes the value returned by your query:
     - **Default**: The query returns a scalar value. Use this in most cases.
@@ -146,7 +146,7 @@ SELECT SUM(column_name) as dd_value FROM schema.table
 
 ## Select entities to monitor
 
-After selecting a monitor type, choose which tables or columns to monitor. You can select entities using the search field, or write a query using the AASTRA query syntax.
+After selecting a metric type, choose which tables or columns to monitor. You can select entities using the search field, or write a query using the AASTRA query syntax.
 
 ### AASTRA query syntax
 
@@ -256,7 +256,7 @@ This monitor alerts when a critical table has not been updated within the expect
 
 1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
 1. Select **Table** as the entity type.
-1. Select **Freshness** as the monitor type.
+1. Select **Freshness** as the metric type.
 1. Select the target table (for example, `analytics.orders`).
 1. Select **Threshold** as the detection method.
 1. Set the expected update frequency to **6 hours**.
@@ -295,7 +295,7 @@ This monitor detects a significant decrease in row count that could indicate a p
 
 1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
 1. Select **Table** as the entity type.
-1. Select **Row Count** as the monitor type.
+1. Select **Row Count** as the metric type.
 1. Select the target table (for example, `warehouse.events`).
 1. Select **Anomaly** as the detection method.
 
@@ -333,7 +333,7 @@ This monitor detects when a column's null percentage exceeds normal levels, whic
 
 1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
 1. Select **Column** as the entity type.
-1. Select **Nullness** as the monitor type.
+1. Select **Nullness** as the metric type.
 1. Select the target column (for example, `warehouse.users.email`).
 1. Select **Anomaly** as the detection method.
 
