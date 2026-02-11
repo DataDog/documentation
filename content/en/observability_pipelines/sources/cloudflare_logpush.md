@@ -20,7 +20,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 
 - A Cloudflare account with Logpush enabled.
 - A server or a server pool, fronted by a load balancer, that runs the Observability Pipelines Worker and allows traffic from Cloudflare's CIDR or the public internet.
-- A DNS entry that points to your Observability Pipelines Worker's load balancer.
+- A DNS entry that points to your Worker's load balancer.
 - An SSL/TLS certificate for your domain. Cloudflare requires an HTTPS endpoint and does not accept HTTP.
 	- **Note**: You cannot use Cloudflare origin certificates because they are not publicly trusted.
 - If you are using a firewall in front of your Worker or Worker's load balancer, ensure you add [Cloudflare's IP addresses][1] to your allowlist.
@@ -35,11 +35,12 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
   1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Set secrets][3] for the defaults used.
   1. Set the authorization strategy to **Basic**. If you are using Secrets Management, enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
   1. In the **Decoding** dropdown menu, select **Bytes**.
-  1. Toggle the switch to **Enable TLS**. The following certificate and key files are required. **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+  1. Toggle the switch to **Enable TLS**.
       - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
-      - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-      - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-      - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+      - The following certificate and key files are required. **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][7] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+        - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+        - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
+        - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory
@@ -85,3 +86,4 @@ After your Logpush job has been successfully created, you can view your Cloudfla
 [4]: /observability_pipelines/configuration/install_the_worker/?tab=docker#pipeline-ui-setup
 [5]: https://developers.cloudflare.com/logs/logpush/logpush-job/enable-destinations/http/
 [6]: https://app.datadoghq.com/logs
+[7]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
