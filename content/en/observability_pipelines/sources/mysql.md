@@ -131,7 +131,7 @@ Store the SQL query that the Worker executes in a local file.
 
 - The SQL query file must contain only one query.
 - The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- The file must be in the default data directory: `var/lib/observability-pipelines-worker`. See [Advanced Worker Configurations][2] for more information.
+- The file must be in the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information.
 
 ## Set up the source while setting up a pipeline
 
@@ -141,7 +141,7 @@ Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, 
 1. Set the SQL query parameters.
   1. Enter the name of your query.
   1. Enter the path to the local file containing the validated SQL query.
-      - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. For example, if the SQL file path is `/var/lib/observability-pipelines-worker/config/config/db_queries/retrieve_incremental_with_start.sql`, enter the path `db_queries/retrieve_incremental_with_start.sql`.
+      - **Note**: All file paths are made relative to the configuration data directory. For example, if the SQL file path is `/var/lib/observability-pipelines-worker/config/config/db_queries/query.sql`, enter the path `/db_queries/query.sql`.
 5. Select your query type (**Batch** or **Incremental**). See [Query types](#query-types) for more information.
     - For **Incremental**:
       1. Define the [incremental column](#incremental-columns).
