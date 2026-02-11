@@ -31,24 +31,24 @@ Data Observability monitors support the following metric types:
 **Table-level metric types:**
 | Metric type | Description |
 |---|---|
-| [Freshness](#select-an-entity-type-and-metric-type) | Tracks the time elapsed since a table was last updated. |
-| [Row Count](#select-an-entity-type-and-metric-type) | Tracks the number of rows in a table or view. |
-| [Custom SQL](#select-an-entity-type-and-metric-type) | Tracks a custom metric value returned by a SQL query. |
+| Freshness | Tracks the time elapsed since a table was last updated. |
+| Row Count | Tracks the number of rows in a table or view. |
+| Custom SQL | Tracks a custom metric value returned by a SQL query. |
 
 **Column-level metric types:**
 | Metric type | Description |
 |---|---|
-| [Freshness](#select-an-entity-type-and-metric-type) | Tracks the most recent date seen in a datetime column. |
-| [Uniqueness](#select-an-entity-type-and-metric-type) | Tracks the percentage of unique values. |
-| [Nullness](#select-an-entity-type-and-metric-type) | Tracks the percentage of null values. |
-| [Cardinality](#select-an-entity-type-and-metric-type) | Tracks the number of distinct values. |
-| [Percent Zero](#select-an-entity-type-and-metric-type) | Tracks the percentage of values equal to zero. |
-| [Percent Negative](#select-an-entity-type-and-metric-type) | Tracks the percentage of negative values. |
-| [Min / Max / Mean / Sum / Standard Deviation](#select-an-entity-type-and-metric-type) | Tracks statistical measures across column values. |
+| Freshness | Tracks the most recent date seen in a datetime column. |
+| Uniqueness | Tracks the percentage of unique values. |
+| Nullness | Tracks the percentage of null values. |
+| Cardinality | Tracks the number of distinct values. |
+| Percent Zero | Tracks the percentage of values equal to zero. |
+| Percent Negative | Tracks the percentage of negative values. |
+| Min / Max / Mean / Sum / Standard Deviation | Tracks statistical measures across column values. |
 
 Where possible, Datadog collects metrics such as row count and freshness from system metadata (for example, `INFORMATION_SCHEMA`). When system metadata is not available for a given metric, the monitor pushes down a query directly to the warehouse to compute the value.
 
-Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (Snowflake, Databricks, or BigQuery).
+Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (e.g. Snowflake, Databricks, or BigQuery).
 
 ## Monitor creation
 
@@ -173,6 +173,12 @@ search for table where `schema:PROD AND database:ANALYTICS_DB`
 search for column where `name:EMAIL`
 search for table where `database:ANALYTICS_DB AND name:USERS*`
 {{< /code-block >}}
+
+### Group by
+
+You can add a **Group by** clause to split a single monitor into multiple groups, each evaluated independently. For example, grouping a row count monitor by a `REGION` column produces a separate alert for each geography.
+
+The default limit is 100 groups per monitor. To increase this limit, <a href="/help/">contact Support</a>.
 
 ## Set alert conditions
 
