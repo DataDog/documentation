@@ -28,6 +28,17 @@
         "description": "Markdoc code block with attributes and tabstop choices"
     },
 
+    "Collapse content": {
+        "scope": "markdoc",
+        "prefix": ";;collapse-content",
+        "body": [
+            "{% collapse-content title=\"${1:Your title}\" level=\"${2|h4,h1,h2,h3,h5|}\" expanded=${3|true,false|} id=\"${4:unique-id}\" %}",
+            "${5:Collapsible content goes here.}",
+            "{% /collapse-content %}"
+        ],
+        "description": "Markdoc collapse block with customizable label"
+    },
+
     "Definition list": {
         "scope": "markdoc",
         "prefix": ";;list",
