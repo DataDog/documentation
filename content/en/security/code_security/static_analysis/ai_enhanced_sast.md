@@ -135,8 +135,6 @@ To view and remediate vulnerabilities:
 
 Use **Single fix** to open a code session where you can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
 
-**Note:** Single vulnerability fixes operate independently from batch remediation campaigns. If you generate a single fix and then create a campaign, Bits AI may duplicate the fix because campaigns do not track fixes created outside the campaign.
-
 ### Bulk fix (campaigns)
 
 Use **Bulk fix** to create a remediation campaign that fixes multiple vulnerabilities at the same time.
@@ -145,12 +143,12 @@ Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal. 
 
 - **Campaign title**: A descriptive title for your campaign.
 - **Repositories**: The repositories and paths you want Bits AI to scan.
-- **PR grouping options**: How Bits AI groups findings into pull requests (for example, one PR per repository, file, or finding). You can also limit the number of open PRs and the number of findings per PR.
+- **PR grouping options**: How Bits AI should group findings into pull requests (for example, one PR per repository, file, or finding). You can also limit the number of open PRs and the number of findings per PR.
 - **Custom instructions** (optional): Additional guidance for how Bits AI should generate fixes, such as changelog requirements or pull request title formatting.
 
-After you create a campaign, Bits AI Dev Agent loads the findings in scope, generates patches according to your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes.
+After you create a campaign, Bits AI Dev Agent loads the findings in scope, generates patches according to your grouping rules, and (if enabled) creates pull requests. You can review and edit each session before merging changes. **Note**: Automatic PR creation is opt-in through [Settings][11].
 
-**Note**: Automatic PR creation is opt-in through [Settings][11].
+<div class="alert alert-info">Single vulnerability fixes and batch remediation campaigns operate independently. If you generate a single fix and then create a campaign, Bits AI may duplicate the fix because campaigns do not track fixes created outside the campaign.</div>
 
 #### View campaign progress
 
@@ -167,7 +165,7 @@ Each code session shows the full lifecycle of an AI-generated fix so you can rev
 - CI results (if enabled) to validate the patch is safe to deploy
 - Options to refine the fix or **Create PR** to apply the changes to your source code repository
 
-To open the remediation session for a vulnerability, select the vulnerability from the [**Vulnerabilities**][6] to open the detailed side panel, scroll to the **Remediation** section, and select **Expand & Chat**. 
+To open the remediation session, select the vulnerability from the [**Vulnerabilities**][6] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**. 
 
 You can also navigate to remediation sessions through the [**Campaigns**][12] and [**Code Sessions**][7] views.
 
