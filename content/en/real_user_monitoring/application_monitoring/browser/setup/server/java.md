@@ -42,28 +42,23 @@ Choose your preferred setup method:
 {{< tabs >}}
 {{% tab "Single-Step Instrumentation (Recommended)" %}}
 
-Single-Step Instrumentation (SSI) enables RUM Browser monitoring during Datadog Agent installation. When you run the installation command, SSI:
-- Injects the Java SDK into your Java applications
-- Configures the Java SDK with the required RUM environment variables
+Enables RUM Browser monitoring via [Single Step Instrumentation (SSI)][2].
+When you run the Agent installation with RUM enabled, Datadog:
+- Loads the Java SDK into your Java applications via SSI
 - Creates a RUM application for you
+- Configures the Java SDK with the required RUM environment variables
 
-Once the Java SDK is injected and configured, it automatically handles the injection of the RUM Browser SDK into HTML responses from your servlet-based applications. This approach requires no code changes and no manual web server configuration.
-
-### Enable RUM during Agent installation
+**This approach requires no code changes and no manual web server configuration.**
 
 1. Go to the [**Agent Installation**][1] page.
 2. Select your platform (for example, Linux).
-3. In the **Customize your observability coverage** section, turn on **APM Instrumentation** under **Application Observability**.
-4. Expand **Real User Monitoring** and turn on **RUM Instrumentation**.
+3. In the **Customize your observability coverage** section, turn on **Real User Monitoring** under **Application Observability**.
 
    A RUM application is automatically created for you when you enable this option.
 
-5. Copy the generated installation command and run it on your host.
-6. Restart your Java servlet-based application.
+4. Copy the generated installation command and run it on your host.
+5. Restart your Java servlet-based application.
 
-After your application restarts, the Java SDK automatically injects the RUM Browser SDK into HTML responses. RUM sessions begin flowing into your Datadog account.
-
-For more information about SSI, see the [Single Step APM Instrumentation documentation][2].
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=overview
 [2]: /tracing/trace_collection/single-step-apm/
@@ -75,8 +70,8 @@ Use manual configuration if you prefer to set up RUM Browser monitoring independ
 
 ### Prerequisites
 
-- Java SDK installed using either:
-  - [Automatic instrumentation][1] (SSI)
+- Java SDK installed and loaded using either:
+  - [Single Step Instrumentation][1] (SSI)
   - [Manual Java SDK installation][2]
 - RUM application [created in Datadog][3]
 - Configuration values ready:
@@ -84,9 +79,9 @@ Use manual configuration if you prefer to set up RUM Browser monitoring independ
   - `applicationId`
   - `remoteConfigurationId`
 
-### Enable RUM injection
+### Enable RUM Instrumentation on Java SDK
 
-RUM SDK injection for Java web application servers can be configured using the usual Java tracing configuration methods. For more information, see [Configuring the Java SDK Library][5].
+RUM Instrumentation for Java web application servers can be configured using the usual Java SDK configuration methods. For more information, see [Configuring the Java SDK Library][5].
 
 RUM SDK injection is disabled by default. Enable it by exporting the following environment variables:
 
@@ -122,7 +117,7 @@ HTML documents should now contain the Datadog RUM JavaScript tag right before th
 
 ## Configuration options
 
-Here are all the configuration options related to RUM SDK injection:
+Here are all the configuration options related to RUM Enablement on the Java SDK:
 
 | Property | Environment variable | Value | Requirement |
 |----------|---------------------|-------|-------------|
