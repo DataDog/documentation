@@ -1,6 +1,10 @@
 ---
 title: Sensitive Data Scanner Processor
 disable_toc: false
+further_reading:
+- link: "/logs/guide/regex_log_parsing/"
+  tag: "guide"
+  text: "Parsing logs with regex"
 products:
 - name: Logs
   icon: logs
