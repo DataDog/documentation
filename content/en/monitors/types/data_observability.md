@@ -48,13 +48,11 @@ Data Observability monitors support the following metric types:
 
 Where possible, Datadog collects metrics such as row count and freshness from system metadata (for example, `INFORMATION_SCHEMA`). When system metadata is not available for a given metric, the monitor pushes down a query directly to the warehouse to compute the value.
 
-Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (e.g. Snowflake, Databricks, or BigQuery).
+Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][7], [Databricks][8], or [BigQuery][9]).
 
 ## Monitor creation
 
 To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**][3] in the UI.
-
-<div class="alert alert-info">There is a default limit of 1000 Data Observability monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#multi-alert">multi alerts</a>, or <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
 ## Select an entity type and metric type
 
@@ -377,3 +375,6 @@ has returned to expected levels.
 [4]: /monitors/notify/
 [5]: /monitors/configuration/?tab=thresholdalert#thresholds
 [6]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /data_observability/quality_monitoring/data_warehouses/snowflake/
+[8]: /data_observability/quality_monitoring/data_warehouses/databricks/
+[9]: /data_observability/quality_monitoring/data_warehouses/bigquery/
