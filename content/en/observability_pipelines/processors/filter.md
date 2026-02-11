@@ -21,7 +21,7 @@ products:
 
 ## Overview
 
-This processor drops all logs or metrics ({{< tooltip glossary="preview" case="title" >}}) that do not match the specified filter query. If a log or metric is dropped, the data isn't sent to any subsequent processors or destinations.
+This processor sends all logs or metrics ({{< tooltip glossary="preview" case="title" >}}) that match the filter query to the next step in the pipeline. Logs or metrics that do not match the filter query are dropped and are not sent to any subsequent processors or destinations.
 
 ## Setup
 
