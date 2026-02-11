@@ -28,10 +28,8 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 ## Setup
 
 1. Declare the library as a dependency depending on your package manager. Swift Package Manager (SPM) is recommended.
-
 {{< tabs >}}
 {{% tab "Swift Package Manager (SPM)" %}}
-
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
 .package(url: "https://github.com/Datadog/dd-sdk-ios.git", .upToNextMajor(from: "2.0.0"))
@@ -56,7 +54,6 @@ pod 'DatadogTrace'
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
-
 You can use [Carthage][5] to install `dd-sdk-ios`:
 ```
 github "DataDog/dd-sdk-ios"
@@ -73,11 +70,9 @@ DatadogTrace.xcframework
 
 {{% /tab %}}
 {{< /tabs >}}
-
 2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code.
 
-For more information about setting up a client token, see the [client token documentation][2].
-
+    For more information about setting up a client token, see the [client token documentation][2].
 {{< site-region region="us" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -106,11 +101,9 @@ configuration.service = @"<service name>";
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
-
 {{< site-region region="eu" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
-
 ```swift
 import DatadogCore
 
@@ -137,11 +130,9 @@ configuration.site = [DDSite eu1];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
-
 {{< site-region region="us3" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
-
 ```swift
 import DatadogCore
 
@@ -168,11 +159,9 @@ configuration.site = [DDSite us3];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
-
 {{< site-region region="us5" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
-
 ```swift
 import DatadogCore
 
@@ -199,11 +188,9 @@ configuration.site = [DDSite us5];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
-
 {{< site-region region="gov" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
-
 ```swift
 import DatadogCore
 
@@ -230,7 +217,6 @@ configuration.site = [DDSite us1_fed];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
-
 {{< site-region region="ap1" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -261,7 +247,6 @@ configuration.site = [DDSite ap1];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
-
 {{< site-region region="ap2" >}}
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -292,25 +277,21 @@ configuration.site = [DDSite ap2];
 {{% /tab %}}
 {{< /tabs >}}
 {{< /site-region >}}
-
 To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
+    - `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+    - `.granted`: The SDK starts collecting the data and sends it to Datadog.
+    - `.notGranted`: The SDK does not collect any data: logs, traces, and RUM events are not sent to Datadog.
 
-- `.pending`: The SDK starts collecting and batching the data but does not send it to Datadog. The SDK waits for the new tracking consent value to decide what to do with the batched data.
-- `.granted`: The SDK starts collecting the data and sends it to Datadog.
-- `.notGranted`: The SDK does not collect any data: logs, traces, and RUM events are not sent to Datadog.
+    To change the tracking consent value after the SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
+    
+    The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
+    - If changed to `.granted`, the SDK send all current and future data to Datadog;
+    - If changed to `.notGranted`, the SDK wipe all current data and stop collecting any future data.
 
-To change the tracking consent value after the SDK is initialized, use the `Datadog.set(trackingConsent:)` API call.
+    Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
 
-The SDK changes its behavior according to the new value. For example, if the current tracking consent is `.pending`:
-
-- If changed to `.granted`, the SDK send all current and future data to Datadog;
-- If changed to `.notGranted`, the SDK wipe all current data and stop collecting any future data.
-
-Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
-
-When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level.
-
+    When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level.
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -323,9 +304,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 3. Datadog tracer implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
-
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -345,15 +324,13 @@ let tracer = Tracer.shared()
 DDTraceConfiguration *configuration = [[DDTraceConfiguration alloc] init];
 configuration.networkInfoEnabled = YES;
 
-[DDTrace enableWithConfiguration:configuration];
+[DDTrace enableWith:configuration];
 
 DDTracer *tracer = [Tracer shared];
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 4. Instrument your code using the following methods:
-
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -372,9 +349,7 @@ id<OTSpan> span = [tracer startSpan:@"<span_name>"];
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 5. (Optional) - Set child-parent relationship between your spans:
-
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -395,9 +370,7 @@ id<OTSpan> responseDecodingSpan = [tracer startSpan:@"response decoding"
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 6. (Optional) - Provide additional tags alongside your span:
-
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -410,9 +383,7 @@ span.setTag(key: "http.url", value: url)
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 7. (Optional) Attach an error to a span - you can do so by logging the error information using the [standard Open Tracing log fields][9]:
-
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -437,11 +408,37 @@ span.log(
 ```
 {{% /tab %}}
 {{< /tabs >}}
+8. (Optional) Override a sampling decision by forcing a trace to be kept or dropped. For example, always keep a critical transaction's trace, or always drop unnecessary, repetitive traces.
 
-8. (Optional) To distribute traces between your environments, for example frontend - backend, you can either do it manually or leverage our auto instrumentation. In both cases, you can opt to inject the trace context into all requests or only into the sampled ones. A sampling of 100% is applied by default.
+    To manually keep a trace:
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+span.keepTrace()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+[span keepTrace];
+{{% /tab %}}
+{{< /tabs >}}
 
-* To manually propagate the trace, inject the span context into `URLRequest` headers:
+    To manually drop a trace:
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+span.dropTrace()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+[span dropTrace];
+{{% /tab %}}
+{{< /tabs >}}
+    <div class="alert alert-danger">
+        Always call <code>keepTrace()</code> or <code>dropTrace()</code> on a root span before child spans are created, and before any context propagation. Otherwise, the system can't ensure consistency, resulting in partial traces being ingested.
+    </div>
+9. (Optional) To distribute traces between your environments, for example from frontend to backend, you can either do it manually or use auto instrumentation. In both cases, you can opt to inject the trace context into all requests or only into the sampled ones. A sampling of 100% is applied by default.
 
+    * To manually propagate the trace, inject the span context into `URLRequest` headers:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -477,11 +474,9 @@ for (NSString *key in headersWriter.traceHeaderFields) {
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 This sets additional tracing headers on your request so your backend can extract the request and continue distributed tracing. Once the request is done, call `span.finish()` within a completion handler. If your backend is also instrumented with [Datadog APM & Distributed Tracing][10], the entire front-to-back trace appears in the Datadog dashboard.
 
-* In order for the SDK to automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Datadog initialization, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the URLSession:
-
+    * In order for the SDK to automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Datadog initialization, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the URLSession:
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
@@ -519,7 +514,7 @@ DDTraceURLSessionTracking *urlSessionTracking = [DDTraceURLSessionTracking alloc
 DDTraceConfiguration *configuration = [[DDTraceConfiguration] alloc] init];
 [configuration setURLSessionTracking:urlSessionTracking];
 
-[DDTrace enableWithConfiguration:configuration];
+[DDTrace enableWith:configuration];
 
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
                                                         delegate:[[DDNSURLSessionDelegate alloc] init]
@@ -527,10 +522,9 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 ```
 {{% /tab %}}
 {{< /tabs >}}
-
 This traces all requests made with this `session` to `example.com` and `api.yourdomain.com` hosts (for example, `https://api.yourdomain.com/v2/users` or `https://subdomain.example.com/image.png`).
 
-**Note**: Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `firstPartyHosts`, swizzling is not applied.
+    **Note**: Tracing auto-instrumentation uses `URLSession` swizzling and is opt-in. If you do not specify `firstPartyHosts`, swizzling is not applied.
 
 ## Batch collection
 
@@ -568,4 +562,4 @@ The following attributes in `Trace.Configuration` can be used when creating the 
 [9]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
 [10]: https://docs.datadoghq.com/tracing/
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[12]: /tracing/trace_collection/custom_instrumentation/ios/otel
+[12]: /tracing/trace_collection/custom_instrumentation/client-side/ios/otel

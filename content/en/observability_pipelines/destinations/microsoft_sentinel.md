@@ -66,19 +66,38 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 
 To set up the Microsoft Sentinel destination in Observability Pipelines:
 
+<div class="alert alert-danger">Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
+
+1. Enter the identifier for your Microsoft Sentinel client secret. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your Microsoft Sentinel Data Collection endpoint. If you leave it blank, the [default](#set-secrets) is used.
 1. Enter the client ID for your application, such as `550e8400-e29b-41d4-a716-446655440000`.
 1. Enter the directory ID for your tenant, such as `72f988bf-86f1-41af-91ab-2d7cd011db47`. This is the Azure AD tenant ID.
 1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.
 1. Enter the Data Collection Rule (DCR) immutable ID, such as `dcr-000a00a000a00000a000000aa000a0aa`.
-1. Optionally, toggle the switch to enable **Buffering Options**.<br>**Note**: Buffering options is in Preview. Contact your account manager to request access.
-	- If left disabled, the maximum size for buffering is 500 events.
-	- If enabled:
-		1. Select the buffer type you want to set (**Memory** or **Disk**).
-		1. Enter the buffer size and select the unit.
+{{% observability_pipelines/destination_buffer_numbered %}}
 
-### Set the environment variables
+### Set secrets
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Microsoft Sentinel client secret identifier:
+    - References the DCE endpoint URL shown as the **Logs Ingestion Endpoint** or **Data Collection Endpoint** on the DCR Overview page. An example URL: `https://<DCE-ID>.ingest.monitor.azure.com`.
+	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`.
+- Microsoft Sentinel Data Collection endpoint identifier:
+    - References the Azure AD application's client secret, such as `550e8400-e29b-41d4-a716-446655440000`.
+	- The default identifier is `DESTINATION_MICROSOFT_SENTINEL_DCE_URI`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/microsoft_sentinel %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## How the destination works
 

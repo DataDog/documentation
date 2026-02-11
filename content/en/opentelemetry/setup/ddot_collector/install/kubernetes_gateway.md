@@ -1,8 +1,9 @@
 ---
 title: Install the DDOT Collector as a Gateway on Kubernetes
-code_lang: kubernetes_gateway
-type: multi-code-lang
-code_lang_weight: 2
+private: true
+# code_lang: kubernetes_gateway
+# type: multi-code-lang
+# code_lang_weight: 2
 further_reading:
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: Blog
@@ -193,28 +194,31 @@ exporters:
     endpoint: http://<release>-datadog-otel-agent-gateway:4318
     tls:
       insecure: true
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 processors:
   infraattributes:
     cardinality: 2
-  batch:
-    timeout: 10s
 connectors:
   datadog/connector:
     traces:
       compute_top_level_by_span_kind: true
+      peer_tags_aggregation: true
+      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [otlphttp, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [otlphttp]
     logs:
       receivers: [otlp]
-      processors: [infraattributes, batch]
+      processors: [infraattributes]
       exporters: [otlphttp]
 ```
 
@@ -234,9 +238,10 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+    sending_queue:
+      batch:
+        flush_timeout: 10s
 processors:
-  batch:
-    timeout: 10s
 extension:
   datadog:
     api:
@@ -246,15 +251,12 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog]
     metrics:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog]
     logs:
       receivers: [otlp]
-      processors: [batch]
       exporters: [datadog]
 ```
 
@@ -352,27 +354,23 @@ data:
             endpoint: "0.0.0.0:4317"
           http:
             endpoint: "0.0.0.0:4318"
-    processors:
-      batch:
-        timeout: 10s
-      # Add custom processors here
     exporters:
       datadog:
         api:
           key: ${env:DD_API_KEY}
+      sending_queue:
+        batch:
+          flush_timeout: 10s
     service:
       pipelines:
         traces:
           receivers: [otlp]
-          processors: [batch]
           exporters: [datadog]
         metrics:
           receivers: [otlp]
-          processors: [batch]
           exporters: [datadog]
         logs:
           receivers: [otlp]
-          processors: [batch]
           exporters: [datadog]
 ```
 
@@ -464,6 +462,9 @@ otelAgentGateway:
       datadog:
         api:
           key: ${env:DD_API_KEY}
+        sending_queue:
+          batch:
+            flush_timeout: 10s
     service:
       pipelines:
         traces:
@@ -776,7 +777,7 @@ targetSystem: "linux"
 fullnameOverride: "my-gw"
 datadog:
   apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY> 
+  appKey: <DATADOG_APP_KEY>
   otelCollector:
     enabled: true
     # RBAC permissions are required for the k8s resolver in the loadbalancing exporter

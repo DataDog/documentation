@@ -54,6 +54,8 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 |---|---|
 | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers |
 
+**Limitation:** On JDK 18 and below, classes compiled with the `-parameters` flag may not be supported. Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+
 {{% /tab %}}
 
 {{% tab "Python" %}}
