@@ -35,19 +35,19 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
   1. If you are using Secrets Management, enter the identifier for the HTTP/S Server address key. See [Set secrets][3] for the defaults used.
   1. Set the authorization strategy to **Basic**. If you are using Secrets Management, enter the identifiers for the HTTP/S Server username and password. See [Set secrets][3] for the defaults used.
   1. In the **Decoding** dropdown menu, select **Bytes**.
-  1. Enable TLS:
-      1. If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
-      1. Enter `/fullchain.pem` in the **Certificate path** field.
-      1. Enter `/privkey.pem` in the **Private key path** field.
-        - Observability Pipelines automatically appends `/var/lib/observability-pipelines-worker/config` as the base path.
+  1. Toggle the switch to **Enable TLS**. The following certificate and key files are required. **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
+      - If you are using Secrets Management, enter the identifier for the HTTP/S Server key pass. See [Set secrets][3] for the defaults used.
+      - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
+      - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
+      - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
 1. Copy your certificates into the configuration directory:
     ```shell
     # Create the configuration directory
     sudo mkdir -p /var/lib/observability-pipelines-worker/config
 
     # Copy your certificates
-    sudo cp /path/to/your/fullchain.pem /var/lib/observability-pipelines-worker/config/fullchain.pem
-    sudo cp /path/to/your/privkey.pem /var/lib/observability-pipelines-worker/config/privkey.pem
+    sudo cp /path/to/your/<your-cert-file> /var/lib/observability-pipelines-worker/config/<your-cert-file>
+    sudo cp /path/to/your/<your-cert-file> /var/lib/observability-pipelines-worker/config/<your-cert-file>
     ```
 1. After you set up your destinations and processors, click **Next: Install**.
 
@@ -58,10 +58,10 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 1. After installing the Worker, change ownership of the certificates so the Observability Pipelines Worker can read them:
     ```shell
     # Change ownership so the Worker can read the certificates
-    sudo chgrp observability-pipelines-worker /var/lib/observability-pipelines-worker/config/fullchain.pem
-    sudo chmod 640 /var/lib/observability-pipelines-worker/config/fullchain.pem
-    sudo chgrp observability-pipelines-worker /var/lib/observability-pipelines-worker/config/privkey.pem
-    sudo chmod 640 /var/lib/observability-pipelines-worker/config/privkey.pem
+    sudo chgrp observability-pipelines-worker /var/lib/observability-pipelines-worker/config/<your-cert-file>
+    sudo chmod 640 /var/lib/observability-pipelines-worker/config/<your-cert-file>
+    sudo chgrp observability-pipelines-worker /var/lib/observability-pipelines-worker/config/<your-cert-file>
+    sudo chmod 640 /var/lib/observability-pipelines-worker/config/<your-cert-file>
     ```
 1. Deploy the configuration from the Observability Pipelines UI.
 1. Test your endpoint using curl:
@@ -75,7 +75,7 @@ The following are required to send Cloudflare Logpush logs to Observability Pipe
 ## Set up Cloudflare Logpush
 
 Follow the [Cloudflare Logpush HTTP destination documentation][5] to set up Logpush to send logs to an HTTP endpoint.
-  - For the **HTTP endpoint**, the basic authorization headers need to be in the URL needs: `https://clodflare.your-domain.com?header_Authorization=Basic%20<base64-encoded-credentials>`
+  - For the **HTTP endpoint**, the basic authorization headers need to be base64 encoded in the URL: `https://subdomain.your-domain.com?header_Authorization=Basic%20<base64-encoded-credentials>`
 
 After your Logpush job has been successfully created, you can view your Cloudflare Logpush logs in Datadog [Log Explorer][6].
 
