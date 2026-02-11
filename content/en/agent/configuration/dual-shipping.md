@@ -21,7 +21,7 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 ## Overview
 
-This document provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics) to multiple Datadog organizations and sites. For more information about Datadog sites, see [Getting Started with Datadog sites][3].
+This guide provides examples of Agent configurations for dual shipping different types of data (for example, APM, logs, Cluster Agent metrics) to multiple Datadog organizations and sites. For more information about Datadog sites, see [Getting Started with Datadog sites][3].
 
 **Note**: Use [Observability Pipelines][1] if you want to dual ship logs or split log traffic across different logging vendors, cloud storages, or SIEM providers.
 
