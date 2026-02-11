@@ -74,11 +74,11 @@ Then run `helm upgrade`.
 
 In Datadog, navigate to [Kubernetes Autoscaling][5]. You can review all your clusters that are available for autoscaling on the [Autoscaling Settings][7] page. Toggle the **Enabled** column for your cluster of choice.
 
-{{< img src="containers/autoscaling/settings.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="containers/autoscaling/settings.png" alt=" The Autoscaling Settings page showing the Enable Clusters for Autoscaling section. Displays afilterable table of Kubernetes clusters with columns for cluster name, nodes, CPU capacity, memory capacity, CPU usage percentage with visual bars, memory usage percentage with visual bars, autoscaled workloads count, cluster scaling availability, workload scaling availability, and an enabled toggle switch. Toggle switches on the right show which clusters have autoscaling enabled." style="width:100%;" >}}
 
 Use the [Cluster Scaling][6] page and select a cluster to review its recommendations. Identify a cluster you want to begin optimizing. During the Preview period, Datadog recommends selecting a **non-production cluster**.
 
-{{< img src="containers/autoscaling/cluster-view.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="containers/autoscaling/cluster-view.png" alt="The Cluster Scaling detail page for cluster dev-eks-shopist-a-us-east-1. The Cost Summary section displays four metrics: cluster cost of $140.7k with negative $3.1k month-over-month change, idle cost of $93.66k with negative $2.29k change, CPU usage/request efficiency at 27.24%, and memory usage/request efficiency at 35.15%. The Scaling Events section shows two time-series graphs tracking CPU and memory metrics over the past month, with fluctuating usage patterns, alongside a timeline of recent scaling events including pod and DatadogPodAutoscaler activities. The Scaling Recommendations section displays a table of workloads with idle CPU and memory, showing 8.7% autoscaling enabled." style="width:100%;" >}}
 
 Click **Start Autoscaling** to apply recommendations.
 
