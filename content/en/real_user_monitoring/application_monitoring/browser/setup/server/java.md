@@ -95,6 +95,8 @@ Here are all the configuration options related to RUM SDK injection:
 | `dd.rum.session.replay.sample.rate` | `DD_RUM_SESSION_REPLAY_SAMPLE_RATE` | Percentage, from `0` to `100` | Required if `rum.remote.configuration.id` is missing |
 | `dd.rum.remote.configuration.id` | `DD_RUM_REMOTE_CONFIGURATION_ID` | `<string>` | Required if either `rum.session.sample.rate` or `rum.session.replay.sample.rate` is missing |
 
+{{% rum-browser-auto-instrumentation-update-user-attributes %}}
+
 ## Troubleshooting
 
 Check the Java web application server logs if you don't see the RUM JavaScript tag injected.

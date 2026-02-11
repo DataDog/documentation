@@ -175,10 +175,10 @@ GO
 
    **Note**: If you're using Amazon RDS for SQL Server, remove the `MEMORY_PARTITION_MODE = PER_NODE` line from both session configurations, as this option is not supported on RDS instances.
 
-2. In the Datadog Agent configuration, enable `xe_collection` in `sqlserver.d/conf.yaml`.
+2. In the Datadog Agent configuration, enable `collect_xe` in `sqlserver.d/conf.yaml`.
 See the [sample conf.yaml.example][3] for all available configuration options.
 ```yaml
-  xe_collection:
+  collect_xe:
     query_completions:
       enabled: true
     query_errors:
