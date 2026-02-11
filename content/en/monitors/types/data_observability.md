@@ -134,7 +134,7 @@ The **Custom SQL** metric type tracks a custom metric value returned by a SQL qu
     - **Percentage**: The query returns a percentage value between 0 and 100.
 1. Write a SQL query that returns a single value aliased as `dd_value`. For example:
 {{< code-block lang="sql" >}}
-SELECT SUM(column_name) as dd_value FROM schema.table
+SELECT SUM(AMOUNT) as dd_value FROM PROD.ORDERS
 {{< /code-block >}}
 1. Click **Validate** to verify your query syntax.
 1. Select the detection method:
@@ -146,11 +146,11 @@ SELECT SUM(column_name) as dd_value FROM schema.table
 
 ## Select entities to monitor
 
-After selecting a metric type, choose which tables or columns to monitor. You can select entities using the search field, or write a query using the AASTRA query syntax.
+After selecting a metric type, choose which tables or columns to monitor. You can select entities using the search field, or write a query to match entities by name or attribute.
 
-### AASTRA query syntax
+### Query syntax
 
-AASTRA queries follow this format:
+Queries follow this format:
 
 {{< code-block lang="text" >}}
 search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
@@ -160,20 +160,18 @@ Where `ENTITY_TYPE` is `table` or `column`, and `FILTER_CONDITIONS` supports the
 
 | Filter | Example | Description |
 |---|---|---|
-| Entity ID | `` entity_id:e5501c92da03da00 `` | Match a specific entity by ID. |
-| Multiple IDs | `` entity_id:("id1" OR "id2") `` | Match multiple entities by ID. |
-| Name | `` name:customers* `` | Match by name. Supports `*` wildcards. |
-| Attribute | `` database:prod_warehouse `` | Match by attribute such as `database`, `schema`, or `account`. |
-| AND | `` database:my_db AND schema:analytics `` | Match entities meeting all conditions. |
-| OR | `` schema:sales OR schema:marketing `` | Match entities meeting any condition. |
-| Negation | `` -database:staging `` | Exclude entities matching a condition. |
+| Name | `` name:USERS* `` | Match by name. Supports `*` wildcards. |
+| Attribute | `` database:ANALYTICS_DB `` | Match by attribute such as `database`, `schema`, or `account`. |
+| AND | `` database:ANALYTICS_DB AND schema:PROD `` | Match entities meeting all conditions. |
+| OR | `` schema:PROD OR schema:STAGING `` | Match entities meeting any condition. |
+| Negation | `` -database:DEV `` | Exclude entities matching a condition. |
 
 **Examples:**
 
 {{< code-block lang="text" >}}
-search for table where `schema:analytics AND database:snowflake`
-search for column where `name:email`
-search for table where `entity_id:("785821c9bd028268" OR "abc123def456")`
+search for table where `schema:PROD AND database:ANALYTICS_DB`
+search for column where `name:EMAIL`
+search for table where `database:ANALYTICS_DB AND name:USERS*`
 {{< /code-block >}}
 
 ## Set alert conditions
@@ -257,7 +255,7 @@ This monitor alerts when a critical table has not been updated within the expect
 1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
 1. Select **Table** as the entity type.
 1. Select **Freshness** as the metric type.
-1. Select the target table (for example, `analytics.orders`).
+1. Select the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
 1. Select **Threshold** as the detection method.
 1. Set the expected update frequency to **6 hours**.
 
@@ -296,7 +294,7 @@ This monitor detects a significant decrease in row count that could indicate a p
 1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
 1. Select **Table** as the entity type.
 1. Select **Row Count** as the metric type.
-1. Select the target table (for example, `warehouse.events`).
+1. Select the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
 1. Select **Anomaly** as the detection method.
 
 #### Set the alert threshold
@@ -334,7 +332,7 @@ This monitor detects when a column's null percentage exceeds normal levels, whic
 1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
 1. Select **Column** as the entity type.
 1. Select **Nullness** as the metric type.
-1. Select the target column (for example, `warehouse.users.email`).
+1. Select the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
 1. Select **Anomaly** as the detection method.
 
 #### Set the alert threshold
@@ -347,12 +345,12 @@ This monitor detects when a column's null percentage exceeds normal levels, whic
 1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-Null percentage for column {{warehouse.name}}.{{schema.name}}.{{table.name}}.email
+Null percentage for {{warehouse.name}}.{{schema.name}}.{{table.name}}.EMAIL
 has exceeded expected levels with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-Null percentage for column {{warehouse.name}}.{{schema.name}}.{{table.name}}.email
+Null percentage for {{warehouse.name}}.{{schema.name}}.{{table.name}}.EMAIL
 has returned to expected levels.
 {{/is_recovery}}
 {{< /code-block >}}
