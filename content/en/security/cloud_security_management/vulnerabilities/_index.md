@@ -61,26 +61,27 @@ Explore reports
 Get started with Cloud Security Vulnerabilities and cover your infrastructure in minutes, using:
 - [Agentless Scanning][11]
 - [Unified Datadog Agent][12]
+- [CI/CD Container Image Scanning][21]
 
-You can also use both deployment methods to use the unified Datadog Agent where you already have it deployed, and Agentless elsewhere.
+You can also use multiple deployment methods together: use the unified Datadog Agent where you already have it deployed, Agentless elsewhere, and CI/CD scanning to catch vulnerabilities before production.
 
-After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [Cloud Security Vulnerabilities Findings page][1] within an hour. 
+After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [Cloud Security Vulnerabilities Findings page][1] within an hour.
 
-Use these tables to decide which solution to start with: 
+Use these tables to decide which solution to start with:
 | Feature                                   | Agentless                                     | Unified Datadog Agent          |
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
 | Time to deploy across your infrastructure | Minutes                                       | Hours to weeks                 |
 | Vulnerability prioritization              | Yes                                           | Yes, with runtime context      |
 | Vulnerability scanning frequency          | 12 hours                                      | Real-time                      |
 
-| Vulnerability detection scope             | Agentless                                     | Unified Datadog Agent          |
-|-------------------------------------------|-----------------------------------------------|--------------------------------|
-| Host and host image                       | OS packages and app packages, mapped to image | OS packages                    |
-| Container image                           | OS packages and app packages, mapped to image | OS packages                    |
-| Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
-| Operating system                          | Linux                                         | Linux, Windows                 |
-| Serverless                                | AWS Lambda, AWS ECS Fargate                   | Not applicable                 |
-| Container registries                      | Amazon ECR                                    | Not applicable                 |
+| Vulnerability detection scope | Agentless                                     | Unified Datadog Agent          |
+|-------------------------------|-----------------------------------------------|--------------------------------|
+| Host and host image           | OS packages and app packages, mapped to image | OS packages                    |
+| Container image               | OS packages and app packages, mapped to image | OS packages                    |
+| Cloud provider                | AWS, Azure, GCP                               | AWS, Azure, GCP, on-prem, etc. |
+| Operating system              | Linux, Windows                                | Linux, Windows                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, GCP Cloud Run | Not applicable                 |
+| Container registries          | Amazon ECR, Google Artifact Registry          | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
@@ -131,12 +132,12 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /security/cloud_security_management/troubleshooting/vulnerabilities/
-[15]: https://www.datadoghq.com/product-preview/agentless-vulnerability-scanning-for-azure/
 [16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[21]: /security/cloud_security_management/setup/ci_cd
 
 ## Further reading
 
