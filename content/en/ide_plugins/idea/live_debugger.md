@@ -18,7 +18,7 @@ The Live Debugger enables you to add logpoints—auto-expiring, non-breaking bre
 ## Live Debugger tab
 The **Live Debugger** tab in the Datadog tool window shows the current session, its logpoints, and the data captured by the selected logpoint:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab-v2.png" alt="The Live Debugger tab" style="width:100%;" >}}
+{{< img src="/ide_plugins/idea/live_debugger/tool-window-tab-v2.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
 The panel has three sections: 
 
@@ -29,7 +29,7 @@ The panel has three sections:
 ### Current session
 The session view shows the current session and its logpoints. Use the selector to choose another session or start a new one. 
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/session-selector.png" alt="The session selector" style="width:80%;" >}}
+{{< img src="/ide_plugins/idea/live_debugger/session-selector.png" alt="The session selector" style="width:80%;" >}}
 
 Activate, deactivate, or delete the session, using the controls in the toolbar at the right of the selector. You can also open the session in the Datadog UI from here.
 
@@ -50,7 +50,7 @@ The **Stacktrace** tab shows the runtime path execution leading up to the logpoi
 ## Source editor
 In the source editor, an icon is shown in the gutter for any line that has a logpoint defined in the current session:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:80%;" >}}
+{{< img src="/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:80%;" >}}
 
 Click the icon to open the Datadog tool window and show the selected logpoint. Right-click the icon for options to [enable, disable](#enable-and-disable-a-logpoint), [edit](#edit-a-logpoint), and [delete](#delete-a-logpoint) the logpoint.
 
@@ -61,7 +61,7 @@ To add a logpoint, right-click a line of code in the source editor and select **
 
 A dialog appears where you can enter the service name, the environment, a template for the log message to be emitted at runtime, a logpoint condition expression (optional), and the variable capture depth:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
+{{< img src="/ide_plugins/idea/live_debugger/new-logpoint.png" alt="Add a new log probe" style="width:75%;" >}}
 
 The log message field accepts a log template that contains descriptive text and variable references—see the [Dynamic Instrumentation expression language][3] documentation for details. The log message is generated using the runtime state immediately *prior* to the line of code being executed. Generated log messages automatically pass through the Dynamic Instrumentation [Sensitive Data Scanner][5].
 
@@ -79,7 +79,7 @@ Notice that the remote code may be a different version compared to the source co
 ### Edit a logpoint
 To modify the log message for a logpoint, right-click the logpoint and select **Edit**:
 
-{{< img src="/developers/ide_plugins/idea/live_debugger/edit-logpoint.png" alt="Edit a log probe" style="width:75%;" >}}
+{{< img src="/ide_plugins/idea/live_debugger/edit-logpoint.png" alt="Edit a log probe" style="width:75%;" >}}
 
 You can update the log message, the logpoint condition, and the capture depth. Changing the service or environment requires deleting the logpoint and creating a new one.
 
@@ -97,10 +97,10 @@ You can enable or disable logpoints by right-clicking and selecting the appropri
 
 | Icon         | Description       |
 |--------------|-------------------|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeActive.svg.png" alt="Active icon" width="24px" >}}      | **Active**: Log events will be generated when the line of code is about to be executed.|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeDisabled.svg.png" alt="Inactive icon" width="24px" >}}  | **Disabled**: The logpoint is inactive, either because it automatically expired or the user disabled it manually. |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeError.svg.png" alt="Error icon" width="24px" >}}        | **Error**: The logpoint is not generating log events due to an error. |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeWarning.svg.png" alt="Warning icon" width="24px" >}}    | **Warning**: The logpoint may not be generating log events. |
+| {{< img src="/ide_plugins/idea/live_debugger/probeActive.svg.png" alt="Active icon" width="24px" >}}      | **Active**: Log events will be generated when the line of code is about to be executed.|
+| {{< img src="/ide_plugins/idea/live_debugger/probeDisabled.svg.png" alt="Inactive icon" width="24px" >}}  | **Disabled**: The logpoint is inactive, either because it automatically expired or the user disabled it manually. |
+| {{< img src="/ide_plugins/idea/live_debugger/probeError.svg.png" alt="Error icon" width="24px" >}}        | **Error**: The logpoint is not generating log events due to an error. |
+| {{< img src="/ide_plugins/idea/live_debugger/probeWarning.svg.png" alt="Warning icon" width="24px" >}}    | **Warning**: The logpoint may not be generating log events. |
 
 Disabling then re-enabling a logpoint extends its expiry time to 48 hours.
 
