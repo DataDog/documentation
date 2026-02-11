@@ -24,7 +24,29 @@ further_reading:
 
 ## Overview
 
-With the [Data Observability][1] monitor type, you can create monitors that alert on data quality issues across your data warehouses. These monitors detect problems such as data freshness delays, unexpected changes in row count, shifts in column-level metrics, and custom SQL query results before they affect downstream dashboards, machine learning models, or other consumers.
+[Data Observability][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
+
+Data Observability monitors support the following monitor types:
+
+**Table-level monitors:**
+| Monitor type | Description |
+|---|---|
+| [Freshness](#select-an-entity-type-and-monitor-type) | Tracks the time elapsed since a table was last updated. |
+| [Row Count](#select-an-entity-type-and-monitor-type) | Tracks the number of rows in a table or view. |
+| [Custom SQL](#select-an-entity-type-and-monitor-type) | Tracks a custom metric value returned by a SQL query. |
+
+**Column-level monitors:**
+| Monitor type | Description |
+|---|---|
+| [Freshness](#select-an-entity-type-and-monitor-type) | Tracks the most recent date seen in a datetime column. |
+| [Uniqueness](#select-an-entity-type-and-monitor-type) | Tracks the percentage of unique values. |
+| [Nullness](#select-an-entity-type-and-monitor-type) | Tracks the percentage of null values. |
+| [Cardinality](#select-an-entity-type-and-monitor-type) | Tracks the number of distinct values. |
+| [Percent Zero](#select-an-entity-type-and-monitor-type) | Tracks the percentage of values equal to zero. |
+| [Percent Negative](#select-an-entity-type-and-monitor-type) | Tracks the percentage of negative values. |
+| [Min / Max / Mean / Sum / Standard Deviation](#select-an-entity-type-and-monitor-type) | Tracks statistical measures across column values. |
+
+Where possible, Datadog collects metrics such as row count and freshness from system metadata (for example, `INFORMATION_SCHEMA`). When system metadata is not available for a given metric, the monitor pushes down a query directly to the warehouse to compute the value.
 
 Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (Snowflake, Databricks, or BigQuery).
 
@@ -121,6 +143,38 @@ SELECT SUM(column_name) as dd_value FROM schema.table
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Select entities to monitor
+
+After selecting a monitor type, choose which tables or columns to monitor. You can select entities using the search field, or write a query using the AASTRA query syntax.
+
+### AASTRA query syntax
+
+AASTRA queries follow this format:
+
+{{< code-block lang="text" >}}
+search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
+{{< /code-block >}}
+
+Where `ENTITY_TYPE` is `table` or `column`, and `FILTER_CONDITIONS` supports the following:
+
+| Filter | Example | Description |
+|---|---|---|
+| Entity ID | `` entity_id:e5501c92da03da00 `` | Match a specific entity by ID. |
+| Multiple IDs | `` entity_id:("id1" OR "id2") `` | Match multiple entities by ID. |
+| Name | `` name:customers* `` | Match by name. Supports `*` wildcards. |
+| Attribute | `` database:prod_warehouse `` | Match by attribute such as `database`, `schema`, or `account`. |
+| AND | `` database:my_db AND schema:analytics `` | Match entities meeting all conditions. |
+| OR | `` schema:sales OR schema:marketing `` | Match entities meeting any condition. |
+| Negation | `` -database:staging `` | Exclude entities matching a condition. |
+
+**Examples:**
+
+{{< code-block lang="text" >}}
+search for table where `schema:analytics AND database:snowflake`
+search for column where `name:email`
+search for table where `entity_id:("785821c9bd028268" OR "abc123def456")`
+{{< /code-block >}}
 
 ## Set alert conditions
 
