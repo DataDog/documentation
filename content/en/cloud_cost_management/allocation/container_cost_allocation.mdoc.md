@@ -190,7 +190,7 @@ All other costs are given the same value and tags as the source metric `gcp.cost
 
 ### Agentless Kubernetes costs
 
-To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][18]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set. This approach comes with a number of limitations (see below).
+To view the costs of GKE clusters without enabling Datadog Infrastructure Monitoring, use [GKE cost allocation][18]. Enable GKE cost allocation on unmonitored GKE clusters to access this feature set. This approach comes with the following limitations.
 
 #### Limitations and differences from the Datadog Agent
 
@@ -284,16 +284,18 @@ Costs are allocated into the following spend types:
 
 Depending on the cloud provider, certain resources may or may not be available for cost allocation.
 
+This sentence {% tooltip contents="I'm the tooltip text" %}uses a tooltip{% /tooltip %}.
+
 | Resource | AWS | Azure | Google Cloud |
 |---:|---:|---|---|
 | CPU | {% x/ %} | {% x/ %} | {% x/ %} |
 | Memory | {% x/ %} | {% x/ %} | {% x/ %} |
-| {% tooltip text="Persistent volumes" tooltip="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles." case="title" /%} | {% x/ %} |  |  |
-| {% tooltip text="Managed service fees" tooltip="Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options." case="title" /%} | {% x/ %} | {% x/ %} | {% x/ %} |
+| {% tooltip contents="Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles." %} Persistent volumes {% /tooltip %} | {% x/ %} |  |  |
+| {% tooltip contents="Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options." %} Managed service fees {% /tooltip %} | {% x/ %} | {% x/ %} | {% x/ %} |
 | ECS costs | {% x/ %} | N/A | N/A |
 | Data transfer costs | {% x/ %} | Limited* | Limited* |
 | GPU | {% x/ %} | {% x/ %} | {% x/ %}  |
-| {% tooltip text="Local storage" tooltip="Directly-attached storage resources for a node." case="title" /%} |  | Limited* | Limited* |
+| {% tooltip contents="Directly-attached storage resources for a node." %} Local storage {% /tooltip %} |  | Limited* | Limited* |
 
 `Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
 

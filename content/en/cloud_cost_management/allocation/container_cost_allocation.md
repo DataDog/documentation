@@ -129,7 +129,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="463"
+    data-if="301"
   >
     <p>
       CCM allocates costs of Amazon ECS clusters as well as all Kubernetes
@@ -231,7 +231,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="464"
+    data-if="302"
   >
     <p>
       CCM allocates costs of all Kubernetes clusters, including those managed
@@ -296,7 +296,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="465"
+    data-if="303"
   >
     <p>
       CCM allocates costs of all Kubernetes clusters, including those managed
@@ -382,7 +382,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="466"
+    data-if="304"
   >
     <p>
       These divided costs are enriched with tags from nodes, pods, tasks, and
@@ -523,7 +523,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="467"
+    data-if="305"
   >
     <h3 id="kubernetes-tag-extraction-2">Kubernetes tag extraction</h3>
     <p>
@@ -568,7 +568,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="468"
+    data-if="306"
   >
     <h3 id="kubernetes-tag-extraction-3">Kubernetes tag extraction</h3>
     <p>
@@ -617,7 +617,7 @@ further_reading:
         href="https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations"
         >GKE cost allocation</a
       >. Enable GKE cost allocation on unmonitored GKE clusters to access this
-      feature set. This approach comes with a number of limitations (see below).
+      feature set. This approach comes with the following limitations.
     </p>
     <h4 id="limitations-and-differences-from-the-datadog-agent">
       Limitations and differences from the Datadog Agent
@@ -658,7 +658,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="469"
+    data-if="307"
   >
     <h3 id="compute-4">Compute</h3>
     <p>
@@ -789,7 +789,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="470"
+    data-if="308"
   >
     <h3 id="compute-5">Compute</h3>
     <p>
@@ -837,7 +837,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="471"
+    data-if="309"
   >
     <h3 id="compute-6">Compute</h3>
     <p>
@@ -894,6 +894,7 @@ further_reading:
     Depending on the cloud provider, certain resources may or may not be
     available for cost allocation.
   </p>
+  <p>This sentence uses a tooltip.</p>
   <table>
     <thead>
       <tr>
@@ -917,13 +918,13 @@ further_reading:
         <td><i class="icon-check-bold"></i></td>
       </tr>
       <tr>
-        <td align="right"></td>
+        <td align="right">Persistent volumes</td>
         <td align="right"><i class="icon-check-bold"></i></td>
         <td></td>
         <td></td>
       </tr>
       <tr>
-        <td align="right"></td>
+        <td align="right">Managed service fees</td>
         <td align="right"><i class="icon-check-bold"></i></td>
         <td><i class="icon-check-bold"></i></td>
         <td><i class="icon-check-bold"></i></td>
@@ -947,7 +948,7 @@ further_reading:
         <td><i class="icon-check-bold"></i></td>
       </tr>
       <tr>
-        <td align="right"></td>
+        <td align="right">Local storage</td>
         <td align="right"></td>
         <td>Limited*</td>
         <td>Limited*</td>
@@ -969,7 +970,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="472"
+    data-if="310"
   >
     <table>
       <thead>
@@ -1007,7 +1008,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="473"
+    data-if="311"
   >
     <table>
       <thead>
@@ -1034,7 +1035,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="474"
+    data-if="312"
   >
     <table>
       <thead>
@@ -1076,7 +1077,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="475"
+    data-if="313"
   >
     <h3 id="kubernetes">Kubernetes</h3>
     <p>
@@ -1258,7 +1259,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="476"
+    data-if="314"
   >
     <h3 id="kubernetes-2">Kubernetes</h3>
     <p>
@@ -1319,7 +1320,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="477"
+    data-if="315"
   >
     <h3 id="kubernetes-3">Kubernetes</h3>
     <p>
@@ -1395,7 +1396,7 @@ further_reading:
   </div>
 <h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/cloud_cost_management/"><span class="w-100 d-flex justify-content-between "><span class="text">Learn about Cloud Cost Management</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"463":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"463"},"464":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"464"},"465":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"465"},"466":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"466"},"467":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"467"},"468":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"468"},"469":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"469"},"470":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"470"},"471":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"471"},"472":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"472"},"473":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"473"},"474":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"474"},"475":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"475"},"476":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"476"},"477":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"477"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"cloud_cost_provider_options","label":"Cloud Provider"},"defaultValsByOptionGroupId":{"cloud_cost_provider_options":"aws"}}},"defaultValsByTraitId":{"platform":"aws"},"optionGroupsById":{"cloud_cost_provider_options":[{"default":true,"id":"aws","label":"AWS"},{"id":"azure","label":"Azure"},{"id":"google","label":"Google"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"301":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"301"},"302":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"302"},"303":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"303"},"304":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"304"},"305":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"305"},"306":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"306"},"307":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"307"},"308":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"308"},"309":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"309"},"310":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"310"},"311":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"311"},"312":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"312"},"313":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"313"},"314":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"314"},"315":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"315"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"cloud_cost_provider_options","label":"Cloud Provider"},"defaultValsByOptionGroupId":{"cloud_cost_provider_options":"aws"}}},"defaultValsByTraitId":{"platform":"aws"},"optionGroupsById":{"cloud_cost_provider_options":[{"default":true,"id":"aws","label":"AWS"},{"id":"azure","label":"Azure"},{"id":"google","label":"Google"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="cloud_cost/container_cost_allocation/container_allocation.png" style="display:none;" alt="" >}}
 
