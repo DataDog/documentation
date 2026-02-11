@@ -1,4 +1,4 @@
-Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated. Note that `counter` metrics such as `pipelines.buffer_received_events_total` represent the count per one-second interval, not a cumulative total.
 
 ### Destination buffer metrics
 
