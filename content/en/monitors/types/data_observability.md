@@ -180,7 +180,7 @@ search for table where `database:ANALYTICS_DB AND name:USERS*`
 1. Set a **Critical** threshold (required) and optionally a **Warning** threshold for early detection.
 1. Determine your desired behavior when data is missing, for example, `evaluate as zero`, `show NO DATA`, `show NO DATA and notify`, or `show OK`.
 
-<div class="alert alert-info">When using the <strong>Anomaly</strong> detection method, the monitor triggers based on deviation from the expected baseline. Threshold values are not required for anomaly detection.</div>
+<div class="alert alert-info">When using the <strong>Anomaly</strong> detection method, the monitor triggers based on deviation from the expected baseline. Threshold values are not required for anomaly detection. The anomaly model requires <strong>3 to 7 days</strong> to train (including a weekend), depending on how frequently the underlying data updates. During the training period, the monitor does not trigger alerts.</div>
 
 ### No data alerts
 
