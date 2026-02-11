@@ -204,7 +204,7 @@ You can use the following template variables in your notification messages:
 |---------------------|------------------------------------------------|
 | `{{table.name}}`    | The name of the affected table.               |
 | `{{schema.name}}`   | The schema containing the affected table.      |
-| `{{warehouse.name}}`| The data warehouse containing the affected table.|
+| `{{database.name}}` | The database containing the affected table.      |
 | `{{threshold}}`     | The alert threshold value.                     |
 | `{{value}}`         | The current value that triggered the alert.    |
 
@@ -223,12 +223,12 @@ The following additional variables are available for **Anomaly** detection monit
 
 {{< code-block lang="text" >}}
 {{#is_alert}}
-Data quality issue detected on {{warehouse.name}}.{{schema.name}}.{{table.name}}:
+Data quality issue detected on {{database.name}}.{{schema.name}}.{{table.name}}:
 current value {{value}} has breached the threshold of {{threshold}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-Data quality issue on {{warehouse.name}}.{{schema.name}}.{{table.name}} has recovered.
+Data quality issue on {{database.name}}.{{schema.name}}.{{table.name}} has recovered.
 Current value {{value}} is within the threshold of {{threshold}}.
 {{/is_recovery}}
 {{< /code-block >}}
@@ -237,13 +237,13 @@ Current value {{value}} is within the threshold of {{threshold}}.
 
 {{< code-block lang="text" >}}
 {{#is_alert}}
-Anomaly detected on {{warehouse.name}}.{{schema.name}}.{{table.name}}:
+Anomaly detected on {{database.name}}.{{schema.name}}.{{table.name}}:
 observed value {{observed}} is outside the expected range of {{lower_bound}} to {{upper_bound}}
 (predicted: {{predicted}}).
 {{/is_alert}}
 
 {{#is_recovery}}
-{{warehouse.name}}.{{schema.name}}.{{table.name}} has recovered.
+{{database.name}}.{{schema.name}}.{{table.name}} has recovered.
 Observed value {{observed}} is within the expected range.
 {{/is_recovery}}
 {{< /code-block >}}
@@ -273,12 +273,12 @@ This monitor alerts when a critical table has not been updated within the expect
 1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-Table {{warehouse.name}}.{{schema.name}}.{{table.name}} has not been updated
+Table {{database.name}}.{{schema.name}}.{{table.name}} has not been updated
 in over {{threshold}}. Investigate potential pipeline delays.
 {{/is_alert}}
 
 {{#is_recovery}}
-Table {{warehouse.name}}.{{schema.name}}.{{table.name}} has been updated.
+Table {{database.name}}.{{schema.name}}.{{table.name}} has been updated.
 Freshness has recovered.
 {{/is_recovery}}
 {{< /code-block >}}
@@ -311,12 +311,12 @@ This monitor detects a significant decrease in row count that could indicate a p
 1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-Row count anomaly detected for {{warehouse.name}}.{{schema.name}}.{{table.name}}.
+Row count anomaly detected for {{database.name}}.{{schema.name}}.{{table.name}}.
 Observed: {{observed}} rows (expected: {{predicted}}, range: {{lower_bound}} to {{upper_bound}}).
 {{/is_alert}}
 
 {{#is_recovery}}
-Row count for {{warehouse.name}}.{{schema.name}}.{{table.name}} has recovered
+Row count for {{database.name}}.{{schema.name}}.{{table.name}} has recovered
 to expected levels.
 {{/is_recovery}}
 {{< /code-block >}}
@@ -349,12 +349,12 @@ This monitor detects when a column's null percentage exceeds normal levels, whic
 1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
-Null percentage for {{warehouse.name}}.{{schema.name}}.{{table.name}}.EMAIL
+Null percentage for {{database.name}}.{{schema.name}}.{{table.name}}.EMAIL
 has exceeded expected levels with a value of {{value}}.
 {{/is_alert}}
 
 {{#is_recovery}}
-Null percentage for {{warehouse.name}}.{{schema.name}}.{{table.name}}.EMAIL
+Null percentage for {{database.name}}.{{schema.name}}.{{table.name}}.EMAIL
 has returned to expected levels.
 {{/is_recovery}}
 {{< /code-block >}}
