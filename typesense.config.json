@@ -260,7 +260,8 @@
                         "group_by": "distinct_base_url",
                         "group_limit": 1,
                         "stopwords": "stopwords",
-                        "group_max_candidates": 1000
+                        "group_max_candidates": 1000,
+                        "exclude_fields": "embedding"
                     }
                 },
                 {
@@ -271,7 +272,8 @@
                         "group_by": "distinct_base_url",
                         "group_limit": 1,
                         "stopwords": "stopwords",
-                        "group_max_candidates": 1000
+                        "group_max_candidates": 1000,
+                        "exclude_fields": "embedding"
                     }
                 }
             ]
