@@ -181,9 +181,6 @@ Is Visible
 Event
 : **Value**: change<br>
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -267,9 +264,6 @@ Is Visible
 Event
 : **Value**: change
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file
-
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -301,9 +295,6 @@ Is Visible
 
 Event
 : **Value**: change
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 For more information on events, see [Events][1].
 
@@ -415,9 +406,6 @@ Is Disabled
 Event
 : **Value**: submit, change, validate
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
 State Function
 : setValue<br>
 **Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
@@ -457,9 +445,6 @@ Is Visible
 Event
 : **Value**: change
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
 For more information on events, see [Events][1].
 
 ### Inspect data
@@ -492,9 +477,6 @@ Is Visible
 
 Event
 : **Values**: toggleOpen, close, open
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
 : setIsOpen<br>
@@ -552,9 +534,6 @@ Is Visible
 
 Event
 : **Value**: change
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
 : setValue<br>
@@ -619,9 +598,6 @@ Is Visible
 Event
 : **Value**: change
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
 State Functions
 : setValue<br>
 **Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
@@ -661,9 +637,6 @@ Event
 
 Function Name
 : **Value**: <code>props.customFunctionName</code>
-
-Reaction
-: **Values**: close modal, custom, download file, open modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action
 
 For more information on events, see [Events][1].
 
@@ -714,9 +687,6 @@ Is Visible
 
 Event
 : **Values**: change, submit
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
 : setValue<br>
@@ -786,9 +756,6 @@ Is Visible
 Event
 : **Value**: change
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
 State Functions
 : setValue<br>
 **Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
@@ -847,9 +814,6 @@ Is Visible
 
 Event
 : **Value**: change
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
 : setTabIndex<br>
@@ -1007,9 +971,6 @@ Is Visible
 Event
 : **Values**: pageChange, tableRowClick
 
-Reaction
-: **Values**: download file, open modal, close modal, open side panel, close side panel, set component state, set state variable value, toast notification, trigger action, custom
-
 State Functions
 : setSelectedRow<br>
 **Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
@@ -1103,9 +1064,6 @@ Is Visible
 Event
 : **Values**: change, submit
 
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
-
 State Functions
 : setValue<br>
 **Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
@@ -1147,9 +1105,6 @@ Is Visible
 
 Event
 : **Values**: change, submit
-
-Reaction
-: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
 
 State Functions
 : setValue<br>
