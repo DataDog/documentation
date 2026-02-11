@@ -2,84 +2,111 @@
 aliases:
 - /fr/tracing/span_to_metrics/
 - /fr/tracing/generate_metrics/
-description: Générez des métriques custom à partir des spans ingérées.
+description: Générer des métriques personnalisées à partir des spans ingérés et des
+  traces complètes.
 further_reading:
-- link: tracing/trace_retention_and_ingestion
+- link: tracing/trace_pipeline
   tag: Documentation
   text: Personnalisez l'ingestion de traces et conservez les traces importantes.
 - link: tracing/trace_search_and_analytics/query_syntax
   tag: Documentation
   text: Utilisez des requêtes et des monitors Analytics basés sur les traces conservées.
-title: Générer des métriques à partir de spans
+- link: tracing/trace_explorer/trace_queries
+  tag: Documentation
+  text: Utiliser des requêtes avancées sur les traces pour créer des métriques à partir
+    de traces spécifiques
+- link: tracing/metrics/metrics_namespace
+  tag: Documentation
+  text: Surveiller 100 % du trafic de votre application avec des métriques de trace
+- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/spans_metric
+  tag: External Site
+  text: Créer et gérer des métriques basées sur les spans avec Terraform
+title: Générer des métriques personnalisées à partir des spans et des traces
 ---
 
-{{< img src="tracing/apm_lifecycle/span_based_metrics.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Métriques basées sur des spans" >}}
+...
 
-Générez des métriques à partir de toutes les spans ingérées, qu'elles soient ou non indexées par un [filtre de rétention][1].
+Générer des métriques personnalisées à partir des spans ingérés pour suivre les tendances, alimenter des tableaux de bord et déclencher des moniteurs, même pour des spans et des traces qui ne sont pas conservés pour une analyse complète des traces.
 
-Utilisez des métriques custom pour des comparaisons et des requêtes fixes spécifiques. Parallèlement, vous pouvez créer des filtres de rétention afin de concevoir des requêtes arbitraires et d'examiner les traces conservées ainsi que leur flamegraph.
+Les métriques personnalisées sont créées à partir des spans ingérés par Datadog APM, peu importe si un [filtre de rétention][1] indexe ces spans. Extraire des valeurs numériques des spans (comme des comptes, des durées ou des tags personnalisés) ou des traces (durée de la trace de bout en bout) et les stocker en tant que [métriques personnalisées][3] à long terme avec une rétention de 15 mois.
 
-**Remarque concernant la facturation :** les métriques créées à partir des spans ingérées sont facturées comme des [métriques custom][2].
-
-Les métriques custom vous permettent notamment de visualiser des anomalies, de créer des dashboards et monitors et d'observer des tendances en fonction de différents paramètres importants pour votre contexte métier. Toutes les métriques générées sont disponibles pendant 15 mois sous la forme de [métriques custom][3] Datadog.
-
-| Raison                        | Métriques custom générées à partir de spans                   | Filtres de rétention                           |
-| -------------------------------------- | -------------------------------------- | --------------------------------- |
-| Période de rétention                     | 15 mois                    | 15 jours             |
-| Détection d'anomalies                           | Créez un [monitor d'anomalie][4] basé sur les métriques générées.                            | Utilisez Analytics pour comparer les comportements au cours des 15 derniers jours, et consultez des traces complètes pour identifier l'origine des anomalies.                         |
-| Examen des traces correspondantes avec un contexte global                          | S. O. : les métriques custom n'entraînent pas la conservation des traces associées.                            | Conservez exactement les traces pertinentes pour votre contexte métier grâce aux [filtres de rétention][1].                            |
-| Granularité du comportement                           | Créez des métriques custom pour les endpoints importants ou pour d'autres groupes à faible cardinalité.                        | Utilisez le [Trace Explorer][5] pour des endpoints spécifiques ou l'option « Group By » dans [Analytics][6].                    |
-| Prévisions ou calculs mathématiques complexes                          | Créez un [monitor Forecast][7] basé sur les métriques générées.                          |   S. O.                            |
-
-Pour générer des métriques à partir de spans, depuis la page [APM Setup and Configuration][8], sélectionnez l'onglet [Generate Metrics][9] et cliquez sur le bouton **New Metric**.
-
-<br>
-
-{{< img src="tracing/span_to_metrics/GenerateMetrics.png" style="width:100%;" alt="Génerer des métriques à partir de spans ingérées" >}}
+**Remarques :**
+- Datadog génère automatiquement des [Métriques de Trace][13] qui capturent les comptes de requêtes, les taux d'erreur et les distributions de latence pour 100 % du trafic de votre application.
+- Les spans disponibles pour la génération de métriques personnalisées dépendent de vos [paramètres de contrôle d'ingestion APM][12]. Les spans abandonnés en raison de l'échantillonnage ou du filtrage ne peuvent pas générer de métriques.
 
 
-## Création d'une métrique basée sur des spans
+Utiliser des métriques personnalisées à partir des spans pour :
+- Une visibilité fine sur la latence au niveau des spans, les taux d'erreur ou la performance au niveau des tags
+- Alimenter des moniteurs [d'anomalie][4] ou [de prévision][7] avec des métriques à faible latence et haute résolution.
+- Extraire des signaux clés pour le suivi ou l'alerte sans conserver le span complet.
 
-{{< img src="tracing/span_to_metrics/createspantometrics.png" style="width:100%;" alt="Comment créer une métrique" >}}
+#### Quand utiliser des métriques personnalisées à partir des traces
 
-1. **Définissez la requête de métrique** : commencez par ajouter une requête afin de filtrer l'ensemble de données souhaité. La [syntaxe de requête][10] est similaire à celle de la fonctionnalité de recherche et d'analyse de l'APM.
+Datadog vous permet de générer des métriques à partir de [Trace Queries][15].
 
-1. **Définissez le champ à surveiller** : sélectionnez `*` pour obtenir le nombre total de spans correspondant à votre requête, ou saisissez un attribut (par exemple, `@cassandra_row_count`) pour agréger une valeur numérique et créer sa métrique agrégée correspondante (count, minimum, maximum, sum et average). Si le type d'attribut est une mesure, la valeur de la métrique correspond à la valeur de l'attribut de la span.
+{{< callout url="https://help.datadoghq.com/hc/en-us/requests/new" header="Demandez l'accès à l'aperçu !" >}} Les métriques personnalisées à partir des traces sont en aperçu. Pour demander l'accès, soumettez un ticket à l'équipe de support APM et fournissez une brève description de votre cas d'utilisation. {{< /callout >}}
 
-1. **Indiquez la dimension de regroupement** : par défaut, les métriques générées à partir de spans ne présentent aucun tag, sauf si des tags y sont explicitement ajoutés. Tout attribut ou tag existant dans vos spans peut être utilisé pour créer des tags de métrique.
+Utilisez des métriques personnalisées à partir des traces pour :
+- Métriques dérivées du contexte complet de la trace, telles que la durée totale de la trace ou les opérations par trace.
+- Alerte sur des conditions nécessitant une connaissance complète de la trace (par exemple, détection de requêtes N+1 ou motifs de fan-out).
+- Extraction de signaux clés pour le suivi ou l'alerte sans conserver la trace complète.
 
-1. **Consultez l'aperçu en temps réel de la requête de la fonctionnalité d'analyse et de recherche** : vous pouvez visualiser l'impact de votre requête en temps réel sur la visualisation des données, ainsi que les spans correspondantes dans par votre requête, dans un aperçu en temps réel.
+## Créez une métrique à partir de spans ou de traces
 
-1. **Donnez un nom à votre métrique** : les noms de métriques doivent suivre la [convention de nommage des métriques][11]. Les noms de métriques commençant par `trace.*` ne sont pas autorisés et ne seront pas enregistrés.
+...
 
-**Remarque importante** : les métriques basées sur des spans sont considérées comme des métriques custom pour la facturation. Évitez donc d'effectuer des regroupements à partir d'attributs sans restriction ou présentant une cardinalité extrêmement élevée, tels que des timestamps, des ID utilisateur, des ID de requête ou des ID de session, pour éviter une hausse conséquente de vos coûts.
+1. Naviguez vers [**APM** > **Générer des métriques**][14].
+2. Cliquez sur **Nouvelle métrique**.
+3. Nommez votre métrique en suivant la [convention de nommage des métriques][11]. Les noms de métriques commençant par `trace.*` ne sont pas autorisés.
+4. Sélectionnez le type de métrique : **Spans** ou **Traces**. Les deux utilisent la même [syntaxe de requête][10] que la recherche et l'analyse APM.
+5. Définissez la requête de métrique pour filtrer et inclure uniquement les spans ou traces que vous souhaitez mesurer.
+6. Choisissez la valeur à agréger :
+     - Sélectionnez `*` pour compter tous les spans ou traces correspondants.
+     - Entrez un attribut numérique (par exemple, `@cassandra_row_count`) à agréger et à suivre le compte, min, max, somme ou percentiles.
+7. Définissez les dimensions de regroupement. Par défaut, les métriques n'ont pas de balises à moins que vous ne les ajoutiez. Utilisez n'importe quel attribut ou balise de span pour créer des balises de métriques.
+8. Aperçu du résultat pour voir l'impact en temps réel de votre requête à travers la visualisation des données et les spans ou traces correspondants dans l'aperçu en direct.
+9. Cliquez sur **Create Metric**.
 
-## Mise à jour des métriques basées sur des spans existantes
+<div class="alert alert-danger"> Les métriques basées sur des spans sont considérées comme des <a href="/metrics/custom_metrics/">métriques personnalisées</a> et facturées en conséquence. Évitez de regrouper par des attributs à cardinalité illimitée ou extrêmement élevée comme les horodatages, les identifiants d'utilisateur, les identifiants de requête ou les identifiants de session pour éviter d'impacter votre facturation.</div>
 
-{{< img src="tracing/span_to_metrics/editspantometrics.png" style="width:100%;" alt="Modifier une métrique existante" >}}
+
+## Mettre à jour les métriques existantes
+
+...
 
 Lorsqu'une métrique est créée, seuls deux champs peuvent être mis à jour :
 
-| Champ                                 | Raison                                                                                                             |
+| Champ                                  | Caractéristique                                                                                                                  |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| Requête de filtre de flux                  | Modifier l'ensemble de spans correspondantes à agréger pour générer les métriques.            |
-| Groupes d'agrégation             | Modifier les tags pour gérer la cardinalité des métriques générées.                                                     |
+| Stream filter query                    | Modifier le groupe de spans à agréger pour générer les métriques.                                                         |
+| Aggregation groups                     | Modifier les tags pour gérer la cardinalité des métriques générées.                                                         |
 
-**Remarque** : pour modifier le type ou le nom d'une métrique, créez une nouvelle métrique et supprimez l'ancienne.
+note Pour changer le type ou le nom de la métrique, créez une nouvelle métrique et supprimez l'ancienne.
+
+
+## Disponibilité des données
+
+Les métriques générées à partir des traces sont émises après la fin d'une trace. Pour les traces de longue durée, le délai augmente en conséquence (par exemple, la métrique d'une trace de 45 minutes ne peut pas être émise avant la fin de la trace).
+
+Lors de l'utilisation de métriques personnalisées à partir de traces dans des moniteurs, tenez compte de cette latence pour éviter les faux positifs.
 
 ## Pour aller plus loin
 
-{{< partial name="whats-next/whats-next.html" >}}
+...
 
 
-[1]: /fr/tracing/trace_retention_and_ingestion
+[1]: /fr/tracing/trace_pipeline/trace_retention
 [2]: /fr/account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/fr/metrics/#overview
-[4]: /fr/monitors/create/types/anomaly/#overview
+[4]: /fr/monitors/types/anomaly/#overview
 [5]: /fr/tracing/trace_explorer/
 [6]: /fr/tracing/trace_explorer/query_syntax/#analytics-query
-[7]: /fr/monitors/create/types/forecasts/
+[7]: /fr/monitors/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /fr/tracing/trace_explorer/query_syntax/
 [11]: /fr/metrics/#naming-metrics
+[12]: /fr/tracing/trace_pipeline/ingestion_controls
+[13]: /fr/tracing/metrics/metrics_namespace/ 
+[14]: https://app.datadoghq.com/apm/traces/generate-metrics
+[15]: /fr/tracing/trace_explorer/trace_queries

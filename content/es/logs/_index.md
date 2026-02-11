@@ -1,7 +1,7 @@
 ---
 algolia:
   tags:
-  - Logs
+  - logs
 aliases:
 - /es/guides/logs/
 - /es/en/logs
@@ -9,33 +9,33 @@ aliases:
 cascade:
   algolia:
     rank: 70
-description: Configurar tu Datadog Agent para recopilar logs de tu host, contenedores
-  y servicios.
+description: '"Configurar tu Datadog Agent para recopilar logs de tu host, contenedores
+  y servicios."'
 disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Log%20Management
-  tag: Notas de la versión
-  text: Comprueba los últimos lanzamientos de Datadog Log Management (inicio de sesión
-    en la aplicación obligatorio)
+  tag: Release Notes
+  text: '"Comprueba los últimos lanzamientos de Datadog Log Management (inicio de
+    sesión en la aplicación obligatorio)"'
 - link: /logs/log_collection/
-  tag: Documentación
-  text: Empieza a recopilar tus logs
+  tag: Documentation
+  text: Empezar con la recopilación de tus logs
 - link: https://learn.datadoghq.com/courses/intro-to-log-management
-  tag: Centro de aprendizaje
-  text: Introducción a la Log Management
+  tag: Learning Center
+  text: Introducción a la gestión de logs
 - link: https://dtdg.co/fe
-  tag: Establecer las bases
-  text: Participa en una sesión interactiva para optimizar tu Log Management
+  tag: Foundation Enablement
+  text: Participa en una sesión interactiva para optimizar tu gestión de logs
 - link: https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/
   tag: Blog
-  text: Acelera las investigaciones de incidencias con la detección de anomalía de
-    log
+  text: '"Acelera las investigaciones de incidencias con la detección de anomalía
+    de log"'
 - link: https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/
   tag: Blog
-  text: Monitoriza tus dispositivos IoT a escala con Datadog Log Management
+  text: '"Monitoriza tus dispositivos IoT a escala con Datadog Log Management"'
 - link: https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/
   tag: Blog
-  text: Monitoriza tus logs de cortafuegos con Datadog
+  text: '"Monitoriza tus logs de cortafuegos con Datadog"'
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: Blog
   text: Utiliza consultas con notación CIDR para filtrar tus logs de tráfico de red
@@ -49,25 +49,24 @@ further_reading:
   tag: Blog
   text: Monitoriza logs de DNS para red y análisis de seguridad
 - link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
-  tag: Centro de arquitectura
+  tag: Architecture Center
   text: Guía de estrategias de indexación de la gestión de logs con Datadog
 - link: https://www.datadoghq.com/blog/archive-search/
   tag: Blog
-  text: Busca en tus logs históricos de forma más eficiente con Datadog Archive Search
-title: Gestión de logs
+  text: '"Busca en tus logs históricos de forma más eficiente con Datadog Archive
+    Search"'
+title: Log Management
 ---
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
-Participa en una sesión de capacitación introductoria o intermedia para aprender cómo la gestión de logs de Datadog unifica logs, métricas, y trazas (traces) en una única vista, ofreciéndote un contexto enriquecido para el análisis de los datos de logs.
-{{< /learning-center-callout >}}
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}} Participa en una sesión de capacitación introductoria o intermedia para aprender cómo la gestión de logs de Datadog unifica logs, métricas, y trazas (traces) en una única vista, ofreciéndote un contexto enriquecido para el análisis de los datos de logs. {{< /learning-center-callout >}}
 
 ## Información general
 
-Registrar las partes importantes de las operaciones de tu sistema es crucial para mantener el estado de la infraestructura. La infraestructura moderna tiene la capacidad de generar miles de eventos de log por minuto. En esta situación, debes elegir qué logs enviar a una solución de gestión de logs, y qué logs archivar. Sin embargo, filtrar los logs antes de enviarlos puede provocar lagunas en la cobertura o la eliminación accidental de datos valiosos.
+Registrar las partes importantes de las operaciones de su sistema es crucial para mantener el estado de la infraestructura. La infraestructura moderna tiene la capacidad de generar miles de eventos de registro por minuto. En esta situación, debe elegir qué registros enviar a una solución de administración de registros y qué registros archivar. Sin embargo, filtrar sus registros antes de enviarlos puede provocar lagunas en la cobertura o la eliminación accidental de datos valiosos.
 
-Datadog Log Management, también denominado como logs de Datadog o logging, elimina estas limitaciones desacoplando la ingesta de logs desde la indexación. Esto te permite recopilar, procesar, archivar, explorar y monitorizar de forma rentable todos tus logs sin limitaciones, también conocido como Logging without Limits\*.
+Datadog Log Management, también conocido como Datadog logs o registro, elimina estas limitaciones al desacoplar la ingestión de registros de la indexación. Esto le permite recopilar, procesar, archivar, explorar y monitorear todos sus registros de forma rentable sin limitaciones, también conocido como Registro sin límites*.
 
-Logging without Limits\* permite agilizar la experiencia de solucionar problemas en el [Log Explorer][1], lo que te permite a ti y a tus equipos evaluar y solucionar rápidamente los problemas de infraestructura. Proporciona un archivado intuitivo para ayudar a tus equipos de seguridad y TI durante las auditorías y evaluaciones. Logging without Limits* también impulsa [Datadog Cloud SIEM][2], que detecta amenazas a la seguridad en tu entorno, sin necesidad de indexar logs.
+Registrarse sin límites* permite una experiencia de solución de problemas optimizada en el [Explorador de registros][1], que le permite a usted y a sus equipos evaluar y solucionar rápidamente sus problemas de infraestructura. Proporciona un archivo intuitivo para apoyar a sus equipos de seguridad y TI durante las auditorías y evaluaciones. Registro sin límites* también alimenta [Datadog Cloud SIEM][2], que detecta amenazas de seguridad en su entorno, sin necesidad de indexar los registros.
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
@@ -79,13 +78,13 @@ Comienza [por ingerir logs][4] desde tus hosts, contenedores, proveedores de nub
 
 ## Configurar
 
-{{< img src="logs/lwl_marketecture_20231030.png" alt="Configura tus logs todos en un solo lugar" >}}
+| ---------------------------------- | ----------------------------------- |
 
 Una vez ingestados tus logs, procesa y enriquece todos tus logs con pipelines y procesadores, proporciona control de tu presupuesto de Log Management con índices, genera métricas a partir de logs ingestados, o gestiona tus logs dentro de archivos de almacenamiento optimizados con [opciones de configuración de logs][5].
 
-## Conectar
+## Connect
 
-{{< img src="/logs/connect.png" alt="Correlaciona logs con métricas o traces (trazas)" style="width:80%;">}}
+| ---------------------------------- | ----------------------------------- |
 
 Aprovecha los pilares de la observabilidad conectando tus logs a métricas y trazas (traces):
 
@@ -96,26 +95,24 @@ Aprovecha los pilares de la observabilidad conectando tus logs a métricas y tra
 
 Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
 
-**Consejo**: Para abrir el Explorador de logs desde la búsqueda global de Datadog, pulsa <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> y busca `logs`.
+**Consejo**: Para abrir el Explorador de registros de la búsqueda global de Datadog, pulse <kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>K</kbd> y busque `logs`.
 
-{{< img src="/logs/explore.png" alt="Explora tus logs ingeridos" style="width:80%;">}}
+| ---------------------------------- | ----------------------------------- |
 
-- [Buscar][8]: busca a través de todos tus logs.
-- [Cola en vivo][9]: ve tus logs ingeridos en tiempo real a través de todos tus entornos.
-- [Análisis][10]: realiza análisis de log de tus logs indexados.
-- [Patrones][11]: ubica los patrones de logs agrupando tus logs indexados.
-- [Vistas guardadas][12]: utiliza las vistas guardadas para configurar automáticamente tu Log Explorer.
+- Buscar Busca a través de todos tus logs.
+- Live Tail Vea sus logs ingeridos en tiempo real a través de todos sus entornos.
+- Analytics Realiza análisis de log de tus logs indexados.
+- Patrones Localiza los patrones de logs agrupando tus logs indexados.
+- Vistas guardadas Utiliza Vistas guardadas para configurar automáticamente tu Log Explorer.
 
 
-{{< learning-center-callout header="Prueba la introducción a Log Management en el Centro de aprendizaje" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
-  Aprende sin coste alguno sobre la capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inscríbete hoy mismo para obtener más información sobre la recopilación, consulta, análisis, métricas, monitorización, procesamiento, almacenamiento y control de acceso de logs.
-{{< /learning-center-callout >}}
+{{< learning-center-callout header="Prueba Introducción a la Administración de Registros en el Centro de Aprendizaje" btn_title="Inscríbete Ahora" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}} Aprende sin costo sobre la capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inscríbase hoy mismo para obtener más información sobre la recopilación de registros, las consultas, los análisis, las métricas, la supervisión, el procesamiento, el almacenamiento y el control de acceso. {{< /learning-center-callout >}}
 
 ## Referencias adicionales
 
-{{< partial name="whats-next/whats-next.html" >}}
+| ---------------------------------- | ----------------------------------- |
 <br>
-\*Logging without Limits es una marca registrada de Datadog, Inc.
+*Logging without Limits es una marca registrada de Datadog, Inc.
 
 [1]: /es/logs/explorer/
 [2]: /es/security/cloud_siem/

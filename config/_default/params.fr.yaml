@@ -1,15 +1,10 @@
-announcement_banner:
-  desktop_message: Read the 2025 State of Containers and Serverless Report!
-  external_link: https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025
-  mobile_message: Read the State of Containers and Serverless Report!
-disclaimer: Cette page n'est pas encore disponible en français, sa traduction est
-  en cours. <br> Si vous avez des questions ou des retours sur notre projet  de traduction
-  actuel, <a href="https://docs.datadoghq.com/fr/help/">n'hésitez pas à nous contacter</a>.
-meta_description: Datadog, le principal prestataire de services de surveillance à
-  l'échelle du cloud.
+site_name: "Surveillance d'applications et d'infrastructures avec Datadog"
 meta_title: Débuter avec Datadog
-site_name: Surveillance d'applications et d'infrastructures avec Datadog
-site_support_banner: Ce produit n'est pas pris en charge par le <a href="/getting_started/site">site
-  Datadog </a> que vous avez sélectionné.
-translate_status_banner: Cette traduction n'est pas à jour. Pour consulter la dernière
-  version en anglais, cliquez ici
+meta_description: "Datadog, le principal prestataire de services de surveillance à l'échelle du cloud."
+disclaimer: "Cette page n'est pas encore disponible en anglais. Nous travaillons sur sa traduction. <br> Si vous avez des questions ou des commentaires sur notre projet de traduction actuel, <a href=\"https://docs.datadoghq.com/help/\">n'hésitez pas à nous contacter !</a>"
+announcement_banner:
+    desktop_message: 'Lisez le rapport 2025 sur l''état des conteneurs et des serveurs sans serveur !'
+    mobile_message: 'Lisez le rapport sur l''état des conteneurs et des serveurs sans serveur !'
+    external_link: 'https://www.datadoghq.com/state-of-containers-and-serverless/?utm_source=inbound&utm_medium=corpsite-display&utm_campaign=int-infra-ww-announcement-product-announcement-containers-serverless-2025'
+translate_status_banner: "Cette traduction n'est pas à jour. Pour la dernière version en anglais, cliquez ici"
+site_support_banner: "Ce produit n'est pas pris en charge pour votre <a href=\"/getting_started/site\">site Datadog</a> sélectionné."

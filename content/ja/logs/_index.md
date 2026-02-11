@@ -9,110 +9,110 @@ aliases:
 cascade:
   algolia:
     rank: 70
-description: Datadog Agent を設定して、ホスト、コンテナー、およびサービスからログを収集します。
+description: ホスト、コンテナ、サービスからログを収集するようにDatadogエージェントを構成します。
 disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Log%20Management
-  tag: リリースノート
-  text: Datadog Log Management の最新リリースをチェック (アプリログインが必要です)
+  tag: Release Notes
+  text: Datadog Log Managementの最新リリースをチェック（要アプリログイン）
 - link: /logs/log_collection/
   tag: Documentation
-  text: ログの収集開始
+  text: ログの収集を開始します
 - link: https://learn.datadoghq.com/courses/intro-to-log-management
-  tag: ラーニング センター
-  text: ログ管理の紹介
+  tag: Learning Center
+  text: ログ管理入門
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: ログ管理を最適化するためのインタラクティブセッションにご参加ください
+  text: 対話型セッションに参加してログ管理を最適化
 - link: https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/
-  tag: ブログ
+  tag: Blog
   text: ログ異常検出によるインシデント調査の迅速化
 - link: https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/
-  tag: ブログ
-  text: Datadog のログ管理で IoT デバイスを大規模に監視する
+  tag: Blog
+  text: Datadog Log ManagementでIoTデバイスを大規模に監視
 - link: https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/
-  tag: ブログ
-  text: Datadog でファイアウォールのログを監視する
+  tag: Blog
+  text: Datadogでファイアウォールのログを監視する
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
-  tag: ブログ
-  text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
+  tag: Blog
+  text: CIDR表記クエリを使用してネットワークトラフィックログをフィルタリング
 - link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
-  tag: ブログ
-  text: Datadog Cloud SIEM で 1Password を監視
+  tag: Blog
+  text: Datadog Cloud SIEMで1Passwordを監視
 - link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
-  tag: ブログ
-  text: サブクエリを使用したログの動的なフィルタリングと相関付け
+  tag: Blog
+  text: サブクエリを使用してログを動的にフィルタリングおよび相関
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
-  tag: ブログ
-  text: ネットワークとセキュリティ分析のための DNS ログの監視
+  tag: Blog
+  text: DNSログを監視してネットワークとセキュリティを分析
 - link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
-  tag: アーキテクチャセンター
-  text: Datadog を使用したログ管理のインデックス戦略ガイド
+  tag: Architecture Center
+  text: Datadogによるログ管理インデックス戦略ガイド
 - link: https://www.datadoghq.com/blog/archive-search/
-  tag: ブログ
-  text: Datadog Archive Search を使用して、履歴ログをより効率的に検索
+  tag: Blog
+  text: Datadog Archive Searchで履歴ログの検索を効率化
 title: ログ管理
 ---
 
-{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
-  入門編または中級編のイネーブルメントセッションに参加して、Datadog Log Management がどのようにしてログ、メトリクス、トレースを単一のビューに統合し、ログデータの分析に役立つ豊富なコンテキストを提供するかを学びましょう。
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  Datadog Log Managementがログ、メトリック、トレースを1つのビューに統合し、ログ・データを分析するための豊富なコンテキストを提供する方法について、入門または中級のイネーブルメント・セッションで学んでください。
 {{< /learning-center-callout >}}
 
 ## 概要
 
-インフラストラクチャーの健全性を維持するためには、システム運用の重要な部分をログに記録することが重要です。現代のインフラストラクチャーは、1分 間に数千のログイベントを生成する能力を備えています。このような場合、ログ管理ソリューションに送信するログとアーカイブするログを決定しなければなりません。しかし、送信前にログを絞り込むと、カバレッジにギャップが生じ、有用なデータが除外されてしまう可能性があります。
+インフラの健全性を維持するためには、システム運用の重要な部分をログに記録することが非常に重要です。最新のインフラストラクチャには、1分間に数千のログイベントを生成する機能があります。このような状況では、ログ管理ソリューションに送信するログとアーカイブするログを選択する必要があります。しかし、送信前にログをフィルタリングしてしまうと、受信範囲にずれが生じたり、誤って貴重なデータが持ち去られてしまう可能性があります。
 
-Datadog ログ管理 (Datadog Logs または Logging とも呼ばれる) は、ログのインジェストをインデックス作成から切り離すことで、これらの制約を取り除きます。これにより、コスト効率よく、制限なしにすべてのログを収集、処理、アーカイブ、探索、監視することが可能になります (Logging without Limits\* とも呼ばれます)。
+Datadog Log Managementは、Datadogログまたはロギングとも呼ばれ、ログの取り込みをインデックスから切り離すことで、これらの制限を排除します。これにより、制限なくすべてのログをコスト効率よく収集、処理、アーカイブ、探索、監視することができます。これは「制限のないロギング」とも呼ばれます*。
 
-Logging without Limits\* は、[ログエクスプローラー][1]でトラブルシューティングを合理化し、インフラストラクチャーの問題を迅速に評価および修正する力を提供します。また、直感的なアーカイブ機能により、監査や評価時にセキュリティチームや IT チームをサポートします。[Datadog Cloud SIEM][2] は、ログのインデックスを作成することなく、環境内のセキュリティ脅威を検出します。
+制限のないロギング*により、[ログエクスプローラ][1]での合理的なトラブルシューティングが可能になります。これにより、お客様とチームはインフラストラクチャの問題を迅速に評価して修正できます。監査や評価の際にセキュリティチームやITチームをサポートする直感的なアーカイブ機能を提供します。また、制限のないロギング*は、お客様の環境のセキュリティ脅威を検出する[Datadog Cloud SIEM][2]を強化し、ログにインデックスを作成する必要はありません。
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
 </br>
 
-## 収集
+## コレクト
 
-ホスト、コンテナ、クラウドプロバイダーなどのソースから[ログを取り込み][4]、Datadog ログ管理を始めましょう。
+ホスト、コンテナ、クラウドプロバイダーなどから[ログを取り込み][4]、Datadog Log Managementの利用を開始します。
 
-## 構成
+## 設定
 
-{{< img src="logs/lwl_marketecture_20231030.png" alt="ログの構成を一元管理" >}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="Configure your logs all in one place" >}}
 
-ログを取り込んだら、パイプラインやプロセッサですべてのログを処理してリッチ化し、インデックスでログ管理予算をコントロールし、取り込んだログからメトリクスを生成し、[ログ構成オプション][5]でストレージに最適化したアーカイブでログを管理することができます。
+ログが取得されたら、パイプラインとプロセッサーを使用してすべてのログを処理し、充実させます。インデックスを使用してログ管理予算をコントロールしたり、取得したログからメトリックを生成したり、[ログ構成オプション][5]を使用してストレージに最適化されたアーカイブ内でログを管理したりすることもできます。
 
-## Connect
+## 接続
 
-{{< img src="/logs/connect.png" alt="ログをメトリクスまたはトレースと相関させる" style="width:80%;">}}
+{{< img src="/logs/connect.png" alt="Correlate logs with metrics or traces" style="width:80%;">}}
 
-ログをメトリクスやトレースに接続することで、観測可能性の柱を活用することができます。
+ログを指標とトレースに結びつけて、オブザーバビリティの柱を活用:
 
-- [ログとトレースを接続する][6]ことで、アプリケーションの可観測性を高めます。
-- [ログとメトリクスの相関付け][7]により、問題のコンテキストを把握し、サービス全体にマッピングすることができます。
+- [ログとトレース][6]を接続し、アプリケーションにオブザーバビリティをもたらします。
+- [ログとメトリック][7]を関連付けて問題のコンテキストを取得し、サービス全体にマッピングします。
 
-## 確認
+## 探索
 
-[ログエクスプローラー][1]でインジェストしたログの確認を開始します。
+[ログエクスプローラ][1]で取り込んだログの探索を開始します。
 
-**ヒント**: Datadog のグローバル検索から Log Explorer を開くには、<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> を押し、`logs` を検索してください。
+**ヒント**:Datadogのグローバル検索からログエクスプローラを開くには、<kbd>Cmd</kbd>/<kbd>Ctrl</kbd>+<kbd>K</kbd>キーを押して`logs`を検索します。
 
-{{< img src="/logs/explore.png" alt="取り込んだログを確認する" style="width:80%;">}}
+{{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:80%;">}}
 
-- [検索][8]: すべてのログを検索します。
-- [Live Tail][9]: 取り込んだログをすべての環境でリアルタイムに確認できます。
-- [分析][10]: インデックス付きログに対してログ分析を実行します。
-- [パターン][11]: インデックス付きログをクラスター化して、ログパターンを特定します。
-- [保存ビュー][12]: 保存ビューを使用してログエクスプローラーを自動構成します。
+- [検索][8]:すべてのログを検索します。
+- [ライブテール][9]:取り込んだログをすべての環境でリアルタイムに確認できます。
+- [分析][10]:インデックスされたログに対してログ分析を実行します。
+- [パターン][11]:インデックスされたログをクラスタ化してログパターンを見つけます。
+- [保存された][12]ビュー：保存されたビューを使用して、ログエクスプローラを自動的に設定します。
 
 
-{{< learning-center-callout header="ラーニングセンターでログ管理入門をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
-  実際のクラウドコンピュートキャパシティと Datadog のトライアルアカウントを使用して、コストをかけずに学ぶことができます。今すぐ登録して、ログの収集、クエリ、分析、メトリクス、監視、処理、ストレージ、アクセス制御を学習しましょう。
+{{< learning-center-callout header="Try Introduction to Log Management in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
+  実際のクラウド・コンピューティング容量とDatadogトライアル・アカウントでコストをかけずに学習できます。今すぐ登録して、ログ収集、クエリ、分析、メトリック、監視、処理、ストレージ、アクセス制御の詳細をご確認ください。
 {{< /learning-center-callout >}}
 
-## 参考情報
+## さらに読む
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*Logging without Limits は Datadog, Inc. の商標です。
+※制限のないロギングはDatadog, Inc.の商標です。
 
 [1]: /ja/logs/explorer/
 [2]: /ja/security/cloud_siem/

@@ -1,8 +1,8 @@
 ---
 categories:
-- recopilación de logs
-- Seguridad
-custom_kind: integración
+- log collection
+- Security
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/alcide.md
 description: Ingesta y proceso de tus logs de Alcide
@@ -19,9 +19,9 @@ version: '1.0'
 
 ## Información general
 
-Alcide brinda servicios de auditoría y monitorización de anomalías en Kubernetes. Esta integración permite a Datadog ingerir y procesar logs de Alcide.
+Alcide proporciona servicios de auditoría y monitorización de anomalías de Kubernetes. Esta integración permite a Datadog ingerir y procesar registros de Alcide.
 
-## Configuración
+## Ajuste
 
 ### Instalación
 
@@ -33,25 +33,25 @@ En Alcide, selecciona la pestaña _Integrations_ (Integraciones) y ve a la secci
 
 1. Selecciona **HTTP API** (API HTTP) como destino.
 
-2. En la casilla URL, introduce `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Sustituye el valor del parámetro `<DATADOG_SITE>` por `datadoghq.com` para el sitio de EE. UU., o por `datadoghq.eu` para el sitio de la UE. Sustituye el valor del parámetro `<DATADOG_API_KEY>` por su [clave de API de Datadog][1].
+2. En el cuadro URL, introduzca `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Sustitúyase el `<DATADOG_SITE>` de valor del marcador de posición por `datadoghq.com` para el sitio de EE.UU. o por `datadoghq.eu` para el sitio de la UE. Reemplace el `<DATADOG_API_KEY>` de valor del marcador de posición por su [clave API Datadog][1].
 
-3. En _Entities Types_ (Tipos de entidades), selecciona los tipos sobre los que deseas reenviar información de amenazas. Datadog recomienda seleccionarlos todos.
+3. En _Tipos de entidades_, seleccione los tipos sobre los que desea reenviar la información de amenazas. Datadog recomienda seleccionar todos estos.
 
-4. En _Detection Categories_ (Categorías de detección), selecciona las categorías que desea reenviar. Datadog recomienda seleccionar tanto _incidents_ (incidencias) como _anomalies_ (anomalías).
+4. En _Categorías de detección_, seleccione las categorías que desea reenviar. Datadog recomienda seleccionar tanto _incidentes_ como _anomalías_.
 
-5. En _Detection Confidence_ (Confianza de detección), selecciona los niveles de confianza deseados. Datadog recomienda seleccionar al menos _high_ (alto) y _medium_ (medio).
+5. En _Confianza de detección_, seleccione los niveles de confianza deseados. Datadog recomienda seleccionar al menos _alta_ y _mediana_.
 
 6. Opcionalmente, puedes crear filtros de inclusión y exclusión de entidades utilizando las casillas _Entities Matching_ y _Entities Not Matching_ (Entidades coincidentes y Entidades no coincidentes).
 
-A continuación, ve a la sección _Selected Audit Entries Integration Configuration_ (Configuración de la integración de entradas de auditoría seleccionadas), situada debajo de la sección anterior. Esta sección se utiliza para configurar integraciones para los logs de auditoría.
+Luego, vaya a la sección _Configuración de integración_ de entradas de auditoría seleccionadas, ubicada debajo de la sección anterior. Esta sección se utiliza para configurar integraciones para registros de auditoría.
 
 1. Selecciona **HTTP API** (API HTTP) como destino.
 
-2. En la casilla URL, introduce `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Sustituye el valor del parámetro `<DATADOG_SITE>` por `datadoghq.com` para el sitio de EE. UU., o por `datadoghq.eu` para el sitio de la UE. Sustituye el valor del parámetro `<DATADOG_API_KEY>` por su [clave de API de Datadog][1].
+2. En el cuadro URL, introduzca `https://http-intake.logs.<DATADOG_SITE>/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=alcide`. Sustitúyase el `<DATADOG_SITE>` de valor del marcador de posición por `datadoghq.com` para el sitio de EE.UU. o por `datadoghq.eu` para el sitio de la UE. Reemplace el `<DATADOG_API_KEY>` de valor del marcador de posición por su [clave API Datadog][1].
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][2].
+¿Necesitas ayuda? Contactar con el equipo de asistencia de Datadog
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /es/help/
