@@ -130,7 +130,7 @@ The **Custom SQL** metric type tracks a custom metric value returned by a SQL qu
     - **Default**: The query returns a scalar value. Use this in most cases.
     - **Freshness**: The query returns the difference (in seconds) between the current time and the last time an event occurred.
     - **Percentage**: The query returns a percentage value between 0 and 100.
-1. Write a SQL query that returns a single value aliased as `dd_value`, for example: `SELECT SUM(AMOUNT) as dd_value FROM PROD.ORDERS`
+1. Write a SQL query that returns a single value aliased as `dd_value`, for example: `SELECT COUNT(*) as dd_value FROM ANALYTICS_DB.PROD.ORDERS WHERE STATUS = 'FAILED'`
 1. Click **Validate** to verify your query syntax.
 1. Select the detection method:
     - **Anomaly**: Alert when the metric deviates from an expected pattern.
