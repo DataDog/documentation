@@ -42,12 +42,12 @@ Choose your preferred setup method:
 {{< tabs >}}
 {{% tab "Single-Step Instrumentation (Recommended)" %}}
 
-Single-Step Instrumentation (SSI) enables RUM Browser monitoring during Datadog Agent installation. When you run the installation command, SSI automatically:
+Single-Step Instrumentation (SSI) enables RUM Browser monitoring during Datadog Agent installation. When you run the installation command, SSI:
 - Injects the Java SDK into your Java applications
-- Creates a RUM application for you
 - Configures the Java SDK with the required RUM environment variables
+- Creates a RUM application for you
 
-This approach requires no code changes and no manual web server configuration.
+Once the Java SDK is injected and configured, it automatically handles the injection of the RUM Browser SDK into HTML responses from your servlet-based applications. This approach requires no code changes and no manual web server configuration.
 
 ### Enable RUM during Agent installation
 
@@ -61,7 +61,7 @@ This approach requires no code changes and no manual web server configuration.
 5. Copy the generated installation command and run it on your host.
 6. Restart your Java servlet-based application.
 
-After your application restarts, SSI automatically injects the RUM Browser SDK into HTML responses. RUM sessions begin flowing into your Datadog account.
+After your application restarts, the Java SDK automatically injects the RUM Browser SDK into HTML responses. RUM sessions begin flowing into your Datadog account.
 
 For more information about SSI, see the [Single Step APM Instrumentation documentation][2].
 
@@ -81,7 +81,7 @@ Use manual configuration if you prefer to set up RUM Browser monitoring independ
 - RUM application [created in Datadog][3]
 - Configuration values ready:
   - `clientToken`
-  - `applicationId` 
+  - `applicationId`
   - `remoteConfigurationId`
 
 ### Enable RUM injection
