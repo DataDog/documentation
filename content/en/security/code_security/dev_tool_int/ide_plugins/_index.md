@@ -11,8 +11,8 @@ disable_toc: false
 [Code Security][1] integrates directly with integrated development environment (IDE) tools to provide real-time feedback on the security and quality of your code. IDE integrations are supported for SAST, SCA, and IAST.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
-    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

@@ -5,7 +5,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
   text: "Introducing the Datadog MCP server"
-- link: "https://docs.datadoghq.com/developers/ide_plugins/vscode/?tab=cursor#installation"
+- link: "https://docs.datadoghq.com/ide_plugins/vscode/?tab=cursor#installation"
   tag: "Documentation"
   text: "Datadog Extension for VS Code & Cursor"
 - link: "/cloudprem/operate/search_logs/"

@@ -5,7 +5,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
   text: "Connect your AI agents to Datadog tools and context using the Datadog MCP Server" 
-- link: "developers/ide_plugins/vscode/?tab=cursor"
+- link: "/ide_plugins/vscode/?tab=cursor"
   tag: "Documentation"
   text: "Datadog Extension for Cursor"
 - link: "bits_ai/"
@@ -31,7 +31,7 @@ The Datadog MCP Server acts as a bridge between your observability data in Datad
 * **Query** metrics, logs, traces, errors, dashboards, monitors, incidents, and services​.
 * **Generate code** based on prompts, errors, and existing code.
 
-<div class="alert alert-tip">Use the <a href="https://docs.datadoghq.com/developers/ide_plugins/vscode/?tab=cursor">Datadog extension for Cursor</a> to enhance the editor's AI-assisted coding capabilities with informed insights from Datadog. The Datadog MCP Server is included in the extension.</div>
+<div class="alert alert-tip">Use the <a href="https://docs.datadoghq.com/ide_plugins/vscode/?tab=cursor">Datadog extension for Cursor</a> to enhance the editor's AI-assisted coding capabilities with informed insights from Datadog. The Datadog MCP Server is included in the extension.</div>
 
 ## Further reading
 
