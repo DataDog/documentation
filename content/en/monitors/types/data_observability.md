@@ -141,32 +141,29 @@ The **Custom SQL** metric type tracks a custom metric value returned by a SQL qu
 
 ## Select entities to monitor
 
-After selecting a metric type, choose which tables or columns to monitor. You can select entities using the search field, or write a query to match entities by name or attribute.
-
-### Query syntax
-
-Queries follow this format:
-
-{{< code-block lang="text" >}}
-search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
-{{< /code-block >}}
-
-Where `ENTITY_TYPE` is `table` or `column`, and `FILTER_CONDITIONS` supports the following:
+After selecting a metric type, choose which tables or columns to monitor. Use the **Edit** tab to search for entities by typing `key:value` filters into the search field. The following attributes are available:
 
 | Filter | Example | Description |
 |---|---|---|
-| Name | `` name:USERS* `` | Match by name. Supports `*` wildcards. |
-| Attribute | `` database:ANALYTICS_DB `` | Match by attribute such as `database`, `schema`, or `account`. |
-| AND | `` database:ANALYTICS_DB AND schema:PROD `` | Match entities meeting all conditions. |
-| OR | `` schema:PROD OR schema:STAGING `` | Match entities meeting any condition. |
-| Negation | `` -database:DEV `` | Exclude entities matching a condition. |
+| Name | `name:USERS*` | Match by name. Supports `*` wildcards. |
+| Schema | `schema:PROD` | Match by schema. |
+| Database | `database:ANALYTICS_DB` | Match by database. |
+| Account | `account:my_account` | Match by account. |
+
+Combine filters with `AND` or `OR`, use parentheses to group conditions, and prefix with `-` to exclude.
 
 **Examples:**
 
+| Goal | Query |
+|---|---|
+| All tables in the PROD schema, excluding temp tables | `schema:PROD AND -name:TEMP*` |
+| All timestamp columns | `name:*_AT OR name:*_TIMESTAMP` |
+| Tables in either PROD or STAGING for a specific database | `database:ANALYTICS_DB AND (schema:PROD OR schema:STAGING)` |
+
+Switch to the **Source** tab to see the backing query generated from your selections. The query follows this format:
+
 {{< code-block lang="text" >}}
-search for table where `schema:PROD AND database:ANALYTICS_DB`
-search for column where `name:EMAIL`
-search for table where `database:ANALYTICS_DB AND name:USERS*`
+search for [ENTITY_TYPE] where `[FILTER_CONDITIONS]`
 {{< /code-block >}}
 
 ### Group by
