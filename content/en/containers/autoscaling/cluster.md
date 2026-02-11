@@ -1,5 +1,6 @@
 ---
 title: Kubernetes Cluster Autoscaling
+description: Automatically scale your clusters with Kubernetes Cluster Autoscaling.
 ---
 
 {{< callout url=#
