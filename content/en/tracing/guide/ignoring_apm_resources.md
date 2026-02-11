@@ -3,7 +3,7 @@ title: Ignoring Unwanted Resources in APM
 description: Learn how to exclude unwanted resources like health checks from traces using sampling rules and filtering to reduce noise and manage costs.
 ---
 
-Services often handle endpoints you may not want to trace (for example, health checks). This guide explains the following approaches for excluding that traffic:
+Services often handle endpoints whose traffic you may not want to trace (for example, health checks). This guide explains the following approaches for excluding that traffic:
 
 - **Sampling**: Use when you want requests to remain visible in trace metrics, but reduce trace ingestion volume.
 - **Filtering in the Datadog Agent**: Use to exclude requests entirely (including from trace metrics) across all services reporting to the Agent.
@@ -35,7 +35,7 @@ DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "samp
 
 If you don't want the span ingested or reflected in trace metrics, use filtering in the Datadog Agent.
 
-The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from being sent: ignoring span tags or ignoring resources. If traces are dropped due to these settings, the trace metrics exclude these requests.
+The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from being sent: filtering by span tags or filtering by resources. If traces are dropped due to these settings, the trace metrics exclude these requests.
 
 Configuring the Trace Agent to ignore certain traces or resources applies to all services that send traces to this Datadog Agent. If you have application-specific requirements, use [Tracer configuration](#tracer-configuration) instead.
 
@@ -43,7 +43,7 @@ Configuring the Trace Agent to ignore certain traces or resources applies to all
 If none of the options in this guide meet your requirements, consider adding a <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">custom span tag</a> in your application and using it to drop traces at the Agent.
 </div>
 
-### Ignoring based on span tags
+### Ignoring traces based on span tags
 
 Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops traces with root spans that match specified span tags. This option applies to all services that send traces to this Datadog Agent. Traces that are dropped because of filter tags are not included in trace metrics.
 
@@ -51,9 +51,9 @@ Starting with Datadog Agent 6.27.0/7.27.0, the **filter tags** option drops trac
 Individual spans within a trace cannot be selectively dropped; if the root span matches the filter criteria, the complete trace is discarded.
 </div>
 
-**Match behavior:**
+**Matching behavior:**
 
-The filter tags option requires an exact string match. For regex-based filtering, see [Ignoring based on resources](#ignoring-based-on-resources).
+The filter tags option requires an exact string match. For regex-based filtering, see [Ignoring based on resources](#ignoring-traces-based-on-resources).
 
 When you specify multiple tags, the filter uses **OR logic**: traces are dropped if the root span matches **any** of the tags. To match multiple conditions simultaneously, add a custom tag that represents those combined criteria.
 
@@ -134,7 +134,7 @@ apm_config:
 
 #### Available span tags
 
-On the backend, Datadog creates and adds the following span tags to spans after ingestion. 
+On the backend, Datadog creates the following span tags on spans after ingestion. 
 
 **Note**: These tags cannot be used to drop traces at the Datadog Agent level. The agent only filters based on tags available before ingestion.
 
@@ -223,7 +223,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
 | `error.message`                  | `error.msg` - All languages                      |
 
-### Ignoring based on resources
+### Ignoring traces based on resources
 
 The **ignore resources** option allows resources to be excluded if the global root span of the trace matches certain criteria. See [Exclude resources from being collected][5]. This option applies to all services that send traces to this particular Datadog Agent. Traces that are dropped because of ignore resources are not included in trace metrics.
 
