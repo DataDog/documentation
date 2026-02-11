@@ -41,25 +41,14 @@ Path: `synthetics` (various shortcuts)
 
 Use these variables to access common test execution data such as failure messages, step counts, duration, and tags.
 
-`{{synthetics.failed_step.failure.message}}`
-: The error message (for example, `Element's content should match the given regex`).
-
-`{{synthetics.failed_step.url}}`
-: The URL of the failed step (for example, `https://www.datadoghq.com/blog/`).
-
-`{{synthetics.attributes.result.response.statusCode}}`
-: The HTTP status code (for example, `403`). </br>
-<strong>Tip:</strong> Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code">conditional alerting</a> page for an example of how to use this variable in a notification.
-
-`{{synthetics.result.step_count}}`
-: Number of steps (for example, `4`).
-
-`{{synthetics.result.duration}}`
-: Duration of the test run (in milliseconds) (for example, `9096`).
-
-`{{tags}}`
-: Lists all the tags added to the synthetics test.
-: To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`.
+| Variable | Description |
+|----------|-------------|
+| `{{synthetics.failed_step.failure.message}}` | The error message (for example, `Element's content should match the given regex`). |
+| `{{synthetics.failed_step.url}}` | The URL of the failed step (for example, `https://www.datadoghq.com/blog/`). |
+| `{{synthetics.attributes.result.response.statusCode}}` | The HTTP status code (for example, `403`). </br><strong>Tip:</strong> Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-based-on-status-code">conditional alerting</a> page for an example of how to use this variable in a notification. |
+| `{{synthetics.result.step_count}}` | Number of steps (for example, `4`). |
+| `{{synthetics.result.duration}}` | Duration of the test run (in milliseconds) (for example, `9096`). |
+| `{{tags}}` | Lists all the tags added to the synthetics test. To access individual tag values, use `{{tags.<tag-key>}}`. For example, if your test is tagged with `env:prod`, use `{{tags.env}}` to return the tag value `prod`. |
 
 ### Result attributes
 
@@ -653,8 +642,6 @@ Use the step's unique identifier:
 
 `.steps.abc-def-ghi`
 
-<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.step</code> variable in a Slack notification based on a failed step.</div>
-
 #### Accessing step properties
 
 Combine any reference method with a property:
@@ -662,6 +649,8 @@ Combine any reference method with a property:
 - `{{synthetics.attributes.result.steps.-1.status}}` - Status of the last step
 - `{{synthetics.attributes.result.steps[Click button].status}}` - Status of the step named "Click button"
 - `{{synthetics.attributes.result.steps.abc-def-ghi.status}}` - Status of the step with step ID "abc-def-ghi"
+
+<div class="alert alert-tip">Review the <a href="/synthetics/notifications/conditional_alerting#send-alerts-to-a-specific-slack-channel-based-on-failed-step">conditional alerting</a> page for an example of how to use the <code>synthetics.attributes.result.step</code> variable in a Slack notification based on a failed step.</div>
 
 ## Further Reading
 
