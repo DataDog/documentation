@@ -493,6 +493,25 @@ The method returns an Evaluation object containing:
 - `action`: `ALLOW`, `DENY`, or `ABORT`.
 - `reason`: natural language summary of the decision.
 
+#### Example: Evaluate a user prompt with content parts {#java-example-evaluate-user-prompt-content-parts}
+
+For multi-modal inputs, you can pass a list of content parts instead of a string. This is useful when including images or other media:
+
+```java
+import datadog.trace.api.aiguard.AIGuard;
+
+// Evaluate a user prompt with both text and image content
+final AIGuard.Evaluation evaluation = AIGuard.evaluate(
+    Arrays.asList(
+        AIGuard.Message.message("system", "You are an AI Assistant"),
+        AIGuard.Message.message("user", Arrays.asList(
+            AIGuard.ContentPart.text("What is in this image?"),
+            AIGuard.ContentPart.imageUrl("data:image/jpeg;base64,...")
+        ))
+    )
+);
+```
+
 #### Example: Evaluate a tool call {#java-example-evaluate-tool-call}
 
 Like evaluating user prompts, the method can also be used to evaluate tool calls:
