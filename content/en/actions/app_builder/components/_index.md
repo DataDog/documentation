@@ -475,7 +475,7 @@ Is Visible
 Event
 : **Values**: toggleOpen, close, open
 
-State Functions
+State Function
 : setIsOpen<br>
 **Example**: `modal0.setIsOpen(true)` sets the state of `modal0` to open.
 
@@ -532,7 +532,7 @@ Is Visible
 Event
 : **Value**: change
 
-State Functions
+State Function
 : setValue<br>
 **Example**: `numberInput0.setValue(3)` sets the value of the `numberInput0` component to `3`.
 
@@ -595,7 +595,7 @@ Is Visible
 Event
 : **Value**: change
 
-State Functions
+State Function
 : setValue<br>
 **Example**: `radioButtons0.setValue("production")` sets the value of the `radioButtons0` component to `"production"`.
 
@@ -685,7 +685,7 @@ Is Visible
 Event
 : **Values**: change, submit
 
-State Functions
+State Function
 : setValue<br>
 **Example**: `search0.setValue("search query")` sets the value of the `search0` component to `"search query"`.
 
@@ -753,7 +753,7 @@ Is Visible
 Event
 : **Value**: change
 
-State Functions
+State Function
 : setValue<br>
 **Example**: `select0.setValue("staging")` sets the value of the `select0` component to `"staging"`.
 
@@ -812,7 +812,7 @@ Is Visible
 Event
 : **Value**: change
 
-State Functions
+State Function
 : setTabIndex<br>
 **Example**: `tab0.setTabIndex(0)` sets the value of the `tab0` component to the first tab.
 
@@ -968,7 +968,7 @@ Is Visible
 Event
 : **Values**: pageChange, tableRowClick
 
-State Functions
+State Function
 : setSelectedRow<br>
 **Examples**: <ul><li>`table0.setSelectedRow(0)` sets the `selectedRow` property of `table0` to the first row.</li><li>`table0.setSelectedRow(null)` clears the `selectedRow` property.</li></ul>
 : setPageIndex<br>
@@ -1061,7 +1061,7 @@ Is Visible
 Event
 : **Values**: change, submit
 
-State Functions
+State Function
 : setValue<br>
 **Example**: `textArea0.setValue("text")` sets the value of the `textArea0` component to `"text"`.
 
@@ -1103,7 +1103,7 @@ Is Visible
 Event
 : **Values**: change, submit
 
-State Functions
+State Function
 : setValue<br>
 **Example**: `textInput0.setValue("text")` sets the value of the `textInput0` component to `"text"`.
 
