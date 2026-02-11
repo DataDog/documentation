@@ -30,8 +30,8 @@ menu:
     - name: Software Delivery
       identifier: software_delivery_heading
       weight: 10000000
-    - name: Developer Workflows
-      identifier: developer_workflows_heading
+    - name: Developer Integrations
+      identifier: developer_integrations_heading
       weight: 11000000
     - name: Security
       identifier: security_platform_heading
@@ -5756,7 +5756,7 @@ menu:
       url: source_code/
       pre: dev-code
       identifier: source_code_integration
-      parent: developer_workflows_heading
+      parent: developer_integrations_heading
       weight: 90000
     - name: Source Code Management Providers
       url: source_code/source-code-management/
