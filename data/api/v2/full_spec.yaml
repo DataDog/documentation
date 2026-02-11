@@ -49605,6 +49605,18 @@ components:
           description: The name of the role. The name is neither unique nor a stable
             identifier of the role.
           type: string
+        receives_permissions_from:
+          description: 'Managed role from which this role automatically receives new
+            permissions as Datadog introduces new products and features.
+
+            Specify one of the following managed roles: "Datadog Admin Role", "Datadog
+            Standard Role", or "Datadog Read Only Role".
+
+            If not specified or set to an empty array, the role does not automatically
+            receive permissions from any managed role.'
+          items:
+            type: string
+          type: array
         user_count:
           description: Number of users with that role.
           format: int64
@@ -49630,6 +49642,18 @@ components:
           description: Name of the new role that is cloned.
           example: cloned-role
           type: string
+        receives_permissions_from:
+          description: 'Managed role from which this role automatically receives new
+            permissions as Datadog introduces new products and features.
+
+            Specify one of the following managed roles: "Datadog Admin Role", "Datadog
+            Standard Role", or "Datadog Read Only Role".
+
+            If not specified or set to an empty array, the role does not automatically
+            receive permissions from any managed role.'
+          items:
+            type: string
+          type: array
       required:
       - name
       type: object
@@ -49658,6 +49682,18 @@ components:
           description: Name of the role.
           example: developers
           type: string
+        receives_permissions_from:
+          description: 'Managed role from which this role automatically receives new
+            permissions as Datadog introduces new products and features.
+
+            Specify one of the following managed roles: "Datadog Admin Role", "Datadog
+            Standard Role", or "Datadog Read Only Role".
+
+            If not specified or set to an empty array, the role does not automatically
+            receive permissions from any managed role.'
+          items:
+            type: string
+          type: array
       required:
       - name
       type: object
@@ -49779,6 +49815,18 @@ components:
         name:
           description: Name of the role.
           type: string
+        receives_permissions_from:
+          description: 'Managed role from which this role automatically receives new
+            permissions as Datadog introduces new products and features.
+
+            Specify one of the following managed roles: "Datadog Admin Role", "Datadog
+            Standard Role", or "Datadog Read Only Role".
+
+            If not specified or set to an empty array, the role does not automatically
+            receive permissions from any managed role.'
+          items:
+            type: string
+          type: array
         user_count:
           description: The user count.
           format: int32
@@ -105327,7 +105375,12 @@ tags:
 
     read access on a specific log index to a role can be done in Datadog from the
 
-    [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
+    [Pipelines page](https://app.datadoghq.com/logs/pipelines).
+
+
+    Roles can also be managed in bulk through the Datadog UI, which provides
+
+    the capability to assign a single permission to multiple roles simultaneously.'
   name: Roles
 - description: Auto-generated tag Rum Audience Management
   name: Rum Audience Management
