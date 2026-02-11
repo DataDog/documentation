@@ -132,6 +132,13 @@
         "description": "Markdoc tabs block with two labeled tabs"
     },
 
+    "Tooltip": {
+        "scope": "markdoc",
+        "prefix": ";;tooltip",
+        "body": ["{% tooltip contents=\"${1:Popup text}\" %}", "${2:display text}", "{% /tooltip %}"],
+        "description": "Markdoc tooltip block with customizable content"
+    },
+
     "Check mark": {
         "scope": "markdoc",
         "prefix": ";;check",
