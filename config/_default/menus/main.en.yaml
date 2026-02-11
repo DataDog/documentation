@@ -7201,11 +7201,16 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agent
       weight: 102
+    - name: Container Image Scanning in CI/CD
+      url: security/cloud_security_management/setup/ci_cd
+      parent: csm_setup
+      identifier: csm_setup_ci_cd
+      weight: 103
     - name: Set Up CloudTrail Logs
       url: security/cloud_security_management/setup/cloudtrail_logs
       parent: csm_setup
       identifier: csm_setup_cloudtrail
-      weight: 103
+      weight: 104
     - name: Set Up without Infrastructure Monitoring
       url: security/cloud_security_management/setup/without_infrastructure_monitoring
       parent: csm_setup
