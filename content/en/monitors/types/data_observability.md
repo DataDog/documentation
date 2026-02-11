@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-[Data Observability][1] monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
+[Data Observability](/data_observability/) monitors use anomaly detection that learns from seasonality, trends, and user feedback to catch delayed data, incomplete loads, and unexpected value changes before they affect downstream dashboards, AI applications, or business decisions. Combined with end-to-end data and code lineage, these monitors help teams detect issues early, assess downstream impact, and route to the right owner.
 
 Data Observability monitors support the following metric types:
 
@@ -48,11 +48,11 @@ Data Observability monitors support the following metric types:
 
 Where possible, Datadog collects metrics such as row count and freshness from system metadata (for example, `INFORMATION_SCHEMA`). When system metadata is not available for a given metric, the monitor pushes down a query directly to the warehouse to compute the value.
 
-Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][7], [Databricks][8], or [BigQuery][9]).
+Data Observability monitors require [Quality Monitoring](/data_observability/quality_monitoring/) to be set up with at least one supported data warehouse (for example, [Snowflake](/data_observability/quality_monitoring/data_warehouses/snowflake/), [Databricks](/data_observability/quality_monitoring/data_warehouses/databricks/), or [BigQuery](/data_observability/quality_monitoring/data_warehouses/bigquery/)).
 
 ## Monitor creation
 
-To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**][3] in the UI.
+To create a Data Observability monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Data Observability**](https://app.datadoghq.com/monitors/create/data-observability) in the UI.
 
 ## Select an entity type and metric type
 
@@ -180,7 +180,7 @@ The default limit is 100 groups per monitor. To increase this limit, <a href="/h
 
 ## Set alert conditions
 
-1. Set an alert to trigger whenever the monitored value is `above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to` a threshold that you define. For help configuring the options in this view, see [Configure Monitors][5].
+1. Set an alert to trigger whenever the monitored value is `above`, `above or equal to`, `below`, `below or equal to`, `equal to`, or `not equal to` a threshold that you define. For help configuring the options in this view, see [Configure Monitors](/monitors/configuration/?tab=thresholdalert#thresholds).
 1. Set a **Critical** threshold (required) and optionally a **Warning** threshold for early detection.
 1. Determine your desired behavior when data is missing, for example, `evaluate as zero`, `show NO DATA`, `show NO DATA and notify`, or `show OK`.
 
@@ -192,11 +192,11 @@ To receive a notification when Datadog stops receiving quality monitoring data f
 
 ### Advanced alert conditions
 
-For more information about advanced alert options such as evaluation delay, see [Configure Monitors][6].
+For more information about advanced alert options such as evaluation delay, see [Configure Monitors](/monitors/create/configuration/#advanced-alert-conditions).
 
 ## Configure notifications and automations
 
-For detailed instructions on the **Configure notifications and automations** section, see [Notifications][4].
+For detailed instructions on the **Configure notifications and automations** section, see [Notifications](/monitors/notify/).
 
 You can use the following template variables in your notification messages:
 
@@ -256,7 +256,7 @@ This monitor alerts when a critical table has not been updated within the expect
 
 #### Build the monitoring query
 
-1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
+1. In Datadog, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
 1. Select **Table** as the entity type.
 1. Select **Freshness** as the metric type.
 1. Select the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
@@ -270,7 +270,7 @@ This monitor alerts when a critical table has not been updated within the expect
 
 #### Configure notifications
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 Table {{warehouse.name}}.{{schema.name}}.{{table.name}} has not been updated
@@ -295,7 +295,7 @@ This monitor detects a significant decrease in row count that could indicate a p
 
 #### Build the monitoring query
 
-1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
+1. In Datadog, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
 1. Select **Table** as the entity type.
 1. Select **Row Count** as the metric type.
 1. Select the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
@@ -308,7 +308,7 @@ This monitor detects a significant decrease in row count that could indicate a p
 
 #### Configure notifications
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 Row count anomaly detected for {{warehouse.name}}.{{schema.name}}.{{table.name}}.
@@ -333,7 +333,7 @@ This monitor detects when a column's null percentage exceeds normal levels, whic
 
 #### Build the monitoring query
 
-1. In Datadog, go to [**Monitors > New Monitor > Data Observability**][3].
+1. In Datadog, go to [**Monitors > New Monitor > Data Observability**](https://app.datadoghq.com/monitors/create/data-observability).
 1. Select **Column** as the entity type.
 1. Select **Nullness** as the metric type.
 1. Select the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
@@ -346,7 +346,7 @@ This monitor detects when a column's null percentage exceeds normal levels, whic
 
 #### Configure notifications
 
-1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications](/monitors/notify/). You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 Null percentage for {{warehouse.name}}.{{schema.name}}.{{table.name}}.EMAIL
@@ -369,12 +369,3 @@ has returned to expected levels.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /data_observability/
-[2]: /data_observability/quality_monitoring/
-[3]: https://app.datadoghq.com/monitors/create/data-observability
-[4]: /monitors/notify/
-[5]: /monitors/configuration/?tab=thresholdalert#thresholds
-[6]: /monitors/create/configuration/#advanced-alert-conditions
-[7]: /data_observability/quality_monitoring/data_warehouses/snowflake/
-[8]: /data_observability/quality_monitoring/data_warehouses/databricks/
-[9]: /data_observability/quality_monitoring/data_warehouses/bigquery/
