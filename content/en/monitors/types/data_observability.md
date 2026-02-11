@@ -68,7 +68,7 @@ Then, choose a metric type based on the data quality signal you want to track:
 
 The **Freshness** metric type detects when data has not been updated within an expected time window. Use it to catch stale data before it affects downstream reports or models.
 
-- **Table freshness** tracks the time elapsed since the table was last updated.
+- **Table freshness** tracks the time elapsed since the table was last updated. Table freshness is not available for views or for data warehouses that do not provide updated timestamps for tables in system metadata. Use column-level freshness instead.
 - **Column freshness** tracks the most recent date seen in a datetime column.
 
 1. Select the entity type: **Table** or **Column**.
