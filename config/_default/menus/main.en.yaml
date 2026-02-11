@@ -2553,17 +2553,22 @@ menu:
       url: incident_response/incident_management/post_incident
       parent: incidents
       identifier: post_incident
-      weight: 6
+      weight: 3
     - name: Follow-ups
       url: incident_response/incident_management/post_incident/follow-ups
       parent: post_incident
       identifier: post_incident_follow_ups
-      weight: 601
+      weight: 301
     - name: Analytics and Reporting
       url: incident_response/incident_management/analytics_and_reporting
       parent: incidents
       identifier: analytics_and_reporting
-      weight: 8
+      weight: 4
+    - name: Guides
+      url: incident_response/incident_management/guides/
+      parent: incidents
+      identifier: incidents_guides
+      weight: 5
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
