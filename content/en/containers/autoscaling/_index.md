@@ -68,6 +68,54 @@ Each cluster can have a maximum of 1000 workloads optimized with Datadog Kuberne
    - Autoscaling Manage
 - (Recommended) Linux kernel v5.19+ and cgroup v2
 
+### How vertical recommendations are calculated
+
+Datadog computes vertical scaling recommendations for CPU and memory by analyzing historical container usage data over the last 8 days. Recommendations are calculated differently depending on whether the workload's current resource request equals its resource limit.
+
+#### Memory
+
+**When memory request differs from memory limit:**
+
+| | How it's computed |
+|---|---|
+| **Request recommendation** | Based on the **p95** of memory usage over the last 8 days, with a decaying weight applied to older samples so that recent usage patterns are prioritized. A **10% safety margin** is then added. |
+| **Limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is then added. |
+
+**When memory request equals memory limit:**
+
+When the current request and limit are set to the same value, both are computed using the more conservative limit-level methodology:
+
+| | How it's computed |
+|---|---|
+| **Request and limit recommendation** | Based on the **maximum peak memory usage** observed over the last 8 days. A **5% safety margin** is added. If an **OOMKill** is detected, an additional **20% bump** is applied to help prevent future out-of-memory events. |
+
+**Note:** Peak memory tracking captures the highest memory usage ever recorded by any container that has existed within the 8-day lookback window. This means that even if a container started before that window, its peak usage (for example, at startup) is still accounted for in the recommendation.
+
+#### CPU
+
+**When CPU request differs from CPU limit:**
+
+| | How it's computed |
+|---|---|
+| **Request recommendation** | Based on the **p95** of CPU usage relative to the current request over the last 8 days. A **10% safety margin** is then added. |
+| **Limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. If the resulting request recommendation ever exceeds the limit recommendation, the request value is used for both. |
+
+**When CPU request equals CPU limit:**
+
+When the current request and limit are set to the same value, both are computed using the same methodology:
+
+| | How it's computed |
+|---|---|
+| **Request and limit recommendation** | Based on the **p99** of CPU usage relative to the current request over the last 8 days. A **5% safety margin** is then added. |
+
+#### Key design principles
+
+- **8-day lookback window**: All recommendations consider usage data from the past 8 days, providing enough history to capture weekly traffic patterns while remaining responsive to changes.
+- **Decaying weights**: For memory request recommendations (when request ≠ limit), older samples are weighted less heavily, so the recommendation adapts faster to recent usage shifts.
+- **Safety margins**: Every recommendation includes a margin above observed usage (5–10%) to provide a buffer against unexpected spikes.
+- **OOMKill response**: When memory requests and limits are equal and an OOMKill occurs, a 20% bump is applied to reduce the likelihood of repeated out-of-memory failures.
+- **Request-equals-limit preservation**: When a workload's request and limit are configured to the same value, Datadog uses the more conservative (limit-level) computation for both, ensuring recommendations do not introduce a gap between request and limit.
+
 ## Setup
 
 {{< tabs >}}
