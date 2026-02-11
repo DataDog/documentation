@@ -105,7 +105,7 @@ To pull test configurations and push test results, the private location worker n
 
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions 1.32.0 and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. **Note:** Windows Private Locations do not support FIPS-compliant encryption. If FIPS compliance is required, use the Linux containerized deployment.{{< /site-region >}} |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions 1.32.0 and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. **Note**: Windows Private Locations do not support FIPS-compliant encryption. If FIPS compliance is required, use the Linux containerized deployment.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
