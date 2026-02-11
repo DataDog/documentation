@@ -129,7 +129,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="301"
+    data-if="0"
   >
     <p>
       CCM allocates costs of Amazon ECS clusters as well as all Kubernetes
@@ -231,7 +231,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="302"
+    data-if="1"
   >
     <p>
       CCM allocates costs of all Kubernetes clusters, including those managed
@@ -296,7 +296,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="303"
+    data-if="2"
   >
     <p>
       CCM allocates costs of all Kubernetes clusters, including those managed
@@ -382,7 +382,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="304"
+    data-if="3"
   >
     <p>
       These divided costs are enriched with tags from nodes, pods, tasks, and
@@ -523,7 +523,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="305"
+    data-if="4"
   >
     <h3 id="kubernetes-tag-extraction-2">Kubernetes tag extraction</h3>
     <p>
@@ -568,7 +568,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="306"
+    data-if="5"
   >
     <h3 id="kubernetes-tag-extraction-3">Kubernetes tag extraction</h3>
     <p>
@@ -658,7 +658,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="307"
+    data-if="6"
   >
     <h3 id="compute-4">Compute</h3>
     <p>
@@ -789,7 +789,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="308"
+    data-if="7"
   >
     <h3 id="compute-5">Compute</h3>
     <p>
@@ -837,7 +837,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="309"
+    data-if="8"
   >
     <h3 id="compute-6">Compute</h3>
     <p>
@@ -894,7 +894,20 @@ further_reading:
     Depending on the cloud provider, certain resources may or may not be
     available for cost allocation.
   </p>
-  <p>This sentence uses a tooltip.</p>
+  <h2 id="plain-tooltip">Plain tooltip</h2>
+  <p>
+    This sentence
+    <!-- prettier-ignore -->
+    <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-uses-a-tooltip">uses a tooltip</button><span id="tooltip-uses-a-tooltip" class="tooltip-content" role="tooltip">I'm the tooltip text</span></span
+    >.
+  </p>
+  <h2 id="tooltip-with-html-link">Tooltip with HTML link</h2>
+  <p>
+    This sentence
+    <!-- prettier-ignore -->
+    <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-uses-a-tooltip">uses a tooltip</button><span id="tooltip-uses-a-tooltip" class="tooltip-content" role="tooltip">I'm the tooltip text, and I link to <a href='https://www.google.com'>Google</a>!</span></span
+    >.
+  </p>
   <table>
     <thead>
       <tr>
@@ -918,13 +931,19 @@ further_reading:
         <td><i class="icon-check-bold"></i></td>
       </tr>
       <tr>
-        <td align="right">Persistent volumes</td>
+        <td align="right">
+          <!-- prettier-ignore -->
+          <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip--persistent-volumes-"> Persistent volumes </button><span id="tooltip--persistent-volumes-" class="tooltip-content" role="tooltip">Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles.</span></span>
+        </td>
         <td align="right"><i class="icon-check-bold"></i></td>
         <td></td>
         <td></td>
       </tr>
       <tr>
-        <td align="right">Managed service fees</td>
+        <td align="right">
+          <!-- prettier-ignore -->
+          <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip--managed-service-fees-"> Managed service fees </button><span id="tooltip--managed-service-fees-" class="tooltip-content" role="tooltip">Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options.</span></span>
+        </td>
         <td align="right"><i class="icon-check-bold"></i></td>
         <td><i class="icon-check-bold"></i></td>
         <td><i class="icon-check-bold"></i></td>
@@ -948,7 +967,10 @@ further_reading:
         <td><i class="icon-check-bold"></i></td>
       </tr>
       <tr>
-        <td align="right">Local storage</td>
+        <td align="right">
+          <!-- prettier-ignore -->
+          <span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip--local-storage-"> Local storage </button><span id="tooltip--local-storage-" class="tooltip-content" role="tooltip">Directly-attached storage resources for a node.</span></span>
+        </td>
         <td align="right"></td>
         <td>Limited*</td>
         <td>Limited*</td>
@@ -970,7 +992,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="310"
+    data-if="9"
   >
     <table>
       <thead>
@@ -1008,7 +1030,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="311"
+    data-if="10"
   >
     <table>
       <thead>
@@ -1035,7 +1057,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="312"
+    data-if="11"
   >
     <table>
       <thead>
@@ -1077,7 +1099,7 @@ further_reading:
   <div
     class="cdoc__toggleable"
     data-description="Cloud Provider is AWS"
-    data-if="313"
+    data-if="12"
   >
     <h3 id="kubernetes">Kubernetes</h3>
     <p>
@@ -1259,7 +1281,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Azure"
-    data-if="314"
+    data-if="13"
   >
     <h3 id="kubernetes-2">Kubernetes</h3>
     <p>
@@ -1320,7 +1342,7 @@ further_reading:
   <div
     class="cdoc__toggleable cdoc__hidden"
     data-description="Cloud Provider is Google"
-    data-if="315"
+    data-if="14"
   >
     <h3 id="kubernetes-3">Kubernetes</h3>
     <p>
@@ -1396,7 +1418,7 @@ further_reading:
   </div>
 <h2 id="further-reading">Further reading</h2><div class="whatsnext"><p>Additional helpful documentation, links, and articles<!-- -->:</p><ul class="list-group"><a style="border-bottom:1px solid rgba(0, 0, 0, 0.125)" class="list-group-item list-group-item-white list-group-item-action d-flex justify-content-between align-items-center" href="http://localhost:1313/cloud_cost_management/"><span class="w-100 d-flex justify-content-between "><span class="text">Learn about Cloud Cost Management</span><span class="badge badge-white pe-2 border-0">DOCUMENTATION</span></span><picture class="img-fluid static"><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid static" srcSet="http://localhost:1313//images/icons/list-group-arrow.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more"/></picture><picture class="img-fluid hover"><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807&amp;dpr=2 2x" media="(min-width: 1200px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=670&amp;dpr=2 2x" media="(min-width: 992px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 759px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 630px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=496&amp;dpr=2 2x" media="(min-width: 530px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 361px)"/><source srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360 1x, http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=360&amp;dpr=2 2x" media="(min-width: 0px)"/><img class="img-fluid hover" srcSet="http://localhost:1313//images/icons/list-group-arrow-r.png?ch=Width,DPR&amp;fit=max&amp;auto=format&amp;w=807" alt="more" loading="lazy"/></picture></a></ul></div></article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"301":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"301"},"302":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"302"},"303":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"303"},"304":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"304"},"305":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"305"},"306":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"306"},"307":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"307"},"308":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"308"},"309":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"309"},"310":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"310"},"311":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"311"},"312":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"312"},"313":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"313"},"314":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"314"},"315":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"315"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"cloud_cost_provider_options","label":"Cloud Provider"},"defaultValsByOptionGroupId":{"cloud_cost_provider_options":"aws"}}},"defaultValsByTraitId":{"platform":"aws"},"optionGroupsById":{"cloud_cost_provider_options":[{"default":true,"id":"aws","label":"AWS"},{"id":"azure","label":"Azure"},{"id":"google","label":"Google"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"2"},"3":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"3"},"4":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"4"},"5":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"5"},"6":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"6"},"7":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"7"},"8":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"8"},"9":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"9"},"10":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"10"},"11":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"11"},"12":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"aws"},"v":true,"r":"12"},"13":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"azure"},"v":false,"r":"13"},"14":{"m":"F","n":"e","p":{"0":{"m":"V","p":["platform"],"v":"aws"},"1":"google"},"v":false,"r":"14"}},    filtersManifest: {"filtersByTraitId":{"platform":{"config":{"trait_id":"platform","option_group_id":"cloud_cost_provider_options","label":"Cloud Provider"},"defaultValsByOptionGroupId":{"cloud_cost_provider_options":"aws"}}},"defaultValsByTraitId":{"platform":"aws"},"optionGroupsById":{"cloud_cost_provider_options":[{"default":true,"id":"aws","label":"AWS"},{"id":"azure","label":"Azure"},{"id":"google","label":"Google"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
 
 {{< img src="cloud_cost/container_cost_allocation/container_allocation.png" style="display:none;" alt="" >}}
 

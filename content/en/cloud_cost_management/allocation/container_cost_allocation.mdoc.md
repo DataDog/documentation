@@ -284,8 +284,6 @@ Costs are allocated into the following spend types:
 
 Depending on the cloud provider, certain resources may or may not be available for cost allocation.
 
-This sentence {% tooltip contents="I'm the tooltip text" %}uses a tooltip{% /tooltip %}.
-
 | Resource | AWS | Azure | Google Cloud |
 |---:|---:|---|---|
 | CPU | {% x/ %} | {% x/ %} | {% x/ %} |
