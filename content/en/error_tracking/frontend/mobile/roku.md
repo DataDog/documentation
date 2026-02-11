@@ -40,8 +40,7 @@ ropm install datadog-roku
 
 #### Manual setup
 
-If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][4] zip archive
-and unzipping it in your project's root folder.
+If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK zip archive][4] and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
 
@@ -268,7 +267,7 @@ To test your implementation:
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/roku/setup/
-[4]: https://github.com/DataDog/dd-sdk-roku
+[4]: https://github.com/DataDog/dd-sdk-roku/releases
 [5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/roku/setup/?tab=rum#step-3---initialize-the-library
 [6]: https://github.com/rokucommunity/ropm
 [101]: https://app.datadoghq.com/error-tracking/settings/setup/client
