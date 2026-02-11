@@ -1,6 +1,8 @@
 ---
 title: Error Tracking
 type: documentation
+aliases:
+- '/developers/ide_plugins/idea/error_tracking/'
 further_reading:
 - link: "/tracing/error_tracking/"
   tag: "Documentation"
@@ -13,14 +15,14 @@ The [Error Tracking][1] integration in the Datadog plugin for JetBrains IDEs hel
 ## Source editor
 Errors are highlighted in the source editor with a distinctive icon in the gutter, for lines that appear in error stack frames (lines of code on the execution path that led to an observed runtime error). Click the icon to select an error and display it in the Datadog tool window.
 
-{{< img src="/developers/ide_plugins/idea/error_tracking/editor.png" alt="Error Tracking in the source editor" style="width:100%;" >}}
+{{< img src="/ide_plugins/idea/error_tracking/editor.png" alt="Error Tracking in the source editor" style="width:100%;" >}}
 
 Errors shown in the editor are filtered by controls on the Error Tracking tab, described in the next section.
 
 ## Error Tracking tab
 Use the Error Tracking tab in the tool window to filter, sort and inspect errors, view stack traces, navigate to relevant locations in your source code, attempt fixes with your local agent, or navigate to Datadog to continue your investigations.
 
-{{< img src="/developers/ide_plugins/idea/error_tracking/toolwindow.png" alt="The Error Tracking tool window" style="width:100%;" >}}
+{{< img src="/ide_plugins/idea/error_tracking/toolwindow.png" alt="The Error Tracking tool window" style="width:100%;" >}}
 
 Additional information shown in this view includes the count, service, first-seen and last-seen timestamps.
 
@@ -45,14 +47,14 @@ Errors can be sorted by:
 ### Issue list
 Errors are displayed in a list on the left-side of the tool window, with the type, service, filename, error count and assignee listed.
 
-{{< img src="/developers/ide_plugins/idea/error_tracking/errorlist.png" alt="Error Tracking list" style="width:60%;" >}}
+{{< img src="/ide_plugins/idea/error_tracking/errorlist.png" alt="Error Tracking list" style="width:60%;" >}}
 
 Select an issue to display its details on the right-side of the tool window.
 
 ### Issue details
 The issue details pane shows detailed information about the selected error, including the error description, the service, the count, first-seen and last-seen information, and a stack trace.
 
-{{< img src="/developers/ide_plugins/idea/error_tracking/details.png" alt="Error Tracking details" style="width:100%;" >}}
+{{< img src="/ide_plugins/idea/error_tracking/details.png" alt="Error Tracking details" style="width:100%;" >}}
 
 Click the **View in Datadog** link to open the selected issue in Datadog.
 

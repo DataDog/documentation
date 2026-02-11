@@ -667,7 +667,7 @@ Datadog stores findings in accordance with our [Data Rentention Periods](https:/
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[3]: /developers/ide_plugins/idea/#static-analysis
+[3]: /ide_plugins/idea/#static-analysis
 [4]: /account_management/api-app-keys/
 [6]: /security/code_security/static_analysis/static_analysis_rules
 [7]: /getting_started/site/

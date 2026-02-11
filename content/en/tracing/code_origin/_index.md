@@ -155,7 +155,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /tracing/services/service_page/
 [3]: /tracing/services/resource_page/
-[4]: /developers/ide_plugins/
+[4]: /ide_plugins/
 [5]: /dynamic_instrumentation/
 [6]: /tracing/trace_collection/
 [7]: /integrations/guide/source-code-integration/

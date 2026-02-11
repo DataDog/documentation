@@ -51,8 +51,8 @@ To get started, go to the [**Code Security** setup page][12] or see the [Setup d
 
 ### IDEs
 {{< whatsnext desc="You can identify code vulnerabilities in real time as you edit a file in your Integrated Development Environment (IDE). See integration-specific documentation for more information:">}}
-    {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/#static-analysis" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results

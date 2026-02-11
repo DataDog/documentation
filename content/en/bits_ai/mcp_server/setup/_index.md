@@ -9,7 +9,7 @@ further_reading:
 - link: "bits_ai/mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
-- link: "developers/ide_plugins/vscode/?tab=cursor"
+- link: "/ide_plugins/vscode/?tab=cursor"
   tag: "Documentation"
   text: "Datadog Extension for Cursor"
 - link: "https://www.datadoghq.com/blog/datadog-cursor-extension/"
@@ -517,9 +517,9 @@ The Datadog MCP Server is under significant development. During the Preview, use
 [9]: https://github.com/block/goose
 [10]: https://kiro.dev/cli/
 [11]: https://code.visualstudio.com/
-[12]: /developers/ide_plugins/vscode/
+[12]: /ide_plugins/vscode/
 [13]: https://nodejs.org/en/about/previous-releases
-[14]: /developers/ide_plugins/vscode/?tab=cursor#installation
+[14]: /ide_plugins/vscode/?tab=cursor#installation
 [15]: /api/latest/events/
 [16]: /account_management/audit_trail/
 [17]: https://cline.bot/

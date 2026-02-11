@@ -11,7 +11,7 @@ further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
   text: "Dynamic Instrumentation Expression Language"
-- link: "/developers/ide_plugins/idea/live_debugger/"
+- link: "/ide_plugins/idea/live_debugger/"
   tag: "Documentation"
   text: "Live Debugger for JetBrains IDEs"
 - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
@@ -108,7 +108,7 @@ Live Debugger.
 
 <div class="alert alert-info">
 <b>Rather debug in your IDE?</b>
-Try using Live Debugger directly from JetBrains! <a href="/developers/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
+Try using Live Debugger directly from JetBrains! <a href="/ide_plugins/idea/live_debugger/">Click here</a> to learn more.</div>
 
 ### Creating and using a Debug Session
 

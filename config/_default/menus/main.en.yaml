@@ -1063,56 +1063,21 @@ menu:
       parent: dev_tools_service_check
       identifier: dev_tools_service_check_api
       weight: 603
-    - name: IDE Plugins
-      url: developers/ide_plugins/
-      parent: dev_tools
-      identifier: ide_plugins
-      weight: 7
-    - name: JetBrains IDEs
-      url: developers/ide_plugins/idea/
-      parent: ide_plugins
-      identifier: ide_plugins_idea
-      weight: 701
-    - name: Error Tracking
-      url: developers/ide_plugins/idea/error_tracking/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_error_tracking
-      weight: 7011
-    - name: Logs
-      url: developers/ide_plugins/idea/logs/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_logs
-      weight: 7012
-    - name: Live Debugger
-      url: developers/ide_plugins/idea/live_debugger/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_debugger
-      weight: 7013
-    - name: Code Security
-      url: developers/ide_plugins/idea/code_security/
-      parent: ide_plugins_idea
-      identifier: ide_plugins_idea_code_security
-      weight: 7014
-    - name: VS Code & Cursor
-      url: developers/ide_plugins/vscode/
-      parent: ide_plugins
-      identifier: ide_plugins_vscode
-      weight: 702
     - name: Community
       url: developers/community/
       parent: dev_tools
       identifier: dev_community
-      weight: 8
+      weight: 7
     - name: Libraries
       identifier: dev_community_libraries
       url: developers/community/libraries/
       parent: dev_community
-      weight: 801
+      weight: 701
     - name: Guides
       url: developers/guide/
       parent: dev_tools
       identifier: dev_tools_guides
-      weight: 9
+      weight: 8
     - name: Administrator's Guide
       url: administrators_guide/
       pre: organization
@@ -5778,6 +5743,42 @@ menu:
       parent: source_code_integration
       identifier: sci_features
       weight: 4
+    - name: IDE Plugins
+      url: ide_plugins/
+      pre: ide
+      parent: developer_integrations_heading
+      identifier: ide_plugins
+      weight: 100000
+    - name: JetBrains IDEs
+      url: ide_plugins/idea/
+      parent: ide_plugins
+      identifier: ide_plugins_idea
+      weight: 1
+    - name: Error Tracking
+      url: ide_plugins/idea/error_tracking/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_error_tracking
+      weight: 101
+    - name: Logs
+      url: ide_plugins/idea/logs/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_logs
+      weight: 102
+    - name: Live Debugger
+      url: ide_plugins/idea/live_debugger/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_debugger
+      weight: 103
+    - name: Code Security
+      url: ide_plugins/idea/code_security/
+      parent: ide_plugins_idea
+      identifier: ide_plugins_idea_code_security
+      weight: 104
+    - name: VS Code & Cursor
+      url: ide_plugins/vscode/
+      parent: ide_plugins
+      identifier: ide_plugins_vscode
+      weight: 2
     - name: Observability Pipelines
       url: observability_pipelines/
       pre: pipelines
