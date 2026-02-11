@@ -139,7 +139,7 @@ Use **Single fix** to open a code session for Bits AI to fix this single vulnera
 
 Use **Bulk fix** to create a remediation campaign that fixes multiple vulnerabilities at the same time.
 
-Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal. Configure the following:
+Selecting this option opens a **Create a new Bits AI Bulk Fix Campaign** modal where you can configure the following:
 
 - **Campaign title**: A descriptive title for your campaign.
 - **Repositories**: The repositories and paths you want Bits AI to scan.
@@ -152,13 +152,15 @@ After you create a campaign, Bits AI Dev Agent loads the findings in scope, gene
 
 #### View campaign progress
 
-To view all campaigns, navigate to **Bits AI** > **Dev Agent** > **Code Sessions** > [**Campaigns**][12]. Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can review, edit, and merge fixes by chatting with the [Bits AI Dev Agent][10].
+To view all campaigns, navigate to **Bits AI** > **Dev Agent** > **Code Sessions** > [**Campaigns**][12]. 
+
+Click a campaign to view details including session status, pull requests by repository, and remediated findings. You can click on individual sessions to review, edit, and merge fixes with the [Bits AI Dev Agent][10].
 
 {{< img src="/code_security/static_analysis/campaigner-hero-image.png" alt="Campaigns page in Bits AI Dev Agent" style="width:100%;">}}
 
 ### Remediation session details
 
-Each code session shows the full lifecycle of an AI-generated fix so you can review and validate changes before merging. It includes:
+Each code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
 
 - The original security finding and proposed code change
 - An explanation of how and why the AI generated the fix
