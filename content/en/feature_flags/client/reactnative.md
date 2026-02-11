@@ -416,7 +416,7 @@ await DdFlags.enable({
 ## Context attribute requirements
 
 <div class="alert alert-warning">
-Evaluation context attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are <strong>not supported</strong> and cause exposure events to be silently dropped.
+Evaluation context attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are <strong>not supported</strong> and will be dropped from the evaluation context.
 </div>
 
 Use flat attributes in your evaluation context:
@@ -433,7 +433,7 @@ OpenFeature.setContext({
 Avoid nested objects and arrays:
 
 {{< code-block lang="javascript" >}}
-// These attributes cause exposure events to be dropped
+// These attributes will be dropped from the evaluation context with a console warning.
 OpenFeature.setContext({
     targetingKey: 'user-123',
     user: { id: 'user-123' },        // nested object - NOT SUPPORTED
