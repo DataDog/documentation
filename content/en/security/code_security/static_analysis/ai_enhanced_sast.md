@@ -133,7 +133,7 @@ To view and remediate vulnerabilities:
 
 ### Single fix
 
-Use **Single fix** to open a code session where you can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+Use **Single fix** to open a code session for Bits AI to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
 
 ### Bulk fix (campaigns)
 
