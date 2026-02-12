@@ -162,6 +162,7 @@ The following table describes the products in which you can use the team filter:
 | [Sheets][37]                   | Team handle                                                                        |
 | [Software Catalog][12]         | Team handle                                                                        |
 | [Synthetic Tests][19]          | Team handle                                                                        |
+| [Workflows][38]                | Team handle                                                                        |
 
 
 ## Permissions
@@ -210,3 +211,4 @@ To customize your team, see [Team Management][3].
 [35]: /security/detection_rules/#restrict-edit-permissions
 [36]: /security/suppressions/#restrict-edit-permissions
 [37]: https://app.datadoghq.com/sheets
+[38]: https://app.datadoghq.com/workflow
