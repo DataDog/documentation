@@ -23,7 +23,7 @@ site_support_id: rum_roku
 
 ## Overview
 
-This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Roku SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking page][11] for specific steps.
+This page describes how to instrument your applications for [Real User Monitoring (RUM)][1] with the Roku SDK. RUM includes Error Tracking by default, but if you have purchased Error Tracking as a standalone product, see the [Error Tracking page setup guide][11] for specific steps.
 
 The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
