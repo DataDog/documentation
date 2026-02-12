@@ -5136,16 +5136,21 @@ menu:
       parent: llm_obs_external_evaluations
       identifier: llm_obs_submit_nemo_evaluations
       weight: 40202
+    - name: Annotation Queues
+      url: llm_observability/evaluations/annotation_queues
+      parent: llm_obs_evaluations
+      identifier: llm_obs_annotation_queues
+      weight: 403
     - name: Compatibility
       url: llm_observability/evaluations/evaluation_compatibility
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluation_compatibility
-      weight: 403
+      weight: 404
     - name: Export API
       url: llm_observability/evaluations/export_api
       parent: llm_obs_evaluations
       identifier: llm_obs_evaluations_export_api
-      weight: 404
+      weight: 405
     - name: Experiments
       url: llm_observability/experiments
       parent: llm_obs
